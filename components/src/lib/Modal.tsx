@@ -51,6 +51,8 @@ const Modal = ({
   confirmButton,
   buttonPosition,
   closeOnOutsideClick = true,
+  customCloseIcon,
+  hideCloseIcon = false,
 }: ModalProps) => {
   const modalRef = useRef<HTMLDivElement>(null);
 
@@ -75,6 +77,10 @@ const Modal = ({
     };
   }, [modalRef, onClose, closeOnOutsideClick]);
 
+  const onErrorIcon = (event: React.SyntheticEvent<HTMLImageElement, Event>) => {
+    event.currentTarget.src = CloseIcon;
+  };
+
   return (
     <>
       {isOpen &&
@@ -85,7 +91,15 @@ const Modal = ({
                 <span className={styles.title} style={style?.modalTitle}>
                   {title}
                 </span>
-                <img src={CloseIcon} alt="close" className={styles.closeButton} onClick={onClose} />
+                {!hideCloseIcon && (
+                  <img
+                    src={customCloseIcon ?? CloseIcon}
+                    alt="close"
+                    className={styles.closeButton}
+                    onClick={onClose}
+                    onError={onErrorIcon}
+                  />
+                )}
               </header>
               {content && <section>{content}</section>}
               {isButton && (
