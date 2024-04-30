@@ -64,6 +64,7 @@ export default App;
 | position            | 'center' 'bottom'   | 'center' | 모달 컨테이너의 위치                   |
 | modalContainerStyle | React.CSSProperties | ''       | 모달 컨테이너의 커스텀 인라인 스타일링 |
 | content             | React.ReactNode     | ''       | 모달 컨테이너의 내용                   |
+| className           | string              | ''       | 모달 컨테이너의 클래스명               |
 
 ## Author
 

@@ -37,6 +37,10 @@ const meta = {
       control: "object",
       description: "모달 컨테이너 인라인 스타일",
     },
+    className: {
+      control: "text",
+      description: "모달 컨테이너의 클래스명",
+    },
   },
   args: {
     onClose: fn(),
