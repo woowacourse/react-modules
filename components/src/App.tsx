@@ -1,5 +1,6 @@
 import React from 'react';
 import './App.css';
+import './reset.css';
 import { Modal } from './lib/index';
 import useModal from './hooks/useModal';
 

@@ -2,8 +2,17 @@ import React from 'react';
 import styled from 'styled-components';
 import { CLOSE_BUTTON } from '../assets/images/index';
 
-const Container = styled.div`
+interface ContainerProps {
+  position: string;
+}
+
+const Container = styled.div<ContainerProps>`
   background-color: #ffffff;
+  position: fixed;
+
+  top: ${(props) => props.position};
+  left: 50%;
+  transform: translate(-50%, -50%);
 `;
 
 const Header = styled.div`
@@ -37,8 +46,16 @@ function Modal({
     toggleModal();
   };
 
+  const handlePosition = () => {
+    if (position === 'center') {
+      const top = '50%';
+      return top;
+    }
+    return '0';
+  };
+
   return (
-    <Container>
+    <Container position={handlePosition()}>
       <Header>
         <div>{title}</div>
         {closeOption === 'icon' && (
