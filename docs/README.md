@@ -4,18 +4,18 @@
 
 - [x] 열고 닫기 기능이 있는 modal 컴포넌트를 구현 한다.
 
-## step 2 - modal 컴포넌트 내 confirm action 추가
+## step 2 - modal 컴포넌트 내 position 추가
 
-- [ ] modal 컴포넌트 내 confirm action을 추가한다.
+- [x] position(center, bottom)에 따라 모달 위치를 변경한다.
 
-## step 3 - modal 컴포넌트 내 position 추가
-
-- [ ] position(center, bottom)에 따라 모달 위치를 변경한다.
-
-## step 4 - modal 컴포넌트를 재 사용 가능한 형태로 분리
+## step 3 - modal 컴포넌트를 재 사용 가능한 형태로 분리
 
 - [ ] 기존 컴포넌트에서 modal header, modal content, modal footer로 분리 한다.
 - [ ] 카드사 선택 모달과 약관 동의 모달 형태를 storybook에 추가한다.
+
+## step 4 - modal 컴포넌트 내 confirm action 추가
+
+- [ ] modal 컴포넌트 내 confirm action을 추가한다.
 
 ## step 5 - 페이먼츠 커스텀 훅 구현
 

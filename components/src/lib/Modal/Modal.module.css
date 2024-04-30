@@ -23,3 +23,12 @@
   background-color: #ffffff;
   z-index: 999;
 }
+
+.bottom {
+  align-items: flex-end;
+}
+
+.modalContainerBottom {
+  width: 100%;
+  border-radius: 8px 8px 0px 0px;
+}
