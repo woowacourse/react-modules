@@ -10,6 +10,13 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
+export const Default: Story = {
+  args: {
+    text: '버튼입니다',
+    onClick: () => {},
+  },
+};
+
 export const Small: Story = {
   args: {
     text: '버튼입니다',
@@ -19,29 +26,11 @@ export const Small: Story = {
   },
 };
 
-export const Medium: Story = {
-  args: {
-    text: '버튼입니다',
-    onClick: () => {},
-    size: 'medium',
-    buttonStyle: 'primary',
-  },
-};
-
 export const Large: Story = {
   args: {
     text: '버튼입니다',
     onClick: () => {},
     size: 'large',
-    buttonStyle: 'primary',
-  },
-};
-
-export const Primary: Story = {
-  args: {
-    text: '버튼입니다',
-    onClick: () => {},
-    size: 'medium',
     buttonStyle: 'primary',
   },
 };
