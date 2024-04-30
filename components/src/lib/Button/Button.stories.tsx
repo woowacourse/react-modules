@@ -13,14 +13,18 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
   args: {
     text: '버튼입니다',
-    onClick: () => {},
+    onClick: () => {
+      alert('버튼 클릭');
+    },
   },
 };
 
 export const Small: Story = {
   args: {
     text: '버튼입니다',
-    onClick: () => {},
+    onClick: () => {
+      alert('버튼 클릭');
+    },
     size: 'small',
     buttonStyle: 'primary',
   },
@@ -29,7 +33,9 @@ export const Small: Story = {
 export const Large: Story = {
   args: {
     text: '버튼입니다',
-    onClick: () => {},
+    onClick: () => {
+      alert('버튼 클릭');
+    },
     size: 'large',
     buttonStyle: 'primary',
   },
@@ -38,7 +44,9 @@ export const Large: Story = {
 export const Border: Story = {
   args: {
     text: '버튼입니다',
-    onClick: () => {},
+    onClick: () => {
+      alert('버튼 클릭');
+    },
     size: 'medium',
     buttonStyle: 'border',
   },
@@ -47,7 +55,9 @@ export const Border: Story = {
 export const Text: Story = {
   args: {
     text: '버튼입니다',
-    onClick: () => {},
+    onClick: () => {
+      alert('버튼 클릭');
+    },
     size: 'medium',
     buttonStyle: 'text',
   },
@@ -56,7 +66,9 @@ export const Text: Story = {
 export const Fit: Story = {
   args: {
     text: '버튼입니다',
-    onClick: () => {},
+    onClick: () => {
+      alert('버튼 클릭');
+    },
     size: 'medium',
     buttonStyle: 'primary',
     width: 'fit',
@@ -66,7 +78,9 @@ export const Fit: Story = {
 export const Full: Story = {
   args: {
     text: '버튼입니다',
-    onClick: () => {},
+    onClick: () => {
+      alert('버튼 클릭');
+    },
     size: 'medium',
     buttonStyle: 'primary',
     width: 'full',
@@ -76,19 +90,23 @@ export const Full: Story = {
 export const Bright: Story = {
   args: {
     text: '버튼입니다',
-    onClick: () => {},
+    onClick: () => {
+      alert('버튼 클릭');
+    },
     size: 'medium',
     buttonStyle: 'primary',
-    primaryColor: '#aaaaff',
+    primaryColor: '#FFE600',
   },
 };
 
 export const Dark: Story = {
   args: {
     text: '버튼입니다',
-    onClick: () => {},
+    onClick: () => {
+      alert('버튼 클릭');
+    },
     size: 'medium',
     buttonStyle: 'primary',
-    primaryColor: '#660066',
+    primaryColor: '#f66f00',
   },
 };
