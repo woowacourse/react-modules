@@ -1,7 +1,7 @@
 {
-  "name": "compoents",
-  "version": "0.0.1",
-  "description": "npm modules",
+  "name": "harrysimodal",
+  "version": "0.0.0",
+  "description": "modal of harrysimo",
   "type": "module",
   "types": "dist/index.d.ts",
   "main": "dist/index.js",
@@ -10,7 +10,7 @@
     "dist"
   ],
   "scripts": {
-    "dev": "vite",
+    "dev": "vite --host",
     "build": "tsc && vite build",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
@@ -18,8 +18,10 @@
     "build-storybook": "storybook build"
   },
   "dependencies": {
+    "harrysimodal": "0.0.0",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "styled-components": "6.1.8"
   },
   "devDependencies": {
     "@chromatic-com/storybook": "^1.3.3",
