@@ -32,3 +32,24 @@
   width: 100%;
   border-radius: 8px 8px 0px 0px;
 }
+
+.modalHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modalTitle {
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 26px;
+  color: rgba(0, 0, 0, 1);
+}
+
+.modalContent {
+  width: 100%;
+}
+
+.modalFooter {
+  width: 100%;
+}

@@ -10,8 +10,9 @@
 
 ## step 3 - modal 컴포넌트를 재 사용 가능한 형태로 분리
 
-- [ ] 기존 컴포넌트에서 modal header, modal content, modal footer로 분리 한다.
-- [ ] 카드사 선택 모달과 약관 동의 모달 형태를 storybook에 추가한다.
+- [x] 기존 컴포넌트에서 modal header, modal content, modal footer로 분리 한다.
+
+- [ ] close button이 위에 있는 case, close button이 아래에 있는 case 추가
 
 ## step 4 - modal 컴포넌트 내 confirm action 추가
 
