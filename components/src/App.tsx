@@ -8,14 +8,14 @@ function App() {
   };
 
   return (
-    <>
+    <div>
       <Modal position="center">
         <Modal.Title>제목</Modal.Title>
         <Modal.CloseButton onClose={handleClose} />
-        sdkfjaksl
-        <Modal.Button text="확인"></Modal.Button>
+        <Modal.Button text="확인" mode="primary"></Modal.Button>
+        <Modal.Button text="닫기" mode="secondary"></Modal.Button>
       </Modal>
-    </>
+    </div>
   );
 }
 
