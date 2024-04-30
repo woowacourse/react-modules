@@ -1,12 +1,14 @@
 import styled from "@emotion/styled";
 import CloseIcon from "./assets/close-icon.png";
+import { useEffect } from "react";
 
 type ModalPosition = "center" | "bottom";
 interface ModalProps extends React.HTMLAttributes<HTMLDivElement> {
   onClose: () => void;
-  title?: string;
   onConfirm?: () => void;
+  title?: string;
   buttonText?: string;
+  hasCloseButton?: boolean;
   position?: ModalPosition;
 }
 
@@ -16,20 +18,25 @@ export default function Modal({
   title,
   buttonText,
   children,
+  hasCloseButton = true,
   position = "center",
 }: ModalProps) {
-  const handleModalKeyDown = (e: React.KeyboardEvent) => {
-    if (e.key === "Escape") {
-      onClose();
-    }
-  };
+  useEffect(() => {
+    const handleModalKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        onClose();
+      }
+    };
+
+    window.addEventListener("keydown", handleModalKeyDown);
+  }, []);
 
   return (
-    <div onKeyDown={handleModalKeyDown}>
+    <div>
       <ModalDimmer onClick={onClose}></ModalDimmer>
       <ModalContent position={position}>
         <ModalHeader>
-          <ModalCloseButton onClick={onClose} />
+          {hasCloseButton && <ModalCloseButton onClick={onClose} />}
           {title && <ModalTitle>{title}</ModalTitle>}
         </ModalHeader>
         {children}
