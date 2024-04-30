@@ -25,7 +25,18 @@
 
     "esModuleInterop": true
   },
-  "include": ["src/lib"],
+  "include": [
+    "src/lib",
+    "src/lib/Modal/BackDrop.tsx",
+    "src/lib/Modal/Button.tsx",
+    "src/lib/Modal/ButtonContainer.tsx",
+    "src/lib/Modal/CloseButton.tsx",
+    "src/lib/Modal/Container.tsx",
+    "src/lib/index.ts",
+    "src/lib/Modal/Header.tsx",
+    "src/lib/Modal/Modal.tsx",
+    "src/lib/Modal/Title.tsx"
+  ],
   "exclude": ["node_modules", "dist", "**/*.test.ts"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
