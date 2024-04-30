@@ -1,7 +1,7 @@
 import { XIcon } from '../../assets';
 import styles from './CloseButton.module.css';
 
-interface CloseButtonProps {
+export interface CloseButtonProps {
   close: () => void;
 }
 

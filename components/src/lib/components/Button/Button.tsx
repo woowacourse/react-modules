@@ -4,7 +4,7 @@ import { ButtonHTMLAttributes } from 'react';
 
 type ButtonMode = 'primary' | 'secondary';
 
-interface ModalButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+export interface ModalButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   text: string;
   mode?: ButtonMode;
   size?: Size;
