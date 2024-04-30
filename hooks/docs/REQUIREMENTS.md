@@ -1,0 +1,19 @@
+- [ ] 모달 컴포넌트 만들기
+  - [ ] 중앙이나 하단에 위치할 수 있도록
+  - [ ] backdrop
+  - [ ] 제목(title)
+  - [ ] 확인 버튼
+  - [ ] children
+  - [ ] 이벤트 핸들러
+    - [ ] 모달 열기
+    - [ ] 모달 닫기
+    - [ ] 모달 확인
+- [ ] hook 만들기
+  - [ ] useCardNumber
+  - [ ] useCardIssuer
+  - [ ] useCardholderName
+  - [ ] useCVC
+  - [ ] useCardPasswordPrefix
+  - [ ] useCardExpiryMonth
+  - [ ] useCardExpiryYear
+  - [ ] useCardExpiryDate
