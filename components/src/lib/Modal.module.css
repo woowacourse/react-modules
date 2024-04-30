@@ -2,6 +2,10 @@
     --dimmed-color: rgba(0, 0, 0, 0.35);
 }
 
+* {
+    box-sizing: border-box;
+}
+
 .dimmed {
     position: fixed;
     inset: 0;
@@ -10,12 +14,28 @@
 
 
 .modal {
+    display: flex;
+    flex-direction: column;
     position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    gap: 24px;
     width: 80vw;
     max-width: 700px;
+    margin: auto;
+    padding: 24px 32px;
+    background-color: white;
+    border-radius: 8px;
+}
+
+.modalBottom {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    bottom: 0;
+    gap: 24px;
+    width: 100%;
     margin: auto;
     padding: 24px 32px;
     background-color: white;
@@ -40,4 +60,39 @@
     font-weight: 700;
     line-height: 26.06px;
     text-align: left;
+}
+
+.buttonRow {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    gap: 12px;
+}
+
+.buttonRowReverse {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    gap: 12px;
+}
+
+.buttonColumn {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    gap: 12px;
+}
+
+.buttonColumnReverse {
+    display: flex;
+    flex-direction: column-reverse;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    gap: 12px;
 }
