@@ -16,11 +16,11 @@ npm i easy-payments-ui
 import { Modal } from "easy-payments-ui-pome";
 
 function App() {
-    const {isCLose, setIsClose} = useState(false)
+  const { isCLose, setIsClose } = useState(false);
   //...
   return (
     <Modal>
-        <div>모달 Contents에 해당하는 요소입니다.</div>
+      <div>모달 Contents에 해당하는 요소입니다.</div>
     </Modal>
   );
 }
