@@ -24,29 +24,16 @@ const hoverColor = (backgroundColor: string) => {
   const g = (bigint >> 8) & 255;
   const b = bigint & 255;
 
-  const total = r + g + b;
+  const adjustColor = (color: number, adjustment: number) => {
+    const newColor = color + adjustment;
+    return Math.min(255, Math.max(0, newColor)).toString(16).padStart(2, '0');
+  };
 
-  if (total <= 384) {
-    const R = Math.floor(r + 32)
-      .toString(16)
-      .padStart(2, '0');
-    const G = Math.floor(g + 32)
-      .toString(16)
-      .padStart(2, '0');
-    const B = Math.floor(b + 32)
-      .toString(16)
-      .padStart(2, '0');
-    return '#' + R + G + B;
-  }
-  const R = Math.floor(r - 32)
-    .toString(16)
-    .padStart(2, '0');
-  const G = Math.floor(g - 32)
-    .toString(16)
-    .padStart(2, '0');
-  const B = Math.floor(b - 32)
-    .toString(16)
-    .padStart(2, '0');
+  const adjustment = r + g + b <= 384 ? 24 : -24;
+  const R = adjustColor(r, adjustment);
+  const G = adjustColor(g, adjustment);
+  const B = adjustColor(b, adjustment);
+
   return '#' + R + G + B;
 };
 
