@@ -9,10 +9,9 @@
   right: 0;
   bottom: 0;
   left: 0;
-  background-color: rgba(0, 0, 0, 0.35);
-
   width: 100%;
   height: 100%;
+  background-color: rgba(0, 0, 0, 0.35);
 }
 
 .center {
@@ -27,29 +26,48 @@
   align-items: flex-end;
 }
 
-.modal {
+.modalContent {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
   position: fixed;
   padding: 24px 32px;
-
   height: 216px;
   background-color: #fff;
 }
 
-.center > .modal {
+.center > .modalContent {
   width: 304px;
   border-radius: 8px;
 }
 
-.bttom > .modal {
+.bottom > .modalContent {
   width: 100%;
   border-radius: 8px 8px 0 0;
 }
 
 .titleContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   height: 26px;
 }
 
 .title {
   font-size: 18px;
   font-weight: 700;
+}
+
+.closeButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background-color: inherit;
+}
+
+.closeButton:hover {
+  background-color: rgba(165, 158, 156, 0.46);
 }
