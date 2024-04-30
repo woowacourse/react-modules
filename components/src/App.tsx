@@ -1,4 +1,3 @@
-import './App.css';
 import 'nakta-react-payments-components/dist/style.css';
 import React, { useState } from 'react';
 import { Modal } from 'nakta-react-payments-components';
