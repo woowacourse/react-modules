@@ -36,8 +36,8 @@ export default function Modal({
       <ModalDimmer onClick={onClose}></ModalDimmer>
       <ModalContent position={position}>
         <ModalHeader>
-          {hasCloseButton && <ModalCloseButton onClick={onClose} />}
           {title && <ModalTitle>{title}</ModalTitle>}
+          {hasCloseButton && <ModalCloseButton onClick={onClose} />}
         </ModalHeader>
         {children}
         {buttonText && (
@@ -58,9 +58,10 @@ const ModalDimmer = styled.div({
 });
 
 const ModalHeader = styled.div({
-  height: "fit-content",
+  height: "20px",
   display: "flex",
-  flexDirection: "row-reverse",
+  position: "relative",
+  flexDirection: "row",
   justifyContent: "space-between",
   alignItems: "center",
   width: "100%",
@@ -78,12 +79,24 @@ const ModalCloseButton = styled.button({
   height: "14px",
   padding: "5px",
   marginLeft: "10px",
+
+  "&:only-child": {
+    position: "absolute",
+    margin: "0 auto",
+    left: "100%",
+  },
 });
 
 const ModalTitle = styled.p({
   fontSize: "18px",
   margin: 0,
   fontWeight: 700,
+  "&:only-child": {
+    position: "absolute",
+    margin: "0 auto",
+    left: "50%",
+    transform: "translateX(-50%)",
+  },
 });
 
 const MODAL_CONTENT_STYLE: {
