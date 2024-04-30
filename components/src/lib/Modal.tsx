@@ -1,3 +1,4 @@
+import { useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
 import styles from './Modal.module.css';
 import CloseButton from './assets/closeButton.svg';
@@ -25,18 +26,41 @@ const Modal = ({
   confirmButton,
   buttonPosition,
   onConfirm,
-  closeOnOutsideClick,
+  closeOnOutsideClick = true,
   children,
 }: React.PropsWithChildren<ModalProps>) => {
+  const modalRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const clickOutSide = (event: MouseEvent) => {
+      if (
+        modalRef.current &&
+        !modalRef.current.contains(event.target as Node) &&
+        closeOnOutsideClick
+      ) {
+        onClose();
+      }
+    };
+    document.addEventListener('mousedown', clickOutSide);
+    return () => {
+      document.removeEventListener('mousedown', clickOutSide);
+    };
+  }, [modalRef, onClose, closeOnOutsideClick]);
+
   return (
     <>
       {isOpen &&
         createPortal(
           <div className={styles.dimmed}>
-            <section className={styles.modal}>
+            <section className={styles.modal} ref={modalRef}>
               <header className={styles.modalHeader}>
                 <div className={styles.title}>{title}</div>
-                <img src={CloseButton} alt="close" className={styles.closeButton} />
+                <img
+                  src={CloseButton}
+                  alt="close"
+                  className={styles.closeButton}
+                  onClick={onClose}
+                />
               </header>
               <section>{children}</section>
             </section>
