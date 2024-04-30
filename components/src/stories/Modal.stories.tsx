@@ -1,8 +1,9 @@
 import React from 'react';
 import '../index.css';
+import 'nakta-react-payments-components/dist/style.css';
+import { Modal } from 'nakta-react-payments-components';
 import type { Meta, StoryObj } from '@storybook/react';
 import { fn } from '@storybook/test';
-import Modal from '../lib/Modal';
 
 const meta = {
   title: 'Modal',
