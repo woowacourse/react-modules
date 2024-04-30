@@ -1,5 +1,4 @@
-import { ReactNode, useEffect, useState, MouseEvent } from 'react';
-import { createContext, useContext } from 'react';
+import { ReactNode, MouseEvent } from 'react';
 
 import clsx from 'clsx';
 import styles from './style.module.css';
@@ -7,52 +6,43 @@ import styles from './style.module.css';
 import Portal from './Portal';
 import ModalContext from '../contexts/modalContext';
 import useModalContext from '../hooks/useModalContext';
-
-type ModalType = 'center' | 'bottom' | 'toast';
-
-interface ModalProps extends React.HTMLProps<HTMLDivElement> {
-  isOpen: boolean;
-  children: ReactNode;
-  type: ModalType;
-  toastDuration?: number;
-}
+import '../styles/reset.css';
 function Modal(props: ModalProps) {
-  const { isOpen, children, type, toastDuration, ...rest } = props;
-
-  const [open, setOpen] = useState(isOpen);
-  const closeModal = () => setOpen(false);
-  const openModal = () => setOpen(true);
+  const { isOpen, closeModal, children, type, ...rest } = props;
 
   return (
     <Portal>
-      <ModalContext.Provider value={{ open, closeModal, openModal }}>
+      <ModalContext.Provider value={{ isOpen, closeModal }}>
         <div
           className={clsx(styles.modal, {
-            [styles[type]]: type,
-            [styles.open]: open,
+            [styles[type]]: type && isOpen,
           })}
           {...rest}
         >
-          {children}
+          <Backdrop />
+          <Contents>{children}</Contents>
         </div>
       </ModalContext.Provider>
     </Portal>
   );
 }
 
-function Header({ children }: { children: ReactNode }) {
-  return <div className={styles.header}>{children}</div>;
+function Header(props: ModalComposedProps<HTMLDivElement>) {
+  const { children, ...rest } = props;
+  return <div {...rest}>{props.children}</div>;
 }
 
-function Title({ children }: { children: ReactNode }) {
-  return <h2 className={styles.title}>{children}</h2>;
+function Title(props: ModalComposedProps<HTMLHeadingElement>) {
+  const { children, ...rest } = props;
+  return <h2 {...rest}>{children}</h2>;
 }
 
-function Body({ children }: { children: ReactNode }) {
-  return <div className={styles.body}>{children}</div>;
+function Body(props: ModalComposedProps<HTMLDivElement>) {
+  const { children, ...rest } = props;
+  return <div {...rest}>{props.children}</div>;
 }
 
-function CloseButton<A extends Function>({ children, extraAction }: { children: ReactNode; extraAction?: A }) {
+function CloseButton<A extends Function>({ children, extraAction, ...rest }: CloseButtonProps<A>) {
   const { closeModal } = useModalContext();
 
   const onClick = () => {
@@ -61,7 +51,7 @@ function CloseButton<A extends Function>({ children, extraAction }: { children: 
   };
 
   return (
-    <button className={styles.closeButton} onClick={onClick}>
+    <button onClick={onClick} {...rest}>
       {children}
     </button>
   );
@@ -78,13 +68,17 @@ function Backdrop() {
     closeModal();
   };
 
-  return <div className={styles.backdrop} onClick={onClick}></div>;
+  return <div className={styles.backdrop} onClick={onClick} />;
 }
 
+function Contents({ children }: { children: ReactNode }) {
+  return <div className={styles.contents}>{children}</div>;
+}
+
+Modal.Contents = Contents;
 Modal.Header = Header;
 Modal.Title = Title;
 Modal.Body = Body;
 Modal.CloseButton = CloseButton;
-Modal.Backdrop = Backdrop;
 
 export default Modal;
