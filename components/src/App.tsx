@@ -4,10 +4,13 @@ import "./App.css";
 import Modal from "./lib/Modal/Modal";
 
 function App() {
+  // console.log(window.matchMedia("(prefers-color-scheme: light)"));
   return (
     <>
       <h1>Component Modules</h1>
-      <Modal position="center" title="카드사 선택" />
+      <Modal position="center" title="카드사 선택">
+        <div>hello, world</div>
+      </Modal>
     </>
   );
 }

@@ -1,7 +1,22 @@
 /** @jsxImportSource @emotion/react */
-import React, { Children, MutableRefObject, forwardRef, useEffect, useRef } from "react";
-import { ModalStyle } from "./Modal.style";
+import React, {
+  Children,
+  MutableRefObject,
+  forwardRef,
+  useEffect,
+  useRef,
+} from "react";
+import {
+  closeButton,
+  confirmButton,
+  modalContentStyle,
+  modalHeaderStyle,
+  modalStyle,
+  titleStyle,
+} from "./Modal.style";
 import useModalHook from "../useModalHook";
+
+import Xmark from "../assets/images/Xmark.png";
 
 interface ModalProps {
   position: "center" | "bottom";
@@ -11,7 +26,13 @@ interface ModalProps {
   onClose?: () => void;
 }
 
-const Modal: React.FC<ModalProps> = ({ position, title, children, onConfirm, onClose }) => {
+const Modal: React.FC<ModalProps> = ({
+  position,
+  title,
+  children,
+  onConfirm,
+  onClose,
+}) => {
   const { ref, action } = useModalHook();
 
   useEffect(() => {
@@ -32,28 +53,30 @@ const Modal: React.FC<ModalProps> = ({ position, title, children, onConfirm, onC
   }, [action, ref]);
 
   return (
-    <dialog ref={ref} css={ModalStyle}>
-      <div>
-        <div>
-          <div>{title}</div>
+    <dialog ref={ref} css={modalStyle(position)}>
+      <div css={modalContentStyle}>
+        <div css={modalHeaderStyle}>
+          <div css={titleStyle}>{title}</div>
           <button
+            css={closeButton}
             onClick={() => {
               action.handleClose();
               if (onClose) onClose();
             }}
           >
-            취소 버튼입니다.
-          </button>
-          <button
-            onClick={() => {
-              action.handleClose();
-              if (onConfirm) onConfirm();
-            }}
-          >
-            확인 버튼입니다.
+            <img src={Xmark} />
           </button>
         </div>
         <div>{children}</div>
+        <button
+          css={confirmButton}
+          onClick={() => {
+            action.handleClose();
+            if (onConfirm) onConfirm();
+          }}
+        >
+          확인 버튼입니다.
+        </button>
       </div>
     </dialog>
   );
