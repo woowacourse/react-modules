@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { ModalButtonType } from './Modal';
 
 export const ModalOverlay = styled.div`
   position: fixed;
@@ -59,7 +60,7 @@ export const Footer = styled.footer`
   gap: 12px;
 `;
 
-export const FooterButton = styled.button<{ $style }>`
+export const FooterButton = styled.button<{ $style: ModalButtonType['style'] }>`
   background: ${(props) => (props.$style === 'primary' ? 'var(--grey-400)' : 'var(--grey-100)')};
   color: ${(props) => (props.$style === 'primary' ? 'var(--grey-100)' : 'var(--grey-200)')};
   border-radius: 5px;
