@@ -1,4 +1,4 @@
-import type { ModalProps, ModalFooterProps } from './Modal.type';
+import type { StrictPropsWithChildren, ModalProps, ModalFooterProps } from './Modal.type';
 
 import styles from './Modal.module.css';
 

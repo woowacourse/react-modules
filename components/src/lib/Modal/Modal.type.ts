@@ -1,3 +1,7 @@
+export type StrictPropsWithChildren<P = unknown> = P & {
+  children: React.ReactNode;
+};
+
 export type Direction = 'row' | 'column';
 export type Position = 'center' | 'bottom';
 export type BackDropType = 'transparent' | 'blur' | 'opaque';
