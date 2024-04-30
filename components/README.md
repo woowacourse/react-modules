@@ -1,15 +1,15 @@
 # Get started
 
-당신의 패키지 매니저를 통해 `@hanuuny/react-modal` 을 설치해 주세요:
+당신의 패키지 매니저를 통해 `@pakxe/react-simple-modal` 을 설치해 주세요:
 
 ```shell
-npm install @hanuuny/react-modal
+npm install @pakxe/react-simple-modal
 ```
 
 `Modal` 컴포넌트를 import 하세요:
 
 ```javascript
-import { Modal } from 'modal';
+import { Modal } from '@pakxe/react-simple-modal';
 
 export const MyComponent = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -85,7 +85,7 @@ export const MyComponent = () => {
 # 합성 컴포넌트를 사용한 모달 예시
 
 ```javascript
-import { Modal } from 'modal';
+import { Modal } from '@pakxe/react-simple-modal';
 
 export const MyComponent = () => {
   const [isOpen, setIsOpen] = useState(false);
