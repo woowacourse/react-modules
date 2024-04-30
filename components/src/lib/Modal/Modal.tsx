@@ -1,5 +1,5 @@
 /** @jsxImportSource @emotion/react */
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { buttonsStyle, modalContentStyle, modalStyle } from "./Modal.style";
 import useModalHook from "../useModalHook";
 
