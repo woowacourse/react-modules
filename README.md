@@ -11,6 +11,8 @@
   - [ ] 열기
   - [ ] 닫기 - deem 눌러도 닫혀야된다.
   - [ ] 확인 - optional
+- [ ] npm으로 배포하기
+- [ ] 설치 후 import해서 사용하기
 
 ### Payment custom hook
 
@@ -35,6 +37,10 @@
 - [ ] usePassword
 
   - [ ] 2자리 숫자만 입력 가능하다.
+
+- [ ] npm으로 배포하기
+
+- [ ] 설치 후 import해서 사용하기
 
   ### Storybook
 
