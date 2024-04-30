@@ -11,6 +11,7 @@
 
 - [ ] close button 포지션 설정
 - [ ] confirm button 포지션 설정
+- [ ] 모달의 width값 사용자에게 받기
 
 - [ ] 스토리 북
   - [ ] 닫기 버튼 스토리

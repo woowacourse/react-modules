@@ -9,8 +9,10 @@ interface LongButtonProps {
 }
 
 const LongButton: React.FC<LongButtonProps> = ({ type, handleClick, children }) => {
+  const isHighLight = type === "confirm" ? true : false;
+
   return (
-    <button css={LongButtonPropsStyle} onClick={handleClick}>
+    <button css={LongButtonPropsStyle(isHighLight)} onClick={handleClick}>
       {children}
     </button>
   );

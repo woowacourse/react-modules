@@ -1,4 +1,5 @@
 import { css } from "@emotion/react";
+import COLOR_PALETTE from "../colorPalette";
 
 type Position = "center" | "bottom";
 
@@ -21,6 +22,7 @@ export const modalStyle = (position: Position) =>
     padding: 0,
     border: 0,
     borderRadius: "8px",
+    background: COLOR_PALETTE.background,
     ...modalConditionStyle(position),
   });
 
