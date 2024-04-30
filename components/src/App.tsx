@@ -9,9 +9,13 @@ function App() {
   return (
     <>
       <button onClick={toggleIsOpen}>모달열기</button>
-      <Modal isOpen={isOpen} onClose={() => toggleIsOpen()} title="카드사 선택" position="center">
-        <SelectBank />
-      </Modal>
+      <Modal
+        isOpen={isOpen}
+        content={<SelectBank />}
+        onClose={() => toggleIsOpen()}
+        title="카드사 선택"
+        position="center"
+      />
     </>
   );
 }

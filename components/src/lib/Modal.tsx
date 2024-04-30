@@ -8,6 +8,7 @@ interface ModalProps {
   onClose: () => void;
   title: string;
   position: 'center' | 'bottom';
+  content?: React.ReactNode;
   style?: React.CSSProperties;
   closeButton?: React.ReactNode;
   confirmButton?: React.ReactNode;
@@ -21,14 +22,14 @@ const Modal = ({
   onClose,
   title,
   position,
+  content,
   style,
   closeButton,
   confirmButton,
   buttonPosition,
   onConfirm,
   closeOnOutsideClick = true,
-  children,
-}: React.PropsWithChildren<ModalProps>) => {
+}: ModalProps) => {
   const modalRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -62,7 +63,7 @@ const Modal = ({
                   onClick={onClose}
                 />
               </header>
-              <section>{children}</section>
+              <section>{content}</section>
             </section>
           </div>,
           document.body,
