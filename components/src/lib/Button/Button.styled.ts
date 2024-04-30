@@ -27,14 +27,26 @@ const hoverColor = (backgroundColor: string) => {
   const total = r + g + b;
 
   if (total <= 384) {
-    const R = Math.floor(r + 32).toString(16);
-    const G = Math.floor(g + 32).toString(16);
-    const B = Math.floor(b + 32).toString(16);
+    const R = Math.floor(r + 32)
+      .toString(16)
+      .padStart(2, '0');
+    const G = Math.floor(g + 32)
+      .toString(16)
+      .padStart(2, '0');
+    const B = Math.floor(b + 32)
+      .toString(16)
+      .padStart(2, '0');
     return '#' + R + G + B;
   }
-  const R = Math.floor(r - 32).toString(16);
-  const G = Math.floor(g - 32).toString(16);
-  const B = Math.floor(b - 32).toString(16);
+  const R = Math.floor(r - 32)
+    .toString(16)
+    .padStart(2, '0');
+  const G = Math.floor(g - 32)
+    .toString(16)
+    .padStart(2, '0');
+  const B = Math.floor(b - 32)
+    .toString(16)
+    .padStart(2, '0');
   return '#' + R + G + B;
 };
 
