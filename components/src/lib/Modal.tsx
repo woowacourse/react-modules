@@ -1,7 +1,6 @@
 import { XIcon } from './assets';
 import type { StrictPropsWithChildren, ModalProps, ModalButtonProps, ModalCloseButtonProps } from './Modal.type';
 
-import GlobalStyles from './Global.style';
 import * as S from './Modal.style';
 
 const ModalTitle = ({ children }: StrictPropsWithChildren) => {
@@ -10,31 +9,38 @@ const ModalTitle = ({ children }: StrictPropsWithChildren) => {
 
 const ModalButton = ({ mode, text, ...rest }: ModalButtonProps) => {
   return (
-    <S.ModalButton $mode={mode} {...rest}>
+    <S.ModalButtonWrapper $mode={mode} {...rest}>
       {text}
-    </S.ModalButton>
+    </S.ModalButtonWrapper>
   );
 };
 
 const ModalCloseButton = ({ close }: ModalCloseButtonProps) => {
   return (
-    <button onClick={close}>
-      <img width="20" height="20" src={XIcon}></img>
-    </button>
+    <S.ModalCloseButtonWrapper onClick={close} aria-label="모달 닫기">
+      <img width="20" height="20" src={XIcon} alt="모달 닫기 아이콘"></img>
+    </S.ModalCloseButtonWrapper>
   );
 };
 
-const ModalMain = ({ position, isOpen, close, children }: StrictPropsWithChildren<ModalProps>) => {
+const ModalHeader = ({ children }: StrictPropsWithChildren) => {
+  return <S.ModalHeaderWrapper>{children}</S.ModalHeaderWrapper>;
+};
+
+const ModalBody = ({ children }: StrictPropsWithChildren) => {
+  return <S.ModalBodyWrapper>{children}</S.ModalBodyWrapper>;
+};
+
+const ModalMain = ({ position, size, isOpen, close, children }: StrictPropsWithChildren<ModalProps>) => {
   if (!isOpen) return null;
 
   return (
-    <div>
-      <GlobalStyles />
-      <S.ModalLayout $position={position}>
-        <S.ModalBackdrop onClick={close} />
-        <S.ModalContainer $position={position}>{children}</S.ModalContainer>
-      </S.ModalLayout>
-    </div>
+    <S.ModalLayout $position={position}>
+      <S.ModalBackdrop onClick={close} />
+      <S.ModalContainer $position={position} $size={size}>
+        {children}
+      </S.ModalContainer>
+    </S.ModalLayout>
   );
 };
 
@@ -42,4 +48,6 @@ export const Modal = Object.assign(ModalMain, {
   Title: ModalTitle,
   Button: ModalButton,
   CloseButton: ModalCloseButton,
+  Header: ModalHeader,
+  Body: ModalBody,
 });

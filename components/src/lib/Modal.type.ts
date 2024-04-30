@@ -11,6 +11,7 @@ export interface ModalButtonProps extends ButtonHTMLAttributes<HTMLButtonElement
 
 export interface ModalProps {
   position: 'center' | 'bottom';
+  size: 'sm' | 'md' | 'lg';
   isOpen: boolean;
   close: () => void;
 }
