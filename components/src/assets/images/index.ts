@@ -1,0 +1,9 @@
+export { default as CLOSE_BUTTON } from './CloseButton.png';
+export { default as BC } from './card/BC.png';
+export { default as HANA } from './card/Hana.png';
+export { default as HYUNDAI } from './card/Hyundai.png';
+export { default as KAKAO } from './card/Kakao.png';
+export { default as KB } from './card/KB.png';
+export { default as LOTTE } from './card/Lotte.png';
+export { default as SHINHAN } from './card/Shinhan.png';
+export { default as WOORI } from './card/Woori.png';
