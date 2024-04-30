@@ -1,14 +1,26 @@
 import styled from 'styled-components';
 
 export const ModalLayout = styled.div<{ $position: string }>`
+  position: fixed;
+  top: 0;
+
   display: flex;
   justify-content: center;
   align-items: ${(props) => (props.$position === 'center' ? 'center' : 'flex-end')};
 
   width: 100vw;
   height: 100vh;
+`;
+
+export const ModalBackdrop = styled.div`
+  position: fixed;
+  top: 0;
+
+  width: 100vw;
+  height: 100vh;
 
   background: #00000050;
+  z-index: 10;
 `;
 
 export const ModalContainer = styled.div<{ $position: string }>`
@@ -20,6 +32,8 @@ export const ModalContainer = styled.div<{ $position: string }>`
 
   max-height: ${(props) => (props.$position === 'center' ? '50vh' : '90vh')};
   overflow-y: auto;
+
+  z-index: 100;
 `;
 
 export const ModalTitleWrapper = styled.h1`

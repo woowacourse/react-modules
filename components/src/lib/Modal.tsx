@@ -15,6 +15,8 @@ interface ModalButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 
 interface ModalProps {
   position: 'center' | 'bottom';
+  isOpen: boolean;
+  close: () => void;
 }
 
 interface ModalCloseButtonProps {
@@ -41,14 +43,17 @@ const ModalCloseButton = ({ onClose }: ModalCloseButtonProps) => {
   );
 };
 
-const ModalMain = ({ position, children }: StrictPropsWithChildren<ModalProps>) => {
+const ModalMain = ({ position, isOpen, close, children }: StrictPropsWithChildren<ModalProps>) => {
+  if (!isOpen) return <div></div>;
+
   return (
-    <>
+    <div>
       <GlobalStyles />
       <S.ModalLayout $position={position}>
+        <S.ModalBackdrop onClick={close} />
         <S.ModalContainer $position={position}>{children}</S.ModalContainer>
       </S.ModalLayout>
-    </>
+    </div>
   );
 };
 
