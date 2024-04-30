@@ -2,7 +2,7 @@ import { ReactNode, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 
 import styles from './style.module.css';
-
+import '../../styles/reset.css';
 interface PortalProps {
   children: ReactNode;
 }
