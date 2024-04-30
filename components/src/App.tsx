@@ -1,7 +1,6 @@
 import React from "react";
 import Modal from "./lib/Modal";
 import styled from "styled-components";
-import Shin from './lib/asset/shinhan.svg'
 
 function App() {
   const handleClose=(e : React.MouseEvent) => {
