@@ -2,7 +2,7 @@
 
 ## step 1 - 열고 닫을 수 있는 modal 컴포넌트 구현
 
-- [v] 열고 닫기 기능이 있는 modal 컴포넌트를 구현 한다.
+- [x] 열고 닫기 기능이 있는 modal 컴포넌트를 구현 한다.
 
 ## step 2 - modal 컴포넌트 내 confirm action 추가
 
