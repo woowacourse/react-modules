@@ -26,10 +26,14 @@
     "esModuleInterop": true,
     "baseUrl": ".",
     "paths": {
-      "@/*": ["src/*"]
+      "@/*": ["src/*"],
+      "@/assets": ["src/assets/*"],
+      "@/data": ["src/data/*"],
+      "@/lib": ["src/lib/*"],
+      "@/stories": ["src/stories/*"]
     }
   },
-  "include": ["src/lib", "src/svg.d.ts"],
+  "include": ["src", "src/types/svg.d.ts", "src/stories/Modal.stories.tsx"],
   "exclude": ["node_modules", "dist", "**/*.test.ts"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
