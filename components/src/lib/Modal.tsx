@@ -1,0 +1,124 @@
+import styled from "@emotion/styled";
+import CloseIcon from "./assets/close-icon.png";
+
+type ModalPosition = "center" | "bottom";
+interface ModalProps extends React.HTMLAttributes<HTMLDivElement> {
+  onClose: () => void;
+  title?: string;
+  onConfirm?: () => void;
+  buttonText?: string;
+  position?: ModalPosition;
+}
+
+export default function Modal({
+  onClose,
+  onConfirm,
+  title,
+  buttonText,
+  children,
+  position = "center",
+}: ModalProps) {
+  const handleModalKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === "Escape") {
+      onClose();
+    }
+  };
+
+  return (
+    <div onKeyDown={handleModalKeyDown}>
+      <ModalDimmer onClick={onClose}></ModalDimmer>
+      <ModalContent position={position}>
+        <ModalHeader>
+          <ModalCloseButton onClick={onClose} />
+          {title && <ModalTitle>{title}</ModalTitle>}
+        </ModalHeader>
+        {children}
+        {buttonText && (
+          <ModalConfirmButton onClick={onConfirm ?? onClose}>{buttonText}</ModalConfirmButton>
+        )}
+      </ModalContent>
+    </div>
+  );
+}
+
+const ModalDimmer = styled.div({
+  position: "fixed",
+  top: 0,
+  left: 0,
+  width: "100vw",
+  height: "100vh",
+  backgroundColor: "#00000059",
+});
+
+const ModalHeader = styled.div({
+  height: "fit-content",
+  display: "flex",
+  flexDirection: "row-reverse",
+  justifyContent: "space-between",
+  alignItems: "center",
+  width: "100%",
+
+  marginBottom: "8px",
+});
+
+const ModalCloseButton = styled.button({
+  border: "none",
+  backgroundColor: "transparent",
+  cursor: "pointer",
+  backgroundImage: `url(${CloseIcon})`,
+  backgroundSize: "contain",
+  width: "14px",
+  height: "14px",
+  padding: "5px",
+  marginLeft: "10px",
+});
+
+const ModalTitle = styled.p({
+  fontSize: "18px",
+  margin: 0,
+  fontWeight: 700,
+});
+
+const MODAL_CONTENT_STYLE: {
+  [key in ModalPosition]: React.CSSProperties;
+} = {
+  center: {
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+  },
+  bottom: {
+    boxSizing: "border-box",
+    bottom: 0,
+    left: 0,
+    width: "100%",
+    borderBottomLeftRadius: "0",
+    borderBottomRightRadius: "0",
+  },
+};
+
+const ModalContent = styled.aside<{ position: ModalPosition }>(({ position }) => {
+  return {
+    borderRadius: "8px",
+    position: "fixed",
+    backgroundColor: "white",
+    padding: "24px 32px",
+    ...MODAL_CONTENT_STYLE[position],
+  };
+});
+
+const ModalConfirmButton = styled.button({
+  width: "100%",
+  height: "44px",
+  backgroundColor: "#333333",
+  border: 0,
+  borderRadius: "5px",
+
+  fontWeight: 700,
+  fontSize: "15px",
+  lineHeight: "21.72px",
+  alignItems: "center",
+  color: "white",
+  marginTop: "10px",
+  cursor: "pointer",
+});
