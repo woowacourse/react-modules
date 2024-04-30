@@ -1,10 +1,14 @@
-import React from "react";
-import "./App.css";
+import './App.css';
+
+import Modal from './lib/Modal/Modal';
+import React from 'react';
+import { Reset } from 'styled-reset';
 
 function App() {
   return (
     <>
-      <h1>Component Modules</h1>
+      <Reset />
+      <Modal isOpened={true} closeModal={() => {}} />
     </>
   );
 }
