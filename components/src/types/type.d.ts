@@ -23,14 +23,14 @@ interface ModalProps {
 }
 
 type ButtonSize = 'small' | 'medium' | 'large';
-type ButtonWidth = 'fit' | 'full';
-type ButtonColor = 'primary' | 'secondary' | 'destructive';
+type ButtonWidth = 'fixed' | 'fit' | 'full';
+type ButtonStyle = 'primary' | 'border' | 'text';
 
 interface ButtonProps {
   text: string;
   onClick: () => void;
-  size: ButtonSize;
-  width: ButtonWidth;
-  color?: ButtonColor;
-  customStyle?: CustomStyle;
+  size?: ButtonSize;
+  width?: ButtonWidth;
+  buttonStyle?: ButtonStyle;
+  primaryColor?: string;
 }
