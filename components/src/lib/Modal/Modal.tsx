@@ -1,22 +1,12 @@
 /** @jsxImportSource @emotion/react */
-import React, {
-  Children,
-  MutableRefObject,
-  forwardRef,
-  useEffect,
-  useRef,
-} from "react";
-import {
-  closeButton,
-  confirmButton,
-  modalContentStyle,
-  modalHeaderStyle,
-  modalStyle,
-  titleStyle,
-} from "./Modal.style";
+import React, { useEffect } from "react";
+import { modalContentStyle, modalStyle } from "./Modal.style";
 import useModalHook from "../useModalHook";
+import ConfirmButton from "../ConfirmButton/ConfirmButton";
 
-import Xmark from "../assets/images/Xmark.png";
+import ModalHeader from "../ModalHeader/ModalHeader";
+import CloseButton from "../CloseButton/CloseButton";
+import Title from "../Title/Title";
 
 interface ModalProps {
   position: "center" | "bottom";
@@ -26,13 +16,7 @@ interface ModalProps {
   onClose?: () => void;
 }
 
-const Modal: React.FC<ModalProps> = ({
-  position,
-  title,
-  children,
-  onConfirm,
-  onClose,
-}) => {
+const Modal: React.FC<ModalProps> = ({ position, title, children, onConfirm, onClose }) => {
   const { ref, action } = useModalHook();
 
   useEffect(() => {
@@ -55,28 +39,12 @@ const Modal: React.FC<ModalProps> = ({
   return (
     <dialog ref={ref} css={modalStyle(position)}>
       <div css={modalContentStyle}>
-        <div css={modalHeaderStyle}>
-          <div css={titleStyle}>{title}</div>
-          <button
-            css={closeButton}
-            onClick={() => {
-              action.handleClose();
-              if (onClose) onClose();
-            }}
-          >
-            <img src={Xmark} />
-          </button>
-        </div>
+        <ModalHeader>
+          <Title>{title}</Title>
+          <CloseButton handleClose={action.handleClose} onClose={onClose} />
+        </ModalHeader>
         <div>{children}</div>
-        <button
-          css={confirmButton}
-          onClick={() => {
-            action.handleClose();
-            if (onConfirm) onConfirm();
-          }}
-        >
-          확인 버튼입니다.
-        </button>
+        <ConfirmButton handleClose={action.handleClose} onConfirm={onConfirm} />
       </div>
     </dialog>
   );

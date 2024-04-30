@@ -32,31 +32,4 @@ export const modalContentStyle = () =>
     padding: "24px 32px",
   });
 
-export const modalHeaderStyle = () =>
-  css({
-    display: "flex",
-    justifyContent: "space-between",
-  });
-
-export const titleStyle = css({
-  fontSize: "18px",
-  fontWeight: "700",
-});
-
-export const closeButton = css({
-  padding: "0",
-});
-
-export const confirmButton = css({
-  color: "#ffffff",
-  fontSize: "15px",
-  fontWeight: "700",
-  display: "flex",
-  alignContent: "center",
-  justifyContent: "center",
-  background: "#333333",
-  borderRadius: "5px",
-  height: "44px",
-});
-
 export const ModalBottom = css({});
