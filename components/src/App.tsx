@@ -1,14 +1,24 @@
 import React from 'react';
 import './App.css';
 import { Modal } from './lib/index';
+import useModal from './hooks/useModal';
 
 function App() {
+  const { isOpen, toggleModal } = useModal();
+
   return (
     <>
       <h1>Component Modules</h1>
-      <Modal position="center" title="카드사 선택" closeOption="icon">
-        <div></div>
-      </Modal>
+      {isOpen && (
+        <Modal
+          toggleModal={toggleModal}
+          position="center"
+          title="카드사 선택"
+          closeOption="icon"
+        >
+          <div></div>
+        </Modal>
+      )}
     </>
   );
 }

@@ -19,21 +19,36 @@ const Header = styled.div`
  */
 
 interface ModalProps {
+  toggleModal: () => void;
   position: 'top' | 'center' | 'bottom';
   title: string;
   closeOption: 'icon' | 'button';
   children: React.ReactNode;
 }
 
-function Modal({ position, title, closeOption, children }: ModalProps) {
+function Modal({
+  toggleModal,
+  position,
+  title,
+  closeOption,
+  children,
+}: ModalProps) {
+  const handleCloseButton = () => {
+    toggleModal();
+  };
+
   return (
     <Container>
       <Header>
         <div>{title}</div>
-        {closeOption === 'icon' && <img src={CLOSE_BUTTON} />}
+        {closeOption === 'icon' && (
+          <img onClick={handleCloseButton} src={CLOSE_BUTTON} />
+        )}
       </Header>
       <div>{children}</div>
-      {closeOption === 'button' && <button>닫기</button>}
+      {closeOption === 'button' && (
+        <button onClick={handleCloseButton}>닫기</button>
+      )}
     </Container>
   );
 }
