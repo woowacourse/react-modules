@@ -3,11 +3,28 @@
     grid-template-rows: repeat(2, 1fr);
     grid-template-columns: repeat(4, 1fr);
     gap: 16px 12px;
+    justify-items: center;
 }
 
-.bankLogo {
-    width: 100%;
-    cursor: pointer;
+@media screen and (max-width: 1440px) {
+    .bankLogo {
+        width: 120px;
+        cursor: pointer;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .bankLogo {
+        width: 80px;
+        cursor: pointer;
+    }
+}
+
+@media screen and (max-width: 450px) {
+    .bankLogo {
+        width: 50px;
+        cursor: pointer;
+    }
 }
 
 .bankName {

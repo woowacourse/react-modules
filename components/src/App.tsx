@@ -15,6 +15,9 @@ function App() {
         onClose={() => toggleIsOpen()}
         title="카드사 선택"
         position="center"
+        closeButton={<button style={{ width: '100%' }}>닫기 버튼</button>}
+        confirmButton={<button style={{ width: '100%' }}>확인 버튼</button>}
+        buttonPosition="column"
       />
     </>
   );
