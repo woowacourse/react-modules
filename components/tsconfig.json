@@ -23,15 +23,11 @@
     /* Testing */
     "types": ["jest"],
 
-    "esModuleInterop": true,
-
-    "baseUrl": "src",
-    "paths": {
-      "@styles/*": ["styles/*"]
-    }
+    "esModuleInterop": true
   },
 
-  "include": ["src/lib"],
+  // "include": ["src/lib"],
+  "include": ["src/**/*"],
   "exclude": ["node_modules", "dist", "**/*.test.ts"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

@@ -22,8 +22,5 @@ export default defineConfig({
       esmExternals: ['react'],
     },
   },
-  resolve: {
-    alias: [{ find: '@styles', replacement: path.resolve(__dirname, 'src/styles') }],
-  },
   plugins: [react(), dts()],
 });
