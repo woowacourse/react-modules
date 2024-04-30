@@ -1,5 +1,4 @@
 import "./Modal.css";
-import usePreventScroll from "../hooks/usePreventScroll";
 
 type ModalProps = {
   onClose: () => void;
@@ -7,12 +6,15 @@ type ModalProps = {
   title: string;
   position: "center" | "bottom";
   content: React.ReactNode;
-  onConfirm?: () => void;
   modalContainerStyle?: React.CSSProperties;
 };
 
 const Modal = ({ onClose, isOpen, title, position, content, modalContainerStyle }: ModalProps) => {
-  const preventScroll = usePreventScroll();
+  if (isOpen) {
+    document.body.style.overflow = "hidden";
+  } else {
+    document.body.style.overflow = "auto";
+  }
 
   return (
     <>

@@ -1,7 +1,7 @@
 {
-  "name": "compoents",
+  "name": "tenbur-modal",
   "version": "0.0.1",
-  "description": "npm modules",
+  "description": "공용 모달 라이브러리",
   "type": "module",
   "types": "dist/index.d.ts",
   "main": "dist/index.js",
@@ -19,7 +19,8 @@
   },
   "dependencies": {
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "tenbur-modal": "^0.0.1"
   },
   "devDependencies": {
     "@chromatic-com/storybook": "^1.3.3",
@@ -46,6 +47,7 @@
     "storybook": "^8.0.9",
     "typescript": "^5.2.2",
     "vite": "^5.2.0",
-    "vite-plugin-dts": "^3.9.0"
+    "vite-plugin-dts": "^3.9.0",
+    "vite-plugin-lib-inject-css": "^2.0.1"
   }
 }

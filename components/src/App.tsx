@@ -1,70 +1,22 @@
 import React from "react";
 import "./App.css";
-// import "../Modal.css";
-import Modal from "./lib/Modal";
 import { useState } from "react";
+import { Modal } from "tenbur-modal";
 
 type TestProps = {
   handleModalClose: () => void;
 };
 
 const customStyles = {
-  width: "1000px",
   height: "50px",
   margin: "auto",
   borderRadius: "8px",
+  padding: "24px 32px",
 };
 
-const Test = ({ handleModalClose }: TestProps) => {
+export const Test = ({ handleModalClose }: TestProps) => {
   return (
     <div>
-      <button onClick={handleModalClose}>모달 닫기</button>
-      <button onClick={handleModalClose}>모달 닫기</button>
-      <button onClick={handleModalClose}>모달 닫기</button>
-      <button onClick={handleModalClose}>모달 닫기</button>
-      <button onClick={handleModalClose}>모달 닫기</button>
-      <button onClick={handleModalClose}>모달 닫기</button>
-      <button onClick={handleModalClose}>모달 닫기</button>
-      <button onClick={handleModalClose}>모달 닫기</button>
-      <button onClick={handleModalClose}>모달 닫기</button>
-      <button onClick={handleModalClose}>모달 닫기</button>
-      <button onClick={handleModalClose}>모달 닫기</button>
-      <button onClick={handleModalClose}>모달 닫기</button>
-      <button onClick={handleModalClose}>모달 닫기</button>
-      <button onClick={handleModalClose}>모달 닫기</button>
-      <button onClick={handleModalClose}>모달 닫기</button>
-      <button onClick={handleModalClose}>모달 닫기</button>
-      <button onClick={handleModalClose}>모달 닫기</button>
-      <button onClick={handleModalClose}>모달 닫기</button>
-      <button onClick={handleModalClose}>모달 닫기</button>
-      <button onClick={handleModalClose}>모달 닫기</button>
-      <button onClick={handleModalClose}>모달 닫기</button>
-      <button onClick={handleModalClose}>모달 닫기</button>
-      <button onClick={handleModalClose}>모달 닫기</button>
-      <button onClick={handleModalClose}>모달 닫기</button>
-      <button onClick={handleModalClose}>모달 닫기</button>
-      <button onClick={handleModalClose}>모달 닫기</button>
-      <button onClick={handleModalClose}>모달 닫기</button>
-      <button onClick={handleModalClose}>모달 닫기</button>
-      <button onClick={handleModalClose}>모달 닫기</button>
-      <button onClick={handleModalClose}>모달 닫기</button>
-      <button onClick={handleModalClose}>모달 닫기</button>
-      <button onClick={handleModalClose}>모달 닫기</button>
-      <button onClick={handleModalClose}>모달 닫기</button>
-      <button onClick={handleModalClose}>모달 닫기</button>
-      <button onClick={handleModalClose}>모달 닫기</button>
-      <button onClick={handleModalClose}>모달 닫기</button>
-      <button onClick={handleModalClose}>모달 닫기</button>
-      <button onClick={handleModalClose}>모달 닫기</button>
-      <button onClick={handleModalClose}>모달 닫기</button>
-      <button onClick={handleModalClose}>모달 닫기</button>
-      <button onClick={handleModalClose}>모달 닫기</button>
-      <button onClick={handleModalClose}>모달 닫기</button>
-      <button onClick={handleModalClose}>모달 닫기</button>
-      <button onClick={handleModalClose}>모달 닫기</button>
-      <button onClick={handleModalClose}>모달 닫기</button>
-      <button onClick={handleModalClose}>모달 닫기</button>
-      <button onClick={handleModalClose}>모달 닫기</button>
       <button onClick={handleModalClose}>모달 닫기</button>
     </div>
   );
@@ -87,9 +39,8 @@ function App() {
       <Modal
         isOpen={modalOpen}
         onClose={handleModalClose}
-        onConfirm={handleModalClose}
         title="약관에 동의해 주세요"
-        position="center"
+        position="bottom"
         modalContainerStyle={customStyles}
         content={<Test handleModalClose={handleModalClose} />}
       />
