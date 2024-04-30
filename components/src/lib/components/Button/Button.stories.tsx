@@ -1,8 +1,7 @@
 import { Meta, StoryObj } from '@storybook/react';
 import Button from './Button';
-import { ModalButtonProps } from './Button'; // Assuming the type is exported
 
-export default {
+const meta = {
   title: 'Components/Button',
   component: Button,
   argTypes: {
@@ -19,9 +18,13 @@ export default {
       control: { type: 'boolean' },
     },
   },
-} as Meta<ModalButtonProps>;
+} satisfies Meta<typeof Button>;
 
-export const Primary: StoryObj<ModalButtonProps> = {
+export default meta;
+
+type Story = StoryObj<typeof Button>;
+
+export const Primary: Story = {
   args: {
     text: 'Primary Button',
     mode: 'primary',
@@ -29,7 +32,7 @@ export const Primary: StoryObj<ModalButtonProps> = {
   },
 };
 
-export const Secondary: StoryObj<ModalButtonProps> = {
+export const Secondary: Story = {
   args: {
     text: 'Secondary Button',
     mode: 'secondary',
@@ -37,7 +40,7 @@ export const Secondary: StoryObj<ModalButtonProps> = {
   },
 };
 
-export const Small: StoryObj<ModalButtonProps> = {
+export const Small: Story = {
   args: {
     text: 'Small Button',
     mode: 'primary',
@@ -45,7 +48,7 @@ export const Small: StoryObj<ModalButtonProps> = {
   },
 };
 
-export const Medium: StoryObj<ModalButtonProps> = {
+export const Medium: Story = {
   args: {
     text: 'Medium Button',
     mode: 'primary',

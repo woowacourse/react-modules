@@ -1,15 +1,18 @@
 import { Meta, StoryObj } from '@storybook/react';
 import CloseButton from './CloseButton';
-import { CloseButtonProps } from './CloseButton';
 
-export default {
+const meta = {
   title: 'Components/CloseButton',
   component: CloseButton,
   argTypes: {
     close: { action: 'closed' },
   },
-} as Meta<CloseButtonProps>;
+} satisfies Meta<typeof CloseButton>;
 
-export const Default: StoryObj<CloseButtonProps> = {
+export default meta;
+
+type Story = StoryObj<typeof CloseButton>;
+
+export const Default: Story = {
   render: (args) => <CloseButton {...args} />,
 };
