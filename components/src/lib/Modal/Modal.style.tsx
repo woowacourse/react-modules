@@ -26,7 +26,7 @@ const ModalContainer = styled.div<{ $position: ModalPosition }>`
   transform: ${({ $position }) =>
     $position === 'center' ? 'translate(-50%, -50%)' : 'translate(-50%, 0%)'};
   min-width: ${({ $position }) => ($position === 'bottom' ? '100%' : '80%')};
-  min-height: 200px;
+  min-height: 150px;
   background-color: white;
   border-radius: ${({ $position }) =>
     $position === 'center' ? '8px' : '8px 8px 0px 0px'};

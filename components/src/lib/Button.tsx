@@ -29,6 +29,6 @@ const ButtonWrapper = styled.button<{ $colorType: ButtonColorType }>`
   color: ${({ $colorType }) => ($colorType === 'black' ? 'white' : '#333333')};
   border: 1px solid
     ${({ $colorType }) => ($colorType === 'white' ? '#bababa' : '#333333')};
-  margin-bottom: 10px;
+  margin-top: 10px;
   cursor: pointer;
 `;
