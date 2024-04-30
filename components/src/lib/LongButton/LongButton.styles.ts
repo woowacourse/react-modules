@@ -1,6 +1,7 @@
 import { css } from "@emotion/react";
 
-export const confirmButtonStyle = css({
+export const LongButtonPropsStyle = css({
+  width: "100%",
   color: "#ffffff",
   fontSize: "15px",
   fontWeight: "700",

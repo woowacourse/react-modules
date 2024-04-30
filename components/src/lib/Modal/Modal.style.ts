@@ -32,4 +32,10 @@ export const modalContentStyle = () =>
     padding: "24px 32px",
   });
 
+export const buttonsStyle = css({
+  display: "flex",
+  flexDirection: "column",
+  gap: "12px",
+});
+
 export const ModalBottom = css({});

@@ -8,7 +8,7 @@ function App() {
   return (
     <>
       <h1>Component Modules</h1>
-      <Modal position="center" title="카드사 선택">
+      <Modal position="center" title="카드사 선택" isConfirmButton={true} closeButtonPosition="top">
         <div>hello, world</div>
       </Modal>
     </>

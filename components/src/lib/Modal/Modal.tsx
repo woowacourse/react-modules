@@ -1,22 +1,32 @@
 /** @jsxImportSource @emotion/react */
 import React, { useEffect } from "react";
-import { modalContentStyle, modalStyle } from "./Modal.style";
+import { buttonsStyle, modalContentStyle, modalStyle } from "./Modal.style";
 import useModalHook from "../useModalHook";
-import ConfirmButton from "../ConfirmButton/ConfirmButton";
 
 import ModalHeader from "../ModalHeader/ModalHeader";
 import CloseButton from "../CloseButton/CloseButton";
 import Title from "../Title/Title";
+import LongButton from "../LongButton/LongButton";
 
 interface ModalProps {
   position: "center" | "bottom";
+  closeButtonPosition: "bottom" | "top";
+  isConfirmButton: boolean;
   title: string;
   children: React.ReactNode;
   onConfirm?: () => void;
   onClose?: () => void;
 }
 
-const Modal: React.FC<ModalProps> = ({ position, title, children, onConfirm, onClose }) => {
+const Modal: React.FC<ModalProps> = ({
+  position,
+  title,
+  children,
+  onConfirm,
+  onClose,
+  closeButtonPosition,
+  isConfirmButton,
+}) => {
   const { ref, action } = useModalHook();
 
   useEffect(() => {
@@ -41,10 +51,27 @@ const Modal: React.FC<ModalProps> = ({ position, title, children, onConfirm, onC
       <div css={modalContentStyle}>
         <ModalHeader>
           <Title>{title}</Title>
-          <CloseButton handleClose={action.handleClose} onClose={onClose} />
+          {closeButtonPosition === "top" && <CloseButton handleClose={action.handleClose} onClose={onClose} />}
         </ModalHeader>
         <div>{children}</div>
-        <ConfirmButton handleClose={action.handleClose} onConfirm={onConfirm} />
+        <div css={buttonsStyle}>
+          {isConfirmButton && (
+            <LongButton type="confirm" handleClick={onConfirm}>
+              동의하고 저장하기
+            </LongButton>
+          )}
+          {closeButtonPosition === "bottom" && (
+            <LongButton
+              type="cancel"
+              handleClick={() => {
+                action.handleClose();
+                if (onClose) onClose();
+              }}
+            >
+              닫기
+            </LongButton>
+          )}
+        </div>
       </div>
     </dialog>
   );
