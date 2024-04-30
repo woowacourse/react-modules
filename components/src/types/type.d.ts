@@ -1,11 +1,5 @@
 import React from 'react';
 
-interface CustomStyle {
-  primaryColor?: string;
-  secondaryColor?: string;
-  destructiveColor?: string;
-}
-
 type ModalPosition = 'center' | 'bottom';
 type ButtonPosition = 'row' | 'column';
 
@@ -16,10 +10,11 @@ interface ModalProps {
   description?: string;
   children?: JSX.Element;
   modalPosition?: ModalPosition;
-  firstButton?: { text: string; onClick: () => void };
-  secondButton?: { text: string; onClick: () => void };
+  primaryButton?: ButtonProps;
+  secondaryButton?: ButtonProps;
   buttonPosition?: ButtonPosition;
-  customStyle?: CustomStyle;
+  primaryColor?: string;
+  showCloseButton?: boolean;
 }
 
 type ButtonSize = 'small' | 'medium' | 'large';
