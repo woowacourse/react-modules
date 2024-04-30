@@ -38,7 +38,7 @@ const hoverColor = (backgroundColor: string) => {
   return '#' + R + G + B;
 };
 
-const BUTTON_STYLE_TABLE = (primaryColor: string = '#333333') => {
+const BUTTON_STYLE_TABLE = (primaryColor: string) => {
   return {
     primary: {
       backgroundColor: primaryColor,
@@ -97,7 +97,7 @@ export const Button = styled.button<{
 export const ButtonText = styled.p<{
   size: ButtonSize;
   buttonStyle: ButtonStyle;
-  primaryColor?: string;
+  primaryColor: string;
 }>`
   font-size: ${(props) => BUTTON_SIZE_TABLE[props.size].fontSize};
   color: ${(props) =>
