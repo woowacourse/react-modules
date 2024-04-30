@@ -1,6 +1,7 @@
 import styled from 'styled-components';
+import { Direction, Position, Size, BackDropType, ButtonMode } from './Modal.type';
 
-export const ModalLayout = styled.div<{ $position: string }>`
+export const ModalLayout = styled.div<{ $position: Position }>`
   position: fixed;
   top: 0;
 
@@ -12,18 +13,20 @@ export const ModalLayout = styled.div<{ $position: string }>`
   height: 100vh;
 `;
 
-export const ModalBackdrop = styled.div`
+export const ModalBackdrop = styled.div<{ $type: BackDropType }>`
   position: fixed;
   top: 0;
 
   width: 100vw;
   height: 100vh;
 
-  background: #00000050;
+  background: ${(props) => (props.$type === 'transparent' ? 'transparent' : '#00000050')};
+  backdrop-filter: ${(props) => props.$type === 'blur' && 'blur(10px)'};
+
   z-index: 10;
 `;
 
-const controlModalWidth = (position: string, size: string) => {
+const controlModalWidth = (position: Position, size: Size) => {
   if (position === 'bottom') return '100%';
 
   switch (size) {
@@ -38,15 +41,17 @@ const controlModalWidth = (position: string, size: string) => {
   }
 };
 
-export const ModalContainer = styled.div<{ $position: string; $size: string }>`
+export const ModalContainer = styled.div<{ $position: Position; $size: Size }>`
+  display: flex;
+  flex-direction: column;
+
   width: ${(props) => controlModalWidth(props.$position, props.$size)};
+  max-height: ${(props) => (props.$position === 'center' ? '70vh' : '90vh')};
+
   margin: ${(props) => props.$position === 'center' && '0 36px'};
   background-color: white;
   padding: 24px 32px;
   border-radius: ${(props) => (props.$position === 'center' ? '8px' : '8px 8px 0 0')};
-
-  max-height: ${(props) => (props.$position === 'center' ? '50vh' : '90vh')};
-  overflow-y: auto;
 
   z-index: 100;
 `;
@@ -57,7 +62,7 @@ export const ModalTitleWrapper = styled.h1`
   font-weight: 700;
 `;
 
-export const ModalButtonWrapper = styled.button<{ $mode: string }>`
+export const ModalButtonWrapper = styled.button<{ $mode: ButtonMode }>`
   width: 100%;
   padding: 15px 0;
   background-color: ${(props) => (props.$mode === 'primary' ? '#333333' : '#ffffff')};
@@ -84,4 +89,11 @@ export const ModalHeaderWrapper = styled.header`
 
 export const ModalBodyWrapper = styled.main`
   margin: 16px 0px;
+  flex-grow: 1;
+  overflow-y: auto;
+`;
+
+export const ModalFooterWrapper = styled.footer<{ $direction: Direction }>`
+  display: flex;
+  flex-direction: ${({ $direction }) => ($direction === 'row' ? 'row' : 'column')};
 `;
