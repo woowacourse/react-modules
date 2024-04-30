@@ -1,0 +1,42 @@
+:root {
+    --dimmed-color: rgba(0, 0, 0, 0.35);
+}
+
+.dimmed {
+    position: fixed;
+    inset: 0;
+    background-color: var(--dimmed-color);
+}
+
+
+.modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80vw;
+    margin: auto;
+    padding: 24px 32px;
+    background-color: white;
+    border-radius: 8px;
+}
+
+.modalHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.closeButton {
+    cursor: pointer;
+}
+
+.title {
+    color: black;
+    font-family: Noto Sans KR;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 26.06px;
+    text-align: left;
+}
