@@ -8,7 +8,6 @@ type TestProps = {
 };
 
 const customStyles = {
-  height: "50px",
   margin: "auto",
   borderRadius: "8px",
   padding: "24px 32px",
@@ -35,7 +34,6 @@ function App() {
 
   return (
     <>
-      <button onClick={handleModalOpen}>모달 열기</button>
       <Modal
         isOpen={modalOpen}
         onClose={handleModalClose}
@@ -44,6 +42,8 @@ function App() {
         modalContainerStyle={customStyles}
         content={<Test handleModalClose={handleModalClose} />}
       />
+
+      <button onClick={handleModalOpen}>모달 열기</button>
     </>
   );
 }

@@ -6,10 +6,10 @@ type ModalProps = {
   title: string;
   position: "center" | "bottom";
   content: React.ReactNode;
-  modalContainerStyle?: React.CSSProperties;
+  modalContainerStyle: React.CSSProperties;
 };
 
-const Modal = ({ onClose, isOpen, title, position, content, modalContainerStyle }: ModalProps) => {
+const Modal = ({ onClose = () => {}, isOpen = true, title = "", position = "center", content = "", modalContainerStyle = {} }: Partial<ModalProps>) => {
   if (isOpen) {
     document.body.style.overflow = "hidden";
   } else {
