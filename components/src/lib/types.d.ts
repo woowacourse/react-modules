@@ -13,7 +13,7 @@ interface ModalComposedProps<T> extends React.HTMLAttributes<T> {
   children: ReactNode;
 }
 
-interface CloseButtonProps<A> extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+interface CloseButtonProps<A> extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, 'onClick'> {
   children: ReactNode;
   extraAction?: A;
 }
