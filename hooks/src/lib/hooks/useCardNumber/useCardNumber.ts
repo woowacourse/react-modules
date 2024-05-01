@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import { getNumberErrorMessage } from '../utils/validation';
+import { getNumberErrorMessage } from '../../utils/validation/validation';
 
-const VALID_CARD_NUMBER_LENGTH = 16;
+export const VALID_CARD_NUMBER_LENGTH = 16;
 
 const useCardNumber = () => {
   const [cardNumber, setCardNumber] = useState<string>('');
@@ -13,7 +13,10 @@ const useCardNumber = () => {
 
     setCardNumberErrorMessage(errorMessage);
 
-    if (errorMessage !== '') return;
+    if (errorMessage !== '') {
+      setIsValidCardNumber(false);
+      return;
+    }
 
     setCardNumber(number);
     setIsValidCardNumber(true);
