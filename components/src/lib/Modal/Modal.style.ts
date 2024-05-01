@@ -1,11 +1,11 @@
 import styled from "@emotion/styled";
 import { ModalProps } from "./Modal";
 
-interface ModalDimProps {
+interface ModalDeemProps {
   isOpen: boolean;
 }
 
-export const ModalDim = styled.div<ModalDimProps>`
+export const ModalDeem = styled.div<ModalDeemProps>`
   display: ${({ isOpen }) => (isOpen ? "block" : "none")};
   position: absolute;
   top: 0;
@@ -16,12 +16,11 @@ export const ModalDim = styled.div<ModalDimProps>`
   z-index: 1000;
 `;
 
-export const ModalContainer = styled.div<Pick<ModalProps, "modalPosition" | "closeButtonPosition">>`
+export const ModalContainer = styled.div<Pick<ModalProps, "modalPosition">>`
   display: flex;
   z-index: 1001;
   flex-direction: column;
-  ${({ closeButtonPosition }) =>
-    closeButtonPosition === "bottom" && "justify-content: space-between;"}
+  justify-content: space-between;
   gap: 16px;
   position: absolute;
   min-height: 216px;
@@ -32,26 +31,23 @@ export const ModalContainer = styled.div<Pick<ModalProps, "modalPosition" | "clo
   background: rgba(255, 255, 255, 1);
   color: rgba(0, 0, 0, 1);
 
-  ${({ modalPosition }) => {
-    switch (modalPosition) {
-      case "center":
-        return `
-          top: 50%;
-          left: 50%;
-          transform: translate(-50%, -50%);
-          width: 304px;
-        `;
-      case "bottom":
-        return `
-          bottom: 0;
-          left: 0;
-          right: 0;
-          width: 100%;
-        `;
-      default:
-        return "";
-    }
-  }}
+  ${({ modalPosition }) =>
+    modalPosition === "center" &&
+    `
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 304px;
+  `}
+
+  ${({ modalPosition }) =>
+    modalPosition === "bottom" &&
+    `
+    bottom: 0;
+    left:0;
+    right:0;
+    width: 100%;
+  `}
 `;
 
 export const ModalHeader = styled.div`

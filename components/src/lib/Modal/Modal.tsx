@@ -1,7 +1,7 @@
 import React from "react";
 import CloseButton from "../CloseButton/CloseButton";
 import Button from "../common/Button";
-import { ModalContainer, ModalDim, ModalHeader } from "./Modal.style";
+import { ModalContainer, ModalDeem, ModalHeader } from "./Modal.style";
 
 export interface ModalProps {
   modalPosition: "center" | "bottom";
@@ -12,19 +12,19 @@ export interface ModalProps {
   onClose: (e: React.MouseEvent<HTMLDivElement | HTMLButtonElement>) => void;
 }
 
-export const Modal = ({
+export const Modal: React.FC<ModalProps> = ({
   modalPosition,
   title,
   children,
   closeButtonPosition,
   isOpen,
   onClose,
-}: ModalProps) => {
+}) => {
   if (!isOpen) return null;
 
   return (
-    <ModalDim isOpen={isOpen} onClick={onClose}>
-      <ModalContainer modalPosition={modalPosition} closeButtonPosition={closeButtonPosition}>
+    <ModalDeem isOpen={isOpen} onClick={(e) => onClose(e)}>
+      <ModalContainer modalPosition={modalPosition}>
         <ModalHeader>
           <h1>{title}</h1>
           {closeButtonPosition === "top" && (
@@ -43,6 +43,6 @@ export const Modal = ({
           />
         )}
       </ModalContainer>
-    </ModalDim>
+    </ModalDeem>
   );
 };
