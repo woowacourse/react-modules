@@ -1,6 +1,6 @@
 import { ReactNode } from 'react';
 import styles from './Modal.module.css';
-import CloseButtonImage from './assets/images/CloseButtonImage.svg';
+import { CloseButtonImage } from './CloseButtonImage';
 import { CancelButtonProps, CloseButtonProps, ConfirmButtonProps, SubtitleProps, TitleProps } from './interfaces';
 
 interface ModalProps {
@@ -97,7 +97,9 @@ const Modal = ({
         className={styles[`container-${modalPosition}`]}
       >
         <div className={styles['header']}>
-          <img className={styles['button-close']} src={CloseButtonImage} onClick={closeButton.onClose}></img>
+          <span className={styles['button-close']} onClick={closeButton.onClose}>
+            <CloseButtonImage />
+          </span>
           {drawTitleField()}
         </div>
         {children}
