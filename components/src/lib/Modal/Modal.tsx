@@ -50,6 +50,16 @@ const Modal = ({
   if (isOpened) document.body.style.overflow = 'hidden';
   else document.body.style.overflow = 'scroll';
 
+  const handleKeyDownEsc = (e: KeyboardEvent) => {
+    if (e.key === 'Escape' && isOpened) {
+      closeModal();
+    }
+
+    document.body.removeEventListener('keydown', handleKeyDownEsc);
+  };
+
+  document.body.addEventListener('keydown', handleKeyDownEsc);
+
   return (
     <>
       <GlobalStyle />
