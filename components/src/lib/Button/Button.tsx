@@ -1,7 +1,5 @@
 import * as Styled from './Button.styled';
 
-import GlobalStyle from '../../global.styled';
-
 type ButtonSize = 'small' | 'medium' | 'large';
 type ButtonWidth = 'fixed' | 'fit' | 'full';
 type ButtonStyle = 'primary' | 'border' | 'text';
@@ -25,7 +23,6 @@ const Button = ({
 }: ButtonProps) => {
   return (
     <>
-      <GlobalStyle />
       <Styled.Button
         onClick={onClick}
         size={size}

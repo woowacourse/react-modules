@@ -2,7 +2,6 @@ import * as Styled from './Modal.styled';
 
 import Button from '../Button/Button';
 import CLOSE_BUTTON from '../../asset/close-button.svg';
-import GlobalStyle from '../../global.styled';
 
 export type ModalPosition = 'center' | 'bottom';
 export type ButtonPosition = 'row' | 'column';
@@ -62,7 +61,6 @@ const Modal = ({
 
   return (
     <>
-      <GlobalStyle />
       {isOpened && (
         <Styled.DimmedLayer onClick={closeModal}>
           <Styled.ModalContainer
