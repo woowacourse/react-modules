@@ -3,15 +3,15 @@ import { getNumberErrorMessage, isNotNumber } from '../../utils/validation/valid
 
 export const VALID_CVC_NUMBER_LENGTH = 3;
 
-const useCardCVC = () => {
+const useCardCVC = (validLength: number = VALID_CVC_NUMBER_LENGTH) => {
   const [cvcNumber, setCVCNumber] = useState('');
   const [isValidCVCNumber, setIsValidCVCNumber] = useState(false);
   const [cvcNumberErrorMessage, setCVCNumberErrorMessage] = useState('');
 
   const handleCVCNumberChange = (number: string) => {
-    if (isNotNumber(number) || number.length > VALID_CVC_NUMBER_LENGTH) return;
+    if (isNotNumber(number) || number.length > validLength) return;
 
-    const errorMessage = getNumberErrorMessage(number, VALID_CVC_NUMBER_LENGTH);
+    const errorMessage = getNumberErrorMessage(number, validLength);
 
     setCVCNumberErrorMessage(errorMessage);
     setIsValidCVCNumber(!errorMessage);
