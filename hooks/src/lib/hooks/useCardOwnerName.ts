@@ -6,15 +6,15 @@ const ERROR_MESSAGES = {
   NOT_ENG: '영어만 입력 가능합니다.',
 };
 
-const makeValidOwnerName = (name: string) => {
-  const engName = filterEnglishAndSpaces(name.toUpperCase());
-  return unifySpaces(engName);
-};
-
 const useCardOwnerName = () => {
   const [ownerName, setOwnerName] = useState('');
   const [isValid, setIsValid] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
+
+  const makeValidOwnerName = (name: string) => {
+    const engName = filterEnglishAndSpaces(name.toUpperCase());
+    return unifySpaces(engName);
+  };
 
   const getErrorMessage = (name: string) => {
     const engName = filterEnglishAndSpaces(name.toUpperCase());
