@@ -10,7 +10,6 @@ import {
   Footer,
   FooterButton,
 } from './Modal.style';
-import './Modal.css';
 
 export type ModalPositionType = 'center' | 'bottom';
 
@@ -61,7 +60,7 @@ export default function Modal({
     <ModalOverlay onClick={onClose}>
       <ModalWrapper
         ref={modalRef}
-        className={position}
+        $position={position}
         onKeyDown={handleKeyDown}
         onClick={(event) => event.stopPropagation()}
         tabIndex={0}

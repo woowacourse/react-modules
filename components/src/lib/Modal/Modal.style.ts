@@ -1,5 +1,13 @@
 import styled from 'styled-components';
-import { ModalButtonType } from './Modal';
+import { ModalButtonType, ModalPositionType } from './Modal';
+
+const colors = {
+  grey100: '#ffffff',
+  grey200: '#8b95a1',
+  grey300: '#666666',
+  grey400: '#333333',
+  grey500: '#000000',
+};
 
 export const ModalOverlay = styled.div`
   position: fixed;
@@ -16,15 +24,34 @@ export const ModalOverlay = styled.div`
   align-items: center;
 `;
 
-export const ModalWrapper = styled.div`
-  background: var(--grey-100);
-  color: var(--grey-500);
+export const ModalWrapper = styled.div<{ $position: ModalPositionType }>`
+  background: ${colors.grey100};
+  color: ${colors.grey500};
   padding: 24px 32px;
   z-index: 100;
 
   display: flex;
   flex-direction: column;
   gap: 16px;
+
+  ${(props) => {
+    if (props.$position === 'center') {
+      return `
+        position: relative;
+        margin: auto;
+        border-radius: 10px;
+      `;
+    }
+    if (props.$position === 'bottom') {
+      return `
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        border-radius: 10px 10px 0 0;
+      `;
+    }
+  }}
 `;
 
 export const Header = styled.header`
@@ -41,9 +68,9 @@ export const Title = styled.h2`
 
 export const CloseButton = styled.button`
   display: inline-block;
-  width: 24px;
-  height: 24px;
-  background: var(--grey-100);
+  width: 14px;
+  height: 100%;
+  background: ${colors.grey100};
   border: 0;
   padding: 0;
 `;
@@ -61,8 +88,8 @@ export const Footer = styled.footer`
 `;
 
 export const FooterButton = styled.button<{ $style: ModalButtonType['style'] }>`
-  background: ${(props) => (props.$style === 'primary' ? 'var(--grey-400)' : 'var(--grey-100)')};
-  color: ${(props) => (props.$style === 'primary' ? 'var(--grey-100)' : 'var(--grey-200)')};
+  background: ${(props) => (props.$style === 'primary' ? colors.grey400 : colors.grey100)};
+  color: ${(props) => (props.$style === 'primary' ? colors.grey100 : colors.grey200)};
   border-radius: 5px;
   font-size: 15px;
   font-weight: 700;
