@@ -1,17 +1,23 @@
 import { useEffect } from 'react';
 import useInput, { ValidationType } from './useInput';
 
+const EXPIRATION_DATE_LENGTH = 2;
+const MONTH = {
+  start: 1,
+  end: 12,
+} as const;
+
 type InitialValueType = [string, string];
 
 const useCardExpirationDate = (initialValue: InitialValueType = ['', '']) => {
   const isValidLength = (value: string) => {
-    return value.length === 2;
+    return value.length === EXPIRATION_DATE_LENGTH;
   };
 
   const isValidMonth = (value: string) => {
     const month = Number(value);
 
-    return month >= 1 && month <= 12;
+    return month >= MONTH.start && month <= MONTH.end;
   };
 
   const isNumber = (value: string) => {
@@ -21,18 +27,18 @@ const useCardExpirationDate = (initialValue: InitialValueType = ['', '']) => {
   const monthInputValidations: ValidationType[] = [
     {
       validate: isValidLength,
-      message: '2자리 월(MM)을 입력해주세요. ex) 01',
+      message: `${EXPIRATION_DATE_LENGTH}자리 월(MM)을 입력해주세요. ex) 01`,
     },
     {
       validate: isValidMonth,
-      message: '1부터 12사이의 숫자를 입력해주세요.',
+      message: `${MONTH.start}부터 ${MONTH.end}사이의 숫자를 입력해주세요.`,
     },
   ];
 
   const yearInputValidations: ValidationType[] = [
     {
       validate: isValidLength,
-      message: '2자리 년도(YY)를 입력해주세요. ex) 24',
+      message: `${EXPIRATION_DATE_LENGTH}자리 년도(YY)를 입력해주세요. ex) 24`,
     },
   ];
 
@@ -48,7 +54,7 @@ const useCardExpirationDate = (initialValue: InitialValueType = ['', '']) => {
 
   useEffect(() => {
     const date = new Date();
-    const currentYear = date.getFullYear() % 100;
+    const currentYear = date.getFullYear() % 10 ** EXPIRATION_DATE_LENGTH;
     const currentMonth = date.getMonth() + 1;
 
     if (isValidLength(month.value) && isValidLength(year.value)) {

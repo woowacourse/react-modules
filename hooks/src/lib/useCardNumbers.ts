@@ -1,33 +1,44 @@
 import { useEffect, useState } from 'react';
 import useInput, { ValidationType } from './useInput';
 
+const CARD_NUMBER_LENGTH = 4;
+const VISA_START_NUMBER = 4;
+const MASTERCARD_START_NUMBER = {
+  min: 51,
+  max: 55,
+};
+
 type InitialValueType = [string, string, string, string];
 
-const useCardNumbers = (initialValue: InitialValueType) => {
+const useCardNumbers = (initialValue: InitialValueType = ['', '', '', '']) => {
   const [cardBrand, setCardBrand] = useState('');
 
   const isValidLength = (value: string) => {
-    return value.length === 4;
+    return value.length === CARD_NUMBER_LENGTH;
   };
 
   const isNumber = (value: string) => {
     return /^\d*$/.test(value);
   };
 
+  const isValidCardNumbersLength = (cardNumbers: string[]) => {
+    return cardNumbers.join('').length === CARD_NUMBER_LENGTH * initialValue.length;
+  };
+
   const isVisa = (cardNumbers: string[]) => {
-    return cardNumbers[0].startsWith('4') && cardNumbers.join('').length === 16;
+    return cardNumbers[0].startsWith(`${VISA_START_NUMBER}`);
   };
 
   const isMasterCard = (cardNumbers: string[]) => {
     const firstTwoDigits = Number(cardNumbers[0].slice(0, 2));
 
-    return firstTwoDigits >= 51 && firstTwoDigits <= 55 && cardNumbers.join('').length === 16;
+    return firstTwoDigits >= MASTERCARD_START_NUMBER.min && firstTwoDigits <= MASTERCARD_START_NUMBER.max;
   };
 
   const inputValidations: ValidationType[] = [
     {
       validate: isValidLength,
-      message: '4자리의 카드 번호를 입력해주세요.',
+      message: `${CARD_NUMBER_LENGTH}자리의 카드 번호를 입력해주세요.`,
     },
   ];
 
@@ -48,11 +59,17 @@ const useCardNumbers = (initialValue: InitialValueType) => {
   useEffect(() => {
     const cardNumberValues = cardNumbers.map(({ value }) => value);
 
-    if (isVisa(cardNumberValues)) setCardBrand('visa');
+    if (isValidCardNumbersLength(cardNumberValues)) {
+      if (isVisa(cardNumberValues)) {
+        setCardBrand('visa');
+        return;
+      }
 
-    if (isMasterCard(cardNumberValues)) setCardBrand('mastercard');
+      if (isMasterCard(cardNumberValues)) {
+        setCardBrand('mastercard');
+        return;
+      }
 
-    if (cardNumberValues.length === 16 && !isVisa(cardNumberValues) && !isMasterCard(cardNumberValues)) {
       setCardBrand('');
     }
   }, [...cardNumbers.map(({ value }) => value)]);

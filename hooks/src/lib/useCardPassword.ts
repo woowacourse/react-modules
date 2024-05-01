@@ -1,8 +1,10 @@
 import useInput, { ValidationType } from './useInput';
 
+const PASSWORD_LENGTH = 2;
+
 const useCardPassword = (initialValue = '') => {
   const isValidLength = (value: string) => {
-    return value.length === 2;
+    return value.length === PASSWORD_LENGTH;
   };
 
   const isNumber = (value: string) => {
@@ -12,7 +14,7 @@ const useCardPassword = (initialValue = '') => {
   const inputValidations: ValidationType[] = [
     {
       validate: isValidLength,
-      message: '앞 2자리의 비밀번호를 입력해주세요.',
+      message: `앞 ${PASSWORD_LENGTH}자리의 비밀번호를 입력해주세요.`,
     },
   ];
 

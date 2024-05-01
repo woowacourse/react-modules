@@ -1,8 +1,10 @@
 import useInput, { ValidationType } from './useInput';
 
+const CVC_LENGTH = 3;
+
 const useCardCVC = (initialValue = '') => {
   const isValidLength = (value: string) => {
-    return value.length === 3;
+    return value.length === CVC_LENGTH;
   };
 
   const isNumber = (value: string) => {
@@ -12,7 +14,7 @@ const useCardCVC = (initialValue = '') => {
   const inputValidations: ValidationType[] = [
     {
       validate: isValidLength,
-      message: '3자리의 CVC번호를 입력해주세요.',
+      message: `${CVC_LENGTH}자리의 CVC번호를 입력해주세요.`,
     },
   ];
 
