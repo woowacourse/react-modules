@@ -27,3 +27,14 @@
   - [x] Main: 모달에 children으로 주입된 콘텐츠 노출 영역
   - [x] Footer: 모달의 하단 버튼 노출 영역
     - [x] FooterButtons: 모달의 하단에 위치하는 버튼 요소들
+
+# Card Validation Module
+
+## Card Validation Module에 포함된 훅 목록
+
+- [ ] useCardNumbers: 카드 번호 검증 및 결과 반환
+- [ ] useCardBrand: 카드사 검증 및 결과 반환
+- [ ] useCardExpiryDate: 카드 유효기간 검증 및 결과 반환
+- [ ] useCardHolder: 카드 소유자 이름 검증 및 결과 반환
+- [ ] useCardCVC: 카드 CVC 번호 검증 및 결과 반환
+- [ ] useCardPassword: 카드 비밀번호 검증 및 결과 반환
