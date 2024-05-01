@@ -1,5 +1,5 @@
 import { renderHook } from "@testing-library/react";
-import usePasswordValidation from "../usePasswordValidation";
+import usePasswordValidation from "../useCardPasswordValidation";
 import ERROR_MESSAGES from "../constants/error";
 import { act } from "react";
 
