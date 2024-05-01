@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { getNumberErrorMessage } from '../../utils/validation/validation';
+import { getNumberErrorMessage, isNotNumber } from '../../utils/validation/validation';
 
 export const VALID_CVC_NUMBER_LENGTH = 3;
 
@@ -9,17 +9,13 @@ const useCardCVC = () => {
   const [cvcNumberErrorMessage, setCVCNumberErrorMessage] = useState('');
 
   const handleCVCNumberChange = (number: string) => {
+    if (isNotNumber(number) || number.length > VALID_CVC_NUMBER_LENGTH) return;
+
     const errorMessage = getNumberErrorMessage(number, VALID_CVC_NUMBER_LENGTH);
 
     setCVCNumberErrorMessage(errorMessage);
-
-    if (errorMessage !== '') {
-      setIsValidCVCNumber(false);
-      return;
-    }
-
+    setIsValidCVCNumber(!errorMessage);
     setCVCNumber(number);
-    setIsValidCVCNumber(true);
   };
 
   return {
