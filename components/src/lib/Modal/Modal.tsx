@@ -2,7 +2,37 @@ import * as Styled from './Modal.styled';
 
 import Button from '../Button/Button';
 import CLOSE_BUTTON from '../../asset/close-button.svg';
-import { ModalProps } from '../../types/type';
+import GlobalStyle from '../../global.styled';
+
+export type ModalPosition = 'center' | 'bottom';
+export type ButtonPosition = 'row' | 'column';
+
+export interface ModalProps {
+  isOpened: boolean;
+  closeModal: () => void;
+  title?: string;
+  description?: string;
+  children?: JSX.Element;
+  modalPosition?: ModalPosition;
+  primaryButton?: ButtonProps;
+  secondaryButton?: ButtonProps;
+  buttonPosition?: ButtonPosition;
+  primaryColor?: string;
+  showCloseButton?: boolean;
+}
+
+export interface ButtonProps {
+  text: string;
+  onClick: () => void;
+  size?: ButtonSize;
+  width?: ButtonWidth;
+  buttonStyle?: ButtonStyle;
+  primaryColor?: string;
+}
+
+export type ButtonSize = 'small' | 'medium' | 'large';
+export type ButtonWidth = 'fixed' | 'fit' | 'full';
+export type ButtonStyle = 'primary' | 'border' | 'text';
 
 const Modal = ({
   isOpened,
@@ -19,6 +49,7 @@ const Modal = ({
 }: ModalProps) => {
   return (
     <>
+      <GlobalStyle />
       {isOpened && (
         <Styled.DimmedLayer onClick={closeModal}>
           <Styled.ModalContainer

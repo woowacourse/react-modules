@@ -1,6 +1,19 @@
 import * as Styled from './Button.styled';
 
-import { ButtonProps } from '../../types/type';
+import GlobalStyle from '../../global.styled';
+
+type ButtonSize = 'small' | 'medium' | 'large';
+type ButtonWidth = 'fixed' | 'fit' | 'full';
+type ButtonStyle = 'primary' | 'border' | 'text';
+
+interface ButtonProps {
+  text: string;
+  onClick: () => void;
+  size?: ButtonSize;
+  width?: ButtonWidth;
+  buttonStyle?: ButtonStyle;
+  primaryColor?: string;
+}
 
 const Button = ({
   text,
@@ -11,21 +24,24 @@ const Button = ({
   primaryColor = '#333333',
 }: ButtonProps) => {
   return (
-    <Styled.Button
-      onClick={onClick}
-      size={size}
-      width={width}
-      buttonStyle={buttonStyle}
-      primaryColor={primaryColor}
-    >
-      <Styled.ButtonText
+    <>
+      <GlobalStyle />
+      <Styled.Button
+        onClick={onClick}
         size={size}
+        width={width}
         buttonStyle={buttonStyle}
         primaryColor={primaryColor}
       >
-        {text}
-      </Styled.ButtonText>
-    </Styled.Button>
+        <Styled.ButtonText
+          size={size}
+          buttonStyle={buttonStyle}
+          primaryColor={primaryColor}
+        >
+          {text}
+        </Styled.ButtonText>
+      </Styled.Button>
+    </>
   );
 };
 
