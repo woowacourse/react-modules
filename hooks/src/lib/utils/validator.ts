@@ -31,9 +31,7 @@ const ValidatorCondition = {
 };
 
 const Validator = {
-	checkCreditExpirationPeriod(value: string, name: string, maxDigit: number): boolean {
-		if (!this.checkFillNumber(value, maxDigit)) return false;
-
+	checkCreditExpirationPeriod(value: string, name: string): boolean {
 		const isValidMonth = name === 'month' ? ValidatorCondition.checkValidMonth(value) : true;
 		if (!isValidMonth) return false;
 
