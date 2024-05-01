@@ -86,6 +86,25 @@ function CloseBoxButton({ children, className, ...rest }: ModalButtonProps) {
   );
 }
 
+function ActionAndCloseButton<A extends Function>({
+  children,
+  extraAction,
+  className,
+  ...rest
+}: ActionAndCloseButtonProps<A>) {
+  const { closeModal } = useModalContext();
+
+  const onClick = () => {
+    if (extraAction) extraAction();
+    closeModal();
+  };
+
+  return (
+    <button className={className} onClick={onClick} {...rest}>
+      {children}
+    </button>
+  );
+}
 
 function Backdrop() {
   const { closeModal } = useModalContext();
@@ -112,5 +131,6 @@ Modal.Body = Body;
 Modal.CloseButton = CloseButton;
 Modal.CloseIconButton = CloseIconButton;
 Modal.CloseBoxButton = CloseBoxButton;
+Modal.ActionAndCloseButton = ActionAndCloseButton;
 
 export default Modal;
