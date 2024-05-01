@@ -1,7 +1,7 @@
 import { MODAL_POSITION_MAP } from './Modal.constant';
 import { ModalPosition } from './Modal.type';
 
-import usePressESC from '../../hooks/usePressESC';
+import useModalControl from './hooks/useModalControl';
 
 import { convertPascalCase } from '../../utils/string';
 
@@ -24,7 +24,7 @@ const Modal: React.FC<React.PropsWithChildren<ModalProps>> & {
 } = ({ children, isOpen, onToggle, position = 'center' }) => {
   const modalContainerStyle = position === 'bottom' ? `modalContainer${convertPascalCase(position)}` : '';
 
-  usePressESC(isOpen, onToggle);
+  useModalControl(isOpen, onToggle);
 
   return (
     isOpen && (
