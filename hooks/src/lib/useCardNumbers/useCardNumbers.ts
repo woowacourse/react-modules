@@ -1,6 +1,6 @@
 import { useState } from "react";
 import ValidationResult from "../types/ValidationResult";
-import Validation from "../../utils/Validation";
+import Validation from "../utils/Validation";
 
 import type {
   CardNumbersType,
