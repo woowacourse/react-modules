@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Modal, ModalProps } from "./Modal";
 
 export const useModal = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -16,5 +17,8 @@ export const useModal = () => {
     isOpen,
     openModal,
     closeModal,
+    ModalComponent: (props: Omit<ModalProps, "isOpen">) => (
+      <Modal {...props} isOpen={isOpen} onClose={closeModal} />
+    ),
   };
 };
