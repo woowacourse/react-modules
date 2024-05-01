@@ -1,12 +1,12 @@
 # Get started
 
-당신의 패키지 매니저를 통해 `modal` 을 설치해 주세요:
+당신의 패키지 매니저를 통해 `@hanuuny/react-modal` 을 설치해 주세요:
 
 ```shell
-npm install modal
+npm install @hanuuny/react-modal
 ```
 
-`modal` 컴포넌트를 import 하세요:
+`Modal` 컴포넌트를 import 하세요:
 
 ```javascript
 import { Modal } from 'modal';
@@ -42,15 +42,19 @@ export const MyComponent = () => {
 
 모달의 하단 영역을 표시합니다. 주로 확인 또는 취소와 같은 동작 버튼을 포함합니다.
 
-각 컴포넌트는 일관된 외관을 제공하도록 적절하게 스타일링되어 있지만, 사용자의 필요에 따라 커스텀할 수 있습니다.
-
 ### `Modal.Title`
 
 모달의 제목을 표시합니다.
 
+### `Modal.Button`
+
+모달에서 제공되는 기본 버튼입니다.
+
 ### `Modal.CloseButton`
 
 모달을 쉽게 닫을 수 있도록 제공되는 닫기 버튼입니다.
+
+각 컴포넌트는 일관된 외관을 제공하도록 적절하게 스타일링되어 있지만, 사용자의 필요에 따라 커스텀할 수 있습니다.
 
 <br />
 
@@ -58,7 +62,7 @@ export const MyComponent = () => {
 
 모달 라이브러리는 다양한 선택 속성을 지원합니다:
 
-## `Modal` 컴포넌트
+### `Modal` 컴포넌트
 
 | Name           | Type                                  | Default    | Description                         |
 | -------------- | ------------------------------------- | ---------- | ----------------------------------- |
@@ -66,13 +70,14 @@ export const MyComponent = () => {
 | `size`         | `'sm' \| 'md' \| 'lg'`                | `'lg'`     | 모달의 크기를 설정합니다.           |
 | `backdropType` | `'transparent' \| 'blur' \| 'opaque'` | `'opaque'` | 원하는 배경 효과 유형을 정의합니다. |
 
-## `Modal.Button` 컴포넌트
+### `Modal.Button` 컴포넌트
 
 | Name   | Type                       | Default     | Description               |
 | ------ | -------------------------- | ----------- | ------------------------- |
 | `mode` | `'primary' \| 'secondary'` | `'primary'` | 버튼의 타입을 설정합니다. |
 | `size` | `'sm' \| 'md' \| 'lg'`     | `'lg'`      | 버튼의 크기를 설정합니다. |
 
+<br />
 <br />
 
 # 합성 컴포넌트를 사용한 모달 예시
