@@ -6,7 +6,7 @@ export default function BasicCenterModal(props: BasicModalProps) {
   return (
     <Modal isOpen={props.isOpen} closeModal={props.closeModal} type="center">
       <Modal.Header className={styles.header}>
-        <Modal.Title className={styles.title}>{props.title}</Modal.Title>
+        <Modal.Title className={styles.title}>{props.modalTitle}</Modal.Title>
         {props.closeButtonType === 'icon' && <Modal.CloseIconButton className={styles.closeButton} />}
       </Modal.Header>
       <Modal.Body>

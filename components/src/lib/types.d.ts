@@ -1,7 +1,7 @@
 type ModalType = 'center' | 'bottom';
 type CloseButtonType = 'icon' | 'box';
 
-interface ModalProps extends React.HTMLProps<HTMLDivElement> {
+interface ModalProps extends React.HTMLAttributes<HTMLDivElement> {
   type: ModalType;
   children: ReactNode;
   isOpen: boolean;
@@ -9,6 +9,7 @@ interface ModalProps extends React.HTMLProps<HTMLDivElement> {
 }
 
 interface BasicModalProps extends Omit<ModalProps, 'type'> {
+  modalTitle: string;
   closeButtonType: CloseButtonType;
 }
 

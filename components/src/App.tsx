@@ -14,7 +14,7 @@ function App() {
       <BasicCenterModal
         closeButtonType="icon"
         isOpen={openCenterModal}
-        title="basic center"
+        modalTitle="basic center"
         closeModal={() => setOpenCenterModal(false)}
       >
         <div>basic center modal</div>
@@ -22,7 +22,7 @@ function App() {
       <BasicBottomModal
         closeButtonType="box"
         isOpen={openBottomModal}
-        title="basic bottom"
+        modalTitle="basic bottom"
         closeModal={() => setOpenBottomModal(false)}
       >
         <Modal.ActionAndCloseButton extraAction={() => alert('extraAction!!')}>
