@@ -4,8 +4,8 @@
 
 ### useInput
 
-- [ ] value, setValue,
-- [ ] error, setError
+- [x] value, setValue,
+- [x] error, setError
 
   1. type : number -> 예상된 입력값 이외의 타입 문자열을 입력하는 경우 에러 발생
   2. validator를 pram으로 받고 에러를 발생시킨다.
@@ -15,8 +15,8 @@
 
 ### useCardCompany
 
-- [ ] value, setValue,
-- [ ] error, setError
+- [x] value, setValue,
+- [x] error, setError
   1. 카드사가 등록되지 않은 value가 감지되면 에러를 만든다.
 
 ### useCardNumbers
