@@ -4,15 +4,15 @@ import { CLOSE_BUTTON } from '../assets/images/index';
 
 interface ContainerProps {
   position: string;
+  transformValue: string;
 }
 
 const Container = styled.div<ContainerProps>`
   background-color: #ffffff;
   position: fixed;
-
   top: ${(props) => props.position};
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: ${(props) => props.transformValue};
 `;
 
 const Header = styled.div`
@@ -29,7 +29,7 @@ const Header = styled.div`
 
 interface ModalProps {
   toggleModal: () => void;
-  position: 'top' | 'center' | 'bottom';
+  position: 'center' | 'bottom';
   title: string;
   closeOption: 'icon' | 'button';
   children: React.ReactNode;
@@ -48,14 +48,26 @@ function Modal({
 
   const handlePosition = () => {
     if (position === 'center') {
-      const top = '50%';
-      return top;
+      return '50%';
+    } else if (position === 'bottom') {
+      return '100%';
+    } else {
+      return '0';
     }
-    return '0';
+  };
+
+  const handleTransform = () => {
+    if (position === 'center') {
+      return 'translate(-50%, -50%)';
+    } else if (position === 'bottom') {
+      return 'translate(-50%, -100%)';
+    } else {
+      return 'translate(-50%, 0)';
+    }
   };
 
   return (
-    <Container position={handlePosition()}>
+    <Container position={handlePosition()} transformValue={handleTransform()}>
       <Header>
         <div>{title}</div>
         {closeOption === 'icon' && (
