@@ -37,4 +37,4 @@
 - [x] useCardExpiryDate: 카드 유효기간 검증 및 결과 반환
 - [x] useCardHolder: 카드 소유자 이름 검증 및 결과 반환
 - [x] useCardCVC: 카드 CVC 번호 검증 및 결과 반환
-- [ ] useCardPassword: 카드 비밀번호 검증 및 결과 반환
+- [x] useCardPassword: 카드 비밀번호 검증 및 결과 반환
