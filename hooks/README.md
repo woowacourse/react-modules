@@ -15,7 +15,7 @@
 - [] useCardCompany
 - [] useCardCVC
 - [] useCardExpirationDate
-- [] useCardOwner
+- [x] useCardOwner
 - [] useCardPassword
 
 ## 유효성 검사

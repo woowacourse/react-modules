@@ -1,14 +1,15 @@
 import React from 'react';
-import useInput from './lib/useInput';
+import useCardOwner from './lib/useCardOwner';
 
 function App() {
-  const { value, onChange } = useInput();
+  const { cardOwner } = useCardOwner();
 
   return (
     <>
       <h1>Hooks Modules</h1>
-      <input value={value} onChange={onChange} />
-      <p>{value}</p>
+      <input autoFocus style={{ border: '1px solid black' }} value={cardOwner.value} onBlur={cardOwner.onBlur} onChange={cardOwner.onChange} />
+      <p>{cardOwner.value}</p>
+      <p style={{ color: 'red' }}>{cardOwner.error.message}</p>
     </>
   );
 }
