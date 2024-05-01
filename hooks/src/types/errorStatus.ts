@@ -3,6 +3,7 @@ export enum ErrorStatus {
   EXPIRED_CARD_DATE = 'expiredCardDate',
   INVALID_MONTH = 'invalidMonth',
   INVALID_YEAR = 'invalidYear',
+  INVALID_DATE = 'invalidDate',
   NAME_SHOULD_BE_CAPITAL = 'nameCapital',
   ENTER_REQUIRED = 'enter',
   IS_NOT_NUMBER = 'isNotNumber',
