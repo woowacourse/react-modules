@@ -18,10 +18,14 @@
 .modalContainer {
   width: 240px;
   height: 168px;
+  max-height: 240px;
+  max-width: 168px;
   padding: 24px 32px;
   border-radius: 8px;
   background-color: #ffffff;
   z-index: 999;
+  overflow-y: auto;
+  overflow-x: auto;
 }
 
 .bottom {
@@ -46,10 +50,11 @@
   color: rgba(0, 0, 0, 1);
 }
 
-.modalContent {
-  width: 100%;
+.modalContainer {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 }
 
-.modalFooter {
-  width: 100%;
+.modalContainer :-webkit-scrollbar {
+  display: none;
 }
