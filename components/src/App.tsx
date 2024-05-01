@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { Modal } from './lib';
-import './App.css';
 
 function App() {
   const [isOpen, setIsOpen] = useState(false);
@@ -21,7 +20,7 @@ function App() {
           <Modal.Button text="닫기" mode="secondary" size="lg" onClick={() => setIsOpen(false)}></Modal.Button>
         </Modal.Footer>
       </Modal>
-    </div>
+    </>
   );
 }
 
