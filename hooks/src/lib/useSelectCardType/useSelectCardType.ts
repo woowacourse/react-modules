@@ -1,5 +1,6 @@
 import { ChangeEvent, useState } from 'react';
-import { CARD } from '../../constants/option';
+import { CARD } from '../constants/option';
+import Validator from '../utils/validator';
 
 type CardType = keyof typeof CARD;
 
@@ -12,6 +13,7 @@ const useSelectCardType = (initialSelected?: CardType) => {
 		if (e.target !== e.currentTarget) return;
 
 		const { value } = e.target;
+		if (!Validator.checkCardType(value)) return;
 
 		setSelectedCardType(value as CardType);
 	};

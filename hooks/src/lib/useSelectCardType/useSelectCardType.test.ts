@@ -16,4 +16,19 @@ describe('신용카드 카드사 입력 테스트', () => {
 
 		expect(result.current.selectedCardType).toEqual(selectCardType);
 	});
+
+	it('잘못된 카드사를 입력하면 업데이트가 되지 않는다', () => {
+		const selectCardType = '기업은행';
+		const { result } = renderHook(() => useSelectedCardType());
+		const target = { value: selectCardType };
+
+		act(() => {
+			result.current.handleSelectCardTypeChange({
+				target,
+				currentTarget: target,
+			} as React.ChangeEvent<HTMLButtonElement>);
+		});
+
+		expect(result.current.selectedCardType).toEqual(null);
+	});
 });
