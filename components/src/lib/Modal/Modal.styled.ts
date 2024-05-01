@@ -39,6 +39,7 @@ export const ModalHeader = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  line-height: 1.2;
 `;
 
 export const ModalCloseButton = styled.img`
@@ -47,6 +48,9 @@ export const ModalCloseButton = styled.img`
 `;
 
 export const ModalTitle = styled.h1`
+  margin-block-start: 0;
+  margin-block-end: 0;
+
   font-size: 18px;
   font-weight: 700;
   line-height: 18px;
@@ -61,9 +65,12 @@ export const ModalBody = styled.div`
 `;
 
 export const ModalDescription = styled.p`
+  margin-block-start: 0;
+  margin-block-end: 0;
+
   font-size: 14px;
   font-weight: 400;
-  line-height: 24px;
+  line-height: 1.6;
   text-align: left;
   color: #999999;
 `;
