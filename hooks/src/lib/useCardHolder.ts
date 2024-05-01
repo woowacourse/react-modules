@@ -12,7 +12,7 @@ const onChange = (value: string) => {
 };
 
 const onBlur = (value: string) => {
-  const isValidHolderFormat = /^(?!\s)(?!.*\s\s)(?!.*\s$)/.test(value);
+  const isValidHolderFormat = /^(?=\S)(?!.*\s\s).*\s+(?=\S).*$/.test(value);
 
   if (!isValidHolderFormat) {
     return {
@@ -25,10 +25,13 @@ const onBlur = (value: string) => {
 };
 
 const useCardHolder = (initialValue: string) => {
-  const { value, setValue, handleBlur, errorInfo, setErrorInfo } = useInput(initialValue, {
-    onChange,
-    onBlur,
-  });
+  const { value, setValue, handleBlur, errorInfo, setErrorInfo } = useInput(
+    initialValue.toUpperCase(),
+    {
+      onChange,
+      onBlur,
+    },
+  );
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const validationResult = onChange(event.target.value);
@@ -38,7 +41,7 @@ const useCardHolder = (initialValue: string) => {
   };
 
   useEffect(() => {
-    if (!onChange(initialValue).isValid) {
+    if (!onChange(initialValue).isValid || !onBlur(initialValue).isValid) {
       console.error(
         `cardholder field error: ${initialValue} 라는 올바르지 않은 값이 들어와 빈 값으로 초기화했습니다.`,
       );
