@@ -31,12 +31,6 @@ const Modal = ({
   xButtonContent
 }: Props) => {
 
-  // const [modalOpen, setModalOpen] = useState(true);
-  // const closeModal = (e: React.MouseEvent) => {
-  //   setModalOpen(false);
-  //   handleClose && handleClose(e);
-  // };
-
   const clickBackDrop = (e: React.MouseEvent) => {
     return e.currentTarget === e.target;
   };
