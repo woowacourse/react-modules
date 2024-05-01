@@ -1,20 +1,24 @@
-import React from "react";
-import Modal from "./lib/Modal";
+import React, { useState } from "react";
 import styled from "styled-components";
+import {Modal} from "chico-custom-modal";
 
 function App() {
+  const [open, setOpen] = useState(false);
   const handleClose=(e : React.MouseEvent) => {
-    console.log(e)
+    console.log(e);
+    setOpen(false);
     console.log('취소');
   }
   const handleConfirm = (e : React.MouseEvent) => {
     console.log(e)
+    setOpen(false)
     console.log('확인');
   }
   return (
     <> 
-      <Modal buttonLayout='column' position="bottom" title="제목입니다." isXButton={true}   closeButtonContent = '닫기'
-  confirmButtonContent='확인' handleConfirm={handleConfirm} handleClose={handleClose}>{<Temp><input></input>dasdfasdfasdfs</Temp>}</Modal>
+    <button onClick={()=>setOpen(true)}></button>
+    { open&& <Modal buttonLayout='column' position="bottom" title="제목입니다." isXButton={true}   closeButtonContent = '닫기'
+  confirmButtonContent='확인' handleConfirm={handleConfirm} handleClose={handleClose}>{<Temp><input></input>dasdfasdfasdfs</Temp>}</Modal>}
     </>
   );
 }

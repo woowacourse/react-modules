@@ -13,7 +13,7 @@ interface Props {
   confirmButtonContent?: string;
   handleConfirm?:  (e:React.MouseEvent) => void;
   position?: string;
-  closeModal: (e:React.MouseEvent) => void;
+  handleClose: (e:React.MouseEvent) => void;
   xButtonContent?:string
 }
 const ModalBox = ({
@@ -25,7 +25,7 @@ const ModalBox = ({
   confirmButtonContent,
   handleConfirm,
   children,
-  closeModal,
+  handleClose,
   xButtonContent
 }: Props) => {
   return (
@@ -36,7 +36,7 @@ const ModalBox = ({
       <ModalHeader
         title={title}
         isXButton={isXButton}
-        closeModal={closeModal}
+        handleClose={handleClose}
         xButtonContent={xButtonContent}
       />
       <ContentWrapper>
@@ -46,7 +46,7 @@ const ModalBox = ({
         buttonLayout={buttonLayout}
         closeButtonContent={closeButtonContent}
         confirmButtonContent={confirmButtonContent}
-        closeModal={closeModal}
+        handleClose={handleClose}
         confirmEvent={handleConfirm}
       />
     </ModalContainer>

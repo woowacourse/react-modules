@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import ModalBox from './ModalBox';
-import { ReactNode, useState } from 'react';
+import { ReactNode } from 'react';
 
 interface Props {
   position?: string;
@@ -15,8 +15,8 @@ interface Props {
 
   xButtonContent?:string;
 
-  handleConfirm?: (e: React.MouseEvent) => void;
-  handleClose?: (e: React.MouseEvent) => void;
+  handleConfirm: (e: React.MouseEvent) => void;
+  handleClose: (e: React.MouseEvent) => void;
 }
 const Modal = ({
   position,
@@ -31,11 +31,11 @@ const Modal = ({
   xButtonContent
 }: Props) => {
 
-  const [modalOpen, setModalOpen] = useState(true);
-  const closeModal = (e: React.MouseEvent) => {
-    setModalOpen(false);
-    handleClose && handleClose(e);
-  };
+  // const [modalOpen, setModalOpen] = useState(true);
+  // const closeModal = (e: React.MouseEvent) => {
+  //   setModalOpen(false);
+  //   handleClose && handleClose(e);
+  // };
 
   const clickBackDrop = (e: React.MouseEvent) => {
     return e.currentTarget === e.target;
@@ -43,16 +43,16 @@ const Modal = ({
 
   return (
     <>
-      {modalOpen && (
+      {(
         <ModalContainer
           $position={position === 'bottom' ? 'flex-end' : 'center'}
-          onClick={(e) => clickBackDrop(e) && closeModal(e)}
+          onClick={(e) => clickBackDrop(e) && handleClose}
         >
           <ModalBox
             title={title}
             position={position}
             isXButton={isXButton}
-            closeModal={closeModal}
+            handleClose={handleClose}
             buttonLayout={buttonLayout}
             confirmButtonContent={confirmButtonContent}
             handleConfirm={handleConfirm}
