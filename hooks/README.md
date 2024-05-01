@@ -7,7 +7,7 @@
 ## common
 
 - [x] useInput
-- [] useCardType
+- [x] useCardType
 
 ## 비지니스 로직
 
