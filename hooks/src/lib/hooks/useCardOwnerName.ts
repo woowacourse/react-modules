@@ -8,8 +8,8 @@ const ERROR_MESSAGES = {
 
 const useCardOwnerName = () => {
   const [ownerName, setOwnerName] = useState('');
-  const [isValid, setIsValid] = useState(false);
-  const [errorMessage, setErrorMessage] = useState('');
+  const [isValidOwnerName, setIsValidOwnerName] = useState(false);
+  const [ownerNameErrorMessage, setOwnerNameErrorMessage] = useState('');
 
   const makeValidOwnerName = (name: string) => {
     const engName = filterEnglishAndSpaces(name.toUpperCase());
@@ -33,16 +33,16 @@ const useCardOwnerName = () => {
     const validOwnerName = makeValidOwnerName(name);
     const errorMessage = getErrorMessage(name);
 
-    setErrorMessage(errorMessage);
+    setOwnerNameErrorMessage(errorMessage);
     setOwnerName(validOwnerName);
 
-    setIsValid(validOwnerName.length >= 1);
+    setIsValidOwnerName(validOwnerName.length >= 1);
   };
 
   return {
-    value: ownerName,
-    isValid,
-    errorMessage,
+    ownerName,
+    isValidOwnerName,
+    ownerNameErrorMessage,
     handleOwnerNameChange,
   };
 };
