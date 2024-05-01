@@ -6,7 +6,9 @@ const ERROR_MESSAGES = {
   MAX_LENGTH: (length: number) => `${length}개의 숫자를 입력해주세요.`,
 };
 
-const useCardCVC = (validLength: number) => {
+const CVC_NUMBER_LENGTH = 3;
+
+const useCardCVC = () => {
   const [cvcNumber, setCVCNumber] = useState('');
   const [isValidCVCNumber, setIsValidCVCNumber] = useState(false);
   const [cvcNumberErrorMessage, setCVCNumberErrorMessage] = useState('');
@@ -16,8 +18,8 @@ const useCardCVC = (validLength: number) => {
       return ERROR_MESSAGES.NOT_NUMBER;
     }
 
-    if (isValidNumberLength(number, 3)) {
-      return ERROR_MESSAGES.MAX_LENGTH(validLength);
+    if (isValidNumberLength(number, CVC_NUMBER_LENGTH)) {
+      return ERROR_MESSAGES.MAX_LENGTH(CVC_NUMBER_LENGTH);
     }
 
     return '';
