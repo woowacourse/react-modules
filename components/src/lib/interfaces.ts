@@ -7,6 +7,8 @@ export interface TitleProps {
 
 export interface SubtitleProps {
   content: string;
+  color?: string;
+  fontSize?: string;
 }
 
 export interface CloseButtonProps {

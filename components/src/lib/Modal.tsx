@@ -33,18 +33,36 @@ const Modal = ({
       if (title.position === 'left') {
         return (
           <div className={styles['title-field']}>
-            <h1 className={styles['title']}>{title.content}</h1>
-            {subtitle && <h2 className={styles['subtitle']}>{subtitle.content}</h2>}
+            <h1
+              style={{ fontSize: title.fontSize || '18px', color: title.color || 'black' }}
+              className={styles['title']}
+            >
+              {title.content}
+            </h1>
+            {subtitle && (
+              <h2
+                style={{ fontSize: subtitle.fontSize || '12px', color: subtitle.color || 'grey' }}
+                className={styles['subtitle']}
+              >
+                {subtitle.content}
+              </h2>
+            )}
           </div>
         );
       } else {
         return (
           <div className={styles['title-field']}>
-            <h1 style={{ textAlign: 'center' }} className={styles['title']}>
+            <h1
+              style={{ textAlign: 'center', color: title.color || 'black', fontSize: title.fontSize || '18px' }}
+              className={styles['title']}
+            >
               {title.content}
             </h1>
             {subtitle && (
-              <h2 style={{ textAlign: 'center' }} className={styles['subtitle']}>
+              <h2
+                style={{ textAlign: 'center', color: subtitle.color || 'grey', fontSize: subtitle.fontSize || '12px' }}
+                className={styles['subtitle']}
+              >
                 {subtitle.content}
               </h2>
             )}
