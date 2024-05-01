@@ -8,7 +8,6 @@
 - Modal.Title
 - Modal.CloseBtn
 - Modal.Body
-- Modal.ActionAndCloseButton
 - Modal.Backdrop
 
 ## Modal props
