@@ -1,8 +1,8 @@
 import React from 'react';
-import useCardCVC from './lib/useCardCVC';
+import useCardPassword from './lib/useCardPassword';
 
 function App() {
-  const { cardCVC } = useCardCVC();
+  const { cardPassword } = useCardPassword();
 
   return (
     <>
@@ -10,14 +10,14 @@ function App() {
 
       <input
         style={{ border: '2px solid black', padding: '4px' }}
-        maxLength={3}
-        type='text'
-        value={cardCVC.value}
-        onChange={cardCVC.onChange}
-        onBlur={cardCVC.onBlur}
+        maxLength={2}
+        type='password'
+        value={cardPassword.value}
+        onChange={cardPassword.onChange}
+        onBlur={cardPassword.onBlur}
       />
 
-      <p style={{ color: 'red' }}>{cardCVC.error.message}</p>
+      <p style={{ color: 'red' }}>{cardPassword.error.message}</p>
     </>
   );
 }
