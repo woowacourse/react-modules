@@ -15,6 +15,10 @@ const validator = {
     return value.length === matchedLength;
   },
 
+  isValidLengthRange: ({ value, maxLength }: { value: string; maxLength: number }) => {
+    return value.length <= maxLength;
+  },
+
   isNumberInRange: ({ min, max, compareNumber }: { min: number; max: number; compareNumber: number }) => {
     return compareNumber >= min && compareNumber <= max;
   },
