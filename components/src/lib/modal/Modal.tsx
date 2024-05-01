@@ -1,17 +1,19 @@
 import * as Styled from "./Modal.styled";
+import { HTMLAttributes } from "react";
 
-interface ModalMainProps extends React.ComponentPropsWithRef<"section"> {
+interface ModalProps extends React.PropsWithChildren {
   children?: React.ReactNode;
   isOpen: boolean;
   onClick?: (event: React.MouseEvent<HTMLElement>) => void;
 }
 
-const ModalMain: React.FC<ModalMainProps> = ({
-  children,
-  isOpen,
-  onClick,
-  ...restProps
-}) => {
+const Modal: React.FC<ModalProps> & {
+  ModalHeader: ModalHeaderType;
+  ModalTitle: ModalTitleType;
+  ModalCloseButton: ModalCloseButtonType;
+  ModalContent: ModalContentType;
+  ModalFooter: ModalFooterType;
+} = ({ children, isOpen = false, onClick, ...restProps }) => {
   return (
     <>
       {isOpen && (
@@ -23,61 +25,54 @@ const ModalMain: React.FC<ModalMainProps> = ({
   );
 };
 
-interface ModalHeaderProps extends React.ComponentPropsWithRef<"header"> {
-  children?: React.ReactNode;
-}
+type ModalHeaderType = React.FC<
+  React.PropsWithChildren<HTMLAttributes<HTMLElement>>
+>;
 
-const ModalHeader = ({ children, ...restProps }: ModalHeaderProps) => {
+const ModalHeader: ModalHeaderType = ({ children, ...restProps }) => {
   return <Styled.ModalHeader {...restProps}>{children}</Styled.ModalHeader>;
 };
 
-interface ModalTitleProps extends React.ComponentPropsWithRef<"span"> {
-  children?: React.ReactNode | string;
-}
+type ModalTitleType = React.FC<
+  React.PropsWithChildren<HTMLAttributes<HTMLSpanElement>>
+>;
 
-const ModalTitle = ({ children, ...restProps }: ModalTitleProps) => {
+const ModalTitle: ModalTitleType = ({ children, ...restProps }) => {
   return <span {...restProps}>{children}</span>;
 };
 
-interface ModalCloseButtonProps extends React.ComponentPropsWithRef<"button"> {
-  children?: React.ReactNode | string;
-  onClick?: (event: React.MouseEvent<HTMLElement>) => void;
-}
+type ModalCloseButtonType = React.FC<
+  React.PropsWithChildren<HTMLAttributes<HTMLButtonElement>>
+>;
 
-const ModalCloseButton = ({
-  children,
-  onClick,
-  ...restProps
-}: ModalCloseButtonProps) => {
+const ModalCloseButton: ModalCloseButtonType = ({ children, ...restProps }) => {
   return (
-    <button type="button" onClick={onClick} {...restProps}>
+    <button type="button" {...restProps}>
       {children}
     </button>
   );
 };
 
-interface ModalContentProps extends React.ComponentPropsWithRef<"section"> {
-  children?: React.ReactNode | string;
-}
+type ModalContentType = React.FC<
+  React.PropsWithChildren<HTMLAttributes<HTMLElement>>
+>;
 
-const ModalContent = ({ children, ...restProps }: ModalContentProps) => {
+const ModalContent: ModalContentType = ({ children, ...restProps }) => {
   return <section {...restProps}>{children}</section>;
 };
 
-interface ModalFooterProps extends React.ComponentPropsWithRef<"footer"> {
-  children?: React.ReactNode;
-}
+type ModalFooterType = React.FC<
+  React.PropsWithChildren<HTMLAttributes<HTMLDivElement>>
+>;
 
-const ModalFooter = ({ children, ...restProps }: ModalFooterProps) => {
+const ModalFooter: ModalFooterType = ({ children, ...restProps }) => {
   return <footer {...restProps}>{children}</footer>;
 };
 
-const Modal = Object.assign(ModalMain, {
-  Header: ModalHeader,
-  Title: ModalTitle,
-  Button: ModalCloseButton,
-  Content: ModalContent,
-  Footer: ModalFooter,
-});
+Modal.ModalHeader = ModalHeader;
+Modal.ModalTitle = ModalTitle;
+Modal.ModalCloseButton = ModalCloseButton;
+Modal.ModalContent = ModalContent;
+Modal.ModalFooter = ModalFooter;
 
 export default Modal;
