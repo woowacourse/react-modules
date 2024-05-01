@@ -5,5 +5,5 @@ export interface CVCType {
 }
 
 export type cvcErrorType =
-  | ErrorStatus.ONLY_UPPERCASE
-  | ErrorStatus.IS_DOUBLE_BLANK;
+  | ErrorStatus.IS_NOT_NUMBER
+  | ErrorStatus.INVALID_LENGTH;
