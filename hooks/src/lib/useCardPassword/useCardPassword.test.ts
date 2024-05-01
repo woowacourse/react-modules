@@ -25,7 +25,7 @@ describe("useCardPassword 테스트", () => {
     }).toEqual({ password: newValue, isValid: true });
   });
 
-  it("유효하지 않은 값을 입력하면 업데이트 되지 않고 에러메시지가 반환 돼야 한다.", () => {
+  it("유효하지 않은 값을 입력하면 에러메시지가 반환 돼야 한다.", () => {
     const initialValue = "12";
     const newValue = "345";
     const { result } = renderHook(() => useCardPassword(initialValue));
@@ -39,7 +39,7 @@ describe("useCardPassword 테스트", () => {
       isValid: result.current.validationResult.isValid,
       errorMessage: result.current.validationResult.errorMessage,
     }).toEqual({
-      password: initialValue,
+      password: newValue,
       isValid: false,
       errorMessage: "두 자리의 숫자여야 합니다. 다시 입력해주세요.",
     });

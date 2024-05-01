@@ -30,7 +30,7 @@ describe("useCardBrand 테스트", () => {
     }).toThrow("[ERROR]");
   });
 
-  it("유효한 카드사로 업데이트하면 상태가 변경되어야 한다.", () => {
+  it("유효한 카드사로 업데이트하면 isValid가 true로 반환되어야 한다.", () => {
     const initialValue = "신한카드";
     const newValue = "현대카드";
     const { result } = renderHook(() =>
@@ -45,29 +45,11 @@ describe("useCardBrand 테스트", () => {
     expect(result.current.validationResult.isValid).toBe(true);
   });
 
-  it("유효하지 않은 카드사로 업데이트하면 brand 상태가 변경되지 않고 에러메시지가 반환되어야 한다.", () => {
+  it("유효하지 않은 카드사로 업데이트하면 isValid가 false이며 에러메시지가 함께 반환되어야 한다.", () => {
     const initialValue = "신한카드";
     const newValue = "마스터카드";
     const { result } = renderHook(() =>
       useCardBrand(initialValue, allowedBrands)
-    );
-
-    act(() => {
-      result.current.handleUpdateBrand(newValue);
-    });
-
-    expect(result.current.brand).toBe(initialValue);
-    expect(result.current.validationResult.isValid).toBe(false);
-    expect(result.current.validationResult.errorMessage).toBe(
-      "지원하지 않는 카드사입니다. 다른 카드를 선택해주세요."
-    );
-  });
-
-  it("alwaysUpdateBrand가 true로 선언된 상태라면, 유효하지 않은 카드사로 업데이트해도 brand 상태가 변경되어야 한다.", () => {
-    const initialValue = "신한카드";
-    const newValue = "마스터카드";
-    const { result } = renderHook(() =>
-      useCardBrand(initialValue, allowedBrands, true)
     );
 
     act(() => {

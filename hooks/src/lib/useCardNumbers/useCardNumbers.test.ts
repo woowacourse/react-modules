@@ -29,31 +29,18 @@ describe("useCardNumbers", () => {
     expect(result.current.validationResult).toEqual({ isValid: true });
   });
 
-  it("카드번호 입력 필드의 인덱스(inputValue)와 잘못된 형식의 새 카드번호가 들어오면, 새 카드번호는 업데이트되지 않고 validationResult에 에러 여부 및 메시지가 업데이트 되어야 한다", () => {
+  it("카드번호 입력 필드의 인덱스(inputValue)와 잘못된 형식의 새 카드번호가 들어오면, validationResult에 에러 여부 및 메시지가 업데이트 되어야 한다", () => {
     const { result } = renderHook(() => useCardNumbers(initialValues));
 
     act(() => {
       result.current.handleUpdateCardNumbers(1, "abc");
     });
 
-    expect(result.current.cardNumbers).toEqual(initialValues);
+    const newCardNumbers = [...initialValues];
+    newCardNumbers[1] = "abc";
+
+    expect(result.current.cardNumbers).toEqual(newCardNumbers);
     expect(result.current.validStates).toEqual([true, false, true, true]);
-    expect(result.current.validationResult).toEqual({
-      isValid: false,
-      errorMessage:
-        "카드 번호는 4자리의 숫자여야 합니다. 확인 후 다시 입력해주세요.",
-    });
-  });
-
-  it("alwaysUpdateCardNumbers가 true일 때, 잘못된 형식의 새 카드번호가 들어와도 카드번호가 업데이트되어야 한다", () => {
-    const { result } = renderHook(() => useCardNumbers(initialValues, true));
-
-    act(() => {
-      result.current.handleUpdateCardNumbers(2, "xyz");
-    });
-
-    expect(result.current.cardNumbers).toEqual(["1234", "5678", "xyz", "3456"]);
-    expect(result.current.validStates).toEqual([true, true, false, true]);
     expect(result.current.validationResult).toEqual({
       isValid: false,
       errorMessage:
@@ -81,7 +68,7 @@ describe("useCardNumbers", () => {
   });
 
   it("하나 이상의 카드번호 입력 필드가 잘못 입력되면 validationResult의 isValid가 false여야 한다", () => {
-    const { result } = renderHook(() => useCardNumbers(initialValues, true));
+    const { result } = renderHook(() => useCardNumbers(initialValues));
 
     act(() => {
       result.current.handleUpdateCardNumbers(0, "7890");

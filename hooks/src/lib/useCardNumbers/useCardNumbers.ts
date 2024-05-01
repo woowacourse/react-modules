@@ -15,8 +15,7 @@ interface CardNumbersValidationResult {
 }
 
 export default function useCardNumbers(
-  initialValues: CardNumbersType,
-  alwaysUpdateCardNumbers: boolean = false
+  initialValues: CardNumbersType
 ): CardNumbersValidationResult {
   const [cardNumbers, setCardNumbers] =
     useState<CardNumbersType>(initialValues);
@@ -39,6 +38,8 @@ export default function useCardNumbers(
   };
 
   const handleUpdateCardNumbers = (inputIndex: number, value: string) => {
+    updateCardNumbers(inputIndex, value);
+
     const isNewInputValid = validateCardNumber(value);
 
     const newValidStates = validStates.map((prevState, index) =>
@@ -48,18 +49,16 @@ export default function useCardNumbers(
 
     const isAllInputValid = newValidStates.every((isValid) => isValid === true);
 
-    if (!isAllInputValid) {
-      setValidationResult({
-        isValid: false,
-        errorMessage:
-          "카드 번호는 4자리의 숫자여야 합니다. 확인 후 다시 입력해주세요.",
-      });
-      if (alwaysUpdateCardNumbers) updateCardNumbers(inputIndex, value);
+    if (isAllInputValid) {
+      setValidationResult({ isValid: true });
       return;
     }
 
-    setValidationResult({ isValid: true });
-    updateCardNumbers(inputIndex, value);
+    setValidationResult({
+      isValid: false,
+      errorMessage:
+        "카드 번호는 4자리의 숫자여야 합니다. 확인 후 다시 입력해주세요.",
+    });
   };
 
   return {

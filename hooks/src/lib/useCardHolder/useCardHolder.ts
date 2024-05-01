@@ -9,8 +9,7 @@ interface CardHolderValidationResult {
 }
 
 export default function useCardHolder(
-  initialValue: string,
-  alwaysUpdateCardHolder: boolean = false
+  initialValue: string
 ): CardHolderValidationResult {
   const [cardHolder, setCardHolder] = useState(initialValue);
   const [validationResult, setValidationResult] = useState<ValidationResult>({
@@ -18,17 +17,17 @@ export default function useCardHolder(
   });
 
   const handleUpdateCardHolder = (value: string) => {
-    if (!validateCardHolder(value)) {
-      setValidationResult({
-        isValid: false,
-        errorMessage: "영문자만 입력할 수 있습니다.",
-      });
-      if (alwaysUpdateCardHolder) setCardHolder(value);
+    setCardHolder(value);
+
+    if (validateCardHolder(value)) {
+      setValidationResult({ isValid: true });
       return;
     }
 
-    setValidationResult({ isValid: true });
-    setCardHolder(value);
+    setValidationResult({
+      isValid: false,
+      errorMessage: "영문자만 입력할 수 있습니다.",
+    });
   };
 
   return {

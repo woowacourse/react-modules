@@ -8,26 +8,24 @@ interface CVCValidationResult {
   handleUpdateCVC: (value: string) => void;
 }
 
-export default function useCardCVC(
-  initialValue: string,
-  alwaysUpdateCVC: boolean = false
-): CVCValidationResult {
+export default function useCardCVC(initialValue: string): CVCValidationResult {
   const [CVC, setCVC] = useState(initialValue);
   const [validationResult, setValidationResult] = useState<ValidationResult>({
     isValid: true,
   });
 
   const handleUpdateCVC = (value: string) => {
-    if (!validateCVC(value)) {
-      setValidationResult({
-        isValid: false,
-        errorMessage: "CVC 번호는 3자리 숫자로 입력하셔야 합니다.",
-      });
-      if (alwaysUpdateCVC) setCVC(value);
+    setCVC(value);
+
+    if (validateCVC(value)) {
+      setValidationResult({ isValid: true });
       return;
     }
-    setValidationResult({ isValid: true });
-    setCVC(value);
+
+    setValidationResult({
+      isValid: false,
+      errorMessage: "CVC 번호는 3자리 숫자로 입력하셔야 합니다.",
+    });
   };
 
   return { CVC, validationResult, handleUpdateCVC };

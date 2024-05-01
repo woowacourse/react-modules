@@ -9,8 +9,7 @@ interface PasswordValidationResult {
 }
 
 export default function useCardPassword(
-  initialValue: string,
-  alwaysUpdatePassword: boolean = false
+  initialValue: string
 ): PasswordValidationResult {
   const [password, setPassword] = useState(initialValue);
   const [validationResult, setValidationResult] = useState<ValidationResult>({
@@ -18,17 +17,17 @@ export default function useCardPassword(
   });
 
   const handleUpdatePassword = (value: string) => {
-    if (!validatePassword(value)) {
-      setValidationResult({
-        isValid: false,
-        errorMessage: "두 자리의 숫자여야 합니다. 다시 입력해주세요.",
-      });
-      if (alwaysUpdatePassword) setPassword(value);
+    setPassword(value);
+
+    if (validatePassword(value)) {
+      setValidationResult({ isValid: true });
       return;
     }
 
-    setValidationResult({ isValid: true });
-    setPassword(value);
+    setValidationResult({
+      isValid: false,
+      errorMessage: "두 자리의 숫자여야 합니다. 다시 입력해주세요.",
+    });
   };
 
   return {

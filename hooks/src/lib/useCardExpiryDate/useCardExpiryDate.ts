@@ -14,8 +14,7 @@ interface ExpiryDateValidationResult {
 }
 
 export default function useCardExpiryDate(
-  initialValue: ExpiryDate,
-  alwaysUpdateExpiryDate: boolean = false
+  initialValue: ExpiryDate
 ): ExpiryDateValidationResult {
   const [expiryDate, setExpiryDate] = useState(initialValue);
   const [validationResult, setValidationResult] = useState<ValidationResult>({
@@ -23,13 +22,14 @@ export default function useCardExpiryDate(
   });
 
   const handleUpdateExpiryDate = (value: ExpiryDate) => {
+    setExpiryDate(value);
+
     if (!validateExpireMonth(value.month)) {
       setValidationResult({
         isValid: false,
         errorMessage:
           "유효 기간의 월은 01 ~ 12 사이의 2자리 숫자로 입력하셔야 합니다.",
       });
-      if (alwaysUpdateExpiryDate) setExpiryDate(value);
       return;
     }
 
@@ -38,7 +38,6 @@ export default function useCardExpiryDate(
         isValid: false,
         errorMessage: "유효 기간의 연도는 2자리 숫자로 입력하셔야 합니다.",
       });
-      if (alwaysUpdateExpiryDate) setExpiryDate(value);
       return;
     }
 
@@ -47,23 +46,26 @@ export default function useCardExpiryDate(
         isValid: false,
         errorMessage: "유효 기간이 만료되었습니다. 확인 후 다시 입력해 주세요.",
       });
-      if (alwaysUpdateExpiryDate) setExpiryDate(value);
       return;
     }
 
     setValidationResult({ isValid: true });
-    setExpiryDate(value);
+    // setExpiryDate(value);
   };
 
-  return { expiryDate, validationResult, handleUpdateExpiryDate };
+  return {
+    expiryDate,
+    validationResult,
+    handleUpdateExpiryDate,
+  };
 }
 
 function validateExpiryDate(value: ExpiryDate) {
   const currentMonth = new Date().getMonth() + 1;
   const currentYear = new Date().getFullYear() - 2000;
 
-  const inputMonth = Number(value.month);
-  const inputYear = Number(value.year);
+  const inputMonth = parseInt(value.month, 10);
+  const inputYear = parseInt(value.year, 10);
 
   return (
     inputYear > currentYear ||

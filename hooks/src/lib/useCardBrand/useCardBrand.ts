@@ -9,8 +9,7 @@ interface BrandValidationResult {
 
 export default function useCardBrand(
   initialValue: string,
-  allowedBrands: string[],
-  alwaysUpdateBrand: boolean = false
+  allowedBrands: string[]
 ): BrandValidationResult {
   validateInitialParams(initialValue, allowedBrands);
 
@@ -20,16 +19,17 @@ export default function useCardBrand(
   });
 
   const handleUpdateBrand = (value: string) => {
-    if (!validateBrand(value, allowedBrands)) {
-      setValidationResult({
-        isValid: false,
-        errorMessage: "지원하지 않는 카드사입니다. 다른 카드를 선택해주세요.",
-      });
-      if (alwaysUpdateBrand) setBrand(value);
+    setBrand(value);
+
+    if (validateBrand(value, allowedBrands)) {
+      setValidationResult({ isValid: true });
       return;
     }
-    setValidationResult({ isValid: true });
-    setBrand(value);
+
+    setValidationResult({
+      isValid: false,
+      errorMessage: "지원하지 않는 카드사입니다. 다른 카드를 선택해주세요.",
+    });
   };
 
   return { brand, validationResult, handleUpdateBrand };
