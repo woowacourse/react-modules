@@ -1,15 +1,15 @@
 # Get started
 
-당신의 패키지 매니저를 통해 `[이름]` 을 설치해 주세요:
+당신의 패키지 매니저를 통해 `@hannuny/react-card-hooks` 을 설치해 주세요:
 
 ```shell
-npm install [이름]
+npm install @hannuny/react-card-hooks
 ```
 
-`[이름]` 컴포넌트를 import 하세요:
+카드 훅을 import 하세요:
 
 ```javascript
-import { useCardCVC } from '[이름]';
+import { useCardCVC } from '@hannuny/react-card-hooks';
 
 export const MyComponent = () => {
   const { cvcNumber, isValidCVCNumber, cvcNumberErrorMessage, handleCVCNumberChange } =
@@ -75,6 +75,8 @@ export const MyComponent = () => {
 | `unitCount`        | `number` | -       | 카드 번호 배열의 길이를 전달합니다.                                   |
 | `singleUnitLength` | `number` | -       | 카드 번호 유닛의 길이(카드 번호 배열 중 한 요소의 길이)를 전달합니다. |
 
+<br />
+
 <details>
 <summary>사용 예시</summary>
 
@@ -124,6 +126,8 @@ export const MyComponent = () => {
 | ---------------------- | ---------- | ------- | ----------------------------------- |
 | `validCardCompanyList` | `string[]` | -       | 유효한 카드 회사 목록을 전달합니다. |
 
+<br />
+
 <details>
 <summary>사용 예시</summary>
 
@@ -160,12 +164,12 @@ export const MyComponent = () => {
 | ------------- | -------- | ------- | ----------------------------- |
 | `validLength` | `number` | `3`     | 유효한 CVC 길이를 전달합니다. |
 
+<br />
+
 <details>
 <summary>사용 예시</summary>
 
 ```js
-import { useCardCVC } from '[이름]';
-
 export const MyComponent = () => {
   const { cvcNumber, isValidCVCNumber, cvcNumberErrorMessage, handleCVCNumberChange } =
     useCardCVC(4);
@@ -196,12 +200,12 @@ export const MyComponent = () => {
 | ------------- | -------- | ------- | --------------------------------------- |
 | `validLength` | `number` | `2`     | 유효한 카드 비밀번호 길이를 전달합니다. |
 
+<br />
+
 <details>
 <summary>사용 예시</summary>
 
 ```js
-import { useCardPassword } from '[이름]';
-
 export const MyComponent = () => {
   const { password, isValidPassword, passwordErrorMessage, handlePasswordChange } =
     useCardPassword(4);
