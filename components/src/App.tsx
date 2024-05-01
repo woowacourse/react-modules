@@ -2,25 +2,21 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import './App.css';
 
-import Modal from './lib/Modal/Modal';
+// import Modal from './lib/Modal/Modal';
+import { Modal, ModalButtonType } from '@seongjinme/react-modal';
 
-const buttons: ModalButtonProps[] = [
+const buttons: ModalButtonType[] = [
   {
     text: '동의하고 저장하기',
     style: 'primary',
-    onClick: () => alert('동의하기 눌렀어요!'),
+    onClick: () => alert('동의하고 저장하기 버튼을 눌렀어요!'),
   },
   {
     text: '닫기',
     style: 'secondary',
-    onClick: () => alert('닫기 눌렀어요!'),
+    onClick: () => alert('닫기 버튼을 눌렀어요!'),
   },
 ];
-interface ModalButtonProps {
-  text: string;
-  style: 'primary' | 'secondary';
-  onClick: () => void;
-}
 
 function App() {
   const [isOpen, setIsOpen] = useState(false);
@@ -32,7 +28,7 @@ function App() {
 
       <Modal
         isOpen={isOpen}
-        title="모달 테스트"
+        title="모달 컴포넌트 테스트"
         position="bottom"
         hasCloseButton={true}
         footerButtons={buttons}
@@ -68,7 +64,8 @@ const Form = styled.form`
 `;
 
 const InputCheckBox = styled.div`
-  margin-bottom: 8px;
+  margin-bottom: 4px;
+  text-align: left;
 `;
 
 export default App;
