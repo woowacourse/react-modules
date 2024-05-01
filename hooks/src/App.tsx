@@ -9,16 +9,18 @@ import {
   useCardNumbers,
 } from './lib';
 
-type CardType = '카드사를 입력해주세요' | 'BC' | 'KB' | '하나' | '우리';
-
 function App() {
   const cvcInfo = useCVC('111');
-  const passwordInfo = usePassword('222');
-  const cardholderInfo = useCardHolder('ASD');
+  const passwordInfo = usePassword('22');
+  const cardholderInfo = useCardHolder('maru cookie');
   const expiryDate = useExpiryDate({ month: '01', year: '24' }, { month: { isAutoFocus: true } });
-  const cardTypeInfo = useCardType<CardType>('카드사를 입력해주세요');
+  const cardTypeInfo = useCardType({
+    initialValue: '카드사를 입력해주세요',
+    options: ['BC', 'KB', '하나', '우리'],
+    placeholder: '카드사를 입력해주세요',
+  });
   const cardNumbersInfo = useCardNumbers(
-    { first: '1231', second: '34', third: '', fourth: '' },
+    { first: '쿠키', second: '1234', third: '치코', fourth: '웨디' },
     { isAutoFocus: true },
   );
 
@@ -89,9 +91,9 @@ function App() {
         </fieldset>
         <fieldset>
           <select
-            defaultValue={'카드사를 입력해주세요'}
             aria-invalid={!cardTypeInfo.errorInfo.isValid}
             onChange={cardTypeInfo.handleChange}
+            value={cardTypeInfo.value}
           >
             <option value={'카드사를 입력해주세요'} disabled hidden>
               카드사를 입력해주세요
@@ -100,6 +102,7 @@ function App() {
             <option value={'KB'}>KB</option>
             <option value={'하나'}>하나</option>
             <option value={'우리'}>우리</option>
+            <option value={'asd'}>오류</option>
           </select>
           {!cardTypeInfo.errorInfo.isValid && <span>{cardTypeInfo.errorInfo.errorMessage}</span>}
         </fieldset>
