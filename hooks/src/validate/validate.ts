@@ -1,5 +1,5 @@
 import { DOUBLE_BLANK, UPPERCASE_AND_SPACE_ONLY } from '../constants/system';
-// import { isValidMonth, isValidYear } from '../utils/checkDateRange';
+import { isValidMonth, isValidYear } from '../utils/checkDateRange';
 import { ErrorStatus } from '../types/errorStatus';
 
 // function checkTrimBlank(n: string) {
@@ -26,19 +26,19 @@ export function validateNumber(str: string) {
 //   }
 // }
 
-// function validateMonth(n: string) {
-//   const month = Number(n);
-//   if (!isValidMonth(month)) {
-//     throw new Error(ErrorStatus.INVALID_MONTH);
-//   }
-// }
+export function validateMonth(n: string) {
+  const month = Number(n);
+  if (!isValidMonth(month)) {
+    throw new Error(ErrorStatus.INVALID_MONTH);
+  }
+}
 
-// function validateYear(n: string) {
-//   const year = Number(n);
-//   if (!isValidYear(year)) {
-//     throw new Error(ErrorStatus.INVALID_YEAR);
-//   }
-// }
+export function validateYear(n: string) {
+  const year = Number(n);
+  if (!isValidYear(year)) {
+    throw new Error(ErrorStatus.INVALID_YEAR);
+  }
+}
 
 export function validateUpperCase(str: string) {
   if (!UPPERCASE_AND_SPACE_ONLY.test(str) && str.length !== 0) {
@@ -47,7 +47,7 @@ export function validateUpperCase(str: string) {
 }
 
 export function checkLength(str: string, length: number) {
-  if (str.length < length) {
+  if (str.length > length) {
     return false;
   }
   return true;
