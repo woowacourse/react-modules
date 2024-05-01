@@ -34,7 +34,7 @@ const useCardNumbers = (initialValue: InitialValueType) => {
   const preventInputValidations: ValidationType[] = [
     {
       validate: isNumber,
-      message: '숫자를 입력해주세요.',
+      message: '숫자만 입력 가능합니다.',
     },
   ];
 
