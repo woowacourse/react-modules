@@ -10,33 +10,25 @@ interface ValidatorProps {
   onBlur: (value: string) => ValidationResult;
 }
 
-interface InputName {
-  first: string;
-  second: string;
-  third: string;
-  fourth: string;
-}
+const makeInitialErrorInfo = (initialValue: Record<string, string>) => {
+  const keys = Object.keys(initialValue);
+  const obj: Record<string, ValidationResult> = {};
 
-const useInputs = (initialValue: Record<keyof InputName, string>, validator: ValidatorProps) => {
-  const [value, setValue] = useState(initialValue);
-  const [errorInfo, setErrorInfo] = useState<Record<keyof InputName, ValidationResult>>({
-    first: {
+  keys.forEach(key => {
+    obj[key] = {
       isValid: true,
       errorMessage: '',
-    },
-    second: {
-      isValid: true,
-      errorMessage: '',
-    },
-    third: {
-      isValid: true,
-      errorMessage: '',
-    },
-    fourth: {
-      isValid: true,
-      errorMessage: '',
-    },
+    };
   });
+
+  return obj;
+};
+
+const useInputs = (initialValue: Record<string, string>, validator: ValidatorProps) => {
+  const [value, setValue] = useState(initialValue);
+  const [errorInfo, setErrorInfo] = useState<Record<string, ValidationResult>>(() =>
+    makeInitialErrorInfo(initialValue),
+  );
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>, name: string) => {
     const validationResult = validator.onChange(event.target.value);

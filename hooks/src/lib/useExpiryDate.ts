@@ -10,9 +10,9 @@ interface Options {
   };
 }
 
-const useExpiryDate = (options?: Options) => {
-  const month = useExpiryMonth({ ...options?.month });
-  const year = useExpiryYear({ ...options?.year });
+const useExpiryDate = (initialValue: { month: string; year: string }, options?: Options) => {
+  const month = useExpiryMonth(initialValue.month, { ...options?.month });
+  const year = useExpiryYear(initialValue.year, { ...options?.year });
 
   return { month, year };
 };

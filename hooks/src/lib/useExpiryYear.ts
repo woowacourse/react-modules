@@ -30,8 +30,8 @@ interface Options {
   isAutoFocus?: boolean;
 }
 
-const useExpiryYear = (options?: Options) => {
-  const { value, setValue, handleBlur, errorInfo, setErrorInfo } = useInput('', {
+const useExpiryYear = (initialValue: string, options?: Options) => {
+  const { value, setValue, handleBlur, errorInfo, setErrorInfo } = useInput(initialValue, {
     onChange,
     onBlur,
   });

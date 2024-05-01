@@ -23,8 +23,8 @@ const onBlur = (value: string) => {
   return { isValid: true, errorMessage: '' };
 };
 
-const useCardHolder = () => {
-  const { value, setValue, handleBlur, errorInfo, setErrorInfo } = useInput('', {
+const useCardHolder = (initialValue: string) => {
+  const { value, setValue, handleBlur, errorInfo, setErrorInfo } = useInput(initialValue, {
     onChange,
     onBlur,
   });

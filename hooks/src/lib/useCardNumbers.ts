@@ -24,14 +24,11 @@ interface Options {
   isAutoFocus?: boolean;
 }
 
-const useCardNumbers = (options?: Options) => {
-  const { value, setValue, handleBlur, errorInfo, setErrorInfo } = useInputs(
-    { first: '', second: '', third: '', fourth: '' },
-    {
-      onChange,
-      onBlur,
-    },
-  );
+const useCardNumbers = (initialValue: Record<string, string>, options?: Options) => {
+  const { value, setValue, handleBlur, errorInfo, setErrorInfo } = useInputs(initialValue, {
+    onChange,
+    onBlur,
+  });
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>, name: string) => {
     const validationResult = onChange(event.target.value);

@@ -20,8 +20,8 @@ const onBlur = (value: string) => {
   return { isValid: true, errorMessage: '' };
 };
 
-const useCVC = () => {
-  const { value, handleChange, handleBlur, errorInfo } = useInput('', {
+const useCVC = (initialValue: string) => {
+  const { value, handleChange, handleBlur, errorInfo } = useInput(initialValue, {
     onChange,
     onBlur,
   });

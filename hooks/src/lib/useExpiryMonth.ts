@@ -29,8 +29,8 @@ interface Options {
   isAutoFocus?: boolean;
 }
 
-const useExpiryMonth = (options?: Options) => {
-  const { value, setValue, handleBlur, errorInfo, setErrorInfo } = useInput('', {
+const useExpiryMonth = (initialValue: string, options?: Options) => {
+  const { value, setValue, handleBlur, errorInfo, setErrorInfo } = useInput(initialValue, {
     onChange,
     onBlur,
   });
