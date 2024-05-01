@@ -25,7 +25,6 @@
   background-color: #ffffff;
   z-index: 999;
   overflow-y: auto;
-  overflow-x: auto;
 }
 
 .bottom {
@@ -50,11 +49,22 @@
   color: rgba(0, 0, 0, 1);
 }
 
-.modalContainer {
+.modalContent {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.modalFooter {
+  width: 100%;
+}
+
+.modalContainer,
+.modalContent {
   scrollbar-width: none;
   -ms-overflow-style: none;
 }
 
-.modalContainer :-webkit-scrollbar {
+.modalContainer :-webkit-scrollbar,
+.modalContent :-webkit-scrollbar {
   display: none;
 }
