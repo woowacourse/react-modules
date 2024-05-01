@@ -29,6 +29,8 @@ const useInput = ({ initialValue, inputValidations, preventInputValidations }: U
 
     if (inputValidationsResult) {
       setError({ state: true, message: inputValidationsResult.message });
+    } else {
+      setError({ state: false, message: '' });
     }
 
     setValue(e.target.value);
@@ -39,6 +41,8 @@ const useInput = ({ initialValue, inputValidations, preventInputValidations }: U
 
     if (inputValidationsResult) {
       setError({ state: true, message: inputValidationsResult.message });
+    } else {
+      setError({ state: false, message: '' });
     }
   };
 
