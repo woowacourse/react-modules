@@ -49,8 +49,6 @@ const meta = {
       </div>
     );
   },
-
-  tags: ['autodocs'],
 } satisfies Meta<typeof Modal>;
 
 export default meta;
