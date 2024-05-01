@@ -64,7 +64,7 @@ export const validateCVC = (value: string, cardCVCLength: number): boolean => {
     return true;
   }
 
-  if (value !== "" && value.length < cardCVCLength) {
+  if (value !== "" && value.length !== cardCVCLength) {
     return true;
   }
 
