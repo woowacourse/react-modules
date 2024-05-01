@@ -1,6 +1,7 @@
 import React from 'react';
 import './reset.css';
-import { Modal } from './lib/index';
+import { Modal } from 'woowacourse-react-modal-component';
+
 import useModal from './hooks/useModal';
 import CardCompanySelector from './components/CardCompanySelector';
 
