@@ -12,7 +12,7 @@
 ## 비지니스 로직
 
 - [x] useCardNumbers
-- [] useCardCompany
+- [x] useCardCompany
 - [] useCardCVC
 - [] useCardExpirationDate
 - [x] useCardOwner

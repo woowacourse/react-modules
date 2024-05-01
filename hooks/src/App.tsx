@@ -1,50 +1,28 @@
 import React from 'react';
-import useCardNumbers from './lib/useCardNumbers';
+import useCardCompany from './lib/useCardCompany';
 
 function App() {
-  const { cardNumbers, cardBrand } = useCardNumbers(['', '', '', '']);
-
-  const cardNumberError = cardNumbers.find(({ error }) => error.state);
+  const { cardCompany } = useCardCompany();
 
   return (
     <>
       <h1>Hooks Modules</h1>
-      <input
-        autoFocus
-        maxLength={4}
-        style={{ border: '1px solid black' }}
-        value={cardNumbers[0].value}
-        onBlur={cardNumbers[0].onBlur}
-        onChange={cardNumbers[0].onChange}
-      />
-      <input
-        maxLength={4}
-        style={{ border: '1px solid black' }}
-        value={cardNumbers[1].value}
-        onBlur={cardNumbers[1].onBlur}
-        onChange={cardNumbers[1].onChange}
-      />
-      <input
-        maxLength={4}
-        style={{ border: '1px solid black' }}
-        value={cardNumbers[2].value}
-        onBlur={cardNumbers[2].onBlur}
-        onChange={cardNumbers[2].onChange}
-      />
-      <input
-        maxLength={4}
-        style={{ border: '1px solid black' }}
-        value={cardNumbers[3].value}
-        onBlur={cardNumbers[3].onBlur}
-        onChange={cardNumbers[3].onChange}
-      />
-      <p>cardNumbers 1: {cardNumbers[0].value}</p>
-      <p>cardNumbers 2: {cardNumbers[1].value}</p>
-      <p>cardNumbers 3: {cardNumbers[2].value}</p>
-      <p>cardNumbers 4: {cardNumbers[3].value}</p>
-      {cardNumberError && <p style={{ color: 'red' }}>{cardNumberError.error.message}</p>}
 
-      <p style={{ color: 'blue' }}>{cardBrand}</p>
+      <input readOnly onBlur={cardCompany.onBlur} style={{ border: '3px solid black', padding: '4px' }} value={cardCompany.value} />
+
+      <label htmlFor='BC카드'>BC카드</label>
+      <input hidden onChange={cardCompany.onChange} id='BC카드' type='radio' value='BC카드' name='cardcompany' />
+
+      <label htmlFor='국민카드'>국민카드</label>
+      <input hidden onChange={cardCompany.onChange} id='국민카드' type='radio' value='국민카드' name='cardcompany' />
+
+      <label htmlFor='카카오뱅크'>카카오뱅크</label>
+      <input hidden onChange={cardCompany.onChange} id='카카오뱅크' type='radio' value='카카오뱅크' name='cardcompany' />
+
+      <label htmlFor='신한카드'>신한카드</label>
+      <input hidden onChange={cardCompany.onChange} id='신한카드' type='radio' value='신한카드' name='cardcompany' />
+
+      <p style={{ color: 'red' }}>{cardCompany.error.message}</p>
     </>
   );
 }
