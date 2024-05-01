@@ -6,4 +6,4 @@ export interface CardHolderType {
 
 export type CardHolderErrorType =
   | ErrorStatus.ONLY_UPPERCASE
-  | ErrorStatus.DOUBLE_SPACE;
+  | ErrorStatus.IS_DOUBLE_BLANK;
