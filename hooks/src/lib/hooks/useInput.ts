@@ -10,8 +10,11 @@ const useInput = () => {
     setErrorMessage(undefined);
   };
 
-  const setError = (errorMessage: string) => {
-    if (!errorMessage) resetError();
+  const setError = (errorMessage: string | undefined) => {
+    if (!errorMessage) {
+      resetError();
+      return;
+    }
     setIsError(true);
     setErrorMessage(errorMessage);
   };

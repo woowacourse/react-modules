@@ -4,8 +4,6 @@ import { useInput } from "../lib/hooks";
 describe("useInputTest", () => {
   it("should allow only English characters", () => {
     const { result } = renderHook(() => useInput());
-    // const [value, setValue] = ;
-    // const { isError, errorMessage, setError } = result.current.errorState;
 
     act(() => result.current.valueState[1]("1"));
     expect(result.current.valueState[0]).toBe("1");
