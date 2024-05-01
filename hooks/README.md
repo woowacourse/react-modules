@@ -40,8 +40,8 @@
 2. useCVC
 3. useOwnerName
 
-- [ ] value, setValue
-- [ ] error, setError
+- [x] value, setValue
+- [x] error, setError
 
 세 개의 공통점 -> 하나의 형태만 입력받을 수 있음. 특정 문자열 이상 입력할 수 없음.
 -> "english" | "number"
