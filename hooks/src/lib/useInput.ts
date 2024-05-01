@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 
 export interface ValidationType {
   validate: (value: string) => boolean;
@@ -17,8 +17,9 @@ const useInput = ({ initialValue, inputValidations, preventInputValidations }: U
     state: false,
     message: '',
   });
+  const ref = useRef<HTMLInputElement>(null);
 
-  const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>, maxLength?: number) => {
     const preventInputValidationsResult = preventInputValidations && preventInputValidations.find(({ validate }) => !validate(e.target.value));
     const inputValidationsResult = inputValidations.find(({ validate }) => !validate(e.target.value));
 
@@ -34,6 +35,12 @@ const useInput = ({ initialValue, inputValidations, preventInputValidations }: U
     }
 
     setValue(e.target.value);
+
+    if (maxLength && e.target.value.length === maxLength) {
+      const nextSibling = ref.current?.nextSibling as HTMLInputElement;
+
+      if (nextSibling) nextSibling.focus();
+    }
   };
 
   const onBlurHandler = (e: React.FocusEvent<HTMLInputElement>) => {
@@ -46,7 +53,7 @@ const useInput = ({ initialValue, inputValidations, preventInputValidations }: U
     }
   };
 
-  return { value, onChange: onChangeHandler, onBlur: onBlurHandler, error, setError };
+  return { value, onChange: onChangeHandler, onBlur: onBlurHandler, error, setError, ref };
 };
 
 export default useInput;
