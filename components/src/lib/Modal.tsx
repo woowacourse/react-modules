@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { ReactNode } from "react";
 import { css } from "@emotion/css";
 
-interface ModalProps {
+export interface ModalProps {
   children?: ReactNode;
   position?: Position;
   title?: string;
