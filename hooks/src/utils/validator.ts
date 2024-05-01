@@ -5,6 +5,10 @@ const ValidatorCondition = {
 		return value.length > digit;
 	},
 
+	checkEqualDigit(value: string, digit: number) {
+		return value.length === digit;
+	},
+
 	checkIsDigit(value: string) {
 		return REGEX.numbers.test(value);
 	},
@@ -28,7 +32,7 @@ const ValidatorCondition = {
 
 const Validator = {
 	checkCreditExpirationPeriod(value: string, name: string, maxDigit: number): boolean {
-		this.checkNumber(value, maxDigit);
+		if (!this.checkNumberAndOver(value, maxDigit)) return false;
 
 		const isValidMonth = name === 'month' ? ValidatorCondition.checkValidMonth(value) : true;
 		if (!isValidMonth) return false;
@@ -42,10 +46,15 @@ const Validator = {
 		return false;
 	},
 
-	checkNumber(value: string, maxDigit: number) {
+	checkNumberAndOver(value: string, maxDigit: number) {
+		if (!ValidatorCondition.checkIsDigit(value)) return false;
 		if (ValidatorCondition.checkMaxDigit(value, maxDigit)) return false;
 
-		if (!ValidatorCondition.checkIsDigit(value)) return false;
+		return true;
+	},
+
+	checkFillNumber(value: string, maxDigit: number) {
+		if (!ValidatorCondition.checkEqualDigit(value, maxDigit)) return false;
 
 		return true;
 	},
