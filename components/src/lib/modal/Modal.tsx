@@ -3,17 +3,19 @@ import * as Styled from "./Modal.styled";
 interface ModalMainProps extends React.ComponentPropsWithRef<"section"> {
   children?: React.ReactNode;
   isOpen: boolean;
+  onClick?: (event: React.MouseEvent<HTMLElement>) => void;
 }
 
 const ModalMain: React.FC<ModalMainProps> = ({
   children,
   isOpen,
+  onClick,
   ...restProps
 }) => {
   return (
     <>
       {isOpen && (
-        <Styled.ModalBackdrop>
+        <Styled.ModalBackdrop onClick={onClick}>
           <Styled.ModalWrapper {...restProps}>{children}</Styled.ModalWrapper>
         </Styled.ModalBackdrop>
       )}
@@ -39,7 +41,7 @@ const ModalTitle = ({ children, ...restProps }: ModalTitleProps) => {
 
 interface ModalCloseButtonProps extends React.ComponentPropsWithRef<"button"> {
   children?: React.ReactNode | string;
-  onClick: () => void;
+  onClick?: (event: React.MouseEvent<HTMLElement>) => void;
 }
 
 const ModalCloseButton = ({
