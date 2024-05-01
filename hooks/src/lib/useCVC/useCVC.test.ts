@@ -1,6 +1,6 @@
 import { renderHook, act } from '@testing-library/react';
 import useCVC from './useCVC';
-import { ERROR_MESSAGE } from '../../constants';
+import { ERROR_MESSAGE } from '../constants';
 
 describe('신용카드 CVC 입력 테스트', () => {
 	const initialValue = {

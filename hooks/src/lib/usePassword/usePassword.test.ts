@@ -1,6 +1,6 @@
 import { renderHook, act } from '@testing-library/react';
 import usePassword from './usePassword';
-import { ERROR_MESSAGE } from '../../constants';
+import { ERROR_MESSAGE } from '../constants';
 
 describe('신용카드 비밀번호 입력 테스트', () => {
 	const initialValue = {

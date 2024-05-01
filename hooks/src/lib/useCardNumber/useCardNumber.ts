@@ -1,7 +1,7 @@
 import { ChangeEvent, KeyboardEvent, FocusEvent, useState } from 'react';
 import { useInput } from '../common';
-import Validator from '../../utils/validator';
-import { ERROR_MESSAGE, OPTION } from '../../constants';
+import Validator from '../utils/validator';
+import { ERROR_MESSAGE, OPTION } from '../constants';
 import { EventProcessor, NameValuePair } from '../common/useInput';
 
 const useCardNumber = <T extends object>(initialValue: T) => {
