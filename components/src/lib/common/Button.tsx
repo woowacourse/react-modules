@@ -7,7 +7,7 @@ export interface ButtonProps {
   onClick: React.MouseEventHandler<HTMLButtonElement>;
 }
 
-const Button = ({ content, backgroundColor, fontColor, onClick }: ButtonProps) => {
+const Button: React.FC<ButtonProps> = ({ content, backgroundColor, fontColor, onClick }) => {
   return (
     <ButtonWrapper backgroundColor={backgroundColor} fontColor={fontColor} onClick={onClick}>
       {content}
