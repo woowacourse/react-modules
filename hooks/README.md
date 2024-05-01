@@ -14,7 +14,7 @@
 - [x] useCardNumbers
 - [x] useCardCompany
 - [x] useCardCVC
-- [] useCardExpirationDate
+- [x] useCardExpirationDate
 - [x] useCardOwner
 - [x] useCardPassword
 

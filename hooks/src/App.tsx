@@ -1,23 +1,32 @@
 import React from 'react';
-import useCardPassword from './lib/useCardPassword';
+import useCardExpirationDate from './lib/useCardExpirationDate';
 
 function App() {
-  const { cardPassword } = useCardPassword();
+  const { month, year } = useCardExpirationDate();
+
+  const error = [month.error, year.error].find(({ state }) => state);
 
   return (
     <>
       <h1>Hooks Modules</h1>
 
       <input
-        style={{ border: '2px solid black', padding: '4px' }}
+        style={{ border: `2px solid ${month.error.state ? 'red' : 'black'}`, padding: '4px' }}
         maxLength={2}
-        type='password'
-        value={cardPassword.value}
-        onChange={cardPassword.onChange}
-        onBlur={cardPassword.onBlur}
+        type='text'
+        value={month.value}
+        onChange={month.onChange}
       />
 
-      <p style={{ color: 'red' }}>{cardPassword.error.message}</p>
+      <input
+        style={{ border: `2px solid ${year.error.state ? 'red' : 'black'}`, padding: '4px' }}
+        maxLength={2}
+        type='text'
+        value={year.value}
+        onChange={year.onChange}
+      />
+
+      {error && <p style={{ color: 'red' }}>{error.message}</p>}
     </>
   );
 }

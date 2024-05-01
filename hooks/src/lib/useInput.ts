@@ -46,7 +46,7 @@ const useInput = ({ initialValue, inputValidations, preventInputValidations }: U
     }
   };
 
-  return { value, onChange: onChangeHandler, onBlur: onBlurHandler, error };
+  return { value, onChange: onChangeHandler, onBlur: onBlurHandler, error, setError };
 };
 
 export default useInput;
