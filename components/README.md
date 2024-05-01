@@ -48,7 +48,12 @@ export const MyComponent = () => {
 
 ### `Modal.Button`
 
+<<<<<<< HEAD
 모달에서 제공되는 기본 버튼입니다.
+=======
+모달에서 제공되는 버튼입니다.
+
+> > > > > > > ccab9ba (chore: 라이브러리 이름과 버전 설정)
 
 ### `Modal.CloseButton`
 
