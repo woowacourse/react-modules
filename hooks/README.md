@@ -11,7 +11,7 @@
 
 ## 비지니스 로직
 
-- [] useCardNumbers
+- [x] useCardNumbers
 - [] useCardCompany
 - [] useCardCVC
 - [] useCardExpirationDate
@@ -24,6 +24,9 @@
 
 - 4자리가 아니라면 에러 발생
 - 숫자가 아니라면 에러 발생 및 입력 제한
+- 카드 브랜드 구분
+  - Visa: 4로 시작하는 16자리 숫자
+  - MasterCard: 51~55로 시작하는 16자리 숫자
 
 ### 카드사 선택 유효성 검증
 
