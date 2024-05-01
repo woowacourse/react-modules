@@ -25,6 +25,7 @@ const useSelect = <T>(initialValue: T, validator: ValidatorProps<T>) => {
 
   return {
     value,
+    setValue,
     handleChange,
     errorInfo,
   };

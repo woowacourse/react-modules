@@ -1,4 +1,5 @@
 import useInput from './useInput';
+import { useEffect } from 'react';
 
 const onChange = (value: string) => {
   const isNumber = !Number.isNaN(Number(value));
@@ -51,6 +52,15 @@ const useExpiryMonth = (initialValue: string, options?: Options) => {
       }
     }
   };
+
+  useEffect(() => {
+    if (!onChange(initialValue).isValid) {
+      console.error(
+        `expiry date field error: ${initialValue} 라는 올바르지 않은 값이 들어와 빈 값으로 초기화했습니다.`,
+      );
+      setValue('');
+    }
+  }, [initialValue, setValue]);
 
   return { value, handleChange, handleBlur, errorInfo };
 };

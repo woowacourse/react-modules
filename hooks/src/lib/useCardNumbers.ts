@@ -1,4 +1,5 @@
 import useInputs from './useInputs';
+import { useEffect } from 'react';
 
 const onChange = (value: string) => {
   const isNumber = !Number.isNaN(Number(value));
@@ -56,6 +57,22 @@ const useCardNumbers = (initialValue: Record<string, string>, options?: Options)
       }
     }
   };
+
+  useEffect(() => {
+    const initialValues = Object.entries(initialValue);
+    for (const [key, value] of initialValues) {
+      if (!onChange(value).isValid) {
+        console.error(
+          `cardNumbers field error: ${value} 라는 올바르지 않은 값이 들어와 빈 값으로 초기화했습니다.`,
+        );
+        setValue(prev => ({
+          ...prev,
+          [key]: '',
+        }));
+      }
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return { value, handleChange, handleBlur, errorInfo };
 };

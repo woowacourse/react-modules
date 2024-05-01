@@ -1,4 +1,5 @@
 import useSelect from './useSelect';
+import { useEffect } from 'react';
 
 const onChange = <T>(value: T) => {
   if (typeof value === 'undefined') {
@@ -9,9 +10,18 @@ const onChange = <T>(value: T) => {
 };
 
 const useCardType = <T>(initialValue: T) => {
-  const { value, handleChange, errorInfo } = useSelect(initialValue, {
+  const { value, setValue, handleChange, errorInfo } = useSelect(initialValue, {
     onChange,
   });
+
+  useEffect(() => {
+    if (!onChange(initialValue).isValid) {
+      console.error(
+        `card type field error: ${initialValue} 라는 올바르지 않은 값이 들어와 빈 값으로 초기화했습니다.`,
+      );
+      setValue('' as T);
+    }
+  }, [initialValue, setValue]);
 
   return { value, handleChange, errorInfo };
 };

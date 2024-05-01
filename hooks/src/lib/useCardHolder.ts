@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import useInput from './useInput';
 
 const onChange = (value: string) => {
@@ -35,6 +36,15 @@ const useCardHolder = (initialValue: string) => {
     if (!validationResult.isValid) return;
     setValue(event.target.value.toUpperCase());
   };
+
+  useEffect(() => {
+    if (!onChange(initialValue).isValid) {
+      console.error(
+        `cardholder field error: ${initialValue} 라는 올바르지 않은 값이 들어와 빈 값으로 초기화했습니다.`,
+      );
+      setValue('');
+    }
+  }, [initialValue, setValue]);
 
   return { value, handleChange, handleBlur, errorInfo };
 };
