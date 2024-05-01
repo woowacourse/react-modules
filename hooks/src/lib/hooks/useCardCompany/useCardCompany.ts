@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-const ERROR_MESSAGES = {
+export const CARD_COMPANY_ERROR_MESSAGES = {
   NO_CARD_COMPANY: '회사를 선택해 주세요.',
   INVALID_CARD_COMPANY: '올바른 카드사가 아닙니다.',
 };
@@ -11,9 +11,10 @@ const useCardCompany = (validCardCompanyList: string[]) => {
   const [cardCompanyErrorMessage, setCardCompanyErrorMessage] = useState('');
 
   const getErrorMessage = (company: string) => {
-    if (company === '') return ERROR_MESSAGES.NO_CARD_COMPANY;
+    if (company === '') return CARD_COMPANY_ERROR_MESSAGES.NO_CARD_COMPANY;
 
-    if (!validCardCompanyList.includes(company)) return ERROR_MESSAGES.INVALID_CARD_COMPANY;
+    if (!validCardCompanyList.includes(company))
+      return CARD_COMPANY_ERROR_MESSAGES.INVALID_CARD_COMPANY;
 
     return '';
   };
@@ -23,10 +24,13 @@ const useCardCompany = (validCardCompanyList: string[]) => {
 
     setCardCompanyErrorMessage(errorMessage);
 
-    if (errorMessage !== '') return;
+    if (errorMessage !== '') {
+      setIsValidCardCompany(false);
+      return;
+    }
 
     setIsValidCardCompany(true);
-    setCardCompany(cardCompany);
+    setCardCompany(company);
   };
 
   return {
