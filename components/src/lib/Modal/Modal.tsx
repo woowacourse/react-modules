@@ -24,7 +24,7 @@ export const Modal: React.FC<ModalProps> = ({
 
   return (
     <ModalDeem isOpen={isOpen} onClick={(e) => onClose(e)}>
-      <ModalContainer modalPosition={modalPosition}>
+      <ModalContainer modalPosition={modalPosition} closeButtonPosition={closeButtonPosition}>
         <ModalHeader>
           <h1>{title}</h1>
           {closeButtonPosition === "top" && (
