@@ -1,5 +1,5 @@
 import { renderHook, act } from '@testing-library/react';
-import useCVC from './useCVC';
+import useCVC from '../lib/useCVC';
 
 describe('useCVC 커스텀 훅 테스트', () => {
   it('초기값이 정확히 설정되어야 한다.', () => {
