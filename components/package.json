@@ -1,7 +1,7 @@
 {
-  "name": "compoents",
-  "version": "0.0.1",
-  "description": "npm modules",
+  "name": "paran-fe-modal",
+  "version": "0.0.4",
+  "description": "simple modal component",
   "type": "module",
   "types": "dist/index.d.ts",
   "main": "dist/index.js",
@@ -15,9 +15,11 @@
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "chromatic": "dotenv -- cross-var chromatic --project-token=%CHROMATIC_PROJECT_TOKEN%"
   },
   "dependencies": {
+    "paran-fe-modal": "^0.0.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
@@ -38,6 +40,9 @@
     "@typescript-eslint/eslint-plugin": "^7.2.0",
     "@typescript-eslint/parser": "^7.2.0",
     "@vitejs/plugin-react-swc": "^3.5.0",
+    "chromatic": "^11.3.0",
+    "cross-var": "^1.1.0",
+    "dotenv-cli": "^7.4.1",
     "eslint": "^8.57.0",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.6",
