@@ -5,8 +5,13 @@ export const ButtonWrapper = styled.button<Pick<ButtonProps, "backgroundColor" |
   width: 100%;
   height: 44px;
   border-radius: 5px;
+  border: none;
   background: ${({ backgroundColor }) => backgroundColor};
   cursor: pointer;
+
+  &:hover {
+    border: 2px solid ${({ fontColor }) => fontColor};
+  }
 
   font-family: Noto Sans KR;
   font-size: 15px;

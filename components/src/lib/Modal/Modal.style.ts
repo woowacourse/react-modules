@@ -16,11 +16,15 @@ export const ModalDeem = styled.div<ModalDeemProps>`
   z-index: 1000;
 `;
 
-export const ModalContainer = styled.div<Pick<ModalProps, "modalPosition">>`
+export const ModalContainer = styled.div<Pick<ModalProps, "modalPosition" | "closeButtonPosition">>`
   display: flex;
   z-index: 1001;
   flex-direction: column;
+  ${({ closeButtonPosition }) =>
+    closeButtonPosition === "bottom" &&
+    `
   justify-content: space-between;
+`}
   gap: 16px;
   position: absolute;
   min-height: 216px;
