@@ -1,26 +1,12 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import React from "react";
 import { useModal } from "../lib/Modal";
-import { Modal, ModalProps } from "../lib/Modal/Modal";
+import { Modal } from "../lib/Modal/Modal";
 
 const meta: Meta<typeof Modal> = {
   title: "Components/Modal",
-  tags: ["autodocs"],
   component: Modal,
-  parameters: {
-    docs: {
-      source: {
-        state: "open",
-      },
-    },
-  },
-  decorators: [
-    (Story) => (
-      <div style={{ width: "400px", height: "200px" }}>
-        <Story />
-      </div>
-    ),
-  ],
+  tags: ["autodocs"],
   argTypes: {
     modalPosition: {
       description: "모달의 위치",
@@ -39,83 +25,142 @@ const meta: Meta<typeof Modal> = {
         options: ["top", "bottom"],
       },
     },
-    children: {
-      description: "모달의 내용",
-      control: {
-        type: "text",
-      },
-    },
   },
 };
 
 export default meta;
 type Story = StoryObj<typeof Modal>;
 
-const Template: Story = {
-  render: (args: ModalProps) => {
-    const { closeModal } = useModal();
+export const 중앙에위치한모달에상단X닫기버튼: Story = {
+  render: () => {
+    const { isOpen, openModal, closeModal, ModalComponent } = useModal();
 
     return (
-      <Modal {...args} isOpen={true} onClose={closeModal}>
-        {args.children}
-      </Modal>
+      <>
+        <button onClick={openModal}>모달 열기</button>
+        <ModalComponent
+          modalPosition="center"
+          title="중앙에 위치한 모달"
+          closeButtonPosition="top"
+          onClose={closeModal}
+        >
+          <div>
+            이것은 중앙에 위치한 모달의 내용입니다.이것은 중앙에 위치한 모달의 내용입니다.이것은
+            중앙에 위치한 모달의 내용입니다.이것은 중앙에 위치한 모달의 내용입니다.이것은 중앙에
+            위치한 모달의 내용입니다.이것은 하단에 위치한 모달의 내용입니다.이것은 하단에 위치한
+            모달의 내용입니다.이것은 하단에 위치한 모달의 내용입니다.이것은 하단에 위치한 모달의
+            내용입니다.이것은 하단에 위치한 모달의 내용입니다.이것은 하단에 위치한 모달의
+            내용입니다.이것은 하단에 위치한 모달의 내용입니다.
+          </div>
+        </ModalComponent>
+      </>
     );
   },
 };
 
-export const 기본_모달: Story = {
-  ...Template,
-  args: {
-    modalPosition: "center",
-    title: "모달 제목",
-    closeButtonPosition: "top",
-    children: "모달 내용",
-    isOpen: false,
+export const 중앙에위치한모달에하단사각형닫기버튼: Story = {
+  render: () => {
+    const { isOpen, openModal, closeModal, ModalComponent } = useModal();
+
+    return (
+      <>
+        <button onClick={openModal}>모달 열기</button>
+        <ModalComponent
+          modalPosition="center"
+          title="중앙에 위치한 모달"
+          closeButtonPosition="bottom"
+          onClose={closeModal}
+        >
+          <div>이것은 중앙에 위치한 모달의 내용입니다.</div>
+        </ModalComponent>
+      </>
+    );
   },
 };
 
-export const 중앙에_위치한_모달에_상단_X닫기_버튼: Story = {
-  ...Template,
-  args: {
-    modalPosition: "center",
-    title: "중앙에 위치한 모달",
-    closeButtonPosition: "top",
-    children: "이것은 중앙에 위치한 모달의 내용입니다.",
-    isOpen: true,
+export const 하단에위치한모달메상단X닫기버튼: Story = {
+  render: () => {
+    const { isOpen, openModal, closeModal, ModalComponent } = useModal();
+
+    return (
+      <>
+        <button onClick={openModal}>모달 열기</button>
+        <ModalComponent
+          modalPosition="bottom"
+          title="하단에 위치한 모달"
+          closeButtonPosition="top"
+          onClose={closeModal}
+        >
+          <div>이것은 하단에 위치한 모달의 내용입니다.</div>
+        </ModalComponent>
+      </>
+    );
+  },
+};
+export const 하단에위치한모달메상단사각형닫기버튼: Story = {
+  render: () => {
+    const { isOpen, openModal, closeModal, ModalComponent } = useModal();
+
+    return (
+      <>
+        <button onClick={openModal}>모달 열기</button>
+        <ModalComponent
+          modalPosition="bottom"
+          title="하단에 위치한 모달"
+          closeButtonPosition="bottom"
+          onClose={closeModal}
+        >
+          <div>
+            이것은 하단에 위치한 모달의 내용입니다.이것은 하단에 위치한 모달의 내용입니다.이것은
+            하단에 위치한 모달의 내용입니다.이것은 하단에 위치한 모달의 내용입니다.이것은 하단에
+            위치한 모달의 내용입니다.이것은 하단에 위치한 모달의 내용입니다.이것은 하단에 위치한
+            모달의 내용입니다.이것은 하단에 위치한 모달의 내용입니다.이것은 하단에 위치한 모달의
+            내용입니다.이것은 하단에 위치한 모달의 내용입니다.이것은 하단에 위치한 모달의
+            내용입니다.이것은 하단에 위치한 모달의 내용입니다.이것은 하단에 위치한 모달의
+            내용입니다.이것은 하단에 위치한 모달의 내용입니다.
+          </div>
+        </ModalComponent>
+      </>
+    );
   },
 };
 
-export const 중앙에_위치한_모달에_하단_사각형닫기_버튼: Story = {
-  ...Template,
-  args: {
-    modalPosition: "center",
-    title: "중앙에 위치한 모달",
-    closeButtonPosition: "bottom",
-    children:
-      "이것은 중앙에 위치한 모달의 내용입니다. 이것은 중앙에 위치한 모달의 내용입니다. 이것은 중앙에 위치한 모달의 내용입니다. 이것은 중앙에 위치한 모달의 내용입니다. 이것은 중앙에 위치한 모달의 내용입니다. 이것은 중앙에 위치한 모달의 내용입니다. 이것은 중앙에 위치한 모달의 내용입니다.",
-    isOpen: true,
+export const 중앙에위치한모달에긴제목: Story = {
+  render: () => {
+    const { isOpen, openModal, closeModal, ModalComponent } = useModal();
+
+    return (
+      <>
+        <button onClick={openModal}>모달 열기</button>
+        <ModalComponent
+          modalPosition="center"
+          title="이것은 매우 긴 제목으로, 줄임표로 잘려야 합니다."
+          closeButtonPosition="top"
+          onClose={closeModal}
+        >
+          <div>이 모달은 긴 제목을 가지고 있어 줄임표로 표시됩니다.</div>
+        </ModalComponent>
+      </>
+    );
   },
 };
 
-export const 하단에_위치한_모달메_상단_X닫기_버튼: Story = {
-  ...Template,
-  args: {
-    modalPosition: "bottom",
-    title: "하단에 위치한 모달",
-    closeButtonPosition: "top",
-    children:
-      "이것은 하단에 위치한 모달의 내용입니다. 이것은 하단에 위치한 모달의 내용입니다. 이것은 하단에 위치한 모달의 내용입니다. 이것은 하단에 위치한 모달의 내용입니다.",
-    isOpen: true,
-  },
-};
+export const 하단에위치한모달에긴제목: Story = {
+  render: () => {
+    const { isOpen, openModal, closeModal, ModalComponent } = useModal();
 
-export const 하단에_위치한_모달메_하단_사각형닫기_버튼: Story = {
-  ...Template,
-  args: {
-    modalPosition: "bottom",
-    title: "하단에 위치한 모달",
-    closeButtonPosition: "bottom",
-    children: "이것은 하단에 위치한 모달의 내용입니다.",
-    isOpen: true,
+    return (
+      <>
+        <button onClick={openModal}>모달 열기</button>
+        <ModalComponent
+          modalPosition="bottom"
+          title="이것은 매우 긴 제목으로, 줄임표로 잘려야 합니다. 이것은 매우 긴 제목으로, 줄임표로 잘려야 합니다."
+          closeButtonPosition="top"
+          onClose={closeModal}
+        >
+          <div>이 모달은 긴 제목을 가지고 있어 줄임표로 표시됩니다.</div>
+        </ModalComponent>
+      </>
+    );
   },
 };
