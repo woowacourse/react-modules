@@ -1,4 +1,5 @@
-import { ButtonPosition, ModalPosition } from '../../types/type';
+export type ModalPosition = 'center' | 'bottom';
+export type ButtonPosition = 'row' | 'column';
 
 import styled from 'styled-components';
 
@@ -8,6 +9,8 @@ export const DimmedLayer = styled.div`
   z-index: 100;
   width: 100vw;
   height: 100vh;
+  padding: 16px;
+  box-sizing: border-box;
   background-color: rgba(0, 0, 0, 0.4);
 `;
 
@@ -21,10 +24,9 @@ export const ModalContainer = styled.div<{ modalPosition: ModalPosition }>`
   display: flex;
   flex-direction: column;
   width: 100%;
-  box-sizing: border-box;
-  margin: ${(props) => (props.modalPosition === 'center' ? '0 16px' : '')};
   max-width: ${(props) => (props.modalPosition === 'center' ? '640px' : '')};
   max-height: 80vh;
+  box-sizing: border-box;
   gap: 16px;
   z-index: 200;
   padding: 24px;
