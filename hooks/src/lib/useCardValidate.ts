@@ -35,7 +35,11 @@ const useCardValidate = ({
   };
 
   const onBlurHandler = () => {
-    validateOnBlur();
+    const { isValid, errorMessage } = validateOnBlur();
+    if (!isValid) {
+      setErrorMessage(errorMessage);
+      return;
+    }
   };
 
   return {
