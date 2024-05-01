@@ -1,8 +1,8 @@
 import { useEffect } from 'react';
-import type { StrictPropsWithChildren } from '../types/common';
 import type { ModalProps, ModalFooterProps } from './Modal.type';
 import { preventScroll, allowScroll } from '../utils/scroll';
 import styles from './Modal.module.css';
+import { StrictPropsWithChildren } from '../type/common';
 
 export const ModalHeader = ({ children }: StrictPropsWithChildren) => {
   return <header className={styles.modalHeader}>{children}</header>;
