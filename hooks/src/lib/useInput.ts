@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-interface ValidationResult {
+export interface ValidationResult {
   isValid: boolean;
   errorMessage: string;
 }
