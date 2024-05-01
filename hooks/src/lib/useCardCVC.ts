@@ -20,7 +20,7 @@ const useCardCVC = (initValue: string, maxLength: number = 3) => {
   const validateOnBlur = () => {
     if (value.length !== maxLength) {
       return {
-        isValid: true,
+        isValid: false,
         errorMessage: `CVC 번호는 ${maxLength}글자로 입력해 주세요.`,
       };
     }
