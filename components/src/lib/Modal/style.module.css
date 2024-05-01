@@ -12,6 +12,8 @@
   width: 100vw;
   height: 100vh;
   button {
+    outline-color: transparent;
+    border-color: transparent;
     background-color: transparent;
     padding: 0;
     &:focus {
