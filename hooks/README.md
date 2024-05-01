@@ -49,6 +49,6 @@
 
 ### useExpiryPeriod
 
-- [ ] value, setValue
-- [ ] error, setError
+- [x] value, setValue
+- [x] error, setError
   - 과거일 시 에러
