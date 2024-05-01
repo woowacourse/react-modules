@@ -1,6 +1,6 @@
+import { useModal } from "choriver-modal-component";
 import React from "react";
 import "./App.css";
-import { useModal } from "./lib/Modal/index";
 
 function App() {
   const { isOpen, openModal, closeModal, ModalComponent } = useModal();

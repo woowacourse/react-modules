@@ -1,6 +1,6 @@
 {
   "name": "choriver-modal-component",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "초코리버가 만든 Modal component 라이브러리",
   "type": "module",
   "types": "dist/index.d.ts",
@@ -20,7 +20,7 @@
   "dependencies": {
     "@emotion/react": "^11.11.4",
     "@emotion/styled": "^11.11.5",
-    "choriver-components": "^0.0.1",
+    "choriver-modal-component": "^0.0.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
