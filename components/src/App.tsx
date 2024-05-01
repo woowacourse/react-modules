@@ -1,8 +1,8 @@
 import React from 'react';
-import './App.css';
 import './reset.css';
 import { Modal } from './lib/index';
 import useModal from './hooks/useModal';
+import CardCompanySelector from './components/CardCompanySelector';
 
 function App() {
   const { isOpen, toggleModal } = useModal();
@@ -15,9 +15,9 @@ function App() {
           toggleModal={toggleModal}
           position="center"
           title="카드사 선택"
-          closeOption="icon"
+          closeOption="button"
         >
-          <div></div>
+          <CardCompanySelector />
         </Modal>
       )}
     </>
