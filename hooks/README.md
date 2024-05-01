@@ -8,6 +8,7 @@
 
 - [x] useInput
 - [x] useCardType
+- [x] useValid
 
 ## 비지니스 로직
 

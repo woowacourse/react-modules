@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import useInput, { ValidationType } from './useInput';
+import useValid from './useValid';
 
 const EXPIRATION_DATE_LENGTH = 2;
 const MONTH = {
@@ -51,6 +52,7 @@ const useCardExpirationDate = (initialValue: InitialValueType = ['', '']) => {
 
   const month = useInput({ initialValue: initialValue[0], inputValidations: monthInputValidations, preventInputValidations });
   const year = useInput({ initialValue: initialValue[1], inputValidations: yearInputValidations, preventInputValidations });
+  const isCardExpirationDateValid = useValid([month, year]);
 
   useEffect(() => {
     const date = new Date();
@@ -64,21 +66,17 @@ const useCardExpirationDate = (initialValue: InitialValueType = ['', '']) => {
       if (currentYear > Number(year.value)) {
         month.setError(error);
         year.setError(error);
-        return;
-      }
-
-      if (currentYear === Number(year.value) && currentMonth > Number(month.value)) {
+      } else if (currentYear === Number(year.value) && currentMonth > Number(month.value)) {
         month.setError(error);
         year.setError(error);
-        return;
+      } else {
+        month.setError(initialErrorState);
+        year.setError(initialErrorState);
       }
-
-      month.setError(initialErrorState);
-      year.setError(initialErrorState);
     }
   }, [month.value, year.value]);
 
-  return { month, year };
+  return { month, year, isCardExpirationDateValid };
 };
 
 export default useCardExpirationDate;

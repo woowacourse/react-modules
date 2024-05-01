@@ -1,4 +1,5 @@
 import useInput, { ValidationType } from './useInput';
+import useValid from './useValid';
 
 const PASSWORD_LENGTH = 2;
 
@@ -26,8 +27,9 @@ const useCardPassword = (initialValue = '') => {
   ];
 
   const cardPassword = useInput({ initialValue, inputValidations, preventInputValidations });
+  const isCardPasswordValid = useValid([cardPassword]);
 
-  return { cardPassword };
+  return { cardPassword, isCardPasswordValid };
 };
 
 export default useCardPassword;

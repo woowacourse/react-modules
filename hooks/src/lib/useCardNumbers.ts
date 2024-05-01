@@ -1,5 +1,6 @@
 import useInput, { ValidationType } from './useInput';
 import useCardType from './useCardType';
+import useValid from './useValid';
 
 export const CARD_NUMBER_LENGTH = 4;
 
@@ -36,8 +37,9 @@ const useCardNumbers = (initialValue: InitialValueType = ['', '', '', '']) => {
   ];
 
   const cardBrand = useCardType(cardNumbers.map(({ value }) => value));
+  const isCardNumbersValid = useValid(cardNumbers);
 
-  return { cardNumbers, cardBrand };
+  return { cardNumbers, cardBrand, isCardNumbersValid };
 };
 
 export default useCardNumbers;
