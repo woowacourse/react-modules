@@ -1,7 +1,7 @@
 {
-  "name": "hooks",
+  "name": "@seongjinme/card-validation",
   "version": "0.0.1",
-  "description": "npm modules",
+  "description": "우아한테크코스 6기 FE 미션을 위해 제작된 간단한 신용카드 입력값 검증 모듈입니다.",
   "type": "module",
   "types": "dist/index.d.ts",
   "main": "dist/index.js",
