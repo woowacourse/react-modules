@@ -1,32 +1,36 @@
 import { useRef } from "react";
+import validator from "./utils/validate";
+import ERROR_MESSAGE from "./constants/errorMessage";
 
 type UserCardNumbersValidationProps = {
   value: string[];
 };
 
+const INDIVIDUAL_CARD_LENGTH = 4;
+
 const useCardNumbersValidation = ({ value }: UserCardNumbersValidationProps) => {
   const ref = useRef({ isValid: false, errorMessage: "" });
 
   for (const cardNumber of value) {
-    if (cardNumber === "") {
+    if (!validator.isValidEmptyValue(cardNumber)) {
       ref.current = {
         isValid: false,
-        errorMessage: "숫자 4자리를 입력해주세요.",
+        errorMessage: ERROR_MESSAGE.EMPTY_VALUE,
       };
       break;
     }
-    if (!/^\d+$/.test(cardNumber)) {
+    if (!validator.isValidDigit(cardNumber)) {
       ref.current = {
         isValid: false,
-        errorMessage: "숫자만 입력해주세요.",
+        errorMessage: ERROR_MESSAGE.ONLY_NUMBER,
       };
       break;
     }
 
-    if (cardNumber.length < 4) {
+    if (!validator.isValidLength({ value: cardNumber, matchedLength: INDIVIDUAL_CARD_LENGTH })) {
       ref.current = {
         isValid: false,
-        errorMessage: "4자리 숫자를 입력해주세요.",
+        errorMessage: ERROR_MESSAGE.INVALID_CARD_NUMBER_LENGTH,
       };
       break;
     }
