@@ -1,5 +1,5 @@
 import { Position } from "./Modal.d";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { ReactNode } from "react";
 import { css } from "@emotion/css";
 
@@ -31,19 +31,14 @@ const Modal = ({
   onClose,
 }: ModalProps) => {
   const [isOpen, setIsOpen] = isOpenState;
-  const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
-    if (!isMounted) {
-      setIsMounted(true);
-      return;
-    }
     if (isOpen && onOpen) onOpen();
-    if (!isOpen && onClose) onClose();
   }, [isOpen]);
 
   const handleClose = () => {
     setIsOpen(false);
+    if (onClose) onClose();
   };
 
   const handleConfirm = () => {
@@ -51,41 +46,39 @@ const Modal = ({
     handleClose();
   };
 
-  return (
-    isOpen && (
-      <>
-        <div className={css(modalContainerCSS, positionCSS[position])}>
-          <div className={css(headerContainerCSS)}>
-            <h2 className={css(titleCSS)}>{title}</h2>
-            {close && (
-              <button className={css(closeButtonCSS)} onClick={handleClose}>
-                ×
+  return isOpen ? (
+    <>
+      <div className={css(modalContainerCSS, positionCSS[position])}>
+        <div className={css(headerContainerCSS)}>
+          <h2 className={css(titleCSS)}>{title}</h2>
+          {close && (
+            <button className={css(closeButtonCSS)} onClick={handleClose}>
+              ×
+            </button>
+          )}
+        </div>
+        <div>
+          <p className={css(descriptionCSS)}>{description}</p>
+        </div>
+        {children && <div>{children}</div>}
+        {confirmLabel && cancelLabel && (
+          <div className={css(buttonContainerCSS)}>
+            {confirmLabel && (
+              <button className={css(buttonCSS, confirmButtonCSS)} onClick={handleConfirm}>
+                {confirmLabel}
+              </button>
+            )}
+            {cancelLabel && (
+              <button className={css(buttonCSS, cancelButtonCSS)} onClick={handleClose}>
+                {cancelLabel}
               </button>
             )}
           </div>
-          <div>
-            <p className={css(descriptionCSS)}>{description}</p>
-          </div>
-          {children && <div>{children}</div>}
-          {confirmLabel && cancelLabel && (
-            <div className={css(buttonContainerCSS)}>
-              {confirmLabel && (
-                <button className={css(buttonCSS, confirmButtonCSS)} onClick={handleConfirm}>
-                  {confirmLabel}
-                </button>
-              )}
-              {cancelLabel && (
-                <button className={css(buttonCSS, cancelButtonCSS)} onClick={handleClose}>
-                  {cancelLabel}
-                </button>
-              )}
-            </div>
-          )}
-        </div>
-        <div className={css(backdropCSS)} onClick={handleClose} />
-      </>
-    )
-  );
+        )}
+      </div>
+      <div className={css(backdropCSS)} onClick={handleClose} />
+    </>
+  ) : null;
 };
 
 const modalContainerCSS = css`
