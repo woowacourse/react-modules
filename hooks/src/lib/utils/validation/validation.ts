@@ -31,7 +31,7 @@ export const NUMBER_ERROR_MESSAGES = {
 export const getNumberErrorMessage = (number: string, validLength: number) => {
   if (isNotNumber(number)) return NUMBER_ERROR_MESSAGES.NOT_NUMBER;
 
-  if (isValidNumberLength(number, validLength))
+  if (!isValidNumberLength(number, validLength))
     return NUMBER_ERROR_MESSAGES.MAX_LENGTH(validLength);
 
   return '';

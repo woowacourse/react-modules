@@ -1,32 +1,33 @@
 import { useState } from 'react';
-import { getNumberErrorMessage } from '../../utils/validation/validation';
+import { getNumberErrorMessage, isNotNumber } from '../../utils/validation/validation';
+import { updateArray } from '../../utils/updateArray';
 
 export const VALID_CARD_NUMBER_LENGTH = 16;
 
-const useCardNumber = () => {
-  const [cardNumber, setCardNumber] = useState<string>('');
-  const [isValidCardNumber, setIsValidCardNumber] = useState(false);
-  const [cardNumberErrorMessage, setCardNumberErrorMessage] = useState('');
+const useCardNumber = (unitCount: number, singleUnitLength: number) => {
+  const [cardNumber, setCardNumber] = useState<string[]>(new Array(unitCount).fill(''));
+  const [isValidCardNumbers, setIsValidCardNumbers] = useState<boolean[]>(
+    new Array(unitCount).fill(false)
+  );
+  const [cardNumberErrorMessages, setCardNumberErrorMessages] = useState<string[]>(
+    new Array(unitCount).fill('')
+  );
 
-  const handleCardNumbersChange = (number: string) => {
-    const errorMessage = getNumberErrorMessage(number, VALID_CARD_NUMBER_LENGTH);
+  const handleCardNumberChange = (number: string, index: number) => {
+    if (isNotNumber(number) || number.length > singleUnitLength) return;
 
-    setCardNumberErrorMessage(errorMessage);
+    const errorMessage = getNumberErrorMessage(number, singleUnitLength);
 
-    if (errorMessage !== '') {
-      setIsValidCardNumber(false);
-      return;
-    }
-
-    setCardNumber(number);
-    setIsValidCardNumber(true);
+    setCardNumberErrorMessages(updateArray(cardNumberErrorMessages, errorMessage, index));
+    setIsValidCardNumbers(updateArray(isValidCardNumbers, !errorMessage, index));
+    setCardNumber(updateArray(cardNumber, number, index));
   };
 
   return {
     cardNumber,
-    handleCardNumbersChange,
-    isValidCardNumber,
-    cardNumberErrorMessage,
+    handleCardNumberChange,
+    isValidCardNumbers,
+    cardNumberErrorMessages,
   };
 };
 
