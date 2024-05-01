@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { getNumberErrorMessage } from '../utils/validation';
+import { getNumberErrorMessage } from '../../utils/validation/validation';
 
 const useCardPassword = (validLength: number = 2) => {
   const [password, setPassword] = useState('');
@@ -11,7 +11,10 @@ const useCardPassword = (validLength: number = 2) => {
 
     setPasswordErrorMessage(errorMessage);
 
-    if (errorMessage !== '') return;
+    if (errorMessage !== '') {
+      setIsValidPassword(false);
+      return;
+    }
 
     setPassword(number);
     setIsValidPassword(true);

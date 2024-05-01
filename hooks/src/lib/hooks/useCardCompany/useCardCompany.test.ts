@@ -12,7 +12,7 @@ const CARD_COMPANY_LIST = [
   '국민카드',
 ];
 
-describe('useCardCompany', () => {
+describe('useCardCompany 커스텀 훅 테스트', () => {
   const { result } = renderHook(() => useCardCompany(CARD_COMPANY_LIST));
 
   it('올바른 카드사를 선택했다면 유효하다.', () => {
