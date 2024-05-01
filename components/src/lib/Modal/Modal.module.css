@@ -49,22 +49,21 @@
   color: rgba(0, 0, 0, 1);
 }
 
-.modalContent {
+.modalContent,
+.modalFooter {
   width: 100%;
   overflow-x: auto;
 }
 
-.modalFooter {
-  width: 100%;
-}
-
 .modalContainer,
-.modalContent {
+.modalContent,
+.modalFooter {
   scrollbar-width: none;
   -ms-overflow-style: none;
 }
 
 .modalContainer :-webkit-scrollbar,
-.modalContent :-webkit-scrollbar {
+.modalContent :-webkit-scrollbar,
+.modalFooter :-webkit-scrollbar {
   display: none;
 }
