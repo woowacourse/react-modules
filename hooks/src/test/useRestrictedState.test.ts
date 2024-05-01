@@ -1,10 +1,7 @@
 import { useRestrictedState } from "../lib/hooks";
 import { renderHook, act } from "@testing-library/react";
 
-// valueState: [value, setValueWrapper],
-//     errorState: { isError, errorMessage, setError },
-
-describe("useCardCompany Test", () => {
+describe("useRestrictedState Test", () => {
   it("type이 english일 경우 영어만 입력가능하다.", () => {
     const { result } = renderHook(() => useRestrictedState({ type: "english" }));
 
