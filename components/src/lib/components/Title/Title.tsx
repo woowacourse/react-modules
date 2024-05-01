@@ -1,10 +1,7 @@
+import { StrictPropsWithChildren } from '../../types/common';
 import styles from './Title.module.css';
 
-export interface TitleProps {
-  children: React.ReactNode;
-}
-
-const Title = ({ children }: TitleProps) => {
+const Title = ({ children }: StrictPropsWithChildren) => {
   return <h1 className={styles.title}>{children}</h1>;
 };
 
