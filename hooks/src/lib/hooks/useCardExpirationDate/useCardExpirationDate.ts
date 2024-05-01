@@ -4,10 +4,10 @@ import {
   isValidNumberLength,
   isValidNumberRange,
   validateExpiredDate,
-} from '../utils/validation';
-import type { EXPIRED_TYPE } from '../utils/validation.type';
+} from '../../utils/validation/validation';
+import type { EXPIRED_TYPE } from '../..//utils/validation/validation.type';
 
-const ERROR_MESSAGES = {
+export const EXPIRATION_DATE_ERROR_MESSAGES = {
   NOT_NUMBER: '숫자를 입력해주세요.',
   INVALID_MONTH: '유효하지 않은 달입니다.',
   INVALID_YEAR: '유효하지 않은 년도입니다.',
@@ -27,23 +27,26 @@ const useCardExpirationDate = () => {
   const [errorMessages, setErrorMessages] = useState<Date<string>>({ month: '', year: '' });
 
   const getMonthErrorMessage = (month: string, isExpiredDate: EXPIRED_TYPE) => {
-    if (isNotNumber(month)) return ERROR_MESSAGES.NOT_NUMBER;
+    if (isNotNumber(month)) return EXPIRATION_DATE_ERROR_MESSAGES.NOT_NUMBER;
 
-    if (isValidNumberLength(month, VALID_DATE_LENGTH)) return ERROR_MESSAGES.INVALID_MONTH;
+    if (isValidNumberLength(month, VALID_DATE_LENGTH))
+      return EXPIRATION_DATE_ERROR_MESSAGES.INVALID_MONTH;
 
-    if (isValidNumberRange(Number(month), 1, 12)) return ERROR_MESSAGES.INVALID_MONTH;
+    if (isValidNumberRange(Number(month), 1, 12))
+      return EXPIRATION_DATE_ERROR_MESSAGES.INVALID_MONTH;
 
-    if (isExpiredDate === 'INVALID_MONTH') return ERROR_MESSAGES.EXPIRED_DATE;
+    if (isExpiredDate === 'INVALID_MONTH') return EXPIRATION_DATE_ERROR_MESSAGES.EXPIRED_DATE;
 
     return '';
   };
 
   const getYearErrorMessage = (year: string, isExpiredDate: EXPIRED_TYPE) => {
-    if (isNotNumber(year)) return ERROR_MESSAGES.NOT_NUMBER;
+    if (isNotNumber(year)) return EXPIRATION_DATE_ERROR_MESSAGES.NOT_NUMBER;
 
-    if (isValidNumberLength(year, VALID_DATE_LENGTH)) return ERROR_MESSAGES.INVALID_YEAR;
+    if (isValidNumberLength(year, VALID_DATE_LENGTH))
+      return EXPIRATION_DATE_ERROR_MESSAGES.INVALID_YEAR;
 
-    if (isExpiredDate === 'INVALID_YEAR') return ERROR_MESSAGES.EXPIRED_DATE;
+    if (isExpiredDate === 'INVALID_YEAR') return EXPIRATION_DATE_ERROR_MESSAGES.EXPIRED_DATE;
 
     return '';
   };
