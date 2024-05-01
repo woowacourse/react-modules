@@ -55,7 +55,7 @@ const useExpiryYear = (initialValue: string, options?: Options) => {
   };
 
   useEffect(() => {
-    if (!onChange(initialValue).isValid) {
+    if (!onChange(initialValue).isValid || !onBlur(initialValue).isValid) {
       console.error(
         `expiry date field error: ${initialValue} 라는 올바르지 않은 값이 들어와 빈 값으로 초기화했습니다.`,
       );

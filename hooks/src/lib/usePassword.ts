@@ -28,7 +28,7 @@ const usePassword = (initialValue: string) => {
   });
 
   useEffect(() => {
-    if (!onChange(initialValue).isValid) {
+    if (!onChange(initialValue).isValid || !onBlur(initialValue).isValid) {
       console.error(
         `password field error: ${initialValue} 라는 올바르지 않은 값이 들어와 빈 값으로 초기화했습니다.`,
       );

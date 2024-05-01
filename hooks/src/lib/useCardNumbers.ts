@@ -61,7 +61,7 @@ const useCardNumbers = (initialValue: Record<string, string>, options?: Options)
   useEffect(() => {
     const initialValues = Object.entries(initialValue);
     for (const [key, value] of initialValues) {
-      if (!onChange(value).isValid) {
+      if (!onChange(value).isValid || !onBlur(value).isValid) {
         console.error(
           `cardNumbers field error: ${value} 라는 올바르지 않은 값이 들어와 빈 값으로 초기화했습니다.`,
         );
