@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import { unifySpaces, filterEnglishAndSpaces } from '../utils/stringHelpers';
+import { unifySpaces, filterEnglishAndSpaces } from '../../utils/stringHelpers';
 
-const ERROR_MESSAGES = {
+export const OWNER_NAME_ERROR_MESSAGES = {
   EXCESSIVE_WHITE_SPACE: '공백을 연속으로 입력할 수 없습니다.',
   NOT_ENG: '영어만 입력 가능합니다.',
 };
@@ -22,9 +22,9 @@ const useCardOwnerName = () => {
     const isExcessiveWhiteSpace = engName.length > unifiedSpaceName.length;
 
     if (isExcessiveWhiteSpace && unifiedSpaceName.length !== 0)
-      return ERROR_MESSAGES.EXCESSIVE_WHITE_SPACE;
+      return OWNER_NAME_ERROR_MESSAGES.EXCESSIVE_WHITE_SPACE;
 
-    if (engName.length < name.length) return ERROR_MESSAGES.NOT_ENG;
+    if (engName.length < name.length) return OWNER_NAME_ERROR_MESSAGES.NOT_ENG;
 
     return '';
   };
