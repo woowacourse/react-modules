@@ -12,7 +12,7 @@ const meta = {
     layout: 'centered',
     docs: {
       description: {
-        component: '',
+        component: '페이지 위에 표시되는 대화 상자 창',
       },
     },
   },
@@ -41,7 +41,11 @@ const meta = {
   render: ({ ...args }) => {
     return (
       <div className="app">
-        <Modal {...args}>모달</Modal>
+        <Modal {...args}>
+          <Modal.ModalHeader title="카드사 선택" />
+          <Modal.ModalContent></Modal.ModalContent>
+          <Modal.ModalFooter></Modal.ModalFooter>
+        </Modal>
       </div>
     );
   },
@@ -56,7 +60,7 @@ export const Default: Story = {
   parameters: {
     docs: {
       description: {
-        story: '모달의 기본 상태',
+        story: 'modal이 화면의 center에 나타날 때',
       },
     },
   },
@@ -70,12 +74,64 @@ export const Bottom: Story = {
   parameters: {
     docs: {
       description: {
-        story: '모달의 기본 상태',
+        story: 'modal이 화면의 bottom에 나타날 때',
       },
     },
   },
   args: {
     isOpen: true,
     position: 'bottom',
+  },
+};
+
+export const OverflowContentModal: Story = {
+  args: Default.args,
+  parameters: {
+    docs: {
+      description: {
+        story: 'modal content가 modal viewport를 초과하는 case',
+      },
+    },
+  },
+  render: ({ ...args }) => {
+    return (
+      <div className="app">
+        <Modal {...args}>
+          <Modal.ModalHeader title="카드사 선택"></Modal.ModalHeader>
+          <Modal.ModalContent>
+            <div style={{ margin: '12px 0px', backgroundColor: 'slategrey', width: '1000px', height: '300px' }}>
+              Box
+            </div>
+          </Modal.ModalContent>
+          <Modal.ModalFooter></Modal.ModalFooter>
+        </Modal>
+      </div>
+    );
+  },
+};
+
+export const OverflowFooterModal: Story = {
+  args: Default.args,
+  parameters: {
+    docs: {
+      description: {
+        story: 'modal footer가 modal viewport를 초과하는 case',
+      },
+    },
+  },
+  render: ({ ...args }) => {
+    return (
+      <div className="app">
+        <Modal {...args}>
+          <Modal.ModalHeader title="카드사 선택"></Modal.ModalHeader>
+          <Modal.ModalContent>
+            <div style={{ backgroundColor: 'red', width: '100%', height: '30px' }}>Content</div>
+          </Modal.ModalContent>
+          <Modal.ModalFooter>
+            <div style={{ backgroundColor: 'slategrey', width: '1000px', height: '300px' }}>Footer</div>
+          </Modal.ModalFooter>
+        </Modal>
+      </div>
+    );
   },
 };

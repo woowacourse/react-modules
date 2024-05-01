@@ -8,11 +8,12 @@
 
 - [x] position(center, bottom)에 따라 모달 위치를 변경한다.
 
-## step 3 - modal 컴포넌트를 재 사용 가능한 형태로 분리
+## step 3 - modal 컴포넌트를 재사용 가능한 형태로 분리
 
 - [x] 기존 컴포넌트에서 modal header, modal content, modal footer로 분리 한다.
 
-- [ ] close button이 위에 있는 case, close button이 아래에 있는 case 추가
+- edge case
+  - [x] modal content와 modal footer가 view port를 초과하는 case 추가
 
 ## step 4 - modal 컴포넌트 내 confirm action 추가
 
