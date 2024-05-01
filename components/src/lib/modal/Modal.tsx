@@ -13,7 +13,7 @@ const Modal: React.FC<ModalProps> & {
   ModalCloseButton: ModalCloseButtonType;
   ModalContent: ModalContentType;
   ModalFooter: ModalFooterType;
-} = ({ children, isOpen = false, onClick, ...restProps }) => {
+} = ({ children, isOpen, onClick, ...restProps }) => {
   return (
     <>
       {isOpen && (
