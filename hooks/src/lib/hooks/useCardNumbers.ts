@@ -8,11 +8,7 @@ const useCardNumbers = () => {
 
   const [errorMessage, setErrorMessage] = useState(Array(4).fill(null));
 
-  const setWrapper = (
-    value: string,
-    setState: (value: string) => void,
-    index: number
-  ) => {
+  const setWrapper = (value: string, setState: (value: string) => void, index: number) => {
     const number = Number(value);
     if (Number.isNaN(number)) {
       setErrorMessage((prev) => {
@@ -22,15 +18,13 @@ const useCardNumbers = () => {
       });
       return;
     }
-    console.log("wrapper");
     setState(value);
   };
 
   const setFirstWrapper = (value: string) => {
     const MASTER_CARD_START_NUMBER_LIST = [51, 52, 53, 54];
-    const MASTER_REG_PATTERN = new RegExp(
-      `${MASTER_CARD_START_NUMBER_LIST.map(String).join("|")}\d{0,3}$`
-    );
+    // eslint-disable-next-line no-useless-escape
+    const MASTER_REG_PATTERN = new RegExp(`${MASTER_CARD_START_NUMBER_LIST.map(String).join("|")}\d{0,3}$`);
     if (MASTER_REG_PATTERN.test(value) || value.startsWith("4")) {
       setErrorMessage((prev) => {
         return [null, ...prev.slice(1)];
@@ -40,26 +34,16 @@ const useCardNumbers = () => {
         return ["잘못됨", ...prev.slice(1)];
       });
     }
-    console.log("firstwrapper");
     setWrapper(value, setFirst, 0);
   };
 
   return {
     firstState: [first, setFirstWrapper] as const,
-    secondState: [
-      second,
-      (value: string) => setWrapper(value, setSecond, 1),
-    ] as const,
-    thirdState: [
-      third,
-      (value: string) => setWrapper(value, setThird, 2),
-    ] as const,
-    fourthState: [
-      fourth,
-      (value: string) => setWrapper(value, setFourth, 3),
-    ] as const,
+    secondState: [second, (value: string) => setWrapper(value, setSecond, 1)] as const,
+    thirdState: [third, (value: string) => setWrapper(value, setThird, 2)] as const,
+    fourthState: [fourth, (value: string) => setWrapper(value, setFourth, 3)] as const,
     error: {
-      isError: errorMessage.every((message) => !message),
+      isError: errorMessage.some((message) => message),
       errorMessage,
     },
   };

@@ -21,12 +21,12 @@
 
 ### useCardNumbers
 
-- [ ] value, setValue
+- [x] value, setValue
       {
       first : string,
       //...
       }
-- [ ] error, setError
+- [x] error, setError
       {
       isError,
       errorMessag
