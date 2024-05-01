@@ -2,7 +2,7 @@ import { useState } from 'react';
 
 interface ValidationResult {
   isValid: boolean;
-  errorMessage?: string;
+  errorMessage: string;
 }
 
 interface ValidatorProps {
