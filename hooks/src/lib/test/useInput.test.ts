@@ -1,6 +1,6 @@
-import { renderHook, act } from '@testing-library/react';
+import { renderHook } from '@testing-library/react';
 import useInput from '../useInput';
-import { ChangeEvent } from 'react';
+import React, { ChangeEvent } from 'react';
 import { validateLength, validateNumber } from '../../validate/validate';
 import { ErrorStatus } from '../../types/errorStatus';
 
@@ -9,7 +9,7 @@ const cardNumbersValidates = (n: string) => {
   validateLength(n, 4);
 };
 
-describe('useInput', () => {
+describe('useInput 훅 테스트', () => {
   it('초기값이 정확히 설정되어야 한다.', () => {
     const initialValue = 'Initial Value';
     const { result } = renderHook(() => useInput(initialValue, () => {}));
@@ -21,7 +21,7 @@ describe('useInput', () => {
     const userInput = 'Hello';
     const { result } = renderHook(() => useInput('Hello', () => {}));
 
-    act(() => {
+    React.act(() => {
       result.current.onChange({
         target: { value: userInput },
       } as ChangeEvent<HTMLInputElement>);
@@ -36,13 +36,11 @@ describe('useInput', () => {
       useInput(userInput, cardNumbersValidates)
     );
 
-    act(() => {
+    React.act(() => {
       result.current.onChange({
         target: { value: userInput },
       } as ChangeEvent<HTMLInputElement>);
     });
-
-    console.log(result.current.errorStatus);
 
     expect(result.current.errorStatus).toBe(ErrorStatus.IS_NOT_NUMBER);
   });

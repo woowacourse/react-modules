@@ -1,10 +1,10 @@
-import { renderHook, act } from '@testing-library/react';
-import { ChangeEvent } from 'react';
+import { renderHook } from '@testing-library/react';
+import React, { ChangeEvent } from 'react';
 import { useCardNumbers } from '../useCardNumbers';
 import { CardNumbersErrorMessages } from '../../constants/error';
 import { ErrorStatus } from '../../types/errorStatus';
 
-describe('useCardNumbers', () => {
+describe('useCardNumbers 훅 테스트', () => {
   it('초기값이 정확히 설정되어야 한다.', () => {
     const initialValue = {
       cardNumber1: '1234',
@@ -32,7 +32,7 @@ describe('useCardNumbers', () => {
     };
     const { result } = renderHook(() => useCardNumbers(initialValues));
 
-    act(() => {
+    React.act(() => {
       result.current.onChange({
         target: { value: '5678', name: 'cardNumber1' },
       } as ChangeEvent<HTMLInputElement>);
@@ -52,7 +52,7 @@ describe('useCardNumbers', () => {
     const { result } = renderHook(() => useCardNumbers(valuesWithString));
 
     const invalidValues = 'abcd';
-    act(() => {
+    React.act(() => {
       result.current.onChange({
         target: { value: invalidValues, name: 'cardNumber1' },
       } as ChangeEvent<HTMLInputElement>);
@@ -74,8 +74,8 @@ describe('useCardNumbers', () => {
 
     const { result } = renderHook(() => useCardNumbers(valuesWithString));
 
-    const invalidValues = '123';
-    act(() => {
+    const invalidValues = '12345';
+    React.act(() => {
       result.current.onChange({
         target: { value: invalidValues, name: 'cardNumber1' },
       } as ChangeEvent<HTMLInputElement>);

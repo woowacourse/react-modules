@@ -1,21 +1,21 @@
 import { renderHook } from '@testing-library/react';
 import React, { ChangeEvent } from 'react';
 import { ErrorStatus } from '../../types/errorStatus';
-import useCardHolder from '../useCardHolder';
-import { CardHolderErrorMessages } from '../../constants/error';
+import usePassword from '../usePassword';
+import { PasswordErrorMessages } from '../../constants/error';
 
-describe('useCardHolder 훅 테스트', () => {
+describe('usePassword 훅 테스트', () => {
   it('초기값이 정확히 설정되어야 한다.', () => {
-    const initialValue = 'HAILEY RIAN';
-    const { result } = renderHook(() => useCardHolder(initialValue));
+    const initialValue = '12';
+    const { result } = renderHook(() => usePassword(initialValue));
 
     expect(result.current.value).toBe(initialValue);
   });
 
   it('입력값이 정확히 업데이트 되어야 한다.', () => {
     const initialValue = '';
-    const { result } = renderHook(() => useCardHolder(initialValue));
-    const invalidValue = 'HAILEY RIAN';
+    const { result } = renderHook(() => usePassword(initialValue));
+    const invalidValue = '12';
     React.act(() => {
       result.current.onChange({
         target: { value: invalidValue },
@@ -25,26 +25,25 @@ describe('useCardHolder 훅 테스트', () => {
     expect(result.current.value).toBe(invalidValue);
   });
 
-  it('영어 대문자가 아니면 에러를 낸다.', () => {
+  it('숫자가 아닌 값이 들어오면 에러를 낸다.', () => {
     const initialValue = '';
-    const { result } = renderHook(() => useCardHolder(initialValue));
-    const invalidValue = 'hailey rian';
+    const { result } = renderHook(() => usePassword(initialValue));
+    const invalidValue = 'ab';
 
     React.act(() => {
       result.current.onChange({
         target: { value: invalidValue },
       } as ChangeEvent<HTMLInputElement>);
     });
-
     const expectedErrorMessage =
-      CardHolderErrorMessages[ErrorStatus.ONLY_UPPERCASE];
-    expect(result.current.errorStatus).toBe(expectedErrorMessage);
+      PasswordErrorMessages[ErrorStatus.IS_NOT_NUMBER];
+    expect(result.current.errorMessages).toBe(expectedErrorMessage);
   });
 
-  it('빈칸이 두 개이면 에러를 낸다.', () => {
+  it('길이가 2글자가 아니면 에러를 낸다.', () => {
     const initialValue = '';
-    const { result } = renderHook(() => useCardHolder(initialValue));
-    const invalidValue = 'HAILEY  RIAN';
+    const { result } = renderHook(() => usePassword(initialValue));
+    const invalidValue = '123';
 
     React.act(() => {
       result.current.onChange({
@@ -53,8 +52,7 @@ describe('useCardHolder 훅 테스트', () => {
     });
 
     const expectedErrorMessage =
-      CardHolderErrorMessages[ErrorStatus.IS_DOUBLE_BLANK];
-
-    expect(result.current.errorStatus).toBe(expectedErrorMessage);
+      PasswordErrorMessages[ErrorStatus.INVALID_LENGTH];
+    expect(result.current.errorMessages).toBe(expectedErrorMessage);
   });
 });
