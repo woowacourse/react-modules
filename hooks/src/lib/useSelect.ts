@@ -1,26 +1,26 @@
 import { useState } from 'react';
 
-interface ValidationResult {
+export interface ValidationResult {
   isValid: boolean;
-  errorMessage?: string;
+  errorMessage: string;
 }
 
-interface ValidatorProps<T> {
-  onChange: (value: T) => ValidationResult;
+interface ValidatorProps {
+  onChange: (value: string, options: string[]) => ValidationResult;
 }
 
-const useSelect = <T>(initialValue: T, validator: ValidatorProps<T>) => {
-  const [value, setValue] = useState<T>(initialValue);
+const useSelect = (initialValue: string, validator: ValidatorProps, options: string[]) => {
+  const [value, setValue] = useState(initialValue);
   const [errorInfo, setErrorInfo] = useState<ValidationResult>({
     isValid: true,
     errorMessage: '',
   });
 
   const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    const validationResult = validator.onChange(event.target.value as T);
+    const validationResult = validator.onChange(event.target.value, options);
     setErrorInfo(validationResult);
     if (!validationResult.isValid) return;
-    setValue(event.target.value as T);
+    setValue(event.target.value);
   };
 
   return {
@@ -28,6 +28,7 @@ const useSelect = <T>(initialValue: T, validator: ValidatorProps<T>) => {
     setValue,
     handleChange,
     errorInfo,
+    setErrorInfo,
   };
 };
 
