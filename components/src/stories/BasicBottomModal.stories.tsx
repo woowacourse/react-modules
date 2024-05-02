@@ -1,7 +1,7 @@
 import '../lib/styles/reset.css';
 
 import type { Meta, StoryObj } from '@storybook/react';
-import { BasicBottomModal } from '../lib';
+import BasicBottomModal from '../lib/Modal/BasicBottomModal';
 
 const meta: Meta<typeof BasicBottomModal> = {
   title: 'BasicBottomModal',
