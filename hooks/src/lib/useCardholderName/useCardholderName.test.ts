@@ -1,4 +1,5 @@
-import { renderHook, act } from "@testing-library/react";
+import React from "react";
+import { renderHook } from "@testing-library/react";
 import useCardholderName from "./useCardholderName";
 
 describe("useCardholderName에 대한 테스트 케이스", () => {
@@ -7,7 +8,7 @@ describe("useCardholderName에 대한 테스트 케이스", () => {
       const { result } = renderHook(() => useCardholderName());
 
       const WRONG_VALUE = "한글";
-      act(() => result.current.setCardholderName(WRONG_VALUE));
+      React.act(() => result.current.setCardholderName(WRONG_VALUE));
 
       expect(result.current.errorStatus.isValid).toBe(false);
       expect(result.current.errorStatus.errorMessage).not.toBeNull();
@@ -17,7 +18,7 @@ describe("useCardholderName에 대한 테스트 케이스", () => {
       const { result } = renderHook(() => useCardholderName());
 
       const WRONG_VALUE = " ABC ";
-      act(() => result.current.setCardholderName(WRONG_VALUE));
+      React.act(() => result.current.setCardholderName(WRONG_VALUE));
 
       expect(result.current.errorStatus.isValid).toBe(false);
       expect(result.current.errorStatus.errorMessage).not.toBeNull();
@@ -27,7 +28,7 @@ describe("useCardholderName에 대한 테스트 케이스", () => {
       const { result } = renderHook(() => useCardholderName());
 
       const WRONG_VALUE = "A B  C";
-      act(() => result.current.setCardholderName(WRONG_VALUE));
+      React.act(() => result.current.setCardholderName(WRONG_VALUE));
 
       expect(result.current.errorStatus.isValid).toBe(false);
       expect(result.current.errorStatus.errorMessage).not.toBeNull();
@@ -39,7 +40,7 @@ describe("useCardholderName에 대한 테스트 케이스", () => {
       const { result } = renderHook(() => useCardholderName());
 
       const CORRECT_VALUE = "ABC";
-      act(() => result.current.setCardholderName(CORRECT_VALUE));
+      React.act(() => result.current.setCardholderName(CORRECT_VALUE));
 
       expect(result.current.errorStatus.isValid).toBe(true);
       expect(result.current.errorStatus.errorMessage).toBeNull();
@@ -49,7 +50,7 @@ describe("useCardholderName에 대한 테스트 케이스", () => {
       const { result } = renderHook(() => useCardholderName());
 
       const CORRECT_VALUE = "ABC";
-      act(() => result.current.setCardholderName(CORRECT_VALUE));
+      React.act(() => result.current.setCardholderName(CORRECT_VALUE));
 
       expect(result.current.errorStatus.isValid).toBe(true);
       expect(result.current.errorStatus.errorMessage).toBeNull();
@@ -59,7 +60,7 @@ describe("useCardholderName에 대한 테스트 케이스", () => {
       const CORRECT_VALUE = "A B C";
       const { result } = renderHook(() => useCardholderName());
 
-      act(() => result.current.setCardholderName(CORRECT_VALUE));
+      React.act(() => result.current.setCardholderName(CORRECT_VALUE));
 
       expect(result.current.errorStatus.isValid).toBe(true);
       expect(result.current.errorStatus.errorMessage).toBeNull();
