@@ -4,7 +4,10 @@ import { unifySpaces, filterEnglishAndSpaces } from '../../utils/stringHelpers';
 export const OWNER_NAME_ERROR_MESSAGES = {
   EXCESSIVE_WHITE_SPACE: '공백을 연속으로 입력할 수 없습니다.',
   NOT_ENG: '영어만 입력 가능합니다.',
+  NAME_LENGTH: '이름은 최대 21자까지 가능합니다.',
 };
+
+const MAX_NAME_LENGTH = 21;
 
 const useCardOwnerName = () => {
   const [ownerName, setOwnerName] = useState('');
@@ -26,16 +29,20 @@ const useCardOwnerName = () => {
 
     if (engName.length < name.length) return OWNER_NAME_ERROR_MESSAGES.NOT_ENG;
 
+    if (unifiedSpaceName.length > MAX_NAME_LENGTH) return OWNER_NAME_ERROR_MESSAGES.NAME_LENGTH;
+
     return '';
   };
 
   const handleOwnerNameChange = (name: string) => {
     const validOwnerName = makeValidOwnerName(name);
+
     const errorMessage = getErrorMessage(name);
-
     setOwnerNameErrorMessage(errorMessage);
-    setOwnerName(validOwnerName);
 
+    if (validOwnerName.length > MAX_NAME_LENGTH) return;
+
+    setOwnerName(validOwnerName);
     setIsValidOwnerName(validOwnerName.length >= 1);
   };
 
