@@ -53,8 +53,8 @@
 
 ### `useExpiryDate` 커스텀 훅
 
-- [ ] useExpiryDate
-- [ ] useExpiryDateValidation
+- [x] useExpiryDate
+- [x] useExpiryDateValidation
 
 ### `useCardHolder` 커스텀 훅
 
