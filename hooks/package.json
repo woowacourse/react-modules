@@ -1,6 +1,6 @@
 {
   "name": "rian-card-validation-hooks",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "npm modules",
   "type": "module",
   "types": "dist/lib/index.d.ts",

@@ -6,6 +6,7 @@ function App() {
     values: cardNumbers,
     onChange: onChangeCardNumbers,
     errorMessages,
+    onBlurValidateLength,
   } = useCardNumbers({
     cardNumber1: "",
     cardNumber2: "",
@@ -22,20 +23,23 @@ function App() {
         onChange={onChangeCardNumbers}
         name="cardNumber1"
         value={cardNumbers["cardNumber1"]}
-      />
-      {/*cardNumber 2*/}
+        onBlur={onBlurValidateLength}
+      />{" "}
       <div>{errorMessages["cardNumber1"]}</div>
+      {/*cardNumber 2*/}
       <input
         onChange={onChangeCardNumbers}
         name="cardNumber2"
         value={cardNumbers["cardNumber2"]}
+        onBlur={onBlurValidateLength}
       />
-      {/*cardNumber 3*/}
       <div>{errorMessages["cardNumber2"]}</div>
+      {/*cardNumber 3*/}
       <input
         value={cardNumbers["cardNumber3"]}
         onChange={onChangeCardNumbers}
         name="cardNumber3"
+        onBlur={onBlurValidateLength}
       />
       <div>{errorMessages["cardNumber3"]}</div>
       {/*cardNumber 4*/}
@@ -43,6 +47,7 @@ function App() {
         value={cardNumbers["cardNumber4"]}
         onChange={onChangeCardNumbers}
         name="cardNumber4"
+        onBlur={onBlurValidateLength}
       />
       <div>{errorMessages["cardNumber4"]}</div>
     </>

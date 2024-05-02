@@ -11,3 +11,10 @@ export const YEAR_RANGE = {
   MIN: 0,
   MAX: 99,
 };
+
+export const VALID_LENGTH = {
+  CARD_NUMBERS: 4,
+  CVC: 3,
+  EXPIRY_DATE: 2,
+  PASSWORD: 2,
+};
