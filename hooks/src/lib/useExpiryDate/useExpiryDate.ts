@@ -26,6 +26,7 @@ const useExpiryDate = () => {
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
     const { name, value } = event.target;
+
     const canUpdate = validateExpiryDate(name, value, expiryDate);
 
     if (!canUpdate) return;
