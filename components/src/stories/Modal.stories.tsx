@@ -36,3 +36,23 @@ export const Bottom: Story = {
     children: <></>,
   },
 };
+
+export const IncludeCloseButton: Story = {
+  args: {
+    isCloseButton: true,
+    onClose: fn(),
+    position: 'center',
+    title: '제목',
+    children: <></>,
+  },
+};
+
+export const ExcludeCloseButton: Story = {
+  args: {
+    isCloseButton: false,
+    onClose: fn(),
+    position: 'center',
+    title: '제목',
+    children: <></>,
+  },
+};
