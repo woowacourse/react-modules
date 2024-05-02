@@ -1,7 +1,7 @@
 import { renderHook, act } from "@testing-library/react";
-import useCardholderName from "../useCardholderName";
+import useCardholderName from "./useCardholderName";
 
-describe("useCardholderName", () => {
+describe("useCardholderName에 대한 테스트 케이스", () => {
   describe("유효성 검증에 실패하는 경우", () => {
     it("영어가 아닌 값을 입력한 경우 유효하지 않은 값으로 판단한다.", () => {
       const { result } = renderHook(() => useCardholderName());
