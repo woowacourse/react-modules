@@ -3,7 +3,7 @@
 ## How to use
 
 ```
-npm i //TODO: 프로젝트 이름 적기
+npm i easy-payments-ui;
 ```
 
 ## Components
