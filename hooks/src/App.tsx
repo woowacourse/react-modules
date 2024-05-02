@@ -1,13 +1,13 @@
-import React from "react";
+import "./App.css";
 
 import {
-  useCardCVC,
   useCardBrand,
+  useCardCVC,
   useCardExpiryDate,
   useCardNumbers,
-} from "@seongjinme/card-validation";
+} from "@cys4585/card-validation";
 
-import "./App.css";
+import React from "react";
 
 const cardBrands = ["신한카드", "현대카드", "카카오뱅크"];
 
