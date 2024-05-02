@@ -1,9 +1,9 @@
 {
-  "name": "hooks",
-  "version": "0.0.1",
-  "description": "npm modules",
+  "name": "@jaymyong66/payments-hooks",
+  "version": "0.0.0",
+  "description": "A library of Custom Hooks for React to enroll payments card information.",
   "type": "module",
-  "types": "dist/index.d.ts",
+  "types": "dist/lib/index.d.ts",
   "main": "dist/index.js",
   "module": "dist/index.js",
   "files": [
