@@ -1,11 +1,11 @@
-# Modal Module
+# badahertz52-react-modules-components
 
 커스텀 가능한 모듈을 제공하는 라이브러리 입니다.
 
 ## 설치
 
 ```
-npm i
+npm i badahertz52-react-modules-components
 ```
 
 ## Modal 구조
