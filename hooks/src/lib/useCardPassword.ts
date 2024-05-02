@@ -30,6 +30,7 @@ const useCardPassword = (initValue: string, maxLength: number = 2) => {
   const {
     value,
     errorMessage,
+    isCompleted,
     onChangeHandler,
     onFocusHandler,
     onBlurHandler,
@@ -42,6 +43,7 @@ const useCardPassword = (initValue: string, maxLength: number = 2) => {
   return {
     value,
     errorMessage,
+    isCompleted,
     onChangeHandler,
     onBlurHandler,
     onFocusHandler,

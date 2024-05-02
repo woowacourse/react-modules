@@ -30,6 +30,7 @@ const useCardCVC = (initValue: string, maxLength: number = 3) => {
   const {
     value,
     errorMessage,
+    isCompleted,
     onChangeHandler,
     onFocusHandler,
     onBlurHandler,
@@ -42,6 +43,7 @@ const useCardCVC = (initValue: string, maxLength: number = 3) => {
   return {
     value,
     errorMessage,
+    isCompleted,
     onChangeHandler,
     onBlurHandler,
     onFocusHandler,

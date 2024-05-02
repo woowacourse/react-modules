@@ -24,6 +24,7 @@ const useCardHolderName = (initValue: string, maxLength: number = 50) => {
   const {
     value,
     errorMessage,
+    isCompleted,
     onChangeHandler,
     onFocusHandler,
     onBlurHandler,
@@ -36,6 +37,7 @@ const useCardHolderName = (initValue: string, maxLength: number = 50) => {
   return {
     value,
     errorMessage,
+    isCompleted,
     onChangeHandler,
     onBlurHandler,
     onFocusHandler,
