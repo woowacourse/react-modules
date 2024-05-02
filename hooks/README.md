@@ -1,18 +1,18 @@
-# tenbur-card-validation-hooks
+# brgndy-card-validation-hooks
 
 텐텐과 버건디가 만든 카드 정보 입력 유효성 검사 커스텀 훅
 
 ## - 설치
 
 ```
-npm install tenbur-card-validation-hooks
+npm install brgndy-card-validate-hooks
 ```
 
 ## - useCardNumbersValidation 사용법
 
 ```javascript
 import { useState } from "react";
-import { useCardNumbersValidation } from "tenbur-card-validation-hooks";
+import { useCardNumbersValidation } from "brgndy-card-validate-hooks";
 
 function App() {
   const [cardNumbers, setCardNumbers] = useState(["", "", "", ""]);
@@ -65,7 +65,7 @@ export default App;
 
 ```javascript
 import { useState } from "react";
-import { useExpiryDateValidation } from "tenbur-card-validation-hooks";
+import { useExpiryDateValidation } from "brgndy-card-validate-hooks";
 
 function App() {
   const [expiryDate, setExpiryDate] = useState({ month: "", year: "" });
@@ -120,7 +120,7 @@ export default App;
 
 ```javascript
 import { useState } from "react";
-import { useCardHolderValidation } from "tenbur-card-validation-hooks";
+import { useCardHolderValidation } from "brgndy-card-validate-hooks";
 
 function App() {
   const [cardHolder, setCardHolder] = useState("");
@@ -164,7 +164,7 @@ export default App;
 
 ```javascript
 import { useState } from "react";
-import { useCVCValidation } from "tenbur-card-validation-hooks";
+import { useCVCValidation } from "brgndy-card-validate-hooks";
 
 function App() {
   const [cvc, setCVC] = useState("");
@@ -210,7 +210,7 @@ export default App;
 
 ```javascript
 import { useState } from "react";
-import { usePasswordValidation } from "tenbur-card-validation-hooks";
+import { usePasswordValidation } from "brgndy-card-validate-hooks";
 
 function App() {
   const [password, setPassword] = useState("");
