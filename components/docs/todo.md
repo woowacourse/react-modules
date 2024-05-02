@@ -22,3 +22,5 @@
 - [ ] Modal.md
 - [ ] ModalHeader.md
 - [ ] Title.md
+
+- [ ] 스크린샷 찍어서 이미지 업로드
