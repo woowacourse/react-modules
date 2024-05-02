@@ -1,6 +1,6 @@
 {
   "name": "cookie-nice-modal",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "cookie's awesome nice modal wow~~~~",
   "type": "module",
   "types": "dist/index.d.ts",
@@ -18,7 +18,7 @@
     "build-storybook": "storybook build"
   },
   "dependencies": {
-    "cookie-nice-modal": "^0.0.1",
+    "cookie-nice-modal": "^0.0.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },

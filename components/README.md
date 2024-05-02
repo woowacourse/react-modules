@@ -1,10 +1,10 @@
-# maru-nice-modal
+# cookie-nice-modal
 모달을 렌더링하는 컴포넌트입니다. 다양한 옵션과 스타일을 받아 사용자에게 제공합니다.
 
 ## 설치 방법
 
 ```bash
-npm i maru-nice-modal
+npm i cookie-nice-modal
 ```
 
 ## 사용 예시
