@@ -5,12 +5,16 @@ import { makeOnBlur, makeOnChange } from "./domains/makeCallback";
 const MAX_LENGTH = 30;
 const validators: Validator[] = [
   {
-    validate: (value) => /^\d*$/.test(value),
-    errorMessage: "숫자만 입력 가능합니다.",
+    validate: (value) => /^[\w\s]*$/.test(value),
+    errorMessage: "문자와 공백만 입력 가능합니다.",
   },
   {
-    validate: (value) => value.length < 30,
-    errorMessage: `필드의 길이는 ${MAX_LENGTH}이하여야합니다.`,
+    validate: (value) => /^(?!.*\s\s)/.test(value),
+    errorMessage: "공백은 한 번만 입력 가능합니다.",
+  },
+  {
+    validate: (value) => value.length <= 30,
+    errorMessage: `이름의 길이는 ${MAX_LENGTH}이하여야합니다.`,
   },
 ];
 const useOwnerName = () => {
