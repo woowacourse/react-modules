@@ -2,10 +2,9 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import './App.css';
 
-// import Modal from './lib/Modal/Modal';
 import { Modal, ModalButtonType } from '@seongjinme/react-modal';
 
-const buttons: ModalButtonType[] = [
+const BUTTONS: ModalButtonType[] = [
   {
     text: '동의하고 저장하기',
     style: 'primary',
@@ -31,7 +30,7 @@ function App() {
         title="모달 컴포넌트 테스트"
         position="bottom"
         hasCloseButton={true}
-        footerButtons={buttons}
+        footerButtons={BUTTONS}
         onClose={() => setIsOpen(false)}
       >
         <Form>
