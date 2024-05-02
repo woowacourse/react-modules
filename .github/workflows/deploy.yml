@@ -41,10 +41,9 @@ jobs:
         run: |
           cd ./components
           npm run build-storybook
-          mv ./storybook-static ./dist/storybook
 
       - name: Deploy to gh-pages branch
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.TOKEN }}
-          publish_dir: ./dist
+          publish_dir: ./components/storybook-static
