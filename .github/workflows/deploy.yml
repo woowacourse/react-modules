@@ -25,9 +25,6 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Change directory to components
-        run: cd ./components
-
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
@@ -36,15 +33,18 @@ jobs:
           cache-dependency-path: ./components/package-lock.json
 
       - name: Install dependencies
-        run: npm install
+        run: |
+          cd ./components
+          npm install
 
       - name: Build storybook
         run: |
+          cd ./components
           npm run build-storybook
-          mv ./storybook-static ./dist/storybook
+          mv ./components/storybook-static ./components/dist/storybook
 
       - name: Deploy to gh-pages branch
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.TOKEN }}
-          publish_dir: ./dist
+          publish_dir: ./components/dist
