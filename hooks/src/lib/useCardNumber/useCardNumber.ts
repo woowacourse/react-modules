@@ -1,5 +1,5 @@
 import { useState } from "react";
-import useValidation from "../useValidation/useValidation";
+import useValidation from "../useValidation";
 
 const cardNumberPartValidators = [
   (value: string) => {
