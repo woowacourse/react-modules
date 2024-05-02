@@ -1,6 +1,6 @@
 import React from "react";
 import { renderHook } from "@testing-library/react";
-import useCardNumber from "./useCardNumber";
+import useCardNumber from ".";
 
 describe("useCardNumber에 대한 테스트 케이스", () => {
   const CARD_NUMBER_INDEX = 0;
@@ -19,6 +19,30 @@ describe("useCardNumber에 대한 테스트 케이스", () => {
 
     test.each(["1", "12", "123", "12345"])(
       "4자리가 아닌 경우(%s) 유효하지 않은 값으로 판단한다.",
+      (value) => {
+        const { result } = renderHook(() => useCardNumber());
+
+        React.act(() => result.current.setCardNumber(value, CARD_NUMBER_INDEX));
+
+        expect(result.current.errorStatus[CARD_NUMBER_INDEX].isValid).toBe(false);
+        expect(result.current.errorStatus[CARD_NUMBER_INDEX].errorMessage).not.toBeNull();
+      }
+    );
+
+    test.each(["-000", "-0000", "-1", "-9999"])(
+      "음수인 경우(%s) 유효하지 않은 값으로 판단한다.",
+      (value) => {
+        const { result } = renderHook(() => useCardNumber());
+
+        React.act(() => result.current.setCardNumber(value, CARD_NUMBER_INDEX));
+
+        expect(result.current.errorStatus[CARD_NUMBER_INDEX].isValid).toBe(false);
+        expect(result.current.errorStatus[CARD_NUMBER_INDEX].errorMessage).not.toBeNull();
+      }
+    );
+
+    test.each(["0.111", "0.11", "0.1", ".111"])(
+      "소수인 경우(%s) 유효하지 않은 값으로 판단한다.",
       (value) => {
         const { result } = renderHook(() => useCardNumber());
 

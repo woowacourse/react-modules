@@ -1,10 +1,10 @@
 import React from "react";
 import { renderHook } from "@testing-library/react";
-import useCardholderName from "./useCardholderName";
+import useCardholderName from ".";
 
 describe("useCardholderName에 대한 테스트 케이스", () => {
   describe("유효성 검증에 실패하는 경우", () => {
-    it("영어가 아닌 값을 입력한 경우 유효하지 않은 값으로 판단한다.", () => {
+    it("한글을 입력한 경우 유효하지 않은 값으로 판단한다.", () => {
       const { result } = renderHook(() => useCardholderName());
 
       const WRONG_VALUE = "한글";
@@ -14,15 +14,37 @@ describe("useCardholderName에 대한 테스트 케이스", () => {
       expect(result.current.errorStatus.errorMessage).not.toBeNull();
     });
 
-    it("양 끝에 공백이 포함된 경우 유효하지 않은 값으로 판단한다.", () => {
+    it("숫자를 입력한 경우 유효하지 않은 값으로 판단한다.", () => {
       const { result } = renderHook(() => useCardholderName());
 
-      const WRONG_VALUE = " ABC ";
+      const WRONG_VALUE = "122";
       React.act(() => result.current.setCardholderName(WRONG_VALUE));
 
       expect(result.current.errorStatus.isValid).toBe(false);
       expect(result.current.errorStatus.errorMessage).not.toBeNull();
     });
+
+    it("대소문자를 섞어서 입력한 경우 유효하지 않은 값으로 판단한다.", () => {
+      const { result } = renderHook(() => useCardholderName());
+
+      const WRONG_VALUE = "aBC";
+      React.act(() => result.current.setCardholderName(WRONG_VALUE));
+
+      expect(result.current.errorStatus.isValid).toBe(false);
+      expect(result.current.errorStatus.errorMessage).not.toBeNull();
+    });
+
+    it.each([" ABC ", "ABC ", " ABC"])(
+      "양 끝에 공백이 포함된 경우(%s) 유효하지 않은 값으로 판단한다.",
+      (value) => {
+        const { result } = renderHook(() => useCardholderName());
+
+        React.act(() => result.current.setCardholderName(value));
+
+        expect(result.current.errorStatus.isValid).toBe(false);
+        expect(result.current.errorStatus.errorMessage).not.toBeNull();
+      }
+    );
 
     it("사이 공백이 두 개 이상 포함된 경우 유효하지 않은 값으로 판단한다.", () => {
       const { result } = renderHook(() => useCardholderName());

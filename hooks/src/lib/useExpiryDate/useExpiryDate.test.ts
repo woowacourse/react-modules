@@ -1,6 +1,6 @@
 import React from "react";
 import { renderHook } from "@testing-library/react";
-import useExpiryDate from "./useExpiryDate";
+import useExpiryDate from ".";
 
 describe("useExpiryDate에 대한 테스트 케이스", () => {
   describe("expiryMonth 유효성 검증에 실패하는 경우", () => {
