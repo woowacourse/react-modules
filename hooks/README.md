@@ -5,7 +5,7 @@
 ## 설치
 
 ```bash
-npm install your-custom-hooks-package-name
+npm install hash-payment-hooks
 ```
 
 ## 훅 목록 및 설명
@@ -28,7 +28,7 @@ npm install your-custom-hooks-package-name
 #### 사용법
 
 ```jsx
-import { useCardHolderValidation } from "your-custom-hooks-package-name";
+import { useCardHolderValidation } from "hash-payment-hooks";
 
 function Component() {
   const { cardHolderValidation, cardHolderValidateHandler } =
@@ -62,7 +62,7 @@ function Component() {
 #### 사용법
 
 ```jsx
-import { useCardNumberValidation } from "your-custom-hooks-package-name";
+import { useCardNumberValidation } from "hash-payment-hooks";
 
 function Component() {
   const { cardNumberValidation, cardNumberValidateHandler } =
@@ -103,7 +103,7 @@ function Component() {
 #### 사용법
 
 ```jsx
-import { usePasswordValidation } from "your-custom-hooks-package-name";
+import { usePasswordValidation } from "hash-payment-hooks";
 
 function Component() {
   const { passwordValidation, passwordValidateHandler } =
@@ -137,7 +137,7 @@ function Component() {
 #### 사용법
 
 ```jsx
-import { useCVCValidation } from "your-custom-hooks-package-name";
+import { useCVCValidation } from "hash-payment-hooks";
 
 function Component() {
   const { CVCValidation, CVCValidateHandler } = useCVCValidation();
@@ -170,7 +170,7 @@ function Component() {
 #### 사용법
 
 ```jsx
-import { useExpiryDateValidation } from "your-custom-hooks-package-name";
+import { useExpiryDateValidation } from "hash-payment-hooks";
 
 function Component() {
   const { expiryDateValidation, expiryDateValidateHandler } =
@@ -215,7 +215,7 @@ cardTypeHandler
 #### 사용법
 
 ```jsx
-import { useCardType } from "your-custom-hooks-package-name";
+import { useCardType } from "hash-payment-hooks";
 
 function Component() {
   const { cardType, cardTypeHandler } = useCardType();
