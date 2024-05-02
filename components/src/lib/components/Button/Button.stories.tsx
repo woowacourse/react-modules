@@ -4,8 +4,8 @@ import Button from './Button';
 const meta = {
   title: 'Components/Button',
   component: Button,
+  tags: ['autodocs'],
   argTypes: {
-    onClick: { action: 'clicked' },
     mode: {
       control: { type: 'select' },
       options: ['primary', 'secondary'],
@@ -17,6 +17,7 @@ const meta = {
     disabled: {
       control: { type: 'boolean' },
     },
+    onClick: { action: 'clicked' },
   },
 } satisfies Meta<typeof Button>;
 

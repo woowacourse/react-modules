@@ -17,7 +17,7 @@ const meta = {
   ],
   argTypes: {
     position: {
-      options: ['center', 'bottom'],
+      options: ['center', 'bottom', 'top'],
       control: { type: 'select' },
     },
     size: {
@@ -27,6 +27,12 @@ const meta = {
     backdropType: {
       options: ['transparent', 'blur', 'opaque'],
       control: { type: 'select' },
+    },
+    shadow: {
+      control: { type: 'boolean' },
+    },
+    animation: {
+      control: { type: 'boolean' },
     },
   },
 } satisfies Meta<typeof Modal>;
@@ -55,6 +61,15 @@ export const Center: Story = {
 export const Bottom: Story = {
   args: {
     position: 'bottom',
+    isOpen: true,
+    close: () => {},
+    children: <p>모달 테스트</p>,
+  },
+};
+
+export const Top: Story = {
+  args: {
+    position: 'top',
     isOpen: true,
     close: () => {},
     children: <p>모달 테스트</p>,

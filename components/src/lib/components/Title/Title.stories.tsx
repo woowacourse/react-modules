@@ -4,6 +4,7 @@ import Title from './Title';
 const meta = {
   title: 'components/Title',
   component: Title,
+  tags: ['autodocs'],
   parameters: {
     controls: { exclude: 'children' },
   },

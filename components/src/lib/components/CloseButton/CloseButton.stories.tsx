@@ -4,6 +4,10 @@ import CloseButton from './CloseButton';
 const meta = {
   title: 'Components/CloseButton',
   component: CloseButton,
+  tags: ['autodocs'],
+  parameters: {
+    controls: { exclude: ['close'] },
+  },
   argTypes: {
     close: { action: 'closed' },
   },
