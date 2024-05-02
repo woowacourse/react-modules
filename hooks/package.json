@@ -1,7 +1,7 @@
 {
-  "name": "hooks",
-  "version": "0.0.1",
-  "description": "npm modules",
+  "name": "tenbur-card-validation-hooks",
+  "version": "0.0.3",
+  "description": "카드 정보 입력 유효성 검사 커스텀 훅 모음집",
   "type": "module",
   "types": "dist/index.d.ts",
   "main": "dist/index.js",
@@ -18,7 +18,8 @@
   },
   "dependencies": {
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "tenbur-card-validation-hooks": "^0.0.3"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^6.4.2",
