@@ -1,20 +1,16 @@
-type Brand = 'visa' | 'master' | 'etc';
+import { CARD_BRAND } from './contexts';
 
-const CARD_BRAND = {
-  visa: {
-    startNumber: 4,
-  },
-  master: {
-    startNumber: 51,
-    endNumber: 55,
-  },
-};
+type Brand = keyof typeof CARD_BRAND | 'etc';
 
-export default function useCardType({ firstCardNumbers }: { firstCardNumbers: string }): Brand {
-  const visaPrefix = Number(firstCardNumbers.slice(0, 1));
-  const masterPrefix = Number(firstCardNumbers.slice(0, 2));
+interface UseCardTypeProps {
+  firstCardNumbers: string;
+}
 
+export default function useCardType({ firstCardNumbers }: UseCardTypeProps): Brand {
   const { visa, master } = CARD_BRAND;
+
+  const visaPrefix = Number(firstCardNumbers.slice(0, visa.prefixNumberCount));
+  const masterPrefix = Number(firstCardNumbers.slice(0, master.prefixNumberCount));
 
   if (visaPrefix === visa.startNumber) return 'visa';
 

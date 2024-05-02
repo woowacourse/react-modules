@@ -1,30 +1,25 @@
 import { useState } from 'react';
-import useValidation from './useValidation';
+import { validateFilledValue } from './utils/validators';
+import { ErrorMessage, UseCardModuleProps } from './types';
+import useCardValidation from './useCardValidation';
 
-interface ValidationErrors {
+interface CardIssuerValidationErrors {
   empty: string;
 }
 
-interface UserCardIssuerProps {
-  validationErrors: ValidationErrors;
-}
-
-export default function useCardIssuer(props: UserCardIssuerProps) {
+export default function useCardIssuer(props: UseCardModuleProps<CardIssuerValidationErrors>) {
   const [cardIssuer, setCardIssuer] = useState('');
-  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [errorMessage, setErrorMessage] = useState<ErrorMessage>(null);
 
-  const validateFilledCardIssuer = (value: string) => {
-    return !!value;
-  };
+  const totalValidators = [{ test: validateFilledValue, errorMessage: props.validationErrors.empty }];
 
-  const blurEventValidators = [{ test: validateFilledCardIssuer, errorMessage: props.validationErrors.empty }];
+  const { handleUpdateValue } = useCardValidation<string>({
+    blurEventValidators: undefined,
+    changeEventValidators: undefined,
+    totalValidators,
+    setValue: setCardIssuer,
+    setErrorMessage,
+  });
 
-  const updateValue = (option: string) => {
-    const result = useValidation<string>({ validators: blurEventValidators, value: option });
-
-    setCardIssuer(option);
-    setErrorMessage(result.isValid ? null : result.errorMessage);
-  };
-
-  return { cardIssuer, isValid: !!errorMessage, errorMessage, updateValue };
+  return { cardIssuer, isValid: !!errorMessage, errorMessage, updateValue: handleUpdateValue };
 }

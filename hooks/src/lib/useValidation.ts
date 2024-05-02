@@ -1,3 +1,5 @@
+import { UseValidationProps, ValidationResult } from './types';
+
 export default function useValidation<V>({ validators, value }: UseValidationProps<V>): ValidationResult {
   const firstFailedTest = validators.find(({ test }) => !test(value));
 

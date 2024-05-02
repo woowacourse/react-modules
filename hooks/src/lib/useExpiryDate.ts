@@ -1,7 +1,8 @@
 import { ChangeEvent, FocusEvent, useState } from 'react';
 import useValidation from './useValidation';
-
-const CENTURY_PREFIX = 2000;
+import { CENTURY_PREFIX, MONTH } from './contexts';
+import { validateNumber, validateFilledValue } from './utils/validators';
+import { ErrorMessage, UseCardModuleProps, ValidationParam } from './types';
 
 interface ValidationErrors {
   empty: string;
@@ -11,24 +12,25 @@ interface ValidationErrors {
   date: string;
 }
 
-interface UserCardHolderProps {
-  validationErrors: ValidationErrors;
-}
 type ExpiryDateKey = 'month' | 'year';
 
-export default function useExpiryDate({ validationErrors }: UserCardHolderProps) {
-  interface ExpiryDate {
-    month: string;
-    year: string;
-  }
-  interface ExpiryDateError {
-    month: boolean;
-    year: boolean;
-  }
+interface ExpiryDate {
+  month: string;
+  year: string;
+}
+interface ExpiryDateError {
+  month: boolean;
+  year: boolean;
+}
 
+interface ExpiryDateValidationParam extends ValidationParam<ExpiryDate> {
+  key: ExpiryDateKey;
+}
+
+export default function useExpiryDate({ validationErrors }: UseCardModuleProps<ValidationErrors>) {
   const [expiryDate, setExpiryDate] = useState<ExpiryDate>({ month: '', year: '' });
   const [error, setError] = useState<ExpiryDateError>({ month: false, year: false });
-  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [errorMessage, setErrorMessage] = useState<ErrorMessage>(null);
 
   const today = new Date();
 
@@ -37,13 +39,12 @@ export default function useExpiryDate({ validationErrors }: UserCardHolderProps)
     month: today.getMonth() + 1,
   };
 
-  const validateNumber = (value: ExpiryDate, key: ExpiryDateKey) => {
-    return Number.isInteger(Number(value[key]));
-  };
+  const validateExpiryDateFilled = (value: ExpiryDate, key: ExpiryDateKey) => validateFilledValue(value[key]);
 
   const validateMonth = (value: ExpiryDate) => {
     const month = Number(value.month);
-    return month >= 1 && month <= 12;
+    const { startNumber, endNumber } = MONTH;
+    return month >= startNumber && month <= endNumber;
   };
 
   const validateYear = (value: ExpiryDate) => {
@@ -60,28 +61,18 @@ export default function useExpiryDate({ validationErrors }: UserCardHolderProps)
     return isOverYear || isOverMonth;
   };
 
-  const validateFilledValue = (value: ExpiryDate, key: ExpiryDateKey) => !!value[key];
-
   const changeEventValidators = (key: ExpiryDateKey) => [
-    { test: (value: ExpiryDate) => validateNumber(value, key), errorMessage: validationErrors.number },
+    { test: (value: ExpiryDate) => validateNumber(value[key]), errorMessage: validationErrors.number },
   ];
   const blurEventValidators = (key: ExpiryDateKey) => [
-    { test: (value: ExpiryDate) => validateFilledValue(value, key), errorMessage: validationErrors.empty },
+    { test: (value: ExpiryDate) => validateExpiryDateFilled(value, key), errorMessage: validationErrors.empty },
     key === 'month'
       ? { test: validateMonth, errorMessage: validationErrors.month }
       : { test: validateYear, errorMessage: validationErrors.year },
     { test: validateDate, errorMessage: validationErrors.date },
   ];
 
-  interface Param {
-    value: ExpiryDate;
-    key: ExpiryDateKey;
-    validators: {
-      test: (value: ExpiryDate) => boolean;
-      errorMessage: string;
-    }[];
-  }
-  const handleValidation = ({ value, key, validators }: Param) => {
+  const handleValidation = ({ value, key, validators }: ExpiryDateValidationParam) => {
     const result = useValidation<ExpiryDate>({ validators, value });
 
     setExpiryDate((prev) => ({
@@ -96,15 +87,18 @@ export default function useExpiryDate({ validationErrors }: UserCardHolderProps)
 
     setErrorMessage(result.isValid ? null : result.errorMessage);
   };
+
   const handleChange = (e: ChangeEvent<HTMLInputElement>, key: ExpiryDateKey) => {
     handleValidation({ value: { ...expiryDate, [key]: e.target.value }, validators: changeEventValidators(key), key });
   };
+
   const handleBlur = (e: FocusEvent<HTMLInputElement>, key: ExpiryDateKey) => {
     handleValidation({ value: { ...expiryDate, [key]: e.target.value }, validators: blurEventValidators(key), key });
   };
 
   const updateValue = (value: string, key: ExpiryDateKey) => {
     const validators = [...blurEventValidators(key)].splice(1, 0, changeEventValidators(key)[0]);
+
     handleValidation({ value: { ...expiryDate, [key]: value }, validators, key });
   };
 

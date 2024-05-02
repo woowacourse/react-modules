@@ -1,51 +1,49 @@
 import { ChangeEvent, useState, FocusEvent } from 'react';
-import useValidation from './useValidation';
+import { ALPHABET_REGEXP } from './contexts';
+import { validateFilledValue } from './utils/validators';
+import { ErrorMessage, UseCardModuleProps } from './types';
+import useCardValidation from './useCardValidation';
 
-interface ValidationErrors {
+interface CardHolderValidationErrors {
   empty: string;
   alphabet: string;
 }
 
-interface UserCardHolderProps {
-  validationErrors: ValidationErrors;
-}
-
-export default function useCardHolder(props: UserCardHolderProps) {
+export default function useCardHolder(props: UseCardModuleProps<CardHolderValidationErrors>) {
   const [cardHolder, setCardHolder] = useState('');
-  const [errorMessage, setErrorMessage] = useState<string | null>(null);
-
-  const validateFilledCardHolder = (value: string) => {
-    return !!value;
-  };
+  const [errorMessage, setErrorMessage] = useState<ErrorMessage>(null);
 
   const validateAlphabeticString = (value: string) => {
-    const isAlphabet = /[a-zA-Z\s]+$/;
-    return !value || isAlphabet.test(value);
+    return !value || ALPHABET_REGEXP.test(value);
   };
 
   const changeEventValidators = [{ test: validateAlphabeticString, errorMessage: props.validationErrors.alphabet }];
-  const blurEventValidators = [{ test: validateFilledCardHolder, errorMessage: props.validationErrors.empty }];
+  const blurEventValidators = [{ test: validateFilledValue, errorMessage: props.validationErrors.empty }];
+  const totalValidators = [blurEventValidators[0], ...changeEventValidators, blurEventValidators[1]];
+
+  const { handleValidationChange, handleValidationBlur, handleUpdateValue } = useCardValidation<string>({
+    blurEventValidators,
+    changeEventValidators,
+    totalValidators,
+    setValue: setCardHolder,
+    setErrorMessage,
+  });
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const result = useValidation<string>({ validators: changeEventValidators, value: e.target.value });
-
-    setCardHolder(e.target.value);
-    setErrorMessage(result.isValid ? null : result.errorMessage);
+    handleValidationChange(e.target.value);
   };
+
   const handleBlur = (e: FocusEvent<HTMLInputElement>) => {
-    const result = useValidation<string>({ validators: blurEventValidators, value: e.target.value });
-
-    setCardHolder(e.target.value);
-    setErrorMessage(result.isValid ? null : result.errorMessage);
+    handleValidationBlur(e.target.value);
   };
 
-  const updateValue = (value: string) => {
-    const validators = [...changeEventValidators, ...blurEventValidators];
-    const result = useValidation<string>({ validators, value: value });
-
-    setCardHolder(value);
-    setErrorMessage(result.errorMessage);
+  return {
+    cardHolder,
+    setCardHolder,
+    isValid: !!errorMessage,
+    errorMessage,
+    handleChange,
+    handleBlur,
+    updateValue: handleUpdateValue,
   };
-
-  return { cardHolder, setCardHolder, isValid: !!errorMessage, errorMessage, handleChange, handleBlur, updateValue };
 }

@@ -1,60 +1,54 @@
-import { useState, ChangeEvent, FocusEvent } from 'react';
+import { useState, ChangeEvent } from 'react';
 import useCardNumber from './useCardNumber';
-import useValidation from './useValidation';
+import { CARD_NUMBERS_GROUP_LENGTH } from './contexts';
+import { ErrorMessage, UseCardModuleProps } from './types';
+import useCardValidationWithKey from './useCardValidationWithKey';
 
-interface ValidationErrors {
+interface CardNumbersValidationErrors {
   empty: string;
   number: string;
   length: string;
 }
 
-interface UseCardNumbersProps {
-  validationErrors: ValidationErrors;
-}
-export default function useCardNumbers({ validationErrors }: UseCardNumbersProps) {
-  const [numbers, setNumbers] = useState(Array.from({ length: 4 }, () => ''));
-  const [error, setError] = useState(Array.from({ length: 4 }, () => false));
-  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+export default function useCardNumbers({ validationErrors }: UseCardModuleProps<CardNumbersValidationErrors>) {
+  const [numbers, setNumbers] = useState(Array.from({ length: CARD_NUMBERS_GROUP_LENGTH }, () => ''));
+  const [error, setError] = useState(Array.from({ length: CARD_NUMBERS_GROUP_LENGTH }, () => false));
+  const [errorMessage, setErrorMessage] = useState<ErrorMessage>(null);
 
-  const { changeEventValidators, blurEventValidators } = useCardNumber({ validationErrors });
+  const { changeEventValidators, blurEventValidators, totalValidators } = useCardNumber({ validationErrors });
 
-  interface Param {
-    value: string;
-    index: number;
-    validators: {
-      test: (value: string) => boolean;
-      errorMessage: string;
-    }[];
-  }
-
-  /**
-   * 입력란 하나에 대한 유효성 검사
-   */
-  const handleValidation = ({ value, index, validators }: Param) => {
-    const result = useValidation<string>({ validators, value });
-
+  const getNewNumbers = (value: string, index: number) => {
     const newNumbers = [...numbers];
     newNumbers[index] = value;
-    setNumbers(newNumbers);
 
-    setErrorMessage(result.isValid ? null : result.errorMessage);
-
-    const newError = [...error];
-    newError[index] = result.isValid;
-    setError(newError);
+    return newNumbers;
   };
+
+  const { handleValidationChange, handleValidationBlur, handleUpdateValue } = useCardValidationWithKey<string, number>({
+    blurEventValidators,
+    changeEventValidators,
+    totalValidators,
+    applyNewValue: (value, key) => {
+      const newNumbers = getNewNumbers(value, key);
+      setNumbers(newNumbers);
+    },
+    applyNewError: (isValid, key) => {
+      const newError = [...error];
+      newError[key] = isValid;
+      setError(newError);
+    },
+    setErrorMessage,
+  });
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>, index: number) => {
-    handleValidation({ value: e.target.value, index, validators: changeEventValidators });
+    handleValidationChange(e.target.value, index);
   };
-
-  const handleBlur = (e: FocusEvent<HTMLInputElement>, index: number) => {
-    handleValidation({ value: e.target.value, index, validators: blurEventValidators });
+  const handleBlur = (e: ChangeEvent<HTMLInputElement>, index: number) => {
+    handleValidationBlur(e.target.value, index);
   };
 
   const updateValue = (value: string, index: number) => {
-    const validators = [...changeEventValidators, ...blurEventValidators];
-    handleValidation({ value, index, validators });
+    handleUpdateValue(value, index);
   };
 
   return { numbers, handleChange, handleBlur, updateValue, errorMessage, error };

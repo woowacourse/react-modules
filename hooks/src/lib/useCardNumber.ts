@@ -1,30 +1,24 @@
-interface ValidationErrors {
+import { VALID_LENGTH } from './contexts';
+import { UseCardModuleProps } from './types';
+import { validateNumber, validateFilledValue, validateLength } from './utils/validators';
+
+interface CardNumberValidationErrors {
   empty: string;
   number: string;
   length: string;
 }
 
-interface UseCardNumberProps {
-  validationErrors: ValidationErrors;
-}
-export default function useCardNumber({ validationErrors }: UseCardNumberProps) {
-  const validateNumber = (value: string) => {
-    return Number.isInteger(Number(value));
-  };
-
-  const validateFilledValue = (value: string) => {
-    return !!value;
-  };
-
-  const validateLength = (value: string) => {
-    return value.length === 4;
-  };
+export default function useCardNumber({ validationErrors }: UseCardModuleProps<CardNumberValidationErrors>) {
+  const validateCardNumberLength = (value: string) => validateLength(value, VALID_LENGTH.cardNumber);
 
   const changeEventValidators = [{ test: validateNumber, errorMessage: validationErrors.number }];
+
   const blurEventValidators = [
     { test: validateFilledValue, errorMessage: validationErrors.empty },
-    { test: validateLength, errorMessage: validationErrors.length },
+    { test: validateCardNumberLength, errorMessage: validationErrors.length },
   ];
 
-  return { changeEventValidators, blurEventValidators };
+  const totalValidators = [blurEventValidators[0], ...changeEventValidators, blurEventValidators[1]];
+
+  return { changeEventValidators, blurEventValidators, totalValidators };
 }

@@ -1,5 +1,8 @@
 import { ChangeEvent, FocusEvent, useState } from 'react';
-import useValidation from './useValidation';
+import { VALID_LENGTH } from './contexts';
+import { validateFilledValue, validateNumber, validateLength } from './utils/validators';
+import { ErrorMessage, UseCardModuleProps } from './types';
+import useCardValidation from './useCardValidation';
 
 interface ValidationErrors {
   empty: string;
@@ -7,53 +10,43 @@ interface ValidationErrors {
   length: string;
 }
 
-interface UserCardPasswordProps {
-  validationErrors: ValidationErrors;
-}
-
-export default function usePassword(props: UserCardPasswordProps) {
+export default function usePassword(props: UseCardModuleProps<ValidationErrors>) {
   const { empty, number, length } = props.validationErrors;
   const [password, setPassword] = useState('');
-  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [errorMessage, setErrorMessage] = useState<ErrorMessage>(null);
 
-  const validateFilledValue = (value: string) => {
-    return !!value;
-  };
-
-  const validateNumber = (value: string) => {
-    return Number.isInteger(Number(value));
-  };
-
-  const validatePasswordLength = (value: string) => {
-    return value.length === 2;
-  };
+  const validatePasswordLength = (value: string) => validateLength(value, VALID_LENGTH.password);
 
   const changeEventValidators = [{ test: validateNumber, errorMessage: number }];
   const blurEventValidators = [
     { test: validateFilledValue, errorMessage: empty },
     { test: validatePasswordLength, errorMessage: length },
   ];
+  const totalValidators = [...changeEventValidators, ...blurEventValidators];
+
+  const { handleValidationChange, handleValidationBlur, handleUpdateValue } = useCardValidation<string>({
+    blurEventValidators,
+    changeEventValidators,
+    totalValidators,
+    setValue: setPassword,
+    setErrorMessage,
+  });
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const result = useValidation<string>({ validators: changeEventValidators, value: e.target.value });
-
-    setPassword(e.target.value);
-    setErrorMessage(result.isValid ? null : result.errorMessage);
+    handleValidationChange(e.target.value);
   };
+
   const handleBlur = (e: FocusEvent<HTMLInputElement>) => {
-    const result = useValidation<string>({ validators: blurEventValidators, value: e.target.value });
-
-    setPassword(e.target.value);
-    setErrorMessage(result.isValid ? null : result.errorMessage);
+    handleValidationBlur(e.target.value);
   };
 
-  const updateValue = (value: string) => {
-    const validators = [...changeEventValidators, ...blurEventValidators];
-    const result = useValidation<string>({ validators, value: value });
-
-    setPassword(value);
-    setErrorMessage(result.isValid ? null : result.errorMessage);
+  return {
+    password,
+    setPassword,
+    isValid: !!errorMessage,
+    errorMessage,
+    handleChange,
+    handleBlur,
+    updateValue: handleUpdateValue,
   };
-
-  return { password, updateValue, isValid: !!errorMessage, handleChange, handleBlur, errorMessage };
 }

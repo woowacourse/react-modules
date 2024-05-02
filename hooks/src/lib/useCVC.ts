@@ -1,59 +1,51 @@
 import { ChangeEvent, useState, FocusEvent } from 'react';
-import useValidation from './useValidation';
-
+import { VALID_LENGTH } from './contexts';
+import { validateNumber, validateFilledValue, validateLength } from './utils/validators';
+import { ErrorMessage, UseCardModuleProps } from './types';
+import useCardValidation from './useCardValidation';
 interface ValidationErrors {
   empty: string;
   number: string;
   length: string;
 }
 
-interface UserCardCVCrProps {
-  validationErrors: ValidationErrors;
-}
-
-export default function useCVC(props: UserCardCVCrProps) {
+export default function useCVC(props: UseCardModuleProps<ValidationErrors>) {
   const { empty, number, length } = props.validationErrors;
   const [cvc, setCVC] = useState('');
-  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [errorMessage, setErrorMessage] = useState<ErrorMessage>(null);
 
-  const validateFilledValue = (value: string) => {
-    return !!value;
-  };
+  const validateCVCLength = (value: string) => validateLength(value, VALID_LENGTH.cvc);
 
-  const validateNumber = (value: string) => {
-    return Number.isInteger(Number(value));
-  };
-
-  const validateCVCLength = (value: string) => {
-    return value.length === 3;
-  };
   const changeEventValidators = [{ test: validateNumber, errorMessage: number }];
   const blurEventValidators = [
     { test: validateFilledValue, errorMessage: empty },
     { test: validateCVCLength, errorMessage: length },
   ];
+  const totalValidators = [blurEventValidators[0], ...changeEventValidators, blurEventValidators[1]];
 
-  const validators = [blurEventValidators[0], ...changeEventValidators, blurEventValidators[1]];
+  const { handleValidationChange, handleValidationBlur, handleUpdateValue } = useCardValidation<string>({
+    blurEventValidators,
+    changeEventValidators,
+    totalValidators,
+    setValue: setCVC,
+    setErrorMessage,
+  });
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const result = useValidation<string>({ validators: changeEventValidators, value: e.target.value });
-
-    setCVC(e.target.value);
-    setErrorMessage(result.isValid ? null : errorMessage);
+    handleValidationChange(e.target.value);
   };
+
   const handleBlur = (e: FocusEvent<HTMLInputElement>) => {
-    const result = useValidation<string>({ validators: blurEventValidators, value: e.target.value });
-
-    setCVC(e.target.value);
-    setErrorMessage(result.isValid ? null : errorMessage);
+    handleValidationBlur(e.target.value);
   };
 
-  const updateValue = (value: string) => {
-    const result = useValidation<string>({ validators, value: value });
-
-    setCVC(value);
-    setErrorMessage(result.isValid ? null : result.errorMessage);
+  return {
+    cvc,
+    setCVC,
+    isValid: !!errorMessage,
+    errorMessage,
+    handleChange,
+    handleBlur,
+    updateValue: handleUpdateValue,
   };
-
-  return { cvc, updateValue, isValid: !!errorMessage, handleChange, handleBlur, errorMessage };
 }
