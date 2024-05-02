@@ -1,4 +1,4 @@
-# <라이브러리 이름>
+# llqqssttyy-react-modules-hooks
 
 > 우아한테크코스 레벨2 페이먼츠 미션에 사용된 유효성 검사 모듈
 
@@ -6,14 +6,14 @@
 
 ## How to use
 
-`<라이브러리 이름>`은 카드 결제 정보 입력 시 필요한 여러 종류의 유효성 검사를 위한 hooks 포함하고 있습니다. 아래의 훅들을 사용하여 각 입력 필드의 유효성과 상태를 체계적으로 관리할 수 있습니다.
+`llqqssttyy-react-modules-hooks`은 카드 결제 정보 입력 시 필요한 여러 종류의 유효성 검사를 위한 hooks 포함하고 있습니다. 아래의 훅들을 사용하여 각 입력 필드의 유효성과 상태를 체계적으로 관리할 수 있습니다.
 
 <br/>
 
 #### 1. 라이브러리 설치
 
 ```shell
-npm install <라이브러리 이름>
+npm install llqqssttyy-react-modules-hooks
 ```
 
 #### 2. hook 사용
