@@ -1,6 +1,6 @@
-import 'nakta-react-payments-components/dist/style.css';
-import React, { useState } from 'react';
-import { Modal } from 'nakta-react-payments-components';
+import "soosoo-react-payments-components/dist/style.css";
+import React, { useState } from "react";
+import { Modal } from "soosoo-react-payments-components";
 
 function App() {
   const [isOpen, setIsOpen] = useState(true);
@@ -9,7 +9,19 @@ function App() {
     setIsOpen(false);
   };
 
-  return <>{isOpen && <Modal position='center' title='제목' children={<></>} onClose={onClose} isCloseButton={true} />}</>;
+  return (
+    <>
+      {isOpen && (
+        <Modal
+          position="center"
+          title="제목"
+          children={<></>}
+          onClose={onClose}
+          isCloseButton={true}
+        />
+      )}
+    </>
+  );
 }
 
 export default App;

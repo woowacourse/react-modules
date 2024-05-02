@@ -1,7 +1,7 @@
 {
-  "name": "nakta-react-payments-components",
-  "version": "0.0.1",
-  "description": "react-payments modal",
+  "name": "soosoo-react-payments-components",
+  "version": "0.0.0",
+  "description": "react-payments components",
   "type": "module",
   "types": "dist/index.d.ts",
   "main": "dist/index.js",
@@ -18,9 +18,9 @@
     "build-storybook": "storybook build"
   },
   "dependencies": {
-    "nakta-react-payments-components": "^0.0.1",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "soosoo-react-payments-components": "^0.0.0"
   },
   "devDependencies": {
     "@chromatic-com/storybook": "^1.3.3",
