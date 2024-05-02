@@ -6,7 +6,7 @@ interface UseCardArrayValidateProps {
   validateOnBlur: () => ValidateResult;
 }
 
-interface ValidateResult {
+export interface ValidateResult {
   isValid: boolean;
   errorMessage: string;
 }
