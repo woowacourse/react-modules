@@ -8,7 +8,7 @@ It can handle the card company, card holder, card numbers, CVC number, expiry da
 
 ## Install
 
-`npm i woowacourse-react-modal-component`
+`npm i woowacourse-card-custom-hook`
 
 ## **Usage & API**
 
