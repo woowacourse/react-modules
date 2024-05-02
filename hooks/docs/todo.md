@@ -60,3 +60,8 @@
 - [x] useExpiryPeriod.md
 - [x] useInput.md
 - [x] useRestrictedState.md
+
+### Test
+
+- [ ] act -> React.act로 변경
+- [ ] fireEvent이벤트 적용
