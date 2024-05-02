@@ -36,17 +36,7 @@ describe("useCardholderName에 대한 테스트 케이스", () => {
   });
 
   describe("유효성 검증에 성공하는 경우", () => {
-    it("영어 대문자로만 이루어진 값을 입력한 경우 유효한 값으로 판단한다.", () => {
-      const { result } = renderHook(() => useCardholderName());
-
-      const CORRECT_VALUE = "ABC";
-      React.act(() => result.current.setCardholderName(CORRECT_VALUE));
-
-      expect(result.current.errorStatus.isValid).toBe(true);
-      expect(result.current.errorStatus.errorMessage).toBeNull();
-    });
-
-    it("양 끝에 공백이 포함되지 않은 경우 유효한 값으로 판단한다.", () => {
+    it("공백 없이 영어 대문자로만 이루어진 값을 입력한 경우 유효한 값으로 판단한다.", () => {
       const { result } = renderHook(() => useCardholderName());
 
       const CORRECT_VALUE = "ABC";
