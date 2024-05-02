@@ -1,7 +1,8 @@
+import type { Size } from '../types/common';
+
 export type Direction = 'row' | 'column';
 export type Position = 'center' | 'bottom' | 'top';
 export type BackDropType = 'transparent' | 'blur' | 'opaque';
-export type Size = 'sm' | 'md' | 'lg';
 
 export interface ModalProps {
   isOpen: boolean;
