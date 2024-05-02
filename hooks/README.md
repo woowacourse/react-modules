@@ -27,6 +27,7 @@ npm install rian-card-validation-hooks
 - useCardNumbers는 카드 번호 16자리를 입력 받습니다.
 - 카드 번호는 4개로 이루어져 있으며, input의 name은 'cardNumbers1','cardNumbers2','cardNumbers3','cardNumbers4' 로 고정되어 있습니다.
 - validate : 입력한 카드 번호가 모두 숫자인지, 4자리씩 작성되었는지 확인합니다.
+- 인풋에 onChange 이벤트에 onChange를, onBlur 이벤트에 onBlurValidLength를 연결하여 사용합니다.
 
 > [IS_NOT_NUMBER]: '카드번호는 숫자만 입력해주세요.'  
 > [INVALID_LENGTH]: '카드 번호를 4자리씩 입력해주세요.'
@@ -36,6 +37,7 @@ const {
   values: cardNumbers,
   onChange: onChangeCardNumbers,
   errorMessages,
+  onBlurValidLength,
 } = useCardNumbers({
   cardNumber1: "",
   cardNumber2: "",
@@ -52,6 +54,7 @@ return (
       onChange={onChangeCardNumbers}
       name="cardNumber1"
       value={cardNumbers["cardNumber1"]}
+      onBlur={onBlurValidLength}
     />
     {/*cardNumber 2*/}
     <div>{errorMessages["cardNumber1"]}</div>
@@ -59,6 +62,7 @@ return (
       onChange={onChangeCardNumbers}
       name="cardNumber2"
       value={cardNumbers["cardNumber2"]}
+      onBlur={onBlurValidLength}
     />
     {/*cardNumber 3*/}
     <div>{errorMessages["cardNumber2"]}</div>
@@ -66,6 +70,7 @@ return (
       value={cardNumbers["cardNumber3"]}
       onChange={onChangeCardNumbers}
       name="cardNumber3"
+      onBlur={onBlurValidLength}
     />
     <div>{errorMessages["cardNumber3"]}</div>
     {/*cardNumber 4*/}
@@ -73,6 +78,7 @@ return (
       value={cardNumbers["cardNumber4"]}
       onChange={onChangeCardNumbers}
       name="cardNumber4"
+      onBlur={onBlurValidLength}
     />
     <div>{errorMessages["cardNumber4"]}</div>
   </>
@@ -144,6 +150,7 @@ const {
   values: { month, year },
   onChange,
   errorMessages,
+  onBlurValidLength,
 } = useExpiryDate({
   month: "",
   year: "",
@@ -152,10 +159,20 @@ const {
 return (
   <>
     <label>expiryDate</label>
-    <input value={month} onChange={onChange} name="month" />
+    <input
+      value={month}
+      onChange={onChange}
+      name="month"
+      onBlur={onBlurValidLength}
+    />
 
     <div>{errorMessages && errorMessages.month}</div>
-    <input value={year} onChange={onChange} name="year" />
+    <input
+      value={year}
+      onChange={onChange}
+      name="year"
+      onBlur={onBlurValidLength}
+    />
     <div>{errorMessages && errorMessages.year}</div>
   </>
 );
@@ -170,11 +187,12 @@ return (
 > [INVALID_LENGTH]: 'CVC는 3글자 이상으로 입력해 주세요.'
 
 ````tsx
-  const { value, onChange, errorMessage } = useCVC('');
+  const { value, onChange, errorMessage,onBlurValidLength } = useCVC('');
   return (
     <>
       <label>CVC</label>
-      <input value={value} onChange={onChange} name="CVC" />
+      <input value={value} onChange={onChange} name="CVC"       onBlur={onBlurValidLength}
+      />
       {errorMessage && <p>{errorMessage}</p>}
     </>
   );```
@@ -189,12 +207,17 @@ return (
 > [INVALID_LENGTH]: '비밀번호는 2글자만 입력해 주세요.'
 
 ```tsx
-const { value, onChange, errorMessage } = usePassword("");
+const { value, onChange, errorMessage, onBlurValidLength } = usePassword("");
 
 return (
   <>
     <label>password</label>
-    <input value={value} onChange={onChange} name="password" />
+    <input
+      value={value}
+      onChange={onChange}
+      name="password"
+      onBlur={onBlurValidLength}
+    />
     <div>{errorMessage}</div>
   </>
 );
