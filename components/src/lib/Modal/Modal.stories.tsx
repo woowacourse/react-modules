@@ -4,6 +4,9 @@ import Modal from './Modal';
 const meta = {
   title: 'Modal',
   component: Modal,
+  parameters: {
+    controls: { exclude: ['children', 'footerButtons', 'onClose'] },
+  },
 } satisfies Meta<typeof Modal>;
 
 export default meta;
@@ -18,7 +21,7 @@ export const Default: Story = {
     hasCloseButton: true,
     footerButtons: [
       {
-        text: 'Primay Button',
+        text: 'Primary Button',
         style: 'primary',
         onClick: () => alert('Primary Button Clicked!'),
       },
@@ -28,7 +31,7 @@ export const Default: Story = {
         onClick: () => alert('Secondary Button Clicked!'),
       },
     ],
-    onClose: () => alert('clicked'),
+    onClose: () => alert('"onClose" method called!'),
     children: null,
   },
 };
