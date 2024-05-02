@@ -2,13 +2,13 @@
 
 ### 페이먼츠 커스텀 훅
 
-- package 이름 : styled-base-modal
+- package 이름 : rian-modal-compoent
 - Writer : 헤일리, 리안
 
 ## Installation
 
 ```
-npm install styled-base-modal
+npm install rian-modal-compoent
 ```
 
 ## Props

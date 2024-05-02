@@ -1,20 +1,9 @@
 import S from "./Modal.style.tsx";
 import BasicButton from "../Button.tsx";
 
-/**
- * 1. ModalMain - default
- *  - backdrop
- *  - container
- * 2. Title
- * 3. IconButton
- * 4. Content
- * 5. Confirm button
- * 6. Close button
- */
-
 export type ModalPosition = "center" | "bottom";
 
-interface ModalMainProps {
+export interface ModalMainProps {
   children?: React.ReactNode;
   isOpen: boolean;
   position: ModalPosition;
@@ -35,7 +24,7 @@ export const ModalMain = ({
   );
 };
 
-interface TitleProps {
+export interface TitleProps {
   children: React.ReactNode;
 }
 
@@ -43,7 +32,7 @@ const Title = ({ children }: TitleProps) => {
   return <S.Title>{children}</S.Title>;
 };
 
-interface CloseIconProps {
+export interface CloseIconProps {
   children: React.ReactNode;
   onClick: () => void;
 }
@@ -52,7 +41,7 @@ const CloseIcon = ({ children, onClick }: CloseIconProps) => {
   return <S.CloseIcon onClick={onClick}>{children}</S.CloseIcon>;
 };
 
-interface ContentsProps {
+export interface ContentsProps {
   children: React.ReactNode;
 }
 
@@ -60,7 +49,7 @@ const Content = ({ children }: ContentsProps) => {
   return <S.Content>{children}</S.Content>;
 };
 
-interface ConfirmButtonProps {
+export interface ConfirmButtonProps {
   label: string;
   onConfirm: () => void;
 }
@@ -69,7 +58,7 @@ const ConfirmButton = ({ label, onConfirm }: ConfirmButtonProps) => {
   return <BasicButton onClick={onConfirm} label={label} colorType="black" />;
 };
 
-interface CloseButtonProps {
+export interface CloseButtonProps {
   label: string;
   onClose: () => void;
 }
