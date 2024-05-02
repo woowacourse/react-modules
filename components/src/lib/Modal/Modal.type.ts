@@ -1,4 +1,4 @@
-import type { Size } from '../types/common';
+import type { Size } from '../type/common';
 
 export type Direction = 'row' | 'column';
 export type Position = 'center' | 'bottom' | 'top';
