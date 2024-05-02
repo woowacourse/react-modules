@@ -4,7 +4,7 @@ import useValidation from "./useValidation";
 const TWO_BLANKS = "  ";
 const cardholderNameValidators = [
   (value: string) => {
-    if (/^[A-Z ]+$/.test(value)) {
+    if (!/^[A-Z ]+$/.test(value)) {
       return "소유자명은 영문 대문자만 포함해야 합니다.";
     }
   },
