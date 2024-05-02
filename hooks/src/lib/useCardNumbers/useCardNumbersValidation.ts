@@ -2,9 +2,11 @@ import { useState } from "react";
 
 import cardInputValidator from "../validators/cardInputValidator";
 
-import { VALIDATION_MESSAGES } from "../constants/card-custom-hook";
-
-type CardNumberKeys = "first" | "second" | "third" | "fourth";
+import {
+  INPUT_RULES,
+  VALIDATION_MESSAGES,
+} from "../constants/card-custom-hook";
+import { CardNumberKeys } from "../types/card-custom-hook";
 
 const useCardNumberValidation = () => {
   const [errorState, setErrorState] = useState<Record<CardNumberKeys, boolean>>(
@@ -35,7 +37,12 @@ const useCardNumberValidation = () => {
       return false;
     }
 
-    if (!cardInputValidator.validateCardNumberLength(value)) {
+    if (
+      !cardInputValidator.validateInputLength(
+        value,
+        INPUT_RULES.maxCardNumberPartLength
+      )
+    ) {
       updateErrorState(name, true);
       setErrorText(VALIDATION_MESSAGES.invalidCardNumberLength);
 

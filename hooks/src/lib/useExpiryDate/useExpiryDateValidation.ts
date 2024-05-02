@@ -2,7 +2,10 @@ import { useState } from "react";
 
 import cardInputValidator from "../validators/cardInputValidator";
 
-import { VALIDATION_MESSAGES } from "../constants/card-custom-hook";
+import {
+  INPUT_RULES,
+  VALIDATION_MESSAGES,
+} from "../constants/card-custom-hook";
 import { ExpiryDateKeys } from "../types/card-custom-hook";
 
 const useExpiryDateValidation = () => {
@@ -36,18 +39,22 @@ const useExpiryDateValidation = () => {
     value: string,
     expiryDate: Record<ExpiryDateKeys, string>
   ): boolean => {
-    const isNumericInput = cardInputValidator.validateNumericInput(value);
+    console.log(name, value, "in validate function");
 
-    if (!isNumericInput) {
+    if (!cardInputValidator.validateNumericInput(value)) {
       setErrorText(VALIDATION_MESSAGES.onlyNumbersAllowed);
       updateErrorState(name, true);
 
       return false;
     }
 
-    const isOverInputLength = value.length > 2;
-
-    if (isOverInputLength) return false;
+    if (
+      cardInputValidator.validateOverInputLength(
+        value,
+        INPUT_RULES.validExpirationLength
+      )
+    )
+      return false;
 
     if (name === "month" && !cardInputValidator.validateMonth(value)) {
       setErrorText(VALIDATION_MESSAGES.invalidMonthLength);
@@ -64,8 +71,10 @@ const useExpiryDateValidation = () => {
     }
 
     if (
-      (name === "month" && expiryDate.year.length !== 2) ||
-      (name === "year" && expiryDate.month.length !== 2)
+      (name === "month" &&
+        expiryDate.year.length !== INPUT_RULES.validExpirationLength) ||
+      (name === "year" &&
+        expiryDate.month.length !== INPUT_RULES.validExpirationLength)
     ) {
       return true;
     }
