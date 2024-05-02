@@ -1,11 +1,11 @@
 import useInput from './useInput';
 import {
-  validateLength,
+  validateMaxLength,
   validateNumber,
   validateYear,
   validateMonth,
 } from '../validate/validate';
-import { ChangeEvent } from 'react';
+import { ChangeEvent, FocusEvent } from 'react';
 import {
   ExpiryDateType,
   ExpiryDateErrorType,
@@ -15,12 +15,12 @@ import { ExpiryDateErrorMessages } from '../constants/error';
 
 const expiryDateValidates = (value: string) => {
   validateNumber(value);
-  validateLength(value, 2);
+  validateMaxLength(value, 2);
 };
 
 const monthValidates = (value: string) => {
   validateNumber(value);
-  validateLength(value, 2);
+  validateMaxLength(value, 2);
   validateMonth(value);
 };
 
@@ -30,21 +30,37 @@ const yearValidates = (value: string) => {
 };
 
 const useExpiryDate = (initialValue: ExpiryDateType) => {
+  const validLength = 1;
   const {
     value: monthValue,
     onChange: onChangeMonth,
+    onBlurValidLength: onBlurMonth,
     errorStatus: errorStatusMonth,
-  } = useInput<ExpiryDateErrorType>(initialValue.month, monthValidates);
+  } = useInput<ExpiryDateErrorType>(
+    initialValue.month,
+    monthValidates,
+    validLength
+  );
 
   const {
     value: yearValue,
     onChange: onChangeYear,
+    onBlurValidLength: onBlurYear,
     errorStatus: errorStatusYear,
-  } = useInput<ExpiryDateErrorType>(initialValue.year, yearValidates);
+  } = useInput<ExpiryDateErrorType>(
+    initialValue.year,
+    yearValidates,
+    validLength
+  );
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name } = e.target;
     name === 'month' ? onChangeMonth(e) : onChangeYear(e);
+  };
+
+  const handleBlur = (e: FocusEvent<HTMLInputElement>) => {
+    const { name } = e.target;
+    name === 'month' ? onBlurMonth(e) : onBlurYear(e);
   };
 
   const errorMessages = {
@@ -64,6 +80,7 @@ const useExpiryDate = (initialValue: ExpiryDateType) => {
       year: yearValue,
     },
     onChange: handleChange,
+    onBlur: handleBlur,
     errorMessages,
   };
 };

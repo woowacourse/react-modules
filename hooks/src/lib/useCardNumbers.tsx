@@ -1,52 +1,61 @@
-import { ChangeEvent } from 'react';
+import { ChangeEvent, FocusEvent } from 'react';
 import {
   CardNumbersType,
   CardNumberKeys,
   CardNumberErrorType,
 } from '../types/cardNumbers';
 import useInput from './useInput';
-import { validateLength, validateNumber } from '../validate/validate';
+import { validateMaxLength, validateNumber } from '../validate/validate';
 import { CardNumbersErrorMessages } from '../constants/error.ts';
 
 const cardNumbersValidates = (value: string) => {
   validateNumber(value);
-  validateLength(value, 4);
+  validateMaxLength(value, 4);
 };
 const useCardNumbers = (initialValues: CardNumbersType) => {
+  const validLength = 4;
   const {
     value: cardNumber1,
     onChange: onChangeNumber1,
+    onBlurValidLength: onBlurNumber1,
     errorStatus: errorStatusNumber1,
   } = useInput<CardNumberErrorType>(
     initialValues['cardNumber1'],
-    cardNumbersValidates
+    cardNumbersValidates,
+    validLength
   );
 
   const {
     value: cardNumber2,
     onChange: onChangeNumber2,
+    onBlurValidLength: onBlurNumber2,
     errorStatus: errorStatusNumber2,
   } = useInput<CardNumberErrorType>(
     initialValues['cardNumber2'],
-    cardNumbersValidates
+    cardNumbersValidates,
+    validLength
   );
 
   const {
     value: cardNumber3,
     onChange: onChangeNumber3,
+    onBlurValidLength: onBlurNumber3,
     errorStatus: errorStatusNumber3,
   } = useInput<CardNumberErrorType>(
     initialValues['cardNumber3'],
-    cardNumbersValidates
+    cardNumbersValidates,
+    validLength
   );
 
   const {
     value: cardNumber4,
     onChange: onChangeNumber4,
+    onBlurValidLength: onBlurNumber4,
     errorStatus: errorStatusNumber4,
   } = useInput<CardNumberErrorType>(
     initialValues['cardNumber4'],
-    cardNumbersValidates
+    cardNumbersValidates,
+    validLength
   );
 
   const onChangeArray = {
@@ -59,6 +68,18 @@ const useCardNumbers = (initialValues: CardNumbersType) => {
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name } = e.target;
     onChangeArray[name as CardNumberKeys](e);
+  };
+
+  const onBlurArray = {
+    cardNumber1: onBlurNumber1,
+    cardNumber2: onBlurNumber2,
+    cardNumber3: onBlurNumber3,
+    cardNumber4: onBlurNumber4,
+  };
+
+  const onBlur = (e: FocusEvent<HTMLInputElement>) => {
+    const { name } = e.target;
+    onBlurArray[name as CardNumberKeys](e);
   };
 
   const errorMessages = {
@@ -86,6 +107,7 @@ const useCardNumbers = (initialValues: CardNumbersType) => {
       cardNumber4,
     },
     onChange,
+    onBlur,
     errorMessages,
   };
 };
