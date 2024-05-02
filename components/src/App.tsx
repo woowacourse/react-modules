@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
-import styled from 'styled-components';
 import './App.css';
 
-// import Modal from './lib/Modal/Modal';
-import { Modal, ModalButtonType } from '@seongjinme/react-modal';
+import { Modal, ModalButtonType } from '@cys4585/react-modal';
+import React, { useState } from 'react';
+
+import styled from 'styled-components';
 
 const buttons: ModalButtonType[] = [
   {
