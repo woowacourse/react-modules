@@ -12,7 +12,7 @@ type ErrorMessage = string;
 type IValidationFunction<T> = (value: T) => ErrorMessage | null | undefined;
 
 function useValidation<T>(validators: IValidationFunction<T>[]): IValidationResult<T> {
-  const [errorMessage, setErrorMessage] = useState<ErrorMessage | null>("");
+  const [errorMessage, setErrorMessage] = useState<ErrorMessage | null>(null);
 
   const validate = (value: T) => {
     const foundErrorMessage = validators.reduce((acc: ErrorMessage | null, fn) => {
