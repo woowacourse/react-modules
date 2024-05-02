@@ -1,5 +1,5 @@
 import { useState } from "react";
-import useValidation from "./useValidation";
+import useValidation from "../useValidation/useValidation";
 
 const cardNumberPartValidators = [
   (value: string) => {
@@ -32,7 +32,7 @@ export default function useCardNumber() {
     validateCardNumberPart(value);
   };
 
-  const cardNumberPartErrorStates = cardNumberPartValidations.map(({ errorStatus }) => errorStatus);
+  const errorStatus = cardNumberPartValidations.map(({ errorStatus }) => errorStatus);
 
-  return { cardNumber: cardNumberPartValues, setCardNumber, cardNumberPartErrorStates };
+  return { cardNumber: cardNumberPartValues, setCardNumber, errorStatus };
 }
