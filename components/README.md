@@ -5,7 +5,7 @@
 # installation
 
 ```bash
-npm install @jinyyy/simple-modal
+npm install @jaymyong66/simple-modal
 ```
 
 # Component spec
@@ -49,7 +49,7 @@ npm install @jinyyy/simple-modal
 ## use example
 
 ```tsx
-import { Modal } from '...';
+import { Modal } from '@jaymyong66/simple-modal';
 
 const OtherModal = () => {
   const [isOpen, setIsOpen] = useState(false);
