@@ -1,4 +1,4 @@
-# tenbur-modal
+# chlwlstlf-modal
 
 텐텐과 버건디가 만든 공용 모달 라이브러리 컴포넌트
 
@@ -9,14 +9,14 @@
 ## - 설치
 
 ```
-npm install tenbur-modal
+npm install chlwlstlf-modal
 ```
 
 ## - 사용법
 
 ```javascript
 import { useState } from "react";
-import { Modal } from "tenbur-modal";
+import { Modal } from "chlwlstlf-modal";
 
 const customStyles = {
   margin: "auto",

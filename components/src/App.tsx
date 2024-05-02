@@ -1,7 +1,7 @@
 import React from "react";
 import "./App.css";
 import { useState } from "react";
-import { Modal } from "tenbur-modal";
+import { Modal } from "chlwlstlf-modal";
 
 type TestProps = {
   handleModalClose: () => void;

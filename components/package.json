@@ -1,6 +1,6 @@
 {
-  "name": "tenbur-modal",
-  "version": "0.0.5",
+  "name": "chlwlstlf-modal",
+  "version": "0.0.8",
   "description": "공용 모달 라이브러리",
   "type": "module",
   "types": "dist/index.d.ts",
@@ -18,9 +18,9 @@
     "build-storybook": "storybook build"
   },
   "dependencies": {
+    "chlwlstlf-modal": "^0.0.8",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "tenbur-modal": "^0.0.5"
+    "react-dom": "^18.2.0"
   },
   "devDependencies": {
     "@chromatic-com/storybook": "^1.3.3",
