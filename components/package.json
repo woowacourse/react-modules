@@ -1,6 +1,6 @@
 {
   "name": "brgndy-modal",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "description": "공용 모달 라이브러리",
   "type": "module",
   "types": "dist/index.d.ts",
@@ -15,7 +15,8 @@
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "chromatic": "npx chromatic --project-token=chpt_460501847d3c13a"
   },
   "dependencies": {
     "react": "^18.2.0",
@@ -38,6 +39,7 @@
     "@typescript-eslint/eslint-plugin": "^7.2.0",
     "@typescript-eslint/parser": "^7.2.0",
     "@vitejs/plugin-react-swc": "^3.5.0",
+    "chromatic": "^11.3.0",
     "eslint": "^8.57.0",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.6",
