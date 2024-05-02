@@ -1,17 +1,6 @@
 import S from './Modal.style.tsx';
 import BasicButton from '../Button.tsx';
 
-/**
- * 1. ModalMain - default
- *  - backdrop
- *  - container
- * 2. Title
- * 3. IconButton
- * 4. Content
- * 5. Confirm button
- * 6. Close button
- */
-
 export type ModalPosition = 'center' | 'bottom';
 
 interface ModalMainProps {
