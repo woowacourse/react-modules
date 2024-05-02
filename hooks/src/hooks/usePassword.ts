@@ -14,7 +14,7 @@ const validators: Validator[] = [
     type: "blur",
   },
 ];
-const useOwnerName = () => {
+const usePassword = () => {
   const ownerName: InputState = useInput("");
 
   validation(ownerName, validators);
@@ -25,4 +25,4 @@ const useOwnerName = () => {
   return { ownerName, onChange, onBlur };
 };
 
-export default useOwnerName;
+export default usePassword;
