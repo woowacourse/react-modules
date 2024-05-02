@@ -47,8 +47,11 @@ function App() {
     <>
       <h1>Modal Component Module</h1>
       <p>React 기반의 간단한 모달 컴포넌트입니다.</p>
-      <button onClick={() => setIsOpenCenterModal(true)}>'Center' 타입 모달 열기</button>
-      <button onClick={() => setIsOpenBottomModal(true)}>'Bottom' 타입 모달 열기</button>
+
+      <div className="button-container">
+        <button onClick={() => setIsOpenCenterModal(true)}>'Center' 타입 모달 열기</button>
+        <button onClick={() => setIsOpenBottomModal(true)}>'Bottom' 타입 모달 열기</button>
+      </div>
 
       <Modal
         isOpen={isOpenCenterModal}
