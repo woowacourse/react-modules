@@ -58,8 +58,8 @@
 
 ### `useCardHolder` 커스텀 훅
 
-- [ ] useCardHolder
-- [ ] useCardHolderValidation
+- [x] useCardHolder
+- [x] useCardHolderValidation
 
 ### `useCVC` 커스텀 훅
 
