@@ -1,4 +1,4 @@
-# paran-fe-modal
+# fe-custom-modal
 - Simple modal component module made by paran and fe
 
 ## Properties
@@ -21,14 +21,14 @@
 - color? `default: black`
 - onClose 
 
-### confirmButton
+### confirmButton?
 
 - background-color? `default: black`
 - font-color? `default: white`
 - content
 - onConfirm
 
-### cancelButton
+### cancelButton?
 
 - background-color? `default: white`
 - color? `default: black`
@@ -43,7 +43,7 @@
 
 `default: 5px`
 
-### modal-position
+### modalPosition
 
 `value: 'center' | 'bottom'`
 

@@ -1,6 +1,6 @@
 {
   "name": "fe-custom-modal",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "simple modal component",
   "type": "module",
   "types": "dist/index.d.ts",
