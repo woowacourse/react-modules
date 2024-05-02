@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 
 interface UseCardArrayValidateProps {
   initValue: string[];
-  validateOnChange: (value: string) => ValidateResult;
+  validateOnChange: (value: string, index: number) => ValidateResult;
   validateOnBlur: () => ValidateResult;
 }
 
@@ -30,7 +30,7 @@ const useCardArrayValidate = ({
   ) => {
     const targetValue = e.target.value;
 
-    const { isValid, errorMessage } = validateOnChange(targetValue);
+    const { isValid, errorMessage } = validateOnChange(targetValue, index);
 
     setIsCompleted(false);
 
@@ -60,6 +60,8 @@ const useCardArrayValidate = ({
   };
 
   useEffect(() => {
+    if (value.join('').length === 0) return;
+
     if (!hasAnyFocus) {
       const { isValid, errorMessage } = validateOnBlur();
 
