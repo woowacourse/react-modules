@@ -9,23 +9,23 @@ import Title from "../Title/Title";
 import LongButton from "../LongButton/LongButton";
 
 interface ModalProps {
-  position: "center" | "bottom";
-  closeButtonPosition: "bottom" | "top";
-  isConfirmButton: boolean;
-  title: string;
-  children: React.ReactNode;
+  position?: "center" | "bottom";
+  title?: string;
+  isConfirmButton?: boolean;
+  closeButtonPosition?: "bottom" | "top";
   onConfirm?: () => void;
   onClose?: () => void;
+  children: React.ReactNode;
 }
 
 const Modal: React.FC<ModalProps> = ({
-  position,
+  position = "center",
   title,
-  children,
+  isConfirmButton = true,
+  closeButtonPosition = "top",
   onConfirm,
   onClose,
-  closeButtonPosition,
-  isConfirmButton,
+  children,
 }) => {
   const { ref, action } = useModalHook();
 
@@ -50,7 +50,7 @@ const Modal: React.FC<ModalProps> = ({
     <dialog ref={ref} css={modalStyle(position)}>
       <div css={modalContentStyle}>
         <ModalHeader>
-          <Title>{title}</Title>
+          {title && <Title>{title}</Title>}
           {closeButtonPosition === "top" && (
             <CloseButton
               handleClick={() => {
