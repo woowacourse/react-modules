@@ -1,9 +1,9 @@
 {
   "name": "use-card-input-hook",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A custom hook for card input",
   "type": "module",
-  "types": "dist/index.d.ts",
+  "types": "dist/lib/index.d.ts",
   "main": "dist/index.js",
   "module": "dist/index.js",
   "files": [
@@ -18,7 +18,8 @@
   },
   "dependencies": {
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "use-card-input-hook": "^0.0.2"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^6.4.2",
