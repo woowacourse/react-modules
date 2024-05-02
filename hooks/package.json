@@ -1,6 +1,6 @@
 {
   "name": "cookie-nice-card-hooks",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "cookie's awesome nice card hooks! wow~~~",
   "type": "module",
   "types": "dist/index.d.ts",
@@ -17,7 +17,7 @@
     "test": "jest"
   },
   "dependencies": {
-    "cookie-nice-card-hooks": "^0.0.1",
+    "cookie-nice-card-hooks": "^0.0.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
