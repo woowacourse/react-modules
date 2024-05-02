@@ -4,7 +4,7 @@ export default function CardHolder() {
   const cardHolderResult = useCardHolder({
     validationErrors: {
       alphabet: '알파벳만 입력해주세요.',
-      empty: '값을 입력해주세요.',
+      empty: '소유자 이름을 입력해주세요.',
     },
   });
   return (
