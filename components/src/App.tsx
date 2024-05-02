@@ -1,6 +1,6 @@
 import React from 'react';
 import './reset.css';
-import { Modal, useModal } from 'woowacourse-react-modal-component';
+import { Modal, useModal } from 'woowacourse-6th-react-modal-component';
 
 import CardCompanySelector from './components/CardCompanySelector';
 
