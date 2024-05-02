@@ -51,7 +51,14 @@ const Modal: React.FC<ModalProps> = ({
       <div css={modalContentStyle}>
         <ModalHeader>
           <Title>{title}</Title>
-          {closeButtonPosition === "top" && <CloseButton handleClose={action.handleClose} onClose={onClose} />}
+          {closeButtonPosition === "top" && (
+            <CloseButton
+              handleClick={() => {
+                action.handleClose();
+                if (onClose) onClose();
+              }}
+            />
+          )}
         </ModalHeader>
         <div>{children}</div>
         <div css={buttonsStyle}>
