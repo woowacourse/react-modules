@@ -8,12 +8,12 @@
     - [x] 모달 열기
     - [x] 모달 닫기
     - [x] 모달 확인
-- [ ] hook 만들기
-  - [ ] useCardNumber
-  - [ ] useCardIssuer
-  - [ ] useCardholderName
-  - [ ] useCVC
-  - [ ] useCardPasswordPrefix
-  - [ ] useCardExpiryMonth
-  - [ ] useCardExpiryYear
-  - [ ] useCardExpiryDate
+- [x] hook 만들기
+  - [x] useCardNumber
+  - [x] useCardIssuer
+  - [x] useCardholderName
+  - [x] useCVC
+  - [x] useCardPasswordPrefix
+  - [x] useCardExpiryMonth
+  - [x] useCardExpiryYear
+  - [x] useCardExpiryDate
