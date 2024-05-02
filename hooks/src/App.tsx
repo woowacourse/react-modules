@@ -7,13 +7,13 @@ import {
   usePassword,
   useCardType,
   useCardNumbers,
-} from './lib';
+} from 'maru-nice-hooks';
 
 function App() {
   const cvcInfo = useCVC('111');
   const passwordInfo = usePassword('22');
-  const cardholderInfo = useCardHolder('maru cookie');
-  const expiryDate = useExpiryDate({ month: '01', year: '24' }, { month: { isAutoFocus: true } });
+  const cardholderInfo = useCardHolder('marucookie');
+  const expiryDate = useExpiryDate({ month: '01', year: '' }, { month: { isAutoFocus: true } });
   const cardTypeInfo = useCardType({
     initialValue: '카드사를 입력해주세요',
     options: ['BC', 'KB', '하나', '우리'],

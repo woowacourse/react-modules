@@ -1,7 +1,12 @@
 {
-  "name": "hooks",
-  "version": "0.0.1",
-  "description": "npm modules",
+  "name": "maru-nice-hooks",
+  "version": "0.0.5",
+  "description": "you can control nice hooks flexibly",
+  "keywords": [
+    "react",
+    "hooks",
+    "maru"
+  ],
   "type": "module",
   "types": "dist/index.d.ts",
   "main": "dist/index.js",
@@ -17,6 +22,7 @@
     "test": "jest"
   },
   "dependencies": {
+    "maru-nice-hooks": "^0.0.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
