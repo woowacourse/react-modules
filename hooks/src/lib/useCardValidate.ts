@@ -17,13 +17,18 @@ const useCardValidate = ({
   validateOnBlur,
 }: UseCardValidateProps) => {
   const [value, setValue] = useState(initValue);
+  const [isCompleted, setIsCompleted] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
 
   const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newValue = e.target.value;
     const { isValid, errorMessage } = validateOnChange(newValue);
+
+    setIsCompleted(false);
+
     if (!isValid) {
       setErrorMessage(errorMessage);
+
       return;
     }
     setErrorMessage('');
@@ -36,6 +41,9 @@ const useCardValidate = ({
 
   const onBlurHandler = () => {
     const { isValid, errorMessage } = validateOnBlur();
+
+    setIsCompleted(isValid);
+
     if (!isValid) {
       setErrorMessage(errorMessage);
       return;
@@ -44,6 +52,7 @@ const useCardValidate = ({
 
   return {
     value,
+    isCompleted,
     errorMessage,
     onChangeHandler,
     onBlurHandler,
