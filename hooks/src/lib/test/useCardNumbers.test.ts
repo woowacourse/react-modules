@@ -1,60 +1,60 @@
-import { renderHook } from '@testing-library/react';
-import React, { ChangeEvent } from 'react';
-import useCardNumbers from '../useCardNumbers';
-import { CardNumbersErrorMessages } from '../../constants/error';
-import { ErrorStatus } from '../../types/errorStatus';
+import { renderHook } from "@testing-library/react";
+import React, { ChangeEvent } from "react";
+import useCardNumbers from "../useCardNumbers";
+import { CardNumbersErrorMessages } from "../../constants/error";
+import { ErrorStatus } from "../../types/errorStatus";
 
-describe('useCardNumbers 훅 테스트', () => {
-  it('초기값이 정확히 설정되어야 한다.', () => {
+describe("useCardNumbers 훅 테스트", () => {
+  it("초기값이 정확히 설정되어야 한다.", () => {
     const initialValue = {
-      cardNumber1: '1234',
-      cardNumber2: '1234',
-      cardNumber3: '1234',
-      cardNumber4: '1234',
+      cardNumber1: "1234",
+      cardNumber2: "1234",
+      cardNumber3: "1234",
+      cardNumber4: "1234",
     };
     const { result } = renderHook(() => useCardNumbers(initialValue));
     expect(result.current.values).toEqual(initialValue);
   });
 
-  it('입력값이 정확히 업데이트 되어야 한다.', () => {
+  it("입력값이 정확히 업데이트 되어야 한다.", () => {
     const initialValues = {
-      cardNumber1: '1234',
-      cardNumber2: '5678',
-      cardNumber3: '5678',
-      cardNumber4: '5678',
+      cardNumber1: "1234",
+      cardNumber2: "5678",
+      cardNumber3: "5678",
+      cardNumber4: "5678",
     };
 
     const changeValue = {
-      cardNumber1: '5678',
-      cardNumber2: '5678',
-      cardNumber3: '5678',
-      cardNumber4: '5678',
+      cardNumber1: "5678",
+      cardNumber2: "5678",
+      cardNumber3: "5678",
+      cardNumber4: "5678",
     };
     const { result } = renderHook(() => useCardNumbers(initialValues));
 
     React.act(() => {
       result.current.onChange({
-        target: { value: '5678', name: 'cardNumber1' },
+        target: { value: "5678", name: "cardNumber1" },
       } as ChangeEvent<HTMLInputElement>);
     });
 
     expect(result.current.values).toEqual(changeValue);
   });
 
-  it('숫자아닌 값이 입력됐을 때 에러를 낸다.', () => {
+  it("숫자아닌 값이 입력됐을 때 에러를 낸다.", () => {
     const valuesWithString = {
-      cardNumber1: '',
-      cardNumber2: '',
-      cardNumber3: '',
-      cardNumber4: '',
+      cardNumber1: "",
+      cardNumber2: "",
+      cardNumber3: "",
+      cardNumber4: "",
     };
 
     const { result } = renderHook(() => useCardNumbers(valuesWithString));
 
-    const invalidValues = 'abcd';
+    const invalidValues = "abcd";
     React.act(() => {
       result.current.onChange({
-        target: { value: invalidValues, name: 'cardNumber1' },
+        target: { value: invalidValues, name: "cardNumber1" },
       } as ChangeEvent<HTMLInputElement>);
     });
 
@@ -64,23 +64,43 @@ describe('useCardNumbers 훅 테스트', () => {
     expect(result.current.errorMessages).toEqual(expectedErrorMessage);
   });
 
-  it('숫자가 4자리가 아닐때 에러를 낸다.', () => {
+  it("숫자가 4자리가 아닐때 에러를 낸다.", () => {
     const valuesWithString = {
-      cardNumber1: '',
-      cardNumber2: '',
-      cardNumber3: '',
-      cardNumber4: '',
+      cardNumber1: "",
+      cardNumber2: "",
+      cardNumber3: "",
+      cardNumber4: "",
     };
 
     const { result } = renderHook(() => useCardNumbers(valuesWithString));
 
-    const invalidValues = '12345';
+    const invalidValues = "12345";
     React.act(() => {
       result.current.onChange({
-        target: { value: invalidValues, name: 'cardNumber1' },
+        target: { value: invalidValues, name: "cardNumber1" },
       } as ChangeEvent<HTMLInputElement>);
     });
 
+    const expectedErrorMessage = {
+      cardNumber1: CardNumbersErrorMessages[ErrorStatus.INVALID_LENGTH],
+    };
+    expect(result.current.errorMessages).toEqual(expectedErrorMessage);
+  });
+
+  it("길이가 3글자이고 포커스를 벗어나면 에러를 낸다.", () => {
+    const initialValues = {
+      cardNumber1: "",
+      cardNumber2: "",
+      cardNumber3: "",
+      cardNumber4: "",
+    };
+    const { result } = renderHook(() => useCardNumbers(initialValues));
+    const invalidValue = "123";
+    React.act(() => {
+      result.current.onBlurValidLength({
+        target: { value: invalidValue, name: "cardNumber1" },
+      } as React.FocusEvent<HTMLInputElement>);
+    });
     const expectedErrorMessage = {
       cardNumber1: CardNumbersErrorMessages[ErrorStatus.INVALID_LENGTH],
     };

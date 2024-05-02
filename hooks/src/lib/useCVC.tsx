@@ -1,8 +1,9 @@
-import useInput from './useInput';
-import { validateLength, validateNumber } from '../validate/validate';
-import { ChangeEvent } from 'react';
-import { cvcErrorType } from '../types/cvc';
-import { CVCErrorMessages } from '../constants/error';
+import useInput from "./useInput";
+import { validateLength, validateNumber } from "../validate/validate";
+import { ChangeEvent } from "react";
+import { cvcErrorType } from "../types/cvc";
+import { CVCErrorMessages } from "../constants/error";
+import { VALID_LENGTH } from "../constants/system";
 
 const cvcValidates = (value: string) => {
   validateNumber(value);
@@ -10,10 +11,8 @@ const cvcValidates = (value: string) => {
 };
 
 const useCVC = (initialValue: string) => {
-  const { value, onChange, errorStatus } = useInput<cvcErrorType>(
-    initialValue,
-    cvcValidates
-  );
+  const { value, onChange, errorStatus, onBlurValidLength } =
+    useInput<cvcErrorType>(initialValue, cvcValidates, VALID_LENGTH.CVC);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     onChange(e);
@@ -23,6 +22,7 @@ const useCVC = (initialValue: string) => {
     value,
     onChange: handleChange,
     errorMessage: errorStatus && CVCErrorMessages[errorStatus],
+    onBlurValidLength,
   };
 };
 

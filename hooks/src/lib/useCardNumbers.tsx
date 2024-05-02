@@ -7,7 +7,6 @@ import {
 import useInput from "./useInput";
 import { validateNumber, validateOverLength } from "../validate/validate";
 import { CardNumbersErrorMessages } from "../constants/error.ts";
-import { FocusEvent } from "react";
 import { VALID_LENGTH } from "../constants/system.ts";
 
 const cardNumbersValidates = (value: string) => {
@@ -95,7 +94,7 @@ const useCardNumbers = (initialValues: CardNumbersType) => {
     cardNumber4: onBlurValidLength4,
   };
 
-  const onBlurValidateLength = (e: FocusEvent<HTMLInputElement>) => {
+  const onBlurValidLength = (e: React.FocusEvent<HTMLInputElement>) => {
     const { name } = e.target;
     onBlurArray[name as CardNumberKeys](e);
   };
@@ -108,7 +107,7 @@ const useCardNumbers = (initialValues: CardNumbersType) => {
       cardNumber4,
     },
     onChange,
-    onBlurValidateLength,
+    onBlurValidLength,
     errorMessages,
   };
 };

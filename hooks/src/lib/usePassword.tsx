@@ -1,8 +1,9 @@
-import useInput from './useInput';
-import { validateLength, validateNumber } from '../validate/validate';
-import { ChangeEvent } from 'react';
-import { PasswordErrorType } from '../types/password';
-import { PasswordErrorMessages } from '../constants/error';
+import useInput from "./useInput";
+import { validateLength, validateNumber } from "../validate/validate";
+import { ChangeEvent } from "react";
+import { PasswordErrorType } from "../types/password";
+import { PasswordErrorMessages } from "../constants/error";
+import { VALID_LENGTH } from "../constants/system";
 
 const passwordValidates = (value: string) => {
   validateNumber(value);
@@ -10,10 +11,12 @@ const passwordValidates = (value: string) => {
 };
 
 const usePassword = (initialValue: string) => {
-  const { value, onChange, errorStatus } = useInput<PasswordErrorType>(
-    initialValue,
-    passwordValidates
-  );
+  const { value, onChange, errorStatus, onBlurValidLength } =
+    useInput<PasswordErrorType>(
+      initialValue,
+      passwordValidates,
+      VALID_LENGTH.PASSWORD
+    );
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     onChange(e);
@@ -23,6 +26,7 @@ const usePassword = (initialValue: string) => {
     value,
     onChange: handleChange,
     errorMessage: errorStatus && PasswordErrorMessages[errorStatus],
+    onBlurValidLength,
   };
 };
 
