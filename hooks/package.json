@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "description": "npm modules",
   "type": "module",
-  "types": "dist/index.d.ts",
+  "types": "dist/lib/index.d.ts",
   "main": "dist/index.js",
   "module": "dist/index.js",
   "files": [
