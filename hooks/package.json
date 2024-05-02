@@ -1,7 +1,7 @@
 {
   "name": "use-card-input-hook",
   "version": "0.0.1",
-  "description": "npm modules",
+  "description": "A custom hook for card input",
   "type": "module",
   "types": "dist/index.d.ts",
   "main": "dist/index.js",

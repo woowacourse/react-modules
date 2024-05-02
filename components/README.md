@@ -1,4 +1,4 @@
-# Button Module
+# Modal Module
 
 ### 페이먼츠 커스텀 훅
 

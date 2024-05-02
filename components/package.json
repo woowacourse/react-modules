@@ -1,9 +1,9 @@
 {
-  "name": "compoents",
-  "version": "0.0.1",
-  "description": "npm modules",
+  "name": "styled-base-modal",
+  "version": "0.0.3",
+  "description": "A simple modal component for React using styled-components",
   "type": "module",
-  "types": "dist/index.d.ts",
+  "types": "dist/lib/index.d.ts",
   "main": "dist/index.js",
   "module": "dist/index.js",
   "files": [
@@ -21,6 +21,7 @@
     "@storybook/addon-viewport": "^8.0.9",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "styled-base-modal": "^0.0.3",
     "styled-components": "^6.1.8"
   },
   "devDependencies": {
