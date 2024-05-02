@@ -10,6 +10,7 @@ const useInput = <T,>(initialValue: string = '', validate: validateType) => {
     try {
       validate(e.target.value);
       setValue(e.target.value);
+      setErrorStatus(null);
     } catch (e) {
       if (e instanceof Error) {
         setErrorStatus(e.message as T);
