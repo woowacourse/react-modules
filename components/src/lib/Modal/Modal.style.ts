@@ -26,6 +26,7 @@ export const ModalOverlay = styled.div`
 
 export const ModalWrapper = styled.div<{ $position: ModalPositionType }>`
   background: ${colors.grey100};
+  min-width: 300px;
   color: ${colors.grey500};
   padding: 24px 32px;
   z-index: 100;
@@ -93,4 +94,10 @@ export const FooterButton = styled.button<{ $style: ModalButtonType['style'] }>`
   border-radius: 5px;
   font-size: 15px;
   font-weight: 700;
+  text-align: center;
+
+  &:hover {
+    background: ${(props) => (props.$style === 'primary' ? '#444444' : '#eeeeee')};
+    transition: 0.3s ease;
+  }
 `;
