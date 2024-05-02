@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import './App.css';
+import React, { useState } from "react";
+import "./App.css";
 import {
   useCVCValidation,
   useCardHolderValidation,
@@ -7,23 +7,31 @@ import {
   useCardPasswordValidation,
   useCardTypeValidation,
   useExpiryDateValidation,
-} from 'paran-fe-card-validation-hooks';
+} from "paran-card-validation-hooks";
 
 function App() {
-  const [cardHolder, setCardHolder] = useState('');
-  const [cardNumber, setCardNumber] = useState(['', '', '', '']);
-  const [cardPassword, setCardPassword] = useState('');
-  const [cardType, setCardType] = useState('');
-  const [cvc, setCVC] = useState('');
-  const [expiryMonth, setExpiryMonth] = useState('');
-  const [expiryYear, setExpiryYear] = useState('');
+  const [cardHolder, setCardHolder] = useState("");
+  const [cardNumber, setCardNumber] = useState(["", "", "", ""]);
+  const [cardPassword, setCardPassword] = useState("");
+  const [cardType, setCardType] = useState("");
+  const [cvc, setCVC] = useState("");
+  const [expiryMonth, setExpiryMonth] = useState("");
+  const [expiryYear, setExpiryYear] = useState("");
 
-  const { validationResult: holderValidationResult, handleCardHolderChange } = useCardHolderValidation();
-  const { validationResults: numberValidationResults, handleCardNumberChange } = useCardNumberValidation();
-  const { validationResult: passwordValidationResult, handleCardPasswordChange } = useCardPasswordValidation();
-  const { validationResult: typeValidationResult, handleCardTypeChange } = useCardTypeValidation();
-  const { validationResult: cvcValidationResult, handleCVCChange } = useCVCValidation();
-  const { validationResult: expiryValidationResult, handleExpiryDateChange } = useExpiryDateValidation();
+  const { validationResult: holderValidationResult, handleCardHolderChange } =
+    useCardHolderValidation();
+  const { validationResults: numberValidationResults, handleCardNumberChange } =
+    useCardNumberValidation();
+  const {
+    validationResult: passwordValidationResult,
+    handleCardPasswordChange,
+  } = useCardPasswordValidation();
+  const { validationResult: typeValidationResult, handleCardTypeChange } =
+    useCardTypeValidation();
+  const { validationResult: cvcValidationResult, handleCVCChange } =
+    useCVCValidation();
+  const { validationResult: expiryValidationResult, handleExpiryDateChange } =
+    useExpiryDateValidation();
 
   const handleCardNumberInputChange = (value: string, index: number) => {
     const newCardNumber = [...cardNumber];
@@ -38,7 +46,7 @@ function App() {
       <div>
         <label>Card Holder Name: </label>
         <input
-          type='text'
+          type="text"
           value={cardHolder}
           onChange={(e) => {
             setCardHolder(e.target.value);
@@ -47,7 +55,7 @@ function App() {
         />
         {!holderValidationResult.isValid &&
           holderValidationResult.errorMessage?.map((error, index) => (
-            <p key={index} style={{ color: 'red' }}>
+            <p key={index} style={{ color: "red" }}>
               {error}
             </p>
           ))}
@@ -57,7 +65,7 @@ function App() {
         {cardNumber.map((number, index) => (
           <input
             key={index}
-            type='text'
+            type="text"
             value={number}
             maxLength={4}
             onChange={(e) => handleCardNumberInputChange(e.target.value, index)}
@@ -67,7 +75,7 @@ function App() {
           <div key={index}>
             {!result.isValid &&
               result.errorMessage?.map((error, idx) => (
-                <p key={idx} style={{ color: 'red' }}>
+                <p key={idx} style={{ color: "red" }}>
                   {error}
                 </p>
               ))}
@@ -77,7 +85,7 @@ function App() {
       <div>
         <label>Card Password: </label>
         <input
-          type='text'
+          type="text"
           value={cardPassword}
           maxLength={2}
           onChange={(e) => {
@@ -87,7 +95,7 @@ function App() {
         />
         {!passwordValidationResult.isValid &&
           passwordValidationResult.errorMessage?.map((error, index) => (
-            <p key={index} style={{ color: 'red' }}>
+            <p key={index} style={{ color: "red" }}>
               {error}
             </p>
           ))}
@@ -95,7 +103,7 @@ function App() {
       <div>
         <label>Card Type: </label>
         <input
-          type='text'
+          type="text"
           value={cardType}
           onChange={(e) => {
             setCardType(e.target.value);
@@ -107,7 +115,7 @@ function App() {
       <div>
         <label>CVC: </label>
         <input
-          type='text'
+          type="text"
           value={cvc}
           onChange={(e) => {
             setCVC(e.target.value);
@@ -116,7 +124,7 @@ function App() {
         />
         {!cvcValidationResult.isValid &&
           cvcValidationResult.errorMessage?.map((error, index) => (
-            <p key={index} style={{ color: 'red' }}>
+            <p key={index} style={{ color: "red" }}>
               {error}
             </p>
           ))}
@@ -124,7 +132,7 @@ function App() {
       <div>
         <label>Expiry Month: </label>
         <input
-          type='text'
+          type="text"
           value={expiryMonth}
           maxLength={2}
           onChange={(e) => {
@@ -134,13 +142,13 @@ function App() {
         />
         {!expiryValidationResult.isValidMonth &&
           expiryValidationResult.monthErrorMessage?.map((error, index) => (
-            <p key={index} style={{ color: 'red' }}>
+            <p key={index} style={{ color: "red" }}>
               {error}
             </p>
           ))}
         <label>Expiry Year: </label>
         <input
-          type='text'
+          type="text"
           value={expiryYear}
           maxLength={2}
           onChange={(e) => {
@@ -150,7 +158,7 @@ function App() {
         />
         {!expiryValidationResult.isValidYear &&
           expiryValidationResult.yearErrorMessage?.map((error, index) => (
-            <p key={index} style={{ color: 'red' }}>
+            <p key={index} style={{ color: "red" }}>
               {error}
             </p>
           ))}

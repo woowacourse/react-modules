@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import Modal from './lib/Modal';
+import React, { useState } from "react";
+import { Modal } from "paran-simple-modal";
 
 function App() {
   const [isOpened, setIsOpened] = useState(false);
@@ -13,20 +13,20 @@ function App() {
               setIsOpened(false);
             },
           }}
-          modalPosition='bottom'
-          title={{ position: 'center', content: 'test' }}
-          subtitle={{ content: '123123' }}
-          backgroundColor='white'
+          modalPosition="bottom"
+          title={{ position: "center", content: "test" }}
+          subtitle={{ content: "123123" }}
+          backgroundColor="white"
           confirmButton={{
-            content: '확인',
+            content: "확인",
             onConfirm: () => {
-              alert('확인');
+              alert("확인");
             },
           }}
           cancelButton={{
-            content: '취소',
+            content: "취소",
             onCancel: () => {
-              alert('취소');
+              alert("취소");
             },
           }}
           children={<p>hi</p>}
