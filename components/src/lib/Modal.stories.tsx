@@ -51,7 +51,7 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const Top: Story = {
+export const Center: Story = {
   args: {
     isOpen: true,
     title: "모달 제목",
