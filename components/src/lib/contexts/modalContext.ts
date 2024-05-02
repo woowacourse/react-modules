@@ -1,6 +1,6 @@
 import { createContext } from 'react';
 
-interface ModalContextType {
+export interface ModalContextType {
   isOpen: boolean;
   closeModal: () => void;
 }
