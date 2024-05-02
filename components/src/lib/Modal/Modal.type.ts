@@ -10,6 +10,7 @@ export interface ModalProps {
   backdropType?: BackDropType;
   size?: Size;
   shadow?: boolean;
+  animation?: boolean;
 }
 
 export interface ModalFooterProps {
