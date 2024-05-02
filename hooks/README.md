@@ -53,15 +53,15 @@ return (
       name="cardNumber1"
       value={cardNumbers['cardNumber1']}
     />
-    {/*cardNumber 2*/}
     <div>{errorMessages['cardNumber1']}</div>
+    {/*cardNumber 2*/}
     <input
       onChange={onChangeCardNumbers}
       name="cardNumber2"
       value={cardNumbers['cardNumber2']}
     />
-    {/*cardNumber 3*/}
     <div>{errorMessages['cardNumber2']}</div>
+    {/*cardNumber 3*/}
     <input
       value={cardNumbers['cardNumber3']}
       onChange={onChangeCardNumbers}
