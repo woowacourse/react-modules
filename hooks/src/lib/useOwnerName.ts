@@ -5,12 +5,12 @@ import { makeOnBlur, makeOnChange } from "./domains/makeCallback";
 const MAX_LENGTH = 30;
 const validators: Validator[] = [
   {
-    validate: (value) => /^[\w\s]*$/.test(value),
-    errorMessage: "문자와 공백만 입력 가능합니다.",
+    validate: (value) => /^[A-Z\s]*$/.test(value),
+    errorMessage: "영어 대문자와 공백만 입력 가능합니다.",
   },
   {
     validate: (value) => /^(?!.*\s\s)/.test(value),
-    errorMessage: "공백은 한 번만 입력 가능합니다.",
+    errorMessage: "공백은 2번 이상 연속될 수 없습니다.",
   },
   {
     validate: (value) => value.length <= 30,
