@@ -22,13 +22,16 @@ export const ModalMain = ({
   position = 'bottom',
   size = 'lg',
   backdropType = 'opaque',
+  shadow = false,
 }: StrictPropsWithChildren<ModalProps>) => {
   if (!isOpen) return null;
 
   return (
     <div className={`${styles.modalLayout} ${position === 'center' ? styles.alignCenter : styles.alignFlexEnd}`}>
       <div onClick={close} className={`${styles.modalBackdrop} ${styles[backdropType]}`} />
-      <div className={`${styles.modalContainer} ${styles[size]} ${styles[position]}`}>{children}</div>
+      <div className={`${styles.modalContainer} ${styles[size]} ${styles[position]} ${shadow ? styles.shadow : ''}`}>
+        {children}
+      </div>
     </div>
   );
 };
