@@ -1,48 +1,47 @@
-import Modal from "./Modal";
-import Close from "../../assets/Close.png";
+import Modal from './Modal';
 
-import { StoryObj, Meta } from "@storybook/react";
-import { fn } from "@storybook/test";
+import { StoryObj, Meta } from '@storybook/react';
+import { fn } from '@storybook/test';
 
 const meta = {
-  title: "Components/Modal",
+  title: 'Components/Modal',
   component: Modal,
   parameters: {
-    layout: "centered",
+    layout: 'centered',
     docs: {
       description: {
-        component: "모달 컴포넌트",
+        component: '모달 컴포넌트',
       },
     },
   },
   argTypes: {
     isOpen: {
-      control: "boolean",
+      control: 'boolean',
       default: true,
-      description: "모달의 상태",
+      description: '모달의 상태',
       table: {
         type: {
-          summary: "boolean",
+          summary: 'boolean',
         },
       },
     },
     onClick: {
-      description: "modal을 열고 닫기 위한 핸들러 함수",
+      description: 'modal을 열고 닫기 위한 핸들러 함수',
     },
     style: {
-      control: "object",
+      control: 'object',
       table: {
         type: {
-          summary: "object",
+          summary: 'object',
         },
       },
-      description: "모달 스타일을 자유롭게 정의할 수 있습니다.",
+      description: '모달 스타일을 자유롭게 정의할 수 있습니다.',
     },
     position: {
-      control: { type: "radio" },
-      options: ["top", "bottom", "center"],
+      control: { type: 'radio' },
+      options: ['top', 'bottom', 'center'],
       description:
-        "모달 위치를 페이지 상단, 중앙, 하단으로 선택할 수 있습니다.",
+        '모달 위치를 페이지 상단, 중앙, 하단으로 선택할 수 있습니다.',
     },
   },
   args: {
@@ -57,36 +56,36 @@ const meta = {
       </Modal>
     );
   },
-  tags: ["autodocs"],
+  tags: ['autodocs'],
 } satisfies Meta<typeof Modal>;
 
 export default meta;
 
-type Story = StoryObj<typeof meta>;
+type Story = StoryObj<typeof Modal>;
 
 export const 기본: Story = {
   parameters: {
     docs: {
       description: {
-        story: "내용만 있는 기본 모달",
+        story: '내용만 있는 기본 모달',
       },
     },
   },
   args: {
     isOpen: true,
-    position: "center",
+    position: 'center',
   },
 };
 
 export const 제목이있는모달: Story = {
   args: {
     isOpen: true,
-    position: "center",
+    position: 'center',
   },
   parameters: {
     docs: {
       description: {
-        story: "제목이 있는 모달",
+        story: '제목이 있는 모달',
       },
     },
   },
@@ -95,8 +94,8 @@ export const 제목이있는모달: Story = {
       <Modal.ModalHeader>
         <Modal.ModalTitle
           style={{
-            margin: "0 auto",
-            textAlign: "center",
+            margin: '0 auto',
+            textAlign: 'center',
           }}
         >
           올리와 썬데이
@@ -112,13 +111,13 @@ export const 제목이있는모달: Story = {
 export const 상단닫기버튼이있는모달: Story = {
   args: {
     isOpen: true,
-    position: "center",
+    position: 'center',
     onClick: fn(),
   },
   parameters: {
     docs: {
       description: {
-        story: "상단 닫기 버튼이 있는 모달",
+        story: '상단 닫기 버튼이 있는 모달',
       },
     },
   },
@@ -126,28 +125,28 @@ export const 상단닫기버튼이있는모달: Story = {
   render: (args) => (
     <Modal isOpen={args.isOpen} position={args.position}>
       <Modal.ModalHeader
-        style={{ display: "flex", alignItems: "center", margin: "10px 20px" }}
+        style={{ display: 'flex', alignItems: 'center', margin: '10px 20px' }}
       >
         <Modal.ModalTitle
           style={{
-            margin: "0 auto",
-            textAlign: "center",
-            fontSize: "24px",
+            margin: '0 auto',
+            textAlign: 'center',
+            fontSize: '24px',
           }}
         >
           올리와 썬데이
         </Modal.ModalTitle>
         <Modal.ModalCloseButton
           style={{
-            border: "none",
-            margin: "3px",
+            border: 'none',
+            margin: '3px',
           }}
           onClick={args.onClick}
         >
-          <img src={Close}></img>
+          X
         </Modal.ModalCloseButton>
       </Modal.ModalHeader>
-      <Modal.ModalContent style={{ margin: "20px 20px" }}>
+      <Modal.ModalContent style={{ margin: '20px 20px' }}>
         <span>올리와 썬데이의 상단 닫기 버튼이 있는 모달</span>
       </Modal.ModalContent>
     </Modal>
@@ -157,13 +156,13 @@ export const 상단닫기버튼이있는모달: Story = {
 export const 하단닫기버튼이있는모달: Story = {
   args: {
     isOpen: true,
-    position: "center",
+    position: 'center',
     onClick: fn(),
   },
   parameters: {
     docs: {
       description: {
-        story: "하단 닫기 버튼이 있는 모달",
+        story: '하단 닫기 버튼이 있는 모달',
       },
     },
   },
@@ -171,22 +170,22 @@ export const 하단닫기버튼이있는모달: Story = {
   render: (args) => (
     <Modal isOpen={args.isOpen} position={args.position}>
       <Modal.ModalHeader
-        style={{ display: "flex", alignItems: "center", margin: "10px 20px" }}
+        style={{ display: 'flex', alignItems: 'center', margin: '10px 20px' }}
       >
         <Modal.ModalTitle>올리와 썬데이</Modal.ModalTitle>
       </Modal.ModalHeader>
-      <Modal.ModalContent style={{ margin: "20px 10px" }}>
+      <Modal.ModalContent style={{ margin: '20px 10px' }}>
         <span>올리와 썬데이의 하단 닫기 버튼이 있는 모달</span>
       </Modal.ModalContent>
       <Modal.ModalFooter
         style={{
-          display: "flex",
-          justifyContent: "center",
-          margin: "10px",
+          display: 'flex',
+          justifyContent: 'center',
+          margin: '10px',
         }}
       >
         <Modal.ModalCloseButton
-          style={{ padding: "5px 15px" }}
+          style={{ padding: '5px 15px' }}
           onClick={args.onClick}
         >
           확인

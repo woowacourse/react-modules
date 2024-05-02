@@ -1,10 +1,10 @@
-import * as Styled from "./Modal.styled";
-import { HTMLAttributes, CSSProperties } from "react";
+import * as Styled from './Modal.styled';
+import { HTMLAttributes, CSSProperties } from 'react';
 
-interface ModalProps extends React.PropsWithChildren {
+export interface ModalProps extends React.PropsWithChildren {
   children?: React.ReactNode;
   isOpen: boolean;
-  position: "top" | "bottom" | "center";
+  position: 'top' | 'bottom' | 'center';
   style?: CSSProperties;
   onClick?: (event: React.MouseEvent<HTMLElement>) => void;
 }
@@ -51,7 +51,7 @@ type ModalCloseButtonType = React.FC<
 
 const ModalCloseButton: ModalCloseButtonType = ({ children, ...restProps }) => {
   return (
-    <button type="button" {...restProps}>
+    <button type='button' {...restProps}>
       {children}
     </button>
   );
