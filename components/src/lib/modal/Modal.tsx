@@ -1,9 +1,11 @@
 import * as Styled from "./Modal.styled";
-import { HTMLAttributes } from "react";
+import { HTMLAttributes, CSSProperties } from "react";
 
 interface ModalProps extends React.PropsWithChildren {
   children?: React.ReactNode;
   isOpen: boolean;
+  position: "top" | "bottom" | "center";
+  style?: CSSProperties;
   onClick?: (event: React.MouseEvent<HTMLElement>) => void;
 }
 
@@ -13,12 +15,14 @@ const Modal: React.FC<ModalProps> & {
   ModalCloseButton: ModalCloseButtonType;
   ModalContent: ModalContentType;
   ModalFooter: ModalFooterType;
-} = ({ children, isOpen, onClick, ...restProps }) => {
+} = ({ children, isOpen, onClick, position, ...restProps }) => {
   return (
     <>
       {isOpen && (
         <Styled.ModalBackdrop onClick={onClick}>
-          <Styled.ModalWrapper {...restProps}>{children}</Styled.ModalWrapper>
+          <Styled.ModalWrapper position={position} {...restProps}>
+            {children}
+          </Styled.ModalWrapper>
         </Styled.ModalBackdrop>
       )}
     </>

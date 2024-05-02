@@ -12,17 +12,38 @@ export const ModalBackdrop = styled.div`
   align-items: center;
 `;
 
-export const ModalWrapper = styled.section`
+export const ModalWrapper = styled.section<{
+  position: "top" | "center" | "bottom";
+}>`
   position: fixed;
-  top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translateX(-50%);
   margin: 0;
   padding: 0;
   background-color: white;
   height: fit-content;
   box-sizing: border-box;
   border: none;
+
+  ${({ position }) => {
+    switch (position) {
+      case "top":
+        return `
+          top: 0;
+          transform: translate(-50%, 0%);
+        `;
+      case "bottom":
+        return `
+          bottom: 0;
+          transform: translate(-50%, 0%);
+        `;
+      case "center":
+        return `
+          top: 50%;
+          transform: translate(-50%, -50%);
+        `;
+    }
+  }}
 `;
 
 export const ModalHeader = styled.header`
