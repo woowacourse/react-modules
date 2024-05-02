@@ -43,11 +43,12 @@ const useCardCompany = (cardCompanyList: readonly string[] = COMPANY_LIST) => {
 
   const cardCompanyRef = useRef<HTMLSelectElement>(null);
 
-  const clickCardCompany = (
-    event: ChangeEvent<HTMLSelectElement> | CustomMouseEvent
-  ) => {
+  const clickCardCompany = (event: ChangeEvent<HTMLSelectElement> | CustomMouseEvent) => {
     const { value } = event.target;
     setCardCompanyWrapper(value);
+    if (cardCompanyRef.current?.value) {
+      cardCompanyRef.current.value = value;
+    }
     cardCompanyRef.current?.blur();
   };
 
