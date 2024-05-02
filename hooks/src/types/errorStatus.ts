@@ -9,6 +9,7 @@ export enum ErrorStatus {
   IS_NOT_NUMBER = 'isNotNumber',
   IS_DOUBLE_BLANK = 'isDoubleBlank',
   ONLY_UPPERCASE = 'onlyUpperCase',
+  INVALID_OPTION = 'invalidOption',
 }
 
 export type ErrorStatusType = keyof typeof ErrorStatus;

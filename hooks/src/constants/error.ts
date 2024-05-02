@@ -33,3 +33,5 @@ export const ExpiryDateErrorMessages: Record<ExpiryDateErrorType, string> = {
   [ErrorStatus.INVALID_YEAR]: '유효하지 않은 년 입력입니다.',
   [ErrorStatus.INVALID_LENGTH]: '일자는 2자리 숫자로 입력해 주세요.',
 };
+
+export const cardCompanyErrorMessage = '유효하지 않은 옵션입니다.';
