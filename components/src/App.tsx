@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Modal from './lib/Modal';
+import { Modal } from 'fe-custom-modal';
 
 function App() {
   const [isOpened, setIsOpened] = useState(false);
