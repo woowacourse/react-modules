@@ -12,8 +12,7 @@ const cardNumbersValidates = (value: string) => {
   validateNumber(value);
   validateLength(value, 4);
 };
-
-export const useCardNumbers = (initialValues: CardNumbersType) => {
+const useCardNumbers = (initialValues: CardNumbersType) => {
   const {
     value: cardNumber1,
     onChange: onChangeNumber1,
@@ -90,3 +89,5 @@ export const useCardNumbers = (initialValues: CardNumbersType) => {
     errorMessages,
   };
 };
+
+export default useCardNumbers;

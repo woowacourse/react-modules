@@ -1,6 +1,6 @@
 import { renderHook } from '@testing-library/react';
 import React, { ChangeEvent } from 'react';
-import { useCardNumbers } from '../useCardNumbers';
+import useCardNumbers from '../useCardNumbers';
 import { CardNumbersErrorMessages } from '../../constants/error';
 import { ErrorStatus } from '../../types/errorStatus';
 
