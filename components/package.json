@@ -1,7 +1,15 @@
 {
   "name": "styled-base-modal",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "A simple modal component for React using styled-components",
+  "keywords": [
+    "react",
+    "modal",
+    "styled-components",
+    "base-modal",
+    "styled-base-modal",
+    "합성 컴포넌트"
+  ],
   "type": "module",
   "types": "dist/lib/index.d.ts",
   "main": "dist/index.js",

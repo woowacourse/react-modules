@@ -1,7 +1,16 @@
 {
   "name": "use-card-input-hook",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "A custom hook for card input",
+  "keywords": [
+    "react",
+    "hook",
+    "card",
+    "useInput",
+    "useCardInput",
+    "card-input",
+    "카드 컴포넌트 커스텀 훅"
+  ],
   "type": "module",
   "types": "dist/lib/index.d.ts",
   "main": "dist/index.js",
