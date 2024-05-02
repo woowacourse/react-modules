@@ -1,7 +1,7 @@
 {
-  "name": "compoents",
+  "name": "ollie-modal-compoents",
   "version": "0.0.1",
-  "description": "npm modules",
+  "description": "모달 모듈 배포",
   "type": "module",
   "types": "dist/index.d.ts",
   "main": "dist/index.js",

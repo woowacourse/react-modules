@@ -1,7 +1,7 @@
 import * as Styled from "./Modal.styled";
 import { HTMLAttributes, CSSProperties } from "react";
 
-interface ModalProps extends React.PropsWithChildren {
+export interface ModalProps extends React.PropsWithChildren {
   children?: React.ReactNode;
   isOpen: boolean;
   position: "top" | "bottom" | "center";
