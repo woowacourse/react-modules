@@ -14,14 +14,14 @@
     "noEmit": true,
     "jsx": "react-jsx",
 
+    /* Testing */
+    "types": ["jest"],
+
     /* Linting */
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
-
-    /* Testing */
-    "types": ["jest"],
 
     "esModuleInterop": true
   },
