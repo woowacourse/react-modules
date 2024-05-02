@@ -35,6 +35,7 @@ npm install use-card-input-hook
 const {
   values: cardNumbers,
   onChange: onChangeCardNumbers,
+  onBlur: onBlurCardNumbers,
   errorMessages,
 } = useCardNumbers({
   cardNumber1: '',
@@ -50,6 +51,7 @@ return (
     {/*cardNumber 1*/}
     <input
       onChange={onChangeCardNumbers}
+      onBlur={onBlurCardNumbers}
       name="cardNumber1"
       value={cardNumbers['cardNumber1']}
     />
@@ -117,12 +119,17 @@ return (
 > [IS_DOUBLE_BLANK]: '빈칸이 두개 이상 포함되어 있습니다.'
 
 ```tsx
-const { value, onChange, errorMessage } = useCardHolder('');
+const { value, onChange, onBlur, errorMessage } = useCardHolder('');
 
 return (
   <>
     <label>CardHolder</label>
-    <input value={value} onChange={onChange} name="cardHolder" />
+    <input
+      value={value}
+      onChange={onChange}
+      onBlur={onBlur}
+      name="cardHolder"
+    />
     <div>{errorMessage}</div>
   </>
 );
@@ -143,6 +150,7 @@ return (
 const {
   values: { month, year },
   onChange,
+  onBlur,
   errorMessages,
 } = useExpiryDate({
   month: '',
@@ -152,10 +160,10 @@ const {
 return (
   <>
     <label>expiryDate</label>
-    <input value={month} onChange={onChange} name="month" />
+    <input value={month} onChange={onChange} onBlur={onBlur} name="month" />
 
     <div>{errorMessages && errorMessages.month}</div>
-    <input value={year} onChange={onChange} name="year" />
+    <input value={year} onChange={onChange} onBlur={onBlur} name="year" />
     <div>{errorMessages && errorMessages.year}</div>
   </>
 );
@@ -170,11 +178,11 @@ return (
 > [INVALID_LENGTH]: 'CVC는 3글자 이상으로 입력해 주세요.'
 
 ````tsx
-  const { value, onChange, errorMessage } = useCVC('');
+  const { value, onChange, onBlur, errorMessage } = useCVC('');
   return (
     <>
       <label>CVC</label>
-      <input value={value} onChange={onChange} name="CVC" />
+      <input value={value} onChange={onChange} onBlur={onBlur} name="CVC" />
       {errorMessage && <p>{errorMessage}</p>}
     </>
   );```
@@ -189,12 +197,12 @@ return (
 > [INVALID_LENGTH]: '비밀번호는 2글자만 입력해 주세요.'
 
 ```tsx
-const { value, onChange, errorMessage } = usePassword('');
+const { value, onChange, onBlur, errorMessage } = usePassword('');
 
 return (
   <>
     <label>password</label>
-    <input value={value} onChange={onChange} name="password" />
+    <input value={value} onChange={onChange} onBlur={onBlur} name="password" />
     <div>{errorMessage}</div>
   </>
 );
