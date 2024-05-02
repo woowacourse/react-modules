@@ -68,8 +68,8 @@
 
 ### `useCardPassword` 커스텀 훅
 
-- [ ] useCardPassword
-- [ ] useCardPasswordValidation
+- [x] useCardPassword
+- [x] useCardPasswordValidation
 
 커스텀 훅은 카드 정보의 유효성 검사 결과와 에러 정보를 사용자인 개발자에게
 제공할 수 있어야 한다. 예를 들어 useCardNumber hook을 만든다면 카드 번호 유효성 검사 결과를 불리언 값으로 반환해야 한다. 만약 유효성 검사에 실패한 경우, 에러 정보를 문자열 형태로 반환할 수 있어야 한다.
