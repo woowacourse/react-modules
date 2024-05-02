@@ -9,7 +9,7 @@
 ## - 설치
 
 ```
-npm install tenbur-modal
+npm install brgndy-modal
 ```
 
 ## - 사용법
