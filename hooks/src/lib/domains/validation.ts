@@ -1,4 +1,3 @@
-// import { useEffect } from "react";
 import { InputState, Status } from "./useInput";
 
 export type ValidatorStatus = Extract<Status, "change" | "blur">;
