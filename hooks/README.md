@@ -1,28 +1,23 @@
 # Get started
 
-당신의 패키지 매니저를 통해 `@hannuny/react-card-hooks` 을 설치해 주세요:
+당신의 패키지 매니저를 통해 `@pakxe/react-card-info-hooks` 을 설치해 주세요:
 
 ```shell
-npm install @hannuny/react-card-hooks
+npm install @pakxe/react-card-info-hooks
 ```
 
-카드 훅을 import 하세요:
+`@pakxe/react-card-info-hooks` 컴포넌트를 import 하세요:
 
 ```javascript
-import { useCardCVC } from '@hannuny/react-card-hooks';
+import { useCardCVC } from '@pakxe/react-card-info-hooks';
 
 export const MyComponent = () => {
-  const { cvcNumber, isValidCVCNumber, cvcNumberErrorMessage, handleCVCNumberChange } =
-    useCardCVC();
+  const { cvcNumber, isValidCVCNumber, cvcNumberErrorMessage, handleCVCNumberChange } = useCardCVC();
 
   return (
     <>
       <h3>useCardCVC</h3>
-      <input
-        type="text"
-        value={cvcNumber}
-        onChange={(e) => handleCVCNumberChange(e.target.value)}
-      />
+      <input type='text' value={cvcNumber} onChange={(e) => handleCVCNumberChange(e.target.value)} />
       <div>
         <p>{isValidCVCNumber ? 'true' : 'false'}</p>
         <p>{cvcNumberErrorMessage}</p>
@@ -82,32 +77,27 @@ export const MyComponent = () => {
 
 ```js
 export const MyComponent = () => {
-  const { cardNumber, isValidCardNumbers, cardNumberErrorMessages, handleCardNumberChange } =
-    useCardNumber(4, 4);
+  const { cardNumber, isValidCardNumbers, cardNumberErrorMessages, handleCardNumberChange } = useCardNumber(4, 4);
 
   return (
     <>
       <h3>useCardNumber</h3>
       <input
-        type="text"
+        type='text'
         value={cardNumbers.cardNumber[0]}
-        onChange={(e) => cardNumbers.handleCardNumberChange(e.target.value, 0)}
-      ></input>
+        onChange={(e) => cardNumbers.handleCardNumberChange(e.target.value, 0)}></input>
       <input
-        type="text"
+        type='text'
         value={cardNumbers.cardNumber[1]}
-        onChange={(e) => cardNumbers.handleCardNumberChange(e.target.value, 1)}
-      ></input>
+        onChange={(e) => cardNumbers.handleCardNumberChange(e.target.value, 1)}></input>
       <input
-        type="text"
+        type='text'
         value={cardNumbers.cardNumber[2]}
-        onChange={(e) => cardNumbers.handleCardNumberChange(e.target.value, 2)}
-      ></input>
+        onChange={(e) => cardNumbers.handleCardNumberChange(e.target.value, 2)}></input>
       <input
-        type="text"
+        type='text'
         value={cardNumbers.cardNumber[3]}
-        onChange={(e) => cardNumbers.handleCardNumberChange(e.target.value, 3)}
-      ></input>
+        onChange={(e) => cardNumbers.handleCardNumberChange(e.target.value, 3)}></input>
       <div>
         <p>{`${cardNumbers.isValidCardNumbers}`}</p>
         // 에러 메세지를 하나씩 띄우도록 해야합니다.
@@ -133,14 +123,17 @@ export const MyComponent = () => {
 
 ```js
 export const MyComponent = () => {
-  const { cardCompany, isValidCardCompany, cardCompanyErrorMessage, handleCardCompanyChange } =
-    useCardCompany(['신한카드', '롯데카드', 'BC카드']);
+  const { cardCompany, isValidCardCompany, cardCompanyErrorMessage, handleCardCompanyChange } = useCardCompany([
+    '신한카드',
+    '롯데카드',
+    'BC카드',
+  ]);
 
   return (
     <>
       <h3>useCardCompany</h3>
       <select onChange={(e) => handleCardCompanyChange(e.target.value)}>
-        <option selected={cardCompany === ''} value="">
+        <option selected={cardCompany === ''} value=''>
           선택해 주세요
         </option>
         <option selected={cardCompany === '신한카드'}>신한카드</option>
@@ -170,20 +163,17 @@ export const MyComponent = () => {
 <summary>사용 예시</summary>
 
 ```js
+import { useCardCVC } from '@pakxe/react-card-info-hooks';
+
 export const MyComponent = () => {
-  const { cvcNumber, isValidCVCNumber, cvcNumberErrorMessage, handleCVCNumberChange } =
-    useCardCVC(4);
+  const { cvcNumber, isValidCVCNumber, cvcNumberErrorMessage, handleCVCNumberChange } = useCardCVC(4);
 
   // 이제 카드 CVC 번호는 4자리 숫자여야만 유효합니다.
 
   return (
     <>
       <h3>useCardCVC</h3>
-      <input
-        type="text"
-        value={cvcNumber}
-        onChange={(e) => handleCVCNumberChange(e.target.value)}
-      />;<div>
+      <input type='text' value={cvcNumber} onChange={(e) => handleCVCNumberChange(e.target.value)} />;<div>
         <p>{isValidCVCNumber ? 'true' : 'false'}</p>
         <p>{cvcNumberErrorMessage}</p>
       </div>
@@ -206,16 +196,17 @@ export const MyComponent = () => {
 <summary>사용 예시</summary>
 
 ```js
+import { useCardPassword } from '@pakxe/react-card-info-hooks';
+
 export const MyComponent = () => {
-  const { password, isValidPassword, passwordErrorMessage, handlePasswordChange } =
-    useCardPassword(4);
+  const { password, isValidPassword, passwordErrorMessage, handlePasswordChange } = useCardPassword(4);
 
   // 이제 카드 비밀번호는 4자리 숫자여야만 유효합니다.
 
   return (
     <>
       <h3>useCardPassword</h3>
-      <input type="text" value={password} onChange={(e) => handlePasswordChange(e.target.value)} />
+      <input type='text' value={password} onChange={(e) => handlePasswordChange(e.target.value)} />
       <div>
         <p>{isValidPassword ? 'true' : 'false'}</p>
         <p>{passwordErrorMessage}</p>
