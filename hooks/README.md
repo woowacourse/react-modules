@@ -5,7 +5,7 @@
 # installation
 
 ```bash
-
+npm install @jaymyong66/payments-hooks
 ```
 
 # Hooks spec
@@ -58,9 +58,9 @@ const SimpleComponent = () => {
 
 ### Return Value
 
-| Return Value                                              | type     | description                                                                                                                                                       |
-| --------------------------------------------------------- | -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------ |
-| `{ expiration, expirationError, handleChangeExpiration }` | `object` | Contains the expiration (`{year : string; month : string;}`), expiration error (`{isError: boolean, errorMessage: string}`) state, and a handler (`(field: 'year' | 'month', value: string) => void`) to change the card number. |
+| Return Value | type | description |
+| ------------ | ---- | ----------- |
+| `{ expiration, expirationError, handleChangeExpiration }` | `object` | Contains the expiration (`{year : string; month : string;}`), expiration error (`{isError: boolean, errorMessage: string}`) state, and a handler (`(field: 'year' | 'month', value: string) => void`) to change the card number. |  
 
 ## useOwnerName
 
@@ -88,7 +88,7 @@ const SimpleComponent = () => {
 
 ## useCVCNumber
 
-Also can only accept numeric input.> Return validated CVC Number for the payment card. It takes a consisting of three-digit number.
+> Return validated CVC Number for the payment card. It takes a consisting of three-digit number. Also can only accept numeric input.
 
 ### Simple Example
 
