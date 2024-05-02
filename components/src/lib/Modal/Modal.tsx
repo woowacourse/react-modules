@@ -19,7 +19,7 @@ export const ModalMain = ({
   isOpen,
   close,
   children,
-  position = 'bottom',
+  position = 'center',
   size = 'lg',
   backdropType = 'opaque',
   shadow = false,
@@ -27,7 +27,7 @@ export const ModalMain = ({
   if (!isOpen) return null;
 
   return (
-    <div className={`${styles.modalLayout} ${position === 'center' ? styles.alignCenter : styles.alignFlexEnd}`}>
+    <div className={`${styles.modalLayout} ${styles[position]}`}>
       <div onClick={close} className={`${styles.modalBackdrop} ${styles[backdropType]}`} />
       <div className={`${styles.modalContainer} ${styles[size]} ${styles[position]} ${shadow ? styles.shadow : ''}`}>
         {children}

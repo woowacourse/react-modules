@@ -35,12 +35,16 @@
   z-index: 999;
 }
 
-.alignCenter {
+.modalLayout.center {
   align-items: center;
 }
 
-.alignFlexEnd {
+.modalLayout.bottom {
   align-items: flex-end;
+}
+
+.modalLayout.top {
+  align-items: flex-start;
 }
 
 .modalBackdrop {
@@ -85,13 +89,18 @@
   width: 100%;
 }
 
-.center {
+.modalContainer.top {
+  max-height: 90vh;
+  border-radius: 0 0 8px 8px;
+}
+
+.modalContainer.center {
   max-height: 70vh;
   border-radius: 8px;
   margin: 0 36px;
 }
 
-.bottom {
+.modalContainer.bottom {
   max-height: 90vh;
   border-radius: 8px 8px 0 0;
 }
