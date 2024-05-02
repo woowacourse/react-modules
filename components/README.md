@@ -64,11 +64,13 @@ export const MyComponent = () => {
 
 ### `Modal` 컴포넌트
 
-| Name           | Type                                  | Default    | Description                         |
-| -------------- | ------------------------------------- | ---------- | ----------------------------------- |
-| `position`     | `'bottom' \| 'center'`                | `'bottom'` | 모달의 위치를 설정합니다.           |
-| `size`         | `'sm' \| 'md' \| 'lg'`                | `'lg'`     | 모달의 크기를 설정합니다.           |
-| `backdropType` | `'transparent' \| 'blur' \| 'opaque'` | `'opaque'` | 원하는 배경 효과 유형을 정의합니다. |
+| Name           | Type                                  | Default    | Description                            |
+| -------------- | ------------------------------------- | ---------- | -------------------------------------- |
+| `position`     | `'bottom' \| 'center'`                | `'bottom'` | 모달의 위치를 설정합니다.              |
+| `size`         | `'sm' \| 'md' \| 'lg'`                | `'lg'`     | 모달의 크기를 설정합니다.              |
+| `backdropType` | `'transparent' \| 'blur' \| 'opaque'` | `'opaque'` | 원하는 배경 효과 유형을 정의합니다.    |
+| `shadow`       | `boolean`                             | `'true'`   | 모달에 그림자 효과를 설정합니다.       |
+| `animation`    | `boolean`                             | `true`     | 모달 트랜지션 애니메이션을 설정합니다. |
 
 ### `Modal.Button` 컴포넌트
 
