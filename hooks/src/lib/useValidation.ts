@@ -1,5 +1,5 @@
 import { useState } from "react";
-interface IErrorStatus {
+export interface IErrorStatus {
   isValid: boolean;
   errorMessage: string | null;
 }
