@@ -5,34 +5,89 @@ import React, { useState } from 'react';
 
 import styled from 'styled-components';
 
-const buttons: ModalButtonType[] = [
-  {
-    text: '동의하고 저장하기',
-    style: 'primary',
-    onClick: () => alert('동의하고 저장하기 버튼을 눌렀어요!'),
-  },
-  {
-    text: '닫기',
-    style: 'secondary',
-    onClick: () => alert('닫기 버튼을 눌렀어요!'),
-  },
-];
-
 function App() {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpenCenterModal, setIsOpenCenterModal] = useState(false);
+  const [isOpenBottomModal, setIsOpenBottomModal] = useState(false);
+
+  const MODAL_CENTER_BUTTONS: ModalButtonType[] = [
+    {
+      text: '동의하고 저장하기',
+      style: 'primary',
+      onClick: () => {
+        setIsOpenCenterModal(false);
+      },
+    },
+    {
+      text: '닫기',
+      style: 'secondary',
+      onClick: () => {
+        setIsOpenCenterModal(false);
+      },
+    },
+  ];
+
+  const MODAL_BOTTOM_BUTTONS: ModalButtonType[] = [
+    {
+      text: '동의하고 저장하기',
+      style: 'primary',
+      onClick: () => {
+        setIsOpenBottomModal(false);
+      },
+    },
+    {
+      text: '닫기',
+      style: 'secondary',
+      onClick: () => {
+        setIsOpenBottomModal(false);
+      },
+    },
+  ];
 
   return (
     <>
-      <h1>Component Modules</h1>
-      <button onClick={() => setIsOpen(true)}>Click me!</button>
+      <h1>Modal Component Module</h1>
+      <p>React 기반의 간단한 모달 컴포넌트입니다.</p>
+
+      <div className="button-container">
+        <button onClick={() => setIsOpenCenterModal(true)}>'Center' 타입 모달 열기</button>
+        <button onClick={() => setIsOpenBottomModal(true)}>'Bottom' 타입 모달 열기</button>
+      </div>
 
       <Modal
-        isOpen={isOpen}
-        title="모달 컴포넌트 테스트"
+        isOpen={isOpenCenterModal}
+        title="Center 타입 모달 컴포넌트"
+        position="center"
+        hasCloseButton={true}
+        footerButtons={MODAL_CENTER_BUTTONS}
+        onClose={() => setIsOpenCenterModal(false)}
+      >
+        <Form>
+          <InputCheckBox>
+            <input
+              name="checkbox-1"
+              type="checkbox"
+              value=""
+            />
+            <label htmlFor="checkbox-1">[필수] 개인정보 수집이용 동의</label>
+          </InputCheckBox>
+          <InputCheckBox>
+            <input
+              name="checkbox-2"
+              type="checkbox"
+              value=""
+            />
+            <label htmlFor="checkbox-2">[필수] 고객정보 제 3자 제공 동의</label>
+          </InputCheckBox>
+        </Form>
+      </Modal>
+
+      <Modal
+        isOpen={isOpenBottomModal}
+        title="Bottom 타입 모달 컴포넌트"
         position="bottom"
         hasCloseButton={true}
-        footerButtons={buttons}
-        onClose={() => setIsOpen(false)}
+        footerButtons={MODAL_BOTTOM_BUTTONS}
+        onClose={() => setIsOpenBottomModal(false)}
       >
         <Form>
           <InputCheckBox>

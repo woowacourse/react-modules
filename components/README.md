@@ -5,7 +5,7 @@ React 기반의 간단한 모달 컴포넌트입니다.
 ## 설치 방법
 
 ```Bash
-npm install woowacourse-my-sample-modal
+npm install @seongjinme/react-modal
 ```
 
 ## 사용 방법

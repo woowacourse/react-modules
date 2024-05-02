@@ -1,0 +1,75 @@
+name: "@seongjinme Components, Hooks 모듈 코드 배포"
+
+on:
+  push:
+    branches: ["step1"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
+
+jobs:
+  deploy-all:
+    environment:
+      name: github-pages
+    runs-on: ubuntu-latest
+    steps:
+      - name: Git 저장소 Checkout
+        uses: actions/checkout@v3
+
+      - name: Node 설치 및 셋업
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
+          cache: "npm"
+
+      - name: react-modal 앱의 dependencies 설치
+        run: npm install
+        working-directory: ./components
+
+      - name: react-modal 앱 빌드
+        run: npm run build
+        working-directory: ./components
+
+      - name: react-modal 스토리북 빌드
+        run: |
+          npm run build-storybook
+          mv storybook-static dist/storybook
+        working-directory: ./components
+
+      - name: react-modal의 빌드된 파일을 dist 경로로 이동
+        run: |
+          mkdir -p ../dist/react-modal
+          mv dist/* ../dist/react-modal
+        working-directory: ./components
+
+      - name: react-hooks 앱의 dependencies 설치
+        run: npm install
+        working-directory: ./hooks
+
+      - name: react-hooks 앱 빌드
+        run: npm run build
+        working-directory: ./hooks
+
+      - name: react-hooks의 빌드된 파일을 dist 경로로 이동
+        run: |
+          mkdir -p ../dist/react-hooks
+          mv dist/* ../dist/react-hooks
+        working-directory: ./hooks
+
+      - name: 깃허브 페이지 셋업
+        uses: actions/configure-pages@v3
+
+      - name: 깃허브 페이지에 빌드된 정적 파일(artifact) 업로드
+        uses: actions/upload-pages-artifact@v1
+        with:
+          path: "./dist"
+
+      - name: 깃허브 페이지 배포
+        uses: actions/deploy-pages@v1
