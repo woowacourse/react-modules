@@ -2,7 +2,7 @@
 
 ### 설치하기
 
-```jsx
+```shell
 npm install harrysimodal
 ```
 
