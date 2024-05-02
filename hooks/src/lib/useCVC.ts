@@ -10,7 +10,7 @@ const validators: Validator[] = [
   },
   {
     validate: (value) => value.length === 3,
-    errorMessage: `필드의 길이는 ${COMPLETE_LENGTH}여야합니다.`,
+    errorMessage: `CVC의 길이는 ${COMPLETE_LENGTH}여야합니다.`,
     type: "blur",
   },
 ];
