@@ -50,7 +50,6 @@ export default function useCardExpiryDate(
     }
 
     setValidationResult({ isValid: true });
-    // setExpiryDate(value);
   };
 
   return {
