@@ -24,6 +24,6 @@ describe("카드 소지자 이름 입력에 대한 useCardHolderValidation 커�
   it("이름이 허용된 길이를 초과하는 경우, 오류 메시지를 반환해야 한다", () => {
     const { result } = renderHook(() => useCardHolderValidation({ cardHolder: "ABCDEFGHIJASDSAFGASDSAKLMNOPQRSTUVWXYZ" }));
     expect(result.current.validationResult.isValid).toBe(false);
-    expect(result.current.validationResult.errorMessage).toBe(ERROR_MESSAGE.OUT_OF_RANGE_HOLDER);
+    expect(result.current.validationResult.errorMessage).toBe(ERROR_MESSAGE.INVALID_HOLDER_LENGTH);
   });
 });

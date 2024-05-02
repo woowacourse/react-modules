@@ -28,7 +28,7 @@ const useCardHolderValidation = ({ cardHolder }: Props) => {
   if (!validator.isValidLengthRange({ value: cardHolder, maxLength: 21 })) {
     ref.current = {
       isValid: false,
-      errorMessage: ERROR_MESSAGE.OUT_OF_RANGE_HOLDER,
+      errorMessage: ERROR_MESSAGE.INVALID_HOLDER_LENGTH,
     };
     return { validationResult: ref.current };
   }

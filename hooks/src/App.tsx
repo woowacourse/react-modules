@@ -1,7 +1,7 @@
 import React from "react";
 import "./App.css";
 import { useState } from "react";
-import { useCardNumbersValidation, useExpiryDateValidation, useCardHolderValidation, useCVCValidation, usePasswordValidation } from "tenbur-card-validation-hooks";
+import { useCardNumbersValidation, useExpiryDateValidation, useCardHolderValidation, useCVCValidation, usePasswordValidation } from "chlwlstlf-card-validation-hooks";
 
 function App() {
   const [cardNumbers, setCardNumbers] = useState(["", "", "", ""]);

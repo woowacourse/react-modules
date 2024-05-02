@@ -1,18 +1,18 @@
-# tenbur-card-validation-hooks
+# chlwlstlf-card-validation-hooks
 
 텐텐과 버건디가 만든 카드 정보 입력 유효성 검사 커스텀 훅
 
 ## - 설치
 
 ```
-npm install tenbur-card-validation-hooks
+npm install chlwlstlf-card-validation-hooks
 ```
 
 ## - useCardNumbersValidation 사용법
 
 ```javascript
 import { useState } from "react";
-import { useCardNumbersValidation } from "tenbur-card-validation-hooks";
+import { useCardNumbersValidation } from "chlwlstlf-card-validation-hooks";
 
 function App() {
   const [cardNumbers, setCardNumbers] = useState(["", "", "", ""]);
@@ -61,11 +61,14 @@ export default App;
 | ----------- | -------- | ----------- |
 | cardNumbers | string[] | 카드 번호   |
 
+<br>
+<br>
+
 ## - useExpiryDateValidation 사용법
 
 ```javascript
 import { useState } from "react";
-import { useExpiryDateValidation } from "tenbur-card-validation-hooks";
+import { useExpiryDateValidation } from "chlwlstlf-card-validation-hooks";
 
 function App() {
   const [expiryDate, setExpiryDate] = useState({ month: "", year: "" });
@@ -116,11 +119,14 @@ export default App;
 | month | string   | 월          |
 | year  | string   | 연도        |
 
+<br>
+<br>
+
 ## - useCardHolderValidation 사용법
 
 ```javascript
 import { useState } from "react";
-import { useCardHolderValidation } from "tenbur-card-validation-hooks";
+import { useCardHolderValidation } from "chlwlstlf-card-validation-hooks";
 
 function App() {
   const [cardHolder, setCardHolder] = useState("");
@@ -160,11 +166,14 @@ export default App;
 | ---------- | -------- | ----------- |
 | cardHolder | string   | 사용자 이름 |
 
+<br>
+<br>
+
 ## - useCVCValidation 사용법
 
 ```javascript
 import { useState } from "react";
-import { useCVCValidation } from "tenbur-card-validation-hooks";
+import { useCVCValidation } from "chlwlstlf-card-validation-hooks";
 
 function App() {
   const [cvc, setCVC] = useState("");
@@ -206,11 +215,14 @@ export default App;
 | ---- | -------- | ----------- |
 | cvc  | string   | CVC         |
 
+<br>
+<br>
+
 ## - usePasswordValidation 사용법
 
 ```javascript
 import { useState } from "react";
-import { usePasswordValidation } from "tenbur-card-validation-hooks";
+import { usePasswordValidation } from "chlwlstlf-card-validation-hooks";
 
 function App() {
   const [password, setPassword] = useState("");
