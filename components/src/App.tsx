@@ -20,7 +20,7 @@ function App() {
           <Modal.Button text="닫기" mode="secondary" size="lg" onClick={() => setIsOpen(false)}></Modal.Button>
         </Modal.Footer>
       </Modal>
-    </>
+    </div>
   );
 }
 
