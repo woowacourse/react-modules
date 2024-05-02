@@ -100,7 +100,7 @@ function CardIssuerComponent() {
 
 `useCardNumber` 훅은 React 프로젝트에서 사용자가 입력한 카드 번호의 유효성을 검증합니다. 이 훅은 네 개의 카드 번호 부분(각각 4자리)을 별도로 입력받아, 각 부분이 숫자로만 이루어져 있고 정확히 4자리인지를 검증합니다. 유효하지 않은 입력에 대해서는 적절한 오류 메시지를 반환합니다.
 
-## 사용 예제
+### 사용 예제
 
 ```tsx
 import React from 'react';
@@ -127,19 +127,15 @@ function CardNumberForm() {
 }
 ```
 
-## useCVC Hook 사용하기
+## useCVC
 
 `useCVC`는 React 프로젝트에서 사용자가 입력한 카드 CVC 번호를 검증하는 Custom Hook입니다. 이 Hook은 사용자가 입력한 CVC 번호가 3자리 숫자로만 구성되었는지를 확인하고, 그렇지 않을 경우 적절한 오류 메시지를 반환합니다.
 
 ### 사용 방법
 
-이 코드를 사용하기 전에, 프로젝트에서 `useValidation` Hook이 정의되어 있어야 하며, `../useValidation`의 경로에서 import할 수 있어야 합니다.
-
-`useCVC` Hook은 다음과 같이 사용할 수 있습니다:
-
 ```tsx
 import React from 'react';
-import { useCVC } from 'newjeans'; // 실제 경로로 수정해주세요.
+import { useCVC } from 'newjeans';
 
 function CVCEnterForm() {
   const { cvc, setCVC, errorStatus } = useCVC();
@@ -154,13 +150,13 @@ function CVCEnterForm() {
         type='text'
         maxLength='3'
       />
-      {errorStatus && <p>{errorStatus}</p>}
+      {!errorStatus.isValid && <p>{errorStatus}</p>}
     </div>
   );
 }
 ```
 
-## useExpiryDate 훅 사용하기
+## useExpiryDate
 
 `useExpiryDate`는 사용자로부터 신용카드의 유효기한(월과 년)을 입력받아 해당 입력값이 유효한지 검증하는 React 훅입니다. 이 훅은 유효기한 월이 01에서 12 사이이며, 년도가 24년에서 40년 사이인지 확인합니다. 또한, 월과 년도 모두 2자리 숫자로 제한됩니다.
 
@@ -205,6 +201,35 @@ function ExpiryDateForm() {
           <p>{expiryYearErrorStatus.errorMessage}</p>
         )}
       </div>
+    </div>
+  );
+}
+```
+
+## usePasswordPrefix
+
+React 환경에서 사용자의 입력을 받아 비밀번호의 앞자리 수를 유효성을 검사하는 Custom Hook입니다. 비밀번호 앞자리는 숫자만 포함해야 하며, 정해진 길이(2자리)를 만족해야 합니다.
+
+### 사용 방법
+
+```tsx
+import React from 'react';
+import { usePasswordPrefix } from 'newjeans'; // 실제 파일 경로에 맞게 수정하세요.
+
+function PasswordInput() {
+  const { passwordPrefix, setPasswordPrefix, errorStatus } =
+    usePasswordPrefix();
+
+  return (
+    <div>
+      <label>비밀번호 앞자리:</label>
+      <input
+        value={passwordPrefix}
+        onChange={e:React.ChangeEvent<HTMLInputElement> => setPasswordPrefix(e.target.value)}
+        type='text'
+        maxLength='2'
+      />
+      {!errorStatus.isValid && <p style={{ color: 'red' }}>{errorStatus.errorMessage}</p>}
     </div>
   );
 }
