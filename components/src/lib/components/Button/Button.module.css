@@ -18,6 +18,15 @@
   color: #8b95a1;
 }
 
+.primary:hover {
+  background-color: #555555;
+}
+
+.secondary:hover {
+  background-color: #eeeeee;
+  color: #65707d;
+}
+
 .sm {
   width: 33%;
 }

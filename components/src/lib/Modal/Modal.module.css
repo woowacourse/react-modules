@@ -16,11 +16,13 @@
 .row {
   flex-direction: row;
   align-items: center;
+  column-gap: 8px;
 }
 
 .column {
   flex-direction: column;
   justify-content: center;
+  row-gap: 8px;
 }
 
 .modalLayout {
