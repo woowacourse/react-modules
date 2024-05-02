@@ -1,7 +1,7 @@
 {
-  "name": "hooks",
-  "version": "0.0.1",
-  "description": "npm modules",
+  "name": "@roqkftjs/react-payments-custom-hooks",
+  "version": "0.0.0",
+  "description": "리액트 페이먼츠 커스텀 훅",
   "type": "module",
   "types": "dist/index.d.ts",
   "main": "dist/index.js",

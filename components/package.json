@@ -1,7 +1,7 @@
 {
-  "name": "compoents",
-  "version": "0.0.1",
-  "description": "npm modules",
+  "name": "@roqkftjs/react-payments-module",
+  "version": "0.0.0",
+  "description": "리액트 페이먼츠 모달 모듈",
   "type": "module",
   "types": "dist/index.d.ts",
   "main": "dist/index.js",
