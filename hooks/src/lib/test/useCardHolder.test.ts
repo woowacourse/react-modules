@@ -38,7 +38,7 @@ describe('useCardHolder 훅 테스트', () => {
 
     const expectedErrorMessage =
       CardHolderErrorMessages[ErrorStatus.ONLY_UPPERCASE];
-    expect(result.current.errorStatus).toBe(expectedErrorMessage);
+    expect(result.current.errorMessage).toBe(expectedErrorMessage);
   });
 
   it('빈칸이 두 개이면 에러를 낸다.', () => {
@@ -55,6 +55,6 @@ describe('useCardHolder 훅 테스트', () => {
     const expectedErrorMessage =
       CardHolderErrorMessages[ErrorStatus.IS_DOUBLE_BLANK];
 
-    expect(result.current.errorStatus).toBe(expectedErrorMessage);
+    expect(result.current.errorMessage).toBe(expectedErrorMessage);
   });
 });

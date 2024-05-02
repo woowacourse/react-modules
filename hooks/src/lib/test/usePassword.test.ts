@@ -37,7 +37,7 @@ describe('usePassword 훅 테스트', () => {
     });
     const expectedErrorMessage =
       PasswordErrorMessages[ErrorStatus.IS_NOT_NUMBER];
-    expect(result.current.errorMessages).toBe(expectedErrorMessage);
+    expect(result.current.errorMessage).toBe(expectedErrorMessage);
   });
 
   it('길이가 2글자가 아니면 에러를 낸다.', () => {
@@ -53,6 +53,6 @@ describe('usePassword 훅 테스트', () => {
 
     const expectedErrorMessage =
       PasswordErrorMessages[ErrorStatus.INVALID_LENGTH];
-    expect(result.current.errorMessages).toBe(expectedErrorMessage);
+    expect(result.current.errorMessage).toBe(expectedErrorMessage);
   });
 });

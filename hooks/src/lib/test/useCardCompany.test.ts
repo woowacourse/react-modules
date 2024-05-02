@@ -1,7 +1,8 @@
 import { renderHook } from '@testing-library/react';
 import React from 'react';
 import useCardCompany from '../useCardCompany';
-import { cardCompanyErrorMessage } from '../../constants/error';
+import { CardCompanyErrorMessage } from '../../constants/error';
+import { ErrorStatus } from '../../types/errorStatus';
 
 export const ExampleCardBrands = [
   'BC카드',
@@ -14,7 +15,7 @@ export const ExampleCardBrands = [
   '국민카드',
 ];
 
-describe('useCardHolder 훅 테스트', () => {
+describe('useCardCompany 훅 테스트', () => {
   it('초기값이 정확히 설정되어야 한다.', () => {
     const initialValue = '';
     const { result } = renderHook(() =>
@@ -49,6 +50,8 @@ describe('useCardHolder 훅 테스트', () => {
       result.current.onSelect(invalidValue);
     });
 
-    expect(result.current.errorMessages).toBe(cardCompanyErrorMessage);
+    const expectedErrorMessage =
+      CardCompanyErrorMessage[ErrorStatus.INVALID_OPTION];
+    expect(result.current.errorMessage).toBe(expectedErrorMessage);
   });
 });

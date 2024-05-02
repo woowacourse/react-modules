@@ -4,6 +4,7 @@ import { cvcErrorType } from '../types/cvc';
 import { ErrorStatus } from '../types/errorStatus';
 import { ExpiryDateErrorType } from '../types/expiryDate';
 import { PasswordErrorType } from '../types/password';
+import { CardCompanyErrorType } from '../types/cardCompany';
 
 export const CardNumbersErrorMessages: Record<CardNumberErrorType, string> = {
   [ErrorStatus.IS_NOT_NUMBER]: '카드번호는 숫자만 입력해주세요.',
@@ -21,7 +22,7 @@ export const CVCErrorMessages: Record<cvcErrorType, string> = {
 };
 
 export const PasswordErrorMessages: Record<PasswordErrorType, string> = {
-  [ErrorStatus.IS_NOT_NUMBER]: 'CVC는 숫자만 입력해주세요.',
+  [ErrorStatus.IS_NOT_NUMBER]: '비밀번호는 숫자만 입력해주세요.',
   [ErrorStatus.INVALID_LENGTH]: '비밀번호는 2글자만 입력해 주세요.',
 };
 
@@ -34,4 +35,6 @@ export const ExpiryDateErrorMessages: Record<ExpiryDateErrorType, string> = {
   [ErrorStatus.INVALID_LENGTH]: '일자는 2자리 숫자로 입력해 주세요.',
 };
 
-export const cardCompanyErrorMessage = '유효하지 않은 옵션입니다.';
+export const CardCompanyErrorMessage: Record<CardCompanyErrorType, string> = {
+  [ErrorStatus.INVALID_OPTION]: '유효하지 않은 옵션입니다.',
+};
