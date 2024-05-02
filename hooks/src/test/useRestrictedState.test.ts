@@ -1,11 +1,12 @@
-import { useRestrictedState } from "../lib/hooks";
-import { renderHook, act } from "@testing-library/react";
+import React from "react";
+import { useRestrictedState } from "../lib";
+import { renderHook } from "@testing-library/react";
 
 describe("useRestrictedState Test", () => {
   it("type이 english일 경우 영어만 입력가능하다.", () => {
     const { result } = renderHook(() => useRestrictedState({ type: "english" }));
 
-    act(() => {
+    React.act(() => {
       result.current.valueState[1]("aaa");
       result.current.valueState[1]("aaa1");
     });
@@ -17,7 +18,7 @@ describe("useRestrictedState Test", () => {
   it("type이 number일 경우 숫자만 입력가능하다.", () => {
     const { result } = renderHook(() => useRestrictedState({ type: "number", maxLength: 10 }));
 
-    act(() => {
+    React.act(() => {
       result.current.valueState[1]("123");
       result.current.valueState[1]("123aaa");
     });
@@ -28,7 +29,7 @@ describe("useRestrictedState Test", () => {
   it("maxLength가 지정될 경우 그 이상 입력할 수 없다.", () => {
     const { result } = renderHook(() => useRestrictedState({ maxLength: 5 }));
 
-    act(() => {
+    React.act(() => {
       result.current.valueState[1]("aaaaa");
       result.current.valueState[1]("aaaaaa");
     });

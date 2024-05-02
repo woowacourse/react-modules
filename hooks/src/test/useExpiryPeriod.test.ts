@@ -1,11 +1,12 @@
-import { useExpiryPeriod } from "../lib/hooks";
-import { renderHook, act } from "@testing-library/react";
+import React from "react";
+import { useExpiryPeriod } from "../lib";
+import { renderHook } from "@testing-library/react";
 
 describe("useExpiryPeriod Test", () => {
   it("과거 year를 입력한 경우", () => {
     const { result } = renderHook(() => useExpiryPeriod());
 
-    act(() => {
+    React.act(() => {
       result.current.yearState[1]("20");
     });
     expect(result.current.yearState[0]).toBe("20");
@@ -17,7 +18,7 @@ describe("useExpiryPeriod Test", () => {
     const currentYear = Number(new Date().getFullYear().toString().slice(2));
     const currentMonth = Number(new Date().getMonth());
 
-    act(() => {
+    React.act(() => {
       result.current.yearState[1](currentMonth === 0 ? String(currentYear - 1) : String(currentYear));
       result.current.monthState[1](String(currentMonth));
     });
@@ -27,7 +28,7 @@ describe("useExpiryPeriod Test", () => {
   it("미래 year를 입력한 경우", () => {
     const { result } = renderHook(() => useExpiryPeriod());
 
-    act(() => {
+    React.act(() => {
       result.current.yearState[1]("33");
     });
     expect(result.current.isError).toBe(false);
@@ -36,7 +37,7 @@ describe("useExpiryPeriod Test", () => {
   it("숫자 이외의 입력값을 넣은 경우", () => {
     const { result } = renderHook(() => useExpiryPeriod());
 
-    act(() => {
+    React.act(() => {
       result.current.yearState[1]("2a");
     });
     expect(result.current.isError).toBe(true);
