@@ -21,11 +21,11 @@ const onBlur = (value: string) => {
   return { isValid: true, errorMessage: '' };
 };
 
-interface Options {
+interface CardNumbersOptions {
   isAutoFocus?: boolean;
 }
 
-const useCardNumbers = (initialValue: Record<string, string>, options?: Options) => {
+const useCardNumbers = (initialValue: Record<string, string>, options?: CardNumbersOptions) => {
   const { value, setValue, handleBlur, errorInfo, setErrorInfo } = useInputs(initialValue, {
     onChange,
     onBlur,
