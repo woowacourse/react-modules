@@ -1,4 +1,4 @@
-name: "@seongjinme Components, Hooks 모듈 코드 배포"
+name: "@seongjinme/react-modal 모듈 Storybook 배포"
 
 on:
   push:
@@ -32,35 +32,17 @@ jobs:
         run: npm install
         working-directory: ./components
 
-      - name: react-modal 앱 빌드
-        run: npm run build
-        working-directory: ./components
-
       - name: react-modal 스토리북 빌드
         run: |
           npm run build-storybook
           mv storybook-static dist/storybook
         working-directory: ./components
 
-      - name: react-modal의 빌드된 파일을 dist 경로로 이동
+      - name: react-modal 경로의 빌드된 파일을 dist 경로로 이동
         run: |
           mkdir -p ../dist/react-modal
           mv dist/* ../dist/react-modal
         working-directory: ./components
-
-      - name: react-hooks 앱의 dependencies 설치
-        run: npm install
-        working-directory: ./hooks
-
-      - name: react-hooks 앱 빌드
-        run: npm run build
-        working-directory: ./hooks
-
-      - name: react-hooks의 빌드된 파일을 dist 경로로 이동
-        run: |
-          mkdir -p ../dist/react-hooks
-          mv dist/* ../dist/react-hooks
-        working-directory: ./hooks
 
       - name: 깃허브 페이지 셋업
         uses: actions/configure-pages@v3
