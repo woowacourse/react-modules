@@ -25,7 +25,6 @@ const useCardValidate = ({
     const { isValid, errorMessage } = validateOnChange(newValue);
 
     setIsCompleted(false);
-    n;
 
     if (!isValid) {
       setErrorMessage(errorMessage);
