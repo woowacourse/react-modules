@@ -1,4 +1,3 @@
-import React from "react";
 import {
   useCVC,
   useCardHolder,
@@ -6,7 +5,8 @@ import {
   useCardNumber,
   useExpiryDate,
   usePassword,
-} from "../src/lib/index";
+} from "choriver-payments-validation-hooks";
+import React from "react";
 import "./App.css";
 
 function App() {
