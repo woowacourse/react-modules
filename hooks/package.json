@@ -1,6 +1,6 @@
 {
-  "name": "paran-fe-card-validation-hooks",
-  "version": "0.0.2",
+  "name": "fe-card-validation-hooks",
+  "version": "0.0.1",
   "description": "custom card validation hooks",
   "type": "module",
   "types": "dist/index.d.ts",
