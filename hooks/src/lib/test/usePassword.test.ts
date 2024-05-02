@@ -1,5 +1,5 @@
 import { renderHook } from '@testing-library/react';
-import React, { ChangeEvent } from 'react';
+import React, { ChangeEvent, FocusEvent } from 'react';
 import { ErrorStatus } from '../../types/errorStatus';
 import usePassword from '../usePassword';
 import { PasswordErrorMessages } from '../../constants/error';
@@ -40,7 +40,7 @@ describe('usePassword 훅 테스트', () => {
     expect(result.current.errorMessage).toBe(expectedErrorMessage);
   });
 
-  it('길이가 2글자가 아니면 에러를 낸다.', () => {
+  it('길이가 2글자 초과면 에러를 낸다.', () => {
     const initialValue = '';
     const { result } = renderHook(() => usePassword(initialValue));
     const invalidValue = '123';
@@ -49,6 +49,22 @@ describe('usePassword 훅 테스트', () => {
       result.current.onChange({
         target: { value: invalidValue },
       } as ChangeEvent<HTMLInputElement>);
+    });
+
+    const expectedErrorMessage =
+      PasswordErrorMessages[ErrorStatus.INVALID_LENGTH];
+    expect(result.current.errorMessage).toBe(expectedErrorMessage);
+  });
+
+  it('길이가 2글자 미만(Blur)이면 에러를 낸다.', () => {
+    const initialValue = '';
+    const { result } = renderHook(() => usePassword(initialValue));
+    const invalidValue = '1';
+
+    React.act(() => {
+      result.current.onBlur({
+        target: { value: invalidValue },
+      } as FocusEvent<HTMLInputElement>);
     });
 
     const expectedErrorMessage =

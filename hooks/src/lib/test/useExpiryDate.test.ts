@@ -1,5 +1,5 @@
 import { renderHook } from '@testing-library/react';
-import React, { ChangeEvent } from 'react';
+import React, { ChangeEvent, FocusEvent } from 'react';
 import { ErrorStatus } from '../../types/errorStatus';
 import useExpiryDate from '../useExpiryDate';
 import { ExpiryDateErrorMessages } from '../../constants/error';
@@ -53,7 +53,7 @@ describe('useExpiryDate 훅 테스트', () => {
     expect(result.current.errorMessages).toEqual(expectedErrorMessage);
   });
 
-  it('월 입력은 2글자 이상이면 에러를 낸다.', () => {
+  it('월 입력은 2글자 초과면 에러를 낸다.', () => {
     const initialValues = {
       month: '',
       year: '',
@@ -65,6 +65,25 @@ describe('useExpiryDate 훅 테스트', () => {
       result.current.onChange({
         target: { value: '123', name: 'month' },
       } as ChangeEvent<HTMLInputElement>);
+    });
+
+    const expectedErrorMessage = {
+      month: ExpiryDateErrorMessages[ErrorStatus.INVALID_LENGTH],
+    };
+    expect(result.current.errorMessages).toEqual(expectedErrorMessage);
+  });
+
+  it('월 입력은 1글자 미만(Blur)이면 에러를 낸다.', () => {
+    const initialValues = {
+      month: '',
+      year: '',
+    };
+    const { result } = renderHook(() => useExpiryDate(initialValues));
+
+    React.act(() => {
+      result.current.onBlur({
+        target: { value: '', name: 'month' },
+      } as FocusEvent<HTMLInputElement>);
     });
 
     const expectedErrorMessage = {

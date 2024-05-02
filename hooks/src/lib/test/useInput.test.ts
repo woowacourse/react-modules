@@ -1,12 +1,12 @@
 import { renderHook } from '@testing-library/react';
 import useInput from '../useInput';
 import React, { ChangeEvent } from 'react';
-import { validateLength, validateNumber } from '../../validate/validate';
+import { validateMaxLength, validateNumber } from '../../validate/validate';
 import { ErrorStatus } from '../../types/errorStatus';
 
 const cardNumbersValidates = (n: string) => {
   validateNumber(n);
-  validateLength(n, 4);
+  validateMaxLength(n, 4);
 };
 
 describe('useInput 훅 테스트', () => {

@@ -1,5 +1,5 @@
 import { renderHook } from '@testing-library/react';
-import React, { ChangeEvent } from 'react';
+import React, { ChangeEvent, FocusEvent } from 'react';
 import useCardNumbers from '../useCardNumbers';
 import { CardNumbersErrorMessages } from '../../constants/error';
 import { ErrorStatus } from '../../types/errorStatus';
@@ -64,7 +64,7 @@ describe('useCardNumbers 훅 테스트', () => {
     expect(result.current.errorMessages).toEqual(expectedErrorMessage);
   });
 
-  it('숫자가 4자리가 아닐때 에러를 낸다.', () => {
+  it('숫자가 4자리가 아닐때(초과시) 에러를 낸다.', () => {
     const valuesWithString = {
       cardNumber1: '',
       cardNumber2: '',
@@ -79,6 +79,29 @@ describe('useCardNumbers 훅 테스트', () => {
       result.current.onChange({
         target: { value: invalidValues, name: 'cardNumber1' },
       } as ChangeEvent<HTMLInputElement>);
+    });
+
+    const expectedErrorMessage = {
+      cardNumber1: CardNumbersErrorMessages[ErrorStatus.INVALID_LENGTH],
+    };
+    expect(result.current.errorMessages).toEqual(expectedErrorMessage);
+  });
+
+  it('숫자가 4자리가 아닐때(미만시) 에러를 낸다.', () => {
+    const valuesWithString = {
+      cardNumber1: '',
+      cardNumber2: '',
+      cardNumber3: '',
+      cardNumber4: '',
+    };
+
+    const { result } = renderHook(() => useCardNumbers(valuesWithString));
+
+    const invalidValues = '1';
+    React.act(() => {
+      result.current.onBlur({
+        target: { value: invalidValues, name: 'cardNumber1' },
+      } as FocusEvent<HTMLInputElement>);
     });
 
     const expectedErrorMessage = {

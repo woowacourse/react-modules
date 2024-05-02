@@ -1,6 +1,6 @@
 import { renderHook } from '@testing-library/react';
 import useCVC from '../useCVC';
-import React, { ChangeEvent } from 'react';
+import React, { ChangeEvent, FocusEvent } from 'react';
 import { ErrorStatus } from '../../types/errorStatus';
 import { CVCErrorMessages } from '../../constants/error';
 
@@ -40,7 +40,7 @@ describe('useCVC 훅 테스트', () => {
     expect(result.current.errorMessage).toBe(expectedErrorMessage);
   });
 
-  it('길이가 3글자가 아니면 에러를 낸다.', () => {
+  it('길이가 3글자 초과시 에러를 낸다.', () => {
     const initialValue = '123';
     const { result } = renderHook(() => useCVC(initialValue));
     const invalidValue = '1234';
@@ -49,6 +49,21 @@ describe('useCVC 훅 테스트', () => {
       result.current.onChange({
         target: { value: invalidValue },
       } as ChangeEvent<HTMLInputElement>);
+    });
+
+    const expectedErrorMessage = CVCErrorMessages[ErrorStatus.INVALID_LENGTH];
+    expect(result.current.errorMessage).toBe(expectedErrorMessage);
+  });
+
+  it('길이가 3글자 미만시(Blur) 에러를 낸다.', () => {
+    const initialValue = '123';
+    const { result } = renderHook(() => useCVC(initialValue));
+    const invalidValue = '12';
+
+    React.act(() => {
+      result.current.onBlur({
+        target: { value: invalidValue },
+      } as FocusEvent<HTMLInputElement>);
     });
 
     const expectedErrorMessage = CVCErrorMessages[ErrorStatus.INVALID_LENGTH];
