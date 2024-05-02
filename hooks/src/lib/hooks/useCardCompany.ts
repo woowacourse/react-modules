@@ -12,10 +12,10 @@ const COMPANY_LIST = [
 ] as const;
 
 interface CustomEventTarget extends EventTarget {
-  value: string;
+  value?: string;
 }
 
-interface CustomMouseEvent extends MouseEvent<HTMLButtonElement> {
+interface CustomMouseEvent extends MouseEvent {
   target: CustomEventTarget;
 }
 
@@ -45,10 +45,13 @@ const useCardCompany = (cardCompanyList: readonly string[] = COMPANY_LIST) => {
 
   const clickCardCompany = (event: ChangeEvent<HTMLSelectElement> | CustomMouseEvent) => {
     const { value } = event.target;
+    if (!value) return;
+
     setCardCompanyWrapper(value);
     if (cardCompanyRef.current?.value) {
       cardCompanyRef.current.value = value;
     }
+
     cardCompanyRef.current?.blur();
   };
 

@@ -64,4 +64,4 @@
 ### Test
 
 - [x] act -> React.act로 변경
-- [ ] fireEvent이벤트 적용
+- [x] fireEvent이벤트 적용
