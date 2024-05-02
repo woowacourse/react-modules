@@ -53,6 +53,7 @@ const CardCompaniesBox = () => {
     </Grid>
   );
 };
+
 const Grid = styled.div`
   width: 100%;
   display: grid;
