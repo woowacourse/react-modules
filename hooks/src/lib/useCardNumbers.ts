@@ -30,6 +30,7 @@ const useCardNumbers = (initValue: string[], maxLength: number = 4) => {
   const {
     value,
     errorMessage,
+    isCompleted,
     onChangeHandler,
     onFocusHandler,
     onBlurHandler,
@@ -42,6 +43,7 @@ const useCardNumbers = (initValue: string[], maxLength: number = 4) => {
   return {
     value,
     errorMessage,
+    isCompleted,
     onChangeHandler,
     onBlurHandler,
     onFocusHandler,
