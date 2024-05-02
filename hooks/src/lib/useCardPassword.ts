@@ -14,7 +14,7 @@ const useCardPassword = (cardPasswordLength: number) => {
     setCardPassWordInfo((prev) => {
       return {
         ...prev,
-        cardNumbers: value,
+        password: value,
       };
     });
 
