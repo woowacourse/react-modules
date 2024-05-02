@@ -27,11 +27,20 @@ export const ModalMain = ({
   animation = true,
 }: StrictPropsWithChildren<ModalProps>) => {
   useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') close();
+    };
+
     if (!isOpen) return;
+
+    document.addEventListener('keydown', handleKeyDown);
 
     const prevScrollY = preventScroll();
 
-    return () => allowScroll(prevScrollY);
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown);
+      allowScroll(prevScrollY);
+    };
   }, [isOpen]);
 
   if (!isOpen) return null;
