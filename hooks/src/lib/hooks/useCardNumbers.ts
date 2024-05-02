@@ -1,42 +1,38 @@
 import { useState } from "react";
+
 import { INPUT_REGEX } from "../constants/regex";
+import { ERROR_MESSAGES } from "../constants/errorMessage";
 
-const useCardNumbers = (maxLength: number, inputCount = 1) => {
-  const initialNumbersState: string[] = Array(inputCount).fill("");
-  const [cardNumbers, setCardNumbers] = useState(initialNumbersState);
-  const [cardNumberErrorState, setCardNumberErrorState] = useState({
-    isError: Array(inputCount).fill(false),
-    errorMessage: "",
-  });
-
-  const updateErrorState = (isValid: boolean, inputIndex: number) => {
-    setCardNumberErrorState((prevState) => {
-      const updatedIsError = [...prevState.isError];
-      updatedIsError[inputIndex] = !isValid;
-
-      const isAllValid = updatedIsError.every((item) => item === false);
-
-      return {
-        ...prevState,
-        isError: updatedIsError,
-        errorMessage: isAllValid
-          ? ""
-          : `${maxLength}자리 숫자로 입력해 주세요.`,
-      };
-    });
-  };
+function useCardNumbers(maxLength: number, inputCount = 1) {
+  const [cardNumbers, setCardNumbers] = useState(Array(inputCount).fill(""));
+  const [cardNumberErrors, setCardNumberErrors] = useState(
+    Array(inputCount).fill(false)
+  );
 
   const handleCardNumbersChange = (value: string, inputIndex: number) => {
     const isValidNumber = INPUT_REGEX.cardNumber(maxLength).test(value);
 
-    updateErrorState(isValidNumber, inputIndex);
+    const updatedErrors = [...cardNumberErrors];
+    updatedErrors[inputIndex] = !isValidNumber;
+    setCardNumberErrors(updatedErrors);
 
     const updatedNumbers = [...cardNumbers];
     updatedNumbers[inputIndex] = value;
     setCardNumbers(updatedNumbers);
   };
 
-  return { cardNumbers, cardNumberErrorState, handleCardNumbersChange };
-};
+  const getCardNumbersErrorMessage = () => {
+    return cardNumberErrors.some((isError) => isError)
+      ? ERROR_MESSAGES.maxLengthNumber(maxLength)
+      : undefined;
+  };
+
+  return {
+    cardNumbers,
+    cardNumberErrors,
+    getCardNumbersErrorMessage,
+    handleCardNumbersChange,
+  };
+}
 
 export default useCardNumbers;

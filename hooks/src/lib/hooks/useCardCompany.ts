@@ -1,38 +1,27 @@
 import { useState } from "react";
+import { ERROR_MESSAGES } from "../constants/errorMessage";
 
-function useCardCompanyInput() {
+function useCardCompany() {
   const [cardCompany, setCardCompany] = useState("");
-  const [cardCompanyErrorState, setCardCompanyErrorState] = useState({
-    isError: false,
-    errorMessage: "",
-  });
-
-  const updateErrorState = (isValid: boolean) => {
-    if (isValid) {
-      setCardCompanyErrorState({
-        isError: false,
-        errorMessage: "",
-      });
-    } else {
-      setCardCompanyErrorState({
-        isError: true,
-        errorMessage: "카드사를 선택해 주세요.",
-      });
-    }
-  };
+  const [cardCompanyError, setCardCompanyError] = useState(false);
 
   const handleCardCompanyChange = (value: string) => {
     const isSelected = value !== "";
+    setCardCompanyError(!isSelected);
 
-    updateErrorState(isSelected);
     setCardCompany(value);
+  };
+
+  const getCardCompanyErrorMessage = () => {
+    return cardCompanyError ? ERROR_MESSAGES.company : undefined;
   };
 
   return {
     cardCompany,
-    cardCompanyErrorState,
+    cardCompanyError,
+    getCardCompanyErrorMessage,
     handleCardCompanyChange,
   };
 }
 
-export default useCardCompanyInput;
+export default useCardCompany;

@@ -1,20 +1,14 @@
 import { useState } from "react";
 
 import { INPUT_REGEX } from "../constants/regex";
+import { ERROR_MESSAGES } from "../constants/errorMessage";
 
-const useExpiryDate = () => {
+function useExpiryDate() {
   const [period, setPeriod] = useState({ month: "", year: "" });
-  const [periodErrorState, setPeriodErrorState] = useState({
-    isError: {
-      month: false,
-      year: false,
-      expired: false,
-    },
-    errorMessage: {
-      month: "",
-      year: "",
-      expired: "",
-    },
+  const [isPeriodError, setIsPeriodError] = useState({
+    month: false,
+    year: false,
+    expired: false,
   });
 
   const validatePeriod = (value: string, type: "month" | "year") => {
@@ -41,36 +35,33 @@ const useExpiryDate = () => {
 
     const isValidPeriod = validatePeriod(value, type);
 
-    const newErrorMessage = { ...periodErrorState.errorMessage };
+    const periodErrors = { ...isPeriodError };
+    periodErrors[type] = !isValidPeriod;
 
-    if (!isValidPeriod) {
-      newErrorMessage[type] = `올바르지 않은 ${
-        type === "month" ? "월" : "년도"
-      } 형식입니다.`;
-    } else {
-      newErrorMessage[type] = "";
-    }
-
-    if (isValidPeriod && newPeriod.month && newPeriod.year) {
+    if (newPeriod.month && newPeriod.year) {
       const isExpired = !validateExpiration(newPeriod.month, newPeriod.year);
-      newErrorMessage["expired"] = isExpired
-        ? "카드의 유효 기간이 만료되었습니다."
-        : "";
+      periodErrors.expired = isExpired;
     }
 
-    setPeriodErrorState((prevState) => ({
-      isError: {
-        ...prevState.isError,
-        [type]: !isValidPeriod,
-        expired: isValidPeriod
-          ? validateExpiration(newPeriod.month, newPeriod.year)
-          : prevState.isError.expired,
-      },
-      errorMessage: newErrorMessage,
-    }));
+    setIsPeriodError(periodErrors);
   };
 
-  return { period, periodErrorState, handlePeriodChange };
-};
+  const getPeriodErrorMessage = () => {
+    if (isPeriodError.month) {
+      return ERROR_MESSAGES.month;
+    }
+
+    if (isPeriodError.year) {
+      return ERROR_MESSAGES.year;
+    }
+
+    if (isPeriodError.expired) {
+      return ERROR_MESSAGES.expired;
+    }
+    return undefined;
+  };
+
+  return { period, isPeriodError, getPeriodErrorMessage, handlePeriodChange };
+}
 
 export default useExpiryDate;

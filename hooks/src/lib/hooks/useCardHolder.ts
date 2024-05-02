@@ -1,40 +1,27 @@
 import { useState } from "react";
 
 import { INPUT_REGEX } from "../constants/regex";
+import { ERROR_MESSAGES } from "../constants/errorMessage";
 
 function useCardHolder(maxLength: number) {
   const [cardHolder, setCardHolder] = useState("");
-  const [cardHolderErrorState, setCardHolderErrorState] = useState({
-    isError: false,
-    errorMessage: "",
-  });
+  const [cardHolderError, setCardHolderError] = useState(false);
 
-  const updateErrorState = (isValid: boolean) => {
-    if (isValid) {
-      setCardHolderErrorState({
-        isError: false,
-        errorMessage: "",
-      });
-    } else {
-      setCardHolderErrorState({
-        isError: true,
-        errorMessage: "유효하지 않은 이름입니다.",
-      });
-    }
+  const handleCardHolderChange = (value: string) => {
+    const isValidHolder = INPUT_REGEX.cardHolder(maxLength).test(value);
+    setCardHolderError(!isValidHolder);
+    setCardHolder(value);
   };
 
-  const handleNameChange = (value: string) => {
-    const upperCaseValue = value.toUpperCase();
-    const isValidHolder = INPUT_REGEX.cardHolder(maxLength).test(value);
-
-    updateErrorState(isValidHolder);
-    setCardHolder(upperCaseValue);
+  const getCardHolderErrorMessage = () => {
+    return cardHolderError ? ERROR_MESSAGES.holder : undefined;
   };
 
   return {
     cardHolder,
-    cardHolderErrorState,
-    handleNameChange,
+    cardHolderError,
+    getCardHolderErrorMessage,
+    handleCardHolderChange,
   };
 }
 
