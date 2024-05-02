@@ -1,4 +1,5 @@
-# paran-fe-modal
+# paran-simple-modal
+
 - Simple modal component module made by paran and fe
 
 ## Properties
@@ -19,16 +20,16 @@
 ### closeButton
 
 - color? `default: black`
-- onClose 
+- onClose
 
-### confirmButton
+### confirmButton?
 
 - background-color? `default: black`
 - font-color? `default: white`
 - content
 - onConfirm
 
-### cancelButton
+### cancelButton?
 
 - background-color? `default: white`
 - color? `default: black`
@@ -54,5 +55,7 @@
 ### children
 
 ---
+
 ## Storybook
+
 link: https://6631dad3ab74b00107d09938-mbvlnyhhgn.chromatic.com/
