@@ -14,7 +14,7 @@ const useCardUserName = (cardUserNameLength: number) => {
     setCardUserNameInfo((prev) => {
       return {
         ...prev,
-        cardNumbers: value,
+        cardUserName: value,
       };
     });
 
