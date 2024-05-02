@@ -3,13 +3,13 @@
 ## How to use
 
 ```
-npm i //TODO: 프로젝트 이름 적기
+npm i easy-payments-ui
 ```
 
 ## Hooks
 
-1. [useCardCompany]()
-2. [useCardNumbers]()
-3. [useExpiryPeriod]()
-4. [useInput]()
-5. [useRestrictedState]()
+1. [useCardCompany](https://github.com/lurgi/react-modules/blob/step1/hooks/docs/hooks/useCardCompany.md)
+2. [useCardNumbers](https://github.com/lurgi/react-modules/blob/step1/hooks/docs/hooks/useCardNumbers.md)
+3. [useExpiryPeriod](https://github.com/lurgi/react-modules/blob/step1/hooks/docs/hooks/useExpiryPeriod.md)
+4. [useInput](https://github.com/lurgi/react-modules/blob/step1/hooks/docs/hooks/useInput.md)
+5. [useRestrictedState](https://github.com/lurgi/react-modules/blob/step1/hooks/docs/hooks/useRestrictedState.md)

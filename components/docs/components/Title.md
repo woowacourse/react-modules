@@ -3,8 +3,7 @@
 ## How to use
 
 ```ts
-//TODO: 문서화 경로 설정
-import { Title } from "";
+import { Title } from "easy-payments-ui";
 
 function App() {
   //...
