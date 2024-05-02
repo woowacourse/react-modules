@@ -1,9 +1,5 @@
 {
-<<<<<<< HEAD
-  "name": "@hanuuny/react-card-hooks",
-=======
   "name": "@pakxe/react-card-info-hooks",
->>>>>>> fc57df1 (chore: 라이브러리 이름 수정)
   "version": "0.0.1",
   "description": "우아한 리액트 카드 훅",
   "type": "module",
