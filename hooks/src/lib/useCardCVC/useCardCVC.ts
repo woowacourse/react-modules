@@ -1,4 +1,4 @@
-import useCardValidate from './useCardValidate';
+import useCardValidate from '../useCardValidate/useCardValidate';
 
 const useCardCVC = (initValue: string, maxLength: number = 3) => {
   const validateOnChange = (newValue: string) => {

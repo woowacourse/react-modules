@@ -1,23 +1,29 @@
-import useCardValidate from './useCardValidate';
+import useCardArrayValidate from '../useCardArrayValidate/useCardArrayValidate';
 
-const useCardHolderName = (initValue: string, maxLength: number = 50) => {
+const useCardNumbers = (initValue: string[], maxLength: number = 4) => {
   const validateOnChange = (newValue: string) => {
     if (newValue.length > maxLength) {
       return {
         isValid: false,
-        errorMessage: `이름은 ${maxLength}글자 까지만 입력이 가능해요.`,
+        errorMessage: `카드번호는 ${maxLength}글자 까지만 입력이 가능해요.`,
       };
     }
-    if (!/^\[a-zA-Z]*$/.test(newValue)) {
+    if (!/^\d*$/.test(newValue)) {
       return {
         isValid: false,
-        errorMessage: '이름은 영어만 입력이 가능해요.',
+        errorMessage: '카드번호는 숫자만 입력이 가능해요.',
       };
     }
     return { isValid: true, errorMessage: '' };
   };
 
   const validateOnBlur = () => {
+    if (value.join('').length !== maxLength * initValue.length) {
+      return {
+        isValid: false,
+        errorMessage: `카드번호는 ${maxLength * initValue.length}글자로 입력해 주세요.`,
+      };
+    }
     return { isValid: true, errorMessage: '' };
   };
 
@@ -28,7 +34,7 @@ const useCardHolderName = (initValue: string, maxLength: number = 50) => {
     onChangeHandler,
     onFocusHandler,
     onBlurHandler,
-  } = useCardValidate({
+  } = useCardArrayValidate({
     initValue,
     validateOnChange,
     validateOnBlur,
@@ -43,4 +49,4 @@ const useCardHolderName = (initValue: string, maxLength: number = 50) => {
     onFocusHandler,
   };
 };
-export default useCardHolderName;
+export default useCardNumbers;

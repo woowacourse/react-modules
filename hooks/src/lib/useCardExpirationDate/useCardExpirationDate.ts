@@ -1,4 +1,4 @@
-import useCardArrayValidate from './useCardArrayValidate';
+import useCardArrayValidate from '../useCardArrayValidate/useCardArrayValidate';
 
 const useCardExpirationDate = (initValue: string[], maxLength: number = 2) => {
   const validateOnChange = (newValue: string, index: number) => {
