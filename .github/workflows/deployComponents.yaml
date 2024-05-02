@@ -27,7 +27,6 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 20
-          cache: "npm"
 
       - name: react-modal 앱의 dependencies 설치
         run: npm install
