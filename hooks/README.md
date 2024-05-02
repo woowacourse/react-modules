@@ -19,11 +19,11 @@ useCardNumber의 경우
 총 4개의 인풋필드를 위한 state와 이벤트핸들러들을 4개 반환합니다.
 cardNumberStates는 InputState[] 타입이며
 
-```javascript
+```typescript
 type InputState = {
-  value: string,
-  errorMessage: string,
-  isError: boolean,
+  value: string;
+  errorMessage: string;
+  isError: boolean;
 };
 ```
 
@@ -41,7 +41,10 @@ return (
     <h1>Hooks Modules</h1>
     <label>Owner Name</label>
     <div>
-      <input value={ownerName.value} onChange={onChange} />
+      <input
+        value={ownerName.value}
+        onChange={onChange}
+      />
       <div>{ownerName.errorMessage}</div>
       <div>{ownerName.isError}</div>
     </div>
