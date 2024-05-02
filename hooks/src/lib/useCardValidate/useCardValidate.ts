@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-interface UseCardValidateProps {
+export interface UseCardValidateProps {
   initValue: string;
   validateOnChange: (value: string) => ValidateResult;
   validateOnBlur: () => ValidateResult;
@@ -25,6 +25,7 @@ const useCardValidate = ({
     const { isValid, errorMessage } = validateOnChange(newValue);
 
     setIsCompleted(false);
+    n;
 
     if (!isValid) {
       setErrorMessage(errorMessage);
