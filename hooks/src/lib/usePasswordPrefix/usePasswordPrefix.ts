@@ -1,5 +1,5 @@
 import { useState } from "react";
-import useValidation from "./useValidation";
+import useValidation from "../useValidation";
 
 const PASSWORD_PREFIX_LENGTH = 2;
 const passwordPrefixValidators = [
