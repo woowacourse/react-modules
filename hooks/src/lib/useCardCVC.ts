@@ -3,7 +3,7 @@ import { validateCVC } from "../validators/newCardInputValidator";
 
 const useCardCVC = (cardCVCLength: number) => {
   const [cardCVCInfo, setCardCVCInfo] = useState({
-    cardUserName: "",
+    cardCVC: "",
     isError: false,
   });
 
@@ -14,7 +14,7 @@ const useCardCVC = (cardCVCLength: number) => {
     setCardCVCInfo((prev) => {
       return {
         ...prev,
-        cardNumbers: value,
+        cardCVC: value,
       };
     });
 
