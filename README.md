@@ -63,8 +63,8 @@
 
 ### `useCVC` 커스텀 훅
 
-- [ ] useCVC
-- [ ] useCVCValidation
+- [x] useCVC
+- [x] useCVCValidation
 
 ### `useCardPassword` 커스텀 훅
 
