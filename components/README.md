@@ -3,13 +3,13 @@
 ## How to use
 
 ```
-npm i easy-payments-ui;
+npm i easy-payments-ui
 ```
 
 ## Components
 
-1. [CloseButton]()
-2. [LongButton]()
-3. [Modal]()
-4. [ModalHeader]()
-5. [Title]()
+1. [CloseButton](https://github.com/lurgi/react-modules/blob/step1/components/docs/components/CloseButton.md)
+2. [LongButton](https://github.com/lurgi/react-modules/blob/step1/components/docs/components/LongButton.md)
+3. [Modal](https://github.com/lurgi/react-modules/blob/step1/components/docs/components/Modal.md)
+4. [ModalHeader](https://github.com/lurgi/react-modules/blob/step1/components/docs/components/ModalHeader.md)
+5. [Title](https://github.com/lurgi/react-modules/blob/step1/components/docs/components/Title.md)

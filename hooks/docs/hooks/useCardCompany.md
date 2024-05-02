@@ -3,8 +3,7 @@
 ## How to use
 
 ```js
-//TODO: 문서화 경로 설정
-import { useCardCompany } from "";
+import { useCardCompany } from "easy-payments-hooks";
 
 function App() {
   const {

@@ -3,8 +3,7 @@
 ## How to use
 
 ```js
-//TODO: 문서화 경로 설정
-import { useInput } from "";
+import { useInput } from "easy-payments-hooks";
 
 function App() {
   const { valueState, errorState } = useInput();

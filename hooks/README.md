@@ -3,7 +3,7 @@
 ## How to use
 
 ```
-npm i easy-payments-ui
+npm i easy-payments-hooks
 ```
 
 ## Hooks

@@ -3,8 +3,7 @@
 ## How to use
 
 ```js
-//TODO: 문서화 경로 설정
-import { useRestrictedState } from "";
+import { useRestrictedState } from "easy-payments-hooks";
 
 function App() {
   const { valueState, errorState } = useRestrictedState();
