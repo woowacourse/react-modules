@@ -1,7 +1,7 @@
 {
-  "name": "choco-payments-validation-hooks",
-  "version": "0.0.3",
-  "description": "초코가 만든 payments validation hooks 라이브러리",
+  "name": "choriver-payments-validation-hooks",
+  "version": "0.0.1",
+  "description": "초코리버가 만든 payments validation hooks 라이브러리",
   "type": "module",
   "types": "dist/index.d.ts",
   "main": "dist/index.js",
