@@ -1,5 +1,5 @@
-import S from './Modal.style.tsx';
-import BasicButton from '../Button.tsx';
+import S from "./Modal.style.tsx";
+import BasicButton from "../Button.tsx";
 
 /**
  * 1. ModalMain - default
@@ -12,7 +12,7 @@ import BasicButton from '../Button.tsx';
  * 6. Close button
  */
 
-export type ModalPosition = 'center' | 'bottom';
+export type ModalPosition = "center" | "bottom";
 
 interface ModalMainProps {
   children?: React.ReactNode;

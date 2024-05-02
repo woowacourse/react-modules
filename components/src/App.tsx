@@ -1,9 +1,8 @@
-import React from 'react';
-import './App.css';
-import Modal from './lib/Modal/Modal';
-import { useState } from 'react';
-import GlobalStyles from './style/global';
-import DeleteIcon from './assets/deleteIcon.svg?react';
+import "./App.css";
+import Modal from "./lib/Modal/Modal";
+import { useState } from "react";
+import GlobalStyles from "./style/global";
+import DeleteIcon from "./assets/deleteIcon.svg?react";
 
 function App() {
   const [isModalOpen, setIsModalOpen] = useState(true);
