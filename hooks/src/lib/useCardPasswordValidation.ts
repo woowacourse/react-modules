@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { Validation } from './validate';
 
+type passwordName = 'password'
+
 const usePasswordValidation = () => {
   const [passwordValidation, setPasswordValidation] = useState({
     errorMessage: {
@@ -11,7 +13,7 @@ const usePasswordValidation = () => {
     }
   });
 
-  const passwordValidateHandler = (value: string, name: string) => {
+  const passwordValidateHandler = (value: string, name: passwordName) => {
     try {
       Validation['password'](value);
       setPasswordValidation((prev) => ({

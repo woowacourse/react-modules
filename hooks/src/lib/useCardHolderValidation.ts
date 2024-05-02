@@ -1,7 +1,7 @@
 import {  useState } from 'react';
 import { Validation } from './validate';
 
-
+type CardHolderName = 'cardHolder'
 
 const useCardHolderValidation = () => {
   const [cardHolderValidation, setCardHolderValidation] = useState({
@@ -11,7 +11,7 @@ const useCardHolderValidation = () => {
     isError: {cardHolder:false}
   });
 
-  const cardHolderValidateHandler = (value: string, name: string) => {
+  const cardHolderValidateHandler = (value: string, name: CardHolderName) => {
     try {
       Validation['userName'](value);
       setCardHolderValidation((prev) => ({
