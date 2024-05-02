@@ -25,9 +25,7 @@
 
     "esModuleInterop": true
   },
-
-  // "include": ["src/lib"],
-  "include": ["src/**/*"],
+  "include": ["src/lib"],
   "exclude": ["node_modules", "dist", "**/*.test.ts"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
