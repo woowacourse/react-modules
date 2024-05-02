@@ -14,10 +14,6 @@ const meta = {
       control: { type: 'select' },
       options: ['sm', 'md', 'lg'],
     },
-    disabled: {
-      control: { type: 'boolean' },
-    },
-    onClick: { action: 'clicked' },
   },
 } satisfies Meta<typeof Button>;
 
@@ -54,5 +50,13 @@ export const Medium: Story = {
     text: 'Medium Button',
     mode: 'primary',
     size: 'md',
+  },
+};
+
+export const Large: Story = {
+  args: {
+    text: 'Large Button',
+    mode: 'primary',
+    size: 'lg',
   },
 };

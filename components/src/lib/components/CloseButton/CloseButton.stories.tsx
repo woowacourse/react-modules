@@ -8,9 +8,6 @@ const meta = {
   parameters: {
     controls: { exclude: ['close'] },
   },
-  argTypes: {
-    close: { action: 'closed' },
-  },
 } satisfies Meta<typeof CloseButton>;
 
 export default meta;

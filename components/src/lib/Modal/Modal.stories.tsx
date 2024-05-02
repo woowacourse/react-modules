@@ -41,29 +41,24 @@ export default meta;
 
 type Story = StoryObj<typeof Modal>;
 
+const childrenSample = (
+  <>
+    <Modal.Header>
+      <Modal.Title>모달 테스트</Modal.Title>
+    </Modal.Header>
+    <Modal.Body>모달 내용</Modal.Body>
+    <Modal.Footer>
+      <Modal.Button text="확인"></Modal.Button>
+      <Modal.Button text="닫기" mode="secondary"></Modal.Button>
+    </Modal.Footer>
+  </>
+);
+
 export const Default: Story = {
   args: {
     isOpen: true,
     close: () => {},
-    children: <p>모달 테스트</p>,
-  },
-};
-
-export const Center: Story = {
-  args: {
-    position: 'center',
-    isOpen: true,
-    close: () => {},
-    children: <p>모달 테스트</p>,
-  },
-};
-
-export const Bottom: Story = {
-  args: {
-    position: 'bottom',
-    isOpen: true,
-    close: () => {},
-    children: <p>모달 테스트</p>,
+    children: childrenSample,
   },
 };
 
@@ -72,7 +67,25 @@ export const Top: Story = {
     position: 'top',
     isOpen: true,
     close: () => {},
-    children: <p>모달 테스트</p>,
+    children: childrenSample,
+  },
+};
+
+export const Center: Story = {
+  args: {
+    position: 'center',
+    isOpen: true,
+    close: () => {},
+    children: childrenSample,
+  },
+};
+
+export const Bottom: Story = {
+  args: {
+    position: 'bottom',
+    isOpen: true,
+    close: () => {},
+    children: childrenSample,
   },
 };
 
@@ -82,7 +95,7 @@ export const Small: Story = {
     size: 'sm',
     isOpen: true,
     close: () => {},
-    children: <p>모달 테스트</p>,
+    children: childrenSample,
   },
 };
 
@@ -92,7 +105,7 @@ export const Medium: Story = {
     size: 'md',
     isOpen: true,
     close: () => {},
-    children: <p>모달 테스트</p>,
+    children: childrenSample,
   },
 };
 
@@ -102,6 +115,6 @@ export const Large: Story = {
     size: 'lg',
     isOpen: true,
     close: () => {},
-    children: <p>모달 테스트</p>,
+    children: childrenSample,
   },
 };
