@@ -13,12 +13,12 @@ const cardInputValidator = {
     return value.length === length;
   },
 
-  validateNumberInRange(number: number, min: number, max: number) {
-    return number >= min && number <= max ? true : false;
+  validateOverInputLength(value: string, length: number) {
+    return value.length > length;
   },
 
-  validateCardNumberLength(value: string) {
-    return value.length === INPUT_RULES.maxCardNumberPartLength ? true : false;
+  validateNumberInRange(number: number, min: number, max: number) {
+    return number >= min && number <= max ? true : false;
   },
 
   validatePastYear(year: string) {
@@ -65,5 +65,3 @@ const cardInputValidator = {
 };
 
 export default cardInputValidator;
-
-//
