@@ -1,7 +1,7 @@
 import { useState } from "react";
-import useValidation from "./useValidation";
+import useValidation from "../useValidation/useValidation";
 
-const CARD_ISSUERS = [
+export const CARD_ISSUERS = [
   "BC카드",
   "신한카드",
   "카카오뱅크",
