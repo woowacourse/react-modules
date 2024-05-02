@@ -21,13 +21,13 @@ describe("카드 만료 날짜 입력에 대한 useExpiryDateValidation 커스�
     expect(result.current.validationResult.errorMessage).toBe(ERROR_MESSAGE.OUT_OF_RANGE_MONTH);
   });
 
-  it("년도가 숫자가 아닐 경우, 오류 메시지를 반환해야 한다", () => {
+  it("연도가 숫자가 아닐 경우, 오류 메시지를 반환해야 한다", () => {
     const { result } = renderHook(() => useExpiryDateValidation({ month: "12", year: "xy" }));
     expect(result.current.validationResult.isValid).toBe(false);
     expect(result.current.validationResult.errorMessage).toBe(ERROR_MESSAGE.ONLY_NUMBER);
   });
 
-  it("년도의 길이가 부적절할 경우, 오류 메시지를 반환해야 한다", () => {
+  it("연도의 길이가 부적절할 경우, 오류 메시지를 반환해야 한다", () => {
     const { result } = renderHook(() => useExpiryDateValidation({ month: "12", year: "2" }));
     expect(result.current.validationResult.isValid).toBe(false);
     expect(result.current.validationResult.errorMessage).toBe(ERROR_MESSAGE.INVALID_YEAR_LENGTH);

@@ -5,7 +5,7 @@ import { useCardNumbersValidation, useExpiryDateValidation, useCardHolderValidat
 
 function App() {
   const [cardNumbers, setCardNumbers] = useState(["", "", "", ""]);
-  const { validationResult: cardNumbersValidationResult } = useCardNumbersValidation({ value: cardNumbers });
+  const { validationResult: cardNumbersValidationResult } = useCardNumbersValidation({ cardNumbers: cardNumbers });
   const [expiryDate, setExpiryDate] = useState({ month: "", year: "" });
   const { validationResult: expiryDateValidationResult } = useExpiryDateValidation({ month: expiryDate.month, year: expiryDate.year });
   const [cardHolder, setCardHolder] = useState("");
@@ -84,7 +84,7 @@ function App() {
         value={cardHolder.toUpperCase()}
         type="text"
         maxLength={22}
-        onChange={(e) => handleCardHolderChange(e)}
+        onChange={handleCardHolderChange}
       />
       <div>{cardHolderValidationResult.errorMessage}</div>
 
@@ -93,7 +93,7 @@ function App() {
         value={cvc}
         type="text"
         maxLength={3}
-        onChange={(e) => handleCVCChange(e)}
+        onChange={handleCVCChange}
       />
       <div>{cvcValidationResult.errorMessage}</div>
 
@@ -102,7 +102,7 @@ function App() {
         value={password}
         type="text"
         maxLength={2}
-        onChange={(e) => handlePasswordChange(e)}
+        onChange={handlePasswordChange}
       />
       <div>{passwordValidationResult.errorMessage}</div>
     </>

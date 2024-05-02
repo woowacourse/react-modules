@@ -3,15 +3,15 @@ import validator from "./utils/validate";
 import ERROR_MESSAGE from "./constants/errorMessage";
 
 type UserCardNumbersValidationProps = {
-  value: string[];
+  cardNumbers: string[];
 };
 
 const INDIVIDUAL_CARD_LENGTH = 4;
 
-const useCardNumbersValidation = ({ value }: UserCardNumbersValidationProps) => {
+const useCardNumbersValidation = ({ cardNumbers }: UserCardNumbersValidationProps) => {
   const ref = useRef({ isValid: false, errorMessage: "" });
 
-  for (const cardNumber of value) {
+  for (const cardNumber of cardNumbers) {
     if (!validator.isValidEmptyValue(cardNumber)) {
       ref.current = {
         isValid: false,
@@ -19,6 +19,7 @@ const useCardNumbersValidation = ({ value }: UserCardNumbersValidationProps) => 
       };
       break;
     }
+
     if (!validator.isValidDigit(cardNumber)) {
       ref.current = {
         isValid: false,
@@ -34,6 +35,7 @@ const useCardNumbersValidation = ({ value }: UserCardNumbersValidationProps) => 
       };
       break;
     }
+
     ref.current = {
       isValid: true,
       errorMessage: "",
