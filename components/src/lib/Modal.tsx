@@ -11,7 +11,7 @@ export interface ModalProps {
   close?: boolean;
   cancelLabel?: string;
   confirmLabel?: string;
-  isOpenState: [boolean, React.Dispatch<React.SetStateAction<boolean>>];
+  isOpenState: ReturnType<typeof useState<boolean>>;
   onOpen?: () => void;
   onConfirm?: () => void;
   onClose?: () => void;
@@ -58,7 +58,10 @@ const Modal = ({
           <div className={css(headerContainerCSS)}>
             <h2 className={css(titleCSS)}>{title}</h2>
             {close && (
-              <button className={css(closeButtonCSS)} onClick={handleClose}>
+              <button
+                className={css(closeButtonCSS)}
+                onClick={handleClose}
+              >
                 ×
               </button>
             )}
@@ -67,22 +70,31 @@ const Modal = ({
             <p className={css(descriptionCSS)}>{description}</p>
           </div>
           {children && <div>{children}</div>}
-          {confirmLabel && cancelLabel && (
+          {(confirmLabel || cancelLabel) && (
             <div className={css(buttonContainerCSS)}>
               {confirmLabel && (
-                <button className={css(buttonCSS, confirmButtonCSS)} onClick={handleConfirm}>
+                <button
+                  className={css(buttonCSS, confirmButtonCSS)}
+                  onClick={handleConfirm}
+                >
                   {confirmLabel}
                 </button>
               )}
               {cancelLabel && (
-                <button className={css(buttonCSS, cancelButtonCSS)} onClick={handleClose}>
+                <button
+                  className={css(buttonCSS, cancelButtonCSS)}
+                  onClick={handleClose}
+                >
                   {cancelLabel}
                 </button>
               )}
             </div>
           )}
         </div>
-        <div className={css(backdropCSS)} onClick={handleClose} />
+        <div
+          className={css(backdropCSS)}
+          onClick={handleClose}
+        />
       </>
     )
   );
