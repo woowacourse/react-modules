@@ -1,5 +1,5 @@
-import { useState } from "react";
-interface IErrorStatus {
+import { useState } from 'react';
+export interface IErrorStatus {
   isValid: boolean;
   errorMessage: string | null;
 }
@@ -11,14 +11,19 @@ interface IValidationResult<T> {
 type ErrorMessage = string;
 type IValidationFunction<T> = (value: T) => ErrorMessage | null | undefined;
 
-function useValidation<T>(validators: IValidationFunction<T>[]): IValidationResult<T> {
+function useValidation<T>(
+  validators: IValidationFunction<T>[]
+): IValidationResult<T> {
   const [errorMessage, setErrorMessage] = useState<ErrorMessage | null>(null);
 
   const validate = (value: T) => {
-    const foundErrorMessage = validators.reduce((acc: ErrorMessage | null, fn) => {
-      const currentErrorMessage = fn(value) ?? null;
-      return acc ?? currentErrorMessage;
-    }, null);
+    const foundErrorMessage = validators.reduce(
+      (acc: ErrorMessage | null, fn) => {
+        const currentErrorMessage = fn(value) ?? null;
+        return acc ?? currentErrorMessage;
+      },
+      null
+    );
 
     setErrorMessage(foundErrorMessage);
   };
