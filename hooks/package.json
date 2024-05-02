@@ -1,6 +1,6 @@
 {
   "name": "hain-tain-hooks",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "This is a module created for practice",
   "type": "module",
   "types": "dist/index.d.ts",
@@ -17,6 +17,7 @@
     "test": "jest"
   },
   "dependencies": {
+    "hain-tain-hooks": "^0.0.2",
     "prettier": "^3.2.5",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"

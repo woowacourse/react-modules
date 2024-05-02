@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-interface UseCardValidateProps {
+export interface UseCardValidateProps {
   initValue: string;
   validateOnChange: (value: string) => ValidateResult;
   validateOnBlur: () => ValidateResult;
