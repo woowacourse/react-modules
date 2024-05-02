@@ -30,10 +30,11 @@ jobs:
         with:
           node-version: 18
           cache: 'npm'
+        run: |
+          cd ./components
 
       - name: Install dependencies
         run: |
-          cd ./components
           npm install
 
       - name: Build storybook
