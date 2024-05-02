@@ -9,11 +9,13 @@ const useCardCVC = (validLength: number = VALID_CVC_NUMBER_LENGTH) => {
   const [cvcNumberErrorMessage, setCVCNumberErrorMessage] = useState('');
 
   const handleCVCNumberChange = (number: string) => {
-    if (isNotNumber(number) || number.length > validLength) return;
+    if (number.length > validLength) return;
 
     const errorMessage = getNumberErrorMessage(number, validLength);
-
     setCVCNumberErrorMessage(errorMessage);
+
+    if (isNotNumber(number)) return;
+
     setIsValidCVCNumber(!errorMessage);
     setCVCNumber(number);
   };

@@ -7,11 +7,13 @@ const useCardPassword = (validLength: number = 2) => {
   const [passwordErrorMessage, setPasswordErrorMessage] = useState('');
 
   const handlePasswordChange = (number: string) => {
-    if (isNotNumber(number) || number.length > validLength) return;
+    if (number.length > validLength) return;
 
     const errorMessage = getNumberErrorMessage(number, validLength);
-
     setPasswordErrorMessage(errorMessage);
+
+    if (isNotNumber(number)) return;
+
     setIsValidPassword(!errorMessage);
     setPassword(number);
   };

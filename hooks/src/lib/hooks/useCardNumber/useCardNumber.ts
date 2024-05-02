@@ -14,11 +14,13 @@ const useCardNumber = (unitCount: number, singleUnitLength: number) => {
   );
 
   const handleCardNumberChange = (number: string, index: number) => {
-    if (isNotNumber(number) || number.length > singleUnitLength) return;
+    if (number.length > singleUnitLength) return;
 
     const errorMessage = getNumberErrorMessage(number, singleUnitLength);
-
     setCardNumberErrorMessages(updateArray(cardNumberErrorMessages, errorMessage, index));
+
+    if (isNotNumber(number)) return;
+
     setIsValidCardNumbers(updateArray(isValidCardNumbers, !errorMessage, index));
     setCardNumber(updateArray(cardNumber, number, index));
   };
