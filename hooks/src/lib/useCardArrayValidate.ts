@@ -17,6 +17,7 @@ const useCardArrayValidate = ({
   validateOnBlur,
 }: UseCardArrayValidateProps) => {
   const [value, setValue] = useState(initValue);
+  const [isCompleted, setIsCompleted] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
   const [hasFocus, setHasFocus] = useState(
     Array.from({ length: initValue.length }).fill(false),
@@ -30,6 +31,9 @@ const useCardArrayValidate = ({
     const targetValue = e.target.value;
 
     const { isValid, errorMessage } = validateOnChange(targetValue);
+
+    setIsCompleted(false);
+
     if (!isValid) {
       setErrorMessage(errorMessage);
       return;
@@ -58,6 +62,9 @@ const useCardArrayValidate = ({
   useEffect(() => {
     if (!hasAnyFocus) {
       const { isValid, errorMessage } = validateOnBlur();
+
+      setIsCompleted(isValid);
+
       if (!isValid) {
         setErrorMessage(errorMessage);
         return;
@@ -67,6 +74,7 @@ const useCardArrayValidate = ({
 
   return {
     value,
+    isCompleted,
     errorMessage,
     onChangeHandler,
     onBlurHandler,
