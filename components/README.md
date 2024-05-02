@@ -1,6 +1,4 @@
-# Button Module
-
-### 페이먼츠 커스텀 훅
+### Modal 컴포넌트
 
 - package 이름 : rian-modal-compoent
 - Writer : 헤일리, 리안

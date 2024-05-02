@@ -1,6 +1,6 @@
-import { useState } from 'react';
-import { ErrorStatus } from '../types/errorStatus';
-import { CardCompanyErrorMessage } from '../constants/error';
+import { useState } from "react";
+import { ErrorStatus } from "../types/errorStatus";
+import { CardCompanyErrorMessage } from "../constants/error";
 
 const checkIncludeArray = (optionArr: string[], value: string) => {
   if (!optionArr.includes(value) || !value) {
@@ -16,7 +16,7 @@ const useCardCompany = ({
   optionArray: string[];
 }) => {
   const [value, setValue] = useState(initialValue);
-  const [errorMessage, setErrorMessage] = useState('');
+  const [errorMessage, setErrorMessage] = useState("");
 
   const onSelect = (value: string) => {
     try {

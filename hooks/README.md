@@ -2,13 +2,13 @@
 
 ### 페이먼츠 커스텀 훅
 
-- package 이름 : use-card-input-hook
+- package 이름 : rian-card-validation-hooks
 - Writer : 헤일리, 리안
 
 ## Installation
 
 ```
-npm install use-card-input-hook
+npm install rian-card-validation-hooks
 ```
 
 ## Available Hooks
@@ -37,10 +37,10 @@ const {
   onChange: onChangeCardNumbers,
   errorMessages,
 } = useCardNumbers({
-  cardNumber1: '',
-  cardNumber2: '',
-  cardNumber3: '',
-  cardNumber4: '',
+  cardNumber1: "",
+  cardNumber2: "",
+  cardNumber3: "",
+  cardNumber4: "",
 });
 
 return (
@@ -51,30 +51,30 @@ return (
     <input
       onChange={onChangeCardNumbers}
       name="cardNumber1"
-      value={cardNumbers['cardNumber1']}
+      value={cardNumbers["cardNumber1"]}
     />
     {/*cardNumber 2*/}
-    <div>{errorMessages['cardNumber1']}</div>
+    <div>{errorMessages["cardNumber1"]}</div>
     <input
       onChange={onChangeCardNumbers}
       name="cardNumber2"
-      value={cardNumbers['cardNumber2']}
+      value={cardNumbers["cardNumber2"]}
     />
     {/*cardNumber 3*/}
-    <div>{errorMessages['cardNumber2']}</div>
+    <div>{errorMessages["cardNumber2"]}</div>
     <input
-      value={cardNumbers['cardNumber3']}
+      value={cardNumbers["cardNumber3"]}
       onChange={onChangeCardNumbers}
       name="cardNumber3"
     />
-    <div>{errorMessages['cardNumber3']}</div>
+    <div>{errorMessages["cardNumber3"]}</div>
     {/*cardNumber 4*/}
     <input
-      value={cardNumbers['cardNumber4']}
+      value={cardNumbers["cardNumber4"]}
       onChange={onChangeCardNumbers}
       name="cardNumber4"
     />
-    <div>{errorMessages['cardNumber4']}</div>
+    <div>{errorMessages["cardNumber4"]}</div>
   </>
 );
 ```
@@ -88,7 +88,7 @@ return (
 
 ```tsx
 const { value, onSelect, errorMessages } = useCardCompany({
-  initialValue: '',
+  initialValue: "",
   optionArray: MockCardCompany,
 });
 
@@ -117,7 +117,7 @@ return (
 > [IS_DOUBLE_BLANK]: '빈칸이 두개 이상 포함되어 있습니다.'
 
 ```tsx
-const { value, onChange, errorMessage } = useCardHolder('');
+const { value, onChange, errorMessage } = useCardHolder("");
 
 return (
   <>
@@ -145,8 +145,8 @@ const {
   onChange,
   errorMessages,
 } = useExpiryDate({
-  month: '',
-  year: '',
+  month: "",
+  year: "",
 });
 
 return (
@@ -189,7 +189,7 @@ return (
 > [INVALID_LENGTH]: '비밀번호는 2글자만 입력해 주세요.'
 
 ```tsx
-const { value, onChange, errorMessage } = usePassword('');
+const { value, onChange, errorMessage } = usePassword("");
 
 return (
   <>

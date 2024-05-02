@@ -1,6 +1,6 @@
 {
   "name": "rian-modal-compoents",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "npm modules",
   "type": "module",
   "types": "dist/index.d.ts",
