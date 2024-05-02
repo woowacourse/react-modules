@@ -48,8 +48,8 @@
 
 ### `useCardNumber` 커스텀 훅
 
-- [ ] useCardNumber
-- [ ] useCardNumberValidation
+- [x] useCardNumber
+- [x] useCardNumberValidation
 
 ### `useExpiryDate` 커스텀 훅
 
