@@ -23,4 +23,5 @@ export default defineConfig({
     },
   },
   plugins: [react(), dts()],
+  base: '/react-modules/',
 });
