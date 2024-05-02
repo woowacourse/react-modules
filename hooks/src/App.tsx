@@ -7,7 +7,7 @@ import {
   usePassword,
   useCardType,
   useCardNumbers,
-} from './lib';
+} from 'cookie-nice-card-hooks';
 
 function App() {
   const cvcInfo = useCVC('111');

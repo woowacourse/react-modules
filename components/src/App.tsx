@@ -1,6 +1,6 @@
 import React, { useReducer } from 'react';
 
-import Modal from './lib/Modal';
+import { Modal } from 'cookie-nice-modal';
 import SelectBank from './components/SelectBank';
 
 function App() {
