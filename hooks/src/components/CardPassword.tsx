@@ -1,4 +1,3 @@
-import React from 'react';
 import { usePassword } from '../lib';
 
 export default function CardPassword() {
