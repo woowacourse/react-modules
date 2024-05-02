@@ -22,7 +22,7 @@ const usePassword = (initialValue: string) => {
   return {
     value,
     onChange: handleChange,
-    errorMessages: errorStatus && PasswordErrorMessages[errorStatus],
+    errorMessage: errorStatus && PasswordErrorMessages[errorStatus],
   };
 };
 

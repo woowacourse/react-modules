@@ -22,7 +22,7 @@ const useCVC = (initialValue: string) => {
   return {
     value,
     onChange: handleChange,
-    errorMessages: errorStatus && CVCErrorMessages[errorStatus],
+    errorMessage: errorStatus && CVCErrorMessages[errorStatus],
   };
 };
 

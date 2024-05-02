@@ -22,7 +22,7 @@ const useCardHolder = (initialValue: string) => {
   return {
     value,
     onChange: handleChange,
-    errorStatus: errorStatus && CardHolderErrorMessages[errorStatus],
+    errorMessage: errorStatus && CardHolderErrorMessages[errorStatus],
   };
 };
 
