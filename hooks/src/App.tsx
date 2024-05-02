@@ -5,16 +5,8 @@ import {
   useCardNumber,
   useExpiryDate,
   usePassword,
-} from "choco-payments-validation-hooks";
+} from "choriver-payments-validation-hooks";
 import React from "react";
-import {
-  useCVC,
-  useCardHolder,
-  useCardIssuer,
-  useCardNumber,
-  useExpiryDate,
-  usePassword,
-} from "../src/lib/index";
 import "./App.css";
 
 const cardNames = ["현대카드", "국민카드", "신한카드", "우리카드"];
