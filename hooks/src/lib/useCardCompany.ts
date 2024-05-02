@@ -24,7 +24,7 @@ const useCardCompany = () => {
       setCardCompanyInfo((prev) => {
         return {
           ...prev,
-          isError: false,
+          isError: true,
         };
       });
       return;
@@ -33,7 +33,7 @@ const useCardCompany = () => {
     setCardCompanyInfo((prev) => {
       return {
         ...prev,
-        isError: true,
+        isError: false,
       };
     });
   };
