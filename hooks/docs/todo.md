@@ -55,8 +55,8 @@
 
 ### docs
 
-- [ ] useCardCompany.md
-- [ ] useCardNumbers.md
-- [ ] useExpiryPeriod.md
-- [ ] useExpiryPeriod.md
-- [ ] useRestrictedState.md
+- [x] useCardCompany.md
+- [x] useCardNumbers.md
+- [x] useExpiryPeriod.md
+- [x] useInput.md
+- [x] useRestrictedState.md
