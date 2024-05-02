@@ -67,8 +67,8 @@ const useExpiryPeriod = () => {
     isError: Object.values(errorMessage).some((message) => message),
     errorState: {
       errorMessage,
-      setYear: (errorMessage: string) => setError("year", errorMessage),
-      setMonth: (errorMessage: string) => setError("month", errorMessage),
+      setYearError: (errorMessage: string) => setError("year", errorMessage),
+      setMonthError: (errorMessage: string) => setError("month", errorMessage),
     },
   } as const;
 };
