@@ -17,10 +17,10 @@
 
 ## docs
 
-- [ ] CloseButton.md
-- [ ] LongButton.md
-- [ ] Modal.md
-- [ ] ModalHeader.md
-- [ ] Title.md
+- [x] CloseButton.md
+- [x] LongButton.md
+- [x] Modal.md
+- [x] ModalHeader.md
+- [x] Title.md
 
 - [ ] 스크린샷 찍어서 이미지 업로드

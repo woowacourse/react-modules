@@ -15,4 +15,4 @@ function App() {
 
 ## Attributes
 
-1. `handleClick` 버튼을 클릭했을 때 실행할 핸들러 함수
+1. `handleClick` [optional] : 버튼을 클릭했을 때 실행할 핸들러 함수
