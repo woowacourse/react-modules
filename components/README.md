@@ -8,10 +8,6 @@
 npm install choriver-modal-component
 ```
 
-```bash
-npm install @emotion/react @emotion/styled
-```
-
 ## Usage
 
 React 컴포넌트에서 모달 라이브러리를 사용하려면 다음 단계를 따르세요
