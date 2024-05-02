@@ -1,5 +1,5 @@
 import { useState } from "react";
-import useValidation from "./useValidation";
+import useValidation from "../useValidation";
 
 const EXPIRY_MONTH_LENGTH = 2;
 const expiryMonthValidators = [
@@ -27,19 +27,19 @@ const expiryYearValidators = [
   },
   (value: string) => {
     const isValidYear = Number(value) >= MIN_YEAR && Number(value) <= MAX_YEAR;
-    if (isValidYear) {
+    if (!isValidYear) {
       return "유효기간 년도(年)는 24년도부터 40년도 중 하나로 입력해 주세요";
     }
   },
 ];
 
-export default function useCardholderName() {
+export default function useExpiryDate() {
   const [expiryMonthValue, setExpiryMonthValue] = useState("");
   const { errorStatus: expiryMonthErrorStatus, validate: validateExpiryMonth } =
     useValidation<string>(expiryMonthValidators);
 
   const [expiryYearValue, setExpiryYearValue] = useState("");
-  const { errorStatus: yearErrorStatus, validate: validateExpiryYear } =
+  const { errorStatus: expiryYearErrorStatus, validate: validateExpiryYear } =
     useValidation<string>(expiryYearValidators);
 
   const setExpiryMonth = (string: string) => {
@@ -58,6 +58,6 @@ export default function useCardholderName() {
     expiryMonthErrorStatus,
     expiryYear: expiryYearValue,
     setExpiryYear,
-    yearErrorStatus,
+    expiryYearErrorStatus,
   };
 }
