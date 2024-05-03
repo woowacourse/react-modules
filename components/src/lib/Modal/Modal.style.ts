@@ -21,10 +21,7 @@ export const ModalContainer = styled.div<Pick<ModalProps, "modalPosition" | "clo
   z-index: 1001;
   flex-direction: column;
   ${({ closeButtonPosition }) =>
-    closeButtonPosition === "bottom" &&
-    `
-  justify-content: space-between;
-`}
+    closeButtonPosition === "bottom" && "justify-content: space-between;"}
   gap: 16px;
   position: absolute;
   min-height: 216px;
@@ -35,23 +32,26 @@ export const ModalContainer = styled.div<Pick<ModalProps, "modalPosition" | "clo
   background: rgba(255, 255, 255, 1);
   color: rgba(0, 0, 0, 1);
 
-  ${({ modalPosition }) =>
-    modalPosition === "center" &&
-    `
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 304px;
-  `}
-
-  ${({ modalPosition }) =>
-    modalPosition === "bottom" &&
-    `
-    bottom: 0;
-    left:0;
-    right:0;
-    width: 100%;
-  `}
+  ${({ modalPosition }) => {
+    switch (modalPosition) {
+      case "center":
+        return `
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          width: 304px;
+        `;
+      case "bottom":
+        return `
+          bottom: 0;
+          left: 0;
+          right: 0;
+          width: 100%;
+        `;
+      default:
+        return "";
+    }
+  }}
 `;
 
 export const ModalHeader = styled.div`
