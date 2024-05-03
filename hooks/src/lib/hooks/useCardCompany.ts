@@ -1,4 +1,5 @@
-import { ChangeEvent, useRef, useState, MouseEvent } from "react";
+import { ChangeEvent, useRef, MouseEvent } from "react";
+import useRestrictedState from "./useRestrictedState";
 
 const COMPANY_LIST = [
   "BC카드",
@@ -20,18 +21,9 @@ interface CustomMouseEvent extends MouseEvent {
 }
 
 const useCardCompany = (cardCompanyList: readonly string[] = COMPANY_LIST) => {
-  const [cardCompany, setCardCompany] = useState("");
-  const [isError, setIsError] = useState(false);
-  const [errorMessage, setErrorMessage] = useState<string | undefined>();
-
-  const setError = (errorMessage: string | undefined) => {
-    setErrorMessage(errorMessage);
-    if (!errorMessage) {
-      setIsError(false);
-      return;
-    }
-    setIsError(true);
-  };
+  const { valueState, errorState } = useRestrictedState();
+  const { value: cardCompany, setValue: setCardCompany } = valueState;
+  const { isError, errorMessage, setError } = errorState;
 
   const setCardCompanyWrapper = (value: string) => {
     if (cardCompanyList.includes(value)) {
@@ -41,18 +33,18 @@ const useCardCompany = (cardCompanyList: readonly string[] = COMPANY_LIST) => {
     setError("잘못된 카드사를 입력했습니다.");
   };
 
-  const cardCompanyRef = useRef<HTMLSelectElement>(null);
+  const cardCompanyInputRef = useRef<HTMLSelectElement>(null);
 
   const clickCardCompany = (event: ChangeEvent<HTMLSelectElement> | CustomMouseEvent) => {
     const { value } = event.target;
     if (!value) return;
 
     setCardCompanyWrapper(value);
-    if (cardCompanyRef.current?.value) {
-      cardCompanyRef.current.value = value;
+    if (cardCompanyInputRef.current?.value) {
+      cardCompanyInputRef.current.value = value;
     }
 
-    cardCompanyRef.current?.blur();
+    cardCompanyInputRef.current?.blur();
   };
 
   return {
@@ -63,7 +55,7 @@ const useCardCompany = (cardCompanyList: readonly string[] = COMPANY_LIST) => {
       setError,
       resetError: () => setError(undefined),
     },
-    cardCompanyRef,
+    cardCompanyInputRef,
     clickCardCompany,
   };
 };

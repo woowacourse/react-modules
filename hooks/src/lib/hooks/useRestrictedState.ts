@@ -45,7 +45,7 @@ const useRestrictedState = ({ type, maxLength }: UseRestrictedStateProps = {}) =
   return {
     valueState: { value, setValue: setValueWrapper },
     errorState: { isError, errorMessage, setError },
-  } as const;
+  };
 };
 
 export default useRestrictedState;
