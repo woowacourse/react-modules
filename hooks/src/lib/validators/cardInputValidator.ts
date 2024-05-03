@@ -2,11 +2,11 @@ import { INPUT_RULES } from "../constants/card-custom-hook";
 
 const cardInputValidator = {
   validateNumericInput(value: string) {
-    return /^(\d*)$/.test(value);
+    return /^(\d*)$/.test(value); // 입력값이 숫자로만 이루어졌는지 확인하는 validator
   },
 
   validateAlphabetInput(value: string) {
-    return /^[a-zA-Z ]*$/.test(value);
+    return /^[a-zA-Z ]*$/.test(value); // 입력값이 알파벳 대소문자로만 이루어졌는지 확인하는 validator
   },
 
   validateInputLength(value: string, length: number) {
@@ -14,15 +14,15 @@ const cardInputValidator = {
   },
 
   validateNumberInRange(number: number, min: number, max: number) {
-    return number >= min && number <= max ? true : false;
+    return number >= min && number <= max;
   },
 
   validateCardNumberLength(value: string) {
-    return value.length === INPUT_RULES.maxCardNumberPartLength ? true : false;
+    return value.length === INPUT_RULES.maxCardNumberPartLength;
   },
 
   validatePastYear(year: string) {
-    const currentYear = new Date().getFullYear() & 100;
+    const currentYear = new Date().getFullYear() % 100;
 
     return parseInt(year, 10) <= currentYear;
   },
@@ -58,9 +58,7 @@ const cardInputValidator = {
     )
       return true;
 
-    return this.validateFutureDate(parseInt(month), parseInt(year))
-      ? true
-      : false;
+    return this.validateFutureDate(parseInt(month), parseInt(year));
   },
 };
 
