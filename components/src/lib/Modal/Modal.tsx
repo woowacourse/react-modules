@@ -7,10 +7,11 @@ import ModalFooter from './ModalFooter/ModalFooter';
 import * as Styled from './Modal.style';
 
 export type ModalPositionType = 'center' | 'bottom';
+export type ModalButtonType = 'primary' | 'secondary';
 
-export interface ModalButtonType {
+export interface ModalButtonInterface {
   text: string;
-  style: 'primary' | 'secondary';
+  style: ModalButtonType;
   onClick: () => void;
 }
 
@@ -20,7 +21,7 @@ export interface ModalProps {
   title: string;
   hasCloseButton?: boolean;
   children: React.ReactNode;
-  footerButtons?: ModalButtonType[];
+  footerButtons?: ModalButtonInterface[];
   onClose: () => void;
 }
 

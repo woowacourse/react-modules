@@ -2,13 +2,14 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import './App.css';
 
-import { Modal, ModalButtonType } from '@seongjinme/react-modal';
+// import { Modal, ModalButtonInterface } from '@seongjinme/react-modal';
+import { Modal, ModalButtonInterface } from './lib';
 
 function App() {
   const [isOpenCenterModal, setIsOpenCenterModal] = useState(false);
   const [isOpenBottomModal, setIsOpenBottomModal] = useState(false);
 
-  const MODAL_CENTER_BUTTONS: ModalButtonType[] = [
+  const MODAL_CENTER_BUTTONS: ModalButtonInterface[] = [
     {
       text: '동의하고 저장하기',
       style: 'primary',
@@ -25,7 +26,7 @@ function App() {
     },
   ];
 
-  const MODAL_BOTTOM_BUTTONS: ModalButtonType[] = [
+  const MODAL_BOTTOM_BUTTONS: ModalButtonInterface[] = [
     {
       text: '동의하고 저장하기',
       style: 'primary',

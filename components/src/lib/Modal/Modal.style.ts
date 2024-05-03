@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { ModalButtonType, ModalPositionType } from './Modal';
+import { ModalButtonInterface, ModalPositionType } from './Modal';
 
 const colors = {
   grey100: '#ffffff',
@@ -87,7 +87,7 @@ export const Footer = styled.footer`
   gap: 12px;
 `;
 
-export const FooterButton = styled.button<{ $style: ModalButtonType['style'] }>`
+export const FooterButton = styled.button<{ $style: ModalButtonInterface['style'] }>`
   background: ${(props) => (props.$style === 'primary' ? colors.grey400 : colors.grey100)};
   color: ${(props) => (props.$style === 'primary' ? colors.grey100 : colors.grey200)};
   border-radius: 5px;

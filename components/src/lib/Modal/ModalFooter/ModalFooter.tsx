@@ -1,9 +1,9 @@
-import { ModalButtonType } from '../Modal';
+import { ModalButtonInterface } from '../Modal';
 
 import * as Styled from './ModalFooter.style';
 
 interface ModalFooterProps {
-  bottons: ModalButtonType[];
+  bottons: ModalButtonInterface[];
 }
 
 export default function ModalFooter({ bottons }: ModalFooterProps) {
