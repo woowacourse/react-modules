@@ -14,14 +14,14 @@ describe("useCardNumber 테스트", () => {
 
       act(() => result.current.onChanges.forEach((onChange) => onChange(makeChangeEvent("1234"))));
 
-      expect(flatten(result.current.cardNumberStates, "isError")).toEqual([false, false, false, false]);
+      expect(flatten(result.current.inputStates, "isError")).toEqual([false, false, false, false]);
     });
     test("첫 번째 인풋태그에 문자를 입력했을 때, 첫번째 입력태그에만 에러를 발생시킨다.", () => {
       const { result } = renderHook(useCardNumber);
 
       act(() => result.current.onChanges[0](makeChangeEvent("1a")));
 
-      expect(flatten(result.current.cardNumberStates, "isError")).toEqual([true, false, false, false]);
+      expect(flatten(result.current.inputStates, "isError")).toEqual([true, false, false, false]);
     });
   });
   describe("blur 상황일 때,", () => {
@@ -30,7 +30,7 @@ describe("useCardNumber 테스트", () => {
 
       act(() => result.current.onBlurs.forEach((onBlur) => onBlur(makeBlurEvent("1234"))));
 
-      expect(flatten(result.current.cardNumberStates, "isError")).toEqual([false, false, false, false]);
+      expect(flatten(result.current.inputStates, "isError")).toEqual([false, false, false, false]);
     });
 
     test.each([0, 1, 2, 3])(
@@ -42,7 +42,7 @@ describe("useCardNumber 테스트", () => {
 
         act(() => result.current.onBlurs[index](makeBlurEvent("123")));
 
-        expect(flatten(result.current.cardNumberStates, "isError")).toEqual(EXPECTED_RESULT);
+        expect(flatten(result.current.inputStates, "isError")).toEqual(EXPECTED_RESULT);
       }
     );
   });

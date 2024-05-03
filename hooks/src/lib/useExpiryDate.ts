@@ -1,7 +1,6 @@
 import useInput, { InputState } from "./domains/useInput";
 import { Validator } from "./domains/validation";
-import validations from "./domains/validations";
-import { makeOnBlur, makeOnChange } from "./domains/makeCallback";
+import useValidations from "./domains/useValidations";
 
 const validators: Validator[] = [
   {
@@ -22,12 +21,9 @@ const validators: Validator[] = [
 const useExpiryDate = () => {
   const expiryDates: InputState[] = [useInput(""), useInput("")];
 
-  validations(expiryDates, validators);
+  const { inputStates, onChanges, onBlurs } = useValidations(expiryDates, validators);
 
-  const onChanges = expiryDates.map(makeOnChange);
-  const onBlurs = expiryDates.map(makeOnBlur);
-
-  return { expiryDates, onChanges, onBlurs };
+  return { expiryDates: inputStates, onChanges, onBlurs };
 };
 
 export default useExpiryDate;

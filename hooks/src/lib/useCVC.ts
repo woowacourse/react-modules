@@ -1,6 +1,6 @@
 import useInput, { InputState } from "./domains/useInput";
-import validation, { Validator } from "./domains/validation";
-import { makeOnBlur, makeOnChange } from "./domains/makeCallback";
+import useValidation from "./domains/useValidation";
+import { Validator } from "./domains/validation";
 
 const COMPLETE_LENGTH = 3;
 const validators: Validator[] = [
@@ -17,12 +17,9 @@ const validators: Validator[] = [
 const useCVC = () => {
   const CVC: InputState = useInput("");
 
-  validation(CVC, validators);
+  const { inputState, onChange, onBlur } = useValidation(CVC, validators);
 
-  const onChange = makeOnChange(CVC);
-  const onBlur = makeOnBlur(CVC);
-
-  return { CVC, onChange, onBlur };
+  return { inputState, onChange, onBlur };
 };
 
 export default useCVC;

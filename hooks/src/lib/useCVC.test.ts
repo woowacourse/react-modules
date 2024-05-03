@@ -9,21 +9,21 @@ describe("useCVC 테스트", () => {
 
     act(() => result.current.onChange(makeChangeEvent("123")));
 
-    expect(result.current.CVC.isError).toBe(false);
+    expect(result.current.inputState.isError).toBe(false);
   });
   test("입력중일 때, 길이 에러는 발생시키지 않는다.", () => {
     const { result } = renderHook(useCVC);
 
     act(() => result.current.onChange(makeChangeEvent("12")));
 
-    expect(result.current.CVC.isError).toBe(false);
+    expect(result.current.inputState.isError).toBe(false);
   });
   test("인풋태그에 문자를 입력했을 때,  에러를 발생시킨다.", () => {
     const { result } = renderHook(useCVC);
 
     act(() => result.current.onChange(makeChangeEvent("1a")));
 
-    expect(result.current.CVC.isError).toBe(true);
+    expect(result.current.inputState.isError).toBe(true);
   });
 
   describe("blur 상황일 때,", () => {
@@ -32,7 +32,7 @@ describe("useCVC 테스트", () => {
 
       act(() => result.current.onBlur(makeBlurEvent("123")));
 
-      expect(result.current.CVC.isError).toBe(false);
+      expect(result.current.inputState.isError).toBe(false);
     });
     test("인풋태그 입력 길이가 3이 되지 않았을 때, 에러를 발생시킨다.", () => {
       const { result } = renderHook(useCVC);
@@ -40,7 +40,7 @@ describe("useCVC 테스트", () => {
 
       act(() => result.current.onBlur(makeBlurEvent("12")));
 
-      expect(result.current.CVC.isError).toBe(EXPECTED_RESULT);
+      expect(result.current.inputState.isError).toBe(EXPECTED_RESULT);
     });
   });
 });

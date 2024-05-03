@@ -24,7 +24,7 @@ const validation = (inputState: InputState, validators: Validator[]) => {
     return;
   }
 
-  // 에러메시지가 동일하지않으면, 에러메시지를 설정
+  // 에러메시지가 동일하지않으면, 에러를 설정
   if (invalidValidators[0].errorMessage !== inputState.errorMessage) {
     inputState.setError(invalidValidators[0].errorMessage);
   }

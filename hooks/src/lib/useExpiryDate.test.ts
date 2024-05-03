@@ -3,7 +3,7 @@ import { renderHook } from "@testing-library/react-hooks";
 import { act } from "react";
 import { InputState } from "./domains/useInput";
 import useExpiryDate from "./useExpiryDate";
-import { makeChangeEvent } from "./domains/makeCallback";
+import { makeBlurEvent, makeChangeEvent } from "./domains/makeCallback";
 const flatten = (cardNumberStates: InputState[], key: keyof InputState) =>
   cardNumberStates.map((inputState) => inputState[key]);
 describe("useExpiryDate 테스트", () => {
@@ -36,9 +36,9 @@ describe("useExpiryDate 테스트", () => {
   describe("blur 상황일 때,", () => {
     test("정상 입력시, 에러를 발생시키지 않는다.", () => {
       const { result } = renderHook(useExpiryDate);
+      const VALID_INPUT = "12";
 
-      act(() => result.current.expiryDates[0].setValue("12"));
-      act(() => result.current.expiryDates[0].setStatus("blur"));
+      act(() => result.current.onBlurs[0](makeBlurEvent(VALID_INPUT)));
 
       expect(flatten(result.current.expiryDates, "isError")).toEqual([false, false]);
     });
@@ -49,8 +49,7 @@ describe("useExpiryDate 테스트", () => {
         const EXPECTED_RESULT = [false, false];
         EXPECTED_RESULT[index] = true;
 
-        act(() => result.current.expiryDates[index].setValue("1"));
-        act(() => result.current.expiryDates[index].setStatus("blur"));
+        act(() => result.current.onBlurs[index](makeBlurEvent("1")));
 
         expect(flatten(result.current.expiryDates, "isError")).toEqual(EXPECTED_RESULT);
       }

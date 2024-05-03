@@ -1,6 +1,6 @@
 import useInput, { InputState } from "./domains/useInput";
-import validation, { Validator } from "./domains/validation";
-import { makeOnBlur, makeOnChange } from "./domains/makeCallback";
+import { Validator } from "./domains/validation";
+import useValidation from "./domains/useValidation";
 
 const VALID_LENGTH = 4;
 const validators: Validator[] = [
@@ -14,15 +14,13 @@ const validators: Validator[] = [
     type: "blur",
   },
 ];
+
 const usePassword = () => {
   const ownerName: InputState = useInput("");
 
-  validation(ownerName, validators);
+  const { inputState, onChange, onBlur } = useValidation(ownerName, validators);
 
-  const onChange = makeOnChange(ownerName);
-  const onBlur = makeOnBlur(ownerName);
-
-  return { ownerName, onChange, onBlur };
+  return { inputState, onChange, onBlur };
 };
 
 export default usePassword;

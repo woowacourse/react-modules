@@ -1,7 +1,7 @@
 import useInput, { InputState } from "./domains/useInput";
 import { Validator } from "./domains/validation";
-import validations from "./domains/validations";
-import { makeOnBlur, makeOnChange } from "./domains/makeCallback";
+
+import useValidations from "./domains/useValidations";
 
 const validators: Validator[] = [
   {
@@ -14,14 +14,13 @@ const validators: Validator[] = [
     type: "blur",
   },
 ];
+
 const useCardNumber = () => {
   const cardNumberStates: InputState[] = [useInput(""), useInput(""), useInput(""), useInput("")];
 
-  validations(cardNumberStates, validators);
+  const { inputStates, onChanges, onBlurs } = useValidations(cardNumberStates, validators);
 
-  const onChanges = cardNumberStates.map(makeOnChange);
-  const onBlurs = cardNumberStates.map(makeOnBlur);
-  return { cardNumberStates, onChanges, onBlurs };
+  return { inputStates, onChanges, onBlurs };
 };
 
 export default useCardNumber;
