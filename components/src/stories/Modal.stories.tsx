@@ -1,7 +1,7 @@
 import Modal from '../lib/Modal/Modal';
 import DeleteIcon from '../assets/deleteIcon.svg?react';
 import type { StoryObj } from '@storybook/react';
-import { CardCompanyType, CardCompanies } from '../data/CardCompany';
+import { CARD_COMPANIES, CardCompany } from '../data/CardCompany';
 import styled from 'styled-components';
 
 export default {
@@ -34,7 +34,7 @@ const NoCloseButtonModal = () => {
   );
 };
 
-const CardCompany = ({ company }: { company: CardCompanyType }) => {
+const CardCompanyBox = ({ company }: { company: CardCompany }) => {
   const { name, logo: Logo } = company;
   return (
     <OneCardCompanyBox>
@@ -47,8 +47,8 @@ const CardCompany = ({ company }: { company: CardCompanyType }) => {
 const CardCompaniesBox = () => {
   return (
     <Grid>
-      {CardCompanies.map((company: CardCompanyType) => (
-        <CardCompany key={company.id} company={company} />
+      {CARD_COMPANIES.map((company: CardCompany) => (
+        <CardCompanyBox key={company.id} company={company} />
       ))}
     </Grid>
   );

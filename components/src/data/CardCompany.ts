@@ -8,13 +8,13 @@ import LotteCardLogo from '../assets/Lotte.svg?react';
 import HanaCardLogo from '../assets/Hana.svg?react';
 import KukminCardLogo from '../assets/Kukmin.svg?react';
 
-export interface CardCompanyType {
+export interface CardCompany {
   name: string;
   logo: FunctionComponent<SVGAttributes<SVGElement>>;
   id: number;
 }
 
-export const CardCompanies: CardCompanyType[] = [
+export const CARD_COMPANIES: CardCompany[] = [
   {
     name: 'BC카드',
     logo: BCCardLogo,
