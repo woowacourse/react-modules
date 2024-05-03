@@ -3,19 +3,10 @@ import { act } from "react";
 import useInput, { InputState } from "./useInput";
 import validations from "./validations";
 import { Validator } from "./validation";
+import { makeLengthValidator, numericOnlyValidator } from "../constants/validators";
 
 const flatten = (inputStates: InputState[], key: keyof InputState) => inputStates.map((inputState) => inputState[key]);
-const validators: Validator[] = [
-  {
-    validate: (value) => /^\d*$/.test(value),
-    errorMessage: "숫자만 입력 가능합니다.",
-  },
-  {
-    validate: (value) => value.length === 2,
-    errorMessage: "필드의 길이는 2여야합니다.",
-    type: "blur",
-  },
-];
+const validators: Validator[] = [numericOnlyValidator, makeLengthValidator(2)];
 
 describe("validations 테스트", () => {
   test("정상 입력하고 change일 때, 에러를 발생시키지 않는다.", () => {

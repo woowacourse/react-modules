@@ -2,17 +2,13 @@ import { renderHook } from "@testing-library/react-hooks";
 import validation, { Validator } from "./validation";
 import useInput from "./useInput";
 import { act } from "react";
+import { makeLengthValidator, numericOnlyValidator } from "../constants/validators";
 
 describe("validation 테스트", () => {
   describe("change 상태일 때,", () => {
     test("validator에 해당하는 에러가 없을 시, 에러를 발생시키지 않는다.", () => {
       // Arrange
-      const validators: Validator[] = [
-        {
-          validate: (value) => /^\d*$/.test(value),
-          errorMessage: "숫자만 입력 가능합니다.",
-        },
-      ];
+      const validators: Validator[] = [numericOnlyValidator];
       const { result } = renderHook(() => useInput("1234"));
       act(() => result.current.setStatus("change"));
 
@@ -27,12 +23,7 @@ describe("validation 테스트", () => {
     test("validator를 받은 검증결과가 false일 때, 에러와 에러메시지를 발생시킨다.", () => {
       // Arrange
       const { result } = renderHook(() => useInput("123ㄹ"));
-      const validators: Validator[] = [
-        {
-          validate: (value) => /^\d*$/.test(value),
-          errorMessage: "숫자만 입력 가능합니다.",
-        },
-      ];
+      const validators: Validator[] = [numericOnlyValidator];
       act(() => result.current.setStatus("change"));
 
       // Act
@@ -45,36 +36,18 @@ describe("validation 테스트", () => {
 
     test("2개의 validator 중 2번째에 에러가 있을 시, 2번째 태그에 에러와 에러메시지를 발생시킨다.", () => {
       const { result } = renderHook(() => useInput("123ㄹ"));
-      const validators: Validator[] = [
-        {
-          validate: (value) => value.length === 4,
-          errorMessage: "입력 길이는 4여야합니다.",
-        },
-        {
-          validate: (value) => /^\d*$/.test(value),
-          errorMessage: "숫자만 입력 가능합니다.",
-        },
-      ];
+      const validators: Validator[] = [numericOnlyValidator, makeLengthValidator(4)];
       act(() => result.current.setStatus("change"));
       act(() => validation(result.current, validators));
 
       expect(result.current.isError).toBe(true);
-      expect(result.current.errorMessage).toBe("숫자만 입력 가능합니다.");
+      expect(result.current.errorMessage).toBe(numericOnlyValidator.errorMessage);
     });
 
     test("에러 발생 후 정상입력으로 수정되었을 때, 에러와 에러메시지를 해제한다.", () => {
       // Arrange
       const { result } = renderHook(() => useInput("123ㄹ"));
-      const validators: Validator[] = [
-        {
-          validate: (value) => value.length === 4,
-          errorMessage: "입력 길이는 4여야합니다.",
-        },
-        {
-          validate: (value) => /^\d*$/.test(value),
-          errorMessage: "숫자만 입력 가능합니다.",
-        },
-      ];
+      const validators: Validator[] = [makeLengthValidator(4), numericOnlyValidator];
 
       // Act
       act(() => result.current.setValue("1f"));
@@ -92,17 +65,7 @@ describe("validation 테스트", () => {
     test("blur 에러 발생 후 change상태에서 에러를 바꿨을 때, 에러와 에러메시지를 즉각 해제한다.", () => {
       // Arrange
       const { result } = renderHook(() => useInput("123ㄹ"));
-      const validators: Validator[] = [
-        {
-          validate: (value) => value.length === 4,
-          errorMessage: "입력 길이는 4여야합니다.",
-          type: "blur",
-        },
-        {
-          validate: (value) => /^\d*$/.test(value),
-          errorMessage: "숫자만 입력 가능합니다.",
-        },
-      ];
+      const validators: Validator[] = [makeLengthValidator(4), numericOnlyValidator];
 
       // Act (scenario)
       act(() => result.current.setValue("123"));
@@ -121,12 +84,7 @@ describe("validation 테스트", () => {
 
   test("inputState가 default상태일 때는, 에러와 에러메시지를 발생시키지 않는다.", () => {
     const { result } = renderHook(() => useInput("1f"));
-    const validators: Validator[] = [
-      {
-        validate: (value) => /^\d*$/.test(value),
-        errorMessage: "숫자만 입력 가능합니다.",
-      },
-    ];
+    const validators: Validator[] = [numericOnlyValidator];
     act(() => validation(result.current, validators));
 
     expect(result.current.isError).toBe(false);
@@ -135,12 +93,7 @@ describe("validation 테스트", () => {
   describe("blur 상태일 때,", () => {
     test("정상 입력시, 에러를 발생시키지 않는다.", () => {
       // Arrange
-      const validators: Validator[] = [
-        {
-          validate: (value) => /^\d*$/.test(value),
-          errorMessage: "숫자만 입력 가능합니다.",
-        },
-      ];
+      const validators: Validator[] = [numericOnlyValidator];
       const { result } = renderHook(() => useInput(""));
       act(() => result.current.setValue("1234"));
       act(() => result.current.setStatus("blur"));
@@ -153,13 +106,7 @@ describe("validation 테스트", () => {
     });
     test("잘못된 입력시, 에러를 발생시킨다.", () => {
       // Arrange
-      const validators: Validator[] = [
-        {
-          validate: (value) => value.length === 4,
-          errorMessage: "입력길이는 4여야합니다.",
-          type: "blur",
-        },
-      ];
+      const validators: Validator[] = [makeLengthValidator(4)];
       const { result } = renderHook(() => useInput(""));
       act(() => result.current.setValue("123"));
       act(() => result.current.setStatus("blur"));
