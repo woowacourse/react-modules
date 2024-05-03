@@ -15,6 +15,8 @@ const useRestrictedState = ({ type, maxLength }: UseRestrictedStateProps = {}) =
     setErrorMessage(undefined);
   };
 
+  // TODO: reset 추가
+
   const setError = (errorMessage: string | undefined) => {
     if (!errorMessage) {
       resetError();
@@ -41,7 +43,7 @@ const useRestrictedState = ({ type, maxLength }: UseRestrictedStateProps = {}) =
   };
 
   return {
-    valueState: [value, setValueWrapper],
+    valueState: { value, setValue: setValueWrapper },
     errorState: { isError, errorMessage, setError },
   } as const;
 };
