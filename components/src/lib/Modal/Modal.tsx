@@ -23,7 +23,7 @@ export const Modal: React.FC<ModalProps> = ({
   if (!isOpen) return null;
 
   return (
-    <ModalDim isOpen={isOpen} onClick={(e) => onClose(e)}>
+    <ModalDim isOpen={isOpen} onClick={onClose}>
       <ModalContainer modalPosition={modalPosition} closeButtonPosition={closeButtonPosition}>
         <ModalHeader>
           <h1>{title}</h1>
