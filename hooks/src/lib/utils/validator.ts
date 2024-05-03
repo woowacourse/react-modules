@@ -1,78 +1,78 @@
-import { CARD, REGEX } from '../constants';
+import { CARD, REGEX } from "../constants";
 
 const ValidatorCondition = {
-	checkMaxDigit(value: string, digit: number) {
-		return value.length > digit;
-	},
+  checkMaxDigit(value: string, digit: number) {
+    return value.length > digit;
+  },
 
-	checkEqualDigit(value: string, digit: number) {
-		return value.length === digit;
-	},
+  checkEqualDigit(value: string, digit: number) {
+    return value.length === digit;
+  },
 
-	checkIsDigit(value: string) {
-		return REGEX.numbers.test(value);
-	},
+  checkIsDigit(value: string) {
+    return REGEX.numbers.test(value);
+  },
 
-	checkIsEnglish(value: string) {
-		return /^[a-zA-Z\s]*$/.test(value);
-	},
+  checkIsEnglish(value: string) {
+    return /^[a-zA-Z\s]*$/.test(value);
+  },
 
-	checkIsBelowNumber(value: string, limit: number) {
-		return parseInt(value) <= limit || !value.length;
-	},
+  checkIsBelowNumber(value: string, limit: number) {
+    return parseInt(value) <= limit || !value.length;
+  },
 
-	checkIsNotDoubleZero(value: string) {
-		return value !== '00';
-	},
+  checkIsNotDoubleZero(value: string) {
+    return value !== "00";
+  },
 
-	checkValidMonth(value: string) {
-		return REGEX.month.test(value);
-	},
+  checkValidMonth(value: string) {
+    return REGEX.month.test(value);
+  },
 };
 
 const Validator = {
-	checkCreditExpirationPeriod(value: string, name: string): boolean {
-		const isValidMonth = name === 'month' ? ValidatorCondition.checkValidMonth(value) : true;
-		if (!isValidMonth) return false;
+  checkCreditExpirationPeriod(value: string, name: string): boolean {
+    const isValidMonth = name === "month" ? ValidatorCondition.checkValidMonth(value) : true;
+    if (!isValidMonth) return false;
 
-		return true;
-	},
+    return true;
+  },
 
-	checkDateExpiration(month: string, year: string): boolean {
-		const inputExpirationDate = new Date(`20${year}-${month}-01`);
-		const currentDate = new Date();
-		if (inputExpirationDate < currentDate) return false;
-		return true;
-	},
+  checkDateExpiration(month: string, year: string): boolean {
+    const inputExpirationDate = new Date(`20${year}-${month}-01`);
+    const currentDate = new Date();
+    if (inputExpirationDate < currentDate) return false;
+    return true;
+  },
 
-	checkEnglish(value: string): boolean {
-		if (ValidatorCondition.checkIsEnglish(value)) return true;
+  checkEnglish(value: string): boolean {
+    if (ValidatorCondition.checkIsEnglish(value)) return true;
 
-		return false;
-	},
+    return false;
+  },
 
-	checkNumberAndOver(value: string, maxDigit: number) {
-		if (!ValidatorCondition.checkIsDigit(value)) return false;
-		if (ValidatorCondition.checkMaxDigit(value, maxDigit)) return false;
+  checkNumberAndOver(value: string, maxDigit: number) {
+    if (!ValidatorCondition.checkIsDigit(value)) return false;
+    if (ValidatorCondition.checkMaxDigit(value, maxDigit)) return false;
 
-		return true;
-	},
+    return true;
+  },
 
-	checkFillNumber(value: string, maxDigit: number) {
-		if (!ValidatorCondition.checkEqualDigit(value, maxDigit)) return false;
+  checkFillNumber(value: string, maxDigit: number) {
+    if (!ValidatorCondition.checkEqualDigit(value, maxDigit)) return false;
 
-		return true;
-	},
+    return true;
+  },
 
-	checkExist(value: string) {
-		return value.length !== 0;
-	},
+  checkExist(value: string) {
+    return value.length !== 0;
+  },
 
-	checkCardType(value: string) {
-		if (Object.values(CARD).includes(value)) return true;
+  checkCardType(value: string) {
+    if (Object.values(CARD).includes(value)) return true;
 
-		return false;
-	},
+    return false;
+  },
 };
 
 export default Validator;

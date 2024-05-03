@@ -1,4 +1,4 @@
 interface ValidationResult {
-	isValid: boolean;
-	errorMessage: string;
+  isValid: boolean;
+  errorMessage: string;
 }

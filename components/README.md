@@ -16,25 +16,25 @@
 
 ```tsx
 function Example() {
-	const [openModal, setOpenModal] = React.useState(false);
+  const [openModal, setOpenModal] = React.useState(false);
 
-	return (
-		<>
-			<button onClick={() => setOpenModal(true)}>Modal Open</button>
-			{openModal && (
-				<Modal
-					position="center"
-					title="제목을 입력해주세요"
-					closeButton="img"
-					closeModal={() => setOpenModal(false)}
-					buttonText="버튼 텍스트틀 넣어주세요"
-					buttonClick={() => alert('버튼 누르기 성공')}
-				>
-					modal 내용은 이곳에 작성해주세요.
-				</Modal>
-			)}
-		</>
-	);
+  return (
+    <>
+      <button onClick={() => setOpenModal(true)}>Modal Open</button>
+      {openModal && (
+        <Modal
+          position="center"
+          title="제목을 입력해주세요"
+          closeButton="img"
+          closeModal={() => setOpenModal(false)}
+          buttonText="버튼 텍스트틀 넣어주세요"
+          buttonClick={() => alert("버튼 누르기 성공")}
+        >
+          modal 내용은 이곳에 작성해주세요.
+        </Modal>
+      )}
+    </>
+  );
 }
 
 export default Example;
