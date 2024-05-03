@@ -1,17 +1,17 @@
-import useInput from './useInput';
+import { ChangeEvent, FocusEvent } from 'react';
+import useInput from '@/lib/useInput';
 import {
   validateLengthOver,
   validateNumber,
   validateYear,
   validateMonth,
-} from '../validate/validate';
-import { ChangeEvent, FocusEvent } from 'react';
+} from '@/validate/validate';
 import {
   ExpiryDate,
   ExpiryDateError,
   ExpiryDateKeys,
-} from '../types/expiryDate';
-import { ExpiryDateErrorMessages } from '../constants/error';
+} from '@/types/expiryDate';
+import { ExpiryDateErrorMessages } from '@/constants/error';
 
 const expiryDateValidates = (value: string) => {
   validateNumber(value);

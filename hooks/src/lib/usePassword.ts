@@ -1,8 +1,8 @@
-import useInput from './useInput';
-import { validateLengthOver, validateNumber } from '../validate/validate';
 import { ChangeEvent, FocusEvent } from 'react';
-import { PasswordError } from '../types/password';
-import { PasswordErrorMessages } from '../constants/error';
+import useInput from '@/lib/useInput';
+import { validateLengthOver, validateNumber } from '@/validate/validate';
+import { PasswordError } from '@/types/password';
+import { PasswordErrorMessages } from '@/constants/error';
 
 const passwordValidates = (value: string) => {
   validateNumber(value);

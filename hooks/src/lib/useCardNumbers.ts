@@ -3,10 +3,10 @@ import {
   CardNumbers,
   CardNumberKeys,
   CardNumberError,
-} from '../types/cardNumbers';
-import useInput from './useInput';
-import { validateLengthOver, validateNumber } from '../validate/validate';
-import { CardNumbersErrorMessages } from '../constants/error.ts';
+} from '@/types/cardNumbers';
+import useInput from '@/lib/useInput';
+import { validateLengthOver, validateNumber } from '@/validate/validate';
+import { CardNumbersErrorMessages } from '@/constants/error';
 
 const cardNumbersValidates = (value: string) => {
   validateNumber(value);
