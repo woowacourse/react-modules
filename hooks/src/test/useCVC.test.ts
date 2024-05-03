@@ -1,8 +1,8 @@
 import { renderHook } from "@testing-library/react";
-import useCVC from "../useCVC";
+import { useCVC } from "@/lib";
 import React, { ChangeEvent } from "react";
-import { ErrorStatus } from "../../types/errorStatus";
-import { CVCErrorMessages } from "../../constants/error";
+import { ErrorStatus } from "@/types/errorStatus";
+import { CVCErrorMessages } from "@/constants/error";
 
 describe("useCVC 훅 테스트", () => {
   it("초기값이 정확히 설정되어야 한다.", () => {

@@ -1,8 +1,8 @@
 import { renderHook } from "@testing-library/react";
 import React, { ChangeEvent, FocusEvent } from "react";
-import { ErrorStatus } from "../../types/errorStatus";
-import useExpiryDate from "../useExpiryDate";
-import { ExpiryDateErrorMessages } from "../../constants/error";
+import { ErrorStatus } from "@/types/errorStatus";
+import { useExpiryDate } from "@/lib";
+import { ExpiryDateErrorMessages } from "@/constants/error";
 
 describe("useExpiryDate 훅 테스트", () => {
   it("초기값이 정확히 설정되어야 한다.", () => {

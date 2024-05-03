@@ -4,14 +4,14 @@ import {
   validateYear,
   validateMonth,
   validateOverLength,
-} from "../validate/validate";
+} from "@/validate/validate";
 import { ChangeEvent, FocusEvent } from "react";
 import {
   ExpiryDateType,
   ExpiryDateErrorType,
   ExpiryDateKeys,
-} from "../types/expiryDate";
-import { ExpiryDateErrorMessages } from "../constants/error";
+} from "@/types/expiryDate";
+import { ExpiryDateErrorMessages } from "@/constants/error";
 
 const expiryDateValidates = (value: string) => {
   validateNumber(value);

@@ -1,8 +1,8 @@
 import { renderHook } from "@testing-library/react";
 import React, { ChangeEvent } from "react";
-import useCardNumbers from "../useCardNumbers";
-import { CardNumbersErrorMessages } from "../../constants/error";
-import { ErrorStatus } from "../../types/errorStatus";
+import { useCardNumbers } from "@/lib";
+import { CardNumbersErrorMessages } from "@/constants/error";
+import { ErrorStatus } from "@/types/errorStatus";
 
 describe("useCardNumbers 훅 테스트", () => {
   it("초기값이 정확히 설정되어야 한다.", () => {

@@ -1,5 +1,5 @@
 import { useState, ChangeEvent } from "react";
-import { validateLength } from "../validate/validate";
+import { validateLength } from "@/validate/validate";
 
 type validateType = (value: string) => void;
 

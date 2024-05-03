@@ -1,21 +1,21 @@
-import { renderHook } from '@testing-library/react';
-import React, { ChangeEvent } from 'react';
-import { ErrorStatus } from '../../types/errorStatus';
-import useCardHolder from '../useCardHolder';
-import { CardHolderErrorMessages } from '../../constants/error';
+import { renderHook } from "@testing-library/react";
+import React, { ChangeEvent } from "react";
+import { ErrorStatus } from "@/types/errorStatus";
+import { useCardHolder } from "@/lib";
+import { CardHolderErrorMessages } from "@/constants/error";
 
-describe('useCardHolder 훅 테스트', () => {
-  it('초기값이 정확히 설정되어야 한다.', () => {
-    const initialValue = 'HAILEY RIAN';
+describe("useCardHolder 훅 테스트", () => {
+  it("초기값이 정확히 설정되어야 한다.", () => {
+    const initialValue = "HAILEY RIAN";
     const { result } = renderHook(() => useCardHolder(initialValue));
 
     expect(result.current.value).toBe(initialValue);
   });
 
-  it('입력값이 정확히 업데이트 되어야 한다.', () => {
-    const initialValue = '';
+  it("입력값이 정확히 업데이트 되어야 한다.", () => {
+    const initialValue = "";
     const { result } = renderHook(() => useCardHolder(initialValue));
-    const invalidValue = 'HAILEY RIAN';
+    const invalidValue = "HAILEY RIAN";
     React.act(() => {
       result.current.onChange({
         target: { value: invalidValue },
@@ -25,10 +25,10 @@ describe('useCardHolder 훅 테스트', () => {
     expect(result.current.value).toBe(invalidValue);
   });
 
-  it('영어 대문자가 아니면 에러를 낸다.', () => {
-    const initialValue = '';
+  it("영어 대문자가 아니면 에러를 낸다.", () => {
+    const initialValue = "";
     const { result } = renderHook(() => useCardHolder(initialValue));
-    const invalidValue = 'hailey rian';
+    const invalidValue = "hailey rian";
 
     React.act(() => {
       result.current.onChange({
@@ -41,10 +41,10 @@ describe('useCardHolder 훅 테스트', () => {
     expect(result.current.errorMessage).toBe(expectedErrorMessage);
   });
 
-  it('빈칸이 두 개이면 에러를 낸다.', () => {
-    const initialValue = '';
+  it("빈칸이 두 개이면 에러를 낸다.", () => {
+    const initialValue = "";
     const { result } = renderHook(() => useCardHolder(initialValue));
-    const invalidValue = 'HAILEY  RIAN';
+    const invalidValue = "HAILEY  RIAN";
 
     React.act(() => {
       result.current.onChange({

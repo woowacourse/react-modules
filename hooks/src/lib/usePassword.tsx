@@ -1,9 +1,9 @@
 import useInput from "./useInput";
-import { validateLength, validateNumber } from "../validate/validate";
+import { validateLength, validateNumber } from "@/validate/validate";
 import { ChangeEvent } from "react";
-import { PasswordErrorType } from "../types/password";
-import { PasswordErrorMessages } from "../constants/error";
-import { VALID_LENGTH } from "../constants/system";
+import { PasswordErrorType } from "@/types/password";
+import { PasswordErrorMessages } from "@/constants/error";
+import { VALID_LENGTH } from "@/constants/system";
 
 const passwordValidates = (value: string) => {
   validateNumber(value);

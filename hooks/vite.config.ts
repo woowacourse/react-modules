@@ -23,4 +23,13 @@ export default defineConfig({
     },
   },
   plugins: [react(), dts()],
+  resolve: {
+    alias: [
+      { find: "@lib", replacement: "/src/lib" },
+      { find: "@constants", replacement: "/src/constants" },
+      { find: "@types", replacement: "/src/types" },
+      { find: "@utils", replacement: "/src/utils" },
+      { find: "@validate", replacement: "/src/validate" },
+    ],
+  },
 });
