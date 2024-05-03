@@ -1,12 +1,13 @@
 import { useState } from 'react';
 import './App.css';
-import BasicCenterModal from './lib/Modal/BasicCenterModal/index';
 import BasicBottomModal from './lib/Modal/BasicBottomModal/index';
 import Modal from './lib/Modal';
+import BasicCenterModal from './lib/Modal/BasicCenterModal';
 
 function App() {
   const [openCenterModal, setOpenCenterModal] = useState(false);
   const [openBottomModal, setOpenBottomModal] = useState(false);
+
   return (
     <>
       <button onClick={() => setOpenCenterModal(true)}>basic center open</button>

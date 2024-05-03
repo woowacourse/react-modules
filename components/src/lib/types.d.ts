@@ -1,4 +1,5 @@
 type ModalType = 'center' | 'bottom';
+
 type CloseButtonType = 'icon' | 'box';
 
 interface ModalProps extends React.HTMLAttributes<HTMLDivElement> {

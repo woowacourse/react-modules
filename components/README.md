@@ -8,6 +8,17 @@
 npm i badahertz52-react-modules-components
 ```
 
+## Modal 사용 전 필수 설정
+
+src/index.html에 아래와 같이 '''modal-root'''라는 DOM Node를 추가해주세요.
+
+```html
+<body>
+  <div id="root"></div>
+  <div id="modal-root"></div>
+</body>
+```
+
 ## Modal 구조
 
 - Modal.Header
@@ -26,7 +37,7 @@ npm i badahertz52-react-modules-components
   - type: ReactNode
   - Modal.Body 안에 들어간다.
 - type
-  - type: 'center'|'bottom'|'toast'
+  - type: 'center'|'bottom'
   - 모달 형태를 결정하는 타입
 - stopModalPropagation
   - type: boolean
