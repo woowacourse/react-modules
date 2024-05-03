@@ -1,26 +1,25 @@
 import useInput from './useInput';
 import {
-  validateMaxLength,
+  validateLengthOver,
   validateNumber,
   validateYear,
   validateMonth,
 } from '../validate/validate';
 import { ChangeEvent, FocusEvent } from 'react';
 import {
-  ExpiryDateType,
-  ExpiryDateErrorType,
+  ExpiryDate,
+  ExpiryDateError,
   ExpiryDateKeys,
 } from '../types/expiryDate';
 import { ExpiryDateErrorMessages } from '../constants/error';
 
 const expiryDateValidates = (value: string) => {
   validateNumber(value);
-  validateMaxLength(value, 2);
+  validateLengthOver(value, 2);
 };
 
 const monthValidates = (value: string) => {
-  validateNumber(value);
-  validateMaxLength(value, 2);
+  expiryDateValidates(value);
   validateMonth(value);
 };
 
@@ -29,14 +28,14 @@ const yearValidates = (value: string) => {
   validateYear(value);
 };
 
-const useExpiryDate = (initialValue: ExpiryDateType) => {
+const useExpiryDate = (initialValue: ExpiryDate) => {
   const validLength = 1;
   const {
     value: monthValue,
     onChange: onChangeMonth,
     onBlurValidLength: onBlurMonth,
     errorStatus: errorStatusMonth,
-  } = useInput<ExpiryDateErrorType>(
+  } = useInput<ExpiryDateError>(
     initialValue.month,
     monthValidates,
     validLength
@@ -47,11 +46,7 @@ const useExpiryDate = (initialValue: ExpiryDateType) => {
     onChange: onChangeYear,
     onBlurValidLength: onBlurYear,
     errorStatus: errorStatusYear,
-  } = useInput<ExpiryDateErrorType>(
-    initialValue.year,
-    yearValidates,
-    validLength
-  );
+  } = useInput<ExpiryDateError>(initialValue.year, yearValidates, validLength);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name } = e.target;

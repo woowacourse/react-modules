@@ -1,5 +1,5 @@
 import useInput from './useInput';
-import { CardHolderErrorType } from '../types/cardHolder';
+import { CardHolderError } from '../types/cardHolder';
 import { checkDoubleBlank, validateUpperCase } from '../validate/validate';
 import { ChangeEvent } from 'react';
 import { CardHolderErrorMessages } from '../constants/error';
@@ -10,7 +10,7 @@ export const cardHolderValidates = (value: string) => {
 };
 
 const useCardHolder = (initialValue: string) => {
-  const { value, onChange, errorStatus } = useInput<CardHolderErrorType>(
+  const { value, onChange, errorStatus } = useInput<CardHolderError>(
     initialValue,
     cardHolderValidates
   );

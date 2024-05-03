@@ -1,25 +1,25 @@
 import { ChangeEvent, FocusEvent } from 'react';
 import {
-  CardNumbersType,
+  CardNumbers,
   CardNumberKeys,
-  CardNumberErrorType,
+  CardNumberError,
 } from '../types/cardNumbers';
 import useInput from './useInput';
-import { validateMaxLength, validateNumber } from '../validate/validate';
+import { validateLengthOver, validateNumber } from '../validate/validate';
 import { CardNumbersErrorMessages } from '../constants/error.ts';
 
 const cardNumbersValidates = (value: string) => {
   validateNumber(value);
-  validateMaxLength(value, 4);
+  validateLengthOver(value, 4);
 };
-const useCardNumbers = (initialValues: CardNumbersType) => {
+const useCardNumbers = (initialValues: CardNumbers) => {
   const validLength = 4;
   const {
     value: cardNumber1,
     onChange: onChangeNumber1,
     onBlurValidLength: onBlurNumber1,
     errorStatus: errorStatusNumber1,
-  } = useInput<CardNumberErrorType>(
+  } = useInput<CardNumberError>(
     initialValues['cardNumber1'],
     cardNumbersValidates,
     validLength
@@ -30,7 +30,7 @@ const useCardNumbers = (initialValues: CardNumbersType) => {
     onChange: onChangeNumber2,
     onBlurValidLength: onBlurNumber2,
     errorStatus: errorStatusNumber2,
-  } = useInput<CardNumberErrorType>(
+  } = useInput<CardNumberError>(
     initialValues['cardNumber2'],
     cardNumbersValidates,
     validLength
@@ -41,7 +41,7 @@ const useCardNumbers = (initialValues: CardNumbersType) => {
     onChange: onChangeNumber3,
     onBlurValidLength: onBlurNumber3,
     errorStatus: errorStatusNumber3,
-  } = useInput<CardNumberErrorType>(
+  } = useInput<CardNumberError>(
     initialValues['cardNumber3'],
     cardNumbersValidates,
     validLength
@@ -52,7 +52,7 @@ const useCardNumbers = (initialValues: CardNumbersType) => {
     onChange: onChangeNumber4,
     onBlurValidLength: onBlurNumber4,
     errorStatus: errorStatusNumber4,
-  } = useInput<CardNumberErrorType>(
+  } = useInput<CardNumberError>(
     initialValues['cardNumber4'],
     cardNumbersValidates,
     validLength

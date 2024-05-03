@@ -1,18 +1,18 @@
 import useInput from './useInput';
-import { validateMaxLength, validateNumber } from '../validate/validate';
+import { validateLengthOver, validateNumber } from '../validate/validate';
 import { ChangeEvent, FocusEvent } from 'react';
-import { PasswordErrorType } from '../types/password';
+import { PasswordError } from '../types/password';
 import { PasswordErrorMessages } from '../constants/error';
 
 const passwordValidates = (value: string) => {
   validateNumber(value);
-  validateMaxLength(value, 2);
+  validateLengthOver(value, 2);
 };
 
 const usePassword = (initialValue: string) => {
   const validLength = 2;
   const { value, onChange, onBlurValidLength, errorStatus } =
-    useInput<PasswordErrorType>(initialValue, passwordValidates, validLength);
+    useInput<PasswordError>(initialValue, passwordValidates, validLength);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     onChange(e);

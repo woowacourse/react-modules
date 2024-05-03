@@ -1,13 +1,13 @@
 import { ErrorStatus } from './errorStatus';
 
-export interface ExpiryDateType {
+export interface ExpiryDate {
   month: string;
   year: string;
 }
 
-export type ExpiryDateKeys = keyof ExpiryDateType;
+export type ExpiryDateKeys = keyof ExpiryDate;
 
-export type ExpiryDateErrorType =
+export type ExpiryDateError =
   | ErrorStatus.IS_NOT_NUMBER
   | ErrorStatus.INVALID_LENGTH
   | ErrorStatus.INVALID_DATE

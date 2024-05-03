@@ -1,5 +1,5 @@
 import { useState, ChangeEvent, FocusEvent } from 'react';
-import { validateMinLength } from '../validate/validate';
+import { validateLengthLess } from '../validate/validate';
 type validateType = (value: string) => void;
 const useInput = <T,>(
   initialValue: string = '',
@@ -25,7 +25,7 @@ const useInput = <T,>(
   const handleBlur = (e: FocusEvent<HTMLInputElement>) => {
     const { value } = e.target;
     try {
-      validLength && validateMinLength(value, validLength);
+      validLength && validateLengthLess(value, validLength);
     } catch (e) {
       if (e instanceof Error) {
         setErrorStatus(e.message as T);

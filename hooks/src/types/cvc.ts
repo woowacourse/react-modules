@@ -1,9 +1,7 @@
 import { ErrorStatus } from './errorStatus';
 
-export interface CVCType {
+export interface CVC {
   CVC: string;
 }
 
-export type cvcErrorType =
-  | ErrorStatus.IS_NOT_NUMBER
-  | ErrorStatus.INVALID_LENGTH;
+export type cvcError = ErrorStatus.IS_NOT_NUMBER | ErrorStatus.INVALID_LENGTH;

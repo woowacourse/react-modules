@@ -1,9 +1,5 @@
 import { ErrorStatus } from './errorStatus';
 
-export interface PasswordType {
-  password: string;
-}
-
-export type PasswordErrorType =
+export type PasswordError =
   | ErrorStatus.IS_NOT_NUMBER
   | ErrorStatus.INVALID_LENGTH;
