@@ -22,6 +22,7 @@ export interface ModalProps {
   hasCloseButton?: boolean;
   children: React.ReactNode;
   footerButtons?: ModalButtonInterface[];
+  isClosableOnClickBackdrop?: boolean;
   onClose: () => void;
 }
 
@@ -32,6 +33,7 @@ export default function Modal({
   hasCloseButton = true,
   children,
   footerButtons,
+  isClosableOnClickBackdrop = true,
   onClose,
 }: ModalProps) {
   const modalRef = useRef<HTMLDivElement>(null);
@@ -50,8 +52,14 @@ export default function Modal({
     }
   };
 
+  const handleClickBackdrop = () => {
+    if (isClosableOnClickBackdrop) {
+      onClose();
+    }
+  };
+
   return (
-    <Styled.ModalOverlay onClick={onClose}>
+    <Styled.ModalBackdrop onClick={handleClickBackdrop}>
       <Styled.ModalWrapper
         ref={modalRef}
         $position={position}
@@ -69,6 +77,6 @@ export default function Modal({
 
         {footerButtons && <ModalFooter bottons={footerButtons} />}
       </Styled.ModalWrapper>
-    </Styled.ModalOverlay>
+    </Styled.ModalBackdrop>
   );
 }

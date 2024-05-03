@@ -9,7 +9,7 @@ const colors = {
   grey500: '#000000',
 };
 
-export const ModalOverlay = styled.div`
+export const ModalBackdrop = styled.div`
   position: fixed;
   inset: 0;
   width: 100%;
