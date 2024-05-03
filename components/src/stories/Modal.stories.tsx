@@ -1,7 +1,7 @@
-import Modal from '../lib/Modal/Modal';
-import DeleteIcon from '../assets/deleteIcon.svg?react';
+import Modal from '@/lib/Modal/Modal';
+import DeleteIcon from '@/assets/deleteIcon.svg?react';
 import type { StoryObj } from '@storybook/react';
-import { CARD_COMPANIES, CardCompany } from '../data/CardCompany';
+import { CARD_COMPANIES, CardCompany } from '@/data/CardCompany';
 import styled from 'styled-components';
 
 export default {

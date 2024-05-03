@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Theme } from '@/style/theme';
+import Theme from '@/style/theme';
 
 type ButtonColorType = 'dark' | 'light';
 

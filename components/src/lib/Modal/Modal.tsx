@@ -1,5 +1,5 @@
-import S from './Modal.style.tsx';
-import BasicButton from '../Button.tsx';
+import S from '@/lib/Modal/Modal.style.tsx';
+import BasicButton from '@/lib/Button.tsx';
 
 export type ModalPosition = 'center' | 'bottom';
 
@@ -50,7 +50,7 @@ export interface ConfirmButtonProps {
 }
 
 const ConfirmButton = ({ label, onConfirm }: ConfirmButtonProps) => {
-  return <BasicButton onClick={onConfirm} label={label} colorType="black" />;
+  return <BasicButton onClick={onConfirm} label={label} colorType="dark" />;
 };
 
 export interface CloseButtonProps {

@@ -30,7 +30,8 @@
       "@/assets": ["src/assets/*"],
       "@/data": ["src/data/*"],
       "@/lib": ["src/lib/*"],
-      "@/stories": ["src/stories/*"]
+      "@/stories": ["src/stories/*"],
+      "@/style": ["src/style/*"]
     }
   },
   "include": [
