@@ -34,28 +34,14 @@ export function validateUpperCase(str: string) {
   }
 }
 
-export function isBigger(str: string, length: number) {
-  if (str.length > length) {
-    return false;
-  }
-  return true;
-}
-
-export function isSmaller(str: string, length: number) {
+export function validateLengthLess(str: string, length: number) {
   if (str.length < length) {
-    return false;
-  }
-  return true;
-}
-
-export function validateMaxLength(str: string, length: number) {
-  if (!isBigger(str, length)) {
     throw new Error(ErrorStatus.INVALID_LENGTH);
   }
 }
 
-export function validateMinLength(str: string, length: number) {
-  if (!isSmaller(str, length)) {
+export function validateLengthOver(str: string, length: number) {
+  if (str.length > length) {
     throw new Error(ErrorStatus.INVALID_LENGTH);
   }
 }
