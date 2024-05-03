@@ -2,6 +2,8 @@ import { ReactNode } from 'react';
 import styles from './Modal.module.css';
 import { CloseButtonImage } from './CloseButtonImage';
 import { CancelButtonProps, CloseButtonProps, ConfirmButtonProps, SubtitleProps, TitleProps } from './interfaces';
+import CancelButton from './CancelButton';
+import ConfirmButton from './ConfirmButton';
 
 interface ModalProps {
   title?: TitleProps;
@@ -72,38 +74,6 @@ const Modal = ({
     }
   };
 
-  const drawConfirmButton = () => {
-    if (confirmButton)
-      return (
-        <button
-          className={styles['button-confirm']}
-          style={{
-            color: `${confirmButton.fontColor || 'white'}`,
-            backgroundColor: `${confirmButton.backgroundColor || 'black'}`,
-          }}
-          onClick={confirmButton.onConfirm}
-        >
-          {confirmButton.content}
-        </button>
-      );
-  };
-
-  const drawCancelButton = () => {
-    if (cancelButton)
-      return (
-        <button
-          className={styles['button-cancel']}
-          style={{
-            color: `${cancelButton.fontColor || 'grey'}`,
-            backgroundColor: `${cancelButton.backgroundColor || 'lightgrey'}`,
-          }}
-          onClick={cancelButton.onCancel}
-        >
-          {cancelButton.content}
-        </button>
-      );
-  };
-
   return (
     <>
       <div onClick={preventCloseOnOutsideClick ? () => {} : closeButton.onClose} className={styles['backdrop']} />
@@ -122,8 +92,8 @@ const Modal = ({
         </div>
         {children}
         <div className={styles['button-container']}>
-          {drawCancelButton()}
-          {drawConfirmButton()}
+          {cancelButton && <CancelButton {...cancelButton} />}
+          {confirmButton && <ConfirmButton {...confirmButton} />}
         </div>
       </div>
     </>

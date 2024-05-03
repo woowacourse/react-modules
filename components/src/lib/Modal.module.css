@@ -81,26 +81,3 @@
   width: 95%;
   margin: 15px 0;
 }
-
-.button-cancel {
-  display: flex;
-  flex-grow: 1;
-  justify-content: center;
-  align-items: center;
-
-  width: 40%;
-  height: 3rem;
-  border-radius: 5px;
-  margin: 0 10px;
-}
-
-.button-confirm {
-  display: flex;
-  flex-grow: 1;
-  justify-content: center;
-  align-items: center;
-  width: 40%;
-  height: 3rem;
-  border-radius: 5px;
-  margin: 0 10px;
-}
