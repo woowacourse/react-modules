@@ -72,4 +72,4 @@
 - [ ] useRestrictedState에 reset함수 추가
 - [ ] 상수 분리
 - [x] 마크다운 개행 정리
-- [ ] useInput register만들어보기
+- [x] useInput register만들어보기
