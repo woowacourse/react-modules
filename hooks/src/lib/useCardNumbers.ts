@@ -12,6 +12,7 @@ const cardNumbersValidates = (value: string) => {
   validateNumber(value);
   validateLengthOver(value, 4);
 };
+
 const useCardNumbers = (initialValues: CardNumbers) => {
   const validLength = 4;
   const {
