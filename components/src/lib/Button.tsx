@@ -3,15 +3,20 @@ import Theme from '@/style/theme';
 
 type ButtonColorType = 'dark' | 'light';
 
-interface ButtonProps {
+interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   label: string;
   onClick: () => void;
   colorType?: ButtonColorType;
 }
 
-const Button = ({ label, onClick, colorType = 'light' }: ButtonProps) => {
+const Button = ({
+  label,
+  onClick,
+  colorType = 'light',
+  ...rest
+}: ButtonProps) => {
   return (
-    <ButtonWrapper onClick={onClick} $colorType={colorType}>
+    <ButtonWrapper onClick={onClick} $colorType={colorType} {...rest}>
       {label}
     </ButtonWrapper>
   );
