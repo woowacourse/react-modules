@@ -1,25 +1,6 @@
-import { ChangeEvent, useRef, useState, MouseEvent } from "react";
+import { ChangeEvent, useRef, useState } from "react";
 
-const COMPANY_LIST = [
-  "BC카드",
-  "신한카드",
-  "카카오뱅크",
-  "현대카드",
-  "우리카드",
-  "롯데카드",
-  "하나카드",
-  "국민카드",
-] as const;
-
-interface CustomEventTarget extends EventTarget {
-  value: string;
-}
-
-interface CustomMouseEvent extends MouseEvent<HTMLButtonElement> {
-  target: CustomEventTarget;
-}
-
-const useCardCompany = (cardCompanyList: readonly string[] = COMPANY_LIST) => {
+const useCardCompany = (cardCompanyList: string[]) => {
   const [cardCompany, setCardCompany] = useState("");
   const [isError, setIsError] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | undefined>();
@@ -43,7 +24,7 @@ const useCardCompany = (cardCompanyList: readonly string[] = COMPANY_LIST) => {
 
   const cardCompanyRef = useRef<HTMLSelectElement>(null);
 
-  const clickCardCompany = (event: ChangeEvent<HTMLSelectElement> | CustomMouseEvent) => {
+  const clickCardCompany = (event: ChangeEvent<HTMLSelectElement>) => {
     const { value } = event.target;
     setCardCompanyWrapper(value);
     if (cardCompanyRef.current?.value) {
