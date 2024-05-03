@@ -16,9 +16,9 @@ const validators: Validator[] = [
 ];
 
 const usePassword = () => {
-  const ownerName: InputState = useInput("");
+  const password: InputState = useInput("");
 
-  const { inputState, onChange, onBlur } = useValidation(ownerName, validators);
+  const { inputState, onChange, onBlur } = useValidation(password, validators);
 
   return { inputState, onChange, onBlur };
 };

@@ -12,9 +12,9 @@ const validators: Validator[] = [
 ];
 
 const usePassword = () => {
-  const ownerName: InputState = useInput("");
+  const cardCompany: InputState = useInput("");
 
-  const { inputState, onChange, onBlur } = useValidation(ownerName, validators);
+  const { inputState, onChange, onBlur } = useValidation(cardCompany, validators);
 
   return { inputState, onChange, onBlur };
 };

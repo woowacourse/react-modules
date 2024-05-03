@@ -22,6 +22,7 @@ const useValidations = (inputStates: InputState[], validators: Validator[]) => {
 
   const onChanges = inputStates.map(makeOnChange);
   const onBlurs = inputStates.map(makeOnBlur);
+
   return { inputStates, onChanges, onBlurs };
 };
 
