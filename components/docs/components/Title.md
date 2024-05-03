@@ -2,16 +2,16 @@
 
 ## How to use
 
-```ts
+```tsx
 import { Title } from "easy-payments-ui";
 
 function App() {
   //...
   return (
     <Title>
-        <div>Hello World</div>
+      <div>Hello World</div>
     </Title>
-  )
+  );
 }
 ```
 

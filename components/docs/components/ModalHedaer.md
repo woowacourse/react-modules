@@ -2,17 +2,17 @@
 
 ## How to use
 
-```ts
+```tsx
 import { ModalHeader } from "easy-payments-ui";
 
 function App() {
   //...
   return (
     <ModalHeader>
-        <div>Hello World</div>
-        <div>Hi</div>
+      <div>Hello World</div>
+      <div>Hi</div>
     </ModalHeader>
-  )
+  );
 }
 ```
 

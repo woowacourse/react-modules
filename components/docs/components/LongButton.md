@@ -2,7 +2,7 @@
 
 ## How to use
 
-```ts
+```tsx
 import { LongButton } from "easy-payments-ui";
 
 function App() {

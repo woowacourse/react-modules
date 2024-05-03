@@ -2,7 +2,7 @@
 
 ## How to use
 
-```js
+```jsx
 import { useInput } from "easy-payments-hooks";
 
 function App() {

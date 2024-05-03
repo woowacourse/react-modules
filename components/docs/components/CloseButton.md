@@ -2,13 +2,13 @@
 
 ## How to use
 
-```ts
+```tsx
 import { CloseButton } from "easy-payments-ui";
 
 function App() {
-    const {isCLose, setIsClose} = useState(false)
+  const { isCLose, setIsClose } = useState(false);
   //...
-  return <CloseButton handleClick={setIsClose(false)}/>;
+  return <CloseButton handleClick={setIsClose(false)} />;
 }
 ```
 

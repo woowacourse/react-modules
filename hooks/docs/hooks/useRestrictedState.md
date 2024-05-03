@@ -2,7 +2,7 @@
 
 ## How to use
 
-```js
+```jsx
 import { useRestrictedState } from "easy-payments-hooks";
 
 function App() {

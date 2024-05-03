@@ -2,7 +2,7 @@
 
 ## How to use
 
-```js
+```jsx
 import { useCardNumbers } from "easy-payments-hooks";
 
 function App() {
