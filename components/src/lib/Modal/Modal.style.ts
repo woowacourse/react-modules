@@ -75,7 +75,7 @@ export const CloseButton = styled.button`
   padding: 0;
 `;
 
-export const Main = styled.main`
+export const Content = styled.section`
   max-width: 100vw;
   max-height: 70vh;
   overflow-y: auto;

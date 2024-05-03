@@ -6,7 +6,7 @@ import {
   Header,
   Title,
   CloseButton,
-  Main,
+  Content,
   Footer,
   FooterButton,
 } from './Modal.style';
@@ -85,7 +85,7 @@ export default function Modal({
           )}
         </Header>
 
-        <Main>{children}</Main>
+        <Content>{children}</Content>
 
         {footerButtons && (
           <Footer>
