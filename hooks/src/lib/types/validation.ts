@@ -38,7 +38,11 @@ export interface UseCardValidationProps<V> {
   setErrorMessage: Dispatch<SetStateAction<ErrorMessage>>;
 }
 
-export interface UseCardValidationWidthKeyProps<V, K> extends Omit<UseCardValidationProps<V>, 'setValue'> {
+export interface UseCardValidationWidthKeyProps<V, K> {
+  blurEventValidators?: ValidatorWithKey<V, K>[];
+  changeEventValidators?: Validator<V>[];
+  totalValidators?: (Validator<V> | ValidatorWithKey<V, K>)[];
+  setErrorMessage: Dispatch<SetStateAction<ErrorMessage>>;
   applyNewValue: (value: V, key: K) => void;
   applyNewError: (isValid: boolean, key: K) => void;
 }
