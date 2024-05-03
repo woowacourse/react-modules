@@ -99,7 +99,8 @@ nav,
 section {
   display: block;
 }
-* {
+button,
+img {
   user-select: none;
 }
 body {
