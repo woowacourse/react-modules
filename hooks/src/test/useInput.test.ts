@@ -2,7 +2,7 @@ import { renderHook, act } from "@testing-library/react";
 import { useInput } from "../lib/hooks";
 
 describe("useInputTest", () => {
-  it("should allow only English characters", () => {
+  it("알파벳이외의 값을 입력한 경우 에러를 반환한다.", () => {
     const { result } = renderHook(() => useInput());
 
     act(() => result.current.valueState[1]("1"));
