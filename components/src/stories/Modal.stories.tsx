@@ -3,6 +3,7 @@ import DeleteIcon from '@/assets/deleteIcon.svg?react';
 import type { StoryObj } from '@storybook/react';
 import { CARD_COMPANIES, CardCompany } from '@/data/CardCompany';
 import styled from 'styled-components';
+import Theme from '@/style/theme';
 
 export default {
   title: 'Components/Modal',
@@ -62,8 +63,8 @@ const Grid = styled.div`
 `;
 
 const OneCardCompanyBox = styled.div`
-  width: 80px;
-  font-size: 14px;
+  width: 100px;
+  font-size: ${Theme.font.size.small};
   display: flex;
   flex-direction: column;
   justify-content: center;
