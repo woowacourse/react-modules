@@ -1,9 +1,9 @@
 import useInput, { InputState } from "./domains/useInput";
 import { Validator } from "./domains/validation";
 import useValidation from "./domains/useValidation";
-import { makeLengthValidator, numericOnlyValidator } from "./constants/validators";
+import { makeLengthBlurValidator, numericOnlyValidator } from "./constants/validators";
 
-const validators: Validator[] = [numericOnlyValidator, makeLengthValidator(4)];
+const validators: Validator[] = [numericOnlyValidator, makeLengthBlurValidator(4)];
 
 const usePassword = () => {
   const password: InputState = useInput("");

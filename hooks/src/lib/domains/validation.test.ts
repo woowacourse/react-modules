@@ -2,7 +2,7 @@ import { renderHook } from "@testing-library/react-hooks";
 import validation, { Validator } from "./validation";
 import useInput from "./useInput";
 import { act } from "react";
-import { makeLengthValidator, numericOnlyValidator } from "../constants/validators";
+import { makeLengthBlurValidator, numericOnlyValidator } from "../constants/validators";
 
 describe("validation 테스트", () => {
   describe("change 상태일 때,", () => {
@@ -36,7 +36,7 @@ describe("validation 테스트", () => {
 
     test("2개의 validator 중 2번째에 에러가 있을 시, 2번째 태그에 에러와 에러메시지를 발생시킨다.", () => {
       const { result } = renderHook(() => useInput("123ㄹ"));
-      const validators: Validator[] = [numericOnlyValidator, makeLengthValidator(4)];
+      const validators: Validator[] = [numericOnlyValidator, makeLengthBlurValidator(4)];
       act(() => result.current.setStatus("change"));
       act(() => validation(result.current, validators));
 
@@ -47,7 +47,7 @@ describe("validation 테스트", () => {
     test("에러 발생 후 정상입력으로 수정되었을 때, 에러와 에러메시지를 해제한다.", () => {
       // Arrange
       const { result } = renderHook(() => useInput("123ㄹ"));
-      const validators: Validator[] = [makeLengthValidator(4), numericOnlyValidator];
+      const validators: Validator[] = [makeLengthBlurValidator(4), numericOnlyValidator];
 
       // Act
       act(() => result.current.setValue("1f"));
@@ -65,7 +65,7 @@ describe("validation 테스트", () => {
     test("blur 에러 발생 후 change상태에서 에러를 바꿨을 때, 에러와 에러메시지를 즉각 해제한다.", () => {
       // Arrange
       const { result } = renderHook(() => useInput("123ㄹ"));
-      const validators: Validator[] = [makeLengthValidator(4), numericOnlyValidator];
+      const validators: Validator[] = [makeLengthBlurValidator(4), numericOnlyValidator];
 
       // Act (scenario)
       act(() => result.current.setValue("123"));
@@ -106,7 +106,7 @@ describe("validation 테스트", () => {
     });
     test("잘못된 입력시, 에러를 발생시킨다.", () => {
       // Arrange
-      const validators: Validator[] = [makeLengthValidator(4)];
+      const validators: Validator[] = [makeLengthBlurValidator(4)];
       const { result } = renderHook(() => useInput(""));
       act(() => result.current.setValue("123"));
       act(() => result.current.setStatus("blur"));

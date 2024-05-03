@@ -1,6 +1,6 @@
 import { Validator } from "../domains/validation";
 
-export const makeLengthValidator = (length: number): Validator => ({
+export const makeLengthBlurValidator = (length: number): Validator => ({
   validate: (value) => value.length === length,
   errorMessage: "필드의 길이는 4여야합니다.",
   type: "blur",

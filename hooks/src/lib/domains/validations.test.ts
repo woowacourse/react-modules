@@ -3,10 +3,10 @@ import { act } from "react";
 import useInput, { InputState } from "./useInput";
 import validations from "./validations";
 import { Validator } from "./validation";
-import { makeLengthValidator, numericOnlyValidator } from "../constants/validators";
+import { makeLengthBlurValidator, numericOnlyValidator } from "../constants/validators";
 
 const flatten = (inputStates: InputState[], key: keyof InputState) => inputStates.map((inputState) => inputState[key]);
-const validators: Validator[] = [numericOnlyValidator, makeLengthValidator(2)];
+const validators: Validator[] = [numericOnlyValidator, makeLengthBlurValidator(2)];
 
 describe("validations 테스트", () => {
   test("정상 입력하고 change일 때, 에러를 발생시키지 않는다.", () => {
