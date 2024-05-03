@@ -13,9 +13,10 @@ const useCVCNumberValidation = () => {
     }
 
     if (!isValidCVCNumberLength(value)) {
+      const isShortCVCNumberLength = isLessThenCVCNumberLength(value);
       setCVCError({
-        isError: isLessThenCVCNumberLength(value),
-        errorMessage: isLessThenCVCNumberLength(value) ? 'cvc 번호 3자리를 입력해주세요.' : '',
+        isError: isShortCVCNumberLength,
+        errorMessage: isShortCVCNumberLength ? 'cvc 번호 3자리를 입력해주세요.' : '',
       });
 
       return CVC_NUMBER_ERROR_TYPE.invalidCVCNumberLength;
