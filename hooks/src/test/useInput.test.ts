@@ -1,13 +1,8 @@
 import { renderHook } from "@testing-library/react";
 import useInput from "@/lib/useInput";
 import React, { ChangeEvent } from "react";
-import { validateLength, validateNumber } from "@/validate/validate";
 import { ErrorStatus } from "@/types/errorStatus";
-
-const cardNumbersValidates = (n: string) => {
-  validateNumber(n);
-  validateLength(n, 4);
-};
+import { cardNumbersValidates } from "@/lib/useCardNumbers";
 
 describe("useInput 훅 테스트", () => {
   it("초기값이 정확히 설정되어야 한다.", () => {

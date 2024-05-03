@@ -30,6 +30,7 @@ export default defineConfig({
       { find: "@types", replacement: "/src/types" },
       { find: "@utils", replacement: "/src/utils" },
       { find: "@validate", replacement: "/src/validate" },
+      { find: "@test", replacement: "/src/test" },
     ],
   },
 });

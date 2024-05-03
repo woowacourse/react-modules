@@ -9,7 +9,7 @@ import { validateNumber, validateOverLength } from "@/validate/validate";
 import { CardNumbersErrorMessages } from "@/constants/error.ts";
 import { VALID_LENGTH } from "@/constants/system.ts";
 
-const cardNumbersValidates = (value: string) => {
+export const cardNumbersValidates = (value: string) => {
   validateNumber(value);
   validateOverLength(value, VALID_LENGTH.CARD_NUMBERS);
 };
@@ -55,7 +55,7 @@ const useCardNumbers = (initialValues: CardNumbersType) => {
   } = useInput<CardNumberErrorType>(
     initialValues["cardNumber4"],
     cardNumbersValidates,
-    4
+    VALID_LENGTH.CARD_NUMBERS
   );
 
   const onChangeArray = {
