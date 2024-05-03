@@ -1,6 +1,7 @@
 import styled from 'styled-components';
-import ModalBox from './ModalBox';
 import { ReactNode } from 'react';
+import ModalHeader from './ModalHeader';
+import ButtonBox from './ButtonBox';
 
 interface Props {
   position?: string;
@@ -13,7 +14,7 @@ interface Props {
   confirmButton?: string;
   confirmButtonContent?: string;
 
-  xButtonContent?:string;
+  xButtonContent?: string;
 
   handleConfirm: (e: React.MouseEvent) => void;
   handleClose: (e: React.MouseEvent) => void;
@@ -28,35 +29,40 @@ const Modal = ({
   handleConfirm,
   handleClose,
   children,
-  xButtonContent
+  xButtonContent,
 }: Props) => {
-
-  const clickBackDrop = (e: React.MouseEvent) => {
+  const isClickBackDrop = (e: React.MouseEvent) => {
     return e.currentTarget === e.target;
   };
 
   return (
     <>
-      {(
+      {
         <ModalContainer
           $position={position === 'bottom' ? 'flex-end' : 'center'}
-          onClick={(e) => clickBackDrop(e) && handleClose}
+          onClick={(e) => isClickBackDrop(e) && handleClose}
         >
-          <ModalBox
-            title={title}
-            position={position}
-            isXButton={isXButton}
-            handleClose={handleClose}
-            buttonLayout={buttonLayout}
-            confirmButtonContent={confirmButtonContent}
-            handleConfirm={handleConfirm}
-            closeButtonContent={closeButtonContent}
-            xButtonContent={xButtonContent}
+          <ModalBoxContainer
+            $minWidth={position === 'bottom' ? '100%' : '200px'}
+            $maxWidth={position === 'bottom' ? '100%' : '85%'}
           >
-            {children}
-          </ModalBox>
+            <ModalHeader
+              title={title}
+              isXButton={isXButton}
+              handleClose={handleClose}
+              xButtonContent={xButtonContent}
+            />
+            <ContentWrapper>{children}</ContentWrapper>
+            <ButtonBox
+              buttonLayout={buttonLayout}
+              closeButtonContent={closeButtonContent}
+              confirmButtonContent={confirmButtonContent}
+              handleClose={handleClose}
+              confirmEvent={handleConfirm}
+            />
+          </ModalBoxContainer>
         </ModalContainer>
-      )}
+      }
     </>
   );
 };
@@ -72,4 +78,21 @@ const ModalContainer = styled.div<{ $position: string }>`
   background: rgba(0, 0, 0, 0.35);
 `;
 
+const ModalBoxContainer = styled.div<{ $minWidth: string; $maxWidth: string }>`
+  display: flex;
+  flex-direction: column;
+  min-width: ${(props) => props.$minWidth};
+  max-width: ${(props) => props.$maxWidth};
+  max-height: 90%;
+  background-color: white;
+  padding: 24px 32px;
+  gap: 5px;
+  border-radius: 8px;
+  box-sizing: border-box;
+`;
+
+const ContentWrapper = styled.div`
+  width: 100%;
+  overflow: auto;
+`;
 export default Modal;
