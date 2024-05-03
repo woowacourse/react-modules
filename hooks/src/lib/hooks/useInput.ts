@@ -6,9 +6,9 @@ const useInput = () => {
   const { isError, errorMessage, setError } = errorState;
 
   return {
-    valueState: [value, setValue],
+    valueState: { value, setValue },
     errorState: { isError, errorMessage, setError },
-  } as const;
+  };
 };
 
 export default useInput;
