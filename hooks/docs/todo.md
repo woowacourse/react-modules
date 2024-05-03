@@ -65,3 +65,11 @@
 
 - [x] act -> React.act로 변경
 - [x] fireEvent이벤트 적용
+
+### Refactor
+
+- [ ] state, error 관리 훅. useRestrictedState으로 변경
+- [ ] useRestrictedState에 reset함수 추가
+- [ ] 상수 분리
+- [ ] 마크다운 개행 정리
+- [ ] useInput register만들어보기
