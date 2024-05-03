@@ -11,9 +11,9 @@ const useCardNumbers = () => {
   const setWrapper = (value: string, setState: (value: string) => void, index: number) => {
     const number = Number(value);
     if (Number.isNaN(number)) {
-      setErrorMessage((prev) => {
+      setErrorMessage((prev: string) => {
         const arr = [...prev];
-        arr[index] = "잘못됨";
+        arr[index] = "잘못됨 카드 번호를 입력하였습니다";
         return arr;
       });
       return;
@@ -24,14 +24,16 @@ const useCardNumbers = () => {
   const setFirstWrapper = (value: string) => {
     const MASTER_CARD_START_NUMBER_LIST = [51, 52, 53, 54];
     // eslint-disable-next-line no-useless-escape
-    const MASTER_REG_PATTERN = new RegExp(`${MASTER_CARD_START_NUMBER_LIST.map(String).join("|")}\d{0,3}$`);
+    const MASTER_REG_PATTERN = new RegExp(
+      `${MASTER_CARD_START_NUMBER_LIST.map(String).join("|")}\d{0,3}$`
+    );
     if (MASTER_REG_PATTERN.test(value) || value.startsWith("4")) {
       setErrorMessage((prev) => {
         return [null, ...prev.slice(1)];
       });
     } else {
       setErrorMessage((prev) => {
-        return ["잘못됨", ...prev.slice(1)];
+        return ["잘못됨 카드 번호를 입력하였습니다", ...prev.slice(1)];
       });
     }
     setWrapper(value, setFirst, 0);
@@ -43,7 +45,7 @@ const useCardNumbers = () => {
     thirdState: [third, (value: string) => setWrapper(value, setThird, 2)] as const,
     fourthState: [fourth, (value: string) => setWrapper(value, setFourth, 3)] as const,
     error: {
-      isError: errorMessage.some((message) => message),
+      isError: errorMessage.some((message: string) => message),
       errorMessage,
     },
   };
