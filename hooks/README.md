@@ -78,7 +78,7 @@ function Component() {
             onChange={(e) => cardNumberValidateHandler(e.target.value, name)}
             placeholder={`Card Number Part ${index + 1}`}
           />
-        )
+        ),
       )}
     </>
   );

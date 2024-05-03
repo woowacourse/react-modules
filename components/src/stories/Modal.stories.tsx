@@ -1,18 +1,17 @@
-import type { Meta, StoryObj } from '@storybook/react';
-import Modal from '../lib/Modal';
-import React from 'react';
-import { Temp, Wide} from '../App';
-
+import type { Meta, StoryObj } from "@storybook/react";
+import Modal from "../lib/Modal";
+import React from "react";
+import { Temp, Wide } from "../App";
 
 const meta = {
-  title: 'Modal',
+  title: "Modal",
   component: Modal,
-  tags: ['autodocs'],
+  tags: ["autodocs"],
 
   argTypes: {
-    isXButton : { control: 'boolean' },
+    isXButton: { control: "boolean" },
   },
-  decorators: [(Story) => <div style={{ padding: '3rem' }}>{Story()}</div>],
+  decorators: [(Story) => <div style={{ padding: "3rem" }}>{Story()}</div>],
 } satisfies Meta<typeof Modal>;
 
 export default meta;
@@ -21,65 +20,57 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
-    position: 'center',
-    title: '제목입니다.',
-    buttonLayout:'row',
+    position: "center",
+    title: "제목입니다.",
+    buttonLayout: "row",
     children: <Temp>default 문서</Temp>,
-    isXButton:true,
-    confirmButtonContent :'확인',
-    }
+    isXButton: true,
+    confirmButtonContent: "확인",
+  },
 };
 
-
 export const BottomModal: Story = {
-    args: {
-      ...Default.args,
-      position: 'bottom',
-    }
+  args: {
+    ...Default.args,
+    position: "bottom",
+  },
+};
 
-  };
+export const NoneXButton: Story = {
+  args: {
+    ...Default.args,
+    isXButton: false,
+  },
+};
 
-  export const NoneXButton: Story = {
-    args: {
-      ...Default.args,
-      isXButton:false,
-    }
-  };
+export const CancelButton: Story = {
+  args: {
+    ...Default.args,
+    closeButtonContent: "취소",
+  },
+};
 
-  export const CancelButton: Story = {
-    args: {
-      ...Default.args,
-      closeButtonContent : '취소',
-    }
+export const ColumnButtonLayout: Story = {
+  args: {
+    ...Default.args,
+    buttonLayout: "column",
+  },
+};
 
-  };
+export const AlertButton: Story = {
+  args: {
+    ...Default.args,
+    confirmButtonContent: "alert",
+    handleConfirm: () => alert("확인"),
+  },
+};
 
-  export const ColumnButtonLayout: Story = {
-    args: {
-      ...Default.args,
-      buttonLayout:'column',
-    }
-  };
-
-  export const AlertButton: Story = {
-    args: {
-      ...Default.args,
-      confirmButtonContent:'alert',
-      handleConfirm: () => alert("확인"),
-    }
-
-  };
-
-  export const ScrollContent: Story = {
-    args: {
-      ...Default.args,
-      children: <Wide>Wide 문서</Wide>
-    }
-
-  };
-
-
-
+export const ScrollContent: Story = {
+  args: {
+    ...Default.args,
+    children: <Wide>Wide 문서</Wide>,
+  },
+};
 
 //   position: 'bottom',
 //   title: '제목입니다.',
@@ -103,7 +94,6 @@ export const BottomModal: Story = {
 //       handleConfirm: () => alert("확인")
 //       }
 //   };
-  
 
 //     position: string;
 //   title: string;

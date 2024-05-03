@@ -1,4 +1,4 @@
-import ERROR_MESSAGES from './constants/error';
+import ERROR_MESSAGES from "./constants/error";
 import {
   CARD_NUMBER,
   CVC_LIMIT,
@@ -7,15 +7,15 @@ import {
   PASSWORD,
   UPPERCASE_AND_SPACE_ONLY,
   YEAR_RANGE,
-} from './constants/system';
+} from "./constants/system";
 
-function checkMaxLength (value : string, maxLength : number){
-  if(value.length !== maxLength){
+function checkMaxLength(value: string, maxLength: number) {
+  if (value.length !== maxLength) {
     throw new Error(`${maxLength}자로 입력해주세요.`);
   }
 }
 function checkTrimBlank(value: string) {
-  if (value.trim() === '' && value !== '') {
+  if (value.trim() === "" && value !== "") {
     throw new Error(ERROR_MESSAGES.INVALID_TRIM_BLANK);
   }
 }
@@ -38,9 +38,8 @@ function checkEmpty(value: string) {
   }
 }
 
-
 function validateMonth(value: string) {
-  if (checkEmpty(value) || value === '0') return;
+  if (checkEmpty(value) || value === "0") return;
   const month = Number(value);
   if (!(MONTH_RANGE.MIN <= month && month <= MONTH_RANGE.MAX)) {
     throw new Error(ERROR_MESSAGES.INVALID_MONTH);
@@ -60,7 +59,6 @@ function validateUpperCase(value: string) {
     throw new Error(ERROR_MESSAGES.INVALID_ONLY_UPPERCASE);
   }
 }
-
 
 interface ValidationMap {
   [key: string]: (value: string) => void;
@@ -90,13 +88,12 @@ export const Validation: ValidationMap = {
   CVC: (value: string) => {
     checkTrimBlank(value);
     validateNumber(value);
-    checkMaxLength(value, CVC_LIMIT.FIELD_LENGTH)
+    checkMaxLength(value, CVC_LIMIT.FIELD_LENGTH);
   },
 
   password: (value: string) => {
     checkTrimBlank(value);
     validateNumber(value);
-    checkMaxLength(value, PASSWORD.FIELD_LENGTH)
+    checkMaxLength(value, PASSWORD.FIELD_LENGTH);
   },
 };
-

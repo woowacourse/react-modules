@@ -1,7 +1,7 @@
-import { ReactNode } from 'react';
-import styled from 'styled-components';
-import ModalHeader from './ModalHeader';
-import ButtonBox from './ButtonBox';
+import { ReactNode } from "react";
+import styled from "styled-components";
+import ModalHeader from "./ModalHeader";
+import ButtonBox from "./ButtonBox";
 interface Props {
   title: string;
   children?: ReactNode;
@@ -11,10 +11,10 @@ interface Props {
   closeButtonContent?: string;
   confirmButton?: string;
   confirmButtonContent?: string;
-  handleConfirm?:  (e:React.MouseEvent) => void;
+  handleConfirm?: (e: React.MouseEvent) => void;
   position?: string;
-  handleClose: (e:React.MouseEvent) => void;
-  xButtonContent?:string
+  handleClose: (e: React.MouseEvent) => void;
+  xButtonContent?: string;
 }
 const ModalBox = ({
   title,
@@ -26,12 +26,12 @@ const ModalBox = ({
   handleConfirm,
   children,
   handleClose,
-  xButtonContent
+  xButtonContent,
 }: Props) => {
   return (
     <ModalContainer
-      $minWidth={position === 'bottom' ? '100%' : '200px'}
-      $maxWidth={position === 'bottom' ? '100%' : '85%'}
+      $minWidth={position === "bottom" ? "100%" : "200px"}
+      $maxWidth={position === "bottom" ? "100%" : "85%"}
     >
       <ModalHeader
         title={title}
@@ -39,9 +39,7 @@ const ModalBox = ({
         handleClose={handleClose}
         xButtonContent={xButtonContent}
       />
-      <ContentWrapper>
-      {children}
-      </ContentWrapper>
+      <ContentWrapper>{children}</ContentWrapper>
       <ButtonBox
         buttonLayout={buttonLayout}
         closeButtonContent={closeButtonContent}
@@ -58,7 +56,7 @@ const ModalContainer = styled.div<{ $minWidth: string; $maxWidth: string }>`
   flex-direction: column;
   min-width: ${(props) => props.$minWidth};
   max-width: ${(props) => props.$maxWidth};
-  max-height:90%;
+  max-height: 90%;
   background-color: white;
   padding: 24px 32px;
   gap: 5px;
@@ -68,7 +66,7 @@ const ModalContainer = styled.div<{ $minWidth: string; $maxWidth: string }>`
 
 const ContentWrapper = styled.div`
   width: 100%;
-  overflow:auto;
-`
+  overflow: auto;
+`;
 
 export default ModalBox;

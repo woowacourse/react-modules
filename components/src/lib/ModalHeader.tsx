@@ -1,23 +1,23 @@
-import styled from 'styled-components';
-import xButton from './asset/xButton.svg';
+import styled from "styled-components";
+import xButton from "./asset/xButton.svg";
 
 interface Props {
   title: string;
-  isXButton:boolean;
-  handleClose: (e:React.MouseEvent) => void;
-  xButtonContent?:string
+  isXButton: boolean;
+  handleClose: (e: React.MouseEvent) => void;
+  xButtonContent?: string;
 }
 const ModalHeader = ({
   title,
   isXButton,
   handleClose,
-  xButtonContent
+  xButtonContent,
 }: Props) => {
   return (
     <HeaderContainer>
       {title}
-      <Button onClick={(e)=>handleClose(e)}>
-        {isXButton&&<img src={xButtonContent||xButton} />}
+      <Button onClick={(e) => handleClose(e)}>
+        {isXButton && <img src={xButtonContent || xButton} />}
       </Button>
     </HeaderContainer>
   );

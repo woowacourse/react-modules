@@ -1,30 +1,34 @@
-import { useState } from 'react';
-import { Validation } from './validate';
+import { useState } from "react";
+import { Validation } from "./validate";
 
-type CardNumberName = 'cardNumber1' | 'cardNumber2' | 'cardNumber3' | 'cardNumber4'
+type CardNumberName =
+  | "cardNumber1"
+  | "cardNumber2"
+  | "cardNumber3"
+  | "cardNumber4";
 
 const useCardNumberValidation = () => {
   const [cardNumberValidation, setCardNumberValidation] = useState({
     errorMessage: {
-      cardNumber1: '',
-      cardNumber2: '',
-      cardNumber3: '',
-      cardNumber4: '',
+      cardNumber1: "",
+      cardNumber2: "",
+      cardNumber3: "",
+      cardNumber4: "",
     },
     isError: {
       cardNumber1: false,
       cardNumber2: false,
       cardNumber3: false,
       cardNumber4: false,
-    }
+    },
   });
 
   const cardNumberValidateHandler = (value: string, name: CardNumberName) => {
     try {
-      Validation['cardNumber'](value);
+      Validation["cardNumber"](value);
       setCardNumberValidation((prev) => ({
         ...prev,
-        errorMessage: { ...prev.errorMessage, [name]: '' },
+        errorMessage: { ...prev.errorMessage, [name]: "" },
         isError: { ...prev.isError, [name]: false },
       }));
     } catch (error) {
@@ -37,6 +41,6 @@ const useCardNumberValidation = () => {
     }
   };
 
-  return {cardNumberValidation, cardNumberValidateHandler}
+  return { cardNumberValidation, cardNumberValidateHandler };
 };
 export default useCardNumberValidation;

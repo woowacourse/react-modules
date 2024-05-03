@@ -1,6 +1,6 @@
-import styled from 'styled-components';
-import ModalBox from './ModalBox';
-import { ReactNode } from 'react';
+import styled from "styled-components";
+import ModalBox from "./ModalBox";
+import { ReactNode } from "react";
 
 interface Props {
   position?: string;
@@ -13,7 +13,7 @@ interface Props {
   confirmButton?: string;
   confirmButtonContent?: string;
 
-  xButtonContent?:string;
+  xButtonContent?: string;
 
   handleConfirm: (e: React.MouseEvent) => void;
   handleClose: (e: React.MouseEvent) => void;
@@ -22,24 +22,23 @@ const Modal = ({
   position,
   title,
   isXButton = true,
-  buttonLayout = 'row',
+  buttonLayout = "row",
   closeButtonContent,
-  confirmButtonContent = '확인',
+  confirmButtonContent = "확인",
   handleConfirm,
   handleClose,
   children,
-  xButtonContent
+  xButtonContent,
 }: Props) => {
-
   const clickBackDrop = (e: React.MouseEvent) => {
     return e.currentTarget === e.target;
   };
 
   return (
     <>
-      {(
+      {
         <ModalContainer
-          $position={position === 'bottom' ? 'flex-end' : 'center'}
+          $position={position === "bottom" ? "flex-end" : "center"}
           onClick={(e) => clickBackDrop(e) && handleClose}
         >
           <ModalBox
@@ -56,7 +55,7 @@ const Modal = ({
             {children}
           </ModalBox>
         </ModalContainer>
-      )}
+      }
     </>
   );
 };

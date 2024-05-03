@@ -1,18 +1,18 @@
-import {  useState } from 'react';
-import { Validation } from './validate';
+import { useState } from "react";
+import { Validation } from "./validate";
 
-type CardExpiryName = 'month'|'year'
+type CardExpiryName = "month" | "year";
 
 const useExpiryDateValidation = () => {
   const [expiryDateValidation, setExpiryDateValidation] = useState({
     errorMessage: {
-      month:'',
-      year:''
+      month: "",
+      year: "",
     },
     isError: {
-        month:false,
-        year:false
-      }
+      month: false,
+      year: false,
+    },
   });
 
   const expiryDateValidateHandler = (value: string, name: CardExpiryName) => {
@@ -20,7 +20,7 @@ const useExpiryDateValidation = () => {
       Validation[name](value);
       setExpiryDateValidation((prev) => ({
         ...prev,
-        errorMessage: { ...prev.errorMessage, [name]: '' },
+        errorMessage: { ...prev.errorMessage, [name]: "" },
         isError: { ...prev.isError, [name]: false },
       }));
     } catch (error) {
@@ -33,8 +33,6 @@ const useExpiryDateValidation = () => {
     }
   };
 
-
-
-  return {expiryDateValidation, expiryDateValidateHandler}
+  return { expiryDateValidation, expiryDateValidateHandler };
 };
 export default useExpiryDateValidation;
