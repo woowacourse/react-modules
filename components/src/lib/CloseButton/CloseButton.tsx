@@ -2,7 +2,7 @@ import { MouseEventHandler } from "react";
 import { ButtonWrapper } from "./CloseButton.style";
 
 interface CloseButtonProps {
-  children: React.ReactNode | string;
+  children: React.ReactElement | string;
   onClick: MouseEventHandler<HTMLButtonElement>;
 }
 
