@@ -15,6 +15,7 @@ interface ModalProps {
   borderRadius?: string;
   modalPosition: 'center' | 'bottom';
   preventCloseOnOutsideClick?: boolean;
+  buttonsDirection?: 'row' | 'column';
   children: ReactNode;
 }
 
@@ -28,6 +29,7 @@ const Modal = ({
   borderRadius,
   modalPosition,
   preventCloseOnOutsideClick,
+  buttonsDirection,
   children,
 }: ModalProps) => {
   const drawTitleField = () => {
@@ -91,7 +93,10 @@ const Modal = ({
           {drawTitleField()}
         </div>
         {children}
-        <div className={styles['button-container']}>
+        <div
+          style={{ display: 'flex', flexDirection: `${buttonsDirection || 'row'}` }}
+          className={styles['button-container']}
+        >
           {cancelButton && <CancelButton {...cancelButton} />}
           {confirmButton && <ConfirmButton {...confirmButton} />}
         </div>
