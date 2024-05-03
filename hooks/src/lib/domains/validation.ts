@@ -20,7 +20,7 @@ const validation = (inputState: InputState, validators: Validator[]) => {
 
   // 만약 에러가 없다면 에러를 초기화
   if (invalidValidators.length === 0) {
-    if (inputState.isError) inputState.resetError();
+    inputState.resetError();
     return;
   }
 
