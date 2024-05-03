@@ -2,10 +2,9 @@ import { ChangeEvent, KeyboardEvent, FocusEvent, useState } from 'react';
 import { useInput } from '../common';
 import Validator from '../utils/validator';
 import { ERROR_MESSAGE, OPTION } from '../constants';
-import { EventProcessor, NameValuePair } from '../common/useInput';
 
 const useCardNumber = <T extends object>(initialValue: T) => {
-	const { inputValue, handleInputChange, handleEventProcessor } = useInput(initialValue);
+	const { inputValue, handleInputChange, updateByNameAndValue } = useInput(initialValue);
 	const [validationResult, setValidationResult] = useState<ValidationResult>({
 		isValid: true,
 		errorMessage: '',
@@ -32,14 +31,14 @@ const useCardNumber = <T extends object>(initialValue: T) => {
 	const handleCardNumberBlur = (e: FocusEvent<HTMLInputElement>) => {
 		if (e.target !== e.currentTarget) return;
 
-		const { value } = e.target;
+		const { name, value } = e.target;
 		if (!Validator.checkFillNumber(value, OPTION.cardNumberMaxLength))
 			return setValidationResult({
 				isValid: false,
 				errorMessage: ERROR_MESSAGE.cardNumberOutOfRange,
 			});
 
-		handleEventProcessor(processor, e);
+		updateByNameAndValue({ name, value });
 		setValidationResult({
 			isValid: true,
 			errorMessage: '',
@@ -50,24 +49,18 @@ const useCardNumber = <T extends object>(initialValue: T) => {
 		if (e.target !== e.currentTarget) return;
 		if (e.key !== 'Enter') return;
 
-		const { value } = e.target as HTMLInputElement;
+		const { name, value } = e.target as HTMLInputElement;
 		if (!value || !Validator.checkFillNumber(value, OPTION.cardNumberMaxLength))
 			return setValidationResult({
 				isValid: false,
 				errorMessage: ERROR_MESSAGE.cardNumberOutOfRange,
 			});
 
-		handleEventProcessor(processor, e);
+		updateByNameAndValue({ name, value });
 		setValidationResult({
 			isValid: true,
 			errorMessage: '',
 		});
-	};
-
-	const processor = (e: EventProcessor) => {
-		const { value, name } = e.target as NameValuePair;
-
-		return { name, value } as const;
 	};
 
 	return {

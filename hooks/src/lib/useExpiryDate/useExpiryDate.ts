@@ -2,11 +2,10 @@ import { ChangeEvent, KeyboardEvent, FocusEvent, useState } from 'react';
 import { useInput } from '../common';
 import Validator from '../utils/validator';
 import { ERROR_MESSAGE, OPTION } from '../constants';
-import { EventProcessor, NameValuePair } from '../common/useInput';
 import formattingMonth from '../utils/formattingMonth';
 
 const useExpiryDate = <T extends object>(initialValue: T) => {
-	const { inputValue, handleInputChange, handleEventProcessor } = useInput<T>(initialValue);
+	const { inputValue, handleInputChange, updateByNameAndValue } = useInput<T>(initialValue);
 	const [validationResult, setValidationResult] = useState<ValidationResult>({
 		isValid: true,
 		errorMessage: '',
@@ -48,7 +47,13 @@ const useExpiryDate = <T extends object>(initialValue: T) => {
 				errorMessage: ERROR_MESSAGE.expiredCard,
 			});
 
-		handleEventProcessor(processor, e);
+		if (name === 'month') {
+			const newValue = formattingMonth(value, name);
+			updateByNameAndValue({ name, value: newValue });
+		} else {
+			updateByNameAndValue({ name, value });
+		}
+
 		setValidationResult({
 			isValid: true,
 			errorMessage: '',
@@ -60,34 +65,30 @@ const useExpiryDate = <T extends object>(initialValue: T) => {
 		if (e.key !== 'Enter') return;
 
 		const { value, name } = e.target as HTMLInputElement;
+
 		if (name === 'year' && !Validator.checkFillNumber(value, OPTION.expirationDateMaxLength))
 			return setValidationResult({
 				isValid: false,
 				errorMessage: ERROR_MESSAGE.expiryFormat,
 			});
 
-		if (!Validator.checkCreditExpirationPeriod(value, name))
+		if (name === 'month' && !Validator.checkCreditExpirationPeriod(value, name))
 			return setValidationResult({
 				isValid: false,
 				errorMessage: ERROR_MESSAGE.expiredCard,
 			});
 
-		handleEventProcessor(processor, e);
+		if (name === 'month') {
+			const newValue = formattingMonth(value, name);
+			updateByNameAndValue({ name, value: newValue });
+		} else {
+			updateByNameAndValue({ name, value });
+		}
+
 		setValidationResult({
 			isValid: true,
 			errorMessage: '',
 		});
-	};
-
-	const processor = (e: EventProcessor) => {
-		const { value, name } = e.target as NameValuePair;
-		if (name === 'month') {
-			const newValue = formattingMonth(value, name);
-
-			return { name, value: newValue } as const;
-		}
-
-		return { name, value } as const;
 	};
 
 	return {

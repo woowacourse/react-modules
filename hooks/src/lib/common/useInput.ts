@@ -5,9 +5,7 @@ export interface NameValuePair {
 	value: string;
 }
 
-export type EventProcessor =
-	| React.FocusEvent<HTMLInputElement>
-	| React.KeyboardEvent<HTMLInputElement>;
+export type EventProcessor = React.FocusEvent<HTMLInputElement> | React.KeyboardEvent<HTMLInputElement>;
 
 const useInput = <T extends object>(initialValue: T) => {
 	const [inputValue, setInputValue] = useState<T>(initialValue);
@@ -19,13 +17,11 @@ const useInput = <T extends object>(initialValue: T) => {
 		setInputValue((prev) => ({ ...prev, [name]: value }));
 	};
 
-	const handleEventProcessor = (func: (e: EventProcessor) => NameValuePair, e: EventProcessor) => {
-		const { name, value } = func(e);
-
+	const updateByNameAndValue = ({ name, value }: NameValuePair) => {
 		setInputValue((prev) => ({ ...prev, [name]: value }));
 	};
 
-	return { inputValue, handleInputChange, handleEventProcessor } as const;
+	return { inputValue, handleInputChange, updateByNameAndValue } as const;
 };
 
 export default useInput;
