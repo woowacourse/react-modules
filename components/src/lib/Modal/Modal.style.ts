@@ -1,12 +1,14 @@
 import styled from 'styled-components';
-import { ModalButtonInterface, ModalPositionType } from './Modal';
+import { ModalPositionType } from './Modal';
 
-const colors = {
+export const COLORS = {
   grey100: '#ffffff',
-  grey200: '#8b95a1',
-  grey300: '#666666',
-  grey400: '#333333',
-  grey500: '#000000',
+  grey200: '#eeeeee',
+  grey300: '#8b95a1',
+  grey400: '#666666',
+  grey500: '#444444',
+  grey600: '#333333',
+  grey700: '#000000',
 };
 
 export const ModalBackdrop = styled.div`
@@ -24,9 +26,9 @@ export const ModalBackdrop = styled.div`
 `;
 
 export const ModalWrapper = styled.div<{ $position: ModalPositionType }>`
-  background: ${colors.grey100};
+  background: ${COLORS.grey100};
   min-width: 300px;
-  color: ${colors.grey500};
+  color: ${COLORS.grey700};
   padding: 24px 32px;
   z-index: 100;
 
@@ -52,51 +54,4 @@ export const ModalWrapper = styled.div<{ $position: ModalPositionType }>`
       `;
     }
   }}
-`;
-
-export const Header = styled.header`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-`;
-
-export const Title = styled.h2`
-  font-size: 18px;
-  font-weight: 700;
-`;
-
-export const CloseButton = styled.button`
-  display: inline-block;
-  width: 14px;
-  height: 100%;
-  background: ${colors.grey100};
-  border: 0;
-  padding: 0;
-`;
-
-export const Content = styled.section`
-  max-width: 100vw;
-  max-height: 70vh;
-  overflow-y: auto;
-`;
-
-export const Footer = styled.footer`
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-`;
-
-export const FooterButton = styled.button<{ $style: ModalButtonInterface['style'] }>`
-  background: ${(props) => (props.$style === 'primary' ? colors.grey400 : colors.grey100)};
-  color: ${(props) => (props.$style === 'primary' ? colors.grey100 : colors.grey200)};
-  border-radius: 5px;
-  font-size: 15px;
-  font-weight: 700;
-  text-align: center;
-
-  &:hover {
-    background: ${(props) => (props.$style === 'primary' ? '#444444' : '#eeeeee')};
-    transition: 0.3s ease;
-  }
 `;

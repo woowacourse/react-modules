@@ -1,5 +1,7 @@
 import styled from 'styled-components';
 
+import { COLORS } from '../Modal.style';
+
 export const Header = styled.header`
   display: flex;
   flex-direction: row;
@@ -16,7 +18,7 @@ export const CloseButton = styled.button`
   display: inline-block;
   width: 14px;
   height: 100%;
-  background: #ffffff;
+  background: ${COLORS.grey100};
   border: 0;
   padding: 0;
 `;
