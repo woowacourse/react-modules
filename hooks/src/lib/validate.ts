@@ -9,8 +9,8 @@ import {
   YEAR_RANGE,
 } from './constants/system';
 
-function checkMaxLength (value : string, maxLength : number){
-  if(value.length !== maxLength){
+function checkMaxLength(value: string, maxLength: number) {
+  if (value.length !== maxLength) {
     throw new Error(`${maxLength}자로 입력해주세요.`);
   }
 }
@@ -38,7 +38,6 @@ function checkEmpty(value: string) {
   }
 }
 
-
 function validateMonth(value: string) {
   if (checkEmpty(value) || value === '0') return;
   const month = Number(value);
@@ -60,7 +59,6 @@ function validateUpperCase(value: string) {
     throw new Error(ERROR_MESSAGES.INVALID_ONLY_UPPERCASE);
   }
 }
-
 
 interface ValidationMap {
   [key: string]: (value: string) => void;
@@ -90,13 +88,12 @@ export const Validation: ValidationMap = {
   CVC: (value: string) => {
     checkTrimBlank(value);
     validateNumber(value);
-    checkMaxLength(value, CVC_LIMIT.FIELD_LENGTH)
+    checkMaxLength(value, CVC_LIMIT.FIELD_LENGTH);
   },
 
   password: (value: string) => {
     checkTrimBlank(value);
     validateNumber(value);
-    checkMaxLength(value, PASSWORD.FIELD_LENGTH)
+    checkMaxLength(value, PASSWORD.FIELD_LENGTH);
   },
 };
-

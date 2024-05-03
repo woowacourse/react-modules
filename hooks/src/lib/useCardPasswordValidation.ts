@@ -1,16 +1,16 @@
 import { useState } from 'react';
 import { Validation } from './validate';
 
-type passwordName = 'password'
+type passwordName = 'password';
 
 const usePasswordValidation = () => {
   const [passwordValidation, setPasswordValidation] = useState({
     errorMessage: {
-      password : ''
+      password: '',
     },
     isError: {
-      password: false
-    }
+      password: false,
+    },
   });
 
   const passwordValidateHandler = (value: string, name: passwordName) => {
@@ -31,6 +31,6 @@ const usePasswordValidation = () => {
     }
   };
 
-  return {passwordValidation, passwordValidateHandler}
+  return { passwordValidation, passwordValidateHandler };
 };
 export default usePasswordValidation;

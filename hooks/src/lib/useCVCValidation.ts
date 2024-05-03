@@ -1,16 +1,16 @@
 import { useState } from 'react';
 import { Validation } from './validate';
 
-type CardCVCName = 'CVC'
+type CardCVCName = 'CVC';
 
 const useCVCValidation = () => {
   const [CVCValidation, setCVCValidation] = useState({
     errorMessage: {
-      CVC : ''
+      CVC: '',
     },
     isError: {
-      CVC: false
-    }
+      CVC: false,
+    },
   });
 
   const CVCValidateHandler = (value: string, name: CardCVCName) => {
@@ -31,6 +31,6 @@ const useCVCValidation = () => {
     }
   };
 
-  return {CVCValidation, CVCValidateHandler}
+  return { CVCValidation, CVCValidateHandler };
 };
 export default useCVCValidation;

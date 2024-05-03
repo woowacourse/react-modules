@@ -1,7 +1,11 @@
 import { useState } from 'react';
 import { Validation } from './validate';
 
-type CardNumberName = 'cardNumber1' | 'cardNumber2' | 'cardNumber3' | 'cardNumber4'
+type CardNumberName =
+  | 'cardNumber1'
+  | 'cardNumber2'
+  | 'cardNumber3'
+  | 'cardNumber4';
 
 const useCardNumberValidation = () => {
   const [cardNumberValidation, setCardNumberValidation] = useState({
@@ -16,7 +20,7 @@ const useCardNumberValidation = () => {
       cardNumber2: false,
       cardNumber3: false,
       cardNumber4: false,
-    }
+    },
   });
 
   const cardNumberValidateHandler = (value: string, name: CardNumberName) => {
@@ -37,6 +41,6 @@ const useCardNumberValidation = () => {
     }
   };
 
-  return {cardNumberValidation, cardNumberValidateHandler}
+  return { cardNumberValidation, cardNumberValidateHandler };
 };
 export default useCardNumberValidation;

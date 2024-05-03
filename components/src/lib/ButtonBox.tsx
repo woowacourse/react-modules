@@ -6,20 +6,34 @@ interface Props {
   buttonLayout?: string;
   closeButtonContent?: string;
   confirmButtonContent?: string;
-  confirmEvent?: (e:React.MouseEvent) => void;
-  handleClose:(e:React.MouseEvent) => void;
+  confirmEvent?: (e: React.MouseEvent) => void;
+  handleClose: (e: React.MouseEvent) => void;
 }
 const ButtonBox = ({
   buttonLayout,
   closeButtonContent,
   confirmButtonContent,
   confirmEvent,
-  handleClose
+  handleClose,
 }: Props) => {
-  return <ButtonContainer $buttonLayout={buttonLayout}>
-    {confirmButtonContent&&<Button content={confirmButtonContent} style={BUTTON_COLOR.defaultButton} handleClick={confirmEvent}></Button>}
-    {closeButtonContent&&<Button content={closeButtonContent} style={BUTTON_COLOR.closeButton} handleClick={handleClose}></Button>}
-  </ButtonContainer>;
+  return (
+    <ButtonContainer $buttonLayout={buttonLayout}>
+      {confirmButtonContent && (
+        <Button
+          content={confirmButtonContent}
+          style={BUTTON_COLOR.defaultButton}
+          handleClick={confirmEvent}
+        ></Button>
+      )}
+      {closeButtonContent && (
+        <Button
+          content={closeButtonContent}
+          style={BUTTON_COLOR.closeButton}
+          handleClick={handleClose}
+        ></Button>
+      )}
+    </ButtonContainer>
+  );
 };
 
 const ButtonContainer = styled.div<{ $buttonLayout?: string }>`
