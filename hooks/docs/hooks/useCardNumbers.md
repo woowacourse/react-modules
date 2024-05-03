@@ -25,5 +25,5 @@ function App() {
 3. thirdState: 세 번째 카드 번호에 대한 state
 4. fourthState: 네 번째 카드 번호에 대한 state
 5. error:
-   5-1. isError: 에러 여부를 판단하는 boolean 가,
-   5-2. errorMessage,
+   - 1. isError: 에러 여부를 판단하는 boolean 가,
+   - 2. errorMessage,
