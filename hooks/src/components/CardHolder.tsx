@@ -1,12 +1,19 @@
 import { useCardHolder } from '../lib';
 
-export default function CardHolder() {
-  const cardHolderResult = useCardHolder({
-    validationErrors: {
-      alphabet: '알파벳만 입력해주세요.',
-      empty: '소유자 이름을 입력해주세요.',
+const useCardHolderProps = {
+  validationErrorMessages: {
+    alphabet: '알파벳만 입력해주세요.',
+    empty: '소유자 이름을 입력해주세요.',
+  },
+  validations: {
+    alphabet: {
+      isOnlyUpperCase: true,
+      isNeedChangeUpperCase: false,
     },
-  });
+  },
+};
+export default function CardHolder() {
+  const cardHolderResult = useCardHolder(useCardHolderProps);
   return (
     <div>
       <h3>card holder</h3>
