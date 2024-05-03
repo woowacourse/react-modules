@@ -6,7 +6,7 @@ interface CloseButtonProps {
   onClick: MouseEventHandler<HTMLButtonElement>;
 }
 
-const CloseButton: React.FC<CloseButtonProps> = ({ children, onClick }) => {
+const CloseButton = ({ children, onClick }: CloseButtonProps) => {
   return <ButtonWrapper onClick={onClick}>{children}</ButtonWrapper>;
 };
 

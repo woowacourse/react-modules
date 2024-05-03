@@ -12,14 +12,14 @@ export interface ModalProps {
   onClose: (e: React.MouseEvent<HTMLDivElement | HTMLButtonElement>) => void;
 }
 
-export const Modal: React.FC<ModalProps> = ({
+export const Modal = ({
   modalPosition,
   title,
   children,
   closeButtonPosition,
   isOpen,
   onClose,
-}) => {
+}: ModalProps) => {
   if (!isOpen) return null;
 
   return (
