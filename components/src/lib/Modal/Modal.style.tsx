@@ -1,3 +1,4 @@
+import Theme from '@/style/theme';
 import styled from 'styled-components';
 
 export type ModalPosition = 'center' | 'bottom';
@@ -15,7 +16,7 @@ const ModalBackground = styled.div`
   right: 0;
   bottom: 0;
   left: 0;
-  background: rgba(0, 0, 0, 0.35);
+  background-color: ${Theme.background.dark};
 `;
 
 const ModalContainer = styled.div<{ $position: ModalPosition }>`
@@ -27,10 +28,10 @@ const ModalContainer = styled.div<{ $position: ModalPosition }>`
     $position === 'center' ? 'translate(-50%, -50%)' : 'translate(-50%, 0%)'};
   min-width: ${({ $position }) => ($position === 'bottom' ? '100%' : '80%')};
   min-height: 150px;
-  background-color: white;
+  background-color: ${Theme.background.light};
   border-radius: ${({ $position }) =>
     $position === 'center' ? '8px' : '8px 8px 0px 0px'};
-  color: black;
+  color: ${Theme.colors.black};
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -38,8 +39,8 @@ const ModalContainer = styled.div<{ $position: ModalPosition }>`
 `;
 
 const Title = styled.span`
-  font-size: 24px;
-  font-weight: bold;
+  font-size: ${Theme.font.size.large};
+  font-weight: ${Theme.font.weight.bold};
   margin-bottom: 16px;
 `;
 

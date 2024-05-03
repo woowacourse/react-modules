@@ -1,6 +1,7 @@
 import styled from 'styled-components';
+import { Theme } from '@/style/theme';
 
-type ButtonColorType = 'black' | 'white';
+type ButtonColorType = 'dark' | 'light';
 
 interface ButtonProps {
   label: string;
@@ -8,7 +9,7 @@ interface ButtonProps {
   colorType?: ButtonColorType;
 }
 
-const Button = ({ label, onClick, colorType = 'white' }: ButtonProps) => {
+const Button = ({ label, onClick, colorType = 'light' }: ButtonProps) => {
   return (
     <ButtonWrapper onClick={onClick} $colorType={colorType}>
       {label}
@@ -21,14 +22,16 @@ export default Button;
 const ButtonWrapper = styled.button<{ $colorType: ButtonColorType }>`
   width: 100%;
   height: 44px;
-  font-size: 16px;
-  font-weight: 700;
+  font-size: ${Theme.font.size.medium};
+  font-weight: ${Theme.font.weight.bold};
   border-radius: 5px;
   background-color: ${({ $colorType }) =>
-    $colorType === 'black' ? '#333333' : 'white'};
-  color: ${({ $colorType }) => ($colorType === 'black' ? 'white' : '#333333')};
+    $colorType === 'dark' ? Theme.colors.dark : Theme.colors.white};
+  color: ${({ $colorType }) =>
+    $colorType === 'dark' ? Theme.colors.white : Theme.colors.dark};
   border: 1px solid
-    ${({ $colorType }) => ($colorType === 'white' ? '#bababa' : '#333333')};
+    ${({ $colorType }) =>
+      $colorType === 'light' ? Theme.colors.grey : Theme.colors.dark};
   margin-top: 10px;
   cursor: pointer;
 `;
