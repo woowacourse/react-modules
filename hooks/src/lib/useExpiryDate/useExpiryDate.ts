@@ -2,11 +2,10 @@ import { ChangeEvent, KeyboardEvent, FocusEvent, useState } from "react";
 import { useInput } from "../common";
 import Validator from "../utils/validator";
 import { ERROR_MESSAGE, OPTION } from "../constants";
-import { EventProcessor, NameValuePair } from "../common/useInput";
 import formattingMonth from "../utils/formattingMonth";
 
 const useExpiryDate = <T extends object>(initialValue: T) => {
-  const { inputValue, handleInputChange, handleEventProcessor } = useInput<T>(initialValue);
+  const { inputValue, handleInputChange, updateByNameAndValue } = useInput<T>(initialValue);
   const [validationResult, setValidationResult] = useState<ValidationResult>({
     isValid: true,
     errorMessage: "",
@@ -48,7 +47,9 @@ const useExpiryDate = <T extends object>(initialValue: T) => {
         errorMessage: ERROR_MESSAGE.expiredCard,
       });
 
-    handleEventProcessor(processor, e);
+    const newValue = formattingMonth(name, value);
+
+    updateByNameAndValue(name, newValue);
     setValidationResult({
       isValid: true,
       errorMessage: "",
@@ -72,22 +73,13 @@ const useExpiryDate = <T extends object>(initialValue: T) => {
         errorMessage: ERROR_MESSAGE.expiredCard,
       });
 
-    handleEventProcessor(processor, e);
+    const newValue = formattingMonth(name, value);
+
+    updateByNameAndValue(name, newValue);
     setValidationResult({
       isValid: true,
       errorMessage: "",
     });
-  };
-
-  const processor = (e: EventProcessor) => {
-    const { value, name } = e.target as NameValuePair;
-    if (name === "month") {
-      const newValue = formattingMonth(value, name);
-
-      return { name, value: newValue } as const;
-    }
-
-    return { name, value } as const;
   };
 
   return {
