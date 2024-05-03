@@ -11,12 +11,23 @@ export const COLORS = {
   grey700: '#000000',
 };
 
-export const ModalBackdrop = styled.div<{ $zIndex: number }>`
+export const ModalPositioner = styled.div`
   position: fixed;
   inset: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+`;
+
+export const ModalBackdrop = styled.div<{
+  $opacity: string;
+  $zIndex: number;
+}>`
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background: ${COLORS.grey700};
+  opacity: ${(props) => props.$opacity};
   z-index: ${(props) => props.$zIndex};
 
   display: flex;
@@ -25,9 +36,14 @@ export const ModalBackdrop = styled.div<{ $zIndex: number }>`
   align-items: center;
 `;
 
-export const ModalWrapper = styled.div<{ $position: ModalPositionType; $zIndex: number }>`
+export const ModalWrapper = styled.div<{
+  $position: ModalPositionType;
+  $width: { basicWidth: string; minWidth: string };
+  $zIndex: number;
+}>`
   background: ${COLORS.grey100};
-  min-width: 300px;
+  min-width: ${(props) => props.$width.minWidth};
+  width: ${(props) => props.$width.basicWidth};
   color: ${COLORS.grey700};
   padding: 24px 32px;
   z-index: ${(props) => props.$zIndex};
@@ -39,7 +55,6 @@ export const ModalWrapper = styled.div<{ $position: ModalPositionType; $zIndex: 
   ${(props) => {
     if (props.$position === 'center') {
       return `
-        position: relative;
         margin: auto;
         border-radius: 10px;
       `;

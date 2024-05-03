@@ -18,26 +18,28 @@ export interface ModalButtonInterface {
 export interface ModalProps {
   isOpen: boolean;
   position?: ModalPositionType;
+  width?: { basicWidth: string; minWidth: string };
   title: string;
   hasCloseButton?: boolean;
   children: React.ReactNode;
   footerButtons?: ModalButtonInterface[];
   isClosableOnClickBackdrop?: boolean;
-  backdropZIndex?: number;
-  modalZIndex?: number;
+  zIndex?: { backdrop: number; modal: number };
+  backdropOpacity?: string;
   onClose: () => void;
 }
 
 export default function Modal({
   isOpen,
   position = 'center',
+  width = { basicWidth: '50%', minWidth: '300px' },
   title,
   hasCloseButton = true,
   children,
   footerButtons,
   isClosableOnClickBackdrop = true,
-  backdropZIndex = 999,
-  modalZIndex = 1000,
+  zIndex = { backdrop: 999, modal: 1000 },
+  backdropOpacity = '50%',
   onClose,
 }: ModalProps) {
   const modalRef = useRef<HTMLDivElement>(null);
@@ -63,14 +65,18 @@ export default function Modal({
   };
 
   return (
-    <Styled.ModalBackdrop
-      $zIndex={backdropZIndex}
-      onClick={handleClickBackdrop}
-    >
+    <Styled.ModalPositioner>
+      <Styled.ModalBackdrop
+        $zIndex={zIndex.backdrop}
+        $opacity={backdropOpacity}
+        onClick={handleClickBackdrop}
+      ></Styled.ModalBackdrop>
+
       <Styled.ModalWrapper
         ref={modalRef}
         $position={position}
-        $zIndex={modalZIndex}
+        $width={width}
+        $zIndex={zIndex.modal}
         onKeyDown={handleKeyDown}
         onClick={(event) => event.stopPropagation()}
         tabIndex={0}
@@ -85,6 +91,6 @@ export default function Modal({
 
         {footerButtons && <ModalFooter bottons={footerButtons} />}
       </Styled.ModalWrapper>
-    </Styled.ModalBackdrop>
+    </Styled.ModalPositioner>
   );
 }
