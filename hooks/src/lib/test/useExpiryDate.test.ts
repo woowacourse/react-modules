@@ -5,7 +5,7 @@ import useExpiryDate from '../useExpiryDate';
 import { ExpiryDateErrorMessages } from '../../constants/error';
 
 describe('useExpiryDate 훅 테스트', () => {
-  it('초기값이 정확히 설정되어야 한다.', () => {
+  it('훅을 선언할 때 초기값과 result.current.value는 같다.', () => {
     const initialValues = {
       month: '12',
       year: '24',
@@ -14,7 +14,7 @@ describe('useExpiryDate 훅 테스트', () => {
     expect(result.current.values).toEqual(initialValues);
   });
 
-  it('입력값이 정확히 업데이트 되어야 한다.', () => {
+  it('훅이 입력값(year)으로 업데이트될 시 초기값 ``에서 `24`으로 업데이트된다', () => {
     const initialValues = {
       month: '12',
       year: '',
@@ -34,7 +34,9 @@ describe('useExpiryDate 훅 테스트', () => {
     expect(result.current.values).toEqual(changeValues);
   });
 
-  it('숫자가 아닌 값이 들어오면 에러를 낸다.', () => {
+  it(`숫자가 아닌 값이 들어오면 에러(${
+    ExpiryDateErrorMessages[ErrorStatus.IS_NOT_NUMBER]
+  })를 낸다.`, () => {
     const initialValues = {
       month: '',
       year: '',
@@ -53,7 +55,9 @@ describe('useExpiryDate 훅 테스트', () => {
     expect(result.current.errorMessages).toEqual(expectedErrorMessage);
   });
 
-  it('월 입력은 2글자 초과면 에러를 낸다.', () => {
+  it(`월 입력은 2글자 초과면 에러(${
+    ExpiryDateErrorMessages[ErrorStatus.INVALID_LENGTH]
+  })를 낸다.`, () => {
     const initialValues = {
       month: '',
       year: '',
@@ -73,7 +77,7 @@ describe('useExpiryDate 훅 테스트', () => {
     expect(result.current.errorMessages).toEqual(expectedErrorMessage);
   });
 
-  it('월 입력은 1글자 미만(Blur)이면 에러를 낸다.', () => {
+  it(`월 입력은 1글자 미만(Blur)이면 에러($ExpiryDateErrorMessages[ErrorStatus.INVALID_LENGTH],)를 낸다.`, () => {
     const initialValues = {
       month: '',
       year: '',
@@ -92,7 +96,9 @@ describe('useExpiryDate 훅 테스트', () => {
     expect(result.current.errorMessages).toEqual(expectedErrorMessage);
   });
 
-  it('유효하지 않은 월일 때 에러를 낸다.', () => {
+  it(`유효하지 않은 월일 때 에러(${
+    ExpiryDateErrorMessages[ErrorStatus.INVALID_MONTH]
+  })를 낸다.`, () => {
     const initialValues = {
       month: '',
       year: '24',
@@ -112,7 +118,9 @@ describe('useExpiryDate 훅 테스트', () => {
     expect(result.current.errorMessages).toEqual(expectedErrorMessage);
   });
 
-  it('유효하지 않은 년일 때 에러를 낸다.', () => {
+  it(`유효하지 않은 년일 때 에러(${
+    ExpiryDateErrorMessages[ErrorStatus.INVALID_YEAR]
+  })를 낸다.`, () => {
     const initialValues = {
       month: '12',
       year: '',

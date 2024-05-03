@@ -5,14 +5,14 @@ import useCardHolder from '../useCardHolder';
 import { CardHolderErrorMessages } from '../../constants/error';
 
 describe('useCardHolder 훅 테스트', () => {
-  it('초기값이 정확히 설정되어야 한다.', () => {
+  it('훅을 선언할 때 초기값이 `HAILEY RIAN`일 시 result.current.value는 `HAILEY RIAN`이 된다', () => {
     const initialValue = 'HAILEY RIAN';
     const { result } = renderHook(() => useCardHolder(initialValue));
 
     expect(result.current.value).toBe(initialValue);
   });
 
-  it('입력값이 정확히 업데이트 되어야 한다.', () => {
+  it('훅이 입력값으로 업데이트될 시 초기값 ``에서 `HAILEY RIAN`으로 업데이트된다.', () => {
     const initialValue = '';
     const { result } = renderHook(() => useCardHolder(initialValue));
     const invalidValue = 'HAILEY RIAN';
@@ -25,7 +25,9 @@ describe('useCardHolder 훅 테스트', () => {
     expect(result.current.value).toBe(invalidValue);
   });
 
-  it('영어 대문자가 아니면 에러를 낸다.', () => {
+  it(`영어 대문자가 아니면 에러(${
+    CardHolderErrorMessages[ErrorStatus.ONLY_UPPERCASE]
+  })를 낸다.`, () => {
     const initialValue = '';
     const { result } = renderHook(() => useCardHolder(initialValue));
     const invalidValue = 'hailey rian';
@@ -41,7 +43,9 @@ describe('useCardHolder 훅 테스트', () => {
     expect(result.current.errorMessage).toBe(expectedErrorMessage);
   });
 
-  it('빈칸이 두 개이면 에러를 낸다.', () => {
+  it(`빈칸이 두 개이면 에러(${
+    CardHolderErrorMessages[ErrorStatus.IS_DOUBLE_BLANK]
+  })를 낸다.`, () => {
     const initialValue = '';
     const { result } = renderHook(() => useCardHolder(initialValue));
     const invalidValue = 'HAILEY  RIAN';
@@ -54,7 +58,6 @@ describe('useCardHolder 훅 테스트', () => {
 
     const expectedErrorMessage =
       CardHolderErrorMessages[ErrorStatus.IS_DOUBLE_BLANK];
-
     expect(result.current.errorMessage).toBe(expectedErrorMessage);
   });
 });

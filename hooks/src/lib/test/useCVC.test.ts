@@ -5,27 +5,29 @@ import { ErrorStatus } from '../../types/errorStatus';
 import { CVCErrorMessages } from '../../constants/error';
 
 describe('useCVC 훅 테스트', () => {
-  it('초기값이 정확히 설정되어야 한다.', () => {
+  it('훅을 선언할 때 초기값이 `123`일 시 result.current.value는 `123`이 된다', () => {
     const initialValue = '123';
     const { result } = renderHook(() => useCVC(initialValue));
     expect(result.current.value).toEqual(initialValue);
   });
 
-  it('입력값이 정확히 업데이트 되어야 한다.', () => {
+  it('훅이 입력값으로 업데이트될 시 초기값 `123`에서 `456`으로 업데이트된다.', () => {
     const initialValue = '123';
     const { result } = renderHook(() => useCVC(initialValue));
     const changeValue = '456';
 
     React.act(() => {
       result.current.onChange({
-        target: { value: '456' },
+        target: { value: changeValue },
       } as ChangeEvent<HTMLInputElement>);
     });
 
     expect(result.current.value).toEqual(changeValue);
   });
 
-  it('숫자가 아닌 값이 들어오면 에러를 낸다.', () => {
+  it(`숫자가 아닌 값(ㄱㄴㄷ)이 들어오면 '${
+    CVCErrorMessages[ErrorStatus.IS_NOT_NUMBER]
+  }'를 출력.`, () => {
     const initialValue = '123';
     const { result } = renderHook(() => useCVC(initialValue));
     const invalidValue = 'ㄱㄴㄷ';
@@ -40,7 +42,9 @@ describe('useCVC 훅 테스트', () => {
     expect(result.current.errorMessage).toBe(expectedErrorMessage);
   });
 
-  it('길이가 3글자 초과시 에러를 낸다.', () => {
+  it(`길이가 3글자 초과시 에러(${
+    CVCErrorMessages[ErrorStatus.INVALID_LENGTH]
+  })를 낸다.`, () => {
     const initialValue = '123';
     const { result } = renderHook(() => useCVC(initialValue));
     const invalidValue = '1234';
@@ -55,7 +59,9 @@ describe('useCVC 훅 테스트', () => {
     expect(result.current.errorMessage).toBe(expectedErrorMessage);
   });
 
-  it('길이가 3글자 미만시(Blur) 에러를 낸다.', () => {
+  it(`길이가 3글자 미만시(Blur) 에러(${
+    CVCErrorMessages[ErrorStatus.INVALID_LENGTH]
+  })를 낸다.`, () => {
     const initialValue = '123';
     const { result } = renderHook(() => useCVC(initialValue));
     const invalidValue = '12';

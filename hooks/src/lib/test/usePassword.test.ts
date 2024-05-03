@@ -5,14 +5,14 @@ import usePassword from '../usePassword';
 import { PasswordErrorMessages } from '../../constants/error';
 
 describe('usePassword 훅 테스트', () => {
-  it('초기값이 정확히 설정되어야 한다.', () => {
+  it('훅을 선언할 때 초기값과 result.current.value는 같다.', () => {
     const initialValue = '12';
     const { result } = renderHook(() => usePassword(initialValue));
 
     expect(result.current.value).toBe(initialValue);
   });
 
-  it('입력값이 정확히 업데이트 되어야 한다.', () => {
+  it('훅이 입력값으로 업데이트될 시 초기값 ``에서 `12`으로 업데이트된다.', () => {
     const initialValue = '';
     const { result } = renderHook(() => usePassword(initialValue));
     const invalidValue = '12';
@@ -25,7 +25,9 @@ describe('usePassword 훅 테스트', () => {
     expect(result.current.value).toBe(invalidValue);
   });
 
-  it('숫자가 아닌 값이 들어오면 에러를 낸다.', () => {
+  it(`숫자가 아닌 값이 들어오면 에러(${
+    PasswordErrorMessages[ErrorStatus.IS_NOT_NUMBER]
+  })를 낸다.`, () => {
     const initialValue = '';
     const { result } = renderHook(() => usePassword(initialValue));
     const invalidValue = 'ab';
@@ -40,7 +42,9 @@ describe('usePassword 훅 테스트', () => {
     expect(result.current.errorMessage).toBe(expectedErrorMessage);
   });
 
-  it('길이가 2글자 초과면 에러를 낸다.', () => {
+  it(`길이가 2글자 초과면 에러(${
+    PasswordErrorMessages[ErrorStatus.INVALID_LENGTH]
+  })를 낸다.`, () => {
     const initialValue = '';
     const { result } = renderHook(() => usePassword(initialValue));
     const invalidValue = '123';
@@ -56,7 +60,9 @@ describe('usePassword 훅 테스트', () => {
     expect(result.current.errorMessage).toBe(expectedErrorMessage);
   });
 
-  it('길이가 2글자 미만(Blur)이면 에러를 낸다.', () => {
+  it(`길이가 2글자 미만(Blur)이면 에러(${
+    PasswordErrorMessages[ErrorStatus.INVALID_LENGTH]
+  })를 낸다.`, () => {
     const initialValue = '';
     const { result } = renderHook(() => usePassword(initialValue));
     const invalidValue = '1';

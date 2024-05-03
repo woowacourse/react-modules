@@ -4,7 +4,7 @@ import useCardCompany from '../useCardCompany';
 import { CardCompanyErrorMessage } from '../../constants/error';
 import { ErrorStatus } from '../../types/errorStatus';
 
-export const ExampleCardBrands = [
+export const EXAMPLE_CARD_BRANDS = [
   'BC카드',
   '신한카드',
   '카카오뱅크',
@@ -16,22 +16,22 @@ export const ExampleCardBrands = [
 ];
 
 describe('useCardCompany 훅 테스트', () => {
-  it('초기값이 정확히 설정되어야 한다.', () => {
+  it('훅을 선언할 때 초기값이 ``일 시 result.current.value는 ``이 된다', () => {
     const initialValue = '';
     const { result } = renderHook(() =>
-      useCardCompany({ initialValue, optionArray: ExampleCardBrands })
+      useCardCompany({ initialValue, optionArray: EXAMPLE_CARD_BRANDS })
     );
 
     expect(result.current.value).toBe(initialValue);
   });
 
-  it('입력값이 정확히 업데이트 되어야 한다.', () => {
+  it(`훅이 입력값으로 업데이트될 시 초기값 ''에서 '${EXAMPLE_CARD_BRANDS[0]}'으로 업데이트된다.`, () => {
     const initialValue = '';
     const { result } = renderHook(() =>
-      useCardCompany({ initialValue, optionArray: ExampleCardBrands })
+      useCardCompany({ initialValue, optionArray: EXAMPLE_CARD_BRANDS })
     );
 
-    const validValue = ExampleCardBrands[0];
+    const validValue = EXAMPLE_CARD_BRANDS[0];
     React.act(() => {
       result.current.onSelect(validValue);
     });
@@ -39,10 +39,12 @@ describe('useCardCompany 훅 테스트', () => {
     expect(result.current.value).toBe(validValue);
   });
 
-  it('유효하지 않은 옵션 선택시 에러를 낸다.', () => {
+  it(`유효하지 않은 옵션 선택시 에러(${
+    CardCompanyErrorMessage[ErrorStatus.INVALID_OPTION]
+  })를 낸다.`, () => {
     const initialValue = '';
     const { result } = renderHook(() =>
-      useCardCompany({ initialValue, optionArray: ExampleCardBrands })
+      useCardCompany({ initialValue, optionArray: EXAMPLE_CARD_BRANDS })
     );
 
     const invalidValue = '헤일리 은행';

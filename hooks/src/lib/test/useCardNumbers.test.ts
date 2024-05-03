@@ -5,7 +5,7 @@ import { CardNumbersErrorMessages } from '../../constants/error';
 import { ErrorStatus } from '../../types/errorStatus';
 
 describe('useCardNumbers 훅 테스트', () => {
-  it('초기값이 정확히 설정되어야 한다.', () => {
+  it('훅을 선언할 때 초기값과 같은 값이 result.current.value이 된다.', () => {
     const initialValue = {
       cardNumber1: '1234',
       cardNumber2: '1234',
@@ -16,7 +16,7 @@ describe('useCardNumbers 훅 테스트', () => {
     expect(result.current.values).toEqual(initialValue);
   });
 
-  it('입력값이 정확히 업데이트 되어야 한다.', () => {
+  it('입력값(cardNumber1) 업데이트될 시 `1234` -> `5678`로 변경되어야 한다.', () => {
     const initialValues = {
       cardNumber1: '1234',
       cardNumber2: '5678',
@@ -41,7 +41,9 @@ describe('useCardNumbers 훅 테스트', () => {
     expect(result.current.values).toEqual(changeValue);
   });
 
-  it('숫자아닌 값이 입력됐을 때 에러를 낸다.', () => {
+  it(`숫자아닌 값이 입력됐을 때 에러(${
+    CardNumbersErrorMessages[ErrorStatus.IS_NOT_NUMBER]
+  })를 낸다.`, () => {
     const valuesWithString = {
       cardNumber1: '',
       cardNumber2: '',
@@ -64,7 +66,9 @@ describe('useCardNumbers 훅 테스트', () => {
     expect(result.current.errorMessages).toEqual(expectedErrorMessage);
   });
 
-  it('숫자가 4자리가 아닐때(초과시) 에러를 낸다.', () => {
+  it(`숫자가 4자리가 아닐때(초과시) 에러(${
+    CardNumbersErrorMessages[ErrorStatus.INVALID_LENGTH]
+  })를 낸다.`, () => {
     const valuesWithString = {
       cardNumber1: '',
       cardNumber2: '',
@@ -87,7 +91,9 @@ describe('useCardNumbers 훅 테스트', () => {
     expect(result.current.errorMessages).toEqual(expectedErrorMessage);
   });
 
-  it('숫자가 4자리가 아닐때(미만시) 에러를 낸다.', () => {
+  it(`숫자가 4자리가 아닐때(미만시) 에러(${
+    CardNumbersErrorMessages[ErrorStatus.INVALID_LENGTH]
+  })를 낸다.`, () => {
     const valuesWithString = {
       cardNumber1: '',
       cardNumber2: '',
