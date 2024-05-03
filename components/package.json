@@ -1,6 +1,6 @@
 {
   "name": "woowacourse-todari-components",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "우아한테크코스 페이먼츠 모듈 미션",
   "type": "module",
   "types": "dist/index.d.ts",
@@ -8,6 +8,12 @@
   "module": "dist/index.js",
   "files": [
     "dist"
+  ],
+  "keywords": [
+    "react",
+    "component",
+    "modal",
+    "button"
   ],
   "scripts": {
     "dev": "vite --host",
