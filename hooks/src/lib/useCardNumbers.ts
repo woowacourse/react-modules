@@ -9,13 +9,21 @@ interface CardNumbersValidationErrors {
   number: string;
   length: string;
 }
+/**
+ * @property {number[]} cardNumberLength : 카드 번호에 대한 하나의 입력란에 들어가는 카드 번호 개수 (ex:4자리 씩 16자린 인 경우 [4,4,4,4], 15자인 경우 [4,3,4,4])
+ */
+interface CardNumberValidations {
+  cardNumberLength: number[];
+}
 
-export default function useCardNumbers({ validationErrors }: UseCardModuleProps<CardNumbersValidationErrors>) {
+type UserCardNumbersProps = UseCardModuleProps<CardNumbersValidationErrors, CardNumberValidations>;
+
+export default function useCardNumbers(props: UserCardNumbersProps) {
   const [numbers, setNumbers] = useState(Array.from({ length: CARD_NUMBERS_GROUP_LENGTH }, () => ''));
   const [error, setError] = useState(Array.from({ length: CARD_NUMBERS_GROUP_LENGTH }, () => false));
   const [errorMessage, setErrorMessage] = useState<ErrorMessage>(null);
 
-  const { changeEventValidators, blurEventValidators, totalValidators } = useCardNumber({ validationErrors });
+  const { changeEventValidators, blurEventValidators, totalValidators } = useCardNumber(props);
 
   const getNewNumbers = (value: string, index: number) => {
     const newNumbers = [...numbers];
