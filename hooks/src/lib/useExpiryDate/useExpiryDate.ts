@@ -2,7 +2,8 @@ import { useState } from "react";
 
 import useExpiryDateValidation from "./useExpiryDateValidation";
 
-import { ExpiryDateKeys } from "../types/card-custom-hook";
+import { ExpiryDateKeys } from "../types/cardCustomHook";
+import { INPUT_RULES } from "../constants/cardCustomHook";
 
 const useExpiryDate = () => {
   const [expiryDate, setExpiryDate] = useState<Record<ExpiryDateKeys, string>>({
@@ -34,7 +35,7 @@ const useExpiryDate = () => {
   };
 
   const isExpiryDateCompleted = Object.values(expiryDate).every(
-    (cardNumber) => cardNumber.length === 2
+    (cardNumber) => cardNumber.length === INPUT_RULES.maxExpiryDateLength
   );
 
   return {

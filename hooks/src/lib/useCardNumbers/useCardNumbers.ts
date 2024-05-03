@@ -2,7 +2,8 @@ import { useState } from "react";
 
 import useCardNumberValidation from "./useCardNumbersValidation";
 
-import { CardNumberKeys } from "../types/card-custom-hook";
+import { CardNumberKeys } from "../types/cardCustomHook";
+import { INPUT_RULES } from "../constants/cardCustomHook";
 
 const useCardNumbers = () => {
   const [cardNumbers, setCardNumbers] = useState<
@@ -39,7 +40,7 @@ const useCardNumbers = () => {
   };
 
   const isCardNumberInputCompleted = Object.values(cardNumbers).every(
-    (cardNumber) => cardNumber.length === 4
+    (cardNumber) => cardNumber.length === INPUT_RULES.maxCardNumberLength
   );
 
   return {

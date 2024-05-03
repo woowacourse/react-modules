@@ -3,7 +3,7 @@ import { renderHook } from "@testing-library/react";
 import React from "react";
 
 import useCardNumbers from "./useCardNumbers";
-import { CardNumberKeys } from "../types/card-custom-hook";
+import { CardNumberKeys } from "../types/cardCustomHook";
 
 describe("useCardNumbers 커스텀 훅 동작 테스트", () => {
   it("초기값이 정확히 설정되어야 한다.", () => {

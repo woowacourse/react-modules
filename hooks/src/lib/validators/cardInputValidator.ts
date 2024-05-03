@@ -1,4 +1,4 @@
-import { INPUT_RULES } from "../constants/card-custom-hook";
+import { INPUT_RULES } from "../constants/cardCustomHook";
 
 const cardInputValidator = {
   validateNumericInput(value: string) {
@@ -18,7 +18,7 @@ const cardInputValidator = {
   },
 
   validateCardNumberLength(value: string) {
-    return value.length === INPUT_RULES.maxCardNumberPartLength;
+    return value.length === INPUT_RULES.maxCardNumberLength;
   },
 
   validatePastYear(year: string) {
@@ -28,13 +28,13 @@ const cardInputValidator = {
   },
 
   validateMonth(month: string) {
-    if (month.length !== INPUT_RULES.validExpirationLength) return false;
+    if (month.length !== INPUT_RULES.validExpiryDateLength) return false;
 
     return this.validateNumberInRange(parseInt(month, 10), 1, 12);
   },
 
   validateYear(year: string) {
-    if (year.length !== INPUT_RULES.validExpirationLength) return false;
+    if (year.length !== INPUT_RULES.validExpiryDateLength) return false;
 
     return this.validatePastYear(year);
   },
@@ -53,8 +53,8 @@ const cardInputValidator = {
     if (name === "year" && !this.validateYear(year)) return false;
 
     if (
-      month.length !== INPUT_RULES.validExpirationLength ||
-      year.length !== INPUT_RULES.validExpirationLength
+      month.length !== INPUT_RULES.validExpiryDateLength ||
+      year.length !== INPUT_RULES.validExpiryDateLength
     )
       return true;
 

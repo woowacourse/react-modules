@@ -2,7 +2,7 @@ import { useState } from "react";
 
 import cardInputValidator from "../validators/cardInputValidator";
 
-import { VALIDATION_MESSAGES } from "../constants/card-custom-hook";
+import { VALIDATION_MESSAGES } from "../constants/cardCustomHook";
 
 type CardNumberKeys = "first" | "second" | "third" | "fourth";
 

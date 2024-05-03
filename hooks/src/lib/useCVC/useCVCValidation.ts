@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 import cardInputValidator from "../validators/cardInputValidator";
-import { VALIDATION_MESSAGES } from "../constants/card-custom-hook";
+import { VALIDATION_MESSAGES } from "../constants/cardCustomHook";
 
 const useCVCValidation = () => {
   const [errorState, setErrorState] = useState(false);
@@ -21,7 +21,7 @@ const useCVCValidation = () => {
     const isValidCVCLength = cardInputValidator.validateInputLength(value, 3);
 
     if (!isValidCVCLength) {
-      setErrorText(VALIDATION_MESSAGES.invalidCVCNumber);
+      setErrorText(VALIDATION_MESSAGES.invalidCVC);
       setErrorState(!isValidCVCLength);
 
       return true;

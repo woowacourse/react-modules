@@ -2,8 +2,8 @@ import { useState } from "react";
 
 import cardInputValidator from "../validators/cardInputValidator";
 
-import { VALIDATION_MESSAGES } from "../constants/card-custom-hook";
-import { ExpiryDateKeys } from "../types/card-custom-hook";
+import { VALIDATION_MESSAGES } from "../constants/cardCustomHook";
+import { ExpiryDateKeys } from "../types/cardCustomHook";
 
 const useExpiryDateValidation = () => {
   const [errorState, setErrorState] = useState<Record<ExpiryDateKeys, boolean>>(
@@ -50,7 +50,7 @@ const useExpiryDateValidation = () => {
     if (isOverInputLength) return false;
 
     if (name === "month" && !cardInputValidator.validateMonth(value)) {
-      setErrorText(VALIDATION_MESSAGES.invalidMonthLength);
+      setErrorText(VALIDATION_MESSAGES.invalidMonthRange);
       updateErrorState(name, true);
 
       return true;

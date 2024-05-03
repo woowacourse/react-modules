@@ -4,7 +4,7 @@ import React from "react";
 
 import useExpiryDate from "./useExpiryDate";
 
-import { ExpiryDateKeys } from "../types/card-custom-hook";
+import { ExpiryDateKeys } from "../types/cardCustomHook";
 
 describe("useExpiryDate 커스텀 훅 동작 테스트", () => {
   it("초기값이 정확히 설정되어야 한다.", () => {
