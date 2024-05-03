@@ -9,7 +9,12 @@
 
 ```
 npm install styled-base-modal
+
 ```
+
+## StoryBook
+
+[Storybook LINK](https://6633385e36610c66d8ade87d-hcpbnioczu.chromatic.com/?path=/story/components-modal--default)
 
 ## Props
 
