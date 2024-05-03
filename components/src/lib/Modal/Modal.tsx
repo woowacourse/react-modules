@@ -23,6 +23,8 @@ export interface ModalProps {
   children: React.ReactNode;
   footerButtons?: ModalButtonInterface[];
   isClosableOnClickBackdrop?: boolean;
+  backdropZIndex?: number;
+  modalZIndex?: number;
   onClose: () => void;
 }
 
@@ -34,6 +36,8 @@ export default function Modal({
   children,
   footerButtons,
   isClosableOnClickBackdrop = true,
+  backdropZIndex = 999,
+  modalZIndex = 1000,
   onClose,
 }: ModalProps) {
   const modalRef = useRef<HTMLDivElement>(null);
@@ -59,10 +63,14 @@ export default function Modal({
   };
 
   return (
-    <Styled.ModalBackdrop onClick={handleClickBackdrop}>
+    <Styled.ModalBackdrop
+      $zIndex={backdropZIndex}
+      onClick={handleClickBackdrop}
+    >
       <Styled.ModalWrapper
         ref={modalRef}
         $position={position}
+        $zIndex={modalZIndex}
         onKeyDown={handleKeyDown}
         onClick={(event) => event.stopPropagation()}
         tabIndex={0}
