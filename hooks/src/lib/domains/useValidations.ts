@@ -9,6 +9,7 @@ const flatten = <K extends keyof InputState>(states: InputState[], key: K) =>
 
 const useDeepCompareEffect = <T>(callback: () => void, dependencies: T[]) => {
   const dependency = dependencies.map((dependency) => JSON.stringify(dependency)).join("+");
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(callback, [dependency]);
 };
 
