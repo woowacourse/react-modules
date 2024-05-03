@@ -11,7 +11,8 @@ interface ValidationErrors {
 }
 
 export default function usePassword(props: UseCardModuleProps<ValidationErrors>) {
-  const { empty, number, length } = props.validationErrors;
+  const { empty, number, length } = props.validationErrorMessages;
+
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState<ErrorMessage>(null);
 

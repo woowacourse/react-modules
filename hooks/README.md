@@ -23,7 +23,7 @@ npm install badahertz52-react-modules-hooks
 ```tsx
 export default function CardCVC() {
   const cvcResult = useCVC({
-    validationErrors: {
+    validationErrorMessages {
       empty: '값을 입력해주세요.',
       number: '숫자만 입력 가능해요.',
       length: '세자리 숫자여야 합니다.',

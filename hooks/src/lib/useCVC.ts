@@ -3,14 +3,14 @@ import { VALID_LENGTH } from './contexts';
 import { validateNumber, validateFilledValue, validateLength } from './utils/validators';
 import { ErrorMessage, UseCardModuleProps } from './types';
 import useCardValidation from './useCardValidation';
-interface ValidationErrors {
+interface ValidationErrorMessages {
   empty: string;
   number: string;
   length: string;
 }
 
-export default function useCVC(props: UseCardModuleProps<ValidationErrors>) {
-  const { empty, number, length } = props.validationErrors;
+export default function useCVC(props: UseCardModuleProps<ValidationErrorMessages>) {
+  const { empty, number, length } = props.validationErrorMessages;
   const [cvc, setCVC] = useState('');
   const [errorMessage, setErrorMessage] = useState<ErrorMessage>(null);
 
