@@ -1,15 +1,10 @@
 import React, { useRef, useEffect } from 'react';
 
-import {
-  ModalOverlay,
-  ModalWrapper,
-  Header,
-  Title,
-  CloseButton,
-  Content,
-  Footer,
-  FooterButton,
-} from './Modal.style';
+import ModalHeader from './ModalHeader/ModalHeader';
+import ModalContent from './ModalContent/ModalContent';
+import ModalFooter from './ModalFooter/ModalFooter';
+
+import * as Styled from './Modal.style';
 
 export type ModalPositionType = 'center' | 'bottom';
 
@@ -46,9 +41,7 @@ export default function Modal({
     }
   }, [isOpen]);
 
-  if (!isOpen) {
-    return;
-  }
+  if (!isOpen) return;
 
   const handleKeyDown = (event: React.KeyboardEvent) => {
     if (event.key === 'Escape') {
@@ -57,52 +50,24 @@ export default function Modal({
   };
 
   return (
-    <ModalOverlay onClick={onClose}>
-      <ModalWrapper
+    <Styled.ModalOverlay onClick={onClose}>
+      <Styled.ModalWrapper
         ref={modalRef}
         $position={position}
         onKeyDown={handleKeyDown}
         onClick={(event) => event.stopPropagation()}
         tabIndex={0}
       >
-        <Header>
-          <Title>{title}</Title>
-          {hasCloseButton && (
-            <CloseButton onClick={onClose}>
-              <svg
-                width="14"
-                height="14"
-                viewBox="0 0 14 14"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M14 1.41L12.59 0L7 5.59L1.41 0L0 1.41L5.59 7L0 12.59L1.41 14L7 8.41L12.59 14L14 12.59L8.41 7L14 1.41Z"
-                  fill="black"
-                />
-              </svg>
-            </CloseButton>
-          )}
-        </Header>
+        <ModalHeader
+          title={title}
+          hasCloseButton={hasCloseButton}
+          onClose={onClose}
+        />
 
-        <Content>{children}</Content>
+        <ModalContent>{children}</ModalContent>
 
-        {footerButtons && (
-          <Footer>
-            {footerButtons.map((button, index) => {
-              return (
-                <FooterButton
-                  key={index}
-                  $style={button.style}
-                  onClick={button.onClick}
-                >
-                  {button.text}
-                </FooterButton>
-              );
-            })}
-          </Footer>
-        )}
-      </ModalWrapper>
-    </ModalOverlay>
+        {footerButtons && <ModalFooter bottons={footerButtons} />}
+      </Styled.ModalWrapper>
+    </Styled.ModalOverlay>
   );
 }
