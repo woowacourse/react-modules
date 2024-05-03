@@ -7,14 +7,15 @@ import {
 import useInput from './useInput';
 import { validateLengthOver, validateNumber } from '../validate/validate';
 import { CardNumbersErrorMessages } from '../constants/error';
+import { CARD_NUMBER_LENGTH } from '../constants/length';
 
 const cardNumbersValidates = (value: string) => {
   validateNumber(value);
-  validateLengthOver(value, 4);
+  validateLengthOver(value, CARD_NUMBER_LENGTH);
 };
 
 const useCardNumbers = (initialValues: CardNumbers) => {
-  const validLength = 4;
+  const validLength = CARD_NUMBER_LENGTH;
   const {
     value: cardNumber1,
     onChange: onChangeNumber1,

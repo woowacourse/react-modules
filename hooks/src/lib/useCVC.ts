@@ -1,18 +1,19 @@
 import { ChangeEvent, FocusEvent } from 'react';
 import useInput from './useInput';
 import { validateLengthOver, validateNumber } from '../validate/validate';
-import { cvcError } from '../types/cvc';
+import { CVCError } from '../types/cvc';
 import { CVCErrorMessages } from '../constants/error';
+import { CVC_LENGTH } from '../constants/length';
 
 const cvcValidates = (value: string) => {
   validateNumber(value);
-  validateLengthOver(value, 3);
+  validateLengthOver(value, CVC_LENGTH);
 };
 
 const useCVC = (initialValue: string) => {
-  const validLength = 3;
+  const validLength = CVC_LENGTH;
   const { value, onChange, onBlurValidLength, errorStatus } =
-    useInput<cvcError>(initialValue, cvcValidates, validLength);
+    useInput<CVCError>(initialValue, cvcValidates, validLength);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     onChange(e);

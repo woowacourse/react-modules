@@ -1,11 +1,11 @@
 import { useState, ChangeEvent, FocusEvent } from 'react';
 import { validateLengthLess } from '../validate/validate';
 
-type validateType = (value: string) => void;
+type ValidateAndThrow = (value: string) => void;
 
 const useInput = <T>(
   initialValue: string = '',
-  validate: validateType,
+  validate: ValidateAndThrow,
   validLength?: number
 ) => {
   const [value, setValue] = useState(initialValue);

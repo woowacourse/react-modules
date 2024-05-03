@@ -12,10 +12,11 @@ import {
   ExpiryDateKeys,
 } from '../types/expiryDate';
 import { ExpiryDateErrorMessages } from '../constants/error';
+import { EXPIRY_DATE_LENGTH } from '../constants/length';
 
 const expiryDateValidates = (value: string) => {
   validateNumber(value);
-  validateLengthOver(value, 2);
+  validateLengthOver(value, EXPIRY_DATE_LENGTH.MAX);
 };
 
 const monthValidates = (value: string) => {
@@ -29,7 +30,7 @@ const yearValidates = (value: string) => {
 };
 
 const useExpiryDate = (initialValue: ExpiryDate) => {
-  const validLength = 1;
+  const validLength = EXPIRY_DATE_LENGTH.MIN;
   const {
     value: monthValue,
     onChange: onChangeMonth,

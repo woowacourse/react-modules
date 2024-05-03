@@ -3,14 +3,15 @@ import useInput from './useInput';
 import { validateLengthOver, validateNumber } from '../validate/validate';
 import { PasswordError } from '../types/password';
 import { PasswordErrorMessages } from '../constants/error';
+import { PASSWORD_LENGTH } from '../constants/length';
 
 const passwordValidates = (value: string) => {
   validateNumber(value);
-  validateLengthOver(value, 2);
+  validateLengthOver(value, PASSWORD_LENGTH);
 };
 
 const usePassword = (initialValue: string) => {
-  const validLength = 2;
+  const validLength = PASSWORD_LENGTH;
   const { value, onChange, onBlurValidLength, errorStatus } =
     useInput<PasswordError>(initialValue, passwordValidates, validLength);
 
