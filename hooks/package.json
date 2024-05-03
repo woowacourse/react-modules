@@ -1,6 +1,6 @@
 {
   "name": "fe-card-validation-hooks",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "custom card validation hooks",
   "type": "module",
   "types": "dist/index.d.ts",
@@ -17,7 +17,6 @@
     "test": "jest"
   },
   "dependencies": {
-    "paran-fe-card-validation-hooks": "^0.0.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
