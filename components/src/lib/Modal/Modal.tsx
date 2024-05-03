@@ -11,7 +11,7 @@ import LongButton from "../LongButton/LongButton";
 interface ModalProps {
   position?: "center" | "bottom";
   title?: string;
-  isConfirmButton?: boolean;
+  hasConfirmButton?: boolean;
   closeButtonPosition?: "bottom" | "top";
   onConfirm?: () => void;
   onClose?: () => void;
@@ -21,7 +21,7 @@ interface ModalProps {
 const Modal: React.FC<ModalProps> = ({
   position = "center",
   title,
-  isConfirmButton = true,
+  hasConfirmButton = true,
   closeButtonPosition = "top",
   onConfirm,
   onClose,
@@ -62,7 +62,7 @@ const Modal: React.FC<ModalProps> = ({
         </ModalHeader>
         <div>{children}</div>
         <div css={buttonsStyle}>
-          {isConfirmButton && (
+          {hasConfirmButton && (
             <LongButton type="confirm" handleClick={onConfirm}>
               동의하고 저장하기
             </LongButton>

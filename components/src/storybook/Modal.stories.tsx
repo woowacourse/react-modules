@@ -27,7 +27,7 @@ export const Default: Story = {
     onConfirm: () => console.log("확인"),
     onClose: () => console.log("닫기"),
     closeButtonPosition: "top",
-    isConfirmButton: false,
+    hasConfirmButton: false,
   },
 };
 
@@ -40,7 +40,7 @@ export const ConfirmButton: Story = {
     onConfirm: () => console.log("확인"),
     onClose: () => console.log("닫기"),
     closeButtonPosition: "top",
-    isConfirmButton: true,
+    hasConfirmButton: true,
   },
 };
 
@@ -53,7 +53,7 @@ export const CloseButtonBottom: Story = {
     onConfirm: () => console.log("확인"),
     onClose: () => console.log("닫기"),
     closeButtonPosition: "bottom",
-    isConfirmButton: true,
+    hasConfirmButton: true,
   },
 };
 
@@ -61,11 +61,12 @@ export const LongTitle: Story = {
   name: "타이틀에 긴 문자열이 들어갈 경우",
   args: {
     position: "center",
-    title: "modal title blahblahblahblahblahblahblahblahblahblahblahblahblahblahblahblahblahblahblahblahblahblah",
+    title:
+      "modal title blahblahblahblahblahblahblahblahblahblahblahblahblahblahblahblahblahblahblahblahblahblah",
     children: <Component />,
     onConfirm: () => console.log("확인"),
     onClose: () => console.log("닫기"),
     closeButtonPosition: "top",
-    isConfirmButton: true,
+    hasConfirmButton: true,
   },
 };
