@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Validation } from './validate';
+import { Validation } from './cardDateValidate';
 
 type CardHolderName = 'cardHolder';
 
