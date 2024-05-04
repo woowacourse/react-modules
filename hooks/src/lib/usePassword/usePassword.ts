@@ -1,5 +1,5 @@
 import { ChangeEvent, useState, KeyboardEvent, FocusEvent } from "react";
-import { useInput } from "../common";
+import useInput from "../common/useInput";
 import Validator from "../utils/validator";
 import { ERROR_MESSAGE, OPTION } from "../constants";
 
