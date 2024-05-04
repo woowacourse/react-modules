@@ -3,14 +3,14 @@ import { CardNumbers, CardExpiryDate, Issuer, CardHolder, CardPassword, CardCVC 
 
 function App() {
   return (
-    <>
+    <div id="app">
       <CardHolder />
       <CardCVC />
       <Issuer />
       <CardPassword />
       <CardNumbers />
       <CardExpiryDate />
-    </>
+    </div>
   );
 }
 
