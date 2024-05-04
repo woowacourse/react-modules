@@ -1,12 +1,12 @@
 import './App.css';
-import { CardNumbers, CardExpiryDate, Issuer, CardHolder, CardPassword, CardCVC } from './components';
+import { CardNumbers, CardExpiryDate, CardIssuer, CardHolder, CardPassword, CardCVC } from './components';
 
 function App() {
   return (
     <div id="app">
       <CardHolder />
       <CardCVC />
-      <Issuer />
+      <CardIssuer />
       <CardPassword />
       <CardNumbers />
       <CardExpiryDate />

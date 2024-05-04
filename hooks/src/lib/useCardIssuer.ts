@@ -1,40 +1,53 @@
-import { useState } from 'react';
-import { validateFilledValue } from './utils/validators';
-import { ErrorMessage, UseCardModuleProps } from './types';
-import useCardValidation from './useCardValidation';
+import { useEffect, useState } from 'react';
+import { UseCardModuleReturn } from './types';
+import { isValid, validateFilledValue } from './utils/validators';
 
 interface CardIssuerValidationErrorMessages {
   empty: string;
   issuer: string;
 }
 
-/**
- * @property {string[]} issuers : 카드 발급사 이름 배열
- */
-interface CardIssuerValidations {
-  issuers: string[];
+export interface UseCardIssuerProps {
+  issuerValue: string;
+  validation: {
+    issuers: string[];
+  };
+  errorMessages: CardIssuerValidationErrorMessages;
 }
+export interface UseCardIssuerResult {
+  isFilledValue: boolean;
+  isValidIssuer: boolean;
+}
+export type UseCardIssuerReturn = UseCardModuleReturn<UseCardIssuerResult>;
 
-type UseCardIssuerProps = UseCardModuleProps<CardIssuerValidationErrorMessages, CardIssuerValidations>;
+export default function useCardIssuer(props: UseCardIssuerProps): UseCardIssuerReturn {
+  const { issuerValue, errorMessages, validation } = props;
 
-export default function useCardIssuer({ validationErrorMessages, validations: { issuers } }: UseCardIssuerProps) {
-  const [cardIssuer, setCardIssuer] = useState('');
-  const [errorMessage, setErrorMessage] = useState<ErrorMessage>(null);
+  type ErrorMessageKey = keyof typeof errorMessages;
+  type Error = ErrorMessageKey[] | null;
 
-  const validateCorrectIssuer = (value: string) => !!issuers.find((i) => i === value);
+  const [error, setError] = useState<Error>(null);
 
-  const totalValidators = [
-    { test: validateFilledValue, errorMessage: validationErrorMessages.empty },
-    { test: validateCorrectIssuer, errorMessage: validationErrorMessages.issuer },
-  ];
+  const validateCorrectIssuer = (value: string) => validation.issuers.includes(value);
 
-  const { handleUpdateValue } = useCardValidation<string>({
-    blurEventValidators: undefined,
-    changeEventValidators: undefined,
-    totalValidators,
-    setValue: setCardIssuer,
-    setErrorMessage,
-  });
+  const validateIssuerValue = (value: string) => {
+    const newError: ErrorMessageKey[] = [];
 
-  return { cardIssuer, isValid: !!errorMessage, errorMessage, updateValue: handleUpdateValue };
+    if (!validateFilledValue(value)) newError.push('empty');
+    if (!validateCorrectIssuer(value)) newError.push('issuer');
+
+    setError(newError[0] ? newError : null);
+  };
+
+  useEffect(() => {
+    validateIssuerValue(issuerValue);
+  }, [issuerValue]);
+
+  return {
+    validationFirstErrorMessage: error ? errorMessages[error[0]] : null,
+    validationResult: {
+      isFilledValue: isValid<ErrorMessageKey>('empty', error),
+      isValidIssuer: isValid<ErrorMessageKey>('issuer', error),
+    },
+  };
 }
