@@ -1,17 +1,16 @@
 import { useState } from "react";
 
-const useInput = <T extends object>(initialValue: T) => {
-  const [inputValue, setInputValue] = useState<T>(initialValue);
+const useInput = (initialValue: string) => {
+  const [inputValue, setInputValue] = useState(initialValue);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target !== e.currentTarget) return;
-    const { name, value } = e.target;
+    const { value } = e.target;
 
-    updateByNameAndValue(name, value);
+    updateByNameAndValue(value);
   };
 
-  const updateByNameAndValue = (name: string, value: string) =>
-    setInputValue((prev) => ({ ...prev, [name]: value }));
+  const updateByNameAndValue = (value: string) => setInputValue(value);
 
   return { inputValue, handleInputChange, updateByNameAndValue } as const;
 };
