@@ -20,8 +20,9 @@ export const ModalWrapper = styled.section<{
   transform: translateX(-50%);
   margin: 0;
   padding: 0;
-  background-color: white;
+  width: 40%;
   height: fit-content;
+  background-color: white;
   box-sizing: border-box;
   border: none;
 
@@ -48,9 +49,46 @@ export const ModalWrapper = styled.section<{
 
 export const ModalHeader = styled.header`
   display: flex;
-  margin: 0;
-  justify-content: space-between;
+  margin: 15px 5px;
+  height: 15%;
   align-items: center;
+  justify-content: space-between;
   padding: 0 1rem;
   font-weight: bold;
+`;
+
+export const ModalTitle = styled.span`
+  font-size: 1.2em;
+  text-align: center;
+`;
+
+export const ModalCloseButton = styled.button`
+  border: none;
+  background-color: transparent;
+
+  &:hover {
+    border: none;
+  }
+`;
+
+export const ModalLongButton = styled.button`
+  border: none;
+  color: white;
+  background-color: #333333;
+  font-weight: bold;
+  width: 85%;
+
+  &:hover {
+    border: none;
+  }
+`;
+
+export const ModalContent = styled.main`
+  margin: 20px 30px;
+  min-height: 40%;
+  overflow-wrap: break-word;
+`;
+
+export const ModalFooter = styled.footer`
+  margin: 15px 5px;
 `;
