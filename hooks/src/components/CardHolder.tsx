@@ -1,24 +1,54 @@
+import { ChangeEvent, useState } from 'react';
 import { useCardHolder } from '../lib';
+import { UseCardHolderProps } from '../lib/useCardHolder';
 
-const useCardHolderProps = {
-  validationErrorMessages: {
+const useCardHolderProps = (cardHolder: string): UseCardHolderProps => ({
+  cardHolder,
+  errorMessages: {
     alphabet: '알파벳만 입력해주세요.',
     empty: '소유자 이름을 입력해주세요.',
+    length: '소유자 이름은 10자 이하로만 작성하실 수 있어요.',
   },
-  validations: {
-    alphabet: {
-      isOnlyUpperCase: true,
-      isNeedChangeUpperCase: false,
-    },
+  validation: {
+    maxLength: 10,
+    isOnlyUpperCase: false,
   },
-};
+
+  isNeedValidValue: true,
+  isNeedUpperCase: true,
+});
+
 export default function CardHolder() {
-  const cardHolderResult = useCardHolder(useCardHolderProps);
+  const [value, setValue] = useState('');
+  const [showError, setShowError] = useState(false);
+
+  const { validationFirstErrorMessage, formattedValue, validationResult } = useCardHolder(useCardHolderProps(value));
+  const { isFilledValue, isValidAlphabet, isValidLength } = validationResult;
+
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setValue(e.target.value);
+    setShowError(true);
+  };
+
+  const handleBlur = (e: ChangeEvent<HTMLInputElement>) => {
+    setValue(e.target.value);
+    setShowError(true);
+  };
+
+  const className = showError && !(isFilledValue && isValidAlphabet && isValidLength) ? 'error' : undefined;
+
   return (
     <div>
       <h3>card holder</h3>
-      <input value={cardHolderResult.cardHolder} type="text" maxLength={50} onChange={cardHolderResult.handleChange} />
-      <div>오류 :{cardHolderResult.errorMessage}</div>
+      <input
+        data-testid="card-holder-input"
+        className={className}
+        value={formattedValue}
+        type="text"
+        onChange={handleChange}
+        onBlur={handleBlur}
+      />
+      <div data-testid="card-holder-error">{showError && validationFirstErrorMessage}</div>
     </div>
   );
 }

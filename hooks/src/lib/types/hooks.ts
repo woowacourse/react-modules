@@ -1,5 +1,4 @@
 /**
-import { UseCardModuleProps } from './../../../dist/lib/types/hooks.d';
  * @typedef {Object} UseCardModuleProps
  * @template E - 유효성 검사시, 검사 항목에 대한  오류 메세지 객체(validationErrorMessages ) 타입
  * @template V - 유효성 검사 규칙을 정의하는 객체(validations) 타입
@@ -11,3 +10,16 @@ export type UseCardModuleProps<E, V = undefined> = {
 } & (V extends undefined ? {} : { validations: V });
 
 export type ErrorMessage = string | null;
+
+/**
+ * @template  T - validationResult 타입
+ * @template  V -formattedValue 타입
+ * @property {string} validationErrorMessage -유효성 검사 결과에 따른 오류 메세지
+ * @property {T} validationResult - 유효성 검사 결과
+ * @property {V}  유효성 검사를 통과한 후 특정 형식으로 변형된 값을 나타내는 변수명으로 유저가 module의 props로 지정한 변수 변경 여부에 따라 다른 값을 내보낸다.(유효하지 않으면 입력값이 없기를 바란다면 '', 대문자로만 반환되기를 바란다면 대문자로 변경된다.)
+ */
+export interface UseCardModuleReturn<T, V> {
+  validationFirstErrorMessage: ErrorMessage;
+  validationResult: T;
+  formattedValue: V;
+}

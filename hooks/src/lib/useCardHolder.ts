@@ -1,68 +1,99 @@
-import { ChangeEvent, useState, FocusEvent } from 'react';
-import { ALPHABET_REGEXP, ONLY_UPPER_CASE_ALPHABET_REGEXP } from './contexts';
+import { useEffect, useState } from 'react';
+import { ALPHABET_REGEXP, ONLY_UPPER_CASE_ALPHABET_REGEXP } from './constants';
 import { validateFilledValue } from './utils/validators';
-import { ErrorMessage, UseCardModuleProps } from './types';
-import useCardValidation from './useCardValidation';
+import { UseCardModuleReturn } from './types';
+import { CARD_HOLDER_MAX_LENGTH, INVALID_INPUT_VALUE } from './constants/system';
+import { sliceText } from './utils/textFormatter';
 
-interface CardHolderValidationErrorMessages {
+export interface CardHolderValidationErrorMessages {
   empty: string;
   alphabet: string;
+  length: string;
 }
-
-/**
- * @property {{isOnlyUpperCase: boolean;isNeedChangeUpperCase: boolean;}} alphabet : 카드 소유자의 이름에 대한 유호성 검사 조건으로 오직 대문자로만 입력을 받을 거라면 isOnlyUpperCase 는 true값을, 그렇지 않다면 false 값을 가져야한다. 만약 대문자로 변환된 대문자를 받고 싶다면 isNeedChangeUpperCase를 true로 설정한다.
- */
-interface CardHolderValidation {
-  alphabet: {
+export interface UseCardHolderProps {
+  cardHolder: string;
+  errorMessages: CardHolderValidationErrorMessages;
+  validation: {
     isOnlyUpperCase: boolean;
-    isNeedChangeUpperCase: boolean;
+    maxLength?: number;
   };
+  isNeedValidValue: boolean;
+  isNeedUpperCase: boolean;
 }
+export interface UseCardHolderResult {
+  isFilledValue: boolean;
+  isValidAlphabet: boolean;
+  isValidLength: boolean;
+}
+export type UseCardHolderReturn = UseCardModuleReturn<UseCardHolderResult, string>;
 
-type UseCardHolderProps = UseCardModuleProps<CardHolderValidationErrorMessages, CardHolderValidation>;
+export default function useCardHolder(props: UseCardHolderProps): UseCardHolderReturn {
+  const { cardHolder, errorMessages, validation, isNeedValidValue, isNeedUpperCase } = props;
 
-export default function useCardHolder({ validationErrorMessages, validations: { alphabet } }: UseCardHolderProps) {
-  const [cardHolder, setCardHolder] = useState('');
-  const [errorMessage, setErrorMessage] = useState<ErrorMessage>(null);
+  type ErrorMessageKey = keyof typeof errorMessages;
+  type Error = ErrorMessageKey[] | null;
 
+  const [error, setError] = useState<Error>(null);
+  const maxLength = validation.maxLength || CARD_HOLDER_MAX_LENGTH;
   /**
-   * 카드 소유자 이름의 입력값이 있을때, 해당 입력값이 알파벳으로 이루저 졌는지 검사
+   * 카드 소유자 이름에 대한 입력값이 알파벳으로 이루저 졌는지 검사
    * validation.alphabet의 isOnlyUpperCase 값에 따라 알파벳 대문자로만 이루어져야하는지, 대소문자 상관없이 알파벳으로만 이루어지면 되는 지 검사
    * @param value : 검사할 사용자 이름
    * @returns 유효성 검사 통과 여부
    */
   const validateAlphabeticString = (value: string) => {
-    const regExp = alphabet.isOnlyUpperCase ? ONLY_UPPER_CASE_ALPHABET_REGEXP : ALPHABET_REGEXP;
-    return !value || regExp.test(value);
+    const regExp = validation.isOnlyUpperCase ? ONLY_UPPER_CASE_ALPHABET_REGEXP : ALPHABET_REGEXP;
+    return regExp.test(value);
   };
 
-  const changeEventValidators = [{ test: validateAlphabeticString, errorMessage: validationErrorMessages.alphabet }];
-  const blurEventValidators = [{ test: validateFilledValue, errorMessage: validationErrorMessages.empty }];
-  const totalValidators = [blurEventValidators[0], ...changeEventValidators, blurEventValidators[1]];
+  const validateMexLength = (value: string) => value.length <= maxLength;
 
-  const { handleValidationChange, handleValidationBlur, handleUpdateValue } = useCardValidation<string>({
-    blurEventValidators,
-    changeEventValidators,
-    totalValidators,
-    setValue: setCardHolder,
-    setErrorMessage,
-  });
+  const validateInputValue = (value: string) => {
+    const newError: ErrorMessageKey[] = [];
 
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    handleValidationChange(e.target.value);
+    if (!validateFilledValue(value)) {
+      newError.push('empty');
+    }
+    if (!validateAlphabeticString(value)) {
+      newError.push('alphabet');
+    }
+    if (!validateMexLength(value)) {
+      newError.push('length');
+    }
+
+    setError(newError[0] ? newError : null);
   };
 
-  const handleBlur = (e: FocusEvent<HTMLInputElement>) => {
-    handleValidationBlur(e.target.value);
+  const changeUpperCase = (value: string) => (isNeedUpperCase ? value.toUpperCase() : value);
+
+  /**
+   *  유요한 값만 input에 나타나기를 원하는 경우(isNeedValidValue===true), length에 대한 검사를 제외한 오류가 있을 경우 input의 value를 빈문자열로 변경한다.
+   * @param value input value
+   * @param error 유효성 검사 결과
+   * @returns 변경된 글자
+   */
+  const getFormattedValue = (value: string) => {
+    const slicedText = sliceText(value, maxLength);
+
+    if (isNeedValidValue) {
+      return error && !error.includes('length') ? INVALID_INPUT_VALUE : changeUpperCase(slicedText);
+    }
+    return changeUpperCase(slicedText);
   };
+
+  const isValid = (key: ErrorMessageKey) => (error ? !error.includes(key) : true);
+
+  useEffect(() => {
+    validateInputValue(cardHolder);
+  }, [cardHolder]);
 
   return {
-    cardHolder: cardHolder.toUpperCase(),
-    setCardHolder,
-    isValid: !!errorMessage,
-    errorMessage,
-    handleChange,
-    handleBlur,
-    updateValue: handleUpdateValue,
+    validationFirstErrorMessage: error ? errorMessages[error[0]] : null,
+    validationResult: {
+      isFilledValue: isValid('empty'),
+      isValidAlphabet: isValid('alphabet'),
+      isValidLength: isValid('length'),
+    },
+    formattedValue: getFormattedValue(cardHolder),
   };
 }
