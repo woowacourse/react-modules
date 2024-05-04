@@ -1,60 +1,67 @@
 import { render, screen, fireEvent } from '@testing-library/react';
-import { CardPassword } from '../components';
 import '@testing-library/jest-dom';
 
-describe('CardPassword', () => {
+import { CardPassword } from '../components';
+
+describe('Card비밀번호', () => {
   it('초기 상태 확인', () => {
     render(<CardPassword />);
-    const input = screen.getByRole('textbox');
-    const errorMessage = screen.getByText('오류:');
+
+    const input = screen.getByTestId('card-password-input');
+    const errorMessage = screen.getByTestId('card-password-error');
 
     expect(input).toHaveValue('');
-    expect(errorMessage).toHaveTextContent('오류:');
+    expect(errorMessage).toBeEmptyDOMElement();
   });
-
-  it('비밀번호로 숫자가 아닌 문자는 입력할 수 없다.', () => {
-    const invalidInputs = ['ab', '*', '1a', '%!'];
-
-    test.each(invalidInputs)('입력 값 "%s"는 유효하지 않다', (invalidInput) => {
+  describe('비밀번호는 숫자가 아닌 문자를 입력할 수 없으며 숫자 외의 문자를 입력하면 오류 메세지가 표시된다.', () => {
+    test.each(['%!', '하나둘', 'one'])('입력 값 "%s"는 유효하지 않다', (invalidInput) => {
       render(<CardPassword />);
-      const input = screen.getByRole('textbox');
-      const errorMessage = screen.getByText('오류:');
+
+      const input = screen.getByTestId('card-password-input');
 
       fireEvent.change(input, { target: { value: invalidInput } });
 
-      expect(errorMessage).toHaveTextContent('숫자만 입력가능해요.');
+      expect(input).toHaveValue('');
+
+      const errorMessage = screen.getByTestId('card-password-error');
+      expect(errorMessage).toHaveTextContent('숫자만 입력 가능해요.');
     });
   });
 
-  it('비밀번호는 2자리로 입력되어야 한다.', () => {
+  it('비밀번호는 반드시 입력되어야 한다. 입력값이 없으면 오류 메세지가 표시된다.', () => {
     render(<CardPassword />);
-    const input = screen.getByRole('textbox');
-    const errorMessage = screen.getByText('오류:');
 
-    fireEvent.change(input, { target: { value: '123' } });
-    fireEvent.blur(input);
-
-    expect(errorMessage).toHaveTextContent('2자리만 입력가능해요.');
-  });
-
-  it('비밀번호는 반드시 입력되어야 한다.', () => {
-    render(<CardPassword />);
-    const input = screen.getByRole('textbox');
-    const errorMessage = screen.getByText('오류:');
+    const input = screen.getByTestId('card-password-input');
 
     fireEvent.focus(input);
     fireEvent.blur(input);
 
-    expect(errorMessage).toHaveTextContent('비밀번호를 입력해 주세요.');
+    const errorMessage = screen.getByTestId('card-password-error');
+    expect(errorMessage).toHaveTextContent('값을 입력해주세요.');
   });
 
-  it('비밀번호 input에 유효한 값을 입력할 수 있다.', () => {
+  describe('비밀번호는 두자리여야 한다. 그렇지 않을 경우 오류 메세지가 표시된다.', () => {
+    test.each(['123', '2'])('입력 값 "%s"는 유효하지 않다', (invalidInput) => {
+      render(<CardPassword />);
+
+      const input = screen.getByTestId('card-password-input');
+
+      fireEvent.change(input, { target: { value: invalidInput } });
+
+      const errorMessage = screen.getByTestId('card-password-error');
+      expect(errorMessage).toHaveTextContent('두자리 숫자여야 합니다.');
+    });
+  });
+
+  it('유효한 입력값일 경우 오류 메세지가 없다.', () => {
     render(<CardPassword />);
-    const input = screen.getByRole('textbox');
+
+    const input = screen.getByTestId('card-password-input');
 
     fireEvent.change(input, { target: { value: '12' } });
     fireEvent.blur(input);
 
-    expect(input).toHaveValue('12');
+    const errorMessage = screen.getByTestId('card-password-error');
+    expect(errorMessage).toBeEmptyDOMElement();
   });
 });
