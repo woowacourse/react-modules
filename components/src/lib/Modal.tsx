@@ -2,11 +2,14 @@ import styled from "@emotion/styled";
 import CloseIcon from "./assets/close-icon.png";
 import { useEffect } from "react";
 import useModalContext, { ModalContext } from "./useModalContext";
-
-interface ModalProps extends React.HTMLAttributes<HTMLDivElement> {
-  onClose: () => void;
-  isOpen: boolean;
-}
+import {
+  ModalButtonProps,
+  ModalCloseButtonProps,
+  ModalContentProps,
+  ModalDimmerProps,
+  ModalPosition,
+  ModalProps,
+} from "./modalProps";
 
 export default function Modal({ children, isOpen, onClose }: ModalProps) {
   useEffect(() => {
@@ -31,22 +34,17 @@ Modal.CloseButton = ModalCloseButton;
 Modal.Button = ModalButton;
 Modal.Content = ModalContent;
 
-function ModalDimmer(attributes: React.HTMLAttributes<HTMLDivElement>) {
+function ModalDimmer(attributes: ModalDimmerProps) {
   const { onClose } = useModalContext();
   return <S.ModalDimmer onClick={onClose} {...attributes}></S.ModalDimmer>;
 }
 
-function ModalCloseButton(attributes: React.HTMLAttributes<HTMLButtonElement>) {
+function ModalCloseButton(attributes: ModalCloseButtonProps) {
   const { onClose } = useModalContext();
   return <S.ModalCloseButton onClick={onClose} {...attributes} />;
 }
 
-type ModalTheme = "dark" | "light";
-function ModalButton({
-  children,
-  theme = "dark",
-  ...attributes
-}: React.HTMLAttributes<HTMLButtonElement> & { theme: ModalTheme }) {
+function ModalButton({ children, theme = "dark", ...attributes }: ModalButtonProps) {
   return (
     <S.ModalButton $theme={theme} {...attributes}>
       {children}
@@ -54,12 +52,7 @@ function ModalButton({
   );
 }
 
-type ModalPosition = "center" | "bottom";
-function ModalContent({
-  position = "center",
-  children,
-  ...attributes
-}: React.HTMLAttributes<HTMLDivElement> & { position?: ModalPosition }) {
+function ModalContent({ position = "center", children, ...attributes }: ModalContentProps) {
   return (
     <S.ModalContent $position={position} {...attributes}>
       {children}
