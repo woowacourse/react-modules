@@ -1,6 +1,6 @@
-import { useState } from "react";
-import ValidationResult from "../types/ValidationResult";
-import Validation from "../utils/Validation";
+import { useState } from 'react';
+import ValidationResult from '../types/ValidationResult';
+import Validation from '../utils/Validation';
 
 interface ExpiryDate {
   month: string;
@@ -14,11 +14,9 @@ interface ExpiryDateValidationResult {
 }
 
 export default function useCardExpiryDate(
-  initialValue?: ExpiryDate
+  initialValue: ExpiryDate = { month: '', year: '' },
 ): ExpiryDateValidationResult {
-  const [expiryDate, setExpiryDate] = useState(
-    initialValue ?? { month: "", year: "" }
-  );
+  const [expiryDate, setExpiryDate] = useState(initialValue);
   const [validationResult, setValidationResult] = useState<ValidationResult>({
     isValid: true,
   });
@@ -29,8 +27,7 @@ export default function useCardExpiryDate(
     if (!validateExpireMonth(value.month)) {
       setValidationResult({
         isValid: false,
-        errorMessage:
-          "유효 기간의 월은 01 ~ 12 사이의 2자리 숫자로 입력하셔야 합니다.",
+        errorMessage: '유효 기간의 월은 01 ~ 12 사이의 2자리 숫자로 입력하셔야 합니다.',
       });
       return;
     }
@@ -38,7 +35,7 @@ export default function useCardExpiryDate(
     if (!validateExpireYear(value.year)) {
       setValidationResult({
         isValid: false,
-        errorMessage: "유효 기간의 연도는 2자리 숫자로 입력하셔야 합니다.",
+        errorMessage: '유효 기간의 연도는 2자리 숫자로 입력하셔야 합니다.',
       });
       return;
     }
@@ -46,7 +43,7 @@ export default function useCardExpiryDate(
     if (!validateExpiryDate(value)) {
       setValidationResult({
         isValid: false,
-        errorMessage: "유효 기간이 만료되었습니다. 확인 후 다시 입력해 주세요.",
+        errorMessage: '유효 기간이 만료되었습니다. 확인 후 다시 입력해 주세요.',
       });
       return;
     }
@@ -68,10 +65,7 @@ function validateExpiryDate(value: ExpiryDate) {
   const inputMonth = parseInt(value.month, 10);
   const inputYear = parseInt(value.year, 10);
 
-  return (
-    inputYear > currentYear ||
-    (inputYear === currentYear && inputMonth >= currentMonth)
-  );
+  return inputYear > currentYear || (inputYear === currentYear && inputMonth >= currentMonth);
 }
 
 function validateExpireMonth(month: string) {

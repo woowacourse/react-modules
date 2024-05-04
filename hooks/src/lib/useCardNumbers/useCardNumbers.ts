@@ -15,15 +15,10 @@ export default function useCardNumbers(
   initialValues: CardNumbersType = ['', '', '', ''],
 ): CardNumbersValidationResult {
   const [cardNumbers, setCardNumbers] = useState<CardNumbersType>(initialValues);
-  const [validStates, setValidStates] = useState<CardNumbersValidStatesType>([
-    true,
-    true,
-    true,
-    true,
-  ]);
-  const [validationResult, setValidationResult] = useState<ValidationResult>({
-    isValid: true,
-  });
+  const [validStates, setValidStates] = useState<CardNumbersValidStatesType>(
+    initialValues.map((value) => validateCardNumber(value)) as CardNumbersValidStatesType,
+  );
+  const [validationResult, setValidationResult] = useState<ValidationResult>({ isValid: true });
 
   const updateCardNumbers = (inputIndex: number, value: string) => {
     setCardNumbers((prev) => {
