@@ -10,3 +10,7 @@ export const validateNumber = (value: string) => {
 export const validateLength = (value: string, length: number) => {
   return value.length === length;
 };
+
+export const isValid = <K>(key: K, error: K[] | null): boolean => {
+  return error ? !error.includes(key) : true;
+};

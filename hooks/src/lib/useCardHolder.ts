@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { ALPHABET_REGEXP, ONLY_UPPER_CASE_ALPHABET_REGEXP } from './constants';
-import { validateFilledValue } from './utils/validators';
+import { isValid, validateFilledValue } from './utils/validators';
 import { UseCardModuleReturn } from './types';
 import { CARD_HOLDER_MAX_LENGTH, INVALID_INPUT_VALUE } from './constants/system';
 import { sliceText } from './utils/textFormatter';
@@ -81,8 +81,6 @@ export default function useCardHolder(props: UseCardHolderProps): UseCardHolderR
     return changeUpperCase(slicedText);
   };
 
-  const isValid = (key: ErrorMessageKey) => (error ? !error.includes(key) : true);
-
   useEffect(() => {
     validateInputValue(cardHolder);
   }, [cardHolder]);
@@ -90,9 +88,9 @@ export default function useCardHolder(props: UseCardHolderProps): UseCardHolderR
   return {
     validationFirstErrorMessage: error ? errorMessages[error[0]] : null,
     validationResult: {
-      isFilledValue: isValid('empty'),
-      isValidAlphabet: isValid('alphabet'),
-      isValidLength: isValid('length'),
+      isFilledValue: isValid<ErrorMessageKey>('empty', error),
+      isValidAlphabet: isValid<ErrorMessageKey>('alphabet', error),
+      isValidLength: isValid<ErrorMessageKey>('length', error),
     },
     formattedValue: getFormattedValue(cardHolder),
   };
