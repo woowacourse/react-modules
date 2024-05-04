@@ -1,4 +1,10 @@
-import { useRef, useEffect, HTMLAttributes, CSSProperties } from "react";
+import {
+  useRef,
+  useEffect,
+  HTMLAttributes,
+  CSSProperties,
+  ButtonHTMLAttributes,
+} from "react";
 
 import * as Styled from "./Modal.styled";
 
@@ -13,8 +19,8 @@ export interface ModalProps extends React.PropsWithChildren {
 const Modal: React.FC<ModalProps> & {
   ModalHeader: ModalHeaderType;
   ModalTitle: ModalTitleType;
-  ModalCloseButton: ModalCloseButtonType;
-  ModalLongButton: ModalLongButtonType;
+  ModalCloseButton: ModalButtonType;
+  ModalLongButton: ModalButtonType;
   ModalContent: ModalContentType;
   ModalFooter: ModalFooterType;
 } = ({ children, isOpen, position, ...restProps }) => {
@@ -82,39 +88,17 @@ const ModalTitle: ModalTitleType = ({ children, ...restProps }) => {
   return <Styled.ModalTitle {...restProps}>{children}</Styled.ModalTitle>;
 };
 
-type ModalCloseButtonType = React.FC<{
-  children: React.ReactNode;
-  onClick?: React.MouseEventHandler<HTMLButtonElement>;
-}>;
+type ModalButtonType = React.FC<ButtonHTMLAttributes<HTMLButtonElement>>;
 
-const ModalCloseButton: ModalCloseButtonType = ({
-  children,
-  onClick,
-  ...restProps
-}) => {
-  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-    if (onClick) onClick(event);
-  };
-
+const ModalCloseButton: ModalButtonType = ({ children, ...restProps }) => {
   return (
-    <Styled.ModalCloseButton type="button" onClick={handleClick} {...restProps}>
-      {children}
-    </Styled.ModalCloseButton>
+    <Styled.ModalCloseButton {...restProps}>{children}</Styled.ModalCloseButton>
   );
 };
 
-type ModalLongButtonType = React.FC<{
-  children: React.ReactNode;
-  onClick?: React.MouseEventHandler<HTMLButtonElement>;
-}>;
-
-const ModalLongButton: ModalLongButtonType = ({
-  children,
-  onClick,
-  ...restProps
-}) => {
+const ModalLongButton: ModalButtonType = ({ children, ...restProps }) => {
   return (
-    <Styled.ModalLongButton type="button" onClick={onClick} {...restProps}>
+    <Styled.ModalLongButton type="button" {...restProps}>
       {children}
     </Styled.ModalLongButton>
   );
