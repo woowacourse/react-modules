@@ -25,7 +25,7 @@ const Modal = ({
   buttonClick,
 }: ModalProps) => {
   return (
-    <div className="modal">
+    <div className="darr-modal">
       <div className="modal-backdrop" onClick={closeModal}></div>
       <div className={`modal-inner ${position}`}>
         <div className="modal-top">
