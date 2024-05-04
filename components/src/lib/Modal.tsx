@@ -8,10 +8,19 @@ import {
   ModalContentProps,
   ModalDimmerProps,
   ModalPosition,
-  ModalProps,
+  ModalMainProps,
 } from "./modalProps";
 
-export default function Modal({ children, isOpen, onClose }: ModalProps) {
+const Modal = Object.assign(ModalMain, {
+  Dimmer: ModalDimmer,
+  CloseButton: ModalCloseButton,
+  Button: ModalButton,
+  Content: ModalContent,
+});
+
+export default Modal;
+
+function ModalMain({ children, isOpen, onClose }: ModalMainProps) {
   useEffect(() => {
     const handleModalKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
@@ -28,11 +37,6 @@ export default function Modal({ children, isOpen, onClose }: ModalProps) {
     </ModalContext.Provider>
   );
 }
-
-Modal.Dimmer = ModalDimmer;
-Modal.CloseButton = ModalCloseButton;
-Modal.Button = ModalButton;
-Modal.Content = ModalContent;
 
 function ModalDimmer(attributes: ModalDimmerProps) {
   const { onClose } = useModalContext();

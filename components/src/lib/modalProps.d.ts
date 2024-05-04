@@ -1,4 +1,4 @@
-export interface ModalProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface ModalMainProps extends React.HTMLAttributes<HTMLDivElement> {
   onClose: () => void;
   isOpen: boolean;
 }
