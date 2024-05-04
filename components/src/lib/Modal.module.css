@@ -1,0 +1,90 @@
+/* ModalMain */
+.ModalContainer {
+  display: none;
+  word-break: break-all;
+
+  &.isOpen {
+    display: block;
+  }
+}
+
+/* ModalDimmer */
+.ModalDimmer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: #00000059;
+}
+
+/* ModalContent */
+.ModalContent {
+  border-radius: 8px;
+  position: fixed;
+  background-color: white;
+  padding: 24px 32px;
+  box-sizing: border-box;
+  max-height: 95vh;
+  overflow: scroll;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  &.center {
+    top: 50%;
+    left: 50%;
+    width: 304px;
+    transform: translate(-50%, -50%);
+  }
+
+  &.bottom {
+    box-sizing: border-box;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+}
+
+/* ModalCloseButton */
+.ModalCloseButton {
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  background-image: url(./assets/close-icon.png);
+  background-size: contain;
+  width: 14px;
+  height: 14px;
+  padding: 5px;
+  margin-left: 10px;
+  position: absolute;
+  top: 24px;
+  right: 32px;
+}
+
+/* ModalButton */
+.ModalButton {
+  width: 100%;
+  min-height: 44px;
+  height: fit-content;
+  border: 0;
+  border-radius: 5px;
+  padding: 13px 10px;
+  font-weight: 700;
+  font-size: 15px;
+  align-items: center;
+  cursor: pointer;
+
+  &.dark {
+    background-color: #333333;
+    color: #ffffff;
+  }
+
+  &.light {
+    background-color: #ffffff;
+    color: #8b95a1;
+  }
+}
