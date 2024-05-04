@@ -1,5 +1,5 @@
-import { render, screen, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom';
+import { render, screen, fireEvent } from '@testing-library/react';
 
 import { CardPassword } from '../components';
 
@@ -21,9 +21,8 @@ describe('Card비밀번호', () => {
 
       fireEvent.change(input, { target: { value: invalidInput } });
 
-      expect(input).toHaveValue('');
-
       const errorMessage = screen.getByTestId('card-password-error');
+      expect(input).toHaveValue('');
       expect(errorMessage).toHaveTextContent('숫자만 입력 가능해요.');
     });
   });

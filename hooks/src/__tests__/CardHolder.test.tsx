@@ -1,26 +1,29 @@
-import { render, screen, fireEvent } from '@testing-library/react';
-import { CardHolder } from '../components';
 import '@testing-library/jest-dom';
+import { render, screen, fireEvent } from '@testing-library/react';
+
+import { CardHolder } from '../components';
 
 describe('CardHolder', () => {
   it('초기 상태 확인', () => {
     render(<CardHolder />);
+
     const input = screen.getByTestId('card-holder-input');
     const errorMessage = screen.getByTestId('card-holder-error');
 
     expect(input).toHaveValue('');
-    expect(errorMessage).toHaveTextContent('');
+    expect(errorMessage).toBeEmptyDOMElement();
   });
 
   describe('카드 소유자 이름은 알파벳이 아닌 문자를 입력할 수 없으며 이를 시도하면 오류 메세지가 뜬다.', () => {
     test.each(['%!', '123', '바다와 렛서'])('입력 값 "%s"는 유효하지 않다', (invalidInput) => {
       render(<CardHolder />);
+
       const input = screen.getByTestId('card-holder-input');
 
       fireEvent.change(input, { target: { value: invalidInput } });
 
-      expect(input).toHaveValue('');
       const errorMessage = screen.getByTestId('card-holder-error');
+      expect(input).toHaveValue('');
       expect(errorMessage).toHaveTextContent('알파벳만 입력해주세요.');
     });
   });
@@ -43,9 +46,8 @@ describe('CardHolder', () => {
     fireEvent.change(input, { target: { value: 'JOHN DOE' } });
     fireEvent.blur(input);
 
-    expect(input).toHaveValue('JOHN DOE');
-
     const errorMessage = screen.getByTestId('card-holder-error');
+    expect(input).toHaveValue('JOHN DOE');
     expect(errorMessage).toBeEmptyDOMElement();
   });
 });
