@@ -1,12 +1,52 @@
-# 컴포넌트
+# 페이먼츠 컴포넌트
 
-### 모달 컴포넌트
+## 📦 Modal
 
-- [x] 모달 컴포넌트를 npm으로 배포하고 사용할 수 있어야 한다.
-- [x] 피그마 시안 예시처럼 모바일에서 사용 가능한 모달 컴포넌트를 만들어야 한다.
-- [x] 모달 위치 및 내용 구성 옵션을 `prop`으로 전달받아 유연하게 모달을 구성할 수 있어야 한다.
-  - [x] position : `center`, `bottom`을 입력 받아 모달의 위치 지정
-  - [x] title: 모달에 사용되는 제목 입력
-  - [x] isCloseButton: 닫기 버튼 유무에 따라 `boolean` 값 입력
-- [x] 사용자 정의 이벤트 핸들러를 지원해야 한다.
-  - [x] 모달 닫기 이벤트 핸들러 구현
+페이먼츠 모달 컴포넌트입니다.
+
+### install
+
+```
+npm install nakta-react-payments-components
+```
+
+### attribute
+
+- `position`: `bottom | center` 입력 값에 따라 모달 중앙, 하단 배치
+- `title`: 모달 제목 입력
+- `onClose`: 모달 닫기 함수 전달
+- `isCloseButton`: 모달 닫기 버튼 유무 입력
+- `children`: 하위 요소 전달
+
+### QuickStart
+
+```javascript
+import React, { useState } from 'react';
+import 'nakta-react-payments-components/dist/style.css';
+import { Modal } from 'nakta-react-payments-components';
+
+function App() {
+  const [isOpen, setIsOpen] = useState(true);
+
+  const onClick = () => {
+    setIsOpen(true);
+  };
+
+  const onClose = () => {
+    setIsOpen(false);
+  };
+
+  return (
+    <>
+      <button onClick={onClick}>modal open</button>
+      {isOpen && (
+        <Modal position='center' title='제목' onClose={onClose} isCloseButton={true}>
+          <div>모달 내부 내용입니다.</div>
+        </Modal>
+      )}
+    </>
+  );
+}
+
+export default App;
+```
