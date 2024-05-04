@@ -32,7 +32,7 @@ const Modal = ({
       <div className="modal-backdrop" onClick={closeModal}></div>
       <div className={`modal-inner ${position} size-${modalSize}`}>
         <div className="modal-top">
-          <h1 className="modal-title">{title}</h1>
+          <h3 className="modal-title">{title}</h3>
           {closeButton === "img" && (
             <button className="modal-close-btn" onClick={closeModal}>
               <img className="modal-close-img" src={Close} alt="모달 닫기 버튼" />
