@@ -1,4 +1,4 @@
-import * as S from "./Modal.style.tsx";
+import * as S from "./Modal.style.ts";
 import BasicButton, {
   ButtonColorType,
   ButtonSizeType,
@@ -6,11 +6,14 @@ import BasicButton, {
 
 export type ModalPosition = "center" | "bottom";
 
+export type ModalSize = "small" | "large" | "full" | "auto";
+
 export interface ModalMainProps {
   children?: React.ReactNode;
   isOpen: boolean;
   position: ModalPosition;
   onClose: () => void;
+  size?: ModalSize;
 }
 
 export const ModalMain = ({
@@ -18,11 +21,14 @@ export const ModalMain = ({
   isOpen,
   position,
   onClose,
+  size = "auto",
 }: ModalMainProps) => {
   return (
     <S.ModalWrapper open={isOpen}>
       <S.ModalBackground onClick={onClose} />
-      <S.ModalContainer $position={position}>{children}</S.ModalContainer>
+      <S.ModalOuter $position={position} $size={size}>
+        <S.ModalInner>{children}</S.ModalInner>
+      </S.ModalOuter>
     </S.ModalWrapper>
   );
 };
@@ -81,10 +87,11 @@ const StyledButton = ({
 export interface CloseButtonProps {
   label: string;
   onClose: () => void;
+  size?: ButtonSizeType;
 }
 
-const CloseButton = ({ label, onClose }: CloseButtonProps) => {
-  return <BasicButton onClick={onClose} label={label} />;
+const CloseButton = ({ label, onClose, size = "full" }: CloseButtonProps) => {
+  return <BasicButton onClick={onClose} label={label} size={size} />;
 };
 
 const Modal = Object.assign(ModalMain, {
