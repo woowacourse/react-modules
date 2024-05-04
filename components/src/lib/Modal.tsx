@@ -1,3 +1,4 @@
+import COLOR_HEXES from './constants/colorHexes';
 import CloseIcon from './assets/close-icon.png';
 import styled from '@emotion/styled';
 import { useEffect } from 'react';
@@ -56,7 +57,7 @@ const ModalDimmer = styled.div({
   left: 0,
   width: '100vw',
   height: '100vh',
-  backgroundColor: '#00000059',
+  backgroundColor: COLOR_HEXES.blackTransparent1,
 });
 
 const ModalHeader = styled.div({
@@ -124,7 +125,7 @@ const ModalContent = styled.aside<{ position: ModalPosition }>(
     return {
       borderRadius: '8px',
       position: 'fixed',
-      backgroundColor: 'white',
+      backgroundColor: COLOR_HEXES.white,
       padding: '24px 32px',
       ...MODAL_CONTENT_STYLE[position],
     };
@@ -134,7 +135,7 @@ const ModalContent = styled.aside<{ position: ModalPosition }>(
 const ModalConfirmButton = styled.button({
   width: '100%',
   height: '44px',
-  backgroundColor: '#333333',
+  backgroundColor: COLOR_HEXES.gray1,
   border: 0,
   borderRadius: '5px',
 
@@ -142,7 +143,7 @@ const ModalConfirmButton = styled.button({
   fontSize: '15px',
   lineHeight: '21.72px',
   alignItems: 'center',
-  color: 'white',
+  color: COLOR_HEXES.white,
   marginTop: '10px',
   cursor: 'pointer',
 });
