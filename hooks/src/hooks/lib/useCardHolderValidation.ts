@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useEffect, useState } from "react";
 import validator from "./utils/validate";
 import ERROR_MESSAGE from "./constants/errorMessage";
 
@@ -7,38 +7,23 @@ type Props = {
 };
 
 const useCardHolderValidation = ({ cardHolder }: Props) => {
-  const ref = useRef({ isValid: false, errorMessage: "" });
+  const [validationResult, setValidationResult] = useState({ isValid: false, errorMessage: "" });
 
-  if (!validator.isValidEmptyValue(cardHolder)) {
-    ref.current = {
-      isValid: false,
-      errorMessage: ERROR_MESSAGE.EMPTY_VALUE,
-    };
-    return { validationResult: ref.current };
-  }
+  useEffect(() => {
+    let error = { isValid: true, errorMessage: "" };
 
-  if (!validator.isEnglish(cardHolder)) {
-    ref.current = {
-      isValid: false,
-      errorMessage: ERROR_MESSAGE.ONLY_ENGLISH,
-    };
-    return { validationResult: ref.current };
-  }
+    if (!validator.isValidEmptyValue(cardHolder)) {
+      error = { isValid: false, errorMessage: ERROR_MESSAGE.EMPTY_VALUE };
+    } else if (!validator.isEnglish(cardHolder)) {
+      error = { isValid: false, errorMessage: ERROR_MESSAGE.ONLY_ENGLISH };
+    } else if (!validator.isValidLengthRange({ value: cardHolder, maxLength: 21 })) {
+      error = { isValid: false, errorMessage: ERROR_MESSAGE.INVALID_HOLDER_LENGTH };
+    }
 
-  if (!validator.isValidLengthRange({ value: cardHolder, maxLength: 21 })) {
-    ref.current = {
-      isValid: false,
-      errorMessage: ERROR_MESSAGE.INVALID_HOLDER_LENGTH,
-    };
-    return { validationResult: ref.current };
-  }
+    setValidationResult(error);
+  }, [cardHolder]);
 
-  ref.current = {
-    isValid: true,
-    errorMessage: "",
-  };
-
-  return { validationResult: ref.current };
+  return { validationResult };
 };
 
 export default useCardHolderValidation;

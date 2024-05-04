@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useEffect, useState } from "react";
 import validator from "./utils/validate";
 import ERROR_MESSAGE from "./constants/errorMessage";
 
@@ -9,38 +9,23 @@ type Props = {
 const MAX_PASSWORD_LENGTH = 2;
 
 const usePasswordValidation = ({ password }: Props) => {
-  const ref = useRef({ isValid: false, errorMessage: "" });
+  const [validationResult, setValidationResult] = useState({ isValid: true, errorMessage: "" });
 
-  if (!validator.isValidEmptyValue(password)) {
-    ref.current = {
-      isValid: false,
-      errorMessage: ERROR_MESSAGE.EMPTY_VALUE,
-    };
-    return { validationResult: ref.current };
-  }
+  useEffect(() => {
+    let error = { isValid: true, errorMessage: "" };
 
-  if (!validator.isValidDigit(password)) {
-    ref.current = {
-      isValid: false,
-      errorMessage: ERROR_MESSAGE.ONLY_NUMBER,
-    };
-    return { validationResult: ref.current };
-  }
+    if (!validator.isValidEmptyValue(password)) {
+      error = { isValid: false, errorMessage: ERROR_MESSAGE.EMPTY_VALUE };
+    } else if (!validator.isValidDigit(password)) {
+      error = { isValid: false, errorMessage: ERROR_MESSAGE.ONLY_NUMBER };
+    } else if (!validator.isValidLength({ value: password, matchedLength: MAX_PASSWORD_LENGTH })) {
+      error = { isValid: false, errorMessage: ERROR_MESSAGE.INVALID_PASSWORD_LENGTH };
+    }
 
-  if (!validator.isValidLength({ value: password, matchedLength: MAX_PASSWORD_LENGTH })) {
-    ref.current = {
-      isValid: false,
-      errorMessage: ERROR_MESSAGE.INVALID_PASSWORD_LENGTH,
-    };
-    return { validationResult: ref.current };
-  }
+    setValidationResult(error);
+  }, [password]);
 
-  ref.current = {
-    isValid: true,
-    errorMessage: "",
-  };
-
-  return { validationResult: ref.current };
+  return { validationResult };
 };
 
 export default usePasswordValidation;

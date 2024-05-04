@@ -16,35 +16,30 @@ function App() {
   const { validationResult: passwordValidationResult } = usePasswordValidation({ password: password });
 
   const handleCardNumbers = (e: React.ChangeEvent<HTMLInputElement>, index: number) => {
-    const inputValue = e.target.value;
-    const newCardNumbers = cardNumbers.map((cardNumber, i) => {
-      return i === index ? inputValue : cardNumber;
-    });
-
-    setCardNumbers(newCardNumbers);
+    setCardNumbers(
+      cardNumbers.map((cardNumber, i) => {
+        return i === index ? e.target.value : cardNumber;
+      })
+    );
   };
 
   const handleExpiryChange = (e: React.ChangeEvent<HTMLInputElement>, field: "month" | "year") => {
-    const inputValue = e.target.value;
     setExpiryDate((prevState) => ({
       ...prevState,
-      [field]: inputValue,
+      [field]: e.target.value,
     }));
   };
 
   const handleCardHolderChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const inputValue = e.target.value;
-    setCardHolder(inputValue);
+    setCardHolder(e.target.value);
   };
 
   const handleCVCChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const inputValue = e.target.value;
-    setCVC(inputValue);
+    setCVC(e.target.value);
   };
 
   const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const inputValue = e.target.value;
-    setPassword(inputValue);
+    setPassword(e.target.value);
   };
 
   return (

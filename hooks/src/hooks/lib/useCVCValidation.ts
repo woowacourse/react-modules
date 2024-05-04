@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useEffect, useState } from "react";
 import validator from "./utils/validate";
 import ERROR_MESSAGE from "./constants/errorMessage";
 
@@ -9,38 +9,23 @@ type Props = {
 const MAX_CVC_LENGTH = 3;
 
 const useCVCValidation = ({ cvc }: Props) => {
-  const ref = useRef({ isValid: false, errorMessage: "" });
+  const [validationResult, setValidationResult] = useState({ isValid: true, errorMessage: "" });
 
-  if (!validator.isValidEmptyValue(cvc)) {
-    ref.current = {
-      isValid: false,
-      errorMessage: ERROR_MESSAGE.EMPTY_VALUE,
-    };
-    return { validationResult: ref.current };
-  }
+  useEffect(() => {
+    let error = { isValid: true, errorMessage: "" };
 
-  if (!validator.isValidDigit(cvc)) {
-    ref.current = {
-      isValid: false,
-      errorMessage: ERROR_MESSAGE.ONLY_NUMBER,
-    };
-    return { validationResult: ref.current };
-  }
+    if (!validator.isValidEmptyValue(cvc)) {
+      error = { isValid: false, errorMessage: ERROR_MESSAGE.EMPTY_VALUE };
+    } else if (!validator.isValidDigit(cvc)) {
+      error = { isValid: false, errorMessage: ERROR_MESSAGE.ONLY_NUMBER };
+    } else if (!validator.isValidLength({ value: cvc, matchedLength: MAX_CVC_LENGTH })) {
+      error = { isValid: false, errorMessage: ERROR_MESSAGE.INVALID_CVC_LENGTH };
+    }
 
-  if (!validator.isValidLength({ value: cvc, matchedLength: MAX_CVC_LENGTH })) {
-    ref.current = {
-      isValid: false,
-      errorMessage: ERROR_MESSAGE.INVALID_CVC_LENGTH,
-    };
-    return { validationResult: ref.current };
-  }
+    setValidationResult(error);
+  }, [cvc]);
 
-  ref.current = {
-    isValid: true,
-    errorMessage: "",
-  };
-
-  return { validationResult: ref.current };
+  return { validationResult };
 };
 
 export default useCVCValidation;
