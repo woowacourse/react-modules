@@ -1,9 +1,9 @@
 import { render, screen, fireEvent } from '@testing-library/react';
-import Issuer from '../components/Issuer';
-
-describe('Issuer', () => {
+import CardIssuer from '../components/CardIssuer';
+import '@testing-library/jest-dom';
+describe('CardIssuer', () => {
   it('초기 상태 확인', () => {
-    render(<Issuer />);
+    render(<CardIssuer />);
 
     const cardIssuers = ['카카오', '현대', '배민'];
     // 카드 발급사 버튼 존재 확인
@@ -12,11 +12,11 @@ describe('Issuer', () => {
       expect(button).toBeInTheDocument();
     });
     // 오류 메세지 상태 확인
-    const errorMessage = screen.getByText('오류:');
-    expect(errorMessage).toHaveTextContent('오류:카드 발급사 선택해주세요.');
+    const errorMessage = screen.getByTestId('card-issuer-error');
+    expect(errorMessage).toHaveTextContent('');
   });
-  it('유효한 카드사를 선택하면 오류 메세지가 발생하지 않는다', () => {
-    render(<Issuer />);
+  it('유효한 카드사를 선택하면 오류 메세지가 없다', () => {
+    render(<CardIssuer />);
     const cardIssuers = ['카카오', '현대', '배민'];
 
     cardIssuers.forEach((issuer) => {
@@ -24,27 +24,27 @@ describe('Issuer', () => {
 
       fireEvent.click(button);
 
-      const errorMessage = screen.getByText('오류:');
-      expect(errorMessage).toHaveTextContent('오류:');
+      const errorMessage = screen.getByTestId('card-issuer-error');
+      expect(errorMessage).toHaveTextContent('');
     });
   });
   describe('카드사를 선택하지 않은 경우 오류 메세지가 뜬다.', () => {
     it('카드사를 선택하지 않고 닫기 버튼 클릭', () => {
-      render(<Issuer />);
+      render(<CardIssuer />);
       const closeButton = screen.getByRole('button', { name: 'close' });
       fireEvent.click(closeButton);
 
-      const errorMessage = screen.getByText('오류:');
-      expect(errorMessage).toHaveTextContent('오류:카드 발급사 선택해주세요.');
+      const errorMessage = screen.getByTestId('card-issuer-error');
+      expect(errorMessage).toHaveTextContent('카드 발급사 선택해주세요.');
     });
 
     it('fieldset 클릭(버튼이 아닌 경우)', () => {
-      render(<Issuer />);
-      const fieldset = screen.getByRole('group');
+      render(<CardIssuer />);
+      const fieldset = screen.getByTestId('card-issuer-fieldset');
       fireEvent.click(fieldset);
 
-      const errorMessage = screen.getByText('오류:');
-      expect(errorMessage).toHaveTextContent('오류:카드 발급사 선택해주세요.');
+      const errorMessage = screen.getByTestId('card-issuer-error');
+      expect(errorMessage).toHaveTextContent('카드 발급사 선택해주세요.');
     });
   });
 });
