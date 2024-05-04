@@ -9,7 +9,7 @@ import {
   ModalDimmerProps,
   ModalPosition,
   ModalMainProps,
-} from "./modalProps";
+} from "./types/modalProps";
 
 const Modal = Object.assign(ModalMain, {
   Dimmer: ModalDimmer,
@@ -87,8 +87,10 @@ const S = {
   ModalContainer: styled.div<{ $isOpen: boolean }>(({ $isOpen }) => {
     return {
       display: $isOpen ? "block" : "none",
+      wordBreak: "break-all",
     };
   }),
+
   ModalDimmer: styled.div({
     position: "fixed",
     top: 0,
@@ -136,6 +138,11 @@ const S = {
       backgroundColor: "white",
       padding: "24px 32px",
       boxSizing: "border-box",
+      maxHeight: "95vh",
+      overflow: "scroll",
+      "&::-webkit-scrollbar": {
+        display: "none",
+      },
       ...MODAL_CONTENT_STYLE[$position],
     };
   }),
@@ -143,14 +150,17 @@ const S = {
   ModalButton: styled.button<{ $theme: "dark" | "light" }>(({ $theme }) => {
     return {
       width: "100%",
-      height: "44px",
+      minHeight: "44px",
+      height: "fit-content",
       backgroundColor: $theme === "dark" ? "#333333" : "#ffffff",
       border: 0,
       borderRadius: "5px",
 
+      padding: "13px 10px",
       fontWeight: 700,
       fontSize: "15px",
-      lineHeight: "21.72px",
+      // lineHeight: "21.72px",
+
       alignItems: "center",
       color: $theme === "dark" ? "#ffffff" : "#8B95A1",
       cursor: "pointer",
