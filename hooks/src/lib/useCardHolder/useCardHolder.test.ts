@@ -1,38 +1,53 @@
-import { renderHook, act } from "@testing-library/react";
-import useCardHolder from "./useCardHolder";
+import { renderHook, act } from '@testing-library/react';
+import useCardHolder from './useCardHolder';
 
-describe("useCardHolder", () => {
-  const initialValue = "Seongjin Hong";
+describe('useCardHolder', () => {
+  const initialValue = 'Seongjin Hong';
 
-  it("올바른 초기값(initialValue)이 설정되면 그에 맞는 cardHolder를 반환할 수 있어야 한다", () => {
+  it('초기값이 설정되면, cardHolder 상태에 해당 초기값이 저장되어야 한다.', () => {
     const { result } = renderHook(() => useCardHolder(initialValue));
 
     expect(result.current.cardHolder).toBe(initialValue);
   });
 
-  it("올바른 카드 소유자 이름이 handleUpdateCardHolder를 통해 들어오면, 입력값에 따라 카드 소유자 이름이 정확히 업데이트 되어야 한다", async () => {
+  it('영문자가 포함된 새로운 카드 소유자 이름이 handleUpdateCardHolder를 통해 들어오면, validationResult의 isValid가 true로 반환되어야 한다.', () => {
     const { result } = renderHook(() => useCardHolder(initialValue));
 
     act(() => {
-      result.current.handleUpdateCardHolder("Suya Choi");
+      result.current.handleUpdateCardHolder('Suya Choi');
     });
 
-    expect(result.current.cardHolder).toBe("Suya Choi");
+    expect(result.current.cardHolder).toBe('Suya Choi');
     expect(result.current.validationResult).toEqual({ isValid: true });
   });
 
-  it("잘못된 형식의 카드 소유자 이름이 들어오면, validationResult에 에러 여부 및 메시지가 업데이트 되어야 한다", async () => {
+  it('영문자 외에 숫자가 포함된 카드 소유자 이름이 들어오면, validationResult의 isValid가 false로 반환되며 소유자 이름 형식에 따른 에러 메시지가 포함되어야 한다.', () => {
     const { result } = renderHook(() => useCardHolder(initialValue));
 
     act(() => {
-      result.current.handleUpdateCardHolder("Seongjin123");
+      result.current.handleUpdateCardHolder('Seongjin123');
     });
 
     expect(result.current.validationResult.isValid).toBe(false);
-    expect(result.current.cardHolder).toBe("Seongjin123");
+    expect(result.current.cardHolder).toBe('Seongjin123');
     expect(result.current.validationResult).toEqual({
       isValid: false,
-      errorMessage: "영문자만 입력할 수 있습니다.",
+      errorMessage: '영문자만 입력할 수 있습니다.',
+    });
+  });
+
+  it('공백으로 시작되는 카드 소유자 이름이 들어오면, validationResult의 isValid가 false로 반환되며 소유자 이름 형식에 따른 에러 메시지가 포함되어야 한다.', () => {
+    const { result } = renderHook(() => useCardHolder(initialValue));
+
+    act(() => {
+      result.current.handleUpdateCardHolder('  Seongjin');
+    });
+
+    expect(result.current.validationResult.isValid).toBe(false);
+    expect(result.current.cardHolder).toBe('  Seongjin');
+    expect(result.current.validationResult).toEqual({
+      isValid: false,
+      errorMessage: '영문자만 입력할 수 있습니다.',
     });
   });
 });
