@@ -1,4 +1,4 @@
-import { ChangeEvent, KeyboardEvent, FocusEvent, useState } from "react";
+import { ChangeEvent, FocusEvent, useState } from "react";
 import useInput from "../common/useInput";
 import Validator from "../utils/validator";
 import { ERROR_MESSAGE, OPTION } from "../constants";
@@ -45,30 +45,11 @@ const useCardNumber = <T extends object>(initialValue: T) => {
     });
   };
 
-  const handleCardNumberEnter = (e: KeyboardEvent<HTMLInputElement>) => {
-    if (e.target !== e.currentTarget) return;
-    if (e.key !== "Enter") return;
-
-    const { name, value } = e.target as HTMLInputElement;
-    if (!value || !Validator.checkFillNumber(value, OPTION.cardNumberMaxLength))
-      return setValidationResult({
-        isValid: false,
-        errorMessage: ERROR_MESSAGE.cardNumberOutOfRange,
-      });
-
-    updateByNameAndValue(name, value);
-    setValidationResult({
-      isValid: true,
-      errorMessage: "",
-    });
-  };
-
   return {
     inputValue,
     validationResult,
     handleCardNumberChange,
     handleCardNumberBlur,
-    handleCardNumberEnter,
   } as const;
 };
 

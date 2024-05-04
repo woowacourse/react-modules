@@ -1,4 +1,4 @@
-import { ChangeEvent, KeyboardEvent, FocusEvent, useState } from "react";
+import { ChangeEvent, FocusEvent, useState } from "react";
 import useInput from "../common/useInput";
 import Validator from "../utils/validator";
 import { ERROR_MESSAGE, OPTION } from "../constants";
@@ -45,30 +45,11 @@ const useCVC = <T extends object>(initialValue: T) => {
     });
   };
 
-  const handleCvcEnter = (e: KeyboardEvent<HTMLInputElement>) => {
-    if (e.target !== e.currentTarget) return;
-    if (e.key !== "Enter") return;
-
-    const { name, value } = e.target as HTMLInputElement;
-    if (!value || !Validator.checkFillNumber(value, OPTION.cvcMaxLength))
-      return setValidationResult({
-        isValid: false,
-        errorMessage: ERROR_MESSAGE.cvcOutOfRange,
-      });
-
-    updateByNameAndValue(name, value);
-    setValidationResult({
-      isValid: true,
-      errorMessage: "",
-    });
-  };
-
   return {
     inputValue,
     validationResult,
     handleCvcChange,
     handleCvcBlur,
-    handleCvcEnter,
   } as const;
 };
 

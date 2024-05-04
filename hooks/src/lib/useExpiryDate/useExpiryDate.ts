@@ -1,4 +1,4 @@
-import { ChangeEvent, KeyboardEvent, FocusEvent, useState } from "react";
+import { ChangeEvent, FocusEvent, useState } from "react";
 import useInput from "../common/useInput";
 import Validator from "../utils/validator";
 import { ERROR_MESSAGE, OPTION } from "../constants";
@@ -56,38 +56,11 @@ const useExpiryDate = <T extends object>(initialValue: T) => {
     });
   };
 
-  const handleExpiryDateEnter = (e: KeyboardEvent<HTMLInputElement>) => {
-    if (e.target !== e.currentTarget) return;
-    if (e.key !== "Enter") return;
-
-    const { value, name } = e.target as HTMLInputElement;
-    if (name === "year" && !Validator.checkFillNumber(value, OPTION.expirationDateMaxLength))
-      return setValidationResult({
-        isValid: false,
-        errorMessage: ERROR_MESSAGE.expiryFormat,
-      });
-
-    if (!Validator.checkCreditExpirationPeriod(value, name))
-      return setValidationResult({
-        isValid: false,
-        errorMessage: ERROR_MESSAGE.expiredCard,
-      });
-
-    const newValue = formattingMonth(name, value);
-
-    updateByNameAndValue(name, newValue);
-    setValidationResult({
-      isValid: true,
-      errorMessage: "",
-    });
-  };
-
   return {
     inputValue,
     validationResult,
     handleExpiryChange,
     handleExpiryDateBlur,
-    handleExpiryDateEnter,
   } as const;
 };
 

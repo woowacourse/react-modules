@@ -1,4 +1,4 @@
-import { ChangeEvent, useState, KeyboardEvent, FocusEvent } from "react";
+import { ChangeEvent, useState, FocusEvent } from "react";
 import Validator from "../utils/validator";
 import { ERROR_MESSAGE } from "../constants";
 import useInput from "../common/useInput";
@@ -45,30 +45,11 @@ const useCardHolder = <T extends object>(initialValue: T) => {
     });
   };
 
-  const handleCardHolderEnter = (e: KeyboardEvent<HTMLInputElement>) => {
-    if (e.target !== e.currentTarget) return;
-    if (e.key !== "Enter") return;
-
-    const { name, value } = e.target as HTMLInputElement;
-    if (!Validator.checkExist(value))
-      return setValidationResult({
-        isValid: false,
-        errorMessage: ERROR_MESSAGE.nameOutOfRange,
-      });
-
-    updateByNameAndValue(name, value);
-    setValidationResult({
-      isValid: true,
-      errorMessage: "",
-    });
-  };
-
   return {
     inputValue,
     validationResult,
     handleCardHolderChange,
     handleCardHolderBlur,
-    handleCardHolderEnter,
   } as const;
 };
 
