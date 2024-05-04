@@ -1,7 +1,7 @@
 {
-  "name": "soha-darr-hooks",
+  "name": "darr-input-hooks",
   "version": "0.0.1",
-  "description": "npm modules",
+  "description": "Custom hook used in credit card payment input field",
   "type": "module",
   "types": "dist/index.d.ts",
   "main": "dist/index.js",

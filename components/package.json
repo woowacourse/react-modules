@@ -1,7 +1,7 @@
 {
-  "name": "soha-darr-components",
+  "name": "darr-modal-components",
   "version": "0.0.1",
-  "description": "npm modules",
+  "description": "Modal component that is easy and simple to use",
   "type": "module",
   "types": "dist/index.d.ts",
   "main": "dist/index.js",
