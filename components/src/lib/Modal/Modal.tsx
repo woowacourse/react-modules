@@ -1,5 +1,5 @@
-import S from "./Modal.style.tsx";
-import BasicButton from "../Button.tsx";
+import * as S from "./Modal.style.tsx";
+import BasicButton, { ButtonColorType, ButtonSizeType } from "../Button.tsx";
 
 export type ModalPosition = "center" | "bottom";
 
@@ -49,13 +49,30 @@ const Content = ({ children }: ContentsProps) => {
   return <S.Content>{children}</S.Content>;
 };
 
-export interface ConfirmButtonProps {
+export interface StyleButtonProps {
   label: string;
-  onConfirm: () => void;
+  onClickEvent: () => void;
+  backgroundColor: ButtonColorType | string;
+  textColor?: ButtonColorType;
+  size?: ButtonSizeType;
 }
 
-const ConfirmButton = ({ label, onConfirm }: ConfirmButtonProps) => {
-  return <BasicButton onClick={onConfirm} label={label} colorType="black" />;
+const StyledButton = ({
+  label,
+  onClickEvent,
+  backgroundColor,
+  textColor,
+  size,
+}: StyleButtonProps) => {
+  return (
+    <BasicButton
+      onClick={onClickEvent}
+      label={label}
+      backgroundColor={backgroundColor}
+      textColor={textColor}
+      size={size}
+    />
+  );
 };
 
 export interface CloseButtonProps {
@@ -71,7 +88,7 @@ const Modal = Object.assign(ModalMain, {
   Title,
   CloseIcon,
   Content,
-  ConfirmButton,
+  StyledButton,
   CloseButton,
 });
 

@@ -58,3 +58,8 @@ isValid: boolean;
 errorMessage?: string;
 };
 ```
+
+리뷰후 리팩토링
+
+- [ ] 에러를 throw 하는 로직에서 리팩토링
+- [ ] 카드 번호를 배열로 받는 것으로 리팩토링

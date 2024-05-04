@@ -29,7 +29,25 @@ function App() {
           <DeleteIcon />
         </Modal.CloseIcon>
         <Modal.Content>[필수] 개인정보 수집약관 동의</Modal.Content>
-        <Modal.ConfirmButton label="동의" onConfirm={handleConfirm} />
+        <Modal.StyledButton
+          label="동의"
+          onClickEvent={handleConfirm}
+          backgroundColor="black"
+          size={"small"}
+        />
+        <Modal.StyledButton
+          label="거부"
+          onClickEvent={handleConfirm}
+          backgroundColor="white"
+          size={"small"}
+        />
+        <Modal.StyledButton
+          label="초기화"
+          onClickEvent={handleConfirm}
+          backgroundColor="#ce7272"
+          textColor="white"
+          size={"full"}
+        />
         <Modal.CloseButton label="닫기" onClose={handleClose} />
       </Modal>
     </>
