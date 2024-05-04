@@ -4,9 +4,9 @@ import { buttonsStyle, modalContentStyle, modalStyle } from "./Modal.style";
 import useModalHook from "../useModalHook";
 
 import ModalHeader from "../ModalHeader/ModalHeader";
-import CloseButton from "../CloseButton/CloseButton";
 import Title from "../Title/Title";
-import LongButton from "../LongButton/LongButton";
+import Button from "../Button/Button";
+import Xmark from "../icon/Xmark";
 
 interface ModalProps {
   position?: "center" | "bottom";
@@ -52,23 +52,26 @@ const Modal: React.FC<ModalProps> = ({
         <ModalHeader>
           {title && <Title>{title}</Title>}
           {closeButtonPosition === "top" && (
-            <CloseButton
+            <Button
+              type="cancel"
               handleClick={() => {
                 action.handleClose();
                 if (onClose) onClose();
               }}
-            />
+            >
+              <Xmark />
+            </Button>
           )}
         </ModalHeader>
         <div>{children}</div>
         <div css={buttonsStyle}>
           {hasConfirmButton && (
-            <LongButton type="confirm" handleClick={onConfirm}>
+            <Button type="confirm" handleClick={onConfirm}>
               동의하고 저장하기
-            </LongButton>
+            </Button>
           )}
           {closeButtonPosition === "bottom" && (
-            <LongButton
+            <Button
               type="cancel"
               handleClick={() => {
                 action.handleClose();
@@ -76,7 +79,7 @@ const Modal: React.FC<ModalProps> = ({
               }}
             >
               닫기
-            </LongButton>
+            </Button>
           )}
         </div>
       </div>
