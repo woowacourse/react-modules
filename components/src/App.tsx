@@ -3,7 +3,7 @@ import "./App.css";
 import { useState } from "react";
 import { Modal } from "chlwlstlf-modal";
 
-type TestProps = {
+type ContentProps = {
   handleModalClose: () => void;
 };
 
@@ -13,7 +13,7 @@ const customStyles = {
   padding: "24px 32px",
 };
 
-export const Test = ({ handleModalClose }: TestProps) => {
+export const Content = ({ handleModalClose }: ContentProps) => {
   return (
     <div>
       <button onClick={handleModalClose}>모달 닫기</button>
@@ -40,7 +40,7 @@ function App() {
         title="약관에 동의해 주세요"
         position="bottom"
         modalContainerStyle={customStyles}
-        content={<Test handleModalClose={handleModalClose} />}
+        content={<Content handleModalClose={handleModalClose} />}
       />
 
       <button onClick={handleModalOpen}>모달 열기</button>
