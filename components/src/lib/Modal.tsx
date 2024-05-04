@@ -1,7 +1,6 @@
 import styled from "@emotion/styled";
 import CloseIcon from "./assets/close-icon.png";
-import { useEffect } from "react";
-import useModalContext, { ModalContext } from "./useModalContext";
+import useModalContext, { ModalContext } from "./hooks/useModalContext";
 import {
   ModalButtonProps,
   ModalCloseButtonProps,
@@ -10,6 +9,7 @@ import {
   ModalPosition,
   ModalMainProps,
 } from "./types/modalProps";
+import useKeyDown from "./hooks/useKeyDown";
 
 const Modal = Object.assign(ModalMain, {
   Dimmer: ModalDimmer,
@@ -21,15 +21,7 @@ const Modal = Object.assign(ModalMain, {
 export default Modal;
 
 function ModalMain({ children, isOpen, onClose }: ModalMainProps) {
-  useEffect(() => {
-    const handleModalKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Escape") {
-        onClose();
-      }
-    };
-
-    window.addEventListener("keydown", handleModalKeyDown);
-  }, []);
+  useKeyDown("Escape", onClose);
 
   return (
     <ModalContext.Provider value={{ onClose }}>
@@ -159,7 +151,6 @@ const S = {
       padding: "13px 10px",
       fontWeight: 700,
       fontSize: "15px",
-      // lineHeight: "21.72px",
 
       alignItems: "center",
       color: $theme === "dark" ? "#ffffff" : "#8B95A1",
