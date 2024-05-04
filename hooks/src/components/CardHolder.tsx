@@ -1,4 +1,4 @@
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, FocusEvent, useState } from 'react';
 import { useCardHolder } from '../lib';
 import { UseCardHolderProps } from '../lib/useCardHolder';
 
@@ -30,7 +30,7 @@ export default function CardHolder() {
     setShowError(true);
   };
 
-  const handleBlur = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleBlur = (e: FocusEvent<HTMLInputElement>) => {
     setValue(e.target.value);
     setShowError(true);
   };

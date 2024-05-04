@@ -74,9 +74,10 @@ export default function useCardHolder(props: UseCardHolderProps): UseCardHolderR
    */
   const getFormattedValue = (value: string) => {
     const slicedText = sliceText(value, maxLength);
+    const isOnlyLengthError = error?.[0] === 'length';
 
     if (isNeedValidValue) {
-      return error && !error.includes('length') ? INVALID_INPUT_VALUE : changeUpperCase(slicedText);
+      return error && !isOnlyLengthError ? INVALID_INPUT_VALUE : changeUpperCase(slicedText);
     }
     return changeUpperCase(slicedText);
   };
