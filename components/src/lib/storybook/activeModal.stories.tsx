@@ -16,6 +16,9 @@ const meta = {
     position: {
       description: "modal의 위치",
     },
+    modalSize: {
+      description: "modal의 크기",
+    },
     closeButton: {
       description: "modal을 닫는 closeButton의 형태",
     },
@@ -74,6 +77,7 @@ export const BottomTextModal: Story = {
   args: {
     position: "bottom",
     children: "칠드런",
+    modalSize: "m",
     closeButton: "text",
     closeModal: () => {},
     title: "제목임",

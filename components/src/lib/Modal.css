@@ -27,12 +27,24 @@
 }
 
 .darr-modal .modal-inner.center {
-  width: 80vw;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   min-height: 216px;
 }
+
+.darr-modal .size-s {
+  width: 40vw;
+}
+
+.darr-modal .size-m {
+  width: 60vw;
+}
+
+.darr-modal .size-l {
+  width: 80vw;
+}
+
 .darr-modal .modal-inner.bottom {
   width: 100vw;
   min-height: 206px;

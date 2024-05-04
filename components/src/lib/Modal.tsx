@@ -4,10 +4,12 @@ import Close from "./asset/Close.svg";
 
 type ModalPosition = "center" | "bottom";
 type ModalCloseBtn = "text" | "img";
+type ModalSize = "s" | "m" | "l";
 
 interface ModalProps {
   position: ModalPosition;
   title: string;
+  modalSize?: ModalSize;
   children: React.ReactNode;
   closeButton: ModalCloseBtn;
   closeModal: () => void;
@@ -18,6 +20,7 @@ interface ModalProps {
 const Modal = ({
   position,
   children,
+  modalSize = "l",
   closeButton,
   closeModal,
   title,
@@ -27,7 +30,7 @@ const Modal = ({
   return (
     <div className="darr-modal">
       <div className="modal-backdrop" onClick={closeModal}></div>
-      <div className={`modal-inner ${position}`}>
+      <div className={`modal-inner ${position} size-${modalSize}`}>
         <div className="modal-top">
           <h1 className="modal-title">{title}</h1>
           {closeButton === "img" && (
