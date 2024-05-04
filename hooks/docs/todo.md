@@ -73,3 +73,5 @@
 - [ ] 상수 분리
 - [x] 마크다운 개행 정리
 - [x] useInput register만들어보기
+  - [ ] required, type
+  - [ ] max, maxLength, min, minLength
