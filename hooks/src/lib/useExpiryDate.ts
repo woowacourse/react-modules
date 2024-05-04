@@ -1,6 +1,6 @@
 import { ChangeEvent, FocusEvent, useState } from 'react';
 import useValidation from './useValidation';
-import { CENTURY_PREFIX, MONTH } from './contexts';
+import { CENTURY_PREFIX, MONTH } from './constants';
 import { validateNumber, validateFilledValue } from './utils/validators';
 import { ErrorMessage, UseCardModuleProps, ValidationParam } from './types';
 
@@ -26,8 +26,8 @@ interface ExpiryDateError {
 interface ExpiryDateValidationParam extends ValidationParam<ExpiryDate> {
   key: ExpiryDateKey;
 }
-
-export default function useExpiryDate({ validationErrors }: UseCardModuleProps<ValidationErrors>) {
+// 연도에 대한 최대 기간 props로 받기
+export default function useExpiryDate({ validationErrorMessages }: UseCardModuleProps<ValidationErrors>) {
   const [expiryDate, setExpiryDate] = useState<ExpiryDate>({ month: '', year: '' });
   const [error, setError] = useState<ExpiryDateError>({ month: false, year: false });
   const [errorMessage, setErrorMessage] = useState<ErrorMessage>(null);
@@ -62,14 +62,14 @@ export default function useExpiryDate({ validationErrors }: UseCardModuleProps<V
   };
 
   const changeEventValidators = (key: ExpiryDateKey) => [
-    { test: (value: ExpiryDate) => validateNumber(value[key]), errorMessage: validationErrors.number },
+    { test: (value: ExpiryDate) => validateNumber(value[key]), errorMessage: validationErrorMessages.number },
   ];
   const blurEventValidators = (key: ExpiryDateKey) => [
-    { test: (value: ExpiryDate) => validateExpiryDateFilled(value, key), errorMessage: validationErrors.empty },
+    { test: (value: ExpiryDate) => validateExpiryDateFilled(value, key), errorMessage: validationErrorMessages.empty },
     key === 'month'
-      ? { test: validateMonth, errorMessage: validationErrors.month }
-      : { test: validateYear, errorMessage: validationErrors.year },
-    { test: validateDate, errorMessage: validationErrors.date },
+      ? { test: validateMonth, errorMessage: validationErrorMessages.month }
+      : { test: validateYear, errorMessage: validationErrorMessages.year },
+    { test: validateDate, errorMessage: validationErrorMessages.date },
   ];
 
   const handleValidation = ({ value, key, validators }: ExpiryDateValidationParam) => {

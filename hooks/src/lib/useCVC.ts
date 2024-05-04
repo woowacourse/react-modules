@@ -1,5 +1,4 @@
 import { ChangeEvent, useState, FocusEvent } from 'react';
-import { VALID_LENGTH } from './contexts';
 import { validateNumber, validateFilledValue, validateLength } from './utils/validators';
 import { ErrorMessage, UseCardModuleProps } from './types';
 import useCardValidation from './useCardValidation';
@@ -14,7 +13,7 @@ export default function useCVC(props: UseCardModuleProps<ValidationErrorMessages
   const [cvc, setCVC] = useState('');
   const [errorMessage, setErrorMessage] = useState<ErrorMessage>(null);
 
-  const validateCVCLength = (value: string) => validateLength(value, VALID_LENGTH.cvc);
+  const validateCVCLength = (value: string) => validateLength(value, 3);
 
   const changeEventValidators = [{ test: validateNumber, errorMessage: number }];
   const blurEventValidators = [

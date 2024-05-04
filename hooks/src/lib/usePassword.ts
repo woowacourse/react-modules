@@ -1,5 +1,5 @@
 import { ChangeEvent, FocusEvent, useState } from 'react';
-import { VALID_LENGTH } from './contexts';
+
 import { validateFilledValue, validateNumber, validateLength } from './utils/validators';
 import { ErrorMessage, UseCardModuleProps } from './types';
 import useCardValidation from './useCardValidation';
@@ -16,7 +16,7 @@ export default function usePassword(props: UseCardModuleProps<ValidationErrors>)
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState<ErrorMessage>(null);
 
-  const validatePasswordLength = (value: string) => validateLength(value, VALID_LENGTH.password);
+  const validatePasswordLength = (value: string) => validateLength(value, 2);
 
   const changeEventValidators = [{ test: validateNumber, errorMessage: number }];
   const blurEventValidators = [

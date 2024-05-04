@@ -1,6 +1,6 @@
 import { useState, ChangeEvent } from 'react';
 import useCardNumber from './useCardNumber';
-import { CARD_NUMBERS_GROUP_LENGTH } from './contexts';
+import { CARD_NUMBERS_GROUP_LENGTH } from './constants';
 import { ErrorMessage, UseCardModuleProps } from './types';
 import useCardValidationWithKey from './useCardValidationWithKey';
 

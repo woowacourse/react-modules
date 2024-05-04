@@ -4,7 +4,7 @@ import clsx from 'clsx';
 import styles from './style.module.css';
 
 import Portal from './Portal';
-import ModalContext from '../contexts/modalContext';
+import ModalContext from '../constants/modalContext';
 import useModalContext from '../hooks/useModalContext';
 import '../styles/reset.css';
 import CloseButtonIcon from './CloseButtonIcon';
