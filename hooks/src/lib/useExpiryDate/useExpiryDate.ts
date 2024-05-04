@@ -4,8 +4,13 @@ import Validator from "../utils/validator";
 import { ERROR_MESSAGE, OPTION } from "../constants";
 import formattingMonth from "../utils/formattingMonth";
 
-const useExpiryDate = <T extends object>(initialValue: T) => {
-  const { inputValue, handleInputChange, updateByNameAndValue } = useInputs<T>(initialValue);
+export interface ExpirationPeriodValue {
+  month: string;
+  year: string;
+}
+
+const useExpiryDate = (initialValue: ExpirationPeriodValue) => {
+  const { inputValue, handleInputChange, updateByNameAndValue } = useInputs(initialValue);
   const [validationResult, setValidationResult] = useState<ValidationResult>({
     isValid: true,
     errorMessage: "",
@@ -34,6 +39,8 @@ const useExpiryDate = <T extends object>(initialValue: T) => {
     if (e.target !== e.currentTarget) return;
 
     const { value, name } = e.target;
+
+    if (name !== "year" && name !== "month") return;
 
     if (name === "year" && !Validator.checkFillNumber(value, OPTION.expirationDateMaxLength))
       return setValidationResult({
