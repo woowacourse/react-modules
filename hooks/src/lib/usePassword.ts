@@ -1,53 +1,77 @@
-import { ChangeEvent, FocusEvent, useState } from 'react';
+import { useEffect, useState } from 'react';
 
-import { validateFilledValue, validateNumber, validateLength } from './utils/validators';
-import { ErrorMessage, UseCardModuleProps } from './types';
-import useCardValidation from './useCardValidation';
+import { validateFilledValue, validateNumber, validateLength, isValid } from './utils/validators';
+import { UseCardModuleReturn } from './types';
 
-interface ValidationErrors {
+import { sliceText } from './utils/textFormatter';
+import { INVALID_INPUT_VALUE } from './constants';
+
+export interface PasswordValidationErrorMessages {
   empty: string;
   number: string;
   length: string;
 }
+export interface UsePasswordProps {
+  cardPassword: string;
+  errorMessages: PasswordValidationErrorMessages;
+  validation: {
+    length: number;
+  };
+  isNeedValidValue: boolean;
+}
+export interface UsePasswordResult {
+  isFilledValue: boolean;
+  isValidNumber: boolean;
+  isValidLength: boolean;
+}
 
-export default function usePassword(props: UseCardModuleProps<ValidationErrors>) {
-  const { empty, number, length } = props.validationErrorMessages;
+export type UsePasswordReturn = UseCardModuleReturn<UsePasswordResult, string>;
 
-  const [password, setPassword] = useState('');
-  const [errorMessage, setErrorMessage] = useState<ErrorMessage>(null);
+export default function usePassword(props: UsePasswordProps) {
+  const { cardPassword, errorMessages, validation, isNeedValidValue } = props;
 
-  const validatePasswordLength = (value: string) => validateLength(value, 2);
+  type ErrorMessageKey = keyof typeof errorMessages;
+  type Error = ErrorMessageKey[] | null;
+  const [error, setError] = useState<Error>(null);
 
-  const changeEventValidators = [{ test: validateNumber, errorMessage: number }];
-  const blurEventValidators = [
-    { test: validateFilledValue, errorMessage: empty },
-    { test: validatePasswordLength, errorMessage: length },
-  ];
-  const totalValidators = [...changeEventValidators, ...blurEventValidators];
+  const validatePassword = () => {
+    const newError: ErrorMessageKey[] = [];
 
-  const { handleValidationChange, handleValidationBlur, handleUpdateValue } = useCardValidation<string>({
-    blurEventValidators,
-    changeEventValidators,
-    totalValidators,
-    setValue: setPassword,
-    setErrorMessage,
-  });
+    if (!validateFilledValue(cardPassword)) newError.push('empty');
+    if (!validateNumber(cardPassword)) newError.push('number');
+    if (!validateLength(cardPassword, validation.length)) newError.push('length');
 
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    handleValidationChange(e.target.value);
+    setError(newError[0] ? newError : null);
   };
 
-  const handleBlur = (e: FocusEvent<HTMLInputElement>) => {
-    handleValidationBlur(e.target.value);
+  /**
+   *  유요한 값만 input에 나타나기를 원하는 경우(isNeedValidValue===true), length에 대한 검사를 제외한 오류가 있을 경우 input의 value를 빈문자열로 변경한다.
+   * @param value input value
+   * @param error 유효성 검사 결과
+   * @returns 변경된 글자
+   */
+  const getFormattedValue = () => {
+    const slicedText = sliceText(cardPassword, validation.length);
+    const isOnlyLengthError = error?.[0] === 'length';
+
+    if (isNeedValidValue) {
+      return error && !isOnlyLengthError ? INVALID_INPUT_VALUE : slicedText;
+    }
+
+    return slicedText;
   };
+
+  useEffect(() => {
+    validatePassword();
+  }, [cardPassword]);
 
   return {
-    password,
-    setPassword,
-    isValid: !!errorMessage,
-    errorMessage,
-    handleChange,
-    handleBlur,
-    updateValue: handleUpdateValue,
+    validationFirstErrorMessage: error ? errorMessages[error[0]] : null,
+    validationResult: {
+      isFilledValue: isValid<ErrorMessageKey>('empty', error),
+      isValidNumber: isValid<ErrorMessageKey>('number', error),
+      isValidLength: isValid<ErrorMessageKey>('length', error),
+    },
+    formattedValue: getFormattedValue(),
   };
 }
