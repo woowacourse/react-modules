@@ -9,9 +9,9 @@ interface CardHolderValidationResult {
 }
 
 export default function useCardHolder(
-  initialValue: string
+  initialValue?: string
 ): CardHolderValidationResult {
-  const [cardHolder, setCardHolder] = useState(initialValue);
+  const [cardHolder, setCardHolder] = useState(initialValue ?? "");
   const [validationResult, setValidationResult] = useState<ValidationResult>({
     isValid: true,
   });

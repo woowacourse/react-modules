@@ -8,8 +8,8 @@ interface CVCValidationResult {
   handleUpdateCVC: (value: string) => void;
 }
 
-export default function useCardCVC(initialValue: string): CVCValidationResult {
-  const [CVC, setCVC] = useState(initialValue);
+export default function useCardCVC(initialValue?: string): CVCValidationResult {
+  const [CVC, setCVC] = useState(initialValue ?? "");
   const [validationResult, setValidationResult] = useState<ValidationResult>({
     isValid: true,
   });

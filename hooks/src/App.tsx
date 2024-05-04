@@ -1,4 +1,13 @@
-import React from "react";
+import React from 'react';
+
+// import {
+//   useCardNumbers,
+//   useCardBrand,
+//   useCardExpiryDate,
+//   useCardHolder,
+//   useCardCVC,
+//   useCardPassword,
+// } from '@seongjinme/card-validation';
 
 import {
   useCardNumbers,
@@ -7,11 +16,11 @@ import {
   useCardHolder,
   useCardCVC,
   useCardPassword,
-} from "@seongjinme/card-validation";
+} from './lib';
 
-import "./App.css";
+import './App.css';
 
-const cardBrands = ["신한카드", "현대카드", "카카오뱅크"];
+const cardBrands = ['신한카드', '현대카드', '카카오뱅크'];
 
 function App() {
   const {
@@ -19,31 +28,28 @@ function App() {
     validationResult: cardNumbersValidationResult,
     validStates,
     handleUpdateCardNumbers,
-  } = useCardNumbers(["", "", "", ""]);
+  } = useCardNumbers();
   const {
     brand,
     validationResult: brandValidationResult,
     handleUpdateBrand,
-  } = useCardBrand("", cardBrands);
+  } = useCardBrand(cardBrands);
   const {
     expiryDate,
     validationResult: expiryDateValidationResult,
     handleUpdateExpiryDate,
-  } = useCardExpiryDate({
-    month: "",
-    year: "",
-  });
+  } = useCardExpiryDate();
   const {
     cardHolder,
     validationResult: cardHolderValidationResult,
     handleUpdateCardHolder,
-  } = useCardHolder("");
-  const { CVC, validationResult, handleUpdateCVC } = useCardCVC("");
+  } = useCardHolder();
+  const { CVC, validationResult, handleUpdateCVC } = useCardCVC();
   const {
     password,
     validationResult: passwordValidationResult,
     handleUpdatePassword,
-  } = useCardPassword("");
+  } = useCardPassword();
 
   return (
     <>
@@ -81,8 +87,8 @@ function App() {
           />
         </div>
         <div className="output-container">
-          <p>cardNumbers: {cardNumbers.join(" ")}</p>
-          <p>validStates: {validStates.join(" ")}</p>
+          <p>cardNumbers: {cardNumbers.join(' ')}</p>
+          <p>validStates: {validStates.join(' ')}</p>
           <p>isValid: {cardNumbersValidationResult.isValid.toString()}</p>
           <p>errorMessage: {cardNumbersValidationResult.errorMessage}</p>
         </div>
@@ -97,7 +103,10 @@ function App() {
             }
           >
             {cardBrands.map((brand) => (
-              <option key={brand} value={brand}>
+              <option
+                key={brand}
+                value={brand}
+              >
                 {brand}
               </option>
             ))}
