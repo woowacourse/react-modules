@@ -1,23 +1,14 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import Modal from "./lib/Modal";
+import { Modal } from "hash-modal";
 
 function App() {
-  const [open, setOpen] = useState(false);
-  const handleClose = (e: React.MouseEvent) => {
-    console.log(e);
-    setOpen(false);
-    console.log("취소");
-  };
-  const handleConfirm = (e: React.MouseEvent) => {
-    console.log(e);
-    setOpen(false);
-    console.log("확인");
-  };
+  const [modalOpen, setModalOpen] = useState(false);
+
   return (
     <>
-      <button onClick={() => setOpen(true)}></button>
-      {open && (
+      <button onClick={() => setModalOpen(true)}>모달 버튼</button>
+      {modalOpen && (
         <Modal
           buttonLayout="column"
           position="bottom"
@@ -25,13 +16,13 @@ function App() {
           isXButton={true}
           closeButtonContent="닫기"
           confirmButtonContent="확인"
-          handleConfirm={() => setOpen(false)}
-          handleClose={handleClose}
+          handleConfirm={() => setModalOpen(true)}
+          handleClose={() => setModalOpen(false)}
         >
           {
-            <Temp>
-              <input></input>dasdfasdfasdfs
-            </Temp>
+            <ContentDefaultTemplate>
+              <input></input>
+            </ContentDefaultTemplate>
           }
         </Modal>
       )}
@@ -39,12 +30,12 @@ function App() {
   );
 }
 
-export const Temp = styled.div`
+export const ContentDefaultTemplate = styled.div`
   height: 50vh;
   background-color: red;
 `;
 
-export const Wide = styled.div`
+export const ContentWideTemplate = styled.div`
   width: 500vw;
   height: 500vh;
   background-color: red;
