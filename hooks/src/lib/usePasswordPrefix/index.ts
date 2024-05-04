@@ -1,5 +1,6 @@
-import { useState } from "react";
-import useValidation from "../useValidation";
+import REGEXPS from '../constants/regExps';
+import { useState } from 'react';
+import useValidation from '../useValidation';
 
 const PASSWORD_PREFIX_LENGTH = 2;
 const passwordPrefixValidators = [
@@ -9,14 +10,14 @@ const passwordPrefixValidators = [
     }
   },
   (value: string) => {
-    if (!/^\d+$/.test(value)) {
-      return "비밀번호는 숫자만 포함해야 합니다.";
+    if (!REGEXPS.onlyDigitNumber.test(value)) {
+      return '비밀번호는 숫자만 포함해야 합니다.';
     }
   },
 ];
 
 export default function usePasswordPrefix() {
-  const [value, setValue] = useState("");
+  const [value, setValue] = useState('');
   const { errorStatus, validate } = useValidation(passwordPrefixValidators);
 
   const setPasswordPrefix = (string: string) => {
