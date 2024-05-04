@@ -7,11 +7,9 @@ interface UseRestrictedStateProps {
 
 const useRestrictedState = ({ type, maxLength }: UseRestrictedStateProps = {}) => {
   const [value, setValue] = useState("");
-  const [isError, setIsError] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | undefined>();
 
   const resetError = () => {
-    setIsError(false);
     setErrorMessage(undefined);
   };
 
@@ -22,7 +20,6 @@ const useRestrictedState = ({ type, maxLength }: UseRestrictedStateProps = {}) =
       resetError();
       return;
     }
-    setIsError(true);
     setErrorMessage(errorMessage);
   };
 
@@ -44,7 +41,7 @@ const useRestrictedState = ({ type, maxLength }: UseRestrictedStateProps = {}) =
 
   return {
     valueState: { value, setValue: setValueWrapper },
-    errorState: { isError, errorMessage, setError },
+    errorState: { isError: !!errorMessage, errorMessage, setError },
   };
 };
 
