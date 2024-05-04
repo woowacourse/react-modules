@@ -1,10 +1,10 @@
 import { ChangeEvent, FocusEvent, useState } from "react";
-import useInput from "../common/useInput";
+import useInputs from "../common/useInputs";
 import Validator from "../utils/validator";
 import { ERROR_MESSAGE, OPTION } from "../constants";
 
 const useCardNumber = <T extends object>(initialValue: T) => {
-  const { inputValue, handleInputChange, updateByNameAndValue } = useInput(initialValue);
+  const { inputValue, handleInputChange, updateByNameAndValue } = useInputs(initialValue);
   const [validationResult, setValidationResult] = useState<ValidationResult>({
     isValid: true,
     errorMessage: "",

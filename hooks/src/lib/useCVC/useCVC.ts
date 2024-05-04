@@ -3,7 +3,7 @@ import useInput from "../common/useInput";
 import Validator from "../utils/validator";
 import { ERROR_MESSAGE, OPTION } from "../constants";
 
-const useCVC = <T extends object>(initialValue: T) => {
+const useCVC = (initialValue: string) => {
   const { inputValue, handleInputChange, updateByNameAndValue } = useInput(initialValue);
   const [validationResult, setValidationResult] = useState<ValidationResult>({
     isValid: true,
@@ -31,14 +31,14 @@ const useCVC = <T extends object>(initialValue: T) => {
   const handleCvcBlur = (e: FocusEvent<HTMLInputElement>) => {
     if (e.target !== e.currentTarget) return;
 
-    const { name, value } = e.target;
+    const { value } = e.target;
     if (!Validator.checkFillNumber(value, OPTION.cvcMaxLength))
       return setValidationResult({
         isValid: false,
         errorMessage: ERROR_MESSAGE.cvcOutOfRange,
       });
 
-    updateByNameAndValue(name, value);
+    updateByNameAndValue(value);
     setValidationResult({
       isValid: true,
       errorMessage: "",

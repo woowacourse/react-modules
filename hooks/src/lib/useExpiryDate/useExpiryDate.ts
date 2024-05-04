@@ -1,11 +1,11 @@
 import { ChangeEvent, FocusEvent, useState } from "react";
-import useInput from "../common/useInput";
+import useInputs from "../common/useInputs";
 import Validator from "../utils/validator";
 import { ERROR_MESSAGE, OPTION } from "../constants";
 import formattingMonth from "../utils/formattingMonth";
 
 const useExpiryDate = <T extends object>(initialValue: T) => {
-  const { inputValue, handleInputChange, updateByNameAndValue } = useInput<T>(initialValue);
+  const { inputValue, handleInputChange, updateByNameAndValue } = useInputs<T>(initialValue);
   const [validationResult, setValidationResult] = useState<ValidationResult>({
     isValid: true,
     errorMessage: "",
