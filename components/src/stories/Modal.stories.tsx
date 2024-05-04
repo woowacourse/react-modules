@@ -20,13 +20,13 @@ const meta: Meta<typeof Modal> = {
 export default meta;
 
 const Template: StoryObj<typeof meta.args> = (args) => {
-  const { isOpen, toggleModal } = useModal();
+  const { isModalOpen, openModal, closeModal } = useModal();
 
   return (
     <>
-      <button onClick={toggleModal}>모달 열기</button>
-      {isOpen && (
-        <Modal {...args} toggleModal={toggleModal}>
+      <button onClick={openModal}>모달 열기</button>
+      {isModalOpen && (
+        <Modal {...args} closeModal={closeModal}>
           <CardCompanySelector />
         </Modal>
       )}

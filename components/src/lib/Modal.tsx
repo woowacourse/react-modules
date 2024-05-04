@@ -66,7 +66,7 @@ const CloseButton = styled.button`
  */
 
 interface ModalProps {
-  toggleModal: () => void;
+  closeModal: () => void;
   position: 'center' | 'bottom';
   title: string;
   closeOption: 'icon' | 'button';
@@ -74,21 +74,17 @@ interface ModalProps {
 }
 
 function Modal({
-  toggleModal,
+  closeModal,
   position,
   title,
   closeOption,
   children,
 }: ModalProps) {
-  const handleCloseButton = () => {
-    toggleModal();
-  };
-
   const handleBackdropClick = (
     event: MouseEvent<HTMLDivElement, globalThis.MouseEvent>,
   ) => {
     if (event.target === event.currentTarget) {
-      handleCloseButton();
+      closeModal();
     }
   };
 
@@ -121,12 +117,12 @@ function Modal({
         <Header>
           <Title>{title}</Title>
           {closeOption === 'icon' && (
-            <CloseIcon onClick={handleCloseButton} src={CLOSE_BUTTON} />
+            <CloseIcon onClick={closeModal} src={CLOSE_BUTTON} />
           )}
         </Header>
         <div>{children}</div>
         {closeOption === 'button' && (
-          <CloseButton onClick={handleCloseButton}>닫기</CloseButton>
+          <CloseButton onClick={closeModal}>닫기</CloseButton>
         )}
       </Container>
     </BackDrop>

@@ -1,18 +1,17 @@
 import { useState } from 'react';
 
-interface ModalHook {
-  isOpen: boolean;
-  toggleModal: () => void;
-}
+function useModal() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
-const useModal = (): ModalHook => {
-  const [isOpen, setIsOpen] = useState(false);
-
-  const toggleModal = () => {
-    setIsOpen(!isOpen);
+  const openModal = () => {
+    setIsModalOpen(true);
   };
 
-  return { isOpen, toggleModal };
-};
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
+
+  return { isModalOpen, openModal, closeModal };
+}
 
 export default useModal;
