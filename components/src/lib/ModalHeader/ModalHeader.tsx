@@ -2,7 +2,7 @@
 
 import { modalHeaderStyle } from "./ModalHeader.style";
 
-const ModalHeader = ({ children }: { children: React.ReactNode }) => {
+const ModalHeader = ({ children }: React.PropsWithChildren) => {
   return <div css={modalHeaderStyle}>{children}</div>;
 };
 

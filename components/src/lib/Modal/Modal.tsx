@@ -1,5 +1,5 @@
 /** @jsxImportSource @emotion/react */
-import React, { useEffect } from "react";
+import React, { PropsWithChildren, useEffect } from "react";
 import { buttonsStyle, modalContentStyle, modalStyle } from "./Modal.style";
 import useModalHook from "../useModalHook";
 
@@ -8,14 +8,13 @@ import CloseButton from "../CloseButton/CloseButton";
 import Title from "../Title/Title";
 import LongButton from "../LongButton/LongButton";
 
-interface ModalProps {
+interface ModalProps extends PropsWithChildren {
   position?: "center" | "bottom";
   title?: string;
   isConfirmButton?: boolean;
   closeButtonPosition?: "bottom" | "top";
   onConfirm?: () => void;
   onClose?: () => void;
-  children: React.ReactNode;
 }
 
 const Modal: React.FC<ModalProps> = ({

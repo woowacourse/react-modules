@@ -1,11 +1,10 @@
 /** @jsxImportSource @emotion/react */
-import React from "react";
+import React, { PropsWithChildren } from "react";
 import { LongButtonPropsStyle } from "./LongButton.styles";
 
-interface LongButtonProps {
+interface LongButtonProps extends PropsWithChildren {
   type: "cancel" | "confirm";
   handleClick?: () => void;
-  children: React.ReactNode;
 }
 
 const LongButton: React.FC<LongButtonProps> = ({ type, handleClick, children }) => {
