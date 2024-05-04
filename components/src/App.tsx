@@ -1,7 +1,7 @@
-import "./App.css";
 import { ThemeProvider } from "styled-components";
-import { theme } from "@/style/theme";
+import "./App.css";
 import GlobalStyles from "@/style/global";
+import { theme } from "@/style/theme";
 import { Modal } from "./lib";
 
 function App() {
