@@ -1,7 +1,7 @@
 import { CARD, REGEX } from "../constants";
 
 const ValidatorCondition = {
-  checkMaxDigit(value: string, digit: number) {
+  checkIsOverMaxDigit(value: string, digit: number) {
     return value.length > digit;
   },
 
@@ -15,14 +15,6 @@ const ValidatorCondition = {
 
   checkIsEnglish(value: string) {
     return /^[a-zA-Z\s]*$/.test(value);
-  },
-
-  checkIsBelowNumber(value: string, limit: number) {
-    return parseInt(value) <= limit || !value.length;
-  },
-
-  checkIsNotDoubleZero(value: string) {
-    return value !== "00";
   },
 
   checkValidMonth(value: string) {
@@ -53,7 +45,7 @@ const Validator = {
 
   checkNumberAndOver(value: string, maxDigit: number) {
     if (!ValidatorCondition.checkIsDigit(value)) return false;
-    if (ValidatorCondition.checkMaxDigit(value, maxDigit)) return false;
+    if (ValidatorCondition.checkIsOverMaxDigit(value, maxDigit)) return false;
 
     return true;
   },
