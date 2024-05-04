@@ -60,4 +60,23 @@ describe('cardHolder에 입력 유효성 검증 커스텀 훅 테스트', () => 
       true
     );
   });
+
+  it("사용자 이름에 대문자로 'LK LK'가 입력된 경우 isError가 false이고 errorMessage가 ''라는 빈 문자열이다.", async () => {
+    const errorMessage = '';
+    const cardHolderValue = 'LK LK';
+    const cardHolderName = 'cardHolder';
+
+    const { result } = renderHook(() => useCardHolderValidation());
+
+    act(() => {
+      result.current.cardHolderValidateHandler(cardHolderValue, cardHolderName);
+    });
+
+    expect(result.current.cardHolderValidation.errorMessage.cardHolder).toBe(
+      errorMessage
+    );
+    expect(result.current.cardHolderValidation.isError[cardHolderName]).toBe(
+      false
+    );
+  });
 });

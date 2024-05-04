@@ -53,4 +53,21 @@ describe('비밀번호 입력 유효성 검증 커스텀 훅 테스트', () => {
     );
     expect(result.current.passwordValidation.isError[passwordName]).toBe(true);
   });
+
+  it("카드 비밀번호에 '12' 입력됐을경우 isError가 false가 되고 errorMessage가 ''이다.", async () => {
+    const errorMessage = '';
+    const passwordValue = '12';
+    const passwordName = 'password';
+
+    const { result } = renderHook(() => usePasswordValidation());
+
+    act(() => {
+      result.current.passwordValidateHandler(passwordValue, passwordName);
+    });
+
+    expect(result.current.passwordValidation.errorMessage.password).toBe(
+      errorMessage
+    );
+    expect(result.current.passwordValidation.isError[passwordName]).toBe(false);
+  });
 });

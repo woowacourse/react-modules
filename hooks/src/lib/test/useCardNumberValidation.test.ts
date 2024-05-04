@@ -60,4 +60,23 @@ describe('카드 번호 입력 유효성 검증 커스텀 훅 테스트', () => 
       true
     );
   });
+
+  it("카드 번호가 '5123'가 입력된 경우 isError가 false이고 errorMessage가 ''라는 빈 문자열이다.", async () => {
+    const errorMessage = '';
+    const cardNumberValue = '5123';
+    const cardNumberName = 'cardNumber1';
+
+    const { result } = renderHook(() => useCardNumberValidate());
+
+    act(() => {
+      result.current.cardNumberValidateHandler(cardNumberValue, cardNumberName);
+    });
+
+    expect(result.current.cardNumberValidation.errorMessage.cardNumber1).toBe(
+      errorMessage
+    );
+    expect(result.current.cardNumberValidation.isError[cardNumberName]).toBe(
+      false
+    );
+  });
 });

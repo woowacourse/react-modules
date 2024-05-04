@@ -79,4 +79,47 @@ describe('카드 만료기간 입력 유효성 검증 커스텀 훅 테스트', 
       true
     );
   });
+
+  it("만료기간이 월이 12라면 isError가 false 되고 errorMessage가 ''라는 값이 된다.", async () => {
+    const errorMessage = '';
+    const expiryDateMonth = 'month';
+    const expiryDateMonthValue = '12';
+    const { result } = renderHook(() => useExpiryDateValidation());
+
+    act(() => {
+      result.current.expiryDateValidateHandler(
+        expiryDateMonthValue,
+        expiryDateMonth
+      );
+    });
+
+    expect(result.current.expiryDateValidation.errorMessage.year).toBe(
+      errorMessage
+    );
+    expect(result.current.expiryDateValidation.isError[expiryDateMonth]).toBe(
+      false
+    );
+  });
+
+  it("만료기간이 년이 24라면 isError가 false 되고 errorMessage가 ''라는 값이 된다.", async () => {
+    const errorMessage = '';
+    const expiryDateYear = 'year';
+    const expiryDateYearValue = '24';
+
+    const { result } = renderHook(() => useExpiryDateValidation());
+
+    act(() => {
+      result.current.expiryDateValidateHandler(
+        expiryDateYearValue,
+        expiryDateYear
+      );
+    });
+
+    expect(result.current.expiryDateValidation.errorMessage.year).toBe(
+      errorMessage
+    );
+    expect(result.current.expiryDateValidation.isError[expiryDateYear]).toBe(
+      false
+    );
+  });
 });
