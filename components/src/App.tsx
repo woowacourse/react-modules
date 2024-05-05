@@ -1,7 +1,7 @@
 import React, { useReducer } from 'react';
 
 import SelectBank from './components/SelectBank';
-import { Modal } from './lib/index';
+import { Modal } from 'cookie-nice-modal';
 
 function App() {
   const [isOpen, toggleIsOpen] = useReducer(prev => !prev, false);
