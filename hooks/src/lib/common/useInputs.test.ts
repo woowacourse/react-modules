@@ -1,19 +1,24 @@
 import { renderHook, act } from "@testing-library/react";
-import useInput from "./useInput";
+import useInputs from "./useInputs";
 
-describe("useInput 커스텀 훅 테스트", () => {
-  const initialValue = "initialInput";
+describe("useInputs 커스텀 훅 테스트", () => {
+  const initialValue = {
+    first: "first",
+    second: "second",
+    third: "third",
+    fourth: "fourth",
+  };
 
   it("인자로 넘긴 값 그대로 초기값이 설정되어야 한다.", () => {
-    const { result } = renderHook(() => useInput(initialValue));
+    const { result } = renderHook(() => useInputs(initialValue));
 
     expect(result.current.inputValue).toEqual(initialValue);
   });
 
   it("유저가 input에 텍스트를 입력하면 해당 상태값이 유저가 입력한 값으로 업데이트 되어야 한다.", () => {
     const userInput = "input";
-    const { result } = renderHook(() => useInput(initialValue));
-    const target = { value: userInput };
+    const { result } = renderHook(() => useInputs(initialValue));
+    const target = { value: userInput, name: "first" };
 
     act(() => {
       result.current.handleInputChange({
@@ -22,6 +27,6 @@ describe("useInput 커스텀 훅 테스트", () => {
       } as React.ChangeEvent<HTMLInputElement>);
     });
 
-    expect(result.current.inputValue).toEqual(userInput);
+    expect(result.current.inputValue.first).toEqual(userInput);
   });
 });
