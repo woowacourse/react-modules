@@ -1,15 +1,6 @@
 import useInputs from './useInputs';
 import { useEffect } from 'react';
-
-const onChange = (value: string) => {
-  const isNumber = !Number.isNaN(Number(value));
-
-  if (!isNumber) {
-    return { isValid: false, errorMessage: '숫자를 입력해주세요' };
-  }
-
-  return { isValid: true, errorMessage: '' };
-};
+import validateNumber from './validator/validateNumber';
 
 const onBlur = (value: string) => {
   const isValidLength = value.length === 0 || value.length === 4;
@@ -27,12 +18,12 @@ interface Options {
 
 const useCardNumbers = (initialValue: Record<string, string>, options?: Options) => {
   const { value, setValue, handleBlur, errorInfo, setErrorInfo } = useInputs(initialValue, {
-    onChange,
+    onChange: validateNumber,
     onBlur,
   });
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>, name: string) => {
-    const validationResult = onChange(event.target.value);
+    const validationResult = validateNumber(event.target.value);
     setErrorInfo(prev => ({
       ...prev,
       [name]: validationResult,
@@ -61,7 +52,7 @@ const useCardNumbers = (initialValue: Record<string, string>, options?: Options)
   useEffect(() => {
     const initialValues = Object.entries(initialValue);
     for (const [key, value] of initialValues) {
-      if (!onChange(value).isValid || !onBlur(value).isValid) {
+      if (!validateNumber(value).isValid || !onBlur(value).isValid) {
         console.error(
           `cardNumbers field error: ${value} 라는 올바르지 않은 값이 들어와 빈 값으로 초기화했습니다.`,
         );
