@@ -5,7 +5,7 @@ import useCardPassword from './useCardPassword';
 const VALID_CARD_PASSWORD_LENGTH = 2;
 
 describe('useCardPassword 커스텀 훅 테스트', () => {
-  const { result } = renderHook(() => useCardPassword(VALID_CARD_PASSWORD_LENGTH));
+  const { result } = renderHook(() => useCardPassword());
 
   it('올바른 카드 비밀번호를 입력하면 유효하다', () => {
     result.current.handlePasswordChange('12');

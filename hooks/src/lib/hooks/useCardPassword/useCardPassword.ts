@@ -4,8 +4,8 @@ import { isNotNumber, getNumberErrorMessage } from '../../utils/validation/valid
 const VALID_PASSWORD_LENGTH = 2;
 
 const useCardPassword = (
-  initialValue: string = '',
-  validLength: number = VALID_PASSWORD_LENGTH
+  validLength: number = VALID_PASSWORD_LENGTH,
+  initialValue: string = ''
 ) => {
   const [password, setPassword] = useState(initialValue);
   const [isValidPassword, setIsValidPassword] = useState(false);

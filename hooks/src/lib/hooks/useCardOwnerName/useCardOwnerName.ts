@@ -10,8 +10,8 @@ export const OWNER_NAME_ERROR_MESSAGES = {
 const VALID_OWNER_NAME_LENGTH = 21;
 
 const useCardOwnerName = (
-  initialValue: string = '',
-  validLength: number = VALID_OWNER_NAME_LENGTH
+  validLength: number = VALID_OWNER_NAME_LENGTH,
+  initialValue: string = ''
 ) => {
   const [ownerName, setOwnerName] = useState(initialValue);
   const [isValidOwnerName, setIsValidOwnerName] = useState(false);

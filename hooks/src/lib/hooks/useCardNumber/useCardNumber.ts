@@ -5,9 +5,9 @@ import { updateArray } from '../../utils/updateArray';
 export const VALID_CARD_NUMBER_LENGTH = 16;
 
 const useCardNumber = (
-  initialValue: string[] | null = null,
   unitCount: number,
-  singleUnitLength: number
+  singleUnitLength: number,
+  initialValue: string[] | null = null
 ) => {
   const [cardNumber, setCardNumber] = useState<string[]>(
     initialValue || new Array(unitCount).fill('')
