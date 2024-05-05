@@ -7,6 +7,7 @@ const meta = {
   argTypes: {
     position: { name: "모달의 위치" },
     title: { name: "모달의 제목" },
+    theme: { name: "모달의 색상 테마" },
     closeButtonPosition: { name: "닫기 버튼의 위치" },
     hasConfirmButton: { name: "확인 버튼의 유무" },
   },

@@ -3,7 +3,7 @@ import { useMemo, useRef } from "react";
 const useModalHook = () => {
   const dialogRef = useRef<HTMLDialogElement | null>(null);
 
-  const action = useMemo(
+  const action: ModalActionType = useMemo(
     () => ({
       handleClose: () => {
         if (dialogRef) dialogRef.current?.close();

@@ -1,5 +1,5 @@
 import { css } from "@emotion/react";
-import COLOR_PALETTE from "../colorPalette";
+import COLOR_PALETTE from "../../colorPalette";
 
 type Position = "center" | "bottom";
 
@@ -17,13 +17,13 @@ const modalConditionStyle = (position: Position, width: number) => {
   }
 };
 
-export const modalStyle = (position: Position, width: number) =>
+export const modalStyle = (position: Position, width: number, theme: ThemeType) =>
   css({
     padding: 0,
     border: 0,
     borderRadius: "8px",
-    color: COLOR_PALETTE.color,
-    background: COLOR_PALETTE.background,
+    color: COLOR_PALETTE[theme].color,
+    background: COLOR_PALETTE[theme].background,
     ...modalConditionStyle(position, width),
   });
 

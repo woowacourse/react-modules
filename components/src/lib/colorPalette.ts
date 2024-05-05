@@ -1,6 +1,4 @@
-const COLOR_PALETTE_KEY = window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark";
-
-const COLOR_PALETTE_OBJECT = {
+const COLOR_PALETTE = {
   light: {
     background: "#ffffff",
     backgroundHighlight: "#333333",
@@ -14,7 +12,5 @@ const COLOR_PALETTE_OBJECT = {
     colorHighlight: "#333333",
   },
 };
-
-const COLOR_PALETTE = COLOR_PALETTE_OBJECT[COLOR_PALETTE_KEY];
 
 export default COLOR_PALETTE;
