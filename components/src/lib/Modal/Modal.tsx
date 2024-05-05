@@ -1,5 +1,8 @@
 import * as S from "./Modal.style.tsx";
-import BasicButton, { ButtonColorType, ButtonSizeType } from "../Button.tsx";
+import BasicButton, {
+  ButtonColorType,
+  ButtonSizeType,
+} from "@/lib/Button/Button.tsx";
 
 export type ModalPosition = "center" | "bottom";
 

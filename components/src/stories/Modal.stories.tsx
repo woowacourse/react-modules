@@ -1,11 +1,11 @@
-import Modal from '../lib/Modal/Modal';
-import DeleteIcon from '../assets/deleteIcon.svg?react';
-import type { StoryObj } from '@storybook/react';
-import { CardCompanyType, CardCompanies } from '../data/CardCompany';
-import styled from 'styled-components';
+import Modal from "../lib/Modal/Modal";
+import DeleteIcon from "../assets/deleteIcon.svg?react";
+import type { StoryObj } from "@storybook/react";
+import { CardCompanyType, CardCompanies } from "../data/CardCompany";
+import styled from "styled-components";
 
 export default {
-  title: 'Components/Modal',
+  title: "Components/Modal",
   component: Modal,
 };
 
@@ -17,7 +17,11 @@ const DefaultModal = () => {
         <DeleteIcon />
       </Modal.CloseIcon>
       <Modal.Content>[필수] 개인정보 수집약관 동의</Modal.Content>
-      <Modal.ConfirmButton label="동의" onConfirm={() => {}} />
+      <Modal.StyledButton
+        label="동의"
+        onClickEvent={() => {}}
+        backgroundColor="black"
+      />
       <Modal.CloseButton label="닫기" onClose={() => {}} />
     </Modal>
   );
@@ -28,7 +32,11 @@ const NoCloseButtonModal = () => {
     <Modal isOpen={true} position="bottom" onClose={() => {}}>
       <Modal.Title> 약관에 동의해 주세요</Modal.Title>
       <Modal.Content>[필수] 개인정보 수집약관 동의</Modal.Content>
-      <Modal.ConfirmButton label="동의" onConfirm={() => {}} />
+      <Modal.StyledButton
+        label="동의"
+        onClickEvent={() => {}}
+        backgroundColor="black"
+      />
       <Modal.CloseButton label="닫기" onClose={() => {}} />
     </Modal>
   );

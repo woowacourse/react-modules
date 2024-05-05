@@ -8,7 +8,7 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyles />
-      <Modal isOpen={true} position="center" onClose={() => {}} size="full">
+      <Modal isOpen={true} position="center" onClose={() => {}}>
         <Modal.Title> 약관에 동의해 주세요</Modal.Title>
         <Modal.CloseIcon onClick={() => {}}>닫기</Modal.CloseIcon>
         <Modal.Content>[필수] 개인정보 수집약관 동의</Modal.Content>
