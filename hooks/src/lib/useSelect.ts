@@ -1,9 +1,5 @@
 import { useState } from 'react';
-
-export interface ValidationResult {
-  isValid: boolean;
-  errorMessage: string;
-}
+import { ValidationResult } from './types';
 
 interface ValidatorProps {
   onChange: (value: string, options: string[]) => ValidationResult;

@@ -1,8 +1,9 @@
 import { useEffect } from 'react';
 import useInput from './useInput';
 import { validateCVCFormat, validateNumber } from './validator';
+import { UseCard } from './types';
 
-const useCVC = (initialValue: string) => {
+const useCVC = (initialValue: string): UseCard => {
   const { value, setValue, handleChange, handleBlur, errorInfo } = useInput(initialValue, {
     onChange: validateNumber,
     onBlur: validateCVCFormat,

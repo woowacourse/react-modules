@@ -1,12 +1,13 @@
 import useInput from './useInput';
 import { useEffect } from 'react';
 import { validateExpiryMonthFormat, validateNumber } from './validator';
+import { UseCard } from './types';
 
 interface Options {
   isAutoFocus?: boolean;
 }
 
-const useExpiryMonth = (initialValue: string, options?: Options) => {
+const useExpiryMonth = (initialValue: string, options?: Options): UseCard => {
   const { value, setValue, handleBlur, errorInfo, setErrorInfo } = useInput(initialValue, {
     onChange: validateNumber,
     onBlur: validateExpiryMonthFormat,

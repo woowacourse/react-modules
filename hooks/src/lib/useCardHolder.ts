@@ -1,8 +1,9 @@
 import { useEffect } from 'react';
 import useInput from './useInput';
 import { validateCardHolderFormat, validateEnglish } from './validator';
+import { UseCard } from './types';
 
-const useCardHolder = (initialValue: string) => {
+const useCardHolder = (initialValue: string): UseCard => {
   const { value, setValue, handleBlur, errorInfo, setErrorInfo } = useInput(
     initialValue.toUpperCase(),
     {
