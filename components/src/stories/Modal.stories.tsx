@@ -3,6 +3,8 @@ import { Meta, StoryObj } from '@storybook/react';
 import { Modal, useModal } from '../lib/index';
 import CardCompanySelector from '../components/CardCompanySelector';
 
+import '../styles/index.css';
+
 const meta: Meta<typeof Modal> = {
   title: 'Modal',
   component: Modal,
