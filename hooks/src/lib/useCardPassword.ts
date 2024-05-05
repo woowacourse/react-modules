@@ -1,15 +1,15 @@
 import { useState, ChangeEvent } from "react";
-import { validatePassword } from "../validators/newCardInputValidator";
+import { validatePassword } from "../validators/cardInputValidator";
 
 const useCardPassword = (cardPasswordLength: number) => {
   const [cardPassWordInfo, setCardPassWordInfo] = useState({
     password: "",
-    isError: false,
+    isValid: false,
   });
 
   const handleCardPassword = (event: ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target;
-    const isError = validatePassword(value, cardPasswordLength);
+    const isValid = validatePassword(value, cardPasswordLength);
 
     setCardPassWordInfo((prev) => {
       return {
@@ -18,22 +18,15 @@ const useCardPassword = (cardPasswordLength: number) => {
       };
     });
 
-    if (isError) {
+    if (isValid) {
       setCardPassWordInfo((prev) => {
         return {
           ...prev,
-          isError: true,
+          isValid: true,
         };
       });
       return;
     }
-
-    setCardPassWordInfo((prev) => {
-      return {
-        ...prev,
-        isError: false,
-      };
-    });
   };
 
   return {

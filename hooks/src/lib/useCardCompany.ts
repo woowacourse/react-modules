@@ -1,17 +1,18 @@
 import { useState, ChangeEvent } from "react";
-import { validateCardCompany } from "../validators/newCardInputValidator";
+import { validateCardCompany } from "../validators/cardInputValidator";
 
 const useCardCompany = () => {
   const [cardCompanyInfo, setCardCompanyInfo] = useState({
     cardCompany: "",
-    isError: false,
+    isValid: false,
   });
+
   const handleCardCompany = (
     event: ChangeEvent<HTMLSelectElement>,
     defaultValue: string
   ) => {
     const { value } = event.target;
-    const isError = validateCardCompany(value, defaultValue);
+    const isValid = validateCardCompany(value, defaultValue);
 
     setCardCompanyInfo((prev) => {
       return {
@@ -20,23 +21,17 @@ const useCardCompany = () => {
       };
     });
 
-    if (isError) {
+    if (isValid) {
       setCardCompanyInfo((prev) => {
         return {
           ...prev,
-          isError: true,
+          isValid: true,
         };
       });
       return;
     }
-
-    setCardCompanyInfo((prev) => {
-      return {
-        ...prev,
-        isError: false,
-      };
-    });
   };
+
   return {
     cardCompanyInfo,
     handleCardCompany,

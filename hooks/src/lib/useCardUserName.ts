@@ -1,15 +1,15 @@
 import { useState, ChangeEvent } from "react";
-import { validateUserName } from "../validators/newCardInputValidator";
+import { validateUserName } from "../validators/cardInputValidator";
 
 const useCardUserName = (cardUserNameLength: number) => {
   const [cardUserNameInfo, setCardUserNameInfo] = useState({
     cardUserName: "",
-    isError: false,
+    isValid: false,
   });
 
   const handleCardUserName = (event: ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target;
-    const isError = validateUserName(value, cardUserNameLength);
+    const isValid = validateUserName(value, cardUserNameLength);
 
     setCardUserNameInfo((prev) => {
       return {
@@ -18,22 +18,15 @@ const useCardUserName = (cardUserNameLength: number) => {
       };
     });
 
-    if (isError) {
+    if (isValid) {
       setCardUserNameInfo((prev) => {
         return {
           ...prev,
-          isError: true,
+          isValid: true,
         };
       });
       return;
     }
-
-    setCardUserNameInfo((prev) => {
-      return {
-        ...prev,
-        isError: false,
-      };
-    });
   };
 
   return {

@@ -1,15 +1,15 @@
 import { useState, ChangeEvent } from "react";
-import { validateCVC } from "../validators/newCardInputValidator";
+import { validateCVC } from "../validators/cardInputValidator";
 
 const useCardCVC = (cardCVCLength: number) => {
   const [cardCVCInfo, setCardCVCInfo] = useState({
     cardCVC: "",
-    isError: false,
+    isValid: false,
   });
 
   const handleCardCVC = (event: ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target;
-    const isError = validateCVC(value, cardCVCLength);
+    const isValid = validateCVC(value, cardCVCLength);
 
     setCardCVCInfo((prev) => {
       return {
@@ -18,22 +18,15 @@ const useCardCVC = (cardCVCLength: number) => {
       };
     });
 
-    if (isError) {
+    if (isValid) {
       setCardCVCInfo((prev) => {
         return {
           ...prev,
-          isError: true,
+          isValid: true,
         };
       });
       return;
     }
-
-    setCardCVCInfo((prev) => {
-      return {
-        ...prev,
-        isError: false,
-      };
-    });
   };
 
   return {
