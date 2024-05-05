@@ -12,24 +12,32 @@ describe("카드 CVC 입력에 대한 useCVCValidation 커스텀 훅 테스트",
   it("CVC가 비어 있을 경우, 오류 메시지를 반환해야 한다", () => {
     const { result } = renderHook(() => useCVCValidation({ cvc: "" }));
     expect(result.current.validationResult.isValid).toBe(false);
-    expect(result.current.validationResult.errorMessage).toBe(ERROR_MESSAGE.EMPTY_VALUE);
+    expect(result.current.validationResult.errorMessage).toBe(
+      ERROR_MESSAGE.EMPTY_VALUE
+    );
   });
 
   it("CVC에 숫자 이외의 문자가 포함된 경우, 오류 메시지를 반환해야 한다", () => {
     const { result } = renderHook(() => useCVCValidation({ cvc: "12A" }));
     expect(result.current.validationResult.isValid).toBe(false);
-    expect(result.current.validationResult.errorMessage).toBe(ERROR_MESSAGE.ONLY_NUMBER);
+    expect(result.current.validationResult.errorMessage).toBe(
+      ERROR_MESSAGE.ONLY_NUMBER
+    );
   });
 
-  it("CVC의 길이가 부적절할 경우, 오류 메시지를 반환해야 한다", () => {
+  it("CVC의 길이가 3자보다 긴 경우, 오류 메시지를 반환해야 한다", () => {
     const { result } = renderHook(() => useCVCValidation({ cvc: "1234" }));
     expect(result.current.validationResult.isValid).toBe(false);
-    expect(result.current.validationResult.errorMessage).toBe(ERROR_MESSAGE.INVALID_CVC_LENGTH);
+    expect(result.current.validationResult.errorMessage).toBe(
+      ERROR_MESSAGE.INVALID_CVC_LENGTH
+    );
   });
 
-  it("CVC의 길이가 부적절할 경우 (너무 짧은 경우), 오류 메시지를 반환해야 한다", () => {
+  it("CVC의 길이가 3자보다 짧은 경우 (너무 짧은 경우), 오류 메시지를 반환해야 한다", () => {
     const { result } = renderHook(() => useCVCValidation({ cvc: "12" }));
     expect(result.current.validationResult.isValid).toBe(false);
-    expect(result.current.validationResult.errorMessage).toBe(ERROR_MESSAGE.INVALID_CVC_LENGTH);
+    expect(result.current.validationResult.errorMessage).toBe(
+      ERROR_MESSAGE.INVALID_CVC_LENGTH
+    );
   });
 });
