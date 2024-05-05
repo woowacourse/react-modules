@@ -1,19 +1,31 @@
-import type { ModalProps, ModalFooterProps } from './Modal.type';
+import type { ModalProps, ModalFooterProps, ModalHeaderType, ModalBodyType } from './Modal.type';
 import styles from './Modal.module.css';
 import { StrictPropsWithChildren } from '../type/common';
 import usePreventScroll from '../hooks/usePreventScroll';
 import useKeyPress from '../hooks/useKeyPress';
 
-export const ModalHeader = ({ children }: StrictPropsWithChildren) => {
-  return <header className={styles.modalHeader}>{children}</header>;
+export const ModalHeader = ({ children, ...rest }: StrictPropsWithChildren<ModalHeaderType>) => {
+  return (
+    <header {...rest} className={styles.modalHeader}>
+      {children}
+    </header>
+  );
 };
 
-export const ModalBody = ({ children }: StrictPropsWithChildren) => {
-  return <section className={styles.modalBody}>{children}</section>;
+export const ModalBody = ({ children, ...rest }: StrictPropsWithChildren<ModalBodyType>) => {
+  return (
+    <section {...rest} className={styles.modalBody}>
+      {children}
+    </section>
+  );
 };
 
-export const ModalFooter = ({ children, direction = 'column' }: StrictPropsWithChildren<ModalFooterProps>) => {
-  return <footer className={`${styles.modalFooter} ${styles[direction]}`}>{children}</footer>;
+export const ModalFooter = ({ children, direction = 'column', ...rest }: StrictPropsWithChildren<ModalFooterProps>) => {
+  return (
+    <footer {...rest} className={`${styles.modalFooter} ${styles[direction]}`}>
+      {children}
+    </footer>
+  );
 };
 
 export const ModalMain = ({
