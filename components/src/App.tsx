@@ -10,7 +10,10 @@ function App() {
       <button onClick={toggleIsOpen}>모달열기</button>
       <Modal isOpen={isOpen}>
         <Modal.Dimmed onDimmedClick={() => toggleIsOpen()} />
-        <Modal.Header onClose={() => toggleIsOpen()} title="제목" />
+        <Modal.Header>
+          <Modal.Title title="제목" />
+          <Modal.CloseIcon onClose={() => toggleIsOpen()} />
+        </Modal.Header>
         <Modal.Content>
           <>
             <div>내용</div>

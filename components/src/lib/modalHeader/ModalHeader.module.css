@@ -4,19 +4,3 @@
     align-items: center;
     width: 100%;
 }
-
-.title {
-    color: black;
-    font-family: Noto Sans KR;
-    font-size: 24px;
-    font-weight: 700;
-    line-height: 26.06px;
-    text-align: left;
-}
-
-.closeButton {
-    width: 24px;
-    height: 24px;
-    object-fit: contain;
-    cursor: pointer;
-}
