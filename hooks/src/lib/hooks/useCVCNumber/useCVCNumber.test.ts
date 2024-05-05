@@ -12,8 +12,8 @@ describe("useCVCNumber 테스트", () => {
     expect(result.current.CVCNumberError).toBeFalsy();
   });
 
-  test.each([["123"], ["000"]])(
-    "CVC 번호가 숫자이며 지정된 길이일 경우 에러 상태가 false여야 한다.",
+  test.each(["123", "000"])(
+    "CVC 번호가 숫자이며 지정된 길이일 경우 에러가 나타나지 않아야 한다.",
     (input) => {
       const { result } = renderHook(() => useCVCNumber(INPUT_LENGTH));
       act(() => {
@@ -25,7 +25,7 @@ describe("useCVCNumber 테스트", () => {
 });
 
 describe("useCVCNumber 예외 테스트", () => {
-  test("CVC 번호 길이가 지정된 길이를 초과할 경우 에러 상태가 true여야 한다.", () => {
+  test("CVC 번호 길이가 지정된 길이를 초과할 경우 에러가 나타나야 한다.", () => {
     const { result } = renderHook(() => useCVCNumber(INPUT_LENGTH));
     act(() => {
       result.current.handleCVCNumberChange("1234");
@@ -33,8 +33,8 @@ describe("useCVCNumber 예외 테스트", () => {
     expect(result.current.CVCNumberError).toBeTruthy();
   });
 
-  test.each([["12ab"], ["!@34"]])(
-    "CVC 번호에 숫자가 아닌 문자 또는 특수 문자가 포함되어 있을 경우 에러 상태가 true여야 한다.",
+  test.each(["12ab", "!@34"])(
+    "CVC 번호에 %s(으)로 유효하지 않게 입력될 경우(문자, 특수 문자 포함) 에러가 나타나야 한다.",
     (input) => {
       const { result } = renderHook(() => useCVCNumber(INPUT_LENGTH));
       act(() => {

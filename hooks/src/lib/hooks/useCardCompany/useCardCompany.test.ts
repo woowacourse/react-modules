@@ -11,8 +11,8 @@ describe("useCardCompany 테스트", () => {
     expect(result.current.cardCompany).toBeFalsy();
   });
 
-  test.each([["하나카드"], ["신한카드"], ["국민카드"]])(
-    "카드사 중 하나를 선택했을 경우, 에러 상태가 false 여야 한다.",
+  test.each(["하나카드", "신한카드", "국민카드"])(
+    "카드사 중 하나인 %s를 선택했을 경우, 에러가 나타나지 않아야 한다.",
     (input) => {
       const { result } = renderHook(() => useCardCompany());
       act(() => {
@@ -24,7 +24,7 @@ describe("useCardCompany 테스트", () => {
 });
 
 describe("useCardCompany 예외 테스트", () => {
-  test("아무 것도 선택하지 않았을 경우, 에러 상태가 true 여야 한다.", () => {
+  test("아무 것도 선택하지 않았을 경우, 에러가 나타나야 한다.", () => {
     const { result } = renderHook(() => useCardCompany());
 
     act(() => {

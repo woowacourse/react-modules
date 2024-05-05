@@ -20,7 +20,7 @@ describe("useCardNumbers 테스트", () => {
     ]);
   });
 
-  test("모든 입력 칸의 길이가 4일 때 cardNumberErrors가 모두 false여야 한다.", () => {
+  test("모든 입력 칸의 길이가 4일 때 cardNumberErrors가 모두 에러가 나타나지 않아야 한다.", () => {
     const { result } = renderHook(() =>
       useCardNumbers(INPUT_LENGTH, INPUT_COUNT)
     );

@@ -13,8 +13,8 @@ describe("useCardHolder 테스트", () => {
     expect(result.current.cardHolderError).toBeFalsy();
   });
 
-  test.each([["Bing Bong"], ["BingBong"]])(
-    "카드 소유주 이름이 유효하게 입력될 경우(영어 대소문자, 공백), 입력될 경우 에러 상태가 false 여야 한다.",
+  test.each(["Bing Bong", "BingBong"])(
+    "카드 소유주 이름이 %s(으)로 유효하게 입력될 경우(영어 대소문자, 공백), 에러가 나타나지 않아야 한다.",
     (input) => {
       const { result } = renderHook(() => useCardHolder(INPUT_LENGTH));
       act(() => {
@@ -26,8 +26,8 @@ describe("useCardHolder 테스트", () => {
 });
 
 describe("useCardHolder 예외 테스트", () => {
-  test.each([["프룬"], ["12345"], ["!@#$%^"], ["FF1"]])(
-    "카드 소유주 이름이 유효하지 않게 입력될 경우(한글, 숫자, 특수문자), 입력될 경우 에러 상태가 true 여야 한다.",
+  test.each(["프룬", "12345", "!@#$%^", "FF1"])(
+    "카드 소유주 이름이 %s(으)로 유효하지 않게 입력될 경우(한글, 숫자, 특수문자), 에러가 나타나야 한다.",
     (input) => {
       const { result } = renderHook(() => useCardHolder(INPUT_LENGTH));
       act(() => {

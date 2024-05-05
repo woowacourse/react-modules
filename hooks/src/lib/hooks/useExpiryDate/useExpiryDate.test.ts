@@ -28,7 +28,7 @@ describe("useExpiryDate 테스트", () => {
 });
 
 describe("useExpiryDate 예외 테스트", () => {
-  test("유효하지 않은 월을 입력했을 경우 에러 상태가 true여야 한다.", () => {
+  test("유효하지 않은 월을 입력했을 경우 에러가 나타나야 한다.", () => {
     const { result } = renderHook(() => useExpiryDate());
     act(() => {
       result.current.handlePeriodChange("month", "13");
@@ -36,8 +36,8 @@ describe("useExpiryDate 예외 테스트", () => {
     expect(result.current.isPeriodError.month).toBeTruthy();
   });
 
-  test.each([["100"], ["-1"]])(
-    "%s가 유효하지 않은 년도일 경우 에러 상태가 true여야 한다.",
+  test.each(["100", "-1"])(
+    "%s가 유효하지 않은 년도일 경우 에러가 나타나야 한다.",
     (input) => {
       const { result } = renderHook(() => useExpiryDate());
       act(() => {
@@ -47,7 +47,7 @@ describe("useExpiryDate 예외 테스트", () => {
     }
   );
 
-  test("만료된 날짜를 입력했을 경우 에러 상태가 true여야 한다.", () => {
+  test("만료된 날짜를 입력했을 경우 에러가 나타나야 한다.", () => {
     const { result } = renderHook(() => useExpiryDate());
 
     act(() => {
