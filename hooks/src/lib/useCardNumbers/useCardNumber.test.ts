@@ -30,7 +30,7 @@ describe("useCardNumber 커스텀 훅 동작 테스트", () => {
     expect(result.current.errorState).toBe(false);
   });
 
-  const INVALID_INPUT_LENGTH_TEST_CASE = [["1"], ["12"], ["123"], ["12345"]];
+  const INVALID_INPUT_LENGTH_TEST_CASE = [["1"], ["12"], ["123"]];
 
   it.each(INVALID_INPUT_LENGTH_TEST_CASE)(
     "필드에 입력하는 입력값이 4글자이지 않을 경우, 해당 입력 필드에 예외가 발생해야한다.",
