@@ -99,6 +99,7 @@ const App = () => {
 | ---------------------------- | ------------------------------------------- | ----------------------------------------------------------------------- |
 | `isOpened`                   | boolean                                     | Determines whether the modal is displayed.                              |
 | `onClose`                    | Function                                    | The function called when the modal is closed.                           |
+| `zIndex` (optional)          | number (`0`: default)                       | The number setting for the modal's z-index.                             |
 | `title` (optional)           | string                                      | The text displayed at the top of the modal.                             |
 | `description` (optional)     | string                                      | The text displayed in the middle of the modal.                          |
 | `children` (optional)        | JSX.Element                                 | The element displayed in the middle of the modal.                       |
