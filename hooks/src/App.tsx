@@ -89,7 +89,12 @@ function App() {
         <div className="output-container">
           <p>cardNumbers: {cardNumbers.join(' ')}</p>
           <p>validStates: {validStates.join(' ')}</p>
-          <p>isValid: {cardNumbersValidationResult.isValid.toString()}</p>
+          <p>
+            isValid:{' '}
+            {cardNumbersValidationResult.isValid !== null
+              ? cardNumbersValidationResult.isValid.toString()
+              : 'null'}
+          </p>
           <p>errorMessage: {cardNumbersValidationResult.errorMessage}</p>
         </div>
       </section>
@@ -114,7 +119,12 @@ function App() {
         </div>
         <div className="output-container">
           <p>brand: {brand}</p>
-          <p>isValid: {brandValidationResult.isValid.toString()}</p>
+          <p>
+            isValid:{' '}
+            {brandValidationResult.isValid !== null
+              ? brandValidationResult.isValid.toString()
+              : 'null'}
+          </p>
           <p>errorMessage: {brandValidationResult.errorMessage}</p>
         </div>
       </section>
@@ -147,7 +157,12 @@ function App() {
           <p>
             ExpiryDate: {expiryDate.month} / {expiryDate.year}
           </p>
-          <p>isValid: {expiryDateValidationResult.isValid.toString()}</p>
+          <p>
+            isValid:{' '}
+            {expiryDateValidationResult.isValid !== null
+              ? expiryDateValidationResult.isValid.toString()
+              : 'null'}
+          </p>
           <p>errorMessage: {expiryDateValidationResult.errorMessage}</p>
         </div>
       </section>
@@ -165,7 +180,12 @@ function App() {
         </div>
         <div className="output-container">
           <p>cardHolder: {cardHolder}</p>
-          <p>isValid: {cardHolderValidationResult.isValid.toString()}</p>
+          <p>
+            isValid:{' '}
+            {cardHolderValidationResult.isValid !== null
+              ? cardHolderValidationResult.isValid.toString()
+              : 'null'}
+          </p>
           <p>errorMessage: {cardHolderValidationResult.errorMessage}</p>
         </div>
       </section>
@@ -183,7 +203,10 @@ function App() {
         </div>
         <div className="output-container">
           <p>CVC: {CVC}</p>
-          <p>isValid: {validationResult.isValid.toString()}</p>
+          <p>
+            isValid:{' '}
+            {validationResult.isValid !== null ? validationResult.isValid.toString() : 'null'}
+          </p>
           <p>errorMessage: {validationResult.errorMessage}</p>
         </div>
       </section>
@@ -201,7 +224,12 @@ function App() {
         </div>
         <div className="output-container">
           <p>password: {password}</p>
-          <p>isValid: {passwordValidationResult.isValid.toString()}</p>
+          <p>
+            isValid:{' '}
+            {passwordValidationResult.isValid !== null
+              ? passwordValidationResult.isValid.toString()
+              : 'null'}
+          </p>
           <p>errorMessage: {passwordValidationResult.errorMessage}</p>
         </div>
       </section>

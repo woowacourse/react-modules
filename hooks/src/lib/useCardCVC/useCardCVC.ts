@@ -21,25 +21,28 @@ export default function useCardCVC(
   errorMessages: ErrorMessages = DEFAULT_PARAMS.errorMessages,
 ): CVCValidationResult {
   const [CVC, setCVC] = useState(initialValue);
-  const [validationResult, setValidationResult] = useState<ValidationResult>({
-    isValid: true,
-  });
+  const [validationResult, setValidationResult] = useState<ValidationResult>(
+    getValidationResult(initialValue, errorMessages),
+  );
 
   const handleUpdateCVC = (value: string) => {
     setCVC(value);
-
-    if (validateCVC(value)) {
-      setValidationResult({ isValid: true });
-      return;
-    }
-
-    setValidationResult({
-      isValid: false,
-      errorMessage: errorMessages.inputType,
-    });
+    setValidationResult(getValidationResult(value, errorMessages));
   };
 
   return { CVC, validationResult, handleUpdateCVC };
+}
+
+function getValidationResult(value: string, errorMessages: ErrorMessages) {
+  if (value === DEFAULT_PARAMS.initialValue) {
+    return { isValid: null };
+  }
+
+  if (!validateCVC(value)) {
+    return { isValid: false, errorMessage: errorMessages.inputType };
+  }
+
+  return { isValid: true };
 }
 
 function validateCVC(value: string) {

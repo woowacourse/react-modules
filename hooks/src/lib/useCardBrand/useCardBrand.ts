@@ -35,22 +35,13 @@ export default function useCardBrand(
   validateInitialParams(allowedBrands, initialValue, errorMessages);
 
   const [brand, setBrand] = useState(initialValue);
-  const [validationResult, setValidationResult] = useState<ValidationResult>({
-    isValid: true,
-  });
+  const [validationResult, setValidationResult] = useState<ValidationResult>(
+    getValidationResult(allowedBrands, initialValue, errorMessages),
+  );
 
   const handleUpdateBrand = (value: string) => {
     setBrand(value);
-
-    if (validateBrand(allowedBrands, value)) {
-      setValidationResult({ isValid: true });
-      return;
-    }
-
-    setValidationResult({
-      isValid: false,
-      errorMessage: errorMessages.invalidBrand,
-    });
+    setValidationResult(getValidationResult(allowedBrands, value, errorMessages));
   };
 
   return { brand, validationResult, handleUpdateBrand };
@@ -68,6 +59,25 @@ function validateInitialParams(
   if (!validateBrand([...allowedBrands, ''], initialValue)) {
     throw new Error(errorMessages.initialValueNotExistsInAllowedBrands);
   }
+}
+
+function getValidationResult(
+  allowedBrands: string[],
+  value: string,
+  errorMessages: CardBrandErrorMessages,
+) {
+  if (value === DEFAULT_PARAMS.initialValue) {
+    return { isValid: null };
+  }
+
+  if (!validateBrand(allowedBrands, value)) {
+    return {
+      isValid: false,
+      errorMessage: errorMessages.invalidBrand,
+    };
+  }
+
+  return { isValid: true };
 }
 
 function validateBrand(allowedBrands: string[], value: string) {

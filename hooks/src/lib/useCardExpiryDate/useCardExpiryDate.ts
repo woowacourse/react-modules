@@ -33,38 +33,13 @@ export default function useCardExpiryDate(
   errorMessages: ExpiryDateErrorMessages = DEFAULT_PARAMS.errorMessages,
 ): ExpiryDateValidationResult {
   const [expiryDate, setExpiryDate] = useState(initialValue);
-  const [validationResult, setValidationResult] = useState<ValidationResult>({
-    isValid: true,
-  });
+  const [validationResult, setValidationResult] = useState<ValidationResult>(
+    getValidationResult(initialValue, errorMessages),
+  );
 
   const handleUpdateExpiryDate = (value: ExpiryDate) => {
     setExpiryDate(value);
-
-    if (!validateExpireMonth(value.month)) {
-      setValidationResult({
-        isValid: false,
-        errorMessage: errorMessages.invalidMonth,
-      });
-      return;
-    }
-
-    if (!validateExpireYear(value.year)) {
-      setValidationResult({
-        isValid: false,
-        errorMessage: errorMessages.invalidYear,
-      });
-      return;
-    }
-
-    if (!validateExpiryDate(value)) {
-      setValidationResult({
-        isValid: false,
-        errorMessage: errorMessages.expiredDate,
-      });
-      return;
-    }
-
-    setValidationResult({ isValid: true });
+    setValidationResult(getValidationResult(value, errorMessages));
   };
 
   return {
@@ -72,6 +47,40 @@ export default function useCardExpiryDate(
     validationResult,
     handleUpdateExpiryDate,
   };
+}
+
+function getValidationResult(value: ExpiryDate, errorMessages: ExpiryDateErrorMessages) {
+  if (
+    value.month === DEFAULT_PARAMS.initialValue.month &&
+    value.year === DEFAULT_PARAMS.initialValue.year
+  ) {
+    return {
+      isValid: null,
+    };
+  }
+
+  if (!validateExpireMonth(value.month)) {
+    return {
+      isValid: false,
+      errorMessage: errorMessages.invalidMonth,
+    };
+  }
+
+  if (!validateExpireYear(value.year)) {
+    return {
+      isValid: false,
+      errorMessage: errorMessages.invalidYear,
+    };
+  }
+
+  if (!validateExpiryDate(value)) {
+    return {
+      isValid: false,
+      errorMessage: errorMessages.expiredDate,
+    };
+  }
+
+  return { isValid: true };
 }
 
 function validateExpiryDate(value: ExpiryDate) {

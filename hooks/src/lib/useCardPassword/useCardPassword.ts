@@ -21,22 +21,13 @@ export default function useCardPassword(
   errorMessages: ErrorMessages = DEFAULT_PARAMS.errorMessages,
 ): PasswordValidationResult {
   const [password, setPassword] = useState(initialValue);
-  const [validationResult, setValidationResult] = useState<ValidationResult>({
-    isValid: true,
-  });
+  const [validationResult, setValidationResult] = useState<ValidationResult>(
+    getValidationResult(initialValue, errorMessages),
+  );
 
   const handleUpdatePassword = (value: string) => {
     setPassword(value);
-
-    if (validatePassword(value)) {
-      setValidationResult({ isValid: true });
-      return;
-    }
-
-    setValidationResult({
-      isValid: false,
-      errorMessage: errorMessages.inputType,
-    });
+    setValidationResult(getValidationResult(value, errorMessages));
   };
 
   return {
@@ -46,6 +37,18 @@ export default function useCardPassword(
   };
 }
 
-const validatePassword = (value: string) => {
+function getValidationResult(value: string, errorMessages: ErrorMessages) {
+  if (value === DEFAULT_PARAMS.initialValue) {
+    return { isValid: null };
+  }
+
+  if (!validatePassword(value)) {
+    return { isValid: false, errorMessage: errorMessages.inputType };
+  }
+
+  return { isValid: true };
+}
+
+function validatePassword(value: string) {
   return Validation.isNumeric(value) && Validation.hasLength(value, 2);
-};
+}

@@ -21,22 +21,13 @@ export default function useCardHolder(
   errorMessages: ErrorMessages = DEFAULT_PARAMS.errorMessages,
 ): CardHolderValidationResult {
   const [cardHolder, setCardHolder] = useState(initialValue);
-  const [validationResult, setValidationResult] = useState<ValidationResult>({
-    isValid: true,
-  });
+  const [validationResult, setValidationResult] = useState<ValidationResult>(
+    getValidationResult(initialValue, errorMessages),
+  );
 
   const handleUpdateCardHolder = (value: string) => {
     setCardHolder(value);
-
-    if (validateCardHolder(value)) {
-      setValidationResult({ isValid: true });
-      return;
-    }
-
-    setValidationResult({
-      isValid: false,
-      errorMessage: errorMessages.inputType,
-    });
+    setValidationResult(getValidationResult(value, errorMessages));
   };
 
   return {
@@ -45,6 +36,19 @@ export default function useCardHolder(
     handleUpdateCardHolder,
   };
 }
-const validateCardHolder = (value: string) => {
+
+function getValidationResult(value: string, errorMessages: ErrorMessages) {
+  if (value === DEFAULT_PARAMS.initialValue) {
+    return { isValid: null };
+  }
+
+  if (!validateCardHolder(value)) {
+    return { isValid: false, errorMessage: errorMessages.inputType };
+  }
+
+  return { isValid: true };
+}
+
+function validateCardHolder(value: string) {
   return Validation.isEnglishWithSpace(value);
-};
+}

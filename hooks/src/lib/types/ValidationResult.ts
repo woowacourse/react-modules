@@ -1,4 +1,4 @@
 export default interface ValidationResult {
-  isValid: boolean;
+  isValid: boolean | null;
   errorMessage?: string;
 }
