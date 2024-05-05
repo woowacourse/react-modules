@@ -1,7 +1,6 @@
 import Button from './lib/Button/Button';
 
 import Modal from './lib/Modal/Modal';
-// import { Modal } from 'woowacourse-todari-components';
 import React, { useState } from 'react';
 
 const App = () => {
