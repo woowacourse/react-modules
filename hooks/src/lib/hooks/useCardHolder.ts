@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 import { INPUT_REGEX } from "../constants/regex";
-import { ERROR_MESSAGES } from "../constants/errorMessage";
+import { ERROR_MESSAGES } from "../constants/messages";
 
 function useCardHolder(maxLength: number) {
   const [cardHolder, setCardHolder] = useState("");

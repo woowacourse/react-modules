@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ERROR_MESSAGES } from "../constants/errorMessage";
+import { ERROR_MESSAGES } from "../constants/messages";
 
 function useCardCompany() {
   const [cardCompany, setCardCompany] = useState("");

@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 import { INPUT_REGEX } from "../constants/regex";
-import { ERROR_MESSAGES } from "../constants/errorMessage";
+import { ERROR_MESSAGES } from "../constants/messages";
 
 function usePassword(maxLength: number) {
   const [password, setPassword] = useState("");
@@ -15,7 +15,7 @@ function usePassword(maxLength: number) {
 
   const getPasswordErrorMessage = () => {
     return passwordError
-      ? ERROR_MESSAGES.maxLengthNumber(maxLength)
+      ? `${maxLength}${ERROR_MESSAGES.maxLengthNumber}`
       : undefined;
   };
 

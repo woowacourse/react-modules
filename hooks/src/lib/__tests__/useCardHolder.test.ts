@@ -1,7 +1,7 @@
 import { renderHook } from "@testing-library/react";
 import useCardHolder from "../hooks/useCardHolder";
 import { act } from "react";
-import { ERROR_MESSAGES } from "../constants/errorMessage";
+import { ERROR_MESSAGES } from "../constants/messages";
 
 const INPUT_LENGTH = 20;
 

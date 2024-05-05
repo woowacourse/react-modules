@@ -1,6 +1,6 @@
 import { act, renderHook } from "@testing-library/react";
 import useCardNumbers from "../hooks/useCardNumbers";
-import { ERROR_MESSAGES } from "../constants/errorMessage";
+import { ERROR_MESSAGES } from "../constants/messages";
 
 const INPUT_LENGTH = 4;
 const INPUT_COUNT = 4;

@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 import { INPUT_REGEX } from "../constants/regex";
-import { ERROR_MESSAGES } from "../constants/errorMessage";
+import { ERROR_MESSAGES } from "../constants/messages";
 
 function useCardNumbers(maxLength: number, inputCount = 1) {
   const [cardNumbers, setCardNumbers] = useState(Array(inputCount).fill(""));
@@ -23,7 +23,7 @@ function useCardNumbers(maxLength: number, inputCount = 1) {
 
   const getCardNumbersErrorMessage = () => {
     return cardNumberErrors.some((isError) => isError)
-      ? ERROR_MESSAGES.maxLengthNumber(maxLength)
+      ? `${maxLength}${ERROR_MESSAGES.maxLengthNumber}`
       : undefined;
   };
 

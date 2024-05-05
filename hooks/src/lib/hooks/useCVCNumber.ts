@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 import { INPUT_REGEX } from "../constants/regex";
-import { ERROR_MESSAGES } from "../constants/errorMessage";
+import { ERROR_MESSAGES } from "../constants/messages";
 
 function useCVCNumber(maxLength: number) {
   const [CVCNumber, setCVCNumber] = useState("");
@@ -16,7 +16,7 @@ function useCVCNumber(maxLength: number) {
 
   const getCVCNumberErrorMessage = () => {
     return CVCNumberError
-      ? ERROR_MESSAGES.maxLengthNumber(maxLength)
+      ? `${maxLength}${ERROR_MESSAGES.maxLengthNumber}`
       : undefined;
   };
 
