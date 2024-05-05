@@ -1,14 +1,5 @@
 import { useState } from 'react';
-
-export interface ValidationResult {
-  isValid: boolean;
-  errorMessage: string;
-}
-
-interface ValidatorProps {
-  validateInputType: (value: string) => ValidationResult;
-  validateFieldRules: (value: string) => ValidationResult;
-}
+import { ValidationResult, ValidatorProps } from './types';
 
 const makeInitialErrorInfo = (initialValue: Record<string, string>) => {
   const keys = Object.keys(initialValue);

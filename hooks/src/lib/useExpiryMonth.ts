@@ -1,4 +1,5 @@
-import useInput, { ValidationResult } from './useInput';
+import { CustomValidator } from './types';
+import useInput from './useInput';
 import { useEffect } from 'react';
 
 const validateInputType = (value: string) => {
@@ -26,10 +27,8 @@ const validateFieldRules = (value: string) => {
   return { isValid: true, errorMessage: '' };
 };
 
-export interface ExpiryMonthOptions {
+export interface ExpiryMonthOptions extends CustomValidator {
   isAutoFocus?: boolean;
-  customValidateInputType?: (value: string) => ValidationResult;
-  customValidateFieldRules?: (value: string) => ValidationResult;
 }
 
 const useExpiryMonth = (initialValue: string, options?: ExpiryMonthOptions) => {

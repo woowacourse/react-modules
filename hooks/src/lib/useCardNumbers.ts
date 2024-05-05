@@ -1,4 +1,5 @@
-import useInputs, { ValidationResult } from './useInputs';
+import { CustomValidator } from './types';
+import useInputs from './useInputs';
 import { useEffect } from 'react';
 
 const validateInputType = (value: string) => {
@@ -21,10 +22,8 @@ const validateFieldRules = (value: string) => {
   return { isValid: true, errorMessage: '' };
 };
 
-export interface CardNumbersOptions {
+export interface CardNumbersOptions extends CustomValidator {
   isAutoFocus?: boolean;
-  customValidateInputType?: (value: string) => ValidationResult;
-  customValidateFieldRules?: (value: string) => ValidationResult;
 }
 
 const useCardNumbers = (initialValue: Record<string, string>, options?: CardNumbersOptions) => {

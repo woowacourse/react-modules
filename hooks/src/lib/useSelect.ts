@@ -1,16 +1,7 @@
 import { useState } from 'react';
+import { ValidationResult, ValidatorSelectProps } from './types';
 
-export interface ValidationResult {
-  isValid: boolean;
-  errorMessage: string;
-}
-
-interface ValidatorProps {
-  validateInputType: (value: string) => ValidationResult;
-  validateFieldRules: (value: string, options: string[]) => ValidationResult;
-}
-
-const useSelect = (initialValue: string, validator: ValidatorProps, options: string[]) => {
+const useSelect = (initialValue: string, validator: ValidatorSelectProps, options: string[]) => {
   const { validateInputType, validateFieldRules } = validator;
   const [value, setValue] = useState(initialValue);
   const [errorInfo, setErrorInfo] = useState<ValidationResult>({

@@ -1,4 +1,5 @@
-import useSelect, { ValidationResult } from './useSelect';
+import { CustomSelectValidator } from './types';
+import useSelect from './useSelect';
 import { useEffect } from 'react';
 
 const validateInputType = (value: string) => {
@@ -17,16 +18,11 @@ const validateFieldRules = (value: string, options: string[]) => {
   return { isValid: true, errorMessage: '' };
 };
 
-export interface CardTypeCustomOptions {
-  customValidateInputType?: (value: string) => ValidationResult;
-  customValidateFieldRules?: (value: string, options: string[]) => ValidationResult;
-}
-
 export interface UseCardTypeProps {
   initialValue: string;
   options: string[];
   placeholder: string;
-  customValidateOptions?: CardTypeCustomOptions;
+  customValidateOptions?: CustomSelectValidator;
 }
 
 const useCardType = ({
