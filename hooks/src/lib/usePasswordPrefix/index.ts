@@ -11,9 +11,9 @@ export default function usePasswordPrefix(): UsePasswordPrefixReturn {
   const [value, setValue] = useState("");
   const { errorStatus, validateValue } = useValidation(validatePasswordPrefix);
 
-  const setPasswordPrefix = (string: string) => {
-    setValue(string);
-    validateValue(string);
+  const setPasswordPrefix = (value: string) => {
+    setValue(value);
+    validateValue(value);
   };
 
   return { passwordPrefix: value, setPasswordPrefix, errorStatus };

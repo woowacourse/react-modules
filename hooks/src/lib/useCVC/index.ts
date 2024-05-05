@@ -11,9 +11,9 @@ export default function useCVC(): UseCVCReturn {
   const [value, setValue] = useState("");
   const { errorStatus, validateValue } = useValidation(validateCVC);
 
-  const setCVC = (string: string) => {
-    setValue(string);
-    validateValue(string);
+  const setCVC = (value: string) => {
+    setValue(value);
+    validateValue(value);
   };
 
   return { cvc: value, setCVC, errorStatus };

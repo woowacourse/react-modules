@@ -19,14 +19,14 @@ export default function useExpiryDate(): UseExpiryDateReturn {
   const { errorStatus: expiryYearErrorStatus, validateValue: validateExpiryYear } =
     useValidation(validateYear);
 
-  const setExpiryMonth = (string: string) => {
-    setExpiryMonthValue(string);
-    validateExpiryMonth(string);
+  const setExpiryMonth = (value: string) => {
+    setExpiryMonthValue(value);
+    validateExpiryMonth(value);
   };
 
-  const setExpiryYear = (string: string) => {
-    setExpiryYearValue(string);
-    validateExpiryYear(string);
+  const setExpiryYear = (value: string) => {
+    setExpiryYearValue(value);
+    validateExpiryYear(value);
   };
 
   return {
