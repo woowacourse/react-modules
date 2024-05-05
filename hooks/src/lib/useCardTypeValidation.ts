@@ -16,10 +16,9 @@ const useCardTypeValidation = () => {
       return;
     }
 
-    if (
-      parseInt(value.substring(0, 2), 10) >= CARD_TYPE.minMastercardNumber &&
-      parseInt(value.substring(0, 2), 10) <= CARD_TYPE.maxMastercardNumber
-    ) {
+    const startNumber = parseInt(value.substring(0, 2), 10);
+
+    if (CARD_TYPE.minMastercardNumber <= startNumber && startNumber <= CARD_TYPE.maxMastercardNumber) {
       setValidationResult({ cardType: 'Mastercard' });
       return;
     }
