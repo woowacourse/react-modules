@@ -1,4 +1,4 @@
-interface ModalContentProps {
+export interface ModalContentProps {
   style?: React.CSSProperties;
 }
 

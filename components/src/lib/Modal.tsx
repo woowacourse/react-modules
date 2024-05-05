@@ -7,12 +7,12 @@ import useCloseOnESCKeyDown from './hooks/useCloseOnESC';
 
 type ModalType = 'dialog' | 'drawer' | 'drawer-top' | 'drawer-left' | 'drawer-right';
 
-interface ModalStyle {
+export interface ModalStyle {
   dimmed?: React.CSSProperties;
   modal?: React.CSSProperties;
 }
 
-interface ModalProps {
+export interface ModalProps {
   open: boolean;
   onClose: () => void;
   type: ModalType;

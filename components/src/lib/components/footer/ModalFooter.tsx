@@ -2,7 +2,7 @@ import styles from './ModalFooter.module.css';
 import CloseButton, { CloseButtonProps } from './buttons/CloseButton';
 import ConfirmButton, { ConfirmButtonProps } from './buttons/ConfirmButton';
 
-type ButtonPosition = 'row' | 'row-reverse' | 'column' | 'column-reverse';
+export type ButtonPosition = 'row' | 'row-reverse' | 'column' | 'column-reverse';
 
 const BUTTON_POSITION_TYPE: Record<ButtonPosition, string> = {
   row: styles.buttonRow,
@@ -11,7 +11,7 @@ const BUTTON_POSITION_TYPE: Record<ButtonPosition, string> = {
   'column-reverse': styles.buttonColumnReverse,
 };
 
-interface ModalFooterProps {
+export interface ModalFooterProps {
   style?: React.CSSProperties;
   buttonPosition?: ButtonPosition;
   closeButton?: CloseButtonProps;

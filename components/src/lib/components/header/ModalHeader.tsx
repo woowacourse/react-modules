@@ -1,12 +1,12 @@
 import styles from './ModalHeader.module.css';
 import CloseIcon from '../../assets/closeButton.svg';
 
-interface ModalHeaderStyle {
+export interface ModalHeaderStyle {
   modalHeader?: React.CSSProperties;
   modalTitle?: React.CSSProperties;
 }
 
-interface ModalHeaderProps {
+export interface ModalHeaderProps {
   title: string;
   onClose: () => void;
   style?: ModalHeaderStyle;
