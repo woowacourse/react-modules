@@ -5,10 +5,10 @@ import { createPortal } from 'react-dom';
 import '../../styles/reset.css';
 import styles from './style.module.css';
 
-interface PortalProps {
+export interface ModalPortalProps {
   children: ReactNode;
 }
-export default function ModalPortal(props: PortalProps) {
+export default function ModalPortal(props: ModalPortalProps) {
   const { children } = props;
 
   const $modalRoot = document.getElementById('modal-root') || document.body;
