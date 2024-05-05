@@ -1,6 +1,6 @@
 import type { CardHolderErrorType } from "@/types/cardHolder";
 import type { CardNumberErrorType } from "@/types/cardNumbers";
-import { cvcErrorType } from "@/types/cvc";
+import { CVCErrorType } from "@/types/cvc";
 import { ErrorStatus } from "@/types/errorStatus";
 import { ExpiryDateErrorType } from "@/types/expiryDate";
 import { PasswordErrorType } from "@/types/password";
@@ -18,7 +18,7 @@ export const CardHolderErrorMessages: ErrorMessages<CardHolderErrorType> = {
   [ErrorStatus.IS_DOUBLE_BLANK]: "빈칸이 두개 이상 포함되어 있습니다.",
 };
 
-export const CVCErrorMessages: ErrorMessages<cvcErrorType> = {
+export const CVCErrorMessages: ErrorMessages<CVCErrorType> = {
   [ErrorStatus.IS_NOT_NUMBER]: "CVC는 숫자만 입력해주세요.",
   [ErrorStatus.INVALID_LENGTH]: "CVC는 3글자 이상으로 입력해 주세요.",
 };
