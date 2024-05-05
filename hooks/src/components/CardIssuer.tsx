@@ -15,7 +15,7 @@ export default function CardIssuer() {
   const [issuer, setIssuer] = useState('');
   const [showError, setShowError] = useState(false);
 
-  const { validationFirstErrorMessage, validationResult } = useCardIssuer(cardIssuerProps(issuer));
+  const { validationErrorMessage, validationResult } = useCardIssuer(cardIssuerProps(issuer));
   const { isFilledValue, isValidIssuer } = validationResult;
 
   const handleClick = (e: MouseEvent<HTMLFieldSetElement>) => {
@@ -38,7 +38,7 @@ export default function CardIssuer() {
         <button name="배민">배민</button>
       </fieldset>
       <button onClick={handleClickClose}>close</button>
-      <div data-testid="card-issuer-error">{showError && validationFirstErrorMessage}</div>
+      <div data-testid="card-issuer-error">{showError && validationErrorMessage}</div>
     </div>
   );
 }

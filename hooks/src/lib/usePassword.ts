@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 
 import { validateFilledValue, validateNumber, validateLength, isValid } from './utils/validators';
-import { UseCardModuleReturn } from './types';
+import { ErrorMessage, UseCardModuleReturn } from './types';
 
 import { sliceText } from './utils/textFormatter';
 import { INVALID_INPUT_VALUE } from './constants';
@@ -25,7 +25,7 @@ export interface UsePasswordResult {
   isValidLength: boolean;
 }
 
-export type UsePasswordReturn = UseCardModuleReturn<UsePasswordResult, string>;
+export type UsePasswordReturn = UseCardModuleReturn<ErrorMessage, UsePasswordResult, string>;
 
 export default function usePassword(props: UsePasswordProps) {
   const { cardPassword, errorMessages, validation, isNeedValidValue } = props;
@@ -66,7 +66,7 @@ export default function usePassword(props: UsePasswordProps) {
   }, [cardPassword]);
 
   return {
-    validationFirstErrorMessage: error ? errorMessages[error[0]] : null,
+    validationErrorMessage: error ? errorMessages[error[0]] : null,
     validationResult: {
       isFilledValue: isValid<ErrorMessageKey>('empty', error),
       isValidNumber: isValid<ErrorMessageKey>('number', error),

@@ -21,7 +21,7 @@ export default function CardPassword() {
   const [cardPassword, setCardCVC] = useState('');
   const [showError, setShowError] = useState(false);
 
-  const { validationFirstErrorMessage, formattedValue, validationResult } = usePassword(usePasswordProps(cardPassword));
+  const { validationErrorMessage, formattedValue, validationResult } = usePassword(usePasswordProps(cardPassword));
   const { isFilledValue, isValidNumber, isValidLength } = validationResult;
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -47,7 +47,7 @@ export default function CardPassword() {
         onBlur={handleBlur}
         onChange={handleChange}
       />
-      <div data-testid="card-password-error">{showError && validationFirstErrorMessage}</div>
+      <div data-testid="card-password-error">{showError && validationErrorMessage}</div>
     </div>
   );
 }

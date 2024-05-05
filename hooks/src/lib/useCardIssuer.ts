@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { UseCardModuleReturn } from './types';
+import { ErrorMessage, UseCardModuleReturn } from './types';
 import { isValid, validateFilledValue } from './utils/validators';
 
 interface CardIssuerValidationErrorMessages {
@@ -18,7 +18,7 @@ export interface UseCardIssuerResult {
   isFilledValue: boolean;
   isValidIssuer: boolean;
 }
-export type UseCardIssuerReturn = UseCardModuleReturn<UseCardIssuerResult>;
+export type UseCardIssuerReturn = UseCardModuleReturn<ErrorMessage, UseCardIssuerResult>;
 
 export default function useCardIssuer(props: UseCardIssuerProps): UseCardIssuerReturn {
   const { issuerValue, errorMessages, validation } = props;
@@ -30,7 +30,7 @@ export default function useCardIssuer(props: UseCardIssuerProps): UseCardIssuerR
 
   const validateCorrectIssuer = (value: string) => validation.issuers.includes(value);
 
-  const validateIssuerValue = (value: string) => {
+  const validateIssuer = (value: string) => {
     const newError: ErrorMessageKey[] = [];
 
     if (!validateFilledValue(value)) newError.push('empty');
@@ -40,11 +40,11 @@ export default function useCardIssuer(props: UseCardIssuerProps): UseCardIssuerR
   };
 
   useEffect(() => {
-    validateIssuerValue(issuerValue);
+    validateIssuer(issuerValue);
   }, [issuerValue]);
 
   return {
-    validationFirstErrorMessage: error ? errorMessages[error[0]] : null,
+    validationErrorMessage: error ? errorMessages[error[0]] : null,
     validationResult: {
       isFilledValue: isValid<ErrorMessageKey>('empty', error),
       isValidIssuer: isValid<ErrorMessageKey>('issuer', error),

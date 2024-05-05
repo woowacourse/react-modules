@@ -21,7 +21,7 @@ export default function CardCVC() {
   const [cardCVC, setCardCVC] = useState('');
   const [showError, setShowError] = useState(false);
 
-  const { validationFirstErrorMessage, formattedValue, validationResult } = useCVC(useCVCProps(cardCVC));
+  const { validationErrorMessage, formattedValue, validationResult } = useCVC(useCVCProps(cardCVC));
   const { isFilledValue, isValidNumber, isValidLength } = validationResult;
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -47,7 +47,7 @@ export default function CardCVC() {
         onBlur={handleBlur}
         onChange={handleChange}
       />
-      <div data-testid="card-cvc-error">{showError && validationFirstErrorMessage}</div>
+      <div data-testid="card-cvc-error">{showError && validationErrorMessage}</div>
     </div>
   );
 }

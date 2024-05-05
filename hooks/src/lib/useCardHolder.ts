@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { ALPHABET_REGEXP, ONLY_UPPER_CASE_ALPHABET_REGEXP } from './constants';
 import { isValid, validateFilledValue } from './utils/validators';
-import { UseCardModuleReturn } from './types';
+import { ErrorMessage, UseCardModuleReturn } from './types';
 import { CARD_HOLDER_MAX_LENGTH, INVALID_INPUT_VALUE } from './constants/system';
 import { sliceText } from './utils/textFormatter';
 
@@ -25,7 +25,7 @@ export interface UseCardHolderResult {
   isValidAlphabet: boolean;
   isValidLength: boolean;
 }
-export type UseCardHolderReturn = UseCardModuleReturn<UseCardHolderResult, string>;
+export type UseCardHolderReturn = UseCardModuleReturn<ErrorMessage, UseCardHolderResult, string>;
 
 export default function useCardHolder(props: UseCardHolderProps): UseCardHolderReturn {
   const { cardHolder, errorMessages, validation, isNeedValidValue, isNeedUpperCase } = props;
@@ -48,7 +48,7 @@ export default function useCardHolder(props: UseCardHolderProps): UseCardHolderR
 
   const validateMexLength = (value: string) => value.length <= maxLength;
 
-  const validateInputValue = (value: string) => {
+  const validateCardHolder = (value: string) => {
     const newError: ErrorMessageKey[] = [];
 
     if (!validateFilledValue(value)) {
@@ -83,11 +83,11 @@ export default function useCardHolder(props: UseCardHolderProps): UseCardHolderR
   };
 
   useEffect(() => {
-    validateInputValue(cardHolder);
+    validateCardHolder(cardHolder);
   }, [cardHolder]);
 
   return {
-    validationFirstErrorMessage: error ? errorMessages[error[0]] : null,
+    validationErrorMessage: error ? errorMessages[error[0]] : null,
     validationResult: {
       isFilledValue: isValid<ErrorMessageKey>('empty', error),
       isValidAlphabet: isValid<ErrorMessageKey>('alphabet', error),

@@ -22,7 +22,7 @@ export default function CardHolder() {
   const [value, setValue] = useState('');
   const [showError, setShowError] = useState(false);
 
-  const { validationFirstErrorMessage, formattedValue, validationResult } = useCardHolder(useCardHolderProps(value));
+  const { validationErrorMessage, formattedValue, validationResult } = useCardHolder(useCardHolderProps(value));
   const { isFilledValue, isValidAlphabet, isValidLength } = validationResult;
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -48,7 +48,7 @@ export default function CardHolder() {
         onChange={handleChange}
         onBlur={handleBlur}
       />
-      <div data-testid="card-holder-error">{showError && validationFirstErrorMessage}</div>
+      <div data-testid="card-holder-error">{showError && validationErrorMessage}</div>
     </div>
   );
 }

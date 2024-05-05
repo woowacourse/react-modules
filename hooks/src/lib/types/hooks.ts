@@ -12,14 +12,15 @@ export type UseCardModuleProps<E, V = undefined> = {
 export type ErrorMessage = string | null;
 
 /**
+ * @template E  - validationErrorMessage 타입
  * @template  T - validationResult 타입
  * @template  V -formattedValue 타입
- * @property {string} validationErrorMessage -유효성 검사 결과에 따른 오류 메세지
+ * @property {E} validationErrorMessage -유효성 검사 결과에 따른 오류 메세지
  * @property {T} validationResult - 유효성 검사 결과
  * @property {V}  유효성 검사를 통과한 후 특정 형식으로 변형된 값을 나타내는 변수명으로 유저가 module의 props로 지정한 변수 변경 여부에 따라 다른 값을 내보낸다.(유효하지 않으면 입력값이 없기를 바란다면 '', 대문자로만 반환되기를 바란다면 대문자로 변경된다.)
  */
-export interface UseCardModuleReturn<T, V = never> {
-  validationFirstErrorMessage: ErrorMessage;
+export interface UseCardModuleReturn<E, T, V = never> {
+  validationErrorMessage: E;
   validationResult: T;
   formattedValue?: V;
 }

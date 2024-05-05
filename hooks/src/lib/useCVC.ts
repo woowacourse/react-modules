@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { validateNumber, validateFilledValue, validateLength, isValid } from './utils/validators';
-import { UseCardModuleReturn } from './types';
+import { ErrorMessage, UseCardModuleReturn } from './types';
 
 import { INVALID_INPUT_VALUE } from './constants';
 import { sliceText } from './utils/textFormatter';
@@ -24,7 +24,7 @@ export interface UseCardCVCResult {
   isValidLength: boolean;
 }
 
-export type UseCardCVCReturn = UseCardModuleReturn<UseCardCVCResult, string>;
+export type UseCardCVCReturn = UseCardModuleReturn<ErrorMessage, UseCardCVCResult, string>;
 
 export default function useCVC(props: UseCardCVCProps): UseCardCVCReturn {
   const { cardCVC, errorMessages, validation, isNeedValidValue } = props;
@@ -65,7 +65,7 @@ export default function useCVC(props: UseCardCVCProps): UseCardCVCReturn {
   }, [cardCVC]);
 
   return {
-    validationFirstErrorMessage: error ? errorMessages[error[0]] : null,
+    validationErrorMessage: error ? errorMessages[error[0]] : null,
     validationResult: {
       isFilledValue: isValid<ErrorMessageKey>('empty', error),
       isValidNumber: isValid<ErrorMessageKey>('number', error),
