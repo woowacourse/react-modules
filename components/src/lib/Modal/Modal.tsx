@@ -9,7 +9,7 @@ export const ModalHeader = ({ children }: StrictPropsWithChildren) => {
 };
 
 export const ModalBody = ({ children }: StrictPropsWithChildren) => {
-  return <main className={styles.modalBody}>{children}</main>;
+  return <section className={styles.modalBody}>{children}</section>;
 };
 
 export const ModalFooter = ({ children, direction = 'column' }: StrictPropsWithChildren<ModalFooterProps>) => {
