@@ -1,5 +1,5 @@
 import { renderHook } from "@testing-library/react";
-import useInput from "@/lib/useInput";
+import useInput from "@/lib/common/useInput";
 import React, { ChangeEvent } from "react";
 import { ErrorStatus } from "@/types/errorStatus";
 import { cardNumbersValidates } from "@/lib/useCardNumbers";

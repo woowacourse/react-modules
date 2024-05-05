@@ -22,7 +22,7 @@ function App() {
     onBlurValidLength,
   } = useCardNumbers2({
     cardCompanyNumbersInfo: cardCompanyNumbersInfo,
-    selectedCompany: "[3,4,5,6]",
+    selectedCompany: "[3,4,5]",
   });
 
   return (

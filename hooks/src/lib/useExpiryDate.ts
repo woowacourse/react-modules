@@ -1,4 +1,4 @@
-import useInput from "./useInput";
+import useInput from "./common/useInput";
 import {
   validateNumber,
   validateYear,

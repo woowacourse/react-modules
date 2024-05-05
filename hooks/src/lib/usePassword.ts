@@ -1,4 +1,4 @@
-import useInput from "./useInput";
+import useInput from "./common/useInput";
 import { validateLength, validateNumber } from "@/validate/validate";
 import { ChangeEvent } from "react";
 import { PasswordErrorType } from "@/types/password";

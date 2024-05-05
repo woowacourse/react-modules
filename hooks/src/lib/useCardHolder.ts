@@ -1,4 +1,4 @@
-import useInput from "./useInput";
+import useInput from "./common/useInput";
 import { CardHolderErrorType } from "@/types/cardHolder";
 import { checkDoubleBlank, validateUpperCase } from "@/validate/validate";
 import { ChangeEvent } from "react";

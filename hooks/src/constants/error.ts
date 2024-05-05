@@ -38,3 +38,7 @@ export const ExpiryDateErrorMessages: Record<ExpiryDateErrorType, string> = {
 export const CardCompanyErrorMessage: Record<CardCompanyErrorType, string> = {
   [ErrorStatus.INVALID_OPTION]: "유효하지 않은 옵션입니다.",
 };
+
+export const SystemErrorMessage = {
+  INVALID_OPTION: "카드 배열에 해당 카드사가 존재하지 않습니다.",
+};

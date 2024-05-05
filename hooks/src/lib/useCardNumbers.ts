@@ -4,7 +4,7 @@ import {
   CardNumberKeys,
   CardNumberErrorType,
 } from "@/types/cardNumbers";
-import useInput from "./useInput";
+import useInput from "./common/useInput";
 import { validateNumber, validateOverLength } from "@/validate/validate";
 import { CardNumbersErrorMessages } from "@/constants/error.ts";
 import { VALID_LENGTH } from "@/constants/system.ts";

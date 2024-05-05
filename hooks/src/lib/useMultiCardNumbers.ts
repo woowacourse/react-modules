@@ -1,9 +1,11 @@
 import { VALID_LENGTH } from "@/constants/system.ts";
-import useInputs from "./useInputs";
 import { CardNumberErrorType, CardNumberKeys } from "@/types/cardNumbers";
-import { CardNumbersErrorMessages } from "@/constants/error";
+import {
+  CardNumbersErrorMessages,
+  SystemErrorMessage,
+} from "@/constants/error";
 import { validateNumber, validateOverLength } from "@/validate/validate";
-import { useEffect } from "react";
+import useInputs from "./common/useInputs";
 
 export const cardNumbersValidates = (value: string) => {
   validateNumber(value);
@@ -24,21 +26,23 @@ export const cardCompanyNumbersInfo = [
     cardNumbersFormat: [3, 4, 5, 6],
   },
 ];
-type CardCompanyNumbers = {
-  name: string;
+type CardCompanyNumbers<T> = {
+  name: T;
   cardNumbersFormat: number[];
 }[];
 
-const useCardNumbers2 = ({
+const useMultiCardNumbers = <T>({
   cardCompanyNumbersInfo,
   selectedCompany,
 }: {
-  cardCompanyNumbersInfo: CardCompanyNumbers;
-  selectedCompany: string;
+  cardCompanyNumbersInfo: CardCompanyNumbers<T>;
+  selectedCompany: T;
 }) => {
   const targetCompany = cardCompanyNumbersInfo.find(
     (company) => company.name === selectedCompany
   );
+
+  if (!targetCompany) throw new Error(SystemErrorMessage.INVALID_OPTION);
 
   const cardInputsNumbers = targetCompany!.cardNumbersFormat.length;
   const inputs = Array.from({ length: cardInputsNumbers }, () => "");
@@ -70,10 +74,6 @@ const useCardNumbers2 = ({
     }
   }
 
-  useEffect(() => {
-    console.log("errorMessages", errorMessages);
-  }, [errorMessages]);
-
   return {
     values: numberValues,
     onChange,
@@ -82,4 +82,4 @@ const useCardNumbers2 = ({
   };
 };
 
-export default useCardNumbers2;
+export default useMultiCardNumbers;
