@@ -36,20 +36,9 @@ const App = () => {
       />
       <Modal
         isOpened={modalOpened}
-        closeModal={handleModalClose}
+        onClose={handleModalClose}
         title="Todal Modal"
         description="This is for woowacourse mission"
-        children={
-          <div
-            style={{
-              backgroundColor: '#dddddd',
-              padding: '8px',
-              height: '50vh',
-            }}
-          >
-            Children Area
-          </div>
-        }
         modalPosition="bottom"
         primaryButton={{
           text: 'DO SOMETHING!',
@@ -65,7 +54,17 @@ const App = () => {
         }}
         buttonPosition="row"
         showCloseButton={false}
-      />
+      >
+        <div
+          style={{
+            backgroundColor: '#dddddd',
+            padding: '8px',
+            height: '50vh',
+          }}
+        >
+          Children Area
+        </div>
+      </Modal>
     </>
   );
 };

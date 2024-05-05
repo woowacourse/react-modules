@@ -20,22 +20,42 @@ const App = () => {
       <Button
         text="open modal"
         onClick={handleModalOpen}
-        size='large'
-        width='full'
-        buttonStyle='primary'
-        primaryColor='#1C77C1' />
+        size="large"
+        width="full"
+        buttonStyle="primary"
+        primaryColor="#1C77C1"
+      />
       <Modal
         isOpened={modalOpened}
         onClose={handleModalClose}
-        title='Todal Modal'
-        description='This is for woowacourse mission'
-        children={<div style={{ backgroundColor: '#dddddd', padding: '8px', height: '1000px' }}> Children Area </div>}
-        modalPosition='bottom'
-        primaryButton={{ text: 'DO SOMETHING!', onClick: () => { }, size: 'medium', width: 'full' }}
-        secondaryButton={{ text: 'Cancel', onClick: handleModalClose, size: 'medium', width: 'fit', buttonStyle: 'text' }}
-        buttonPosition='row'
-        showCloseButton={true}
-      />
+        title="Todal Modal"
+        description="This is for woowacourse mission"
+        modalPosition="bottom"
+        primaryButton={{
+          text: 'DO SOMETHING!',
+          onClick: () => { },
+          size: 'medium',
+          width: 'full',
+        }}
+        secondaryButton={{
+          text: 'Cancel',
+          onClick: handleModalClose,
+          size: 'medium',
+          width: 'fit',
+        }}
+        buttonPosition="row"
+        showCloseButton={false}
+      >
+        <div
+          style={{
+            backgroundColor: '#dddddd',
+            padding: '8px',
+            height: '50vh',
+          }}
+        >
+          Children Area
+        </div>
+      </Modal>
     </>
   );
 }
