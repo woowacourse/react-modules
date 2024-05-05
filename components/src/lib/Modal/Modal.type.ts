@@ -1,3 +1,4 @@
+import { HTMLAttributes } from 'react';
 import type { Size } from '../type/common';
 
 export type Direction = 'row' | 'column';
@@ -15,6 +16,9 @@ export interface ModalProps {
   zIndex?: number;
 }
 
-export interface ModalFooterProps {
+export interface ModalFooterProps extends HTMLAttributes<HTMLElement> {
   direction?: Direction;
 }
+
+export interface ModalHeaderType extends HTMLAttributes<HTMLElement> {}
+export interface ModalBodyType extends HTMLAttributes<HTMLElement> {}
