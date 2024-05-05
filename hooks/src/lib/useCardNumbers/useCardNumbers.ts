@@ -1,54 +1,67 @@
-import { useState } from "react";
+import useCardNumber from "./useCardNumber";
+import useCardNumberErrorText from "./useCardNumberErrorText";
 
-import useCardNumberValidation from "./useCardNumbersValidation";
-
-import { CardNumberKeys } from "../types/cardCustomHook";
 import { INPUT_RULES } from "../constants/cardCustomHook";
 
 const useCardNumbers = () => {
-  const [cardNumbers, setCardNumbers] = useState<
-    Record<CardNumberKeys, string>
-  >({
-    first: "",
-    second: "",
-    third: "",
-    fourth: "",
-  });
+  const {
+    cardNumber: first,
+    errorState: firstErrorState,
+    errorText: firstErrorText,
+    handleCardNumberChange: handleFirstChange,
+  } = useCardNumber();
+  const {
+    cardNumber: second,
+    errorState: secondErrorState,
+    errorText: secondErrorText,
+    handleCardNumberChange: handleSecondChange,
+  } = useCardNumber();
+  const {
+    cardNumber: third,
+    errorState: thirdErrorState,
+    errorText: thirdErrorText,
+    handleCardNumberChange: handleThirdChange,
+  } = useCardNumber();
+  const {
+    cardNumber: fourth,
+    errorState: fourthErrorState,
+    errorText: fourthErrorText,
+    handleCardNumberChange: handleFourthChange,
+  } = useCardNumber();
 
-  const { errorState, errorText, validateCardNumber } =
-    useCardNumberValidation();
-
-  const updateCardNumber = (name: string, value: string) => {
-    setCardNumbers((prevValue) => {
-      return {
-        ...prevValue,
-        [name]: value,
-      };
-    });
-  };
-
-  const handleCardNumberChange = (
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    const { name, value } = event.target;
-
-    const canUpdate = validateCardNumber(name, value);
-
-    if (!canUpdate) return;
-
-    updateCardNumber(name, value);
-  };
-
-  const isCardNumberInputCompleted = Object.values(cardNumbers).every(
+  const cardNumbers = [first, second, third, fourth];
+  const isCardNumberInputCompleted = cardNumbers.every(
     (cardNumber) => cardNumber.length === INPUT_RULES.maxCardNumberLength
   );
 
+  const { errorText } = useCardNumberErrorText({
+    firstErrorText,
+    secondErrorText,
+    thirdErrorText,
+    fourthErrorText,
+  });
+
   return {
-    cardNumbers,
-    isCardNumberInputCompleted,
-    errorState,
+    cardNumbers: {
+      first,
+      second,
+      third,
+      fourth,
+    },
+    errorStates: {
+      first: firstErrorState,
+      second: secondErrorState,
+      third: thirdErrorState,
+      fourth: fourthErrorState,
+    },
     errorText,
-    handleCardNumberChange,
+    handleCardNumberChanges: {
+      first: handleFirstChange,
+      second: handleSecondChange,
+      third: handleThirdChange,
+      fourth: handleFourthChange,
+    },
+    isCardNumberInputCompleted,
   };
 };
 
