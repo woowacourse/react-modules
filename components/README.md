@@ -1,14 +1,18 @@
 # badahertz52-react-modules-components
 
-커스텀 가능한 모듈을 제공하는 라이브러리 입니다.
+**커스텀 가능한 모듈을 제공하는 라이브러리 입니다.**
 
-## 설치
+<img src="./modal-step1.gif" width="80%" alt="modal" />
+
+## Install
 
 ```
 npm i badahertz52-react-modules-components
 ```
 
-## Modal 사용 전 필수 설정
+## How to use?
+
+### Modal 사용 전 필수 설정
 
 src/index.html에 아래와 같이 '''modal-root'''라는 DOM Node를 추가해주세요.
 
@@ -19,118 +23,93 @@ src/index.html에 아래와 같이 '''modal-root'''라는 DOM Node를 추가해�
 </body>
 ```
 
-## Modal 구조
+### Modal 구조
 
-- Modal.Header
-- Modal.Title
-- Modal.CloseBtn
-- Modal.Body
-- Modal.Backdrop
+```ts
+interface ModalButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
+  children: ReactNode;
+  isCloseModal: boolean;
+  handleCloseModal?: () => void;
+}
+interface ContentsProps {
+  children: ReactNode;
+  className?: string;
+  style?: CSSProperties;
+}
+interface BackdropProps {
+  closeModal: () => void;
+}
+```
 
-## Modal props
+| 구조           | 설명                                                                                                                                                 | props              |
+| -------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------ |
+| Modal.button   | isCloseModal의 값에 따라 클릭 시 모달창을 닫는 기능을 제공하는 버튼                                                                                  | `ModalButtonProps` |
+| Modal.Contents | Modal의 children이 들어가는 장소                                                                                                                     | `ContentsProps`    |
+| Modal.Backdrop | <ul><li>모달의 배경으로, 토스트 모달을 제외한 모든 모달에 제공됨</li><li>isCloseOnBackdrop, isCloseOnEsc의 값에 따라 모달창 닫기 기능 제공</li></ul> | `BackdropProps`    |
 
-### 필수 옵션
+### Modal props
 
-- isOpen :
-  - type: boolean
-- children :
-  - type: ReactNode
-  - Modal.Body 안에 들어간다.
-- type
-  - type: 'center'|'bottom'
-  - 모달 형태를 결정하는 타입
-- stopModalPropagation
-  - type: boolean
-  - true일때, modal에서 발생하는 이벤트 전파를 막는다.
+```ts
+type ModalType = 'center' | 'bottom' | 'toast';
+```
 
-### 선택 옵션
+| 키                | 설명                                                                                                                                       | 타입                              | 필수 | 기본값                               |
+| ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------ | --------------------------------- | ---- | ------------------------------------ |
+| type              | 모달의 형태                                                                                                                                | ModalType                         | Y    | -                                    |
+| children          | 모달창 안에 띄울 내용                                                                                                                      | ReactNode                         | Y    | -                                    |
+| animationDuration | 모달창 열고 닫을 때의 애니메이션 지속 시간(단위:s)                                                                                         | number                            | N    | bottom:500s, toast:3000s             |
+| isNeedAnimation?  | 모달창을 열고 닫을 때 애니메이션 효과를 원하는지 여부                                                                                      | boolean                           | N    | type이 bottom이면 true, 아니면 false |
+| openModal         | 모달창 여는 여부                                                                                                                           | boolean                           | Y    | -                                    |
+| setOpenModal      | openModal의 상태를 변경하는 setState                                                                                                       | Dispatch<SetStateAction<boolean>> | Y    | -                                    |
+| isCloseOnEsc      | esc키를 눌렀을때 모달창을 닫을 지 여부 (토스트 모달에서는 해당 기능 없음)                                                                  | boolean                           | N    | true                                 |
+| isCloseOnBackdrop | 모달의 배경(backdrop)을 클릭했을 때 모달창을 닫을 지 여부 (토스트 모달에서는 해당 기능 없음)                                               | boolean                           | N    | true                                 |
+| position?         | <ul><li>토스트 모달을 열 위치</li><li> 토스트 모달외의 모달에서는 필요 없음</li><li>⚠️ 토스트 모달에서는 position을 필수로 지정해야함</li> | ModalPosition                     | Y    | -                                    |
 
-- HTMLDiveElement의 기본 속성들
+### 제공하는 기능
 
-## 제공하는 기능
+#### 모달
 
 - Modal : 합성 컴포넌트로 필요한 부분들을 가지고 사용자가 원하는 모달을 만들 수 있습니다.
-- BasicCenterModal : 기본 제공하는 모달로, 화면의 하단에 나타납니다.
-- BasicBottomModal : 기본 제공하는 모달로, 화면의 정가운데 나타납니다.
-- useModal : 모달의 오픈,클로즈를 사용할 수 있는 커스텀 훅입니다.
+- BottomModal : type='bottom'시의 모달로, 화면의 하단에 나타납니다.
+- CenterModal : type='center'시의 모달로,화면의 정가운데에 나타납니다.
+- TostModal: type='toast'시의 모달로, 지정된 위치에 나타났다가 일정 시간이 지나면 사라집니다.
 
-## Basic Modal
+#### 커스텀 훅
 
-해당 패키지에서는 'BasicBottomModal','BasicCenterModal'이라는 기본 모달을 제공하고 있습니다.
+**useBottomModalContext**
 
-### 사용 예시
+- BottomModalContext로 전해지는 props값을 BottomModal 내에서 사용할 수 있습니다.
 
-```js
-import BasicCenterModal from './lib/Modal/BasicCenterModal/index';
-import BasicBottomModal from './lib/Modal/BasicBottomModal/index';
-import { Modal } from './lib';
-
-function App() {
-  const [openCenterModal, setOpenCenterModal] = useState(false);
-  const [openBottomModal, setOpenBottomModal] = useState(false);
-  return (
-    <>
-      <button onClick={() => setOpenCenterModal(true)}>basic center open</button>
-      <button onClick={() => setOpenBottomModal(true)}>basic bottom open</button>
-      <BasicCenterModal
-        closeButtonType="icon"
-        isOpen={openCenterModal}
-        modalTitle="basic center"
-        closeModal={() => setOpenCenterModal(false)}
-      >
-        <div>basic center modal</div>
-      </BasicCenterModal>
-      <BasicBottomModal
-        closeButtonType="box"
-        isOpen={openBottomModal}
-        modalTitle="basic bottom"
-        closeModal={() => setOpenBottomModal(false)}
-      >
-        <Modal.ActionAndCloseButton extraAction={() => alert('extraAction!!')}>
-          <div>Action And Close Button</div>
-        </Modal.ActionAndCloseButton>
-        <div> basic bottom modal</div>
-      </BasicBottomModal>
-    </>
-  );
+```ts
+interface BottomModalContextType {
+  handleCloseModal: () => void;
 }
+
+const BottomModalContext = createContext<BottomModalContextType | null>(null);
 ```
 
-## Custom Modal 사용 예시
+**useModalContext**
 
-합성 컴포넌트로 이루저여서 필요한 컴포넌트를 사용해 사용자가 원하는 모달을 생성할 수 있습니다.
+- ModalContext로 전해지는 props값을 Modal내에서 사용할 수 있습니다.
 
-### useModal을 사용한 Custom Modal
-
-```tsx
-function useModal(props: Props) {
-  const [open, setOpen] = useState(props.initialState);
-
-  const openModal = () => setOpen(true);
-  const closeModal = () => setOpen(false);
-
-  return { open: open, openModal, closeModal };
+```ts
+interface ModalContextType {
+  isCloseOnEsc?: boolean;
+  isCloseOnBackdrop?: boolean;
+  animationDuration?: number;
+  isNeedAnimation?: boolean;
+  position?: ModalPosition;
+  closeModal: () => void;
 }
-
-function App() {
-  const [isOpenModal, setIsOpenModal] = useState<boolean>(false);
-  const { open, openModal, closeModal } = useModal({ initialState: isOpenModal });
-
-  //...
-  return (
-    <div>
-      {open && (
-        <Modal type="center" isOpen={open} closeModal={closeModal}>
-          <Modal.Header className={styles.header}>
-            <Modal.Title className={styles.title}>{props.modalTitle}</Modal.Title>
-            <Modal.CloseIconButton className={styles.closeButton} />
-          </Modal.Header>
-          <Modal.Body className={styles.body}>
-            <div> 모달 사용 예시 </div>
-          </Modal.Body>
-        </Modal>
-      )}
-    </div>
-  );
-}
+const ModalContext = createContext<ModalContextType | null>(null);
 ```
+
+**usePosition**
+
+- 토스트 모달에서 모달이 열린 장소를 찾는 데 사용할 수 았는 hook입니다.
+
+  ```ts
+  function usePosition(targetElement: HTMLElement | null | undefined): {
+    position: ModalPosition;
+  };
+  ```
