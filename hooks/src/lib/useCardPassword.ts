@@ -1,34 +1,42 @@
-import useInput, { ValidationType } from './useInput';
+import { ChangeEvent, FocusEvent, useState } from 'react';
+import useValidation, { ValidationType } from './useValidation';
+import Validation from './utils/validation';
 
 const PASSWORD_LENGTH = 2;
 
+const inputValidations: ValidationType<string>[] = [
+  {
+    validate: (value) => Validation.isExactLength(PASSWORD_LENGTH, value),
+    message: `앞 ${PASSWORD_LENGTH}자리의 비밀번호를 입력해주세요.`,
+  },
+];
+
+const preventInputValidations: ValidationType<string>[] = [
+  {
+    validate: Validation.isNumericPattern,
+    message: '숫자만 입력할 수 있습니다.',
+  },
+];
+
 const useCardPassword = (initialValue = '') => {
-  const isValidLength = (value: string) => {
-    return value.length === PASSWORD_LENGTH;
+  const [value, setValue] = useState(initialValue);
+  const { error, validateValue } = useValidation<string>();
+  const isValid = value !== '' && !error.state;
+
+  const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
+    const preventInputValidateResult = validateValue(e.target.value, preventInputValidations);
+
+    if (!preventInputValidateResult) return;
+
+    validateValue(e.target.value, inputValidations);
+    setValue(e.target.value);
   };
 
-  const isNumber = (value: string) => {
-    return /^\d*$/.test(value);
+  const onBlurHandler = (e: FocusEvent<HTMLInputElement>) => {
+    validateValue(e.target.value, inputValidations);
   };
 
-  const inputValidations: ValidationType[] = [
-    {
-      validate: isValidLength,
-      message: `앞 ${PASSWORD_LENGTH}자리의 비밀번호를 입력해주세요.`,
-    },
-  ];
-
-  const preventInputValidations: ValidationType[] = [
-    {
-      validate: isNumber,
-      message: '숫자만 입력 가능합니다.',
-    },
-  ];
-
-  const cardPassword = useInput({ initialValue, inputValidations, preventInputValidations });
-  const isCardPasswordValid = cardPassword.value !== '' && !cardPassword.error.state;
-
-  return { cardPassword, isCardPasswordValid };
+  return { value, isValid, error, onChange: onChangeHandler, onBlur: onBlurHandler };
 };
 
 export default useCardPassword;

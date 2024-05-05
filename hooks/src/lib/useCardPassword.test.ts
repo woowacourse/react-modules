@@ -3,42 +3,34 @@ import { ChangeEvent, act } from 'react';
 import useCardPassword from './useCardPassword';
 
 describe('useCardPassword 테스트', () => {
-  it('입력한 값이 숫자가 아니라면 입력을 제한한다.', () => {
-    const userInput = 'Hello';
-    const { result } = renderHook(() => useCardPassword());
+  it('초기값이 정확하게 설정되어야 한다.', () => {
+    const initialValue = '12';
+    const { result } = renderHook(() => useCardPassword(initialValue));
 
-    act(() => {
-      result.current.cardPassword.onChange({
-        target: { value: userInput },
-      } as ChangeEvent<HTMLInputElement>);
-    });
-
-    expect(result.current.cardPassword.value).toBe('');
+    expect(result.current.value).toBe(initialValue);
   });
 
-  it('입력한 값이 숫자가 아니라면 에러 상태가 true가 된다.', () => {
-    const userInput = 'Hello';
+  it.each([['1'], ['123']])('입력한 비밀번호가 2자리가 아니라면 에러 상태가 true가 된다.', (userInput: string) => {
     const { result } = renderHook(() => useCardPassword());
 
     act(() => {
-      result.current.cardPassword.onChange({
+      result.current.onChange({
         target: { value: userInput },
       } as ChangeEvent<HTMLInputElement>);
     });
 
-    expect(result.current.cardPassword.error.state).toBeTruthy();
+    expect(result.current.error.state).toBeTruthy();
   });
 
-  it('입력한 비밀번호가 2자리가 아니라면 에러 상태가 true가 된다.', () => {
-    const userInput = '1';
+  it.each([['nakta'], ['@/[]'], [' '], ['한글입력']])('입력값이 숫자가 아닌 경우 입력을 제한한다.', (userInput: string) => {
     const { result } = renderHook(() => useCardPassword());
 
     act(() => {
-      result.current.cardPassword.onChange({
+      result.current.onChange({
         target: { value: userInput },
       } as ChangeEvent<HTMLInputElement>);
     });
 
-    expect(result.current.cardPassword.error.state).toBeTruthy();
+    expect(result.current.value).toBe('');
   });
 });
