@@ -15,17 +15,15 @@ const Validation = {
     return value >= 1 && value <= 12;
   },
 
-  isExpired: (month: number, year: number, inputLength = 2) => {
+  isExpired: ([month, year]: number[]) => {
     const date = new Date();
-    const currentYear = date.getFullYear() % 10 ** inputLength;
+    const currentYear = date.getFullYear() % 100;
     const currentMonth = date.getMonth() + 1;
-    const isExactLength = Validation.isExactLength(inputLength, String(month)) && Validation.isExactLength(inputLength, String(year));
 
-    if (isExactLength) {
-      if (currentYear > year) return true;
-      else if (currentYear === year && currentMonth > month) return true;
-      else return false;
-    }
+    if (currentYear > year) return true;
+    if (currentYear === year && currentMonth > month) return true;
+
+    return false;
   },
 
   isVisa: (cardNumber: string) => {

@@ -1,81 +1,38 @@
 import { useEffect } from 'react';
-import useInput, { ValidationType } from './useInput';
+import Validation from './utils/validation';
+import useValidation, { ValidationType } from './useValidation';
+import useMonthInput from './useMonthInput';
+import useYearInput from './useYearInput';
 
 const EXPIRATION_DATE_LENGTH = 2;
-const MONTH = {
-  start: 1,
-  end: 12,
-} as const;
 
-type InitialValueType = [string, string];
+interface InitialValueProps {
+  month: string;
+  year: string;
+}
 
-const useCardExpirationDate = (initialValue: InitialValueType = ['', '']) => {
-  const isValidLength = (value: string) => {
-    return value.length === EXPIRATION_DATE_LENGTH;
-  };
+const cardExpirationValidations: ValidationType<number[]>[] = [
+  {
+    validate: ([month, year]: number[]) => !Validation.isExpired([Number(month), Number(year)]),
+    message: '유효기간이 만료된 카드입니다. 다른 카드를 등록해주세요.',
+  },
+];
 
-  const isValidMonth = (value: string) => {
-    const month = Number(value);
-
-    return month >= MONTH.start && month <= MONTH.end;
-  };
-
-  const isNumber = (value: string) => {
-    return /^\d*$/.test(value);
-  };
-
-  const monthInputValidations: ValidationType[] = [
-    {
-      validate: isValidLength,
-      message: `${EXPIRATION_DATE_LENGTH}자리 월(MM)을 입력해주세요. ex) 01`,
-    },
-    {
-      validate: isValidMonth,
-      message: `${MONTH.start}부터 ${MONTH.end}사이의 숫자를 입력해주세요.`,
-    },
-  ];
-
-  const yearInputValidations: ValidationType[] = [
-    {
-      validate: isValidLength,
-      message: `${EXPIRATION_DATE_LENGTH}자리 년도(YY)를 입력해주세요. ex) 24`,
-    },
-  ];
-
-  const preventInputValidations: ValidationType[] = [
-    {
-      validate: isNumber,
-      message: '숫자만 입력 가능합니다.',
-    },
-  ];
-
-  const month = useInput({ initialValue: initialValue[0], inputValidations: monthInputValidations, preventInputValidations });
-  const year = useInput({ initialValue: initialValue[1], inputValidations: yearInputValidations, preventInputValidations });
-  const isCardExpirationDateValid = [month, year].every(({ value, error }) => value !== '' && !error.state);
+const useCardExpirationDate = (initialValue: InitialValueProps = { month: '', year: '' }) => {
+  const month = useMonthInput(initialValue.month);
+  const year = useYearInput(initialValue.year);
+  const { error, validateValue } = useValidation<number[]>();
+  const isExpirationDateValid = month.isValid && year.isValid && !error.state;
 
   useEffect(() => {
-    const date = new Date();
-    const currentYear = date.getFullYear() % 10 ** EXPIRATION_DATE_LENGTH;
-    const currentMonth = date.getMonth() + 1;
+    const isExactLength = Validation.isExactLength(EXPIRATION_DATE_LENGTH, month.value) && Validation.isExactLength(EXPIRATION_DATE_LENGTH, year.value);
 
-    if (isValidLength(month.value) && isValidLength(year.value)) {
-      const error = { state: true, message: '유효기간이 만료된 카드입니다.' };
-      const initialErrorState = { state: false, message: '' };
-
-      if (currentYear > Number(year.value)) {
-        month.setError(error);
-        year.setError(error);
-      } else if (currentYear === Number(year.value) && currentMonth > Number(month.value)) {
-        month.setError(error);
-        year.setError(error);
-      } else {
-        month.setError(initialErrorState);
-        year.setError(initialErrorState);
-      }
+    if (isExactLength) {
+      validateValue([Number(month.value), Number(year.value)], cardExpirationValidations);
     }
   }, [month.value, year.value]);
 
-  return { month, year, isCardExpirationDateValid };
+  return { month, year, expirationDateError: error, isExpirationDateValid };
 };
 
 export default useCardExpirationDate;
