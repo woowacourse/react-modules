@@ -68,7 +68,7 @@ describe('useExpiryDate 커스텀 훅 테스트', () => {
     expect(value).toEqual({ month: userInputMonth, year: userInputYear });
   });
 
-  it('month 입력값이 01월~12월 이내가 아니라면 에러이다', () => {
+  it('month 입력값이 01월~12월 이내가 아니라면 field rule 에러이다', () => {
     const initialValue = { month: '12', year: '24' };
     const userInput = '13';
     const { result } = renderHook(() => useExpiryDate(initialValue));
@@ -82,7 +82,7 @@ describe('useExpiryDate 커스텀 훅 테스트', () => {
     expect(result.current.month.errorInfo.isValid).toBe(false);
   });
 
-  it('year 입력값이 24년 이후가 아니라면 에러이다', () => {
+  it('year 입력값이 24년 이후가 아니라면 field rule 에러이다', () => {
     const initialValue = { month: '12', year: '24' };
     const userInput = '23';
     const { result } = renderHook(() => useExpiryDate(initialValue));
@@ -96,7 +96,7 @@ describe('useExpiryDate 커스텀 훅 테스트', () => {
     expect(result.current.year.errorInfo.isValid).toBe(false);
   });
 
-  it('초기값이 잘못 설정된다면 값이 비워진다.', () => {
+  it('initial value로 field type, field rule에 맞지 않는 초기값(ex: 3자리 수)을 넣을 때 input의 결과는 빈 값으로 셋팅된다.', () => {
     const initialValue = { month: '122', year: '234' };
     const reset = { month: '', year: '' };
     const { result } = renderHook(() => useExpiryDate(initialValue));

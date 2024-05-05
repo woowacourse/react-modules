@@ -57,7 +57,7 @@ describe('useCardType 커스텀 훅 테스트', () => {
     expect(result.current.errorInfo.isValid).toBe(false);
   });
 
-  it('초기값이 올바르지 않으면 플레이스홀더로 값이 변한다.', () => {
+  it('초기값이 올바르지 않으면(options에 없는 초기값) 플레이스홀더로 값이 변한다.', () => {
     const initialValue = '해리';
     const { result } = renderHook(() =>
       useCardType({
