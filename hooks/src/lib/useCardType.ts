@@ -45,7 +45,7 @@ const useCardType = ({ initialValue, options, placeholder }: UseCardTypeProps) =
     }
   }, [initialValue, setValue, options, placeholder]);
 
-  return { value, handleChange, errorInfo };
+  return { value, runValidationByChange: handleChange, errorInfo };
 };
 
 export default useCardType;

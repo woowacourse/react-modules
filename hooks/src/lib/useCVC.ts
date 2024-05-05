@@ -38,8 +38,8 @@ const useCVC = (initialValue: string) => {
 
   return {
     value,
-    handleChange,
-    handleBlur,
+    runValidationInputTypeByChange: handleChange,
+    runValidationFieldRulesByBlur: handleBlur,
     errorInfo,
   };
 };

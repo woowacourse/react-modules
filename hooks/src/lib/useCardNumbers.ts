@@ -74,7 +74,12 @@ const useCardNumbers = (initialValue: Record<string, string>, options?: CardNumb
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  return { value, handleChange, handleBlur, errorInfo };
+  return {
+    value,
+    runValidationInputTypeByChange: handleChange,
+    runValidationFieldRulesByBlur: handleBlur,
+    errorInfo,
+  };
 };
 
 export default useCardNumbers;

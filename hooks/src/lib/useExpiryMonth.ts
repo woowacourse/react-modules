@@ -62,7 +62,12 @@ const useExpiryMonth = (initialValue: string, options?: Options) => {
     }
   }, [initialValue, setValue]);
 
-  return { value, handleChange, handleBlur, errorInfo };
+  return {
+    value,
+    runValidationInputTypeByChange: handleChange,
+    runValidationFieldRulesByBlur: handleBlur,
+    errorInfo,
+  };
 };
 
 export default useExpiryMonth;
