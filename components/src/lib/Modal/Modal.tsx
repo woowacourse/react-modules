@@ -3,9 +3,6 @@ import * as Styled from './Modal.styled';
 import Button from '../Button/Button';
 import CLOSE_BUTTON from '../../asset/close-button.svg';
 
-export type ModalPosition = 'center' | 'bottom';
-export type ButtonPosition = 'row' | 'column';
-
 export interface ModalProps {
   isOpened: boolean;
   onClose: () => void;

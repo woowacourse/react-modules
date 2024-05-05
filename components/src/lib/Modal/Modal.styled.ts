@@ -1,6 +1,3 @@
-export type ModalPosition = 'center' | 'bottom';
-export type ButtonPosition = 'row' | 'column';
-
 import styled from 'styled-components';
 
 export const DimmedLayer = styled.div`
