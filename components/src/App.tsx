@@ -1,4 +1,3 @@
-import './App.css';
 import Button from './lib/Button/Button';
 
 import Modal from './lib/Modal/Modal';
