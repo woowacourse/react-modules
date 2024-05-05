@@ -1,6 +1,7 @@
 import useSelect from './useSelect';
 import { useEffect } from 'react';
 import validateCardType from './validator/validateCardType';
+import { UseCardType } from './type';
 
 interface UseCardTypeProps {
   initialValue: string;
@@ -8,7 +9,7 @@ interface UseCardTypeProps {
   placeholder: string;
 }
 
-const useCardType = ({ initialValue, options, placeholder }: UseCardTypeProps) => {
+const useCardType = ({ initialValue, options, placeholder }: UseCardTypeProps): UseCardType => {
   const { value, handleChange, setValue, errorInfo } = useSelect(
     initialValue,
     {
