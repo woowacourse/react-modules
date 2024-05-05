@@ -1,35 +1,58 @@
-import { ChangeEvent, FocusEventHandler, useEffect, useRef, useState } from "react";
+import { ChangeEvent, InputHTMLAttributes, useEffect, useRef, useState } from "react";
 import useRestrictedState from "./useRestrictedState";
 
-interface InputAttributes {
-  onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
-  onBlur?: (e: FocusEventHandler<HTMLInputElement>) => void;
+interface CustomInputAttributes extends Omit<InputHTMLAttributes<HTMLInputElement>, "required"> {
+  required?: {
+    message: string;
+  };
 }
 
 const useInput = () => {
-  const [valueMap, setValueMap] = useState<Record<string, string>>({});
-  // const errorMap = {};
+  const [valueMap, setValueMap] = useState<Record<string, string | undefined>>({});
+  const [errorMap, setErrorMap] = useState<Record<string, string | undefined>>({});
 
-  const useRegister = (name: string, { onChange, onBlur }: InputAttributes = {}) => {
-    const { valueState, errorState } = useRestrictedState();
+  const useRegister = (
+    name: string,
+    { onChange, onBlur, placeholder, required, type, maxLength }: CustomInputAttributes = {}
+  ) => {
+    const { valueState, errorState } = useRestrictedState({
+      type: type === "number" ? "number" : undefined,
+      maxLength,
+    });
     const { value, setValue } = valueState;
-    // const { isError, errorMessage, setError } = errorState;
+    const { errorMessage, setError } = errorState;
 
-    //TODO: Blur되었을 경우 register내부 에러를 관찰하여 에러가 있으면 바깥 에러에 할당한다.
+    useEffect(() => {
+      if (!valueMap[name]) {
+        setValueMap((prev) => ({ ...prev, [name]: undefined }));
+        setErrorMap((prev) => ({ ...prev, [name]: undefined }));
+      }
+    }, []);
+
+    useEffect(() => {
+      setErrorMap((prev) => ({ ...prev, [name]: errorMessage }));
+    }, [errorMessage]);
 
     const ref = useRef<HTMLInputElement>(null);
 
-    const onChangeWrapper = (e: ChangeEvent<HTMLInputElement>) => {
-      setValue(e.target.value);
-      setValueMap((prev) => ({ ...prev, [name]: e.target.value }));
-      if (onChange) onChange(e);
+    const requiredValidator = (input: string) => {
+      if (!input) setError(required?.message);
     };
 
-    return { onChange: onChangeWrapper, onBlur, name, ref, value };
+    const onChangeWrapper = (e: ChangeEvent<HTMLInputElement>) => {
+      const input = e.target.value;
+      setValue(input);
+      setValueMap((prev) => ({ ...prev, [name]: input }));
+      if (onChange) onChange(e);
+
+      requiredValidator(input);
+    };
+
+    return { onChange: onChangeWrapper, onBlur, name, ref, value, placeholder };
   };
 
   //
-  return { register: useRegister, valueMap };
+  return { register: useRegister, valueMap, errorMap };
 };
 
 export default useInput;
