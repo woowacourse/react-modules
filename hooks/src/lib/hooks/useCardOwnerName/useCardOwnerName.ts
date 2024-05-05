@@ -9,8 +9,8 @@ export const OWNER_NAME_ERROR_MESSAGES = {
 
 const MAX_NAME_LENGTH = 21;
 
-const useCardOwnerName = () => {
-  const [ownerName, setOwnerName] = useState('');
+const useCardOwnerName = (name: string = '') => {
+  const [ownerName, setOwnerName] = useState(name);
   const [isValidOwnerName, setIsValidOwnerName] = useState(false);
   const [ownerNameErrorMessage, setOwnerNameErrorMessage] = useState('');
 
@@ -24,8 +24,7 @@ const useCardOwnerName = () => {
     const unifiedSpaceName = unifySpaces(engName);
     const isExcessiveWhiteSpace = engName.length > unifiedSpaceName.length;
 
-    if (isExcessiveWhiteSpace && unifiedSpaceName.length !== 0)
-      return OWNER_NAME_ERROR_MESSAGES.EXCESSIVE_WHITE_SPACE;
+    if (isExcessiveWhiteSpace && unifiedSpaceName.length !== 0) return OWNER_NAME_ERROR_MESSAGES.EXCESSIVE_WHITE_SPACE;
 
     if (engName.length < name.length) return OWNER_NAME_ERROR_MESSAGES.NOT_ENG;
 

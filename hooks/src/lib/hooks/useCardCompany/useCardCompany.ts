@@ -5,16 +5,15 @@ export const CARD_COMPANY_ERROR_MESSAGES = {
   INVALID_CARD_COMPANY: '올바른 카드사가 아닙니다.',
 };
 
-const useCardCompany = (validCardCompanyList: string[]) => {
-  const [cardCompany, setCardCompany] = useState('');
+const useCardCompany = (validCardCompanyList: string[], selected: string = '') => {
+  const [cardCompany, setCardCompany] = useState(selected);
   const [isValidCardCompany, setIsValidCardCompany] = useState(false);
   const [cardCompanyErrorMessage, setCardCompanyErrorMessage] = useState('');
 
   const getErrorMessage = (company: string) => {
     if (company === '') return CARD_COMPANY_ERROR_MESSAGES.NO_CARD_COMPANY;
 
-    if (!validCardCompanyList.includes(company))
-      return CARD_COMPANY_ERROR_MESSAGES.INVALID_CARD_COMPANY;
+    if (!validCardCompanyList.includes(company)) return CARD_COMPANY_ERROR_MESSAGES.INVALID_CARD_COMPANY;
 
     return '';
   };
