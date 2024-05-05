@@ -1,9 +1,27 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { Modal } from "../lib";
+import { ModalProps } from "../lib/components/Modal/Modal";
+
+import { Modal, ModalProvider, useModalAction } from "../lib";
+import { useEffect } from "react";
+
+const TestModal: React.FC<ModalProps> = (props) => {
+  const action = useModalAction();
+
+  useEffect(() => {
+    action.handleOpen();
+  }, [action]);
+
+  return (
+    <>
+      <button onClick={action.handleOpen}>모달을 오픈하는 버튼입니다.</button>
+      <Modal {...props} />
+    </>
+  );
+};
 
 const meta = {
   title: "Modal",
-  component: Modal,
+  component: TestModal,
   argTypes: {
     position: { name: "모달의 위치" },
     title: { name: "모달의 제목" },
@@ -11,6 +29,13 @@ const meta = {
     closeButtonPosition: { name: "닫기 버튼의 위치" },
     hasConfirmButton: { name: "확인 버튼의 유무" },
   },
+  decorators: [
+    (Story) => (
+      <ModalProvider>
+        <Story />
+      </ModalProvider>
+    ),
+  ],
 } satisfies Meta<typeof Modal>;
 
 export default meta;

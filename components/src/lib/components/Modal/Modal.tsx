@@ -12,7 +12,7 @@ import ThemeProvider from "../../contextProvider/ThemeProvider";
 import useThemeContext from "../../../hooks/useThemeContext";
 import useModalContext from "../../../hooks/useModalContext";
 
-interface ModalProps extends PropsWithChildren {
+export interface ModalProps extends PropsWithChildren {
   position?: "center" | "bottom";
   title?: string;
   width?: number;
