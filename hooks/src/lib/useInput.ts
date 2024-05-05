@@ -1,12 +1,12 @@
 import { useState } from 'react';
-import { ValidationResult } from './types';
+import { UseCard, ValidationResult, ValidatorProps } from './type';
 
-interface ValidatorProps {
-  onChange: (value: string) => ValidationResult;
-  onBlur: (value: string) => ValidationResult;
+interface UseInputReturn extends UseCard {
+  setValue: React.Dispatch<React.SetStateAction<string>>;
+  setErrorInfo: React.Dispatch<React.SetStateAction<ValidationResult>>;
 }
 
-const useInput = (initialValue: string, validator: ValidatorProps) => {
+const useInput = (initialValue: string, validator: ValidatorProps): UseInputReturn => {
   const [value, setValue] = useState(initialValue);
   const [errorInfo, setErrorInfo] = useState<ValidationResult>({
     isValid: true,

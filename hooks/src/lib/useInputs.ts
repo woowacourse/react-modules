@@ -1,9 +1,9 @@
 import { useState } from 'react';
-import { ValidationResult } from './types';
+import { UseCardNumber, ValidationResult, ValidatorProps } from './type';
 
-interface ValidatorProps {
-  onChange: (value: string) => ValidationResult;
-  onBlur: (value: string) => ValidationResult;
+interface UseInputs extends UseCardNumber {
+  setValue: React.Dispatch<React.SetStateAction<Record<string, string>>>;
+  setErrorInfo: React.Dispatch<React.SetStateAction<Record<string, ValidationResult>>>;
 }
 
 const makeInitialErrorInfo = (initialValue: Record<string, string>) => {
@@ -20,7 +20,7 @@ const makeInitialErrorInfo = (initialValue: Record<string, string>) => {
   return obj;
 };
 
-const useInputs = (initialValue: Record<string, string>, validator: ValidatorProps) => {
+const useInputs = (initialValue: Record<string, string>, validator: ValidatorProps): UseInputs => {
   const [value, setValue] = useState(initialValue);
   const [errorInfo, setErrorInfo] = useState<Record<string, ValidationResult>>(() =>
     makeInitialErrorInfo(initialValue),

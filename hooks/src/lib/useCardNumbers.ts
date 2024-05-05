@@ -1,12 +1,9 @@
 import useInputs from './useInputs';
 import { useEffect } from 'react';
 import { validateCardNumberFormat, validateNumber } from './validator';
+import { Options, UseCardNumber } from './type';
 
-interface Options {
-  isAutoFocus?: boolean;
-}
-
-const useCardNumbers = (initialValue: Record<string, string>, options?: Options) => {
+const useCardNumbers = (initialValue: Record<string, string>, options?: Options): UseCardNumber => {
   const { value, setValue, handleBlur, errorInfo, setErrorInfo } = useInputs(initialValue, {
     onChange: validateNumber,
     onBlur: validateCardNumberFormat,
