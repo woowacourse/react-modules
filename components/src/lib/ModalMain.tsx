@@ -9,10 +9,9 @@ const MODAL_TYPE: Record<ModalPosition, string> = {
 
 type ModalPosition = 'center' | 'bottom';
 
-interface ModalMainProps {
+interface ModalMainProps extends React.HTMLAttributes<HTMLDivElement> {
   isOpen: boolean;
   position?: ModalPosition;
-  style?: React.CSSProperties;
 }
 
 const ModalMain = ({
@@ -20,6 +19,7 @@ const ModalMain = ({
   position = 'center',
   style,
   children,
+  ...rest
 }: PropsWithChildren<ModalMainProps>) => {
   if (!isOpen) {
     return null;
@@ -28,7 +28,7 @@ const ModalMain = ({
   return (
     <>
       {createPortal(
-        <section className={MODAL_TYPE[position]} style={style}>
+        <section className={MODAL_TYPE[position]} style={style} {...rest}>
           {children}
         </section>,
         document.body,
