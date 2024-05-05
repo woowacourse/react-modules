@@ -1,45 +1,61 @@
 # fe-custom-modal
 - Simple modal component module made by paran and fe
 
+## Quick Start
+
+- install with npm:
+```bash
+npm install fe-custom-modal
+```
+
 ## Properties
 
-### title?
+### title (optional)
 
 - content
-- position? `default: left`
-- color? `default: black`
-- font-size? `default: 18px`
+- position (optional) `default: left`
+- color (optional) `default: black`
+- font-size (optional) `default: 18px`
 
-### subtitle?
+### subtitle (optional)
 
 - content
-- color? `default: lightgrey`
-- font-size? `default: 12px`
+- color (optional) `default: lightgrey`
+- font-size (optional) `default: 12px`
 
 ### closeButton
 
-- color? `default: black`
+- color (optional) `default: black`
 - onClose 
 
-### confirmButton?
+### confirmButton (optional)
 
-- background-color? `default: black`
-- font-color? `default: white`
+- background-color (optional) `default: black`
+- font-color (optional) `default: white`
 - content
 - onConfirm
 
-### cancelButton?
+### cancelButton (optional)
 
-- background-color? `default: white`
-- color? `default: black`
+- background-color (optional) `default: white`
+- color (optional) `default: black`
 - content
 - onCancel
 
-### background-color?
+### modalSize (optional)
+
+- width (optional)
+  - `default: 80%` when modalPosition is `center`
+  - `default: 100%` when modalPosition is `bottom`
+- height (optional) `default: fit-content`
+- minWidth (optional)
+- minHeight (optional)
+
+### background-color (optional)
 
 `default: white`
 
-### border-radius?
+### border-radius (optional)
 
 `default: 5px`
 
@@ -47,7 +63,7 @@
 
 `value: 'center' | 'bottom'`
 
-### preventCloseOnOutsideClick?
+### preventCloseOnOutsideClick (optional)
 
 `default: false`
 
