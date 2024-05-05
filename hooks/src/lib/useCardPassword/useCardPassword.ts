@@ -1,4 +1,4 @@
-import useCardValidate from '../useCardValidate/useCardValidate';
+import useInputValidate from '../useInputValidate/useInputValidate';
 
 const useCardPassword = (initValue: string, maxLength: number = 2) => {
   const validateOnChange = (newValue: string) => {
@@ -34,7 +34,7 @@ const useCardPassword = (initValue: string, maxLength: number = 2) => {
     onChangeHandler,
     onFocusHandler,
     onBlurHandler,
-  } = useCardValidate({
+  } = useInputValidate({
     initValue,
     validateOnChange,
     validateOnBlur,

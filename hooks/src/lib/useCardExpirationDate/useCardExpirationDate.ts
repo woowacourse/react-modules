@@ -1,4 +1,4 @@
-import useCardArrayValidate from '../useCardArrayValidate/useCardArrayValidate';
+import useInputArrayValidate from '../useInputArrayValidate/useInputArrayValidate';
 
 const useCardExpirationDate = (initValue: string[], maxLength: number = 2) => {
   const validateOnChange = (newValue: string, index: number) => {
@@ -52,7 +52,7 @@ const useCardExpirationDate = (initValue: string[], maxLength: number = 2) => {
     onChangeHandler,
     onFocusHandler,
     onBlurHandler,
-  } = useCardArrayValidate({
+  } = useInputArrayValidate({
     initValue,
     validateOnChange,
     validateOnBlur,

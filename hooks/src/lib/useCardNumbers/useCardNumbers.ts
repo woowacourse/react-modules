@@ -1,4 +1,4 @@
-import useCardArrayValidate from '../useCardArrayValidate/useCardArrayValidate';
+import useInputArrayValidate from '../useInputArrayValidate/useInputArrayValidate';
 
 const useCardNumbers = (initValue: string[], maxLength: number = 4) => {
   const validateOnChange = (newValue: string) => {
@@ -34,7 +34,7 @@ const useCardNumbers = (initValue: string[], maxLength: number = 4) => {
     onChangeHandler,
     onFocusHandler,
     onBlurHandler,
-  } = useCardArrayValidate({
+  } = useInputArrayValidate({
     initValue,
     validateOnChange,
     validateOnBlur,

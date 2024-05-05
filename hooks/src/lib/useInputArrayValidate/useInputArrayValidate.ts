@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-export interface UseCardArrayValidateProps {
+export interface UseInputArrayValidate {
   initValue: string[];
   validateOnChange: (value: string, index: number) => ValidateResult;
   validateOnBlur: () => ValidateResult;
@@ -11,11 +11,11 @@ export interface ValidateResult {
   errorMessage: string;
 }
 
-const useCardArrayValidate = ({
+const useInputArrayValidate = ({
   initValue,
   validateOnChange,
   validateOnBlur,
-}: UseCardArrayValidateProps) => {
+}: UseInputArrayValidate) => {
   const [value, setValue] = useState(initValue);
   const [isCompleted, setIsCompleted] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
@@ -83,4 +83,4 @@ const useCardArrayValidate = ({
     onFocusHandler,
   };
 };
-export default useCardArrayValidate;
+export default useInputArrayValidate;

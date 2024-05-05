@@ -1,9 +1,9 @@
-import useCardArrayValidate, { ValidateResult } from './useCardArrayValidate';
+import useInputArrayValidate, { ValidateResult } from './useInputArrayValidate';
 
 import { act } from 'react';
 import { renderHook } from '@testing-library/react';
 
-describe('useCardArrayValidate custom hook', () => {
+describe('useInputArrayValidate custom hook', () => {
   let validateOnChangeMock: jest.Mock<ValidateResult, [string, number]>;
   let validateOnBlurMock: jest.Mock<ValidateResult, []>;
 
@@ -16,7 +16,7 @@ describe('useCardArrayValidate custom hook', () => {
     validateOnBlurMock.mockReturnValue({ isValid: false, errorMessage: '' });
 
     const { result } = renderHook(() =>
-      useCardArrayValidate({
+      useInputArrayValidate({
         initValue: ['12', ''],
         validateOnChange: validateOnChangeMock,
         validateOnBlur: validateOnBlurMock,
@@ -32,7 +32,7 @@ describe('useCardArrayValidate custom hook', () => {
     validateOnChangeMock.mockReturnValue({ isValid: true, errorMessage: '' });
 
     const { result } = renderHook(() =>
-      useCardArrayValidate({
+      useInputArrayValidate({
         initValue: ['', ''],
         validateOnChange: validateOnChangeMock,
         validateOnBlur: validateOnBlurMock,
@@ -55,7 +55,7 @@ describe('useCardArrayValidate custom hook', () => {
     });
 
     const { result } = renderHook(() =>
-      useCardArrayValidate({
+      useInputArrayValidate({
         initValue: ['', ''],
         validateOnChange: validateOnChangeMock,
         validateOnBlur: validateOnBlurMock,
@@ -75,7 +75,7 @@ describe('useCardArrayValidate custom hook', () => {
     validateOnBlurMock.mockReturnValue({ isValid: true, errorMessage: '' });
 
     const { result } = renderHook(() =>
-      useCardArrayValidate({
+      useInputArrayValidate({
         initValue: ['123', '456'],
         validateOnChange: validateOnChangeMock,
         validateOnBlur: validateOnBlurMock,
@@ -98,7 +98,7 @@ describe('useCardArrayValidate custom hook', () => {
     });
 
     const { result } = renderHook(() =>
-      useCardArrayValidate({
+      useInputArrayValidate({
         initValue: ['123', '12'],
         validateOnChange: validateOnChangeMock,
         validateOnBlur: validateOnBlurMock,
