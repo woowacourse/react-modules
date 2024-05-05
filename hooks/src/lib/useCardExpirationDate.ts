@@ -1,6 +1,5 @@
 import { useEffect } from 'react';
 import useInput, { ValidationType } from './useInput';
-import useValid from './useValid';
 
 const EXPIRATION_DATE_LENGTH = 2;
 const MONTH = {
@@ -52,7 +51,7 @@ const useCardExpirationDate = (initialValue: InitialValueType = ['', '']) => {
 
   const month = useInput({ initialValue: initialValue[0], inputValidations: monthInputValidations, preventInputValidations });
   const year = useInput({ initialValue: initialValue[1], inputValidations: yearInputValidations, preventInputValidations });
-  const isCardExpirationDateValid = useValid([month, year]);
+  const isCardExpirationDateValid = [month, year].every(({ value, error }) => value !== '' && !error.state);
 
   useEffect(() => {
     const date = new Date();
