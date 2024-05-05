@@ -11,6 +11,7 @@ import LongButton from "../LongButton/LongButton";
 interface ModalProps extends PropsWithChildren {
   position?: "center" | "bottom";
   title?: string;
+  width?: number;
   hasConfirmButton?: boolean;
   closeButtonPosition?: "bottom" | "top";
   onConfirm?: () => void;
@@ -20,6 +21,7 @@ interface ModalProps extends PropsWithChildren {
 const Modal: React.FC<ModalProps> = ({
   position = "center",
   title,
+  width = 242,
   hasConfirmButton = true,
   closeButtonPosition = "top",
   onConfirm,
@@ -45,7 +47,7 @@ const Modal: React.FC<ModalProps> = ({
   }, [action, ref]);
 
   return (
-    <dialog ref={ref} css={modalStyle(position)}>
+    <dialog ref={ref} css={modalStyle(position, width)}>
       <div css={modalContentStyle}>
         <ModalHeader>
           {title && <Title>{title}</Title>}

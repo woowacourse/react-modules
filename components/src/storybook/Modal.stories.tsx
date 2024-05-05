@@ -5,8 +5,10 @@ const meta = {
   title: "Modal",
   component: Modal,
   argTypes: {
-    position: { name: "모달의 위치. center 혹은 bottom 값" },
+    position: { name: "모달의 위치" },
     title: { name: "모달의 제목" },
+    closeButtonPosition: { name: "닫기 버튼의 위치" },
+    hasConfirmButton: { name: "확인 버튼의 유무" },
   },
 } satisfies Meta<typeof Modal>;
 
@@ -23,11 +25,11 @@ export const Default: Story = {
   args: {
     position: "center",
     title: "modal title",
+    closeButtonPosition: "top",
+    hasConfirmButton: false,
     children: <Component />,
     onConfirm: () => console.log("확인"),
     onClose: () => console.log("닫기"),
-    closeButtonPosition: "top",
-    isConfirmButton: false,
   },
 };
 
@@ -36,11 +38,11 @@ export const ConfirmButton: Story = {
   args: {
     position: "center",
     title: "modal title",
+    closeButtonPosition: "top",
+    hasConfirmButton: true,
     children: <Component />,
     onConfirm: () => console.log("확인"),
     onClose: () => console.log("닫기"),
-    closeButtonPosition: "top",
-    isConfirmButton: true,
   },
 };
 
@@ -49,11 +51,11 @@ export const CloseButtonBottom: Story = {
   args: {
     position: "center",
     title: "modal title",
+    closeButtonPosition: "bottom",
+    hasConfirmButton: true,
     children: <Component />,
     onConfirm: () => console.log("확인"),
     onClose: () => console.log("닫기"),
-    closeButtonPosition: "bottom",
-    isConfirmButton: true,
   },
 };
 
@@ -62,10 +64,24 @@ export const LongTitle: Story = {
   args: {
     position: "center",
     title: "modal title blahblahblahblahblahblahblahblahblahblahblahblahblahblahblahblahblahblahblahblahblahblah",
+    closeButtonPosition: "top",
+    hasConfirmButton: true,
     children: <Component />,
     onConfirm: () => console.log("확인"),
     onClose: () => console.log("닫기"),
+  },
+};
+
+export const CustomWidth: Story = {
+  name: "width값을 지정한 경우. position이 bottom일 경우 적용되지 않는다.",
+  args: {
+    position: "center",
+    title: "modal title",
+    width: 555,
     closeButtonPosition: "top",
-    isConfirmButton: true,
+    hasConfirmButton: true,
+    children: <Component />,
+    onConfirm: () => console.log("확인"),
+    onClose: () => console.log("닫기"),
   },
 };
