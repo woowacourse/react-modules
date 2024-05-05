@@ -1,81 +1,61 @@
-import React from "react";
-import { renderHook } from "@testing-library/react";
-import useCardholderName from ".";
+import React from 'react';
+import { renderHook } from '@testing-library/react';
+import useCardholderName from '.';
 
-describe("useCardholderName에 대한 테스트 케이스", () => {
-  describe("유효성 검증에 실패하는 경우", () => {
-    it("한글을 입력한 경우 유효하지 않은 값으로 판단한다.", () => {
-      const { result } = renderHook(() => useCardholderName());
+describe('useCardholderName에 대한 테스트 케이스', () => {
+  const testWrongCase = (name: string) => {
+    const { result } = renderHook(() => useCardholderName());
 
-      const WRONG_VALUE = "한글";
-      React.act(() => result.current.setCardholderName(WRONG_VALUE));
+    React.act(() => result.current.setCardholderName(name));
 
-      expect(result.current.errorStatus.isValid).toBe(false);
-      expect(result.current.errorStatus.errorMessage).not.toBeNull();
-    });
+    expect(result.current.isValid).toBe(false);
+    expect(result.current.errorMessage).not.toBeNull();
+  };
 
-    it("숫자를 입력한 경우 유효하지 않은 값으로 판단한다.", () => {
-      const { result } = renderHook(() => useCardholderName());
+  const testValidCase = (name: string) => {
+    const { result } = renderHook(() => useCardholderName());
 
-      const WRONG_VALUE = "122";
-      React.act(() => result.current.setCardholderName(WRONG_VALUE));
+    React.act(() => result.current.setCardholderName(name));
 
-      expect(result.current.errorStatus.isValid).toBe(false);
-      expect(result.current.errorStatus.errorMessage).not.toBeNull();
-    });
-
-    it("대소문자를 섞어서 입력한 경우 유효하지 않은 값으로 판단한다.", () => {
-      const { result } = renderHook(() => useCardholderName());
-
-      const WRONG_VALUE = "aBC";
-      React.act(() => result.current.setCardholderName(WRONG_VALUE));
-
-      expect(result.current.errorStatus.isValid).toBe(false);
-      expect(result.current.errorStatus.errorMessage).not.toBeNull();
-    });
-
-    it.each([" ABC ", "ABC ", " ABC"])(
-      "양 끝에 공백이 포함된 경우(%s) 유효하지 않은 값으로 판단한다.",
-      (value) => {
-        const { result } = renderHook(() => useCardholderName());
-
-        React.act(() => result.current.setCardholderName(value));
-
-        expect(result.current.errorStatus.isValid).toBe(false);
-        expect(result.current.errorStatus.errorMessage).not.toBeNull();
-      }
+    expect(result.current.isValid).toBe(true);
+    expect(result.current.errorMessage).toBeNull();
+  };
+  describe('유효성 검증에 실패하는 경우', () => {
+    it.each(['한글', 'ㄱ', 'ㅏ'])(
+      '한글(%s)을 입력한 경우 유효하지 않은 값으로 판단한다.',
+      testWrongCase
     );
 
-    it("사이 공백이 두 개 이상 포함된 경우 유효하지 않은 값으로 판단한다.", () => {
-      const { result } = renderHook(() => useCardholderName());
+    it.each(['123', '1', '0', '-1'])(
+      '숫자(%s)를 입력한 경우 유효하지 않은 값으로 판단한다.',
+      testWrongCase
+    );
 
-      const WRONG_VALUE = "A B  C";
-      React.act(() => result.current.setCardholderName(WRONG_VALUE));
+    it.each(['abc', 'ABc', 'ABc', 'AbC', 'aB'])(
+      '소문자(%s)를 입력한 경우 유효하지 않은 값으로 판단한다.',
+      testWrongCase
+    );
 
-      expect(result.current.errorStatus.isValid).toBe(false);
-      expect(result.current.errorStatus.errorMessage).not.toBeNull();
-    });
+    it.each([' ABC ', 'ABC ', ' ABC'])(
+      '양 끝에 공백이 포함된 경우(%s) 유효하지 않은 값으로 판단한다.',
+      testWrongCase
+    );
+
+    it.each(['A B  C', 'A  B C'])(
+      '사이 공백이 두 개 이상 포함된 경우 유효하지 않은 값으로 판단한다.',
+      testWrongCase
+    );
   });
 
-  describe("유효성 검증에 성공하는 경우", () => {
-    it("공백 없이 영어 대문자로만 이루어진 값을 입력한 경우 유효한 값으로 판단한다.", () => {
-      const { result } = renderHook(() => useCardholderName());
+  describe('유효성 검증에 성공하는 경우', () => {
+    it.each(['ABC', 'A'])(
+      '공백 없이 영어 대문자로만 이루어진 값을 입력한 경우 유효한 값으로 판단한다.',
+      testValidCase
+    );
 
-      const CORRECT_VALUE = "ABC";
-      React.act(() => result.current.setCardholderName(CORRECT_VALUE));
-
-      expect(result.current.errorStatus.isValid).toBe(true);
-      expect(result.current.errorStatus.errorMessage).toBeNull();
-    });
-
-    it("사이 공백이 한 개 이하로 포함된 경우 유효한 값으로 판단한다.", () => {
-      const CORRECT_VALUE = "A B C";
-      const { result } = renderHook(() => useCardholderName());
-
-      React.act(() => result.current.setCardholderName(CORRECT_VALUE));
-
-      expect(result.current.errorStatus.isValid).toBe(true);
-      expect(result.current.errorStatus.errorMessage).toBeNull();
-    });
+    it.each(['A B C', 'A B'])(
+      '사이 공백이 한 개 이하로 포함된 경우 유효한 값으로 판단한다.',
+      testValidCase
+    );
   });
 });
