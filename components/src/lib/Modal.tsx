@@ -1,9 +1,9 @@
 import COLOR_HEXES from './constants/colorHexes';
 import CloseIcon from './assets/close-icon.png';
+import { ModalPosition } from './types/type';
 import styled from '@emotion/styled';
 import { useEffect } from 'react';
 
-type ModalPosition = 'center' | 'bottom';
 interface ModalProps extends React.HTMLAttributes<HTMLDivElement> {
   onClose: () => void;
   onConfirm?: () => void;
