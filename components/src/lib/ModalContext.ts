@@ -8,6 +8,7 @@ export type ModalContextType = {
   style: CSSProperties;
   mountAnimation: string;
   unMountAnimation: string;
+  position: "center" | "bottom";
 };
 
 const defaultContext: Partial<ModalContextType> = {
@@ -21,6 +22,7 @@ const defaultContext: Partial<ModalContextType> = {
   },
   mountAnimation: "",
   unMountAnimation: "",
+  position: "center",
 };
 
 export const ModalContext =

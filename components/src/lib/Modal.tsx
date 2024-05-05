@@ -18,12 +18,14 @@ export default function Modal({
   style = {},
   mountAnimation = "",
   unMountAnimation = "",
+  position = "center",
 }: PropsWithChildren<Partial<ModalContextType>>) {
   const contextValue = useModal();
   const handleOnClose = onClose ?? contextValue.onClose;
 
   const modalProps: ModalContextType = {
     isOpen: isOpen ?? contextValue.isOpen,
+    position: position ?? contextValue.position,
     modalContainerStyle:
       modalContainerStyle ?? contextValue.modalContainerStyle,
     className: className ?? contextValue.className,
@@ -41,4 +43,4 @@ export default function Modal({
 Modal.Portal = ModalPortal;
 Modal.Backdrop = ModalBackdrop;
 Modal.Container = Container;
-Modal.ModalCloseButton = ModalCloseButton;
+Modal.CloseButton = ModalCloseButton;

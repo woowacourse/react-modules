@@ -1,20 +1,20 @@
-import { CSSProperties, PropsWithChildren } from "react";
+import { CSSProperties, PropsWithChildren, useContext } from "react";
 import styles from "./container.module.css";
+import { ModalContext } from "./ModalContext";
 
 type Props = {
   className?: string;
   style?: CSSProperties;
-  position?: "center" | "bottom";
 };
 
 export default function Container({
   children,
   className,
   style,
-  position = "center",
 }: PropsWithChildren<Props>) {
   const containerClassName = className ?? "";
   const innerStyle = style ?? {};
+  const { position } = useContext(ModalContext);
 
   return (
     <div
