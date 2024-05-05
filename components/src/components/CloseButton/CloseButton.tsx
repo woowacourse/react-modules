@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
 
-import useThemeContext from "../../../hooks/useThemeContext";
+import useThemeContext from "../../hooks/useThemeContext";
 import COLOR_PALETTE from "../../colorPalette";
 import { closeButton } from "./CloseButton.styles";
 

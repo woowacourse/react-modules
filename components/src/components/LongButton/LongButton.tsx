@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import React, { PropsWithChildren } from "react";
 import { LongButtonPropsStyle } from "./LongButton.styles";
-import useThemeContext from "../../../hooks/useThemeContext";
+import useThemeContext from "../../hooks/useThemeContext";
 
 interface LongButtonProps extends PropsWithChildren {
   type: "cancel" | "confirm";

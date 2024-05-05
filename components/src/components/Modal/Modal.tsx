@@ -7,10 +7,10 @@ import CloseButton from "../CloseButton/CloseButton";
 import Title from "../Title/Title";
 import LongButton from "../LongButton/LongButton";
 
-import ThemeProvider from "../../contextProvider/ThemeProvider";
+import ThemeProvider from "../contextProvider/ThemeProvider";
 
-import useThemeContext from "../../../hooks/useThemeContext";
-import useModalContext from "../../../hooks/useModalContext";
+import useThemeContext from "../../hooks/useThemeContext";
+import useModalContext from "../../hooks/useModalContext";
 
 export interface ModalProps extends PropsWithChildren {
   position?: "center" | "bottom";
