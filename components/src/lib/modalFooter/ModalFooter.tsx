@@ -1,6 +1,6 @@
 import styles from './ModalFooter.module.css';
 
-const BUTTON_POSITION_TYPE: Record<ContainerPosition, string> = {
+const FOOTER_POSITION_TYPE: Record<ContainerPosition, string> = {
   row: styles.row,
   'row-reverse': styles.rowReverse,
   column: styles.column,
@@ -19,7 +19,7 @@ const Container = ({
   ...rest
 }: React.PropsWithChildren<ContainerProps>) => {
   return (
-    <footer className={BUTTON_POSITION_TYPE[position]} {...rest}>
+    <footer className={FOOTER_POSITION_TYPE[position]} {...rest}>
       {children}
     </footer>
   );
