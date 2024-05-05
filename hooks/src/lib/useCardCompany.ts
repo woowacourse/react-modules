@@ -18,18 +18,9 @@ const useCardCompany = () => {
       return {
         ...prev,
         cardCompany: value,
+        isValid,
       };
     });
-
-    if (isValid) {
-      setCardCompanyInfo((prev) => {
-        return {
-          ...prev,
-          isValid: true,
-        };
-      });
-      return;
-    }
   };
 
   return {

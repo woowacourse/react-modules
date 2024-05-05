@@ -15,18 +15,9 @@ const useCardUserName = (cardUserNameLength: number) => {
       return {
         ...prev,
         cardUserName: value,
+        isValid,
       };
     });
-
-    if (isValid) {
-      setCardUserNameInfo((prev) => {
-        return {
-          ...prev,
-          isValid: true,
-        };
-      });
-      return;
-    }
   };
 
   return {

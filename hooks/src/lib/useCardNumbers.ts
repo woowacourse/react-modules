@@ -15,18 +15,9 @@ const useCardNumbers = (cardNumbersLength: number) => {
       return {
         ...prev,
         cardNumbers: value,
+        isValid,
       };
     });
-
-    if (isValid) {
-      setCardNumbersInfo((prev) => {
-        return {
-          ...prev,
-          isValid: true,
-        };
-      });
-      return;
-    }
   };
 
   return {

@@ -15,18 +15,9 @@ const useCardPassword = (cardPasswordLength: number) => {
       return {
         ...prev,
         password: value,
+        isValid,
       };
     });
-
-    if (isValid) {
-      setCardPassWordInfo((prev) => {
-        return {
-          ...prev,
-          isValid: true,
-        };
-      });
-      return;
-    }
   };
 
   return {

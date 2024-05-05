@@ -15,18 +15,9 @@ const useCardCVC = (cardCVCLength: number) => {
       return {
         ...prev,
         cardCVC: value,
+        isValid,
       };
     });
-
-    if (isValid) {
-      setCardCVCInfo((prev) => {
-        return {
-          ...prev,
-          isValid: true,
-        };
-      });
-      return;
-    }
   };
 
   return {
