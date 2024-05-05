@@ -1,11 +1,15 @@
 import useSelect from './useSelect';
 import { useEffect } from 'react';
 
-const onChange = (value: string, options: string[]) => {
+const validateInputType = (value: string) => {
   if (typeof value === 'undefined') {
     return { isValid: false, errorMessage: '카드사를 선택해주세요.' };
   }
 
+  return { isValid: true, errorMessage: '' };
+};
+
+const validateFieldRules = (value: string, options: string[]) => {
   if (!options.includes(value)) {
     return { isValid: false, errorMessage: '올바르지 않은 선택입니다.' };
   }
@@ -23,13 +27,17 @@ const useCardType = ({ initialValue, options, placeholder }: UseCardTypeProps) =
   const { value, handleChange, setValue, errorInfo } = useSelect(
     initialValue,
     {
-      onChange,
+      validateInputType,
+      validateFieldRules,
     },
     [placeholder, ...options],
   );
 
   useEffect(() => {
-    if (!onChange(initialValue, [placeholder, ...options]).isValid) {
+    if (
+      !validateInputType(initialValue) ||
+      !validateFieldRules(initialValue, [placeholder, ...options]).isValid
+    ) {
       console.error(
         `card type field error: ${initialValue} 라는 올바르지 않은 값이 들어와 빈 값으로 초기화했습니다.`,
       );

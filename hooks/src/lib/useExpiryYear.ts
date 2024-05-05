@@ -1,7 +1,7 @@
 import useInput from './useInput';
 import { useEffect } from 'react';
 
-const onChange = (value: string) => {
+const validateInputType = (value: string) => {
   const isNumber = !Number.isNaN(Number(value));
 
   if (!isNumber) {
@@ -11,7 +11,7 @@ const onChange = (value: string) => {
   return { isValid: true, errorMessage: '' };
 };
 
-const onBlur = (value: string) => {
+const validateFieldRules = (value: string) => {
   const nowYear = Number(new Date().getFullYear().toString().slice(2));
   const isValidLength = value.length === 0 || value.length === 2;
   const isValidYear = Number(value) >= nowYear;
@@ -33,18 +33,18 @@ interface Options {
 
 const useExpiryYear = (initialValue: string, options?: Options) => {
   const { value, setValue, handleBlur, errorInfo, setErrorInfo } = useInput(initialValue, {
-    onChange,
-    onBlur,
+    validateInputType,
+    validateFieldRules,
   });
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const validationResult = onChange(event.target.value);
+    const validationResult = validateInputType(event.target.value);
     setErrorInfo(validationResult);
     if (!validationResult.isValid) return;
     setValue(event.target.value);
 
     if (event.target.value.length === event.target.maxLength) {
-      const validationResult = onBlur(event.target.value);
+      const validationResult = validateFieldRules(event.target.value);
       setErrorInfo(validationResult);
       if (!validationResult.isValid) return;
       if (options?.isAutoFocus) {
@@ -55,7 +55,7 @@ const useExpiryYear = (initialValue: string, options?: Options) => {
   };
 
   useEffect(() => {
-    if (!onChange(initialValue).isValid || !onBlur(initialValue).isValid) {
+    if (!validateInputType(initialValue).isValid || !validateFieldRules(initialValue).isValid) {
       console.error(
         `expiry date field error: ${initialValue} 라는 올바르지 않은 값이 들어와 빈 값으로 초기화했습니다.`,
       );

@@ -6,11 +6,12 @@ export interface ValidationResult {
 }
 
 interface ValidatorProps {
-  onChange: (value: string) => ValidationResult;
-  onBlur: (value: string) => ValidationResult;
+  validateInputType: (value: string) => ValidationResult;
+  validateFieldRules: (value: string) => ValidationResult;
 }
 
 const useInput = (initialValue: string, validator: ValidatorProps) => {
+  const { validateInputType, validateFieldRules } = validator;
   const [value, setValue] = useState(initialValue);
   const [errorInfo, setErrorInfo] = useState<ValidationResult>({
     isValid: true,
@@ -18,14 +19,14 @@ const useInput = (initialValue: string, validator: ValidatorProps) => {
   });
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const validationResult = validator.onChange(event.target.value);
+    const validationResult = validateInputType(event.target.value);
     setErrorInfo(validationResult);
     if (!validationResult.isValid) return;
     setValue(event.target.value);
   };
 
   const handleBlur = (event: React.FocusEvent<HTMLInputElement, Element>) => {
-    setErrorInfo(validator.onBlur(event.target.value));
+    setErrorInfo(validateFieldRules(event.target.value));
   };
 
   return {

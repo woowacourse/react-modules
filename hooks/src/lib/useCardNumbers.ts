@@ -1,7 +1,7 @@
 import useInputs from './useInputs';
 import { useEffect } from 'react';
 
-const onChange = (value: string) => {
+const validateInputType = (value: string) => {
   const isNumber = !Number.isNaN(Number(value));
 
   if (!isNumber) {
@@ -11,7 +11,7 @@ const onChange = (value: string) => {
   return { isValid: true, errorMessage: '' };
 };
 
-const onBlur = (value: string) => {
+const validateFieldRules = (value: string) => {
   const isValidLength = value.length === 0 || value.length === 4;
 
   if (!isValidLength) {
@@ -27,12 +27,12 @@ interface CardNumbersOptions {
 
 const useCardNumbers = (initialValue: Record<string, string>, options?: CardNumbersOptions) => {
   const { value, setValue, handleBlur, errorInfo, setErrorInfo } = useInputs(initialValue, {
-    onChange,
-    onBlur,
+    validateInputType,
+    validateFieldRules,
   });
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>, name: string) => {
-    const validationResult = onChange(event.target.value);
+    const validationResult = validateInputType(event.target.value);
     setErrorInfo(prev => ({
       ...prev,
       [name]: validationResult,
@@ -44,7 +44,7 @@ const useCardNumbers = (initialValue: Record<string, string>, options?: CardNumb
     }));
 
     if (event.target.value.length === event.target.maxLength) {
-      const validationResult = onBlur(event.target.value);
+      const validationResult = validateFieldRules(event.target.value);
 
       setErrorInfo(prev => ({
         ...prev,
@@ -61,7 +61,7 @@ const useCardNumbers = (initialValue: Record<string, string>, options?: CardNumb
   useEffect(() => {
     const initialValues = Object.entries(initialValue);
     for (const [key, value] of initialValues) {
-      if (!onChange(value).isValid || !onBlur(value).isValid) {
+      if (!validateInputType(value).isValid || !validateFieldRules(value).isValid) {
         console.error(
           `cardNumbers field error: ${value} 라는 올바르지 않은 값이 들어와 빈 값으로 초기화했습니다.`,
         );

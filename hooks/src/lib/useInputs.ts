@@ -6,8 +6,8 @@ export interface ValidationResult {
 }
 
 interface ValidatorProps {
-  onChange: (value: string) => ValidationResult;
-  onBlur: (value: string) => ValidationResult;
+  validateInputType: (value: string) => ValidationResult;
+  validateFieldRules: (value: string) => ValidationResult;
 }
 
 const makeInitialErrorInfo = (initialValue: Record<string, string>) => {

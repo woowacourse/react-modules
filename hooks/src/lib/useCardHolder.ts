@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import useInput from './useInput';
 
-const onChange = (value: string) => {
+const validateInputType = (value: string) => {
   const isEnglish = /^$|^[a-zA-Z ]+$/.test(value);
 
   if (!isEnglish) {
@@ -11,7 +11,7 @@ const onChange = (value: string) => {
   return { isValid: true, errorMessage: '' };
 };
 
-const onBlur = (value: string) => {
+const validateFieldRules = (value: string) => {
   const isValidHolderFormat = /^(?=\S)(?!.*\s\s).*\s+(?=\S).*$/.test(value);
 
   if (!isValidHolderFormat) {
@@ -28,20 +28,20 @@ const useCardHolder = (initialValue: string) => {
   const { value, setValue, handleBlur, errorInfo, setErrorInfo } = useInput(
     initialValue.toUpperCase(),
     {
-      onChange,
-      onBlur,
+      validateInputType,
+      validateFieldRules,
     },
   );
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const validationResult = onChange(event.target.value);
+    const validationResult = validateInputType(event.target.value);
     setErrorInfo(validationResult);
     if (!validationResult.isValid) return;
     setValue(event.target.value.toUpperCase());
   };
 
   useEffect(() => {
-    if (!onChange(initialValue).isValid || !onBlur(initialValue).isValid) {
+    if (!validateInputType(initialValue).isValid || !validateFieldRules(initialValue).isValid) {
       console.error(
         `cardholder field error: ${initialValue} 라는 올바르지 않은 값이 들어와 빈 값으로 초기화했습니다.`,
       );
