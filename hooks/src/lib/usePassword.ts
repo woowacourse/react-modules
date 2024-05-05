@@ -1,25 +1,15 @@
 import { useEffect } from 'react';
 import useInput from './useInput';
-import validateNumber from './validator/validateNumber';
-
-const onBlur = (value: string) => {
-  const isValidLength = value.length === 0 || value.length === 2;
-
-  if (!isValidLength) {
-    return { isValid: false, errorMessage: '비밀번호는 2자리로 입력해주세요' };
-  }
-
-  return { isValid: true, errorMessage: '' };
-};
+import { validateNumber, validatePasswordFormat } from './validator';
 
 const usePassword = (initialValue: string) => {
   const { value, setValue, handleChange, handleBlur, errorInfo } = useInput(initialValue, {
     onChange: validateNumber,
-    onBlur,
+    onBlur: validatePasswordFormat,
   });
 
   useEffect(() => {
-    if (!validateNumber(initialValue).isValid || !onBlur(initialValue).isValid) {
+    if (!validateNumber(initialValue).isValid || !validatePasswordFormat(initialValue).isValid) {
       console.error(
         `password field error: ${initialValue} 라는 올바르지 않은 값이 들어와 빈 값으로 초기화했습니다.`,
       );

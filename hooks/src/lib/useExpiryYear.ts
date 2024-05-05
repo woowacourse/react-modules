@@ -1,22 +1,6 @@
 import useInput from './useInput';
 import { useEffect } from 'react';
-import validateNumber from './validator/validateNumber';
-
-const onBlur = (value: string) => {
-  const nowYear = Number(new Date().getFullYear().toString().slice(2));
-  const isValidLength = value.length === 0 || value.length === 2;
-  const isValidYear = Number(value) >= nowYear;
-
-  if (!isValidLength) {
-    return { isValid: false, errorMessage: '년은 2자리로 입력해주세요' };
-  }
-
-  if (!isValidYear) {
-    return { isValid: false, errorMessage: `유효 기간은 ${nowYear}년 이후로 입력해주세요` };
-  }
-
-  return { isValid: true, errorMessage: '' };
-};
+import { validateExpiryYearFormat, validateNumber } from './validator';
 
 interface Options {
   isAutoFocus?: boolean;
@@ -25,7 +9,7 @@ interface Options {
 const useExpiryYear = (initialValue: string, options?: Options) => {
   const { value, setValue, handleBlur, errorInfo, setErrorInfo } = useInput(initialValue, {
     onChange: validateNumber,
-    onBlur,
+    onBlur: validateExpiryYearFormat,
   });
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -35,7 +19,7 @@ const useExpiryYear = (initialValue: string, options?: Options) => {
     setValue(event.target.value);
 
     if (event.target.value.length === event.target.maxLength) {
-      const validationResult = onBlur(event.target.value);
+      const validationResult = validateExpiryYearFormat(event.target.value);
       setErrorInfo(validationResult);
       if (!validationResult.isValid) return;
       if (options?.isAutoFocus) {
@@ -46,7 +30,7 @@ const useExpiryYear = (initialValue: string, options?: Options) => {
   };
 
   useEffect(() => {
-    if (!validateNumber(initialValue).isValid || !onBlur(initialValue).isValid) {
+    if (!validateNumber(initialValue).isValid || !validateExpiryYearFormat(initialValue).isValid) {
       console.error(
         `expiry date field error: ${initialValue} 라는 올바르지 않은 값이 들어와 빈 값으로 초기화했습니다.`,
       );
