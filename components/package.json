@@ -1,6 +1,6 @@
 {
   "name": "darr-modal-components",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Modal component that is easy and simple to use",
   "type": "module",
   "types": "dist/index.d.ts",
