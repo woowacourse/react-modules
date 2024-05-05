@@ -18,14 +18,16 @@ function App() {
             <div>내용</div>
           </>
         </Modal.Content>
-        <Modal.ConfirmButton
-          label="동의하고 저장하기"
-          onConfirm={() => {
-            alert('확인');
-            toggleIsOpen();
-          }}
-        />
-        <Modal.CloseButton label="닫기" onClose={() => toggleIsOpen()} />
+        <Modal.Footer>
+          <Modal.ConfirmButton
+            label="동의하고 저장하기"
+            onConfirm={() => {
+              alert('확인');
+              toggleIsOpen();
+            }}
+          />
+          <Modal.CloseButton label="닫기" onClose={() => toggleIsOpen()} />
+        </Modal.Footer>
       </Modal>
     </>
   );

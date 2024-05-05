@@ -4,6 +4,7 @@ import ModalDimmed from './modalDimmed/ModalDimmed';
 import ModalContent from './modalContent/ModalContent';
 import CloseButton from './closeButton/CloseButton';
 import ConfirmButton from './confirmButton/ConfirmButton';
+import ModalFooter from './modalFooter/ModalFooter';
 
 export const Modal = Object.assign(ModalMain, {
   Dimmed: ModalDimmed,
@@ -11,4 +12,5 @@ export const Modal = Object.assign(ModalMain, {
   Content: ModalContent,
   CloseButton: CloseButton,
   ConfirmButton: ConfirmButton,
+  Footer: ModalFooter,
 });
