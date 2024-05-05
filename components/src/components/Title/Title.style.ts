@@ -5,6 +5,8 @@ export const titleStyle = css({
   fontWeight: "700",
   overflow: "hidden",
   textOverflow: "ellipsis",
+  whiteSpace: "nowrap",
+  flex: 1,
   width: "80%",
   textAlign: "left",
 });

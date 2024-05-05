@@ -3,11 +3,9 @@ import React, { PropsWithChildren, ReactNode, useEffect } from "react";
 import { buttonsStyle, modalContentStyle, modalStyle } from "./Modal.style";
 
 import ModalHeader from "../ModalHeader/ModalHeader";
-import CloseButton from "../CloseButton/CloseButton";
-import Title from "../Title/Title";
 import LongButton from "../LongButton/LongButton";
 
-import ThemeProvider from "../contextProvider/ThemeProvider";
+import ThemeProvider from "../ContextProvider/ThemeProvider";
 
 import useThemeContext from "../../hooks/useThemeContext";
 import useModalContext from "../../hooks/useModalContext";
@@ -57,17 +55,7 @@ const Dialog: React.FC<DialogProps> = ({
   return (
     <dialog ref={dialogRef} css={modalStyle(position, width, theme)}>
       <div css={modalContentStyle}>
-        <ModalHeader>
-          {title && <Title>{title}</Title>}
-          {closeButtonPosition === "top" && (
-            <CloseButton
-              handleClick={() => {
-                action.handleClose();
-                if (onClose) onClose();
-              }}
-            />
-          )}
-        </ModalHeader>
+        <ModalHeader hasCloseButton={closeButtonPosition === "top"}>{title}</ModalHeader>
         <div>{children}</div>
         <div css={buttonsStyle}>
           {hasConfirmButton && (
