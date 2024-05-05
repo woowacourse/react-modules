@@ -1,5 +1,5 @@
 /** @jsxImportSource @emotion/react */
-import React, { PropsWithChildren, useEffect } from "react";
+import React, { PropsWithChildren, ReactNode, useEffect } from "react";
 import { buttonsStyle, modalContentStyle, modalStyle } from "./Modal.style";
 
 import ModalHeader from "../ModalHeader/ModalHeader";
@@ -21,6 +21,8 @@ export interface ModalProps extends PropsWithChildren {
   closeButtonPosition?: "bottom" | "top";
   onConfirm?: () => void;
   onClose?: () => void;
+  confirmMessage?: ReactNode;
+  cancelMessage?: ReactNode;
 }
 
 interface DialogProps extends Omit<ModalProps, "theme"> {}
@@ -34,6 +36,8 @@ const Dialog: React.FC<DialogProps> = ({
   onConfirm,
   onClose,
   children,
+  confirmMessage,
+  cancelMessage,
 }) => {
   const theme = useThemeContext();
   const { dialogRef, action } = useModalContext();
@@ -67,19 +71,19 @@ const Dialog: React.FC<DialogProps> = ({
         <div>{children}</div>
         <div css={buttonsStyle}>
           {hasConfirmButton && (
-            <LongButton type="confirm" handleClick={onConfirm}>
-              동의하고 저장하기
+            <LongButton isHighLight={true} handleClick={onConfirm}>
+              {confirmMessage}
             </LongButton>
           )}
           {closeButtonPosition === "bottom" && (
             <LongButton
-              type="cancel"
+              isHighLight={false}
               handleClick={() => {
                 action.handleClose();
                 if (onClose) onClose();
               }}
             >
-              닫기
+              {cancelMessage}
             </LongButton>
           )}
         </div>

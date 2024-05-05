@@ -4,12 +4,11 @@ import { LongButtonPropsStyle } from "./LongButton.styles";
 import useThemeContext from "../../hooks/useThemeContext";
 
 interface LongButtonProps extends PropsWithChildren {
-  type: "cancel" | "confirm";
+  isHighLight?: boolean;
   handleClick?: () => void;
 }
 
-const LongButton: React.FC<LongButtonProps> = ({ type, handleClick, children }) => {
-  const isHighLight = type === "confirm" ? true : false;
+const LongButton: React.FC<LongButtonProps> = ({ isHighLight = false, handleClick, children }) => {
   const theme = useThemeContext();
 
   return (
