@@ -13,6 +13,8 @@ interface ModalStyle {
   modal?: React.CSSProperties;
   modalHeader?: React.CSSProperties;
   modalTitle?: React.CSSProperties;
+  closeButton?: React.CSSProperties;
+  confirmButton?: React.CSSProperties;
 }
 
 interface ModalProps {
@@ -22,8 +24,12 @@ interface ModalProps {
   type: ModalType;
   content?: React.ReactNode;
   style?: ModalStyle;
-  closeButton?: React.ReactNode;
-  confirmButton?: React.ReactNode;
+  customCloseButton?: React.ReactNode;
+  customConfirmButton?: React.ReactNode;
+  closeButtonText?: string;
+  confirmButtonText?: string;
+  hideConfirmButton?: boolean;
+  hideCloseButton?: boolean;
   buttonPosition?: ButtonPosition;
   closeOnOutsideClick?: boolean;
   customCloseIcon?: string;
@@ -42,8 +48,12 @@ const Modal = ({
   type,
   content,
   style,
-  closeButton,
-  confirmButton,
+  customCloseButton,
+  customConfirmButton,
+  closeButtonText,
+  confirmButtonText,
+  hideCloseButton,
+  hideConfirmButton,
   buttonPosition,
   closeOnOutsideClick = true,
   customCloseIcon,
@@ -51,7 +61,6 @@ const Modal = ({
 }: ModalProps) => {
   const modalRef = useRef<HTMLDivElement>(null);
 
-  const isButton = closeButton || confirmButton;
   useModalCloseClickDimmer(modalRef, onClose, closeOnOutsideClick);
 
   const modalHeaderOptions = {
@@ -63,8 +72,14 @@ const Modal = ({
 
   const modalFooterOptions = {
     buttonPosition,
-    closeButton,
-    confirmButton,
+    customCloseButton,
+    customConfirmButton,
+    closeButtonText,
+    hideCloseButton,
+    hideConfirmButton,
+    confirmButtonText,
+    closeButtonStyle: style?.closeButton,
+    confirmButtonStyle: style?.confirmButton,
   };
 
   return (
@@ -75,7 +90,7 @@ const Modal = ({
             <section className={MODAL_TYPE[type]} ref={modalRef} style={style?.modal}>
               <ModalHeader title={title} onClose={onClose} {...modalHeaderOptions} />
               {content && <section>{content}</section>}
-              {isButton && <ModalFooter {...modalFooterOptions} />}
+              <ModalFooter {...modalFooterOptions} />
             </section>
           </div>,
           document.body,
