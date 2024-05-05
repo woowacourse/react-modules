@@ -1,8 +1,8 @@
-import { useEffect } from 'react';
 import type { ModalProps, ModalFooterProps } from './Modal.type';
-import { preventScroll, allowScroll } from '../utils/scroll';
 import styles from './Modal.module.css';
 import { StrictPropsWithChildren } from '../type/common';
+import usePreventScroll from '../hooks/usePreventScroll';
+import useKeyPress from '../hooks/useKeyPress';
 
 export const ModalHeader = ({ children }: StrictPropsWithChildren) => {
   return <header className={styles.modalHeader}>{children}</header>;
@@ -26,22 +26,8 @@ export const ModalMain = ({
   shadow = true,
   animation = true,
 }: StrictPropsWithChildren<ModalProps>) => {
-  useEffect(() => {
-    if (!isOpen) return;
-
-    const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') close();
-    };
-
-    const prevScrollY = preventScroll();
-
-    document.addEventListener('keydown', handleKeyDown);
-
-    return () => {
-      allowScroll(prevScrollY);
-      document.removeEventListener('keydown', handleKeyDown);
-    };
-  }, [isOpen, close]);
+  usePreventScroll(isOpen);
+  useKeyPress({ targetKey: 'Escape', callback: close, isActive: isOpen });
 
   if (!isOpen) return null;
 
