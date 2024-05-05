@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import ValidationResult from '../types/ValidationResult';
 import Validation from '../utils/Validation';
+import ErrorMessages from '../types/ErrorMessages';
 
 interface CVCValidationResult {
   CVC: string;
@@ -8,7 +9,17 @@ interface CVCValidationResult {
   handleUpdateCVC: (value: string) => void;
 }
 
-export default function useCardCVC(initialValue: string = ''): CVCValidationResult {
+export const DEFAULT_PARAMS = {
+  initialValue: '',
+  errorMessages: {
+    inputType: 'CVC 번호는 숫자로만 입력해 주세요.',
+  },
+};
+
+export default function useCardCVC(
+  initialValue: string = DEFAULT_PARAMS.initialValue,
+  errorMessages: ErrorMessages = DEFAULT_PARAMS.errorMessages,
+): CVCValidationResult {
   const [CVC, setCVC] = useState(initialValue);
   const [validationResult, setValidationResult] = useState<ValidationResult>({
     isValid: true,
@@ -24,7 +35,7 @@ export default function useCardCVC(initialValue: string = ''): CVCValidationResu
 
     setValidationResult({
       isValid: false,
-      errorMessage: 'CVC 번호는 3자리 숫자로 입력하셔야 합니다.',
+      errorMessage: errorMessages.inputType,
     });
   };
 

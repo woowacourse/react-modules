@@ -1,6 +1,8 @@
 import { renderHook, act } from '@testing-library/react';
 import useCardPassword from './useCardPassword';
 
+import { DEFAULT_PARAMS } from './useCardPassword';
+
 describe('useCardPassword 테스트', () => {
   it('2자리 숫자의 초기값이 설정되면, password 상태에 해당 초기값이 저장되어야 한다.', () => {
     const initialValue = '12';
@@ -41,7 +43,7 @@ describe('useCardPassword 테스트', () => {
     }).toEqual({
       password: newValue,
       isValid: false,
-      errorMessage: '두 자리의 숫자여야 합니다. 다시 입력해주세요.',
+      errorMessage: DEFAULT_PARAMS.errorMessages.inputType,
     });
   });
 
@@ -61,7 +63,7 @@ describe('useCardPassword 테스트', () => {
     }).toEqual({
       password: newValue,
       isValid: false,
-      errorMessage: '두 자리의 숫자여야 합니다. 다시 입력해주세요.',
+      errorMessage: DEFAULT_PARAMS.errorMessages.inputType,
     });
   });
 });

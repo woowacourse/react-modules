@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import ValidationResult from '../types/ValidationResult';
 import Validation from '../utils/Validation';
+import ErrorMessages from '../types/ErrorMessages';
 
 interface CardHolderValidationResult {
   cardHolder: string;
@@ -8,7 +9,17 @@ interface CardHolderValidationResult {
   handleUpdateCardHolder: (value: string) => void;
 }
 
-export default function useCardHolder(initialValue: string = ''): CardHolderValidationResult {
+export const DEFAULT_PARAMS = {
+  initialValue: '',
+  errorMessages: {
+    inputType: '카드 소유자는 영문 대소문자로 입력해 주세요.',
+  },
+};
+
+export default function useCardHolder(
+  initialValue: string = DEFAULT_PARAMS.initialValue,
+  errorMessages: ErrorMessages = DEFAULT_PARAMS.errorMessages,
+): CardHolderValidationResult {
   const [cardHolder, setCardHolder] = useState(initialValue);
   const [validationResult, setValidationResult] = useState<ValidationResult>({
     isValid: true,
@@ -24,7 +35,7 @@ export default function useCardHolder(initialValue: string = ''): CardHolderVali
 
     setValidationResult({
       isValid: false,
-      errorMessage: '영문자만 입력할 수 있습니다.',
+      errorMessage: errorMessages.inputType,
     });
   };
 

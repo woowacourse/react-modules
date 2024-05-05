@@ -1,6 +1,8 @@
 import { act, renderHook } from '@testing-library/react';
 import useCardBrand from './useCardBrand';
 
+import { DEFAULT_PARAMS } from './useCardBrand';
+
 describe('useCardBrand 테스트', () => {
   const ALLOWED_BRANDS = ['신한카드', 'KB카드', '카카오뱅크', '현대카드'];
 
@@ -17,7 +19,7 @@ describe('useCardBrand 테스트', () => {
 
     expect(() => {
       renderHook(() => useCardBrand([], initialValue));
-    }).toThrow('[ERROR]');
+    }).toThrow(DEFAULT_PARAMS.errorMessages.emptyAllowedBrands);
   });
 
   it('초기값으로 입력한 카드사 이름이 함께 입력된 카드사 목록에 존재하지 않거나 공백("")이 아니라면 에러를 반환해야 한다.', () => {
@@ -25,7 +27,7 @@ describe('useCardBrand 테스트', () => {
 
     expect(() => {
       renderHook(() => useCardBrand(ALLOWED_BRANDS, initialValue));
-    }).toThrow('[ERROR]');
+    }).toThrow(DEFAULT_PARAMS.errorMessages.initialValueNotExistsInAllowedBrands);
   });
 
   it('brand의 상태값이 기존의 카드사 목록에 존재하는 카드사 이름으로 업데이트되면, validationResult의 isValid가 true로 반환되어야 한다.', () => {
@@ -53,7 +55,7 @@ describe('useCardBrand 테스트', () => {
     expect(result.current.brand).toBe(newValue);
     expect(result.current.validationResult.isValid).toBe(false);
     expect(result.current.validationResult.errorMessage).toBe(
-      '지원하지 않는 카드사입니다. 다른 카드를 선택해주세요.',
+      DEFAULT_PARAMS.errorMessages.invalidBrand,
     );
   });
 });

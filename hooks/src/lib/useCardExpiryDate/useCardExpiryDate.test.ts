@@ -1,6 +1,8 @@
 import { renderHook, act } from '@testing-library/react';
 import useCardExpiryDate from './useCardExpiryDate';
 
+import { DEFAULT_PARAMS } from './useCardExpiryDate';
+
 describe('useCardExpiryDate', () => {
   const initialValue = { month: '12', year: '25' };
 
@@ -32,7 +34,7 @@ describe('useCardExpiryDate', () => {
     expect(result.current.expiryDate).toEqual(newValue);
     expect(result.current.validationResult).toEqual({
       isValid: false,
-      errorMessage: '유효 기간의 월은 01 ~ 12 사이의 2자리 숫자로 입력하셔야 합니다.',
+      errorMessage: DEFAULT_PARAMS.errorMessages.invalidMonth,
     });
   });
 
@@ -47,7 +49,7 @@ describe('useCardExpiryDate', () => {
     expect(result.current.expiryDate).toEqual(newValue);
     expect(result.current.validationResult).toEqual({
       isValid: false,
-      errorMessage: '유효 기간의 월은 01 ~ 12 사이의 2자리 숫자로 입력하셔야 합니다.',
+      errorMessage: DEFAULT_PARAMS.errorMessages.invalidMonth,
     });
   });
 
@@ -62,7 +64,7 @@ describe('useCardExpiryDate', () => {
     expect(result.current.expiryDate).toEqual(newValue);
     expect(result.current.validationResult).toEqual({
       isValid: false,
-      errorMessage: '유효 기간의 연도는 2자리 숫자로 입력하셔야 합니다.',
+      errorMessage: DEFAULT_PARAMS.errorMessages.invalidYear,
     });
   });
 
@@ -77,7 +79,7 @@ describe('useCardExpiryDate', () => {
     expect(result.current.expiryDate).toEqual(newValue);
     expect(result.current.validationResult).toEqual({
       isValid: false,
-      errorMessage: '유효 기간의 연도는 2자리 숫자로 입력하셔야 합니다.',
+      errorMessage: DEFAULT_PARAMS.errorMessages.invalidYear,
     });
   });
 
@@ -92,7 +94,7 @@ describe('useCardExpiryDate', () => {
     expect(result.current.expiryDate).toEqual(newValue);
     expect(result.current.validationResult).toEqual({
       isValid: false,
-      errorMessage: '유효 기간의 연도는 2자리 숫자로 입력하셔야 합니다.',
+      errorMessage: DEFAULT_PARAMS.errorMessages.invalidYear,
     });
   });
 
@@ -110,7 +112,7 @@ describe('useCardExpiryDate', () => {
 
     expect(result.current.validationResult).toEqual({
       isValid: false,
-      errorMessage: '유효 기간이 만료되었습니다. 확인 후 다시 입력해 주세요.',
+      errorMessage: DEFAULT_PARAMS.errorMessages.expiredDate,
     });
   });
 });

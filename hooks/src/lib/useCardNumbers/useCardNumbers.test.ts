@@ -2,6 +2,7 @@ import { renderHook, act } from '@testing-library/react';
 import useCardNumbers from './useCardNumbers';
 
 import type { CardNumbersType } from '../types/CardNumberTypes';
+import { DEFAULT_PARAMS } from './useCardNumbers';
 
 describe('useCardNumbers', () => {
   const initialValues: CardNumbersType = ['1234', '5678', '9012', '3456'];
@@ -32,7 +33,7 @@ describe('useCardNumbers', () => {
     expect(result.current.validStates).toEqual([true, true, false, true]);
     expect(result.current.validationResult).toEqual({
       isValid: false,
-      errorMessage: '카드 번호는 4자리의 숫자여야 합니다. 확인 후 다시 입력해주세요.',
+      errorMessage: DEFAULT_PARAMS.errorMessages.inputType,
     });
   });
 
@@ -62,7 +63,7 @@ describe('useCardNumbers', () => {
     expect(result.current.validStates).toEqual([true, false, true, true]);
     expect(result.current.validationResult).toEqual({
       isValid: false,
-      errorMessage: '카드 번호는 4자리의 숫자여야 합니다. 확인 후 다시 입력해주세요.',
+      errorMessage: DEFAULT_PARAMS.errorMessages.inputType,
     });
   });
 
@@ -103,7 +104,7 @@ describe('useCardNumbers', () => {
 
     expect(result.current.validationResult).toEqual({
       isValid: false,
-      errorMessage: '카드 번호는 4자리의 숫자여야 합니다. 확인 후 다시 입력해주세요.',
+      errorMessage: DEFAULT_PARAMS.errorMessages.inputType,
     });
   });
 });

@@ -1,6 +1,8 @@
 import { renderHook, act } from '@testing-library/react';
 import useCardCVC from './useCardCVC';
 
+import { DEFAULT_PARAMS } from './useCardCVC';
+
 describe('useCardCVC', () => {
   const initialValue = '123';
 
@@ -31,7 +33,7 @@ describe('useCardCVC', () => {
     expect(result.current.CVC).toBe('12');
     expect(result.current.validationResult).toEqual({
       isValid: false,
-      errorMessage: 'CVC 번호는 3자리 숫자로 입력하셔야 합니다.',
+      errorMessage: DEFAULT_PARAMS.errorMessages.inputType,
     });
   });
 
@@ -45,7 +47,7 @@ describe('useCardCVC', () => {
     expect(result.current.CVC).toBe('12c');
     expect(result.current.validationResult).toEqual({
       isValid: false,
-      errorMessage: 'CVC 번호는 3자리 숫자로 입력하셔야 합니다.',
+      errorMessage: DEFAULT_PARAMS.errorMessages.inputType,
     });
   });
 });

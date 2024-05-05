@@ -1,6 +1,8 @@
 import { renderHook, act } from '@testing-library/react';
 import useCardHolder from './useCardHolder';
 
+import { DEFAULT_PARAMS } from './useCardHolder';
+
 describe('useCardHolder', () => {
   const initialValue = 'Seongjin Hong';
 
@@ -32,7 +34,7 @@ describe('useCardHolder', () => {
     expect(result.current.cardHolder).toBe('Seongjin123');
     expect(result.current.validationResult).toEqual({
       isValid: false,
-      errorMessage: '영문자만 입력할 수 있습니다.',
+      errorMessage: DEFAULT_PARAMS.errorMessages.inputType,
     });
   });
 
@@ -47,7 +49,7 @@ describe('useCardHolder', () => {
     expect(result.current.cardHolder).toBe('  Seongjin');
     expect(result.current.validationResult).toEqual({
       isValid: false,
-      errorMessage: '영문자만 입력할 수 있습니다.',
+      errorMessage: DEFAULT_PARAMS.errorMessages.inputType,
     });
   });
 });
