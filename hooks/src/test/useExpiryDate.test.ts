@@ -92,7 +92,7 @@ describe("useExpiryDate 훅 테스트", () => {
     expect(result.current.errorMessages).toEqual(expectedErrorMessage);
   });
 
-  it("유효하지 않은 월일 때 에러를 낸다.", () => {
+  it("01~12이 아닌 범위의 월을 입력했을 때 에러를 낸다.", () => {
     const initialValues = {
       month: "",
       year: "24",
@@ -112,7 +112,7 @@ describe("useExpiryDate 훅 테스트", () => {
     expect(result.current.errorMessages).toEqual(expectedErrorMessage);
   });
 
-  it("유효하지 않은 년일 때 에러를 낸다.", () => {
+  it("두자리 정수가 아닌 년도를 입력했을 때 에러를 낸다.", () => {
     const initialValues = {
       month: "12",
       year: "",

@@ -7,12 +7,12 @@ export interface CardNumbersType {
   cardNumber4: string;
 }
 
-export const cardNumberKeys = [
+export const cardNumberKeys: CardNumberKeys[] = [
   "cardNumber1",
   "cardNumber2",
   "cardNumber3",
   "cardNumber4",
-];
+] as const;
 
 export type CardNumberKeys = keyof CardNumbersType;
 
