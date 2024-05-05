@@ -13,7 +13,7 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
   args: {
     isOpened: true,
-    closeModal: () => {
+    onClose: () => {
       alert('모달 닫기');
     },
     title: '제목입니다',
@@ -36,7 +36,7 @@ export const Default: Story = {
 export const CloseButton: Story = {
   args: {
     isOpened: true,
-    closeModal: () => {
+    onClose: () => {
       alert('모달 닫기');
     },
     title: '제목입니다',
@@ -60,7 +60,7 @@ export const CloseButton: Story = {
 export const Bottom: Story = {
   args: {
     isOpened: true,
-    closeModal: () => {
+    onClose: () => {
       alert('모달 닫기');
     },
     title: '제목입니다',
@@ -84,7 +84,7 @@ export const Bottom: Story = {
 export const Column: Story = {
   args: {
     isOpened: true,
-    closeModal: () => {
+    onClose: () => {
       alert('모달 닫기');
     },
     title: '제목입니다',
@@ -109,7 +109,7 @@ export const Column: Story = {
 export const Color: Story = {
   args: {
     isOpened: true,
-    closeModal: () => {
+    onClose: () => {
       alert('모달 닫기');
     },
     title: '제목입니다',
