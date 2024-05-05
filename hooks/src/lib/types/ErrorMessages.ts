@@ -1,4 +1,5 @@
 export default interface ErrorMessages {
   inputType: string;
-  length?: string;
+  inputLength?: (length: number) => string;
+  allowedLengthOutOfRange?: string;
 }

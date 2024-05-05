@@ -21,6 +21,7 @@ import {
 import './App.css';
 
 const cardBrands = ['신한카드', '현대카드', '카카오뱅크'];
+const cardNumbersFormat = [4, 4, 4, 4];
 
 function App() {
   const {
@@ -28,7 +29,7 @@ function App() {
     validationResult: cardNumbersValidationResult,
     validStates,
     handleUpdateCardNumbers,
-  } = useCardNumbers();
+  } = useCardNumbers(cardNumbersFormat);
   const {
     brand,
     validationResult: brandValidationResult,
@@ -57,34 +58,16 @@ function App() {
       <section>
         <h2>useCardNumbers</h2>
         <div className="input-container">
-          <input
-            type="text"
-            onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-              handleUpdateCardNumbers(0, event.target.value)
-            }
-            placeholder="1234"
-          />
-          <input
-            type="text"
-            onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-              handleUpdateCardNumbers(1, event.target.value)
-            }
-            placeholder="1234"
-          />
-          <input
-            type="text"
-            onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-              handleUpdateCardNumbers(2, event.target.value)
-            }
-            placeholder="1234"
-          />
-          <input
-            type="text"
-            onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-              handleUpdateCardNumbers(3, event.target.value)
-            }
-            placeholder="1234"
-          />
+          {cardNumbersFormat.map((length, index) => (
+            <input
+              key={index}
+              type="text"
+              onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+                handleUpdateCardNumbers(index, event.target.value)
+              }
+              placeholder={Array.from({ length }, (_, index) => (index + 1).toString()).join('')}
+            />
+          ))}
         </div>
         <div className="output-container">
           <p>cardNumbers: {cardNumbers.join(' ')}</p>
