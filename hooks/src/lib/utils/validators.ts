@@ -1,5 +1,5 @@
 export const validateFilledValue = (value: string) => {
-  return !!value;
+  return !!value.trim();
 };
 
 export const validateNumber = (value: string) => {
