@@ -1,10 +1,5 @@
 import { useState } from 'react';
-import { UseCardNumber, ValidationResult, ValidatorProps } from './type';
-
-interface UseInputs extends UseCardNumber {
-  setValue: React.Dispatch<React.SetStateAction<Record<string, string>>>;
-  setErrorInfo: React.Dispatch<React.SetStateAction<Record<string, ValidationResult>>>;
-}
+import { UseInputs, ValidationResult, ValidatorProps } from './type';
 
 const makeInitialErrorInfo = (initialValue: Record<string, string>) => {
   const keys = Object.keys(initialValue);
