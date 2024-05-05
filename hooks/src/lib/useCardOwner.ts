@@ -1,28 +1,40 @@
-import useInput, { ValidationType } from './useInput';
+import { ChangeEvent, FocusEvent, useState } from 'react';
+import useValidation, { ValidationType } from './useValidation';
+import Validation from './utils/validation';
+
+const inputValidations: ValidationType<string>[] = [
+  {
+    validate: (value) => value !== '',
+    message: '소유자 이름을 영어로 입력해주세요.',
+  },
+];
+
+const preventInputValidations: ValidationType<string>[] = [
+  {
+    validate: Validation.isEnglishPattern,
+    message: '영어만 입력 가능합니다.',
+  },
+];
 
 const useCardOwner = (initialValue = '') => {
-  const isEnglish = (value: string) => {
-    return /^[a-zA-Z ]*$/.test(value);
+  const [value, setValue] = useState(initialValue);
+  const { error, validateValue } = useValidation<string>();
+  const isValid = value !== '' && !error.state;
+
+  const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
+    const preventInputValidateResult = validateValue(e.target.value, preventInputValidations);
+
+    if (!preventInputValidateResult) return;
+
+    validateValue(e.target.value, inputValidations);
+    setValue(e.target.value);
   };
 
-  const inputValidations: ValidationType[] = [
-    {
-      validate: (value: string) => value !== '',
-      message: '소유자 이름을 영어로 입력해주세요.',
-    },
-  ];
+  const onBlurHandler = (e: FocusEvent<HTMLInputElement>) => {
+    validateValue(e.target.value, inputValidations);
+  };
 
-  const preventInputValidations: ValidationType[] = [
-    {
-      validate: isEnglish,
-      message: '영어만 입력 가능합니다.',
-    },
-  ];
-
-  const cardOwner = useInput({ initialValue, inputValidations, preventInputValidations });
-  const isCardOwnerValid = cardOwner.value !== '' && !cardOwner.error.state;
-
-  return { cardOwner, isCardOwnerValid };
+  return { value, isValid, error, onChange: onChangeHandler, onBlur: onBlurHandler };
 };
 
 export default useCardOwner;
