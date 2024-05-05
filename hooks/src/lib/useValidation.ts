@@ -1,25 +1,17 @@
 import { useState } from "react";
 
-export type IErrorStatus =
-  | { isError: false; errorMessage: null }
-  | { isError: true; errorMessage: string };
-
-interface IUseValidationReturn<T> {
+interface IUseValidationReturn {
   errorStatus: IErrorStatus;
-  validateValue: (value: T) => void;
+  validateValue: (value: string) => void;
 }
 
-type ValidationFunction<T> = (value: T) => IErrorStatus;
-
-export default function useValidation<T>(
-  validator: ValidationFunction<T>
-): IUseValidationReturn<T> {
+export default function useValidation(validator: Validator): IUseValidationReturn {
   const [errorStatus, setErrorStatus] = useState<IErrorStatus>({
     isError: false,
     errorMessage: null,
   });
 
-  const validateValue = (value: T) => {
+  const validateValue = (value: string) => {
     setErrorStatus(validator(value));
   };
 
@@ -28,3 +20,9 @@ export default function useValidation<T>(
     validateValue,
   };
 }
+
+export type IErrorStatus =
+  | { isError: false; errorMessage: null }
+  | { isError: true; errorMessage: string };
+
+type Validator = (value: string) => IErrorStatus;

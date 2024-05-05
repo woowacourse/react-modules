@@ -1,7 +1,13 @@
 import { useState } from "react";
 import useValidation, { IErrorStatus } from "../useValidation";
 
-export default function usePasswordPrefix() {
+interface UsePasswordPrefixReturn {
+  passwordPrefix: string;
+  setPasswordPrefix: (value: string) => void;
+  errorStatus: IErrorStatus;
+}
+
+export default function usePasswordPrefix(): UsePasswordPrefixReturn {
   const [value, setValue] = useState("");
   const { errorStatus, validateValue } = useValidation(validatePasswordPrefix);
 

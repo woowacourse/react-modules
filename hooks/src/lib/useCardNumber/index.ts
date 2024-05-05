@@ -1,16 +1,22 @@
 import { useState } from "react";
 import useValidation, { IErrorStatus } from "../useValidation";
 
-export default function useCardNumber() {
+interface UseCardNumberReturn {
+  cardNumber: [string, string, string, string];
+  setCardNumber: (value: string, index: number) => void;
+  errorStatus: [IErrorStatus, IErrorStatus, IErrorStatus, IErrorStatus];
+}
+
+export default function useCardNumber(): UseCardNumberReturn {
   const [firstPart, setFirstPart] = useState("");
   const [secondPart, setSecondPart] = useState("");
   const [thirdPart, setThirdPart] = useState("");
   const [fourthPart, setFourthPart] = useState("");
 
-  const firstPartValidation = useValidation<string>(validateCardNumber);
-  const secondPartValidation = useValidation<string>(validateCardNumber);
-  const thirdPartValidation = useValidation<string>(validateCardNumber);
-  const fourthPartValidation = useValidation<string>(validateCardNumber);
+  const firstPartValidation = useValidation(validateCardNumber);
+  const secondPartValidation = useValidation(validateCardNumber);
+  const thirdPartValidation = useValidation(validateCardNumber);
+  const fourthPartValidation = useValidation(validateCardNumber);
 
   const setCardNumber = (value: string, index: number) => {
     switch (index) {

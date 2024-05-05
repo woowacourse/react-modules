@@ -1,14 +1,23 @@
 import { useState } from "react";
 import useValidation, { IErrorStatus } from "../useValidation";
 
-export default function useExpiryDate() {
+interface UseExpiryDateReturn {
+  expiryMonth: string;
+  setExpiryMonth: (value: string) => void;
+  expiryMonthErrorStatus: IErrorStatus;
+  expiryYear: string;
+  setExpiryYear: (value: string) => void;
+  expiryYearErrorStatus: IErrorStatus;
+}
+
+export default function useExpiryDate(): UseExpiryDateReturn {
   const [expiryMonthValue, setExpiryMonthValue] = useState("");
   const { errorStatus: expiryMonthErrorStatus, validateValue: validateExpiryMonth } =
-    useValidation<string>(validateMonth);
+    useValidation(validateMonth);
 
   const [expiryYearValue, setExpiryYearValue] = useState("");
   const { errorStatus: expiryYearErrorStatus, validateValue: validateExpiryYear } =
-    useValidation<string>(validateYear);
+    useValidation(validateYear);
 
   const setExpiryMonth = (string: string) => {
     setExpiryMonthValue(string);

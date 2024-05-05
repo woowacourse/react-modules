@@ -1,7 +1,13 @@
 import { useState } from "react";
 import useValidation, { IErrorStatus } from "../useValidation";
 
-export default function useCardIssuer() {
+interface UseCardIssuerReturn {
+  cardIssuer: string;
+  setCardIssuer: (value: string) => void;
+  errorStatus: IErrorStatus;
+}
+
+export default function useCardIssuer(): UseCardIssuerReturn {
   const [value, setValue] = useState("");
   const { errorStatus, validateValue } = useValidation(validateCardIssuer);
 

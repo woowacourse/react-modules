@@ -1,7 +1,13 @@
 import { useState } from "react";
 import useValidation, { IErrorStatus } from "../useValidation";
 
-export default function useCVC() {
+interface UseCVCReturn {
+  cvc: string;
+  setCVC: (value: string) => void;
+  errorStatus: IErrorStatus;
+}
+
+export default function useCVC(): UseCVCReturn {
   const [value, setValue] = useState("");
   const { errorStatus, validateValue } = useValidation(validateCVC);
 
