@@ -1,24 +1,13 @@
-import React from "react";
 import "./App.css";
 import { useState } from "react";
-import { Modal } from "tenbur-modal";
+import Modal from "./lib/Modal";
 
-type TestProps = {
-  handleModalClose: () => void;
+export const CloseContent = () => {
+  return <div>모달 닫기</div>;
 };
 
-const customStyles = {
-  margin: "auto",
-  borderRadius: "8px",
-  padding: "24px 32px",
-};
-
-export const Test = ({ handleModalClose }: TestProps) => {
-  return (
-    <div>
-      <button onClick={handleModalClose}>모달 닫기</button>
-    </div>
-  );
+export const Content = () => {
+  return <div>모달 컨텐츠</div>;
 };
 
 function App() {
@@ -34,14 +23,18 @@ function App() {
 
   return (
     <>
-      <Modal
-        isOpen={modalOpen}
-        onClose={handleModalClose}
-        title="약관에 동의해 주세요"
-        position="bottom"
-        modalContainerStyle={customStyles}
-        content={<Test handleModalClose={handleModalClose} />}
-      />
+      <Modal isOpen={modalOpen} onClose={handleModalClose} position="center">
+        <Modal.Portal id="modal">
+          <Modal.Backdrop>
+            <Modal.Container className="container" style={{}}>
+              <Content />
+              <Modal.CloseButton>
+                <CloseContent />
+              </Modal.CloseButton>
+            </Modal.Container>
+          </Modal.Backdrop>
+        </Modal.Portal>
+      </Modal>
 
       <button onClick={handleModalOpen}>모달 열기</button>
     </>
