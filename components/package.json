@@ -1,7 +1,12 @@
 {
   "name": "badahertz52-react-modules-components",
-  "version": "0.0.1",
-  "description": "npm modules",
+  "version": "0.0.2",
+  "description": "createPortal을 사용한 모달 모듈 제공",
+  "keywords": [
+    "modal",
+    "createPortal",
+    "react"
+  ],
   "type": "module",
   "types": "dist/index.d.ts",
   "main": "dist/index.js",
