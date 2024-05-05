@@ -1,18 +1,19 @@
 import styles from './CloseButton.module.css';
 
 interface CloseButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  label: string;
   onClose: () => void;
 }
 
 const CloseButton = ({
+  label,
   onClose,
   style,
-  children,
   ...rest
 }: React.PropsWithChildren<CloseButtonProps>) => {
   return (
     <button className={styles.closeButton} style={style} onClick={onClose} {...rest}>
-      {children}
+      {label}
     </button>
   );
 };
