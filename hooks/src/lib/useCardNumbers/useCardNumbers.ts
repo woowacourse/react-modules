@@ -22,41 +22,25 @@ export default function useCardNumbers(
   initialValues: string[] = DEFAULT_PARAMS.initialValue,
   errorMessages: ErrorMessages = DEFAULT_PARAMS.errorMessages,
 ): CardNumbersValidationResult {
-  const [cardNumbers, setCardNumbers] = useState(initialValues);
-  const [validStates, setValidStates] = useState(
-    initialValues.map((value) => validateCardNumber(value)),
+  const { cardNumbers, updateCardNumber } = useCardNumberState(initialValues);
+  const { validStates, updateValidState } = useCardNumberValidState(initialValues);
+  const { validationResult, updateValidationResult } = useValidationResult(
+    validStates.every((validState) => validState),
+    errorMessages,
   );
-  const [validationResult, setValidationResult] = useState<ValidationResult>({ isValid: true });
 
-  const updateCardNumbers = (inputIndex: number, value: string) => {
-    setCardNumbers((prev) => {
-      const newCardNumbers = [...prev];
-      newCardNumbers[inputIndex] = value;
-      return newCardNumbers;
-    });
-  };
+  const handleUpdateCardNumbers = (inputIndex: number, cardNumber: string) => {
+    updateCardNumber(inputIndex, cardNumber);
 
-  const handleUpdateCardNumbers = (inputIndex: number, value: string) => {
-    updateCardNumbers(inputIndex, value);
+    const newValidStates = updateValidState(inputIndex, validateCardNumber(cardNumber));
+    const isAllCardNumbersValid = newValidStates.every((validState) => validState);
 
-    const isNewInputValid = validateCardNumber(value);
-
-    const newValidStates = validStates.map((prevState, index) =>
-      index === inputIndex ? isNewInputValid : prevState,
-    );
-    setValidStates(newValidStates);
-
-    const isAllInputValid = newValidStates.every((isValid) => isValid === true);
-
-    if (isAllInputValid) {
-      setValidationResult({ isValid: true });
+    if (isAllCardNumbersValid) {
+      updateValidationResult(true);
       return;
     }
 
-    setValidationResult({
-      isValid: false,
-      errorMessage: errorMessages.inputType,
-    });
+    updateValidationResult(false, errorMessages.inputType);
   };
 
   return {
@@ -67,6 +51,49 @@ export default function useCardNumbers(
   };
 }
 
-function validateCardNumber(value: string) {
-  return Validation.isNumeric(value) && Validation.hasLength(value, 4);
+function useCardNumberState(initialValues: string[]) {
+  const [cardNumbers, setCardNumbers] = useState(initialValues);
+
+  const updateCardNumber = (inputIndex: number, value: string) => {
+    setCardNumbers((prevNumbers) => {
+      const newCardNumbers = [...prevNumbers];
+      newCardNumbers[inputIndex] = value;
+      return newCardNumbers;
+    });
+  };
+
+  return { cardNumbers, updateCardNumber };
+}
+
+function useCardNumberValidState(initialValues: string[]) {
+  const [validStates, setValidStates] = useState(
+    initialValues.map((value) => validateCardNumber(value)),
+  );
+
+  const updateValidState = (inputIndex: number, isValid: boolean) => {
+    const newValidStates = [...validStates];
+    newValidStates[inputIndex] = isValid;
+    setValidStates(newValidStates);
+    return newValidStates;
+  };
+
+  return { validStates, updateValidState };
+}
+
+function useValidationResult(isValid: boolean, errorMessages: ErrorMessages) {
+  const initialValidationResult = isValid
+    ? { isValid }
+    : { isValid, errorMessage: errorMessages.inputType };
+  const [validationResult, setValidationResult] =
+    useState<ValidationResult>(initialValidationResult);
+
+  const updateValidationResult = (isValid: boolean, errorMessage?: string) => {
+    setValidationResult({ isValid, errorMessage });
+  };
+
+  return { validationResult, updateValidationResult };
+}
+
+function validateCardNumber(cardNumber: string) {
+  return Validation.isNumeric(cardNumber) && Validation.hasLength(cardNumber, 4);
 }
