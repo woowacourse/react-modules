@@ -8,11 +8,9 @@ export interface CloseButtonProps {
 
 const CloseButton = ({ onCloseButtonClick }: CloseButtonProps) => {
   return (
-    <Styled.CloseButton
-      src={closeImage}
-      alt="닫기"
-      onClick={onCloseButtonClick}
-    />
+    <Styled.CloseButton onClick={onCloseButtonClick}>
+      <Styled.CloseImg src={closeImage} alt="닫기" />
+    </Styled.CloseButton>
   );
 };
 
