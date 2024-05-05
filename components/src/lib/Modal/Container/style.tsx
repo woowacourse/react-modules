@@ -4,6 +4,9 @@ import { ContainerPositionType } from "./Container";
 const POSITION_STYLES = {
   top: `
     top: 0;
+    left: 50%;
+    transform: translate(-50%, 0);
+
     width: 100%;
     
     border-radius: 0px 0px 10px 10px;
@@ -13,13 +16,14 @@ const POSITION_STYLES = {
     left: 50%;
     transform: translate(-50%,-50%);
     
-    width: 300px;
+    width: 80%;
     
     border-radius: 8px;
     `,
   bottom: `
     top: 100%;
-    transform: translateY(-100%);
+    left: 50%;
+    transform: translate(-50%,-100%);
 
     width: 100%;
   
@@ -28,7 +32,7 @@ const POSITION_STYLES = {
 };
 
 export const Container = styled.div<{ $position: ContainerPositionType }>`
-  position: absolute;
+  position: fixed;
   padding: 32px 24px;
   display: flex;
   flex-direction: column;
