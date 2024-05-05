@@ -19,12 +19,12 @@ const useValidation = <T>() => {
         message: validateResult.message,
       });
 
-      return true;
+      return false;
     }
 
     setError(INITIAL_ERROR_STATE);
 
-    return false;
+    return true;
   };
 
   return { error, validateValue };
