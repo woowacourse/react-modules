@@ -13,7 +13,7 @@ npm i cookie-nice-modal
 const App = () => {
   return (
     <Modal
-      isOpen={isOpen}
+      open={isOpen}
       content={<SelectBank />}
       onClose={() => toggleIsOpen()}
       title="카드사 선택"
@@ -27,7 +27,7 @@ const App = () => {
 ```
 
 ### props (required)
-- isOpen: boolean : 모달이 열려있는지 여부
+- open: boolean : 모달이 열려있는지 여부
 - onClose: (function) : 모달을 닫는 콜백함수를 제공해야 합니다.
 - title: string : 모달의 제목을 설정할 수 있습니다.
 - type (ModalType) : `dialog`, `drawer`
