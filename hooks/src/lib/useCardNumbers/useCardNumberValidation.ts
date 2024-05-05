@@ -17,7 +17,7 @@ const useCardNumberValidation = () => {
       return false;
     }
 
-    const isOverInputLength = value.length > INPUT_RULES.maxCardNumberLength;
+    const isOverInputLength = value.length > INPUT_RULES.validCardNumberLength;
 
     if (isOverInputLength) return false;
 

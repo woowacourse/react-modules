@@ -31,7 +31,7 @@ const useCardNumbers = () => {
 
   const cardNumbers = [first, second, third, fourth];
   const isCardNumberInputCompleted = cardNumbers.every(
-    (cardNumber) => cardNumber.length === INPUT_RULES.maxCardNumberLength
+    (cardNumber) => cardNumber.length === INPUT_RULES.validCardNumberLength
   );
 
   const { errorText } = useCardNumberErrorText({

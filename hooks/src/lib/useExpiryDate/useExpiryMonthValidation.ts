@@ -19,7 +19,7 @@ const useExpiryMonthValidation = () => {
       return false;
     }
 
-    const isOverInputLength = value.length > INPUT_RULES.maxExpiryDateLength;
+    const isOverInputLength = value.length > INPUT_RULES.validExpiryDateLength;
 
     if (isOverInputLength) return false;
 

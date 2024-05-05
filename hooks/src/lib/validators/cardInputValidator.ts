@@ -18,7 +18,7 @@ const cardInputValidator = {
   },
 
   validateCardNumberLength(value: string) {
-    return value.length === INPUT_RULES.maxCardNumberLength;
+    return value.length === INPUT_RULES.validCardNumberLength;
   },
 
   validatePastYear(year: string) {

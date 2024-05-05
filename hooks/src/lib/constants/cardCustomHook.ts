@@ -1,10 +1,9 @@
 export const INPUT_RULES = {
   minMonth: 1,
   maxMonth: 12,
-  maxCardNumberLength: 4,
-  maxExpiryDateLength: 2,
   minCardHolderNameLength: 1,
   maxCardHolderNameLength: 15,
+  validCardNumberLength: 4,
   validExpiryDateLength: 2,
   validCVCLength: 3,
   validCardPasswordLength: 2,

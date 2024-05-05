@@ -29,7 +29,7 @@ const useExpiryDate = () => {
   const expiryDate = [expiryMonth, expiryYear];
   const isExpiryDateFilled = expiryDate.every(
     (expiryDateValue) =>
-      expiryDateValue.length === INPUT_RULES.maxExpiryDateLength
+      expiryDateValue.length === INPUT_RULES.validExpiryDateLength
   );
 
   useEffect(() => {
