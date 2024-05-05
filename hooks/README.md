@@ -29,7 +29,7 @@ import React from 'react';
 import { useCardholderName } from 'newjeans';
 
 function CardholderNameInput() {
-  const { cardholderName, setCardholderName, errorStatus } =
+  const { cardholderName, isValid, errorMessage, onChange } =
     useCardholderName();
 
   return (
@@ -37,12 +37,10 @@ function CardholderNameInput() {
       <input
         type='text'
         value={cardholderName}
-        onChange={ e:React.ChangeEvent<HTMLInputElement> => setCardholderName(e.target.value)}
+        onChange={onChange}
         placeholder='카드 소유자명 입력'
       />
-      {errorStatus.isValid && (
-        <p style={{ color: 'red' }}>{errorStatus.errorMessage}</p>
-      )}
+      {!isValid && <p style={{ color: 'red' }}>{errorMessage}</p>}
     </div>
   );
 }
@@ -73,24 +71,31 @@ export default CardholderNameInput;
 
 ```tsx
 import React from 'react';
-import {useCardIssuer} from 'newjeans';
+import { useCardIssuer } from 'newjeans';
 
 function CardIssuerComponent() {
-  const { cardIssuer, setCardIssuer, errorStatus } = useCardIssuer();
-
-  const handleChange = e:React.ChangeEvent<HTMLInputElement> => {
-    setCardIssuer(e.target.value);
-  };
+  const { cardIssuer, onChange, isValid, errorMessage } = useCardIssuer();
 
   return (
     <div>
-      <select onChange={handleChange} value={cardIssuer}>
-        <option value="">카드 발행사 선택</option>
-        {["BC카드", "신한카드", "카카오뱅크", "현대카드", "우리카드", "롯데카드", "하나카드", "국민카드"].map(issuer => (
-          <option key={issuer} value={issuer}>{issuer}</option>
+      <select onChange={onChange} value={cardIssuer}>
+        <option value=''>카드 발행사 선택</option>
+        {[
+          'BC카드',
+          '신한카드',
+          '카카오뱅크',
+          '현대카드',
+          '우리카드',
+          '롯데카드',
+          '하나카드',
+          '국민카드',
+        ].map(issuer => (
+          <option key={issuer} value={issuer}>
+            {issuer}
+          </option>
         ))}
       </select>
-      {errorStatus && <p style={{color: 'red'}}>{errorStatus}</p>}
+      {!isValid && <p style={{ color: 'red' }}>{errorMessage}</p>}
     </div>
   );
 }
@@ -107,17 +112,14 @@ import React from 'react';
 import { useCardNumber } from 'newjeans';
 
 function CardNumberForm() {
-  const { cardNumber, setCardNumber, errorStatus } = useCardNumber();
+  const { cardNumberParts, onChangeCardNumberPart } = useCardNumber();
 
   return (
     <div>
-      {cardNumber.map((part, index) => (
+      {cardNumberParts.map((part, index) => (
         <input
           key={index}
-          value={part}
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-            setCardNumber(e.target.value, index)
-          }
+          onChange={onChangeCardNumberPart[index]}
           type='text'
           maxLength='4'
         />
@@ -138,19 +140,12 @@ import React from 'react';
 import { useCVC } from 'newjeans';
 
 function CVCEnterForm() {
-  const { cvc, setCVC, errorStatus } = useCVC();
+  const { cvc, onChange, isValid, errorMessage } = useCVC();
 
   return (
     <div>
-      <input
-        value={cvc}
-        onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-          setCVC(e.target.value)
-        }
-        type='text'
-        maxLength='3'
-      />
-      {!errorStatus.isValid && <p>{errorStatus}</p>}
+      <input onChange={onChange} type='text' maxLength='3' />
+      {!isValid && <p>{errorMessage}</p>}
     </div>
   );
 }
@@ -158,48 +153,25 @@ function CVCEnterForm() {
 
 ## useExpiryDate
 
-`useExpiryDate`는 사용자로부터 신용카드의 유효기한(월과 년)을 입력받아 해당 입력값이 유효한지 검증하는 React 훅입니다. 이 훅은 유효기한 월이 01에서 12 사이이며, 년도가 24년에서 40년 사이인지 확인합니다. 또한, 월과 년도 모두 2자리 숫자로 제한됩니다.
+`useExpiryDate`는 사용자로부터 신용카드의 유효기한(월과 년)을 입력받아 해당 입력값이 유효한지 검증하는 React 훅입니다. 이 훅은 유효기한 월이 01에서 12 사이이며, 입력 날짜가 현재보다 과거인지 확인합니다. 또한, 월과 년도 모두 2자리 숫자로 제한됩니다.
 
 ```jsx
 import React from 'react';
 import { useExpiryDate } from 'newjeans';
 
 function ExpiryDateForm() {
-  const {
-    expiryMonth,
-    setExpiryMonth,
-    expiryMonthErrorStatus,
-    expiryYear,
-    setExpiryYear,
-    expiryYearErrorStatus,
-  } = useExpiryDate();
+  const { expiryMonth, expiryYear, onChangeExpiryMonth, onChangeExpiryYear } =
+    useExpiryDate();
 
   return (
     <div>
       <div>
         <label>유효기간 월:</label>
-        <input
-          value={expiryMonth}
-          onChange={e: React.ChangeEvent<HTMLInputElement> => setExpiryMonth(e.target.value)}
-          type='text'
-          maxLength='2'
-        />
-        {
-          (!expiryMonthErrorStatus.
-          isValid && <p>{expiryMonthErrorStatus.errorMessage}</p>)
-        }
+        <input onChange={onChangeMonth} type='text' maxLength='2' />
       </div>
       <div>
         <label>유효기간 년:</label>
-        <input
-          value={expiryYear}
-          onChange={e: React.ChangeEvent<HTMLInputElement> => setExpiryYear(e.target.value)}
-          type='text'
-          maxLength='2'
-        />
-        {!expiryYearErrorStatus.isValid && (
-          <p>{expiryYearErrorStatus.errorMessage}</p>
-        )}
+        <input onChange={onChangeExpiryYear} type='text' maxLength='2' />
       </div>
     </div>
   );
@@ -217,19 +189,14 @@ import React from 'react';
 import { usePasswordPrefix } from 'newjeans'; // 실제 파일 경로에 맞게 수정하세요.
 
 function PasswordInput() {
-  const { passwordPrefix, setPasswordPrefix, errorStatus } =
+  const { passwordPrefix, onChange, isValid, errorMessage } =
     usePasswordPrefix();
 
   return (
     <div>
       <label>비밀번호 앞자리:</label>
-      <input
-        value={passwordPrefix}
-        onChange={e:React.ChangeEvent<HTMLInputElement> => setPasswordPrefix(e.target.value)}
-        type='text'
-        maxLength='2'
-      />
-      {!errorStatus.isValid && <p style={{ color: 'red' }}>{errorStatus.errorMessage}</p>}
+      <input onChange={onChange} type='text' maxLength='2' />
+      {!isValid && <p style={{ color: 'red' }}>{errorMessage}</p>}
     </div>
   );
 }
