@@ -3,6 +3,7 @@ import { createPortal } from 'react-dom';
 import styles from './Modal.module.css';
 
 import useModalCloseClickDimmer from './hooks/useModalCloseClickDimmer';
+import useCloseOnESCKeyDown from './hooks/useCloseOnESC';
 
 type ModalType = 'dialog' | 'drawer';
 
@@ -17,6 +18,7 @@ interface ModalProps {
   type: ModalType;
   style?: ModalStyle;
   closeOnOutsideClick?: boolean;
+  closeOnESCKeydown?: boolean;
 }
 
 const MODAL_TYPE: Record<ModalType, string> = {
@@ -30,11 +32,13 @@ const Modal = ({
   type,
   style,
   closeOnOutsideClick = true,
+  closeOnESCKeydown = false,
   children,
 }: React.PropsWithChildren<ModalProps>) => {
   const modalRef = useRef<HTMLDivElement>(null);
 
   useModalCloseClickDimmer(modalRef, onClose, closeOnOutsideClick);
+  useCloseOnESCKeyDown(onClose, closeOnESCKeydown);
 
   return (
     <>
