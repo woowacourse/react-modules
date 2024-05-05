@@ -4,3 +4,10 @@
   margin: auto;
   border: 1px solid black;
 }
+
+:root {
+  --grey-100: #ffffff;
+  --grey-200: rgba(139, 149, 161, 1);
+  --primary: rgba(51, 51, 51, 1);
+  --danger: #ff3d3d;
+}

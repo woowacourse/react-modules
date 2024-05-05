@@ -1,3 +1,4 @@
+/* modal */
 .modal {
   width: 100%;
   height: 100%;
@@ -9,22 +10,20 @@
 
 .dimmed {
   position: absolute;
-  width: 100%;
-  height: 100%;
+  inset: 0;
   background-color: rgba(0, 0, 0, 0.35);
   z-index: 1;
 }
 
 .modalContainer {
   width: 240px;
-  height: 168px;
+  min-height: 168px;
   max-height: 240px;
   max-width: 375px;
   padding: 24px 32px;
   border-radius: 8px;
   background-color: #ffffff;
   z-index: 999;
-  overflow-y: auto;
 }
 
 .bottom {
@@ -36,6 +35,7 @@
   border-radius: 8px 8px 0px 0px;
 }
 
+/* modal header */
 .modalHeader {
   display: flex;
   justify-content: space-between;
@@ -49,12 +49,81 @@
   color: rgba(0, 0, 0, 1);
 }
 
+/* modal close button */
+.modalCloseButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  border: none;
+  cursor: pointer;
+  background-color: transparent;
+}
+
+.modalCloseButtonImage {
+  width: 100%;
+  height: 100%;
+}
+
+/* modal content & modal footer */
 .modalContent,
 .modalFooter {
   width: 100%;
+  height: 100px;
   overflow-x: auto;
+  overflow-y: auto;
 }
 
+.modalFooterChildrenContainer {
+  width: 100%;
+  height: 100%;
+}
+
+.footerRow {
+  height: 44px;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+}
+
+/* modal button */
+.modalButton {
+  width: 100%;
+  height: 42px;
+  border-radius: 6px;
+  cursor: pointer;
+  border: none;
+  color: var(--grey-100);
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.buttonPrimary {
+  background-color: var(--primary);
+  color: var(--grey-100);
+}
+
+.buttonSecondary {
+  background-color: var(--grey-100);
+  color: var(--grey-200);
+}
+
+.buttonDanger {
+  background-color: var(--danger);
+  color: var(--grey-100);
+}
+
+/* modal scroll */
 .modalContainer,
 .modalContent,
 .modalFooter {
