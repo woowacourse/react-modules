@@ -1,10 +1,8 @@
 import styles from './ModalContent.module.css';
 
-interface ModalContentProps extends React.HTMLAttributes<HTMLElement> {
-  children?: JSX.Element;
-}
+interface ModalContentProps extends React.HTMLAttributes<HTMLElement> {}
 
-const ModalContent = ({ style, children, ...rest }: ModalContentProps) => {
+const ModalContent = ({ style, children, ...rest }: React.PropsWithChildren<ModalContentProps>) => {
   if (!children) {
     return null;
   }

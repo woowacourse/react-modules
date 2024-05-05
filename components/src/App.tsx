@@ -15,11 +15,9 @@ function App() {
           <Modal.CloseIcon onClose={() => toggleIsOpen()} />
         </Modal.Header>
         <Modal.Content>
-          <>
-            <div>내용</div>
-            <div>내용</div>
-            <div>내용</div>
-          </>
+          <div>내용</div>
+          <div>내용</div>
+          <div>내용</div>
         </Modal.Content>
         <Modal.Footer>
           <Modal.ConfirmButton
