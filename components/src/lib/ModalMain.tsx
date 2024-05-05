@@ -28,9 +28,9 @@ const ModalMain = ({
   return (
     <>
       {createPortal(
-        <section className={MODAL_TYPE[position]} style={style} {...rest}>
+        <div className={MODAL_TYPE[position]} style={style} {...rest}>
           {children}
-        </section>,
+        </div>,
         document.body,
       )}
     </>
