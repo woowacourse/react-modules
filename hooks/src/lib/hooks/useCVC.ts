@@ -43,7 +43,7 @@ export default function useCVC(props: UseCardCVCProps): UseCardCVCReturn {
   };
 
   /**
-   *  유요한 값만 input에 나타나기를 원하는 경우(isNeedValidValue===true), length에 대한 검사를 제외한 오류가 있을 경우 input의 value를 빈문자열로 변경한다.
+   *  유효한 값만 input에 나타나기를 원하는 경우(isNeedValidValue===true), length에 대한 검사를 제외한 오류가 있을 경우 input의 value를 빈문자열로 변경한다
    * @param value input value
    * @param error 유효성 검사 결과
    * @returns 변경된 글자
