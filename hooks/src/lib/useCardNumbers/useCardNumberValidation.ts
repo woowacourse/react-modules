@@ -4,45 +4,27 @@ import cardInputValidator from "../validators/cardInputValidator";
 
 import { VALIDATION_MESSAGES } from "../constants/cardCustomHook";
 
-type CardNumberKeys = "first" | "second" | "third" | "fourth";
-
 const useCardNumberValidation = () => {
-  const [errorState, setErrorState] = useState<Record<CardNumberKeys, boolean>>(
-    {
-      first: false,
-      second: false,
-      third: false,
-      fourth: false,
-    }
-  );
+  const [errorState, setErrorState] = useState<boolean>(false);
 
   const [errorText, setErrorText] = useState("");
 
-  const updateErrorState = (name: string, validResult: boolean) => {
-    setErrorState((prevErrorState) => {
-      return {
-        ...prevErrorState,
-        [name]: validResult,
-      };
-    });
-  };
-
-  const validateCardNumber = (name: string, value: string) => {
+  const validateCardNumber = (value: string) => {
     if (!cardInputValidator.validateNumericInput(value)) {
-      updateErrorState(name, true);
+      setErrorState(true);
       setErrorText(VALIDATION_MESSAGES.onlyNumbersAllowed);
 
       return false;
     }
 
     if (!cardInputValidator.validateCardNumberLength(value)) {
-      updateErrorState(name, true);
+      setErrorState(true);
       setErrorText(VALIDATION_MESSAGES.invalidCardNumberLength);
 
       return true;
     }
 
-    updateErrorState(name, false);
+    setErrorState(false);
     setErrorText("");
     return true;
   };
