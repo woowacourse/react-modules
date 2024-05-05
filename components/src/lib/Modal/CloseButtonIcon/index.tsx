@@ -1,7 +1,18 @@
+import styled from 'styled-components';
+
 import CloseButtonImg from '../../assets/images/closeButton.svg';
 
-import styles from './style.module.css';
+const CloseButton = styled.button`
+  img {
+    width: 0.875rem;
+    height: 0.875rem;
+  }
+`;
 
 export default function CloseButtonIcon() {
-  return <img className={styles.closeBtn} src={CloseButtonImg} />;
+  return (
+    <CloseButton>
+      <img src={CloseButtonImg} alt="Close" />
+    </CloseButton>
+  );
 }

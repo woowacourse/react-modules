@@ -1,28 +1,40 @@
 import { useEffect, useLayoutEffect, useState } from 'react';
+import styled from 'styled-components';
 
 import { useModalContext } from '../../hooks/';
-import { ModalContentsProps } from '../../types/modal';
-import Modal from '../index';
+import { ModalContentsProps, ModalPosition } from '../../types/modal';
+import calculateTimeout from '../../utils/timeoutCalculator';
 
-import styles from './style.module.css';
+const ToastModalContents = styled.div<{ $position: undefined | ModalPosition; $timeout: number; $isOn: boolean }>`
+  position: fixed;
+  opacity: ${({ $isOn }) => ($isOn ? 1 : 0)};
+  transition: opacity ${({ $timeout }) => $timeout / 1000}s ease;
+  text-align: center;
+  ${({ $position }) =>
+    $position &&
+    `
+      top: ${$position.top}px;
+      right: ${$position.right}px;
+      bottom: ${$position.bottom}px;
+      left: ${$position.left}px;
+    `}
+`;
 
-const BASIC_ANIMATION_DURATION = 3000;
+function ToastModal({ children }: ModalContentsProps) {
+  const { handleCloseModal, animationDuration, position, isNeedAnimation } = useModalContext();
+  const timeout = calculateTimeout({ animationDuration, type: 'toast' });
+  const [isOn, setIsOn] = useState(true);
 
-function TostModal({ children }: ModalContentsProps) {
-  const { closeModal, animationDuration, position, isNeedAnimation } = useModalContext();
-  const timeout = animationDuration || BASIC_ANIMATION_DURATION;
-
-  const [className, setClassName] = useState(styles.tostModalContents + ' ' + styles.on);
-
-  const fadInModal = () => {
+  const fadeInModal = () => {
     if (!isNeedAnimation) return;
     setTimeout(() => {
-      setClassName((prev) => prev.replace(styles.on, ''));
+      setIsOn(false);
     }, timeout);
   };
+
   const fadeOutModal = () =>
     setTimeout(() => {
-      closeModal();
+      handleCloseModal();
     }, timeout);
 
   useEffect(() => {
@@ -32,19 +44,18 @@ function TostModal({ children }: ModalContentsProps) {
   }, [position]);
 
   useLayoutEffect(() => {
-    fadInModal();
+    fadeInModal();
     const timer = fadeOutModal();
-
     return () => {
       clearTimeout(timer);
     };
   }, []);
 
   return (
-    <Modal.Contents className={className} style={{ ...position, transitionDuration: `${timeout / 1000}s` }}>
+    <ToastModalContents $position={position} $timeout={timeout} $isOn={isOn}>
       {children}
-    </Modal.Contents>
+    </ToastModalContents>
   );
 }
 
-export default TostModal;
+export default ToastModal;

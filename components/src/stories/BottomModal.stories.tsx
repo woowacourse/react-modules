@@ -2,8 +2,6 @@ import type { Meta, StoryObj } from '@storybook/react';
 
 import Modal from '../lib/Modal';
 import '../lib/styles/reset.css';
-import BottomModal from '../lib/Modal/BottomModal';
-import CloseButtonIcon from '../lib/Modal/CloseButtonIcon';
 
 const meta: Meta<typeof Modal> = {
   title: 'Modal',
@@ -35,9 +33,6 @@ export const BottomModalSample: Story = {
   args: {
     children: (
       <>
-        <BottomModal.button>
-          <CloseButtonIcon />
-        </BottomModal.button>
         <h1>Bottom Modal</h1>
       </>
     ),

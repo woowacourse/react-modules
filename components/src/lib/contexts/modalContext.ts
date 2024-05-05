@@ -8,7 +8,7 @@ export interface ModalContextType {
   animationDuration?: number;
   isNeedAnimation?: boolean;
   position?: ModalPosition;
-  closeModal: () => void;
+  handleCloseModal: () => void;
 }
 
 const ModalContext = createContext<ModalContextType | null>(null);

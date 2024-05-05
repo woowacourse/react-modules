@@ -1,62 +1,56 @@
-import { ReactNode, useLayoutEffect, useState } from 'react';
+import { MouseEvent } from 'react';
+import styled from 'styled-components';
 
-import { BottomModalContext } from '../../contexts/';
-import { useBottomModalContext, useModalContext } from '../../hooks/';
-import { ModalContentsProps } from '../../types/modal';
-import Modal from '../index';
+import { BottomModalContext } from '../../contexts';
+import { useBottomModalAnimation, useBottomModalContext, useModalContext } from '../../hooks';
+import { ModalButtonProps, ModalContentsProps } from '../../types/modal';
 
-import styles from './style.module.css';
-
-const BASIC_ANIMATION_DURATION = 500;
-const NOW = 0;
+const BottomModalContents = styled.div<{ isOn: boolean; timeout: number }>`
+  position: fixed;
+  bottom: 0;
+  transform: translateY(${({ isOn }) => (isOn ? '0' : '100%')});
+  transition: transform ${({ timeout }) => timeout / 1000}s ease;
+  border-top-right-radius: 0.625rem;
+  border-top-left-radius: 0.625rem;
+  width: 100%;
+  background-color: #ffff;
+  box-sizing: border-box;
+`;
 
 function BottomModal({ children }: ModalContentsProps) {
-  const [className, setClassName] = useState(styles.bottomModalContents);
-  const { closeModal, animationDuration, isNeedAnimation } = useModalContext();
-  const timeout = isNeedAnimation ? animationDuration || BASIC_ANIMATION_DURATION : NOW;
+  const { handleCloseModal, animationDuration, isNeedAnimation } = useModalContext();
 
-  const fadeOutModal = () => {
-    setClassName((prev) => prev.replace(styles.on, ''));
-
-    setTimeout(() => {
-      closeModal();
-    }, timeout);
-  };
-
-  const fadeInModal = () =>
-    setTimeout(() => {
-      setClassName((prev) => prev + ' ' + styles.on);
-    }, timeout);
-
-  useLayoutEffect(() => {
-    const timer = fadeInModal();
-
-    return () => {
-      clearTimeout(timer);
-    };
-  }, []);
+  const { fadeOutModal, isOn, timeout } = useBottomModalAnimation({
+    isNeedAnimation,
+    animationDuration,
+    closeModal: handleCloseModal,
+  });
 
   return (
     <>
       <BottomModalContext.Provider value={{ handleCloseModal: fadeOutModal }}>
-        <Modal.Backdrop closeModal={fadeOutModal} />
-        <Modal.Contents className={className} style={{ transitionDuration: `${timeout / 1000}s` }}>
+        <BottomModalContents isOn={isOn} timeout={timeout}>
           {children}
-        </Modal.Contents>
+        </BottomModalContents>
       </BottomModalContext.Provider>
     </>
   );
 }
 
-/**
- * click 시 BottomModal에서 지정한 애니메이션 효과와 함께 BottomModal을 닫는 버튼
- */
-function Button({ children }: { children: ReactNode }) {
+function Button({ children, onClick, isCloseModal, ...rest }: ModalButtonProps) {
   const { handleCloseModal } = useBottomModalContext();
+
+  const handleClick = (e: MouseEvent<HTMLButtonElement>) => {
+    if (onClick) onClick(e);
+    if (isCloseModal) {
+      handleCloseModal();
+    }
+  };
+
   return (
-    <Modal.button isCloseModal={true} handleCloseModal={handleCloseModal}>
+    <button {...rest} onClick={handleClick}>
       {children}
-    </Modal.button>
+    </button>
   );
 }
 

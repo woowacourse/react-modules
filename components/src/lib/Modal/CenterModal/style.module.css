@@ -1,9 +1,0 @@
-.centerModalContents {
-  -webkit-box-shadow: var(--shadow);
-  box-shadow: var(--shadow);
-  border-radius: var(--border-radius);
-  min-width: 50vw;
-  max-width: 90vw;
-  min-height: 12.5rem;
-  max-height: 90vw;
-}

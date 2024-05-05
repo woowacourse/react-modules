@@ -27,15 +27,6 @@
   }
 }
 
-#toast-modal-sample .modal-contents {
-  border: 10px;
-  border-radius: 10px;
-  background-color: rgb(248, 255, 188);
-  padding: 0.875rem 1rem;
-  width: 300px;
-  font-size: 1.5rem;
-  text-align: center;
-}
 #toast-modal-position {
   margin: 0 auto;
   margin-top: 2rem;
