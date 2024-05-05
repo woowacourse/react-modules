@@ -5,7 +5,7 @@ export interface ModalMainProps extends React.HTMLAttributes<HTMLDivElement> {
 
 export interface ModalDimmerProps extends React.HTMLAttributes<HTMLDivElement> {}
 
-export interface ModalCloseButtonProps extends React.HTMLAttributes<HTMLButtonElement> {}
+export interface ModalCloseButtonProps extends React.HTMLAttributes<HTMLOrSVGElement> {}
 
 type ModalTheme = "dark" | "light";
 export interface ModalButtonProps extends React.HTMLAttributes<HTMLButtonElement> {

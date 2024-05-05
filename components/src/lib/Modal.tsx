@@ -8,7 +8,8 @@ import {
   ModalDimmerProps,
   ModalMainProps,
 } from "./types/modalProps";
-import style from "./modal.module.css";
+import style from "./Modal.module.css";
+import { ReactComponent as CloseIcon } from "./assets/closeIcon.svg";
 
 const Modal = Object.assign(ModalMain, {
   Dimmer: ModalDimmer,
@@ -48,7 +49,15 @@ function ModalContent({ position = "center", children, ...attributes }: ModalCon
 function ModalCloseButton(attributes: ModalCloseButtonProps) {
   const { onClose } = useModalContext();
 
-  return <button className={style.ModalCloseButton} onClick={onClose} {...attributes} />;
+  return (
+    <CloseIcon
+      role="button"
+      aria-label="모달창 닫기"
+      className={style.ModalCloseButton}
+      onClick={onClose}
+      {...attributes}
+    />
+  );
 }
 
 function ModalButton({ children, theme = "dark", ...attributes }: ModalButtonProps) {

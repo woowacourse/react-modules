@@ -54,12 +54,9 @@
   border: none;
   background-color: transparent;
   cursor: pointer;
-  background-image: url(./assets/close-icon.png);
   background-size: contain;
   width: 14px;
   height: 14px;
-  padding: 5px;
-  margin-left: 10px;
   position: absolute;
   top: 24px;
   right: 32px;
