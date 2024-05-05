@@ -1,0 +1,20 @@
+.modal_container {
+  position: relative;
+}
+
+.container::-webkit-scrollbar {
+  display: none;
+}
+
+.container > :last-child {
+  margin-bottom: 50px;
+}
+
+.center {
+  position: relative;
+}
+
+.bottom {
+  position: absolute;
+  bottom: 0;
+}
