@@ -14,7 +14,7 @@ interface ModalStyle {
 }
 
 interface ModalProps {
-  isOpen: boolean;
+  open: boolean;
   onClose: () => void;
   title: string;
   position: ModalPosition;
@@ -41,7 +41,7 @@ const BUTTON_POSITION_TYPE: Record<ButtonPosition, string> = {
 };
 
 const Modal = ({
-  isOpen,
+  open,
   onClose,
   title,
   position,
@@ -83,7 +83,7 @@ const Modal = ({
 
   return (
     <>
-      {isOpen &&
+      {open &&
         createPortal(
           <div className={styles.dimmed} style={style?.dimmed}>
             <section className={MODAL_TYPE[position]} ref={modalRef} style={style?.modal}>
