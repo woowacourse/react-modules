@@ -1,13 +1,6 @@
-import React from "react";
 import styled from "styled-components";
 
-type ButtonColor = "dark" | "white";
-
-export interface ButtonProps {
-  children: React.ReactNode;
-  theme: ButtonColor;
-  onClick: () => void;
-}
+import { ButtonColor } from "./Button";
 
 const BUTTON_STYLES: Record<ButtonColor, string> = {
   dark: `
@@ -32,17 +25,7 @@ const BUTTON_STYLES: Record<ButtonColor, string> = {
     `,
 };
 
-const Button = ({ children, theme, onClick }: ButtonProps) => {
-  return (
-    <StyledButton $theme={theme} onClick={onClick}>
-      {children}
-    </StyledButton>
-  );
-};
-
-export default Button;
-
-const StyledButton = styled.button<{ $theme: ButtonColor }>`
+export const Button = styled.button<{ $theme: ButtonColor }>`
   display: flex;
   justify-content: center;
   align-items: center;

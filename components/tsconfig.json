@@ -27,15 +27,15 @@
   },
   "include": [
     "src/lib",
-    "src/lib/Modal/BackDrop.tsx",
-    "src/lib/Modal/Button.tsx",
-    "src/lib/Modal/ButtonContainer.tsx",
-    "src/lib/Modal/CloseButton.tsx",
-    "src/lib/Modal/Container.tsx",
+    "src/lib/Modal/BackDrop/BackDrop.tsx",
+    "src/lib/Modal/Button/Button.tsx",
+    "src/lib/Modal/ButtonContainer/ButtonContainer.tsx",
+    "src/lib/Modal/CloseButton/CloseButton.tsx",
+    "src/lib/Modal/Container/Container.tsx",
     "src/lib/index.ts",
-    "src/lib/Modal/Header.tsx",
+    "src/lib/Modal/Header/Header.tsx",
     "src/lib/Modal/Modal.tsx",
-    "src/lib/Modal/Title.tsx"
+    "src/lib/Modal/Title/Title.tsx"
   ],
   "exclude": ["node_modules", "dist", "**/*.test.ts"],
   "references": [{ "path": "./tsconfig.node.json" }]

@@ -1,6 +1,6 @@
-import styled from "styled-components";
+import * as Styled from "./style";
 
-import { closeImage } from "../asset/index";
+import { closeImage } from "../../asset/index";
 
 export interface CloseButtonProps {
   onCloseButtonClick: () => void;
@@ -8,7 +8,7 @@ export interface CloseButtonProps {
 
 const CloseButton = ({ onCloseButtonClick }: CloseButtonProps) => {
   return (
-    <StyledCloseButton
+    <Styled.CloseButton
       src={closeImage}
       alt="닫기"
       onClick={onCloseButtonClick}
@@ -17,10 +17,3 @@ const CloseButton = ({ onCloseButtonClick }: CloseButtonProps) => {
 };
 
 export default CloseButton;
-
-const StyledCloseButton = styled.img`
-  width: 14px;
-  height: 14px;
-
-  margin: 0 10px;
-`;

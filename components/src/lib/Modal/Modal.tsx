@@ -1,19 +1,19 @@
-import styled from "styled-components";
+import * as Styled from "./style";
 
-import BackDrop from "./BackDrop";
-import Container from "./Container";
-import Header from "./Header";
-import Title from "./Title";
-import ButtonContainer from "./ButtonContainer";
-import Button from "./Button";
-import CloseButton from "./CloseButton";
+import BackDrop from "./BackDrop/BackDrop";
+import Container from "./Container/Container";
+import Header from "./Header/Header";
+import Title from "./Title/Title";
+import ButtonContainer from "./ButtonContainer/ButtonContainer";
+import Button from "./Button/Button";
+import CloseButton from "./CloseButton/CloseButton";
 
 export interface ModalProps {
   children: React.ReactNode;
 }
 
 const Modal = ({ children }: ModalProps) => {
-  return <StyledModal>{children}</StyledModal>;
+  return <Styled.Modal>{children}</Styled.Modal>;
 };
 
 Modal.BackDrop = BackDrop;
@@ -25,10 +25,3 @@ Modal.Button = Button;
 Modal.CloseButton = CloseButton;
 
 export default Modal;
-
-const StyledModal = styled.section`
-  position: relative;
-
-  height: 100vh;
-  width: 376px;
-`;

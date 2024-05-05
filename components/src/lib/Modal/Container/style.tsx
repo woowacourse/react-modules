@@ -1,11 +1,5 @@
 import styled from "styled-components";
-
-type ContainerPositionType = "top" | "bottom" | "center";
-
-export interface ContainerProps {
-  position: ContainerPositionType;
-  children: React.ReactNode;
-}
+import { ContainerPositionType } from "./Container";
 
 const POSITION_STYLES = {
   top: `
@@ -33,13 +27,7 @@ const POSITION_STYLES = {
     `,
 };
 
-const Container = ({ position, children }: ContainerProps) => {
-  return <StyledContainer $position={position}>{children}</StyledContainer>;
-};
-
-export default Container;
-
-const StyledContainer = styled.div<{ $position: ContainerPositionType }>`
+export const Container = styled.div<{ $position: ContainerPositionType }>`
   position: absolute;
   padding: 32px 24px;
   display: flex;
