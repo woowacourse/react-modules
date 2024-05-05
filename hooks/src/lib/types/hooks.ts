@@ -24,3 +24,5 @@ export interface UseCardModuleReturn<E, T, V = never> {
   validationResult: T;
   formattedValue?: V;
 }
+
+export type DateError = 'empty' | 'length' | 'number' | 'format' | null;
