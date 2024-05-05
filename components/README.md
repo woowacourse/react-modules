@@ -95,5 +95,6 @@ const App = () => {
 ### Modal.Footer
 - 보통 버튼을 감싸는 Modal 하단 영역
 - children으로 내용 삽입
+- position?('row' | 'row-reverse' | 'column' | 'column-reverse'): 사용자가 직접 레이아웃을 구현할 수 있도록 제공하지만 필요할 경우 position으로 children들에 대해 flex 레이아웃을 제공하고 있습니다.
 
 
