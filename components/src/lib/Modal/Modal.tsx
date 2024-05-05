@@ -8,7 +8,7 @@ export type ButtonPosition = 'row' | 'column';
 
 export interface ModalProps {
   isOpened: boolean;
-  closeModal: () => void;
+  onClose: () => void;
   title?: string;
   description?: string;
   children?: JSX.Element;
@@ -35,7 +35,7 @@ export type ButtonStyle = 'primary' | 'border' | 'text';
 
 const Modal = ({
   isOpened,
-  closeModal,
+  onClose,
   title = '',
   description = '',
   children,
@@ -51,7 +51,7 @@ const Modal = ({
 
   const handleKeyDownEsc = (e: KeyboardEvent) => {
     if (e.key === 'Escape' && isOpened) {
-      closeModal();
+      onClose();
     }
 
     document.body.removeEventListener('keydown', handleKeyDownEsc);
@@ -62,7 +62,7 @@ const Modal = ({
   return (
     <>
       {isOpened && (
-        <Styled.DimmedLayer onClick={closeModal}>
+        <Styled.DimmedLayer onClick={onClose}>
           <Styled.ModalContainer
             modalPosition={modalPosition}
             onClick={(e) => {
@@ -74,7 +74,7 @@ const Modal = ({
               {showCloseButton && (
                 <Styled.ModalCloseButton
                   src={CLOSE_BUTTON}
-                  onClick={closeModal}
+                  onClick={onClose}
                 />
               )}
             </Styled.ModalHeader>
@@ -98,7 +98,7 @@ const Modal = ({
               {secondaryButton && (
                 <Button
                   text={secondaryButton.text}
-                  onClick={secondaryButton.onClick || closeModal}
+                  onClick={secondaryButton.onClick || onClose}
                   size={secondaryButton.size || 'medium'}
                   width={secondaryButton.width || 'full'}
                   buttonStyle={secondaryButton.buttonStyle || 'border'}
