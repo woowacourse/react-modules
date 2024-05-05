@@ -13,26 +13,24 @@ export default function Modal({
     event.preventDefault();
     event.stopPropagation();
   },
-  title = "",
-  position = "center",
-  content = null,
   modalContainerStyle = {},
   className = "",
   style = {},
+  mountAnimation = "",
+  unMountAnimation = "",
 }: PropsWithChildren<Partial<ModalContextType>>) {
   const contextValue = useModal();
   const handleOnClose = onClose ?? contextValue.onClose;
 
   const modalProps: ModalContextType = {
     isOpen: isOpen ?? contextValue.isOpen,
-    title: title ?? contextValue.title,
-    position: position ?? contextValue.position,
-    content: content ?? contextValue.content,
     modalContainerStyle:
       modalContainerStyle ?? contextValue.modalContainerStyle,
     className: className ?? contextValue.className,
     style: style ?? contextValue.style,
     onClose: handleOnClose,
+    mountAnimation: mountAnimation ?? contextValue.mountAnimation,
+    unMountAnimation: unMountAnimation ?? contextValue.unMountAnimation,
   };
 
   return modalProps.isOpen ? (

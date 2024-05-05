@@ -1,4 +1,4 @@
-import { PropsWithChildren, useCallback, useContext, useEffect } from "react";
+import { PropsWithChildren, useCallback, useContext } from "react";
 import styles from "./backdrop.module.css";
 import { ModalContext } from "./ModalContext";
 import usePreventScroll from "./hooks/usePreventScroll";
