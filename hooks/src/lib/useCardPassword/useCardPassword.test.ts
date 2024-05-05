@@ -32,28 +32,21 @@ describe("useCardPassword 커스텀 훅 동작 테스트", () => {
     expect(result.current.errorState).toBe(false);
   });
 
-  const INVALID_INPUT_LENGTH_TEST_CASE = [
-    ["1", "1"],
-    ["123", "123"],
-  ];
+  it("필드에 입력하는 입력값이 2자리가 아닌 경우, 해당 입력 필드에 예외가 발생해야한다.", () => {
+    const { result } = renderHook(() => useCardPassword());
+    const INVALID_INPUT_LENGTH = "1";
 
-  it.each(INVALID_INPUT_LENGTH_TEST_CASE)(
-    "필드에 입력하는 입력값이 2자리가 아닌 경우, 해당 입력 필드에 예외가 발생해야한다.",
-    (invalidValue, expectedResult) => {
-      const { result } = renderHook(() => useCardPassword());
+    React.act(() => {
+      result.current.handleCardPasswordChange({
+        target: {
+          value: INVALID_INPUT_LENGTH,
+        },
+      } as React.ChangeEvent<HTMLInputElement>);
+    });
 
-      React.act(() => {
-        result.current.handleCardPasswordChange({
-          target: {
-            value: invalidValue,
-          },
-        } as React.ChangeEvent<HTMLInputElement>);
-      });
-
-      expect(result.current.cardPassword).toBe(expectedResult);
-      expect(result.current.errorState).toBe(true);
-    }
-  );
+    expect(result.current.cardPassword).toBe(INVALID_INPUT_LENGTH);
+    expect(result.current.errorState).toBe(true);
+  });
 
   const INVALID_CHARACTER_INPUT_TEST_CASE = [
     [["1", "1a"], "1"],

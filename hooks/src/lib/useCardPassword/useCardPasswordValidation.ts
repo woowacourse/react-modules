@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 import cardInputValidator from "../validators/cardInputValidator";
-import { VALIDATION_MESSAGES } from "../constants/cardCustomHook";
+import { INPUT_RULES, VALIDATION_MESSAGES } from "../constants/cardCustomHook";
 
 const useCardPasswordValidation = () => {
   const [errorState, setErrorState] = useState(false);
@@ -17,6 +17,11 @@ const useCardPasswordValidation = () => {
 
       return false;
     }
+
+    const isOverInputLength =
+      value.length > INPUT_RULES.validCardPasswordLength;
+
+    if (isOverInputLength) return false;
 
     const isValidCardPasswordLength = cardInputValidator.validateInputLength(
       value,
