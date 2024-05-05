@@ -7,9 +7,11 @@ describe("useCardNumbers Test", () => {
     const { result } = renderHook(() => useCardNumbers());
 
     React.act(() => {
-      result.current.firstState[1]("1234");
+      const [_, setValue] = result.current.firstState;
+      setValue("1234");
     });
-    expect(result.current.firstState[0]).toBe("1234");
+    const [value] = result.current.firstState;
+    expect(value).toBe("1234");
     expect(result.current.error.isError).toBe(true);
   });
 
@@ -17,9 +19,12 @@ describe("useCardNumbers Test", () => {
     const { result } = renderHook(() => useCardNumbers());
 
     React.act(() => {
-      result.current.firstState[1]("5123");
+      const [_, setValue] = result.current.firstState;
+      setValue("5123");
     });
-    expect(result.current.firstState[0]).toBe("5123");
+
+    const [value] = result.current.firstState;
+    expect(value).toBe("5123");
     expect(result.current.error.isError).toBe(false);
   });
 
@@ -27,8 +32,19 @@ describe("useCardNumbers Test", () => {
     const { result } = renderHook(() => useCardNumbers());
 
     React.act(() => {
-      result.current.secondState[1]("1234");
+      const [_value, setSecondValue] = result.current.secondState;
+      setSecondValue("1234");
+      const [_value2, setThirdValue] = result.current.thirdState;
+      setThirdValue("4444");
+      const [_value3, setFourthValue] = result.current.fourthState;
+      setFourthValue("5555");
     });
-    expect(result.current.secondState[0]).toBe("1234");
+
+    const [secondValue] = result.current.secondState;
+    expect(secondValue).toBe("1234");
+    const [thirdValue] = result.current.thirdState;
+    expect(thirdValue).toBe("4444");
+    const [fourthValue] = result.current.fourthState;
+    expect(fourthValue).toBe("5555");
   });
 });
