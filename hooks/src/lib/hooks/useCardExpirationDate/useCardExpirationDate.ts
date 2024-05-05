@@ -21,19 +21,22 @@ type Date<T> = {
 
 const VALID_DATE_LENGTH = 2;
 
-const useCardExpirationDate = () => {
-  const [date, setDate] = useState<Date<string>>({ month: '', year: '' });
+type useCardExpirationDateProps = {
+  month?: string;
+  year?: string;
+};
+
+const useCardExpirationDate = ({ month = '', year = '' }: useCardExpirationDateProps = {}) => {
+  const [date, setDate] = useState<Date<string>>({ month, year });
   const [isValid, setIsValid] = useState<Date<boolean>>({ month: false, year: false });
   const [errorMessages, setErrorMessages] = useState<Date<string>>({ month: '', year: '' });
 
   const getMonthErrorMessage = (month: string, isExpiredDate: EXPIRED_TYPE) => {
     if (isNotNumber(month)) return EXPIRATION_DATE_ERROR_MESSAGES.NOT_NUMBER;
 
-    if (isValidNumberLength(month, VALID_DATE_LENGTH))
-      return EXPIRATION_DATE_ERROR_MESSAGES.INVALID_MONTH;
+    if (!isValidNumberLength(month, VALID_DATE_LENGTH)) return EXPIRATION_DATE_ERROR_MESSAGES.INVALID_MONTH;
 
-    if (isValidNumberRange(Number(month), 1, 12))
-      return EXPIRATION_DATE_ERROR_MESSAGES.INVALID_MONTH;
+    if (!isValidNumberRange(Number(month), 1, 12)) return EXPIRATION_DATE_ERROR_MESSAGES.INVALID_MONTH;
 
     if (isExpiredDate === 'INVALID_MONTH') return EXPIRATION_DATE_ERROR_MESSAGES.EXPIRED_DATE;
 
@@ -43,8 +46,7 @@ const useCardExpirationDate = () => {
   const getYearErrorMessage = (year: string, isExpiredDate: EXPIRED_TYPE) => {
     if (isNotNumber(year)) return EXPIRATION_DATE_ERROR_MESSAGES.NOT_NUMBER;
 
-    if (isValidNumberLength(year, VALID_DATE_LENGTH))
-      return EXPIRATION_DATE_ERROR_MESSAGES.INVALID_YEAR;
+    if (!isValidNumberLength(year, VALID_DATE_LENGTH)) return EXPIRATION_DATE_ERROR_MESSAGES.INVALID_YEAR;
 
     if (isExpiredDate === 'INVALID_YEAR') return EXPIRATION_DATE_ERROR_MESSAGES.EXPIRED_DATE;
 
@@ -58,7 +60,7 @@ const useCardExpirationDate = () => {
     const yearErrorMessage = getYearErrorMessage(year, isExpiredDate);
 
     setErrorMessages({ month: monthErrorMessage, year: yearErrorMessage });
-    setIsValid({ month: !monthErrorMessage, year: !yearErrorMessage });
+    setIsValid({ month: monthErrorMessage === '', year: yearErrorMessage === '' });
   };
 
   const formatMonth = (month: string) => {
