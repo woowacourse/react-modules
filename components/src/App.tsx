@@ -4,6 +4,12 @@ import { Modal } from "hash-modal";
 
 function App() {
   const [modalOpen, setModalOpen] = useState(false);
+  const [nameInputValue, setNameInputValue] = useState("");
+
+  const setConfirm = () => {
+    alert(`${nameInputValue}님, 접수 완료 되었습니다.`);
+    setModalOpen(false);
+  };
 
   return (
     <>
@@ -11,17 +17,22 @@ function App() {
       {modalOpen && (
         <Modal
           buttonLayout="column"
-          position="bottom"
-          title="제목입니다."
-          isXButton={true}
+          position="center"
+          title="◻◻ 병원 접수 신청"
+          hasXButton={true}
           closeButtonContent="닫기"
-          confirmButtonContent="확인"
-          handleConfirm={() => setModalOpen(true)}
+          confirmButtonContent="이름 등록"
+          handleConfirm={setConfirm}
           handleClose={() => setModalOpen(false)}
         >
           {
             <ContentDefaultTemplate>
-              <input></input>
+              <label htmlFor="name-input">이름을 입력해주세요.</label>
+              <input
+                id="name-input"
+                value={nameInputValue}
+                onChange={(e) => setNameInputValue(e.target.value)}
+              ></input>
             </ContentDefaultTemplate>
           }
         </Modal>
@@ -31,14 +42,25 @@ function App() {
 }
 
 export const ContentDefaultTemplate = styled.div`
-  height: 50vh;
-  background-color: red;
+  height: 10rem;
+  width: 20rem;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 1rem;
+
+  #name-input {
+    width: 70%;
+    height: 1.875rem;
+  }
 `;
 
 export const ContentWideTemplate = styled.div`
   width: 500vw;
   height: 500vh;
-  background-color: red;
+  background-color: #ffc7c7;
 `;
 
 export default App;
