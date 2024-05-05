@@ -2,27 +2,24 @@ import styled from "styled-components";
 
 import { ButtonColor } from "./Button";
 
-const BUTTON_STYLES: Record<ButtonColor, string> = {
+const BUTTON_COLOR_STYLES = {
   dark: `
-    background-color: #333333; 
+      background-color: #333333;
 
-    color: #ffffff;
+      color: #ffffff;
 
-    &:hover {
-      background-color: #1f1f1f; 
-    }
+      &:hover {
+        background-color: #1f1f1f;
+      }
     `,
+  white: `background-color: #ffffff;
 
-  white: `
-    background-color: #ffffff; 
-
-    color: #8B95A1;
+    color: #8b95a1;
 
     &:hover {
       border: 0.5px solid #dfdfdf;
-      background-color: #f0f0f0; 
-    }
-    `,
+      background-color: #f0f0f0;
+    }`,
 };
 
 export const Button = styled.button<{ $theme: ButtonColor }>`
@@ -36,7 +33,8 @@ export const Button = styled.button<{ $theme: ButtonColor }>`
   border: 0.5px solid #8b95a1;
   border-radius: 8px;
 
-  ${({ $theme }) => BUTTON_STYLES[$theme]}
+  ${({ $theme }) => BUTTON_COLOR_STYLES[$theme]}
+
   font-size: 15px;
   font-weight: 700;
 `;
