@@ -7,6 +7,8 @@ import { useEffect } from 'react';
  */
 const usePressESC = <T extends (...args: unknown[]) => void>(condition: boolean, callback: T) => {
   useEffect(() => {
+    if (!condition) return;
+
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === 'Escape') callback();
     };
