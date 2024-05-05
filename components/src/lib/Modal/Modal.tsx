@@ -9,11 +9,12 @@ import Button from "./Button/Button";
 import CloseButton from "./CloseButton/CloseButton";
 
 export interface ModalProps {
+  isOpen: boolean;
   children: JSX.Element;
 }
 
-const Modal = ({ children }: ModalProps) => {
-  return <Styled.Modal>{children}</Styled.Modal>;
+const Modal = ({ isOpen, children }: ModalProps) => {
+  return <Styled.Modal $isOpen={isOpen}>{children}</Styled.Modal>;
 };
 
 Modal.BackDrop = BackDrop;
