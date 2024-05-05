@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const CloseButton = styled.button`
-  background-color: white;
+  background-color: ${(props) => props.theme.color.white};
 `;
 
 export const CloseImg = styled.img`

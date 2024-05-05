@@ -38,8 +38,6 @@ export const Container = styled.div<{ $position: ContainerPositionType }>`
   flex-direction: column;
   gap: 1rem;
 
-  box-sizing: border-box;
-
-  background-color: #ffffff;
+  background-color: ${(props) => props.theme.color.white};
   ${({ $position }) => POSITION_STYLES[$position]};
 `;

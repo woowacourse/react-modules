@@ -1,25 +1,27 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 import { ButtonColor } from "./Button";
 
 const BUTTON_COLOR_STYLES = {
-  dark: `
-      background-color: #333333;
+  dark: css`
+    background-color: ${(props) => props.theme.color.darkGrey};
 
-      color: #ffffff;
-
-      &:hover {
-        background-color: #1f1f1f;
-      }
-    `,
-  white: `background-color: #ffffff;
-
-    color: #8b95a1;
+    color: ${(props) => props.theme.color.white};
 
     &:hover {
-      border: 0.5px solid #dfdfdf;
-      background-color: #f0f0f0;
-    }`,
+      background-color: ${(props) => props.theme.color.black};
+    }
+  `,
+  white: css`
+    background-color: ${(props) => props.theme.color.white};
+
+    color: ${(props) => props.theme.color.grey};
+
+    &:hover {
+      border: 0.5px solid ${(props) => props.theme.color.lightGrey};
+      background-color: ${(props) => props.theme.color.lightGrey};
+    }
+  `,
 };
 
 export const Button = styled.button<{ $color: ButtonColor }>`
@@ -30,7 +32,7 @@ export const Button = styled.button<{ $color: ButtonColor }>`
   height: 44px;
   width: 100%;
 
-  border: 0.5px solid #8b95a1;
+  border: 0.5px solid ${(props) => props.theme.color.grey};
   border-radius: 8px;
 
   ${({ $color }) => BUTTON_COLOR_STYLES[$color]}
