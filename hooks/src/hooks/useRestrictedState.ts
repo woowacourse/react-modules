@@ -1,11 +1,18 @@
-import { useState } from "react";
+import { InputHTMLAttributes, useState } from "react";
 
 interface UseRestrictedStateProps {
-  type?: "english" | "number";
+  type?: InputHTMLAttributes<HTMLInputElement>["type"] | "english";
   maxLength?: number;
+  typeErrorMessage?: string;
+  maxLengthErrorMessage?: string;
 }
 
-const useRestrictedState = ({ type, maxLength }: UseRestrictedStateProps = {}) => {
+const useRestrictedState = ({
+  type,
+  maxLength,
+  typeErrorMessage,
+  maxLengthErrorMessage,
+}: UseRestrictedStateProps = {}) => {
   const [value, setValue] = useState("");
   const [errorMessage, setErrorMessage] = useState<string | undefined>();
 
@@ -24,18 +31,15 @@ const useRestrictedState = ({ type, maxLength }: UseRestrictedStateProps = {}) =
   };
 
   const setValueWrapper = (value: string) => {
-    if (type === "english" && !/^[a-zA-Z ]+$/.test(value)) {
-      setError("영어만 입력하세요");
-      return;
-    }
-    if (type === "number" && Number.isNaN(Number(value))) {
-      setError("숫자만 입력하세요");
+    if ((type === "english" && !/^[a-zA-Z ]+$/.test(value)) || (type === "number" && Number.isNaN(Number(value)))) {
+      setError(typeErrorMessage);
       return;
     }
     if (maxLength && value.length > maxLength) {
-      setError(`${maxLength}자 이상 입력할 수 없습니다.`);
+      setError(maxLengthErrorMessage);
       return;
     }
+    setError(undefined);
     setValue(value);
   };
 

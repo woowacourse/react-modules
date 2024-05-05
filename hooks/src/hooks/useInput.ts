@@ -5,6 +5,9 @@ interface CustomInputAttributes extends Omit<InputHTMLAttributes<HTMLInputElemen
   required?: {
     message: string;
   };
+  customType?: "number" | "english";
+  typeErrorMessage?: string;
+  maxLengthErrorMessage?: string;
 }
 
 const useInput = () => {
@@ -13,11 +16,22 @@ const useInput = () => {
 
   const useRegister = (
     name: string,
-    { onChange, onBlur, placeholder, required, type, maxLength }: CustomInputAttributes = {}
+    {
+      onChange,
+      onBlur,
+      placeholder,
+      required,
+      customType,
+      typeErrorMessage,
+      maxLength,
+      maxLengthErrorMessage,
+    }: CustomInputAttributes = {}
   ) => {
     const { valueState, errorState } = useRestrictedState({
-      type: type === "number" ? "number" : undefined,
+      type: customType,
+      typeErrorMessage,
       maxLength,
+      maxLengthErrorMessage,
     });
     const { value, setValue } = valueState;
     const { errorMessage, setError } = errorState;
@@ -48,10 +62,9 @@ const useInput = () => {
       requiredValidator(input);
     };
 
-    return { onChange: onChangeWrapper, onBlur, name, ref, value, placeholder };
+    return { name, ref, value, placeholder, onChange: onChangeWrapper, onBlur };
   };
 
-  //
   return { register: useRegister, valueMap, errorMap };
 };
 
