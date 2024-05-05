@@ -5,8 +5,8 @@ type Style = {
   fontColor: string;
 };
 interface Props {
-  content?: string;
-  handleClick?: (e: React.MouseEvent) => void;
+  content: string;
+  handleClick: (e: React.MouseEvent) => void;
   style?: Style;
 }
 const Button = ({
@@ -15,7 +15,7 @@ const Button = ({
   style = { backgroundColor: "black", fontColor: "white" },
 }: Props) => {
   return (
-    <StyledButton $style={style} onClick={(e) => handleClick && handleClick(e)}>
+    <StyledButton $style={style} onClick={(e) => handleClick(e)}>
       {content}
     </StyledButton>
   );
