@@ -34,44 +34,6 @@
   opacity: 0.4;
 }
 
-.header {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: flex-start;
-  margin: 15px;
-}
-
-.title-field {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-}
-
-.title {
-  font-size: 18px;
-  text-align: left;
-  font-weight: bold;
-  color: black;
-  width: 100%;
-}
-
-.subtitle {
-  font-size: 10px;
-  font-weight: normal;
-  text-align: left;
-  color: gray;
-  width: 100%;
-}
-
-.button-close {
-  width: 15px;
-  height: 15px;
-
-  position: absolute;
-  right: 15px;
-}
-
 .button-container {
   display: flex;
   flex-direction: row;
