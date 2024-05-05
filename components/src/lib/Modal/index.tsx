@@ -11,6 +11,7 @@ import CenterModal from './CenterModal';
 import ModalPortal from './ModalPortal';
 import styles from './style.module.css';
 import TostModal from './ToastModal';
+
 function Modal(props: ModalProps) {
   const {
     openModal,

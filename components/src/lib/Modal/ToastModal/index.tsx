@@ -29,7 +29,7 @@ function TostModal({ children }: ModalContentsProps) {
     if (!position) {
       throw new Error('position을 지정해주세요.');
     }
-  }, []);
+  }, [position]);
 
   useLayoutEffect(() => {
     fadInModal();
@@ -41,11 +41,9 @@ function TostModal({ children }: ModalContentsProps) {
   }, []);
 
   return (
-    <>
-      <Modal.Contents className={className} style={{ ...position, transitionDuration: `${timeout / 1000}s` }}>
-        {children}
-      </Modal.Contents>
-    </>
+    <Modal.Contents className={className} style={{ ...position, transitionDuration: `${timeout / 1000}s` }}>
+      {children}
+    </Modal.Contents>
   );
 }
 
