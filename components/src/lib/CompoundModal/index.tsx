@@ -15,14 +15,12 @@ interface CompoundModalProps extends React.HTMLAttributes<HTMLDivElement> {
   onClose?: () => void;
   onConfirm?: () => void;
   position?: ModalPosition;
-  hasDimmer?: boolean;
 }
 
 const CompoundModal = ({
   onClose,
   onConfirm,
   position = 'center',
-  hasDimmer = true,
   children,
 }: CompoundModalProps) => {
   const value = {
@@ -43,7 +41,7 @@ const CompoundModal = ({
 
   return (
     <CompoundModalContext.Provider value={value}>
-      {hasDimmer && <CompoundModalDimmer />}
+      <CompoundModalDimmer />
       <ModalContent position={position}>{children}</ModalContent>
     </CompoundModalContext.Provider>
   );
