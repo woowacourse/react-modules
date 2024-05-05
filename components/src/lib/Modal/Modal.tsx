@@ -25,14 +25,22 @@ export const ModalMain = ({
   backdropType = 'opaque',
   shadow = true,
   animation = true,
+  zIndex = 100,
 }: StrictPropsWithChildren<ModalProps>) => {
   usePreventScroll(isOpen);
   useKeyPress({ targetKey: 'Escape', callback: close, isActive: isOpen });
 
   if (!isOpen) return null;
 
+  const modalStyle = {
+    zIndex,
+  };
+
   return (
-    <div className={`${styles.modalLayout} ${styles[position]} ${animation ? styles.animation : ''}`}>
+    <div
+      style={modalStyle}
+      className={`${styles.modalLayout} ${styles[position]} ${animation ? styles.animation : ''}`}
+    >
       <div onClick={close} className={`${styles.modalBackdrop} ${styles[backdropType]}`} />
       <div
         className={`${styles.modalContainer} ${styles[size]} ${styles[position]} ${shadow ? styles.shadow : ''} ${animation ? styles.animation : ''}`}

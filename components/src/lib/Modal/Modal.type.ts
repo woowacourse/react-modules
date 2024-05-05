@@ -12,6 +12,7 @@ export interface ModalProps {
   size?: Size;
   shadow?: boolean;
   animation?: boolean;
+  zIndex?: number;
 }
 
 export interface ModalFooterProps {
