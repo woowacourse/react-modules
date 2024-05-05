@@ -26,11 +26,7 @@
     "esModuleInterop": true,
     "baseUrl": ".",
     "paths": {
-      "@/*": ["src/*"],
-      "@/assets": ["src/assets/*"],
-      "@/data": ["src/data/*"],
-      "@/lib": ["src/lib/*"],
-      "@/stories": ["src/stories/*"]
+      "@/*": ["src/*"]
     }
   },
   "include": [
