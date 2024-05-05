@@ -35,7 +35,6 @@ describe("useCVC 커스텀 훅 동작 테스트", () => {
   const INVALID_INPUT_LENGTH_TEST_CASE = [
     ["1", "1"],
     ["12", "12"],
-    ["1234", "1234"],
   ];
 
   it.each(INVALID_INPUT_LENGTH_TEST_CASE)(
