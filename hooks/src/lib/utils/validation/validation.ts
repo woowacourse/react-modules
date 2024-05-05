@@ -24,15 +24,14 @@ export const validateExpiredDate = (month: string, year: string): EXPIRED_TYPE =
 };
 
 export const NUMBER_ERROR_MESSAGES = {
-  NOT_NUMBER: '숫자를 입력해주세요.',
-  MAX_LENGTH: (length: number) => `${length}개의 숫자를 입력해주세요.`,
+  NOT_NUMBER: 'NOT_NUMBER',
+  MAX_LENGTH: 'MAX_LENGTH',
 };
 
 export const getNumberErrorMessage = (number: string, validLength: number) => {
-  if (isNotNumber(number)) return NUMBER_ERROR_MESSAGES.NOT_NUMBER;
+  if (isNotNumber(number)) return 'NOT_NUMBER';
 
-  if (!isValidNumberLength(number, validLength))
-    return NUMBER_ERROR_MESSAGES.MAX_LENGTH(validLength);
+  if (!isValidNumberLength(number, validLength)) return 'MAX_LENGTH';
 
   return '';
 };

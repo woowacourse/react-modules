@@ -8,10 +8,10 @@ import {
 import type { EXPIRED_TYPE } from '../..//utils/validation/validation.type';
 
 export const EXPIRATION_DATE_ERROR_MESSAGES = {
-  NOT_NUMBER: '숫자를 입력해주세요.',
-  INVALID_MONTH: '유효하지 않은 달입니다.',
-  INVALID_YEAR: '유효하지 않은 년도입니다.',
-  EXPIRED_DATE: '이미 만료된 카드입니다.',
+  NOT_NUMBER: 'NOT_NUMBER',
+  INVALID_MONTH: 'INVALID_MONTH',
+  INVALID_YEAR: 'INVALID_YEAR',
+  EXPIRED_DATE: 'EXPIRED_DATE',
 };
 
 type Date<T> = {

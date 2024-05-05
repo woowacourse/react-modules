@@ -1,8 +1,8 @@
 import { useState } from 'react';
 
 export const CARD_COMPANY_ERROR_MESSAGES = {
-  NO_CARD_COMPANY: '회사를 선택해 주세요.',
-  INVALID_CARD_COMPANY: '올바른 카드사가 아닙니다.',
+  NO_CARD_COMPANY: 'NO_CARD_COMPANY',
+  INVALID_CARD_COMPANY: 'INVALID_CARD_COMPANY',
 };
 
 const useCardCompany = (validCardCompanyList: string[], initialValue: string = '') => {
