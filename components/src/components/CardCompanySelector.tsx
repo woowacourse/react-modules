@@ -1,6 +1,22 @@
 import React from 'react';
-import styled from 'styled-components';
 import { CARD_COMPANIES } from '../constants/cards';
+
+import styled from 'styled-components';
+
+function CardCompanySelector() {
+  return (
+    <CardCompanyContainer>
+      {CARD_COMPANIES.map((company) => (
+        <CardCompanyBox key={company.name}>
+          <CardCompanyImg src={company.img} alt={company.name} />
+          <CardCompanyName>{company.name}</CardCompanyName>
+        </CardCompanyBox>
+      ))}
+    </CardCompanyContainer>
+  );
+}
+
+export default CardCompanySelector;
 
 const CardCompanyContainer = styled.div`
   display: grid;
@@ -22,17 +38,6 @@ const CardCompanyImg = styled.img`
   height: 3.2rem;
 `;
 
-function CardCompanySelector() {
-  return (
-    <CardCompanyContainer>
-      {CARD_COMPANIES.map((company) => (
-        <CardCompanyBox key={company.name}>
-          <CardCompanyImg src={company.img} alt={company.name} />
-          <div>{company.name}</div>
-        </CardCompanyBox>
-      ))}
-    </CardCompanyContainer>
-  );
-}
-
-export default CardCompanySelector;
+const CardCompanyName = styled.div`
+  font-size: 1.2rem;
+`;
