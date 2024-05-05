@@ -7,9 +7,9 @@ export const OWNER_NAME_ERROR_MESSAGES = {
   NAME_LENGTH: '이름은 최대 21자까지 가능합니다.',
 };
 
-const MAX_NAME_LENGTH = 21;
+const VALID_OWNER_NAME_LENGTH = 21;
 
-const useCardOwnerName = () => {
+const useCardOwnerName = (validLength: number = VALID_OWNER_NAME_LENGTH) => {
   const [ownerName, setOwnerName] = useState('');
   const [isValidOwnerName, setIsValidOwnerName] = useState(false);
   const [ownerNameErrorMessage, setOwnerNameErrorMessage] = useState('');
@@ -29,7 +29,7 @@ const useCardOwnerName = () => {
 
     if (engName.length < name.length) return OWNER_NAME_ERROR_MESSAGES.NOT_ENG;
 
-    if (unifiedSpaceName.length > MAX_NAME_LENGTH) return OWNER_NAME_ERROR_MESSAGES.NAME_LENGTH;
+    if (unifiedSpaceName.length > validLength) return OWNER_NAME_ERROR_MESSAGES.NAME_LENGTH;
 
     return '';
   };
@@ -40,7 +40,7 @@ const useCardOwnerName = () => {
     const errorMessage = getErrorMessage(name);
     setOwnerNameErrorMessage(errorMessage);
 
-    if (validOwnerName.length > MAX_NAME_LENGTH) return;
+    if (validOwnerName.length > validLength) return;
 
     setOwnerName(validOwnerName);
     setIsValidOwnerName(validOwnerName.length >= 1);
