@@ -8,14 +8,14 @@ const useExpirationValidation = (expiration: { month: string; year: string }) =>
 
   const validateExpirationDate = (field: 'month' | 'year', value: string): string => {
     if (isContainsNonNumeric(value)) {
-      setExpirationError({ isError: true, errorMessage: '월은 01에서 12 사이의 숫자여야 합니다.' });
+      setExpirationError({ isError: true, errorMessage: '숫자만 입력 가능합니다.' });
       return EXPIRATION_ERROR_TYPE.nonNumeric;
     }
 
     const newExpiration = { ...expiration, [field]: value };
 
     if (isInvalidMonth(newExpiration.month)) {
-      setExpirationError({ isError: true, errorMessage: '월은 01에서 12 사이의 숫자여야 합니다.' });
+      setExpirationError({ isError: true, errorMessage: '월은 01에서 12 사이여야 합니다.' });
       return EXPIRATION_ERROR_TYPE.invalidMonth;
     }
 
