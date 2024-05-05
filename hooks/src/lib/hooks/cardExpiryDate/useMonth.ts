@@ -4,11 +4,11 @@ import { DATE_LENGTH, MONTH } from '../../constants';
 import { DateError } from '../../types';
 import { validateFilledValue, validateNumber } from '../../utils';
 
-interface UseMonthProps {
+export interface UseMonthProps {
   month: string;
 }
 
-interface UseMonthResult {
+export interface UseMonthResult {
   isValid: boolean;
   error: DateError;
 }

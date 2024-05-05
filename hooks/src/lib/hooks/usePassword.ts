@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-import { INVALID_INPUT_VALUE } from '../constants';
+import { INVALID_INPUT_VALUE, PASSWORD_LENGTH } from '../constants';
 import { ErrorMessage, UseCardModuleReturn } from '../types';
 import { isValid, sliceText, validateFilledValue, validateLength, validateNumber } from '../utils';
 
@@ -13,7 +13,7 @@ export interface UsePasswordProps {
   cardPassword: string;
   errorMessages: PasswordValidationErrorMessages;
   validation: {
-    length: number;
+    length?: number;
   };
   isNeedValidValue: boolean;
 }
@@ -37,7 +37,7 @@ export default function usePassword(props: UsePasswordProps) {
 
     if (!validateFilledValue(cardPassword)) newError.push('empty');
     if (!validateNumber(cardPassword)) newError.push('number');
-    if (!validateLength(cardPassword, validation.length)) newError.push('length');
+    if (!validateLength(cardPassword, validation.length || PASSWORD_LENGTH)) newError.push('length');
 
     setError(newError[0] ? newError : null);
   };
@@ -49,7 +49,7 @@ export default function usePassword(props: UsePasswordProps) {
    * @returns 변경된 글자
    */
   const getFormattedValue = () => {
-    const slicedText = sliceText(cardPassword, validation.length);
+    const slicedText = sliceText(cardPassword, validation.length || PASSWORD_LENGTH);
     const isOnlyLengthError = error?.[0] === 'length';
 
     if (isNeedValidValue) {

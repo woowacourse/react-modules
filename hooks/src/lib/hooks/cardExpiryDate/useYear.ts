@@ -4,12 +4,12 @@ import { DATE_LENGTH, MAX_CARD_YEARS_FROM_NOW } from '../../constants';
 import { DateError } from '../../types';
 import { getNowYearAndMonth, validateFilledValue, validateNumber } from '../../utils';
 
-interface UseYearProps {
+export interface UseYearProps {
   year: string;
   maxYearsFromNow?: number;
 }
 
-interface UseYearResult {
+export interface UseYearResult {
   isValid: boolean;
   error: DateError;
 }

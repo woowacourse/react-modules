@@ -2,14 +2,13 @@ import { useEffect, useState } from 'react';
 
 import { getNowYearAndMonth } from '../../utils';
 
-interface UseCardAvailabilityProps {
-  expiryDate: {
-    month: string;
-    year: string;
-  };
+import { ExpiryDate } from './useExpiryDate';
+
+export interface UseCardAvailabilityProps {
+  expiryDate: ExpiryDate;
 }
 
-interface UseCardAvailabilityResult {
+export interface UseCardAvailabilityResult {
   isValid: boolean;
 }
 
