@@ -4,6 +4,7 @@ import Button from '../Button/Button';
 import CLOSE_BUTTON from '../../asset/close-button.svg';
 
 import { ButtonProps } from '../Button/Button';
+import { useEffect } from 'react';
 
 interface ModalProps {
   isOpened: boolean;
@@ -34,18 +35,20 @@ const Modal = ({
   primaryColor,
   showCloseButton = false,
 }: ModalProps) => {
-  if (isOpened) document.body.style.overflow = 'hidden';
-  else document.body.style.overflow = 'scroll';
+  useEffect(() => {
+    if (isOpened) document.body.style.overflow = 'hidden';
+    else document.body.style.overflow = 'scroll';
+    document.body.addEventListener('keydown', handleKeyDownEsc);
+    return () => {
+      document.body.removeEventListener('keydown', handleKeyDownEsc)
+    };
+  }, [isOpened])
 
   const handleKeyDownEsc = (e: KeyboardEvent) => {
     if (e.key === 'Escape' && isOpened) {
       onClose();
     }
-
-    document.body.removeEventListener('keydown', handleKeyDownEsc);
   };
-
-  document.body.addEventListener('keydown', handleKeyDownEsc);
 
   return (
     <>
