@@ -13,10 +13,10 @@
 }
 
 .title {
-  color: black;
+  color: var(--black);
   font-family: Noto Sans KR;
-  font-size: 18px;
-  font-weight: 700;
-  line-height: 26.06px;
+  font-size: var(--title-font-size);
+  font-weight: var(--title-font-weight);
+  line-height: var(--title-line-height);
   text-align: left;
 }

@@ -3,16 +3,16 @@
   border: 1px solid transparent;
   width: 100%;
   padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
+  font-size: var(--button-font-size);
+  font-weight: var(--button-font-weight);
   font-family: inherit;
-  background-color: #1a1a1a;
+  background-color: var(--grayscale-main);
   cursor: pointer;
   transition: border-color 0.25s;
 }
 
 .modalButton:hover {
-  border-color: #646cff;
+  border-color: var(--button-border-blue);
 }
 
 .modalButton:focus,
@@ -21,11 +21,11 @@
 }
 
 .confirmButton {
-  background-color: #1a1a1a;
-  color: white;
+  background-color: var(--grayscale-main);
+  color: var(--white);
 }
 
 .closeButton {
-  background-color: #f9f9f9;
-  color: black;
+  background-color: var(--white-variable);
+  color: var(--black);
 }
