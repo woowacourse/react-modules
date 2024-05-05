@@ -1,12 +1,12 @@
 ### Modal 컴포넌트
 
-- package 이름 : rian-modal-compoent
+- package 이름 : rian-modal-component
 - Writer : 헤일리, 리안
 
 ## Installation
 
 ```
-npm install rian-modal-compoent
+npm install rian-modal-component
 ```
 
 ## Props
@@ -82,6 +82,8 @@ npm install rian-modal-compoent
 ## Usage
 
 ```tsx
+import { Modal } from "rian-modal-components";
+
 <Modal isOpen={true} position="center" onClose={() => {}} size="full">
   <Modal.Title> 약관에 동의해 주세요</Modal.Title>
   <Modal.CloseIcon onClick={() => {}}>
@@ -94,5 +96,5 @@ npm install rian-modal-compoent
     backgroundColor="white"
   />
   <Modal.CloseButton label="닫기" onClose={() => {}} />
-</Modal>
+</Modal>;
 ```

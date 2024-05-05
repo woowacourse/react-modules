@@ -92,6 +92,8 @@ export const CloseIcon = styled.button`
   position: absolute;
   top: 20px;
   right: 20px;
+  background-color: transparent;
+  color: black;
 `;
 
 export const Content = styled.div`

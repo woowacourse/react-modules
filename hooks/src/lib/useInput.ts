@@ -3,7 +3,7 @@ import { validateLength } from "@/validate/validate";
 
 type validateType = (value: string) => void;
 
-const useInput = <T,>(
+const useInput = <T>(
   initialValue: string = "",
   validate: validateType,
   validLength?: number

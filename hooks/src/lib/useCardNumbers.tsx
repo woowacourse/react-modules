@@ -13,6 +13,7 @@ export const cardNumbersValidates = (value: string) => {
   validateNumber(value);
   validateOverLength(value, VALID_LENGTH.CARD_NUMBERS);
 };
+
 const useCardNumbers = (initialValues: CardNumbersType) => {
   const {
     value: cardNumber1,

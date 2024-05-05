@@ -61,7 +61,7 @@ const Content = ({ children }: ContentsProps) => {
 export interface StyleButtonProps {
   label: string;
   onClickEvent: () => void;
-  backgroundColor: ButtonColorType | string;
+  backgroundColor?: ButtonColorType | string;
   textColor?: ButtonColorType;
   size?: ButtonSizeType;
 }
@@ -69,7 +69,7 @@ export interface StyleButtonProps {
 const StyledButton = ({
   label,
   onClickEvent,
-  backgroundColor,
+  backgroundColor = "white",
   textColor,
   size,
 }: StyleButtonProps) => {
