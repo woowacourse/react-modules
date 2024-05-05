@@ -15,10 +15,6 @@ const meta = {
       control: "boolean",
       description: "모달 열림 상태",
     },
-    modalContainerStyle: {
-      control: "object",
-      description: "모달 컨테이너 인라인 스타일",
-    },
     position: {
       options: ["center", "bottom"],
       control: { type: "radio" },

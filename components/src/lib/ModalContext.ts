@@ -1,11 +1,8 @@
-import { createContext, useContext, CSSProperties } from "react";
+import { createContext, useContext } from "react";
 
 export type ModalContextType = {
   isOpen: boolean;
   onClose: (event: React.SyntheticEvent) => void;
-  modalContainerStyle: CSSProperties;
-  className: string;
-  style: CSSProperties;
   mountAnimation: string;
   unMountAnimation: string;
   position: "center" | "bottom";
@@ -13,9 +10,6 @@ export type ModalContextType = {
 
 const defaultContext: Partial<ModalContextType> = {
   isOpen: false,
-  modalContainerStyle: {},
-  className: "",
-  style: {},
   onClose: (event: React.SyntheticEvent) => {
     event.preventDefault();
     event.stopPropagation();

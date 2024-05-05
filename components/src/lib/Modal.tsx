@@ -13,9 +13,6 @@ export default function Modal({
     event.preventDefault();
     event.stopPropagation();
   },
-  modalContainerStyle = {},
-  className = "",
-  style = {},
   mountAnimation = "",
   unMountAnimation = "",
   position = "center",
@@ -26,10 +23,6 @@ export default function Modal({
   const modalProps: ModalContextType = {
     isOpen: isOpen ?? contextValue.isOpen,
     position: position ?? contextValue.position,
-    modalContainerStyle:
-      modalContainerStyle ?? contextValue.modalContainerStyle,
-    className: className ?? contextValue.className,
-    style: style ?? contextValue.style,
     onClose: handleOnClose,
     mountAnimation: mountAnimation ?? contextValue.mountAnimation,
     unMountAnimation: unMountAnimation ?? contextValue.unMountAnimation,
