@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import useInput from './useInput';
+import useInput, { ValidationResult } from './useInput';
 
 const validateInputType = (value: string) => {
   const isNumber = !Number.isNaN(Number(value));
@@ -21,10 +21,16 @@ const validateFieldRules = (value: string) => {
   return { isValid: true, errorMessage: '' };
 };
 
-const usePassword = (initialValue: string) => {
+export interface PasswordOptions {
+  customValidateInputType?: (value: string) => ValidationResult;
+  customValidateFieldRules?: (value: string) => ValidationResult;
+}
+
+const usePassword = (initialValue: string, options?: PasswordOptions) => {
+  const { customValidateInputType, customValidateFieldRules } = options ?? {};
   const { value, setValue, handleChange, handleBlur, errorInfo } = useInput(initialValue, {
-    validateInputType,
-    validateFieldRules,
+    validateInputType: customValidateInputType ?? validateInputType,
+    validateFieldRules: customValidateFieldRules ?? validateFieldRules,
   });
 
   useEffect(() => {

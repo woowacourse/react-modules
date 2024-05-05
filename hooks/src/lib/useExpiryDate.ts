@@ -1,13 +1,9 @@
-import useExpiryMonth from './useExpiryMonth';
-import useExpiryYear from './useExpiryYear';
+import useExpiryMonth, { ExpiryMonthOptions } from './useExpiryMonth';
+import useExpiryYear, { ExpiryYearOptions } from './useExpiryYear';
 
-interface ExpiryDateOptions {
-  month?: {
-    isAutoFocus?: boolean;
-  };
-  year?: {
-    isAutoFocus?: boolean;
-  };
+export interface ExpiryDateOptions {
+  month?: ExpiryMonthOptions;
+  year?: ExpiryYearOptions;
 }
 
 const useExpiryDate = (

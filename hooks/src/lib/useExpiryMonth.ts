@@ -1,4 +1,4 @@
-import useInput from './useInput';
+import useInput, { ValidationResult } from './useInput';
 import { useEffect } from 'react';
 
 const validateInputType = (value: string) => {
@@ -26,14 +26,17 @@ const validateFieldRules = (value: string) => {
   return { isValid: true, errorMessage: '' };
 };
 
-interface Options {
+export interface ExpiryMonthOptions {
   isAutoFocus?: boolean;
+  customValidateInputType?: (value: string) => ValidationResult;
+  customValidateFieldRules?: (value: string) => ValidationResult;
 }
 
-const useExpiryMonth = (initialValue: string, options?: Options) => {
+const useExpiryMonth = (initialValue: string, options?: ExpiryMonthOptions) => {
+  const { isAutoFocus, customValidateInputType, customValidateFieldRules } = options ?? {};
   const { value, setValue, handleBlur, errorInfo, setErrorInfo } = useInput(initialValue, {
-    validateInputType,
-    validateFieldRules,
+    validateInputType: customValidateInputType ?? validateInputType,
+    validateFieldRules: customValidateFieldRules ?? validateFieldRules,
   });
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -46,7 +49,7 @@ const useExpiryMonth = (initialValue: string, options?: Options) => {
       const validationResult = validateFieldRules(event.target.value);
       setErrorInfo(validationResult);
       if (!validationResult.isValid) return;
-      if (options?.isAutoFocus) {
+      if (isAutoFocus) {
         const target = event.target.nextElementSibling;
         if (target instanceof HTMLInputElement) target.focus();
       }

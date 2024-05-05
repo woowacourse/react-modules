@@ -31,7 +31,7 @@ const useInputs = (initialValue: Record<string, string>, validator: ValidatorPro
   );
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>, name: string) => {
-    const validationResult = validator.onChange(event.target.value);
+    const validationResult = validator.validateInputType(event.target.value);
     setErrorInfo(prev => ({
       ...prev,
       [name]: validationResult,
@@ -45,7 +45,7 @@ const useInputs = (initialValue: Record<string, string>, validator: ValidatorPro
   };
 
   const handleBlur = (event: React.FocusEvent<HTMLInputElement, Element>, name: string) => {
-    const validationResult = validator.onBlur(event.target.value);
+    const validationResult = validator.validateFieldRules(event.target.value);
     setErrorInfo(prev => ({
       ...prev,
       [name]: validationResult,

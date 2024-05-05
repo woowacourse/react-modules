@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import useInput from './useInput';
+import useInput, { ValidationResult } from './useInput';
 
 const validateInputType = (value: string) => {
   const isNumber = !Number.isNaN(Number(value));
@@ -21,10 +21,16 @@ const validateFieldRules = (value: string) => {
   return { isValid: true, errorMessage: '' };
 };
 
-const useCVC = (initialValue: string) => {
+export interface CVCOptions {
+  customValidateInputType?: (value: string) => ValidationResult;
+  customValidateFieldRules?: (value: string) => ValidationResult;
+}
+
+const useCVC = (initialValue: string, options?: CVCOptions) => {
+  const { customValidateInputType, customValidateFieldRules } = options ?? {};
   const { value, setValue, handleChange, handleBlur, errorInfo } = useInput(initialValue, {
-    validateInputType,
-    validateFieldRules,
+    validateInputType: customValidateInputType ?? validateInputType,
+    validateFieldRules: customValidateFieldRules ?? validateFieldRules,
   });
 
   useEffect(() => {

@@ -1,4 +1,4 @@
-import useInputs from './useInputs';
+import useInputs, { ValidationResult } from './useInputs';
 import { useEffect } from 'react';
 
 const validateInputType = (value: string) => {
@@ -21,14 +21,17 @@ const validateFieldRules = (value: string) => {
   return { isValid: true, errorMessage: '' };
 };
 
-interface CardNumbersOptions {
+export interface CardNumbersOptions {
   isAutoFocus?: boolean;
+  customValidateInputType?: (value: string) => ValidationResult;
+  customValidateFieldRules?: (value: string) => ValidationResult;
 }
 
 const useCardNumbers = (initialValue: Record<string, string>, options?: CardNumbersOptions) => {
+  const { isAutoFocus, customValidateInputType, customValidateFieldRules } = options ?? {};
   const { value, setValue, handleBlur, errorInfo, setErrorInfo } = useInputs(initialValue, {
-    validateInputType,
-    validateFieldRules,
+    validateInputType: customValidateInputType ?? validateInputType,
+    validateFieldRules: customValidateFieldRules ?? validateFieldRules,
   });
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>, name: string) => {
@@ -51,7 +54,7 @@ const useCardNumbers = (initialValue: Record<string, string>, options?: CardNumb
         [name]: validationResult,
       }));
       if (!validationResult.isValid) return;
-      if (options?.isAutoFocus) {
+      if (isAutoFocus) {
         const target = event.target.nextElementSibling;
         if (target instanceof HTMLInputElement) target.focus();
       }
