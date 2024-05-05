@@ -1,7 +1,7 @@
 import styles from './ModalCloseIcon.module.css';
 import CloseIcon from '../assets/closeButton.svg';
 
-interface ModalCloseIconProps extends React.HTMLAttributes<HTMLImageElement> {
+export interface ModalCloseIconProps extends React.HTMLAttributes<HTMLImageElement> {
   onClose: () => void;
   showCloseIcon?: boolean;
   customCloseIcon?: string;

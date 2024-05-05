@@ -1,6 +1,6 @@
 import styles from './ModalTitle.module.css';
 
-interface ModalTitleProps extends React.HTMLAttributes<HTMLSpanElement> {
+export interface ModalTitleProps extends React.HTMLAttributes<HTMLSpanElement> {
   title?: string;
 }
 

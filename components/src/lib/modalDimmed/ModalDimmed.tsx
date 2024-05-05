@@ -1,7 +1,7 @@
 import { createPortal } from 'react-dom';
 import styles from './ModalDimmed.module.css';
 
-interface ModalDimmedProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface ModalDimmedProps extends React.HTMLAttributes<HTMLDivElement> {
   onDimmedClick?: () => void;
 }
 

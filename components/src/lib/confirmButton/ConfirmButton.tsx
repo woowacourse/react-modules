@@ -1,6 +1,6 @@
 import styles from './ConfirmButton.module.css';
 
-interface CloseButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+export interface CloseButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   label: string;
   onConfirm: () => void;
 }

@@ -9,7 +9,7 @@ const FOOTER_POSITION_TYPE: Record<ContainerPosition, string> = {
 
 type ContainerPosition = 'row' | 'row-reverse' | 'column' | 'column-reverse';
 
-interface ContainerProps extends React.HTMLAttributes<HTMLElement> {
+export interface ContainerProps extends React.HTMLAttributes<HTMLElement> {
   position?: ContainerPosition;
 }
 

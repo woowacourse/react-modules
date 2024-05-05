@@ -1,6 +1,6 @@
 import styles from './ModalHeader.module.css';
 
-interface ModalHeaderProps extends React.HTMLAttributes<HTMLElement> {}
+export interface ModalHeaderProps extends React.HTMLAttributes<HTMLElement> {}
 
 const ModalHeader = ({ style, children, ...rest }: React.PropsWithChildren<ModalHeaderProps>) => {
   return (
