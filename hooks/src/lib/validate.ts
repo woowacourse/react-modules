@@ -7,7 +7,7 @@ import {
   PASSWORD,
   UPPERCASE_AND_SPACE_ONLY,
   YEAR_RANGE,
-} from "./constants/system";
+} from "./constants/cardInformation";
 
 function checkMaxLength(value: string, maxLength: number) {
   if (value.length !== maxLength) {

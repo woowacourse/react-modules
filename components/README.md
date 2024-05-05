@@ -26,7 +26,7 @@ function App() {
     <div>
       <Modal
         title="Modal Title"
-        isXButton={true}
+        hasXButton={true}
         handleClose={handleClose}
         handleConfirm={handleConfirm}
         position="center" // "center" 또는 "bottom"
@@ -47,7 +47,7 @@ export default App;
 `Modal` 컴포넌트는 다음과 같은 props를 받을 수 있습니다.
 
 - `title` (string): 모달의 제목을 설정합니다.
-- `isXButton` (boolean): 우측 상단에 X 버튼의 표시 여부를 결정합니다. 기본값은 `true`입니다.
+- `hasXButton` (boolean): 우측 상단에 X 버튼의 표시 여부를 결정합니다. 기본값은 `true`입니다.
 - `handleClose` (function): 모달을 닫을 때 실행할 함수입니다.
 - `handleConfirm` (function): 확인 버튼을 클릭할 때 실행할 함수입니다.
 - `position` (string): 모달의 위치를 설정합니다. "center" 또는 "bottom" 중 선택할 수 있습니다. 기본값은 "center"입니다.

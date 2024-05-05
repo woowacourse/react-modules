@@ -9,7 +9,7 @@ const meta = {
   tags: ["autodocs"],
 
   argTypes: {
-    isXButton: { control: "boolean" },
+    hasXButton: { control: "boolean" },
   },
   decorators: [(Story) => <div style={{ padding: "3rem" }}>{Story()}</div>],
 } satisfies Meta<typeof Modal>;
@@ -24,7 +24,7 @@ export const Default: Story = {
     title: "제목입니다.",
     buttonLayout: "row",
     children: <ContentDefaultTemplate>default 문서</ContentDefaultTemplate>,
-    isXButton: true,
+    hasXButton: true,
     confirmButtonContent: "확인",
     handleConfirm: () => {
       alert("열림");
@@ -45,7 +45,7 @@ export const BottomModal: Story = {
 export const NoneXButton: Story = {
   args: {
     ...Default.args,
-    isXButton: false,
+    hasXButton: false,
   },
 };
 
