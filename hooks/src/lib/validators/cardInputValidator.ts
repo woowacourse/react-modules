@@ -36,7 +36,7 @@ const cardInputValidator = {
   validateYear(year: string) {
     if (year.length !== INPUT_RULES.validExpiryDateLength) return false;
 
-    return this.validatePastYear(year);
+    return !this.validatePastYear(year);
   },
 
   validateFutureDate(month: number, year: number) {
@@ -63,5 +63,3 @@ const cardInputValidator = {
 };
 
 export default cardInputValidator;
-
-//
