@@ -1,17 +1,21 @@
 import REGEXPS from '../constants/regExps';
 import { Validator } from '../type';
 import getErrorMessage from '../utils/getErrorMessage';
+import getOnChange from '../utils/getOnChange';
 import { useState } from 'react';
 
 export default function usePasswordPrefix() {
   const [passwordPrefix, setPasswordPrefix] = useState('');
+
+  const onChange = getOnChange(setPasswordPrefix);
+
   const errorMessage = getErrorMessage(
     passwordPrefix,
     passwordPrefixValidators
   );
 
   const isValid = errorMessage === null;
-  return { passwordPrefix, setPasswordPrefix, errorMessage, isValid };
+  return { passwordPrefix, setPasswordPrefix, onChange, errorMessage, isValid };
 }
 
 const PASSWORD_PREFIX_LENGTH = 2;

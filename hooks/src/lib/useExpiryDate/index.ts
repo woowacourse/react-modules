@@ -3,11 +3,14 @@ import { useMemo, useState } from 'react';
 import REGEXPS from '../constants/regExps';
 import { Validator } from '../type';
 import getErrorMessage from '../utils/getErrorMessage';
+import getOnChange from '../utils/getOnChange';
 
 export default function useExpiryDate() {
   const [expiryMonth, setExpiryMonth] = useState('');
+  const onChangeExpiryMonth = getOnChange(setExpiryMonth);
 
   const [expiryYear, setExpiryYear] = useState('');
+  const onChangeExpiryYear = getOnChange(setExpiryYear);
 
   const expiryMonthErrorMessage = useMemo(() => {
     return getErrorMessage(expiryMonth, expiryMonthValidators);
@@ -30,6 +33,8 @@ export default function useExpiryDate() {
     expiryYear,
     setExpiryMonth,
     setExpiryYear,
+    onChangeExpiryMonth,
+    onChangeExpiryYear,
     expiryMonthErrorMessage,
     expiryYearErrorMessage,
     expiryDateErrorMessage,

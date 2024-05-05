@@ -1,15 +1,18 @@
 import { Validator } from '../type';
 import getErrorMessage from '../utils/getErrorMessage';
+import getOnChange from '../utils/getOnChange';
 import { useState } from 'react';
 
 export default function useCardIssuer() {
   const [cardIssuer, setCardIssuer] = useState('');
 
+  const onChange = getOnChange(setCardIssuer);
+
   const errorMessage = getErrorMessage(cardIssuer, cardIssuerValidators);
 
   const isValid = errorMessage === null;
 
-  return { cardIssuer, setCardIssuer, errorMessage, isValid };
+  return { cardIssuer, setCardIssuer, onChange, errorMessage, isValid };
 }
 
 export const CARD_ISSUERS = [

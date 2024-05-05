@@ -1,16 +1,19 @@
 import REGEXPS from '../constants/regExps';
 import { Validator } from '../type';
 import getErrorMessage from '../utils/getErrorMessage';
+import getOnChange from '../utils/getOnChange';
 import { useState } from 'react';
 
 export default function useCVC() {
   const [cvc, setCVC] = useState('');
 
+  const onChange = getOnChange(setCVC);
+
   const errorMessage = getErrorMessage(cvc, cvcValidators);
 
   const isValid = errorMessage === null;
 
-  return { cvc, setCVC, errorMessage, isValid };
+  return { cvc, setCVC, onChange, errorMessage, isValid };
 }
 
 const CVC_LENGTH = 3;

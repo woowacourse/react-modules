@@ -3,6 +3,7 @@ import { useMemo, useState } from 'react';
 import REGEXPS from '../constants/regExps';
 import { Validator } from '../type';
 import getErrorMessage from '../utils/getErrorMessage';
+import getOnChange from '../utils/getOnChange';
 
 export default function useCardNumber() {
   const [firstCardNumberPart, setFirstCardNumberPart] = useState('');
@@ -22,6 +23,8 @@ export default function useCardNumber() {
     setThirdCardNumberPart,
     setFourthCardNumberPart,
   ];
+
+  const onChangeCardNumberPart = setCardNumberParts.map(getOnChange);
 
   const firstErrorMessage = useMemo(() => {
     return getErrorMessage(firstCardNumberPart, cardNumberPartValidators);
@@ -57,6 +60,7 @@ export default function useCardNumber() {
   return {
     cardNumberParts,
     setCardNumberParts,
+    onChangeCardNumberPart,
     cardPartErrorMessages,
     isValidCardNumber,
     isValidCardNumberParts,

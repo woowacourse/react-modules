@@ -1,10 +1,13 @@
 import REGEXPS from '../constants/regExps';
 import { Validator } from '../type';
 import getErrorMessage from '../utils/getErrorMessage';
+import getOnChange from '../utils/getOnChange';
 import { useState } from 'react';
 
 export default function useCardholderName() {
   const [cardholderName, setCardholderName] = useState('');
+
+  const onChange = getOnChange(setCardholderName);
 
   const errorMessage = getErrorMessage(
     cardholderName,
@@ -13,7 +16,7 @@ export default function useCardholderName() {
 
   const isValid = errorMessage === null;
 
-  return { cardholderName, setCardholderName, isValid, errorMessage };
+  return { cardholderName, setCardholderName, onChange, isValid, errorMessage };
 }
 
 export const CARD_HOLDER_NAME_ERROR_MESSAGE = {
