@@ -1,7 +1,7 @@
 import { useState } from "react";
 
-import { INPUT_REGEX } from "../constants/regex";
-import { ERROR_MESSAGES } from "../constants/errorMessage";
+import { INPUT_REGEX } from "../../constants/regex";
+import { ERROR_MESSAGES } from "../../constants/errorMessage";
 
 function useExpiryDate() {
   const [period, setPeriod] = useState({ month: "", year: "" });

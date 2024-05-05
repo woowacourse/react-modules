@@ -1,6 +1,6 @@
 import { renderHook, act } from "@testing-library/react";
-import usePassword from "../hooks/usePassword";
-import { ERROR_MESSAGES } from "../constants/errorMessage";
+import usePassword from "./usePassword";
+import { ERROR_MESSAGES } from "../../constants/errorMessage";
 
 const INPUT_LENGTH = 2;
 

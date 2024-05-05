@@ -1,6 +1,6 @@
 import { renderHook, act } from "@testing-library/react";
-import useCVCNumber from "../hooks/useCVCNumber";
-import { ERROR_MESSAGES } from "../constants/errorMessage";
+import useCVCNumber from "./useCVCNumber";
+import { ERROR_MESSAGES } from "../../constants/errorMessage";
 
 const INPUT_LENGTH = 3;
 

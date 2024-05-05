@@ -1,7 +1,7 @@
 import { useState } from "react";
 
-import { INPUT_REGEX } from "../constants/regex";
-import { ERROR_MESSAGES } from "../constants/errorMessage";
+import { INPUT_REGEX } from "../../constants/regex";
+import { ERROR_MESSAGES } from "../../constants/errorMessage";
 
 function useCardNumbers(maxLength: number, inputCount = 1) {
   const [cardNumbers, setCardNumbers] = useState(Array(inputCount).fill(""));

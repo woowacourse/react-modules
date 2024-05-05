@@ -7,3 +7,6 @@ export const ERROR_MESSAGES = {
   maxLengthNumber: (maxLength: number) =>
     `${maxLength}자리 숫자로 입력해 주세요.`,
 };
+
+export const MAX_LENGTH_ERROR_MESSAGE = (maxLength: number) =>
+  `${maxLength}자리 숫자로 입력해 주세요.`;

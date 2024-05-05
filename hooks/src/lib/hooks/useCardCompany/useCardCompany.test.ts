@@ -1,7 +1,7 @@
 import { renderHook } from "@testing-library/react";
-import useCardCompany from "../hooks/useCardCompany";
+import useCardCompany from "./useCardCompany";
 import { act } from "react";
-import { ERROR_MESSAGES } from "../constants/errorMessage";
+import { ERROR_MESSAGES } from "../../constants/errorMessage";
 
 describe("useCardCompany 테스트", () => {
   test("초기 cardCompany 상태는 빈 문자열이어야 한다.", () => {

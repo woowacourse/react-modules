@@ -1,6 +1,6 @@
 import { renderHook, act } from "@testing-library/react";
-import useExpiryDate from "../hooks/useExpiryDate";
-import { ERROR_MESSAGES } from "../constants/errorMessage";
+import useExpiryDate from "./useExpiryDate";
+import { ERROR_MESSAGES } from "../../constants/errorMessage";
 
 describe("useExpiryDate 테스트", () => {
   test("초기 period 상태는 month와 year이 빈 문자열이어야 한다.", () => {
@@ -13,9 +13,7 @@ describe("useExpiryDate 테스트", () => {
     expect(result.current.isPeriodError.expired).toBeFalsy();
   });
 
-  test.each<
-    [string, "month" | "year"]
-  >([
+  test.each<[string, "month" | "year"]>([
     ["01", "month"],
     ["25", "year"],
   ])("%s는 유효한 %s이어야 한다.", (input: string, type: "month" | "year") => {
@@ -24,7 +22,7 @@ describe("useExpiryDate 테스트", () => {
     act(() => {
       result.current.handlePeriodChange(type, input);
     });
-    
+
     expect(result.current.isPeriodError[type]).toBeFalsy();
   });
 });
