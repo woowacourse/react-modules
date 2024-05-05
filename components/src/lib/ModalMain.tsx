@@ -12,11 +12,13 @@ type ModalPosition = 'center' | 'bottom';
 interface ModalMainProps {
   isOpen: boolean;
   position?: ModalPosition;
+  style?: React.CSSProperties;
 }
 
 const ModalMain = ({
   isOpen,
   position = 'center',
+  style,
   children,
 }: PropsWithChildren<ModalMainProps>) => {
   if (!isOpen) {
@@ -25,7 +27,12 @@ const ModalMain = ({
 
   return (
     <>
-      {createPortal(<section className={MODAL_TYPE[position]}>{children}</section>, document.body)}
+      {createPortal(
+        <section className={MODAL_TYPE[position]} style={style}>
+          {children}
+        </section>,
+        document.body,
+      )}
     </>
   );
 };

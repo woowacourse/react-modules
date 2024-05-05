@@ -5,20 +5,22 @@ interface ModalHeaderProps {
   handleClose: () => void;
   showCloseIcon?: boolean;
   customCloseIcon?: string;
+  style?: React.CSSProperties;
 }
 
 const ModalHeader = ({
-  children,
   handleClose,
   showCloseIcon = true,
   customCloseIcon,
+  style,
+  children,
 }: React.PropsWithChildren<ModalHeaderProps>) => {
   const onErrorIcon = (event: React.SyntheticEvent<HTMLImageElement, Event>) => {
     event.currentTarget.src = CloseIcon;
   };
 
   return (
-    <header className={styles.modalHeader}>
+    <header className={styles.modalHeader} style={style}>
       <span className={styles.title}>{children}</span>
       {showCloseIcon && (
         <img
