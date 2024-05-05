@@ -14,7 +14,7 @@ const inputValidations: ValidationType<string>[] = [
 const preventInputValidations: ValidationType<string>[] = [
   {
     validate: Validation.isNumericPattern,
-    message: '숫자만 입력 가능합니다.',
+    message: '숫자만 입력할 수 있습니다.',
   },
 ];
 
