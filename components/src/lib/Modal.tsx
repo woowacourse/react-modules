@@ -1,8 +1,9 @@
-import { useEffect, useRef } from 'react';
+import { useRef } from 'react';
 import { createPortal } from 'react-dom';
 import styles from './Modal.module.css';
 import ModalHeader from './components/header/ModalHeader';
 import ModalFooter from './components/footer/ModalFooter';
+import useModalCloseClickDimmer from './hooks/useModalCloseClickDimmer';
 
 type ModalType = 'dialog' | 'drawer';
 type ButtonPosition = 'row' | 'row-reverse' | 'column' | 'column-reverse';
@@ -51,22 +52,7 @@ const Modal = ({
   const modalRef = useRef<HTMLDivElement>(null);
 
   const isButton = closeButton || confirmButton;
-
-  useEffect(() => {
-    const clickOutSide = (event: MouseEvent) => {
-      if (
-        modalRef.current &&
-        !modalRef.current.contains(event.target as Node) &&
-        closeOnOutsideClick
-      ) {
-        onClose();
-      }
-    };
-    document.addEventListener('mousedown', clickOutSide);
-    return () => {
-      document.removeEventListener('mousedown', clickOutSide);
-    };
-  }, [modalRef, onClose, closeOnOutsideClick]);
+  useModalCloseClickDimmer(modalRef, onClose, closeOnOutsideClick);
 
   const modalHeaderOptions = {
     customCloseIcon,
