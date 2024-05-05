@@ -89,12 +89,12 @@ function App() {
 
 ### API
 
-| Property Name             | Type     | Description                                                                                                                                                                 |
-| ------------------------- | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| cardHolder                | string   | The current value of the card holder's name.                                                                                                                                |
-| cardHolderError           | boolean  | Indicates whether there is an error with the card holder's name. Becomes true if there's an error.                                                                          |
-| getCardHolderErrorMessage | function | Returns the error message for the card holder's name if there's an error, otherwise undefined. The error message is sourced from ERROR_MESSAGES.holder.                     |
-| handleCardHolderChange    | function | A function to update the card holder's name based on user input. It checks the validity against a regex pattern (INPUT_REGEX.cardHolder) and updates the state accordingly. |
+| Property Name             | Type     | Description                                                                                                                                                                        |
+| ------------------------- | -------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| cardHolder                | string   | The current value of the card holder's name.                                                                                                                                       |
+| cardHolderError           | boolean  | Indicates whether there is an error with the card holder's name. Becomes true if there's an error.                                                                                 |
+| getCardHolderErrorMessage | function | Returns the error message for the card holder's name if there's an error, otherwise undefined. The error message is sourced from ERROR_MESSAGES.holder.                            |
+| handleCardHolderChange    | function | A function to update the card holder's name based on user input. It checks the validity against a regex pattern (INPUT_REGEX_PARAMS.cardHolder) and updates the state accordingly. |
 
 ### useCardNumbers hook
 

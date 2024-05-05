@@ -1,7 +1,7 @@
 import { useState } from "react";
 
-import { INPUT_REGEX } from "../../constants/regex";
-import { ERROR_MESSAGES, MAX_LENGTH_ERROR_MESSAGE } from "../../constants/errorMessage";
+import { INPUT_REGEX_PARAMS } from "../../constants/regex";
+import { MAX_LENGTH_ERROR_MESSAGE } from "../../constants/errorMessage";
 
 function useCardNumbers(maxLength: number, inputCount = 1) {
   const [cardNumbers, setCardNumbers] = useState(Array(inputCount).fill(""));
@@ -10,7 +10,7 @@ function useCardNumbers(maxLength: number, inputCount = 1) {
   );
 
   const handleCardNumbersChange = (value: string, inputIndex: number) => {
-    const isValidNumber = INPUT_REGEX.cardNumber(maxLength).test(value);
+    const isValidNumber = INPUT_REGEX_PARAMS.cardNumber(maxLength).test(value);
 
     const updatedErrors = [...cardNumberErrors];
     updatedErrors[inputIndex] = !isValidNumber;

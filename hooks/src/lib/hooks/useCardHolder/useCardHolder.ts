@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import { INPUT_REGEX } from "../../constants/regex";
+import { INPUT_REGEX_PARAMS } from "../../constants/regex";
 import { ERROR_MESSAGES } from "../../constants/errorMessage";
 
 function useCardHolder(maxLength: number) {
@@ -8,7 +8,7 @@ function useCardHolder(maxLength: number) {
   const [cardHolderError, setCardHolderError] = useState(false);
 
   const handleCardHolderChange = (value: string) => {
-    const isValidHolder = INPUT_REGEX.cardHolder(maxLength).test(value);
+    const isValidHolder = INPUT_REGEX_PARAMS.cardHolder(maxLength).test(value);
     setCardHolderError(!isValidHolder);
     setCardHolder(value);
   };

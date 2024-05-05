@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import { INPUT_REGEX } from "../../constants/regex";
+import { INPUT_REGEX_PARAMS } from "../../constants/regex";
 import { MAX_LENGTH_ERROR_MESSAGE } from "../../constants/errorMessage";
 
 function useCVCNumber(maxLength: number) {
@@ -8,16 +8,14 @@ function useCVCNumber(maxLength: number) {
   const [CVCNumberError, setCVCNumberError] = useState(false);
 
   const handleCVCNumberChange = (value: string) => {
-    const isValidCVC = INPUT_REGEX.CVCNumber(maxLength).test(value);
+    const isValidCVC = INPUT_REGEX_PARAMS.CVCNumber(maxLength).test(value);
     setCVCNumberError(!isValidCVC);
 
     setCVCNumber(value);
   };
 
   const getCVCNumberErrorMessage = () => {
-    return CVCNumberError
-      ? MAX_LENGTH_ERROR_MESSAGE(maxLength)
-      : undefined;
+    return CVCNumberError ? MAX_LENGTH_ERROR_MESSAGE(maxLength) : undefined;
   };
 
   return {
