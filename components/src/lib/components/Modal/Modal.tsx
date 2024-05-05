@@ -1,14 +1,16 @@
 /** @jsxImportSource @emotion/react */
 import React, { PropsWithChildren, useEffect } from "react";
 import { buttonsStyle, modalContentStyle, modalStyle } from "./Modal.style";
-import useModalHook from "../../../hooks/useModal";
 
 import ModalHeader from "../ModalHeader/ModalHeader";
 import CloseButton from "../CloseButton/CloseButton";
 import Title from "../Title/Title";
 import LongButton from "../LongButton/LongButton";
+
 import ThemeProvider from "../../contextProvider/ThemeProvider";
+
 import useThemeContext from "../../../hooks/useThemeContext";
+import useModalContext from "../../../hooks/useModalContext";
 
 interface ModalProps extends PropsWithChildren {
   position?: "center" | "bottom";
@@ -21,10 +23,7 @@ interface ModalProps extends PropsWithChildren {
   onClose?: () => void;
 }
 
-interface DialogProps extends Omit<ModalProps, "theme"> {
-  dialogRef: React.LegacyRef<HTMLDialogElement>;
-  action: ModalActionType;
-}
+interface DialogProps extends Omit<ModalProps, "theme"> {}
 
 const Dialog: React.FC<DialogProps> = ({
   position = "center",
@@ -32,13 +31,24 @@ const Dialog: React.FC<DialogProps> = ({
   width = 242,
   hasConfirmButton = true,
   closeButtonPosition = "top",
-  dialogRef,
-  action,
   onConfirm,
   onClose,
   children,
 }) => {
   const theme = useThemeContext();
+  const { dialogRef, action } = useModalContext();
+
+  useEffect(() => {
+    const clickBackdrop = (e: MouseEvent) => {
+      if (e.target === e.currentTarget) {
+        action.handleClose();
+      }
+    };
+
+    if (dialogRef.current) {
+      dialogRef.current.onclick = clickBackdrop;
+    }
+  }, [dialogRef, action]);
 
   return (
     <dialog ref={dialogRef} css={modalStyle(position, width, theme)}>
@@ -78,30 +88,17 @@ const Dialog: React.FC<DialogProps> = ({
   );
 };
 
-const Modal = (props: ModalProps) => {
-  const { ref, action } = useModalHook();
-
-  useEffect(() => {
-    action.handleOpen();
-  }, [action]);
-
-  useEffect(() => {
-    const clickBackdrop = (e: MouseEvent) => {
-      if (e.target === e.currentTarget) {
-        action.handleClose();
-      }
-    };
-
-    if (ref.current) {
-      ref.current.onclick = clickBackdrop;
-    }
-  }, [ref, action]);
-
+const Modal: React.FC<ModalProps> = (props) => {
   return (
     <ThemeProvider value={props.theme}>
-      <Dialog {...props} dialogRef={ref} action={action}></Dialog>
+      <Dialog {...props}></Dialog>
     </ThemeProvider>
   );
+};
+
+export const useModalAction = () => {
+  const { action } = useModalContext();
+  return action;
 };
 
 export default Modal;

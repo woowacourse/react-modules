@@ -14,7 +14,7 @@
 - [x] 모달의 width값 사용자에게 받기
 - [x] color theme값 사용자에게 받기
 - [ ] 다국어 지원을 생각한 메세지 상수화
-- [ ] Trigger 컴포넌트를 하나 만들어서 dialog를 open하는 api를 제공하는 방식
+- [x] Trigger 컴포넌트를 하나 만들어서 dialog를 open하는 api를 제공하는 방식
 
 - [x] 스토리 북
 
