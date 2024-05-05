@@ -1,14 +1,41 @@
 import './App.css';
+import Button from './lib/Button/Button';
 
 import Modal from './lib/Modal/Modal';
-import React from 'react';
-import { Reset } from 'styled-reset';
+import React, { useState } from 'react';
 
-function App() {
+
+const App = () => {
+  const [modalOpened, setModalOpened] = useState(false)
+
+  const handleModalOpen = () => {
+    setModalOpened(true)
+  }
+
+  const handleModalClose = () => {
+    setModalOpened(false)
+  }
   return (
     <>
-      <Reset />
-      <Modal isOpened={true} closeModal={() => {}} />
+      <Button
+        text="open modal"
+        onClick={handleModalOpen}
+        size='large'
+        width='full'
+        buttonStyle='primary'
+        primaryColor='#1C77C1' />
+      <Modal
+        isOpened={modalOpened}
+        closeModal={handleModalClose}
+        title='Todal Modal'
+        description='This is for woowacourse mission'
+        children={<div style={{ backgroundColor: '#dddddd', padding: '8px', height: '1000px' }}> Children Area </div>}
+        modalPosition='bottom'
+        primaryButton={{ text: 'DO SOMETHING!', onClick: () => { }, size: 'medium', width: 'full' }}
+        secondaryButton={{ text: 'Cancel', onClick: handleModalClose, size: 'medium', width: 'fit', buttonStyle: 'text' }}
+        buttonPosition='row'
+        showCloseButton={true}
+      />
     </>
   );
 }
