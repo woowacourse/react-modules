@@ -1,10 +1,15 @@
 import { createPortal } from 'react-dom';
 import styles from './ModalDimmed.module.css';
 
-interface ModalDimmedProps extends React.HTMLAttributes<HTMLDivElement> {}
+interface ModalDimmedProps extends React.HTMLAttributes<HTMLDivElement> {
+  onDimmedClick?: () => void;
+}
 
-const ModalDimmed = ({ style, ...rest }: ModalDimmedProps) => {
-  return createPortal(<div className={styles.dimmed} style={style} {...rest} />, document.body);
+const ModalDimmed = ({ onDimmedClick, style, ...rest }: ModalDimmedProps) => {
+  return createPortal(
+    <div className={styles.dimmed} style={style} onClick={onDimmedClick} {...rest} />,
+    document.body,
+  );
 };
 
 export default ModalDimmed;
