@@ -12,7 +12,7 @@
     background-color: var(--dimmed-color);
 }
 
-.modal {
+.modalWrapper {
     position: fixed;
     top: 50%;
     left: 50%;
@@ -20,17 +20,94 @@
     width: 80vw;
     max-width: 700px;
     margin: auto;
-    padding: 24px 32px;
-    background-color: white;
-    border-radius: 8px;
 }
 
-.modalBottom {
+.modalBottomWrapper {
     position: fixed;
     bottom: 0;
     width: 100%;
     margin: auto;
+}
+
+.modal {
     padding: 24px 32px;
     background-color: white;
     border-radius: 8px;
+
+    animation-duration: 0.3s;
+    animation-fill-mode: forwards;
+
+}
+
+.modalBottom {
+    padding: 24px 32px;
+    background-color: white;
+    border-radius: 8px;
+
+    animation-duration: 0.3s;
+    animation-fill-mode: forwards;
+}
+
+.modalEnter {
+    animation-name: modalFadeIn;
+}
+
+.modalExit {
+    animation-name: modalFadeOut;
+}
+
+.modalBottomEnter {
+    animation-name: modalBottomFadeIn;
+}
+
+.modalBottomExit {
+    animation-name: modalBottomFadeOut;
+}
+
+@keyframes modalFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes modalFadeOut {
+    from {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    to {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+}
+
+@keyframes modalBottomFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(200px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes modalBottomFadeOut {
+    from {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    to {
+        opacity: 0;
+        transform: translateY(200px);
+    }
 }

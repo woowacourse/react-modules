@@ -8,7 +8,7 @@ function App() {
   return (
     <>
       <button onClick={toggleIsOpen}>모달열기</button>
-      <Modal isOpen={isOpen}>
+      <Modal isOpen={isOpen} position="bottom" isAnimation duration={300}>
         <Modal.Dimmed onDimmedClick={() => toggleIsOpen()} />
         <Modal.Header>
           <Modal.Title title="제목" />
