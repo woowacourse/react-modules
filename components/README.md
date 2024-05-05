@@ -37,6 +37,7 @@ const App = () => {
       <Modal
         isOpened={modalOpened}
         onClose={handleModalClose}
+        zIndex={300}
         title="Todal Modal"
         description="This is for woowacourse mission"
         modalPosition="bottom"
@@ -97,7 +98,7 @@ const App = () => {
 | props                        | type                                        | description                                                             |
 | ---------------------------- | ------------------------------------------- | ----------------------------------------------------------------------- |
 | `isOpened`                   | boolean                                     | Determines whether the modal is displayed.                              |
-| `closeModal`                 | Function                                    | The function called when the modal is closed.                           |
+| `onClose`                    | Function                                    | The function called when the modal is closed.                           |
 | `title` (optional)           | string                                      | The text displayed at the top of the modal.                             |
 | `description` (optional)     | string                                      | The text displayed in the middle of the modal.                          |
 | `children` (optional)        | JSX.Element                                 | The element displayed in the middle of the modal.                       |
