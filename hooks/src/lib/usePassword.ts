@@ -7,7 +7,7 @@ import { VALID_LENGTH } from "@/constants/system";
 
 const passwordValidates = (value: string) => {
   validateNumber(value);
-  validateLength(value, 2);
+  validateLength(value, VALID_LENGTH.PASSWORD);
 };
 
 const usePassword = (initialValue: string) => {

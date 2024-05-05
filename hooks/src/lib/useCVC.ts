@@ -7,7 +7,7 @@ import { VALID_LENGTH } from "@/constants/system";
 
 const cvcValidates = (value: string) => {
   validateNumber(value);
-  validateLength(value, 3);
+  validateLength(value, VALID_LENGTH.CVC);
 };
 
 const useCVC = (initialValue: string) => {
