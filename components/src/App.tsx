@@ -1,7 +1,8 @@
 import React from 'react';
 import './reset.css';
-import { Modal, useModal } from 'woowacourse-react-modal-component';
 
+import Modal from './lib/Modal';
+import useModal from './lib/hooks/useModal';
 import CardCompanySelector from './components/CardCompanySelector';
 
 function App() {
@@ -10,6 +11,7 @@ function App() {
   return (
     <>
       <h1>Component Modules</h1>
+      <button onClick={() => toggleModal()}>모달 버튼</button>
       {isOpen && (
         <Modal
           toggleModal={toggleModal}
