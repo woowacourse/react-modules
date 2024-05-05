@@ -77,7 +77,7 @@ function App() {
     cardHolderError,
     getCardHolderErrorMessage,
     handleCardHolderChange,
-  } = useCardHolder(3);
+  } = useCardHolder();
 
   return (
     <>
