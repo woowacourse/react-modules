@@ -13,61 +13,42 @@ describe("useExpiryDate 테스트", () => {
     expect(result.current.isPeriodError.expired).toBeFalsy();
   });
 
-  test.each<[string, "month" | "year"]>([
-    ["01", "month"],
-    ["25", "year"],
-  ])("%s는 유효한 %s이어야 한다.", (input: string, type: "month" | "year") => {
-    const { result } = renderHook(() => useExpiryDate());
-
-    act(() => {
-      result.current.handlePeriodChange(type, input);
-    });
-
-    expect(result.current.isPeriodError[type]).toBeFalsy();
-  });
-});
-
-describe("useExpiryDate 예외 테스트", () => {
-  test("유효하지 않은 월을 입력했을 경우 에러 상태가 true여야 한다.", () => {
-    const { result } = renderHook(() => useExpiryDate());
-    act(() => {
-      result.current.handlePeriodChange("month", "13");
-    });
-    expect(result.current.isPeriodError.month).toBeTruthy();
-  });
-
-  test.each([["100"], ["-1"]])(
-    "%s가 유효하지 않은 년도일 경우 에러 상태가 true여야 한다.",
-    (input) => {
+  test.each<["month" | "year", string, string]>([
+    ["month", "13", ERROR_MESSAGES.month],
+    ["month", "0", ERROR_MESSAGES.month],
+    ["year", "2024", ERROR_MESSAGES.year],
+  ])(
+    `입력한 %s (%s)가 유효한 입력이 아닐 경우, 에러 메시지("%s")가 표시된다.`,
+    (type: "month" | "year", input: string, message: string) => {
       const { result } = renderHook(() => useExpiryDate());
+
       act(() => {
-        result.current.handlePeriodChange("year", input);
+        result.current.handlePeriodChange(type, input);
       });
-      expect(result.current.isPeriodError.year).toBeTruthy();
+
+      expect(result.current.getPeriodErrorMessage()).toBe(message);
     }
   );
 
-  test("만료된 날짜를 입력했을 경우 에러 상태가 true여야 한다.", () => {
-    const { result } = renderHook(() => useExpiryDate());
+  test.each([
+    ["12", "23"],
+    ["04", "24"],
+  ])(
+    `만료된 기간(%s월 %s년)을 입력한 경우, 에러 메시지("${ERROR_MESSAGES.expired}")가 표시된다.`,
+    (month, year) => {
+      const { result } = renderHook(() => useExpiryDate());
 
-    act(() => {
-      result.current.handlePeriodChange("month", "12");
-    });
+      act(() => {
+        result.current.handlePeriodChange("month", month);
+      });
 
-    act(() => {
-      result.current.handlePeriodChange("year", "22");
-    });
+      act(() => {
+        result.current.handlePeriodChange("year", year);
+      });
 
-    expect(result.current.isPeriodError.expired).toBeTruthy();
-  });
-
-  test("유효하지 않은 값을 입력한 경우 에러 메시지가 적절히 반환되어야 한다.", () => {
-    const { result } = renderHook(() => useExpiryDate());
-
-    act(() => {
-      result.current.handlePeriodChange("month", "13");
-    });
-
-    expect(result.current.getPeriodErrorMessage()).toBe(ERROR_MESSAGES.month);
-  });
+      expect(result.current.getPeriodErrorMessage()).toBe(
+        ERROR_MESSAGES.expired
+      );
+    }
+  );
 });
