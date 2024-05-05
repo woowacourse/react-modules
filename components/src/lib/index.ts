@@ -1,1 +1,3 @@
-export { default as Modal } from './Modal';
+import ModalMain from './ModalMain';
+
+export const Modal = Object.assign(ModalMain, {});

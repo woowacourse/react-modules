@@ -12,7 +12,6 @@
     background-color: var(--dimmed-color);
 }
 
-
 .modal {
     display: flex;
     flex-direction: column;
@@ -40,29 +39,6 @@
     padding: 24px 32px;
     background-color: white;
     border-radius: 8px;
-}
-
-.modalHeader {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-}
-
-.closeButton {
-    width: 24px;
-    height: 24px;
-    object-fit: contain;
-    cursor: pointer;
-}
-
-.title {
-    color: black;
-    font-family: Noto Sans KR;
-    font-size: 18px;
-    font-weight: 700;
-    line-height: 26.06px;
-    text-align: left;
 }
 
 .buttonRow {
