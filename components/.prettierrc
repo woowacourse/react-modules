@@ -8,5 +8,5 @@
 	"bracketSpacing": true,
 	"arrowParens": "always",
 	"endOfLine": "auto",
-	"prefer-const": true
+	"prefer-const": true,
 }
