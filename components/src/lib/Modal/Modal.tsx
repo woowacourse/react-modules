@@ -1,7 +1,11 @@
-import { useEffect } from 'react';
+import { useRef } from 'react';
+
+import useEscapeKey from '../hooks/useEscapeKey';
+import usePreventScroll from '../hooks/usePreventScroll';
+import useFocusTrap from '../hooks/useFocusTrap';
+
 import type { StrictPropsWithChildren } from '../types/common';
 import type { ModalProps, ModalFooterProps } from './Modal.type';
-import { preventScroll, allowScroll } from '../utils/scroll';
 import styles from './Modal.module.css';
 
 export const ModalHeader = ({ children }: StrictPropsWithChildren) => {
@@ -26,27 +30,16 @@ export const ModalMain = ({
   shadow = true,
   animation = true,
 }: StrictPropsWithChildren<ModalProps>) => {
-  useEffect(() => {
-    if (!isOpen) return;
+  const modalRef = useRef(null);
 
-    const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') close();
-    };
-
-    const prevScrollY = preventScroll();
-
-    document.addEventListener('keydown', handleKeyDown);
-
-    return () => {
-      allowScroll(prevScrollY);
-      document.removeEventListener('keydown', handleKeyDown);
-    };
-  }, [isOpen, close]);
+  useEscapeKey(isOpen, close);
+  usePreventScroll(isOpen);
+  useFocusTrap(isOpen, modalRef);
 
   if (!isOpen) return null;
 
   return (
-    <div className={`${styles.modalLayout} ${styles[position]} ${animation ? styles.animation : ''}`}>
+    <div ref={modalRef} className={`${styles.modalLayout} ${styles[position]} ${animation ? styles.animation : ''}`}>
       <div onClick={close} className={`${styles.modalBackdrop} ${styles[backdropType]}`} />
       <div
         className={`${styles.modalContainer} ${styles[size]} ${styles[position]} ${shadow ? styles.shadow : ''} ${animation ? styles.animation : ''}`}
