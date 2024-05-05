@@ -1,17 +1,14 @@
 import REGEXPS from '../constants/regExps';
 import { Validator } from '../type';
+import getErrorMessage from '../utils/getErrorMessage';
 import { useState } from 'react';
 
 export default function useCardholderName() {
   const [cardholderName, setCardholderName] = useState('');
 
-  const errorMessage = cardholderNameValidators.reduce(
-    (message: ErrorMessage | null, validator) => {
-      if (message !== null) return message;
-      if (validator.checkIsValid(cardholderName)) return message;
-      return validator.message;
-    },
-    null
+  const errorMessage = getErrorMessage(
+    cardholderName,
+    cardholderNameValidators
   );
 
   const isValid = errorMessage === null;

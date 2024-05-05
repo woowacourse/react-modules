@@ -1,6 +1,17 @@
 import REGEXPS from '../constants/regExps';
 import { Validator } from '../type';
+import getErrorMessage from '../utils/getErrorMessage';
 import { useState } from 'react';
+
+export default function useCVC() {
+  const [cvc, setCVC] = useState('');
+
+  const errorMessage = getErrorMessage(cvc, cvcValidators);
+
+  const isValid = errorMessage === null;
+
+  return { cvc, setCVC, errorMessage, isValid };
+}
 
 const CVC_LENGTH = 3;
 
@@ -21,20 +32,3 @@ const cvcValidators: Validator<string, ErrorMessage>[] = [
     message: CVC_ERROR_MESSAGE.notDigit,
   },
 ];
-
-export default function useCVC() {
-  const [cvc, setCVC] = useState('');
-
-  const errorMessage = cvcValidators.reduce(
-    (message: ErrorMessage | null, validator) => {
-      if (message !== null) return message;
-      if (validator.checkIsValid(cvc)) return message;
-      return validator.message;
-    },
-    null
-  );
-
-  const isValid = errorMessage === null;
-
-  return { cvc, setCVC, errorMessage, isValid };
-}

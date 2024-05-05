@@ -1,6 +1,18 @@
 import REGEXPS from '../constants/regExps';
 import { Validator } from '../type';
+import getErrorMessage from '../utils/getErrorMessage';
 import { useState } from 'react';
+
+export default function usePasswordPrefix() {
+  const [passwordPrefix, setPasswordPrefix] = useState('');
+  const errorMessage = getErrorMessage(
+    passwordPrefix,
+    passwordPrefixValidators
+  );
+
+  const isValid = errorMessage === null;
+  return { passwordPrefix, setPasswordPrefix, errorMessage, isValid };
+}
 
 const PASSWORD_PREFIX_LENGTH = 2;
 
@@ -22,18 +34,3 @@ const passwordPrefixValidators: Validator<string, ErrorMessage>[] = [
     message: PASSWORD_PREFIX_ERROR_MESSAGE.notDigit,
   },
 ];
-
-export default function usePasswordPrefix() {
-  const [passwordPrefix, setPasswordPrefix] = useState('');
-  const errorMessage = passwordPrefixValidators.reduce(
-    (message: ErrorMessage | null, validator) => {
-      if (message !== null) return message;
-      if (validator.checkIsValid(passwordPrefix)) return message;
-      return validator.message;
-    },
-    null
-  );
-
-  const isValid = errorMessage === null;
-  return { passwordPrefix, setPasswordPrefix, errorMessage, isValid };
-}

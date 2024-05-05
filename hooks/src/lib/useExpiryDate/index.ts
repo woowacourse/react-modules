@@ -2,6 +2,7 @@ import { useMemo, useState } from 'react';
 
 import REGEXPS from '../constants/regExps';
 import { Validator } from '../type';
+import getErrorMessage from '../utils/getErrorMessage';
 
 export default function useExpiryDate() {
   const [expiryMonth, setExpiryMonth] = useState('');
@@ -9,36 +10,18 @@ export default function useExpiryDate() {
   const [expiryYear, setExpiryYear] = useState('');
 
   const expiryMonthErrorMessage = useMemo(() => {
-    expiryMonthValidators.reduce(
-      (message: MonthErrorMessage | null, validator) => {
-        if (message !== null) return message;
-        if (validator.checkIsValid(expiryMonth)) return message;
-        return validator.message;
-      },
-      null
-    );
+    return getErrorMessage(expiryMonth, expiryMonthValidators);
   }, [expiryMonth]);
   const isValidExpiryMonth = expiryMonthErrorMessage === null;
 
   const expiryYearErrorMessage = useMemo(() => {
-    expiryYearValidators.reduce(
-      (message: YearErrorMessage | null, validator) => {
-        if (message !== null) return message;
-        if (validator.checkIsValid(expiryMonth)) return message;
-        return validator.message;
-      },
-      null
-    );
-  }, [expiryMonth]);
+    return getErrorMessage(expiryYear, expiryYearValidators);
+  }, [expiryYear]);
   const isValidExpiryYear = expiryYearErrorMessage === null;
 
-  const expiryDateErrorMessage = expiryDateValidators.reduce(
-    (message: DateErrorMessage | null, validator) => {
-      if (message !== null) return message;
-      if (validator.checkIsValid([expiryMonth, expiryMonth])) return message;
-      return validator.message;
-    },
-    null
+  const expiryDateErrorMessage = getErrorMessage(
+    [expiryMonth, expiryYear],
+    expiryDateValidators
   );
   const isValidExpiryDate = expiryDateErrorMessage === null;
 
@@ -82,6 +65,7 @@ type YearErrorMessage =
 
 type DateErrorMessage =
   (typeof EXPIRY_DATE_ERROR_MESSAGE)[keyof typeof EXPIRY_DATE_ERROR_MESSAGE];
+
 const expiryMonthValidators: Validator<string, MonthErrorMessage>[] = [
   {
     checkIsValid: (month: string) => REGEXPS.onlyDigitNumber.test(month),

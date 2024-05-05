@@ -2,6 +2,7 @@ import { useMemo, useState } from 'react';
 
 import REGEXPS from '../constants/regExps';
 import { Validator } from '../type';
+import getErrorMessage from '../utils/getErrorMessage';
 
 export default function useCardNumber() {
   const [firstCardNumberPart, setFirstCardNumberPart] = useState('');
@@ -23,22 +24,19 @@ export default function useCardNumber() {
   ];
 
   const firstErrorMessage = useMemo(() => {
-    const reducer = getValidateReducer(firstCardNumberPart);
-    return cardNumberPartValidators.reduce(reducer, null);
+    return getErrorMessage(firstCardNumberPart, cardNumberPartValidators);
   }, [firstCardNumberPart]);
 
   const secondErrorMessage = useMemo(() => {
-    const reducer = getValidateReducer(secondCardNumberPart);
-    return cardNumberPartValidators.reduce(reducer, null);
+    return getErrorMessage(secondCardNumberPart, cardNumberPartValidators);
   }, [secondCardNumberPart]);
 
   const thirdErrorMessage = useMemo(() => {
-    const reducer = getValidateReducer(thirdCardNumberPart);
-    return cardNumberPartValidators.reduce(reducer, null);
+    return getErrorMessage(thirdCardNumberPart, cardNumberPartValidators);
   }, [thirdCardNumberPart]);
+
   const fourthErrorMessage = useMemo(() => {
-    const reducer = getValidateReducer(fourthCardNumberPart);
-    return cardNumberPartValidators.reduce(reducer, null);
+    return getErrorMessage(fourthCardNumberPart, cardNumberPartValidators);
   }, [fourthCardNumberPart]);
 
   const cardPartErrorMessages = [
@@ -86,14 +84,3 @@ const cardNumberPartValidators: Validator<string, ErrorMessage>[] = [
     message: CARD_NUMBER_PART_ERROR_MESSAGE.notDigit,
   },
 ];
-
-const getValidateReducer =
-  (cardNumberPart: string) =>
-  (
-    errorMessage: ErrorMessage | null,
-    validator: Validator<string, ErrorMessage>
-  ) => {
-    if (errorMessage !== null) return errorMessage;
-    if (validator.checkIsValid(cardNumberPart)) return errorMessage;
-    return validator.message;
-  };

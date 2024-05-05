@@ -1,17 +1,11 @@
 import { Validator } from '../type';
+import getErrorMessage from '../utils/getErrorMessage';
 import { useState } from 'react';
 
 export default function useCardIssuer() {
   const [cardIssuer, setCardIssuer] = useState('');
 
-  const errorMessage = cardIssuerValidators.reduce(
-    (message: ErrorMessage | null, validator) => {
-      if (message !== null) return message;
-      if (validator.checkIsValid(cardIssuer)) return message;
-      return validator.message;
-    },
-    null
-  );
+  const errorMessage = getErrorMessage(cardIssuer, cardIssuerValidators);
 
   const isValid = errorMessage === null;
 
