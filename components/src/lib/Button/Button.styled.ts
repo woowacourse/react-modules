@@ -2,10 +2,6 @@ import styled from 'styled-components';
 import textColorGenerator from '../utils/textColorGenerator';
 import hoverColorGenerator from '../utils/hoverColorGenerator';
 
-export type ButtonSize = 'small' | 'medium' | 'large';
-export type ButtonWidth = 'fixed' | 'fit' | 'full';
-export type ButtonStyle = 'primary' | 'border' | 'text';
-
 const BUTTON_SIZE_TABLE = {
   small: { width: '100px', height: '32px', fontSize: '12px' },
   medium: { width: '160px', height: '44px', fontSize: '15px' },
