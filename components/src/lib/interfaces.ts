@@ -28,3 +28,10 @@ export interface CancelButtonProps {
   content: string;
   onCancel: () => void;
 }
+
+export interface ModalSizeProps {
+  width?: string;
+  height?: string;
+  minWidth?: string;
+  minHeight?: string;
+}

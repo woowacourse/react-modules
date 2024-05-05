@@ -1,5 +1,12 @@
 import styles from './Modal.module.css';
-import { CancelButtonProps, CloseButtonProps, ConfirmButtonProps, SubtitleProps, TitleProps } from './interfaces';
+import {
+  CancelButtonProps,
+  CloseButtonProps,
+  ConfirmButtonProps,
+  ModalSizeProps,
+  SubtitleProps,
+  TitleProps,
+} from './interfaces';
 import ModalHeader from './ModalHeader';
 import ModalContent from './ModalContent';
 import ModalFooter from './ModalFooter';
@@ -10,11 +17,12 @@ interface ModalProps {
   closeButton: CloseButtonProps;
   confirmButton?: ConfirmButtonProps;
   cancelButton?: CancelButtonProps;
+  modalSize?: ModalSizeProps;
   backgroundColor?: string;
   borderRadius?: string;
+  buttonsDirection?: 'row' | 'column';
   modalPosition: 'center' | 'bottom';
   preventCloseOnOutsideClick?: boolean;
-  buttonsDirection?: 'row' | 'column';
   children: React.ReactNode;
 }
 
@@ -24,11 +32,12 @@ const Modal = ({
   closeButton,
   confirmButton,
   cancelButton,
+  modalSize,
   backgroundColor,
   borderRadius,
+  buttonsDirection,
   modalPosition,
   preventCloseOnOutsideClick,
-  buttonsDirection,
   children,
 }: ModalProps) => {
   return (
@@ -38,6 +47,10 @@ const Modal = ({
         style={{
           backgroundColor: `${backgroundColor || 'white'}`,
           borderRadius: `${borderRadius || '5px'}`,
+          width: `${(modalSize && modalSize.width) || (modalPosition === 'center' ? '80%' : '100%')}`,
+          height: `${(modalSize && modalSize.height) || 'fit-content'}`,
+          minWidth: `${modalSize && modalSize.minWidth}`,
+          minHeight: `${modalSize && modalSize.minHeight}`,
         }}
         className={styles[`container-${modalPosition}`]}
       >
