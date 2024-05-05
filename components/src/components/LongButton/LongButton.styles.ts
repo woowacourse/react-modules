@@ -14,4 +14,7 @@ export const LongButtonPropsStyle = (isHighlight: boolean, theme: ThemeType) =>
     border: `1px solid ${isHighlight ? COLOR_PALETTE[theme].colorHighlight : COLOR_PALETTE[theme].color}`,
     borderRadius: "5px",
     height: "44px",
+    "&:hover": {
+      cursor: "pointer",
+    },
   });
