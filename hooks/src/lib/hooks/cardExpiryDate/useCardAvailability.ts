@@ -1,5 +1,6 @@
-import { useState, useEffect } from 'react';
-import { getNowYearAndMonth } from './utils';
+import { useEffect, useState } from 'react';
+
+import { getNowYearAndMonth } from '../../utils';
 
 interface UseCardAvailabilityProps {
   expiryDate: {

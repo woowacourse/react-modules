@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
-import { ErrorMessage, UseCardModuleReturn } from './types';
-import { isValid, validateFilledValue } from './utils/validators';
+
+import { ErrorMessage, UseCardModuleReturn } from '../types';
+import { isValid, validateFilledValue } from '../utils/validators';
 
 interface CardIssuerValidationErrorMessages {
   empty: string;

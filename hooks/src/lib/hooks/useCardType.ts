@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
-import { validateNumber } from './utils/validators';
+
+import { validateNumber } from '../utils';
 
 /**
  * 카드 브랜드

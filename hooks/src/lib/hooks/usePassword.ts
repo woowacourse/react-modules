@@ -1,44 +1,43 @@
-import { useState, useEffect } from 'react';
-import { validateNumber, validateFilledValue, validateLength, isValid } from './utils/validators';
-import { ErrorMessage, UseCardModuleReturn } from './types';
+import { useEffect, useState } from 'react';
 
-import { INVALID_INPUT_VALUE } from './constants';
-import { sliceText } from './utils/textFormatter';
+import { INVALID_INPUT_VALUE } from '../constants';
+import { ErrorMessage, UseCardModuleReturn } from '../types';
+import { isValid, sliceText, validateFilledValue, validateLength, validateNumber } from '../utils';
 
-export interface CardCVCValidationErrorMessages {
+export interface PasswordValidationErrorMessages {
   empty: string;
   number: string;
   length: string;
 }
-export interface UseCardCVCProps {
-  cardCVC: string;
-  errorMessages: CardCVCValidationErrorMessages;
+export interface UsePasswordProps {
+  cardPassword: string;
+  errorMessages: PasswordValidationErrorMessages;
   validation: {
     length: number;
   };
   isNeedValidValue: boolean;
 }
-export interface UseCardCVCResult {
+export interface UsePasswordResult {
   isFilledValue: boolean;
   isValidNumber: boolean;
   isValidLength: boolean;
 }
 
-export type UseCardCVCReturn = UseCardModuleReturn<ErrorMessage, UseCardCVCResult, string>;
+export type UsePasswordReturn = UseCardModuleReturn<ErrorMessage, UsePasswordResult, string>;
 
-export default function useCVC(props: UseCardCVCProps): UseCardCVCReturn {
-  const { cardCVC, errorMessages, validation, isNeedValidValue } = props;
+export default function usePassword(props: UsePasswordProps) {
+  const { cardPassword, errorMessages, validation, isNeedValidValue } = props;
 
   type ErrorMessageKey = keyof typeof errorMessages;
   type Error = ErrorMessageKey[] | null;
   const [error, setError] = useState<Error>(null);
 
-  const validateCVC = () => {
+  const validatePassword = () => {
     const newError: ErrorMessageKey[] = [];
 
-    if (!validateFilledValue(cardCVC)) newError.push('empty');
-    if (!validateNumber(cardCVC)) newError.push('number');
-    if (!validateLength(cardCVC, validation.length)) newError.push('length');
+    if (!validateFilledValue(cardPassword)) newError.push('empty');
+    if (!validateNumber(cardPassword)) newError.push('number');
+    if (!validateLength(cardPassword, validation.length)) newError.push('length');
 
     setError(newError[0] ? newError : null);
   };
@@ -49,8 +48,8 @@ export default function useCVC(props: UseCardCVCProps): UseCardCVCReturn {
    * @param error 유효성 검사 결과
    * @returns 변경된 글자
    */
-  const getFormattedValue = (value: string) => {
-    const slicedText = sliceText(value, validation.length);
+  const getFormattedValue = () => {
+    const slicedText = sliceText(cardPassword, validation.length);
     const isOnlyLengthError = error?.[0] === 'length';
 
     if (isNeedValidValue) {
@@ -61,8 +60,8 @@ export default function useCVC(props: UseCardCVCProps): UseCardCVCReturn {
   };
 
   useEffect(() => {
-    validateCVC();
-  }, [cardCVC]);
+    validatePassword();
+  }, [cardPassword]);
 
   return {
     validationErrorMessage: error ? errorMessages[error[0]] : null,
@@ -71,6 +70,6 @@ export default function useCVC(props: UseCardCVCProps): UseCardCVCReturn {
       isValidNumber: isValid<ErrorMessageKey>('number', error),
       isValidLength: isValid<ErrorMessageKey>('length', error),
     },
-    formattedValue: getFormattedValue(cardCVC),
+    formattedValue: getFormattedValue(),
   };
 }

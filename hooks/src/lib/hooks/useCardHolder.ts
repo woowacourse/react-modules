@@ -1,9 +1,13 @@
 import { useEffect, useState } from 'react';
-import { ALPHABET_REGEXP, ONLY_UPPER_CASE_ALPHABET_REGEXP } from './constants';
-import { isValid, validateFilledValue } from './utils/validators';
-import { ErrorMessage, UseCardModuleReturn } from './types';
-import { CARD_HOLDER_MAX_LENGTH, INVALID_INPUT_VALUE } from './constants/system';
-import { sliceText } from './utils/textFormatter';
+
+import {
+  ALPHABET_REGEXP,
+  CARD_HOLDER_MAX_LENGTH,
+  INVALID_INPUT_VALUE,
+  ONLY_UPPER_CASE_ALPHABET_REGEXP,
+} from '../constants';
+import { ErrorMessage, UseCardModuleReturn } from '../types';
+import { isValid, sliceText, validateFilledValue } from '../utils';
 
 export interface CardHolderValidationErrorMessages {
   empty: string;

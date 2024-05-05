@@ -1,6 +1,7 @@
 import { ChangeEvent, FocusEvent, useState } from 'react';
+
 import { usePassword } from '../lib';
-import { UsePasswordProps } from '../lib/usePassword';
+import { UsePasswordProps } from '../lib/hooks/usePassword';
 
 const LENGTH = 2;
 

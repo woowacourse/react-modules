@@ -1,9 +1,10 @@
 import { ChangeEvent, FocusEvent, useLayoutEffect, useState } from 'react';
+
 import useExpiryDate, {
   ExpiryDate,
   ExpiryDateErrorMessages,
   ExpiryDateValidationErrorMessageKey,
-} from '../lib/useExpiryDate';
+} from '../lib/hooks/cardExpiryDate/useExpiryDate';
 import { padZero } from '../lib/utils/textFormatter';
 
 const errorMessages: ExpiryDateErrorMessages = {

@@ -1,6 +1,7 @@
 import { ChangeEvent, FocusEvent, useState } from 'react';
+
 import { useCardHolder } from '../lib';
-import { UseCardHolderProps } from '../lib/useCardHolder';
+import { UseCardHolderProps } from '../lib/hooks/useCardHolder';
 
 const useCardHolderProps = (cardHolder: string): UseCardHolderProps => ({
   cardHolder,

@@ -1,5 +1,15 @@
-import useCardNumber, { UseCardNumberValidation } from './useCardNumber';
-import { CardNumberError, CardNumbersValidationResult, CardNumberValidation } from './useCardNumbers';
+import { validateFilledValue, validateLength, validateNumber } from '../../utils';
+
+import { CardNumberError, CardNumbersValidationResults, CardNumberValidationResult } from './useCardNumbers';
+
+/**
+ * validateCardNumber 의 결과
+ */
+interface ValidateCardNumberResult {
+  isFilledValue: boolean;
+  isNumber: boolean;
+  isValidLength: boolean;
+}
 
 interface UseCardNumbersValidationProps {
   fieldCount: number;
@@ -9,8 +19,9 @@ interface UseCardNumbersValidationProps {
 /**
  * 카드 번호에 대한 입력 필드의 유효성 검사와 오류 여부를 계산하는 훅
  */
-export default function useCardNumbersValidation(props: UseCardNumbersValidationProps): CardNumbersValidationResult {
+export default function useCardNumbersValidation(props: UseCardNumbersValidationProps): CardNumbersValidationResults {
   const { fieldCount, cardNumberCounts, cardNumbers } = props;
+
   /**
    * 특정 입력 필드(cardNumbers[index])에 대한 유효성 검사
    * @param index  입력 필드 index
@@ -18,30 +29,29 @@ export default function useCardNumbersValidation(props: UseCardNumbersValidation
    * @param cardNumberCounts  입력 필드당 가져야하는 문자 개수
    * @returns 유효성 검사 결과
    */
-  const getCardNumberValidation = (
+  const validateCardNumber = (
     index: number,
     cardNumbers: (string | undefined)[],
     cardNumberCounts: number[],
-  ): ReturnType<typeof useCardNumber> => {
-    const key = `field${index + 1}`;
+  ): ValidateCardNumberResult => {
     // 해당 입력 필드의 입력값들
     const cardNumber = cardNumbers[index] || '';
     // 해당 입력 필드에 입력값들이 지켜야하는 length 값
     const length = cardNumberCounts[index];
     // 해당 입력 필드에 대한 유효성 검사
-    return useCardNumber({
-      number: cardNumber,
-      length,
-      key,
-    });
+    return {
+      isFilledValue: validateFilledValue(cardNumber),
+      isNumber: validateNumber(cardNumber),
+      isValidLength: validateLength(cardNumber, length),
+    };
   };
 
   /**
    * 입력 필드에 대한 유효성 검사 결과를 이용해 해당 입력 필드에 대한 오류 타입 반환
-   * @param cardNumberValidation
+   * @param  ValidateCardNumberResult
    */
-  const getCardNumberError = (cardNumberValidation: UseCardNumberValidation): CardNumberError => {
-    const { isFilledValue, isNumber, isValidLength } = cardNumberValidation;
+  const getCardNumberError = (validationResult: ValidateCardNumberResult): CardNumberError => {
+    const { isFilledValue, isNumber, isValidLength } = validationResult;
 
     switch (true) {
       case !isFilledValue:
@@ -57,12 +67,12 @@ export default function useCardNumbersValidation(props: UseCardNumbersValidation
   /**
    * 입력 필드의 값(cardNumbers)을  돌면서, 해당 입력 필드에 대한 유효성 검사를 진행
    */
-  const createValidation = (): CardNumbersValidationResult => {
-    return Array.from({ length: fieldCount }).reduce<CardNumbersValidationResult>((acc, _, index) => {
-      const { validation: cardNumberValidation } = getCardNumberValidation(index, cardNumbers, cardNumberCounts);
+  const createValidation = (): CardNumbersValidationResults => {
+    return Array.from({ length: fieldCount }).reduce<CardNumbersValidationResults>((acc, _, index) => {
+      const validationResult = validateCardNumber(index, cardNumbers, cardNumberCounts);
 
-      const error = getCardNumberError(cardNumberValidation);
-      const validation: CardNumberValidation = {
+      const error = getCardNumberError(validationResult);
+      const validation: CardNumberValidationResult = {
         error,
         isValid: error === null,
       };

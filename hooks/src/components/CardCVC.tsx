@@ -1,6 +1,7 @@
 import { ChangeEvent, FocusEvent, useState } from 'react';
+
 import { useCVC } from '../lib';
-import { UseCardCVCProps } from '../lib/useCVC';
+import { UseCardCVCProps } from '../lib/hooks/useCVC';
 
 const LENGTH = 3;
 

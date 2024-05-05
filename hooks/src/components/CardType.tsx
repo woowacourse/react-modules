@@ -1,6 +1,7 @@
 import { ChangeEvent, useState } from 'react';
+
 import { useCardType } from '../lib';
-import { Brand } from '../lib/useCardType';
+import { Brand } from '../lib/hooks/useCardType';
 
 const VISA: Brand = {
   name: 'visa',

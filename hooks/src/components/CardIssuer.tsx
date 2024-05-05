@@ -1,6 +1,7 @@
 import { MouseEvent, useState } from 'react';
-import { useCardIssuer } from '../lib/index';
-import { UseCardIssuerProps } from '../lib/useCardIssuer';
+
+import { useCardIssuer } from '../lib';
+import { UseCardIssuerProps } from '../lib/hooks/useCardIssuer';
 
 const cardIssuerProps = (issuerValue: string): UseCardIssuerProps => ({
   issuerValue,

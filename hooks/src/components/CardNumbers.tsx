@@ -1,9 +1,13 @@
 import { ChangeEvent, FocusEvent, useState } from 'react';
-import { useCardNumbers } from '../lib';
-import { CardNumberErrorMessages } from '../lib/hooks/cardNumbers/useCardNumber';
-import { CardNumbersType, UseCardNumbersProps } from '../lib/hooks/cardNumbers/useCardNumbers';
 
-const errorMessages: CardNumberErrorMessages = {
+import { useCardNumbers } from '../lib';
+import {
+  CardNumbersType,
+  UseCardNumbersErrorMessage,
+  UseCardNumbersProps,
+} from '../lib/hooks/cardNumbers/useCardNumbers';
+
+const errorMessages: UseCardNumbersErrorMessage = {
   empty: '카드 번호를 입력해주세요.',
   number: '숫자만 사용 가능해요.',
   length: '4개 숫자를 입력해주세요.',
