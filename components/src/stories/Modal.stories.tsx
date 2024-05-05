@@ -12,7 +12,7 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const 모달이_열림_center: Story = {
+export const 모달이_열림_Dialog: Story = {
   args: {
     open: true,
     children: <Modal.Header title="마루" onClose={() => console.log('마루')} />,
@@ -21,11 +21,38 @@ export const 모달이_열림_center: Story = {
   },
 };
 
-export const 모달이_열림_bottom: Story = {
+export const 모달이_열림_Drawer: Story = {
   args: {
     open: true,
     children: <Modal.Header title="마루" onClose={() => console.log('마루')} />,
     type: 'drawer',
+    onClose: () => console.log('마루'),
+  },
+};
+
+export const 모달이_열림_DrawerTop: Story = {
+  args: {
+    open: true,
+    children: <Modal.Header title="마루" onClose={() => console.log('마루')} />,
+    type: 'drawer-top',
+    onClose: () => console.log('마루'),
+  },
+};
+
+export const 모달이_열림_DrawerRight: Story = {
+  args: {
+    open: true,
+    children: <Modal.Header title="마루" onClose={() => console.log('마루')} />,
+    type: 'drawer-right',
+    onClose: () => console.log('마루'),
+  },
+};
+
+export const 모달이_열림_DrawerLeft: Story = {
+  args: {
+    open: true,
+    children: <Modal.Header title="마루" onClose={() => console.log('마루')} />,
+    type: 'drawer-left',
     onClose: () => console.log('마루'),
   },
 };
