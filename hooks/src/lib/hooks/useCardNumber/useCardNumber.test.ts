@@ -41,9 +41,7 @@ describe('useCardNumber 커스텀 훅 테스트', () => {
     result.current.handleCardNumberChange('1', 0);
 
     waitFor(() =>
-      expect(result.current.cardNumberErrorMessages[0]).toBe(
-        NUMBER_ERROR_MESSAGES.MAX_LENGTH(VALID_SINGLE_UNIT_LENGTH)
-      )
+      expect(result.current.cardNumberErrorMessages[0]).toBe(NUMBER_ERROR_MESSAGES.MAX_LENGTH)
     );
   });
 });

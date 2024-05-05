@@ -34,10 +34,6 @@ describe('useCardPassword 커스텀 훅 테스트', () => {
   it(`${VALID_CARD_PASSWORD_LENGTH}자 미만의 카드 번호를 입력하면 에러 메시지를 표시한다.`, () => {
     result.current.handlePasswordChange('1');
 
-    waitFor(() =>
-      expect(result.current.isValidPassword).toBe(
-        NUMBER_ERROR_MESSAGES.MAX_LENGTH(VALID_CARD_PASSWORD_LENGTH)
-      )
-    );
+    waitFor(() => expect(result.current.isValidPassword).toBe(NUMBER_ERROR_MESSAGES.MAX_LENGTH));
   });
 });

@@ -1,5 +1,5 @@
 import { renderHook, waitFor } from '@testing-library/react';
-import useCardCVC, { VALID_CVC_NUMBER_LENGTH } from './useCardCVC';
+import useCardCVC from './useCardCVC';
 import { NUMBER_ERROR_MESSAGES } from '../../utils/validation/validation';
 
 describe('useCardCVC 커스텀 훅 테스트', () => {
@@ -35,9 +35,7 @@ describe('useCardCVC 커스텀 훅 테스트', () => {
     result.current.handleCVCNumberChange('1');
 
     waitFor(() =>
-      expect(result.current.cvcNumberErrorMessage).toBe(
-        NUMBER_ERROR_MESSAGES.MAX_LENGTH(VALID_CVC_NUMBER_LENGTH)
-      )
+      expect(result.current.cvcNumberErrorMessage).toBe(NUMBER_ERROR_MESSAGES.MAX_LENGTH)
     );
   });
 });
