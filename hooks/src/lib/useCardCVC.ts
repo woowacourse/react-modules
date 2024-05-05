@@ -1,34 +1,41 @@
-import useInput, { ValidationType } from './useInput';
+import { ChangeEvent, FocusEvent, useState } from 'react';
+import useValidation, { ValidationType } from './useValidation';
+import Validation from './utils/validation';
 
 const CVC_LENGTH = 3;
 
+const inputValidations: ValidationType<string>[] = [
+  {
+    validate: (value) => Validation.isExactLength(CVC_LENGTH, value),
+    message: `${CVC_LENGTH}자리의 CVC번호를 입력해주세요.`,
+  },
+];
+
+const preventInputValidations: ValidationType<string>[] = [
+  {
+    validate: Validation.isNumericPattern,
+    message: '숫자만 입력 가능합니다.',
+  },
+];
+
 const useCardCVC = (initialValue = '') => {
-  const isValidLength = (value: string) => {
-    return value.length === CVC_LENGTH;
+  const [value, setValue] = useState(initialValue);
+  const { error, validateValue } = useValidation<string>();
+  const isValid = value !== '' && !error.state;
+
+  const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
+    const preventInputValidateResult = validateValue(e.target.value, preventInputValidations);
+    if (!preventInputValidateResult) return;
+
+    validateValue(e.target.value, inputValidations);
+    setValue(e.target.value);
   };
 
-  const isNumber = (value: string) => {
-    return /^\d*$/.test(value);
+  const onBlurHandler = (e: FocusEvent<HTMLInputElement>) => {
+    validateValue(e.target.value, inputValidations);
   };
 
-  const inputValidations: ValidationType[] = [
-    {
-      validate: isValidLength,
-      message: `${CVC_LENGTH}자리의 CVC번호를 입력해주세요.`,
-    },
-  ];
-
-  const preventInputValidations: ValidationType[] = [
-    {
-      validate: isNumber,
-      message: '숫자만 입력 가능합니다.',
-    },
-  ];
-
-  const cardCVC = useInput({ initialValue, inputValidations, preventInputValidations });
-  const isCardCVCValid = cardCVC.value !== '' && !cardCVC.error.state;
-
-  return { cardCVC, isCardCVCValid };
+  return { value, isValid, error, onChange: onChangeHandler, onBlur: onBlurHandler };
 };
 
 export default useCardCVC;
