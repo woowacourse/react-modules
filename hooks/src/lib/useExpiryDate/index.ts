@@ -26,7 +26,8 @@ export default function useExpiryDate() {
     [expiryMonth, expiryYear],
     expiryDateValidators
   );
-  const isValidExpiryDate = expiryDateErrorMessage === null;
+  const isValidExpiryDate =
+    expiryDateErrorMessage === null && isValidExpiryMonth && isValidExpiryYear;
 
   return {
     expiryMonth,
