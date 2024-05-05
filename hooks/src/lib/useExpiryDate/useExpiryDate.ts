@@ -21,10 +21,17 @@ const useExpiryDate = (initialValue: ExpirationPeriodValue) => {
 
     const { value } = e.target;
 
-    if (!Validator.checkNumberAndOver(value, OPTION.expirationDateMaxLength)) {
+    if (!Validator.checkDigit(value)) {
       return setValidationResult({
         isValid: false,
         errorMessage: ERROR_MESSAGE.onlyNumber,
+      });
+    }
+
+    if (Validator.checkOverMaxDigit(value, OPTION.expirationDateMaxLength)) {
+      return setValidationResult({
+        isValid: false,
+        errorMessage: ERROR_MESSAGE.expiryFormat,
       });
     }
 

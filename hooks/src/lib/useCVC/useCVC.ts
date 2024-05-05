@@ -14,10 +14,17 @@ const useCVC = (initialValue: string) => {
     if (e.target !== e.currentTarget) return;
 
     const { value } = e.target;
-    if (!Validator.checkNumberAndOver(value, OPTION.cvcMaxLength)) {
+    if (!Validator.checkDigit(value)) {
       return setValidationResult({
         isValid: false,
         errorMessage: ERROR_MESSAGE.onlyNumber,
+      });
+    }
+
+    if (Validator.checkOverMaxDigit(value, OPTION.cvcMaxLength)) {
+      return setValidationResult({
+        isValid: false,
+        errorMessage: ERROR_MESSAGE.cvcOutOfRange,
       });
     }
 

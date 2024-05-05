@@ -14,10 +14,17 @@ const usePassword = (initialValue: string) => {
     if (e.target !== e.currentTarget) return;
 
     const { value } = e.target;
-    if (!Validator.checkNumberAndOver(value, OPTION.passwordMaxLength)) {
+    if (!Validator.checkDigit(value)) {
       return setValidationResult({
         isValid: false,
         errorMessage: ERROR_MESSAGE.onlyNumber,
+      });
+    }
+
+    if (Validator.checkOverMaxDigit(value, OPTION.passwordMaxLength)) {
+      return setValidationResult({
+        isValid: false,
+        errorMessage: ERROR_MESSAGE.passwordOutOfRange,
       });
     }
 

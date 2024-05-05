@@ -21,10 +21,17 @@ const useCardNumber = (initialValue: CardNumberValue) => {
     if (e.target !== e.currentTarget) return;
 
     const { value } = e.target;
-    if (!Validator.checkNumberAndOver(value, OPTION.cardNumberMaxLength)) {
+    if (!Validator.checkDigit(value)) {
       return setValidationResult({
         isValid: false,
         errorMessage: ERROR_MESSAGE.onlyNumber,
+      });
+    }
+
+    if (Validator.checkOverMaxDigit(value, OPTION.cardNumberMaxLength)) {
+      return setValidationResult({
+        isValid: false,
+        errorMessage: ERROR_MESSAGE.cardNumberOutOfRange,
       });
     }
 
