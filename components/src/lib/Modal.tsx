@@ -5,7 +5,7 @@ import styles from './Modal.module.css';
 import useModalCloseClickDimmer from './hooks/useModalCloseClickDimmer';
 import useCloseOnESCKeyDown from './hooks/useCloseOnESC';
 
-type ModalType = 'dialog' | 'drawer';
+type ModalType = 'dialog' | 'drawer' | 'drawer-top' | 'drawer-left' | 'drawer-right';
 
 interface ModalStyle {
   dimmed?: React.CSSProperties;
@@ -23,7 +23,10 @@ interface ModalProps {
 
 const MODAL_TYPE: Record<ModalType, string> = {
   dialog: styles.dialog,
-  drawer: styles.drawer,
+  drawer: `${styles.drawer} ${styles.drawerBottom}`,
+  'drawer-top': `${styles.drawer} ${styles.drawerTop}`,
+  'drawer-right': `${styles.drawer} ${styles.drawerRight}`,
+  'drawer-left': `${styles.drawer} ${styles.drawerLeft}`,
 };
 
 const Modal = ({
