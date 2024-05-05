@@ -13,7 +13,7 @@
 }
 
 
-.modal {
+.dialog {
     display: flex;
     flex-direction: column;
     position: fixed;
@@ -29,7 +29,7 @@
     border-radius: 8px;
 }
 
-.modalBottom {
+.drawer {
     display: flex;
     flex-direction: column;
     position: fixed;

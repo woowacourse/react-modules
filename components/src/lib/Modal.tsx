@@ -3,7 +3,7 @@ import { createPortal } from 'react-dom';
 import styles from './Modal.module.css';
 import CloseIcon from './assets/closeButton.svg';
 
-type ModalPosition = 'center' | 'bottom';
+type ModalType = 'dialog' | 'drawer';
 type ButtonPosition = 'row' | 'row-reverse' | 'column' | 'column-reverse';
 
 interface ModalStyle {
@@ -17,7 +17,7 @@ interface ModalProps {
   open: boolean;
   onClose: () => void;
   title: string;
-  position: ModalPosition;
+  type: ModalType;
   content?: React.ReactNode;
   style?: ModalStyle;
   closeButton?: React.ReactNode;
@@ -28,9 +28,9 @@ interface ModalProps {
   hideCloseIcon?: boolean;
 }
 
-const MODAL_TYPE: Record<ModalPosition, string> = {
-  center: styles.modal,
-  bottom: styles.modalBottom,
+const MODAL_TYPE: Record<ModalType, string> = {
+  dialog: styles.dialog,
+  drawer: styles.drawer,
 };
 
 const BUTTON_POSITION_TYPE: Record<ButtonPosition, string> = {
@@ -44,7 +44,7 @@ const Modal = ({
   open,
   onClose,
   title,
-  position,
+  type,
   content,
   style,
   closeButton,
@@ -86,7 +86,7 @@ const Modal = ({
       {open &&
         createPortal(
           <div className={styles.dimmed} style={style?.dimmed}>
-            <section className={MODAL_TYPE[position]} ref={modalRef} style={style?.modal}>
+            <section className={MODAL_TYPE[type]} ref={modalRef} style={style?.modal}>
               <header className={styles.modalHeader} style={style?.modalHeader}>
                 <span className={styles.title} style={style?.modalTitle}>
                   {title}
