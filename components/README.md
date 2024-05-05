@@ -30,14 +30,15 @@ const App = () => {
 - isOpen: boolean : 모달이 열려있는지 여부
 - onClose: (function) : 모달을 닫는 콜백함수를 제공해야 합니다.
 - title: string : 모달의 제목을 설정할 수 있습니다.
-- position (ModalPosition) : 모달의 위치 (`center`) 또는 (`bottom`)
+- type (ModalType) : `dialog`, `drawer`
 
 ### props (optional)
 - content (React.ReactNode): 모달 내용을 넣을 수 있습니다.
 - style (ModalStyle): 모달의 스타일 (dimmed, modal, modalHeader, modalTitle)을 커스텀 할 수 있습니다.
 - closeButton (React.ReactNode): 모달 하단의 닫기 버튼을 넣을 수 있습니다.
 - confirmButton (React.ReactNode): 모달 하단의 확인 버튼을 넣을 수 있습니다.
-- buttonPosition (ButtonPosition): 닫기 버튼과 확인 버튼의 배치를 결정할 수 있습니다. (확인 버튼이 오른쪽, 아래가 정배) ('row', 'row-reverse', 'column', 'column-reverse')
+- buttonPosition (ButtonPosition): 닫기 버튼과 확인 버튼의 배치를 결정할 수 있습니다.
+  - row일 때 확인 버튼이 오른쪽, column일 때 확인 버튼이 아래가 default 입니다. ('row', 'row-reverse', 'column', 'column-reverse')
 - closeOnOutsideClick (boolean): 모달 외부 영역 클릭 시 닫기 여부를 설정할 수 있습니다. (default: true)
 - customCloseIcon (string): 커스텀 닫기 아이콘을 설정할 수 있습니다.
 - hideCloseIcon (boolean): 닫기 아이콘 숨김 여부를 설정할 수 있습니다.
