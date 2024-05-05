@@ -11,7 +11,14 @@ import {
 import style from "./Modal.module.css";
 import { ReactComponent as CloseIcon } from "./assets/closeIcon.svg";
 
-const Modal = Object.assign(ModalMain, {
+interface IModal extends React.FC<ModalMainProps> {
+  Dimmer: React.FC<ModalDimmerProps>;
+  Content: React.FC<ModalContentProps>;
+  CloseButton: React.FC<ModalCloseButtonProps>;
+  Button: React.FC<ModalButtonProps>;
+}
+
+const Modal: IModal = Object.assign(ModalMain, {
   Dimmer: ModalDimmer,
   Content: ModalContent,
   CloseButton: ModalCloseButton,
