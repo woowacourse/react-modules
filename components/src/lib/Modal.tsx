@@ -1,9 +1,8 @@
 import styles from './Modal.module.css';
 import { CancelButtonProps, CloseButtonProps, ConfirmButtonProps, SubtitleProps, TitleProps } from './interfaces';
-import CancelButton from './CancelButton';
-import ConfirmButton from './ConfirmButton';
 import ModalHeader from './ModalHeader';
 import ModalContent from './ModalContent';
+import ModalFooter from './ModalFooter';
 
 interface ModalProps {
   title?: TitleProps;
@@ -44,13 +43,7 @@ const Modal = ({
       >
         <ModalHeader title={title} subtitle={subtitle} closeButton={closeButton} />
         <ModalContent children={children} />
-        <div
-          style={{ display: 'flex', flexDirection: `${buttonsDirection || 'row'}` }}
-          className={styles['button-container']}
-        >
-          {cancelButton && <CancelButton {...cancelButton} />}
-          {confirmButton && <ConfirmButton {...confirmButton} />}
-        </div>
+        <ModalFooter cancelButton={cancelButton} confirmButton={confirmButton} buttonsDirection={buttonsDirection} />
       </div>
     </>
   );

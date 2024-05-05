@@ -33,13 +33,3 @@
   background-color: #000000;
   opacity: 0.4;
 }
-
-.button-container {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  align-items: center;
-
-  width: 95%;
-  margin: 15px 0;
-}
