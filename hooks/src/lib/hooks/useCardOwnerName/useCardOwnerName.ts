@@ -9,8 +9,8 @@ export const OWNER_NAME_ERROR_MESSAGES = {
 
 const MAX_NAME_LENGTH = 21;
 
-const useCardOwnerName = (name: string = '') => {
-  const [ownerName, setOwnerName] = useState(name);
+const useCardOwnerName = (maxLength: number = MAX_NAME_LENGTH, initialName: string = '') => {
+  const [ownerName, setOwnerName] = useState(initialName);
   const [isValidOwnerName, setIsValidOwnerName] = useState(false);
   const [ownerNameErrorMessage, setOwnerNameErrorMessage] = useState('');
 
@@ -28,7 +28,7 @@ const useCardOwnerName = (name: string = '') => {
 
     if (engName.length < name.length) return OWNER_NAME_ERROR_MESSAGES.NOT_ENG;
 
-    if (unifiedSpaceName.length > MAX_NAME_LENGTH) return OWNER_NAME_ERROR_MESSAGES.NAME_LENGTH;
+    if (unifiedSpaceName.length > maxLength) return OWNER_NAME_ERROR_MESSAGES.NAME_LENGTH;
 
     return '';
   };
@@ -39,7 +39,7 @@ const useCardOwnerName = (name: string = '') => {
     const errorMessage = getErrorMessage(name);
     setOwnerNameErrorMessage(errorMessage);
 
-    if (validOwnerName.length > MAX_NAME_LENGTH) return;
+    if (validOwnerName.length > maxLength) return;
 
     setOwnerName(validOwnerName);
     setIsValidOwnerName(validOwnerName.length >= 1);
