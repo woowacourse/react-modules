@@ -16,15 +16,14 @@ const Modal: React.FC<ModalProps> & {
   ModalContent: ModalContentType;
   ModalFooter: ModalFooterType;
 } = ({ children, isOpen, onClick, position, ...restProps }) => {
+  if (!isOpen) return;
   return (
     <>
-      {isOpen && (
-        <Styled.ModalBackdrop onClick={onClick}>
-          <Styled.ModalWrapper position={position} {...restProps}>
-            {children}
-          </Styled.ModalWrapper>
-        </Styled.ModalBackdrop>
-      )}
+      <Styled.ModalBackdrop onClick={onClick}>
+        <Styled.ModalContentWrapper position={position} {...restProps}>
+          {children}
+        </Styled.ModalContentWrapper>
+      </Styled.ModalBackdrop>
     </>
   );
 };
