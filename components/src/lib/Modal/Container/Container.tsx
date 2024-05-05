@@ -4,7 +4,7 @@ export type ContainerPositionType = "top" | "bottom" | "center";
 
 export interface ContainerProps {
   position: ContainerPositionType;
-  children: React.ReactNode;
+  children: JSX.Element;
 }
 
 const Container = ({ position, children }: ContainerProps) => {

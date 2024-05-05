@@ -1,7 +1,7 @@
 import * as Styled from "./style";
 
 export interface HeaderProps {
-  children: React.ReactNode;
+  children: JSX.Element;
 }
 
 const Header = ({ children }: HeaderProps) => {

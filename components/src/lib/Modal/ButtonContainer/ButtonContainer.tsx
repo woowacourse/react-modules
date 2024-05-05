@@ -1,11 +1,10 @@
-import React from "react";
 import * as Styled from "./style";
 
 export type ButtonDirectionType = "row" | "column";
 
 export interface ButtonContainerProps {
   direction?: ButtonDirectionType;
-  children: React.ReactNode;
+  children: JSX.Element;
 }
 
 const ButtonContainer = ({

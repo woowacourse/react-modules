@@ -1,10 +1,9 @@
-import React from "react";
 import * as Styled from "./style";
 
 export type ButtonColor = "dark" | "white";
 
 export interface ButtonProps {
-  children: React.ReactNode;
+  children: JSX.Element;
   theme: ButtonColor;
   onClick: () => void;
 }

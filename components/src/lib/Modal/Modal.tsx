@@ -9,7 +9,7 @@ import Button from "./Button/Button";
 import CloseButton from "./CloseButton/CloseButton";
 
 export interface ModalProps {
-  children: React.ReactNode;
+  children: JSX.Element;
 }
 
 const Modal = ({ children }: ModalProps) => {
