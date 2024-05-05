@@ -1,13 +1,14 @@
+import clsx from 'clsx';
 import { ReactNode, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 
-import styles from './style.module.css';
 import '../../styles/reset.css';
-import clsx from 'clsx';
+import styles from './style.module.css';
+
 interface PortalProps {
   children: ReactNode;
 }
-export default function Portal(props: PortalProps) {
+export default function ModalPortal(props: PortalProps) {
   const { children } = props;
 
   const $modalRoot = document.getElementById('modal-root') as HTMLDivElement;

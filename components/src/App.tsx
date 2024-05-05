@@ -1,8 +1,10 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import './App.css';
-import BasicBottomModal from './lib/Modal/BasicBottomModal/index';
+
+import { usePosition } from './lib/hooks/';
 import Modal from './lib/Modal';
-import BasicCenterModal from './lib/Modal/BasicCenterModal';
+import BottomModal from './lib/Modal/BottomModal/index';
+import CloseButtonIcon from './lib/Modal/CloseButtonIcon';
 
 function App() {
   const [openCenterModal, setOpenCenterModal] = useState(false);
@@ -10,21 +12,18 @@ function App() {
 
   return (
     <>
-      <button onClick={() => setOpenCenterModal(true)}>basic center open</button>
-      <button onClick={() => setOpenBottomModal(true)}>basic bottom open</button>
-      <BasicCenterModal
-        closeButtonType="icon"
-        isOpen={openCenterModal}
-        modalTitle="basic center"
-        closeModal={() => setOpenCenterModal(false)}
-      >
-        <div>basic center modal</div>
-      </BasicCenterModal>
-      <BasicBottomModal
-        closeButtonType="box"
-        isOpen={openBottomModal}
-        modalTitle="basic bottom"
-        closeModal={() => setOpenBottomModal(false)}
+      <button onClick={() => setOpenCenterModal(true)}> center modal open</button>
+      <button onClick={() => setOpenBottomModal(true)}> bottom modal open</button>
+      <Modal type="bottom" openModal={openBottomModal} setOpenModal={setOpenBottomModal}>
+        <BottomModal.button>
+          <CloseButtonIcon />
+        </BottomModal.button>
+        <h1>Bottom Modal</h1>
+      </Modal>
+      <Modal type="center" openModal={openCenterModal} setOpenModal={setOpenCenterModal}>
+        <h1>Center Modal</h1>
+        <Modal.button isCloseModal={true}>close button</Modal.button>
+      </Modal>
       >
         <Modal.ActionAndCloseButton extraAction={() => alert('extraAction!!')}>
           <div>Action And Close Button</div>

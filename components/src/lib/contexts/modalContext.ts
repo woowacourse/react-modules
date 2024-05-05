@@ -1,7 +1,13 @@
 import { createContext } from 'react';
 
+import { ModalPosition } from '../types/modal';
+
 export interface ModalContextType {
-  isOpen: boolean;
+  isCloseOnEsc?: boolean;
+  isCloseOnBackdrop?: boolean;
+  animationDuration?: number;
+  isNeedAnimation?: boolean;
+  position?: ModalPosition;
   closeModal: () => void;
 }
 

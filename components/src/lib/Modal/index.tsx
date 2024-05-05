@@ -1,136 +1,117 @@
-import { ReactNode, MouseEvent } from 'react';
-
 import clsx from 'clsx';
-import styles from './style.module.css';
+import { CSSProperties, MouseEvent, ReactNode, useEffect } from 'react';
 
-import Portal from './Portal';
-import ModalContext from '../constants/modalContext';
+import ModalContext from '../contexts/modalContext';
 import useModalContext from '../hooks/useModalContext';
 import '../styles/reset.css';
-import CloseButtonIcon from './CloseButtonIcon';
+import { ModalButtonProps, ModalProps } from '../types/modal';
+
+import BottomModal from './BottomModal';
+import CenterModal from './CenterModal';
+import ModalPortal from './ModalPortal';
+import styles from './style.module.css';
 function Modal(props: ModalProps) {
-  const { isOpen, closeModal, children, type, className, ...rest } = props;
+  const {
+    openModal,
+    setOpenModal,
+    children,
+    type,
+    isCloseOnBackdrop = true,
+    isCloseOnEsc = true,
+    animationDuration,
+    isNeedAnimation = type === 'bottom' ? true : false,
+    className,
+    position,
+    ...rest
+  } = props;
 
-  return (
-    <Portal>
-      <ModalContext.Provider value={{ isOpen, closeModal }}>
-        <div
-          className={clsx(className, styles.modal, {
-            [styles[type]]: type && isOpen,
-          })}
-          {...rest}
-        >
-          <Backdrop />
-          <Contents>{children}</Contents>
-        </div>
-      </ModalContext.Provider>
-    </Portal>
-  );
-}
+  const closeModal = () => {
+    if (!animationDuration) return setOpenModal(false);
 
-function Header(props: ModalComposedProps<HTMLDivElement>) {
-  const { children, ...rest } = props;
-  return <div {...rest}>{props.children}</div>;
-}
-
-function Title(props: ModalComposedProps<HTMLHeadingElement>) {
-  const { children, ...rest } = props;
-  return <h2 {...rest}>{children}</h2>;
-}
-
-function Body(props: ModalComposedProps<HTMLDivElement>) {
-  const { children, ...rest } = props;
-  return <div {...rest}>{props.children}</div>;
-}
-
-function CloseButton({ children, ...rest }: ModalButtonProps) {
-  const { closeModal } = useModalContext();
-
-  const onClick = () => {
-    closeModal();
+    setTimeout(() => {
+      setOpenModal(false);
+    }, animationDuration);
   };
 
   return (
-    <button onClick={onClick} {...rest}>
-      {children}
-    </button>
-  );
-}
-function CloseIconButton({ className, ...attribute }: Omit<ModalButtonProps, 'children'>) {
-  const { closeModal } = useModalContext();
-
-  const onClick = () => {
-    closeModal();
-  };
-
-  return (
-    <button className={clsx(styles.closeIconButton, className)} onClick={onClick} {...attribute}>
-      <CloseButtonIcon />
-    </button>
-  );
-}
-
-function CloseBoxButton({ children, className, ...rest }: ModalButtonProps) {
-  const { closeModal } = useModalContext();
-
-  const onClick = () => {
-    closeModal();
-  };
-
-  return (
-    <div className={styles.closeBoxButtonContainer}>
-      <button className={clsx(styles.closeBoxButton, className)} onClick={onClick} {...rest}>
-        {children}
-      </button>
-    </div>
+    <>
+      {openModal && (
+        <ModalPortal>
+          <ModalContext.Provider
+            value={{ isCloseOnBackdrop, isCloseOnEsc, closeModal, isNeedAnimation, animationDuration, position }}
+          >
+            <div
+              className={clsx(className, 'modal', styles.modal, {
+                [styles[type]]: type,
+              })}
+              {...rest}
+            >
+              {type === 'bottom' && <BottomModal children={children} />}
+              {type === 'center' && <CenterModal children={children} />}
+            </div>
+          </ModalContext.Provider>
+        </ModalPortal>
+      )}
+    </>
   );
 }
 
-function ActionAndCloseButton<A extends Function>({
-  children,
-  extraAction,
-  className,
-  ...rest
-}: ActionAndCloseButtonProps<A>) {
-  const { closeModal } = useModalContext();
+function Backdrop({ closeModal }: { closeModal: () => void }) {
+  const { isCloseOnBackdrop, isCloseOnEsc } = useModalContext();
 
-  const onClick = () => {
-    if (extraAction) extraAction();
-    closeModal();
-  };
-
-  return (
-    <button className={className} onClick={onClick} {...rest}>
-      {children}
-    </button>
-  );
-}
-
-function Backdrop() {
-  const { closeModal } = useModalContext();
-
-  const onClick = (e: MouseEvent<HTMLDivElement>) => {
+  const handleClick = (e: MouseEvent<HTMLDivElement>) => {
+    if (!isCloseOnBackdrop) return;
     const { target } = e;
+
     if (!(target instanceof HTMLElement)) return;
     if (target.closest(styles.modal)) return;
 
     closeModal();
   };
 
-  return <div className={styles.backdrop} onClick={onClick} />;
+  const handleKeyDown = (event: globalThis.KeyboardEvent) => {
+    if (event.key === 'Escape' && isCloseOnEsc) {
+      closeModal();
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener('keydown', handleKeyDown);
+
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, []);
+
+  return <div className={clsx(styles.backdrop, 'modal=backdrop')} onClick={handleClick} />;
 }
 
-function Contents({ children }: { children: ReactNode }) {
-  return <div className={styles.contents}>{children}</div>;
+function Contents({ children, className, style }: { children: ReactNode; className?: string; style?: CSSProperties }) {
+  return (
+    <div className={clsx(styles.contents, className, 'modal-contents')} style={style}>
+      {children}
+    </div>
+  );
 }
 
+function ModalButton({ isCloseModal, children, handleCloseModal, onClick, ...rest }: ModalButtonProps) {
+  const { closeModal } = useModalContext();
+
+  const handleClick = (e: MouseEvent<HTMLButtonElement>) => {
+    if (onClick) onClick(e);
+    if (isCloseModal) {
+      handleCloseModal ? handleCloseModal() : closeModal();
+    }
+  };
+  return (
+    <button {...rest} onClick={handleClick}>
+      {children}
+    </button>
+  );
+}
+
+Modal.Backdrop = Backdrop;
 Modal.Contents = Contents;
-Modal.Header = Header;
-Modal.Title = Title;
-Modal.Body = Body;
-Modal.CloseButton = CloseButton;
-Modal.CloseIconButton = CloseIconButton;
-Modal.CloseBoxButton = CloseBoxButton;
-Modal.ActionAndCloseButton = ActionAndCloseButton;
+Modal.button = ModalButton;
 
 export default Modal;
