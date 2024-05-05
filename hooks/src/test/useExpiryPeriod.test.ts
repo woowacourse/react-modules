@@ -7,9 +7,11 @@ describe("useExpiryPeriod Test", () => {
     const { result } = renderHook(() => useExpiryPeriod());
 
     React.act(() => {
-      result.current.yearState[1]("20");
+      const [_, setYear] = result.current.yearState;
+      setYear("20");
     });
-    expect(result.current.yearState[0]).toBe("20");
+    const [year] = result.current.yearState;
+    expect(year).toBe("20");
     expect(result.current.isError).toBe(true);
   });
 
@@ -19,8 +21,10 @@ describe("useExpiryPeriod Test", () => {
     const currentMonth = Number(new Date().getMonth());
 
     React.act(() => {
-      result.current.yearState[1](currentMonth === 0 ? String(currentYear - 1) : String(currentYear));
-      result.current.monthState[1](String(currentMonth));
+      const [_year, setYear] = result.current.yearState;
+      setYear(currentMonth === 0 ? String(currentYear - 1) : String(currentYear));
+      const [_month, setMonth] = result.current.monthState;
+      setMonth(String(currentMonth));
     });
     expect(result.current.isError).toBe(true);
   });
@@ -29,7 +33,8 @@ describe("useExpiryPeriod Test", () => {
     const { result } = renderHook(() => useExpiryPeriod());
 
     React.act(() => {
-      result.current.yearState[1]("33");
+      const [_, setYear] = result.current.yearState;
+      setYear("33");
     });
     expect(result.current.isError).toBe(false);
   });
@@ -38,7 +43,8 @@ describe("useExpiryPeriod Test", () => {
     const { result } = renderHook(() => useExpiryPeriod());
 
     React.act(() => {
-      result.current.yearState[1]("2a");
+      const [_, setYear] = result.current.yearState;
+      setYear("2a");
     });
     expect(result.current.isError).toBe(true);
   });
