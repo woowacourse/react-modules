@@ -21,6 +21,7 @@ const Button = ({
   buttonStyle = 'primary',
   primaryColor = '#333333',
 }: ButtonProps) => {
+
   return (
     <>
       <Styled.Button

@@ -23,6 +23,7 @@ const App = () => {
   const handleModalClose = () => {
     setModalOpened(false);
   };
+
   return (
     <>
       <Button
