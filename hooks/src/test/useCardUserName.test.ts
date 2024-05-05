@@ -18,7 +18,7 @@ describe("useCardUserName 커스텀 훅 테스트", () => {
     expect(result.current.cardUserNameInfo.cardUserName).toBe(cardUserName);
   });
 
-  it("카드 고객 이름 제한 길이 미만의 이름인 경우에는 isError를 false로 설정한다.", () => {
+  it("카드 고객 이름 제한 길이 미만의 이름인 경우에도 isValid는 true이다.", () => {
     const cardUserNameUnderTenLength = "HI";
     const { result } = renderHook(() => useCardUserName(cardUserNameLength));
 
@@ -28,10 +28,10 @@ describe("useCardUserName 커스텀 훅 테스트", () => {
       } as ChangeEvent<HTMLInputElement>);
     });
 
-    expect(result.current.cardUserNameInfo.isError).toBe(false);
+    expect(result.current.cardUserNameInfo.isValid).toBe(true);
   });
 
-  it("카드 고객 이름 제한 길이를 초과한 이름인 경우 isError가 true로 설정한다.", () => {
+  it("카드 고객 이름 제한 길이를 초과한 이름인 경우 isValid는 false이다.", () => {
     const cardUserNameOverTenLength = "TOOLONGNAME";
     const { result } = renderHook(() => useCardUserName(cardUserNameLength));
 
@@ -41,6 +41,32 @@ describe("useCardUserName 커스텀 훅 테스트", () => {
       } as ChangeEvent<HTMLInputElement>);
     });
 
-    expect(result.current.cardUserNameInfo.isError).toBe(true);
+    expect(result.current.cardUserNameInfo.isValid).toBe(false);
+  });
+
+  it("카드 고객 이름에 공백만 입력한 경우 isValid는 false이다.", () => {
+    const nameWithOnlySpaces = "    ";
+    const { result } = renderHook(() => useCardUserName(cardUserNameLength));
+
+    act(() => {
+      result.current.handleCardUserName({
+        target: { value: nameWithOnlySpaces },
+      } as ChangeEvent<HTMLInputElement>);
+    });
+
+    expect(result.current.cardUserNameInfo.isValid).toBe(false);
+  });
+
+  it("카드 고객 이름에 대문자 외의 문자가 있는 경우 isValid는 false이다.", () => {
+    const nameNotOnlyCapital = "hELLO";
+    const { result } = renderHook(() => useCardUserName(cardUserNameLength));
+
+    act(() => {
+      result.current.handleCardUserName({
+        target: { value: nameNotOnlyCapital },
+      } as ChangeEvent<HTMLInputElement>);
+    });
+
+    expect(result.current.cardUserNameInfo.isValid).toBe(false);
   });
 });

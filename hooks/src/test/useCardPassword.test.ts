@@ -17,7 +17,7 @@ describe("useCardPassword 커스텀 훅 테스트", () => {
     expect(result.current.cardPassWordInfo.password).toBe(password);
   });
 
-  it("정상적인 비밀번호 입력 시 isError 상태가 false이다.", () => {
+  it("정상적인 비밀번호 입력 시 isValid는 true이다.", () => {
     const password = "12";
     const { result } = renderHook(() => useCardPassword(passwordLength));
 
@@ -27,10 +27,10 @@ describe("useCardPassword 커스텀 훅 테스트", () => {
       } as ChangeEvent<HTMLInputElement>);
     });
 
-    expect(result.current.cardPassWordInfo.isError).toBe(false);
+    expect(result.current.cardPassWordInfo.isValid).toBe(true);
   });
 
-  it("비밀번호 길이가 부정확할 때 isError 상태가 true이다.", () => {
+  it("비밀번호 길이가 부정확할 때 isValid는 false이다.", () => {
     const passwordOverLength = "123";
     const { result } = renderHook(() => useCardPassword(passwordLength));
 
@@ -40,6 +40,6 @@ describe("useCardPassword 커스텀 훅 테스트", () => {
       } as ChangeEvent<HTMLInputElement>);
     });
 
-    expect(result.current.cardPassWordInfo.isError).toBe(true);
+    expect(result.current.cardPassWordInfo.isValid).toBe(false);
   });
 });

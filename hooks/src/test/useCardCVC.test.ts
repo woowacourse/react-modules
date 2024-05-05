@@ -5,7 +5,7 @@ import useCardCVC from "../lib/useCardCVC";
 describe("useCardNumbers 커스텀 훅 테스트", () => {
   const cardCVCLength = 3;
 
-  it("입력된 CVC가 숫자가 아닌 경우 isError 상태가 true이다.", () => {
+  it("입력된 CVC가 전부 숫자가 아닌 경우 isValid는 false이다.", () => {
     const { result } = renderHook(() => useCardCVC(cardCVCLength));
 
     act(() => {
@@ -14,10 +14,10 @@ describe("useCardNumbers 커스텀 훅 테스트", () => {
       } as ChangeEvent<HTMLInputElement>);
     });
 
-    expect(result.current.cardCVCInfo.isError).toBe(true);
+    expect(result.current.cardCVCInfo.isValid).toBe(false);
   });
 
-  it("입력된 CVC 길이가 사용자 설정값을 초과한 경우 isError 상태가 true이다.", () => {
+  it("입력된 CVC 길이가 사용자 설정값을 초과한 경우 isValid는 false이다.", () => {
     const { result } = renderHook(() => useCardCVC(cardCVCLength));
 
     act(() => {
@@ -26,10 +26,10 @@ describe("useCardNumbers 커스텀 훅 테스트", () => {
       } as ChangeEvent<HTMLInputElement>);
     });
 
-    expect(result.current.cardCVCInfo.isError).toBe(true);
+    expect(result.current.cardCVCInfo.isValid).toBe(false);
   });
 
-  it("입력된 CVC 길이가 사용자 설정값 미만인 경우 isError 상태가 true이다.", () => {
+  it("입력된 CVC 길이가 사용자 설정값 미만인 경우 isValid는 false이다.", () => {
     const { result } = renderHook(() => useCardCVC(cardCVCLength));
 
     act(() => {
@@ -38,7 +38,7 @@ describe("useCardNumbers 커스텀 훅 테스트", () => {
       } as ChangeEvent<HTMLInputElement>);
     });
 
-    expect(result.current.cardCVCInfo.isError).toBe(true);
+    expect(result.current.cardCVCInfo.isValid).toBe(false);
   });
 
   it("CVC 입력에 따라 CVC 상태가 올바르게 업데이트되는지 확인한다.", () => {
@@ -52,18 +52,5 @@ describe("useCardNumbers 커스텀 훅 테스트", () => {
     });
 
     expect(result.current.cardCVCInfo.cardCVC).toBe(inputValue);
-  });
-
-  it("CVC 입력에 따라 isError 상태가 올바르게 업데이트되는지 확인한다.", () => {
-    const { result } = renderHook(() => useCardCVC(cardCVCLength));
-    const inputValue = "123";
-
-    act(() => {
-      result.current.handleCardCVC({
-        target: { value: inputValue },
-      } as ChangeEvent<HTMLInputElement>);
-    });
-
-    expect(result.current.cardCVCInfo.isError).toBe(false);
   });
 });

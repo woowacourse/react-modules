@@ -5,7 +5,7 @@ import useCardCompany from "../lib/useCardCompany";
 describe("useCardCompany 커스텀 훅 테스트", () => {
   const defaultValue = "카드사를 선택해주세요.";
 
-  it("카드 회사 선택한 경우 isError 상태가 false이다.", () => {
+  it("카드사를 선택한 경우 isValid는 true이다.", () => {
     const { result } = renderHook(() => useCardCompany());
 
     act(() => {
@@ -17,9 +17,9 @@ describe("useCardCompany 커스텀 훅 테스트", () => {
       );
     });
 
-    expect(result.current.cardCompanyInfo.isError).toBe(false);
+    expect(result.current.cardCompanyInfo.isValid).toBe(true);
   });
-  it("카드사를 선택하지 않으면 isError 상태가 true이다.", () => {
+  it("카드사를 선택하지 않은 경우 isValid는 false이다.", () => {
     const { result } = renderHook(() => useCardCompany());
 
     act(() => {
@@ -31,10 +31,10 @@ describe("useCardCompany 커스텀 훅 테스트", () => {
       );
     });
 
-    expect(result.current.cardCompanyInfo.isError).toBe(true);
+    expect(result.current.cardCompanyInfo.isValid).toBe(false);
   });
 
-  it("카드 회사의 선택에 따라 cardCompany 상태가 올바르게 업데이트되는지 확인한다.", () => {
+  it("선택한 카드사로 cardCompany 상태가 업데이트되는지 확인한다.", () => {
     const { result } = renderHook(() => useCardCompany());
     const cardCompany = "썬데이뱅크";
 
@@ -48,6 +48,6 @@ describe("useCardCompany 커스텀 훅 테스트", () => {
     });
 
     expect(result.current.cardCompanyInfo.cardCompany).toBe(cardCompany);
-    expect(result.current.cardCompanyInfo.isError).toBe(false);
+    expect(result.current.cardCompanyInfo.isValid).toBe(true);
   });
 });
