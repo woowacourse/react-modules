@@ -1,6 +1,6 @@
 import { act, renderHook } from "@testing-library/react";
 import useCardNumbers from "./useCardNumbers";
-import { ERROR_MESSAGES } from "../../constants/errorMessage";
+import { MAX_LENGTH_ERROR_MESSAGE } from "../../constants/errorMessage";
 
 const INPUT_LENGTH = 4;
 const INPUT_COUNT = 4;
@@ -70,7 +70,7 @@ describe("useCardNumbers 예외 테스트", () => {
     }
   );
 
-  test("cardNumbers의 값이 ['1234', '1234', '1234', ''] 일 때 getCardNumbersErrorMessage() 결과가 ERROR_MESSAGES.maxLengthNumber(4) 가 출력되어야 한다.", () => {
+  test("cardNumbers의 값이 ['1234', '1234', '1234', ''] 일 때 getCardNumbersErrorMessage() 결과가 MAX_LENGTH_ERROR_MESSAGE(4) 가 출력되어야 한다.", () => {
     const { result } = renderHook(() =>
       useCardNumbers(INPUT_LENGTH, INPUT_COUNT)
     );
@@ -80,7 +80,7 @@ describe("useCardNumbers 예외 테스트", () => {
     });
 
     expect(result.current.getCardNumbersErrorMessage()).toBe(
-      ERROR_MESSAGES.maxLengthNumber(INPUT_LENGTH)
+      MAX_LENGTH_ERROR_MESSAGE(INPUT_LENGTH)
     );
   });
 });

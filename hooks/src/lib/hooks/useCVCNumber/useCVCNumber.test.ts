@@ -1,6 +1,6 @@
 import { renderHook, act } from "@testing-library/react";
 import useCVCNumber from "./useCVCNumber";
-import { ERROR_MESSAGES } from "../../constants/errorMessage";
+import { MAX_LENGTH_ERROR_MESSAGE } from "../../constants/errorMessage";
 
 const INPUT_LENGTH = 3;
 
@@ -52,7 +52,7 @@ describe("useCVCNumber 예외 테스트", () => {
     });
 
     expect(result.current.getCVCNumberErrorMessage()).toBe(
-      ERROR_MESSAGES.maxLengthNumber(INPUT_LENGTH)
+      MAX_LENGTH_ERROR_MESSAGE(INPUT_LENGTH)
     );
   });
 });

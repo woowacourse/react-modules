@@ -1,6 +1,6 @@
 import { renderHook, act } from "@testing-library/react";
 import usePassword from "./usePassword";
-import { ERROR_MESSAGES } from "../../constants/errorMessage";
+import { MAX_LENGTH_ERROR_MESSAGE } from "../../constants/errorMessage";
 
 const INPUT_LENGTH = 2;
 
@@ -52,7 +52,7 @@ describe("usePassword 예외 테스트", () => {
     });
 
     expect(result.current.getPasswordErrorMessage()).toBe(
-      ERROR_MESSAGES.maxLengthNumber(INPUT_LENGTH)
+      MAX_LENGTH_ERROR_MESSAGE(INPUT_LENGTH)
     );
   });
 });
