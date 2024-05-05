@@ -1,49 +1,64 @@
-import { useState } from "react";
+import { useEffect } from "react";
 
+import useExpiryMonth from "./useExpiryMonth";
+import useExpiryYear from "./useExpiryYear";
 import useExpiryDateValidation from "./useExpiryDateValidation";
+import useExpiryDateErrorText from "./useExpiryDateErrorText";
 
-import { ExpiryDateKeys } from "../types/cardCustomHook";
 import { INPUT_RULES } from "../constants/cardCustomHook";
 
 const useExpiryDate = () => {
-  const [expiryDate, setExpiryDate] = useState<Record<ExpiryDateKeys, string>>({
-    month: "",
-    year: "",
-  });
+  const {
+    expiryMonth,
+    errorState: monthError,
+    setErrorState: monthSetError,
+    errorText: monthErrorText,
+    handleExpiryMonthChange,
+  } = useExpiryMonth();
+  const {
+    expiryYear,
+    errorState: yearError,
+    setErrorState: yearSetError,
+    errorText: yearErrorText,
+    handleExpiryYearChange,
+  } = useExpiryYear();
 
-  const { errorState, errorText, validateExpiryDate } =
-    useExpiryDateValidation();
+  const { errorText: expiredDateErrorText, validateExpiryDate } =
+    useExpiryDateValidation(monthSetError, yearSetError);
 
-  const updateExpiryDate = (name: string, value: string) => {
-    setExpiryDate((prevValue) => {
-      return {
-        ...prevValue,
-        [name]: value,
-      };
-    });
-  };
-
-  const handleExpiryDateChange = (
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    const { name, value } = event.target;
-    const canUpdate = validateExpiryDate(name, value, expiryDate);
-
-    if (!canUpdate) return;
-
-    updateExpiryDate(name, value);
-  };
-
-  const isExpiryDateCompleted = Object.values(expiryDate).every(
-    (cardNumber) => cardNumber.length === INPUT_RULES.maxExpiryDateLength
+  const expiryDate = [expiryMonth, expiryYear];
+  const isExpiryDateFilled = expiryDate.every(
+    (expiryDateValue) =>
+      expiryDateValue.length === INPUT_RULES.maxExpiryDateLength
   );
 
+  useEffect(() => {
+    if (isExpiryDateFilled) validateExpiryDate(expiryMonth, expiryYear);
+  }, [expiryMonth, expiryYear]);
+
+  const { errorText } = useExpiryDateErrorText({
+    monthErrorText,
+    yearErrorText,
+    expiredDateErrorText,
+  });
+
+  const isExpiryDateCompleted = !errorText && isExpiryDateFilled;
+
   return {
-    expiryDate,
-    errorState,
-    isExpiryDateCompleted,
+    expiryDate: {
+      month: expiryMonth,
+      year: expiryYear,
+    },
+    errorState: {
+      month: monthError,
+      year: yearError,
+    },
+    handleExpiryDateChange: {
+      month: handleExpiryMonthChange,
+      year: handleExpiryYearChange,
+    },
     errorText,
-    handleExpiryDateChange,
+    isExpiryDateCompleted,
   };
 };
 
