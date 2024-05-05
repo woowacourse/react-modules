@@ -2,9 +2,8 @@ import { renderHook } from "@testing-library/react";
 import React, { ChangeEvent } from "react";
 import { CardNumbersErrorMessages } from "@/constants/error";
 import { ErrorStatus } from "@/types/errorStatus";
-import useMultiCardNumbers, {
-  cardCompanyNumbersInfo,
-} from "@/lib/useMultiCardNumbers";
+import useMultiCardNumbers from "@/lib/useMultiCardNumbers";
+import { cardCompanyNumbersInfo } from "@/data/cardCompanyNumbersInfo";
 
 describe("useMultiCardNumbers 훅 테스트", () => {
   it("입력값이 정확히 업데이트 되어야 한다.", () => {
@@ -57,7 +56,7 @@ describe("useMultiCardNumbers 훅 테스트", () => {
     expect(result.current.errorMessages).toEqual(expectedErrorMessage);
   });
 
-  it("[3,4,5,6] 포맷을 가진 카드 브랜드 인 경우, 각 자리의 숫자를 채우지 못하면 에러가 난다.", () => {
+  it("[3,4,5,6] 포맷을 가진 카드 브랜드 인 경우, 마지막 인풋의 숫자를 채우지 못하면 에러가 난다.", () => {
     const { result } = renderHook(() =>
       useMultiCardNumbers({
         cardCompanyNumbersInfo: cardCompanyNumbersInfo,
@@ -84,7 +83,7 @@ describe("useMultiCardNumbers 훅 테스트", () => {
     expect(result.current.errorMessages).toEqual(expectedErrorMessage);
   });
 
-  it("[4,4,4,4] 포맷을 가진 카드 브랜드 인 경우, 숫자가 4자리가 아닐때 에러를 낸다.", () => {
+  it("[4,4,4,4] 포맷을 가진 카드 브랜드 인 경우, 첫 인풋의 숫자가 4자리가 아닐때 에러를 낸다.", () => {
     const { result } = renderHook(() =>
       useMultiCardNumbers({
         cardCompanyNumbersInfo: cardCompanyNumbersInfo,
@@ -109,23 +108,32 @@ describe("useMultiCardNumbers 훅 테스트", () => {
     expect(result.current.errorMessages).toEqual(expectedErrorMessage);
   });
 
-  // it("길이가 3글자이고 포커스를 벗어나면 에러를 낸다.", () => {
-  //   const initialValues = {
-  //     cardNumber1: "",
-  //     cardNumber2: "",
-  //     cardNumber3: "",
-  //     cardNumber4: "",
-  //   };
-  //   const { result } = renderHook(() => useCardNumbers(initialValues));
-  //   const invalidValue = "123";
-  //   React.act(() => {
-  //     result.current.onBlurValidLength({
-  //       target: { value: invalidValue, name: "cardNumber1" },
-  //     } as React.FocusEvent<HTMLInputElement>);
-  //   });
-  //   const expectedErrorMessage = {
-  //     cardNumber1: CardNumbersErrorMessages[ErrorStatus.INVALID_LENGTH],
-  //   };
-  //   expect(result.current.errorMessages).toEqual(expectedErrorMessage);
-  // });
+  it("[5,5,5] 포맷을 가진 카드 브랜드 인 경우, 모든 인풋의 숫자가 5자리가 아니면 에러를 낸다.", () => {
+    const { result } = renderHook(() =>
+      useMultiCardNumbers({
+        cardCompanyNumbersInfo: cardCompanyNumbersInfo,
+        selectedCompany: "[5,5,5]",
+      })
+    );
+
+    const invalidValues = "1234";
+
+    Array.from({ length: 3 }).forEach((_, index) => {
+      React.act(() => {
+        result.current.onBlurValidLength(
+          {
+            target: { value: invalidValues },
+          } as React.FocusEvent<HTMLInputElement>,
+          index
+        );
+      });
+    });
+
+    const expectedErrorMessage = {
+      cardNumber1: CardNumbersErrorMessages[ErrorStatus.INVALID_LENGTH],
+      cardNumber2: CardNumbersErrorMessages[ErrorStatus.INVALID_LENGTH],
+      cardNumber3: CardNumbersErrorMessages[ErrorStatus.INVALID_LENGTH],
+    };
+    expect(result.current.errorMessages).toEqual(expectedErrorMessage);
+  });
 });

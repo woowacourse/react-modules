@@ -36,22 +36,22 @@ const useExpiryDate = (initialValue: ExpiryDateType) => {
     onChange: onChangeMonth,
     onBlurValidLength: onBlurMonth,
     errorStatus: errorStatusMonth,
-  } = useInput<ExpiryDateErrorType>(
-    initialValue.month,
-    monthValidates,
-    validLength
-  );
+  } = useInput<ExpiryDateErrorType>({
+    initialValue: initialValue.month,
+    validate: monthValidates,
+    validLength,
+  });
 
   const {
     value: yearValue,
     onChange: onChangeYear,
     onBlurValidLength: onBlurYear,
     errorStatus: errorStatusYear,
-  } = useInput<ExpiryDateErrorType>(
-    initialValue.year,
-    yearValidates,
-    validLength
-  );
+  } = useInput<ExpiryDateErrorType>({
+    initialValue: initialValue.year,
+    validate: yearValidates,
+    validLength,
+  });
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name } = e.target;

@@ -3,11 +3,12 @@ import { validateLength } from "@/validate/validate";
 
 type validateType = (value: string) => void;
 
-const useInput = <T>(
-  initialValue: string = "",
-  validate: validateType,
-  validLength?: number
-) => {
+interface Props {
+  initialValue: string;
+  validate: validateType;
+  validLength?: number;
+}
+const useInput = <T>({ initialValue = "", validate, validLength }: Props) => {
   const [value, setValue] = useState(initialValue);
   const [errorStatus, setErrorStatus] = useState<T | null>(null);
 

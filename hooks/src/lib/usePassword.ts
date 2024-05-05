@@ -12,11 +12,11 @@ const passwordValidates = (value: string) => {
 
 const usePassword = (initialValue: string) => {
   const { value, onChange, errorStatus, onBlurValidLength } =
-    useInput<PasswordErrorType>(
+    useInput<PasswordErrorType>({
       initialValue,
-      passwordValidates,
-      VALID_LENGTH.PASSWORD
-    );
+      validate: passwordValidates,
+      validLength: VALID_LENGTH.PASSWORD,
+    });
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     onChange(e);

@@ -12,7 +12,11 @@ const cvcValidates = (value: string) => {
 
 const useCVC = (initialValue: string) => {
   const { value, onChange, errorStatus, onBlurValidLength } =
-    useInput<cvcErrorType>(initialValue, cvcValidates, VALID_LENGTH.CVC);
+    useInput<cvcErrorType>({
+      initialValue,
+      validate: cvcValidates,
+      validLength: VALID_LENGTH.CVC,
+    });
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     onChange(e);

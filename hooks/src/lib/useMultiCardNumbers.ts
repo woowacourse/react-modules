@@ -12,20 +12,6 @@ export const cardNumbersValidates = (value: string) => {
   validateOverLength(value, VALID_LENGTH.CARD_NUMBERS);
 };
 
-export const cardCompanyNumbersInfo = [
-  {
-    name: "[4,4,4,4]",
-    cardNumbersFormat: [4, 4, 4, 4],
-  },
-  {
-    name: "[5,5,5]",
-    cardNumbersFormat: [5, 5, 5],
-  },
-  {
-    name: "[3,4,5,6]",
-    cardNumbersFormat: [3, 4, 5, 6],
-  },
-];
 type CardCompanyNumbers<T> = {
   name: T;
   cardNumbersFormat: number[];
@@ -54,19 +40,18 @@ const useMultiCardNumbers = <T>({
       targetCompany!.cardNumbersFormat
     );
 
-  const numberValues: Record<CardNumberKeys, string> = {
-    cardNumber1: values[0].value,
-    cardNumber2: values[1].value,
-    cardNumber3: values[2].value,
-    cardNumber4: values[3].value,
-  };
+  const numberValues = values.reduce((acc, input, index) => {
+    acc[`cardNumber${index + 1}` as CardNumberKeys] = input.value;
+    return acc;
+  }, {} as Record<CardNumberKeys, string>);
 
-  const errorMessages = {
-    cardNumber1: values[0].error && CardNumbersErrorMessages[values[0].error],
-    cardNumber2: values[1].error && CardNumbersErrorMessages[values[1].error],
-    cardNumber3: values[2].error && CardNumbersErrorMessages[values[2].error],
-    cardNumber4: values[3].error && CardNumbersErrorMessages[values[3].error],
-  };
+  const errorMessages = values.reduce((acc, input, index) => {
+    const errorKey = input.error;
+    acc[`cardNumber${index + 1}` as CardNumberKeys] = errorKey
+      ? CardNumbersErrorMessages[errorKey]
+      : null;
+    return acc;
+  }, {} as Record<CardNumberKeys, string | null>);
 
   for (const key in errorMessages) {
     if (errorMessages[key as CardNumberKeys] === null) {

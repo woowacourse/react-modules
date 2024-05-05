@@ -1,29 +1,20 @@
 import "./App.css";
-import useCardNumbers2, { cardCompanyNumbersInfo } from "./lib/useCardNumbers2";
-import { CardNumberKeys } from "./types/cardNumbers";
+import { cardCompanyNumbersInfo } from "@/data/cardCompanyNumbersInfo";
+import useMultiCardNumbers from "@/lib/useMultiCardNumbers";
 
 function App() {
-  // const {
-  //   values: cardNumbers,
-  //   onChange: onChangeCardNumbers,
-  //   errorMessages,
-  //   onBlurValidLength,
-  // } = useCardNumbers({
-  //   cardNumber1: "",
-  //   cardNumber2: "",
-  //   cardNumber3: "",
-  //   cardNumber4: "",
-  // });
-
   const {
     values: cardNumbers,
     errorMessages,
     onChange: onChangeCardNumbers,
     onBlurValidLength,
-  } = useCardNumbers2({
+  } = useMultiCardNumbers({
     cardCompanyNumbersInfo: cardCompanyNumbersInfo,
-    selectedCompany: "[3,4,5]",
+    selectedCompany: "[3,4,5,6]",
   });
+
+  const valuesArr = Object.values(cardNumbers);
+  const errorMessagesArr = Object.values(errorMessages);
 
   return (
     <>
@@ -36,10 +27,10 @@ function App() {
             <>
               <input
                 onChange={(e) => onChangeCardNumbers(e, i)}
-                value={cardNumbers[`cardNumber${i + 1}` as CardNumberKeys]}
+                value={valuesArr[i]}
                 onBlur={(e) => onBlurValidLength(e, i)}
               />
-              <div>{errorMessages[`cardNumber${i + 1}` as CardNumberKeys]}</div>
+              <div>{errorMessagesArr[i]}</div>
             </>
           );
         })}

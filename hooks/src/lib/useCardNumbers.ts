@@ -15,49 +15,50 @@ export const cardNumbersValidates = (value: string) => {
 };
 
 const useCardNumbers = (initialValues: CardNumbersType) => {
+  const cardNumbersConfig = {
+    validate: cardNumbersValidates,
+    validLength: VALID_LENGTH.CARD_NUMBERS,
+  };
+
   const {
     value: cardNumber1,
     onChange: onChangeNumber1,
     errorStatus: errorStatusNumber1,
     onBlurValidLength: onBlurValidLength1,
-  } = useInput<CardNumberErrorType>(
-    initialValues["cardNumber1"],
-    cardNumbersValidates,
-    VALID_LENGTH.CARD_NUMBERS
-  );
+  } = useInput<CardNumberErrorType>({
+    initialValue: initialValues["cardNumber1"],
+    ...cardNumbersConfig,
+  });
 
   const {
     value: cardNumber2,
     onChange: onChangeNumber2,
     errorStatus: errorStatusNumber2,
     onBlurValidLength: onBlurValidLength2,
-  } = useInput<CardNumberErrorType>(
-    initialValues["cardNumber2"],
-    cardNumbersValidates,
-    VALID_LENGTH.CARD_NUMBERS
-  );
+  } = useInput<CardNumberErrorType>({
+    initialValue: initialValues["cardNumber2"],
+    ...cardNumbersConfig,
+  });
 
   const {
     value: cardNumber3,
     onChange: onChangeNumber3,
     errorStatus: errorStatusNumber3,
     onBlurValidLength: onBlurValidLength3,
-  } = useInput<CardNumberErrorType>(
-    initialValues["cardNumber3"],
-    cardNumbersValidates,
-    VALID_LENGTH.CARD_NUMBERS
-  );
+  } = useInput<CardNumberErrorType>({
+    initialValue: initialValues["cardNumber3"],
+    ...cardNumbersConfig,
+  });
 
   const {
     value: cardNumber4,
     onChange: onChangeNumber4,
     errorStatus: errorStatusNumber4,
     onBlurValidLength: onBlurValidLength4,
-  } = useInput<CardNumberErrorType>(
-    initialValues["cardNumber4"],
-    cardNumbersValidates,
-    VALID_LENGTH.CARD_NUMBERS
-  );
+  } = useInput<CardNumberErrorType>({
+    initialValue: initialValues["cardNumber4"],
+    ...cardNumbersConfig,
+  });
 
   const onChangeArray = {
     cardNumber1: onChangeNumber1,

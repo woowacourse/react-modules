@@ -10,10 +10,10 @@ export const cardHolderValidates = (value: string) => {
 };
 
 const useCardHolder = (initialValue: string) => {
-  const { value, onChange, errorStatus } = useInput<CardHolderErrorType>(
+  const { value, onChange, errorStatus } = useInput<CardHolderErrorType>({
     initialValue,
-    cardHolderValidates
-  );
+    validate: cardHolderValidates,
+  });
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     onChange(e);

@@ -7,6 +7,13 @@ export interface CardNumbersType {
   cardNumber4: string;
 }
 
+export const cardNumberKeys = [
+  "cardNumber1",
+  "cardNumber2",
+  "cardNumber3",
+  "cardNumber4",
+];
+
 export type CardNumberKeys = keyof CardNumbersType;
 
 export type CardNumberErrorType =

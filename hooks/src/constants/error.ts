@@ -8,7 +8,7 @@ import { CardCompanyErrorType } from "@/types/cardCompany";
 
 export const CardNumbersErrorMessages: Record<CardNumberErrorType, string> = {
   [ErrorStatus.IS_NOT_NUMBER]: "카드번호는 숫자만 입력해주세요.",
-  [ErrorStatus.INVALID_LENGTH]: "카드 번호를 4자리씩 입력해주세요.",
+  [ErrorStatus.INVALID_LENGTH]: "카드 번호 길이가 유효하지 않습니다.",
 };
 
 export const CardHolderErrorMessages: Record<CardHolderErrorType, string> = {

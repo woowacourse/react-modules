@@ -14,6 +14,7 @@ npm install rian-card-validation-hooks
 ## Available Hooks
 
 - useCardNumbers (카드 넘버 16자리 입력 커스텀 훅)
+- useMultiCardNumbers (여러 카드사의 다양한 카드 넘버 포맷을 지정해서 검사 가능한 커스텀 훅)
 - useCardCompany (카드 회사 선택 커스텀 훅)
 - useCardHolder (영문이름 입력 커스텀 훅)
 - useExpiryDate (유효기간(월/년) 입력 커스텀 훅)
@@ -29,8 +30,42 @@ npm install rian-card-validation-hooks
 - validate : 입력한 카드 번호가 모두 숫자인지, 4자리씩 작성되었는지 확인합니다.
 - 인풋에 onChange 이벤트에 onChange를, onBlur 이벤트에 onBlurValidLength를 연결하여 사용합니다.
 
+#### inputs
+
+(1)`initialValue` : 다음 객체를 고정으로 넣어야 합니다.
+
+```tsx
+{
+  cardNumber1: "",
+  cardNumber2: "",
+  cardNumber3: "",
+  cardNumber4: "",
+}
+```
+
+#### outputs
+
+(1)`values` : 인풋에 입력된 값이 객체 형태로 나옵니다.
+
+```tsx
+{
+  cardNumber1: "1234",
+  cardNumber2: "1234",
+  cardNumber3: "1234",
+  cardNumber4: "1234",
+}
+```
+
+(2)`errorMessages` : 인풋에 해당하는 에러 메세지가 객체 형태로 나옵니다. values와 포맷이 같습니다. 다음과 같은 에러 메세지가 들어갑니다.
+
 > [IS_NOT_NUMBER]: '카드번호는 숫자만 입력해주세요.'  
 > [INVALID_LENGTH]: '카드 번호를 4자리씩 입력해주세요.'
+
+(3) `onChangeCardNumbers` : 카드 번호의 값을 입력받아 관리하는 메서드 입니다. 첫번째 인자로 event가 들어갑니다.
+
+(4) `onBlurValidLength` : 현재 인풋의 포커스가 벗어났을 때 길이 검사를 해주는 함수입니다. 첫번째 인자로 event가 들어갑니다.
+
+#### Usage
 
 ```tsx
 const {
@@ -85,12 +120,115 @@ return (
 );
 ```
 
-### (2) useCardCompany
+### (2) useMultiCardNumbers
+
+- 다양한 타입의 카드 브랜드들의 카드 숫자 정보를 받아, 현재 카드 브랜드의 정보에 맞게 동적으로 카드 번호를 검사해 주는 커스텀 훅입니다.
+
+(1)`cardCompanyNumbersInfo` : 사용할 카드 브랜드들의 카드 번호 포맷을 배열 형태로 전달해야 합니다.
+
+```tsx
+const cardCompanyNumbersInfo = [
+  {
+    name: "VISA",
+    cardNumbersFormat: [4, 4, 4, 4],
+  },
+  {
+    name: "MASTER",
+    cardNumbersFormat: [5, 5, 5],
+  },
+];
+```
+
+(2) `selectedCompany` : 현재 검사할 카드의 타입을 명시합니다. 이 타입은 cardCompanyNumbersInfo 안에 있는 name 이어야 합니다. 만약 cardCompanyNumbersInfo 에 없는 이름을 넣는다면, 에러가 납니다.
+
+#### outputs
+
+(1)`values` : 인풋에 입력된 값이 객체 형태로 나옵니다.
+
+```tsx
+{
+  cardNumber1: "1234",
+  cardNumber2: "1234",
+  cardNumber3: "1234",
+  cardNumber4: "1234",
+}
+```
+
+(2)`errorMessages` : 인풋에 해당하는 에러 메세지가 객체 형태로 나옵니다. values와 포맷이 같습니다. 다음과 같은 에러 메세지가 들어갑니다.
+
+> [IS_NOT_NUMBER]: '카드번호는 숫자만 입력해주세요.'  
+> [INVALID_LENGTH]: '카드 번호를 4자리씩 입력해주세요.'
+
+(3) `onChangeCardNumbers` : 카드 번호의 값을 입력받아 관리하는 메서드 입니다. 첫번째 인자로 event 를, 두번쨰 인자로는 현재 인풋의 인덱스를 전달해야 합니다.
+
+(4) `onBlurValidLength` : 현재 인풋의 포커스가 벗어났을 때 길이 검사를 해주는 함수입니다. 첫번째 인자로 event 를, 두번쨰 인자로는 현재 인풋의 인덱스를 전달해야 합니다.
+
+```tsx
+<input
+  onChange={(e) => onChangeCardNumbers(e, i)}
+  value={cardNumbers[`cardNumber${i + 1}`]}
+  onBlur={(e) => onBlurValidLength(e, i)}
+/>
+```
+
+#### Usage
+
+```tsx
+const {
+  values: cardNumbers,
+  errorMessages,
+  onChange: onChangeCardNumbers,
+  onBlurValidLength,
+} = useMultiCardNumbers({
+  cardCompanyNumbersInfo: cardCompanyNumbersInfo,
+  selectedCompany: "[3,4,5,6]",
+});
+
+const valuesArr = Object.values(cardNumbers);
+const errorMessagesArr = Object.values(errorMessages);
+
+return (
+  <>
+    <h1>Hooks Modules</h1>
+    <div>카드 번호</div>
+    {Array.from({ length: 4 })
+      .fill(0)
+      .map((e, i) => {
+        return (
+          <>
+            <input
+              onChange={(e) => onChangeCardNumbers(e, i)}
+              value={valuesArr[i]}
+              onBlur={(e) => onBlurValidLength(e, i)}
+            />
+            <div>{errorMessagesArr[i]}</div>
+          </>
+        );
+      })}
+  </>
+);
+```
+
+### (3) useCardCompany
 
 - useCardCompany는 카드 발급 회사에 대해 선택할 수 있습니다.
 - validate : 선택한 벨류가 유효한 값인지 확인합니다.
 
+#### inputs
+
+(1)`initialValue` : 빈 문자열을 고정으로 넣어야 합니다.
+
+(2) `optionArray` : (string[]) 선택 가능한 배열을 넣어야 합니다.
+
+```tsx
+optionArray: ["하나카드", "우리카드", "비씨카드"];
+```
+
+#### errors
+
 > [INVALID_OPTION]: '유효하지 않은 옵션입니다.'
+
+#### usage
 
 ```tsx
 const { value, onSelect, errorMessages } = useCardCompany({
@@ -114,13 +252,21 @@ return (
 );
 ```
 
-### (3) useCardHolder
+### (4) useCardHolder
 
 - useCardHolder 커스텀 훅은 카드의 영문이름을 입력 받습니다.
 - validate : 입력 받은 벨류가 모두 대문자 영어인지를 확인합니다.
 
+#### inputs
+
+빈 문자열을 고정으로 넣어야 합니다.
+
+#### errors
+
 > [ONLY_UPPERCASE]: '영대문자로만 입력해주세요.'  
 > [IS_DOUBLE_BLANK]: '빈칸이 두개 이상 포함되어 있습니다.'
+
+#### usage
 
 ```tsx
 const { value, onChange, errorMessage } = useCardHolder("");
@@ -134,16 +280,44 @@ return (
 );
 ```
 
-### (4) useExpiryDate
+### (5) useExpiryDate
 
 - useExpiryDate 커스텀 훅은 카드의 유효기간 (월/년도)에 대해 입력 받습니다.
 - validate : 입력 받은 벨류가 모두 숫자인지, 유효한 기간인지를 확인합니다.
+
+#### inputs
+
+다음과 같은 객체를 고정으로 넣어야 합니다.
+
+```tsx
+{
+  month: "",
+  year: "",
+}
+```
+
+#### outputs
+
+(1)`values` : 인풋에 입력된 값이 객체 형태로 나옵니다.
+
+```tsx
+{
+  month: "12",
+  year: "25",
+}
+```
+
+(2)`errorMessages` : 인풋에 해당하는 에러 메세지가 객체 형태로 나옵니다. values와 포맷이 같습니다. 다음과 같은 에러 메세지가 들어갑니다.
+
+#### errors
 
 > [IS_NOT_NUMBER]: '만료 일자는 숫자만 입력해주세요.'  
 > [INVALID_DATE]:'이미 만료된 카드입니다. 만료일자를 확인해 주세요.'
 > [INVALID_MONTH]: '유효하지 않은 월 입력입니다.'  
 > [INVALID_YEAR]: '유효하지 않은 년 입력입니다.'  
 > [INVALID_LENGTH]: '일자는 2자리 숫자로 입력해 주세요.'
+
+#### usage
 
 ```tsx
 const {
@@ -178,10 +352,16 @@ return (
 );
 ```
 
-### (5) useCVC
+### (6) useCVC
 
 - useCVC 커스텀 훅은 카드의 CVC 3자리를 입력 받습니다.
 - validate : 입력 받은 벨류가 모두 숫자인지, 길이가 3인지를 확인합니다.
+
+#### inputs
+
+빈 문자열을 고정으로 넣어야 합니다.
+
+#### errors
 
 > [IS_NOT_NUMBER]: 'CVC는 숫자만 입력해주세요.'  
 > [INVALID_LENGTH]: 'CVC는 3글자 이상으로 입력해 주세요.'
@@ -198,10 +378,16 @@ return (
   );```
 ````
 
-### (6) usePassword
+### (7) usePassword
 
 - usePassword 커스텀 훅은 카드의 비밀번호 앞자리 2자리를 입력 받습니다.
 - validate : 입력 받은 벨류가 모두 숫자인지, 길이가 2인지를 확인합니다.
+
+#### inputs
+
+빈 문자열을 고정으로 넣어야 합니다.
+
+#### errors
 
 > [IS_NOT_NUMBER]: '비밀번호는 숫자만 입력해주세요.'  
 > [INVALID_LENGTH]: '비밀번호는 2글자만 입력해 주세요.'
