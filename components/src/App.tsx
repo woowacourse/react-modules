@@ -1,6 +1,7 @@
 import Button from './lib/Button/Button';
 
 import Modal from './lib/Modal/Modal';
+// import { Modal } from 'woowacourse-todari-components';
 import React, { useState } from 'react';
 
 const App = () => {
@@ -27,6 +28,7 @@ const App = () => {
       <Modal
         isOpened={modalOpened}
         onClose={handleModalClose}
+        zIndex={300}
         title="Todal Modal"
         description="This is for woowacourse mission"
         modalPosition="bottom"

@@ -1,9 +1,9 @@
 import styled from 'styled-components';
 
-export const DimmedLayer = styled.div`
+export const DimmedLayer = styled.div<{ zIndex: number }>`
   position: fixed;
   inset: 0;
-  z-index: 100;
+  z-index: ${(props) => 100 + props.zIndex};
   width: 100vw;
   height: 100vh;
   padding: 16px;
@@ -25,7 +25,6 @@ export const ModalContainer = styled.div<{ modalPosition: ModalPosition }>`
   max-height: 80vh;
   box-sizing: border-box;
   gap: 16px;
-  z-index: 200;
   padding: 24px;
   background-color: white;
   border-radius: ${(props) =>

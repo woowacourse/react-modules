@@ -8,6 +8,7 @@ import { ButtonProps } from '../Button/Button';
 interface ModalProps {
   isOpened: boolean;
   onClose: () => void;
+  zIndex?: number;
   title?: string;
   description?: string;
   children?: JSX.Element;
@@ -22,6 +23,7 @@ interface ModalProps {
 const Modal = ({
   isOpened,
   onClose,
+  zIndex = 0,
   title = '',
   description = '',
   children,
@@ -48,7 +50,7 @@ const Modal = ({
   return (
     <>
       {isOpened && (
-        <Styled.DimmedLayer onClick={onClose}>
+        <Styled.DimmedLayer onClick={onClose} zIndex={zIndex}>
           <Styled.ModalContainer
             modalPosition={modalPosition}
             onClick={(e) => {
