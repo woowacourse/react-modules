@@ -1,7 +1,13 @@
 {
   "name": "badahertz52-react-modules-hooks",
-  "version": "0.0.2",
-  "description": "npm modules",
+  "version": "0.0.4",
+  "description": "카드 정보에 대한 유효성 검사 hooks",
+  "keywords": [
+    "card-form",
+    "react",
+    "typescript",
+    "hooks"
+  ],
   "type": "module",
   "types": "dist/index.d.ts",
   "main": "dist/index.js",
