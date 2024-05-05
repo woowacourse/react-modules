@@ -50,11 +50,7 @@ type ModalCloseButtonType = React.FC<
 >;
 
 const ModalCloseButton: ModalCloseButtonType = ({ children, ...restProps }) => {
-  return (
-    <button type='button' {...restProps}>
-      {children}
-    </button>
-  );
+  return <button {...restProps}>{children}</button>;
 };
 
 type ModalContentType = React.FC<
