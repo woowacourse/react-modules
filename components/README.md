@@ -1,8 +1,8 @@
-# le-serrafim
+# le-sserrafim
 
-`le-serrafim`은 React 기반 프로젝트에서 사용할 수 있는 모달 컴포넌트 라이브러리입니다. 이 모달 컴포넌트는 `styled-components` 및 `@emotion/styled`를 사용하여 스타일링되어 있으며, 사용자가 종료, 확인 작업을 쉽게 수행할 수 있도록 다양한 속성을 지원합니다. 또한, 모달의 위치를 설정할 수 있는 기능(중앙 혹은 하단에 배치)과 닫기 버튼의 표시 여부를 선택할 수 있는 옵션도 포함하고 있습니다.
+`le-sserrafim`은 React 기반 프로젝트에서 사용할 수 있는 모달 컴포넌트 라이브러리입니다. 이 모달 컴포넌트는 `styled-components` 및 `@emotion/styled`를 사용하여 스타일링되어 있으며, 사용자가 종료, 확인 작업을 쉽게 수행할 수 있도록 다양한 속성을 지원합니다. 또한, 모달의 위치를 설정할 수 있는 기능(중앙 혹은 하단에 배치)과 닫기 버튼의 표시 여부를 선택할 수 있는 옵션도 포함하고 있습니다.
 
-## 기능
+## 공통 기능
 
 - **이스케이프(ESC) 키로 모달 닫기:** 사용자가 이스케이프(ESC) 키를 누를 때 모달이 닫히는 기능을 지원합니다.
 - **커스터마이징 가능한 버튼 텍스트 및 이벤트 핸들러:** 확인 버튼의 텍스트를 사용자 정의할 수 있으며, 선택적으로 버튼에 대한 커스텀 클릭 이벤트 핸들러도 설정할 수 있습니다.
@@ -12,15 +12,14 @@
 ## 설치 방법
 
 ```bash
-npm i le-serrafim
+npm i le-sserrafim
 ```
 
-## 사용 방법
+## Modal 사용 방법
 
 ```jsx
 import React from 'react';
-import Modal from 'le-serrafim';
-import 'le-serrafim/dist/index.css'; // 필요한 경우
+import Modal from 'le-sserrafim'요한 경우
 
 function App() {
   const [isModalOpen, setIsModalOpen] = React.useState(false);
@@ -44,7 +43,7 @@ function App() {
 }
 ```
 
-## Props
+## Modal Props
 
 `Modal` 컴포넌트는 다음과 같은 props를 지원합니다:
 
@@ -55,3 +54,33 @@ function App() {
 - `children`: 모달의 내용으로 렌더링될 요소입니다.
 - `hasCloseButton`: 닫기 버튼의 표시 여부를 결정합니다. 기본값은 `true`입니다.
 - `position`: 모달의 위치를 설정합니다. `'center'` 또는 `'bottom'`을 설정할 수 있으며, 기본값은 `'center'`입니다.
+
+## CompoundModal 사용예시
+
+```jsx
+import React from 'react';
+import Modal from 'le-sserrafim/CompoundModal';
+function App() {
+  const [isOpen, setIsOpen] = useState(true);
+  return (
+    <>
+      {isOpen && (
+        <CompoundModal position='bottom' onClose={() => setIsOpen(false)}>
+          <CompoundModal.titleBar>
+            <CompoundModalTitle>123</CompoundModalTitle>
+            <CompoundModal.closeButton />
+          </CompoundModal.titleBar>
+          컨텐츠 내용
+          <CompoundModal.button buttonTheme='primary' isCloseButton={true}>
+            닫기
+          </CompoundModal.button>
+        </CompoundModal>
+      )}
+    </>
+  );
+}
+```
+
+## CompoundModal 주의사항
+
+`<CompoundModal.closeButton>`은 오직 `<CompoundModal.titleBar>`의 하위요소에서 사용할 것을 권장합니다.
