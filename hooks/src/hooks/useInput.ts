@@ -8,12 +8,12 @@ interface InputAttributes {
 
 const useInput = () => {
   const [valueMap, setValueMap] = useState<Record<string, string>>({});
-  const errorMap = {};
+  // const errorMap = {};
 
   const useRegister = (name: string, { onChange, onBlur }: InputAttributes = {}) => {
     const { valueState, errorState } = useRestrictedState();
     const { value, setValue } = valueState;
-    const { isError, errorMessage, setError } = errorState;
+    // const { isError, errorMessage, setError } = errorState;
 
     //TODO: Blur되었을 경우 register내부 에러를 관찰하여 에러가 있으면 바깥 에러에 할당한다.
 
