@@ -1,13 +1,17 @@
 import styles from './ModalHeader.module.css';
 import CloseIcon from '../../assets/closeButton.svg';
 
+interface ModalHeaderStyle {
+  modalHeader?: React.CSSProperties;
+  modalTitle?: React.CSSProperties;
+}
+
 interface ModalHeaderProps {
   title: string;
   onClose: () => void;
+  style?: ModalHeaderStyle;
   customCloseIcon?: string;
   hideCloseIcon?: boolean;
-  modalHeader?: React.CSSProperties;
-  modalTitle?: React.CSSProperties;
 }
 
 const ModalHeader = ({
@@ -15,16 +19,15 @@ const ModalHeader = ({
   onClose,
   customCloseIcon,
   hideCloseIcon,
-  modalHeader,
-  modalTitle,
+  style,
 }: ModalHeaderProps) => {
   const onErrorIcon = (event: React.SyntheticEvent<HTMLImageElement, Event>) => {
     event.currentTarget.src = CloseIcon;
   };
 
   return (
-    <header className={styles.modalHeader} style={modalHeader}>
-      <span className={styles.title} style={modalTitle}>
+    <header className={styles.modalHeader} style={style?.modalHeader}>
+      <span className={styles.title} style={style?.modalTitle}>
         {title}
       </span>
       {!hideCloseIcon && (

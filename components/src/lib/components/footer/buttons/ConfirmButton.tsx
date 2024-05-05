@@ -1,13 +1,26 @@
 import styles from './styles.module.css';
 
-const ConfirmButton = ({
-  children,
-  ...props
-}: React.PropsWithChildren<React.ButtonHTMLAttributes<HTMLButtonElement>>) => {
+export interface ConfirmButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  text?: string;
+  style?: React.CSSProperties;
+  customButton?: React.ReactNode;
+  hide?: boolean;
+}
+
+const ConfirmButton = ({ style, customButton, hide, text, ...props }: ConfirmButtonProps) => {
   return (
-    <button className={`${styles.modalButton} ${styles.confirmButton}`} {...props}>
-      {children}
-    </button>
+    <>
+      {!hide &&
+        (customButton ?? (
+          <button
+            className={`${styles.modalButton} ${styles.confirmButton}`}
+            {...props}
+            style={style}
+          >
+            {text ?? '확인'}
+          </button>
+        ))}
+    </>
   );
 };
 
