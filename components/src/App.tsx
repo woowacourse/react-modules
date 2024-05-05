@@ -8,7 +8,9 @@ function App() {
   return (
     <>
       <button onClick={toggleIsOpen}>모달열기</button>
-      <Modal isOpen={isOpen}></Modal>
+      <Modal isOpen={isOpen}>
+        <Modal.Dimmed />
+      </Modal>
     </>
   );
 }
