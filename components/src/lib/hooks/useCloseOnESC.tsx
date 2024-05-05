@@ -1,9 +1,13 @@
 import { useEffect } from 'react';
 
-const useCloseOnESCKeyDown = (onClose: () => void, activeESCKeyDownClose: boolean) => {
+const useCloseOnESCKeyDown = (
+  open: boolean,
+  onClose: () => void,
+  activeESCKeyDownClose: boolean,
+) => {
   useEffect(() => {
     const onESCKeyDown = (event: KeyboardEvent) => {
-      if (event.key === 'Escape' && activeESCKeyDownClose) {
+      if (open && event.key === 'Escape' && activeESCKeyDownClose) {
         onClose();
       }
     };
@@ -11,7 +15,7 @@ const useCloseOnESCKeyDown = (onClose: () => void, activeESCKeyDownClose: boolea
     return () => {
       document.removeEventListener('keydown', onESCKeyDown);
     };
-  }, [onClose, activeESCKeyDownClose]);
+  }, [open, onClose, activeESCKeyDownClose]);
 };
 
 export default useCloseOnESCKeyDown;

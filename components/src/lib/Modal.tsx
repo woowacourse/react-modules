@@ -41,7 +41,7 @@ const Modal = ({
   const modalRef = useRef<HTMLDivElement>(null);
 
   useModalCloseClickDimmer(modalRef, onClose, closeOnOutsideClick);
-  useCloseOnESCKeyDown(onClose, closeOnESCKeydown);
+  useCloseOnESCKeyDown(open, onClose, closeOnESCKeydown);
 
   return (
     <>
