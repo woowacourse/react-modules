@@ -4,8 +4,8 @@ import { updateArray } from '../../utils/updateArray';
 
 export const VALID_CARD_NUMBER_LENGTH = 16;
 
-const useCardNumber = (lengthList: number[]) => {
-  const [cardNumber, setCardNumber] = useState<string[]>(new Array(lengthList.length).fill(''));
+const useCardNumber = (lengthList: number[], initialCardNumber: string[] = new Array(lengthList.length).fill('')) => {
+  const [cardNumber, setCardNumber] = useState<string[]>(initialCardNumber);
   const [isValidCardNumbers, setIsValidCardNumbers] = useState<boolean[]>(new Array(lengthList.length).fill(false));
   const [cardNumberErrorMessages, setCardNumberErrorMessages] = useState<string[]>(
     new Array(lengthList.length).fill(''),
