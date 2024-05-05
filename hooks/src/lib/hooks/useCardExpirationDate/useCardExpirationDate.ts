@@ -21,8 +21,11 @@ type Date<T> = {
 
 const VALID_DATE_LENGTH = 2;
 
-const useCardExpirationDate = () => {
-  const [date, setDate] = useState<Date<string>>({ month: '', year: '' });
+const useCardExpirationDate = (initialMonthValue: string = '', initialYearValue: string = '') => {
+  const [date, setDate] = useState<Date<string>>({
+    month: initialMonthValue,
+    year: initialYearValue,
+  });
   const [isValid, setIsValid] = useState<Date<boolean>>({ month: false, year: false });
   const [errorMessages, setErrorMessages] = useState<Date<string>>({ month: '', year: '' });
 

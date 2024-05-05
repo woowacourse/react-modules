@@ -3,8 +3,8 @@ import { getNumberErrorMessage, isNotNumber } from '../../utils/validation/valid
 
 export const VALID_CVC_NUMBER_LENGTH = 3;
 
-const useCardCVC = (validLength: number = VALID_CVC_NUMBER_LENGTH) => {
-  const [cvcNumber, setCVCNumber] = useState('');
+const useCardCVC = (initialValue: string = '', validLength: number = VALID_CVC_NUMBER_LENGTH) => {
+  const [cvcNumber, setCVCNumber] = useState(initialValue);
   const [isValidCVCNumber, setIsValidCVCNumber] = useState(false);
   const [cvcNumberErrorMessage, setCVCNumberErrorMessage] = useState('');
 
