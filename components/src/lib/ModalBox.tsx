@@ -2,30 +2,32 @@ import { ReactNode } from "react";
 import styled from "styled-components";
 import ModalHeader from "./ModalHeader";
 import ButtonBox from "./ButtonBox";
+import { modalButtonLayout, modalPosition } from "./modalType";
 interface Props {
+  position?: modalPosition;
   title: string;
   children?: ReactNode;
-  isXButton: boolean;
-  buttonLayout: string;
-  closeButtonType?: string;
-  closeButtonContent?: string;
-  confirmButton?: string;
-  confirmButtonContent?: string;
-  handleConfirm?: (e: React.MouseEvent) => void;
-  position?: string;
-  handleClose: (e: React.MouseEvent) => void;
+
+  hasXButton: boolean;
   xButtonContent?: string;
+
+  buttonLayout: modalButtonLayout;
+  closeButtonContent?: string;
+  confirmButtonContent?: string;
+
+  handleConfirmEvent: (e: React.MouseEvent) => void;
+  handleCloseEvent: (e: React.MouseEvent) => void;
 }
 const ModalBox = ({
   title,
   position,
-  isXButton,
+  hasXButton,
   buttonLayout,
   closeButtonContent,
   confirmButtonContent,
-  handleConfirm,
+  handleConfirmEvent,
   children,
-  handleClose,
+  handleCloseEvent,
   xButtonContent,
 }: Props) => {
   return (
@@ -35,8 +37,8 @@ const ModalBox = ({
     >
       <ModalHeader
         title={title}
-        isXButton={isXButton}
-        handleClose={handleClose}
+        hasXButton={hasXButton}
+        handleCloseEvent={handleCloseEvent}
         xButtonContent={xButtonContent}
       />
       <ContentWrapper>{children}</ContentWrapper>
@@ -44,8 +46,8 @@ const ModalBox = ({
         buttonLayout={buttonLayout}
         closeButtonContent={closeButtonContent}
         confirmButtonContent={confirmButtonContent}
-        handleClose={handleClose}
-        confirmEvent={handleConfirm}
+        handleCloseEvent={handleCloseEvent}
+        handleConfirmEvent={handleConfirmEvent}
       />
     </ModalContainer>
   );

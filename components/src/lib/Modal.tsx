@@ -1,36 +1,39 @@
 import styled from "styled-components";
 import ModalBox from "./ModalBox";
 import { ReactNode } from "react";
+import { modalButtonLayout, modalPosition } from "./modalType";
 
 interface Props {
-  position?: string;
+  position?: modalPosition;
   title: string;
-  isXButton?: boolean;
-  buttonLayout?: string;
   children?: ReactNode;
 
-  closeButtonContent?: string;
-  confirmButton?: string;
-  confirmButtonContent?: string;
-
+  hasXButton?: boolean;
   xButtonContent?: string;
 
-  handleConfirm: (e: React.MouseEvent) => void;
-  handleClose: (e: React.MouseEvent) => void;
+  buttonLayout?: modalButtonLayout;
+  closeButtonContent?: string;
+  confirmButtonContent?: string;
+
+  handleConfirmEvent: (e: React.MouseEvent) => void;
+  handleCloseEvent: (e: React.MouseEvent) => void;
 }
 const Modal = ({
   position,
   title,
-  isXButton = true,
+  children,
+
+  hasXButton = true,
+  xButtonContent,
+
   buttonLayout = "row",
   closeButtonContent,
   confirmButtonContent = "확인",
-  handleConfirm,
-  handleClose,
-  children,
-  xButtonContent,
+
+  handleConfirmEvent,
+  handleCloseEvent,
 }: Props) => {
-  const clickBackDrop = (e: React.MouseEvent) => {
+  const isClickBackDrop = (e: React.MouseEvent) => {
     return e.currentTarget === e.target;
   };
 
@@ -39,16 +42,16 @@ const Modal = ({
       {
         <ModalContainer
           $position={position === "bottom" ? "flex-end" : "center"}
-          onClick={(e) => clickBackDrop(e) && handleClose}
+          onClick={(e) => isClickBackDrop(e) && handleCloseEvent(e)}
         >
           <ModalBox
             title={title}
             position={position}
-            isXButton={isXButton}
-            handleClose={handleClose}
+            hasXButton={hasXButton}
+            handleCloseEvent={handleCloseEvent}
             buttonLayout={buttonLayout}
             confirmButtonContent={confirmButtonContent}
-            handleConfirm={handleConfirm}
+            handleConfirmEvent={handleConfirmEvent}
             closeButtonContent={closeButtonContent}
             xButtonContent={xButtonContent}
           >
