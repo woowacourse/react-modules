@@ -35,13 +35,12 @@ const Modal = ({
   primaryColor,
   showCloseButton = false,
 }: ModalProps) => {
+
   useEffect(() => {
     if (isOpened) document.body.style.overflow = 'hidden';
     else document.body.style.overflow = 'scroll';
     document.body.addEventListener('keydown', handleKeyDownEsc);
-    return () => {
-      document.body.removeEventListener('keydown', handleKeyDownEsc)
-    };
+    return document.body.removeEventListener('keydown', handleKeyDownEsc);
   }, [isOpened])
 
   const handleKeyDownEsc = (e: KeyboardEvent) => {
