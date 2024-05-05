@@ -1,4 +1,6 @@
 import styled from 'styled-components';
+import textColorGenerator from '../utils/textColorGenerator';
+import hoverColorGenerator from '../utils/hoverColorGenerator';
 
 export type ButtonSize = 'small' | 'medium' | 'large';
 export type ButtonWidth = 'fixed' | 'fit' | 'full';
@@ -10,40 +12,11 @@ const BUTTON_SIZE_TABLE = {
   large: { width: '240px', height: '56px', fontSize: '18px' },
 };
 
-const textColor = (primaryColor: string) => {
-  const bigint = parseInt(primaryColor.slice(1, 7), 16);
-  const r = (bigint >> 16) & 255;
-  const g = (bigint >> 8) & 255;
-  const b = bigint & 255;
-
-  if (r + g + b <= 384) return '#FFFFFF';
-  return '#000000';
-};
-
-const hoverColor = (backgroundColor: string) => {
-  const bigint = parseInt(backgroundColor.slice(1, 7), 16);
-  const r = (bigint >> 16) & 255;
-  const g = (bigint >> 8) & 255;
-  const b = bigint & 255;
-
-  const adjustColor = (color: number, adjustment: number) => {
-    const newColor = color + adjustment;
-    return Math.min(255, Math.max(0, newColor)).toString(16).padStart(2, '0');
-  };
-
-  const adjustment = r + g + b <= 384 ? 24 : -24;
-  const R = adjustColor(r, adjustment);
-  const G = adjustColor(g, adjustment);
-  const B = adjustColor(b, adjustment);
-
-  return '#' + R + G + B;
-};
-
 const BUTTON_STYLE_TABLE = (primaryColor: string) => {
   return {
     primary: {
       backgroundColor: primaryColor,
-      color: textColor(primaryColor),
+      color: textColorGenerator(primaryColor),
       border: 'none',
     },
     border: {
@@ -87,9 +60,9 @@ export const Button = styled.button<{
     background-color: ${(props) => {
       switch (props.buttonStyle) {
         case 'primary':
-          return hoverColor(props.primaryColor);
+          return hoverColorGenerator(props.primaryColor);
         default:
-          return hoverColor('#FFFFFF');
+          return hoverColorGenerator('#FFFFFF');
       }
     }};
   }
