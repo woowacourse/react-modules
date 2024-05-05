@@ -25,24 +25,6 @@ const useInput = () => {
       if (onChange) onChange(e);
     };
 
-    useEffect(() => {
-      if (ref.current) {
-        ref.current.addEventListener("change", onChangeWrapper);
-        return () => {
-          ref.current?.removeEventListener("change", onChangeWrapper);
-        };
-      }
-    }, [onChange]);
-
-    useEffect(() => {
-      if (ref.current) {
-        ref.current.addEventListener("blur", onBlur);
-        return () => {
-          ref.current?.removeEventListener("blur", onBlur);
-        };
-      }
-    }, [onBlur]);
-
     return { onChange: onChangeWrapper, onBlur, name, ref, value };
   };
 
