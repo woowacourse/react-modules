@@ -3,22 +3,19 @@ module.exports = {
   env: { browser: true, es2020: true },
   extends: [
     'prettier',
-    "eslint:recommended",
-    "plugin:@typescript-eslint/recommended",
-    "plugin:react-hooks/recommended",
-    "plugin:storybook/recommended",
+    'eslint:recommended',
+    'plugin:@typescript-eslint/recommended',
+    'plugin:react-hooks/recommended',
+    'plugin:storybook/recommended',
   ],
-  ignorePatterns: ["dist", ".eslintrc.cjs"],
-  parser: "@typescript-eslint/parser",
-  plugins: ["react-refresh" , '@typescript-eslint'],
+  ignorePatterns: ['dist', '.eslintrc.cjs', 'import'],
+  parser: '@typescript-eslint/parser',
+  plugins: ['react-refresh', '@typescript-eslint'],
   rules: {
-    "react-refresh/only-export-components": [
-      "warn",
-      { allowConstantExport: true },
-    ],
+    'react-refresh/only-export-components': ['warn', { allowConstantExport: true }],
     'max-depth': ['error', 1],
-    "sort-imports": [
-      "error",
+    'sort-imports': [
+      'error',
       {
         ignoreCase: true,
         ignoreDeclarationSort: true,
@@ -26,38 +23,32 @@ module.exports = {
         allowSeparatedGroups: true,
       },
     ],
-    "import/order": [
-      "error",
+    'import/order': [
+      'error',
       {
-        "newlines-between": "always",
-        groups: [
-          ["builtin", "external"],
-          "internal",
-          "parent",
-          "sibling",
-          "index",
-        ],
+        'newlines-between': 'always',
+        groups: [['builtin', 'external'], 'internal', 'parent', 'sibling', 'index'],
         pathGroups: [
           {
-            pattern: "next",
-            group: "builtin",
+            pattern: 'next',
+            group: 'builtin',
           },
           {
-            pattern: "react",
-            group: "builtin",
+            pattern: 'react',
+            group: 'builtin',
           },
           {
-            pattern: "@MyDesignSystem/**",
-            group: "internal",
+            pattern: '@MyDesignSystem/**',
+            group: 'internal',
           },
           {
-            pattern: "src/**",
-            group: "internal",
+            pattern: 'src/**',
+            group: 'internal',
           },
         ],
-        pathGroupsExcludedImportTypes: ["src/**", "@MyDesignSystem/**"],
+        pathGroupsExcludedImportTypes: ['src/**', '@MyDesignSystem/**'],
         alphabetize: {
-          order: "asc",
+          order: 'asc',
           caseInsensitive: true,
         },
       },
