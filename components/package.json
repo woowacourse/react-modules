@@ -1,6 +1,6 @@
 {
   "name": "badahertz52-react-modules-components",
-  "version": "0.0.3",
+  "version": "0.0.5",
   "description": "createPortal을 사용한 모달 모듈 제공",
   "keywords": [
     "modal",
@@ -58,8 +58,10 @@
     "prettier": "^3.2.5",
     "prettier-plugin-css-order": "^2.1.2",
     "storybook": "^8.0.9",
+    "styled-components": "^6.1.9",
     "typescript": "^5.2.2",
     "vite": "^5.2.0",
-    "vite-plugin-dts": "^3.9.0"
+    "vite-plugin-dts": "^3.9.0",
+    "vite-plugin-libcss": "^1.1.1"
   }
 }
