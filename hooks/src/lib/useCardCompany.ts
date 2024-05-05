@@ -18,7 +18,7 @@ const useCardCompany = ({
   const [value, setValue] = useState(initialValue);
   const [errorMessage, setErrorMessage] = useState("");
 
-  const onSelect = (value: string) => {
+  const onSetValue = (value: string) => {
     try {
       checkIncludeArray(optionArray, value);
       setValue(value);
@@ -29,7 +29,7 @@ const useCardCompany = ({
     }
   };
 
-  return { value, onSelect, errorMessage };
+  return { value, onSetValue, errorMessage };
 };
 
 export default useCardCompany;

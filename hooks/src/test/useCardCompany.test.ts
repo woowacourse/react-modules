@@ -33,7 +33,7 @@ describe("useCardCompany 훅 테스트", () => {
 
     const validValue = ExampleCardBrands[0];
     React.act(() => {
-      result.current.onSelect(validValue);
+      result.current.onSetValue(validValue);
     });
 
     expect(result.current.value).toBe(validValue);
@@ -47,7 +47,7 @@ describe("useCardCompany 훅 테스트", () => {
 
     const invalidValue = "헤일리 은행";
     React.act(() => {
-      result.current.onSelect(invalidValue);
+      result.current.onSetValue(invalidValue);
     });
 
     const expectedErrorMessage =
