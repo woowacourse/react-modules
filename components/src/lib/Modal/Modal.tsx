@@ -3,7 +3,9 @@ import * as Styled from './Modal.styled';
 import Button from '../Button/Button';
 import CLOSE_BUTTON from '../../asset/close-button.svg';
 
-export interface ModalProps {
+import { ButtonProps } from '../Button/Button';
+
+interface ModalProps {
   isOpened: boolean;
   onClose: () => void;
   title?: string;
@@ -16,19 +18,6 @@ export interface ModalProps {
   primaryColor?: string;
   showCloseButton?: boolean;
 }
-
-export interface ButtonProps {
-  text: string;
-  onClick: () => void;
-  size?: ButtonSize;
-  width?: ButtonWidth;
-  buttonStyle?: ButtonStyle;
-  primaryColor?: string;
-}
-
-export type ButtonSize = 'small' | 'medium' | 'large';
-export type ButtonWidth = 'fixed' | 'fit' | 'full';
-export type ButtonStyle = 'primary' | 'border' | 'text';
 
 const Modal = ({
   isOpened,

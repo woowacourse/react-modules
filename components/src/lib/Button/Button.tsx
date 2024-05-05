@@ -1,6 +1,6 @@
 import * as Styled from './Button.styled';
 
-interface ButtonProps {
+export interface ButtonProps {
   text: string;
   onClick: () => void;
   size?: ButtonSize;
