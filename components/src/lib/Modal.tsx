@@ -1,9 +1,9 @@
-import { ReactNode } from 'react';
 import styles from './Modal.module.css';
 import { CancelButtonProps, CloseButtonProps, ConfirmButtonProps, SubtitleProps, TitleProps } from './interfaces';
 import CancelButton from './CancelButton';
 import ConfirmButton from './ConfirmButton';
 import ModalHeader from './ModalHeader';
+import ModalContent from './ModalContent';
 
 interface ModalProps {
   title?: TitleProps;
@@ -16,7 +16,7 @@ interface ModalProps {
   modalPosition: 'center' | 'bottom';
   preventCloseOnOutsideClick?: boolean;
   buttonsDirection?: 'row' | 'column';
-  children: ReactNode;
+  children: React.ReactNode;
 }
 
 const Modal = ({
@@ -43,7 +43,7 @@ const Modal = ({
         className={styles[`container-${modalPosition}`]}
       >
         <ModalHeader title={title} subtitle={subtitle} closeButton={closeButton} />
-        {children}
+        <ModalContent children={children} />
         <div
           style={{ display: 'flex', flexDirection: `${buttonsDirection || 'row'}` }}
           className={styles['button-container']}
