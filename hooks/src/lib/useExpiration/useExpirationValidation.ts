@@ -6,7 +6,7 @@ import { isContainsNonNumeric } from '../../utils/number';
 const useExpirationValidation = (expiration: { month: string; year: string }) => {
   const [expirationError, setExpirationError] = useState({ isError: false, errorMessage: '' });
 
-  const validateExpirationDate = (field: 'month' | 'year', value: string): string => {
+  const validateExpirationDate = (field: 'month' | 'year', value: string) => {
     if (isContainsNonNumeric(value)) {
       setExpirationError({ isError: true, errorMessage: '월은 01에서 12 사이의 숫자여야 합니다.' });
       return EXPIRATION_ERROR_TYPE.nonNumeric;

@@ -12,7 +12,7 @@ const calculateLastDayOfMonth = (month: string, year: string) => {
   return lastDayOfMonth;
 };
 
-export const isPastExpirationDate = (month: string, year: string): boolean => {
+export const isPastExpirationDate = (month: string, year: string) => {
   const lastDayOfMonth = calculateLastDayOfMonth(month, year);
 
   const currentDate = new Date();
