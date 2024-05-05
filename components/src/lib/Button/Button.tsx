@@ -19,23 +19,21 @@ const Button = ({
 }: ButtonProps) => {
 
   return (
-    <>
-      <Styled.Button
-        onClick={onClick}
+    <Styled.Button
+      onClick={onClick}
+      size={size}
+      width={width}
+      buttonStyle={buttonStyle}
+      primaryColor={primaryColor}
+    >
+      <Styled.ButtonText
         size={size}
-        width={width}
         buttonStyle={buttonStyle}
         primaryColor={primaryColor}
       >
-        <Styled.ButtonText
-          size={size}
-          buttonStyle={buttonStyle}
-          primaryColor={primaryColor}
-        >
-          {text}
-        </Styled.ButtonText>
-      </Styled.Button>
-    </>
+        {text}
+      </Styled.ButtonText>
+    </Styled.Button>
   );
 };
 
