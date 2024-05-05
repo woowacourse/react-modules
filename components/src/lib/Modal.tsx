@@ -14,7 +14,7 @@ const BackDrop = styled.div`
   width: 100%;
   height: 100%;
   backdrop-filter: blur(5px);
-  background-color: rgba(0, 0, 0, 0.35);
+  background-color: var(--gray-backdrop-color);
 `;
 
 const Container = styled.div<ContainerProps>`
@@ -28,14 +28,14 @@ const Container = styled.div<ContainerProps>`
   padding: 2.4rem 3.2rem;
   box-sizing: border-box;
   border-radius: 0.8rem;
-  background-color: #ffffff;
+  background-color: var(--white-color);
 `;
 
 const Header = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  color: #000000;
+  color: var(--black-color);
 `;
 
 const Title = styled.div`
@@ -54,7 +54,7 @@ const CloseButton = styled.button`
   color: #8b95a1;
   font-weight: bold;
   font-size: 1.5rem;
-  border: 1px solid #cccccc;
+  border: 1px solid var(--gray-border-color);
   border-radius: 0.5rem;
   padding: 0.8rem auto;
   box-sizing: border-box;
