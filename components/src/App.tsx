@@ -10,7 +10,7 @@ function App() {
       <button onClick={toggleIsOpen}>모달열기</button>
       <Modal isOpen={isOpen}>
         <Modal.Dimmed />
-        <Modal.Header handleClose={() => toggleIsOpen()}>제목</Modal.Header>
+        <Modal.Header onClose={() => toggleIsOpen()}>제목</Modal.Header>
         <Modal.Content>
           <>
             <div>내용</div>
@@ -18,6 +18,15 @@ function App() {
             <div>내용</div>
           </>
         </Modal.Content>
+        <Modal.ConfirmButton
+          onConfirm={() => {
+            alert('확인');
+            toggleIsOpen();
+          }}
+        >
+          동의하고 저장하기
+        </Modal.ConfirmButton>
+        <Modal.CloseButton onClose={() => toggleIsOpen()}>닫기</Modal.CloseButton>
       </Modal>
     </>
   );
