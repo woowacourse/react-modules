@@ -27,6 +27,27 @@
   }
 }
 
+#toast-modal-sample .modal-contents {
+  border: 10px;
+  border-radius: 10px;
+  background-color: rgb(248, 255, 188);
+  padding: 0.875rem 1rem;
+  width: 300px;
+  font-size: 1.5rem;
+  text-align: center;
+}
+#toast-modal-position {
+  margin: 0 auto;
+  margin-top: 2rem;
+  border: 2px solid black;
+  border-radius: 10px;
+  width: 300px;
+  height: 2rem;
+  color: rgb(54, 54, 138);
+  font-size: 1.2rem;
+  line-height: 1.5rem;
+  text-align: center;
+}
 @media (prefers-reduced-motion: no-preference) {
   a:nth-of-type(2) .logo {
     animation: logo-spin infinite 20s linear;

@@ -5,6 +5,11 @@ export type ModalType = 'center' | 'bottom' | 'toast';
 export interface ModalContentsProps {
   children: ReactNode;
 }
+export interface ModalPosition {
+  top?: number | string;
+  left?: number | string;
+  right?: number | string;
+  bottom?: number | string;
 }
 export interface ModalProps extends React.HTMLAttributes<HTMLDivElement> {
   type: ModalType;
@@ -15,6 +20,7 @@ export interface ModalProps extends React.HTMLAttributes<HTMLDivElement> {
   setOpenModal: Dispatch<SetStateAction<boolean>>;
   isCloseOnEsc?: boolean;
   isCloseOnBackdrop?: boolean;
+  position?: ModalPosition;
 }
 
 export interface ModalComposedProps<T> extends React.HTMLAttributes<T> {

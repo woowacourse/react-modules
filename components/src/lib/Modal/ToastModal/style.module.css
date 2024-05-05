@@ -1,0 +1,8 @@
+.tostModalContents {
+  position: fixed;
+  opacity: 0;
+  transition: opacity 1s ease;
+}
+.on {
+  opacity: 1;
+}

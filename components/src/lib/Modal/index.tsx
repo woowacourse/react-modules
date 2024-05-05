@@ -10,6 +10,7 @@ import BottomModal from './BottomModal';
 import CenterModal from './CenterModal';
 import ModalPortal from './ModalPortal';
 import styles from './style.module.css';
+import TostModal from './ToastModal';
 function Modal(props: ModalProps) {
   const {
     openModal,
@@ -48,6 +49,7 @@ function Modal(props: ModalProps) {
             >
               {type === 'bottom' && <BottomModal children={children} />}
               {type === 'center' && <CenterModal children={children} />}
+              {type === 'toast' && <TostModal children={children} />}
             </div>
           </ModalContext.Provider>
         </ModalPortal>
