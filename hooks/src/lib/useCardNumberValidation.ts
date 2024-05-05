@@ -3,7 +3,7 @@ import { REGEX, MAX_LENGTH } from './constants';
 
 interface ValidationResult {
   isValid: boolean;
-  errorMessage?: string[];
+  errorMessages?: string[];
 }
 
 const useCardNumberValidation = () => {
@@ -28,7 +28,7 @@ const useCardNumberValidation = () => {
 
     setValidationResults((prevResults) => {
       const newResults = [...prevResults];
-      newResults[index] = { isValid: isNumeric && isValidNumber, errorMessage: errors };
+      newResults[index] = { isValid: isNumeric && isValidNumber, errorMessages: errors };
       return newResults;
     });
   };

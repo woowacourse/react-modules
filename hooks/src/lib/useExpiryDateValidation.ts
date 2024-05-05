@@ -3,19 +3,19 @@ import { DATE, MAX_LENGTH, REGEX } from './constants';
 
 interface ValidationResult {
   isValidMonth: boolean;
-  monthErrorMessage?: string[];
+  monthErrorMessages?: string[];
 
   isValidYear: boolean;
-  yearErrorMessage?: string[];
+  yearErrorMessages?: string[];
 }
 
 const useExpiryDateValidation = () => {
   const [validationResult, setValidationResult] = useState<ValidationResult>({
     isValidMonth: true,
-    monthErrorMessage: [],
+    monthErrorMessages: [],
 
     isValidYear: true,
-    yearErrorMessage: [],
+    yearErrorMessages: [],
   });
 
   const handleExpiryDateChange = (month: string, year: string) => {
@@ -65,10 +65,10 @@ const useExpiryDateValidation = () => {
 
     setValidationResult({
       isValidMonth: isMonthNumeric && isValidMonthLength && monthErrors.length === 0,
-      monthErrorMessage: monthErrors,
+      monthErrorMessages: monthErrors,
 
       isValidYear: isYearNumeric && isValidYearLength && yearErrors.length === 0,
-      yearErrorMessage: yearErrors,
+      yearErrorMessages: yearErrors,
     });
   };
 

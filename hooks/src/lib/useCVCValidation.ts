@@ -3,13 +3,13 @@ import { REGEX } from './constants';
 
 interface ValidationResult {
   isValid: boolean;
-  errorMessage?: string[];
+  errorMessages?: string[];
 }
 
 const useCVCValidation = () => {
   const [validationResult, setValidationResult] = useState<ValidationResult>({
     isValid: true,
-    errorMessage: [],
+    errorMessages: [],
   });
 
   const handleCVCChange = (value: string, maxLength: number) => {
@@ -27,7 +27,7 @@ const useCVCValidation = () => {
 
     setValidationResult({
       isValid: isNumericInput && isValidLength,
-      errorMessage: errors,
+      errorMessages: errors,
     });
   };
 

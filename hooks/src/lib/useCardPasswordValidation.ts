@@ -3,13 +3,13 @@ import { REGEX } from './constants';
 
 interface ValidationResult {
   isValid: boolean;
-  errorMessage?: string[];
+  errorMessages?: string[];
 }
 
 const useCardPasswordValidation = () => {
   const [validationResult, setValidationResult] = useState<ValidationResult>({
     isValid: true,
-    errorMessage: [],
+    errorMessages: [],
   });
 
   const handleCardPasswordChange = (value: string, maxLength: number) => {
@@ -27,7 +27,7 @@ const useCardPasswordValidation = () => {
 
     setValidationResult({
       isValid: isNumericInput && isValidLength,
-      errorMessage: errors,
+      errorMessages: errors,
     });
   };
 
