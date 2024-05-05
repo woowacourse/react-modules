@@ -22,7 +22,7 @@ const BUTTON_COLOR_STYLES = {
     }`,
 };
 
-export const Button = styled.button<{ $theme: ButtonColor }>`
+export const Button = styled.button<{ $color: ButtonColor }>`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -33,7 +33,7 @@ export const Button = styled.button<{ $theme: ButtonColor }>`
   border: 0.5px solid #8b95a1;
   border-radius: 8px;
 
-  ${({ $theme }) => BUTTON_COLOR_STYLES[$theme]}
+  ${({ $color }) => BUTTON_COLOR_STYLES[$color]}
 
   font-size: 15px;
   font-weight: 700;
