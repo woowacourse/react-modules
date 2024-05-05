@@ -12,7 +12,7 @@ describe("useCardNumber에 대한 테스트 케이스", () => {
 
         React.act(() => result.current.setCardNumber(value, CARD_NUMBER_INDEX));
 
-        expect(result.current.errorStatus[CARD_NUMBER_INDEX].isValid).toBe(false);
+        expect(result.current.errorStatus[CARD_NUMBER_INDEX].isError).toBe(true);
         expect(result.current.errorStatus[CARD_NUMBER_INDEX].errorMessage).not.toBeNull();
       }
     );
@@ -24,7 +24,7 @@ describe("useCardNumber에 대한 테스트 케이스", () => {
 
         React.act(() => result.current.setCardNumber(value, CARD_NUMBER_INDEX));
 
-        expect(result.current.errorStatus[CARD_NUMBER_INDEX].isValid).toBe(false);
+        expect(result.current.errorStatus[CARD_NUMBER_INDEX].isError).toBe(true);
         expect(result.current.errorStatus[CARD_NUMBER_INDEX].errorMessage).not.toBeNull();
       }
     );
@@ -36,7 +36,7 @@ describe("useCardNumber에 대한 테스트 케이스", () => {
 
         React.act(() => result.current.setCardNumber(value, CARD_NUMBER_INDEX));
 
-        expect(result.current.errorStatus[CARD_NUMBER_INDEX].isValid).toBe(false);
+        expect(result.current.errorStatus[CARD_NUMBER_INDEX].isError).toBe(true);
         expect(result.current.errorStatus[CARD_NUMBER_INDEX].errorMessage).not.toBeNull();
       }
     );
@@ -48,7 +48,7 @@ describe("useCardNumber에 대한 테스트 케이스", () => {
 
         React.act(() => result.current.setCardNumber(value, CARD_NUMBER_INDEX));
 
-        expect(result.current.errorStatus[CARD_NUMBER_INDEX].isValid).toBe(false);
+        expect(result.current.errorStatus[CARD_NUMBER_INDEX].isError).toBe(true);
         expect(result.current.errorStatus[CARD_NUMBER_INDEX].errorMessage).not.toBeNull();
       }
     );
@@ -62,7 +62,7 @@ describe("useCardNumber에 대한 테스트 케이스", () => {
 
         React.act(() => result.current.setCardNumber(value, CARD_NUMBER_INDEX));
 
-        expect(result.current.errorStatus[CARD_NUMBER_INDEX].isValid).toBe(true);
+        expect(result.current.errorStatus[CARD_NUMBER_INDEX].isError).toBe(false);
         expect(result.current.errorStatus[CARD_NUMBER_INDEX].errorMessage).toBeNull();
       }
     );

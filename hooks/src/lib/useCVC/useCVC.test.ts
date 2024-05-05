@@ -11,7 +11,7 @@ describe("useCVC에 대한 테스트 케이스", () => {
 
         React.act(() => result.current.setCVC(value));
 
-        expect(result.current.errorStatus.isValid).toBe(false);
+        expect(result.current.errorStatus.isError).toBe(true);
         expect(result.current.errorStatus.errorMessage).not.toBeNull();
       }
     );
@@ -23,7 +23,7 @@ describe("useCVC에 대한 테스트 케이스", () => {
 
         React.act(() => result.current.setCVC(value));
 
-        expect(result.current.errorStatus.isValid).toBe(false);
+        expect(result.current.errorStatus.isError).toBe(true);
         expect(result.current.errorStatus.errorMessage).not.toBeNull();
       }
     );
@@ -35,7 +35,7 @@ describe("useCVC에 대한 테스트 케이스", () => {
 
         React.act(() => result.current.setCVC(value));
 
-        expect(result.current.errorStatus.isValid).toBe(false);
+        expect(result.current.errorStatus.isError).toBe(true);
         expect(result.current.errorStatus.errorMessage).not.toBeNull();
       }
     );
@@ -47,7 +47,7 @@ describe("useCVC에 대한 테스트 케이스", () => {
 
         React.act(() => result.current.setCVC(value));
 
-        expect(result.current.errorStatus.isValid).toBe(false);
+        expect(result.current.errorStatus.isError).toBe(true);
         expect(result.current.errorStatus.errorMessage).not.toBeNull();
       }
     );
@@ -61,7 +61,7 @@ describe("useCVC에 대한 테스트 케이스", () => {
 
         React.act(() => result.current.setCVC(value));
 
-        expect(result.current.errorStatus.isValid).toBe(true);
+        expect(result.current.errorStatus.isError).toBe(false);
         expect(result.current.errorStatus.errorMessage).toBeNull();
       }
     );

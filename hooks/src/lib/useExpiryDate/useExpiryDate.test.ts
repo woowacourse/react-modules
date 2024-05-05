@@ -11,7 +11,7 @@ describe("useExpiryDate에 대한 테스트 케이스", () => {
 
         React.act(() => result.current.setExpiryMonth(value));
 
-        expect(result.current.expiryMonthErrorStatus.isValid).toBe(false);
+        expect(result.current.expiryMonthErrorStatus.isError).toBe(true);
         expect(result.current.expiryMonthErrorStatus.errorMessage).not.toBeNull();
       }
     );
@@ -25,7 +25,7 @@ describe("useExpiryDate에 대한 테스트 케이스", () => {
 
         React.act(() => result.current.setExpiryYear(value));
 
-        expect(result.current.expiryYearErrorStatus.isValid).toBe(false);
+        expect(result.current.expiryYearErrorStatus.isError).toBe(true);
         expect(result.current.expiryYearErrorStatus.errorMessage).not.toBeNull();
       }
     );
@@ -39,7 +39,7 @@ describe("useExpiryDate에 대한 테스트 케이스", () => {
 
         React.act(() => result.current.setExpiryMonth(value));
 
-        expect(result.current.expiryMonthErrorStatus.isValid).toBe(true);
+        expect(result.current.expiryMonthErrorStatus.isError).toBe(false);
         expect(result.current.expiryMonthErrorStatus.errorMessage).toBeNull();
       }
     );
@@ -53,7 +53,7 @@ describe("useExpiryDate에 대한 테스트 케이스", () => {
 
         React.act(() => result.current.setExpiryYear(value));
 
-        expect(result.current.expiryYearErrorStatus.isValid).toBe(true);
+        expect(result.current.expiryYearErrorStatus.isError).toBe(false);
         expect(result.current.expiryYearErrorStatus.errorMessage).toBeNull();
       }
     );

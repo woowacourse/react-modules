@@ -1,32 +1,30 @@
 import { useState } from "react";
-export interface IErrorStatus {
-  isValid: boolean;
-  errorMessage: string | null;
-}
-interface IValidationResult<T> {
+
+export type IErrorStatus =
+  | { isError: false; errorMessage: null }
+  | { isError: true; errorMessage: string };
+
+interface IUseValidationReturn<T> {
   errorStatus: IErrorStatus;
-  validate: (value: T) => void;
+  validateValue: (value: T) => void;
 }
 
-type ErrorMessage = string;
-type IValidationFunction<T> = (value: T) => ErrorMessage | null | undefined;
+type ValidationFunction<T> = (value: T) => IErrorStatus;
 
-function useValidation<T>(validators: IValidationFunction<T>[]): IValidationResult<T> {
-  const [errorMessage, setErrorMessage] = useState<ErrorMessage | null>(null);
+export default function useValidation<T>(
+  validator: ValidationFunction<T>
+): IUseValidationReturn<T> {
+  const [errorStatus, setErrorStatus] = useState<IErrorStatus>({
+    isError: false,
+    errorMessage: null,
+  });
 
-  const validate = (value: T) => {
-    const foundErrorMessage = validators.reduce((acc: ErrorMessage | null, fn) => {
-      const currentErrorMessage = fn(value) ?? null;
-      return acc ?? currentErrorMessage;
-    }, null);
-
-    setErrorMessage(foundErrorMessage);
+  const validateValue = (value: T) => {
+    setErrorStatus(validator(value));
   };
 
   return {
-    errorStatus: { isValid: errorMessage === null, errorMessage },
-    validate,
+    errorStatus,
+    validateValue,
   };
 }
-
-export default useValidation;

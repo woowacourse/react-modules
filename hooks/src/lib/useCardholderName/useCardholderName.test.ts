@@ -10,7 +10,7 @@ describe("useCardholderName에 대한 테스트 케이스", () => {
       const WRONG_VALUE = "한글";
       React.act(() => result.current.setCardholderName(WRONG_VALUE));
 
-      expect(result.current.errorStatus.isValid).toBe(false);
+      expect(result.current.errorStatus.isError).toBe(true);
       expect(result.current.errorStatus.errorMessage).not.toBeNull();
     });
 
@@ -20,7 +20,7 @@ describe("useCardholderName에 대한 테스트 케이스", () => {
       const WRONG_VALUE = "122";
       React.act(() => result.current.setCardholderName(WRONG_VALUE));
 
-      expect(result.current.errorStatus.isValid).toBe(false);
+      expect(result.current.errorStatus.isError).toBe(true);
       expect(result.current.errorStatus.errorMessage).not.toBeNull();
     });
 
@@ -30,7 +30,7 @@ describe("useCardholderName에 대한 테스트 케이스", () => {
       const WRONG_VALUE = "aBC";
       React.act(() => result.current.setCardholderName(WRONG_VALUE));
 
-      expect(result.current.errorStatus.isValid).toBe(false);
+      expect(result.current.errorStatus.isError).toBe(true);
       expect(result.current.errorStatus.errorMessage).not.toBeNull();
     });
 
@@ -41,7 +41,7 @@ describe("useCardholderName에 대한 테스트 케이스", () => {
 
         React.act(() => result.current.setCardholderName(value));
 
-        expect(result.current.errorStatus.isValid).toBe(false);
+        expect(result.current.errorStatus.isError).toBe(true);
         expect(result.current.errorStatus.errorMessage).not.toBeNull();
       }
     );
@@ -52,7 +52,7 @@ describe("useCardholderName에 대한 테스트 케이스", () => {
       const WRONG_VALUE = "A B  C";
       React.act(() => result.current.setCardholderName(WRONG_VALUE));
 
-      expect(result.current.errorStatus.isValid).toBe(false);
+      expect(result.current.errorStatus.isError).toBe(true);
       expect(result.current.errorStatus.errorMessage).not.toBeNull();
     });
   });
@@ -64,7 +64,7 @@ describe("useCardholderName에 대한 테스트 케이스", () => {
       const CORRECT_VALUE = "ABC";
       React.act(() => result.current.setCardholderName(CORRECT_VALUE));
 
-      expect(result.current.errorStatus.isValid).toBe(true);
+      expect(result.current.errorStatus.isError).toBe(false);
       expect(result.current.errorStatus.errorMessage).toBeNull();
     });
 
@@ -74,7 +74,7 @@ describe("useCardholderName에 대한 테스트 케이스", () => {
 
       React.act(() => result.current.setCardholderName(CORRECT_VALUE));
 
-      expect(result.current.errorStatus.isValid).toBe(true);
+      expect(result.current.errorStatus.isError).toBe(false);
       expect(result.current.errorStatus.errorMessage).toBeNull();
     });
   });

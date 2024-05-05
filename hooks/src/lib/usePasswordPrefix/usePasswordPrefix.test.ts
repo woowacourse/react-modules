@@ -11,7 +11,7 @@ describe("usePasswordPrefix에 대한 테스트 케이스", () => {
 
         React.act(() => result.current.setPasswordPrefix(value));
 
-        expect(result.current.errorStatus.isValid).toBe(false);
+        expect(result.current.errorStatus.isError).toBe(true);
         expect(result.current.errorStatus.errorMessage).not.toBeNull();
       }
     );
@@ -21,7 +21,7 @@ describe("usePasswordPrefix에 대한 테스트 케이스", () => {
 
       React.act(() => result.current.setPasswordPrefix(value));
 
-      expect(result.current.errorStatus.isValid).toBe(false);
+      expect(result.current.errorStatus.isError).toBe(true);
       expect(result.current.errorStatus.errorMessage).not.toBeNull();
     });
 
@@ -30,7 +30,7 @@ describe("usePasswordPrefix에 대한 테스트 케이스", () => {
 
       React.act(() => result.current.setPasswordPrefix(value));
 
-      expect(result.current.errorStatus.isValid).toBe(false);
+      expect(result.current.errorStatus.isError).toBe(true);
       expect(result.current.errorStatus.errorMessage).not.toBeNull();
     });
   });
@@ -43,7 +43,7 @@ describe("usePasswordPrefix에 대한 테스트 케이스", () => {
 
         React.act(() => result.current.setPasswordPrefix(value));
 
-        expect(result.current.errorStatus.isValid).toBe(true);
+        expect(result.current.errorStatus.isError).toBe(false);
         expect(result.current.errorStatus.errorMessage).toBeNull();
       }
     );
