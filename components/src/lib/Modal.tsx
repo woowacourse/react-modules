@@ -1,7 +1,8 @@
 import { useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
 import styles from './Modal.module.css';
-import CloseIcon from './assets/closeButton.svg';
+import ModalHeader from './components/header/ModalHeader';
+import ModalFooter from './components/footer/ModalFooter';
 
 type ModalType = 'dialog' | 'drawer';
 type ButtonPosition = 'row' | 'row-reverse' | 'column' | 'column-reverse';
@@ -33,13 +34,6 @@ const MODAL_TYPE: Record<ModalType, string> = {
   drawer: styles.drawer,
 };
 
-const BUTTON_POSITION_TYPE: Record<ButtonPosition, string> = {
-  row: styles.buttonRow,
-  'row-reverse': styles.buttonRowReverse,
-  column: styles.buttonColumn,
-  'column-reverse': styles.buttonColumnReverse,
-};
-
 const Modal = ({
   open,
   onClose,
@@ -57,9 +51,6 @@ const Modal = ({
   const modalRef = useRef<HTMLDivElement>(null);
 
   const isButton = closeButton || confirmButton;
-  const buttonLayoutStyle = buttonPosition
-    ? BUTTON_POSITION_TYPE[buttonPosition]
-    : styles.buttonRow;
 
   useEffect(() => {
     const clickOutSide = (event: MouseEvent) => {
@@ -77,8 +68,17 @@ const Modal = ({
     };
   }, [modalRef, onClose, closeOnOutsideClick]);
 
-  const onErrorIcon = (event: React.SyntheticEvent<HTMLImageElement, Event>) => {
-    event.currentTarget.src = CloseIcon;
+  const modalHeaderOptions = {
+    customCloseIcon,
+    hideCloseIcon,
+    modalHeader: style?.modalHeader,
+    modalTitle: style?.modalTitle,
+  };
+
+  const modalFooterOptions = {
+    buttonPosition,
+    closeButton,
+    confirmButton,
   };
 
   return (
@@ -87,27 +87,9 @@ const Modal = ({
         createPortal(
           <div className={styles.dimmed} style={style?.dimmed}>
             <section className={MODAL_TYPE[type]} ref={modalRef} style={style?.modal}>
-              <header className={styles.modalHeader} style={style?.modalHeader}>
-                <span className={styles.title} style={style?.modalTitle}>
-                  {title}
-                </span>
-                {!hideCloseIcon && (
-                  <img
-                    src={customCloseIcon ?? CloseIcon}
-                    alt="close"
-                    className={styles.closeButton}
-                    onClick={onClose}
-                    onError={onErrorIcon}
-                  />
-                )}
-              </header>
+              <ModalHeader title={title} onClose={onClose} {...modalHeaderOptions} />
               {content && <section>{content}</section>}
-              {isButton && (
-                <footer className={buttonLayoutStyle}>
-                  {closeButton}
-                  {confirmButton}
-                </footer>
-              )}
+              {isButton && <ModalFooter {...modalFooterOptions} />}
             </section>
           </div>,
           document.body,
