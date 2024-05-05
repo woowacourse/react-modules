@@ -11,7 +11,7 @@ interface PortalProps {
 export default function ModalPortal(props: PortalProps) {
   const { children } = props;
 
-  const $modalRoot = document.getElementById('modal-root') as HTMLDivElement;
+  const $modalRoot = document.getElementById('modal-root') || document.body;
   const stopModalPropagation = (e: globalThis.MouseEvent) => {
     e.stopPropagation();
   };
