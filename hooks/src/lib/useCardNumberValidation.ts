@@ -8,7 +8,7 @@ interface ValidationResult {
 
 const useCardNumberValidation = () => {
   const [validationResults, setValidationResults] = useState<ValidationResult[]>(() =>
-    Array(4).fill({ isValid: true, errorMessage: [] })
+    Array(4).fill({ isValid: true, errorMessages: [] })
   );
 
   const isNumericInput = (value: string) => REGEX.onlyNumber.test(value);
