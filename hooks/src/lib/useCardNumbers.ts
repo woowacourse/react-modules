@@ -2,19 +2,15 @@ import useInputs from './useInputs';
 import { useEffect } from 'react';
 import { validateCardNumberFormat, validateNumber } from './validator';
 import { Options, UseCardNumber } from './type';
+import useValidations from './useValidations';
 
 const useCardNumbers = (initialValue: Record<string, string>, options?: Options): UseCardNumber => {
-  const { value, setValue, handleBlur, errorInfo, setErrorInfo } = useInputs(initialValue, {
-    onChange: validateNumber,
-    onBlur: validateCardNumberFormat,
-  });
+  const { value, setValue } = useInputs(initialValue);
+  const { errorInfo, updateValidationResult } = useValidations(initialValue);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>, name: string) => {
     const validationResult = validateNumber(event.target.value);
-    setErrorInfo(prev => ({
-      ...prev,
-      [name]: validationResult,
-    }));
+    updateValidationResult(validationResult, name);
     if (!validationResult.isValid) return;
     setValue(prev => ({
       ...prev,
@@ -23,17 +19,23 @@ const useCardNumbers = (initialValue: Record<string, string>, options?: Options)
 
     if (event.target.value.length === event.target.maxLength) {
       const validationResult = validateCardNumberFormat(event.target.value);
-
-      setErrorInfo(prev => ({
-        ...prev,
-        [name]: validationResult,
-      }));
+      updateValidationResult(validationResult, name);
       if (!validationResult.isValid) return;
       if (options?.isAutoFocus) {
         const target = event.target.nextElementSibling;
         if (target instanceof HTMLInputElement) target.focus();
       }
     }
+  };
+
+  const handleBlur = (event: React.FocusEvent<HTMLInputElement, Element>, name: string) => {
+    const validationResult = validateCardNumberFormat(event.target.value);
+    updateValidationResult(validationResult, name);
+    if (!validationResult.isValid) return;
+    setValue(prev => ({
+      ...prev,
+      [name]: event.target.value,
+    }));
   };
 
   useEffect(() => {
