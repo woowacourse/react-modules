@@ -7,13 +7,13 @@ describe("신용카드 CVC 입력 테스트", () => {
     cvc: "99",
   };
 
-  it("초기값이 정확히 설정되어야 한다.", () => {
+  it("초기값이 cvc, value는 string으로 유효하게 설정되어야 한다.", () => {
     const { result } = renderHook(() => useCVC(initialValue));
 
     expect(result.current.inputValue).toEqual(initialValue);
   });
 
-  it("입력값 숫자일 떄 정확히 업데이트 되어야 한다.", () => {
+  it("입력값 숫자로 유효할 때, 업데이트 된다.", () => {
     const userInput = "129";
     const { result } = renderHook(() => useCVC(initialValue));
     const target = { value: userInput, name: "cvc" };
@@ -33,7 +33,7 @@ describe("신용카드 CVC 입력 테스트", () => {
     expect(result.current.validationResult).toEqual(expectedValidationResult);
   });
 
-  it("입력값이 숫자가 아닐 때 업데이트가 안된다", () => {
+  it("입력값이 문자열로 유효하지 않을 때, 업데이트 되지 않고 에러가 발생한다.", () => {
     const userInput = "notUpdate";
     const { result } = renderHook(() => useCVC(initialValue));
     const target = { value: userInput, name: "cvc" };
@@ -53,7 +53,7 @@ describe("신용카드 CVC 입력 테스트", () => {
     expect(result.current.validationResult).toEqual(expectedValidationResult);
   });
 
-  it("입력값이 3자리 초과시 업데이트가 안된다", () => {
+  it("입력값이 숫자이지만 3자리 초과로 유효하지 않을 때, 업데이트 되지 않고 에러가 발생한다.", () => {
     const userInput = "1234";
     const { result } = renderHook(() => useCVC(initialValue));
     const target = { value: userInput, name: "cvc" };
@@ -73,7 +73,7 @@ describe("신용카드 CVC 입력 테스트", () => {
     expect(result.current.validationResult).toEqual(expectedValidationResult);
   });
 
-  it("입력 값이 모두 채워지고 블러/엔터 이벤트 발생 시 에러가 발생하지 않는다", () => {
+  it("입력 값이 유효한 값으로 모두 채워지고 블러/엔터 이벤트 발생 시, 에러가 발생하지 않는다.", () => {
     const userInput = "123";
     const { result } = renderHook(() => useCVC(initialValue));
     const target = { value: userInput, name: "cvc" };
@@ -93,7 +93,7 @@ describe("신용카드 CVC 입력 테스트", () => {
     expect(result.current.validationResult).toEqual(expectedValidationResult);
   });
 
-  it("입력 값이 모두 채워지지 않고 블러/엔터 이벤트 발생 시 에러가 발생한다", () => {
+  it("입력 값이 유효하지만 3자리 모두 채워지지 않고 블러/엔터 이벤트 발생 시, 에러가 발생한다.", () => {
     const userInput = "12";
     const { result } = renderHook(() => useCVC(initialValue));
     const target = { value: userInput, name: "cvc" };
