@@ -52,12 +52,14 @@ function App() {
         hasCloseButton={true}
         footerButtons={[
           <ModalButton
-            text="Primary Button Style"
+            key="primary-button"
+            text="Primary Button"
             style="primary"
             onClick={() => alert('Clicked primary button!')}
           />,
           <ModalButton
-            text="Secondary Button Style"
+            key="secondary-button"
+            text="Secondary Button"
             style="secondary"
             onClick={() => alert('Clicked secondary button!')}
           />,
