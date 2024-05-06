@@ -1,9 +1,8 @@
 import React from 'react';
 import '../index.css';
-import 'nakta-react-payments-components/dist/style.css';
-import { Modal } from 'nakta-react-payments-components';
 import type { Meta, StoryObj } from '@storybook/react';
 import { fn } from '@storybook/test';
+import Modal from '../lib/Modal';
 
 const meta = {
   title: 'Modal',
@@ -19,7 +18,7 @@ type Story = StoryObj<typeof meta>;
 
 export const Center: Story = {
   args: {
-    isCloseButton: true,
+    existCloseButton: true,
     onClose: fn(),
     position: 'center',
     title: '제목',
@@ -29,7 +28,7 @@ export const Center: Story = {
 
 export const Bottom: Story = {
   args: {
-    isCloseButton: true,
+    existCloseButton: true,
     onClose: fn(),
     position: 'bottom',
     title: '제목',
@@ -39,7 +38,7 @@ export const Bottom: Story = {
 
 export const IncludeCloseButton: Story = {
   args: {
-    isCloseButton: true,
+    existCloseButton: true,
     onClose: fn(),
     position: 'center',
     title: '제목',
@@ -49,7 +48,18 @@ export const IncludeCloseButton: Story = {
 
 export const ExcludeCloseButton: Story = {
   args: {
-    isCloseButton: false,
+    existCloseButton: false,
+    onClose: fn(),
+    position: 'center',
+    title: '제목',
+    children: <></>,
+  },
+};
+
+export const BackdropClickWithoutClose: Story = {
+  args: {
+    existCloseButton: false,
+    closeOnBackdropClick: false,
     onClose: fn(),
     position: 'center',
     title: '제목',
