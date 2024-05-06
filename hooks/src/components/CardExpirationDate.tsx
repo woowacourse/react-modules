@@ -2,7 +2,7 @@ import useCardExpirationDate from '../lib/useCardExpirationDate/useCardExpiratio
 
 const CardExpirationDate = () => {
   const {
-    value,
+    values,
     errorMessage,
     onChangeHandler,
     onBlurHandler,
@@ -13,7 +13,7 @@ const CardExpirationDate = () => {
     <>
       {[...Array(2)].map((_, index) => (
         <input
-          value={value[index]}
+          value={values[index]}
           onChange={(e) => onChangeHandler(e, index)}
           onBlur={() => onBlurHandler(index)}
           onFocus={() => onFocusHandler(index)}

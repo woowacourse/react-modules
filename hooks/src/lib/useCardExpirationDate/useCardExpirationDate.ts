@@ -28,9 +28,9 @@ const useCardExpirationDate = (initValue: string[], maxLength: number = 2) => {
     const year = nowDate.getFullYear().toString().slice(2, 4);
     const month = (nowDate.getMonth() + 1).toString().padStart(2, '0');
     const now = Number(year + month);
-    const expireDate = Number(value[1] + value[0]);
+    const expireDate = Number(values[1] + values[0]);
 
-    if (value.join('').length !== maxLength * initValue.length) {
+    if (values.join('').length !== maxLength * initValue.length) {
       return {
         isValid: false,
         errorMessage: `유효기간은 (MM/YY) 형식의 ${maxLength * initValue.length}글자로 입력해 주세요.`,
@@ -46,7 +46,7 @@ const useCardExpirationDate = (initValue: string[], maxLength: number = 2) => {
   };
 
   const {
-    value,
+    values,
     errorMessage,
     isCompleted,
     onChangeHandler,
@@ -59,7 +59,7 @@ const useCardExpirationDate = (initValue: string[], maxLength: number = 2) => {
   });
 
   return {
-    value,
+    values,
     errorMessage,
     isCompleted,
     onChangeHandler,

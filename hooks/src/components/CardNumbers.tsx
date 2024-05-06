@@ -2,7 +2,7 @@ import useCardNumbers from '../lib/useCardNumbers/useCardNumbers';
 
 const CardNumbers = () => {
   const {
-    value,
+    values,
     errorMessage,
     onChangeHandler,
     onBlurHandler,
@@ -13,7 +13,7 @@ const CardNumbers = () => {
     <>
       {[...Array(4)].map((_, index) => (
         <input
-          value={value[index]}
+          value={values[index]}
           onChange={(e) => onChangeHandler(e, index)}
           onBlur={() => onBlurHandler(index)}
           onFocus={() => onFocusHandler(index)}

@@ -18,7 +18,7 @@ const useCardNumbers = (initValue: string[], maxLength: number = 4) => {
   };
 
   const validateOnBlur = () => {
-    if (value.join('').length !== maxLength * initValue.length) {
+    if (values.join('').length !== maxLength * initValue.length) {
       return {
         isValid: false,
         errorMessage: `카드번호는 ${maxLength * initValue.length}글자로 입력해 주세요.`,
@@ -28,7 +28,7 @@ const useCardNumbers = (initValue: string[], maxLength: number = 4) => {
   };
 
   const {
-    value,
+    values,
     errorMessage,
     isCompleted,
     onChangeHandler,
@@ -41,7 +41,7 @@ const useCardNumbers = (initValue: string[], maxLength: number = 4) => {
   });
 
   return {
-    value,
+    values,
     errorMessage,
     isCompleted,
     onChangeHandler,
