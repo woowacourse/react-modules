@@ -22,20 +22,6 @@ export function validateAllowedLength({
   }
 }
 
-export function validateAllowedYearLength({
-  allowedYearLength,
-  allowedRange,
-  errorMessage,
-}: {
-  allowedYearLength: number;
-  allowedRange: number[];
-  errorMessage: string;
-}) {
-  if (!allowedRange.includes(allowedYearLength)) {
-    throw new Error(errorMessage);
-  }
-}
-
 export function validateTotalCardNumbersLength({
   format,
   totalLength,
