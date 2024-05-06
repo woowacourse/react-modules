@@ -35,3 +35,4 @@ const useCVCValidation = () => {
 };
 
 export default useCVCValidation;
+export type { ValidationResult as CVCValidationResult };

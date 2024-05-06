@@ -76,3 +76,4 @@ const useExpiryDateValidation = () => {
 };
 
 export default useExpiryDateValidation;
+export type { ValidationResult as ExpiryDateValidationResult };

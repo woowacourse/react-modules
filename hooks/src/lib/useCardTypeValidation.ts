@@ -29,3 +29,4 @@ const useCardTypeValidation = () => {
 };
 
 export default useCardTypeValidation;
+export type { ValidationResult as CardType };

@@ -37,3 +37,4 @@ const useCardNumberValidation = () => {
 };
 
 export default useCardNumberValidation;
+export type { ValidationResult as CardNumberValidationResult };

@@ -35,3 +35,4 @@ const useCardPasswordValidation = () => {
 };
 
 export default useCardPasswordValidation;
+export type { ValidationResult as CardPasswordValidationResult };
