@@ -1,10 +1,10 @@
 import type { CardHolderError } from '../types/cardHolder';
 import type { CardNumberError } from '../types/cardNumbers';
-import { CVCError } from '../types/cvc';
+import type { CVCError } from '../types/cvc';
+import type { ExpiryDateError } from '../types/expiryDate';
+import type { PasswordError } from '../types/password';
+import type { CardCompanyError } from '../types/cardCompany';
 import { ErrorStatus } from '../types/errorStatus';
-import { ExpiryDateError } from '../types/expiryDate';
-import { PasswordError } from '../types/password';
-import { CardCompanyError } from '../types/cardCompany';
 
 export const CARD_NUMBERS_ERROR_MESSAGES: Record<CardNumberError, string> = {
   [ErrorStatus.IS_NOT_NUMBER]: '카드번호는 숫자만 입력해주세요.',
