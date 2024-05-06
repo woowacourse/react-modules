@@ -10,7 +10,7 @@ interface Props {
 export default function calculateTimeout({ isNeedAnimation, animationDuration, type }: Props) {
   if (type === 'bottom') return isNeedAnimation ? animationDuration || BASIC_BOTTOM_MODAL_ANIMATION_DURATION : NOW;
 
-  if (type === 'toast') return animationDuration || BASIC_TOAST_MODAL_ANIMATION_DURATION;
+  if (type === 'toast') return isNeedAnimation ? animationDuration || BASIC_TOAST_MODAL_ANIMATION_DURATION : NOW;
 
   return BASIC_TOAST_MODAL_ANIMATION_DURATION;
 }

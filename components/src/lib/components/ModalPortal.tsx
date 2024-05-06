@@ -1,6 +1,6 @@
 import { ReactNode, useEffect } from 'react';
 import { createPortal } from 'react-dom';
-import '../../styles/reset.css';
+import '../styles/reset.css';
 import styled from 'styled-components';
 
 export interface ModalPortalProps {

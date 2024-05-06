@@ -11,16 +11,26 @@ export interface ModalPosition {
   right?: number | string;
   bottom?: number | string;
 }
-export interface ModalProps extends React.HTMLAttributes<HTMLDivElement> {
+
+export interface ModalOptions {
   type: ModalType;
-  children: ReactNode;
   animationDuration?: number; //단위:s
   isNeedAnimation?: boolean;
-  openModal: boolean;
-  setOpenModal: Dispatch<SetStateAction<boolean>>;
   isCloseOnEsc?: boolean;
   isCloseOnBackdrop?: boolean;
   position?: ModalPosition;
+  toastDuration?: number; //단위:s
+  contentsPadding?: string;
+  borderRadius?: string;
+  backgroundColor?: {
+    modal?: string;
+    backdrop?: string;
+  };
+}
+export interface ModalProps extends React.HTMLAttributes<HTMLDivElement>, ModalOptions {
+  children: ReactNode;
+  openModal: boolean;
+  setOpenModal: Dispatch<SetStateAction<boolean>>;
 }
 
 export interface ModalComposedProps<T> extends React.HTMLAttributes<T> {

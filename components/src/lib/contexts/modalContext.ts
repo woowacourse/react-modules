@@ -1,14 +1,9 @@
 import { createContext } from 'react';
 
-import { ModalPosition } from '../types/modal';
+import { ModalOptions } from '../types/modal';
 
-export interface ModalContextType {
-  isCloseOnEsc?: boolean;
-  isCloseOnBackdrop?: boolean;
-  animationDuration?: number;
-  isNeedAnimation?: boolean;
-  position?: ModalPosition;
-  handleCloseModal: () => void;
+export interface ModalContextType extends ModalOptions {
+  closeModal: () => void;
 }
 
 const ModalContext = createContext<ModalContextType | null>(null);
