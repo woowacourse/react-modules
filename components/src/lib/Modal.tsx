@@ -25,26 +25,26 @@ const Modal = ({
   buttonClick,
 }: ModalProps) => {
   return (
-    <div className="modal">
-      <div className="modal-backdrop" onClick={closeModalClick}></div>
-      <div className={`modal-inner ${position}`}>
-        <div className="modal-top">
-          <h1 className="modal-title">{title}</h1>
+    <div className="soha-modal">
+      <div className="soha-modal-backdrop" onClick={closeModalClick}></div>
+      <div className={`soha-modal-inner ${position}`}>
+        <div className="soha-modal-top">
+          <h1 className="soha-modal-title">{title}</h1>
           {closeButton === "img" && (
-            <button className="modal-close-btn" onClick={closeModalClick}>
-              <img className="modal-close-img" src={Close} alt="모달 닫기 버튼" />
+            <button className="soha-modal-close-btn" onClick={closeModalClick}>
+              <img className="soha-modal-close-img" src={Close} alt="모달 닫기 버튼" />
             </button>
           )}
         </div>
-        <div className="modal-content">{children}</div>
-        <div className="modal-bottom">
+        <div className="soha-modal-content">{children}</div>
+        <div className="soha-modal-bottom">
           {buttonText && (
-            <button className="modal-confirm-btn" onClick={buttonClick}>
+            <button className="soha-modal-confirm-btn" onClick={buttonClick}>
               {buttonText}
             </button>
           )}
           {closeButton === "text" && (
-            <button className="modal-close-text-btn" onClick={closeModalClick}>
+            <button className="soha-modal-close-text-btn" onClick={closeModalClick}>
               닫기
             </button>
           )}
