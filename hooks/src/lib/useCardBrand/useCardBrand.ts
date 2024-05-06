@@ -8,12 +8,12 @@ interface BrandValidationResult {
 }
 
 export default function useCardBrand(
-  initialValue: string,
+  initialValue = "",
   allowedBrands: string[]
 ): BrandValidationResult {
   validateInitialParams(initialValue, allowedBrands);
 
-  const [brand, setBrand] = useState((initialValue = ""));
+  const [brand, setBrand] = useState(initialValue);
   const [validationResult, setValidationResult] = useState<ValidationResult>({
     isValid: true,
   });
