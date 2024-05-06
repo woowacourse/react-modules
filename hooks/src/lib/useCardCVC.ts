@@ -29,7 +29,7 @@ const useCardCVC = (cardCVCLength: number) => {
 
     const isValidCVC = validateCVCLength(value, cardCVCLength);
     if (!isValidCVC) {
-      errorMessages.push(CVC_NUMBER.errorMessage.notThreeDigits);
+      errorMessages.push(CVC_NUMBER.errorMessage.inValidLength(cardCVCLength));
     }
 
     setCardCVCInfo({

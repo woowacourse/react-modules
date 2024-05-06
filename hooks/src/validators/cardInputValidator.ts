@@ -1,3 +1,5 @@
+import { USERNAME, EXPIRATION_DATE } from "../lib/constants/validation";
+
 type Validator = (value: string, compareValue?: number | string) => boolean;
 
 export const isEmptyValue = (value: string): boolean => {
@@ -17,11 +19,11 @@ export const validateCardCompany: Validator = (value, defaultValue) => {
 };
 
 export const validateMonthFormat = (month: string) => {
-  return /^(0[1-9]|1[0-2])$/.test(month);
+  return RegExp(EXPIRATION_DATE.monthRegexp()).test(month);
 };
 
 export const validateYearFormat = (year: string) => {
-  return /^(0\d|[1-9]\d|\d{2})$/.test(year);
+  return RegExp(EXPIRATION_DATE.yearRegexp()).test(year);
 };
 
 export const isExpirationUpToDate = (month: string, year: string) => {
@@ -44,8 +46,8 @@ export const validateCardExpiration = (month: string, year: string) => {
   );
 };
 
-export const validateUserName: Validator = (value, length) => {
-  return new RegExp(`^[A-Z\\s]{0,${length}}$`).test(value);
+export const validateUserName = (value: string, length: number) => {
+  return new RegExp(USERNAME.regexp(length)).test(value);
 };
 
 export const validateCVCLength: Validator = (value, length) => {
