@@ -1,0 +1,62 @@
+import { IErrorStatus } from "../useInputValidation";
+
+export const EXPIRY_MONTH_LENGTH = 2;
+export const expiryMonthValidator = {
+  onChange: (value: string): IErrorStatus => {
+    if (!/^\d+$/.test(value)) {
+      return { isError: true, errorMessage: "유효기간 월(月)은 숫자만 포함해야 합니다." };
+    }
+
+    return { isError: false, errorMessage: null };
+  },
+  onBlur: (value: string): IErrorStatus => {
+    if (!/^\d+$/.test(value)) {
+      return { isError: true, errorMessage: "유효기간 월(月)은 숫자만 포함해야 합니다." };
+    }
+
+    if (value.length !== EXPIRY_MONTH_LENGTH) {
+      return { isError: true, errorMessage: "유효기간 월(月)은 2자리로 입력해 주세요." };
+    }
+
+    if (!/^(0[1-9]|1[0-2])$/.test(value)) {
+      return {
+        isError: true,
+        errorMessage: "유효기간 월(月)은 01월부터 12월 중 하나로 입력해 주세요.",
+      };
+    }
+
+    return { isError: false, errorMessage: null };
+  },
+};
+
+const EXPIRY_YEAR_LENGTH = 2;
+const MIN_YEAR = 24;
+const MAX_YEAR = 40;
+export const expiryYearValidator = {
+  onChange: (value: string): IErrorStatus => {
+    if (!/^\d+$/.test(value)) {
+      return { isError: true, errorMessage: "유효기간 년도(年)은 숫자만 포함해야 합니다." };
+    }
+
+    return { isError: false, errorMessage: null };
+  },
+
+  onBlur: (value: string): IErrorStatus => {
+    if (!/^\d+$/.test(value)) {
+      return { isError: true, errorMessage: "유효기간 년도(年)은 숫자만 포함해야 합니다." };
+    }
+
+    if (value.length !== EXPIRY_YEAR_LENGTH) {
+      return { isError: true, errorMessage: "유효기간 년도(年)은 2자리로 입력해 주세요" };
+    }
+
+    if (Number(value) < MIN_YEAR || Number(value) > MAX_YEAR) {
+      return {
+        isError: true,
+        errorMessage: "유효기간 년도(年)은 24년도부터 40년도 중 하나로 입력해 주세요",
+      };
+    }
+
+    return { isError: false, errorMessage: null };
+  },
+};

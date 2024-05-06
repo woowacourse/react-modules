@@ -1,36 +1,27 @@
-import { useState } from "react";
-import { useValidation, IErrorStatus } from "../useValidation";
+import { useInputValidation, IErrorStatus } from "../useInputValidation";
+import { passwordPrefixValidator } from "./validator";
 
 interface UsePasswordPrefixReturn {
-  passwordPrefix: string;
-  setPasswordPrefix: (value: string) => void;
+  value: string;
   errorStatus: IErrorStatus;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onBlur: (e: React.FocusEvent<HTMLInputElement>) => void;
 }
 
 export function usePasswordPrefix(): UsePasswordPrefixReturn {
-  const [value, setValue] = useState("");
-  const { errorStatus, validateValue } = useValidation(validatePasswordPrefix);
+  const { value, errorStatus, setValueWithValidation, validateOnBlur } =
+    useInputValidation(passwordPrefixValidator);
 
-  const setPasswordPrefix = (value: string) => {
-    setValue(value);
-    validateValue(value);
+  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setValueWithValidation(e.target.value);
   };
 
-  return { passwordPrefix: value, setPasswordPrefix, errorStatus };
-}
+  const onBlur = (e: React.FocusEvent<HTMLInputElement>) => validateOnBlur(e.target.value);
 
-const PASSWORD_PREFIX_LENGTH = 2;
-
-function validatePasswordPrefix(value: string): IErrorStatus {
-  if (value.length !== PASSWORD_PREFIX_LENGTH) {
-    return {
-      isError: true,
-      errorMessage: `비밀번호 앞자리는 ${PASSWORD_PREFIX_LENGTH}자리여야 합니다.`,
-    };
-  }
-  if (!/^\d+$/.test(value)) {
-    return { isError: true, errorMessage: "비밀번호는 숫자만 포함해야 합니다." };
-  }
-
-  return { isError: false, errorMessage: null };
+  return {
+    value,
+    errorStatus,
+    onChange,
+    onBlur,
+  };
 }

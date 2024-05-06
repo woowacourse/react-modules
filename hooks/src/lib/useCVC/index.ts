@@ -1,30 +1,26 @@
-import { useState } from "react";
-import { useValidation, IErrorStatus } from "../useValidation";
+import { useInputValidation, IErrorStatus } from "../useInputValidation";
+import { CVCValidator } from "./validator";
 
 interface UseCVCReturn {
-  cvc: string;
-  setCVC: (value: string) => void;
+  value: string;
   errorStatus: IErrorStatus;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onBlur: (e: React.FocusEvent<HTMLInputElement>) => void;
 }
 
 export function useCVC(): UseCVCReturn {
-  const [value, setValue] = useState("");
-  const { errorStatus, validateValue } = useValidation(validateCVC);
+  const { value, errorStatus, setValueWithValidation, validateOnBlur } =
+    useInputValidation(CVCValidator);
 
-  const setCVC = (value: string) => {
-    setValue(value);
-    validateValue(value);
+  const onChange = (e: React.ChangeEvent<HTMLInputElement>) =>
+    setValueWithValidation(e.target.value);
+
+  const onBlur = (e: React.FocusEvent<HTMLInputElement>) => validateOnBlur(e.target.value);
+
+  return {
+    value,
+    errorStatus,
+    onChange,
+    onBlur,
   };
-
-  return { cvc: value, setCVC, errorStatus };
-}
-
-function validateCVC(value: string): IErrorStatus {
-  if (value.length !== 3) {
-    return { isError: true, errorMessage: "CVC는 3자리여야 합니다." };
-  }
-  if (!/^\d+$/.test(value)) {
-    return { isError: true, errorMessage: "CVC 값은 숫자만 포함해야 합니다." };
-  }
-  return { isError: false, errorMessage: null };
 }

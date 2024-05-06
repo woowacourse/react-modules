@@ -1,64 +1,37 @@
-import { useState } from "react";
-import { useValidation, IErrorStatus } from "../useValidation";
+import { useInputValidation, IErrorStatus } from "../useInputValidation";
+import { cardNumberValidator } from "./validator";
 
-interface UseCardNumberReturn {
-  cardNumber: [string, string, string, string];
-  setCardNumber: (value: string, index: number) => void;
-  errorStatus: [IErrorStatus, IErrorStatus, IErrorStatus, IErrorStatus];
+interface CardNumberPartControl {
+  value: string;
+  errorStatus: IErrorStatus;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onBlur: (e: React.FocusEvent<HTMLInputElement>) => void;
 }
 
-export function useCardNumber(): UseCardNumberReturn {
-  const [firstPart, setFirstPart] = useState("");
-  const [secondPart, setSecondPart] = useState("");
-  const [thirdPart, setThirdPart] = useState("");
-  const [fourthPart, setFourthPart] = useState("");
+export function useCardNumber(): CardNumberPartControl[] {
+  const firstPartControl = useInputValidation(cardNumberValidator);
+  const secondPartControl = useInputValidation(cardNumberValidator);
+  const thirdPartControl = useInputValidation(cardNumberValidator);
+  const fourthPartControl = useInputValidation(cardNumberValidator);
 
-  const firstPartValidation = useValidation(validateCardNumber);
-  const secondPartValidation = useValidation(validateCardNumber);
-  const thirdPartValidation = useValidation(validateCardNumber);
-  const fourthPartValidation = useValidation(validateCardNumber);
+  const cardNumberPartControls = [
+    firstPartControl,
+    secondPartControl,
+    thirdPartControl,
+    fourthPartControl,
+  ];
 
-  const setCardNumber = (value: string, index: number) => {
-    switch (index) {
-      case 0:
-        setFirstPart(value);
-        firstPartValidation.validateValue(value);
-        break;
-      case 1:
-        setSecondPart(value);
-        secondPartValidation.validateValue(value);
-        break;
-      case 2:
-        setThirdPart(value);
-        thirdPartValidation.validateValue(value);
-        break;
-      case 3:
-        setFourthPart(value);
-        fourthPartValidation.validateValue(value);
-        break;
+  const result = cardNumberPartControls.map(
+    ({ value, setValueWithValidation, errorStatus, validateOnBlur }) => {
+      return {
+        value,
+        errorStatus,
+        onChange: (e: React.ChangeEvent<HTMLInputElement>) =>
+          setValueWithValidation(e.target.value),
+        onBlur: (e: React.FocusEvent<HTMLInputElement>) => validateOnBlur(e.target.value),
+      };
     }
-  };
+  );
 
-  return {
-    cardNumber: [firstPart, secondPart, thirdPart, fourthPart],
-    setCardNumber,
-    errorStatus: [
-      firstPartValidation.errorStatus,
-      secondPartValidation.errorStatus,
-      thirdPartValidation.errorStatus,
-      fourthPartValidation.errorStatus,
-    ],
-  };
-}
-
-function validateCardNumber(value: string): IErrorStatus {
-  if (value.length !== 4) {
-    return { isError: true, errorMessage: "카드번호 한 단위는 4자리로 입력해 주세요." };
-  }
-
-  if (!/^\d+$/.test(value)) {
-    return { isError: true, errorMessage: "카드번호는 숫자만 포함해야 합니다." };
-  }
-
-  return { isError: false, errorMessage: null };
+  return result;
 }
