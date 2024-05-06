@@ -18,7 +18,7 @@ const meta = {
     closeButton: {
       description: "modal을 닫는 closeButton의 형태",
     },
-    closeModal: {
+    closeModalClick: {
       description: "modal을 닫을 떄의 action",
     },
     title: {
@@ -45,7 +45,7 @@ export const CenterImgModal: Story = {
     position: "center",
     children: "칠드런",
     closeButton: "img",
-    closeModal: () => {},
+    closeModalClick: () => {},
     title: "제목임",
     buttonText: "버튼임",
     buttonClick: () => {},
@@ -57,7 +57,7 @@ export const BottomTextModal: Story = {
     position: "bottom",
     children: "칠드런",
     closeButton: "text",
-    closeModal: () => {},
+    closeModalClick: () => {},
     title: "제목임",
     buttonText: "버튼임",
     buttonClick: () => {},

@@ -19,7 +19,7 @@ const meta = {
     closeButton: {
       description: "modal을 닫는 closeButton의 형태",
     },
-    closeModal: {
+    closeModalClick: {
       description: "modal을 닫을 떄의 action",
     },
     title: {
@@ -40,13 +40,13 @@ const meta = {
     (Story, context) => {
       const [openModal, setOpenModal] = React.useState(false);
       const clickModalButton = () => alert("버튼 클릭 성공");
-      const closeModal = () => setOpenModal(false);
+      const closeModalClick = () => setOpenModal(false);
 
       return (
         <div>
           <button onClick={() => setOpenModal(true)}>모달 열기</button>
           {openModal && (
-            <Story args={{ ...context.args, closeModal, buttonClick: clickModalButton }} />
+            <Story args={{ ...context.args, closeModalClick, buttonClick: clickModalButton }} />
           )}
         </div>
       );
@@ -63,7 +63,7 @@ export const CenterImgModal: Story = {
     position: "center",
     children: "칠드런",
     closeButton: "img",
-    closeModal: () => {},
+    closeModalClick: () => {},
     title: "제목임",
     buttonText: "버튼임",
     buttonClick: () => {},
@@ -75,7 +75,7 @@ export const BottomTextModal: Story = {
     position: "bottom",
     children: "칠드런",
     closeButton: "text",
-    closeModal: () => {},
+    closeModalClick: () => {},
     title: "제목임",
     buttonText: "버튼임",
     buttonClick: () => {},
