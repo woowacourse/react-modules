@@ -1,8 +1,8 @@
-import useInput from './useInput';
+import useInput from '../useInput';
 import { useEffect } from 'react';
-import { validateExpiryMonthFormat, validateNumber } from './validator';
-import { Options, UseCard } from './type';
-import useValidation from './useValidation';
+import { validateExpiryMonthFormat, validateNumber } from '../validator';
+import { Options, UseCard } from '../type';
+import useValidation from '../useValidation';
 
 const useExpiryMonth = (initialValue: string, options?: Options): UseCard => {
   const { value, setValue } = useInput(initialValue);

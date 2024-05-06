@@ -1,8 +1,8 @@
-import useSelect from './useSelect';
+import useSelect from '../useSelect';
 import { useEffect } from 'react';
-import validateCardType from './validator/validateCardType';
-import { UseCardType } from './type';
-import useValidation from './useValidation';
+import validateCardType from '../validator/validateCardType';
+import { UseCardType } from '../type';
+import useValidation from '../useValidation';
 
 interface UseCardTypeProps {
   initialValue: string;

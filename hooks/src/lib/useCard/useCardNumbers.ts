@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
-import { validateCardNumberFormat, validateNumber } from './validator';
-import { Options, UseCardNumber, ValidationResult } from './type';
-import useValidations from './useValidations';
+import { validateCardNumberFormat, validateNumber } from '../validator';
+import { Options, UseCardNumber, ValidationResult } from '../type';
+import useValidations from '../useValidations';
 import useCardNumbersState from './useCardNumbersState';
 
 const useCardNumbers = (initialValue: Record<string, string>, options?: Options): UseCardNumber => {

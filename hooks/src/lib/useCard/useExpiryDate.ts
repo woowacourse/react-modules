@@ -1,4 +1,4 @@
-import { Options } from './type';
+import { Options } from '../type';
 import useExpiryMonth from './useExpiryMonth';
 import useExpiryYear from './useExpiryYear';
 

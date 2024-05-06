@@ -1,8 +1,8 @@
 import { useEffect } from 'react';
-import useInput from './useInput';
-import { validateNumber, validatePasswordFormat } from './validator';
-import { UseCard } from './type';
-import useValidation from './useValidation';
+import useInput from '../useInput';
+import { validateNumber, validatePasswordFormat } from '../validator';
+import { UseCard } from '../type';
+import useValidation from '../useValidation';
 
 const usePassword = (initialValue: string): UseCard => {
   const { value, setValue } = useInput(initialValue);

@@ -1,4 +1,4 @@
-import useInputs from './useInputs';
+import useInputs from '../useInputs';
 
 const useCardNumbersState = (initialValue: Record<string, string>) => {
   const { value, setValue } = useInputs(initialValue);
