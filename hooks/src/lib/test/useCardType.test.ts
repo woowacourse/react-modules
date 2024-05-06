@@ -3,7 +3,7 @@ import useCardType from "../useCardType";
 import { act } from "react";
 
 describe("카드 타입 훅 테스트", () => {
-  it("카드 번호 입력 시 첫 글자가 4로 시작할 때 cardType 이 visa 가 된다.", async () => {
+  it("카드 번호 첫 글자가 4로 시작할 때 cardType 이 visa 가 된다.", async () => {
     const cardNumberValue = "4444";
     const cardNumberName = "cardNumber1";
 
@@ -16,7 +16,7 @@ describe("카드 타입 훅 테스트", () => {
     expect(result.current.cardType).toBe("Visa");
   });
 
-  it("카드 번호 입력 시 앞의 두 글자가 51~55 로 시작할 때 cardType 이 MasterCard 가 된다.", async () => {
+  it("카드 번호 앞의 두 글자가 51~55 로 시작할 때 cardType 이 MasterCard 가 된다.", async () => {
     const cardNumberValue = "5526";
     const cardNumberName = "cardNumber1";
     const { result } = renderHook(() => useCardType());
