@@ -1,32 +1,63 @@
-import styles from './Modal.module.css';
-import { PropsWithChildren } from 'react';
-import closeButton from './assets/closeButton.svg';
+import styles from "./Modal.module.css";
+import { PropsWithChildren } from "react";
+import ModalHeader from "./ModalHeader";
+import ModalContent from "./ModalContent";
+import ModalFooter from "./ModalFooter";
 
-type positionProps = 'center' | 'bottom';
+type positionProps = "center" | "bottom";
+
+export interface TitleProps {
+  position: "left" | "center";
+  content: string;
+}
+
+export interface CloseButtonProps {
+  onClose: () => void;
+}
+
+export interface ConfirmButtonProps {
+  content: string;
+  onConfirm: () => void;
+}
+
+export interface CancelButtonProps {
+  content: string;
+  onCancel: () => void;
+}
 
 interface ModalProps {
   position: positionProps;
-  title: string;
+  title?: TitleProps;
+  isOpen: boolean;
   onClose: () => void;
-  isCloseButton: boolean;
+  closeButton?: CloseButtonProps;
+  confirmButton?: ConfirmButtonProps;
+  cancelButton?: CancelButtonProps;
 }
 
-const Modal = ({ position, title, children, onClose, isCloseButton }: PropsWithChildren<ModalProps>) => {
+const Modal = ({
+  position,
+  title,
+  children,
+  isOpen,
+  onClose,
+  closeButton,
+  confirmButton,
+  cancelButton,
+}: PropsWithChildren<ModalProps>) => {
   return (
-    <div className={`${styles.container} ${styles[position]}`}>
-      <div className={styles.backDrop} onClick={onClose}></div>
-      <div className={styles.modalContent}>
-        <div className={styles.titleContainer}>
-          <h2 className={styles.title}>{title}</h2>
-          {isCloseButton && (
-            <button className={styles.closeButton} onClick={onClose}>
-              <img src={closeButton} />
-            </button>
-          )}
+    <>
+      {isOpen && (
+        <div className={`${styles.container} ${styles[position]}`}>
+          <div className={styles.backDrop} onClick={onClose}></div>
+          <div className={styles.modalSection}>
+            <ModalHeader title={title} closeButton={closeButton} />
+            <ModalContent children={children} />
+            <ModalFooter confirmButton={confirmButton} cancelButton={cancelButton} />
+          </div>
         </div>
-        <div>{children}</div>
-      </div>
-    </div>
+      )}
+    </>
   );
 };
 

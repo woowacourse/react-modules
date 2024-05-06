@@ -24,48 +24,22 @@
   align-items: flex-end;
 }
 
-.modalContent {
+.modalSection {
   display: flex;
   flex-direction: column;
   gap: 24px;
   position: fixed;
   padding: 24px 32px;
-  height: 216px;
+  min-height: 216px;
   background-color: #fff;
 }
 
-.center > .modalContent {
+.center > .modalSection {
   width: 80vw;
   border-radius: 8px;
 }
 
-.bottom > .modalContent {
+.bottom > .modalSection {
   width: 100%;
   border-radius: 8px 8px 0 0;
-}
-
-.titleContainer {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  height: 26px;
-}
-
-.title {
-  font-size: 18px;
-  font-weight: 700;
-}
-
-.closeButton {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 24px;
-  height: 24px;
-  border-radius: 50%;
-  background-color: inherit;
-}
-
-.closeButton:hover {
-  background-color: rgba(165, 158, 156, 0.46);
 }
