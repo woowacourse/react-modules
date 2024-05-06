@@ -30,10 +30,13 @@ const useCardExpirationDate = (initValue: string[], maxLength: number = 2) => {
     const now = Number(year + month);
     const expireDate = Number(values[1] + values[0]);
 
-    if (values.join('').length !== maxLength * initValue.length) {
+    const currentValuesLength = values.join('').length;
+    const requiredLength = maxLength * initValue.length;
+
+    if (currentValuesLength !== requiredLength) {
       return {
         isValid: false,
-        errorMessage: `유효기간은 (MM/YY) 형식의 ${maxLength * initValue.length}글자로 입력해 주세요.`,
+        errorMessage: `유효기간은 (MM/YY) 형식의 ${requiredLength}글자로 입력해 주세요.`,
       };
     }
     if (now - expireDate > 0) {
