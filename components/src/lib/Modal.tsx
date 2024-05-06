@@ -102,7 +102,6 @@ const headerContainerCSS = css`
 `;
 
 const titleCSS = css`
-  font-family: Noto Sans KR;
   font-size: var(--title-font-size);
   font-weight: 700;
   color: var(--title-font-color);
@@ -111,7 +110,6 @@ const titleCSS = css`
 `;
 
 const descriptionCSS = css`
-  font-family: Noto Sans KR;
   font-size: var(--desc-font-size);
   font-weight: 400;
   color: var(--desc-font-color);
@@ -129,7 +127,6 @@ const buttonCSS = css`
   border: 2px solid var(--color-gray-300);
   width: 100%;
   height: auto;
-  font-family: Noto Sans KR;
   font-size: var(--btn-font-size);
   font-weight: 700;
   text-align: center;
