@@ -1,3 +1,4 @@
+import { isOnlyNumber } from '../utils/validateCardInfo';
 import useCardValidate from '../useCardValidate/useCardValidate';
 
 const useCardPassword = (initValue: string, maxLength: number = 2) => {
@@ -8,7 +9,7 @@ const useCardPassword = (initValue: string, maxLength: number = 2) => {
         errorMessage: `비밀번호는 ${maxLength}글자 까지만 입력이 가능해요.`,
       };
     }
-    if (!/^\d*$/.test(newValue)) {
+    if (isOnlyNumber(newValue)) {
       return {
         isValid: false,
         errorMessage: '비밀번호는 숫자만 입력이 가능해요.',

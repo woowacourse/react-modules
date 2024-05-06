@@ -1,3 +1,4 @@
+import { isOnlyNumber } from '../utils/validateCardInfo';
 import useCardArrayValidate from '../useCardArrayValidate/useCardArrayValidate';
 
 const useCardNumbers = (initValue: string[], maxLength: number = 4) => {
@@ -8,7 +9,7 @@ const useCardNumbers = (initValue: string[], maxLength: number = 4) => {
         errorMessage: `카드번호는 ${maxLength}글자 까지만 입력이 가능해요.`,
       };
     }
-    if (!/^\d*$/.test(newValue)) {
+    if (isOnlyNumber(newValue)) {
       return {
         isValid: false,
         errorMessage: '카드번호는 숫자만 입력이 가능해요.',
@@ -18,10 +19,13 @@ const useCardNumbers = (initValue: string[], maxLength: number = 4) => {
   };
 
   const validateOnBlur = () => {
-    if (values.join('').length !== maxLength * initValue.length) {
+    const currentValuesLength = values.join('').length;
+    const requiredLength = maxLength * initValue.length;
+
+    if (currentValuesLength !== requiredLength) {
       return {
         isValid: false,
-        errorMessage: `카드번호는 ${maxLength * initValue.length}글자로 입력해 주세요.`,
+        errorMessage: `카드번호는 ${requiredLength}글자로 입력해 주세요.`,
       };
     }
     return { isValid: true, errorMessage: '' };

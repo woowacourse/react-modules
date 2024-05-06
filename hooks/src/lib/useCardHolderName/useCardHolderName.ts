@@ -1,3 +1,4 @@
+import { isOnlyEnglishWithOneSpace } from '../utils/validateCardInfo';
 import useCardValidate from '../useCardValidate/useCardValidate';
 
 const useCardHolderName = (initValue: string, maxLength: number = 50) => {
@@ -8,7 +9,7 @@ const useCardHolderName = (initValue: string, maxLength: number = 50) => {
         errorMessage: `이름은 ${maxLength}글자 까지만 입력이 가능해요.`,
       };
     }
-    if (!/^([a-zA-Z]+ ?)*[a-zA-Z]*$/.test(newValue)) {
+    if (isOnlyEnglishWithOneSpace(newValue)) {
       return {
         isValid: false,
         errorMessage:

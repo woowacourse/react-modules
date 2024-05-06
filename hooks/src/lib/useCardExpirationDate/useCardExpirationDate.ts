@@ -1,3 +1,5 @@
+import { isOnlyNumber, isValidMonth } from '../utils/validateCardInfo';
+
 import useCardArrayValidate from '../useCardArrayValidate/useCardArrayValidate';
 
 const useCardExpirationDate = (initValue: string[], maxLength: number = 2) => {
@@ -8,13 +10,13 @@ const useCardExpirationDate = (initValue: string[], maxLength: number = 2) => {
         errorMessage: `각 유효기간은 ${maxLength}글자 까지만 입력이 가능해요.`,
       };
     }
-    if (!/^\d*$/.test(newValue)) {
+    if (isOnlyNumber(newValue)) {
       return {
         isValid: false,
         errorMessage: '유효기간은 숫자만 입력이 가능해요.',
       };
     }
-    if (index === 0 && !/^$|^(0[1-9]|1[0-2]|0|1)$/.test(newValue))
+    if (index === 0 && isValidMonth(newValue))
       return {
         isValid: false,
         errorMessage: '유효기간 월은 01~12 사이만 입력이 가능해요',

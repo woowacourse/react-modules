@@ -1,3 +1,4 @@
+import { isOnlyNumber } from '../utils/validateCardInfo';
 import useCardValidate from '../useCardValidate/useCardValidate';
 
 const useCardCVC = (initValue: string, maxLength: number = 3) => {
@@ -8,7 +9,7 @@ const useCardCVC = (initValue: string, maxLength: number = 3) => {
         errorMessage: `CVC 번호는 ${maxLength}글자 까지만 입력이 가능해요.`,
       };
     }
-    if (!/^\d*$/.test(newValue)) {
+    if (isOnlyNumber(newValue)) {
       return {
         isValid: false,
         errorMessage: 'CVC 번호는 숫자만 입력이 가능해요.',
