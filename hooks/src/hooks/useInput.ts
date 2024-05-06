@@ -18,13 +18,12 @@ const useInput = () => {
     name: string,
     {
       onChange,
-      onBlur,
-      placeholder,
       required,
       customType,
       typeErrorMessage,
       maxLength,
       maxLengthErrorMessage,
+      ...props
     }: CustomInputAttributes = {}
   ) => {
     const { valueState, errorState } = useRestrictedState({
@@ -62,7 +61,7 @@ const useInput = () => {
       requiredValidator(input);
     };
 
-    return { name, ref, value, placeholder, onChange: onChangeWrapper, onBlur };
+    return { name, ref, value, onChange: onChangeWrapper, ...props };
   };
 
   return { register: useRegister, valueMap, errorMap };
