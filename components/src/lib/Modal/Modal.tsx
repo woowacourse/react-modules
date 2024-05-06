@@ -1,10 +1,13 @@
 import * as Styled from './Modal.styled';
 
-import { ButtonPosition, ModalPosition } from './Modal.styled';
-import { ButtonSize, ButtonStyle, ButtonWidth } from '../Button/Button.styled';
+import { ButtonSize, ButtonStyle, ButtonWidth } from '../Button/Button';
 
 import Button from '../Button/Button';
 import CLOSE_BUTTON from '../../asset/close-button.svg';
+import { useEffect } from 'react';
+
+export type ModalPosition = 'center' | 'bottom';
+export type ButtonPosition = 'row' | 'column';
 
 export interface ModalProps {
   isOpened: boolean;
@@ -42,18 +45,22 @@ const Modal = ({
   primaryColor,
   showCloseButton = false,
 }: ModalProps) => {
-  if (isOpened) document.body.style.overflow = 'hidden';
-  else document.body.style.overflow = 'scroll';
+  useEffect(() => {
+    if (isOpened) document.body.style.overflow = 'hidden';
 
-  const handleKeyDownEsc = (e: KeyboardEvent) => {
-    if (e.key === 'Escape' && isOpened) {
-      closeModal();
-    }
+    const handleKeyDownEsc = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && isOpened) {
+        closeModal();
+      }
+    };
 
-    document.body.removeEventListener('keydown', handleKeyDownEsc);
-  };
+    document.body.addEventListener('keydown', handleKeyDownEsc);
 
-  document.body.addEventListener('keydown', handleKeyDownEsc);
+    return () => {
+      document.body.style.overflow = 'scroll';
+      document.body.removeEventListener('keydown', handleKeyDownEsc);
+    };
+  }, [isOpened]);
 
   return (
     <>
