@@ -10,10 +10,11 @@ describe("useCardUserName 커스텀 훅 테스트", () => {
     const cardUserName = "SUNDAY";
     const { result } = renderHook(() => useCardUserName(cardUserNameLength));
 
+    const validEvent = {
+      target: { value: cardUserName },
+    } as ChangeEvent<HTMLInputElement>;
     act(() => {
-      result.current.onChangeCardUserName({
-        target: { value: cardUserName },
-      } as ChangeEvent<HTMLInputElement>);
+      result.current.onChangeCardUserName(validEvent);
     });
 
     expect(result.current.cardUserNameInfo.cardUserName).toBe(cardUserName);
@@ -23,10 +24,11 @@ describe("useCardUserName 커스텀 훅 테스트", () => {
     const cardUserName = "HELLO";
     const { result } = renderHook(() => useCardUserName(cardUserNameLength));
 
+    const validEvent = {
+      target: { value: cardUserName },
+    } as ChangeEvent<HTMLInputElement>;
     act(() => {
-      result.current.onChangeCardUserName({
-        target: { value: cardUserName },
-      } as ChangeEvent<HTMLInputElement>);
+      result.current.onChangeCardUserName(validEvent);
     });
 
     expect(result.current.cardUserNameInfo.isValid).toBe(true);
@@ -37,10 +39,11 @@ describe("useCardUserName 커스텀 훅 테스트", () => {
     const cardUserNameOverLength = "TOOLONGNAME";
     const { result } = renderHook(() => useCardUserName(cardUserNameLength));
 
+    const invalidEvent = {
+      target: { value: cardUserNameOverLength },
+    } as ChangeEvent<HTMLInputElement>;
     act(() => {
-      result.current.onChangeCardUserName({
-        target: { value: cardUserNameOverLength },
-      } as ChangeEvent<HTMLInputElement>);
+      result.current.onChangeCardUserName(invalidEvent);
     });
 
     expect(result.current.cardUserNameInfo.isValid).toBe(false);
@@ -53,10 +56,11 @@ describe("useCardUserName 커스텀 훅 테스트", () => {
     const emptyCardUserName = "";
     const { result } = renderHook(() => useCardUserName(cardUserNameLength));
 
+    const invalidEvent = {
+      target: { value: emptyCardUserName },
+    } as ChangeEvent<HTMLInputElement>;
     act(() => {
-      result.current.onChangeCardUserName({
-        target: { value: emptyCardUserName },
-      } as ChangeEvent<HTMLInputElement>);
+      result.current.onChangeCardUserName(invalidEvent);
     });
 
     expect(result.current.cardUserNameInfo.isValid).toBe(false);
@@ -69,10 +73,11 @@ describe("useCardUserName 커스텀 훅 테스트", () => {
     const mixedCardUserName = "heLLO WORLD";
     const { result } = renderHook(() => useCardUserName(cardUserNameLength));
 
+    const invalidEvent = {
+      target: { value: mixedCardUserName },
+    } as ChangeEvent<HTMLInputElement>;
     act(() => {
-      result.current.onChangeCardUserName({
-        target: { value: mixedCardUserName },
-      } as ChangeEvent<HTMLInputElement>);
+      result.current.onChangeCardUserName(invalidEvent);
     });
 
     expect(result.current.cardUserNameInfo.isValid).toBe(false);

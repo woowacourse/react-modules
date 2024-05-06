@@ -8,10 +8,11 @@ describe("useCardExpiration 커스텀 훅 테스트", () => {
     const september = "09";
     const { result } = renderHook(() => useCardExpiration());
 
+    const validEvent = {
+      target: { value: september },
+    } as ChangeEvent<HTMLInputElement>;
     act(() => {
-      result.current.onChangeCardExpirationMM({
-        target: { value: september },
-      } as ChangeEvent<HTMLInputElement>);
+      result.current.onChangeCardExpirationMM(validEvent);
     });
 
     expect(result.current.cardExpirationInfo.MM.value).toBe(september);
@@ -23,10 +24,11 @@ describe("useCardExpiration 커스텀 훅 테스트", () => {
     const year2023 = "23";
     const { result } = renderHook(() => useCardExpiration());
 
+    const validEvent = {
+      target: { value: year2023 },
+    } as ChangeEvent<HTMLInputElement>;
     act(() => {
-      result.current.onChangeCardExpirationYY({
-        target: { value: year2023 },
-      } as ChangeEvent<HTMLInputElement>);
+      result.current.onChangeCardExpirationYY(validEvent);
     });
 
     expect(result.current.cardExpirationInfo.YY.value).toBe(year2023);
@@ -38,10 +40,11 @@ describe("useCardExpiration 커스텀 훅 테스트", () => {
     const invalidMonth = "13";
     const { result } = renderHook(() => useCardExpiration());
 
+    const invalidEvent = {
+      target: { value: invalidMonth },
+    } as ChangeEvent<HTMLInputElement>;
     act(() => {
-      result.current.onChangeCardExpirationMM({
-        target: { value: invalidMonth },
-      } as ChangeEvent<HTMLInputElement>);
+      result.current.onChangeCardExpirationMM(invalidEvent);
     });
 
     expect(result.current.cardExpirationInfo.MM.isValid).toBe(false);
@@ -54,10 +57,11 @@ describe("useCardExpiration 커스텀 훅 테스트", () => {
     const invalidMonthFormat = "2";
     const { result } = renderHook(() => useCardExpiration());
 
+    const invalidEvent = {
+      target: { value: invalidMonthFormat },
+    } as ChangeEvent<HTMLInputElement>;
     act(() => {
-      result.current.onChangeCardExpirationMM({
-        target: { value: invalidMonthFormat },
-      } as ChangeEvent<HTMLInputElement>);
+      result.current.onChangeCardExpirationMM(invalidEvent);
     });
 
     expect(result.current.cardExpirationInfo.MM.isValid).toBe(false);
@@ -71,15 +75,18 @@ describe("useCardExpiration 커스텀 훅 테스트", () => {
     const year2024 = "24";
     const { result } = renderHook(() => useCardExpiration());
 
+    const validMonthEvent = {
+      target: { value: december },
+    } as ChangeEvent<HTMLInputElement>;
+    const validYearEvent = {
+      target: { value: year2024 },
+    } as ChangeEvent<HTMLInputElement>;
+
     act(() => {
-      result.current.onChangeCardExpirationMM({
-        target: { value: december },
-      } as ChangeEvent<HTMLInputElement>);
+      result.current.onChangeCardExpirationMM(validMonthEvent);
     });
     act(() => {
-      result.current.onChangeCardExpirationYY({
-        target: { value: year2024 },
-      } as ChangeEvent<HTMLInputElement>);
+      result.current.onChangeCardExpirationYY(validYearEvent);
     });
 
     expect(result.current.cardExpirationInfo.isAllValid).toBe(true);

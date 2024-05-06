@@ -5,14 +5,16 @@ import useCardPassword from "../lib/useCardPassword";
 
 describe("useCardPassword 커스텀 훅 테스트", () => {
   const passwordLength = 2;
+
   it("카드 비밀번호 입력 시 상태가 올바르게 업데이트되는지 확인한다.", () => {
     const password = "12";
     const { result } = renderHook(() => useCardPassword(passwordLength));
 
+    const validEvent = {
+      target: { value: password },
+    } as ChangeEvent<HTMLInputElement>;
     act(() => {
-      result.current.onChangeCardPassword({
-        target: { value: password },
-      } as ChangeEvent<HTMLInputElement>);
+      result.current.onChangeCardPassword(validEvent);
     });
 
     expect(result.current.cardPasswordInfo.cardPassword).toBe(password);
@@ -22,10 +24,11 @@ describe("useCardPassword 커스텀 훅 테스트", () => {
     const password = "12";
     const { result } = renderHook(() => useCardPassword(passwordLength));
 
+    const validEvent = {
+      target: { value: password },
+    } as ChangeEvent<HTMLInputElement>;
     act(() => {
-      result.current.onChangeCardPassword({
-        target: { value: password },
-      } as ChangeEvent<HTMLInputElement>);
+      result.current.onChangeCardPassword(validEvent);
     });
 
     expect(result.current.cardPasswordInfo.isValid).toBe(true);
@@ -35,10 +38,11 @@ describe("useCardPassword 커스텀 훅 테스트", () => {
     const passwordOverLength = "123";
     const { result } = renderHook(() => useCardPassword(passwordLength));
 
+    const invalidEvent = {
+      target: { value: passwordOverLength },
+    } as ChangeEvent<HTMLInputElement>;
     act(() => {
-      result.current.onChangeCardPassword({
-        target: { value: passwordOverLength },
-      } as ChangeEvent<HTMLInputElement>);
+      result.current.onChangeCardPassword(invalidEvent);
     });
 
     expect(result.current.cardPasswordInfo.isValid).toBe(false);

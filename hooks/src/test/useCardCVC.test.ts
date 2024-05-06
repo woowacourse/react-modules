@@ -10,10 +10,11 @@ describe("useCardCVC 커스텀 훅 테스트", () => {
     const CVCNotOnlyNumber = "12A";
     const { result } = renderHook(() => useCardCVC(cardCVCLength));
 
+    const invalidEvent = {
+      target: { value: CVCNotOnlyNumber },
+    } as ChangeEvent<HTMLInputElement>;
     act(() => {
-      result.current.onChangeCardCVC({
-        target: { value: CVCNotOnlyNumber },
-      } as ChangeEvent<HTMLInputElement>);
+      result.current.onChangeCardCVC(invalidEvent);
     });
 
     expect(result.current.cardCVCInfo.isValid).toBe(false);
@@ -26,10 +27,11 @@ describe("useCardCVC 커스텀 훅 테스트", () => {
     const CVCOverLength = "1234";
     const { result } = renderHook(() => useCardCVC(cardCVCLength));
 
+    const invalidEvent = {
+      target: { value: CVCOverLength },
+    } as ChangeEvent<HTMLInputElement>;
     act(() => {
-      result.current.onChangeCardCVC({
-        target: { value: CVCOverLength },
-      } as ChangeEvent<HTMLInputElement>);
+      result.current.onChangeCardCVC(invalidEvent);
     });
 
     expect(result.current.cardCVCInfo.isValid).toBe(false);
@@ -42,10 +44,11 @@ describe("useCardCVC 커스텀 훅 테스트", () => {
     const CVCUnderLength = "12";
     const { result } = renderHook(() => useCardCVC(cardCVCLength));
 
+    const invalidEvent = {
+      target: { value: CVCUnderLength },
+    } as ChangeEvent<HTMLInputElement>;
     act(() => {
-      result.current.onChangeCardCVC({
-        target: { value: CVCUnderLength },
-      } as ChangeEvent<HTMLInputElement>);
+      result.current.onChangeCardCVC(invalidEvent);
     });
 
     expect(result.current.cardCVCInfo.isValid).toBe(false);
@@ -58,10 +61,11 @@ describe("useCardCVC 커스텀 훅 테스트", () => {
     const { result } = renderHook(() => useCardCVC(cardCVCLength));
     const CVC = "123";
 
+    const validEvent = {
+      target: { value: CVC },
+    } as ChangeEvent<HTMLInputElement>;
     act(() => {
-      result.current.onChangeCardCVC({
-        target: { value: CVC },
-      } as ChangeEvent<HTMLInputElement>);
+      result.current.onChangeCardCVC(validEvent);
     });
 
     expect(result.current.cardCVCInfo.cardCVC).toBe(CVC);
