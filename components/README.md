@@ -36,7 +36,7 @@ npm install @cys4585/react-modal
 
 ```tsx
 import { useState } from 'react';
-import { Modal, ModalButtonType } from '@cys4585/react-modal';
+import { Modal, ModalButton } from '@cys4585/react-modal';
 
 function App() {
   const [isOpen, setIsOpen] = useState(false);

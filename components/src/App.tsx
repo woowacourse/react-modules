@@ -1,6 +1,6 @@
 import './App.css';
 
-import { Modal, ModalButtonType } from '@cys4585/react-modal';
+import { Modal, ModalButton } from '@cys4585/react-modal';
 import React, { useState } from 'react';
 
 import styled from 'styled-components';
@@ -8,40 +8,6 @@ import styled from 'styled-components';
 function App() {
   const [isOpenCenterModal, setIsOpenCenterModal] = useState(false);
   const [isOpenBottomModal, setIsOpenBottomModal] = useState(false);
-
-  const MODAL_CENTER_BUTTONS: ModalButtonType[] = [
-    {
-      text: '동의하고 저장하기',
-      style: 'primary',
-      onClick: () => {
-        setIsOpenCenterModal(false);
-      },
-    },
-    {
-      text: '닫기',
-      style: 'secondary',
-      onClick: () => {
-        setIsOpenCenterModal(false);
-      },
-    },
-  ];
-
-  const MODAL_BOTTOM_BUTTONS: ModalButtonType[] = [
-    {
-      text: '동의하고 저장하기',
-      style: 'primary',
-      onClick: () => {
-        setIsOpenBottomModal(false);
-      },
-    },
-    {
-      text: '닫기',
-      style: 'secondary',
-      onClick: () => {
-        setIsOpenBottomModal(false);
-      },
-    },
-  ];
 
   return (
     <>
@@ -58,7 +24,6 @@ function App() {
         title="Center 타입 모달 컴포넌트"
         position="center"
         hasCloseButton={true}
-        footerButtons={MODAL_CENTER_BUTTONS}
         onClose={() => setIsOpenCenterModal(false)}
       >
         <Form>
@@ -86,7 +51,20 @@ function App() {
         title="Bottom 타입 모달 컴포넌트"
         position="bottom"
         hasCloseButton={true}
-        footerButtons={MODAL_BOTTOM_BUTTONS}
+        footerButtons={[
+          <ModalButton
+            key="primary-button"
+            text="동의하고 저장하기"
+            style="primary"
+            onClick={() => setIsOpenBottomModal(false)}
+          />,
+          <ModalButton
+            key="secondary-button"
+            text="닫기"
+            style="secondary"
+            onClick={() => setIsOpenBottomModal(false)}
+          />,
+        ]}
         onClose={() => setIsOpenBottomModal(false)}
       >
         <Form>
