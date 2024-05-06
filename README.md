@@ -5,10 +5,11 @@
 ### Modal
 
 - `position`: `bottom | center` 입력 값에 따라 모달 중앙, 하단 배치
-- `title`: 모달 제목 입력
-- `onClose`: 모달 닫기 함수 전달
-- `isCloseButton`: 모달 닫기 버튼 유무 입력
-- `children`: 하위 요소 전달
+- `title`: 모달 제목
+- `onClose`: 모달 닫기 함수
+- `existCloseButton`: 모달 닫기 버튼 유무
+- `closeOnBackdropClick`: 모달 바깥을 클릭했을 때 모달 창이 닫아지는지 유무
+- `children`: 하위 요소
 
 ---
 
