@@ -1,5 +1,6 @@
 import useModalBackdropClickClose from '../hooks/useModalBackdropClickClose';
 import useModalEscClose from '../hooks/useModalEscClose';
+import useDisableBackgroundScroll from '../hooks/useDisableBackgroundScroll';
 import * as Styled from './Modal.styled';
 import { HTMLAttributes, CSSProperties, useRef } from 'react';
 
@@ -22,6 +23,7 @@ const Modal: React.FC<ModalProps> & {
 
   useModalEscClose(isOpen, onClose);
   useModalBackdropClickClose(isOpen, modalRef, onClose);
+  useDisableBackgroundScroll(isOpen);
 
   if (!isOpen) return null;
 
