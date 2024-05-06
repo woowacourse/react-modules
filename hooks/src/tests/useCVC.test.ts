@@ -15,7 +15,7 @@ describe('useCVC 커스텀 훅 테스트', () => {
     const { result } = renderHook(() => useCVC(initialValue));
 
     act(() => {
-      result.current.handleChange({
+      result.current.runValidationInputTypeByChange({
         target: { value: userInput },
       } as React.ChangeEvent<HTMLInputElement>);
     });
@@ -29,12 +29,12 @@ describe('useCVC 커스텀 훅 테스트', () => {
     const { result } = renderHook(() => useCVC(initialValue));
 
     act(() => {
-      result.current.handleBlur({
+      result.current.runValidationFieldRulesByBlur({
         target: { value: userInput },
       } as React.FocusEvent<HTMLInputElement, Element>);
     });
 
-    expect(result.current.errorInfo.isValid).toBe(false);
+    expect(result.current.validationResult.isValid).toBe(false);
   });
 
   it('initial value로 field type, field rule에 맞지 않는 초기값(문자)을 넣을 때 input의 결과는 빈 값으로 셋팅된다.', () => {

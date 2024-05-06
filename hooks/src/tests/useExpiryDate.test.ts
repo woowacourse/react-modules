@@ -21,7 +21,7 @@ describe('useExpiryDate 커스텀 훅 테스트', () => {
     const { result } = renderHook(() => useExpiryDate(initialValue));
 
     act(() => {
-      result.current.month.handleChange({
+      result.current.month.runValidationInputTypeByChange({
         target: { value: userInput },
       } as React.ChangeEvent<HTMLInputElement>);
     });
@@ -36,7 +36,7 @@ describe('useExpiryDate 커스텀 훅 테스트', () => {
     const { result } = renderHook(() => useExpiryDate(initialValue));
 
     act(() => {
-      result.current.year.handleChange({
+      result.current.year.runValidationInputTypeByChange({
         target: { value: userInput },
       } as React.ChangeEvent<HTMLInputElement>);
     });
@@ -52,10 +52,10 @@ describe('useExpiryDate 커스텀 훅 테스트', () => {
     const { result } = renderHook(() => useExpiryDate(initialValue));
 
     act(() => {
-      result.current.month.handleChange({
+      result.current.month.runValidationInputTypeByChange({
         target: { value: userInputMonth },
       } as React.ChangeEvent<HTMLInputElement>);
-      result.current.year.handleChange({
+      result.current.year.runValidationInputTypeByChange({
         target: { value: userInputYear },
       } as React.ChangeEvent<HTMLInputElement>);
     });
@@ -74,12 +74,12 @@ describe('useExpiryDate 커스텀 훅 테스트', () => {
     const { result } = renderHook(() => useExpiryDate(initialValue));
 
     act(() => {
-      result.current.month.handleBlur({
+      result.current.month.runValidationFieldRulesByBlur({
         target: { value: userInput },
       } as React.FocusEvent<HTMLInputElement, Element>);
     });
 
-    expect(result.current.month.errorInfo.isValid).toBe(false);
+    expect(result.current.month.validationResult.isValid).toBe(false);
   });
 
   it('year 입력값이 24년 이후가 아니라면 field rule 에러이다', () => {
@@ -88,12 +88,12 @@ describe('useExpiryDate 커스텀 훅 테스트', () => {
     const { result } = renderHook(() => useExpiryDate(initialValue));
 
     act(() => {
-      result.current.year.handleBlur({
+      result.current.year.runValidationFieldRulesByBlur({
         target: { value: userInput },
       } as React.FocusEvent<HTMLInputElement, Element>);
     });
 
-    expect(result.current.year.errorInfo.isValid).toBe(false);
+    expect(result.current.year.validationResult.isValid).toBe(false);
   });
 
   it('initial value로 field type, field rule에 맞지 않는 초기값(ex: 3자리 수)을 넣을 때 input의 결과는 빈 값으로 셋팅된다.', () => {

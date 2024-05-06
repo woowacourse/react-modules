@@ -29,7 +29,7 @@ describe('useCardType 커스텀 훅 테스트', () => {
     );
 
     act(() => {
-      result.current.handleChange({
+      result.current.runValidationByChange({
         target: { value: userInput },
       } as React.ChangeEvent<HTMLSelectElement>);
     });
@@ -49,12 +49,12 @@ describe('useCardType 커스텀 훅 테스트', () => {
     );
 
     act(() => {
-      result.current.handleChange({
+      result.current.runValidationByChange({
         target: { value: userInput },
       } as React.ChangeEvent<HTMLSelectElement>);
     });
 
-    expect(result.current.errorInfo.isValid).toBe(false);
+    expect(result.current.validationResult.isValid).toBe(false);
   });
 
   it('초기값이 올바르지 않으면(options에 없는 초기값) 플레이스홀더로 값이 변한다.', () => {

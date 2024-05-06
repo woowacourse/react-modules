@@ -15,7 +15,7 @@ describe('useCardHolder 커스텀 훅 테스트', () => {
     const { result } = renderHook(() => useCardHolder(initialValue));
 
     act(() => {
-      result.current.handleChange({
+      result.current.runValidationInputTypeByChange({
         target: { value: userInput },
       } as React.ChangeEvent<HTMLInputElement>);
     });
@@ -29,12 +29,12 @@ describe('useCardHolder 커스텀 훅 테스트', () => {
     const { result } = renderHook(() => useCardHolder(initialValue));
 
     act(() => {
-      result.current.handleChange({
+      result.current.runValidationInputTypeByChange({
         target: { value: userInput },
       } as React.ChangeEvent<HTMLInputElement>);
     });
 
-    expect(result.current.errorInfo.isValid).toBe(false);
+    expect(result.current.validationResult.isValid).toBe(false);
   });
 
   it('입력값이 한글이라면 field type 에러이다', () => {
@@ -43,12 +43,12 @@ describe('useCardHolder 커스텀 훅 테스트', () => {
     const { result } = renderHook(() => useCardHolder(initialValue));
 
     act(() => {
-      result.current.handleChange({
+      result.current.runValidationInputTypeByChange({
         target: { value: userInput },
       } as React.ChangeEvent<HTMLInputElement>);
     });
 
-    expect(result.current.errorInfo.isValid).toBe(false);
+    expect(result.current.validationResult.isValid).toBe(false);
   });
 
   it('성과 이름 사이에 공백이 없으면 field rule 에러이다', () => {
@@ -57,12 +57,12 @@ describe('useCardHolder 커스텀 훅 테스트', () => {
     const { result } = renderHook(() => useCardHolder(initialValue));
 
     act(() => {
-      result.current.handleBlur({
+      result.current.runValidationFieldRulesByBlur({
         target: { value: userInput },
       } as React.FocusEvent<HTMLInputElement, Element>);
     });
 
-    expect(result.current.errorInfo.isValid).toBe(false);
+    expect(result.current.validationResult.isValid).toBe(false);
   });
 
   it('initial value로 field type, field rule에 맞지 않는 초기값(숫자)을 넣을 때 input의 결과는 빈 값으로 셋팅된다.', () => {

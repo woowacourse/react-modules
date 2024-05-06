@@ -15,7 +15,7 @@ describe('useCardNumbers 커스텀 훅 테스트', () => {
     const { result } = renderHook(() => useCardNumbers(initialValue));
 
     act(() => {
-      result.current.handleChange(
+      result.current.runValidationInputTypeByChange(
         {
           target: { value: userInput },
         } as unknown as React.ChangeEvent<HTMLInputElement>,
@@ -31,7 +31,7 @@ describe('useCardNumbers 커스텀 훅 테스트', () => {
     const { result } = renderHook(() => useCardNumbers(initialValue));
 
     act(() => {
-      result.current.handleChange(
+      result.current.runValidationInputTypeByChange(
         {
           target: { value: userInput },
         } as unknown as React.ChangeEvent<HTMLInputElement>,
@@ -39,7 +39,7 @@ describe('useCardNumbers 커스텀 훅 테스트', () => {
       );
     });
 
-    expect(result.current.errorInfo.second.isValid).toBe(false);
+    expect(result.current.validationResult.second.isValid).toBe(false);
   });
 
   it('userInput에 4자리가 아닌 아닌 입력이 들어올 경우 field rule 에러이다.', () => {
@@ -47,7 +47,7 @@ describe('useCardNumbers 커스텀 훅 테스트', () => {
     const { result } = renderHook(() => useCardNumbers(initialValue));
 
     act(() => {
-      result.current.handleBlur(
+      result.current.runValidationFieldRulesByBlur(
         {
           target: { value: userInput },
         } as unknown as React.FocusEvent<HTMLInputElement, Element>,
@@ -55,7 +55,7 @@ describe('useCardNumbers 커스텀 훅 테스트', () => {
       );
     });
 
-    expect(result.current.errorInfo.second.isValid).toBe(false);
+    expect(result.current.validationResult.second.isValid).toBe(false);
   });
 
   it('초기값에 숫자가 아닌 입력이 들어올 경우 필드들이 초기화된다.', () => {
