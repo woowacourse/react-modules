@@ -6,13 +6,12 @@ import { ModalContainer, ModalDimmer, ModalHeader } from "./Modal.style";
 export interface ModalProps {
   modalPosition: "center" | "bottom";
   title: string;
-  children: React.ReactNode;
   closeButtonPosition: "top" | "bottom";
   isOpen: boolean;
   onClose: (e: React.MouseEvent<HTMLDivElement | HTMLButtonElement>) => void;
 }
 
-export const Modal: React.FC<ModalProps> = ({
+export const Modal: React.FC<React.PropsWithChildren<ModalProps>> = ({
   modalPosition,
   title,
   children,
