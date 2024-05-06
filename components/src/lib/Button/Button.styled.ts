@@ -53,6 +53,8 @@ export const Button = styled.button<{
     BUTTON_STYLE_TABLE(props.primaryColor)[props.buttonStyle].border};
   border-radius: 8px;
 
+  cursor: pointer;
+
   &:hover {
     background-color: ${(props) => {
       switch (props.buttonStyle) {
@@ -65,7 +67,7 @@ export const Button = styled.button<{
   }
 `;
 
-export const ButtonText = styled.p<{
+export const ButtonText = styled.span<{
   size: ButtonSize;
   buttonStyle: ButtonStyle;
   primaryColor: string;
