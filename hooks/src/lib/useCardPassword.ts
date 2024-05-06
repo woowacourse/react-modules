@@ -1,27 +1,51 @@
 import { useState, ChangeEvent } from "react";
-import { validatePassword } from "../validators/cardInputValidator";
+import { COMMON_ERROR, PASSWORD } from "./constants/validation";
+import {
+  validatePasswordLength,
+  isValidNumberValue,
+} from "../validators/cardInputValidator";
+
+interface cardPasswordInfo {
+  cardPassword: string;
+  isValid: boolean;
+  errorMessages: string[];
+}
 
 const useCardPassword = (cardPasswordLength: number) => {
-  const [cardPassWordInfo, setCardPassWordInfo] = useState({
-    password: "",
+  const [cardPasswordInfo, setCardPasswordInfo] = useState<cardPasswordInfo>({
+    cardPassword: "",
     isValid: false,
+    errorMessages: [],
   });
 
   const handleCardPassword = (event: ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target;
-    const isValid = validatePassword(value, cardPasswordLength);
+    const errorMessages: string[] = [];
 
-    setCardPassWordInfo((prev) => {
-      return {
-        ...prev,
-        password: value,
-        isValid,
-      };
+    const isValidNumber = isValidNumberValue(value);
+    if (!isValidNumber) {
+      errorMessages.push(COMMON_ERROR.notNumeric);
+    }
+
+    const isValidPasswordLength = validatePasswordLength(
+      value,
+      cardPasswordLength
+    );
+    if (!isValidPasswordLength) {
+      errorMessages.push(
+        PASSWORD.errorMessage.invalidLength(cardPasswordLength)
+      );
+    }
+
+    setCardPasswordInfo({
+      cardPassword: value,
+      isValid: isValidNumber && isValidPasswordLength,
+      errorMessages,
     });
   };
 
   return {
-    cardPassWordInfo,
+    cardPasswordInfo,
     handleCardPassword,
   };
 };

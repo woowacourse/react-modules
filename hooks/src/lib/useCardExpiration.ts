@@ -1,113 +1,106 @@
-// import { useState, ChangeEvent } from "react";
-// import { validateCardExpiration } from "../validators/cardInputValidator";
-
-// const useCardExpiration = () => {
-//   const [cardExpiration, setCardExpiration] = useState({
-//     MM: "",
-//     YY: "",
-//     isValid: true,
-//   });
-
-//   const handleCardExpirationMM = (event: ChangeEvent<HTMLInputElement>) => {
-//     const { value } = event.target;
-//     const isValid = validateCardExpiration(value, "MM");
-
-//     setCardExpiration((prev) => {
-//       return {
-//         ...prev,
-//         MM: value,
-//       };
-//     });
-
-//     if (!isValid) {
-//       setCardExpiration((prev) => {
-//         return {
-//           ...prev,
-//           isValid: false,
-//         };
-//       });
-//       return;
-//     }
-//   };
-
-//   const handleCardExpirationYY = (event: ChangeEvent<HTMLInputElement>) => {
-//     const { value } = event.target;
-//     const isValid = validateCardExpiration(value, "YY");
-
-//     setCardExpiration((prev) => {
-//       return {
-//         ...prev,
-//         YY: value,
-//       };
-//     });
-
-//     if (!isValid) {
-//       setCardExpiration((prev) => {
-//         return {
-//           ...prev,
-//           isValid: false,
-//         };
-//       });
-//       return;
-//     }
-//   };
-
-//   return {
-//     cardExpiration,
-//     handleCardExpirationMM,
-//     handleCardExpirationYY,
-//   };
-// };
-
-// export default useCardExpiration;
-
 import { useState, ChangeEvent, useEffect } from "react";
+import { COMMON_ERROR, EXPIRATION_DATE } from "./constants/validation";
 import {
+  isValidNumberValue,
   validateMonthFormat,
   validateYearFormat,
   isExpirationUpToDate,
 } from "../validators/cardInputValidator";
 
+interface CardExpirationInfo {
+  MM: {
+    value: string;
+    isValid: boolean;
+    errorMessages: string[];
+  };
+  YY: {
+    value: string;
+    isValid: boolean;
+    errorMessages: string[];
+  };
+  isAllValid: boolean;
+  errorMessages: string[];
+}
+
 const useCardExpiration = () => {
-  const [cardExpiration, setCardExpiration] = useState({
-    MM: {
-      value: "",
-      isValid: false,
-    },
-    YY: {
-      value: "",
-      isValid: false,
-    },
-    isAllValid: false,
-  });
+  const [cardExpirationInfo, setCardExpirationInfo] =
+    useState<CardExpirationInfo>({
+      MM: {
+        value: "",
+        isValid: false,
+        errorMessages: [],
+      },
+      YY: {
+        value: "",
+        isValid: false,
+        errorMessages: [],
+      },
+      isAllValid: false,
+      errorMessages: [],
+    });
 
   useEffect(() => {
-    const monthIsValid = validateMonthFormat(cardExpiration.MM.value);
-    const yearIsValid = validateYearFormat(cardExpiration.YY.value);
-    const isUpToDate = isExpirationUpToDate(
-      cardExpiration.MM.value,
-      cardExpiration.YY.value
-    );
+    const monthErrorMessages: string[] = [];
+    const isValidMonthNumber = isValidNumberValue(cardExpirationInfo.MM.value);
+    if (!isValidMonthNumber) {
+      monthErrorMessages.push(COMMON_ERROR.notNumeric);
+    }
 
-    setCardExpiration((prev) => ({
+    const isValidMonthFormat = validateMonthFormat(cardExpirationInfo.MM.value);
+    if (!isValidMonthFormat) {
+      monthErrorMessages.push(EXPIRATION_DATE.errorMessage.invalidMonth);
+    }
+
+    const yearErrorMessages: string[] = [];
+    const isValidYearNumber = isValidNumberValue(cardExpirationInfo.YY.value);
+    if (!isValidYearNumber) {
+      yearErrorMessages.push(COMMON_ERROR.notNumeric);
+    }
+
+    const isValidYearFormat = validateYearFormat(cardExpirationInfo.YY.value);
+    if (!isValidYearFormat) {
+      yearErrorMessages.push(EXPIRATION_DATE.errorMessage.invalidYear);
+    }
+
+    const isValidExpiration = isExpirationUpToDate(
+      cardExpirationInfo.MM.value,
+      cardExpirationInfo.YY.value
+    );
+    const commonErrorMessages = isValidExpiration
+      ? []
+      : [EXPIRATION_DATE.errorMessage.expired];
+
+    setCardExpirationInfo((prev) => ({
       ...prev,
       MM: {
         ...prev.MM,
-        isValid: monthIsValid,
+        isValid: isValidMonthNumber && isValidMonthFormat,
+        errorMessages: monthErrorMessages,
       },
       YY: {
         ...prev.YY,
-        isValid: yearIsValid,
+        isValid: isValidYearNumber && isValidYearFormat,
+        errorMessages: yearErrorMessages,
       },
-      isAllValid: monthIsValid && yearIsValid && isUpToDate,
+      isAllValid:
+        isValidMonthNumber &&
+        isValidMonthFormat &&
+        isValidYearNumber &&
+        isValidYearFormat &&
+        isValidExpiration,
+      errorMessages: [
+        ...monthErrorMessages,
+        ...yearErrorMessages,
+        ...commonErrorMessages,
+      ],
     }));
-  }, [cardExpiration.MM.value, cardExpiration.YY.value]);
+  }, [cardExpirationInfo.MM.value, cardExpirationInfo.YY.value]);
 
   const handleCardExpirationChange =
     (type: "MM" | "YY") => (event: ChangeEvent<HTMLInputElement>) => {
       const { value } = event.target;
 
-      setCardExpiration((prev) => ({
+      setCardExpirationInfo((prev) => ({
         ...prev,
         [type]: {
           ...prev[type],
@@ -117,7 +110,7 @@ const useCardExpiration = () => {
     };
 
   return {
-    cardExpiration,
+    cardExpirationInfo,
     handleCardExpirationMM: handleCardExpirationChange("MM"),
     handleCardExpirationYY: handleCardExpirationChange("YY"),
   };

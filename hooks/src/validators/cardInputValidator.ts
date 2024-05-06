@@ -1,26 +1,19 @@
 type Validator = (value: string, compareValue?: number | string) => boolean;
 
-const isInvalidValue = (
-  value: string,
-  length: number,
-  condition: boolean = false
-): boolean => {
-  return (
-    value.trim() !== "" &&
-    (Number.isNaN(Number(value)) || value.length < length || condition)
-  );
+export const isEmptyValue = (value: string): boolean => {
+  return value.trim() === "";
 };
 
-export const validateCardNumber: Validator = (value, length) => {
-  return (
-    value.trim() !== "" &&
-    !Number.isNaN(Number(value)) &&
-    value.length === length
-  );
+export const isValidNumberValue = (value: string): boolean => {
+  return value.trim() !== "" && !Number.isNaN(Number(value));
+};
+
+export const validateCardNumberLength: Validator = (value, length) => {
+  return value.length === length;
 };
 
 export const validateCardCompany: Validator = (value, defaultValue) => {
-  return value !== defaultValue;
+  return value.trim() !== "" && value !== defaultValue;
 };
 
 export const validateMonthFormat = (month: string) => {
@@ -44,24 +37,21 @@ export const isExpirationUpToDate = (month: string, year: string) => {
 };
 
 export const validateCardExpiration = (month: string, year: string) => {
-  const isValidMonth = validateMonthFormat(month);
-  const isValidYear = validateYearFormat(year);
-
-  if (!isValidMonth || !isValidYear) return false;
-
-  return isExpirationUpToDate(month, year);
-};
-
-export const validateUserName: Validator = (value, length) => {
   return (
-    value.trim() !== "" && new RegExp(`^[A-Z\\s]{0,${length}}$`).test(value)
+    validateMonthFormat(month) &&
+    validateYearFormat(year) &&
+    isExpirationUpToDate(month, year)
   );
 };
 
-export const validateCVC: Validator = (value, length) => {
-  return !isInvalidValue(value, length as number, value.length !== length);
+export const validateUserName: Validator = (value, length) => {
+  return new RegExp(`^[A-Z\\s]{0,${length}}$`).test(value);
 };
 
-export const validatePassword: Validator = (value, length) => {
-  return !isInvalidValue(value, length as number, value.length !== length);
+export const validateCVCLength: Validator = (value, length) => {
+  return value.length === length;
+};
+
+export const validatePasswordLength: Validator = (value, length) => {
+  return value.length === length;
 };

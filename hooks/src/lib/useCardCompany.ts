@@ -1,10 +1,18 @@
 import { useState, ChangeEvent } from "react";
 import { validateCardCompany } from "../validators/cardInputValidator";
+import { CARD_COMPANY } from "./constants/validation";
+
+interface CardCompanyInfo {
+  cardCompany: string;
+  isValid: boolean;
+  errorMessages: string[];
+}
 
 const useCardCompany = () => {
-  const [cardCompanyInfo, setCardCompanyInfo] = useState({
+  const [cardCompanyInfo, setCardCompanyInfo] = useState<CardCompanyInfo>({
     cardCompany: "",
     isValid: false,
+    errorMessages: [],
   });
 
   const handleCardCompany = (
@@ -12,14 +20,16 @@ const useCardCompany = () => {
     defaultValue: string
   ) => {
     const { value } = event.target;
-    const isValid = validateCardCompany(value, defaultValue);
 
-    setCardCompanyInfo((prev) => {
-      return {
-        ...prev,
-        cardCompany: value,
-        isValid,
-      };
+    const isValidSelection = validateCardCompany(value, defaultValue);
+    const errorMessages = isValidSelection
+      ? []
+      : [CARD_COMPANY.errorMessage.notSelected];
+
+    setCardCompanyInfo({
+      cardCompany: value,
+      isValid: isValidSelection,
+      errorMessages,
     });
   };
 

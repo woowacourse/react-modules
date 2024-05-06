@@ -1,28 +1,52 @@
 import { useState, ChangeEvent } from "react";
-import { validateCardNumber } from "../validators/cardInputValidator";
+import { COMMON_ERROR, CARD_NUMBER } from "./constants/validation";
+import {
+  isValidNumberValue,
+  validateCardNumberLength,
+} from "../validators/cardInputValidator";
 
-const useCardNumbers = (cardNumbersLength: number) => {
-  const [cardNumbersInfo, setCardNumbersInfo] = useState({
-    cardNumbers: "",
+interface CardNumberInfo {
+  cardNumber: string;
+  isValid: boolean;
+  errorMessages: string[];
+}
+
+const useCardNumbers = (cardNumberLength: number) => {
+  const [cardNumberInfo, setCardNumberInfo] = useState<CardNumberInfo>({
+    cardNumber: "",
     isValid: false,
+    errorMessages: [],
   });
 
   const handleCardNumbers = (event: ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target;
-    const isValid = validateCardNumber(value, cardNumbersLength);
+    const errorMessages: string[] = [];
 
-    setCardNumbersInfo((prev) => {
-      return {
-        ...prev,
-        cardNumbers: value,
-        isValid,
-      };
+    const isValidNumber = isValidNumberValue(value);
+    if (!isValidNumber) {
+      errorMessages.push(COMMON_ERROR.notNumeric);
+    }
+
+    const isValidCardNumberLength = validateCardNumberLength(
+      value,
+      cardNumberLength
+    );
+    if (!isValidCardNumberLength) {
+      errorMessages.push(
+        CARD_NUMBER.errorMessage.invalidLength(cardNumberLength)
+      );
+    }
+
+    setCardNumberInfo({
+      cardNumber: value,
+      isValid: isValidNumber && isValidCardNumberLength,
+      errorMessages,
     });
   };
 
   return {
-    cardNumbersInfo,
-    handleCardNumbers,
+    cardNumberInfo,
+    handleCardNumbers: handleCardNumbers,
   };
 };
 
