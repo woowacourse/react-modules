@@ -1,6 +1,6 @@
 {
   "name": "hook-simo-harry",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "card add form custom hook made by harry & simo",
   "type": "module",
   "types": "dist/index.d.ts",
