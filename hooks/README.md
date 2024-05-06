@@ -2,6 +2,12 @@
 
 - Custom card validation hooks made by paran and fe
 
+## How to install
+
+```
+npm install paran-card-validation-hooks
+```
+
 ## Hooks
 
 - 에러가 발생하면 아래 문서에 작성된 순서대로 해당하는 에러 문자열을 validationResult의 errorMessages 배열에 저장합니다.

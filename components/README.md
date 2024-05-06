@@ -2,6 +2,12 @@
 
 - Simple modal component module made by paran and fe
 
+## How to install
+
+```
+npm install paran-simple-modal
+```
+
 ## Properties
 
 ### (optional)title: string
@@ -34,7 +40,7 @@ default: false
 
 ## Storybook
 
-link: https://6631dad3ab74b00107d09938-mbvlnyhhgn.chromatic.com/
+link: [here](https://6638f8463b7cb5cd9e63da7f-aawuumjsnf.chromatic.com/?path=/docs/modal-bottom--docs)
 
 ## Usage
 
