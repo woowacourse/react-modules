@@ -6,7 +6,7 @@ import { ExpiryDateErrorType } from "@/types/expiryDate";
 import { PasswordErrorType } from "@/types/password";
 import { CardCompanyErrorType } from "@/types/cardCompany";
 
-type ErrorMessages<T extends ErrorStatus> = Record<T, string>;
+type ErrorMessages<T extends string> = Record<T, string>;
 
 export const CardNumbersErrorMessages: ErrorMessages<CardNumberErrorType> = {
   [ErrorStatus.IS_NOT_NUMBER]: "카드번호는 숫자만 입력해주세요.",

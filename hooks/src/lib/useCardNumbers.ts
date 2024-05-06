@@ -3,7 +3,7 @@ import {
   CardNumbersType,
   CardNumberKeys,
   CardNumberErrorType,
-  cardNumberKeys,
+  // cardNumberKeys,
 } from "@/types/cardNumbers";
 import useInput from "./common/useInput";
 import { validateNumber, validateOverLength } from "@/validate/validate";
@@ -83,12 +83,6 @@ const useCardNumbers = (initialValues: CardNumbersType) => {
     cardNumber4:
       errorStatusNumber4 && CardNumbersErrorMessages[errorStatusNumber4],
   };
-
-  cardNumberKeys.forEach((key) => {
-    if (errorMessages[key] === null) {
-      delete errorMessages[key];
-    }
-  });
 
   const onBlurArray = {
     cardNumber1: onBlurValidLength1,

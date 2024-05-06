@@ -16,8 +16,8 @@ export const ExampleCardBrands = [
 ];
 
 describe("useCardCompany 훅 테스트", () => {
+  const initialValue = "";
   it("초기값이 정확히 설정되어야 한다.", () => {
-    const initialValue = "";
     const { result } = renderHook(() =>
       useCardCompany({ initialValue, optionArray: ExampleCardBrands })
     );
@@ -26,7 +26,6 @@ describe("useCardCompany 훅 테스트", () => {
   });
 
   it("입력값이 정확히 업데이트 되어야 한다.", () => {
-    const initialValue = "";
     const { result } = renderHook(() =>
       useCardCompany({ initialValue, optionArray: ExampleCardBrands })
     );
@@ -40,7 +39,6 @@ describe("useCardCompany 훅 테스트", () => {
   });
 
   it("유효하지 않은 옵션 선택시 에러를 낸다.", () => {
-    const initialValue = "";
     const { result } = renderHook(() =>
       useCardCompany({ initialValue, optionArray: ExampleCardBrands })
     );

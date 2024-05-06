@@ -5,20 +5,19 @@ import { ErrorStatus } from "@/types/errorStatus";
 import { CVCErrorMessages } from "@/constants/error";
 
 describe("useCVC 훅 테스트", () => {
+  const validValue = "123";
+  const changeValue = "456";
+
   it("초기값이 정확히 설정되어야 한다.", () => {
-    const initialValue = "123";
-    const { result } = renderHook(() => useCVC(initialValue));
-    expect(result.current.value).toEqual(initialValue);
+    const { result } = renderHook(() => useCVC(validValue));
+    expect(result.current.value).toEqual(validValue);
   });
 
   it("입력값이 정확히 업데이트 되어야 한다.", () => {
-    const initialValue = "123";
-    const { result } = renderHook(() => useCVC(initialValue));
-    const changeValue = "456";
-
+    const { result } = renderHook(() => useCVC(validValue));
     React.act(() => {
       result.current.onChange({
-        target: { value: "456" },
+        target: { value: changeValue },
       } as ChangeEvent<HTMLInputElement>);
     });
 
@@ -26,8 +25,7 @@ describe("useCVC 훅 테스트", () => {
   });
 
   it("숫자가 아닌 값이 들어오면 에러를 낸다.", () => {
-    const initialValue = "123";
-    const { result } = renderHook(() => useCVC(initialValue));
+    const { result } = renderHook(() => useCVC(""));
     const invalidValue = "ㄱㄴㄷ";
 
     React.act(() => {
@@ -41,8 +39,7 @@ describe("useCVC 훅 테스트", () => {
   });
 
   it("길이가 3글자가 아니면 에러를 낸다.", () => {
-    const initialValue = "123";
-    const { result } = renderHook(() => useCVC(initialValue));
+    const { result } = renderHook(() => useCVC(""));
     const invalidValue = "1234";
 
     React.act(() => {
@@ -57,9 +54,11 @@ describe("useCVC 훅 테스트", () => {
 
   it("길이가 2글자이고 포커스를 벗어나면 에러를 낸다.", () => {
     const { result } = renderHook(() => useCVC(""));
+    const invalidValue = "12";
+
     React.act(() => {
       result.current.onBlurValidLength({
-        target: { value: "12", name: "cardNumber1" },
+        target: { value: invalidValue, name: "cardNumber1" },
       } as React.FocusEvent<HTMLInputElement>);
     });
     const expectedErrorMessage = CVCErrorMessages[ErrorStatus.INVALID_LENGTH];

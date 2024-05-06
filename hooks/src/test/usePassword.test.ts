@@ -5,28 +5,27 @@ import { usePassword } from "@/lib";
 import { PasswordErrorMessages } from "@/constants/error";
 
 describe("usePassword 훅 테스트", () => {
-  it("초기값이 정확히 설정되어야 한다.", () => {
-    const initialValue = "12";
-    const { result } = renderHook(() => usePassword(initialValue));
+  const validValue = "12";
+  const initialValue = "";
 
-    expect(result.current.value).toBe(initialValue);
+  it("초기값이 정확히 설정되어야 한다.", () => {
+    const { result } = renderHook(() => usePassword(validValue));
+
+    expect(result.current.value).toBe(validValue);
   });
 
   it("입력값이 정확히 업데이트 되어야 한다.", () => {
-    const initialValue = "";
     const { result } = renderHook(() => usePassword(initialValue));
-    const invalidValue = "12";
     React.act(() => {
       result.current.onChange({
-        target: { value: invalidValue },
+        target: { value: validValue },
       } as ChangeEvent<HTMLInputElement>);
     });
 
-    expect(result.current.value).toBe(invalidValue);
+    expect(result.current.value).toBe(validValue);
   });
 
   it("숫자가 아닌 값이 들어오면 에러를 낸다.", () => {
-    const initialValue = "";
     const { result } = renderHook(() => usePassword(initialValue));
     const invalidValue = "ab";
 
@@ -41,7 +40,6 @@ describe("usePassword 훅 테스트", () => {
   });
 
   it("길이가 2글자가 아니면 에러를 낸다.", () => {
-    const initialValue = "";
     const { result } = renderHook(() => usePassword(initialValue));
     const invalidValue = "123";
 
@@ -57,7 +55,6 @@ describe("usePassword 훅 테스트", () => {
   });
 
   it("길이가 2글자 미만(Blur)이면 에러를 낸다.", () => {
-    const initialValue = "";
     const { result } = renderHook(() => usePassword(initialValue));
     const invalidValue = "1";
 

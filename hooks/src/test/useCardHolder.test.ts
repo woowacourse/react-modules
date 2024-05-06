@@ -5,24 +5,25 @@ import { CardHolderErrorMessages } from "@/constants/error";
 import { useCardHolder } from "@/lib";
 
 describe("useCardHolder 훅 테스트", () => {
+  const validValue = "HAILEY RIAN";
+  const initialValue = "";
+  const doubleSpaceInvalidValue = "HAILEY  RIAN";
   it("초기값이 정확히 설정되어야 한다.", () => {
-    const initialValue = "HAILEY RIAN";
-    const { result } = renderHook(() => useCardHolder(initialValue));
+    const { result } = renderHook(() => useCardHolder(validValue));
 
-    expect(result.current.value).toBe(initialValue);
+    expect(result.current.value).toBe(validValue);
   });
 
   it("입력값이 정확히 업데이트 되어야 한다.", () => {
-    const initialValue = "";
-    const { result } = renderHook(() => useCardHolder(initialValue));
-    const invalidValue = "HAILEY RIAN";
+    const { result } = renderHook(() => useCardHolder(validValue));
+    const changeValue = "RIAN HAILEY";
     React.act(() => {
       result.current.onChange({
-        target: { value: invalidValue },
+        target: { value: changeValue },
       } as ChangeEvent<HTMLInputElement>);
     });
 
-    expect(result.current.value).toBe(invalidValue);
+    expect(result.current.value).toBe(changeValue);
   });
 
   it("영어 대문자가 아니면 에러를 낸다.", () => {
@@ -42,13 +43,11 @@ describe("useCardHolder 훅 테스트", () => {
   });
 
   it("빈칸이 두 개이면 에러를 낸다.", () => {
-    const initialValue = "";
     const { result } = renderHook(() => useCardHolder(initialValue));
-    const invalidValue = "HAILEY  RIAN";
 
     React.act(() => {
       result.current.onChange({
-        target: { value: invalidValue },
+        target: { value: doubleSpaceInvalidValue },
       } as ChangeEvent<HTMLInputElement>);
     });
 

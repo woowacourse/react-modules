@@ -6,11 +6,7 @@ import {
   validateOverLength,
 } from "@/validate/validate";
 import { ChangeEvent, FocusEvent } from "react";
-import {
-  ExpiryDateType,
-  ExpiryDateErrorType,
-  ExpiryDateKeys,
-} from "@/types/expiryDate";
+import { ExpiryDateType, ExpiryDateErrorType } from "@/types/expiryDate";
 import { ExpiryDateErrorMessages } from "@/constants/error";
 import { VALID_LENGTH } from "@/constants/system";
 
@@ -67,12 +63,6 @@ const useExpiryDate = (initialValue: ExpiryDateType) => {
     month: errorStatusMonth && ExpiryDateErrorMessages[errorStatusMonth],
     year: errorStatusYear && ExpiryDateErrorMessages[errorStatusYear],
   };
-
-  for (const key in errorMessages) {
-    if (errorMessages[key as ExpiryDateKeys] === null) {
-      delete errorMessages[key as ExpiryDateKeys];
-    }
-  }
 
   return {
     values: {
