@@ -1,6 +1,6 @@
-# Modal Component Module
+# @seongjinme/react-modal
 
-React 기반의 간단한 모달 컴포넌트입니다.
+우아한테크코스 6기 FE 미션을 위해 제작된 React 기반의 간단한 모달 컴포넌트입니다.
 
 ## 설치 방법
 
@@ -15,22 +15,35 @@ npm install @seongjinme/react-modal
   isOpen={isOpen}
   title="Title"
   position="center"
+  width={{ basicWidth: '50%', minWidth: '300px' }}
   hasCloseButton={true}
   footerButtons={buttons}
+  isClosableOnClickBackdrop={true}
+  zIndex={{ backdrop: 999, modal: 1000 }}
+  backdropOpacity="50%"
   onClose={() => setIsOpen(false)}
 >
   <p>Sample Modal!</p>
 </Modal>
 ```
 
-- `isOpen` : 모달을 열고 닫을 수 있는 상태값입니다. (`true` / `false`)
+### 필수 속성
+
+- `isOpen` : 모달을 열고 닫을 수 있는 상태값을 주입합니다. (`true` / `false`)
 - `title` : 모달의 제목입니다.
-- `position`(선택) : 모달의 위치를 정합니다. (`center`(기본값) / `bottom`)
+- `onClose` : 모달을 닫을 때 실행시킬 콜백 함수를 설정합니다.
+
+### 선택 속성
+
+- `position` : 모달의 위치를 정합니다. (`center`(기본값) / `bottom`)
   - `'center'` : 모달을 화면의 정중앙에 위치시킵니다.
   - `'bottom'` : 모달을 화면 하단에 고정시킵니다.
-- `hasCloseButton`(선택) : 모달의 우측 상단에 '닫기(X)' 버튼 노출 여부를 설정합니다. (`true`(기본값) / `false`)
-- `footerButtons`(선택) : 모달 하단에 배치할 버튼들을 설정합니다. 이 버튼들은 `ModalButtonType` 타입의 배열 형태로 추가 가능합니다.
-- `onClose`: 모달을 닫을 때 실행시킬 콜백 함수를 설정합니다.
+- `width` : 모달의 기본 가로 길이(`basicWidth`)와 최소 가로 길이(`minWidth`)를 정합니다.
+- `hasCloseButton` : 모달의 우측 상단에 '닫기(X)' 버튼 노출 여부를 설정합니다. (`true`(기본값) / `false`)
+- `footerButtons` : 모달 하단에 배치할 버튼들을 설정합니다. 이 버튼들은 `ModalButtonType` 타입의 배열 형태로 추가 가능합니다.
+- `isClosableOnClickBackdrop` : 모달의 배경 영역 클릭 시 `onClose` 콜백 함수의 실행 여부를 정합니다. (`true`(기본값) / `false`)
+- `zIndex` : 모달의 배경 영역(`backdrop`; 기본값 `999`)과 모달 영역(`modal`; 기본값 `1000`)의 z-index 값을 정합니다.
+- `backdropOpacity` : 모달의 배경 영역에 부여할 투명도를 정합니다. 기본값은 `50%`입니다.
 
 ### `footerButtons`를 통해 버튼을 추가하는 방법
 
