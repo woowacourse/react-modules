@@ -2,7 +2,7 @@ import { renderHook } from '@testing-library/react';
 import React, { ChangeEvent, FocusEvent } from 'react';
 import { ErrorStatus } from '../../types/errorStatus';
 import usePassword from '../usePassword';
-import { PasswordErrorMessages } from '../../constants/error';
+import { PASSWORD_ERROR_MESSAGES } from '../../constants/error';
 
 describe('usePassword 훅 테스트', () => {
   it('훅을 선언할 때 초기값과 result.current.value는 같다.', () => {
@@ -26,7 +26,7 @@ describe('usePassword 훅 테스트', () => {
   });
 
   it(`숫자가 아닌 값이 들어오면 에러(${
-    PasswordErrorMessages[ErrorStatus.IS_NOT_NUMBER]
+    PASSWORD_ERROR_MESSAGES[ErrorStatus.IS_NOT_NUMBER]
   })를 낸다.`, () => {
     const initialValue = '';
     const { result } = renderHook(() => usePassword(initialValue));
@@ -38,12 +38,12 @@ describe('usePassword 훅 테스트', () => {
       } as ChangeEvent<HTMLInputElement>);
     });
     const expectedErrorMessage =
-      PasswordErrorMessages[ErrorStatus.IS_NOT_NUMBER];
+      PASSWORD_ERROR_MESSAGES[ErrorStatus.IS_NOT_NUMBER];
     expect(result.current.errorMessage).toBe(expectedErrorMessage);
   });
 
   it(`길이가 2글자 초과면 에러(${
-    PasswordErrorMessages[ErrorStatus.INVALID_LENGTH]
+    PASSWORD_ERROR_MESSAGES[ErrorStatus.INVALID_LENGTH]
   })를 낸다.`, () => {
     const initialValue = '';
     const { result } = renderHook(() => usePassword(initialValue));
@@ -56,12 +56,12 @@ describe('usePassword 훅 테스트', () => {
     });
 
     const expectedErrorMessage =
-      PasswordErrorMessages[ErrorStatus.INVALID_LENGTH];
+      PASSWORD_ERROR_MESSAGES[ErrorStatus.INVALID_LENGTH];
     expect(result.current.errorMessage).toBe(expectedErrorMessage);
   });
 
   it(`길이가 2글자 미만(Blur)이면 에러(${
-    PasswordErrorMessages[ErrorStatus.INVALID_LENGTH]
+    PASSWORD_ERROR_MESSAGES[ErrorStatus.INVALID_LENGTH]
   })를 낸다.`, () => {
     const initialValue = '';
     const { result } = renderHook(() => usePassword(initialValue));
@@ -74,7 +74,7 @@ describe('usePassword 훅 테스트', () => {
     });
 
     const expectedErrorMessage =
-      PasswordErrorMessages[ErrorStatus.INVALID_LENGTH];
+      PASSWORD_ERROR_MESSAGES[ErrorStatus.INVALID_LENGTH];
     expect(result.current.errorMessage).toBe(expectedErrorMessage);
   });
 });

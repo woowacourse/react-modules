@@ -2,7 +2,7 @@ import { renderHook } from '@testing-library/react';
 import useCVC from '../useCVC';
 import React, { ChangeEvent, FocusEvent } from 'react';
 import { ErrorStatus } from '../../types/errorStatus';
-import { CVCErrorMessages } from '../../constants/error';
+import { CVC_ERROR_MESSAGES } from '../../constants/error';
 
 describe('useCVC 훅 테스트', () => {
   it('훅을 선언할 때 초기값이 `123`일 시 result.current.value는 `123`이 된다', () => {
@@ -26,7 +26,7 @@ describe('useCVC 훅 테스트', () => {
   });
 
   it(`숫자가 아닌 값(ㄱㄴㄷ)이 들어오면 '${
-    CVCErrorMessages[ErrorStatus.IS_NOT_NUMBER]
+    CVC_ERROR_MESSAGES[ErrorStatus.IS_NOT_NUMBER]
   }'를 출력.`, () => {
     const initialValue = '123';
     const { result } = renderHook(() => useCVC(initialValue));
@@ -38,12 +38,12 @@ describe('useCVC 훅 테스트', () => {
       } as ChangeEvent<HTMLInputElement>);
     });
 
-    const expectedErrorMessage = CVCErrorMessages[ErrorStatus.IS_NOT_NUMBER];
+    const expectedErrorMessage = CVC_ERROR_MESSAGES[ErrorStatus.IS_NOT_NUMBER];
     expect(result.current.errorMessage).toBe(expectedErrorMessage);
   });
 
   it(`길이가 3글자 초과시 에러(${
-    CVCErrorMessages[ErrorStatus.INVALID_LENGTH]
+    CVC_ERROR_MESSAGES[ErrorStatus.INVALID_LENGTH]
   })를 낸다.`, () => {
     const initialValue = '123';
     const { result } = renderHook(() => useCVC(initialValue));
@@ -55,12 +55,12 @@ describe('useCVC 훅 테스트', () => {
       } as ChangeEvent<HTMLInputElement>);
     });
 
-    const expectedErrorMessage = CVCErrorMessages[ErrorStatus.INVALID_LENGTH];
+    const expectedErrorMessage = CVC_ERROR_MESSAGES[ErrorStatus.INVALID_LENGTH];
     expect(result.current.errorMessage).toBe(expectedErrorMessage);
   });
 
   it(`길이가 3글자 미만시(Blur) 에러(${
-    CVCErrorMessages[ErrorStatus.INVALID_LENGTH]
+    CVC_ERROR_MESSAGES[ErrorStatus.INVALID_LENGTH]
   })를 낸다.`, () => {
     const initialValue = '123';
     const { result } = renderHook(() => useCVC(initialValue));
@@ -72,7 +72,7 @@ describe('useCVC 훅 테스트', () => {
       } as FocusEvent<HTMLInputElement>);
     });
 
-    const expectedErrorMessage = CVCErrorMessages[ErrorStatus.INVALID_LENGTH];
+    const expectedErrorMessage = CVC_ERROR_MESSAGES[ErrorStatus.INVALID_LENGTH];
     expect(result.current.errorMessage).toBe(expectedErrorMessage);
   });
 });

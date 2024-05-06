@@ -1,7 +1,7 @@
 import { renderHook } from '@testing-library/react';
 import React from 'react';
 import useCardCompany from '../useCardCompany';
-import { CardCompanyErrorMessage } from '../../constants/error';
+import { CARD_COMPANY_ERROR_MESSAGE } from '../../constants/error';
 import { ErrorStatus } from '../../types/errorStatus';
 
 export const EXAMPLE_CARD_BRANDS = [
@@ -40,7 +40,7 @@ describe('useCardCompany 훅 테스트', () => {
   });
 
   it(`유효하지 않은 옵션 선택시 에러(${
-    CardCompanyErrorMessage[ErrorStatus.INVALID_OPTION]
+    CARD_COMPANY_ERROR_MESSAGE[ErrorStatus.INVALID_OPTION]
   })를 낸다.`, () => {
     const initialValue = '';
     const { result } = renderHook(() =>
@@ -53,7 +53,7 @@ describe('useCardCompany 훅 테스트', () => {
     });
 
     const expectedErrorMessage =
-      CardCompanyErrorMessage[ErrorStatus.INVALID_OPTION];
+      CARD_COMPANY_ERROR_MESSAGE[ErrorStatus.INVALID_OPTION];
     expect(result.current.errorMessage).toBe(expectedErrorMessage);
   });
 });

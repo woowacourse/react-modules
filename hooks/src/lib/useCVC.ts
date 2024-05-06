@@ -2,7 +2,7 @@ import { ChangeEvent, FocusEvent } from 'react';
 import useInput from './useInput';
 import { validateLengthOver, validateNumber } from '../validate/validate';
 import { CVCError } from '../types/cvc';
-import { CVCErrorMessages } from '../constants/error';
+import { CVC_ERROR_MESSAGES } from '../constants/error';
 import { CVC_LENGTH } from '../constants/length';
 
 const cvcValidates = (value: string) => {
@@ -27,7 +27,7 @@ const useCVC = (initialValue: string) => {
     value,
     onChange: handleChange,
     onBlur: handleBlur,
-    errorMessage: errorStatus && CVCErrorMessages[errorStatus],
+    errorMessage: errorStatus && CVC_ERROR_MESSAGES[errorStatus],
   };
 };
 

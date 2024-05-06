@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { CardCompanyErrorMessage } from '../constants/error';
+import { CARD_COMPANY_ERROR_MESSAGE } from '../constants/error';
 import { ErrorStatus } from '../types/errorStatus';
 
 const checkIncludeArray = (optionArr: string[], value: string) => {
@@ -24,7 +24,7 @@ const useCardCompany = ({
       setValue(value);
     } catch (e) {
       if (e instanceof Error) {
-        setErrorMessage(CardCompanyErrorMessage[ErrorStatus.INVALID_OPTION]);
+        setErrorMessage(CARD_COMPANY_ERROR_MESSAGE[ErrorStatus.INVALID_OPTION]);
       }
     }
   };

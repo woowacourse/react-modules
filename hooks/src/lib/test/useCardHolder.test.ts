@@ -2,7 +2,7 @@ import { renderHook } from '@testing-library/react';
 import React, { ChangeEvent } from 'react';
 import { ErrorStatus } from '../../types/errorStatus';
 import useCardHolder from '../useCardHolder';
-import { CardHolderErrorMessages } from '../../constants/error';
+import { CARD_HOLDER_ERROR_MESSAGES } from '../../constants/error';
 
 describe('useCardHolder 훅 테스트', () => {
   it('훅을 선언할 때 초기값이 `HAILEY RIAN`일 시 result.current.value는 `HAILEY RIAN`이 된다', () => {
@@ -26,7 +26,7 @@ describe('useCardHolder 훅 테스트', () => {
   });
 
   it(`영어 대문자가 아니면 에러(${
-    CardHolderErrorMessages[ErrorStatus.ONLY_UPPERCASE]
+    CARD_HOLDER_ERROR_MESSAGES[ErrorStatus.ONLY_UPPERCASE]
   })를 낸다.`, () => {
     const initialValue = '';
     const { result } = renderHook(() => useCardHolder(initialValue));
@@ -39,12 +39,12 @@ describe('useCardHolder 훅 테스트', () => {
     });
 
     const expectedErrorMessage =
-      CardHolderErrorMessages[ErrorStatus.ONLY_UPPERCASE];
+      CARD_HOLDER_ERROR_MESSAGES[ErrorStatus.ONLY_UPPERCASE];
     expect(result.current.errorMessage).toBe(expectedErrorMessage);
   });
 
   it(`빈칸이 두 개이면 에러(${
-    CardHolderErrorMessages[ErrorStatus.IS_DOUBLE_BLANK]
+    CARD_HOLDER_ERROR_MESSAGES[ErrorStatus.IS_DOUBLE_BLANK]
   })를 낸다.`, () => {
     const initialValue = '';
     const { result } = renderHook(() => useCardHolder(initialValue));
@@ -57,7 +57,7 @@ describe('useCardHolder 훅 테스트', () => {
     });
 
     const expectedErrorMessage =
-      CardHolderErrorMessages[ErrorStatus.IS_DOUBLE_BLANK];
+      CARD_HOLDER_ERROR_MESSAGES[ErrorStatus.IS_DOUBLE_BLANK];
     expect(result.current.errorMessage).toBe(expectedErrorMessage);
   });
 });

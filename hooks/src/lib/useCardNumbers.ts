@@ -6,7 +6,7 @@ import {
 } from '../types/cardNumbers';
 import useInput from './useInput';
 import { validateLengthOver, validateNumber } from '../validate/validate';
-import { CardNumbersErrorMessages } from '../constants/error';
+import { CARD_NUMBERS_ERROR_MESSAGES } from '../constants/error';
 import { CARD_NUMBER_LENGTH } from '../constants/length';
 
 const cardNumbersValidates = (value: string) => {
@@ -86,13 +86,13 @@ const useCardNumbers = (initialValues: CardNumbers) => {
 
   const errorMessages = {
     cardNumber1:
-      errorStatusNumber1 && CardNumbersErrorMessages[errorStatusNumber1],
+      errorStatusNumber1 && CARD_NUMBERS_ERROR_MESSAGES[errorStatusNumber1],
     cardNumber2:
-      errorStatusNumber2 && CardNumbersErrorMessages[errorStatusNumber2],
+      errorStatusNumber2 && CARD_NUMBERS_ERROR_MESSAGES[errorStatusNumber2],
     cardNumber3:
-      errorStatusNumber3 && CardNumbersErrorMessages[errorStatusNumber3],
+      errorStatusNumber3 && CARD_NUMBERS_ERROR_MESSAGES[errorStatusNumber3],
     cardNumber4:
-      errorStatusNumber4 && CardNumbersErrorMessages[errorStatusNumber4],
+      errorStatusNumber4 && CARD_NUMBERS_ERROR_MESSAGES[errorStatusNumber4],
   };
 
   for (const key in errorMessages) {

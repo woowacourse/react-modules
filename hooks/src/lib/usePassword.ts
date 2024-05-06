@@ -2,7 +2,7 @@ import { ChangeEvent, FocusEvent } from 'react';
 import useInput from './useInput';
 import { validateLengthOver, validateNumber } from '../validate/validate';
 import { PasswordError } from '../types/password';
-import { PasswordErrorMessages } from '../constants/error';
+import { PASSWORD_ERROR_MESSAGES } from '../constants/error';
 import { PASSWORD_LENGTH } from '../constants/length';
 
 const passwordValidates = (value: string) => {
@@ -27,7 +27,7 @@ const usePassword = (initialValue: string) => {
     value,
     onChange: handleChange,
     onBlur: handleBlur,
-    errorMessage: errorStatus && PasswordErrorMessages[errorStatus],
+    errorMessage: errorStatus && PASSWORD_ERROR_MESSAGES[errorStatus],
   };
 };
 

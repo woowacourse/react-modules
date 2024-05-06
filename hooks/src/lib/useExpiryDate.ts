@@ -11,7 +11,7 @@ import {
   ExpiryDateError,
   ExpiryDateKeys,
 } from '../types/expiryDate';
-import { ExpiryDateErrorMessages } from '../constants/error';
+import { EXPIRY_DATE_ERROR_MESSAGES } from '../constants/error';
 import { EXPIRY_DATE_LENGTH } from '../constants/length';
 
 const expiryDateValidates = (value: string) => {
@@ -60,8 +60,8 @@ const useExpiryDate = (initialValue: ExpiryDate) => {
   };
 
   const errorMessages = {
-    month: errorStatusMonth && ExpiryDateErrorMessages[errorStatusMonth],
-    year: errorStatusYear && ExpiryDateErrorMessages[errorStatusYear],
+    month: errorStatusMonth && EXPIRY_DATE_ERROR_MESSAGES[errorStatusMonth],
+    year: errorStatusYear && EXPIRY_DATE_ERROR_MESSAGES[errorStatusYear],
   };
 
   for (const key in errorMessages) {

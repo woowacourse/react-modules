@@ -1,7 +1,7 @@
 import { renderHook } from '@testing-library/react';
 import React, { ChangeEvent, FocusEvent } from 'react';
 import useCardNumbers from '../useCardNumbers';
-import { CardNumbersErrorMessages } from '../../constants/error';
+import { CARD_NUMBERS_ERROR_MESSAGES } from '../../constants/error';
 import { ErrorStatus } from '../../types/errorStatus';
 
 describe('useCardNumbers 훅 테스트', () => {
@@ -42,7 +42,7 @@ describe('useCardNumbers 훅 테스트', () => {
   });
 
   it(`숫자아닌 값이 입력됐을 때 에러(${
-    CardNumbersErrorMessages[ErrorStatus.IS_NOT_NUMBER]
+    CARD_NUMBERS_ERROR_MESSAGES[ErrorStatus.IS_NOT_NUMBER]
   })를 낸다.`, () => {
     const valuesWithString = {
       cardNumber1: '',
@@ -61,13 +61,13 @@ describe('useCardNumbers 훅 테스트', () => {
     });
 
     const expectedErrorMessage = {
-      cardNumber1: CardNumbersErrorMessages[ErrorStatus.IS_NOT_NUMBER],
+      cardNumber1: CARD_NUMBERS_ERROR_MESSAGES[ErrorStatus.IS_NOT_NUMBER],
     };
     expect(result.current.errorMessages).toEqual(expectedErrorMessage);
   });
 
   it(`숫자가 4자리가 아닐때(초과시) 에러(${
-    CardNumbersErrorMessages[ErrorStatus.INVALID_LENGTH]
+    CARD_NUMBERS_ERROR_MESSAGES[ErrorStatus.INVALID_LENGTH]
   })를 낸다.`, () => {
     const valuesWithString = {
       cardNumber1: '',
@@ -86,13 +86,13 @@ describe('useCardNumbers 훅 테스트', () => {
     });
 
     const expectedErrorMessage = {
-      cardNumber1: CardNumbersErrorMessages[ErrorStatus.INVALID_LENGTH],
+      cardNumber1: CARD_NUMBERS_ERROR_MESSAGES[ErrorStatus.INVALID_LENGTH],
     };
     expect(result.current.errorMessages).toEqual(expectedErrorMessage);
   });
 
   it(`숫자가 4자리가 아닐때(미만시) 에러(${
-    CardNumbersErrorMessages[ErrorStatus.INVALID_LENGTH]
+    CARD_NUMBERS_ERROR_MESSAGES[ErrorStatus.INVALID_LENGTH]
   })를 낸다.`, () => {
     const valuesWithString = {
       cardNumber1: '',
@@ -111,7 +111,7 @@ describe('useCardNumbers 훅 테스트', () => {
     });
 
     const expectedErrorMessage = {
-      cardNumber1: CardNumbersErrorMessages[ErrorStatus.INVALID_LENGTH],
+      cardNumber1: CARD_NUMBERS_ERROR_MESSAGES[ErrorStatus.INVALID_LENGTH],
     };
     expect(result.current.errorMessages).toEqual(expectedErrorMessage);
   });
