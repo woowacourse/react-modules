@@ -14,12 +14,12 @@ export interface ModalPosition {
 
 export interface ModalOptions {
   type: ModalType;
-  animationDuration?: number; //단위:s
+  animationDuration?: number; //단위:ms
   isNeedAnimation?: boolean;
   isCloseOnEsc?: boolean;
   isCloseOnBackdrop?: boolean;
   position?: ModalPosition;
-  toastDuration?: number; //단위:s
+  toastDuration?: number; //단위:ms
   contentsPadding?: string;
   borderRadius?: string;
   backgroundColor?: {

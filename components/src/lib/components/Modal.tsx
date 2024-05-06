@@ -1,7 +1,12 @@
 import { MouseEvent } from 'react';
 import styled from 'styled-components';
 
-import { BASIC_TOAST_DURATION } from '../constants/modal';
+import {
+  BASIC_BORDER_RADIUS,
+  BASIC_MODAL_BACKGROUND_COLOR,
+  BASIC_PADDING,
+  BASIC_TOAST_DURATION,
+} from '../constants/modal';
 import ModalContext from '../contexts/modalContext';
 import { useModalContext } from '../hooks';
 import '../styles/reset.css';
@@ -55,9 +60,9 @@ function Modal(props: ModalProps) {
     className,
     position,
     toastDuration = BASIC_TOAST_DURATION,
-    contentsPadding = '2rem 1.5rem',
-    borderRadius = '0.625rem',
-    backgroundColor = { modal: '#ffff', backdrop: '#5959599b' },
+    contentsPadding = BASIC_PADDING,
+    borderRadius = BASIC_BORDER_RADIUS,
+    backgroundColor = { modal: BASIC_MODAL_BACKGROUND_COLOR, backdrop: BASIC_MODAL_BACKGROUND_COLOR },
     ...rest
   } = props;
 
