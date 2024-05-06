@@ -1,5 +1,4 @@
-export type ModalPosition = 'center' | 'bottom';
-export type ButtonPosition = 'row' | 'column';
+import { ButtonPosition, ModalPosition } from './Modal';
 
 import styled from 'styled-components';
 
