@@ -1,6 +1,6 @@
 {
   "name": "paran-simple-modal",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "simple modal component",
   "type": "module",
   "types": "dist/index.d.ts",
