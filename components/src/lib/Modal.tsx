@@ -43,7 +43,7 @@ const Modal = ({
   return (
     <>
       <div onClick={preventCloseOnOutsideClick ? () => {} : closeButton.onClose} className={styles['backdrop']} />
-      <div
+      <section
         style={{
           backgroundColor: `${backgroundColor || 'white'}`,
           borderRadius: `${borderRadius || '5px'}`,
@@ -57,7 +57,7 @@ const Modal = ({
         <ModalHeader title={title} subtitle={subtitle} closeButton={closeButton} />
         <ModalContent children={children} />
         <ModalFooter cancelButton={cancelButton} confirmButton={confirmButton} buttonsDirection={buttonsDirection} />
-      </div>
+      </section>
     </>
   );
 };
