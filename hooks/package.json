@@ -1,6 +1,6 @@
 {
   "name": "ryan-card-info-hooks",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "license": "MIT",
   "description": "package containing reusable hooks for validating card information by ryan 🦁",
   "type": "module",
