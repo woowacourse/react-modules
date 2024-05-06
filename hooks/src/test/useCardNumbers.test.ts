@@ -13,6 +13,9 @@ describe("useCardNumbers Test", () => {
     const [value] = result.current.firstState;
     expect(value).toBe("1234");
     expect(result.current.error.isError).toBe(true);
+    const firstNumberErrorMessage = result.current.error.errorMessage[0];
+    const expectedMessage = "Master,Visa카드가 아닙니다. 카드 번호를 확인해주세요.";
+    expect(firstNumberErrorMessage).toBe(expectedMessage);
   });
 
   it("firstNumbers에 51로 시작하는 숫자 입력시 통과", () => {
