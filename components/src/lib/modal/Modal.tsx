@@ -1,6 +1,7 @@
+import useModalBackdropClickClose from '../hooks/useModalBackdropClickClose';
 import useModalEscClose from '../hooks/useModalEscClose';
 import * as Styled from './Modal.styled';
-import { HTMLAttributes, CSSProperties, useEffect } from 'react';
+import { HTMLAttributes, CSSProperties, useRef } from 'react';
 
 export interface ModalProps extends React.PropsWithChildren {
   children?: React.ReactNode;
@@ -17,14 +18,21 @@ const Modal: React.FC<ModalProps> & {
   ModalContent: ModalContentType;
   ModalFooter: ModalFooterType;
 } = ({ children, isOpen, onClose, position, ...restProps }) => {
-  if (!isOpen) return null;
+  const modalRef = useRef(null);
 
   useModalEscClose(isOpen, onClose);
+  useModalBackdropClickClose(isOpen, modalRef, onClose);
+
+  if (!isOpen) return null;
 
   return (
     <>
       <Styled.ModalBackdrop>
-        <Styled.ModalContentWrapper position={position} {...restProps}>
+        <Styled.ModalContentWrapper
+          ref={modalRef}
+          $position={position}
+          {...restProps}
+        >
           {children}
         </Styled.ModalContentWrapper>
       </Styled.ModalBackdrop>
