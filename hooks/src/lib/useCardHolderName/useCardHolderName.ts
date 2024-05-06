@@ -3,17 +3,14 @@ import useCardHolderNameValidation from "./useCardHolderNameValidation";
 
 const useCardHolderName = () => {
   const [holderName, setHolderName] = useState("");
-  const { errorState, errorText, validateCardHolderName } =
-    useCardHolderNameValidation();
+  const { errorState, errorText, validateCardHolderName } = useCardHolderNameValidation();
 
-  const handleCardHolderNameChange = (
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => {
+  const handleCardHolderNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target;
 
-    const canUpdate = validateCardHolderName(value);
+    const capUpdateHolderName = validateCardHolderName(value);
 
-    if (!canUpdate) return;
+    if (!capUpdateHolderName) return;
 
     setHolderName(value.toUpperCase());
   };

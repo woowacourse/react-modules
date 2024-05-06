@@ -51,14 +51,7 @@ describe("useCardHolderName 커스텀 훅 동작 테스트", () => {
   });
 
   it("필드 입력값에 알파벳 이외의 문자가 있을 경우, 상태 업데이트가 발생하지 않고 해당 입력 필드에 예외가 발생해야한다.", () => {
-    const INVALID_INPUT_SCENARIO_TEST_CASE = [
-      "H",
-      "HA",
-      "HAR",
-      "HARR",
-      "HARRY",
-      "HARRY1",
-    ];
+    const INVALID_INPUT_SCENARIO_TEST_CASE = ["H", "HA", "HAR", "HARR", "HARRY", "HARRY1"];
     const EXPECTED_RESULT = "HARRY";
 
     const { result } = renderHook(() => useCardHolderName());
