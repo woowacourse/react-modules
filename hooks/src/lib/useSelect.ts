@@ -18,12 +18,27 @@ const useSelect = (initialValue: string, validator: ValidatorSelectProps, option
     setValue(event.target.value);
   };
 
+  const clearInvalidInitialValue = (
+    initialValue: string,
+    placeholder: string,
+    errorMessage: string,
+  ) => {
+    if (
+      !validateInputType(initialValue) ||
+      !validateFieldRules(initialValue, [placeholder, ...options]).isValid
+    ) {
+      console.error(errorMessage);
+      setValue(placeholder);
+    }
+  };
+
   return {
     value,
     setValue,
     handleChange,
     validationResult,
     handleValidationResult,
+    clearInvalidInitialValue,
   };
 };
 

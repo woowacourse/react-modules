@@ -35,6 +35,7 @@ const useCardNumbers = (initialValue: Record<string, string>, options?: CardNumb
     validationResult,
     isValidValue,
     focusNextInputWhenMaxLength,
+    clearInvalidInitialValues,
   } = useInputs(initialValue, {
     validateInputType: customValidateInputType ?? validateInputType,
     validateFieldRules: customValidateFieldRules ?? validateFieldRules,
@@ -54,18 +55,11 @@ const useCardNumbers = (initialValue: Record<string, string>, options?: CardNumb
   };
 
   useEffect(() => {
-    const initialValues = Object.entries(initialValue);
-    for (const [key, value] of initialValues) {
-      if (!validateInputType(value).isValid || !validateFieldRules(value).isValid) {
-        console.error(
-          `cardNumbers field error: ${value} 라는 올바르지 않은 값이 들어와 빈 값으로 초기화했습니다.`,
-        );
-        setValue(prev => ({
-          ...prev,
-          [key]: '',
-        }));
-      }
-    }
+    clearInvalidInitialValues(
+      initialValue,
+      (value: string) =>
+        `cardNumbers field error: ${value} 라는 올바르지 않은 값이 들어와 빈 값으로 초기화했습니다.`,
+    );
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

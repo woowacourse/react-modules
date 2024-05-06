@@ -32,7 +32,7 @@ const useCardType = ({
   customValidateOptions,
 }: UseCardTypeProps) => {
   const { customValidateInputType, customValidateFieldRules } = customValidateOptions ?? {};
-  const { value, handleChange, setValue, validationResult } = useSelect(
+  const { value, handleChange, validationResult, clearInvalidInitialValue } = useSelect(
     initialValue,
     {
       validateInputType: customValidateInputType ?? validateInputType,
@@ -42,16 +42,12 @@ const useCardType = ({
   );
 
   useEffect(() => {
-    if (
-      !validateInputType(initialValue) ||
-      !validateFieldRules(initialValue, [placeholder, ...options]).isValid
-    ) {
-      console.error(
-        `card type field error: ${initialValue} 라는 올바르지 않은 값이 들어와 빈 값으로 초기화했습니다.`,
-      );
-      setValue(placeholder);
-    }
-  }, [initialValue, setValue, options, placeholder]);
+    clearInvalidInitialValue(
+      initialValue,
+      placeholder,
+      `card type field error: ${initialValue} 라는 올바르지 않은 값이 들어와 빈 값으로 초기화했습니다.`,
+    );
+  }, [clearInvalidInitialValue, initialValue, placeholder]);
 
   return { value, runValidationByChange: handleChange, validationResult };
 };

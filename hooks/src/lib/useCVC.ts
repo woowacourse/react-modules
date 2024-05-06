@@ -24,19 +24,20 @@ const validateFieldRules = (value: string) => {
 
 const useCVC = (initialValue: string, options?: CustomValidator) => {
   const { customValidateInputType, customValidateFieldRules } = options ?? {};
-  const { value, setValue, handleChange, handleBlur, validationResult } = useInput(initialValue, {
-    validateInputType: customValidateInputType ?? validateInputType,
-    validateFieldRules: customValidateFieldRules ?? validateFieldRules,
-  });
+  const { value, handleChange, handleBlur, validationResult, clearInvalidInitialValue } = useInput(
+    initialValue,
+    {
+      validateInputType: customValidateInputType ?? validateInputType,
+      validateFieldRules: customValidateFieldRules ?? validateFieldRules,
+    },
+  );
 
   useEffect(() => {
-    if (!validateInputType(initialValue).isValid || !validateFieldRules(initialValue).isValid) {
-      console.error(
-        `cvc field error: ${initialValue} 라는 올바르지 않은 값이 들어와 빈 값으로 초기화했습니다.`,
-      );
-      setValue('');
-    }
-  }, [initialValue, setValue]);
+    clearInvalidInitialValue(
+      initialValue,
+      `cvc field error: ${initialValue} 라는 올바르지 않은 값이 들어와 빈 값으로 초기화했습니다.`,
+    );
+  }, [clearInvalidInitialValue, initialValue]);
 
   return {
     value,

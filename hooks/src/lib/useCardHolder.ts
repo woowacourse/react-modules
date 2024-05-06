@@ -27,13 +27,11 @@ const validateFieldRules = (value: string) => {
 
 const useCardHolder = (initialValue: string, options?: CustomValidator) => {
   const { customValidateInputType, customValidateFieldRules } = options ?? {};
-  const { value, setValue, handleBlur, isValidValue, validationResult } = useInput(
-    initialValue.toUpperCase(),
-    {
+  const { value, setValue, handleBlur, isValidValue, validationResult, clearInvalidInitialValue } =
+    useInput(initialValue.toUpperCase(), {
       validateInputType: customValidateInputType ?? validateInputType,
       validateFieldRules: customValidateFieldRules ?? validateFieldRules,
-    },
-  );
+    });
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (!isValidValue(event.target.value, 'inputType')) return;
@@ -41,13 +39,11 @@ const useCardHolder = (initialValue: string, options?: CustomValidator) => {
   };
 
   useEffect(() => {
-    if (!validateInputType(initialValue).isValid || !validateFieldRules(initialValue).isValid) {
-      console.error(
-        `cardholder field error: ${initialValue} 라는 올바르지 않은 값이 들어와 빈 값으로 초기화했습니다.`,
-      );
-      setValue('');
-    }
-  }, [initialValue, setValue]);
+    clearInvalidInitialValue(
+      initialValue,
+      `cardholder field error: ${initialValue} 라는 올바르지 않은 값이 들어와 빈 값으로 초기화했습니다.`,
+    );
+  }, [clearInvalidInitialValue, initialValue]);
 
   return {
     value,

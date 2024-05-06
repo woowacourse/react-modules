@@ -40,6 +40,7 @@ const useExpiryMonth = (initialValue: string, options?: ExpiryMonthOptions) => {
     validationResult,
     isValidValue,
     focusNextInputWhenMaxLength,
+    clearInvalidInitialValue,
   } = useInput(initialValue, {
     validateInputType: customValidateInputType ?? validateInputType,
     validateFieldRules: customValidateFieldRules ?? validateFieldRules,
@@ -55,13 +56,11 @@ const useExpiryMonth = (initialValue: string, options?: ExpiryMonthOptions) => {
   };
 
   useEffect(() => {
-    if (!validateInputType(initialValue).isValid || !validateFieldRules(initialValue).isValid) {
-      console.error(
-        `expiry date field error: ${initialValue} 라는 올바르지 않은 값이 들어와 빈 값으로 초기화했습니다.`,
-      );
-      setValue('');
-    }
-  }, [initialValue, setValue]);
+    clearInvalidInitialValue(
+      initialValue,
+      `expiry date field error: ${initialValue} 라는 올바르지 않은 값이 들어와 빈 값으로 초기화했습니다.`,
+    );
+  }, [clearInvalidInitialValue, initialValue]);
 
   return {
     value,

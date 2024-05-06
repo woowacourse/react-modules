@@ -40,6 +40,16 @@ const useInput = (initialValue: string, validator: ValidatorProps) => {
     if (isAutoFocus) focusNextInput(event);
   };
 
+  const clearInvalidInitialValue = (initialValue: string, errorMessage: string) => {
+    if (
+      !validator.validateInputType(initialValue).isValid ||
+      !validator.validateFieldRules(initialValue).isValid
+    ) {
+      console.error(errorMessage);
+      setValue('');
+    }
+  };
+
   return {
     value,
     setValue,
@@ -49,6 +59,7 @@ const useInput = (initialValue: string, validator: ValidatorProps) => {
     validationResult,
     handleValidationResult,
     focusNextInputWhenMaxLength,
+    clearInvalidInitialValue,
   };
 };
 

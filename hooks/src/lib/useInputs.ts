@@ -46,6 +46,25 @@ const useInputs = (initialValue: Record<string, string>, validator: ValidatorPro
     if (isAutoFocus) focusNextInput(event);
   };
 
+  const clearInvalidInitialValues = (
+    initialValue: Record<string, string>,
+    getErrorMessage: (value: string) => void,
+  ) => {
+    const initialValues = Object.entries(initialValue);
+    for (const [key, value] of initialValues) {
+      if (
+        !validator.validateInputType(value).isValid ||
+        !validator.validateFieldRules(value).isValid
+      ) {
+        console.error(getErrorMessage(value));
+        setValue(prev => ({
+          ...prev,
+          [key]: '',
+        }));
+      }
+    }
+  };
+
   return {
     value,
     setValue,
@@ -55,6 +74,7 @@ const useInputs = (initialValue: Record<string, string>, validator: ValidatorPro
     validationResult,
     handleValidationResult,
     focusNextInputWhenMaxLength,
+    clearInvalidInitialValues,
   };
 };
 
