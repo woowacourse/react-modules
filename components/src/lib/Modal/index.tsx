@@ -31,6 +31,16 @@ function Modal(props: ModalProps) {
 function Header(props: ModalComposedProps<HTMLDivElement>) {
   const { children, ...rest } = props;
   return <div {...rest}>{props.children}</div>;
+function Backdrop() {
+  const { closeModal } = useModalContext();
+
+  const onClick = (e: MouseEvent<HTMLDivElement>) => {
+    if (e.currentTarget === e.target) {
+      closeModal();
+    }
+  };
+
+  return <div className={styles.backdrop} onClick={onClick} />;
 }
 
 function Title(props: ModalComposedProps<HTMLHeadingElement>) {
