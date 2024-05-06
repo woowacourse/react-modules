@@ -1,9 +1,19 @@
-import { UseValidationProps, ValidationResult } from './types';
+import { Validator } from './types';
 
-export default function useValidation<V>({ validators, value }: UseValidationProps<V>): ValidationResult {
-  const firstFailedTest = validators.find(({ test }) => !test(value));
+interface UseValidationProps {
+  validators: Validator[] | null;
+}
 
-  if (firstFailedTest) return { isValid: false, errorMessage: firstFailedTest.errorMessage };
+export default function useValidation({ validators }: UseValidationProps) {
+  if (!validators) return { validate: null };
 
-  return { isValid: true, errorMessage: null };
+  const validate = (value: string) => {
+    const firstFailedTest = validators.find(({ test }) => !test(value));
+
+    if (firstFailedTest) return { isValid: false, errorMessage: firstFailedTest.errorMessage };
+
+    return { isValid: true, errorMessage: null };
+  };
+
+  return { validate };
 }
