@@ -1,24 +1,22 @@
 import { ChangeEvent, FocusEvent, useState } from 'react';
-import useValidation, { ValidationType } from './useValidation';
-import Validation from './utils/validation';
-
-const EXPIRATION_DATE_LENGTH = 2;
+import useValidation, { ValidationType } from '../common/useValidation';
+import Validation from '../utils/validation';
 
 const inputValidations: ValidationType<string>[] = [
   {
-    validate: (value) => Validation.isExactLength(EXPIRATION_DATE_LENGTH, value),
-    message: `${EXPIRATION_DATE_LENGTH}자리 년도(YY)를 입력해주세요. ex) 24`,
+    validate: (value) => value !== '',
+    message: '소유자 이름을 영어로 입력해주세요.',
   },
 ];
 
 const preventInputValidations: ValidationType<string>[] = [
   {
-    validate: Validation.isNumericPattern,
-    message: '숫자만 입력할 수 있습니다.',
+    validate: Validation.isEnglishPattern,
+    message: '영어만 입력 가능합니다.',
   },
 ];
 
-const useYearInput = (initialValue = '') => {
+const useCardOwner = (initialValue = '') => {
   const [value, setValue] = useState(initialValue);
   const { error, validateValue } = useValidation<string>();
   const isValid = value !== '' && !error.state;
@@ -36,7 +34,7 @@ const useYearInput = (initialValue = '') => {
     validateValue(e.target.value, inputValidations);
   };
 
-  return { value, error, isValid, onChange: onChangeHandler, onBlur: onBlurHandler };
+  return { value, isValid, error, onChange: onChangeHandler, onBlur: onBlurHandler };
 };
 
-export default useYearInput;
+export default useCardOwner;

@@ -1,13 +1,13 @@
 import { ChangeEvent, FocusEvent, useState } from 'react';
-import useValidation, { ValidationType } from './useValidation';
-import Validation from './utils/validation';
+import useValidation, { ValidationType } from '../common/useValidation';
+import Validation from '../utils/validation';
 
-const PASSWORD_LENGTH = 2;
+const CVC_LENGTH = 3;
 
 const inputValidations: ValidationType<string>[] = [
   {
-    validate: (value) => Validation.isExactLength(PASSWORD_LENGTH, value),
-    message: `앞 ${PASSWORD_LENGTH}자리의 비밀번호를 입력해주세요.`,
+    validate: (value) => Validation.isExactLength(CVC_LENGTH, value),
+    message: `${CVC_LENGTH}자리의 CVC번호를 입력해주세요.`,
   },
 ];
 
@@ -18,14 +18,13 @@ const preventInputValidations: ValidationType<string>[] = [
   },
 ];
 
-const useCardPassword = (initialValue = '') => {
+const useCardCVC = (initialValue = '') => {
   const [value, setValue] = useState(initialValue);
   const { error, validateValue } = useValidation<string>();
   const isValid = value !== '' && !error.state;
 
   const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
     const preventInputValidateResult = validateValue(e.target.value, preventInputValidations);
-
     if (!preventInputValidateResult) return;
 
     validateValue(e.target.value, inputValidations);
@@ -39,4 +38,4 @@ const useCardPassword = (initialValue = '') => {
   return { value, isValid, error, onChange: onChangeHandler, onBlur: onBlurHandler };
 };
 
-export default useCardPassword;
+export default useCardCVC;

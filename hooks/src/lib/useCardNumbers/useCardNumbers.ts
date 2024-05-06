@@ -1,6 +1,6 @@
 import { ChangeEvent, FocusEvent, useState } from 'react';
-import useCardType from './useCardType';
-import Validation from './utils/validation';
+import useCardType from '../common/useCardType';
+import Validation from '../utils/validation';
 
 interface InitialValueProps {
   value: string;

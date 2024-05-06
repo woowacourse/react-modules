@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
-import Validation from './utils/validation';
-import useValidation, { ValidationType } from './useValidation';
+import Validation from '../utils/validation';
+import useValidation, { ValidationType } from '../common/useValidation';
 import useMonthInput from './useMonthInput';
 import useYearInput from './useYearInput';
 

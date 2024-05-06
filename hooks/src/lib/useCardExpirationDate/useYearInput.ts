@@ -1,21 +1,13 @@
 import { ChangeEvent, FocusEvent, useState } from 'react';
-import useValidation, { ValidationType } from './useValidation';
-import Validation from './utils/validation';
+import useValidation, { ValidationType } from '../common/useValidation';
+import Validation from '../utils/validation';
 
 const EXPIRATION_DATE_LENGTH = 2;
-const MONTH = {
-  start: 1,
-  end: 12,
-} as const;
 
 const inputValidations: ValidationType<string>[] = [
   {
     validate: (value) => Validation.isExactLength(EXPIRATION_DATE_LENGTH, value),
-    message: `${EXPIRATION_DATE_LENGTH}자리 월(MM)을 입력해주세요. ex) 01`,
-  },
-  {
-    validate: (value) => Validation.isMonthInRange(Number(value)),
-    message: `${MONTH.start}부터 ${MONTH.end}사이의 숫자를 입력해주세요.`,
+    message: `${EXPIRATION_DATE_LENGTH}자리 년도(YY)를 입력해주세요. ex) 24`,
   },
 ];
 
@@ -26,7 +18,7 @@ const preventInputValidations: ValidationType<string>[] = [
   },
 ];
 
-const useMonthInput = (initialValue = '') => {
+const useYearInput = (initialValue = '') => {
   const [value, setValue] = useState(initialValue);
   const { error, validateValue } = useValidation<string>();
   const isValid = value !== '' && !error.state;
@@ -47,4 +39,4 @@ const useMonthInput = (initialValue = '') => {
   return { value, error, isValid, onChange: onChangeHandler, onBlur: onBlurHandler };
 };
 
-export default useMonthInput;
+export default useYearInput;

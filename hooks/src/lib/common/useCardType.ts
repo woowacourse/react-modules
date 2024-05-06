@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import Validation from './utils/validation';
+import Validation from '../utils/validation';
 
 const VISA_LENGTH = 16;
 
