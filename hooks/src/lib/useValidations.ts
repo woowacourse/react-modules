@@ -27,9 +27,20 @@ const useValidations = (initialValue: Record<string, string>) => {
     }));
   };
 
+  const checkValidInputs = (
+    targetValue: string,
+    name: string,
+    validate: (value: string) => ValidationResult,
+  ) => {
+    const validationResult = validate(targetValue);
+    updateValidationResult(validationResult, name);
+    return validationResult.isValid;
+  };
+
   return {
     errorInfo,
     updateValidationResult,
+    checkValidInputs,
   };
 };
 

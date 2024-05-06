@@ -1,39 +1,28 @@
 import { useEffect } from 'react';
 import { validateCardNumberFormat, validateNumber } from '../validator';
-import { Options, UseCardNumber, ValidationResult } from '../type';
+import { Options, UseCardNumber } from '../type';
 import useValidations from '../useValidations';
 import useCardNumbersState from './useCardNumbersState';
 
 const useCardNumbers = (initialValue: Record<string, string>, options?: Options): UseCardNumber => {
   const { value, updateCardNumbers } = useCardNumbersState(initialValue);
-  const { errorInfo, updateValidationResult } = useValidations(initialValue);
+  const { errorInfo, checkValidInputs } = useValidations(initialValue);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>, name: string) => {
-    if (!processValidCardNumberInput(e.target.value, name, validateNumber)) return;
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>, name: string) => {
+    const targetValue = event.target.value;
+    if (!checkValidInputs(targetValue, name, validateNumber)) return;
+    updateCardNumbers(targetValue, name);
 
-    if (e.target.value.length !== e.target.maxLength) return;
-    const validationResult = validateCardNumberFormat(e.target.value);
-    updateValidationResult(validationResult, name);
-    if (!validationResult.isValid) return;
-    if (options?.isAutoFocus) {
-      autoFocusNextInput(e.target);
+    if (targetValue.length === event.target.maxLength) {
+      if (!checkValidInputs(targetValue, name, validateCardNumberFormat)) return;
+      if (options?.isAutoFocus) {
+        autoFocusNextInput(event.target);
+      }
     }
   };
 
-  const handleBlur = (e: React.FocusEvent<HTMLInputElement, Element>, name: string) => {
-    processValidCardNumberInput(e.target.value, name, validateCardNumberFormat);
-  };
-
-  const processValidCardNumberInput = (
-    value: string,
-    name: string,
-    validate: (value: string) => ValidationResult,
-  ) => {
-    const validationResult = validate(value);
-    updateValidationResult(validationResult, name);
-    if (!validationResult.isValid) return false;
-    updateCardNumbers(value, name);
-    return true;
+  const handleBlur = (event: React.FocusEvent<HTMLInputElement, Element>, name: string) => {
+    checkValidInputs(event.target.value, name, validateCardNumberFormat);
   };
 
   const autoFocusNextInput = (element: HTMLElement) => {
