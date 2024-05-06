@@ -20,9 +20,7 @@ function Modal({
   closeOption,
   children,
 }: ModalProps) {
-  const handleBackdropClick = (
-    event: MouseEvent<HTMLDivElement, globalThis.MouseEvent>,
-  ) => {
+  const handleBackdropClick = (event: MouseEvent<HTMLElement>) => {
     if (event.target === event.currentTarget) {
       closeModal();
     }
