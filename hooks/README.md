@@ -1,60 +1,278 @@
-# 페이먼츠 커스텀 훅
+# 📦 페이먼츠 커스텀 훅
 
-- [x] 페이먼츠 커스텀 훅 모듈을 npm으로 배포하고 사용할 수 있어야 한다.
-- [x] 페이먼츠 카드의 다양한 정보에 대한 유효성 검사 로직을 여러 개의 작은 커스텀 훅으로 분리하고, 필요에 따라 조합하여 사용할 수 있도록 한다.
-- [x] 커스텀 훅은 카드 정보의 유효성 검사 결과와 에러 정보를 사용자인 개발자에게 제공할 수 있어야 한다.
+## useCardNumbers
 
-## common
+### props
 
-- [x] useInput
-- [x] useCardType
-- [x] useValid
+- `initialValue`: 카드 번호 배열 상태 초기값 설정
+  - `{value: '', length: 4}`형태의 배열
+    - value: 초기 값
+    - length: input 입력 글자
 
-## 비지니스 로직
+### return
 
-- [x] useCardNumbers
-- [x] useCardCompany
-- [x] useCardCVC
-- [x] useCardExpirationDate
-- [x] useCardOwner
-- [x] useCardPassword
+- `cardNumbers`: `id`, `value`, `length`, `isError` 속성이 담긴 객체 배열
+- `cardBrand`: 카드 브랜드(visa, mastercard) 상태값
+- `isValid`: 카드 번호 입력 유효성 상태값
+- `onChange`: 각 입력 값에 대한 `onChange` 이벤트 핸들러. `event`와 `index`를 인자로 받습니다.
+- `onBlur`: 각 입력 값에 대한 `onBlur` 이벤트 핸들러. `event`와 `index`를 인자로 받습니다.
 
-## 유효성 검사
+### 사용 예시
 
-### 카드 번호 유효성 검증
+```tsx
+function App() {
+  const { cardNumbers, cardBrand, errorMessage, isValid, onBlur, onChange } = useCardNumbers([
+    { value: '', length: 4 },
+    { value: '', length: 4 },
+    { value: '', length: 4 },
+    { value: '', length: 4 },
+  ]);
 
-- 4자리가 아니라면 에러 발생
-- 숫자가 아니라면 에러 발생 및 입력 제한
-- 카드 브랜드 구분
-  - Visa: 4로 시작하는 16자리 숫자
-  - MasterCard: 51~55로 시작하는 16자리 숫자
+  const cardNumbersError = cardNumbers.some(({ isError }) => isError);
 
-### 카드사 선택 유효성 검증
+  return (
+    <>
+      <h1>Hooks Modules</h1>
+      {cardNumbers.map((cardNumber, index) => (
+        <input
+          key={cardNumber.id}
+          style={{ border: `1px solid ${cardNumber.isError ? 'red' : 'black'}`, outline: 'none' }}
+          type='text'
+          value={cardNumber.value}
+          onChange={(e) => onChange(e, index)}
+          onBlur={(e) => onBlur(e, index)}
+        />
+      ))}
+      <p>
+        {cardNumbers.map(({ value, id }) => (
+          <span key={id}>{value}</span>
+        ))}
+      </p>
+      {cardNumbersError && <span style={{ color: 'red' }}>{errorMessage}</span>}
+      {cardBrand && <span style={{ color: 'purple' }}>{cardBrand}</span>}
+      {isValid && <span style={{ color: 'blue' }}>유효한 번호</span>}
+    </>
+  );
+}
+```
 
-- 빈 문자열일 때 에러 발생
+## useCardCardCompany
 
-### 카드 유효기간 유효성 검증
+### props
 
-- 유효기간이 지났으면 에러 발생
-- 월
-  - 2자리가 아니라면 에러 발생
-  - 숫자가 아니라면 에러 발생 및 입력 제한
-  - 1~12 사이의 숫자가 아니라면 에러 발생
-- 년
-  - 2자리가 아니라면 에러 발생
-  - 숫자가 아니라면 에러 발생 및 입력 제한
-  - 올해 이전 년도라면 에러 발생
+- `initialValue`: 카드사 상태 초기값 설정
 
-### 소유자 이름 유효성 검증
+### return
 
-- 영어가 아니라면 에러 발생 및 입력 제한
+- `value`: 카드사 상태값
+- `isValid`: 카드사 입력 유효성 상태값
+- `error`: 에러 상태값
+- `onChange`: `onChange` 이벤트 핸들러
+- `onBlur`: `onBlur` 이벤트 핸들러
 
-### CVC 유효성 검증
+### 사용 예시
 
-- 3자리가 아니라면 에러 발생
-- 숫자가 아니라면 에러 발생 및 입력 제한
+```tsx
+function App() {
+  const cardCompany = useCardCompany();
 
-### 비밀번호 유효성 검증
+  return (
+    <>
+      <h1>Hooks Modules</h1>
+      <div style={{ display: 'flex', flexDirection: 'column' }}>
+        <input readOnly onBlur={cardCompany.onBlur} style={{ border: '3px solid black', padding: '4px' }} value={cardCompany.value} />
 
-- 2자리가 아니라면 에러 발생
-- 숫자가 아니라면 에러 발생 및 입력 제한
+        <label htmlFor='BC카드'>BC카드</label>
+        <input hidden onChange={cardCompany.onChange} id='BC카드' type='radio' value='BC카드' name='cardcompany' />
+
+        <label htmlFor='국민카드'>국민카드</label>
+        <input hidden onChange={cardCompany.onChange} id='국민카드' type='radio' value='국민카드' name='cardcompany' />
+
+        <label htmlFor='카카오뱅크'>카카오뱅크</label>
+        <input hidden onChange={cardCompany.onChange} id='카카오뱅크' type='radio' value='카카오뱅크' name='cardcompany' />
+
+        <label htmlFor='신한카드'>신한카드</label>
+        <input hidden onChange={cardCompany.onChange} id='신한카드' type='radio' value='신한카드' name='cardcompany' />
+      </div>
+      <p style={{ color: 'red' }}>{cardCompany.error.message}</p>
+      {cardCompany.isValid && <p style={{ color: 'purple' }}>유효한 입력</p>}
+    </>
+  );
+}
+```
+
+## useCardExpirationDate
+
+### props
+
+- `initialValue`: 월, 년도 상태 객체 초기값 설정
+  - month: 월 입력
+  - year: 년도 입력
+
+### return
+
+- `month`: 월 입력 상태
+  - value
+  - error
+  - isValid
+  - onChange
+  - onBlur
+- `year`: 년도 입력 상태
+  - value
+  - error
+  - isValid
+  - onChange
+  - onBlur
+- `expirationDateError`: 월, 년도 입력 유효성 상태값(유효기간 만료 여부)
+- `isExpirationDateValid`: 각 입력값 유효성 상태값
+- `expirationDateErrorMessage`: 에러 메시지
+
+### 사용 예시
+
+```tsx
+function App() {
+  const { month, year, expirationDateErrorMessage, isExpirationDateValid } = useCardExpirationDate({ month: '', year: '' });
+
+  return (
+    <>
+      <h1>Hooks Modules</h1>
+      <input
+        style={{ border: `1px solid ${month.error.state ? 'red' : 'black'}` }}
+        maxLength={2}
+        type='text'
+        value={month.value}
+        onChange={month.onChange}
+        onBlur={month.onBlur}
+      />
+      <input
+        style={{ border: `1px solid ${year.error.state ? 'red' : 'black'}` }}
+        maxLength={2}
+        type='text'
+        value={year.value}
+        onChange={year.onChange}
+        onBlur={year.onBlur}
+      />
+      <span>{month.value}</span>
+      <span>{year.value}</span>
+      {expirationDateErrorMessage && <p style={{ color: 'red' }}>{expirationDateErrorMessage}</p>}
+      {isExpirationDateValid && <p style={{ color: 'blue' }}>유효한 입력</p>}
+    </>
+  );
+}
+```
+
+## useCardOwner
+
+### props
+
+- `initialValue`: 카드 소유자 상태 초기값 설정
+
+### return
+
+- `value`: 카드 소유자 상태값
+- `isValid`: 카드 소유자 입력 유효성 상태값
+- `error`: 에러 상태값
+- `onChange`: `onChange` 이벤트 핸들러
+- `onBlur`: `onBlur` 이벤트 핸들러
+
+### 사용 예시
+
+```tsx
+function App() {
+  const cardOwner = useCardOwner();
+
+  return (
+    <>
+      <h1>Hooks Modules</h1>
+      <input
+        style={{ border: `1px solid ${cardOwner.error.state ? 'red' : 'black'}` }}
+        type='text'
+        value={cardOwner.value.toUpperCase()}
+        onChange={cardOwner.onChange}
+        onBlur={cardOwner.onBlur}
+      />
+      <span>{cardOwner.value.toUpperCase()}</span>
+      {cardOwner.error.state && <p style={{ color: 'red' }}>{cardOwner.error.message}</p>}
+      {cardOwner.isValid && <p style={{ color: 'blue' }}>유효한 입력</p>}
+    </>
+  );
+}
+```
+
+## useCardCVC
+
+### props
+
+- `initialValue`: CVC번호 상태 초기값 설정
+
+### return
+
+- `value` : CVC번호 상태값
+- `isValid`: CVC번호 입력 유효성 상태값
+- `error`: 에러 상태값
+- `onChange`: onChange 이벤트 핸들러
+- `onBlur`: onBlur 이벤트 핸들러
+
+### 사용 예시
+
+```tsx
+function App() {
+  const cardCVC = useCardCVC();
+
+  return (
+    <>
+      <h1>Hooks Modules</h1>
+      <input
+        style={{ border: `1px solid ${cardCVC.error.state ? 'red' : 'black'}` }}
+        type='text'
+        maxLength={3}
+        value={cardCVC.value}
+        onChange={cardCVC.onChange}
+        onBlur={cardCVC.onBlur}
+      />
+      <span>{cardCVC.value.toUpperCase()}</span>
+      {cardCVC.error.state && <p style={{ color: 'red' }}>{cardCVC.error.message}</p>}
+      {cardCVC.isValid && <p style={{ color: 'blue' }}>유효한 입력</p>}
+    </>
+  );
+}
+```
+
+## usePassword
+
+### props
+
+- `initialValue`: 비밀번호 상태 초기값 설정
+
+### return
+
+- `value`: 비밀번호 상태값
+- `isValid`: 비밀번호 입력 유효성 상태값
+- `error`: 에러 상태값
+- `onChange`: onChange 이벤트 핸들러
+- `onBlur`: onBlur 이벤트 핸들러
+
+### 사용 예시
+
+```tsx
+function App() {
+  const cardPassword = useCardPassword();
+
+  return (
+    <>
+      <h1>Hooks Modules</h1>
+      <input
+        style={{ border: `1px solid ${cardPassword.error.state ? 'red' : 'black'}` }}
+        type='text'
+        maxLength={2}
+        value={cardPassword.value}
+        onChange={cardPassword.onChange}
+        onBlur={cardPassword.onBlur}
+      />
+      <span>{cardPassword.value.toUpperCase()}</span>
+      {cardPassword.error.state && <p style={{ color: 'red' }}>{cardPassword.error.message}</p>}
+      {cardPassword.isValid && <p style={{ color: 'blue' }}>유효한 입력</p>}
+    </>
+  );
+}
+```
