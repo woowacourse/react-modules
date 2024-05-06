@@ -10,6 +10,10 @@ export const validateCardNumber = (
     return `숫자 ${cardNumbersLength}자리를 입력해주세요.`;
   }
 
+  if (value !== '' && value.length > cardNumbersLength) {
+    return `숫자 ${cardNumbersLength}자리를 입력해주세요.`;
+  }
+
   return '';
 };
 
@@ -46,11 +50,12 @@ export const validateUserName = (
   value: string,
   cardUserNameLength: number,
 ): string => {
-  if (
-    value !== '' &&
-    !new RegExp(`^[a-zA-Z\\s]{0,${cardUserNameLength}}$`).test(value)
-  ) {
+  if (value !== '' && !/^[a-zA-Z\s]+$/.test(value)) {
     return '영어만 입력 가능합니다.';
+  }
+
+  if (value !== '' && value.length > cardUserNameLength) {
+    return `${cardUserNameLength}자까지 입력 가능합니다.`;
   }
 
   return '';
