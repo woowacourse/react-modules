@@ -22,6 +22,7 @@ const useCardExpirationDate = (initialValue: InitialValueProps = { month: '', ye
   const month = useMonthInput(initialValue.month);
   const year = useYearInput(initialValue.year);
   const { error, validateValue } = useValidation<number[]>();
+  const expirationDateErrorMessage = month.error.state ? month.error.message : year.error.state ? year.error.message : error.state ? error.message : null;
   const isExpirationDateValid = month.isValid && year.isValid && !error.state;
 
   useEffect(() => {
@@ -32,7 +33,7 @@ const useCardExpirationDate = (initialValue: InitialValueProps = { month: '', ye
     }
   }, [month.value, year.value]);
 
-  return { month, year, expirationDateError: error, isExpirationDateValid };
+  return { month, year, expirationDateError: error, isExpirationDateValid, expirationDateErrorMessage };
 };
 
 export default useCardExpirationDate;
