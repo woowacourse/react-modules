@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { getStatus, useInput } from "./useInput";
+import { getInputStatus, useInput } from "./useInput";
 import { LEAST_LENGTH } from "../shared/options";
 import { ERROR_MESSAGE } from "../shared/errorMessages";
 import validator from "../shared/utils/validator/validator";
@@ -14,8 +14,8 @@ const useInputExpiryDate = () => {
 
   const handleChange = (value: string, type: ExpiryDateType) => {
     // status 업데이트
-    states.month.setStatus(getStatus(states.month.value, LEAST_LENGTH.expiryDateMonth));
-    states.year.setStatus(getStatus(states.year.value, LEAST_LENGTH.expiryDateYear));
+    states.month.setStatus(getInputStatus(states.month.value, LEAST_LENGTH.expiryDateMonth));
+    states.year.setStatus(getInputStatus(states.year.value, LEAST_LENGTH.expiryDateYear));
 
     // 연도 미완성 error 상태 업데이트
     if (type === "month" && states.year.status === "pending") {
@@ -38,8 +38,8 @@ const useInputExpiryDate = () => {
   };
 
   const handleBlur = () => {
-    states.month.setStatus(getStatus(states.month.value, LEAST_LENGTH.expiryDateMonth));
-    states.year.setStatus(getStatus(states.year.value, LEAST_LENGTH.expiryDateYear));
+    states.month.setStatus(getInputStatus(states.month.value, LEAST_LENGTH.expiryDateMonth));
+    states.year.setStatus(getInputStatus(states.year.value, LEAST_LENGTH.expiryDateYear));
 
     // 월 complete 상태 업데이트
     if (states.month.status === "pending") {

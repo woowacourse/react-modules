@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { getStatus, useInput } from "./useInput";
+import { getInputStatus, useInput } from "./useInput";
 import { LEAST_LENGTH } from "../shared/options";
 import { ERROR_MESSAGE } from "../shared/errorMessages";
 import validator from "../shared/utils/validator/validator";
@@ -10,7 +10,7 @@ const useInputPasswordPrefix = () => {
 
   const handleChange = (value: string) => {
     // status 업데이트
-    setStatus(getStatus(value, LEAST_LENGTH.passwordPrefix));
+    setStatus(getInputStatus(value, LEAST_LENGTH.passwordPrefix));
 
     // Default 상태에서 유효성검사 스킵
     if (status === "default") return;

@@ -1,5 +1,5 @@
 import { Dispatch, SetStateAction, useState } from "react";
-import { getStatus, useInput } from "./useInput";
+import { getInputStatus, useInput } from "./useInput";
 import { Status } from "../shared/types";
 import { LEAST_LENGTH } from "../shared/options";
 import { ERROR_MESSAGE } from "../shared/errorMessages";
@@ -24,7 +24,7 @@ const useInputCardNumber = () => {
   const handleChange = (value: string, index: number) => {
     // 전체필드 status 업데이트
     values.forEach((_value, _index) => {
-      setStatuses[_index](getStatus(_value, LEAST_LENGTH.cardNumber));
+      setStatuses[_index](getInputStatus(_value, LEAST_LENGTH.cardNumber));
 
       // 전체필드 미완성 error 상태 업데이트
       if (statuses[_index] === "pending" && _index !== index) {
@@ -50,7 +50,7 @@ const useInputCardNumber = () => {
   const handleBlur = (index: number) => {
     // 전체필드 미완성 error 상태 업데이트
     values.forEach((_value, _index) => {
-      setStatuses[_index](getStatus(_value, LEAST_LENGTH.cardNumber));
+      setStatuses[_index](getInputStatus(_value, LEAST_LENGTH.cardNumber));
 
       if (statuses[_index] === "pending" && _index !== index) {
         setStatuses[_index]("error");

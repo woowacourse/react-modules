@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Status } from "../shared/types";
 
-export const getStatus = (value: string, maxLength: number): Status => {
+export const getInputStatus = (value: string, maxLength: number): Status => {
   const length = value.length;
 
   if (length === 0) return "default";
