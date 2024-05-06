@@ -15,35 +15,25 @@ const ModalHeader = ({ title, subtitle, closeButton }: ModalHeaderProps) => {
         <CloseButtonImage />
       </span>
       <div className={styles['title-field']}>
-        {title && title.position === 'left' && (
+        {title && (
           <>
             <h1
-              style={{ fontSize: title.fontSize || '18px', color: title.color || 'black' }}
+              style={{
+                textAlign: `${title.position || 'center'}`,
+                fontSize: title.fontSize || '18px',
+                color: title.color || 'black',
+              }}
               className={styles['title']}
             >
               {title.content}
             </h1>
             {subtitle && (
               <h2
-                style={{ fontSize: subtitle.fontSize || '12px', color: subtitle.color || 'grey' }}
-                className={styles['subtitle']}
-              >
-                {subtitle.content}
-              </h2>
-            )}
-          </>
-        )}
-        {title && title.position === 'center' && (
-          <>
-            <h1
-              style={{ textAlign: 'center', color: title.color || 'black', fontSize: title.fontSize || '18px' }}
-              className={styles['title']}
-            >
-              {title.content}
-            </h1>
-            {subtitle && (
-              <h2
-                style={{ textAlign: 'center', color: subtitle.color || 'grey', fontSize: subtitle.fontSize || '12px' }}
+                style={{
+                  textAlign: `${title.position || 'center'}`,
+                  fontSize: subtitle.fontSize || '12px',
+                  color: subtitle.color || 'grey',
+                }}
                 className={styles['subtitle']}
               >
                 {subtitle.content}
