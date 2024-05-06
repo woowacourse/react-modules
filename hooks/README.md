@@ -6,18 +6,101 @@
 
 ## common
 
-- [x] useInput
-- [x] useCardType
-- [x] useValid
+- ### [x] useInput
+
+  - **props**
+    - `initialValue`: 초기값 설정
+    - `inputValidations`: 입력 값에 대한 유효성 검증
+    - `preventInputValidations`: 입력 값에 대한 유효성 검증 실패 시 입력 제한
+  - **return**
+    - `value` : 입력 상태 값
+    - `onChange`: onChange구현 함수
+    - `onBlur`: onBlur 구현 함수
+    - `error`: 에러 상태 값
+      - `state`: 에러라면 true, 에러가 아니라면 false
+      - `message`: 에러 메시지
+    - `setError`: 에러 상태 setState
+    - `ref`: 현재 입력 값에 대한 ref
+
+- ### [x] useValidation
+  - 유효성 검증 후 에러 상태 관리
+  - **return**
+    - `error`: 에러 상태 값
+      - `state`: 에러라면 true, 에러가 아니라면 false
+      - `message`: 에러 메시지
+    - `setError`: 에러 상태 setState
+    - `validate`: 유효성 검사 함수
 
 ## 비지니스 로직
 
-- [x] useCardNumbers
-- [x] useCardCompany
-- [x] useCardCVC
-- [x] useCardExpirationDate
-- [x] useCardOwner
-- [x] useCardPassword
+- ### [x] useCardNumbers
+
+  - **props**
+    - `initialValue`: 카드 번호 배열 상태 초기값 설정
+  - **getCardType**
+
+    - 조건 탐색 후 해당 조건에 맞는 상태값(`cardBrand: string`) 반환
+
+      ```
+      visa: 4로 시작하는 16자리 숫자
+      mastercard: 51~55로 시작하는 16자리 숫자
+      ```
+
+  - **return**
+    - `cardNumbers`: 4개의 카드 번호 입력 배열
+    - `cardBrand`: 카드 브랜드(visa, mastercard) 상태값
+    - `isCardNumberValid`: 카드 번호 입력 유효성 상태값
+
+- ### [x] useCardCompany
+
+  - **props**
+
+    - `initialValue`: 카드사 상태 초기값 설정
+
+  - **return**
+    - `cardCompany`: 카드사 상태값
+    - `isCardCompanyValid`: 카드사 입력 유효성 상태값
+
+- ### [x] useCardCVC
+
+  - **props**
+
+    - `initialValue`: CVC번호 상태 초기값 설정
+
+  - **return**
+    - `cardCVC` : CVC번호 상태값
+    - `isCardCVCValid`: CVC번호 입력 유효성 상태값
+
+- ### [x] useCardExpirationDate
+
+  - **props**
+
+    - `initialValue`: 월, 년도 상태 배열 초기값 설정
+
+  - **reuturn**
+    - `month`: 월 상태값
+    - `year`: 년도 상태값
+    - `isCardExpirationDateValid`: 월, 년도 입력 유효성 상태값
+
+- ### [x] useCardOwner
+
+  - **props**
+
+    - `initialValue`: 카드 소유자 상태 초기값 설정
+
+  - **return**
+    - `cardOwner`: 카드 소유자 상태값
+    - `isCardOwnerValid`: 카드 소유자 입력 유효성 상태값
+
+- ### [x] useCardPassword
+
+  - **props**
+
+    - `initialValue`: 비밀번호 상태 초기값 설정
+
+  - **return**
+    - `cardPassword`: 비밀번호 상태값
+    - `isCardPasswordValid`: 비밀번호 입력 유효성 상태값
 
 ## 유효성 검사
 

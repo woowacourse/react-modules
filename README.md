@@ -19,7 +19,9 @@
 - `initialValue`: 초기값 설정
 - `inputValidations`: 입력 값에 대한 유효성 검증
 - `preventInputValidations`: 입력 값에 대한 유효성 검증 실패 시 입력 제한
-  **return**
+
+**return**
+
 - `value` : 입력 상태 값
 - `onChange`: onChange구현 함수
 - `onBlur`: onBlur 구현 함수
@@ -29,25 +31,35 @@
 - `setError`: 에러 상태 setState
 - `ref`: 현재 입력 값에 대한 ref
 
-### useCardType
+### useValidation
 
-조건 탐색 후 해당 조건에 맞는 상태값(`cardBrand: string`) 반환
+- 유효성 검증 후 에러 상태 관리
 
-```
-visa: 4로 시작하는 16자리 숫자
-mastercard: 51~55로 시작하는 16자리 숫자
-```
+**return**
 
-### useValid
-
-유효성 검증 후 유효성 상태값(`isValid: boolean`) 반환
+- `error`: 에러 상태 값
+  - `state`: 에러라면 true, 에러가 아니라면 false
+  - `message`: 에러 메시지
+- `setError`: 에러 상태 setState
+- `validate`: 유효성 검사 함수
 
 ### useCardNumbers
 
 **props**
 
 - `initialValue`: 카드 번호 배열 상태 초기값 설정
-  **return**
+
+**getCardType**
+
+- 조건 탐색 후 해당 조건에 맞는 상태값(`cardBrand: string`) 반환
+
+  ```
+    visa: 4로 시작하는 16자리 숫자
+    mastercard: 51~55로 시작하는 16자리 숫자
+  ```
+
+**return**
+
 - `cardNumbers`: 4개의 카드 번호 입력 배열
 - `cardBrand`: 카드 브랜드(visa, mastercard) 상태값
 - `isCardNumberValid`: 카드 번호 입력 유효성 상태값
