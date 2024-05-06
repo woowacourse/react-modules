@@ -1,7 +1,8 @@
-import { Position } from "./Modal.d";
 import { useEffect } from "react";
 import { ReactNode } from "react";
 import { css } from "@emotion/css";
+
+export type Position = "top" | "bottom" | "center";
 
 export interface ModalProps {
   children?: ReactNode;
