@@ -46,9 +46,7 @@ const Validator = {
   },
 
   checkEnglish(value: string) {
-    if (ValidatorCondition.checkIsEnglish(value)) return true;
-
-    return false;
+    return ValidatorCondition.checkIsEnglish(value);
   },
 
   checkNumberAndOver(value: string, maxDigit: number) {
