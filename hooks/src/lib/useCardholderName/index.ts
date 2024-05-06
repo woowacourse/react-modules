@@ -13,7 +13,7 @@ export function useCardholderName(): UseCardholderNameReturn {
     useInputValidation(cardholderNameValidator);
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setValueWithValidation(e.target.value);
+    setValueWithValidation(e.target.value.toUpperCase());
   };
 
   const onBlur = (e: React.FocusEvent<HTMLInputElement>) => validateOnBlur(e.target.value);
