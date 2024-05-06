@@ -14,7 +14,7 @@ App.tsx
 
 ```jsx
 import React, { useState } from "react";
-import { Modal } from "./lib";
+import { Modal } from "chlwlstlf-modal";
 import "./App.css";
 
 const App = () => {

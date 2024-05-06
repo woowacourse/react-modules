@@ -1,6 +1,6 @@
 {
   "name": "chlwlstlf-modal",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "description": "공용 모달 라이브러리",
   "type": "module",
   "types": "dist/index.d.ts",
@@ -19,7 +19,7 @@
     "chromatic": "npx chromatic --project-token=chpt_faf5b6e61479ebd"
   },
   "dependencies": {
-    "chlwlstlf-modal": "^0.0.9",
+    "chlwlstlf-modal": "^0.0.10",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
