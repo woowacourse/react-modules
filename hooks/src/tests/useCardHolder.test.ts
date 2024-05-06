@@ -1,5 +1,6 @@
 import { renderHook, act } from '@testing-library/react';
 import useCardHolder from '../lib/useCardHolder';
+import { ValidationResult } from './../lib/types';
 
 describe('useCardHolder 커스텀 훅 테스트', () => {
   it('초기값이 정확히 설정되어야 한다.', () => {
@@ -71,6 +72,36 @@ describe('useCardHolder 커스텀 훅 테스트', () => {
     const { result } = renderHook(() => useCardHolder(initialValue));
 
     expect(result.current.value).toBe(reset);
+  });
+
+  it('초기값이 소문자라면 대문자로 변환한다.', () => {
+    const initialValue = 'maru cookie';
+    const cardHolder = 'MARU COOKIE';
+    const { result } = renderHook(() => useCardHolder(initialValue));
+
+    expect(result.current.value).toBe(cardHolder);
+  });
+
+  it('커스텀 validate 함수를 줬을 때 (숫자만 허용) 초기값으로 123을 주면 초기화되지 않는다.', () => {
+    const customValidateInputType = (value: string): ValidationResult => {
+      const isNumber = !Number.isNaN(Number(value));
+      if (!isNumber) {
+        return { isValid: false, errorMessage: '숫자를 입력해주세요' };
+      }
+      return { isValid: true, errorMessage: '' };
+    };
+
+    const customValidateFieldRules = (value: string): ValidationResult => {
+      console.log(value);
+      return { isValid: true, errorMessage: '' };
+    };
+
+    const initialValue = '123';
+    const { result } = renderHook(() =>
+      useCardHolder(initialValue, { customValidateInputType, customValidateFieldRules }),
+    );
+
+    expect(result.current.value).toBe(initialValue);
   });
 
   it('초기값이 소문자라면 대문자로 변환한다.', () => {

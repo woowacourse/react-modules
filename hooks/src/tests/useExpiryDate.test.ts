@@ -1,5 +1,6 @@
 import { renderHook, act } from '@testing-library/react';
 import useExpiryDate from '../lib/useExpiryDate';
+import { ValidationResult } from '../lib/types';
 
 describe('useExpiryDate 커스텀 훅 테스트', () => {
   it('초기값이 정확히 설정되어야 한다.', () => {
@@ -107,5 +108,37 @@ describe('useExpiryDate 커스텀 훅 테스트', () => {
     };
 
     expect(value).toEqual(reset);
+  });
+
+  it('커스텀 validate 함수를 줬을 때 (영어만 허용) 초기값으로 maru cookie를 주면 초기화되지 않는다.', () => {
+    const customValidateInputType = (value: string): ValidationResult => {
+      const isEnglish = /^$|^[a-zA-Z ]+$/.test(value);
+
+      if (!isEnglish) {
+        return { isValid: false, errorMessage: '유효기간은 영어로만 입력해주세요' };
+      }
+
+      return { isValid: true, errorMessage: '' };
+    };
+
+    const customValidateFieldRules = (value: string): ValidationResult => {
+      console.log(value);
+      return { isValid: true, errorMessage: '' };
+    };
+
+    const initialValue = { month: 'maru', year: 'cookie' };
+    const { result } = renderHook(() =>
+      useExpiryDate(initialValue, {
+        month: { customValidateInputType, customValidateFieldRules },
+        year: { customValidateInputType, customValidateFieldRules },
+      }),
+    );
+
+    const value = {
+      month: result.current.month.value,
+      year: result.current.year.value,
+    };
+
+    expect(value).toEqual(initialValue);
   });
 });

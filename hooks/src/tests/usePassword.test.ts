@@ -1,5 +1,6 @@
 import { renderHook, act } from '@testing-library/react';
 import usePassword from '../lib/usePassword';
+import { ValidationResult } from '../lib/types';
 
 describe('usePassword 커스텀 훅 테스트', () => {
   it('초기값이 정확히 설정되어야 한다.', () => {
@@ -43,5 +44,29 @@ describe('usePassword 커스텀 훅 테스트', () => {
     const { result } = renderHook(() => usePassword(initialValue));
 
     expect(result.current.value).toBe(reset);
+  });
+
+  it('커스텀 validate 함수를 줬을 때 (영어만 허용) 초기값으로 cookie을 주면 초기화되지 않는다.', () => {
+    const customValidateInputType = (value: string): ValidationResult => {
+      const isEnglish = /^$|^[a-zA-Z ]+$/.test(value);
+
+      if (!isEnglish) {
+        return { isValid: false, errorMessage: '비밀번호는 영어로만 입력해주세요' };
+      }
+
+      return { isValid: true, errorMessage: '' };
+    };
+
+    const customValidateFieldRules = (value: string): ValidationResult => {
+      console.log(value);
+      return { isValid: true, errorMessage: '' };
+    };
+
+    const initialValue = 'cookie';
+    const { result } = renderHook(() =>
+      usePassword(initialValue, { customValidateInputType, customValidateFieldRules }),
+    );
+
+    expect(result.current.value).toBe(initialValue);
   });
 });

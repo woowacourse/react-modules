@@ -1,5 +1,6 @@
 import { renderHook, act } from '@testing-library/react';
 import useCardNumbers from '../lib/useCardNumbers';
+import { ValidationResult } from '../lib/types';
 
 const initialValue = { first: '1234', second: '1234', third: '2344', fourth: '5623' };
 
@@ -64,5 +65,29 @@ describe('useCardNumbers 커스텀 훅 테스트', () => {
     const { result } = renderHook(() => useCardNumbers(initialValue));
 
     expect(result.current.value).toEqual(expected);
+  });
+
+  it('커스텀 validate 함수를 줬을 때 (영어만 허용) 초기값으로 문자들을 주면 초기화되지 않는다.', () => {
+    const customValidateInputType = (value: string) => {
+      const isEnglish = /^$|^[a-zA-Z ]+$/.test(value);
+
+      if (!isEnglish) {
+        return { isValid: false, errorMessage: '카드번호는 영어로만 입력해주세요' };
+      }
+
+      return { isValid: true, errorMessage: '' };
+    };
+
+    const customValidateFieldRules = (value: string): ValidationResult => {
+      console.log(value);
+      return { isValid: true, errorMessage: '' };
+    };
+
+    const initialValue = { first: 'maru', second: 'cookie', third: 'hary', fourth: 'river' };
+    const { result } = renderHook(() =>
+      useCardNumbers(initialValue, { customValidateInputType, customValidateFieldRules }),
+    );
+
+    expect(result.current.value).toEqual(initialValue);
   });
 });
