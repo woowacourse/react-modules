@@ -1,15 +1,15 @@
-import useInput, { ValidationType } from './useInput';
-import useValid from './useValid';
+import useInput, { ValidationType } from "./useInput";
+import useValid from "./useValid";
 
-const useCardCompany = (initialValue = '') => {
-  const isValid = (value: string) => {
-    return value !== '';
-  };
+const isValid = (value: string) => {
+  return value !== "";
+};
 
+const useCardCompany = (initialValue = "") => {
   const inputValidations: ValidationType[] = [
     {
       validate: isValid,
-      message: '카드사를 선택해주세요.',
+      message: "카드사를 선택해주세요.",
     },
   ];
 

@@ -1,17 +1,17 @@
-import useInput, { ValidationType } from './useInput';
-import useValid from './useValid';
+import useInput, { ValidationType } from "./useInput";
+import useValid from "./useValid";
 
 const CVC_LENGTH = 3;
 
-const useCardCVC = (initialValue = '') => {
-  const isValidLength = (value: string) => {
-    return value.length === CVC_LENGTH;
-  };
+const isValidLength = (value: string) => {
+  return value.length === CVC_LENGTH;
+};
 
-  const isNumber = (value: string) => {
-    return /^\d*$/.test(value);
-  };
+const isNumber = (value: string) => {
+  return /^\d*$/.test(value);
+};
 
+const useCardCVC = (initialValue = "") => {
   const inputValidations: ValidationType[] = [
     {
       validate: isValidLength,
@@ -22,7 +22,7 @@ const useCardCVC = (initialValue = '') => {
   const preventInputValidations: ValidationType[] = [
     {
       validate: isNumber,
-      message: '숫자만 입력 가능합니다.',
+      message: "숫자만 입력 가능합니다.",
     },
   ];
 

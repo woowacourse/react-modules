@@ -1,20 +1,20 @@
-import useInput, { ValidationType } from './useInput';
-import useCardType from './useCardType';
-import useValid from './useValid';
+import useInput, { ValidationType } from "./useInput";
+import useCardType from "./useCardType";
+import useValid from "./useValid";
 
 export const CARD_NUMBER_LENGTH = 4;
 
 type InitialValueType = [string, string, string, string];
 
-const useCardNumbers = (initialValue: InitialValueType = ['', '', '', '']) => {
-  const isValidLength = (value: string) => {
-    return value.length === CARD_NUMBER_LENGTH;
-  };
+const isValidLength = (value: string) => {
+  return value.length === CARD_NUMBER_LENGTH;
+};
 
-  const isNumber = (value: string) => {
-    return /^\d*$/.test(value);
-  };
+const isNumber = (value: string) => {
+  return /^\d*$/.test(value);
+};
 
+const useCardNumbers = (initialValue: InitialValueType = ["", "", "", ""]) => {
   const inputValidations: ValidationType[] = [
     {
       validate: isValidLength,
@@ -25,7 +25,7 @@ const useCardNumbers = (initialValue: InitialValueType = ['', '', '', '']) => {
   const preventInputValidations: ValidationType[] = [
     {
       validate: isNumber,
-      message: '숫자만 입력 가능합니다.',
+      message: "숫자만 입력 가능합니다.",
     },
   ];
 
