@@ -13,21 +13,13 @@ const ValidatorCondition = {
     return REGEX.numbers.test(value);
   },
 
-  checkIsBelowNumber(value: string, limit: number) {
-    return parseInt(value) <= limit || !value.length;
-  },
-
-  checkIsNotDoubleZero(value: string) {
-    return value !== "00";
-  },
-
   checkValidMonth(value: string) {
     return REGEX.month.test(value);
   },
 };
 
 const Validator = {
-  checkCreditExpirationPeriod(value: string, name: string) {
+  checkExpirationMonth(name: string, value: string) {
     const isValidMonth = name === "month" ? ValidatorCondition.checkValidMonth(value) : true;
     if (!isValidMonth) return false;
 
