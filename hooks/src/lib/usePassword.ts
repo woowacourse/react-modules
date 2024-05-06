@@ -1,5 +1,5 @@
 import { useSingleInput } from '.';
-import { VALID_LENGTH } from './contexts';
+import { VALID_LENGTH } from './constants';
 import { Validations, Validator, Validators } from './types';
 import { validateFilledValue, validateLength, validateNumber } from './utils/validators';
 

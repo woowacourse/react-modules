@@ -1,5 +1,5 @@
 import { useSingleInput } from '.';
-import { ALPHABET_REGEXP } from './contexts';
+import { ALPHABET_REGEXP } from './constants';
 import { Validations, Validator, Validators } from './types';
 import { validateFilledValue } from './utils/validators';
 

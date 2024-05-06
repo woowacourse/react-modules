@@ -1,4 +1,4 @@
-import { CARD_BRAND } from './contexts';
+import { CARD_BRAND } from './constants';
 
 type Brand = keyof typeof CARD_BRAND | 'etc';
 

@@ -1,4 +1,4 @@
-import { VALID_LENGTH } from './contexts';
+import { VALID_LENGTH } from './constants';
 import { Validations, Validator, Validators } from './types';
 import useMultipleInputs from './useMultipleInputs';
 import { validateFilledValue, validateLength, validateNumber } from './utils/validators';
