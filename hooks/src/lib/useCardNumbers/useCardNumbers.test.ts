@@ -9,7 +9,7 @@ describe('useCardNumbers custom hook', () => {
     const { result } = renderHook(() =>
       useCardNumbers(['1234', '5678', '9012', '3456'], maxLength),
     );
-    expect(result.current.value).toEqual(['1234', '5678', '9012', '3456']);
+    expect(result.current.values).toEqual(['1234', '5678', '9012', '3456']);
   });
 
   test(`카드번호의 각 input에서 ${maxLength}를 초과하는 값을 입력하면 "카드번호는 ${maxLength}글자 까지만 입력이 가능해요." 라는 errorMessage를 반환한다.`, () => {

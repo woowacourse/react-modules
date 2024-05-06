@@ -6,7 +6,7 @@ import useCardExpirationDate from './useCardExpirationDate';
 describe('useCardExpirationDate custom hook', () => {
   test('hook이 초기화될 때 주어진 initValue로 설정된다.', () => {
     const { result } = renderHook(() => useCardExpirationDate(['12', '23'], 2));
-    expect(result.current.value).toEqual(['12', '23']);
+    expect(result.current.values).toEqual(['12', '23']);
   });
 
   test('월 input에 01~12 범위를 초가하는 입력값이 입력될 때, onChangeHandler의 결과로 "유효기간 월은 01~12 사이만 입력이 가능해요" 라는 errorMessage를 반환합니다.', () => {

@@ -23,7 +23,7 @@ describe('useCardArrayValidate custom hook', () => {
       }),
     );
 
-    expect(result.current.value).toEqual(['12', '']);
+    expect(result.current.values).toEqual(['12', '']);
     expect(result.current.isCompleted).toBe(false);
     expect(result.current.errorMessage).toBe('');
   });
@@ -43,7 +43,7 @@ describe('useCardArrayValidate custom hook', () => {
       result.current.onChangeHandler({ target: { value: '789' } } as any, 1);
     });
 
-    expect(result.current.value).toEqual(['', '789']);
+    expect(result.current.values).toEqual(['', '789']);
     expect(result.current.errorMessage).toBe('');
     expect(validateOnChangeMock).toHaveBeenCalledWith('789', 1);
   });
@@ -66,7 +66,7 @@ describe('useCardArrayValidate custom hook', () => {
       result.current.onChangeHandler({ target: { value: 'abc' } } as any, 1);
     });
 
-    expect(result.current.value).toEqual(['', '']);
+    expect(result.current.values).toEqual(['', '']);
     expect(result.current.errorMessage).toBe('유효하지 않은 값이 입력됐어요');
     expect(validateOnChangeMock).toHaveBeenCalledWith('abc', 1);
   });
