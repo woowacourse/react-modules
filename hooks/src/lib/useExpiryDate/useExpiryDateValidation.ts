@@ -2,19 +2,14 @@ import { useState } from "react";
 
 import cardInputValidator from "../validators/cardInputValidator";
 
-import {
-  INPUT_RULES,
-  VALIDATION_MESSAGES,
-} from "../constants/card-custom-hook";
+import { INPUT_RULES, VALIDATION_MESSAGES } from "../constants/card-custom-hook";
 import { ExpiryDateKeys } from "../types/card-custom-hook";
 
 const useExpiryDateValidation = () => {
-  const [errorState, setErrorState] = useState<Record<ExpiryDateKeys, boolean>>(
-    {
-      month: false,
-      year: false,
-    }
-  );
+  const [errorState, setErrorState] = useState<Record<ExpiryDateKeys, boolean>>({
+    month: false,
+    year: false,
+  });
 
   const [errorText, setErrorText] = useState("");
 
@@ -34,12 +29,8 @@ const useExpiryDateValidation = () => {
     });
   };
 
-  const validateExpiryDate = (
-    name: string,
-    value: string,
-    expiryDate: Record<ExpiryDateKeys, string>
-  ): boolean => {
-    console.log(name, value, "in validate function");
+  const validateExpiryDate = (name: ExpiryDateKeys, value: string, expiryDate: Record<ExpiryDateKeys, string>): boolean => {
+    if (cardInputValidator.validateOverInputLength(value, INPUT_RULES.maxExpirationDateLength)) return false;
 
     if (!cardInputValidator.validateNumericInput(value)) {
       setErrorText(VALIDATION_MESSAGES.onlyNumbersAllowed);
@@ -47,14 +38,6 @@ const useExpiryDateValidation = () => {
 
       return false;
     }
-
-    if (
-      cardInputValidator.validateOverInputLength(
-        value,
-        INPUT_RULES.validExpirationLength
-      )
-    )
-      return false;
 
     if (name === "month" && !cardInputValidator.validateMonth(value)) {
       setErrorText(VALIDATION_MESSAGES.invalidMonthLength);
@@ -71,11 +54,12 @@ const useExpiryDateValidation = () => {
     }
 
     if (
-      (name === "month" &&
-        expiryDate.year.length !== INPUT_RULES.validExpirationLength) ||
-      (name === "year" &&
-        expiryDate.month.length !== INPUT_RULES.validExpirationLength)
+      (name === "month" && expiryDate.year.length !== INPUT_RULES.maxExpirationDateLength) ||
+      (name === "year" && expiryDate.month.length !== INPUT_RULES.maxExpirationDateLength)
     ) {
+      setErrorText("");
+      updateAllErrorState(false);
+
       return true;
     }
 

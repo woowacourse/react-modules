@@ -24,24 +24,21 @@ describe("useExpiryDate 커스텀 훅 동작 테스트", () => {
     ["year", "25"],
   ];
 
-  it.each(VALID_INPUT_TEST_CASE)(
-    "%s 필드에 입력하는 %s가 해당 필드에 정확히 입력되어야 한다",
-    (field, value) => {
-      const { result } = renderHook(() => useExpiryDate());
+  it.each(VALID_INPUT_TEST_CASE)("%s 필드에 입력하는 %s가 해당 필드에 정확히 입력되어야 한다", (field, value) => {
+    const { result } = renderHook(() => useExpiryDate());
 
-      React.act(() => {
-        result.current.handleExpiryDateChange({
-          target: {
-            name: field,
-            value: value,
-          },
-        } as React.ChangeEvent<HTMLInputElement>);
-      });
+    React.act(() => {
+      result.current.handleExpiryDateChange({
+        target: {
+          name: field,
+          value: value,
+        },
+      } as React.ChangeEvent<HTMLInputElement>);
+    });
 
-      expect(result.current.expiryDate[field as ExpiryDateKeys]).toBe(value);
-      expect(result.current.errorState[field as ExpiryDateKeys]).toBe(false);
-    }
-  );
+    expect(result.current.expiryDate[field as ExpiryDateKeys]).toBe(value);
+    expect(result.current.errorState[field as ExpiryDateKeys]).toBe(false);
+  });
 
   const INVALID_INPUT_LENGTH_TEST_CASE = [
     ["month", "1"],
@@ -62,20 +59,16 @@ describe("useExpiryDate 커스텀 훅 동작 테스트", () => {
         } as React.ChangeEvent<HTMLInputElement>);
       });
 
-      expect(result.current.expiryDate[field as ExpiryDateKeys]).toBe(
-        invalidValue
-      );
+      expect(result.current.expiryDate[field as ExpiryDateKeys]).toBe(invalidValue);
       expect(result.current.errorState[field as ExpiryDateKeys]).toBe(true);
     }
   );
 
   const INVALID_CHARACTER_INPUT_TEST_CASE = [
+    ["month", ["a"], ""],
     ["month", ["1", "1a"], "1"],
-    ["month", ["1", "12", "12a"], "12"],
-    ["month", ["1", "12", "123"], "12"],
+    ["year", ["a"], ""],
     ["year", ["3", "3a"], "3"],
-    ["year", ["3", "32", "32a"], "32"],
-    ["year", ["1", "12", "123"], "12"],
   ];
 
   it.each(INVALID_CHARACTER_INPUT_TEST_CASE)(
@@ -96,10 +89,35 @@ describe("useExpiryDate 커스텀 훅 동작 테스트", () => {
         }
       });
 
-      expect(result.current.expiryDate[field as ExpiryDateKeys]).toBe(
-        expectedResult
-      );
+      expect(result.current.expiryDate[field as ExpiryDateKeys]).toBe(expectedResult);
       expect(result.current.errorState[field as ExpiryDateKeys]).toBe(true);
+    }
+  );
+
+  const INVALID_INPUT_OVER_LENGTH = [
+    ["month", ["1", "12", "123"], "12"],
+    ["year", ["1", "12", "123"], "12"],
+  ];
+
+  it.each(INVALID_INPUT_OVER_LENGTH)(
+    "%s 필드에 3글자 이상을 입력할 경우, 상태 업데이트가 발생하지 않아야 한다",
+    (field, inputScenario, expectedResult) => {
+      const { result } = renderHook(() => useExpiryDate());
+
+      React.act(() => {
+        if (inputScenario instanceof Array) {
+          inputScenario.forEach((inputValue) => {
+            result.current.handleExpiryDateChange({
+              target: {
+                name: field,
+                value: inputValue,
+              },
+            } as React.ChangeEvent<HTMLInputElement>);
+          });
+        }
+      });
+
+      expect(result.current.expiryDate[field as ExpiryDateKeys]).toBe(expectedResult);
     }
   );
 });

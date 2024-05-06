@@ -10,8 +10,7 @@ const useExpiryDate = () => {
     year: "",
   });
 
-  const { errorState, errorText, validateExpiryDate } =
-    useExpiryDateValidation();
+  const { errorState, errorText, validateExpiryDate } = useExpiryDateValidation();
 
   const updateExpiryDate = (name: string, value: string) => {
     setExpiryDate((prevValue) => {
@@ -22,21 +21,21 @@ const useExpiryDate = () => {
     });
   };
 
-  const handleExpiryDateChange = (
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    const { name, value } = event.target;
+  const handleExpiryDateChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = event.target as {
+      name: ExpiryDateKeys;
+      value: string;
+    };
 
-    const canUpdate = validateExpiryDate(name, value, expiryDate);
+    const canExpiryDateUpdate = validateExpiryDate(name, value, expiryDate);
 
-    if (!canUpdate) return;
+    if (!canExpiryDateUpdate) return;
 
     updateExpiryDate(name, value);
   };
 
-  const isExpiryDateCompleted = Object.values(expiryDate).every(
-    (cardNumber) => cardNumber.length === 2
-  );
+  const isExpiryDateCompleted =
+    Object.values(expiryDate).every((cardNumber) => cardNumber.length === 2) && Object.values(errorState).every((isValid) => !isValid);
 
   return {
     expiryDate,
