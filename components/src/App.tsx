@@ -8,15 +8,12 @@ function App() {
     <>
       {isOpened ? (
         <Modal
-          closeButton={{
-            onClose: () => {
-              setIsOpened(false);
-            },
+          onClose={() => {
+            setIsOpened(false);
           }}
           modalPosition="bottom"
-          title={{ position: "center", content: "test" }}
-          subtitle={{ content: "123123" }}
-          backgroundColor="white"
+          title="test"
+          subtitle="123123"
           confirmButton={{
             content: "확인",
             onConfirm: () => {
