@@ -1,34 +1,27 @@
 import { useState } from 'react';
 import { ValidationResult, ValidatorProps } from './types';
+import useValidationResults from './useValidationResults';
 
-const makeInitialErrorInfo = (initialValue: Record<string, string>) => {
-  const keys = Object.keys(initialValue);
-  const obj: Record<string, ValidationResult> = {};
-
-  keys.forEach(key => {
-    obj[key] = {
-      isValid: true,
-      errorMessage: '',
-    };
-  });
-
-  return obj;
-};
+export type ValidationType = 'inputType' | 'fieldRules';
 
 const useInputs = (initialValue: Record<string, string>, validator: ValidatorProps) => {
+  const VALIDATION_FUNCTION: Record<ValidationType, (value: string) => ValidationResult> = {
+    inputType: validator.validateInputType,
+    fieldRules: validator.validateFieldRules,
+  };
+
   const [value, setValue] = useState(initialValue);
-  const [errorInfo, setErrorInfo] = useState<Record<string, ValidationResult>>(() =>
-    makeInitialErrorInfo(initialValue),
-  );
+  const [validationResult, handleValidationResult] = useValidationResults(initialValue);
+
+  const isValidValue = (value: string, name: string, validationType: ValidationType) => {
+    const validationResult = VALIDATION_FUNCTION[validationType](value);
+    handleValidationResult(name, validationResult);
+    return validationResult.isValid;
+  };
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>, name: string) => {
-    const validationResult = validator.validateInputType(event.target.value);
-    setErrorInfo(prev => ({
-      ...prev,
-      [name]: validationResult,
-    }));
+    if (!isValidValue(event.target.value, name, 'inputType')) return;
 
-    if (!validationResult.isValid) return;
     setValue(prev => ({
       ...prev,
       [name]: event.target.value,
@@ -36,25 +29,32 @@ const useInputs = (initialValue: Record<string, string>, validator: ValidatorPro
   };
 
   const handleBlur = (event: React.FocusEvent<HTMLInputElement, Element>, name: string) => {
-    const validationResult = validator.validateFieldRules(event.target.value);
-    setErrorInfo(prev => ({
-      ...prev,
-      [name]: validationResult,
-    }));
-    if (!validationResult.isValid) return;
-    setValue(prev => ({
-      ...prev,
-      [name]: event.target.value,
-    }));
+    isValidValue(event.target.value, name, 'fieldRules');
+  };
+
+  const focusNextInput = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const target = event.target.nextElementSibling;
+    if (target instanceof HTMLInputElement) target.focus();
+  };
+
+  const focusNextInputWhenMaxLength = (
+    event: React.ChangeEvent<HTMLInputElement>,
+    isAutoFocus: boolean,
+    name: string,
+  ) => {
+    if (!isValidValue(event.target.value, name, 'fieldRules')) return;
+    if (isAutoFocus) focusNextInput(event);
   };
 
   return {
     value,
     setValue,
+    isValidValue,
     handleChange,
     handleBlur,
-    errorInfo,
-    setErrorInfo,
+    validationResult,
+    handleValidationResult,
+    focusNextInputWhenMaxLength,
   };
 };
 

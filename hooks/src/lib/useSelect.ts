@@ -1,19 +1,20 @@
 import { useState } from 'react';
-import { ValidationResult, ValidatorSelectProps } from './types';
+import { ValidatorSelectProps } from './types';
+import useValidationResult from './useValidationResult';
 
 const useSelect = (initialValue: string, validator: ValidatorSelectProps, options: string[]) => {
   const { validateInputType, validateFieldRules } = validator;
   const [value, setValue] = useState(initialValue);
-  const [errorInfo, setErrorInfo] = useState<ValidationResult>({
-    isValid: true,
-    errorMessage: '',
-  });
+  const [validationResult, handleValidationResult] = useValidationResult();
+
+  const isValidValue = (value: string) => {
+    const validationResult = validateInputType(value) && validateFieldRules(value, options);
+    handleValidationResult(validationResult);
+    return validationResult.isValid;
+  };
 
   const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    const validationResult =
-      validateInputType(event.target.value) && validateFieldRules(event.target.value, options);
-    setErrorInfo(validationResult);
-    if (!validationResult.isValid) return;
+    if (!isValidValue(event.target.value)) return;
     setValue(event.target.value);
   };
 
@@ -21,8 +22,8 @@ const useSelect = (initialValue: string, validator: ValidatorSelectProps, option
     value,
     setValue,
     handleChange,
-    errorInfo,
-    setErrorInfo,
+    validationResult,
+    handleValidationResult,
   };
 };
 

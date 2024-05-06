@@ -1,32 +1,54 @@
 import { useState } from 'react';
 import { ValidationResult, ValidatorProps } from './types';
+import useValidationResult from './useValidationResult';
+import { ValidationType } from './useInputs';
 
 const useInput = (initialValue: string, validator: ValidatorProps) => {
-  const { validateInputType, validateFieldRules } = validator;
   const [value, setValue] = useState(initialValue);
-  const [errorInfo, setErrorInfo] = useState<ValidationResult>({
-    isValid: true,
-    errorMessage: '',
-  });
+  const [validationResult, handleValidationResult] = useValidationResult();
+
+  const VALIDATION_FUNCTION: Record<ValidationType, (value: string) => ValidationResult> = {
+    inputType: validator.validateInputType,
+    fieldRules: validator.validateFieldRules,
+  };
+
+  const isValidValue = (value: string, validationType: ValidationType) => {
+    const validationResult = VALIDATION_FUNCTION[validationType](value);
+    handleValidationResult(validationResult);
+    return validationResult.isValid;
+  };
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const validationResult = validateInputType(event.target.value);
-    setErrorInfo(validationResult);
-    if (!validationResult.isValid) return;
+    if (!isValidValue(event.target.value, 'inputType')) return;
     setValue(event.target.value);
   };
 
   const handleBlur = (event: React.FocusEvent<HTMLInputElement, Element>) => {
-    setErrorInfo(validateFieldRules(event.target.value));
+    isValidValue(event.target.value, 'fieldRules');
+  };
+
+  const focusNextInput = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const target = event.target.nextElementSibling;
+    if (target instanceof HTMLInputElement) target.focus();
+  };
+
+  const focusNextInputWhenMaxLength = (
+    event: React.ChangeEvent<HTMLInputElement>,
+    isAutoFocus: boolean,
+  ) => {
+    if (!isValidValue(event.target.value, 'fieldRules')) return;
+    if (isAutoFocus) focusNextInput(event);
   };
 
   return {
     value,
     setValue,
+    isValidValue,
     handleChange,
     handleBlur,
-    errorInfo,
-    setErrorInfo,
+    validationResult,
+    handleValidationResult,
+    focusNextInputWhenMaxLength,
   };
 };
 
