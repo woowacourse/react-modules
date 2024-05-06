@@ -7,6 +7,7 @@ describe("신용카드 번호 입력 테스트", () => {
     first: "first",
     second: "second",
     third: "third",
+    fourth: "fourth",
   };
 
   it("초기값이 정확히 설정되어야 한다.", () => {

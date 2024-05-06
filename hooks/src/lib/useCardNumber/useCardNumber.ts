@@ -3,7 +3,14 @@ import { useInput } from "../common";
 import Validator from "../utils/validator";
 import { ERROR_MESSAGE, OPTION } from "../constants";
 
-const useCardNumber = <T extends object>(initialValue: T) => {
+interface CardNumberValue {
+  first: string;
+  second: string;
+  third: string;
+  fourth: string;
+}
+
+const useCardNumber = (initialValue: CardNumberValue) => {
   const { inputValue, handleInputChange, updateByNameAndValue } = useInput(initialValue);
   const [validationResult, setValidationResult] = useState<ValidationResult>({
     isValid: true,

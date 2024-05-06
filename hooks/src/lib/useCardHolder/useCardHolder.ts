@@ -3,7 +3,7 @@ import { useInput } from "../common";
 import Validator from "../utils/validator";
 import { ERROR_MESSAGE } from "../constants";
 
-const useCardHolder = <T extends object>(initialValue: T) => {
+const useCardHolder = (initialValue: { cardHolder: string }) => {
   const { inputValue, handleInputChange, updateByNameAndValue } = useInput(initialValue);
   const [validationResult, setValidationResult] = useState<ValidationResult>({
     isValid: true,

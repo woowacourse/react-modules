@@ -3,7 +3,7 @@ import { useInput } from "../common";
 import Validator from "../utils/validator";
 import { ERROR_MESSAGE, OPTION } from "../constants";
 
-const useCVC = <T extends object>(initialValue: T) => {
+const useCVC = (initialValue: { cvc: string }) => {
   const { inputValue, handleInputChange, updateByNameAndValue } = useInput(initialValue);
   const [validationResult, setValidationResult] = useState<ValidationResult>({
     isValid: true,

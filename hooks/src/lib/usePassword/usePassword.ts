@@ -3,7 +3,7 @@ import { useInput } from "../common";
 import Validator from "../utils/validator";
 import { ERROR_MESSAGE, OPTION } from "../constants";
 
-const usePassword = <T extends object>(initialValue: T) => {
+const usePassword = (initialValue: { password: string }) => {
   const { inputValue, handleInputChange, updateByNameAndValue } = useInput(initialValue);
   const [validationResult, setValidationResult] = useState<ValidationResult>({
     isValid: true,
