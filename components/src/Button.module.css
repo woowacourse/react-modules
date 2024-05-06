@@ -1,0 +1,9 @@
+.modal-button {
+  width: 200px;
+  height: 50px;
+  border-radius: 20px;
+  border: 1px solid grey;
+
+  font-size: 15px;
+  font-weight: 700;
+}
