@@ -1,9 +1,9 @@
-import type { Meta, StoryObj } from "@storybook/react";
-import { Modal } from "paran-simple-modal";
-import "../index.css";
+import { Meta, StoryObj } from "@storybook/react";
+import React, { useState } from "react";
+import Modal from "../lib/Modal";
 
 const meta = {
-  title: "Modal/Center",
+  title: "Modal/Bottom",
   component: Modal,
 
   parameters: {
@@ -11,6 +11,25 @@ const meta = {
   },
 
   tags: ["autodocs"],
+  decorators: [
+    (Story, { args }) => {
+      const [isOpen, setIsOpen] = useState(false);
+
+      const handleClose = () => {
+        setIsOpen(false);
+        args.onClose();
+      };
+
+      return (
+        <>
+          <button onClick={() => setIsOpen(true)}>Open Modal</button>
+          <div style={{ height: "100vh" }}>
+            {isOpen && <Story args={{ ...args, onClose: handleClose }} />}
+          </div>
+        </>
+      );
+    },
+  ],
 } satisfies Meta<typeof Modal>;
 
 export default meta;
@@ -20,7 +39,7 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
   args: {
     onClose: () => {},
-    modalPosition: "center",
+    modalPosition: "bottom",
     children: "Children will go here",
   },
 };
@@ -29,7 +48,7 @@ export const ModalWithConfirmButton: Story = {
   args: {
     onClose: () => {},
     confirmButton: { content: "확인", onConfirm: () => {} },
-    modalPosition: "center",
+    modalPosition: "bottom",
     children: "Children will go here",
   },
 };
@@ -38,17 +57,19 @@ export const ModalWithCancelButton: Story = {
   args: {
     onClose: () => {},
     cancelButton: { content: "취소", onCancel: () => {} },
-    modalPosition: "center",
+    modalPosition: "bottom",
     children: "Children will go here",
   },
 };
 
 export const ModalWithAllButton: Story = {
   args: {
-    onClose: () => {},
+    onClose: () => {
+      alert("닫기");
+    },
     confirmButton: { content: "확인", onConfirm: () => {} },
     cancelButton: { content: "취소", onCancel: () => {} },
-    modalPosition: "center",
+    modalPosition: "bottom",
     children: "Children will go here",
   },
 };
@@ -60,7 +81,6 @@ export const ModalWithButtonsAndTitle: Story = {
     onClose: () => {
       alert("닫기");
     },
-
     confirmButton: {
       content: "확인",
       onConfirm: () => {
@@ -73,7 +93,7 @@ export const ModalWithButtonsAndTitle: Story = {
         alert("취소");
       },
     },
-    modalPosition: "center",
+    modalPosition: "bottom",
     children: "Children will go here",
   },
 };
