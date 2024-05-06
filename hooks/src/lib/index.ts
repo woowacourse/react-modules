@@ -7,3 +7,4 @@ export { default as useValidation } from './useValidation';
 export { default as useCardNumbers } from './useCardNumbers';
 export { default as useExpiryDate } from './useExpiryDate';
 export { default as useSingleInput } from './useSingleInput';
+export { default as useMultipleInputs } from './useMultipleInputs';
