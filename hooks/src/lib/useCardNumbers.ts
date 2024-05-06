@@ -1,21 +1,18 @@
-import useInputs from './useInputs';
 import { useEffect } from 'react';
 import { validateCardNumberFormat, validateNumber } from './validator';
 import { Options, UseCardNumber } from './type';
 import useValidations from './useValidations';
+import useCardNumbersState from './useCardNumbersState';
 
 const useCardNumbers = (initialValue: Record<string, string>, options?: Options): UseCardNumber => {
-  const { value, setValue } = useInputs(initialValue);
+  const { value, updateCardNumbers } = useCardNumbersState(initialValue);
   const { errorInfo, updateValidationResult } = useValidations(initialValue);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>, name: string) => {
     const validationResult = validateNumber(event.target.value);
     updateValidationResult(validationResult, name);
     if (!validationResult.isValid) return;
-    setValue(prev => ({
-      ...prev,
-      [name]: event.target.value,
-    }));
+    updateCardNumbers(event.target.value, name);
 
     if (event.target.value.length === event.target.maxLength) {
       const validationResult = validateCardNumberFormat(event.target.value);
@@ -32,10 +29,7 @@ const useCardNumbers = (initialValue: Record<string, string>, options?: Options)
     const validationResult = validateCardNumberFormat(event.target.value);
     updateValidationResult(validationResult, name);
     if (!validationResult.isValid) return;
-    setValue(prev => ({
-      ...prev,
-      [name]: event.target.value,
-    }));
+    updateCardNumbers(event.target.value, name);
   };
 
   useEffect(() => {
@@ -45,10 +39,7 @@ const useCardNumbers = (initialValue: Record<string, string>, options?: Options)
         console.error(
           `cardNumbers field error: ${value} 라는 올바르지 않은 값이 들어와 빈 값으로 초기화했습니다.`,
         );
-        setValue(prev => ({
-          ...prev,
-          [key]: '',
-        }));
+        updateCardNumbers('', key);
       }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
