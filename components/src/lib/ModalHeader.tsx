@@ -17,7 +17,7 @@ const ModalHeader = ({ title, subtitle, closeButton }: ModalHeaderProps) => {
       <div className={styles['title-field']}>
         {title && (
           <>
-            <h1
+            <h3
               style={{
                 textAlign: `${title.position || 'center'}`,
                 fontSize: title.fontSize || '18px',
@@ -26,9 +26,9 @@ const ModalHeader = ({ title, subtitle, closeButton }: ModalHeaderProps) => {
               className={styles['title']}
             >
               {title.content}
-            </h1>
+            </h3>
             {subtitle && (
-              <h2
+              <h4
                 style={{
                   textAlign: `${title.position || 'center'}`,
                   fontSize: subtitle.fontSize || '12px',
@@ -37,7 +37,7 @@ const ModalHeader = ({ title, subtitle, closeButton }: ModalHeaderProps) => {
                 className={styles['subtitle']}
               >
                 {subtitle.content}
-              </h2>
+              </h4>
             )}
           </>
         )}
