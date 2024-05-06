@@ -1,14 +1,5 @@
 import React from 'react';
 
-// import {
-//   useCardNumbers,
-//   useCardBrand,
-//   useCardExpiryDate,
-//   useCardHolder,
-//   useCardCVC,
-//   useCardPassword,
-// } from '@seongjinme/card-validation';
-
 import {
   useCardNumbers,
   useCardBrand,
@@ -16,7 +7,7 @@ import {
   useCardHolder,
   useCardCVC,
   useCardPassword,
-} from './lib';
+} from '@seongjinme/card-validation';
 
 import './App.css';
 

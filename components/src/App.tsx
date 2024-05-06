@@ -2,8 +2,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import './App.css';
 
-// import { Modal, ModalButtonInterface } from '@seongjinme/react-modal';
-import { Modal, ModalButtonInterface } from './lib';
+import { Modal, ModalButtonInterface } from '@seongjinme/react-modal';
 
 function App() {
   const [isOpenCenterModal, setIsOpenCenterModal] = useState(false);
