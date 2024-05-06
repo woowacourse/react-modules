@@ -1,23 +1,23 @@
-# brgndy-modal
+# brgndyy-react-modal
 
 Common React Modal Library Component
 
-## - 실행 영상
+## - Running Video
 
 ![](https://velog.velcdn.com/images/brgndy/post/08fdf1b2-ffcb-415a-a513-b9a1fa92f11a/image.gif)
 
 ## - install
 
 ```
-npm install brgndy-react-modal
-yarn add brgndy-react-modal
+npm install brgndyy-react-modal
+yarn add brgndyy-react-modal
 ```
 
 ## - How to use
 
-```javascript
+```tsx
 import { useState } from "react";
-import { Modal } from "brgndy-react-modal";
+import { Modal } from "brgndyy-react-modal";
 
 export const CloseContent = () => {
   return <div>Close Modal Button Content</div>;
@@ -40,7 +40,14 @@ function App() {
 
   return (
     <>
-      <Modal isOpen={modalOpen} onClose={handleModalClose} position="center">
+      <Modal
+        isOpen={modalOpen}
+        onClose={handleModalClose}
+        position="center"
+        mountAnimation="modal_enter"
+        unMountAnimation="modal_exit"
+        animationTime={300}
+      >
         <Modal.Portal id="modal">
           <Modal.Backdrop>
             <Modal.Container className="container">
@@ -53,7 +60,7 @@ function App() {
         </Modal.Portal>
       </Modal>
 
-      <button onClick={handleModalOpen}>모달 열기</button>
+      <button onClick={handleModalOpen}>Modal Open</button>
     </>
   );
 }
@@ -63,11 +70,14 @@ export default App;
 
 ## Modal Component Props
 
-| Name     | Datatype          | Default  | Description              |
-| -------- | ----------------- | -------- | ------------------------ |
-| isOpen   | boolean           | false    | 모달의 열림 상태         |
-| onClose  | ()=> void         | none     | 모달이 닫혔을때의 이벤트 |
-| position | 'center' 'bottom' | 'center' | 모달 컨테이너의 위치     |
+| Name             | Datatype          | Default  | Description                          |
+| ---------------- | ----------------- | -------- | ------------------------------------ |
+| isOpen           | boolean           | false    | state of Modal Open                  |
+| onClose          | ()=> void         | none     | event of Modal Close                 |
+| position         | 'center' 'bottom' | 'center' | Position of Modal Container          |
+| mountAnimation   | string            | ""       | Name of Animation When Modal mount   |
+| unMountAnimation | string            | ""       | Name of Animation When Modal unmount |
+| animationTime    | number            | 300      | time of animation duration           |
 
 ## Pitfalls
 
