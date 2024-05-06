@@ -1,11 +1,23 @@
-import { Modal, POSITIONS } from "../lib";
+import { Modal, POSITIONS } from ".";
 import type { Meta, StoryObj } from "@storybook/react";
-import { fn } from "@storybook/test";
 import "../reset.css";
+import useModalState from "./useModalState";
+
+const ModalWrapper = ({ onOpen = () => {}, onConfirm = () => {}, onClose = () => {}, ...restProps }) => {
+  const { isOpen, closeModal, confirmModal } = useModalState(true, { onOpen, onClose, onConfirm });
+  return (
+    <Modal
+      isOpen={isOpen}
+      closeModal={closeModal}
+      confirmModal={confirmModal}
+      {...restProps}
+    />
+  );
+};
 
 const meta = {
   title: "Modal",
-  component: Modal,
+  component: ModalWrapper,
   parameters: {
     layout: "centered",
     docs: {
@@ -57,21 +69,6 @@ const meta = {
       },
       description: "Confirm Button Label (if empty, Confirm Button will be hidden)",
     },
-    isOpenState: {
-      description: "Is Open State",
-    },
-    onOpen: {
-      type: "function",
-      description: "Open Event",
-    },
-    onConfirm: {
-      type: "function",
-      description: "Confirm Event",
-    },
-    onClose: {
-      type: "function",
-      description: "Close Event",
-    },
   },
   args: {
     position: "center",
@@ -80,10 +77,6 @@ const meta = {
     close: false,
     cancelLabel: undefined,
     confirmLabel: undefined,
-    isOpenState: [true, fn()],
-    onOpen: () => {},
-    onConfirm: () => {},
-    onClose: () => {},
   },
   tags: ["autodocs"],
 } satisfies Meta<typeof Modal>;
@@ -104,6 +97,9 @@ export const ConfirmButton: Story = {
   },
   args: {
     confirmLabel: "confirm",
+    onConfirm: () => {
+      alert("confirm");
+    },
   },
 };
 
@@ -113,6 +109,9 @@ export const CancelButton: Story = {
   },
   args: {
     cancelLabel: "cancel",
+    onClose: () => {
+      alert("close");
+    },
   },
 };
 
@@ -120,14 +119,15 @@ export const ConfirmAndCancelButton: Story = {
   parameters: {
     docs: { description: { story: "확인/취소 버튼이 존재하는 상태" } },
   },
+
   args: {
     confirmLabel: "확인",
-    onConfirm: () => {
-      alert("confirm");
-    },
-    cancelLabel: "닫기",
+    cancelLabel: "취소",
     onClose: () => {
       alert("close");
+    },
+    onConfirm: () => {
+      alert("confirm");
     },
   },
 };
@@ -140,6 +140,23 @@ export const CloseButton: Story = {
     close: true,
     onClose: () => {
       alert("close");
+    },
+  },
+};
+
+export const Full: Story = {
+  parameters: {
+    docs: { description: { story: "확인/취소버튼과 끄기버튼이 존재하는 상태" } },
+  },
+  args: {
+    close: true,
+    confirmLabel: "확인",
+    cancelLabel: "취소",
+    onClose: () => {
+      alert("close");
+    },
+    onConfirm: () => {
+      alert("confirm");
     },
   },
 };
