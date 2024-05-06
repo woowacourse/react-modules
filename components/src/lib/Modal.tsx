@@ -1,10 +1,15 @@
-import { PropsWithChildren } from "react";
+import { PropsWithChildren, useEffect, useRef, useState } from "react";
 import { ModalProvider } from "./ModalProvider";
-import { ModalContextType, useModal } from "./ModalContext";
+import { ModalContextType } from "./ModalContext";
 import ModalPortal from "./ModalPortal";
 import ModalBackdrop from "./ModalBackdrop";
 import ModalCloseButton from "./ModalCloseButton";
 import Container from "./Container";
+
+interface ModalProviderValue extends ModalContextType {
+  closing: boolean;
+  open: boolean;
+}
 
 export default function Modal({
   children,
@@ -16,19 +21,61 @@ export default function Modal({
   mountAnimation = "",
   unMountAnimation = "",
   position = "center",
+  animationTime = 300,
 }: PropsWithChildren<Partial<ModalContextType>>) {
-  const contextValue = useModal();
-  const handleOnClose = onClose ?? contextValue.onClose;
+  const [closing, setClosing] = useState(false);
+  const [open, setOpen] = useState(isOpen);
+  const modalRef = useRef<HTMLDivElement>(null);
 
-  const modalProps: ModalContextType = {
-    isOpen: isOpen ?? contextValue.isOpen,
-    position: position ?? contextValue.position,
-    onClose: handleOnClose,
-    mountAnimation: mountAnimation ?? contextValue.mountAnimation,
-    unMountAnimation: unMountAnimation ?? contextValue.unMountAnimation,
+  useEffect(() => {
+    if (isOpen) {
+      setOpen(true);
+    } else {
+      setClosing(true);
+    }
+  }, [isOpen]);
+
+  useEffect(() => {
+    if (closing) {
+      const timer = setTimeout(() => {
+        setClosing(false);
+        setOpen(false);
+        const fakeEvent: React.SyntheticEvent = {
+          preventDefault: () => {},
+          stopPropagation: () => {},
+          nativeEvent: new Event("close"),
+          currentTarget: modalRef.current as HTMLDivElement,
+          target: modalRef.current as HTMLDivElement,
+          bubbles: false,
+          cancelable: false,
+          defaultPrevented: false,
+          eventPhase: 2,
+          isTrusted: false,
+          timeStamp: Date.now(),
+          type: "close",
+          isDefaultPrevented: () => false,
+          isPropagationStopped: () => false,
+          persist: () => {},
+        };
+        onClose(fakeEvent);
+      }, animationTime);
+
+      return () => clearTimeout(timer);
+    }
+  }, [closing]);
+
+  const modalProps: ModalProviderValue = {
+    isOpen,
+    position,
+    onClose,
+    mountAnimation,
+    unMountAnimation,
+    animationTime,
+    closing,
+    open,
   };
 
-  return modalProps.isOpen ? (
+  return open ? (
     <ModalProvider value={modalProps}>{children}</ModalProvider>
   ) : null;
 }

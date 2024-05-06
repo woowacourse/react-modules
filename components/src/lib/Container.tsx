@@ -14,14 +14,17 @@ export default function Container({
 }: PropsWithChildren<Props>) {
   const containerClassName = className ?? "";
   const innerStyle = style ?? {};
-  const { position } = useContext(ModalContext);
+  const { position, mountAnimation, unMountAnimation, open, closing } =
+    useContext(ModalContext);
 
-  return (
+  const modalClassName = closing ? unMountAnimation : mountAnimation;
+
+  return open ? (
     <div
-      className={`${styles.modal_container} ${position === "center" ? styles.center : styles.bottom} ${containerClassName}`}
+      className={`${styles.modal_container} ${position === "center" ? styles.center : styles.bottom} ${containerClassName} ${modalClassName}`}
       style={innerStyle}
     >
       {children}
     </div>
-  );
+  ) : null;
 }

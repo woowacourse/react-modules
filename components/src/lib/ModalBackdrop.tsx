@@ -5,7 +5,7 @@ import usePreventScroll from "./hooks/usePreventScroll";
 
 export default function ModalBackdrop(props: PropsWithChildren<object>) {
   const { children } = props;
-  const { isOpen, onClose } = useContext(ModalContext);
+  const { isOpen, onClose, open } = useContext(ModalContext);
 
   const backdropRef = useCallback((node: HTMLDivElement) => {
     node?.focus();
@@ -19,7 +19,7 @@ export default function ModalBackdrop(props: PropsWithChildren<object>) {
 
   usePreventScroll(isOpen);
 
-  return (
+  return open ? (
     <div
       className={styles.back_drop}
       onClick={(e) => onClose && onClose(e)}
@@ -30,5 +30,5 @@ export default function ModalBackdrop(props: PropsWithChildren<object>) {
     >
       {children}
     </div>
-  );
+  ) : null;
 }

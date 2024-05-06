@@ -1,12 +1,15 @@
 import { createContext, useContext } from "react";
 
-export type ModalContextType = {
+export interface ModalContextType {
   isOpen: boolean;
   onClose: (event: React.SyntheticEvent) => void;
   mountAnimation: string;
   unMountAnimation: string;
   position: "center" | "bottom";
-};
+  animationTime: number;
+  open: boolean;
+  closing: boolean;
+}
 
 const defaultContext: Partial<ModalContextType> = {
   isOpen: false,
@@ -17,6 +20,9 @@ const defaultContext: Partial<ModalContextType> = {
   mountAnimation: "",
   unMountAnimation: "",
   position: "center",
+  animationTime: 300,
+  open: true,
+  closing: true,
 };
 
 export const ModalContext =
