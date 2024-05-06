@@ -32,9 +32,7 @@ function ModalMain({ children, isOpen, onClose }: ModalMainProps) {
 
   return (
     <ModalContext.Provider value={{ onClose }}>
-      <div className={classnames({ [style.ModalContainer]: true, [style.isOpen]: isOpen })}>
-        {children}
-      </div>
+      <div className={classnames(style.ModalContainer, { [style.isOpen]: isOpen })}>{children}</div>
     </ModalContext.Provider>
   );
 }
