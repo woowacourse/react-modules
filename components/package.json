@@ -18,13 +18,12 @@
     "build-storybook": "storybook build"
   },
   "dependencies": {
-    "hain-tain-components": "^0.1.0",
-    "prettier": "^3.2.5",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "styled-components": "^6.1.8"
   },
   "devDependencies": {
+    "prettier": "^3.2.5",
     "@chromatic-com/storybook": "^1.3.3",
     "@storybook/addon-essentials": "^8.0.9",
     "@storybook/addon-interactions": "^8.0.9",
