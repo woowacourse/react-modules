@@ -11,9 +11,16 @@ const useValidation = () => {
     setErrorInfo(validationResult);
   };
 
+  const checkValidInput = (targetValue: string, validate: (value: string) => ValidationResult) => {
+    const validationResult = validate(targetValue);
+    updateValidationResult(validationResult);
+    return validationResult.isValid;
+  };
+
   return {
     errorInfo,
     updateValidationResult,
+    checkValidInput,
   };
 };
 

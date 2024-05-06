@@ -6,18 +6,15 @@ import useValidation from '../useValidation';
 
 const usePassword = (initialValue: string): UseCard => {
   const { value, setValue } = useInput(initialValue);
-  const { errorInfo, updateValidationResult } = useValidation();
+  const { errorInfo, checkValidInput } = useValidation();
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const validationResult = validateNumber(event.target.value);
-    updateValidationResult(validationResult);
-    if (!validationResult.isValid) return;
+    if (!checkValidInput(event.target.value, validateNumber)) return;
     setValue(event.target.value);
   };
 
   const handleBlur = (event: React.FocusEvent<HTMLInputElement, Element>) => {
-    const validationResult = validatePasswordFormat(event.target.value);
-    updateValidationResult(validationResult);
+    checkValidInput(event.target.value, validatePasswordFormat);
   };
 
   useEffect(() => {

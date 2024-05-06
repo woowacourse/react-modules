@@ -6,18 +6,15 @@ import useValidation from '../useValidation';
 
 const useCardHolder = (initialValue: string): UseCard => {
   const { value, setValue } = useInput(initialValue.toUpperCase());
-  const { errorInfo, updateValidationResult } = useValidation();
+  const { errorInfo, checkValidInput } = useValidation();
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const validationResult = validateEnglish(event.target.value);
-    updateValidationResult(validationResult);
-    if (!validationResult.isValid) return;
+    if (!checkValidInput(event.target.value, validateEnglish)) return;
     setValue(event.target.value.toUpperCase());
   };
 
   const handleBlur = (event: React.FocusEvent<HTMLInputElement, Element>) => {
-    const validationResult = validateCardHolderFormat(event.target.value);
-    updateValidationResult(validationResult);
+    checkValidInput(event.target.value, validateCardHolderFormat);
   };
 
   useEffect(() => {
