@@ -26,13 +26,22 @@ const meta = {
       control: { type: "radio" },
       description: "모달 컨테이너 위치",
     },
+    className: {
+      control: "text",
+      description: "모달 컨테이너의 클래스명",
+    },
+
+    zIndex: {
+      control: "number",
+      description: "모달 컨테이너의 z-index",
+    },
     customStyle: {
       control: "object",
       description: "모달 컨테이너 인라인 스타일",
     },
-    className: {
-      control: "text",
-      description: "모달 컨테이너의 클래스명",
+    portalRoot: {
+      control: ["HTMLElement", "null"],
+      description: "스크롤 막고자하는 요소",
     },
   },
   args: {
