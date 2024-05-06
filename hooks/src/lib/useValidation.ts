@@ -1,16 +1,25 @@
-import { useEffect, useState } from "react";
-import useInput from "./useInput";
+import { useState } from "react";
+import { ValidationType } from "./useInput";
 
-const useValidation = (inputs: ReturnType<typeof useInput>[]) => {
-  const [isValid, setIsValid] = useState(false);
+const useValidation = () => {
+  const [error, setError] = useState({
+    state: false,
+    message: "",
+  });
 
-  useEffect(() => {
-    const res = inputs.every(({ value, error }) => value !== "" && !error.state);
+  const validate = (value: string, validations: ValidationType[]) => {
+    const validationsResult = validations.find(({ validate }) => !validate(value));
 
-    setIsValid(res);
-  }, [...inputs.map(({ value }) => value), ...inputs.map(({ error }) => error)]);
+    if (validationsResult) {
+      setError({ state: true, message: validationsResult.message });
+      return false;
+    }
 
-  return isValid;
+    setError({ state: false, message: "" });
+    return true;
+  };
+
+  return { error, setError, validate };
 };
 
 export default useValidation;

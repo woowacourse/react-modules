@@ -1,4 +1,5 @@
-import { useRef, useState } from 'react';
+import { useRef, useState } from "react";
+import useValidation from "./useValidation";
 
 export interface ValidationType {
   validate: (value: string) => boolean;
@@ -13,25 +14,16 @@ interface UseInputProps {
 
 const useInput = ({ initialValue, inputValidations, preventInputValidations }: UseInputProps) => {
   const [value, setValue] = useState(initialValue);
-  const [error, setError] = useState({
-    state: false,
-    message: '',
-  });
+  const { error, setError, validate } = useValidation();
   const ref = useRef<HTMLInputElement>(null);
 
   const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>, maxLength?: number) => {
-    const preventInputValidationsResult = preventInputValidations && preventInputValidations.find(({ validate }) => !validate(e.target.value));
-    const inputValidationsResult = inputValidations.find(({ validate }) => !validate(e.target.value));
-
-    if (preventInputValidationsResult) {
-      setError({ state: true, message: preventInputValidationsResult.message });
+    if (preventInputValidations && !validate(e.target.value, preventInputValidations)) {
       return;
     }
 
-    if (inputValidationsResult) {
-      setError({ state: true, message: inputValidationsResult.message });
-    } else {
-      setError({ state: false, message: '' });
+    if (inputValidations) {
+      validate(e.target.value, inputValidations);
     }
 
     setValue(e.target.value);
@@ -44,12 +36,8 @@ const useInput = ({ initialValue, inputValidations, preventInputValidations }: U
   };
 
   const onBlurHandler = (e: React.FocusEvent<HTMLInputElement>) => {
-    const inputValidationsResult = inputValidations.find(({ validate }) => !validate(e.target.value));
-
-    if (inputValidationsResult) {
-      setError({ state: true, message: inputValidationsResult.message });
-    } else {
-      setError({ state: false, message: '' });
+    if (inputValidations) {
+      validate(e.target.value, inputValidations);
     }
   };
 
