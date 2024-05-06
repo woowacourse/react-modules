@@ -1,7 +1,6 @@
 import {
   CloseButton,
   Footer,
-  FooterButton,
   Header,
   Main,
   ModalOverlay,
@@ -12,19 +11,13 @@ import React, { useEffect, useRef } from 'react';
 
 export type ModalPositionType = 'center' | 'bottom';
 
-export interface ModalButtonType {
-  text: string;
-  style: 'primary' | 'secondary';
-  onClick: () => void;
-}
-
 export interface ModalProps {
   isOpen: boolean;
   position?: ModalPositionType;
   title: string;
   hasCloseButton?: boolean;
   children: React.ReactNode;
-  footerButtons?: ModalButtonType[];
+  footerButtons?: React.ReactNode[];
   onClose: () => void;
 }
 
@@ -41,7 +34,6 @@ export default function Modal({
 
   useEffect(() => {
     if (isOpen && modalRef.current) {
-      console.log('focus');
       modalRef.current?.focus();
     }
   }, [isOpen]);
@@ -87,21 +79,7 @@ export default function Modal({
 
         <Main>{children}</Main>
 
-        {footerButtons && (
-          <Footer>
-            {footerButtons.map((button, index) => {
-              return (
-                <FooterButton
-                  key={index}
-                  $style={button.style}
-                  onClick={button.onClick}
-                >
-                  {button.text}
-                </FooterButton>
-              );
-            })}
-          </Footer>
-        )}
+        {footerButtons && <Footer>{footerButtons}</Footer>}
       </ModalWrapper>
     </ModalOverlay>
   );

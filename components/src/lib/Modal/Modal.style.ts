@@ -1,7 +1,7 @@
+import { ModalPositionType } from './Modal';
 import styled from 'styled-components';
-import { ModalButtonType, ModalPositionType } from './Modal';
 
-const colors = {
+export const colors = {
   grey100: '#ffffff',
   grey200: '#8b95a1',
   grey300: '#666666',
@@ -86,18 +86,4 @@ export const Footer = styled.footer`
   display: flex;
   flex-direction: column;
   gap: 12px;
-`;
-
-export const FooterButton = styled.button<{ $style: ModalButtonType['style'] }>`
-  background: ${(props) => (props.$style === 'primary' ? colors.grey400 : colors.grey100)};
-  color: ${(props) => (props.$style === 'primary' ? colors.grey100 : colors.grey200)};
-  border-radius: 5px;
-  font-size: 15px;
-  font-weight: 700;
-  text-align: center;
-
-  &:hover {
-    background: ${(props) => (props.$style === 'primary' ? '#444444' : '#eeeeee')};
-    transition: 0.3s ease;
-  }
 `;
