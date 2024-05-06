@@ -1,5 +1,4 @@
 import useInput, { ValidationType } from "./useInput";
-import useValidation from "./useValidation";
 
 const PASSWORD_LENGTH = 2;
 
@@ -27,7 +26,7 @@ const useCardPassword = (initialValue = "") => {
   ];
 
   const cardPassword = useInput({ initialValue, inputValidations, preventInputValidations });
-  const isCardPasswordValid = useValidation([cardPassword]);
+  const isCardPasswordValid = cardPassword.value !== "" && !cardPassword.error.state;
 
   return { cardPassword, isCardPasswordValid };
 };

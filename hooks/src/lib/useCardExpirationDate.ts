@@ -60,7 +60,8 @@ const useCardExpirationDate = (initialValue: InitialValueType = ["", ""]) => {
     preventInputValidations,
   });
 
-  const isCardExpirationDateValid = !month.error.state && !year.error.state;
+  const isCardExpirationDateValid =
+    month.value !== "" && year.value !== "" && !month.error.state && !year.error.state;
 
   useEffect(() => {
     const date = new Date();

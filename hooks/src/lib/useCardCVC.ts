@@ -1,5 +1,4 @@
 import useInput, { ValidationType } from "./useInput";
-import useValidation from "./useValidation";
 
 const CVC_LENGTH = 3;
 
@@ -27,7 +26,7 @@ const useCardCVC = (initialValue = "") => {
   ];
 
   const cardCVC = useInput({ initialValue, inputValidations, preventInputValidations });
-  const isCardCVCValid = useValidation([cardCVC]);
+  const isCardCVCValid = cardCVC.value !== "" && !cardCVC.error.state;
 
   return { cardCVC, isCardCVCValid };
 };

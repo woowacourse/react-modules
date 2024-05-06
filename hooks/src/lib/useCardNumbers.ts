@@ -1,6 +1,5 @@
 import useInput, { ValidationType } from "./useInput";
 import useCardType from "./useCardType";
-import useValidation from "./useValidation";
 
 export const CARD_NUMBER_LENGTH = 4;
 
@@ -37,7 +36,7 @@ const useCardNumbers = (initialValue: InitialValueType = ["", "", "", ""]) => {
   ];
 
   const cardBrand = useCardType(cardNumbers.map(({ value }) => value));
-  const isCardNumbersValid = useValidation(cardNumbers);
+  const isCardNumbersValid = cardNumbers.every(({ value, error }) => value !== "" && !error.state);
 
   return { cardNumbers, cardBrand, isCardNumbersValid };
 };
