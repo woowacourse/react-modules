@@ -1,6 +1,6 @@
 import { renderHook } from "@testing-library/react";
 import { ChangeEvent, act } from "react";
-import useCardOwner from "./useCardOwner";
+import useCardOwner from "../lib/useCardOwner";
 
 describe("useCardOwner 테스트", () => {
   it.each([["12345"], ["호프짱"], ["!@#$^&"]])(
