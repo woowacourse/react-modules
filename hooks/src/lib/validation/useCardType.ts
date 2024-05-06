@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { CARD_CONFIG } from "./constants/cardInformation";
+import { CARD_CONFIG } from "../constants/cardInputInformation";
 
 type CardNumberName =
   | "cardNumber1"
