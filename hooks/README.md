@@ -54,7 +54,7 @@ return (
 
 ### 스크린샷
 
-![alt text](<스크린샷 2024-05-02 172940.png>)
+![alt text](https://i.imgur.com/fu1xegM.png)
 
 ### 특이사항
 
