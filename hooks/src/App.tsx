@@ -7,7 +7,7 @@ import {
   useCardPasswordValidation,
   useCardTypeValidation,
   useExpiryDateValidation,
-} from 'paran-fe-card-validation-hooks';
+} from 'fe-card-validation-hooks';
 
 function App() {
   const [cardHolder, setCardHolder] = useState('');
@@ -46,7 +46,7 @@ function App() {
           }}
         />
         {!holderValidationResult.isValid &&
-          holderValidationResult.errorMessage?.map((error, index) => (
+          holderValidationResult.errorMessages?.map((error, index) => (
             <p key={index} style={{ color: 'red' }}>
               {error}
             </p>
@@ -66,7 +66,7 @@ function App() {
         {numberValidationResults.map((result, index) => (
           <div key={index}>
             {!result.isValid &&
-              result.errorMessage?.map((error, idx) => (
+              result.errorMessages?.map((error, idx) => (
                 <p key={idx} style={{ color: 'red' }}>
                   {error}
                 </p>
@@ -82,11 +82,11 @@ function App() {
           maxLength={2}
           onChange={(e) => {
             setCardPassword(e.target.value);
-            handleCardPasswordChange(e.target.value);
+            handleCardPasswordChange(e.target.value, 2);
           }}
         />
         {!passwordValidationResult.isValid &&
-          passwordValidationResult.errorMessage?.map((error, index) => (
+          passwordValidationResult.errorMessages?.map((error, index) => (
             <p key={index} style={{ color: 'red' }}>
               {error}
             </p>
@@ -115,7 +115,7 @@ function App() {
           }}
         />
         {!cvcValidationResult.isValid &&
-          cvcValidationResult.errorMessage?.map((error, index) => (
+          cvcValidationResult.errorMessages?.map((error, index) => (
             <p key={index} style={{ color: 'red' }}>
               {error}
             </p>
@@ -133,7 +133,7 @@ function App() {
           }}
         />
         {!expiryValidationResult.isValidMonth &&
-          expiryValidationResult.monthErrorMessage?.map((error, index) => (
+          expiryValidationResult.monthErrorMessages?.map((error, index) => (
             <p key={index} style={{ color: 'red' }}>
               {error}
             </p>
@@ -149,7 +149,7 @@ function App() {
           }}
         />
         {!expiryValidationResult.isValidYear &&
-          expiryValidationResult.yearErrorMessage?.map((error, index) => (
+          expiryValidationResult.yearErrorMessages?.map((error, index) => (
             <p key={index} style={{ color: 'red' }}>
               {error}
             </p>
