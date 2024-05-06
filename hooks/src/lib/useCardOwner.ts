@@ -1,5 +1,5 @@
 import useInput, { ValidationType } from "./useInput";
-import useValid from "./useValid";
+import useValidation from "./useValidation";
 
 const isEnglish = (value: string) => {
   return /^[a-zA-Z ]*$/.test(value);
@@ -21,7 +21,7 @@ const useCardOwner = (initialValue = "") => {
   ];
 
   const cardOwner = useInput({ initialValue, inputValidations, preventInputValidations });
-  const isCardOwnerValid = useValid([cardOwner]);
+  const isCardOwnerValid = useValidation([cardOwner]);
 
   return { cardOwner, isCardOwnerValid };
 };
