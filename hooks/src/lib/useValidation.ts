@@ -1,14 +1,14 @@
 import { useEffect, useState } from "react";
 import useInput from "./useInput";
 
-const useValidation = (useInputs: ReturnType<typeof useInput>[]) => {
+const useValidation = (inputs: ReturnType<typeof useInput>[]) => {
   const [isValid, setIsValid] = useState(false);
 
   useEffect(() => {
-    const res = useInputs.every(({ value, error }) => value !== "" && !error.state);
+    const res = inputs.every(({ value, error }) => value !== "" && !error.state);
 
     setIsValid(res);
-  }, [...useInputs.map(({ value }) => value), ...useInputs.map(({ error }) => error)]);
+  }, [...inputs.map(({ value }) => value), ...inputs.map(({ error }) => error)]);
 
   return isValid;
 };
