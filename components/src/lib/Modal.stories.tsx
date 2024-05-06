@@ -1,4 +1,4 @@
-import { Modal, POSITIONS } from ".";
+import Modal, { POSITIONS } from "./Modal";
 import type { Meta, StoryObj } from "@storybook/react";
 import "../reset.css";
 import useModalState from "./useModalState";

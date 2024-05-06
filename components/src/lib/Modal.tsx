@@ -1,6 +1,8 @@
-import { Position } from "./Modal.d";
 import { ReactNode } from "react";
 import { css } from "@emotion/css";
+
+export const POSITIONS = ["top", "bottom", "center"] as const;
+export type Position = (typeof POSITIONS)[number];
 
 const ModalPositioner = ({ position, children }: { position: Position; children: ReactNode }) => {
   return <div className={css(modalContainerCSS, positionCSS[position])}>{children}</div>;
@@ -19,6 +21,13 @@ const ModalHeader = ({ title, close, onClose }: { title: string; close: boolean;
       )}
     </div>
   );
+};
+
+import { useState } from "react";
+
+const B = () => <M a={useState<boolean>(false)} />;
+const M = (a: ReturnType<typeof useState<boolean>>) => {
+  return <div>hi</div>;
 };
 
 const ModalContent = ({ description, children }: { description: string; children: ReactNode }) => {

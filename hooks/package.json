@@ -1,6 +1,6 @@
 {
   "name": "card-input-hooks",
-  "version": "0.0.4",
+  "version": "0.0.7",
   "description": "npm modules",
   "type": "module",
   "types": "dist/index.d.ts",
