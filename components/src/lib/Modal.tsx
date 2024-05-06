@@ -1,6 +1,6 @@
 import classnames from "classnames";
-import useModalContext, { ModalContext } from "./hooks/useModalContext";
-import useKeyDown from "./hooks/useKeyDown";
+import { useModalContext, ModalContext } from "./hooks/useModalContext";
+import { useKeyDown } from "./hooks/useKeyDown";
 import {
   ModalButtonProps,
   ModalCloseButtonProps,
@@ -18,14 +18,12 @@ interface IModal extends React.FC<ModalMainProps> {
   Button: React.FC<ModalButtonProps>;
 }
 
-const Modal: IModal = Object.assign(ModalMain, {
+export const Modal: IModal = Object.assign(ModalMain, {
   Dimmer: ModalDimmer,
   Content: ModalContent,
   CloseButton: ModalCloseButton,
   Button: ModalButton,
 });
-
-export default Modal;
 
 function ModalMain({ children, isOpen, onClose }: ModalMainProps) {
   useKeyDown("Escape", onClose);

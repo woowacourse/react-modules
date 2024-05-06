@@ -1,5 +1,5 @@
 import { useState } from "react";
-import useValidation, { IErrorStatus } from "../useValidation";
+import { useValidation, IErrorStatus } from "../useValidation";
 
 interface UseExpiryDateReturn {
   expiryMonth: string;
@@ -10,7 +10,7 @@ interface UseExpiryDateReturn {
   expiryYearErrorStatus: IErrorStatus;
 }
 
-export default function useExpiryDate(): UseExpiryDateReturn {
+export function useExpiryDate(): UseExpiryDateReturn {
   const [expiryMonthValue, setExpiryMonthValue] = useState("");
   const { errorStatus: expiryMonthErrorStatus, validateValue: validateExpiryMonth } =
     useValidation(validateMonth);

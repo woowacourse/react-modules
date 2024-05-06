@@ -1,5 +1,5 @@
 import { useState } from "react";
-import useValidation, { IErrorStatus } from "../useValidation";
+import { useValidation, IErrorStatus } from "../useValidation";
 
 interface UseCardIssuerReturn {
   cardIssuer: string;
@@ -7,7 +7,7 @@ interface UseCardIssuerReturn {
   errorStatus: IErrorStatus;
 }
 
-export default function useCardIssuer(): UseCardIssuerReturn {
+export function useCardIssuer(): UseCardIssuerReturn {
   const [value, setValue] = useState("");
   const { errorStatus, validateValue } = useValidation(validateCardIssuer);
 

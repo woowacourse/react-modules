@@ -5,7 +5,7 @@ interface IUseValidationReturn {
   validateValue: (value: string) => void;
 }
 
-export default function useValidation(validator: Validator): IUseValidationReturn {
+export function useValidation(validator: Validator): IUseValidationReturn {
   const [errorStatus, setErrorStatus] = useState<IErrorStatus>({
     isError: false,
     errorMessage: null,

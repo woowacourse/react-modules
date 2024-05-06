@@ -1,5 +1,5 @@
 import { useState } from "react";
-import useValidation, { IErrorStatus } from "../useValidation";
+import { useValidation, IErrorStatus } from "../useValidation";
 
 interface UseCardNumberReturn {
   cardNumber: [string, string, string, string];
@@ -7,7 +7,7 @@ interface UseCardNumberReturn {
   errorStatus: [IErrorStatus, IErrorStatus, IErrorStatus, IErrorStatus];
 }
 
-export default function useCardNumber(): UseCardNumberReturn {
+export function useCardNumber(): UseCardNumberReturn {
   const [firstPart, setFirstPart] = useState("");
   const [secondPart, setSecondPart] = useState("");
   const [thirdPart, setThirdPart] = useState("");
