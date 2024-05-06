@@ -52,38 +52,36 @@ const Modal = ({
   };
 
   return isOpen ? (
-    <>
-      <div className={css(dimmedCSS)} onClick={handleClickDimmed}>
-        <div className={css(modalContainerCSS, positionCSS[position])}>
-          <div className={css(headerContainerCSS)}>
-            <h2 className={css(titleCSS)}>{title}</h2>
-            {close && (
-              <button className={css(closeButtonCSS)} onClick={handleClose}>
-                ×
+    <div className={css(dimmedCSS)} onClick={handleClickDimmed}>
+      <div className={css(modalContainerCSS, positionCSS[position])}>
+        <div className={css(headerContainerCSS)}>
+          <h2 className={css(titleCSS)}>{title}</h2>
+          {close && (
+            <button className={css(closeButtonCSS)} onClick={handleClose}>
+              ×
+            </button>
+          )}
+        </div>
+        <div>
+          <p className={css(descriptionCSS)}>{description}</p>
+        </div>
+        {children && <div>{children}</div>}
+        {(confirmLabel || cancelLabel) && (
+          <div className={css(buttonContainerCSS)}>
+            {confirmLabel && (
+              <button className={css(buttonCSS, confirmButtonCSS)} onClick={handleConfirm}>
+                {confirmLabel}
+              </button>
+            )}
+            {cancelLabel && (
+              <button className={css(buttonCSS, cancelButtonCSS)} onClick={handleClose}>
+                {cancelLabel}
               </button>
             )}
           </div>
-          <div>
-            <p className={css(descriptionCSS)}>{description}</p>
-          </div>
-          {children && <div>{children}</div>}
-          {(confirmLabel || cancelLabel) && (
-            <div className={css(buttonContainerCSS)}>
-              {confirmLabel && (
-                <button className={css(buttonCSS, confirmButtonCSS)} onClick={handleConfirm}>
-                  {confirmLabel}
-                </button>
-              )}
-              {cancelLabel && (
-                <button className={css(buttonCSS, cancelButtonCSS)} onClick={handleClose}>
-                  {cancelLabel}
-                </button>
-              )}
-            </div>
-          )}
-        </div>
+        )}
       </div>
-    </>
+    </div>
   ) : null;
 };
 
