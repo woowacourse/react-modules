@@ -62,7 +62,7 @@ const Modal = ({
           <p className={css(descriptionCSS)}>{description}</p>
         </div>
         {children && <div>{children}</div>}
-        {confirmLabel && cancelLabel && (
+        {(confirmLabel || cancelLabel) && (
           <div className={css(buttonContainerCSS)}>
             {confirmLabel && (
               <button className={css(buttonCSS, confirmButtonCSS)} onClick={handleConfirm}>
