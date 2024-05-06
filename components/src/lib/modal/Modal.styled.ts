@@ -1,43 +1,43 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const ModalBackdrop = styled.div`
   position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  inset: 0;
   background-color: rgba(0, 0, 0, 0.5);
   display: flex;
   justify-content: center;
   align-items: center;
 `;
 
-export const ModalWrapper = styled.section<{
-  position: "top" | "center" | "bottom";
+export const ModalContentWrapper = styled.div<{
+  $position: 'top' | 'center' | 'bottom';
 }>`
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
   position: fixed;
+  height: fit-content;
   left: 50%;
   transform: translateX(-50%);
   margin: 0;
-  padding: 0;
+  padding: 24px 32px 24px 32px;
   background-color: white;
-  height: fit-content;
   box-sizing: border-box;
   border: none;
 
-  ${({ position }) => {
-    switch (position) {
-      case "top":
+  ${({ $position }) => {
+    switch ($position) {
+      case 'top':
         return `
           top: 0;
           transform: translate(-50%, 0%);
         `;
-      case "bottom":
+      case 'bottom':
         return `
           bottom: 0;
           transform: translate(-50%, 0%);
         `;
-      case "center":
+      case 'center':
         return `
           top: 50%;
           transform: translate(-50%, -50%);
@@ -51,6 +51,54 @@ export const ModalHeader = styled.header`
   margin: 0;
   justify-content: space-between;
   align-items: center;
-  padding: 0 1rem;
   font-weight: bold;
+`;
+
+interface ModalTitleProps {
+  fontSize?: string;
+  fontWeight?: string;
+}
+
+export const ModalTitle = styled.span<ModalTitleProps>`
+  font-size: ${({ fontSize }) => fontSize || '18px'};
+  font-weight: ${({ fontWeight }) => fontWeight || 700};
+`;
+
+export const ModalIconButton = styled.button<{ imgSize?: string }>`
+  padding: 0;
+  border: none;
+  &:focus {
+    outline: none;
+  }
+  img {
+    width: ${({ imgSize }) => imgSize || '16px'};
+  }
+`;
+
+interface ModalTextButtonProps {
+  buttonSize?: string;
+  fontSize?: string;
+  backgroudColor?: string;
+  color?: string;
+}
+
+export const ModalTextButton = styled.button<ModalTextButtonProps>`
+  width: ${({ buttonSize }) => buttonSize || '100%'};
+  padding: 10px;
+  border: none;
+  border-radius: 0;
+  &:focus {
+    outline: none;
+  }
+  color: ${({ color }) => color || '#FFFFFF'};
+  background-color: ${({ backgroudColor }) => backgroudColor || '#333333'};
+  font-size: ${({ fontSize }) => fontSize || '15px'};
+`;
+
+interface ModalContentProps {
+  fontSize?: string;
+}
+
+export const ModalContent = styled.section<ModalContentProps>`
+  font-size: ${({ fontSize }) => fontSize || '15px'};
 `;

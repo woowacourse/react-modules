@@ -13,11 +13,12 @@ export interface ModalProps extends React.PropsWithChildren {
 }
 
 const Modal: React.FC<ModalProps> & {
-  ModalHeader: ModalHeaderType;
-  ModalTitle: ModalTitleType;
-  ModalCloseButton: ModalCloseButtonType;
-  ModalContent: ModalContentType;
-  ModalFooter: ModalFooterType;
+  Header: ModalHeaderType;
+  Title: ModalTitleType;
+  IconButton: ModalIconButtonType;
+  TextButton: ModalTextButtonType;
+  Content: ModalContentType;
+  Footer: ModalFooterType;
 } = ({ children, isOpen, onClose, position, ...restProps }) => {
   const modalRef = useRef(null);
 
@@ -55,15 +56,48 @@ type ModalTitleType = React.FC<
 >;
 
 const ModalTitle: ModalTitleType = ({ children, ...restProps }) => {
-  return <span {...restProps}>{children}</span>;
+  return <Styled.ModalTitle {...restProps}>{children}</Styled.ModalTitle>;
 };
 
-type ModalCloseButtonType = React.FC<
-  React.PropsWithChildren<HTMLAttributes<HTMLButtonElement>>
+type ModalIconButtonType = React.FC<
+  React.PropsWithChildren<
+    { src: string; imgSize?: string } & HTMLAttributes<HTMLButtonElement>
+  >
 >;
 
-const ModalCloseButton: ModalCloseButtonType = ({ children, ...restProps }) => {
-  return <button {...restProps}>{children}</button>;
+const ModalIconButton: ModalIconButtonType = ({
+  src,
+  imgSize,
+  ...restProps
+}) => {
+  return (
+    <Styled.ModalIconButton {...restProps}>
+      <img src={src} style={{ width: imgSize }} />
+    </Styled.ModalIconButton>
+  );
+};
+
+type ModalTextButtonType = React.FC<
+  React.PropsWithChildren<
+    {
+      buttonSize?: string;
+      fontSize?: string;
+    } & HTMLAttributes<HTMLButtonElement>
+  >
+>;
+
+const ModalTextButton: ModalTextButtonType = ({
+  buttonSize,
+  fontSize,
+  ...restProps
+}) => {
+  return (
+    <Styled.ModalTextButton
+      buttonSize={buttonSize}
+      fontSize={fontSize}
+      {...restProps}
+    ></Styled.ModalTextButton>
+  );
 };
 
 type ModalContentType = React.FC<
@@ -71,7 +105,7 @@ type ModalContentType = React.FC<
 >;
 
 const ModalContent: ModalContentType = ({ children, ...restProps }) => {
-  return <section {...restProps}>{children}</section>;
+  return <Styled.ModalContent {...restProps}>{children}</Styled.ModalContent>;
 };
 
 type ModalFooterType = React.FC<
@@ -82,10 +116,11 @@ const ModalFooter: ModalFooterType = ({ children, ...restProps }) => {
   return <footer {...restProps}>{children}</footer>;
 };
 
-Modal.ModalHeader = ModalHeader;
-Modal.ModalTitle = ModalTitle;
-Modal.ModalCloseButton = ModalCloseButton;
-Modal.ModalContent = ModalContent;
-Modal.ModalFooter = ModalFooter;
+Modal.Header = ModalHeader;
+Modal.Title = ModalTitle;
+Modal.IconButton = ModalIconButton;
+Modal.TextButton = ModalTextButton;
+Modal.Content = ModalContent;
+Modal.Footer = ModalFooter;
 
 export default Modal;
