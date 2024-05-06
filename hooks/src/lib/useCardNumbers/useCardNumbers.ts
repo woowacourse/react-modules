@@ -24,7 +24,6 @@ export const DEFAULT_PARAMS = {
   initialValue: [],
   errorMessages: {
     inputType: '카드 번호는 각 자릿수에 맞춰 숫자로만 입력해 주세요.',
-    inputLength: (length: number) => `해당 입력 필드에는 ${length}자리의 숫자로 입력해 주세요.`,
     allowedLengthOutOfRange: `[ERROR] 카드 번호는 총합 ${TOTAL_CARD_NUMBERS_LENGTH}자리 이내로만 설정 가능합니다. 다시 확인해 주세요.`,
   },
 };
@@ -65,7 +64,11 @@ export default function useCardNumbers(
 }
 
 function useCardNumberState(format: number[], initialValues: string[]) {
-  const initialCardNumbers = initialValues.length ? initialValues : Array(format.length).fill('');
+  const initialCardNumbers = Array.from(
+    { length: format.length },
+    (_, index) => initialValues[index] || '',
+  );
+
   const [cardNumbers, setCardNumbers] = useState(initialCardNumbers);
 
   const updateCardNumber = (inputIndex: number, value: string) => {
@@ -79,9 +82,10 @@ function useCardNumberState(format: number[], initialValues: string[]) {
 }
 
 function useCardNumberValidState(format: number[], initialValues: string[]) {
-  const initialValidStates: CardNumbersValidState[] = initialValues.length
-    ? initialValues.map((value, index) => validateCardNumber(value, format[index]))
-    : Array(format.length).fill(null);
+  const initialValidStates: CardNumbersValidState[] = Array.from(
+    { length: format.length },
+    (_, index) => validateCardNumber(initialValues[index], format[index]),
+  );
 
   const [validStates, setValidStates] = useState(initialValidStates);
 
@@ -116,6 +120,6 @@ function getValidationResult(
 }
 
 function validateCardNumber(cardNumber: string, partLength: number) {
-  if (!cardNumber.length) return null;
+  if (!cardNumber || !cardNumber.length) return null;
   return Validation.isNumeric(cardNumber) && Validation.hasLength(cardNumber, partLength);
 }

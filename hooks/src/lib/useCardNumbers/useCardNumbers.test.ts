@@ -151,4 +151,22 @@ describe('useCardNumbers', () => {
       errorMessage: DEFAULT_PARAMS.errorMessages.inputType,
     });
   });
+
+  it('주어진 format의 길이보다 짧은 길이의 카드 번호 배열이 초기값으로 설정된 경우, cardNumbers에는 나머지의 각 자리에 빈 문자열("")이 입력되고 validStates에는 해당 자리에 각각 null이 입력되어야 한다.', () => {
+    const newFormat = [4, 6, 5];
+    const newCardNumbers = ['1234'];
+    const { result } = renderHook(() => useCardNumbers(newFormat, newCardNumbers));
+
+    expect(result.current.cardNumbers).toEqual(['1234', '', '']);
+    expect(result.current.validStates).toEqual([true, null, null]);
+  });
+
+  it('주어진 format의 길이보다 긴 길이의 카드 번호 배열이 초기값으로 설정된 경우, cardNumbers와 validStates에는 format의 길이를 기준으로 앞에서 split된 초기값만 반영된 결과가 입력되어야 한다.', () => {
+    const newFormat = [4, 6, 5];
+    const newCardNumbers = ['1234', '56789a', '12345', '678'];
+    const { result } = renderHook(() => useCardNumbers(newFormat, newCardNumbers));
+
+    expect(result.current.cardNumbers).toEqual(['1234', '56789a', '12345']);
+    expect(result.current.validStates).toEqual([true, false, true]);
+  });
 });
