@@ -11,7 +11,7 @@ describe("useCardUserName 커스텀 훅 테스트", () => {
     const { result } = renderHook(() => useCardUserName(cardUserNameLength));
 
     act(() => {
-      result.current.handleCardUserName({
+      result.current.onChangeCardUserName({
         target: { value: cardUserName },
       } as ChangeEvent<HTMLInputElement>);
     });
@@ -24,7 +24,7 @@ describe("useCardUserName 커스텀 훅 테스트", () => {
     const { result } = renderHook(() => useCardUserName(cardUserNameLength));
 
     act(() => {
-      result.current.handleCardUserName({
+      result.current.onChangeCardUserName({
         target: { value: cardUserName },
       } as ChangeEvent<HTMLInputElement>);
     });
@@ -38,7 +38,7 @@ describe("useCardUserName 커스텀 훅 테스트", () => {
     const { result } = renderHook(() => useCardUserName(cardUserNameLength));
 
     act(() => {
-      result.current.handleCardUserName({
+      result.current.onChangeCardUserName({
         target: { value: cardUserNameOverLength },
       } as ChangeEvent<HTMLInputElement>);
     });
@@ -54,7 +54,7 @@ describe("useCardUserName 커스텀 훅 테스트", () => {
     const { result } = renderHook(() => useCardUserName(cardUserNameLength));
 
     act(() => {
-      result.current.handleCardUserName({
+      result.current.onChangeCardUserName({
         target: { value: emptyCardUserName },
       } as ChangeEvent<HTMLInputElement>);
     });
@@ -70,7 +70,7 @@ describe("useCardUserName 커스텀 훅 테스트", () => {
     const { result } = renderHook(() => useCardUserName(cardUserNameLength));
 
     act(() => {
-      result.current.handleCardUserName({
+      result.current.onChangeCardUserName({
         target: { value: mixedCardUserName },
       } as ChangeEvent<HTMLInputElement>);
     });

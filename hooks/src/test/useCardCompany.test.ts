@@ -10,7 +10,7 @@ describe("useCardCompany 커스텀 훅 테스트", () => {
     const { result } = renderHook(() => useCardCompany());
 
     act(() => {
-      result.current.handleCardCompany(
+      result.current.onChangeCardCompany(
         {
           target: { value: defaultValue },
         } as ChangeEvent<HTMLSelectElement>,
@@ -29,7 +29,7 @@ describe("useCardCompany 커스텀 훅 테스트", () => {
     const cardCompany = "올리뱅크";
 
     act(() => {
-      result.current.handleCardCompany(
+      result.current.onChangeCardCompany(
         {
           target: { value: cardCompany },
         } as ChangeEvent<HTMLSelectElement>,
@@ -46,7 +46,7 @@ describe("useCardCompany 커스텀 훅 테스트", () => {
     const cardCompany = "썬데이뱅크";
 
     act(() => {
-      result.current.handleCardCompany(
+      result.current.onChangeCardCompany(
         {
           target: { value: cardCompany },
         } as ChangeEvent<HTMLSelectElement>,

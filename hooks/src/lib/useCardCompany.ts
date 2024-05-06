@@ -15,7 +15,7 @@ const useCardCompany = () => {
     errorMessages: [],
   });
 
-  const handleCardCompany = (
+  const onChangeCardCompany = (
     event: ChangeEvent<HTMLSelectElement>,
     defaultValue: string
   ) => {
@@ -35,7 +35,7 @@ const useCardCompany = () => {
 
   return {
     cardCompanyInfo,
-    handleCardCompany,
+    onChangeCardCompany,
   };
 };
 

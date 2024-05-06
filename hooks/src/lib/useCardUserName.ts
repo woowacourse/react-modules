@@ -18,7 +18,7 @@ const useCardUserName = (cardUserNameLength: number) => {
     errorMessages: [],
   });
 
-  const handleCardUserName = (event: ChangeEvent<HTMLInputElement>) => {
+  const onChangeCardUserName = (event: ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target;
     const errorMessages: string[] = [];
 
@@ -43,7 +43,7 @@ const useCardUserName = (cardUserNameLength: number) => {
 
   return {
     cardUserNameInfo,
-    handleCardUserName,
+    onChangeCardUserName: onChangeCardUserName,
   };
 };
 

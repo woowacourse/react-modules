@@ -11,7 +11,7 @@ describe("useCardCVC 커스텀 훅 테스트", () => {
     const { result } = renderHook(() => useCardCVC(cardCVCLength));
 
     act(() => {
-      result.current.handleCardCVC({
+      result.current.onChangeCardCVC({
         target: { value: CVCNotOnlyNumber },
       } as ChangeEvent<HTMLInputElement>);
     });
@@ -27,7 +27,7 @@ describe("useCardCVC 커스텀 훅 테스트", () => {
     const { result } = renderHook(() => useCardCVC(cardCVCLength));
 
     act(() => {
-      result.current.handleCardCVC({
+      result.current.onChangeCardCVC({
         target: { value: CVCOverLength },
       } as ChangeEvent<HTMLInputElement>);
     });
@@ -43,7 +43,7 @@ describe("useCardCVC 커스텀 훅 테스트", () => {
     const { result } = renderHook(() => useCardCVC(cardCVCLength));
 
     act(() => {
-      result.current.handleCardCVC({
+      result.current.onChangeCardCVC({
         target: { value: CVCUnderLength },
       } as ChangeEvent<HTMLInputElement>);
     });
@@ -59,7 +59,7 @@ describe("useCardCVC 커스텀 훅 테스트", () => {
     const CVC = "123";
 
     act(() => {
-      result.current.handleCardCVC({
+      result.current.onChangeCardCVC({
         target: { value: CVC },
       } as ChangeEvent<HTMLInputElement>);
     });

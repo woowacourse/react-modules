@@ -9,7 +9,7 @@ describe("useCardExpiration 커스텀 훅 테스트", () => {
     const { result } = renderHook(() => useCardExpiration());
 
     act(() => {
-      result.current.handleCardExpirationMM({
+      result.current.onChangeCardExpirationMM({
         target: { value: september },
       } as ChangeEvent<HTMLInputElement>);
     });
@@ -24,7 +24,7 @@ describe("useCardExpiration 커스텀 훅 테스트", () => {
     const { result } = renderHook(() => useCardExpiration());
 
     act(() => {
-      result.current.handleCardExpirationYY({
+      result.current.onChangeCardExpirationYY({
         target: { value: year2023 },
       } as ChangeEvent<HTMLInputElement>);
     });
@@ -39,7 +39,7 @@ describe("useCardExpiration 커스텀 훅 테스트", () => {
     const { result } = renderHook(() => useCardExpiration());
 
     act(() => {
-      result.current.handleCardExpirationMM({
+      result.current.onChangeCardExpirationMM({
         target: { value: invalidMonth },
       } as ChangeEvent<HTMLInputElement>);
     });
@@ -55,7 +55,7 @@ describe("useCardExpiration 커스텀 훅 테스트", () => {
     const { result } = renderHook(() => useCardExpiration());
 
     act(() => {
-      result.current.handleCardExpirationMM({
+      result.current.onChangeCardExpirationMM({
         target: { value: invalidMonthFormat },
       } as ChangeEvent<HTMLInputElement>);
     });
@@ -72,12 +72,12 @@ describe("useCardExpiration 커스텀 훅 테스트", () => {
     const { result } = renderHook(() => useCardExpiration());
 
     act(() => {
-      result.current.handleCardExpirationMM({
+      result.current.onChangeCardExpirationMM({
         target: { value: december },
       } as ChangeEvent<HTMLInputElement>);
     });
     act(() => {
-      result.current.handleCardExpirationYY({
+      result.current.onChangeCardExpirationYY({
         target: { value: year2024 },
       } as ChangeEvent<HTMLInputElement>);
     });

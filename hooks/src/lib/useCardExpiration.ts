@@ -111,8 +111,8 @@ const useCardExpiration = () => {
 
   return {
     cardExpirationInfo,
-    handleCardExpirationMM: handleCardExpirationChange("MM"),
-    handleCardExpirationYY: handleCardExpirationChange("YY"),
+    onChangeCardExpirationMM: handleCardExpirationChange("MM"),
+    onChangeCardExpirationYY: handleCardExpirationChange("YY"),
   };
 };
 

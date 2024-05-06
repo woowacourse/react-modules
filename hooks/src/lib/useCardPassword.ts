@@ -18,7 +18,7 @@ const useCardPassword = (cardPasswordLength: number) => {
     errorMessages: [],
   });
 
-  const handleCardPassword = (event: ChangeEvent<HTMLInputElement>) => {
+  const onChangeCardPassword = (event: ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target;
     const errorMessages: string[] = [];
 
@@ -46,7 +46,7 @@ const useCardPassword = (cardPasswordLength: number) => {
 
   return {
     cardPasswordInfo,
-    handleCardPassword,
+    onChangeCardPassword: onChangeCardPassword,
   };
 };
 

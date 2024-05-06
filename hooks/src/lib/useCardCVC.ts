@@ -18,7 +18,7 @@ const useCardCVC = (cardCVCLength: number) => {
     errorMessages: [],
   });
 
-  const handleCardCVC = (event: ChangeEvent<HTMLInputElement>) => {
+  const onChangeCardCVC = (event: ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target;
     const errorMessages: string[] = [];
 
@@ -41,7 +41,7 @@ const useCardCVC = (cardCVCLength: number) => {
 
   return {
     cardCVCInfo,
-    handleCardCVC,
+    onChangeCardCVC,
   };
 };
 

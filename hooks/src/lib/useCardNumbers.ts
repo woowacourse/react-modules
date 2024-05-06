@@ -18,7 +18,7 @@ const useCardNumbers = (cardNumberLength: number) => {
     errorMessages: [],
   });
 
-  const handleCardNumbers = (event: ChangeEvent<HTMLInputElement>) => {
+  const onChangeCardNumbers = (event: ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target;
     const errorMessages: string[] = [];
 
@@ -46,7 +46,7 @@ const useCardNumbers = (cardNumberLength: number) => {
 
   return {
     cardNumberInfo,
-    handleCardNumbers: handleCardNumbers,
+    onChangeCardNumbers: onChangeCardNumbers,
   };
 };
 

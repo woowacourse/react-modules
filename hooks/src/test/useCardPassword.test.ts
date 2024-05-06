@@ -10,7 +10,7 @@ describe("useCardPassword 커스텀 훅 테스트", () => {
     const { result } = renderHook(() => useCardPassword(passwordLength));
 
     act(() => {
-      result.current.handleCardPassword({
+      result.current.onChangeCardPassword({
         target: { value: password },
       } as ChangeEvent<HTMLInputElement>);
     });
@@ -23,7 +23,7 @@ describe("useCardPassword 커스텀 훅 테스트", () => {
     const { result } = renderHook(() => useCardPassword(passwordLength));
 
     act(() => {
-      result.current.handleCardPassword({
+      result.current.onChangeCardPassword({
         target: { value: password },
       } as ChangeEvent<HTMLInputElement>);
     });
@@ -36,7 +36,7 @@ describe("useCardPassword 커스텀 훅 테스트", () => {
     const { result } = renderHook(() => useCardPassword(passwordLength));
 
     act(() => {
-      result.current.handleCardPassword({
+      result.current.onChangeCardPassword({
         target: { value: passwordOverLength },
       } as ChangeEvent<HTMLInputElement>);
     });

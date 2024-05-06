@@ -13,7 +13,7 @@ describe("useCardNumber 커스텀 훅 테스트", () => {
       target: { value: cardNumber },
     };
     act(() => {
-      result.current.handleCardNumbers(
+      result.current.onChangeCardNumbers(
         mockEvent as ChangeEvent<HTMLInputElement>
       );
     });
@@ -30,7 +30,7 @@ describe("useCardNumber 커스텀 훅 테스트", () => {
       target: { value: numbersOverSixteenLength },
     };
     act(() => {
-      result.current.handleCardNumbers(
+      result.current.onChangeCardNumbers(
         mockEvent as ChangeEvent<HTMLInputElement>
       );
     });
@@ -49,7 +49,7 @@ describe("useCardNumber 커스텀 훅 테스트", () => {
       target: { value: numbersUnderSixteenLength },
     };
     act(() => {
-      result.current.handleCardNumbers(
+      result.current.onChangeCardNumbers(
         mockEvent as ChangeEvent<HTMLInputElement>
       );
     });
@@ -68,7 +68,7 @@ describe("useCardNumber 커스텀 훅 테스트", () => {
       target: { value: notNumericValue },
     };
     act(() => {
-      result.current.handleCardNumbers(
+      result.current.onChangeCardNumbers(
         mockEvent as ChangeEvent<HTMLInputElement>
       );
     });
