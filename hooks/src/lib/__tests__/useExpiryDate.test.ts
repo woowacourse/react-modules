@@ -1,6 +1,8 @@
 import { renderHook, act } from "@testing-library/react";
 import useExpiryDate from "../hooks/useExpiryDate";
+
 import { ERROR_MESSAGES } from "../constants/messages";
+import { PeriodType } from "../hooks/useExpiryDate";
 
 describe("useExpiryDate 테스트", () => {
   test("초기 period 상태는 month와 year이 빈 문자열이어야 한다.", () => {
@@ -19,7 +21,7 @@ describe("useExpiryDate 테스트", () => {
     ["year", "2024", ERROR_MESSAGES.year],
   ])(
     `입력한 %s (%s)가 유효한 입력이 아닐 경우, 에러 메시지("%s")가 표시된다.`,
-    (type: "month" | "year", input: string, message: string) => {
+    (type: PeriodType, input: string, message: string) => {
       const { result } = renderHook(() => useExpiryDate());
 
       act(() => {

@@ -3,6 +3,8 @@ import { useState } from "react";
 import { INPUT_REGEX } from "../constants/regex";
 import { ERROR_MESSAGES } from "../constants/messages";
 
+export type PeriodType = "month" | "year";
+
 function useExpiryDate() {
   const [period, setPeriod] = useState({ month: "", year: "" });
   const [isPeriodError, setIsPeriodError] = useState({
@@ -11,7 +13,7 @@ function useExpiryDate() {
     expired: false,
   });
 
-  const validatePeriod = (value: string, type: "month" | "year") => {
+  const validatePeriod = (value: string, type: PeriodType) => {
     const regex =
       type === "month" ? INPUT_REGEX.period.month : INPUT_REGEX.period.year;
     return regex.test(value);
@@ -29,7 +31,7 @@ function useExpiryDate() {
     );
   };
 
-  const handlePeriodChange = (type: "month" | "year", value: string) => {
+  const handlePeriodChange = (type: PeriodType, value: string) => {
     const newPeriod = { ...period, [type]: value };
     setPeriod(newPeriod);
 
