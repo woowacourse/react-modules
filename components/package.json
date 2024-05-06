@@ -1,12 +1,16 @@
 {
   "name": "badahertz52-react-modules-components",
-  "version": "0.0.5",
+  "version": "0.0.8",
   "description": "createPortal을 사용한 모달 모듈 제공",
   "keywords": [
     "modal",
     "createPortal",
     "react"
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/BadaHertz52/react-modules/tree/step1/components"
+  },
   "type": "module",
   "types": "dist/index.d.ts",
   "main": "dist/index.js",
