@@ -2,7 +2,6 @@ import { Meta, StoryObj } from '@storybook/react';
 import React, { useState } from 'react';
 import Modal from '../lib/Modal';
 import Button from '../Button';
-import '../index.css';
 
 const meta = {
   title: 'Modal/Center',
