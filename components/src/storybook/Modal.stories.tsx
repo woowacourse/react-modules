@@ -56,6 +56,7 @@ const DEFAULT_PROPS_OBJ = {
   children: <Component />,
   confirmMessage: "동의하고 계속하기",
   cancelMessage: "닫기",
+  theme: "light",
   onConfirm: () => console.log("확인"),
   onClose: () => console.log("닫기"),
 } as const;
@@ -94,5 +95,15 @@ export const CustomWidth: Story = {
   args: {
     ...DEFAULT_PROPS_OBJ,
     width: 555,
+  },
+};
+
+export const Theme: Story = {
+  name: "다크모드일 경우",
+  args: {
+    ...DEFAULT_PROPS_OBJ,
+    hasConfirmButton: true,
+    closeButtonPosition: "bottom",
+    theme: "dark",
   },
 };
