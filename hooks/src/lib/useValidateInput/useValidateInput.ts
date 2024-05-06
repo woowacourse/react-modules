@@ -11,7 +11,7 @@ export interface ValidateResult {
   errorMessage: string;
 }
 
-const useCardValidate = ({
+const useValidateInput = ({
   initValue,
   validateOnChange,
   validateOnBlur,
@@ -59,4 +59,4 @@ const useCardValidate = ({
     onFocusHandler,
   };
 };
-export default useCardValidate;
+export default useValidateInput;

@@ -1,5 +1,5 @@
 import { isOnlyEnglishWithOneSpace } from '../utils/validateCardInfo';
-import useCardValidate from '../useValidateInput/useValidateInput';
+import useValidateInput from '../useValidateInput/useValidateInput';
 
 const useCardHolderName = (initValue: string, maxLength: number = 50) => {
   const validateOnChange = (newValue: string) => {
@@ -30,7 +30,7 @@ const useCardHolderName = (initValue: string, maxLength: number = 50) => {
     onChangeHandler,
     onFocusHandler,
     onBlurHandler,
-  } = useCardValidate({
+  } = useValidateInput({
     initValue,
     validateOnChange,
     validateOnBlur,

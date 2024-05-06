@@ -1,5 +1,5 @@
 import { isOnlyNumber } from '../utils/validateCardInfo';
-import useCardArrayValidate from '../useValidateArrayInput/useValidateArrayInput';
+import useValidateArrayInput from '../useValidateArrayInput/useValidateArrayInput';
 
 const useCardNumbers = (initValue: string[], maxLength: number = 4) => {
   const validateOnChange = (newValue: string) => {
@@ -18,7 +18,7 @@ const useCardNumbers = (initValue: string[], maxLength: number = 4) => {
     return { isValid: true, errorMessage: '' };
   };
 
-  const validateOnBlur = () => {
+  const validateOnBlurAll = () => {
     const currentValuesLength = values.join('').length;
     const requiredLength = maxLength * initValue.length;
 
@@ -38,10 +38,10 @@ const useCardNumbers = (initValue: string[], maxLength: number = 4) => {
     onChangeHandler,
     onFocusHandler,
     onBlurHandler,
-  } = useCardArrayValidate({
+  } = useValidateArrayInput({
     initValue,
     validateOnChange,
-    validateOnBlur,
+    validateOnBlurAll,
   });
 
   return {

@@ -1,9 +1,9 @@
-import useCardValidate, { ValidateResult } from './useValidateInput';
+import useValidateInput, { ValidateResult } from './useValidateInput';
 
 import { act } from 'react';
 import { renderHook } from '@testing-library/react';
 
-describe('useCardValidate custom hook 테스트', () => {
+describe('useValidateInput custom hook 테스트', () => {
   let validateOnChangeMock: jest.Mock<ValidateResult, [string]>;
   let validateOnBlurMock: jest.Mock<ValidateResult, []>;
 
@@ -14,7 +14,7 @@ describe('useCardValidate custom hook 테스트', () => {
 
   test('hook이 초기화될 때 주어진 initValue로 설정된다.', () => {
     const { result } = renderHook(() =>
-      useCardValidate({
+      useValidateInput({
         initValue: '1234',
         validateOnChange: validateOnChangeMock,
         validateOnBlur: validateOnBlurMock,
@@ -30,7 +30,7 @@ describe('useCardValidate custom hook 테스트', () => {
     validateOnChangeMock.mockReturnValue({ isValid: true, errorMessage: '' });
 
     const { result } = renderHook(() =>
-      useCardValidate({
+      useValidateInput({
         initValue: '',
         validateOnChange: validateOnChangeMock,
         validateOnBlur: validateOnBlurMock,
@@ -53,7 +53,7 @@ describe('useCardValidate custom hook 테스트', () => {
     });
 
     const { result } = renderHook(() =>
-      useCardValidate({
+      useValidateInput({
         initValue: '',
         validateOnChange: validateOnChangeMock,
         validateOnBlur: validateOnBlurMock,
@@ -76,7 +76,7 @@ describe('useCardValidate custom hook 테스트', () => {
     });
 
     const { result } = renderHook(() =>
-      useCardValidate({
+      useValidateInput({
         initValue: '',
         validateOnChange: validateOnChangeMock,
         validateOnBlur: validateOnBlurMock,
@@ -103,7 +103,7 @@ describe('useCardValidate custom hook 테스트', () => {
     });
 
     const { result } = renderHook(() =>
-      useCardValidate({
+      useValidateInput({
         initValue: '',
         validateOnChange: validateOnChangeMock,
         validateOnBlur: validateOnBlurMock,
@@ -132,7 +132,7 @@ describe('useCardValidate custom hook 테스트', () => {
     });
 
     const { result } = renderHook(() =>
-      useCardValidate({
+      useValidateInput({
         initValue: '',
         validateOnChange: validateOnChangeMock,
         validateOnBlur: validateOnBlurMock,

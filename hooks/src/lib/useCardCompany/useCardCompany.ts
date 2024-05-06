@@ -1,4 +1,4 @@
-import useCardValidate from '../useValidateInput/useValidateInput';
+import useValidateInput from '../useValidateInput/useValidateInput';
 
 const useCardCompany = (initValue: string, companyList: string[]) => {
   const validateOnChange = () => {
@@ -19,7 +19,7 @@ const useCardCompany = (initValue: string, companyList: string[]) => {
     onChangeHandler,
     onFocusHandler,
     onBlurHandler,
-  } = useCardValidate({
+  } = useValidateInput({
     initValue,
     validateOnChange,
     validateOnBlur,
