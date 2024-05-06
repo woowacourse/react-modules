@@ -1,10 +1,9 @@
-// declaration.d.ts
-declare module '*.module.css' {
+declare module "*.module.css" {
   const content: { [className: string]: string };
   export = content;
 }
 
-declare module '*.svg' {
+declare module "*.svg" {
   const value: React.FunctionComponent<React.SVGAttributes<SVGElement>>;
   export default value;
 }
