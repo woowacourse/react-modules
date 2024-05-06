@@ -40,24 +40,26 @@ const useExpiryDate = (initialValue: ExpiryDateValue) => {
 
     const { value, name } = e.target;
 
+    if (name === "month" && !Validator.checkExpirationMonth(name, value))
+      return setValidationResult({
+        isValid: false,
+        errorMessage: ERROR_MESSAGE.expiredMonth,
+      });
+
+    const newValue = name === "month" ? formattingMonth(value, name) : value;
+    updateByNameAndValue({ name, value: newValue });
+
     if (name === "year" && !Validator.checkFillNumber(value, OPTION.expirationDateMaxLength))
       return setValidationResult({
         isValid: false,
         errorMessage: ERROR_MESSAGE.expiryFormat,
       });
 
-    if (name === "month" && !Validator.checkCreditExpirationPeriod(value, name))
+    if (!Validator.checkDateExpiration(inputValue.month, inputValue.year))
       return setValidationResult({
         isValid: false,
         errorMessage: ERROR_MESSAGE.expiredCard,
       });
-
-    if (name === "month") {
-      const newValue = formattingMonth(value, name);
-      updateByNameAndValue({ name, value: newValue });
-    } else {
-      updateByNameAndValue({ name, value });
-    }
 
     setValidationResult({
       isValid: true,
@@ -71,24 +73,26 @@ const useExpiryDate = (initialValue: ExpiryDateValue) => {
 
     const { value, name } = e.target as HTMLInputElement;
 
+    if (name === "month" && !Validator.checkExpirationMonth(name, value))
+      return setValidationResult({
+        isValid: false,
+        errorMessage: ERROR_MESSAGE.expiredMonth,
+      });
+
+    const newValue = name === "month" ? formattingMonth(value, name) : value;
+    updateByNameAndValue({ name, value: newValue });
+
     if (name === "year" && !Validator.checkFillNumber(value, OPTION.expirationDateMaxLength))
       return setValidationResult({
         isValid: false,
         errorMessage: ERROR_MESSAGE.expiryFormat,
       });
 
-    if (name === "month" && !Validator.checkCreditExpirationPeriod(value, name))
+    if (!Validator.checkDateExpiration(inputValue.month, inputValue.year))
       return setValidationResult({
         isValid: false,
         errorMessage: ERROR_MESSAGE.expiredCard,
       });
-
-    if (name === "month") {
-      const newValue = formattingMonth(value, name);
-      updateByNameAndValue({ name, value: newValue });
-    } else {
-      updateByNameAndValue({ name, value });
-    }
 
     setValidationResult({
       isValid: true,
