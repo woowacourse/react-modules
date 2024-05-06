@@ -1,0 +1,34 @@
+.titleContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 26px;
+}
+
+.title {
+  width: 100%;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.closeButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background-color: inherit;
+}
+
+.closeButton:hover {
+  background-color: rgba(165, 158, 156, 0.46);
+}
+
+.left {
+  text-align: left;
+}
+
+.center {
+  text-align: center;
+}
