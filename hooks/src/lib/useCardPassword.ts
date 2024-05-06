@@ -4,24 +4,16 @@ import { validatePassword } from '../validators/newCardInputValidator';
 const useCardPassword = (cardPasswordLength: number) => {
   const [cardPassWordInfo, setCardPassWordInfo] = useState({
     password: '',
-    isError: false,
+    errorMessage: '',
   });
 
   const handleCardPassword = (event: ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target;
-    const isError = validatePassword(value, cardPasswordLength);
-
-    if (isError) {
-      setCardPassWordInfo({
-        password: value,
-        isError: true,
-      });
-      return;
-    }
+    const message = validatePassword(value, cardPasswordLength);
 
     setCardPassWordInfo({
       password: value,
-      isError: false,
+      errorMessage: message,
     });
   };
 

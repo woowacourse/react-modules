@@ -4,23 +4,15 @@ import { validateCardNumber } from '../validators/newCardInputValidator';
 const useCardNumbers = (cardNumbersLength: number) => {
   const [cardNumbersInfo, setCardNumbersInfo] = useState({
     cardNumbers: '',
-    isError: false,
+    errorMessage: '',
   });
   const handleCardNumbers = (event: ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target;
-    const isError = validateCardNumber(value, cardNumbersLength);
-
-    if (isError) {
-      setCardNumbersInfo({
-        cardNumbers: value,
-        isError: true,
-      });
-      return;
-    }
+    const message = validateCardNumber(value, cardNumbersLength);
 
     setCardNumbersInfo({
       cardNumbers: value,
-      isError: false,
+      errorMessage: message,
     });
   };
 

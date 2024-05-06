@@ -1,87 +1,84 @@
 export const validateCardNumber = (
   value: string,
-  cardNumbersLength: number
-): boolean => {
-  if (value !== "" && Number.isNaN(Number(value))) {
-    return true;
+  cardNumbersLength: number,
+): string => {
+  if (value !== '' && Number.isNaN(Number(value))) {
+    return '숫자만 입력 가능합니다.';
   }
 
-  if (value !== "" && value.length < cardNumbersLength) {
-    return true;
+  if (value !== '' && value.length < cardNumbersLength) {
+    return `숫자 ${cardNumbersLength}자리를 입력해주세요.`;
   }
 
-  return false;
+  return '';
 };
 
 export const validateCardCompany = (
   value: string,
-  defaultValue: string
-): boolean => {
-  if (value === defaultValue) return true;
+  defaultValue: string,
+): string => {
+  if (value === defaultValue) return '카드사를 선택해주세요.';
 
-  return false;
+  return '';
 };
 
-export const validateCardExpiration = (
-  value: string,
-  type: string
-): boolean => {
-  if (value !== "" && Number.isNaN(Number(value))) {
-    return true;
+export const validateCardExpiration = (value: string, type: string): string => {
+  if (value !== '' && Number.isNaN(Number(value))) {
+    return '숫자만 입력 가능합니다.';
   }
 
-  if (value !== "" && value.length != 2) {
-    return true;
+  if (value !== '' && value.length != 2) {
+    return '숫자 2개를 입력해주세요.';
   }
 
   if (
-    value !== "" &&
-    type === "MM" &&
+    value !== '' &&
+    type === 'MM' &&
     !(Number(value) >= 1 && Number(value) <= 12)
   ) {
-    return true;
+    return '월은 1이상 12이하여야 합니다.';
   }
 
-  return false;
+  return '';
 };
 
 export const validateUserName = (
   value: string,
-  cardUserNameLength: number
-): boolean => {
+  cardUserNameLength: number,
+): string => {
   if (
-    value !== "" &&
+    value !== '' &&
     !new RegExp(`^[a-zA-Z\\s]{0,${cardUserNameLength}}$`).test(value)
   ) {
-    return true;
+    return '영어만 입력 가능합니다.';
   }
 
-  return false;
+  return '';
 };
 
-export const validateCVC = (value: string, cardCVCLength: number): boolean => {
-  if (value !== "" && Number.isNaN(Number(value))) {
-    return true;
+export const validateCVC = (value: string, cardCVCLength: number): string => {
+  if (value !== '' && Number.isNaN(Number(value))) {
+    return '숫자만 입력 가능합니다.';
   }
 
-  if (value !== "" && value.length !== cardCVCLength) {
-    return true;
+  if (value !== '' && value.length !== cardCVCLength) {
+    return '3자리를 입력해주세요.';
   }
 
-  return false;
+  return '';
 };
 
 export const validatePassword = (
   value: string,
-  passwordLength: number
-): boolean => {
-  if (value !== "" && Number.isNaN(Number(value))) {
-    return true;
+  passwordLength: number,
+): string => {
+  if (value !== '' && Number.isNaN(Number(value))) {
+    return '숫자만 입력 가능합니다.';
   }
 
-  if (value !== "" && value.length !== passwordLength) {
-    return true;
+  if (value !== '' && value.length !== passwordLength) {
+    return `${passwordLength}자리를 입력해주세요.`;
   }
 
-  return false;
+  return '';
 };

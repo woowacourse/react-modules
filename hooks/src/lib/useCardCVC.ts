@@ -4,24 +4,16 @@ import { validateCVC } from '../validators/newCardInputValidator';
 const useCardCVC = (cardCVCLength: number) => {
   const [cardCVCInfo, setCardCVCInfo] = useState({
     cardCVC: '',
-    isError: false,
+    errorMessage: '',
   });
 
   const handleCardCVC = (event: ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target;
-    const isError = validateCVC(value, cardCVCLength);
-
-    if (isError) {
-      setCardCVCInfo({
-        cardCVC: value,
-        isError: true,
-      });
-      return;
-    }
+    const message = validateCVC(value, cardCVCLength);
 
     setCardCVCInfo({
       cardCVC: value,
-      isError: false,
+      errorMessage: message,
     });
   };
 

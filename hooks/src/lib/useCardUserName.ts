@@ -4,24 +4,16 @@ import { validateUserName } from '../validators/newCardInputValidator';
 const useCardUserName = (cardUserNameLength: number) => {
   const [cardUserNameInfo, setCardUserNameInfo] = useState({
     cardUserName: '',
-    isError: false,
+    errorMessage: '',
   });
 
   const handleCardUserName = (event: ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target;
-    const isError = validateUserName(value, cardUserNameLength);
-
-    if (isError) {
-      setCardUserNameInfo({
-        cardUserName: value,
-        isError: true,
-      });
-      return;
-    }
+    const messae = validateUserName(value, cardUserNameLength);
 
     setCardUserNameInfo({
       cardUserName: value,
-      isError: false,
+      errorMessage: messae,
     });
   };
 
