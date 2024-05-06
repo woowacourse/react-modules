@@ -1,8 +1,9 @@
+import React from "react";
 import type { Meta, StoryObj } from "@storybook/react";
 import Modal from "../Modal";
 
 const meta = {
-  title: "Modal",
+  title: "ModalExample",
   component: Modal,
   parameters: {
     docs: {
@@ -37,6 +38,23 @@ const meta = {
       description: "(optional) 버튼을 클릭했을 때 action",
     },
   },
+
+  decorators: [
+    (Story, context) => {
+      const [openModal, setOpenModal] = React.useState(false);
+      const clickModalButton = () => alert("버튼 클릭 성공");
+      const closeModal = () => setOpenModal(false);
+
+      return (
+        <div>
+          <button onClick={() => setOpenModal(true)}>모달 열기</button>
+          {openModal && (
+            <Story args={{ ...context.args, closeModal, buttonClick: clickModalButton }} />
+          )}
+        </div>
+      );
+    },
+  ],
 } satisfies Meta<typeof Modal>;
 
 export default meta;
