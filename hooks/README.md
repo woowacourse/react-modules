@@ -12,7 +12,7 @@
 ## 설치 방법
 
 ```Bash
-npm install @seongjinme/card-validation
+npm install @cys4585/card-validation
 ```
 
 ## 사용 방법
@@ -41,10 +41,7 @@ const {
 - `validStates` : 입력받은 카드 번호를 4자리 단위로 검증한 결과를 `boolean` 타입의 배열 형태로 반환합니다.
 - `validationResult` : 입력받은 전체 카드 번호의 전체 유효성 검증 결과를 아래와 같은 포맷으로 반환합니다. 검증 미통과시 에러 메시지를 `errorMessage`로 함께 반환합니다.
   ```
-  {
-    isValid: boolean,
-    errorMessage?: string,
-  }
+  { isValid: true } | { isValid: false, errorMessage: string }
   ```
 - `handleUpdateCardNumbers(inputIndex, value)` : 각 입력 필드에 대한 이벤트 발생시 입력값을 처리하기 위한 핸들링 함수입니다.
   - `inputIndex` : 해당 입력 필드의 `index` 값입니다. `number` 타입으로 입력합니다.
@@ -54,7 +51,7 @@ const {
 
 ```tsx
 import React from "react";
-import { useCardNumbers } from "@seongjinme/card-validation";
+import { useCardNumbers } from "@cys4585/card-validation";
 
 function CardNumbersForm() {
   const {
@@ -99,10 +96,7 @@ const { brand, validationResult, handleUpdateBrand } = useCardBrand("", cardBran
 - `brand` : 입력된 카드사를 저장하고 반환합니다.
 - `validationResult` : 입력받은 카드사의 유효성 검증 결과를 아래와 같이 반환합니다. 검증 미통과시에 한해 에러 메시지를 `errorMessage`로 함께 반환합니다.
   ```
-  {
-    isValid: boolean,
-    errorMessage?: string,
-  }
+  { isValid: true } | { isValid: false, errorMessage: string }
   ```
 - `handleUpdateBrand(value)` : 카드사 입력 필드에 대한 이벤트 발생시 `string` 타입의 입력값(`value`)을 처리하는 핸들링 함수입니다.
 
@@ -110,7 +104,7 @@ const { brand, validationResult, handleUpdateBrand } = useCardBrand("", cardBran
 
 ```tsx
 import React from "react";
-import { useCardBrand } from "@seongjinme/card-validation";
+import { useCardBrand } from "@cys4585/card-validation";
 
 const CARD_BRANDS = ["신한카드", "카카오뱅크", "현대카드"];
 
@@ -156,10 +150,7 @@ const { expiryDate, validationResult, handleUpdateExpiryDate } = useCardExpiryDa
 - `expiryDate` : 입력 받은 유효기간을 `{ month: string, year: string }` 타입으로 저장하고 반환합니다.
 - `validationResult` : 입력 받은 유효기간 검증 결과를 아래와 같이 반환합니다. 검증 미통과시에 한해 에러 메시지를 `errorMessage`로 함께 반환합니다.
   ```
-  {
-    isValid: boolean,
-    errorMessage?: string,
-  }
+  { isValid: true } | { isValid: false, errorMessage: string }
   ```
 - `handleUpdateExpiryDate({ month: string, year: string })` : 월(`month`), 연도(`year`) 입력 필드에 댇한 이벤트 발생시 입력값을 처리하는 핸들링 함수입니다.
 
@@ -167,7 +158,7 @@ const { expiryDate, validationResult, handleUpdateExpiryDate } = useCardExpiryDa
 
 ```tsx
 import React from "react";
-import { useCardExpiryDate } from "@seongjinme/card-validation";
+import { useCardExpiryDate } from "@cys4585/card-validation";
 
 function CardBrandSelectBox() {
   const { expiryDate, validationResult, handleUpdateExpiryDate } =
@@ -219,10 +210,7 @@ const { cardHolder, validationResult, handleUpdateCardHolder } = useCardHolder("
 - `cardHolder` : 입력 받은 소유자 이름을 `string` 타입으로 저장하고 반환합니다.
 - `validationResult` : 입력받은 소유자 이름의 검증 결과를 아래와 같이 반환합니다. 검증 미통과시에 한해 에러 메시지를 `errorMessage`로 함께 반환합니다.
   ```
-  {
-    isValid: boolean,
-    errorMessage?: string,
-  }
+  { isValid: true } | { isValid: false, errorMessage: string }
   ```
 - `handleUpdateCardHolder(string)` : 카드 소유자 입력 필드에 댇한 이벤트 발생시 입력값을 처리하는 핸들링 함수입니다.
 
@@ -230,7 +218,7 @@ const { cardHolder, validationResult, handleUpdateCardHolder } = useCardHolder("
 
 ```tsx
 import React from "react";
-import { useCardHolder } from "@seongjinme/card-validation";
+import { useCardHolder } from "@cys4585/card-validation";
 
 function CardHolderForm() {
   const { cardHolder, validationResult, handleUpdateCardHolder } =
@@ -266,10 +254,7 @@ const { CVC, validationResult, handleUpdateCVC } = useCardCVC("");
 - `CVC` : 입력 받은 CVC 번호를 `string` 타입으로 저장하고 반환합니다.
 - `validationResult` : 입력받은 CVC 번호의 검증 결과를 아래와 같이 반환합니다. 검증 미통과시에 한해 에러 메시지를 `errorMessage`로 함께 반환합니다.
   ```
-  {
-    isValid: boolean,
-    errorMessage?: string,
-  }
+  { isValid: true } | { isValid: false, errorMessage: string }
   ```
 - `handleUpdateCVC(string)` : 카드 CVC 입력 필드에 댇한 이벤트 발생시 입력값을 처리하는 핸들링 함수입니다.
 
@@ -277,7 +262,7 @@ const { CVC, validationResult, handleUpdateCVC } = useCardCVC("");
 
 ```tsx
 import React from "react";
-import { useCardCVC } from "@seongjinme/card-validation";
+import { useCardCVC } from "@cys4585/card-validation";
 
 function CardCVCForm() {
   const { CVC, validationResult, handleUpdateCVC } = useCardCVC("");
@@ -312,10 +297,7 @@ const {password, validationResult, handleUpdatePassword } = useCardPassword("");
 - `password` : 입력 받은 비밀번호를 `string` 타입으로 저장하고 반환합니다.
 - `validationResult` : 입력받은 CVC 번호의 검증 결과를 아래와 같이 반환합니다. 검증 미통과시에 한해 에러 메시지를 `errorMessage`로 함께 반환합니다.
   ```
-  {
-    isValid: boolean,
-    errorMessage?: string,
-  }
+  { isValid: true } | { isValid: false, errorMessage: string }
   ```
 - `handleUpdatePassword(string)` : 비밀번호 입력 필드에 댇한 이벤트 발생시 입력값을 처리하는 핸들링 함수입니다.
 
@@ -323,7 +305,7 @@ const {password, validationResult, handleUpdatePassword } = useCardPassword("");
 
 ```tsx
 import React from "react";
-import { useCardPassword } from "@seongjinme/card-validation";
+import { useCardPassword } from "@cys4585/card-validation";
 
 function CardPasswordForm() {
   const { cardNumbers, validationResult, handleUpdatePassword } =
