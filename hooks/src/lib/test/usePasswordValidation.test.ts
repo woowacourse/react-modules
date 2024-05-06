@@ -1,5 +1,5 @@
 import { renderHook } from "@testing-library/react";
-import usePasswordValidation from "../useCardPasswordValidation";
+import usePasswordValidation from "../validation/useCardPasswordValidation";
 import ERROR_MESSAGES from "../constants/error";
 import { act } from "react";
 
@@ -12,11 +12,11 @@ describe("비밀번호 입력 유효성 검증 커스텀 훅 테스트", () => {
     const { result } = renderHook(() => usePasswordValidation());
 
     act(() => {
-      result.current.passwordValidateHandler(passwordValue, passwordName);
+      result.current.isPasswordValid(passwordValue, passwordName);
     });
 
     expect(result.current.passwordValidation.errorMessage.password).toBe(
-      errorMessage,
+      errorMessage
     );
     expect(result.current.passwordValidation.isError[passwordName]).toBe(true);
   });
@@ -29,11 +29,11 @@ describe("비밀번호 입력 유효성 검증 커스텀 훅 테스트", () => {
     const { result } = renderHook(() => usePasswordValidation());
 
     act(() => {
-      result.current.passwordValidateHandler(passwordValue, passwordName);
+      result.current.isPasswordValid(passwordValue, passwordName);
     });
 
     expect(result.current.passwordValidation.errorMessage.password).toBe(
-      errorMessage,
+      errorMessage
     );
     expect(result.current.passwordValidation.isError[passwordName]).toBe(true);
   });
@@ -45,11 +45,11 @@ describe("비밀번호 입력 유효성 검증 커스텀 훅 테스트", () => {
     const { result } = renderHook(() => usePasswordValidation());
 
     act(() => {
-      result.current.passwordValidateHandler(passwordValue, passwordName);
+      result.current.isPasswordValid(passwordValue, passwordName);
     });
 
     expect(result.current.passwordValidation.errorMessage.password).toBe(
-      "2" + errorMessage,
+      "2" + errorMessage
     );
     expect(result.current.passwordValidation.isError[passwordName]).toBe(true);
   });

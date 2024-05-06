@@ -1,5 +1,5 @@
 import { renderHook } from "@testing-library/react";
-import useCVCValidate from "../useCVCValidation";
+import useCVCValidate from "../validation/useCVCValidation";
 import ERROR_MESSAGES from "../constants/error";
 import { act } from "react";
 
@@ -12,7 +12,7 @@ describe("CVC 입력 유효성 검증 커스텀 훅 테스트", () => {
     const { result } = renderHook(() => useCVCValidate());
 
     act(() => {
-      result.current.CVCValidateHandler(CVCValue, CVCName);
+      result.current.isCVCValid(CVCValue, CVCName);
     });
 
     expect(result.current.CVCValidation.errorMessage.CVC).toBe(errorMessage);
@@ -27,7 +27,7 @@ describe("CVC 입력 유효성 검증 커스텀 훅 테스트", () => {
     const { result } = renderHook(() => useCVCValidate());
 
     act(() => {
-      result.current.CVCValidateHandler(CVCValue, CVCName);
+      result.current.isCVCValid(CVCValue, CVCName);
     });
 
     expect(result.current.CVCValidation.errorMessage.CVC).toBe(errorMessage);
@@ -42,7 +42,7 @@ describe("CVC 입력 유효성 검증 커스텀 훅 테스트", () => {
     const { result } = renderHook(() => useCVCValidate());
 
     act(() => {
-      result.current.CVCValidateHandler(CVCValue, CVCName);
+      result.current.isCVCValid(CVCValue, CVCName);
     });
 
     expect(result.current.CVCValidation.errorMessage.CVC).toBe(

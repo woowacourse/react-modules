@@ -1,5 +1,5 @@
 import { renderHook } from "@testing-library/react";
-import useCardType from "../useCardType";
+import useCardType from "../validation/useCardType";
 import { act } from "react";
 
 describe("카드 타입 훅 테스트", () => {

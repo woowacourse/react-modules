@@ -1,5 +1,5 @@
 import { renderHook } from "@testing-library/react";
-import useCardHolderValidation from "../useCardHolderValidation";
+import useCardHolderValidation from "../validation/useCardHolderValidation";
 import ERROR_MESSAGES from "../constants/error";
 import { act } from "react";
 
@@ -12,7 +12,7 @@ describe("cardHolder에 입력 유효성 검증 커스텀 훅 테스트", () => 
     const { result } = renderHook(() => useCardHolderValidation());
 
     act(() => {
-      result.current.cardHolderValidateHandler(cardHolderValue, cardHolderName);
+      result.current.isCardHolderValid(cardHolderValue, cardHolderName);
     });
 
     expect(result.current.cardHolderValidation.errorMessage.cardHolder).toBe(
@@ -31,7 +31,7 @@ describe("cardHolder에 입력 유효성 검증 커스텀 훅 테스트", () => 
     const { result } = renderHook(() => useCardHolderValidation());
 
     act(() => {
-      result.current.cardHolderValidateHandler(cardHolderValue, cardHolderName);
+      result.current.isCardHolderValid(cardHolderValue, cardHolderName);
     });
 
     expect(result.current.cardHolderValidation.errorMessage.cardHolder).toBe(

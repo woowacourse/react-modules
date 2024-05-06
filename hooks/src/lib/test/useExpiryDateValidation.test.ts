@@ -1,5 +1,5 @@
 import { renderHook } from "@testing-library/react";
-import useExpiryDateValidation from "../useExpiryDateValidation";
+import useExpiryDateValidation from "../validation/useExpiryDateValidation";
 import ERROR_MESSAGES from "../constants/error";
 import { act } from "react";
 
@@ -12,14 +12,14 @@ describe("카드 만료기간 입력 유효성 검증 커스텀 훅 테스트", 
     const { result } = renderHook(() => useExpiryDateValidation());
 
     act(() => {
-      result.current.expiryDateValidateHandler(expiryDateValue, expiryDateName);
+      result.current.isExpiryDateValid(expiryDateValue, expiryDateName);
     });
 
     expect(result.current.expiryDateValidation.errorMessage.month).toBe(
-      errorMessage,
+      errorMessage
     );
     expect(result.current.expiryDateValidation.isError[expiryDateName]).toBe(
-      true,
+      true
     );
   });
 
@@ -31,14 +31,14 @@ describe("카드 만료기간 입력 유효성 검증 커스텀 훅 테스트", 
     const { result } = renderHook(() => useExpiryDateValidation());
 
     act(() => {
-      result.current.expiryDateValidateHandler(expiryDateValue, expiryDateName);
+      result.current.isExpiryDateValid(expiryDateValue, expiryDateName);
     });
 
     expect(result.current.expiryDateValidation.errorMessage.month).toBe(
-      errorMessage,
+      errorMessage
     );
     expect(result.current.expiryDateValidation.isError[expiryDateName]).toBe(
-      true,
+      true
     );
   });
 
@@ -50,14 +50,14 @@ describe("카드 만료기간 입력 유효성 검증 커스텀 훅 테스트", 
     const { result } = renderHook(() => useExpiryDateValidation());
 
     act(() => {
-      result.current.expiryDateValidateHandler(expiryDateValue, expiryDateName);
+      result.current.isExpiryDateValid(expiryDateValue, expiryDateName);
     });
 
     expect(result.current.expiryDateValidation.errorMessage.month).toBe(
-      errorMessage,
+      errorMessage
     );
     expect(result.current.expiryDateValidation.isError[expiryDateName]).toBe(
-      true,
+      true
     );
   });
 
@@ -69,14 +69,14 @@ describe("카드 만료기간 입력 유효성 검증 커스텀 훅 테스트", 
     const { result } = renderHook(() => useExpiryDateValidation());
 
     act(() => {
-      result.current.expiryDateValidateHandler(expiryDateValue, expiryDateName);
+      result.current.isExpiryDateValid(expiryDateValue, expiryDateName);
     });
 
     expect(result.current.expiryDateValidation.errorMessage.year).toBe(
-      errorMessage,
+      errorMessage
     );
     expect(result.current.expiryDateValidation.isError[expiryDateName]).toBe(
-      true,
+      true
     );
   });
 });

@@ -1,5 +1,5 @@
 import { renderHook } from "@testing-library/react";
-import useCardNumberValidate from "../useCardNumberValidation";
+import useCardNumberValidate from "../validation/useCardNumberValidation";
 import ERROR_MESSAGES from "../constants/error";
 import { act } from "react";
 
@@ -12,7 +12,7 @@ describe("카드 번호 입력 유효성 검증 커스텀 훅 테스트", () => 
     const { result } = renderHook(() => useCardNumberValidate());
 
     act(() => {
-      result.current.cardNumberValidateHandler(cardNumberValue, cardNumberName);
+      result.current.isCardNumberValid(cardNumberValue, cardNumberName);
     });
 
     expect(result.current.cardNumberValidation.errorMessage.cardNumber1).toBe(
@@ -31,7 +31,7 @@ describe("카드 번호 입력 유효성 검증 커스텀 훅 테스트", () => 
     const { result } = renderHook(() => useCardNumberValidate());
 
     act(() => {
-      result.current.cardNumberValidateHandler(cardNumberValue, cardNumberName);
+      result.current.isCardNumberValid(cardNumberValue, cardNumberName);
     });
 
     expect(result.current.cardNumberValidation.errorMessage.cardNumber1).toBe(
@@ -50,7 +50,7 @@ describe("카드 번호 입력 유효성 검증 커스텀 훅 테스트", () => 
     const { result } = renderHook(() => useCardNumberValidate());
 
     act(() => {
-      result.current.cardNumberValidateHandler(cardNumberValue, cardNumberName);
+      result.current.isCardNumberValid(cardNumberValue, cardNumberName);
     });
 
     expect(result.current.cardNumberValidation.errorMessage.cardNumber1).toBe(
