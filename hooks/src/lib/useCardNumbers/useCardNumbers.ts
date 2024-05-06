@@ -3,19 +3,17 @@ import { useState } from "react";
 import useCardNumberValidation from "./useCardNumbersValidation";
 
 import { CardNumberKeys } from "../types/card-custom-hook";
+import { INPUT_RULES } from "../constants/card-custom-hook";
 
 const useCardNumbers = () => {
-  const [cardNumbers, setCardNumbers] = useState<
-    Record<CardNumberKeys, string>
-  >({
+  const [cardNumbers, setCardNumbers] = useState<Record<CardNumberKeys, string>>({
     first: "",
     second: "",
     third: "",
     fourth: "",
   });
 
-  const { errorState, errorText, validateCardNumber } =
-    useCardNumberValidation();
+  const { errorState, errorText, validateCardNumber } = useCardNumberValidation();
 
   const updateCardNumber = (name: string, value: string) => {
     setCardNumbers((prevValue) => {
@@ -26,21 +24,20 @@ const useCardNumbers = () => {
     });
   };
 
-  const handleCardNumberChange = (
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    const { name, value } = event.target;
+  const handleCardNumberChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = event.target as {
+      name: CardNumberKeys;
+      value: string;
+    };
 
-    const canUpdate = validateCardNumber(name, value);
+    const cardCardNumberUpdate = validateCardNumber(name, value);
 
-    if (!canUpdate) return;
+    if (!cardCardNumberUpdate) return;
 
     updateCardNumber(name, value);
   };
 
-  const isCardNumberInputCompleted = Object.values(cardNumbers).every(
-    (cardNumber) => cardNumber.length === 4
-  );
+  const isCardNumberInputCompleted = Object.values(cardNumbers).every((cardNumber) => cardNumber.length === INPUT_RULES.maxCardNumberInputLength);
 
   return {
     cardNumbers,

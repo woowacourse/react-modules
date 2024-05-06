@@ -27,34 +27,30 @@ describe("useCardNumbers 커스텀 훅 동작 테스트", () => {
     ["fourth", "1234"],
   ];
 
-  it.each(VALID_INPUT_TEST_CASE)(
-    "%s 필드에 입력하는 %s가 해당 필드에 정확히 입력되어야 한다",
-    (field, value) => {
-      const { result } = renderHook(() => useCardNumbers());
+  it.each(VALID_INPUT_TEST_CASE)("%s 필드에 입력하는 %s가 해당 필드에 정확히 입력되어야 한다", (field, value) => {
+    const { result } = renderHook(() => useCardNumbers());
 
-      React.act(() => {
-        result.current.handleCardNumberChange({
-          target: {
-            name: field,
-            value: value,
-          },
-        } as React.ChangeEvent<HTMLInputElement>);
-      });
+    React.act(() => {
+      result.current.handleCardNumberChange({
+        target: {
+          name: field,
+          value: value,
+        },
+      } as React.ChangeEvent<HTMLInputElement>);
+    });
 
-      expect(result.current.cardNumbers[field as CardNumberKeys]).toBe(value);
-      expect(result.current.errorState[field as CardNumberKeys]).toBe(false);
-    }
-  );
+    expect(result.current.cardNumbers[field as CardNumberKeys]).toBe(value);
+    expect(result.current.errorState[field as CardNumberKeys]).toBe(false);
+  });
 
   const INVALID_INPUT_LENGTH_TEST_CASE = [
     ["first", "1"],
     ["second", "12"],
     ["third", "123"],
-    ["fourth", "12345"],
   ];
 
   it.each(INVALID_INPUT_LENGTH_TEST_CASE)(
-    "%s 필드에 입력하는 입력값이 4글자이지 않을 경우, 해당 입력 필드에 예외가 발생해야한다.",
+    "%s 필드에 입력하는 입력값이 4글자 이하일 경우, 해당 입력 필드에 예외가 발생해야한다.",
     (field, invalidValue) => {
       const { result } = renderHook(() => useCardNumbers());
 
@@ -67,9 +63,7 @@ describe("useCardNumbers 커스텀 훅 동작 테스트", () => {
         } as React.ChangeEvent<HTMLInputElement>);
       });
 
-      expect(result.current.cardNumbers[field as CardNumberKeys]).toBe(
-        invalidValue
-      );
+      expect(result.current.cardNumbers[field as CardNumberKeys]).toBe(invalidValue);
       expect(result.current.errorState[field as CardNumberKeys]).toBe(true);
     }
   );
@@ -78,7 +72,6 @@ describe("useCardNumbers 커스텀 훅 동작 테스트", () => {
     ["second", ["1", "1a"], "1"],
     ["first", ["1", "12", "12a"], "12"],
     ["third", ["1", "12", "123", "123a"], "123"],
-    ["fourth", ["1", "12", "123", "1234", "1234a"], "1234"],
   ];
 
   it.each(INVALID_CHARACTER_INPUT_TEST_CASE)(
@@ -99,10 +92,37 @@ describe("useCardNumbers 커스텀 훅 동작 테스트", () => {
         }
       });
 
-      expect(result.current.cardNumbers[field as CardNumberKeys]).toBe(
-        expectedResult
-      );
+      expect(result.current.cardNumbers[field as CardNumberKeys]).toBe(expectedResult);
       expect(result.current.errorState[field as CardNumberKeys]).toBe(true);
+    }
+  );
+
+  const INVALID_OVER_INPUT_LENGTH = [
+    ["first", ["1", "12", "123", "1234", "12345"], "1234"],
+    ["second", ["1", "12", "123", "1234", "12345"], "1234"],
+    ["second", ["1", "12", "123", "1234", "12345"], "1234"],
+    ["fourth", ["1", "12", "123", "1234", "12345"], "1234"],
+  ];
+
+  it.each(INVALID_OVER_INPUT_LENGTH)(
+    "%s 필드에 4글자 이상의 입력을 할 경우, 상태 업데이트가 발생하지 않아야 한다.",
+    (field, inputScenario, expectedResult) => {
+      const { result } = renderHook(() => useCardNumbers());
+
+      React.act(() => {
+        if (inputScenario instanceof Array) {
+          inputScenario.forEach((inputValue) => {
+            result.current.handleCardNumberChange({
+              target: {
+                name: field,
+                value: inputValue,
+              },
+            } as React.ChangeEvent<HTMLInputElement>);
+          });
+        }
+      });
+
+      expect(result.current.cardNumbers[field as CardNumberKeys]).toBe(expectedResult);
     }
   );
 });
