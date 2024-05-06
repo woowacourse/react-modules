@@ -1,6 +1,6 @@
 {
   "name": "hain-tain-hooks",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "This is a module created for practice",
   "type": "module",
   "types": "dist/index.d.ts",
