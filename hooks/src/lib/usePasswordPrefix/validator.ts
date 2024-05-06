@@ -3,7 +3,7 @@ import { IErrorStatus } from "../useInputValidation";
 const PASSWORD_PREFIX_LENGTH = 2;
 export const passwordPrefixValidator = {
   onChange: (value: string): IErrorStatus => {
-    if (!/^\d+$/.test(value)) {
+    if (!/^\d*$/.test(value)) {
       return { isError: true, errorMessage: "비밀번호는 숫자만 포함해야 합니다." };
     }
 

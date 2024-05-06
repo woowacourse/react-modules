@@ -3,12 +3,13 @@ import { IErrorStatus } from "../useInputValidation";
 export const EXPIRY_MONTH_LENGTH = 2;
 export const expiryMonthValidator = {
   onChange: (value: string): IErrorStatus => {
-    if (!/^\d+$/.test(value)) {
+    if (!/^\d*$/.test(value)) {
       return { isError: true, errorMessage: "유효기간 월(月)은 숫자만 포함해야 합니다." };
     }
 
     return { isError: false, errorMessage: null };
   },
+
   onBlur: (value: string): IErrorStatus => {
     if (!/^\d+$/.test(value)) {
       return { isError: true, errorMessage: "유효기간 월(月)은 숫자만 포함해야 합니다." };
@@ -34,7 +35,7 @@ const MIN_YEAR = 24;
 const MAX_YEAR = 40;
 export const expiryYearValidator = {
   onChange: (value: string): IErrorStatus => {
-    if (!/^\d+$/.test(value)) {
+    if (!/^\d*$/.test(value)) {
       return { isError: true, errorMessage: "유효기간 년도(年)은 숫자만 포함해야 합니다." };
     }
 

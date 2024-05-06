@@ -2,7 +2,7 @@ import { IErrorStatus } from "../useInputValidation";
 
 export const cardNumberValidator = {
   onChange: (value: string): IErrorStatus => {
-    if (!/^\d+$/.test(value)) {
+    if (!/^\d*$/.test(value)) {
       return { isError: true, errorMessage: "카드번호는 숫자만 포함해야 합니다." };
     }
 
