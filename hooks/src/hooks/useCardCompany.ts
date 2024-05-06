@@ -20,6 +20,8 @@ interface CustomMouseEvent extends MouseEvent {
   target: CustomEventTarget;
 }
 
+const ERROR_MESSAGE = "잘못된 카드사를 입력했습니다.";
+
 const useCardCompany = (cardCompanyList: readonly string[] = COMPANY_LIST) => {
   const { valueState, errorState } = useRestrictedState();
   const { value: cardCompany, setValue: setCardCompany } = valueState;
@@ -30,7 +32,7 @@ const useCardCompany = (cardCompanyList: readonly string[] = COMPANY_LIST) => {
       setCardCompany(value);
       return;
     }
-    setError("잘못된 카드사를 입력했습니다.");
+    setError(ERROR_MESSAGE);
   };
 
   const cardCompanyInputRef = useRef<HTMLSelectElement>(null);

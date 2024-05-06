@@ -5,6 +5,12 @@ interface ErrorType {
   year?: string;
 }
 
+const ERROR_MESSAGE = {
+  ONLY_NUMBER: "숫자만 입력해주세요.",
+  NOT_VALID_MONTH: "잘못된 월을 입력하셨습니다.",
+  NOT_VALID_YEAR: "잘못된 년도를 입력하셨습니다.",
+} as const;
+
 const useExpiryPeriod = () => {
   const [month, setMonth] = useState("");
   const [year, setYear] = useState("");
@@ -41,14 +47,14 @@ const useExpiryPeriod = () => {
     const year = Number(value);
     if (value.length > 2) return;
     if (Number.isNaN(year)) {
-      setError("year", "숫자만 입력해주세요.");
+      setError("year", ERROR_MESSAGE.ONLY_NUMBER);
       return;
     }
     if (year === currentYear && Number(month) < currentMonth) {
-      setError("month", "잘못된 월을 입력하셨습니다.");
+      setError("month", ERROR_MESSAGE.NOT_VALID_MONTH);
     }
     if (year < currentYear) {
-      setError("year", "잘못된 년도를 입력하셨습니다.");
+      setError("year", ERROR_MESSAGE.NOT_VALID_YEAR);
     }
     setYear(value);
   };
@@ -58,7 +64,7 @@ const useExpiryPeriod = () => {
       setMonth(value);
       return;
     }
-    setError("month", "1에서 12사이의 숫자를 입력해주세요");
+    setError("month", ERROR_MESSAGE.NOT_VALID_MONTH);
   };
 
   return {
