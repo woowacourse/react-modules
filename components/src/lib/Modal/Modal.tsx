@@ -1,15 +1,14 @@
-import React, { useRef, useEffect } from 'react';
-
 import {
-  ModalOverlay,
-  ModalWrapper,
-  Header,
-  Title,
   CloseButton,
-  Main,
   Footer,
   FooterButton,
+  Header,
+  Main,
+  ModalOverlay,
+  ModalWrapper,
+  Title,
 } from './Modal.style';
+import React, { useEffect, useRef } from 'react';
 
 export type ModalPositionType = 'center' | 'bottom';
 
@@ -41,7 +40,8 @@ export default function Modal({
   const modalRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (isOpen && modalRef) {
+    if (isOpen && modalRef.current) {
+      console.log('focus');
       modalRef.current?.focus();
     }
   }, [isOpen]);
@@ -63,7 +63,7 @@ export default function Modal({
         $position={position}
         onKeyDown={handleKeyDown}
         onClick={(event) => event.stopPropagation()}
-        tabIndex={0}
+        tabIndex={-1}
       >
         <Header>
           <Title>{title}</Title>
