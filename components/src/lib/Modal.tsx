@@ -1,46 +1,36 @@
+import { ReactNode, MouseEvent, CSSProperties } from "react";
 import "./Modal.css";
 
-type ModalProps = {
+interface ModalMainProps {
   onClose: () => void;
   isOpen: boolean;
-  title: string;
-  position: "center" | "bottom";
-  content: React.ReactNode;
-  modalContainerStyle: React.CSSProperties;
-  className: string;
-  zIndex: number;
-};
+  position?: "center" | "bottom";
+  className?: string;
+  zIndex?: number;
+  customStyle?: CSSProperties;
+  children?: string | ReactNode;
+}
 
-const Modal = ({ onClose = () => {}, isOpen = true, title = "", position = "center", content = "", modalContainerStyle = {}, className = "", zIndex = 999 }: Partial<ModalProps>) => {
-  if (isOpen) {
-    document.body.style.overflow = "hidden";
-  } else {
-    document.body.style.overflow = "auto";
-  }
+export function ModalMain({ onClose, isOpen, position = "center", className = "", zIndex = 999, customStyle = {}, children }: ModalMainProps) {
+  if (!isOpen) return null;
+
+  const handleModalContainerClick = (event: MouseEvent<HTMLDivElement>) => {
+    event.stopPropagation();
+  };
 
   return (
-    <>
-      {isOpen && (
-        <div
-          className="back-drop"
-          onClick={onClose}
-        >
-          <div
-            className="modal-container"
-            style={{ zIndex: zIndex }}
-          >
-            <div
-              className={`container ${position} ${className}`}
-              style={modalContainerStyle}
-            >
-              <div className="title">{title}</div>
-              <div className="content">{content}</div>
-            </div>
-          </div>
-        </div>
-      )}
-    </>
+    <div className="modal-container">
+      <div
+        className="back-drop"
+        onClick={onClose}
+      ></div>
+      <div
+        className={`modal-content-container ${position} ${className}`}
+        style={{ zIndex, ...customStyle }}
+        onClick={handleModalContainerClick}
+      >
+        {children}
+      </div>
+    </div>
   );
-};
-
-export default Modal;
+}

@@ -1,0 +1,15 @@
+.modal-btn {
+  width: 100%;
+  height: 44px;
+  border-radius: 5px;
+}
+
+.modal-btn.primary {
+  color: #ffffff;
+  background-color: #333333;
+}
+
+.modal-btn.secondary {
+  color: #8b95a1;
+  background-color: #ffffff;
+}

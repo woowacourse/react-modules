@@ -1,0 +1,8 @@
+.modal-close-btn {
+  background-image: url("../assets/close-icon.png");
+  background-repeat: no-repeat;
+  background-size: contain;
+  outline: none;
+  border: none;
+  padding: 7px;
+}

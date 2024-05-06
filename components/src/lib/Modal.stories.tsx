@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import Modal from "./Modal";
+import { Modal } from "./index";
 import { fn } from "@storybook/test";
 
 const meta = {
@@ -11,7 +11,7 @@ const meta = {
   },
   decorators: [
     (Story) => (
-      <div style={{ width: "100vw", height: "100vh" }}>
+      <div style={{ width: "1000px", height: "700px" }}>
         <Story />
       </div>
     ),
@@ -21,19 +21,12 @@ const meta = {
       control: "boolean",
       description: "모달 열림 상태",
     },
-    title: {
-      control: "text",
-      description: "모달 제목",
-    },
     position: {
       options: ["center", "bottom"],
       control: { type: "radio" },
       description: "모달 컨테이너 위치",
     },
-    content: {
-      description: "모달 컨텐츠 컴포넌트",
-    },
-    modalContainerStyle: {
+    customStyle: {
       control: "object",
       description: "모달 컨테이너 인라인 스타일",
     },
@@ -51,20 +44,20 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const Center: Story = {
-  args: {
-    isOpen: true,
-    title: "모달 제목",
-    position: "center",
-    content: [<div>모달 content</div>],
-  },
-};
+const children = (
+  <>
+    <Modal.Title>제목</Modal.Title>
+    <Modal.CloseButton></Modal.CloseButton>
+    <div>모달 content</div>
+    <Modal.Button variant="primary">동의하고 저장하기</Modal.Button>
+    <Modal.Button variant="secondary">닫기</Modal.Button>
+  </>
+);
 
-export const Bottom: Story = {
+export const Default: Story = {
   args: {
     isOpen: true,
-    title: "모달 제목",
-    position: "bottom",
-    content: [<div>모달 content</div>],
+    position: "center",
+    children: children,
   },
 };
