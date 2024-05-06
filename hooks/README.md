@@ -1,5 +1,11 @@
 # 📦 페이먼츠 커스텀 훅
 
+### install
+
+```
+npm install nakta-react-payments-hooks
+```
+
 ## useCardNumbers
 
 ### props
