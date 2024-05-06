@@ -1,6 +1,6 @@
-import { useState } from "react";
-import ValidationResult from "../types/ValidationResult";
 import Validation from "../utils/Validation";
+import ValidationResult from "../types/ValidationResult";
+import { useState } from "react";
 
 interface PasswordValidationResult {
   password: string;
@@ -19,15 +19,14 @@ export default function useCardPassword(
   const handleUpdatePassword = (value: string) => {
     setPassword(value);
 
-    if (validatePassword(value)) {
-      setValidationResult({ isValid: true });
-      return;
-    }
+    const validationResult: ValidationResult = validatePassword(value)
+      ? { isValid: true }
+      : {
+          isValid: false,
+          errorMessage: "두 자리의 숫자여야 합니다. 다시 입력해주세요.",
+        };
 
-    setValidationResult({
-      isValid: false,
-      errorMessage: "두 자리의 숫자여야 합니다. 다시 입력해주세요.",
-    });
+    setValidationResult(validationResult);
   };
 
   return {

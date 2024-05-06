@@ -1,6 +1,6 @@
-import { useState } from "react";
-import ValidationResult from "../types/ValidationResult";
 import Validation from "../utils/Validation";
+import ValidationResult from "../types/ValidationResult";
+import { useState } from "react";
 
 interface ExpiryDate {
   month: string;
@@ -24,32 +24,26 @@ export default function useCardExpiryDate(
   const handleUpdateExpiryDate = (value: ExpiryDate) => {
     setExpiryDate(value);
 
-    if (!validateExpireMonth(value.month)) {
-      setValidationResult({
-        isValid: false,
-        errorMessage:
-          "유효 기간의 월은 01 ~ 12 사이의 2자리 숫자로 입력하셔야 합니다.",
-      });
-      return;
-    }
+    const validationResult: ValidationResult = !validateExpireMonth(value.month)
+      ? {
+          isValid: false,
+          errorMessage:
+            "유효 기간의 월은 01 ~ 12 사이의 2자리 숫자로 입력하셔야 합니다.",
+        }
+      : !validateExpireYear(value.year)
+      ? {
+          isValid: false,
+          errorMessage: "유효 기간의 연도는 2자리 숫자로 입력하셔야 합니다.",
+        }
+      : !validateExpiryDate(value)
+      ? {
+          isValid: false,
+          errorMessage:
+            "유효 기간이 만료되었습니다. 확인 후 다시 입력해 주세요.",
+        }
+      : { isValid: true };
 
-    if (!validateExpireYear(value.year)) {
-      setValidationResult({
-        isValid: false,
-        errorMessage: "유효 기간의 연도는 2자리 숫자로 입력하셔야 합니다.",
-      });
-      return;
-    }
-
-    if (!validateExpiryDate(value)) {
-      setValidationResult({
-        isValid: false,
-        errorMessage: "유효 기간이 만료되었습니다. 확인 후 다시 입력해 주세요.",
-      });
-      return;
-    }
-
-    setValidationResult({ isValid: true });
+    setValidationResult(validationResult);
   };
 
   return {

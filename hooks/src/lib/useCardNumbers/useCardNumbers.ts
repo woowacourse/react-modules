@@ -1,11 +1,11 @@
-import { useState } from "react";
-import ValidationResult from "../types/ValidationResult";
-import Validation from "../utils/Validation";
-
 import type {
   CardNumbersType,
   CardNumbersValidStatesType,
 } from "../types/CardNumberTypes";
+
+import Validation from "../utils/Validation";
+import ValidationResult from "../types/ValidationResult";
+import { useState } from "react";
 
 interface CardNumbersValidationResult {
   cardNumbers: CardNumbersType;
@@ -49,16 +49,15 @@ export default function useCardNumbers(
 
     const isAllInputValid = newValidStates.every((isValid) => isValid === true);
 
-    if (isAllInputValid) {
-      setValidationResult({ isValid: true });
-      return;
-    }
+    const validationResult: ValidationResult = isAllInputValid
+      ? { isValid: true }
+      : {
+          isValid: false,
+          errorMessage:
+            "카드 번호는 4자리의 숫자여야 합니다. 확인 후 다시 입력해주세요.",
+        };
 
-    setValidationResult({
-      isValid: false,
-      errorMessage:
-        "카드 번호는 4자리의 숫자여야 합니다. 확인 후 다시 입력해주세요.",
-    });
+    setValidationResult(validationResult);
   };
 
   return {

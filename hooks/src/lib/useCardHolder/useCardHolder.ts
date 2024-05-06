@@ -1,6 +1,6 @@
-import { useState } from "react";
-import ValidationResult from "../types/ValidationResult";
 import Validation from "../utils/Validation";
+import ValidationResult from "../types/ValidationResult";
+import { useState } from "react";
 
 interface CardHolderValidationResult {
   cardHolder: string;
@@ -19,15 +19,11 @@ export default function useCardHolder(
   const handleUpdateCardHolder = (value: string) => {
     setCardHolder(value);
 
-    if (validateCardHolder(value)) {
-      setValidationResult({ isValid: true });
-      return;
-    }
+    const validationResult: ValidationResult = validateCardHolder(value)
+      ? { isValid: true }
+      : { isValid: false, errorMessage: "영문자만 입력할 수 있습니다." };
 
-    setValidationResult({
-      isValid: false,
-      errorMessage: "영문자만 입력할 수 있습니다.",
-    });
+    setValidationResult(validationResult);
   };
 
   return {

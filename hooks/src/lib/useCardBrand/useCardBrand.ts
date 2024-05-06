@@ -1,5 +1,5 @@
-import { useState } from "react";
 import ValidationResult from "../types/ValidationResult";
+import { useState } from "react";
 
 interface BrandValidationResult {
   brand: string;
@@ -21,15 +21,17 @@ export default function useCardBrand(
   const handleUpdateBrand = (value: string) => {
     setBrand(value);
 
-    if (validateBrand(value, allowedBrands)) {
-      setValidationResult({ isValid: true });
-      return;
-    }
+    const validationResult: ValidationResult = validateBrand(
+      value,
+      allowedBrands
+    )
+      ? { isValid: true }
+      : {
+          isValid: false,
+          errorMessage: "지원하지 않는 카드사입니다. 다른 카드를 선택해주세요.",
+        };
 
-    setValidationResult({
-      isValid: false,
-      errorMessage: "지원하지 않는 카드사입니다. 다른 카드를 선택해주세요.",
-    });
+    setValidationResult(validationResult);
   };
 
   return { brand, validationResult, handleUpdateBrand };
