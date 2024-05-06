@@ -1,6 +1,5 @@
 import { useEffect } from "react";
 import useInput, { ValidationType } from "./useInput";
-import useValidation from "./useValidation";
 
 const EXPIRATION_DATE_LENGTH = 2;
 const MONTH = {
@@ -60,14 +59,15 @@ const useCardExpirationDate = (initialValue: InitialValueType = ["", ""]) => {
     inputValidations: yearInputValidations,
     preventInputValidations,
   });
-  const isCardExpirationDateValid = useValidation([month, year]);
+
+  const isCardExpirationDateValid = !month.error.state && !year.error.state;
 
   useEffect(() => {
     const date = new Date();
     const currentYear = date.getFullYear() % 10 ** EXPIRATION_DATE_LENGTH;
     const currentMonth = date.getMonth() + 1;
 
-    if (isValidLength(month.value) && isValidLength(year.value)) {
+    if (isValidLength(month.value) && isValidMonth(month.value) && isValidLength(year.value)) {
       const error = { state: true, message: "유효기간이 만료된 카드입니다." };
       const initialErrorState = { state: false, message: "" };
 
