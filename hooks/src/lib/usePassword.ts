@@ -1,8 +1,7 @@
-import { ChangeEvent, FocusEvent, useState } from 'react';
+import { useSingleInput } from '.';
 import { VALID_LENGTH } from './contexts';
-import { validateFilledValue, validateNumber, validateLength } from './utils/validators';
-import { ErrorMessage, UseCardModuleProps } from './types';
-import useCardValidation from './useCardValidation';
+import { Validations, Validator, Validators } from './types';
+import { validateFilledValue, validateLength, validateNumber } from './utils/validators';
 
 interface ValidationErrors {
   empty: string;
@@ -10,43 +9,47 @@ interface ValidationErrors {
   length: string;
 }
 
-export default function usePassword(props: UseCardModuleProps<ValidationErrors>) {
-  const { empty, number, length } = props.validationErrors;
-  const [password, setPassword] = useState('');
-  const [errorMessage, setErrorMessage] = useState<ErrorMessage>(null);
+interface UsePasswordProps {
+  initialValue: string;
+  validations: Validations;
+}
 
-  const validatePasswordLength = (value: string) => validateLength(value, VALID_LENGTH.password);
+const validators: Validators<keyof ValidationErrors> = {
+  number: validateNumber,
+  empty: validateFilledValue,
+  length: (value: string) => validateLength(value, VALID_LENGTH.password),
+};
 
-  const changeEventValidators = [{ test: validateNumber, errorMessage: number }];
-  const blurEventValidators = [
-    { test: validateFilledValue, errorMessage: empty },
-    { test: validatePasswordLength, errorMessage: length },
-  ];
-  const totalValidators = [...changeEventValidators, ...blurEventValidators];
+export default function usePassword<E extends HTMLInputElement>({ initialValue, validations }: UsePasswordProps) {
+  const onChangeValidators: Validator[] = Object.entries(validations.onChange || {}).map(([key, errorMessage]) => ({
+    test: validators[key as keyof ValidationErrors],
+    errorMessage,
+  }));
 
-  const { handleValidationChange, handleValidationBlur, handleUpdateValue } = useCardValidation<string>({
-    blurEventValidators,
-    changeEventValidators,
-    totalValidators,
+  const onBlurValidators: Validator[] = Object.entries(validations.onBlur || {}).map(([key, errorMessage]) => ({
+    test: validators[key as keyof ValidationErrors],
+    errorMessage,
+  }));
+
+  const {
+    value: password,
     setValue: setPassword,
-    setErrorMessage,
+    isValid,
+    errorMessage,
+    onChange,
+    onBlur,
+  } = useSingleInput<E>({
+    initialValue,
+    validations: { onChange: onChangeValidators, onBlur: onBlurValidators },
   });
-
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    handleValidationChange(e.target.value);
-  };
-
-  const handleBlur = (e: FocusEvent<HTMLInputElement>) => {
-    handleValidationBlur(e.target.value);
-  };
 
   return {
     password,
     setPassword,
-    isValid: !!errorMessage,
+    isValid,
     errorMessage,
-    handleChange,
-    handleBlur,
-    updateValue: handleUpdateValue,
+    validators: [...onChangeValidators, ...onBlurValidators],
+    handleChange: onChange,
+    handleBlur: onBlur,
   };
 }

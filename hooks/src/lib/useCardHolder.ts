@@ -1,49 +1,55 @@
-import { ChangeEvent, useState, FocusEvent } from 'react';
+import { useSingleInput } from '.';
 import { ALPHABET_REGEXP } from './contexts';
+import { Validations, Validator, Validators } from './types';
 import { validateFilledValue } from './utils/validators';
-import { ErrorMessage, UseCardModuleProps } from './types';
-import useCardValidation from './useCardValidation';
 
-interface CardHolderValidationErrors {
+interface ValidationErrors {
   empty: string;
   alphabet: string;
 }
 
-export default function useCardHolder(props: UseCardModuleProps<CardHolderValidationErrors>) {
-  const [cardHolder, setCardHolder] = useState('');
-  const [errorMessage, setErrorMessage] = useState<ErrorMessage>(null);
+interface UseCardHolderProps {
+  initialValue: string;
+  validations: Validations;
+}
 
-  const validateAlphabeticString = (value: string) => {
+const validators: Validators<keyof ValidationErrors> = {
+  empty: validateFilledValue,
+  alphabet: (value: string) => {
     return !value || ALPHABET_REGEXP.test(value);
-  };
+  },
+};
 
-  const changeEventValidators = [{ test: validateAlphabeticString, errorMessage: props.validationErrors.alphabet }];
-  const blurEventValidators = [{ test: validateFilledValue, errorMessage: props.validationErrors.empty }];
-  const totalValidators = [blurEventValidators[0], ...changeEventValidators, blurEventValidators[1]];
+export default function useCardHolder<E extends HTMLInputElement>({ initialValue, validations }: UseCardHolderProps) {
+  const onChangeValidators: Validator[] = Object.entries(validations.onChange || {}).map(([key, errorMessage]) => ({
+    test: validators[key as keyof ValidationErrors],
+    errorMessage,
+  }));
 
-  const { handleValidationChange, handleValidationBlur, handleUpdateValue } = useCardValidation<string>({
-    blurEventValidators,
-    changeEventValidators,
-    totalValidators,
+  const onBlurValidators: Validator[] = Object.entries(validations.onBlur || {}).map(([key, errorMessage]) => ({
+    test: validators[key as keyof ValidationErrors],
+    errorMessage,
+  }));
+
+  const {
+    value: cardHolder,
     setValue: setCardHolder,
-    setErrorMessage,
+    isValid,
+    errorMessage,
+    onChange,
+    onBlur,
+  } = useSingleInput<E>({
+    initialValue,
+    validations: { onChange: onChangeValidators, onBlur: onBlurValidators },
   });
-
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    handleValidationChange(e.target.value);
-  };
-
-  const handleBlur = (e: FocusEvent<HTMLInputElement>) => {
-    handleValidationBlur(e.target.value);
-  };
 
   return {
     cardHolder,
     setCardHolder,
-    isValid: !!errorMessage,
+    isValid,
     errorMessage,
-    handleChange,
-    handleBlur,
-    updateValue: handleUpdateValue,
+    validators: [...onChangeValidators, ...onBlurValidators],
+    handleChange: onChange,
+    handleBlur: onBlur,
   };
 }

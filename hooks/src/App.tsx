@@ -1,5 +1,5 @@
 import './App.css';
-import { CardNumbers, CardExpiryDate, Issuer, CardHolder, CardPassword, CardCVC } from './components';
+import { CardCVC, CardExpiryDate, CardHolder, CardNumbers, CardPassword, Issuer } from './components';
 
 function App() {
   return (

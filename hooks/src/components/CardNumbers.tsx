@@ -1,24 +1,35 @@
 import { useCardNumbers } from '../lib';
 
 export default function CardNumbers() {
-  const { numbers, handleChange, handleBlur, errorMessage, error } = useCardNumbers({
-    validationErrors: {
-      empty: '카드 번호를 입력해주세요.',
-      number: '숫자만 사용 가능해요.',
-      length: '4개 숫자를 써주세요.',
+  const { cardNumbers, handleChange, handleBlur, errorMessage } = useCardNumbers<HTMLInputElement>({
+    initialValues: {
+      first: '',
+      second: '',
+      third: '',
+      fourth: '',
+    },
+    validations: {
+      onChange: {
+        number: '숫자만 사용 가능해요.',
+      },
+      onBlur: {
+        empty: '카드 번호를 입력해주세요.',
+        length: '4개 숫자를 써주세요.',
+      },
     },
   });
 
   return (
     <div>
-      {Array.from({ length: 4 }).map((_, index) => (
+      {Object.keys(cardNumbers).map((name) => (
         <input
+          key={name}
           maxLength={4}
-          name={`${error[index]}`}
-          value={numbers[index]}
+          name={`${name}`}
+          value={cardNumbers[name]}
           type="text"
-          onChange={(e) => handleChange(e, index)}
-          onBlur={(e) => handleBlur(e, index)}
+          onChange={handleChange}
+          onBlur={handleBlur}
         />
       ))}
       <div>오류:{errorMessage}</div>

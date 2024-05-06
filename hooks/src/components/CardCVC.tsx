@@ -1,11 +1,16 @@
 import { useCVC } from '../lib';
 
 export default function CardCVC() {
-  const cvcResult = useCVC({
-    validationErrors: {
-      empty: '값을 입력해주세요.',
-      number: '숫자만 입력 가능해요.',
-      length: '세자리 숫자여야 합니다.',
+  const cvcResult = useCVC<HTMLInputElement>({
+    initialValue: '',
+    validations: {
+      onChange: {
+        number: '숫자만 입력 가능해요.',
+      },
+      onBlur: {
+        empty: '값을 입력해주세요.',
+        length: '세자리 숫자여야 합니다.',
+      },
     },
   });
 

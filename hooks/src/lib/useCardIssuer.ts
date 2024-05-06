@@ -1,25 +1,50 @@
-import { useState } from 'react';
+import { useSingleInput } from '.';
+import { Validations, Validator, ValidatorFunction } from './types';
 import { validateFilledValue } from './utils/validators';
-import { ErrorMessage, UseCardModuleProps } from './types';
-import useCardValidation from './useCardValidation';
 
-interface CardIssuerValidationErrors {
+interface ValidationErrors {
   empty: string;
 }
 
-export default function useCardIssuer(props: UseCardModuleProps<CardIssuerValidationErrors>) {
-  const [cardIssuer, setCardIssuer] = useState('');
-  const [errorMessage, setErrorMessage] = useState<ErrorMessage>(null);
+interface UseCardIssuerProps {
+  initialValue: string;
+  validations: Validations;
+}
 
-  const totalValidators = [{ test: validateFilledValue, errorMessage: props.validationErrors.empty }];
+const validators: Record<keyof ValidationErrors, ValidatorFunction> = {
+  empty: validateFilledValue,
+};
 
-  const { handleUpdateValue } = useCardValidation<string>({
-    blurEventValidators: undefined,
-    changeEventValidators: undefined,
-    totalValidators,
+export default function useCardIssuer({ initialValue, validations }: UseCardIssuerProps) {
+  const onChangeValidators: Validator[] = Object.entries(validations.onChange || {}).map(([key, errorMessage]) => ({
+    test: validators[key as keyof ValidationErrors],
+    errorMessage,
+  }));
+
+  const onBlurValidators: Validator[] = Object.entries(validations.onBlur || {}).map(([key, errorMessage]) => ({
+    test: validators[key as keyof ValidationErrors],
+    errorMessage,
+  }));
+
+  const {
+    value: cardIssuer,
     setValue: setCardIssuer,
-    setErrorMessage,
+    isValid,
+    errorMessage,
+    onChange,
+    onBlur,
+  } = useSingleInput<HTMLSelectElement>({
+    initialValue,
+    validations: { onChange: onChangeValidators, onBlur: onBlurValidators },
   });
 
-  return { cardIssuer, isValid: !!errorMessage, errorMessage, updateValue: handleUpdateValue };
+  return {
+    cardIssuer,
+    setCardIssuer,
+    isValid,
+    errorMessage,
+    validators: [...onChangeValidators, ...onBlurValidators],
+    handleChange: onChange,
+    handleBlur: onBlur,
+  };
 }

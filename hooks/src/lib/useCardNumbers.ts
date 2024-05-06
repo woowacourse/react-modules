@@ -1,55 +1,58 @@
-import { useState, ChangeEvent } from 'react';
-import useCardNumber from './useCardNumber';
-import { CARD_NUMBERS_GROUP_LENGTH } from './contexts';
-import { ErrorMessage, UseCardModuleProps } from './types';
-import useCardValidationWithKey from './useCardValidationWithKey';
+import { VALID_LENGTH } from './contexts';
+import { Validations, Validator, Validators } from './types';
+import useMultipleInputs from './useMultipleInputs';
+import { validateFilledValue, validateLength, validateNumber } from './utils/validators';
 
-interface CardNumbersValidationErrors {
+interface ValidationErrors {
   empty: string;
   number: string;
   length: string;
 }
 
-export default function useCardNumbers({ validationErrors }: UseCardModuleProps<CardNumbersValidationErrors>) {
-  const [numbers, setNumbers] = useState(Array.from({ length: CARD_NUMBERS_GROUP_LENGTH }, () => ''));
-  const [error, setError] = useState(Array.from({ length: CARD_NUMBERS_GROUP_LENGTH }, () => false));
-  const [errorMessage, setErrorMessage] = useState<ErrorMessage>(null);
+interface UseCardNumbersProps {
+  initialValues: Record<string, string>;
+  validations: Validations;
+}
 
-  const { changeEventValidators, blurEventValidators, totalValidators } = useCardNumber({ validationErrors });
+const validators: Validators<keyof ValidationErrors> = {
+  empty: validateFilledValue,
+  number: validateNumber,
+  length: (value: string) => validateLength(value, VALID_LENGTH.cardNumber),
+};
 
-  const getNewNumbers = (value: string, index: number) => {
-    const newNumbers = [...numbers];
-    newNumbers[index] = value;
+export default function useCardNumbers<E extends HTMLInputElement>({
+  initialValues,
+  validations,
+}: UseCardNumbersProps) {
+  const onChangeValidators: Validator[] = Object.entries(validations.onChange || {}).map(([key, errorMessage]) => ({
+    test: validators[key as keyof ValidationErrors],
+    errorMessage,
+  }));
 
-    return newNumbers;
-  };
+  const onBlurValidators: Validator[] = Object.entries(validations.onBlur || {}).map(([key, errorMessage]) => ({
+    test: validators[key as keyof ValidationErrors],
+    errorMessage,
+  }));
 
-  const { handleValidationChange, handleValidationBlur, handleUpdateValue } = useCardValidationWithKey<string, number>({
-    blurEventValidators,
-    changeEventValidators,
-    totalValidators,
-    applyNewValue: (value, key) => {
-      const newNumbers = getNewNumbers(value, key);
-      setNumbers(newNumbers);
-    },
-    applyNewError: (isValid, key) => {
-      const newError = [...error];
-      newError[key] = isValid;
-      setError(newError);
-    },
-    setErrorMessage,
+  const {
+    values: cardNumbers,
+    setValues: setCardNumbers,
+    isValid,
+    errorMessage,
+    onChange,
+    onBlur,
+  } = useMultipleInputs<E>({
+    initialValues,
+    validations: { onChange: onChangeValidators, onBlur: onBlurValidators },
   });
 
-  const handleChange = (e: ChangeEvent<HTMLInputElement>, index: number) => {
-    handleValidationChange(e.target.value, index);
+  return {
+    cardNumbers,
+    setCardNumbers,
+    isValid,
+    errorMessage,
+    validators: [...onChangeValidators, ...onBlurValidators],
+    handleChange: onChange,
+    handleBlur: onBlur,
   };
-  const handleBlur = (e: ChangeEvent<HTMLInputElement>, index: number) => {
-    handleValidationBlur(e.target.value, index);
-  };
-
-  const updateValue = (value: string, index: number) => {
-    handleUpdateValue(value, index);
-  };
-
-  return { numbers, handleChange, handleBlur, updateValue, errorMessage, error };
 }
