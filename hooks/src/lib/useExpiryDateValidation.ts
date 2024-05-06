@@ -1,21 +1,21 @@
-import { useState } from 'react';
-import { DATE, MAX_LENGTH, REGEX } from './constants';
+import { useState } from "react";
+import { DATE, MAX_LENGTH, REGEX } from "./constants";
 
 interface ValidationResult {
   isValidMonth: boolean;
-  monthErrorMessage?: string[];
+  monthErrorMessages: string[];
 
   isValidYear: boolean;
-  yearErrorMessage?: string[];
+  yearErrorMessages: string[];
 }
 
 const useExpiryDateValidation = () => {
   const [validationResult, setValidationResult] = useState<ValidationResult>({
-    isValidMonth: true,
-    monthErrorMessage: [],
+    isValidMonth: false,
+    monthErrorMessages: [],
 
-    isValidYear: true,
-    yearErrorMessage: [],
+    isValidYear: false,
+    yearErrorMessages: [],
   });
 
   const handleExpiryDateChange = (month: string, year: string) => {
@@ -30,7 +30,7 @@ const useExpiryDateValidation = () => {
     const currentMonth = new Date().getMonth() + 1;
 
     if (!isMonthNumeric) {
-      monthErrors.push('숫자로 입력해주세요.');
+      monthErrors.push("숫자로 입력해주세요.");
     } else {
       const monthNumber = parseInt(month, 10);
       if (monthNumber < DATE.minMonth || monthNumber > DATE.maxMonth) {
@@ -39,7 +39,7 @@ const useExpiryDateValidation = () => {
     }
 
     if (!isYearNumeric) {
-      yearErrors.push('숫자로 입력해주세요.');
+      yearErrors.push("숫자로 입력해주세요.");
     }
 
     if (!isValidMonthLength) {
@@ -50,25 +50,32 @@ const useExpiryDateValidation = () => {
       yearErrors.push(`${MAX_LENGTH.expiryYear}자로 입력해주세요.`);
     }
 
-    if (isMonthNumeric && isYearNumeric && isValidMonthLength && isValidYearLength) {
+    if (
+      isMonthNumeric &&
+      isYearNumeric &&
+      isValidMonthLength &&
+      isValidYearLength
+    ) {
       const inputYear = parseInt(year, 10);
       const inputMonth = parseInt(month, 10);
 
       if (inputYear < currentYear) {
-        yearErrors.push('만료된 카드입니다.');
+        yearErrors.push("만료된 카드입니다.");
       }
 
       if (inputYear === currentYear && inputMonth < currentMonth) {
-        monthErrors.push('만료된 카드입니다.');
+        monthErrors.push("만료된 카드입니다.");
       }
     }
 
     setValidationResult({
-      isValidMonth: isMonthNumeric && isValidMonthLength && monthErrors.length === 0,
-      monthErrorMessage: monthErrors,
+      isValidMonth:
+        isMonthNumeric && isValidMonthLength && monthErrors.length === 0,
+      monthErrorMessages: monthErrors,
 
-      isValidYear: isYearNumeric && isValidYearLength && yearErrors.length === 0,
-      yearErrorMessage: yearErrors,
+      isValidYear:
+        isYearNumeric && isValidYearLength && yearErrors.length === 0,
+      yearErrorMessages: yearErrors,
     });
   };
 

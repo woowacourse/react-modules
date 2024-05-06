@@ -1,18 +1,19 @@
-import { useState } from 'react';
-import { REGEX, MAX_LENGTH } from './constants';
+import { useState } from "react";
+import { REGEX, MAX_LENGTH } from "./constants";
 
 interface ValidationResult {
   isValid: boolean;
-  errorMessage?: string[];
+  errorMessages: string[];
 }
 
 const useCardNumberValidation = () => {
-  const [validationResults, setValidationResults] = useState<ValidationResult[]>(() =>
-    Array(4).fill({ isValid: true, errorMessage: [] })
-  );
+  const [validationResults, setValidationResults] = useState<
+    ValidationResult[]
+  >(() => Array(4).fill({ isValid: false, errorMessages: [] }));
 
   const isNumericInput = (value: string) => REGEX.onlyNumber.test(value);
-  const isValidateCardNumber = (value: string) => value.length === MAX_LENGTH.cardNumber;
+  const isValidateCardNumber = (value: string) =>
+    value.length === MAX_LENGTH.cardNumber;
 
   const handleCardNumberChange = (cardNumber: string, index: number) => {
     const errors: string[] = [];
@@ -20,7 +21,7 @@ const useCardNumberValidation = () => {
     const isValidNumber = isValidateCardNumber(cardNumber);
 
     if (!isNumeric) {
-      errors.push('숫자를 입력해주세요.');
+      errors.push("숫자를 입력해주세요.");
     }
     if (!isValidNumber) {
       errors.push(`${MAX_LENGTH.cardNumber}자리 숫자를 입력해주세요.`);
@@ -28,7 +29,10 @@ const useCardNumberValidation = () => {
 
     setValidationResults((prevResults) => {
       const newResults = [...prevResults];
-      newResults[index] = { isValid: isNumeric && isValidNumber, errorMessage: errors };
+      newResults[index] = {
+        isValid: isNumeric && isValidNumber,
+        errorMessages: errors,
+      };
       return newResults;
     });
   };

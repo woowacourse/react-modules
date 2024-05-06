@@ -1,15 +1,15 @@
-import { useState } from 'react';
-import { REGEX } from './constants';
+import { useState } from "react";
+import { REGEX } from "./constants";
 
 interface ValidationResult {
   isValid: boolean;
-  errorMessage?: string[];
+  errorMessages: string[];
 }
 
 const useCardPasswordValidation = () => {
   const [validationResult, setValidationResult] = useState<ValidationResult>({
-    isValid: true,
-    errorMessage: [],
+    isValid: false,
+    errorMessages: [],
   });
 
   const handleCardPasswordChange = (value: string, maxLength: number) => {
@@ -18,7 +18,7 @@ const useCardPasswordValidation = () => {
     const isValidLength = value.length === maxLength;
 
     if (!isNumericInput) {
-      errors.push('숫자로 입력해주세요.');
+      errors.push("숫자로 입력해주세요.");
     }
 
     if (!isValidLength) {
@@ -27,7 +27,7 @@ const useCardPasswordValidation = () => {
 
     setValidationResult({
       isValid: isNumericInput && isValidLength,
-      errorMessage: errors,
+      errorMessages: errors,
     });
   };
 

@@ -1,15 +1,15 @@
-import { useState } from 'react';
-import { REGEX } from './constants';
+import { useState } from "react";
+import { REGEX } from "./constants";
 
 interface ValidationResult {
   isValid: boolean;
-  errorMessage?: string[];
+  errorMessages: string[];
 }
 
 const useCardHolderValidation = () => {
   const [validationResult, setValidationResult] = useState<ValidationResult>({
-    isValid: true,
-    errorMessage: [],
+    isValid: false,
+    errorMessages: [],
   });
 
   const handleCardHolderChange = (value: string, maxLength: number) => {
@@ -18,7 +18,7 @@ const useCardHolderValidation = () => {
     const isValidLength = value.length <= maxLength;
 
     if (!isValidNameFormat) {
-      errors.push('1개 이하의 공백이 연속된 대문자 영어로 입력해주세요.');
+      errors.push("1개 이하의 공백이 연속된 대문자 영어로 입력해주세요.");
     }
 
     if (!isValidLength) {
@@ -27,7 +27,7 @@ const useCardHolderValidation = () => {
 
     setValidationResult({
       isValid: isValidNameFormat && isValidLength,
-      errorMessage: errors,
+      errorMessages: errors,
     });
   };
 
