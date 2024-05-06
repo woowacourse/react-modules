@@ -25,7 +25,7 @@
   --confirm-btn-font-color: white;
   --cancel-btn-bg-color: white;
   --cancel-btn-font-color: #8b95a1;
-  --backdrop-bg-color: rgba(0, 0, 0, 0.5);
+  --dimmed-bg-color: rgba(0, 0, 0, 0.5);
 }
 
 a {

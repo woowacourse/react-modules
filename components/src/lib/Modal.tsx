@@ -47,37 +47,42 @@ const Modal = ({
     handleClose();
   };
 
+  const handleClickDimmed = (e: React.MouseEvent) => {
+    if (e.target === e.currentTarget) handleClose();
+  };
+
   return isOpen ? (
     <>
-      <div className={css(modalContainerCSS, positionCSS[position])}>
-        <div className={css(headerContainerCSS)}>
-          <h2 className={css(titleCSS)}>{title}</h2>
-          {close && (
-            <button className={css(closeButtonCSS)} onClick={handleClose}>
-              ×
-            </button>
-          )}
-        </div>
-        <div>
-          <p className={css(descriptionCSS)}>{description}</p>
-        </div>
-        {children && <div>{children}</div>}
-        {(confirmLabel || cancelLabel) && (
-          <div className={css(buttonContainerCSS)}>
-            {confirmLabel && (
-              <button className={css(buttonCSS, confirmButtonCSS)} onClick={handleConfirm}>
-                {confirmLabel}
-              </button>
-            )}
-            {cancelLabel && (
-              <button className={css(buttonCSS, cancelButtonCSS)} onClick={handleClose}>
-                {cancelLabel}
+      <div className={css(dimmedCSS)} onClick={handleClickDimmed}>
+        <div className={css(modalContainerCSS, positionCSS[position])}>
+          <div className={css(headerContainerCSS)}>
+            <h2 className={css(titleCSS)}>{title}</h2>
+            {close && (
+              <button className={css(closeButtonCSS)} onClick={handleClose}>
+                ×
               </button>
             )}
           </div>
-        )}
+          <div>
+            <p className={css(descriptionCSS)}>{description}</p>
+          </div>
+          {children && <div>{children}</div>}
+          {(confirmLabel || cancelLabel) && (
+            <div className={css(buttonContainerCSS)}>
+              {confirmLabel && (
+                <button className={css(buttonCSS, confirmButtonCSS)} onClick={handleConfirm}>
+                  {confirmLabel}
+                </button>
+              )}
+              {cancelLabel && (
+                <button className={css(buttonCSS, cancelButtonCSS)} onClick={handleClose}>
+                  {cancelLabel}
+                </button>
+              )}
+            </div>
+          )}
+        </div>
       </div>
-      <div className={css(backdropCSS)} onClick={handleClose} />
     </>
   ) : null;
 };
@@ -155,14 +160,14 @@ const closeButtonCSS = css`
   background-color: rgba(0, 0, 0, 0);
 `;
 
-const backdropCSS = css`
+const dimmedCSS = css`
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
   z-index: 0;
-  background-color: var(--backdrop-bg-color);
+  background-color: var(--dimmed-bg-color);
 `;
 
 const positionCSS: Record<Position, string> = {
