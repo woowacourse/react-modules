@@ -1,12 +1,13 @@
+import useModalEscClose from '../hooks/useModalEscClose';
 import * as Styled from './Modal.styled';
-import { HTMLAttributes, CSSProperties } from 'react';
+import { HTMLAttributes, CSSProperties, useEffect } from 'react';
 
 export interface ModalProps extends React.PropsWithChildren {
   children?: React.ReactNode;
   isOpen: boolean;
   position: 'top' | 'bottom' | 'center';
   style?: CSSProperties;
-  onClick?: (event: React.MouseEvent<HTMLElement>) => void;
+  onClose: () => void;
 }
 
 const Modal: React.FC<ModalProps> & {
@@ -15,11 +16,14 @@ const Modal: React.FC<ModalProps> & {
   ModalCloseButton: ModalCloseButtonType;
   ModalContent: ModalContentType;
   ModalFooter: ModalFooterType;
-} = ({ children, isOpen, onClick, position, ...restProps }) => {
-  if (!isOpen) return;
+} = ({ children, isOpen, onClose, position, ...restProps }) => {
+  if (!isOpen) return null;
+
+  useModalEscClose(isOpen, onClose);
+
   return (
     <>
-      <Styled.ModalBackdrop onClick={onClick}>
+      <Styled.ModalBackdrop>
         <Styled.ModalContentWrapper position={position} {...restProps}>
           {children}
         </Styled.ModalContentWrapper>
