@@ -66,12 +66,57 @@ onChange 단일 핸들러를 반환합니다.
 
 ### 특징
 
-blur 이벤트와 change 이벤트를 대응합니다.
-입력길이 검증은 blur 이벤트로 구성하고,
-잘못된 값 검증은 change 이벤트로 구성되어 있습니다.
+blur 이벤트와 change 이벤트를 구분하여 사용하고 있습니다.
+예를 들어,
+카드번호 입력시 총4개의 숫자를 입력해야하는데,
+입력도중에 길이검증로직이 동작하여 "길이는 4여야합니다." 라는 에러를 띄우는 건 보기좋지않습니다.
 
-입력 도중에 에러가 발생하는 것이 UX에 좋지않기때문에
-blur 이벤트로 대응합니다.
+입력길이 검증은 blur이벤트로 구성하고,
+잘못된 값 검증은 change 이벤트로 구성되어있습니다.
+
+### 특징2
+나만의 검증을 위해 나만의 커스텀 훅을 직접만들어 사용할 수 있습니다.
+```typescript
+import useInput, { InputState } from "./domains/useInput";
+import { Validator } from "./domains/validation";
+import useValidations from "./domains/useValidations";
+import { makeLengthBlurValidator, numericOnlyValidator } from "./constants/validators";
+
+export const monthValidator: Validator = {
+  validate: (value) => Number(value) >= 1 && Number(value) <= 12,
+  errorMessage: "월의 범위는 1~12여야 합니다.",
+  index: [0],
+};
+const validators: Validator[] = [numericOnlyValidator, monthValidator, makeLengthBlurValidator(2)];
+const useExpiryDate = () => {
+  const expiryDates: InputState[] = [useInput(""), useInput("")];
+
+  const { inputStates, onChanges, onBlurs } = useValidations(expiryDates, validators);
+
+  return { expiryDates: inputStates, onChanges, onBlurs };
+};
+
+export default useExpiryDate;
+```
+위는 useExpiryDate의 코드인데요.
+useInput과 useValidations 만을 import하여,
+나만의 Validator를 추가하여 위와같이 나만의 커스텀 훅을 즉각적으로 만들어 사용할 수 있습니다.
+
+#### 커스텀 Input사용을 위한 Validator 설명
+```typescript
+interface Validator {
+  validate: (value: string) => boolean;
+  errorMessage: string;
+  index?: number[];
+  type?: "change" | "blur";
+}
+```
+validate: 검증함수입니다. 올바른 상태일때 true를 반환합니다.
+errorMessage: error발생시 보여줄 메세지입니다.
+index: 선택입력입니다. 미입력시, 모든 인풋태그를 동시에 검증합니다. [1,3]으로 입력시, 첫번쨰와 3번쨰 인풋태그만 해당 검증을 적용합니다.
+type: onChange이벤트시 에러를 검증할 지, onBlur 이벤트시 에러를 검증할 지 선택할 수 있습니다.
+
+makeLengthBlurValidator, numericOnlyValidator와 같은 기본적인 Validator들은 제공해주고있습니다.
 
 ## 검증로직
 
