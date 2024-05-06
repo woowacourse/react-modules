@@ -1,11 +1,11 @@
-import useCardArrayValidate, { ValidateResult } from './useCardArrayValidate';
+import { renderHook, waitFor } from '@testing-library/react';
+import useCardArrayValidate, { ValidateResult } from './useValidateArrayInput';
 
 import { act } from 'react';
-import { renderHook } from '@testing-library/react';
 
 describe('useCardArrayValidate custom hook', () => {
   let validateOnChangeMock: jest.Mock<ValidateResult, [string, number]>;
-  let validateOnBlurMock: jest.Mock<ValidateResult, []>;
+  let validateOnBlurMock: jest.Mock<ValidateResult>;
 
   beforeEach(() => {
     validateOnChangeMock = jest.fn();
@@ -91,8 +91,8 @@ describe('useCardArrayValidate custom hook', () => {
     expect(result.current.isCompleted).toBe(true);
   });
 
-  test('모든 필드의 포커스가 해제될 때, 하나의 index라도 유효하지 않은 경우 errorMessage를 설정한다.', () => {
-    validateOnBlurMock.mockReturnValue({
+  test('모든 필드의 포커스가 해제될 때, 하나의 index라도 유효하지 않은 경우 errorMessage를 설정한다.', async () => {
+    validateOnBlurMock.mockReturnValueOnce({
       isValid: false,
       errorMessage: '유효하지 않은 값이 입력됐어요',
     });
@@ -105,14 +105,19 @@ describe('useCardArrayValidate custom hook', () => {
       }),
     );
 
-    act(() => {
+    await act(async () => {
       result.current.onFocusHandler(0);
       result.current.onBlurHandler(0);
+      result.current.onFocusHandler(1);
       result.current.onBlurHandler(1);
-    });
 
-    expect(validateOnBlurMock).toHaveBeenCalledTimes(1);
-    expect(result.current.isCompleted).toBe(false);
-    expect(result.current.errorMessage).toBe('유효하지 않은 값이 입력됐어요');
+      await waitFor(() => {
+        expect(validateOnBlurMock).toHaveBeenCalledTimes(1);
+        expect(result.current.isCompleted).toBe(false);
+        expect(result.current.errorMessage).toBe(
+          '유효하지 않은 값이 입력됐어요',
+        );
+      });
+    });
   });
 });
