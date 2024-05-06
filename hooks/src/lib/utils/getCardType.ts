@@ -1,5 +1,4 @@
-import { useEffect, useState } from "react";
-import { CARD_NUMBER_LENGTH } from "./useCardNumbers";
+import { CARD_NUMBER_LENGTH } from "../useCardNumbers";
 
 const VISA_START_NUMBER = 4;
 const MASTERCARD_START_NUMBER = {
@@ -23,26 +22,18 @@ const isMasterCard = (cardNumbers: string[]) => {
   );
 };
 
-const useCardType = (cardNumbers: string[]) => {
-  const [cardBrand, setCardBrand] = useState("");
-
-  useEffect(() => {
-    if (isValidCardNumbersLength(cardNumbers)) {
-      if (isVisa(cardNumbers)) {
-        setCardBrand("visa");
-        return;
-      }
-
-      if (isMasterCard(cardNumbers)) {
-        setCardBrand("mastercard");
-        return;
-      }
+const getCardType = (cardNumbers: string[]) => {
+  if (isValidCardNumbersLength(cardNumbers)) {
+    if (isVisa(cardNumbers)) {
+      return "visa";
     }
 
-    setCardBrand("");
-  }, [...cardNumbers]);
+    if (isMasterCard(cardNumbers)) {
+      return "mastercard";
+    }
+  }
 
-  return cardBrand;
+  return "";
 };
 
-export default useCardType;
+export default getCardType;

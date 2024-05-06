@@ -1,5 +1,5 @@
 import useInput, { ValidationType } from "./useInput";
-import useCardType from "./useCardType";
+import getCardType from "./utils/getCardType";
 
 export const CARD_NUMBER_LENGTH = 4;
 
@@ -54,7 +54,7 @@ const useCardNumbers = (initialValue: InitialValueType = ["", "", "", ""]) => {
 
   const cardNumbers = [cardNumber1, cardNumber2, cardNumber3, cardNumber4];
 
-  const cardBrand = useCardType(cardNumbers.map(({ value }) => value));
+  const cardBrand = getCardType(cardNumbers.map(({ value }) => value));
   const isCardNumbersValid = cardNumbers.every(({ value, error }) => value !== "" && !error.state);
 
   return { cardNumbers, cardBrand, isCardNumbersValid };
