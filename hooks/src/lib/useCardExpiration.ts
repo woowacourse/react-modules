@@ -1,61 +1,50 @@
-import { useState, ChangeEvent } from "react";
-import { validateCardExpiration } from "../validators/newCardInputValidator";
+import { useState, ChangeEvent } from 'react';
+import { validateCardExpiration } from '../validators/newCardInputValidator';
 
 const useCardExpiration = () => {
   const [cardExpiration, setCardExpiration] = useState({
-    MM: "",
-    YY: "",
+    MM: '',
+    YY: '',
     isError: false,
   });
 
   const handleCardExpirationMM = (event: ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target;
-    const isError = validateCardExpiration(value, "MM");
-
-    setCardExpiration((prev) => {
-      return {
-        ...prev,
-        MM: value,
-      };
-    });
+    const isError = validateCardExpiration(value, 'MM');
 
     if (isError) {
-      setCardExpiration((prev) => {
-        return {
-          ...prev,
-          isError: true,
-        };
+      setCardExpiration({
+        MM: value,
+        YY: cardExpiration.YY,
+        isError: true,
       });
       return;
     }
+
+    setCardExpiration({
+      MM: value,
+      YY: cardExpiration.YY,
+      isError: false,
+    });
   };
 
   const handleCardExpirationYY = (event: ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target;
-    const isError = validateCardExpiration(value, "YY");
-
-    setCardExpiration((prev) => {
-      return {
-        ...prev,
-        YY: value,
-      };
-    });
+    const isError = validateCardExpiration(value, 'YY');
 
     if (isError) {
-      setCardExpiration((prev) => {
-        return {
-          ...prev,
-          isError: true,
-        };
+      setCardExpiration({
+        MM: cardExpiration.MM,
+        YY: value,
+        isError: true,
       });
       return;
     }
 
-    setCardExpiration((prev) => {
-      return {
-        ...prev,
-        isError: false,
-      };
+    setCardExpiration({
+      MM: cardExpiration.MM,
+      YY: value,
+      isError: false,
     });
   };
 

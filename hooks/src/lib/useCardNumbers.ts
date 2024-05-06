@@ -1,37 +1,26 @@
-import { useState, ChangeEvent } from "react";
-import { validateCardNumber } from "../validators/newCardInputValidator";
+import { useState, ChangeEvent } from 'react';
+import { validateCardNumber } from '../validators/newCardInputValidator';
 
 const useCardNumbers = (cardNumbersLength: number) => {
   const [cardNumbersInfo, setCardNumbersInfo] = useState({
-    cardNumbers: "",
+    cardNumbers: '',
     isError: false,
   });
   const handleCardNumbers = (event: ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target;
     const isError = validateCardNumber(value, cardNumbersLength);
 
-    setCardNumbersInfo((prev) => {
-      return {
-        ...prev,
-        cardNumbers: value,
-      };
-    });
-
     if (isError) {
-      setCardNumbersInfo((prev) => {
-        return {
-          ...prev,
-          isError: true,
-        };
+      setCardNumbersInfo({
+        cardNumbers: value,
+        isError: true,
       });
       return;
     }
 
-    setCardNumbersInfo((prev) => {
-      return {
-        ...prev,
-        isError: false,
-      };
+    setCardNumbersInfo({
+      cardNumbers: value,
+      isError: false,
     });
   };
 

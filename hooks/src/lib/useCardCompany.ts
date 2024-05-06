@@ -1,42 +1,32 @@
-import { useState, ChangeEvent } from "react";
-import { validateCardCompany } from "../validators/newCardInputValidator";
+import { useState, ChangeEvent } from 'react';
+import { validateCardCompany } from '../validators/newCardInputValidator';
 
 const useCardCompany = () => {
   const [cardCompanyInfo, setCardCompanyInfo] = useState({
-    cardCompany: "",
+    cardCompany: '',
     isError: false,
   });
   const handleCardCompany = (
     event: ChangeEvent<HTMLSelectElement>,
-    defaultValue: string
+    defaultValue: string,
   ) => {
     const { value } = event.target;
     const isError = validateCardCompany(value, defaultValue);
 
-    setCardCompanyInfo((prev) => {
-      return {
-        ...prev,
-        cardCompany: value,
-      };
-    });
-
     if (isError) {
-      setCardCompanyInfo((prev) => {
-        return {
-          ...prev,
-          isError: true,
-        };
+      setCardCompanyInfo({
+        cardCompany: value,
+        isError: true,
       });
       return;
     }
 
-    setCardCompanyInfo((prev) => {
-      return {
-        ...prev,
-        isError: false,
-      };
+    setCardCompanyInfo({
+      cardCompany: value,
+      isError: false,
     });
   };
+
   return {
     cardCompanyInfo,
     handleCardCompany,
