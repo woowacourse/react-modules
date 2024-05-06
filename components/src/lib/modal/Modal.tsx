@@ -2,7 +2,7 @@ import useModalBackdropClickClose from '../hooks/useModalBackdropClickClose';
 import useModalEscClose from '../hooks/useModalEscClose';
 import useDisableBackgroundScroll from '../hooks/useDisableBackgroundScroll';
 import * as Styled from './Modal.styled';
-import { HTMLAttributes, CSSProperties, useRef } from 'react';
+import React, { HTMLAttributes, CSSProperties, useRef } from 'react';
 
 export interface ModalProps extends React.PropsWithChildren {
   children?: React.ReactNode;
@@ -61,17 +61,22 @@ const ModalTitle: ModalTitleType = ({ children, ...restProps }) => {
 
 type ModalIconButtonType = React.FC<
   React.PropsWithChildren<
-    { src: string; imgSize?: string } & HTMLAttributes<HTMLButtonElement>
+    {
+      onClose: () => void;
+      src: string;
+      imgSize?: string;
+    } & HTMLAttributes<HTMLButtonElement>
   >
 >;
 
 const ModalIconButton: ModalIconButtonType = ({
+  onClose,
   src,
   imgSize,
   ...restProps
 }) => {
   return (
-    <Styled.ModalIconButton {...restProps}>
+    <Styled.ModalIconButton onClick={onClose} {...restProps}>
       <img src={src} style={{ width: imgSize }} />
     </Styled.ModalIconButton>
   );
@@ -80,6 +85,7 @@ const ModalIconButton: ModalIconButtonType = ({
 type ModalTextButtonType = React.FC<
   React.PropsWithChildren<
     {
+      onClose: () => void;
       buttonSize?: string;
       fontSize?: string;
     } & HTMLAttributes<HTMLButtonElement>
@@ -87,12 +93,14 @@ type ModalTextButtonType = React.FC<
 >;
 
 const ModalTextButton: ModalTextButtonType = ({
+  onClose,
   buttonSize,
   fontSize,
   ...restProps
 }) => {
   return (
     <Styled.ModalTextButton
+      onClick={onClose}
       buttonSize={buttonSize}
       fontSize={fontSize}
       {...restProps}
