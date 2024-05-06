@@ -25,7 +25,7 @@ function App() {
   );
 
   const getErrorMessage = () => {
-    const errorDetails = Object.values(cardNumbersInfo.errorInfo);
+    const errorDetails = Object.values(cardNumbersInfo.validationResult);
     const firstErrorElement = errorDetails.find(value => !value.isValid);
     return firstErrorElement ? firstErrorElement.errorMessage : '';
   };
@@ -37,62 +37,70 @@ function App() {
           <input
             type="text"
             value={cvcInfo.value}
-            onChange={cvcInfo.handleChange}
-            onBlur={cvcInfo.handleBlur}
-            aria-invalid={!cvcInfo.errorInfo.isValid}
+            onChange={cvcInfo.runValidationInputTypeByChange}
+            onBlur={cvcInfo.runValidationFieldRulesByBlur}
+            aria-invalid={!cvcInfo.validationResult.isValid}
             maxLength={4}
           />
-          {!cvcInfo.errorInfo.isValid && <span>{cvcInfo.errorInfo.errorMessage}</span>}
+          {!cvcInfo.validationResult.isValid && (
+            <span>{cvcInfo.validationResult.errorMessage}</span>
+          )}
         </fieldset>
         <fieldset>
           <input
             type="password"
             value={passwordInfo.value}
-            onChange={passwordInfo.handleChange}
-            onBlur={passwordInfo.handleBlur}
-            aria-invalid={!passwordInfo.errorInfo.isValid}
+            onChange={passwordInfo.runValidationInputTypeByChange}
+            onBlur={passwordInfo.runValidationFieldRulesByBlur}
+            aria-invalid={!passwordInfo.validationResult.isValid}
             maxLength={2}
           />
-          {!passwordInfo.errorInfo.isValid && <span>{passwordInfo.errorInfo.errorMessage}</span>}
+          {!passwordInfo.validationResult.isValid && (
+            <span>{passwordInfo.validationResult.errorMessage}</span>
+          )}
         </fieldset>
         <fieldset>
           <input
             type="text"
             value={cardholderInfo.value}
-            onChange={cardholderInfo.handleChange}
-            onBlur={cardholderInfo.handleBlur}
-            aria-invalid={!cardholderInfo.errorInfo.isValid}
+            onChange={cardholderInfo.runValidationInputTypeByChange}
+            onBlur={cardholderInfo.runValidationFieldRulesByBlur}
+            aria-invalid={!cardholderInfo.validationResult.isValid}
             maxLength={100}
           />
-          {!cardholderInfo.errorInfo.isValid && (
-            <span>{cardholderInfo.errorInfo.errorMessage}</span>
+          {!cardholderInfo.validationResult.isValid && (
+            <span>{cardholderInfo.validationResult.errorMessage}</span>
           )}
         </fieldset>
         <fieldset>
           <input
             type="text"
             value={expiryDate.month.value}
-            onChange={expiryDate.month.handleChange}
-            onBlur={expiryDate.month.handleBlur}
-            aria-invalid={!expiryDate.month.errorInfo.isValid}
+            onChange={expiryDate.month.runValidationInputTypeByChange}
+            onBlur={expiryDate.month.runValidationFieldRulesByBlur}
+            aria-invalid={!expiryDate.month.validationResult.isValid}
             maxLength={2}
           />
           <input
             type="text"
             value={expiryDate.year.value}
-            onChange={expiryDate.year.handleChange}
-            onBlur={expiryDate.year.handleBlur}
-            aria-invalid={!expiryDate.year.errorInfo.isValid}
+            onChange={expiryDate.year.runValidationInputTypeByChange}
+            onBlur={expiryDate.year.runValidationFieldRulesByBlur}
+            aria-invalid={!expiryDate.year.validationResult.isValid}
             maxLength={2}
           />
-          {!expiryDate.year.errorInfo.isValid && (
-            <span>{expiryDate.year.errorInfo.errorMessage}</span>
+          {(!expiryDate.year.validationResult.isValid ||
+            !expiryDate.month.validationResult.isValid) && (
+            <>
+              <span>{expiryDate.month.validationResult.errorMessage}</span>
+              <span>{expiryDate.year.validationResult.errorMessage}</span>
+            </>
           )}
         </fieldset>
         <fieldset>
           <select
-            aria-invalid={!cardTypeInfo.errorInfo.isValid}
-            onChange={cardTypeInfo.handleChange}
+            aria-invalid={!cardTypeInfo.validationResult.isValid}
+            onChange={cardTypeInfo.runValidationByChange}
             value={cardTypeInfo.value}
           >
             <option value={'카드사를 입력해주세요'} disabled hidden>
@@ -104,55 +112,57 @@ function App() {
             <option value={'우리'}>우리</option>
             <option value={'asd'}>오류</option>
           </select>
-          {!cardTypeInfo.errorInfo.isValid && <span>{cardTypeInfo.errorInfo.errorMessage}</span>}
+          {!cardTypeInfo.validationResult.isValid && (
+            <span>{cardTypeInfo.validationResult.errorMessage}</span>
+          )}
         </fieldset>
         <fieldset>
           <input
             type="text"
             value={cardNumbersInfo.value.first}
             onChange={event => {
-              cardNumbersInfo.handleChange(event, 'first');
+              cardNumbersInfo.runValidationInputTypeByChange(event, 'first');
             }}
             onBlur={event => {
-              cardNumbersInfo.handleBlur(event, 'first');
+              cardNumbersInfo.runValidationFieldRulesByBlur(event, 'first');
             }}
-            aria-invalid={!cardNumbersInfo.errorInfo.first}
+            aria-invalid={!cardNumbersInfo.validationResult.first}
             maxLength={4}
           />
           <input
             type="text"
             value={cardNumbersInfo.value.second}
             onChange={event => {
-              cardNumbersInfo.handleChange(event, 'second');
+              cardNumbersInfo.runValidationInputTypeByChange(event, 'second');
             }}
             onBlur={event => {
-              cardNumbersInfo.handleBlur(event, 'second');
+              cardNumbersInfo.runValidationFieldRulesByBlur(event, 'second');
             }}
-            aria-invalid={!cardNumbersInfo.errorInfo.second}
+            aria-invalid={!cardNumbersInfo.validationResult.second}
             maxLength={4}
           />
           <input
             type="password"
             value={cardNumbersInfo.value.third}
             onChange={event => {
-              cardNumbersInfo.handleChange(event, 'third');
+              cardNumbersInfo.runValidationInputTypeByChange(event, 'third');
             }}
             onBlur={event => {
-              cardNumbersInfo.handleBlur(event, 'third');
+              cardNumbersInfo.runValidationFieldRulesByBlur(event, 'third');
             }}
-            aria-invalid={!cardNumbersInfo.errorInfo.third.isValid}
+            aria-invalid={!cardNumbersInfo.validationResult.third.isValid}
             maxLength={4}
           />
           <input
             type="password"
             value={cardNumbersInfo.value.fourth}
             onChange={event => {
-              cardNumbersInfo.handleChange(event, 'fourth');
+              cardNumbersInfo.runValidationInputTypeByChange(event, 'fourth');
             }}
             onBlur={event => {
-              cardNumbersInfo.handleBlur(event, 'fourth');
+              cardNumbersInfo.runValidationFieldRulesByBlur(event, 'fourth');
             }}
-            aria-invalid={!cardNumbersInfo.errorInfo.fourth.isValid}
+            aria-invalid={!cardNumbersInfo.validationResult.fourth.isValid}
             maxLength={4}
           />
           <span>{getErrorMessage()}</span>

@@ -25,6 +25,15 @@ function App() {
 }
 ```
 
+### validation result 형식
+
+```ts
+interface ValidationResult {
+  isValid: boolean;
+  errorMessage: string;
+}
+```
+
 ## useCardHolder
 - 카드 소유자 이름 입력 필드를 위한 커스텀 훅 생성
 
@@ -33,11 +42,17 @@ function App() {
 initialValue : string
 ```
 
+### params (optional) 
+```ts
+customValidateInputType (value: string) => ValidationResult; // 커스텀 input type 규칙을 넣어줄 수 있습니다
+customValidateFieldRules (value: string) => ValidationResult; // 커스텀 필드 규칙을 넣어줄 수 있습니다.
+```
+
 ### return
 - value: 입력 필드의 현재 값. 초기값으로 주어진 initialValue가 대문자로 변환되어 설정.
-- handleChange: 입력 필드의 값이 변경될 때 호출되는 함수. 입력 값의 유효성을 실시간으로 검사하고, 유효하지 않은 값에 대해서는 상태 업데이트 중단
-- handleBlur: 입력 필드에서 포커스가 벗어날 때 호출되는 함수. 이 함수는 최종 값의 형식 검증.
-- errorInfo: 현재 입력 값의 유효성 정보를 담고 있는 객체. isValid와 errorMessage 속성을 포함.
+- runValidationInputTypeByChange: 입력 필드의 값이 변경될 때 호출되는 함수. 입력 값의 유효성을 실시간으로 검사하고, 유효하지 않은 값에 대해서는 상태 업데이트 중단
+- runValidationFieldRulesByBlur: 입력 필드에서 포커스가 벗어날 때 호출되는 함수. 이 함수는 최종 값의 형식 검증.
+- validationResult: 현재 입력 값의 유효성 정보를 담고 있는 객체로 isValid와 errorMessage 속성을 포함합니다.
 
 
 ## useCVC
@@ -48,11 +63,17 @@ initialValue : string
 initialValue : string
 ```
 
+### params (optional) 
+```ts
+customValidateInputType (value: string) => ValidationResult; // 커스텀 input type 규칙을 넣어줄 수 있습니다
+customValidateFieldRules (value: string) => ValidationResult; // 커스텀 필드 규칙을 넣어줄 수 있습니다.
+```
+
 ### return
 - value: 입력 필드의 현재 값. 이 값은 initialValue로 설정.
-- handleChange: 입력 필드의 값이 변경될 때 호출되는 함수. 숫자 입력 검증 수행.
-- handleBlur: 입력 필드에서 포커스가 벗어날 때 호출되는 함수. CVC의 길이 검증 수행.
-- errorInfo: 현재 입력 값의 유효성 정보를 담고 있는 객체. isValid와 errorMessage 속성 포함.
+- runValidationInputTypeByChange: 입력 필드의 값이 변경될 때 호출되는 함수. 숫자 입력 검증 수행.
+- runValidationFieldRulesByBlur: 입력 필드에서 포커스가 벗어날 때 호출되는 함수. CVC의 길이 검증 수행.
+- validationResult: 현재 입력 값의 유효성 정보를 담고 있는 객체로 isValid와 errorMessage 속성을 포함합니다.
 
 
 ## useExpiryDate
@@ -60,16 +81,22 @@ initialValue : string
 
 ### params
 ```ts
-initialValue : string
- { month?: { isAutoFocus?: boolean }, year?: {isAutoFocus?: boolean } }
+initialValue : {month: string, year: string}
+```
+
+### params (optional) month, year
+```ts
+isAutoFocus: boolean;
+customValidateInputType (value: string) => ValidationResult; // 커스텀 input type 규칙을 넣어줄 수 있습니다
+customValidateFieldRules (value: string) => ValidationResult; // 커스텀 필드 규칙을 넣어줄 수 있습니다.
 ```
 
 ### return
 - month: 월 입력을 관리하는 useExpiryMonth 훅에서 반환된 객체입니다.
   - value: 입력 필드의 현재 값입니다.
-  - handleChange: 입력 필드의 값이 변경될 때 호출되는 함수입니다.
-  - handleBlur: 입력 필드에서 포커스가 벗어날 때 호출되는 함수입니다.
-  - errorInfo: 현재 입력 값의 유효성 정보를 담고 있는 객체입니다.
+  - runValidationInputTypeByChange: 입력 필드의 값이 변경될 때 호출되는 함수입니다.
+  - runValidationFieldRulesByBlur: 입력 필드에서 포커스가 벗어날 때 호출되는 함수입니다.
+  - validationResult: 현재 입력 값의 유효성 정보를 담고 있는 객체로 isValid와 errorMessage 속성을 포함합니다.
 - year: 년 입력을 관리하는 useExpiryYear 훅에서 반환된 객체입니다.
   - 각 속성은 month와 같습니다.
 
@@ -83,12 +110,18 @@ initialValue : string
 initialValue: string // 초기 값
 ```
 
+### params (optional) 
+```ts
+customValidateInputType (value: string) => ValidationResult; // 커스텀 input type 규칙을 넣어줄 수 있습니다
+customValidateFieldRules (value: string) => ValidationResult; // 커스텀 필드 규칙을 넣어줄 수 있습니다.
+```
+
 ### return
 - value: 입력된 값
-- handleChange: 입력된 값이 숫자인지 확인하고, 숫자가 아닌 경우 오류 메시지를 반환합니다. 또한 입력 값이 유효한지 여부를 isValid로 표시합니다.
-- handleBlur:
+- runValidationInputTypeByChange: 입력된 값이 숫자인지 확인하고, 숫자가 아닌 경우 오류 메시지를 반환합니다. 또한 입력 값이 유효한지 여부를 isValid로 표시합니다.
+- runValidationFieldRulesByBlur:
 입력된 값의 길이가 0이거나 2인지 확인하고, 그렇지 않은 경우 오류 메시지를 반환합니다. 또한 입력 값이 유효한지 여부를 isValid로 표시합니다.
-- errorInfo: 오류 정보를 담고 있는 객체
+- validationResult: 현재 입력 값의 유효성 정보를 담고 있는 객체로 isValid와 errorMessage 속성을 포함합니다.
 
 
 ## useCardNumbers
@@ -98,14 +131,20 @@ initialValue: string // 초기 값
 ### params
 ```ts
 initialValue: (Record<string, string>) // 초기 값 (각 카드 번호 필드에 대한 초기 값)
-options: ({ isAutoFocus: boolean }) // 추가 옵션 객체 (오토포커스 여부)
+```
+
+### params (optional) 
+```ts
+isAutoFocus: boolean; // 추가 옵션 객체 (오토포커스 여부)
+customValidateInputType (value: string) => ValidationResult; // 커스텀 input type 규칙을 넣어줄 수 있습니다
+customValidateFieldRules (value: string) => ValidationResult; // 커스텀 필드 규칙을 넣어줄 수 있습니다.
 ```
 
 ### return
 - value: 입력된 값
-- handleChange: 입력된 값의 변경을 처리하고, 유효성 검사를 수행합니다. 입력 값이 숫자가 아니거나 길이가 올바르지 않은 경우 오류 메시지를 설정합니다.
-- handleBlur: 입력된 값의 포커스가 떠날 때, 입력 값의 길이가 올바른지 확인하고 오류 메시지를 설정합니다.
-- errorInfo: 오류 정보를 담고 있는 객체
+- runValidationInputTypeByChange: 입력된 값의 변경을 처리하고, 유효성 검사를 수행합니다. 입력 값이 숫자가 아니거나 길이가 올바르지 않은 경우 오류 메시지를 설정합니다.
+- runValidationFieldRulesByBlur: 입력된 값의 포커스가 떠날 때, 입력 값의 길이가 올바른지 확인하고 오류 메시지를 설정합니다.
+- validationResult: 현재 입력 값의 유효성 정보를 담고 있는 객체로 isValid와 errorMessage 속성을 포함합니다.
 
 
 ## useCardType
@@ -120,7 +159,13 @@ options: string[] // 카드 타입의 옵션 목록
 placeholder: string // 선택지가 없을 때 보여질 플레이스홀더
 ```
 
+### params (optional) 
+```ts
+customValidateInputType (value: string) => ValidationResult; // 커스텀 input type 규칙을 넣어줄 수 있습니다
+customValidateFieldRules (value: string, options: string[]) => ValidationResult; // 커스텀 필드 규칙을 넣어줄 수 있습니다.
+```
+
 ### return
 - value: 선택된 값
-- handleChange: 선택된 값이 변경될 때의 처리 함수
-- errorInfo: 오류 정보를 담고 있는 객체
+- runValidationByChange: 선택된 값이 변경될 때의 처리 함수입니다.
+- validationResult: 현재 입력 값의 유효성 정보를 담고 있는 객체로 isValid와 errorMessage 속성을 포함합니다.
