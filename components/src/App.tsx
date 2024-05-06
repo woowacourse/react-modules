@@ -28,7 +28,7 @@ function App() {
         onOpen={onOpen}
         onConfirm={onConfirm}
         onClose={onClose}
-      ></Modal>
+      />
     </>
   );
 }
