@@ -76,7 +76,7 @@ export const 기본: Story = {
   },
 };
 
-export const 제목이있는모달: Story = {
+export const 제목이_있는_모달: Story = {
   args: {
     isOpen: true,
     position: "center",
@@ -100,7 +100,7 @@ export const 제목이있는모달: Story = {
   ),
 };
 
-export const 상단닫기버튼이있는모달: Story = {
+export const 상단_닫기_버튼이_있는_모달: Story = {
   args: {
     isOpen: true,
     position: "center",
@@ -129,7 +129,7 @@ export const 상단닫기버튼이있는모달: Story = {
   ),
 };
 
-export const 하단닫기버튼이있는모달: Story = {
+export const 하단_닫기_버튼이_있는_모달: Story = {
   args: {
     isOpen: true,
     position: "center",
