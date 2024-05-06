@@ -1,4 +1,5 @@
 import { act, renderHook } from "@testing-library/react";
+
 import useCardBrand from "./useCardBrand";
 
 describe("useCardBrand 테스트", () => {
@@ -58,8 +59,9 @@ describe("useCardBrand 테스트", () => {
 
     expect(result.current.brand).toBe(newValue);
     expect(result.current.validationResult.isValid).toBe(false);
-    expect(result.current.validationResult.errorMessage).toBe(
-      "지원하지 않는 카드사입니다. 다른 카드를 선택해주세요."
-    );
+    expect(
+      result.current.validationResult.isValid ||
+        result.current.validationResult.errorMessage
+    ).toBe("지원하지 않는 카드사입니다. 다른 카드를 선택해주세요.");
   });
 });

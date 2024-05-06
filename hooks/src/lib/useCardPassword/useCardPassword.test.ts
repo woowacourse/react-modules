@@ -1,4 +1,5 @@
-import { renderHook, act } from "@testing-library/react";
+import { act, renderHook } from "@testing-library/react";
+
 import useCardPassword from "./useCardPassword";
 
 describe("useCardPassword 테스트", () => {
@@ -37,7 +38,9 @@ describe("useCardPassword 테스트", () => {
     expect({
       password: result.current.password,
       isValid: result.current.validationResult.isValid,
-      errorMessage: result.current.validationResult.errorMessage,
+      errorMessage:
+        result.current.validationResult.isValid ||
+        result.current.validationResult.errorMessage,
     }).toEqual({
       password: newValue,
       isValid: false,
