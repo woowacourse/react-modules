@@ -4,55 +4,31 @@
 
 ## Properties
 
-### title?
+### (optional)title: string
 
-- content
-- position? `default: left`
-- color? `default: black`
-- font-size? `default: 18px`
+### (optional)subtitle: string
 
-### subtitle?
+### onClose: () => void
 
-- content
-- color? `default: lightgrey`
-- font-size? `default: 12px`
+### (optional)confirmButton
 
-### closeButton
+- content: string
+- onConfirm: () => void
 
-- color? `default: black`
-- onClose
+### (optional)cancelButton
 
-### confirmButton?
-
-- background-color? `default: black`
-- font-color? `default: white`
-- content
-- onConfirm
-
-### cancelButton?
-
-- background-color? `default: white`
-- color? `default: black`
-- content
-- onCancel
-
-### background-color?
-
-`default: white`
-
-### border-radius?
-
-`default: 5px`
+- content: string
+- onCancel: () => void
 
 ### modal-position
 
-`value: 'center' | 'bottom'`
+value: 'center' | 'bottom'
 
-### preventCloseOnOutsideClick?
+### (optional)preventCloseOnOutsideClick
 
-`default: false`
+default: false
 
-### children
+### children: ReactNode
 
 ---
 
