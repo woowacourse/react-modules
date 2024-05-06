@@ -17,7 +17,9 @@ export const Default: Story = {
   args: {
     isOpen: true,
     title: '모달 테스트',
+    children: '@seongjinme/react-modal',
     position: 'center',
+    width: { basicWidth: '50%', minWidth: '300px' },
     hasCloseButton: true,
     footerButtons: [
       {
@@ -31,8 +33,10 @@ export const Default: Story = {
         onClick: () => alert('Secondary Button Clicked!'),
       },
     ],
+    isClosableOnClickBackdrop: true,
+    zIndex: { backdrop: 999, modal: 1000 },
+    backdropOpacity: '50%',
     onClose: () => alert('"onClose" method called!'),
-    children: null,
   },
 };
 
@@ -41,7 +45,7 @@ export const CenterModal: Story = {
   render: (args) => {
     return (
       <Modal {...args}>
-        <div>contents</div>
+        <div>@seongjinme/react-modal</div>
       </Modal>
     );
   },
@@ -52,7 +56,7 @@ export const BottomModal: Story = {
   render: (args) => {
     return (
       <Modal {...args}>
-        <div>contents</div>
+        <div>@seongjinme/react-modal</div>
       </Modal>
     );
   },

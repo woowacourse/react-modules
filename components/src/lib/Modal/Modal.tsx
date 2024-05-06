@@ -17,11 +17,11 @@ export interface ModalButtonInterface {
 
 export interface ModalProps {
   isOpen: boolean;
+  title: string;
+  children: React.ReactNode;
   position?: ModalPositionType;
   width?: { basicWidth: string; minWidth: string };
-  title: string;
   hasCloseButton?: boolean;
-  children: React.ReactNode;
   footerButtons?: ModalButtonInterface[];
   isClosableOnClickBackdrop?: boolean;
   zIndex?: { backdrop: number; modal: number };
@@ -31,11 +31,11 @@ export interface ModalProps {
 
 export default function Modal({
   isOpen,
+  title,
+  children,
   position = 'center',
   width = { basicWidth: '50%', minWidth: '300px' },
-  title,
   hasCloseButton = true,
-  children,
   footerButtons,
   isClosableOnClickBackdrop = true,
   zIndex = { backdrop: 999, modal: 1000 },
