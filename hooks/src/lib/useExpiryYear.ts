@@ -34,25 +34,24 @@ export interface ExpiryYearOptions extends CustomValidator {
 
 const useExpiryYear = (initialValue: string, options?: ExpiryYearOptions) => {
   const { isAutoFocus, customValidateInputType, customValidateFieldRules } = options ?? {};
-  const { value, setValue, handleBlur, errorInfo, setErrorInfo } = useInput(initialValue, {
+  const {
+    value,
+    setValue,
+    handleBlur,
+    validationResult,
+    isValidValue,
+    focusNextInputWhenMaxLength,
+  } = useInput(initialValue, {
     validateInputType: customValidateInputType ?? validateInputType,
     validateFieldRules: customValidateFieldRules ?? validateFieldRules,
   });
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const validationResult = validateInputType(event.target.value);
-    setErrorInfo(validationResult);
-    if (!validationResult.isValid) return;
+    if (!isValidValue(event.target.value, 'inputType')) return;
     setValue(event.target.value);
 
     if (event.target.value.length === event.target.maxLength) {
-      const validationResult = validateFieldRules(event.target.value);
-      setErrorInfo(validationResult);
-      if (!validationResult.isValid) return;
-      if (isAutoFocus) {
-        const target = event.target.nextElementSibling;
-        if (target instanceof HTMLInputElement) target.focus();
-      }
+      focusNextInputWhenMaxLength(event, isAutoFocus ?? false);
     }
   };
 
@@ -69,7 +68,7 @@ const useExpiryYear = (initialValue: string, options?: ExpiryYearOptions) => {
     value,
     runValidationInputTypeByChange: handleChange,
     runValidationFieldRulesByBlur: handleBlur,
-    errorInfo,
+    validationResult,
   };
 };
 

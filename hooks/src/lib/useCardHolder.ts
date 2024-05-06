@@ -27,7 +27,7 @@ const validateFieldRules = (value: string) => {
 
 const useCardHolder = (initialValue: string, options?: CustomValidator) => {
   const { customValidateInputType, customValidateFieldRules } = options ?? {};
-  const { value, setValue, handleBlur, errorInfo, setErrorInfo } = useInput(
+  const { value, setValue, handleBlur, isValidValue, validationResult } = useInput(
     initialValue.toUpperCase(),
     {
       validateInputType: customValidateInputType ?? validateInputType,
@@ -36,9 +36,7 @@ const useCardHolder = (initialValue: string, options?: CustomValidator) => {
   );
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const validationResult = validateInputType(event.target.value);
-    setErrorInfo(validationResult);
-    if (!validationResult.isValid) return;
+    if (!isValidValue(event.target.value, 'inputType')) return;
     setValue(event.target.value.toUpperCase());
   };
 
@@ -55,7 +53,7 @@ const useCardHolder = (initialValue: string, options?: CustomValidator) => {
     value,
     runValidationInputTypeByChange: handleChange,
     runValidationFieldRulesByBlur: handleBlur,
-    errorInfo,
+    validationResult,
   };
 };
 

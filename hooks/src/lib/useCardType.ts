@@ -32,7 +32,7 @@ const useCardType = ({
   customValidateOptions,
 }: UseCardTypeProps) => {
   const { customValidateInputType, customValidateFieldRules } = customValidateOptions ?? {};
-  const { value, handleChange, setValue, errorInfo } = useSelect(
+  const { value, handleChange, setValue, validationResult } = useSelect(
     initialValue,
     {
       validateInputType: customValidateInputType ?? validateInputType,
@@ -53,7 +53,7 @@ const useCardType = ({
     }
   }, [initialValue, setValue, options, placeholder]);
 
-  return { value, runValidationByChange: handleChange, errorInfo };
+  return { value, runValidationByChange: handleChange, validationResult };
 };
 
 export default useCardType;

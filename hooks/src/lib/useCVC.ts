@@ -24,7 +24,7 @@ const validateFieldRules = (value: string) => {
 
 const useCVC = (initialValue: string, options?: CustomValidator) => {
   const { customValidateInputType, customValidateFieldRules } = options ?? {};
-  const { value, setValue, handleChange, handleBlur, errorInfo } = useInput(initialValue, {
+  const { value, setValue, handleChange, handleBlur, validationResult } = useInput(initialValue, {
     validateInputType: customValidateInputType ?? validateInputType,
     validateFieldRules: customValidateFieldRules ?? validateFieldRules,
   });
@@ -42,7 +42,7 @@ const useCVC = (initialValue: string, options?: CustomValidator) => {
     value,
     runValidationInputTypeByChange: handleChange,
     runValidationFieldRulesByBlur: handleBlur,
-    errorInfo,
+    validationResult,
   };
 };
 
