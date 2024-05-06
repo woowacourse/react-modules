@@ -1,6 +1,6 @@
 import React, { useReducer } from 'react';
 
-import { Modal } from 'maru-nice-modal';
+import { Modal } from './lib';
 
 function App() {
   const [isOpen, toggleIsOpen] = useReducer(prev => !prev, false);

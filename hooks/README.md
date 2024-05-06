@@ -3,6 +3,7 @@
 ## 설치 방법
 ```bash
 npm i maru-nice-hooks
+yarn add maru-nice-hooks
 ```
 
 ## 사용 예시

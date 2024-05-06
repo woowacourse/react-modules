@@ -7,7 +7,7 @@ import {
   usePassword,
   useCardType,
   useCardNumbers,
-} from 'maru-nice-hooks';
+} from './lib';
 
 function App() {
   const cvcInfo = useCVC('111');
@@ -34,6 +34,7 @@ function App() {
     <div>
       <form>
         <fieldset>
+          <span>cvc : </span>
           <input
             type="text"
             value={cvcInfo.value}
@@ -45,6 +46,7 @@ function App() {
           {!cvcInfo.errorInfo.isValid && <span>{cvcInfo.errorInfo.errorMessage}</span>}
         </fieldset>
         <fieldset>
+          <span>비밀번호 : </span>
           <input
             type="password"
             value={passwordInfo.value}
@@ -56,6 +58,7 @@ function App() {
           {!passwordInfo.errorInfo.isValid && <span>{passwordInfo.errorInfo.errorMessage}</span>}
         </fieldset>
         <fieldset>
+          <span>카드 소유자 : </span>
           <input
             type="text"
             value={cardholderInfo.value}
@@ -69,6 +72,7 @@ function App() {
           )}
         </fieldset>
         <fieldset>
+          <span>유효기간 : </span>
           <input
             type="text"
             value={expiryDate.month.value}
@@ -85,11 +89,19 @@ function App() {
             aria-invalid={!expiryDate.year.errorInfo.isValid}
             maxLength={2}
           />
-          {!expiryDate.year.errorInfo.isValid && (
-            <span>{expiryDate.year.errorInfo.errorMessage}</span>
-          )}
+          <div>
+            {!expiryDate.month.errorInfo.isValid && (
+              <span>{expiryDate.month.errorInfo.errorMessage}</span>
+            )}
+          </div>
+          <div>
+            {!expiryDate.year.errorInfo.isValid && (
+              <span>{expiryDate.year.errorInfo.errorMessage}</span>
+            )}
+          </div>
         </fieldset>
         <fieldset>
+          <span>카드사 : </span>
           <select
             aria-invalid={!cardTypeInfo.errorInfo.isValid}
             onChange={cardTypeInfo.handleChange}
@@ -107,6 +119,7 @@ function App() {
           {!cardTypeInfo.errorInfo.isValid && <span>{cardTypeInfo.errorInfo.errorMessage}</span>}
         </fieldset>
         <fieldset>
+          <span>카드 번호 : </span>
           <input
             type="text"
             value={cardNumbersInfo.value.first}
@@ -116,7 +129,7 @@ function App() {
             onBlur={event => {
               cardNumbersInfo.handleBlur(event, 'first');
             }}
-            aria-invalid={!cardNumbersInfo.errorInfo.first}
+            aria-invalid={!cardNumbersInfo.errorInfo.first.isValid}
             maxLength={4}
           />
           <input
@@ -128,7 +141,7 @@ function App() {
             onBlur={event => {
               cardNumbersInfo.handleBlur(event, 'second');
             }}
-            aria-invalid={!cardNumbersInfo.errorInfo.second}
+            aria-invalid={!cardNumbersInfo.errorInfo.second.isValid}
             maxLength={4}
           />
           <input

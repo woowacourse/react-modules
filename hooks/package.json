@@ -1,6 +1,6 @@
 {
   "name": "maru-nice-hooks",
-  "version": "0.0.5",
+  "version": "0.0.13",
   "description": "you can control nice hooks flexibly",
   "keywords": [
     "react",
@@ -22,7 +22,6 @@
     "test": "jest"
   },
   "dependencies": {
-    "maru-nice-hooks": "^0.0.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
