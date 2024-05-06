@@ -2,6 +2,7 @@ import useSelect from './useSelect';
 import { useEffect } from 'react';
 import validateCardType from './validator/validateCardType';
 import { UseCardType } from './type';
+import useValidation from './useValidation';
 
 interface UseCardTypeProps {
   initialValue: string;
@@ -10,13 +11,15 @@ interface UseCardTypeProps {
 }
 
 const useCardType = ({ initialValue, options, placeholder }: UseCardTypeProps): UseCardType => {
-  const { value, handleChange, setValue, errorInfo } = useSelect(
-    initialValue,
-    {
-      onChange: validateCardType,
-    },
-    [placeholder, ...options],
-  );
+  const { value, setValue } = useSelect(initialValue);
+  const { errorInfo, updateValidationResult } = useValidation();
+
+  const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    const validationResult = validateCardType(event.target.value, [placeholder, ...options]);
+    updateValidationResult(validationResult);
+    if (!validationResult.isValid) return;
+    setValue(event.target.value);
+  };
 
   useEffect(() => {
     if (!validateCardType(initialValue, [placeholder, ...options]).isValid) {

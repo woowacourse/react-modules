@@ -26,9 +26,6 @@ export interface UseInputs {
   value: Record<string, string>;
   setValue: React.Dispatch<React.SetStateAction<Record<string, string>>>;
   handleChange: (event: React.ChangeEvent<HTMLInputElement>, name: string) => void;
-  handleBlur: (event: React.FocusEvent<HTMLInputElement, Element>, name: string) => void;
-  errorInfo: Record<string, ValidationResult>;
-  setErrorInfo: React.Dispatch<React.SetStateAction<Record<string, ValidationResult>>>;
 }
 
 /**
@@ -38,8 +35,10 @@ export interface UseInputs {
  * - handleBlur: 입력 필드에서 포커스가 벗어날 때 호출되는 함수. name을 명시적으로 받아 어떤 객체 프로퍼티에서 blur 이벤트가 발생했는지 체크함.
  * - errorInfo: 현재 입력 값의 유효성 정보를 담고 있는 객체. isValid와 errorMessage 속성을 포함.
  */
-export type UseCardNumber = Omit<UseInputs, 'setValue' | 'setErrorInfo'>;
-
+export interface UseCardNumber extends Omit<UseInputs, 'setValue'> {
+  handleBlur: (event: React.FocusEvent<HTMLInputElement, Element>, name: string) => void;
+  errorInfo: Record<string, ValidationResult>;
+}
 /**
  * ValidationResult : input의 유효 상태와 에러 메시지를 갖는 에러 객체 타입
  */
@@ -70,8 +69,8 @@ export interface UseSelect {
   value: string;
   setValue: React.Dispatch<React.SetStateAction<string>>;
   handleChange: (event: React.ChangeEvent<HTMLSelectElement>) => void;
-  errorInfo: ValidationResult;
-  setErrorInfo: React.Dispatch<React.SetStateAction<ValidationResult>>;
+  // errorInfo: ValidationResult;
+  // setErrorInfo: React.Dispatch<React.SetStateAction<ValidationResult>>;
 }
 
 /**
@@ -80,4 +79,6 @@ export interface UseSelect {
  * - handleChange: 입력 필드의 값이 변경될 때 호출되는 함수. 값을 선택하지 않은 경우와 설정한 카드 타입들과 다른 option 값이 들어오면 에러 처리.
  * - errorInfo: 현재 입력 값의 유효성 정보를 담고 있는 객체. isValid와 errorMessage 속성을 포함.
  */
-export type UseCardType = Omit<UseSelect, 'setValue' | 'setErrorInfo'>;
+export interface UseCardType extends Omit<UseSelect, 'setValue'> {
+  errorInfo: ValidationResult;
+}
