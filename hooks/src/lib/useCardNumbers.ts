@@ -28,12 +28,31 @@ const useCardNumbers = (initialValue: InitialValueType = ["", "", "", ""]) => {
     },
   ];
 
-  const cardNumbers = [
-    useInput({ initialValue: initialValue[0], inputValidations, preventInputValidations }),
-    useInput({ initialValue: initialValue[1], inputValidations, preventInputValidations }),
-    useInput({ initialValue: initialValue[2], inputValidations, preventInputValidations }),
-    useInput({ initialValue: initialValue[3], inputValidations, preventInputValidations }),
-  ];
+  const cardNumber1 = useInput({
+    initialValue: initialValue[0],
+    inputValidations,
+    preventInputValidations,
+  });
+
+  const cardNumber2 = useInput({
+    initialValue: initialValue[1],
+    inputValidations,
+    preventInputValidations,
+  });
+
+  const cardNumber3 = useInput({
+    initialValue: initialValue[2],
+    inputValidations,
+    preventInputValidations,
+  });
+
+  const cardNumber4 = useInput({
+    initialValue: initialValue[3],
+    inputValidations,
+    preventInputValidations,
+  });
+
+  const cardNumbers = [cardNumber1, cardNumber2, cardNumber3, cardNumber4];
 
   const cardBrand = useCardType(cardNumbers.map(({ value }) => value));
   const isCardNumbersValid = cardNumbers.every(({ value, error }) => value !== "" && !error.state);
