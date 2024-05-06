@@ -84,7 +84,11 @@ function App() {
           <p>cardNumbers: {cardNumbers.join(" ")}</p>
           <p>validStates: {validStates.join(" ")}</p>
           <p>isValid: {cardNumbersValidationResult.isValid.toString()}</p>
-          <p>errorMessage: {cardNumbersValidationResult.errorMessage}</p>
+          <p>
+            errorMessage:{" "}
+            {cardNumbersValidationResult.isValid ||
+              cardNumbersValidationResult.errorMessage}
+          </p>
         </div>
       </section>
 
@@ -106,7 +110,11 @@ function App() {
         <div className="output-container">
           <p>brand: {brand}</p>
           <p>isValid: {brandValidationResult.isValid.toString()}</p>
-          <p>errorMessage: {brandValidationResult.errorMessage}</p>
+          <p>
+            errorMessage:{" "}
+            {brandValidationResult.isValid ||
+              brandValidationResult.errorMessage}
+          </p>
         </div>
       </section>
 
@@ -139,7 +147,11 @@ function App() {
             ExpiryDate: {expiryDate.month} / {expiryDate.year}
           </p>
           <p>isValid: {expiryDateValidationResult.isValid.toString()}</p>
-          <p>errorMessage: {expiryDateValidationResult.errorMessage}</p>
+          <p>
+            errorMessage:{" "}
+            {expiryDateValidationResult.isValid ||
+              expiryDateValidationResult.errorMessage}
+          </p>
         </div>
       </section>
 
@@ -157,7 +169,11 @@ function App() {
         <div className="output-container">
           <p>cardHolder: {cardHolder}</p>
           <p>isValid: {cardHolderValidationResult.isValid.toString()}</p>
-          <p>errorMessage: {cardHolderValidationResult.errorMessage}</p>
+          <p>
+            errorMessage:{" "}
+            {cardHolderValidationResult.isValid ||
+              cardHolderValidationResult.errorMessage}
+          </p>
         </div>
       </section>
 
@@ -175,7 +191,10 @@ function App() {
         <div className="output-container">
           <p>CVC: {CVC}</p>
           <p>isValid: {validationResult.isValid.toString()}</p>
-          <p>errorMessage: {validationResult.errorMessage}</p>
+          <p>
+            errorMessage:{" "}
+            {validationResult.isValid || validationResult.errorMessage}
+          </p>
         </div>
       </section>
 
@@ -193,7 +212,11 @@ function App() {
         <div className="output-container">
           <p>password: {password}</p>
           <p>isValid: {passwordValidationResult.isValid.toString()}</p>
-          <p>errorMessage: {passwordValidationResult.errorMessage}</p>
+          <p>
+            errorMessage:{" "}
+            {passwordValidationResult.isValid ||
+              passwordValidationResult.errorMessage}
+          </p>
         </div>
       </section>
     </>
