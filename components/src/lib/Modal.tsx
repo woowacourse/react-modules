@@ -1,10 +1,9 @@
 import React, { MouseEvent } from 'react';
 import { CLOSE_BUTTON } from '../assets/images/index';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 interface ContainerProps {
   $position: string;
-  $transform: string;
 }
 
 const BackDrop = styled.div`
@@ -17,18 +16,40 @@ const BackDrop = styled.div`
   background-color: var(--gray-backdrop-color);
 `;
 
+const calculateModalPosition = (position: string) => {
+  switch (position) {
+    case 'center':
+      return css({
+        top: '50%',
+        transform: 'translate(-50%, -50%)',
+      });
+
+    case 'bottom':
+      return css({
+        top: 'auto',
+        bottom: 0,
+        transform: 'translate(-50%, 0)',
+      });
+    default:
+      return css({
+        top: '0',
+      });
+  }
+};
+
 const Container = styled.div<ContainerProps>`
-  position: fixed;
-  top: ${(props) => props.$position};
-  left: 50%;
-  transform: ${(props) => props.$transform};
-  display: flex;
-  flex-direction: column;
-  gap: 2.4rem;
-  padding: 2.4rem 3.2rem;
-  box-sizing: border-box;
-  border-radius: 0.8rem;
-  background-color: var(--white-color);
+  ${(props) => css`
+    position: fixed;
+    left: 50%;
+    display: flex;
+    flex-direction: column;
+    gap: 2.4rem;
+    padding: 2.4rem 3.2rem;
+    box-sizing: border-box;
+    border-radius: 0.8rem;
+    background-color: var(--white-color);
+    ${calculateModalPosition(props.$position)}
+  `}
 `;
 
 const Header = styled.div`
@@ -92,32 +113,9 @@ function Modal({
     }
   };
 
-  const calculateModalPosition = () => {
-    if (position === 'center') {
-      return '50%';
-    } else if (position === 'bottom') {
-      return '100%';
-    } else {
-      return '0';
-    }
-  };
-
-  const calculateModalTransform = () => {
-    if (position === 'center') {
-      return 'translate(-50%, -50%)';
-    } else if (position === 'bottom') {
-      return 'translate(-50%, -100%)';
-    } else {
-      return 'translate(-50%, 0)';
-    }
-  };
-
   return (
     <BackDrop onClick={(e) => handleBackdropClick(e)}>
-      <Container
-        $position={calculateModalPosition()}
-        $transform={calculateModalTransform()}
-      >
+      <Container $position={position}>
         <Header>
           <Title>{title}</Title>
           {closeOption === 'icon' && (
