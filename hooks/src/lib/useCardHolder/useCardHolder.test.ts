@@ -99,7 +99,7 @@ describe("신용카드의 소유자 이름 입력 테스트", () => {
     const target = { value: userInput, name: "name" };
     const expectedValidationResult = {
       isValid: false,
-      errorMessage: ERROR_MESSAGE.nameOutOfRange,
+      errorMessage: ERROR_MESSAGE.notExistCardHolder,
     };
 
     act(() => {

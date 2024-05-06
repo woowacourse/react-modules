@@ -17,7 +17,7 @@ const usePassword = <T extends object>(initialValue: T) => {
     if (!Validator.checkNumberAndOver(value, OPTION.passwordMaxLength)) {
       return setValidationResult({
         isValid: false,
-        errorMessage: ERROR_MESSAGE.onlyNumber,
+        errorMessage: ERROR_MESSAGE.passwordOutOfRange,
       });
     }
 

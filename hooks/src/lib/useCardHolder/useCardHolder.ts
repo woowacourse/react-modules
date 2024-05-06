@@ -35,7 +35,7 @@ const useCardHolder = <T extends object>(initialValue: T) => {
     if (!Validator.checkExist(value))
       return setValidationResult({
         isValid: false,
-        errorMessage: ERROR_MESSAGE.nameOutOfRange,
+        errorMessage: ERROR_MESSAGE.notExistCardHolder,
       });
 
     updateByNameAndValue({ name, value });
@@ -53,7 +53,7 @@ const useCardHolder = <T extends object>(initialValue: T) => {
     if (!Validator.checkExist(value))
       return setValidationResult({
         isValid: false,
-        errorMessage: ERROR_MESSAGE.nameOutOfRange,
+        errorMessage: ERROR_MESSAGE.notExistCardHolder,
       });
 
     updateByNameAndValue({ name, value });

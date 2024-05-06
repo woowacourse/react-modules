@@ -17,7 +17,7 @@ const useCVC = <T extends object>(initialValue: T) => {
     if (!Validator.checkNumberAndOver(value, OPTION.cvcMaxLength)) {
       return setValidationResult({
         isValid: false,
-        errorMessage: ERROR_MESSAGE.onlyNumber,
+        errorMessage: ERROR_MESSAGE.cvcOutOfRange,
       });
     }
 

@@ -41,7 +41,7 @@ describe("신용카드 번호 입력 테스트", () => {
     const target = { value: userInput, name: "first" };
     const expectedValidationResult = {
       isValid: false,
-      errorMessage: ERROR_MESSAGE.onlyNumber,
+      errorMessage: ERROR_MESSAGE.cardNumberOutOfRange,
     };
 
     act(() => {
@@ -61,7 +61,7 @@ describe("신용카드 번호 입력 테스트", () => {
     const target = { value: userInput, name: "first" };
     const expectedValidationResult = {
       isValid: false,
-      errorMessage: ERROR_MESSAGE.onlyNumber,
+      errorMessage: ERROR_MESSAGE.cardNumberOutOfRange,
     };
 
     act(() => {

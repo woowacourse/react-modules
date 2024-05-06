@@ -19,7 +19,7 @@ const useExpiryDate = <T extends object>(initialValue: T) => {
     if (!Validator.checkNumberAndOver(value, OPTION.expirationDateMaxLength)) {
       return setValidationResult({
         isValid: false,
-        errorMessage: ERROR_MESSAGE.onlyNumber,
+        errorMessage: ERROR_MESSAGE.expiryFormat,
       });
     }
 
