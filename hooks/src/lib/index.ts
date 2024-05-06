@@ -10,5 +10,5 @@ export { default as useCardHolderNameValidation } from "./useCardHolderName/useC
 export { default as useCardPassword } from "./useCardPassword/useCardPassword";
 export { default as useCardPasswordValidation } from "./useCardPassword/useCardPasswordValidation";
 
-export { default as useCVC } from "./useCVC/useCVC";
-export { default as useCVCValidation } from "./useCVC/useCVCValidation";
+export { default as useCVCNumber } from "./useCVCNumber/useCVCNumber";
+export { default as useCVCNumberValidation } from "./useCVCNumber/useCVCNumberValidation";
