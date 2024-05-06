@@ -22,8 +22,8 @@ function App() {
           hasXButton={true}
           closeButtonContent="닫기"
           confirmButtonContent="이름 등록"
-          handleConfirm={setConfirm}
-          handleClose={() => setModalOpen(false)}
+          handleConfirmEvent={setConfirm}
+          handleCloseEvent={() => setModalOpen(false)}
         >
           {
             <ContentDefaultTemplate>

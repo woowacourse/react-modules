@@ -26,10 +26,10 @@ export const Default: Story = {
     children: <ContentDefaultTemplate>default 문서</ContentDefaultTemplate>,
     hasXButton: true,
     confirmButtonContent: "확인",
-    handleConfirm: () => {
+    handleConfirmEvent: () => {
       alert("열림");
     },
-    handleClose: () => {
+    handleCloseEvent: () => {
       alert("닫힘");
     },
   },
