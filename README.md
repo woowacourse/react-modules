@@ -10,7 +10,7 @@
     - [x] prop 이름 : closeButtonPosition : 'top' | 'bottom'
 - [x] 모달 event
   - [x] 열기
-  - [x] 닫기 - deem 눌러도 닫혀야된다.
+  - [x] 닫기 - dimmer 눌러도 닫혀야된다.
   - [ ] 확인 - optional
 - [x] npm으로 배포하기
 - [x] 설치 후 import해서 사용하기

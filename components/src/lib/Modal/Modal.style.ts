@@ -1,12 +1,12 @@
 import styled from "@emotion/styled";
 import { ModalProps } from "./Modal";
 
-interface ModalDeemProps {
-  isOpen: boolean;
+interface ModalDimmerProps {
+  $isOpen: boolean;
 }
 
-export const ModalDeem = styled.div<ModalDeemProps>`
-  display: ${({ isOpen }) => (isOpen ? "block" : "none")};
+export const ModalDimmer = styled.div<ModalDimmerProps>`
+  display: ${({ $isOpen }) => ($isOpen ? "block" : "none")};
   position: absolute;
   top: 0;
   left: 0;
