@@ -1,9 +1,9 @@
 {
   "name": "brgndyy-react-modal",
-  "version": "0.0.1",
+  "version": "0.0.5",
   "description": "공용 모달 라이브러리",
   "type": "module",
-  "types": "dist/index.d.ts",
+  "types": "dist/lib/index.d.ts",
   "main": "dist/index.js",
   "module": "dist/index.js",
   "files": [
