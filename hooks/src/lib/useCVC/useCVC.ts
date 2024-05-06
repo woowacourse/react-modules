@@ -69,7 +69,7 @@ const useCVC = <T extends object>(initialValue: T) => {
     handleCvcChange,
     handleCvcBlur,
     handleCvcEnter,
-  } as const;
+  };
 };
 
 export default useCVC;

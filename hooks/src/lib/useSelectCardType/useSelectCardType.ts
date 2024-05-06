@@ -18,7 +18,7 @@ const useSelectCardType = (initialSelected?: CardType) => {
     setSelectedCardType(value as CardType);
   };
 
-  return { selectedCardType, handleSelectCardTypeChange } as const;
+  return { selectedCardType, handleSelectCardTypeChange };
 };
 
 export default useSelectCardType;

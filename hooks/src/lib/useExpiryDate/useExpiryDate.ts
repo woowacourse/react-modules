@@ -97,7 +97,7 @@ const useExpiryDate = <T extends object>(initialValue: T) => {
     handleExpiryChange,
     handleExpiryDateBlur,
     handleExpiryDateEnter,
-  } as const;
+  };
 };
 
 export default useExpiryDate;

@@ -69,7 +69,7 @@ const useCardHolder = <T extends object>(initialValue: T) => {
     handleCardHolderChange,
     handleCardHolderBlur,
     handleCardHolderEnter,
-  } as const;
+  };
 };
 
 export default useCardHolder;

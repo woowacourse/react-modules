@@ -69,7 +69,7 @@ const usePassword = <T extends object>(initialValue: T) => {
     handlePasswordChange,
     handlePasswordBlur,
     handleCardNumberEnter,
-  } as const;
+  };
 };
 
 export default usePassword;

@@ -23,7 +23,7 @@ const useInput = <T extends object>(initialValue: T) => {
     setInputValue((prev) => ({ ...prev, [name]: value }));
   };
 
-  return { inputValue, handleInputChange, updateByNameAndValue } as const;
+  return { inputValue, handleInputChange, updateByNameAndValue };
 };
 
 export default useInput;
