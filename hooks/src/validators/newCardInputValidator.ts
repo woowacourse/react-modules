@@ -67,7 +67,7 @@ export const validateCVC = (value: string, cardCVCLength: number): string => {
   }
 
   if (value !== '' && value.length !== cardCVCLength) {
-    return '3자리를 입력해주세요.';
+    return `${cardCVCLength}자리를 입력해주세요.`;
   }
 
   return '';
