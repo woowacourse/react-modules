@@ -23,7 +23,14 @@ function App() {
 
   return (
     <>
-      <Modal isOpen={modalOpen} onClose={handleModalClose} position="center">
+      <Modal
+        isOpen={modalOpen}
+        onClose={handleModalClose}
+        position="center"
+        mountAnimation="modal_enter"
+        unMountAnimation="modal_exit"
+        animationTime={300}
+      >
         <Modal.Portal id="modal">
           <Modal.Backdrop>
             <Modal.Container className="container" style={{}}>
