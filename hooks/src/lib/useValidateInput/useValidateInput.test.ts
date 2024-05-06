@@ -1,4 +1,4 @@
-import useCardValidate, { ValidateResult } from './useCardValidate';
+import useCardValidate, { ValidateResult } from './useValidateInput';
 
 import { act } from 'react';
 import { renderHook } from '@testing-library/react';
