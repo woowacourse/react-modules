@@ -1,5 +1,5 @@
 import useInput from '../useInput';
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { validateExpiryYearFormat, validateNumber } from '../validator';
 import { Options, UseCard } from '../type';
 import useValidation from '../useValidation';
@@ -7,6 +7,7 @@ import useValidation from '../useValidation';
 const useExpiryYear = (initialValue: string, options?: Options): UseCard => {
   const { value, setValue } = useInput(initialValue);
   const { errorInfo, checkValidInput } = useValidation();
+  const isAutoFocused = useRef(false);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const targetValue = event.target.value;
@@ -22,12 +23,20 @@ const useExpiryYear = (initialValue: string, options?: Options): UseCard => {
   };
 
   const handleBlur = (event: React.FocusEvent<HTMLInputElement, Element>) => {
+    if (isAutoFocused.current) {
+      isAutoFocused.current = false;
+      return;
+    }
+
     checkValidInput(event.target.value, validateExpiryYearFormat);
   };
 
   const autoFocusNextInput = (element: HTMLElement) => {
     const target = element.nextElementSibling;
-    if (target instanceof HTMLInputElement) target.focus();
+    if (target instanceof HTMLInputElement) {
+      isAutoFocused.current = true;
+      target.focus();
+    }
   };
 
   useEffect(() => {
