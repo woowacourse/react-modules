@@ -1,7 +1,9 @@
 import './App.css';
 
-import { Button, Modal } from 'hain-tain-components';
 import React, { useState } from 'react';
+
+import Button from './lib/Button/Button';
+import Modal from './lib/Modal/Modal';
 
 function App() {
   const [isOpened, setIsOpened] = useState(false);
