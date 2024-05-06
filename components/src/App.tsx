@@ -12,16 +12,15 @@ function App() {
     <>
       <h1>Component Modules</h1>
       <button onClick={() => toggleModal()}>모달 버튼</button>
-      {isOpen && (
-        <Modal
-          toggleModal={toggleModal}
-          position="center"
-          title="카드사 선택"
-          closeOption="button"
-        >
-          <CardCompanySelector />
-        </Modal>
-      )}
+      <Modal
+        toggleModal={toggleModal}
+        position="center"
+        title="카드사 선택"
+        closeOption="icon"
+        isOpen={isOpen}
+      >
+        <CardCompanySelector />
+      </Modal>
     </>
   );
 }

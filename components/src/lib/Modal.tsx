@@ -6,14 +6,21 @@ interface ContainerProps {
   $position: string;
 }
 
-const BackDrop = styled.div`
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  backdrop-filter: blur(5px);
-  background-color: var(--gray-backdrop-color);
+interface BackDropProps {
+  $display: string;
+}
+
+const BackDrop = styled.div<BackDropProps>`
+  ${(props) => css`
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    backdrop-filter: blur(5px);
+    background-color: var(--gray-backdrop-color);
+    display: ${props.$display};
+  `}
 `;
 
 const calculateModalPosition = (position: string) => {
@@ -91,6 +98,7 @@ interface ModalProps {
   position: 'center' | 'bottom';
   title: string;
   closeOption: 'icon' | 'button';
+  isOpen: boolean;
   children: React.ReactNode;
 }
 
@@ -99,6 +107,7 @@ function Modal({
   position,
   title,
   closeOption,
+  isOpen,
   children,
 }: ModalProps) {
   const handleCloseButton = () => {
@@ -114,7 +123,10 @@ function Modal({
   };
 
   return (
-    <BackDrop onClick={(e) => handleBackdropClick(e)}>
+    <BackDrop
+      onClick={(e) => handleBackdropClick(e)}
+      $display={isOpen ? 'block' : 'none'}
+    >
       <Container $position={position}>
         <Header>
           <Title>{title}</Title>
