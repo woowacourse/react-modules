@@ -2,12 +2,23 @@ import { useEffect } from 'react';
 import useInput from './useInput';
 import { validateCVCFormat, validateNumber } from './validator';
 import { UseCard } from './type';
+import useValidation from './useValidation';
 
 const useCVC = (initialValue: string): UseCard => {
-  const { value, setValue, handleChange, handleBlur, errorInfo } = useInput(initialValue, {
-    onChange: validateNumber,
-    onBlur: validateCVCFormat,
-  });
+  const { value, setValue } = useInput(initialValue);
+  const { errorInfo, updateValidationResult } = useValidation();
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const validationResult = validateNumber(event.target.value);
+    updateValidationResult(validationResult);
+    if (!validationResult.isValid) return;
+    setValue(event.target.value);
+  };
+
+  const handleBlur = (event: React.FocusEvent<HTMLInputElement, Element>) => {
+    const validationResult = validateCVCFormat(event.target.value);
+    updateValidationResult(validationResult);
+  };
 
   useEffect(() => {
     if (!validateNumber(initialValue).isValid || !validateCVCFormat(initialValue).isValid) {

@@ -5,19 +5,19 @@ export interface UseInput {
   value: string;
   setValue: React.Dispatch<React.SetStateAction<string>>;
   handleChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  handleBlur: (event: React.FocusEvent<HTMLInputElement, Element>) => void;
-  errorInfo: ValidationResult;
-  setErrorInfo: React.Dispatch<React.SetStateAction<ValidationResult>>;
 }
 
 /**
- * UseCard : UseInput 에서 setValue와 setErrorInfo를 제외한 단일 input 커스텀 훅 반환 타입.
+ * UseCard : 카드 등록 도메인에 대한 단일 input 커스텀 훅 반환 타입.
  * - value: 입력 필드의 현재 값.
  * - handleChange: 입력 필드의 값이 변경될 때 호출되는 함수. 입력 값의 유효성을 실시간으로 검사하고, 유효하지 않은 값에 대해서는 상태 업데이트 중단
  * - handleBlur: 입력 필드에서 포커스가 벗어날 때 호출되는 함수. 이 함수는 최종 값의 형식 검증.
  * - errorInfo: 현재 입력 값의 유효성 정보를 담고 있는 객체. isValid와 errorMessage 속성을 포함.
  */
-export type UseCard = Omit<UseInput, 'setValue' | 'setErrorInfo'>;
+export interface UseCard extends Omit<UseInput, 'setValue'> {
+  handleBlur: (event: React.FocusEvent<HTMLInputElement, Element>) => void;
+  errorInfo: ValidationResult;
+}
 
 /**
  * UseInputs : input 태그의 입력값을 객체로 제어하는데, 객체 프로퍼티들이 같은 validation을 처리할 경우 사용

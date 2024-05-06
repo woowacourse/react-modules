@@ -2,28 +2,32 @@ import useInput from './useInput';
 import { useEffect } from 'react';
 import { validateExpiryMonthFormat, validateNumber } from './validator';
 import { Options, UseCard } from './type';
+import useValidation from './useValidation';
 
 const useExpiryMonth = (initialValue: string, options?: Options): UseCard => {
-  const { value, setValue, handleBlur, errorInfo, setErrorInfo } = useInput(initialValue, {
-    onChange: validateNumber,
-    onBlur: validateExpiryMonthFormat,
-  });
+  const { value, setValue } = useInput(initialValue);
+  const { errorInfo, updateValidationResult } = useValidation();
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const validationResult = validateNumber(event.target.value);
-    setErrorInfo(validationResult);
+    updateValidationResult(validationResult);
     if (!validationResult.isValid) return;
     setValue(event.target.value);
 
     if (event.target.value.length === event.target.maxLength) {
       const validationResult = validateExpiryMonthFormat(event.target.value);
-      setErrorInfo(validationResult);
+      updateValidationResult(validationResult);
       if (!validationResult.isValid) return;
       if (options?.isAutoFocus) {
         const target = event.target.nextElementSibling;
         if (target instanceof HTMLInputElement) target.focus();
       }
     }
+  };
+
+  const handleBlur = (event: React.FocusEvent<HTMLInputElement, Element>) => {
+    const validationResult = validateExpiryMonthFormat(event.target.value);
+    updateValidationResult(validationResult);
   };
 
   useEffect(() => {
