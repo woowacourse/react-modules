@@ -3,6 +3,7 @@ import useModalEscClose from '../hooks/useModalEscClose';
 import useDisableBackgroundScroll from '../hooks/useDisableBackgroundScroll';
 import * as Styled from './Modal.styled';
 import React, { HTMLAttributes, CSSProperties, useRef } from 'react';
+import CloseImage from '../../assets/close.png';
 
 export interface ModalProps extends React.PropsWithChildren {
   children?: React.ReactNode;
@@ -77,7 +78,7 @@ const ModalIconButton: ModalIconButtonType = ({
 }) => {
   return (
     <Styled.ModalIconButton onClick={onClose} {...restProps}>
-      <img src={src} style={{ width: imgSize }} />
+      <img src={src || CloseImage} style={{ width: imgSize }} />
     </Styled.ModalIconButton>
   );
 };
