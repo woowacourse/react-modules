@@ -47,7 +47,7 @@ export const ModalCloseButton = styled.img`
   height: 18px;
 `;
 
-export const ModalTitle = styled.h1`
+export const ModalTitle = styled.h2`
   margin-block-start: 0;
   margin-block-end: 0;
 
