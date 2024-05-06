@@ -5,7 +5,7 @@ export type Direction = 'row' | 'column';
 export type Position = 'center' | 'bottom' | 'top';
 export type BackDropType = 'transparent' | 'blur' | 'opaque';
 
-export interface ModalProps {
+export interface ModalProps extends HTMLAttributes<HTMLElement> {
   isOpen: boolean;
   close: () => void;
   position?: Position;
