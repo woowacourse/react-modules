@@ -83,16 +83,16 @@ const Modal = ({
 };
 
 const modalContainerCSS = css`
-  transform: translateX(-50%);
-  left: 50%;
-  width: 300px;
-  gap: 16px;
-  z-index: 1;
-  position: fixed;
   display: flex;
+  gap: 16px;
   flex-direction: column;
   padding: 24px 32px;
-  background-color: white;
+  position: fixed;
+  left: 50%;
+  z-index: 1;
+  width: 300px;
+  background-color: var(--main-bg-color);
+  transform: translateX(-50%);
 `;
 
 const headerContainerCSS = css`
@@ -102,49 +102,50 @@ const headerContainerCSS = css`
 `;
 
 const titleCSS = css`
-  color: black;
   font-family: Noto Sans KR;
-  font-size: 18px;
+  font-size: var(--title-font-size);
   font-weight: 700;
+  color: var(--title-font-color);
+
   text-align: left;
 `;
 
 const descriptionCSS = css`
-  color: #333333;
   font-family: Noto Sans KR;
-  font-size: 16px;
+  font-size: var(--desc-font-size);
   font-weight: 400;
+  color: var(--desc-font-color);
   text-align: left;
 `;
 
 const buttonContainerCSS = css`
   display: flex;
-  flex-direction: column;
   gap: 12px;
+  flex-direction: column;
 `;
 
 const buttonCSS = css`
-  aspect-ratio: 8;
-  height: auto;
-  width: 100%;
   padding: 5px;
-  border-radius: 5px;
-  box-sizing: border-box;
+  border: 2px solid var(--color-gray-300);
+  width: 100%;
+  height: auto;
   font-family: Noto Sans KR;
-  font-size: 16px;
+  font-size: var(--btn-font-size);
   font-weight: 700;
   text-align: center;
-  border: 2px solid #333333;
+  aspect-ratio: 8;
+  border-radius: 5px;
+  box-sizing: border-box;
 `;
 
 const confirmButtonCSS = css`
-  color: white;
-  background-color: #333333;
+  background-color: var(--confirm-btn-bg-color);
+  color: var(--confirm-btn-font-color);
 `;
 
 const cancelButtonCSS = css`
-  color: #8b95a1;
-  background-color: white;
+  background-color: var(--cancel-btn-bg-color);
+  color: var(--cancel-btn-font-color);
 `;
 
 const closeButtonCSS = css`
@@ -153,8 +154,8 @@ const closeButtonCSS = css`
   width: 24px;
   height: 24px;
   line-height: 0px;
-  color: #333333;
-  background-color: white;
+  color: var(--color-gray-300);
+  background-color: rgba(0, 0, 0, 0);
 `;
 
 const backdropCSS = css`
@@ -164,7 +165,7 @@ const backdropCSS = css`
   width: 100%;
   height: 100%;
   z-index: 0;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: var(--backdrop-bg-color);
 `;
 
 const positionCSS: Record<Position, string> = {

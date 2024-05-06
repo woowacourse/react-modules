@@ -11,6 +11,21 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  /* 슽스타일 변수 */
+  --color-gray-300: #333333;
+
+  --main-bg-color: white;
+  --title-font-size: 18px;
+  --title-font-color: black;
+  --desc-font-size: 16px;
+  --desc-font-color: var(--color-gray-300);
+  --btn-font-size: 16px;
+  --confirm-btn-bg-color: var(--color-gray-300);
+  --confirm-btn-font-color: white;
+  --cancel-btn-bg-color: white;
+  --cancel-btn-font-color: #8b95a1;
+  --backdrop-bg-color: rgba(0, 0, 0, 0.5);
 }
 
 a {
