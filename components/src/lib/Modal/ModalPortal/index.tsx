@@ -1,24 +1,25 @@
 import { ReactNode, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 
-import styles from './style.module.css';
 import '../../styles/reset.css';
-interface PortalProps {
+import styles from './style.module.css';
+
+interface ModalPortalProps {
   children: ReactNode;
 }
-export default function Portal(props: PortalProps) {
-  const { children } = props;
-  const $body = document.getElementsByTagName('body')?.[0] as HTMLElement;
+
+export default function ModalPortal({ children }: ModalPortalProps) {
+  const $body = document.body;
 
   const stopModalPropagation = (e: globalThis.MouseEvent) => {
     e.stopPropagation();
   };
 
   useEffect(() => {
-    document.getElementsByTagName('body')[0].addEventListener('click', stopModalPropagation);
+    $body.addEventListener('click', stopModalPropagation);
 
     return () => {
-      document.getElementsByTagName('body')[0].removeEventListener('click', stopModalPropagation);
+      $body.removeEventListener('click', stopModalPropagation);
     };
   }, []);
 
