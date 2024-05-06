@@ -61,7 +61,7 @@ interface ModalTitleProps {
 
 export const ModalTitle = styled.span<ModalTitleProps>`
   font-size: ${({ fontSize }) => fontSize || '18px'};
-  font-weight: ${({ fontWeight }) => fontWeight || 700};
+  font-weight: 700;
 `;
 
 export const ModalIconButton = styled.button<{ imgSize?: string }>`
@@ -90,8 +90,8 @@ export const ModalTextButton = styled.button<ModalTextButtonProps>`
   &:focus {
     outline: none;
   }
-  color: ${({ color }) => color || '#FFFFFF'};
-  background-color: ${({ backgroudColor }) => backgroudColor || '#333333'};
+  color: #ffffff;
+  background-color: #333333;
   font-size: ${({ fontSize }) => fontSize || '15px'};
 `;
 
