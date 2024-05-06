@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import Modal from './Modal';
+import ModalButton from './ModalButton/ModalButton';
 
 const meta = {
   title: 'Modal',
@@ -20,16 +21,18 @@ export const Default: Story = {
     position: 'center',
     hasCloseButton: true,
     footerButtons: [
-      {
-        text: 'Primary Button',
-        style: 'primary',
-        onClick: () => alert('Primary Button Clicked!'),
-      },
-      {
-        text: 'Secondary Button',
-        style: 'secondary',
-        onClick: () => alert('Secondary Button Clicked!'),
-      },
+      <ModalButton
+        key="primary-button"
+        text="Primary Button"
+        style="primary"
+        onClick={() => alert('Clicked primary button!')}
+      />,
+      <ModalButton
+        key="secondary-button"
+        text="Secondary Button"
+        style="secondary"
+        onClick={() => alert('Clicked secondary button!')}
+      />,
     ],
     onClose: () => alert('"onClose" method called!'),
     children: null,
