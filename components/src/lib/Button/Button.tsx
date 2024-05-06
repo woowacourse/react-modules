@@ -1,10 +1,9 @@
 import * as Styled from './Button.styled';
 
-type ButtonSize = 'small' | 'medium' | 'large';
-type ButtonWidth = 'fixed' | 'fit' | 'full';
-type ButtonStyle = 'primary' | 'border' | 'text';
-
-interface ButtonProps {
+export type ButtonSize = 'small' | 'medium' | 'large';
+export type ButtonWidth = 'fixed' | 'fit' | 'full';
+export type ButtonStyle = 'primary' | 'border' | 'text';
+export interface ButtonProps {
   text: string;
   onClick: () => void;
   size?: ButtonSize;

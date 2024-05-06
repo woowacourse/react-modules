@@ -1,8 +1,6 @@
-import styled from 'styled-components';
+import { ButtonSize, ButtonStyle, ButtonWidth } from './Button';
 
-export type ButtonSize = 'small' | 'medium' | 'large';
-export type ButtonWidth = 'fixed' | 'fit' | 'full';
-export type ButtonStyle = 'primary' | 'border' | 'text';
+import styled from 'styled-components';
 
 const BUTTON_SIZE_TABLE = {
   small: { width: '100px', height: '32px', fontSize: '12px' },
