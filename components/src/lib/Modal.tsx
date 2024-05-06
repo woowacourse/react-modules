@@ -8,17 +8,18 @@ interface ModalProps {
   position: positionProps;
   title: string;
   onClose: () => void;
-  isCloseButton: boolean;
+  existCloseButton: boolean;
+  closeOnBackdropClick?: boolean;
 }
 
-const Modal = ({ position, title, children, onClose, isCloseButton }: PropsWithChildren<ModalProps>) => {
+const Modal = ({ position, title, children, onClose, existCloseButton, closeOnBackdropClick = true }: PropsWithChildren<ModalProps>) => {
   return (
     <div className={`${styles.container} ${styles[position]}`}>
-      <div className={styles.backDrop} onClick={onClose}></div>
+      <div className={styles.backDrop} onClick={closeOnBackdropClick ? onClose : undefined}></div>
       <div className={styles.modalContent}>
         <div className={styles.titleContainer}>
           <h2 className={styles.title}>{title}</h2>
-          {isCloseButton && (
+          {existCloseButton && (
             <button className={styles.closeButton} onClick={onClose}>
               <img src={closeButton} />
             </button>

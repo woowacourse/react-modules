@@ -18,7 +18,7 @@ function App() {
     <div style={{ width: '100vw', height: '300vh' }}>
       <button onClick={onClick}>modal open</button>
       {isOpen && (
-        <Modal position='bottom' title='제목' onClose={onClose} isCloseButton={true}>
+        <Modal position='center' title='제목' onClose={onClose} existCloseButton={true}>
           <div>test</div>
         </Modal>
       )}
