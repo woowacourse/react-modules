@@ -1,5 +1,9 @@
 import { useState } from "react";
 
+const ERROR_MESSAGE = (index: number) => `${index}번 째 카드 번호를 잘못입력하셨습니다.`;
+const VALID_CARD_LIST = ["Master", "Visa"];
+const NO_VALID_CARD = `${VALID_CARD_LIST.join(",")}카드가 아닙니다. 카드 번호를 확인해주세요.`;
+
 const useCardNumbers = () => {
   const [first, setFirst] = useState("");
   const [second, setSecond] = useState("");
@@ -13,7 +17,7 @@ const useCardNumbers = () => {
     if (Number.isNaN(number)) {
       setErrorMessage((prev) => {
         const arr = [...prev];
-        arr[index] = "잘못됨";
+        arr[index] = ERROR_MESSAGE(index);
         return arr;
       });
       return;
@@ -31,7 +35,7 @@ const useCardNumbers = () => {
       });
     } else {
       setErrorMessage((prev) => {
-        return ["잘못됨", ...prev.slice(1)];
+        return [NO_VALID_CARD, ...prev.slice(1)];
       });
     }
     setWrapper(value, setFirst, 0);
