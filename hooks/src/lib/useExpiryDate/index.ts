@@ -32,7 +32,6 @@ export function useExpiryDate(): UseExpiryDateReturn {
   const onYearChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     yearControl.setValueWithValidation(e.target.value);
   };
-
   const onYearBlur = (e: React.FocusEvent<HTMLInputElement>) => {
     yearControl.validateOnBlur(e.target.value);
   };
