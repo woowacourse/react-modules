@@ -15,8 +15,8 @@ const ModalFooter = ({ cancelButton, confirmButton, buttonsDirection }: ModalFoo
       style={{ display: 'flex', flexDirection: `${buttonsDirection || 'row'}` }}
       className={styles['button-container']}
     >
-      {cancelButton && <CancelButton {...cancelButton} />}
       {confirmButton && <ConfirmButton {...confirmButton} />}
+      {cancelButton && <CancelButton {...cancelButton} />}
     </div>
   );
 };
