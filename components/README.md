@@ -8,7 +8,7 @@
 | closeButton | 'text', 'img'         | modal을 닫는 closeButton의 형태를 선택한다.                                              |
 | closeModal  | () => void            | modal을 닫을 떄의 action을 정의한다.                                                     |
 | title       | string                | modal의 제목을 작성한다.                                                                 |
-| children    | react component       | modal의 내용을 작성한다.                                                                 |
+| children    | React.ReactNode       | modal의 내용을 작성한다.                                                                 |
 | buttonText  | string (optional)     | 확인 버튼을 사용하고 싶을 경우, 해당 props에 button의 text를 작성한다.                   |
 | buttonClick | () => void (optional) | 확인 버튼을 클릭했을 때 action을 정의한다. buttonText가 정의되어 있을 경우에만 동작한다. |
 
