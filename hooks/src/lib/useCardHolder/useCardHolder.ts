@@ -25,8 +25,8 @@ export const DEFAULT_LENGTH = {
 };
 
 export const DEFAULT_PARAMS = {
-  initialValue: '',
   allowedLength: DEFAULT_LENGTH.defaultLength,
+  initialValue: '',
   errorMessages: {
     inputType: '카드 소유자는 영문 대소문자로 입력해 주세요.',
     allowedLengthOutOfRange: `[ERROR] 카드 소유자의 길이는 ${DEFAULT_LENGTH.minLength}~${DEFAULT_LENGTH.maxLength} 사이의 숫자로 설정되어야 합니다. 다시 확인해 주세요.`,
@@ -36,8 +36,8 @@ export const DEFAULT_PARAMS = {
 };
 
 export default function useCardHolder(
-  initialValue: string = DEFAULT_PARAMS.initialValue,
   allowedLength: number = DEFAULT_PARAMS.allowedLength,
+  initialValue: string = DEFAULT_PARAMS.initialValue,
   errorMessages: CardHolderErrorMessages = DEFAULT_PARAMS.errorMessages,
 ): CardHolderValidationResult {
   validateAllowedLength({

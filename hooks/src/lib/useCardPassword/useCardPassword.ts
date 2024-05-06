@@ -20,8 +20,8 @@ export const DEFAULT_LENGTH = {
 };
 
 export const DEFAULT_PARAMS = {
-  initialValue: '',
   allowedLength: DEFAULT_LENGTH.minLength,
+  initialValue: '',
   errorMessages: {
     inputType: `비밀번호는 숫자로만 입력해 주세요.`,
     inputLength: (allowedLength: number) =>
@@ -31,8 +31,8 @@ export const DEFAULT_PARAMS = {
 };
 
 export default function useCardPassword(
-  initialValue: string = DEFAULT_PARAMS.initialValue,
   allowedLength: number = DEFAULT_PARAMS.allowedLength,
+  initialValue: string = DEFAULT_PARAMS.initialValue,
   errorMessages: ErrorMessages = DEFAULT_PARAMS.errorMessages,
 ): PasswordValidationResult {
   validateAllowedLength({

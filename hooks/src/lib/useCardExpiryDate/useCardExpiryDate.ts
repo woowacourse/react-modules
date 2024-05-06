@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import ValidationResult from '../types/ValidationResult';
 import Validation from '../utils/Validation';
-import { validateAllowedYearLength } from '../utils/validateInitialParams';
 
 interface ExpiryDate {
   month: string;
@@ -18,7 +17,6 @@ interface ExpiryDateErrorMessages {
   invalidMonth: string;
   invalidYear: (value: number) => string;
   expiredDate: string;
-  allowedYearLengthOutOfRange: string;
 }
 
 /**
@@ -27,36 +25,29 @@ interface ExpiryDateErrorMessages {
 export const DEFAULT_YEAR_LENGTH = [2, 4];
 
 export const DEFAULT_PARAMS = {
+  isYearFourDigits: false,
   initialValue: { month: '', year: '' },
-  allowedYearLength: DEFAULT_YEAR_LENGTH[0],
   errorMessages: {
     invalidMonth: '유효 기간의 월은 01 ~ 12 사이의 2자리 숫자로 입력해 주세요.',
     invalidYear: (allowedLength: number) =>
       `유효 기간의 연도는 ${allowedLength}자리 숫자로 입력해 주세요.`,
     expiredDate: '유효 기간이 만료되었습니다. 확인 후 다시 입력해 주세요.',
-    allowedYearLengthOutOfRange: `[ERROR] 유효 기간의 연도는 ${DEFAULT_YEAR_LENGTH[0]}자리 또는 ${DEFAULT_YEAR_LENGTH[1]}자리만 허용됩니다. 다시 확인해 주세요.`,
   },
 };
 
 export default function useCardExpiryDate(
+  isYearFourDigits: boolean = DEFAULT_PARAMS.isYearFourDigits,
   initialValue: ExpiryDate = DEFAULT_PARAMS.initialValue,
-  allowedYearLength: number = DEFAULT_PARAMS.allowedYearLength,
   errorMessages: ExpiryDateErrorMessages = DEFAULT_PARAMS.errorMessages,
 ): ExpiryDateValidationResult {
-  validateAllowedYearLength({
-    allowedYearLength,
-    allowedRange: DEFAULT_YEAR_LENGTH,
-    errorMessage: errorMessages.allowedYearLengthOutOfRange,
-  });
-
   const [expiryDate, setExpiryDate] = useState(initialValue);
   const [validationResult, setValidationResult] = useState<ValidationResult>(
-    getValidationResult(initialValue, allowedYearLength, errorMessages),
+    getValidationResult(initialValue, isYearFourDigits, errorMessages),
   );
 
   const handleUpdateExpiryDate = (value: ExpiryDate) => {
     setExpiryDate(value);
-    setValidationResult(getValidationResult(value, allowedYearLength, errorMessages));
+    setValidationResult(getValidationResult(value, isYearFourDigits, errorMessages));
   };
 
   return {
@@ -68,7 +59,7 @@ export default function useCardExpiryDate(
 
 function getValidationResult(
   value: ExpiryDate,
-  allowedYearLength: number,
+  isYearFourDigits: boolean,
   errorMessages: ExpiryDateErrorMessages,
 ) {
   if (
@@ -87,14 +78,16 @@ function getValidationResult(
     };
   }
 
-  if (!validateExpireYear(value.year, allowedYearLength)) {
+  const allowedLength = isYearFourDigits ? 4 : 2;
+
+  if (!validateExpireYear(value.year, allowedLength)) {
     return {
       isValid: false,
-      errorMessage: errorMessages.invalidYear(allowedYearLength),
+      errorMessage: errorMessages.invalidYear(allowedLength),
     };
   }
 
-  if (!validateExpiryDate(value, allowedYearLength)) {
+  if (!validateExpiryDate(value, isYearFourDigits)) {
     return {
       isValid: false,
       errorMessage: errorMessages.expiredDate,
@@ -104,10 +97,9 @@ function getValidationResult(
   return { isValid: true };
 }
 
-function validateExpiryDate(value: ExpiryDate, allowedYearLength: number) {
+function validateExpiryDate(value: ExpiryDate, isYearFourDigits: boolean) {
   const currentMonth = new Date().getMonth() + 1;
-  const currentYear =
-    allowedYearLength === 2 ? new Date().getFullYear() - 2000 : new Date().getFullYear();
+  const currentYear = isYearFourDigits ? new Date().getFullYear() : new Date().getFullYear() - 2000;
 
   const inputMonth = parseInt(value.month, 10);
   const inputYear = parseInt(value.year, 10);

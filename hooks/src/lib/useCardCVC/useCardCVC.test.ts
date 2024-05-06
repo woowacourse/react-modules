@@ -4,10 +4,11 @@ import useCardCVC from './useCardCVC';
 import { DEFAULT_LENGTH, DEFAULT_PARAMS } from './useCardCVC';
 
 describe('useCardCVC', () => {
+  const allowedLength = 3;
   const initialValue = '123';
 
   it('초기값이 설정되면, CVC 상태에 해당 초기값이 저장되어야 한다.', () => {
-    const { result } = renderHook(() => useCardCVC(initialValue));
+    const { result } = renderHook(() => useCardCVC(allowedLength, initialValue));
 
     expect(result.current.CVC).toBe(initialValue);
   });
@@ -53,7 +54,7 @@ describe('useCardCVC', () => {
 
   it('CVC의 형식이 4자리로 설정된 경우, 4자리 숫자 형식의 새로운 CVC 입력값이 handleUpdateCVC를 통해 들어오면, validationResult의 isValid가 true로 반환되어야 한다.', () => {
     const newLength = 4;
-    const { result } = renderHook(() => useCardCVC('', newLength));
+    const { result } = renderHook(() => useCardCVC(newLength));
 
     act(() => {
       result.current.handleUpdateCVC('1234');
@@ -65,7 +66,7 @@ describe('useCardCVC', () => {
 
   it('CVC의 형식이 4자리로 설정된 경우, 3자리의 새로운 CVC 입력값이 handleUpdateCVC를 통해 들어오면, validationResult의 isValid가 false로 반환되며 길이 오류에 따른 에러 메시지가 함께 포함되어야 한다.', () => {
     const newLength = 4;
-    const { result } = renderHook(() => useCardCVC('', newLength));
+    const { result } = renderHook(() => useCardCVC(newLength));
 
     act(() => {
       result.current.handleUpdateCVC('123');
