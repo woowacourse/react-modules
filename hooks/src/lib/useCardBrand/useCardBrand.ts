@@ -13,7 +13,7 @@ export default function useCardBrand(
 ): BrandValidationResult {
   validateInitialParams(initialValue, allowedBrands);
 
-  const [brand, setBrand] = useState(initialValue);
+  const [brand, setBrand] = useState((initialValue = ""));
   const [validationResult, setValidationResult] = useState<ValidationResult>({
     isValid: true,
   });

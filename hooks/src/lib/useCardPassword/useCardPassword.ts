@@ -9,7 +9,7 @@ interface PasswordValidationResult {
 }
 
 export default function useCardPassword(
-  initialValue: string
+  initialValue = ""
 ): PasswordValidationResult {
   const [password, setPassword] = useState(initialValue);
   const [validationResult, setValidationResult] = useState<ValidationResult>({

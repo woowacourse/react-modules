@@ -14,7 +14,7 @@ interface ExpiryDateValidationResult {
 }
 
 export default function useCardExpiryDate(
-  initialValue: ExpiryDate
+  initialValue = { month: "", year: "" }
 ): ExpiryDateValidationResult {
   const [expiryDate, setExpiryDate] = useState(initialValue);
   const [validationResult, setValidationResult] = useState<ValidationResult>({

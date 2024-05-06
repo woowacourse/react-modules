@@ -15,7 +15,7 @@ interface CardNumbersValidationResult {
 }
 
 export default function useCardNumbers(
-  initialValues: CardNumbersType
+  initialValues: CardNumbersType = ["", "", "", ""]
 ): CardNumbersValidationResult {
   const [cardNumbers, setCardNumbers] =
     useState<CardNumbersType>(initialValues);
