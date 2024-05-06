@@ -1,6 +1,6 @@
 import { isOnlyNumber, isValidMonth } from '../utils/validateCardInfo';
 
-import useCardArrayValidate from '../useCardArrayValidate/useCardArrayValidate';
+import useCardArrayValidate from '../useValidateArrayInput/useValidateArrayInput';
 
 const useCardExpirationDate = (initValue: string[], maxLength: number = 2) => {
   const validateOnChange = (newValue: string, index: number) => {

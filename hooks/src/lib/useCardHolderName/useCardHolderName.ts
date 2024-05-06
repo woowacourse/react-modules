@@ -1,5 +1,5 @@
 import { isOnlyEnglishWithOneSpace } from '../utils/validateCardInfo';
-import useCardValidate from '../useCardValidate/useCardValidate';
+import useCardValidate from '../useValidateInput/useValidateInput';
 
 const useCardHolderName = (initValue: string, maxLength: number = 50) => {
   const validateOnChange = (newValue: string) => {

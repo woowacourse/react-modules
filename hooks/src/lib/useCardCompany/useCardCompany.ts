@@ -1,4 +1,4 @@
-import useCardValidate from '../useCardValidate/useCardValidate';
+import useCardValidate from '../useValidateInput/useValidateInput';
 
 const useCardCompany = (initValue: string, companyList: string[]) => {
   const validateOnChange = () => {

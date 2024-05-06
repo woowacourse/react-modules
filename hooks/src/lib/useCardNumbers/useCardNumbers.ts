@@ -1,5 +1,5 @@
 import { isOnlyNumber } from '../utils/validateCardInfo';
-import useCardArrayValidate from '../useCardArrayValidate/useCardArrayValidate';
+import useCardArrayValidate from '../useValidateArrayInput/useValidateArrayInput';
 
 const useCardNumbers = (initValue: string[], maxLength: number = 4) => {
   const validateOnChange = (newValue: string) => {
