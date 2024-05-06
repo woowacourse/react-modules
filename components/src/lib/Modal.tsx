@@ -60,7 +60,7 @@ const BackDrop = styled.div`
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.35);
+  background-color: var(--gray-color-300);
   backdrop-filter: blur(5px);
 `;
 
@@ -76,19 +76,19 @@ const Container = styled.div<ContainerStyleProps>`
   padding: 2.4rem 3.2rem;
   box-sizing: border-box;
   border-radius: 0.8rem;
-  background-color: #ffffff;
+  background-color: var(--white-color);
 `;
 
 const Header = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  color: #000000;
+  color: var(--black-color);
 `;
 
 const Title = styled.div`
-  font-size: 1.8rem;
-  font-weight: bold;
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-bold);
 `;
 
 const CloseIcon = styled.button`
@@ -107,10 +107,9 @@ const CloseButton = styled.button`
   height: 4.4rem;
   padding: 0.8rem auto;
   box-sizing: border-box;
-  border: 1px solid #cccccc;
+  border: 1px solid var(--gray-color-100);
   border-radius: 0.5rem;
   background-color: transparent;
-  color: #8b95a1;
-  font-size: 1.5rem;
-  font-weight: bold;
+  color: var(--gray-color-500);
+  font-weight: var(--font-weight-bold);
 `;

@@ -1,6 +1,5 @@
 import React from 'react';
 import { CARD_COMPANIES } from '../constants/cards';
-
 import styled from 'styled-components';
 
 function CardCompanySelector() {
@@ -23,7 +22,7 @@ const CardCompanyContainer = styled.div`
   grid-template-columns: repeat(4, 1fr);
   grid-column-gap: 1.2rem;
   grid-row-gap: 1.6rem;
-  color: #0a0d13;
+  color: var(--black-color);
 `;
 
 const CardCompanyBox = styled.div`
@@ -39,5 +38,5 @@ const CardCompanyImg = styled.img`
 `;
 
 const CardCompanyName = styled.div`
-  font-size: 1.2rem;
+  font-size: var(--font-size-sm);
 `;
