@@ -1,74 +1,29 @@
-# React Custom Modal Library
+# Modal Module
 
-Welcome to the React Custom Modal Library documentation! This library is designed to help you effortlessly integrate modals into your React applications.
+## 핵심 기능 한 줄
 
-## Installation
+위치, 내용, 스타일을 재활용할 수 있는 모달 모듈을 만들고 배포한다.
 
-To install the library, run the following command in your project directory:
+### 모달 Props 목록
 
-```bash
-npm install ollie-modal-components
-```
+- 모달 위치
+- 모달 전체 위치 : "position"
+  - 페이지 중앙 : "center"
+  - 페이지 하단 : "bottom"
+  - 페이지 상단 : "top"
+- 모달 닫기 버튼 위치
+  - 모달 우측 상단
+  - 모달 하단 중앙
+- 모달 제목
+- 모달 내용
+- 사용자 정의 이벤트 핸들러
+- 확인 버튼 클릭에 대한 이벤트 핸들러
+- 닫기 버튼 클릭에 대한 이벤트 핸들러
 
-## Usage
+## Button Component
 
-Here is a simple example to get you started with using the React Custom Modal.
+### 버튼 Props 목록
 
-```javascript
-import React, { useState } from "react";
-import Modal from "ollie-modal-components";
-
-function App() {
-  const [isOpen, setIsOpen] = useState(false);
-
-  const openModal = () => setIsOpen(true);
-  const closeModal = () => setIsOpen(false);
-
-  return (
-    <div>
-      <button onClick={openModal}>Open Modal</button>
-      <Modal isOpen={isOpen} onClose={closeModal} position="center">
-        <Modal.ModalHeader>
-          <Modal.ModalTitle>Modal Title Here</Modal.ModalTitle>
-          <Modal.ModalCloseButton onClick={closeModal}>
-            Close
-          </Modal.ModalCloseButton>
-        </Modal.ModalHeader>
-        <Modal.ModalContent>
-          Your modal content goes here. Feel free to include text, images, or
-          any React component.
-        </Modal.ModalContent>
-        <Modal.ModalFooter>
-          <Modal.ModalLongButton onClick={closeModal}>
-            Confirm
-          </Modal.ModalLongButton>
-        </Modal.ModalFooter>
-      </Modal>
-    </div>
-  );
-}
-
-export default App;
-```
-
-## Props
-
-The Modal component accepts the following props:
-
-- `isOpen`: Boolean indicating whether the modal is open or not.
-- `onClose`: Function to be called when the modal needs to be closed.
-- `position`: String indicating the modal's position (top, bottom, or center).
-- `style`: (Optional) CSSProperties to customize the style of the modal.
-
-## Styling
-
-This library uses styled-components for styling. You can override the default styles by extending the styled components exported from the library.
-
-```react
-  <Modal.ModalCloseButton
-      style={{ backgroundColor: "blue" }}
-      ...
-  >
-      X
-  </Modal.ModalCloseButton>
-```
+- 버튼 내용 - "children"
+- 버튼 스타일 - "style"
+- 버튼 클릭 이벤트 핸들러 - "onClick"
