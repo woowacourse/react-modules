@@ -11,6 +11,14 @@ export const cardIssuerValidator: InputValidator = {
   onBlur: validateCardIssuer,
 };
 
+function validateCardIssuer(value: string): IErrorStatus {
+  if (!contains(CARD_ISSUERS, value)) {
+    return { isError: true, errorMessage: "지정된 카드 발행사가 아닙니다." };
+  }
+
+  return { isError: false, errorMessage: null };
+}
+
 export const CARD_ISSUERS = [
   "BC카드",
   "신한카드",
@@ -24,11 +32,3 @@ export const CARD_ISSUERS = [
 
 export type CardIssuer = (typeof CARD_ISSUERS)[number];
 type Validate = (value: string) => IErrorStatus;
-
-function validateCardIssuer(value: string): IErrorStatus {
-  if (!contains(CARD_ISSUERS, value)) {
-    return { isError: true, errorMessage: "지정된 카드 발행사가 아닙니다." };
-  }
-
-  return { isError: false, errorMessage: null };
-}

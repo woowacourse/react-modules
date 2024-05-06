@@ -12,8 +12,9 @@ export function useCVC(): UseCVCReturn {
   const { value, errorStatus, setValueWithValidation, validateOnBlur } =
     useInputValidation(CVCValidator);
 
-  const onChange = (e: React.ChangeEvent<HTMLInputElement>) =>
+  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setValueWithValidation(e.target.value);
+  };
 
   const onBlur = (e: React.FocusEvent<HTMLInputElement>) => validateOnBlur(e.target.value);
 
