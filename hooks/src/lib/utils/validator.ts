@@ -31,21 +31,21 @@ const ValidatorCondition = {
 };
 
 const Validator = {
-  checkCreditExpirationPeriod(value: string, name: string): boolean {
+  checkCreditExpirationPeriod(value: string, name: string) {
     const isValidMonth = name === "month" ? ValidatorCondition.checkValidMonth(value) : true;
     if (!isValidMonth) return false;
 
     return true;
   },
 
-  checkDateExpiration(month: string, year: string): boolean {
+  checkDateExpiration(month: string, year: string) {
     const inputExpirationDate = new Date(`20${year}-${month}-01`);
     const currentDate = new Date();
     if (inputExpirationDate < currentDate) return false;
     return true;
   },
 
-  checkEnglish(value: string): boolean {
+  checkEnglish(value: string) {
     if (ValidatorCondition.checkIsEnglish(value)) return true;
 
     return false;
