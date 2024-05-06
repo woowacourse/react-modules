@@ -1,6 +1,6 @@
 import React from "react";
 import { renderHook } from "@testing-library/react";
-import useCardNumber from ".";
+import { useCardNumber } from ".";
 
 describe("useCardNumber에 대한 테스트 케이스", () => {
   const CARD_NUMBER_INDEX = 0;

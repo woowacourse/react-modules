@@ -1,6 +1,6 @@
 import React from "react";
 import { renderHook } from "@testing-library/react";
-import useCardIssuer, { CARD_ISSUERS } from ".";
+import { useCardIssuer, CARD_ISSUERS } from ".";
 
 describe("useCardIssuer에 대한 테스트 케이스", () => {
   describe("유효성 검증에 실패하는 경우", () => {

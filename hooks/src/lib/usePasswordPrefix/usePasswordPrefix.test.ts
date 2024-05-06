@@ -1,6 +1,6 @@
 import React from "react";
 import { renderHook } from "@testing-library/react";
-import usePasswordPrefix from ".";
+import { usePasswordPrefix } from ".";
 
 describe("usePasswordPrefix에 대한 테스트 케이스", () => {
   describe("유효성 검증에 실패하는 경우", () => {
