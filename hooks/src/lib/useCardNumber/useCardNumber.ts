@@ -14,9 +14,10 @@ const useCardNumber = () => {
     if (errorType === CARD_NUMBER_ERROR_TYPE.nonNumeric || value.length > 4) return;
 
     setCardNumbers((prevCardNumbers) => {
-      prevCardNumbers[cardIndex] = value;
+      const newCardNumbers = [...prevCardNumbers];
 
-      return prevCardNumbers;
+      newCardNumbers[cardIndex] = value;
+      return newCardNumbers;
     });
   };
 
