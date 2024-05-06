@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useValidation, IErrorStatus } from "../useValidation";
+import { contains } from "../utils/contains";
 
 interface UseCardIssuerReturn {
   cardIssuer: string;
@@ -30,11 +31,10 @@ export const CARD_ISSUERS = [
   "국민카드",
 ] as const;
 
-export type CardIssuer = typeof CARD_ISSUERS;
-const cardIssuerSet = new Set<string>(CARD_ISSUERS);
+export type CardIssuer = (typeof CARD_ISSUERS)[number];
 
 function validateCardIssuer(value: string): IErrorStatus {
-  if (!cardIssuerSet.has(value)) {
+  if (!contains<CardIssuer>(CARD_ISSUERS, value)) {
     return { isError: true, errorMessage: "지정된 카드 발행사가 아닙니다." };
   }
 
