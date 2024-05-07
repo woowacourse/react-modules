@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { isContainsNonNumeric } from '../../utils/number';
+import { isContainsNonNumeric } from '../utils/number';
 
 import { isValidCardPasswordLength } from './useCardPassword.util';
 import { CARD_PASSWORD_ERROR_TYPE } from './useCardPassword.constant';

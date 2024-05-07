@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { isContainsNonNumeric } from '../../utils/number';
+import { isContainsNonNumeric } from '../utils/number';
 import { isLessThenCVCNumberLength, isValidCVCNumberLength } from './useCVCNumber.util';
 import { CVC_NUMBER_ERROR_TYPE } from './useCVCNumber.constant';
 

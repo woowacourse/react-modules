@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { isInvalidMonth, isPastExpirationDate } from './useExpiration.util';
 import { EXPIRATION_ERROR_TYPE } from './useExpiration.constant';
-import { isContainsNonNumeric } from '../../utils/number';
+import { isContainsNonNumeric } from '../utils/number';
 
 const useExpirationValidation = (expiration: { month: string; year: string }) => {
   const [expirationError, setExpirationError] = useState({ isError: false, errorMessage: '' });
