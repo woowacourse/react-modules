@@ -1,15 +1,15 @@
-type ModalType = 'center' | 'bottom';
+type ModalPosition = 'center' | 'bottom';
 type CloseButtonType = 'icon' | 'box';
 
 interface ModalProps extends React.HTMLAttributes<HTMLDivElement> {
-  type: ModalType;
+  position: ModalPosition;
   children: ReactNode;
-  isOpen: boolean;
+  isModalOpen: boolean;
   closeModal: () => void;
 }
 
 interface BasicModalProps extends Omit<ModalProps, 'type'> {
-  modalTitle: string;
+  modalTitle: ReactNode;
   closeButtonType: CloseButtonType;
 }
 
@@ -18,8 +18,11 @@ interface ModalComposedProps<T> extends React.HTMLAttributes<T> {
 }
 
 interface ModalButtonProps extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, 'onClick'> {
-  children: ReactNode;
+  buttonType?: CloseButtonType;
+  children?: ReactNode;
 }
-interface ActionAndCloseButtonProps<A> extends ModalButtonProps {
-  extraAction?: A;
+
+interface ActionButtonProps<A> extends ModalButtonProps {
+  action?: A;
+  closeAfterAction?: boolean;
 }

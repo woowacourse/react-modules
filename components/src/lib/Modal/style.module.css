@@ -1,113 +1,110 @@
 :root {
   --shadow: 0px 0px 18px 6px rgba(0, 0, 0, 0.19);
   --border-radius: 0.5rem;
+
+  /* z-index */
+  --z-index-backdrop: 1000;
+  --z-index-contents: 1001;
+
+  /* colors */
+  --color-white: #fff;
+
+  --color-bg-contents: var(--color-white);
+  --color-primary: #333333;
+  --color-btn-txt: var(--color-white);
 }
 
 * {
   box-sizing: border-box;
 }
 
-.modal {
-  display: none;
+/* back drop */
+.backdrop {
+  display: flex;
   position: fixed;
-  width: 100vw;
-  height: 100vh;
-  button {
-    outline-color: transparent;
-    border-color: transparent;
-    background-color: transparent;
-    padding: 0;
-    &:focus {
-      outline-color: transparent;
-      border-color: transparent;
-    }
-    &:hover {
-      outline-color: transparent;
-      border-color: transparent;
-    }
-  }
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.5);
 }
 
 /*modal type*/
+.contents {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+
+  z-index: var(--z-index-contents);
+
+  box-shadow: var(--shadow);
+
+  background: var(--color-bg-contents);
+  padding: 2.25rem 1.5rem;
+}
+
 .default,
 .center {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  height: 100%;
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  border-radius: 0.5rem;
+
+  min-width: 19rem;
+  max-width: 80%;
+  min-height: 13.5rem;
 }
 
 .bottom {
-  display: block;
-  width: 100%;
-}
-
-/*modal 세부 구조*/
-
-.backdrop {
-  position: fixed;
-  top: 0;
-  left: 0;
-  opacity: 35%;
-  background-color: #000;
-  width: 100%;
-  height: 100%;
-}
-
-.contents {
-  position: relative;
-  box-sizing: border-box;
-  background-color: #ffffff;
-  padding: 2.25rem 1.5rem;
-  width: fit-content;
-  height: fit-content;
-}
-
-.center .contents {
-  -webkit-box-shadow: var(--shadow);
-  box-shadow: var(--shadow);
-  border-radius: var(--border-radius);
-  min-width: 50vw;
-  max-width: 90vw;
-  min-height: 12.5rem;
-  max-height: 90vw;
-}
-.bottom .contents {
   position: fixed;
   bottom: 0;
-  border-top-right-radius: var(--border-radius);
-  border-top-left-radius: var(--border-radius);
+  border-radius: 0.5rem 0.5rem 0 0;
   width: 100%;
 }
 
-.closeIconButton {
-  display: flex;
-  align-items: center;
-  width: 1.5rem;
-  height: 1.5rem;
+/* modal title */
+.title {
+  margin: 0;
+  font-weight: 700;
+  font-size: 1.125rem;
+  line-height: 1.625rem;
+  text-align: left;
 }
 
-.closeBoxButtonContainer .closeBoxButton {
-  display: inline-block;
+/* close button */
+.closeButton {
+  all: unset;
+  display: block;
+}
+
+.closeButton:hover {
   cursor: pointer;
-  margin-top: 1rem;
-  border-radius: 6px;
-  padding: 0 auto;
+}
+
+.defaultButton,
+.box {
+  border-radius: 0.3125rem;
+  background-color: var(--color-primary);
+  padding: 0.5rem 0;
   width: 100%;
-  height: 44px;
-  color: #666666;
+
+  color: var(--color-btn-txt);
   font-weight: 700;
   font-size: 0.9375rem;
-  line-height: 21.72px;
-
-  &:hover {
-    border: 1px solid #dcdcdc;
-  }
+  line-height: 1.375rem;
+  text-align: center;
 }
 
-@media screen and (max-width: 435px) {
-  .center .contents {
-    min-width: 80vw;
-  }
+.icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
 }

@@ -1,13 +1,10 @@
 import { useState } from 'react';
 
-interface Props {
-  initialState: boolean;
-}
-export default function useModal(props: Props) {
-  const [open, setOpen] = useState(props.initialState);
+export default function useModal(initialModalState: boolean) {
+  const [isModalOpen, setModalOpen] = useState(initialModalState);
 
-  const openModal = () => setOpen(true);
-  const closeModal = () => setOpen(false);
+  const openModal = () => setModalOpen(true);
+  const closeModal = () => setModalOpen(false);
 
-  return { open: open, openModal, closeModal };
+  return { isModalOpen, openModal, closeModal };
 }
