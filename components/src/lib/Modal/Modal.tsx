@@ -7,6 +7,7 @@ import CLOSE_BUTTON from '../../asset/close-button.svg';
 import useBlockedScroll from '../hooks/useBlockedScroll';
 import useEscKeyDown from '../hooks/useEscKeyDown';
 
+export type ModalSize = 'small' | 'medium' | 'large';
 export type ModalPosition = 'center' | 'bottom';
 export type ButtonPosition = 'row' | 'column';
 
@@ -15,6 +16,7 @@ export interface ModalProps {
   closeModal: () => void;
   title?: string;
   description?: string;
+  size?: ModalSize;
   children?: JSX.Element;
   modalPosition?: ModalPosition;
   primaryButton?: ButtonProps;
@@ -38,6 +40,7 @@ const Modal = ({
   closeModal,
   title = '',
   description = '',
+  size = 'large',
   children,
   modalPosition = 'center',
   primaryButton,
@@ -55,6 +58,7 @@ const Modal = ({
         <Styled.DimmedLayer onClick={closeModal}>
           <Styled.ModalContainer
             modalPosition={modalPosition}
+            size={size}
             onClick={(e) => {
               e.stopPropagation();
             }}

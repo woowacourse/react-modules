@@ -25,6 +25,7 @@ function App() {
         closeModal={handleClose}
         title="안녕하세요, 하루 💙"
         description="여기는 description 이에요."
+        size="small"
         children={
           <>
             <div style={{ backgroundColor: '#f3e3da', height: '100px' }}>

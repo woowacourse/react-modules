@@ -1,4 +1,4 @@
-import { ButtonPosition, ModalPosition } from './Modal';
+import { ButtonPosition, ModalPosition, ModalSize } from './Modal';
 
 import styled from 'styled-components';
 
@@ -13,7 +13,16 @@ export const DimmedLayer = styled.div`
   background-color: rgba(0, 0, 0, 0.4);
 `;
 
-export const ModalContainer = styled.div<{ modalPosition: ModalPosition }>`
+const ModalWidth: Record<ModalSize, number> = {
+  small: 320,
+  medium: 480,
+  large: 600,
+};
+
+export const ModalContainer = styled.div<{
+  modalPosition: ModalPosition;
+  size: ModalSize;
+}>`
   position: ${(props) =>
     props.modalPosition === 'center' ? 'relative' : 'fixed'};
   inset: ${(props) =>
@@ -23,7 +32,8 @@ export const ModalContainer = styled.div<{ modalPosition: ModalPosition }>`
   display: flex;
   flex-direction: column;
   width: 100%;
-  max-width: ${(props) => (props.modalPosition === 'center' ? '640px' : '')};
+  max-width: ${(props) =>
+    props.modalPosition === 'center' ? `${ModalWidth[props.size]}px` : ''};
   max-height: 80vh;
   box-sizing: border-box;
   gap: 16px;
