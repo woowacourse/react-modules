@@ -1,0 +1,28 @@
+input {
+  box-sizing: border-box;
+
+  padding: 8px;
+  border-radius: 4px;
+  border: 2px solid #b1b1b1;
+  outline: none;
+}
+
+input:focus {
+  border: 2px solid black;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.sm {
+  width: 100px;
+}
+
+.md {
+  width: 200px;
+}
+
+.lg {
+  width: 300px;
+}
