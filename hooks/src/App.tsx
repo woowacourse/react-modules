@@ -5,7 +5,7 @@ import {
   useCardNumber,
   useExpiryDate,
   usePassword,
-} from "choriver-payments-validation-hooks";
+} from "choco-payments-validation-hooks";
 import React from "react";
 import "./App.css";
 
