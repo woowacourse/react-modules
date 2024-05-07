@@ -33,7 +33,8 @@ const findCardBrand = (value: string): CardBrand | undefined => {
 };
 
 const useCardNumbers = (): CardNumberReturn => {
-  //TODO: 상태관리를 통해서 카드 넘버의 상태 갯수를 정한다.
+  const [cardBrand, setCardBrand] = useState<CardBrand | undefined>(undefined);
+
   const [first, setFirst] = useState("");
   const [second, setSecond] = useState("");
   const [third, setThird] = useState("");
@@ -55,7 +56,8 @@ const useCardNumbers = (): CardNumberReturn => {
   };
 
   const setFirstWrapper = (value: string) => {
-    if (validMasterNumbers(value) || validVisaNumbers(value)) {
+    const brand = findCardBrand(value);
+    if (brand) {
       setErrorMessage((prev) => {
         return [undefined, ...prev.slice(1)];
       });
@@ -64,6 +66,7 @@ const useCardNumbers = (): CardNumberReturn => {
         return [NO_VALID_CARD, ...prev.slice(1)];
       });
     }
+    setCardBrand(brand);
     setWrapper(value, setFirst, 0);
   };
 
@@ -82,6 +85,7 @@ const useCardNumbers = (): CardNumberReturn => {
       fourthState: [fourth, (value: string) => setWrapper(value, setFourth, 3)] as const,
     },
     errorList: errorMessage,
+    cardBrand,
     //TODO: 카드 브랜드를 반환한다.
   };
 };
