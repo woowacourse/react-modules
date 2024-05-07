@@ -27,7 +27,7 @@ export const validDinersNumbers = (firstNumbers: string) => {
 const isNumberInRange = (targetNumber: number, number1: number, number2: number) =>
   number1 <= targetNumber && targetNumber <= number2;
 
-export const validUnionPayNumbers = (firstNumbers: string) => {
+export const validUnionPayFirstNumbers = (firstNumbers: string) => {
   const targetNumber = Number(firstNumbers);
   const UNION_PAY_RANGE_NUMBERS = [
     [6222, 6228],
@@ -35,4 +35,16 @@ export const validUnionPayNumbers = (firstNumbers: string) => {
     [6282, 6288],
   ];
   return UNION_PAY_RANGE_NUMBERS.some(([number1, number2]) => isNumberInRange(targetNumber, number1, number2));
+};
+
+export const validUnionPaySecondNumbers = (firstNumbers: string, secondNumbers: string) => {
+  const START_NUMBER = 6221;
+  const START_CONDITION_MIN_NUMBER = 26;
+  const END_NUMBER = 6229;
+  const END_CONDITION_MAX_NUMBER = 25;
+  console.log(firstNumbers === String(START_NUMBER) && START_CONDITION_MIN_NUMBER <= Number(secondNumbers.slice(0, 2)));
+  return (
+    (firstNumbers === String(START_NUMBER) && START_CONDITION_MIN_NUMBER <= Number(secondNumbers.slice(0, 2))) ||
+    (firstNumbers === String(END_NUMBER) && END_CONDITION_MAX_NUMBER >= Number(secondNumbers.slice(0, 2)))
+  );
 };

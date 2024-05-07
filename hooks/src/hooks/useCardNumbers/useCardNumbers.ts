@@ -3,7 +3,8 @@ import {
   validAMEXNumbers,
   validDinersNumbers,
   validMasterNumbers,
-  validUnionPayNumbers,
+  validUnionPayFirstNumbers,
+  validUnionPaySecondNumbers,
   validVisaNumbers,
 } from "./cardNumberValidator";
 
@@ -40,7 +41,7 @@ const findCardBrand = (value: string): CardBrand | undefined => {
   if (validDinersNumbers(value)) {
     return "Diners";
   }
-  if (validUnionPayNumbers(value)) {
+  if (validUnionPayFirstNumbers(value)) {
     return "UnionPay";
   }
 };
@@ -84,16 +85,18 @@ const useCardNumbers = (): CardNumberReturn => {
   };
 
   const setSecondWrapper = (value: string) => {
-    /*TODO: UnionPay일 경우
-     6221인 경우 secondNumbers의 앞 두자가 26보다 커야하고,
-     6229인 경우 secondNumbers의 앞 두자가 25보다 작아야한다.
-     */
+    if (validUnionPaySecondNumbers(first, value)) {
+      setCardBrand("UnionPay");
+    } else {
+      setCardBrand(undefined);
+    }
+    setWrapper(value, setSecond, 1);
   };
 
   return {
     numbers: {
       firstState: [first, setFirstWrapper] as const,
-      secondState: [second, (value: string) => setWrapper(value, setSecond, 1)] as const,
+      secondState: [second, setSecondWrapper] as const,
       thirdState: [third, (value: string) => setWrapper(value, setThird, 2)] as const,
       fourthState: [fourth, (value: string) => setWrapper(value, setFourth, 3)] as const,
     },
