@@ -6,13 +6,17 @@ const meta = {
   component: Button,
   tags: ['autodocs'],
   argTypes: {
-    mode: {
+    color: {
       control: { type: 'select' },
-      options: ['primary', 'secondary'],
+      options: ['default', 'none'],
     },
     size: {
       control: { type: 'select' },
       options: ['sm', 'md', 'lg'],
+    },
+    variants: {
+      control: { type: 'select' },
+      options: ['normal', 'border'],
     },
   },
 } satisfies Meta<typeof Button>;
@@ -24,7 +28,7 @@ type Story = StoryObj<typeof Button>;
 export const Primary: Story = {
   args: {
     text: 'Primary Button',
-    mode: 'primary',
+    color: 'default',
     size: 'lg',
   },
 };
@@ -32,7 +36,7 @@ export const Primary: Story = {
 export const Secondary: Story = {
   args: {
     text: 'Secondary Button',
-    mode: 'secondary',
+    color: 'none',
     size: 'lg',
   },
 };
@@ -40,7 +44,7 @@ export const Secondary: Story = {
 export const Small: Story = {
   args: {
     text: 'Small Button',
-    mode: 'primary',
+    color: 'default',
     size: 'sm',
   },
 };
@@ -48,7 +52,7 @@ export const Small: Story = {
 export const Medium: Story = {
   args: {
     text: 'Medium Button',
-    mode: 'primary',
+    color: 'default',
     size: 'md',
   },
 };
@@ -56,7 +60,15 @@ export const Medium: Story = {
 export const Large: Story = {
   args: {
     text: 'Large Button',
-    mode: 'primary',
+    color: 'default',
     size: 'lg',
+  },
+};
+
+export const FullWidth: Story = {
+  args: {
+    text: 'Full width Button',
+    color: 'default',
+    fullWidth: true,
   },
 };
