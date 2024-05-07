@@ -9,6 +9,6 @@ export interface CardNumbers {
 
 export type CardNumberKeys = keyof CardNumbers;
 
-export type CardNumberError =
+export type CardNumbersError =
   | ErrorStatus.INVALID_LENGTH
   | ErrorStatus.IS_NOT_NUMBER;

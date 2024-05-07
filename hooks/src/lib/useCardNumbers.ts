@@ -1,116 +1,66 @@
-import { ChangeEvent, FocusEvent } from 'react';
-import {
-  CardNumbers,
-  CardNumberKeys,
-  CardNumberError,
-} from '../types/cardNumbers';
+import { ChangeEvent, FocusEvent, useEffect, useRef, useState } from 'react';
 import useInput from './useInput';
 import { validateLengthOver, validateNumber } from '../validate/validate';
 import { CARD_NUMBERS_ERROR_MESSAGES } from '../constants/error';
-import { CARD_NUMBER_LENGTH } from '../constants/length';
+import { CARD_NUMBER_TOTAL_LENGTH } from '../constants/length';
+import { CardNumbersError } from '../types/cardNumbers';
+import getCardBrand from '../utils/checkCardBrandType';
+import { CARD_BRAND, CARD_BRAND_CONFIG } from '../constants/cardBrand';
+import { formatCardNumbers } from '../utils/formatCardNumbers';
 
-const cardNumbersValidates = (value: string) => {
+const cardNumbersValidates = (value: string, validLength: number) => {
   validateNumber(value);
-  validateLengthOver(value, CARD_NUMBER_LENGTH);
+  validateLengthOver(value, validLength);
 };
 
-const useCardNumbers = (initialValues: CardNumbers) => {
-  const validLength = CARD_NUMBER_LENGTH;
-  const {
-    value: cardNumber1,
-    onChange: onChangeNumber1,
-    onBlurValidLength: onBlurNumber1,
-    errorStatus: errorStatusNumber1,
-  } = useInput<CardNumberError>(
-    initialValues['cardNumber1'],
-    cardNumbersValidates,
-    validLength
-  );
+const useCardNumbers = (initialValues: string = '') => {
+  const validateLengthRef = useRef<number>(CARD_NUMBER_TOTAL_LENGTH);
 
-  const {
-    value: cardNumber2,
-    onChange: onChangeNumber2,
-    onBlurValidLength: onBlurNumber2,
-    errorStatus: errorStatusNumber2,
-  } = useInput<CardNumberError>(
-    initialValues['cardNumber2'],
-    cardNumbersValidates,
-    validLength
-  );
+  const [cardBrand, setCardBrand] = useState<CARD_BRAND>('UNKNOWN');
+  const [formatValue, setFormatValue] = useState<string>('');
 
-  const {
-    value: cardNumber3,
-    onChange: onChangeNumber3,
-    onBlurValidLength: onBlurNumber3,
-    errorStatus: errorStatusNumber3,
-  } = useInput<CardNumberError>(
-    initialValues['cardNumber3'],
-    cardNumbersValidates,
-    validLength
-  );
+  const { value, onChange, onBlurValidLength, errorStatus } =
+    useInput<CardNumbersError>(
+      initialValues,
+      (value) => cardNumbersValidates(value, validateLengthRef.current),
+      validateLengthRef.current
+    );
 
-  const {
-    value: cardNumber4,
-    onChange: onChangeNumber4,
-    onBlurValidLength: onBlurNumber4,
-    errorStatus: errorStatusNumber4,
-  } = useInput<CardNumberError>(
-    initialValues['cardNumber4'],
-    cardNumbersValidates,
-    validLength
-  );
+  useEffect(() => {
+    setFormatValue(
+      formatCardNumbers(value, CARD_BRAND_CONFIG[cardBrand].format)
+    );
+  }, [cardBrand, value]);
 
-  const onChangeArray = {
-    cardNumber1: onChangeNumber1,
-    cardNumber2: onChangeNumber2,
-    cardNumber3: onChangeNumber3,
-    cardNumber4: onChangeNumber4,
+  const setValidateLength = (newLength: number) => {
+    validateLengthRef.current = newLength;
   };
 
-  const onChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const { name } = e.target;
-    onChangeArray[name as CardNumberKeys](e);
+  const checkCardBrandType = (value: string) => {
+    const cardBrand = getCardBrand(value);
+    console.log(cardBrand);
+    setCardBrand(cardBrand);
+    setValidateLength(CARD_BRAND_CONFIG[cardBrand].length);
   };
 
-  const onBlurArray = {
-    cardNumber1: onBlurNumber1,
-    cardNumber2: onBlurNumber2,
-    cardNumber3: onBlurNumber3,
-    cardNumber4: onBlurNumber4,
-  };
-
-  const onBlur = (e: FocusEvent<HTMLInputElement>) => {
-    const { name } = e.target;
-    onBlurArray[name as CardNumberKeys](e);
-  };
-
-  const errorMessages = {
-    cardNumber1:
-      errorStatusNumber1 && CARD_NUMBERS_ERROR_MESSAGES[errorStatusNumber1],
-    cardNumber2:
-      errorStatusNumber2 && CARD_NUMBERS_ERROR_MESSAGES[errorStatusNumber2],
-    cardNumber3:
-      errorStatusNumber3 && CARD_NUMBERS_ERROR_MESSAGES[errorStatusNumber3],
-    cardNumber4:
-      errorStatusNumber4 && CARD_NUMBERS_ERROR_MESSAGES[errorStatusNumber4],
-  };
-
-  for (const key in errorMessages) {
-    if (errorMessages[key as CardNumberKeys] === null) {
-      delete errorMessages[key as CardNumberKeys];
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    if (e.target.value.length >= 6) {
+      checkCardBrandType(e.target.value);
     }
-  }
+
+    onChange(e);
+  };
+
+  const handleBlur = (e: FocusEvent<HTMLInputElement>) => {
+    onBlurValidLength(e);
+  };
 
   return {
-    values: {
-      cardNumber1,
-      cardNumber2,
-      cardNumber3,
-      cardNumber4,
-    },
-    onChange,
-    onBlur,
-    errorMessages,
+    value,
+    formatValue,
+    onChange: handleChange,
+    onBlur: handleBlur,
+    errorMessage: errorStatus && CARD_NUMBERS_ERROR_MESSAGES[errorStatus],
   };
 };
 
