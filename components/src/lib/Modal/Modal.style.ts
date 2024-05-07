@@ -1,12 +1,7 @@
 import styled from "@emotion/styled";
 import { ModalProps } from "./Modal";
 
-interface ModalDimmerProps {
-  $isOpen: boolean;
-}
-
-export const ModalDimmer = styled.div<ModalDimmerProps>`
-  display: ${({ $isOpen }) => ($isOpen ? "block" : "none")};
+export const ModalDimmer = styled.div`
   position: absolute;
   top: 0;
   left: 0;
