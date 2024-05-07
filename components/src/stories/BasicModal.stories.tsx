@@ -34,23 +34,23 @@ const SmallModal = () => {
   );
 };
 
-// const SmallModal = () => {
-//   return (
-//     <Modal isOpen={true} position="center" onClose={() => {}} size="small">
-//       <Modal.Title> 약관에 동의해 주세요</Modal.Title>
-//       <Modal.CloseIcon onClick={() => {}}>
-//         <DeleteIcon />
-//       </Modal.CloseIcon>
-//       <Modal.Content>[필수] 개인정보 수집약관 동의</Modal.Content>
-//       <Modal.StyledButton
-//         label="동의"
-//         onClickEvent={() => {}}
-//         backgroundColor="white"
-//       />
-//       <Modal.CloseButton label="닫기" onClose={() => {}} />
-//     </Modal>
-//   );
-// };
+const MediumModal = () => {
+  return (
+    <Modal isOpen={true} position="center" onClose={() => {}} size="medium">
+      <Modal.Title> 약관에 동의해 주세요</Modal.Title>
+      <Modal.CloseIcon onClick={() => {}}>
+        <DeleteIcon />
+      </Modal.CloseIcon>
+      <Modal.Content>[필수] 개인정보 수집약관 동의</Modal.Content>
+      <Modal.StyledButton
+        label="동의"
+        onClickEvent={() => {}}
+        backgroundColor="black"
+      />
+      <Modal.CloseButton label="닫기" onClose={() => {}} />
+    </Modal>
+  );
+};
 
 const LargeModal = () => {
   return (
@@ -63,7 +63,7 @@ const LargeModal = () => {
       <Modal.StyledButton
         label="동의"
         onClickEvent={() => {}}
-        backgroundColor="white"
+        backgroundColor="black"
       />
       <Modal.CloseButton label="닫기" onClose={() => {}} />
     </Modal>
@@ -74,6 +74,10 @@ type Story = StoryObj<typeof Modal>;
 
 export const Small: Story = {
   render: () => <SmallModal />,
+};
+
+export const Medium: Story = {
+  render: () => <MediumModal />,
 };
 
 export const Large: Story = {

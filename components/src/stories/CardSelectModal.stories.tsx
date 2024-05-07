@@ -14,13 +14,13 @@ const Grid = styled.div`
 `;
 
 const OneCardCompanyBox = styled.div`
-  width: 80px;
-  font-size: 14px;
+  width: 58px;
+  font-size: 11px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 10px;
+  gap: 5px;
 `;
 
 const CardCompany = ({ company }: { company: CardCompanyType }) => {
@@ -45,7 +45,7 @@ const CardCompaniesBox = () => {
 
 const CardSelectModal = () => {
   return (
-    <Modal isOpen={true} position="center" onClose={() => {}}>
+    <Modal isOpen={true} size="small" position="center" onClose={() => {}}>
       <Modal.Title> 카드사 선택 </Modal.Title>
       <Modal.CloseIcon onClick={() => {}}>
         <DeleteIcon />
