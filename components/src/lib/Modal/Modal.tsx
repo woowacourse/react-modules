@@ -1,9 +1,7 @@
 import * as Styled from './Modal.styled';
 
-import Button from '../Button/Button';
+import Button, { ButtonProps } from '../Button/Button';
 import CLOSE_BUTTON from '../../asset/close-button.svg';
-
-import { ButtonProps } from '../Button/Button';
 import { useEffect } from 'react';
 
 interface ModalProps {
@@ -77,23 +75,23 @@ const Modal = ({
                 <Button
                   text={primaryButton.text}
                   onClick={primaryButton.onClick}
-                  size={primaryButton.size || 'medium'}
-                  width={primaryButton.width || 'full'}
-                  buttonStyle={primaryButton.buttonStyle || 'primary'}
+                  size={primaryButton.size ?? 'medium'}
+                  width={primaryButton.width ?? 'full'}
+                  buttonStyle={primaryButton.buttonStyle ?? 'primary'}
                   primaryColor={
-                    primaryColor || primaryButton.primaryColor || '#333333'
+                    primaryColor ?? primaryButton.primaryColor ?? '#333333'
                   }
                 />
               )}
               {secondaryButton && (
                 <Button
                   text={secondaryButton.text}
-                  onClick={secondaryButton.onClick || onClose}
-                  size={secondaryButton.size || 'medium'}
-                  width={secondaryButton.width || 'full'}
-                  buttonStyle={secondaryButton.buttonStyle || 'border'}
+                  onClick={secondaryButton.onClick ?? onClose}
+                  size={secondaryButton.size ?? 'medium'}
+                  width={secondaryButton.width ?? 'full'}
+                  buttonStyle={secondaryButton.buttonStyle ?? 'border'}
                   primaryColor={
-                    primaryColor || secondaryButton.primaryColor || '#333333'
+                    primaryColor ?? secondaryButton.primaryColor ?? '#333333'
                   }
                 />
               )}
