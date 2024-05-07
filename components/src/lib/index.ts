@@ -14,3 +14,4 @@ export const Modal = Object.assign(MainModal, {
 });
 
 export { default as AlertModal } from './Modal/AlertModal/AlertModal';
+export { default as ConfirmModal } from './Modal/ConfirmModal/ConfirmModal';
