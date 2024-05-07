@@ -13,7 +13,7 @@ export function useCardHolder(): [string, (value: string) => void, ValidationRes
     }
 
     // 입력된 문자열이 영어 대문자와 공백이 아니라면 에러 발생
-    if (!/^[A-Z\s]$/.test(value) && isTouched) {
+    if (!/^[A-Z\s]*$/.test(value) && isTouched) {
       return {
         isValid: false,
         errorMessage: ERROR_MESSAGE.CARD_HOLDER.INVALID_CHARACTERS,
