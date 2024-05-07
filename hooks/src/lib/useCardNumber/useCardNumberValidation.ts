@@ -2,8 +2,8 @@ import { useState } from 'react';
 import { isCardNumberLessLength } from './useCardNumber.util';
 import { CARD_NUMBER_ERROR_TYPE } from './useCardNumber.constant';
 import { isContainsNonNumeric } from '../utils/number';
-import { CardBrand } from '../utils/cardBrand/cardBrand.type';
-import { CARD_BRAND_LENGTH_MAP } from '../utils/cardBrand/cardBrand.constant';
+import { CardBrand } from '../domain/cardBrand/cardBrand.type';
+import { CARD_BRAND_LENGTH_MAP } from '../domain/cardBrand/cardBrand.constant';
 
 const useCardNumberValidation = () => {
   const [cardNumberError, setCardNumberError] = useState({

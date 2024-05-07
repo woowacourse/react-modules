@@ -4,7 +4,7 @@ import useCardNumberValidation from './useCardNumberValidation';
 
 import { CARD_NUMBER_ERROR_TYPE } from './useCardNumber.constant';
 
-import { determineCardBrand } from '../utils/cardBrand/cardBrand';
+import { determineCardBrand } from '../domain/cardBrand/cardBrand';
 import { isCardNumberOverLength } from './useCardNumber.util';
 
 const useCardNumber = () => {

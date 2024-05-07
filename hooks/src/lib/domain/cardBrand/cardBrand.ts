@@ -1,4 +1,4 @@
-import { startsWithin } from '../string';
+import { startsWithin } from '../../utils/string';
 
 export const isDinersCardNumber = (value: string) => {
   return value.startsWith('36');

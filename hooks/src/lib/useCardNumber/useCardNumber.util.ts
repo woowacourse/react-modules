@@ -1,4 +1,4 @@
-import type { CardBrand } from '../utils/cardBrand/cardBrand.type';
+import type { CardBrand } from '../domain/cardBrand/cardBrand.type';
 
 export const isCardNumberLessLength = (cardNumber: string, cardBrand: CardBrand) => {
   switch (cardBrand) {
