@@ -1,7 +1,7 @@
-import Modal from './Modal';
-
 import { StoryObj, Meta } from '@storybook/react';
 import { fn } from '@storybook/test';
+import Modal from './Modal';
+import CloseImage from '../../assets/close.png';
 
 const meta = {
   title: 'Components/Modal',
@@ -25,7 +25,7 @@ const meta = {
         },
       },
     },
-    onClick: {
+    onClose: {
       description: 'modal을 열고 닫기 위한 핸들러 함수',
     },
     style: {
@@ -45,14 +45,15 @@ const meta = {
     },
   },
   args: {
-    onClick: fn(),
+    onClose: fn(),
   },
   render: ({ style, ...args }) => {
     return (
       <Modal style={style} {...args}>
-        <Modal.ModalContent style={style}>
-          <span>올리와 썬데이의 기본 모달</span>
-        </Modal.ModalContent>
+        <Modal.Content style={style}>
+          <span>지그😊 기본 모달이에요.</span>
+        </Modal.Content>
+        <Modal.TextButton onClose={args.onClose}>확인</Modal.TextButton>
       </Modal>
     );
   },
@@ -67,7 +68,7 @@ export const 기본: Story = {
   parameters: {
     docs: {
       description: {
-        story: '내용만 있는 기본 모달',
+        story: '기본 모달',
       },
     },
   },
@@ -77,120 +78,88 @@ export const 기본: Story = {
   },
 };
 
-export const 제목이있는모달: Story = {
+export const 이미지_버튼이_있는_모달: Story = {
   args: {
     isOpen: true,
     position: 'center',
+    onClose: fn(),
   },
   parameters: {
     docs: {
       description: {
-        story: '제목이 있는 모달',
+        story: '이미지 버튼이 있는 모달',
       },
     },
   },
+
   render: (args) => (
-    <Modal {...args}>
-      <Modal.ModalHeader>
-        <Modal.ModalTitle
-          style={{
-            margin: '0 auto',
-            textAlign: 'center',
-          }}
-        >
-          올리와 썬데이
-        </Modal.ModalTitle>
-      </Modal.ModalHeader>
-      <Modal.ModalContent>
-        <span>올리와 썬데이의 제목이 있는 모달</span>
-      </Modal.ModalContent>
+    <Modal isOpen={args.isOpen} position={args.position} onClose={args.onClose}>
+      <Modal.Header>
+        <Modal.Title>지그🥰</Modal.Title>
+        <Modal.IconButton onClose={args.onClose} src={CloseImage} />
+      </Modal.Header>
+      <Modal.Content>
+        <span>이미지 버튼이 있는 모달이에요.</span>
+      </Modal.Content>
     </Modal>
   ),
 };
 
-export const 상단닫기버튼이있는모달: Story = {
+export const 텍스트_버튼이_있는_모달: Story = {
   args: {
     isOpen: true,
     position: 'center',
-    onClick: fn(),
+    onClose: fn(),
   },
   parameters: {
     docs: {
       description: {
-        story: '상단 닫기 버튼이 있는 모달',
+        story: '텍스트 버튼이 있는 모달',
       },
     },
   },
 
   render: (args) => (
-    <Modal isOpen={args.isOpen} position={args.position}>
-      <Modal.ModalHeader
-        style={{ display: 'flex', alignItems: 'center', margin: '10px 20px' }}
-      >
-        <Modal.ModalTitle
-          style={{
-            margin: '0 auto',
-            textAlign: 'center',
-            fontSize: '24px',
-          }}
-        >
-          올리와 썬데이
-        </Modal.ModalTitle>
-        <Modal.ModalCloseButton
-          style={{
-            border: 'none',
-            margin: '3px',
-          }}
-          onClick={args.onClick}
-        >
-          X
-        </Modal.ModalCloseButton>
-      </Modal.ModalHeader>
-      <Modal.ModalContent style={{ margin: '20px 20px' }}>
-        <span>올리와 썬데이의 상단 닫기 버튼이 있는 모달</span>
-      </Modal.ModalContent>
+    <Modal isOpen={args.isOpen} position={args.position} onClose={args.onClose}>
+      <Modal.Header>
+        <Modal.Title>지그😇</Modal.Title>
+      </Modal.Header>
+      <Modal.Content>
+        <span>텍스트 버튼이 있는 모달이에요.</span>
+      </Modal.Content>
+      <Modal.Footer>
+        <Modal.TextButton onClose={args.onClose}>확인</Modal.TextButton>
+      </Modal.Footer>
     </Modal>
   ),
 };
 
-export const 하단닫기버튼이있는모달: Story = {
+export const 이미지_버튼과_텍스트_버튼이_있는_모달: Story = {
   args: {
     isOpen: true,
     position: 'center',
-    onClick: fn(),
+    onClose: fn(),
   },
   parameters: {
     docs: {
       description: {
-        story: '하단 닫기 버튼이 있는 모달',
+        story: '이미지 버튼과 텍스트 버튼이 있는 모달',
       },
     },
   },
 
   render: (args) => (
-    <Modal isOpen={args.isOpen} position={args.position}>
-      <Modal.ModalHeader
-        style={{ display: 'flex', alignItems: 'center', margin: '10px 20px' }}
-      >
-        <Modal.ModalTitle>올리와 썬데이</Modal.ModalTitle>
-      </Modal.ModalHeader>
-      <Modal.ModalContent style={{ margin: '20px 10px' }}>
-        <span>올리와 썬데이의 하단 닫기 버튼이 있는 모달</span>
-      </Modal.ModalContent>
-      <Modal.ModalFooter
-        style={{
-          display: 'flex',
-          justifyContent: 'center',
-          margin: '10px',
-        }}
-      >
-        <Modal.ModalCloseButton
-          style={{ padding: '5px 15px' }}
-          onClick={args.onClick}
-        >
-          확인
-        </Modal.ModalCloseButton>
-      </Modal.ModalFooter>
+    <Modal isOpen={args.isOpen} position={args.position} onClose={args.onClose}>
+      <Modal.Header>
+        <Modal.Title>지그🌞</Modal.Title>
+        <Modal.IconButton onClose={args.onClose} src={CloseImage} />
+      </Modal.Header>
+      <Modal.Content>
+        <span>이미지 버튼과 텍스트 버튼이 있는 모달이에요.</span>
+      </Modal.Content>
+      <Modal.Footer>
+        <Modal.TextButton onClose={args.onClose}>확인</Modal.TextButton>
+      </Modal.Footer>
     </Modal>
   ),
 };
