@@ -1,11 +1,11 @@
-# choriver-modal-component
+# choco-modal-component
 
 ## Install
 
 이 라이브러리를 사용하기 위해서는 다음 패키지를 설치해야 합니다:
 
 ```bash
-npm install choriver-modal-component
+npm install choco-modal-component
 ```
 
 ## Usage
@@ -13,23 +13,24 @@ npm install choriver-modal-component
 React 컴포넌트에서 모달 라이브러리를 사용하려면 다음 단계를 따르세요
 
 ```jsx
-import { useModal } from "choriver-modal-component";
+import { useModal, Modal } from "choco-modal-component";
 
 function App() {
-  const { isOpen, openModal, closeModal, ModalComponent } = useModal();
+  const { isOpen, openModal, closeModal } = useModal();
 
   return (
     <>
       <button onClick={openModal}>Open Modal</button>
 
-      <ModalComponent
+      <Modal
         modalPosition="bottom"
         title="모달의 제목"
         closeButtonPosition="top"
+        isOpen={isOpen}
         onClose={closeModal}
       >
         {/* 모달 내용 */}
-      </ModalComponent>
+      </Modal>
     </>
   );
 }
