@@ -1,81 +1,48 @@
-import { useState, ChangeEvent } from "react";
-import { validateLength } from "@/validate/validate";
-import { ErrorStatus } from "@/types/errorStatus";
+// import { useState, ChangeEvent } from "react";
+// import { ValidateType } from "./useInput";
 
-type ValidateType = (value: string) => void;
+// const useInputs = <T>(
+//   initialValues: string[],
+//   validates: ValidateType[],
+//   validLength: number[]
+// ) => {
+//   const [values, setValues] = useState<T>();
+//   const [errorStatus, setErrorStatus] = useState<T>();
 
-type InputsType<T> = {
-  value: string;
-  error: T | null;
-};
+//   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+//     const { value, name } = e.target;
+//     let newError: string | null = null;
 
-const useInputs = <T>(
-  initialValues: string[],
-  validate: ValidateType,
-  validLength: number[]
-) => {
-  const [values, setValues] = useState<InputsType<T>[]>(
-    initialValues.map(() => ({
-      value: "",
-      error: null,
-    }))
-  );
+//     validates.forEach((validate: ValidateType) => {
+//       const result = validate(value);
+//       if (!result.isValid && result.error) {
+//         return (newError = result.error);
+//       }
+//     });
 
-  const handleChange = (e: ChangeEvent<HTMLInputElement>, index: number) => {
-    try {
-      validate(e.target.value);
-      setValues((prev) => {
-        return prev.map((input, i) =>
-          i === index ? { ...input, value: e.target.value, error: null } : input
-        );
-      });
-    } catch (err) {
-      if (err instanceof Error) {
-        setValues((prev) => {
-          return prev.map((input, i) =>
-            i === index
-              ? { ...input, value: e.target.value, error: err.message as T }
-              : input
-          );
-        });
-      }
-    }
-  };
+//     if (!newError) {
+//       setErrorStatus((prev) => ({
+//         ...prev,
+//         [name]: null,
+//       }));
+//     } else {
+//       setErrorStatus((prev) => ({
+//         ...prev,
+//         [name]: newError,
+//       }));
+//     }
 
-  const handleBlur = (e: React.FocusEvent<HTMLInputElement>, index: number) => {
-    try {
-      if (e.target.value.length !== validLength[index]) {
-        validateLength(values[index].value, validLength[index]);
-      } else {
-        if (values[index].error === ErrorStatus.INVALID_LENGTH) {
-          setValues((prev) => {
-            return prev.map((input, i) =>
-              i === index
-                ? {
-                    ...input,
-                    error: null,
-                  }
-                : input
-            );
-          });
-        }
-      }
-    } catch (err) {
-      if (err instanceof Error) {
-        setValues((prev) => {
-          return prev.map((input, i) =>
-            i === index ? { ...input, error: err.message as T } : input
-          );
-        });
-      }
-    }
-  };
+//     setValues((prev) => ({
+//       ...prev,
+//       [name]: value,
+//     }));
+//   };
 
-  return {
-    values,
-    onChange: handleChange,
-    onBlurValidLength: handleBlur,
-  };
-};
+//   return {
+//     values,
+//     onChange: handleChange,
+//     // onBlurValidLength: handleBlur,
+//   };
+// };
 
-export default useInputs;
+// export default useInputs;

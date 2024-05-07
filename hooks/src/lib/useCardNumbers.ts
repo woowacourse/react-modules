@@ -3,21 +3,20 @@ import {
   CardNumbersType,
   CardNumberKeys,
   CardNumberErrorType,
-  // cardNumberKeys,
 } from "@/types/cardNumbers";
-import useInput from "./common/useInput";
-import { validateNumber, validateOverLength } from "@/validate/validate";
+import { validLength, validateNumber } from "@/validate/validate";
 import { CardNumbersErrorMessages } from "@/constants/error.ts";
 import { VALID_LENGTH } from "@/constants/system.ts";
+import useInput from "./common/useInput";
 
-export const cardNumbersValidates = (value: string) => {
-  validateNumber(value);
-  validateOverLength(value, VALID_LENGTH.CARD_NUMBERS);
-};
+export const cardNumbersValidates = [
+  (value: string) => validateNumber(value),
+  (value: string) => validLength(value, VALID_LENGTH.CARD_NUMBERS),
+];
 
 const useCardNumbers = (initialValues: CardNumbersType) => {
   const cardNumbersConfig = {
-    validate: cardNumbersValidates,
+    validates: cardNumbersValidates,
     validLength: VALID_LENGTH.CARD_NUMBERS,
   };
 
@@ -25,7 +24,6 @@ const useCardNumbers = (initialValues: CardNumbersType) => {
     value: cardNumber1,
     onChange: onChangeNumber1,
     errorStatus: errorStatusNumber1,
-    onBlurValidLength: onBlurValidLength1,
   } = useInput<CardNumberErrorType>({
     initialValue: initialValues["cardNumber1"],
     ...cardNumbersConfig,
@@ -35,7 +33,6 @@ const useCardNumbers = (initialValues: CardNumbersType) => {
     value: cardNumber2,
     onChange: onChangeNumber2,
     errorStatus: errorStatusNumber2,
-    onBlurValidLength: onBlurValidLength2,
   } = useInput<CardNumberErrorType>({
     initialValue: initialValues["cardNumber2"],
     ...cardNumbersConfig,
@@ -45,7 +42,6 @@ const useCardNumbers = (initialValues: CardNumbersType) => {
     value: cardNumber3,
     onChange: onChangeNumber3,
     errorStatus: errorStatusNumber3,
-    onBlurValidLength: onBlurValidLength3,
   } = useInput<CardNumberErrorType>({
     initialValue: initialValues["cardNumber3"],
     ...cardNumbersConfig,
@@ -55,7 +51,6 @@ const useCardNumbers = (initialValues: CardNumbersType) => {
     value: cardNumber4,
     onChange: onChangeNumber4,
     errorStatus: errorStatusNumber4,
-    onBlurValidLength: onBlurValidLength4,
   } = useInput<CardNumberErrorType>({
     initialValue: initialValues["cardNumber4"],
     ...cardNumbersConfig,
@@ -84,18 +79,6 @@ const useCardNumbers = (initialValues: CardNumbersType) => {
       errorStatusNumber4 && CardNumbersErrorMessages[errorStatusNumber4],
   };
 
-  const onBlurArray = {
-    cardNumber1: onBlurValidLength1,
-    cardNumber2: onBlurValidLength2,
-    cardNumber3: onBlurValidLength3,
-    cardNumber4: onBlurValidLength4,
-  };
-
-  const onBlurValidLength = (e: React.FocusEvent<HTMLInputElement>) => {
-    const { name } = e.target;
-    onBlurArray[name as CardNumberKeys](e);
-  };
-
   return {
     values: {
       cardNumber1,
@@ -104,7 +87,6 @@ const useCardNumbers = (initialValues: CardNumbersType) => {
       cardNumber4,
     },
     onChange,
-    onBlurValidLength,
     errorMessages,
   };
 };

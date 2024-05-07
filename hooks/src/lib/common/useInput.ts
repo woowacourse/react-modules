@@ -1,46 +1,48 @@
+import { ErrorStatus } from "@/types/errorStatus";
 import { useState, ChangeEvent } from "react";
-import { validateLength } from "@/validate/validate";
 
-type validateType = (value: string) => void;
-
+export type ValidateType = (value: string) => {
+  isValid: boolean;
+  error: ErrorStatus;
+};
 interface Props {
   initialValue: string;
-  validate: validateType;
+  validates: ValidateType[];
   validLength?: number;
 }
-const useInput = <T>({ initialValue = "", validate, validLength }: Props) => {
+
+const useInput = <T>({ initialValue = "", validates }: Props) => {
   const [value, setValue] = useState(initialValue);
   const [errorStatus, setErrorStatus] = useState<T | null>(null);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    try {
-      validate(e.target.value);
-      setValue(e.target.value);
-      setErrorStatus(null);
-    } catch (e) {
-      if (e instanceof Error) {
-        setErrorStatus(e.message as T);
-      }
-    }
-  };
+    const { value } = e.target;
 
-  const handleBlur = (e: React.FocusEvent<HTMLInputElement>) => {
-    try {
-      if (e.target.value.length !== validLength && validLength) {
-        validateLength(value, validLength);
+    let newError: T | null = null;
+
+    validates.forEach((validate) => {
+      const result = validate(value);
+      const { isValid, error } = result;
+      if (!isValid && !newError) {
+        newError = error as T;
+      } else {
+        if (errorStatus === error) {
+          setErrorStatus(null);
+        }
       }
-    } catch (e) {
-      if (e instanceof Error) {
-        setErrorStatus(e.message as T);
-      }
+    });
+
+    if (newError) {
+      setErrorStatus(newError);
     }
+
+    setValue(value);
   };
 
   return {
     value,
     onChange: handleChange,
     errorStatus,
-    onBlurValidLength: handleBlur,
   };
 };
 

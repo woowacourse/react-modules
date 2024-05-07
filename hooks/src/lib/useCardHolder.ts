@@ -4,15 +4,15 @@ import { checkDoubleBlank, validateUpperCase } from "@/validate/validate";
 import { ChangeEvent } from "react";
 import { CardHolderErrorMessages } from "@/constants/error";
 
-export const cardHolderValidates = (value: string) => {
-  validateUpperCase(value);
-  checkDoubleBlank(value);
-};
+export const cardHolderValidates = [
+  (value: string) => validateUpperCase(value),
+  (value: string) => checkDoubleBlank(value),
+];
 
 const useCardHolder = (initialValue: string) => {
   const { value, onChange, errorStatus } = useInput<CardHolderErrorType>({
     initialValue,
-    validate: cardHolderValidates,
+    validates: cardHolderValidates,
   });
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {

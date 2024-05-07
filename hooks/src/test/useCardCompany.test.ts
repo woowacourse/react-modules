@@ -38,7 +38,7 @@ describe("useCardCompany 훅 테스트", () => {
     expect(result.current.value).toBe(validValue);
   });
 
-  it("유효하지 않은 옵션 선택시 에러를 낸다.", () => {
+  it("목록에 존재하지 않는 카드 회사 옵션을 선택하면 에러를 낸다.", () => {
     const { result } = renderHook(() =>
       useCardCompany({ initialValue, optionArray: ExampleCardBrands })
     );
