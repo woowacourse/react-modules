@@ -13,7 +13,7 @@ npm install use-card-input-hook
 
 ## Available Hooks
 
-- useCardNumbers (카드 넘버 16자리 입력 커스텀 훅)
+- useCardNumbers (카드 넘버 입력 커스텀 훅)
 - useCardCompany (카드 회사 선택 커스텀 훅)
 - useCardHolder (영문이름 입력 커스텀 훅)
 - useExpiryDate (유효기간(월/년) 입력 커스텀 훅)
@@ -26,57 +26,33 @@ npm install use-card-input-hook
 
 - useCardNumbers는 카드 번호 16자리를 입력 받습니다.
 - 카드 번호는 4개로 이루어져 있으며, input의 name은 'cardNumbers1','cardNumbers2','cardNumbers3','cardNumbers4' 로 고정되어 있습니다.
-- validate : 입력한 카드 번호가 모두 숫자인지, 4자리씩 작성되었는지 확인합니다.
+- validate : 입력한 카드 번호가 모두 숫자인지, 조건에 맞게 모두 작성되었는지 확인합니다.
+
+- 사용 가능한 카드 타입 :
+  CARD_BRAND =
+  | 'VISA'
+  | 'MASTER'
+  | 'AMEX'
+  | 'DINERS'
+  | 'UNIONPAY';
 
 > [IS_NOT_NUMBER]: '카드번호는 숫자만 입력해주세요.'  
-> [INVALID_LENGTH]: '카드 번호를 4자리씩 입력해주세요.'
+> [INVALID_LENGTH]: '잘못된 카드 번호입니다. 다시 입력해주세요.'
 
 ```tsx
-const {
-  values: cardNumbers,
-  onChange: onChangeCardNumbers,
-  onBlur: onBlurCardNumbers,
-  errorMessages,
-} = useCardNumbers({
-  cardNumber1: '',
-  cardNumber2: '',
-  cardNumber3: '',
-  cardNumber4: '',
-});
+const { value, cardBrand, formatValue, onChange, onBlur, errorMessage } =
+  useCardNumbers();
 
 return (
   <>
     <h1>Hooks Modules</h1>
     <div>카드 번호</div>
-    {/*cardNumber 1*/}
-    <input
-      onChange={onChangeCardNumbers}
-      onBlur={onBlurCardNumbers}
-      name="cardNumber1"
-      value={cardNumbers['cardNumber1']}
-    />
-    <div>{errorMessages['cardNumber1']}</div>
-    {/*cardNumber 2*/}
-    <input
-      onChange={onChangeCardNumbers}
-      name="cardNumber2"
-      value={cardNumbers['cardNumber2']}
-    />
-    <div>{errorMessages['cardNumber2']}</div>
-    {/*cardNumber 3*/}
-    <input
-      value={cardNumbers['cardNumber3']}
-      onChange={onChangeCardNumbers}
-      name="cardNumber3"
-    />
-    <div>{errorMessages['cardNumber3']}</div>
-    {/*cardNumber 4*/}
-    <input
-      value={cardNumbers['cardNumber4']}
-      onChange={onChangeCardNumbers}
-      name="cardNumber4"
-    />
-    <div>{errorMessages['cardNumber4']}</div>
+    {/*cardNumbers*/}
+    <input type="text" value={value} onChange={onChange} onBlur={onBlur} />
+    <p>
+      {cardBrand} {formatValue}
+    </p>
+    <p>{errorMessage}</p>
   </>
 );
 ```
