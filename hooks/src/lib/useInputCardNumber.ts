@@ -11,13 +11,7 @@ const useInputCardNumber = () => {
     //  status 업데이트
     setStatus(getInputStatus(value, event.target.maxLength));
 
-    // 미완성인 경우 : Error 상태로 판단
-    if (status === "pending") {
-      setStatus("error");
-      setErrorMessage(ERROR_MESSAGE.cardNumber.isNotFulfilled);
-    }
-
-    // Default인 경우 : Error 검사
+    // Default가 아닌 경우 : Error 검사
     if (status !== "default") {
       const [isValid, errorMessage] = validator.cardNumber.isValidInput(value);
 
@@ -35,7 +29,7 @@ const useInputCardNumber = () => {
 
   const handleBlur = () => {
     // 미완성인 경우 : Error 상태로 판단
-    if (status === "pending") {
+    if (["default", "pending"].includes(status)) {
       setStatus("error");
       setErrorMessage(ERROR_MESSAGE.cardNumber.isNotFulfilled);
     }
