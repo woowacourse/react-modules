@@ -20,9 +20,14 @@ export const ModalBody = ({ children, ...rest }: StrictPropsWithChildren<ModalBo
   );
 };
 
-export const ModalFooter = ({ children, direction = 'column', ...rest }: StrictPropsWithChildren<ModalFooterProps>) => {
+export const ModalFooter = ({
+  children,
+  direction = 'column',
+  position = 'center',
+  ...rest
+}: StrictPropsWithChildren<ModalFooterProps>) => {
   return (
-    <footer {...rest} className={`${styles.modalFooter} ${styles[direction]}`}>
+    <footer {...rest} className={`${styles.modalFooter} ${styles[direction]} ${styles[position]}`}>
       {children}
     </footer>
   );

@@ -4,9 +4,9 @@
 }
 
 .modalBody {
-  margin: 16px 0px;
   flex-grow: 1;
   overflow-y: auto;
+  width: 100%;
 }
 
 .modalFooter {
@@ -15,14 +15,36 @@
 
 .row {
   flex-direction: row;
-  justify-content: center;
-  column-gap: 8px;
+  column-gap: 14px;
+
+  &.right {
+    justify-content: end;
+  }
+
+  &.left {
+    justify-content: start;
+  }
+
+  &.center {
+    justify-content: center;
+  }
 }
 
 .column {
   flex-direction: column;
-  align-items: center;
-  row-gap: 8px;
+  row-gap: 14px;
+
+  &.right {
+    align-items: end;
+  }
+
+  &.left {
+    align-items: start;
+  }
+
+  &.center {
+    align-items: center;
+  }
 }
 
 .modalLayout {
@@ -76,6 +98,8 @@
   padding: 32px;
   border-radius: 8px;
   z-index: 1001;
+
+  row-gap: 14px;
 }
 
 .modalContainer.animation {
@@ -83,15 +107,15 @@
 }
 
 .sm {
-  width: 33%;
+  width: 320px;
 }
 
 .md {
-  width: 66%;
+  width: 480%;
 }
 
 .lg {
-  width: 100%;
+  width: 600px;
 }
 
 .modalContainer.top {
