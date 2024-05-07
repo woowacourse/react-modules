@@ -18,6 +18,7 @@ export interface ModalProps extends HTMLAttributes<HTMLElement> {
 
 export interface ModalFooterProps extends HTMLAttributes<HTMLElement> {
   direction?: Direction;
+  position?: 'left' | 'right' | 'center';
 }
 
 export interface ModalHeaderType extends HTMLAttributes<HTMLElement> {}
