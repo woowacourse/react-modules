@@ -1,16 +1,17 @@
-import { useModal } from "choriver-modal-component";
+import { useModal, Modal } from "choco-modal-component";
 import React from "react";
 import "./App.css";
 
 function App() {
-  const { isOpen, openModal, closeModal, ModalComponent } = useModal();
+  const { isOpen, openModal, closeModal } = useModal();
 
   return (
     <>
-      <ModalComponent
+      <Modal
         modalPosition="bottom"
         title="컴포넌트를 어느정도까지 분리 해야할까요? 또 어떤 경우 컴포넌트를 그룹화해서 하나의 컴포넌트처럼 보이게 하는 것이 좋을까요?"
         closeButtonPosition="top"
+        isOpen={isOpen}
         onClose={closeModal}
       >
         <div>
@@ -25,7 +26,7 @@ function App() {
           수 있습니다. 페이스북의 경우 서로 여러개의 채팅창을 보여주고 있지만 독립적으로 작동할 수
           있습니다. 이는 재사용 가능한 컴포넌트를 만들었기 때문에 가능한 것이죠.
         </div>
-      </ModalComponent>
+      </Modal>
       <h1>Component Modules</h1>
       <button onClick={openModal}>Open Modal</button>
     </>
