@@ -12,7 +12,6 @@ export interface ModalButtonProps extends ButtonHTMLAttributes<HTMLButtonElement
 }
 
 const Button = ({ text, mode = 'primary', size = 'lg', fullWidth, ...rest }: ModalButtonProps) => {
-  console.log(fullWidth);
   return (
     <button
       className={`${styles.modalButton} ${styles[mode]} ${styles[size]} ${fullWidth ? styles['full-width'] : ''}`}
