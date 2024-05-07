@@ -2,19 +2,20 @@ import { ButtonHTMLAttributes } from 'react';
 import type { Size } from '../../type/common';
 import styles from './Button.module.css';
 
-type ButtonMode = 'primary' | 'secondary';
-
-export interface ModalButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+type ButtonColor = 'default' | 'none';
+type ButtonVariant = 'normal' | 'border';
+export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   text: string;
-  mode?: ButtonMode;
+  color?: ButtonColor;
   size?: Size;
   fullWidth?: boolean;
+  variants?: ButtonVariant;
 }
 
-const Button = ({ text, mode = 'primary', size = 'lg', fullWidth, ...rest }: ModalButtonProps) => {
+const Button = ({ text, color = 'default', size = 'lg', fullWidth, variants = 'normal', ...rest }: ButtonProps) => {
   return (
     <button
-      className={`${styles.modalButton} ${styles[mode]} ${styles[size]} ${fullWidth ? styles['full-width'] : ''}`}
+      className={`${styles.modalButton} ${styles[color]} ${styles[size]} ${fullWidth ? styles['full-width'] : ''} ${styles[variants]}`}
       {...rest}
     >
       {text}
