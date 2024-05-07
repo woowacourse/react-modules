@@ -5,6 +5,7 @@ import CLOSE_BUTTON from '../../asset/close-button.svg';
 import { useEffect } from 'react';
 
 interface ModalProps {
+  size?: ModalSize;
   isOpened: boolean;
   onClose: () => void;
   zIndex?: number;
@@ -20,6 +21,7 @@ interface ModalProps {
 }
 
 const Modal = ({
+  size = 'small',
   isOpened,
   onClose,
   zIndex = 0,
@@ -52,6 +54,7 @@ const Modal = ({
       {isOpened && (
         <Styled.DimmedLayer onClick={onClose} zIndex={zIndex}>
           <Styled.ModalContainer
+            size={size}
             modalPosition={modalPosition}
             onClick={(e) => {
               e.stopPropagation();

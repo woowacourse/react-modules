@@ -11,7 +11,10 @@ export const DimmedLayer = styled.div<{ zIndex: number }>`
   background-color: rgba(0, 0, 0, 0.4);
 `;
 
-export const ModalContainer = styled.div<{ modalPosition: ModalPosition }>`
+export const ModalContainer = styled.div<{
+  modalPosition: ModalPosition;
+  size: ModalSize;
+}>`
   position: ${(props) =>
     props.modalPosition === 'center' ? 'relative' : 'fixed'};
   inset: ${(props) =>
@@ -21,7 +24,19 @@ export const ModalContainer = styled.div<{ modalPosition: ModalPosition }>`
   display: flex;
   flex-direction: column;
   width: 100%;
-  max-width: ${(props) => (props.modalPosition === 'center' ? '640px' : '')};
+  max-width: ${(props) => {
+    if (props.modalPosition === 'bottom') {
+      return '100%';
+    }
+    switch (props.size) {
+      case 'medium':
+        return '480px';
+      case 'large':
+        return '600px';
+      default:
+        return '320px';
+    }
+  }};
   max-height: 80vh;
   box-sizing: border-box;
   gap: 16px;
