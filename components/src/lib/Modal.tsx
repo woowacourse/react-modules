@@ -2,7 +2,8 @@ import { useEffect } from "react";
 import { ReactNode } from "react";
 import { css } from "@emotion/css";
 
-export type Position = "top" | "bottom" | "center";
+export const POSITIONS = ["top", "bottom", "center"] as const;
+type Position = (typeof POSITIONS)[number];
 
 export interface ModalProps {
   children?: ReactNode;

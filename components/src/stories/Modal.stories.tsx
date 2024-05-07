@@ -1,4 +1,5 @@
-import { Modal, POSITIONS } from "../lib";
+import { Modal } from "../lib";
+import { POSITIONS } from "../lib/Modal";
 import type { Meta, StoryObj } from "@storybook/react";
 import { fn } from "@storybook/test";
 import "../reset.css";
