@@ -17,12 +17,12 @@ const BUTTON_STYLE_TABLE = (primaryColor: string) => {
     },
     border: {
       backgroundColor: '#ffffff',
-      color: primaryColor,
-      border: `2px solid ${primaryColor}`,
+      color: '#333333BF',
+      border: `2px solid #33333340`,
     },
     text: {
       backgroundColor: 'transparent',
-      color: primaryColor,
+      color: '#333333BF',
       border: 'none',
     },
   };
