@@ -17,7 +17,6 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 80vw;
     max-width: 700px;
     margin: auto;
 }
@@ -47,6 +46,18 @@
 
     animation-duration: 0.3s;
     animation-fill-mode: forwards;
+}
+
+.small {
+    width: 40vw;
+}
+
+.medium {
+    width: 60vw;
+}
+
+.large {
+    width: 80vw;
 }
 
 .modalEnter {

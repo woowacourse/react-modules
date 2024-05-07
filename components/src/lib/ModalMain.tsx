@@ -21,10 +21,18 @@ const MODAL_TYPE: Record<ModalPosition, string> = {
   bottom: styles.modalBottom,
 };
 
+const MODAL_SIZE: Record<ModalSize, string> = {
+  small: styles.small,
+  medium: styles.medium,
+  large: styles.large,
+};
+
 type ModalPosition = 'center' | 'bottom';
+type ModalSize = 'small' | 'medium' | 'large';
 
 interface ModalMainProps extends React.HTMLAttributes<HTMLDivElement> {
   isOpen: boolean;
+  size?: ModalSize;
   position?: ModalPosition;
   isAnimation?: boolean;
   duration?: number;
@@ -32,6 +40,7 @@ interface ModalMainProps extends React.HTMLAttributes<HTMLDivElement> {
 
 const ModalMain = ({
   isOpen,
+  size = 'large',
   position = 'center',
   isAnimation = false,
   duration,
@@ -47,6 +56,8 @@ const ModalMain = ({
   });
 
   const modalClass = isAnimation ? modalAnimationClass : MODAL_TYPE[position];
+  const modalWrapperClass = MODAL_WRAPPER_TYPE[position];
+  const modalSizeClass = MODAL_SIZE[size];
 
   if (!mounted) {
     return null;
@@ -55,7 +66,7 @@ const ModalMain = ({
   return (
     <>
       {createPortal(
-        <div className={MODAL_WRAPPER_TYPE[position]}>
+        <div className={`${modalWrapperClass}  ${modalSizeClass}`}>
           <div
             className={modalClass}
             style={{ animationDuration: `${duration}ms`, ...style }}
