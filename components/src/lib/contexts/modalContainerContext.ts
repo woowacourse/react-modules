@@ -1,11 +1,8 @@
 import { createContext } from 'react';
 
-import { ModalCommonProps } from '../types/modal';
+import { ModalContainerProps } from '../types/modal';
 
-export interface ModalContainerContext extends Omit<ModalCommonProps, 'children' | 'openModal' | 'setOpenModal'> {
-  closeModal: () => void;
-}
-
-const ModalContainerContext = createContext<ModalContainerContext | null>(null);
+interface ModalContainerContextType extends Omit<ModalContainerProps, 'children' | 'openModal'> {}
+const ModalContainerContext = createContext<ModalContainerContextType | null>(null);
 
 export default ModalContainerContext;

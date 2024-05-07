@@ -27,7 +27,10 @@ export interface ModalOptions {
     backdrop?: string;
   };
 }
-
+export interface Background {
+  modal?: string;
+  backdrop?: string;
+}
 export interface ModalCommonProps {
   openModal: boolean;
   setOpenModal: Dispatch<SetStateAction<boolean>>;
@@ -35,14 +38,11 @@ export interface ModalCommonProps {
   isCloseOnBackdrop?: boolean;
   contentsPadding?: string;
   borderRadius?: string;
-  backgroundColor?: {
-    modal?: string;
-    backdrop?: string;
-  };
+  backgroundColor?: Background;
   children: ReactNode;
 }
 
-interface AnimationProps {
+export interface AnimationProps {
   animationDuration?: number; //단위:ms
   isNeedAnimation?: boolean;
 }
@@ -50,6 +50,10 @@ export interface BottomModalProps extends ModalCommonProps, AnimationProps {}
 export interface ToastModalProps extends ModalCommonProps, AnimationProps {
   position?: ModalPosition;
   toastDuration?: number; //단위:ms
+}
+
+export interface ModalContainerProps extends Omit<ModalCommonProps, 'setOpenModal'> {
+  closeModal: () => void;
 }
 
 export interface ModalButtonProps extends React.HTMLAttributes<HTMLButtonElement> {

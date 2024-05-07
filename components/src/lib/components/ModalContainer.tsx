@@ -1,10 +1,10 @@
-import { MouseEvent, ReactNode } from 'react';
+import { MouseEvent } from 'react';
 import styled from 'styled-components';
 
 import '../styles/reset.css';
 import { ModalContainerContext } from '../contexts';
 import { useModalContext } from '../hooks';
-import { ModalButtonProps } from '../types/modal';
+import { ModalButtonProps, ModalContainerProps } from '../types/modal';
 
 import Backdrop from './Backdrop';
 import Contents from './Contents';
@@ -15,23 +15,15 @@ const ModalWrapper = styled.div`
   width: 100vw;
   height: 100vh;
 `;
-interface ModalContainerProps {
-  children: ReactNode;
-  openModal: boolean;
-  closeModal: () => void;
-}
+
 function ModalContainer(props: ModalContainerProps) {
-  const { openModal, closeModal, children } = props;
+  const { openModal, children, ...rest } = props;
 
   return (
     <>
       {openModal && (
         <ModalPortal>
-          <ModalContainerContext.Provider
-            value={{
-              closeModal,
-            }}
-          >
+          <ModalContainerContext.Provider value={{ ...rest }}>
             <ModalWrapper>{children}</ModalWrapper>
           </ModalContainerContext.Provider>
         </ModalPortal>

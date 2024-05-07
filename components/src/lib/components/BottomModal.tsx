@@ -1,7 +1,7 @@
 import { MouseEvent } from 'react';
 import styled from 'styled-components';
 
-import { BASIC_BOTTOM_MODAL_ANIMATION_DURATION } from '../constants/modal';
+import { BASIC_BORDER_RADIUS, BASIC_BOTTOM_MODAL_ANIMATION_DURATION } from '../constants/modal';
 import { BottomModalContext } from '../contexts';
 import { useBottomModalAnimation, useModalContext } from '../hooks';
 import { BottomModalProps, ModalButtonProps } from '../types/modal';
@@ -18,13 +18,14 @@ const BottomModalContents = styled(ModalContents)<ModalContentsStyleProps>`
   transform: translateY(${({ $isOn }) => ($isOn ? '0' : '100%')});
   transition: transform ${({ $timeout }) => $timeout}ms ease;
   border-radius: 0;
-  border-top-right-radius: ${({ $borderRadius }) => $borderRadius || '100%'};
-  border-top-left-radius: ${({ $borderRadius }) => $borderRadius || '100%'};
+  border-top-right-radius: ${({ $borderRadius }) => $borderRadius || BASIC_BORDER_RADIUS};
+  border-top-left-radius: ${({ $borderRadius }) => $borderRadius || BASIC_BORDER_RADIUS};
   width: 100%;
   box-sizing: border-box;
 `;
 
 function BottomModal(props: BottomModalProps) {
+  const { setOpenModal, children, ...rest } = props;
   const {
     isNeedAnimation = true,
     animationDuration = BASIC_BOTTOM_MODAL_ANIMATION_DURATION,
@@ -32,10 +33,7 @@ function BottomModal(props: BottomModalProps) {
     backgroundColor,
     contentsPadding,
     openModal,
-    setOpenModal,
-    children,
-  } = props;
-
+  } = rest;
   const closeModal = () => setOpenModal(false);
 
   const { isOn, fadeOutModal, timeout } = useBottomModalAnimation({
@@ -46,14 +44,14 @@ function BottomModal(props: BottomModalProps) {
   });
 
   return (
-    <ModalContainer openModal={openModal} closeModal={fadeOutModal}>
+    <ModalContainer {...rest} closeModal={closeModal}>
       <BottomModalContext.Provider value={{ handleCloseModal: fadeOutModal }}>
         <Backdrop handleCloseModal={fadeOutModal} />
         <BottomModalContents
           $isOn={isOn}
           $timeout={timeout}
           $borderRadius={borderRadius}
-          $modalBackgroundColor={backgroundColor?.modal}
+          $backgroundColor={backgroundColor}
           $contentsPadding={contentsPadding}
         >
           {children}
