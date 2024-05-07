@@ -8,13 +8,7 @@ const checkIncludeArray = (optionArr: string[], value: string) => {
   }
 };
 
-const useCardCompany = ({
-  initialValue,
-  optionArray,
-}: {
-  initialValue: string;
-  optionArray: string[];
-}) => {
+const useCardCompany = (initialValue: string, optionArray: string[]) => {
   const [value, setValue] = useState(initialValue);
   const [errorMessage, setErrorMessage] = useState('');
 

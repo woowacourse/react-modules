@@ -19,7 +19,7 @@ describe('useCardCompany 훅 테스트', () => {
   it('훅을 선언할 때 초기값이 ``일 시 result.current.value는 ``이 된다', () => {
     const initialValue = '';
     const { result } = renderHook(() =>
-      useCardCompany({ initialValue, optionArray: EXAMPLE_CARD_BRANDS })
+      useCardCompany(initialValue, EXAMPLE_CARD_BRANDS)
     );
 
     expect(result.current.value).toBe(initialValue);
@@ -28,7 +28,7 @@ describe('useCardCompany 훅 테스트', () => {
   it(`훅이 입력값으로 업데이트될 시 초기값 ''에서 '${EXAMPLE_CARD_BRANDS[0]}'으로 업데이트된다.`, () => {
     const initialValue = '';
     const { result } = renderHook(() =>
-      useCardCompany({ initialValue, optionArray: EXAMPLE_CARD_BRANDS })
+      useCardCompany(initialValue, EXAMPLE_CARD_BRANDS)
     );
 
     const validValue = EXAMPLE_CARD_BRANDS[0];
@@ -44,7 +44,7 @@ describe('useCardCompany 훅 테스트', () => {
   })를 낸다.`, () => {
     const initialValue = '';
     const { result } = renderHook(() =>
-      useCardCompany({ initialValue, optionArray: EXAMPLE_CARD_BRANDS })
+      useCardCompany(initialValue, EXAMPLE_CARD_BRANDS)
     );
 
     const invalidValue = '헤일리 은행';
