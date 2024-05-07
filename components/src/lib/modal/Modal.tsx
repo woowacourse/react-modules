@@ -30,17 +30,15 @@ const Modal: React.FC<ModalProps> & {
   if (!isOpen) return null;
 
   return (
-    <>
-      <Styled.ModalBackdrop>
-        <Styled.ModalContentWrapper
-          ref={modalRef}
-          $position={position}
-          {...restProps}
-        >
-          {children}
-        </Styled.ModalContentWrapper>
-      </Styled.ModalBackdrop>
-    </>
+    <Styled.ModalBackdrop>
+      <Styled.ModalContentWrapper
+        ref={modalRef}
+        $position={position}
+        {...restProps}
+      >
+        {children}
+      </Styled.ModalContentWrapper>
+    </Styled.ModalBackdrop>
   );
 };
 
