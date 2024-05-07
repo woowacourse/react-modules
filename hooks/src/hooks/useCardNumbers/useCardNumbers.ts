@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { validMasterNumbers, validVisaNumbers } from "./cardNumberValidator";
 
 type NumberState = readonly [string, (value: string) => void];
 
@@ -12,15 +13,24 @@ interface CardNumberReturn {
     fourthState?: NumberState;
   };
   errorList: (string | undefined)[];
-  cardBrand: CardBrand;
-  inputMaxLength: number[];
+  cardBrand?: CardBrand;
+  inputMaxLength?: number[];
 }
 
 const ERROR_MESSAGE = (index: number) => `${index}번 째 카드 번호를 잘못입력하셨습니다.`;
 //TODO: AMEX, Diners, UnionPay 추가하기.
 //TODO: 카드 브랜드 사용자에게 입력 받으면 좋을 듯 하다.
-const VALID_CARD_LIST = ["Master", "Visa"];
+const VALID_CARD_LIST = ["Visa", "Master", "AMEX", "Diners", "UnionPay"];
 const NO_VALID_CARD = `${VALID_CARD_LIST.join(",")}카드가 아닙니다. 카드 번호를 확인해주세요.`;
+
+const findCardBrand = (value: string): CardBrand | undefined => {
+  if (validMasterNumbers(value)) {
+    return "Master";
+  }
+  if (validVisaNumbers(value)) {
+    return "Visa";
+  }
+};
 
 const useCardNumbers = (): CardNumberReturn => {
   //TODO: 상태관리를 통해서 카드 넘버의 상태 갯수를 정한다.
@@ -45,10 +55,7 @@ const useCardNumbers = (): CardNumberReturn => {
   };
 
   const setFirstWrapper = (value: string) => {
-    const MASTER_CARD_START_NUMBER_LIST = [51, 52, 53, 54];
-    // eslint-disable-next-line no-useless-escape
-    const MASTER_REG_PATTERN = new RegExp(`${MASTER_CARD_START_NUMBER_LIST.map(String).join("|")}\d{0,3}$`);
-    if (MASTER_REG_PATTERN.test(value) || value.startsWith("4")) {
+    if (validMasterNumbers(value) || validVisaNumbers(value)) {
       setErrorMessage((prev) => {
         return [undefined, ...prev.slice(1)];
       });
@@ -58,6 +65,13 @@ const useCardNumbers = (): CardNumberReturn => {
       });
     }
     setWrapper(value, setFirst, 0);
+  };
+
+  const setSecondWrapper = (value: string) => {
+    /*TODO: UnionPay일 경우
+     6221인 경우 secondNumbers의 앞 두자가 26보다 커야하고,
+     6229인 경우 secondNumbers의 앞 두자가 25보다 작아야한다.
+     */
   };
 
   return {
