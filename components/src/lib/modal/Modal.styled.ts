@@ -79,7 +79,7 @@ interface ModalTextButtonProps {
   buttonSize?: string;
   fontSize?: string;
   backgroudColor?: string;
-  color?: string;
+  fontColor?: string;
 }
 
 export const ModalTextButton = styled.button<ModalTextButtonProps>`
@@ -90,8 +90,8 @@ export const ModalTextButton = styled.button<ModalTextButtonProps>`
   &:focus {
     outline: none;
   }
-  color: #ffffff;
-  background-color: #333333;
+  color: ${({ fontColor }) => fontColor || '#333333'};
+  background-color: ${({ backgroudColor }) => backgroudColor || '#ffffff'};
   font-size: ${({ fontSize }) => fontSize || '15px'};
 `;
 

@@ -88,6 +88,8 @@ type ModalTextButtonType = React.FC<
       onClose: () => void;
       buttonSize?: string;
       fontSize?: string;
+      backgroudColor?: string;
+      fontColor?: string;
     } & HTMLAttributes<HTMLButtonElement>
   >
 >;
@@ -96,6 +98,8 @@ const ModalTextButton: ModalTextButtonType = ({
   onClose,
   buttonSize,
   fontSize,
+  backgroudColor,
+  fontColor,
   ...restProps
 }) => {
   return (
@@ -103,6 +107,8 @@ const ModalTextButton: ModalTextButtonType = ({
       onClick={onClose}
       buttonSize={buttonSize}
       fontSize={fontSize}
+      backgroudColor={backgroudColor}
+      fontColor={fontColor}
       {...restProps}
     ></Styled.ModalTextButton>
   );
