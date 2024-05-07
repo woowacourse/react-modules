@@ -196,3 +196,42 @@ export const AlertModal: Story = {
     </Modal>
   ),
 };
+
+export const ConfirmModal: Story = {
+  args: {
+    isOpen: true,
+    position: 'center',
+    onClose: fn(),
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: '사용자에게 선택지를 제공하고 확인 및 취소 버튼 제공',
+      },
+    },
+  },
+
+  render: (args) => (
+    <Modal isOpen={args.isOpen} position={args.position} onClose={args.onClose}>
+      <Modal.Header>
+        <Modal.Title>카드를 삭제하시겠습니까?</Modal.Title>
+      </Modal.Header>
+      <Modal.Content>
+        <span>삭제하면 복구하실 수 없습니다.</span>
+      </Modal.Content>
+      <Modal.Footer buttonPosition='right' buttonGap='10px'>
+        <Modal.TextButton onClose={args.onClose} buttonSize='50px'>
+          취소
+        </Modal.TextButton>
+        <Modal.TextButton
+          onClose={args.onClose}
+          buttonSize='50px'
+          backgroudColor='#333333'
+          fontColor='#ffffff'
+        >
+          확인
+        </Modal.TextButton>
+      </Modal.Footer>
+    </Modal>
+  ),
+};
