@@ -6,8 +6,8 @@ const CancelButton = (props: CancelButtonProps) => {
     <button
       className={styles['button-cancel']}
       style={{
-        color: `${props.fontColor || 'grey'}`,
-        backgroundColor: `${props.backgroundColor || '#eee'}`,
+        color: `${props.fontColor || 'black'}`,
+        backgroundColor: `${props.backgroundColor || 'white'}`,
       }}
       onClick={props.onCancel}
     >
