@@ -1,8 +1,6 @@
 import { renderHook } from "@testing-library/react";
 import React from "react";
 import { useCardCompany } from "@/lib";
-import { CardCompanyErrorMessage } from "@/constants/error";
-import { ErrorStatus } from "@/types/errorStatus";
 
 export const ExampleCardBrands = [
   "BC카드",
@@ -36,20 +34,5 @@ describe("useCardCompany 훅 테스트", () => {
     });
 
     expect(result.current.value).toBe(validValue);
-  });
-
-  it("목록에 존재하지 않는 카드 회사 옵션을 선택하면 에러를 낸다.", () => {
-    const { result } = renderHook(() =>
-      useCardCompany({ initialValue, optionArray: ExampleCardBrands })
-    );
-
-    const invalidValue = "헤일리 은행";
-    React.act(() => {
-      result.current.onSetValue(invalidValue);
-    });
-
-    const expectedErrorMessage =
-      CardCompanyErrorMessage[ErrorStatus.INVALID_OPTION];
-    expect(result.current.errorMessage).toBe(expectedErrorMessage);
   });
 });

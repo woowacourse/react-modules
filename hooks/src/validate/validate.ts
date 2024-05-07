@@ -45,22 +45,3 @@ export function validLength(str: string, length: number) {
   }
   return { error: ErrorStatus.INVALID_LENGTH, isValid: true };
 }
-
-// export function checkOverLength(str: string, length: number) {
-//   if (str.length > length) {
-//     return false;
-//   }
-//   return true;
-// }
-
-// export function validateOverLength(str: string, length: number) {
-//   if (!checkOverLength(str, length)) {
-//     throw new Error(ErrorStatus.INVALID_LENGTH);
-//   }
-// }
-
-// export function validateLength(str: string, length: number) {
-//   if (!checkLength(str, length)) {
-//     throw new Error(ErrorStatus.INVALID_LENGTH);
-//   }
-// }
