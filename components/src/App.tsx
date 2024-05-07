@@ -1,13 +1,16 @@
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import './App.css';
 
-import { BottomModal, CenterModal } from './lib';
+import { BottomModal, CenterModal, usePosition } from './lib';
+import ModalContainer from './lib/components/ModalContainer';
+import ToastModal from './lib/components/ToastModal';
 
 function App() {
   const [openCenterModal, setOpenCenterModal] = useState(false);
   const [openBottomModal, setOpenBottomModal] = useState(false);
   const [openToastModal, setOpenToastModal] = useState(false);
   const positionRef = useRef<HTMLDivElement>(null);
+  const { position } = usePosition(positionRef.current);
 
   return (
     <>
@@ -20,13 +23,10 @@ function App() {
       </BottomModal>
       <CenterModal openModal={openCenterModal} setOpenModal={setOpenCenterModal}>
         <h1>Center Modal</h1>
+        <ModalContainer.button isCloseModal={true}>close button</ModalContainer.button>
       </CenterModal>
-      {/* <Modal type="center" openModal={openCenterModal} setOpenModal={setOpenCenterModal}>
-        <h1>Center Modal</h1>
-        <Modal.button isCloseModal={true}>close button</Modal.button>
-      </Modal>
-      <Modal
-        type="toast"
+
+      <ToastModal
         openModal={openToastModal}
         setOpenModal={setOpenToastModal}
         position={position}
@@ -37,7 +37,7 @@ function App() {
         <div style={{ width: '300px', height: '2rem', textAlign: 'center' }}>
           <h2>toast modal</h2>
         </div>
-      </Modal> */}
+      </ToastModal>
       <div ref={positionRef} id="toast-modal-position">
         toast modal position
       </div>

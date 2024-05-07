@@ -1,26 +1,22 @@
 import styled from 'styled-components';
 
-import { CONTENTS_CLASS_NAME } from '../constants/modal';
-import { useModalContext, useToastModalAnimation } from '../hooks';
-import { ModalContentsProps, ModalPosition } from '../types/modal';
+import { useToastModalAnimation } from '../hooks';
+import { ToastModalProps } from '../types/modal';
 
-interface StyleProps {
-  $position: undefined | ModalPosition;
-  $timeout: number;
-  $isOn: boolean;
-  $borderRadius: string | undefined;
-  $modalBackgroundColor: string | undefined;
-  $contentsPadding: string | undefined;
-}
+import { ModalContents, ModalContentsStyleProps } from './Contents';
+import ModalContainer from './ModalContainer';
 
-const ToastModalContents = styled.div<StyleProps>`
+const ToastModalContents = styled(ModalContents)<ModalContentsStyleProps>`
   position: fixed;
   opacity: ${({ $isOn }) => ($isOn ? 1 : 0)};
   transition: opacity ${({ $timeout }) => $timeout}ms ease-in-out;
-  text-align: center;
-  border-radius: ${({ $borderRadius }) => $borderRadius};
-  background-color: ${({ $modalBackgroundColor }) => $modalBackgroundColor};
-  padding: ${({ $contentsPadding }) => $contentsPadding};
+  -webkit-box-shadow: 0px 0px 18px -4px rgba(0, 0, 0, 0.21);
+  box-shadow: 0px 0px 18px -4px rgba(0, 0, 0, 0.21);
+  min-height: initial;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
   ${({ $position }) =>
     $position &&
     `
@@ -31,22 +27,46 @@ const ToastModalContents = styled.div<StyleProps>`
     `};
 `;
 
-function ToastModal({ children }: ModalContentsProps) {
-  const { borderRadius, backgroundColor, contentsPadding } = useModalContext();
-  const { isOn, position, timeout } = useToastModalAnimation();
+function ToastModal(props: ToastModalProps) {
+  const {
+    openModal,
+    setOpenModal,
+    children,
+    borderRadius,
+    backgroundColor,
+    contentsPadding,
+    animationDuration,
+    position,
+    isNeedAnimation,
+    toastDuration,
+  } = props;
+
+  if (!position) {
+    throw new Error('position을 지정해주세요.');
+  }
+
+  const closeModal = () => setOpenModal(false);
+  const { isOn, timeout } = useToastModalAnimation({
+    closeModal,
+    animationDuration,
+    isNeedAnimation,
+    toastDuration,
+    openModal,
+  });
 
   return (
-    <ToastModalContents
-      className={CONTENTS_CLASS_NAME}
-      $position={position}
-      $timeout={timeout}
-      $isOn={isOn}
-      $borderRadius={borderRadius}
-      $modalBackgroundColor={backgroundColor?.modal}
-      $contentsPadding={contentsPadding}
-    >
-      {children}
-    </ToastModalContents>
+    <ModalContainer {...props} closeModal={closeModal}>
+      <ToastModalContents
+        $position={position}
+        $timeout={timeout}
+        $isOn={isOn}
+        $borderRadius={borderRadius}
+        $backgroundColor={backgroundColor}
+        $contentsPadding={contentsPadding}
+      >
+        {children}
+      </ToastModalContents>
+    </ModalContainer>
   );
 }
 
