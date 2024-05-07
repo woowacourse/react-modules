@@ -1,4 +1,5 @@
-import styles from './Modal.module.css';
+import { Modal } from '..';
+import styles from './ModalMain.module.css';
 import {
   CancelButtonProps,
   CloseButtonProps,
@@ -6,12 +7,9 @@ import {
   ModalSizeProps,
   SubtitleProps,
   TitleProps,
-} from './interfaces';
-import ModalHeader from './ModalHeader';
-import ModalContent from './ModalContent';
-import ModalFooter from './ModalFooter';
+} from '../interfaces';
 
-interface ModalProps {
+export interface ModalProps {
   title?: TitleProps;
   subtitle?: SubtitleProps;
   closeButton: CloseButtonProps;
@@ -26,7 +24,7 @@ interface ModalProps {
   children: React.ReactNode;
 }
 
-const Modal = ({
+const ModalMain = ({
   title,
   subtitle,
   closeButton,
@@ -54,12 +52,12 @@ const Modal = ({
         }}
         className={styles[`container-${modalPosition}`]}
       >
-        <ModalHeader title={title} subtitle={subtitle} closeButton={closeButton} />
-        <ModalContent children={children} />
-        <ModalFooter cancelButton={cancelButton} confirmButton={confirmButton} buttonsDirection={buttonsDirection} />
+        <Modal.Header title={title} subtitle={subtitle} closeButton={closeButton} />
+        <Modal.Content children={children} />
+        <Modal.Footer cancelButton={cancelButton} confirmButton={confirmButton} buttonsDirection={buttonsDirection} />
       </section>
     </>
   );
 };
 
-export default Modal;
+export default ModalMain;

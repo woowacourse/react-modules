@@ -1,5 +1,5 @@
-import { CloseButtonImage } from './CloseButtonImage';
-import { CloseButtonProps, SubtitleProps, TitleProps } from './interfaces';
+import { CloseButtonImage } from '../CloseButtonImage';
+import { CloseButtonProps, SubtitleProps, TitleProps } from '../interfaces';
 import styles from './ModalHeader.module.css';
 
 interface ModalHeaderProps {

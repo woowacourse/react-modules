@@ -1,5 +1,5 @@
 import styles from './ConfirmButton.module.css';
-import { ConfirmButtonProps } from './interfaces';
+import { ConfirmButtonProps } from '../interfaces';
 
 const ConfirmButton = (props: ConfirmButtonProps) => {
   return (

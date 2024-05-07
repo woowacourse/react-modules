@@ -1,5 +1,5 @@
 import styles from './CancelButton.module.css';
-import { CancelButtonProps } from './interfaces';
+import { CancelButtonProps } from '../interfaces';
 
 const CancelButton = (props: CancelButtonProps) => {
   return (
