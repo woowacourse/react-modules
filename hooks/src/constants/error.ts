@@ -8,7 +8,7 @@ import { ErrorStatus } from '../types/errorStatus';
 
 export const CARD_NUMBERS_ERROR_MESSAGES: Record<CardNumbersError, string> = {
   [ErrorStatus.IS_NOT_NUMBER]: '카드번호는 숫자만 입력해주세요.',
-  [ErrorStatus.INVALID_LENGTH]: '카드 번호를 4자리씩 입력해주세요.',
+  [ErrorStatus.INVALID_LENGTH]: '잘못된 카드 번호입니다. 다시 입력해주세요.',
 };
 
 export const CARD_HOLDER_ERROR_MESSAGES: Record<CardHolderError, string> = {

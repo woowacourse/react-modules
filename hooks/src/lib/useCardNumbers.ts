@@ -56,8 +56,8 @@ const useCardNumbers = (initialValues: string = '') => {
 
   return {
     value,
-    formatValue,
     cardBrand,
+    formatValue,
     onChange: handleChange,
     onBlur: handleBlur,
     errorMessage: errorStatus && CARD_NUMBERS_ERROR_MESSAGES[errorStatus],
