@@ -1,12 +1,17 @@
 .modalButton {
-  width: 100%;
   padding: 15px 0;
-  text-align: center;
   font-weight: 700;
-  font-size: 14px;
+  font-size: 15px;
   border: none;
   border-radius: 5px;
   cursor: pointer;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  flex: 0 0 auto;
+  white-space: nowrap;
 }
 
 .primary {
@@ -29,13 +34,21 @@
 }
 
 .sm {
-  width: 33%;
+  width: auto;
+  min-width: 60px;
+  height: 30px;
 }
 
 .md {
-  width: 66%;
+  min-width: 80px;
+  height: 36px;
 }
 
 .lg {
+  min-width: 100px;
+  height: 40px;
+}
+
+.full-width {
   width: 100%;
 }

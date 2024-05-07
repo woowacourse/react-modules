@@ -8,11 +8,16 @@ export interface ModalButtonProps extends ButtonHTMLAttributes<HTMLButtonElement
   text: string;
   mode?: ButtonMode;
   size?: Size;
+  fullWidth?: boolean;
 }
 
-const Button = ({ text, mode = 'primary', size = 'lg', ...rest }: ModalButtonProps) => {
+const Button = ({ text, mode = 'primary', size = 'lg', fullWidth, ...rest }: ModalButtonProps) => {
+  console.log(fullWidth);
   return (
-    <button className={`${styles.modalButton} ${styles[mode]} ${styles[size]}`} {...rest}>
+    <button
+      className={`${styles.modalButton} ${styles[mode]} ${styles[size]} ${fullWidth ? styles['full-width'] : ''}`}
+      {...rest}
+    >
       {text}
     </button>
   );
