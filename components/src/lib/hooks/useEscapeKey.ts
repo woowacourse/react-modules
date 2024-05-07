@@ -4,13 +4,13 @@ const useEscapeKey = (isOpen: boolean, close: () => void) => {
   useEffect(() => {
     if (!isOpen) return;
 
-    const handleKeyDown = (event: KeyboardEvent) => {
+    const handleEscapePress = (event: KeyboardEvent) => {
       if (event.key === 'Escape') close();
     };
 
-    document.addEventListener('keydown', handleKeyDown);
+    document.addEventListener('keydown', handleEscapePress);
 
-    return () => document.removeEventListener('keydown', handleKeyDown);
+    return () => document.removeEventListener('keydown', handleEscapePress);
   }, [isOpen, close]);
 };
 
