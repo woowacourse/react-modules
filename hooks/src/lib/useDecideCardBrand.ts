@@ -1,35 +1,26 @@
+import { CardBrandName } from "@/data/cardCompanyNumbersInfo";
+import {
+  decideCardBrandByFirstDigits,
+  decideCardBrandByNextFourDigits,
+  decideCardBrandByNextTwoDigits,
+} from "@/utils/checkCardBrand";
 import { useState } from "react";
 
 const useDecideCardBrand = (value: string) => {
-  const [cardBrand, setCardBrand] = useState();
+  const [cardBrand, setCardBrand] = useState<CardBrandName | null>();
+  let newCardBrand = null;
 
-  const slicedValue = value.slice(0, 2);
-  const secondSlicedValue = value.slice(2, 6);
-
-  if (slicedValue[0] === "4") {
-    return console.log("VISA");
+  if (value.length == 1) {
+    newCardBrand = decideCardBrandByFirstDigits(value);
   }
-  if (
-    slicedValue[0] === "5" &&
-    slicedValue[1] >= "1" &&
-    slicedValue[1] <= "5"
-  ) {
-    return console.log("MASTER");
+  if (!newCardBrand && value.length == 2) {
+    newCardBrand = decideCardBrandByNextTwoDigits(value);
   }
-  if (slicedValue == "34" || slicedValue == "37") {
-    return console.log("AMEX");
-  }
-  if (slicedValue == "36") {
-    return console.log("DINERS");
-  }
-  if (slicedValue == "62") {
-    if (secondSlicedValue[0] === "2") {
-      if (+secondSlicedValue >= 2126 && +secondSlicedValue <= 2925) {
-        return console.log("UNION_PAY");
-      }
-    }
+  if (!newCardBrand && value.length == 6) {
+    newCardBrand = decideCardBrandByNextFourDigits(value);
   }
 
+  setCardBrand(newCardBrand);
   return { cardBrand };
 };
 

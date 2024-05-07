@@ -1,61 +1,76 @@
-import { ChangeEvent } from "react";
-import { CardNumbersType, CardNumberErrorType } from "@/types/cardNumbers";
+import { ChangeEvent, useState } from "react";
 import { validLength, validateNumber } from "@/validate/validate";
 import { VALID_LENGTH } from "@/constants/system.ts";
-import useInput from "./common/useInput";
+import { CardBrandName, cardBrandsInfo } from "@/data/cardCompanyNumbersInfo";
+import { CardNumbersErrorMessages } from "@/constants/error";
+import { ErrorStatus } from "@/types/errorStatus";
+import {
+  decideCardBrandByFirstDigits,
+  decideCardBrandByNextTwoDigits,
+  decideCardBrandByNextFourDigits,
+} from "@/utils/checkCardBrand";
 
 export const cardNumbersValidates = [
   (value: string) => validateNumber(value),
   (value: string) => validLength(value, VALID_LENGTH.CARD_NUMBERS),
 ];
 
-const useCardNumbers2 = (initialValues: CardNumbersType) => {
-  const cardNumbersConfig = {
-    validates: cardNumbersValidates,
-    validLength: VALID_LENGTH.CARD_NUMBERS,
-  };
+const useCardNumbers2 = () => {
+  const [value, setValue] = useState("");
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [cardBrand, setCardBrand] = useState<CardBrandName | null>(null);
 
-  const { value, onChange, errorStatus } = useInput<CardNumberErrorType>({
-    initialValue: initialValues["cardNumber1"],
-    ...cardNumbersConfig,
-  });
+  const decideCardBrand = (value: string): CardBrandName | null => {
+    let newCardBrand = null;
+
+    if (value.length >= 1) {
+      newCardBrand = decideCardBrandByFirstDigits(value);
+    }
+    if (!newCardBrand && value.length >= 2) {
+      newCardBrand = decideCardBrandByNextTwoDigits(value);
+    }
+    if (!newCardBrand && value.length >= 6) {
+      newCardBrand = decideCardBrandByNextFourDigits(value);
+    }
+    return newCardBrand;
+  };
 
   const onChangeValue = (e: ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
-    const slicedValue = value.slice(0, 2);
-    const secondSlicedValue = value.slice(2, 6);
+    setValue(value);
 
-    if (slicedValue[0] === "4") {
-      return "VISA";
+    if (!validateNumber(value).isValid) {
+      setErrorMessage(ErrorStatus.IS_NOT_NUMBER);
     }
-    if (
-      slicedValue[0] === "5" &&
-      slicedValue[1] >= "1" &&
-      slicedValue[1] <= "5"
-    ) {
-      return "MASTER";
-    }
-    if (slicedValue == "34" || slicedValue == "37") {
-      return "AMEX";
-    }
-    if (slicedValue == "36") {
-      return "DINERS";
-    }
-    if (slicedValue == "62") {
-      if (secondSlicedValue[0] === "2") {
-        if (+secondSlicedValue >= 2126 && +secondSlicedValue <= 2925) {
-          return "UNION_PAY";
+
+    const newCardBrand = decideCardBrand(value);
+    setCardBrand(newCardBrand);
+
+    const lengthErrorMessage =
+      CardNumbersErrorMessages[ErrorStatus.INVALID_LENGTH];
+
+    if (cardBrand) {
+      const currentCardBrandInfo = cardBrandsInfo.find(
+        (brand) => brand.name === cardBrand
+      )!;
+
+      if (value.length !== currentCardBrandInfo.validLength) {
+        if (!errorMessage) {
+          setErrorMessage(lengthErrorMessage);
+        }
+      } else {
+        if (errorMessage === lengthErrorMessage) {
+          setErrorMessage(null);
         }
       }
     }
-
-    onChange(e);
   };
 
   return {
     value,
+    cardBrand,
     onChange: onChangeValue,
-    errorStatus,
+    errorMessage,
   };
 };
 

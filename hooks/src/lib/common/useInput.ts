@@ -43,6 +43,7 @@ const useInput = <T>({ initialValue = "", validates }: Props) => {
     value,
     onChange: handleChange,
     errorStatus,
+    setValue,
   };
 };
 
