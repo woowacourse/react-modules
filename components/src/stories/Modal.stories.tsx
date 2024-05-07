@@ -6,7 +6,7 @@ import {
   ModalButtonSize,
   ModalContentSize,
   ModalPosition,
-  ModalTheme,
+  ModalButtonTheme,
 } from "../lib/types/modalProps";
 
 const meta = {
@@ -62,7 +62,7 @@ const meta = {
         defaultValue: { summary: "This is the content of the modal." },
       },
     },
-    buttonText: {
+    confirmButtonText: {
       description: "모달 버튼의 텍스트를 설정하는 arg입니다.",
       control: {
         type: "text",
@@ -71,7 +71,7 @@ const meta = {
         defaultValue: { summary: "OK" },
       },
     },
-    buttonTheme: {
+    confirmButtonTheme: {
       description: "버튼의 색상 테마를 결정하는 arg입니다. (dark/light)",
       options: ["dark", "light"],
       control: {
@@ -91,9 +91,11 @@ interface ModalStoryProps {
   position: ModalPosition;
   contentSize: ModalContentSize;
   title: string;
-  buttonText: string;
+  confirmButtonText?: string;
+  cancelButtonText?: string;
   contentText: string;
-  buttonTheme: ModalTheme;
+  confirmButtonTheme: ModalButtonTheme;
+  cancelButtonTheme?: ModalButtonTheme;
   buttonSize: ModalButtonSize;
 }
 type Story = StoryObj<ModalStoryProps>;
@@ -105,8 +107,8 @@ export const Default: Story = {
     contentSize: "medium",
     title: "Modal Title",
     contentText: "This is the content of the modal.",
-    buttonText: "OK",
-    buttonTheme: "dark",
+    confirmButtonText: "OK",
+    confirmButtonTheme: "dark",
     buttonSize: "large",
   },
 
@@ -115,8 +117,8 @@ export const Default: Story = {
     contentSize,
     title,
     contentText,
-    buttonText,
-    buttonTheme,
+    confirmButtonText,
+    confirmButtonTheme,
   }: ModalStoryProps) => {
     const [args, updateArgs] = useArgs();
 
@@ -139,8 +141,11 @@ export const Default: Story = {
             </header>
             <main style={{ margin: "10px 0" }}>{contentText}</main>
             <footer>
-              <Modal.Button theme={buttonTheme} onClick={() => alert("modal button clicked!")}>
-                {buttonText}
+              <Modal.Button
+                theme={confirmButtonTheme}
+                onClick={() => alert("modal button clicked!")}
+              >
+                {confirmButtonText}
               </Modal.Button>
             </footer>
           </Modal.Content>
@@ -157,8 +162,8 @@ export const AlertModal: Story = {
     contentSize: "medium",
     title: "아이디를 입력해 주세요.",
     contentText: "아이디는 필수로 입력해야 합니다.",
-    buttonText: "확인",
-    buttonTheme: "dark",
+    confirmButtonText: "확인",
+    confirmButtonTheme: "dark",
     buttonSize: "small",
   },
 
@@ -167,8 +172,8 @@ export const AlertModal: Story = {
     contentSize,
     title,
     contentText,
-    buttonText,
-    buttonTheme,
+    confirmButtonText,
+    confirmButtonTheme,
     buttonSize,
   }: ModalStoryProps) => {
     const [args, updateArgs] = useArgs();
@@ -194,11 +199,81 @@ export const AlertModal: Story = {
             </main>
             <footer style={{ display: "flex", flexDirection: "row-reverse" }}>
               <Modal.Button
-                theme={buttonTheme}
+                theme={confirmButtonTheme}
                 size={buttonSize}
                 onClick={() => alert("modal button clicked!")}
               >
-                {buttonText}
+                {confirmButtonText}
+              </Modal.Button>
+            </footer>
+          </Modal.Content>
+        </Modal>
+      </>
+    );
+  },
+};
+
+export const ConfirmModal: Story = {
+  args: {
+    isOpen: false,
+    position: "center",
+    contentSize: "medium",
+    title: "카드를 삭제하시겠습니까?",
+    contentText: "삭제하면 복구하실 수 없습니다.",
+    confirmButtonText: "확인",
+    cancelButtonText: "취소",
+    confirmButtonTheme: "dark",
+    cancelButtonTheme: "light",
+    buttonSize: "small",
+  },
+
+  render: ({
+    position,
+    contentSize,
+    title,
+    contentText,
+    cancelButtonText,
+    confirmButtonText,
+    confirmButtonTheme,
+    cancelButtonTheme,
+    buttonSize,
+  }: ModalStoryProps) => {
+    const [args, updateArgs] = useArgs();
+
+    const onOpen = () => {
+      updateArgs({ isOpen: true });
+    };
+    const onClose = () => {
+      updateArgs({ isOpen: false });
+    };
+
+    return (
+      <>
+        <button onClick={onOpen}>Open Modal</button>
+        <Modal isOpen={args.isOpen} onClose={onClose}>
+          <Modal.Dimmer />
+          <Modal.Content position={position} size={contentSize}>
+            <header>
+              <h2 style={{ margin: 0, fontSize: "18px", fontWeight: 700 }}>{title}</h2>
+            </header>
+            <main style={{ margin: "16px 0", fontSize: "12px", color: "#0A0D13" }}>
+              {contentText}
+            </main>
+            <footer style={{ display: "flex", flexDirection: "row-reverse" }}>
+              <Modal.Button
+                theme={confirmButtonTheme}
+                size={buttonSize}
+                onClick={() => alert("modal button clicked!")}
+              >
+                {confirmButtonText}
+              </Modal.Button>
+              <Modal.Button
+                style={{ marginRight: "12px" }}
+                theme={cancelButtonTheme}
+                size={buttonSize}
+                onClick={() => alert("modal button clicked!")}
+              >
+                {cancelButtonText}
               </Modal.Button>
             </footer>
           </Modal.Content>
