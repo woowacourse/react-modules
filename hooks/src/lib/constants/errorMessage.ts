@@ -1,5 +1,5 @@
 export const ERROR_MESSAGE = {
-  NO_INPUT: "인풋은 비어있을 수 없습니다.",
+  NO_INPUT: "입력필드는 비어있을 수 없습니다.",
   CARD_HOLDER: {
     INVALID_CHARACTERS: "카드 소유자 이름은 영어 대문자와 공백만 입력 가능합니다.",
     MAX_LENGTH_EXCEEDED: "카드 소유자 이름은 공백 포함 15자까지만 입력 가능합니다.",
