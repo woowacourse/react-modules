@@ -51,17 +51,4 @@ describe("useCVC 훅 테스트", () => {
     const expectedErrorMessage = CVCErrorMessages[ErrorStatus.INVALID_LENGTH];
     expect(result.current.errorMessage).toBe(expectedErrorMessage);
   });
-
-  // it("길이가 2글자이고 포커스를 벗어나면 에러를 낸다.", () => {
-  //   const { result } = renderHook(() => useCVC(""));
-  //   const invalidValue = "12";
-
-  //   React.act(() => {
-  //     result.current.onBlurValidLength({
-  //       target: { value: invalidValue, name: "cardNumber1" },
-  //     } as React.FocusEvent<HTMLInputElement>);
-  //   });
-  //   const expectedErrorMessage = CVCErrorMessages[ErrorStatus.INVALID_LENGTH];
-  //   expect(result.current.errorMessage).toEqual(expectedErrorMessage);
-  // });
 });

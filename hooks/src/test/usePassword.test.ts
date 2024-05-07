@@ -53,19 +53,4 @@ describe("usePassword 훅 테스트", () => {
       PasswordErrorMessages[ErrorStatus.INVALID_LENGTH];
     expect(result.current.errorMessage).toBe(expectedErrorMessage);
   });
-
-  // it("길이가 2글자 미만(Blur)이면 에러를 낸다.", () => {
-  //   const { result } = renderHook(() => usePassword(initialValue));
-  //   const invalidValue = "1";
-
-  //   React.act(() => {
-  //     result.current.onBlurValidLength({
-  //       target: { value: invalidValue },
-  //     } as React.FocusEvent<HTMLInputElement>);
-  //   });
-
-  //   const expectedErrorMessage =
-  //     PasswordErrorMessages[ErrorStatus.INVALID_LENGTH];
-  //   expect(result.current.errorMessage).toBe(expectedErrorMessage);
-  // });
 });
