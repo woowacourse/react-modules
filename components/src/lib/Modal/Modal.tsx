@@ -1,24 +1,9 @@
 import { useRef } from 'react';
-
-import useEscapeKey from '../hooks/useEscapeKey';
-import usePreventScroll from '../hooks/usePreventScroll';
-import useFocusTrap from '../hooks/useFocusTrap';
-
+import { useEscapeKey, useFocusTrap, usePreventScroll } from '../hooks';
 import type { StrictPropsWithChildren } from '../types/common';
-import type { ModalProps, ModalFooterProps } from './Modal.type';
+import type { ModalProps } from './Modal.type';
+
 import styles from './Modal.module.css';
-
-export const ModalHeader = ({ children }: StrictPropsWithChildren) => {
-  return <header className={styles.modalHeader}>{children}</header>;
-};
-
-export const ModalBody = ({ children }: StrictPropsWithChildren) => {
-  return <main className={styles.modalBody}>{children}</main>;
-};
-
-export const ModalFooter = ({ children, direction = 'column' }: StrictPropsWithChildren<ModalFooterProps>) => {
-  return <footer className={`${styles.modalFooter} ${styles[direction]}`}>{children}</footer>;
-};
 
 export const ModalMain = ({
   isOpen,

@@ -1,0 +1,26 @@
+.modalHeader {
+  display: flex;
+  justify-content: space-between;
+}
+
+.modalBody {
+  margin: 16px 0px;
+  flex-grow: 1;
+  overflow-y: auto;
+}
+
+.modalFooter {
+  display: flex;
+}
+
+.modalFooter.row {
+  flex-direction: row;
+  align-items: center;
+  column-gap: 8px;
+}
+
+.modalFooter.column {
+  flex-direction: column;
+  justify-content: center;
+  row-gap: 8px;
+}
