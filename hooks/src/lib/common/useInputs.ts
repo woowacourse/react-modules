@@ -1,7 +1,7 @@
 import { useState } from "react";
 
-const useInputs = <T extends object>(initialValue: T) => {
-  const [inputValue, setInputValue] = useState<T>(initialValue);
+const useInputs = (initialValue: Record<string, string>) => {
+  const [inputValue, setInputValue] = useState(initialValue);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target !== e.currentTarget) return;

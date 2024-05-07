@@ -3,15 +3,9 @@ import useInputs from "../common/useInputs";
 import Validator from "../utils/validator";
 import { ERROR_MESSAGE, OPTION } from "../constants";
 
-export interface CardNumberValue {
-  firstValue: string;
-  secondValue: string;
-  thirdValue: string;
-  fourthValue: string;
-}
-
-const useCardNumber = (initialValue: CardNumberValue) => {
+const useCardNumber = (initialValue: Record<string, string>) => {
   const { inputValue, handleInputChange, updateByNameAndValue } = useInputs(initialValue);
+
   const [validationResult, setValidationResult] = useState<ValidationResult>({
     isValid: true,
     errorMessage: "",

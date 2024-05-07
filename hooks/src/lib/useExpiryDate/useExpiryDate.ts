@@ -10,7 +10,9 @@ export interface ExpirationPeriodValue {
 }
 
 const useExpiryDate = (initialValue: ExpirationPeriodValue) => {
-  const { inputValue, handleInputChange, updateByNameAndValue } = useInputs(initialValue);
+  const { inputValue, handleInputChange, updateByNameAndValue } = useInputs(
+    initialValue as unknown as Record<string, string>
+  );
   const [validationResult, setValidationResult] = useState<ValidationResult>({
     isValid: true,
     errorMessage: "",
