@@ -32,6 +32,9 @@
   width: 15px;
   height: 15px;
 
+  background-color: inherit;
   position: absolute;
   right: 15px;
+
+  cursor: pointer;
 }

@@ -11,9 +11,9 @@ interface ModalHeaderProps {
 const ModalHeader = ({ title, subtitle, closeButton }: ModalHeaderProps) => {
   return (
     <div className={styles['header']}>
-      <span aria-label={'모달 닫기 버튼'} className={styles['button-close']} onClick={closeButton.onClose}>
+      <button aria-label={'모달 닫기 버튼'} className={styles['button-close']} onClick={closeButton.onClose}>
         <CloseButtonImage />
-      </span>
+      </button>
       <div className={styles['title-field']}>
         {title && (
           <>
