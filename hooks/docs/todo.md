@@ -70,8 +70,22 @@
 
 - [x] state, error 관리 훅. useRestrictedState으로 변경
 - [ ] useRestrictedState에 reset함수 추가
-- [ ] 상수 분리
+- [x] 상수 분리
 - [x] 마크다운 개행 정리
 - [x] useInput register만들어보기
-  - [ ] required, type
-  - [ ] max, maxLength, min, minLength
+  - [x] required, type
+  - [x] max, maxLength, min, minLength
+
+## STEP2 TODO
+
+1. [ ] 카드 브랜드가 달라지에 따라서, 총 카드번호의 갯수, input의 갯수가 달라진다.
+
+   - 카드 브랜드 종류 ["Visa", "Master", "AMEX", "Diners", "UnionPay"]
+     1. Visa는 4로 시작한다. input은 4개. 16자리
+     2. Master는 51~54로 시작한다. input은 4개. 16자리
+     3. AMEX는 34, 27로 시작한다. input은 3개. 15자리
+     4. Diners는 36으로 시작한다. input은 3개. 14자리
+     5. UnionPay는 622126~622925, 624~626, 6282~6288로 시작한다. 16자리
+
+2. [ ] 카드 브랜드에 따라서 cardNumber state의 갯수가 정해진다.
+   - useCardNumbers는 카드 브랜드를 반환한다.
