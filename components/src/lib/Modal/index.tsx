@@ -64,7 +64,7 @@ function CloseButton({ children, buttonType, className, ...attribute }: ModalBut
   return (
     <button
       onClick={onClick}
-      className={clsx(className, styles.closeButton, buttonType ? styles[buttonType] : styles.defaultButton)}
+      className={clsx(className, buttonType ? styles[buttonType] : styles.defaultCloseButton)}
       {...attribute}
     >
       {buttonType === 'box' ? children : <CloseButtonIcon />}
@@ -87,7 +87,7 @@ function Button<A extends Function>({
   };
 
   return (
-    <button className={clsx(className, styles.defaultButton)} onClick={onClick} {...attribute}>
+    <button className={clsx(className, styles.button)} onClick={onClick} {...attribute}>
       {children}
     </button>
   );

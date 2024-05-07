@@ -12,13 +12,14 @@
   --color-bg-contents: var(--color-white);
   --color-primary: #333333;
   --color-btn-txt: var(--color-white);
+  --color-close-btn-txt: #8b95a1;
 }
 
 * {
   box-sizing: border-box;
 }
 
-/* back drop */
+/* BackDrop */
 .backdrop {
   display: flex;
   position: fixed;
@@ -29,7 +30,7 @@
   background-color: rgba(0, 0, 0, 0.5);
 }
 
-/*modal type*/
+/* Contents */
 .contents {
   display: flex;
   flex-direction: column;
@@ -42,9 +43,10 @@
   box-shadow: var(--shadow);
 
   background: var(--color-bg-contents);
-  padding: 2.25rem 1.5rem;
+  padding: 1.5rem 2rem;
 }
 
+/* position */
 .default,
 .center {
   position: relative;
@@ -66,7 +68,7 @@
   width: 100%;
 }
 
-/* modal title */
+/* Title */
 .title {
   margin: 0;
   font-weight: 700;
@@ -75,24 +77,37 @@
   text-align: left;
 }
 
-/* close button */
-.closeButton {
+/* buttons */
+/* common */
+button {
   all: unset;
   display: block;
 }
 
-.closeButton:hover {
+button:hover {
   cursor: pointer;
 }
 
-.defaultButton,
-.box {
+/* Button */
+.button {
   border-radius: 0.3125rem;
   background-color: var(--color-primary);
   padding: 0.5rem 0;
   width: 100%;
 
   color: var(--color-btn-txt);
+  font-weight: 700;
+  font-size: 0.9375rem;
+  line-height: 1.375rem;
+  text-align: center;
+}
+
+/* CloseButton */
+.defaultCloseButton,
+.box {
+  width: 100%;
+  height: 2.75rem;
+  color: var(--color-close-btn-txt);
   font-weight: 700;
   font-size: 0.9375rem;
   line-height: 1.375rem;
