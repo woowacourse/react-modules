@@ -28,7 +28,7 @@ const useCVC = (initialValue: { cvc: string }) => {
     });
   };
 
-  const handleCvcBlur = (e: FocusEvent<HTMLInputElement>) => {
+  const handleCvcValidator = (e: EventType) => {
     if (e.target !== e.currentTarget) return;
 
     const { name, value } = e.target;
@@ -45,22 +45,13 @@ const useCVC = (initialValue: { cvc: string }) => {
     });
   };
 
+  const handleCvcBlur = (e: FocusEvent<HTMLInputElement>) => {
+    handleCvcValidator(e);
+  };
+
   const handleCvcEnter = (e: KeyboardEvent<HTMLInputElement>) => {
-    if (e.target !== e.currentTarget) return;
     if (e.key !== "Enter") return;
-
-    const { name, value } = e.target as HTMLInputElement;
-    if (!value || !Validator.checkFillNumber(value, OPTION.cvcMaxLength))
-      return setValidationResult({
-        isValid: false,
-        errorMessage: ERROR_MESSAGE.cvcOutOfRange,
-      });
-
-    updateByNameAndValue({ name, value });
-    setValidationResult({
-      isValid: true,
-      errorMessage: "",
-    });
+    handleCvcValidator(e);
   };
 
   return {

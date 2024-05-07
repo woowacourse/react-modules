@@ -28,7 +28,7 @@ const useCardHolder = (initialValue: { cardHolder: string }) => {
     });
   };
 
-  const handleCardHolderBlur = (e: FocusEvent<HTMLInputElement>) => {
+  const handleCardHolderValidator = (e: EventType) => {
     if (e.target !== e.currentTarget) return;
 
     const { name, value } = e.target;
@@ -45,22 +45,13 @@ const useCardHolder = (initialValue: { cardHolder: string }) => {
     });
   };
 
+  const handleCardHolderBlur = (e: FocusEvent<HTMLInputElement>) => {
+    handleCardHolderValidator(e);
+  };
+
   const handleCardHolderEnter = (e: KeyboardEvent<HTMLInputElement>) => {
-    if (e.target !== e.currentTarget) return;
     if (e.key !== "Enter") return;
-
-    const { name, value } = e.target as HTMLInputElement;
-    if (!Validator.checkExist(value))
-      return setValidationResult({
-        isValid: false,
-        errorMessage: ERROR_MESSAGE.notExistCardHolder,
-      });
-
-    updateByNameAndValue({ name, value });
-    setValidationResult({
-      isValid: true,
-      errorMessage: "",
-    });
+    handleCardHolderValidator(e);
   };
 
   return {

@@ -35,7 +35,7 @@ const useCardNumber = (initialValue: CardNumberValue) => {
     });
   };
 
-  const handleCardNumberBlur = (e: FocusEvent<HTMLInputElement>) => {
+  const handleCardNumberValidator = (e: EventType) => {
     if (e.target !== e.currentTarget) return;
 
     const { name, value } = e.target;
@@ -52,22 +52,13 @@ const useCardNumber = (initialValue: CardNumberValue) => {
     });
   };
 
+  const handleCardNumberBlur = (e: FocusEvent<HTMLInputElement>) => {
+    handleCardNumberValidator(e);
+  };
+
   const handleCardNumberEnter = (e: KeyboardEvent<HTMLInputElement>) => {
-    if (e.target !== e.currentTarget) return;
     if (e.key !== "Enter") return;
-
-    const { name, value } = e.target as HTMLInputElement;
-    if (!value || !Validator.checkFillNumber(value, OPTION.cardNumberMaxLength))
-      return setValidationResult({
-        isValid: false,
-        errorMessage: ERROR_MESSAGE.cardNumberOutOfRange,
-      });
-
-    updateByNameAndValue({ name, value });
-    setValidationResult({
-      isValid: true,
-      errorMessage: "",
-    });
+    handleCardNumberValidator(e);
   };
 
   return {
