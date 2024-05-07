@@ -1,11 +1,10 @@
 import { useRef } from 'react';
-import { useEscapeKey, useFocusTrap, usePreventScroll } from '../hooks';
-import type { StrictPropsWithChildren } from '../types/common';
-import type { ModalProps } from './Modal.type';
+import { useEscapeKey, useFocusTrap, usePreventScroll } from '../../hooks';
+import type { StrictPropsWithChildren, ModalProps } from '../../types/common';
 
-import styles from './Modal.module.css';
+import styles from './MainModal.module.css';
 
-export const ModalMain = ({
+const MainModal = ({
   isOpen,
   close,
   children,
@@ -34,3 +33,5 @@ export const ModalMain = ({
     </div>
   );
 };
+
+export default MainModal;
