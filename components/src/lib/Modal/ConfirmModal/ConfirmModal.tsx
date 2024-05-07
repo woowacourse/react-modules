@@ -2,7 +2,6 @@ import MainModal from '../MainModal/MainModal';
 import Title from '../../components/Title/Title';
 import Button from '../../components/Button/Button';
 import { ModalHeader, ModalBody, ModalFooter } from '../../components/ModalLayout/ModalLayout';
-
 import type { ModalProps } from '../../types/common';
 
 interface ConfirmModalProps extends ModalProps {

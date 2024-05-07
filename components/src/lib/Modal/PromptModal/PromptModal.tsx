@@ -3,7 +3,6 @@ import Title from '../../components/Title/Title';
 import Input from '../../components/Input/Input';
 import Button from '../../components/Button/Button';
 import { ModalHeader, ModalBody, ModalFooter } from '../../components/ModalLayout/ModalLayout';
-
 import type { ModalProps } from '../../types/common';
 
 interface PromptModalProps extends ModalProps {

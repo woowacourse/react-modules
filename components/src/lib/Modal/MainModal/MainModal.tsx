@@ -1,7 +1,6 @@
 import { useRef } from 'react';
 import { useEscapeKey, useFocusTrap, usePreventScroll } from '../../hooks';
 import type { StrictPropsWithChildren, ModalProps } from '../../types/common';
-
 import styles from './MainModal.module.css';
 
 const MainModal = ({

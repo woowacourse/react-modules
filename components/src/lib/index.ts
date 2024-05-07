@@ -1,9 +1,9 @@
+import MainModal from './Modal/MainModal/MainModal';
 import Title from './components/Title/Title';
 import Input from './components/Input/Input';
 import Button from './components/Button/Button';
 import CloseButton from './components/CloseButton/CloseButton';
 import { ModalHeader, ModalBody, ModalFooter } from './components/ModalLayout/ModalLayout';
-import MainModal from './Modal/MainModal/MainModal';
 
 export const Modal = Object.assign(MainModal, {
   Title: Title,
