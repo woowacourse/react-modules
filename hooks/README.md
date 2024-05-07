@@ -1,11 +1,11 @@
-# choriver-payments-validation-hooks
+# choco-payments-validation-hooks
 
 ## Install
 
 이 라이브러리를 사용하기 위해서는 다음 패키지를 설치해야 합니다:
 
 ```bash
-npm install choriver-payments-validation-hooks
+npm install choco-payments-validation-hooks
 ```
 
 ## Usage
@@ -13,7 +13,7 @@ npm install choriver-payments-validation-hooks
 React 컴포넌트에서 모달 라이브러리를 사용하려면 다음 단계를 따르세요
 
 ```jsx
-import { useCVC } from "choriver-payments-validation-hooks";
+import { useCVC } from "choco-payments-validation-hooks";
 
 function App() {
   const [cardCVC, handleCardCVCChange, cardCVCValidation] = useCVC();
