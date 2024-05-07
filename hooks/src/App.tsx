@@ -9,6 +9,8 @@ import {
 import React from "react";
 import "./App.css";
 
+const cardNames = ["현대카드, 국민카드, 신한카드, 우리카드"];
+
 function App() {
   const [cardHolder, handleCardHolderChange, cardHolderValidation] = useCardHolder();
   const [cardPassword, handleCardPasswordChange, cardPasswordValidation] = usePassword();
@@ -19,17 +21,9 @@ function App() {
 
   const cardNumberKeys = Object.keys(cardNumbers) as Array<keyof typeof cardNumbers>;
 
-  const cardTypes = [
-    { name: "현대카드" },
-    { name: "국민카드" },
-    { name: "신한카드" },
-    { name: "우리카드" },
-  ];
-
   return (
     <>
       <h1>Hooks Modules</h1>
-      {/* 카드 소유자 이름 입력 */}
       <div>
         <label htmlFor="cardHolder">Card Holder:</label>
         <input
@@ -43,7 +37,6 @@ function App() {
         )}
       </div>
 
-      {/* 카드 비밀번호 입력 */}
       <div>
         <label htmlFor="cardPassword">Card Password:</label>
         <input
@@ -57,7 +50,6 @@ function App() {
         )}
       </div>
 
-      {/* 카드 CVC 번호 입력 */}
       <div>
         <label htmlFor="cardCVC">Card CVC:</label>
         <input
@@ -71,7 +63,6 @@ function App() {
         )}
       </div>
 
-      {/* 카드 유효기간 입력 */}
       <div>
         <label htmlFor="cardExpiryDate">Card Expiry Date:</label>
         <input
@@ -91,7 +82,6 @@ function App() {
         )}
       </div>
 
-      {/* 카드 번호 입력 */}
       <div>
         <label htmlFor="cardNumber">Card Number:</label>
         {cardNumberKeys.map((key, index) => (
@@ -108,24 +98,23 @@ function App() {
         )}
       </div>
 
-      {/* 카드 회사 선택 */}
       <div>
         <label htmlFor="cardIssuer">Card Issuer:</label>
         <div>
-          {cardTypes.map((type) => (
+          {cardNames.map((name) => (
             <div
-              key={type.name}
-              onClick={() => handleCardIssuerChange(cardIssuer === type.name ? "" : type.name)}
+              key={name}
+              onClick={() => handleCardIssuerChange(cardIssuer === name ? "" : name)}
               style={{
                 display: "inline-block",
                 padding: "8px",
-                border: `2px solid ${cardIssuer === type.name ? "blue" : "gray"}`,
+                border: `2px solid ${cardIssuer === name ? "blue" : "gray"}`,
                 borderRadius: "4px",
                 margin: "5px",
                 cursor: "pointer",
               }}
             >
-              {type.name}
+              {name}
             </div>
           ))}
         </div>
