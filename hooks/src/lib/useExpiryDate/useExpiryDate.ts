@@ -82,7 +82,6 @@ const useExpiryDate = (initialValue: ExpiryDateValue) => {
     handleExpiryChange,
     handleExpiryDateBlur,
     handleExpiryDateEnter,
-    handleExpiryDateValidator,
   };
 };
 
