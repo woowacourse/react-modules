@@ -1,6 +1,13 @@
 import styled, { css } from "styled-components";
 import { ButtonColorType, ButtonSizeType } from "./Button";
 
+export const BUTTON_WIDTH_MAP = {
+  small: "80px",
+  medium: "120px",
+  large: "150px",
+  full: "100%",
+};
+
 export const ButtonWrapper = styled.button<{
   $backgroundColor: ButtonColorType | string;
   $textColor: ButtonColorType;
@@ -12,38 +19,19 @@ export const ButtonWrapper = styled.button<{
   border-radius: 5px;
   margin-top: 10px;
   cursor: pointer;
+  width: ${({ $size }) => BUTTON_WIDTH_MAP[$size]};
 
-  ${({ $size }) => {
-    if ($size === "small") {
-      return css`
-        width: 100px;
-      `;
-    }
-    if ($size === "medium") {
-      return css`
-        width: 150px;
-      `;
-    }
-    if ($size === "large") {
-      return css`
-        width: 200px;
-      `;
-    }
-    return css`
-      width: 100%;
-    `;
-  }}
   ${({ $backgroundColor, $textColor, theme }) => {
     if ($backgroundColor === "black") {
       return css`
-        background-color: ${theme.COLOR.grey};
+        background-color: ${theme.COLOR["lineGrey"]};
         color: white;
-        border: 1px solid ${theme.COLOR.grey};
+        border: 1px solid ${theme.COLOR["lineGrey"]};
       `;
     } else if ($backgroundColor === "white") {
       return css`
         background-color: white;
-        color: ${theme.COLOR.grey};
+        color: ${theme.COLOR["lineGrey"]};
         border: 1px solid ${theme.COLOR.border};
       `;
     } else {

@@ -2,7 +2,14 @@ import styled, { css } from "styled-components";
 
 export type ModalPosition = "center" | "bottom";
 
-export type ModalSize = "full" | "large" | "small" | "auto";
+export type ModalSize = "small" | "medium" | "large" | "full";
+
+export const MODAL_WIDTH_MAP: Record<ModalSize, string> = {
+  small: "320px",
+  medium: "480px",
+  large: "600px",
+  full: "100vw",
+};
 
 export const ModalWrapper = styled.div<{ open: boolean }>`
   position: fixed;
@@ -33,14 +40,8 @@ export const ModalOuter = styled.div<{
   flex-direction: column;
   align-items: flex-start;
   min-height: 150px;
-  width: ${({ $size }) =>
-    $size === "full"
-      ? "100vw"
-      : $size === "large"
-        ? "350px"
-        : $size === "small"
-          ? "200px"
-          : "auto"};
+  width: ${({ $size: size }) => MODAL_WIDTH_MAP[size]};
+
   ${({ $position }) => {
     if ($position === "bottom") {
       return css`
@@ -101,7 +102,9 @@ export const Content = styled.div`
   text-align: left;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: left;
 `;
 
-export const ConfirmButton = styled.button``;
+export const ButtonWrapper = styled.div`
+  display: flex;
+`;

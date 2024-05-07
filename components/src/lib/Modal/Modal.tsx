@@ -6,7 +6,7 @@ import BasicButton, {
 
 export type ModalPosition = "center" | "bottom";
 
-export type ModalSize = "small" | "large" | "full" | "auto";
+export type ModalSize = "small" | "medium" | "large" | "full";
 
 export interface ModalMainProps {
   children?: React.ReactNode;
@@ -21,7 +21,7 @@ export const ModalMain = ({
   isOpen,
   position,
   onClose,
-  size = "auto",
+  size = "small",
 }: ModalMainProps) => {
   return (
     <S.ModalWrapper open={isOpen}>
@@ -71,7 +71,7 @@ const StyledButton = ({
   onClickEvent,
   backgroundColor = "white",
   textColor,
-  size,
+  size = "full",
 }: StyleButtonProps) => {
   return (
     <BasicButton

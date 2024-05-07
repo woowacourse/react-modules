@@ -1,5 +1,6 @@
 const COLOR = {
   grey: "#555555",
+  lineGrey: "#333333",
   border: "#bababa",
 };
 
