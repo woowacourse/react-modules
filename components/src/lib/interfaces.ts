@@ -1,14 +1,18 @@
+import { ElementType } from 'react';
+
 export interface TitleProps {
   content: string;
   position?: 'left' | 'center';
   color?: string;
   fontSize?: string;
+  as?: ElementType;
 }
 
 export interface SubtitleProps {
   content: string;
   color?: string;
   fontSize?: string;
+  as?: ElementType;
 }
 
 export interface CloseButtonProps {
