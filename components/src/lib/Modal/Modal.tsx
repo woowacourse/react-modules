@@ -8,6 +8,7 @@ export interface ModalProps {
   modalPosition?: "center" | "bottom";
   title?: string;
   closeButtonPosition?: "top" | "bottom";
+  isOpenValue?: boolean;
 }
 
 export const Modal: React.FC<React.PropsWithChildren<ModalProps>> = ({
@@ -15,11 +16,12 @@ export const Modal: React.FC<React.PropsWithChildren<ModalProps>> = ({
   title = "",
   children,
   closeButtonPosition = "top",
+  isOpenValue,
 }) => {
   const { isOpen, closeModal } = useModalContext();
 
   return (
-    isOpen && (
+    (isOpenValue || isOpen) && (
       <>
         <ModalDimmer onClick={closeModal} />
         <ModalContainer modalPosition={modalPosition} closeButtonPosition={closeButtonPosition}>
