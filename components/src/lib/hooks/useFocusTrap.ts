@@ -1,76 +1,39 @@
 import { RefObject, useEffect, useRef } from 'react';
 
-const findFocusableElements = (element: HTMLElement | ChildNode | null, result: HTMLElement[] = []) => {
-  if (!element || element.childNodes.length === 0) return result;
-
-  element.childNodes.forEach((childNode) => {
-    const childElement = childNode as HTMLElement;
-
-    if (childElement.nodeType === Node.ELEMENT_NODE && childElement.tabIndex >= 0) {
-      result.push(childElement);
-    }
-
-    findFocusableElements(childElement, result);
-  });
-
-  return result;
-};
+const FOCUSABLE_SELECTORS =
+  'button:not([disabled]), input:not([disabled]), select:not([disabled], textarea:not([disabled]), a[href], [tabindex]:not([tabindex="-1"])';
 
 const useFocusTrap = (isOpen: boolean, modalRef: RefObject<HTMLElement>) => {
-  const focusableElements = useRef<(HTMLElement | null)[]>([]);
+  const focusableElements = useRef<HTMLElement[]>([]);
 
   useEffect(() => {
-    if (!isOpen) return;
+    if (!isOpen || !modalRef.current) return;
 
-    focusableElements.current = findFocusableElements(modalRef.current);
+    focusableElements.current = Array.from(modalRef.current.querySelectorAll<HTMLElement>(FOCUSABLE_SELECTORS));
 
-    const firstElement = focusableElements.current[0];
-    const lastElement = focusableElements.current.at(-1);
+    if (focusableElements.current.length === 0) return;
 
-    let currentFocusIndex = -1;
+    const moveFocusIndexPrev = (currentIndex: number) =>
+      currentIndex === 0 ? focusableElements.current.length - 1 : currentIndex - 1;
 
-    const moveFocusPrev = () => {
-      const element = focusableElements.current[currentFocusIndex - 1];
-
-      if (!element) {
-        currentFocusIndex = focusableElements.current.length - 1;
-        lastElement?.focus();
-
-        return;
-      }
-
-      currentFocusIndex--;
-      element.focus();
-    };
-
-    const moveFocusNext = () => {
-      const element = focusableElements.current[currentFocusIndex + 1];
-
-      if (!element) {
-        currentFocusIndex = 0;
-        firstElement?.focus();
-
-        return;
-      }
-
-      currentFocusIndex++;
-      element.focus();
-    };
+    const moveFocusIndexNext = (currentIndex: number) =>
+      currentIndex === focusableElements.current.length - 1 ? 0 : currentIndex + 1;
 
     const handleKeyPress = (event: KeyboardEvent) => {
       if (event.key === 'Tab') {
-        if (event.shiftKey) moveFocusPrev();
-        else {
-          event.preventDefault();
-          moveFocusNext();
-        }
+        event.preventDefault();
+
+        const currentIndex = focusableElements.current.findIndex((el) => el === document.activeElement);
+        const nextIndex = event.shiftKey ? moveFocusIndexPrev(currentIndex) : moveFocusIndexNext(currentIndex);
+
+        focusableElements.current[nextIndex].focus();
       }
     };
 
     document.addEventListener('keydown', handleKeyPress);
 
     return () => document.removeEventListener('keydown', handleKeyPress);
-  }, [isOpen]);
+  }, [isOpen, modalRef]);
 };
 
 export default useFocusTrap;
