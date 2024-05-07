@@ -10,27 +10,42 @@
   justify-content: center;
   align-items: center;
 
-  flex: 0 0 auto;
   white-space: nowrap;
 }
 
-.primary {
+.default {
   background-color: #333333;
   color: white;
+
+  &:hover {
+    background-color: #555555;
+  }
+
+  &.border {
+    border: 2px solid #555555;
+  }
 }
 
-.secondary {
-  background-color: #ffffff;
-  color: #8b95a1;
+.none {
+  background-color: transparent;
+  color: #606060;
+
+  &:hover {
+    background-color: #eeeeee60;
+    color: #8b8f94;
+  }
+
+  &.border {
+    border: 2px solid #d7d6d6;
+  }
 }
 
-.primary:hover {
-  background-color: #555555;
+.normal {
+  border: none;
 }
 
-.secondary:hover {
-  background-color: #eeeeee;
-  color: #65707d;
+.border {
+  border: none;
 }
 
 .sm {
