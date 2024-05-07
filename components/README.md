@@ -39,19 +39,6 @@ export default App;
 
 ## API
 
-### useModal
-
-`useModal` 훅은 다음 속성을 가진 객체를 반환합니다:
-
-| props            | description                                               |
-| ---------------- | --------------------------------------------------------- |
-| `isOpen`         | 모달이 현재 열려 있는지 여부를 나타내는 boolean 값입니다. |
-| `openModal`      | 모달을 열기 위한 함수입니다.                              |
-| `closeModal`     | 모달을 닫기 위한 함수입니다.                              |
-| `ModalComponent` | 지정된 props로 모달을 렌더링하는 컴포넌트입니다.          |
-
-# <<<<<<< HEAD
-
 ### ModalComponent
 
 `ModalComponent`는 다음 props를 받습니다:
@@ -63,4 +50,13 @@ export default App;
 | `children` (필수)            | 모달의 내용입니다.                                              |
 | `closeButtonPosition` (필수) | 닫기 버튼의 위치입니다. 가능한 값은 `"top"`과 `"bottom"`입니다. |
 
-> > > > > > > 8926ef8 (chore: 라이브러리명 변경 및 리드미 작성)
+### useModal
+
+`useModal` 훅은 다음 속성을 가진 객체를 반환합니다:
+
+| props            | description                                               |
+| ---------------- | --------------------------------------------------------- |
+| `isOpen`         | 모달이 현재 열려 있는지 여부를 나타내는 boolean 값입니다. |
+| `openModal`      | 모달을 열기 위한 함수입니다.                              |
+| `closeModal`     | 모달을 닫기 위한 함수입니다.                              |
+| `ModalComponent` | 지정된 props로 모달을 렌더링하는 컴포넌트입니다.          |
