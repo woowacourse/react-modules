@@ -19,6 +19,7 @@ const Modal: React.FC<ModalProps> & {
   IconButton: ModalIconButtonType;
   TextButton: ModalTextButtonType;
   Content: ModalContentType;
+  Input: ModalInputType;
   Footer: ModalFooterType;
 } = ({ children, isOpen, onClose, position, ...restProps }) => {
   const modalRef = useRef(null);
@@ -115,6 +116,14 @@ const ModalContent: ModalContentType = ({ children, ...restProps }) => {
   return <Styled.ModalContent {...restProps}>{children}</Styled.ModalContent>;
 };
 
+type ModalInputType = React.FC<
+  React.PropsWithChildren<HTMLAttributes<HTMLElement>>
+>;
+
+const ModalInput: ModalInputType = ({ ...restProps }) => {
+  return <input {...restProps}></input>;
+};
+
 type ModalFooterType = React.FC<
   React.PropsWithChildren<HTMLAttributes<HTMLDivElement>>
 >;
@@ -128,6 +137,7 @@ Modal.Title = ModalTitle;
 Modal.IconButton = ModalIconButton;
 Modal.TextButton = ModalTextButton;
 Modal.Content = ModalContent;
+Modal.Input = ModalInput;
 Modal.Footer = ModalFooter;
 
 export default Modal;
