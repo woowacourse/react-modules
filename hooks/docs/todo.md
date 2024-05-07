@@ -89,3 +89,4 @@
 
 2. [ ] 카드 브랜드에 따라서 cardNumber state의 갯수가 정해진다.
    - useCardNumbers는 카드 브랜드를 반환한다.
+3. [ ] useInput에서 maxLength가 아닌 경우일 때 에러를 뱉은 경우 추가
