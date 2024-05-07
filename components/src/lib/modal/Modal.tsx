@@ -128,6 +128,7 @@ type ModalFooterType = React.FC<
   React.PropsWithChildren<
     {
       buttonPosition?: 'left' | 'center' | 'right';
+      buttonGap?: string;
     } & HTMLAttributes<HTMLDivElement>
   >
 >;
@@ -135,10 +136,15 @@ type ModalFooterType = React.FC<
 const ModalFooter: ModalFooterType = ({
   children,
   buttonPosition,
+  buttonGap,
   ...restProps
 }) => {
   return (
-    <Styled.ModalFooter buttonPosition={buttonPosition} {...restProps}>
+    <Styled.ModalFooter
+      buttonPosition={buttonPosition}
+      buttonGap={buttonGap}
+      {...restProps}
+    >
       {children}
     </Styled.ModalFooter>
   );

@@ -105,9 +105,11 @@ export const ModalContent = styled.section<ModalContentProps>`
 
 interface ModalFooterProps {
   buttonPosition?: 'left' | 'center' | 'right';
+  buttonGap?: string;
 }
 
 export const ModalFooter = styled.div<ModalFooterProps>`
   display: flex;
   justify-content: ${({ buttonPosition }) => buttonPosition || 'center'};
+  gap: ${({ buttonGap }) => buttonGap || '12px'};
 `;
