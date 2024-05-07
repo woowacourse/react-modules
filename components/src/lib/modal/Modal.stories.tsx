@@ -64,6 +64,7 @@ export default meta;
 
 type Story = StoryObj<typeof Modal>;
 
+// step1 모달
 export const 기본: Story = {
   parameters: {
     docs: {
@@ -159,6 +160,38 @@ export const 이미지_버튼과_텍스트_버튼이_있는_모달: Story = {
       </Modal.Content>
       <Modal.Footer>
         <Modal.TextButton onClose={args.onClose}>확인</Modal.TextButton>
+      </Modal.Footer>
+    </Modal>
+  ),
+};
+
+// step2 모달
+export const AlertModal: Story = {
+  args: {
+    isOpen: true,
+    position: 'center',
+    onClose: fn(),
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: '사용자에게 메시지를 전달하고 확인 버튼만 제공',
+      },
+    },
+  },
+
+  render: (args) => (
+    <Modal isOpen={args.isOpen} position={args.position} onClose={args.onClose}>
+      <Modal.Header>
+        <Modal.Title>아이디를 입력해 주세요.</Modal.Title>
+      </Modal.Header>
+      <Modal.Content>
+        <span>아이디는 필수로 입력해야 합니다.</span>
+      </Modal.Content>
+      <Modal.Footer buttonPosition='right'>
+        <Modal.TextButton onClose={args.onClose} buttonSize={'50px'}>
+          확인
+        </Modal.TextButton>
       </Modal.Footer>
     </Modal>
   ),
