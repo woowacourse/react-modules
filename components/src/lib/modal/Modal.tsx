@@ -125,11 +125,23 @@ const ModalInput: ModalInputType = ({ ...restProps }) => {
 };
 
 type ModalFooterType = React.FC<
-  React.PropsWithChildren<HTMLAttributes<HTMLDivElement>>
+  React.PropsWithChildren<
+    {
+      buttonPosition?: 'left' | 'center' | 'right';
+    } & HTMLAttributes<HTMLDivElement>
+  >
 >;
 
-const ModalFooter: ModalFooterType = ({ children, ...restProps }) => {
-  return <footer {...restProps}>{children}</footer>;
+const ModalFooter: ModalFooterType = ({
+  children,
+  buttonPosition,
+  ...restProps
+}) => {
+  return (
+    <Styled.ModalFooter buttonPosition={buttonPosition} {...restProps}>
+      {children}
+    </Styled.ModalFooter>
+  );
 };
 
 Modal.Header = ModalHeader;

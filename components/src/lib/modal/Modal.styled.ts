@@ -102,3 +102,12 @@ interface ModalContentProps {
 export const ModalContent = styled.section<ModalContentProps>`
   font-size: ${({ fontSize }) => fontSize || '15px'};
 `;
+
+interface ModalFooterProps {
+  buttonPosition?: 'left' | 'center' | 'right';
+}
+
+export const ModalFooter = styled.div<ModalFooterProps>`
+  display: flex;
+  justify-content: ${({ buttonPosition }) => buttonPosition || 'center'};
+`;
