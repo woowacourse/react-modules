@@ -2,7 +2,7 @@ import React from "react";
 import { StoryObj } from "@storybook/react";
 import { Modal } from "../lib/Modal";
 import { useArgs } from "@storybook/client-api";
-import { ModalPosition, ModalTheme } from "../lib/types/modalProps";
+import { ModalPosition, ModalSize, ModalTheme } from "../lib/types/modalProps";
 
 const meta = {
   title: "Modal",
@@ -27,6 +27,16 @@ const meta = {
       },
       table: {
         defaultValue: { summary: "center" },
+      },
+    },
+    size: {
+      description: "모달의 사이즈를 결정하는 arg입니다. (small/medium/large)",
+      options: ["small", "medium", "large"],
+      control: {
+        type: "radio",
+      },
+      table: {
+        defaultValue: { summary: "medium" },
       },
     },
     title: {
@@ -74,6 +84,7 @@ export default meta;
 interface ModalStoryProps {
   isOpen: boolean;
   position: ModalPosition;
+  size: ModalSize;
   title: string;
   buttonText: string;
   contentText: string;
@@ -85,13 +96,14 @@ export const Default: Story = {
   args: {
     isOpen: false,
     position: "center",
+    size: "medium",
     title: "Modal Title",
     contentText: "This is the content of the modal.",
     buttonText: "OK",
     buttonTheme: "dark",
   },
 
-  render: ({ position, title, contentText, buttonText, buttonTheme }: ModalStoryProps) => {
+  render: ({ position, size, title, contentText, buttonText, buttonTheme }: ModalStoryProps) => {
     const [args, updateArgs] = useArgs();
 
     const onOpen = () => {
@@ -106,7 +118,7 @@ export const Default: Story = {
         <button onClick={onOpen}>Open Modal</button>
         <Modal isOpen={args.isOpen} onClose={onClose}>
           <Modal.Dimmer />
-          <Modal.Content position={position}>
+          <Modal.Content position={position} size={size}>
             <header>
               <h2 style={{ margin: 0 }}>{title}</h2>
               <Modal.CloseButton />
