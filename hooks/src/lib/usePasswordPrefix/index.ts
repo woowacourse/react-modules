@@ -1,5 +1,6 @@
+import { Validator, ValueOf } from '../type';
+
 import REGEXPS from '../constants/regExps';
-import { Validator } from '../type';
 import getErrorMessage from '../utils/getErrorMessage';
 import getOnChange from '../utils/getOnChange';
 import { useState } from 'react';
@@ -25,8 +26,7 @@ export const PASSWORD_PREFIX_ERROR_MESSAGE = {
   notDigit: '비밀번호는 숫자만 포함해야 합니다.',
 } as const;
 
-type ErrorMessage =
-  (typeof PASSWORD_PREFIX_ERROR_MESSAGE)[keyof typeof PASSWORD_PREFIX_ERROR_MESSAGE];
+type ErrorMessage = ValueOf<typeof PASSWORD_PREFIX_ERROR_MESSAGE>;
 
 const passwordPrefixValidators: Validator<string, ErrorMessage>[] = [
   {

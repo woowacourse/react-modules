@@ -1,5 +1,6 @@
+import { Validator, ValueOf } from '../type';
+
 import REGEXPS from '../constants/regExps';
-import { Validator } from '../type';
 import getErrorMessage from '../utils/getErrorMessage';
 import getOnChange from '../utils/getOnChange';
 import { useState } from 'react';
@@ -25,8 +26,7 @@ export const CARD_HOLDER_NAME_ERROR_MESSAGE = {
   hasTwoBlank: '소유자명의 사이 공백은 최대 한 칸 입력할 수 있습니다',
 } as const;
 
-type ErrorMessage =
-  (typeof CARD_HOLDER_NAME_ERROR_MESSAGE)[keyof typeof CARD_HOLDER_NAME_ERROR_MESSAGE];
+type ErrorMessage = ValueOf<typeof CARD_HOLDER_NAME_ERROR_MESSAGE>;
 
 const TWO_BLANKS = '  ';
 const cardholderNameValidators: Validator<string, ErrorMessage>[] = [

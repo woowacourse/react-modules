@@ -1,7 +1,7 @@
+import { Validator, ValueOf } from '../type';
 import { useMemo, useState } from 'react';
 
 import REGEXPS from '../constants/regExps';
-import { Validator } from '../type';
 import getErrorMessage from '../utils/getErrorMessage';
 import getOnChange from '../utils/getOnChange';
 
@@ -63,14 +63,11 @@ export const EXPIRY_DATE_ERROR_MESSAGE = {
   expiredDate: `만료된 유효기간 입니다.`,
 } as const;
 
-type MonthErrorMessage =
-  (typeof EXPIRY_MONTH_ERROR_MESSAGE)[keyof typeof EXPIRY_MONTH_ERROR_MESSAGE];
+type MonthErrorMessage = ValueOf<typeof EXPIRY_MONTH_ERROR_MESSAGE>;
 
-type YearErrorMessage =
-  (typeof EXPIRY_YEAR_ERROR_MESSAGE)[keyof typeof EXPIRY_YEAR_ERROR_MESSAGE];
+type YearErrorMessage = ValueOf<typeof EXPIRY_YEAR_ERROR_MESSAGE>;
 
-type DateErrorMessage =
-  (typeof EXPIRY_DATE_ERROR_MESSAGE)[keyof typeof EXPIRY_DATE_ERROR_MESSAGE];
+type DateErrorMessage = ValueOf<typeof EXPIRY_DATE_ERROR_MESSAGE>;
 
 const expiryMonthValidators: Validator<string, MonthErrorMessage>[] = [
   {

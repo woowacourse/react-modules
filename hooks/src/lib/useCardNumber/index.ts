@@ -1,7 +1,7 @@
+import { Validator, ValueOf } from '../type';
 import { useMemo, useState } from 'react';
 
 import REGEXPS from '../constants/regExps';
-import { Validator } from '../type';
 import getErrorMessage from '../utils/getErrorMessage';
 import getOnChange from '../utils/getOnChange';
 
@@ -73,8 +73,7 @@ export const CARD_NUMBER_PART_ERROR_MESSAGE = {
   notDigit: '카드번호는 숫자만 포함해야 합니다.',
 } as const;
 
-type ErrorMessage =
-  (typeof CARD_NUMBER_PART_ERROR_MESSAGE)[keyof typeof CARD_NUMBER_PART_ERROR_MESSAGE];
+type ErrorMessage = ValueOf<typeof CARD_NUMBER_PART_ERROR_MESSAGE>;
 
 const cardNumberPartValidators: Validator<string, ErrorMessage>[] = [
   {

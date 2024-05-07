@@ -1,4 +1,5 @@
-import { Validator } from '../type';
+import { Validator, ValueOf } from '../type';
+
 import getErrorMessage from '../utils/getErrorMessage';
 import getOnChange from '../utils/getOnChange';
 import { useState } from 'react';
@@ -32,8 +33,7 @@ export const CARD_ISSUER_ERROR_MESSAGE = {
   notIssuer: '지정된 카드 발행사가 아닙니다.',
 } as const;
 
-type ErrorMessage =
-  (typeof CARD_ISSUER_ERROR_MESSAGE)[keyof typeof CARD_ISSUER_ERROR_MESSAGE];
+type ErrorMessage = ValueOf<typeof CARD_ISSUER_ERROR_MESSAGE>;
 
 const cardIssuerSet = new Set<string>(CARD_ISSUERS);
 

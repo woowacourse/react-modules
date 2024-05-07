@@ -1,5 +1,6 @@
+import { Validator, ValueOf } from '../type';
+
 import REGEXPS from '../constants/regExps';
-import { Validator } from '../type';
 import getErrorMessage from '../utils/getErrorMessage';
 import getOnChange from '../utils/getOnChange';
 import { useState } from 'react';
@@ -23,7 +24,7 @@ export const CVC_ERROR_MESSAGE = {
   notDigit: 'CVC 값은 숫자만 포함해야 합니다.',
 } as const;
 
-type ErrorMessage = (typeof CVC_ERROR_MESSAGE)[keyof typeof CVC_ERROR_MESSAGE];
+type ErrorMessage = ValueOf<typeof CVC_ERROR_MESSAGE>;
 
 const cvcValidators: Validator<string, ErrorMessage>[] = [
   {
