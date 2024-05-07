@@ -9,7 +9,7 @@ import {
 import React from "react";
 import "./App.css";
 
-const cardNames = ["현대카드, 국민카드, 신한카드, 우리카드"];
+const cardNames = ["현대카드", "국민카드", "신한카드", "우리카드"];
 
 function App() {
   const [cardHolder, handleCardHolderChange, cardHolderValidation] = useCardHolder();
