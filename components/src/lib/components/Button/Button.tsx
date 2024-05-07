@@ -12,7 +12,7 @@ export interface ModalButtonProps extends ButtonHTMLAttributes<HTMLButtonElement
 
 const Button = ({ text, mode = 'primary', size = 'lg', ...rest }: ModalButtonProps) => {
   return (
-    <button className={`${styles.modalButton} ${styles[mode]} ${styles[size]}`} {...rest}>
+    <button {...rest} className={`${styles.modalButton} ${styles[mode]} ${styles[size]}`}>
       {text}
     </button>
   );
