@@ -7,14 +7,14 @@ export interface ModalDimmerProps extends React.HTMLAttributes<HTMLDivElement> {
 
 export interface ModalCloseButtonProps extends React.HTMLAttributes<HTMLOrSVGElement> {}
 
-type ModalTheme = "dark" | "light";
+type ModalButtonTheme = "dark" | "light";
 type ModalButtonSize = "small" | "large";
 export interface ModalButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
   /**
    * 모달 버튼의 색 테마를 결정
    * @defaultValue "dark"
    */
-  theme?: ModalTheme;
+  theme?: ModalButtonTheme;
   /**
    * 모달 버튼의 사이즈를 결정
    * @defaultValue "large"
