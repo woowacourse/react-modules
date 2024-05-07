@@ -8,6 +8,8 @@ interface CustomInputAttributes extends Omit<InputHTMLAttributes<HTMLInputElemen
   customType?: "number" | "english";
   typeErrorMessage?: string;
   maxLengthErrorMessage?: string;
+  customErrorMessage?: string;
+  value?: string;
 }
 
 const useInput = () => {
@@ -23,6 +25,8 @@ const useInput = () => {
       typeErrorMessage,
       maxLength,
       maxLengthErrorMessage,
+      customErrorMessage,
+      value,
       ...props
     }: CustomInputAttributes = {}
   ) => {
@@ -32,8 +36,12 @@ const useInput = () => {
       maxLength,
       maxLengthErrorMessage,
     });
-    const { value, setValue } = valueState;
+    const { value: builtInValue, setValue } = valueState;
     const { errorMessage, setError } = errorState;
+
+    useEffect(() => {
+      if (value) setValue(value);
+    }, [value]);
 
     useEffect(() => {
       if (!valueMap[name]) {
@@ -49,7 +57,11 @@ const useInput = () => {
     const ref = useRef<HTMLInputElement>(null);
 
     const requiredValidator = (input: string) => {
-      if (!input) setError(required?.message);
+      if (!input && required) setError(required?.message);
+    };
+
+    const setCustomErrorMessage = (message?: string) => {
+      if (message) setError(message);
     };
 
     const onChangeWrapper = (e: ChangeEvent<HTMLInputElement>) => {
@@ -59,9 +71,10 @@ const useInput = () => {
       if (onChange) onChange(e);
 
       requiredValidator(input);
+      setCustomErrorMessage(customErrorMessage);
     };
 
-    return { name, ref, value, onChange: onChangeWrapper, ...props };
+    return { name, ref, value: builtInValue, onChange: onChangeWrapper, ...props };
   };
 
   return { register: useRegister, valueMap, errorMap };
