@@ -38,7 +38,6 @@ const useCardNumbers = (initialValues: string = '') => {
 
   const checkCardBrandType = (value: string) => {
     const cardBrand = getCardBrand(value);
-    console.log(cardBrand);
     setCardBrand(cardBrand);
     setValidateLength(CARD_BRAND_CONFIG[cardBrand].length);
   };
@@ -58,6 +57,7 @@ const useCardNumbers = (initialValues: string = '') => {
   return {
     value,
     formatValue,
+    cardBrand,
     onChange: handleChange,
     onBlur: handleBlur,
     errorMessage: errorStatus && CARD_NUMBERS_ERROR_MESSAGES[errorStatus],

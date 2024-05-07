@@ -43,7 +43,33 @@ describe.only('useCard 훅 테스트', () => {
     expect(result.current.errorMessage).toBe(expectedErrorMessage);
   });
 
-  it.only(`카드 브랜드 종류 변경으로 조건 달라짐 확인`, () => {
+  const cardNumberWithBrand = [
+    { brand: 'VISA', cardNumbers: '4234123412341234' },
+    { brand: 'MASTER', cardNumbers: '5123123412341234' },
+    { brand: 'AMEX', cardNumbers: '343412341234123' },
+    { brand: 'DINERS', cardNumbers: '36123412341234' },
+    { brand: 'UNIONPAY', cardNumbers: '6221263412341234' },
+    { brand: 'UNKNOWN', cardNumbers: '1234123412341234' },
+  ];
+
+  it.each(cardNumberWithBrand)(
+    `카드 브랜드 종류(%s) 판별 확인`,
+    ({ brand, cardNumbers }) => {
+      const initialValue = '';
+      const { result } = renderHook(() => useCardNumbers(initialValue));
+
+      // 브랜드 변경으로 인한 조건 변경 (16자리)
+      React.act(() => {
+        result.current.onChange({
+          target: { value: cardNumbers },
+        } as FocusEvent<HTMLInputElement>);
+      });
+
+      expect(result.current.cardBrand).toBe(brand);
+    }
+  );
+
+  it(`카드 브랜드 종류 변경으로 조건 달라짐 확인`, () => {
     const initialValue = '1234123412341234';
     const { result } = renderHook(() => useCardNumbers(initialValue));
 
@@ -60,4 +86,3 @@ describe.only('useCard 훅 테스트', () => {
     expect(result.current.errorMessage).toBe(expectedErrorMessage);
   });
 });
-36341234123412;
