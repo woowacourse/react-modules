@@ -1,5 +1,11 @@
 import { useState } from "react";
-import { validMasterNumbers, validVisaNumbers } from "./cardNumberValidator";
+import {
+  validAMEXNumbers,
+  validDinersNumbers,
+  validMasterNumbers,
+  validUnionPayNumbers,
+  validVisaNumbers,
+} from "./cardNumberValidator";
 
 type NumberState = readonly [string, (value: string) => void];
 
@@ -18,8 +24,6 @@ interface CardNumberReturn {
 }
 
 const ERROR_MESSAGE = (index: number) => `${index}번 째 카드 번호를 잘못입력하셨습니다.`;
-//TODO: AMEX, Diners, UnionPay 추가하기.
-//TODO: 카드 브랜드 사용자에게 입력 받으면 좋을 듯 하다.
 const VALID_CARD_LIST = ["Visa", "Master", "AMEX", "Diners", "UnionPay"];
 const NO_VALID_CARD = `${VALID_CARD_LIST.join(",")}카드가 아닙니다. 카드 번호를 확인해주세요.`;
 
@@ -29,6 +33,15 @@ const findCardBrand = (value: string): CardBrand | undefined => {
   }
   if (validVisaNumbers(value)) {
     return "Visa";
+  }
+  if (validAMEXNumbers(value)) {
+    return "AMEX";
+  }
+  if (validDinersNumbers(value)) {
+    return "Diners";
+  }
+  if (validUnionPayNumbers(value)) {
+    return "UnionPay";
   }
 };
 
