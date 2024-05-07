@@ -17,7 +17,7 @@ const AlertModal = ({ headerText, bodyText, ...modalProps }: AlertModalProps) =>
         <Title>{headerText}</Title>
       </ModalHeader>
       <ModalBody>{bodyText}</ModalBody>
-      <ModalFooter>
+      <ModalFooter align="right">
         <Button type="button" text="확인" size="sm" onClick={modalProps.close}></Button>
       </ModalFooter>
     </MainModal>

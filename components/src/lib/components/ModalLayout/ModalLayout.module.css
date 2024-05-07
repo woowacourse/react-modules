@@ -25,3 +25,27 @@
   justify-content: center;
   row-gap: 8px;
 }
+
+.modalFooter.row.left {
+  justify-content: flex-start;
+}
+
+.modalFooter.row.center {
+  justify-content: center;
+}
+
+.modalFooter.row.right {
+  justify-content: flex-end;
+}
+
+.modalFooter.column.left {
+  align-items: start;
+}
+
+.modalFooter.column.center {
+  align-items: center;
+}
+
+.modalFooter.column.right {
+  align-items: end;
+}
