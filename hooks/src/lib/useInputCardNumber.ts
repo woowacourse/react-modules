@@ -1,65 +1,47 @@
-import { Dispatch, SetStateAction, useState } from "react";
+import { useState } from "react";
 import { getInputStatus, useInput } from "./useInput";
-import { Status } from "../shared/types";
-import { LEAST_LENGTH } from "../shared/options";
 import { ERROR_MESSAGE } from "../shared/errorMessages";
 import validator from "../shared/utils/validator/validator";
 
 const useInputCardNumber = () => {
-  const inputFields = [useInput(""), useInput(""), useInput(""), useInput("")];
+  const { value, status, setValue, setStatus } = useInput("");
   const [errorMessage, setErrorMessage] = useState<string>("");
 
-  const values: string[] = [];
-  const statuses: Status[] = [];
-  const setValues: Dispatch<SetStateAction<string>>[] = [];
-  const setStatuses: Dispatch<SetStateAction<Status>>[] = [];
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>, value: string) => {
+    //  status 업데이트
+    setStatus(getInputStatus(value, event.target.maxLength));
 
-  inputFields.forEach(({ value, status, setValue, setStatus }) => {
-    values.push(value);
-    statuses.push(status);
-    setValues.push(setValue);
-    setStatuses.push(setStatus);
-  });
+    // 미완성인 경우 : Error 상태로 판단
+    if (status === "pending") {
+      setStatus("error");
+      setErrorMessage(ERROR_MESSAGE.cardNumber.isNotFulfilled);
+    }
 
-  const handleChange = (value: string, index: number) => {
-    // 전체필드 status 업데이트
-    values.forEach((_value, _index) => {
-      setStatuses[_index](getInputStatus(_value, LEAST_LENGTH.cardNumber));
+    // Default인 경우 : Error 검사
+    if (status !== "default") {
+      const [isValid, errorMessage] = validator.cardNumber.isValidInput(value);
 
-      // 전체필드 미완성 error 상태 업데이트
-      if (statuses[_index] === "pending" && _index !== index) {
-        setStatuses[_index]("error");
-        setErrorMessage(ERROR_MESSAGE.cardNumber.isNotFulfilled);
+      // Error인 경우 : 에러 발생
+      if (!isValid) {
+        setStatus("error");
+        setErrorMessage(errorMessage);
       }
-    });
+    }
 
-    // Default 상태에서 유효성검사 스킵
-    if (statuses[index] === "default") return;
+    // Error가 아닌 경우 : 값 업데이트
+    setValue(value);
+    setErrorMessage("");
+  };
 
-    // 현제필드 입력 error 상태 업데이트
-    const [isValid, errorMessage] = validator.cardNumber.isValidInput(value);
-    if (isValid) {
-      setValues[index](value);
-      setErrorMessage("");
-    } else {
-      setStatuses[index]("error");
-      setErrorMessage(errorMessage);
+  const handleBlur = () => {
+    // 미완성인 경우 : Error 상태로 판단
+    if (status === "pending") {
+      setStatus("error");
+      setErrorMessage(ERROR_MESSAGE.cardNumber.isNotFulfilled);
     }
   };
 
-  const handleBlur = (index: number) => {
-    // 전체필드 미완성 error 상태 업데이트
-    values.forEach((_value, _index) => {
-      setStatuses[_index](getInputStatus(_value, LEAST_LENGTH.cardNumber));
-
-      if (statuses[_index] === "pending" && _index !== index) {
-        setStatuses[_index]("error");
-        setErrorMessage(ERROR_MESSAGE.cardNumber.isNotFulfilled);
-      }
-    });
-  };
-
-  return [values, statuses, errorMessage, handleChange, handleBlur];
+  return [value, status, errorMessage, handleChange, handleBlur];
 };
 
 export default useInputCardNumber;
