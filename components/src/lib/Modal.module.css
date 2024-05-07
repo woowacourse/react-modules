@@ -32,6 +32,7 @@
     display: none;
   }
 
+  /* position variant */
   &.center {
     top: 50%;
     left: 50%;
@@ -46,6 +47,19 @@
     width: 100%;
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
+  }
+
+  /* size variant */
+  &.small {
+    width: 304px;
+  }
+
+  &.medium {
+    width: 480px;
+  }
+
+  &.large {
+    width: 600px;
   }
 }
 

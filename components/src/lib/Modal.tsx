@@ -41,9 +41,14 @@ function ModalDimmer(attributes: ModalDimmerProps) {
   return <div className={style.ModalDimmer} onClick={onClose} {...attributes}></div>;
 }
 
-function ModalContent({ position = "center", children, ...attributes }: ModalContentProps) {
+function ModalContent({
+  position = "center",
+  size = "medium",
+  children,
+  ...attributes
+}: ModalContentProps) {
   return (
-    <div className={classnames(style.ModalContent, style[position])} {...attributes}>
+    <div className={classnames(style.ModalContent, style[position], style[size])} {...attributes}>
       {children}
     </div>
   );
