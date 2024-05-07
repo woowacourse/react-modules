@@ -1,12 +1,12 @@
 import { useState } from "react";
 import { Status } from "../shared/types";
 
-export const getInputStatus = (value: string, maxLength: number): Status => {
+export const getInputStatus = (value: string, validLength: number): Status => {
   const length = value.length;
 
   if (length === 0) return "default";
-  if (length < maxLength) return "pending";
-  if (length >= maxLength) return "complete";
+  if (length < validLength) return "pending";
+  if (length >= validLength) return "complete";
 
   throw new Error("invalid length : (useInput.getStatus)");
 };

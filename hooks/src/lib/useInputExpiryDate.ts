@@ -1,47 +1,65 @@
 import { useState } from "react";
 import { getInputStatus, useInput } from "./useInput";
-import { LEAST_LENGTH } from "../shared/options";
 import { ERROR_MESSAGE } from "../shared/errorMessages";
+import { VALID_LENGTH } from "../shared/options";
 import validator from "../shared/utils/validator/validator";
-import { ExpiryDateType } from "../shared/types";
+import { ExpiryDateType, Status } from "../shared/types";
 
-const useInputExpiryDate = () => {
+type UseInputExpiryDateReturn = [
+  values: { month: string; year: string },
+  status: { month: Status; year: Status },
+  errorMessage: string,
+  handleChange: (value: string, type: ExpiryDateType) => void,
+  handleBlur: (monthValidLength: number) => void
+];
+
+const useInputExpiryDate = (): UseInputExpiryDateReturn => {
   const states = {
     month: useInput(""),
     year: useInput(""),
   };
   const [errorMessage, setErrorMessage] = useState<string>("");
 
-  const handleChange = (value: string, maxLength: number, type: ExpiryDateType) => {
+  const handleChange = (value: string, type: ExpiryDateType) => {
     // 연/월 status 업데이트
-    states.year.setStatus(getInputStatus(states.year.value, maxLength));
-    states.month.setStatus(getInputStatus(states.month.value, maxLength));
+    const status = {
+      year: getInputStatus(states.year.value, VALID_LENGTH.expiryDate.year),
+      month: getInputStatus(states.month.value, VALID_LENGTH.expiryDate.month),
+      [type]: getInputStatus(value, VALID_LENGTH.expiryDate[type]),
+    };
+    console.log(status.month, status.year);
 
-    // 월 입력 중, 연도가 미완성인 경우 : Error 상태로 판단
-    if (type === "month" && ["default", "pending"].includes(states.year.status)) {
-      states.year.setStatus("error");
-      setErrorMessage(ERROR_MESSAGE.expiryDate.year.isNotFulfilled);
-    }
+    let errorMessage = "";
 
     // Default가 아닌 경우 : Error 검사
-    if (states[type].status !== "default") {
+    if (status[type] !== "default") {
       const [isValid, errorMessage] = validator.expiryDate.isValidInput(value, type);
 
       // Error인 경우 : 에러 발생
-      if (isValid) {
+      if (!isValid) {
         states[type].setStatus("error");
         setErrorMessage(errorMessage);
+        return;
       }
     }
 
+    // 월 입력 중, 연도가 미완성인 경우 : Error 상태로 판단
+    if (type === "month" && status.year === "pending") {
+      status.year = "error";
+      errorMessage = ERROR_MESSAGE.expiryDate.year.isNotFulfilled;
+    }
+
     // Error가 아닌 경우 : 값 업데이트
+    console.log(status.month, status.year);
     states[type].setValue(value);
-    setErrorMessage("");
+    states.year.setStatus(status.year);
+    states.month.setStatus(status.month);
+    setErrorMessage(errorMessage);
   };
 
-  const handleBlur = () => {
-    // 연/월 status 업데이트
-    states.month.setStatus(getInputStatus(states.month.value, LEAST_LENGTH.expiryDateMonth));
+  const handleBlur = (monthValidLength: number) => {
+    // 월 Pending인 경우 : status 업데이트
+    states.month.setStatus(getInputStatus(states.month.value, monthValidLength));
 
     // 월 완성인 경우 : Complete 상태로 판단
     if (states.month.status === "pending") {
@@ -61,6 +79,7 @@ const useInputExpiryDate = () => {
         states.month.value,
         states.year.value
       );
+      console.log(isValid);
 
       // Error인 경우 : 에러 발생
       if (!isValid) {

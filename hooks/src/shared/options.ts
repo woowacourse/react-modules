@@ -1,9 +1,11 @@
-export const LEAST_LENGTH = {
-  cardNumber: 4,
+export const VALID_LENGTH = {
+  cardNumber: 16,
   cardIssuer: 1,
   cvcNumber: 3,
-  expiryDateMonth: 99,
-  expiryDateYear: 2,
-  ownerName: 99,
+  expiryDate: {
+    month: 1,
+    year: 2,
+  },
+  ownerName: 1,
   passwordPrefix: 2,
 };

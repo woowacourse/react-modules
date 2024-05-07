@@ -2,14 +2,24 @@ import { useState } from "react";
 import { getInputStatus, useInput } from "./useInput";
 import { ERROR_MESSAGE } from "../shared/errorMessages";
 import validator from "../shared/utils/validator/validator";
+import { Status } from "../shared/types";
+import { VALID_LENGTH } from "../shared/options";
 
-const useInputOwnerName = () => {
+type UseInputOwnerNameReturn = [
+  value: string,
+  status: Status,
+  errorMessage: string,
+  handleChange: (value: string) => void,
+  handleBlur: () => void
+];
+
+const useInputOwnerName = (): UseInputOwnerNameReturn => {
   const { value, status, setValue, setStatus } = useInput("");
   const [errorMessage, setErrorMessage] = useState<string>("");
 
-  const handleChange = (value: string, maxLength: number) => {
+  const handleChange = (value: string) => {
     //  status 업데이트
-    setStatus(getInputStatus(value, maxLength));
+    setStatus(getInputStatus(value, VALID_LENGTH.ownerName));
 
     // Default가 아닌 경우 : Error 검사
     if (status !== "default") {
@@ -19,6 +29,7 @@ const useInputOwnerName = () => {
       if (!isValid) {
         setStatus("error");
         setErrorMessage(errorMessage);
+        return;
       }
     }
 

@@ -1,6 +1,13 @@
+import { Status } from "../shared/types";
 import { useInput } from "./useInput";
 
-const useInputCardIssuer = () => {
+type UseInputCardIssuerReturn = [
+  value: string,
+  status: Status,
+  handleChange: (value: string) => void
+];
+
+const useInputCardIssuer = (): UseInputCardIssuerReturn => {
   const { value, status, setValue, setStatus } = useInput("");
 
   const handleChange = (value: string) => {
