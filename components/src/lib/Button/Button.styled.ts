@@ -73,4 +73,5 @@ export const ButtonText = styled.p<{
   color: ${(props) =>
     BUTTON_STYLE_TABLE(props.primaryColor)[props.buttonStyle].color};
   font-weight: 700;
+  margin-block: 0;
 `;
