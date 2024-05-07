@@ -4,20 +4,21 @@ import useCardNumberValidation from './useCardNumberValidation';
 
 import { CARD_NUMBER_ERROR_TYPE } from './useCardNumber.constant';
 
+import { determineCardBrand } from '../utils/cardBrand/cardBrand';
+import { isCardNumberOverLength } from './useCardNumber.util';
+
 const useCardNumber = () => {
-  const [cardNumbers, setCardNumbers] = useState(['', '', '', '']);
-  const { cardNumberError, validateCardNumbers } = useCardNumberValidation(cardNumbers);
+  const [cardNumbers, setCardNumbers] = useState('');
+  const { cardNumberError, validateCardNumbers } = useCardNumberValidation();
 
-  const handleChangeCardNumber = (cardIndex: number, value: string) => {
-    const errorType = validateCardNumbers(cardIndex, value.slice(0, 4));
+  const handleChangeCardNumber = (value: string) => {
+    const cardBrand = determineCardBrand(value);
 
-    if (errorType === CARD_NUMBER_ERROR_TYPE.nonNumeric || value.length > 4) return;
+    const errorType = validateCardNumbers(value, cardBrand);
 
-    setCardNumbers((prevCardNumbers) => {
-      prevCardNumbers[cardIndex] = value;
+    if (errorType === CARD_NUMBER_ERROR_TYPE.nonNumeric || isCardNumberOverLength(value, cardBrand)) return;
 
-      return prevCardNumbers;
-    });
+    setCardNumbers(value);
   };
 
   return { cardNumbers, cardNumberError, handleChangeCardNumber };

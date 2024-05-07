@@ -1,63 +1,37 @@
 import { useState } from 'react';
-import { isFulledCardNumber, isFulledCardNumbers } from './useCardNumber.util';
+import { isCardNumberLessLength } from './useCardNumber.util';
 import { CARD_NUMBER_ERROR_TYPE } from './useCardNumber.constant';
-import { isContainsNonNumeric } from '../../utils/number';
+import { isContainsNonNumeric } from '../utils/number';
+import { CardBrand } from '../utils/cardBrand/cardBrand.type';
+import { CARD_BRAND_LENGTH_MAP } from '../utils/cardBrand/cardBrand.constant';
 
-const useCardNumberValidation = (cardNumbers: string[]) => {
+const useCardNumberValidation = () => {
   const [cardNumberError, setCardNumberError] = useState({
-    isError: [false, false, false, false],
+    isError: false,
     errorMessage: '',
   });
 
-  const validateCardNumbers = (cardIndex: number, value: string) => {
-    if (isContainsNonNumeric(value)) {
-      setCardNumberError((prevCardNumberError) => {
-        const newErrorConditions = [...prevCardNumberError.isError];
-        newErrorConditions[cardIndex] = true;
+  const updateCardNumberError = (errorMessage: string, isError: boolean = true) => {
+    setCardNumberError({
+      isError,
+      errorMessage,
+    });
+  };
 
-        return {
-          isError: newErrorConditions,
-          errorMessage: '숫자만 입력 가능합니다.',
-        };
-      });
+  const validateCardNumbers = (value: string, cardBrand: CardBrand) => {
+    if (isContainsNonNumeric(value)) {
+      updateCardNumberError('숫자만 입력 가능합니다.');
 
       return CARD_NUMBER_ERROR_TYPE.nonNumeric;
     }
 
-    const newCardNumbers = [...cardNumbers];
-    newCardNumbers[cardIndex] = value;
-
-    if (!isFulledCardNumber(value)) {
-      setCardNumberError((prevCardNumberError) => {
-        const newErrorConditions = [...prevCardNumberError.isError];
-        newErrorConditions[cardIndex] = true;
-
-        newCardNumbers.forEach((cardNumbers, newCardIndex) => {
-          if (cardIndex !== newCardIndex && cardNumbers === '') newErrorConditions[newCardIndex] = false;
-        });
-
-        return {
-          isError: newErrorConditions,
-          errorMessage: '카드 번호 4자리를 입력해주세요.',
-        };
-      });
-
-      return CARD_NUMBER_ERROR_TYPE.notFulledCardNumber;
-    }
-
-    if (!isFulledCardNumbers(newCardNumbers)) {
-      setCardNumberError({
-        isError: newCardNumbers.map((cardNumber) => (isFulledCardNumber(cardNumber) ? false : true)),
-        errorMessage: '카드 번호는 16자리 숫자여야 합니다.',
-      });
+    if (isCardNumberLessLength(value, cardBrand)) {
+      updateCardNumberError(`카드 번호는 ${CARD_BRAND_LENGTH_MAP[cardBrand]}자리 숫자여야 합니다.`);
 
       return CARD_NUMBER_ERROR_TYPE.notFulledCardNumbers;
     }
 
-    setCardNumberError({
-      isError: [false, false, false, false],
-      errorMessage: '',
-    });
+    updateCardNumberError('', false);
 
     return CARD_NUMBER_ERROR_TYPE.notError;
   };
