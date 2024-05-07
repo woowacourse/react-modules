@@ -235,3 +235,43 @@ export const ConfirmModal: Story = {
     </Modal>
   ),
 };
+
+export const PromptModal: Story = {
+  args: {
+    isOpen: true,
+    position: 'center',
+    onClose: fn(),
+  },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          '사용자로부터 입력값을 받을 수 있는 입력 필드와 확인/취소 버튼 제공',
+      },
+    },
+  },
+
+  render: (args) => (
+    <Modal isOpen={args.isOpen} position={args.position} onClose={args.onClose}>
+      <Modal.Header>
+        <Modal.Title>쿠폰 번호를 입력해 주세요.</Modal.Title>
+      </Modal.Header>
+      <Modal.Content>
+        <Modal.Input></Modal.Input>
+      </Modal.Content>
+      <Modal.Footer buttonPosition='right' buttonGap='10px'>
+        <Modal.TextButton onClose={args.onClose} buttonSize='50px'>
+          취소
+        </Modal.TextButton>
+        <Modal.TextButton
+          onClose={args.onClose}
+          buttonSize='50px'
+          backgroudColor='#333333'
+          fontColor='#ffffff'
+        >
+          확인
+        </Modal.TextButton>
+      </Modal.Footer>
+    </Modal>
+  ),
+};
