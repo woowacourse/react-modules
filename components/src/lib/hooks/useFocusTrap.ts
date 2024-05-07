@@ -58,11 +58,12 @@ const useFocusTrap = (isOpen: boolean, modalRef: RefObject<HTMLElement>) => {
     };
 
     const handleKeyPress = (event: KeyboardEvent) => {
-      event.preventDefault();
-
       if (event.key === 'Tab') {
         if (event.shiftKey) moveFocusPrev();
-        else moveFocusNext();
+        else {
+          event.preventDefault();
+          moveFocusNext();
+        }
       }
     };
 
