@@ -1,49 +1,29 @@
 import styled from 'styled-components';
 
-import { CONTENTS_CLASS_NAME } from '../constants/modal';
-import { useModalContext } from '../hooks';
-import { ModalContentsProps } from '../types/modal';
+import { ModalCommonProps } from '../types/modal';
 
 import Backdrop from './Backdrop';
+import ModalContainer from './ModalContainer';
 
-interface StyleProps {
-  $borderRadius: string | undefined;
-  $modalBackgroundColor: string | undefined;
-  $contentsPadding: string | undefined;
-}
-
-const CenterModalContents = styled.div<StyleProps>`
-  -webkit-box-shadow: 0px 0px 18px 6px rgba(0, 0, 0, 0.19);
-  box-shadow: 0px 0px 18px 6px rgba(0, 0, 0, 0.19);
-  border-radius: ${({ $borderRadius }) => $borderRadius};
-  min-width: 50vw;
-  max-width: 90vw;
-  min-height: 12.5rem;
-  max-height: 90vw;
-  background-color: ${({ $modalBackgroundColor }) => $modalBackgroundColor || 'transparent'};
-  padding: ${({ $contentsPadding }) => $contentsPadding};
-  position: relative;
-
-  @media screen and (max-width: 435px) {
-    min-width: 80vw;
-  }
+const CenterContentsWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
 `;
 
-function CenterModal({ children }: ModalContentsProps) {
-  const { closeModal, borderRadius, backgroundColor, contentsPadding } = useModalContext();
-  return (
-    <>
-      <Backdrop handleCloseModal={closeModal} />
+function CenterModal(props: ModalCommonProps) {
+  const { setOpenModal, children, ...rest } = props;
 
-      <CenterModalContents
-        className={CONTENTS_CLASS_NAME}
-        $borderRadius={borderRadius}
-        $modalBackgroundColor={backgroundColor?.modal}
-        $contentsPadding={contentsPadding}
-      >
-        {children}
-      </CenterModalContents>
-    </>
+  const closeModal = () => setOpenModal(false);
+  return (
+    <ModalContainer {...rest} closeModal={closeModal}>
+      <Backdrop handleCloseModal={closeModal} />
+      <CenterContentsWrapper>
+        <ModalContainer.contents>{children}</ModalContainer.contents>
+      </CenterContentsWrapper>
+    </ModalContainer>
   );
 }
 
