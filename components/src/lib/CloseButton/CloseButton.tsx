@@ -1,15 +1,10 @@
-import { MouseEventHandler } from "react";
+import { useModalContext } from "../hooks/useModalContext";
 import { ButtonWrapper } from "./CloseButton.style";
 
-interface CloseButtonProps {
-  onClick: MouseEventHandler<HTMLButtonElement>;
-}
+const CloseButton: React.FC<React.PropsWithChildren> = ({ children }) => {
+  const { closeModal } = useModalContext();
 
-const CloseButton: React.FC<React.PropsWithChildren<CloseButtonProps>> = ({
-  children,
-  onClick,
-}) => {
-  return <ButtonWrapper onClick={onClick}>{children}</ButtonWrapper>;
+  return <ButtonWrapper onClick={closeModal}>{children}</ButtonWrapper>;
 };
 
 export default CloseButton;
