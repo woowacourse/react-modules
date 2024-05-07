@@ -1,6 +1,6 @@
 {
   "name": "choco-modal-component",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "초코가 만든 Modal component 라이브러리",
   "type": "module",
   "types": "dist/index.d.ts",
