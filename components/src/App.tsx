@@ -15,20 +15,16 @@ function App() {
       <button onClick={() => setIsModalOpen(true)}></button>
       {isModalOpen && (
         <Modal
-          buttonLayout='column'
-          position='bottom'
+          position='center'
+          size='large'
           title='제목입니다.'
-          isXButton={true}
-          closeButtonContent='닫기'
+          // isXButton={true}
+          // closeButtonContent='닫기'
           confirmButtonContent='확인'
           handleConfirm={handleConfirm}
-          handleClose={handleClose}
+          // handleClose={handleClose}
         >
-          {
-            <Temp>
-              <input></input>
-            </Temp>
-          }
+          {<Temp></Temp>}
         </Modal>
       )}
     </>
@@ -36,12 +32,13 @@ function App() {
 }
 
 export const Temp = styled.div`
-  height: 50vh;
+  width: 400px;
+  height: 200px;
   background-color: red;
 `;
 
 export const Wide = styled.div`
-  width: 500vw;
+  width: 400px;
   height: 500vh;
   background-color: red;
 `;
