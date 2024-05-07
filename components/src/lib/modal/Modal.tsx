@@ -127,7 +127,7 @@ type ModalInputType = React.FC<
 >;
 
 const ModalInput: ModalInputType = ({ ...restProps }) => {
-  return <input {...restProps}></input>;
+  return <Styled.ModalInput {...restProps}></Styled.ModalInput>;
 };
 
 type ModalFooterType = React.FC<

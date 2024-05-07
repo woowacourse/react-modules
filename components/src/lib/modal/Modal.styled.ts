@@ -103,6 +103,12 @@ export const ModalContent = styled.section<ModalContentProps>`
   font-size: ${({ fontSize }) => fontSize || '15px'};
 `;
 
+export const ModalInput = styled.input`
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #000000;
+`;
+
 interface ModalFooterProps {
   buttonPosition?: 'left' | 'center' | 'right';
   buttonGap?: string;
