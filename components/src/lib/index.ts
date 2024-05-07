@@ -1,9 +1,10 @@
 import Title from './components/Title/Title';
 import Button from './components/Button/Button';
 import CloseButton from './components/CloseButton/CloseButton';
-import { ModalBody, ModalFooter, ModalHeader, ModalMain } from './Modal/Modal';
+import { ModalHeader, ModalBody, ModalFooter } from './components/ModalLayout/ModalLayout';
+import MainModal from './Modal/MainModal/MainModal';
 
-export const Modal = Object.assign(ModalMain, {
+export const Modal = Object.assign(MainModal, {
   Title: Title,
   Button: Button,
   CloseButton: CloseButton,
@@ -11,3 +12,5 @@ export const Modal = Object.assign(ModalMain, {
   Body: ModalBody,
   Footer: ModalFooter,
 });
+
+export { default as AlertModal } from './Modal/AlertModal/AlertModal';
