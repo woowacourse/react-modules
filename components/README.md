@@ -15,7 +15,7 @@ npm install @roqkftjs/react-payments-module
 
 ```ts
 import React, { useState } from 'react';
-import Modal from 'react-custom-modal';
+import Modal from '@roqkftjs/react-payments-module';
 import Image from '../asset/example.png'
 function App() {
   const [isOpen, setIsOpen] = useState(false);
@@ -74,7 +74,7 @@ Modal 컴포넌트는 다음과 같은 서브 컴포넌트를 포함합니다.
 
 ## 스타일 커스터마이징
 
-- 기본으로 제공하는 스타일 prop 외에도 style 프로퍼디를 이용하여 스타일을 입힐 수 있습니다.
+- 기본으로 제공하는 스타일 prop 외에도 style 프로퍼티를 이용하여 스타일을 입힐 수 있습니다.
   - 사용 예시
     ```ts
     <Modal.TextButton onClose={onClose} style={{ borderRadius: 30 }}>안녕</Modal.TextButton>
@@ -82,8 +82,8 @@ Modal 컴포넌트는 다음과 같은 서브 컴포넌트를 포함합니다.
 
 ## 기능
 
-- ESC 키로 닫기: 사용자가 ESC 키를 누를 때 모달을 닫을 수 있습니다.
-- 배경 클릭으로 닫기: 모달 외부(배경)을 클릭할 때 모달을 닫을 수 있습니다.
+- ESC 키로 모달 닫기: 사용자가 ESC 키를 누를 때 모달을 닫을 수 있습니다.
+- 배경 클릭으로 모달 닫기: 모달 외부(배경)을 클릭할 때 모달을 닫을 수 있습니다.
 - 배경 스크롤 방지: 모달이 열려 있을 때 배경의 스크롤을 방지합니다.
 
 ## 기여하기
