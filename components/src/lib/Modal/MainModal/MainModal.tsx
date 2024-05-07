@@ -1,4 +1,5 @@
 import { useRef } from 'react';
+import { createPortal } from 'react-dom';
 import { useEscapeKey, useFocusTrap, usePreventScroll } from '../../hooks';
 import type { StrictPropsWithChildren, ModalProps } from '../../types/common';
 import styles from './MainModal.module.css';
@@ -21,7 +22,7 @@ const MainModal = ({
 
   if (!isOpen) return null;
 
-  return (
+  return createPortal(
     <div ref={modalRef} className={`${styles.modalLayout} ${styles[position]} ${animation ? styles.animation : ''}`}>
       <div onClick={close} className={`${styles.modalBackdrop} ${styles[backdropType]}`} />
       <div
@@ -29,7 +30,8 @@ const MainModal = ({
       >
         {children}
       </div>
-    </div>
+    </div>,
+    document.body,
   );
 };
 
