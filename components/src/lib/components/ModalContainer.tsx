@@ -6,6 +6,8 @@ import { ModalContainerContext } from '../contexts';
 import { useModalContext } from '../hooks';
 import { ModalButtonProps } from '../types/modal';
 
+import Backdrop from './Backdrop';
+import Contents from './Contents';
 import ModalPortal from './ModalPortal';
 
 const ModalWrapper = styled.div`
@@ -54,7 +56,8 @@ function ModalButton({ isCloseModal, children, onClick, ...rest }: ModalButtonPr
     </button>
   );
 }
-
+ModalContainer.backdrop = Backdrop;
 ModalContainer.button = ModalButton;
+ModalContainer.contents = Contents;
 
 export default ModalContainer;
