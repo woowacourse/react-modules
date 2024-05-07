@@ -1,118 +1,63 @@
 import { renderHook } from '@testing-library/react';
 import React, { ChangeEvent, FocusEvent } from 'react';
-import useCardNumbers from '../useCardNumbers';
-import { CARD_NUMBERS_ERROR_MESSAGES } from '../../constants/error';
 import { ErrorStatus } from '../../types/errorStatus';
+import { CARD_NUMBERS_ERROR_MESSAGES } from '../../constants/error';
+import useCardNumbers from '../useCardNumbers';
 
-describe('useCardNumbers 훅 테스트', () => {
-  it('훅을 선언할 때 초기값과 같은 값이 result.current.value이 된다.', () => {
-    const initialValue = {
-      cardNumber1: '1234',
-      cardNumber2: '1234',
-      cardNumber3: '1234',
-      cardNumber4: '1234',
-    };
+describe.only('useCard 훅 테스트', () => {
+  it('훅을 선언할 때 초기값이 `123`일 시 result.current.value는 `123`이 된다', () => {
+    const initialValue = '1234567890';
     const { result } = renderHook(() => useCardNumbers(initialValue));
-    expect(result.current.values).toEqual(initialValue);
+    expect(result.current.value).toEqual(initialValue);
   });
 
-  it('입력값(cardNumber1) 업데이트될 시 `1234` -> `5678`로 변경되어야 한다.', () => {
-    const initialValues = {
-      cardNumber1: '1234',
-      cardNumber2: '5678',
-      cardNumber3: '5678',
-      cardNumber4: '5678',
-    };
-
-    const changeValue = {
-      cardNumber1: '5678',
-      cardNumber2: '5678',
-      cardNumber3: '5678',
-      cardNumber4: '5678',
-    };
-    const { result } = renderHook(() => useCardNumbers(initialValues));
+  it('훅이 입력값으로 업데이트될 시 초기값 `123`에서 `456`으로 업데이트된다.', () => {
+    const initialValue = '1234567890';
+    const { result } = renderHook(() => useCardNumbers(initialValue));
+    const changeValue = '0987654321';
 
     React.act(() => {
       result.current.onChange({
-        target: { value: '5678', name: 'cardNumber1' },
+        target: { value: changeValue },
       } as ChangeEvent<HTMLInputElement>);
     });
 
-    expect(result.current.values).toEqual(changeValue);
+    expect(result.current.value).toEqual(changeValue);
   });
 
-  it(`숫자아닌 값이 입력됐을 때 에러(${
+  it(`숫자가 아닌 값(ㄱㄴㄷ)이 들어오면 '${
     CARD_NUMBERS_ERROR_MESSAGES[ErrorStatus.IS_NOT_NUMBER]
-  })를 낸다.`, () => {
-    const valuesWithString = {
-      cardNumber1: '',
-      cardNumber2: '',
-      cardNumber3: '',
-      cardNumber4: '',
-    };
+  }'를 출력.`, () => {
+    const initialValue = '123';
+    const { result } = renderHook(() => useCardNumbers(initialValue));
+    const invalidValue = 'ㄱㄴㄷ';
 
-    const { result } = renderHook(() => useCardNumbers(valuesWithString));
-
-    const invalidValues = 'abcd';
     React.act(() => {
       result.current.onChange({
-        target: { value: invalidValues, name: 'cardNumber1' },
+        target: { value: invalidValue },
       } as ChangeEvent<HTMLInputElement>);
     });
 
-    const expectedErrorMessage = {
-      cardNumber1: CARD_NUMBERS_ERROR_MESSAGES[ErrorStatus.IS_NOT_NUMBER],
-    };
-    expect(result.current.errorMessages).toEqual(expectedErrorMessage);
+    const expectedErrorMessage =
+      CARD_NUMBERS_ERROR_MESSAGES[ErrorStatus.IS_NOT_NUMBER];
+    expect(result.current.errorMessage).toBe(expectedErrorMessage);
   });
 
-  it(`숫자가 4자리가 아닐때(초과시) 에러(${
-    CARD_NUMBERS_ERROR_MESSAGES[ErrorStatus.INVALID_LENGTH]
-  })를 낸다.`, () => {
-    const valuesWithString = {
-      cardNumber1: '',
-      cardNumber2: '',
-      cardNumber3: '',
-      cardNumber4: '',
-    };
+  it.only(`카드 브랜드 종류 변경으로 조건 달라짐 확인`, () => {
+    const initialValue = '1234123412341234';
+    const { result } = renderHook(() => useCardNumbers(initialValue));
 
-    const { result } = renderHook(() => useCardNumbers(valuesWithString));
-
-    const invalidValues = '12345';
+    // 브랜드 변경으로 인한 조건 변경 (16자리)
+    const invalidValue = '3634123412341234';
     React.act(() => {
       result.current.onChange({
-        target: { value: invalidValues, name: 'cardNumber1' },
-      } as ChangeEvent<HTMLInputElement>);
-    });
-
-    const expectedErrorMessage = {
-      cardNumber1: CARD_NUMBERS_ERROR_MESSAGES[ErrorStatus.INVALID_LENGTH],
-    };
-    expect(result.current.errorMessages).toEqual(expectedErrorMessage);
-  });
-
-  it(`숫자가 4자리가 아닐때(미만시) 에러(${
-    CARD_NUMBERS_ERROR_MESSAGES[ErrorStatus.INVALID_LENGTH]
-  })를 낸다.`, () => {
-    const valuesWithString = {
-      cardNumber1: '',
-      cardNumber2: '',
-      cardNumber3: '',
-      cardNumber4: '',
-    };
-
-    const { result } = renderHook(() => useCardNumbers(valuesWithString));
-
-    const invalidValues = '1';
-    React.act(() => {
-      result.current.onBlur({
-        target: { value: invalidValues, name: 'cardNumber1' },
+        target: { value: invalidValue },
       } as FocusEvent<HTMLInputElement>);
     });
 
-    const expectedErrorMessage = {
-      cardNumber1: CARD_NUMBERS_ERROR_MESSAGES[ErrorStatus.INVALID_LENGTH],
-    };
-    expect(result.current.errorMessages).toEqual(expectedErrorMessage);
+    const expectedErrorMessage =
+      CARD_NUMBERS_ERROR_MESSAGES[ErrorStatus.INVALID_LENGTH];
+    expect(result.current.errorMessage).toBe(expectedErrorMessage);
   });
 });
+36341234123412;
