@@ -68,9 +68,14 @@ function ModalCloseButton(attributes: ModalCloseButtonProps) {
   );
 }
 
-function ModalButton({ children, theme = "dark", ...attributes }: ModalButtonProps) {
+function ModalButton({
+  children,
+  theme = "dark",
+  size = "large",
+  ...attributes
+}: ModalButtonProps) {
   return (
-    <button className={classnames([style.ModalButton, style[theme]])} {...attributes}>
+    <button className={classnames([style.ModalButton, style[theme], style[size]])} {...attributes}>
       {children}
     </button>
   );

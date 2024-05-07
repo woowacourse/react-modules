@@ -78,17 +78,15 @@
 
 /* ModalButton */
 .ModalButton {
-  width: 100%;
-  min-height: 44px;
-  height: fit-content;
   border: 0;
   border-radius: 5px;
-  padding: 13px 10px;
+  padding: 9px 10px;
   font-weight: 700;
   font-size: 15px;
   align-items: center;
   cursor: pointer;
 
+  /* theme variant */
   &.dark {
     background-color: #333333;
     color: #ffffff;
@@ -97,5 +95,16 @@
   &.light {
     background-color: #ffffff;
     color: #8b95a1;
+  }
+
+  /* size variant */
+  &.small {
+    width: 80px;
+    min-height: 36px;
+  }
+
+  &.large {
+    width: 100%;
+    min-height: 44px;
   }
 }
