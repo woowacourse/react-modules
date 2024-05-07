@@ -1,4 +1,20 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
+
+type NumberState = readonly [string, (value: string) => void];
+
+type CardBrand = "Visa" | "Master" | "AMEX" | "Diners" | "UnionPay";
+
+interface CardNumberReturn {
+  numbers: {
+    firstState: NumberState;
+    secondState: NumberState;
+    thirdState: NumberState;
+    fourthState?: NumberState;
+  };
+  errorList: (string | undefined)[];
+  cardBrand: CardBrand;
+  inputMaxLength: number[];
+}
 
 const ERROR_MESSAGE = (index: number) => `${index}번 째 카드 번호를 잘못입력하셨습니다.`;
 //TODO: AMEX, Diners, UnionPay 추가하기.
@@ -6,7 +22,7 @@ const ERROR_MESSAGE = (index: number) => `${index}번 째 카드 번호를 잘�
 const VALID_CARD_LIST = ["Master", "Visa"];
 const NO_VALID_CARD = `${VALID_CARD_LIST.join(",")}카드가 아닙니다. 카드 번호를 확인해주세요.`;
 
-const useCardNumbers = () => {
+const useCardNumbers = (): CardNumberReturn => {
   //TODO: 상태관리를 통해서 카드 넘버의 상태 갯수를 정한다.
   const [first, setFirst] = useState("");
   const [second, setSecond] = useState("");
@@ -51,10 +67,7 @@ const useCardNumbers = () => {
       thirdState: [third, (value: string) => setWrapper(value, setThird, 2)] as const,
       fourthState: [fourth, (value: string) => setWrapper(value, setFourth, 3)] as const,
     },
-    error: {
-      isError: errorMessage.some((message) => message),
-      errorMessage,
-    },
+    errorList: errorMessage,
     //TODO: 카드 브랜드를 반환한다.
   };
 };
