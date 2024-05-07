@@ -1,5 +1,5 @@
 export const isNumeric = (value: string) => {
-  return Number.isInteger(value);
+  return Number.isInteger(Number(value));
 };
 
 export const isAlphabetic = (value: string) => {

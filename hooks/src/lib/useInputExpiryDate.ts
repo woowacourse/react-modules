@@ -12,13 +12,13 @@ const useInputExpiryDate = () => {
   };
   const [errorMessage, setErrorMessage] = useState<string>("");
 
-  const handleChange = (value: string, type: ExpiryDateType) => {
+  const handleChange = (value: string, maxLength: number, type: ExpiryDateType) => {
     // 연/월 status 업데이트
-    states.year.setStatus(getInputStatus(states.year.value, LEAST_LENGTH.expiryDateYear));
-    states.month.setStatus(getInputStatus(states.month.value, LEAST_LENGTH.expiryDateMonth));
+    states.year.setStatus(getInputStatus(states.year.value, maxLength));
+    states.month.setStatus(getInputStatus(states.month.value, maxLength));
 
     // 월 입력 중, 연도가 미완성인 경우 : Error 상태로 판단
-    if (type === "month" && ["default", "pending"].includes(status)) {
+    if (type === "month" && ["default", "pending"].includes(states.year.status)) {
       states.year.setStatus("error");
       setErrorMessage(ERROR_MESSAGE.expiryDate.year.isNotFulfilled);
     }

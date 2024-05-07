@@ -7,9 +7,9 @@ const useInputOwnerName = () => {
   const { value, status, setValue, setStatus } = useInput("");
   const [errorMessage, setErrorMessage] = useState<string>("");
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>, value: string) => {
+  const handleChange = (value: string, maxLength: number) => {
     //  status 업데이트
-    setStatus(getInputStatus(value, event.target.maxLength));
+    setStatus(getInputStatus(value, maxLength));
 
     // Default가 아닌 경우 : Error 검사
     if (status !== "default") {
