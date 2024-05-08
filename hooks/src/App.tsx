@@ -6,6 +6,7 @@ import {
   usePassword,
 } from "choco-payments-validation-hooks";
 import { useCardNumber } from "./lib/hooks/useCardNumber";
+import useCardBrandIdentification from "./lib/hooks/useCardBrandIdentification";
 import React from "react";
 import "./App.css";
 
@@ -91,6 +92,10 @@ function App() {
         {!cardNumbersValidation.isValid && (
           <span style={{ color: "red" }}>{cardNumbersValidation.errorMessage}</span>
         )}
+      </div>
+
+      <div>
+        <p>Card Brand Identification: {useCardBrandIdentification(cardNumbers)}</p>
       </div>
 
       <div>
