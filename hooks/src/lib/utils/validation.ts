@@ -29,14 +29,14 @@ const Validation = {
   isVisa: (cardNumber: string) => {
     const VISA_LENGTH = 16;
 
-    return cardNumber.startsWith('4') && Validation.isExactLength(VISA_LENGTH, cardNumber);
+    return Validation.isExactLength(VISA_LENGTH, cardNumber) && cardNumber.startsWith('4');
   },
 
   isMasterCard: (cardNumber: string) => {
     const MASTERCARD_LENGTH = 16;
     const firstTwoDigits = Number(cardNumber.slice(0, 2));
 
-    return firstTwoDigits >= 51 && firstTwoDigits <= 55 && Validation.isExactLength(MASTERCARD_LENGTH, cardNumber);
+    return Validation.isExactLength(MASTERCARD_LENGTH, cardNumber) && firstTwoDigits >= 51 && firstTwoDigits <= 55;
   },
 };
 
