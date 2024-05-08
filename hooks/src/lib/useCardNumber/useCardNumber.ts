@@ -1,27 +1,31 @@
 import { useState } from 'react';
 
-import useCardNumberValidation from './useCardNumberValidation';
-
 import { CARD_NUMBER_ERROR_TYPE } from './useCardNumber.constant';
+import useCardNumberValidation from './useCardNumberValidation';
+import { checkCardBrand, formattingCardNumbers } from './useCardNumber.util';
 
 const useCardNumber = () => {
-  const [cardNumbers, setCardNumbers] = useState(['', '', '', '']);
-  const { cardNumberError, validateCardNumbers } = useCardNumberValidation(cardNumbers);
+  const [cardNumbers, setCardNumbers] = useState('');
+  const { cardNumberError, validateCardNumbers } = useCardNumberValidation();
 
-  const handleChangeCardNumber = (cardIndex: number, value: string) => {
-    const errorType = validateCardNumbers(cardIndex, value.slice(0, 4));
+  const handleChangeCardNumber = (value: string) => {
+    value = value.replace(/[\s-]/g, '');
+    const cardBrand = checkCardBrand(value);
 
-    if (errorType === CARD_NUMBER_ERROR_TYPE.nonNumeric || value.length > 4) return;
+    if (value.length > cardBrand.length) return;
 
-    setCardNumbers((prevCardNumbers) => {
-      const newCardNumbers = [...prevCardNumbers];
+    const errorType = validateCardNumbers(value.slice(0, cardBrand.length), cardBrand.length);
 
-      newCardNumbers[cardIndex] = value;
-      return newCardNumbers;
-    });
+    if (errorType === CARD_NUMBER_ERROR_TYPE.nonNumeric) return;
+
+    setCardNumbers(value);
   };
 
-  return { cardNumbers, cardNumberError, handleChangeCardNumber };
+  return {
+    cardNumbers: formattingCardNumbers(cardNumbers, checkCardBrand(cardNumbers).format),
+    cardNumberError,
+    handleChangeCardNumber,
+  };
 };
 
 export default useCardNumber;
