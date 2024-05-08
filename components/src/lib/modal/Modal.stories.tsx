@@ -306,12 +306,13 @@ export const PromptModal: Story = {
           취소
         </Modal.TextButton>
         <Modal.TextButton
+          type='submit'
           onClose={args.onClose}
           buttonSize='50px'
           backgroudColor='#333333'
           fontColor='#ffffff'
         >
-          확인
+          제출
         </Modal.TextButton>
       </Modal.Footer>
     </Modal>
