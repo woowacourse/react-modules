@@ -18,9 +18,13 @@
   --color-txt-primary-btn: var(--color-white);
   --color-txt-secondary-btn: #333333bf;
   --color-txt-close-btn: #8b95a1;
+  --color--txt-description: #0a0d13;
 
   /* size */
   --button-small: 5rem;
+  --modal-small: 20rem;
+  --modal-medium: 30rem;
+  --modal-large: 37.5rem;
 }
 
 * {
@@ -53,6 +57,22 @@
   padding: 1.5rem 2rem;
 }
 
+.contents.fitContent {
+  width: fit-content;
+}
+
+.contents.small {
+  width: var(--modal-small);
+}
+
+.contents.medium {
+  width: var(--modal-medium);
+}
+
+.contents.large {
+  width: var(--modal-large);
+}
+
 /* position */
 .defaultPosition,
 .center {
@@ -77,6 +97,16 @@
   font-weight: 700;
   font-size: 1.125rem;
   line-height: 1.625rem;
+  text-align: left;
+}
+
+/* Description */
+.description {
+  margin: 0;
+  color: var(--color--txt-description);
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 15px;
   text-align: left;
 }
 

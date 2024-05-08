@@ -36,10 +36,15 @@ function Backdrop() {
   return <div className={styles.backdrop} onClick={onClick} />;
 }
 
-function Contents({ position = 'center', children, className, ...attribute }: ContentsProps) {
+function Contents({ size, position = 'center', children, className, ...attribute }: ContentsProps) {
   return (
     <div
-      className={clsx(className, styles.contents, position ? styles[position] : styles.defaultPosition)}
+      className={clsx(
+        className,
+        styles.contents,
+        size ? styles[size] : styles.fitContent,
+        position ? styles[position] : styles.defaultPosition,
+      )}
       {...attribute}
     >
       {children}
@@ -60,10 +65,10 @@ function Description({ children, ...attribute }: HTMLAttributes<HTMLParagraphEle
     <p className={styles.description} {...attribute}>
       {children}
     </p>
+  );
+}
 
-  const onClick = () => {
-    closeModal();
-  };
+function CloseButton({ children, buttonType, className, ...attribute }: CloseButtonProps) {
   const { closeModal } = useModalContext();
 
   return (
