@@ -10,6 +10,7 @@ import ModalContent from './modalContent/ModalContent';
 import CloseButton from './closeButton/CloseButton';
 import ConfirmButton from './confirmButton/ConfirmButton';
 import ModalFooter from './modalFooter/ModalFooter';
+import ModalInput from './modalInput/ModalInput';
 
 const MODAL_WRAPPER_TYPE: Record<ModalPosition, string> = {
   center: styles.modalWrapper,
@@ -40,7 +41,7 @@ interface ModalMainProps extends React.HTMLAttributes<HTMLDivElement> {
 
 const ModalMain = ({
   isOpen,
-  size = 'large',
+  size,
   position = 'center',
   isAnimation = false,
   duration,
@@ -57,7 +58,7 @@ const ModalMain = ({
 
   const modalClass = isAnimation ? modalAnimationClass : MODAL_TYPE[position];
   const modalWrapperClass = MODAL_WRAPPER_TYPE[position];
-  const modalSizeClass = MODAL_SIZE[size];
+  const modalSizeClass = size ? MODAL_SIZE[size] : '';
 
   if (!mounted) {
     return null;
@@ -66,12 +67,8 @@ const ModalMain = ({
   return (
     <>
       {createPortal(
-        <div className={`${modalWrapperClass}  ${modalSizeClass}`}>
-          <div
-            className={modalClass}
-            style={{ animationDuration: `${duration}ms`, ...style }}
-            {...rest}
-          >
+        <div className={`${modalWrapperClass} ${modalSizeClass}`} style={style}>
+          <div className={modalClass} style={{ animationDuration: `${duration}ms` }} {...rest}>
             {children}
           </div>
         </div>,
@@ -91,6 +88,7 @@ const Modal = Object.assign(ModalMain, {
   CloseButton: CloseButton,
   ConfirmButton: ConfirmButton,
   Footer: ModalFooter,
+  Input: ModalInput,
 });
 
 export default Modal;
