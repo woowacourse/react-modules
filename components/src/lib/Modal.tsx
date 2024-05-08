@@ -3,9 +3,16 @@ import { css } from "@emotion/css";
 
 export const POSITIONS = ["top", "bottom", "center"] as const;
 export type Position = (typeof POSITIONS)[number];
+export const SIZES = ["small", "medium", "large"] as const;
+export type ModalSize = (typeof SIZES)[number];
 
-const ModalPositioner = ({ position, children }: { position: Position; children: ReactNode }) => {
-  return <div className={css(modalContainerCSS, positionCSS[position])}>{children}</div>;
+interface ModalPositionerProps {
+  position: Position;
+  size: ModalSize;
+  children: ReactNode;
+}
+const ModalPositioner = ({ position, size, children }: ModalPositionerProps) => {
+  return <div className={css(modalContainerCSS, positionCSS[position], sizeCSS[size])}>{children}</div>;
 };
 const ModalHeader = ({ title, close, onClose }: { title: string; close: boolean; onClose: () => void }) => {
   return (
@@ -63,6 +70,7 @@ interface ModalProps {
   close?: boolean;
   cancelLabel?: string;
   confirmLabel?: string;
+  size?: ModalSize;
 
   isOpen: boolean;
   confirmModal: () => void;
@@ -77,6 +85,7 @@ const Modal = ({
   close = false,
   cancelLabel,
   confirmLabel,
+  size = "medium",
 
   isOpen,
   closeModal,
@@ -85,7 +94,7 @@ const Modal = ({
   return (
     isOpen && (
       <>
-        <ModalPositioner position={position}>
+        <ModalPositioner position={position} size={size}>
           <ModalHeader title={title} close={close} onClose={closeModal} />
           <ModalContent description={description}>{children}</ModalContent>
           <ModalFooter
@@ -119,6 +128,18 @@ const headerContainerCSS = css`
   align-items: center;
   justify-content: space-between;
 `;
+
+const sizeCSS = {
+  small: css`
+    width: 320px;
+  `,
+  medium: css`
+    width: 480px;
+  `,
+  large: css`
+    width: 600px;
+  `,
+};
 
 const titleCSS = css`
   color: black;
@@ -186,10 +207,22 @@ const backdropCSS = css`
   background-color: rgba(0, 0, 0, 0.5);
 `;
 
-const positionCSS: Record<Position, string> = {
-  top: "width:100%; top:0; border-radius: 0 0 8px 8px;",
-  center: "top:50%; transform:translate(-50%,-50%); border-radius: 8px;",
-  bottom: "width:100%; bottom:0; border-radius: 8px 8px 0 0;",
+const positionCSS = {
+  top: css`
+    width: 100%;
+    top: 0;
+    border-radius: 0 0 8px 8px;
+  `,
+  center: css`
+    top: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 8px;
+  `,
+  bottom: css`
+    width: 100%;
+    bottom: 0;
+    border-radius: 8px 8px 0 0;
+  `,
 } as const;
 
 export default Modal;
