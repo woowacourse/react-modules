@@ -1,41 +1,41 @@
 import { useState } from 'react';
+import useCardType from '../useCardType/useCardType';
 import { getNumberErrorMessage, isNotNumber } from '../../utils/validation/validation';
-import { updateArray } from '../../utils/updateArray';
+import { getValidCardNumberLength, formatCardNumber, CardType } from '../../utils/card';
 
 export const VALID_CARD_NUMBER_LENGTH = 16;
 
-const useCardNumber = (
-  unitCount: number,
-  singleUnitLength: number,
-  initialValue: string[] | null = null
-) => {
-  const [cardNumber, setCardNumber] = useState<string[]>(
-    initialValue || new Array(unitCount).fill('')
-  );
-  const [isValidCardNumbers, setIsValidCardNumbers] = useState<boolean[]>(
-    new Array(unitCount).fill(false)
-  );
-  const [cardNumberErrorMessages, setCardNumberErrorMessages] = useState<string[]>(
-    new Array(unitCount).fill('')
-  );
+const useCardNumber = (initialValue: string = '') => {
+  const [cardNumber, setCardNumber] = useState<string>(initialValue);
+  const [isValidCardNumber, setIsValidCardNumber] = useState<boolean>(false);
+  const [cardNumberErrorMessage, setCardNumberErrorMessage] = useState<string>('');
 
-  const handleCardNumberChange = (number: string, index: number) => {
-    if (number.length > singleUnitLength) return;
+  const { cardType, handleCardType } = useCardType();
 
-    const errorMessage = getNumberErrorMessage(number, singleUnitLength);
-    setCardNumberErrorMessages(updateArray(cardNumberErrorMessages, errorMessage, index));
+  const handleCardNumberChange = (number: string) => {
+    const numberCopy = number.replace(/\s/g, '');
 
-    if (isNotNumber(number)) return;
+    handleCardType(numberCopy);
 
-    setIsValidCardNumbers(updateArray(isValidCardNumbers, !errorMessage, index));
-    setCardNumber(updateArray(cardNumber, number, index));
+    const validCardNumberLength = getValidCardNumberLength(cardType as CardType);
+
+    if (numberCopy.length > validCardNumberLength) return;
+
+    const errorMessage = getNumberErrorMessage(numberCopy, validCardNumberLength);
+    setCardNumberErrorMessage(errorMessage);
+
+    if (isNotNumber(numberCopy)) return;
+
+    setIsValidCardNumber(!errorMessage);
+    setCardNumber(formatCardNumber(cardType as CardType, numberCopy));
   };
 
   return {
     cardNumber,
+    cardType,
     handleCardNumberChange,
-    isValidCardNumbers,
-    cardNumberErrorMessages,
+    isValidCardNumber,
+    cardNumberErrorMessage,
   };
 };
 
