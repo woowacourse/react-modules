@@ -1,6 +1,6 @@
 export const OPTION = {
-  cardNumberInputCount: 4,
-  cardNumberMaxLength: 4,
+  cardNumberInputCount: 1,
+  cardNumberMaxLength: 16,
   expirationDateInputCount: 2,
   expirationDateMaxLength: 2,
   nameInputCount: 1,
@@ -12,6 +12,14 @@ export const OPTION = {
   cardCompanyInputCount: 1,
   minMonth: "01",
   maxMonth: "12",
+};
+
+export const CARD_BRAND_MAX_LENGTH = {
+  Visa: 16,
+  MasterCard: 16,
+  Diners: 14,
+  AMEX: 15,
+  UnionPay: 16,
 };
 
 export const CARD = {
