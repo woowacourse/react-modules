@@ -21,7 +21,6 @@ export const ModalWrapper = styled.section<{
   transform: translateX(-50%);
   margin: 0;
   padding: 0;
-  // width: 40%;
   height: fit-content;
   background-color: white;
   box-sizing: border-box;
@@ -109,7 +108,7 @@ export const ModalButton = styled.button<{
         `;
       case "L":
         return `
-          width: 90%;
+          width: 100%;
         `;
     }
   }}
@@ -121,8 +120,21 @@ export const ModalButton = styled.button<{
 
 export const ModalContent = styled.main`
   margin: 20px 30px;
+  text-align: left;
   min-height: 40%;
   overflow-wrap: break-word;
+`;
+
+export const ModalLabel = styled.label`
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+  display: block;
+`;
+
+export const ModalInput = styled.input`
+  width: 95%;
+  padding: 5px 8px;
 `;
 
 export const ModalFooter = styled.footer`

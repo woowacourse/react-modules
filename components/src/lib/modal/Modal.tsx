@@ -23,6 +23,8 @@ const Modal: React.FC<ModalProps> & {
   ModalCloseButton: ModalCloseButtonType;
   ModalButton: ModalButtonType;
   ModalContent: ModalContentType;
+  ModalLabel: ModalLabelType;
+  ModalInput: ModalInputType;
   ModalFooter: ModalFooterType;
 } = ({ children, isOpen, size, position, ...restProps }) => {
   const modalBackdropRef = useRef<HTMLDivElement>(null);
@@ -117,6 +119,38 @@ const ModalContent: ModalContentType = ({ children, ...restProps }) => {
   return <Styled.ModalContent {...restProps}>{children}</Styled.ModalContent>;
 };
 
+type ModalLabelType = React.FC<
+  React.PropsWithChildren<
+    React.HTMLAttributes<HTMLLabelElement> & {
+      htmlFor?: string;
+    }
+  >
+>;
+
+const ModalLabel: ModalLabelType = ({ htmlFor, children, ...restProps }) => {
+  return (
+    <Styled.ModalLabel htmlFor={htmlFor} {...restProps}>
+      {children}
+    </Styled.ModalLabel>
+  );
+};
+
+type ModalInputType = React.FC<
+  React.PropsWithChildren<
+    HTMLAttributes<HTMLElement> & {
+      type: HTMLInputElement["type"];
+    }
+  >
+>;
+
+const ModalInput: ModalInputType = ({ type, children, ...restProps }) => {
+  return (
+    <Styled.ModalInput type={type} {...restProps}>
+      {children}
+    </Styled.ModalInput>
+  );
+};
+
 type ModalFooterType = React.FC<
   React.PropsWithChildren<HTMLAttributes<HTMLDivElement>>
 >;
@@ -130,6 +164,8 @@ Modal.ModalTitle = ModalTitle;
 Modal.ModalCloseButton = ModalCloseButton;
 Modal.ModalButton = ModalButton;
 Modal.ModalContent = ModalContent;
+Modal.ModalLabel = ModalLabel;
+Modal.ModalInput = ModalInput;
 Modal.ModalFooter = ModalFooter;
 
 export default Modal;
