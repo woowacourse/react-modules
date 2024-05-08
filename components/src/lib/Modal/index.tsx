@@ -8,7 +8,7 @@ import ModalContext from '../contexts/modalContext';
 import useModalContext from '../hooks/useModalContext';
 import CloseButtonIcon from './CloseButtonIcon';
 
-function Modal({ isModalOpen, closeModal, children, className, ...attribute }: ModalProps) {
+function Modal({ isModalOpen, closeModal, children, className, size, position, ...attribute }: ModalProps) {
   const contextValue = useMemo(() => ({ isModalOpen, closeModal }), [isModalOpen, closeModal]);
 
   if (!isModalOpen) return null;
@@ -16,7 +16,7 @@ function Modal({ isModalOpen, closeModal, children, className, ...attribute }: M
     <ModalContext.Provider value={contextValue}>
       <ModalPortal>
         <Backdrop />
-        <Contents className={className} {...attribute}>
+        <Contents className={className} size={size} position={position} {...attribute}>
           {children}
         </Contents>
       </ModalPortal>

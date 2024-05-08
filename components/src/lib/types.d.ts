@@ -7,6 +7,8 @@ type HTMLAttributes<T> = React.HTMLAttributes<T>;
 interface ModalProps extends HTMLAttributes<HTMLDivElement> {
   isModalOpen: boolean;
   closeModal: () => void;
+  size?: ModalSize;
+  position?: ModalPosition;
 }
 
 interface ContentsProps extends HTMLAttributes<HTMLDivElement> {
