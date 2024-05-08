@@ -29,7 +29,10 @@ export default function PromptModal({
 
   const onInputChange = (e: React.ChangeEvent<HTMLInputElement>) => setValue(e.target.value);
 
-  const onSubmitButtonClick = () => onSubmit(value);
+  const onSubmitButtonClick = () => {
+    onSubmit(value);
+    setValue('');
+  };
 
   return (
     <Modal
