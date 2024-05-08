@@ -5,6 +5,7 @@ import ModalContent from './ModalContent/ModalContent';
 import ModalFooter from './ModalFooter/ModalFooter';
 import ModalHeader from './ModalHeader/ModalHeader';
 import ModalMessage from './ModalMessage/ModalMessage';
+import ModalInput from './ModalInput/ModalInput';
 
 export const Modal = Object.assign(ModalMain, {
   Header: ModalHeader,
@@ -13,4 +14,5 @@ export const Modal = Object.assign(ModalMain, {
   CancelButton: CancelButton,
   ConfirmButton: ConfirmButton,
   Message: ModalMessage,
+  Input: ModalInput,
 });
