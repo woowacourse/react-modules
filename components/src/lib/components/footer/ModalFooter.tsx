@@ -1,6 +1,5 @@
 import styles from './ModalFooter.module.css';
-import CloseButton, { CloseButtonProps } from './buttons/CloseButton';
-import ConfirmButton, { ConfirmButtonProps } from './buttons/ConfirmButton';
+import Button, { ButtonProps } from './button/Button';
 
 export type ButtonPosition = 'row' | 'row-reverse' | 'column' | 'column-reverse';
 
@@ -14,8 +13,8 @@ const BUTTON_POSITION_TYPE: Record<ButtonPosition, string> = {
 export interface ModalFooterProps {
   style?: React.CSSProperties;
   buttonPosition?: ButtonPosition;
-  closeButton?: CloseButtonProps;
-  confirmButton?: ConfirmButtonProps;
+  closeButton?: ButtonProps;
+  confirmButton?: ButtonProps;
 }
 
 const ModalFooter = ({ buttonPosition, closeButton, confirmButton, style }: ModalFooterProps) => {
@@ -25,8 +24,8 @@ const ModalFooter = ({ buttonPosition, closeButton, confirmButton, style }: Moda
 
   return (
     <footer className={buttonLayoutStyle} style={style}>
-      <CloseButton {...closeButton} />
-      <ConfirmButton {...confirmButton} />
+      <Button role="close" {...closeButton} />
+      <Button role="confirm" {...confirmButton} />
     </footer>
   );
 };
