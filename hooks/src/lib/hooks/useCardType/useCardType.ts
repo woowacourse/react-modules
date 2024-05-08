@@ -1,24 +1,26 @@
 import { useState } from 'react';
-import { CardType, getCardType, getValidCardNumberLength } from '../../utils/card';
+import { CardType, getCardType } from '../../utils/card';
+
+const MIN_CARD_NUMBER_LENGTH: Record<CardType, number> = {
+  VISA: 1,
+  MASTERCARD: 2,
+  DINERS: 2,
+  AMEX: 2,
+  UNIONPAY: 6,
+  DEFAULT: 6,
+};
 
 const useCardType = () => {
-  const [cardType, setCardType] = useState('');
+  const [cardType, setCardType] = useState<CardType>('DEFAULT');
 
   const handleCardType = (cardNumber: string) => {
-    if (cardType === 'VISA' && cardNumber.length > 2) return;
-    if (['MASTERCARD', 'DINERS', 'AMEX'].includes(cardType) && cardNumber.length > 3) return;
-    if (cardType === 'UNIONPAY' && cardNumber.length > 6) return;
+    if (cardNumber.length > MIN_CARD_NUMBER_LENGTH[cardType]) return;
 
     const newCardType = getCardType(cardNumber);
-
     setCardType(newCardType);
   };
 
-  return {
-    cardType,
-    validCardNumberLength: getValidCardNumberLength(cardType as CardType),
-    handleCardType,
-  };
+  return { cardType, handleCardType };
 };
 
 export default useCardType;
