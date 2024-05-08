@@ -1,10 +1,10 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import Modal from '../Modal';
+import PromptModal from '../../PromptModal';
 
 const meta = {
-  title: 'Modal/modalPosition',
-  component: Modal,
-} satisfies Meta<typeof Modal>;
+  title: 'PromptModal/modalPosition',
+  component: PromptModal,
+} satisfies Meta<typeof PromptModal>;
 
 export default meta;
 
@@ -18,18 +18,11 @@ export const Center: Story = {
     },
     title: '제목입니다',
     description: '설명입니다',
-    primaryButton: {
-      text: '확인',
-      onClick: () => {
-        alert('확인');
-      },
+
+    onConfirm: (value: string) => {
+      alert(`${value} 전달됨`)
     },
-    secondaryButton: {
-      text: '취소',
-      onClick: () => {
-        alert('취소');
-      },
-    },
+    placeholder: 'placeholder',
   },
 };
 
@@ -42,17 +35,10 @@ export const Bottom: Story = {
     },
     title: '제목입니다',
     description: '설명입니다',
-    primaryButton: {
-      text: '확인',
-      onClick: () => {
-        alert('확인');
-      },
+
+    onConfirm: (value: string) => {
+      alert(`${value} 전달됨`)
     },
-    secondaryButton: {
-      text: '취소',
-      onClick: () => {
-        alert('취소');
-      },
-    },
+    placeholder: 'placeholder',
   },
 };

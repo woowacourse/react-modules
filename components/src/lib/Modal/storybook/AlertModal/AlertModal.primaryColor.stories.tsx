@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import AlertModal from '../AlertModal';
+import AlertModal from '../../AlertModal';
 
 const meta = {
   title: 'AlertModal/primaryColor',

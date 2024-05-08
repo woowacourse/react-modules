@@ -1,8 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import AlertModal from '../AlertModal';
+import AlertModal from '../../AlertModal';
 
 const meta = {
-  title: 'AlertModal/buttonPosition',
+  title: 'AlertModal/modalPosition',
   component: AlertModal,
 } satisfies Meta<typeof AlertModal>;
 
@@ -10,7 +10,7 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const Row: Story = {
+export const Center: Story = {
   args: {
     isOpened: true,
     onClose: () => {
@@ -21,9 +21,9 @@ export const Row: Story = {
   },
 };
 
-export const Column: Story = {
+export const Bottom: Story = {
   args: {
-    buttonPosition: 'column',
+    modalPosition: 'bottom',
     isOpened: true,
     onClose: () => {
       alert('모달 닫기');

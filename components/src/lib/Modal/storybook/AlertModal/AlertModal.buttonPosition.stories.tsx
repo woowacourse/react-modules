@@ -1,16 +1,16 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import PromptModal from '../PromptModal';
+import AlertModal from '../../AlertModal';
 
 const meta = {
-  title: 'PromptModal/modalPosition',
-  component: PromptModal,
-} satisfies Meta<typeof PromptModal>;
+  title: 'AlertModal/buttonPosition',
+  component: AlertModal,
+} satisfies Meta<typeof AlertModal>;
 
 export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const Center: Story = {
+export const Row: Story = {
   args: {
     isOpened: true,
     onClose: () => {
@@ -18,27 +18,17 @@ export const Center: Story = {
     },
     title: '제목입니다',
     description: '설명입니다',
-
-    onConfirm: (value: string) => {
-      alert(`${value} 전달됨`)
-    },
-    placeholder: 'placeholder',
   },
 };
 
-export const Bottom: Story = {
+export const Column: Story = {
   args: {
-    modalPosition: 'bottom',
+    buttonPosition: 'column',
     isOpened: true,
     onClose: () => {
       alert('모달 닫기');
     },
     title: '제목입니다',
     description: '설명입니다',
-
-    onConfirm: (value: string) => {
-      alert(`${value} 전달됨`)
-    },
-    placeholder: 'placeholder',
   },
 };

@@ -1,8 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import AlertModal from '../AlertModal';
+import AlertModal from '../../AlertModal';
 
 const meta = {
-  title: 'AlertModal/modalPosition',
+  title: 'AlertModal/size',
   component: AlertModal,
 } satisfies Meta<typeof AlertModal>;
 
@@ -10,7 +10,7 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const Center: Story = {
+export const Small: Story = {
   args: {
     isOpened: true,
     onClose: () => {
@@ -21,9 +21,9 @@ export const Center: Story = {
   },
 };
 
-export const Bottom: Story = {
+export const Medium: Story = {
   args: {
-    modalPosition: 'bottom',
+    size: 'medium',
     isOpened: true,
     onClose: () => {
       alert('모달 닫기');
@@ -32,3 +32,16 @@ export const Bottom: Story = {
     description: '설명입니다',
   },
 };
+
+export const Large: Story = {
+  args: {
+    size: 'large',
+    isOpened: true,
+    onClose: () => {
+      alert('모달 닫기');
+    },
+    title: '제목입니다',
+    description: '설명입니다',
+  },
+};
+

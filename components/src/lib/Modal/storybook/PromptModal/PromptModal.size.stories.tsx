@@ -1,8 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import PromptModal from '../PromptModal';
+import PromptModal from '../../PromptModal';
 
 const meta = {
-  title: 'PromptModal/primaryColor',
+  title: 'PromptModal/size',
   component: PromptModal,
 } satisfies Meta<typeof PromptModal>;
 
@@ -10,7 +10,7 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {
+export const Small: Story = {
   args: {
     isOpened: true,
     onClose: () => {
@@ -26,8 +26,9 @@ export const Default: Story = {
   },
 };
 
-export const Bright: Story = {
+export const Medium: Story = {
   args: {
+    size: 'medium',
     isOpened: true,
     onClose: () => {
       alert('모달 닫기');
@@ -39,12 +40,12 @@ export const Bright: Story = {
       alert(`${value} 전달됨`)
     },
     placeholder: 'placeholder',
-    primaryColor: '#ffd09e',
   },
 };
 
-export const Dark: Story = {
+export const Large: Story = {
   args: {
+    size: 'large',
     isOpened: true,
     onClose: () => {
       alert('모달 닫기');
@@ -56,6 +57,6 @@ export const Dark: Story = {
       alert(`${value} 전달됨`)
     },
     placeholder: 'placeholder',
-    primaryColor: '#0076d0',
   },
 };
+

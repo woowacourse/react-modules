@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import ConfirmModal from '../ConfirmModal';
+import ConfirmModal from '../../ConfirmModal';
 
 const meta = {
   title: 'ConfirmModal/size',
