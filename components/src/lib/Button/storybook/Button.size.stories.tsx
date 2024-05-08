@@ -12,7 +12,7 @@ type Story = StoryObj<typeof meta>;
 
 export const Medium: Story = {
   args: {
-    text: '버튼입니다',
+    text: '버튼',
     onClick: () => {
       alert('버튼 클릭');
     },
@@ -21,7 +21,7 @@ export const Medium: Story = {
 
 export const Small: Story = {
   args: {
-    text: '버튼입니다',
+    text: '버튼',
     onClick: () => {
       alert('버튼 클릭');
     },
@@ -31,7 +31,7 @@ export const Small: Story = {
 
 export const Large: Story = {
   args: {
-    text: '버튼입니다',
+    text: '버튼',
     onClick: () => {
       alert('버튼 클릭');
     },

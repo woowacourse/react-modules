@@ -12,7 +12,7 @@ type Story = StoryObj<typeof meta>;
 
 export const Fixed: Story = {
   args: {
-    text: '버튼입니다',
+    text: '버튼',
     onClick: () => {
       alert('버튼 클릭');
     },
@@ -21,7 +21,7 @@ export const Fixed: Story = {
 
 export const Fit: Story = {
   args: {
-    text: '버튼입니다',
+    text: '버튼',
     onClick: () => {
       alert('버튼 클릭');
     },
@@ -33,7 +33,7 @@ export const Fit: Story = {
 
 export const Full: Story = {
   args: {
-    text: '버튼입니다',
+    text: '버튼',
     onClick: () => {
       alert('버튼 클릭');
     },

@@ -12,7 +12,7 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
-    text: '버튼입니다',
+    text: '버튼',
     onClick: () => {
       alert('버튼 클릭');
     },
@@ -21,7 +21,7 @@ export const Default: Story = {
 
 export const Bright: Story = {
   args: {
-    text: '버튼입니다',
+    text: '버튼',
     onClick: () => {
       alert('버튼 클릭');
     },
@@ -31,7 +31,7 @@ export const Bright: Story = {
 
 export const Dark: Story = {
   args: {
-    text: '버튼입니다',
+    text: '버튼',
     onClick: () => {
       alert('버튼 클릭');
     },
