@@ -20,8 +20,6 @@ const useRestrictedState = ({
     setErrorMessage(undefined);
   };
 
-  // TODO: reset 추가
-
   const setError = (errorMessage: string | undefined) => {
     if (!errorMessage) {
       resetError();
