@@ -1,4 +1,4 @@
-import { ChangeEvent, InputHTMLAttributes, useEffect, useRef, useState } from "react";
+import { ChangeEvent, InputHTMLAttributes, useEffect, useRef } from "react";
 import useRestrictedState from "./useRestrictedState";
 
 interface CustomInputAttributes extends Omit<InputHTMLAttributes<HTMLInputElement>, "required"> {
@@ -8,7 +8,6 @@ interface CustomInputAttributes extends Omit<InputHTMLAttributes<HTMLInputElemen
   customType?: "number" | "english";
   typeErrorMessage?: string;
   maxLengthErrorMessage?: string;
-  customErrorMessage?: string;
   value?: string;
 }
 
@@ -21,7 +20,6 @@ const useRegister = (
     typeErrorMessage,
     maxLength,
     maxLengthErrorMessage,
-    customErrorMessage,
     value,
   }: CustomInputAttributes = {}
 ) => {
@@ -33,15 +31,10 @@ const useRegister = (
   });
   const { value: builtInValue, setValue } = valueState;
   const { errorMessage, setError } = errorState;
-  const [customErrMsgState, setCustomErrMsg] = useState<string | undefined>(undefined);
 
   useEffect(() => {
     if (value) setValue(value);
   }, [value]);
-
-  useEffect(() => {
-    setCustomErrMsg(customErrorMessage);
-  }, [customErrorMessage]);
 
   const ref = useRef<HTMLInputElement>(null);
 
@@ -57,7 +50,7 @@ const useRegister = (
     requiredValidator(input);
   };
 
-  return { name, ref, value: builtInValue, onChange: onChangeWrapper, errorMessage: errorMessage ?? customErrMsgState };
+  return { name, ref, value: builtInValue, onChange: onChangeWrapper, errorMessage: errorMessage };
 };
 
 export default useRegister;
