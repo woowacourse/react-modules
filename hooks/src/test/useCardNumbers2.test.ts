@@ -2,6 +2,7 @@ import useCardNumbers2 from "@/lib/useCardNumbers2";
 import { renderHook } from "@testing-library/react";
 import React, { ChangeEvent } from "react";
 
+/*VISA : 4로 시작하는 16자리 숫자*/
 describe("VISA 카드사 번호 테스트", () => {
   const VISA_NUMBERS = ["4", "41"];
   test.each(VISA_NUMBERS)(
@@ -19,6 +20,7 @@ describe("VISA 카드사 번호 테스트", () => {
       });
     }
   );
+
   const INVALID_VISA_NUMBERS = ["3", "5"];
   test.each(INVALID_VISA_NUMBERS)(
     "%s를 입력하면 VISA 카드 번호 유효성 검사 테스트를 통과하지 않는다.",
@@ -37,6 +39,7 @@ describe("VISA 카드사 번호 테스트", () => {
   );
 });
 
+/*MASTER : 51~55로 시작하는 16자리 숫자*/
 describe("MASTER 카드사 번호 테스트", () => {
   const MASTER_NUMBERS = ["51", "52", "53", "54", "55"];
   test.each(MASTER_NUMBERS)(
@@ -72,6 +75,7 @@ describe("MASTER 카드사 번호 테스트", () => {
   );
 });
 
+/*AMEX : 34 또는 37로로 시작하는 15자리 숫자*/
 describe("AMEX 카드사 번호 테스트", () => {
   const AMEX_NUMBERS = ["34", "37"];
   test.each(AMEX_NUMBERS)(
@@ -106,7 +110,7 @@ describe("AMEX 카드사 번호 테스트", () => {
     }
   );
 });
-
+/*DINERS :36으로 시작하는 14자리 숫자*/
 describe("DINERS 카드사 번호 테스트", () => {
   const DINERS_NUMBERS = ["36", "361", "3623"];
   test.each(DINERS_NUMBERS)(
@@ -142,6 +146,7 @@ describe("DINERS 카드사 번호 테스트", () => {
   );
 });
 
+/*DINERS :622126~622925, 624~626,6282~6288로 시작하는 16자리 숫자*/
 describe("UNION_PAY 카드사 번호 테스트", () => {
   const UNION_PAY_NUMBERS = [
     "622126",
