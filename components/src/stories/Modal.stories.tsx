@@ -9,13 +9,16 @@ const meta: Meta<typeof Modal> = {
   title: 'Modal',
   component: Modal,
   argTypes: {
+    title: { control: 'text' },
+    size: {
+      control: { type: 'select', options: ['small', 'medium', 'large'] },
+    },
     position: {
       control: { type: 'select', options: ['center', 'bottom'] },
     },
     closeOption: {
       control: { type: 'select', options: ['icon', 'button'] },
     },
-    title: { control: 'text' },
   },
 };
 
