@@ -5,7 +5,7 @@ import styles from './ModalHeader.module.css';
 export interface ModalHeaderProps {
   title?: TitleProps;
   subtitle?: SubtitleProps;
-  closeButton?: CloseButtonProps;
+  closeButton: CloseButtonProps;
 }
 
 const ModalHeader = ({ title, subtitle, closeButton }: ModalHeaderProps) => {
@@ -14,7 +14,7 @@ const ModalHeader = ({ title, subtitle, closeButton }: ModalHeaderProps) => {
 
   return (
     <div className={styles['header']}>
-      {closeButton && (
+      {closeButton.display && (
         <button aria-label={'모달 닫기 버튼'} className={styles['button-close']} onClick={closeButton.onClose}>
           <CloseButtonImage />
         </button>
