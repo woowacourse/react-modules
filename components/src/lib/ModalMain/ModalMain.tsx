@@ -30,7 +30,7 @@ const ModalMain = ({
   return (
     <>
       <div
-        onClick={preventCloseOnOutsideClick ? () => {} : modalHeader.closeButton && modalHeader.closeButton.onClose}
+        onClick={preventCloseOnOutsideClick ? () => {} : modalHeader.closeButton.onClose}
         className={styles['backdrop']}
       />
       <section
