@@ -1,9 +1,10 @@
 import { css } from "@emotion/react";
 import COLOR_PALETTE from "../../colorPalette";
+import { StyleType } from "./MainButton";
 
-export const LongButtonPropsStyle = (isHighlight: boolean, theme: ThemeType) =>
+export const LongButtonPropsStyle = (isHighlight: boolean, theme: ThemeType, buttonType: StyleType) =>
   css({
-    width: "100%",
+    width: buttonType === "Short" ? "20%" : "100%",
     color: isHighlight ? COLOR_PALETTE[theme].colorHighlight : COLOR_PALETTE[theme].color,
     fontSize: "15px",
     fontWeight: "700",

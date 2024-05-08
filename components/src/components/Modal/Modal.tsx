@@ -3,7 +3,7 @@ import React, { MouseEventHandler, PropsWithChildren, ReactNode } from "react";
 import { buttonsStyle, modalContentStyle, modalStyle } from "./Modal.style";
 
 import ModalHeader from "../ModalHeader/ModalHeader";
-import LongButton from "../LongButton/LongButton";
+import LongButton from "../MainButton/MainButton";
 
 import ThemeProvider from "../ContextProvider/ThemeProvider";
 
