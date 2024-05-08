@@ -13,7 +13,6 @@
 - [x] confirm button 포지션 설정
 - [x] 모달의 width값 사용자에게 받기
 - [x] color theme값 사용자에게 받기
-- [ ] 다국어 지원을 생각한 메세지 상수화
 - [x] Trigger 컴포넌트를 하나 만들어서 dialog를 open하는 api를 제공하는 방식
 
 - [x] 스토리 북
@@ -26,4 +25,16 @@
 - [x] ModalHeader.md
 - [x] Title.md
 
-- [ ] 스크린샷 찍어서 이미지 업로드
+## Step2
+
+- [ ] 작은 confirm 버튼 cancel버튼 만들기
+
+- [ ] Alert 모달.
+  - title, Content만 제공 받기.
+  - 확인 버튼만 존재.
+- [ ] Confirm 모달.
+  - Title, Content제공 받기.
+  - 취소 확인 버튼이 둘 다 존재.
+- [ ] Prompt 모달.
+  - Form으로 구성된 모달.
+  - 취소 확인 버튼이 둘 다 존재.
