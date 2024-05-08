@@ -24,6 +24,8 @@ npm install styled-base-modal
 
 `position` : `center` | `bottom`;
 
+`size` : `small` | `medium` | `large`;
+
 `onClose` : 모달을 닫는 메서드 함수
 
 ## Children Components
@@ -61,7 +63,9 @@ npm install styled-base-modal
 onConfirm에 확인시 실행될 함수를 연결할 수 있습니다.
 
 > `label` : 해당 버튼에 들어갈 텍스트  
+> `size` : `small` | `medium` | `large`;
 > `onConfirm`: 확인 버튼 클릭시 실행될 사용자 정의 이벤트 핸들러
+> `...rest` : 다른 입력 태그 props
 
 ```tsx
 <Modal.ConfirmButton label="동의" onConfirm={handleConfirm} />
@@ -70,7 +74,20 @@ onConfirm에 확인시 실행될 함수를 연결할 수 있습니다.
 ### (5) CloseButton : 모달의 닫기 버튼
 
 > `label` : 해당 버튼에 들어갈 텍스트  
+> `size` : `small` | `medium` | `large`;
 > `onClose`: 닫기 버튼 클릭시 실행될 사용자 정의 이벤트 핸들러
+> `...rest` : 다른 입력 태그 props
+
+```tsx
+<Modal.CloseButton label="닫기" onClose={handleClose} />
+```
+
+### (6) PromptInput : 모달내 입력창
+
+> `value` : 입력창에 입력된 value
+> `placeholder` : 입력창 내부 `placeholder`;
+> `onChange`: 내부 value 변경될 시 실행될 사용자 정의 이벤트 핸들러
+> `...rest` : 다른 입력 태그 props
 
 ```tsx
 <Modal.CloseButton label="닫기" onClose={handleClose} />

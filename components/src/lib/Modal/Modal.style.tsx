@@ -34,7 +34,8 @@ const ModalContainer = styled.div<{
   left: 50%;
   transform: ${({ $position }) =>
     $position === 'center' ? 'translate(-50%, -50%)' : 'translate(-50%, 0%)'};
-  width: ${({ $size }) => sizeMap[$size]};
+  width: ${({ $size, $position }) =>
+    $position === 'center' ? sizeMap[$size] : '100%'};
   min-height: 150px;
   background-color: ${Theme.background.light};
   border-radius: ${({ $position }) =>
@@ -67,6 +68,8 @@ const CloseIcon = styled.button`
   justify-content: center;
   padding: 0;
   cursor: pointer;
+  background: none;
+  border: 0;
   position: absolute;
   top: 20px;
   right: 20px;
@@ -78,7 +81,7 @@ const Content = styled.div`
 `;
 
 const PromptInput = styled.input`
-  width: 100%;
+  width: calc(100% - 24px);
   height: 40px;
   padding: 0 10px;
   margin: 10px 0;
