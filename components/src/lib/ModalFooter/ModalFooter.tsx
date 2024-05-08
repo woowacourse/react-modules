@@ -20,8 +20,8 @@ const ModalFooter = ({ cancelButton, confirmButton, buttonsDirection, buttonsJus
       }}
       className={styles['button-container']}
     >
-      {confirmButton && <Modal.ConfirmButton {...confirmButton} />}
       {cancelButton && <Modal.CancelButton {...cancelButton} />}
+      {confirmButton && <Modal.ConfirmButton {...confirmButton} />}
     </div>
   );
 };
