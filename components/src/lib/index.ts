@@ -8,3 +8,5 @@ export const Modal = Object.assign(BaseModal, {
   Content: ModalContent,
   Footer: ModalFooter,
 });
+
+export { default as AlertModal } from './AlertModal';
