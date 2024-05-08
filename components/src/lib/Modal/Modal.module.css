@@ -16,23 +16,28 @@
 }
 
 .modalContainer {
-  width: 240px;
-  min-height: 168px;
-  max-height: 240px;
-  max-width: 375px;
   padding: 24px 32px;
   border-radius: 8px;
   background-color: #ffffff;
   z-index: 999;
 }
 
-.bottom {
-  align-items: flex-end;
+.modalSizeSmall {
+  width: 256px;
+}
+
+.modalSizeMedium {
+  width: 416px;
+}
+
+.modalSizeLarge {
+  width: 536px;
 }
 
 .modalContainerBottom {
   width: 100%;
   border-radius: 8px 8px 0px 0px;
+  align-items: flex-end;
 }
 
 /* modal header */
