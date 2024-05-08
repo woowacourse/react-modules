@@ -22,7 +22,7 @@ export interface CloseButtonProps {
 export interface ConfirmButtonProps {
   backgroundColor?: CSSProperties['backgroundColor'];
   fontColor?: CSSProperties['color'];
-  buttonSize?: SizeProps;
+  buttonSize?: Pick<SizeProps, 'width' | 'height'>;
   content: string;
   onConfirm: () => void;
 }
@@ -30,7 +30,7 @@ export interface ConfirmButtonProps {
 export interface CancelButtonProps {
   backgroundColor?: CSSProperties['backgroundColor'];
   fontColor?: CSSProperties['color'];
-  buttonSize?: SizeProps;
+  buttonSize?: Pick<SizeProps, 'width' | 'height'>;
   content: string;
   onCancel: () => void;
 }
