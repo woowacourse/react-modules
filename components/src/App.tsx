@@ -39,6 +39,7 @@ function App() {
       <Modal
         isOpen={isOpenCenterModal}
         position="center"
+        zIndex={100}
         onClose={() => setIsOpenCenterModal(false)}
       >
         <Modal.Header
