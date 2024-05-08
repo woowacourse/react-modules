@@ -7,6 +7,7 @@
 - ### Modal
 
   - `position`: `bottom | center | top` 입력 값에 따라 모달 중앙, 하단 배치
+  - `size` : `small | medium | large` 입력 값에 따라 모달 크기 조절
   - `title`: 모달 제목 설정
   - `children`: 하위 요소 전달
   - `isOpen`: `true | false`에 따라 모달 렌더링

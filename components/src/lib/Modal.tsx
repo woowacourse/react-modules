@@ -6,6 +6,7 @@ import ModalFooter from "./ModalFooter";
 import { ButtonProps } from "./Button/Button";
 
 type PositionProps = "top" | "center" | "bottom";
+type SizeProps = "small" | "medium" | "large";
 
 export interface TitleProps {
   position: "left" | "center";
@@ -18,6 +19,7 @@ export interface CloseButtonProps {
 
 interface ModalProps {
   position: PositionProps;
+  size: SizeProps;
   title?: TitleProps;
   isOpen: boolean;
   onClose: () => void;
@@ -27,6 +29,7 @@ interface ModalProps {
 
 const Modal = ({
   position,
+  size,
   title,
   children,
   isOpen,
@@ -39,7 +42,7 @@ const Modal = ({
       {isOpen && (
         <div className={`${styles.container} ${styles[position]}`}>
           <div className={styles.backDrop} onClick={onClose}></div>
-          <div className={`${styles.modalSection}`}>
+          <div className={`${styles.modalSection} ${styles[size]}`}>
             <ModalHeader title={title} closeButton={closeButton} />
             <ModalContent children={children} />
             {footerButtons && <ModalFooter buttons={footerButtons} />}
