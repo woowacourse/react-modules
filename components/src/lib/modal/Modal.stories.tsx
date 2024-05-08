@@ -37,6 +37,11 @@ const meta = {
       },
       description: "모달 스타일을 자유롭게 정의하는 속성",
     },
+    size: {
+      control: { type: "radio" },
+      options: ["S", "M", "L"],
+      description: "모달의 크기(너비)를 조정하는 속성",
+    },
     position: {
       control: { type: "radio" },
       options: ["top", "bottom", "center"],
@@ -103,6 +108,7 @@ export const 제목이_있는_모달: Story = {
 export const 상단_닫기_버튼이_있는_모달: Story = {
   args: {
     isOpen: true,
+    size: "M",
     position: "center",
     onClose: fn(),
   },
@@ -115,7 +121,12 @@ export const 상단_닫기_버튼이_있는_모달: Story = {
   },
 
   render: (args) => (
-    <Modal isOpen={args.isOpen} onClose={args.onClose} position={args.position}>
+    <Modal
+      isOpen={args.isOpen}
+      onClose={args.onClose}
+      size={"M"}
+      position={args.position}
+    >
       <Modal.ModalHeader>
         <Modal.ModalTitle>올리와 썬데이</Modal.ModalTitle>
         <Modal.ModalCloseButton onClick={args.onClose}>
@@ -132,6 +143,7 @@ export const 상단_닫기_버튼이_있는_모달: Story = {
 export const 하단_닫기_버튼이_있는_모달: Story = {
   args: {
     isOpen: true,
+    size: "M",
     position: "center",
     onClose: fn(),
   },
@@ -144,12 +156,122 @@ export const 하단_닫기_버튼이_있는_모달: Story = {
   },
 
   render: (args) => (
-    <Modal isOpen={args.isOpen} onClose={args.onClose} position={args.position}>
+    <Modal
+      isOpen={args.isOpen}
+      onClose={args.onClose}
+      size={"M"}
+      position={args.position}
+    >
       <Modal.ModalHeader>
         <Modal.ModalTitle>올리와 썬데이</Modal.ModalTitle>
       </Modal.ModalHeader>
       <Modal.ModalContent>
         <span>올리와 썬데이의 하단 닫기 버튼이 있는 모달</span>
+      </Modal.ModalContent>
+      <Modal.ModalFooter>
+        <Modal.ModalLongButton>확인</Modal.ModalLongButton>
+      </Modal.ModalFooter>
+    </Modal>
+  ),
+};
+
+export const S_사이즈_모달: Story = {
+  args: {
+    isOpen: true,
+    size: "S",
+    position: "center",
+    onClose: fn(),
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: "S 사이즈 모달",
+      },
+    },
+  },
+
+  render: (args) => (
+    <Modal
+      isOpen={args.isOpen}
+      onClose={args.onClose}
+      size={"S"}
+      position={args.position}
+    >
+      <Modal.ModalHeader>
+        <Modal.ModalTitle>작은 사이즈의 모달!</Modal.ModalTitle>
+      </Modal.ModalHeader>
+      <Modal.ModalContent>
+        <span>작은 모달</span>
+      </Modal.ModalContent>
+      <Modal.ModalFooter>
+        <Modal.ModalLongButton>확인</Modal.ModalLongButton>
+      </Modal.ModalFooter>
+    </Modal>
+  ),
+};
+
+export const M_사이즈_모달: Story = {
+  args: {
+    isOpen: true,
+    size: "M",
+    position: "center",
+    onClose: fn(),
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: "M 사이즈 모달",
+      },
+    },
+  },
+
+  render: (args) => (
+    <Modal
+      isOpen={args.isOpen}
+      onClose={args.onClose}
+      size={"M"}
+      position={args.position}
+    >
+      <Modal.ModalHeader>
+        <Modal.ModalTitle>보통 사이즈의 모달!</Modal.ModalTitle>
+      </Modal.ModalHeader>
+      <Modal.ModalContent>
+        <span>평범한 모달</span>
+      </Modal.ModalContent>
+      <Modal.ModalFooter>
+        <Modal.ModalLongButton>확인</Modal.ModalLongButton>
+      </Modal.ModalFooter>
+    </Modal>
+  ),
+};
+
+export const L_사이즈_모달: Story = {
+  args: {
+    isOpen: true,
+    size: "L",
+    position: "center",
+    onClose: fn(),
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: "L 사이즈 모달",
+      },
+    },
+  },
+
+  render: (args) => (
+    <Modal
+      isOpen={args.isOpen}
+      onClose={args.onClose}
+      size={"M"}
+      position={args.position}
+    >
+      <Modal.ModalHeader>
+        <Modal.ModalTitle>큰 사이즈의 모달!</Modal.ModalTitle>
+      </Modal.ModalHeader>
+      <Modal.ModalContent>
+        <span>큰 모달</span>
       </Modal.ModalContent>
       <Modal.ModalFooter>
         <Modal.ModalLongButton>확인</Modal.ModalLongButton>
