@@ -88,7 +88,27 @@ export const SmallModal: Story = {
   render: (args) => {
     return (
       <Modal {...args}>
-        <div>contents</div>
+        <Modal.Header
+          title="Small Modal"
+          onClose={() => alert('close!')}
+        />
+        <Modal.Content>
+          <div>contents</div>
+        </Modal.Content>
+        <Modal.Footer>
+          <Modal.Footer.Button
+            style="primary"
+            onClick={() => alert('Clicked primary button!')}
+          >
+            Primary Button
+          </Modal.Footer.Button>
+          <Modal.Footer.Button
+            style="secondary"
+            onClick={() => alert('Clicked secondary button!')}
+          >
+            Secondary Button
+          </Modal.Footer.Button>
+        </Modal.Footer>
       </Modal>
     );
   },
@@ -99,7 +119,27 @@ export const MediumModal: Story = {
   render: (args) => {
     return (
       <Modal {...args}>
-        <div>contents</div>
+        <Modal.Header
+          title="Medium Modal"
+          onClose={() => alert('close!')}
+        />
+        <Modal.Content>
+          <div>contents</div>
+        </Modal.Content>
+        <Modal.Footer>
+          <Modal.Footer.Button
+            style="primary"
+            onClick={() => alert('Clicked primary button!')}
+          >
+            Primary Button
+          </Modal.Footer.Button>
+          <Modal.Footer.Button
+            style="secondary"
+            onClick={() => alert('Clicked secondary button!')}
+          >
+            Secondary Button
+          </Modal.Footer.Button>
+        </Modal.Footer>
       </Modal>
     );
   },
@@ -110,7 +150,27 @@ export const LargeModal: Story = {
   render: (args) => {
     return (
       <Modal {...args}>
-        <div>contents</div>
+        <Modal.Header
+          title="Large Modal"
+          onClose={() => alert('close!')}
+        />
+        <Modal.Content>
+          <div>contents</div>
+        </Modal.Content>
+        <Modal.Footer>
+          <Modal.Footer.Button
+            style="primary"
+            onClick={() => alert('Clicked primary button!')}
+          >
+            Primary Button
+          </Modal.Footer.Button>
+          <Modal.Footer.Button
+            style="secondary"
+            onClick={() => alert('Clicked secondary button!')}
+          >
+            Secondary Button
+          </Modal.Footer.Button>
+        </Modal.Footer>
       </Modal>
     );
   },
