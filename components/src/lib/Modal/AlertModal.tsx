@@ -72,6 +72,7 @@ const AlertModal = ({
                 text={'확인'}
                 onClick={onClose}
                 size={'small'}
+                width={modalPosition === 'bottom' || buttonPosition === 'column' ? 'full' : 'fixed'}
                 buttonStyle={'primary'}
                 primaryColor={
                   primaryColor ?? '#333333'
