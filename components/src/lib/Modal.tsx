@@ -1,9 +1,15 @@
 import { ReactNode, MouseEvent, CSSProperties, useEffect } from "react";
+import { Modal } from "../lib";
 import "./Modal.css";
 
 interface ModalMainProps {
-  onClose: () => void;
   isOpen: boolean;
+  onClose: () => void;
+  onConfirm?: () => void;
+  onCancel?: () => void;
+  onSubmit?: () => void;
+  type?: "alert" | "confirm" | "prompt" | "";
+  size?: "small" | "medium" | "large" | "";
   position?: "center" | "bottom";
   className?: string;
   zIndex?: number;
@@ -12,7 +18,7 @@ interface ModalMainProps {
   portalRoot?: HTMLElement | null;
 }
 
-export function ModalMain({ onClose, isOpen, position = "center", className = "", zIndex = 999, customStyle = {}, children, portalRoot = document.body }: ModalMainProps) {
+export function ModalMain({ isOpen, onClose, onConfirm, onCancel, onSubmit, type = "", size = "", position = "center", className = "", zIndex = 999, customStyle = {}, children, portalRoot = document.body }: ModalMainProps) {
   if (!portalRoot) portalRoot = document.body;
 
   useEffect(() => {
@@ -20,8 +26,6 @@ export function ModalMain({ onClose, isOpen, position = "center", className = ""
   }, [isOpen, portalRoot]);
 
   if (!isOpen) return null;
-
-  portalRoot.style.overflow = isOpen ? "hidden" : "auto";
 
   const handleModalContainerClick = (event: MouseEvent<HTMLDivElement>) => {
     event.stopPropagation();
@@ -34,11 +38,18 @@ export function ModalMain({ onClose, isOpen, position = "center", className = ""
         onClick={onClose}
       ></div>
       <div
-        className={`modal-content-container ${position} ${className}`}
+        className={`modal-content-container ${position} ${size} ${className}`}
         style={{ zIndex, ...customStyle }}
         onClick={handleModalContainerClick}
       >
         {children}
+        <Modal.ButtonContainer
+          type={type}
+          onConfirm={onConfirm}
+          onCancel={onCancel}
+          onClose={onClose}
+          onSubmit={onSubmit}
+        />
       </div>
     </div>
   );

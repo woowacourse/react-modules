@@ -17,31 +17,38 @@
 }
 
 .modal-content-container {
-  box-sizing: content-box;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
   background: #ffffff;
   padding: 24px 32px;
-  overflow: auto;
 }
 
-.container::-webkit-scrollbar {
-  display: none;
+/* size */
+.modal-content-container.small {
+  width: 320px;
 }
 
-.container > :last-child {
-  margin-bottom: 50px;
+.modal-content-container.medium {
+  width: 480px;
 }
 
-.center {
+.modal-content-container.large {
+  width: 600px;
+}
+
+/* position */
+.modal-content-container.center {
   position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   width: 304px;
-  height: 216px;
+  max-height: 216px;
   border-radius: 8px;
 }
 
-.bottom {
+.modal-content-container.bottom {
   position: fixed;
   left: 0;
   bottom: 0;
