@@ -30,7 +30,7 @@ export const CARD_BRAND: Omit<CardBrand, 'etc'> = {
       { from: 624, to: 626 },
       { from: 6282, to: 6282 },
     ],
-    segmentLength: 16,
+    segmentLength: [4, 4, 4, 4],
   },
 };
 

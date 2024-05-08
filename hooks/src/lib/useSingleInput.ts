@@ -57,6 +57,7 @@ export default function useSingleInput({ initialValue, validations }: UseSingleI
     setValue,
     isValid: !errorMessage,
     errorMessage,
+    setErrorMessage,
     handleChange,
     handleBlur,
   };

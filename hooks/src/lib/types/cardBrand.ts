@@ -5,7 +5,7 @@ type Prefix = number | { from: number; to: number };
 interface CardBrandConfig {
   cardNumberCount: number;
   prefixes: Prefix[];
-  segmentLength: number[] | number;
+  segmentLength: number[];
 }
 
 type CardBrand = {
