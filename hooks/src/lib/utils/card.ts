@@ -1,4 +1,5 @@
-export type CardType = 'DEFAULT' | 'VISA' | 'MASTERCARD' | 'DINERS' | 'AMEX' | 'UNIONPAY';
+import { CARD_TYPE } from '../constants/Condition';
+import type { CardType } from '../types/common.type';
 
 export const getCardType = (cardNumber: string): CardType => {
   const firstDigits = cardNumber.charAt(0);
@@ -29,16 +30,13 @@ export const getCardType = (cardNumber: string): CardType => {
 };
 
 export const formatCardNumber = (cardType: CardType, cardNumber: string) => {
-  if (cardType === 'DINERS' || cardType === 'AMEX') {
-    const formatted = [cardNumber.slice(0, 4), cardNumber.slice(4, 10), cardNumber.slice(10)];
-    return formatted.filter((el) => el).join(' ');
-  }
+  const formattedCardNumber: string[] = [];
 
-  const formatted = [
-    cardNumber.slice(0, 4),
-    cardNumber.slice(4, 8),
-    cardNumber.slice(8, 12),
-    cardNumber.slice(12),
-  ];
-  return formatted.filter((el) => el).join(' ');
+  let index = 0;
+
+  CARD_TYPE[cardType].PATTERN.forEach((length) => {
+    formattedCardNumber.push(cardNumber.slice(index, (index += length)));
+  });
+
+  return formattedCardNumber.filter(Boolean).join(' ');
 };

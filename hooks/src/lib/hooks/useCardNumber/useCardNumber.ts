@@ -1,6 +1,8 @@
 import { useState } from 'react';
+
 import useCardType from '../useCardType/useCardType';
-import { CardType, formatCardNumber } from '../../utils/card';
+import type { CardType } from '../../types/common.type';
+import { formatCardNumber } from '../../utils/card';
 import { getNumberErrorMessage, isNotNumber } from '../../utils/validation/validation';
 
 import { CARD_TYPE } from '../../constants/Condition';
@@ -10,7 +12,10 @@ const useCardNumber = (initialValue: string = '') => {
   const [isValidCardNumber, setIsValidCardNumber] = useState(false);
   const [cardNumberErrorMessage, setCardNumberErrorMessage] = useState('');
 
-  const { cardType, handleCardType } = useCardType();
+  const {
+    cardType,
+    handleCardType,
+  }: { cardType: CardType; handleCardType: (cardNumber: string) => void } = useCardType();
 
   const handleCardNumberChange = (number: string) => {
     const numberCopy = number.replace(/\s/g, '');
@@ -23,7 +28,7 @@ const useCardNumber = (initialValue: string = '') => {
 
     setCardNumberErrorMessage(errorMessage);
     setIsValidCardNumber(!errorMessage);
-    setCardNumber(formatCardNumber(cardType as CardType, numberCopy));
+    setCardNumber(formatCardNumber(cardType, numberCopy));
   };
 
   return {
