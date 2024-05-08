@@ -1,8 +1,6 @@
 import Theme from '../../style/theme';
 import styled from 'styled-components';
-import { ModalSize } from './Modal';
-
-export type ModalPosition = 'center' | 'bottom';
+import { ModalPosition, Size } from './Modal';
 
 const ModalWrapper = styled.div<{ open: boolean }>`
   position: fixed;
@@ -28,7 +26,7 @@ const sizeMap = {
 
 const ModalContainer = styled.div<{
   $position: ModalPosition;
-  $modalSize: ModalSize;
+  $size: Size;
 }>`
   position: fixed;
   top: ${({ $position }) => $position === 'center' && '50%'};
@@ -36,7 +34,7 @@ const ModalContainer = styled.div<{
   left: 50%;
   transform: ${({ $position }) =>
     $position === 'center' ? 'translate(-50%, -50%)' : 'translate(-50%, 0%)'};
-  width: ${({ $modalSize }) => sizeMap[$modalSize]};
+  width: ${({ $size }) => sizeMap[$size]};
   min-height: 150px;
   background-color: ${Theme.background.light};
   border-radius: ${({ $position }) =>
@@ -75,10 +73,22 @@ const CloseIcon = styled.button`
 `;
 
 const Content = styled.div`
+  width: 100%;
   margin-bottom: 10px;
 `;
 
-const ConfirmButton = styled.button``;
+const PromptInput = styled.input`
+  width: 100%;
+  height: 40px;
+  padding: 0 10px;
+  margin: 10px 0;
+  border: 1px solid ${Theme.colors.grey};
+  border-radius: 4px;
+
+  &:focus {
+    border: 1px solid ${Theme.colors.black};
+  }
+`;
 
 const S = {
   ModalWrapper,
@@ -86,9 +96,9 @@ const S = {
   ModalBackground,
   ModalHeader,
   CloseIcon,
-  ConfirmButton,
   Content,
   ModalContainer,
+  PromptInput,
 };
 
 export default S;
