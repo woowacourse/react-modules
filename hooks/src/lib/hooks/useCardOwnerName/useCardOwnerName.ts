@@ -42,7 +42,7 @@ const useCardOwnerName = (maxLength: number = MAX_NAME_LENGTH, initialName: stri
     if (validOwnerName.length > maxLength) return;
 
     setOwnerName(validOwnerName);
-    setIsValidOwnerName(validOwnerName.length >= 1);
+    setIsValidOwnerName(validOwnerName.length <= maxLength && errorMessage === '');
   };
 
   return {
