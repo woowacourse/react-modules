@@ -1,25 +1,41 @@
 import styled from "styled-components";
 import Button from "./Button";
 import { BUTTON_COLOR } from "./constant/color";
+import { ButtonPosition, ButtonSize, ModalButtonLayout } from "./modalType";
 
 interface Props {
-  buttonLayout?: string;
+  buttonLayout: ModalButtonLayout;
   closeButtonContent?: string;
   confirmButtonContent?: string;
   handleConfirmEvent?: (e: React.MouseEvent) => void;
   handleCloseEvent: (e: React.MouseEvent) => void;
+  buttonSize: ButtonSize;
+  buttonPosition: ButtonPosition;
 }
+
+const getButtonPosition = {
+  left: "flex-start",
+  center: "center",
+  right: "flex-end",
+};
+
 const ButtonBox = ({
   buttonLayout,
+  buttonPosition,
   closeButtonContent,
   confirmButtonContent,
   handleConfirmEvent,
   handleCloseEvent,
+  buttonSize,
 }: Props) => {
   return (
-    <ButtonContainer $buttonLayout={buttonLayout}>
+    <ButtonContainer
+      $buttonLayout={buttonLayout}
+      $buttonPosition={buttonPosition}
+    >
       {confirmButtonContent && handleConfirmEvent && (
         <Button
+          buttonSize={buttonSize}
           content={confirmButtonContent}
           style={BUTTON_COLOR.defaultButton}
           handleClick={handleConfirmEvent}
@@ -27,6 +43,7 @@ const ButtonBox = ({
       )}
       {closeButtonContent && (
         <Button
+          buttonSize={buttonSize}
           content={closeButtonContent}
           style={BUTTON_COLOR.closeButton}
           handleClick={handleCloseEvent}
@@ -36,10 +53,13 @@ const ButtonBox = ({
   );
 };
 
-const ButtonContainer = styled.div<{ $buttonLayout?: string }>`
+const ButtonContainer = styled.div<{
+  $buttonLayout: ModalButtonLayout;
+  $buttonPosition: ButtonPosition;
+}>`
   display: flex;
   flex-direction: ${(props) => props.$buttonLayout};
-  background-color: white;
+  justify-content: ${(props) => getButtonPosition[props.$buttonPosition]};
   gap: 12px;
 
   border-radius: 8px;
