@@ -15,7 +15,7 @@ type Position = 'bottom' | 'center';
 
 interface Props {
   position?: Position;
-  size: Size;
+  size?: Size;
   children?: ReactNode;
   dimmed?: string;
 

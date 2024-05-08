@@ -33,7 +33,7 @@ function App() {
             </Modal.Button>
           </Modal.Header>
           <Modal.Body>
-            <div>예시입니다.</div>
+            <input style={{ width: '100%' }}></input>
           </Modal.Body>
           <Modal.Footer>
             <Modal.Button onClick={handleClose}>취소</Modal.Button>
@@ -52,8 +52,8 @@ export const Temp = styled.div`
 `;
 
 export const Wide = styled.div`
-  width: 400px;
-  height: 500vh;
+  width: 2000px;
+  height: 50vh;
   background-color: red;
 `;
 
