@@ -143,7 +143,10 @@ export const Default: Story = {
             <footer>
               <Modal.Button
                 theme={confirmButtonTheme}
-                onClick={() => alert("modal button clicked!")}
+                onClick={() => {
+                  alert("modal button clicked!");
+                  onClose();
+                }}
               >
                 {confirmButtonText}
               </Modal.Button>
@@ -201,7 +204,10 @@ export const AlertModal: Story = {
               <Modal.Button
                 theme={confirmButtonTheme}
                 size={buttonSize}
-                onClick={() => alert("modal button clicked!")}
+                onClick={() => {
+                  alert("modal confirm button clicked!");
+                  onClose();
+                }}
               >
                 {confirmButtonText}
               </Modal.Button>
@@ -263,7 +269,10 @@ export const ConfirmModal: Story = {
               <Modal.Button
                 theme={confirmButtonTheme}
                 size={buttonSize}
-                onClick={() => alert("modal button clicked!")}
+                onClick={() => {
+                  alert("modal confirm button clicked!");
+                  onClose();
+                }}
               >
                 {confirmButtonText}
               </Modal.Button>
@@ -271,7 +280,92 @@ export const ConfirmModal: Story = {
                 style={{ marginRight: "12px" }}
                 theme={cancelButtonTheme}
                 size={buttonSize}
-                onClick={() => alert("modal button clicked!")}
+                onClick={() => {
+                  alert("modal cancel button clicked!");
+                  onClose();
+                }}
+              >
+                {cancelButtonText}
+              </Modal.Button>
+            </footer>
+          </Modal.Content>
+        </Modal>
+      </>
+    );
+  },
+};
+
+export const PromptModal: Story = {
+  args: {
+    isOpen: false,
+    position: "center",
+    contentSize: "medium",
+    title: "쿠폰 번호를 입력해 주세요.",
+    confirmButtonText: "확인",
+    cancelButtonText: "취소",
+    confirmButtonTheme: "dark",
+    cancelButtonTheme: "light",
+    buttonSize: "small",
+  },
+
+  render: ({
+    position,
+    contentSize,
+    title,
+    cancelButtonText,
+    confirmButtonText,
+    confirmButtonTheme,
+    cancelButtonTheme,
+    buttonSize,
+  }: ModalStoryProps) => {
+    const [args, updateArgs] = useArgs();
+    const [inputValue, setInputValue] = React.useState("");
+
+    const onOpen = () => {
+      updateArgs({ isOpen: true });
+    };
+    const onClose = () => {
+      updateArgs({ isOpen: false });
+    };
+
+    return (
+      <>
+        <button onClick={onOpen}>Open Modal</button>
+        <Modal isOpen={args.isOpen} onClose={onClose}>
+          <Modal.Dimmer />
+          <Modal.Content position={position} size={contentSize}>
+            <header>
+              <h2 style={{ margin: 0, fontSize: "18px", fontWeight: 700 }}>{title}</h2>
+            </header>
+            <Modal.Input
+              placeholder="123412341234"
+              value={inputValue}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                setInputValue(e.target.value);
+              }}
+              style={{ margin: "14px 0" }}
+            />
+            <footer style={{ display: "flex", flexDirection: "row-reverse" }}>
+              <Modal.Button
+                theme={confirmButtonTheme}
+                size={buttonSize}
+                onClick={() => {
+                  alert(`modal confirm button clicked with the value of ${inputValue}!`);
+                  setInputValue("");
+                  onClose();
+                }}
+              >
+                {confirmButtonText}
+              </Modal.Button>
+              <Modal.Button
+                style={{ marginRight: "12px" }}
+                theme={cancelButtonTheme}
+                size={buttonSize}
+                onClick={() => {
+                  alert("modal cancel button clicked!");
+                  setInputValue("");
+                  onClose();
+                }}
               >
                 {cancelButtonText}
               </Modal.Button>
