@@ -126,7 +126,7 @@ function App() {
             onBlur={event => {
               cardNumbersInfo.runValidationFieldRulesByBlur(event, 'first');
             }}
-            aria-invalid={!cardNumbersInfo.validationResult.first}
+            aria-invalid={!cardNumbersInfo.validationResult.first.isValid}
             maxLength={4}
           />
           <input
@@ -138,7 +138,7 @@ function App() {
             onBlur={event => {
               cardNumbersInfo.runValidationFieldRulesByBlur(event, 'second');
             }}
-            aria-invalid={!cardNumbersInfo.validationResult.second}
+            aria-invalid={!cardNumbersInfo.validationResult.second.isValid}
             maxLength={4}
           />
           <input
