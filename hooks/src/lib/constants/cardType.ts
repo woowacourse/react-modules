@@ -24,6 +24,16 @@ export const CARD_TYPE = {
     MAX_LENGTH: 16,
     PATTERN: [4, 4, 4, 4],
   },
+  JCB: {
+    REGEX: '^35(28|89)',
+    MAX_LENGTH: 16,
+    PATTERN: [4, 4, 4, 4],
+  },
+  DISCOVER: {
+    REGEX: '^(6011|65|64[4-9])',
+    MAX_LENGTH: 16,
+    PATTERN: [4, 4, 4, 4],
+  },
   UNKNOWN: {
     MAX_LENGTH: 16,
     PATTERN: [4, 4, 4, 4],
