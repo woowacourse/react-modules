@@ -6,6 +6,7 @@ import {
   ModalCloseButtonProps,
   ModalContentProps,
   ModalDimmerProps,
+  ModalInputProps,
   ModalMainProps,
 } from "./types/modalProps";
 import style from "./Modal.module.css";
@@ -16,6 +17,7 @@ interface IModal extends React.FC<ModalMainProps> {
   Content: React.FC<ModalContentProps>;
   CloseButton: React.FC<ModalCloseButtonProps>;
   Button: React.FC<ModalButtonProps>;
+  Input: React.FC<ModalInputProps>;
 }
 
 export const Modal: IModal = Object.assign(ModalMain, {
@@ -23,6 +25,7 @@ export const Modal: IModal = Object.assign(ModalMain, {
   Content: ModalContent,
   CloseButton: ModalCloseButton,
   Button: ModalButton,
+  Input: ModalInput,
 });
 
 function ModalMain({ children, isOpen, onClose }: ModalMainProps) {
@@ -54,7 +57,7 @@ function ModalContent({
   );
 }
 
-function ModalCloseButton(attributes: ModalCloseButtonProps) {
+function ModalCloseButton({ length = "14px", ...attributes }: ModalCloseButtonProps) {
   const { onClose } = useModalContext();
 
   return (
@@ -63,6 +66,8 @@ function ModalCloseButton(attributes: ModalCloseButtonProps) {
       aria-label="모달창 닫기"
       className={style.ModalCloseButton}
       onClick={onClose}
+      width={length}
+      height={length}
       {...attributes}
     />
   );
@@ -79,4 +84,8 @@ function ModalButton({
       {children}
     </button>
   );
+}
+
+function ModalInput(attributes: ModalInputProps) {
+  return <input className={style.ModalInput} {...attributes} />;
 }

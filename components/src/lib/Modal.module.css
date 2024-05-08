@@ -69,8 +69,6 @@
   background-color: transparent;
   cursor: pointer;
   background-size: contain;
-  width: 14px;
-  height: 14px;
   position: absolute;
   top: 24px;
   right: 32px;
@@ -108,5 +106,24 @@
   &.large {
     width: 100%;
     min-height: 44px;
+  }
+}
+
+/* ModalInput */
+.ModalInput {
+  border: 1.01px solid #000000;
+  border-radius: 2px;
+  padding: 8px;
+  font-size: 11px;
+  width: 100%;
+  box-sizing: border-box;
+  margin-bottom: 16px;
+
+  &::placeholder {
+    color: #b0b0b0;
+  }
+
+  &:focus {
+    outline: none;
   }
 }
