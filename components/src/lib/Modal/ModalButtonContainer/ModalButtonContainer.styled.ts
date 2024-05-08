@@ -6,5 +6,5 @@ export const StyledButtonContainer = styled.div<{
   display: flex;
   flex-direction: ${(props) =>
     props.buttonPosition === 'row' ? 'row-reverse' : 'column'};
-  gap: 16px;
+  gap: 12px;
 `;

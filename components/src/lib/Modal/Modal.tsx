@@ -11,7 +11,6 @@ import ModalDescription from './ModalDescription/ModalDescription';
 import ModalButtonContainer from './ModalButtonContainer/ModalButtonContainer';
 
 interface ModalProps {
-  type?: ModalTypes;
   size?: ModalSize;
   isOpened: boolean;
   onClose: () => void;
@@ -28,7 +27,6 @@ interface ModalProps {
 }
 
 const Modal = ({
-  type = 'custom',
   size = 'small',
   isOpened,
   onClose,
@@ -78,7 +76,7 @@ const Modal = ({
                 <Button
                   text={primaryButton.text}
                   onClick={primaryButton.onClick}
-                  size={primaryButton.size ?? 'medium'}
+                  size={primaryButton.size ?? 'small'}
                   width={primaryButton.width ?? 'full'}
                   buttonStyle={primaryButton.buttonStyle ?? 'primary'}
                   primaryColor={
@@ -90,7 +88,7 @@ const Modal = ({
                 <Button
                   text={secondaryButton.text}
                   onClick={secondaryButton.onClick ?? onClose}
-                  size={secondaryButton.size ?? 'medium'}
+                  size={secondaryButton.size ?? 'small'}
                   width={secondaryButton.width ?? 'full'}
                   buttonStyle={secondaryButton.buttonStyle ?? 'border'}
                   primaryColor={
