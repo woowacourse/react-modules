@@ -51,6 +51,8 @@ const usePassword = (initialValue: { password: string }) => {
 
   const handleCardNumberEnter = (e: KeyboardEvent<HTMLInputElement>) => {
     if (e.key !== "Enter") return;
+    e.currentTarget.blur();
+
     handlePasswordValidator(e);
   };
 

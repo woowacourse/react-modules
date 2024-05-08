@@ -51,6 +51,8 @@ const useCVC = (initialValue: { cvc: string }) => {
 
   const handleCvcEnter = (e: KeyboardEvent<HTMLInputElement>) => {
     if (e.key !== "Enter") return;
+    e.currentTarget.blur();
+
     handleCvcValidator(e);
   };
 

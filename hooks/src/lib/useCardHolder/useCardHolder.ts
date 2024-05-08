@@ -51,6 +51,8 @@ const useCardHolder = (initialValue: { cardHolder: string }) => {
 
   const handleCardHolderEnter = (e: KeyboardEvent<HTMLInputElement>) => {
     if (e.key !== "Enter") return;
+    e.currentTarget.blur();
+
     handleCardHolderValidator(e);
   };
 

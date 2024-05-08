@@ -73,6 +73,8 @@ const useExpiryDate = (initialValue: ExpiryDateValue) => {
 
   const handleExpiryDateEnter = (e: KeyboardEvent<HTMLInputElement>) => {
     if (e.key !== "Enter") return;
+    e.currentTarget.blur();
+
     handleExpiryDateValidator(e);
   };
 

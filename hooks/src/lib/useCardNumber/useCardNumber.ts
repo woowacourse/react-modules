@@ -57,6 +57,7 @@ const useCardNumber = (initialValue: { cardNumber: string }) => {
   const handleCardNumberEnter = (e: KeyboardEvent<HTMLInputElement>) => {
     if (e.key !== "Enter") return;
     e.currentTarget.blur();
+
     handleCardNumberValidator(e);
   };
 
