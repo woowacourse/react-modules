@@ -1,27 +1,28 @@
 import { useState } from "react";
 import useCardNumberValidation from "./validation/useCardNumberValidation";
 
-type CardNumberName =
-  | "cardNumber1"
-  | "cardNumber2"
-  | "cardNumber3"
-  | "cardNumber4";
+type CardNumberName = "cardNumber";
 
 const useCardNumberInput = () => {
-  const { cardNumberValidation, isCardNumberValid } = useCardNumberValidation();
+  const { getCardNumberErrorState } = useCardNumberValidation();
 
   const [cardNumber, setCardNumber] = useState({
     value: {
-      cardNumber1: "",
-      cardNumber2: "",
-      cardNumber3: "",
-      cardNumber4: "",
+      cardNumber: "",
     },
-    ...cardNumberValidation,
+    errorMessage: { cardNumber: "" },
+    isError: { cardNumber: false },
   });
 
   const handleCardNumberChange = (value: string, name: CardNumberName) => {
-    if (isCardNumberValid(value, name)) return;
+    const errorState = getCardNumberErrorState(value);
+    if (errorState) {
+      setCardNumber({
+        value: { cardNumber: cardNumber.value.cardNumber },
+        ...errorState,
+      });
+      return;
+    }
     setCardNumber({
       errorMessage: { ...cardNumber.value, [name]: "" },
       isError: { ...cardNumber.isError, [name]: false },
