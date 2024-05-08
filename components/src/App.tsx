@@ -1,8 +1,9 @@
 import { useRef, useState } from 'react';
 import './App.css';
 
-import { BottomModal, Modal } from './lib';
-import { usePosition } from './lib/hooks/';
+import { BottomModal, CenterModal, usePosition } from './lib';
+import ModalContainer from './lib/components/ModalContainer';
+import ToastModal from './lib/components/ToastModal';
 
 function App() {
   const [openCenterModal, setOpenCenterModal] = useState(false);
@@ -16,16 +17,16 @@ function App() {
       <button onClick={() => setOpenCenterModal(true)}> center modal open</button>
       <button onClick={() => setOpenBottomModal(true)}> bottom modal open</button>
       <button onClick={() => setOpenToastModal(true)}> toast modal open</button>
-      <Modal type="bottom" openModal={openBottomModal} setOpenModal={setOpenBottomModal}>
+      <BottomModal openModal={openBottomModal} setOpenModal={setOpenBottomModal}>
         <h1>Bottom Modal</h1>
         <BottomModal.button isCloseModal={true}>close</BottomModal.button>
-      </Modal>
-      <Modal type="center" openModal={openCenterModal} setOpenModal={setOpenCenterModal}>
+      </BottomModal>
+      <CenterModal openModal={openCenterModal} setOpenModal={setOpenCenterModal}>
         <h1>Center Modal</h1>
-        <Modal.button isCloseModal={true}>close button</Modal.button>
-      </Modal>
-      <Modal
-        type="toast"
+        <ModalContainer.button isCloseModal={true}>close button</ModalContainer.button>
+      </CenterModal>
+
+      <ToastModal
         openModal={openToastModal}
         setOpenModal={setOpenToastModal}
         position={position}
@@ -36,7 +37,7 @@ function App() {
         <div style={{ width: '300px', height: '2rem', textAlign: 'center' }}>
           <h2>toast modal</h2>
         </div>
-      </Modal>
+      </ToastModal>
       <div ref={positionRef} id="toast-modal-position">
         toast modal position
       </div>

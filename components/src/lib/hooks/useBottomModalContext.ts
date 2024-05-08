@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 
-import BottomModalContext from '../contexts/bottomModalContext';
+import BottomModalContext from '../contexts/BottomModalContext';
 
 export default function useBottomModalContext() {
   const context = useContext(BottomModalContext);

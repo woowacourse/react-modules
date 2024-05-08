@@ -1,7 +1,8 @@
 import { MouseEvent, useEffect } from 'react';
 import styled from 'styled-components';
 
-import { CONTENTS_CLASS_NAME } from '../constants/modal';
+import { BASIC_BACKGROUND_COLOR } from '../constants/modal';
+import { ModalContainerContext } from '../contexts';
 import { useModalContext } from '../hooks';
 
 const ModalBackdrop = styled.div<{ $backgroundColor: string | undefined }>`
@@ -14,13 +15,16 @@ const ModalBackdrop = styled.div<{ $backgroundColor: string | undefined }>`
 `;
 
 export default function Backdrop({ handleCloseModal }: { handleCloseModal: () => void }) {
-  const { isCloseOnBackdrop, isCloseOnEsc, backgroundColor } = useModalContext();
+  const {
+    isCloseOnBackdrop = true,
+    isCloseOnEsc = true,
+    backgroundColor = BASIC_BACKGROUND_COLOR,
+  } = useModalContext(ModalContainerContext);
 
   const handleClick = (e: MouseEvent<HTMLDivElement>) => {
     if (!isCloseOnBackdrop) return;
-    const { target } = e;
-    if (!(target instanceof HTMLElement)) return;
-    if (target.closest(`.${CONTENTS_CLASS_NAME}`)) return;
+
+    if (e.target !== e.currentTarget) return;
     handleCloseModal();
   };
 

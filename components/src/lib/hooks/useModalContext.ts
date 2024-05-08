@@ -1,10 +1,8 @@
 import { useContext } from 'react';
 
-import ModalContext from '../contexts/modalContext';
+export default function useModalContext<T>(context: React.Context<T>) {
+  const targetContext = useContext(context);
+  if (!targetContext) throw new Error('modal context를 찾을 수 없습니다.');
 
-export default function useModalContext() {
-  const context = useContext(ModalContext);
-  if (!context) throw new Error('modal context를 찾을 수 없습니다.');
-
-  return context;
+  return targetContext;
 }

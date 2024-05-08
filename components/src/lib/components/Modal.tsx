@@ -8,7 +8,7 @@ import {
   BASIC_PADDING,
   BASIC_TOAST_DURATION,
 } from '../constants/modal';
-import ModalContext from '../contexts/modalContext';
+import ModalContext from '../contexts/ModalContext';
 import { useModalContext } from '../hooks';
 import '../styles/reset.css';
 import { ModalButtonProps, ModalProps, ModalType } from '../types/modal';

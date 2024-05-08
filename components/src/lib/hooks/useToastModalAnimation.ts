@@ -1,39 +1,45 @@
-import { useEffect, useLayoutEffect, useState } from 'react';
+import { useLayoutEffect, useState } from 'react';
 
-import { BASIC_TOAST_DURATION } from '../constants/modal';
+import { BASIC_TOAST_DURATION, BASIC_TOAST_MODAL_ANIMATION_DURATION } from '../constants/modal';
+import { AnimationProps } from '../types/modal';
 import calculateTimeout from '../utils/timeoutCalculator';
 
-import useModalContext from './useModalContext';
+interface Props extends AnimationProps {
+  openModal: boolean;
+  closeModal: () => void;
+  toastDuration?: number;
+}
+export default function useToastModalAnimation(props: Props) {
+  const {
+    closeModal,
+    animationDuration = BASIC_TOAST_MODAL_ANIMATION_DURATION,
+    isNeedAnimation,
+    toastDuration = BASIC_TOAST_DURATION,
+    openModal,
+  } = props;
 
-export default function useToastModalAnimation() {
-  const { closeModal, animationDuration, position, isNeedAnimation, toastDuration } = useModalContext();
   const [isOn, setIsOn] = useState(true);
-  /**
-   * 토스트 모달이 등장,퇴장 시 opacity 전환 속도
-   */
-  const timeout = calculateTimeout({ isNeedAnimation, animationDuration, type: 'toast' });
-  /**
-   * 토스트 모달이 닫히는 시간
-   */
-  const fadeOutTimeout = toastDuration || BASIC_TOAST_DURATION;
 
+  /**
+   * 토스트 모달이 등장,퇴장 시 opacity 전환 시간
+   */
+  const timeout = calculateTimeout({ isNeedAnimation, animationDuration });
+
+  const fadeInModal = () => {
+    setIsOn(true);
+  };
   const fadeOutModal = () =>
     setTimeout(() => {
       setIsOn(false);
-    }, fadeOutTimeout - timeout);
+    }, toastDuration - timeout);
 
   const setTimeoutToCloseModal = () =>
     setTimeout(() => {
       closeModal();
-    }, fadeOutTimeout);
-
-  useEffect(() => {
-    if (!position) {
-      throw new Error('position을 지정해주세요.');
-    }
-  }, [position]);
+    }, toastDuration);
 
   useLayoutEffect(() => {
+    fadeInModal();
     const fadeOutTimer = fadeOutModal();
     const closeModalTimer = setTimeoutToCloseModal();
 
@@ -41,7 +47,7 @@ export default function useToastModalAnimation() {
       clearTimeout(fadeOutTimer);
       clearTimeout(closeModalTimer);
     };
-  }, []);
+  }, [openModal]);
 
-  return { isOn, position, timeout };
+  return { isOn, timeout };
 }

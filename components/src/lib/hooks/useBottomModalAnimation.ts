@@ -3,17 +3,19 @@ import { useLayoutEffect, useState } from 'react';
 import calculateTimeout from '../utils/timeoutCalculator';
 
 export interface UseBottomModalAnimationProps {
+  openModal: boolean;
   isNeedAnimation: boolean | undefined;
-  animationDuration: number | undefined;
+  animationDuration: number;
   closeModal: () => void;
 }
 
 export default function useBottomModalAnimation({
+  openModal,
   isNeedAnimation,
   animationDuration,
   closeModal,
 }: UseBottomModalAnimationProps) {
-  const timeout = calculateTimeout({ isNeedAnimation, animationDuration, type: 'bottom' });
+  const timeout = calculateTimeout({ isNeedAnimation, animationDuration });
 
   const [isOn, setIsOn] = useState(false);
 
@@ -34,7 +36,7 @@ export default function useBottomModalAnimation({
     return () => {
       clearTimeout(timer);
     };
-  }, []);
+  }, [openModal]);
 
   return { isOn, fadeOutModal, timeout };
 }
