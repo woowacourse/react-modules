@@ -10,8 +10,8 @@ export const VALID_CARD_NUMBER_LENGTH = 16;
 const useCardNumber = (initialCardNumber: string = '') => {
   const [cardNumber, setCardNumber] = useState<string>(initialCardNumber);
   const [cardType, setCardType] = useState<CardType | null>(null); // 이전 카드 타입을 위해서 상태로 저장
-  const [isValidCardNumbers, setIsValidCardNumbers] = useState<boolean>(false);
-  const [cardNumberErrorMessages, setCardNumberErrorMessages] = useState<string>('');
+  const [isValidCardNumber, setIsValidCardNumber] = useState<boolean>(false);
+  const [cardNumberErrorMessage, setCardNumberErrorMessage] = useState<string>('');
 
   const handleCardNumberChange = (number: string) => {
     const joinedNumber = number.replace(/\s+/g, '');
@@ -20,11 +20,11 @@ const useCardNumber = (initialCardNumber: string = '') => {
     if (joinedNumber.length > CARD_TYPE[detectedCardType].MAX_LENGTH) return;
 
     const errorMessage = getNumberErrorMessage(joinedNumber, CARD_TYPE[detectedCardType].MAX_LENGTH);
-    setCardNumberErrorMessages(errorMessage);
+    setCardNumberErrorMessage(errorMessage);
 
     if (isNotNumber(joinedNumber)) return;
 
-    setIsValidCardNumbers(!errorMessage);
+    setIsValidCardNumber(errorMessage === '');
 
     const formattedNumber = formatCardNumber(joinedNumber, CARD_TYPE[detectedCardType].PATTERN);
     setCardNumber(formattedNumber);
@@ -36,8 +36,8 @@ const useCardNumber = (initialCardNumber: string = '') => {
     cardNumber,
     cardType,
     handleCardNumberChange,
-    isValidCardNumbers,
-    cardNumberErrorMessages,
+    isValidCardNumber,
+    cardNumberErrorMessage,
   };
 };
 
