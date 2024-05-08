@@ -1,5 +1,5 @@
 import { act, renderHook } from "@testing-library/react";
-import { useCardIdentifier } from "./../src/lib/hooks/useCardIdentifier";
+import { useCardIdentifier } from "../src/lib/hooks/useCardIdentifier";
 
 describe("useCardIdentifier", () => {
   test("유효한 카드 번호에 대해 올바른 카드 식별자를 반환해야 합니다", () => {
