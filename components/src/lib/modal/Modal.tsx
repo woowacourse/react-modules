@@ -2,15 +2,16 @@ import useModalBackdropClickClose from '../hooks/useModalBackdropClickClose';
 import useModalEscClose from '../hooks/useModalEscClose';
 import useDisableBackgroundScroll from '../hooks/useDisableBackgroundScroll';
 import * as Styled from './Modal.styled';
-import React, { HTMLAttributes, CSSProperties, useRef } from 'react';
+import React, { HTMLAttributes, useRef } from 'react';
 import CloseImage from '../../assets/close.png';
 
-export interface ModalProps extends React.PropsWithChildren {
+export interface ModalProps
+  extends React.PropsWithChildren,
+    Pick<HTMLAttributes<HTMLElement>, 'style'> {
   children?: React.ReactNode;
   isOpen: boolean;
   position: 'top' | 'bottom' | 'center';
-  size?: 'small' | 'medium' | 'large' | undefined;
-  style?: CSSProperties;
+  size?: 'small' | 'medium' | 'large';
   onClose: () => void;
 }
 

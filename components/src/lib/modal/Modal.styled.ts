@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { ModalProps } from './Modal';
 
 export const ModalBackdrop = styled.div`
   position: fixed;
@@ -9,10 +10,9 @@ export const ModalBackdrop = styled.div`
   align-items: center;
 `;
 
-export const ModalContentWrapper = styled.div<{
-  position: 'top' | 'center' | 'bottom';
-  size: 'small' | 'medium' | 'large' | undefined;
-}>`
+export const ModalContentWrapper = styled.div<
+  Pick<ModalProps, 'position' | 'size'>
+>`
   display: flex;
   flex-direction: column;
   gap: 16px;
