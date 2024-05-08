@@ -26,6 +26,7 @@ const FooterButton = styled.button<{ $style: ModalButtonProps['style'] }>`
   font-weight: 700;
   text-align: center;
   border: 1px solid rgba(51, 51, 51, 0.25);
+  padding: 6px 21px;
 
   &:hover {
     background: ${(props) => (props.$style === 'primary' ? '#444444' : '#eeeeee')};
