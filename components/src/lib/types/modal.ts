@@ -1,4 +1,4 @@
-import React, { CSSProperties, Dispatch, ReactNode, SetStateAction } from 'react';
+import React, { CSSProperties, Dispatch, MouseEvent, ReactNode, SetStateAction } from 'react';
 
 export type ModalType = 'center' | 'bottom' | 'toast';
 
@@ -51,6 +51,26 @@ export interface AlertModalProps extends Omit<ModalCommonProps, 'children'> {
   buttonContents: ReactNode;
 }
 
+export type ExtraClickAction = (e?: MouseEvent<HTMLButtonElement>) => void;
+export interface ConfirmChildrenButton {
+  contents: ReactNode;
+  style?: CSSProperties;
+  extraClickAction?: ExtraClickAction;
+}
+
+export interface ConfirmButtonGroupProps {
+  confirmButton: ConfirmChildrenButton;
+  cancelButton: ConfirmChildrenButton;
+  isConfirmButtonFirst?: boolean;
+  closeModal: () => void;
+}
+export interface ConfirmModalProps
+  extends Omit<ModalCommonProps, 'children'>,
+    Omit<ConfirmButtonGroupProps, 'closeModal'> {
+  title?: ReactNode;
+  contents: ReactNode;
+  buttonContainerJustifyContent: ButtonContainerJustifyContent;
+}
 export interface ModalContainerProps extends Omit<ModalCommonProps, 'setOpenModal'>, AnimationProps {
   closeModal: () => void;
 }

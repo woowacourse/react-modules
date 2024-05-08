@@ -2,16 +2,16 @@ import { useRef, useState } from 'react';
 import styled from 'styled-components';
 import './App.css';
 
-import { AlertModal, BottomModal, CenterModal, ToastModal, usePosition } from './lib';
+import { AlertModal, BottomModal, CenterModal, ConfirmModal, ToastModal, usePosition } from './lib';
 import ModalContainer from './lib/components/ModalContainer';
 import { BASIC_BORDER_RADIUS } from './lib/constants/modal';
 
-const AlertModalTitle = styled.h2`
+const ModalTitle = styled.h2`
   margin-bottom: 1rem;
   font-size: 1.2rem;
 `;
 
-const AlertModalContents = styled.div`
+const ModalContents = styled.div`
   margin-bottom: 1rem;
   font-size: 1rem;
   p {
@@ -24,6 +24,7 @@ function App() {
   const [openBottomModal, setOpenBottomModal] = useState(false);
   const [openToastModal, setOpenToastModal] = useState(false);
   const [openAlertModal, setOpenAlertModal] = useState(false);
+  const [openConfirmModal, setOpenConfirmModal] = useState(false);
   const positionRef = useRef<HTMLDivElement>(null);
   const { position } = usePosition(positionRef.current);
 
@@ -33,10 +34,13 @@ function App() {
       <button onClick={() => setOpenBottomModal(true)}> bottom modal open</button>
       <button onClick={() => setOpenToastModal(true)}> toast modal open</button>
       <button onClick={() => setOpenAlertModal(true)}> alert modal open</button>
+      <button onClick={() => setOpenConfirmModal(true)}> confirm modal open</button>
+
       <BottomModal openModal={openBottomModal} setOpenModal={setOpenBottomModal}>
         <h1>Bottom Modal</h1>
         <BottomModal.button isCloseModal={true}>close</BottomModal.button>
       </BottomModal>
+
       <CenterModal openModal={openCenterModal} setOpenModal={setOpenCenterModal}>
         <h1>Center Modal</h1>
         <ModalContainer.Button isCloseModal={true}>close button</ModalContainer.Button>
@@ -57,19 +61,42 @@ function App() {
       <div ref={positionRef} id="toast-modal-position">
         toast modal position
       </div>
+
       <AlertModal
         openModal={openAlertModal}
         setOpenModal={setOpenAlertModal}
-        title={<AlertModalTitle>alert modal</AlertModalTitle>}
+        title={<ModalTitle>alert modal</ModalTitle>}
         contents={
-          <AlertModalContents>
+          <ModalContents>
             <p>open</p>
             <p>alert modal</p>
-          </AlertModalContents>
+          </ModalContents>
         }
         buttonContainerJustifyContent="right"
         buttonStyle={{ backgroundColor: '#111111ed', color: '#ffff', borderRadius: BASIC_BORDER_RADIUS }}
         buttonContents="확인"
+      />
+
+      <ConfirmModal
+        openModal={openConfirmModal}
+        setOpenModal={setOpenConfirmModal}
+        title={<ModalTitle>alert modal</ModalTitle>}
+        contents={
+          <ModalContents>
+            <p>open</p>
+            <p>alert modal</p>
+          </ModalContents>
+        }
+        buttonContainerJustifyContent="space-between"
+        confirmButton={{
+          contents: '확인',
+          style: { backgroundColor: 'black', color: '#ffff', borderRadius: BASIC_BORDER_RADIUS },
+          extraClickAction: () => alert('확인'),
+        }}
+        cancelButton={{
+          contents: '취소',
+          style: { backgroundColor: '#ffff', color: 'black', borderRadius: BASIC_BORDER_RADIUS },
+        }}
       />
     </>
   );
