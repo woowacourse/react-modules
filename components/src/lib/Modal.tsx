@@ -4,20 +4,23 @@ import { CLOSE_BUTTON } from '../assets/images/index';
 import styled from 'styled-components';
 
 type ModalPosition = 'center' | 'bottom';
+type ModalSize = 'small' | 'medium' | 'large';
 
 interface ModalProps {
-  closeModal: () => void;
-  position: ModalPosition;
   title: string;
-  closeOption: 'icon' | 'button';
+  size?: ModalSize;
+  position: ModalPosition;
+  closeOption?: 'icon' | 'button';
   children: React.ReactNode;
+  closeModal: () => void;
 }
 
 function Modal({
-  closeModal,
-  position,
   title,
-  closeOption,
+  closeModal,
+  size = 'medium',
+  position = 'center',
+  closeOption = 'icon',
   children,
 }: ModalProps) {
   const handleBackdropClick = (event: MouseEvent<HTMLElement>) => {
@@ -28,7 +31,7 @@ function Modal({
 
   return (
     <BackDrop onClick={handleBackdropClick}>
-      <Container position={position}>
+      <Container $size={size} $position={position}>
         <Header>
           <Title>{title}</Title>
           {closeOption === 'icon' && (
@@ -49,8 +52,15 @@ function Modal({
 export default Modal;
 
 interface ContainerStyleProps {
-  position: ModalPosition;
+  $size: ModalSize;
+  $position: ModalPosition;
 }
+
+const modalWidthBySize = {
+  small: '32rem',
+  medium: '48rem',
+  large: '60rem',
+};
 
 const BackDrop = styled.div`
   position: absolute;
@@ -64,13 +74,16 @@ const BackDrop = styled.div`
 
 const Container = styled.div<ContainerStyleProps>`
   position: fixed;
-  top: ${({ position }) => (position === 'center' ? '50%' : '100%')};
+  top: ${({ $position }) => ($position === 'center' ? '50%' : '100%')};
   left: 50%;
-  transform: ${({ position }) =>
-    position === 'center' ? 'translate(-50%, -50%)' : 'translate(-50%, -100%)'};
+  transform: ${({ $position }) =>
+    $position === 'center'
+      ? 'translate(-50%, -50%)'
+      : 'translate(-50%, -100%)'};
   display: flex;
   flex-direction: column;
   gap: 2.4rem;
+  width: ${({ $size }) => modalWidthBySize[$size] || '48rem'};
   padding: 2.4rem 3.2rem;
   box-sizing: border-box;
   border-radius: 0.8rem;
