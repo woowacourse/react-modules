@@ -1,6 +1,7 @@
-import { VALID_LENGTH } from './constants';
+import { ChangeEventHandler } from 'react';
+import { useCardBrand, useSingleInput } from '.';
+import { CARD_BRAND, VALID_LENGTH } from './constants';
 import { Validations, Validator, Validators } from './types';
-import useMultipleInputs from './useMultipleInputs';
 import { validateFilledValue, validateLength, validateNumber } from './utils/validators';
 
 interface ValidationErrors {
@@ -10,7 +11,7 @@ interface ValidationErrors {
 }
 
 interface UseCardNumbersProps {
-  initialValues: Record<string, string>;
+  initialValue: string;
   validations: Validations;
 }
 
@@ -20,10 +21,7 @@ const validators: Validators<keyof ValidationErrors> = {
   length: (value: string) => validateLength(value, VALID_LENGTH.cardNumber),
 };
 
-export default function useCardNumbers<E extends HTMLInputElement>({
-  initialValues,
-  validations,
-}: UseCardNumbersProps) {
+export default function useCardNumbers({ initialValue, validations }: UseCardNumbersProps) {
   const onChangeValidators: Validator[] = Object.entries(validations.onChange || {}).map(([key, errorMessage]) => ({
     test: validators[key as keyof ValidationErrors],
     errorMessage,
@@ -35,16 +33,21 @@ export default function useCardNumbers<E extends HTMLInputElement>({
   }));
 
   const {
-    values: cardNumbers,
-    setValues: setCardNumbers,
+    value: cardNumbers,
+    setValue: setCardNumbers,
     isValid,
     errorMessage,
-    onChange,
-    onBlur,
-  } = useMultipleInputs<E>({
-    initialValues,
+    handleChange,
+    handleBlur,
+  } = useSingleInput({
+    initialValue,
     validations: { onChange: onChangeValidators, onBlur: onBlurValidators },
   });
+
+  const onChange: ChangeEventHandler<HTMLInputElement> = (e) => {
+    const { value } = e.target;
+    handleChange(value.split(' ').join(''));
+  };
 
   return {
     cardNumbers,
@@ -52,7 +55,7 @@ export default function useCardNumbers<E extends HTMLInputElement>({
     isValid,
     errorMessage,
     validators: [...onChangeValidators, ...onBlurValidators],
-    handleChange: onChange,
-    handleBlur: onBlur,
+    onChange,
+    onBlur: handleBlur,
   };
 }
