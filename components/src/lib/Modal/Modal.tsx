@@ -1,13 +1,9 @@
-import {
-  CloseButton,
-  Footer,
-  Header,
-  Main,
-  ModalOverlay,
-  ModalWrapper,
-  Title,
-} from './Modal.style';
+import { ModalOverlay, ModalWrapper } from './Modal.style';
 import React, { useEffect, useRef } from 'react';
+
+import ModalContent from './ModalContent';
+import ModalFooter from './ModalFooter/ModalFooter';
+import ModalHeader from './ModalHeader';
 
 export type ModalPositionType = 'center' | 'bottom';
 export type ModalSizeType = 'small' | 'medium' | 'large';
@@ -16,23 +12,11 @@ export interface ModalProps {
   isOpen: boolean;
   position?: ModalPositionType;
   size?: ModalSizeType;
-  title: string;
-  hasCloseButton?: boolean;
   children: React.ReactNode;
-  footerButtons?: React.ReactNode[];
   onClose: () => void;
 }
 
-export default function Modal({
-  isOpen,
-  position = 'center',
-  size = 'medium',
-  title,
-  hasCloseButton = true,
-  children,
-  footerButtons,
-  onClose,
-}: ModalProps) {
+function Modal({ isOpen, position = 'center', size = 'medium', children, onClose }: ModalProps) {
   const modalRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -61,30 +45,14 @@ export default function Modal({
         onClick={(event) => event.stopPropagation()}
         tabIndex={-1}
       >
-        <Header>
-          <Title>{title}</Title>
-          {hasCloseButton && (
-            <CloseButton onClick={onClose}>
-              <svg
-                width="14"
-                height="14"
-                viewBox="0 0 14 14"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M14 1.41L12.59 0L7 5.59L1.41 0L0 1.41L5.59 7L0 12.59L1.41 14L7 8.41L12.59 14L14 12.59L8.41 7L14 1.41Z"
-                  fill="black"
-                />
-              </svg>
-            </CloseButton>
-          )}
-        </Header>
-
-        <Main>{children}</Main>
-
-        {footerButtons && <Footer>{footerButtons}</Footer>}
+        {children}
       </ModalWrapper>
     </ModalOverlay>
   );
 }
+
+Modal.Header = ModalHeader;
+Modal.Content = ModalContent;
+Modal.Footer = ModalFooter;
+
+export default Modal;

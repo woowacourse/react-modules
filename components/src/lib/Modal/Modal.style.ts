@@ -77,36 +77,3 @@ export const ModalWrapper = styled.div<ModalWrapperProps>`
     }
   }}
 `;
-
-export const Header = styled.header`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-`;
-
-export const Title = styled.h2`
-  font-size: 18px;
-  font-weight: 700;
-`;
-
-export const CloseButton = styled.button`
-  display: inline-block;
-  width: 14px;
-  height: 100%;
-  background: ${colors.grey100};
-  border: 0;
-  padding: 0;
-`;
-
-export const Main = styled.main`
-  max-width: 100vw;
-  max-height: 70vh;
-  overflow-y: auto;
-`;
-
-export const Footer = styled.footer`
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-`;
