@@ -14,7 +14,7 @@ export const Default: Story = {
   args: {
     isOpen: true,
     title: 'Alert Modal',
-    message: '확인해주세요.',
+    message: '알립니다.',
     onCheck: () => alert('확인!'),
     onClose: () => alert('close!'),
   },
