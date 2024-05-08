@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { COLORS } from '../Modal.style';
+import { COLORS } from '../../constants/styles';
 
 export const Header = styled.header`
   display: flex;

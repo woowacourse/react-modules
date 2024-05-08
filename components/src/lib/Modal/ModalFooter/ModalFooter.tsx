@@ -1,20 +1,22 @@
-import { ModalButtonInterface } from '../Modal';
+import { ButtonInterface, ButtonsPositionType } from '../../types/ModalTypes';
 
 import * as Styled from './ModalFooter.style';
 
 interface ModalFooterProps {
-  bottons: ModalButtonInterface[];
+  buttons: ButtonInterface[];
+  buttonsFlexDirection: ButtonsPositionType;
 }
 
-export default function ModalFooter({ bottons }: ModalFooterProps) {
+export default function ModalFooter({ buttons, buttonsFlexDirection }: ModalFooterProps) {
   return (
-    <Styled.Footer>
-      {bottons.map((button, index) => {
+    <Styled.Footer $buttonsFlexDirection={buttonsFlexDirection}>
+      {buttons.map((button, index) => {
         return (
           <Styled.FooterButton
             key={index}
             $style={button.style}
             onClick={button.onClick}
+            type="button"
           >
             {button.text}
           </Styled.FooterButton>
