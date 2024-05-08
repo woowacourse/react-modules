@@ -1,6 +1,6 @@
 {
   "name": "choco-payments-validation-hooks",
-  "version": "0.0.3",
+  "version": "0.0.5",
   "description": "초코가 만든 payments validation hooks 라이브러리",
   "type": "module",
   "types": "dist/index.d.ts",
@@ -17,7 +17,7 @@
     "test": "jest"
   },
   "dependencies": {
-    "choco-payments-validation-hooks": "^0.0.1",
+    "choco-payments-validation-hooks": "^0.0.5",
     "choriver-payments-validation-hooks": "^0.0.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
