@@ -1,6 +1,7 @@
 const ERROR_MESSAGE = {
   onlyNumber: "숫자만 입력 가능합니다.",
-  cardNumberOutOfRange: "카드번호는 16자의 숫자여야 합니다.",
+  cardNumberOutOfRange: (cardMaxLength: number) =>
+    `카드번호는 ${cardMaxLength}자의 숫자여야 합니다.`,
   expiredCard: "유효기간이 만료된 카드입니다.",
   expiredMonth: "월은 1~12 사이의 숫자만 입력이 가능합니다.",
   expiryFormat: "유효기간은 4자리(MM/YY) 숫자여야 합니다.",

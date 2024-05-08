@@ -22,7 +22,7 @@ const useCardNumber = (initialValue: { cardNumber: string }) => {
     if (!Validator.checkNumberAndOver(value, maxLength)) {
       return setValidationResult({
         isValid: false,
-        errorMessage: ERROR_MESSAGE.cardNumberOutOfRange,
+        errorMessage: ERROR_MESSAGE.cardNumberOutOfRange(maxLength),
       });
     }
 
@@ -40,7 +40,7 @@ const useCardNumber = (initialValue: { cardNumber: string }) => {
     if (!Validator.checkFillNumber(value, maxLength))
       return setValidationResult({
         isValid: false,
-        errorMessage: ERROR_MESSAGE.cardNumberOutOfRange,
+        errorMessage: ERROR_MESSAGE.cardNumberOutOfRange(maxLength),
       });
 
     updateByNameAndValue({ name, value: formattingCardNumber(cardBrand, value) });
