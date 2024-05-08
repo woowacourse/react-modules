@@ -10,7 +10,8 @@ export const ModalBackdrop = styled.div`
 `;
 
 export const ModalContentWrapper = styled.div<{
-  $position: 'top' | 'center' | 'bottom';
+  position: 'top' | 'center' | 'bottom';
+  size: 'small' | 'medium' | 'large' | undefined;
 }>`
   display: flex;
   flex-direction: column;
@@ -25,8 +26,8 @@ export const ModalContentWrapper = styled.div<{
   box-sizing: border-box;
   border: none;
 
-  ${({ $position }) => {
-    switch ($position) {
+  ${({ position }) => {
+    switch (position) {
       case 'top':
         return `
           top: 0;
@@ -42,6 +43,32 @@ export const ModalContentWrapper = styled.div<{
           top: 50%;
           transform: translate(-50%, -50%);
         `;
+      default:
+        return `
+          top: 50%;
+          transform: translate(-50%, -50%);
+        `;
+    }
+  }}
+
+  ${({ size }) => {
+    switch (size) {
+      case 'small':
+        return `
+          width: 320px;
+        `;
+      case 'medium':
+        return `
+          width: 480px;
+        `;
+      case 'large':
+        return `
+          width: 600px;
+        `;
+      default:
+        return `
+        width: 480px;
+      `;
     }
   }}
 `;

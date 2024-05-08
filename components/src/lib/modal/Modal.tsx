@@ -9,6 +9,7 @@ export interface ModalProps extends React.PropsWithChildren {
   children?: React.ReactNode;
   isOpen: boolean;
   position: 'top' | 'bottom' | 'center';
+  size?: 'small' | 'medium' | 'large' | undefined;
   style?: CSSProperties;
   onClose: () => void;
 }
@@ -21,7 +22,7 @@ const Modal: React.FC<ModalProps> & {
   Content: ModalContentType;
   Input: ModalInputType;
   Footer: ModalFooterType;
-} = ({ children, isOpen, onClose, position, ...restProps }) => {
+} = ({ children, isOpen, onClose, position, size, ...restProps }) => {
   const modalRef = useRef(null);
 
   useModalEscClose(isOpen, onClose);
@@ -34,7 +35,8 @@ const Modal: React.FC<ModalProps> & {
     <Styled.ModalBackdrop>
       <Styled.ModalContentWrapper
         ref={modalRef}
-        $position={position}
+        position={position}
+        size={size}
         {...restProps}
       >
         {children}
