@@ -1,6 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
 import { Modal } from '../.';
+import Button from '../components/Button/Button';
+import { useState } from 'react';
 
 const meta = {
   title: 'Modal',
@@ -9,12 +11,33 @@ const meta = {
     controls: { exclude: ['close', 'children'] },
   },
   decorators: [
-    (Story) => (
-      <div style={{ height: '500px' }}>
-        <Story />
-      </div>
-    ),
+    (_, context) => {
+      const [isOpen, setIsOpen] = useState(false);
+
+      const storyArgs = {
+        ...context.args,
+        isOpen: isOpen,
+        close: () => setIsOpen(false),
+      };
+
+      return (
+        <div style={{ height: '500px' }}>
+          <Button text="Modal Open" onClick={() => setIsOpen(!isOpen)} />
+          <Modal {...storyArgs}>
+            <Modal.Header>
+              <Modal.Title>모달 테스트</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>모달 내용</Modal.Body>
+            <Modal.Footer>
+              <Modal.Button text="확인"></Modal.Button>
+              <Modal.Button text="닫기" color="default" onClick={() => setIsOpen(false)}></Modal.Button>
+            </Modal.Footer>
+          </Modal>
+        </div>
+      );
+    },
   ],
+
   argTypes: {
     position: {
       options: ['center', 'bottom', 'top'],
@@ -41,51 +64,25 @@ export default meta;
 
 type Story = StoryObj<typeof Modal>;
 
-const childrenSample = (
-  <>
-    <Modal.Header>
-      <Modal.Title>모달 테스트</Modal.Title>
-    </Modal.Header>
-    <Modal.Body>모달 내용</Modal.Body>
-    <Modal.Footer>
-      <Modal.Button text="확인"></Modal.Button>
-      <Modal.Button text="닫기" mode="secondary"></Modal.Button>
-    </Modal.Footer>
-  </>
-);
-
 export const Default: Story = {
-  args: {
-    isOpen: true,
-    close: () => {},
-    children: childrenSample,
-  },
+  args: {},
 };
 
 export const Top: Story = {
   args: {
     position: 'top',
-    isOpen: true,
-    close: () => {},
-    children: childrenSample,
   },
 };
 
 export const Center: Story = {
   args: {
     position: 'center',
-    isOpen: true,
-    close: () => {},
-    children: childrenSample,
   },
 };
 
 export const Bottom: Story = {
   args: {
     position: 'bottom',
-    isOpen: true,
-    close: () => {},
-    children: childrenSample,
   },
 };
 
@@ -93,9 +90,6 @@ export const Small: Story = {
   args: {
     position: 'center',
     size: 'sm',
-    isOpen: true,
-    close: () => {},
-    children: childrenSample,
   },
 };
 
@@ -103,9 +97,6 @@ export const Medium: Story = {
   args: {
     position: 'center',
     size: 'md',
-    isOpen: true,
-    close: () => {},
-    children: childrenSample,
   },
 };
 
@@ -113,8 +104,5 @@ export const Large: Story = {
   args: {
     position: 'center',
     size: 'lg',
-    isOpen: true,
-    close: () => {},
-    children: childrenSample,
   },
 };
