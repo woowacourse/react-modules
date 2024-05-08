@@ -1,17 +1,14 @@
-import S from './Modal.style.tsx';
-import BasicButton from '../Button.tsx';
-
-export type ModalPosition = 'center' | 'bottom';
-
-export type Size = 'small' | 'medium' | 'large';
-
-export interface ModalMainProps {
-  children?: React.ReactNode;
-  isOpen: boolean;
-  position: ModalPosition;
-  size?: Size;
-  onClose: () => void;
-}
+import S from '@/lib/Modal/Modal.style.tsx';
+import BasicButton from '@/lib/Button.tsx';
+import {
+  TitleProps,
+  CloseButtonProps,
+  CloseIconProps,
+  ConfirmButtonProps,
+  ContentsProps,
+  ModalMainProps,
+  PromptInputProps,
+} from '@/types/modal';
 
 const ModalMain = ({
   children,
@@ -30,36 +27,17 @@ const ModalMain = ({
   );
 };
 
-export interface TitleProps {
-  children: React.ReactNode;
-}
-
 const Title = ({ children }: TitleProps) => {
   return <S.Title>{children}</S.Title>;
 };
-
-export interface CloseIconProps {
-  children: React.ReactNode;
-  onClick: () => void;
-}
 
 const CloseIcon = ({ children, onClick }: CloseIconProps) => {
   return <S.CloseIcon onClick={onClick}>{children}</S.CloseIcon>;
 };
 
-export interface ContentsProps {
-  children: React.ReactNode;
-}
-
 const Content = ({ children }: ContentsProps) => {
   return <S.Content>{children}</S.Content>;
 };
-
-export interface ConfirmButtonProps {
-  label: string;
-  size?: Size;
-  onConfirm: () => void;
-}
 
 const ConfirmButton = ({
   label,
@@ -76,22 +54,9 @@ const ConfirmButton = ({
   );
 };
 
-export interface CloseButtonProps {
-  label: string;
-  size?: Size;
-  onClose: () => void;
-}
-
 const CloseButton = ({ label, size = 'medium', onClose }: CloseButtonProps) => {
   return <BasicButton onClick={onClose} label={label} size={size} />;
 };
-
-export interface PromptInputProps
-  extends React.InputHTMLAttributes<HTMLInputElement> {
-  value: string;
-  placeholder: string;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-}
 
 const PromptInput = ({
   value,

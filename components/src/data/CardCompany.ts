@@ -1,12 +1,12 @@
 import { FunctionComponent, SVGAttributes } from 'react';
-import BCCardLogo from '../assets/BC.svg?react';
-import ShinHanCardLogo from '../assets/Shinhan.svg?react';
-import KakaoBankLogo from '../assets/KakaoBank.svg?react';
-import HyundaiLogo from '../assets/Hyundai.svg?react';
-import WooriCardLogo from '../assets/Woori.svg?react';
-import LotteCardLogo from '../assets/Lotte.svg?react';
-import HanaCardLogo from '../assets/Hana.svg?react';
-import KukminCardLogo from '../assets/Kukmin.svg?react';
+import BCCardLogo from '@/assets/BC.svg?react';
+import ShinHanCardLogo from '@/assets/Shinhan.svg?react';
+import KakaoBankLogo from '@/assets/KakaoBank.svg?react';
+import HyundaiLogo from '@/assets/Hyundai.svg?react';
+import WooriCardLogo from '@/assets/Woori.svg?react';
+import LotteCardLogo from '@/assets/Lotte.svg?react';
+import HanaCardLogo from '@/assets/Hana.svg?react';
+import KukminCardLogo from '@/assets/Kukmin.svg?react';
 
 export interface CardCompany {
   name: string;

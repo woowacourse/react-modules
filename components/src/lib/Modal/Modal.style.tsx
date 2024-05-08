@@ -1,6 +1,6 @@
-import Theme from '../../style/theme';
 import styled from 'styled-components';
-import { ModalPosition, Size } from './Modal';
+import Theme from '@/style/theme';
+import { ModalPosition, Size } from '@/types/system';
 
 const ModalWrapper = styled.div<{ open: boolean }>`
   position: fixed;

@@ -25,9 +25,8 @@ export default defineConfig({
   },
   plugins: [react(), dts(), svgr()],
   resolve: {
-    alias: [
-      { find: '@lib', replacement: '/src/lib' },
-      { find: '@assets', replacement: '/src/assets' },
-    ],
+    alias: {
+      '@': path.resolve(__dirname, './src'),
+    },
   },
 });

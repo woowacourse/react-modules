@@ -1,6 +1,6 @@
 import styled from 'styled-components';
-import Theme from '../style/theme';
-import { Size } from './Modal/Modal';
+import Theme from '@/style/theme';
+import { Size } from '@/types/system';
 
 type ButtonColorType = 'dark' | 'light';
 
