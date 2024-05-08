@@ -1,5 +1,6 @@
-import Theme from '@/style/theme';
+import Theme from '../../style/theme';
 import styled from 'styled-components';
+import { ModalSize } from './Modal';
 
 export type ModalPosition = 'center' | 'bottom';
 
@@ -19,15 +20,23 @@ const ModalBackground = styled.div`
   background-color: ${Theme.background.dark};
 `;
 
-const ModalContainer = styled.div<{ $position: ModalPosition }>`
+const sizeMap = {
+  small: '400px',
+  medium: '600px',
+  large: '800px',
+};
+
+const ModalContainer = styled.div<{
+  $position: ModalPosition;
+  $modalSize: ModalSize;
+}>`
   position: fixed;
   top: ${({ $position }) => $position === 'center' && '50%'};
   bottom: ${({ $position }) => $position === 'bottom' && '0px'};
   left: 50%;
   transform: ${({ $position }) =>
     $position === 'center' ? 'translate(-50%, -50%)' : 'translate(-50%, 0%)'};
-  min-width: ${({ $position }) => ($position === 'bottom' ? '100%' : '80%')};
-  max-width: 500px;
+  width: ${({ $modalSize }) => sizeMap[$modalSize]};
   min-height: 150px;
   background-color: ${Theme.background.light};
   border-radius: ${({ $position }) =>
