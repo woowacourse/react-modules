@@ -1,20 +1,35 @@
 import { CARD_BRAND } from './constants';
 
-type Brand = keyof typeof CARD_BRAND | 'etc';
-
 interface UseCardBrandProps {
-  cardNumbers: string;
+  cardNumber: string;
 }
 
-export default function useCardBrand({ cardNumbers }: UseCardBrandProps): Brand {
-  const { visa, master } = CARD_BRAND;
+export default function useCardBrand({ cardNumber }: UseCardBrandProps) {
+  const isExistBrand = (prefixes: Prefix[]): boolean => {
+    return prefixes.some((prefix) => {
+      // prefix가 숫자면 앞 글자를 비교
+      if (typeof prefix === 'number') {
+        return cardNumber.startsWith(prefix.toString());
+      }
 
-  const visaPrefix = Number(cardNumbers.slice(0, visa.prefixNumberCount));
-  const masterPrefix = Number(cardNumbers.slice(0, master.prefixNumberCount));
+      // prefix가 범위면 숫자로 변환하여 비교
+      const prefixLength = prefix.to.toString().length;
+      const startNumber = Number(cardNumber.substring(0, prefixLength));
 
-  if (visaPrefix === visa.startNumber) return 'visa';
+      return startNumber >= prefix.from && startNumber <= prefix.to;
+    });
+  };
 
-  if (masterPrefix >= master.startNumber && masterPrefix <= master.endNumber) return 'master';
+  const getCardBrand = (): Brand => {
+    for (const [key, { prefixes }] of Object.entries(CARD_BRAND)) {
+      const brand = key as Brand;
 
-  return 'etc';
+      if (isExistBrand(prefixes)) {
+        return brand;
+      }
+    }
+    return 'etc';
+  };
+
+  return { brand: getCardBrand() };
 }
