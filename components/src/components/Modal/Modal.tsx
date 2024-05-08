@@ -1,5 +1,5 @@
 /** @jsxImportSource @emotion/react */
-import React, { PropsWithChildren, ReactNode, useEffect } from "react";
+import React, { MouseEventHandler, PropsWithChildren, ReactNode } from "react";
 import { buttonsStyle, modalContentStyle, modalStyle } from "./Modal.style";
 
 import ModalHeader from "../ModalHeader/ModalHeader";
@@ -40,20 +40,14 @@ const Dialog: React.FC<DialogProps> = ({
   const theme = useThemeContext();
   const { dialogRef, action } = useModalContext();
 
-  useEffect(() => {
-    const clickBackdrop = (e: MouseEvent) => {
-      if (e.target === e.currentTarget) {
-        action.handleClose();
-      }
-    };
-
-    if (dialogRef.current) {
-      dialogRef.current.onclick = clickBackdrop;
+  const clickBackdrop: MouseEventHandler<HTMLDialogElement> = (e) => {
+    if (e.target === e.currentTarget) {
+      action.handleClose();
     }
-  }, [dialogRef, action]);
+  };
 
   return (
-    <dialog ref={dialogRef} css={modalStyle(position, width, theme)}>
+    <dialog onClick={clickBackdrop} ref={dialogRef} css={modalStyle(position, width, theme)}>
       <div css={modalContentStyle}>
         <ModalHeader hasCloseButton={closeButtonPosition === "top"}>{title}</ModalHeader>
         <div>{children}</div>
