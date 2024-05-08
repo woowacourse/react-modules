@@ -18,9 +18,9 @@ npm i badahertz52-react-modules-components
 
 ## How to use?
 
-### Modal 사용 전 필수 설정
+### 모달이 열렸을 경우 dom 구조
 
-💡사용하기 전, src/index.html에 아래와 같이 '''modal-root'''라는 DOM Node를 추가해주세요. 🙏
+모달은 `modal-root`안에서 열립니다.
 
 ```html
 <body>
