@@ -1,4 +1,4 @@
-import { CardBrandInfo, cardBrandsInfo } from "@/data/cardCompanyNumbersInfo";
+import { CardBrandInfo, cardBrandsInfo } from "@/constants/cardBrand";
 
 export const decideCardBrand = (value: string) => {
   if (value.length >= 1) {

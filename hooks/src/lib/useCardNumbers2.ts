@@ -1,6 +1,6 @@
 import { ChangeEvent, useState } from "react";
 import { validateLength, validateNumber } from "@/validate/validate";
-import { cardBrandsInfo, CardBrandInfo } from "@/data/cardCompanyNumbersInfo";
+import { CardBrandInfo, cardBrandsInfo } from "@/constants/cardBrand";
 import {
   decideCardBrandByFirstDigits,
   decideCardBrandByNextTwoDigits,
