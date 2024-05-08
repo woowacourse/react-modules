@@ -12,16 +12,24 @@ type NumberState = readonly [string, (value: string) => void];
 
 type CardBrand = "Visa" | "Master" | "AMEX" | "Diners" | "UnionPay";
 
+const CardInputMaxLength = {
+  Master: [4, 4, 4, 4],
+  Visa: [4, 4, 4, 4],
+  AMEX: [4, 6, 5],
+  Diners: [4, 6, 4],
+  UnionPay: [4, 4, 4, 4],
+} as const;
+
 interface CardNumberReturn {
   numbers: {
     firstState: NumberState;
     secondState: NumberState;
     thirdState: NumberState;
-    fourthState?: NumberState;
+    fourthState: NumberState;
   };
   errorList: (string | undefined)[];
   cardBrand?: CardBrand;
-  inputMaxLength?: number[];
+  inputMaxLengthList?: (typeof CardInputMaxLength)[keyof typeof CardInputMaxLength];
 }
 
 enum CardNumberErrorType {
@@ -103,7 +111,7 @@ const useCardNumbers = (): CardNumberReturn => {
     },
     errorList: errorTypeList,
     cardBrand,
-    //TODO: 카드 브랜드를 반환한다.
+    inputMaxLengthList: cardBrand && CardInputMaxLength[cardBrand],
   };
 };
 
