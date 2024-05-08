@@ -1,5 +1,5 @@
 import useInput from "./common/useInput";
-import { validLength, validateNumber } from "@/validate/validate";
+import { validateLength, validateNumber } from "@/validate/validate";
 import { ChangeEvent } from "react";
 import { CVCErrorType } from "@/types/cvc";
 import { CVCErrorMessages } from "@/constants/error";
@@ -7,7 +7,7 @@ import { VALID_LENGTH } from "@/constants/system";
 
 const CVC_Validates = [
   (value: string) => validateNumber(value),
-  (value: string) => validLength(value, VALID_LENGTH.CVC),
+  (value: string) => validateLength(value, VALID_LENGTH.CVC),
 ];
 
 const useCVC = (initialValue: string) => {

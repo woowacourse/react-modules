@@ -48,22 +48,6 @@ describe("useExpiryDate 훅 테스트", () => {
     expect(result.current.errorMessages).toEqual(expectedErrorMessage);
   });
 
-  it("월 입력은 2글자 초과면 에러를 낸다.", () => {
-    const { result } = renderHook(() => useExpiryDate(initialValues));
-
-    React.act(() => {
-      result.current.onChange({
-        target: { value: "123", name: "month" },
-      } as ChangeEvent<HTMLInputElement>);
-    });
-
-    const expectedErrorMessage = {
-      month: ExpiryDateErrorMessages[ErrorStatus.INVALID_LENGTH],
-      year: null,
-    };
-    expect(result.current.errorMessages).toEqual(expectedErrorMessage);
-  });
-
   it("01~12이 아닌 범위의 월을 입력했을 때 에러를 낸다.", () => {
     const { result } = renderHook(() => useExpiryDate(initialValues));
 

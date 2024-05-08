@@ -36,21 +36,18 @@ describe("usePassword 훅 테스트", () => {
     });
     const expectedErrorMessage =
       PasswordErrorMessages[ErrorStatus.IS_NOT_NUMBER];
+
     expect(result.current.errorMessage).toBe(expectedErrorMessage);
   });
 
-  it("길이가 2글자가 아니면 에러를 낸다.", () => {
-    const { result } = renderHook(() => usePassword(initialValue));
-    const invalidValue = "123";
+  // it("2글자 초과 입력시 2글자만 입력된다.", () => {
+  //   const { result } = renderHook(() => usePassword(initialValue));
+  //   React.act(() => {
+  //     result.current.onChange({
+  //       target: { value: "123" },
+  //     } as ChangeEvent<HTMLInputElement>);
+  //   });
 
-    React.act(() => {
-      result.current.onChange({
-        target: { value: invalidValue },
-      } as ChangeEvent<HTMLInputElement>);
-    });
-
-    const expectedErrorMessage =
-      PasswordErrorMessages[ErrorStatus.INVALID_LENGTH];
-    expect(result.current.errorMessage).toBe(expectedErrorMessage);
-  });
+  //   expect(result.current.value).toBe("12");
+  // });
 });

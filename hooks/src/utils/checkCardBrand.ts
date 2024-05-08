@@ -1,5 +1,13 @@
 import { CardBrandInfo, cardBrandsInfo } from "@/data/cardCompanyNumbersInfo";
 
+export const decideCardBrand = (value: string) => {
+  if (value.length >= 1) {
+    const slicedValue = value.slice(0, 1);
+    if (slicedValue[0] === "4") {
+      return cardBrandsInfo["VISA"];
+    }
+  }
+};
 export const decideCardBrandByFirstDigits = (
   slicedValue: string
 ): CardBrandInfo | null => {

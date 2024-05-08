@@ -4,14 +4,14 @@ import {
   CardNumberKeys,
   CardNumberErrorType,
 } from "@/types/cardNumbers";
-import { validLength, validateNumber } from "@/validate/validate";
+import { validateLength, validateNumber } from "@/validate/validate";
 import { CardNumbersErrorMessages } from "@/constants/error.ts";
 import { VALID_LENGTH } from "@/constants/system.ts";
 import useInput from "./common/useInput";
 
 export const cardNumbersValidates = [
   (value: string) => validateNumber(value),
-  (value: string) => validLength(value, VALID_LENGTH.CARD_NUMBERS),
+  (value: string) => validateLength(value, VALID_LENGTH.CARD_NUMBERS),
 ];
 
 const useCardNumbers = (initialValues: CardNumbersType) => {

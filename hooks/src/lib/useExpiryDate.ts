@@ -3,7 +3,7 @@ import {
   validateNumber,
   validateYear,
   validateMonth,
-  validLength,
+  validateLength,
 } from "@/validate/validate";
 import { ChangeEvent } from "react";
 import { ExpiryDateType, ExpiryDateErrorType } from "@/types/expiryDate";
@@ -12,7 +12,7 @@ import { VALID_LENGTH } from "@/constants/system";
 
 const commonValidates = [
   (value: string) => validateNumber(value),
-  (value: string) => validLength(value, VALID_LENGTH.EXPIRY_DATE),
+  (value: string) => validateLength(value, VALID_LENGTH.EXPIRY_DATE),
 ];
 
 const monthValidates = [

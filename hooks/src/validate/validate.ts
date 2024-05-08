@@ -39,7 +39,7 @@ export function validateUpperCase(str: string) {
   return { error: ErrorStatus.ONLY_UPPERCASE, isValid: true };
 }
 
-export function validLength(str: string, length: number) {
+export function validateLength(str: string, length: number) {
   if (str.length !== length) {
     return { error: ErrorStatus.INVALID_LENGTH, isValid: false };
   }
