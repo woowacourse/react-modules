@@ -279,3 +279,52 @@ export const L_사이즈_모달: Story = {
     </Modal>
   ),
 };
+
+export const Input이_있는_모달: Story = {
+  args: {
+    isOpen: true,
+    size: "M",
+    position: "center",
+    onClose: fn(),
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: "Input 요소가 있는 모달",
+      },
+    },
+  },
+
+  render: (args) => (
+    <Modal
+      isOpen={args.isOpen}
+      onClose={args.onClose}
+      size={"M"}
+      position={args.position}
+    >
+      <Modal.ModalContent>
+        <Modal.ModalLabel htmlFor="">
+          쿠폰 번호를 입력해 주세요.
+        </Modal.ModalLabel>
+        <Modal.ModalInput type="text"></Modal.ModalInput>
+      </Modal.ModalContent>
+      <Modal.ModalFooter style={{ textAlign: "right", paddingRight: "10px" }}>
+        <Modal.ModalButton
+          size={"S"}
+          style={{
+            padding: "5px 8px",
+            marginRight: "20px",
+            border: "1px solid #33333340",
+            color: "#333333",
+            backgroundColor: "white",
+          }}
+        >
+          취소
+        </Modal.ModalButton>
+        <Modal.ModalButton size={"S"} style={{ padding: "5px 10px" }}>
+          확인
+        </Modal.ModalButton>
+      </Modal.ModalFooter>
+    </Modal>
+  ),
+};
