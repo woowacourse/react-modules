@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import Modal from './lib/Modal';
+import xButton from './lib/asset/xButton.svg';
 
 function App() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -12,19 +13,32 @@ function App() {
   };
   return (
     <>
-      <button onClick={() => setIsModalOpen(true)}></button>
+      <button onClick={() => setIsModalOpen(true)}>열기</button>
       {isModalOpen && (
         <Modal
           position='center'
-          size='large'
-          title='제목입니다.'
-          // isXButton={true}
-          // closeButtonContent='닫기'
-          confirmButtonContent='확인'
-          handleConfirm={handleConfirm}
-          // handleClose={handleClose}
+          size='small'
+          onDimmedClick={handleClose}
         >
-          {<Temp></Temp>}
+          <Modal.Header>
+            <Modal.Title title='예시' />
+            <Modal.Button
+              style={{
+                backgroundColor: 'white',
+                fontColor: '#8B95A1',
+              }}
+              onClick={handleClose}
+            >
+              <img src={xButton}></img>
+            </Modal.Button>
+          </Modal.Header>
+          <Modal.Body>
+            <div>예시입니다.</div>
+          </Modal.Body>
+          <Modal.Footer>
+            <Modal.Button onClick={handleClose}>취소</Modal.Button>
+            <Modal.Button onClick={handleClose}>확인</Modal.Button>
+          </Modal.Footer>
         </Modal>
       )}
     </>
