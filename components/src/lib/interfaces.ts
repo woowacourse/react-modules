@@ -1,17 +1,17 @@
-import { ElementType } from 'react';
+import { CSSProperties, ElementType } from 'react';
 
 export interface TitleProps {
   content: string;
   position?: 'left' | 'center';
-  color?: string;
-  fontSize?: string;
+  color?: CSSProperties['color'];
+  fontSize?: CSSProperties['fontSize'];
   as?: ElementType;
 }
 
 export interface SubtitleProps {
   content: string;
-  color?: string;
-  fontSize?: string;
+  color?: CSSProperties['color'];
+  fontSize?: CSSProperties['fontSize'];
   as?: ElementType;
 }
 
@@ -20,22 +20,24 @@ export interface CloseButtonProps {
 }
 
 export interface ConfirmButtonProps {
-  backgroundColor?: string;
-  fontColor?: string;
+  backgroundColor?: CSSProperties['backgroundColor'];
+  fontColor?: CSSProperties['color'];
+  buttonSize?: SizeProps;
   content: string;
   onConfirm: () => void;
 }
 
 export interface CancelButtonProps {
-  backgroundColor?: string;
-  fontColor?: string;
+  backgroundColor?: CSSProperties['backgroundColor'];
+  fontColor?: CSSProperties['color'];
+  buttonSize?: SizeProps;
   content: string;
   onCancel: () => void;
 }
 
-export interface ModalSizeProps {
-  width?: string;
-  height?: string;
-  minWidth?: string;
-  minHeight?: string;
+export interface SizeProps {
+  width?: CSSProperties['width'];
+  height?: CSSProperties['height'];
+  minWidth?: CSSProperties['minWidth'];
+  minHeight?: CSSProperties['minHeight'];
 }
