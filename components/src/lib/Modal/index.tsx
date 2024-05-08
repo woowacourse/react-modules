@@ -8,8 +8,8 @@ import ModalContext from '../contexts/modalContext';
 import useModalContext from '../hooks/useModalContext';
 import CloseButtonIcon from './CloseButtonIcon';
 
-function Modal({ isModalOpen, closeModal, children, position, className, ...attribute }: ModalProps) {
-  const contextValue = useMemo(() => ({ isModalOpen, closeModal, position }), [isModalOpen, closeModal, position]);
+function Modal({ isModalOpen, closeModal, children, className, ...attribute }: ModalProps) {
+  const contextValue = useMemo(() => ({ isModalOpen, closeModal }), [isModalOpen, closeModal]);
 
   if (!isModalOpen) return null;
   return (
@@ -36,17 +36,18 @@ function Backdrop() {
   return <div className={styles.backdrop} onClick={onClick} />;
 }
 
-function Contents({ children, className, ...attribute }: ModalComposedProps<HTMLDivElement>) {
-  const { position } = useModalContext();
-
+function Contents({ position = 'center', children, className, ...attribute }: ContentsProps) {
   return (
-    <div className={clsx(className, styles.contents, position ? styles[position] : styles.default)} {...attribute}>
+    <div
+      className={clsx(className, styles.contents, position ? styles[position] : styles.defaultPosition)}
+      {...attribute}
+    >
       {children}
     </div>
   );
 }
 
-function Title({ children, ...attribute }: ModalComposedProps<HTMLHeadingElement>) {
+function Title({ children, ...attribute }: HTMLAttributes<HTMLHeadingElement>) {
   return (
     <h2 className={styles.title} {...attribute}>
       {children}
@@ -54,16 +55,20 @@ function Title({ children, ...attribute }: ModalComposedProps<HTMLHeadingElement
   );
 }
 
-function CloseButton({ children, buttonType, className, ...attribute }: ModalButtonProps) {
-  const { closeModal } = useModalContext();
+function Description({ children, ...attribute }: HTMLAttributes<HTMLParagraphElement>) {
+  return (
+    <p className={styles.description} {...attribute}>
+      {children}
+    </p>
 
   const onClick = () => {
     closeModal();
   };
+  const { closeModal } = useModalContext();
 
   return (
     <button
-      onClick={onClick}
+      onClick={closeModal}
       className={clsx(className, buttonType ? styles[buttonType] : styles.defaultCloseButton)}
       {...attribute}
     >
@@ -72,29 +77,28 @@ function CloseButton({ children, buttonType, className, ...attribute }: ModalBut
   );
 }
 
-function Button<A extends Function>({
+function Button({
   children,
-  action,
-  closeAfterAction = false,
   className,
+  /** @defaultValue 'button' */
+  type = 'button',
+  /** @defaultValue 'full-width' */
+  size = 'fullWidth',
+  /** @defaultValue 'primary' */
+  variant = 'primary',
+  onClick,
   ...attribute
-}: ActionButtonProps<A>) {
-  const { closeModal } = useModalContext();
-
-  const onClick = () => {
-    if (action) action();
-    if (closeAfterAction) closeModal();
-  };
-
+}: ModalButtonProps) {
+  const buttonClassName = clsx(className, styles.button, styles[size], styles[variant]);
   return (
-    <button className={clsx(className, styles.button)} onClick={onClick} {...attribute}>
+    <button className={buttonClassName} type={type} onClick={onClick} {...attribute}>
       {children}
     </button>
   );
 }
 
-Modal.Contents = Contents;
 Modal.Title = Title;
+Modal.Description = Description;
 Modal.Button = Button;
 Modal.CloseButton = CloseButton;
 
