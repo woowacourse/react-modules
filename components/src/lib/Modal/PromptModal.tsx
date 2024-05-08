@@ -81,6 +81,7 @@ const PromptModal = ({
                 text={'확인'}
                 onClick={() => onConfirm(value)}
                 size={'small'}
+                width={modalPosition === 'bottom' || buttonPosition === 'column' ? 'full' : 'fixed'}
                 buttonStyle={'primary'}
                 primaryColor={
                   primaryColor ?? '#333333'
@@ -90,6 +91,7 @@ const PromptModal = ({
                 text={'취소'}
                 onClick={onClose}
                 size={'small'}
+                width={modalPosition === 'bottom' || buttonPosition === 'column' ? 'full' : 'fixed'}
                 buttonStyle={'border'}
               />
             </ModalButtonContainer>
