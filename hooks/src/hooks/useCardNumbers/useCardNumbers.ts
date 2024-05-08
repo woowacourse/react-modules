@@ -24,9 +24,10 @@ interface CardNumberReturn {
   inputMaxLength?: number[];
 }
 
-const ERROR_MESSAGE = (index: number) => `${index}번 째 카드 번호를 잘못입력하셨습니다.`;
-const VALID_CARD_LIST = ["Visa", "Master", "AMEX", "Diners", "UnionPay"];
-const NO_VALID_CARD = `${VALID_CARD_LIST.join(",")}카드가 아닙니다. 카드 번호를 확인해주세요.`;
+enum CardNumberErrorType {
+  CardNumberError = "CardNumberError",
+  NoValidBrandError = "noBrandError",
+}
 
 const findCardBrand = (value: string): CardBrand | undefined => {
   if (validMasterNumbers(value)) {
@@ -54,14 +55,14 @@ const useCardNumbers = (): CardNumberReturn => {
   const [third, setThird] = useState("");
   const [fourth, setFourth] = useState("");
 
-  const [errorMessage, setErrorMessage] = useState<(string | undefined)[]>(Array(4).fill(undefined));
+  const [errorTypeList, setErrorTypeList] = useState<(string | undefined)[]>(Array(4).fill(undefined));
 
   const setWrapper = (value: string, setState: (value: string) => void, index: number) => {
     const number = Number(value);
     if (Number.isNaN(number)) {
-      setErrorMessage((prev) => {
+      setErrorTypeList((prev) => {
         const arr = [...prev];
-        arr[index] = ERROR_MESSAGE(index);
+        arr[index] = CardNumberErrorType.CardNumberError;
         return arr;
       });
       return;
@@ -72,12 +73,12 @@ const useCardNumbers = (): CardNumberReturn => {
   const setFirstWrapper = (value: string) => {
     const brand = findCardBrand(value);
     if (brand) {
-      setErrorMessage((prev) => {
+      setErrorTypeList((prev) => {
         return [undefined, ...prev.slice(1)];
       });
     } else {
-      setErrorMessage((prev) => {
-        return [NO_VALID_CARD, ...prev.slice(1)];
+      setErrorTypeList((prev) => {
+        return [CardNumberErrorType.NoValidBrandError, ...prev.slice(1)];
       });
     }
     setCardBrand(brand);
@@ -100,7 +101,7 @@ const useCardNumbers = (): CardNumberReturn => {
       thirdState: [third, (value: string) => setWrapper(value, setThird, 2)] as const,
       fourthState: [fourth, (value: string) => setWrapper(value, setFourth, 3)] as const,
     },
-    errorList: errorMessage,
+    errorList: errorTypeList,
     cardBrand,
     //TODO: 카드 브랜드를 반환한다.
   };

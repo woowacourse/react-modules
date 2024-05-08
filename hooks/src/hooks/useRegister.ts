@@ -1,36 +1,26 @@
-import { ChangeEvent, InputHTMLAttributes, useEffect, useRef } from "react";
+import { ChangeEvent, InputHTMLAttributes, useEffect, useRef, useState } from "react";
 import useRestrictedState from "./useRestrictedState";
 
 interface CustomInputAttributes extends Omit<InputHTMLAttributes<HTMLInputElement>, "required"> {
-  required?: {
-    message: string;
-  };
+  required?: boolean;
   customType?: "number" | "english";
-  typeErrorMessage?: string;
-  maxLengthErrorMessage?: string;
   value?: string;
+}
+
+enum RegisterErrorType {
+  RequiredError = "requiredTypeError",
 }
 
 const useRegister = (
   name: string,
-  {
-    onChange,
-    required,
-    customType,
-    typeErrorMessage,
-    maxLength,
-    maxLengthErrorMessage,
-    value,
-  }: CustomInputAttributes = {}
+  { onChange, required, customType, maxLength, value }: CustomInputAttributes = {}
 ) => {
-  const { valueState, errorState } = useRestrictedState({
+  const { valueState, errorType } = useRestrictedState({
     type: customType,
-    typeErrorMessage,
     maxLength,
-    maxLengthErrorMessage,
   });
   const { value: builtInValue, setValue } = valueState;
-  const { errorMessage, setError } = errorState;
+  const [registerErrorType, setRegisterErrorType] = useState<RegisterErrorType>();
 
   useEffect(() => {
     if (value) setValue(value);
@@ -39,7 +29,7 @@ const useRegister = (
   const ref = useRef<HTMLInputElement>(null);
 
   const requiredValidator = (input: string) => {
-    if (!input && required) setError(required?.message);
+    if (!input && required) setRegisterErrorType(RegisterErrorType.RequiredError);
   };
 
   const onChangeWrapper = (e: ChangeEvent<HTMLInputElement>) => {
@@ -50,7 +40,7 @@ const useRegister = (
     requiredValidator(input);
   };
 
-  return { name, ref, value: builtInValue, onChange: onChangeWrapper, errorMessage: errorMessage };
+  return { name, ref, value: builtInValue, onChange: onChangeWrapper, errorType: errorType ?? registerErrorType };
 };
 
 export default useRegister;

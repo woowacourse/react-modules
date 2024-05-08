@@ -25,6 +25,11 @@ export interface ModalProps extends PropsWithChildren {
 
 interface DialogProps extends Omit<ModalProps, "theme"> {}
 
+enum ButtonPosition {
+  top = "top",
+  bottom = "bottom",
+}
+
 const Dialog: React.FC<DialogProps> = ({
   position = "center",
   title,
@@ -49,7 +54,7 @@ const Dialog: React.FC<DialogProps> = ({
   return (
     <dialog onClick={clickBackdrop} ref={dialogRef} css={modalStyle(position, width, theme)}>
       <div css={modalContentStyle}>
-        <ModalHeader hasCloseButton={closeButtonPosition === "top"}>{title}</ModalHeader>
+        <ModalHeader hasCloseButton={closeButtonPosition === ButtonPosition.top}>{title}</ModalHeader>
         <div>{children}</div>
         <div css={buttonsStyle}>
           {hasConfirmButton && (
@@ -57,7 +62,7 @@ const Dialog: React.FC<DialogProps> = ({
               {confirmMessage}
             </LongButton>
           )}
-          {closeButtonPosition === "bottom" && (
+          {closeButtonPosition === ButtonPosition.bottom && (
             <LongButton
               isHighLight={false}
               handleClick={() => {

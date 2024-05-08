@@ -1,4 +1,4 @@
-import { ChangeEvent, useRef, MouseEvent } from "react";
+import { ChangeEvent, useRef, MouseEvent, useState } from "react";
 import useRestrictedState from "./useRestrictedState";
 
 const COMPANY_LIST = [
@@ -20,19 +20,22 @@ interface CustomMouseEvent extends MouseEvent {
   target: CustomEventTarget;
 }
 
-const ERROR_MESSAGE = "잘못된 카드사를 입력했습니다.";
+enum CardCompanyErrorType {
+  CardCompanyError = "cardCompanyError",
+}
 
 const useCardCompany = (cardCompanyList: readonly string[] = COMPANY_LIST) => {
-  const { valueState, errorState } = useRestrictedState();
+  const { valueState, errorType } = useRestrictedState();
   const { value: cardCompany, setValue: setCardCompany } = valueState;
-  const { isError, errorMessage, setError } = errorState;
+  const [cardCompanyErrorType, setCardCompanyErrorType] = useState<CardCompanyErrorType>();
 
   const setCardCompanyWrapper = (value: string) => {
     if (cardCompanyList.includes(value)) {
       setCardCompany(value);
+      setCardCompanyErrorType(undefined);
       return;
     }
-    setError(ERROR_MESSAGE);
+    setCardCompanyErrorType(CardCompanyErrorType.CardCompanyError);
   };
 
   const cardCompanyInputRef = useRef<HTMLSelectElement>(null);
@@ -51,12 +54,7 @@ const useCardCompany = (cardCompanyList: readonly string[] = COMPANY_LIST) => {
 
   return {
     cardCompany,
-    errorState: {
-      isError,
-      errorMessage,
-      setError,
-      resetError: () => setError(undefined),
-    },
+    errorType: errorType ?? cardCompanyErrorType,
     cardCompanyInputRef,
     clickCardCompany,
   };

@@ -3,47 +3,37 @@ import { InputHTMLAttributes, useState } from "react";
 interface UseRestrictedStateProps {
   type?: InputHTMLAttributes<HTMLInputElement>["type"] | "english";
   maxLength?: number;
-  typeErrorMessage?: string;
-  maxLengthErrorMessage?: string;
 }
 
-const useRestrictedState = ({
-  type,
-  maxLength,
-  typeErrorMessage,
-  maxLengthErrorMessage,
-}: UseRestrictedStateProps = {}) => {
+enum RestrictedErrorType {
+  EnglishTypeError = "englishTypeError",
+  NumberTypeError = "numberTypeError",
+  MaxLengthError = "maxLengthError",
+}
+
+const useRestrictedState = ({ type, maxLength }: UseRestrictedStateProps = {}) => {
   const [value, setValue] = useState("");
-  const [errorMessage, setErrorMessage] = useState<string | undefined>();
-
-  const resetError = () => {
-    setErrorMessage(undefined);
-  };
-
-  const setError = (errorMessage: string | undefined) => {
-    if (!errorMessage) {
-      resetError();
-      return;
-    }
-    setErrorMessage(errorMessage);
-  };
+  const [errorType, setErrorType] = useState<RestrictedErrorType | undefined>();
 
   const setValueWrapper = (value: string) => {
-    if ((type === "english" && !/^[a-zA-Z ]+$/.test(value)) || (type === "number" && Number.isNaN(Number(value)))) {
-      setError(typeErrorMessage);
+    if (type === "english" && !/^[a-zA-Z ]+$/.test(value)) {
+      setErrorType(RestrictedErrorType.EnglishTypeError);
+      return;
+    }
+    if (type === "number" && Number.isNaN(Number(value))) {
+      setErrorType(RestrictedErrorType.NumberTypeError);
       return;
     }
     if (maxLength && value.length > maxLength) {
-      setError(maxLengthErrorMessage);
+      setErrorType(RestrictedErrorType.MaxLengthError);
       return;
     }
-    setError(undefined);
     setValue(value);
   };
 
   return {
     valueState: { value, setValue: setValueWrapper },
-    errorState: { isError: !!errorMessage, errorMessage, setError },
+    errorType,
   };
 };
 
