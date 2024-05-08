@@ -24,7 +24,7 @@ export const ModalContents = styled.div<ModalContentsStyleProps>`
   border-radius: ${({ $borderRadius }) => $borderRadius || BASIC_BORDER_RADIUS};
   min-width: 50vw;
   max-width: 90vw;
-  min-height: 12.5rem;
+  min-height: 1rem;
   max-height: 90vw;
   background-color: ${({ $backgroundColor }) => $backgroundColor?.modal || BASIC_BACKGROUND_COLOR.modal};
   padding: ${({ $contentsPadding }) => $contentsPadding || BASIC_PADDING};

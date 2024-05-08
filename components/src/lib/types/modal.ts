@@ -1,4 +1,4 @@
-import React, { Dispatch, ReactNode, SetStateAction } from 'react';
+import React, { CSSProperties, Dispatch, ReactNode, SetStateAction } from 'react';
 
 export type ModalType = 'center' | 'bottom' | 'toast';
 
@@ -10,22 +10,6 @@ export interface ModalPosition {
   left?: number | string;
   right?: number | string;
   bottom?: number | string;
-}
-// TODO 삭제
-export interface ModalOptions {
-  type: ModalType;
-  animationDuration?: number; //단위:ms
-  isNeedAnimation?: boolean;
-  isCloseOnEsc?: boolean;
-  isCloseOnBackdrop?: boolean;
-  position?: ModalPosition;
-  toastDuration?: number; //단위:ms
-  contentsPadding?: string;
-  borderRadius?: string;
-  backgroundColor?: {
-    modal?: string;
-    backdrop?: string;
-  };
 }
 export interface Background {
   modal?: string;
@@ -50,6 +34,21 @@ export interface BottomModalProps extends ModalCommonProps, AnimationProps {}
 export interface ToastModalProps extends ModalCommonProps, AnimationProps {
   position?: ModalPosition;
   toastDuration?: number; //단위:ms
+}
+export type ButtonContainerJustifyContent =
+  | 'center'
+  | 'right'
+  | 'left'
+  | 'space-around'
+  | 'space-between'
+  | 'space-evenly';
+
+export interface AlertModalProps extends Omit<ModalCommonProps, 'children'> {
+  title?: ReactNode;
+  contents: ReactNode;
+  buttonContainerJustifyContent: ButtonContainerJustifyContent;
+  buttonStyle: CSSProperties;
+  buttonContents: ReactNode;
 }
 
 export interface ModalContainerProps extends Omit<ModalCommonProps, 'setOpenModal'>, AnimationProps {

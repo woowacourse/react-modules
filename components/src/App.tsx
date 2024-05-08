@@ -1,13 +1,29 @@
 import { useRef, useState } from 'react';
+import styled from 'styled-components';
 import './App.css';
 
-import { BottomModal, CenterModal, ToastModal, usePosition } from './lib';
+import { AlertModal, BottomModal, CenterModal, ToastModal, usePosition } from './lib';
 import ModalContainer from './lib/components/ModalContainer';
+import { BASIC_BORDER_RADIUS } from './lib/constants/modal';
+
+const AlertModalTitle = styled.h2`
+  margin-bottom: 1rem;
+  font-size: 1.2rem;
+`;
+
+const AlertModalContents = styled.div`
+  margin-bottom: 1rem;
+  font-size: 1rem;
+  p {
+    margin-bottom: 0.625rem;
+  }
+`;
 
 function App() {
   const [openCenterModal, setOpenCenterModal] = useState(false);
   const [openBottomModal, setOpenBottomModal] = useState(false);
   const [openToastModal, setOpenToastModal] = useState(false);
+  const [openAlertModal, setOpenAlertModal] = useState(false);
   const positionRef = useRef<HTMLDivElement>(null);
   const { position } = usePosition(positionRef.current);
 
@@ -16,6 +32,7 @@ function App() {
       <button onClick={() => setOpenCenterModal(true)}> center modal open</button>
       <button onClick={() => setOpenBottomModal(true)}> bottom modal open</button>
       <button onClick={() => setOpenToastModal(true)}> toast modal open</button>
+      <button onClick={() => setOpenAlertModal(true)}> alert modal open</button>
       <BottomModal openModal={openBottomModal} setOpenModal={setOpenBottomModal}>
         <h1>Bottom Modal</h1>
         <BottomModal.button isCloseModal={true}>close</BottomModal.button>
@@ -40,6 +57,20 @@ function App() {
       <div ref={positionRef} id="toast-modal-position">
         toast modal position
       </div>
+      <AlertModal
+        openModal={openAlertModal}
+        setOpenModal={setOpenAlertModal}
+        title={<AlertModalTitle>alert modal</AlertModalTitle>}
+        contents={
+          <AlertModalContents>
+            <p>open</p>
+            <p>alert modal</p>
+          </AlertModalContents>
+        }
+        buttonContainerJustifyContent="right"
+        buttonStyle={{ backgroundColor: '#111111ed', color: '#ffff', borderRadius: BASIC_BORDER_RADIUS }}
+        buttonContents="확인"
+      />
     </>
   );
 }
