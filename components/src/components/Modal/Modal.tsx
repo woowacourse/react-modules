@@ -10,7 +10,7 @@ import ThemeProvider from "../ContextProvider/ThemeProvider";
 import useThemeContext from "../../hooks/useThemeContext";
 import useModalContext from "../../hooks/useModalContext";
 
-export interface ModalProps extends PropsWithChildren {
+export interface ModalProps {
   position?: "center" | "bottom";
   title?: string;
   width?: number;
@@ -30,7 +30,7 @@ enum ButtonPosition {
   bottom = "bottom",
 }
 
-const Dialog: React.FC<DialogProps> = ({
+const Dialog = ({
   position = "center",
   title,
   width = 242,
@@ -41,7 +41,7 @@ const Dialog: React.FC<DialogProps> = ({
   children,
   confirmMessage,
   cancelMessage,
-}) => {
+}: PropsWithChildren<ModalProps>) => {
   const theme = useThemeContext();
   const { dialogRef, action } = useModalContext();
 
@@ -79,9 +79,9 @@ const Dialog: React.FC<DialogProps> = ({
   );
 };
 
-const Modal: React.FC<ModalProps> = (props) => {
+const Modal = ({ theme, ...props }: PropsWithChildren<ModalProps>) => {
   return (
-    <ThemeProvider value={props.theme}>
+    <ThemeProvider value={theme}>
       <Dialog {...props}></Dialog>
     </ThemeProvider>
   );
@@ -91,5 +91,19 @@ export const useModalAction = () => {
   const { action } = useModalContext();
   return action;
 };
+
+const SmallModal = ({ ...props }: PropsWithChildren<DialogProps>) => {
+  return <Modal {...props} width={320}></Modal>;
+};
+const MediumModal = ({ ...props }: PropsWithChildren<DialogProps>) => {
+  return <Modal {...props} width={480}></Modal>;
+};
+const LargeModal = ({ ...props }: PropsWithChildren<DialogProps>) => {
+  return <Modal {...props} width={600}></Modal>;
+};
+
+Modal.Small = SmallModal;
+Modal.Medium = MediumModal;
+Modal.Large = LargeModal;
 
 export default Modal;

@@ -28,6 +28,7 @@
 ## Step2
 
 - [x] 작은 confirm 버튼 cancel버튼 만들기
+- [x] small, medium, large 모달
 
 - [ ] Alert 모달.
   - title, Content만 제공 받기.

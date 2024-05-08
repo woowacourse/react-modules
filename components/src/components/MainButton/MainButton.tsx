@@ -6,7 +6,7 @@ import useThemeContext from "../../hooks/useThemeContext";
 export type StyleType = "Long" | "Short";
 
 interface LongButtonProps extends PropsWithChildren {
-  buttonType: StyleType;
+  buttonType?: StyleType;
   isHighLight?: boolean;
   handleClick?: () => void;
 }
