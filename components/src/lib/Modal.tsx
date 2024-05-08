@@ -12,22 +12,12 @@ const ModalHeader = ({ title, close, onClose }: { title: string; close: boolean;
     <div className={css(headerContainerCSS)}>
       <p className={css(titleCSS)}>{title}</p>
       {close && (
-        <button
-          className={css(closeButtonCSS)}
-          onClick={onClose}
-        >
+        <button className={css(closeButtonCSS)} onClick={onClose}>
           X
         </button>
       )}
     </div>
   );
-};
-
-import { useState } from "react";
-
-const B = () => <M a={useState<boolean>(false)} />;
-const M = (a: ReturnType<typeof useState<boolean>>) => {
-  return <div>hi</div>;
 };
 
 const ModalContent = ({ description, children }: { description: string; children: ReactNode }) => {
@@ -51,18 +41,12 @@ const ModalFooter = ({ cancelLabel, confirmLabel, onConfirm, onClose }: ModalFoo
     (confirmLabel || cancelLabel) && (
       <div className={css(buttonContainerCSS)}>
         {confirmLabel && (
-          <button
-            className={css(buttonCSS, confirmButtonCSS)}
-            onClick={onConfirm}
-          >
+          <button className={css(buttonCSS, confirmButtonCSS)} onClick={onConfirm}>
             {confirmLabel}
           </button>
         )}
         {cancelLabel && (
-          <button
-            className={css(buttonCSS, cancelButtonCSS)}
-            onClick={onClose}
-          >
+          <button className={css(buttonCSS, cancelButtonCSS)} onClick={onClose}>
             {cancelLabel}
           </button>
         )}
@@ -102,11 +86,7 @@ const Modal = ({
     isOpen && (
       <>
         <ModalPositioner position={position}>
-          <ModalHeader
-            title={title}
-            close={close}
-            onClose={closeModal}
-          />
+          <ModalHeader title={title} close={close} onClose={closeModal} />
           <ModalContent description={description}>{children}</ModalContent>
           <ModalFooter
             cancelLabel={cancelLabel}
@@ -115,10 +95,7 @@ const Modal = ({
             onClose={closeModal}
           />
         </ModalPositioner>
-        <div
-          className={css(backdropCSS)}
-          onClick={closeModal}
-        />
+        <div className={css(backdropCSS)} onClick={closeModal} />
       </>
     )
   );

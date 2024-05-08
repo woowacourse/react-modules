@@ -13,10 +13,6 @@ const useModalState = (
   const [isOpen, setIsOpen] = useState(initialIsOpen);
 
   useEffect(() => {
-    onOpen();
-  }, []);
-
-  useEffect(() => {
     if (isOpen) onOpen();
     else onClose();
   }, [isOpen]);
