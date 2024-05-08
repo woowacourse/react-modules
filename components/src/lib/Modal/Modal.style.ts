@@ -10,14 +10,14 @@ export const colors = {
   grey500: '#000000',
 };
 
-export const ModalOverlay = styled.div`
+export const ModalOverlay = styled.div<{ $zIndex: number }>`
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.5);
-  z-index: 10;
+  z-index: ${(props) => props.$zIndex};
 
   display: flex;
   flex-direction: column;
@@ -28,13 +28,14 @@ export const ModalOverlay = styled.div`
 interface ModalWrapperProps {
   $position: ModalPositionType;
   $size: ModalSizeType;
+  $zIndex: number;
 }
 export const ModalWrapper = styled.div<ModalWrapperProps>`
   background: ${colors.grey100};
   min-width: 300px;
   color: ${colors.grey500};
   padding: 24px 32px;
-  z-index: 100;
+  z-index: ${(props) => props.$zIndex};
 
   display: flex;
   flex-direction: column;

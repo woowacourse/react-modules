@@ -12,11 +12,19 @@ export interface ModalProps {
   isOpen: boolean;
   position?: ModalPositionType;
   size?: ModalSizeType;
+  zIndex?: number;
   children: React.ReactNode;
   onClose: () => void;
 }
 
-function Modal({ isOpen, position = 'center', size = 'medium', children, onClose }: ModalProps) {
+function Modal({
+  isOpen,
+  position = 'center',
+  size = 'medium',
+  zIndex = 999,
+  children,
+  onClose,
+}: ModalProps) {
   const modalRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -36,8 +44,12 @@ function Modal({ isOpen, position = 'center', size = 'medium', children, onClose
   };
 
   return (
-    <ModalOverlay onClick={onClose}>
+    <ModalOverlay
+      onClick={onClose}
+      $zIndex={zIndex - 1}
+    >
       <ModalWrapper
+        $zIndex={zIndex}
         ref={modalRef}
         $position={position}
         $size={size}
