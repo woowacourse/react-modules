@@ -75,6 +75,7 @@ const ConfirmModal = ({
                 text={'확인'}
                 onClick={onConfirm}
                 size={'small'}
+                width={modalPosition === 'bottom' || buttonPosition === 'column' ? 'full' : 'fixed'}
                 buttonStyle={'primary'}
                 primaryColor={
                   primaryColor ?? '#333333'
@@ -84,6 +85,7 @@ const ConfirmModal = ({
                 text={'취소'}
                 onClick={onClose}
                 size={'small'}
+                width={modalPosition === 'bottom' || buttonPosition === 'column' ? 'full' : 'fixed'}
                 buttonStyle={'border'}
               />
             </ModalButtonContainer>
