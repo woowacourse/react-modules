@@ -46,7 +46,10 @@ const Button = styled.button<ButtonProps>(({ buttonTheme }) => {
     width: '100%',
     height: '44px',
     backgroundColor,
-    border: '1px solid',
+    border:
+      buttonTheme === 'secondary'
+        ? `1px solid ${COLOR_HEXES.grayTransParent1}`
+        : undefined,
     borderRadius: '5px',
 
     fontWeight: 700,
