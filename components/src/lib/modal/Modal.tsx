@@ -20,8 +20,8 @@ export interface ModalProps extends React.PropsWithChildren {
 const Modal: React.FC<ModalProps> & {
   ModalHeader: ModalHeaderType;
   ModalTitle: ModalTitleType;
-  ModalCloseButton: ModalButtonType;
-  ModalLongButton: ModalButtonType;
+  ModalCloseButton: ModalCloseButtonType;
+  ModalButton: ModalButtonType;
   ModalContent: ModalContentType;
   ModalFooter: ModalFooterType;
 } = ({ children, isOpen, size, position, ...restProps }) => {
@@ -89,19 +89,23 @@ const ModalTitle: ModalTitleType = ({ children, ...restProps }) => {
   return <Styled.ModalTitle {...restProps}>{children}</Styled.ModalTitle>;
 };
 
-type ModalButtonType = React.FC<ButtonHTMLAttributes<HTMLButtonElement>>;
+type ModalCloseButtonType = React.FC<ButtonHTMLAttributes<HTMLButtonElement>>;
 
-const ModalCloseButton: ModalButtonType = ({ children, ...restProps }) => {
+const ModalCloseButton: ModalCloseButtonType = ({ children, ...restProps }) => {
   return (
     <Styled.ModalCloseButton {...restProps}>{children}</Styled.ModalCloseButton>
   );
 };
 
-const ModalLongButton: ModalButtonType = ({ children, ...restProps }) => {
+type ModalButtonType = React.FC<
+  ButtonHTMLAttributes<HTMLButtonElement> & { size: "S" | "M" | "L" }
+>;
+
+const ModalButton: ModalButtonType = ({ size, children, ...restProps }) => {
   return (
-    <Styled.ModalLongButton type="button" {...restProps}>
+    <Styled.ModalButton size={size} type="button" {...restProps}>
       {children}
-    </Styled.ModalLongButton>
+    </Styled.ModalButton>
   );
 };
 
@@ -124,7 +128,7 @@ const ModalFooter: ModalFooterType = ({ children, ...restProps }) => {
 Modal.ModalHeader = ModalHeader;
 Modal.ModalTitle = ModalTitle;
 Modal.ModalCloseButton = ModalCloseButton;
-Modal.ModalLongButton = ModalLongButton;
+Modal.ModalButton = ModalButton;
 Modal.ModalContent = ModalContent;
 Modal.ModalFooter = ModalFooter;
 

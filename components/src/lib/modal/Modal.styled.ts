@@ -89,12 +89,30 @@ export const ModalCloseButton = styled.button`
   }
 `;
 
-export const ModalLongButton = styled.button`
+export const ModalButton = styled.button<{
+  size: "S" | "M" | "L";
+}>`
   border: none;
   color: white;
   background-color: #333333;
   font-weight: bold;
-  width: 100%;
+
+  ${({ size }) => {
+    switch (size) {
+      case "S":
+        return `
+          width: 10%;
+        `;
+      case "M":
+        return `
+          width: 50%;
+        `;
+      case "L":
+        return `
+          width: 90%;
+        `;
+    }
+  }}
 
   &:hover {
     border: none;
