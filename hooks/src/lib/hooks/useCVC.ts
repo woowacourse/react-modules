@@ -2,8 +2,14 @@ import { useState } from "react";
 import { ValidationResult } from "../../type";
 import { ERROR_MESSAGE } from "../constants/errorMessage";
 
-export function useCVC(): [string, (value: string) => void, ValidationResult] {
-  const [password, setPassword] = useState("");
+type UseCVCResult = {
+  cardCVC: string;
+  handleCardCVCChange: (value: string) => void;
+  cardCVCValidation: ValidationResult;
+};
+
+export function useCVC(): UseCVCResult {
+  const [cardCVC, setCardCVC] = useState("");
   const [isTouched, setIsTouched] = useState(false);
 
   function validatePassword(value: string): ValidationResult {
@@ -25,10 +31,10 @@ export function useCVC(): [string, (value: string) => void, ValidationResult] {
     return { isValid: true };
   }
 
-  function handlePasswordChange(value: string) {
+  function handleCardCVCChange(value: string) {
     if (!isTouched) setIsTouched(true);
-    setPassword(value);
+    setCardCVC(value);
   }
 
-  return [password, handlePasswordChange, validatePassword(password)];
+  return { cardCVC, handleCardCVCChange, cardCVCValidation: validatePassword(cardCVC) };
 }

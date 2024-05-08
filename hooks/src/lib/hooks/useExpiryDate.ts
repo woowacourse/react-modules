@@ -7,12 +7,14 @@ type ExpiryDate = {
   year: string;
 };
 
-export function useExpiryDate(): [
-  ExpiryDate,
-  (option: "year" | "month", value: string) => void,
-  ValidationResult
-] {
-  const [expiryDate, setExpiryDate] = useState<ExpiryDate>({ month: "", year: "" });
+type UseExpiryDateResult = {
+  cardExpiryDate: ExpiryDate;
+  handleCardExpiryDateChange: (option: "year" | "month", value: string) => void;
+  cardExpiryDateValidation: ValidationResult;
+};
+
+export function useExpiryDate(): UseExpiryDateResult {
+  const [cardExpiryDate, setCardExpiryDate] = useState<ExpiryDate>({ month: "", year: "" });
   const [isTouched, setIsTouched] = useState({ month: false, year: false });
 
   function validateExpiryDate(expiryDate: ExpiryDate): ValidationResult {
@@ -64,10 +66,14 @@ export function useExpiryDate(): [
     return { isValid: true };
   }
 
-  function handleExpiryDateChange(option: "year" | "month", value: string) {
+  function handleCardExpiryDateChange(option: "year" | "month", value: string) {
     if (!isTouched[option]) setIsTouched((prev) => ({ ...prev, [option]: true }));
-    setExpiryDate((prev) => ({ ...prev, [option]: value }));
+    setCardExpiryDate((prev) => ({ ...prev, [option]: value }));
   }
 
-  return [expiryDate, handleExpiryDateChange, validateExpiryDate(expiryDate)];
+  return {
+    cardExpiryDate,
+    handleCardExpiryDateChange,
+    cardExpiryDateValidation: validateExpiryDate(cardExpiryDate),
+  };
 }

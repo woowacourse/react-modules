@@ -1,23 +1,29 @@
-import {
-  useCVC,
-  useCardHolder,
-  useCardIssuer,
-  useCardNumber,
-  useExpiryDate,
-  usePassword,
-} from "choco-payments-validation-hooks";
+// import {
+//   useCVC,
+//   useCardHolder,
+//   useCardIssuer,
+//   useCardNumber,
+//   useExpiryDate,
+//   usePassword,
+// } from "choco-payments-validation-hooks";
 import React from "react";
 import "./App.css";
+import { useCVC } from "./lib/hooks/useCVC";
+import { useCardHolder } from "./lib/hooks/useCardHolder";
+import { useCardIssuer } from "./lib/hooks/useCardIssuer";
+import { useCardNumber } from "./lib/hooks/useCardNumber";
+import { useExpiryDate } from "./lib/hooks/useExpiryDate";
+import { usePassword } from "./lib/hooks/usePassword";
 
 const cardNames = ["현대카드", "국민카드", "신한카드", "우리카드"];
 
 function App() {
-  const [cardHolder, handleCardHolderChange, cardHolderValidation] = useCardHolder();
-  const [cardPassword, handleCardPasswordChange, cardPasswordValidation] = usePassword();
-  const [cardCVC, handleCardCVCChange, cardCVCValidation] = useCVC();
-  const [cardExpiryDate, handleCardExpiryDateChange, cardExpiryDateValidation] = useExpiryDate();
-  const [cardNumbers, handleCardNumbersChange, cardNumbersValidation] = useCardNumber();
-  const [cardIssuer, handleCardIssuerChange, cardIssuerValidation] = useCardIssuer();
+  const { cardCVC, handleCardCVCChange, cardCVCValidation } = useCVC();
+  const { cardHolder, handleCardHolderChange, cardHolderValidation } = useCardHolder();
+  const { cardIssuer, handleCardIssuerChange, cardIssuerValidation } = useCardIssuer();
+  const { cardNumbers, handleCardNumbersChange, cardNumbersValidation } = useCardNumber();
+  const { cardExpiryDate, handleCardExpiryDateChange, cardExpiryDateValidation } = useExpiryDate();
+  const { cardPassword, handleCardPasswordChange, cardPasswordValidation } = usePassword();
 
   const cardNumberKeys = Object.keys(cardNumbers) as Array<keyof typeof cardNumbers>;
 

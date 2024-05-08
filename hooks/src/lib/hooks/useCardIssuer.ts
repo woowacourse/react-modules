@@ -2,7 +2,13 @@ import { useState } from "react";
 import { ValidationResult } from "../../type";
 import { ERROR_MESSAGE } from "../constants/errorMessage";
 
-export function useCardIssuer(): [string, (value: string) => void, ValidationResult] {
+type UseCardIssuerResult = {
+  cardIssuer: string;
+  handleCardIssuerChange: (value: string) => void;
+  cardIssuerValidation: ValidationResult;
+};
+
+export function useCardIssuer(): UseCardIssuerResult {
   const [cardIssuer, setCardIssuer] = useState("");
   const [isTouched, setIsTouched] = useState(false);
 
@@ -20,5 +26,9 @@ export function useCardIssuer(): [string, (value: string) => void, ValidationRes
     setCardIssuer(value);
   }
 
-  return [cardIssuer, handleCardIssuerChange, validateCardIssuer(cardIssuer)];
+  return {
+    cardIssuer,
+    handleCardIssuerChange,
+    cardIssuerValidation: validateCardIssuer(cardIssuer),
+  };
 }

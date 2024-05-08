@@ -13,11 +13,13 @@ type TouchedState = {
   [key in keyof CardNumbers]: boolean;
 };
 
-export function useCardNumber(): [
-  CardNumbers,
-  (option: keyof CardNumbers, value: string) => void,
-  ValidationResult
-] {
+type UseCardNumberResult = {
+  cardNumbers: CardNumbers;
+  handleCardNumbersChange: (option: keyof CardNumbers, value: string) => void;
+  cardNumbersValidation: ValidationResult;
+};
+
+export function useCardNumber(): UseCardNumberResult {
   const [cardNumbers, setCardNumbers] = useState<CardNumbers>({
     first: "",
     second: "",
@@ -64,5 +66,9 @@ export function useCardNumber(): [
     setCardNumbers((prev) => ({ ...prev, [option]: value }));
   }
 
-  return [cardNumbers, handleCardNumbersChange, validateCardNumbers(cardNumbers)];
+  return {
+    cardNumbers,
+    handleCardNumbersChange,
+    cardNumbersValidation: validateCardNumbers(cardNumbers),
+  };
 }
