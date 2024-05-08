@@ -18,7 +18,6 @@ export const Default: Story = {
   args: {
     isOpen: true,
     title: '모달 테스트',
-    position: 'center',
     hasCloseButton: true,
     footerButtons: [
       <ModalButton
@@ -52,6 +51,39 @@ export const CenterModal: Story = {
 
 export const BottomModal: Story = {
   args: { ...Default.args, position: 'bottom' },
+  render: (args) => {
+    return (
+      <Modal {...args}>
+        <div>contents</div>
+      </Modal>
+    );
+  },
+};
+
+export const SmallModal: Story = {
+  args: { ...Default.args, size: 'small' },
+  render: (args) => {
+    return (
+      <Modal {...args}>
+        <div>contents</div>
+      </Modal>
+    );
+  },
+};
+
+export const MediumModal: Story = {
+  args: { ...Default.args, size: 'medium' },
+  render: (args) => {
+    return (
+      <Modal {...args}>
+        <div>contents</div>
+      </Modal>
+    );
+  },
+};
+
+export const LargeModal: Story = {
+  args: { ...Default.args, size: 'large' },
   render: (args) => {
     return (
       <Modal {...args}>

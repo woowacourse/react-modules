@@ -10,10 +10,12 @@ import {
 import React, { useEffect, useRef } from 'react';
 
 export type ModalPositionType = 'center' | 'bottom';
+export type ModalSizeType = 'small' | 'medium' | 'large';
 
 export interface ModalProps {
   isOpen: boolean;
   position?: ModalPositionType;
+  size?: ModalSizeType;
   title: string;
   hasCloseButton?: boolean;
   children: React.ReactNode;
@@ -24,6 +26,7 @@ export interface ModalProps {
 export default function Modal({
   isOpen,
   position = 'center',
+  size = 'medium',
   title,
   hasCloseButton = true,
   children,
@@ -53,6 +56,7 @@ export default function Modal({
       <ModalWrapper
         ref={modalRef}
         $position={position}
+        $size={size}
         onKeyDown={handleKeyDown}
         onClick={(event) => event.stopPropagation()}
         tabIndex={-1}

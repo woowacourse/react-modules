@@ -1,4 +1,5 @@
-import { ModalPositionType } from './Modal';
+import { ModalPositionType, ModalSizeType } from './Modal';
+
 import styled from 'styled-components';
 
 export const colors = {
@@ -24,7 +25,11 @@ export const ModalOverlay = styled.div`
   align-items: center;
 `;
 
-export const ModalWrapper = styled.div<{ $position: ModalPositionType }>`
+interface ModalWrapperProps {
+  $position: ModalPositionType;
+  $size: ModalSizeType;
+}
+export const ModalWrapper = styled.div<ModalWrapperProps>`
   background: ${colors.grey100};
   min-width: 300px;
   color: ${colors.grey500};
@@ -34,6 +39,8 @@ export const ModalWrapper = styled.div<{ $position: ModalPositionType }>`
   display: flex;
   flex-direction: column;
   gap: 16px;
+
+  max-width: 100%;
 
   ${(props) => {
     if (props.$position === 'center') {
@@ -50,6 +57,22 @@ export const ModalWrapper = styled.div<{ $position: ModalPositionType }>`
         left: 0;
         width: 100%;
         border-radius: 10px 10px 0 0;
+      `;
+    }
+  }}
+
+  ${(props) => {
+    if (props.$position === 'center' && props.$size === 'small') {
+      return `
+        width: 320px`;
+    }
+    if (props.$position === 'center' && props.$size === 'medium') {
+      return `
+        width: 480px`;
+    }
+    if (props.$position === 'center' && props.$size === 'large') {
+      return `
+        width: 600px;
       `;
     }
   }}
