@@ -1,22 +1,30 @@
 import styled from 'styled-components';
-import Theme from '@/style/theme';
+import Theme from '../style/theme';
+import { Size } from './Modal/Modal';
 
 type ButtonColorType = 'dark' | 'light';
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   label: string;
-  onClick: () => void;
+  size: Size;
   colorType?: ButtonColorType;
+  onClick: () => void;
 }
 
 const Button = ({
   label,
-  onClick,
+  size,
   colorType = 'light',
+  onClick,
   ...rest
 }: ButtonProps) => {
   return (
-    <ButtonWrapper onClick={onClick} $colorType={colorType} {...rest}>
+    <ButtonWrapper
+      onClick={onClick}
+      $size={size}
+      $colorType={colorType}
+      {...rest}
+    >
       {label}
     </ButtonWrapper>
   );
@@ -24,8 +32,17 @@ const Button = ({
 
 export default Button;
 
-const ButtonWrapper = styled.button<{ $colorType: ButtonColorType }>`
-  width: 100%;
+const sizeMap = {
+  small: '100px',
+  medium: '200px',
+  large: '100%',
+};
+
+const ButtonWrapper = styled.button<{
+  $size: Size;
+  $colorType: ButtonColorType;
+}>`
+  width: ${({ $size }) => sizeMap[$size]};
   height: 44px;
   font-size: ${Theme.font.size.medium};
   font-weight: ${Theme.font.weight.bold};
