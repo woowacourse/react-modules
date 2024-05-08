@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const useInputs = (initialValue: Record<string, string>) => {
+const useInputs = <T extends string>(initialValue: Record<T, string>) => {
   const [inputValue, setInputValue] = useState(initialValue);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
