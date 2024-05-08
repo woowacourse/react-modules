@@ -5,7 +5,7 @@ import useCardNumberValidation from './useCardNumberValidation';
 import { CARD_NUMBER_ERROR_TYPE } from './useCardNumber.constant';
 
 import { determineCardBrand } from '../domain/cardBrand/cardBrand';
-import { isCardNumberOverLength } from './useCardNumber.util';
+import { formatCardNumber, isCardNumberOverLength } from './useCardNumber.util';
 
 const useCardNumber = () => {
   const [cardNumbers, setCardNumbers] = useState('');
@@ -16,12 +16,14 @@ const useCardNumber = () => {
 
     const errorType = validateCardNumbers(value, cardBrand);
 
-    if (errorType === CARD_NUMBER_ERROR_TYPE.nonNumeric || isCardNumberOverLength(value, cardBrand)) return;
+    if (isCardNumberOverLength(value, cardBrand) || errorType === CARD_NUMBER_ERROR_TYPE.nonNumeric) return;
 
     setCardNumbers(value);
   };
 
-  return { cardNumbers, cardNumberError, handleChangeCardNumber };
+  const formattedCardNumbers = formatCardNumber(cardNumbers, determineCardBrand(cardNumbers));
+
+  return { cardNumbers: formattedCardNumbers, cardNumberError, handleChangeCardNumber };
 };
 
 export default useCardNumber;
