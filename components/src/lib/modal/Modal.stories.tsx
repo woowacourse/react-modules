@@ -169,7 +169,7 @@ export const 하단_닫기_버튼이_있는_모달: Story = {
         <span>올리와 썬데이의 하단 닫기 버튼이 있는 모달</span>
       </Modal.ModalContent>
       <Modal.ModalFooter>
-        <Modal.ModalLongButton>확인</Modal.ModalLongButton>
+        <Modal.ModalButton size={"L"}>확인</Modal.ModalButton>
       </Modal.ModalFooter>
     </Modal>
   ),
@@ -204,7 +204,7 @@ export const S_사이즈_모달: Story = {
         <span>작은 모달</span>
       </Modal.ModalContent>
       <Modal.ModalFooter>
-        <Modal.ModalLongButton>확인</Modal.ModalLongButton>
+        <Modal.ModalButton size={"L"}>확인</Modal.ModalButton>
       </Modal.ModalFooter>
     </Modal>
   ),
@@ -239,7 +239,7 @@ export const M_사이즈_모달: Story = {
         <span>평범한 모달</span>
       </Modal.ModalContent>
       <Modal.ModalFooter>
-        <Modal.ModalLongButton>확인</Modal.ModalLongButton>
+        <Modal.ModalButton size={"L"}>확인</Modal.ModalButton>
       </Modal.ModalFooter>
     </Modal>
   ),
@@ -274,7 +274,7 @@ export const L_사이즈_모달: Story = {
         <span>큰 모달</span>
       </Modal.ModalContent>
       <Modal.ModalFooter>
-        <Modal.ModalLongButton>확인</Modal.ModalLongButton>
+        <Modal.ModalButton size={"L"}>확인</Modal.ModalButton>
       </Modal.ModalFooter>
     </Modal>
   ),
