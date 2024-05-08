@@ -13,6 +13,7 @@ const validateInputType = (value: string) => {
 };
 
 const validateFieldRules = (value: string) => {
+  // 성과 이름의 구조처럼 문자열과 문자열 사이에 공백이 1개 존재하며, 연속으로 2개는 불가
   const isValidHolderFormat = /^(?=\S)(?!.*\s\s).*\s+(?=\S).*$/.test(value);
 
   if (!isValidHolderFormat) {
