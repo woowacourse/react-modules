@@ -16,6 +16,7 @@ export interface SubtitleProps {
 }
 
 export interface CloseButtonProps {
+  display: boolean;
   onClose: () => void;
 }
 
