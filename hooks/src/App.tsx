@@ -2,10 +2,10 @@ import {
   useCVC,
   useCardHolder,
   useCardIssuer,
-  useCardNumber,
   useExpiryDate,
   usePassword,
 } from "choco-payments-validation-hooks";
+import { useCardNumber } from "./lib/hooks/useCardNumber";
 import React from "react";
 import "./App.css";
 
@@ -18,8 +18,6 @@ function App() {
   const { cardNumbers, handleCardNumbersChange, cardNumbersValidation } = useCardNumber();
   const { cardExpiryDate, handleCardExpiryDateChange, cardExpiryDateValidation } = useExpiryDate();
   const { cardPassword, handleCardPasswordChange, cardPasswordValidation } = usePassword();
-
-  const cardNumberKeys = Object.keys(cardNumbers) as Array<keyof typeof cardNumbers>;
 
   return (
     <>
@@ -84,15 +82,12 @@ function App() {
 
       <div>
         <label htmlFor="cardNumber">Card Number:</label>
-        {cardNumberKeys.map((key, index) => (
-          <input
-            key={index}
-            type="text"
-            id={`cardNumber-${index}`}
-            value={cardNumbers[key]}
-            onChange={(e) => handleCardNumbersChange(key, e.target.value)}
-          />
-        ))}
+        <input
+          type="text"
+          id={"cardNumber"}
+          value={cardNumbers}
+          onChange={(e) => handleCardNumbersChange(e.target.value)}
+        />
         {!cardNumbersValidation.isValid && (
           <span style={{ color: "red" }}>{cardNumbersValidation.errorMessage}</span>
         )}

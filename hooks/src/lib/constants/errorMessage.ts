@@ -6,7 +6,7 @@ export const ERROR_MESSAGE = {
   },
   CARD__NUMBER: {
     INVALID_NUMBERS: "카드 번호는 숫자만 입력 가능합니다.",
-    MAX_LENGTH_EXCEEDED: "카드 번호는 4자리까지만 입력 가능합니다.",
+    INVALID_LENGTH: "카드 번호는 4자리까지만 입력 가능합니다.",
   },
   CARD_CVC: {
     INVALID_NUMBERS: "카드 CVC는 숫자만 입력 가능합니다.",
