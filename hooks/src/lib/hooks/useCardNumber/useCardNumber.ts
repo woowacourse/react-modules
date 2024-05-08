@@ -1,14 +1,14 @@
 import { useState } from 'react';
 import useCardType from '../useCardType/useCardType';
+import { CardType, formatCardNumber } from '../../utils/card';
 import { getNumberErrorMessage, isNotNumber } from '../../utils/validation/validation';
-import { getValidCardNumberLength, formatCardNumber, CardType } from '../../utils/card';
 
-export const VALID_CARD_NUMBER_LENGTH = 16;
+import { CARD_TYPE } from '../../constants/Condition';
 
 const useCardNumber = (initialValue: string = '') => {
-  const [cardNumber, setCardNumber] = useState<string>(initialValue);
-  const [isValidCardNumber, setIsValidCardNumber] = useState<boolean>(false);
-  const [cardNumberErrorMessage, setCardNumberErrorMessage] = useState<string>('');
+  const [cardNumber, setCardNumber] = useState(initialValue);
+  const [isValidCardNumber, setIsValidCardNumber] = useState(false);
+  const [cardNumberErrorMessage, setCardNumberErrorMessage] = useState('');
 
   const { cardType, handleCardType } = useCardType();
 
@@ -17,15 +17,11 @@ const useCardNumber = (initialValue: string = '') => {
 
     handleCardType(numberCopy);
 
-    const validCardNumberLength = getValidCardNumberLength(cardType as CardType);
+    if (numberCopy.length > CARD_TYPE[cardType].VALID_LENGTH || isNotNumber(numberCopy)) return;
 
-    if (numberCopy.length > validCardNumberLength) return;
+    const errorMessage = getNumberErrorMessage(numberCopy, CARD_TYPE[cardType].VALID_LENGTH);
 
-    const errorMessage = getNumberErrorMessage(numberCopy, validCardNumberLength);
     setCardNumberErrorMessage(errorMessage);
-
-    if (isNotNumber(numberCopy)) return;
-
     setIsValidCardNumber(!errorMessage);
     setCardNumber(formatCardNumber(cardType as CardType, numberCopy));
   };

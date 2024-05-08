@@ -1,20 +1,13 @@
 import { useState } from 'react';
 import { CardType, getCardType } from '../../utils/card';
 
-const MIN_CARD_NUMBER_LENGTH: Record<CardType, number> = {
-  VISA: 1,
-  MASTERCARD: 2,
-  DINERS: 2,
-  AMEX: 2,
-  UNIONPAY: 6,
-  DEFAULT: 6,
-};
+import { CARD_TYPE } from '../../constants/Condition';
 
 const useCardType = () => {
   const [cardType, setCardType] = useState<CardType>('DEFAULT');
 
   const handleCardType = (cardNumber: string) => {
-    if (cardNumber.length > MIN_CARD_NUMBER_LENGTH[cardType]) return;
+    if (cardNumber.length > CARD_TYPE[cardType].MIN_LENGTH) return;
 
     const newCardType = getCardType(cardNumber);
     setCardType(newCardType);
