@@ -50,15 +50,15 @@
   }
 
   /* size variant */
-  &.small {
+  &.small:not(.bottom) {
     width: 304px;
   }
 
-  &.medium {
+  &.medium:not(.bottom) {
     width: 480px;
   }
 
-  &.large {
+  &.large:not(.bottom) {
     width: 600px;
   }
 }

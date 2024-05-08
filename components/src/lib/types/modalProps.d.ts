@@ -40,6 +40,7 @@ export interface ModalContentProps extends React.HTMLAttributes<HTMLDivElement> 
   /**
    * 모달의 사이즈를 결정
    * @defaultValue "medium"
+   * - position이 "bottom"일 경우 size 속성은 무시됨
    */
   size?: ModalSize;
 }
