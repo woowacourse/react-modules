@@ -43,6 +43,11 @@ const meta = {
       description:
         '모달 위치를 페이지 상단, 중앙, 하단으로 선택할 수 있습니다.',
     },
+    size: {
+      control: { type: 'radio' },
+      options: ['small', 'medium', 'large'],
+      description: '모달 크기를 small, medium, large로 선택할 수 있습니다.',
+    },
   },
   args: {
     onClose: fn(),
@@ -76,6 +81,7 @@ export const 기본: Story = {
   args: {
     isOpen: true,
     position: 'center',
+    size: 'medium',
   },
 };
 
@@ -84,6 +90,7 @@ export const 이미지_버튼이_있는_모달: Story = {
     isOpen: true,
     position: 'center',
     onClose: fn(),
+    size: 'medium',
   },
   parameters: {
     docs: {
@@ -94,7 +101,12 @@ export const 이미지_버튼이_있는_모달: Story = {
   },
 
   render: (args) => (
-    <Modal isOpen={args.isOpen} position={args.position} onClose={args.onClose}>
+    <Modal
+      isOpen={args.isOpen}
+      position={args.position}
+      size={args.size}
+      onClose={args.onClose}
+    >
       <Modal.Header>
         <Modal.Title>지그🥰</Modal.Title>
         <Modal.IconButton onClose={args.onClose} src={CloseImage} />
@@ -111,6 +123,7 @@ export const 텍스트_버튼이_있는_모달: Story = {
     isOpen: true,
     position: 'center',
     onClose: fn(),
+    size: 'medium',
   },
   parameters: {
     docs: {
@@ -121,7 +134,12 @@ export const 텍스트_버튼이_있는_모달: Story = {
   },
 
   render: (args) => (
-    <Modal isOpen={args.isOpen} position={args.position} onClose={args.onClose}>
+    <Modal
+      isOpen={args.isOpen}
+      position={args.position}
+      size={args.size}
+      onClose={args.onClose}
+    >
       <Modal.Header>
         <Modal.Title>지그😇</Modal.Title>
       </Modal.Header>
@@ -140,6 +158,7 @@ export const 이미지_버튼과_텍스트_버튼이_있는_모달: Story = {
     isOpen: true,
     position: 'center',
     onClose: fn(),
+    size: 'medium',
   },
   parameters: {
     docs: {
@@ -150,7 +169,12 @@ export const 이미지_버튼과_텍스트_버튼이_있는_모달: Story = {
   },
 
   render: (args) => (
-    <Modal isOpen={args.isOpen} position={args.position} onClose={args.onClose}>
+    <Modal
+      isOpen={args.isOpen}
+      position={args.position}
+      size={args.size}
+      onClose={args.onClose}
+    >
       <Modal.Header>
         <Modal.Title>지그🌞</Modal.Title>
         <Modal.IconButton onClose={args.onClose} src={CloseImage} />
@@ -171,6 +195,7 @@ export const AlertModal: Story = {
     isOpen: true,
     position: 'center',
     onClose: fn(),
+    size: 'medium',
   },
   parameters: {
     docs: {
@@ -181,7 +206,12 @@ export const AlertModal: Story = {
   },
 
   render: (args) => (
-    <Modal isOpen={args.isOpen} position={args.position} onClose={args.onClose}>
+    <Modal
+      isOpen={args.isOpen}
+      position={args.position}
+      size={args.size}
+      onClose={args.onClose}
+    >
       <Modal.Header>
         <Modal.Title>아이디를 입력해 주세요.</Modal.Title>
       </Modal.Header>
@@ -202,6 +232,7 @@ export const ConfirmModal: Story = {
     isOpen: true,
     position: 'center',
     onClose: fn(),
+    size: 'medium',
   },
   parameters: {
     docs: {
@@ -212,7 +243,12 @@ export const ConfirmModal: Story = {
   },
 
   render: (args) => (
-    <Modal isOpen={args.isOpen} position={args.position} onClose={args.onClose}>
+    <Modal
+      isOpen={args.isOpen}
+      position={args.position}
+      size={args.size}
+      onClose={args.onClose}
+    >
       <Modal.Header>
         <Modal.Title>카드를 삭제하시겠습니까?</Modal.Title>
       </Modal.Header>
@@ -241,6 +277,7 @@ export const PromptModal: Story = {
     isOpen: true,
     position: 'center',
     onClose: fn(),
+    size: 'medium',
   },
   parameters: {
     docs: {
@@ -252,7 +289,12 @@ export const PromptModal: Story = {
   },
 
   render: (args) => (
-    <Modal isOpen={args.isOpen} position={args.position} onClose={args.onClose}>
+    <Modal
+      isOpen={args.isOpen}
+      position={args.position}
+      onClose={args.onClose}
+      size={args.size}
+    >
       <Modal.Header>
         <Modal.Title>쿠폰 번호를 입력해 주세요.</Modal.Title>
       </Modal.Header>
