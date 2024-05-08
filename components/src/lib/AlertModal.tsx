@@ -16,18 +16,18 @@ const AlertModal = ({
   ...props
 }: React.PropsWithChildren<AlertModalProps>) => {
   return (
-    <Modal type="dialog" {...props} closeOnOutsideClick={false}>
+    <Modal type="dialog" {...props} closeOnOutsideClick={false} style={{ modal: { gap: 16 } }}>
       <ModalHeader title={title} onClose={props.onClose} hideCloseIcon />
-      <ModalContent>
-        <p>{caption}</p>
-      </ModalContent>
+      <ModalContent>{caption}</ModalContent>
       <ModalFooter
+        style={{ justifyContent: 'flex-end' }}
         closeButton={{
           role: 'close',
           hide: true,
         }}
         confirmButton={{
           role: 'confirm',
+          style: { width: 80 },
           onClick: () => {
             if (onOk) onOk();
             props.onClose();

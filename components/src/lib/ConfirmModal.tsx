@@ -18,14 +18,16 @@ const ConfirmModal = ({
   ...props
 }: React.PropsWithChildren<ConfirmModalProps>) => {
   return (
-    <Modal type="dialog" {...props} closeOnOutsideClick={false}>
+    <Modal type="dialog" {...props} closeOnOutsideClick={false} style={{ modal: { gap: 16 } }}>
       <ModalHeader title={title} onClose={props.onClose} hideCloseIcon />
       <ModalContent>
         <p>{caption}</p>
       </ModalContent>
       <ModalFooter
+        style={{ justifyContent: 'flex-end', gap: 12 }}
         closeButton={{
           role: 'close',
+          style: { width: 80 },
           onClick: () => {
             if (onCancel) onCancel();
             props.onClose();
@@ -33,6 +35,7 @@ const ConfirmModal = ({
         }}
         confirmButton={{
           role: 'confirm',
+          style: { width: 80 },
           onClick: () => {
             if (onOk) onOk();
             props.onClose();

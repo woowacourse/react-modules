@@ -18,7 +18,7 @@ const PromptModal = ({
   ...props
 }: React.PropsWithChildren<PromptModalProps>) => {
   return (
-    <Modal type="dialog" {...props} closeOnOutsideClick={false}>
+    <Modal type="dialog" {...props} closeOnOutsideClick={false} style={{ modal: { gap: 16 } }}>
       <ModalHeader title={title} onClose={props.onClose} hideCloseIcon />
       <ModalContent>
         <input
@@ -29,8 +29,10 @@ const PromptModal = ({
         />
       </ModalContent>
       <ModalFooter
+        style={{ justifyContent: 'flex-end', gap: 12 }}
         closeButton={{
           role: 'close',
+          style: { width: 80 },
           onClick: () => {
             if (onCancel) onCancel();
             props.onClose();
@@ -39,6 +41,7 @@ const PromptModal = ({
         }}
         confirmButton={{
           role: 'confirm',
+          style: { width: 80 },
           onClick: () => {
             if (onOk) onOk();
             props.onClose();

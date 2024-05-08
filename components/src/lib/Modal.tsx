@@ -1,5 +1,7 @@
 import { useRef } from 'react';
 import { createPortal } from 'react-dom';
+
+import './index.css';
 import styles from './Modal.module.css';
 
 import useModalCloseClickDimmer from './hooks/useModalCloseClickDimmer';
