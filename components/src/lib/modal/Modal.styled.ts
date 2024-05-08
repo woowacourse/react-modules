@@ -100,7 +100,7 @@ export const ModalButton = styled.button<{
     switch (size) {
       case "S":
         return `
-          width: 10%;
+          width: 15%;
         `;
       case "M":
         return `
