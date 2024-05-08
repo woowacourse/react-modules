@@ -3,3 +3,15 @@ export interface Validator<CheckType, ErrorMessageType> {
   message: ErrorMessageType;
 }
 export type ValueOf<T> = T[keyof T];
+
+export interface Range<CompareType = string> {
+  from: CompareType;
+  to: CompareType;
+}
+
+export interface CardBrand<CardNameType = string> {
+  name: CardNameType;
+  numberLength: number;
+  startWith: (string | Range)[];
+  formatArray: number[];
+}
