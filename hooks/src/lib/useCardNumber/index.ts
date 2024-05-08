@@ -1,11 +1,12 @@
 import { useInputValidation, IErrorStatus } from "../useInputValidation";
-import { findCardBrand } from "./utils/findCardBrand";
+import { identifyCardBrand } from "./utils/identifyCardBrand";
+import { formatCardNumber } from "./utils/formatCardNumber";
 import { cardNumberValidator } from "./validator";
 
 export interface CardNumberControl {
   value: {
     raw: string;
-    formatted: string;
+    formatted: string[];
   };
   errorStatus: IErrorStatus;
   cardBrand: string;
@@ -17,9 +18,6 @@ export function useCardNumber(): CardNumberControl {
   const { value, setValueWithValidation, validateOnBlur, errorStatus } =
     useInputValidation(cardNumberValidator);
 
-  const cardBrand = findCardBrand(value);
-  // const formattedCardNumber = formatCardNumber(cardNumbers, brand);
-
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setValueWithValidation(e.target.value);
   };
@@ -28,13 +26,16 @@ export function useCardNumber(): CardNumberControl {
     validateOnBlur(e.target.value);
   };
 
+  const cardBrand = identifyCardBrand(value);
+  const formattedCardNumber = formatCardNumber(value, cardBrand);
+
   return {
     value: {
       raw: value,
-      formatted: value,
+      formatted: formattedCardNumber,
     },
-    errorStatus,
     cardBrand,
+    errorStatus,
     onChange,
     onBlur,
   };
