@@ -17,8 +17,8 @@ export interface PromptModalProps {
 export default function PromptModal({
   isOpen,
   title,
-  placeholder = 'placeholder',
-  defaultValue = 'defaultValue',
+  placeholder = '',
+  defaultValue = '',
   submitButtonLabel = '확인',
   cancelButtonLabel = '취소',
   onSubmit,
