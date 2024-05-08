@@ -21,10 +21,7 @@ export const Default: Story = {
 
 export const Small: Story = {
   args: {
-    text: '버튼입니다',
-    onClick: () => {
-      alert('버튼 클릭');
-    },
+    ...Default.args,
     size: 'small',
     buttonStyle: 'primary',
   },
@@ -32,10 +29,7 @@ export const Small: Story = {
 
 export const Large: Story = {
   args: {
-    text: '버튼입니다',
-    onClick: () => {
-      alert('버튼 클릭');
-    },
+    ...Default.args,
     size: 'large',
     buttonStyle: 'primary',
   },
@@ -43,10 +37,7 @@ export const Large: Story = {
 
 export const Border: Story = {
   args: {
-    text: '버튼입니다',
-    onClick: () => {
-      alert('버튼 클릭');
-    },
+    ...Default.args,
     size: 'medium',
     buttonStyle: 'border',
   },
@@ -54,10 +45,7 @@ export const Border: Story = {
 
 export const Text: Story = {
   args: {
-    text: '버튼입니다',
-    onClick: () => {
-      alert('버튼 클릭');
-    },
+    ...Default.args,
     size: 'medium',
     buttonStyle: 'text',
   },
@@ -65,10 +53,7 @@ export const Text: Story = {
 
 export const Fit: Story = {
   args: {
-    text: '버튼입니다',
-    onClick: () => {
-      alert('버튼 클릭');
-    },
+    ...Default.args,
     size: 'medium',
     buttonStyle: 'primary',
     width: 'fit',
@@ -77,10 +62,7 @@ export const Fit: Story = {
 
 export const Full: Story = {
   args: {
-    text: '버튼입니다',
-    onClick: () => {
-      alert('버튼 클릭');
-    },
+    ...Default.args,
     size: 'medium',
     buttonStyle: 'primary',
     width: 'full',
@@ -89,10 +71,7 @@ export const Full: Story = {
 
 export const Bright: Story = {
   args: {
-    text: '버튼입니다',
-    onClick: () => {
-      alert('버튼 클릭');
-    },
+    ...Default.args,
     size: 'medium',
     buttonStyle: 'primary',
     primaryColor: '#FFE600',
@@ -101,10 +80,7 @@ export const Bright: Story = {
 
 export const Dark: Story = {
   args: {
-    text: '버튼입니다',
-    onClick: () => {
-      alert('버튼 클릭');
-    },
+    ...Default.args,
     size: 'medium',
     buttonStyle: 'primary',
     primaryColor: '#f66f00',
