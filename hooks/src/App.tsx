@@ -1,4 +1,4 @@
-import useCardNumbers from './lib/useCardNumbers.ts';
+import useCardNumbers from '@/lib/useCardNumbers.ts';
 import './App.css';
 
 function App() {

@@ -1,12 +1,12 @@
 import { ChangeEvent, FocusEvent, useEffect, useRef, useState } from 'react';
-import useInput from './useInput';
-import { validateLengthOver, validateNumber } from '../validate/validate';
-import { CARD_NUMBERS_ERROR_MESSAGES } from '../constants/error';
-import { CARD_NUMBER_TOTAL_LENGTH } from '../constants/length';
-import { CardNumbersError } from '../types/cardNumbers';
-import getCardBrand from '../utils/checkCardBrandType';
-import { CARD_BRAND, CARD_BRAND_CONFIG } from '../constants/cardBrand';
-import { formatCardNumbers } from '../utils/formatCardNumbers';
+import useInput from '@/lib/useInput';
+import { validateLengthOver, validateNumber } from '@/validate/validate';
+import { CARD_NUMBERS_ERROR_MESSAGES } from '@/constants/error';
+import { CARD_NUMBER_TOTAL_LENGTH } from '@/constants/length';
+import { CardNumbersError } from '@/types/cardNumbers';
+import getCardBrand from '@/utils/checkCardBrandType';
+import { CARD_BRAND, CARD_BRAND_CONFIG } from '@/constants/cardBrand';
+import { formatCardNumbers } from '@/utils/formatCardNumbers';
 
 const cardNumbersValidates = (value: string, validLength: number) => {
   validateNumber(value);

@@ -1,4 +1,4 @@
-import { ErrorStatus } from './errorStatus';
+import { ErrorStatus } from '@/types/errorStatus';
 
 export interface CardNumbers {
   cardNumber1: string;

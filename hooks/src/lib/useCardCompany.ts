@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import { CARD_COMPANY_ERROR_MESSAGE } from '../constants/error';
-import { ErrorStatus } from '../types/errorStatus';
+import { CARD_COMPANY_ERROR_MESSAGE } from '@/constants/error';
+import { ErrorStatus } from '@/types/errorStatus';
 
 const checkIncludeArray = (optionArr: string[], value: string) => {
   if (!optionArr.includes(value) || !value) {

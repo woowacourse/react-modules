@@ -1,9 +1,9 @@
 import { ChangeEvent, FocusEvent } from 'react';
-import useInput from './useInput';
-import { validateLengthOver, validateNumber } from '../validate/validate';
-import { CVCError } from '../types/cvc';
-import { CVC_ERROR_MESSAGES } from '../constants/error';
-import { CVC_LENGTH } from '../constants/length';
+import useInput from '@/lib/useInput';
+import { validateLengthOver, validateNumber } from '@/validate/validate';
+import { CVCError } from '@/types/cvc';
+import { CVC_ERROR_MESSAGES } from '@/constants/error';
+import { CVC_LENGTH } from '@/constants/length';
 
 const cvcValidates = (value: string) => {
   validateNumber(value);

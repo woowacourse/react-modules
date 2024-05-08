@@ -1,4 +1,4 @@
-import { ErrorStatus } from './errorStatus';
+import { ErrorStatus } from '@/types/errorStatus';
 
 export type CardHolderError =
   | ErrorStatus.ONLY_UPPERCASE

@@ -1,4 +1,4 @@
-import { CARD_CONFIG } from '../constants/cardBrand';
+import { CARD_CONFIG } from '@/constants/cardBrand';
 
 const isVisaCard = (cardBrandNumber: number) => {
   if (Math.floor(cardBrandNumber / 10) === CARD_CONFIG.VISA) return true;

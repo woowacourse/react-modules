@@ -1,6 +1,6 @@
 import { DOUBLE_BLANK, UPPERCASE_AND_SPACE_ONLY } from '../constants/system';
-import { isValidMonth, isValidYear } from '../utils/checkDateRange';
-import { ErrorStatus } from '../types/errorStatus';
+import { isValidMonth, isValidYear } from '@/utils/checkDateRange';
+import { ErrorStatus } from '@/types/errorStatus';
 
 export function validateDoubleBlank(str: string) {
   if (DOUBLE_BLANK.test(str)) {

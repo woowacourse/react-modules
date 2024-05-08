@@ -1,8 +1,8 @@
 import { ChangeEvent } from 'react';
-import useInput from './useInput';
-import { CardHolderError } from '../types/cardHolder';
-import { validateDoubleBlank, validateUpperCase } from '../validate/validate';
-import { CARD_HOLDER_ERROR_MESSAGES } from '../constants/error';
+import useInput from '@/lib/useInput';
+import { CardHolderError } from '@/types/cardHolder';
+import { validateDoubleBlank, validateUpperCase } from '@/validate/validate';
+import { CARD_HOLDER_ERROR_MESSAGES } from '@/constants/error';
 
 export const cardHolderValidates = (value: string) => {
   validateUpperCase(value);

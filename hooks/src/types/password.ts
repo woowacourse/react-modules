@@ -1,4 +1,4 @@
-import { ErrorStatus } from './errorStatus';
+import { ErrorStatus } from '@/types/errorStatus';
 
 export type PasswordError =
   | ErrorStatus.IS_NOT_NUMBER
