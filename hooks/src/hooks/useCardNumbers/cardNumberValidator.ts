@@ -1,8 +1,8 @@
 export const validMasterNumbers = (firstNumbers: string) => {
   const MASTER_CARD_START_NUMBER_LIST = [51, 52, 53, 54];
   // eslint-disable-next-line no-useless-escape
-  const MASTER_REG_PATTERN = new RegExp(`${MASTER_CARD_START_NUMBER_LIST.map(String).join("|")}\d{0,3}$`);
-  return MASTER_REG_PATTERN.test(firstNumbers);
+  const MASTER_REG_PATTERN = new RegExp(`${MASTER_CARD_START_NUMBER_LIST.map(String).join("|")}\d{0,2}$`);
+  return MASTER_REG_PATTERN.test(firstNumbers.slice(0, 2));
 };
 
 export const validVisaNumbers = (firstNumbers: string) => {
@@ -13,15 +13,15 @@ export const validVisaNumbers = (firstNumbers: string) => {
 export const validAMEXNumbers = (firstNumbers: string) => {
   const AMEX_START_NUMBER = [34, 27];
   // eslint-disable-next-line no-useless-escape
-  const AMEX_REG_PATTERN = new RegExp(`${AMEX_START_NUMBER.map(String).join("|")}\d{0,3}$`);
-  return AMEX_REG_PATTERN.test(firstNumbers);
+  const AMEX_REG_PATTERN = new RegExp(`${AMEX_START_NUMBER.map(String).join("|")}\d{0,2}$`);
+  return AMEX_REG_PATTERN.test(firstNumbers.slice(0, 2));
 };
 
 export const validDinersNumbers = (firstNumbers: string) => {
   const AMEX_START_NUMBER = [36];
   // eslint-disable-next-line no-useless-escape
-  const AMEX_REG_PATTERN = new RegExp(`${AMEX_START_NUMBER.map(String).join("|")}\d{0,3}$`);
-  return AMEX_REG_PATTERN.test(firstNumbers);
+  const AMEX_REG_PATTERN = new RegExp(`${AMEX_START_NUMBER.map(String).join("|")}\d{0,2}$`);
+  return AMEX_REG_PATTERN.test(firstNumbers.slice(0, 2));
 };
 
 const isNumberInRange = (targetNumber: number, number1: number, number2: number) =>
