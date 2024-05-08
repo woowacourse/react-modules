@@ -3,8 +3,9 @@ import { PropsWithChildren } from "react";
 import ModalHeader from "./ModalHeader";
 import ModalContent from "./ModalContent";
 import ModalFooter from "./ModalFooter";
+import { ButtonProps } from "./Button/Button";
 
-type positionProps = "center" | "bottom";
+type PositionProps = "top" | "center" | "bottom";
 
 export interface TitleProps {
   position: "left" | "center";
@@ -15,24 +16,13 @@ export interface CloseButtonProps {
   onClose: () => void;
 }
 
-export interface ConfirmButtonProps {
-  content: string;
-  onConfirm: () => void;
-}
-
-export interface CancelButtonProps {
-  content: string;
-  onCancel: () => void;
-}
-
 interface ModalProps {
-  position: positionProps;
+  position: PositionProps;
   title?: TitleProps;
   isOpen: boolean;
   onClose: () => void;
   closeButton?: CloseButtonProps;
-  confirmButton?: ConfirmButtonProps;
-  cancelButton?: CancelButtonProps;
+  footerButtons?: ButtonProps[];
 }
 
 const Modal = ({
@@ -42,18 +32,17 @@ const Modal = ({
   isOpen,
   onClose,
   closeButton,
-  confirmButton,
-  cancelButton,
+  footerButtons,
 }: PropsWithChildren<ModalProps>) => {
   return (
     <>
       {isOpen && (
         <div className={`${styles.container} ${styles[position]}`}>
           <div className={styles.backDrop} onClick={onClose}></div>
-          <div className={styles.modalSection}>
+          <div className={`${styles.modalSection}`}>
             <ModalHeader title={title} closeButton={closeButton} />
             <ModalContent children={children} />
-            <ModalFooter confirmButton={confirmButton} cancelButton={cancelButton} />
+            {footerButtons && <ModalFooter buttons={footerButtons} />}
           </div>
         </div>
       )}

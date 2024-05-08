@@ -1,15 +1,19 @@
 .container {
   position: fixed;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
+  inset: 0;
 }
 
 .backDrop {
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.35);
+}
+
+/* modal-postion */
+.top {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
 }
 
 .center {
@@ -34,8 +38,13 @@
   background-color: #fff;
 }
 
+.top > .modalSection {
+  width: 100%;
+  border-radius: 0 0 8px 8px;
+}
+
 .center > .modalSection {
-  width: 80vw;
+  /* width: 80vw; */
   border-radius: 8px;
 }
 

@@ -1,25 +1,24 @@
 import styles from "./ModalFooter.module.css";
-import { ConfirmButtonProps } from "./Modal";
-import { CancelButtonProps } from "./Modal";
+import Button, { ButtonProps } from "./Button/Button";
 
 interface ModalFooterProps {
-  confirmButton?: ConfirmButtonProps;
-  cancelButton?: CancelButtonProps;
+  buttons: ButtonProps[];
 }
 
-const ModalFooter = ({ confirmButton, cancelButton }: ModalFooterProps) => {
+const ModalFooter = ({ buttons }: ModalFooterProps) => {
   return (
     <div className={styles.footerContainer}>
-      {confirmButton && (
-        <button className={styles.confirmButton} onClick={confirmButton.onConfirm}>
-          {confirmButton.content}
-        </button>
-      )}
-      {cancelButton && (
-        <button className={styles.cancelButton} onClick={cancelButton.onCancel}>
-          {cancelButton.content}
-        </button>
-      )}
+      {buttons.map((button, index) => {
+        return (
+          <Button
+            key={index}
+            content={button.content}
+            onClick={button.onClick}
+            className={button.className}
+            style={button.style}
+          />
+        );
+      })}
     </div>
   );
 };

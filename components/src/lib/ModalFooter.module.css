@@ -5,19 +5,3 @@
   align-items: center;
   gap: 16px;
 }
-
-.confirmButton {
-  width: 100%;
-  background: rgba(51, 51, 51, 1);
-  color: white;
-  border-radius: 8px;
-  padding: 16px 24px;
-}
-
-.cancelButton {
-  width: 100%;
-  background: transparent;
-  color: rgba(139, 149, 161, 1);
-  border-radius: 8px;
-  padding: 16px 24px;
-}
