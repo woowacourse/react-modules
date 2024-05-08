@@ -1,0 +1,5 @@
+.modal-custom-button-container {
+  display: flex;
+  flex-direction: row-reverse;
+  gap: 12px;
+}
