@@ -2,10 +2,10 @@ import { CloseButtonImage } from '../CloseButtonImage';
 import { CloseButtonProps, SubtitleProps, TitleProps } from '../interfaces';
 import styles from './ModalHeader.module.css';
 
-interface ModalHeaderProps {
+export interface ModalHeaderProps {
   title?: TitleProps;
   subtitle?: SubtitleProps;
-  closeButton: CloseButtonProps;
+  closeButton?: CloseButtonProps;
 }
 
 const ModalHeader = ({ title, subtitle, closeButton }: ModalHeaderProps) => {
@@ -14,9 +14,12 @@ const ModalHeader = ({ title, subtitle, closeButton }: ModalHeaderProps) => {
 
   return (
     <div className={styles['header']}>
-      <button aria-label={'모달 닫기 버튼'} className={styles['button-close']} onClick={closeButton.onClose}>
-        <CloseButtonImage />
-      </button>
+      {closeButton && (
+        <button aria-label={'모달 닫기 버튼'} className={styles['button-close']} onClick={closeButton.onClose}>
+          <CloseButtonImage />
+        </button>
+      )}
+
       <div className={styles['title-field']}>
         {title && (
           <>
