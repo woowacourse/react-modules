@@ -8,7 +8,7 @@ interface ModalContextProps {
 
 const ModalContext = createContext<ModalContextProps | undefined>(undefined);
 
-export const ModalProvider: React.FC<React.PropsWithChildren<{}>> = ({ children }) => {
+export const ModalContextProvider: React.FC<React.PropsWithChildren<{}>> = ({ children }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const openModal = () => {
