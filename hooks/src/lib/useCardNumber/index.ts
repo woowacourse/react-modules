@@ -1,89 +1,111 @@
-import { Validator, ValueOf } from '../type';
+import { CardBrand, Validator, ValueOf } from '../type';
 import { useMemo, useState } from 'react';
 
+import CARD_BRAND from '../constants/cardBrand';
 import REGEXPS from '../constants/regExps';
+import checkIsInRangeString from '../utils/checkIsInRangeString';
 import getErrorMessage from '../utils/getErrorMessage';
 import getOnChange from '../utils/getOnChange';
 
 export default function useCardNumber() {
-  const [firstCardNumberPart, setFirstCardNumberPart] = useState('');
-  const [secondCardNumberPart, setSecondCardNumberPart] = useState('');
-  const [thirdCardNumberPart, setThirdCardNumberPart] = useState('');
-  const [fourthCardNumberPart, setFourthCardNumberPart] = useState('');
-  const cardNumberParts = [
-    firstCardNumberPart,
-    secondCardNumberPart,
-    thirdCardNumberPart,
-    fourthCardNumberPart,
-  ];
+  const [cardNumber, setCardNumber] = useState('');
 
-  const setCardNumberParts = [
-    setFirstCardNumberPart,
-    setSecondCardNumberPart,
-    setThirdCardNumberPart,
-    setFourthCardNumberPart,
-  ];
+  const onChange = useMemo(() => getOnChange(setCardNumber), []);
 
-  const onChangeCardNumberPart = setCardNumberParts.map(getOnChange);
+  const errorMessage = getErrorMessage(cardNumber, cardNumberPartValidators);
 
-  const firstErrorMessage = useMemo(() => {
-    return getErrorMessage(firstCardNumberPart, cardNumberPartValidators);
-  }, [firstCardNumberPart]);
+  const isValid = errorMessage === null;
 
-  const secondErrorMessage = useMemo(() => {
-    return getErrorMessage(secondCardNumberPart, cardNumberPartValidators);
-  }, [secondCardNumberPart]);
+  const cardBrand = getCardBrand(cardNumber);
 
-  const thirdErrorMessage = useMemo(() => {
-    return getErrorMessage(thirdCardNumberPart, cardNumberPartValidators);
-  }, [thirdCardNumberPart]);
-
-  const fourthErrorMessage = useMemo(() => {
-    return getErrorMessage(fourthCardNumberPart, cardNumberPartValidators);
-  }, [fourthCardNumberPart]);
-
-  const cardPartErrorMessages = [
-    firstErrorMessage,
-    secondErrorMessage,
-    thirdErrorMessage,
-    fourthErrorMessage,
-  ];
-
-  const isValidCardNumberParts = cardPartErrorMessages.map(
-    message => message === null
-  );
-
-  const isValidCardNumber = cardPartErrorMessages.every(
-    message => message === null
-  );
+  const formattedCardNumber =
+    cardBrand && cardBrand.numberLength === cardNumber.length
+      ? getFormattedCardNumber(cardNumber, cardBrand.formatArray)
+      : null;
 
   return {
-    cardNumberParts,
-    setCardNumberParts,
-    onChangeCardNumberPart,
-    cardPartErrorMessages,
-    isValidCardNumber,
-    isValidCardNumberParts,
+    cardNumber,
+    setCardNumber,
+    onChange,
+    errorMessage,
+    isValid,
+    cardBrand: cardBrand ?? null,
+    formattedCardNumber,
   };
 }
 
-const CARD_NUMBER_PART_LENGTH = 4;
-export const CARD_NUMBER_PART_ERROR_MESSAGE = {
-  invalidLength: `카드번호 한 단위는 ${CARD_NUMBER_PART_LENGTH}자리여야 합니다.`,
+const isItCardBrand = (cardNumber: string, cardBrand: CardBrand) => {
+  return cardBrand.startWith.some(head => {
+    if (typeof head === 'string') {
+      return cardNumber.startsWith(head);
+    }
+    const sliceNumber = Math.max(head.from.length, head.to.length);
+    return checkIsInRangeString(
+      cardNumber.slice(0, sliceNumber),
+      head.from,
+      head.to
+    );
+  });
+};
+
+const getCardBrand = (cardNumber: string) => {
+  return CARD_BRAND.find(cardBrand => isItCardBrand(cardNumber, cardBrand));
+};
+
+const getFormattedCardNumber = (cardNumber: string, formatArray: number[]) => {
+  const formatAccumulatedArray = formatArray.reduce((acc, number) => {
+    const lastNumber = (acc[acc.length - 1] ?? 0) + number;
+    acc.push(lastNumber + number);
+    return acc;
+  }, [] as number[]);
+
+  return formatAccumulatedArray.reduce((result, number, index) => {
+    if (index === 0) {
+      result.push(cardNumber.slice(0, number + 1));
+      return result;
+    }
+    if (index === formatArray.length - 1) {
+      result.push(cardNumber.slice(-number));
+      return result;
+    }
+    result.push(cardNumber.slice(formatArray[index - 1], number + 1));
+    return result;
+  }, [] as string[]);
+};
+
+const CARD_NUMBER_LENGTH = 16;
+export const CARD_NUMBER_ERROR_MESSAGE = {
+  overLength: `카드번호는 ${CARD_NUMBER_LENGTH}자리 이하여야 합니다.`,
   notDigit: '카드번호는 숫자만 포함해야 합니다.',
+  notSupportedBrand: '지원하지 않는 카드 브랜드입니다.',
+  invalidCardLength: '해당 카드 브랜드와는 맞지 않는 번호 길이입니다.',
 } as const;
 
-type ErrorMessage = ValueOf<typeof CARD_NUMBER_PART_ERROR_MESSAGE>;
+type ErrorMessage = ValueOf<typeof CARD_NUMBER_ERROR_MESSAGE>;
 
 const cardNumberPartValidators: Validator<string, ErrorMessage>[] = [
   {
-    checkIsValid: (cardNumberPart: string) =>
-      cardNumberPart.length === CARD_NUMBER_PART_LENGTH,
-    message: CARD_NUMBER_PART_ERROR_MESSAGE.invalidLength,
+    checkIsValid: (cardNumber: string) =>
+      cardNumber.length <= CARD_NUMBER_LENGTH,
+    message: CARD_NUMBER_ERROR_MESSAGE.overLength,
   },
   {
-    checkIsValid: (cardNumberPart: string) =>
-      REGEXPS.onlyDigitNumber.test(cardNumberPart),
-    message: CARD_NUMBER_PART_ERROR_MESSAGE.notDigit,
+    checkIsValid: (cardNumber: string) =>
+      REGEXPS.onlyDigitNumber.test(cardNumber),
+    message: CARD_NUMBER_ERROR_MESSAGE.notDigit,
+  },
+  {
+    checkIsValid: (cardNumber: string) => {
+      return getCardBrand(cardNumber) !== null;
+    },
+    message: CARD_NUMBER_ERROR_MESSAGE.notSupportedBrand,
+  },
+  {
+    checkIsValid: (cardNumber: string) => {
+      const cardBrand = getCardBrand(cardNumber);
+      if (cardBrand === null) return false;
+      return cardBrand?.numberLength === cardNumber.length;
+    },
+    message: CARD_NUMBER_ERROR_MESSAGE.notSupportedBrand,
   },
 ];
