@@ -1,20 +1,18 @@
-import styled from 'styled-components';
-
-import { AlertModalProps, ButtonContainerJustifyContent } from '../../types/modal';
+import { BASIC_BUTTON_STYLE } from '../../constants/modal';
+import { AlertModalProps } from '../../types/modal';
+import ButtonContainer from '../ButtonContainer';
 
 import CenterModal from './CenterModal';
 
-interface StyleProps {
-  $buttonContainerJustifyContent: ButtonContainerJustifyContent;
-}
-
-const ButtonContainer = styled.div<StyleProps>`
-  display: flex;
-  justify-content: ${(props) => props.$buttonContainerJustifyContent};
-`;
-
 export default function AlertModal(props: AlertModalProps) {
-  const { setOpenModal, title, contents, buttonContainerJustifyContent, buttonStyle, buttonContents } = props;
+  const {
+    setOpenModal,
+    title,
+    contents,
+    buttonContainerJustifyContent,
+    buttonStyle = BASIC_BUTTON_STYLE,
+    buttonContents,
+  } = props;
 
   const closeModal = () => setOpenModal(false);
 

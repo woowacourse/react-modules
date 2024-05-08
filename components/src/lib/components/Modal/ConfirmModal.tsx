@@ -1,29 +1,10 @@
-import { CSSProperties, MouseEvent } from 'react';
-import styled from 'styled-components';
+import { MouseEvent } from 'react';
 
-import {
-  ButtonContainerJustifyContent,
-  ConfirmButtonGroupProps,
-  ConfirmModalProps,
-  ExtraClickAction,
-} from '../../types/modal';
+import { BASIC_BUTTON_STYLE } from '../../constants/modal';
+import { ConfirmButtonGroupProps, ConfirmModalProps, ExtraClickAction } from '../../types/modal';
+import ButtonContainer from '../ButtonContainer';
 
 import CenterModal from './CenterModal';
-
-interface StyleProps {
-  $buttonContainerJustifyContent: ButtonContainerJustifyContent;
-}
-
-const BASIC_BUTTON_STYLE: CSSProperties = {
-  padding: '0.625rem 0.875rem',
-  backgroundColor: '#ffff',
-  color: 'black',
-  fontSize: '1rem',
-};
-const ButtonContainer = styled.div<StyleProps>`
-  display: flex;
-  justify-content: ${(props) => props.$buttonContainerJustifyContent};
-`;
 
 function ConfirmButtonGroup({
   confirmButton,
