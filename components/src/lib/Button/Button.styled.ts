@@ -18,7 +18,7 @@ const BUTTON_STYLE_TABLE = (primaryColor: string) => {
     border: {
       backgroundColor: '#ffffff',
       color: '#333333BF',
-      border: `2px solid #33333340`,
+      border: `1px solid #33333340`,
     },
     text: {
       backgroundColor: 'transparent',
@@ -50,7 +50,7 @@ export const Button = styled.button<{
     BUTTON_STYLE_TABLE(props.primaryColor)[props.buttonStyle].backgroundColor};
   border: ${(props) =>
     BUTTON_STYLE_TABLE(props.primaryColor)[props.buttonStyle].border};
-  border-radius: 8px;
+  border-radius: 4px;
 
   &:hover {
     background-color: ${(props) => {
