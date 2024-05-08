@@ -2,50 +2,36 @@ import { useState, useEffect } from "react";
 import validator from "./utils/validate";
 import ERROR_MESSAGE from "./constants/errorMessage";
 
-type UserCardNumbersValidationProps = {
-  cardNumbers: string[];
+type Props = {
+  cardNumbers: string;
 };
 
-const INDIVIDUAL_CARD_LENGTH = 4;
-
-const useCardNumbersValidation = ({
-  cardNumbers,
-}: UserCardNumbersValidationProps) => {
+const useCardNumbersValidation = ({ cardNumbers }: Props) => {
   const [validationResult, setValidationResult] = useState({
     isValid: true,
     errorMessage: "",
   });
 
   useEffect(() => {
-    let isValid = true;
-    let errorMessage = "";
+    if (!validator.isValidEmptyValue(cardNumbers)) {
+      setValidationResult({
+        isValid: false,
+        errorMessage: ERROR_MESSAGE.EMPTY_VALUE,
+      });
 
-    for (const cardNumber of cardNumbers) {
-      if (!validator.isValidEmptyValue(cardNumber)) {
-        isValid = false;
-        errorMessage = ERROR_MESSAGE.EMPTY_VALUE;
-        break;
-      }
-
-      if (!validator.isValidDigit(cardNumber)) {
-        isValid = false;
-        errorMessage = ERROR_MESSAGE.ONLY_NUMBER;
-        break;
-      }
-
-      if (
-        !validator.isValidLength({
-          value: cardNumber,
-          matchedLength: INDIVIDUAL_CARD_LENGTH,
-        })
-      ) {
-        isValid = false;
-        errorMessage = ERROR_MESSAGE.INVALID_CARD_NUMBER_LENGTH;
-        break;
-      }
+      return;
     }
 
-    setValidationResult({ isValid, errorMessage });
+    if (!validator.isValidDigit(cardNumbers)) {
+      setValidationResult({
+        isValid: false,
+        errorMessage: ERROR_MESSAGE.ONLY_NUMBER,
+      });
+
+      return;
+    }
+
+    setValidationResult({ isValid: true, errorMessage: "" });
   }, [cardNumbers]);
 
   return { validationResult };
