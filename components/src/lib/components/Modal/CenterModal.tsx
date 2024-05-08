@@ -11,7 +11,7 @@ const CenterContentsWrapper = styled.div`
   height: 100%;
 `;
 
-function CenterModal(props: ModalCommonProps) {
+export default function CenterModal(props: ModalCommonProps) {
   const { setOpenModal, children, ...rest } = props;
 
   const closeModal = () => setOpenModal(false);
@@ -24,5 +24,3 @@ function CenterModal(props: ModalCommonProps) {
     </ModalContainer>
   );
 }
-
-export default CenterModal;

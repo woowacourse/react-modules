@@ -26,7 +26,7 @@ const ToastModalContents = styled(ModalContents)<ModalContentsStyleProps>`
     `};
 `;
 
-function ToastModal(props: ToastModalProps) {
+export default function ToastModal(props: ToastModalProps) {
   const {
     openModal,
     setOpenModal,
@@ -68,5 +68,3 @@ function ToastModal(props: ToastModalProps) {
     </ModalContainer>
   );
 }
-
-export default ToastModal;
