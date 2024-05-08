@@ -1,6 +1,3 @@
-// const DEFAULT_MAX_LENGTH = 16;
-// const DEFAULT_PATTERN = [4, 4, 4, 4];
-
 export const CARD_TYPE = {
   VISA: {
     REGEX: '^4',
