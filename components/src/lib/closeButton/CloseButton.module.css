@@ -4,3 +4,15 @@
     background-color: white;
     font-weight: 700;
 }
+
+.small {
+    width: 100px;
+}
+
+.medium {
+    width: 300px;
+}
+
+.large {
+    width: 500px;
+}
