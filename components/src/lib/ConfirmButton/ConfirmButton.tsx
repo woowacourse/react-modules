@@ -8,6 +8,8 @@ const ConfirmButton = (props: ConfirmButtonProps) => {
       style={{
         color: `${props.fontColor || 'white'}`,
         backgroundColor: `${props.backgroundColor || 'black'}`,
+        width: `${(props.buttonSize && props.buttonSize.width) || '100%'}`,
+        height: `${(props.buttonSize && props.buttonSize.height) || '3rem'}`,
       }}
       onClick={props.onConfirm}
     >
