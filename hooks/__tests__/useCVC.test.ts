@@ -19,7 +19,7 @@ describe("useCVC 테스트", () => {
     });
     expect(result.current.cardCVCValidation.isValid).toBe(false);
     expect(result.current.cardCVCValidation.errorMessage).toBe(
-      ERROR_MESSAGE.CARD_CVC.INVALID_CHARACTERS
+      ERROR_MESSAGE.CARD_CVC.INVALID_NUMBERS
     );
   });
 

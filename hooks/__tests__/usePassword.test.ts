@@ -19,7 +19,7 @@ describe("usePassword 테스트", () => {
     });
     expect(result.current.cardPasswordValidation.isValid).toBe(false);
     expect(result.current.cardPasswordValidation.errorMessage).toBe(
-      ERROR_MESSAGE.CARD_PASSWORD.INVALID_CHARACTERS
+      ERROR_MESSAGE.CARD_PASSWORD.INVALID_NUMBERS
     );
   });
 

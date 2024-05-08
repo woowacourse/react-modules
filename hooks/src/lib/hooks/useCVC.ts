@@ -20,7 +20,7 @@ export function useCVC(): UseCVCResult {
 
     // 입력된 문자열이 숫자가 아니라면 에러 발생
     if (!/^\d+$/.test(value) && isTouched) {
-      return { isValid: false, errorMessage: ERROR_MESSAGE.CARD_CVC.INVALID_CHARACTERS };
+      return { isValid: false, errorMessage: ERROR_MESSAGE.CARD_CVC.INVALID_NUMBERS };
     }
 
     // 입력된 문자열이 1부터 999 사이의 3자리가 아니라면 에러 발생

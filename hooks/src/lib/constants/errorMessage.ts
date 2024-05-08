@@ -9,7 +9,7 @@ export const ERROR_MESSAGE = {
     MAX_LENGTH_EXCEEDED: "카드 번호는 4자리까지만 입력 가능합니다.",
   },
   CARD_CVC: {
-    INVALID_CHARACTERS: "카드 CVC는 숫자만 입력 가능합니다.",
+    INVALID_NUMBERS: "카드 CVC는 숫자만 입력 가능합니다.",
     MAX_LENGTH_EXCEEDED: "카드 CVC는 3자리까지만 입력 가능합니다.",
   },
   CARD_EXPIRY_DATE: {
@@ -19,7 +19,7 @@ export const ERROR_MESSAGE = {
     EXPIRED_CARD: "카드 유효기간이 만료되었습니다.",
   },
   CARD_PASSWORD: {
-    INVALID_CHARACTERS: "카드 비밀번호는 숫자만 입력 가능합니다.",
+    INVALID_NUMBERS: "카드 비밀번호는 숫자만 입력 가능합니다.",
     MAX_LENGTH_EXCEEDED: "카드 비밀번호는 2자리까지만 입력 가능합니다.",
   },
 };
