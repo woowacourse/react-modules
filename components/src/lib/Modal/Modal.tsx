@@ -1,10 +1,17 @@
-import * as Styled from './Modal.styled';
-
 import Button, { ButtonProps } from '../Button/Button';
-import CLOSE_BUTTON from '../../asset/close-button.svg';
+
 import { useEffect } from 'react';
+import ModalDimmedLayer from './ModalDimmedLayer/ModalDimmedLayer';
+import ModalContainer from './ModalContainer/ModalContainer';
+import ModalHeader from './ModalHeader/ModalHeader';
+import ModalTitle from './ModalTitle/ModalTitle';
+import ModalCloseButton from './ModalCloseButton/ModalCloseButton';
+import ModalBody from './ModalBody/ModalBody';
+import ModalDescription from './ModalDescription/ModalDescription';
+import ModalButtonContainer from './ModalButtonContainer/ModalButtonContainer';
 
 interface ModalProps {
+  type?: ModalTypes;
   size?: ModalSize;
   isOpened: boolean;
   onClose: () => void;
@@ -21,6 +28,7 @@ interface ModalProps {
 }
 
 const Modal = ({
+  type = 'custom',
   size = 'small',
   isOpened,
   onClose,
@@ -52,28 +60,20 @@ const Modal = ({
   return (
     <>
       {isOpened && (
-        <Styled.DimmedLayer onClick={onClose} zIndex={zIndex}>
-          <Styled.ModalContainer
+        <ModalDimmedLayer onClick={onClose} zIndex={zIndex}>
+          <ModalContainer
             size={size}
             modalPosition={modalPosition}
-            onClick={(e) => {
-              e.stopPropagation();
-            }}
           >
-            <Styled.ModalHeader>
-              <Styled.ModalTitle>{title}</Styled.ModalTitle>
-              {showCloseButton && (
-                <Styled.ModalCloseButton
-                  src={CLOSE_BUTTON}
-                  onClick={onClose}
-                />
-              )}
-            </Styled.ModalHeader>
-            <Styled.ModalBody>
-              <Styled.ModalDescription>{description}</Styled.ModalDescription>
-              <div>{children}</div>
-            </Styled.ModalBody>
-            <Styled.ButtonContainer buttonPosition={buttonPosition}>
+            <ModalHeader>
+              <ModalTitle title={title} />
+              <ModalCloseButton showCloseButton={showCloseButton} onClick={onClose} />
+            </ModalHeader>
+            <ModalBody>
+              <ModalDescription description={description} />
+              <>{children}</>
+            </ModalBody>
+            <ModalButtonContainer buttonPosition={buttonPosition}>
               {primaryButton && (
                 <Button
                   text={primaryButton.text}
@@ -98,9 +98,9 @@ const Modal = ({
                   }
                 />
               )}
-            </Styled.ButtonContainer>
-          </Styled.ModalContainer>
-        </Styled.DimmedLayer>
+            </ModalButtonContainer>
+          </ModalContainer>
+        </ModalDimmedLayer>
       )}
     </>
   );
