@@ -22,7 +22,7 @@ describe('useCardCompany 테스트', () => {
     expect(result.current.error.state).toBeTruthy();
   });
 
-  it('올바른 값이 입력되었을 때 유효성 상태가 true가 된다.', () => {
+  it('유효한 카드사가 입력, 선택되었을 때 유효성 상태가 true가 된다.', () => {
     const userInput = 'BC카드';
     const { result } = renderHook(() => useCardCompany());
 
