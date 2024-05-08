@@ -1,2 +1,2 @@
 export * from './validators';
-export * from './formatWithDelimiter';
+export * from './string';

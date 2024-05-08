@@ -2,7 +2,7 @@ import { ChangeEventHandler, FocusEventHandler } from 'react';
 import { useCardBrand, useSingleInput } from '.';
 import { CARD_BRAND } from './constants';
 import { Validations, Validator, Validators } from './types';
-import { formatWithDelimiter } from './utils';
+import { formatWithDelimiter, removeSpaces } from './utils';
 import { validateFilledValue, validateNumber, validateLength } from './utils/validators';
 
 interface ValidationErrors {
@@ -56,11 +56,11 @@ export default function useCardNumbers({ initialValue, validations }: UseCardNum
 
   const onChange: ChangeEventHandler<HTMLInputElement> = (e) => {
     const { value } = e.target;
-    handleChange(value.split(' ').join(''));
+    handleChange(removeSpaces(value));
   };
 
   const onBlur: FocusEventHandler<HTMLInputElement> = (e) => {
-    const inputValue = e.target.value.split(' ').join('');
+    const inputValue = removeSpaces(e.target.value);
 
     const cardNumberCount = brand === 'etc' ? 16 : CARD_BRAND[brand].cardNumberCount;
 

@@ -13,3 +13,5 @@ export const formatWithDelimiter = (str: string, segmentLength: number[], delimi
 
   return result.join(delimiter ?? ' ');
 };
+
+export const removeSpaces = (value: string) => value.split(' ').join('');
