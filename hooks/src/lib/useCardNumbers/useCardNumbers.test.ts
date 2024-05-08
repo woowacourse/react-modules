@@ -10,7 +10,7 @@ describe('useCardNumbers 테스트', () => {
     { value: '', length: 4 },
   ];
 
-  it('초기값이 정확하게 설정되어야 한다.', () => {
+  it('카드 번호의 초기값 설정 시, 정확하게 설정되어야 한다.', () => {
     const setInitialValue = [
       { value: '1234', length: 4 },
       { value: '1234', length: 4 },

@@ -3,7 +3,7 @@ import { ChangeEvent, act } from 'react';
 import useCardPassword from './useCardPassword';
 
 describe('useCardPassword 테스트', () => {
-  it('초기값이 정확하게 설정되어야 한다.', () => {
+  it('카드 비밀번호의 초기값 설정 시, 정확하게 설정되어야 한다.', () => {
     const initialValue = '12';
     const { result } = renderHook(() => useCardPassword(initialValue));
 

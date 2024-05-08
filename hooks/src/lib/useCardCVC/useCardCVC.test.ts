@@ -3,7 +3,7 @@ import { ChangeEvent, act } from 'react';
 import useCardCVC from './useCardCVC';
 
 describe('useCardCVC 테스트', () => {
-  it('초기값이 정확하게 설정되어야 한다.', () => {
+  it('CVC번호의 초기값 설정 시, 정확하게 설정되어야 한다.', () => {
     const initialValue = '123';
     const { result } = renderHook(() => useCardCVC(initialValue));
 

@@ -2,7 +2,7 @@ import { renderHook } from '@testing-library/react';
 import { ChangeEvent, act } from 'react';
 import useCardCompany from './useCardCompany';
 describe('useCardCompany 테스트', () => {
-  it('초기값이 정확하게 설정되어야 한다.', () => {
+  it('카드 회사 이름의 초기값 설정 시, 정확하게 설정되어야 한다.', () => {
     const initialValue = 'BC카드';
     const { result } = renderHook(() => useCardCompany(initialValue));
 

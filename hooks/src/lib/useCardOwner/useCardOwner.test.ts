@@ -3,7 +3,7 @@ import { ChangeEvent, act } from 'react';
 import useCardOwner from './useCardOwner';
 
 describe('useCardOwner 테스트', () => {
-  it('초기값이 정확하게 설정되어야 한다.', () => {
+  it('카드 소유자명의 초기값 설정 시, 정확하게 설정되어야 한다.', () => {
     const initialValue = 'SONG NAKTA';
     const { result } = renderHook(() => useCardOwner(initialValue));
 
