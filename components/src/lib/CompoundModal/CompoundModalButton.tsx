@@ -5,18 +5,26 @@ import useCompoundModalContext from './useCompoundModalContext';
 
 interface CompoundModalButtonProps
   extends React.HTMLAttributes<HTMLButtonElement> {
-  isCloseButton: boolean;
+  isCloseButton?: boolean;
+  isConfirmButton?: boolean;
+  isCancelButton?: boolean;
   buttonTheme?: ButtonTheme;
 }
-
-export default function CompoundModalButton({
+const getOnClick = ({
   isCloseButton,
-  buttonTheme = 'primary',
-  children,
-}: CompoundModalButtonProps) {
-  const { onClose, onConfirm } = useCompoundModalContext();
+  isConfirmButton,
+  isCancelButton,
+}: CompoundModalButtonProps) => {
+  const { onClose, onConfirm, onCancel } = useCompoundModalContext();
+  if (isCloseButton) return onClose;
+  if (isConfirmButton) return onConfirm;
+  if (isCancelButton) return onCancel;
+  return onClose;
+};
 
-  const onClick = isCloseButton ? onClose : onConfirm;
+export default function CompoundModalButton(props: CompoundModalButtonProps) {
+  const { buttonTheme = 'primary', children } = props;
+  const onClick = getOnClick(props);
 
   return (
     <Button buttonTheme={buttonTheme} onClick={onClick}>

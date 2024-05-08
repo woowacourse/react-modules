@@ -3,6 +3,7 @@ import React from 'react';
 interface CompoundModalContextProps {
   onClose?: () => void;
   onConfirm?: () => void;
+  onCancel?: () => void;
 }
 
 export const CompoundModalContext =
