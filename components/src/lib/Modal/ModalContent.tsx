@@ -12,4 +12,5 @@ const Main = styled.main`
   max-width: 100vw;
   max-height: 70vh;
   overflow-y: auto;
+  text-align: start;
 `;
