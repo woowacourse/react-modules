@@ -1,4 +1,9 @@
-import { ButtonPosition, ModalPosition, ModalSize } from './Modal';
+import {
+  ButtonJustifyContent,
+  ButtonPosition,
+  ModalPosition,
+  ModalSize,
+} from './Modal';
 
 import styled from 'styled-components';
 
@@ -84,9 +89,14 @@ export const ModalDescription = styled.p`
   color: #999999;
 `;
 
-export const ButtonContainer = styled.div<{ buttonPosition: ButtonPosition }>`
+export const ButtonContainer = styled.div<{
+  buttonPosition: ButtonPosition;
+  buttonJustifyContent: ButtonJustifyContent;
+}>`
   display: flex;
   flex-direction: ${(props) =>
     props.buttonPosition === 'row' ? 'row-reverse' : 'column'};
+
+  justify-content: ${(props) => props.buttonJustifyContent};
   gap: 16px;
 `;
