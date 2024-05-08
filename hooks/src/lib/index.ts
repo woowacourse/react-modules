@@ -1,5 +1,5 @@
 export { default as useCVC } from "./hooks/useCVC";
-export { default as useCardBrancIdentification } from "./hooks/useCardBrandIdentification";
+export { default as useCardBrandIdentification } from "./hooks/useCardBrandIdentification";
 export { default as useCardHolder } from "./hooks/useCardHolder";
 export { default as useCardIssuer } from "./hooks/useCardIssuer";
 export { default as useCardNumber } from "./hooks/useCardNumber";
