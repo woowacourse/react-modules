@@ -14,18 +14,21 @@ import { useEffect } from 'react';
 interface CompoundModalProps extends React.HTMLAttributes<HTMLDivElement> {
   onClose?: () => void;
   onConfirm?: () => void;
+  onCancel?: () => void;
   position?: ModalPosition;
 }
 
 const CompoundModal = ({
   onClose,
   onConfirm,
+  onCancel,
   position = 'center',
   children,
 }: CompoundModalProps) => {
   const value = {
     onClose,
     onConfirm,
+    onCancel,
   };
 
   useEffect(() => {
