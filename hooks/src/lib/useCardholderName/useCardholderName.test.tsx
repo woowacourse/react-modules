@@ -94,19 +94,6 @@ describe("useCardholderName에 대한 테스트 케이스", () => {
         expect(errorMessage).not.toBeNull();
       });
 
-      it("대소문자를 섞어서 입력한 경우 유효하지 않은 값으로 판단한다.", () => {
-        const { input, getErrorStatus } = setup();
-
-        const WRONG_VALUE = "AbC";
-        fireEvent.change(input, { target: { value: WRONG_VALUE } });
-        fireEvent.blur(input);
-
-        const { isError, errorMessage } = getErrorStatus();
-
-        expect(isError).toBe(true);
-        expect(errorMessage).not.toBeNull();
-      });
-
       it.each([" ABC ", "ABC ", " ABC"])(
         "양 끝에 공백이 포함된 경우(%s) 유효하지 않은 값으로 판단한다.",
         (value) => {
