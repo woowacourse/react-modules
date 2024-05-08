@@ -4,10 +4,7 @@ import Validator from "../utils/validator";
 import { ERROR_MESSAGE, OPTION } from "../constants";
 import formattingMonth from "../utils/formattingMonth";
 
-interface ExpiryDateValue {
-  month: string;
-  year: string;
-}
+type ExpiryDateValue = Record<"month" | "year", string>;
 
 const useExpiryDate = (initialValue: ExpiryDateValue) => {
   const { inputValue, handleInputChange, updateByNameAndValue } = useInput(initialValue);
