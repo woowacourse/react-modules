@@ -1,15 +1,7 @@
 import styled from 'styled-components';
-import { ModalPositionType } from './Modal';
 
-export const COLORS = {
-  grey100: '#ffffff',
-  grey200: '#eeeeee',
-  grey300: '#8b95a1',
-  grey400: '#666666',
-  grey500: '#444444',
-  grey600: '#333333',
-  grey700: '#000000',
-};
+import { ModalPositionType, ModalSizeType } from '../types/ModalTypes';
+import { COLORS, MODAL_SIZE } from '../constants/styles';
 
 export const ModalPositioner = styled.div`
   position: fixed;
@@ -26,7 +18,7 @@ export const ModalBackdrop = styled.div<{
   position: fixed;
   width: 100%;
   height: 100%;
-  background: ${COLORS.grey700};
+  background: ${COLORS.grey800};
   opacity: ${(props) => props.$opacity};
   z-index: ${(props) => props.$zIndex};
 
@@ -38,19 +30,19 @@ export const ModalBackdrop = styled.div<{
 
 export const ModalWrapper = styled.div<{
   $position: ModalPositionType;
-  $width: { basicWidth: string; minWidth: string };
+  $size: ModalSizeType;
   $zIndex: number;
 }>`
   background: ${COLORS.grey100};
-  min-width: ${(props) => props.$width.minWidth};
-  width: ${(props) => props.$width.basicWidth};
-  color: ${COLORS.grey700};
+  color: ${COLORS.grey800};
   padding: 24px 32px;
-  z-index: ${(props) => props.$zIndex};
 
   display: flex;
   flex-direction: column;
   gap: 16px;
+
+  width: ${(props) => MODAL_SIZE[props.$size]};
+  z-index: ${(props) => props.$zIndex};
 
   ${(props) => {
     if (props.$position === 'center') {
