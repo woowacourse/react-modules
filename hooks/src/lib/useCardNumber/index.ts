@@ -1,38 +1,41 @@
 import { useInputValidation, IErrorStatus } from "../useInputValidation";
+import { findCardBrand } from "./utils/findCardBrand";
 import { cardNumberValidator } from "./validator";
 
-interface CardNumberUnitControl {
-  value: string;
+export interface CardNumberControl {
+  value: {
+    raw: string;
+    formatted: string;
+  };
   errorStatus: IErrorStatus;
+  cardBrand: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onBlur: (e: React.FocusEvent<HTMLInputElement>) => void;
 }
 
-export function useCardNumber(): CardNumberUnitControl[] {
-  const firstUnitControl = useInputValidation(cardNumberValidator);
-  const secondUnitControl = useInputValidation(cardNumberValidator);
-  const thirdUnitControl = useInputValidation(cardNumberValidator);
-  const fourthUnitControl = useInputValidation(cardNumberValidator);
+export function useCardNumber(): CardNumberControl {
+  const { value, setValueWithValidation, validateOnBlur, errorStatus } =
+    useInputValidation(cardNumberValidator);
 
-  const cardNumberUnitControls = [
-    firstUnitControl,
-    secondUnitControl,
-    thirdUnitControl,
-    fourthUnitControl,
-  ];
+  const cardBrand = findCardBrand(value);
+  // const formattedCardNumber = formatCardNumber(cardNumbers, brand);
 
-  const result = cardNumberUnitControls.map(
-    ({ value, setValueWithValidation, errorStatus, validateOnBlur }) => {
-      return {
-        value,
-        errorStatus,
-        onChange: (e: React.ChangeEvent<HTMLInputElement>) => {
-          setValueWithValidation(e.target.value);
-        },
-        onBlur: (e: React.FocusEvent<HTMLInputElement>) => validateOnBlur(e.target.value),
-      };
-    }
-  );
+  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setValueWithValidation(e.target.value);
+  };
 
-  return result;
+  const onBlur = (e: React.FocusEvent<HTMLInputElement>) => {
+    validateOnBlur(e.target.value);
+  };
+
+  return {
+    value: {
+      raw: value,
+      formatted: value,
+    },
+    errorStatus,
+    cardBrand,
+    onChange,
+    onBlur,
+  };
 }
