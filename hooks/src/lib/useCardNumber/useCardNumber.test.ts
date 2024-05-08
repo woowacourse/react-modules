@@ -8,55 +8,18 @@ describe('useCardNumber 테스트', () => {
     const errorCases = [
       {
         title: '카드 번호에 "한글"을 입력한 경우 "숫자만 입력 가능합니다."라는 메시지와 함께 에러가 발생한다.',
-        inputDetails: [{ inputIndex: 0, typeMessage: '한글' }],
+        inputDetails: '한글',
         expectedErrorDetail: {
-          errorConditions: [true, false, false, false],
+          isError: true,
           errorMessage: '숫자만 입력 가능합니다.',
         },
       },
       {
-        title:
-          '첫 번째 입력창에 숫자 "1"만 입력한 경우 "카드 번호 4자리를 입력해주세요."라는 메시지와 함께 첫 번째 입력창에서 에러가 발생한다.',
-        inputDetails: [{ inputIndex: 0, typeMessage: '1' }],
+        title: '"1"만 입력한 경우, "카드 번호를 모두 입력해주세요."라는 메시지와 함께 에러가 발생한다.',
+        inputDetails: '1',
         expectedErrorDetail: {
-          errorConditions: [true, false, false, false],
-          errorMessage: '카드 번호 4자리를 입력해주세요.',
-        },
-      },
-      {
-        title:
-          '두 번째 입력창에 숫자 "1"만 입력한 경우 "카드 번호 4자리를 입력해주세요."라는 메시지와 함께 두번째 입력창에서 에러가 발생한다.',
-        inputDetails: [{ inputIndex: 1, typeMessage: '1' }],
-        expectedErrorDetail: {
-          errorConditions: [false, true, false, false],
-          errorMessage: '카드 번호 4자리를 입력해주세요.',
-        },
-      },
-      {
-        title:
-          '세 번째 입력창에 숫자 "1"만 입력한 경우 "카드 번호 4자리를 입력해주세요."라는 메시지와 함께 세번째 입력창에서 에러가 발생한다.',
-        inputDetails: [{ inputIndex: 2, typeMessage: '1' }],
-        expectedErrorDetail: {
-          errorConditions: [false, false, true, false],
-          errorMessage: '카드 번호 4자리를 입력해주세요.',
-        },
-      },
-      {
-        title:
-          '마지막 입력창에 숫자 "1"만 입력한 경우 "카드 번호 4자리를 입력해주세요."라는 메시지와 함께 마지막 입력창에서 에러가 발생한다.',
-        inputDetails: [{ inputIndex: 3, typeMessage: '1' }],
-        expectedErrorDetail: {
-          errorConditions: [false, false, false, true],
-          errorMessage: '카드 번호 4자리를 입력해주세요.',
-        },
-      },
-      {
-        title:
-          '한 입력 창에 4자리 모두 입력한 경우 "카드 번호는 16자리 숫자여야 합니다."라는 메시지와 함께 에러가 발생한다.',
-        inputDetails: [{ inputIndex: 0, typeMessage: '1234' }],
-        expectedErrorDetail: {
-          errorConditions: [false, true, true, true],
-          errorMessage: '카드 번호는 16자리 숫자여야 합니다.',
+          isError: true,
+          errorMessage: '카드 번호를 모두 입력해주세요.',
         },
       },
     ];
@@ -65,110 +28,168 @@ describe('useCardNumber 테스트', () => {
       const { result } = renderHook(() => useCardNumber());
 
       React.act(() => {
-        inputDetails.forEach(({ typeMessage, inputIndex }) => {
-          result.current.handleChangeCardNumber(inputIndex, typeMessage);
-        });
+        result.current.handleChangeCardNumber(inputDetails);
       });
 
       // then
       expect(result.current.cardNumberError).toStrictEqual(expectedErrorDetail);
     });
 
-    it('유저가 16자리를 다 입력한 후 2번째 입력 창의 값을 하나 지웠을 때 "카드 번호 4자리를 입력해주세요."라는 메시지와 함께 에러가 발생한다.', () => {
+    it('유저가 기본 카드 번호인 16자리를 모두 입력한 후 값을 하나 지웠을 때 "카드 번호를 모두 입력해주세요."라는 메시지와 함께 에러가 발생한다.', () => {
       // given
-      const cardNumbers = ['1234', '5678', '9012', '3456'];
+      const cardNumbers = '1234123412341234';
 
       // when
       const { result } = renderHook(() => useCardNumber());
 
-      cardNumbers.forEach((num, index) => {
-        React.act(() => {
-          result.current.handleChangeCardNumber(index, num);
-        });
+      React.act(() => {
+        result.current.handleChangeCardNumber(cardNumbers);
       });
 
       React.act(() => {
-        result.current.handleChangeCardNumber(1, '567');
+        result.current.handleChangeCardNumber('123412341234123');
       });
 
       // then
       expect(result.current.cardNumberError).toStrictEqual({
-        errorConditions: [false, true, false, false],
-        errorMessage: '카드 번호 4자리를 입력해주세요.',
+        isError: true,
+        errorMessage: '카드 번호를 모두 입력해주세요.',
       });
     });
 
-    it('유저가 16자리를 다 입력한 후 모두 지웠을 때 "카드 번호 4자리를 입력해주세요."라는 메시지와 함께 에러와 함께 발생한다.', () => {
+    it('유저가 기본 카드 번호인 16자리를 모두 입력한 후 값을 모두 지웠을 때 "카드 번호를 모두 입력해주세요."라는 메시지와 함께 에러가 발생한다.', () => {
       // given
-      const cardNumbers = ['1234', '5678', '9012', '3456'];
+      const cardNumbers = '1234123412341234';
 
       // when
       const { result } = renderHook(() => useCardNumber());
 
-      cardNumbers.forEach((num, index) => {
-        React.act(() => {
-          result.current.handleChangeCardNumber(index, num);
-        });
+      React.act(() => {
+        result.current.handleChangeCardNumber(cardNumbers);
       });
 
-      [
-        { inputIndex: 3, typeMessage: '' },
-        { inputIndex: 2, typeMessage: '' },
-        { inputIndex: 1, typeMessage: '' },
-        { inputIndex: 0, typeMessage: '' },
-      ].forEach(({ inputIndex, typeMessage }) => {
-        React.act(() => {
-          result.current.handleChangeCardNumber(inputIndex, typeMessage);
-        });
+      React.act(() => {
+        result.current.handleChangeCardNumber('');
       });
 
       // then
       expect(result.current.cardNumberError).toStrictEqual({
-        errorConditions: [true, false, false, false],
-        errorMessage: '카드 번호 4자리를 입력해주세요.',
+        isError: true,
+        errorMessage: '카드 번호를 모두 입력해주세요.',
       });
     });
   });
-
   describe('success case', () => {
-    it('유저가 16자리의 숫자를 모두 입력한 경우 에러가 발생하지 않는다.', () => {
+    it('유저가 기본 카드 번호인 16자리의 숫자를 모두 입력한 경우 에러가 발생하지 않는다.', () => {
       // given
-      const cardNumbers = ['1234', '5678', '9012', '3456'];
+      const cardNumbers = '1234567890123456';
 
       // when
       const { result } = renderHook(() => useCardNumber());
 
-      cardNumbers.forEach((num, index) => {
-        React.act(() => {
-          result.current.handleChangeCardNumber(index, num);
-        });
+      React.act(() => {
+        result.current.handleChangeCardNumber(cardNumbers);
       });
 
       // then
       expect(result.current.cardNumberError).toStrictEqual({
-        errorConditions: [false, false, false, false],
+        isError: false,
         errorMessage: '',
       });
     });
 
-    it('유저가 한 입력창에 4자리 이상 입력하는 경우 4자리만 입력한다.', () => {
+    it('유저가 VISA 카드 번호인 16자리의 숫자를 모두 입력한 경우 에러가 발생하지 않고, VISA 카드로 포매팅된 번호를 반환한다.', () => {
       // given
-      const cardNumbers = ['1234', '5678', '9012', '3456'];
+      const cardNumbers = '4123123412341234';
 
       // when
       const { result } = renderHook(() => useCardNumber());
 
-      cardNumbers.forEach((num, index) => {
-        React.act(() => {
-          result.current.handleChangeCardNumber(index, num);
-        });
+      React.act(() => {
+        result.current.handleChangeCardNumber(cardNumbers);
       });
 
       // then
       expect(result.current.cardNumberError).toStrictEqual({
-        errorConditions: [false, false, false, false],
+        isError: false,
         errorMessage: '',
       });
+      expect(result.current.cardNumbers).toStrictEqual(['4123', '1234', '1234', '1234']);
+    });
+    it('유저가 MASTER 카드 번호인 16자리의 숫자를 모두 입력한 경우 에러가 발생하지 않고, VISA 카드로 포매팅된 번호를 반환한다.', () => {
+      // given
+      const cardNumbers = '5123123412341234';
+
+      // when
+      const { result } = renderHook(() => useCardNumber());
+
+      React.act(() => {
+        result.current.handleChangeCardNumber(cardNumbers);
+      });
+
+      // then
+      expect(result.current.cardNumberError).toStrictEqual({
+        isError: false,
+        errorMessage: '',
+      });
+      expect(result.current.cardNumbers).toStrictEqual(['5123', '1234', '1234', '1234']);
+    });
+
+    it('유저가 DINERS 카드 번호인 14자리의 숫자를 모두 입력한 경우 에러가 발생하지 않고, DINERS 카드로 포매팅된 번호를 반환한다.', () => {
+      // given
+      const cardNumbers = '36121234121234';
+
+      // when
+      const { result } = renderHook(() => useCardNumber());
+
+      React.act(() => {
+        result.current.handleChangeCardNumber(cardNumbers);
+      });
+
+      // then
+      expect(result.current.cardNumberError).toStrictEqual({
+        isError: false,
+        errorMessage: '',
+      });
+      expect(result.current.cardNumbers).toStrictEqual(['3612', '123412', '1234']);
+    });
+
+    it('유저가 AMEX 카드 번호인 15자리의 숫자를 모두 입력한 경우 에러가 발생하지 않고, AMEX 카드로 포매팅된 번호를 반환한다.', () => {
+      // given
+      const cardNumbers = '341212341212345';
+
+      // when
+      const { result } = renderHook(() => useCardNumber());
+
+      React.act(() => {
+        result.current.handleChangeCardNumber(cardNumbers);
+      });
+
+      // then
+      expect(result.current.cardNumberError).toStrictEqual({
+        isError: false,
+        errorMessage: '',
+      });
+      expect(result.current.cardNumbers).toStrictEqual(['3412', '123412', '12345']);
+    });
+
+    it('유저가 UNION 카드 번호인 16자리의 숫자를 모두 입력한 경우 에러가 발생하지 않고, UNION 카드로 포매팅된 번호를 반환한다.', () => {
+      // given
+      const cardNumbers = '6221261212341234';
+
+      // when
+      const { result } = renderHook(() => useCardNumber());
+
+      React.act(() => {
+        result.current.handleChangeCardNumber(cardNumbers);
+      });
+
+      // then
+      expect(result.current.cardNumberError).toStrictEqual({
+        isError: false,
+        errorMessage: '',
+      });
+      expect(result.current.cardNumbers).toStrictEqual(['6221', '2612', '1234', '1234']);
     });
   });
 });
