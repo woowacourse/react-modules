@@ -1,9 +1,9 @@
 import { PropsWithChildren } from 'react';
 
-interface ModalContentProps extends PropsWithChildren {}
+export interface ModalContentProps extends PropsWithChildren {}
 
 const ModalContent = ({ children }: ModalContentProps) => {
-  return <div>{children}</div>;
+  return <div style={{ width: '90%' }}>{children}</div>;
 };
 
 export default ModalContent;
