@@ -1,28 +1,39 @@
 import styled from "styled-components";
 import { ReactNode } from "react";
-import { modalButtonLayout, modalPosition } from "./modalType";
+import {
+  ButtonPosition,
+  ButtonSize,
+  ModalButtonLayout,
+  ModalPosition,
+  ModalSize,
+} from "./modalType";
 import ModalHeader from "./ModalHeader";
 import ButtonBox from "./ButtonBox";
 
 interface Props {
-  position?: modalPosition;
+  position?: ModalPosition;
   title: string;
   children?: ReactNode;
+  modalSize?: ModalSize;
 
   hasXButton?: boolean;
   xButtonContent?: string;
 
-  buttonLayout?: modalButtonLayout;
+  buttonLayout?: ModalButtonLayout;
   closeButtonContent?: string;
   confirmButtonContent?: string;
+  buttonPosition?: ButtonPosition;
+  buttonSize?: ButtonSize;
 
-  handleConfirmEvent: (e: React.MouseEvent) => void;
+  handleConfirmEvent?: (e: React.MouseEvent) => void;
   handleCloseEvent: (e: React.MouseEvent) => void;
 }
+
 const Modal = ({
   position,
   title,
   children,
+  modalSize,
 
   hasXButton = true,
   xButtonContent,
@@ -30,12 +41,22 @@ const Modal = ({
   buttonLayout = "row",
   closeButtonContent,
   confirmButtonContent = "확인",
+  buttonSize = "MAX",
+  buttonPosition = "center",
 
   handleConfirmEvent,
   handleCloseEvent,
 }: Props) => {
   const isClickBackDrop = (e: React.MouseEvent) => {
     return e.currentTarget === e.target;
+  };
+
+  const getContainerWidth = () => {
+    if (position === "bottom") return "100%";
+    if (modalSize === "L") return "37.5rem";
+    if (modalSize === "M") return "30rem";
+    if (modalSize === "S") return "20rem";
+    return "30rem";
   };
 
   return (
@@ -45,10 +66,7 @@ const Modal = ({
           $position={position === "bottom" ? "flex-end" : "center"}
           onClick={(e) => isClickBackDrop(e) && handleCloseEvent(e)}
         >
-          <ModalContainer
-            $minWidth={position === "bottom" ? "100%" : "200px"}
-            $maxWidth={position === "bottom" ? "100%" : "85%"}
-          >
+          <ModalContainer $width={getContainerWidth()}>
             <ModalHeader
               title={title}
               hasXButton={hasXButton}
@@ -62,9 +80,10 @@ const Modal = ({
               confirmButtonContent={confirmButtonContent}
               handleCloseEvent={handleCloseEvent}
               handleConfirmEvent={handleConfirmEvent}
+              buttonSize={buttonSize}
+              buttonPosition={buttonPosition}
             />
           </ModalContainer>
-          {children}
         </ModalBackDrop>
       }
     </>
@@ -79,20 +98,21 @@ const ModalBackDrop = styled.div<{ $position: string }>`
   width: 100%;
   height: 100%;
   justify-content: center;
-  background: rgba(0, 0, 0, 0.35);
+  background: rgba(0, 0, 0, 0.581);
+  z-index: 10;
 `;
 
-const ModalContainer = styled.div<{ $minWidth: string; $maxWidth: string }>`
+const ModalContainer = styled.div<{ $width: string }>`
   display: flex;
   flex-direction: column;
-  min-width: ${(props) => props.$minWidth};
-  max-width: ${(props) => props.$maxWidth};
+  width: ${(props) => props.$width};
   max-height: 90%;
   background-color: white;
   padding: 24px 32px;
   gap: 5px;
   border-radius: 8px;
   box-sizing: border-box;
+  overflow: auto;
 `;
 
 const ContentWrapper = styled.div`
