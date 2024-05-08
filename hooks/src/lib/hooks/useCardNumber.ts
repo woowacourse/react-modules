@@ -8,7 +8,7 @@ type UseCardNumberResult = {
   cardNumbersValidation: ValidationResult;
 };
 
-export function useCardNumber(): UseCardNumberResult {
+export default function useCardNumber(): UseCardNumberResult {
   const [cardNumbers, setCardNumbers] = useState("");
   const [isTouched, setIsTouched] = useState(false);
 

@@ -1,6 +1,6 @@
-import { renderHook, act } from "@testing-library/react";
-import { usePassword } from "../src/lib/hooks/usePassword";
+import { act, renderHook } from "@testing-library/react";
 import { ERROR_MESSAGE } from "../src/lib/constants/errorMessage";
+import usePassword from "../src/lib/hooks/usePassword";
 
 describe("usePassword 테스트", () => {
   it("touched 상태인데 입력값이 비어있다면 에러 메시지를 반환해야 한다", () => {

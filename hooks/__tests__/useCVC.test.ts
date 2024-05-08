@@ -1,6 +1,6 @@
-import { renderHook, act } from "@testing-library/react";
-import { useCVC } from "../src/lib/hooks/useCVC";
+import { act, renderHook } from "@testing-library/react";
 import { ERROR_MESSAGE } from "../src/lib/constants/errorMessage";
+import useCVC from "../src/lib/hooks/useCVC";
 
 describe("useCVC 테스트", () => {
   it("touched 상태인데 입력값이 비어있다면 에러 메시지를 반환해야 한다", () => {

@@ -8,7 +8,7 @@ type UseCardIssuerResult = {
   cardIssuerValidation: ValidationResult;
 };
 
-export function useCardIssuer(): UseCardIssuerResult {
+export default function useCardIssuer(): UseCardIssuerResult {
   const [cardIssuer, setCardIssuer] = useState("");
   const [isTouched, setIsTouched] = useState(false);
 

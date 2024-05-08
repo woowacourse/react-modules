@@ -13,7 +13,7 @@ type UseExpiryDateResult = {
   cardExpiryDateValidation: ValidationResult;
 };
 
-export function useExpiryDate(): UseExpiryDateResult {
+export default function useExpiryDate(): UseExpiryDateResult {
   const [cardExpiryDate, setCardExpiryDate] = useState<ExpiryDate>({ month: "", year: "" });
   const [isTouched, setIsTouched] = useState({ month: false, year: false });
 

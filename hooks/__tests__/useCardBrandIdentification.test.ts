@@ -1,5 +1,5 @@
-import useCardBrandIdentification from "../src/lib/hooks/useCardBrandIdentification";
 import { renderHook } from "@testing-library/react";
+import useCardBrandIdentification from "../src/lib/hooks/useCardBrandIdentification";
 
 describe("useCardBrandIdentification 테스트", () => {
   it("Diners 카드 번호를 정확히 식별한다.", () => {

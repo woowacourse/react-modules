@@ -8,7 +8,7 @@ type UseCardHolderResult = {
   cardHolderValidation: ValidationResult;
 };
 
-export function useCardHolder(): UseCardHolderResult {
+export default function useCardHolder(): UseCardHolderResult {
   const [cardHolder, setCardHolder] = useState("");
   const [isTouched, setIsTouched] = useState(false);
 

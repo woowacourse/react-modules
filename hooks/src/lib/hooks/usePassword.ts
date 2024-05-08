@@ -8,7 +8,7 @@ type UsePasswordResult = {
   cardPasswordValidation: ValidationResult;
 };
 
-export function usePassword(): UsePasswordResult {
+export default function usePassword(): UsePasswordResult {
   const [cardPassword, setCardPassword] = useState("");
   const [isTouched, setIsTouched] = useState(false);
 

@@ -8,7 +8,7 @@ type UseCVCResult = {
   cardCVCValidation: ValidationResult;
 };
 
-export function useCVC(): UseCVCResult {
+export default function useCVC(): UseCVCResult {
   const [cardCVC, setCardCVC] = useState("");
   const [isTouched, setIsTouched] = useState(false);
 
