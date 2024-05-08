@@ -11,6 +11,7 @@ import * as Styled from "./Modal.styled";
 export interface ModalProps extends React.PropsWithChildren {
   children?: React.ReactNode;
   isOpen: boolean;
+  size: "S" | "M" | "L";
   position: "top" | "bottom" | "center";
   onClose: () => void;
   style?: CSSProperties;
@@ -23,7 +24,7 @@ const Modal: React.FC<ModalProps> & {
   ModalLongButton: ModalButtonType;
   ModalContent: ModalContentType;
   ModalFooter: ModalFooterType;
-} = ({ children, isOpen, position, ...restProps }) => {
+} = ({ children, isOpen, size, position, ...restProps }) => {
   const modalBackdropRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -63,7 +64,7 @@ const Modal: React.FC<ModalProps> & {
           ref={modalBackdropRef}
           onClick={clickBackDropHandler}
         >
-          <Styled.ModalWrapper position={position} {...restProps}>
+          <Styled.ModalWrapper size={size} position={position} {...restProps}>
             {children}
           </Styled.ModalWrapper>
         </Styled.ModalBackdrop>

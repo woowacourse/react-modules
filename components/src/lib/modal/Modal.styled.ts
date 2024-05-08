@@ -13,6 +13,7 @@ export const ModalBackdrop = styled.div`
 `;
 
 export const ModalWrapper = styled.section<{
+  size: "S" | "M" | "L";
   position: "top" | "center" | "bottom";
 }>`
   position: fixed;
@@ -20,11 +21,28 @@ export const ModalWrapper = styled.section<{
   transform: translateX(-50%);
   margin: 0;
   padding: 0;
-  width: 40%;
+  // width: 40%;
   height: fit-content;
   background-color: white;
   box-sizing: border-box;
   border: none;
+
+  ${({ size }) => {
+    switch (size) {
+      case "S":
+        return `
+          width: 20%;
+        `;
+      case "M":
+        return `
+          width: 40%;
+        `;
+      case "L":
+        return `
+          width: 55%;
+        `;
+    }
+  }}
 
   ${({ position }) => {
     switch (position) {
@@ -76,7 +94,7 @@ export const ModalLongButton = styled.button`
   color: white;
   background-color: #333333;
   font-weight: bold;
-  width: 85%;
+  width: 100%;
 
   &:hover {
     border: none;
@@ -90,5 +108,5 @@ export const ModalContent = styled.main`
 `;
 
 export const ModalFooter = styled.footer`
-  margin: 15px 5px;
+  margin: 15px 20px;
 `;
