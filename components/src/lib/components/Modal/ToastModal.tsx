@@ -1,10 +1,9 @@
 import styled from 'styled-components';
 
-import { useToastModalAnimation } from '../hooks';
-import { ToastModalProps } from '../types/modal';
-
-import { ModalContents, ModalContentsStyleProps } from './Contents';
-import ModalContainer from './ModalContainer';
+import { useToastModalAnimation } from '../../hooks';
+import { ToastModalProps } from '../../types/modal';
+import ModalContainer from '../ModalContainer';
+import { ModalContents, ModalContentsStyleProps } from '../ModalContainer/Contents';
 
 const ToastModalContents = styled(ModalContents)<ModalContentsStyleProps>`
   position: fixed;

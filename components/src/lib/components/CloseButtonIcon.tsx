@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import CloseButtonImg from '../../assets/images/closeButton.svg';
+import CloseButtonImg from '../assets/images/closeButton.svg';
 
 const CloseButton = styled.button`
   img {

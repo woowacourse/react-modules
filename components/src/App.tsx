@@ -1,9 +1,8 @@
 import { useRef, useState } from 'react';
 import './App.css';
 
-import { BottomModal, CenterModal, usePosition } from './lib';
+import { BottomModal, CenterModal, ToastModal, usePosition } from './lib';
 import ModalContainer from './lib/components/ModalContainer';
-import ToastModal from './lib/components/ToastModal';
 
 function App() {
   const [openCenterModal, setOpenCenterModal] = useState(false);
@@ -23,7 +22,7 @@ function App() {
       </BottomModal>
       <CenterModal openModal={openCenterModal} setOpenModal={setOpenCenterModal}>
         <h1>Center Modal</h1>
-        <ModalContainer.button isCloseModal={true}>close button</ModalContainer.button>
+        <ModalContainer.Button isCloseModal={true}>close button</ModalContainer.Button>
       </CenterModal>
 
       <ToastModal

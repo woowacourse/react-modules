@@ -52,7 +52,7 @@ export interface ToastModalProps extends ModalCommonProps, AnimationProps {
   toastDuration?: number; //단위:ms
 }
 
-export interface ModalContainerProps extends Omit<ModalCommonProps, 'setOpenModal'> {
+export interface ModalContainerProps extends Omit<ModalCommonProps, 'setOpenModal'>, AnimationProps {
   closeModal: () => void;
 }
 

@@ -1,9 +1,7 @@
 import styled from 'styled-components';
 
-import { ModalCommonProps } from '../types/modal';
-
-import Backdrop from './Backdrop';
-import ModalContainer from './ModalContainer';
+import { ModalCommonProps } from '../../types/modal';
+import ModalContainer from '../ModalContainer';
 
 const CenterContentsWrapper = styled.div`
   display: flex;
@@ -19,9 +17,9 @@ function CenterModal(props: ModalCommonProps) {
   const closeModal = () => setOpenModal(false);
   return (
     <ModalContainer {...rest} closeModal={closeModal}>
-      <Backdrop handleCloseModal={closeModal} />
+      <ModalContainer.Backdrop handleCloseModal={closeModal} />
       <CenterContentsWrapper>
-        <ModalContainer.contents>{children}</ModalContainer.contents>
+        <ModalContainer.Contents>{children}</ModalContainer.Contents>
       </CenterContentsWrapper>
     </ModalContainer>
   );

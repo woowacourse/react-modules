@@ -1,14 +1,12 @@
 import { MouseEvent } from 'react';
 import styled from 'styled-components';
 
-import { BASIC_BORDER_RADIUS, BASIC_BOTTOM_MODAL_ANIMATION_DURATION } from '../constants/modal';
-import { BottomModalContext } from '../contexts';
-import { useBottomModalAnimation, useModalContext } from '../hooks';
-import { BottomModalProps, ModalButtonProps } from '../types/modal';
-
-import Backdrop from './Backdrop';
-import { ModalContents, ModalContentsStyleProps } from './Contents';
-import ModalContainer from './ModalContainer';
+import { BASIC_BORDER_RADIUS, BASIC_BOTTOM_MODAL_ANIMATION_DURATION } from '../../constants/modal';
+import { BottomModalContext } from '../../contexts';
+import { useBottomModalAnimation, useModalContext } from '../../hooks';
+import { BottomModalProps, ModalButtonProps } from '../../types/modal';
+import ModalContainer from '../ModalContainer';
+import { ModalContents, ModalContentsStyleProps } from '../ModalContainer/Contents';
 
 const BottomModalContents = styled(ModalContents)<ModalContentsStyleProps>`
   max-width: 100vw;
@@ -46,7 +44,7 @@ function BottomModal(props: BottomModalProps) {
   return (
     <ModalContainer {...rest} closeModal={closeModal}>
       <BottomModalContext.Provider value={{ handleCloseModal: fadeOutModal }}>
-        <Backdrop handleCloseModal={fadeOutModal} />
+        <ModalContainer.Backdrop handleCloseModal={fadeOutModal} />
         <BottomModalContents
           $isOn={isOn}
           $timeout={timeout}
