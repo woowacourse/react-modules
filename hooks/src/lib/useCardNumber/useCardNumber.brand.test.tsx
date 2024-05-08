@@ -1,8 +1,8 @@
 import { fireEvent, render, screen } from "@testing-library/react";
 import { useCardNumber } from ".";
-import { CARD_BRANDS } from "./utils/findCardBrand";
+import { CARD_BRAND } from "./constants/cardBrand";
 
-function UseCardNumberTestComponent() {
+function UseCardNumberBrandTestComponent() {
   const { value, errorStatus, cardBrand, onChange, onBlur } = useCardNumber();
 
   return (
@@ -13,7 +13,8 @@ function UseCardNumberTestComponent() {
         onChange={onChange}
         onBlur={onBlur}
       />
-      <input readOnly data-testid={"card-brand-input"} value={cardBrand} />
+      <div data-testid={"card-brand"}>{cardBrand}</div>
+      <div data-testid={"formatted-card-number"}>{value.formatted.join(" ")}</div>
       {errorStatus.isError && <div data-testid={"is-error"}>is error: true</div>}
       {errorStatus.errorMessage && (
         <div data-testid={"error-message"}>{errorStatus.errorMessage}</div>
@@ -23,11 +24,13 @@ function UseCardNumberTestComponent() {
 }
 
 const setup = () => {
-  render(<UseCardNumberTestComponent />);
+  render(<UseCardNumberBrandTestComponent />);
   const input = screen.getByTestId<HTMLInputElement>("card-number-input");
-  const cardBrandInput = screen.getByTestId<HTMLInputElement>("card-brand-input");
+  const cardBrandDiv = screen.getByTestId<HTMLDivElement>("card-brand");
+  const formattedCardNumberDiv = screen.getByTestId<HTMLDivElement>("formatted-card-number");
 
-  const getCardBrand = () => cardBrandInput.value;
+  const getCardBrand = () => cardBrandDiv.textContent;
+  const getFormattedCardNumber = () => formattedCardNumberDiv.textContent;
 
   const getErrorStatus = () => {
     const isError = screen.queryByTestId("is-error");
@@ -39,33 +42,43 @@ const setup = () => {
     };
   };
 
-  return { input, getCardBrand, getErrorStatus };
+  return { input, getCardBrand, getFormattedCardNumber, getErrorStatus };
 };
+
+const TESTING_CARD_NUMBERS = {
+  Diners: "36" + "1".repeat(12),
+  AMEX: "34" + "1".repeat(13),
+  UnionPay: "622126" + "1".repeat(10),
+  MasterCard: "51" + "1".repeat(14),
+  Visa: "4" + "1".repeat(15),
+  unknown: "9999".repeat(4),
+} as const;
+
 describe("카드 브랜드 관련 처리에 대한 테스트 케이스", () => {
   describe("카드 브랜드 식별 기능이 정상적으로 동작한다.", () => {
     test.each([
       {
-        cardNumber: "36" + "1".repeat(12),
-        expectedCardBrand: CARD_BRANDS.Diners,
+        cardNumber: TESTING_CARD_NUMBERS.Diners,
+        expectedCardBrand: CARD_BRAND.Diners,
       },
       {
-        cardNumber: "34" + "1".repeat(13),
-        expectedCardBrand: CARD_BRANDS.AMEX,
+        cardNumber: TESTING_CARD_NUMBERS.AMEX,
+        expectedCardBrand: CARD_BRAND.AMEX,
       },
       {
-        cardNumber: "622126" + "1".repeat(10),
-        expectedCardBrand: CARD_BRANDS.UnionPay,
+        cardNumber: TESTING_CARD_NUMBERS.UnionPay,
+        expectedCardBrand: CARD_BRAND.UnionPay,
       },
       {
-        cardNumber: "51" + "1".repeat(14),
-        expectedCardBrand: CARD_BRANDS.MasterCard,
+        cardNumber: TESTING_CARD_NUMBERS.MasterCard,
+        expectedCardBrand: CARD_BRAND.MasterCard,
       },
       {
-        cardNumber: "4" + "1".repeat(15),
-        expectedCardBrand: CARD_BRANDS.Visa,
+        cardNumber: TESTING_CARD_NUMBERS.Visa,
+        expectedCardBrand: CARD_BRAND.Visa,
       },
       {
-        cardNumber: "9999".repeat(4),
+        cardNumber: TESTING_CARD_NUMBERS.unknown,
         expectedCardBrand: "unknown",
       },
     ])(
@@ -76,6 +89,44 @@ describe("카드 브랜드 관련 처리에 대한 테스트 케이스", () => {
         fireEvent.change(input, { target: { value: cardNumber } });
 
         expect(getCardBrand()).toBe(expectedCardBrand);
+      }
+    );
+  });
+
+  describe("카드번호가 입력될 때, 포맷팅이 정상적으로 동작한다.", () => {
+    test.each([
+      {
+        cardNumber: TESTING_CARD_NUMBERS.Diners,
+        expectedFormattedCardNumber: "3611 111111 1111",
+      },
+      {
+        cardNumber: TESTING_CARD_NUMBERS.AMEX,
+        expectedFormattedCardNumber: "3411 111111 11111",
+      },
+      {
+        cardNumber: TESTING_CARD_NUMBERS.UnionPay,
+        expectedFormattedCardNumber: "6221 2611 1111 1111",
+      },
+      {
+        cardNumber: TESTING_CARD_NUMBERS.MasterCard,
+        expectedFormattedCardNumber: "5111 1111 1111 1111",
+      },
+      {
+        cardNumber: TESTING_CARD_NUMBERS.Visa,
+        expectedFormattedCardNumber: "4111 1111 1111 1111",
+      },
+      {
+        cardNumber: TESTING_CARD_NUMBERS.unknown,
+        expectedFormattedCardNumber: "9999 9999 9999 9999",
+      },
+    ])(
+      "카드번호가 $cardNumber일 경우, $expectedFormattedCardNumber(으)로 포맷팅한다.",
+      ({ cardNumber, expectedFormattedCardNumber }) => {
+        const { input, getFormattedCardNumber } = setup();
+
+        fireEvent.change(input, { target: { value: cardNumber } });
+
+        expect(getFormattedCardNumber()).toBe(expectedFormattedCardNumber);
       }
     );
   });
