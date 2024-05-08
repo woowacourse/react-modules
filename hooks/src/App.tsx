@@ -7,6 +7,7 @@ import {
 } from "choco-payments-validation-hooks";
 import { useCardNumber } from "./lib/hooks/useCardNumber";
 import useCardBrandIdentification from "./lib/hooks/useCardBrandIdentification";
+import useCardNumberFormat from "./lib/hooks/useCardNumberFormat";
 import React from "react";
 import "./App.css";
 
@@ -96,6 +97,7 @@ function App() {
 
       <div>
         <p>Card Brand Identification: {useCardBrandIdentification(cardNumbers)}</p>
+        <p>Card Number Format: {useCardNumberFormat(cardNumbers)}</p>
       </div>
 
       <div>
