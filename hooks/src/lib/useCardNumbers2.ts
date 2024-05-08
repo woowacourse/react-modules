@@ -1,4 +1,4 @@
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import { validLength, validateNumber } from "@/validate/validate";
 import { VALID_LENGTH } from "@/constants/system.ts";
 import { cardBrandsInfo, CardBrandInfo } from "@/data/cardCompanyNumbersInfo";
@@ -42,10 +42,18 @@ const useCardNumbers2 = () => {
 
   const onChangeValue = (e: ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
-    setNumbers(value);
-    handleNumberValidation(value);
+
+    const newValue = value;
+    const { validLength } = currentCardBrandInfo;
+    if (value.length > validLength) return;
+
+    const isValidNumber = handleNumberValidation(value);
+    if (!isValidNumber) return;
+
     decideCardBrand(value);
     handleLengthValidation(value);
+
+    setNumbers(newValue);
   };
 
   const handleNumberValidation = (value: string) => {
@@ -53,11 +61,12 @@ const useCardNumbers2 = () => {
 
     if (!validateNumber(value).isValid) {
       setErrorMessage(numberError);
-    } else {
-      if (errorMessage === numberError) {
-        setErrorMessage(null);
-      }
+      return false;
     }
+    if (validateNumber(value).isValid && errorMessage === numberError) {
+      setErrorMessage(null);
+    }
+    return true;
   };
 
   const handleLengthValidation = (value: string) => {
@@ -68,6 +77,7 @@ const useCardNumbers2 = () => {
     const isValidLength = value.length === validLength;
     if (!isValidLength && !errorMessage) {
       setErrorMessage(lengthError);
+      return false;
     }
     if (isValidLength && errorMessage === lengthError) {
       setErrorMessage(null);
@@ -75,6 +85,7 @@ const useCardNumbers2 = () => {
     if (isValidLength) {
       formatCardNumber(value, cardNumbersFormat);
     }
+    return true;
   };
 
   const formatCardNumber = (value: string, numberFormat: number[]) => {
@@ -87,6 +98,10 @@ const useCardNumbers2 = () => {
 
     setFormattedNumbers(formattedArr.join(" "));
   };
+
+  useEffect(() => {
+    console.log("aa", numbers);
+  }, [numbers]);
 
   return {
     numbers,
