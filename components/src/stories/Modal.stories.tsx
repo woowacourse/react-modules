@@ -2,10 +2,23 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { Modal } from '../lib';
 import React, { useReducer } from 'react';
+import { INITIAL_VIEWPORTS, MINIMAL_VIEWPORTS } from '@storybook/addon-viewport';
+import AlertModal from '../components/AlertModal';
+import ConfirmModal from '../components/ConfirmModal';
+import PromptModal from '../components/PromptModal';
 
 const meta = {
   title: 'Modal',
   component: Modal,
+  parameters: {
+    viewport: {
+      viewports: {
+        ...INITIAL_VIEWPORTS,
+        ...MINIMAL_VIEWPORTS,
+      },
+      defaultViewport: 'desktop',
+    },
+  },
 } satisfies Meta<typeof Modal>;
 
 export default meta;
@@ -16,21 +29,18 @@ const DefaultModal = ({ ...args }) => {
   const [isOpen, toggleIsOpen] = useReducer(prev => !prev, true);
 
   return (
-    <>
-      <button onClick={toggleIsOpen}>모달열기</button>
-      <Modal {...args} isOpen={isOpen}>
-        <Modal.Dimmed onDimmedClick={() => toggleIsOpen()} />
-        <Modal.Header>
-          <Modal.Title title="마루" />
-          <Modal.CloseIcon onClose={() => toggleIsOpen()} />
-        </Modal.Header>
-        <Modal.Content>마루와 쿠키</Modal.Content>
-        <Modal.Footer>
-          <Modal.ConfirmButton label="확인" onConfirm={() => toggleIsOpen()} />
-          <Modal.CloseButton label="닫기" onClose={() => toggleIsOpen()} />
-        </Modal.Footer>
-      </Modal>
-    </>
+    <Modal {...args} isOpen={isOpen}>
+      <Modal.Dimmed onDimmedClick={() => toggleIsOpen()} />
+      <Modal.Header>
+        <Modal.Title title="마루" />
+        <Modal.CloseIcon onClose={() => toggleIsOpen()} />
+      </Modal.Header>
+      <Modal.Content>마루와 쿠키</Modal.Content>
+      <Modal.Footer>
+        <Modal.ConfirmButton label="확인" onConfirm={() => toggleIsOpen()} />
+        <Modal.CloseButton label="닫기" onClose={() => toggleIsOpen()} />
+      </Modal.Footer>
+    </Modal>
   );
 };
 
@@ -210,4 +220,57 @@ export const 모달_닫기_아이콘_커스텀_오류: Story = {
       </Modal.Footer>
     </Modal>
   ),
+};
+
+export const 모달_Alert: Story = {
+  args: {
+    isOpen: true,
+  },
+  render: args => <AlertModal toggleIsOpen={() => ''} {...args} />,
+};
+
+export const 모달_Confirm: Story = {
+  args: {
+    isOpen: true,
+  },
+  render: args => <ConfirmModal toggleIsOpen={() => ''} {...args} />,
+};
+
+export const 모달_Prompt: Story = {
+  args: {
+    isOpen: true,
+  },
+  render: args => <PromptModal toggleIsOpen={() => ''} {...args} />,
+};
+
+export const 모달_모바일_반응형: Story = {
+  parameters: {
+    viewport: {
+      viewports: {
+        ...INITIAL_VIEWPORTS,
+        ...MINIMAL_VIEWPORTS,
+      },
+      defaultViewport: 'iphone6',
+    },
+  },
+  args: {
+    isOpen: true,
+  },
+  render: args => <DefaultModal {...args} />,
+};
+
+export const 모달_태블릿_반응형: Story = {
+  parameters: {
+    viewport: {
+      viewports: {
+        ...INITIAL_VIEWPORTS,
+        ...MINIMAL_VIEWPORTS,
+      },
+      defaultViewport: 'tablet',
+    },
+  },
+  args: {
+    isOpen: true,
+  },
+  render: args => <DefaultModal {...args} />,
 };
