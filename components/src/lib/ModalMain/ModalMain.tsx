@@ -1,46 +1,38 @@
 import { Modal } from '..';
 import styles from './ModalMain.module.css';
-import {
-  CancelButtonProps,
-  CloseButtonProps,
-  ConfirmButtonProps,
-  ModalSizeProps,
-  SubtitleProps,
-  TitleProps,
-} from '../interfaces';
+import { SizeProps } from '../interfaces';
+import { ModalHeaderProps } from '../ModalHeader/ModalHeader';
+import { ModalContentProps } from '../ModalContent/ModalContent';
+import { ModalFooterProps } from '../ModalFooter/ModalFooter';
+import { CSSProperties } from 'react';
 
 export interface ModalProps {
-  title?: TitleProps;
-  subtitle?: SubtitleProps;
-  closeButton: CloseButtonProps;
-  confirmButton?: ConfirmButtonProps;
-  cancelButton?: CancelButtonProps;
-  modalSize?: ModalSizeProps;
-  backgroundColor?: string;
-  borderRadius?: string;
-  buttonsDirection?: 'row' | 'column';
+  modalHeader: ModalHeaderProps;
+  modalContent?: ModalContentProps;
+  modalFooter?: ModalFooterProps;
   modalPosition: 'center' | 'bottom';
+  modalSize?: SizeProps;
+  backgroundColor?: CSSProperties['backgroundColor'];
+  borderRadius?: CSSProperties['borderRadius'];
   preventCloseOnOutsideClick?: boolean;
-  children: React.ReactNode;
 }
 
 const ModalMain = ({
-  title,
-  subtitle,
-  closeButton,
-  confirmButton,
-  cancelButton,
+  modalHeader,
+  modalContent,
+  modalFooter,
   modalSize,
   backgroundColor,
   borderRadius,
-  buttonsDirection,
   modalPosition,
   preventCloseOnOutsideClick,
-  children,
 }: ModalProps) => {
   return (
     <>
-      <div onClick={preventCloseOnOutsideClick ? () => {} : closeButton.onClose} className={styles['backdrop']} />
+      <div
+        onClick={preventCloseOnOutsideClick ? () => {} : modalHeader.closeButton && modalHeader.closeButton.onClose}
+        className={styles['backdrop']}
+      />
       <section
         style={{
           backgroundColor: `${backgroundColor || 'white'}`,
@@ -52,9 +44,9 @@ const ModalMain = ({
         }}
         className={styles[`container-${modalPosition}`]}
       >
-        <Modal.Header title={title} subtitle={subtitle} closeButton={closeButton} />
-        <Modal.Content children={children} />
-        <Modal.Footer cancelButton={cancelButton} confirmButton={confirmButton} buttonsDirection={buttonsDirection} />
+        <Modal.Header {...modalHeader} />
+        <Modal.Content {...modalContent} />
+        <Modal.Footer {...modalFooter} />
       </section>
     </>
   );
