@@ -7,11 +7,14 @@
 ```jsx
 import { useCardNumbers, useRegister } from "easy-payments-hooks";
 
+const DEFAULT_INPUT_LENGTH = 4;
+
 function App() {
   const {
     numbers: { firstState, secondState, thirdState, fourthState },
     errorList: [firstErrorType, secondErrorType, thirdErrorType, fourthErrorType],
     cardBrand,
+    inputMaxLengthList,
   } = useCardNumbers();
 
   const { errorType: firstErrType, ...firstNumberAttrs } = useRegister("firstNumber", {
@@ -19,14 +22,28 @@ function App() {
     onChange: (e: ChangeEvent<HTMLInputElement>) => firstState[1](e.target.value),
     customType: "number",
     required: true,
-    maxLength: 4,
+    maxLength: DEFAULT_INPUT_LENGTH,
   });
 
   const { errorType: secondErrType, ...secondNumberAttrs } = useRegister("secondNumber", {
     value: secondState[0],
     onChange: (e: ChangeEvent<HTMLInputElement>) => secondState[1](e.target.value),
     customType: "number",
-    maxLength: 4,
+    maxLength: inputMaxLengthList ? inputMaxLengthList[1] : DEFAULT_INPUT_LENGTH,
+  });
+
+  const { errorType: thirdErrType, ...thirdNumberAttrs } = useRegister("secondNumber", {
+    value: thirdState[0],
+    onChange: (e: ChangeEvent<HTMLInputElement>) => thirdState[1](e.target.value),
+    customType: "number",
+    maxLength: inputMaxLengthList ? inputMaxLengthList[2] : DEFAULT_INPUT_LENGTH,
+  });
+
+  const { errorType: fourthErrType, ...fourthNumberAttrs } = useRegister("secondNumber", {
+    value: fourthState[0],
+    onChange: (e: ChangeEvent<HTMLInputElement>) => fourthState[1](e.target.value),
+    customType: "number",
+    maxLength: inputMaxLengthList ? inputMaxLengthList[3] : DEFAULT_INPUT_LENGTH,
   });
 
   return (
@@ -37,6 +54,10 @@ function App() {
       <div>{firstErrType ?? firstErrorType}</div>
       <input {...secondNumberAttrs}></input>
       <div>{secondErrorType ?? secondErrType}</div>
+      <input {...thirdNumberAttrs}></input>
+      <div>{thirdErrType ?? thirdErrorType}</div>
+      <input {...fourthNumberAttrs} disabled={!(inputMaxLengthList && inputMaxLengthList[3])}></input>
+      <div>{fourthErrType ?? fourthErrorType}</div>
     </>
   );
 }
