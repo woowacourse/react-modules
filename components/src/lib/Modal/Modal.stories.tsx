@@ -2,10 +2,16 @@ import type { Meta, StoryObj } from '@storybook/react';
 import Modal from './Modal';
 
 const meta = {
-  title: 'Modal',
+  title: '기본 모달 컴포넌트(Modal)',
   component: Modal,
   parameters: {
-    controls: { exclude: ['children', 'footerButtons', 'onClose'] },
+    controls: { exclude: ['children', 'zIndex', 'buttons', 'onClose'] },
+  },
+  argTypes: {
+    backdropOpacity: {
+      options: ['0%', '25%', '50%', '75%', '100%'],
+      control: { type: 'select' },
+    },
   },
 } satisfies Meta<typeof Modal>;
 
@@ -16,27 +22,26 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
   args: {
     isOpen: true,
-    title: '모달 테스트',
-    children: '@seongjinme/react-modal',
+    title: '모달 제목',
+    children: '@seongjinme/react-modal 모달의 본문 내용입니다.',
     position: 'center',
-    width: { basicWidth: '50%', minWidth: '300px' },
     hasCloseButton: true,
-    footerButtons: [
+    buttons: [
       {
-        text: 'Primary Button',
+        text: '확인',
         style: 'primary',
-        onClick: () => alert('Primary Button Clicked!'),
+        onClick: () => alert('확인 버튼이 눌렸습니다!'),
       },
       {
-        text: 'Secondary Button',
+        text: '취소',
         style: 'secondary',
-        onClick: () => alert('Secondary Button Clicked!'),
+        onClick: () => alert('취소 버튼이 눌렸습니다!'),
       },
     ],
     isClosableOnClickBackdrop: true,
     zIndex: { backdrop: 999, modal: 1000 },
     backdropOpacity: '50%',
-    onClose: () => alert('"onClose" method called!'),
+    onClose: () => alert('"onClose" 메서드가 실행되었습니다!'),
   },
 };
 
