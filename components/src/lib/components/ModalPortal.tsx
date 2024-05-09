@@ -40,13 +40,9 @@ export default function ModalPortal(props: ModalPortalProps) {
     };
   }, [modalRoot]);
 
-  return modalRoot ? (
-    createPortal(
-      <ModalPortalWrapper className="modal-portal">{children}</ModalPortalWrapper>,
-      modalRoot,
-      'modal-portal',
-    )
-  ) : (
-    <div>모달이 열릴 장소를 찾을 수 없습니다.</div>
+  return createPortal(
+    <ModalPortalWrapper className="modal-portal">{children}</ModalPortalWrapper>,
+    modalRoot || document.body,
+    'modal-portal',
   );
 }
