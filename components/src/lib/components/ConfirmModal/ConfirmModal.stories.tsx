@@ -16,9 +16,7 @@ const meta = {
     layout: 'centered',
   },
   argTypes: {
-    isOpen: {
-      control: 'boolean',
-    },
+    isOpen: { control: 'boolean' },
     position: {
       control: 'radio',
       options: Object.keys(MODAL_POSITION_CLASS_NAME_MAP),
@@ -31,9 +29,12 @@ const meta = {
       control: 'radio',
       options: Object.keys(MODAL_DEVICE_CLASS_NAME_MAP),
     },
+    cancelButtonText: { control: 'text' },
+    confirmButtonText: { control: 'text' },
   },
   args: {
     onToggle: fn(),
+    onConfirm: fn(),
   },
 
   render: ({ ...args }) => {

@@ -44,6 +44,7 @@ const meta = {
   args: {
     onToggle: fn(),
     onChange: fn(),
+    onConfirm: fn(),
   },
 
   render: ({ ...args }) => {
@@ -71,9 +72,7 @@ export const Tablet: Story = {
   render: ({ ...args }) => {
     return (
       <div className="tablet">
-        <PromptModal {...args}>
-          <p style={{ fontSize: '12px', fontWeight: '500', lineHeight: '16px' }}>삭제하면 복구하실 수 없습니다.</p>
-        </PromptModal>
+        <PromptModal {...args} />
       </div>
     );
   },
@@ -85,12 +84,10 @@ export const Desktop: Story = {
   render: ({ ...args }) => {
     return (
       <div className="desktop">
-        <PromptModal {...args}>
-          <p style={{ fontSize: '12px', fontWeight: '500', lineHeight: '16px' }}>삭제하면 복구하실 수 없습니다.</p>
-        </PromptModal>
+        <PromptModal {...args} />
       </div>
     );
   },
 
-  args: { ...Mobile.args, size: 'medium', device: 'desktop' },
+  args: { ...Mobile.args, size: 'large', device: 'desktop' },
 };
