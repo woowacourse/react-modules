@@ -6,7 +6,6 @@ import useModalHook from "../useModalHook";
 import ModalHeader from "../ModalHeader/ModalHeader";
 import Title from "../Title/Title";
 import Button from "../Button/Button";
-import Xmark from "../icon/Xmark";
 
 interface ModalProps {
   position?: "center" | "bottom";
@@ -29,7 +28,7 @@ const Modal: React.FC<ModalProps> = ({
   inputValue,
   children,
   size = "medium",
-  type = "confirm",
+  type = "alert",
 }) => {
   const { ref, action } = useModalHook();
 
@@ -51,26 +50,48 @@ const Modal: React.FC<ModalProps> = ({
   }, [action, ref]);
 
   return (
-    <dialog ref={ref} css={modalStyle(position)}>
+    <dialog ref={ref} css={modalStyle(position, size)}>
       <div css={modalContentStyle}>
         <ModalHeader>{title && <Title>{title}</Title>}</ModalHeader>
         <div>{children}</div>
         <div css={buttonsStyle}>
-          {hasConfirmButton && (
+          {type === "alert" && (
             <Button type="confirm" handleClick={onConfirm}>
-              동의하고 저장하기
+              확인
             </Button>
           )}
-          {closeButtonPosition === "bottom" && (
-            <Button
-              type="cancel"
-              handleClick={() => {
-                action.handleClose();
-                if (onClose) onClose();
-              }}
-            >
-              닫기
-            </Button>
+          {type === "confirm" && (
+            <>
+              <Button type="confirm" handleClick={onConfirm}>
+                확인
+              </Button>
+              <Button
+                type="cancel"
+                handleClick={() => {
+                  action.handleClose();
+                  if (onClose) onClose();
+                }}
+              >
+                닫기
+              </Button>
+            </>
+          )}
+          {type === "prompt" && (
+            <>
+              <input type="text" value={inputValue} onChange={onChange} />
+              <Button type="confirm" handleClick={onConfirm}>
+                확인
+              </Button>
+              <Button
+                type="cancel"
+                handleClick={() => {
+                  action.handleClose();
+                  if (onClose) onClose();
+                }}
+              >
+                닫기
+              </Button>
+            </>
           )}
         </div>
       </div>

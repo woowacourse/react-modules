@@ -20,53 +20,46 @@ const Component = () => {
 
 export const Default: Story = {
   name: "기본 모달",
-  args: {
-    position: "center",
-    title: "modal title",
-    children: <Component />,
-    onConfirm: () => console.log("확인"),
-    onClose: () => console.log("닫기"),
-    closeButtonPosition: "top",
-    hasConfirmButton: false,
-  },
-};
-
-export const ConfirmButton: Story = {
-  name: "확인 버튼이 나타난다.",
-  args: {
-    position: "center",
-    title: "modal title",
-    children: <Component />,
-    onConfirm: () => console.log("확인"),
-    onClose: () => console.log("닫기"),
-    closeButtonPosition: "top",
-    hasConfirmButton: true,
-  },
-};
-
-export const CloseButtonBottom: Story = {
-  name: "취소 버튼이 아래에 나타난다",
-  args: {
-    position: "center",
-    title: "modal title",
-    children: <Component />,
-    onConfirm: () => console.log("확인"),
-    onClose: () => console.log("닫기"),
-    closeButtonPosition: "bottom",
-    hasConfirmButton: true,
-  },
+  args: {},
 };
 
 export const LongTitle: Story = {
   name: "타이틀에 긴 문자열이 들어갈 경우",
   args: {
-    position: "center",
     title:
       "modal title blahblahblahblahblahblahblahblahblahblahblahblahblahblahblahblahblahblahblahblahblahblah",
+  },
+};
+
+export const BottomModal: Story = {
+  name: "바닥에 붙어있는 modal",
+  args: {
+    position: "bottom",
+  },
+};
+
+export const ConfirmButton: Story = {
+  name: "타입은 confirm, 사이즈는 small",
+  args: {
+    position: "center",
+    title: "modal title",
     children: <Component />,
     onConfirm: () => console.log("확인"),
     onClose: () => console.log("닫기"),
-    closeButtonPosition: "top",
-    hasConfirmButton: true,
+    type: "confirm",
+    size: "small",
+  },
+};
+
+export const CloseButtonBottom: Story = {
+  name: "타입은 prompt, 사이즈는 large",
+  args: {
+    position: "center",
+    title: "modal title",
+    children: <Component />,
+    onConfirm: () => console.log("확인"),
+    onClose: () => console.log("닫기"),
+    type: "prompt",
+    size: "large",
   },
 };
