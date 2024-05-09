@@ -1,15 +1,25 @@
 import { ChangeEvent, FocusEvent, useState } from "react";
-import useInputs from "../common/useInputs";
 import Validator from "../utils/validator";
-import { ERROR_MESSAGE, OPTION } from "../constants";
+import { ERROR_MESSAGE } from "../constants";
+import getCardBrand from "../utils/getCardBrand";
+import useInput from "../common/useInput";
+import getCardNumberMaxLength from "../utils/getCardNumberMaxLength";
 
-const useCardNumber = (initialValue: Record<string, string>) => {
-  const { inputValue, handleInputChange, updateByNameAndValue } = useInputs(initialValue);
+const useCardNumber = (initialValue: string) => {
+  const { inputValue, handleInputChange, updateByNameAndValue } = useInput(initialValue);
 
+  const [brandType, setBrandType] = useState<BrandType>("Normal");
   const [validationResult, setValidationResult] = useState<ValidationResult>({
     isValid: true,
     errorMessage: "",
   });
+
+  const assignCardBrandFromNumber = (cardNumber: string) => {
+    const cardBrand = getCardBrand(cardNumber);
+    if (brandType === cardBrand) return;
+
+    setBrandType(cardBrand);
+  };
 
   const handleCardNumberChange = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target !== e.currentTarget) return;
@@ -22,7 +32,7 @@ const useCardNumber = (initialValue: Record<string, string>) => {
       });
     }
 
-    if (Validator.checkOverMaxDigit(value, OPTION.cardNumberMaxLength)) {
+    if (Validator.checkOverMaxDigit(value, getCardNumberMaxLength(brandType))) {
       return setValidationResult({
         isValid: false,
         errorMessage: ERROR_MESSAGE.cardNumberOutOfRange,
@@ -34,19 +44,20 @@ const useCardNumber = (initialValue: Record<string, string>) => {
       isValid: true,
       errorMessage: "",
     });
+    assignCardBrandFromNumber(value);
   };
 
   const handleCardNumberBlur = (e: FocusEvent<HTMLInputElement>) => {
     if (e.target !== e.currentTarget) return;
 
-    const { name, value } = e.target;
-    if (!Validator.checkFillNumber(value, OPTION.cardNumberMaxLength))
+    const { value } = e.target;
+    if (!Validator.checkFillNumber(value, getCardNumberMaxLength(brandType)))
       return setValidationResult({
         isValid: false,
         errorMessage: ERROR_MESSAGE.cardNumberOutOfRange,
       });
 
-    updateByNameAndValue(name, value);
+    updateByNameAndValue(value);
     setValidationResult({
       isValid: true,
       errorMessage: "",
@@ -56,6 +67,7 @@ const useCardNumber = (initialValue: Record<string, string>) => {
   return {
     inputValue,
     validationResult,
+    brandType,
     handleCardNumberChange,
     handleCardNumberBlur,
   } as const;
