@@ -4,10 +4,17 @@ import clsx from 'clsx';
 import styles from './style.module.css';
 
 import ModalPortal from './ModalPortal';
-import ModalContext from '../contexts/modalContext';
-import useModalContext from '../hooks/useModalContext';
+import ModalContext from '../../contexts/modalContext';
+import useModalContext from '../../hooks/useModalContext';
 import CloseButtonIcon from './CloseButtonIcon';
 
+/**
+ *
+ * @param {Object} props
+ * @param {string} [props.size] 'small' | 'medium' | 'large' 아무 값도 전달하지 않으면 너비가 contents의 크기 만큼 잡힙니다.
+ * @param {string} [props.position = 'center'] 'center' | 'bottom'
+ * @default position 'center'
+ */
 function Modal({ isModalOpen, closeModal, children, className, size, position, ...attribute }: ModalProps) {
   const contextValue = useMemo(() => ({ isModalOpen, closeModal }), [isModalOpen, closeModal]);
 
@@ -68,7 +75,14 @@ function Description({ children, ...attribute }: HTMLAttributes<HTMLParagraphEle
   );
 }
 
-function CloseButton({ children, buttonType, className, ...attribute }: CloseButtonProps) {
+/**
+ * Modal을 닫을 때 사용 가능한 Button입니다.
+ *
+ * @param {Object} props
+ * @param {string} [props.buttonType = 'box'] - 'box' | 'icon'
+ * @default buttonType = 'box'
+ */
+function CloseButton({ children, buttonType = 'box', className, ...attribute }: CloseButtonProps) {
   const { closeModal } = useModalContext();
 
   return (
@@ -82,14 +96,20 @@ function CloseButton({ children, buttonType, className, ...attribute }: CloseBut
   );
 }
 
+/**
+ * Modal 안에서 사용 가능한 Button입니다.
+ * @param {Object} props
+ *
+ * @param {string} [props.size = 'fullWidth'] - 'small' | 'fullWidth'
+ * @param {string} [props.variant = 'primary'] - 'primary' | 'secondary'
+ * @default size - 'fullWidth'
+ * @default variant - 'primary'
+ */
 function Button({
   children,
   className,
-  /** @defaultValue 'button' */
   type = 'button',
-  /** @defaultValue 'full-width' */
   size = 'fullWidth',
-  /** @defaultValue 'primary' */
   variant = 'primary',
   onClick,
   ...attribute
