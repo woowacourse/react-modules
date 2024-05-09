@@ -2,6 +2,7 @@ import { useInputValidation, IErrorStatus } from "../useInputValidation";
 import { identifyCardBrand } from "./utils/identifyCardBrand";
 import { formatCardNumber } from "./utils/formatCardNumber";
 import { cardNumberValidator } from "./validator";
+import { CardBrand } from "./constants/cardBrand";
 
 export interface CardNumberControl {
   value: {
@@ -9,7 +10,7 @@ export interface CardNumberControl {
     formatted: string[];
   };
   errorStatus: IErrorStatus;
-  cardBrand: string;
+  cardBrand: CardBrand;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onBlur: (e: React.FocusEvent<HTMLInputElement>) => void;
 }
