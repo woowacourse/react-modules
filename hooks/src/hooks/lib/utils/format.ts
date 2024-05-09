@@ -1,4 +1,4 @@
-export const cardNumberFormatting = {
+export const cardNumberFormatter = {
   default(value: string) {
     const v = value.replace(/\s+/g, "").replace(/[^0-9]/gi, "");
     const matches = v.match(/\d{4,16}/g);
@@ -15,6 +15,6 @@ export const cardNumberFormatting = {
   },
 };
 
-export const cardHolderFormatting = (value: string) => {
+export const cardHolderFormatter = (value: string) => {
   return value.toUpperCase();
 };

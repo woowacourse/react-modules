@@ -4,7 +4,7 @@ const validator = {
   },
 
   isValidDigit: (value: string) => {
-    return /^\d+$/.test(value);
+    return /^[\d\s]+$/.test(value);
   },
 
   isEnglish: (value: string) => {
