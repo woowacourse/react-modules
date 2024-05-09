@@ -7,14 +7,14 @@ const WIDTH_SIZE = {
     large: "90%",
   },
   tablet: {
-    small: 640,
-    medium: 768,
-    large: 900,
+    small: "640px",
+    medium: "768px",
+    large: "900px",
   },
   desktop: {
-    small: 1024,
-    medium: 1280,
-    large: 1440,
+    small: "1024px",
+    medium: "1280px",
+    large: "1440px",
   },
 };
 
@@ -40,7 +40,8 @@ export const StyledModalContainer = styled.div<{
   border-radius: ${({ modalPosition }) => (modalPosition === "center" ? "8px" : "8px 8px 0 0")};
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
   z-index: 1000;
-  width: ${getWidth("mobile", "medium")};
+  width: ${({ modalPosition }) =>
+    modalPosition === "bottom" ? "100%" : getWidth("mobile", "medium")};
   max-width: 90%;
   display: flex;
   flex-direction: column;
