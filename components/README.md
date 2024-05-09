@@ -68,33 +68,33 @@ export const MyComponent = () => {
 
 ### `ModalMain` 컴포넌트
 
-| Name           | Type           | Default   | Description                            |
-| -------------- | -------------- | --------- | -------------------------------------- | ------------------------- | ----------------------------------- |
-| `isOpen`       | `boolean`      | -         | 모달이 열려 있는지 여부를 결정합니다.  |
-| `close`        | `function`     | -         | 모달을 닫는 함수입니다.                |
-| `position`     | `'bottom'      | 'center'` | `'center'`                             | 모달의 위치를 설정합니다. |
-| `size`         | `'sm'          | 'md'      | 'lg'`                                  | `'lg'`                    | 모달의 크기를 설정합니다.           |
-| `backdropType` | `'transparent' | 'blur'    | 'opaque'`                              | `'opaque'`                | 원하는 배경 효과 유형을 정의합니다. |
-| `shadow`       | `boolean`      | `true`    | 모달에 그림자 효과를 설정합니다.       |
-| `animation`    | `boolean`      | `true`    | 모달 트랜지션 애니메이션을 설정합니다. |
-| `zIndex`       | `number`       | `100`     | 모달의 z-인덱스를 설정합니다.          |
+| Name           | Type                              | Default    | Description                            |
+| -------------- | --------------------------------- | ---------- | -------------------------------------- |
+| `isOpen`       | `boolean`                         | -          | 모달이 열려 있는지 여부를 결정합니다.  |
+| `close`        | `function`                        | -          | 모달을 닫는 함수입니다.                |
+| `position`     | `'bottom' , 'center', 'top'`      | `'center'` | 모달의 위치를 설정합니다.              |
+| `size`         | `'sm', 'md', 'lg'`                | `'lg'`     | 모달의 크기를 설정합니다.              |
+| `backdropType` | `'transparent', 'blur', 'opaque'` | `'opaque'` | 원하는 배경 효과 유형을 정의합니다.    |
+| `shadow`       | `boolean`                         | `true`     | 모달에 그림자 효과를 설정합니다.       |
+| `animation`    | `boolean`                         | `true`     | 모달 트랜지션 애니메이션을 설정합니다. |
+| `zIndex`       | `number`                          | `100`      | 모달의 z-인덱스를 설정합니다.          |
 
 ### `Modal.Footer` 컴포넌트
 
-| Name        | Type     | Default   | Description |
-| ----------- | -------- | --------- | ----------- | ---------------------------------- | ------------------------- |
-| `direction` | `'row'   | 'column'` | `'column'`  | 푸터의 레이아웃 방향을 설정합니다. |
-| `position`  | `'start' | 'center'  | 'end'`      | `'center'`                         | 푸터의 위치를 정렬합니다. |
+| Name        | Type                        | Default    | Description                        |
+| ----------- | --------------------------- | ---------- | ---------------------------------- |
+| `direction` | `'row', 'column', 'column'` | `'column'` | 푸터의 레이아웃 방향을 설정합니다. |
+| `position`  | `'start', 'center', 'end'`  | `'center'` | 푸터의 위치를 정렬합니다.          |
 
 ### `Modal.Button` 컴포넌트
 
-| Name        | Type       | Default   | Description                                    |
-| ----------- | ---------- | --------- | ---------------------------------------------- | -------------------------------- |
-| `text`      | `string`   | -         | 버튼에 표시될 텍스트입니다.                    |
-| `color`     | `'default' | 'none'`   | `'default'`                                    | 버튼의 색상 스타일을 설정합니다. |
-| `size`      | `Size`     | `'lg'`    | 버튼의 크기를 설정합니다.                      |
-| `fullWidth` | `boolean`  | `false`   | 버튼이 전체 너비를 차지할지 여부를 설정합니다. |
-| `variants`  | `'normal'  | 'border'` | `'normal'`                                     | 버튼의 스타일 변형을 설정합니다. |
+| Name        | Type                 | Default     | Description                                    |
+| ----------- | -------------------- | ----------- | ---------------------------------------------- |
+| `text`      | `string`             | -           | 버튼에 표시될 텍스트입니다.                    |
+| `color`     | `'default', 'none'`  | `'default'` | 버튼의 색상 스타일을 설정합니다.               |
+| `size`      | `'sm', 'md', 'lg'`   | `'lg'`      | 버튼의 크기를 설정합니다.                      |
+| `fullWidth` | `boolean`            | `false`     | 버튼이 전체 너비를 차지할지 여부를 설정합니다. |
+| `variants`  | `'normal', 'border'` | `'normal'`  | 버튼의 스타일 변형을 설정합니다.               |
 
 <br />
 <br />
