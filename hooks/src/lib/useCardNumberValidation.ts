@@ -1,41 +1,34 @@
 import { useState } from 'react';
-import { Validation } from './cardDateValidate';
-
-type CardNumberName =
-  | 'cardNumber1'
-  | 'cardNumber2'
-  | 'cardNumber3'
-  | 'cardNumber4';
+import { validateCardNumbers } from './cardDateValidate';
+import { CARD_NUMBER } from './constants/cardDataValidation';
 
 const useCardNumberValidation = () => {
   const [cardNumberValidation, setCardNumberValidation] = useState({
     errorMessage: {
-      cardNumber1: '',
-      cardNumber2: '',
-      cardNumber3: '',
-      cardNumber4: '',
+      cardNumbers: '',
     },
     isError: {
-      cardNumber1: false,
-      cardNumber2: false,
-      cardNumber3: false,
-      cardNumber4: false,
+      cardNumbers: false,
     },
   });
 
-  const cardNumberValidateHandler = (value: string, name: CardNumberName) => {
+  const cardNumberValidateHandler = (
+    value: string,
+    cardType: keyof typeof CARD_NUMBER
+  ) => {
     try {
-      Validation['cardNumber'](value);
+      validateCardNumbers(value, cardType);
       setCardNumberValidation((prev) => ({
         ...prev,
-        errorMessage: { ...prev.errorMessage, [name]: '' },
-        isError: { ...prev.isError, [name]: false },
+        errorMessage: { cardNumbers: '' },
+        isError: { cardNumbers: false },
       }));
     } catch (error) {
       if (error instanceof Error) {
         setCardNumberValidation((prev) => ({
-          errorMessage: { ...prev.errorMessage, [name]: error.message },
-          isError: { ...prev.isError, [name]: true },
+          ...prev,
+          errorMessage: { cardNumbers: error.message },
+          isError: { cardNumbers: true },
         }));
       }
     }
