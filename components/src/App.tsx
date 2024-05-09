@@ -8,7 +8,7 @@ function App() {
     <>
       {isOpened ? (
         <Modal
-          size="large"
+          guidanceSize="large"
           position="bottom"
           onBackdropClick={() => setIsOpened(false)}
         >
@@ -16,25 +16,23 @@ function App() {
             title="Modal Title"
             subtitle="Modal subtitle"
             position="left"
-          ></Modal.Title>
+          />
           <div>Children</div>
-          <Modal.InputForm
-            title="Input Title"
-            placeHolder="Input placeholder"
-            size="small"
-          ></Modal.InputForm>
-
+          <Modal.InputForm guidanceSize="small" placeholder="placeholder" />
           <Modal.CancelButton
             onClick={() => setIsOpened(false)}
-            content="Close"
-            size="medium"
+            content="Cancel"
+            guidanceSize="medium"
           />
           <Modal.ConfirmButton
             onClick={() => alert("Confirmed")}
             content="Confirm"
-            size="large"
+            guidanceSize="large"
           />
-          <Modal.CloseButton onClick={() => setIsOpened(false)} size="large" />
+          <Modal.CloseButton
+            onClick={() => setIsOpened(false)}
+            guidanceSize="medium"
+          />
         </Modal>
       ) : (
         <button onClick={() => setIsOpened(true)}>모달 열기</button>
