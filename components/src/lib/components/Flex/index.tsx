@@ -1,9 +1,9 @@
-interface FlexProps {
-  flexDirection?: 'row' | 'row-reverse' | 'column' | 'column-reverse';
-  justifyContent?: 'flex-start' | 'flex-end' | 'center' | 'space-between' | 'space-around' | 'space-evenly';
-  alignItems?: 'flex-start' | 'flex-end' | 'center' | 'baseline' | 'stretch';
-  flexWrap?: 'nowrap' | 'wrap' | 'wrap-reverse';
-  alignContent?: 'flex-start' | 'flex-end' | 'center' | 'space-between' | 'space-around' | 'stretch';
+type FlexProperties = Pick<
+  React.CSSProperties,
+  'flexDirection' | 'justifyContent' | 'alignItems' | 'flexWrap' | 'alignContent' | 'gap'
+>;
+
+interface FlexProps extends FlexProperties {
   style?: React.CSSProperties;
   children?: React.ReactNode;
 }
@@ -11,7 +11,7 @@ interface FlexProps {
 /**
  * CSS Flexbox 레이아웃을 쉽게 적용할 수 있도록 도와줍니다.
  *
- * @default alignItems = 'center' - css상의 기본값은 'stretch'입니다.
+ * @default alignItems = 'center' - css의 기본값은 'stretch'입니다.
  */
 export default function Flex({
   flexDirection = 'row',
@@ -19,6 +19,7 @@ export default function Flex({
   alignItems = 'center',
   flexWrap = 'nowrap',
   alignContent = 'stretch',
+  gap = '0',
   style,
   children,
 }: FlexProps) {
@@ -29,6 +30,7 @@ export default function Flex({
     alignItems,
     flexWrap,
     alignContent,
+    gap,
     ...style,
   };
 
