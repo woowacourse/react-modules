@@ -24,6 +24,7 @@ function App() {
           modalPosition="center"
           closeButtonPosition="top"
           placeholder="CGEXX46Z"
+          onSubmit={(value) => console.log("input value : ", value)}
         ></Modal.Prompt>
       </Modal.Provider>
 

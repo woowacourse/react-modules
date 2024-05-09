@@ -5,7 +5,6 @@ import Button from "../common/Button";
 import { ModalContextProvider, useModalContext } from "../hooks/useModalContext";
 import {
   StyledModalBody,
-  StyledModalButton,
   StyledModalContainer,
   StyledModalDimmer,
   StyledModalFooter,
@@ -17,6 +16,7 @@ export interface ModalProps {
   modalPosition: "center" | "bottom";
   closeButtonPosition: "top" | "bottom";
   placeholder?: string;
+  onSubmit?: (value: string) => void | string;
 }
 
 /* -------------------------------------------------------------------------------------------------
@@ -68,10 +68,11 @@ export const ModalClose: React.FC<React.PropsWithChildren<{ onClick?: () => void
 }) => {
   const { closeModal } = useModalContext();
   const handleClick = () => {
-    if (onClick) onClick();
+    onClick && onClick();
     closeModal();
   };
-  return <StyledModalButton onClick={handleClick}>{children}</StyledModalButton>;
+  // return <StyledModalButton onClick={handleClick}>{children}</StyledModalButton>;
+  return <div onClick={handleClick}>{children}</div>;
 };
 
 /* -------------------------------------------------------------------------------------------------
@@ -168,6 +169,7 @@ export const PromptModal: React.FC<React.PropsWithChildren<ModalProps & { title:
   children,
   title,
   placeholder,
+  onSubmit,
   ...props
 }) => {
   const [value, setValue] = useState("");
@@ -177,14 +179,17 @@ export const PromptModal: React.FC<React.PropsWithChildren<ModalProps & { title:
     setValue(newValue);
   };
 
+  const handleSubmit = () => {
+    onSubmit && onSubmit(value);
+    setValue("");
+  };
+
   return (
     <ModalContent {...props}>
       <ModalHeader containClose={false} title={title} />
       <ModalBody>
         {children}
-        <form onSubmit={() => console.log(value)}>
-          <StyledModalInput value={value} onChange={handleChange} placeholder={placeholder} />
-        </form>
+        <StyledModalInput value={value} onChange={handleChange} placeholder={placeholder} />
       </ModalBody>
       <ModalFooter align="end">
         <ModalClose>
@@ -193,7 +198,7 @@ export const PromptModal: React.FC<React.PropsWithChildren<ModalProps & { title:
           </Button>
         </ModalClose>
         <ModalClose>
-          <Button backgroundColor="#333" fontColor="#fff">
+          <Button backgroundColor="#333" fontColor="#fff" onClick={() => handleSubmit()}>
             확인
           </Button>
         </ModalClose>
