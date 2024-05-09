@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import { getNumberErrorMessage, isNotNumber } from '../../utils/validation/validation';
 
-export const DEFAULT_LENGTH = 3;
+export const CVC_DEFAULT_LENGTH = 3;
 
-const useCardCVC = (validLength: number = DEFAULT_LENGTH, initialValue: string = '') => {
+const useCardCVC = (validLength: number = CVC_DEFAULT_LENGTH, initialValue: string = '') => {
   const [cvcNumber, setCVCNumber] = useState(initialValue);
   const [isValidCVCNumber, setIsValidCVCNumber] = useState(false);
   const [cvcNumberErrorMessage, setCVCNumberErrorMessage] = useState('');

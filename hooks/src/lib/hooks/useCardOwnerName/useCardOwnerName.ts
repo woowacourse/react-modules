@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { unifySpaces, filterEnglishAndSpaces } from '../../utils/stringHelpers';
 
-const DEFAULT_LENGTH = 21;
+export const OWNER_NAME_DEFAULT_LENGTH = 21;
 
 export const OWNER_NAME_ERROR_MESSAGES = {
   NOT_ENG: 'NOT_ENG',
@@ -9,7 +9,7 @@ export const OWNER_NAME_ERROR_MESSAGES = {
   EXCESSIVE_WHITE_SPACE: 'EXCESSIVE_WHITE_SPACE',
 };
 
-const useCardOwnerName = (validLength: number = DEFAULT_LENGTH, initialValue: string = '') => {
+const useCardOwnerName = (validLength: number = OWNER_NAME_DEFAULT_LENGTH, initialValue: string = '') => {
   const [ownerName, setOwnerName] = useState(initialValue);
   const [isValidOwnerName, setIsValidOwnerName] = useState(false);
   const [ownerNameErrorMessage, setOwnerNameErrorMessage] = useState('');
