@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { ModalProps } from "../components/Modal/Modal";
+import { ModalProps } from "./Modal";
 
-import { Modal, ModalProvider, useModalAction } from "../lib";
+import { Modal, ModalProvider, useModalAction } from "../../lib";
 import { useEffect } from "react";
 
 const TestModal: React.FC<ModalProps> = (props) => {
