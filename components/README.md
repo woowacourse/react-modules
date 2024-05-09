@@ -2,7 +2,7 @@
 
 ## 간단한 설명
 
-`ryan-modal`은 일반적으로 재사용 가능한 모달 컴포넌트입니다. 사용자가 커스터마이징할 수 있는 다양한 옵션을 제공하여 모달을 쉽게 구성할 수 있습니다.
+`ryan-modal`은 일반적으로 재사용 가능한 모달 컴포넌트입니다. 합성 컴포넌트 형태로, 커스터마이징할 수 있는 다양한 옵션을 제공하여 사용 맥락에 맞게 모달을 쉽게 구성할 수 있습니다.
 
 ## 설치 방법
 
@@ -18,40 +18,70 @@ import { Modal } from "ryan-modal";
 // 모달 사용 예시
 const App = () => {
   return (
-    <Modal
-      onClose={() => {
-        /* 모달을 닫는 로직 */
-      }}
-      onConfirm={() => {
-        /* 확인 버튼을 클릭한 경우의 로직 */
-      }}
-      title="제목"
-      buttonText="확인"
-      hasCloseButton={true}
-      position={position}
-    >
-      {/* 모달 내용 */}
+    <Modal isOpen={isOpen} onClose={onClose}>
+      <Modal.Dimmer />
+      <Modal.Content position={position} size={contentSize}>
+        <header>
+          <h2>{title}</h2>
+        </header>
+        <main style={{ margin: "16px 0" }}>{contentText}</main>
+        <footer style={{ display: "flex", flexDirection: "row-reverse" }}>
+          <Modal.Button theme={confirmButtonTheme} size={buttonSize} onClick={onModalButtonClick}>
+            {confirmButtonText}
+          </Modal.Button>
+        </footer>
+      </Modal.Content>
     </Modal>
   );
 };
 ```
 
-## API 문서
+## API 명세
 
-### `Modal` 컴포넌트
+### `Modal` 컴포넌트 구성
 
-#### Props
+`Modal` 컴포넌트는 다음과 같이 구성됩니다.
 
-- `onClose`: 모달을 닫을 때 호출되는 콜백 함수입니다.
-- `onConfirm`: 확인 버튼을 클릭할 때 호출되는 콜백 함수입니다. (선택 사항)
-- `title`: 모달의 제목입니다. (선택 사항)
-- `buttonText`: 확인 버튼 텍스트입니다. (선택 사항)
-- `hasCloseButton`: 닫기 버튼의 표시 여부를 결정하는 불리언 값입니다. (선택 사항, 기본값: `true`)
-- `position`: 모달의 위치를 지정하는 문자열입니다. `"center"` 또는 `"bottom"`으로 설정할 수 있습니다. (선택 사항, 기본값: `"center"`)
+- `Modal.Main`: 모달의 바탕을 이루는 루트 컴포넌트입니다.
+- `Modal.Dimmer`: 배경 뒷배경을 나타내는 컴포넌트입니다.
+- `Modal.Content`: 모달 내용을 담는 컴포넌트입니다.
+- `Modal.CloseButton`: 모달을 닫는 닫기 버튼에 해당하는 컴포넌트입니다.
+- `Modal.Button`: 모달 내에서 사용되는 버튼에 해당하는 컴포넌트입니다.
+- `Modal.Input`: 모달 내에서 사용되는 프롬프트 입력 필드에 해당하는 컴포넌트입니다.
+
+### `Modal` 인터페이스
+
+```ts
+export interface ModalMainProps extends React.HTMLAttributes<HTMLDivElement> {
+  onClose: () => void;
+  isOpen: boolean;
+}
+
+export interface ModalDimmerProps extends React.HTMLAttributes<HTMLDivElement> {}
+
+export interface ModalCloseButtonProps extends React.HTMLAttributes<HTMLOrSVGElement> {
+  length?: string;
+}
+
+export interface ModalButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
+  theme?: "dark" | "light" | "inactive";
+  size?: "small" | "large";
+}
+
+export interface ModalContentProps extends React.HTMLAttributes<HTMLDivElement> {
+  position?: "center" | "bottom";
+  size?: "small" | "medium" | "large";
+}
+
+export interface ModalInputProps extends React.HTMLAttributes<HTMLInputElement> {
+  value: string;
+  placeholder: string;
+}
+```
 
 ## 개발 및 기여
 
-이 패키지는 [GitHub 저장소](https://github.com/Parkhanyoung/react-modules/tree/main)에서 관리되고 있습니다. 기여를 환영합니다!
+이 패키지는 [GitHub 저장소](https://github.com/Parkhanyoung/react-modules)에서 관리되고 있습니다. 기여를 환영합니다!
 
 ## 라이센스
 
