@@ -98,3 +98,78 @@ import { Modal } from "rian-modal-components";
   <Modal.CloseButton label="닫기" onClose={() => {}} />
 </Modal>;
 ```
+
+## Styled Modal Components
+
+- 필요한 props 만 넣어주면 완성되는 템플릿 형식의 modal을 제공합니다.
+- `AlertModal`,`ConfirmModal`,`PromptModal` 이 있습니다.
+
+### AlertModal
+
+> `isOpen`[boolean] : 모달이 열려 있는지 여부
+> `onClose`: 모달을 열고 닫는 함수
+> `onConfirm`: 확인 버튼을 클릭할 시 들어갈 함수
+> `title`: 모달의 제목
+> `message`: 모달의 내용
+> `buttonText?`: 확인 버튼 내용. '확인'이 기본값입니다.
+> `position?`: "center" | "bottom"
+> `modalSize?`: "small" | "medium" | "large" | "full"
+
+```tsx
+<AlertModal
+  isOpen={true}
+  onClose={() => {}}
+  onConfirm={() => {}}
+  title="아이디를 입력해 주세요."
+  message="아이디는 필수로 입력해야 합니다."
+/>
+```
+
+### ConfirmModal
+
+> `isOpen`[boolean] : 모달이 열려 있는지 여부
+> `onClose`: 모달을 열고 닫는 함수
+> `onConfirm`: 확인 버튼을 클릭할 시 들어갈 함수
+> `title`: 모달의 제목
+> `message`: 모달의 내용
+> `confirmButtonText?`: 확인 버튼 내용. '확인'이 기본값입니다.
+> `cancelButtonText?`: 취소 버튼 내용. '취소'가 기본값입니다.
+> `position?`: "center" | "bottom"
+> `modalSize?`: "small" | "medium" | "large" | "full"
+
+```tsx
+<ConfirmModal
+  isOpen={true}
+  onClose={() => {}}
+  onConfirm={() => {}}
+  title="아이디를 입력해 주세요."
+  message="아이디는 필수로 입력해야 합니다."
+/>
+```
+
+### PromptModal
+
+> `isOpen`[boolean] : 모달이 열려 있는지 여부
+> `onClose`: 모달을 열고 닫는 함수
+> `onConfirm`: 확인 버튼을 클릭할 시 들어갈 함수
+> `title`: 모달의 제목
+> `message`: 모달의 내용
+> `confirmButtonText?`: 확인 버튼 내용. '확인'이 기본값입니다.
+> `cancelButtonText?`: 취소 버튼 내용. '취소'가 기본값입니다.
+> `position?`: "center" | "bottom"
+> `modalSize?`: "small" | "medium" | "large" | "full"
+> `inputProps?`: 인풋 태그에 들어갈 props 를 정의할 수 있습니다;
+> `value`: 인풋의 값을 지정합니다. ;
+> `onChange`: 인풋의 값을 관리하는 onChange 메서드입니다.
+
+```tsx
+<PromptModal
+  isOpen={true}
+  onClose={() => {}}
+  onConfirm={() => {}}
+  title="아이디를 입력해 주세요."
+  message="아이디는 필수로 입력해야 합니다."
+  onChange={onChange}
+  value={value}
+/>
+```
