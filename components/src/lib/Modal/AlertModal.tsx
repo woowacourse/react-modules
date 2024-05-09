@@ -4,14 +4,13 @@ import ModalContent from "./ModalContent/ModalContent";
 import ModalFooter from "./ModalFooter/ModalFooter";
 import { PositionProps, SizeProps, TitleProps } from "./Modal";
 import styles from "./Modal.module.css";
-import { ButtonProps } from "../Button/Button";
 
 interface AlertModalProps {
   position: PositionProps;
   size?: SizeProps;
   title?: TitleProps;
   isOpen: boolean;
-  footerButtons: ButtonProps[];
+  onConfirm: () => void;
 }
 
 const AlertModal = ({
@@ -20,8 +19,20 @@ const AlertModal = ({
   title,
   children,
   isOpen,
-  footerButtons,
+  onConfirm,
 }: PropsWithChildren<AlertModalProps>) => {
+  const alertModalButton = [
+    {
+      content: "확인",
+      onClick: onConfirm,
+      className: "alertButton",
+      style: {
+        background: "rgba(51, 51, 51, 1)",
+        color: "white",
+      },
+    },
+  ];
+
   return (
     <>
       {isOpen && (
@@ -29,8 +40,8 @@ const AlertModal = ({
           <div className={styles.backDrop}></div>
           <div className={`${styles.modalSection} ${styles[size!]}`}>
             <ModalHeader title={title} />
-            <ModalContent children={children} />
-            <ModalFooter className={"alertModalFooter"} buttons={footerButtons} />
+            <ModalContent>{children}</ModalContent>
+            <ModalFooter className={"alertModalFooter"} buttons={alertModalButton} />
           </div>
         </div>
       )}
