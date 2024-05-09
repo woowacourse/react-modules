@@ -87,7 +87,6 @@ describe("신용카드 번호 입력 테스트", () => {
       } as React.FocusEvent<HTMLInputElement>);
     });
 
-    expect(result.current.inputValue).toEqual(userInput);
     expect(result.current.validationResult).toEqual(expectedValidationResult);
   });
 
@@ -142,4 +141,54 @@ describe("신용카드 번호 입력 테스트", () => {
       expect(result.current.brandType).toEqual(cardBrand);
     }
   );
+
+  describe("유저의 입력값이 카드 브랜드의 포멧팅에 맞춰 저장", () => {
+    it("Diners 브랜드 는 xxxx xxxxxx xxxx 형식으로 저장된다", () => {
+      const userInput = "36112222223333";
+      const expectedValue = "3611 222222 3333";
+      const { result } = renderHook(() => useCardNumber(initialValue));
+      const target = { value: userInput };
+
+      act(() => {
+        result.current.handleCardNumberChange({
+          target,
+          currentTarget: target,
+        } as React.ChangeEvent<HTMLInputElement>);
+      });
+
+      expect(result.current.inputValue).toEqual(expectedValue);
+    });
+
+    it("AMEX 브랜드 는 xxxx xxxxxx xxxxx 형식으로 저장된다", () => {
+      const userInput = "341122222233333";
+      const expectedValue = "3411 222222 33333";
+      const { result } = renderHook(() => useCardNumber(initialValue));
+      const target = { value: userInput };
+
+      act(() => {
+        result.current.handleCardNumberChange({
+          target,
+          currentTarget: target,
+        } as React.ChangeEvent<HTMLInputElement>);
+      });
+
+      expect(result.current.inputValue).toEqual(expectedValue);
+    });
+
+    it("그 외 브랜드 는 xxxx xxxx xxxx xxxx 형식으로 저장된다", () => {
+      const userInput = "1111222233334444";
+      const expectedValue = "1111 2222 3333 4444";
+      const { result } = renderHook(() => useCardNumber(initialValue));
+      const target = { value: userInput };
+
+      act(() => {
+        result.current.handleCardNumberChange({
+          target,
+          currentTarget: target,
+        } as React.ChangeEvent<HTMLInputElement>);
+      });
+
+      expect(result.current.inputValue).toEqual(expectedValue);
+    });
+  });
 });

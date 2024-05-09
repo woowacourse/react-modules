@@ -1,12 +1,13 @@
 import { ChangeEvent, FocusEvent, useState } from "react";
 import Validator from "../utils/validator";
-import { ERROR_MESSAGE } from "../constants";
+import { ERROR_MESSAGE, REGEX } from "../constants";
 import getCardBrand from "../utils/getCardBrand";
 import useInput from "../common/useInput";
 import getCardNumberMaxLength from "../utils/getCardNumberMaxLength";
+import formattingCardNumber from "../utils/formattingCardNumber";
 
 const useCardNumber = (initialValue: string) => {
-  const { inputValue, handleInputChange, updateByNameAndValue } = useInput(initialValue);
+  const { inputValue, updateByNameAndValue } = useInput(initialValue);
 
   const [brandType, setBrandType] = useState<BrandType>("Normal");
   const [validationResult, setValidationResult] = useState<ValidationResult>({
@@ -25,39 +26,44 @@ const useCardNumber = (initialValue: string) => {
     if (e.target !== e.currentTarget) return;
 
     const { value } = e.target;
-    if (!Validator.checkDigit(value)) {
+    const valueWithoutSpace = value.replace(REGEX.space, "");
+
+    if (!Validator.checkDigit(valueWithoutSpace)) {
       return setValidationResult({
         isValid: false,
         errorMessage: ERROR_MESSAGE.onlyNumber,
       });
     }
 
-    if (Validator.checkOverMaxDigit(value, getCardNumberMaxLength(brandType))) {
+    if (Validator.checkOverMaxDigit(valueWithoutSpace, getCardNumberMaxLength(brandType))) {
       return setValidationResult({
         isValid: false,
         errorMessage: ERROR_MESSAGE.cardNumberOutOfRange,
       });
     }
 
-    handleInputChange(e);
+    assignCardBrandFromNumber(valueWithoutSpace);
     setValidationResult({
       isValid: true,
       errorMessage: "",
     });
-    assignCardBrandFromNumber(value);
+
+    const formattedValue = formattingCardNumber(valueWithoutSpace);
+    updateByNameAndValue(formattedValue);
   };
 
   const handleCardNumberBlur = (e: FocusEvent<HTMLInputElement>) => {
     if (e.target !== e.currentTarget) return;
 
     const { value } = e.target;
-    if (!Validator.checkFillNumber(value, getCardNumberMaxLength(brandType)))
+    const valueWithoutSpace = value.replace(REGEX.space, "");
+
+    if (!Validator.checkFillNumber(valueWithoutSpace, getCardNumberMaxLength(brandType)))
       return setValidationResult({
         isValid: false,
         errorMessage: ERROR_MESSAGE.cardNumberOutOfRange,
       });
 
-    updateByNameAndValue(value);
     setValidationResult({
       isValid: true,
       errorMessage: "",

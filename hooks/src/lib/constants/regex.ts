@@ -7,6 +7,7 @@ const REGEX = {
   zero: /^[0]+$/,
   specificCardFormat: /^(\d{0,4})?(\d{0,6})?(\d{0,5})?/,
   normalCardFormat: /^(\d{0,4})?(\d{0,4})?(\d{0,4})?(\d{0,4})?/,
+  space: /\s/g,
 } as const;
 
 export default REGEX;
