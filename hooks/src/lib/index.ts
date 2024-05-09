@@ -4,3 +4,4 @@ export { default as useCardHolder } from './useCard/useCardHolder';
 export { default as useExpiryDate } from './useCard/useExpiryDate';
 export { default as useCardType } from './useCard/useCardType';
 export { default as useCardNumbers } from './useCard/useCardNumbers';
+export { default as useCardBrand } from './useCard/useCardBrand';
