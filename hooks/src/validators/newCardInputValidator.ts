@@ -1,20 +1,48 @@
-export const validateCardNumber = (
-  value: string,
-  cardNumbersLength: number,
-): string => {
-  if (value !== '' && Number.isNaN(Number(value))) {
-    return '숫자만 입력 가능합니다.';
+export const validateCardNumber = (brand: string, value: string) => {
+  switch (brand) {
+    case 'None':
+      if (Number.isNaN(Number(value))) {
+        return {
+          errorMessage: '숫자만 입력 가능합니다.',
+          errorType: 'NonNumeric',
+        };
+      }
+      if (value.length !== 16) {
+        return {
+          errorMessage: '일반 카드는 16자리 숫자여야 합니다.',
+          errorType: 'NoneInvalidLength',
+        };
+      }
+      break;
+    case 'Diners':
+      if (value.length !== 14) {
+        return {
+          errorMessage: 'Diners 카드는 14자리 숫자여야 합니다.',
+          errorType: 'DinersInvalidLength',
+        };
+      }
+      break;
+    case 'AMEX':
+      if (value.length !== 15) {
+        return {
+          errorMessage: 'AMEX 카드는 15자리 숫자여야 합니다.',
+          errorType: 'AMEXInvalidLength',
+        };
+      }
+      break;
+    case 'UnionPay':
+      if (value.length !== 16) {
+        return {
+          errorMessage: 'UnionPay 카드는 16자리 숫자여야 합니다.',
+          errorType: 'UnionPayInvalidLength',
+        };
+      }
+      break;
   }
-
-  if (value !== '' && value.length < cardNumbersLength) {
-    return `숫자 ${cardNumbersLength}자리를 입력해주세요.`;
-  }
-
-  if (value !== '' && value.length > cardNumbersLength) {
-    return `숫자 ${cardNumbersLength}자리를 입력해주세요.`;
-  }
-
-  return '';
+  return {
+    errorMessage: '',
+    errorType: 'NoError',
+  };
 };
 
 export const validateCardCompany = (
