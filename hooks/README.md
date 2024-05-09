@@ -103,7 +103,7 @@ function CardIssuerComponent() {
 
 ## useCardNumber
 
-`useCardNumber` 훅은 React 프로젝트에서 사용자가 입력한 카드 번호의 유효성을 검증합니다. 이 훅은 네 개의 카드 번호 부분(각각 4자리)을 별도로 입력받아, 각 부분이 숫자로만 이루어져 있고 정확히 4자리인지를 검증합니다. 유효하지 않은 입력에 대해서는 적절한 오류 메시지를 반환합니다.
+`useCardNumber` 훅은 React 프로젝트에서 사용자가 입력한 카드 번호의 유효성을 검증합니다. 이 훅은 네 개의 카드 번호 부분(각각 4자리)을 별도로 입력받아, 각 부분이 숫자로만 이루어져 있고 정확히 4자리인지를 검증합니다. 유효하지 않은 입력에 대해서는 적절한 오류 메시지를 반환합니다. 카드 브랜드와 포맷팅된 카드 번호도 각각 반환합니다.
 
 ### 사용 예제
 
@@ -112,18 +112,11 @@ import React from 'react';
 import { useCardNumber } from 'newjeans';
 
 function CardNumberForm() {
-  const { cardNumberParts, onChangeCardNumberPart } = useCardNumber();
+  const { cardNumber, onChange } = useCardNumber();
 
   return (
     <div>
-      {cardNumberParts.map((part, index) => (
-        <input
-          key={index}
-          onChange={onChangeCardNumberPart[index]}
-          type='text'
-          maxLength='4'
-        />
-      ))}
+      <input onChange={onChange} type='text' maxLength='16' />
     </div>
   );
 }
