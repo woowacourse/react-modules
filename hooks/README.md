@@ -67,7 +67,7 @@ interface UseCardIssuerReturn {
   onChange: (e: React.ChangeEvent<HTMLSelectElement | HTMLInputElement>) => void;
 }
 
-export interface CardNumberControl {
+export interface UseCardNumberReturn {
   value: {
     raw: string;
     formatted: string[];
