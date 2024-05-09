@@ -3,7 +3,7 @@ import Modal from "./Modal";
 import "../App.css";
 import { fn } from "@storybook/test";
 
-const meta = {
+const meta: Meta<typeof Modal> = {
   title: "Modal",
   component: Modal,
   tags: ["autodocs"],
@@ -22,8 +22,10 @@ const meta = {
   },
   args: {
     onClose: fn(),
+    isOpen: true,
+    position: "center",
   },
-} satisfies Meta<typeof Modal>;
+};
 
 export default meta;
 
@@ -40,5 +42,29 @@ export const Bottom: Story = {
   args: {
     isOpen: true,
     position: "bottom",
+  },
+};
+
+export const Large: Story = {
+  args: {
+    isOpen: true,
+    position: "center",
+    size: "large",
+  },
+};
+
+export const Medium: Story = {
+  args: {
+    isOpen: true,
+    position: "center",
+    size: "medium",
+  },
+};
+
+export const Small: Story = {
+  args: {
+    isOpen: true,
+    position: "center",
+    size: "small",
   },
 };
