@@ -39,9 +39,31 @@ const isMasterCard = (numberString: string) => {
   );
 };
 
+const createFormattingCardNumbers = (
+  cardNumbers: string,
+  cardBrand: CardBrands | null
+) => {
+  if (cardBrand === "Diners" || cardBrand === "UnionPay") {
+    let answer = cardNumbers.substring(0, 4);
+    if (cardNumbers.substring(4, 10))
+      answer += "-" + cardNumbers.substring(4, 10);
+    if (cardNumbers.substring(10, 16))
+      answer += "-" + cardNumbers.substring(10, 16);
+    return answer;
+  }
+
+  let answer = cardNumbers.substring(0, 4);
+  if (cardNumbers.substring(4, 8)) answer += "-" + cardNumbers.substring(4, 8);
+  if (cardNumbers.substring(8, 12))
+    answer += "-" + cardNumbers.substring(8, 12);
+  if (cardNumbers.substring(12, 16))
+    answer += "-" + cardNumbers.substring(12, 16);
+  return answer;
+};
+
 const useCardNumbers = () => {
   const [cardNumbers, setCardNumbers] = useState("");
-  const [cardBrand, setCardBrand] = useState<CardBrands | null>();
+  const [cardBrand, setCardBrand] = useState<CardBrands | null>(null);
   const [isError, setIsError] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
 
@@ -62,7 +84,7 @@ const useCardNumbers = () => {
   }, [cardNumbers]);
 
   const handleCardNumbers = (event: ChangeEvent<HTMLInputElement>) => {
-    const value = event.target.value;
+    const value = event.target.value.replace("-", "");
 
     if (!isNumberString(value)) {
       setIsError(true);
@@ -74,7 +96,13 @@ const useCardNumbers = () => {
     setCardNumbers(value);
   };
 
-  return { cardNumbers, cardBrand, handleCardNumbers, isError, errorMessage };
+  return {
+    cardNumbers: createFormattingCardNumbers(cardNumbers, cardBrand),
+    cardBrand,
+    handleCardNumbers,
+    isError,
+    errorMessage,
+  };
 };
 
 export default useCardNumbers;
