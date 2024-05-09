@@ -126,3 +126,62 @@ export const MyComponent = () => {
   );
 };
 ```
+
+# PresetModal
+
+간편하게 사용할 수 있는 3종류의 모달입니다.
+
+## AlertModal
+
+### 스냅샷
+
+![alt text](image.png)
+
+### 사용 예시
+
+```js
+<AlertModal
+  isOpen={isOpen}
+  close={() => setIsOpen(false)}
+  title="아이디를 입력해주세요."
+  description="아이디는 필수로 입력해야 합니다."
+  onConfirm={() => setIsOpen(false)}
+/>
+```
+
+## ConfirmModal
+
+### 스냅샷
+
+![alt text](image-1.png)
+
+### 사용 예시
+
+```js
+<ConfirmModal
+  isOpen={isOpen}
+  close={() => setIsOpen(false)}
+  title="카드를 삭제하시겠습니까?"
+  description="삭제하면 복구하실 수 없습니다."
+  onConfirm={() => setIsOpen(false)}
+/>
+```
+
+## PromptModal
+
+### 스냅샷
+
+![alt text](image-2.png)
+
+### 사용 예시
+
+```js
+<PromptModal
+  onConfirm={() => setIsOpen(false)}
+  value={value}
+  onChange={handleChange}
+  isOpen={isOpen}
+  close={() => setIsOpen(false)}
+  title="쿠폰 번호를 입력해 주세요."
+/>
+```
