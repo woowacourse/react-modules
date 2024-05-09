@@ -12,16 +12,15 @@ const MAX_NAME_LENGTH = 21;
 type useCardOwnerNameProps = {
   maxLength?: number;
   initialName?: string;
-  needKeyTrigger?: boolean;
+  triggerKey?: string; // 없으면 사용하지 않음
 };
 
 const useCardOwnerName = ({
   maxLength = MAX_NAME_LENGTH,
   initialName = '',
-  needKeyTrigger = false,
+  triggerKey = '',
 }: useCardOwnerNameProps = {}) => {
   const [ownerName, setOwnerName] = useState(initialName);
-  const [isTriggered, setIsTriggered] = useState(false);
   const [isValidOwnerName, setIsValidOwnerName] = useState(false);
   const [ownerNameErrorMessage, setOwnerNameErrorMessage] = useState('');
 
@@ -44,7 +43,15 @@ const useCardOwnerName = ({
     return '';
   };
 
-  const handleOwnerNameChange = (name: string) => {
+  const handleKeyPress = (key: string) => {
+    if (key === triggerKey) {
+      return true;
+    }
+    return false;
+  };
+
+  const handleOwnerNameChange = (name: string, pressedKey: string = '') => {
+    console.log(pressedKey);
     const validOwnerName = makeValidOwnerName(name);
 
     const errorMessage = getErrorMessage(name);
@@ -54,7 +61,8 @@ const useCardOwnerName = ({
 
     setOwnerName(validOwnerName);
 
-    if (needKeyTrigger) setIsValidOwnerName(validOwnerName.length <= maxLength && errorMessage === '' && isTriggered);
+    if (triggerKey !== '')
+      setIsValidOwnerName(validOwnerName.length <= maxLength && errorMessage === '' && handleKeyPress(pressedKey));
     else setIsValidOwnerName(validOwnerName.length <= maxLength && errorMessage === '');
   };
 
@@ -63,7 +71,6 @@ const useCardOwnerName = ({
     isValidOwnerName,
     ownerNameErrorMessage,
     handleOwnerNameChange,
-    setIsTriggered,
   };
 };
 
