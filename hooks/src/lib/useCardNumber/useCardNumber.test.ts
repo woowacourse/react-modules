@@ -79,4 +79,71 @@ describe('useCardNumber에 대한 테스트 케이스', () => {
       getTestCardBrandName('유니온페이')
     );
   });
+
+  describe('카드 포맷팅 확인', () => {
+    test.each([['4123456789012345', ['4123', '4567', '8901', '2345']]])(
+      '비자카드는 4 4 4 4로 나눠서 포맷팅한다.',
+      (cardNumber, expected) => {
+        const { result } = renderHook(() => useCardNumber());
+
+        React.act(() => result.current.setCardNumber(cardNumber));
+
+        expect(result.current.formattedCardNumber).toEqual(expected);
+      }
+    );
+
+    test.each([
+      ['5123456789012345', ['5123', '4567', '8901', '2345']],
+      ['5223456789012345', ['5223', '4567', '8901', '2345']],
+      ['5323456789012345', ['5323', '4567', '8901', '2345']],
+      ['5423456789012345', ['5423', '4567', '8901', '2345']],
+      ['5523456789012345', ['5523', '4567', '8901', '2345']],
+    ])('마스터카드는 4 4 4 4로 나눠서 포맷팅한다.', (cardNumber, expected) => {
+      const { result } = renderHook(() => useCardNumber());
+
+      React.act(() => result.current.setCardNumber(cardNumber));
+
+      expect(result.current.formattedCardNumber).toEqual(expected);
+    });
+
+    test.each([['36123456789012', ['3612', '345678', '9012']]])(
+      '다이너스 클럽은 4 6 4로 나눠서 포맷팅한다.',
+      (cardNumber, expected) => {
+        const { result } = renderHook(() => useCardNumber());
+
+        React.act(() => result.current.setCardNumber(cardNumber));
+
+        expect(result.current.formattedCardNumber).toEqual(expected);
+      }
+    );
+
+    test.each([
+      ['341234567890123', ['3412', '345678', '90123']],
+      ['371234567890123', ['3712', '345678', '90123']],
+    ])(
+      '아메리칸 익스프레스는 4 6 5로 나눠서 포맷팅한다.',
+      (cardNumber, expected) => {
+        const { result } = renderHook(() => useCardNumber());
+
+        React.act(() => result.current.setCardNumber(cardNumber));
+
+        expect(result.current.formattedCardNumber).toEqual(expected);
+      }
+    );
+
+    test.each([
+      ['6221261234567890', ['6221', '2612', '3456', '7890']],
+      ['6229251234567890', ['6229', '2512', '3456', '7890']],
+      ['6240123456789012', ['6240', '1234', '5678', '9012']],
+      ['6260123456789012', ['6260', '1234', '5678', '9012']],
+      ['6282123456789012', ['6282', '1234', '5678', '9012']],
+      ['6288123456789012', ['6288', '1234', '5678', '9012']],
+    ])('유니온페이는 4 4 4 4로 나눠서 포맷팅한다.', (cardNumber, expected) => {
+      const { result } = renderHook(() => useCardNumber());
+
+      React.act(() => result.current.setCardNumber(cardNumber));
+
+      expect(result.current.formattedCardNumber).toEqual(expected);
+    });
+  });
 });
