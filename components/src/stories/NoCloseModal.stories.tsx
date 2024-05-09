@@ -1,4 +1,4 @@
-import { Modal } from "../../src/lib";
+import Modal from "@/lib/Modal/Modal/Modal";
 import { StoryObj } from "@storybook/react";
 import styled from "styled-components";
 

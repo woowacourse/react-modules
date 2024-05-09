@@ -9,7 +9,8 @@ export type ModalPosition = "center" | "bottom";
 export type ModalSize = "small" | "medium" | "large" | "full";
 
 export interface ModalMainProps {
-  children?: React.ReactNode;
+  children: React.ReactNode;
+  buttons?: React.ReactNode;
   isOpen: boolean;
   position: ModalPosition;
   onClose: () => void;
@@ -94,12 +95,21 @@ const CloseButton = ({ label, onClose, size = "full" }: CloseButtonProps) => {
   return <BasicButton onClick={onClose} label={label} size={size} />;
 };
 
+interface FooterProps {
+  children?: React.ReactNode;
+}
+
+const Footer = ({ children }: FooterProps) => {
+  return <S.Footer>{children}</S.Footer>;
+};
+
 const Modal = Object.assign(ModalMain, {
   Title,
   CloseIcon,
   Content,
   StyledButton,
   CloseButton,
+  Footer,
 });
 
 export default Modal;

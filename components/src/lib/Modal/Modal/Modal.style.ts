@@ -105,6 +105,7 @@ export const Content = styled.div`
   justify-content: left;
 `;
 
-export const ButtonWrapper = styled.div`
+export const Footer = styled.div`
   display: flex;
+  justify-content: end;
 `;
