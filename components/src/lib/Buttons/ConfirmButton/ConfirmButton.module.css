@@ -1,0 +1,11 @@
+.button-confirm {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  height: 2.5rem;
+  border-radius: 5px;
+  margin: 5px;
+  color: white;
+  background-color: black;
+}
