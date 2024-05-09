@@ -1,3 +1,5 @@
+import { PAYMENT_COMPANY } from "./paymentCompany";
+
 export const COMMON_ERROR = {
   notNumeric: "숫자만 입력해주세요.",
   empty: "값을 입력해주세요.",
@@ -5,8 +7,13 @@ export const COMMON_ERROR = {
 
 export const CARD_NUMBER = {
   errorMessage: {
-    invalidLength: (length: number) => {
-      return `카드 번호는 총 ${length}자리입니다.`;
+    invalidLength: (companyName: string, length: number) => {
+      const errorMessage =
+        companyName === PAYMENT_COMPANY.NONE.name
+          ? `카드 번호는 총 ${PAYMENT_COMPANY.NONE.length}자리입니다.`
+          : `${companyName}사의 카드 번호는 총 ${length}자리입니다.`;
+
+      return errorMessage;
     },
   },
 } as const;
