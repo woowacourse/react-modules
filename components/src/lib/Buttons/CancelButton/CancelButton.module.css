@@ -1,0 +1,11 @@
+.button-cancel {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  height: 2.5rem;
+  border-radius: 5px;
+  color: grey;
+  background-color: lightgrey;
+  margin: 5px;
+}
