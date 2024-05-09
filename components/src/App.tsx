@@ -2,7 +2,7 @@ import { useRef, useState } from 'react';
 import styled from 'styled-components';
 import './App.css';
 
-import { AlertModal, BottomModal, CenterModal, ConfirmModal, ToastModal, usePosition } from './lib';
+import { AlertModal, BottomModal, CenterModal, ConfirmModal, PromptModal, ToastModal, usePosition } from './lib';
 import ModalContainer from './lib/components/ModalContainer';
 import { BASIC_BORDER_RADIUS } from './lib/constants/modal';
 
@@ -25,6 +25,7 @@ function App() {
   const [openToastModal, setOpenToastModal] = useState(false);
   const [openAlertModal, setOpenAlertModal] = useState(false);
   const [openConfirmModal, setOpenConfirmModal] = useState(false);
+  const [openPromptModal, setOpenPromptModal] = useState(false);
   const positionRef = useRef<HTMLDivElement>(null);
   const { position } = usePosition(positionRef.current);
 
@@ -35,10 +36,11 @@ function App() {
       <button onClick={() => setOpenToastModal(true)}> toast modal open</button>
       <button onClick={() => setOpenAlertModal(true)}> alert modal open</button>
       <button onClick={() => setOpenConfirmModal(true)}> confirm modal open</button>
+      <button onClick={() => setOpenPromptModal(true)}> prompt modal open</button>
 
       <BottomModal openModal={openBottomModal} setOpenModal={setOpenBottomModal}>
         <h1>Bottom Modal</h1>
-        <BottomModal.button isCloseModal={true}>close</BottomModal.button>
+        <BottomModal.Button isCloseModal={true}>close</BottomModal.Button>
       </BottomModal>
 
       <CenterModal openModal={openCenterModal} setOpenModal={setOpenCenterModal}>
@@ -87,6 +89,33 @@ function App() {
             <p>alert modal</p>
           </ModalContents>
         }
+        buttonContainerJustifyContent="space-between"
+        confirmButton={{
+          contents: '확인',
+          style: { backgroundColor: 'black', color: '#ffff', borderRadius: BASIC_BORDER_RADIUS },
+          extraClickAction: () => alert('확인'),
+        }}
+        cancelButton={{
+          contents: '취소',
+          style: { backgroundColor: '#ffff', color: 'black', borderRadius: BASIC_BORDER_RADIUS },
+        }}
+      />
+
+      <PromptModal
+        openModal={openPromptModal}
+        setOpenModal={setOpenPromptModal}
+        title={<ModalTitle>alert modal</ModalTitle>}
+        label="prompt modal"
+        input={{
+          attribute: {
+            className: 'input test',
+          },
+          props: {
+            onChange: (e) => {
+              console.log(e.target.value);
+            },
+          },
+        }}
         buttonContainerJustifyContent="space-between"
         confirmButton={{
           contents: '확인',

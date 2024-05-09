@@ -52,6 +52,7 @@ export interface AlertModalProps extends Omit<ModalCommonProps, 'children'> {
 }
 
 export type ExtraClickAction = (e?: MouseEvent<HTMLButtonElement>) => void;
+export interface Button {
   contents: ReactNode;
   style?: CSSProperties;
   extraClickAction?: ExtraClickAction;
@@ -69,6 +70,14 @@ export interface ConfirmModalProps
   title?: ReactNode;
   contents: ReactNode;
   buttonContainerJustifyContent?: ButtonContainerJustifyContent;
+}
+
+export interface PromptModalProps extends Omit<ConfirmModalProps, 'contents'> {
+  label: string;
+  input: {
+    attribute?: Omit<React.HtmlHTMLAttributes<HTMLInputElement>, 'id'>;
+    props: Omit<React.ComponentProps<'input'>, 'id'>;
+  };
 }
 export interface ModalContainerProps extends Omit<ModalCommonProps, 'setOpenModal'>, AnimationProps {
   closeModal: () => void;
