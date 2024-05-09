@@ -1,4 +1,3 @@
-import { ChangeEventHandler } from 'react';
 import { useSingleInput } from '.';
 import { Validations, Validator, Validators } from './types';
 import { validateDate, validateFilledValue, validateMonth, validateNumber } from './utils/validators';
