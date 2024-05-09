@@ -1,14 +1,28 @@
 import { PropsWithChildren } from "react";
 import Modal from "./Modal";
+import { useModalAction } from ".";
 
-interface Props {
+export interface Props {
   title: string;
   width?: number;
+  onConfirm?: () => void;
 }
 
-const AlertModal = ({ title, width, children }: PropsWithChildren<Props>) => {
+const AlertModal = ({ title, width, children, onConfirm }: PropsWithChildren<Props>) => {
+  const action = useModalAction();
+
   return (
-    <Modal title={title} width={width} hasConfirmButton buttonAlign="row" confirmMessage="확인">
+    <Modal
+      title={title}
+      width={width}
+      hasConfirmButton
+      buttonAlign="row"
+      confirmMessage="확인"
+      onConfirm={() => {
+        if (onConfirm) onConfirm();
+        action.handleClose();
+      }}
+    >
       {children}
     </Modal>
   );
