@@ -1,7 +1,12 @@
 {
   "name": "@hanuuny/react-modal",
-  "version": "0.0.6",
+  "version": "0.0.10",
   "description": "우아한 리액트 모달 라이브러리",
+  "keywords": [
+    "react",
+    "modal",
+    "react-modal"
+  ],
   "type": "module",
   "types": "dist/index.d.ts",
   "main": "dist/index.js",
