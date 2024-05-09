@@ -3,15 +3,27 @@
 ## useInput
 
 사용자가 입력한 값을 상태 관리한다.
-필요 시 고차함수를 인자로 받아 상태를 변경한다.
+
+- 입력 값은 object이다.
+- handleInputChange는 event를 인자로 받아 값을 업데이트 한다.
+- updateByNameAndValue는 name과 value를 인자로 받아 값을 업데이트 한다.
 
 # 각 form에 대한 Hook
+
+## useCardBrand
+
+신용카드 카드번호 입력에 따라 카드 브랜드와 카드번호 입력 최댓값을 찾는 커스텀 훅
+
+- props로 cardNumber를 받아 각 카드 브랜드를 조건에 맞춰 찾는다.
+- 카드 브랜드가 존재하지 않을 경우 cardBrand는 null이고 maxLength는 16(DefaultMaxCardNumber)이다.
+- 카드 브랜드 종류: Visa, MasterCard, AMEX, Diners, UnionPay
 
 ## useCardNumber
 
 신용카드 카드번호에 대한 커스텀 훅
 
-- 입력한 카드번호가 4자리 숫자만 들어올 수 있다.
+- 카드번호는 입력한 값에 따라 카드 브랜드를 찾아, 해당 카드 브랜드에 맞는 입력 최댓값의 숫자만 들어올 수 있다.
+- ex) 카드 브랜드가 AMEX일 경우, 입력 최댓값은 15이다.
 - 유효한 값이 아닐 경우 에러가 발생한다.
 
 ## useCardHolder
@@ -58,3 +70,40 @@
 
 - 입력 값으로 2자리 숫자만 들어올 수 있다.
 - 유효한 값이 아닐 경우 에러가 발생한다.
+
+# 사용예시
+
+```jsx
+function Example() {
+  const {
+    inputValue,
+    validationResult,
+    cardBrand,
+    handleCardNumberChange,
+    handleCardNumberBlur,
+    handleCardNumberEnter,
+    handleCardNumberFocus,
+  } = useCardNumber({ cardNumber: "" });
+
+  console.log(validationResult);
+
+  return (
+    <>
+      <h1>Hooks Modules</h1>
+      <p>{cardBrand}</p>
+      <input
+        type="text"
+        name="cardNumber"
+        value={inputValue.cardNumber}
+        onChange={(e) => handleCardNumberChange(e)}
+        onBlur={(e) => handleCardNumberBlur(e)}
+        onKeyDown={(e) => handleCardNumberEnter(e)}
+        onFocus={(e) => handleCardNumberFocus(e)}
+      />
+    </p>
+  );
+}
+
+export default Example;
+
+```
