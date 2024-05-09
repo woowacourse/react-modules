@@ -4,7 +4,7 @@ import { formatCardNumber } from "./utils/formatCardNumber";
 import { cardNumberValidator } from "./validator";
 import { CardBrand } from "./constants/cardBrand";
 
-export interface CardNumberControl {
+export interface UseCardNumberReturn {
   value: {
     raw: string;
     formatted: string[];
@@ -15,7 +15,7 @@ export interface CardNumberControl {
   onBlur: (e: React.FocusEvent<HTMLInputElement>) => void;
 }
 
-export function useCardNumber(): CardNumberControl {
+export function useCardNumber(): UseCardNumberReturn {
   const { value, setValueWithValidation, validateOnBlur, errorStatus } =
     useInputValidation(cardNumberValidator);
 
