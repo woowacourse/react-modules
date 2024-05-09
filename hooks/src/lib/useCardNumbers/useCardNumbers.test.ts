@@ -1,92 +1,66 @@
-import { renderHook, act } from "@testing-library/react";
-import useCardNumbers from "./useCardNumbers";
+import { ERROR_MESSAGE, ERROR_TYPE } from "../types/ValidationResult";
+import { act, renderHook } from "@testing-library/react";
 
-import type { CardNumbersType } from "../types/CardNumberTypes";
+import { CardGlobalBrand } from "./utils/identifyCardGLobalBrand";
+import useCardNumber from "./useCardNumbers";
 
-describe("useCardNumbers", () => {
-  const initialValues: CardNumbersType = ["1234", "5678", "9012", "3456"];
+describe("useCardNumber 커스텀 훅 테스트", () => {
+  test("제공된 initialValue로 초기화된다.", () => {
+    const initialValue = "4111";
+    const { result } = renderHook(() => useCardNumber(initialValue));
 
-  it("올바른 초기값(initialValues)이 설정되면 그에 맞는 cardNumbers를 반환할 수 있어야 한다", () => {
-    const { result } = renderHook(() => useCardNumbers(initialValues));
-
-    expect(result.current.cardNumbers).toEqual(initialValues);
+    expect(result.current.cardNumber).toBe(initialValue);
   });
 
-  it("카드번호 입력 필드의 인덱스(inputValue)와 올바른 새 카드번호가 handleUpdateCardNumbers를 통해 들어오면, 입력값에 따라 새 카드번호가 정확히 업데이트 되어야 한다", () => {
-    const { result } = renderHook(() => useCardNumbers(initialValues));
+  test("initialValue가 주어지지 않으면 빈문자열로 초기화된다.", () => {
+    const { result } = renderHook(() => useCardNumber());
+
+    expect(result.current.cardNumber).toBe("");
+  });
+
+  test("유효한 값으로 handleUpdateCardNumber를 호출하면, 유효성 검사를 통과하고 값 업데이트에 성공한다.", () => {
+    const { result } = renderHook(() => useCardNumber());
+    const newValue = "4111111111111111";
 
     act(() => {
-      result.current.handleUpdateCardNumbers(0, "7890");
+      result.current.handleUpdateCardNumber(newValue);
     });
 
-    expect(result.current.cardNumbers).toEqual([
-      "7890",
-      "5678",
-      "9012",
-      "3456",
+    expect(result.current.cardNumber).toBe(newValue);
+    expect(
+      result.current.validationResult && result.current.validationResult.isValid
+    ).toBe(true);
+    expect(result.current.cardGlobalBrand).toBe(CardGlobalBrand.VISA);
+    expect(result.current.maxLength).toBe(16);
+    expect(result.current.formattedCardNumber).toEqual([
+      "4111",
+      "1111",
+      "1111",
+      "1111",
     ]);
-    expect(result.current.validStates).toEqual([true, true, true, true]);
-    expect(result.current.validationResult).toEqual({ isValid: true });
   });
 
-  it("카드번호 입력 필드의 인덱스(inputValue)와 잘못된 형식의 새 카드번호가 들어오면, validationResult에 에러 여부 및 메시지가 업데이트 되어야 한다", () => {
-    const { result } = renderHook(() => useCardNumbers(initialValues));
+  test("유효하지 않은 값으로 handleUpdateCardNumber를 호출하면, 유효성 검사에 실패하고 값 업데이트에 실패한다.", () => {
+    const { result } = renderHook(() => useCardNumber());
+    const updatingValue = "abc";
 
     act(() => {
-      result.current.handleUpdateCardNumbers(1, "abc");
+      result.current.handleUpdateCardNumber(updatingValue);
     });
 
-    const newCardNumbers = [...initialValues];
-    newCardNumbers[1] = "abc";
-
-    expect(result.current.cardNumbers).toEqual(newCardNumbers);
-    expect(result.current.validStates).toEqual([true, false, true, true]);
-    expect(result.current.validationResult).toEqual({
-      isValid: false,
-      errorMessage:
-        "카드 번호는 4자리의 숫자여야 합니다. 확인 후 다시 입력해주세요.",
-    });
-  });
-
-  it("모든 카드번호 입력 필드가 올바르게 입력되면 validationResult의 isValid가 true여야 한다", () => {
-    const { result } = renderHook(() => useCardNumbers(initialValues));
-
-    act(() => {
-      result.current.handleUpdateCardNumbers(0, "7890");
-    });
-    act(() => {
-      result.current.handleUpdateCardNumbers(1, "1234");
-    });
-    act(() => {
-      result.current.handleUpdateCardNumbers(2, "5678");
-    });
-    act(() => {
-      result.current.handleUpdateCardNumbers(3, "9012");
-    });
-
-    expect(result.current.validationResult).toEqual({ isValid: true });
-  });
-
-  it("하나 이상의 카드번호 입력 필드가 잘못 입력되면 validationResult의 isValid가 false여야 한다", () => {
-    const { result } = renderHook(() => useCardNumbers(initialValues));
-
-    act(() => {
-      result.current.handleUpdateCardNumbers(0, "7890");
-    });
-    act(() => {
-      result.current.handleUpdateCardNumbers(1, "abcd");
-    });
-    act(() => {
-      result.current.handleUpdateCardNumbers(2, "5678");
-    });
-    act(() => {
-      result.current.handleUpdateCardNumbers(3, "9012");
-    });
-
-    expect(result.current.validationResult).toEqual({
-      isValid: false,
-      errorMessage:
-        "카드 번호는 4자리의 숫자여야 합니다. 확인 후 다시 입력해주세요.",
-    });
+    expect(result.current.cardNumber).toBe("");
+    expect(
+      result.current.validationResult && result.current.validationResult.isValid
+    ).toBe(false);
+    expect(
+      result.current.validationResult &&
+        !result.current.validationResult.isValid &&
+        result.current.validationResult.errorType
+    ).toBe(ERROR_TYPE.numericOnly);
+    expect(
+      result.current.validationResult &&
+        !result.current.validationResult.isValid &&
+        result.current.validationResult.errorMessage
+    ).toBe(ERROR_MESSAGE[ERROR_TYPE.numericOnly]);
   });
 });
