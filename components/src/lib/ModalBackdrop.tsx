@@ -3,8 +3,14 @@ import styles from "./backdrop.module.css";
 import { ModalContext } from "./ModalContext";
 import usePreventScroll from "./hooks/usePreventScroll";
 
-export default function ModalBackdrop(props: PropsWithChildren<object>) {
-  const { children } = props;
+type Props = {
+  opacity?: string;
+};
+
+export default function ModalBackdrop({
+  children,
+  opacity = "rgba(255, 255, 255, 0.1)",
+}: PropsWithChildren<Props>) {
   const { isOpen, onClose, open } = useContext(ModalContext);
 
   const backdropRef = useCallback((node: HTMLDivElement) => {
@@ -24,6 +30,9 @@ export default function ModalBackdrop(props: PropsWithChildren<object>) {
       className={styles.back_drop}
       onClick={(e) => onClose && onClose(e)}
       onKeyDown={handleKeyDown}
+      style={{
+        background: opacity,
+      }}
       role="button"
       tabIndex={0}
       ref={backdropRef}
