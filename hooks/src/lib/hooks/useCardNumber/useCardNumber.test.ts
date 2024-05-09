@@ -1,47 +1,136 @@
-import { renderHook, waitFor } from '@testing-library/react';
-import { NUMBER_ERROR_MESSAGES } from '../../utils/validation/validation';
-import useCardNumber from './useCardNumber';
+import React from 'react';
+import { renderHook } from '@testing-library/react';
 
-const VALID_UNIT_COUNT = 4;
-const VALID_SINGLE_UNIT_LENGTH = 4;
+import useCardNumber from './useCardNumber';
+import { NUMBER_ERROR_MESSAGES } from '../../utils/validation/validation';
+import { CARD_TYPE } from '../../constants/Condition';
 
 describe('useCardNumber 커스텀 훅 테스트', () => {
-  const { result } = renderHook(() => useCardNumber(VALID_UNIT_COUNT, VALID_SINGLE_UNIT_LENGTH));
+  describe('DINERS 카드 유효성 테스트', () => {
+    it(`${CARD_TYPE['DINERS'].VALID_LENGTH}자 카드 번호를 입력하면 유효하다.`, () => {
+      const { result } = renderHook(() => useCardNumber());
 
-  it('올바른 카드 번호를 입력하면 유효하다.', () => {
-    result.current.handleCardNumberChange('1234', 0);
-    result.current.handleCardNumberChange('2345', 1);
-    result.current.handleCardNumberChange('3456', 2);
-    result.current.handleCardNumberChange('4567', 3);
+      React.act(() => result.current.handleCardNumberChange('36'));
+      React.act(() => result.current.handleCardNumberChange('3612 234567 3456'));
 
-    waitFor(() => expect(result.current.isValidCardNumbers.every(Boolean)).toBe(true));
+      expect(result.current.isValidCardNumber).toBe(true);
+    });
+
+    it(`${CARD_TYPE['DINERS'].VALID_LENGTH}자 미만의 카드 번호를 입력하면 유효하지 않다.`, () => {
+      const { result } = renderHook(() => useCardNumber());
+
+      React.act(() => result.current.handleCardNumberChange('36'));
+      React.act(() => result.current.handleCardNumberChange('3612 234567 345'));
+
+      expect(result.current.isValidCardNumber).toBe(false);
+    });
+
+    it(`${CARD_TYPE['DINERS'].VALID_LENGTH}자 미만의 카드 번호를 입력하면 에러 메시지를 표시한다.`, () => {
+      const { result } = renderHook(() => useCardNumber());
+
+      React.act(() => result.current.handleCardNumberChange('36'));
+      React.act(() => result.current.handleCardNumberChange('3612 234567 345'));
+
+      expect(result.current.cardNumberErrorMessage).toBe(NUMBER_ERROR_MESSAGES.MAX_LENGTH);
+    });
   });
 
-  it('숫자 외의 값을 입력하면 유효하지 않다.', () => {
-    result.current.handleCardNumberChange('v', 0);
+  describe('AMEX 카드 유효성 테스트', () => {
+    it(`${CARD_TYPE['AMEX'].VALID_LENGTH}자의 카드 번호를 입력하면 유효하다.`, () => {
+      const { result } = renderHook(() => useCardNumber());
 
-    waitFor(() => expect(result.current.isValidCardNumbers[0]).toBe(false));
+      React.act(() => result.current.handleCardNumberChange('34'));
+      React.act(() => result.current.handleCardNumberChange('3412 234567 34567'));
+
+      expect(result.current.isValidCardNumber).toBe(true);
+    });
+
+    it(`${CARD_TYPE['AMEX'].VALID_LENGTH}자 미만의 카드 번호를 입력하면 유효하지 않다.`, () => {
+      const { result } = renderHook(() => useCardNumber());
+
+      React.act(() => result.current.handleCardNumberChange('34'));
+      React.act(() => result.current.handleCardNumberChange('3412 234567 3456'));
+
+      expect(result.current.isValidCardNumber).toBe(false);
+    });
+
+    it(`${CARD_TYPE['AMEX'].VALID_LENGTH}자 미만의 카드 번호를 입력하면 에러 메시지를 표시한다.`, () => {
+      const { result } = renderHook(() => useCardNumber());
+
+      React.act(() => result.current.handleCardNumberChange('34'));
+      React.act(() => result.current.handleCardNumberChange('3412 234567 3456'));
+
+      expect(result.current.cardNumberErrorMessage).toBe(NUMBER_ERROR_MESSAGES.MAX_LENGTH);
+    });
   });
 
-  it('숫자 외의 값을 입력하면 에러 메세지가 표시된다.', () => {
-    result.current.handleCardNumberChange('v', 0);
+  describe('기본 카드 유효성 테스트', () => {
+    it(`${CARD_TYPE['DEFAULT'].VALID_LENGTH}자 카드 번호를 입력하면 유효하다.`, () => {
+      const { result } = renderHook(() => useCardNumber());
 
-    waitFor(() =>
-      expect(result.current.cardNumberErrorMessages[0]).toBe(NUMBER_ERROR_MESSAGES.NOT_NUMBER)
-    );
+      React.act(() => result.current.handleCardNumberChange('1234 2345 3456 4567'));
+
+      expect(result.current.isValidCardNumber).toBe(true);
+    });
+
+    it(`${CARD_TYPE['DEFAULT'].VALID_LENGTH}자 미만의 카드 번호를 입력하면 유효하지 않다.`, () => {
+      const { result } = renderHook(() => useCardNumber());
+
+      React.act(() => result.current.handleCardNumberChange('1234 2345 3456 456'));
+
+      expect(result.current.isValidCardNumber).toBe(false);
+    });
+
+    it(`${CARD_TYPE['DEFAULT'].VALID_LENGTH}자 미만의 카드 번호를 입력하면 에러 메시지를 표시한다.`, () => {
+      const { result } = renderHook(() => useCardNumber());
+
+      React.act(() => result.current.handleCardNumberChange('1234 2345 3456 456'));
+
+      expect(result.current.cardNumberErrorMessage).toBe(NUMBER_ERROR_MESSAGES.MAX_LENGTH);
+    });
+
+    it('숫자 외의 값을 입력하면 유효하지 않다.', () => {
+      const { result } = renderHook(() => useCardNumber());
+
+      React.act(() => result.current.handleCardNumberChange('ㄱ'));
+
+      expect(result.current.isValidCardNumber).toBe(false);
+    });
+
+    it('숫자 외의 값을 입력하면 에러 메세지가 표시된다.', () => {
+      const { result } = renderHook(() => useCardNumber());
+
+      React.act(() => result.current.handleCardNumberChange('ㄱ'));
+
+      expect(result.current.cardNumberErrorMessage).toBe(NUMBER_ERROR_MESSAGES.NOT_NUMBER);
+    });
   });
 
-  it(`${VALID_SINGLE_UNIT_LENGTH}자 미만의 카드 번호를 입력하면 유효하지 않다.`, () => {
-    result.current.handleCardNumberChange('1', 0);
+  describe('카드 번호 포맷팅 테스트', () => {
+    it(`DINERS 카드는 ${CARD_TYPE['DINERS'].PATTERN} 패턴으로 포맷팅 된다.`, () => {
+      const { result } = renderHook(() => useCardNumber());
 
-    waitFor(() => expect(result.current.isValidCardNumbers[0]).toBe(false));
-  });
+      React.act(() => result.current.handleCardNumberChange('36'));
+      React.act(() => result.current.handleCardNumberChange('36122345673456'));
 
-  it(`${VALID_SINGLE_UNIT_LENGTH}자 미만의 카드 번호를 입력하면 에러 메세지가 표시된다.`, () => {
-    result.current.handleCardNumberChange('1', 0);
+      expect(result.current.cardNumber).toBe('3612 234567 3456');
+    });
 
-    waitFor(() =>
-      expect(result.current.cardNumberErrorMessages[0]).toBe(NUMBER_ERROR_MESSAGES.MAX_LENGTH)
-    );
+    it(`AMEX 카드는 ${CARD_TYPE['AMEX'].PATTERN} 패턴으로 포맷팅 된다.`, () => {
+      const { result } = renderHook(() => useCardNumber());
+
+      React.act(() => result.current.handleCardNumberChange('34'));
+      React.act(() => result.current.handleCardNumberChange('341223456734567'));
+
+      expect(result.current.cardNumber).toBe('3412 234567 34567');
+    });
+
+    it(`기본 카드는 ${CARD_TYPE['DEFAULT'].PATTERN} 패턴으로 포맷팅 된다.`, () => {
+      const { result } = renderHook(() => useCardNumber());
+
+      React.act(() => result.current.handleCardNumberChange('1234234534564567'));
+
+      expect(result.current.cardNumber).toBe('1234 2345 3456 4567');
+    });
   });
 });
