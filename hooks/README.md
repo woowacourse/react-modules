@@ -12,20 +12,31 @@ npm install @jaymyong66/payments-hooks
 
 ## useCardNumber
 
-> Return validated the number on the payment card. It takes an array of four-digit \* four inputs and validates a total of 16 numbers. Also can only accept numeric input.
+> Returns the validated number of the payment card, formatted and card brand. This input accepts only numeric input to validate the total card number. The length of the total card number input is dynamically changed based on the card brand.
 
 ### Simple Example
 
 ```tsx
 const SimpleComponent = () => {
-    const { cardNumbers, cardNumberError, handleChangeCardNumber } = useCardNumber();
+    const { cardNumbers, cardBrand, cardNumberError, handleChangeCardNumber } = useCardNumber();
 
     return (
         <h1>Card Numbers</h1>
-        <input value={cardNumbers[0]} onChange={(e) => handleChangeCardNumber(0, e.target.value)} />
-        <input value={cardNumbers[1]} onChange={(e) => handleChangeCardNumber(1, e.target.value)} />
-        <input value={cardNumbers[2]} onChange={(e) => handleChangeCardNumber(2, e.target.value)} />
-        <input value={cardNumbers[3]} onChange={(e) => handleChangeCardNumber(3, e.target.value)} />
+        <input value={cardNumbers} onChange={(e) => handleChangeCardNumber(e.target.value)} />
+        <div>{cardNumberError.errorMessage}</div>
+    )
+}
+```
+
+If you want to show the user a formatted card number from the value of the input tag, you can call the 'formattingValue' function to apply it.
+
+```tsx
+const SimpleComponent = () => {
+    const { cardNumbers, cardBrand, cardNumberError, handleChangeCardNumber } = useCardNumber();
+
+    return (
+        <h1>Card Numbers</h1>
+        <input value={formattingValue(cardNumbers)} onChange={(e) => handleChangeCardNumber(e.target.value)} />
         <div>{cardNumberError.errorMessage}</div>
     )
 }
@@ -33,9 +44,22 @@ const SimpleComponent = () => {
 
 ### Return Value
 
-| Return Value                                               | type     | description                                                                                                                                                                                                    |
-| ---------------------------------------------------------- | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `{ cardNumbers, cardNumberError, handleChangeCardNumber }` | `object` | Contains the card number (`number[]`), card number error (`{errorConditions: boolean[], errorMessage: string}`) state, and a handler (`(cardIndex: number, value: string) => void`) to change the card number. |
+| Return Value                                                          | type     | description                                                                                                                                                                                                                                                              |
+| --------------------------------------------------------------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `{ cardNumbers, cardBrand, cardNumberError, handleChangeCardNumber }` | `object` | Contains the Card number formatted according to card brand (`number[]`), card brand (`string`) , card number error (`{errorConditions: boolean[], errorMessage: string}`) state, and a handler (`(cardIndex: number, value: string) => void`) to change the card number. |
+
+If the card number starts with '36', cardNumbers will be returned in the form ['3600','000000','0000'], which is the card number of DINERS.
+
+The following brands are supported for card brand identification and formatting.
+
+| Card Brand | Card identification rules                                                                                                                                                                                                              | Example Return Values                                              |
+| ---------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------ |
+| VISA       | `the first digit of the card number starts with '4'`                                                                                                                                                                                   | cardNumbers : ['4000','0000','0000','0000'], cardBrand : 'VISA'    |
+| MASTER     | `both digits of the card number start with a number between '51' and '55'`                                                                                                                                                             | cardNumbers : ['5100','0000','0000','0000'], cardBrand : 'MASTER'  |
+| DINERS     | `If both digits of the card number start with '36'`                                                                                                                                                                                    | cardNumbers : ['3600','000000','0000'], cardBrand : 'DINERS'       |
+| AMEX       | `If two digits of the card number start with '34' or '37'`                                                                                                                                                                             | cardNumbers : ['3400','000000','00000'], cardBrand : 'AMEX'        |
+| UNION      | `Six digits of the card number start with a number between 622126 and 622925, or three digits of the card number begin with a number between 624 and 626, orfour digits of the card number start with a number between 6282 and 6288.` | cardNumbers : ['6221','2600','0000','0000'], cardBrand : 'UNION'   |
+| Default    | `default`                                                                                                                                                                                                                              | cardNumbers : ['0000','0000','0000','0000'], cardBrand : 'DEFAULT' |
 
 ## useExpiration
 
@@ -58,9 +82,9 @@ const SimpleComponent = () => {
 
 ### Return Value
 
-| Return Value | type | description |
-| ------------ | ---- | ----------- |
-| `{ expiration, expirationError, handleChangeExpiration }` | `object` | Contains the expiration (`{year : string; month : string;}`), expiration error (`{isError: boolean, errorMessage: string}`) state, and a handler (`(field: 'year' | 'month', value: string) => void`) to change the card number. |  
+| Return Value  | type  | description  |
+| ------------- | ----- | ------------ | 
+| `{ expiration, expirationError, handleChangeExpiration }` | `object` | Contains the expiration (`{year : string; month : string;}`), expiration error (`{isError: boolean, errorMessage: string}`) state, and a handler (`(field: 'year' | 'month', value: string) => void`) to change the card number. |
 
 ## useOwnerName
 
