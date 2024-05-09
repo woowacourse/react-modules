@@ -1,178 +1,123 @@
-import { useEffect } from "react";
-import { ReactNode } from "react";
-import { css } from "@emotion/css";
+import { FormEvent, ReactNode, useLayoutEffect, useState } from 'react';
+import ReactDOM from 'react-dom';
+import styles from './Modal.module.css';
+import '../reset.css';
+import '../index.css';
 
-export const POSITIONS = ["top", "bottom", "center"] as const;
-type Position = (typeof POSITIONS)[number];
+const ModalTypes = ['basic', 'alert', 'confirm', 'prompt'] as const;
+const ModalPositions = ['top', 'center', 'bottom'] as const;
 
-export interface ModalProps {
-  children?: ReactNode;
-  position?: Position;
-  title?: string;
-  description?: string;
-  close?: boolean;
-  cancelLabel?: string;
-  confirmLabel?: string;
-  isOpenState: [boolean, React.Dispatch<React.SetStateAction<boolean>>];
-  onOpen?: () => void;
-  onConfirm?: () => void;
-  onClose?: () => void;
+type ModalType = (typeof ModalTypes)[number];
+type ModalPosition = (typeof ModalPositions)[number];
+type ModalSize = 'small' | 'medium' | 'large';
+
+interface FormValues {
+  [key: string]: string;
 }
 
-const Modal = ({
+interface ModalProps {
+  isOpen: boolean;
+  setIsOpen: (isOpen: boolean) => void;
+
+  type?: ModalType;
+  size?: ModalSize; // Only for desktop, tablet
+  position?: ModalPosition; // Only for mobile
+
+  title?: string;
+  description?: string;
+  placeholder?: string; // Only for prompt type
+  confirmLabel?: string;
+  cancelLabel?: string; // Only for confirm, prompt type
+  onConfirm?: (formValues: Record<string, string>) => void;
+
+  portalNodeId?: string;
+  children?: ReactNode;
+}
+
+const Modal: React.FC<ModalProps> = ({
+  isOpen,
+  setIsOpen,
+  type = 'basic',
+  size = 'small',
+  position = 'center',
+  title = '',
+  description = '',
+  placeholder = '',
+  confirmLabel = '확인',
+  cancelLabel = '취소',
+  onConfirm = () => {},
+  portalNodeId = '',
   children,
-  position = "center",
-  title = "",
-  description = "",
-  close = false,
-  cancelLabel,
-  confirmLabel,
-  isOpenState,
-  onOpen,
-  onConfirm,
-  onClose,
-}: ModalProps) => {
-  const [isOpen, setIsOpen] = isOpenState;
+}) => {
+  const [$portal, setPortal] = useState<HTMLElement | null>(null);
 
-  useEffect(() => {
-    if (isOpen && onOpen) onOpen();
-  }, [isOpen]);
+  const willRenderCancelButton = ['confirm', 'prompt'].includes(type);
+  const willRenderConfirmButton = ['confirm', 'prompt', 'alert'].includes(type);
 
-  const handleClose = () => {
-    setIsOpen(false);
-    if (onClose) onClose();
-  };
+  const handleClose = () => setIsOpen(false);
 
-  const handleConfirm = () => {
-    onConfirm && onConfirm();
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const formValues = Object.fromEntries(new FormData(e.currentTarget).entries()) as FormValues;
+    onConfirm(formValues);
     handleClose();
   };
 
-  const handleClickDimmed = (e: React.MouseEvent) => {
-    if (e.target === e.currentTarget) handleClose();
-  };
+  /* Mount: Create portal element to 'domNode' */
+  /* Unmount: Remove portal element from 'domNode' */
+  useLayoutEffect(function createPortalElement() {
+    // Create & Store
+    const $newPortal = document.createElement('div');
+    $newPortal.className = styles.container;
+    setPortal($newPortal);
 
-  return isOpen ? (
-    <div className={css(dimmedCSS)} onClick={handleClickDimmed}>
-      <div className={css(modalContainerCSS, positionCSS[position])}>
-        <div className={css(headerContainerCSS)}>
-          <h2 className={css(titleCSS)}>{title}</h2>
-          {close && (
-            <button className={css(closeButtonCSS)} onClick={handleClose}>
-              ×
-            </button>
-          )}
-        </div>
-        <div>
-          <p className={css(descriptionCSS)}>{description}</p>
-        </div>
-        {children && <div>{children}</div>}
-        {(confirmLabel || cancelLabel) && (
-          <div className={css(buttonContainerCSS)}>
-            {confirmLabel && (
-              <button className={css(buttonCSS, confirmButtonCSS)} onClick={handleConfirm}>
-                {confirmLabel}
-              </button>
-            )}
-            {cancelLabel && (
-              <button className={css(buttonCSS, cancelButtonCSS)} onClick={handleClose}>
+    // Get Parent & Render
+    const $parentNode = portalNodeId ? document.getElementById(portalNodeId) : document.body;
+    $parentNode?.appendChild($newPortal);
+
+    // Remove
+    return () => {
+      $parentNode?.removeChild($newPortal);
+    };
+  }, []);
+
+  /* Close 'Modal'' */
+  if (!isOpen || !$portal) return null;
+
+  /* Open 'Modal'' */
+  return ReactDOM.createPortal(
+    <div className={styles.overlay} onClick={handleClose}>
+      <form
+        className={`${styles.content} ${styles[size]} ${styles[position]}`}
+        onClick={(e) => e.stopPropagation()}
+        onSubmit={handleSubmit}
+      >
+        {title && <p className={styles.title}>{title}</p>}
+        {description && <p className={styles.description}>{description}</p>}
+        {children}
+
+        {/* Render 'Close Button' (on Basic)*/}
+        {type === 'basic' && <button className={styles.closeButton} onClick={handleClose} />}
+
+        {/* Render 'Input Field' (on Prompt) */}
+        {type === 'prompt' && <input name='prompt' className={styles.inputField} placeholder={placeholder} />}
+
+        {/* Render 'Cancel Button' (on Confirm | Prompt) */}
+        {/* Render 'Confirm Button' (on Alert | Confirm | Prompt) */}
+        {(willRenderConfirmButton || willRenderCancelButton) && (
+          <div className={styles.buttonWrapper}>
+            {willRenderCancelButton && (
+              <button type='button' className={styles.cancelButton} onClick={handleClose}>
                 {cancelLabel}
               </button>
             )}
+            {willRenderConfirmButton && <button className={styles.confirmButton}>{confirmLabel}</button>}
           </div>
         )}
-      </div>
-    </div>
-  ) : null;
+      </form>
+    </div>,
+    $portal
+  );
 };
-
-const modalContainerCSS = css`
-  display: flex;
-  gap: 16px;
-  flex-direction: column;
-  padding: 24px 32px;
-  position: fixed;
-  left: 50%;
-  z-index: 1;
-  width: 300px;
-  background-color: var(--main-bg-color);
-  transform: translateX(-50%);
-`;
-
-const headerContainerCSS = css`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-`;
-
-const titleCSS = css`
-  font-size: var(--title-font-size);
-  font-weight: 700;
-  color: var(--title-font-color);
-
-  text-align: left;
-`;
-
-const descriptionCSS = css`
-  font-size: var(--desc-font-size);
-  font-weight: 400;
-  color: var(--desc-font-color);
-  text-align: left;
-`;
-
-const buttonContainerCSS = css`
-  display: flex;
-  gap: 12px;
-  flex-direction: column;
-`;
-
-const buttonCSS = css`
-  padding: 5px;
-  border: 2px solid var(--color-gray-300);
-  width: 100%;
-  height: auto;
-  font-size: var(--btn-font-size);
-  font-weight: 700;
-  text-align: center;
-  aspect-ratio: 8;
-  border-radius: 5px;
-  box-sizing: border-box;
-`;
-
-const confirmButtonCSS = css`
-  background-color: var(--confirm-btn-bg-color);
-  color: var(--confirm-btn-font-color);
-`;
-
-const cancelButtonCSS = css`
-  background-color: var(--cancel-btn-bg-color);
-  color: var(--cancel-btn-font-color);
-`;
-
-const closeButtonCSS = css`
-  padding: 0;
-  font-size: 24px;
-  width: 24px;
-  height: 24px;
-  line-height: 0px;
-  color: var(--color-gray-300);
-  background-color: rgba(0, 0, 0, 0);
-`;
-
-const dimmedCSS = css`
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 0;
-  background-color: var(--dimmed-bg-color);
-`;
-
-const positionCSS: Record<Position, string> = {
-  top: "width:100%; top:0; border-radius: 0 0 8px 8px;",
-  center: "top:50%; transform:translate(-50%,-50%); border-radius: 8px;",
-  bottom: "width:100%; bottom:0; border-radius: 8px 8px 0 0;",
-} as const;
 
 export default Modal;

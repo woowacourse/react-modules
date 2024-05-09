@@ -1,146 +1,201 @@
-import { Modal } from "../lib";
-import { POSITIONS } from "../lib/Modal";
-import type { Meta, StoryObj } from "@storybook/react";
-import { fn } from "@storybook/test";
-import "../reset.css";
+import { Modal } from '../lib';
+import type { Meta, StoryObj } from '@storybook/react';
+import { fn } from '@storybook/test';
 
 const meta = {
-  title: "Modal",
+  title: 'Modal',
   component: Modal,
   parameters: {
-    layout: "centered",
-    docs: {
-      description: {
-        component: "Modal Component",
-      },
-    },
+    layout: 'centered',
+    docs: { description: { component: 'Modal Component. Try test by changing the size of the viewport.' } },
   },
   argTypes: {
+    isOpen: {
+      control: { type: 'boolean' },
+      description: 'Determines whether the modal is open or not',
+    },
+    setIsOpen: {
+      action: 'setIsOpen',
+      description: 'Function to set the open state of the modal',
+    },
+    type: {
+      control: { type: 'select', options: ['basic', 'alert', 'confirm', 'prompt'] },
+      description: 'The type of the modal',
+    },
+    size: {
+      control: { type: 'select', options: ['small', 'medium', 'large'] },
+      description: 'The size of the modal (only for desktop, tablet)',
+    },
     position: {
-      type: "string",
-      control: {
-        type: "select",
-      },
-      options: [...POSITIONS],
-      description: "Floating Position",
+      control: { type: 'select', options: ['top', 'center', 'bottom'] },
+      description: 'The position of the modal (only for mobile)',
     },
     title: {
-      type: "string",
-      control: {
-        type: "text",
-      },
-      description: "Modal Title",
+      control: { type: 'text' },
+      description: 'The title of the modal',
     },
     description: {
-      type: "string",
-      control: {
-        type: "text",
-      },
+      control: { type: 'text' },
+      description: 'The description of the modal',
     },
-    close: {
-      type: "boolean",
-      control: {
-        type: "boolean",
-      },
-      description: "Show Close Button or Not",
-    },
-    cancelLabel: {
-      type: "string",
-      control: {
-        type: "text",
-      },
-      description: "Cancel Button Label (if empty, Cancel Button will be hidden)",
+    placeholder: {
+      control: { type: 'text' },
+      description: 'The placeholder for the input field (only for prompt type)',
     },
     confirmLabel: {
-      type: "string",
-      control: {
-        type: "text",
-      },
-      description: "Confirm Button Label (if empty, Confirm Button will be hidden)",
+      control: { type: 'text' },
+      description: 'The label for the confirm button',
     },
-    isOpenState: {
-      description: "Is Open State",
+    cancelLabel: {
+      control: { type: 'text' },
+      description: 'The label for the cancel button (only for confirm and prompt types)',
     },
-    onOpen: {
-      type: "function",
-      description: "Open Event",
+    portalNodeId: {
+      control: { type: 'text' },
+      description: 'The ID of the parent node where the modal should be rendered',
     },
     onConfirm: {
-      type: "function",
-      description: "Confirm Event",
+      action: 'onConfirm',
+      description: 'The function to be called when the confirm button is clicked',
     },
-    onClose: {
-      type: "function",
-      description: "Close Event",
+    children: {
+      control: { type: 'text' },
+      description: 'The content to be displayed inside the modal',
     },
   },
   args: {
-    position: "center",
-    title: "title",
-    description: "description",
-    close: false,
-    cancelLabel: undefined,
-    confirmLabel: undefined,
-    isOpenState: [true, fn()],
-    onOpen: () => {},
-    onConfirm: () => {},
-    onClose: () => {},
+    isOpen: true,
+    setIsOpen: fn,
   },
-  tags: ["autodocs"],
+
+  tags: ['autodocs'],
 } satisfies Meta<typeof Modal>;
 
 export default meta;
 
 type Story = StoryObj<typeof meta>;
 
+const exampleCommonArgs = {
+  title: 'Title',
+  description: 'Description',
+  placeholder: 'Placeholder',
+  confirmLabel: 'Confirm Label',
+  cancelLabel: 'Cancel Label',
+};
+
 export const Default: Story = {
   parameters: {
-    docs: { description: { story: "기본 상태" } },
+    docs: { description: { story: 'Default (type: basic, size: small, position: center)' } },
   },
 };
 
-export const ConfirmButton: Story = {
-  parameters: {
-    docs: { description: { story: "확인버튼이 존재하는 상태" } },
-  },
+export const Type_Basic: Story = {
+  name: 'Type / Basic',
   args: {
-    confirmLabel: "confirm",
+    ...exampleCommonArgs,
+    type: 'basic',
+    position: 'center',
+  },
+  parameters: {
+    docs: { description: { story: 'Basic Type (type: basic)' } },
   },
 };
 
-export const CancelButton: Story = {
-  parameters: {
-    docs: { description: { story: "취소버튼이 존재하는 상태" } },
-  },
+export const Type_Alert: Story = {
+  name: 'Type / Alert',
   args: {
-    cancelLabel: "cancel",
+    ...exampleCommonArgs,
+    type: 'alert',
+  },
+  parameters: {
+    docs: { description: { story: 'Alert Type (type: alert)' } },
   },
 };
 
-export const ConfirmAndCancelButton: Story = {
-  parameters: {
-    docs: { description: { story: "확인/취소 버튼이 존재하는 상태" } },
-  },
+export const Type_Confirm: Story = {
+  name: 'Type / Confirm',
   args: {
-    confirmLabel: "확인",
-    onConfirm: () => {
-      alert("confirm");
-    },
-    cancelLabel: "닫기",
-    onClose: () => {
-      alert("close");
-    },
+    ...exampleCommonArgs,
+    type: 'confirm',
+  },
+  parameters: {
+    docs: { description: { story: 'Confirm Type (type: confirm)' } },
   },
 };
 
-export const CloseButton: Story = {
-  parameters: {
-    docs: { description: { story: "닫기버튼이 존재하는 상태" } },
-  },
+export const Type_Prompt: Story = {
+  name: 'Type / Prompt',
   args: {
-    close: true,
-    onClose: () => {
-      alert("close");
-    },
+    ...exampleCommonArgs,
+    type: 'prompt',
+  },
+  parameters: {
+    docs: { description: { story: 'Prompt Type (type: prompt)' } },
+  },
+};
+
+export const Position_Top: Story = {
+  name: 'Position / Top (only for Mobile)',
+  args: {
+    ...exampleCommonArgs,
+    position: 'top',
+  },
+  parameters: {
+    docs: { description: { story: 'Top Position (position: top)' } },
+  },
+};
+
+export const Position_Center: Story = {
+  name: 'Position / Center (only for Mobile)',
+  args: {
+    ...exampleCommonArgs,
+    position: 'center',
+  },
+  parameters: {
+    docs: { description: { story: 'Center Position (position: center)' } },
+  },
+};
+
+export const Position_Bottom: Story = {
+  name: 'Position / Bottom (only for Mobile)',
+  args: {
+    ...exampleCommonArgs,
+    position: 'bottom',
+  },
+  parameters: {
+    docs: { description: { story: 'Bottom Position (position: bottom)' } },
+  },
+};
+
+export const Size_Small: Story = {
+  name: 'Size / Small (only for Desktop, Tablet)',
+  args: {
+    ...exampleCommonArgs,
+    size: 'small',
+  },
+  parameters: {
+    docs: { description: { story: 'Small Size (size: small)' } },
+  },
+};
+
+export const Size_Medium: Story = {
+  name: 'Size / Medium (only for Desktop, Tablet)',
+  args: {
+    ...exampleCommonArgs,
+    size: 'medium',
+  },
+  parameters: {
+    docs: { description: { story: 'Medium Size (size: medium)' } },
+  },
+};
+
+export const Size_Large: Story = {
+  name: 'Size / Large (only for Desktop, Tablet)',
+  args: {
+    ...exampleCommonArgs,
+    size: 'large',
+  },
+  parameters: {
+    docs: { description: { story: 'Large Size (size: large)' } },
   },
 };

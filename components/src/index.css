@@ -1,32 +1,73 @@
 :root {
+  background-color: #242424;
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
   font-weight: 400;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.87);
 
   color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-
-  /* 슽스타일 변수 */
-  --color-gray-300: #333333;
-
-  --main-bg-color: white;
-  --title-font-size: 18px;
-  --title-font-color: black;
-  --desc-font-size: 16px;
-  --desc-font-color: var(--color-gray-300);
-  --btn-font-size: 16px;
-  --confirm-btn-bg-color: var(--color-gray-300);
-  --confirm-btn-font-color: white;
-  --cancel-btn-bg-color: white;
-  --cancel-btn-font-color: #8b95a1;
-  --dimmed-bg-color: rgba(0, 0, 0, 0.5);
 }
+
+/* <Color Variables> */
+:root {
+  /* Colors */
+  --gray-333: #333;
+  --gray-333-rgb: 51, 51, 51;
+}
+/* </Color Variables> */
+
+/* <Modal> */
+:root {
+  /* Modal Commons */
+  --modal-font-family: Noto Sans KR;
+
+  /* Modal Overlay */
+  --overlay-bg-color: rgba(0, 0, 0, 0.5);
+
+  /* Modal Content */
+  --content-bg-color: white;
+
+  /* Modal Title */
+  --title-color: black;
+  --title-font-size: 18px;
+  --title-font-weight: 700;
+  --title-line-height: 26.06px;
+
+  /* Modal Description */
+  --description-color: #0a0d13;
+  --description-font-size: 12px;
+  --description-font-weight: 500;
+  --description-line-height: 15px;
+
+  /* Modal Close Button */
+  --close-button-color: black;
+
+  /* Modal Input Field */
+  --input-field-border-color: black;
+  --input-field-bg-color: white;
+  --input-field-color: black;
+
+  /* Modal Buttons (Confirm, Cancel) */
+  --button-font-size: 15px;
+  --button-font-weight: 700;
+  --button-line-height: 21.72px;
+
+  /* Modal Confirm Button */
+  --confirm-button-border-color: var(--gray-333);
+  --confirm-button-bg-color: var(--gray-333);
+  --confirm-button-color: white;
+
+  /* Modal Cancel Button */
+  --cancel-button-border-color: rgba(var(--gray-333-rgb), 0.5);
+  --cancel-button-bg-color: white;
+  --cancel-button-color: var(--gray-333);
+}
+/* </Modal> */
 
 a {
   font-weight: 500;
@@ -38,9 +79,9 @@ a:hover {
 }
 
 body {
-  margin: 0;
   display: flex;
   place-items: center;
+  margin: 0;
   min-width: 320px;
   min-height: 100vh;
 }
@@ -50,29 +91,10 @@ h1 {
   line-height: 1.1;
 }
 
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-}
-
 @media (prefers-color-scheme: light) {
   :root {
-    color: #213547;
     background-color: #ffffff;
+    color: #213547;
   }
   a:hover {
     color: #747bff;
