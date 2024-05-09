@@ -15,15 +15,12 @@ export const getCardType = (cardNumber: string): CardType => {
     if (secondDigits === '34' || secondDigits === '37') return 'AMEX';
   }
 
-  if (firstDigits === '5' && Number(secondDigits) >= 51 && Number(secondDigits) <= 55)
-    return 'MASTERCARD';
+  if (firstDigits === '5' && Number(secondDigits) >= 51 && Number(secondDigits) <= 55) return 'MASTERCARD';
 
   if (firstDigits === '6') {
     if (Number(thirdDigits) >= 624 && Number(thirdDigits) <= 626) return 'UNIONPAY';
-    if (thirdDigits === '622' && Number(sixthDigits) >= 622126 && Number(sixthDigits) <= 622925)
-      return 'UNIONPAY';
-    if (thirdDigits === '628' && Number(fourthDigits) >= 6282 && Number(fourthDigits) <= 6288)
-      return 'UNIONPAY';
+    if (thirdDigits === '622' && Number(sixthDigits) >= 622126 && Number(sixthDigits) <= 622925) return 'UNIONPAY';
+    if (thirdDigits === '628' && Number(fourthDigits) >= 6282 && Number(fourthDigits) <= 6288) return 'UNIONPAY';
   }
 
   return 'DEFAULT';
