@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Modal } from "paran-simple-modal";
+import { Modal } from "./lib/index";
 
 function App() {
   const [isOpened, setIsOpened] = useState(false);
@@ -8,27 +8,34 @@ function App() {
     <>
       {isOpened ? (
         <Modal
-          onClose={() => {
-            setIsOpened(false);
-          }}
-          modalPosition="bottom"
-          title="test"
-          subtitle="123123"
-          confirmButton={{
-            content: "확인",
-            onConfirm: () => {
-              alert("확인");
-            },
-          }}
-          cancelButton={{
-            content: "취소",
-            onCancel: () => {
-              alert("취소");
-            },
-          }}
-          children={<p>hi</p>}
-          preventCloseOnOutsideClick={true}
-        />
+          size="large"
+          position="bottom"
+          onBackdropClick={() => setIsOpened(false)}
+        >
+          <Modal.Title
+            title="Modal Title"
+            subtitle="Modal subtitle"
+            position="left"
+          ></Modal.Title>
+          <div>Children</div>
+          <Modal.InputForm
+            title="Input Title"
+            placeHolder="Input placeholder"
+            size="small"
+          ></Modal.InputForm>
+
+          <Modal.CancelButton
+            onClick={() => setIsOpened(false)}
+            content="Close"
+            size="medium"
+          />
+          <Modal.ConfirmButton
+            onClick={() => alert("Confirmed")}
+            content="Confirm"
+            size="large"
+          />
+          <Modal.CloseButton onClick={() => setIsOpened(false)} size="large" />
+        </Modal>
       ) : (
         <button onClick={() => setIsOpened(true)}>모달 열기</button>
       )}
