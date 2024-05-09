@@ -1,5 +1,5 @@
 import { isOnlyNumber } from '../utils/validateCardInfo';
-import useValidateArrayInput from '../useValidateArrayInput/useValidateArrayInput';
+import useValidateInputs from '../useValidateInputs/useValidateInputs';
 
 const useCardNumbers = (initValue: string[], maxLength: number = 4) => {
   const validateOnChange = (newValue: string) => {
@@ -38,7 +38,7 @@ const useCardNumbers = (initValue: string[], maxLength: number = 4) => {
     onChangeHandler,
     onFocusHandler,
     onBlurHandler,
-  } = useValidateArrayInput({
+  } = useValidateInputs({
     initValue,
     validateOnChange,
     validateOnBlurAll,

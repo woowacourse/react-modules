@@ -1,9 +1,9 @@
 import { renderHook, waitFor } from '@testing-library/react';
-import useValidateArrayInput, { ValidateResult } from './useValidateArrayInput';
+import useValidateInputs, { ValidateResult } from './useValidateInputs';
 
 import { act } from 'react';
 
-describe('useValidateArrayInput custom hook', () => {
+describe('useValidateInputs custom hook', () => {
   let validateOnChangeMock: jest.Mock<ValidateResult, [string, number]>;
   let validateOnBlurMock: jest.Mock<ValidateResult>;
 
@@ -16,7 +16,7 @@ describe('useValidateArrayInput custom hook', () => {
     validateOnBlurMock.mockReturnValue({ isValid: false, errorMessage: '' });
 
     const { result } = renderHook(() =>
-      useValidateArrayInput({
+      useValidateInputs({
         initValue: ['12', ''],
         validateOnChange: validateOnChangeMock,
         validateOnBlurAll: validateOnBlurMock,
@@ -32,7 +32,7 @@ describe('useValidateArrayInput custom hook', () => {
     validateOnChangeMock.mockReturnValue({ isValid: true, errorMessage: '' });
 
     const { result } = renderHook(() =>
-      useValidateArrayInput({
+      useValidateInputs({
         initValue: ['', ''],
         validateOnChange: validateOnChangeMock,
         validateOnBlurAll: validateOnBlurMock,
@@ -55,7 +55,7 @@ describe('useValidateArrayInput custom hook', () => {
     });
 
     const { result } = renderHook(() =>
-      useValidateArrayInput({
+      useValidateInputs({
         initValue: ['', ''],
         validateOnChange: validateOnChangeMock,
         validateOnBlurAll: validateOnBlurMock,
@@ -75,7 +75,7 @@ describe('useValidateArrayInput custom hook', () => {
     validateOnBlurMock.mockReturnValue({ isValid: true, errorMessage: '' });
 
     const { result } = renderHook(() =>
-      useValidateArrayInput({
+      useValidateInputs({
         initValue: ['123', '456'],
         validateOnChange: validateOnChangeMock,
         validateOnBlurAll: validateOnBlurMock,
@@ -98,7 +98,7 @@ describe('useValidateArrayInput custom hook', () => {
     });
 
     const { result } = renderHook(() =>
-      useValidateArrayInput({
+      useValidateInputs({
         initValue: ['123', '12'],
         validateOnChange: validateOnChangeMock,
         validateOnBlurAll: validateOnBlurMock,

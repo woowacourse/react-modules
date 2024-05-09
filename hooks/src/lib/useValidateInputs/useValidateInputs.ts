@@ -11,7 +11,7 @@ export interface ValidateResult {
   errorMessage: string;
 }
 
-const useValidateArrayInput = ({
+const useValidateInputs = ({
   initValue,
   validateOnChange,
   validateOnBlurAll,
@@ -83,4 +83,4 @@ const useValidateArrayInput = ({
     onFocusHandler,
   };
 };
-export default useValidateArrayInput;
+export default useValidateInputs;

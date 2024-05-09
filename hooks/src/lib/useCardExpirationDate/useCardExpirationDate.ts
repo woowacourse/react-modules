@@ -1,6 +1,6 @@
 import { isOnlyNumber, isValidMonth } from '../utils/validateCardInfo';
 
-import useValidateArrayInput from '../useValidateArrayInput/useValidateArrayInput';
+import useValidateInputs from '../useValidateInputs/useValidateInputs';
 
 const useCardExpirationDate = (initValue: string[], maxLength: number = 2) => {
   const validateOnChange = (newValue: string, index: number) => {
@@ -57,7 +57,7 @@ const useCardExpirationDate = (initValue: string[], maxLength: number = 2) => {
     onChangeHandler,
     onFocusHandler,
     onBlurHandler,
-  } = useValidateArrayInput({
+  } = useValidateInputs({
     initValue,
     validateOnChange,
     validateOnBlurAll,

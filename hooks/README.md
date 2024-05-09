@@ -231,7 +231,7 @@ export default CardPassword;
 #### Top-Level Exports
 
 - `useValidateInput`
-- `useValidateArrayInput`
+- `useValidateInputs`
 - `useCardNumbers`
 - `useCardCompany`
 - `useCardExpiration`

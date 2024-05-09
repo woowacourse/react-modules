@@ -1,5 +1,5 @@
 export { default as useValidateInput } from './useValidateInput/useValidateInput';
-export { default as useValidateArrayInput } from './useValidateArrayInput/useValidateArrayInput';
+export { default as useValidateInputs } from './useValidateInputs/useValidateInputs';
 export { default as useCardCompany } from './useCardCompany/useCardCompany';
 export { default as useCardCVC } from './useCardCVC/useCardCVC';
 export { default as useCardExpirationDate } from './useCardExpirationDate/useCardExpirationDate';
