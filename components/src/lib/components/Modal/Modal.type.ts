@@ -14,4 +14,5 @@ export interface ModalImplementationProps {
   title: string;
   cancelButtonText?: string;
   confirmButtonText?: string;
+  onConfirm: (...args: unknown[]) => void;
 }
