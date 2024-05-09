@@ -1,41 +1,47 @@
-import { renderHook, waitFor } from '@testing-library/react';
+import React from 'react';
+import { renderHook } from '@testing-library/react';
+
 import useCardCVC from './useCardCVC';
 import { NUMBER_ERROR_MESSAGES } from '../../utils/validation/validation';
 
 describe('useCardCVC 커스텀 훅 테스트', () => {
-  const { result } = renderHook(() => useCardCVC());
-
   it('올바른 CVC 번호를 입력하면 유효하다', () => {
-    result.current.handleCVCNumberChange('123');
+    const { result } = renderHook(() => useCardCVC());
 
-    waitFor(() => expect(result.current.isValidCVCNumber).toBe(true));
+    React.act(() => result.current.handleCVCNumberChange('123'));
+
+    expect(result.current.isValidCVCNumber).toBe(true);
   });
 
   it('숫자 외의 값을 입력하면 유효하지 않다.', () => {
-    result.current.handleCVCNumberChange('v');
+    const { result } = renderHook(() => useCardCVC());
 
-    waitFor(() => expect(result.current.isValidCVCNumber).toBe(false));
+    React.act(() => result.current.handleCVCNumberChange('ㄱ'));
+
+    expect(result.current.isValidCVCNumber).toBe(false);
   });
 
   it('숫자 외의 값을 입력하면 에러 메세지를 표시한다.', () => {
-    result.current.handleCVCNumberChange('v');
+    const { result } = renderHook(() => useCardCVC());
 
-    waitFor(() =>
-      expect(result.current.cvcNumberErrorMessage).toBe(NUMBER_ERROR_MESSAGES.NOT_NUMBER)
-    );
+    React.act(() => result.current.handleCVCNumberChange('ㄱ'));
+
+    expect(result.current.cvcNumberErrorMessage).toBe(NUMBER_ERROR_MESSAGES.NOT_NUMBER);
   });
 
   it('3자 미만의 CVC 번호를 입력하면 유효하지 않다.', () => {
-    result.current.handleCVCNumberChange('1');
+    const { result } = renderHook(() => useCardCVC());
 
-    waitFor(() => expect(result.current.isValidCVCNumber).toBe(false));
+    React.act(() => result.current.handleCVCNumberChange('1'));
+
+    expect(result.current.isValidCVCNumber).toBe(false);
   });
 
   it('3자 미만의 CVC 번호를 입력하면 에러 메시지를 표시한다.', () => {
-    result.current.handleCVCNumberChange('1');
+    const { result } = renderHook(() => useCardCVC());
 
-    waitFor(() =>
-      expect(result.current.cvcNumberErrorMessage).toBe(NUMBER_ERROR_MESSAGES.MAX_LENGTH)
-    );
+    React.act(() => result.current.handleCVCNumberChange('1'));
+
+    expect(result.current.cvcNumberErrorMessage).toBe(NUMBER_ERROR_MESSAGES.MAX_LENGTH);
   });
 });
