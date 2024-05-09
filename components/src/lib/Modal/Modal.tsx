@@ -29,11 +29,9 @@ export const ModalProvider: React.FC<React.PropsWithChildren<{}>> = ({ children 
 /* -------------------------------------------------------------------------------------------------
  * ModalContent
  * -----------------------------------------------------------------------------------------------*/
-export const ModalContent: React.FC<React.PropsWithChildren<ModalProps>> = ({
-  children,
-  modalPosition,
-  closeButtonPosition,
-}) => {
+export const ModalContent: React.FC<
+  React.PropsWithChildren<ModalProps & { size?: "small" | "medium" | "large" }>
+> = ({ children, modalPosition, closeButtonPosition, size }) => {
   const { isOpen, closeModal } = useModalContext();
 
   return (
@@ -43,6 +41,7 @@ export const ModalContent: React.FC<React.PropsWithChildren<ModalProps>> = ({
         <StyledModalContainer
           modalPosition={modalPosition}
           closeButtonPosition={closeButtonPosition}
+          size={size || "medium"}
         >
           {children}
         </StyledModalContainer>
@@ -114,11 +113,9 @@ export const ModalFooter: React.FC<React.PropsWithChildren<{ align: "center" | "
 /* -------------------------------------------------------------------------------------------------
  * AlertModal
  * -----------------------------------------------------------------------------------------------*/
-export const AlertModal: React.FC<React.PropsWithChildren<ModalProps & { title: string }>> = ({
-  children,
-  title,
-  ...props
-}) => {
+export const AlertModal: React.FC<
+  React.PropsWithChildren<ModalProps & { title: string; size: "small" | "medium" | "large" }>
+> = ({ children, title, ...props }) => {
   return (
     <ModalContent {...props}>
       <ModalHeader containClose={false} title={title} />
@@ -142,11 +139,9 @@ export const AlertModal: React.FC<React.PropsWithChildren<ModalProps & { title: 
 /* -------------------------------------------------------------------------------------------------
  * ConfirmModal
  * -----------------------------------------------------------------------------------------------*/
-export const ConfirmModal: React.FC<React.PropsWithChildren<ModalProps & { title: string }>> = ({
-  children,
-  title,
-  ...props
-}) => {
+export const ConfirmModal: React.FC<
+  React.PropsWithChildren<ModalProps & { title: string; size: "small" | "medium" | "large" }>
+> = ({ children, title, ...props }) => {
   return (
     <ModalContent {...props}>
       <ModalHeader containClose={false} title={title} />
@@ -165,13 +160,9 @@ export const ConfirmModal: React.FC<React.PropsWithChildren<ModalProps & { title
 /* -------------------------------------------------------------------------------------------------
  * PromptModal
  * -----------------------------------------------------------------------------------------------*/
-export const PromptModal: React.FC<React.PropsWithChildren<ModalProps & { title: string }>> = ({
-  children,
-  title,
-  placeholder,
-  onSubmit,
-  ...props
-}) => {
+export const PromptModal: React.FC<
+  React.PropsWithChildren<ModalProps & { title: string; size: "small" | "medium" | "large" }>
+> = ({ children, title, placeholder, onSubmit, size, ...props }) => {
   const [value, setValue] = useState("");
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -185,7 +176,7 @@ export const PromptModal: React.FC<React.PropsWithChildren<ModalProps & { title:
   };
 
   return (
-    <ModalContent {...props}>
+    <ModalContent {...props} size={size}>
       <ModalHeader containClose={false} title={title} />
       <ModalBody>
         {children}

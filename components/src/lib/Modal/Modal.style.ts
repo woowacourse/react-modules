@@ -1,8 +1,34 @@
 import styled from "@emotion/styled";
 
+const WIDTH_SIZE = {
+  mobile: {
+    small: "70%",
+    medium: "80%",
+    large: "90%",
+  },
+  tablet: {
+    small: 640,
+    medium: 768,
+    large: 900,
+  },
+  desktop: {
+    small: 1024,
+    medium: 1280,
+    large: 1440,
+  },
+};
+
+const getWidth = (
+  device: keyof typeof WIDTH_SIZE,
+  size: "small" | "medium" | "large"
+): number | string => {
+  return WIDTH_SIZE[device][size];
+};
+
 export const StyledModalContainer = styled.div<{
   modalPosition: "center" | "bottom";
   closeButtonPosition: "top" | "bottom";
+  size: "small" | "medium" | "large";
 }>`
   position: fixed;
   top: ${({ modalPosition }) => (modalPosition === "center" ? "50%" : "auto")};
@@ -11,16 +37,24 @@ export const StyledModalContainer = styled.div<{
   transform: ${({ modalPosition }) =>
     modalPosition === "center" ? "translate(-50%, -50%)" : "translateX(-50%)"};
   background-color: white;
-  border-radius: 8px;
+  border-radius: ${({ modalPosition }) => (modalPosition === "center" ? "8px" : "8px 8px 0 0")};
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
   z-index: 1000;
-  width: 400px;
+  width: ${getWidth("mobile", "medium")};
   max-width: 90%;
   display: flex;
   flex-direction: column;
   max-height: 90%;
   color: black;
   padding: 16px 24px;
+
+  @media (min-width: 600px) {
+    width: ${({ size }) => getWidth("tablet", size)}px;
+  }
+
+  @media (min-width: 900px) {
+    width: ${({ size }) => getWidth("desktop", size)}px;
+  }
 `;
 
 export const StyledModalDimmer = styled.div`
