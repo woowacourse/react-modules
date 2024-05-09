@@ -22,7 +22,7 @@ export const getCardType = (cardNumber: string): CardType => {
     if (Number(thirdDigits) >= 624 && Number(thirdDigits) <= 626) return 'UNIONPAY';
     if (thirdDigits === '622' && Number(sixthDigits) >= 622126 && Number(sixthDigits) <= 622925)
       return 'UNIONPAY';
-    if (thirdDigits === '628' && Number(fourthDigits) >= 6282 && Number(fourthDigits) >= 6288)
+    if (thirdDigits === '628' && Number(fourthDigits) >= 6282 && Number(fourthDigits) <= 6288)
       return 'UNIONPAY';
   }
 
@@ -30,13 +30,11 @@ export const getCardType = (cardNumber: string): CardType => {
 };
 
 export const formatCardNumber = (cardType: CardType, cardNumber: string) => {
-  const formattedCardNumber: string[] = [];
-
   let index = 0;
+  const formatPattern = CARD_TYPE[cardType].PATTERN;
 
-  CARD_TYPE[cardType].PATTERN.forEach((length) => {
-    formattedCardNumber.push(cardNumber.slice(index, (index += length)));
-  });
-
-  return formattedCardNumber.filter(Boolean).join(' ');
+  return formatPattern
+    .map((length) => cardNumber.slice(index, (index += length)))
+    .join(' ')
+    .trim();
 };
