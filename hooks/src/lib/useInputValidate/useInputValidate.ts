@@ -4,6 +4,7 @@ export interface UseInputValidateProps {
   initValue: string;
   validateOnChange: (value: string) => ValidateResult;
   validateOnBlur: () => ValidateResult;
+  formatValue?: (value: string) => string;
 }
 
 export interface ValidateResult {
@@ -15,6 +16,7 @@ const useInputValidate = ({
   initValue,
   validateOnChange,
   validateOnBlur,
+  formatValue,
 }: UseInputValidateProps) => {
   const [value, setValue] = useState(initValue);
   const [isCompleted, setIsCompleted] = useState(false);
@@ -22,7 +24,9 @@ const useInputValidate = ({
 
   const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newValue = e.target.value;
-    const { isValid, errorMessage } = validateOnChange(newValue);
+    const { isValid, errorMessage } = validateOnChange(
+      newValue.replace(/-/g, ''),
+    );
 
     setIsCompleted(false);
 
@@ -32,7 +36,8 @@ const useInputValidate = ({
       return;
     }
     setErrorMessage('');
-    setValue(newValue);
+    const formattedValue = formatValue ? formatValue(newValue) : newValue;
+    setValue(formattedValue);
   };
 
   const onFocusHandler = () => {
