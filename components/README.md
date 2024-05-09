@@ -1,52 +1,198 @@
 # paran-simple-modal
 
-- Simple modal component module made by paran and fe
+- Simple modal component module made by paran
 
-## How to install
+# How to install
 
 ```
 npm install paran-simple-modal
 ```
 
-## Properties
+# Components
 
-### (optional)title: string
+## Container Component
 
-### (optional)subtitle: string
+The Container component is used to wrap and position content within a modal.
 
-### onClose: () => void
+### Props:
 
-### (optional)confirmButton
+- **onBackdropClick** (() => void, optional): Callback function triggered when clicking on the backdrop.
 
-- content: string
-- onConfirm: () => void
+- **guidanceSize** ("small" | "medium" | "large", optional, default: "medium"): Sets the size of the container.
 
-### (optional)cancelButton
+- **position** ("center" | "bottom", optional, default: "center"): Sets the position of the container.
 
-- content: string
-- onCancel: () => void
+- **children** (ReactNode, required): The content to be displayed within the container.
 
-### modal-position
+- **...restProps**: Supports additional div attributes.
 
-value: 'center' | 'bottom'
+### Example Usage:
 
-### (optional)preventCloseOnOutsideClick
+```tsx
+import { Modal } from "paran-simple-modal";
+import { Container } from "paran-simple-modal";
 
-default: false
+function MyModal() {
+  return (
+    <Modal
+      onBackdropClick={() => console.log("Backdrop clicked")}
+      guidanceSize="medium"
+      position="center"
+    >
+      {/* Content inside the container */}
+    </Modal>
+  );
+}
+```
 
-### children: ReactNode
+# CloseButton Component
 
----
+The CloseButton component is used to display a close button typically used in modals or dialogs.
 
-## Storybook
+⚠️ Always fixed on the top right!
 
-link: [here](https://6638f8463b7cb5cd9e63da7f-aawuumjsnf.chromatic.com/?path=/docs/modal-bottom--docs)
+### Props:
 
-## Usage
+- **guidanceSize** ("small" | "medium" | "large", optional, default: "medium"): Sets the size of the close button.
+- **...restProps**: Supports additional SVG attributes.
+
+### Example Usage:
+
+```tsx
+import { Modal } from "paran-simple-modal";
+import { CloseButton } from "paran-simple-modal";
+
+function MyModal() {
+  return (
+    <Modal>
+      {/* Modal content */}
+      <Modal.CloseButton guidanceSize="medium" />
+    </Modal>
+  );
+}
+```
+
+## Modal.Title Component
+
+The Modal.Title component is used to display the title and subtitle of a modal window.
+
+### Props:
+
+- **title** (string, required): Sets the title of the modal.
+
+- **subtitle** (string, optional): Sets the subtitle of the modal.
+
+- **position** ("left" | "center", optional, default: "left"): Determines the position of the title and subtitle.
+
+- **titleProps** (ComponentProps<"h1">, optional): Sets additional properties for the title element(`<h1>`).
+
+- **subtitleProps** (ComponentProps<"h2">, optional): Sets additional properties for the subtitle element(`<h2>`).
+
+- **...restProps**: Supports additional h1, h2 attributes.
+
+### Example Usage:
+
+```tsx
+import { Modal } from "paran-simple-modal";
+import { ModalTitle } from "paran-simple-modal";
+
+function MyModal() {
+  return (
+    <Modal>
+      <Modal.ModalTitle
+        title="Modal Title"
+        subtitle="Modal Subtitle"
+        position="left"
+      />
+      {/* Additional modal contents */}
+    </Modal>
+  );
+}
+```
+
+## ConfirmButton Component
+
+The ConfirmButton component is used to display a button typically used for confirming actions within modals or dialogs.
+
+### Props:
+
+- **content** (string, optional): The text content of the button.
+- **guidanceSize** ("small" | "medium" | "large", optional, default: "large"): Sets the size of the button.
+- **...restProps**: Supports additional button attributes.
+
+### Example Usage:
+
+```tsx
+import { Modal } from "paran-simple-modal";
+import { ConfirmButton } from "paran-simple-modal";
+
+function MyModal() {
+  return (
+    <Modal>
+      {/* Modal content */}
+      <Modal.ConfirmButton content="Confirm" guidanceSize="large" />
+    </Modal>
+  );
+}
+```
+
+## CancelButton Component
+
+The CancelButton component is used to display a button typically used for canceling actions within modals or dialogs.
+
+### Props:
+
+- **content** (string, optional): The text content of the button.
+- **guidanceSize** ("small" | "medium" | "large", optional, default: "medium"): Sets the size of the button.
+- **...restProps**: Supports additional button attributes.
+
+### Example Usage:
+
+```tsx
+import { Modal } from "paran-simple-modal";
+import { CancelButton } from "paran-simple-modal";
+
+function MyModal() {
+  return (
+    <Modal>
+      {/* Modal content */}
+      <Modal.CancelButton content="Cancel" guidanceSize="medium" />
+    </Modal>
+  );
+}
+```
+
+## InputForm Component
+
+The InputForm component is used to display an input field typically used within modals or forms.
+
+### Props:
+
+- **title** (string, optional): The title or label for the input field.
+- **guidanceSize** ("small" | "medium" | "large", optional, default: "large"): Sets the size of the input field.
+- **...restProps**: Supports additional input attributes.
+
+### Example Usage:
+
+```tsx
+import { Modal } from "paran-simple-modal";
+import { InputForm } from "paran-simple-modal";
+
+function MyModal() {
+  return (
+    <Modal>
+      {/* Modal content */}
+      <Modal.InputForm title="Enter your name" guidanceSize="large" />
+    </Modal>
+  );
+}
+```
+
+# Example Code
 
 ```tsx
 import React, { useState } from "react";
-import { Modal } from "paran-simple-modal";
+import { Modal } from "./lib/index";
 
 function App() {
   const [isOpened, setIsOpened] = useState(false);
@@ -55,29 +201,34 @@ function App() {
     <>
       {isOpened ? (
         <Modal
-          onClose={() => {
-            setIsOpened(false);
-          }}
-          modalPosition="bottom"
-          title="test"
-          subtitle="123123"
-          confirmButton={{
-            content: "확인",
-            onConfirm: () => {
-              alert("확인");
-            },
-          }}
-          cancelButton={{
-            content: "취소",
-            onCancel: () => {
-              alert("취소");
-            },
-          }}
-          children={<p>hi</p>}
-          preventCloseOnOutsideClick={true}
-        />
+          guidanceSize="large"
+          position="bottom"
+          onBackdropClick={() => setIsOpened(false)}
+        >
+          <Modal.Title
+            title="Modal Title"
+            subtitle="Modal subtitle"
+            position="left"
+          />
+          <div>Children</div>
+          <Modal.InputForm guidanceSize="small" placeholder="placeholder" />
+          <Modal.CancelButton
+            onClick={() => setIsOpened(false)}
+            content="Cancel"
+            guidanceSize="medium"
+          />
+          <Modal.ConfirmButton
+            onClick={() => alert("Confirmed")}
+            content="Confirm"
+            guidanceSize="large"
+          />
+          <Modal.CloseButton
+            onClick={() => setIsOpened(false)}
+            guidanceSize="medium"
+          />
+        </Modal>
       ) : (
-        <button onClick={() => setIsOpened(true)}>모달 열기</button>
+        <button onClick={() => setIsOpened(true)}>Open Modal</button>
       )}
     </>
   );
