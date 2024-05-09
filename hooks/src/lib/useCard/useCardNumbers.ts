@@ -37,7 +37,8 @@ const useCardNumbers = (initialValue: Record<string, string>, options?: Options)
         updateCardNumbers('', key);
       }
     }
-  }, [initialValue, updateCardNumbers]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return { value, handleChange, handleBlur, errorInfo };
 };
