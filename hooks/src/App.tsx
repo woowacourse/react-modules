@@ -16,6 +16,7 @@ const cardBrands = ["신한카드", "현대카드", "카카오뱅크"];
 function App() {
   const {
     cardNumber,
+    cardGlobalBrand,
     formattedCardNumber,
     validationResult: cardNumberValidationResult,
     handleUpdateCardNumber,
@@ -62,6 +63,7 @@ function App() {
         </div>
         <div className="output-container">
           <p>cardNumber: {cardNumber}</p>
+          <p>cardGlobalBrand: {cardGlobalBrand}</p>
           <p>formattedCardNumber: {formattedCardNumber}</p>
           <p>
             cardNumberValidationResult:{" "}
