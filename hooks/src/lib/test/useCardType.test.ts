@@ -66,4 +66,18 @@ describe('카드 타입 훅 테스트', () => {
 
     expect(result.current.cardType).toBe('Empty');
   });
+
+  it('cardType이 Diners일 경우, 36123456789012의 카드 번호를 3612 345678 9012로 포맷팅', async () => {
+    const cardNumberValue = '36123456789012';
+    const expectedCardNumberValue = '3612 345678 9012';
+    const { result } = renderHook(() => useCardType());
+
+    act(() => {
+      result.current.cardTypeHandler(cardNumberValue);
+    });
+
+    expect(result.current.formatCardNumber(cardNumberValue)).toBe(
+      expectedCardNumberValue
+    );
+  });
 });
