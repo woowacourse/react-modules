@@ -37,6 +37,16 @@ export const MyComponent = () => {
 
 카드 번호를 관리합니다. 카드 번호를 받고, 카드 번호의 유효성을 검증하며, 유효한 값만으로 구성된 카드 번호로 관리됩니다.
 
+카드 번호로 브랜드를 식별합니다. 현재 지원되는 브랜드는 다음과 같습니다.
+
+- Visa
+- Master Card
+- Diners
+- AMEX
+- Union Pay
+- JCB
+- Discover
+
 ### `useCardCompany`
 
 카드 회사를 선택합니다. 입력으로 들어온 카드 회사 리스트와 맞지 않는 값 또는 선택하지 않은 경우에 대해 유효성을 검증합니다.
@@ -63,12 +73,23 @@ export const MyComponent = () => {
 
 카드 훅 라이브러리를 사용하실 때는 적절한 인자를 전달해야 합니다:
 
-### `useCardNumber`
+`?` 가 붙은 인자는 필요시 선택적으로 추가할 수 있습니다.
 
-| Name               | Type     | Default | Description                                                           |
-| ------------------ | -------- | ------- | --------------------------------------------------------------------- |
-| `unitCount`        | `number` | -       | 카드 번호 배열의 길이를 전달합니다.                                   |
-| `singleUnitLength` | `number` | -       | 카드 번호 유닛의 길이(카드 번호 배열 중 한 요소의 길이)를 전달합니다. |
+### `useCardNumber` 입력
+
+| Name             | Type     | Default | Description                  |
+| ---------------- | -------- | ------- | ---------------------------- |
+| `initialNumber`? | `string` | `''`    | 초기 카드 번호를 전달합니다. |
+
+### `useCardNumber` 반환 값
+
+| Name                     | Type                                                                    | Default | Description                                          |
+| ------------------------ | ----------------------------------------------------------------------- | ------- | ---------------------------------------------------- |
+| `cardNumber`             | `string`                                                                | -       | 현재 입력된 카드 번호입니다.                         |
+| `cardType`               | `'VISA',  'MASTER',  'DINERS',  'AMEX',  'UNION_PAY', 'JCB', 'UNKNOWN'` | -       | 카드 타입을 저장하고 유지합니다.                     |
+| `isValidCardNumber`      | `boolean`                                                               | -       | 카드 번호의 유효성 여부입니다.                       |
+| `cardNumberErrorMessage` | `string`                                                                | -       | 카드 번호 입력 시 발생하는 오류 메시지입니다.        |
+| `handleCardNumberChange` | `function`                                                              | -       | 카드 번호 입력 및 유효성 검사를 처리하는 함수입니다. |
 
 <br />
 
@@ -77,31 +98,15 @@ export const MyComponent = () => {
 
 ```js
 export const MyComponent = () => {
-  const { cardNumber, isValidCardNumbers, cardNumberErrorMessages, handleCardNumberChange } = useCardNumber(4, 4);
+  const { cardNumber, isValidCardNumbers, cardNumberErrorMessages, handleCardNumberChange } = useCardNumber('1234');
 
   return (
     <>
       <h3>useCardNumber</h3>
-      <input
-        type='text'
-        value={cardNumbers.cardNumber[0]}
-        onChange={(e) => cardNumbers.handleCardNumberChange(e.target.value, 0)}></input>
-      <input
-        type='text'
-        value={cardNumbers.cardNumber[1]}
-        onChange={(e) => cardNumbers.handleCardNumberChange(e.target.value, 1)}></input>
-      <input
-        type='text'
-        value={cardNumbers.cardNumber[2]}
-        onChange={(e) => cardNumbers.handleCardNumberChange(e.target.value, 2)}></input>
-      <input
-        type='text'
-        value={cardNumbers.cardNumber[3]}
-        onChange={(e) => cardNumbers.handleCardNumberChange(e.target.value, 3)}></input>
+      <input type='text' value={cardNumber} onChange={(e) => handleCardNumberChange(e.target.value)}></input>
       <div>
-        <p>{`${cardNumbers.isValidCardNumbers}`}</p>
-        // 에러 메세지를 하나씩 띄우도록 해야합니다.
-        <p>{cardNumbers.cardNumberErrorMessages}</p>
+        <p>{`${isValidCardNumber}`}</p>
+        <p>{cardNumberErrorMessage}</p>
       </div>
     </>
   );
@@ -110,11 +115,21 @@ export const MyComponent = () => {
 
 </details>
 
-### `useCardCompany`
+### `useCardCompany` 입력
 
 | Name                   | Type       | Default | Description                         |
 | ---------------------- | ---------- | ------- | ----------------------------------- |
 | `validCardCompanyList` | `string[]` | -       | 유효한 카드 회사 목록을 전달합니다. |
+| `initialSelected`?     | `string`   | `''`    | 카드 회사 초기값을 전달합니다.      |
+
+### `useCardCompany` 반환 값
+
+| Name                      | Type       | Description                                         |
+| ------------------------- | ---------- | --------------------------------------------------- |
+| `cardCompany`             | `string`   | 현재 선택된 카드 회사입니다.                        |
+| `isValidCardCompany`      | `boolean`  | 선택된 카드 회사가 유효한 목록에 있는지 여부입니다. |
+| `cardCompanyErrorMessage` | `string`   | 카드 회사 선택시 발생하는 오류 메시지입니다.        |
+| `handleCardCompanyChange` | `function` | 카드 회사 변경을 처리하고 오류 메시지를 설정합니다. |
 
 <br />
 
@@ -151,11 +166,131 @@ export const MyComponent = () => {
 
 </details>
 
-### `useCardCVC`
+### `useCardExpirationDate` 입력
 
-| Name          | Type     | Default | Description                   |
-| ------------- | -------- | ------- | ----------------------------- |
-| `validLength` | `number` | `3`     | 유효한 CVC 길이를 전달합니다. |
+| Name     | Type     | Default | Description                            |
+| -------- | -------- | ------- | -------------------------------------- |
+| `month`? | `string` | `''`    | 카드 만료 월의 초기 값을 설정합니다.   |
+| `year`?  | `string` | `''`    | 카드 만료 연도의 초기 값을 설정합니다. |
+
+### `useCardExpirationDate` 반환 값
+
+| Name                 | Type       | Description                                        |
+| -------------------- | ---------- | -------------------------------------------------- |
+| `month`              | `string`   | 현재 입력된 카드 만료 월입니다.                    |
+| `year`               | `string`   | 현재 입력된 카드 만료 연도입니다.                  |
+| `handleMonthChange`  | `function` | 카드 만료 월을 변경하는 함수입니다.                |
+| `handleYearChange`   | `function` | 카드 만료 연도를 변경하는 함수입니다.              |
+| `monthErrorMessages` | `string`   | 카드 만료 월 입력 시 발생하는 오류 메시지입니다.   |
+| `yearErrorMessages`  | `string`   | 카드 만료 연도 입력 시 발생하는 오류 메시지입니다. |
+| `isValidMonth`       | `boolean`  | 입력된 카드 만료 월의 유효성 여부입니다.           |
+| `isValidYear`        | `boolean`  | 입력된 카드 만료 연도의 유효성 여부입니다.         |
+
+<br />
+
+<details>
+<summary>사용 예시</summary>
+
+```js
+import { useCardExpirationDate } from '@pakxe/react-card-info-hooks';
+
+export const MyComponent = () => {
+  const {
+    month,
+    year,
+    handleMonthChange,
+    handleYearChange,
+    monthErrorMessages,
+    yearErrorMessages,
+    isValidMonth,
+    isValidYear,
+  } = useCardExpirationDate();
+
+  return (
+    <>
+      <h3>Card Expiration Date</h3>
+      <div>
+        <label htmlFor='month'>Month:</label>
+        <input
+          type='text'
+          id='month'
+          value={month}
+          onChange={(e) => handleMonthChange(e.target.value)}
+          placeholder='MM'
+        />
+        <p>{isValidMonth ? 'Valid Month' : 'Invalid Month'}</p>
+        <p>{monthErrorMessages}</p>
+      </div>
+      <div>
+        <label htmlFor='year'>Year:</label>
+        <input type='text' id='year' value={year} onChange={(e) => handleYearChange(e.target.value)} placeholder='YY' />
+        <p>{isValidYear ? 'Valid Year' : 'Invalid Year'}</p>
+        <p>{yearErrorMessages}</p>
+      </div>
+    </>
+  );
+};
+```
+
+</details>
+
+### `useCardOwnerName` 입력
+
+| Name           | Type     | Default | Description                           |
+| -------------- | -------- | ------- | ------------------------------------- |
+| `maxLength`    | `number` | `21`    | 소유자 이름의 최대 길이를 설정합니다. |
+| `initialName`? | `string` | `''`    | 카드 소유자의 초기 이름을 설정합니다. |
+
+### `useCardOwnerName` 반환 값
+
+| Name                    | Type       | Description                                                    |
+| ----------------------- | ---------- | -------------------------------------------------------------- |
+| `ownerName`             | `string`   | 현재 입력된 카드 소유자 이름입니다.                            |
+| `isValidOwnerName`      | `boolean`  | 입력된 카드 소유자 이름의 유효성 여부입니다.                   |
+| `ownerNameErrorMessage` | `string`   | 카드 소유자 이름 입력 시 발생하는 오류 메시지입니다.           |
+| `handleOwnerNameChange` | `function` | 카드 소유자 이름 변경을 처리하고 유효성을 검사하는 함수입니다. |
+
+<br />
+
+<details>
+<summary>사용 예시</summary>
+
+```js
+import { useCardOwnerName } from '@pakxe/react-card-info-hooks';
+
+export const MyComponent = () => {
+  const { ownerName, isValidOwnerName, ownerNameErrorMessage, handleOwnerNameChange } = useCardOwnerName();
+
+  return (
+    <>
+      <h3>useCardOwnerName</h3>
+      <input type='text' value={ownerName} onChange={(e) => handleOwnerNameChange(e.target.value)} />
+      <div>
+        <p>{isValidOwnerName ? 'true' : 'false'}</p>
+        <p>{ownerNameErrorMessage}</p>
+      </div>
+    </>
+  );
+};
+```
+
+</details>
+
+### `useCardCVC` 입력
+
+| Name                | Type     | Default | Description                        |
+| ------------------- | -------- | ------- | ---------------------------------- |
+| `validLength`       | `number` | `3`     | CVC 번호의 유효 길이를 설정합니다. |
+| `initialCVCNumber`? | `string` | `''`    | 초기 CVC 번호를 설정합니다.        |
+
+### `useCardCVC` 반환 값
+
+| Name                    | Type       | Description                                            |
+| ----------------------- | ---------- | ------------------------------------------------------ |
+| `cvcNumber`             | `string`   | 현재 입력된 CVC 번호입니다.                            |
+| `isValidCVCNumber`      | `boolean`  | 입력된 CVC 번호의 유효성 여부입니다.                   |
+| `cvcNumberErrorMessage` | `string`   | CVC 번호 입력 시 발생하는 오류 메시지입니다.           |
+| `handleCVCNumberChange` | `function` | CVC 번호 변경을 처리하고 유효성을 검사하는 함수입니다. |
 
 <br />
 
@@ -184,11 +319,20 @@ export const MyComponent = () => {
 
 </details>
 
-### `useCardPassword`
+### `useCardPassword` 입력
 
 | Name          | Type     | Default | Description                             |
 | ------------- | -------- | ------- | --------------------------------------- |
 | `validLength` | `number` | `2`     | 유효한 카드 비밀번호 길이를 전달합니다. |
+
+### `useCardPassword` 반환 값
+
+| Name                   | Type       | Description                                                 |
+| ---------------------- | ---------- | ----------------------------------------------------------- |
+| `password`             | `string`   | 현재 입력된 카드 패스워드입니다.                            |
+| `isValidPassword`      | `boolean`  | 입력된 카드 패스워드의 유효성 여부입니다.                   |
+| `passwordErrorMessage` | `string`   | 카드 패스워드 입력 시 발생하는 오류 메시지입니다.           |
+| `handlePasswordChange` | `function` | 카드 패스워드 변경을 처리하고 유효성을 검사하는 함수입니다. |
 
 <br />
 
