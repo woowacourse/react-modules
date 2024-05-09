@@ -4,7 +4,7 @@ import Modal, {
   ModalSize,
 } from '../Modal';
 
-import { Input } from '../../Input/Input.styled';
+import Input from '../../Input/Input';
 import { LabelPosition } from '../../Input/Input';
 import { ModalTextBody } from '../Modal.styled';
 
