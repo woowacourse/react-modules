@@ -28,6 +28,24 @@ const BUTTON_STYLE_TABLE = (primaryColor: string) => {
   };
 };
 
+const BUTTON_DISABLED_STYLE_TABLE = {
+  primary: {
+    backgroundColor: '#DDDDDD',
+    color: '#FFFFFF',
+    border: 'none',
+  },
+  border: {
+    backgroundColor: '#ffffff',
+    color: '#dddddd',
+    border: `1px solid #dddddd`,
+  },
+  text: {
+    backgroundColor: '#eeeeee',
+    color: '#bbbbbb',
+    border: 'none',
+  },
+};
+
 export const Button = styled.button<{
   size: ButtonSize;
   width: ButtonWidth;
@@ -62,16 +80,27 @@ export const Button = styled.button<{
       }
     }};
   }
+
+  &:disabled {
+    background-color: ${(props) =>
+      BUTTON_DISABLED_STYLE_TABLE[props.buttonStyle].backgroundColor};
+    border: ${(props) => BUTTON_DISABLED_STYLE_TABLE[props.buttonStyle].border};
+  }
 `;
 
 export const ButtonText = styled.p<{
   size: ButtonSize;
   buttonStyle: ButtonStyle;
   primaryColor: string;
+  disabled: boolean;
 }>`
   font-size: ${(props) => BUTTON_SIZE_TABLE[props.size].fontSize};
-  color: ${(props) =>
-    BUTTON_STYLE_TABLE(props.primaryColor)[props.buttonStyle].color};
+  color: ${(props) => {
+    if (props.disabled) {
+      return BUTTON_DISABLED_STYLE_TABLE[props.buttonStyle].color;
+    }
+    return BUTTON_STYLE_TABLE(props.primaryColor)[props.buttonStyle].color;
+  }};
   font-weight: 700;
   margin-block: 0;
 `;
