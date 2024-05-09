@@ -28,9 +28,15 @@ const meta = {
               <Modal.Title>모달 테스트</Modal.Title>
             </Modal.Header>
             <Modal.Body>모달 내용</Modal.Body>
-            <Modal.Footer>
-              <Modal.Button text="확인"></Modal.Button>
-              <Modal.Button text="닫기" color="default" onClick={() => setIsOpen(false)}></Modal.Button>
+            <Modal.Footer direction="column">
+              <Modal.Button text="확인" fullWidth></Modal.Button>
+              <Modal.Button
+                text="닫기"
+                fullWidth
+                color="none"
+                variants="normal"
+                onClick={() => setIsOpen(false)}
+              ></Modal.Button>
             </Modal.Footer>
           </Modal>
         </div>
