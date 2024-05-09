@@ -4,7 +4,7 @@ import {
   ValidationError,
 } from "../../types/ValidationResult";
 
-import { Validation } from "@cys4585/card-validation";
+import Validation from "../../utils/Validation";
 
 const validateBeforeUpdate = (value: string, maxCardNumberLength: number) => {
   if (!Validation.isNumeric(value)) {
