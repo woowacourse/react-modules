@@ -1,7 +1,5 @@
 import { useState } from 'react';
-import { Validation } from './cardDateValidate';
-
-type passwordName = 'password';
+import { validatePassword } from './cardDateValidate';
 
 const usePasswordValidation = () => {
   const [passwordValidation, setPasswordValidation] = useState({
@@ -13,19 +11,19 @@ const usePasswordValidation = () => {
     },
   });
 
-  const passwordValidateHandler = (value: string, name: passwordName) => {
+  const passwordValidateHandler = (value: string) => {
     try {
-      Validation['password'](value);
+      validatePassword(value);
       setPasswordValidation((prev) => ({
         ...prev,
-        errorMessage: { ...prev.errorMessage, [name]: '' },
-        isError: { ...prev.isError, [name]: false },
+        errorMessage: { ...prev.errorMessage, password: '' },
+        isError: { ...prev.isError, password: false },
       }));
     } catch (error) {
       if (error instanceof Error) {
         setPasswordValidation((prev) => ({
-          errorMessage: { ...prev.errorMessage, [name]: error.message },
-          isError: { ...prev.isError, [name]: true },
+          errorMessage: { ...prev.errorMessage, password: error.message },
+          isError: { ...prev.isError, password: true },
         }));
       }
     }

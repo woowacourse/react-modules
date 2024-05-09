@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Validation } from './cardDateValidate';
+import { validateExpiryDate } from './cardDateValidate';
 
 type CardExpiryName = 'month' | 'year';
 
@@ -17,7 +17,7 @@ const useExpiryDateValidation = () => {
 
   const expiryDateValidateHandler = (value: string, name: CardExpiryName) => {
     try {
-      Validation[name](value);
+      validateExpiryDate(value, name);
       setExpiryDateValidation((prev) => ({
         ...prev,
         errorMessage: { ...prev.errorMessage, [name]: '' },

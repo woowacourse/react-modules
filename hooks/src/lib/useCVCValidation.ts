@@ -1,7 +1,5 @@
 import { useState } from 'react';
-import { Validation } from './cardDateValidate';
-
-type CardCVCName = 'CVC';
+import { validateCVC } from './cardDateValidate';
 
 const useCVCValidation = () => {
   const [CVCValidation, setCVCValidation] = useState({
@@ -13,19 +11,19 @@ const useCVCValidation = () => {
     },
   });
 
-  const CVCValidateHandler = (value: string, name: CardCVCName) => {
+  const CVCValidateHandler = (value: string) => {
     try {
-      Validation['CVC'](value);
+      validateCVC(value);
       setCVCValidation((prev) => ({
         ...prev,
-        errorMessage: { ...prev.errorMessage, [name]: '' },
-        isError: { ...prev.isError, [name]: false },
+        errorMessage: { ...prev.errorMessage, CVC: '' },
+        isError: { ...prev.isError, CVC: false },
       }));
     } catch (error) {
       if (error instanceof Error) {
         setCVCValidation((prev) => ({
-          errorMessage: { ...prev.errorMessage, [name]: error.message },
-          isError: { ...prev.isError, [name]: true },
+          errorMessage: { ...prev.errorMessage, CVC: error.message },
+          isError: { ...prev.isError, CVC: true },
         }));
       }
     }
