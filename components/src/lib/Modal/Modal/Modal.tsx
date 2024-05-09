@@ -22,7 +22,7 @@ export const ModalMain = ({
   isOpen,
   position,
   onClose,
-  size = "small",
+  size = "medium",
 }: ModalMainProps) => {
   return (
     <S.ModalWrapper open={isOpen}>

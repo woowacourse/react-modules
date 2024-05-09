@@ -1,15 +1,15 @@
-import AlertModal from "@/lib/Modal/AlertModal/AlertModal";
+import ConfirmModal from "@/lib/Modal/ConfirmModal/ConfirmModal";
 import Modal from "@/lib/Modal/Modal/Modal";
 import { StoryObj } from "@storybook/react";
 
 export default {
-  title: "StyledModal/AlertModal",
+  title: "StyledModal/ConfirmModal",
   component: Modal,
 };
 
-const BasicAlertModal = () => {
+const BasicConfirmModal = () => {
   return (
-    <AlertModal
+    <ConfirmModal
       isOpen={true}
       onClose={() => {}}
       onConfirm={() => {}}
@@ -22,5 +22,5 @@ const BasicAlertModal = () => {
 type Story = StoryObj<typeof Modal>;
 
 export const Small: Story = {
-  render: () => <BasicAlertModal />,
+  render: () => <BasicConfirmModal />,
 };

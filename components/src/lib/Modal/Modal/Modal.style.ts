@@ -108,4 +108,5 @@ export const Content = styled.div`
 export const Footer = styled.div`
   display: flex;
   justify-content: end;
+  gap: 10px;
 `;
