@@ -1,0 +1,23 @@
+.container {
+  position: fixed;
+  inset: 0;
+}
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.bottom {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+}
+
+.center > :global(.content) {
+  border-radius: 8px;
+}
+
+.bottom > :global(.content) {
+  border-radius: 8px 8px 0 0;
+}

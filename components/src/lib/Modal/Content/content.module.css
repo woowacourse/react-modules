@@ -1,0 +1,24 @@
+:global(.content) {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  position: absolute;
+  padding: 24px 32px;
+  height: 216px;
+  background-color: #fff;
+}
+
+.small {
+  width: 320px;
+  min-height: 206px;
+}
+
+.medium {
+  width: 480px;
+  min-height: 206px;
+}
+
+.large {
+  width: 600px;
+  min-height: 206px;
+}
