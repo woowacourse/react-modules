@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 
 import { AMEX, DINERS, MASTER, MIN_CARD_NUMBERS_LENGTH, UNION, VISA } from '../constants';
 import { Brand, BrandInfo } from '../types/card';
+import { validateNumber } from '../utils';
 
 export default function useCardBrand({ cardNumbers }: { cardNumbers: string }) {
   const [brand, setBrand] = useState<Brand>(null);
@@ -57,7 +58,7 @@ export default function useCardBrand({ cardNumbers }: { cardNumbers: string }) {
   const detectCardBrand = () => Array.from(brandDetecterMap.entries()).find(([_, value]) => !!value())?.[0];
 
   const validateCardBrand = () => {
-    // TODO: 카드 번호 최소 길이에 대한 유효성 검사 => CardNumbers에서 해도...?
+    if (!validateNumber(cardNumbers)) return setBrand(null);
     if (!validateMinLength()) return setBrand(null);
     // 카드 번호에 맞는 카드 번호 판단
     const cardBrand = detectCardBrand();

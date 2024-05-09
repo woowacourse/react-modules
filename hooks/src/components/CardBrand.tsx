@@ -1,13 +1,14 @@
 import { ChangeEvent, useState } from 'react';
 
 import useCardBrand from '../lib/hooks/useCardBrand';
+import useCardNumbers from '../lib/hooks/useCardNumbers';
 
 export default function CardBrand() {
-  const [cardNumbers, setCardNumbers] = useState('');
-  const { brand } = useCardBrand({ cardNumbers });
-
+  const [value, setValue] = useState('');
+  const { brand } = useCardBrand({ cardNumbers: value });
+  const { cardNumbers } = useCardNumbers({ numbers: value });
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setCardNumbers(e.target.value);
+    setValue(e.target.value);
   };
 
   return (
@@ -15,6 +16,7 @@ export default function CardBrand() {
       <h3>card brand</h3>
       <input type="text" data-testid="card-cvc-input" onChange={handleChange} />
       <div>brand:{brand}</div>
+      <div>numbers: {cardNumbers?.join('-')}</div>
     </div>
   );
 }

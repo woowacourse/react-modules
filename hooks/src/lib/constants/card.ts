@@ -1,4 +1,4 @@
-import { BrandInfo } from '../types/card';
+import { Brand, BrandInfo } from '../types/card';
 import createNumbers from '../utils/numberArrayUtils';
 
 export const CARD_NUMBERS_PART_LENGTH = 4;
@@ -68,4 +68,12 @@ export const UNION: BrandInfo<{ sixNumbers: number[]; fourNumbers: number[]; thr
     threeNumbers: createNumbers(UNION_NUMBERS.threeNumbers.start, UNION_NUMBERS.threeNumbers.end),
   },
   length: 16,
+};
+
+export const BRAND_LENGTH: { [key in Exclude<Brand, null>]: number } = {
+  visa: VISA.length,
+  master: MASTER.length,
+  diners: DINERS.length,
+  amex: AMEX.length,
+  union: UNION.length,
 };
