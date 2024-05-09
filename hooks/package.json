@@ -41,5 +41,18 @@
     "typescript": "^5.2.2",
     "vite": "^5.2.0",
     "vite-plugin-dts": "^3.9.0"
+  },
+  "keywords": [
+    "React",
+    "React-payments",
+    "custom-hook",
+    "hooks",
+    "payments-hook"
+  ],
+  "license": "MIT",
+  "author": {
+    "name": "JAEWI MYONG",
+    "email": "mjw8941@gmail.com",
+    "url": "https://github.com/JayMyong66"
   }
 }
