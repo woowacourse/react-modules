@@ -1,9 +1,8 @@
-import { CardBrand, Validator, ValueOf } from '../type';
+import { Validator, ValueOf } from '../type';
 import { useMemo, useState } from 'react';
 
-import CARD_BRAND from '../constants/cardBrand';
 import REGEXPS from '../constants/regExps';
-import checkIsInRangeString from '../utils/checkIsInRangeString';
+import getCardBrand from './getCardBrand';
 import getErrorMessage from '../utils/getErrorMessage';
 import getFormattedCardNumber from './getFormattedCardNumber';
 import getOnChange from '../utils/getOnChange';
@@ -34,24 +33,6 @@ export default function useCardNumber() {
     formattedCardNumber,
   };
 }
-
-const isItCardBrand = (cardNumber: string, cardBrand: CardBrand) => {
-  return cardBrand.startWiths.some(head => {
-    if (typeof head === 'string') {
-      return cardNumber.startsWith(head);
-    }
-    const sliceNumber = Math.max(head.from.length, head.to.length);
-    return checkIsInRangeString(
-      cardNumber.slice(0, sliceNumber),
-      head.from,
-      head.to
-    );
-  });
-};
-
-const getCardBrand = (cardNumber: string) => {
-  return CARD_BRAND.find(cardBrand => isItCardBrand(cardNumber, cardBrand));
-};
 
 const CARD_NUMBER_LENGTH = 16;
 export const CARD_NUMBER_ERROR_MESSAGE = {
