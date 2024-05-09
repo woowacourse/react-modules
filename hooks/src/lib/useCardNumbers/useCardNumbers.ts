@@ -1,73 +1,67 @@
-import type {
-  CardNumbersType,
-  CardNumbersValidStatesType,
-} from "../types/CardNumberTypes";
+import ValidationResult, {
+  ERROR_MESSAGE,
+  ERROR_TYPE,
+  ValidationError,
+} from "../types/ValidationResult";
 
 import Validation from "../utils/Validation";
-import ValidationResult from "../types/ValidationResult";
 import { useState } from "react";
 
-interface CardNumbersValidationResult {
-  cardNumbers: CardNumbersType;
-  validStates: CardNumbersValidStatesType;
-  validationResult: ValidationResult;
-  handleUpdateCardNumbers: (inputIndex: number, value: string) => void;
+interface CardNumberValidationResult {
+  cardNumber: string;
+  formattedCardNumber: string[];
+  validationResult?: ValidationResult;
+  handleUpdateCardNumber: (value: string) => void;
 }
 
-export default function useCardNumbers(
-  initialValues: CardNumbersType = ["", "", "", ""]
-): CardNumbersValidationResult {
-  const [cardNumbers, setCardNumbers] =
-    useState<CardNumbersType>(initialValues);
-  const [validStates, setValidStates] = useState<CardNumbersValidStatesType>([
-    true,
-    true,
-    true,
-    true,
-  ]);
-  const [validationResult, setValidationResult] = useState<ValidationResult>({
-    isValid: true,
-  });
+export default function useCardNumber(
+  initialValues: string = ""
+): CardNumberValidationResult {
+  const [cardNumber, setCardNumber] = useState(initialValues);
 
-  const updateCardNumbers = (inputIndex: number, value: string) => {
-    setCardNumbers((prev) => {
-      const newCardNumbers = [...prev];
-      newCardNumbers[inputIndex] = value;
-      return newCardNumbers as CardNumbersType;
-    });
-  };
+  const [validationResult, setValidationResult] = useState<ValidationResult>();
 
-  const handleUpdateCardNumbers = (inputIndex: number, value: string) => {
-    updateCardNumbers(inputIndex, value);
+  const handleUpdateCardNumber = (value: string) => {
+    try {
+      validateBeforeUpdate(value);
 
-    const isNewInputValid = validateCardNumber(value);
+      setCardNumber(value);
+      setValidationResult({ isValid: true });
 
-    const newValidStates = validStates.map((prevState, index) =>
-      index === inputIndex ? isNewInputValid : prevState
-    ) as CardNumbersValidStatesType;
-    setValidStates(newValidStates);
-
-    const isAllInputValid = newValidStates.every((isValid) => isValid === true);
-
-    const validationResult: ValidationResult = isAllInputValid
-      ? { isValid: true }
-      : {
+      validateAfterUpdate(value);
+    } catch (error) {
+      if (error instanceof ValidationError) {
+        setValidationResult({
           isValid: false,
-          errorMessage:
-            "카드 번호는 4자리의 숫자여야 합니다. 확인 후 다시 입력해주세요.",
-        };
-
-    setValidationResult(validationResult);
+          errorType: error.errorType,
+          errorMessage: error.errorMessage,
+        });
+      }
+    }
   };
 
   return {
-    cardNumbers,
-    validStates,
+    cardNumber,
+    formattedCardNumber: [""], // TODO 카드 포맷팅
     validationResult,
-    handleUpdateCardNumbers,
+    handleUpdateCardNumber,
   };
 }
 
-function validateCardNumber(value: string) {
-  return Validation.isNumeric(value) && Validation.hasLength(value, 4);
-}
+const validateBeforeUpdate = (value: string) => {
+  if (!Validation.isNumeric(value)) {
+    throw new ValidationError(
+      ERROR_TYPE.numericOnly,
+      ERROR_MESSAGE.numericOnly
+    );
+  }
+};
+
+const validateAfterUpdate = (value: string) => {
+  if (!Validation.hasLength(value, 16)) {
+    throw new ValidationError(
+      ERROR_TYPE.invalidLength,
+      ERROR_MESSAGE.invalidLength
+    );
+  }
+};
