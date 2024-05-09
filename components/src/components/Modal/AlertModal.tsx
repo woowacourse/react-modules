@@ -8,7 +8,7 @@ interface Props {
 
 const AlertModal = ({ title, width, children }: PropsWithChildren<Props>) => {
   return (
-    <Modal title={title} width={width} hasConfirmButton buttonAlign="row">
+    <Modal title={title} width={width} hasConfirmButton buttonAlign="row" confirmMessage="확인">
       {children}
     </Modal>
   );

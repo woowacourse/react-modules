@@ -3,15 +3,11 @@ import COLOR_PALETTE from "../../colorPalette";
 
 export const closeButton = (theme: ThemeType) =>
   css({
-    all: "unset",
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
+    padding: "10px",
+    borderRadius: "100%",
     backgroundColor: COLOR_PALETTE[theme].background,
     color: COLOR_PALETTE[theme].colorHighlight,
-    transition: "0.2s all ease",
-    "&:hover": {
-      cursor: "pointer",
-      backgroundColor: COLOR_PALETTE[theme].backgroundHighlight,
-    },
   });

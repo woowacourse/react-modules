@@ -16,9 +16,6 @@ export const MainButtonPropsStyle = (isHighlight: boolean, theme: ThemeType, but
     borderRadius: "5px",
     padding: "5px",
     height: "44px",
-    "&:hover": {
-      cursor: "pointer",
-    },
   });
 
 export const ButtonTextStyle = css({
