@@ -16,7 +16,7 @@ const PromptModal: React.FC<
       </Modal.ModalContent>
       <Modal.ModalFooter>
         <ModalFooterContainer>
-          <Modal.ModalButton onClick={rest.onToggle} color="secondary" style={{ ...MODAL_CUSTOM_STYLES.cancelButton }}>
+          <Modal.ModalButton onClick={rest.onConfirm} color="secondary" style={{ ...MODAL_CUSTOM_STYLES.cancelButton }}>
             {cancelButtonText}
           </Modal.ModalButton>
           <Modal.ModalButton onClick={rest.onToggle} color="primary" style={{ ...MODAL_CUSTOM_STYLES.confirmButton }}>
