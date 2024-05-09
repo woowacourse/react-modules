@@ -4,7 +4,7 @@ import { ERROR_MESSAGE } from "../constants";
 import useInput from "../common/useInput";
 
 const useCardHolder = (initialValue: string) => {
-  const { inputValue, handleInputChange, updateByNameAndValue } = useInput(initialValue);
+  const { inputValue, handleInputChange } = useInput(initialValue);
   const [validationResult, setValidationResult] = useState<ValidationResult>({
     isValid: true,
     errorMessage: "",
@@ -38,7 +38,6 @@ const useCardHolder = (initialValue: string) => {
         errorMessage: ERROR_MESSAGE.nameOutOfRange,
       });
 
-    updateByNameAndValue(value);
     setValidationResult({
       isValid: true,
       errorMessage: "",

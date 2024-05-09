@@ -4,7 +4,7 @@ import Validator from "../utils/validator";
 import { ERROR_MESSAGE, OPTION } from "../constants";
 
 const usePassword = (initialValue: string) => {
-  const { inputValue, handleInputChange, updateByNameAndValue } = useInput(initialValue);
+  const { inputValue, handleInputChange } = useInput(initialValue);
   const [validationResult, setValidationResult] = useState<ValidationResult>({
     isValid: true,
     errorMessage: "",
@@ -45,7 +45,6 @@ const usePassword = (initialValue: string) => {
         errorMessage: ERROR_MESSAGE.passwordOutOfRange,
       });
 
-    updateByNameAndValue(value);
     setValidationResult({
       isValid: true,
       errorMessage: "",

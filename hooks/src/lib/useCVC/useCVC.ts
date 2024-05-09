@@ -4,7 +4,7 @@ import Validator from "../utils/validator";
 import { ERROR_MESSAGE, OPTION } from "../constants";
 
 const useCVC = (initialValue: string) => {
-  const { inputValue, handleInputChange, updateByNameAndValue } = useInput(initialValue);
+  const { inputValue, handleInputChange } = useInput(initialValue);
   const [validationResult, setValidationResult] = useState<ValidationResult>({
     isValid: true,
     errorMessage: "",
@@ -45,7 +45,6 @@ const useCVC = (initialValue: string) => {
         errorMessage: ERROR_MESSAGE.cvcOutOfRange,
       });
 
-    updateByNameAndValue(value);
     setValidationResult({
       isValid: true,
       errorMessage: "",

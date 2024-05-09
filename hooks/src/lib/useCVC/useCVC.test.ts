@@ -87,7 +87,6 @@ describe("신용카드 CVC 입력 테스트", () => {
       } as React.FocusEvent<HTMLInputElement>);
     });
 
-    expect(result.current.inputValue).toEqual(userInput);
     expect(result.current.validationResult).toEqual(expectedValidationResult);
   });
 
