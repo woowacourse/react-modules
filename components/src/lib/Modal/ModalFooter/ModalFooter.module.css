@@ -18,3 +18,11 @@
   right: 32px;
   bottom: 24px;
 }
+
+.promptModalFooter.footerContainer {
+  display: flex;
+  gap: 10px;
+  position: absolute;
+  right: 32px;
+  bottom: 24px;
+}
