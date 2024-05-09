@@ -27,7 +27,7 @@ const ModalMain = ({
   modalPosition,
   preventCloseOnOutsideClick,
 }: ModalProps) => {
-  const modalWidth = () => {
+  const modalWidth = (): CSSProperties['width'] => {
     if (modalSize) {
       switch (modalSize.width) {
         case 'small':
