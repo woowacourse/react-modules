@@ -28,19 +28,6 @@
   align-items: flex-end;
 }
 
-/* modal-size */
-.small {
-  width: 30%;
-}
-
-.medium {
-  width: 60%;
-}
-
-.large {
-  width: 90%;
-}
-
 .modalSection {
   display: flex;
   flex-direction: column;
@@ -57,11 +44,24 @@
 }
 
 .center > .modalSection {
-  /* width: 80vw; */
+  width: 80vw;
   border-radius: 8px;
 }
 
 .bottom > .modalSection {
   width: 100%;
   border-radius: 8px 8px 0 0;
+}
+
+/* modal-size */
+.center > .modalSection.small {
+  width: 30%;
+}
+
+.center > .modalSection.medium {
+  width: 60%;
+}
+
+.center > .modalSection.large {
+  width: 90%;
 }

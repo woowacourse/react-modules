@@ -1,6 +1,6 @@
-import { CloseButtonProps, TitleProps } from "./Modal";
+import { CloseButtonProps, TitleProps } from "../Modal";
 import styles from "./ModalHeader.module.css";
-import closeButtonImage from "./assets/closeButton.svg";
+import closeButtonImage from "../../assets/closeButton.svg";
 
 interface ModalHeaderProps {
   title?: TitleProps;

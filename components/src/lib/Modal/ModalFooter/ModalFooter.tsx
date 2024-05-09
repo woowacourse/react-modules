@@ -1,13 +1,14 @@
 import styles from "./ModalFooter.module.css";
-import Button, { ButtonProps } from "./Button/Button";
+import Button, { ButtonProps } from "../../Button/Button";
 
 interface ModalFooterProps {
+  className: string;
   buttons: ButtonProps[];
 }
 
-const ModalFooter = ({ buttons }: ModalFooterProps) => {
+const ModalFooter = ({ className, buttons }: ModalFooterProps) => {
   return (
-    <div className={styles.footerContainer}>
+    <div className={`${styles.footerContainer} ${styles[className]}`}>
       {buttons.map((button, index) => {
         return (
           <Button

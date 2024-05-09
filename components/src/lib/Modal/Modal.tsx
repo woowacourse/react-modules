@@ -1,12 +1,12 @@
 import styles from "./Modal.module.css";
 import { PropsWithChildren } from "react";
-import ModalHeader from "./ModalHeader";
-import ModalContent from "./ModalContent";
-import ModalFooter from "./ModalFooter";
-import { ButtonProps } from "./Button/Button";
+import ModalHeader from "./ModalHeader/ModalHeader";
+import ModalContent from "./ModalContent/ModalContent";
+import ModalFooter from "./ModalFooter/ModalFooter";
+import { ButtonProps } from "../Button/Button";
 
-type PositionProps = "top" | "center" | "bottom";
-type SizeProps = "small" | "medium" | "large";
+export type PositionProps = "top" | "center" | "bottom";
+export type SizeProps = "small" | "medium" | "large";
 
 export interface TitleProps {
   position: "left" | "center";
@@ -19,7 +19,7 @@ export interface CloseButtonProps {
 
 interface ModalProps {
   position: PositionProps;
-  size: SizeProps;
+  size?: SizeProps;
   title?: TitleProps;
   isOpen: boolean;
   onClose: () => void;
@@ -40,12 +40,12 @@ const Modal = ({
   return (
     <>
       {isOpen && (
-        <div className={`${styles.container} ${styles[position]}`}>
+        <div className={`${styles.modal} ${styles.container} ${styles[position]}`}>
           <div className={styles.backDrop} onClick={onClose}></div>
-          <div className={`${styles.modalSection} ${styles[size]}`}>
+          <div className={`${styles.modalSection} ${styles[size!]}`}>
             <ModalHeader title={title} closeButton={closeButton} />
             <ModalContent children={children} />
-            {footerButtons && <ModalFooter buttons={footerButtons} />}
+            {footerButtons && <ModalFooter className={"modalFooter"} buttons={footerButtons} />}
           </div>
         </div>
       )}
