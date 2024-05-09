@@ -49,4 +49,9 @@ export const buttonsStyle = css({
   gap: "12px",
 });
 
-export const inputStyle = css({});
+export const inputStyle = css({
+  height: "30px",
+  border: "1px solid #dfe1e5",
+  borderRadius: "24px",
+  padding: "10px",
+});

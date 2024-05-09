@@ -1,6 +1,11 @@
 /** @jsxImportSource @emotion/react */
 import { useEffect } from "react";
-import { buttonsStyle, modalContentStyle, modalStyle } from "./Modal.style";
+import {
+  buttonsStyle,
+  modalContentStyle,
+  modalStyle,
+  inputStyle,
+} from "./Modal.style";
 import useModalHook from "../useModalHook";
 
 import ModalHeader from "../ModalHeader/ModalHeader";
@@ -78,7 +83,12 @@ const Modal: React.FC<ModalProps> = ({
           )}
           {type === "prompt" && (
             <>
-              <input type="text" value={inputValue} onChange={onChange} />
+              <input
+                type="text"
+                value={inputValue}
+                onChange={onChange}
+                css={inputStyle}
+              />
               <Button type="confirm" handleClick={onConfirm}>
                 확인
               </Button>
