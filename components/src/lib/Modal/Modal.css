@@ -27,6 +27,7 @@
   overflow: auto;
 }
 
+/* position props에 따라 위치 변경 */
 .soha-modal-inner.center {
   width: 80vw;
   top: 50%;
@@ -66,6 +67,7 @@
   height: 100%;
   min-height: 50px;
   margin-bottom: 16px;
+  word-wrap: break-word;
 }
 
 .soha-modal-inner .soha-modal-bottom {
@@ -107,4 +109,17 @@
   color: black;
   border: none;
   outline: none;
+}
+
+.soha-modal-inner::-webkit-scrollbar {
+  width: 20px;
+}
+
+.soha-modal-inner::-webkit-scrollbar-thumb {
+  background-color: rgb(218, 218, 218);
+  border-radius: 10px;
+  border: 7px solid white;
+}
+.soha-modal-inner::-webkit-scrollbar-track {
+  background-color: transparent;
 }

@@ -1,6 +1,6 @@
 import React from "react";
 import "./Modal.css";
-import Close from "./asset/Close.svg";
+import Close from "../asset/Close.svg";
 
 type ModalPosition = "center" | "bottom";
 type ModalCloseBtnType = "text" | "img";
