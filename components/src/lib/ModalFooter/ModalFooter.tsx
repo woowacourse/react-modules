@@ -1,7 +1,8 @@
 import styles from './ModalFooter.module.css';
 import { CancelButtonProps, ConfirmButtonProps } from '../interfaces';
-import { Modal } from '..';
 import { CSSProperties } from 'react';
+import CancelButton from '../CancelButton/CancelButton';
+import ConfirmButton from '../ConfirmButton/ConfirmButton';
 
 export interface ModalFooterProps {
   cancelButton?: CancelButtonProps;
@@ -16,12 +17,12 @@ const ModalFooter = ({ cancelButton, confirmButton, buttonsDirection, buttonsJus
       style={{
         display: 'flex',
         flexDirection: `${buttonsDirection || 'row'}`,
-        justifyContent: `${buttonsJustifyContent}`,
+        justifyContent: `${buttonsJustifyContent || 'center'}`,
       }}
       className={styles['button-container']}
     >
-      {cancelButton && <Modal.CancelButton {...cancelButton} />}
-      {confirmButton && <Modal.ConfirmButton {...confirmButton} />}
+      {cancelButton && <CancelButton {...cancelButton} />}
+      {confirmButton && <ConfirmButton {...confirmButton} />}
     </div>
   );
 };

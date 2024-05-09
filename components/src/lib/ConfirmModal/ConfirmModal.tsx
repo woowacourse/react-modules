@@ -3,18 +3,19 @@ import {
   CancelButtonProps,
   CloseButtonProps,
   ConfirmButtonProps,
-  SizeProps,
+  ModalSizeProps,
   SubtitleProps,
   TitleProps,
 } from '../interfaces';
-import { Modal } from '..';
+import Modal from '../Modal/Modal';
+import ModalMessage from '../ModalMessage/ModalMessage';
 
 interface ConfirmModalProps {
   title: TitleProps;
   subtitle?: SubtitleProps;
   message: string;
   modalPosition: 'center' | 'bottom';
-  modalSize: SizeProps;
+  modalSize: ModalSizeProps;
   closeButton: CloseButtonProps;
   cancelButton: CancelButtonProps;
   confirmButton: ConfirmButtonProps;
@@ -70,7 +71,7 @@ const ConfirmModal = ({
       modalContent={{
         children: (
           <>
-            <Modal.Message content={message} position={title.position || 'center'} />
+            <ModalMessage content={message} position={title.position || 'center'} />
             {children}
           </>
         ),

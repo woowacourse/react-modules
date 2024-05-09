@@ -3,17 +3,18 @@ import {
   CancelButtonProps,
   CloseButtonProps,
   ConfirmButtonProps,
-  SizeProps,
+  ModalSizeProps,
   SubtitleProps,
   TitleProps,
 } from '../interfaces';
-import { Modal } from '..';
+import Modal from '../Modal/Modal';
+import ModalInput from '../ModalInput/ModalInput';
 
 interface PromptModalProps {
   title: TitleProps;
   subtitle?: SubtitleProps;
   modalPosition: 'center' | 'bottom';
-  modalSize: SizeProps;
+  modalSize: ModalSizeProps;
   closeButton: CloseButtonProps;
   cancelButton: CancelButtonProps;
   confirmButton: ConfirmButtonProps;
@@ -68,7 +69,7 @@ const PromptModal = ({
       modalContent={{
         children: (
           <>
-            <Modal.Input onChange={(e) => console.log(e.target.value)} />
+            <ModalInput onChange={(e) => console.log(e.target.value)} />
             {children}
           </>
         ),

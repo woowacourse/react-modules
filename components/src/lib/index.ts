@@ -1,18 +1,4 @@
-import ModalMain from './ModalMain/ModalMain';
-import CancelButton from './CancelButton/CancelButton';
-import ConfirmButton from './ConfirmButton/ConfirmButton';
-import ModalContent from './ModalContent/ModalContent';
-import ModalFooter from './ModalFooter/ModalFooter';
-import ModalHeader from './ModalHeader/ModalHeader';
-import ModalMessage from './ModalMessage/ModalMessage';
-import ModalInput from './ModalInput/ModalInput';
-
-export const Modal = Object.assign(ModalMain, {
-  Header: ModalHeader,
-  Content: ModalContent,
-  Footer: ModalFooter,
-  CancelButton: CancelButton,
-  ConfirmButton: ConfirmButton,
-  Message: ModalMessage,
-  Input: ModalInput,
-});
+export { default as Modal } from './Modal/Modal';
+export { default as AlertModal } from './AlertModal/AlertModal';
+export { default as ConfirmMoal } from './ConfirmModal/ConfirmModal';
+export { default as PromptModal } from './PromptModal/PromptModal';

@@ -1,13 +1,14 @@
 import { CSSProperties } from 'react';
-import { Modal } from '..';
-import { CloseButtonProps, ConfirmButtonProps, SizeProps, SubtitleProps, TitleProps } from './../interfaces';
+import { CloseButtonProps, ConfirmButtonProps, ModalSizeProps, SubtitleProps, TitleProps } from './../interfaces';
+import Modal from '../Modal/Modal';
+import ModalMessage from '../ModalMessage/ModalMessage';
 
 interface AlertModalProps {
   title: TitleProps;
   subtitle?: SubtitleProps;
   message: string;
   modalPosition: 'center' | 'bottom';
-  modalSize: SizeProps;
+  modalSize: ModalSizeProps;
   closeButton: CloseButtonProps;
   confirmButton: ConfirmButtonProps;
   children?: React.ReactNode;
@@ -54,7 +55,7 @@ const AlertModal = ({
       modalContent={{
         children: (
           <>
-            <Modal.Message content={message} position={title.position || 'center'} />
+            <ModalMessage content={message} position={title.position || 'center'} />
             {children}
           </>
         ),

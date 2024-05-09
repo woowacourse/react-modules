@@ -1,9 +1,8 @@
-import { Modal } from '..';
-import styles from './ModalMain.module.css';
+import styles from './Modal.module.css';
 import { ModalSizeProps } from '../interfaces';
-import { ModalHeaderProps } from '../ModalHeader/ModalHeader';
-import { ModalContentProps } from '../ModalContent/ModalContent';
-import { ModalFooterProps } from '../ModalFooter/ModalFooter';
+import ModalHeader, { ModalHeaderProps } from '../ModalHeader/ModalHeader';
+import ModalContent, { ModalContentProps } from '../ModalContent/ModalContent';
+import ModalFooter, { ModalFooterProps } from '../ModalFooter/ModalFooter';
 import { CSSProperties } from 'react';
 
 export interface ModalProps {
@@ -17,7 +16,7 @@ export interface ModalProps {
   preventCloseOnOutsideClick?: boolean;
 }
 
-const ModalMain = ({
+const Modal = ({
   modalHeader,
   modalContent,
   modalFooter,
@@ -59,12 +58,12 @@ const ModalMain = ({
         }}
         className={styles[`container-${modalPosition}`]}
       >
-        <Modal.Header {...modalHeader} />
-        <Modal.Content {...modalContent} />
-        <Modal.Footer {...modalFooter} />
+        <ModalHeader {...modalHeader} />
+        <ModalContent {...modalContent} />
+        <ModalFooter {...modalFooter} />
       </section>
     </>
   );
 };
 
-export default ModalMain;
+export default Modal;
