@@ -1,11 +1,12 @@
 import { CARD_BRAND, CARD_NUMBER_LENGTH } from "./constants/cardBrand";
 import { IErrorStatus } from "../useInputValidation";
 import { hasCardBrand } from "./utils/hasCardBrand";
+import { REGEX } from "../constants/regex";
 
 const DEFAULT_CARD_NUMBER_LENGTH = 16;
 export const cardNumberValidator = {
   onChange: (value: string): IErrorStatus => {
-    if (!/^\d*$/.test(value)) {
+    if (!REGEX.zeroOrMoreDigits.test(value)) {
       return { isError: true, errorMessage: "카드번호는 숫자만 포함해야 합니다." };
     }
 
@@ -20,7 +21,7 @@ export const cardNumberValidator = {
   },
 
   onBlur: (value: string): IErrorStatus => {
-    if (!/^\d+$/.test(value)) {
+    if (!REGEX.oneOrMoreDigits.test(value)) {
       return { isError: true, errorMessage: "카드번호는 숫자만 포함해야 합니다." };
     }
 

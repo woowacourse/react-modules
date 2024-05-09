@@ -1,9 +1,10 @@
+import { REGEX } from "../constants/regex";
 import { IErrorStatus } from "../useInputValidation";
 
 const CVC_LENGTH = 3;
 export const CVCValidator = {
   onChange: (value: string): IErrorStatus => {
-    if (!/^\d*$/.test(value)) {
+    if (!REGEX.zeroOrMoreDigits.test(value)) {
       return { isError: true, errorMessage: "CVC 값은 숫자만 포함해야 합니다." };
     }
 
@@ -15,7 +16,7 @@ export const CVCValidator = {
   },
 
   onBlur: (value: string): IErrorStatus => {
-    if (!/^\d+$/.test(value)) {
+    if (!REGEX.oneOrMoreDigits.test(value)) {
       return { isError: true, errorMessage: "CVC 값은 숫자만 포함해야 합니다." };
     }
     if (value.length !== CVC_LENGTH) {
