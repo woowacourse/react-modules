@@ -46,6 +46,7 @@ const useIdentifyCardBrand = () => {
         });
       }
     });
+
     if (!newCardBrandInfo) {
       newCardBrandInfo = CardBrands["NONE"];
     }

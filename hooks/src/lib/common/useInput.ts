@@ -16,29 +16,32 @@ const useInput = <T>({ initialValue = "", validates, validLength }: Props) => {
   const [errorStatus, setErrorStatus] = useState<T | null>(null);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const { value } = e.target;
+    const { value: newValue } = e.target;
 
+    let isValid = true;
     let newError: T | null = null;
 
-    if (validLength && value.length > validLength) return;
-
-    validates.forEach((validate) => {
-      const result = validate(value);
-      const { isValid, error } = result;
-      if (!isValid && !newError) {
-        newError = error as T;
-      } else {
-        if (errorStatus === error) {
-          setErrorStatus(null);
+    if (validLength && newValue.length > validLength) {
+      isValid = false;
+    } else {
+      validates.forEach((validate) => {
+        const result = validate(newValue);
+        if (!result.isValid && isValid) {
+          isValid = false;
+          newError = result.error as T;
         }
-      }
-    });
+      });
+    }
+
+    if (isValid) {
+      setValue(newValue);
+    }
 
     if (newError) {
       setErrorStatus(newError);
+    } else if (errorStatus) {
+      setErrorStatus(null);
     }
-
-    setValue(value);
   };
 
   return {
