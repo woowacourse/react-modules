@@ -2,11 +2,7 @@
 import React, { PropsWithChildren } from "react";
 import { ButtonTextStyle, MainButtonPropsStyle } from "./MainButton.styles";
 import useThemeContext from "../../hooks/useThemeContext";
-
-export enum MainButtonStyleType {
-  Long = "long",
-  Short = "short",
-}
+import { MainButtonStyleType } from "./constants";
 
 interface LongButtonProps extends PropsWithChildren {
   buttonType?: MainButtonStyleType;

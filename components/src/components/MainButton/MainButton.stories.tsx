@@ -1,20 +1,22 @@
+import "../../index.css";
 import type { Meta, StoryObj } from "@storybook/react";
 
-import { LongButton } from "../lib";
+import { MainButton } from "../../lib";
+import { MainButtonStyleType } from "./constants";
 
 const meta = {
-  title: "LongButton",
-  component: LongButton,
+  title: "MainButton",
+  component: MainButton,
   argTypes: {
     isHighLight: { name: "하이라이트 여부" },
     children: { name: "버튼 내부 요소" },
     buttonType: { name: "버튼의 타입" },
   },
-} satisfies Meta<typeof LongButton>;
+} satisfies Meta<typeof MainButton>;
 
 export default meta;
 
-type Story = StoryObj<typeof LongButton>;
+type Story = StoryObj<typeof MainButton>;
 
 export const Default: Story = {
   name: "기본 버튼",
@@ -39,7 +41,7 @@ export const ShortButton: Story = {
   args: {
     isHighLight: false,
     children: "버튼 입니다.",
-    buttonType: "Short",
+    buttonType: MainButtonStyleType.Short,
     handleClick: () => alert("클릭 되었습니다."),
   },
 };
@@ -49,7 +51,7 @@ export const ShortReverseButton: Story = {
   args: {
     isHighLight: true,
     children: "버튼 입니다.",
-    buttonType: "Short",
+    buttonType: MainButtonStyleType.Short,
     handleClick: () => alert("클릭 되었습니다."),
   },
 };
