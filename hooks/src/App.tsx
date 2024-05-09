@@ -9,8 +9,7 @@ import {
 } from './lib';
 
 function App() {
-  const cardNumbers = useCardNumber(4, 4);
-  const cardNumbers2 = useCardNumber(1, 16);
+  const cardNumber = useCardNumber();
   const cardCompany = useCardCompany(['신한카드', '롯데카드', 'BC카드']);
   const cardOwnerName = useCardOwnerName();
   const cardCVC = useCardCVC();
@@ -23,37 +22,13 @@ function App() {
         <h3>useCardNumber</h3>
         <input
           type="text"
-          value={cardNumbers.cardNumber[0]}
-          onChange={(e) => cardNumbers.handleCardNumberChange(e.target.value, 0)}
-        ></input>
-        <input
-          type="text"
-          value={cardNumbers.cardNumber[1]}
-          onChange={(e) => cardNumbers.handleCardNumberChange(e.target.value, 1)}
-        ></input>
-        <input
-          type="text"
-          value={cardNumbers.cardNumber[2]}
-          onChange={(e) => cardNumbers.handleCardNumberChange(e.target.value, 2)}
-        ></input>
-        <input
-          type="text"
-          value={cardNumbers.cardNumber[3]}
-          onChange={(e) => cardNumbers.handleCardNumberChange(e.target.value, 3)}
+          value={cardNumber.cardNumber}
+          onChange={(e) => cardNumber.handleCardNumberChange(e.target.value)}
         ></input>
         <div>
-          <p>{`${cardNumbers.isValidCardNumbers}`}</p>
-          <p>{cardNumbers.cardNumberErrorMessages}</p>
-        </div>
-        <h3>useCardNumber2</h3>
-        <input
-          type="text"
-          value={cardNumbers2.cardNumber[0]}
-          onChange={(e) => cardNumbers2.handleCardNumberChange(e.target.value, 0)}
-        ></input>
-        <div>
-          <p>{`${cardNumbers2.isValidCardNumbers}`}</p>
-          <p>{cardNumbers2.cardNumberErrorMessages}</p>
+          <p>{cardNumber.cardType}</p>
+          <p>{`${cardNumber.isValidCardNumber}`}</p>
+          <p>{cardNumber.cardNumberErrorMessage}</p>
         </div>
         <h3>useCardCompany</h3>
         <select onChange={(e) => cardCompany.handleCardCompanyChange(e.target.value)}>
