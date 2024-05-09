@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 import "./App.css";
-import { Modal } from "./lib";
 import useModalState from "./lib/useModalState";
+
+import AlertModal from "./AlertModal";
 
 function App() {
   const { isOpen, openModal, closeModal, confirmModal } = useModalState(false, {});
@@ -9,22 +10,18 @@ function App() {
   return (
     <>
       <h1>Component Modules</h1>
-      <button
-        type="button"
-        onClick={openModal}
-      >
+      <button type="button" onClick={openModal}>
         모달 열기
       </button>
-      <Modal
-        position="center"
-        title="title"
-        description="description"
-        close={true}
-        cancelLabel="cancel"
-        confirmLabel="confirm"
+
+      <AlertModal
         isOpen={isOpen}
         closeModal={closeModal}
         confirmModal={confirmModal}
+        title="아이디를 입력해 주세요"
+        description="아이디는 필수로 입력해야 합니다."
+        confirmLabel="확인"
+        size="medium"
       />
     </>
   );

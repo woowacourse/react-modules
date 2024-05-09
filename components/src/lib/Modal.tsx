@@ -11,10 +11,11 @@ interface ModalPositionerProps {
   size: ModalSize;
   children: ReactNode;
 }
-const ModalPositioner = ({ position, size, children }: ModalPositionerProps) => {
+const Positioner = ({ position, size, children }: ModalPositionerProps) => {
   return <div className={css(modalContainerCSS, positionCSS[position], sizeCSS[size])}>{children}</div>;
 };
-const ModalHeader = ({ title, close, onClose }: { title: string; close: boolean; onClose: () => void }) => {
+
+const Header = ({ title, close, onClose }: { title: string; close: boolean; onClose: () => void }) => {
   return (
     <div className={css(headerContainerCSS)}>
       <p className={css(titleCSS)}>{title}</p>
@@ -27,7 +28,7 @@ const ModalHeader = ({ title, close, onClose }: { title: string; close: boolean;
   );
 };
 
-const ModalContent = ({ description, children }: { description: string; children: ReactNode }) => {
+const Content = ({ description, children }: { description: string; children?: ReactNode }) => {
   return (
     <>
       <p className={css(descriptionCSS)}>{description}</p>
@@ -36,17 +37,18 @@ const ModalContent = ({ description, children }: { description: string; children
   );
 };
 
-interface ModalFooterProps {
+interface FooterProps extends React.HTMLAttributes<HTMLDivElement> {
   cancelLabel?: string;
   confirmLabel?: string;
+  align?: "vertical" | "horizontal";
   onConfirm: () => void;
   onClose: () => void;
 }
 
-const ModalFooter = ({ cancelLabel, confirmLabel, onConfirm, onClose }: ModalFooterProps) => {
+const Footer = ({ cancelLabel, confirmLabel, onConfirm, onClose, align = "vertical", ...restProps }: FooterProps) => {
   return (
     (confirmLabel || cancelLabel) && (
-      <div className={css(buttonContainerCSS)}>
+      <div className={css(buttonContainerCSS[align])} {...restProps}>
         {confirmLabel && (
           <button className={css(buttonCSS, confirmButtonCSS)} onClick={onConfirm}>
             {confirmLabel}
@@ -63,52 +65,26 @@ const ModalFooter = ({ cancelLabel, confirmLabel, onConfirm, onClose }: ModalFoo
 };
 
 interface ModalProps {
-  children?: ReactNode;
-  position?: Position;
-  title?: string;
-  description?: string;
-  close?: boolean;
-  cancelLabel?: string;
-  confirmLabel?: string;
-  size?: ModalSize;
-
-  isOpen: boolean;
-  confirmModal: () => void;
+  children: ReturnType<typeof Positioner>;
   closeModal: () => void;
+  isOpen: boolean;
 }
 
-const Modal = ({
-  children,
-  position = "center",
-  title = "",
-  description = "",
-  close = false,
-  cancelLabel,
-  confirmLabel,
-  size = "medium",
-
-  isOpen,
-  closeModal,
-  confirmModal,
-}: ModalProps) => {
+const Modal = ({ children, isOpen, closeModal }: ModalProps) => {
   return (
     isOpen && (
       <>
-        <ModalPositioner position={position} size={size}>
-          <ModalHeader title={title} close={close} onClose={closeModal} />
-          <ModalContent description={description}>{children}</ModalContent>
-          <ModalFooter
-            cancelLabel={cancelLabel}
-            confirmLabel={confirmLabel}
-            onConfirm={confirmModal}
-            onClose={closeModal}
-          />
-        </ModalPositioner>
+        {children}
         <div className={css(backdropCSS)} onClick={closeModal} />
       </>
     )
   );
 };
+
+Modal.Positioner = Positioner;
+Modal.Header = Header;
+Modal.Content = Content;
+Modal.Footer = Footer;
 
 const modalContainerCSS = css`
   transform: translateX(-50%);
@@ -121,6 +97,7 @@ const modalContainerCSS = css`
   flex-direction: column;
   padding: 24px 32px;
   background-color: white;
+  box-sizing: border-box;
 `;
 
 const headerContainerCSS = css`
@@ -157,11 +134,17 @@ const descriptionCSS = css`
   text-align: left;
 `;
 
-const buttonContainerCSS = css`
+const buttonContainerCSS = {
+  vertical: `
   display: flex;
   flex-direction: column;
-  gap: 12px;
-`;
+  gap: 12px;`,
+  horizontal: `
+  display:flex;
+  flex-direction: row-reverse;
+  justify-content: flex-end;
+  gap:12px;`,
+};
 
 const buttonCSS = css`
   aspect-ratio: 8;

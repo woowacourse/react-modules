@@ -5,14 +5,7 @@ import useModalState from "./useModalState";
 
 const ModalWrapper = ({ onOpen = () => {}, onConfirm = () => {}, onClose = () => {}, ...restProps }) => {
   const { isOpen, closeModal, confirmModal } = useModalState(true, { onOpen, onClose, onConfirm });
-  return (
-    <Modal
-      isOpen={isOpen}
-      closeModal={closeModal}
-      confirmModal={confirmModal}
-      {...restProps}
-    />
-  );
+  return <Modal isOpen={isOpen} closeModal={closeModal} confirmModal={confirmModal} {...restProps} />;
 };
 
 const meta = {
@@ -149,6 +142,24 @@ export const Full: Story = {
     docs: { description: { story: "확인/취소버튼과 끄기버튼이 존재하는 상태" } },
   },
   args: {
+    close: true,
+    confirmLabel: "확인",
+    cancelLabel: "취소",
+    onClose: () => {
+      alert("close");
+    },
+    onConfirm: () => {
+      alert("confirm");
+    },
+  },
+};
+
+export const FullHorizontal: Story = {
+  parameters: {
+    docs: { description: { story: "확인/취소버튼과 끄기버튼이 존재하는 상태" } },
+  },
+  args: {
+    footerAlign: "horizontal",
     close: true,
     confirmLabel: "확인",
     cancelLabel: "취소",
