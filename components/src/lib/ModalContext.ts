@@ -9,6 +9,8 @@ export interface ModalContextType {
   animationTime: number;
   open: boolean;
   closing: boolean;
+  size: "small" | "medium" | "large" | "";
+  sizeClassName: string;
 }
 
 const defaultContext: Partial<ModalContextType> = {

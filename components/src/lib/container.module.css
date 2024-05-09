@@ -21,16 +21,16 @@
 }
 
 .large {
-  width: 600px;
-  height: 206px;
+  width: 600px !important;
+  height: 206px !important;
 }
 
 .medium {
-  width: 480px;
-  height: 206px;
+  width: 480px !important;
+  height: 206px !important;
 }
 
 .small {
-  width: 320px;
-  height: 206px;
+  width: 320px !important;
+  height: 206px !important;
 }

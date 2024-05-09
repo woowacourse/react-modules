@@ -5,30 +5,25 @@ import { ModalContext } from "./ModalContext";
 type Props = {
   className?: string;
   style?: CSSProperties;
-  size?: "small" | "medium" | "large" | "";
 };
 
 export default function Container({
   children,
   className,
   style,
-  size = "",
 }: PropsWithChildren<Props>) {
   const containerClassName = className ?? "";
   const innerStyle = style ?? {};
-  const { position, mountAnimation, unMountAnimation, open, closing } =
-    useContext(ModalContext);
+  const {
+    position,
+    mountAnimation,
+    unMountAnimation,
+    open,
+    closing,
+    sizeClassName,
+  } = useContext(ModalContext);
 
   const modalClassName = closing ? unMountAnimation : mountAnimation;
-
-  const sizeClassName =
-    size === "large"
-      ? styles.large
-      : size === "medium"
-        ? styles.medium
-        : size === "small"
-          ? styles.small
-          : "";
 
   return open ? (
     <div
