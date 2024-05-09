@@ -1,24 +1,32 @@
 /** @jsxImportSource @emotion/react */
 import React, { PropsWithChildren } from "react";
-import { LongButtonPropsStyle } from "./MainButton.styles";
+import { ButtonTextStyle, MainButtonPropsStyle } from "./MainButton.styles";
 import useThemeContext from "../../hooks/useThemeContext";
 
-export type StyleType = "Long" | "Short";
+export enum MainButtonStyleType {
+  Long = "long",
+  Short = "short",
+}
 
 interface LongButtonProps extends PropsWithChildren {
-  buttonType?: StyleType;
+  buttonType?: MainButtonStyleType;
   isHighLight?: boolean;
   handleClick?: () => void;
 }
 
-const LongButton: React.FC<LongButtonProps> = ({ buttonType = "Long", isHighLight = false, handleClick, children }) => {
+const MainButton: React.FC<LongButtonProps> = ({
+  buttonType = MainButtonStyleType.Long,
+  isHighLight = false,
+  handleClick,
+  children,
+}) => {
   const theme = useThemeContext();
 
   return (
-    <button css={LongButtonPropsStyle(isHighLight, theme, buttonType)} onClick={handleClick}>
-      {children}
+    <button css={MainButtonPropsStyle(isHighLight, theme, buttonType)} onClick={handleClick}>
+      <div css={ButtonTextStyle}>{children}</div>
     </button>
   );
 };
 
-export default LongButton;
+export default MainButton;

@@ -1,9 +1,9 @@
 /** @jsxImportSource @emotion/react */
-import React, { MouseEventHandler, PropsWithChildren, ReactNode } from "react";
+import { MouseEventHandler, PropsWithChildren, ReactNode } from "react";
 import { buttonsStyle, modalContentStyle, modalStyle } from "./Modal.style";
 
 import ModalHeader from "../ModalHeader/ModalHeader";
-import LongButton from "../MainButton/MainButton";
+import MainButton, { MainButtonStyleType } from "../MainButton/MainButton";
 
 import ThemeProvider from "../ContextProvider/ThemeProvider";
 
@@ -15,6 +15,7 @@ export interface ModalProps {
   title?: string;
   width?: number;
   theme?: "light" | "dark";
+  buttonAlign?: "column" | "row";
   hasConfirmButton?: boolean;
   closeButtonPosition?: "bottom" | "top";
   onConfirm?: () => void;
@@ -26,12 +27,18 @@ export interface ModalProps {
 interface DialogProps extends Omit<ModalProps, "theme"> {}
 
 enum ButtonPosition {
-  top = "top",
-  bottom = "bottom",
+  Top = "top",
+  Bottom = "bottom",
+}
+
+enum ButtonAlign {
+  Column = "column",
+  Row = "row",
 }
 
 const Dialog = ({
   position = "center",
+  buttonAlign = "column",
   title,
   width = 242,
   hasConfirmButton = true,
@@ -54,16 +61,21 @@ const Dialog = ({
   return (
     <dialog onClick={clickBackdrop} ref={dialogRef} css={modalStyle(position, width, theme)}>
       <div css={modalContentStyle}>
-        <ModalHeader hasCloseButton={closeButtonPosition === ButtonPosition.top}>{title}</ModalHeader>
+        <ModalHeader hasCloseButton={closeButtonPosition === ButtonPosition.Top}>{title}</ModalHeader>
         <div>{children}</div>
-        <div css={buttonsStyle}>
+        <div css={buttonsStyle(buttonAlign)}>
           {hasConfirmButton && (
-            <LongButton isHighLight={true} handleClick={onConfirm}>
+            <MainButton
+              buttonType={buttonAlign === ButtonAlign.Row ? MainButtonStyleType.Short : MainButtonStyleType.Long}
+              isHighLight={true}
+              handleClick={onConfirm}
+            >
               {confirmMessage}
-            </LongButton>
+            </MainButton>
           )}
-          {closeButtonPosition === ButtonPosition.bottom && (
-            <LongButton
+          {closeButtonPosition === ButtonPosition.Bottom && (
+            <MainButton
+              buttonType={buttonAlign === ButtonAlign.Row ? MainButtonStyleType.Short : MainButtonStyleType.Long}
               isHighLight={false}
               handleClick={() => {
                 action.handleClose();
@@ -71,7 +83,7 @@ const Dialog = ({
               }}
             >
               {cancelMessage}
-            </LongButton>
+            </MainButton>
           )}
         </div>
       </div>
@@ -92,14 +104,20 @@ export const useModalAction = () => {
   return action;
 };
 
+enum ModalWidth {
+  Small = 320,
+  Medium = 480,
+  Large = 600,
+}
+
 const SmallModal = ({ ...props }: PropsWithChildren<DialogProps>) => {
-  return <Modal {...props} width={320}></Modal>;
+  return <Modal {...props} width={ModalWidth.Small}></Modal>;
 };
 const MediumModal = ({ ...props }: PropsWithChildren<DialogProps>) => {
-  return <Modal {...props} width={480}></Modal>;
+  return <Modal {...props} width={ModalWidth.Medium}></Modal>;
 };
 const LargeModal = ({ ...props }: PropsWithChildren<DialogProps>) => {
-  return <Modal {...props} width={600}></Modal>;
+  return <Modal {...props} width={ModalWidth.Large}></Modal>;
 };
 
 Modal.Small = SmallModal;
