@@ -1,0 +1,19 @@
+.labelContainer {
+  display: flex;
+  align-items: center;
+
+  height: 0.9375rem;
+}
+
+.label {
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+.basic {
+  color: #0a0d13;
+}
+
+.lightGray {
+  color: #8b95a1;
+}

@@ -4,6 +4,7 @@ import CloseButton from './Modal/CloseButton/CloseButton';
 import Content from './Modal/Content/Content';
 import Footer from './Modal/Footer/Footer';
 import Header from './Modal/Header/Header';
+import Label from './Modal/Label/Label';
 import Main from './Modal/Main/Main';
 import ModalContainer from './Modal/ModalContainer';
 import Title from './Modal/Title/Title';
@@ -17,4 +18,5 @@ export const Modal = Object.assign(ModalContainer, {
   Title: Title,
   CloseButton: CloseButton,
   Button: Button,
+  Label: Label,
 });
