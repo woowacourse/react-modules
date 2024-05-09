@@ -15,6 +15,10 @@ export function validateNumber(str: string) {
 }
 
 export function validateMonth(n: string) {
+  if (n.length === 0) {
+    return;
+  }
+
   const month = Number(n);
   if (!isValidMonth(month)) {
     throw new Error(ErrorStatus.INVALID_MONTH);

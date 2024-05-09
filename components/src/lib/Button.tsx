@@ -4,7 +4,8 @@ import { Size } from '@/types/system';
 
 type ButtonColorType = 'dark' | 'light';
 
-interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+export interface ButtonProps
+  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   label: string;
   size: Size;
   colorType?: ButtonColorType;

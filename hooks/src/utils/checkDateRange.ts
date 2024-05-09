@@ -1,4 +1,4 @@
-import { MONTH_RANGE, YEAR_RANGE } from '../constants/system';
+import { MONTH_RANGE, YEAR_RANGE } from '@/constants/system';
 
 export const isValidMonth = (month: number) => {
   if (MONTH_RANGE.MIN <= month && month <= MONTH_RANGE.MAX) {

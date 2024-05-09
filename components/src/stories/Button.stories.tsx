@@ -1,4 +1,3 @@
-import Modal from '@/lib/Modal/Modal';
 import type { StoryObj } from '@storybook/react';
 import Button from '@/lib/Button';
 
@@ -17,7 +16,7 @@ const DarkButton = () => {
   );
 };
 
-type Story = StoryObj<typeof Modal>;
+type Story = StoryObj<typeof Button>;
 
 export const Default: Story = {
   render: () => <DefaultButton />,
