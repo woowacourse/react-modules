@@ -1,3 +1,4 @@
+import { ComponentProps } from "react";
 import styles from "./ConfirmButton.module.css";
 
 const SIZE_VALUES = {
@@ -6,20 +7,21 @@ const SIZE_VALUES = {
   large: "90%",
 };
 
+interface ConfirmButtonProps extends ComponentProps<"button"> {
+  content?: string;
+  guidanceSize?: "small" | "medium" | "large";
+}
+
 export default function ConfirmButton({
-  onClick,
   content,
-  size = "large",
-}: {
-  onClick: () => void;
-  content: string;
-  size?: "small" | "medium" | "large";
-}) {
+  guidanceSize = "large",
+  ...restProps
+}: ConfirmButtonProps) {
   return (
     <button
-      style={{ width: SIZE_VALUES[size] }}
+      {...restProps}
+      style={{ width: SIZE_VALUES[guidanceSize] }}
       className={styles["button-confirm"]}
-      onClick={onClick}
     >
       {content}
     </button>

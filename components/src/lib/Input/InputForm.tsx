@@ -1,3 +1,4 @@
+import { ComponentProps } from "react";
 import styles from "./InputForm.module.css";
 
 const SIZE_VALUES = {
@@ -6,28 +7,23 @@ const SIZE_VALUES = {
   large: "90%",
 };
 
-function InputForm({
-  onChange,
-  title,
-  placeHolder,
-  size = "large",
-}: {
-  onChange: () => void;
+interface InputFormProps extends ComponentProps<"input"> {
   title?: string;
-  placeHolder?: string;
-  size?: "small" | "medium" | "large";
-}) {
+  guidanceSize?: "small" | "medium" | "large";
+}
+
+function InputForm({
+  title,
+  guidanceSize = "large",
+  ...restProps
+}: InputFormProps) {
   return (
     <div
-      style={{ width: SIZE_VALUES[size] }}
+      style={{ width: SIZE_VALUES[guidanceSize] }}
       className={styles["title-container"]}
     >
       {title && <div className={styles["title"]}>{title}</div>}
-      <input
-        onChange={onChange}
-        className={styles.input}
-        placeholder={placeHolder}
-      ></input>
+      <input {...restProps} className={styles.input} />
     </div>
   );
 }

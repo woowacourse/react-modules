@@ -1,22 +1,26 @@
-import { ReactNode } from "react";
+import { ComponentProps, ReactNode } from "react";
 import styles from "./Container.module.css";
+
+interface ContainerProps extends ComponentProps<"div"> {
+  onBackdropClick?: () => void;
+  guidanceSize?: "small" | "medium" | "large";
+  position?: "center" | "bottom";
+  children: ReactNode;
+}
 
 function Container({
   onBackdropClick,
-  size = "medium",
+  guidanceSize = "medium",
   position = "center",
   children,
-}: {
-  onBackdropClick?: () => void;
-  size?: "small" | "medium" | "large";
-  position?: "center" | "bottom";
-  children: ReactNode;
-}) {
+  ...restProps
+}: ContainerProps) {
   return (
     <>
       <div onClick={onBackdropClick} className={styles["backdrop"]} />
       <div
-        className={`${styles.container} ${styles[position]} ${styles[size]}`}
+        {...restProps}
+        className={`${styles.container} ${styles[position]} ${styles[guidanceSize]}`}
       >
         {children}
       </div>

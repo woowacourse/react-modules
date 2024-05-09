@@ -1,3 +1,4 @@
+import { ComponentProps } from "react";
 import styles from "./CancelButton.module.css";
 
 const SIZE_VALUES = {
@@ -6,20 +7,21 @@ const SIZE_VALUES = {
   large: "90%",
 };
 
+interface CancelButtonProps extends ComponentProps<"button"> {
+  content?: string;
+  guidanceSize?: "small" | "medium" | "large";
+}
+
 export default function CancelButton({
-  onClick,
   content,
-  size = "large",
-}: {
-  onClick: () => void;
-  content: string;
-  size?: "small" | "medium" | "large";
-}) {
+  guidanceSize = "medium",
+  ...restProps
+}: CancelButtonProps) {
   return (
     <button
-      style={{ width: SIZE_VALUES[size] }}
+      {...restProps}
+      style={{ width: SIZE_VALUES[guidanceSize] }}
       className={styles["button-cancel"]}
-      onClick={onClick}
     >
       {content}
     </button>
