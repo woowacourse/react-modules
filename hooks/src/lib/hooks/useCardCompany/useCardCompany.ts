@@ -12,9 +12,7 @@ const useCardCompany = (validCardCompanyList: string[], initialValue: string = '
 
   const getErrorMessage = (company: string) => {
     if (company === '') return CARD_COMPANY_ERROR_MESSAGES.NO_CARD_COMPANY;
-
-    if (!validCardCompanyList.includes(company))
-      return CARD_COMPANY_ERROR_MESSAGES.INVALID_CARD_COMPANY;
+    if (!validCardCompanyList.includes(company)) return CARD_COMPANY_ERROR_MESSAGES.INVALID_CARD_COMPANY;
 
     return '';
   };
@@ -23,13 +21,10 @@ const useCardCompany = (validCardCompanyList: string[], initialValue: string = '
     const errorMessage = getErrorMessage(company);
 
     setCardCompanyErrorMessage(errorMessage);
+    setIsValidCardCompany(!errorMessage);
 
-    if (errorMessage !== '') {
-      setIsValidCardCompany(false);
-      return;
-    }
+    if (!errorMessage) return;
 
-    setIsValidCardCompany(true);
     setCardCompany(company);
   };
 

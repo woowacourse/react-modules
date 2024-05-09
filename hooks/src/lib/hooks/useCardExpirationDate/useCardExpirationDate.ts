@@ -7,6 +7,10 @@ import {
 } from '../../utils/validation/validation';
 import type { EXPIRED_TYPE } from '../..//utils/validation/validation.type';
 
+type Date<T> = { month: T; year: T };
+
+const DEFAULT_LENGTH = 2;
+
 export const EXPIRATION_DATE_ERROR_MESSAGES = {
   NOT_NUMBER: 'NOT_NUMBER',
   INVALID_MONTH: 'INVALID_MONTH',
@@ -14,30 +18,15 @@ export const EXPIRATION_DATE_ERROR_MESSAGES = {
   EXPIRED_DATE: 'EXPIRED_DATE',
 };
 
-type Date<T> = {
-  month: T;
-  year: T;
-};
-
-const VALID_DATE_LENGTH = 2;
-
 const useCardExpirationDate = (initialMonthValue: string = '', initialYearValue: string = '') => {
-  const [date, setDate] = useState<Date<string>>({
-    month: initialMonthValue,
-    year: initialYearValue,
-  });
+  const [date, setDate] = useState<Date<string>>({ month: initialMonthValue, year: initialYearValue });
   const [isValid, setIsValid] = useState<Date<boolean>>({ month: false, year: false });
   const [errorMessages, setErrorMessages] = useState<Date<string>>({ month: '', year: '' });
 
   const getMonthErrorMessage = (month: string, isExpiredDate: EXPIRED_TYPE) => {
     if (isNotNumber(month)) return EXPIRATION_DATE_ERROR_MESSAGES.NOT_NUMBER;
-
-    if (isValidNumberLength(month, VALID_DATE_LENGTH))
-      return EXPIRATION_DATE_ERROR_MESSAGES.INVALID_MONTH;
-
-    if (isValidNumberRange(Number(month), 1, 12))
-      return EXPIRATION_DATE_ERROR_MESSAGES.INVALID_MONTH;
-
+    if (isValidNumberLength(month, DEFAULT_LENGTH)) return EXPIRATION_DATE_ERROR_MESSAGES.INVALID_MONTH;
+    if (isValidNumberRange(Number(month), 1, 12)) return EXPIRATION_DATE_ERROR_MESSAGES.INVALID_MONTH;
     if (isExpiredDate === 'INVALID_MONTH') return EXPIRATION_DATE_ERROR_MESSAGES.EXPIRED_DATE;
 
     return '';
@@ -45,16 +34,13 @@ const useCardExpirationDate = (initialMonthValue: string = '', initialYearValue:
 
   const getYearErrorMessage = (year: string, isExpiredDate: EXPIRED_TYPE) => {
     if (isNotNumber(year)) return EXPIRATION_DATE_ERROR_MESSAGES.NOT_NUMBER;
-
-    if (isValidNumberLength(year, VALID_DATE_LENGTH))
-      return EXPIRATION_DATE_ERROR_MESSAGES.INVALID_YEAR;
-
+    if (isValidNumberLength(year, DEFAULT_LENGTH)) return EXPIRATION_DATE_ERROR_MESSAGES.INVALID_YEAR;
     if (isExpiredDate === 'INVALID_YEAR') return EXPIRATION_DATE_ERROR_MESSAGES.EXPIRED_DATE;
 
     return '';
   };
 
-  const checkValidDate = ({ month = date.month, year = date.year }) => {
+  const validateDate = ({ month = date.month, year = date.year }) => {
     const isExpiredDate = validateExpiredDate(month, year);
 
     const monthErrorMessage = getMonthErrorMessage(month, isExpiredDate);
@@ -64,22 +50,20 @@ const useCardExpirationDate = (initialMonthValue: string = '', initialYearValue:
     setIsValid({ month: !monthErrorMessage, year: !yearErrorMessage });
   };
 
-  const formatMonth = (month: string) => {
-    if (isValidNumberRange(Number(month), 2, 9)) return month.padStart(2, '0');
-
-    return month;
-  };
+  const formatMonth = (month: string) => (isValidNumberRange(Number(month), 2, 9) ? month.padStart(2, '0') : month);
 
   const handleMonthChange = (month: string) => {
-    if (!isNotNumber(month)) setDate({ ...date, month: formatMonth(month) });
+    if (month.length > DEFAULT_LENGTH || isNotNumber(month)) return;
 
-    checkValidDate({ month });
+    validateDate({ month });
+    setDate({ ...date, month: formatMonth(month) });
   };
 
   const handleYearChange = (year: string) => {
-    if (!isNotNumber(year)) setDate({ ...date, year });
+    if (year.length > DEFAULT_LENGTH || isNotNumber(year)) return;
 
-    checkValidDate({ year });
+    validateDate({ year });
+    setDate({ ...date, year });
   };
 
   return {
