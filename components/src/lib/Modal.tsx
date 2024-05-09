@@ -1,10 +1,4 @@
-import {
-  PropsWithChildren,
-  RefObject,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
+import { PropsWithChildren, useEffect, useState } from "react";
 import { ModalProvider } from "./ModalProvider";
 import { ModalContextType } from "./ModalContext";
 import ModalPortal from "./ModalPortal";
@@ -19,34 +13,14 @@ interface ModalProviderValue extends ModalContextType {
   sizeClassName: string;
 }
 
-const generateFakeEvent = (ref: RefObject<HTMLDivElement>) => {
-  const fakeEvent: React.SyntheticEvent = {
-    preventDefault: () => {},
-    stopPropagation: () => {},
-    nativeEvent: new Event("close"),
-    currentTarget: ref.current as HTMLDivElement,
-    target: ref.current as HTMLDivElement,
-    bubbles: false,
-    cancelable: false,
-    defaultPrevented: false,
-    eventPhase: 2,
-    isTrusted: false,
-    timeStamp: Date.now(),
-    type: "close",
-    isDefaultPrevented: () => false,
-    isPropagationStopped: () => false,
-    persist: () => {},
-  };
-
-  return fakeEvent;
-};
-
 export default function Modal({
   children,
   isOpen = false,
-  onClose = (event: React.SyntheticEvent) => {
-    event.preventDefault();
-    event.stopPropagation();
+  onClose = (event?: React.SyntheticEvent) => {
+    if (event) {
+      event.preventDefault();
+      event.stopPropagation();
+    }
   },
   mountAnimation = "",
   unMountAnimation = "",
@@ -56,7 +30,6 @@ export default function Modal({
 }: PropsWithChildren<Partial<ModalContextType>>) {
   const [closing, setClosing] = useState(false);
   const [open, setOpen] = useState(isOpen);
-  const modalRef = useRef<HTMLDivElement>(null);
 
   const sizeClassName =
     size === "large"
@@ -76,20 +49,19 @@ export default function Modal({
   }, [isOpen]);
 
   useEffect(() => {
-    const fakeEvent = generateFakeEvent(modalRef);
     if (closing) {
       if (unMountAnimation) {
         const timer = setTimeout(() => {
           setClosing(false);
           setOpen(false);
-          onClose(fakeEvent);
+          onClose();
         }, animationTime);
 
         return () => clearTimeout(timer);
       } else {
         setClosing(false);
         setOpen(false);
-        onClose(fakeEvent);
+        onClose();
       }
     }
   }, [closing, unMountAnimation]);
