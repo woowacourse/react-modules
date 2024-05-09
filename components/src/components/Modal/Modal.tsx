@@ -12,13 +12,13 @@ import useThemeContext from "../../hooks/useThemeContext";
 import useModalContext from "../../hooks/useModalContext";
 
 export interface ModalProps {
-  position?: "center" | "bottom";
   title?: string;
   width?: number;
+  position?: "center" | "bottom";
   theme?: "light" | "dark";
   buttonAlign?: "column" | "row";
-  hasConfirmButton?: boolean;
   closeButtonPosition?: "bottom" | "top";
+  hasConfirmButton?: boolean;
   onConfirm?: () => void;
   onClose?: () => void;
   confirmMessage?: ReactNode;
@@ -38,12 +38,12 @@ enum ButtonAlign {
 }
 
 const Dialog = ({
-  position = "center",
-  buttonAlign = "column",
   title,
   width = 242,
-  hasConfirmButton = true,
+  position = "center",
+  buttonAlign = "column",
   closeButtonPosition = "top",
+  hasConfirmButton = true,
   onConfirm,
   onClose,
   children,
@@ -67,15 +67,19 @@ const Dialog = ({
         <div css={buttonsStyle(buttonAlign)}>
           {hasConfirmButton && (
             <MainButton
+              type="submit"
               buttonType={buttonAlign === ButtonAlign.Row ? MainButtonStyleType.Short : MainButtonStyleType.Long}
               isHighLight={true}
-              handleClick={onConfirm}
+              handleClick={() => {
+                if (onConfirm) onConfirm();
+              }}
             >
               {confirmMessage}
             </MainButton>
           )}
           {closeButtonPosition === ButtonPosition.Bottom && (
             <MainButton
+              type="button"
               buttonType={buttonAlign === ButtonAlign.Row ? MainButtonStyleType.Short : MainButtonStyleType.Long}
               isHighLight={false}
               handleClick={() => {
