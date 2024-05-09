@@ -39,3 +39,46 @@ function Example() {
 
 export default Example;
 ```
+
+# DesignModal Module
+
+## props 타입 & 설명
+
+| props        | type                         | description                                                                 |
+| ------------ | ---------------------------- | --------------------------------------------------------------------------- |
+| type         | 'alert', 'confirm', 'prompt' | modal의 type을 결정한다.                                                    |
+| size         | 'small', 'medium', 'large'   | modal의 width 사이즈를 결정한다.                                            |
+| title        | string                       | modal의 제목을 작성한다.                                                    |
+| children     | React.ReactNode              | modal의 내용을 작성한다.                                                    |
+| confirmClick | () => void                   | '확인' 버튼, 사용자가 특정 action을 추가하거나 modal을 닫게 할 때 사용한다. |
+| cancelClick  | () => void (optional)        | '취소' 버튼, 사용자가 특정 action을 추가하거나 modal을 닫게 할 때 사용한다. |
+
+## 사용방법 예시
+
+```tsx
+function Example() {
+  const [openModal, setOpenModal] = React.useState(false);
+
+  return (
+    <>
+      <button onClick={() => setOpenModal(true)}>Modal Open</button>
+      {openModal && (
+        <DesignModal
+          type="confirm"
+          size="medium"
+          title="제목을 입력해주세요"
+          confirmClick={() => {
+            alert("확인 버튼 클릭 성공");
+            setOpenModal(false);
+          }}
+          cancelClick={() => setOpenModal(false)}
+        >
+          modal 내용은 이곳에 작성해주세요.
+        </DesignModal>
+      )}
+    </>
+  );
+}
+
+export default Example;
+```
