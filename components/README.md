@@ -1,73 +1,103 @@
 # fe-custom-modal
 - Simple modal component module made by paran and fe
+- Can make your own unique modal, or use customed modal where you need
 
 ## Quick Start
 
-- install with npm:
+install with npm:
 ```bash
 npm install fe-custom-modal
 ```
 
+## Customed Modal
+### Alert modal:
+  - Display message and confirm button
+
+### Confirm modal:
+  - Provide options and display cancel and confirm button
+
+### Prompt modal:
+  - Display input field, cancel and confirm button
+
 ## Properties
+### Modal Header
 
-### title (optional)
+<details> 
+  <summary>view header properties</summary>
 
-- content
-- position (optional) `default: left`
-- color (optional) `default: black`
-- font-size (optional) `default: 18px`
+| domain 1 | domain 2 | property | is optional | default value |
+|:---:|:---:|:---:|:---:|:---:|
+| modalHeader | title |  | yes |  |
+|  |  | content | no |  |
+|  |  | position | yes | left |
+|  |  | fontSize | yes | 18px |
+|  |  | as | yes | h3 |
+|  | subtitle |  | yes |  |
+|  |  | content | no |  |
+|  |  | color | yes | lightgrey |
+|  |  | fontSize | yes | 12px |
+|  |  | as | yes | h4 |
+|  | closeButton |  |  no |  |
+|  |  | display | no |  |
+|  |  | onClose | no |  |
 
-### subtitle (optional)
+</details>
 
-- content
-- color (optional) `default: lightgrey`
-- font-size (optional) `default: 12px`
+### Modal Content
 
-### closeButton
+<details>
+  <summary>view content properties</summary>
 
-- color (optional) `default: black`
-- onClose 
+| domain 1 | domain 2 | property | is optional | default value |
+|---|---|---|---|---|
+| modalContent |  | children | yes | {} |
+|  |  |  |  |  |
 
-### confirmButton (optional)
+</details>
 
-- background-color (optional) `default: black`
-- font-color (optional) `default: white`
-- content
-- onConfirm
+### Modal Footer
 
-### cancelButton (optional)
+<details>
+  <summary>view footer properties</summary>
 
-- background-color (optional) `default: white`
-- color (optional) `default: black`
-- content
-- onCancel
+| domain 1 | domain 2 | property | is optional | default value |
+|:---:|:---:|:---:|:---:|:---:|
+| modalFooter | cancelButton |  | yes |  |
+|  |  | backgroundColor | yes | white |
+|  |  | fontColor | yes | black |
+|  |  | buttonSize | yes | width: 100%, height: 3rem |
+|  |  | content | no |  |
+|  |  | onCancel | no |  |
+|  | confirmButton |  | yes |  |
+|  |  | backgroundColor | yes | black |
+|  |  | fontColor | yes | white |
+|  |  | buttonSize | yes | width: 100%, height: 3rem |
+|  |  | content | no |  |
+|  |  | onCancel | no |  |
+|  |  |  |  |  |
+|  |  | buttonsDirection | yes | row |
+|  |  | buttonsJustifyContent | yes | center |
 
-### modalSize (optional)
+</details>
 
-- width (optional)
-  - `default: 80%` when modalPosition is `center`
-  - `default: 100%` when modalPosition is `bottom`
-- height (optional) `default: fit-content`
-- minWidth (optional)
-- minHeight (optional)
+### Other properties
 
-### background-color (optional)
+<details>
+  <summary>view other properties</summary>
 
-`default: white`
+| domain | property | is optional | default value |
+|:---:|:---:|:---:|:---:|
+| modalPosition |  | no |  |
+| modalSize |  | yes |  |
+|  | width | yes | 80% when `modalPosition` is center <br> 100% when `modalPosition` is bottom |
+|  | height | yes | fit-content |
+|  | minWidth | yes |  |
+|  | minHeight | yes |  |
+| backgroundColor |  | yes | white |
+| borderRadius |  | yes | 5px |
+| preventCloseOnOutsideClick |  | yes |  |
 
-### border-radius (optional)
-
-`default: 5px`
-
-### modalPosition
-
-`value: 'center' | 'bottom'`
-
-### preventCloseOnOutsideClick (optional)
-
-`default: false`
-
-### children
+</details>
 
 ---
 ## Storybook
