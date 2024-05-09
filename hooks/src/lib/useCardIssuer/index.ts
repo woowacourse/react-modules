@@ -4,13 +4,13 @@ import { cardIssuerValidator } from "./validator";
 interface UseCardIssuerReturn {
   value: string;
   errorStatus: IErrorStatus;
-  onChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
+  onChange: (e: React.ChangeEvent<HTMLSelectElement | HTMLInputElement>) => void;
 }
 
 export function useCardIssuer(): UseCardIssuerReturn {
   const { value, errorStatus, setValueWithValidation } = useInputValidation(cardIssuerValidator);
 
-  const onChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+  const onChange = (e: React.ChangeEvent<HTMLSelectElement | HTMLInputElement>) => {
     setValueWithValidation(e.target.value);
   };
 
