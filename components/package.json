@@ -1,6 +1,6 @@
 {
   "name": "le-sserafim",
-  "version": "0.0.1",
+  "version": "0.0.5",
   "description": "npm modules",
   "type": "module",
   "types": "dist/index.d.ts",
@@ -21,8 +21,7 @@
   "dependencies": {
     "@emotion/styled": "^11.11.5",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "tsc": "^2.0.4"
+    "react-dom": "^18.2.0"
   },
   "devDependencies": {
     "@chromatic-com/storybook": "^1.3.3",
@@ -48,7 +47,7 @@
     "eslint-plugin-storybook": "^0.8.0",
     "path": "^0.12.7",
     "storybook": "^8.0.9",
-    "typescript": "^5.2.2",
+    "typescript": "^5.4.5",
     "vite": "^5.2.0",
     "vite-plugin-dts": "^3.9.0"
   }
