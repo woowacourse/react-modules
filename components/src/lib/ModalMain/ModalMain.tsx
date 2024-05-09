@@ -1,6 +1,6 @@
 import { Modal } from '..';
 import styles from './ModalMain.module.css';
-import { SizeProps } from '../interfaces';
+import { ModalSizeProps } from '../interfaces';
 import { ModalHeaderProps } from '../ModalHeader/ModalHeader';
 import { ModalContentProps } from '../ModalContent/ModalContent';
 import { ModalFooterProps } from '../ModalFooter/ModalFooter';
@@ -11,7 +11,7 @@ export interface ModalProps {
   modalContent?: ModalContentProps;
   modalFooter?: ModalFooterProps;
   modalPosition: 'center' | 'bottom';
-  modalSize?: SizeProps;
+  modalSize?: ModalSizeProps;
   backgroundColor?: CSSProperties['backgroundColor'];
   borderRadius?: CSSProperties['borderRadius'];
   preventCloseOnOutsideClick?: boolean;
@@ -27,6 +27,21 @@ const ModalMain = ({
   modalPosition,
   preventCloseOnOutsideClick,
 }: ModalProps) => {
+  const modalWidth = () => {
+    if (modalSize) {
+      switch (modalSize.width) {
+        case 'small':
+          return '320px';
+        case 'medium':
+          return '480px';
+        case 'large':
+          return '600px';
+        default:
+          return modalSize.width;
+      }
+    }
+  };
+
   return (
     <>
       <div
@@ -37,7 +52,7 @@ const ModalMain = ({
         style={{
           backgroundColor: `${backgroundColor || 'white'}`,
           borderRadius: `${borderRadius || '5px'}`,
-          width: `${(modalSize && modalSize.width) || (modalPosition === 'center' ? '80%' : '100%')}`,
+          width: `${(modalSize && modalWidth()) || (modalPosition === 'center' ? '80%' : '100%')}`,
           height: `${(modalSize && modalSize.height) || 'fit-content'}`,
           minWidth: `${modalSize && modalSize.minWidth}`,
           minHeight: `${modalSize && modalSize.minHeight}`,
