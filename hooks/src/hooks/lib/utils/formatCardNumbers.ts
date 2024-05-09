@@ -34,7 +34,7 @@ const SPLIT_INDEX = Object.freeze({
   ],
 });
 
-const formatCardNumber = ({ cardNumbers, type }: Props) => {
+const formatCardNumbers = ({ cardNumbers, type }: Props) => {
   const cleanNumber = cardNumbers.replace(/\s+/g, "");
 
   const splitConfig = type && SPLIT_INDEX[type];
@@ -49,4 +49,4 @@ const formatCardNumber = ({ cardNumbers, type }: Props) => {
   return parts.join(" ");
 };
 
-export default formatCardNumber;
+export default formatCardNumbers;
