@@ -1,7 +1,12 @@
 {
   "name": "@hanuuny/react-card-hooks",
-  "version": "0.0.1",
+  "version": "0.0.5",
   "description": "우아한 리액트 카드 훅",
+  "keywords": [
+    "react",
+    "hook",
+    "react-card-hooks"
+  ],
   "type": "module",
   "types": "dist/index.d.ts",
   "main": "dist/index.js",
