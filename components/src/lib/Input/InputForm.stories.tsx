@@ -7,6 +7,7 @@ export default {
 } as Meta;
 
 const Template: StoryFn<{
+  onChange: () => void;
   title?: string;
   placeHolder?: string;
   size?: "small" | "medium" | "large";

@@ -7,10 +7,12 @@ const SIZE_VALUES = {
 };
 
 function InputForm({
+  onChange,
   title,
   placeHolder,
   size = "large",
 }: {
+  onChange: () => void;
   title?: string;
   placeHolder?: string;
   size?: "small" | "medium" | "large";
@@ -21,7 +23,11 @@ function InputForm({
       className={styles["title-container"]}
     >
       {title && <div className={styles["title"]}>{title}</div>}
-      <input className={styles.input} placeholder={placeHolder}></input>
+      <input
+        onChange={onChange}
+        className={styles.input}
+        placeholder={placeHolder}
+      ></input>
     </div>
   );
 }
