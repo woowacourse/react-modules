@@ -1,5 +1,7 @@
 import { StoryFn, Meta } from "@storybook/react";
 import Container from "./Container";
+import "../../reset.css";
+import "./Container.module.css";
 
 export default {
   title: "Components/Container",
@@ -8,7 +10,7 @@ export default {
 
 const Template: StoryFn<{
   onBackdropClick?: () => void;
-  size?: "small" | "medium" | "large";
+  guidanceSize?: "small" | "medium" | "large";
   position?: "center" | "bottom";
 }> = (args) => (
   <Container {...args}>
@@ -18,19 +20,19 @@ const Template: StoryFn<{
 
 export const CenterSmall = Template.bind({});
 CenterSmall.args = {
-  size: "small",
+  guidanceSize: "small",
   position: "center",
 };
 
 export const CenterMedium = Template.bind({});
 CenterMedium.args = {
-  size: "medium",
+  guidanceSize: "medium",
   position: "center",
 };
 
 export const CenterLarge = Template.bind({});
 CenterLarge.args = {
-  size: "large",
+  guidanceSize: "large",
   position: "center",
 };
 

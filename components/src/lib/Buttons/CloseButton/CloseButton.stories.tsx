@@ -4,27 +4,28 @@ import CloseButton from "./CloseButton";
 export default {
   title: "Components/Buttons/CloseButton",
   component: CloseButton,
+  tags: ["autodocs"],
 } as Meta;
 
 const Template: StoryFn<{
   onClick: () => void;
-  size?: "small" | "medium" | "large";
+  guidanceSize?: "small" | "medium" | "large";
 }> = (args) => <CloseButton {...args} />;
 
 export const Small = Template.bind({});
 Small.args = {
   onClick: () => alert("Clicked"),
-  size: "small",
+  guidanceSize: "small",
 };
 
 export const Medium = Template.bind({});
 Medium.args = {
   onClick: () => alert("Clicked"),
-  size: "medium",
+  guidanceSize: "medium",
 };
 
 export const Large = Template.bind({});
 Large.args = {
   onClick: () => alert("Clicked"),
-  size: "large",
+  guidanceSize: "large",
 };

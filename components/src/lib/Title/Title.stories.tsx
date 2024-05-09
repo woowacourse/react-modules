@@ -4,6 +4,7 @@ import Title from "./Title";
 export default {
   title: "Components/Title",
   component: Title,
+  tags: ["autodocs"],
 } as Meta;
 
 const Template: StoryFn<{
