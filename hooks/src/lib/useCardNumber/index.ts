@@ -5,6 +5,7 @@ import CARD_BRAND from '../constants/cardBrand';
 import REGEXPS from '../constants/regExps';
 import checkIsInRangeString from '../utils/checkIsInRangeString';
 import getErrorMessage from '../utils/getErrorMessage';
+import getFormattedCardNumber from './getFormattedCardNumber';
 import getOnChange from '../utils/getOnChange';
 
 export default function useCardNumber() {
@@ -35,7 +36,7 @@ export default function useCardNumber() {
 }
 
 const isItCardBrand = (cardNumber: string, cardBrand: CardBrand) => {
-  return cardBrand.startWith.some(head => {
+  return cardBrand.startWiths.some(head => {
     if (typeof head === 'string') {
       return cardNumber.startsWith(head);
     }
@@ -50,27 +51,6 @@ const isItCardBrand = (cardNumber: string, cardBrand: CardBrand) => {
 
 const getCardBrand = (cardNumber: string) => {
   return CARD_BRAND.find(cardBrand => isItCardBrand(cardNumber, cardBrand));
-};
-
-const getFormattedCardNumber = (cardNumber: string, formatArray: number[]) => {
-  const formatAccumulatedArray = formatArray.reduce((acc, number) => {
-    const lastNumber = (acc[acc.length - 1] ?? 0) + number;
-    acc.push(lastNumber + number);
-    return acc;
-  }, [] as number[]);
-
-  return formatAccumulatedArray.reduce((result, number, index) => {
-    if (index === 0) {
-      result.push(cardNumber.slice(0, number + 1));
-      return result;
-    }
-    if (index === formatArray.length - 1) {
-      result.push(cardNumber.slice(-number));
-      return result;
-    }
-    result.push(cardNumber.slice(formatArray[index - 1], number + 1));
-    return result;
-  }, [] as string[]);
 };
 
 const CARD_NUMBER_LENGTH = 16;
