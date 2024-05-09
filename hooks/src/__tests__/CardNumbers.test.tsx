@@ -1,6 +1,6 @@
+import '@testing-library/jest-dom';
 import { render, screen, fireEvent } from '@testing-library/react';
 import { CardNumbers } from '../components';
-import '@testing-library/jest-dom';
 
 describe('CardNumbers', () => {
   it('초기 상태 확인', () => {
