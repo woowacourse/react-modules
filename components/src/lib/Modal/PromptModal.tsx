@@ -9,7 +9,7 @@ import ModalCloseButton from './ModalCloseButton/ModalCloseButton';
 import ModalBody from './ModalBody/ModalBody';
 import ModalDescription from './ModalDescription/ModalDescription';
 import ModalButtonContainer from './ModalButtonContainer/ModalButtonContainer';
-import ModalInputField from './ModalInputField/ModalInputField';
+import ModalInputField, { ValidateResult } from './ModalInputField/ModalInputField';
 
 interface PromptModalProps {
   size?: ModalSize;
@@ -26,6 +26,9 @@ interface PromptModalProps {
 
   placeholder?: string;
   onConfirm: (value: string) => void;
+  initialValue?: string;
+  validateOnChange?: (value: string) => ValidateResult;
+  validateOnBlur?: (value: string) => ValidateResult;
 }
 
 const PromptModal = ({
@@ -42,6 +45,9 @@ const PromptModal = ({
   showCloseButton = false,
   placeholder = '',
   onConfirm,
+  initialValue = '',
+  validateOnChange = () => ({ isValid: true, errorMessage: '' }),
+  validateOnBlur = () => ({ isValid: true, errorMessage: '' }),
 }: PromptModalProps) => {
 
   useEffect(() => {
@@ -57,7 +63,7 @@ const PromptModal = ({
     }
   };
 
-  const [value, setValue] = useState('');
+  const [value, setValue] = useState(initialValue)
 
   return (
     <>
@@ -73,7 +79,7 @@ const PromptModal = ({
             </ModalHeader>
             <ModalBody>
               <ModalDescription description={description} />
-              <ModalInputField placeholder={placeholder} value={value} onChange={(e) => setValue(e.target.value)} />
+              <ModalInputField placeholder={placeholder} value={value} updateValue={setValue} validateOnChange={validateOnChange} validateOnBlur={validateOnBlur} />
               <>{children}</>
             </ModalBody>
             <ModalButtonContainer buttonPosition={buttonPosition}>

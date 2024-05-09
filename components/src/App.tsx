@@ -135,11 +135,29 @@ const App = () => {
       <PromptModal
         isOpened={promptModalOpened}
         onClose={handlePromptModalClose}
-        onConfirm={(value) => alert(`value is '${value}'`)}
+        onConfirm={(value) => alert(`your email is '${value}'`)}
         zIndex={300}
-        title="Todal Modal"
-        description="This is for woowacourse mission"
+        title="Email"
+        description="write your email"
         showCloseButton={false}
+
+        validateOnChange={(value) => {
+          if (/^[a-zA-Z0-9@.]+$/.test(value)) {
+
+            return { isValid: true, errorMessage: '' }
+          }
+
+          return { isValid: false, errorMessage: 'invalid input' }
+        }}
+
+        validateOnBlur={(value) => {
+          if (/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(value)) {
+
+            return { isValid: true, errorMessage: '' }
+          }
+
+          return { isValid: false, errorMessage: 'invalid email' }
+        }}
       />
     </>
   );

@@ -1,14 +1,27 @@
-import { StyledModalInput } from "./ModalInputField.styled";
+import { StyledModalInput, StyledModalInputContainer, StyledModalInputError } from "./ModalInputField.styled";
+import useInputValidate from "./useInputValidate/useInputValidate";
 
-interface ModalInputField<T> {
+interface ModalInputField {
   placeholder: string;
-  value: T;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  value: string;
+  updateValue: (value: string) => void;
+  validateOnChange: (value: string) => ValidateResult;
+  validateOnBlur: (value: string) => ValidateResult;
 }
 
-const ModalInputField = <T extends string>({ placeholder, value, onChange }: ModalInputField<T>) => {
+export interface ValidateResult {
+  isValid: boolean;
+  errorMessage: string;
+}
+
+const ModalInputField = ({ placeholder, value, updateValue, validateOnChange, validateOnBlur }: ModalInputField) => {
+  const { isCompleted, errorMessage, onChangeHandler, onBlurHandler, onFocusHandler } = useInputValidate({ value, updateValue, validateOnChange, validateOnBlur })
+
   return (
-    <StyledModalInput placeholder={placeholder} value={value} onChange={onChange} />
+    <StyledModalInputContainer>
+      <StyledModalInput placeholder={placeholder} value={value} onChange={onChangeHandler} onBlur={onBlurHandler} onFocus={onFocusHandler} hasError={errorMessage.length !== 0} />
+      <StyledModalInputError children={errorMessage} />
+    </StyledModalInputContainer>
   )
 }
 
