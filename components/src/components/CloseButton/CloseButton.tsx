@@ -3,7 +3,7 @@
 import useThemeContext from "../../hooks/useThemeContext";
 import COLOR_PALETTE from "../../colorPalette";
 import { closeButton } from "./CloseButton.styles";
-import { useModalAction } from "../Modal/Modal";
+import { useModalAction } from "../Modal";
 
 interface CloseButtonProps {
   handleClick?: () => void;

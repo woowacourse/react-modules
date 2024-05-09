@@ -99,11 +99,6 @@ const Modal = ({ theme, ...props }: PropsWithChildren<ModalProps>) => {
   );
 };
 
-export const useModalAction = () => {
-  const { action } = useModalContext();
-  return action;
-};
-
 enum ModalWidth {
   Small = 320,
   Medium = 480,
