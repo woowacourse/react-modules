@@ -3,33 +3,47 @@ import ValidationResult, {
   ERROR_TYPE,
   ValidationError,
 } from "../types/ValidationResult";
+import { useMemo, useState } from "react";
 
 import Validation from "../utils/Validation";
-import { useState } from "react";
 
-type CardGlobalBrand = "Visa" | "Master" | "Diners" | "AMEX" | "UnionPay";
+// 카드사 식별
+enum CardGlobalBrand {
+  VISA = "Visa",
+  MASTER = "Master",
+  DINERS = "Diners",
+  AMEX = "AMEX",
+  UNION_PAY = "UnionPay",
+  NOT_IDENTIFIED = "notIdentified",
+}
 
-const isVisaCard = (cardNumber: string) => {
+const isVisaCard = (cardNumber: string): cardNumber is CardGlobalBrand.VISA => {
   return cardNumber.startsWith("4");
 };
 
-const isMasterCard = (cardNumber: string) => {
+const isMasterCard = (
+  cardNumber: string
+): cardNumber is CardGlobalBrand.MASTER => {
   return ["51", "52", "53", "54", "55"].some((startingNumber) =>
     cardNumber.startsWith(startingNumber)
   );
 };
 
-const isDinersCard = (cardNumber: string) => {
+const isDinersCard = (
+  cardNumber: string
+): cardNumber is CardGlobalBrand.DINERS => {
   return cardNumber.startsWith("36");
 };
 
-const isAmexCard = (cardNumber: string) => {
+const isAmexCard = (cardNumber: string): cardNumber is CardGlobalBrand.AMEX => {
   return ["34", "37"].some((startingNumber) =>
     cardNumber.startsWith(startingNumber)
   );
 };
 
-const isUnionPayCard = (cardNumber: string) => {
+const isUnionPayCard = (
+  cardNumber: string
+): cardNumber is CardGlobalBrand.UNION_PAY => {
   if (cardNumber.length >= 3) {
     const targetNumber = parseInt(cardNumber.slice(0, 3));
     if (624 <= targetNumber && targetNumber <= 626) {
@@ -54,31 +68,65 @@ const isUnionPayCard = (cardNumber: string) => {
   return false;
 };
 
-const identifyCardGlobalBrand = (
-  cardNumber: string
-): CardGlobalBrand | undefined => {
+const identifyCardGlobalBrand = (cardNumber: string): CardGlobalBrand => {
   if (isVisaCard(cardNumber)) {
-    return "Visa";
+    return CardGlobalBrand.VISA;
   }
   if (isMasterCard(cardNumber)) {
-    return "Master";
+    return CardGlobalBrand.MASTER;
   }
   if (isDinersCard(cardNumber)) {
-    return "Diners";
+    return CardGlobalBrand.DINERS;
   }
   if (isAmexCard(cardNumber)) {
-    return "AMEX";
+    return CardGlobalBrand.AMEX;
   }
   if (isUnionPayCard(cardNumber)) {
-    return "UnionPay";
+    return CardGlobalBrand.UNION_PAY;
   }
+  return CardGlobalBrand.NOT_IDENTIFIED;
+};
+// ---
+
+// 포맷팅
+type CardFormat = Record<CardGlobalBrand, number[]>;
+
+const cardFormat: CardFormat = {
+  [CardGlobalBrand.VISA]: [4, 4, 4, 4],
+  [CardGlobalBrand.MASTER]: [4, 4, 4, 4],
+  [CardGlobalBrand.DINERS]: [4, 6, 4],
+  [CardGlobalBrand.AMEX]: [4, 6, 5],
+  [CardGlobalBrand.UNION_PAY]: [4, 4, 4, 4],
+  [CardGlobalBrand.NOT_IDENTIFIED]: [4, 4, 4, 4],
 };
 
+const formatCardNumber = (
+  cardNumber: string,
+  cardGlobalBrand: CardGlobalBrand
+) => {
+  const format = cardFormat[cardGlobalBrand];
+
+  let currentIndex = 0;
+  return format.map((length) =>
+    cardNumber.substring(currentIndex, (currentIndex += length))
+  );
+};
+// ---
+
+const calculateValidCardNumberLength = (cardGlobalBrand: CardGlobalBrand) => {
+  return cardFormat[cardGlobalBrand].reduce(
+    (prevSum, segmentLength) => prevSum + segmentLength,
+    0
+  );
+};
+
+// useCardNumber
 interface CardNumberValidationResult {
   cardNumber: string;
-  cardGlobalBrand?: CardGlobalBrand;
-  formattedCardNumber?: string[];
   validationResult?: ValidationResult;
+  cardGlobalBrand?: CardGlobalBrand;
+  maxLength: number;
+  formattedCardNumber?: string[];
   handleUpdateCardNumber: (value: string) => void;
 }
 
@@ -89,18 +137,27 @@ export default function useCardNumber(
 
   const [validationResult, setValidationResult] = useState<ValidationResult>();
 
-  const updateCardNumber = (cardNumber: string) => {
-    setCardNumber(cardNumber);
-    setValidationResult({ isValid: true });
-  };
+  const { cardGlobalBrand, validCardNumberLength, formattedCardNumber } =
+    useMemo(() => {
+      const cardGlobalBrand = identifyCardGlobalBrand(cardNumber);
+      const validCardNumberLength =
+        calculateValidCardNumberLength(cardGlobalBrand);
+      const formattedCardNumber = formatCardNumber(cardNumber, cardGlobalBrand);
+      return { cardGlobalBrand, validCardNumberLength, formattedCardNumber };
+    }, [cardNumber]);
 
-  const handleUpdateCardNumber = (value: string) => {
+  const handleUpdateCardNumber = (cardNumber: string) => {
     try {
-      validateBeforeUpdate(value);
+      const cardGlobalBrand = identifyCardGlobalBrand(cardNumber);
+      const validCardNumberLength =
+        calculateValidCardNumberLength(cardGlobalBrand);
 
-      updateCardNumber(value);
+      validateBeforeUpdate(cardNumber, validCardNumberLength);
 
-      validateAfterUpdate(value);
+      setCardNumber(cardNumber);
+      setValidationResult({ isValid: true });
+
+      validateAfterUpdate(cardNumber, validCardNumberLength);
     } catch (error) {
       if (error instanceof ValidationError) {
         setValidationResult({
@@ -114,27 +171,37 @@ export default function useCardNumber(
 
   return {
     cardNumber,
-    cardGlobalBrand: identifyCardGlobalBrand(cardNumber),
-    formattedCardNumber: [""], // TODO 카드 포맷팅
     validationResult,
+    cardGlobalBrand,
+    maxLength: validCardNumberLength,
+    formattedCardNumber,
     handleUpdateCardNumber,
   };
 }
+// ---
 
-const validateBeforeUpdate = (value: string) => {
+// validation
+const validateBeforeUpdate = (value: string, maxCardNumberLength: number) => {
   if (!Validation.isNumeric(value)) {
     throw new ValidationError(
       ERROR_TYPE.numericOnly,
-      ERROR_MESSAGE.numericOnly
+      ERROR_MESSAGE[ERROR_TYPE.numericOnly]
+    );
+  }
+  if (value.length > maxCardNumberLength) {
+    throw new ValidationError(
+      ERROR_TYPE.maxLength,
+      ERROR_MESSAGE[ERROR_TYPE.maxLength](maxCardNumberLength)
     );
   }
 };
 
-const validateAfterUpdate = (value: string) => {
-  if (!Validation.hasLength(value, 16)) {
+const validateAfterUpdate = (value: string, validCardNumberLength: number) => {
+  if (!Validation.hasLength(value, validCardNumberLength)) {
     throw new ValidationError(
       ERROR_TYPE.invalidLength,
-      ERROR_MESSAGE.invalidLength
+      ERROR_MESSAGE[ERROR_TYPE.invalidLength](validCardNumberLength)
     );
   }
 };
+// ---

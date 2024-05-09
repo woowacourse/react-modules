@@ -1,18 +1,22 @@
 export enum ERROR_TYPE {
   numericOnly,
+  maxLength,
   invalidLength,
 }
 
-export enum ERROR_MESSAGE {
-  numericOnly = "숫자만 입력이 가능해요!",
-  invalidLength = "유효하지 않는 길이입니다!",
-}
+export const ERROR_MESSAGE = {
+  [ERROR_TYPE.numericOnly]: "숫자만 입력할 수 있어요!",
+  [ERROR_TYPE.maxLength]: (maxLength: number) =>
+    `${maxLength}자리까지만 입력할 수 있어요!`,
+  [ERROR_TYPE.invalidLength]: (validLength: number) =>
+    `${validLength}자리 숫자를 입력해주세요!`,
+};
 
 export class ValidationError extends Error {
   errorType: ERROR_TYPE;
-  errorMessage: ERROR_MESSAGE;
+  errorMessage: string;
 
-  constructor(errorType: ERROR_TYPE, errorMessage: ERROR_MESSAGE) {
+  constructor(errorType: ERROR_TYPE, errorMessage: string) {
     super(errorMessage);
     this.name = "ValidationError";
     this.errorType = errorType;
