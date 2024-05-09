@@ -1,10 +1,11 @@
 import { useState } from 'react';
-import { CardType, getCardType } from '../../utils/card';
-
+import { getCardType } from '../../utils/card';
 import { CARD_TYPE } from '../../constants/Condition';
 
-const useCardType = () => {
-  const [cardType, setCardType] = useState<CardType>('DEFAULT');
+import type { CardType } from '../../types/common.type';
+
+const useCardType = (initialValue: CardType = 'DEFAULT') => {
+  const [cardType, setCardType] = useState<CardType>(initialValue);
 
   const handleCardType = (cardNumber: string) => {
     if (cardNumber.length > CARD_TYPE[cardType].MIN_LENGTH) return;
