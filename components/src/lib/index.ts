@@ -1,4 +1,5 @@
 import Backdrop from './Modal/Backdrop/Backdrop';
+import Button from './Modal/Button/Button';
 import CloseButton from './Modal/CloseButton/CloseButton';
 import Content from './Modal/Content/Content';
 import Footer from './Modal/Footer/Footer';
@@ -15,4 +16,5 @@ export const Modal = Object.assign(ModalContainer, {
   Footer: Footer,
   Title: Title,
   CloseButton: CloseButton,
+  Button: Button,
 });
