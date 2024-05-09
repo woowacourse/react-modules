@@ -73,7 +73,7 @@ const meta = {
     },
     confirmButtonTheme: {
       description: "버튼의 색상 테마를 결정하는 arg입니다. (dark/light)",
-      options: ["dark", "light"],
+      options: ["dark", "light", "inactive"],
       control: {
         type: "radio",
       },
