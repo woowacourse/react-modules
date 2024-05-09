@@ -1,16 +1,22 @@
 import React, { useState } from "react";
+import CloseButton from "../CloseButton/CloseButton";
+import x_img from "../assets/images/x_img.png";
+import Button from "../common/Button";
 import { ModalContextProvider, useModalContext } from "../hooks/useModalContext";
 import {
   StyledModalBody,
+  StyledModalButton,
   StyledModalContainer,
   StyledModalDimmer,
   StyledModalFooter,
   StyledModalHeader,
+  StyledModalInput,
 } from "./Modal.style";
 
 export interface ModalProps {
   modalPosition: "center" | "bottom";
   closeButtonPosition: "top" | "bottom";
+  placeholder?: string;
 }
 
 /* -------------------------------------------------------------------------------------------------
@@ -65,7 +71,7 @@ export const ModalClose: React.FC<React.PropsWithChildren<{ onClick?: () => void
     if (onClick) onClick();
     closeModal();
   };
-  return <button onClick={handleClick}>{children}</button>;
+  return <StyledModalButton onClick={handleClick}>{children}</StyledModalButton>;
 };
 
 /* -------------------------------------------------------------------------------------------------
@@ -75,11 +81,14 @@ export const ModalHeader: React.FC<{ title?: string; containClose: boolean }> = 
   title,
   containClose,
 }) => {
-  const { closeModal } = useModalContext();
   return (
     <StyledModalHeader>
       <h2>{title}</h2>
-      {containClose && <button onClick={closeModal}>X</button>}
+      {containClose && (
+        <CloseButton>
+          <img src={x_img} />
+        </CloseButton>
+      )}
     </StyledModalHeader>
   );
 };
@@ -94,8 +103,11 @@ export const ModalBody: React.FC<React.PropsWithChildren<{}>> = ({ children }) =
 /* -------------------------------------------------------------------------------------------------
  * ModalFooter
  * -----------------------------------------------------------------------------------------------*/
-export const ModalFooter: React.FC<React.PropsWithChildren<{}>> = ({ children }) => {
-  return <StyledModalFooter>{children}</StyledModalFooter>;
+export const ModalFooter: React.FC<React.PropsWithChildren<{ align: "center" | "end" }>> = ({
+  children,
+  align,
+}) => {
+  return <StyledModalFooter align={align}>{children}</StyledModalFooter>;
 };
 
 /* -------------------------------------------------------------------------------------------------
@@ -110,9 +122,17 @@ export const AlertModal: React.FC<React.PropsWithChildren<ModalProps & { title: 
     <ModalContent {...props}>
       <ModalHeader containClose={false} title={title} />
       <ModalBody>{children}</ModalBody>
-      <ModalFooter>
-        <ModalClose>닫기</ModalClose>
-        <ModalClose>확인</ModalClose>
+      <ModalFooter align="end">
+        <ModalClose>
+          <Button backgroundColor="#fff" fontColor="#333" borderColor="#33333340">
+            취소
+          </Button>
+        </ModalClose>
+        <ModalClose>
+          <Button backgroundColor="#333" fontColor="#fff">
+            확인
+          </Button>
+        </ModalClose>
       </ModalFooter>
     </ModalContent>
   );
@@ -130,8 +150,12 @@ export const ConfirmModal: React.FC<React.PropsWithChildren<ModalProps & { title
     <ModalContent {...props}>
       <ModalHeader containClose={false} title={title} />
       <ModalBody>{children}</ModalBody>
-      <ModalFooter>
-        <ModalClose>확인</ModalClose>
+      <ModalFooter align="end">
+        <ModalClose>
+          <Button backgroundColor="#333" fontColor="#fff">
+            확인
+          </Button>
+        </ModalClose>
       </ModalFooter>
     </ModalContent>
   );
@@ -143,6 +167,7 @@ export const ConfirmModal: React.FC<React.PropsWithChildren<ModalProps & { title
 export const PromptModal: React.FC<React.PropsWithChildren<ModalProps & { title: string }>> = ({
   children,
   title,
+  placeholder,
   ...props
 }) => {
   const [value, setValue] = useState("");
@@ -157,11 +182,21 @@ export const PromptModal: React.FC<React.PropsWithChildren<ModalProps & { title:
       <ModalHeader containClose={false} title={title} />
       <ModalBody>
         {children}
-        <form onSubmit={() => console.log(value)}></form>
-        <input value={value} onChange={handleChange} />
+        <form onSubmit={() => console.log(value)}>
+          <StyledModalInput value={value} onChange={handleChange} placeholder={placeholder} />
+        </form>
       </ModalBody>
-      <ModalFooter>
-        <ModalClose onClick={() => console.log(value)}>확인</ModalClose>
+      <ModalFooter align="end">
+        <ModalClose>
+          <Button backgroundColor="#fff" fontColor="#333" borderColor="#33333340">
+            취소
+          </Button>
+        </ModalClose>
+        <ModalClose>
+          <Button backgroundColor="#333" fontColor="#fff">
+            확인
+          </Button>
+        </ModalClose>
       </ModalFooter>
     </ModalContent>
   );

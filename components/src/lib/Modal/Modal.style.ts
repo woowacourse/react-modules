@@ -18,7 +18,6 @@ export const StyledModalContainer = styled.div<{
   max-width: 90%;
   display: flex;
   flex-direction: column;
-  height: 400px;
   max-height: 90%;
   color: black;
   padding: 16px 24px;
@@ -38,6 +37,7 @@ export const StyledModalHeader = styled.div`
   width: 100%;
   display: flex;
   justify-content: space-between;
+  align-items: center;
   padding: 0 16px;
   box-sizing: border-box;
   color: black;
@@ -45,10 +45,34 @@ export const StyledModalHeader = styled.div`
 
 export const StyledModalBody = styled.div`
   flex: 1;
-  padding: 16px;
+  padding: 10px;
+  text-align: left;
   overflow-y: auto;
 `;
 
-export const StyledModalFooter = styled.div`
+export const StyledModalFooter = styled.div<{ align: "center" | "end" }>`
   padding: 16px;
+  display: flex;
+  gap: 12px;
+  justify-content: ${({ align }) => (align === "center" ? "center" : "flex-end")};
+`;
+
+export const StyledModalButton = styled.button`
+  background: none;
+  color: inherit;
+  border: none;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+  outline: inherit;
+`;
+
+export const StyledModalInput = styled.input`
+  width: 100%;
+  box-sizing: border-box;
+  padding: 8px;
+  gap: 8px;
+  border-radius: 2px;
+  border: solid 1px #000;
+  opacity: 0px;
 `;
