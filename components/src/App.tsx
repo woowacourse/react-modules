@@ -1,7 +1,6 @@
 import React, { useReducer } from 'react';
 
 import { AlertModal, ConfirmModal, Modal, PromptModal } from './lib';
-import SelectBank from './components/SelectBank';
 
 function App() {
   const [isOpen, toggleIsOpen] = useReducer(prev => !prev, false);
@@ -28,14 +27,21 @@ function App() {
         caption=""
       />
       <PromptModal open={isPromptModalOpen} onClose={() => togglePromptModalOpen()} title="안녕" />
-      <Modal open={isOpen} onClose={() => toggleIsOpen()} type="drawer" closeOnESCKeydown>
+      <Modal
+        open={isOpen}
+        onClose={() => toggleIsOpen()}
+        type="dialog"
+        closeOnESCKeydown
+        dialogSize="small"
+      >
         <Modal.Header title="카드사 선택" onClose={toggleIsOpen} />
         <Modal.Content>
-          <SelectBank />
+          <div>안녕하세요</div>
         </Modal.Content>
         <Modal.Footer
           buttonPosition="column-reverse"
           closeButton={{
+            hide: true,
             role: 'close',
             text: '취소',
             onClick: () => console.log('취소'),
