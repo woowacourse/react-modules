@@ -3,6 +3,7 @@ import Button from './components/Button/Button';
 import CloseButton from './components/CloseButton/CloseButton';
 import { ModalBody, ModalFooter, ModalHeader, ModalMain } from './Modal/Modal';
 import Input from './components/Input/Input';
+import { AlertModal, ConfirmModal, PromptModal } from './ModalPreset/ModalPreset';
 
 export const Modal = Object.assign(ModalMain, {
   Title: Title,
@@ -13,3 +14,5 @@ export const Modal = Object.assign(ModalMain, {
   Footer: ModalFooter,
   Input: Input,
 });
+
+export { AlertModal, ConfirmModal, PromptModal };
