@@ -1,71 +1,54 @@
 import styled from "@emotion/styled";
-import { ModalProps } from "./Modal";
 
-export const ModalDimmer = styled.div`
-  position: absolute;
+export const StyledModalContainer = styled.div<{
+  modalPosition: "center" | "bottom";
+  closeButtonPosition: "top" | "bottom";
+}>`
+  position: fixed;
+  top: ${({ modalPosition }) => (modalPosition === "center" ? "50%" : "auto")};
+  bottom: ${({ modalPosition }) => (modalPosition === "bottom" ? "0" : "auto")};
+  left: 50%;
+  transform: ${({ modalPosition }) =>
+    modalPosition === "center" ? "translate(-50%, -50%)" : "translateX(-50%)"};
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
+  z-index: 1000;
+  width: 400px;
+  max-width: 90%;
+  display: flex;
+  flex-direction: column;
+  height: 400px;
+  max-height: 90%;
+  color: black;
+  padding: 16px 24px;
+`;
+
+export const StyledModalDimmer = styled.div`
+  position: fixed;
   top: 0;
   left: 0;
-  width: 100vw;
-  height: 100vh;
-  background: rgba(0, 0, 0, 0.35);
-  z-index: 1000;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 999;
 `;
 
-export const ModalContainer = styled.div<Pick<ModalProps, "modalPosition" | "closeButtonPosition">>`
+export const StyledModalHeader = styled.div`
+  width: 100%;
   display: flex;
-  z-index: 1001;
-  flex-direction: column;
-  ${({ closeButtonPosition }) =>
-    closeButtonPosition === "bottom" &&
-    `
   justify-content: space-between;
-`}
-  gap: 16px;
-  position: absolute;
-  min-height: 216px;
-  max-height: 70%;
-  padding: 24px 32px;
+  padding: 0 16px;
   box-sizing: border-box;
-  border-radius: 8px;
-  background: rgba(255, 255, 255, 1);
-  color: rgba(0, 0, 0, 1);
-
-  ${({ modalPosition }) =>
-    modalPosition === "center" &&
-    `
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 304px;
-  `}
-
-  ${({ modalPosition }) =>
-    modalPosition === "bottom" &&
-    `
-    bottom: 0;
-    left:0;
-    right:0;
-    width: 100%;
-  `}
+  color: black;
 `;
 
-export const ModalHeader = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
+export const StyledModalBody = styled.div`
+  flex: 1;
+  padding: 16px;
+  overflow-y: auto;
+`;
 
-  h1 {
-    width: 100%;
-    font-family: Noto Sans KR;
-    font-size: 18px;
-    font-weight: 700;
-    line-height: 26.06px;
-    text-align: left;
-    color: rgba(0, 0, 0, 1);
-
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
+export const StyledModalFooter = styled.div`
+  padding: 16px;
 `;

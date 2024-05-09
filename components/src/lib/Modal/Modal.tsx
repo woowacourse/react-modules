@@ -1,10 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import { ModalContextProvider, useModalContext } from "../hooks/useModalContext";
-import { ModalContainer, ModalDimmer } from "./Modal.style";
+import {
+  StyledModalBody,
+  StyledModalContainer,
+  StyledModalDimmer,
+  StyledModalFooter,
+  StyledModalHeader,
+} from "./Modal.style";
 
-interface ModalProps {
-  modalPosition?: "center" | "bottom";
-  closeButtonPosition?: "top" | "bottom";
+export interface ModalProps {
+  modalPosition: "center" | "bottom";
+  closeButtonPosition: "top" | "bottom";
 }
 
 /* -------------------------------------------------------------------------------------------------
@@ -27,10 +33,13 @@ export const ModalContent: React.FC<React.PropsWithChildren<ModalProps>> = ({
   return (
     isOpen && (
       <>
-        <ModalDimmer onClick={closeModal} />
-        <ModalContainer modalPosition={modalPosition} closeButtonPosition={closeButtonPosition}>
+        <StyledModalDimmer onClick={closeModal} />
+        <StyledModalContainer
+          modalPosition={modalPosition}
+          closeButtonPosition={closeButtonPosition}
+        >
           {children}
-        </ModalContainer>
+        </StyledModalContainer>
       </>
     )
   );
@@ -47,9 +56,16 @@ export const ModalTrigger: React.FC<React.PropsWithChildren<{}>> = ({ children }
 /* -------------------------------------------------------------------------------------------------
  * ModalClose
  * -----------------------------------------------------------------------------------------------*/
-export const ModalClose: React.FC<React.PropsWithChildren<{}>> = ({ children }) => {
+export const ModalClose: React.FC<React.PropsWithChildren<{ onClick?: () => void }>> = ({
+  children,
+  onClick,
+}) => {
   const { closeModal } = useModalContext();
-  return <button onClick={closeModal}>{children}</button>;
+  const handleClick = () => {
+    if (onClick) onClick();
+    closeModal();
+  };
+  return <button onClick={handleClick}>{children}</button>;
 };
 
 /* -------------------------------------------------------------------------------------------------
@@ -61,10 +77,10 @@ export const ModalHeader: React.FC<{ title?: string; containClose: boolean }> = 
 }) => {
   const { closeModal } = useModalContext();
   return (
-    <div>
+    <StyledModalHeader>
       <h2>{title}</h2>
       {containClose && <button onClick={closeModal}>X</button>}
-    </div>
+    </StyledModalHeader>
   );
 };
 
@@ -72,14 +88,83 @@ export const ModalHeader: React.FC<{ title?: string; containClose: boolean }> = 
  * ModalBody
  * -----------------------------------------------------------------------------------------------*/
 export const ModalBody: React.FC<React.PropsWithChildren<{}>> = ({ children }) => {
-  return <div>{children}</div>;
+  return <StyledModalBody>{children}</StyledModalBody>;
 };
 
 /* -------------------------------------------------------------------------------------------------
  * ModalFooter
  * -----------------------------------------------------------------------------------------------*/
 export const ModalFooter: React.FC<React.PropsWithChildren<{}>> = ({ children }) => {
-  return <div>{children}</div>;
+  return <StyledModalFooter>{children}</StyledModalFooter>;
+};
+
+/* -------------------------------------------------------------------------------------------------
+ * AlertModal
+ * -----------------------------------------------------------------------------------------------*/
+export const AlertModal: React.FC<React.PropsWithChildren<ModalProps & { title: string }>> = ({
+  children,
+  title,
+  ...props
+}) => {
+  return (
+    <ModalContent {...props}>
+      <ModalHeader containClose={false} title={title} />
+      <ModalBody>{children}</ModalBody>
+      <ModalFooter>
+        <ModalClose>닫기</ModalClose>
+        <ModalClose>확인</ModalClose>
+      </ModalFooter>
+    </ModalContent>
+  );
+};
+
+/* -------------------------------------------------------------------------------------------------
+ * ConfirmModal
+ * -----------------------------------------------------------------------------------------------*/
+export const ConfirmModal: React.FC<React.PropsWithChildren<ModalProps & { title: string }>> = ({
+  children,
+  title,
+  ...props
+}) => {
+  return (
+    <ModalContent {...props}>
+      <ModalHeader containClose={false} title={title} />
+      <ModalBody>{children}</ModalBody>
+      <ModalFooter>
+        <ModalClose>확인</ModalClose>
+      </ModalFooter>
+    </ModalContent>
+  );
+};
+
+/* -------------------------------------------------------------------------------------------------
+ * PromptModal
+ * -----------------------------------------------------------------------------------------------*/
+export const PromptModal: React.FC<React.PropsWithChildren<ModalProps & { title: string }>> = ({
+  children,
+  title,
+  ...props
+}) => {
+  const [value, setValue] = useState("");
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const newValue = e.target.value;
+    setValue(newValue);
+  };
+
+  return (
+    <ModalContent {...props}>
+      <ModalHeader containClose={false} title={title} />
+      <ModalBody>
+        {children}
+        <form onSubmit={() => console.log(value)}></form>
+        <input value={value} onChange={handleChange} />
+      </ModalBody>
+      <ModalFooter>
+        <ModalClose onClick={() => console.log(value)}>확인</ModalClose>
+      </ModalFooter>
+    </ModalContent>
+  );
 };
 
 /* -------------------------------------------------------------------------------------------------
@@ -93,4 +178,7 @@ export const Modal = {
   Body: ModalBody,
   Footer: ModalFooter,
   Content: ModalContent,
+  Alert: AlertModal,
+  Confirm: ConfirmModal,
+  Prompt: PromptModal,
 };
