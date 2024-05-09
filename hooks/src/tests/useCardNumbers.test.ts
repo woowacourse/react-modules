@@ -1,5 +1,5 @@
 import { renderHook, act } from '@testing-library/react';
-import useCardNumbers from '../lib/useCardNumbers';
+import useCardNumbers from '../lib/useCard/useCardNumbers';
 
 const initialValue = { first: '1234', second: '1234', third: '2344', fourth: '5623' };
 

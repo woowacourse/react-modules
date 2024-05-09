@@ -1,5 +1,5 @@
 import { renderHook, act } from '@testing-library/react';
-import usePassword from '../lib/usePassword';
+import usePassword from '../lib/useCard/usePassword';
 
 describe('usePassword 커스텀 훅 테스트', () => {
   it('초기값이 정확히 설정되어야 한다.', () => {

@@ -1,5 +1,5 @@
 import { renderHook, act } from '@testing-library/react';
-import useCardType from '../lib/useCardType';
+import useCardType from '../lib/useCard/useCardType';
 
 const selectOptions = ['마루', '쿠키', '치코', '헤인', '낙타'];
 

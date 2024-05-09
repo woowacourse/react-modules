@@ -1,5 +1,5 @@
 import { renderHook, act } from '@testing-library/react';
-import useCardHolder from '../lib/useCardHolder';
+import useCardHolder from '../lib/useCard/useCardHolder';
 
 describe('useCardHolder 커스텀 훅 테스트', () => {
   it('초기값이 정확히 설정되어야 한다.', () => {
