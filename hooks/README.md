@@ -5,37 +5,36 @@
 # installation
 
 ```bash
-
+npm install @jinyyy/react-payments
 ```
 
 # Hooks spec
 
 ## useCardNumber
 
-> Return validated the number on the payment card. It takes an array of four-digit \* four inputs and validates a total of 16 numbers. Also can only accept numeric input.
+> Returns a formatted value with the card company(amex, diners, visa, master, union pay) rules applied through validation.
 
 ### Simple Example
 
 ```tsx
 const SimpleComponent = () => {
-    const { cardNumbers, cardNumberError, handleChangeCardNumber } = useCardNumber();
+  const { cardNumbers, cardNumberError, handleChangeCardNumber } = useCardNumber();
 
-    return (
-        <h1>Card Numbers</h1>
-        <input value={cardNumbers[0]} onChange={(e) => handleChangeCardNumber(0, e.target.value)} />
-        <input value={cardNumbers[1]} onChange={(e) => handleChangeCardNumber(1, e.target.value)} />
-        <input value={cardNumbers[2]} onChange={(e) => handleChangeCardNumber(2, e.target.value)} />
-        <input value={cardNumbers[3]} onChange={(e) => handleChangeCardNumber(3, e.target.value)} />
-        <div>{cardNumberError.errorMessage}</div>
-    )
-}
+  return (
+    <>
+      <h1>Card Numbers</h1>
+      <input value={cardNumbers.join(' ')} onChange={(e) => handleChangeCardNumber(e.target.value.replace(/ /g, ''))} />
+      <div>{cardNumberError.errorMessage}</div>
+    </>
+  );
+};
 ```
 
 ### Return Value
 
-| Return Value                                               | type     | description                                                                                                                                                                                                    |
-| ---------------------------------------------------------- | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `{ cardNumbers, cardNumberError, handleChangeCardNumber }` | `object` | Contains the card number (`number[]`), card number error (`{errorConditions: boolean[], errorMessage: string}`) state, and a handler (`(cardIndex: number, value: string) => void`) to change the card number. |
+| Return Value                                               | Type     | Description                                                                              |
+| ---------------------------------------------------------- | -------- | ---------------------------------------------------------------------------------------- |
+| `{ cardNumbers, cardNumberError, handleChangeCardNumber }` | `object` | Contains the card numbers (`string[]`), card number error state, and a handler function. |
 
 ## useExpiration
 
@@ -58,9 +57,9 @@ const SimpleComponent = () => {
 
 ### Return Value
 
-| Return Value                                              | type     | description                                                                                                                                                       |
-| --------------------------------------------------------- | -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------ |
-| `{ expiration, expirationError, handleChangeExpiration }` | `object` | Contains the expiration (`{year : string; month : string;}`), expiration error (`{isError: boolean, errorMessage: string}`) state, and a handler (`(field: 'year' | 'month', value: string) => void`) to change the card number. |
+| Return Value                                              | Type     | Description                                                                                   |
+| --------------------------------------------------------- | -------- | --------------------------------------------------------------------------------------------- |
+| `{ expiration, expirationError, handleChangeExpiration }` | `object` | Contains the expiration date, expiration error state, and a handler to change the expiration. |
 
 ## useOwnerName
 
@@ -82,9 +81,9 @@ const SimpleComponent = () => {
 
 ### Return Value
 
-| Return Value                                           | type     | description                                                                                                                                                   |
-| ------------------------------------------------------ | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `{ ownerName, ownerNameError, handleChangeOwnerName }` | `object` | Contains owner Name(`string`), ownerNameError(`{isError : boolean; errorMessage : string;}`), and handleChangeOwnerName(`(value : string) => void`) function. |
+| Return Value                                          | Type     | Description                                                     |
+| ----------------------------------------------------- | -------- | --------------------------------------------------------------- |
+| `{ ownerName, ownerNameError, handleChangeOwnerName}` | `object` | Contains the owner's name, error state, and a handler function. |
 
 ## useCVCNumber
 
@@ -106,9 +105,9 @@ const SimpleComponent = () => {
 
 ### Return Value
 
-| Return Value                                           | type     | description                                                                                                                                                      |
-| ------------------------------------------------------ | -------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `{ cvcNumber, cvcNumberError, handleChangeCVCNumber }` | `object` | Contains cvc nuember(`string`), cvc number error(`{isError : boolean; errorMessage : string;}`), and handleChangeCVCNumber(`(value : string) => void`) function. |
+| Return Value                                     | Type     | Description                                                   |
+| ------------------------------------------------ | -------- | ------------------------------------------------------------- |
+| `{ cvcNumber, cvcError, handleChangeCVCNumber }` | `object` | Contains the CVC number, error state, and a handler function. |
 
 ## useCardPassword
 
@@ -130,6 +129,6 @@ const SimpleComponent = () => {
 
 ### Return Value
 
-| Return Value                                                    | type     | description                                                                                                                                                              |
-| --------------------------------------------------------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `{ cardPassword, cardPasswordError, handleChangeCardPassword }` | `object` | Contains card password(`string`), card password error(`{isError : boolean; errorMessage : string;}`), and handleChangeCardPassword(`(value : string) => void`) function. |
+| Return Value                                                    | Type     | Description                                                      |
+| --------------------------------------------------------------- | -------- | ---------------------------------------------------------------- |
+| `{ cardPassword, cardPasswordError, handleChangeCardPassword }` | `object` | Contains the card password, error state, and a handler function. |
