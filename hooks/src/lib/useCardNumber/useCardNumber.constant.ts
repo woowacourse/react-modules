@@ -7,32 +7,32 @@ export const CARD_NUMBER_ERROR_TYPE = {
 
 export const CARD_BRAND = {
   visa: {
-    name: 'visa',
+    brand: 'VISA',
     length: 16,
     format: [4, 4, 4, 4],
   },
   master: {
-    name: 'master',
+    brand: 'MASTER',
     length: 16,
     format: [4, 4, 4, 4],
   },
   diners: {
-    name: 'diners',
+    brand: 'DINERS',
     length: 14,
     format: [4, 6, 4],
   },
   amex: {
-    name: 'amex',
+    brand: 'AMEX',
     length: 15,
     format: [4, 6, 5],
   },
   union: {
-    name: 'union',
+    brand: 'UNION',
     length: 16,
     format: [4, 4, 4, 4],
   },
   default: {
-    name: 'default',
+    brand: 'DEFAULT',
     length: 16,
     format: [4, 4, 4, 4],
   },
