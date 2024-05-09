@@ -1,5 +1,5 @@
 import { Validator, ValueOf } from '../type';
-import { useMemo, useState } from 'react';
+import { useCallback, useState } from 'react';
 
 import REGEXPS from '../constants/regExps';
 import getCardBrand from './getCardBrand';
@@ -10,7 +10,7 @@ import getOnChange from '../utils/getOnChange';
 export default function useCardNumber() {
   const [cardNumber, setCardNumber] = useState('');
 
-  const onChange = useMemo(() => getOnChange(setCardNumber), []);
+  const onChange = useCallback(() => getOnChange(setCardNumber), []);
 
   const errorMessage = getErrorMessage(cardNumber, cardNumberPartValidators);
 
