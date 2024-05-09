@@ -95,7 +95,7 @@ const CloseButton = ({ label, onClose, size = "full" }: CloseButtonProps) => {
   return <BasicButton onClick={onClose} label={label} size={size} />;
 };
 
-interface FooterProps {
+export interface FooterProps {
   children?: React.ReactNode;
 }
 

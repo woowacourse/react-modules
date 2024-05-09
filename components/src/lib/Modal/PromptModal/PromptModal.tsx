@@ -2,7 +2,7 @@ import Input, { InputProps } from "@/lib/Input/Input";
 import Modal, { ModalPosition, ModalSize } from "../Modal/Modal";
 import { ChangeEvent } from "react";
 
-interface PromptModalProps {
+export interface PromptModalProps {
   isOpen: boolean;
   onClose: () => void;
   onConfirm: () => void;

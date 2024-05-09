@@ -4,7 +4,7 @@ import { StoryObj } from "@storybook/react";
 
 export default {
   title: "StyledModal/AlertModal",
-  component: Modal,
+  component: AlertModal,
 };
 
 const BasicAlertModal = () => {

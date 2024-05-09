@@ -5,7 +5,7 @@ import useInput from "@/lib/hooks/useInput";
 
 export default {
   title: "StyledModal/PromptModal",
-  component: Modal,
+  component: PromptModal,
 };
 
 const BasicPromptModal = () => {

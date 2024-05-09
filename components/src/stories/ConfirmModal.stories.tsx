@@ -4,7 +4,7 @@ import { StoryObj } from "@storybook/react";
 
 export default {
   title: "StyledModal/ConfirmModal",
-  component: Modal,
+  component: ConfirmModal,
 };
 
 const BasicConfirmModal = () => {

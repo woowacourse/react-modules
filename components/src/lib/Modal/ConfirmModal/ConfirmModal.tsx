@@ -1,6 +1,6 @@
 import Modal, { ModalPosition, ModalSize } from "../Modal/Modal";
 
-interface ConfirmModalProps {
+export interface ConfirmModalProps {
   isOpen: boolean;
   onClose: () => void;
   onConfirm: () => void;
