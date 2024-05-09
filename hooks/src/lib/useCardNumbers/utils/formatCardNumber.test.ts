@@ -1,22 +1,25 @@
+import formatCardNumber, {
+  calculateValidCardNumberLength,
+} from "./formatCardNumber";
+
 import { CardGlobalBrand } from "./identifyCardGLobalBrand";
-import formatCardNumber from "./formatCardNumber";
 
 describe("카드번호 포맷팅 테스트(formatCardNumber)", () => {
   const visaTestCases = [
     {
       cardNumber: "4123123412341234",
       cardGlobalBrand: CardGlobalBrand.VISA,
-      expectedBrand: ["4123", "1234", "1234", "1234"],
+      expectedFormattedNumber: ["4123", "1234", "1234", "1234"],
     },
     {
       cardNumber: "412312341234123",
       cardGlobalBrand: CardGlobalBrand.VISA,
-      expectedBrand: ["4123", "1234", "1234", "123"],
+      expectedFormattedNumber: ["4123", "1234", "1234", "123"],
     },
     {
       cardNumber: "41231234123",
       cardGlobalBrand: CardGlobalBrand.VISA,
-      expectedBrand: ["4123", "1234", "123", ""],
+      expectedFormattedNumber: ["4123", "1234", "123", ""],
     },
   ];
 
@@ -24,22 +27,22 @@ describe("카드번호 포맷팅 테스트(formatCardNumber)", () => {
     {
       cardNumber: "5123123412341234",
       cardGlobalBrand: CardGlobalBrand.MASTER,
-      expectedBrand: ["5123", "1234", "1234", "1234"],
+      expectedFormattedNumber: ["5123", "1234", "1234", "1234"],
     },
     {
       cardNumber: "512312341234123",
       cardGlobalBrand: CardGlobalBrand.MASTER,
-      expectedBrand: ["5123", "1234", "1234", "123"],
+      expectedFormattedNumber: ["5123", "1234", "1234", "123"],
     },
     {
       cardNumber: "5123123412341",
       cardGlobalBrand: CardGlobalBrand.MASTER,
-      expectedBrand: ["5123", "1234", "1234", "1"],
+      expectedFormattedNumber: ["5123", "1234", "1234", "1"],
     },
     {
       cardNumber: "51231",
       cardGlobalBrand: CardGlobalBrand.MASTER,
-      expectedBrand: ["5123", "1", "", ""],
+      expectedFormattedNumber: ["5123", "1", "", ""],
     },
   ];
 
@@ -47,17 +50,17 @@ describe("카드번호 포맷팅 테스트(formatCardNumber)", () => {
     {
       cardNumber: "36127897891324",
       cardGlobalBrand: CardGlobalBrand.DINERS,
-      expectedBrand: ["3612", "789789", "1324"],
+      expectedFormattedNumber: ["3612", "789789", "1324"],
     },
     {
       cardNumber: "36127897891",
       cardGlobalBrand: CardGlobalBrand.DINERS,
-      expectedBrand: ["3612", "789789", "1"],
+      expectedFormattedNumber: ["3612", "789789", "1"],
     },
     {
       cardNumber: "36127897",
       cardGlobalBrand: CardGlobalBrand.DINERS,
-      expectedBrand: ["3612", "7897", ""],
+      expectedFormattedNumber: ["3612", "7897", ""],
     },
   ];
 
@@ -65,17 +68,17 @@ describe("카드번호 포맷팅 테스트(formatCardNumber)", () => {
     {
       cardNumber: "341245678912345",
       cardGlobalBrand: CardGlobalBrand.AMEX,
-      expectedBrand: ["3412", "456789", "12345"],
+      expectedFormattedNumber: ["3412", "456789", "12345"],
     },
     {
       cardNumber: "341245678912",
       cardGlobalBrand: CardGlobalBrand.AMEX,
-      expectedBrand: ["3412", "456789", "12"],
+      expectedFormattedNumber: ["3412", "456789", "12"],
     },
     {
       cardNumber: "371245678",
       cardGlobalBrand: CardGlobalBrand.AMEX,
-      expectedBrand: ["3712", "45678", ""],
+      expectedFormattedNumber: ["3712", "45678", ""],
     },
   ];
 
@@ -83,44 +86,44 @@ describe("카드번호 포맷팅 테스트(formatCardNumber)", () => {
     {
       cardNumber: "6221265678901234",
       cardGlobalBrand: CardGlobalBrand.UNION_PAY,
-      expectedBrand: ["6221", "2656", "7890", "1234"],
+      expectedFormattedNumber: ["6221", "2656", "7890", "1234"],
     },
     {
       cardNumber: "62212656789012",
       cardGlobalBrand: CardGlobalBrand.UNION_PAY,
-      expectedBrand: ["6221", "2656", "7890", "12"],
+      expectedFormattedNumber: ["6221", "2656", "7890", "12"],
     },
     {
       cardNumber: "622126567890",
       cardGlobalBrand: CardGlobalBrand.UNION_PAY,
-      expectedBrand: ["6221", "2656", "7890", ""],
+      expectedFormattedNumber: ["6221", "2656", "7890", ""],
     },
 
     {
       cardNumber: "6245678901234123",
       cardGlobalBrand: CardGlobalBrand.UNION_PAY,
-      expectedBrand: ["6245", "6789", "0123", "4123"],
+      expectedFormattedNumber: ["6245", "6789", "0123", "4123"],
     },
     {
       cardNumber: "6245679",
       cardGlobalBrand: CardGlobalBrand.UNION_PAY,
-      expectedBrand: ["6245", "679", "", ""],
+      expectedFormattedNumber: ["6245", "679", "", ""],
     },
     {
       cardNumber: "624",
       cardGlobalBrand: CardGlobalBrand.UNION_PAY,
-      expectedBrand: ["624", "", "", ""],
+      expectedFormattedNumber: ["624", "", "", ""],
     },
 
     {
       cardNumber: "6282567901234123",
       cardGlobalBrand: CardGlobalBrand.UNION_PAY,
-      expectedBrand: ["6282", "5679", "0123", "4123"],
+      expectedFormattedNumber: ["6282", "5679", "0123", "4123"],
     },
     {
       cardNumber: "6282",
       cardGlobalBrand: CardGlobalBrand.UNION_PAY,
-      expectedBrand: ["6282", "", "", ""],
+      expectedFormattedNumber: ["6282", "", "", ""],
     },
   ];
 
@@ -132,10 +135,60 @@ describe("카드번호 포맷팅 테스트(formatCardNumber)", () => {
     ...unionTestCases,
   ];
 
-  testCases.forEach(({ cardNumber, cardGlobalBrand, expectedBrand }) => {
-    test(`카드번호 ${cardNumber}와 카드사 ${cardGlobalBrand}를 입력받으면, ${expectedBrand}로 포맷팅한다.`, () => {
+  test.each(testCases)(
+    `카드번호 $cardNumber와 카드사 $cardGlobalBrand를 입력받으면, $expectedFormattedNumber로 포맷팅한다.`,
+    ({
+      cardNumber,
+      cardGlobalBrand,
+      expectedFormattedNumber,
+    }: {
+      cardNumber: string;
+      cardGlobalBrand: CardGlobalBrand;
+      expectedFormattedNumber: string[];
+    }) => {
       const formattedNumber = formatCardNumber(cardNumber, cardGlobalBrand);
-      expect(formattedNumber).toEqual(expectedBrand);
-    });
-  });
+      expect(formattedNumber).toEqual(expectedFormattedNumber);
+    }
+  );
+});
+
+describe("카드사의 유효한 카드번호의 길이 테스트 (calculateValidCardNumberLength)", () => {
+  test.each([
+    {
+      cardGlobalBrand: CardGlobalBrand.VISA,
+      expectedLength: 16,
+    },
+    {
+      cardGlobalBrand: CardGlobalBrand.MASTER,
+      expectedLength: 16,
+    },
+    {
+      cardGlobalBrand: CardGlobalBrand.DINERS,
+      expectedLength: 14,
+    },
+    {
+      cardGlobalBrand: CardGlobalBrand.AMEX,
+      expectedLength: 15,
+    },
+    {
+      cardGlobalBrand: CardGlobalBrand.UNION_PAY,
+      expectedLength: 16,
+    },
+    {
+      cardGlobalBrand: CardGlobalBrand.NOT_IDENTIFIED,
+      expectedLength: 16,
+    },
+  ])(
+    "카드사가 $cardGlobalBrand일 때, 유효한 카드번호의 길이는 $expectedLength이다.",
+    ({
+      cardGlobalBrand,
+      expectedLength,
+    }: {
+      cardGlobalBrand: CardGlobalBrand;
+      expectedLength: number;
+    }) => {
+      const validLength = calculateValidCardNumberLength(cardGlobalBrand);
+      expect(validLength).toBe(expectedLength);
+    }
+  );
 });
