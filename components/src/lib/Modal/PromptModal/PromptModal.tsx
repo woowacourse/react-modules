@@ -5,7 +5,7 @@ import Button from '../../components/Button/Button';
 import { ModalHeader, ModalBody, ModalFooter } from '../../components/ModalLayout/ModalLayout';
 import type { ModalProps } from '../../types/common';
 
-interface PromptModalProps extends ModalProps {
+export interface PromptModalProps extends ModalProps {
   headerText: string;
   inputValue: string;
   onInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void;

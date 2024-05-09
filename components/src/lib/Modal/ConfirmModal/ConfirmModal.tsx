@@ -4,7 +4,7 @@ import Button from '../../components/Button/Button';
 import { ModalHeader, ModalBody, ModalFooter } from '../../components/ModalLayout/ModalLayout';
 import type { ModalProps } from '../../types/common';
 
-interface ConfirmModalProps extends ModalProps {
+export interface ConfirmModalProps extends ModalProps {
   headerText: string;
   bodyText: string;
   onConfirm: () => void;

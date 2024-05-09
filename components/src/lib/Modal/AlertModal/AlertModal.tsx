@@ -4,7 +4,7 @@ import Button from '../../components/Button/Button';
 import { ModalHeader, ModalBody, ModalFooter } from '../../components/ModalLayout/ModalLayout';
 import type { ModalProps } from '../../types/common';
 
-interface AlertModalProps extends ModalProps {
+export interface AlertModalProps extends ModalProps {
   headerText: string;
   bodyText: string;
 }
