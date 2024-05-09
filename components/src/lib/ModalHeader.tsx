@@ -3,20 +3,20 @@ import xButton from "./asset/xButton.svg";
 
 interface Props {
   title: string;
-  hasXButton: boolean;
-  handleCloseEvent: (e: React.MouseEvent) => void;
+  hasXButton?: boolean;
+  setModalClose: (e: React.MouseEvent) => void;
   xButtonContent?: string;
 }
 const ModalHeader = ({
   title,
-  hasXButton,
-  handleCloseEvent,
+  hasXButton = true,
+  setModalClose,
   xButtonContent,
 }: Props) => {
   return (
     <HeaderContainer>
       {title}
-      <Button onClick={(e) => handleCloseEvent(e)}>
+      <Button onClick={(e) => setModalClose(e)}>
         {hasXButton && <img src={xButtonContent || xButton} />}
       </Button>
     </HeaderContainer>
