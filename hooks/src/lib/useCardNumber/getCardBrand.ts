@@ -3,15 +3,15 @@ import { CardBrand } from '../type';
 import checkIsInRangeString from '../utils/checkIsInRangeString';
 
 const isItCardBrand = (cardNumber: string, cardBrand: CardBrand) => {
-  return cardBrand.startWiths.some(head => {
-    if (typeof head === 'string') {
-      return cardNumber.startsWith(head);
+  return cardBrand.startWiths.some(startWith => {
+    if (typeof startWith === 'string') {
+      return cardNumber.startsWith(startWith);
     }
-    const sliceNumber = Math.max(head.from.length, head.to.length);
+    const sliceNumber = Math.max(startWith.from.length, startWith.to.length);
     return checkIsInRangeString(
       cardNumber.slice(0, sliceNumber),
-      head.from,
-      head.to
+      startWith.from,
+      startWith.to
     );
   });
 };
