@@ -2,14 +2,12 @@ import { ButtonHTMLAttributes } from 'react';
 import type { Size } from '../../type/common';
 import styles from './Button.module.css';
 
-type ButtonColor = 'default' | 'none';
-type ButtonVariant = 'normal' | 'border';
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   text: string;
-  color?: ButtonColor;
+  color?: 'default' | 'none';
   size?: Size;
   fullWidth?: boolean;
-  variants?: ButtonVariant;
+  variants?: 'normal' | 'border';
 }
 
 const Button = ({ text, color = 'default', size = 'lg', fullWidth, variants = 'normal', ...rest }: ButtonProps) => {
