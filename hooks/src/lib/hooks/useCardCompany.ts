@@ -23,7 +23,6 @@ const useCardCompany = (cardCompanyList: string[]) => {
   };
 
   const cardCompanyRef = useRef<HTMLSelectElement>(null);
-
   const clickCardCompany = (event: ChangeEvent<HTMLSelectElement>) => {
     const { value } = event.target;
     setCardCompanyWrapper(value);
