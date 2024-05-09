@@ -1,0 +1,33 @@
+.inputWrapper {
+  display: flex;
+  align-items: center;
+
+  width: 100%;
+  height: 32px;
+}
+
+.SROnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  border: 0;
+  clip: rect(0 0 0 0);
+}
+
+.input {
+  padding: 8px;
+
+  width: 100%;
+
+  border: 1px solid #000;
+  border-radius: 2px;
+
+  font-size: 0.6875rem;
+  font-weight: 400;
+
+  outline: none;
+}
