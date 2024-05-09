@@ -1,4 +1,4 @@
-import { MouseEvent } from 'react';
+import { MouseEvent, useEffect } from 'react';
 import styled from 'styled-components';
 
 import { BASIC_BORDER_RADIUS, BASIC_BOTTOM_MODAL_ANIMATION_DURATION } from '../../constants/modal';
@@ -7,6 +7,7 @@ import { useBottomModalAnimation, useModalContext } from '../../hooks';
 import { BottomModalProps, ModalButtonProps } from '../../types/modal';
 import ModalContainer from '../ModalContainer';
 import { ModalContents, ModalContentsStyleProps } from '../ModalContainer/Contents';
+import calculateTimeout from '../../utils/timeoutCalculator';
 
 const BottomModalContents = styled(ModalContents)<ModalContentsStyleProps>`
   max-width: 100vw;
