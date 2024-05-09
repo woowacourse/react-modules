@@ -19,7 +19,7 @@ const useCardOwnerName = ({
   maxLength = MAX_NAME_LENGTH,
   initialName = '',
   needKeyTrigger = false,
-}: useCardOwnerNameProps) => {
+}: useCardOwnerNameProps = {}) => {
   const [ownerName, setOwnerName] = useState(initialName);
   const [isTriggered, setIsTriggered] = useState(false);
   const [isValidOwnerName, setIsValidOwnerName] = useState(false);
