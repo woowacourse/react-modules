@@ -13,11 +13,8 @@ const useCardNumbers = (initialValue: Record<string, string>, options?: Options)
     if (!checkValidInputs(targetValue, name, validateNumber)) return;
     updateCardNumbers(targetValue, name);
 
-    if (targetValue.length === event.target.maxLength) {
-      if (!checkValidInputs(targetValue, name, validateCardNumberFormat)) return;
-      if (options?.isAutoFocus) {
-        autoFocusNextInput(event.target);
-      }
+    if (options?.isAutoFocus) {
+      autoFocusNextInput(event.target);
     }
   };
 
@@ -35,13 +32,12 @@ const useCardNumbers = (initialValue: Record<string, string>, options?: Options)
     for (const [key, value] of initialValues) {
       if (!validateNumber(value).isValid || !validateCardNumberFormat(value).isValid) {
         console.error(
-          `cardNumbers field error: ${value} 라는 올바르지 않은 값이 들어와 빈 값으로 초기화했습니다.`,
+          `cardNumbers field error: ${initialValue} 라는 올바르지 않은 값이 들어와 빈 값으로 초기화했습니다.`,
         );
         updateCardNumbers('', key);
       }
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [initialValue, updateCardNumbers]);
 
   return { value, handleChange, handleBlur, errorInfo };
 };
