@@ -41,11 +41,18 @@ interface FooterProps extends React.HTMLAttributes<HTMLDivElement> {
   cancelLabel?: string;
   confirmLabel?: string;
   align?: "vertical" | "horizontal";
-  onConfirm: () => void;
-  onClose: () => void;
+  onConfirm?: () => void;
+  onClose?: () => void;
 }
 
-const Footer = ({ cancelLabel, confirmLabel, onConfirm, onClose, align = "vertical", ...restProps }: FooterProps) => {
+const Footer = ({
+  cancelLabel,
+  confirmLabel,
+  onConfirm = () => {},
+  onClose = () => {},
+  align = "vertical",
+  ...restProps
+}: FooterProps) => {
   return (
     (confirmLabel || cancelLabel) && (
       <div className={css(buttonContainerCSS[align])} {...restProps}>

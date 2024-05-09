@@ -18,7 +18,7 @@ function App() {
         isOpen={isOpen}
         closeModal={closeModal}
         confirmModal={confirmModal}
-        title="아이디를 입력해 주세요"
+        title="아이디를 입력해 주세요."
         description="아이디는 필수로 입력해야 합니다."
         confirmLabel="확인"
         size="medium"
