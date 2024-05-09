@@ -5,7 +5,7 @@ import { buttonsStyle, modalContentStyle, modalStyle } from "./Modal.style";
 import ModalHeader from "../ModalHeader/ModalHeader";
 import MainButton, { MainButtonStyleType } from "../MainButton/MainButton";
 
-import ThemeProvider from "../ContextProvider/ThemeProvider";
+import ThemeProvider from "../contextProvider/ThemeProvider";
 
 import useThemeContext from "../../hooks/useThemeContext";
 import useModalContext from "../../hooks/useModalContext";

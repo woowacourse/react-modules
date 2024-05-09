@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
 import { ModalHeader, ModalProvider } from "../lib";
-import ThemeProvider from "../components/ContextProvider/ThemeProvider";
+import ThemeProvider from "../components/contextProvider/ThemeProvider";
 
 const meta = {
   title: "ModalHeader",

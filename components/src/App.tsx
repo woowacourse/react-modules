@@ -1,5 +1,5 @@
 import "./App.css";
-import { AlertModal, useModalAction } from "./lib/index";
+import { AlertModal, useModalAction } from "./lib/";
 
 function App() {
   const { handleOpen } = useModalAction();
@@ -19,7 +19,7 @@ function App() {
       >
         <div>hello, world</div>
       </Modal.Small> */}
-      <AlertModal.Large title="카드번호를 입력하세요."></AlertModal.Large>
+      <AlertModal.Large title="카드번호를 입력하세요.">여기에는 alert내부 컨텐츠가 들어갑니다</AlertModal.Large>
     </>
   );
 }

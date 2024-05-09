@@ -3,7 +3,7 @@ import ReactDOM from "react-dom/client";
 import App from "./App.tsx";
 import "./index.css";
 
-import { ModalProvider } from "./lib/index.ts";
+import { ModalProvider } from "./lib/";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <ModalProvider>
