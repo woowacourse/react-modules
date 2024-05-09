@@ -11,21 +11,25 @@ import Xmark from "../icon/Xmark";
 interface ModalProps {
   position?: "center" | "bottom";
   title?: string;
-  hasConfirmButton?: boolean;
-  closeButtonPosition?: "bottom" | "top";
   onConfirm?: () => void;
   onClose?: () => void;
-  children: React.ReactNode;
+  onChange?: () => void;
+  inputValue?: string;
+  size?: "small" | "medium" | "large";
+  type?: "alert" | "confirm" | "prompt";
+  children?: React.ReactNode;
 }
 
 const Modal: React.FC<ModalProps> = ({
   position = "center",
   title,
-  hasConfirmButton = true,
-  closeButtonPosition = "top",
   onConfirm,
   onClose,
+  onChange,
+  inputValue,
   children,
+  size = "medium",
+  type = "confirm",
 }) => {
   const { ref, action } = useModalHook();
 
@@ -49,20 +53,7 @@ const Modal: React.FC<ModalProps> = ({
   return (
     <dialog ref={ref} css={modalStyle(position)}>
       <div css={modalContentStyle}>
-        <ModalHeader>
-          {title && <Title>{title}</Title>}
-          {closeButtonPosition === "top" && (
-            <Button
-              type="cancel"
-              handleClick={() => {
-                action.handleClose();
-                if (onClose) onClose();
-              }}
-            >
-              <Xmark />
-            </Button>
-          )}
-        </ModalHeader>
+        <ModalHeader>{title && <Title>{title}</Title>}</ModalHeader>
         <div>{children}</div>
         <div css={buttonsStyle}>
           {hasConfirmButton && (
