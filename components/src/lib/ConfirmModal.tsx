@@ -2,12 +2,14 @@ import CompoundModal, { CompoundModalProps } from './CompoundModal';
 
 interface ConfirmModalProps extends CompoundModalProps {
   title?: string;
+  onCancel: () => void;
+  onConfirm: () => void;
 }
 export default function ConfirmModal({
   title,
-  position,
   children,
-  size,
+  position = 'center',
+  size = 'medium',
   onCancel,
   onConfirm,
 }: ConfirmModalProps) {

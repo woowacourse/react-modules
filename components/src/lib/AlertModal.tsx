@@ -2,15 +2,17 @@ import CompoundModal, { CompoundModalProps } from './CompoundModal';
 
 interface AlertModalProps extends CompoundModalProps {
   title?: string;
+  onConfirm: () => void;
 }
 export default function AlertModal({
   title,
   children,
-  onCancel,
+  position = 'center',
+  size = 'medium',
   onConfirm,
 }: AlertModalProps) {
   return (
-    <CompoundModal onCancel={onCancel} onConfirm={onConfirm}>
+    <CompoundModal onConfirm={onConfirm} position={position} size={size}>
       {title && (
         <CompoundModal.title style={{ marginBottom: '10px' }}>
           {title}
