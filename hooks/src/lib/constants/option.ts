@@ -1,6 +1,5 @@
 export const OPTION = {
   cardNumberInputCount: 4,
-  cardNumberMaxLength: 4,
   expirationDateInputCount: 2,
   expirationDateMaxLength: 2,
   nameInputCount: 1,
@@ -23,4 +22,13 @@ export const CARD = {
   롯데카드: "롯데카드",
   하나카드: "하나카드",
   국민카드: "국민카드",
+};
+
+export const CARD_BRAND: Record<BrandType, BrandType> = {
+  Diners: "Diners",
+  AMEX: "AMEX",
+  UnionPay: "UnionPay",
+  Visa: "Visa",
+  Master: "Master",
+  Normal: "Normal",
 };
