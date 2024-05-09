@@ -21,6 +21,6 @@ const CloseButton = styled.button({
   '&:only-child': {
     position: 'absolute',
     margin: '0 auto',
-    left: '100%',
+    right: 0,
   },
 });
