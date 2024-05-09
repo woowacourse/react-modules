@@ -16,7 +16,7 @@ const Validator = {
   },
 
   checkEnglish(value: string): boolean {
-    return /^[a-zA-Z\s]*$/.test(value);
+    return REGEX.english.test(value);
   },
 
   checkFillNumber(value: string, maxDigit: number) {
