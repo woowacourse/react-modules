@@ -89,6 +89,17 @@ export const ModalDescription = styled.p`
   color: #999999;
 `;
 
+export const ModalTextBody = styled.p`
+  margin-block-start: 0;
+  margin-block-end: 0;
+
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.6;
+  text-align: left;
+  color: #333333;
+`;
+
 export const ButtonContainer = styled.div<{
   buttonPosition: ButtonPosition;
   buttonJustifyContent: ButtonJustifyContent;

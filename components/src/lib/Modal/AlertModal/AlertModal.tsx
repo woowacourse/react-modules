@@ -4,12 +4,15 @@ import Modal, {
   ModalSize,
 } from '../Modal';
 
+import { ModalTextBody } from '../Modal.styled';
+
 export interface AlertModalProps {
   isOpened: boolean;
   closeModal: () => void;
   handleConfirm?: () => void;
   title?: string;
   description?: string;
+  content?: string;
   size?: ModalSize;
   children?: JSX.Element;
   modalPosition?: ModalPosition;
@@ -23,6 +26,7 @@ const AlertModal = ({
   handleConfirm = () => {},
   title = '',
   description = '',
+  content = '',
   size = 'large',
   children,
   modalPosition = 'center',
@@ -51,7 +55,10 @@ const AlertModal = ({
         onClick: handleClick,
       }}
     >
-      {children}
+      <>
+        <ModalTextBody>{content}</ModalTextBody>
+        {children}
+      </>
     </Modal>
   );
 };
