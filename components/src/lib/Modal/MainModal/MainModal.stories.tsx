@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { Modal } from '../..';
 
 const meta = {
-  title: 'Modal',
+  title: 'MainModal',
   component: Modal,
   parameters: {
     controls: { exclude: ['close', 'children'] },
@@ -18,15 +18,15 @@ const meta = {
   argTypes: {
     position: {
       options: ['center', 'bottom', 'top'],
-      control: { type: 'select' },
+      control: { type: 'radio' },
     },
     size: {
       options: ['sm', 'md', 'lg'],
-      control: { type: 'select' },
+      control: { type: 'radio' },
     },
     backdropType: {
       options: ['transparent', 'blur', 'opaque'],
-      control: { type: 'select' },
+      control: { type: 'radio' },
     },
     shadow: {
       control: { type: 'boolean' },
@@ -57,7 +57,6 @@ const childrenSample = (
 export const Default: Story = {
   args: {
     isOpen: true,
-    close: () => {},
     children: childrenSample,
   },
 };
@@ -66,7 +65,6 @@ export const Top: Story = {
   args: {
     position: 'top',
     isOpen: true,
-    close: () => {},
     children: childrenSample,
   },
 };
@@ -75,7 +73,6 @@ export const Center: Story = {
   args: {
     position: 'center',
     isOpen: true,
-    close: () => {},
     children: childrenSample,
   },
 };
@@ -84,7 +81,6 @@ export const Bottom: Story = {
   args: {
     position: 'bottom',
     isOpen: true,
-    close: () => {},
     children: childrenSample,
   },
 };
@@ -94,7 +90,6 @@ export const Small: Story = {
     position: 'center',
     size: 'sm',
     isOpen: true,
-    close: () => {},
     children: childrenSample,
   },
 };
@@ -104,7 +99,6 @@ export const Medium: Story = {
     position: 'center',
     size: 'md',
     isOpen: true,
-    close: () => {},
     children: childrenSample,
   },
 };
@@ -114,7 +108,6 @@ export const Large: Story = {
     position: 'center',
     size: 'lg',
     isOpen: true,
-    close: () => {},
     children: childrenSample,
   },
 };
