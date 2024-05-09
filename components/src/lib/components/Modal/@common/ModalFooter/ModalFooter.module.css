@@ -1,0 +1,35 @@
+.modalFooter {
+  width: 100%;
+  height: 100px;
+  overflow-x: auto;
+  overflow-y: auto;
+}
+
+.modalFooterChildrenContainer {
+  width: 100%;
+  height: 100%;
+}
+
+.footerRow {
+  height: 44px;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+}
+
+.modalFooter {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.modalFooter :-webkit-scrollbar {
+  display: none;
+}

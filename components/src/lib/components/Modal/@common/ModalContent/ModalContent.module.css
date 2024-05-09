@@ -1,0 +1,15 @@
+.modalContent {
+  width: 100%;
+  height: 100px;
+  overflow-x: auto;
+  overflow-y: auto;
+}
+
+.modalContent {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.modalContent :-webkit-scrollbar {
+  display: none;
+}
