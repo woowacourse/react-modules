@@ -5,10 +5,10 @@ export const MODAL_SIZE = {
 };
 
 export const BUTTON_SIZE = {
-  small: { width: '30%', height: '3.2rem', fontSize: 'var(--font-size-sm)' },
+  small: { width: '25%', height: '3.6rem', fontSize: 'var(--font-size-sm)' },
   medium: {
     width: '50%',
-    height: '3.8rem',
+    height: '4rem',
     fontSize: 'var(--font-size-base)',
   },
   large: { width: '100%', height: '4.4rem', fontSize: 'var(--font-size-lg)' },
