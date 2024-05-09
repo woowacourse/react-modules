@@ -9,6 +9,7 @@ interface ModalProps extends HTMLAttributes<HTMLDivElement> {
   closeModal: () => void;
   size?: ModalSize;
   position?: ModalPosition;
+  children: React.ReactNode;
 }
 
 interface ContentsProps extends HTMLAttributes<HTMLDivElement> {

@@ -5,7 +5,7 @@ type FlexProperties = Pick<
 
 interface FlexProps extends FlexProperties {
   style?: React.CSSProperties;
-  children?: React.ReactNode;
+  children: React.ReactNode;
 }
 
 /**
