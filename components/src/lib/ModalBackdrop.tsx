@@ -5,11 +5,13 @@ import usePreventScroll from "./hooks/usePreventScroll";
 
 type Props = {
   opacity?: string;
+  zIndex?: number;
 };
 
 export default function ModalBackdrop({
   children,
   opacity = "rgba(255, 255, 255, 0.1)",
+  zIndex = 100,
 }: PropsWithChildren<Props>) {
   const { isOpen, onClose, open } = useContext(ModalContext);
 
@@ -23,15 +25,22 @@ export default function ModalBackdrop({
     }
   };
 
+  const handleBackdropClick = (event: React.MouseEvent<HTMLDivElement>) => {
+    if (event.target === event.currentTarget && onClose) {
+      onClose(event);
+    }
+  };
+
   usePreventScroll(isOpen);
 
   return open ? (
     <div
       className={styles.back_drop}
-      onClick={(e) => onClose && onClose(e)}
+      onClick={handleBackdropClick}
       onKeyDown={handleKeyDown}
       style={{
         background: opacity,
+        zIndex: zIndex,
       }}
       role="button"
       tabIndex={0}
