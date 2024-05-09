@@ -2,24 +2,24 @@ import styled from 'styled-components';
 import { ButtonSize } from './constant/buttonSize';
 import { ReactNode } from 'react';
 
-type Style = {
+export type Style = {
   backgroundColor: string;
   fontColor: string;
 };
 
-type Width = 'default' | 'stretch';
-interface Props {
+export type Width = 'default' | 'stretch';
+export interface ButtonProps {
   width?: Width;
   onClick?: (e: React.MouseEvent) => void;
   children?: ReactNode;
   style?: Style;
 }
-const Button = ({
+const Button: React.FC<ButtonProps> = ({
   width = 'default',
   children,
   onClick,
   style = { backgroundColor: 'black', fontColor: 'white' },
-}: Props) => {
+}: ButtonProps) => {
   return (
     <StyledButton
       $style={style}

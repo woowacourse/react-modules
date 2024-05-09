@@ -1,18 +1,21 @@
 import styled from 'styled-components';
 
-interface Props {
+export interface ModalDimmedProps {
   color?: string;
   onClick?: (e: React.MouseEvent) => void;
 }
 
-function ModalDimmed({ color, onClick }: Props) {
+const ModalDimmed: React.FC<ModalDimmedProps> = ({
+  color,
+  onClick,
+}: ModalDimmedProps) => {
   return (
     <Dimmed
       color={color}
       onClick={onClick}
     />
   );
-}
+};
 const Dimmed = styled.div`
   position: fixed;
   inset: 0;

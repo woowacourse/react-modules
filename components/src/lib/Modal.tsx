@@ -9,11 +9,11 @@ import Button from './Button';
 import ModalFooter from './ModalFooter';
 import ModalBody from './ModalBody';
 
-type Size = 'small' | 'medium' | 'large';
+export type Size = 'small' | 'medium' | 'large';
 
-type Position = 'bottom' | 'center';
+export type Position = 'bottom' | 'center';
 
-interface Props {
+export interface ModalProps {
   position?: Position;
   size?: Size;
   children?: ReactNode;
@@ -21,13 +21,13 @@ interface Props {
 
   onDimmedClick?: (e: React.MouseEvent) => void;
 }
-const ModalMain = ({
+const ModalMain: React.FC<ModalProps> = ({
   position = 'center',
   size = 'medium',
   dimmed,
   onDimmedClick,
   children,
-}: Props) => {
+}: ModalProps) => {
   return (
     <>
       <ModalDimmed
@@ -53,6 +53,7 @@ const ModalWrapper = styled.div<{
   width: ${(props) => props.$size};
   max-width: ${(props) => props.$size};
   max-height: 90%;
+
   @media (max-width: ${(props) => props.$size}) {
     width: 90%;
   }
@@ -63,8 +64,9 @@ const ModalFrame = styled.div`
   flex-direction: column;
   background-color: white;
   padding: 24px 32px;
-  gap: 5px;
+  border: 1px solid gray;
   border-radius: 8px;
+  gap: 5px;
   box-sizing: border-box;
 `;
 

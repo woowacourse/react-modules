@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import Modal from './lib/Modal';
+import { Modal } from 'chico-custom-modal';
 import xButton from './lib/asset/xButton.svg';
 
 function App() {

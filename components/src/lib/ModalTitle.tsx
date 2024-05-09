@@ -1,11 +1,11 @@
 import styled from 'styled-components';
 
-interface Props {
+export interface ModalTitleProps {
   title: string;
 }
-function ModalTitle({ title }: Props) {
+const ModalTitle: React.FC<ModalTitleProps> = ({ title }: ModalTitleProps) => {
   return <Title>{title}</Title>;
-}
+};
 
 const Title = styled.span`
   color: black;

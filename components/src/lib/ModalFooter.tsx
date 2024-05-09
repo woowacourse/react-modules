@@ -1,16 +1,19 @@
 import { ReactNode } from 'react';
 import styled from 'styled-components';
 
-type Position = 'row' | 'column';
+export type FooterLayout = 'row' | 'column';
 
-interface Props {
-  position?: Position;
+export interface ModalFooterProps {
+  position?: FooterLayout;
   children: ReactNode;
 }
 
-function ModalFooter({ position = 'row', children }: Props) {
+const ModalFooter: React.FC<ModalFooterProps> = ({
+  position = 'row',
+  children,
+}: ModalFooterProps) => {
   return <Footer $position={position}>{children}</Footer>;
-}
+};
 
 const Footer = styled.footer<{ $position: string }>`
   display: flex;

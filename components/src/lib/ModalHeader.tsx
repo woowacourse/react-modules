@@ -1,10 +1,12 @@
 import styled from 'styled-components';
 import { ReactNode } from 'react';
 
-interface Props {
+export interface ModalHeaderProps {
   children?: ReactNode;
 }
-const ModalHeader = ({ children }: Props) => {
+const ModalHeader: React.FC<ModalHeaderProps> = ({
+  children,
+}: ModalHeaderProps) => {
   return <HeaderContainer>{children}</HeaderContainer>;
 };
 
