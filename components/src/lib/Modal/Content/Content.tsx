@@ -1,7 +1,7 @@
 import { PropsWithChildren } from 'react';
 import styles from './content.module.css';
 
-type SizeType = 'small' | 'medium' | 'large';
+export type SizeType = 'small' | 'medium' | 'large';
 
 interface ContentProps {
   size: SizeType;

@@ -1,14 +1,16 @@
 import { Modal } from '../..';
+import { SizeType } from '../Content/Content';
 import { ModalProps } from '../ModalContainer';
 
 interface AlertModalProps extends ModalProps {
+  size: SizeType;
   title: string;
   label: string;
   existCloseButton: boolean;
   onConfirm: () => void;
 }
 
-export default function AlertModal({ title, label, position, isOpen, onClose, onConfirm, existCloseButton }: AlertModalProps) {
+export default function AlertModal({ size = 'medium', title, label, position, isOpen, onClose, onConfirm, existCloseButton }: AlertModalProps) {
   const onConfirmHandler = () => {
     onConfirm();
     onClose();
@@ -17,7 +19,7 @@ export default function AlertModal({ title, label, position, isOpen, onClose, on
   return (
     <Modal position={position} isOpen={isOpen} onClose={onClose}>
       <Modal.Backdrop onClick={onClose} />
-      <Modal.Content size='medium'>
+      <Modal.Content size={size}>
         <Modal.Header>
           <Modal.Title>{title}</Modal.Title>
           {existCloseButton && <Modal.CloseButton onClick={onClose} />}
