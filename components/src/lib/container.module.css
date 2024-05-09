@@ -17,4 +17,20 @@
 .bottom {
   position: absolute;
   bottom: 0;
+  max-width: 100%;
+}
+
+.large {
+  width: 600px;
+  height: 206px;
+}
+
+.medium {
+  width: 480px;
+  height: 206px;
+}
+
+.small {
+  width: 320px;
+  height: 206px;
 }
