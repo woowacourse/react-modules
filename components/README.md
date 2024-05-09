@@ -54,6 +54,10 @@ export const MyComponent = () => {
 
 모달을 쉽게 닫을 수 있도록 제공되는 닫기 버튼입니다.
 
+### `Modal.Input`
+
+모달에서 제공되는 기본 입력창 입니다.
+
 각 컴포넌트는 일관된 외관을 제공하도록 적절하게 스타일링되어 있지만, 사용자의 필요에 따라 커스텀할 수 있습니다.
 
 <br />
@@ -62,22 +66,35 @@ export const MyComponent = () => {
 
 모달 라이브러리는 다양한 선택 속성을 지원합니다:
 
-### `Modal` 컴포넌트
+### `ModalMain` 컴포넌트
 
-| Name           | Type                                  | Default    | Description                            |
-| -------------- | ------------------------------------- | ---------- | -------------------------------------- |
-| `position`     | `'bottom' \| 'center'`                | `'bottom'` | 모달의 위치를 설정합니다.              |
-| `size`         | `'sm' \| 'md' \| 'lg'`                | `'lg'`     | 모달의 크기를 설정합니다.              |
-| `backdropType` | `'transparent' \| 'blur' \| 'opaque'` | `'opaque'` | 원하는 배경 효과 유형을 정의합니다.    |
-| `shadow`       | `boolean`                             | `'true'`   | 모달에 그림자 효과를 설정합니다.       |
-| `animation`    | `boolean`                             | `true`     | 모달 트랜지션 애니메이션을 설정합니다. |
+| Name           | Type           | Default   | Description                            |
+| -------------- | -------------- | --------- | -------------------------------------- | ------------------------- | ----------------------------------- |
+| `isOpen`       | `boolean`      | -         | 모달이 열려 있는지 여부를 결정합니다.  |
+| `close`        | `function`     | -         | 모달을 닫는 함수입니다.                |
+| `position`     | `'bottom'      | 'center'` | `'center'`                             | 모달의 위치를 설정합니다. |
+| `size`         | `'sm'          | 'md'      | 'lg'`                                  | `'lg'`                    | 모달의 크기를 설정합니다.           |
+| `backdropType` | `'transparent' | 'blur'    | 'opaque'`                              | `'opaque'`                | 원하는 배경 효과 유형을 정의합니다. |
+| `shadow`       | `boolean`      | `true`    | 모달에 그림자 효과를 설정합니다.       |
+| `animation`    | `boolean`      | `true`    | 모달 트랜지션 애니메이션을 설정합니다. |
+| `zIndex`       | `number`       | `100`     | 모달의 z-인덱스를 설정합니다.          |
+
+### `Modal.Footer` 컴포넌트
+
+| Name        | Type     | Default   | Description |
+| ----------- | -------- | --------- | ----------- | ---------------------------------- | ------------------------- |
+| `direction` | `'row'   | 'column'` | `'column'`  | 푸터의 레이아웃 방향을 설정합니다. |
+| `position`  | `'start' | 'center'  | 'end'`      | `'center'`                         | 푸터의 위치를 정렬합니다. |
 
 ### `Modal.Button` 컴포넌트
 
-| Name   | Type                       | Default     | Description               |
-| ------ | -------------------------- | ----------- | ------------------------- |
-| `mode` | `'primary' \| 'secondary'` | `'primary'` | 버튼의 타입을 설정합니다. |
-| `size` | `'sm' \| 'md' \| 'lg'`     | `'lg'`      | 버튼의 크기를 설정합니다. |
+| Name        | Type       | Default   | Description                                    |
+| ----------- | ---------- | --------- | ---------------------------------------------- | -------------------------------- |
+| `text`      | `string`   | -         | 버튼에 표시될 텍스트입니다.                    |
+| `color`     | `'default' | 'none'`   | `'default'`                                    | 버튼의 색상 스타일을 설정합니다. |
+| `size`      | `Size`     | `'lg'`    | 버튼의 크기를 설정합니다.                      |
+| `fullWidth` | `boolean`  | `false`   | 버튼이 전체 너비를 차지할지 여부를 설정합니다. |
+| `variants`  | `'normal'  | 'border'` | `'normal'`                                     | 버튼의 스타일 변형을 설정합니다. |
 
 <br />
 <br />
@@ -101,9 +118,9 @@ export const MyComponent = () => {
       <Modal.Body>
         <p>모달입니다.</p>
       </Modal.Body>
-      <Modal.Footer>
-        <Modal.Button text="확인" mode="primary" size="lg"></Modal.Button>
-        <Modal.Button text="닫기" mode="secondary" size="lg" onClick={handleClose}></Modal.Button>
+      <Modal.Footer direction="row" location="right">
+        <Modal.Button text="확인" color="default" size="lg"></Modal.Button>
+        <Modal.Button text="닫기" color="none" variants="border" size="lg" onClick={handleClose}></Modal.Button>
       </Modal.Footer>
     </Modal>
   );
