@@ -59,7 +59,7 @@ function BottomModal(props: BottomModalProps) {
   );
 }
 
-function Button({ children, onClick, isCloseModal, ...rest }: ModalButtonProps) {
+function BottomModalButton({ children, onClick, isCloseModal, ...rest }: ModalButtonProps) {
   const { handleCloseModal } = useModalContext(BottomModalContext);
 
   const handleClick = (e: MouseEvent<HTMLButtonElement>) => {
@@ -76,6 +76,6 @@ function Button({ children, onClick, isCloseModal, ...rest }: ModalButtonProps) 
   );
 }
 
-BottomModal.button = Button;
+BottomModal.Button = BottomModalButton;
 
 export default BottomModal;

@@ -9,7 +9,7 @@ export default function AlertModal(props: AlertModalProps) {
     setOpenModal,
     title,
     contents,
-    buttonContainerJustifyContent,
+    buttonContainerJustifyContent = 'right',
     buttonStyle = BASIC_BUTTON_STYLE,
     buttonContents,
   } = props;

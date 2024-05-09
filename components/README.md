@@ -91,7 +91,7 @@ type ModalType = 'center' | 'bottom' | 'toast';
 #### 모달
 
 - Modal : 합성 컴포넌트로 필요한 부분들을 가지고 사용자가 원하는 모달을 만들 수 있습니다.
-- BottomModal : type='bottom'시의 모달로, 화면의 하단에 나타납니다. BottomModal의 닫기 기능이 있는 버튼을 사용하고 싶다면, BottomModal.button 을 사용하실 수 있습니다.
+- BottomModal : type='bottom'시의 모달로, 화면의 하단에 나타납니다. BottomModal의 닫기 기능이 있는 버튼을 사용하고 싶다면, BottomModal.Button 을 사용하실 수 있습니다.
 - CenterModal : type='center'시의 모달로,화면의 정가운데에 나타납니다.
 - TostModal: type='toast'시의 모달로, 지정된 위치에 나타났다가 사용자가 지정한 일정 시간이 지나면 사라집니다.
 

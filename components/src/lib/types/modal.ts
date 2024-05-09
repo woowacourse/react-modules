@@ -46,30 +46,29 @@ export type ButtonContainerJustifyContent =
 export interface AlertModalProps extends Omit<ModalCommonProps, 'children'> {
   title?: ReactNode;
   contents: ReactNode;
-  buttonContainerJustifyContent: ButtonContainerJustifyContent;
+  buttonContainerJustifyContent?: ButtonContainerJustifyContent;
   buttonStyle: CSSProperties;
   buttonContents: ReactNode;
 }
 
 export type ExtraClickAction = (e?: MouseEvent<HTMLButtonElement>) => void;
-export interface ConfirmChildrenButton {
   contents: ReactNode;
   style?: CSSProperties;
   extraClickAction?: ExtraClickAction;
 }
 
-export interface ConfirmButtonGroupProps {
-  confirmButton: ConfirmChildrenButton;
-  cancelButton: ConfirmChildrenButton;
+export interface ConfirmAndCancelButtonGroupProps {
+  confirmButton: Button;
+  cancelButton: Button;
   isConfirmButtonFirst?: boolean;
   closeModal: () => void;
 }
 export interface ConfirmModalProps
   extends Omit<ModalCommonProps, 'children'>,
-    Omit<ConfirmButtonGroupProps, 'closeModal'> {
+    Omit<ConfirmAndCancelButtonGroupProps, 'closeModal'> {
   title?: ReactNode;
   contents: ReactNode;
-  buttonContainerJustifyContent: ButtonContainerJustifyContent;
+  buttonContainerJustifyContent?: ButtonContainerJustifyContent;
 }
 export interface ModalContainerProps extends Omit<ModalCommonProps, 'setOpenModal'>, AnimationProps {
   closeModal: () => void;
