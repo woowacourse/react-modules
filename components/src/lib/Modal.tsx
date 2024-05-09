@@ -14,8 +14,11 @@ export interface ModalStyle {
   modal?: React.CSSProperties;
 }
 
+type ModalSize = 'small' | 'medium' | 'large';
+
 export interface ModalProps {
   open: boolean;
+  dialogSize?: ModalSize;
   onClose: () => void;
   type: ModalType;
   style?: ModalStyle;
@@ -31,10 +34,17 @@ const MODAL_TYPE: Record<ModalType, string> = {
   'drawer-left': `${styles.drawer} ${styles.drawerLeft}`,
 };
 
+const DIALOG_SIZE: Record<ModalSize, string> = {
+  small: styles.dialogSmall,
+  medium: styles.dialogMedium,
+  large: styles.dialogLarge,
+};
+
 const Modal = ({
   open,
   onClose,
   type,
+  dialogSize = 'large',
   style,
   closeOnOutsideClick = true,
   closeOnESCKeydown = false,
@@ -45,12 +55,15 @@ const Modal = ({
   useModalCloseClickDimmer(modalRef, onClose, closeOnOutsideClick);
   useCloseOnESCKeyDown(open, onClose, closeOnESCKeydown);
 
+  const modalStyle =
+    type === 'dialog' ? `${MODAL_TYPE[type]} ${DIALOG_SIZE[dialogSize]}` : MODAL_TYPE[type];
+
   return (
     <>
       {open &&
         createPortal(
           <div className={styles.dimmed} style={style?.dimmed}>
-            <section className={MODAL_TYPE[type]} ref={modalRef} style={style?.modal}>
+            <section className={modalStyle} ref={modalRef} style={style?.modal}>
               {children}
             </section>
           </div>,
