@@ -14,7 +14,7 @@ enum DefaultColor {
 
 const COLOR_PALETTE = {
   light: {
-    background: DefaultColor.MediumWhite,
+    background: DefaultColor.SmokeWhite,
     backgroundHighlight: DefaultColor.SmokeWhite,
     backgroundReverse: DefaultColor.VeryDarkGray,
     color: DefaultColor.VeryDarkGray,
