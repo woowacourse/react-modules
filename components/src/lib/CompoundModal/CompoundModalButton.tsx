@@ -5,20 +5,20 @@ import useCompoundModalContext from './useCompoundModalContext';
 
 interface CompoundModalButtonProps
   extends React.HTMLAttributes<HTMLButtonElement> {
-  isCloseButton?: boolean;
-  isConfirmButton?: boolean;
-  isCancelButton?: boolean;
+  closeButton?: boolean;
+  confirmButton?: boolean;
+  cancelButton?: boolean;
   buttonTheme?: ButtonTheme;
 }
 const getOnClick = ({
-  isCloseButton,
-  isConfirmButton,
-  isCancelButton,
+  closeButton: closeButton,
+  confirmButton,
+  cancelButton,
 }: CompoundModalButtonProps) => {
   const { onClose, onConfirm, onCancel } = useCompoundModalContext();
-  if (isCloseButton) return onClose;
-  if (isConfirmButton) return onConfirm;
-  if (isCancelButton) return onCancel;
+  if (closeButton) return onClose;
+  if (confirmButton) return onConfirm;
+  if (cancelButton) return onCancel;
   return onClose;
 };
 
@@ -41,15 +41,18 @@ const Button = styled.button<ButtonProps>(({ buttonTheme }) => {
   const backgroundColor =
     buttonTheme === 'primary' ? COLOR_HEXES.gray1 : COLOR_HEXES.white;
   const color =
-    buttonTheme === 'primary' ? COLOR_HEXES.white : COLOR_HEXES.gray1;
+    buttonTheme === 'primary'
+      ? COLOR_HEXES.white
+      : COLOR_HEXES.grayTransParent2;
   return {
+    boxSizing: 'border-box',
     width: '100%',
     height: '44px',
     backgroundColor,
     border:
       buttonTheme === 'secondary'
         ? `1px solid ${COLOR_HEXES.grayTransParent1}`
-        : undefined,
+        : '0',
     borderRadius: '5px',
 
     fontWeight: 700,
