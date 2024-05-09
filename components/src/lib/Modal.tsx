@@ -1,17 +1,13 @@
 import { PropsWithChildren, useEffect, useState } from "react";
 import { ModalProvider } from "./ModalProvider";
 import { ModalContextType } from "./ModalContext";
+import { PropsWithChildren } from "react";
+import { ModalProvider } from "./ModalProvider";
+import { ModalContextType, useModal } from "./ModalContext";
 import ModalPortal from "./ModalPortal";
 import ModalBackdrop from "./ModalBackdrop";
 import ModalCloseButton from "./ModalCloseButton";
 import Container from "./Container";
-import styles from "./container.module.css";
-
-interface ModalProviderValue extends ModalContextType {
-  closing: boolean;
-  open: boolean;
-  sizeClassName: string;
-}
 
 export default function Modal({
   children,
