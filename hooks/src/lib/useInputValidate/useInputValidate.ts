@@ -24,9 +24,7 @@ const useInputValidate = ({
 
   const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newValue = e.target.value;
-    const { isValid, errorMessage } = validateOnChange(
-      newValue.replace(/-/g, ''),
-    );
+    const { isValid, errorMessage } = validateOnChange(newValue);
 
     setIsCompleted(false);
 
