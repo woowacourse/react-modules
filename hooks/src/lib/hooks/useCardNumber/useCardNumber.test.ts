@@ -10,7 +10,6 @@ describe('useCardNumber 커스텀 훅 테스트', () => {
     it(`${CARD_TYPE['DINERS'].VALID_LENGTH}자 카드 번호를 입력하면 유효하다.`, () => {
       const { result } = renderHook(() => useCardNumber());
 
-      React.act(() => result.current.handleCardNumberChange('36'));
       React.act(() => result.current.handleCardNumberChange('3612 234567 3456'));
 
       expect(result.current.isValidCardNumber).toBe(true);
@@ -19,7 +18,6 @@ describe('useCardNumber 커스텀 훅 테스트', () => {
     it(`${CARD_TYPE['DINERS'].VALID_LENGTH}자 미만의 카드 번호를 입력하면 유효하지 않다.`, () => {
       const { result } = renderHook(() => useCardNumber());
 
-      React.act(() => result.current.handleCardNumberChange('36'));
       React.act(() => result.current.handleCardNumberChange('3612 234567 345'));
 
       expect(result.current.isValidCardNumber).toBe(false);
@@ -28,7 +26,6 @@ describe('useCardNumber 커스텀 훅 테스트', () => {
     it(`${CARD_TYPE['DINERS'].VALID_LENGTH}자 미만의 카드 번호를 입력하면 에러 메시지를 표시한다.`, () => {
       const { result } = renderHook(() => useCardNumber());
 
-      React.act(() => result.current.handleCardNumberChange('36'));
       React.act(() => result.current.handleCardNumberChange('3612 234567 345'));
 
       expect(result.current.cardNumberErrorMessage).toBe(NUMBER_ERROR_MESSAGES.MAX_LENGTH);
@@ -39,7 +36,6 @@ describe('useCardNumber 커스텀 훅 테스트', () => {
     it(`${CARD_TYPE['AMEX'].VALID_LENGTH}자의 카드 번호를 입력하면 유효하다.`, () => {
       const { result } = renderHook(() => useCardNumber());
 
-      React.act(() => result.current.handleCardNumberChange('34'));
       React.act(() => result.current.handleCardNumberChange('3412 234567 34567'));
 
       expect(result.current.isValidCardNumber).toBe(true);
@@ -48,7 +44,6 @@ describe('useCardNumber 커스텀 훅 테스트', () => {
     it(`${CARD_TYPE['AMEX'].VALID_LENGTH}자 미만의 카드 번호를 입력하면 유효하지 않다.`, () => {
       const { result } = renderHook(() => useCardNumber());
 
-      React.act(() => result.current.handleCardNumberChange('34'));
       React.act(() => result.current.handleCardNumberChange('3412 234567 3456'));
 
       expect(result.current.isValidCardNumber).toBe(false);
@@ -57,7 +52,6 @@ describe('useCardNumber 커스텀 훅 테스트', () => {
     it(`${CARD_TYPE['AMEX'].VALID_LENGTH}자 미만의 카드 번호를 입력하면 에러 메시지를 표시한다.`, () => {
       const { result } = renderHook(() => useCardNumber());
 
-      React.act(() => result.current.handleCardNumberChange('34'));
       React.act(() => result.current.handleCardNumberChange('3412 234567 3456'));
 
       expect(result.current.cardNumberErrorMessage).toBe(NUMBER_ERROR_MESSAGES.MAX_LENGTH);
@@ -110,7 +104,6 @@ describe('useCardNumber 커스텀 훅 테스트', () => {
     it(`DINERS 카드는 ${CARD_TYPE['DINERS'].PATTERN} 패턴으로 포맷팅 된다.`, () => {
       const { result } = renderHook(() => useCardNumber());
 
-      React.act(() => result.current.handleCardNumberChange('36'));
       React.act(() => result.current.handleCardNumberChange('36122345673456'));
 
       expect(result.current.cardNumber).toBe('3612 234567 3456');
@@ -119,7 +112,6 @@ describe('useCardNumber 커스텀 훅 테스트', () => {
     it(`AMEX 카드는 ${CARD_TYPE['AMEX'].PATTERN} 패턴으로 포맷팅 된다.`, () => {
       const { result } = renderHook(() => useCardNumber());
 
-      React.act(() => result.current.handleCardNumberChange('34'));
       React.act(() => result.current.handleCardNumberChange('341223456734567'));
 
       expect(result.current.cardNumber).toBe('3412 234567 34567');

@@ -1,4 +1,4 @@
-import type { CardType } from '../types/common.type';
+import type { CardType } from '../utils/card/card.type';
 
 interface CardTypeProperty {
   MIN_LENGTH: number;

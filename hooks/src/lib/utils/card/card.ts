@@ -1,5 +1,5 @@
-import { CARD_TYPE } from '../constants/Condition';
-import type { CardType } from '../types/common.type';
+import { CARD_TYPE } from '../../constants/Condition';
+import type { CardType } from './card.type';
 
 export const getCardType = (cardNumber: string): CardType => {
   const firstDigits = cardNumber.charAt(0);
