@@ -135,7 +135,7 @@ export const MyComponent = () => {
 
 ### 스냅샷
 
-![alt text](image.png)
+![AlertModal](https://pakxe.s3.ap-northeast-2.amazonaws.com/AlertModal.png)
 
 ### 사용 예시
 
@@ -153,7 +153,7 @@ export const MyComponent = () => {
 
 ### 스냅샷
 
-![alt text](image-1.png)
+![ConfirmModal](https://pakxe.s3.ap-northeast-2.amazonaws.com/ConfirmModal.png)
 
 ### 사용 예시
 
@@ -171,7 +171,7 @@ export const MyComponent = () => {
 
 ### 스냅샷
 
-![alt text](image-2.png)
+![PromptModal](https://pakxe.s3.ap-northeast-2.amazonaws.com/PromptModal.png)
 
 ### 사용 예시
 
