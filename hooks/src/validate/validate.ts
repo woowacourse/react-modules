@@ -16,6 +16,14 @@ export function validateNumber(str: string) {
   return { error: ErrorStatus.IS_NOT_NUMBER, isValid: true };
 }
 
+export const validateRegex = (str: string) => {
+  const regex = /^d{4} d{4} d{4} d{4}$/;
+  if (!regex.test(str)) {
+    return { error: ErrorStatus.IS_NOT_NUMBER, isValid: false };
+  }
+  return { error: ErrorStatus.IS_NOT_NUMBER, isValid: true };
+};
+
 export function validateMonth(n: string) {
   const month = Number(n);
   if (!isValidMonth(month)) {

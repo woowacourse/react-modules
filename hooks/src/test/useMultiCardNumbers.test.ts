@@ -1,4 +1,4 @@
-import useCardNumbers2 from "@/lib/useCardNumbers2";
+import useMultiCardNumbers from "@/lib/useMultiCardNumbers";
 import { renderHook } from "@testing-library/react";
 import React, { ChangeEvent } from "react";
 
@@ -8,7 +8,7 @@ describe("VISA 카드사 번호 테스트", () => {
   test.each(VISA_NUMBERS)(
     "%s를 입력하면 VISA 카드 번호 유효성 검사 테스트를 통과한다.",
     () => {
-      const { result } = renderHook(() => useCardNumbers2());
+      const { result } = renderHook(() => useMultiCardNumbers());
 
       VISA_NUMBERS.forEach((number) => {
         React.act(() => {
@@ -25,7 +25,7 @@ describe("VISA 카드사 번호 테스트", () => {
   test.each(INVALID_VISA_NUMBERS)(
     "%s를 입력하면 VISA 카드 번호 유효성 검사 테스트를 통과하지 않는다.",
     () => {
-      const { result } = renderHook(() => useCardNumbers2());
+      const { result } = renderHook(() => useMultiCardNumbers());
 
       INVALID_VISA_NUMBERS.forEach((number) => {
         React.act(() => {
@@ -45,7 +45,7 @@ describe("MASTER 카드사 번호 테스트", () => {
   test.each(MASTER_NUMBERS)(
     "%s를 입력하면 MASTER 카드 번호 유효성 검사 테스트를 통과한다.",
     () => {
-      const { result } = renderHook(() => useCardNumbers2());
+      const { result } = renderHook(() => useMultiCardNumbers());
 
       MASTER_NUMBERS.forEach((number) => {
         React.act(() => {
@@ -61,7 +61,7 @@ describe("MASTER 카드사 번호 테스트", () => {
   test.each(INVALID_MASTER_NUMBERS)(
     "%s를 입력하면 MASTER 카드 번호 유효성 검사 테스트를 통과하지 않는다.",
     () => {
-      const { result } = renderHook(() => useCardNumbers2());
+      const { result } = renderHook(() => useMultiCardNumbers());
 
       INVALID_MASTER_NUMBERS.forEach((number) => {
         React.act(() => {
@@ -81,7 +81,7 @@ describe("AMEX 카드사 번호 테스트", () => {
   test.each(AMEX_NUMBERS)(
     "%s를 입력하면 AMEX 카드 번호 유효성 검사 테스트를 통과한다.",
     () => {
-      const { result } = renderHook(() => useCardNumbers2());
+      const { result } = renderHook(() => useMultiCardNumbers());
 
       AMEX_NUMBERS.forEach((number) => {
         React.act(() => {
@@ -97,7 +97,7 @@ describe("AMEX 카드사 번호 테스트", () => {
   test.each(INVALID_AMEX_NUMBERS)(
     "%s를 입력하면 AMEX 카드 번호 유효성 검사 테스트를 통과하지 않는다.",
     () => {
-      const { result } = renderHook(() => useCardNumbers2());
+      const { result } = renderHook(() => useMultiCardNumbers());
 
       INVALID_AMEX_NUMBERS.forEach((number) => {
         React.act(() => {
@@ -116,7 +116,7 @@ describe("DINERS 카드사 번호 테스트", () => {
   test.each(DINERS_NUMBERS)(
     "%s를 입력하면 AMEX 카드 번호 유효성 검사 테스트를 통과하지 않는다.",
     () => {
-      const { result } = renderHook(() => useCardNumbers2());
+      const { result } = renderHook(() => useMultiCardNumbers());
 
       DINERS_NUMBERS.forEach((number) => {
         React.act(() => {
@@ -132,7 +132,7 @@ describe("DINERS 카드사 번호 테스트", () => {
   test.each(INVALID_DINERS_NUMBERS)(
     "%s를 입력하면 AMEX 카드 번호 유효성 검사 테스트를 통과하지 않는다.",
     () => {
-      const { result } = renderHook(() => useCardNumbers2());
+      const { result } = renderHook(() => useMultiCardNumbers());
 
       INVALID_DINERS_NUMBERS.forEach((number) => {
         React.act(() => {
@@ -161,7 +161,7 @@ describe("UNION_PAY 카드사 번호 테스트", () => {
   test.each(UNION_PAY_NUMBERS)(
     "%s를 입력하면 AMEX 카드 번호 유효성 검사 테스트를 통과하지 않는다.",
     () => {
-      const { result } = renderHook(() => useCardNumbers2());
+      const { result } = renderHook(() => useMultiCardNumbers());
 
       UNION_PAY_NUMBERS.forEach((number) => {
         React.act(() => {
@@ -186,7 +186,7 @@ describe("UNION_PAY 카드사 번호 테스트", () => {
   test.each(INVALID_UNION_PAY_NUMBERS)(
     "%s를 입력하면 AMEX 카드 번호 유효성 검사 테스트를 통과하지 않는다.",
     () => {
-      const { result } = renderHook(() => useCardNumbers2());
+      const { result } = renderHook(() => useMultiCardNumbers());
 
       INVALID_UNION_PAY_NUMBERS.forEach((number) => {
         React.act(() => {
