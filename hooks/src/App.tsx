@@ -6,11 +6,18 @@ import useExpiryDateValidation from "./hooks/lib/useExpiryDateValidation";
 import useCardHolderValidation from "./hooks/lib/useCardHolderValidation";
 import useCVCValidation from "./hooks/lib/useCVCValidation";
 import usePasswordValidation from "./hooks/lib/usePasswordValidation";
+import useCardBrand from "./hooks/lib/useCardBrand";
+import formatCardNumbers from "./hooks/lib/utils/formatCardNumbers";
 
 function App() {
-  const [cardNumbers, setCardNumbers] = useState(["", "", "", ""]);
+  const [cardNumbers, setCardNumbers] = useState("");
   const { validationResult: cardNumbersValidationResult } =
     useCardNumbersValidation({ cardNumbers: cardNumbers });
+  const { cardBrand } = useCardBrand({ cardNumbers });
+  const formattedCardNumbers = formatCardNumbers({
+    cardNumbers,
+    type: cardBrand,
+  });
   const [expiryDate, setExpiryDate] = useState({ month: "", year: "" });
   const { validationResult: expiryDateValidationResult } =
     useExpiryDateValidation({ month: expiryDate.month, year: expiryDate.year });
@@ -26,16 +33,10 @@ function App() {
     password: password,
   });
 
-  const handleCardNumbers = (
-    e: React.ChangeEvent<HTMLInputElement>,
-    index: number
-  ) => {
+  const handleCardNumbers = (e: React.ChangeEvent<HTMLInputElement>) => {
     const inputValue = e.target.value;
-    const newCardNumbers = cardNumbers.map((cardNumber, i) => {
-      return i === index ? inputValue : cardNumber;
-    });
 
-    setCardNumbers(newCardNumbers);
+    setCardNumbers(inputValue);
   };
 
   const handleExpiryChange = (
@@ -68,19 +69,17 @@ function App() {
     <>
       <h1>Hooks Modules</h1>
       <h2>카드 번호</h2>
-      {cardNumbers.map((_, index) => {
-        return (
-          <input
-            key={index}
-            value={cardNumbers[index]}
-            type="text"
-            maxLength={4}
-            onChange={(e) => handleCardNumbers(e, index)}
-          />
-        );
-      })}
+      <input
+        value={cardNumbers}
+        type="text"
+        maxLength={16}
+        onChange={handleCardNumbers}
+      />
       <div>{cardNumbersValidationResult.errorMessage}</div>
+      <span>{formattedCardNumbers}</span>
 
+      <h2>카드 브랜드</h2>
+      {cardBrand}
       <h2>카드 유효 기간</h2>
       <input
         value={expiryDate.month}
