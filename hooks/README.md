@@ -1,6 +1,6 @@
 # brgndy-card-validation-hooks
 
-텐텐과 버건디가 만든 카드 정보 입력 유효성 검사 커스텀 훅
+카드 정보 입력 유효성 검사 커스텀 훅
 
 ## - 설치
 
@@ -252,9 +252,42 @@ export default App;
 | -------- | -------- | ---------------------- |
 | password | string   | 카드 비밀번호 앞 2자리 |
 
-## Author
+## - useCardBrand 사용법
 
-- [tenten github](https://github.com/chlwlstlf)
+```tsx
+function ModuleTestPage() {
+  const { cardBrand } = useCardBrand({ cardNumbers });
+  return <>{cardBrand}</>;
+}
+```
+
+### - useCardBrand의 리턴 값
+
+1. MasterCard
+
+앞자리가 51에서 55 사이인 16자리 숫자
+
+2. Visa
+
+앞자리가 4로 시작하는 16자리 숫자
+
+3. Diners
+
+36으로 시작하는 14자리 숫자
+
+4. AMEX
+
+34나 37로 시작하는 15자리 숫자
+
+5. UnionPay
+
+- 622126~622925로 시작하는 경우: 6221 2612 3456 7890
+
+- 624~626로 시작하는 경우: 6240 1234 5678 9012
+
+- 6282~6288로 시작하는 경우: 6282 1234 5678 9012
+
+## Author
 
 - [brgndyy github](https://github.com/brgndyy)
 
