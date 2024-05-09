@@ -3,7 +3,7 @@ import { useCardBrand, useSingleInput } from '.';
 import { CARD_BRAND } from './constants';
 import { Validations, Validator, Validators } from './types';
 import { formatWithDelimiter, removeSpaces } from './utils';
-import { validateFilledValue, validateNumber, validateLength } from './utils/validators';
+import { validateFilledValue, validateLength, validateNumber } from './utils/validators';
 
 interface ValidationErrors {
   empty: string;
@@ -44,6 +44,22 @@ export default function useCardNumbers({ initialValue, validations }: UseCardNum
     validations: { onChange: onChangeValidators, onBlur: onBlurValidators },
   });
 
+  const onChange: ChangeEventHandler<HTMLInputElement> = (e) => {
+    const { value } = e.target;
+    handleChange(removeSpaces(value));
+  };
+
+  const onBlur: FocusEventHandler<HTMLInputElement> = (e) => {
+    handleBlur();
+
+    const inputValue = removeSpaces(e.target.value);
+    const cardNumberCount = brand === 'etc' ? 16 : CARD_BRAND[brand].cardNumberCount;
+
+    if (inputValue !== '' && !validateLength(inputValue, cardNumberCount)) {
+      setErrorMessage(`${cardNumberCount}자리를 입력해 주세요.`);
+    }
+  };
+
   const { brand } = useCardBrand({ cardNumbers });
 
   const formatCardNumber = (cardNumbers: string) => {
@@ -54,32 +70,15 @@ export default function useCardNumbers({ initialValue, validations }: UseCardNum
     return formattedCardNumber.trim();
   };
 
-  const onChange: ChangeEventHandler<HTMLInputElement> = (e) => {
-    const { value } = e.target;
-    handleChange(removeSpaces(value));
-  };
-
-  const onBlur: FocusEventHandler<HTMLInputElement> = (e) => {
-    const inputValue = removeSpaces(e.target.value);
-
-    const cardNumberCount = brand === 'etc' ? 16 : CARD_BRAND[brand].cardNumberCount;
-
-    if (validateLength(inputValue, cardNumberCount)) {
-      setErrorMessage(`${cardNumberCount}자리를 입력해 주세요.`);
-    }
-
-    handleBlur();
-  };
-
   return {
     brand,
     cardNumbers,
+    formatCardNumber,
     setCardNumbers,
     isValid,
     errorMessage,
     onChange,
     onBlur,
-    formatCardNumber,
     validators: [...onChangeValidators, ...onBlurValidators],
   };
 }
