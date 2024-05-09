@@ -9,8 +9,19 @@ export const OWNER_NAME_ERROR_MESSAGES = {
 
 const MAX_NAME_LENGTH = 21;
 
-const useCardOwnerName = (maxLength: number = MAX_NAME_LENGTH, initialName: string = '') => {
+type useCardOwnerNameProps = {
+  maxLength?: number;
+  initialName?: string;
+  needKeyTrigger?: boolean;
+};
+
+const useCardOwnerName = ({
+  maxLength = MAX_NAME_LENGTH,
+  initialName = '',
+  needKeyTrigger = false,
+}: useCardOwnerNameProps) => {
   const [ownerName, setOwnerName] = useState(initialName);
+  const [isTriggered, setIsTriggered] = useState(false);
   const [isValidOwnerName, setIsValidOwnerName] = useState(false);
   const [ownerNameErrorMessage, setOwnerNameErrorMessage] = useState('');
 
@@ -42,7 +53,9 @@ const useCardOwnerName = (maxLength: number = MAX_NAME_LENGTH, initialName: stri
     if (validOwnerName.length > maxLength) return;
 
     setOwnerName(validOwnerName);
-    setIsValidOwnerName(validOwnerName.length <= maxLength && errorMessage === '');
+
+    if (needKeyTrigger) setIsValidOwnerName(validOwnerName.length <= maxLength && errorMessage === '' && isTriggered);
+    else setIsValidOwnerName(validOwnerName.length <= maxLength && errorMessage === '');
   };
 
   return {
@@ -50,6 +63,7 @@ const useCardOwnerName = (maxLength: number = MAX_NAME_LENGTH, initialName: stri
     isValidOwnerName,
     ownerNameErrorMessage,
     handleOwnerNameChange,
+    setIsTriggered,
   };
 };
 
