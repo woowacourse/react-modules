@@ -1,34 +1,38 @@
-import React, { useState } from "react";
-import "./App.css";
-import { Modal } from "./lib";
+import { useState } from 'react';
+import './App.css';
+// import { Modal } from "./lib";
+import Modal from './lib/Modal';
 
 function App() {
-  const isOpenState = useState(false);
+  const [isOpen, setIsOpen] = useState(true);
 
-  const onOpen = () => {};
+  const openModal = () => setIsOpen(true);
 
-  const onConfirm = () => {};
-
-  const onClose = () => {};
+  const onConfirm = (formValues: Record<string, string>) => {
+    Object.entries(formValues).forEach(([key, value]) => {
+      console.log(key + ' : ' + value);
+    });
+  };
 
   return (
     <>
-      <h1>Component Modules</h1>
-      <button type="button" onClick={() => isOpenState[1](true)}>
+      <h1 style={{ marginBottom: '20px' }}>Component Modules</h1>
+      <button type='button' onClick={openModal}>
         모달 열기
       </button>
+
       <Modal
-        isOpenState={isOpenState}
-        position="center"
-        title="title"
-        description="description"
-        close={true}
-        cancelLabel="cancel"
-        confirmLabel="confirm"
-        onOpen={onOpen}
+        isOpen={isOpen}
+        setIsOpen={setIsOpen}
+        type='prompt'
+        size='medium'
+        title='Modal Title'
+        description='Modal Description'
+        placeholder='Enter Text'
+        confirmLabel='Confirm'
+        cancelLabel='Cancel'
         onConfirm={onConfirm}
-        onClose={onClose}
-      />
+      ></Modal>
     </>
   );
 }
