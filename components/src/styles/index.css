@@ -1,8 +1,15 @@
-.app {
-  width: 375px;
-  height: 100vh;
+.mobile,
+.desktop,
+.tablet {
   margin: auto;
-  border: 1px solid black;
+}
+
+.mobile {
+  width: 600px;
+}
+
+.tablet {
+  width: 768px;
 }
 
 :root {

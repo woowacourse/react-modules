@@ -14,3 +14,15 @@ export const BUTTON_COLOR_MAP = {
   secondary: 'buttonSecondary',
   danger: 'buttonDanger',
 } as const;
+
+export const MODAL_CUSTOM_STYLES = {
+  cancelButton: { width: '20%', border: '1px solid rgba(51, 51, 51, 0.25)' },
+  confirmButton: { width: '20%' },
+  modalContent: { height: 'auto', padding: '16px 0px' },
+} as const;
+
+export const MODAL_DEVICE_CLASS_NAME_MAP = {
+  mobile: 'modalDeviceMobile',
+  tablet: 'modalDeviceTablet',
+  desktop: 'modalDeviceDesktop',
+} as const;

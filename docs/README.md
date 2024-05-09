@@ -63,3 +63,9 @@
 
 - [v] `small`, `medium`, `large` 등의 크기 옵션을 prop으로 전달받아 모달 크기를 조절할 수 있어야 한다.
 - [] 각 크기 별 스토리를 스토리북에 추가한다.
+
+# step 10 - AlertModal, ConfirmModal, PromptModal 구현
+
+- [v] 주어진 Modal을 가지고 해당 Modal 들을 구현할 수 있어야 한다.
+  - 각 디바이스(mobile, tablet, desktop)에 대응할 수 있어야 한다.
+- [] 각 Modal 들을 storybook에 추가할 수 있어야 한다.

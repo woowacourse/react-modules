@@ -1,21 +1,32 @@
-import { BUTTON_COLOR_MAP, MODAL_POSITION_CLASS_NAME_MAP, MODAL_SIZE_CLASS_NAME_MAP } from './Modal.constant';
-import type { ButtonColorType, FlexDirection, ModalPosition, ModalSize } from './Modal.type';
+import { forwardRef } from 'react';
 
-import useModalControl from './hooks/useModalControl';
+import {
+  BUTTON_COLOR_MAP,
+  MODAL_DEVICE_CLASS_NAME_MAP,
+  MODAL_POSITION_CLASS_NAME_MAP,
+  MODAL_SIZE_CLASS_NAME_MAP,
+} from './Modal.constant';
+import type { ButtonColorType, FlexDirection, ModalDevice, ModalPosition, ModalSize } from './Modal.type';
 
-import { convertPascalCase } from '../../utils/string';
-import { extendClassNames } from '../../utils/extendClassNames';
-import { CloseImage } from '../assets';
+import useModalControl from './@hooks/useModalControl';
+
+import { convertPascalCase } from '../../../utils/string';
+import { extendClassNames } from '../../../utils/extendClassNames';
+import { CloseImage } from '../../assets';
 
 import styles from './Modal.module.css';
 
-interface ModalProps {
+export interface ModalProps {
   isOpen: boolean;
   position: ModalPosition;
   size?: ModalSize;
+  device?: ModalDevice;
   onToggle: () => void;
 }
 
+export type ModalInputType = React.ForwardRefExoticComponent<
+  React.InputHTMLAttributes<HTMLInputElement> & React.RefAttributes<HTMLInputElement>
+>;
 type ModalHeaderType = React.FC<React.PropsWithChildren<{ title: string } & React.HTMLAttributes<HTMLElement>>>;
 type ModalContentType = React.FC<React.PropsWithChildren<React.HTMLAttributes<HTMLElement>>>;
 type ModalFooterType = React.FC<
@@ -23,6 +34,7 @@ type ModalFooterType = React.FC<
 >;
 type ModalCloseButtonType = React.FC<React.ButtonHTMLAttributes<HTMLButtonElement>>;
 type ModalButtonType = React.FC<React.ButtonHTMLAttributes<HTMLButtonElement> & { color: ButtonColorType }>;
+type ModalLabelType = React.FC<React.PropsWithChildren>;
 
 const Modal: React.FC<React.PropsWithChildren<ModalProps>> & {
   ModalHeader: ModalHeaderType;
@@ -30,12 +42,20 @@ const Modal: React.FC<React.PropsWithChildren<ModalProps>> & {
   ModalFooter: ModalFooterType;
   ModalCloseButton: ModalCloseButtonType;
   ModalButton: ModalButtonType;
-} = ({ children, isOpen, size = 'small', position = 'center', onToggle }) => {
+  ModalInput: ModalInputType;
+  ModalLabel: ModalLabelType;
+} = ({ children, isOpen, device = 'mobile', size = 'small', position = 'center', onToggle }) => {
   useModalControl(isOpen, onToggle);
 
   return (
     isOpen && (
-      <div className={extendClassNames(styles.modal, styles[MODAL_POSITION_CLASS_NAME_MAP[position]])}>
+      <div
+        className={extendClassNames(
+          styles.modal,
+          styles[MODAL_POSITION_CLASS_NAME_MAP[position]],
+          styles[MODAL_DEVICE_CLASS_NAME_MAP[device]],
+        )}
+      >
         <div className={styles.dimmed} onClick={onToggle} />
         <div
           className={extendClassNames(
@@ -97,6 +117,14 @@ const ModalButton: ModalButtonType = ({ children, type = 'submit', color = 'prim
   );
 };
 
+const ModalInput = forwardRef<HTMLInputElement, React.InputHTMLAttributes<HTMLInputElement>>(({ ...rest }, ref) => {
+  return <input className={styles.modalInput} ref={ref} {...rest} />;
+});
+
+const ModalLabel: ModalLabelType = ({ children }) => {
+  return <p className={styles.modalLabel}>{children}</p>;
+};
+
 export default Modal;
 
 Modal.ModalHeader = ModalHeader;
@@ -104,3 +132,5 @@ Modal.ModalCloseButton = ModalCloseButton;
 Modal.ModalContent = ModalContent;
 Modal.ModalFooter = ModalFooter;
 Modal.ModalButton = ModalButton;
+Modal.ModalInput = ModalInput;
+Modal.ModalLabel = ModalLabel;
