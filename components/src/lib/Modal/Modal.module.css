@@ -25,15 +25,28 @@
 }
 
 .modalContainer {
-  width: 240px;
-  height: 168px;
-  max-height: 240px;
-  max-width: 375px;
+  /* max-height: 240px;
+  max-width: 375px; */
   padding: 24px 32px;
   border-radius: 8px;
   background-color: var(--modal-bg-color);
   z-index: var(--modal-z-index);
   overflow-y: auto;
+}
+
+.large {
+  width: 536px;
+  height: 152px;
+}
+
+.medium {
+  width: 416px;
+  height: 152px;
+}
+
+.small {
+  width: 256px;
+  height: 152px;
 }
 
 .bottom {

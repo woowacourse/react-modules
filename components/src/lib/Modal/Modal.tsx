@@ -1,5 +1,5 @@
-import { MODAL_POSITION_MAP } from './Modal.constant';
-import { ButtonStyle, ModalPosition } from './Modal.type';
+import { MODAL_POSITION_MAP, MODAL_SIZE_MAP } from './Modal.constant';
+import { ButtonStyle, ModalPosition, ModalSize } from './Modal.type';
 
 import useModalControl from './hooks/useModalControl';
 
@@ -11,6 +11,7 @@ interface ModalProps {
   isOpen: boolean;
   onToggle: () => void;
   position: ModalPosition;
+  size: ModalSize;
 }
 
 interface ModalButtonProps {
@@ -34,16 +35,18 @@ const Modal: React.FC<React.PropsWithChildren<ModalProps>> & {
   ModalFooter: ModalFooterType;
   ModalButton: ModalButtonType;
   ModalCloseButton: ModalCloseButtonType;
-} = ({ children, isOpen, onToggle, position = 'center' }) => {
+} = ({ children, isOpen, onToggle, position = 'center', size = 'large' }) => {
   const modalContainerStyle = position === 'bottom' ? `modalContainer${convertPascalCase(position)}` : '';
 
   useModalControl(isOpen, onToggle);
 
   return (
     isOpen && (
-      <div className={`${styles.modal} ${styles[MODAL_POSITION_MAP[position]]}`}>
+      <div className={`${styles.modal} ${styles[MODAL_POSITION_MAP[position]]} `}>
         <div className={styles.dimmed} onClick={onToggle} />
-        <div className={`${styles.modalContainer} ${styles[modalContainerStyle]}`}>{children}</div>
+        <div className={`${styles.modalContainer} ${styles[modalContainerStyle]} ${styles[MODAL_SIZE_MAP[size]]}`}>
+          {children}
+        </div>
       </div>
     )
   );
