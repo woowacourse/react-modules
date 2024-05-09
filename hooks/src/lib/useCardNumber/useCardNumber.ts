@@ -25,7 +25,7 @@ const useCardNumber = (initialValue: string) => {
   const handleCardNumberChange = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target !== e.currentTarget) return;
 
-    const { value } = e.target;
+    const { value, selectionStart } = e.target;
     const valueWithoutSpace = value.replace(REGEX.space, "");
 
     if (!Validator.checkDigit(valueWithoutSpace)) {
@@ -50,6 +50,18 @@ const useCardNumber = (initialValue: string) => {
 
     const formattedValue = formattingCardNumber(valueWithoutSpace);
     updateByNameAndValue(formattedValue);
+
+    setTimeout(() => {
+      if (selectionStart === null) return;
+
+      if (formattedValue[selectionStart - 1] === " ") {
+        const newSelectionStart =
+          formattedValue.length > value.length ? selectionStart + 1 : selectionStart - 1;
+
+        return e.target.setSelectionRange(newSelectionStart, newSelectionStart);
+      }
+      e.target.setSelectionRange(selectionStart, selectionStart);
+    });
   };
 
   const handleCardNumberBlur = (e: FocusEvent<HTMLInputElement>) => {
