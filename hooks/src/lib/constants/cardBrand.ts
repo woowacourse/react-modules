@@ -14,31 +14,31 @@ const CARD_BRAND: CardBrand<CardBrandName>[] = [
   {
     name: '비자카드',
     numberLength: 16,
-    startWith: ['4'],
+    startWiths: ['4'],
     formatArray: [4, 4, 4, 4],
   },
   {
     name: '마스터카드',
     numberLength: 16,
-    startWith: [{ from: '51', to: '55' }],
+    startWiths: [{ from: '51', to: '55' }],
     formatArray: [4, 4, 4, 4],
   },
   {
     name: '다이너스 클럽',
     numberLength: 14,
-    startWith: ['36'],
+    startWiths: ['36'],
     formatArray: [4, 6, 4],
   },
   {
     name: '아메리칸 익스프레스',
     numberLength: 15,
-    startWith: ['34', '37'],
+    startWiths: ['34', '37'],
     formatArray: [4, 6, 5],
   },
   {
     name: '유니온페이',
     numberLength: 16,
-    startWith: [
+    startWiths: [
       { from: '622126', to: '622925' },
       { from: '624', to: '626' },
       { from: '6282', to: '6288' },

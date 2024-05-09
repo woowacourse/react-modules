@@ -12,6 +12,6 @@ export interface Range<CompareType = string> {
 export interface CardBrand<CardNameType = string> {
   name: CardNameType;
   numberLength: number;
-  startWith: (string | Range)[];
+  startWiths: (string | Range)[];
   formatArray: number[];
 }
