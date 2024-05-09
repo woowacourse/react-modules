@@ -7,7 +7,7 @@ import {
   usePassword,
   useCardType,
   useCardNumbers,
-} from 'cookie-nice-card-hooks';
+} from './lib';
 
 function App() {
   const cvcInfo = useCVC('111');
@@ -20,7 +20,7 @@ function App() {
     placeholder: '카드사를 입력해주세요',
   });
   const cardNumbersInfo = useCardNumbers(
-    { first: '쿠키', second: '1234', third: '치코', fourth: '웨디' },
+    { first: '', second: '', third: '', fourth: '' },
     { isAutoFocus: true },
   );
 
@@ -28,6 +28,13 @@ function App() {
     const errorDetails = Object.values(cardNumbersInfo.validationResult);
     const firstErrorElement = errorDetails.find(value => !value.isValid);
     return firstErrorElement ? firstErrorElement.errorMessage : '';
+  };
+
+  const indexByKey = {
+    0: 'first',
+    1: 'second',
+    2: 'third',
+    3: 'fourth',
   };
 
   return (
@@ -117,54 +124,23 @@ function App() {
           )}
         </fieldset>
         <fieldset>
-          <input
-            type="text"
-            value={cardNumbersInfo.value.first}
-            onChange={event => {
-              cardNumbersInfo.runValidationInputTypeByChange(event, 'first');
-            }}
-            onBlur={event => {
-              cardNumbersInfo.runValidationFieldRulesByBlur(event, 'first');
-            }}
-            aria-invalid={!cardNumbersInfo.validationResult.first.isValid}
-            maxLength={4}
-          />
-          <input
-            type="text"
-            value={cardNumbersInfo.value.second}
-            onChange={event => {
-              cardNumbersInfo.runValidationInputTypeByChange(event, 'second');
-            }}
-            onBlur={event => {
-              cardNumbersInfo.runValidationFieldRulesByBlur(event, 'second');
-            }}
-            aria-invalid={!cardNumbersInfo.validationResult.second.isValid}
-            maxLength={4}
-          />
-          <input
-            type="password"
-            value={cardNumbersInfo.value.third}
-            onChange={event => {
-              cardNumbersInfo.runValidationInputTypeByChange(event, 'third');
-            }}
-            onBlur={event => {
-              cardNumbersInfo.runValidationFieldRulesByBlur(event, 'third');
-            }}
-            aria-invalid={!cardNumbersInfo.validationResult.third.isValid}
-            maxLength={4}
-          />
-          <input
-            type="password"
-            value={cardNumbersInfo.value.fourth}
-            onChange={event => {
-              cardNumbersInfo.runValidationInputTypeByChange(event, 'fourth');
-            }}
-            onBlur={event => {
-              cardNumbersInfo.runValidationFieldRulesByBlur(event, 'fourth');
-            }}
-            aria-invalid={!cardNumbersInfo.validationResult.fourth.isValid}
-            maxLength={4}
-          />
+          {Array.from({ length: cardNumbersInfo.getInputMaxLengthByCardBrand().length }).map(
+            (_, index) => (
+              <input
+                key={index}
+                type="text"
+                value={cardNumbersInfo.value[indexByKey[index]]}
+                onChange={event => {
+                  cardNumbersInfo.runValidationInputTypeByChange(event, indexByKey[index]);
+                }}
+                onBlur={event => {
+                  cardNumbersInfo.runValidationFieldRulesByBlur(event, indexByKey[index]);
+                }}
+                aria-invalid={!cardNumbersInfo.validationResult[indexByKey[index]].isValid}
+                maxLength={cardNumbersInfo.getInputMaxLengthByCardBrand()[index]}
+              />
+            ),
+          )}
           <span>{getErrorMessage()}</span>
         </fieldset>
       </form>
