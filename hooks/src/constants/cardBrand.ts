@@ -20,7 +20,7 @@ export type CardBrandName =
   | "UNION_PAY"
   | "NONE";
 
-type CardBrandNameExcludedNone = Exclude<CardBrandName, "NONE">;
+export type CardBrandNameExcludedNone = Exclude<CardBrandName, "NONE">;
 
 export interface CardBrandInfo {
   name: CardBrandName;
