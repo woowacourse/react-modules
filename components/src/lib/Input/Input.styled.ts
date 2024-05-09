@@ -6,7 +6,9 @@ export const Label = styled.label<{ labelPosition: LabelPosition }>`
   flex-direction: ${(props) => props.labelPosition};
   align-items: ${(props) => (props.labelPosition === 'row' ? 'center' : '')};
 
-  gap: 8px;
+  gap: ${(props) => (props.labelPosition === 'row' ? '4px' : '')};
+  margin: 4px 0;
+  font-size: 12px;
   color: #333333;
 
   width: 100%;
