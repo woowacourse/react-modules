@@ -1,0 +1,28 @@
+.title-field {
+  display: flex;
+  flex-direction: column;
+  width: 90%;
+  margin: 5px;
+}
+
+.title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: black;
+  width: 100%;
+}
+
+.subtitle {
+  font-size: 0.8rem;
+  font-weight: normal;
+  color: gray;
+  width: 100%;
+}
+
+.left {
+  text-align: left;
+}
+
+.center {
+  text-align: center;
+}
