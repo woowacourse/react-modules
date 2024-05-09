@@ -1,12 +1,12 @@
 export const CARD_BRAND: Omit<CardBrand, 'etc'> = {
   visa: {
-    cardNumberCount: 12,
+    cardNumberCount: 16,
     prefixes: [4],
     segmentLength: [4, 4, 4, 4],
   },
 
   master: {
-    cardNumberCount: 12,
+    cardNumberCount: 16,
     prefixes: [{ from: 51, to: 55 }],
     segmentLength: [4, 4, 4, 4],
   },
@@ -28,7 +28,7 @@ export const CARD_BRAND: Omit<CardBrand, 'etc'> = {
     prefixes: [
       { from: 622126, to: 622925 },
       { from: 624, to: 626 },
-      { from: 6282, to: 6282 },
+      { from: 6282, to: 6288 },
     ],
     segmentLength: [4, 4, 4, 4],
   },
