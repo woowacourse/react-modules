@@ -58,7 +58,7 @@ const meta = {
         <Modal.Content style={style}>
           <span>지그😊 기본 모달이에요.</span>
         </Modal.Content>
-        <Modal.TextButton onClose={args.onClose}>확인</Modal.TextButton>
+        <Modal.TextButton actionFn={args.onClose}>확인</Modal.TextButton>
       </Modal>
     );
   },
@@ -109,7 +109,7 @@ export const 이미지_버튼이_있는_모달: Story = {
     >
       <Modal.Header>
         <Modal.Title>지그🥰</Modal.Title>
-        <Modal.IconButton onClose={args.onClose} src={CloseImage} />
+        <Modal.IconButton actionFn={args.onClose} src={CloseImage} />
       </Modal.Header>
       <Modal.Content>
         <span>이미지 버튼이 있는 모달이에요.</span>
@@ -147,7 +147,7 @@ export const 텍스트_버튼이_있는_모달: Story = {
         <span>텍스트 버튼이 있는 모달이에요.</span>
       </Modal.Content>
       <Modal.Footer>
-        <Modal.TextButton onClose={args.onClose}>확인</Modal.TextButton>
+        <Modal.TextButton actionFn={args.onClose}>확인</Modal.TextButton>
       </Modal.Footer>
     </Modal>
   ),
@@ -177,13 +177,13 @@ export const 이미지_버튼과_텍스트_버튼이_있는_모달: Story = {
     >
       <Modal.Header>
         <Modal.Title>지그🌞</Modal.Title>
-        <Modal.IconButton onClose={args.onClose} src={CloseImage} />
+        <Modal.IconButton actionFn={args.onClose} src={CloseImage} />
       </Modal.Header>
       <Modal.Content>
         <span>이미지 버튼과 텍스트 버튼이 있는 모달이에요.</span>
       </Modal.Content>
       <Modal.Footer>
-        <Modal.TextButton onClose={args.onClose}>확인</Modal.TextButton>
+        <Modal.TextButton actionFn={args.onClose}>확인</Modal.TextButton>
       </Modal.Footer>
     </Modal>
   ),
@@ -219,7 +219,7 @@ export const AlertModal: Story = {
         <span>아이디는 필수로 입력해야 합니다.</span>
       </Modal.Content>
       <Modal.Footer buttonPosition='right'>
-        <Modal.TextButton onClose={args.onClose} buttonSize={'50px'}>
+        <Modal.TextButton actionFn={args.onClose} buttonSize={'50px'}>
           확인
         </Modal.TextButton>
       </Modal.Footer>
@@ -256,13 +256,13 @@ export const ConfirmModal: Story = {
         <span>삭제하면 복구하실 수 없습니다.</span>
       </Modal.Content>
       <Modal.Footer buttonPosition='right' buttonGap='10px'>
-        <Modal.TextButton onClose={args.onClose} buttonSize='50px'>
+        <Modal.TextButton actionFn={args.onClose} buttonSize='50px'>
           취소
         </Modal.TextButton>
         <Modal.TextButton
-          onClose={args.onClose}
+          actionFn={args.onClose}
           buttonSize='50px'
-          backgroudColor='#333333'
+          backgroundColor='#333333'
           fontColor='#ffffff'
         >
           확인
@@ -302,14 +302,14 @@ export const PromptModal: Story = {
         <Modal.Input></Modal.Input>
       </Modal.Content>
       <Modal.Footer buttonPosition='right' buttonGap='10px'>
-        <Modal.TextButton onClose={args.onClose} buttonSize='50px'>
+        <Modal.TextButton actionFn={args.onClose} buttonSize='50px'>
           취소
         </Modal.TextButton>
         <Modal.TextButton
           type='submit'
-          onClose={args.onClose}
+          actionFn={args.onClose}
           buttonSize='50px'
-          backgroudColor='#333333'
+          backgroundColor='#333333'
           fontColor='#ffffff'
         >
           제출

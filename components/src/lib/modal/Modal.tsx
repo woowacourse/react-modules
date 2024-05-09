@@ -65,7 +65,7 @@ const ModalTitle: ModalTitleType = ({ children, ...restProps }) => {
 type ModalIconButtonType = React.FC<
   React.PropsWithChildren<
     {
-      onClose: () => void;
+      actionFn: () => void;
       src: string;
       imgSize?: string;
     } & ButtonHTMLAttributes<HTMLButtonElement>
@@ -73,14 +73,14 @@ type ModalIconButtonType = React.FC<
 >;
 
 const ModalIconButton: ModalIconButtonType = ({
-  onClose,
+  actionFn,
   type = 'button',
   src = CloseImage,
   imgSize,
   ...restProps
 }) => {
   return (
-    <Styled.ModalIconButton type={type} onClick={onClose} {...restProps}>
+    <Styled.ModalIconButton type={type} onClick={actionFn} {...restProps}>
       <img src={src} style={{ width: imgSize }} />
     </Styled.ModalIconButton>
   );
@@ -89,31 +89,31 @@ const ModalIconButton: ModalIconButtonType = ({
 type ModalTextButtonType = React.FC<
   React.PropsWithChildren<
     {
-      onClose: () => void;
+      actionFn: () => void;
       buttonSize?: string;
       fontSize?: string;
-      backgroudColor?: string;
+      backgroundColor?: string;
       fontColor?: string;
     } & ButtonHTMLAttributes<HTMLButtonElement>
   >
 >;
 
 const ModalTextButton: ModalTextButtonType = ({
-  onClose,
+  actionFn,
   type = 'button',
   buttonSize,
   fontSize,
-  backgroudColor,
+  backgroundColor,
   fontColor,
   ...restProps
 }) => {
   return (
     <Styled.ModalTextButton
       type={type}
-      onClick={onClose}
+      onClick={actionFn}
       buttonSize={buttonSize}
       fontSize={fontSize}
-      backgroudColor={backgroudColor}
+      backgroundColor={backgroundColor}
       fontColor={fontColor}
       {...restProps}
     ></Styled.ModalTextButton>

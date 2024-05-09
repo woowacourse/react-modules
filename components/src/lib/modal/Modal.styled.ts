@@ -105,7 +105,7 @@ export const ModalIconButton = styled.button<{ imgSize?: string }>`
 interface ModalTextButtonProps {
   buttonSize?: string;
   fontSize?: string;
-  backgroudColor?: string;
+  backgroundColor?: string;
   fontColor?: string;
 }
 
@@ -117,9 +117,10 @@ export const ModalTextButton = styled.button<ModalTextButtonProps>`
   &:focus {
     outline: none;
   }
-  color: ${({ fontColor }) => fontColor || '#333333'};
-  background-color: ${({ backgroudColor }) => backgroudColor || '#ffffff'};
+  color: ${({ fontColor }) => fontColor || '#ffffff'};
+  background-color: ${({ backgroundColor }) => backgroundColor || '#333333'};
   font-size: ${({ fontSize }) => fontSize || '15px'};
+  border: 1px solid #333333;
 `;
 
 interface ModalContentProps {
