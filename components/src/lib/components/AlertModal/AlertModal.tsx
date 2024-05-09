@@ -9,12 +9,9 @@ interface AlertModalProps {
   contentLabel: string;
 }
 
-const AlertModal: React.FC<AlertModalProps & Omit<ModalImplementationProps, 'cancelButtonText'> & ModalProps> = ({
-  title,
-  contentLabel,
-  confirmButtonText = '확인',
-  ...rest
-}) => {
+const AlertModal: React.FC<
+  AlertModalProps & Omit<ModalImplementationProps, 'cancelButtonText' | 'onConfirm'> & ModalProps
+> = ({ title, contentLabel, confirmButtonText = '확인', ...rest }) => {
   return (
     <Modal {...rest}>
       <Modal.ModalHeader title={title} />
