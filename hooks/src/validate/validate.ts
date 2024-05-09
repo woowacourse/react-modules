@@ -16,8 +16,7 @@ export function validateNumber(str: string) {
   return { error: ErrorStatus.IS_NOT_NUMBER, isValid: true };
 }
 
-export const validateRegex = (str: string) => {
-  const regex = /^d{4} d{4} d{4} d{4}$/;
+export const validateRegex = (str: string, regex: RegExp) => {
   if (!regex.test(str)) {
     return { error: ErrorStatus.IS_NOT_NUMBER, isValid: false };
   }

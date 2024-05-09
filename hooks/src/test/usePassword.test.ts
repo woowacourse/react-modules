@@ -39,15 +39,4 @@ describe("usePassword 훅 테스트", () => {
 
     expect(result.current.errorMessage).toBe(expectedErrorMessage);
   });
-
-  // it("2글자 초과 입력시 2글자만 입력된다.", () => {
-  //   const { result } = renderHook(() => usePassword(initialValue));
-  //   React.act(() => {
-  //     result.current.onChange({
-  //       target: { value: "123" },
-  //     } as ChangeEvent<HTMLInputElement>);
-  //   });
-
-  //   expect(result.current.value).toBe("12");
-  // });
 });

@@ -1,13 +1,11 @@
 interface NumbersIdentifier {
   type: "value";
   values: number[];
-  step: number;
 }
 
 interface RangeIdentifier {
   type: "range";
   values: [number, number][];
-  step: number;
 }
 
 export type Identifier = NumbersIdentifier | RangeIdentifier;
@@ -35,22 +33,18 @@ export const CardBrandIdentifiers: Record<
   VISA: {
     type: "value",
     values: [4],
-    step: 1,
   },
   MASTER_CARD: {
     type: "range",
     values: [[51, 55]],
-    step: 2,
   },
   AMEX: {
     type: "value",
     values: [34, 37],
-    step: 2,
   },
   DINERS: {
     type: "value",
     values: [36],
-    step: 2,
   },
   UNION_PAY: {
     type: "range",
@@ -59,7 +53,6 @@ export const CardBrandIdentifiers: Record<
       [624, 626],
       [6282, 6288],
     ],
-    step: 3,
   },
 };
 export const CardBrands: Record<CardBrandName, CardBrandInfo> = {
@@ -76,7 +69,7 @@ export const CardBrands: Record<CardBrandName, CardBrandInfo> = {
   AMEX: {
     name: "AMEX",
     cardNumbersFormat: [4, 6, 5],
-    validLength: 17, //15
+    validLength: 17,
   },
   DINERS: {
     name: "DINERS",
