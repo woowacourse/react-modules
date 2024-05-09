@@ -68,4 +68,4 @@
 
 - [v] 주어진 Modal을 가지고 해당 Modal 들을 구현할 수 있어야 한다.
   - 각 디바이스(mobile, tablet, desktop)에 대응할 수 있어야 한다.
-- [] 각 Modal 들을 storybook에 추가할 수 있어야 한다.
+- [v] 각 Modal 들을 storybook에 추가할 수 있어야 한다.
