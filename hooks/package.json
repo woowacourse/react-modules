@@ -1,6 +1,6 @@
 {
   "name": "@pakxe/react-card-info-hooks",
-  "version": "0.0.2",
+  "version": "1.0.0",
   "description": "우아한 리액트 카드 훅",
   "type": "module",
   "types": "dist/index.d.ts",
