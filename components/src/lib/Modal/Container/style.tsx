@@ -1,32 +1,45 @@
 import styled from "styled-components";
-import { ContainerPositionType, ModalContainerSizeType } from "./Container";
+import { ContainerPositionType, ContainerSizeType } from "./Container";
 
 const POSITION_STYLES = {
   top: `
     top: 0;
     left: 50%;
     transform: translate(-50%, 0);
-    
+
     border-radius: 0px 0px 10px 10px;
-    `,
+  `,
   center: `
     top: 50%;
     left: 50%;
-    transform: translate(-50%,-50%);
+    transform: translate(-50%, -50%);
 
     border-radius: 8px;
-    `,
+  `,
   bottom: `
     top: 100%;
     left: 50%;
-    transform: translate(-50%,-100%);
+    transform: translate(-50%, -100%);
 
     border-radius: 10px 10px 0px 0px;
-    `,
+  `,
+};
+
+const containerSize = (size: ContainerSizeType) => {
+  switch (size) {
+    case "large":
+      return "60%";
+
+    case "medium":
+      return "40%";
+
+    case "small":
+      return "30%";
+  }
 };
 
 export const Container = styled.div<{
-  $size: ModalContainerSizeType;
+  $size: ContainerSizeType;
   $position: ContainerPositionType;
 }>`
   position: fixed;
@@ -35,8 +48,7 @@ export const Container = styled.div<{
   flex-direction: column;
   gap: 1rem;
 
-  width: ${({ $size }) =>
-    $size === "large" ? "60%" : $size === "medium" ? "40%" : "30%"};
+  width: ${({ $size }) => containerSize($size)};
 
   background-color: ${(props) => props.theme.color.white};
 
