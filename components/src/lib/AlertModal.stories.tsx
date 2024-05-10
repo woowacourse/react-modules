@@ -1,4 +1,3 @@
-import React from "react";
 import AlertModal from "./AlertModal";
 import type { Meta, StoryObj } from "@storybook/react";
 import useModalState from "./common/useModalState";

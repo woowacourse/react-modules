@@ -1,4 +1,3 @@
-import React from "react";
 import PromptModal from "./PromptModal";
 import type { Meta, StoryObj } from "@storybook/react";
 import useModalState from "./common/useModalState";

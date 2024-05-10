@@ -1,6 +1,6 @@
 {
   "name": "lv2-modal-component",
-  "version": "0.0.14",
+  "version": "0.0.15",
   "description": "lv2 mission2 step1",
   "type": "module",
   "types": "dist/index.d.ts",

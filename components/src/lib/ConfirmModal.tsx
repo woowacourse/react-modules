@@ -1,5 +1,3 @@
-import React from "react";
-// import "./App.css";
 import { Modal } from ".";
 import { css } from "@emotion/css";
 import { ModalSize } from "./common/Modal";
