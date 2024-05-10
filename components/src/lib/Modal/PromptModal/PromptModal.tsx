@@ -27,14 +27,26 @@ export default function PromptModal({ size = 'medium', existCloseButton, title, 
           {existCloseButton && <Modal.CloseButton onClick={onClose} />}
         </Modal.Header>
         <Modal.Main>{children}</Modal.Main>
-        <Modal.Footer align='row' position='right'>
-          <Modal.Button backgroundColor='secondary' onClick={onConfirmHandler} size='small'>
-            취소
-          </Modal.Button>
-          <Modal.Button backgroundColor='primary' onClick={onConfirmHandler} size='small'>
-            확인
-          </Modal.Button>
-        </Modal.Footer>
+        {position === 'center' && (
+          <Modal.Footer align='row' position='right'>
+            <Modal.Button backgroundColor='secondary' onClick={onConfirmHandler} size='small'>
+              취소
+            </Modal.Button>
+            <Modal.Button backgroundColor='primary' onClick={onConfirmHandler} size='small'>
+              확인
+            </Modal.Button>
+          </Modal.Footer>
+        )}
+        {position === 'bottom' && (
+          <Modal.Footer align='column' position='right'>
+            <Modal.Button backgroundColor='primary' onClick={onConfirmHandler} size='full'>
+              확인
+            </Modal.Button>
+            <Modal.Button backgroundColor='secondary' onClick={onConfirmHandler} size='full'>
+              취소
+            </Modal.Button>
+          </Modal.Footer>
+        )}
       </Modal.Content>
     </Modal>
   );

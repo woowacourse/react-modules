@@ -2,7 +2,7 @@ import { Modal } from '../..';
 import { SizeType } from '../Content/Content';
 import { ModalProps } from '../ModalContainer';
 
-interface AlertModalProps extends ModalProps {
+export interface AlertModalProps extends ModalProps {
   size: SizeType;
   title: string;
   label: string;
@@ -28,7 +28,7 @@ export default function AlertModal({ size = 'medium', title, label, position, is
           <Modal.Label color='basic'>{label}</Modal.Label>
         </Modal.Main>
         <Modal.Footer align='row' position='right'>
-          <Modal.Button backgroundColor='primary' onClick={onConfirmHandler} size='small'>
+          <Modal.Button backgroundColor='primary' onClick={onConfirmHandler} size={position === 'bottom' ? 'full' : 'small'}>
             확인
           </Modal.Button>
         </Modal.Footer>
