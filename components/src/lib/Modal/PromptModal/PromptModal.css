@@ -1,0 +1,8 @@
+.darr-modal .modal-input {
+  width: 100%;
+  border-radius: 2px;
+  padding: 8px;
+  height: 32px;
+  box-sizing: border-box;
+  outline: none;
+}
