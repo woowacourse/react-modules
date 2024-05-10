@@ -8,7 +8,6 @@ import {
   UPPERCASE_AND_SPACE_ONLY,
   YEAR_RANGE,
 } from './constants/cardDataValidation';
-import { CardType } from './useCardType';
 
 function throwIfNoneMaxLength(value: string, maxLength: number) {
   if (value.length !== maxLength) {
@@ -61,7 +60,10 @@ function throwIfNoneUpperCase(value: string) {
   }
 }
 
-export const validateCardNumbers = (value: string, cardType: CardType) => {
+export const validateCardNumbers = (
+  value: string,
+  cardType: keyof typeof CARD_BRAND_NUMBER_LENGTH
+) => {
   throwIfTrimBlank(value);
   throwIfNoneNumber(value);
   throwIfNoneMaxLength(value, CARD_BRAND_NUMBER_LENGTH[cardType]);
