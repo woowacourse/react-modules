@@ -9,13 +9,8 @@ const ButtonContainer = styled.div`
 `;
 
 function App() {
-  const {
-    isOpen: isAlertOpen,
-    toggleModal,
-    // openModal: openAlertModal,
-    // closeModal: closeAlertModal,
-  } = useModal();
-  // const { isOpen: isConfirmOpen, toggleModal: toggleConfirmModal } = useModal();
+  const { isOpen: isAlertOpen, toggleModal: toggleAlertModal } = useModal();
+  const { isOpen: isConfirmOpen, toggleModal: toggleConfirmModal } = useModal();
   // const { isOpen: isPromptOpen, toggleModal: togglePromptModal } = useModal();
 
   // const { isOpen: isSmallModalOpen, toggleModal: toggleSmallModal } =
@@ -27,9 +22,9 @@ function App() {
   return (
     <>
       <ButtonContainer>
-        <button onClick={() => toggleModal()}>Alert!</button>
-        {/* <button onClick={() => toggleConfirmModal()}>Confirm!</button>
-        <button onClick={() => togglePromptModal()}>Prompt!</button> */}
+        <button onClick={() => toggleAlertModal()}>Alert!</button>
+        <button onClick={() => toggleConfirmModal()}>Confirm!</button>
+        {/* <button onClick={() => togglePromptModal()}>Prompt!</button> */}
       </ButtonContainer>
       {/* <ButtonContainer>
         <button onClick={() => toggleSmallModal()}>Small Modal Button</button>
@@ -39,7 +34,7 @@ function App() {
 
       {/* alert modal */}
       <Modal
-        toggleModal={toggleModal}
+        toggleModal={toggleAlertModal}
         position="center"
         category="alert"
         isOpen={isAlertOpen}
@@ -47,10 +42,29 @@ function App() {
         <Modal.Header
           title="아이디를 입력해 주세요."
           closeOption="icon"
-          handleCloseButton={toggleModal}
+          handleCloseButton={toggleAlertModal}
         />
         <Modal.SubTitle subTitle="아이디는 필수로 입력해야 합니다." />
-        <Modal.Button handleCloseButton={toggleModal} />
+        <Modal.Button category="alert" handleCloseButton={toggleAlertModal} />
+      </Modal>
+
+      {/* confirm modal */}
+      <Modal
+        toggleModal={toggleConfirmModal}
+        position="center"
+        category="confirm"
+        isOpen={isConfirmOpen}
+      >
+        <Modal.Header
+          title="아이디를 입력해 주세요."
+          closeOption="icon"
+          handleCloseButton={toggleConfirmModal}
+        />
+        <Modal.SubTitle subTitle="아이디는 필수로 입력해야 합니다." />
+        <Modal.Button
+          category="confirm"
+          handleCloseButton={toggleConfirmModal}
+        />
       </Modal>
     </>
   );
