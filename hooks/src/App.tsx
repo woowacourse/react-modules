@@ -9,6 +9,8 @@ import {
   useCardNumbers,
 } from './lib';
 
+import CardNumbers from './CardNumbers';
+
 function App() {
   const cvcInfo = useCVC('111');
   const passwordInfo = usePassword('22');
@@ -23,19 +25,6 @@ function App() {
     { first: '', second: '', third: '', fourth: '' },
     { isAutoFocus: true },
   );
-
-  const getErrorMessage = () => {
-    const errorDetails = Object.values(cardNumbersInfo.validationResult);
-    const firstErrorElement = errorDetails.find(value => !value.isValid);
-    return firstErrorElement ? firstErrorElement.errorMessage : '';
-  };
-
-  const indexByKey = {
-    0: 'first',
-    1: 'second',
-    2: 'third',
-    3: 'fourth',
-  };
 
   return (
     <div>
@@ -134,28 +123,7 @@ function App() {
           )}
         </fieldset>
         <fieldset>
-          <legend>cardNumbers</legend>
-          {Array.from({ length: cardNumbersInfo.getInputMaxLengthByCardBrand().length }).map(
-            (_, index) => (
-              <input
-                key={index}
-                type="text"
-                value={cardNumbersInfo.value[indexByKey[index]]}
-                onChange={event => {
-                  cardNumbersInfo.runValidationInputTypeByChange(event, indexByKey[index]);
-                }}
-                onBlur={event => {
-                  cardNumbersInfo.runValidationFieldRulesByBlur(event, indexByKey[index]);
-                }}
-                aria-invalid={!cardNumbersInfo.validationResult[indexByKey[index]].isValid}
-                maxLength={cardNumbersInfo.getInputMaxLengthByCardBrand()[index]}
-              />
-            ),
-          )}
-          <div>
-            <span>{getErrorMessage()}</span>
-            <span>{cardNumbersInfo.getCardBrand()}</span>
-          </div>
+          <CardNumbers cardNumbersInfo={cardNumbersInfo} />
         </fieldset>
       </form>
     </div>
