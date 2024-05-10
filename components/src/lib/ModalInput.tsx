@@ -3,11 +3,11 @@ import styled from 'styled-components';
 
 const ModalInputStyle = styled.input`
   width: 100%;
-  padding: 0.8rem;
+  box-sizing: border-box;
+
   gap: 0.8rem;
+  padding: 0.8rem;
   border-radius: 0.4rem;
-  border: 0.1rem 0 0 0;
-  opacity: 0px;
   border: 0.1rem solid var(--black-color);
 
   font-family: Inter;
