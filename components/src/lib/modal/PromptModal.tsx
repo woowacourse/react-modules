@@ -1,11 +1,7 @@
-import Modal from './Modal';
+import Modal, { ModalProps } from './Modal';
 
-export interface PromptModalProps {
-  isOpen: boolean;
-  onClose: () => void;
+export interface PromptModalProps extends ModalProps {
   title: string;
-  position?: 'top' | 'bottom' | 'center';
-  size?: 'small' | 'medium' | 'large';
 }
 
 const PromptModal: React.FC<PromptModalProps> = ({

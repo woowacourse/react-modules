@@ -1,11 +1,7 @@
 import React from 'react';
-import Modal from './Modal';
+import Modal, { ModalProps } from './Modal';
 
-export interface AlertModalProps {
-  isOpen: boolean;
-  onClose: () => void;
-  position?: 'top' | 'bottom' | 'center';
-  size?: 'small' | 'medium' | 'large';
+export interface AlertModalProps extends ModalProps {
   title: string;
   message: string;
 }

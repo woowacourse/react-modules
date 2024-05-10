@@ -1,13 +1,9 @@
 import React from 'react';
-import Modal from './Modal';
+import Modal, { ModalProps } from './Modal';
 
-export interface ConfirmModalProps {
-  isOpen: boolean;
-  onClose: () => void;
+export interface ConfirmModalProps extends ModalProps {
   title: string;
   children: React.ReactNode;
-  position?: 'top' | 'bottom' | 'center';
-  size?: 'small' | 'medium' | 'large';
 }
 
 const ConfirmModal: React.FC<ConfirmModalProps> = ({
