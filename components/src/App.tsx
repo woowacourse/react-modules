@@ -11,7 +11,7 @@ export const ModalTitle = styled.h2`
   font-size: 1.2rem;
 `;
 
-export const ModalContents = styled.div`
+export const AppModalContents = styled.div`
   margin-bottom: 1rem;
   font-size: 1rem;
   p {
@@ -69,10 +69,10 @@ function App() {
         setOpenModal={setOpenAlertModal}
         title={<ModalTitle>alert modal</ModalTitle>}
         contents={
-          <ModalContents>
+          <AppModalContents>
             <p>open</p>
             <p>alert modal</p>
-          </ModalContents>
+          </AppModalContents>
         }
         buttonContainerJustifyContent="right"
         buttonStyle={{ backgroundColor: '#111111ed', color: '#ffff', borderRadius: BASIC_BORDER_RADIUS }}
@@ -84,10 +84,10 @@ function App() {
         setOpenModal={setOpenConfirmModal}
         title={<ModalTitle>alert modal</ModalTitle>}
         contents={
-          <ModalContents>
+          <AppModalContents>
             <p>open</p>
             <p>confirm modal</p>
-          </ModalContents>
+          </AppModalContents>
         }
         buttonContainerJustifyContent="space-between"
         confirmButton={{

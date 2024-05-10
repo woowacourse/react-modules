@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
 import '../lib/styles/reset.css';
-import { ModalContents, ModalTitle } from '../App';
+import { AppModalContents, ModalTitle } from '../App';
 import { AlertModal } from '../lib';
 import { BASIC_BORDER_RADIUS } from '../lib/constants/modal';
 
@@ -27,10 +27,10 @@ export const AlertModalSample: Story = {
     setOpenModal: () => {},
     title: <ModalTitle>alert modal</ModalTitle>,
     contents: (
-      <ModalContents>
+      <AppModalContents>
         <p>open</p>
         <p>alert modal</p>
-      </ModalContents>
+      </AppModalContents>
     ),
     buttonContainerJustifyContent: 'right',
     buttonStyle: { backgroundColor: '#111111ed', color: '#ffff', borderRadius: BASIC_BORDER_RADIUS },

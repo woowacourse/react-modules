@@ -1,8 +1,8 @@
-import CardExpiryDate from './CardExpiryDate';
-import CardNumbers from './CardNumbers';
-import CardIssuer from './CardIssuer';
-import CardPassword from './CardPassword';
-import CardHolder from './CardHolder';
 import CardCVC from './CardCVC';
+import CardExpiryDate from './CardExpiryDate';
+import CardHolder from './CardHolder';
+import CardIssuer from './CardIssuer';
+import CardNumbers from './CardNumbers';
+import CardPassword from './CardPassword';
 
 export { CardNumbers, CardExpiryDate, CardIssuer, CardPassword, CardHolder, CardCVC };

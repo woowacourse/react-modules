@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 
 import '../lib/styles/reset.css';
 
-import { ModalContents, ModalTitle } from '../App';
+import { AppModalContents, ModalTitle } from '../App';
 import { ConfirmModal } from '../lib';
 import { BASIC_BORDER_RADIUS } from '../lib/constants/modal';
 
@@ -28,10 +28,10 @@ export const ConfirmModalSample: Story = {
     setOpenModal: () => {},
     title: <ModalTitle>alert modal</ModalTitle>,
     contents: (
-      <ModalContents>
+      <AppModalContents>
         <p>open</p>
         <p>confirm modal</p>
-      </ModalContents>
+      </AppModalContents>
     ),
     buttonContainerJustifyContent: 'space-between',
     confirmButton: {

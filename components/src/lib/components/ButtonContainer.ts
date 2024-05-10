@@ -2,11 +2,11 @@ import styled from 'styled-components';
 
 import { ButtonContainerJustifyContent } from '../types/modal';
 
-interface StyleProps {
+export interface BottomContainerStyleProps {
   $buttonContainerJustifyContent: ButtonContainerJustifyContent;
 }
 
-const ButtonContainer = styled.div<StyleProps>`
+const ButtonContainer = styled.div<BottomContainerStyleProps>`
   display: flex;
   justify-content: ${(props) => props.$buttonContainerJustifyContent};
 `;
