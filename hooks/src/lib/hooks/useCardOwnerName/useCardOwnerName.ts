@@ -18,7 +18,7 @@ type useCardOwnerNameProps = {
 const useCardOwnerName = ({
   maxLength = MAX_NAME_LENGTH,
   initialName = '',
-  triggerKey = '',
+  triggerKey = '', // 이 값이 있다면, 이 키를 입력하고 유효성 검사도 통과해야 isValid가 true가 된다.
 }: useCardOwnerNameProps = {}) => {
   const [ownerName, setOwnerName] = useState(initialName);
   const [isValidOwnerName, setIsValidOwnerName] = useState(false);
