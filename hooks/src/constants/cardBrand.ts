@@ -6,7 +6,8 @@ export type CARD_BRAND =
   | 'UNIONPAY'
   | 'UNKNOWN';
 
-export const CARD_CONFIG = {
+// 카드 브랜드 판별 카드 넘버 설정 (카드 브랜드 숫자)
+export const CARD_BRAND_DIGIT_CONFIG = {
   VISA: 4,
   MASTER: {
     START: 51,
