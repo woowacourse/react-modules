@@ -1,0 +1,50 @@
+.darr-modal {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  color: black;
+}
+
+.darr-modal .modal-backdrop {
+  background-color: rgba(0, 0, 0, 0.35);
+  width: 100vw;
+  height: 100vh;
+  z-index: 1;
+}
+
+.darr-modal .modal-inner {
+  position: absolute;
+  background-color: white;
+  height: fit-content;
+  z-index: 2;
+  border-radius: 8px;
+  padding: 24px 32px;
+  box-sizing: border-box;
+  max-height: 60%;
+  overflow: auto;
+}
+
+.darr-modal .modal-inner.center {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.darr-modal .size-s {
+  width: 40vw;
+}
+
+.darr-modal .size-m {
+  width: 60vw;
+}
+
+.darr-modal .size-l {
+  width: 80vw;
+}
+
+.darr-modal .modal-inner.bottom {
+  width: 100vw;
+  bottom: 0;
+}
