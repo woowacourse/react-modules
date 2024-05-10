@@ -1,67 +1,10 @@
 import { useState, ChangeEvent, useEffect } from "react";
 import { CardBrands } from "../types/card";
-
-const isNumberString = (numberString: string) => {
-  return numberString
-    .split("")
-    .every((char) => Number.isInteger(Number(char)) && char !== " ");
-};
-
-const isDiners = (numberString: string) => {
-  return numberString.substring(0, 2) === "36";
-};
-
-const isAMEX = (numberString: string) => {
-  return (
-    numberString.substring(0, 2) === "34" ||
-    numberString.substring(0, 2) === "37"
-  );
-};
-
-const isUnionPay = (numberString: string) => {
-  return (
-    (622126 <= Number(numberString.substring(0, 6)) &&
-      Number(numberString.substring(0, 6)) <= 622925) ||
-    (624 <= Number(numberString.substring(0, 3)) &&
-      Number(numberString.substring(0, 3)) <= 626) ||
-    (6282 <= Number(numberString.substring(0, 4)) &&
-      Number(numberString.substring(0, 4)) <= 6288)
-  );
-};
-
-const isVisa = (numberString: string) => {
-  return numberString[0] === "4";
-};
-
-const isMasterCard = (numberString: string) => {
-  console.log(Number(numberString.substring(0, 2)));
-  return (
-    51 <= Number(numberString.substring(0, 2)) &&
-    Number(numberString.substring(0, 2)) <= 55
-  );
-};
-
-const createFormattingCardNumbers = (
-  cardNumbers: string,
-  cardBrand: CardBrands | null
-) => {
-  if (cardBrand === "Diners" || cardBrand === "AMEX") {
-    let answer = cardNumbers.substring(0, 4);
-    if (cardNumbers.substring(4, 10))
-      answer += "-" + cardNumbers.substring(4, 10);
-    if (cardNumbers.substring(10, 16))
-      answer += "-" + cardNumbers.substring(10, 16);
-    return answer;
-  }
-
-  let answer = cardNumbers.substring(0, 4);
-  if (cardNumbers.substring(4, 8)) answer += "-" + cardNumbers.substring(4, 8);
-  if (cardNumbers.substring(8, 12))
-    answer += "-" + cardNumbers.substring(8, 12);
-  if (cardNumbers.substring(12, 16))
-    answer += "-" + cardNumbers.substring(12, 16);
-  return answer;
-};
+import {
+  isNumberString,
+  createFormattingCardNumbers,
+  decideCardBrand,
+} from "../utils/card";
 
 const useCardNumbers = () => {
   const [cardNumbers, setCardNumbers] = useState("");
@@ -70,19 +13,7 @@ const useCardNumbers = () => {
   const [errorMessage, setErrorMessage] = useState("");
 
   useEffect(() => {
-    if (isDiners(cardNumbers)) {
-      setCardBrand("Diners");
-    } else if (isAMEX(cardNumbers)) {
-      setCardBrand("AMEX");
-    } else if (isUnionPay(cardNumbers)) {
-      setCardBrand("UnionPay");
-    } else if (isVisa(cardNumbers)) {
-      setCardBrand("Visa");
-    } else if (isMasterCard(cardNumbers)) {
-      setCardBrand("Mastercard");
-    } else {
-      setCardBrand(null);
-    }
+    setCardBrand(decideCardBrand(cardNumbers));
   }, [cardNumbers]);
 
   const handleCardNumbers = (event: ChangeEvent<HTMLInputElement>) => {
