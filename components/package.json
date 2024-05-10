@@ -1,6 +1,6 @@
 {
   "name": "styled-base-modal",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "A simple modal component for React using styled-components",
   "keywords": [
     "react",
