@@ -1,49 +1,74 @@
 import React from 'react';
 import { Meta, StoryObj } from '@storybook/react';
-import { Modal, useModal } from '../lib/index';
-import CardCompanySelector from '../components/CardCompanySelector';
+import { action } from '@storybook/addon-actions';
+
+import { Modal } from '../lib/index';
+import styled from 'styled-components';
+import '../index.css';
+
+const BackGroundStyle = styled.div`
+  background-color: #000000;
+  height: 100vh;
+`;
 
 const meta: Meta<typeof Modal> = {
   title: 'Modal',
   component: Modal,
   argTypes: {
+    isOpen: {
+      control: 'select',
+      options: [true, false],
+      default: true,
+    },
     position: {
-      control: { type: 'select', options: ['center', 'bottom'] },
+      control: 'select',
+      options: ['center', 'bottom'],
+      default: 'center',
     },
-    closeOption: {
-      control: { type: 'select', options: ['icon', 'button'] },
+    size: {
+      control: 'select',
+      options: ['small', 'medium', 'large'],
+      default: 'small',
     },
-    title: { control: 'text' },
   },
 };
 
 export default meta;
 
 const Template: StoryObj<typeof meta.args> = (args) => {
-  const { isOpen, toggleModal } = useModal();
-
   return (
-    <>
-      <button onClick={toggleModal}>모달 열기</button>
-      {isOpen && (
-        <Modal {...args} toggleModal={toggleModal}>
-          <CardCompanySelector />
-        </Modal>
-      )}
-    </>
+    <BackGroundStyle>
+      <Modal {...args}>
+        <Modal.Header {...args} />
+        {args.category !== 'prompt' && <Modal.SubTitle {...args} />}
+        {args.category === 'prompt' && <Modal.Input {...args} />}
+        <Modal.Button {...args} />
+      </Modal>
+    </BackGroundStyle>
   );
 };
 
-export const IconCloseModal = Template.bind({});
-IconCloseModal.args = {
-  title: '아이콘으로 닫기',
+export const Default = Template.bind({});
+Default.args = {
   position: 'center',
-  closeOption: 'icon',
+  size: 'small',
+  isOpen: true,
+  closeOption: 'button',
+  title: '아이디를 입력해 주세요.',
+  subTitle: '아이디는 필수로 입력해야 합니다.',
+  category: 'alert',
+  toggleModal: action('toggleModal'),
+  handleCloseButton: action('handleCloseButton'),
 };
 
-export const ButtonCloseModal = Template.bind({});
-ButtonCloseModal.args = {
-  title: '버튼으로 닫기',
-  position: 'bottom',
-  closeOption: 'button',
+export const Confirm = Template.bind({});
+Confirm.args = {
+  ...Default.args,
+  category: 'confirm',
+};
+
+export const Prompt = Template.bind({});
+Prompt.args = {
+  ...Default.args,
+  category: 'prompt',
 };
