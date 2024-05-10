@@ -21,17 +21,3 @@ export function validateAllowedLength({
     throw new Error(errorMessage);
   }
 }
-
-export function validateTotalCardNumbersLength({
-  format,
-  totalLength,
-  errorMessage,
-}: {
-  format: number[];
-  totalLength: number;
-  errorMessage: string;
-}) {
-  if (format.reduce((totalLength, length) => totalLength + length, 0) > totalLength) {
-    throw new Error(errorMessage);
-  }
-}
