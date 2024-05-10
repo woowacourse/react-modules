@@ -35,12 +35,12 @@ describe('useCardExpirationDate 커스텀 훅 테스트', () => {
     expect(result.current.isValidMonth).toBe(false);
   });
 
-  it('2자 미만의 달을 입력하면 에러 메시지를 표시한다.', () => {
+  it('2자 미만의 달을 입력하면 입력하는 중이라 판단하고 에러 메세지를 표시하지 않는다.', () => {
     const { result } = renderHook(() => useCardExpirationDate());
     act(() => {
       result.current.handleMonthChange('1');
     });
-    expect(result.current.monthErrorMessages).toBe(EXPIRATION_DATE_ERROR_MESSAGES.INVALID_MONTH);
+    expect(result.current.monthErrorMessages).toBe('');
   });
 
   it('01 ~ 12 사이의 달을 입력하지 않으면 유효하지 않다.', () => {
@@ -91,12 +91,12 @@ describe('useCardExpirationDate 커스텀 훅 테스트', () => {
     expect(result.current.isValidYear).toBe(false);
   });
 
-  it('2자 미만의 년도를 입력하면 에러 메시지를 표시한다.', () => {
+  it('2자 미만의 년도를 입력하면 입력하는 중이라 판단하고 에러 메세지를 표시하지 않는다.', () => {
     const { result } = renderHook(() => useCardExpirationDate());
     act(() => {
       result.current.handleYearChange('1');
     });
-    expect(result.current.yearErrorMessages).toBe(EXPIRATION_DATE_ERROR_MESSAGES.INVALID_YEAR);
+    expect(result.current.yearErrorMessages).toBe('');
   });
 
   it('과거의 년도를 입력하면 유효하지 않다.', () => {
