@@ -1,6 +1,6 @@
 import ERROR_MESSAGES from './constants/error';
 import {
-  CARD_NUMBER,
+  CARD_BRAND_NUMBER_LENGTH,
   CVC_LIMIT,
   DOUBLE_BLANK,
   MONTH_RANGE,
@@ -8,6 +8,7 @@ import {
   UPPERCASE_AND_SPACE_ONLY,
   YEAR_RANGE,
 } from './constants/cardDataValidation';
+import { CardType } from './useCardType';
 
 function throwIfNoneMaxLength(value: string, maxLength: number) {
   if (value.length !== maxLength) {
@@ -60,13 +61,10 @@ function throwIfNoneUpperCase(value: string) {
   }
 }
 
-export const validateCardNumbers = (
-  value: string,
-  cardType: keyof typeof CARD_NUMBER
-) => {
+export const validateCardNumbers = (value: string, cardType: CardType) => {
   throwIfTrimBlank(value);
   throwIfNoneNumber(value);
-  throwIfNoneMaxLength(value, CARD_NUMBER[cardType]);
+  throwIfNoneMaxLength(value, CARD_BRAND_NUMBER_LENGTH[cardType]);
 };
 
 export const validateExpiryDate = (value: string, target: 'month' | 'year') => {
