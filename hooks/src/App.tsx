@@ -41,7 +41,9 @@ function App() {
     <div>
       <form>
         <fieldset>
+          <legend>cvc</legend>
           <input
+            id="cvc"
             type="text"
             value={cvcInfo.value}
             onChange={cvcInfo.runValidationInputTypeByChange}
@@ -54,7 +56,9 @@ function App() {
           )}
         </fieldset>
         <fieldset>
+          <legend>password</legend>
           <input
+            id="password"
             type="password"
             value={passwordInfo.value}
             onChange={passwordInfo.runValidationInputTypeByChange}
@@ -63,11 +67,13 @@ function App() {
             maxLength={2}
           />
           {!passwordInfo.validationResult.isValid && (
-            <span>{passwordInfo.validationResult.errorMessage}</span>
+            <div>{passwordInfo.validationResult.errorMessage}</div>
           )}
         </fieldset>
         <fieldset>
+          <legend>cardHolder</legend>
           <input
+            id="cardHolder"
             type="text"
             value={cardholderInfo.value}
             onChange={cardholderInfo.runValidationInputTypeByChange}
@@ -76,11 +82,13 @@ function App() {
             maxLength={100}
           />
           {!cardholderInfo.validationResult.isValid && (
-            <span>{cardholderInfo.validationResult.errorMessage}</span>
+            <div>{cardholderInfo.validationResult.errorMessage}</div>
           )}
         </fieldset>
         <fieldset>
+          <legend>expiryDate</legend>
           <input
+            id="expiryDate"
             type="text"
             value={expiryDate.month.value}
             onChange={expiryDate.month.runValidationInputTypeByChange}
@@ -98,14 +106,16 @@ function App() {
           />
           {(!expiryDate.year.validationResult.isValid ||
             !expiryDate.month.validationResult.isValid) && (
-            <>
+            <div>
               <span>{expiryDate.month.validationResult.errorMessage}</span>
               <span>{expiryDate.year.validationResult.errorMessage}</span>
-            </>
+            </div>
           )}
         </fieldset>
         <fieldset>
+          <legend>cardType</legend>
           <select
+            id="cardType"
             aria-invalid={!cardTypeInfo.validationResult.isValid}
             onChange={cardTypeInfo.runValidationByChange}
             value={cardTypeInfo.value}
@@ -120,10 +130,11 @@ function App() {
             <option value={'asd'}>오류</option>
           </select>
           {!cardTypeInfo.validationResult.isValid && (
-            <span>{cardTypeInfo.validationResult.errorMessage}</span>
+            <div>{cardTypeInfo.validationResult.errorMessage}</div>
           )}
         </fieldset>
         <fieldset>
+          <legend>cardNumbers</legend>
           {Array.from({ length: cardNumbersInfo.getInputMaxLengthByCardBrand().length }).map(
             (_, index) => (
               <input
@@ -141,7 +152,10 @@ function App() {
               />
             ),
           )}
-          <span>{getErrorMessage()}</span>
+          <div>
+            <span>{getErrorMessage()}</span>
+            <span>{cardNumbersInfo.getCardBrand()}</span>
+          </div>
         </fieldset>
       </form>
     </div>
