@@ -16,7 +16,7 @@ export const PAYMENT_COMPANY = {
 
   MASTER: {
     name: "MASTER",
-    startNumber: ["51", "55"],
+    startNumber: ["51", "52", "53", "54", "55"],
     formatStyle: [4, 4, 4, 4],
     length: 16,
     whiteSpaceCount: 3,
