@@ -32,6 +32,8 @@ import { extendClassNames } from '@utils/extendClassNames';
 
 import styles from './Modal.module.css';
 
+import '../../styles/index.css';
+
 export interface ModalProps {
   isOpen: boolean;
   position: ModalPosition;
