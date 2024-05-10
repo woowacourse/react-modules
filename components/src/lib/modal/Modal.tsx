@@ -139,13 +139,19 @@ type ModalInputType = React.FC<
   React.PropsWithChildren<
     HTMLAttributes<HTMLElement> & {
       type: HTMLInputElement["type"];
+      placeholder?: string;
     }
   >
 >;
 
-const ModalInput: ModalInputType = ({ type, children, ...restProps }) => {
+const ModalInput: ModalInputType = ({
+  type,
+  placeholder,
+  children,
+  ...restProps
+}) => {
   return (
-    <Styled.ModalInput type={type} {...restProps}>
+    <Styled.ModalInput type={type} placeholder={placeholder} {...restProps}>
       {children}
     </Styled.ModalInput>
   );
