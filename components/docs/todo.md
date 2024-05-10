@@ -30,12 +30,11 @@
 - [x] 작은 confirm 버튼 cancel버튼 만들기
 - [x] small, medium, large 모달
 
-- [ ] Alert 모달.
+- [x] Alert 모달.
   - title, Content만 제공 받기.
   - 확인 버튼만 존재.
-- [ ] Confirm 모달.
+- [x] Confirm 모달.
   - Title, Content제공 받기.
   - 취소 확인 버튼이 둘 다 존재.
-- [ ] Prompt 모달.
-  - Form으로 구성된 모달.
+- [x] Prompt 모달.
   - 취소 확인 버튼이 둘 다 존재.
