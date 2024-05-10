@@ -12,30 +12,22 @@ npm install hook-simo-harry
 
 ```jsx
 import React from "react";
-import useCardNumbers from "your-library-name";
+import useCardNumbers from "hook-simo-harry";
 
 const CardNumberForm = () => {
-  const {
-    cardNumbers,
-    isCardNumberInputCompleted,
-    errorState,
-    errorText,
-    handleCardNumberChange,
-  } = useCardNumbers();
+  const { cardNumbers, validationResult, handleCardNumberChange } = useCardNumbers();
 
   return (
     <form>
-      {Object.entries(cardNumbers).map(([key, value], index) => (
-        <input
-          key={key}
-          name={key}
-          value={value}
-          onChange={handleCardNumberChange}
-          placeholder={`Part ${index + 1}`}
-        />
-      ))}
-      {errorText && <p>{errorText}</p>}
-      <button type="submit" disabled={!isCardNumberInputCompleted}>
+      <input
+        key="your input key"
+        name="your input name"
+        value={cardNumbers.join("-")}
+        onChange={(e) => handleCardNumberChange(e.target.value.replaceAll("-", ""))}
+        placeholder="please enter your card number"
+      />
+      {validationResult.errorText && <p>{validationResult.errorText}</p>}
+      <button type="submit" disabled={!validationResult.isValid}>
         Submit
       </button>
     </form>
@@ -49,15 +41,13 @@ export default CardNumberForm;
 
 아래는 `useCardNumbers` 훅의 반환값을 설명하는 표입니다 :)
 
-| Property                     | Type                             | Description                                               |
-| ---------------------------- | -------------------------------- | --------------------------------------------------------- |
-| `cardNumbers`                | `Record<CardNumberKeys, string>` | 각 카드 번호 부분의 값을 포함하는 객체입니다.             |
-| `isCardNumberInputCompleted` | `boolean`                        | 모든 카드 입력값이 유효한지 판단합니다.                   |
-| `errorState`                 | `boolean`                        | 각 카드 번호 입력 부분의 에러 상태를 표현하는 객체입니다. |
-| `errorText`                  | `string`                         | 입력 관련 에러 메시지를 제공합니다.                       |
-| `handleCardNumberChange`     | `function`                       | 카드 번호 입력 필드의 변경을 처리하는 함수입니다.         |
+| Property                 | Type                                       | Description                                                                                                                                                                                                                                                                  |
+| ------------------------ | ------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `cardNumbers`            | `string[]`                                 | 각 카드 번호 부분의 값 카드 브랜드 포매팅 규칙에 맞게 포매팅한 후 결과를 을 배열로 제공합니다. <br/> ex) ['1234', '1234', '1234', '1234'] <br/> 배열로 제공된 값을 자유롭게 문자열로 다시 변경하거나 배열의 값 그대로 사용할 수 있습니다. <br/> ex) `cardNumbers.join('-');` |
+| `validationResult`       | `{ isValid: boolean; errorText: string; }` | 카드 입력의 유효성 검사 결과를 포함합니다.                                                                                                                                                                                                                                   |
+| `handleCardNumberChange` | `function`                                 | 카드 번호 입력 필드의 변경을 처리하는 함수입니다.                                                                                                                                                                                                                            |
 
-이 훅을 사용하면 각 카드 번호 필드를 개별적으로 관리할 수 있으며, 입력 검증도 함께 제공됩니다.
+이 훅을 사용하면 각 카드 번호에 따라서 카드 브랜드를 판별할 수 있고, 그에 맞는 유효성 검증과 포매팅 규칙이 적용된 결과를 반환받을 수 있습니다.
 
 - **useExpiryDate**
 
@@ -66,28 +56,12 @@ import React from "react";
 import useExpiryDate from "your-library-name";
 
 const ExpiryDateForm = () => {
-  const {
-    expiryDate,
-    isExpiryDateCompleted,
-    errorState,
-    errorText,
-    handleExpiryDateChange,
-  } = useExpiryDate();
+  const { expiryDate, isExpiryDateCompleted, errorState, errorText, handleExpiryDateChange } = useExpiryDate();
 
   return (
     <form>
-      <input
-        name="month"
-        value={expiryDate.month}
-        onChange={handleExpiryDateChange}
-        placeholder="MM"
-      />
-      <input
-        name="year"
-        value={expiryDate.year}
-        onChange={handleExpiryDateChange}
-        placeholder="YY"
-      />
+      <input name="month" value={expiryDate.month} onChange={handleExpiryDateChange} placeholder="MM" />
+      <input name="year" value={expiryDate.year} onChange={handleExpiryDateChange} placeholder="YY" />
       {errorText && <p>{errorText}</p>}
       <button type="submit" disabled={!isExpiryDateCompleted}>
         Submit
@@ -120,17 +94,11 @@ import React from "react";
 import useCardHolderName from "your-library-name";
 
 const CardHolderNameForm = () => {
-  const { holderName, errorState, errorText, handleCardHolderNameChange } =
-    useCardHolderName();
+  const { holderName, errorState, errorText, handleCardHolderNameChange } = useCardHolderName();
 
   return (
     <form>
-      <input
-        type="text"
-        value={holderName}
-        onChange={handleCardHolderNameChange}
-        placeholder="Card Holder Name"
-      />
+      <input type="text" value={holderName} onChange={handleCardHolderNameChange} placeholder="Card Holder Name" />
       {errorText && <p>{errorText}</p>}
       <button type="submit" disabled={errorState}>
         Submit
@@ -166,13 +134,7 @@ const CVCForm = () => {
 
   return (
     <form>
-      <input
-        type="text"
-        value={cvc}
-        onChange={handleCVCChange}
-        placeholder="CVC"
-        maxLength={4}
-      />
+      <input type="text" value={cvc} onChange={handleCVCChange} placeholder="CVC" maxLength={4} />
       {errorText && <p>{errorText}</p>}
       <button type="submit" disabled={!cvc.length === 3 || errorState}>
         Submit
@@ -204,17 +166,11 @@ import React from "react";
 import useCardPassword from "your-library-name";
 
 const CardPasswordForm = () => {
-  const { cardPassword, errorState, errorText, handleCardPasswordChange } =
-    useCardPassword();
+  const { cardPassword, errorState, errorText, handleCardPasswordChange } = useCardPassword();
 
   return (
     <form>
-      <input
-        type="password"
-        value={cardPassword}
-        onChange={handleCardPasswordChange}
-        placeholder="Card Password"
-      />
+      <input type="password" value={cardPassword} onChange={handleCardPasswordChange} placeholder="Card Password" />
       {errorText && <p>{errorText}</p>}
       <button type="submit" disabled={!cardPassword.length === 4 || errorState}>
         Submit
