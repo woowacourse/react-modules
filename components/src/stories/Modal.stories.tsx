@@ -1,4 +1,3 @@
-/* eslint-disable storybook/prefer-pascal-case */
 import type { Meta, StoryObj } from '@storybook/react';
 import { Modal } from '../lib/index';
 import React from 'react';
@@ -72,7 +71,7 @@ export const 모달_버튼_1개: Story = {
     children: (
       <>
         <Modal.Header title="마루" onClose={() => console.log('마루')} />
-        <Modal.Footer closeButton={{ hide: true }} />
+        <Modal.Footer closeButton={{ role: 'close', hide: true }} />
       </>
     ),
     type: 'dialog',
@@ -187,6 +186,60 @@ export const 모달_닫기_아이콘_커스텀_오류: Story = {
 export const 모달_컨텐츠: Story = {
   args: {
     open: true,
+    children: (
+      <>
+        <Modal.Header title="마루" onClose={() => console.log('마루')} />
+        <Modal.Content>
+          <div>안녕 마루와 쿠키의 나이스 모달</div>
+        </Modal.Content>
+        <Modal.Footer buttonPosition="column-reverse" />
+      </>
+    ),
+    type: 'dialog',
+    onClose: () => console.log('마루'),
+  },
+};
+
+export const 모달_small: Story = {
+  args: {
+    open: true,
+    dialogSize: 'small',
+    children: (
+      <>
+        <Modal.Header title="마루" onClose={() => console.log('마루')} />
+        <Modal.Content>
+          <div>안녕 마루와 쿠키의 나이스 모달</div>
+        </Modal.Content>
+        <Modal.Footer buttonPosition="column-reverse" />
+      </>
+    ),
+    type: 'dialog',
+    onClose: () => console.log('마루'),
+  },
+};
+
+export const 모달_medium: Story = {
+  args: {
+    open: true,
+    dialogSize: 'medium',
+    children: (
+      <>
+        <Modal.Header title="마루" onClose={() => console.log('마루')} />
+        <Modal.Content>
+          <div>안녕 마루와 쿠키의 나이스 모달</div>
+        </Modal.Content>
+        <Modal.Footer buttonPosition="column-reverse" />
+      </>
+    ),
+    type: 'dialog',
+    onClose: () => console.log('마루'),
+  },
+};
+
+export const 모달_large: Story = {
+  args: {
+    open: true,
+    dialogSize: 'large',
     children: (
       <>
         <Modal.Header title="마루" onClose={() => console.log('마루')} />
