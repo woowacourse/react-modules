@@ -48,7 +48,7 @@ const Modal: React.FC<React.PropsWithChildren<ModalProps>> & {
   ModalButton: ModalButtonType;
   ModalInput: ModalInputType;
   ModalLabel: ModalLabelType;
-} = ({ children, isOpen, device = 'mobile', size = 'small', position = 'center', onToggle }) => {
+} = ({ children, isOpen, device, size = 'small', position = 'center', onToggle }) => {
   useModalControl(isOpen, onToggle);
 
   return (
@@ -57,7 +57,7 @@ const Modal: React.FC<React.PropsWithChildren<ModalProps>> & {
         className={extendClassNames(
           styles.modal,
           styles[MODAL_POSITION_CLASS_NAME_MAP[position]],
-          styles[MODAL_DEVICE_CLASS_NAME_MAP[device]],
+          device ? styles[MODAL_DEVICE_CLASS_NAME_MAP[device]] : '',
         )}
       >
         <div className={styles.dimmed} onClick={onToggle} />

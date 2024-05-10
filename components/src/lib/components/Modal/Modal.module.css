@@ -10,6 +10,39 @@
   justify-content: center;
 }
 
+/* 600px(mobile) */
+@media (min-width: 600px) {
+  .modal {
+    max-width: 600px;
+  }
+}
+
+/* 768px(tablet) */
+@media (min-width: 768px) {
+  .modal {
+    max-width: 768px;
+  }
+}
+
+/* 1024px(desktop) */
+@media (min-width: 1024px) {
+  .modal {
+    max-width: 100%;
+  }
+}
+
+.modalDeviceMobile {
+  max-width: 600px;
+}
+
+.modalDeviceTablet {
+  max-width: 768px;
+}
+
+.modalDeviceDesktop {
+  max-width: 100%;
+}
+
 .dimmed {
   width: 100%;
   position: absolute;
@@ -41,18 +74,6 @@
 
 .modalSizeLarge {
   width: 536px;
-}
-
-.modalDeviceMobile {
-  max-width: 600px;
-}
-
-.modalDeviceTablet {
-  max-width: 768px;
-}
-
-.modalDeviceDesktop {
-  max-width: 100%;
 }
 
 .modalContainerBottom {
