@@ -1,6 +1,6 @@
 {
   "name": "chico-card-custom-hooks",
-  "version": "0.0.2",
+  "version": "0.0.11",
   "description": "level2-mission2-react-modules-hooks",
   "type": "module",
   "types": "dist/index.d.ts",
