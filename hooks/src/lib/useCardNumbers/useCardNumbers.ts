@@ -45,7 +45,7 @@ const useCardNumbers = (initValue: string) => {
   const [cardBrand, setCardBrand] = useState('none');
   const maxLength = CARD_BRAND_TABLE[cardBrand].maxLength;
   const validateOnChange = (newValue: string) => {
-    if (newValue.replace(/-/g, '').length > maxLength) {
+    if (newValue.replace(/\D/g, '').length > maxLength) {
       return {
         isValid: false,
         errorMessage: `카드번호는 ${maxLength}글자 까지만 입력이 가능해요.`,
@@ -70,7 +70,7 @@ const useCardNumbers = (initValue: string) => {
   };
 
   const validateOnBlur = () => {
-    if (value.length !== maxLength) {
+    if (value.replace(/\D/g, '').length !== maxLength) {
       return {
         isValid: false,
         errorMessage: `카드번호는 ${maxLength}글자로 입력해 주세요.`,
