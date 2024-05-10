@@ -25,8 +25,7 @@ const useCardExpirationDate = (initialMonthValue: string = '', initialYearValue:
 
   const getMonthErrorMessage = (month: string, isExpiredDate: EXPIRED_TYPE) => {
     if (isNotNumber(month)) return EXPIRATION_DATE_ERROR_MESSAGES.NOT_NUMBER;
-    if (isValidNumberLength(month, DATE_DEFAULT_LENGTH)) return EXPIRATION_DATE_ERROR_MESSAGES.INVALID_MONTH;
-    if (isValidNumberRange(Number(month), 1, 12)) return EXPIRATION_DATE_ERROR_MESSAGES.INVALID_MONTH;
+    if (!isValidNumberRange(Number(month), 1, 12)) return EXPIRATION_DATE_ERROR_MESSAGES.INVALID_MONTH;
     if (isExpiredDate === 'INVALID_MONTH') return EXPIRATION_DATE_ERROR_MESSAGES.EXPIRED_DATE;
 
     return '';
@@ -34,7 +33,7 @@ const useCardExpirationDate = (initialMonthValue: string = '', initialYearValue:
 
   const getYearErrorMessage = (year: string, isExpiredDate: EXPIRED_TYPE) => {
     if (isNotNumber(year)) return EXPIRATION_DATE_ERROR_MESSAGES.NOT_NUMBER;
-    if (isValidNumberLength(year, DATE_DEFAULT_LENGTH)) return EXPIRATION_DATE_ERROR_MESSAGES.INVALID_YEAR;
+    if (!isValidNumberLength(year, DATE_DEFAULT_LENGTH)) return EXPIRATION_DATE_ERROR_MESSAGES.INVALID_YEAR;
     if (isExpiredDate === 'INVALID_YEAR') return EXPIRATION_DATE_ERROR_MESSAGES.EXPIRED_DATE;
 
     return '';
@@ -53,16 +52,22 @@ const useCardExpirationDate = (initialMonthValue: string = '', initialYearValue:
   const formatMonth = (month: string) => (isValidNumberRange(Number(month), 2, 9) ? month.padStart(2, '0') : month);
 
   const handleMonthChange = (month: string) => {
-    if (month.length > DATE_DEFAULT_LENGTH || isNotNumber(month)) return;
+    if (month.length > DATE_DEFAULT_LENGTH) return;
 
     validateDate({ month });
+
+    if (isNotNumber(month)) return;
+
     setDate({ ...date, month: formatMonth(month) });
   };
 
   const handleYearChange = (year: string) => {
-    if (year.length > DATE_DEFAULT_LENGTH || isNotNumber(year)) return;
+    if (year.length > DATE_DEFAULT_LENGTH) return;
 
     validateDate({ year });
+
+    if (isNotNumber(year)) return;
+
     setDate({ ...date, year });
   };
 

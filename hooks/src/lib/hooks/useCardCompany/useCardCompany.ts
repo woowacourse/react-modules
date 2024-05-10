@@ -23,7 +23,7 @@ const useCardCompany = (validCardCompanyList: string[], initialValue: string = '
     setCardCompanyErrorMessage(errorMessage);
     setIsValidCardCompany(!errorMessage);
 
-    if (!errorMessage) return;
+    if (errorMessage) return;
 
     setCardCompany(company);
   };

@@ -35,9 +35,9 @@ const useCardNumber = (initialValue: string = '') => {
   return {
     cardNumber,
     cardType,
-    handleCardNumberChange,
     isValidCardNumber,
     cardNumberErrorMessage,
+    handleCardNumberChange,
   };
 };
 

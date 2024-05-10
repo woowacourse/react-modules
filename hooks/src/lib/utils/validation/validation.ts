@@ -7,8 +7,6 @@ export const isValidNumberLength = (value: string, validLength: number) => value
 export const isValidNumberRange = (number: number, min: number, max: number) => number >= min && number <= max;
 
 export const validateExpiredDate = (month: string, year: string): EXPIRED_TYPE => {
-  if (month.length < 2 || year.length < 2) return false;
-
   const today = new Date();
   const todayMonth = today.getMonth() + 1;
   const todayYear = today.getFullYear() - 2000;

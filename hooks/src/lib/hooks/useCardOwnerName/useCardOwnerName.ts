@@ -43,7 +43,7 @@ const useCardOwnerName = (validLength: number = OWNER_NAME_DEFAULT_LENGTH, initi
 
     if (validOwnerName.length > validLength) return;
 
-    validateOwnerName(validOwnerName);
+    validateOwnerName(name);
     setOwnerName(validOwnerName);
   };
 
