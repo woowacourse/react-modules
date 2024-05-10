@@ -1,6 +1,6 @@
 const Validation = {
   isNumericPattern: (value: string) => {
-    return /^\d*$/.test(value);
+    return /^[\d-]*$/.test(value);
   },
 
   isEnglishPattern: (value: string) => {
@@ -27,16 +27,33 @@ const Validation = {
   },
 
   isVisa: (cardNumber: string) => {
-    const VISA_LENGTH = 16;
-
-    return Validation.isExactLength(VISA_LENGTH, cardNumber) && cardNumber.startsWith('4');
+    return cardNumber.startsWith('4');
   },
 
-  isMasterCard: (cardNumber: string) => {
-    const MASTERCARD_LENGTH = 16;
+  isMastercard: (cardNumber: string) => {
     const firstTwoDigits = Number(cardNumber.slice(0, 2));
 
-    return Validation.isExactLength(MASTERCARD_LENGTH, cardNumber) && firstTwoDigits >= 51 && firstTwoDigits <= 55;
+    return firstTwoDigits >= 51 && firstTwoDigits <= 55;
+  },
+
+  isDiners: (cardNumber: string) => {
+    return cardNumber.startsWith('36');
+  },
+
+  isAmex: (cardNumber: string) => {
+    return cardNumber.startsWith('34') || cardNumber.startsWith('37');
+  },
+
+  isUnionpay: (cardNumber: string) => {
+    const firstThreeDigits = Number(cardNumber.slice(0, 3));
+    const firstFourDigits = Number(cardNumber.slice(0, 4));
+    const firstSixDigits = Number(cardNumber.slice(0, 6));
+
+    return (
+      (firstSixDigits >= 622126 && firstSixDigits <= 622925) ||
+      (firstThreeDigits >= 624 && firstThreeDigits <= 626) ||
+      (firstFourDigits >= 6282 && firstFourDigits <= 6288)
+    );
   },
 };
 
