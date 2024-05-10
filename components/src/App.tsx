@@ -6,12 +6,12 @@ import { AlertModal, BottomModal, CenterModal, ConfirmModal, PromptModal, ToastM
 import ModalContainer from './lib/components/ModalContainer';
 import { BASIC_BORDER_RADIUS } from './lib/constants/modal';
 
-const ModalTitle = styled.h2`
+export const ModalTitle = styled.h2`
   margin-bottom: 1rem;
   font-size: 1.2rem;
 `;
 
-const ModalContents = styled.div`
+export const ModalContents = styled.div`
   margin-bottom: 1rem;
   font-size: 1rem;
   p {
@@ -86,7 +86,7 @@ function App() {
         contents={
           <ModalContents>
             <p>open</p>
-            <p>alert modal</p>
+            <p>confirm modal</p>
           </ModalContents>
         }
         buttonContainerJustifyContent="space-between"
