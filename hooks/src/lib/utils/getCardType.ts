@@ -1,4 +1,4 @@
-import { CARD_NUMBER_LENGTH } from "../useCardNumbers";
+import { CARD_NUMBER_LENGTH } from "../useCardNumbers/useCardNumbers";
 
 const VISA_START_NUMBER = 4;
 const MASTERCARD_START_NUMBER = {

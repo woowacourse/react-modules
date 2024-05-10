@@ -1,6 +1,6 @@
 import { renderHook } from "@testing-library/react";
 import { ChangeEvent, FocusEvent, act } from "react";
-import useInput, { ValidationType } from "../lib/useInput";
+import useInput, { ValidationType } from "./useInput";
 
 describe("useInput 테스트", () => {
   const isNumber = (value: string) => /^\d+$/.test(value);

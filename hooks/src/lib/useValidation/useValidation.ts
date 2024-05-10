@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ValidationType } from "./useInput";
+import { ValidationType } from "../useInput/useInput";
 
 const useValidation = () => {
   const [error, setError] = useState({

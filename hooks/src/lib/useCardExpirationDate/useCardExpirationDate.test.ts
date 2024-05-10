@@ -1,6 +1,6 @@
 import { renderHook } from "@testing-library/react";
 import { ChangeEvent, act } from "react";
-import useCardExpirationDate from "../lib/useCardExpirationDate";
+import useCardExpirationDate from "./useCardExpirationDate";
 
 describe("useCardExpirationDate 테스트", () => {
   it("유효기간이 만료된 카드 입력 시 에러 상태가 true가 된다.", () => {

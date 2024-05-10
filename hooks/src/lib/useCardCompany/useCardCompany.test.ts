@@ -1,6 +1,6 @@
 import { renderHook } from "@testing-library/react";
 import { ChangeEvent, act } from "react";
-import useCardCompany from "../lib/useCardCompany";
+import useCardCompany from "./useCardCompany";
 
 describe("useCardCompany 테스트", () => {
   const CARD_COMPANY_ERROR_MESSAGE = "카드사를 선택해주세요.";

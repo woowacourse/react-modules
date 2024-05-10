@@ -1,5 +1,5 @@
-import useInput, { ValidationType } from "./useInput";
-import getCardType from "./utils/getCardType";
+import useInput, { ValidationType } from "../useInput/useInput";
+import getCardType from "../utils/getCardType";
 
 export const CARD_NUMBER_LENGTH = 4;
 

@@ -1,4 +1,4 @@
-import useInput, { ValidationType } from "./useInput";
+import useInput, { ValidationType } from "../useInput/useInput";
 
 const CVC_LENGTH = 3;
 

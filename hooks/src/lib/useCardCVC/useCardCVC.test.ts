@@ -1,6 +1,6 @@
 import { renderHook } from "@testing-library/react";
 import { ChangeEvent, act } from "react";
-import useCardCVC from "../lib/useCardCVC";
+import useCardCVC from "./useCardCVC";
 
 describe("useCardCVC 테스트", () => {
   it.each([["12"], ["3456"]])(

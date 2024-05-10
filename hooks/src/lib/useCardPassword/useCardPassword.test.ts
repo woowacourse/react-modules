@@ -1,6 +1,6 @@
 import { renderHook } from "@testing-library/react";
 import { ChangeEvent, act } from "react";
-import useCardPassword from "../lib/useCardPassword";
+import useCardPassword from "./useCardPassword";
 
 describe("useCardPassword 테스트", () => {
   it("입력한 값이 숫자가 아니라면 입력을 제한한다.", () => {

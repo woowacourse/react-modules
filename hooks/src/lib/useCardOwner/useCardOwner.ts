@@ -1,4 +1,4 @@
-import useInput, { ValidationType } from "./useInput";
+import useInput, { ValidationType } from "../useInput/useInput";
 
 const isEnglish = (value: string) => {
   return /^[a-zA-Z ]*$/.test(value);

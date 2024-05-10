@@ -1,5 +1,5 @@
 import { useRef, useState } from "react";
-import useValidation from "./useValidation";
+import useValidation from "../useValidation/useValidation";
 
 export interface ValidationType {
   validate: (value: string) => boolean;

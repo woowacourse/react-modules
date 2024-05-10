@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import useInput, { ValidationType } from "./useInput";
+import useInput, { ValidationType } from "../useInput/useInput";
 
 const EXPIRATION_DATE_LENGTH = 2;
 const MONTH = {
