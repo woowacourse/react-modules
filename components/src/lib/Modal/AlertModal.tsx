@@ -15,6 +15,7 @@ interface AlertModalProps {
   size?: ModalSize;
   isOpened: boolean;
   onClose: () => void;
+  onConfirm?: () => void;
   zIndex?: number;
   title?: string;
   description?: string;
@@ -29,6 +30,7 @@ const AlertModal = ({
   size = 'small',
   isOpened,
   onClose,
+  onConfirm = () => { },
   title = '',
   description = '',
   children,
@@ -70,7 +72,10 @@ const AlertModal = ({
             <ModalButtonContainer buttonPosition={buttonPosition}>
               <Button
                 text={'확인'}
-                onClick={onClose}
+                onClick={() => {
+                  onConfirm();
+                  onClose();
+                }}
                 size={'small'}
                 width={modalPosition === 'bottom' || buttonPosition === 'column' ? 'full' : 'fixed'}
                 buttonStyle={'primary'}
