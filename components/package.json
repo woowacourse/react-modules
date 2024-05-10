@@ -1,6 +1,6 @@
 {
   "name": "harrysimodal",
-  "version": "0.0.2",
+  "version": "0.0.4",
   "description": "modal of harrysimo",
   "type": "module",
   "types": "dist/index.d.ts",

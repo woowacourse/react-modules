@@ -5,7 +5,7 @@ import { FLEX_DIRECTION } from "../constants/modal";
 
 import { ElementDirection } from "../types/modal";
 
-interface ModalFormProps extends React.PropsWithChildren<React.HTMLAttributes<HTMLFormElement>> {
+export interface ModalFormProps extends React.PropsWithChildren<React.HTMLAttributes<HTMLFormElement>> {
   direction?: ElementDirection;
 }
 
