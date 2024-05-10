@@ -35,6 +35,7 @@ const meta = {
 
   args: {
     onToggle: fn(),
+    onConfirm: fn(),
   },
 
   render: ({ ...args }) => {
