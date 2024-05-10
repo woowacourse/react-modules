@@ -1,37 +1,44 @@
 import { useState } from 'react';
 import { validateCardNumbers } from './cardDateValidate';
-import { CARD_NUMBER } from './constants/cardDataValidation';
+import { CardType } from './useCardType';
+import { CardError } from './type/Card';
 
 const useCardNumberValidation = () => {
-  const [cardNumberValidation, setCardNumberValidation] = useState({
-    errorMessage: {
-      cardNumbers: '',
-    },
-    isError: {
-      cardNumbers: false,
-    },
+  const [cardNumberValidation, setCardNumberValidation] = useState<CardError>({
+    errorMessage: '',
+    isError: false,
   });
 
   const cardNumberValidateHandler = (
     value: string,
-    cardType: keyof typeof CARD_NUMBER
-  ) => {
+    cardType: CardType
+  ): CardError => {
     try {
       validateCardNumbers(value, cardType);
       setCardNumberValidation((prev) => ({
         ...prev,
-        errorMessage: { cardNumbers: '' },
-        isError: { cardNumbers: false },
+        errorMessage: '',
+        isError: false,
       }));
     } catch (error) {
       if (error instanceof Error) {
         setCardNumberValidation((prev) => ({
           ...prev,
-          errorMessage: { cardNumbers: error.message },
-          isError: { cardNumbers: true },
+          errorMessage: error.message,
+          isError: true,
         }));
+        return {
+          ...cardNumberValidation,
+          errorMessage: error.message,
+          isError: true,
+        };
       }
     }
+    return {
+      ...cardNumberValidation,
+      errorMessage: '',
+      isError: true,
+    };
   };
 
   return { cardNumberValidation, cardNumberValidateHandler };

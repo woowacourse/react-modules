@@ -1,30 +1,40 @@
 import { useState } from 'react';
 import { validateUserName } from './cardDateValidate';
+import { CardError } from './type/Card';
 
 const useCardHolderValidation = () => {
-  const [cardHolderValidation, setCardHolderValidation] = useState({
-    errorMessage: {
-      cardHolder: '',
-    },
-    isError: { cardHolder: false },
+  const [cardHolderValidation, setCardHolderValidation] = useState<CardError>({
+    errorMessage: '',
+    isError: false,
   });
 
-  const cardHolderValidateHandler = (value: string) => {
+  const cardHolderValidateHandler = (value: string): CardError => {
     try {
       validateUserName(value);
       setCardHolderValidation((prev) => ({
         ...prev,
-        errorMessage: { ...prev.errorMessage, cardHolder: '' },
-        isError: { ...prev.isError, cardHolder: false },
+        errorMessage: '',
+        isError: false,
       }));
     } catch (error) {
       if (error instanceof Error) {
         setCardHolderValidation((prev) => ({
-          errorMessage: { ...prev.errorMessage, cardHolder: error.message },
-          isError: { ...prev.isError, cardHolder: true },
+          ...prev,
+          errorMessage: error.message,
+          isError: true,
         }));
+        return {
+          ...cardHolderValidation,
+          errorMessage: error.message,
+          isError: true,
+        };
       }
     }
+    return {
+      ...cardHolderValidation,
+      errorMessage: '',
+      isError: false,
+    };
   };
 
   return { cardHolderValidation, cardHolderValidateHandler };

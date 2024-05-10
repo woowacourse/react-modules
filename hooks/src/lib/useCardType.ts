@@ -1,5 +1,10 @@
 import { useState } from 'react';
-import { CARD_CONFIG, CARD_NUMBER } from './constants/cardDataValidation';
+import {
+  CARD_BRAND_NUMBER_LENGTH,
+  CARD_CONFIG,
+} from './constants/cardDataValidation';
+
+export type CardType = keyof typeof CARD_BRAND_NUMBER_LENGTH;
 
 const checkCardType = (cardNumber: string) => {
   const cardBrandNumber = parseInt(cardNumber.substring(0, 2), 10);
@@ -33,13 +38,13 @@ const checkCardType = (cardNumber: string) => {
 };
 
 const useCardType = () => {
-  const [cardType, setCardType] = useState<keyof typeof CARD_NUMBER>('Empty');
+  const [cardType, setCardType] = useState<CardType>('Empty');
 
   const cardTypeHandler = (value: string) => {
     setCardType(checkCardType(value));
   };
 
-  const formatCardNumber = (cardType: keyof typeof CARD_NUMBER) => {
+  const formatCardNumber = (cardType: CardType) => {
     switch (cardType) {
       case 'Diners':
         return (cardNumbers: string) =>
