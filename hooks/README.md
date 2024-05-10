@@ -97,13 +97,8 @@ function App() {
 import { useCardNumbers } from "easy-payments-hooks";
 
 function App() {
-  const {
-    firstState: [first, setFirst],
-    secondState: [second, setSecond],
-    thirdState: [third, setThird],
-    fourthState: [fourth, setFourth],
-    error: { isError, errorMessage },
-  } = useCardNumbers();
+  const { cardNumbers, cardBrand, handleCardNumbers, isError, errorMessage } =
+    useCardNumbers();
 
   //...
 }
@@ -111,10 +106,8 @@ function App() {
 
 ### Return
 
-1. firstState: 첫 번째 카드 번호에 대한 state
-2. secondState: 두 번째 카드 번호에 대한 state
-3. thirdState: 세 번째 카드 번호에 대한 state
-4. fourthState: 네 번째 카드 번호에 대한 state
-5. error:
-   5-1. isError: 에러 여부를 판단하는 boolean 가,
-   5-2. errorMessage,
+1. cardNumbers: 카드 번호 문자열
+2. cardBrand: 카드 브랜드
+3. handleCardNumbers: 카드 번호를 변경하는 handler 함수
+4. isError: Error 여부를 판단하는 boolean 값
+5. errorMessage: 에러 메세지
