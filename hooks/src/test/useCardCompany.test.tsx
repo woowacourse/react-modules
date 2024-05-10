@@ -1,8 +1,6 @@
-import React from "react";
 import { useCardCompany } from "../lib";
 import { render, renderHook, screen } from "@testing-library/react";
 import { userEvent } from "@testing-library/user-event";
-
 describe("useCardCompany Test", () => {
   it("option, button요소를 클릭시 카드사 state가 변경된다.", async () => {
     //Arrange
@@ -37,21 +35,6 @@ describe("useCardCompany Test", () => {
     await user.click(screen.getByRole("button"));
 
     //Assert
-    expect(result.current.errorState.isError).toBe(true);
-  });
-
-  it("resetError를 실행하면 에러가 사라진다.", async () => {
-    //Arrange
-    const { result } = renderHook(() => useCardCompany());
-    const user = userEvent.setup();
-
-    render(<button onClick={result.current.clickCardCompany} value={"하나은행"} />);
-
-    //Act
-    await user.click(screen.getByRole("button"));
-    React.act(() => result.current.errorState.resetError());
-
-    //Assert
-    expect(result.current.errorState.isError).toBe(false);
+    expect(result.current.errorType).toBeTruthy();
   });
 });

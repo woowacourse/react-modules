@@ -27,7 +27,7 @@ interface CardNumberReturn {
     thirdState: NumberState;
     fourthState: NumberState;
   };
-  errorList: (string | undefined)[];
+  errorTypeList: (string | undefined)[];
   cardBrand?: CardBrand;
   inputMaxLengthList?: (typeof CardInputMaxLength)[keyof typeof CardInputMaxLength];
 }
@@ -109,7 +109,7 @@ const useCardNumbers = (): CardNumberReturn => {
       thirdState: [third, (value: string) => setWrapper(value, setThird, 2)] as const,
       fourthState: [fourth, (value: string) => setWrapper(value, setFourth, 3)] as const,
     },
-    errorList: errorTypeList,
+    errorTypeList: errorTypeList,
     cardBrand,
     inputMaxLengthList: cardBrand && CardInputMaxLength[cardBrand],
   };
