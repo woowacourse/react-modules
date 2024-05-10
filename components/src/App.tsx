@@ -47,6 +47,7 @@ function App() {
         toggleModal={toggleAlertModal}
         position="center"
         isOpen={isAlertOpen}
+        size="small"
       >
         <Modal.Header
           title="아이디를 입력해 주세요."
@@ -62,6 +63,7 @@ function App() {
         toggleModal={toggleConfirmModal}
         position="center"
         isOpen={isConfirmOpen}
+        size="medium"
       >
         <Modal.Header
           title="카드를 삭제하시겠습니까?"
@@ -81,6 +83,7 @@ function App() {
         toggleModal={togglePromptModal}
         position="center"
         isOpen={isPromptOpen}
+        size="large"
       >
         <Modal.Header
           title="쿠폰 번호를 입력해 주세요."

@@ -3,6 +3,7 @@ import { MouseEvent } from 'react';
 
 interface ContainerProps {
   $position: string;
+  $size: 'small' | 'medium' | 'large';
 }
 
 interface BackDropProps {
@@ -43,6 +44,25 @@ const calculateModalPosition = (position: string) => {
   }
 };
 
+const calculateModalSize = (size: 'small' | 'medium' | 'large') => {
+  switch (size) {
+    case 'small':
+      return css({
+        width: '32rem',
+      });
+
+    case 'medium':
+      return css({
+        width: '48rem',
+      });
+
+    case 'large':
+      return css({
+        width: '60rem',
+      });
+  }
+};
+
 const Container = styled.div<ContainerProps>`
   ${(props) => css`
     position: fixed;
@@ -50,54 +70,27 @@ const Container = styled.div<ContainerProps>`
     display: flex;
     flex-direction: column;
     gap: 1.6rem;
-    width: 48rem;
     padding: 2.4rem 3.2rem;
     box-sizing: border-box;
     border-radius: 0.8rem;
     background-color: var(--white-color);
+    ${calculateModalSize(props.$size)}
     ${calculateModalPosition(props.$position)}
   `}
 `;
-
-// const Header = styled.div`
-//   display: flex;
-//   justify-content: space-between;
-//   align-items: center;
-//   color: var(--black-color);
-// `;
-
-// const Title = styled.div`
-//   font-weight: bold;
-//   font-size: 1.8rem;
-// `;
-
-// const CloseIcon = styled.img`
-//   width: 2.4rem;
-//   height: 2.4rem;
-// `;
-
-// const CloseButton = styled.button`
-//   height: 2.75rem;
-//   background-color: transparent;
-//   color: #8b95a1;
-//   font-weight: bold;
-//   font-size: 1.5rem;
-//   border: 1px solid var(--gray-border-color);
-//   border-radius: 0.5rem;
-//   padding: 0.8rem auto;
-//   box-sizing: border-box;
-// `;
 
 interface ModalProps {
   toggleModal: () => void;
   isOpen: boolean;
   position: 'center' | 'bottom';
+  size: 'small' | 'medium' | 'large';
 }
 
 function BaseModal({
   toggleModal,
   isOpen,
   position,
+  size,
   children,
 }: React.PropsWithChildren<ModalProps>) {
   const handleCloseButton = () => {
@@ -116,7 +109,9 @@ function BaseModal({
       onClick={(e) => handleBackdropClick(e)}
       $display={isOpen ? 'block' : 'none'}
     >
-      <Container $position={position}>{children}</Container>
+      <Container $position={position} $size={size}>
+        {children}
+      </Container>
     </BackDrop>
   );
 }
