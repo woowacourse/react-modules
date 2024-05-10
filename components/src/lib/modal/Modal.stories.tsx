@@ -2,6 +2,9 @@ import { StoryObj, Meta } from '@storybook/react';
 import { fn } from '@storybook/test';
 import Modal from './Modal';
 import CloseImage from '../../assets/close.png';
+import AlertModal from './AlertModal';
+import ConfirmModal from './ConfirmModal';
+import PromptModal from './PromptModal';
 
 const meta = {
   title: 'Components/Modal',
@@ -190,7 +193,7 @@ export const 이미지_버튼과_텍스트_버튼이_있는_모달: Story = {
 };
 
 // step2 모달
-export const AlertModal: Story = {
+export const 확인_모달: Story = {
   args: {
     isOpen: true,
     position: 'center',
@@ -206,28 +209,18 @@ export const AlertModal: Story = {
   },
 
   render: (args) => (
-    <Modal
+    <AlertModal
       isOpen={args.isOpen}
       position={args.position}
       size={args.size}
+      title='아이디를 입력해 주세요.'
       onClose={args.onClose}
-    >
-      <Modal.Header>
-        <Modal.Title>아이디를 입력해 주세요.</Modal.Title>
-      </Modal.Header>
-      <Modal.Content>
-        <span>아이디는 필수로 입력해야 합니다.</span>
-      </Modal.Content>
-      <Modal.Footer buttonPosition='right'>
-        <Modal.TextButton actionFn={args.onClose} buttonSize={'50px'}>
-          확인
-        </Modal.TextButton>
-      </Modal.Footer>
-    </Modal>
+      message='아이디는 필수로 입력해야 합니다.'
+    />
   ),
 };
 
-export const ConfirmModal: Story = {
+export const 확인_취소_모달: Story = {
   args: {
     isOpen: true,
     position: 'center',
@@ -243,36 +236,19 @@ export const ConfirmModal: Story = {
   },
 
   render: (args) => (
-    <Modal
+    <ConfirmModal
       isOpen={args.isOpen}
       position={args.position}
       size={args.size}
+      title='카드를 삭제하시겠습니까?'
       onClose={args.onClose}
     >
-      <Modal.Header>
-        <Modal.Title>카드를 삭제하시겠습니까?</Modal.Title>
-      </Modal.Header>
-      <Modal.Content>
-        <span>삭제하면 복구하실 수 없습니다.</span>
-      </Modal.Content>
-      <Modal.Footer buttonPosition='right' buttonGap='10px'>
-        <Modal.TextButton actionFn={args.onClose} buttonSize='50px'>
-          취소
-        </Modal.TextButton>
-        <Modal.TextButton
-          actionFn={args.onClose}
-          buttonSize='50px'
-          backgroundColor='#333333'
-          fontColor='#ffffff'
-        >
-          확인
-        </Modal.TextButton>
-      </Modal.Footer>
-    </Modal>
+      <span>삭제하면 복구하실 수 없습니다.</span>
+    </ConfirmModal>
   ),
 };
 
-export const PromptModal: Story = {
+export const 입력_모달: Story = {
   args: {
     isOpen: true,
     position: 'center',
@@ -289,32 +265,12 @@ export const PromptModal: Story = {
   },
 
   render: (args) => (
-    <Modal
+    <PromptModal
       isOpen={args.isOpen}
       position={args.position}
-      onClose={args.onClose}
       size={args.size}
-    >
-      <Modal.Header>
-        <Modal.Title>쿠폰 번호를 입력해 주세요.</Modal.Title>
-      </Modal.Header>
-      <Modal.Content>
-        <Modal.Input></Modal.Input>
-      </Modal.Content>
-      <Modal.Footer buttonPosition='right' buttonGap='10px'>
-        <Modal.TextButton actionFn={args.onClose} buttonSize='50px'>
-          취소
-        </Modal.TextButton>
-        <Modal.TextButton
-          type='submit'
-          actionFn={args.onClose}
-          buttonSize='50px'
-          backgroundColor='#333333'
-          fontColor='#ffffff'
-        >
-          제출
-        </Modal.TextButton>
-      </Modal.Footer>
-    </Modal>
+      title='쿠폰 번호를 입력해 주세요.'
+      onClose={args.onClose}
+    />
   ),
 };
