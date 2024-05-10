@@ -15,7 +15,6 @@ interface PromptModalProps {
   size?: ModalSize;
   isOpened: boolean;
   onClose: () => void;
-  zIndex?: number;
   title?: string;
   description?: string;
   children?: JSX.Element;
@@ -35,7 +34,6 @@ const PromptModal = ({
   size = 'small',
   isOpened,
   onClose,
-  zIndex = 0,
   title = '',
   description = '',
   children,
@@ -68,7 +66,7 @@ const PromptModal = ({
   return (
     <>
       {isOpened && (
-        <ModalDimmedLayer onClick={onClose} zIndex={zIndex}>
+        <ModalDimmedLayer onClick={onClose}>
           <ModalContainer
             size={size}
             modalPosition={modalPosition}

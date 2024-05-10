@@ -9,12 +9,12 @@ import ModalCloseButton from './ModalCloseButton/ModalCloseButton';
 import ModalBody from './ModalBody/ModalBody';
 import ModalDescription from './ModalDescription/ModalDescription';
 import ModalButtonContainer from './ModalButtonContainer/ModalButtonContainer';
+import { createPortal } from 'react-dom';
 
 interface ConfirmModalProps {
   size?: ModalSize;
   isOpened: boolean;
   onClose: () => void;
-  zIndex?: number;
   title?: string;
   description?: string;
   children?: JSX.Element;
@@ -30,7 +30,6 @@ const ConfirmModal = ({
   size = 'small',
   isOpened,
   onClose,
-  zIndex = 0,
   title = '',
   description = '',
   children,
@@ -54,10 +53,10 @@ const ConfirmModal = ({
     }
   };
 
-  return (
+  return createPortal(
     <>
       {isOpened && (
-        <ModalDimmedLayer onClick={onClose} zIndex={zIndex}>
+        <ModalDimmedLayer onClick={onClose}>
           <ModalContainer
             size={size}
             modalPosition={modalPosition}
@@ -92,7 +91,7 @@ const ConfirmModal = ({
           </ModalContainer>
         </ModalDimmedLayer>
       )}
-    </>
+    </>, document.body
   );
 };
 

@@ -79,11 +79,9 @@ const App = () => {
         />
       </div>
 
-
       <Modal
         isOpened={modalOpened}
         onClose={handleModalClose}
-        zIndex={300}
         title="Todal Modal"
         description="This is for woowacourse mission"
         modalPosition="bottom"
@@ -116,7 +114,6 @@ const App = () => {
       <AlertModal
         isOpened={alertModalOpened}
         onClose={handleAlertModalClose}
-        zIndex={300}
         title="Todal Modal"
         description="This is for woowacourse mission"
         showCloseButton={false}
@@ -126,7 +123,6 @@ const App = () => {
         isOpened={confirmModalOpened}
         onClose={handleConfirmModalClose}
         onConfirm={() => alert('confirmed!')}
-        zIndex={300}
         title="Todal Modal"
         description="This is for woowacourse mission"
         showCloseButton={false}
@@ -136,7 +132,6 @@ const App = () => {
         isOpened={promptModalOpened}
         onClose={handlePromptModalClose}
         onConfirm={(value) => alert(`your email is '${value}'`)}
-        zIndex={300}
         title="Email"
         description="write your email"
         showCloseButton={false}

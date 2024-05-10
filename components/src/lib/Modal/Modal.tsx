@@ -9,12 +9,12 @@ import ModalCloseButton from './ModalCloseButton/ModalCloseButton';
 import ModalBody from './ModalBody/ModalBody';
 import ModalDescription from './ModalDescription/ModalDescription';
 import ModalButtonContainer from './ModalButtonContainer/ModalButtonContainer';
+import { createPortal } from 'react-dom';
 
 interface ModalProps {
   size?: ModalSize;
   isOpened: boolean;
   onClose: () => void;
-  zIndex?: number;
   title?: string;
   description?: string;
   children?: JSX.Element;
@@ -30,7 +30,6 @@ const Modal = ({
   size = 'small',
   isOpened,
   onClose,
-  zIndex = 0,
   title = '',
   description = '',
   children,
@@ -55,10 +54,10 @@ const Modal = ({
     }
   };
 
-  return (
+  return createPortal(
     <>
       {isOpened && (
-        <ModalDimmedLayer onClick={onClose} zIndex={zIndex}>
+        <ModalDimmedLayer onClick={onClose}>
           <ModalContainer
             size={size}
             modalPosition={modalPosition}
@@ -101,7 +100,7 @@ const Modal = ({
         </ModalDimmedLayer>
       )}
     </>
-  );
+    , document.body);
 };
 
 export default Modal;
