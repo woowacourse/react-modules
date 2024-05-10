@@ -8,27 +8,27 @@ export const SIZES = ["small", "medium", "large"] as const;
 export type ModalSize = (typeof SIZES)[number];
 
 interface ModalPositionerProps {
-  position: Position;
-  size: ModalSize;
+  position?: Position;
+  size?: ModalSize;
   children: ReactNode;
 }
-const Positioner = ({ position, size, children }: ModalPositionerProps) => {
+const Positioner = ({ position = "center", size = "medium", children }: ModalPositionerProps) => {
   return <div className={css(modalContainerCSS, positionCSS[position], sizeCSS[size])}>{children}</div>;
 };
 
 const Header = ({
   title,
-  closeButton: close,
+  closeButton = false,
   onClose,
 }: {
   title: string;
-  closeButton: boolean;
+  closeButton?: boolean;
   onClose: () => void;
 }) => {
   return (
     <div className={css(headerContainerCSS)}>
       <p className={css(titleCSS)}>{title}</p>
-      {close && (
+      {closeButton && (
         <button className={css(closeButtonCSS)} onClick={onClose}>
           X
         </button>
