@@ -1,0 +1,31 @@
+.darr-button {
+  font-size: 15px;
+  font-weight: 700;
+  height: 36px;
+  border: none;
+  outline: none;
+  border-radius: 5px;
+}
+
+.darr-button.small {
+  width: 80px;
+}
+
+.darr-button.medium {
+  width: 40%;
+}
+
+.darr-button.large {
+  width: 100%;
+}
+
+.darr-button.primary {
+  background: #333333;
+  color: white;
+}
+
+.darr-button.white {
+  background-color: white;
+  color: #333333bf;
+  border: 1px solid #33333340;
+}
