@@ -10,17 +10,17 @@ interface AlertModalProps {
 }
 
 const AlertModal: React.FC<
-  AlertModalProps & Omit<ModalImplementationProps, 'cancelButtonText' | 'onConfirm'> & ModalProps
-> = ({ title, contentLabel, confirmButtonText = '확인', ...rest }) => {
+  AlertModalProps & Pick<ModalImplementationProps, 'onConfirm' | 'title' | 'confirmButtonText'> & ModalProps
+> = ({ confirmButtonText = '확인', title, contentLabel, onToggle, ...rest }) => {
   return (
-    <Modal {...rest}>
+    <Modal onToggle={onToggle} {...rest}>
       <Modal.ModalHeader title={title} />
       <Modal.ModalContent style={{ ...MODAL_CUSTOM_STYLES.modalContent }}>
         <Modal.ModalLabel>{contentLabel}</Modal.ModalLabel>
       </Modal.ModalContent>
       <Modal.ModalFooter>
         <ModalFooterContainer>
-          <Modal.ModalButton onClick={rest.onToggle} color="primary" style={{ ...MODAL_CUSTOM_STYLES.confirmButton }}>
+          <Modal.ModalButton onClick={onToggle} color="primary" style={{ ...MODAL_CUSTOM_STYLES.confirmButton }}>
             {confirmButtonText}
           </Modal.ModalButton>
         </ModalFooterContainer>
