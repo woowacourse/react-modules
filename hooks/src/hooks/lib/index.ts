@@ -1,5 +1,5 @@
-export { default as useCardNumbersValidation } from "./useCardNumbersValidation";
-export { default as useCardHolderValidation } from "./useCardHolderValidation";
-export { default as usePasswordValidation } from "./usePasswordValidation";
-export { default as useCVCValidation } from "./useCVCValidation";
-export { default as useExpiryDateValidation } from "./useExpiryDateValidation";
+export { default as useCardNumbersInput } from "./useCardNumbersInput/useCardNumbersInput";
+export { default as useCardHolderInput } from "./useCardHolderInput/useCardHolderInput";
+export { default as usePasswordInput } from "./usePasswordInput/usePasswordInput";
+export { default as useCVCInput } from "./useCVCInput/useCVCInput";
+export { default as useExpiryDateInput } from "./useExpiryDateInput/useExpiryDateInput";

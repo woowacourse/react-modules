@@ -1,105 +1,64 @@
 import React from "react";
 import "./App.css";
-import { useState } from "react";
-import { useCardNumbersValidation, useExpiryDateValidation, useCardHolderValidation, useCVCValidation, usePasswordValidation } from "chlwlstlf-card-validation-hooks";
+import { useCardNumbersInput, useExpiryDateInput, useCardHolderInput, useCVCInput, usePasswordInput } from "./hooks/lib";
+import CARD_BRAND from "./hooks/lib/constants/cardBrand";
 
 function App() {
-  const [cardNumbers, setCardNumbers] = useState(["", "", "", ""]);
-  const { validationResult: cardNumbersValidationResult } = useCardNumbersValidation({ cardNumbers: cardNumbers });
-  const [expiryDate, setExpiryDate] = useState({ month: "", year: "" });
-  const { validationResult: expiryDateValidationResult } = useExpiryDateValidation({ month: expiryDate.month, year: expiryDate.year });
-  const [cardHolder, setCardHolder] = useState("");
-  const { validationResult: cardHolderValidationResult } = useCardHolderValidation({ cardHolder: cardHolder });
-  const [cvc, setCVC] = useState("");
-  const { validationResult: cvcValidationResult } = useCVCValidation({ cvc: cvc });
-  const [password, setPassword] = useState("");
-  const { validationResult: passwordValidationResult } = usePasswordValidation({ password: password });
-
-  const handleCardNumbers = (e: React.ChangeEvent<HTMLInputElement>, index: number) => {
-    setCardNumbers(
-      cardNumbers.map((cardNumber, i) => {
-        return i === index ? e.target.value : cardNumber;
-      })
-    );
-  };
-
-  const handleExpiryChange = (e: React.ChangeEvent<HTMLInputElement>, field: "month" | "year") => {
-    setExpiryDate((prevState) => ({
-      ...prevState,
-      [field]: e.target.value,
-    }));
-  };
-
-  const handleCardHolderChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setCardHolder(e.target.value);
-  };
-
-  const handleCVCChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setCVC(e.target.value);
-  };
-
-  const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setPassword(e.target.value);
-  };
+  const { CardNumbersState, handleCardNumbersChange } = useCardNumbersInput();
+  const { ExpiryDateState, handleExpiryDateChange } = useExpiryDateInput();
+  const { CardHolderState, handleCardHolderChange } = useCardHolderInput();
+  const { CVCState, handleCVCChange } = useCVCInput();
+  const { PasswordState, handlePasswordChange } = usePasswordInput();
 
   return (
     <>
       <h1>Hooks Modules</h1>
       <h2>카드 번호</h2>
-      {cardNumbers.map((_, index) => {
-        return (
-          <input
-            key={index}
-            value={cardNumbers[index]}
-            type="text"
-            maxLength={4}
-            onChange={(e) => handleCardNumbers(e, index)}
-          />
-        );
-      })}
-      <div>{cardNumbersValidationResult.errorMessage}</div>
+      <input
+        value={CardNumbersState.value}
+        maxLength={CARD_BRAND[CardNumbersState.cardBrand].maxLength}
+        type="text"
+        onChange={handleCardNumbersChange}
+      />
+      <div>{CardNumbersState.errorMessage}</div>
+      <div>{CardNumbersState.cardBrand}</div>
+      <div>{CardNumbersState.value}</div>
 
       <h2>카드 유효 기간</h2>
       <input
-        value={expiryDate.month}
+        value={ExpiryDateState.value}
         type="text"
-        maxLength={2}
-        onChange={(e) => handleExpiryChange(e, "month")}
+        maxLength={5}
+        onChange={handleExpiryDateChange}
       />
-      <input
-        value={expiryDate.year}
-        type="text"
-        maxLength={2}
-        onChange={(e) => handleExpiryChange(e, "year")}
-      />
-      <div>{expiryDateValidationResult.errorMessage}</div>
+      <div>{ExpiryDateState.errorMessage}</div>
 
       <h2>사용자 이름</h2>
       <input
-        value={cardHolder.toUpperCase()}
+        value={CardHolderState.value}
         type="text"
         maxLength={22}
         onChange={handleCardHolderChange}
       />
-      <div>{cardHolderValidationResult.errorMessage}</div>
+      <div>{CardHolderState.errorMessage}</div>
 
       <h2>CVC</h2>
       <input
-        value={cvc}
+        value={CVCState.value}
         type="text"
         maxLength={3}
         onChange={handleCVCChange}
       />
-      <div>{cvcValidationResult.errorMessage}</div>
+      <div>{CVCState.errorMessage}</div>
 
       <h2>비밀번호</h2>
       <input
-        value={password}
-        type="text"
+        value={PasswordState.value}
+        type="password"
         maxLength={2}
         onChange={handlePasswordChange}
       />
-      <div>{passwordValidationResult.errorMessage}</div>
+      <div>{PasswordState.errorMessage}</div>
     </>
   );
 }
