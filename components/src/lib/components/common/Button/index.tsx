@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import { BUTTON_SIZE } from '../constants/styles';
-import { StyleSize } from '../types';
+import { BUTTON_SIZE } from '../../constants/styles';
+import { StyleSize } from '../../types';
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   onButtonClick: React.MouseEventHandler<HTMLButtonElement>;
