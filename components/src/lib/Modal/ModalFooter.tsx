@@ -1,28 +1,30 @@
 import React from "react";
 import styled from "styled-components";
 
-type ButtonDirectionType = "row" | "column";
+import { FLEX_DIRECTION, JUSTIFY_CONTENT } from "../constants/modal";
 
-export interface ModalFooterProps {
-  direction?: ButtonDirectionType;
-  children: React.ReactNode;
+import { ElementDirection, ElementJustify } from "../types/modal";
+
+export interface ModalFooterProps extends React.PropsWithChildren<React.HTMLAttributes<HTMLDivElement>> {
+  direction?: ElementDirection;
+  justify?: ElementJustify;
 }
 
-const FLEX_DIRECTION = {
-  row: "row",
-  column: "column",
-} as const;
-
-const ModalFooter = ({ direction = "row", children }: ModalFooterProps) => {
-  return <StyledFooter $direction={direction}>{children}</StyledFooter>;
+const ModalFooter = ({ children, direction = "row", justify = "between" }: ModalFooterProps) => {
+  return (
+    <StyledFooter $direction={direction} $justify={justify}>
+      {children}
+    </StyledFooter>
+  );
 };
 
 export default ModalFooter;
 
-const StyledFooter = styled.div<{ $direction: ButtonDirectionType }>`
-  display: flex;
-  flex-direction: ${({ $direction }) => FLEX_DIRECTION[$direction]};
-  gap: 12px;
-
+const StyledFooter = styled.div<{ $direction: ElementDirection; $justify: ElementJustify }>`
   width: 100%;
+
+  display: flex;
+  gap: 12px;
+  flex-direction: ${({ $direction }) => FLEX_DIRECTION[$direction]};
+  justify-content: ${({ $justify }) => JUSTIFY_CONTENT[$justify]};
 `;
