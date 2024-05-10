@@ -25,9 +25,9 @@ const cardBrands = ['신한카드', '현대카드', '카카오뱅크'];
 function App() {
   const {
     cardNumber,
-    // formattedCardNumber,
-    cardNumberFormat,
     cardGlobalBrand,
+    cardNumberFormat,
+    cardNumberFormatted,
     validationResult: cardNumberValidationResult,
     handleUpdateCardNumber,
   } = useCardNumber();
@@ -62,7 +62,7 @@ function App() {
         <div className="input-container">
           <input
             type="text"
-            value={cardNumber}
+            value={cardNumberFormatted}
             onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
               handleUpdateCardNumber(event.target.value, event)
             }

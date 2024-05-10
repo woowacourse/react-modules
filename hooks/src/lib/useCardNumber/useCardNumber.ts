@@ -6,10 +6,11 @@ import ErrorMessages from '../types/ErrorMessages';
 
 interface CardNumberValidationResult {
   cardNumber: string;
-  cardNumberFormat: number[];
   cardGlobalBrand: string;
+  cardNumberFormat: number[];
+  cardNumberFormatted: string;
   validationResult: ValidationResult;
-  handleUpdateCardNumber: (inputValue: string) => void;
+  handleUpdateCardNumber: (inputValue: string, event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 interface CardNumberErrorMessages extends ErrorMessages {
@@ -52,9 +53,41 @@ export default function useCardNumber(
     getValidationResult(initialValue, GLOBAL_BRANDS_FORMAT.Default.allowedLength, errorMessages),
   );
 
-  const handleUpdateCardNumber = (cardNumber: string) => {
+  const handleUpdateCardNumber = (
+    inputValue: string,
+    event: React.ChangeEvent<HTMLInputElement>,
+  ) => {
+    const cardNumber = inputValue.replace(/[^\d]/g, '');
     const cardGlobalBrand = getCardGlobalBrand(cardNumber);
-    const { allowedLength } = GLOBAL_BRANDS_FORMAT[cardGlobalBrand];
+
+    const { allowedLength, format } = GLOBAL_BRANDS_FORMAT[cardGlobalBrand];
+
+    if (cardNumber.length > allowedLength) return;
+
+    const cardNumberFormatted = formatCardNumber(cardNumber, format);
+
+    // 포맷에 따른 공백 추가/제거 상황을 고려하여 커서 위치를 자동으로 조정한다.
+    let cursorPosition = event.target.selectionStart ?? 0;
+    const inputEvent = event.nativeEvent;
+
+    // 커서를 기준으로 backspace를 눌렀을 때 커서 앞쪽의 문자가 공백이라면 커서를 왼쪽으로 1 옮긴다.
+    if (inputEvent instanceof InputEvent && inputEvent.inputType === 'deleteContentBackward') {
+      if (cardNumberFormatted[cursorPosition - 1] === ' ') {
+        cursorPosition -= 1;
+      }
+    }
+
+    // 커서를 기준으로 값을 입력했을 떄 커서 앞쪽의 문자가 공백이라면 커서를 오른쪽으로 1 옮긴다.
+    if (inputEvent instanceof InputEvent && inputEvent.inputType === 'insertText') {
+      if (cardNumberFormatted[cursorPosition - 1] === ' ') {
+        cursorPosition += 1;
+      }
+    }
+
+    // 새 상태값이 input으로 전송될 때 커서 위치가 초기화되는 것을 막는다.
+    window.requestAnimationFrame(() => {
+      event.target.setSelectionRange(cursorPosition, cursorPosition);
+    });
 
     setCardNumber(cardNumber);
     setCardGlobalBrand(cardGlobalBrand);
@@ -65,6 +98,7 @@ export default function useCardNumber(
     cardNumber,
     cardGlobalBrand,
     cardNumberFormat: GLOBAL_BRANDS_FORMAT[cardGlobalBrand].format,
+    cardNumberFormatted: formatCardNumber(cardNumber, GLOBAL_BRANDS_FORMAT[cardGlobalBrand].format),
     validationResult,
     handleUpdateCardNumber,
   };
