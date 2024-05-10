@@ -1,8 +1,9 @@
 import { CustomValidator } from './types';
 import useInputs from './useInputs';
 import { useEffect } from 'react';
+import { CardNumbersReturn } from './index';
 
-type CardBrand = 'Diners' | 'AMEX' | 'UnionPay' | 'VISA' | 'MasterCard';
+export type CardBrand = 'Diners' | 'AMEX' | 'UnionPay' | 'VISA' | 'MasterCard';
 
 const validateInputType = (value: string) => {
   const isNumber = !Number.isNaN(Number(value));
@@ -28,7 +29,10 @@ export interface CardNumbersOptions extends CustomValidator {
   isAutoFocus?: boolean;
 }
 
-const useCardNumbers = (initialValue: Record<string, string>, options?: CardNumbersOptions) => {
+const useCardNumbers = (
+  initialValue: Record<string, string>,
+  options?: CardNumbersOptions,
+): CardNumbersReturn => {
   const { isAutoFocus, customValidateInputType, customValidateFieldRules } = options ?? {};
 
   const {

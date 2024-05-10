@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import useInput from './useInput';
 import { CustomValidator } from './types';
+import { CVCReturn } from './index';
 
 const validateInputType = (value: string) => {
   const isNumber = !Number.isNaN(Number(value));
@@ -22,7 +23,7 @@ const validateFieldRules = (value: string) => {
   return { isValid: true, errorMessage: '' };
 };
 
-const useCVC = (initialValue: string, options?: CustomValidator) => {
+const useCVC = (initialValue: string, options?: CustomValidator): CVCReturn => {
   const { customValidateInputType, customValidateFieldRules } = options ?? {};
   const { value, handleChange, handleBlur, validationResult, clearInvalidInitialValue } = useInput(
     initialValue,

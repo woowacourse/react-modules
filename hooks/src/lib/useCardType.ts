@@ -1,6 +1,7 @@
 import { CustomSelectValidator } from './types';
 import useSelect from './useSelect';
 import { useEffect } from 'react';
+import { CardTypeReturn } from './index';
 
 const validateInputType = (value: string) => {
   if (typeof value === 'undefined') {
@@ -30,7 +31,7 @@ const useCardType = ({
   options,
   placeholder,
   customValidateOptions,
-}: UseCardTypeProps) => {
+}: UseCardTypeProps): CardTypeReturn => {
   const { customValidateInputType, customValidateFieldRules } = customValidateOptions ?? {};
   const { value, handleChange, validationResult, clearInvalidInitialValue } = useSelect(
     initialValue,

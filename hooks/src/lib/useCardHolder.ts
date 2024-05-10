@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import useInput from './useInput';
 import { CustomValidator } from './types';
+import { CardHolderReturn } from './index';
 
 const validateInputType = (value: string) => {
   const isEnglish = /^$|^[a-zA-Z ]+$/.test(value);
@@ -26,7 +27,7 @@ const validateFieldRules = (value: string) => {
   return { isValid: true, errorMessage: '' };
 };
 
-const useCardHolder = (initialValue: string, options?: CustomValidator) => {
+const useCardHolder = (initialValue: string, options?: CustomValidator): CardHolderReturn => {
   const { customValidateInputType, customValidateFieldRules } = options ?? {};
   const { value, setValue, handleBlur, isValidValue, validationResult, clearInvalidInitialValue } =
     useInput(initialValue.toUpperCase(), {
