@@ -26,6 +26,7 @@ const meta = {
   argTypes: {
     title: { name: "모달의 제목" },
     width: { name: "모달의 너비" },
+    theme: { name: "색상 테마" },
     onSubmit: { name: "확인 버튼을 눌렀을 때 실행되는 함수" },
   },
   decorators: [
@@ -46,6 +47,18 @@ export const Default: Story = {
   args: {
     title: "입력해주세요.",
     width: 300,
+    onSubmit: (value?: string) => {
+      console.log(value);
+    },
+  },
+};
+
+export const ReverseTheme: Story = {
+  name: "반대 되는 테마 속성",
+  args: {
+    title: "입력해주세요.",
+    width: 300,
+    theme: window.matchMedia("(prefers-color-scheme: light)").matches ? "dark" : "light",
     onSubmit: (value?: string) => {
       console.log(value);
     },
