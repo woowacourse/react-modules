@@ -6,8 +6,10 @@ import useModalControl from './hooks/useModalControl';
 import { convertPascalCase } from '../../utils/string';
 import closeButtonImg from '../../asset/CloseButton.png';
 import styles from './Modal.module.css';
+import { forwardRef } from 'react';
 
-interface ModalProps {
+export interface ModalProps {
+  className?: string;
   isOpen: boolean;
   onToggle: () => void;
   position: ModalPosition;
@@ -23,11 +25,17 @@ interface ModalCloseButtonProps {
   onClick: () => void;
 }
 
+interface ModalInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
+  className: string;
+}
+
 type ModalHeaderType = React.FC<React.PropsWithChildren<React.HTMLAttributes<HTMLElement> & { title: string }>>;
 type ModalContentType = React.FC<React.PropsWithChildren<React.HTMLAttributes<HTMLElement>>>;
 type ModalFooterType = React.FC<React.PropsWithChildren<React.HTMLAttributes<HTMLElement>>>;
 type ModalButtonType = React.FC<React.PropsWithChildren<ModalButtonProps>>;
 type ModalCloseButtonType = React.FC<React.PropsWithChildren<ModalCloseButtonProps>>;
+type ModalCaptionType = React.FC<React.PropsWithChildren<React.HTMLAttributes<HTMLElement> & { caption: string }>>;
+type ModalInputType = React.FC<React.PropsWithChildren<ModalInputProps>>;
 
 const Modal: React.FC<React.PropsWithChildren<ModalProps>> & {
   ModalHeader: ModalHeaderType;
@@ -35,7 +43,9 @@ const Modal: React.FC<React.PropsWithChildren<ModalProps>> & {
   ModalFooter: ModalFooterType;
   ModalButton: ModalButtonType;
   ModalCloseButton: ModalCloseButtonType;
-} = ({ children, isOpen, onToggle, position = 'center', size = 'large' }) => {
+  ModalInput: ModalInputType;
+  ModalCaption: ModalCaptionType;
+} = ({ children, className, isOpen, onToggle, position = 'center', size = 'large' }) => {
   const modalContainerStyle = position === 'bottom' ? `modalContainer${convertPascalCase(position)}` : '';
 
   useModalControl(isOpen, onToggle);
@@ -44,7 +54,9 @@ const Modal: React.FC<React.PropsWithChildren<ModalProps>> & {
     isOpen && (
       <div className={`${styles.modal} ${styles[MODAL_POSITION_MAP[position]]} `}>
         <div className={styles.dimmed} onClick={onToggle} />
-        <div className={`${styles.modalContainer} ${styles[modalContainerStyle]} ${styles[MODAL_SIZE_MAP[size]]}`}>
+        <div
+          className={`${styles.modalContainer} ${styles[modalContainerStyle]} ${styles[MODAL_SIZE_MAP[size]]} ${className}`}
+        >
           {children}
         </div>
       </div>
@@ -93,6 +105,15 @@ const ModalCloseButton: ModalCloseButtonType = ({ onClick, ...rest }) => {
   );
 };
 
+const ModalCaption: ModalCaptionType = ({ caption, ...rest }) => {
+  return <div {...rest}>{caption}</div>;
+};
+
+const ModalInput = forwardRef<HTMLInputElement, ModalInputProps>(({ className, value, onChange, ...rest }, ref) => {
+  return (
+    <input ref={ref} className={`${styles.modalInput} ${className}`} value={value} onChange={onChange} {...rest} />
+  );
+});
 export default Modal;
 
 Modal.ModalHeader = ModalHeader;
@@ -100,3 +121,5 @@ Modal.ModalContent = ModalContent;
 Modal.ModalFooter = ModalFooter;
 Modal.ModalButton = ModalButton;
 Modal.ModalCloseButton = ModalCloseButton;
+Modal.ModalInput = ModalInput;
+Modal.ModalCaption = ModalCaption;

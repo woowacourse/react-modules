@@ -34,6 +34,15 @@
   overflow-y: auto;
 }
 
+.modalContainerBottom {
+  width: 100%;
+  border-radius: 8px 8px 0px 0px;
+}
+
+.modalContent {
+  min-height: 20px;
+}
+
 .large {
   width: 536px;
   height: 152px;
@@ -53,15 +62,15 @@
   align-items: flex-end;
 }
 
-.modalContainerBottom {
-  width: 100%;
-  border-radius: 8px 8px 0px 0px;
-}
-
 .modalHeader {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  font-family: Noto Sans KR;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 26.06px;
+  text-align: left;
 }
 
 .modalTitle {
@@ -101,11 +110,22 @@
 .primary {
   background-color: rgba(51, 51, 51, 1);
   color: rgba(255, 255, 255, 1);
+  font-family: Noto Sans KR;
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 21.72px;
+  text-align: center;
 }
 
 .secondary {
-  background-color: rgba(51, 51, 51, 0.25);
+  background-color: rgba(255, 255, 255, 1);
   color: rgba(51, 51, 51, 0.75);
+  border: 1px solid rgba(51, 51, 51, 0.25);
+  font-family: Noto Sans KR;
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 21.72px;
+  text-align: center;
 }
 
 .modalCloseButton {
@@ -116,4 +136,10 @@
   padding: 0;
   overflow: visible;
   cursor: pointer;
+}
+
+/* ModalInput */
+.modalInput {
+  height: 16px;
+  padding: 8px;
 }
