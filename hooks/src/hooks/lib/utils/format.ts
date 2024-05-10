@@ -1,5 +1,5 @@
 export const cardNumberFormatter = (value: string, format: number[]): string => {
-  const cleaned = value.replace(/\s+/g, "").replace(/[^0-9]/gi, "");
+  const cleaned = value.replace(/\s+/g, "");
   const parts = [];
   let index = 0;
 
@@ -11,6 +11,18 @@ export const cardNumberFormatter = (value: string, format: number[]): string => 
   }
 
   return parts.join(" ");
+};
+
+export const expiryDateFormatter = (value: string): string => {
+  const cleaned = value.replace(/\//g, "");
+
+  if (cleaned.length <= 2) {
+    return cleaned;
+  } else {
+    const month = cleaned.slice(0, 2);
+    const year = cleaned.slice(2);
+    return `${month}/${year}`;
+  }
 };
 
 export const cardHolderFormatter = (value: string) => {
