@@ -1,77 +1,45 @@
 import { ChangeEvent, FocusEvent, useState } from 'react';
 
 import { useCardNumbers } from '../lib';
-import {
-  CardNumbersType,
-  UseCardNumbersErrorMessage,
-  UseCardNumbersProps,
-} from '../lib/hooks/cardNumbers/useCardNumbers';
-
-const errorMessages: UseCardNumbersErrorMessage = {
-  empty: '카드 번호를 입력해주세요.',
-  number: '숫자만 사용 가능해요.',
-  length: '4개 숫자를 입력해주세요.',
-};
+import { UseCardNumbersErrorMessage, UseCardNumbersProps } from '../lib/hooks/useCardNumbers';
 
 export default function CardNumbers() {
-  const [cardNumbers, setCardNumbers] = useState<CardNumbersType>(Array.from({ length: 4 }, () => undefined));
-  const [targetInputIndex, setTargetInputIndex] = useState(0);
+  const [numbers, setNumbers] = useState('');
+
   const [showErrorMessage, setShowErrorMessage] = useState(false);
 
+  const errorMessages: UseCardNumbersErrorMessage = {
+    empty: '카드 번호를 입력해주세요.',
+    number: '숫자만 사용 가능해요.',
+    length: '최소 14개 숫자를 입력해주세요.',
+    brand: '카드 브랜드를 찾을 수 없어요.',
+  };
+
   const useCardNumbersProps: UseCardNumbersProps = {
-    fieldCount: 4,
-    cardNumberCounts: [4, 4, 4, 4],
-    cardNumbers,
+    numbers,
     errorMessages,
     isNeedValidValue: true,
   };
 
-  const { validationErrorMessage, validationResult, formattedValue } = useCardNumbers(useCardNumbersProps);
+  const { validationErrorMessage, validationResult, formattedValue, brand } = useCardNumbers(useCardNumbersProps);
 
-  const handleChange = (e: ChangeEvent<HTMLInputElement>, index: number) => {
-    setTargetInputIndex(index);
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setShowErrorMessage(true);
-    setCardNumbers((prev) => {
-      const newPrev = [...prev];
-      newPrev[index] = e.target.value;
-
-      return newPrev;
-    });
+    setNumbers(e.target.value);
   };
-  const handleBlur = (e: FocusEvent<HTMLInputElement>, index: number) => {
-    setTargetInputIndex(index);
+  const handleBlur = (e: FocusEvent<HTMLInputElement>) => {
     setShowErrorMessage(true);
-    setCardNumbers((prev) => {
-      const newPrev = [...prev];
-      newPrev[index] = e.target.value;
-
-      return newPrev;
-    });
+    setNumbers(e.target.value);
   };
-
-  /**
-   * 현재 입력이 이루어지거나, blur의 타겟인 input 필드에 대한 오류 여부를 표시하기 위한 클래스 네임을 반환하는 함수
-   * @param index input 의 index
-   */
-  const getClassName = (index: number) =>
-    !validationResult[index].isValid && showErrorMessage && index === targetInputIndex ? 'error' : '';
 
   return (
     <div>
-      {Array.from({ length: 4 }, (_, index) => (index === 1 ? 3 : 4)).map((value, index) => (
-        <input
-          key={`card-number_${index}`}
-          maxLength={value}
-          value={formattedValue?.[index]}
-          type="text"
-          className={getClassName(index)}
-          data-testid={`card-number-input-${index}`}
-          onChange={(e) => handleChange(e, index)}
-          onBlur={(e) => handleBlur(e, index)}
-        />
-      ))}
-
-      <div data-testid="card-numbers-error">{showErrorMessage && validationErrorMessage[targetInputIndex]}</div>
+      <h4>Card Numbers</h4>
+      <input type="text" maxLength={16} data-testid={`card-number-input`} onChange={handleChange} onBlur={handleBlur} />
+      <div>numbers: {formattedValue?.join('-')}</div>
+      <div data-testid="card-numbers-error">{validationResult.error}</div>
+      <div data-testid="card-numbers-error-message">{showErrorMessage && validationErrorMessage}</div>
+      <div data-testid="card-brand">{brand || 'etc'}</div>
     </div>
   );
 }

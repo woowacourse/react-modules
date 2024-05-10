@@ -1,10 +1,6 @@
 import { Brand, BrandInfo } from '../types/card';
 import createNumbers from '../utils/numberArrayUtils';
 
-export const CARD_NUMBERS_PART_LENGTH = 4;
-
-export const CARD_NUMBERS_GROUP_LENGTH = 4;
-
 export const MONTH = {
   startNumber: 1,
   endNumber: 12,
@@ -59,6 +55,7 @@ export const UNION_NUMBERS = {
 };
 
 export const MIN_CARD_NUMBERS_LENGTH = 14;
+export const MAX_CARD_NUMBERS_LENGTH = 16;
 
 export const UNION: BrandInfo<{ sixNumbers: number[]; fourNumbers: number[]; threeNumbers: number[] }> = {
   name: 'union',

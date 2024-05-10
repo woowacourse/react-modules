@@ -1,18 +1,10 @@
 import { useEffect, useState } from 'react';
 
-import { AMEX, DINERS, MASTER, MIN_CARD_NUMBERS_LENGTH, UNION, VISA } from '../constants';
+import { AMEX, DINERS, MASTER, UNION, VISA } from '../constants';
 import { Brand, BrandInfo } from '../types/card';
-import { validateNumber } from '../utils';
 
 export default function useCardBrand({ cardNumbers }: { cardNumbers: string }) {
   const [brand, setBrand] = useState<Brand>(null);
-  // 숫자로 이루어 졌는지
-
-  // 카드 번호 최소 자리 수
-  const validateMinLength = () => {
-    return cardNumbers.length >= MIN_CARD_NUMBERS_LENGTH;
-  };
-
   /**
    * 카드 번호에 카드 브랜드에 적합한 번호가 존재하는 지 여부를 판단하는 함수
    * @param brandNumbers : 카드 브랜드에 속하는 번호들
@@ -58,8 +50,6 @@ export default function useCardBrand({ cardNumbers }: { cardNumbers: string }) {
   const detectCardBrand = () => Array.from(brandDetecterMap.entries()).find(([_, value]) => !!value())?.[0];
 
   const validateCardBrand = () => {
-    if (!validateNumber(cardNumbers)) return setBrand(null);
-    if (!validateMinLength()) return setBrand(null);
     // 카드 번호에 맞는 카드 번호 판단
     const cardBrand = detectCardBrand();
     setBrand(cardBrand || null);
