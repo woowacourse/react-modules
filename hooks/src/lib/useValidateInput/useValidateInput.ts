@@ -4,6 +4,7 @@ export interface UseCardValidateProps {
   initValue: string;
   validateOnChange: (value: string) => ValidateResult;
   validateOnBlur: () => ValidateResult;
+  decorator?: (value: string) => string;
 }
 
 export interface ValidateResult {
@@ -15,6 +16,7 @@ const useValidateInput = ({
   initValue,
   validateOnChange,
   validateOnBlur,
+  decorator = (value: string) => value,
 }: UseCardValidateProps) => {
   const [value, setValue] = useState(initValue);
   const [isCompleted, setIsCompleted] = useState(false);
@@ -32,7 +34,7 @@ const useValidateInput = ({
       return;
     }
     setErrorMessage('');
-    setValue(newValue);
+    setValue(decorator(newValue));
   };
 
   const onFocusHandler = () => {

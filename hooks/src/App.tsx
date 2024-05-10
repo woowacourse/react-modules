@@ -4,6 +4,7 @@ import CardCVC from './components/CardCVC';
 import CardCompany from './components/CardCompany';
 import CardExpirationDate from './components/CardExpirationDate';
 import CardHolderName from './components/CardHolderName';
+import CardNumber from './components/CardNumber';
 import CardNumbers from './components/CardNumbers';
 import CardPassword from './components/CardPassword';
 import React from 'react';
@@ -11,6 +12,8 @@ import React from 'react';
 function App() {
   return (
     <div>
+      <h2>CardNumber</h2>
+      <CardNumber />
       <h2>CardNumbers</h2>
       <CardNumbers />
       <h2>CardCompany</h2>
