@@ -9,7 +9,7 @@
   justify-content: flex-end;
   gap: 12px;
 }
-/* .modalInputLarge {
+.modalInputLarge {
   width: 96%;
 }
 
@@ -19,4 +19,4 @@
 
 .modalInputSmall {
   width: 92%;
-} */
+}
