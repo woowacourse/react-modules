@@ -100,21 +100,27 @@ describe("VISA 유효성 검증", () => {
 });
 
 describe("MASTER 유효성 검증", () => {
-  it("51 ~ 55로 시작하는 카드 번호는 MASTER이다.", () => {
-    const masterCardNumber = "5523123412341234";
-    const { result } = renderHook(() => useCardNumbers());
+  describe("MASTER 판정", () => {
+    test.each([
+      ["51 23123412341234"],
+      ["52 23123412341234"],
+      ["54 23123412341234"],
+      ["55 23123412341234"],
+    ])("51 ~ 55로 시작하는 카드 번호는 MASTER이다.", (cardNumber) => {
+      const { result } = renderHook(() => useCardNumbers());
 
-    const validEvent = {
-      target: { value: masterCardNumber.replace(/\s+/g, "") },
-    } as ChangeEvent<HTMLInputElement>;
+      const validEvent = {
+        target: { value: cardNumber.replace(/\s+/g, "") },
+      } as ChangeEvent<HTMLInputElement>;
 
-    act(() => {
-      result.current.onChangeCardNumbers(validEvent);
+      act(() => {
+        result.current.onChangeCardNumbers(validEvent);
+      });
+
+      expect(result.current.cardNumberInfo.paymentCompany).toBe(
+        PAYMENT_COMPANY.MASTER.name
+      );
     });
-
-    expect(result.current.cardNumberInfo.paymentCompany).toBe(
-      PAYMENT_COMPANY.MASTER.name
-    );
   });
 
   it("포매팅이 [4, 4, 4, 4]형식으로 이루어진다.", () => {
@@ -157,7 +163,7 @@ describe("MASTER 유효성 검증", () => {
 
 describe("DINERS 유효성 검증", () => {
   it("36으로 시작하는 카드 번호는 DINERS이다.", () => {
-    const dinersCardNumber = "3612 345678 9012";
+    const dinersCardNumber = "36 123456789012";
     const { result } = renderHook(() => useCardNumbers());
 
     const validEvent = {
@@ -212,20 +218,24 @@ describe("DINERS 유효성 검증", () => {
 });
 
 describe("AMEX 유효성 검증", () => {
-  it("34 혹은 37로 시작하는 카드 번호는 AMEX이다.", () => {
-    const amexCardNumber = "3412 345678 90123";
-    const { result } = renderHook(() => useCardNumbers());
+  describe("AMEX 판정", () => {
+    test.each([["34 1234567890123"], ["37 1234567890123"]])(
+      "34 혹은 37로 시작하는 카드 번호는 AMEX이다.",
+      (cardNumber) => {
+        const { result } = renderHook(() => useCardNumbers());
 
-    const validEvent = {
-      target: { value: amexCardNumber.replace(/\s+/g, "") },
-    } as ChangeEvent<HTMLInputElement>;
+        const validEvent = {
+          target: { value: cardNumber.replace(/\s+/g, "") },
+        } as ChangeEvent<HTMLInputElement>;
 
-    act(() => {
-      result.current.onChangeCardNumbers(validEvent);
-    });
+        act(() => {
+          result.current.onChangeCardNumbers(validEvent);
+        });
 
-    expect(result.current.cardNumberInfo.paymentCompany).toBe(
-      PAYMENT_COMPANY.AMEX.name
+        expect(result.current.cardNumberInfo.paymentCompany).toBe(
+          PAYMENT_COMPANY.AMEX.name
+        );
+      }
     );
   });
 
@@ -268,38 +278,70 @@ describe("AMEX 유효성 검증", () => {
 });
 
 describe("UNION 유효성 검증", () => {
-  it("622126 ~ 622925로 시작하는 카드 번호는 UNION이다.", () => {
-    const unionCardNumber = "6221 2612 3456 7890";
-    const { result } = renderHook(() => useCardNumbers());
+  describe("UNION 판정", () => {
+    test.each([
+      ["622126 1234567890"],
+      ["622127 1234567890"],
+      ["622190 1234567890"],
+      ["622245 1234567890"],
+      ["622324 1234567890"],
+      ["622890 1234567890"],
+      ["622925 1234567890"],
+    ])("622126 ~ 622925로 시작하는 카드 번호는 UNION이다.", (cardNumber) => {
+      const { result } = renderHook(() => useCardNumbers());
 
-    const validEvent = {
-      target: { value: unionCardNumber.replace(/\s+/g, "") },
-    } as ChangeEvent<HTMLInputElement>;
+      const validEvent = {
+        target: { value: cardNumber.replace(/\s+/g, "") },
+      } as ChangeEvent<HTMLInputElement>;
 
-    act(() => {
-      result.current.onChangeCardNumbers(validEvent);
+      act(() => {
+        result.current.onChangeCardNumbers(validEvent);
+      });
+
+      expect(result.current.cardNumberInfo.paymentCompany).toBe(
+        PAYMENT_COMPANY.UNION.name
+      );
     });
 
-    expect(result.current.cardNumberInfo.paymentCompany).toBe(
-      PAYMENT_COMPANY.UNION.name
-    );
-  });
+    test.each([
+      ["624 1261234567890"],
+      ["625 1271234567890"],
+      ["626 1901234567890"],
+    ])("624 ~ 626으로 시작하는 카드 번호는 UNION이다.", (cardNumber) => {
+      const { result } = renderHook(() => useCardNumbers());
 
-  it("624 ~ 626으로 시작하는 카드 번호는 UNION이다.", () => {
-    const unionCardNumber = "6240 1234 5678 9012";
-    const { result } = renderHook(() => useCardNumbers());
+      const validEvent = {
+        target: { value: cardNumber.replace(/\s+/g, "") },
+      } as ChangeEvent<HTMLInputElement>;
 
-    const validEvent = {
-      target: { value: unionCardNumber.replace(/\s+/g, "") },
-    } as ChangeEvent<HTMLInputElement>;
+      act(() => {
+        result.current.onChangeCardNumbers(validEvent);
+      });
 
-    act(() => {
-      result.current.onChangeCardNumbers(validEvent);
+      expect(result.current.cardNumberInfo.paymentCompany).toBe(
+        PAYMENT_COMPANY.UNION.name
+      );
     });
 
-    expect(result.current.cardNumberInfo.paymentCompany).toBe(
-      PAYMENT_COMPANY.UNION.name
-    );
+    test.each([
+      ["6282 261234567890"],
+      ["6283 271234567890"],
+      ["6288 901234567890"],
+    ])("6282 ~ 6288로 시작하는 카드 번호는 UNION이다.", (cardNumber) => {
+      const { result } = renderHook(() => useCardNumbers());
+
+      const validEvent = {
+        target: { value: cardNumber.replace(/\s+/g, "") },
+      } as ChangeEvent<HTMLInputElement>;
+
+      act(() => {
+        result.current.onChangeCardNumbers(validEvent);
+      });
+
+      expect(result.current.cardNumberInfo.paymentCompany).toBe(
+        PAYMENT_COMPANY.UNION.name
+      );
+    });
   });
 
   it("6282 ~ 6288로 시작하는 카드 번호는 UNION이다.", () => {
