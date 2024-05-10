@@ -1,7 +1,7 @@
 import React from "react";
 import AlertModal from "./AlertModal";
 import type { Meta, StoryObj } from "@storybook/react";
-import useModalState from "./lib/useModalState";
+import useModalState from "./common/useModalState";
 
 const AlertModalWrapper = () => {
   const { isOpen, closeModal } = useModalState(true, {});

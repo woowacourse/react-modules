@@ -1,8 +1,8 @@
 import React from "react";
-import "./App.css";
-import { Modal } from "./lib";
+// import "./App.css";
+import { Modal } from ".";
 import { css } from "@emotion/css";
-import { ModalSize } from "./lib/Modal";
+import { ModalSize } from "./common/Modal";
 
 interface AlertModalProps {
   isOpen: boolean;
@@ -21,7 +21,7 @@ function AlertModal({ isOpen, closeModal, title, description, confirmLabel, size
         <Modal.Content description={description} />
         <Modal.Footer
           confirmLabel={confirmLabel}
-          onClose={closeModal}
+          onConfirm={closeModal}
           className={css`
             display: flex;
             flex-direction: row-reverse;

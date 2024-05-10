@@ -1,11 +1,11 @@
 import React from "react";
 import "./App.css";
-import useModalState from "./lib/useModalState";
+import useModalState from "./lib/common/useModalState";
 
-import AlertModal from "./AlertModal";
+import AlertModal from "./lib/AlertModal";
 
 function App() {
-  const { isOpen, openModal, closeModal, confirmModal } = useModalState(false, {});
+  const { isOpen, openModal, closeModal } = useModalState(false, {});
 
   return (
     <>
@@ -17,7 +17,6 @@ function App() {
       <AlertModal
         isOpen={isOpen}
         closeModal={closeModal}
-        confirmModal={confirmModal}
         title="아이디를 입력해 주세요."
         description="아이디는 필수로 입력해야 합니다."
         confirmLabel="확인"

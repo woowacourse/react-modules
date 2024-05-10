@@ -1,5 +1,6 @@
 import { ReactNode } from "react";
 import { css } from "@emotion/css";
+import "../../reset.css";
 
 export const POSITIONS = ["top", "bottom", "center"] as const;
 export type Position = (typeof POSITIONS)[number];
