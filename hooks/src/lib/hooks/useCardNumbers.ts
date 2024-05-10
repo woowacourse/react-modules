@@ -2,7 +2,9 @@ import { useState, ChangeEvent, useEffect } from "react";
 import { CardBrands } from "../types/card";
 
 const isNumberString = (numberString: string) => {
-  return numberString.split("").every((char) => Number.isInteger(Number(char)));
+  return numberString
+    .split("")
+    .every((char) => Number.isInteger(Number(char)) && char !== " ");
 };
 
 const isDiners = (numberString: string) => {
@@ -43,7 +45,7 @@ const createFormattingCardNumbers = (
   cardNumbers: string,
   cardBrand: CardBrands | null
 ) => {
-  if (cardBrand === "Diners" || cardBrand === "UnionPay") {
+  if (cardBrand === "Diners" || cardBrand === "AMEX") {
     let answer = cardNumbers.substring(0, 4);
     if (cardNumbers.substring(4, 10))
       answer += "-" + cardNumbers.substring(4, 10);
@@ -84,7 +86,7 @@ const useCardNumbers = () => {
   }, [cardNumbers]);
 
   const handleCardNumbers = (event: ChangeEvent<HTMLInputElement>) => {
-    const value = event.target.value.replace("-", "");
+    const value = event.target.value.replaceAll("-", "");
 
     if (!isNumberString(value)) {
       setIsError(true);
