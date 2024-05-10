@@ -26,7 +26,7 @@ export const isCardNumberOverLength = (cardNumber: string, cardBrand: CardBrand)
   }
 };
 
-export const formatCardNumber = (cardNumber: string, cardBrand: string) => {
+export const formatCardNumber = (cardNumber: string, cardBrand: CardBrand) => {
   const formattedParts = [];
 
   switch (cardBrand) {
