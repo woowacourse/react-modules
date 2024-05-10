@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import usePressESC from '../../../../hooks/usePressESC';
+import usePressESC from '@hooks/usePressESC';
 
 /**
  * modal control에 관한 훅입니다.

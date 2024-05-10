@@ -23,6 +23,12 @@
   border-radius: 8px;
   background-color: #ffffff;
   z-index: 999;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.modalContainer :-webkit-scrollbar {
+  display: none;
 }
 
 .modalSizeSmall {
@@ -53,14 +59,4 @@
   width: 100%;
   border-radius: 8px 8px 0px 0px;
   align-items: flex-end;
-}
-
-/* modal scroll */
-.modalContainer {
-  scrollbar-width: none;
-  -ms-overflow-style: none;
-}
-
-.modalContainer :-webkit-scrollbar {
-  display: none;
 }

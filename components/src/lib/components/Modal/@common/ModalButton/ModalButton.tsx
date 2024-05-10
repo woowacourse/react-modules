@@ -1,4 +1,4 @@
-import { extendClassNames } from '../../../../../utils/extendClassNames';
+import { extendClassNames } from '@utils/extendClassNames';
 
 import { BUTTON_COLOR_MAP } from '../../Modal.constant';
 

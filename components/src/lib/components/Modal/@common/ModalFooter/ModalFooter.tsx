@@ -1,5 +1,5 @@
-import { extendClassNames } from '../../../../../utils/extendClassNames';
-import { convertPascalCase } from '../../../../../utils/string';
+import { extendClassNames } from '@utils/extendClassNames';
+import { convertPascalCase } from '@utils/string';
 
 import { FlexDirection } from '../../Modal.type';
 

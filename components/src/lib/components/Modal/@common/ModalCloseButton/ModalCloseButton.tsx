@@ -1,5 +1,5 @@
-import { extendClassNames } from '../../../../../utils/extendClassNames';
-import { CloseImage } from '../../../../assets';
+import { extendClassNames } from '@utils/extendClassNames';
+import { CloseImage } from '@assets/index';
 
 import styles from './ModalCloseButton.module.css';
 

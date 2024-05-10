@@ -22,5 +22,13 @@ export default defineConfig({
       esmExternals: ['react'],
     },
   },
+  resolve: {
+    alias: [
+      { find: '@src', replacement: path.resolve(__dirname, 'src') },
+      { find: '@utils', replacement: path.resolve(__dirname, 'src/utils') },
+      { find: '@assets', replacement: path.resolve(__dirname, 'src/lib/assets') },
+      { find: '@hooks', replacement: path.resolve(__dirname, 'src/hooks') },
+    ],
+  },
   plugins: [react(), dts()],
 });

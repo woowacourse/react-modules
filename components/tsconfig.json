@@ -23,7 +23,14 @@
     /* Testing */
     "types": ["jest"],
 
-    "esModuleInterop": true
+    "esModuleInterop": true,
+
+    "baseUrl": "src",
+    "paths": {
+      "@utils/*": ["utils/*"],
+      "@assets/*": ["lib/assets/*"],
+      "@hooks/*": ["hooks/*"]
+    }
   },
   "include": ["src/lib"],
   "exclude": ["node_modules", "dist", "**/*.test.ts"],

@@ -26,9 +26,9 @@ import {
 
 import type { ModalDevice, ModalPosition, ModalSize } from './Modal.type';
 
-import useModalControl from './@hooks/useModalControl';
+import useModalControl from '@hooks/Modal/useModalControl';
 
-import { extendClassNames } from '../../../utils/extendClassNames';
+import { extendClassNames } from '@utils/extendClassNames';
 
 import styles from './Modal.module.css';
 

@@ -1,4 +1,4 @@
-import { extendClassNames } from '../../../../../utils/extendClassNames';
+import { extendClassNames } from '@utils/extendClassNames';
 
 import styles from './ModalHeader.module.css';
 
