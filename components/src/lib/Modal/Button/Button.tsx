@@ -1,17 +1,18 @@
 import { ButtonHTMLAttributes } from "react";
 import * as Styled from "./style";
 
-export type ButtonColor = "dark" | "light";
-
+export type ButtonColorType = "dark" | "light";
+export type ButtonSizeType = "large" | "small";
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  children: JSX.Element;
-  color: ButtonColor;
+  color: ButtonColorType;
+  size: ButtonSizeType;
   onClick: () => void;
+  children: JSX.Element;
 }
 
-const Button = ({ children, color, onClick, ...props }: ButtonProps) => {
+const Button = ({ color, size, onClick, children, ...props }: ButtonProps) => {
   return (
-    <Styled.Button $color={color} onClick={onClick} {...props}>
+    <Styled.Button $color={color} $size={size} onClick={onClick} {...props}>
       {children}
     </Styled.Button>
   );
