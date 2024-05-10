@@ -68,7 +68,7 @@ const useCardNumbers = (initValue: string) => {
     } else {
       setCardBrand('none');
     }
-    console.log(cardBrand);
+
     return { isValid: true, errorMessage: '' };
   };
 
