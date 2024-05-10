@@ -8,7 +8,7 @@ const DEFAULT_INPUT_LENGTH = 4;
 function App() {
   const {
     numbers: { firstState, secondState, thirdState, fourthState },
-    errorList: [firstErrorType, secondErrorType, thirdErrorType, fourthErrorType],
+    errorTypeList: [firstErrorType, secondErrorType, thirdErrorType, fourthErrorType],
     cardBrand,
     inputMaxLengthList,
   } = useCardNumbers();
