@@ -14,8 +14,9 @@ const useCardNumber = (initialCardNumber: string = '') => {
   const [cardNumberErrorMessage, setCardNumberErrorMessage] = useState<string>('');
 
   const handleCardNumberChange = (number: string) => {
-    const joinedNumber = number.replace(/\s+/g, '');
-    const detectedCardType = cardType === null || joinedNumber.length <= 6 ? detectCardType(joinedNumber) : cardType;
+    let joinedNumber = number.replace(/\s+/g, '');
+    const detectedCardType = detectCardType(joinedNumber);
+    joinedNumber = joinedNumber.slice(0, CARD_TYPE[detectedCardType].MAX_LENGTH);
 
     if (joinedNumber.length > CARD_TYPE[detectedCardType].MAX_LENGTH) return;
 
