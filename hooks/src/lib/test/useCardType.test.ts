@@ -12,7 +12,7 @@ describe('카드 타입 훅 테스트', () => {
       result.current.cardTypeHandler(cardNumberValue);
     });
 
-    expect(result.current.cardType).toBe('Visa');
+    expect(result.current.cardType.name).toBe('Visa');
   });
 
   it('카드 번호 입력 시 앞의 두 글자가 51~55 로 시작할 때 cardType 이 MasterCard 가 된다.', async () => {
@@ -23,7 +23,7 @@ describe('카드 타입 훅 테스트', () => {
       result.current.cardTypeHandler(cardNumberValue);
     });
 
-    expect(result.current.cardType).toBe('MasterCard');
+    expect(result.current.cardType.name).toBe('MasterCard');
   });
   it('카드 번호 입력 시 앞의 두 글자가 36 로 시작할 때 cardType 이 Diners 가 된다.', async () => {
     const cardNumberValue = '3612';
@@ -33,7 +33,7 @@ describe('카드 타입 훅 테스트', () => {
       result.current.cardTypeHandler(cardNumberValue);
     });
 
-    expect(result.current.cardType).toBe('Diners');
+    expect(result.current.cardType.name).toBe('Diners');
   });
   it('카드 번호 입력 시 앞의 두 글자가 34, 37 로 시작할 때 cardType 이 MasterCard 가 된다.', async () => {
     const cardNumberValue = '3412';
@@ -43,7 +43,7 @@ describe('카드 타입 훅 테스트', () => {
       result.current.cardTypeHandler(cardNumberValue);
     });
 
-    expect(result.current.cardType).toBe('AMEX');
+    expect(result.current.cardType.name).toBe('AMEX');
   });
   it('카드 번호 입력 시 앞의 622126~622925로 시작할 때 cardType 이 MasterCard 가 된다.', async () => {
     const cardNumberValue = '62212612';
@@ -53,7 +53,7 @@ describe('카드 타입 훅 테스트', () => {
       result.current.cardTypeHandler(cardNumberValue);
     });
 
-    expect(result.current.cardType).toBe('UnionPay');
+    expect(result.current.cardType.name).toBe('UnionPay');
   });
 
   it('카드 번호 입력 시 첫 글자에 4 이외의 숫자가 오고, 앞 두글자가 51~55 에 포함되지 않을 경우 cardType 이 Empty 가 된다. ', async () => {
@@ -64,7 +64,7 @@ describe('카드 타입 훅 테스트', () => {
       result.current.cardTypeHandler(cardNumberValue);
     });
 
-    expect(result.current.cardType).toBe('Empty');
+    expect(result.current.cardType.name).toBe('Empty');
   });
 
   it('cardType이 Diners일 경우, 36123456789012의 카드 번호를 3612 345678 9012로 포맷팅', async () => {

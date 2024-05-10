@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { validateCardNumbers } from './cardDateValidate';
-import { CardType } from './useCardType';
 import { CardError } from './type/Card';
+import { CARD_BRAND_NUMBER_LENGTH } from './constants/cardDataValidation';
 
 const useCardNumberValidation = () => {
   const [cardNumberValidation, setCardNumberValidation] = useState<CardError>({
@@ -11,7 +11,7 @@ const useCardNumberValidation = () => {
 
   const cardNumberValidateHandler = (
     value: string,
-    cardType: CardType
+    cardType: keyof typeof CARD_BRAND_NUMBER_LENGTH
   ): CardError => {
     try {
       validateCardNumbers(value, cardType);
