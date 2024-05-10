@@ -1,15 +1,15 @@
-import useInputArrayValidate from '../useInputArrayValidate/useInputArrayValidate';
 import useInputValidate from '../useInputValidate/useInputValidate';
-
 const useCardExpirationDate = (initValue: string, maxLength: number = 4) => {
+  const getPureNumbers = (value: string) => value.replace(/[/]/g, '');
+
   const validateOnChange = (newValue: string) => {
-    if (newValue.replace(/\D/g, '').length > maxLength) {
+    if (getPureNumbers(newValue).length > maxLength) {
       return {
         isValid: false,
         errorMessage: `각 유효기간은 ${maxLength}글자 까지만 입력이 가능해요.`,
       };
     }
-    if (!/^\d*$/.test(newValue.replace(/[/]/g, ''))) {
+    if (!/^\d*$/.test(getPureNumbers(newValue))) {
       return {
         isValid: false,
         errorMessage: '유효기간은 숫자만 입력이 가능해요.',
@@ -25,7 +25,7 @@ const useCardExpirationDate = (initValue: string, maxLength: number = 4) => {
     const now = Number(year + month);
     const expireDate = Number(value.slice(3, 5) + value.slice(0, 2));
 
-    if (value.replace(/\D/g, '').length !== maxLength) {
+    if (getPureNumbers(value).length !== maxLength) {
       return {
         isValid: false,
         errorMessage: `유효기간은 (MM/YY) 형식의 ${maxLength * initValue.length}글자로 입력해 주세요.`,
@@ -47,7 +47,7 @@ const useCardExpirationDate = (initValue: string, maxLength: number = 4) => {
   };
 
   const formatValue = (value: string) => {
-    const numberValue = value.replace(/\D/g, '');
+    const numberValue = getPureNumbers(value);
     return numberValue.replace(/^(\d{1,2})/g, '$1/').replace(/[/]+$/, '');
   };
 

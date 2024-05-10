@@ -44,21 +44,24 @@ const CARD_BRAND_TABLE: Record<string, CardBrandInfo> = {
 const useCardNumbers = (initValue: string) => {
   const [cardBrand, setCardBrand] = useState('none');
   const maxLength = CARD_BRAND_TABLE[cardBrand].maxLength;
+
+  const getPureNumbers = (value: string) => value.replace(/-/g, '');
+
   const validateOnChange = (newValue: string) => {
-    if (newValue.replace(/\D/g, '').length > maxLength) {
+    if (getPureNumbers(newValue).length > maxLength) {
       return {
         isValid: false,
         errorMessage: `카드번호는 ${maxLength}글자 까지만 입력이 가능해요.`,
       };
     }
-    if (!/^\d*$/.test(newValue.replace(/-/g, ''))) {
+    if (!/^\d*$/.test(getPureNumbers(newValue))) {
       return {
         isValid: false,
         errorMessage: '카드번호는 숫자만 입력이 가능해요.',
       };
     }
     const brandWithRegex = Object.entries(CARD_BRAND_TABLE).find((value) =>
-      value[1].validate.test(newValue.replace(/-/g, '')),
+      value[1].validate.test(getPureNumbers(newValue)),
     );
     if (brandWithRegex) {
       setCardBrand(brandWithRegex[0]);
@@ -70,7 +73,7 @@ const useCardNumbers = (initValue: string) => {
   };
 
   const validateOnBlur = () => {
-    if (value.replace(/\D/g, '').length !== maxLength) {
+    if (getPureNumbers(value).length !== maxLength) {
       return {
         isValid: false,
         errorMessage: `카드번호는 ${maxLength}글자로 입력해 주세요.`,
@@ -80,7 +83,7 @@ const useCardNumbers = (initValue: string) => {
   };
 
   const formatValue = (value: string) => {
-    const numberValue = value.replace(/\D/g, '');
+    const numberValue = getPureNumbers(value);
     return numberValue
       .replace(
         CARD_BRAND_TABLE[cardBrand].replaceProps.regex,
