@@ -4,17 +4,12 @@ import { ErrorStatus } from "@/types/errorStatus";
 import { removeNonNumeric } from "@/utils/numberHelper";
 import { CardNumbersErrorMessages } from "@/constants/error";
 import { CardNumberErrorType } from "@/types/cardNumbers";
-import {
-  CARD_BRANDS_NAMES,
-  CardBrandInfo,
-  CardBrandName,
-  CardBrands,
-} from "@/constants/cardBrand";
+import useCardBrands from "./useCardBrand";
 
 const useMultiCardNumbers = () => {
   const [formattedNumbers, setFormattedNumbers] = useState<string[]>([]);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
-  const [cardBrand, setCardBrand] = useState<CardBrandName>("NONE");
+  const { cardBrand, identifyBrand } = useCardBrands();
 
   const onChangeValue = (e: ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
@@ -32,7 +27,6 @@ const useMultiCardNumbers = () => {
       newCardBrand.cardNumbersFormat
     );
     setFormattedNumbers(formattedArr);
-    setCardBrand(newCardBrand.name);
   };
 
   const validateIsNumber = (value: string) => {
@@ -76,59 +70,13 @@ const useMultiCardNumbers = () => {
     }
   };
 
-  const identifyBrand = (value: string) => {
-    let newCardBrandInfo: CardBrandInfo | null = null;
-
-    CARD_BRANDS_NAMES.forEach((name) => {
-      const identifiers = CardBrands[name].identifier;
-      if (identifiers) {
-        if (
-          identifiers.type === "value" &&
-          checkValueMatch(value, identifiers.values)
-        ) {
-          newCardBrandInfo = CardBrands[name];
-        } else if (
-          identifiers.type === "range" &&
-          checkRangeMatch(value, identifiers.values)
-        ) {
-          newCardBrandInfo = CardBrands[name];
-        }
-      }
-    });
-
-    if (!newCardBrandInfo) {
-      newCardBrandInfo = CardBrands["NONE"];
-    }
-    return newCardBrandInfo;
-  };
-
-  const checkValueMatch = (value: string, values: number[]) => {
-    return values.some((identifier) => {
-      return (
-        value.length >= String(identifier).length &&
-        value.startsWith(String(identifier))
-      );
-    });
-  };
-
-  const checkRangeMatch = (value: string, ranges: [number, number][]) => {
-    return ranges.some(([from, to]) => {
-      const maxLength = Math.max(String(from).length, String(to).length);
-      if (value.length >= maxLength) {
-        const numericValue = parseInt(value.slice(0, maxLength), 10);
-        return numericValue >= from && numericValue <= to;
-      }
-      return false;
-    });
-  };
-
   return {
     onChange: onChangeValue,
     errorMessage:
       errorMessage &&
       CardNumbersErrorMessages[errorMessage as CardNumberErrorType],
     formattedNumbers,
-    cardBrand: cardBrand,
+    cardBrand: cardBrand.name,
   };
 };
 
