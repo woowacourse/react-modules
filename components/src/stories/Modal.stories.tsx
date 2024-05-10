@@ -100,7 +100,7 @@ export const Modal_Story_Playground: Story = {
         }}
       >
         <button onClick={onOpen}>click me, open modal!</button>
-        <Modal isOpen={args.isOpen} onClose={onClose} device={args.device}>
+        <Modal isOpen={args.isOpen} onClose={onClose} device={args.device} position={args.position}>
           <Modal.ModalContent size={args.size}>
             <Modal.ModalHeader>
               <Modal.ModalTitle text="약관에 동의해 주세요." />
