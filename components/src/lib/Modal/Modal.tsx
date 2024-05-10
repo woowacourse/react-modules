@@ -1,5 +1,3 @@
-import * as Styled from "./style";
-
 import BackDrop from "./BackDrop/BackDrop";
 import Container from "./Container/Container";
 import Header from "./Header/Header";
@@ -14,7 +12,7 @@ export interface ModalProps {
 }
 
 const Modal = ({ isOpen, children }: ModalProps) => {
-  return <Styled.Modal $isOpen={isOpen}>{children}</Styled.Modal>;
+  return isOpen ? <section>{children}</section> : null;
 };
 
 Modal.BackDrop = BackDrop;
