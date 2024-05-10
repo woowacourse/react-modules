@@ -25,7 +25,7 @@ npm install use-card-input-hook
 ### (1) useCardNumbers
 
 - useCardNumbers는 카드 번호 16자리를 입력 받습니다.
-- 카드 번호는 4개로 이루어져 있으며, input의 name은 'cardNumbers1','cardNumbers2','cardNumbers3','cardNumbers4' 로 고정되어 있습니다.
+- 카드 번호는 하나의 폼에 입력하는 형태입니다 (카드 번호 14 ~ 16자리).
 - validate : 입력한 카드 번호가 모두 숫자인지, 조건에 맞게 모두 작성되었는지 확인합니다.
 
 - 사용 가능한 카드 타입 :

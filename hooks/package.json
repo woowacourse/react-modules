@@ -1,6 +1,6 @@
 {
   "name": "use-card-input-hook",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "description": "A custom hook for card input",
   "keywords": [
     "react",
@@ -27,8 +27,7 @@
   },
   "dependencies": {
     "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "use-card-input-hook": "^0.0.3"
+    "react-dom": "^18.2.0"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^6.4.2",

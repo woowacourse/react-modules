@@ -14,19 +14,21 @@ npm install styled-base-modal
 
 ## StoryBook
 
-[Storybook LINK](https://6633385e36610c66d8ade87d-hcpbnioczu.chromatic.com/?path=/story/components-modal--default)
+[Storybook LINK](https://6633385e36610c66d8ade87d-oghkmviovt.chromatic.com/)
 
-## Props
+## Main Modal Props
 
-`children` : 모달안에 들어갈 자식 요소
+> `children` : 모달안에 들어갈 자식 요소
+>
+> `isOpen` : 모달이 현재 열렸는지 닫혔는지를 알려주는 state
+>
+> `position` : `center` | `bottom`; \* optional: 미지정시 default로 `center`
+>
+> `size` : `small` | `medium` | `large`; \* optional: 미지정시 default로 `medium`
+>
+> `onClose` : 모달을 닫는 메서드 함수
 
-`isOpen` : 모달이 현재 열렸는지 닫혔는지를 알려주는 state
-
-`position` : `center` | `bottom`;
-
-`size` : `small` | `medium` | `large`;
-
-`onClose` : 모달을 닫는 메서드 함수
+<br>
 
 ## Children Components
 
@@ -62,9 +64,12 @@ npm install styled-base-modal
 
 onConfirm에 확인시 실행될 함수를 연결할 수 있습니다.
 
-> `label` : 해당 버튼에 들어갈 텍스트  
-> `size` : `small` | `medium` | `large`;
+> `label` : 해당 버튼에 들어갈 텍스트
+>
+> `size` : `small` | `medium` | `large`; \* optional: 미지정시 default로 `medium`
+>
 > `onConfirm`: 확인 버튼 클릭시 실행될 사용자 정의 이벤트 핸들러
+>
 > `...rest` : 다른 입력 태그 props
 
 ```tsx
@@ -73,9 +78,12 @@ onConfirm에 확인시 실행될 함수를 연결할 수 있습니다.
 
 ### (5) CloseButton : 모달의 닫기 버튼
 
-> `label` : 해당 버튼에 들어갈 텍스트  
-> `size` : `small` | `medium` | `large`;
+> `label` : 해당 버튼에 들어갈 텍스트
+>
+> `size` : `small` | `medium` | `large`; \* optional: 미지정시 default로 `medium`
+>
 > `onClose`: 닫기 버튼 클릭시 실행될 사용자 정의 이벤트 핸들러
+>
 > `...rest` : 다른 입력 태그 props
 
 ```tsx
@@ -85,13 +93,18 @@ onConfirm에 확인시 실행될 함수를 연결할 수 있습니다.
 ### (6) PromptInput : 모달내 입력창
 
 > `value` : 입력창에 입력된 value
+>
 > `placeholder` : 입력창 내부 `placeholder`;
+>
 > `onChange`: 내부 value 변경될 시 실행될 사용자 정의 이벤트 핸들러
+>
 > `...rest` : 다른 입력 태그 props
 
 ```tsx
 <Modal.CloseButton label="닫기" onClose={handleClose} />
 ```
+
+<br>
 
 ## Usage
 
