@@ -41,10 +41,7 @@ return (
     <h1>Hooks Modules</h1>
     <label>Owner Name</label>
     <div>
-      <input
-        value={ownerName.value}
-        onChange={onChange}
-      />
+      <input value={ownerName.value} onChange={onChange} />
       <div>{ownerName.errorMessage}</div>
       <div>{ownerName.isError}</div>
     </div>
@@ -75,7 +72,9 @@ blur 이벤트와 change 이벤트를 구분하여 사용하고 있습니다.
 잘못된 값 검증은 change 이벤트로 구성되어있습니다.
 
 ### 특징2
+
 나만의 검증을 위해 나만의 커스텀 훅을 직접만들어 사용할 수 있습니다.
+
 ```typescript
 import useInput, { InputState } from "./domains/useInput";
 import { Validator } from "./domains/validation";
@@ -98,11 +97,13 @@ const useExpiryDate = () => {
 
 export default useExpiryDate;
 ```
+
 위는 useExpiryDate의 코드인데요.
 useInput과 useValidations 만을 import하여,
 나만의 Validator를 추가하여 위와같이 나만의 커스텀 훅을 즉각적으로 만들어 사용할 수 있습니다.
 
 #### 커스텀 Input사용을 위한 Validator 설명
+
 ```typescript
 interface Validator {
   validate: (value: string) => boolean;
@@ -111,6 +112,7 @@ interface Validator {
   type?: "change" | "blur";
 }
 ```
+
 validate: 검증함수입니다. 올바른 상태일때 true를 반환합니다.
 errorMessage: error발생시 보여줄 메세지입니다.
 index: 선택입력입니다. 미입력시, 모든 인풋태그를 동시에 검증합니다. [1,3]으로 입력시, 첫번쨰와 3번쨰 인풋태그만 해당 검증을 적용합니다.
@@ -127,6 +129,20 @@ makeLengthBlurValidator, numericOnlyValidator와 같은 기본적인 Validator�
 - 각 필드는 숫자만 입력 가능합니다.
 - 월의 범위는 1~12여야 합니다.
 - 필드의 길이는 4여야합니다. (blur 이벤트)
+
+#### 사용한 CardBrand 규칙
+
+- Visa: 4로 시작하는 16자리 숫자
+- MasterCard: 51~55로 시작하는 16자리 숫자
+- Diners: 36으로 시작하는 14자리 숫자
+  - 예시: 3612 345678 9012
+- AMEX: 34, 37로 시작하는 15자리 숫자
+  - 예시 (34로 시작): 3412 345678 90123
+  - 예시 (37로 시작): 3712 345678 90123
+- 유니온페이: 카드의 앞 번호가 아래 3가지 조건을 만족하는 16자리 숫자
+  - 622126~622925로 시작하는 경우: 6221 2612 3456 7890
+  - 624~626로 시작하는 경우: 6240 1234 5678 9012
+  - 6282~6288로 시작하는 경우: 6282 1234 5678 9012
 
 ### useExpiryDate
 
