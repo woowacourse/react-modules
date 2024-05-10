@@ -5,6 +5,7 @@ import formatCardNumbers from '../utils/formatCardNumbers';
 
 interface cardNumbersInfoProps {
   cardNumbers: string;
+  cardBrand: string;
   formattedCardNumber: string[];
   errorMessage: string;
 }
@@ -12,6 +13,7 @@ interface cardNumbersInfoProps {
 const useCardNumbers = () => {
   const [cardNumbersInfo, setCardNumbersInfo] = useState<cardNumbersInfoProps>({
     cardNumbers: '',
+    cardBrand: '',
     formattedCardNumber: [],
     errorMessage: '',
   });
@@ -23,6 +25,7 @@ const useCardNumbers = () => {
     if (value.length === 0) {
       setCardNumbersInfo({
         cardNumbers: '',
+        cardBrand: '',
         formattedCardNumber: [],
         errorMessage: '',
       });
@@ -32,6 +35,7 @@ const useCardNumbers = () => {
     if (errorType === 'NonNumeric') {
       setCardNumbersInfo({
         cardNumbers: cardNumbersInfo.cardNumbers,
+        cardBrand: cardNumbersInfo.cardBrand,
         formattedCardNumber: cardNumbersInfo.formattedCardNumber,
         errorMessage,
       });
@@ -48,6 +52,7 @@ const useCardNumbers = () => {
 
     setCardNumbersInfo({
       cardNumbers: value,
+      cardBrand: cardBrand,
       formattedCardNumber: formattedCardNumber,
       errorMessage: errorMessage,
     });
