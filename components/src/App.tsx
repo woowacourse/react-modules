@@ -23,12 +23,6 @@ function App() {
     console.log('onConfirm 실행');
   };
 
-  // const { isOpen: isSmallModalOpen, toggleModal: toggleSmallModal } =
-  //   useModal();
-  // const { isOpen: isMediumModalOpen, toggleModal: toggleMediumModal } =
-  //   useModal();
-  // const { isOpen: isBigModalOpen, toggleModal: toggleBigModal } = useModal();
-
   return (
     <>
       <ButtonContainer>
@@ -36,11 +30,6 @@ function App() {
         <button onClick={() => toggleConfirmModal()}>Confirm!</button>
         <button onClick={() => togglePromptModal()}>Prompt!</button>
       </ButtonContainer>
-      {/* <ButtonContainer>
-        <button onClick={() => toggleSmallModal()}>Small Modal Button</button>
-        <button onClick={() => toggleMediumModal()}>Medium Modal Button</button>
-        <button onClick={() => toggleBigModal()}>Large Modal Button</button>
-      </ButtonContainer> */}
 
       {/* alert modal */}
       <Modal

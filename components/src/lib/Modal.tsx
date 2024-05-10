@@ -1,8 +1,8 @@
-import BaseModal from './BaseModal';
-import ModalButton from './ModalButton';
-import ModalHeader from './ModalHeader';
-import ModalInput from './ModalInput';
-import ModalSubTitle from './ModalSubTitle';
+import BaseModal from './components/BaseModal';
+import ModalButton from './components/ModalButton';
+import ModalHeader from './components/ModalHeader';
+import ModalInput from './components/ModalInput';
+import ModalSubTitle from './components/ModalSubTitle';
 
 const Modal = Object.assign(BaseModal, {
   Header: ModalHeader,

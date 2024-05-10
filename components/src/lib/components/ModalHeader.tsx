@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import ModalTitle from './ModalTitle';
-import { CLOSE_BUTTON } from '../assets/images/index';
+import { CLOSE_BUTTON } from '../../assets/images/index';
 
 const Header = styled.div`
   display: flex;
