@@ -1,5 +1,6 @@
+import ValidationResult, { ERROR_TYPE } from "../types/ValidationResult";
+
 import Validation from "../utils/Validation";
-import ValidationResult from "../types/ValidationResult";
 import { useState } from "react";
 
 interface PasswordValidationResult {
@@ -23,6 +24,7 @@ export default function useCardPassword(
       ? { isValid: true }
       : {
           isValid: false,
+          errorType: ERROR_TYPE.invalidLength,
           errorMessage: "두 자리의 숫자여야 합니다. 다시 입력해주세요.",
         };
 

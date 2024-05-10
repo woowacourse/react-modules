@@ -1,4 +1,5 @@
-import ValidationResult from "../types/ValidationResult";
+import ValidationResult, { ERROR_TYPE } from "../types/ValidationResult";
+
 import { useState } from "react";
 
 interface BrandValidationResult {
@@ -28,6 +29,7 @@ export default function useCardBrand(
       ? { isValid: true }
       : {
           isValid: false,
+          errorType: ERROR_TYPE.invalidCardBrand,
           errorMessage: "지원하지 않는 카드사입니다. 다른 카드를 선택해주세요.",
         };
 

@@ -2,6 +2,11 @@ export enum ERROR_TYPE {
   numericOnly,
   maxLength,
   invalidLength,
+  englishOnly,
+  monthCondition,
+  yearCondition,
+  expired,
+  invalidCardBrand,
 }
 
 export const ERROR_MESSAGE = {

@@ -1,5 +1,6 @@
+import ValidationResult, { ERROR_TYPE } from "../types/ValidationResult";
+
 import Validation from "../utils/Validation";
-import ValidationResult from "../types/ValidationResult";
 import { useState } from "react";
 
 interface ExpiryDate {
@@ -27,17 +28,20 @@ export default function useCardExpiryDate(
     const validationResult: ValidationResult = !validateExpireMonth(value.month)
       ? {
           isValid: false,
+          errorType: ERROR_TYPE.monthCondition,
           errorMessage:
             "유효 기간의 월은 01 ~ 12 사이의 2자리 숫자로 입력하셔야 합니다.",
         }
       : !validateExpireYear(value.year)
       ? {
           isValid: false,
+          errorType: ERROR_TYPE.yearCondition,
           errorMessage: "유효 기간의 연도는 2자리 숫자로 입력하셔야 합니다.",
         }
       : !validateExpiryDate(value)
       ? {
           isValid: false,
+          errorType: ERROR_TYPE.expired,
           errorMessage:
             "유효 기간이 만료되었습니다. 확인 후 다시 입력해 주세요.",
         }
