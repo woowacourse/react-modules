@@ -1,10 +1,5 @@
 import { useState } from 'react';
-import {
-  isNotNumber,
-  isValidNumberLength,
-  isValidNumberRange,
-  validateExpiredDate,
-} from '../../utils/validation/validation';
+import { isNotNumber, isValidNumberRange, validateExpiredDate } from '../../utils/validation/validation';
 import type { EXPIRED_TYPE } from '../..//utils/validation/validation.type';
 
 export const EXPIRATION_DATE_ERROR_MESSAGES = {
@@ -32,11 +27,11 @@ const useCardExpirationDate = ({ month = '', year = '' }: useCardExpirationDateP
   const [errorMessages, setErrorMessages] = useState<Date<string>>({ month: '', year: '' });
 
   const getMonthErrorMessage = (month: string, isExpiredDate: EXPIRED_TYPE) => {
-    if (month.length < VALID_DATE_LENGTH) return '';
-
     if (isNotNumber(month)) return EXPIRATION_DATE_ERROR_MESSAGES.NOT_NUMBER;
 
-    if (!isValidNumberLength(month, VALID_DATE_LENGTH)) return EXPIRATION_DATE_ERROR_MESSAGES.INVALID_MONTH;
+    if (month.length < VALID_DATE_LENGTH) return '';
+
+    // if (!isValidNumberLength(month, VALID_DATE_LENGTH)) return EXPIRATION_DATE_ERROR_MESSAGES.INVALID_MONTH;
 
     if (!isValidNumberRange(Number(month), 1, 12)) return EXPIRATION_DATE_ERROR_MESSAGES.INVALID_MONTH;
 
@@ -46,11 +41,11 @@ const useCardExpirationDate = ({ month = '', year = '' }: useCardExpirationDateP
   };
 
   const getYearErrorMessage = (year: string, isExpiredDate: EXPIRED_TYPE) => {
-    if (year.length < VALID_DATE_LENGTH) return '';
-
     if (isNotNumber(year)) return EXPIRATION_DATE_ERROR_MESSAGES.NOT_NUMBER;
 
-    if (!isValidNumberLength(year, VALID_DATE_LENGTH)) return EXPIRATION_DATE_ERROR_MESSAGES.INVALID_YEAR;
+    if (year.length < VALID_DATE_LENGTH) return '';
+
+    // if (!isValidNumberLength(year, VALID_DATE_LENGTH)) return EXPIRATION_DATE_ERROR_MESSAGES.INVALID_YEAR;
 
     if (isExpiredDate === 'INVALID_YEAR') return EXPIRATION_DATE_ERROR_MESSAGES.EXPIRED_DATE;
 
