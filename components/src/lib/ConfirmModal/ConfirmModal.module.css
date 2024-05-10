@@ -1,0 +1,11 @@
+.confirmModal {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.confirmModalFooter {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+}
