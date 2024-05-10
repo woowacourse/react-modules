@@ -1,3 +1,22 @@
+.modalLayout {
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  inset: 0;
+}
+
+.modalLayout.center {
+  align-items: center;
+}
+
+.modalLayout.bottom {
+  align-items: flex-end;
+}
+
+.modalLayout.top {
+  align-items: flex-start;
+}
+
 .modalHeader {
   display: flex;
   justify-content: space-between;
@@ -45,25 +64,6 @@
   &.center {
     align-items: center;
   }
-}
-
-.modalLayout {
-  position: fixed;
-  display: flex;
-  justify-content: center;
-  inset: 0;
-}
-
-.modalLayout.center {
-  align-items: center;
-}
-
-.modalLayout.bottom {
-  align-items: flex-end;
-}
-
-.modalLayout.top {
-  align-items: flex-start;
 }
 
 .modalBackdrop {
