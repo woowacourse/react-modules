@@ -18,4 +18,4 @@ npm i easy-payments-ui
 5. [Title](https://github.com/lurgi/react-modules/blob/step2/components/docs/components/Title.md)
 6. [Input](https://github.com/lurgi/react-modules/blob/step2/components/docs/components/Input.md)
 
-## [Components Storybook. Click Here ⬅️](https://663880abfe79c0b75f6d41ab-ffryqvvzrg.chromatic.com/?path=/story/modalheader--default)
+## [Components Storybook. Click Here ⬅️](https://663880abfe79c0b75f6d41ab-dzgcjqvipi.chromatic.com/?path=/story/modalheader--reverse-color-button)
