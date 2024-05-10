@@ -95,12 +95,13 @@ export const ModalButton = styled.button<{
   color: white;
   background-color: #333333;
   font-weight: bold;
+  padding: 7px 10px;
 
   ${({ size }) => {
     switch (size) {
       case "S":
         return `
-          width: 15%;
+          width: 20%;
         `;
       case "M":
         return `
@@ -108,7 +109,7 @@ export const ModalButton = styled.button<{
         `;
       case "L":
         return `
-          width: 100%;
+          width: 95%;
         `;
     }
   }}
@@ -119,7 +120,7 @@ export const ModalButton = styled.button<{
 `;
 
 export const ModalContent = styled.main`
-  margin: 20px 30px;
+  margin: 20px 25px;
   text-align: left;
   min-height: 40%;
   overflow-wrap: break-word;
@@ -138,5 +139,8 @@ export const ModalInput = styled.input`
 `;
 
 export const ModalFooter = styled.footer`
-  margin: 15px 20px;
+  margin: 15px 5px;
+  display: flex;
+  justify-content: center;
+  gap: 15px;
 `;
