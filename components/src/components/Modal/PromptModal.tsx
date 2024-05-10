@@ -2,43 +2,45 @@
 import { InputHTMLAttributes, useState } from "react";
 import Modal from "./Modal";
 import { useModalAction } from ".";
-import { css } from "@emotion/react";
+import { inputStyle } from "./PromptModalStyle";
+import useThemeContext from "../../hooks/useThemeContext";
 
 export interface Props {
   title?: string;
   width?: number;
+  theme?: ThemeType;
   onSubmit?: (value?: string) => void;
-  inputProps?: InputHTMLAttributes<HTMLInputElement>;
+  inputAttrs?: InputHTMLAttributes<HTMLInputElement>;
 }
 
-const inputStyle = css({});
+const Input = ({ ...inputAttrs }) => {
+  const theme = useThemeContext();
+  return <input name="input" css={inputStyle(theme)} {...inputAttrs} />;
+};
 
-const PromptModal = ({ title, width, onSubmit, inputProps }: Props) => {
+const PromptModal = ({ title, width, onSubmit, theme, inputAttrs }: Props) => {
   const action = useModalAction();
 
-  const [state, setState] = useState<string>();
+  const [value, setValue] = useState<string>();
+
+  const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => setValue(e.target.value);
 
   return (
     <Modal
       title={title}
       width={width}
       hasConfirmButton
+      theme={theme}
       buttonAlign="row"
       confirmMessage="확인"
       cancelMessage="취소"
       onConfirm={() => {
-        if (onSubmit) onSubmit(state);
+        if (onSubmit) onSubmit(value);
         action.handleClose();
       }}
       closeButtonPosition="bottom"
     >
-      <input
-        name="input"
-        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setState(e.target.value)}
-        value={state}
-        css={inputStyle}
-        {...inputProps}
-      />
+      <Input value={value} onChange={handleInput} {...inputAttrs} />
     </Modal>
   );
 };
