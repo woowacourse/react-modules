@@ -1,10 +1,10 @@
 import * as Styled from "./style";
 
 export type ContainerPositionType = "top" | "bottom" | "center";
-export type ModalContainerSizeType = "small" | "medium" | "large";
+export type ContainerSizeType = "small" | "medium" | "large";
 export interface ContainerProps {
   position: ContainerPositionType;
-  size: ModalContainerSizeType;
+  size: ContainerSizeType;
   children: JSX.Element;
 }
 
