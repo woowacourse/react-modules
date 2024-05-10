@@ -17,90 +17,71 @@ function App() {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const openModal = () => setIsModalOpen(true);
+
   const closeModal = () => setIsModalOpen(false);
 
   return (
-    isModalOpen && (
-    <Modal>
-      <Modal.BackDrop onClose={closeModal} />
-      <Modal.Container position=“bottom”>
-        <Modal.Header>
-          <Modal.Title text=“카드사 선택” />
-          <Modal.CloseButton onCloseButtonClick={closeModal} />
-        </Modal.Header>
-        <YourContent /> 😊
-        <Modal.ButtonContainer direction=“column”>
-          <Modal.Button theme=“dark” onClick={closeModal}>
-            동의하고 저장하기
-          </Modal.Button>
-          <Modal.Button theme=“white” onClick={closeModal}>
-            닫기
-          </Modal.Button>
-        </Modal.ButtonContainer>
-      </Modal.Container>
-    </Modal>
-    )
+    <>
+      <button onClick={openModal}>click me, open modal!</button>
+
+      <Modal isOpen={isModalOpen} onClose={closeModal} position="center" device="mobile">
+        <Modal.ModalContent size="large">
+          <Modal.ModalHeader>
+            <Modal.ModalTitle text="your title" />
+            <Modal.ModalCloseButton onCloseButtonClick={closeModal} />
+          </Modal.ModalHeader>
+          <YourContent /> 😊
+          <Modal.ModalFooter direction="row" justify="between">
+            <Modal.ModalButton theme="dark">button text</Modal.ModalButton>
+            <Modal.ModalButton onClick={closeModal}>button text</Modal.ModalButton>
+          </Modal.ModalFooter>
+        </Modal.ModalContent>
+      </Modal>
+    </>
   );
 }
-export default App;
 ```
 
-- **Modal.BackDrop**
+- **Modal**
 
-```tsx
-<Modal.BackDrop onClose={closeModal} />
-```
+| Props    | Type              | Default   | Description                                                                                            |
+| -------- | ----------------- | --------- | ------------------------------------------------------------------------------------------------------ |
+| children | `React.ReactNode` | -         | 모달 내부에 표시할 컨텐츠를 정의합니다.                                                                |
+| isOpen   | `boolean`         | -         | 모달의 표시 상태를 결정합니다. `true`일 경우 모달이 렌더링됩니다.                                      |
+| position | `ModalPosition`   | 'center'  | 모달의 위치를 정의합니다. 가능한 값은 'top', 'center', 'bottom'입니다.                                 |
+| device   | `Device`          | 'desktop' | 디바이스 타입에 따른 모달의 최대 너비를 설정합니다. 가능한 값은 'mobile', 'tablet', 'desktop' 입니다.  |
+| onClose  | `() => void`      | -         | 모달을 닫을 때 실행할 핸들러 함수입니다. 일반적으로 백드롭 클릭 시 모달을 닫기 위한 함수를 지정합니다. |
 
-| props   | type       | description                                                                                         |
-| ------- | ---------- | --------------------------------------------------------------------------------------------------- |
-| onClose | () => void | backDrop 클릭시 실행할 핸들러를 받습니다. <br/> 위의 예시처럼 모달을 끄는 핸들러를 넣어주면 됩니다. |
+- **Modal.ModalContent**
 
-- **Modal.Container**
-
-```tsx
-<Modal.Container position=“bottom”>
-  // Modal Header
-  // Modal Content - Your Content
-  // Modal ButtonContainer
-</Modal.Container>
-```
-
-| props    | type                      | description                                                                                                                                                                                                                                                     |
-| -------- | ------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| position | 'top', 'center', 'bottom' | 모달 내용의 위치를 결정합니다.<br/> top의 경우 App의 상단, bottom의 경우 하단, 그리고 center의 경우 중간에 위치합니다.<br/> 이때 top과 bottom의 경우 App의 너비 100%를 차지하는 반면, center의 경우 85%을 가집니다. <br/> UI를 고려하여 너비에 차이를 뒀습니다. |
+| Props | Type                       | Default  | Description                                                                   |
+| ----- | -------------------------- | -------- | ----------------------------------------------------------------------------- |
+| size  | 'small', 'medium', 'large' | 'medium' | 모달 내용의 크기를 결정합니다. 가능한 값은 'small', 'medium', 'large' 입니다. |
 
 - **Modal.Header**
-
-```tsx
-<Modal.Header>
-  <Modal.Title text=“안녕하세요👋🏻” />
-  <Modal.CloseButton onCloseButtonClick={closeModal} />
-</Modal.Header>
-```
 
 | props              | type       | description                                                                                           |
 | ------------------ | ---------- | ----------------------------------------------------------------------------------------------------- |
 | text               | string     | 모달의 제목을 표시해줍니다.                                                                           |
 | onCloseButtonClick | () => void | 모달 닫기 버튼을 클릭 시, 실행할 핸들러를 받습니다. 위의 예시처럼 모달을 끄는 들러를 넣어주면 됩니다. |
 
-- **Modal.ButtonContainer**
+- **Modal.ModalFooter**
 
-```tsx
-<Modal.ButtonContainer direction=“column”>
-  <Modal.Button theme=“dark” onClick={closeModal}>
-    동의하고 저장하기
-  </Modal.Button>
-  <Modal.Button theme=“white” onClick={closeModal}>
-    닫기
-  </Modal.Button>
-</Modal.ButtonContainer>
-```
+| Props     | Type                                                     | Default   | Description                                                                                      |
+| --------- | -------------------------------------------------------- | --------- | ------------------------------------------------------------------------------------------------ |
+| direction | `'row'`, `'column'`                                      | 'row'     | 모달 푸터에 위치할 수 있는 버튼의 정렬 방향을 결정합니다.                                        |
+| justify   | `'center'`, `'start'`, `'end'`, `'stretch'`, `'between'` | 'between' | 버튼의 정렬 위치를 결정합니다. 가능한 값은 'center', 'start', 'end', 'stretch', 'between'입니다. |
+| children  | `React.ReactNode`                                        | -         | 모달 푸터 내부에 표시할 컨텐츠를 정의합니다.                                                     |
 
-| props     | type            | description                                                                                                                                                     |
-| --------- | --------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| direction | 'row', 'column' | 버튼의 정렬 방향을 결정합니다. row의 경우 가로로 정렬을 하며, column의 경우 세로로 정렬합니다.                                                                  |
-| theme     | 'dark', 'white' | 버튼의 색을 결정합니다. dark의 경우 검은색 버튼을, white의 경우 배경이 흰 버튼을 제공합니다. 현재는 이 두 theme만 있으며 언제든 새로운 theme이 추가 가능합니다! |
-| onClick   | () => void      | 버튼을 클릭했을 경우 실행할 핸들러를 받습니다.                                                                                                                  |
+- **Modal.ModalButton**
+
+| Props    | Type               | Default  | Description                                                                  |
+| -------- | ------------------ | -------- | ---------------------------------------------------------------------------- |
+| children | `React.ReactNode`  | -        | 버튼 내부에 표시할 컨텐츠를 정의합니다.                                      |
+| onClick  | `() => void`       | -        | 버튼 클릭 시 호출될 이벤트 핸들러입니다.                                     |
+| theme    | `ModalButtonTheme` | 'white'  | 버튼의 테마를 설정합니다. 가능한 값은 'dark', 'white'가 있습니다.            |
+| size     | `ModalButtonSize`  | 'medium' | 버튼의 크기를 정의합니다. 가능한 값은 'small', 'medium', 'large'가 있습니다. |
+| width    | `ButtonWidthProps` | 'full'   | 버튼의 너비를 설정합니다. 가능한 값은 'full', 'fit', 'fixed'가 있습니다.     |
 
 ### 고려한 점
 
