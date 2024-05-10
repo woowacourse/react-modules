@@ -33,7 +33,6 @@ export const isVisa = (numberString: string) => {
 };
 
 export const isMasterCard = (numberString: string) => {
-  console.log(Number(numberString.substring(0, 2)));
   return (
     51 <= Number(numberString.substring(0, 2)) &&
     Number(numberString.substring(0, 2)) <= 55
