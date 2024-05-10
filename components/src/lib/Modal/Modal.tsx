@@ -22,7 +22,8 @@ interface ModalProps {
   size?: SizeProps;
   title?: TitleProps;
   isOpen: boolean;
-  onClose: () => void;
+  onClose?: () => void;
+  footerClassName?: string;
   closeButton?: CloseButtonProps;
   footerButtons?: ButtonProps[];
 }
@@ -35,6 +36,7 @@ const Modal = ({
   isOpen,
   onClose,
   closeButton,
+  footerClassName,
   footerButtons,
 }: PropsWithChildren<ModalProps>) => {
   return (
@@ -44,8 +46,10 @@ const Modal = ({
           <div className={styles.backDrop} onClick={onClose}></div>
           <div className={`${styles.modalSection} ${styles[size!]}`}>
             <ModalHeader title={title} closeButton={closeButton} />
-            <ModalContent children={children} />
-            {footerButtons && <ModalFooter className={"modalFooter"} buttons={footerButtons} />}
+            <ModalContent>{children}</ModalContent>
+            {footerButtons && (
+              <ModalFooter className={footerClassName || "modalFooter"} buttons={footerButtons} />
+            )}
           </div>
         </div>
       )}

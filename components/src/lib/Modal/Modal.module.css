@@ -31,10 +31,9 @@
 .modalSection {
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 16px;
   position: fixed;
   padding: 24px 32px;
-  min-height: 216px;
   background-color: #fff;
 }
 

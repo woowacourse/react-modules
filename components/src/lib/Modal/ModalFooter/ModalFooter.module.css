@@ -1,28 +1,15 @@
-.modalFooter.footerContainer {
+.footerContainer {
   display: flex;
+}
+
+.modalFooter.footerContainer {
   flex-direction: column;
   gap: 10px;
 }
 
-.alertModalFooter.footerContainer {
-  gap: 10px;
-  position: absolute;
-  right: 32px;
-  bottom: 24px;
-}
-
-.confirmModalFooter.footerContainer {
-  display: flex;
-  gap: 10px;
-  position: absolute;
-  right: 32px;
-  bottom: 24px;
-}
-
+.alertModalFooter.footerContainer,
+.confirmModalFooter.footerContainer,
 .promptModalFooter.footerContainer {
-  display: flex;
+  justify-content: flex-end;
   gap: 10px;
-  position: absolute;
-  right: 32px;
-  bottom: 24px;
 }
