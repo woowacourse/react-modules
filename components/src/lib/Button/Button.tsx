@@ -2,7 +2,7 @@ import * as Styled from './Button.styled';
 
 export interface ButtonProps {
   text: string;
-  onClick: () => void;
+  onClick?: () => void;
   size?: ButtonSize;
   width?: ButtonWidth;
   buttonStyle?: ButtonStyle;
