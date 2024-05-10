@@ -1,8 +1,9 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import validator from "../utils/validate";
 import ERROR_MESSAGE from "../constants/errorMessage";
-import useCardBrand from "../useCardBrand/useCardBrand";
 import CARD_BRAND from "../constants/cardBrand";
+import getCardBrand from "../utils/getCardBrand";
+import { cardNumberFormatter } from "../utils/format";
 
 type CardBrand = "VISA" | "MASTER_CARD" | "DINERS" | "AMEX" | "UNION_PAY" | "UNDEFINED";
 
@@ -10,12 +11,12 @@ interface CardNumbersState {
   value: string;
   isValid: boolean;
   errorMessage: string;
+  cardBrand: CardBrand;
 }
 
 interface Props {
   CardNumbersState: CardNumbersState;
   handleCardNumbersChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  CardBrand: CardBrand;
 }
 
 const useCardNumbersInput = (): Props => {
@@ -23,20 +24,16 @@ const useCardNumbersInput = (): Props => {
     value: "",
     isValid: false,
     errorMessage: "",
+    cardBrand: "UNDEFINED",
   });
-  const { cardBrand, detectCardBrand } = useCardBrand();
-  const [rawValue, setRawValue] = useState("");
 
   const handleCardNumbersChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value.replace(/\s+/g, "");
-    setRawValue(value);
-    detectCardBrand(value);
-  };
-
-  useEffect(() => {
     let isValid = true;
     let errorMessage = "";
-    const slicedValue = rawValue.slice(0, CARD_BRAND[cardBrand].matchedLength);
+
+    const cardBrand = getCardBrand(value);
+    const slicedValue = value.slice(0, CARD_BRAND[cardBrand].matchedLength);
 
     if (!validator.isValidEmptyValue(slicedValue)) {
       isValid = false;
@@ -50,13 +47,14 @@ const useCardNumbersInput = (): Props => {
     }
 
     setCardNumbersState({
-      value: rawValue,
+      value: cardNumberFormatter(value, CARD_BRAND[cardBrand].format),
       isValid,
       errorMessage,
+      cardBrand,
     });
-  }, [rawValue, cardBrand]);
+  };
 
-  return { CardNumbersState: cardNumbersState, handleCardNumbersChange, CardBrand: cardBrand };
+  return { CardNumbersState: cardNumbersState, handleCardNumbersChange };
 };
 
 export default useCardNumbersInput;
