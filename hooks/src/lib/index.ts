@@ -1,4 +1,3 @@
-export { default as useInputArrayValidate } from './useInputArrayValidate/useInputArrayValidate';
 export { default as useCardCompany } from './useCardCompany/useCardCompany';
 export { default as useCardCVC } from './useCardCVC/useCardCVC';
 export { default as useCardExpirationDate } from './useCardExpirationDate/useCardExpirationDate';
