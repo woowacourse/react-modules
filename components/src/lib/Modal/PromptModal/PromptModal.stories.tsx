@@ -4,7 +4,7 @@ import { PromptModal, Modal } from '../../';
 import type { Meta, StoryObj } from '@storybook/react';
 
 const meta: Meta<typeof PromptModal> = {
-  title: 'PromptModal',
+  title: 'Modal/PromptModal',
   component: PromptModal,
   decorators: [
     (Story) => (

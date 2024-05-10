@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { Modal } from '../../';
 
 const meta = {
-  title: 'Label',
+  title: 'Component/Label',
   component: Modal.Label,
   decorators: [
     (Story) => (

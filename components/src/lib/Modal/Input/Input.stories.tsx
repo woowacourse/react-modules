@@ -4,7 +4,7 @@ import { Modal } from '../../';
 import { action } from '@storybook/addon-actions';
 
 const meta = {
-  title: 'Input',
+  title: 'Component/Input',
   component: Modal.Input,
   parameters: {
     layout: 'centered',

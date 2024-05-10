@@ -1,10 +1,10 @@
 import '../../../index.css';
 import type { Meta, StoryObj } from '@storybook/react';
-import { Modal } from '../../';
+import { Modal } from '../..';
 import { fn } from '@storybook/test';
 
 const meta = {
-  title: 'Button',
+  title: 'Component/Button',
   component: Modal.Button,
   decorators: [
     (Story) => (
