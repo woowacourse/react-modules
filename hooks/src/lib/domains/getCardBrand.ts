@@ -1,4 +1,4 @@
-type CardBrand = "visa" | "mastercard" | "diners" | "amex" | "union";
+export type CardBrand = "visa" | "mastercard" | "diners" | "amex" | "union";
 
 const matchers: Record<CardBrand, (value: string) => boolean> = {
   visa: (value) => /^4\d*$/.test(value) && value.length <= 16,
