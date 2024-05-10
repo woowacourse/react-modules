@@ -4,7 +4,10 @@ import {
   CARD_CONFIG,
 } from './constants/cardDataValidation';
 
-export type CardType = keyof typeof CARD_BRAND_NUMBER_LENGTH;
+export type CardType = {
+  name: keyof typeof CARD_BRAND_NUMBER_LENGTH;
+  maxLength: number;
+};
 
 const checkCardType = (cardNumber: string) => {
   const cardBrandNumber = parseInt(cardNumber.substring(0, 2), 10);
@@ -38,14 +41,21 @@ const checkCardType = (cardNumber: string) => {
 };
 
 const useCardType = () => {
-  const [cardType, setCardType] = useState<CardType>('Empty');
+  const [cardType, setCardType] = useState<CardType>({
+    name: 'Empty',
+    maxLength: 16,
+  });
 
   const cardTypeHandler = (value: string) => {
-    setCardType(checkCardType(value));
+    const cardTypeName = checkCardType(value);
+    setCardType({
+      name: cardTypeName,
+      maxLength: CARD_BRAND_NUMBER_LENGTH[cardTypeName],
+    });
   };
 
   const formatCardNumber = (cardType: CardType) => {
-    switch (cardType) {
+    switch (cardType.name) {
       case 'Diners':
         return (cardNumbers: string) =>
           cardNumbers.replace(
