@@ -72,3 +72,40 @@ This library uses styled-components for styling. You can override the default st
       X
   </Modal.ModalCloseButton>
 ```
+
+## Default Modals
+
+### AlertModal
+
+> It provides title, content, and ok button at bottom.
+
+```ts
+export interface AlertModalProps extends ModalProps {
+  title: string;
+  content: React.ReactNode;
+}
+```
+
+### ConfirmModal
+
+> It provides title, content, ok and cancel button at bottom.
+
+```ts
+export interface ConfirmModalProps extends ModalProps {
+  title: string;
+  content: React.ReactNode;
+  onConfirm: () => void;
+}
+```
+
+### PromptModal
+
+> It provides Label, Input and ok button at bottom.
+
+```ts
+export interface PromptModalProps extends ModalProps {
+  labelText: string;
+  inputType: string;
+  htmlFor: string;
+}
+```
