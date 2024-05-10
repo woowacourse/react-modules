@@ -60,18 +60,16 @@ const Modal: React.FC<ModalProps> & {
   };
 
   return (
-    <>
-      {isOpen && (
-        <Styled.ModalBackdrop
-          ref={modalBackdropRef}
-          onClick={clickBackDropHandler}
-        >
-          <Styled.ModalWrapper size={size} position={position} {...restProps}>
-            {children}
-          </Styled.ModalWrapper>
-        </Styled.ModalBackdrop>
-      )}
-    </>
+    isOpen && (
+      <Styled.ModalBackdrop
+        ref={modalBackdropRef}
+        onClick={clickBackDropHandler}
+      >
+        <Styled.ModalWrapper size={size} position={position} {...restProps}>
+          {children}
+        </Styled.ModalWrapper>
+      </Styled.ModalBackdrop>
+    )
   );
 };
 
