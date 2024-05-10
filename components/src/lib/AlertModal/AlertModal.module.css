@@ -1,0 +1,10 @@
+.alertModal {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.alertModalFooter {
+  display: flex;
+  justify-content: flex-end;
+}
