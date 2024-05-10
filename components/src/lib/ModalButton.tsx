@@ -31,21 +31,26 @@ const WhiteButtonStyle = styled(ButtonStyle)`
 interface ModalButtonType {
   category: 'alert' | 'confirm' | 'prompt';
   handleCloseButton: () => void;
+  onConfirm?: () => void;
 }
 
-function ModalButton({ category, handleCloseButton }: ModalButtonType) {
+function ModalButton({
+  category,
+  handleCloseButton,
+  onConfirm,
+}: ModalButtonType) {
   const handleModalButton = () => {
     if (category === 'alert') {
-      return handleCloseButton;
+      return handleCloseButton();
     }
-    // TODO: confirm, prompt일 경우 처리 방식 추가
-    return handleCloseButton;
+    onConfirm && onConfirm();
+    handleCloseButton();
   };
 
   return (
     <ButtonContainer>
       {(category === 'confirm' || category === 'prompt') && (
-        <WhiteButtonStyle onClick={handleCloseButton}>취소</WhiteButtonStyle>
+        <WhiteButtonStyle onClick={handleModalButton}>취소</WhiteButtonStyle>
       )}
       <ButtonStyle onClick={handleModalButton}>확인</ButtonStyle>
     </ButtonContainer>
