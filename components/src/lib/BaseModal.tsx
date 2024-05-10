@@ -89,18 +89,15 @@ const Container = styled.div<ContainerProps>`
 // `;
 
 interface ModalProps {
-  // openModal: () => void;
   toggleModal: () => void;
   isOpen: boolean;
   position: 'center' | 'bottom';
-  category: 'alert' | 'confirm' | 'prompt';
 }
 
 function BaseModal({
   toggleModal,
   isOpen,
   position,
-  category,
   children,
 }: React.PropsWithChildren<ModalProps>) {
   const handleCloseButton = () => {

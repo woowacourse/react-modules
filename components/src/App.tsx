@@ -46,7 +46,6 @@ function App() {
       <Modal
         toggleModal={toggleAlertModal}
         position="center"
-        category="alert"
         isOpen={isAlertOpen}
       >
         <Modal.Header
@@ -62,7 +61,6 @@ function App() {
       <Modal
         toggleModal={toggleConfirmModal}
         position="center"
-        category="confirm"
         isOpen={isConfirmOpen}
       >
         <Modal.Header
@@ -82,7 +80,6 @@ function App() {
       <Modal
         toggleModal={togglePromptModal}
         position="center"
-        category="prompt"
         isOpen={isPromptOpen}
       >
         <Modal.Header
