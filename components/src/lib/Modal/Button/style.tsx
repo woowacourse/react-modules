@@ -4,18 +4,18 @@ import { ButtonColor } from "./Button";
 
 const BUTTON_COLOR_STYLES = {
   dark: css`
-    background-color: ${(props) => props.theme.color.darkGrey};
+    background-color: ${(props) => props.theme.color.dark.background};
 
-    color: ${(props) => props.theme.color.white};
+    color: ${(props) => props.theme.color.dark.text};
 
     &:hover {
       background-color: ${(props) => props.theme.color.black};
     }
   `,
-  white: css`
-    background-color: ${(props) => props.theme.color.white};
+  light: css`
+    background-color: ${(props) => props.theme.color.light.background};
 
-    color: ${(props) => props.theme.color.grey};
+    color: ${(props) => props.theme.color.light.text};
 
     &:hover {
       border: 0.5px solid ${(props) => props.theme.color.lightGrey};

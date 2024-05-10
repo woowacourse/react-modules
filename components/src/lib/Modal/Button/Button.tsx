@@ -1,7 +1,7 @@
 import { ButtonHTMLAttributes } from "react";
 import * as Styled from "./style";
 
-export type ButtonColor = "dark" | "white";
+export type ButtonColor = "dark" | "light";
 
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   children: JSX.Element;
