@@ -24,13 +24,13 @@ const cardInputValidator = {
   validatePastYear(year: string) {
     const currentYear = new Date().getFullYear() % 100;
 
-    return parseInt(year, 10) <= currentYear;
+    return Number(year) <= currentYear;
   },
 
   validateMonth(month: string) {
     if (month.length !== INPUT_RULES.validExpiryDateLength) return false;
 
-    return this.validateNumberInRange(parseInt(month, 10), 1, 12);
+    return this.validateNumberInRange(Number(month), 1, 12);
   },
 
   validateYear(year: string) {
@@ -58,7 +58,7 @@ const cardInputValidator = {
     )
       return true;
 
-    return this.validateFutureDate(parseInt(month), parseInt(year));
+    return this.validateFutureDate(Number(month), Number(year));
   },
 };
 

@@ -15,23 +15,16 @@ const useExpiryDateValidation = (
     expiryYearSetError(validResult);
   };
 
-  const validateExpiryDate = (month: string, year: string): boolean => {
-    if (
-      !cardInputValidator.validateFutureDate(
-        parseInt(month, 10),
-        parseInt(year, 10)
-      )
-    ) {
+  const validateExpiryDate = (month: string, year: string) => {
+    if (!cardInputValidator.validateFutureDate(Number(month), Number(year))) {
       setErrorText(VALIDATION_MESSAGES.expiredDate);
       updateAllErrorState(true);
 
-      return true;
+      return;
     }
 
     setErrorText("");
     updateAllErrorState(false);
-
-    return true;
   };
 
   return {
