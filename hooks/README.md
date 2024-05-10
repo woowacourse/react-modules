@@ -54,15 +54,70 @@ const MyComponent = () => {
 };
 ```
 
+## Detailed Description of the useCardNumbers Hook
+### Interface
+```ts
+interface CardNumberInfo {
+  cardNumber: string | undefined;
+  paymentCompany: string;
+  isValid: boolean;
+  maxLength: number;
+  errorMessages: string[];
+}
+```
+- `cardNumber`: The inputted card number. Formatted according to the rules of the respective company.
+- `paymentCompany`: Indicates which company the card belongs to based on the card number.
+- `isValid`: Indicates whether the card number is valid.
+- `maxLength`: The maximum length allowed for the input element. Varies depending on the company.
+- `errorMessages`: Array containing error messages for the card number.
+
+
+### Company Types and Identification Rules
+- VISA: 16-digit number starting with 4.
+  - Example: 4082 4739 0391 3827
+- MASTER: 16-digit number starting with 51 to 55.
+  - Example: 5123 1234 2345 8421
+- Diners: 14-digit number starting with 36.
+  - Example: 3612 345678 9012
+- AMEX: 15-digit number starting with 34 or 37.
+  - Example (starting with 34): 3412 345678 90123
+  - Example (starting with 37): 3712 345678 90123
+- UnionPay: 16-digit number meeting one of the following conditions:
+  - Starting with 622126 to 622925: 6221 2612 3456 7890
+  - Starting with 624 to 626: 6240 1234 5678 9012
+  - Starting with 6282 to 6288: 6282 1234 5678 9012
+
+
+### Usage Example
+```javascript
+function App() {
+  const { cardNumberInfo, onChangeCardNumbers } = useCardNumbers();
+
+  return (
+    <>
+      <h1>Hooks Modules</h1>
+      <input
+        type="text"
+        value={cardNumberInfo.cardNumber ? cardNumberInfo.cardNumber : ""}
+        maxLength={cardNumberInfo.maxLength}
+        onChange={onChangeCardNumbers}
+        placeholder="Card Number"
+      />
+      {cardNumberInfo.isValid ? (
+        <p>Valid</p>
+      ) : (
+        <p>{cardNumberInfo.errorMessages[0]}</p>
+      )}
+    </>
+  );
+}
+```
+
 ## Features
 
 ### Validation Check
 
-Automatically validates the CVC input to ensure it is numeric and matches the specified length.
-
-### Customizable Length
-
-Allows you to set a custom length for the CVC to match different card types.
+Automatically validates inputs to ensure it is numeric and matches the specified length.
 
 ### Error Messaging
 
