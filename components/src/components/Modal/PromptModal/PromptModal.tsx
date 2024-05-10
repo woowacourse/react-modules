@@ -2,8 +2,7 @@
 import { InputHTMLAttributes, useState } from "react";
 import Modal from "../Modal";
 import { useModalAction } from "..";
-import { inputStyle } from "./PromptModalStyle";
-import useThemeContext from "../../../hooks/useThemeContext";
+import Input from "../../Input/Input";
 
 export interface Props {
   title?: string;
@@ -12,11 +11,6 @@ export interface Props {
   onSubmit?: (value?: string) => void;
   inputAttrs?: InputHTMLAttributes<HTMLInputElement>;
 }
-
-const Input = ({ ...inputAttrs }) => {
-  const theme = useThemeContext();
-  return <input name="input" css={inputStyle(theme)} {...inputAttrs} />;
-};
 
 const PromptModal = ({ title, width, onSubmit, theme, inputAttrs }: Props) => {
   const action = useModalAction();
