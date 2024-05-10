@@ -1,4 +1,4 @@
-import { PropsWithChildren } from "react";
+import { PropsWithChildren, useEffect, useRef } from "react";
 import Modal, { PositionProps, SizeProps, TitleProps } from "../Modal";
 import styles from "../Modal.module.css";
 
@@ -20,6 +20,14 @@ const PromptModal = ({
   onConfirm,
   onCancel,
 }: PropsWithChildren<PromptModalProps>) => {
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    if (isOpen && inputRef.current) {
+      inputRef.current.focus();
+    }
+  }, [isOpen]);
+
   const footerClassName = "promptModalFooter";
   const promptModalButton = [
     {
@@ -55,7 +63,12 @@ const PromptModal = ({
         footerClassName={footerClassName}
         footerButtons={promptModalButton}
       >
-        <input type="text" placeholder="010-1234-5678" className={styles.promptModalInput} />
+        <input
+          ref={inputRef}
+          type="text"
+          placeholder="010-1234-5678"
+          className={styles.promptModalInput}
+        />
         {children}
       </Modal>
     </>
