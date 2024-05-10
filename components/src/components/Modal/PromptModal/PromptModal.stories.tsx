@@ -29,6 +29,13 @@ const meta = {
     theme: { name: "색상 테마" },
     onSubmit: { name: "확인 버튼을 눌렀을 때 실행되는 함수" },
   },
+  args: {
+    title: "입력해주세요.",
+    width: 300,
+    onSubmit: (value?: string) => {
+      console.log(value);
+    },
+  },
   decorators: [
     (Story) => (
       <ModalProvider>
@@ -44,23 +51,11 @@ type Story = StoryObj<typeof PromptModal>;
 
 export const Default: Story = {
   name: "기본 Prompt 모달",
-  args: {
-    title: "입력해주세요.",
-    width: 300,
-    onSubmit: (value?: string) => {
-      console.log(value);
-    },
-  },
 };
 
 export const ReverseTheme: Story = {
   name: "반대 되는 테마 속성",
   args: {
-    title: "입력해주세요.",
-    width: 300,
     theme: window.matchMedia("(prefers-color-scheme: light)").matches ? "dark" : "light",
-    onSubmit: (value?: string) => {
-      console.log(value);
-    },
   },
 };
