@@ -48,15 +48,30 @@ const useCardType = () => {
     switch (cardType) {
       case 'Diners':
         return (cardNumbers: string) =>
-          cardNumbers.replace(/(\d{4})(\d{6})(\d{4})/, '$1 $2 $3');
+          cardNumbers.replace(
+            /(\d{1,4})(\d{1,6})?(\d{1,4})?/,
+            (_, p1, p2, p3) => {
+              return [p1, p2, p3].filter(Boolean).join(' ');
+            }
+          );
       case 'AMEX':
         return (cardNumbers: string) =>
-          cardNumbers.replace(/(\d{4})(\d{6})(\d{5})/, '$1 $2 $3');
+          cardNumbers.replace(
+            /(\d{1,4})(\d{1,6})?(\d{1,5})?/,
+            (_, p1, p2, p3) => {
+              return [p1, p2, p3].filter(Boolean).join(' ');
+            }
+          );
       case 'UnionPay':
       case 'Visa':
       case 'MasterCard':
         return (cardNumbers: string) =>
-          cardNumbers.replace(/(\d{4})(\d{4})(\d{4})(\d{4})/, '$1 $2 $3 $4');
+          cardNumbers.replace(
+            /(\d{1,4})(\d{1,4})?(\d{1,4})?(\d{1,4})?/,
+            (_, p1, p2, p3, p4) => {
+              return [p1, p2, p3, p4].filter(Boolean).join(' ');
+            }
+          );
       default:
         return (cardNumbers: string) => cardNumbers;
     }
