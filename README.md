@@ -17,7 +17,7 @@
     - [x] 버튼
   - [x] 모달 열기, 닫기, 확인 등의 동작에 대한 이벤트 핸들러
   - [x] 모달 크기: small, medium, large
-  - [ ] 버튼 크기: large, small
+  - [x] 버튼 크기: large, small
   - [x] 버튼 컨테이너 위치: left, center, right
 
 - [x] 모달 컴포넌트를 npm으로 배포하고 사용할 수 있어야 한다.
