@@ -40,7 +40,7 @@ function App() {
       >
         <Modal.Header
           title="아이디를 입력해 주세요."
-          closeOption="icon"
+          closeOption="button"
           handleCloseButton={toggleAlertModal}
         />
         <Modal.SubTitle subTitle="아이디는 필수로 입력해야 합니다." />
@@ -56,7 +56,7 @@ function App() {
       >
         <Modal.Header
           title="카드를 삭제하시겠습니까?"
-          closeOption="icon"
+          closeOption="button"
           handleCloseButton={toggleConfirmModal}
         />
         <Modal.SubTitle subTitle="삭제하면 복구하실 수 없습니다." />
@@ -76,7 +76,7 @@ function App() {
       >
         <Modal.Header
           title="쿠폰 번호를 입력해 주세요."
-          closeOption="icon"
+          closeOption="button"
           handleCloseButton={togglePromptModal}
         />
         <Modal.Input onChangeInput={onChangeInput} />
