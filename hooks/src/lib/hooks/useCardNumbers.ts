@@ -77,6 +77,10 @@ export default function useCardNumbers(props: UseCardNumbersProps): UseCardNumbe
 
     const length = BRAND_LENGTH[brand];
 
+    if (length === 14) {
+      return [numString.slice(0, 4), numString.slice(4, 10), numString.slice(10, 14)];
+    }
+
     if (length === 15) {
       return [numString.slice(0, 4), numString.slice(4, 10), numString.slice(10, 15)];
     }
