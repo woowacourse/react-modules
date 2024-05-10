@@ -1,7 +1,7 @@
-import "../../index.css";
+import "../../../index.css";
 import type { Meta, StoryObj } from "@storybook/react";
 
-import { AlertModal, ModalProvider, useModalAction } from "../../lib";
+import { AlertModal, ModalProvider, useModalAction } from "../../../lib";
 import { useEffect } from "react";
 import { Props } from "./AlertModal";
 

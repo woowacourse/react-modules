@@ -1,6 +1,6 @@
 import { PropsWithChildren } from "react";
-import Modal from "./Modal";
-import { useModalAction } from ".";
+import Modal from "../Modal";
+import { useModalAction } from "..";
 
 export interface Props {
   title: string;

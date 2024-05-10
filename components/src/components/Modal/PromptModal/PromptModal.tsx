@@ -1,9 +1,9 @@
 /** @jsxImportSource @emotion/react */
 import { InputHTMLAttributes, useState } from "react";
-import Modal from "./Modal";
-import { useModalAction } from ".";
+import Modal from "../Modal";
+import { useModalAction } from "..";
 import { inputStyle } from "./PromptModalStyle";
-import useThemeContext from "../../hooks/useThemeContext";
+import useThemeContext from "../../../hooks/useThemeContext";
 
 export interface Props {
   title?: string;

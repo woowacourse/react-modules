@@ -1,5 +1,5 @@
 import { css } from "@emotion/react";
-import COLOR_PALETTE from "../../colorPalette";
+import COLOR_PALETTE from "../../../colorPalette";
 
 export const inputStyle = (theme: ThemeType) =>
   css({
