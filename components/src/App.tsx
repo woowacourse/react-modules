@@ -9,37 +9,48 @@ const ButtonContainer = styled.div`
 `;
 
 function App() {
-  const { isOpen: isAlertOpen, toggleModal: toggleAlertModal } = useModal();
-  const { isOpen: isConfirmOpen, toggleModal: toggleConfirmModal } = useModal();
-  const { isOpen: isPromptOpen, toggleModal: togglePromptModal } = useModal();
+  const {
+    isOpen: isAlertOpen,
+    toggleModal,
+    // openModal: openAlertModal,
+    // closeModal: closeAlertModal,
+  } = useModal();
+  // const { isOpen: isConfirmOpen, toggleModal: toggleConfirmModal } = useModal();
+  // const { isOpen: isPromptOpen, toggleModal: togglePromptModal } = useModal();
 
-  const { isOpen: isSmallModalOpen, toggleModal: toggleSmallModal } =
-    useModal();
-  const { isOpen: isMediumModalOpen, toggleModal: toggleMediumModal } =
-    useModal();
-  const { isOpen: isBigModalOpen, toggleModal: toggleBigModal } = useModal();
+  // const { isOpen: isSmallModalOpen, toggleModal: toggleSmallModal } =
+  //   useModal();
+  // const { isOpen: isMediumModalOpen, toggleModal: toggleMediumModal } =
+  //   useModal();
+  // const { isOpen: isBigModalOpen, toggleModal: toggleBigModal } = useModal();
 
   return (
     <>
       <ButtonContainer>
-        <button onClick={() => toggleAlertModal()}>Alert!</button>
-        <button onClick={() => toggleConfirmModal()}>Confirm!</button>
-        <button onClick={() => togglePromptModal()}>Prompt!</button>
+        <button onClick={() => toggleModal()}>Alert!</button>
+        {/* <button onClick={() => toggleConfirmModal()}>Confirm!</button>
+        <button onClick={() => togglePromptModal()}>Prompt!</button> */}
       </ButtonContainer>
-      <ButtonContainer>
+      {/* <ButtonContainer>
         <button onClick={() => toggleSmallModal()}>Small Modal Button</button>
         <button onClick={() => toggleMediumModal()}>Medium Modal Button</button>
         <button onClick={() => toggleBigModal()}>Large Modal Button</button>
-      </ButtonContainer>
+      </ButtonContainer> */}
+
+      {/* alert modal */}
       <Modal
-        toggleModal={toggleAlertModal}
+        toggleModal={toggleModal}
         position="center"
         category="alert"
         isOpen={isAlertOpen}
       >
-        <Modal.Title title="아이디를 입력해 주세요." />
+        <Modal.Header
+          title="아이디를 입력해 주세요."
+          closeOption="icon"
+          handleCloseButton={toggleModal}
+        />
         <Modal.SubTitle subTitle="아이디는 필수로 입력해야 합니다." />
-        <Modal.Button />
+        <Modal.Button handleCloseButton={toggleModal} />
       </Modal>
     </>
   );

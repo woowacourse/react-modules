@@ -1,11 +1,11 @@
 import BaseModal from './BaseModal';
 import ModalButton from './ModalButton';
+import ModalHeader from './ModalHeader';
 import ModalInput from './ModalInput';
 import ModalSubTitle from './ModalSubTitle';
-import ModalTitle from './ModalTitle';
 
 const Modal = Object.assign(BaseModal, {
-  Title: ModalTitle,
+  Header: ModalHeader,
   SubTitle: ModalSubTitle,
   Input: ModalInput,
   Button: ModalButton,

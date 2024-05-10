@@ -49,7 +49,8 @@ const Container = styled.div<ContainerProps>`
     left: 50%;
     display: flex;
     flex-direction: column;
-    gap: 2.4rem;
+    gap: 1.6rem;
+    width: 48rem;
     padding: 2.4rem 3.2rem;
     box-sizing: border-box;
     border-radius: 0.8rem;
@@ -88,11 +89,11 @@ const Container = styled.div<ContainerProps>`
 // `;
 
 interface ModalProps {
+  // openModal: () => void;
   toggleModal: () => void;
   isOpen: boolean;
   position: 'center' | 'bottom';
   category: 'alert' | 'confirm' | 'prompt';
-  children: React.ReactNode;
 }
 
 function BaseModal({
@@ -118,9 +119,7 @@ function BaseModal({
       onClick={(e) => handleBackdropClick(e)}
       $display={isOpen ? 'block' : 'none'}
     >
-      <Container $position={position}>
-        <div>{children}</div>
-      </Container>
+      <Container $position={position}>{children}</Container>
     </BackDrop>
   );
 }
