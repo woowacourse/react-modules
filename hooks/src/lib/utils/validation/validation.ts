@@ -1,6 +1,10 @@
 import { EXPIRED_TYPE } from './validation.type';
 
-export const isNotNumber = (value: string) => isNaN(Number(value));
+export const isNotNumber = (value: string) => {
+  if (isNaN(Number(value))) return true;
+  if (value.length > value.trim().length) return true; // 공백이 포함되어도 숫자가 아니다.
+  return false;
+};
 
 export const isValidNumberLength = (value: string, validLength: number) => value.length === validLength;
 
