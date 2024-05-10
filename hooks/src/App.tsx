@@ -1,19 +1,19 @@
 import "./App.css";
-import { useCardHolder } from "./lib";
-import useMultiCardNumbers from "./lib/useMultiCardNumbers";
+import { useMultiCardNumbers } from "./lib";
 
 function App() {
-  const { onChange, errorMessage, formattedNumbers } = useMultiCardNumbers();
-
-  const { onChange: cardHolderChange, value } = useCardHolder("");
+  const { onChange, errorMessage, formattedNumbers, cardBrand } =
+    useMultiCardNumbers();
 
   return (
     <>
-      <input onChange={onChange} value={formattedNumbers.join("-")} />
-      <span>{formattedNumbers.join("-")}</span>
+      <input
+        onChange={onChange}
+        value={formattedNumbers.join(" ")}
+        name="month"
+      />
       <span>{errorMessage}</span>
-
-      <input onChange={cardHolderChange} value={value} />
+      <span>{cardBrand}</span>
     </>
   );
 }

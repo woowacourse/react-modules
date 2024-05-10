@@ -124,51 +124,31 @@ return (
 
 - 다양한 타입의 카드 브랜드들의 카드 숫자 정보를 받아, 현재 카드 브랜드의 정보에 맞게 동적으로 카드 번호를 검사해 주는 커스텀 훅입니다.
 
-(1)`cardCompanyNumbersInfo` : 사용할 카드 브랜드들의 카드 번호 포맷을 배열 형태로 전달해야 합니다.
-
-```tsx
-const cardCompanyNumbersInfo = [
-  {
-    name: "VISA",
-    cardNumbersFormat: [4, 4, 4, 4],
-  },
-  {
-    name: "MASTER",
-    cardNumbersFormat: [5, 5, 5],
-  },
-];
-```
-
-(2) `selectedCompany` : 현재 검사할 카드의 타입을 명시합니다. 이 타입은 cardCompanyNumbersInfo 안에 있는 name 이어야 합니다. 만약 cardCompanyNumbersInfo 에 없는 이름을 넣는다면, 에러가 납니다.
-
 #### outputs
 
-(1)`values` : 인풋에 입력된 값이 객체 형태로 나옵니다.
+(1)`formattedNumbers` : 카드 번호가 브랜드에 따라 포맷팅 되어 배열 형태로 나옵니다.
 
 ```tsx
-{
-  cardNumber1: "1234",
-  cardNumber2: "1234",
-  cardNumber3: "1234",
-  cardNumber4: "1234",
-}
+[["1234"], ["1234"], ["1234"], ["1234"]];
 ```
 
-(2)`errorMessages` : 인풋에 해당하는 에러 메세지가 객체 형태로 나옵니다. values와 포맷이 같습니다. 다음과 같은 에러 메세지가 들어갑니다.
+(2)`errorMessage` : 인풋에 해당하는 에러 메세지가 나옵니다.
 
 > [IS_NOT_NUMBER]: '카드번호는 숫자만 입력해주세요.'  
 > [INVALID_LENGTH]: '카드 번호를 4자리씩 입력해주세요.'
 
-(3) `onChangeCardNumbers` : 카드 번호의 값을 입력받아 관리하는 메서드 입니다. 첫번째 인자로 event 를, 두번쨰 인자로는 현재 인풋의 인덱스를 전달해야 합니다.
-
-(4) `onBlurValidLength` : 현재 인풋의 포커스가 벗어났을 때 길이 검사를 해주는 함수입니다. 첫번째 인자로 event 를, 두번쨰 인자로는 현재 인풋의 인덱스를 전달해야 합니다.
+(3) `onChange` : 카드 번호을 입력하는 input의 값을 관리하는 onChange 메서드를 필수로 달아야 합니다.
 
 ```tsx
-<input
-  onChange={(e) => onChangeCardNumbers(e, i)}
-  value={cardNumbers[`cardNumber${i + 1}`]}
-  onBlur={(e) => onBlurValidLength(e, i)}
-/>
+const { onChange, errorMessage, formattedNumbers } = useMultiCardNumbers();
+
+return (
+  <>
+    <input onChange={onChange} value={formattedNumbers.join("-")} />
+    <span>{formattedNumbers.join("-")}</span>
+    <span>{errorMessage}</span>
+  </>
+);
 ```
 
 #### Usage
