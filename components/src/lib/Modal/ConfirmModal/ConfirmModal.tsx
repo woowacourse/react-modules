@@ -1,9 +1,5 @@
 import { PropsWithChildren } from "react";
-import ModalHeader from "./ModalHeader/ModalHeader";
-import ModalContent from "./ModalContent/ModalContent";
-import ModalFooter from "./ModalFooter/ModalFooter";
-import { PositionProps, SizeProps, TitleProps } from "./Modal";
-import styles from "./Modal.module.css";
+import Modal, { PositionProps, SizeProps, TitleProps } from "../Modal";
 
 interface ConfirmModalProps {
   position: PositionProps;
@@ -23,7 +19,8 @@ const ConfirmModal = ({
   onConfirm,
   onCancel,
 }: PropsWithChildren<ConfirmModalProps>) => {
-  const confirmModalButton = [
+  const footerClassName = "confirmModalFooter";
+  const footerButtons = [
     {
       content: "취소",
       onClick: onCancel,
@@ -32,6 +29,7 @@ const ConfirmModal = ({
         background: "transparent",
         color: "rgba(139, 149, 161, 1)",
         border: "1px solid rgba(51, 51, 51, 0.25)",
+        width: "80px",
       },
     },
     {
@@ -41,22 +39,23 @@ const ConfirmModal = ({
       style: {
         background: "rgba(51, 51, 51, 1)",
         color: "white",
+        width: "80px",
       },
     },
   ];
 
   return (
     <>
-      {isOpen && (
-        <div className={`${styles.alertModal} ${styles.container} ${styles[position]}`}>
-          <div className={styles.backDrop}></div>
-          <div className={`${styles.modalSection} ${styles[size!]}`}>
-            <ModalHeader title={title} />
-            <ModalContent>{children}</ModalContent>
-            <ModalFooter className={"confirmModalFooter"} buttons={confirmModalButton} />
-          </div>
-        </div>
-      )}
+      <Modal
+        position={position}
+        size={size}
+        title={title}
+        isOpen={isOpen}
+        footerClassName={footerClassName}
+        footerButtons={footerButtons}
+      >
+        {children}
+      </Modal>
     </>
   );
 };
