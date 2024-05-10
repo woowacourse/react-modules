@@ -5,16 +5,18 @@ import { useModalAction } from "..";
 export interface Props {
   title: string;
   width?: number;
+  theme?: ThemeType;
   onConfirm?: () => void;
 }
 
-const ConfirmModal = ({ title, width, children, onConfirm }: PropsWithChildren<Props>) => {
+const ConfirmModal = ({ title, width, children, theme, onConfirm }: PropsWithChildren<Props>) => {
   const action = useModalAction();
 
   return (
     <Modal
       title={title}
       width={width}
+      theme={theme}
       hasConfirmButton
       buttonAlign="row"
       confirmMessage="확인"

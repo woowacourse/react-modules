@@ -26,7 +26,13 @@ const meta = {
   argTypes: {
     title: { name: "모달의 제목" },
     width: { name: "모달의 너비" },
+    theme: { name: "색상 테마" },
     children: { name: "버튼 내부 요소" },
+  },
+  args: {
+    title: "제목입니다.",
+    width: 300,
+    children: <Children />,
   },
   decorators: [
     (Story) => (
@@ -47,9 +53,11 @@ function Children() {
 
 export const Default: Story = {
   name: "기본 Alert 모달",
+};
+
+export const ReverseTheme: Story = {
+  name: "반대 되는 테마 속성",
   args: {
-    title: "제목입니다.",
-    width: 300,
-    children: <Children />,
+    theme: window.matchMedia("(prefers-color-scheme: light)").matches ? "dark" : "light",
   },
 };

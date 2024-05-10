@@ -1,7 +1,7 @@
 import "../../../index.css";
 import type { Meta, StoryObj } from "@storybook/react";
 
-import { AlertModal, ModalProvider, useModalAction } from "../../../lib";
+import { ModalProvider, useModalAction } from "../../../lib";
 import { useEffect } from "react";
 import ConfirmModal, { Props } from "./ConfirmModal";
 
@@ -20,13 +20,23 @@ const TestModal: React.FC<Props> = (props) => {
   );
 };
 
+function Children() {
+  return <div>삭제하면 복구할 수 없습니다.</div>;
+}
+
 const meta = {
   title: "ConfirmModal",
   component: TestModal,
   argTypes: {
     title: { name: "모달의 제목" },
     width: { name: "모달의 너비" },
+    theme: { name: "색상 테마" },
     children: { name: "버튼 내부 요소" },
+  },
+  args: {
+    title: "삭제하시겠습니까?",
+    width: 300,
+    children: <Children />,
   },
   decorators: [
     (Story) => (
@@ -35,21 +45,19 @@ const meta = {
       </ModalProvider>
     ),
   ],
-} satisfies Meta<typeof AlertModal>;
+} satisfies Meta<typeof ConfirmModal>;
 
 export default meta;
 
-type Story = StoryObj<typeof AlertModal>;
-
-function Children() {
-  return <div>삭제하면 복구할 수 없습니다.</div>;
-}
+type Story = StoryObj<typeof ConfirmModal>;
 
 export const Default: Story = {
   name: "기본 Confirm 모달",
+};
+
+export const ReverseTheme: Story = {
+  name: "반대 되는 테마 속성",
   args: {
-    title: "삭제하시겠습니까?",
-    width: 300,
-    children: <Children />,
+    theme: window.matchMedia("(prefers-color-scheme: light)").matches ? "dark" : "light",
   },
 };
