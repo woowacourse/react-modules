@@ -10,9 +10,9 @@ export interface ModalFooterProps extends React.PropsWithChildren<React.HTMLAttr
   justify?: ElementJustify;
 }
 
-const ModalFooter = ({ children, direction = "row", justify = "between" }: ModalFooterProps) => {
+const ModalFooter = ({ children, direction = "row", justify = "between", ...props }: ModalFooterProps) => {
   return (
-    <StyledFooter $direction={direction} $justify={justify}>
+    <StyledFooter $direction={direction} $justify={justify} {...props}>
       {children}
     </StyledFooter>
   );
