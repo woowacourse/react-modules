@@ -26,7 +26,7 @@ describe('useCardPassword 커스텀 훅 테스트', () => {
 
     React.act(() => result.current.handlePasswordChange('ㄱ'));
 
-    expect(result.current.isValidPassword).toBe(NUMBER_ERROR_MESSAGES.NOT_NUMBER);
+    expect(result.current.passwordErrorMessage).toBe(NUMBER_ERROR_MESSAGES.NOT_NUMBER);
   });
 
   it(`${PASSWORD_DEFAULT_LENGTH}자 미만의 카드 번호를 입력하면 유효하지 않다.`, () => {
@@ -42,6 +42,6 @@ describe('useCardPassword 커스텀 훅 테스트', () => {
 
     React.act(() => result.current.handlePasswordChange('1'));
 
-    expect(result.current.isValidPassword).toBe(NUMBER_ERROR_MESSAGES.MAX_LENGTH);
+    expect(result.current.passwordErrorMessage).toBe(NUMBER_ERROR_MESSAGES.MAX_LENGTH);
   });
 });

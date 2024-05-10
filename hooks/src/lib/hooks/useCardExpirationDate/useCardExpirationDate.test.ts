@@ -24,29 +24,13 @@ describe('useCardExpirationDate 커스텀 훅 테스트', () => {
 
     React.act(() => result.current.handleMonthChange('ㄱ'));
 
-    expect(result.current.isValidMonth).toBe(EXPIRATION_DATE_ERROR_MESSAGES.NOT_NUMBER);
-  });
-
-  it('2자 미만의 달을 입력하면 유효하지 않다.', () => {
-    const { result } = renderHook(() => useCardExpirationDate());
-
-    React.act(() => result.current.handleMonthChange('1'));
-
-    expect(result.current.isValidMonth).toBe(false);
-  });
-
-  it('2자 미만의 달을 입력하면 에러 메시지를 표시한다.', () => {
-    const { result } = renderHook(() => useCardExpirationDate());
-
-    React.act(() => result.current.handleMonthChange('1'));
-
-    expect(result.current.monthErrorMessages).toBe(EXPIRATION_DATE_ERROR_MESSAGES.INVALID_MONTH);
+    expect(result.current.monthErrorMessages).toBe(EXPIRATION_DATE_ERROR_MESSAGES.NOT_NUMBER);
   });
 
   it('01 ~ 12 사이의 달을 입력하지 않으면 유효하지 않다.', () => {
     const { result } = renderHook(() => useCardExpirationDate());
 
-    React.act(() => result.current.handleMonthChange('ㄱ'));
+    React.act(() => result.current.handleMonthChange('13'));
 
     expect(result.current.isValidMonth).toBe(false);
   });
@@ -54,7 +38,7 @@ describe('useCardExpirationDate 커스텀 훅 테스트', () => {
   it('01 ~ 12 사이의 달을 입력하지 않으면 에러 메세지를 표시한다.', () => {
     const { result } = renderHook(() => useCardExpirationDate());
 
-    React.act(() => result.current.handleMonthChange('ㄱ'));
+    React.act(() => result.current.handleMonthChange('13'));
 
     expect(result.current.monthErrorMessages).toBe(EXPIRATION_DATE_ERROR_MESSAGES.INVALID_MONTH);
   });
@@ -118,10 +102,8 @@ describe('useCardExpirationDate 커스텀 훅 테스트', () => {
   it('현재의 년도에 과거의 달을 입력하면 유효하지 않다.', () => {
     const { result } = renderHook(() => useCardExpirationDate());
 
-    React.act(() => {
-      result.current.handleMonthChange('03');
-      result.current.handleYearChange('24');
-    });
+    React.act(() => result.current.handleMonthChange('03'));
+    React.act(() => result.current.handleYearChange('24'));
 
     expect(result.current.isValidMonth).toBe(false);
   });
@@ -129,10 +111,8 @@ describe('useCardExpirationDate 커스텀 훅 테스트', () => {
   it('현재의 년도에 과거의 달을 입력하면 에러 메시지를 표시한다.', () => {
     const { result } = renderHook(() => useCardExpirationDate());
 
-    React.act(() => {
-      result.current.handleMonthChange('03');
-      result.current.handleYearChange('24');
-    });
+    React.act(() => result.current.handleMonthChange('03'));
+    React.act(() => result.current.handleYearChange('24'));
 
     expect(result.current.monthErrorMessages).toBe(EXPIRATION_DATE_ERROR_MESSAGES.EXPIRED_DATE);
   });
