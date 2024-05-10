@@ -1,5 +1,5 @@
 import type { StoryObj } from '@storybook/react';
-import Button from '@/lib/Button';
+import Button from '@/lib/Button/Button';
 
 export default {
   title: 'Components/Button',

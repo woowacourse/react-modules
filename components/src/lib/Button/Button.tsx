@@ -1,8 +1,7 @@
 import styled from 'styled-components';
 import Theme from '@/style/theme';
-import { Size } from '@/types/system';
-
-type ButtonColorType = 'dark' | 'light';
+import { Size } from '@/types/common.type';
+import { ButtonColorType } from './Button.type';
 
 export interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
