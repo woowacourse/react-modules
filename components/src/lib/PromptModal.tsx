@@ -1,26 +1,35 @@
 import React from "react";
-// import "./App.css";
 import { Modal } from ".";
 import { css } from "@emotion/css";
 import { ModalSize } from "./common/Modal";
 
-interface AlertModalProps {
+interface PromptModalProps {
   isOpen: boolean;
   closeModal: () => void;
 
   title: string;
-  description: string;
+  description?: string;
   confirmLabel: string;
+  cancelLabel: string;
   size: ModalSize;
 }
-function AlertModal({ isOpen, closeModal, title, description, confirmLabel, size }: AlertModalProps) {
+function PromptModal({ isOpen, closeModal, title, description, cancelLabel, confirmLabel, size }: PromptModalProps) {
   return (
     <Modal isOpen={isOpen} closeModal={closeModal}>
       <Modal.Positioner position="center" size={size}>
-        <Modal.Header title={title} closeButton={true} onClose={closeModal} />
-        <Modal.Content description={description} />
+        <Modal.Header title={title} closeButton={false} onClose={closeModal} />
+        <Modal.Content description={description}>
+          <input
+            className={css`
+              width: 100%;
+              height: 32px;
+              font-size: 11px;
+            `}
+          />
+        </Modal.Content>
         <Modal.Footer
           confirmLabel={confirmLabel}
+          cancelLabel={cancelLabel}
           onConfirm={closeModal}
           className={css`
             display: flex;
@@ -36,4 +45,4 @@ function AlertModal({ isOpen, closeModal, title, description, confirmLabel, size
   );
 }
 
-export default AlertModal;
+export default PromptModal;

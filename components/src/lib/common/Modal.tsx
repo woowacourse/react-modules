@@ -16,7 +16,15 @@ const Positioner = ({ position, size, children }: ModalPositionerProps) => {
   return <div className={css(modalContainerCSS, positionCSS[position], sizeCSS[size])}>{children}</div>;
 };
 
-const Header = ({ title, close, onClose }: { title: string; close: boolean; onClose: () => void }) => {
+const Header = ({
+  title,
+  closeButton: close,
+  onClose,
+}: {
+  title: string;
+  closeButton: boolean;
+  onClose: () => void;
+}) => {
   return (
     <div className={css(headerContainerCSS)}>
       <p className={css(titleCSS)}>{title}</p>
@@ -29,10 +37,10 @@ const Header = ({ title, close, onClose }: { title: string; close: boolean; onCl
   );
 };
 
-const Content = ({ description, children }: { description: string; children?: ReactNode }) => {
+const Content = ({ description, children }: { description?: string; children?: ReactNode }) => {
   return (
     <>
-      <p className={css(descriptionCSS)}>{description}</p>
+      {description && <p className={css(descriptionCSS)}>{description}</p>}
       {children && <div>{children}</div>}
     </>
   );
