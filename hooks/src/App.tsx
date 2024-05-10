@@ -5,11 +5,13 @@ import {
   useCardCVC,
   useCardExpiryDate,
   useCardHolder,
+  useCardNumber,
   useCardPassword,
 } from "@cys4585/card-validation";
 
 import React from "react";
-import useCardNumber from "./lib/useCardNumbers/useCardNumbers";
+
+// import useCardNumber from "./lib/useCardNumbers/useCardNumbers";
 
 const cardBrands = ["신한카드", "현대카드", "카카오뱅크"];
 
