@@ -40,10 +40,10 @@ const Modal = ({ children, isOpen, position = "center", device = "desktop", onCl
   );
 };
 
-Modal.ModalContent = ModalContent;
 Modal.ModalHeader = ModalHeader;
 Modal.ModalTitle = ModalTitle;
 Modal.ModalCloseButton = ModalCloseButton;
+Modal.ModalContent = ModalContent;
 Modal.ModalForm = ModalForm;
 Modal.ModalInput = ModalInput;
 Modal.ModalFooter = ModalFooter;

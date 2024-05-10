@@ -15,6 +15,12 @@ const meta = {
   },
 
   argTypes: {
+    disabled: {
+      control: {
+        type: "boolean",
+      },
+    },
+
     theme: {
       options: ["dark", "white"],
       control: {

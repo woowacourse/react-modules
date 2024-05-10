@@ -80,6 +80,12 @@ export const MODAL_BUTTON_THEME: Record<ModalButtonTheme, string> = {
     &:hover {
       background-color: #1f1f1f; 
     }
+
+    &:disabled {
+      background-color: #555555; 
+      color: #aaaaaa; 
+      cursor: not-allowed;
+    }
     `,
 
   white: `
@@ -90,6 +96,13 @@ export const MODAL_BUTTON_THEME: Record<ModalButtonTheme, string> = {
     &:hover {
       border: 0.5px solid #dfdfdf;
       background-color: #f0f0f0; 
+    }
+
+    &:disabled {
+      background-color: #eeeeee; 
+      color: #cccccc; 
+      border: 0.5px solid #cccccc; 
+      cursor: not-allowed;
     }
     `,
 };

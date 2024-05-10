@@ -6,15 +6,15 @@ import { MODAL_BUTTON_SIZE, MODAL_BUTTON_THEME, MODAL_BUTTON_WIDTH } from "../co
 
 type ButtonWidthProps = ModalButtonWidth | "fixed";
 
-export interface ButtonProps extends React.PropsWithChildren<React.HTMLAttributes<HTMLButtonElement>> {
+export interface ButtonProps extends React.PropsWithChildren<React.ButtonHTMLAttributes<HTMLButtonElement>> {
   theme?: ModalButtonTheme;
   size?: ModalButtonSize;
   width?: ButtonWidthProps;
 }
 
-const ModalButton = ({ children, onClick, theme = "white", size = "medium", width = "full", ...props }: ButtonProps) => {
+const ModalButton = ({ children, onClick, theme = "white", size = "medium", width = "full", disabled = false, ...props }: ButtonProps) => {
   return (
-    <StyledButton $theme={theme} $size={size} $width={width} onClick={onClick} {...props}>
+    <StyledButton $theme={theme} $size={size} $width={width} onClick={onClick} disabled={disabled} {...props}>
       {children}
     </StyledButton>
   );
