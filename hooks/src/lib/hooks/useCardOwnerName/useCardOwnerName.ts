@@ -51,7 +51,6 @@ const useCardOwnerName = ({
   };
 
   const handleOwnerNameChange = (name: string, pressedKey: string = '') => {
-    console.log(pressedKey);
     const validOwnerName = makeValidOwnerName(name);
 
     const errorMessage = getErrorMessage(name);
