@@ -14,7 +14,7 @@ const preview: Preview = {
 
 export const decorators = [
   (Story) => (
-    <div style={{ width: "100px", height: "300px" }}>
+    <div style={{ width: "800px", height: "300px" }}>
       <Story />
     </div>
   ),
