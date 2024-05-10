@@ -1,4 +1,9 @@
 const CardBrandService = (value: string) => {
+  if (value.startsWith('4')) return 'Visa';
+
+  const masterCardPrefix = parseInt(value.substring(0, 2));
+  if (masterCardPrefix >= 51 && masterCardPrefix <= 55) return 'Master';
+
   if (value.startsWith('36')) return 'Diners';
 
   if (value.startsWith('34') || value.startsWith('37')) return 'AMEX';
