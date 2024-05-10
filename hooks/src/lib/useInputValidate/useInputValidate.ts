@@ -43,8 +43,9 @@ const useInputValidate = ({
   };
 
   const onBlurHandler = () => {
-    const { isValid, errorMessage } = validateOnBlur();
+    setErrorMessage('');
 
+    const { isValid, errorMessage } = validateOnBlur();
     setIsCompleted(isValid);
 
     if (!isValid) {
