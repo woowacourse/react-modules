@@ -17,13 +17,13 @@ npm install chico-card-custom-hooks
 #### 반환 값
 
 - cardHolderValidation: 다음의 객체 구조를 가집니다.
-  - errorMessage: 입력 필드별 오류 메시지를 담고 있습니다.
-  - isError: 입력 필드가 오류 상태인지를 boolean 값으로 표시합니다.
+  - errorMessage: 사용자 이름 오류 메시지를 담고 있습니다. 기본값은 ''입니다.
+  - isError: 입력 필드가 오류 상태인지를 boolean 값으로 표시합니다. 기본값은 false입니다.
+- cardHolderValidateHandler : value : string을 입력해 cardHolderValidateHandler 업데이트하는 함수입니다. 최신화된 cardHolderValidation 반환합니다.
 
 #### cardHolderValidateHandler 인자
 
 - `value` (string): 사용자 입력값.
-- `name` (CardHolderName): 입력 필드의 이름, 이 경우에는 'cardHolder'.
 
 #### 사용법
 
@@ -37,7 +37,7 @@ function Component() {
   return (
     <input
       type="text"
-      onChange={(e) => cardHolderValidateHandler(e.target.value, "cardHolder")}
+      onChange={(e) => cardHolderValidateHandler(e.target.value)}
       placeholder="Card Holder Name"
     />
   );
@@ -51,13 +51,13 @@ function Component() {
 #### 반환 값
 
 - cardNumberValidation: 다음의 객체 구조를 가집니다.
-  - errorMessage: : 각 카드 번호 부분(cardNumber1, cardNumber2, cardNumber3, cardNumber4) 오류 메시지를 담고 있습니다.
-  - isError: : 각 카드 번호 부분(cardNumber1, cardNumber2, cardNumber3, cardNumber4) 오류 상태인지를 boolean 값으로 표시합니다.
+  - errorMessage: : 카드 번호의 오류 메시지를 담고 있습니다.
+  - isError: : 카드 번호가 오류 상태인지를 boolean 값으로 표시합니다.
+- cardNumberValidateHandler : value : string을 입력해 cardNumberValidateHandler 업데이트하는 함수입니다. 최신화된 cardNumberValidation 반환합니다.
+#### cardNumberValidateHandler 인자
 
-#### 인자
-
-- `value` (string): 사용자 입력값.
-- `name` (CardNumberName): 각 카드 번호 부분의 이름 (cardNumber1, cardNumber2, cardNumber3, cardNumber4).
+- `value` (string): 사용자 입력값
+- `cardType` (string) : 카드 타입
 
 #### 사용법
 
@@ -69,18 +69,11 @@ function Component() {
     useCardNumberValidation();
 
   return (
-    <>
-      {["cardNumber1", "cardNumber2", "cardNumber3", "cardNumber4"].map(
-        (name, index) => (
-          <input
-            key={index}
-            type="text"
-            onChange={(e) => cardNumberValidateHandler(e.target.value, name)}
-            placeholder={`Card Number Part ${index + 1}`}
-          />
-        )
-      )}
-    </>
+      <input
+        type="text"
+        onChange={(e) => cardNumberValidateHandler(e.target.value)}
+        placeholder={`Card Number Part`}
+      />
   );
 }
 ```
@@ -92,13 +85,13 @@ function Component() {
 #### 반환 값
 
 - passwordValidation: 다음의 객체 구조를 가집니다.
-  - errorMessage: 입력 필드별 오류 메시지를 담고 있습니다.
-  - isError: 입력 필드가 오류 상태인지를 boolean 값으로 표시합니다.
+  - errorMessage: 입력값의 오류 메시지를 담고 있습니다.
+  - isError: 입력값이 오류 상태인지를 boolean 값으로 표시합니다.
+- passwordValidateHandler : value : string을 입력해 passwordValidation을 업데이트하는 함수입니다. 최신화된 passwordValidation을 반환합니다.
 
 #### passwordValidateHandler 인자
 
 - `value` (string): 사용자 입력값.
-- `name` (passwordName): 입력 필드의 이름, 이 경우에는 'password'.
 
 #### 사용법
 
@@ -112,7 +105,7 @@ function Component() {
   return (
     <input
       type="password"
-      onChange={(e) => passwordValidateHandler(e.target.value, "password")}
+      onChange={(e) => passwordValidateHandler(e.target.value)}
       placeholder="Password"
     />
   );
@@ -126,13 +119,12 @@ function Component() {
 #### 반환 값
 
 - CVCValidation: 다음의 객체 구조를 가집니다.
-  - errorMessage: 입력 필드별 오류 메시지를 담고 있습니다.
-  - isError: 입력 필드가 오류 상태인지를 boolean 값으로 표시합니다.
-
+  - errorMessage: 입력값에 대한 오류 메시지를 담고 있습니다.
+  - isError: 입력값이 오류 상태인지를 boolean 값으로 표시합니다.
+- CVCValidateHandler: value : string을 입력해 CVCValidation를 업데이트 하는 함수입니다. 최신화된 CVCValidation 반환합니다.
 #### CVCValidateHandler 인자
 
 - `value` (string): 사용자 입력값.
-- `name` (CardCVCName): 입력 필드의 이름, 이 경우에는 'CVC'.
 
 #### 사용법
 
@@ -145,7 +137,7 @@ function Component() {
   return (
     <input
       type="text"
-      onChange={(e) => CVCValidateHandler(e.target.value, "CVC")}
+      onChange={(e) => CVCValidateHandler(e.target.value)}
       placeholder="CVC"
     />
   );
@@ -159,13 +151,17 @@ function Component() {
 #### 반환 값
 
 - expiryDateValidation: 다음의 객체 구조를 가집니다.
-  - errorMessage: 입력 필드별 오류 메시지를 담고 있습니다.
-  - isError: 입력 필드가 오류 상태인지를 boolean 값으로 표시합니다.
+  - errorMessage
+    - month : 입력값에 대한 에러메세지를 담고 있습니다.
+    - year : 입력값에 대한 에러메세지를 담고 있습니다.
+  - isError
+    - month : 입력값이 오류 상태인지를 boolean 값으로 표시합니다.
+    - year : 입력값이 오류 상태인지를 boolean 값으로 표시합니다.
+- expiryDateValidateHandler : value : string과 name : 'month' | 'year'을 인자로 받아 유효일자를 업데이트하는 함수입니다. 최신화된 expiryDateValidation 반환합니다.
 
 #### expiryDateValidateHandler 인자
 
 - `value` (string): 사용자 입력값.
-- `name` (CardExpiryName): 'month' 또는 'year' 중 하나.
 
 #### 사용법
 
@@ -199,80 +195,39 @@ function Component() {
 
 #### 반환값
 
-cardType : cardType을 string 으로 제공합니다.
-
-- Visa : 카드 번호가 4로 시작 할 경우.
-- MasterCard : 카드 번호가 51~55 로 시작 할 경우.
-- Empty : 그 외.
-
-cardTypeHandler
+- cardType: 현재 식별된 카드 유형과 해당 유형의 최대 길이를 포함하는 객체입니다.
+  - name: 식별된 카드 유형의 이름 ('Visa', 'MasterCard', 'AMEX', 'Diners', 'UnionPay', 'Empty').
+  - maxLength: 식별된 카드 유형에 따라 정의된 카드 번호의 최대 길이입니다.
+- formatCardNumber: 현재 카드 유형에 맞게 입력된 카드 번호를 형식화하는 함수입니다. 이 함수는 카드 번호를 적절한 형식(예: 4자리-4자리-4자리-4자리)으로 나누어 표시합니다.
+- cardTypeHandler : value : string을 받아 카드 타입을 업데이트하는 함수입니다. 
 
 #### cardTypeHandler 인자
 
-- `value` (string): 첫 번째 카드 번호 부분.
-- `name` (CardNumberName): 이 훅에서는 주로 'cardNumber1'가 사용됩니다.
+- `value` (string): 카드 번호
 
 #### 사용법
 
 ```jsx
-import { useCardType } from "your-custom-hooks-package-name";
+import useCardType from 'your-custom-hooks-package-name';
 
-function Component() {
-  const { cardType, cardTypeHandler } = useCardType();
+function CardInputComponent() {
+  const { cardType, formatCardNumber, cardTypeHandler } = useCardType();
+
+  const handleInputChange = (e) => {
+    const formattedNumber = formatCardNumber(e.target.value);
+    cardTypeHandler(formattedNumber);
+    e.target.value = formattedNumber; // Update input with formatted number
+  };
 
   return (
     <input
       type="text"
-      onChange={(e) => cardTypeHandler(e.target.value, "cardNumber1")}
-      placeholder="Enter first part of card number"
+      onChange={handleInputChange}
+      placeholder="Enter card number"
+      maxLength={cardType.maxLength}
     />
   );
 }
+
 ```
 
-## 스타일링
-
-이 훅들은 기본적인 HTML 요소와 함께 사용할 수 있으며, 필요에 따라 추가적인 스타일링을 적용할 수 있습니다. 사용법에 따라 스타일을 커스터마이즈하고, 보다 사용자 친화적인 인터페이스를 구현하세요.
-
----
-
-## Hooks 요구사항
-
-값 변경, 에러 변경, validation ,동적 렌더링
-
-- [x] useCardHolderValidation
-
-  - 카드 소유자 이름에 대한 유효성 검사 로직
-  - [x] cardHolder 는 영대문자여야 한다.
-  - [x] cardHolder 에는 공백이 2번 이상 입력되면 안된다.
-  - [x] cardHolder 에는 공백으로 시작하거나 끝나면 안된다.
-
-- [x] useCardNumberValidation
-
-  - [x] 카드 번호에는 숫자만 입력되어야 한다.
-  - [x] 카드 번호는 공백으로 시작하거나 끝나면 안된다.
-  - [x] 카드 번호는 4자리여야 한다.
-
-- [x] useCardPasswordValidation
-
-  - [x] 카드 비밀번호에는 숫자만 입력되어야 한다.
-  - [x] 카드 비밀번호는 공백으로 시작하거나 끝나면 안된다.
-  - [x] 카드 비밀번호는 2자리여야 한다.
-
-- [x] useCVCValidation
-
-  - [x] CVC에는 숫자만 입력되어야 한다.
-  - [x] CVC는 공백으로 시작하거나 끝나면 안된다.
-  - [x] CVC는 3자여야 한다.
-
-- [x] useExpiryDateValidation
-
-  - [x] 카드 만료기간에는 숫자만 입력되어야 한다.
-  - [x] 카드 만료기간는 공백으로 시작하거나 끝나면 안된다.
-  - [x] 카드 만료기간의 월 에는 1~12 사이의 값이 입력되어야 한다.
-  - [x] 카드 만료기간의 년도 에는 0~99 사이의 값이 입력되어야 한다.
-
-- [x] useCardType
-  - [x] 카드 번호가 51~55 로 시작하면 카드타입이 MasterCard 가 되어야 한다.
-  - [x] 카드 번호가 4 로 시작하면 카드타입이 Visa 가 되어야 한다.
-  - [x] 카드 번호가 위 경우가 아닐경우 카드타입이 Empty 가 되어야 한다.
