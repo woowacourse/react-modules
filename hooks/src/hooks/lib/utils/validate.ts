@@ -8,7 +8,7 @@ const validator = {
   },
 
   isEnglish: (value: string) => {
-    return /^[a-zA-Z\s]+$/.test(value);
+    return /^[a-zA-Z]+(\s[a-zA-Z]+)*\s?$/.test(value);
   },
 
   isValidLength: ({ value, matchedLength }: { value: string; matchedLength: number }) => {
