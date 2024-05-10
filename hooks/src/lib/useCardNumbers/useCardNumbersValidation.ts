@@ -3,11 +3,7 @@ import { useState } from "react";
 import cardInputValidator from "../validators/cardInputValidator";
 
 import { VALIDATION_MESSAGES } from "../constants/card-custom-hook";
-
-interface ValidResult {
-  isValid: boolean;
-  errorText: string;
-}
+import { ValidResult } from "../types/card-custom-hook";
 
 const useCardNumberValidation = () => {
   const [validationResult, setValidationResult] = useState<ValidResult>({

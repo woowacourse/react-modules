@@ -1,4 +1,4 @@
-import { CardBrand } from "../types/card-custom-hook";
+import { CardBrand, CardInputRule } from "../types/card-custom-hook";
 
 export const INPUT_RULES = {
   minMonth: 1,
@@ -32,12 +32,6 @@ export const CARD_BRAND = {
   unionPay: "unionPay",
   none: "none",
 } as const;
-
-interface CardInputRule {
-  formattingRule: number[];
-  maxLength: number;
-  errorText: string;
-}
 
 export const CARD_INPUT_RULES: Record<CardBrand, CardInputRule> = {
   visa: {

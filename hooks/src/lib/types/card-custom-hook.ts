@@ -10,3 +10,14 @@ export interface FormattedCardNumber {
   formattedResult: string[];
   totalLength: number;
 }
+
+export interface ValidResult {
+  isValid: boolean;
+  errorText: string;
+}
+
+export interface CardInputRule {
+  formattingRule: number[];
+  maxLength: number;
+  errorText: string;
+}
