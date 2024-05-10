@@ -1,10 +1,18 @@
 import { useState } from 'react';
 import { validateCardNumber } from '../validators/newCardInputValidator';
 import CardBrandService from '../domain/CardBrandService';
+import formatCardNumbers from '../utils/formatCardNumbers';
+
+interface cardNumbersInfoProps {
+  cardNumbers: string;
+  formattedCardNumber: string[];
+  errorMessage: string;
+}
 
 const useCardNumbers = () => {
-  const [cardNumbersInfo, setCardNumbersInfo] = useState({
+  const [cardNumbersInfo, setCardNumbersInfo] = useState<cardNumbersInfoProps>({
     cardNumbers: '',
+    formattedCardNumber: [],
     errorMessage: '',
   });
 
@@ -12,9 +20,19 @@ const useCardNumbers = () => {
     const cardBrand = CardBrandService(value);
     const { errorMessage, errorType } = validateCardNumber(cardBrand, value);
 
+    if (value.length === 0) {
+      setCardNumbersInfo({
+        cardNumbers: '',
+        formattedCardNumber: [],
+        errorMessage: '',
+      });
+      return;
+    }
+
     if (errorType === 'NonNumeric') {
       setCardNumbersInfo({
         cardNumbers: cardNumbersInfo.cardNumbers,
+        formattedCardNumber: cardNumbersInfo.formattedCardNumber,
         errorMessage,
       });
       return;
@@ -26,8 +44,11 @@ const useCardNumbers = () => {
 
     if (value.length > 16) return;
 
+    const formattedCardNumber = formatCardNumbers(cardBrand, value);
+
     setCardNumbersInfo({
       cardNumbers: value,
+      formattedCardNumber: formattedCardNumber,
       errorMessage: errorMessage,
     });
   };
