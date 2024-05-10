@@ -35,7 +35,9 @@ type ModalFooterType = React.FC<React.PropsWithChildren<React.HTMLAttributes<HTM
 type ModalButtonType = React.FC<React.PropsWithChildren<ModalButtonProps>>;
 type ModalCloseButtonType = React.FC<React.PropsWithChildren<ModalCloseButtonProps>>;
 type ModalCaptionType = React.FC<React.PropsWithChildren<React.HTMLAttributes<HTMLElement> & { caption: string }>>;
-type ModalInputType = React.FC<React.PropsWithChildren<ModalInputProps>>;
+// type ModalInputType = React.FC<React.PropsWithChildren<ModalInputProps>>;
+// type ModalInputType = React.ForwardRefRenderFunction<HTMLInputElement, ModalInputProps>;
+type ModalInputType = React.ForwardRefExoticComponent<ModalInputProps & React.RefAttributes<HTMLInputElement>>;
 
 const Modal: React.FC<React.PropsWithChildren<ModalProps>> & {
   ModalHeader: ModalHeaderType;

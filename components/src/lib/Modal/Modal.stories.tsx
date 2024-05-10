@@ -65,6 +65,7 @@ export const Default: Story = {
   args: {
     isOpen: true,
     position: 'center',
+    size: 'large',
   },
 };
 
@@ -79,6 +80,7 @@ export const Bottom: Story = {
   args: {
     isOpen: true,
     position: 'bottom',
+    size: 'large',
   },
 };
 
