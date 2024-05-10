@@ -1,0 +1,22 @@
+.promptModal {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.promptModalFooter {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+}
+/* .modalInputLarge {
+  width: 96%;
+}
+
+.modalInputMedium {
+  width: 95%;
+}
+
+.modalInputSmall {
+  width: 92%;
+} */
