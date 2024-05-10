@@ -1,9 +1,11 @@
-import { useCardCompany } from "../lib/hooks";
+import { useCardCompany } from "../lib";
 import { renderHook, act } from "@testing-library/react";
 
 describe("useCardCompany Test", () => {
   it("click 이벤트의 target value를 검사한다.", () => {
-    const { result } = renderHook(() => useCardCompany());
+    const { result } = renderHook(() =>
+      useCardCompany(["하나은행", "하나카드"])
+    );
 
     act(() => {
       result.current.clickCardCompany({ target: { value: "하나카드" } } as any);

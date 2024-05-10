@@ -1,5 +1,5 @@
 import { renderHook, act } from "@testing-library/react";
-import { useInput } from "../lib/hooks";
+import { useInput } from "../lib";
 
 describe("useInputTest", () => {
   it("알파벳이외의 값을 입력한 경우 에러를 반환한다.", () => {

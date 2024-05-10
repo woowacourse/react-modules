@@ -1,4 +1,4 @@
-import { useExpiryPeriod } from "../lib/hooks";
+import { useExpiryPeriod } from "../lib";
 import { renderHook, act } from "@testing-library/react";
 
 describe("useExpiryPeriod Test", () => {
@@ -18,7 +18,9 @@ describe("useExpiryPeriod Test", () => {
     const currentMonth = Number(new Date().getMonth());
 
     act(() => {
-      result.current.yearState[1](currentMonth === 0 ? String(currentYear - 1) : String(currentYear));
+      result.current.yearState[1](
+        currentMonth === 0 ? String(currentYear - 1) : String(currentYear)
+      );
       result.current.monthState[1](String(currentMonth));
     });
     expect(result.current.isError).toBe(true);
