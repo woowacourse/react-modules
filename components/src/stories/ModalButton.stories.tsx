@@ -1,8 +1,9 @@
 import React from "react";
 
-import { StoryObj } from "@storybook/react";
+import { Meta, StoryObj } from "@storybook/react";
 
 import ModalButton from "../lib/Modal/ModalButton";
+import { fn } from "@storybook/test";
 
 const meta = {
   title: "ModalButton",
@@ -20,14 +21,32 @@ const meta = {
         type: "radio",
       },
     },
+
+    size: {
+      options: ["small", "medium", "large", "xLarge"],
+      control: {
+        type: "radio",
+      },
+    },
+
+    width: {
+      options: ["full", "fit", "fixed"],
+      control: {
+        type: "radio",
+      },
+    },
   },
-};
+
+  args: {
+    onClick: fn(),
+  },
+} satisfies Meta<typeof ModalButton>;
 
 export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {
+export const Button_Story_Playground: Story = {
   parameters: {
     docs: {
       description: {
@@ -37,13 +56,20 @@ export const Default: Story = {
   },
 
   args: {
-    theme: "white",
-    children: "모달 버튼 컴포넌트",
+    children: "Button",
   },
 
   render: (args) => (
-    <div style={{ width: "200px", height: "44px" }}>
-      <ModalButton theme={args.theme}>{args.children}</ModalButton>
+    <div
+      style={{
+        width: "100vw",
+        display: "flex",
+        justifyContent: "center",
+      }}
+    >
+      <ModalButton onClick={args.onClick} {...args}>
+        {args.children}
+      </ModalButton>
     </div>
   ),
 };
