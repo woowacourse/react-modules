@@ -145,6 +145,69 @@ customValidateFieldRules (value: string) => ValidationResult; // 커스텀 필�
 - runValidationInputTypeByChange: 입력된 값의 변경을 처리하고, 유효성 검사를 수행합니다. 입력 값이 숫자가 아니거나 길이가 올바르지 않은 경우 오류 메시지를 설정합니다.
 - runValidationFieldRulesByBlur: 입력된 값의 포커스가 떠날 때, 입력 값의 길이가 올바른지 확인하고 오류 메시지를 설정합니다.
 - validationResult: 현재 입력 값의 유효성 정보를 담고 있는 객체로 isValid와 errorMessage 속성을 포함합니다.
+- getCardBrand: 사용자의 카드 번호 입력값을 파악하여 카드 브랜드를 알려줍니다. ('Diners' | 'AMEX' | 'UnionPay' | 'VISA' | 'MasterCard')
+- getInputMaxLengthByCardBrand: 카드 브랜드 별로 input의 maxLength를 받을 수 있습니다. 현재 입력한 입력대로 그에 맞는 maxLength 배열을 받게 됩니다.
+
+
+- formatting 방법
+처음에는 input을 4개를 사용하는 것을 권장하며, Diners와 AMEX의 경우 3개의 구분으로 나뉘게 됩니다.
+동적으로 input field를 렌더링해야하는데 아래와 같이 랜더링해주면 정상적으로 작동하게 됩니다.
+
+```jsx
+import React from 'react';
+import { CardNumbersReturn } from './lib';
+
+interface CardNumbersProps {
+  cardNumbersInfo: CardNumbersReturn;
+}
+
+const CardNumbers = ({ cardNumbersInfo }: CardNumbersProps) => {
+  const getErrorMessage = () => {
+    const errorDetails = Object.values(cardNumbersInfo.validationResult);
+    const firstErrorElement = errorDetails.find(value => !value.isValid);
+    return firstErrorElement ? firstErrorElement.errorMessage : '';
+  };
+
+  const indexByKey = {
+    0: 'first',
+    1: 'second',
+    2: 'third',
+    3: 'fourth',
+  };
+
+  return (
+    <>
+      <legend>cardNumbers</legend>
+      <div>
+        {Array.from({ length: cardNumbersInfo.getInputMaxLengthByCardBrand().length }).map(
+          (_, index) => (
+            <input
+              key={index}
+              type="text"
+              value={cardNumbersInfo.value[indexByKey[index]]}
+              onChange={event => {
+                cardNumbersInfo.runValidationInputTypeByChange(event, indexByKey[index]);
+              }}
+              onBlur={event => {
+                cardNumbersInfo.runValidationFieldRulesByBlur(event, indexByKey[index]);
+              }}
+              aria-invalid={!cardNumbersInfo.validationResult[indexByKey[index]].isValid}
+              maxLength={cardNumbersInfo.getInputMaxLengthByCardBrand()[index]}
+            />
+          ),
+        )}
+      </div>
+
+      <div>
+        <span>{getErrorMessage()}</span>
+        <span>{cardNumbersInfo.getCardBrand()}</span>
+      </div>
+    </>
+  );
+};
+
+export default CardNumbers;
+```
 
 
 ## useCardType
