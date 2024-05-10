@@ -2,68 +2,48 @@ import { useState } from "react";
 
 import cardInputValidator from "../validators/cardInputValidator";
 
-import { INPUT_RULES, VALIDATION_MESSAGES } from "../constants/card-custom-hook";
-import { CardNumberKeys } from "../types/card-custom-hook";
+import { VALIDATION_MESSAGES } from "../constants/card-custom-hook";
+
+interface ValidResult {
+  isValid: boolean;
+  errorText: string;
+}
 
 const useCardNumberValidation = () => {
-  const [errorState, setErrorState] = useState<Record<CardNumberKeys, boolean>>({
-    first: false,
-    second: false,
-    third: false,
-    fourth: false,
+  const [validationResult, setValidationResult] = useState<ValidResult>({
+    isValid: false,
+    errorText: "",
   });
 
-  const [errorText, setErrorText] = useState<Record<CardNumberKeys, string>>({
-    first: "",
-    second: "",
-    third: "",
-    fourth: "",
-  });
-
-  const updateErrorState = (name: CardNumberKeys, validResult: boolean) => {
-    setErrorState((prevErrorState) => {
-      return {
-        ...prevErrorState,
-        [name]: validResult,
-      };
+  const updateValidResult = (isValid: boolean, errorText: string) => {
+    setValidationResult({
+      isValid,
+      errorText,
     });
   };
 
-  const updateErrorText = (name: CardNumberKeys, errorText: string) => {
-    setErrorText((prevErrorText) => {
-      return {
-        ...prevErrorText,
-        [name]: errorText,
-      };
-    });
-  };
-
-  const validateCardNumber = (name: CardNumberKeys, value: string) => {
-    if (cardInputValidator.validateOverInputLength(value, INPUT_RULES.maxCardNumberInputLength)) return false;
+  const validateCardNumber = (value: string, maxLength: number, errorText: string) => {
+    if (cardInputValidator.validateOverInputLength(value, maxLength)) return false;
 
     if (!cardInputValidator.validateNumericInput(value)) {
-      updateErrorState(name, true);
-      updateErrorText(name, VALIDATION_MESSAGES.onlyNumbersAllowed);
+      updateValidResult(false, VALIDATION_MESSAGES.onlyNumbersAllowed);
 
       return false;
     }
 
-    if (!cardInputValidator.validateInputLength(value, INPUT_RULES.maxCardNumberInputLength)) {
-      updateErrorState(name, true);
-      updateErrorText(name, VALIDATION_MESSAGES.invalidCardNumberLength);
+    if (!cardInputValidator.validateInputLength(value, maxLength)) {
+      updateValidResult(false, errorText);
 
       return true;
     }
 
-    updateErrorState(name, false);
-    updateErrorText(name, "");
+    updateValidResult(true, "");
 
     return true;
   };
 
   return {
-    errorState,
-    errorText,
+    validationResult,
     validateCardNumber,
   };
 };
