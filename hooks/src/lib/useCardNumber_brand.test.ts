@@ -3,7 +3,7 @@ import useCardNumber from "./useCardNumber";
 import { renderHook } from "@testing-library/react-hooks";
 import { makeChangeEvent } from "./domains/makeCallback";
 
-describe("useCardBrand 테스트", () => {
+describe("useCardNumber/getCardBrand 테스트", () => {
   describe("visa", () => {
     it.each([
       ["4", "visa"],
