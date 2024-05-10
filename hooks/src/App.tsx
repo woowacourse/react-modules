@@ -5,6 +5,8 @@ function App() {
   const { onChange, errorMessage, formattedNumbers, cardBrand } =
     useMultiCardNumbers();
 
+  console.log("formattedNumbers", formattedNumbers);
+
   return (
     <>
       <input

@@ -43,7 +43,7 @@ describe("useExpiryDate 훅 테스트", () => {
     });
     const expectedErrorMessage = {
       month: ExpiryDateErrorMessages[ErrorStatus.IS_NOT_NUMBER],
-      year: null,
+      year: "",
     };
     expect(result.current.errorMessages).toEqual(expectedErrorMessage);
   });
@@ -59,7 +59,7 @@ describe("useExpiryDate 훅 테스트", () => {
 
     const expectedErrorMessage = {
       month: ExpiryDateErrorMessages[ErrorStatus.INVALID_MONTH],
-      year: null,
+      year: "",
     };
     expect(result.current.errorMessages).toEqual(expectedErrorMessage);
   });
@@ -74,7 +74,7 @@ describe("useExpiryDate 훅 테스트", () => {
     });
 
     const expectedErrorMessage = {
-      month: null,
+      month: "",
       year: ExpiryDateErrorMessages[ErrorStatus.INVALID_YEAR],
     };
 

@@ -68,30 +68,30 @@ describe("useCardBrand", () => {
   describe("DINERS 카드", () => {
     const DINERS_NUMBERS = ["36", "361", "3623"];
     test.each(DINERS_NUMBERS)(
-      "카드 번호가 36로 시작하면 DINERS를 반환한다.(%s)",
+      "카드 번호가 51-55로 시작하면 DINERS 반환한다.(%s)",
       () => {
         const { result } = renderHook(() => useCardBrands());
 
         DINERS_NUMBERS.forEach((number) => {
           React.act(() => {
             result.current.identifyBrand(number);
-            expect(result.current.cardBrand.name).toBe("DINERS");
           });
+          expect(result.current.cardBrand.name).toBe("DINERS");
         });
-        const INVALID_DINERS_NUMBERS = ["34", "35"];
-        test.each(INVALID_DINERS_NUMBERS)(
-          "카드 번호가 36으로 시작하지 않으면 DINERS를 반환하지 않는다.(%s)",
-          () => {
-            const { result } = renderHook(() => useCardBrands());
+      }
+    );
+    const INVALID_DINERS_NUMBERS = ["34", "35"];
+    test.each(INVALID_DINERS_NUMBERS)(
+      "카드 번호가 51-55로 시작하지 않으면 DINERS 반환하지 않는다.(%s)",
+      () => {
+        const { result } = renderHook(() => useCardBrands());
 
-            INVALID_DINERS_NUMBERS.forEach((number) => {
-              React.act(() => {
-                result.current.identifyBrand(number);
-                expect(result.current.cardBrand.name).not.toBe("DINERS");
-              });
-            });
-          }
-        );
+        INVALID_DINERS_NUMBERS.forEach((number) => {
+          React.act(() => {
+            result.current.identifyBrand(number);
+          });
+          expect(result.current.cardBrand.name).not.toBe("DINERS");
+        });
       }
     );
   });

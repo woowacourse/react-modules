@@ -33,11 +33,7 @@ const useCardBrands = () => {
   };
 
   const checkValueMatch = (value: string, values: number[]) => {
-    return values.some(
-      (identifier) =>
-        value.length >= String(identifier).length &&
-        value.startsWith(String(identifier))
-    );
+    return values.some((identifier) => value.startsWith(String(identifier)));
   };
 
   const checkRangeMatch = (value: string, ranges: [number, number][]) => {
