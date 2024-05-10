@@ -7,19 +7,28 @@ import type { ModalImplementationProps } from '../Modal/Modal.type';
 
 const PromptModal: React.FC<
   Pick<React.InputHTMLAttributes<HTMLInputElement>, 'value' | 'onChange'> & ModalImplementationProps & ModalProps
-> = ({ title, cancelButtonText = '확인', confirmButtonText = '취소', ...rest }) => {
+> = ({
+  cancelButtonText = '확인',
+  confirmButtonText = '취소',
+  value,
+  title,
+  onConfirm,
+  onToggle,
+  onChange,
+  ...rest
+}) => {
   return (
-    <Modal {...rest}>
+    <Modal onToggle={onToggle} {...rest}>
       <Modal.ModalHeader title={title} />
       <Modal.ModalContent style={{ ...MODAL_CUSTOM_STYLES.modalContent }}>
-        <Modal.ModalInput value={rest.value} onChange={rest.onChange} />
+        <Modal.ModalInput value={value} onChange={onChange} />
       </Modal.ModalContent>
       <Modal.ModalFooter>
         <ModalFooterContainer>
-          <Modal.ModalButton onClick={rest.onConfirm} color="secondary" style={{ ...MODAL_CUSTOM_STYLES.cancelButton }}>
+          <Modal.ModalButton onClick={onConfirm} color="secondary" style={{ ...MODAL_CUSTOM_STYLES.cancelButton }}>
             {cancelButtonText}
           </Modal.ModalButton>
-          <Modal.ModalButton onClick={rest.onToggle} color="primary" style={{ ...MODAL_CUSTOM_STYLES.confirmButton }}>
+          <Modal.ModalButton onClick={onToggle} color="primary" style={{ ...MODAL_CUSTOM_STYLES.confirmButton }}>
             {confirmButtonText}
           </Modal.ModalButton>
         </ModalFooterContainer>
