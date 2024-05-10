@@ -1,3 +1,5 @@
+import { CardBrand } from "../types/card-custom-hook";
+
 export const INPUT_RULES = {
   minMonth: 1,
   maxMonth: 12,
@@ -20,4 +22,52 @@ export const VALIDATION_MESSAGES = {
   invalidHolderName: "사용자 이름은 0 ~ 15자 사이의 영문이어야해요.",
   invalidCVCNumber: "3자리의 숫자를 입력해 주세요.",
   invalidCardPassword: "2자리 숫자를 입력해주세요.",
+};
+
+export const CARD_BRAND = {
+  visa: "visa",
+  master: "master",
+  diners: "diners",
+  amex: "amex",
+  unionPay: "unionPay",
+  none: "none",
+} as const;
+
+interface CardInputRule {
+  formattingRule: number[];
+  maxLength: number;
+  errorText: string;
+}
+
+export const CARD_INPUT_RULES: Record<CardBrand, CardInputRule> = {
+  visa: {
+    formattingRule: [4, 4, 4, 4],
+    maxLength: 16,
+    errorText: "4-4-4-4 형식의 16자리 숫자를 입력해 주세요",
+  },
+  master: {
+    formattingRule: [4, 4, 4, 4],
+    maxLength: 16,
+    errorText: "4-4-4-4 형식의 16자리 숫자를 입력해 주세요",
+  },
+  diners: {
+    formattingRule: [4, 6, 4],
+    maxLength: 14,
+    errorText: "4-6-4 형식의 14자리 숫자를 입력해 주세요",
+  },
+  amex: {
+    formattingRule: [4, 6, 5],
+    maxLength: 15,
+    errorText: "4-6-5 형식의 15자리 숫자를 입력해 주세요",
+  },
+  unionPay: {
+    formattingRule: [4, 4, 4, 4],
+    maxLength: 16,
+    errorText: "4-4-4-4 형식의 16자리 숫자를 입력해 주세요",
+  },
+  none: {
+    formattingRule: [4, 4, 4, 4],
+    maxLength: 16,
+    errorText: "4-4-4-4 형식의 16자리 숫자를 입력해 주세요",
+  },
 };
