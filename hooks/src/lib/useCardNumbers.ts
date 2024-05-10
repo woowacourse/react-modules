@@ -130,7 +130,7 @@ const useCardNumbers = (
         Number(cardNumbersToArray.join().replace(',', '').slice(0, 6)) <= 622925) ||
       (Number(cardNumbersToArray[0].slice(0, 3)) >= 624 &&
         Number(cardNumbersToArray[0].slice(0, 3)) <= 626) ||
-      (Number(cardNumbersToArray[0]) >= 6282 && Number(cardNumbersToArray[0]) <= 6286),
+      (Number(cardNumbersToArray[0]) >= 6282 && Number(cardNumbersToArray[0]) <= 6288),
     VISA: cardNumbersToArray[0].startsWith('4'),
     MasterCard:
       Number(cardNumbersToArray[0].slice(0, 2)) >= 51 &&
