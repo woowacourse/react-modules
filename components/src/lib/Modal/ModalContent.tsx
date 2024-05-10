@@ -1,46 +1,22 @@
 import styled from "styled-components";
 
-type ContainerPositionType = "top" | "bottom" | "center";
+import { MODAL_SIZE } from "../constants/modal";
+
+import { ModalSize } from "../types/modal";
 
 export interface ModalContentProps extends React.PropsWithChildren<React.HTMLAttributes<HTMLDivElement>> {
-  position?: ContainerPositionType;
+  size?: ModalSize;
 }
 
-const ModalContent = ({ position = "center", children }: ModalContentProps) => {
-  return <StyledContent $position={position}>{children}</StyledContent>;
+const ModalContent = ({ children, size = "medium" }: ModalContentProps) => {
+  return <StyledContent $size={size}>{children}</StyledContent>;
 };
 
 export default ModalContent;
 
-const POSITION_STYLES = {
-  top: `
-    top: 0;
-    width: 100%;
-    
-    border-radius: 0px 0px 10px 10px;
-    `,
-  center: `
-    width: 100%;
-    max-width: 640px;
-    
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%,-50%);
-    
-    border-radius: 8px;
-    `,
-  bottom: `
-    top: 100%;
-    transform: translateY(-100%);
-
-    width: 100%;
-  
-    border-radius: 10px 10px 0px 0px;
-    `,
-};
-
-const StyledContent = styled.div<{ $position: ContainerPositionType }>`
-  position: absolute;
+const StyledContent = styled.div<{ $size: ModalSize }>`
+  width: 100%;
+  max-width: ${({ $size }) => MODAL_SIZE[$size]};
 
   padding: 32px 24px;
   display: flex;
@@ -50,5 +26,5 @@ const StyledContent = styled.div<{ $position: ContainerPositionType }>`
   box-sizing: border-box;
 
   background-color: #ffffff;
-  ${({ $position }) => POSITION_STYLES[$position]};
+  z-index: 1;
 `;
