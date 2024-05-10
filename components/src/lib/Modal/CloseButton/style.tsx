@@ -7,6 +7,5 @@ export const CloseButton = styled.button`
 export const CloseImg = styled.img`
   width: 14px;
   height: 14px;
-
   margin: 0 10px;
 `;
