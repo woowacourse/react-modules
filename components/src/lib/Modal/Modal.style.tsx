@@ -1,6 +1,7 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import Theme from '@/style/theme';
-import { ModalPosition, Size } from '@/types/system';
+import { ModalPosition } from './modal.type';
+import { Size } from '@/types/common.type';
 
 const ModalWrapper = styled.div<{ open: boolean }>`
   position: fixed;
@@ -29,23 +30,35 @@ const ModalContainer = styled.div<{
   $size: Size;
 }>`
   position: fixed;
-  top: ${({ $position }) => $position === 'center' && '50%'};
-  bottom: ${({ $position }) => $position === 'bottom' && '0px'};
   left: 50%;
-  transform: ${({ $position }) =>
-    $position === 'center' ? 'translate(-50%, -50%)' : 'translate(-50%, 0%)'};
-  width: ${({ $size, $position }) =>
-    $position === 'center' ? sizeMap[$size] : '100%'};
+  ${({ $position, $size }) => positionMapper($position, $size)}
   min-height: 150px;
   background-color: ${Theme.background.light};
-  border-radius: ${({ $position }) =>
-    $position === 'center' ? '8px' : '8px 8px 0px 0px'};
   color: ${Theme.colors.black};
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   padding: 24px;
 `;
+
+const positionMapper = (position: ModalPosition, size: Size) => {
+  switch (position) {
+    case 'center':
+      return css({
+        top: '50%',
+        transform: 'translate(-50%, -50%)',
+        borderRadius: '8px',
+        width: sizeMap[size],
+      });
+    case 'bottom':
+      return css({
+        bottom: '0px',
+        transform: 'translate(-50%, 0%)',
+        borderRadius: '8px 8px 0px 0px',
+        width: '100%',
+      });
+  }
+};
 
 const Title = styled.span`
   font-size: ${Theme.font.size.large};
@@ -76,7 +89,7 @@ const CloseIcon = styled.button`
 `;
 
 const Content = styled.div`
-  width: 100%;
+  width: calc(100% - 24px);
   margin-bottom: 10px;
 `;
 

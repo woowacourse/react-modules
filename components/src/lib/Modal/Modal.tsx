@@ -1,5 +1,5 @@
 import S from '@/lib/Modal/Modal.style.tsx';
-import BasicButton from '@/lib/Button.tsx';
+import BasicButton from '@/lib/Button/Button';
 import {
   TitleProps,
   CloseButtonProps,
@@ -8,12 +8,12 @@ import {
   ContentsProps,
   ModalMainProps,
   PromptInputProps,
-} from '@/types/modal';
+} from '@/lib/Modal/modal.type';
 
 const ModalMain = ({
   children,
   isOpen,
-  position,
+  position = 'center',
   size = 'medium',
   onClose,
 }: ModalMainProps) => {

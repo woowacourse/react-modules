@@ -2,7 +2,7 @@ import { CARD_COMPANIES, CardCompany } from '@/data/CardCompany';
 import styled from 'styled-components';
 import Theme from '@/style/theme';
 import DeleteIcon from '@/assets/deleteIcon.svg?react';
-import Modal from '@/lib/Modal/Modal';
+import Modal from '@/lib/Modal/Modal.tsx';
 
 // CloseIconModal
 export const CloseIconModal = () => {

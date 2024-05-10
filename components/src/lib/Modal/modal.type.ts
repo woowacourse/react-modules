@@ -1,4 +1,6 @@
-import { ModalPosition, Size } from './system';
+import { Size } from '@/types/common.type';
+
+export type ModalPosition = 'center' | 'bottom';
 
 export interface ModalMainProps {
   children?: React.ReactNode;

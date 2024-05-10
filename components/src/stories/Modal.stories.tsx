@@ -1,4 +1,4 @@
-import Modal from '@/lib/Modal/Modal';
+import Modal from '@/lib/Modal/Modal.tsx';
 import type { StoryObj } from '@storybook/react';
 import {
   CardSelectModal,
