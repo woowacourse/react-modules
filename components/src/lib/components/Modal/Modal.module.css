@@ -54,7 +54,7 @@
 .modalContainer {
   padding: 24px 32px;
   border-radius: 8px;
-  background-color: #ffffff;
+  background-color: var(--grey-100);
   z-index: 999;
   scrollbar-width: none;
   -ms-overflow-style: none;

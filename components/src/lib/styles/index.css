@@ -15,6 +15,7 @@
 :root {
   --grey-100: #ffffff;
   --grey-200: rgba(139, 149, 161, 1);
+  --grey-500: rgba(0, 0, 0, 1);
   --primary: rgba(51, 51, 51, 1);
   --danger: #ff3d3d;
 }

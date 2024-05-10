@@ -8,5 +8,5 @@
   font-size: 18px;
   font-weight: 700;
   line-height: 26px;
-  color: rgba(0, 0, 0, 1);
+  color: var(--grey-500);
 }
