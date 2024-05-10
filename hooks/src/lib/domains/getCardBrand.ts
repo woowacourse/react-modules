@@ -13,10 +13,9 @@ const matchers: Record<CardBrand, (value: string) => boolean> = {
 };
 
 const getCardBrand = (value: string) => {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const matches = Object.entries(matchers).filter(([_, validate]) => validate(value));
-  if (matches && matches.length > 0) {
-    return matches[0][0] as CardBrand;
+  const matched = Object.entries(matchers).find(([, validate]) => validate(value));
+  if (matched) {
+    return matched[0] as CardBrand;
   }
   return "none";
 };

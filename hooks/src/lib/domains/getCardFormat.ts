@@ -13,19 +13,16 @@ const formatter = (value: string, pose: number[]) => {
   const prefixSum = getPrefixSum(pose);
   return value
     .split("")
-    .map((v, i) => (prefixSum.includes(i + 1) ? v + " " : v))
-    .join("")
-    .trim();
+    .map((v, i) => (prefixSum.includes(i) ? " " + v : v))
+    .join("");
 };
 
 const getPrefixSum = (pose: number[]) => {
-  const prefixSum = Array(pose.length).fill(0);
-  prefixSum[0] = pose[0];
-  for (let i = 1; i < pose.length; i++) {
-    prefixSum[i] = pose[i] + prefixSum[i - 1];
-  }
-
-  return prefixSum;
+  return pose.reduce((result, cur) => {
+    const lastNumber = result[result.length - 1] ?? 0;
+    result.push(lastNumber + cur);
+    return result;
+  }, [] as number[]);
 };
 
 const getCardFormat = (value: string, brand: CardBrand | "none") => formatter(value, cardFormats[brand]);
