@@ -53,16 +53,12 @@
   - [x] Diners (36으로 시작하는 14자리 숫자 4-6-4)
   - [x] AMEX (34, 37로 시작하는 15자리 숫자 4-6-5)
   - [x] 그 외 16자리인 경우(4-4-4-4)
+    - [x] UnionPay (622126~622925, 624~626, 6282~6288로 시작)
     - [x] MasterCard (51~55로 시작)
     - [x] Visa (4로 시작)
-    - [x] UnionPay (622126~622925, 624~626, 6282~6288로 시작)
 - [ ] 사용자 입력 시 자동으로 카드사별 규칙에 맞게 포멧팅 한다.
 
-### `useCardBrand` 커스텀 훅
-
-- [ ] useCardBrand
-
-### `useCardNumbe` 커스텀 훅
+### `useCardNumber` 커스텀 훅
 
 - [x] useCardNumber
 - [x] useCardNumberValidation
