@@ -15,7 +15,7 @@ export interface ValidateResult {
 }
 
 const ModalInputField = ({ placeholder, value, updateValue, validateOnChange, validateOnBlur }: ModalInputField) => {
-  const { isCompleted, errorMessage, onChangeHandler, onBlurHandler, onFocusHandler } = useInputValidate({ value, updateValue, validateOnChange, validateOnBlur })
+  const { errorMessage, onChangeHandler, onBlurHandler, onFocusHandler } = useInputValidate({ value, updateValue, validateOnChange, validateOnBlur })
 
   return (
     <StyledModalInputContainer>
