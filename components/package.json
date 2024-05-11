@@ -1,6 +1,6 @@
 {
   "name": "hain-tain-components",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "This is a module created for practice",
   "type": "module",
   "types": "dist/index.d.ts",
