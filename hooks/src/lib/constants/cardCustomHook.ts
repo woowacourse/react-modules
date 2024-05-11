@@ -7,12 +7,25 @@ export const INPUT_RULES = {
   maxCardHolderNameLength: 15,
   validDinersCardNumber: "36",
   validAMEXCardNumbers: ["34", "37"],
+  validUnionPayCardNumber: {
+    lengthThree: { first: 624, last: 626 },
+    lengthFour: { first: 6282, last: 6288 },
+    lengthSix: { first: 622126, last: 622925 },
+  },
+  validMasterCardNumber: { first: 51, last: 55 },
+  validVisaCardNumber: "4",
   validCardNumberLength: (value: string) => {
     if (cardInputValidator.validateDinersCardNumber(value)) return 14;
-
     if (cardInputValidator.validateAMEXCardNumber(value)) return 15;
-
     return 16;
+  },
+  validCardBrand: (value: string) => {
+    if (cardInputValidator.validateDinersCardNumber(value)) return "Diners";
+    if (cardInputValidator.validateAMEXCardNumber(value)) return "AMEX";
+    if (cardInputValidator.validateUnionPayCardNumber(value)) return "UnionPay";
+    if (cardInputValidator.validateMasterCardNumber(value)) return "MasterCard";
+    if (cardInputValidator.validateVisaCardNumber(value)) return "Visa";
+    return "";
   },
   validExpiryDateLength: 2,
   validCVCLength: 3,
