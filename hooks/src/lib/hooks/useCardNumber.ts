@@ -1,68 +1,37 @@
 import { useState } from "react";
 import { ValidationResult } from "../../type";
 import { ERROR_MESSAGE } from "../constants/errorMessage";
+import identifyCard, { CardIdentifier } from "../util/cardIdentifier";
+import cardNumberFormatter from "../util/cardNumberFormatter";
 
-type CardNumbers = {
-  first: string;
-  second: string;
-  third: string;
-  fourth: string;
-};
+export const useCardNumber = () => {
+  const [cardNumbers, setCardNumber] = useState<string>("");
+  const [isTouched, setIsTouched] = useState(false);
+  const [_, setCardIdentifier] = useState<CardIdentifier>();
 
-type TouchedState = {
-  [key in keyof CardNumbers]: boolean;
-};
+  const cardNumbersValidation = (cardNumber: string): ValidationResult => {
+    if (isTouched) {
+      // 인풋을 클릭했지만 아무런 입력이 없다면 에러 발생
+      if (cardNumber === "") {
+        return { isValid: false, errorMessage: ERROR_MESSAGE.NO_INPUT };
+      }
 
-export function useCardNumber(): [
-  CardNumbers,
-  (option: keyof CardNumbers, value: string) => void,
-  ValidationResult
-] {
-  const [cardNumbers, setCardNumbers] = useState<CardNumbers>({
-    first: "",
-    second: "",
-    third: "",
-    fourth: "",
-  });
-  const [isTouched, setIsTouched] = useState<TouchedState>({
-    first: false,
-    second: false,
-    third: false,
-    fourth: false,
-  });
-
-  function validateCardNumbers(cardNumbers: CardNumbers): ValidationResult {
-    for (const key in cardNumbers) {
-      if (isTouched[key as keyof TouchedState]) {
-        const inputValue = cardNumbers[key as keyof CardNumbers];
-        // 인풋을 클릭했지만 아무런 입력이 없다면 에러 발생
-        if (inputValue === "") {
-          return { isValid: false, errorMessage: ERROR_MESSAGE.NO_INPUT };
-        }
-
-        // 입력된 문자열이 숫자가 아니라면 에러 발생
-        if (!/^\d+$/.test(inputValue)) {
-          return { isValid: false, errorMessage: ERROR_MESSAGE.CARD__NUMBER.INVALID_NUMBERS };
-        }
-
-        // 입력된 문자열이 1부터 9999 사이의 4자리가 아니라면 에러 발생
-        if (!/^\d{4}$/.test(inputValue)) {
-          return { isValid: false, errorMessage: ERROR_MESSAGE.CARD__NUMBER.MAX_LENGTH_EXCEEDED };
-        }
+      // 입력된 문자열이 숫자가 아니라면 에러 발생
+      if (!/^[\d\s]+$/.test(cardNumber)) {
+        return { isValid: false, errorMessage: ERROR_MESSAGE.CARD__NUMBER.INVALID_NUMBERS };
       }
     }
 
-    return { isValid: true };
-  }
+    return { isValid: true, errorMessage: "" };
+  };
 
-  function handleCardNumbersChange(option: keyof CardNumbers, value: string) {
-    if (!isTouched[option])
-      setIsTouched((prev) => ({
-        ...prev,
-        [option]: true,
-      }));
-    setCardNumbers((prev) => ({ ...prev, [option]: value }));
-  }
+  const handleCardNumberChange = (value: string) => {
+    if (!isTouched) setIsTouched(true);
+    const cardBrand = identifyCard(value);
+    setCardIdentifier(cardBrand);
+    const numbersFormatted = cardNumberFormatter(value, cardBrand);
+    setCardNumber(numbersFormatted);
+  };
 
-  return [cardNumbers, handleCardNumbersChange, validateCardNumbers(cardNumbers)];
-}
+  return { cardNumbers, handleCardNumberChange, cardNumbersValidation };
+};
