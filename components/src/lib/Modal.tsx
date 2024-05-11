@@ -1,4 +1,4 @@
-import { ReactNode, MouseEvent, CSSProperties, useEffect } from "react";
+import React, { ReactNode, MouseEvent, CSSProperties, useEffect } from "react";
 import { Modal } from "../lib";
 import "./Modal.css";
 
@@ -8,28 +8,28 @@ interface ModalMainProps {
   onConfirm?: () => void;
   onCancel?: () => void;
   onSubmit?: () => void;
-  type?: "alert" | "confirm" | "prompt" | "";
-  size?: "small" | "medium" | "large" | "";
+  type?: "alert" | "confirm" | "prompt" | "default";
+  size?: "small" | "medium" | "large";
   position?: "center" | "bottom";
   className?: string;
   zIndex?: number;
   customStyle?: CSSProperties;
-  children?: string | ReactNode;
+  children?: ReactNode;
   portalRoot?: HTMLElement | null;
 }
 
-export function ModalMain({ isOpen, onClose, onConfirm, onCancel, onSubmit, type = "", size = "", position = "center", className = "", zIndex = 999, customStyle = {}, children, portalRoot = document.body }: ModalMainProps) {
-  if (!portalRoot) portalRoot = document.body;
-
+export const ModalMain = ({ isOpen, onClose, onConfirm, onCancel, onSubmit, type = "default", size = "medium", position = "center", className = "", zIndex = 999, customStyle = {}, children, portalRoot = document.body }: ModalMainProps) => {
   useEffect(() => {
-    portalRoot.style.overflow = isOpen ? "hidden" : "auto";
+    if (portalRoot) {
+      portalRoot.style.overflow = isOpen ? "hidden" : "auto";
+    }
   }, [isOpen, portalRoot]);
-
-  if (!isOpen) return null;
 
   const handleModalContainerClick = (event: MouseEvent<HTMLDivElement>) => {
     event.stopPropagation();
   };
+
+  if (!isOpen) return null;
 
   return (
     <div className="modal-container">
@@ -45,12 +45,12 @@ export function ModalMain({ isOpen, onClose, onConfirm, onCancel, onSubmit, type
         {children}
         <Modal.ButtonContainer
           type={type}
+          onClose={onClose}
           onConfirm={onConfirm}
           onCancel={onCancel}
-          onClose={onClose}
           onSubmit={onSubmit}
         />
       </div>
     </div>
   );
-}
+};

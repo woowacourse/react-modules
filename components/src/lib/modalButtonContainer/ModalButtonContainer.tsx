@@ -2,7 +2,7 @@ import { Modal } from "../../lib";
 import "./ModalButtonContainer.css";
 
 interface ModalButtonContainerProps {
-  type?: "alert" | "confirm" | "prompt" | "";
+  type?: "alert" | "confirm" | "prompt" | "default";
   onClose: () => void;
   onConfirm?: () => void;
   onCancel?: () => void;

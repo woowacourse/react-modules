@@ -43,7 +43,6 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 304px;
   max-height: 216px;
   border-radius: 8px;
 }
