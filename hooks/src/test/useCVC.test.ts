@@ -37,21 +37,3 @@ describe("useCVC 훅 테스트", () => {
     const expectedErrorMessage = CVCErrorMessages[ErrorStatus.IS_NOT_NUMBER];
     expect(result.current.errorMessage).toBe(expectedErrorMessage);
   });
-<<<<<<< HEAD
-
-  it("길이가 3글자가 아니면 에러를 낸다.", () => {
-    const { result } = renderHook(() => useCVC(""));
-    const invalidValue = "1234";
-
-    React.act(() => {
-      result.current.onChange({
-        target: { value: invalidValue },
-      } as ChangeEvent<HTMLInputElement>);
-    });
-
-    const expectedErrorMessage = CVCErrorMessages[ErrorStatus.INVALID_LENGTH];
-    expect(result.current.errorMessage).toBe(expectedErrorMessage);
-  });
-=======
->>>>>>> c04a3007662d19237170a83f917eeba4ed676674
-});

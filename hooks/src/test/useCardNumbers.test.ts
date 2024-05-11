@@ -59,7 +59,6 @@ describe("useCardNumbers 훅 테스트", () => {
     };
     expect(result.current.errorMessages).toEqual(expectedErrorMessage);
   });
-<<<<<<< HEAD
 
   it("숫자가 4자리가 아닐때 에러를 낸다.", () => {
     const { result } = renderHook(() => useCardNumbers(initialValues));
@@ -79,6 +78,4 @@ describe("useCardNumbers 훅 테스트", () => {
     };
     expect(result.current.errorMessages).toEqual(expectedErrorMessage);
   });
-=======
->>>>>>> c04a3007662d19237170a83f917eeba4ed676674
 });

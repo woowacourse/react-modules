@@ -43,27 +43,7 @@ describe("useExpiryDate 훅 테스트", () => {
     });
     const expectedErrorMessage = {
       month: ExpiryDateErrorMessages[ErrorStatus.IS_NOT_NUMBER],
-<<<<<<< HEAD
-      year: null,
-    };
-    expect(result.current.errorMessages).toEqual(expectedErrorMessage);
-  });
-
-  it("월 입력은 2글자 초과면 에러를 낸다.", () => {
-    const { result } = renderHook(() => useExpiryDate(initialValues));
-
-    React.act(() => {
-      result.current.onChange({
-        target: { value: "123", name: "month" },
-      } as ChangeEvent<HTMLInputElement>);
-    });
-
-    const expectedErrorMessage = {
-      month: ExpiryDateErrorMessages[ErrorStatus.INVALID_LENGTH],
-      year: null,
-=======
       year: "",
->>>>>>> c04a3007662d19237170a83f917eeba4ed676674
     };
     expect(result.current.errorMessages).toEqual(expectedErrorMessage);
   });
@@ -79,11 +59,7 @@ describe("useExpiryDate 훅 테스트", () => {
 
     const expectedErrorMessage = {
       month: ExpiryDateErrorMessages[ErrorStatus.INVALID_MONTH],
-<<<<<<< HEAD
-      year: null,
-=======
       year: "",
->>>>>>> c04a3007662d19237170a83f917eeba4ed676674
     };
     expect(result.current.errorMessages).toEqual(expectedErrorMessage);
   });
@@ -98,11 +74,7 @@ describe("useExpiryDate 훅 테스트", () => {
     });
 
     const expectedErrorMessage = {
-<<<<<<< HEAD
-      month: null,
-=======
       month: "",
->>>>>>> c04a3007662d19237170a83f917eeba4ed676674
       year: ExpiryDateErrorMessages[ErrorStatus.INVALID_YEAR],
     };
 
