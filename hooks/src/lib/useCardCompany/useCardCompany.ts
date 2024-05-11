@@ -34,7 +34,7 @@ const useCardCompany = (initialValue = '') => {
   const { error, validateValue } = useValidation<CardType>();
   const isValid = value !== '' && !error.state;
 
-  const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
+  const onChangeHandler = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const targetValue = e.target.value as CardType;
     const preventInputValidateResult = validateValue(targetValue, preventInputValidations);
 
@@ -44,7 +44,7 @@ const useCardCompany = (initialValue = '') => {
     setValue(targetValue);
   };
 
-  const onBlurHandler = (e: FocusEvent<HTMLInputElement>) => {
+  const onBlurHandler = (e: FocusEvent<HTMLInputElement | HTMLSelectElement>) => {
     const targetValue = e.target.value as CardType;
     validateValue(targetValue, inputValidations);
   };
