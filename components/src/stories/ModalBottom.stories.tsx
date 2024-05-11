@@ -1,6 +1,6 @@
 import { Meta, StoryObj } from '@storybook/react';
 import React, { useState } from 'react';
-import Modal from '../lib/Modal';
+import Modal from '../lib/Modal/Modal';
 import Button from '../Button';
 
 const meta = {
@@ -19,16 +19,21 @@ const meta = {
 
       const handleClose = () => {
         setIsOpen(false);
-        if (args.closeButton && args.closeButton.onClose) {
-          args.closeButton.onClose();
-        }
+        args.modalHeader.closeButton.onClose();
       };
 
       return (
         <>
           <Button onClick={() => setIsOpen(true)} />
           <div style={{ height: '100vh' }}>
-            {isOpen && <Story args={{ ...args, closeButton: { onClose: handleClose } }} />}
+            {isOpen && (
+              <Story
+                args={{
+                  ...args,
+                  modalHeader: { ...args.modalHeader, closeButton: { onClose: handleClose, display: true } },
+                }}
+              />
+            )}
           </div>
         </>
       );
@@ -42,66 +47,88 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
-    closeButton: { onClose: () => {} },
+    modalHeader: { closeButton: { onClose: () => {}, display: true } },
+    modalContent: { children: 'Children will go here' },
     modalPosition: 'bottom',
-    children: 'Children will go here',
   },
 };
 
 export const ModalWithConfirmButton: Story = {
   args: {
-    closeButton: { onClose: () => {} },
-    confirmButton: { content: '확인', onConfirm: () => {} },
+    modalHeader: { closeButton: { onClose: () => {}, display: true } },
+    modalContent: { children: 'Children will go here' },
+    modalFooter: {
+      confirmButton: {
+        content: '확인',
+        onConfirm: () => {
+          alert('확인');
+        },
+      },
+    },
     modalPosition: 'bottom',
-    children: 'Children will go here',
   },
 };
 
 export const ModalWithCancelButton: Story = {
   args: {
-    closeButton: { onClose: () => {} },
-    cancelButton: { content: '취소', onCancel: () => {} },
+    modalHeader: { closeButton: { onClose: () => {}, display: true } },
+    modalContent: { children: 'Children will go here' },
+    modalFooter: {
+      cancelButton: {
+        content: '취소',
+        onCancel: () => {
+          alert('취소');
+        },
+      },
+    },
     modalPosition: 'bottom',
-    children: 'Children will go here',
   },
 };
 
 export const ModalWithAllButton: Story = {
   args: {
-    closeButton: {
-      onClose: () => {
-        alert('닫기');
+    modalHeader: { closeButton: { onClose: () => {}, display: true } },
+    modalContent: { children: 'Children will go here' },
+    modalFooter: {
+      confirmButton: {
+        content: '확인',
+        onConfirm: () => {
+          alert('확인');
+        },
+      },
+      cancelButton: {
+        content: '취소',
+        onCancel: () => {
+          alert('취소');
+        },
       },
     },
-    confirmButton: { content: '확인', onConfirm: () => {} },
-    cancelButton: { content: '취소', onCancel: () => {} },
     modalPosition: 'bottom',
-    children: 'Children will go here',
   },
 };
 
 export const ModalWithButtonsAndTitle: Story = {
   args: {
-    title: { content: 'Test Title' },
-    subtitle: { content: 'Test Subtitle' },
-    closeButton: {
-      onClose: () => {
-        alert('닫기');
-      },
+    modalHeader: {
+      title: { content: 'Title' },
+      subtitle: { content: 'Subtitle' },
+      closeButton: { onClose: () => {}, display: true },
     },
-    confirmButton: {
-      content: '확인',
-      onConfirm: () => {
-        alert('확인');
+    modalContent: { children: 'Children will go here' },
+    modalFooter: {
+      confirmButton: {
+        content: '확인',
+        onConfirm: () => {
+          alert('확인');
+        },
       },
-    },
-    cancelButton: {
-      content: '취소',
-      onCancel: () => {
-        alert('취소');
+      cancelButton: {
+        content: '취소',
+        onCancel: () => {
+          alert('취소');
+        },
       },
     },
     modalPosition: 'bottom',
-    children: 'Children will go here',
   },
 };
