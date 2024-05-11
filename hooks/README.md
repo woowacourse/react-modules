@@ -6,7 +6,17 @@
 npm i woowacourse-todari-hooks
 ```
 
-## Usage
+## API
+
+### Top-Level Exports
+
+- `useCardCompany`
+- `useCardCVC`
+- `useCardExpiration`
+- `useCardHolderName`
+- `useCardNumbers`
+- `useCardPassword`
+- `useInputValidate`
 
 ### useCardCompany
 
@@ -170,27 +180,27 @@ import { useCardNumbers } from 'woowacourse-todari-hooks';
 const CardNumbers = () => {
   const {
     value,
+    cardBrand,
     errorMessage,
     onChangeHandler,
     onBlurHandler,
     onFocusHandler,
-  } = useCardNumbers(['', '', '', '']);
+  } = useCardNumbers('');
 
   return (
     <>
-      {[...Array(4)].map((_, index) => (
-        <input
-          value={value[index]}
-          onChange={(e) => onChangeHandler(e, index)}
-          onBlur={() => onBlurHandler(index)}
-          onFocus={() => onFocusHandler(index)}
-          onKeyDown={(e) => {
-            if (e.key === 'Escape' || e.key === 'Enter') {
-              e.currentTarget.blur();
-            }
-          }}
-        />
-      ))}
+      <input
+        value={value}
+        onChange={onChangeHandler}
+        onBlur={onBlurHandler}
+        onFocus={onFocusHandler}
+        onKeyDown={(e) => {
+          if (e.key === 'Escape' || e.key === 'Enter') {
+            e.currentTarget.blur();
+          }
+        }}
+      />
+      <p>brand : {cardBrand}</p>
       <p style={{ color: 'red' }}>{errorMessage}</p>
     </>
   );
@@ -235,16 +245,3 @@ const CardPassword = () => {
 
 export default CardPassword;
 ```
-
-## API
-
-### Top-Level Exports
-
-- `useCardCompany`
-- `useCardCVC`
-- `useCardExpiration`
-- `useCardHolderName`
-- `useCardNumbers`
-- `useCardPassword`
-- `useInputArrayValidate`
-- `useInputValidate`
