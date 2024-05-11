@@ -1,43 +1,121 @@
 import { renderHook } from "@testing-library/react";
-import useCardType from "../validation/useCardType";
 import { act } from "react";
 
-describe("카드 타입 훅 테스트", () => {
-  it("카드 번호 첫 글자가 4로 시작할 때 cardType 이 visa 가 된다.", async () => {
-    const cardNumberValue = "4444";
-    const cardNumberName = "cardNumber1";
+describe("useCardTypeValidation", () => {
+  describe("Visa 카드", () => {
+    it("카드 번호가 4로 시작하면 'visa'를 반환한다", async () => {
+      const cardNumberValue = "4444";
 
-    const { result } = renderHook(() => useCardType());
+      const { result } = renderHook(() => useCardTypeValidation());
 
-    act(() => {
-      result.current.cardTypeHandler(cardNumberValue, cardNumberName);
+      act(() => {
+        result.current.handleCardType(cardNumberValue);
+      });
+
+      expect(result.current.cardType).toBe("VISA");
     });
-
-    expect(result.current.cardType).toBe("Visa");
   });
 
-  it("카드 번호 앞의 두 글자가 51~55 로 시작할 때 cardType 이 MasterCard 가 된다.", async () => {
-    const cardNumberValue = "5526";
-    const cardNumberName = "cardNumber1";
-    const { result } = renderHook(() => useCardType());
+  describe("Master 카드", () => {
+    test.each([
+      "5111111111111111",
+      "5211111111111111",
+      "5311111111111111",
+      "5411111111111111",
+      "5511111111111111",
+    ])(
+      '카드 번호가 51 ~ 55로 시작하면 "MASTER"를 반환한다',
+      (cardNumberValue) => {
+        const { result } = renderHook(() => useCardTypeValidation());
 
-    act(() => {
-      result.current.cardTypeHandler(cardNumberValue, cardNumberName);
-    });
+        act(() => {
+          result.current.handleCardType(cardNumberValue);
+        });
 
-    expect(result.current.cardType).toBe("MasterCard");
+        expect(result.current.cardType).toBe("MASTER");
+      }
+    );
   });
 
-  it("카드 번호 입력 시 첫 글자에 4 이외의 숫자가 오고, 앞 두글자가 51~55 에 포함되지 않을 경우 cardType 이 Empty 가 된다. ", async () => {
-    const cardNumberValue = "6123";
-    const cardNumberName = "cardNumber1";
+  describe("Diners 카드", () => {
+    it("카드 번호가 36로 시작하면 'DINERS'를 반환한다", async () => {
+      const cardNumberValue = "3636";
 
-    const { result } = renderHook(() => useCardType());
+      const { result } = renderHook(() => useCardTypeValidation());
+
+      act(() => {
+        result.current.handleCardType(cardNumberValue);
+      });
+
+      expect(result.current.cardType).toBe("DINERS");
+    });
+  });
+
+  describe("Amex 카드", () => {
+    test.each(["3411111111111", "3711111111111"])(
+      '카드 번호가 34, 37로 시작하면 "AMEX"를 반환한다',
+      (cardNumberValue) => {
+        const { result } = renderHook(() => useCardTypeValidation());
+
+        act(() => {
+          result.current.handleCardType(cardNumberValue);
+        });
+
+        expect(result.current.cardType).toBe("AMEX");
+      }
+    );
+  });
+
+  describe("Union Pay 카드", () => {
+    test.each(["62212611111111", "62212711111111", "6229251111111"])(
+      '카드 번호가 622126 ~ 622925로 시작하면 "UNION_PAY"를 반환한다',
+      (cardNumberValue) => {
+        const { result } = renderHook(() => useCardTypeValidation());
+
+        act(() => {
+          result.current.handleCardType(cardNumberValue);
+        });
+
+        expect(result.current.cardType).toBe("UNION_PAY");
+      }
+    );
+
+    test.each(["62411111111111", "62511111111111", "6261111111111"])(
+      '카드 번호가 624 ~ 626 으로 시작하면 "UNION_PAY"를 반환한다',
+      (cardNumberValue) => {
+        const { result } = renderHook(() => useCardTypeValidation());
+
+        act(() => {
+          result.current.handleCardType(cardNumberValue);
+        });
+
+        expect(result.current.cardType).toBe("UNION_PAY");
+      }
+    );
+
+    test.each(["62821111111111", "6283111111111", "6288111111111"])(
+      '카드 번호가 6282 ~ 6288 으로 시작하면 "UNION_PAY"를 반환한다',
+      (cardNumberValue) => {
+        const { result } = renderHook(() => useCardTypeValidation());
+
+        act(() => {
+          result.current.handleCardType(cardNumberValue);
+        });
+
+        expect(result.current.cardType).toBe("UNION_PAY");
+      }
+    );
+  });
+
+  it("그 이외의 숫자가 올 시 'EMPTY' 를 반환한다. ", async () => {
+    const cardNumberValue = "111111111111";
+
+    const { result } = renderHook(() => useCardTypeValidation());
 
     act(() => {
-      result.current.cardTypeHandler(cardNumberValue, cardNumberName);
+      result.current.handleCardType(cardNumberValue);
     });
 
-    expect(result.current.cardType).toBe("Empty");
+    expect(result.current.cardType).toBe("EMPTY");
   });
 });
