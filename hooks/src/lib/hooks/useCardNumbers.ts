@@ -1,36 +1,38 @@
 import { useState } from "react";
+import useCardBrand from "./useCardBrand";
 
-import { INPUT_REGEX } from "../constants/regex";
+import { CARD_BRANDS_INFO } from "../constants/cardBrands";
 import { ERROR_MESSAGES } from "../constants/messages";
+import { INPUT_REGEX } from "../constants/regex";
 
-function useCardNumbers(maxLength: number, inputCount = 1) {
-  const [cardNumbers, setCardNumbers] = useState(Array(inputCount).fill(""));
-  const [cardNumberErrors, setCardNumberErrors] = useState(
-    Array(inputCount).fill(false)
-  );
+function useCardNumbers() {
+  const { cardBrand, handleCardBrandChange } = useCardBrand();
 
-  const handleCardNumbersChange = (value: string, inputIndex: number) => {
-    const isValidNumber = INPUT_REGEX.cardNumber(maxLength).test(value);
+  const [cardNumbers, setCardNumbers] = useState("");
+  const [cardNumbersError, setCardNumbersError] = useState(false);
 
-    const updatedErrors = [...cardNumberErrors];
-    updatedErrors[inputIndex] = !isValidNumber;
-    setCardNumberErrors(updatedErrors);
+  const handleCardNumbersChange = (value: string) => {
+    handleCardBrandChange(value);
 
-    const updatedNumbers = [...cardNumbers];
-    updatedNumbers[inputIndex] = value;
-    setCardNumbers(updatedNumbers);
+    const isValidNumber = INPUT_REGEX.cardNumber(
+      CARD_BRANDS_INFO[cardBrand].maxLength
+    ).test(value);
+    setCardNumbersError(!isValidNumber);
+
+    setCardNumbers(value);
   };
 
-  const getCardNumbersErrorMessage = () => {
-    return cardNumberErrors.some((isError) => isError)
-      ? `${maxLength}${ERROR_MESSAGES.maxLengthNumber}`
+  const getCardNumberErrorMessage = () => {
+    return cardNumbersError
+      ? `${CARD_BRANDS_INFO[cardBrand].maxLength}${ERROR_MESSAGES.maxLengthNumber}`
       : undefined;
   };
 
   return {
     cardNumbers,
-    cardNumberErrors,
-    getCardNumbersErrorMessage,
+    cardNumbersError,
+    getCardNumberErrorMessage,
+    cardBrand,
     handleCardNumbersChange,
   };
 }
