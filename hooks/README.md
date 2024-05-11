@@ -107,23 +107,23 @@ import { useCardNumbers } from "woowacourse-card-custom-hook";
 function App() {
   const {
     cardNumbers,
-    cardNumberErrors,
+    formattedCardNumbers,
+    cardNumberMaxLength,
+    cardBrand,
+    cardNumberError,
     getCardNumbersErrorMessage,
     handleCardNumbersChange,
-  } = useCardNumbers(4, 4);
+  } = useCardNumbers();
 
   return (
     <>
-      {cardNumbers.map((cardNumber, index) => {
-        return (
-          <input
-            key={index}
-            value={cardNumber}
-            onChange={(e) => handleCardNumbersChange(e.target.value, index)}
-          />
-        );
-      })}
-      <div>{getCardNumbersErrorMessage()}</div>
+      <input onChange={(e) => handleCardNumbersChange(e.target.value)} />
+      <div>Card Numbers : {cardNumbers}</div>
+      <div>Formatted : {formattedCardNumbers}</div>
+      <div>Card Brand : {cardBrand}</div>
+      <div>Error : {cardNumberError.toString()}</div>
+      <div>Error Message : {errorMessage}</div>
+      <div>Max Length : {cardNumberMaxLength}</div>
     </>
   );
 }
@@ -131,14 +131,17 @@ function App() {
 
 ### API
 
-|                            | Type           | Description                                                                                                                                                                                                                         |
-| -------------------------- | -------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| cardNumbers                | Array<string>  | An array of strings representing the card numbers entered by the user. Initially filled with empty strings for each card number input field.                                                                                        |
-| cardNumberErrors           | Array<boolean> | An array of boolean flags indicating the validity of each card number input. Initially set to false, indicating no error.                                                                                                           |
-| getCardNumbersErrorMessage | function       | A function that checks if there are any errors in the card number inputs and returns the appropriate error message if any errors are found; otherwise, it returns undefined.                                                        |
-| handleCardNumbersChange    | function       | A function that must be called whenever the user changes the value in any card number input field. It takes value (the new string value of the input) and inputIndex (the index of the input field that was changed) as parameters. |
+|                            | Type     | Description                                                                                                                                                                                                                                                                                                  |
+| -------------------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| cardNumbers                | string   | A string representing the current value of the card number input field. Initially, it is an empty string.                                                                                                                                                                                                    |
+| formattedCardNumbers       | string   | A string that holds the formatted card number based on the card brand. The formatting divides the card number into different parts (first, second, third, and possibly last), separated by spaces. For Diners and Amex cards, the formatting is different compared to other card brands.                     |
+| cardNumberMaxLength        | integer  | An integer that represents the maximum length of the card number. It varies depending on the detected card brand (16 for Visa, MasterCard, and UnionPay; 14 for Diners; 15 for Amex).                                                                                                                        |
+| cardBrand                  | string   | A string that indicates the detected card brand based on the card number's prefix. It can be "domestic", "visa", "masterCard", "diners", "amex", or "unionPay".                                                                                                                                              |
+| cardNumberError            | boolean  | A boolean that indicates whether there is an error in the card number input. Initially, it is set to false. The error status is updated based on the validity of the card number against a regular expression determined by cardNumberMaxLength.                                                             |
+| getCardNumbersErrorMessage | function | A function that checks if there is an error in the card number input and returns the appropriate error message if any errors are found. If there are no errors, it returns null. The error message is determined by MAX_LENGTH_ERROR_MESSAGE, which likely generates a message based on cardNumberMaxLength. |
+| handleCardNumbersChange    | function | A function that must be called whenever the user changes the value in the card number input field. |
 
-### useCVCNumber
+### useCVCNumber hook
 
 ```tsx
 // useCVCNumber
