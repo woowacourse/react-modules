@@ -5,7 +5,7 @@ import cardInputValidator from "../validators/cardInputValidator";
 import { INPUT_RULES, VALIDATION_MESSAGES } from "../constants/cardCustomHook";
 
 const useExpiryMonthValidation = () => {
-  const [errorState, setErrorState] = useState<boolean>(false);
+  const [errorState, setErrorState] = useState(false);
 
   const [errorText, setErrorText] = useState("");
 

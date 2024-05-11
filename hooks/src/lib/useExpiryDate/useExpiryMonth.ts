@@ -3,7 +3,7 @@ import { useState } from "react";
 import useExpiryMonthValidation from "./useExpiryMonthValidation";
 
 const useExpiryMonth = () => {
-  const [expiryMonth, setExpiryMonth] = useState<string>("");
+  const [expiryMonth, setExpiryMonth] = useState("");
 
   const { errorState, setErrorState, errorText, validateExpiryMonth } =
     useExpiryMonthValidation();

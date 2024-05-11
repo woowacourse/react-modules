@@ -3,7 +3,7 @@ import { useState } from "react";
 import useCardNumberValidation from "./useCardNumberValidation";
 
 const useCardNumber = () => {
-  const [cardNumber, setCardNumber] = useState<string>("");
+  const [cardNumber, setCardNumber] = useState("");
 
   const { errorState, errorText, validateCardNumber } =
     useCardNumberValidation();

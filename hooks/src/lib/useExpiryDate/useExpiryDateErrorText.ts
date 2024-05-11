@@ -11,7 +11,7 @@ const useCardNumberErrorText = ({
   yearErrorText,
   expiredDateErrorText,
 }: UseExpiryDateErrorTextProps) => {
-  const [errorText, setErrorText] = useState<string>("");
+  const [errorText, setErrorText] = useState("");
 
   useEffect(() => {
     setErrorText(monthErrorText);

@@ -5,7 +5,7 @@ import cardInputValidator from "../validators/cardInputValidator";
 import { VALIDATION_MESSAGES } from "../constants/cardCustomHook";
 
 const useCardNumberValidation = () => {
-  const [errorState, setErrorState] = useState<boolean>(false);
+  const [errorState, setErrorState] = useState(false);
 
   const [errorText, setErrorText] = useState("");
 
