@@ -1,6 +1,6 @@
 import { renderHook, act } from '@testing-library/react';
 import { ChangeEvent } from 'react';
-import useCardUserName from '../lib/useCardUserName';
+import useCardUserName from '../useCardUserName';
 
 describe('useCardUserName 커스텀 훅 테스트', () => {
   const cardUserNameLength = 21;

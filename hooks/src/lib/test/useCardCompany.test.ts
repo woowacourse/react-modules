@@ -1,6 +1,6 @@
 import { ChangeEvent } from 'react';
 import { renderHook, act } from '@testing-library/react';
-import useCardCompany from '../lib/useCardCompany';
+import useCardCompany from '../useCardCompany';
 
 describe('useCardCompany 커스텀 훅 테스트', () => {
   const defaultValue = '카드사를 선택해주세요.';

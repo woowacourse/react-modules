@@ -1,5 +1,5 @@
 import { useState, ChangeEvent } from 'react';
-import { validateUserName } from '../validators/newCardInputValidator';
+import { validateUserName } from './validators/newCardInputValidator';
 
 const useCardUserName = (cardUserNameLength: number) => {
   const [cardUserNameInfo, setCardUserNameInfo] = useState({

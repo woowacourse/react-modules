@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import { validateCardNumber } from '../validators/newCardInputValidator';
-import CardBrandService from '../domain/CardBrandService';
-import formatCardNumbers from '../utils/formatCardNumbers';
-import { CARD_TYPES } from '../constants/card';
+import { validateCardNumber } from './validators/newCardInputValidator';
+import CardBrandService from './domain/CardBrandService';
+import formatCardNumbers from './utils/formatCardNumbers';
+import { CARD_TYPES } from './constants/card';
 
 interface cardNumbersInfoProps {
   cardNumbers: string;

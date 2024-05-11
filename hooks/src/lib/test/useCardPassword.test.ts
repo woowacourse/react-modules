@@ -1,6 +1,6 @@
 import { renderHook, act } from '@testing-library/react';
 import { ChangeEvent } from 'react';
-import useCardPassword from '../lib/useCardPassword';
+import useCardPassword from '../useCardPassword';
 
 describe('useCardPassword 커스텀 훅 테스트', () => {
   const passwordLength = 2;

@@ -1,6 +1,6 @@
 import { renderHook, act } from '@testing-library/react';
 import { ChangeEvent } from 'react';
-import useCardExpiration from '../lib/useCardExpiration';
+import useCardExpiration from '../useCardExpiration';
 
 describe('useCardExpiration 커스텀 훅 테스트', () => {
   it('월 입력에 따라 월 상태가 올바르게 업데이트되는지 확인한다.', () => {

@@ -1,5 +1,5 @@
 import { renderHook, act } from '@testing-library/react';
-import useCardNumbers from '../lib/useCardNumbers';
+import useCardNumbers from '../useCardNumbers';
 import { CARD_TYPES, ERROR_MESSAGES } from '../constants/card';
 
 describe('useCardNumbers 커스텀 훅 테스트', () => {

@@ -1,6 +1,6 @@
 import { ChangeEvent } from 'react';
 import { renderHook, act } from '@testing-library/react';
-import useCardCVC from '../lib/useCardCVC';
+import useCardCVC from '../useCardCVC';
 
 describe('useCardNumbers 커스텀 훅 테스트', () => {
   const cardCVCLength = 3;
