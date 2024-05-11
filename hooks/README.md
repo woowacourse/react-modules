@@ -100,29 +100,35 @@ const CardExpirationComponent = () => {
 
 ### 카드 번호 (useCardNumbers)
 
-카드 번호 입력의 상태와 유효성 검사를 관리합니다.
+카드 번호 입력의 상태와 유효성 검사를 관리합니다. 이 훅은 카드 번호 입력에 대한 정보와 함께, 입력값의 변화를 처리하고, 카드 브랜드를 식별하며, 유효성 검사를 수행합니다.
 
 ```ts
 import { useCardNumbers } from '@roqkftjs/react-payments-custom-hooks';
 
 const CardNumbersComponent = () => {
-  const { cardNumbersInfo, handleCardNumbers } = useCardNumbers(16);
+  const { cardNumbersInfo, handleCardNumbers } = useCardNumbers();
+
+  const onChange = (event) => {
+    handleCardNumbers(event.target.value);
+  };
 
   return (
-    <input type="text" onChange={handleCardNumbers} />
-    {cardNumbersInfo.errorMessage && <p>{cardNumbersInfo.errorMessage}</p>}
+    <div>
+      <input type='text' onChange={onChange} />
+      {cardNumbersInfo.cardBrand && <p>{cardNumbersInfo.cardBrand}</p>}
+      {cardNumbersInfo.formattedCardNumber && (
+        <p>{cardNumbersInfo.formattedCardNumber.join(' ')}</p>
+      )}
+      {cardNumbersInfo.errorMessage && <p>{cardNumbersInfo.errorMessage}</p>}
+    </div>
   );
 };
 ```
 
-#### 매개 변수
-
-- cardNumbersLength (number): 카드 번호의 최대 길이를 설정합니다.
-
 #### 반환 값
 
-- cardNumbersInfo (object): 카드 번호 입력 상태를 나타내는 객체입니다. cardNumbers (string)과 errorMessage (string) 필드를 포함합니다.
-- handleCardNumbers (function): 입력 요소의 onChange 이벤트에 바인딩할 핸들러 함수입니다. 이 함수는 입력값의 상태를 업데이트하고 유효성 검사를 수행합니다.
+- cardNumbersInfo (object): 카드 번호 입력 상태를 나타내는 객체입니다. cardNumbers (string), cardBrand (string), formattedCardNumber (string[]), errorMessage (string) 필드를 포함합니다.
+- handleCardNumbers (function): 입력 요소의 onChange 이벤트에 바인딩할 핸들러 함수입니다. 이 함수는 입력값의 상태를 업데이트하고, 카드 브랜드를 식별하며, 유효성 검사를 수행하고, 카드 번호를 형식화합니다.
 
 ### 카드 비밀번호 (useCardPassword)
 
