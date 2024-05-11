@@ -1,6 +1,6 @@
 {
   "name": "@jaymyong66/simple-modal",
-  "version": "0.0.2",
+  "version": "0.0.4",
   "description": "Displays a dialog with a custom content that requires attention or provides additional information.",
   "type": "module",
   "types": "dist/lib/index.d.ts",
@@ -19,7 +19,7 @@
     "chromatic": "npx chromatic --project-token=chpt_e5e0efa0eeae0d7"
   },
   "dependencies": {
-    "@jaymyong66/simple-modal": "^0.0.2",
+    "@jaymyong66/simple-modal": "^0.0.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
@@ -50,5 +50,17 @@
     "typescript": "^5.2.2",
     "vite": "^5.2.0",
     "vite-plugin-dts": "^3.9.0"
+  },
+  "keywords": [
+    "React",
+    "React-component",
+    "modal",
+    "modal-component"
+  ],
+  "license": "MIT",
+  "author": {
+    "name": "JAEWI MYONG",
+    "email": "mjw8941@gmail.com",
+    "url": "https://github.com/JayMyong66"
   }
 }
