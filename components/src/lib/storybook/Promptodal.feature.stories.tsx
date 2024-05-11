@@ -57,7 +57,7 @@ export const Bottom = ({ ...args }) => {
   const [isOpened, setIsOpened] = useState(false);
   return (<>
     <Button text='show modal' onClick={() => setIsOpened(true)} />
-    <PromptModal {...args} modalPosition='center' title="title" description='description' isOpened={isOpened} onClose={() => setIsOpened(false)} onConfirm={() => alert('confirm')} />
+    <PromptModal {...args} modalPosition='bottom' title="title" description='description' isOpened={isOpened} onClose={() => setIsOpened(false)} onConfirm={() => alert('confirm')} />
   </>)
 }
 
