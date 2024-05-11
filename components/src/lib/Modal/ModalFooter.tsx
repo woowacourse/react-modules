@@ -1,8 +1,9 @@
 import * as Styled from './Modal.styled';
 
-import { ButtonJustifyContent, ButtonPosition, ButtonProps } from './Modal';
+import { ButtonJustifyContent, ButtonPosition } from './Modal';
 
 import { Button } from '..';
+import { ButtonProps } from '../Button/Button';
 
 export interface ModalFooterProps {
   closeModal: () => void;
