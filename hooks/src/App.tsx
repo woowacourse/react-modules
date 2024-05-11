@@ -1,5 +1,7 @@
 import React from 'react';
 import { useCardNumber, useCVCNumber, useExpiration, useCardPassword, useOwnerName } from '@jaymyong66/payments-hooks';
+import { formattingValue } from './lib/useCardNumber/useCardNumber.util';
+
 function App() {
   const { cvcNumber, cvcError, handleChangeCVCNumber } = useCVCNumber();
   const { cardNumbers, cardNumberError, handleChangeCardNumber } = useCardNumber();
@@ -22,10 +24,7 @@ function App() {
       <input value={expiration.year} onChange={(e) => handleChangeExpiration('year', e.target.value)} />
       <div>{expirationError.errorMessage}</div>
       <h1>Card Numbers</h1>
-      <input value={cardNumbers[0]} onChange={(e) => handleChangeCardNumber(0, e.target.value)} />
-      <input value={cardNumbers[1]} onChange={(e) => handleChangeCardNumber(1, e.target.value)} />
-      <input value={cardNumbers[2]} onChange={(e) => handleChangeCardNumber(2, e.target.value)} />
-      <input value={cardNumbers[3]} onChange={(e) => handleChangeCardNumber(3, e.target.value)} />
+      <input value={formattingValue(cardNumbers)} onChange={(e) => handleChangeCardNumber(e.target.value)} />
       <div>{cardNumberError.errorMessage}</div>
     </>
   );
