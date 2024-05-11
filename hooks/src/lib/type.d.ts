@@ -9,7 +9,7 @@ export interface Range<CompareType = string> {
   to: CompareType;
 }
 
-export interface CardBrand<CardNameType = string> {
+export interface CardBrandRule<CardNameType = string> {
   name: CardNameType;
   numberLength: number;
   startWiths: (string | Range)[];
