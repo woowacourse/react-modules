@@ -19,6 +19,7 @@ npm install fe-card-validation-hooks
 
 - 입력한 카드 번호에 맞는 카드 브랜드를 반환합니다.
 - 카드 브랜드에 맞는 카드 번호 자릿수를 제한합니다.
+- 숫자 이외의 입력을 차단합니다.
 - 카드 브랜드마다 다른 포맷팅 규칙을 적용해서 배열 형태로 반환합니다. `join`을 통해 사용하세요.
 
 `return { cardNumberInfo, handleCardNumberChange }`
@@ -52,7 +53,6 @@ const { cardNumberInfo, handleCardNumberChange } = useCardNumber();
 
 반환 에러 문자열:
 
-- cardNumber가 숫자가 아닌 경우: `숫자를 입력해주세요.`
 - cardNumber의 길이가 해당 카드 브랜드의 길이가 아닌 경우: `{해당 카드 브랜드 자릿수}자리 숫자를 입력해주세요.`
 
 ### useExpiryDateValidation
