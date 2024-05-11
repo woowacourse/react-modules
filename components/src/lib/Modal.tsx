@@ -1,6 +1,7 @@
-import React, { ReactNode, MouseEvent, CSSProperties, useEffect } from "react";
+import { ReactNode, MouseEvent, CSSProperties, useEffect } from "react";
 import { Modal } from "../lib";
 import "./Modal.css";
+import { Size, Type, Position } from "./type/modalType";
 
 interface ModalMainProps {
   isOpen: boolean;
@@ -8,9 +9,9 @@ interface ModalMainProps {
   onConfirm?: () => void;
   onCancel?: () => void;
   onSubmit?: () => void;
-  type?: "alert" | "confirm" | "prompt" | "default";
-  size?: "small" | "medium" | "large";
-  position?: "center" | "bottom";
+  type?: Type;
+  size?: Size;
+  position?: Position;
   className?: string;
   zIndex?: number;
   customStyle?: CSSProperties;

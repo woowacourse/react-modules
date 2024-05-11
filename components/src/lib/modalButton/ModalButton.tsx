@@ -1,10 +1,11 @@
 import { ReactNode, CSSProperties } from "react";
 import "./ModalButton.css";
+import { ButtonSize, ButtonVariant } from "../type/modalType";
 
 interface ModalButtonProps {
   onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
-  variant?: "primary" | "secondary";
-  size?: "small" | "large";
+  variant?: ButtonVariant;
+  size?: ButtonSize;
   children?: ReactNode;
   className?: string;
   customStyle?: CSSProperties;

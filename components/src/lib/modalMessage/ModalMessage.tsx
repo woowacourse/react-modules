@@ -4,12 +4,13 @@ import "./ModalMessage.css";
 interface ModalMessageProps {
   children?: ReactNode;
   customStyle?: CSSProperties;
+  className?: string;
 }
 
-const ModalMessage = ({ children, customStyle = {} }: ModalMessageProps) => {
+const ModalMessage = ({ children, customStyle = {}, className = "" }: ModalMessageProps) => {
   return (
     <div
-      className="modal-message"
+      className={`modal-message ${className}`}
       style={customStyle}
     >
       {children}
