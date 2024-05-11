@@ -140,6 +140,52 @@ const DefaultConfirmModal: StoryObj<typeof meta.args> = (args) => {
   );
 };
 
+const DefaultPromptModal: StoryObj<typeof meta.args> = (args) => {
+  const { isModalOpen, openModal, closeModal } = useModal();
+
+  return (
+    <>
+      <button onClick={openModal}>모달 열기</button>
+      {isModalOpen && (
+        <Modal
+          $size={args.$size}
+          $position={args.$position}
+          onCloseModal={closeModal}
+        >
+          <Modal.Header
+            title={args.title}
+            closeIcon={args.closeIcon}
+            onCloseModal={closeModal}
+          ></Modal.Header>
+          <Modal.Content message={args.message}>
+            <Input
+              onChange={(event) => action('inputChange')(event.target.value)}
+            />
+          </Modal.Content>
+          <Modal.Footer>
+            <Modal.Button
+              type="button"
+              $size="small"
+              $backgroundColor={args.$backgroundColor}
+              $color={args.$color}
+              onButtonClick={closeModal}
+            >
+              취소
+            </Modal.Button>
+            <Modal.Button
+              type="button"
+              $size="small"
+              onButtonClick={closeModal}
+            >
+              확인
+            </Modal.Button>
+          </Modal.Footer>
+        </Modal>
+      )}
+    </>
+  );
+};
+
 export const SmallModal = DefaultModal.bind({});
 SmallModal.args = {
   title: '작은 모달',
@@ -206,6 +252,18 @@ export const ConfirmModal = DefaultConfirmModal.bind({});
 ConfirmModal.args = {
   title: '확인/취소(Confirm) 모달',
   message: '사용자에게 선택지를 제공하고 확인 및 취소 버튼을 제공',
+  closeIcon: false,
+  $size: 'medium',
+  $position: 'center',
+  $backgroundColor: '#FFFFFF',
+  $color: '#000000',
+};
+
+export const PromptModal = DefaultPromptModal.bind({});
+PromptModal.args = {
+  title: '입력(Prompt) 모달',
+  message:
+    '사용자로부터 입력값을 받을 수 있는 입력 필드와 확인/취소 버튼을 제공',
   closeIcon: false,
   $size: 'medium',
   $position: 'center',
