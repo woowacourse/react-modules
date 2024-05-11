@@ -23,7 +23,11 @@ const AlertModal: React.FC<AlertModalProps> = ({
         <span>{message}</span>
       </Modal.Content>
       <Modal.Footer buttonPosition='right'>
-        <Modal.TextButton actionFn={onClose} buttonSize='50px'>
+        <Modal.TextButton
+          actionFn={onClose}
+          buttonWidth='80px'
+          buttonHeight='36px'
+        >
           확인
         </Modal.TextButton>
       </Modal.Footer>

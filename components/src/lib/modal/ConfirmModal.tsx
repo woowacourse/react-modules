@@ -23,13 +23,18 @@ const ConfirmModal: React.FC<ConfirmModalProps> = ({
       <Modal.Footer buttonPosition='right' buttonGap='10px'>
         <Modal.TextButton
           actionFn={onClose}
-          buttonSize='50px'
+          buttonWidth='80px'
+          buttonHeight='36px'
           backgroundColor='#ffffff'
           fontColor='#333333'
         >
           취소
         </Modal.TextButton>
-        <Modal.TextButton actionFn={onClose} buttonSize='50px'>
+        <Modal.TextButton
+          actionFn={onClose}
+          buttonWidth='80px'
+          buttonHeight='36px'
+        >
           확인
         </Modal.TextButton>
       </Modal.Footer>

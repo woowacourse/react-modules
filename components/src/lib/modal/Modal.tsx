@@ -90,7 +90,8 @@ type ModalTextButtonType = React.FC<
   React.PropsWithChildren<
     {
       actionFn: () => void;
-      buttonSize?: string;
+      buttonWidth?: string;
+      buttonHeight?: string;
       fontSize?: string;
       backgroundColor?: string;
       fontColor?: string;
@@ -101,7 +102,8 @@ type ModalTextButtonType = React.FC<
 const ModalTextButton: ModalTextButtonType = ({
   actionFn,
   type = 'button',
-  buttonSize,
+  buttonWidth,
+  buttonHeight,
   fontSize,
   backgroundColor,
   fontColor,
@@ -111,7 +113,8 @@ const ModalTextButton: ModalTextButtonType = ({
     <Styled.ModalTextButton
       type={type}
       onClick={actionFn}
-      buttonSize={buttonSize}
+      buttonWidth={buttonWidth}
+      buttonHeight={buttonHeight}
       fontSize={fontSize}
       backgroundColor={backgroundColor}
       fontColor={fontColor}

@@ -18,10 +18,12 @@ export const ModalContentWrapper = styled.div<
   gap: 16px;
   position: fixed;
   height: fit-content;
+  min-height: 10%;
   left: 50%;
   transform: translateX(-50%);
   margin: 0;
   padding: 24px 32px 24px 32px;
+  border-radius: 8px;
   background-color: white;
   box-sizing: border-box;
   border: none;
@@ -103,14 +105,19 @@ export const ModalIconButton = styled.button<{ imgSize?: string }>`
 `;
 
 interface ModalTextButtonProps {
-  buttonSize?: string;
+  buttonWidth?: string;
+  buttonHeight?: string;
   fontSize?: string;
   backgroundColor?: string;
   fontColor?: string;
 }
 
 export const ModalTextButton = styled.button<ModalTextButtonProps>`
-  width: ${({ buttonSize }) => buttonSize || '100%'};
+  width: ${({ buttonWidth }) => buttonWidth || '100%'};
+  height: ${({ buttonHeight }) => buttonHeight || '100%'};
+  display: flex;
+  align-items: center;
+  justify-content: center;
   padding: 10px;
   border: none;
   border-radius: 0;
@@ -120,7 +127,8 @@ export const ModalTextButton = styled.button<ModalTextButtonProps>`
   color: ${({ fontColor }) => fontColor || '#ffffff'};
   background-color: ${({ backgroundColor }) => backgroundColor || '#333333'};
   font-size: ${({ fontSize }) => fontSize || '15px'};
-  border: 1px solid #333333;
+  border: 1px solid #33333340;
+  border-radius: 8px;
 `;
 
 interface ModalContentProps {
@@ -128,7 +136,10 @@ interface ModalContentProps {
 }
 
 export const ModalContent = styled.section<ModalContentProps>`
-  font-size: ${({ fontSize }) => fontSize || '15px'};
+  * {
+    box-sizing: border-box;
+  }
+  font-size: ${({ fontSize }) => fontSize || '12px'};
 `;
 
 export const ModalInput = styled.input`

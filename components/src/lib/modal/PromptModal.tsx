@@ -22,7 +22,8 @@ const PromptModal: React.FC<PromptModalProps> = ({
       <Modal.Footer buttonPosition='right' buttonGap='10px'>
         <Modal.TextButton
           actionFn={onClose}
-          buttonSize='50px'
+          buttonWidth='80px'
+          buttonHeight='36px'
           backgroundColor='#ffffff'
           fontColor='#333333'
         >
@@ -31,7 +32,8 @@ const PromptModal: React.FC<PromptModalProps> = ({
         <Modal.TextButton
           type='submit'
           actionFn={onClose}
-          buttonSize='50px'
+          buttonWidth='80px'
+          buttonHeight='36px'
           fontColor='#ffffff'
         >
           제출
