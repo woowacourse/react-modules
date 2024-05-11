@@ -1,47 +1,33 @@
-# chlwlstlf-card-validation-hooks
+# chlwlstlf-card-input-hooks
 
-텐텐과 버건디가 만든 카드 정보 입력 유효성 검사 커스텀 훅
+카드 정보 입력과 유효성 검사 커스텀 훅
 
 ## - 설치
 
 ```
-npm install chlwlstlf-card-validation-hooks
+npm install chlwlstlf-card-input-hooks
 ```
 
-## - useCardNumbersValidation 사용법
+## - useCardNumbersInput 사용법
 
-```javascript
+```jsx
 import { useState } from "react";
-import { useCardNumbersValidation } from "chlwlstlf-card-validation-hooks";
+import { useCardNumbersInput } from "chlwlstlf-card-input-hooks";
 
 function App() {
-  const [cardNumbers, setCardNumbers] = useState(["", "", "", ""]);
-  const { validationResult: cardNumbersValidationResult } = useCardNumbersValidation({ cardNumbers: cardNumbers });
-
-  const handleCardNumbers = (e: React.ChangeEvent<HTMLInputElement>, index: number) => {
-    const inputValue = e.target.value;
-    const newCardNumbers = cardNumbers.map((cardNumber, i) => {
-      return i === index ? inputValue : cardNumber;
-    });
-
-    setCardNumbers(newCardNumbers);
-  };
+  const { CardNumbersState, handleCardNumbersChange } = useCardNumbersInput();
 
   return (
     <>
+      <h1>Hooks Modules</h1>
       <h2>카드 번호</h2>
-      {cardNumbers.map((_, index) => {
-        return (
-          <input
-            key={index}
-            value={cardNumbers[index]}
-            type="text"
-            maxLength={4}
-            onChange={(e) => handleCardNumbers(e, index)}
-          />
-        );
-      })}
-      <div>{cardNumbersValidationResult.errorMessage}</div>
+      <input
+        value={CardNumbersState.value}
+        maxLength={CardNumbersState.maxLength}
+        type="text"
+        onChange={handleCardNumbersChange}
+      />
+      <div>{CardNumbersState.errorMessage}</div>
     </>
   );
 }
@@ -49,55 +35,42 @@ function App() {
 export default App;
 ```
 
-### - useCardNumbersValidation의 유효성 검증 목록
+### - useCardNumbersInput의 유효성 검증 목록
 
 1. 각 카드 번호는 값이 있어야한다.
 2. 각 카드 번호는 숫자여야한다.
 3. 각 카드 번호는 4자리여야한다.
 
-### - useCardNumbersValidation 인자
+### - CardNumbersState 설명
 
-| Name        | Datatype | Description |
-| ----------- | -------- | ----------- |
-| cardNumbers | string[] | 카드 번호   |
+- value: 카드 브랜드와 번호에 맞게 포맷팅 된 값
+- isValid: 유효한 지 여부
+- errorMessage: 에러메세지
+- cardBrand: 카드 번호에 따른 카드 브랜드
+- maxLength: 카드 브랜드에 따른 카드 번호 자릿수
 
 <br>
 <br>
 
-## - useExpiryDateValidation 사용법
+## - useExpiryDateInput 사용법
 
-```javascript
+```jsx
 import { useState } from "react";
-import { useExpiryDateValidation } from "chlwlstlf-card-validation-hooks";
+import { useExpiryDateInput } from "chlwlstlf-card-input-hooks";
 
 function App() {
-  const [expiryDate, setExpiryDate] = useState({ month: "", year: "" });
-  const { validationResult: expiryDateValidationResult } = useExpiryDateValidation({ month: expiryDate.month, year: expiryDate.year });
-
-  const handleExpiryChange = (e: React.ChangeEvent<HTMLInputElement>, field: "month" | "year") => {
-    const inputValue = e.target.value;
-    setExpiryDate((prevState) => ({
-      ...prevState,
-      [field]: inputValue,
-    }));
-  };
+  const { ExpiryDateState, handleExpiryDateChange } = useExpiryDateInput();
 
   return (
     <>
       <h2>카드 유효 기간</h2>
       <input
-        value={expiryDate.month}
+        value={ExpiryDateState.value}
         type="text"
-        maxLength={2}
-        onChange={(e) => handleExpiryChange(e, "month")}
+        maxLength={5}
+        onChange={handleExpiryDateChange}
       />
-      <input
-        value={expiryDate.year}
-        type="text"
-        maxLength={2}
-        onChange={(e) => handleExpiryChange(e, "year")}
-      />
-      <div>{expiryDateValidationResult.errorMessage}</div>
+      <div>{ExpiryDateState.errorMessage}</div>
     </>
   );
 }
@@ -105,48 +78,41 @@ function App() {
 export default App;
 ```
 
-### - useExpiryDateValidation 유효성 검증 목록
+### - useExpiryDateInput 유효성 검증 목록
 
 1. 월과 연도는 값이 있어야한다.
 2. 월과 연도는 숫자여야한다.
 3. 월과 연도는 2자리여야한다.
 4. 월은 1부터 12 사이의 숫자여야한다.
 
-### - useExpiryDateValidation 인자
+### - ExpiryDateState 설명
 
-| Name  | Datatype | Description |
-| ----- | -------- | ----------- |
-| month | string   | 월          |
-| year  | string   | 연도        |
+- value: 날짜에 맞게 포맷팅된 값(MM/YY)
+- isValid: 유효한 지 여부
+- errorMessage: 에러메세지
 
 <br>
 <br>
 
-## - useCardHolderValidation 사용법
+## - useCardHolderInput 사용법
 
-```javascript
+```jsx
 import { useState } from "react";
-import { useCardHolderValidation } from "chlwlstlf-card-validation-hooks";
+import { useCardHolderInput } from "chlwlstlf-card-input-hooks";
 
 function App() {
-  const [cardHolder, setCardHolder] = useState("");
-  const { validationResult: cardHolderValidationResult } = useCardHolderValidation({ cardHolder: cardHolder });
-
-  const handleCardHolderChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const inputValue = e.target.value;
-    setCardHolder(inputValue);
-  };
+  const { CardHolderState, handleCardHolderChange } = useCardHolderInput();
 
   return (
     <>
       <h2>사용자 이름</h2>
       <input
-        value={cardHolder.toUpperCase()}
+        value={CardHolderState.value}
         type="text"
         maxLength={22}
         onChange={handleCardHolderChange}
       />
-      <div>{cardHolderValidationResult.errorMessage}</div>
+      <div>{CardHolderState.errorMessage}</div>
     </>
   );
 }
@@ -154,48 +120,40 @@ function App() {
 export default App;
 ```
 
-### - useCardHolderValidation 유효성 검증 목록
+### - useCardHolderInput 유효성 검증 목록
 
 1. 사용자 이름은 값이 존재해야한다.
 2. 사용자 이름은 영어여야한다.
 3. 사용자 이름은 최대 21까지 입력 가능하다.
 
-### - useCardHolderValidation 인자
+### - CardHolderState 설명
 
-| Name       | Datatype | Description |
-| ---------- | -------- | ----------- |
-| cardHolder | string   | 사용자 이름 |
+- value: 영어면 대문자로 포맷팅된 값
+- isValid: 유효한 지 여부
+- errorMessage: 에러메세지
 
 <br>
 <br>
 
-## - useCVCValidation 사용법
+## - useCVCInput 사용법
 
-```javascript
+```jsx
 import { useState } from "react";
-import { useCVCValidation } from "chlwlstlf-card-validation-hooks";
+import { useCVCInput } from "chlwlstlf-card-input-hooks";
 
 function App() {
-  const [cvc, setCVC] = useState("");
-  const { validationResult: cvcValidationResult } = useCVCValidation({
-    cvc: cvc,
-  });
-
-  const handleCVCChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const inputValue = e.target.value;
-    setCVC(inputValue);
-  };
+  const { CVCState, handleCVCChange } = useCVCInput();
 
   return (
     <>
       <h2>CVC</h2>
       <input
-        value={cvc}
+        value={CVCState.value}
         type="text"
         maxLength={3}
         onChange={handleCVCChange}
       />
-      <div>{cvcValidationResult.errorMessage}</div>
+      <div>{CVCState.errorMessage}</div>
     </>
   );
 }
@@ -203,48 +161,40 @@ function App() {
 export default App;
 ```
 
-### - useCVCValidation 유효성 검증 목록
+### - useCVCInput 유효성 검증 목록
 
 1. CVC 번호는 값이 있어야한다.
 2. CVC 번호는 숫자여야한다.
 3. CVC 번호는 3자리여야한다.
 
-### - useCVCValidation 인자
+### - CVCState 설명
 
-| Name | Datatype | Description |
-| ---- | -------- | ----------- |
-| cvc  | string   | CVC         |
+- value: 입력된 값
+- isValid: 유효한 지 여부
+- errorMessage: 에러메세지
 
 <br>
 <br>
 
-## - usePasswordValidation 사용법
+## - usePasswordInput 사용법
 
-```javascript
+```jsx
 import { useState } from "react";
-import { usePasswordValidation } from "chlwlstlf-card-validation-hooks";
+import { usePasswordInput } from "chlwlstlf-card-input-hooks";
 
 function App() {
-  const [password, setPassword] = useState("");
-  const { validationResult: passwordValidationResult } = usePasswordValidation({
-    password: password,
-  });
-
-  const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const inputValue = e.target.value;
-    setPassword(inputValue);
-  };
+  const { PasswordState, handlePasswordChange } = usePasswordInput();
 
   return (
     <>
       <h2>비밀번호</h2>
       <input
-        value={password}
-        type="text"
+        value={PasswordState.value}
+        type="password"
         maxLength={2}
         onChange={handlePasswordChange}
       />
-      <div>{passwordValidationResult.errorMessage}</div>
+      <div>{PasswordState.errorMessage}</div>
     </>
   );
 }
@@ -252,23 +202,21 @@ function App() {
 export default App;
 ```
 
-### - usePasswordValidation 유효성 검증 목록
+### - usePasswordInput 유효성 검증 목록
 
 1. 비밀번호는 값이 있어야한다.
 2. 비밀번호는 숫자여야한다.
 3. 비밀번호는 2자리여야한다.
 
-### - usePasswordValidation 인자
+### - PasswordState 설명
 
-| Name     | Datatype | Description            |
-| -------- | -------- | ---------------------- |
-| password | string   | 카드 비밀번호 앞 2자리 |
+- value: 입력된 값
+- isValid: 유효한 지 여부
+- errorMessage: 에러메세지
 
 ## Author
 
 - [tenten github](https://github.com/chlwlstlf)
-
-- [brgndyy github](https://github.com/brgndyy)
 
 ## License
 
