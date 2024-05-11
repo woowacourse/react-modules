@@ -1,3 +1,4 @@
+export { default as useCardBrand } from "./hooks/useCardBrand";
 export { default as useCardCompany } from "./hooks/useCardCompany";
 export { default as useCardHolder } from "./hooks/useCardHolder";
 export { default as useCardNumbers } from "./hooks/useCardNumbers";
