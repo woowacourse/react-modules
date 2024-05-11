@@ -2,7 +2,7 @@ import { act } from 'react';
 import { renderHook } from '@testing-library/react';
 import useCardPassword from './useCardPassword';
 
-describe('useCardPassword custom hook', () => {
+describe('useCardPassword', () => {
   const maxLength = 2;
 
   test('hook이 초기화되면, 주어진 initValue로 설정된다.', () => {

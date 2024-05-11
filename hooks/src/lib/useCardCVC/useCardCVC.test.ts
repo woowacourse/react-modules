@@ -2,7 +2,7 @@ import { act } from 'react';
 import { renderHook } from '@testing-library/react';
 import useCardCVC from './useCardCVC';
 
-describe('useCardCVC custom hook', () => {
+describe('useCardCVC', () => {
   const maxLength = 3;
 
   test('hook이 초기화되면, 주어진 initValue로 설정된다.', () => {

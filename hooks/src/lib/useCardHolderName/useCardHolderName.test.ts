@@ -2,7 +2,7 @@ import { act } from 'react';
 import { renderHook } from '@testing-library/react';
 import useCardHolderName from './useCardHolderName';
 
-describe('useCardHolderName custom hook', () => {
+describe('useCardHolderName', () => {
   const maxLength = 50;
 
   test('hook이 초기화될 때 주어진 initValue로 설정된다.', () => {

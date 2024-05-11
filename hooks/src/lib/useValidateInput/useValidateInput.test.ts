@@ -3,7 +3,7 @@ import useValidateInput, { ValidateResult } from './useValidateInput';
 import { act } from 'react';
 import { renderHook } from '@testing-library/react';
 
-describe('useValidateInput custom hook 테스트', () => {
+describe('useValidateInput', () => {
   let validateOnChangeMock: jest.Mock<ValidateResult, [string]>;
   let validateOnBlurMock: jest.Mock<ValidateResult, []>;
 

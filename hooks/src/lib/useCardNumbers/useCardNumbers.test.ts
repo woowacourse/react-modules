@@ -2,7 +2,7 @@ import { act } from 'react';
 import { renderHook } from '@testing-library/react';
 import useCardNumbers from './useCardNumbers';
 
-describe('useCardNumbers custom hook', () => {
+describe('useCardNumbers', () => {
   const maxLength = 4;
 
   test('hook이 초기화될 때 주어진 initValue로 설정된다.', () => {

@@ -2,7 +2,7 @@ import { act } from 'react';
 import { renderHook } from '@testing-library/react';
 import useCardCompany from './useCardCompany';
 
-describe('useCardCompany custom hook', () => {
+describe('useCardCompany', () => {
   const companyList = ['카카오뱅크', '현대카드', '신한카드', '국민카드'];
 
   test('존재하는 카드사를 입력 후 포커스가 해제되면 isCompleted 상태가 true가 된다.', () => {

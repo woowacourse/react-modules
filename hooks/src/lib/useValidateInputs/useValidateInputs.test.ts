@@ -3,7 +3,7 @@ import useValidateInputs, { ValidateResult } from './useValidateInputs';
 
 import { act } from 'react';
 
-describe('useValidateInputs custom hook', () => {
+describe('useValidateInputs', () => {
   let validateOnChangeMock: jest.Mock<ValidateResult, [string, number]>;
   let validateOnBlurMock: jest.Mock<ValidateResult>;
 

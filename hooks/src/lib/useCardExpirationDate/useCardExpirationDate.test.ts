@@ -3,7 +3,7 @@ import { renderHook, waitFor } from '@testing-library/react';
 import { act } from 'react';
 import useCardExpirationDate from './useCardExpirationDate';
 
-describe('useCardExpirationDate custom hook', () => {
+describe('useCardExpirationDate', () => {
   test('hook이 초기화될 때 주어진 initValue로 설정된다.', () => {
     const { result } = renderHook(() => useCardExpirationDate(['12', '23'], 2));
     expect(result.current.values).toEqual(['12', '23']);
