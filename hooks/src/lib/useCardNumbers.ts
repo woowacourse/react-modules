@@ -32,21 +32,24 @@ const useCardNumbers = () => {
       return;
     }
 
-    if (errorType === 'NonNumeric') {
-      setCardNumbersInfo({
-        cardNumbers: cardNumbersInfo.cardNumbers,
-        cardBrand: cardNumbersInfo.cardBrand,
-        formattedCardNumber: cardNumbersInfo.formattedCardNumber,
-        errorMessage,
-      });
-      return;
+    interface InvalidLengthCheckType {
+      [key: string]: number;
+      Diners: number;
+      AMEX: number;
+      default: number;
     }
 
-    if (errorType === 'DinersInvalidLength' && value.length > 14) return;
+    const invalidLengthCheck: InvalidLengthCheckType = {
+      Diners: 14,
+      AMEX: 15,
+      default: 16,
+    };
 
-    if (errorType === 'AMEXInvalidLength' && value.length > 15) return;
-
-    if (value.length > 16) return;
+    if (
+      value.length >
+      (invalidLengthCheck[errorType] || invalidLengthCheck.default)
+    )
+      return;
 
     const formattedCardNumber = formatCardNumbers(cardBrand, value);
 
