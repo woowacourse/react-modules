@@ -41,15 +41,9 @@ const useMultiCardNumbers = () => {
       newSelectionStart += 1;
     }
 
-    console.log("new", newSelectionStart);
-
     setFormattedNumbers(formattedArr);
     setCursorPosition(newSelectionStart);
   };
-
-  useEffect(() => {
-    console.log(cursorPosition);
-  }, [cursorPosition]);
 
   const validateIsNumber = (value: string) => {
     const isValidNumberResult = validateNumber(value);
