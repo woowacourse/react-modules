@@ -1,14 +1,13 @@
 import { useState } from "react";
-import { useCardType } from ".";
 import { CARD_TYPE } from "./constants/cardType";
 import { removeSpace } from "./util/removeSpace";
 import { isNumber, isRightLength } from "./validation/validate";
 import ERROR_MESSAGES from "./constants/error";
 import { CARD_TYPE_NAME } from "./type";
+import { getCardType } from "./validation/getCardType";
 
 const useCardNumberInput = () => {
-  const { cardType, handleCardType } = useCardType();
-
+  const [cardType, setCardType] = useState<CARD_TYPE_NAME>("EMPTY");
   const [cardNumber, setCardNumber] = useState({
     value: {
       cardNumber: "",
@@ -95,7 +94,9 @@ const useCardNumberInput = () => {
   ) => {
     const { value, selectionStart } = event.target;
 
-    handleCardType(value);
+    setCardType(getCardType(value));
+    const cardType = getCardType(value);
+
     const noneSpaceValue = removeSpace(value);
     const formatValue = valueFormatting(noneSpaceValue, cardType);
 
