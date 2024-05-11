@@ -104,7 +104,7 @@ describe('useCardNumbers 커스텀 훅 테스트', () => {
       );
     });
 
-    it(`카드 브랜드가 없는 경우, 16자리 미만 숫자 입력 시 '${ERROR_MESSAGES.STANDARD_CARD_LENGTH}'라는 에러 메시지를 표시한다.`, () => {
+    it(`카드 브랜드가 없는 경우, ${CARD_TYPES.NONE.INPUT_COUNT}자리 미만 숫자 입력 시 '${ERROR_MESSAGES.STANDARD_CARD_LENGTH}'라는 에러 메시지를 표시한다.`, () => {
       const { result } = renderHook(() => useCardNumbers());
 
       act(() => {
@@ -115,7 +115,29 @@ describe('useCardNumbers 커스텀 훅 테스트', () => {
       );
     });
 
-    it(`카드 브랜드가 Diners인 경우, 14자리 미만의 숫자를 입력했을 때 '${ERROR_MESSAGES.DINERS_CARD_LENGTH}'라는 에러메세지를 표시한다.`, () => {
+    it(`카드 브랜드가 Visa인 경우, ${CARD_TYPES.VISA.INPUT_COUNT}자리 미만 숫자 입력 시 '${ERROR_MESSAGES.VISA_CARD_LENGTH}'라는 에러 메시지를 표시한다.`, () => {
+      const { result } = renderHook(() => useCardNumbers());
+
+      act(() => {
+        result.current.handleCardNumbers('4111');
+      });
+      expect(result.current.cardNumbersInfo.errorMessage).toBe(
+        `${ERROR_MESSAGES.VISA_CARD_LENGTH}`,
+      );
+    });
+
+    it(`카드 브랜드가 Master인 경우, ${CARD_TYPES.MASTER.INPUT_COUNT}자리 미만 숫자 입력 시 '${ERROR_MESSAGES.MASTER_CARD_LENGTH}'라는 에러 메시지를 표시한다.`, () => {
+      const { result } = renderHook(() => useCardNumbers());
+
+      act(() => {
+        result.current.handleCardNumbers('4111');
+      });
+      expect(result.current.cardNumbersInfo.errorMessage).toBe(
+        `${ERROR_MESSAGES.VISA_CARD_LENGTH}`,
+      );
+    });
+
+    it(`카드 브랜드가 Diners인 경우, ${CARD_TYPES.DINERS.INPUT_COUNT}자리 미만의 숫자를 입력했을 때 '${ERROR_MESSAGES.DINERS_CARD_LENGTH}'라는 에러메세지를 표시한다.`, () => {
       const { result } = renderHook(() => useCardNumbers());
 
       act(() => {
@@ -126,7 +148,7 @@ describe('useCardNumbers 커스텀 훅 테스트', () => {
       );
     });
 
-    it(`카드 브랜드가 AMEX인 경우, 15자리 미만의 숫자를 입력했을 때 '${ERROR_MESSAGES.AMEX_CARD_LENGTH}'라는 에러메세지를 표시한다.`, () => {
+    it(`카드 브랜드가 AMEX인 경우, ${CARD_TYPES.AMEX.INPUT_COUNT}자리 미만의 숫자를 입력했을 때 '${ERROR_MESSAGES.AMEX_CARD_LENGTH}'라는 에러메세지를 표시한다.`, () => {
       const { result } = renderHook(() => useCardNumbers());
 
       act(() => {
@@ -137,7 +159,7 @@ describe('useCardNumbers 커스텀 훅 테스트', () => {
       );
     });
 
-    it(`카드 브랜드가 UnionPay인 경우, 16자리 미만의 숫자를 입력했을 때 '${ERROR_MESSAGES.UNIONPAY_CARD_LENGTH}'라는 에러메세지를 표시한다.`, () => {
+    it(`카드 브랜드가 UnionPay인 경우, ${CARD_TYPES.UNION_PAY.INPUT_COUNT}자리 미만의 숫자를 입력했을 때 '${ERROR_MESSAGES.UNIONPAY_CARD_LENGTH}'라는 에러메세지를 표시한다.`, () => {
       const { result } = renderHook(() => useCardNumbers());
 
       act(() => {

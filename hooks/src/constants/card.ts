@@ -28,6 +28,8 @@ export const CARD_TYPES = {
 export const ERROR_MESSAGES = {
   ONLY_NUMBERS: '숫자만 입력 가능합니다.',
   STANDARD_CARD_LENGTH: '일반 카드는 16자리 숫자여야 합니다.',
+  VISA_CARD_LENGTH: 'Visa 카드는 16자리 숫자여야 합니다.',
+  MASTER_CARD_LENGTH: 'Master 카드는 16자리 숫자여야 합니다.',
   DINERS_CARD_LENGTH: 'Diners 카드는 14자리 숫자여야 합니다.',
   AMEX_CARD_LENGTH: 'AMEX 카드는 15자리 숫자여야 합니다.',
   UNIONPAY_CARD_LENGTH: 'UnionPay 카드는 16자리 숫자여야 합니다.',
@@ -43,7 +45,7 @@ export const ERROR_MESSAGES = {
 
 export const ERROR_TYPES = {
   NON_NUMERIC: 'NonNumeric',
-  INVALID_LENGTH_NONE: 'NoneInvalidLength',
+  INVALID_LENGTH_DEFAULT: 'DefaultInvalidLength',
   INVALID_LENGTH_DINERS: 'DinersInvalidLength',
   INVALID_LENGTH_AMEX: 'AMEXInvalidLength',
   INVALID_LENGTH_UNIONPAY: 'UnionPayInvalidLength',
