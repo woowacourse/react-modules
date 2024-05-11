@@ -1,9 +1,9 @@
 import CARD_BRAND from "../constants/cardBrand";
 
-type CardBrand = "VISA" | "MASTER_CARD" | "DINERS" | "AMEX" | "UNION_PAY" | "UNDEFINED";
+type CardBrand = "VISA" | "MASTER_CARD" | "DINERS" | "AMEX" | "UNION_PAY" | "UNKNOWN";
 
 const getCardBrand = (cardNumbers: string) => {
-  let cardBrand: CardBrand = "UNDEFINED";
+  let cardBrand: CardBrand = "UNKNOWN";
 
   const cleanedCardNumber = cardNumbers.replace(/\D/g, "");
 
@@ -13,7 +13,7 @@ const getCardBrand = (cardNumbers: string) => {
       return cardBrand;
     }
   }
-  cardBrand = "UNDEFINED";
+  cardBrand = "UNKNOWN";
 
   return cardBrand;
 };
