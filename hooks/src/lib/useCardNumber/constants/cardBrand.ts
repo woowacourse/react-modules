@@ -11,7 +11,7 @@ export const VALID_CARD_BRAND = {
 
 export const CARD_BRAND = {
   ...VALID_CARD_BRAND,
-  unknown: "unknown",
+  UNKNOWN: "UNKNOWN",
 } as const;
 
 export const CARD_BRAND_REGEX = {
@@ -34,5 +34,5 @@ export const CARD_NUMBER_LENGTH = {
   [CARD_BRAND.UnionPay]: 16,
   [CARD_BRAND.MasterCard]: 16,
   [CARD_BRAND.Visa]: 16,
-  [CARD_BRAND.unknown]: 16,
+  [CARD_BRAND.UNKNOWN]: 16,
 } as const;

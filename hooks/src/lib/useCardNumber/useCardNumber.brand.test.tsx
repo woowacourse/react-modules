@@ -51,7 +51,7 @@ const TESTING_CARD_NUMBERS = {
   UnionPay: "622126" + "1".repeat(10),
   MasterCard: "51" + "1".repeat(14),
   Visa: "4" + "1".repeat(15),
-  unknown: "9999".repeat(4),
+  UNKNOWN: "9999".repeat(4),
 } as const;
 
 describe("카드 브랜드 관련 처리에 대한 테스트 케이스", () => {
@@ -78,8 +78,8 @@ describe("카드 브랜드 관련 처리에 대한 테스트 케이스", () => {
         expectedCardBrand: CARD_BRAND.Visa,
       },
       {
-        cardNumber: TESTING_CARD_NUMBERS.unknown,
-        expectedCardBrand: "unknown",
+        cardNumber: TESTING_CARD_NUMBERS.UNKNOWN,
+        expectedCardBrand: "UNKNOWN",
       },
     ])(
       "카드번호가 $cardNumber일 경우, $expectedCardBrand(으)로 식별한다.",
@@ -116,7 +116,7 @@ describe("카드 브랜드 관련 처리에 대한 테스트 케이스", () => {
         expectedFormattedCardNumber: "4111 1111 1111 1111",
       },
       {
-        cardNumber: TESTING_CARD_NUMBERS.unknown,
+        cardNumber: TESTING_CARD_NUMBERS.UNKNOWN,
         expectedFormattedCardNumber: "9999 9999 9999 9999",
       },
     ])(

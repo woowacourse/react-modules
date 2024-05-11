@@ -12,5 +12,5 @@ export function identifyCardBrand(cardNumber: string): CardBrand {
 
   const foundCardBrand = cardBrands.find(matchesWithGivenNumber);
 
-  return foundCardBrand || CARD_BRAND.unknown;
+  return foundCardBrand || CARD_BRAND.UNKNOWN;
 }
