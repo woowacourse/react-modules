@@ -34,7 +34,7 @@ const CARD_BRAND = {
     matchedLength: 16,
     maxLength: 19,
   },
-  UNDEFINED: {
+  UNKNOWN: {
     name: "",
     patterns: /^/,
     format: [4, 4, 4, 4],
