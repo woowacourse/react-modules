@@ -3,7 +3,7 @@ import { useState } from 'react';
 export interface UseInputValidateProps {
   initValue: string;
   validateOnChange: (value: string) => ValidateResult;
-  validateOnBlur: () => ValidateResult;
+  validateOnBlur: (value: string) => ValidateResult;
   formatValue?: (value: string) => string;
 }
 
@@ -45,7 +45,7 @@ const useInputValidate = ({
   const onBlurHandler = () => {
     setErrorMessage('');
 
-    const { isValid, errorMessage } = validateOnBlur();
+    const { isValid, errorMessage } = validateOnBlur(value);
     setIsCompleted(isValid);
 
     if (!isValid) {

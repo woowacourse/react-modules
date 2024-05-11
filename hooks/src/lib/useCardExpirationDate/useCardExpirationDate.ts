@@ -1,6 +1,6 @@
 import useInputValidate from '../useInputValidate/useInputValidate';
 const useCardExpirationDate = (initValue: string, maxLength: number = 4) => {
-  const getPureNumbers = (value: string) => value.replace(/[/]/g, '');
+  const getPureNumbers = (value: string) => value.replace(/\//g, '');
 
   const validateOnChange = (newValue: string) => {
     if (getPureNumbers(newValue).length > maxLength) {
@@ -18,7 +18,7 @@ const useCardExpirationDate = (initValue: string, maxLength: number = 4) => {
     return { isValid: true, errorMessage: '' };
   };
 
-  const validateOnBlur = () => {
+  const validateOnBlur = (value: string) => {
     const nowDate = new Date();
     const year = nowDate.getFullYear().toString().slice(2, 4);
     const month = (nowDate.getMonth() + 1).toString().padStart(2, '0');
@@ -28,10 +28,10 @@ const useCardExpirationDate = (initValue: string, maxLength: number = 4) => {
     if (getPureNumbers(value).length !== maxLength) {
       return {
         isValid: false,
-        errorMessage: `유효기간은 (MM/YY) 형식의 ${maxLength * initValue.length}글자로 입력해 주세요.`,
+        errorMessage: `유효기간은 (MM/YY) 형식의 ${maxLength}글자로 입력해 주세요.`,
       };
     }
-    if (!/^$|(0[1-9]?|1[0-2]?)/.test(value)) {
+    if (!/^$|(0[1-9]|1[0-2])/.test(value)) {
       return {
         isValid: false,
         errorMessage: '유효기간 월은 01~12 사이만 입력이 가능해요',
@@ -48,7 +48,7 @@ const useCardExpirationDate = (initValue: string, maxLength: number = 4) => {
 
   const formatValue = (value: string) => {
     const numberValue = getPureNumbers(value);
-    return numberValue.replace(/^(\d{1,2})/g, '$1/').replace(/[/]+$/, '');
+    return numberValue.replace(/^(\d{1,2})/g, '$1/').replace(/\/+$/, '');
   };
 
   const {
