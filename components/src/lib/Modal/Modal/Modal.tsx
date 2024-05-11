@@ -12,7 +12,7 @@ export interface ModalMainProps {
   children: React.ReactNode;
   buttons?: React.ReactNode;
   isOpen: boolean;
-  position: ModalPosition;
+  position?: ModalPosition;
   onClose: () => void;
   size?: ModalSize;
 }
@@ -20,7 +20,7 @@ export interface ModalMainProps {
 export const ModalMain = ({
   children,
   isOpen,
-  position,
+  position = "center",
   onClose,
   size = "medium",
 }: ModalMainProps) => {

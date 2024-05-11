@@ -4,6 +4,25 @@ export type ModalPosition = "center" | "bottom";
 
 export type ModalSize = "small" | "medium" | "large" | "full";
 
+export const ModalBottomStyle = css`
+  top: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 8px;
+
+  @media (max-width: 567px) {
+    width: 100%;
+    top: auto;
+    transform: translate(-50%);
+    bottom: 0;
+    border-radius: 8px 8px 0px 0px;
+  }
+`;
+
+export const ModalCenterStyle = css`
+  top: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 8px;
+`;
 export const MODAL_WIDTH_MAP: Record<ModalSize, string> = {
   small: "320px",
   medium: "480px",
@@ -43,21 +62,8 @@ export const ModalOuter = styled.div<{
   width: ${({ $size: size }) => MODAL_WIDTH_MAP[size]};
 
   ${({ $position }) => {
-    if ($position === "bottom") {
-      return css`
-        top: auto;
-        transform: translate(-50%);
-        bottom: 0;
-        border-radius: 8px 8px 0px 0px;
-      `;
-    }
-    if ($position === "center") {
-      return css`
-        top: 50%;
-        transform: translate(-50%, -50%);
-        border-radius: 8px;
-      `;
-    }
+    if ($position === "bottom") return ModalBottomStyle;
+    if ($position === "center") return ModalCenterStyle;
   }};
 `;
 
