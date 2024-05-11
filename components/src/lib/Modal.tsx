@@ -24,8 +24,12 @@ export default function Modal({
   animationTime = 300,
   size = "",
 }: PropsWithChildren<Partial<ModalContextType>>) {
-  const [closing, setClosing] = useState(false);
-  const [open, setOpen] = useState(isOpen);
+  const { open, closing } = useAnimation({
+    onClose,
+    unMountAnimation,
+    initialState: isOpen,
+    animationTime,
+  });
 
   const sizeClassName =
     size === "large"
@@ -35,32 +39,6 @@ export default function Modal({
         : size === "small"
           ? styles.small
           : "";
-
-  useEffect(() => {
-    if (isOpen) {
-      setOpen(true);
-    } else {
-      setClosing(true);
-    }
-  }, [isOpen]);
-
-  useEffect(() => {
-    if (closing) {
-      if (unMountAnimation) {
-        const timer = setTimeout(() => {
-          setClosing(false);
-          setOpen(false);
-          onClose();
-        }, animationTime);
-
-        return () => clearTimeout(timer);
-      } else {
-        setClosing(false);
-        setOpen(false);
-        onClose();
-      }
-    }
-  }, [closing, unMountAnimation]);
 
   const modalProps: ModalProviderValue = {
     isOpen,
