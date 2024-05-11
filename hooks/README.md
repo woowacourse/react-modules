@@ -15,45 +15,45 @@ npm install fe-card-validation-hooks
 - 에러가 발생하면 아래 문서에 작성된 순서대로 해당하는 에러 문자열이 `validationResult`의 `errorMessages` 배열에 저장합니다.
 - 사용하고 싶은 에러 메시지를 각 handler가 반환하는 배열에서 문자열로 찾아 사용하거나 배열을 순회하면서 모두 사용할 수 있습니다.
 
-### useCardNumberValidation
+### useCardNumber
 
-`return { validationResults, handleCardNumberChange }`
+- 입력한 카드 번호에 맞는 카드 브랜드를 반환합니다.
+- 카드 브랜드에 맞는 카드 번호 자릿수를 제한합니다.
+- 카드 브랜드마다 다른 포맷팅 규칙을 적용해서 배열 형태로 반환합니다. `join`을 통해 사용하세요.
+
+`return { cardNumberInfo, handleCardNumberChange }`
 
 ```ts
-validationResult {
+cardNumberInfo {
+  cardNumber: string[];
+  cardType: CardBrand;
   isValid: boolean;
-  errorMessage?: string[];
+  errorMessages?: string[];
 }
 
-handleCardNumberChange(cardNumber: string, index: number)
+handleCardNumberChange(cardNumber: string)
 ```
 
 사용 예시:
 
 ```tsx
-const [cardNumber, setCardNumber] = useState(['', '', '', '']);
-
-const { validationResults: numberValidationResults, handleCardNumberChange } = useCardNumberValidation();
+const { cardNumberInfo, handleCardNumberChange } = useCardNumber();
 
 {
-  cardNumber.map((number, index) => (
-    return (
-      <input
-        key={index}
-        type='text'
-        value={number}
-        maxLength={4}
-        onChange={(e) => handleCardNumberInputChange(e.target.value, index)}
-      />
-    );
-  ));
+  return (
+    <input
+      type='text'
+      value={cardNumberInfo.cardNumber.join(' ')}
+      onChange={(e) => handleCardNumberInputChange(e.target.value)}
+    />
+  );
 }
 ```
 
 반환 에러 문자열:
 
 - cardNumber가 숫자가 아닌 경우: `숫자를 입력해주세요.`
-- cardNumber의 길이가 4가 아닌 경우: `4자리 숫자를 입력해주세요.`
+- cardNumber의 길이가 해당 카드 브랜드의 길이가 아닌 경우: `{해당 카드 브랜드 자릿수}자리 숫자를 입력해주세요.`
 
 ### useExpiryDateValidation
 
@@ -215,36 +215,21 @@ const { validationResult: passwordValidationResult, handleCardPasswordChange } =
 />;
 ```
 
-### useCardTypeValidation
+### useCardType
 
-`return { validationResult, handleCardTypeChange };`
+- (참고) `useCardNumber` 훅 내부에서 `useCardType`을 사용하고 있습니다. 일반적인 상황에서는 `useCardNumber`를 사용하세요.
+
+`return { handleCardTypeChange };`
 
 ```ts
-validationResult {
-  cardType: 'Visa' | 'Mastercard' | 'none';
-}
-
 handleCardTypeChange = (value: string)
-```
-
-사용 예시:
-
-```tsx
-const [cardType, setCardType] = useState('');
-const { validationResult: typeValidationResult, handleCardTypeChange } = useCardTypeValidation();
-
-<input
-  type='text'
-  value={cardType}
-  onChange={(e) => {
-    setCardType(e.target.value);
-    handleCardTypeChange(e.target.value);
-  }}
-/>;
 ```
 
 반환값:
 
-- value의 첫 글자가 4일 경우: `Visa`
-- value의 첫 두 글자가 51~55 사이의 숫자일 경우: `Mastercard`
-- 그 외: `none`
+- value가 4로 시작하는 경우: `Visa`
+- value가 51~55 사이의 숫자로 시작하는 경우: `Mastercard`
+- value가 36으로 시작하는 경우: `Diners`
+- value가 34 또는 37로 시작하는 경우: `AMEX`
+- value가 622126~622925로 시작하거나, 624~626으로 시작하거나, 6282~6288로 시작하는 경우: `Unionpay`
+- 그 외: `None`
