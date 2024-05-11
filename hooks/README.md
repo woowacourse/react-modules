@@ -2,7 +2,7 @@
 
 우아한테크코스 6기 FE 미션을 위해 제작된 간단한 React 기반 신용카드 입력값 검증 모듈입니다. 아래와 같은 유형들에 대한 입력값 검증 기능을 제공합니다.
 
-- `useCardNumbers` : 카드 번호 입력값 검증
+- `useCardNumber` : 카드 번호 입력값 검증
 - `useCardBrand`: 카드사 입력값 검증
 - `useCardExpiryDate`: 카드 유효기간 입력값 검증
 - `useCardHolder`: 카드 소유자 이름 입력값 검증
@@ -17,26 +17,21 @@ npm install @seongjinme/card-validation
 
 # 각 Hook별 사용 방법
 
-## useCardNumbers
+## useCardNumber
 
-카드 번호 입력값의 유효성을 검증하는 훅입니다. 최대 20자리 이내로 임의의 카드 번호 입력 형식을 정하여 입력값을 저장하고, 각 입력 필드별 입력값 검증과 전체 필드의 검증 통과 여부를 체크할 수 있습니다.
+카드 번호 입력값의 유효성을 검증하는 훅입니다. 입력된 카드 번호에 따라 Visa, MasterCard, AMEX, Diners, UnionPay 등의 글로벌 브랜드의 판별 결과와 입력값의 검증 결과를 함께 확인하실 수 있습니다.
+
+각 브랜드별 카드 번호 형식에 따라 입력값의 포맷팅을 자동으로 실행하며, 입력값의 길이를 자동으로 제한하는 기능도 갖추고 있습니다.
 
 ```TypeScript
-// 기본 설정 : 4자리씩 4개의 입력 필드로 분할된 16자리 카드 번호를 검증할 경우
 const {
-  cardNumbers,
-  validStates,
+  cardNumber,
+  cardGlobalBrand,
+  cardNumberFormat,
+  cardNumberFormatted,
   validationResult,
-  handleUpdateCardNumbers,
-} = useCardNumbers();
-
-// 4-6-5자리씩 분할된 15자리 카드 번호를 검증할 경우
-const {
-  cardNumbers,
-  validStates,
-  validationResult,
-  handleUpdateCardNumbers,
-} = useCardNumbers([4, 6, 5]);
+  handleUpdateCardNumber,
+} = useCardNumber();
 ```
 
 ### 훅을 선언할 때 사용 가능한 파라미터들
@@ -44,32 +39,26 @@ const {
 ```TypeScript
 // 훅에 설정되어 있는 파라미터별 기본값
 useCardNumbers(
-  format: [4, 4, 4, 4],
-  initialValue: [],
+  initialValue: '',
   errorMessages: {
     inputType: '카드 번호는 각 자릿수에 맞춰 숫자로만 입력해 주세요.',
-    allowedLengthOutOfRange: `[ERROR] 카드 번호는 총합 20자리 이내로만 설정 가능합니다. 다시 확인해 주세요.`,
+    inputLength: `[ERROR] 카드 번호는 총합 16자리 이내로만 설정 가능합니다. 다시 확인해 주세요.`,
   },
 );
 ```
 
-- `format` : 카드 번호의 입력 필드 형식을 `number[]` 타입으로 지정합니다.
-  - 기본값은 `[4, 4, 4, 4]`입니다.
-  - 원소의 길이는 카드 번호 입력 필드의 전체 수를 의미합니다.
-  - 각 원소는 해당 필드에 허용되는 입력값의 길이를 의미합니다.
-  - 배열의 길이에는 제한이 없으나, 배열에 포함된 숫자의 총합은 `20`을 초과할 수 없습니다.
-- `initialValue` : 초기 상태값으로 지정하고 싶은 카드 번호를 `string[]` 타입으로 지정합니다.
-  - 기본값은 `[]`입니다.
-  - `format`으로 지정한 입력 필드의 길이보다 짧은 길이의 배열을 입력할 경우, 입력되지 않은 뒷자리에 한하여 빈 값(`''`)으로 초기화되어 입력됩니다.
-  - `format`으로 지정한 입력 필드의 길이보다 긴 길이의 배열을 입력할 경우, 배열의 앞에서부터 `format`의 길이에 해당하는 만큼의 원소들만 초기값으로 입력됩니다.
+- `initialValue` : 초기 상태값으로 지정하고 싶은 카드 번호를 `string` 타입으로 지정합니다.
 - `errorMessages` : 유형별 에러 메시지를 직접 지정하실 수 있습니다.
-  - `inputType` : 입력값의 유효성 검증 미통과시 출력되는 에러 메시지입니다.
-  - `allowedLengthOutOfRange` : `format`에 입력된 숫자의 통합이 `20`을 초과할 경우 콘솔에 나타나는 에러 메시지입니다.
+  - `inputType` : 입력값에 숫자 이외의 문자가 입력되었을 경우 출력되는 에러 메시지입니다.
+  - `inputLength` : 입력값의 길이가 해당 카드 브랜드의 형식에 맞지 않을 경우 출력되는 에러 메시지입니다. `number` 타입의 `length`를 인자로 받아 메시지가 생성되는 구조를 가지고 있습니다.
 
 ### 반환값 설명
 
-- `cardNumbers` : 입력받은 카드 번호를 4자리씩 분할된 `string` 타입의 배열 형태로 반환합니다.
-- `validStates` : 입력받은 카드 번호를 4자리 단위로 검증한 결과를 `boolean | null` 타입의 배열 형태로 반환합니다.
+- `cardNumber` : 입력받은 카드 번호를 구분자 없이 `string` 타입으로 반환합니다.
+- `cardGlobalBrand` : 입력받은 카드 번호에 따라 판별된 글로벌 브랜드를 반환합니다.
+  - 현재 지원되는 브랜드 : Visa, MasterCard, AMEX, Diners, UnionPay
+- `cardNumberFormat` : 판별된 글로벌 브랜드에 따른 카드 번호 형식을 `number[]` 타입으로 반환합니다.
+- `cardNumberFormatted` : 입력받은 카드 번호에 구분자를 추가하여 `string` 타입으로 반환합니다.
 - `validationResult` : 입력받은 전체 카드 번호의 전체 유효성 검증 결과를 아래와 같은 포맷으로 반환합니다. 검증 미통과시 에러 메시지를 `errorMessage`로 함께 반환합니다.
   ```
   {
@@ -77,30 +66,34 @@ useCardNumbers(
     errorMessage?: string,
   }
   ```
-- `handleUpdateCardNumbers(inputIndex, value)` : 각 입력 필드에 대한 이벤트 발생시 입력값을 처리하기 위한 핸들링 함수입니다.
-  - `inputIndex` : 해당 입력 필드의 `index` 값입니다. `number` 타입으로 입력합니다.
-  - `value` : 해당 입력 필드에 입력된 `string` 값입니다.
+- `handleUpdateCardNumber(value)` : 카드 번호 입력 필드에 대한 이벤트 발생시 `string` 타입의 입력값(`value`)을 처리하는 핸들링 함수입니다.
 
 ### 사용 예시
 
 ```tsx
 import React from 'react';
-import { useCardNumbers } from '@seongjinme/card-validation';
+import { useCardNumber } from '@seongjinme/card-validation';
 
-function CardNumbersForm() {
-  const { cardNumbers, validStates, validationResult, handleUpdateCardNumbers } = useCardNumbers();
+function CardNumberForm() {
+  const {
+    cardNumber,
+    cardGlobalBrand,
+    cardNumberFormat,
+    cardNumberFormatted,
+    validationResult,
+    handleUpdateCardNumbers,
+  } = useCardNumber();
 
   return (
     <form>
-      {cardNumbers.map((_, index) => (
-        <input
-          key={index}
-          type="text"
-          onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-            handleUpdateCardNumbers(index, event.target.value)
-          }
-        />
-      ))}
+      <input
+        type="text"
+        value={cardNumberFormatted}
+        onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+          handleUpdateCardNumber(event.target.value, event)
+        }
+        placeholder="카드번호를 입력해 주세요."
+      />
       <button type="submit">Submit</button>
     </form>
   );
