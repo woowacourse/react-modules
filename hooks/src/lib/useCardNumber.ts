@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { REGEX, META_CARD, CardBrand } from './constants';
+import { META_CARD, CardBrand } from './constants';
 import useCardType from './useCardType';
 import { formatCardNumber } from './../utils/formatCardNumber';
 
@@ -25,12 +25,7 @@ const useCardNumber = () => {
     const formattedNumber = formatCardNumber(cardNumberWithoutSpace, META_CARD[newCardType].format);
 
     const errors: string[] = [];
-    const isNumeric = REGEX.onlyNumber.test(cardNumberWithoutSpace);
     const isValidNumber = formattedNumber.join('').length === META_CARD[newCardType].maxLength;
-
-    if (!isNumeric) {
-      errors.push('숫자를 입력해주세요.');
-    }
 
     if (!isValidNumber) {
       errors.push(`${META_CARD[newCardType].maxLength}자리 숫자를 입력해주세요.`);
@@ -39,7 +34,7 @@ const useCardNumber = () => {
     setCardNumberInfo({
       cardNumber: formattedNumber,
       cardType: newCardType,
-      isValid: isNumeric && isValidNumber,
+      isValid: isValidNumber,
       errorMessages: errors,
     });
   };
