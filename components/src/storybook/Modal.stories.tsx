@@ -35,6 +35,12 @@ export const BottomModal: Story = {
   name: "바닥에 붙어있는 modal",
   args: {
     position: "bottom",
+    title: "bottom modal",
+    children: <Component />,
+    onConfirm: () => console.log("확인"),
+    onClose: () => console.log("닫기"),
+    type: "confirm",
+    size: "medium",
   },
 };
 
