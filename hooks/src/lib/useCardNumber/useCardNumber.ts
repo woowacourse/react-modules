@@ -1,5 +1,6 @@
 import { useState } from "react";
 
+import useCardNumberFormat from "./useCardNumberFormat";
 import useCardNumberValidation from "./useCardNumberValidation";
 
 import { INPUT_RULES } from "../constants/cardCustomHook";
@@ -16,6 +17,8 @@ const useCardNumber = () => {
   const [cardNumber, setCardNumber] = useState("");
   const [cardBrand, setCardBrand] = useState<CardBrandType>("");
 
+  const { cardNumberFormat, updateCardNumberFormat } = useCardNumberFormat();
+
   const { errorState, errorText, validateCardNumber } =
     useCardNumberValidation();
 
@@ -30,13 +33,16 @@ const useCardNumber = () => {
 
     setCardNumber(value);
     setCardBrand(INPUT_RULES.validCardBrand(value));
+
+    updateCardNumberFormat(value);
   };
 
   return {
     cardNumber,
+    cardNumberFormat,
+    cardBrand,
     errorState,
     errorText,
-    cardBrand,
     handleCardNumberChange,
   };
 };
