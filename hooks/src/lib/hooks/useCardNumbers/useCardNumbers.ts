@@ -52,17 +52,17 @@ function useCardNumbers() {
     setCardNumberError(!isValidNumber);
     setCardNumbers(value);
 
-    handleCardNumbersFormat(value);
+    handleCardNumbersFormat(value, cardBrand);
   };
 
-  const handleCardNumbersFormat = (value: string) => {
+  const handleCardNumbersFormat = (value: string, cardBrandValue: string) => {
     const formattedValue = {
       first: "",
       second: "",
       third: "",
       last: "",
     };
-    if (cardBrand === "diners" || cardBrand === "amex") {
+    if (cardBrandValue === "diners" || cardBrandValue === "amex") {
       formattedValue.first = value.substring(0, 4);
       formattedValue.second = value.substring(4, 10);
       formattedValue.third = value.substring(10, value.length);
@@ -74,7 +74,7 @@ function useCardNumbers() {
     }
 
     const formattedValueToString = Object.values(formattedValue).join(" ");
-    setFormattedCardNumbers(formattedValueToString);
+    setFormattedCardNumbers(formattedValueToString.trim());
   };
 
   const getCardNumbersErrorMessage = () => {
