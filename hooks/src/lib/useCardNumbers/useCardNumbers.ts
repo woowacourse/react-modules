@@ -60,14 +60,6 @@ const useCardNumbers = (initValue: string) => {
         errorMessage: '카드번호는 숫자만 입력이 가능해요.',
       };
     }
-    const brandWithRegex = Object.entries(CARD_BRAND_TABLE).find((value) =>
-      value[1].validate.test(getPureNumbers(newValue)),
-    );
-    if (brandWithRegex) {
-      setCardBrand(brandWithRegex[0]);
-    } else {
-      setCardBrand('none');
-    }
 
     return { isValid: true, errorMessage: '' };
   };
@@ -83,11 +75,17 @@ const useCardNumbers = (initValue: string) => {
   };
 
   const formatValue = (value: string) => {
+    const brandWithRegex = Object.entries(CARD_BRAND_TABLE).find((info) =>
+      info[1].validate.test(getPureNumbers(value)),
+    );
+    const newCardBrand = brandWithRegex ? brandWithRegex[0] : 'none';
+    setCardBrand(newCardBrand);
+
     const numberValue = getPureNumbers(value);
     return numberValue
       .replace(
-        CARD_BRAND_TABLE[cardBrand].replaceProps.regex,
-        CARD_BRAND_TABLE[cardBrand].replaceProps.group,
+        CARD_BRAND_TABLE[newCardBrand].replaceProps.regex,
+        CARD_BRAND_TABLE[newCardBrand].replaceProps.group,
       )
       .replace(/-+$/, '');
   };
