@@ -1,4 +1,3 @@
-export { default as useCardNumbers } from "./useCardNumbers/useCardNumbers";
 export { default as useCardNumber } from "./useCardNumbers/useCardNumber";
 export { default as useCardNumberValidation } from "./useCardNumbers/useCardNumberValidation";
 
