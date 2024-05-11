@@ -1,4 +1,4 @@
-export { default as useCardNumbers } from './useCardNumbers/useCardNumbers';
+export { default as useCardNumber } from './useCardNumber/useCardNumber';
 export { default as useCardCompany } from './useCardCompany/useCardCompany';
 export { default as useCardCVC } from './useCardCVC/useCardCVC';
 export { default as useCardExpirationDate } from './useCardExpirationDate/useCardExpirationDate';
