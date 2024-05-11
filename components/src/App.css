@@ -83,13 +83,15 @@ u,
 ul,
 var,
 video {
-  border: 0;
-  font-size: 100%;
-  font: inherit;
-  margin: 0;
-  padding: 0;
+  border        : 0;
+  font-size     : 100%;
+  font          : inherit;
+  margin        : 0;
+  padding       : 0;
   vertical-align: baseline;
+  box-sizing    : border-box;
 }
+
 article,
 aside,
 details,
@@ -103,17 +105,21 @@ nav,
 section {
   display: block;
 }
+
 body {
   line-height: 1;
 }
+
 ol,
 ul {
   list-style: none;
 }
+
 blockquote,
 q {
   quotes: none;
 }
+
 blockquote:after,
 blockquote:before,
 q:after,
@@ -121,7 +127,8 @@ q:before {
   content: "";
   content: none;
 }
+
 table {
   border-collapse: collapse;
-  border-spacing: 0;
+  border-spacing : 0;
 }
