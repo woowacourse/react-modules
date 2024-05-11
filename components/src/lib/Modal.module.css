@@ -108,9 +108,19 @@
     min-height: 36px;
   }
 
+  &.medium {
+    width: 160px;
+    min-height: 40px;
+  }
+
   &.large {
-    width: 100%;
+    width: 240px;
     min-height: 44px;
+  }
+
+  /* fullWidth prop */
+  &.fullWidth {
+    width: 100%;
   }
 }
 

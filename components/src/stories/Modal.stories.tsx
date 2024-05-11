@@ -81,6 +81,25 @@ const meta = {
         defaultValue: { summary: "dark" },
       },
     },
+    buttonSize: {
+      description: "버튼의 사이즈를 결정하는 arg입니다. (small/medium/large)",
+      options: ["small", "medium", "large"],
+      control: {
+        type: "radio",
+      },
+      table: {
+        defaultValue: { summary: "large" },
+      },
+    },
+    fullWidth: {
+      description: "버튼의 width 100% 여부를 결정하는 arg입니다.",
+      control: {
+        type: "boolean",
+      },
+      table: {
+        defaultValue: { summary: false },
+      },
+    },
   },
 };
 
@@ -97,6 +116,7 @@ interface ModalStoryProps {
   confirmButtonTheme: ModalButtonTheme;
   cancelButtonTheme?: ModalButtonTheme;
   buttonSize: ModalButtonSize;
+  fullWidth?: boolean;
 }
 type Story = StoryObj<ModalStoryProps>;
 
@@ -110,6 +130,7 @@ export const Default: Story = {
     confirmButtonText: "OK",
     confirmButtonTheme: "dark",
     buttonSize: "large",
+    fullWidth: true,
   },
 
   render: ({
@@ -119,6 +140,8 @@ export const Default: Story = {
     contentText,
     confirmButtonText,
     confirmButtonTheme,
+    buttonSize,
+    fullWidth,
   }: ModalStoryProps) => {
     const [args, updateArgs] = useArgs();
 
@@ -142,6 +165,8 @@ export const Default: Story = {
             <main style={{ margin: "10px 0" }}>{contentText}</main>
             <footer>
               <Modal.Button
+                size={buttonSize}
+                fullWidth={fullWidth}
                 theme={confirmButtonTheme}
                 onClick={() => {
                   alert("modal button clicked!");

@@ -15,7 +15,7 @@ export interface ModalCloseButtonProps extends React.HTMLAttributes<HTMLOrSVGEle
 }
 
 type ModalButtonTheme = "dark" | "light" | "inactive";
-type ModalButtonSize = "small" | "large";
+type ModalButtonSize = "small" | "medium" | "large";
 export interface ModalButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
   /**
    * 모달 버튼의 색 테마를 결정
@@ -27,6 +27,11 @@ export interface ModalButtonProps extends React.HTMLAttributes<HTMLButtonElement
    * @defaultValue "large"
    */
   size?: ModalButtonSize;
+  /**
+   * 모달 버튼의 width 100% 여부를 결정
+   * @defaultValue false
+   */
+  fullWidth?: boolean;
 }
 
 type ModalPosition = "center" | "bottom";
