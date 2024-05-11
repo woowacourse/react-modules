@@ -2,7 +2,7 @@ import { useState } from "react";
 
 import cardInputValidator from "../validators/cardInputValidator";
 
-import { INPUT_RULES, VALIDATION_MESSAGES } from "../constants/cardCustomHook";
+import { VALIDATION_MESSAGES } from "../constants/cardCustomHook";
 
 const useCardNumberValidation = () => {
   const [errorState, setErrorState] = useState<boolean>(false);
@@ -17,13 +17,11 @@ const useCardNumberValidation = () => {
       return false;
     }
 
-    const isOverInputLength = value.length > INPUT_RULES.validCardNumberLength;
+    if (!cardInputValidator.validateCardNumberLength(value)) return false;
 
-    if (isOverInputLength) return false;
-
-    if (!cardInputValidator.validateCardNumberLength(value)) {
+    if (!cardInputValidator.validateCardNumberExactLength(value)) {
       setErrorState(true);
-      setErrorText(VALIDATION_MESSAGES.invalidCardNumberLength);
+      setErrorText(VALIDATION_MESSAGES.invalidCardNumberLength(value));
 
       return true;
     }
