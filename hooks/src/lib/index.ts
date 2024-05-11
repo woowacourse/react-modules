@@ -1,5 +1,5 @@
-export { default as useCardNumber } from "./useCardNumbers/useCardNumber";
-export { default as useCardNumberValidation } from "./useCardNumbers/useCardNumberValidation";
+export { default as useCardNumber } from "./useCardNumber/useCardNumber";
+export { default as useCardNumberValidation } from "./useCardNumber/useCardNumberValidation";
 
 export { default as useExpiryDate } from "./useExpiryDate/useExpiryDate";
 export { default as useExpiryDateValidation } from "./useExpiryDate/useExpiryDateValidation";
