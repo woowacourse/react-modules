@@ -17,6 +17,7 @@ const useCardNumbersInput = (): Props => {
     isValid: false,
     errorMessage: "",
     cardBrand: "UNKNOWN",
+    maxLength: 16,
   });
 
   const handleCardNumbersChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -43,6 +44,7 @@ const useCardNumbersInput = (): Props => {
       isValid,
       errorMessage,
       cardBrand,
+      maxLength: CARD_BRAND[cardBrand].maxLength,
     });
   };
 

@@ -8,4 +8,5 @@ export interface InputState {
 
 export interface CardNumbersState extends InputState {
   cardBrand: CardBrand;
+  maxLength: number;
 }

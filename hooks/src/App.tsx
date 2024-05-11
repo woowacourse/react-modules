@@ -1,7 +1,6 @@
 import React from "react";
 import "./App.css";
 import { useCardNumbersInput, useExpiryDateInput, useCardHolderInput, useCVCInput, usePasswordInput } from "chlwlstlf-card-validation-hooks";
-import CARD_BRAND from "./hooks/lib/constants/cardBrand";
 
 function App() {
   const { CardNumbersState, handleCardNumbersChange } = useCardNumbersInput();
@@ -16,7 +15,7 @@ function App() {
       <h2>카드 번호</h2>
       <input
         value={CardNumbersState.value}
-        maxLength={CARD_BRAND[CardNumbersState.cardBrand].maxLength}
+        maxLength={CardNumbersState.maxLength}
         type="text"
         onChange={handleCardNumbersChange}
       />
