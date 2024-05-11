@@ -62,13 +62,11 @@ const MODAL_CONTENT_POSITION: {
   [key in ModalPosition]: React.CSSProperties;
 } = {
   center: {
-    boxSizing: 'border-box',
     top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
   },
   bottom: {
-    boxSizing: 'border-box',
     bottom: 0,
     left: '50%',
     transform: 'translateX(-50%)',

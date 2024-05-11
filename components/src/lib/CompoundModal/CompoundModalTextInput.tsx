@@ -5,7 +5,6 @@ export default function CompoundModalTextInput() {
   return <TextInput type='text' autoFocus></TextInput>;
 }
 const TextInput = styled.input({
-  boxSizing: 'border-box',
   width: '100%',
   height: '32px',
   borderRadius: '2px',
