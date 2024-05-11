@@ -72,7 +72,10 @@ const ConfirmModal = ({
             <ModalButtonContainer buttonPosition={buttonPosition}>
               <Button
                 text={'확인'}
-                onClick={onConfirm}
+                onClick={() => {
+                  onConfirm();
+                  onClose();
+                }}
                 size={'small'}
                 width={modalPosition === 'bottom' || buttonPosition === 'column' ? 'full' : 'fixed'}
                 buttonStyle={'primary'}
