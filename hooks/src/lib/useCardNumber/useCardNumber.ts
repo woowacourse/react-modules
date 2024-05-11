@@ -56,12 +56,15 @@ const useCardNumber = (initValue: string, formattingChar: string = '-') => {
     decorator,
   });
 
+  const formattingValue = splitByLengthList(
+    value.split(formattingChar).join(''),
+    [...judgeCardBrand(value).formattingRules],
+  ).join(formattingChar);
+
   return {
     value,
     cardBrand: judgeCardBrand(value).name,
-    formattingValue: splitByLengthList(value.split(formattingChar).join(''), [
-      ...judgeCardBrand(value).formattingRules,
-    ]).join(formattingChar),
+    formattingValue,
     errorMessage,
     isCompleted,
     onChangeHandler,
