@@ -1,6 +1,6 @@
 {
   "name": "nakta-react-payments-hooks",
-  "version": "0.0.0",
+  "version": "0.1.1",
   "description": "react-payments hooks",
   "type": "module",
   "types": "dist/index.d.ts",
