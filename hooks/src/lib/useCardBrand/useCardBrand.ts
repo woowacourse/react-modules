@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import ValidationResult from '../types/ValidationResult';
 
-import DEFAULT_CARD_BRANDS from './defaultCardBrands';
+import DEFAULT_CARD_BRANDS from '../constants/defaultCardBrands';
 
 interface BrandValidationResult {
   brand: string;
