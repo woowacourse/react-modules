@@ -3,11 +3,6 @@ export const BLANK_PATTERN = /^\s+|\s+$/g;
 export const UPPERCASE_AND_SPACE_ONLY = /^[A-Z\s]+$/;
 export const NUMBER = /^[0-9]*$/;
 
-export const CARD_NUMBER = {
-  FIELD_LENGTH: 4,
-  TOTAL_FIELDS: 4,
-};
-
 export const EXPIRATION_DATE = {
   FIELD_LENGTH: 2,
   TOTAL_FIELDS: 2,
