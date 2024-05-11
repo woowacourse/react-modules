@@ -24,7 +24,7 @@ export default function Modal({
   size = "",
 }: PropsWithChildren<Partial<ModalContextType>>) {
   const { open, closing } = useAnimation({
-    onClose,
+    unMountEvent: onClose,
     unMountAnimation,
     initialState: isOpen,
     animationTime,

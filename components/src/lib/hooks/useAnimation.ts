@@ -4,14 +4,14 @@ type HookProps = {
   initialState: boolean;
   unMountAnimation: string;
   animationTime: number;
-  onClose: () => void;
+  unMountEvent: () => void;
 };
 
 const useAnimation = ({
   initialState,
   unMountAnimation,
   animationTime,
-  onClose,
+  unMountEvent,
 }: HookProps) => {
   const [closing, setClosing] = useState(false);
   const [open, setOpen] = useState(initialState);
@@ -30,14 +30,14 @@ const useAnimation = ({
         const timer = setTimeout(() => {
           setClosing(false);
           setOpen(false);
-          onClose();
+          unMountEvent();
         }, animationTime);
 
         return () => clearTimeout(timer);
       } else {
         setClosing(false);
         setOpen(false);
-        onClose();
+        unMountEvent();
       }
     }
   }, [closing, unMountAnimation]);
