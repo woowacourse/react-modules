@@ -1,13 +1,12 @@
-import { PropsWithChildren, useEffect, useState } from "react";
-import { ModalProvider } from "./ModalProvider";
-import { ModalContextType } from "./ModalContext";
 import { PropsWithChildren } from "react";
 import { ModalProvider } from "./ModalProvider";
-import { ModalContextType, useModal } from "./ModalContext";
+import { ModalContextType } from "./ModalContext";
 import ModalPortal from "./ModalPortal";
 import ModalBackdrop from "./ModalBackdrop";
 import ModalCloseButton from "./ModalCloseButton";
 import Container from "./Container";
+import useAnimation from "./hooks/useAnimation";
+import styles from "./container.module.css";
 
 export default function Modal({
   children,
@@ -40,7 +39,7 @@ export default function Modal({
           ? styles.small
           : "";
 
-  const modalProps: ModalProviderValue = {
+  const modalProps: ModalContextType = {
     isOpen,
     position,
     onClose,
