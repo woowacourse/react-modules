@@ -10,14 +10,12 @@ const getAccumulatedArray = (formatArray: number[]) => {
 const getFormattedCardNumber = (cardNumber: string, formatArray: number[]) => {
   const formatAccumulatedArray = getAccumulatedArray(formatArray);
 
-  return formatAccumulatedArray.reduce((result, number, index) => {
+  return formatAccumulatedArray.map((number, index) => {
     if (index === 0) {
-      result.push(cardNumber.slice(0, number));
-      return result;
+      return cardNumber.slice(0, number);
     }
-    result.push(cardNumber.slice(formatAccumulatedArray[index - 1], number));
-    return result;
-  }, [] as string[]);
+    return cardNumber.slice(formatAccumulatedArray[index - 1], number);
+  });
 };
 
 export default getFormattedCardNumber;
