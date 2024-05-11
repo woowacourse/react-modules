@@ -21,8 +21,6 @@ function App() {
         onChange={handleCardNumbersChange}
       />
       <div>{CardNumbersState.errorMessage}</div>
-      <div>{CardNumbersState.cardBrand}</div>
-      <div>{CardNumbersState.value}</div>
 
       <h2>카드 유효 기간</h2>
       <input

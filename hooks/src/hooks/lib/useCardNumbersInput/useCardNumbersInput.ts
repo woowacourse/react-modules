@@ -4,15 +4,7 @@ import ERROR_MESSAGE from "../constants/errorMessage";
 import CARD_BRAND from "../constants/cardBrand";
 import getCardBrand from "../utils/getCardBrand";
 import { cardNumberFormatter } from "../utils/format";
-
-type CardBrand = "VISA" | "MASTER_CARD" | "DINERS" | "AMEX" | "UNION_PAY" | "UNKNOWN";
-
-interface CardNumbersState {
-  value: string;
-  isValid: boolean;
-  errorMessage: string;
-  cardBrand: CardBrand;
-}
+import { CardNumbersState } from "../type/cardType";
 
 interface Props {
   CardNumbersState: CardNumbersState;

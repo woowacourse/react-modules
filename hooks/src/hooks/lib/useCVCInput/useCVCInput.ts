@@ -1,22 +1,17 @@
 import { useState } from "react";
 import validator from "../utils/validate";
 import ERROR_MESSAGE from "../constants/errorMessage";
-
-interface CVCState {
-  value: string;
-  isValid: boolean;
-  errorMessage: string;
-}
+import { InputState } from "../type/cardType";
 
 interface Props {
-  CVCState: CVCState;
+  CVCState: InputState;
   handleCVCChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 const MAX_CVC_LENGTH = 3;
 
 const useCVCInput = (): Props => {
-  const [cvcState, setCVCState] = useState<CVCState>({
+  const [cvcState, setCVCState] = useState<InputState>({
     value: "",
     isValid: false,
     errorMessage: "",

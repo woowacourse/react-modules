@@ -1,6 +1,5 @@
 import CARD_BRAND from "../constants/cardBrand";
-
-type CardBrand = "VISA" | "MASTER_CARD" | "DINERS" | "AMEX" | "UNION_PAY" | "UNKNOWN";
+import { CardBrand } from "../type/cardType";
 
 const getCardBrand = (cardNumbers: string) => {
   let cardBrand: CardBrand = "UNKNOWN";

@@ -2,20 +2,15 @@ import { useState } from "react";
 import validator from "../utils/validate";
 import ERROR_MESSAGE from "../constants/errorMessage";
 import { cardHolderFormatter } from "../utils/format";
-
-interface CardHolderState {
-  value: string;
-  isValid: boolean;
-  errorMessage: string;
-}
+import { InputState } from "../type/cardType";
 
 interface Props {
-  CardHolderState: CardHolderState;
+  CardHolderState: InputState;
   handleCardHolderChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 const useCardHolderInput = (): Props => {
-  const [cardHolderState, setCardHolderState] = useState<CardHolderState>({
+  const [cardHolderState, setCardHolderState] = useState<InputState>({
     value: "",
     isValid: false,
     errorMessage: "",

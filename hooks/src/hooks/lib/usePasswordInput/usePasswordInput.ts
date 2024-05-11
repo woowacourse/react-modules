@@ -1,22 +1,17 @@
 import { useState } from "react";
 import validator from "../utils/validate";
 import ERROR_MESSAGE from "../constants/errorMessage";
-
-interface PasswordState {
-  value: string;
-  isValid: boolean;
-  errorMessage: string;
-}
+import { InputState } from "../type/cardType";
 
 interface Props {
-  PasswordState: PasswordState;
+  PasswordState: InputState;
   handlePasswordChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 const MAX_PASSWORD_LENGTH = 2;
 
 const usePasswordInput = (): Props => {
-  const [passwordState, setPasswordState] = useState<PasswordState>({
+  const [passwordState, setPasswordState] = useState<InputState>({
     value: "",
     isValid: false,
     errorMessage: "",

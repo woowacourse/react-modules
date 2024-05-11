@@ -2,24 +2,19 @@ import validator from "../utils/validate";
 import ERROR_MESSAGE from "../constants/errorMessage";
 import { useState } from "react";
 import { expiryDateFormatter } from "../utils/format";
-
-interface ExpiryDateState {
-  value: string;
-  isValid: boolean;
-  errorMessage: string;
-}
+import { InputState } from "../type/cardType";
 
 interface Props {
-  ExpiryDateState: ExpiryDateState;
+  ExpiryDateState: InputState;
   handleExpiryDateChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 const MIN_MONTH = 1;
 const MAX_MONTH = 12;
-const MAX_DATE_LENGTH = 2;
+const MAX_DATE_LENGTH = 5;
 
 const useExpiryDateInput = (): Props => {
-  const [expiryDateState, setExpiryDateState] = useState<ExpiryDateState>({
+  const [expiryDateState, setExpiryDateState] = useState<InputState>({
     value: "",
     isValid: false,
     errorMessage: "",
@@ -39,7 +34,7 @@ const useExpiryDateInput = (): Props => {
       } else if (!validator.isValidDigit(date[i])) {
         isValid = false;
         errorMessage = ERROR_MESSAGE.ONLY_NUMBER;
-      } else if (!validator.isValidLength({ value: date[i], matchedLength: MAX_DATE_LENGTH })) {
+      } else if (!validator.isValidLength({ value: value, matchedLength: MAX_DATE_LENGTH })) {
         isValid = false;
         errorMessage = ERROR_MESSAGE.INVALID_DATE_LENGTH;
       } else if (!validator.isNumberInRange({ min: MIN_MONTH, max: MAX_MONTH, compareNumber: Number(date[0]) })) {
