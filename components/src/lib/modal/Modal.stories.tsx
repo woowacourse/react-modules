@@ -1,7 +1,7 @@
 import { StoryObj, Meta } from '@storybook/react';
 import { fn } from '@storybook/test';
 import Modal from './Modal';
-import CloseImage from '../../assets/close.png';
+import CloseImage from '../assets/close.png';
 import AlertModal from './AlertModal';
 import ConfirmModal from './ConfirmModal';
 import PromptModal from './PromptModal';
