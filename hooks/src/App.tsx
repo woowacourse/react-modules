@@ -3,35 +3,21 @@ import './App.css';
 import {
   useCVCValidation,
   useCardHolderValidation,
-  useCardNumberValidation,
+  useCardNumber,
   useCardPasswordValidation,
-  useCardTypeValidation,
   useExpiryDateValidation,
-} from 'fe-card-validation-hooks';
-
+} from './lib/index';
 function App() {
   const [cardHolder, setCardHolder] = useState('');
-  const [cardNumber, setCardNumber] = useState(['', '', '', '']);
   const [cardPassword, setCardPassword] = useState('');
-  const [cardType, setCardType] = useState('');
   const [cvc, setCVC] = useState('');
   const [expiryMonth, setExpiryMonth] = useState('');
   const [expiryYear, setExpiryYear] = useState('');
-
   const { validationResult: holderValidationResult, handleCardHolderChange } = useCardHolderValidation();
-  const { validationResults: numberValidationResults, handleCardNumberChange } = useCardNumberValidation();
+  const { cardNumberInfo, handleCardNumberChange } = useCardNumber();
   const { validationResult: passwordValidationResult, handleCardPasswordChange } = useCardPasswordValidation();
-  const { validationResult: typeValidationResult, handleCardTypeChange } = useCardTypeValidation();
   const { validationResult: cvcValidationResult, handleCVCChange } = useCVCValidation();
   const { validationResult: expiryValidationResult, handleExpiryDateChange } = useExpiryDateValidation();
-
-  const handleCardNumberInputChange = (value: string, index: number) => {
-    const newCardNumber = [...cardNumber];
-    newCardNumber[index] = value;
-    setCardNumber(newCardNumber);
-    handleCardNumberChange(value, index);
-  };
-
   return (
     <div>
       <h1>Hooks Modules</h1>
@@ -54,25 +40,20 @@ function App() {
       </div>
       <div>
         <label>Card Number: </label>
-        {cardNumber.map((number, index) => (
-          <input
-            key={index}
-            type='text'
-            value={number}
-            maxLength={4}
-            onChange={(e) => handleCardNumberInputChange(e.target.value, index)}
-          />
-        ))}
-        {numberValidationResults.map((result, index) => (
-          <div key={index}>
-            {!result.isValid &&
-              result.errorMessages?.map((error, idx) => (
-                <p key={idx} style={{ color: 'red' }}>
-                  {error}
-                </p>
-              ))}
-          </div>
-        ))}
+        <input
+          type='text'
+          value={cardNumberInfo.cardNumber.join(' ')}
+          onChange={(e) => handleCardNumberChange(e.target.value)}
+        />
+        <div>
+          {!cardNumberInfo.isValid &&
+            cardNumberInfo.errorMessages?.map((error, idx) => (
+              <p key={idx} style={{ color: 'red' }}>
+                {error}
+              </p>
+            ))}
+          {<p>Card Type: {cardNumberInfo.cardType}</p>}
+        </div>
       </div>
       <div>
         <label>Card Password: </label>
@@ -91,18 +72,6 @@ function App() {
               {error}
             </p>
           ))}
-      </div>
-      <div>
-        <label>Card Type: </label>
-        <input
-          type='text'
-          value={cardType}
-          onChange={(e) => {
-            setCardType(e.target.value);
-            handleCardTypeChange(e.target.value);
-          }}
-        />
-        {<p>Card Type: {typeValidationResult.cardType}</p>}
       </div>
       <div>
         <label>CVC: </label>
@@ -158,5 +127,4 @@ function App() {
     </div>
   );
 }
-
 export default App;
