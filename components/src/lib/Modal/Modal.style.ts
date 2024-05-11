@@ -16,7 +16,9 @@ export const ModalDim = styled.div<ModalDimProps>`
   z-index: 1000;
 `;
 
-export const ModalContainer = styled.div<Pick<ModalProps, "modalPosition" | "closeButtonPosition">>`
+export const ModalContainer = styled.div<
+  Pick<ModalProps, "modalPosition" | "closeButtonPosition" | "size">
+>`
   display: flex;
   z-index: 1001;
   flex-direction: column;
@@ -32,14 +34,16 @@ export const ModalContainer = styled.div<Pick<ModalProps, "modalPosition" | "clo
   background: rgba(255, 255, 255, 1);
   color: rgba(0, 0, 0, 1);
 
-  ${({ modalPosition }) => {
+  ${({ modalPosition, size }) => {
     switch (modalPosition) {
       case "center":
         return `
           top: 50%;
           left: 50%;
           transform: translate(-50%, -50%);
-          width: 304px;
+          ${size === "small" ? "width: 320px;" : "width: 320px;"}
+          ${size === "medium" ? "width: 480px;" : "width: 320px;"}
+          ${size === "large" ? "width: 600px;" : "width: 320px;"}
         `;
       case "bottom":
         return `

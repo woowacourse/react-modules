@@ -3,13 +3,17 @@ import CloseButton from "../CloseButton/CloseButton";
 import Button from "../common/Button";
 import { ModalContainer, ModalDim, ModalHeader } from "./Modal.style";
 
+export type ModalPosition = "center" | "bottom";
+export type CloseButton = "top" | "bottom";
+export type ModalSize = "small" | "medium" | "large";
 export interface ModalProps {
-  modalPosition: "center" | "bottom";
+  modalPosition: ModalPosition;
   title: string;
   children: React.ReactNode;
-  closeButtonPosition: "top" | "bottom";
+  closeButtonPosition: CloseButton;
   isOpen: boolean;
   onClose: (e: React.MouseEvent<HTMLDivElement | HTMLButtonElement>) => void;
+  size: ModalSize;
 }
 
 export const Modal = ({
@@ -19,12 +23,17 @@ export const Modal = ({
   closeButtonPosition,
   isOpen,
   onClose,
+  size,
 }: ModalProps) => {
   if (!isOpen) return null;
 
   return (
     <ModalDim isOpen={isOpen} onClick={onClose}>
-      <ModalContainer modalPosition={modalPosition} closeButtonPosition={closeButtonPosition}>
+      <ModalContainer
+        modalPosition={modalPosition}
+        closeButtonPosition={closeButtonPosition}
+        size={size}
+      >
         <ModalHeader>
           <h1>{title}</h1>
           {closeButtonPosition === "top" && (
