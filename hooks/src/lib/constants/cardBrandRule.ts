@@ -1,4 +1,4 @@
-import { CardBrand } from '../type';
+import { CardBrandRule } from '../type';
 
 export const CARD_BRAND_NAME = [
   '비자카드',
@@ -10,7 +10,7 @@ export const CARD_BRAND_NAME = [
 
 type CardBrandName = (typeof CARD_BRAND_NAME)[number];
 
-const CARD_BRAND: CardBrand<CardBrandName>[] = [
+const CARD_BRAND: CardBrandRule<CardBrandName>[] = [
   {
     name: '비자카드',
     numberLength: 16,
