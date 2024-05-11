@@ -1,6 +1,39 @@
 import React, { useState } from "react";
 import { Modal } from "./lib";
 
+const App = () => {
+  return (
+    <>
+      <DefaultSample></DefaultSample>
+      <AlertSample></AlertSample>
+      <ConfirmSample></ConfirmSample>
+      <PromptSample></PromptSample>
+    </>
+  );
+};
+
+export const DefaultSample = () => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const handleClose = () => setIsOpen(false);
+  const handleOpen = () => setIsOpen(true);
+
+  return (
+    <div>
+      <button onClick={handleOpen}>Open Default Modal</button>
+
+      <Modal
+        isOpen={isOpen}
+        onClose={handleClose}
+        position="center"
+      >
+        <Modal.CloseButton onClick={handleClose}></Modal.CloseButton>
+        <Modal.Title>기본 모달입니다.</Modal.Title>
+      </Modal>
+    </div>
+  );
+};
+
 export const AlertSample = () => {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -69,10 +102,12 @@ export const PromptSample = () => {
   const handleSubmit = () => {
     alert(`${couponCode}를 입력하였습니다.`);
     handleClose();
+    setCouponCode("");
   };
   const handleCancel = () => {
     alert("취소되었습니다.");
     handleClose();
+    setCouponCode("");
   };
 
   return (
@@ -84,7 +119,7 @@ export const PromptSample = () => {
         onClose={handleClose}
         onSubmit={handleSubmit}
         onCancel={handleCancel}
-        position="center"
+        position="bottom"
         type="prompt"
       >
         <Modal.Title>쿠폰 번호를 입력해 주세요.</Modal.Title>
@@ -94,16 +129,6 @@ export const PromptSample = () => {
         ></Modal.Input>
       </Modal>
     </div>
-  );
-};
-
-const App = () => {
-  return (
-    <>
-      <AlertSample></AlertSample>
-      <ConfirmSample></ConfirmSample>
-      <PromptSample></PromptSample>
-    </>
   );
 };
 
