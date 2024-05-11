@@ -18,7 +18,6 @@ interface PromptModalProps {
   closeButton: CloseButtonProps;
   cancelButton: CancelButtonProps;
   confirmButton: ConfirmButtonProps;
-  children?: React.ReactNode;
   backgroundColor?: CSSProperties['backgroundColor'];
   borderRadius?: CSSProperties['borderRadius'];
   preventCloseOnOutsideClick?: boolean;
@@ -33,7 +32,6 @@ const PromptModal = ({
   closeButton,
   cancelButton,
   confirmButton,
-  children,
   backgroundColor,
   borderRadius,
   preventCloseOnOutsideClick,
