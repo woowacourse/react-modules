@@ -7,31 +7,6 @@ export interface AlertModalProps extends ModalProps {
   onConfirm: () => void;
 }
 
-/**
- *
- * @param param0   title: string;
-  children?: React.ReactNode;
-  size?: ModalSizeType;
-  position?: ModalPositionType;
-  hasCloseButton?: boolean;
-  isClosableOnClickBackdrop?: boolean;
-  zIndex?: { backdrop: number; modal: number };
-  backdropOpacity?: string;
-  buttons?: ButtonInterface[];
-  buttonsFlexDirection?: ButtonsPositionType;
-
-    children,
-  size = 'medium',
-  position = 'center',
-  hasCloseButton = true,
-  isClosableOnClickBackdrop = true,
-  zIndex = { backdrop: 999, modal: 1000 },
-  backdropOpacity = '50%',
-  buttons,
-  buttonsFlexDirection = 'column',
- * @returns
- */
-
 export default function AlertModal({
   isOpen,
   size,
