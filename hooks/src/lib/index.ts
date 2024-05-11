@@ -7,3 +7,4 @@ export { default as useCardPassword } from './useCardPassword/useCardPassword';
 export { default as Validation } from './utils/Validation';
 
 export type { default as ValidationResult } from './types/ValidationResult';
+export type { default as ErrorMessages } from './types/ErrorMessages';

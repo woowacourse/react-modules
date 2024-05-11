@@ -1,14 +1,5 @@
 import React from 'react';
 
-// import {
-//   useCardNumbers,
-//   useCardBrand,
-//   useCardExpiryDate,
-//   useCardHolder,
-//   useCardCVC,
-//   useCardPassword,
-// } from '@seongjinme/card-validation';
-
 import {
   useCardNumber,
   useCardBrand,
@@ -16,7 +7,7 @@ import {
   useCardHolder,
   useCardCVC,
   useCardPassword,
-} from './lib';
+} from '@seongjinme/card-validation';
 
 import './App.css';
 
@@ -82,33 +73,6 @@ function App() {
           <p>errorMessage: {cardNumberValidationResult.errorMessage}</p>
         </div>
       </section>
-
-      {/* <section>
-        <h2>useCardNumber</h2>
-        <div className="input-container">
-          <input
-            type="text"
-            value={formatCardNumber(cardNumber, cardNumberFormat)}
-            onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-              handleUpdateCardNumber(event.target.value.replace(/\s/g, ''))
-            }
-            placeholder="카드번호를 입력해 주세요."
-          />
-        </div>
-        <div className="output-container">
-          <p>cardNumber: {cardNumber}</p>
-          <p>cardNumberFormatted: {cardNumberFormatted}</p>
-          <p>cardGlobalBrand: {cardGlobalBrand}</p>
-          <p>cardNumberFormat: {cardNumberFormat.join(', ')}</p>
-          <p>
-            isValid:
-            {cardNumberValidationResult.isValid !== null
-              ? cardNumberValidationResult.isValid.toString()
-              : 'null'}
-          </p>
-          <p>errorMessage: {cardNumberValidationResult.errorMessage}</p>
-        </div>
-      </section> */}
 
       <section>
         <h2>useCardBrand</h2>

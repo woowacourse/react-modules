@@ -1,6 +1,6 @@
 {
   "name": "@seongjinme/card-validation",
-  "version": "0.1.0",
+  "version": "0.2.2",
   "description": "우아한테크코스 6기 FE 미션을 위해 제작된 간단한 신용카드 입력값 검증 모듈입니다.",
   "type": "module",
   "types": "dist/index.d.ts",
@@ -17,7 +17,7 @@
     "test": "jest"
   },
   "dependencies": {
-    "@seongjinme/card-validation": "^0.1.0",
+    "@seongjinme/card-validation": "^0.2.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
