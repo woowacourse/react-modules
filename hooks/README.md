@@ -1,8 +1,24 @@
-# Hooks Module
+# woowacourse-6th-card-custom-hook Library
 
 ## Description
 
-It can handle the card company, card holder, card numbers, CVC number, expiry date, and password.
+This library provides a set of custom React hooks to handle various aspects of credit card input validation and formatting. It simplifies the process of building credit card forms by encapsulating the logic for validating and formatting card numbers, expiry dates, CVC codes, and more.
+
+The library offers several hooks, each responsible for a specific part of the credit card input process:
+
+1. **useCardBrand**: This hook detects the card brand (e.g., Visa, Mastercard, American Express) based on the user's input for the card number. It uses regular expressions to match the card number patterns and determines the corresponding brand.
+
+2. **useCardNumbers**: This hook handles the card number input, including formatting, validation, and error handling. It formats the card number according to the rules of the detected card brand and provides error messages if the input is invalid or exceeds the maximum length.
+
+3. **useCardHolder**: This hook manages the input for the cardholder's name, ensuring it follows the specified naming pattern and providing error messages if the input is invalid.
+
+4. **useCVCNumber**: This hook validates the CVC (Card Verification Code) number input, checking if it matches the expected length and format for the detected card brand.
+
+5. **useExpiryDate**: This hook handles the expiry date input, allowing the user to enter the month and year separately. It validates the input and checks if the provided date is in the future.
+
+6. **usePassword**: This hook is responsible for validating the password input, ensuring it meets the specified requirements (e.g., minimum length, character composition).
+
+By using these hooks, developers can easily incorporate credit card input functionality into their React applications without having to worry about the intricate details of validation and formatting. The hooks provide a consistent and reusable solution, making it easier to build robust and user-friendly credit card forms.
 
 <br />
 
@@ -15,6 +31,51 @@ npm i woowacourse-6th-card-custom-hook
 <br />
 
 ## **Usage & API**
+
+... (rest of the documentation remains the same)
+<br />
+
+## Install
+
+```
+npm i woowacourse-6th-card-custom-hook
+```
+
+<br />
+
+## **Usage & API**
+
+### useCardBrand hook
+
+```tsx
+// useCardBrand
+
+import React from "react";
+import { useCardBrand } from "woowacourse-6th-card-custom-hook";
+
+function App() {
+  const { cardBrand, handleCardBrandChange } = useCardBrand();
+
+  return (
+    <>
+      <input
+        value={cardNumbers}
+        onChange={(e) => handleCardBrandChange(e.target.value)}
+      />
+      <div>Card Brand: {cardBrand}</div>
+    </>
+  );
+}
+```
+
+### API
+
+| Property Name         | Type     | Description                                                                                                 |
+| --------------------- | -------- | ----------------------------------------------------------------------------------------------------------- |
+| cardBrand             | string   | The detected card brand based on the input card number. It can be one of the supported brands or "unknown". |
+| handleCardBrandChange | function | A function to update the cardBrand state based on the input card number.                                    |
+
+<br />
 
 ### useCardCompany hook
 
@@ -63,6 +124,8 @@ function App() {
 | getCardCompanyErrorMessage | function | A function that returns an error message when a card company has not been selected. This function returns an error message applicable when cardCompanyError is true, and the error message is defined in [ERROR_MESSAGES.company]. |
 | handleCardCompanyChange    | function | A function that handles changes in the card company selection dropdown. This function needs to be called whenever a user selects or changes the selected card company.                                                             |
 
+<br />
+
 ### useCardHolder hook
 
 ```tsx
@@ -100,6 +163,7 @@ function App() {
 | getCardHolderErrorMessage | function | Returns the error message for the card holder's name if there's an error, otherwise undefined. The error message is sourced from ERROR_MESSAGES.holder.                     |
 | handleCardHolderChange    | function | A function to update the card holder's name based on user input. It checks the validity against a regex pattern (INPUT_REGEX.cardHolder) and updates the state accordingly. |
 
+<br />
 ### useCardNumbers hook
 
 ```tsx
@@ -111,23 +175,20 @@ import { useCardNumbers } from "woowacourse-6th-card-custom-hook";
 function App() {
   const {
     cardNumbers,
-    cardNumberErrors,
+    cardNumbersError,
     getCardNumbersErrorMessage,
+    cardBrand,
     handleCardNumbersChange,
-  } = useCardNumbers(4, 4);
+  } = useCardNumbers();
 
   return (
     <>
-      {cardNumbers.map((cardNumber, index) => {
-        return (
-          <input
-            key={index}
-            value={cardNumber}
-            onChange={(e) => handleCardNumbersChange(e.target.value, index)}
-          />
-        );
-      })}
+      <input
+        value={cardNumbers.join(" ")}
+        onChange={(e) => handleCardNumbersChange(e.target.value)}
+      />
       <div>{getCardNumbersErrorMessage()}</div>
+      <div>Card Brand: {cardBrand}</div>
     </>
   );
 }
@@ -135,12 +196,15 @@ function App() {
 
 ### API
 
-|                            | Type           | Description                                                                                                                                                                                                                         |
-| -------------------------- | -------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| cardNumbers                | Array<string>  | An array of strings representing the card numbers entered by the user. Initially filled with empty strings for each card number input field.                                                                                        |
-| cardNumberErrors           | Array<boolean> | An array of boolean flags indicating the validity of each card number input. Initially set to false, indicating no error.                                                                                                           |
-| getCardNumbersErrorMessage | function       | A function that checks if there are any errors in the card number inputs and returns the appropriate error message if any errors are found; otherwise, it returns undefined.                                                        |
-| handleCardNumbersChange    | function       | A function that must be called whenever the user changes the value in any card number input field. It takes value (the new string value of the input) and inputIndex (the index of the input field that was changed) as parameters. |
+| Property Name              | Type          | Description                                                                                                                                                                                                            |
+| -------------------------- | ------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| cardNumbers                | Array<string> | An array of formatted card number strings based on the detected card brand.                                                                                                                                            |
+| cardNumbersError           | boolean       | Indicates whether there is an error with the card number input.                                                                                                                                                        |
+| getCardNumbersErrorMessage | function      | A function that checks if there are any errors in the card number input and returns the appropriate error message if any errors are found; otherwise, it returns undefined.                                            |
+| cardBrand                  | string        | The detected card brand based on the input card number. It can be one of the supported brands or "unknown".                                                                                                            |
+| handleCardNumbersChange    | function      | A function that must be called whenever the user changes the value in the card number input field. It takes value (the new string value of the input) as a parameter and updates the cardBrand and cardNumbers states. |
+
+<br />
 
 ### useCVCNumber
 
@@ -179,6 +243,8 @@ function App() {
 | getCVCNumberErrorMessage | function | A function that checks if there is an error in the CVC number input and returns the appropriate error message if an error is found; otherwise, it returns undefined. |
 | handleCVCNumberChange    | function | A function that must be called whenever the user changes the value in the CVC number input field. It takes value (the new string value of the input) as a parameter. |
 
+<br />
+
 ### useExpiryDate hook
 
 ```tsx
@@ -214,6 +280,8 @@ function App() {
 | isPeriodError         | { month: boolean, year: boolean, expired: boolean } | An object indicating the presence of errors in the period inputs, including an expired date error.                                                  |
 | getPeriodErrorMessage | Function                                            | A function that returns error messages related to the period input, based on the type of error found. If no errors are found, it returns undefined. |
 | handlePeriodChange    | Function                                            | A function to handle changes in the period inputs. It accepts a type ('month' or 'year') and the value of the input.                                |
+
+<br />
 
 ### usePassword hook
 
