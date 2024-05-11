@@ -74,7 +74,7 @@ const Modal: React.FC<ModalProps> = ({
                 type="cancel"
                 handleClick={() => {
                   action.handleClose();
-                  if (onClose) onClose();
+                  onClose?.();
                 }}
               >
                 닫기
@@ -96,7 +96,7 @@ const Modal: React.FC<ModalProps> = ({
                 type="cancel"
                 handleClick={() => {
                   action.handleClose();
-                  if (onClose) onClose();
+                  onClose?.();
                 }}
               >
                 닫기
