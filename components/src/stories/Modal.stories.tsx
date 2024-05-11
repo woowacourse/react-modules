@@ -65,6 +65,39 @@ const DefaultModal: StoryObj<typeof meta.args> = (args) => {
   );
 };
 
+const DefaultAlertModal: StoryObj<typeof meta.args> = (args) => {
+  const { isModalOpen, openModal, closeModal } = useModal();
+
+  return (
+    <>
+      <button onClick={openModal}>모달 열기</button>
+      {isModalOpen && (
+        <Modal
+          $size={args.$size}
+          $position={args.$position}
+          onCloseModal={closeModal}
+        >
+          <Modal.Header
+            title={args.title}
+            closeIcon={args.closeIcon}
+            onCloseModal={closeModal}
+          ></Modal.Header>
+          <Modal.Content message={args.message} />
+          <Modal.Footer>
+            <Modal.Button
+              type="button"
+              $size="small"
+              onButtonClick={closeModal}
+            >
+              확인
+            </Modal.Button>
+          </Modal.Footer>
+        </Modal>
+      )}
+    </>
+  );
+};
+
 export const SmallModal = DefaultModal.bind({});
 SmallModal.args = {
   title: '작은 모달',
@@ -113,6 +146,15 @@ export const ButtonCloseModal = DefaultModal.bind({});
 ButtonCloseModal.args = {
   title: '버튼으로 닫기',
   message: '닫기 버튼을 클릭하면 모달이 닫힙니다.',
+  closeIcon: false,
+  $size: 'medium',
+  $position: 'center',
+};
+
+export const AlertModal = DefaultAlertModal.bind({});
+AlertModal.args = {
+  title: '확인(Alert) 모달',
+  message: '사용자에게 메시지를 전달하고 확인 버튼만 제공',
   closeIcon: false,
   $size: 'medium',
   $position: 'center',
