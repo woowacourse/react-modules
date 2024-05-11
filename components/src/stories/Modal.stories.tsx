@@ -1,71 +1,76 @@
-import type { Meta, StoryObj } from "@storybook/react";
-import { Modal } from "hash-modal";
-import React from "react";
-import { ContentDefaultTemplate, ContentWideTemplate } from "../App";
+// import { Meta, StoryFn } from "@storybook/react";
+// import { Modal, useModalHandler } from "../lib";
 
-const meta = {
-  title: "Modal",
-  component: Modal,
-  tags: ["autodocs"],
+// // 스토리 메타 정보 설정
+// const meta: Meta<typeof Modal> = {
+//   title: "Modal",
+//   component: Modal,
 
-  argTypes: {
-    hasXButton: { control: "boolean" },
-  },
-  decorators: [(Story) => <div style={{ padding: "3rem" }}>{Story()}</div>],
-} satisfies Meta<typeof Modal>;
+//   tags: ["autodocs"],
+//   argTypes: {
+//     title: {
+//       control: "text",
+//     },
+//     backgroundColor: {
+//       description: "모달창 색 설정.",
+//       color: /(background|color)$/i,
+//     },
 
-export default meta;
+//     buttonContent: {
+//       description: "모달의 버튼 내용",
+//       control: "text",
+//     },
+//     contents: {
+//       description: "모달 내용",
+//       control: "text",
+//     },
+//     position: {
+//       description: "모달 위치 설정.",
+//       control: { type: "select", options: ["bottom", "center"] },
+//     },
+//     modalSize: {
+//       description: "모달 크기 설정",
+//       control: { type: "select", options: ["S", "M", "L"] },
+//     },
 
-type Story = StoryObj<typeof meta>;
+//     children: { table: { disable: true } },
+//   },
+// } as Meta;
 
-export const Default: Story = {
-  args: {
-    position: "center",
-    title: "제목입니다.",
-    buttonLayout: "row",
-    children: <ContentDefaultTemplate>default 문서</ContentDefaultTemplate>,
-    hasXButton: true,
-    confirmButtonContent: "확인",
-    handleConfirmEvent: () => {
-      alert("열림");
-    },
-    handleCloseEvent: () => {
-      alert("닫힘");
-    },
-  },
-};
+// export default meta;
 
-export const BottomModal: Story = {
-  args: {
-    ...Default.args,
-    position: "bottom",
-  },
-};
+// export const Template: StoryFn<typeof meta> = (args) => {
+//   const { modalOpen, openModal, closeModal } = useModalHandler();
 
-export const NoneXButton: Story = {
-  args: {
-    ...Default.args,
-    hasXButton: false,
-  },
-};
+//   return (
+//     <>
+//       <button onClick={openModal}>모달 열기</button>
+//       {modalOpen && (
+//         <Modal
+//           setModalClose={openModal}
+//           backgroundColor={args.backgroundColor}
+//           position={args.position}
+//           modalSize={args.modalSize}
+//         >
+//           <Modal.Header title={args.title} setModalClose={closeModal} />
+//           <Modal.Content>{args.contents}</Modal.Content>
+//           <Modal.Footer>
+//             <Modal.Button
+//               content={args.buttonContent}
+//               onClick={closeModal}
+//               buttonSize="S"
+//             />
+//           </Modal.Footer>
+//         </Modal>
+//       )}
+//     </>
+//   );
+// };
 
-export const CancelButton: Story = {
-  args: {
-    ...Default.args,
-    closeButtonContent: "취소",
-  },
-};
-
-export const ColumnButtonLayout: Story = {
-  args: {
-    ...Default.args,
-    buttonLayout: "column",
-  },
-};
-
-export const ScrollContent: Story = {
-  args: {
-    ...Default.args,
-    children: <ContentWideTemplate>Wide 문서</ContentWideTemplate>,
-  },
-};
+// export const AlertModal = Template.bind({});
+// AlertModal.args = {
+//   title: "아이디를 입력해 주세요.",
+//   contents: "아이디는 필수로 입력해야 합니다.",
+//   buttonSize: "S",
+// };
+export default {};
