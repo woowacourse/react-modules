@@ -1,6 +1,6 @@
 {
   "name": "@roqkftjs/react-payments-module",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "리액트 페이먼츠 모달 모듈",
   "type": "module",
   "types": "dist/index.d.ts",
