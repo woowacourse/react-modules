@@ -12,45 +12,35 @@ interface PromptModalProps extends BasicModal {
 }
 
 function PromptModal({ ...rest }: PromptModalProps) {
-  const { isModalOpen, closeModal } = useModal();
   return (
-    <>
-      {isModalOpen && (
-        <Modal onCloseModal={closeModal}>
-          <Modal.Header
-            title={rest.title}
-            isCloseIcon={rest.isCloseIcon}
-            onCloseModal={closeModal}
-          ></Modal.Header>
-          <Modal.Content
-            message={rest.message}
-            $direction={rest.$contentDirection}
-          >
-            <Input label={rest.label} onChange={rest.onInputChange} />
-          </Modal.Content>
-          <Modal.Footer $direction={rest.$footerDirection} $align={rest.$algin}>
-            <Modal.Button
-              type="button"
-              onButtonClick={rest.onCancelButtonClick}
-              $size={rest.$buttonSize}
-              $backgroundColor={rest.$buttonBackgroundColor}
-              $color={rest.$buttonColor}
-            >
-              취소
-            </Modal.Button>
-            <Modal.Button
-              type="button"
-              onButtonClick={rest.onConfirmButtonClick}
-              $size={rest.$buttonSize}
-              $backgroundColor={rest.$buttonBackgroundColor}
-              $color={rest.$buttonColor}
-            >
-              확인
-            </Modal.Button>
-          </Modal.Footer>
-        </Modal>
-      )}
-    </>
+    <Modal onCloseModal={rest.onModalClose}>
+      <Modal.Header
+        title={rest.title}
+        isCloseIcon={rest.isCloseIcon}
+        onCloseModal={rest.onModalClose}
+      ></Modal.Header>
+      <Modal.Content message={rest.message} $direction={rest.$contentDirection}>
+        <Input label={rest.label} onChange={rest.onInputChange} />
+      </Modal.Content>
+      <Modal.Footer $direction={rest.$footerDirection} $align={rest.$algin}>
+        <Modal.Button
+          type="button"
+          onButtonClick={rest.onCancelButtonClick}
+          $size={rest.$buttonSize}
+          $backgroundColor={rest.$buttonBackgroundColor}
+          $color={rest.$buttonColor}
+        >
+          취소
+        </Modal.Button>
+        <Modal.Button
+          type="button"
+          onButtonClick={rest.onConfirmButtonClick}
+          $size={rest.$buttonSize}
+        >
+          확인
+        </Modal.Button>
+      </Modal.Footer>
+    </Modal>
   );
 }
 

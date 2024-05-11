@@ -7,10 +7,10 @@ export interface BasicModal {
   title: string;
   message?: string;
   isCloseIcon?: boolean;
+  onModalClose: () => void;
   $modalSize?: StyleSize;
   $position?: StylePosition;
   $contentDirection?: StyleDirection;
-  $footerSize?: StyleSize;
   $footerDirection?: StyleDirection;
   $algin?: StyleAlign;
   $buttonSize?: StyleSize;
