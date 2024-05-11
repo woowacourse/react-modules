@@ -17,8 +17,26 @@ const cardInputValidator = {
     return number >= min && number <= max;
   },
 
+  validateDinersCardNumber(value: string) {
+    return value.slice(0, 2) === INPUT_RULES.validDinersCardNumber;
+  },
+
+  validateAMEXCardNumber(value: string) {
+    return INPUT_RULES.validAMEXCardNumbers.includes(value.slice(0, 2));
+  },
+
+  validateCardNumberExactLength(value: string) {
+    return this.validateInputLength(
+      value,
+      INPUT_RULES.validCardNumberLength(value)
+    );
+  },
+
   validateCardNumberLength(value: string) {
-    return value.length === INPUT_RULES.validCardNumberLength;
+    const isOverDinersCardNumberLength =
+      value.length <= INPUT_RULES.validCardNumberLength(value);
+
+    return isOverDinersCardNumberLength;
   },
 
   validatePastYear(year: string) {
