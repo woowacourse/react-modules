@@ -10,15 +10,13 @@ npm install nakta-react-payments-hooks
 
 ### props
 
-- `initialValue`: 카드 번호 배열 상태 초기값 설정
-  - `{value: '', length: 4}`형태의 배열
-    - value: 초기 값
-    - length: input 입력 글자
+- `initialValue`: 카드번호 초기값
 
 ### return
 
-- `cardNumbers`: `id`, `value`, `length`, `isError` 속성이 담긴 객체 배열
-- `cardBrand`: 카드 브랜드(visa, mastercard) 상태값
+- `value`: 카드번호가 포맷팅된 형태 제공
+- `number`: 포맷팅되지 않은 숫자형태의 카드번호
+- `brand`: 카드 브랜드(visa, mastercard, diners, amex, unionpay) 상태값
 - `isValid`: 카드 번호 입력 유효성 상태값
 - `onChange`: 각 입력 값에 대한 `onChange` 이벤트 핸들러. `event`와 `index`를 인자로 받습니다.
 - `onBlur`: 각 입력 값에 대한 `onBlur` 이벤트 핸들러. `event`와 `index`를 인자로 받습니다.
@@ -27,36 +25,25 @@ npm install nakta-react-payments-hooks
 
 ```tsx
 function App() {
-  const { cardNumbers, cardBrand, errorMessage, isValid, onBlur, onChange } = useCardNumbers([
-    { value: '', length: 4 },
-    { value: '', length: 4 },
-    { value: '', length: 4 },
-    { value: '', length: 4 },
-  ]);
-
-  const cardNumbersError = cardNumbers.some(({ isError }) => isError);
+  const cardNumber = useCardNumber();
 
   return (
     <>
       <h1>Hooks Modules</h1>
-      {cardNumbers.map((cardNumber, index) => (
-        <input
-          key={cardNumber.id}
-          style={{ border: `1px solid ${cardNumber.isError ? 'red' : 'black'}`, outline: 'none' }}
-          type='text'
-          value={cardNumber.value}
-          onChange={(e) => onChange(e, index)}
-          onBlur={(e) => onBlur(e, index)}
-        />
-      ))}
+      <input
+        style={{ border: `1px solid ${cardNumber.error.state ? 'red' : 'black'}`, outline: 'none' }}
+        type='text'
+        value={cardNumber.value}
+        onChange={cardNumber.onChange}
+        onBlur={cardNumber.onBlur}
+      />
+
       <p>
-        {cardNumbers.map(({ value, id }) => (
-          <span key={id}>{value}</span>
-        ))}
+        <span>{cardNumber.number}</span>
       </p>
-      {cardNumbersError && <span style={{ color: 'red' }}>{errorMessage}</span>}
-      {cardBrand && <span style={{ color: 'purple' }}>{cardBrand}</span>}
-      {isValid && <span style={{ color: 'blue' }}>유효한 번호</span>}
+      {cardNumber.error.state && <span style={{ color: 'red' }}>{cardNumber.error.message}</span>}
+      {cardNumber.brand !== '' && <span style={{ color: 'purple' }}>{cardNumber.brand}</span>}
+      {cardNumber.isValid && <span style={{ color: 'blue' }}>유효한 번호</span>}
     </>
   );
 }
