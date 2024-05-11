@@ -1,4 +1,4 @@
-import React, { CSSProperties } from 'react';
+import { CSSProperties } from 'react';
 import {
   CancelButtonProps,
   CloseButtonProps,
@@ -68,7 +68,6 @@ const PromptModal = ({
         children: (
           <>
             <ModalInput onChange={(e) => console.log(e.target.value)} />
-            {children}
           </>
         ),
       }}
