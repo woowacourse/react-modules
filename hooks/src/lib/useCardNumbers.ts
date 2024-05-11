@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { validateCardNumber } from '../validators/newCardInputValidator';
 import CardBrandService from '../domain/CardBrandService';
 import formatCardNumbers from '../utils/formatCardNumbers';
+import { CARD_TYPES } from '../constants/card';
 
 interface cardNumbersInfoProps {
   cardNumbers: string;
@@ -40,9 +41,9 @@ const useCardNumbers = () => {
     }
 
     const invalidLengthCheck: InvalidLengthCheckType = {
-      Diners: 14,
-      AMEX: 15,
-      default: 16,
+      Diners: CARD_TYPES.DINERS.INPUT_COUNT,
+      AMEX: CARD_TYPES.AMEX.INPUT_COUNT,
+      default: CARD_TYPES.NONE.INPUT_COUNT,
     };
 
     if (

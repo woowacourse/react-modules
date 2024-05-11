@@ -1,5 +1,6 @@
 import { renderHook, act } from '@testing-library/react';
 import useCardNumbers from '../lib/useCardNumbers';
+import { CARD_TYPES, ERROR_MESSAGES } from '../constants/card';
 
 describe('useCardNumbers 커스텀 훅 테스트', () => {
   describe('카드 브랜드 식별 테스트', () => {
@@ -92,64 +93,64 @@ describe('useCardNumbers 커스텀 훅 테스트', () => {
   });
 
   describe('에러 메시지 테스트', () => {
-    it(`카드 브랜드가 없는 경우, 숫자가 아닌 문자 입력 시 '숫자만 입력 가능합니다.' 에러 메시지를 표시한다.`, () => {
+    it(`카드 브랜드가 없는 경우, 숫자가 아닌 문자 입력 시 '${ERROR_MESSAGES.ONLY_NUMBERS}'라는 에러 메시지를 표시한다.`, () => {
       const { result } = renderHook(() => useCardNumbers());
 
       act(() => {
         result.current.handleCardNumbers('abc');
       });
       expect(result.current.cardNumbersInfo.errorMessage).toBe(
-        '숫자만 입력 가능합니다.',
+        `${ERROR_MESSAGES.ONLY_NUMBERS}`,
       );
     });
 
-    it(`카드 브랜드가 없는 경우, 16자리 미만 숫자 입력 시 '일반 카드는 16자리 숫자여야 합니다.'라는 에러 메시지를 표시한다.`, () => {
+    it(`카드 브랜드가 없는 경우, 16자리 미만 숫자 입력 시 '${ERROR_MESSAGES.STANDARD_CARD_LENGTH}'라는 에러 메시지를 표시한다.`, () => {
       const { result } = renderHook(() => useCardNumbers());
 
       act(() => {
         result.current.handleCardNumbers('1111');
       });
       expect(result.current.cardNumbersInfo.errorMessage).toBe(
-        '일반 카드는 16자리 숫자여야 합니다.',
+        `${ERROR_MESSAGES.STANDARD_CARD_LENGTH}`,
       );
     });
 
-    it(`카드 브랜드가 Diners인 경우, 14자리 미만의 숫자를 입력했을 때 'Diners 카드는 14자리 숫자여야 합니다.'라는 에러메세지를 표시한다.`, () => {
+    it(`카드 브랜드가 Diners인 경우, 14자리 미만의 숫자를 입력했을 때 '${ERROR_MESSAGES.DINERS_CARD_LENGTH}'라는 에러메세지를 표시한다.`, () => {
       const { result } = renderHook(() => useCardNumbers());
 
       act(() => {
         result.current.handleCardNumbers('3611');
       });
       expect(result.current.cardNumbersInfo.errorMessage).toBe(
-        'Diners 카드는 14자리 숫자여야 합니다.',
+        `${ERROR_MESSAGES.DINERS_CARD_LENGTH}`,
       );
     });
 
-    it(`카드 브랜드가 AMEX인 경우, 15자리 미만의 숫자를 입력했을 때 'AMEX 카드는 15자리 숫자여야 합니다.'라는 에러메세지를 표시한다.`, () => {
+    it(`카드 브랜드가 AMEX인 경우, 15자리 미만의 숫자를 입력했을 때 '${ERROR_MESSAGES.AMEX_CARD_LENGTH}'라는 에러메세지를 표시한다.`, () => {
       const { result } = renderHook(() => useCardNumbers());
 
       act(() => {
         result.current.handleCardNumbers('3411');
       });
       expect(result.current.cardNumbersInfo.errorMessage).toBe(
-        'AMEX 카드는 15자리 숫자여야 합니다.',
+        `${ERROR_MESSAGES.AMEX_CARD_LENGTH}`,
       );
     });
 
-    it(`카드 브랜드가 UnionPay인 경우, 16자리 미만의 숫자를 입력했을 때 'UnionPay 카드는 16자리 숫자여야 합니다.'라는 에러메세지를 표시한다.`, () => {
+    it(`카드 브랜드가 UnionPay인 경우, 16자리 미만의 숫자를 입력했을 때 '${ERROR_MESSAGES.UNIONPAY_CARD_LENGTH}'라는 에러메세지를 표시한다.`, () => {
       const { result } = renderHook(() => useCardNumbers());
 
       act(() => {
         result.current.handleCardNumbers('62212611');
       });
       expect(result.current.cardNumbersInfo.errorMessage).toBe(
-        'UnionPay 카드는 16자리 숫자여야 합니다.',
+        `${ERROR_MESSAGES.UNIONPAY_CARD_LENGTH}`,
       );
     });
   });
 
   describe('카드 브랜드에 따른 포맷팅 테스트', () => {
-    it('일반 카드인 경우 4-4-4-4로 포맷팅 한다.', () => {
+    it(`일반 카드인 경우 ${CARD_TYPES.NONE.FORMATTING_RULE}로 포맷팅 한다.`, () => {
       const { result } = renderHook(() => useCardNumbers());
 
       act(() => {
@@ -161,7 +162,7 @@ describe('useCardNumbers 커스텀 훅 테스트', () => {
       );
     });
 
-    it('Visa 카드는 4-4-4-4로 포맷팅 한다.', () => {
+    it(`Visa 카드는 ${CARD_TYPES.VISA.FORMATTING_RULE}로 포맷팅 한다.`, () => {
       const { result } = renderHook(() => useCardNumbers());
 
       act(() => {
@@ -175,7 +176,7 @@ describe('useCardNumbers 커스텀 훅 테스트', () => {
       );
     });
 
-    it('Master 카드는 4-4-4-4로 포맷팅 한다.', () => {
+    it(`Master 카드는 ${CARD_TYPES.MASTER.FORMATTING_RULE}로 포맷팅 한다.`, () => {
       const { result } = renderHook(() => useCardNumbers());
 
       act(() => {
@@ -189,7 +190,7 @@ describe('useCardNumbers 커스텀 훅 테스트', () => {
       );
     });
 
-    it('UnionPay 카드인 경우 4-4-4-4로 포맷팅 한다.', () => {
+    it(`UnionPay 카드인 경우 ${CARD_TYPES.UNION_PAY.FORMATTING_RULE}로 포맷팅 한다.`, () => {
       const { result } = renderHook(() => useCardNumbers());
 
       act(() => {
@@ -203,7 +204,7 @@ describe('useCardNumbers 커스텀 훅 테스트', () => {
       );
     });
 
-    it('Diners 카드인 경우 4-6-4로 포맷팅 한다.', () => {
+    it(`Diners 카드인 경우 ${CARD_TYPES.DINERS.FORMATTING_RULE}로 포맷팅 한다.`, () => {
       const { result } = renderHook(() => useCardNumbers());
 
       act(() => {
@@ -217,7 +218,7 @@ describe('useCardNumbers 커스텀 훅 테스트', () => {
       );
     });
 
-    it('AMEX 카드인 경우 4-6-5로 포맷팅 한다.', () => {
+    it(`AMEX 카드인 경우 ${CARD_TYPES.AMEX.FORMATTING_RULE}로 포맷팅 한다.`, () => {
       const { result } = renderHook(() => useCardNumbers());
 
       act(() => {
@@ -233,58 +234,70 @@ describe('useCardNumbers 커스텀 훅 테스트', () => {
   });
 
   describe('카드 브랜드 별 초과 입력 제한 테스트', () => {
-    it('일반 카드 번호 16자리 초과 입력 시 입력 제한', () => {
+    it(`일반 카드 번호 ${CARD_TYPES.NONE.INPUT_COUNT}자리 초과 입력 시 입력 제한`, () => {
       const { result } = renderHook(() => useCardNumbers());
 
       act(() => {
         result.current.handleCardNumbers('1211111111111111');
       });
-      expect(result.current.cardNumbersInfo.cardNumbers).toHaveLength(16);
+      expect(result.current.cardNumbersInfo.cardNumbers).toHaveLength(
+        CARD_TYPES.NONE.INPUT_COUNT,
+      );
     });
 
-    it('Visa 카드 번호 16자리 초과 입력 시 입력 제한', () => {
+    it(`Visa 카드 번호 ${CARD_TYPES.VISA.INPUT_COUNT}자리 초과 입력 시 입력 제한`, () => {
       const { result } = renderHook(() => useCardNumbers());
 
       act(() => {
         result.current.handleCardNumbers('4111111111111111');
       });
-      expect(result.current.cardNumbersInfo.cardNumbers).toHaveLength(16);
+      expect(result.current.cardNumbersInfo.cardNumbers).toHaveLength(
+        CARD_TYPES.VISA.INPUT_COUNT,
+      );
     });
 
-    it('Master 카드 번호 16자리 초과 입력 시 입력 제한', () => {
+    it(`Master 카드 번호 ${CARD_TYPES.MASTER.INPUT_COUNT}자리 초과 입력 시 입력 제한`, () => {
       const { result } = renderHook(() => useCardNumbers());
 
       act(() => {
         result.current.handleCardNumbers('5511111111111111');
       });
-      expect(result.current.cardNumbersInfo.cardNumbers).toHaveLength(16);
+      expect(result.current.cardNumbersInfo.cardNumbers).toHaveLength(
+        CARD_TYPES.MASTER.INPUT_COUNT,
+      );
     });
 
-    it('UnionPay 카드 번호 16자리 초과 입력 시 입력 제한', () => {
+    it(`UnionPay 카드 번호 ${CARD_TYPES.UNION_PAY.INPUT_COUNT}자리 초과 입력 시 입력 제한`, () => {
       const { result } = renderHook(() => useCardNumbers());
 
       act(() => {
         result.current.handleCardNumbers('6241123412341234');
       });
-      expect(result.current.cardNumbersInfo.cardNumbers).toHaveLength(16);
+      expect(result.current.cardNumbersInfo.cardNumbers).toHaveLength(
+        CARD_TYPES.UNION_PAY.INPUT_COUNT,
+      );
     });
 
-    it('Diners 카드 번호 14자리 초과 입력 시 입력 제한', () => {
+    it(`Diners 카드 번호 ${CARD_TYPES.DINERS.INPUT_COUNT}자리 초과 입력 시 입력 제한`, () => {
       const { result } = renderHook(() => useCardNumbers());
 
       act(() => {
         result.current.handleCardNumbers('36111111111111');
       });
-      expect(result.current.cardNumbersInfo.cardNumbers).toHaveLength(14);
+      expect(result.current.cardNumbersInfo.cardNumbers).toHaveLength(
+        CARD_TYPES.DINERS.INPUT_COUNT,
+      );
     });
 
-    it('AMEX 카드 번호 15자리 초과 입력 시 입력 제한', () => {
+    it(`AMEX 카드 번호 ${CARD_TYPES.AMEX.INPUT_COUNT}자리 초과 입력 시 입력 제한`, () => {
       const { result } = renderHook(() => useCardNumbers());
 
       act(() => {
         result.current.handleCardNumbers('341212345612345');
       });
-      expect(result.current.cardNumbersInfo.cardNumbers).toHaveLength(15);
+      expect(result.current.cardNumbersInfo.cardNumbers).toHaveLength(
+        CARD_TYPES.AMEX.INPUT_COUNT,
+      );
     });
   });
 });
