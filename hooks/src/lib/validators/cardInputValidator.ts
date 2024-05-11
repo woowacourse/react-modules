@@ -25,6 +25,38 @@ const cardInputValidator = {
     return INPUT_RULES.validAMEXCardNumbers.includes(value.slice(0, 2));
   },
 
+  validateUnionPayCardNumber(value: string) {
+    return (
+      this.validateNumberInRange(
+        Number(value.slice(0, 3)),
+        INPUT_RULES.validUnionPayCardNumber.lengthThree.first,
+        INPUT_RULES.validUnionPayCardNumber.lengthThree.last
+      ) ||
+      this.validateNumberInRange(
+        Number(value.slice(0, 4)),
+        INPUT_RULES.validUnionPayCardNumber.lengthFour.first,
+        INPUT_RULES.validUnionPayCardNumber.lengthFour.last
+      ) ||
+      this.validateNumberInRange(
+        Number(value.slice(0, 6)),
+        INPUT_RULES.validUnionPayCardNumber.lengthSix.first,
+        INPUT_RULES.validUnionPayCardNumber.lengthSix.last
+      )
+    );
+  },
+
+  validateMasterCardNumber(value: string) {
+    return this.validateNumberInRange(
+      Number(value.slice(0, 2)),
+      INPUT_RULES.validMasterCardNumber.first,
+      INPUT_RULES.validMasterCardNumber.last
+    );
+  },
+
+  validateVisaCardNumber(value: string) {
+    return value.slice(0, 1) === INPUT_RULES.validVisaCardNumber;
+  },
+
   validateCardNumberExactLength(value: string) {
     return this.validateInputLength(
       value,
