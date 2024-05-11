@@ -1,14 +1,17 @@
 import { Validator, ValueOf } from '../type';
+import { useCallback, useState } from 'react';
 
 import REGEXPS from '../constants/regExps';
 import getErrorMessage from '../utils/getErrorMessage';
+import getOnBlur from '../utils/getOnBlur';
 import getOnChange from '../utils/getOnChange';
-import { useState } from 'react';
 
 export default function useCardholderName() {
   const [cardholderName, setCardholderName] = useState('');
 
-  const onChange = getOnChange(setCardholderName);
+  const onChange = useCallback(() => getOnChange(setCardholderName), []);
+
+  const onBlur = useCallback(() => getOnBlur(setCardholderName), []);
 
   const errorMessage = getErrorMessage(
     cardholderName,
@@ -17,7 +20,7 @@ export default function useCardholderName() {
 
   const isValid = errorMessage === null;
 
-  return { cardholderName, setCardholderName, onChange, isValid, errorMessage };
+  return { cardholderName, onChange, onBlur, isValid, errorMessage };
 }
 
 export const CARD_HOLDER_NAME_ERROR_MESSAGE = {

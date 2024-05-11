@@ -1,20 +1,23 @@
 import { Validator, ValueOf } from '../type';
+import { useCallback, useState } from 'react';
 
 import REGEXPS from '../constants/regExps';
 import getErrorMessage from '../utils/getErrorMessage';
+import getOnBlur from '../utils/getOnBlur';
 import getOnChange from '../utils/getOnChange';
-import { useState } from 'react';
 
 export default function useCVC() {
   const [cvc, setCVC] = useState('');
 
-  const onChange = getOnChange(setCVC);
+  const onChange = useCallback(() => getOnChange(setCVC), []);
+
+  const onBlur = useCallback(() => getOnBlur(setCVC), []);
 
   const errorMessage = getErrorMessage(cvc, cvcValidators);
 
   const isValid = errorMessage === null;
 
-  return { cvc, setCVC, onChange, errorMessage, isValid };
+  return { cvc, onChange, onBlur, errorMessage, isValid };
 }
 
 const CVC_LENGTH = 3;

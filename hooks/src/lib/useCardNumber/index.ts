@@ -5,6 +5,7 @@ import getCardNumberValidator from './getCardNumberValidator';
 import getCheckCardBrandRule from './getCheckCardBrand';
 import getErrorMessage from '../utils/getErrorMessage';
 import getFormattedCardNumber from './getFormattedCardNumber';
+import getOnBlur from '../utils/getOnBlur';
 import getOnChange from '../utils/getOnChange';
 
 export default function useCardNumber(
@@ -13,6 +14,8 @@ export default function useCardNumber(
   const [cardNumber, setCardNumber] = useState('');
 
   const onChange = useCallback(() => getOnChange(setCardNumber), []);
+
+  const onBlur = useCallback(() => getOnBlur(setCardNumber), []);
 
   const checkCardBrandRule = useCallback(
     getCheckCardBrandRule(targetBrandNames),
@@ -37,8 +40,8 @@ export default function useCardNumber(
 
   return {
     cardNumber,
-    setCardNumber,
     onChange,
+    onBlur,
     errorMessage,
     isValid,
     cardBrandName: cardBrandRule?.name ?? null,

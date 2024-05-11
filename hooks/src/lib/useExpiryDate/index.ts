@@ -1,16 +1,22 @@
 import { Validator, ValueOf } from '../type';
-import { useMemo, useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 
 import REGEXPS from '../constants/regExps';
 import getErrorMessage from '../utils/getErrorMessage';
+import getOnBlur from '../utils/getOnBlur';
 import getOnChange from '../utils/getOnChange';
 
 export default function useExpiryDate() {
   const [expiryMonth, setExpiryMonth] = useState('');
-  const onChangeExpiryMonth = getOnChange(setExpiryMonth);
+  const onChangeExpiryMonth = useCallback(
+    () => getOnChange(setExpiryMonth),
+    []
+  );
+  const onBlurExpiryMonth = useCallback(() => getOnBlur(setExpiryMonth), []);
 
   const [expiryYear, setExpiryYear] = useState('');
-  const onChangeExpiryYear = getOnChange(setExpiryYear);
+  const onChangeExpiryYear = useCallback(() => getOnChange(setExpiryYear), []);
+  const onBlurExpiryYear = useCallback(() => getOnBlur(setExpiryYear), []);
 
   const expiryMonthErrorMessage = useMemo(() => {
     return getErrorMessage(expiryMonth, expiryMonthValidators);
@@ -32,10 +38,10 @@ export default function useExpiryDate() {
   return {
     expiryMonth,
     expiryYear,
-    setExpiryMonth,
-    setExpiryYear,
     onChangeExpiryMonth,
     onChangeExpiryYear,
+    onBlurExpiryMonth,
+    onBlurExpiryYear,
     expiryMonthErrorMessage,
     expiryYearErrorMessage,
     expiryDateErrorMessage,

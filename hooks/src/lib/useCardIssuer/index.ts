@@ -1,19 +1,22 @@
 import { Validator, ValueOf } from '../type';
+import { useCallback, useState } from 'react';
 
 import getErrorMessage from '../utils/getErrorMessage';
+import getOnBlur from '../utils/getOnBlur';
 import getOnChange from '../utils/getOnChange';
-import { useState } from 'react';
 
 export default function useCardIssuer() {
   const [cardIssuer, setCardIssuer] = useState('');
 
-  const onChange = getOnChange(setCardIssuer);
+  const onChange = useCallback(() => getOnChange(setCardIssuer), []);
+
+  const onBlur = useCallback(() => getOnBlur(setCardIssuer), []);
 
   const errorMessage = getErrorMessage(cardIssuer, cardIssuerValidators);
 
   const isValid = errorMessage === null;
 
-  return { cardIssuer, setCardIssuer, onChange, errorMessage, isValid };
+  return { cardIssuer, setCardIssuer, onBlur, onChange, errorMessage, isValid };
 }
 
 export const CARD_ISSUERS = [
