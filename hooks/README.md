@@ -1,4 +1,4 @@
-# Custom Hooks for Form Validation 사용 가이드
+# Card Input Custom Hooks for Form 사용 가이드
 
 이 패키지는 카드 폼 입력값에 대한 유효성 검사를 위한 여러 가지 커스텀 React 훅을 제공합니다.
 
@@ -10,17 +10,19 @@ npm install hash-payment-hooks
 
 ## 훅 목록 및 설명
 
-### 1. `useCardHolderValidation`
+## 1. `useCardHolderInput`
 
-**카드 소유자 이름의 유효성을 검증하는 훅입니다.**
+**카드 소지자 이름 입력 관련 상태 관리와 유효성 검증을 쉽게 구현할 수 있게 도와주는 커스텀 Hook을 제공합니다. 사용자가 입력한 카드 소지자 이름의 유효성을 검사하고, 관련 상태를 관리하는 기능을 포함하고 있습니다.**
 
 #### 반환 값
 
-- cardHolderValidation: 다음의 객체 구조를 가집니다.
-  - errorMessage: 입력 필드별 오류 메시지를 담고 있습니다.
-  - isError: 입력 필드가 오류 상태인지를 boolean 값으로 표시합니다.
+- cardHolder: 객체. 카드 소지자 이름에 대한 현재 상태를 나타냅니다.
+  - value: 객체. 카드 소지자 이름 값을 담고 있습니다.
+  - errorMessage: 객체. 유효성 검사 실패 시 오류 메시지를 담고 있습니다.
+  - isError: 객체. 필드별 유효성 검사 통과 여부를 나타냅니다.
+- handleCardHolderChange: 함수. 카드 소지자 이름 입력 필드의 값이 변경될 때 호출해야 하는 함수입니다. 변경된 값과 필드 이름을 인자로 받습니다.
 
-#### cardHolderValidateHandler 인자
+#### handleCardHolderChange 인자
 
 - `value` (string): 사용자 입력값.
 - `name` (CardHolderName): 입력 필드의 이름, 이 경우에는 'cardHolder'.
@@ -28,251 +30,175 @@ npm install hash-payment-hooks
 #### 사용법
 
 ```jsx
-import { useCardHolderValidation } from "hash-payment-hooks";
+import React from "react";
+import useCardHolderInput from "hash-payment-hooks";
 
-function Component() {
-  const { cardHolderValidation, cardHolderValidateHandler } =
-    useCardHolderValidation();
+function CardHolderInputComponent() {
+  const { cardHolder, handleCardHolderChange } = useCardHolderInput();
 
-  return (
-    <input
-      type="text"
-      onChange={(e) => cardHolderValidateHandler(e.target.value, "cardHolder")}
-      placeholder="Card Holder Name"
-    />
-  );
-}
-```
-
-### 2. `useCardNumberValidation`
-
-**카드 번호의 각 부분을 검증하는 훅입니다.**
-
-#### 반환 값
-
-- cardNumberValidation: 다음의 객체 구조를 가집니다.
-  - errorMessage: : 각 카드 번호 부분(cardNumber1, cardNumber2, cardNumber3, cardNumber4) 오류 메시지를 담고 있습니다.
-  - isError: : 각 카드 번호 부분(cardNumber1, cardNumber2, cardNumber3, cardNumber4) 오류 상태인지를 boolean 값으로 표시합니다.
-
-#### 인자
-
-- `value` (string): 사용자 입력값.
-- `name` (CardNumberName): 각 카드 번호 부분의 이름 (cardNumber1, cardNumber2, cardNumber3, cardNumber4).
-
-#### 사용법
-
-```jsx
-import { useCardNumberValidation } from "hash-payment-hooks";
-
-function Component() {
-  const { cardNumberValidation, cardNumberValidateHandler } =
-    useCardNumberValidation();
+  const onChange = (e) => {
+    handleCardHolderChange(e.target.value, "cardHolder");
+  };
 
   return (
-    <>
-      {["cardNumber1", "cardNumber2", "cardNumber3", "cardNumber4"].map(
-        (name, index) => (
-          <input
-            key={index}
-            type="text"
-            onChange={(e) => cardNumberValidateHandler(e.target.value, name)}
-            placeholder={`Card Number Part ${index + 1}`}
-          />
-        ),
+    <div>
+      <input
+        type="text"
+        value={cardHolder.value.cardHolder}
+        onChange={onChange}
+        placeholder="카드 소지자 이름 입력"
+      />
+      {cardHolder.isError.cardHolder && (
+        <p>{cardHolder.errorMessage.cardHolder}</p>
       )}
-    </>
+    </div>
   );
 }
+
+export default CardHolderInputComponent;
 ```
 
-### 3. `usePasswordValidation`
+## 2.`useCardNumberInput`
 
-**비밀번호의 유효성을 검사하는 훅입니다.**
+`useCardNumberInput`은 사용자로부터 신용카드 번호 입력을 받고, 해당 입력값을 포맷팅하여 상태를 관리하는 React Hook입니다. 이 Hook은 입력된 카드 번호의 타입을 식별하고, 해당 번호의 유효성을 검증합니다. 또한, 사용자가 입력 폼 내에서 커서 위치를 조정할 수 있도록 도와줍니다.
 
-#### 반환 값
+### 기능
 
-- passwordValidation: 다음의 객체 구조를 가집니다.
-  - errorMessage: 입력 필드별 오류 메시지를 담고 있습니다.
-  - isError: 입력 필드가 오류 상태인지를 boolean 값으로 표시합니다.
+#### 커서 위치 조정
 
-#### passwordValidateHandler 인자
+- 입력 폼의 중간에 숫자를 수정할 때 커서 위치를 조정하기 위한 기능입니다.
+- 사용자가 값을 입력하거나 삭제할 때, 커서의 위치를 자동으로 조정해 줍니다.
 
-- `value` (string): 사용자 입력값.
-- `name` (passwordName): 입력 필드의 이름, 이 경우에는 'password'.
+#### 값 포맷팅
 
-#### 사용법
+- 사용자가 입력한 값에 따라 신용카드 번호를 포맷팅합니다.
+- 카드 타입(CARD_TYPE)에 따라 다른 포맷을 적용합니다.
 
-```jsx
-import { usePasswordValidation } from "hash-payment-hooks";
+#### 카드 번호 업데이트
 
-function Component() {
-  const { passwordValidation, passwordValidateHandler } =
-    usePasswordValidation();
+- 사용자의 입력에 따라 카드 번호의 상태를 업데이트합니다.
+- 입력값의 유효성을 검증하고, 오류 메시지나 포맷팅된 값을 상태에 저장합니다.
 
+#### 카드 번호 변경 핸들러
+
+- 입력 필드에서 발생하는 변경사항을 처리합니다.
+- 카드 타입을 식별하고, 입력값을 포맷팅하며, 값의 유효성을 검증합니다.
+
+## 반환값
+
+- `cardNumber`: 사용자로부터 입력 받은 카드 번호의 상태를 포함한 객체입니다.
+- `handleCardNumberChange`: 입력 필드의 변경을 처리하는 함수입니다.
+- `cardType`: 식별된 카드 타입입니다.
+
+## 예시 코드
+
+```javascript
+import {useCardNumberInput} from "hash-payment-hooks";
+import styled from "styled-components";
+
+function App() {
+  const { cardNumber, cardType, handleCardNumberChange } = useCardNumberInput();
   return (
-    <input
-      type="password"
-      onChange={(e) => passwordValidateHandler(e.target.value, "password")}
-      placeholder="Password"
-    />
-  );
-}
-```
-
-### 4. `useCVCValidation`
-
-**카드 CVC 번호의 유효성을 검사하는 훅입니다.**
-
-#### 반환 값
-
-- CVCValidation: 다음의 객체 구조를 가집니다.
-  - errorMessage: 입력 필드별 오류 메시지를 담고 있습니다.
-  - isError: 입력 필드가 오류 상태인지를 boolean 값으로 표시합니다.
-
-#### CVCValidateHandler 인자
-
-- `value` (string): 사용자 입력값.
-- `name` (CardCVCName): 입력 필드의 이름, 이 경우에는 'CVC'.
-
-#### 사용법
-
-```jsx
-import { useCVCValidation } from "hash-payment-hooks";
-
-function Component() {
-  const { CVCValidation, CVCValidateHandler } = useCVCValidation();
-
-  return (
-    <input
-      type="text"
-      onChange={(e) => CVCValidateHandler(e.target.value, "CVC")}
-      placeholder="CVC"
-    />
-  );
-}
-```
-
-### 5. `useExpiryDateValidation`
-
-**카드 만료 날짜의 유효성을 검사하는 훅입니다.**
-
-#### 반환 값
-
-- expiryDateValidation: 다음의 객체 구조를 가집니다.
-  - errorMessage: 입력 필드별 오류 메시지를 담고 있습니다.
-  - isError: 입력 필드가 오류 상태인지를 boolean 값으로 표시합니다.
-
-#### expiryDateValidateHandler 인자
-
-- `value` (string): 사용자 입력값.
-- `name` (CardExpiryName): 'month' 또는 'year' 중 하나.
-
-#### 사용법
-
-```jsx
-import { useExpiryDateValidation } from "hash-payment-hooks";
-
-function Component() {
-  const { expiryDateValidation, expiryDateValidateHandler } =
-    useExpiryDateValidation();
-
-  return (
-    <>
+    <DefaultStyle>
+      <label htmlFor="card-number">카드 번호 입력</label>
       <input
-        type="text"
-        onChange={(e) => expiryDateValidateHandler(e.target.value, "month")}
-        placeholder="MM"
-      />
-      <input
-        type="text"
-        onChange={(e) => expiryDateValidateHandler(e.target.value, "year")}
-        placeholder="YY"
-      />
-    </>
+        id="card-number"
+        value={cardNumber.value.cardNumber}
+        onChange={(e) => handleCardNumberChange(e)}
+        name="cardNumber"
+      ></input>
+      <p "error">
+        에러메세지: {cardNumber.errorMessage.cardNumber}
+      </p>
+      <p "value">값: {cardNumber.value.cardNumber}</p>
+      <p "type"> 카드 타입: {cardType}</p>
+    </DefaultStyle>
   );
 }
 ```
 
-### 6. `useCardType`
+## 3. `useCardPasswordInput`
 
-**카드 유형을 식별하는 훅입니다.**
+useCardPasswordInput은 사용자로부터 카드 비밀번호 입력을 받고, 해당 입력값을 관리하는 동시에, 비밀번호의 유효성을 검증하는 React Hook입니다. 이 Hook은 비밀번호 유효성 검증을 위해 usePasswordValidation Hook을 사용하며, 입력된 비밀번호가 설정된 조건을 만족하는지 확인합니다.
 
-#### 반환값
+### 기능
 
-cardType : cardType을 string 으로 제공합니다.
+- 비밀번호 유효성 검증
+  usePasswordValidation을 통해 설정된 조건(예: 길이, 특수 문자 포함 여부 등)에 대한 비밀번호의 유효성을 검증합니다.
+  비밀번호가 유효성 검증 조건을 만족하지 않는 경우, 관련 정보를 상태에 저장합니다.
+- 비밀번호 변경 핸들러
+  입력 필드에서 발생하는 변경사항을 처리합니다.
+  비밀번호 유효성 검증을 통과하면, 비밀번호의 상태를 업데이트합니다.
 
-- Visa : 카드 번호가 4로 시작 할 경우.
-- MasterCard : 카드 번호가 51~55 로 시작 할 경우.
-- Empty : 그 외.
+### 반환값
 
-cardTypeHandler
+- password: 사용자로부터 입력 받은 비밀번호의 상태를 포함한 객체입니다. 이 객체는 비밀번호 값, 오류 메시지, 오류 여부 등을 포함합니다.
+- handlePasswordChange: 입력 필드의 변경을 처리하는 함수입니다. 이 함수는 비밀번호 값과 비밀번호의 이름을 인자로 받습니다.
 
-#### cardTypeHandler 인자
+### 예시 코드
 
-- `value` (string): 첫 번째 카드 번호 부분.
-- `name` (CardNumberName): 이 훅에서는 주로 'cardNumber1'가 사용됩니다.
+```js
+import React, { useState } from "react";
+import useCardPasswordInput from "hash-payment-hooks";
 
-#### 사용법
-
-```jsx
-import { useCardType } from "hash-payment-hooks";
-
-function Component() {
-  const { cardType, cardTypeHandler } = useCardType();
+function App() {
+  const { password, handlePasswordChange } = useCardPasswordInput();
 
   return (
-    <input
-      type="text"
-      onChange={(e) => cardTypeHandler(e.target.value, "cardNumber1")}
-      placeholder="Enter first part of card number"
-    />
+    <div>
+      <label htmlFor="password">카드 비밀번호 입력</label>
+      <input
+        id="password"
+        type="password"
+        value={password.value.password}
+        onChange={(e) => handlePasswordChange(e.target.value, "password")}
+        name="password"
+      />
+      {password.isError.password && (
+        <p className="error">에러 메시지: {password.errorMessage.password}</p>
+      )}
+    </div>
   );
 }
+
+export default App;
 ```
 
-## 스타일링
+## 4. `useCVCInput`
 
-이 훅들은 기본적인 HTML 요소와 함께 사용할 수 있으며, 필요에 따라 추가적인 스타일링을 적용할 수 있습니다. 사용법에 따라 스타일을 커스터마이즈하고, 보다 사용자 친화적인 인터페이스를 구현하세요.
+useCVCInput은 사용자로부터 카드의 CVC(카드 검증 코드) 입력을 받고, 해당 입력값의 상태를 관리하는 동시에, CVC의 유효성을 검증하는 React Hook입니다. 이 Hook은 CVC 유효성 검증을 위해 useCVCValidation Hook을 사용하며, 입력된 CVC가 설정된 조건을 만족하는지 확인합니다.
 
----
+### 기능
 
-## Hooks 요구사항
+- CVC 유효성 검증
+  useCVCValidation을 통해 설정된 조건(예: 길이, 숫자 여부 등)에 대한 CVC의 유효성을 검증합니다.
+  CVC가 유효성 검증 조건을 만족하지 않는 경우, 관련 정보를 상태에 저장합니다.
+- CVC 변경 핸들러
+  입력 필드에서 발생하는 변경사항을 처리합니다.
+  CVC 유효성 검증을 통과하면, CVC의 상태를 업데이트합니다.
 
-값 변경, 에러 변경, validation ,동적 렌더링
+### 반환값
 
-- [x] useCardHolderValidation
+- CVC: 사용자로부터 입력 받은 CVC의 상태를 포함한 객체입니다. 이 객체는 CVC 값, 오류 메시지, 오류 여부 등을 포함합니다.
 
-  - 카드 소유자 이름에 대한 유효성 검사 로직
-  - [x] cardHolder 는 영대문자여야 한다.
-  - [x] cardHolder 에는 공백이 2번 이상 입력되면 안된다.
-  - [x] cardHolder 에는 공백으로 시작하거나 끝나면 안된다.
+- handleCVCChange: 입력 필드의 변경을 처리하는 함수입니다. 이 함수는 CVC 값과 CVC의 이름을 인자로 받습니다.
 
-- [x] useCardNumberValidation
+## 4. `useCardExpiryDateInput`
 
-  - [x] 카드 번호에는 숫자만 입력되어야 한다.
-  - [x] 카드 번호는 공백으로 시작하거나 끝나면 안된다.
-  - [x] 카드 번호는 4자리여야 한다.
+useCardExpiryDateInput은 카드 만료 날짜 입력(월과 년)을 받고, 해당 입력값을 관리하며, 만료 날짜의 유효성을 검증하는 React Hook입니다.
 
-- [x] useCardPasswordValidation
+### 기능
 
-  - [x] 카드 비밀번호에는 숫자만 입력되어야 한다.
-  - [x] 카드 비밀번호는 공백으로 시작하거나 끝나면 안된다.
-  - [x] 카드 비밀번호는 2자리여야 한다.
+- 만료 날짜 유효성 검증
+  useExpiryDateValidation을 통해 설정된 조건에 대한 만료 날짜의 유효성을 검증합니다.
+  만료 날짜가 유효성 검증 조건을 만족하지 않는 경우, 관련 정보를 상태에 저장합니다.
 
-- [x] useCVCValidation
+- 만료 날짜 변경 핸들러
+  입력 필드에서 발생하는 변경사항을 처리합니다.
+  만료 날짜 유효성 검증을 통과하면, 만료 날짜의 상태를 업데이트합니다.
 
-  - [x] CVC에는 숫자만 입력되어야 한다.
-  - [x] CVC는 공백으로 시작하거나 끝나면 안된다.
-  - [x] CVC는 3자여야 한다.
+### 반환값
 
-- [x] useExpiryDateValidation
+- expiryDate: 사용자로부터 입력 받은 만료 날짜의 상태를 포함한 객체입니다. 이 객체는 만료 날짜 값(월, 년), 오류 메시지, 오류 여부 등을 포함합니다.
 
-  - [x] 카드 만료기간에는 숫자만 입력되어야 한다.
-  - [x] 카드 만료기간는 공백으로 시작하거나 끝나면 안된다.
-  - [x] 카드 만료기간의 월 에는 1~12 사이의 값이 입력되어야 한다.
-  - [x] 카드 만료기간의 년도 에는 0~99 사이의 값이 입력되어야 한다.
-
-- [x] useCardType
-  - [x] 카드 번호가 51~55 로 시작하면 카드타입이 MasterCard 가 되어야 한다.
-  - [x] 카드 번호가 4 로 시작하면 카드타입이 Visa 가 되어야 한다.
-  - [x] 카드 번호가 위 경우가 아닐경우 카드타입이 Empty 가 되어야 한다.
+- handleExpiryDateChange: 입력 필드의 변경을 처리하는 함수입니다. 이 함수는 만료 날짜 값과 만료 날짜의 이름(월 또는 년)을 인자로 받습니다.
