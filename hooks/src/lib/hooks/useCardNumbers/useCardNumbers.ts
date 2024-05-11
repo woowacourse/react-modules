@@ -12,7 +12,9 @@ function useCardNumbers() {
 
   const checkCardBrand = (value: string) => {
     const twoDigitValue = Number(value.substring(0, 2));
-    const valueToNumber = Number(value.substring(0, 3));
+    const threeDigitValue = Number(value.substring(0, 3));
+    const fourDigitValue = Number(value.substring(0, 4));
+    const sixDigitValue = Number(value.substring(0, 6));
 
     const inputValue = {
       cardBrand: "domestic",
@@ -21,7 +23,7 @@ function useCardNumbers() {
     if (value.startsWith("4")) {
       inputValue.cardBrand = "visa";
       setCardNumberMaxLength(16);
-    } else if (twoDigitValue > 50 && twoDigitValue < 56) {
+    } else if (twoDigitValue >= 51 && twoDigitValue <= 55) {
       inputValue.cardBrand = "masterCard";
       setCardNumberMaxLength(16);
     } else if (twoDigitValue === 36) {
@@ -31,9 +33,9 @@ function useCardNumbers() {
       inputValue.cardBrand = "amex";
       setCardNumberMaxLength(15);
     } else if (
-      (valueToNumber >= 624 && valueToNumber <= 626) ||
-      (valueToNumber >= 6282 && valueToNumber <= 6288) ||
-      (valueToNumber >= 622126 && valueToNumber <= 622925)
+      (threeDigitValue >= 624 && threeDigitValue <= 626) ||
+      (fourDigitValue >= 6282 && fourDigitValue <= 6288) ||
+      (sixDigitValue >= 622126 && sixDigitValue <= 622925)
     ) {
       inputValue.cardBrand = "unionPay";
       setCardNumberMaxLength(16);
