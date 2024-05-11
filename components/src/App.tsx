@@ -1,22 +1,24 @@
 import React from 'react';
-import { Modal, useModal } from 'woowacourse-6th-react-modal-component';
 
-import CardCompanySelector from './components/CardCompanySelector';
+import {
+  Modal,
+  PromptModal,
+  useModal,
+} from 'woowacourse-6th-react-modal-component';
 
 function App() {
-  const { isModalOpen, closeModal } = useModal();
+  const { isModalOpen, openModal, closeModal } = useModal();
 
   return (
     <>
+      <Modal.Button onClick={openModal}>Prompt 모달 열기</Modal.Button>
       {isModalOpen && (
-        <Modal
-          closeModal={closeModal}
-          position="center"
-          title="카드사 선택"
-          closeOption="button"
-        >
-          <CardCompanySelector />
-        </Modal>
+        <PromptModal
+          title="prompt 모달"
+          label="이름을 입력하세요."
+          onModalClose={closeModal}
+          onInputChange={(event) => console.log(event.target.value)}
+        />
       )}
     </>
   );
