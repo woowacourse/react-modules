@@ -11,7 +11,6 @@ interface AlertModalProps {
   modalSize: ModalSizeProps;
   closeButton: CloseButtonProps;
   confirmButton: ConfirmButtonProps;
-  children?: React.ReactNode;
   backgroundColor?: CSSProperties['backgroundColor'];
   borderRadius?: CSSProperties['borderRadius'];
   preventCloseOnOutsideClick?: boolean;
@@ -26,7 +25,6 @@ const AlertModal = ({
   modalSize,
   closeButton,
   confirmButton,
-  children,
   backgroundColor,
   borderRadius,
   preventCloseOnOutsideClick,
@@ -56,7 +54,6 @@ const AlertModal = ({
         children: (
           <>
             <ModalMessage content={message} position={title.position || 'center'} />
-            {children}
           </>
         ),
       }}
