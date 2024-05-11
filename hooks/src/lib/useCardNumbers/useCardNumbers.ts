@@ -1,7 +1,15 @@
+import { useEffect, useState } from "react";
 import useInput, { ValidationType } from "../useInput/useInput";
-import getCardType from "../utils/getCardType";
+import getCardBrand from "../utils/getCardBrand";
 
 export const CARD_NUMBER_LENGTH = 4;
+const CARD_LENGTH: { [key: string]: number } = {
+  visa: 4,
+  mastercard: 4,
+  diners: 14,
+  amex: 15,
+  unionpay: 16,
+};
 
 type InitialValueType = [string, string, string, string];
 
@@ -54,8 +62,20 @@ const useCardNumbers = (initialValue: InitialValueType = ["", "", "", ""]) => {
 
   const cardNumbers = [cardNumber1, cardNumber2, cardNumber3, cardNumber4];
 
-  const cardBrand = getCardType(cardNumbers.map(({ value }) => value));
+  const [cardBrand, setCardBrand] = useState("");
+
   const isCardNumbersValid = cardNumbers.every(({ value, error }) => value !== "" && !error.state);
+
+  useEffect(() => {
+    const currentCardNumbers = cardNumbers.map(({ value }) => value);
+    const brand = getCardBrand(currentCardNumbers);
+
+    if (brand in CARD_LENGTH && currentCardNumbers.join("").length <= CARD_LENGTH[brand]) {
+      setCardBrand(brand);
+    } else {
+      setCardBrand("");
+    }
+  }, [...cardNumbers.map(({ value }) => value)]);
 
   return { cardNumbers, cardBrand, isCardNumbersValid };
 };
