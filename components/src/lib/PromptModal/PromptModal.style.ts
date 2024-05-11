@@ -8,3 +8,9 @@ export const Input = styled.input`
   border: 1px solid #000000;
   font-size: 11px;
 `;
+
+export const Label = styled.label`
+  font-size: 12px;
+  margin-bottom: 6px;
+  display: inline-block;
+`;

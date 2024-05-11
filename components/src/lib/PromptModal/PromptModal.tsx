@@ -10,7 +10,6 @@ export interface PromptModalProps extends ModalProps {
     name: string;
     label?: string;
     placeholder?: string;
-    onChange?: () => void;
   };
   submitButtonText?: string;
   cancelButtonText?: string;
@@ -67,7 +66,9 @@ export default function PromptModal({
       zIndex={zIndex}
       backdropOpacity={backdropOpacity}
     >
-      {inputField.label && <label htmlFor={inputField.name}>{inputField.label}</label>}
+      {inputField.label && (
+        <Styled.Label htmlFor={inputField.name}>{inputField.label}</Styled.Label>
+      )}
       <Styled.Input
         name={inputField.name}
         placeholder={inputField.placeholder}
