@@ -56,12 +56,13 @@
     - [x] UnionPay (622126~622925, 624~626, 6282~6288로 시작)
     - [x] MasterCard (51~55로 시작)
     - [x] Visa (4로 시작)
-- [ ] 사용자 입력 시 자동으로 카드사별 규칙에 맞게 포멧팅 한다.
+- [x] 사용자 입력 시 자동으로 카드사별 규칙에 맞게 포멧팅 한다.
 
 ### `useCardNumber` 커스텀 훅
 
 - [x] useCardNumber
 - [x] useCardNumberValidation
+- [x] useCardNumberFormat
 
 ### `useExpiryDate` 커스텀 훅
 
