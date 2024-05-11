@@ -1,4 +1,5 @@
-import React from 'react';
+import { fireEvent, render, screen } from '@testing-library/react';
+
 import { renderHook } from '@testing-library/react';
 import usePasswordPrefix from '.';
 
@@ -6,7 +7,9 @@ describe('usePasswordPrefix에 대한 테스트 케이스', () => {
   const testWrongCase = (prefix: string) => {
     const { result } = renderHook(() => usePasswordPrefix());
 
-    React.act(() => result.current.setPasswordPrefix(prefix));
+    render(<input data-testid='test' onChange={result.current.onChange} />);
+    const input = screen.getByTestId('test');
+    fireEvent.change(input, { target: { value: prefix } });
 
     expect(result.current.isValid).toBe(false);
     expect(result.current.errorMessage).not.toBeNull();
@@ -15,7 +18,9 @@ describe('usePasswordPrefix에 대한 테스트 케이스', () => {
   const testValidCase = (prefix: string) => {
     const { result } = renderHook(() => usePasswordPrefix());
 
-    React.act(() => result.current.setPasswordPrefix(prefix));
+    render(<input data-testid='test' onChange={result.current.onChange} />);
+    const input = screen.getByTestId('test');
+    fireEvent.change(input, { target: { value: prefix } });
 
     expect(result.current.isValid).toBe(true);
     expect(result.current.errorMessage).toBeNull();

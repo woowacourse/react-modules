@@ -1,5 +1,6 @@
-import { CARD_BRAND_NAME } from './../constants/cardBrandRule';
-import React from 'react';
+import { fireEvent, render, screen } from '@testing-library/react';
+
+import { CARD_BRAND_NAME } from '../constants/cardBrandRule';
 import { renderHook } from '@testing-library/react';
 import useCardNumber from '.';
 
@@ -8,7 +9,9 @@ describe('useCardNumber에 대한 테스트 케이스', () => {
     const testWrongCase = (cardNumber: string) => {
       const { result } = renderHook(() => useCardNumber());
 
-      React.act(() => result.current.setCardNumber(cardNumber));
+      render(<input data-testid='test' onChange={result.current.onChange} />);
+      const input = screen.getByTestId('test');
+      fireEvent.change(input, { target: { value: cardNumber } });
 
       expect(result.current.isValid).toBe(false);
     };
@@ -32,7 +35,9 @@ describe('useCardNumber에 대한 테스트 케이스', () => {
       return (cardNumber: string) => {
         const { result } = renderHook(() => useCardNumber(targetBrandNames));
 
-        React.act(() => result.current.setCardNumber(cardNumber));
+        render(<input data-testid='test' onChange={result.current.onChange} />);
+        const input = screen.getByTestId('test');
+        fireEvent.change(input, { target: { value: cardNumber } });
 
         expect(result.current.cardBrandRule?.name ?? null).toBe(cardBrandName);
       };
@@ -84,7 +89,9 @@ describe('useCardNumber에 대한 테스트 케이스', () => {
     const testFormatting = (cardNumber: string, expected: string[]) => {
       const { result } = renderHook(() => useCardNumber());
 
-      React.act(() => result.current.setCardNumber(cardNumber));
+      render(<input data-testid='test' onChange={result.current.onChange} />);
+      const input = screen.getByTestId('test');
+      fireEvent.change(input, { target: { value: cardNumber } });
 
       expect(result.current.formattedCardNumber).toEqual(expected);
     };
@@ -129,7 +136,9 @@ describe('useCardNumber에 대한 테스트 케이스', () => {
   ) => {
     const { result } = renderHook(() => useCardNumber(targetBrandNames));
 
-    React.act(() => result.current.setCardNumber(cardNumber));
+    render(<input data-testid='test' onChange={result.current.onChange} />);
+    const input = screen.getByTestId('test');
+    fireEvent.change(input, { target: { value: cardNumber } });
 
     expect(result.current.cardBrandRule?.name ?? null).toBe(cardBrandName);
   };

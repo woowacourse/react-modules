@@ -1,12 +1,15 @@
-import React from 'react';
+import { fireEvent, render, screen } from '@testing-library/react';
+
 import { renderHook } from '@testing-library/react';
 import useCardholderName from '.';
 
-describe('useCardholderName에 대한 테스트 케이스', () => {
+describe.only('useCardholderName에 대한 테스트 케이스', () => {
   const testWrongCase = (name: string) => {
     const { result } = renderHook(() => useCardholderName());
 
-    React.act(() => result.current.setCardholderName(name));
+    render(<input data-testid='test' onChange={result.current.onChange} />);
+    const input = screen.getByTestId('test');
+    fireEvent.change(input, { target: { value: name } });
 
     expect(result.current.isValid).toBe(false);
     expect(result.current.errorMessage).not.toBeNull();
@@ -15,7 +18,9 @@ describe('useCardholderName에 대한 테스트 케이스', () => {
   const testValidCase = (name: string) => {
     const { result } = renderHook(() => useCardholderName());
 
-    React.act(() => result.current.setCardholderName(name));
+    render(<input data-testid='test' onChange={result.current.onChange} />);
+    const input = screen.getByTestId('test');
+    fireEvent.change(input, { target: { value: name } });
 
     expect(result.current.isValid).toBe(true);
     expect(result.current.errorMessage).toBeNull();

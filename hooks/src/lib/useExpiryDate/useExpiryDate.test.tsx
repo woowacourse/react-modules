@@ -1,4 +1,5 @@
-import React from 'react';
+import { fireEvent, render, screen } from '@testing-library/react';
+
 import { renderHook } from '@testing-library/react';
 import useExpiryDate from '.';
 
@@ -9,7 +10,14 @@ describe('useExpiryDate에 대한 테스트 케이스', () => {
       month => {
         const { result } = renderHook(() => useExpiryDate());
 
-        React.act(() => result.current.setExpiryMonth(month));
+        render(
+          <input
+            data-testid='test'
+            onChange={result.current.onChangeExpiryMonth}
+          />
+        );
+        const input = screen.getByTestId('test');
+        fireEvent.change(input, { target: { value: month } });
 
         expect(result.current.isValidExpiryMonth).toBe(false);
         expect(result.current.expiryMonthErrorMessage).not.toBeNull();
@@ -23,7 +31,14 @@ describe('useExpiryDate에 대한 테스트 케이스', () => {
       month => {
         const { result } = renderHook(() => useExpiryDate());
 
-        React.act(() => result.current.setExpiryMonth(month));
+        render(
+          <input
+            data-testid='test'
+            onChange={result.current.onChangeExpiryMonth}
+          />
+        );
+        const input = screen.getByTestId('test');
+        fireEvent.change(input, { target: { value: month } });
 
         expect(result.current.isValidExpiryMonth).toBe(false);
         expect(result.current.expiryMonthErrorMessage).not.toBeNull();

@@ -1,4 +1,5 @@
-import React from 'react';
+import { fireEvent, render, screen } from '@testing-library/react';
+
 import { renderHook } from '@testing-library/react';
 import useCVC from '.';
 
@@ -6,7 +7,9 @@ describe('useCVC에 대한 테스트 케이스', () => {
   const testWrongCase = (cvc: string) => {
     const { result } = renderHook(() => useCVC());
 
-    React.act(() => result.current.setCVC(cvc));
+    render(<input data-testid='test' onChange={result.current.onChange} />);
+    const input = screen.getByTestId('test');
+    fireEvent.change(input, { target: { value: cvc } });
 
     expect(result.current.isValid).toBe(false);
     expect(result.current.errorMessage).not.toBeNull();
@@ -15,7 +18,9 @@ describe('useCVC에 대한 테스트 케이스', () => {
   const testValidCase = (cvc: string) => {
     const { result } = renderHook(() => useCVC());
 
-    React.act(() => result.current.setCVC(cvc));
+    render(<input data-testid='test' onChange={result.current.onChange} />);
+    const input = screen.getByTestId('test');
+    fireEvent.change(input, { target: { value: cvc } });
 
     expect(result.current.isValid).toBe(true);
     expect(result.current.errorMessage).toBeNull();
