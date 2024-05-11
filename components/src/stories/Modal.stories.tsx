@@ -73,7 +73,7 @@ const meta = {
     },
     confirmButtonTheme: {
       description: "버튼의 색상 테마를 결정하는 arg입니다. (dark/light)",
-      options: ["dark", "light", "inactive"],
+      options: ["dark", "light"],
       control: {
         type: "radio",
       },
@@ -99,6 +99,16 @@ const meta = {
       table: {
         defaultValue: { summary: false },
       },
+
+      disabled: {
+        description: "버튼의 비활성화 여부를 결정하는 arg입니다.",
+        control: {
+          type: "boolean",
+        },
+        table: {
+          defaultValue: { summary: false },
+        },
+      },
     },
   },
 };
@@ -117,6 +127,7 @@ interface ModalStoryProps {
   cancelButtonTheme?: ModalButtonTheme;
   buttonSize: ModalButtonSize;
   fullWidth?: boolean;
+  disabled?: boolean;
 }
 type Story = StoryObj<ModalStoryProps>;
 
@@ -131,6 +142,7 @@ export const Default: Story = {
     confirmButtonTheme: "dark",
     buttonSize: "large",
     fullWidth: true,
+    disabled: false,
   },
 
   render: ({
@@ -142,6 +154,7 @@ export const Default: Story = {
     confirmButtonTheme,
     buttonSize,
     fullWidth,
+    disabled,
   }: ModalStoryProps) => {
     const [args, updateArgs] = useArgs();
 
@@ -165,6 +178,7 @@ export const Default: Story = {
             <main style={{ margin: "10px 0" }}>{contentText}</main>
             <footer>
               <Modal.Button
+                disabled={disabled}
                 size={buttonSize}
                 fullWidth={fullWidth}
                 theme={confirmButtonTheme}

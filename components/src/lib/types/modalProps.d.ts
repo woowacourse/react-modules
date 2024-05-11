@@ -14,7 +14,7 @@ export interface ModalCloseButtonProps extends React.HTMLAttributes<HTMLOrSVGEle
   length?: string;
 }
 
-type ModalButtonTheme = "dark" | "light" | "inactive";
+type ModalButtonTheme = "dark" | "light";
 type ModalButtonSize = "small" | "medium" | "large";
 export interface ModalButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
   /**
@@ -32,6 +32,11 @@ export interface ModalButtonProps extends React.HTMLAttributes<HTMLButtonElement
    * @defaultValue false
    */
   fullWidth?: boolean;
+  /**
+   * 모달 버튼의 비활성화 여부를 결정
+   * @defaultValue false
+   */
+  disabled?: boolean;
 }
 
 type ModalPosition = "center" | "bottom";

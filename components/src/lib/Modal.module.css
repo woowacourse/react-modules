@@ -96,7 +96,7 @@
     box-sizing: border-box;
   }
 
-  &.inactive {
+  &.disabled {
     background-color: #c0c0c0;
     color: #ffffff;
     cursor: default;

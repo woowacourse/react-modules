@@ -78,15 +78,17 @@ function ModalButton({
   theme = "dark",
   size = "large",
   fullWidth = false,
+  disabled = false,
   ...attributes
 }: ModalButtonProps) {
   return (
     <button
+      disabled={disabled}
       className={classnames([
         style.ModalButton,
         style[theme],
         style[size],
-        { [style.fullWidth]: fullWidth },
+        { [style.fullWidth]: fullWidth, [style.disabled]: disabled },
       ])}
       {...attributes}
     >

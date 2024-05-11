@@ -64,8 +64,10 @@ export interface ModalCloseButtonProps extends React.HTMLAttributes<HTMLOrSVGEle
 }
 
 export interface ModalButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
-  theme?: "dark" | "light" | "inactive";
-  size?: "small" | "large";
+  theme?: "dark" | "light";
+  size?: "small" | "medium" | "large";
+  fullWidth?: boolean;
+  disabled?: boolean;
 }
 
 export interface ModalContentProps extends React.HTMLAttributes<HTMLDivElement> {
