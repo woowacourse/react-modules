@@ -12,6 +12,10 @@ export const cardholderNameValidator = {
   },
 
   onBlur: (value: string): IErrorStatus => {
+    if (value.length === 0) {
+      return { isError: true, errorMessage: "소유자명을 입력해 주세요." };
+    }
+
     if (!REGEX.oneOrMoreUppercaseWithBlank.test(value)) {
       return { isError: true, errorMessage: "소유자명은 영문 대문자만 포함해야 합니다." };
     }
@@ -26,6 +30,7 @@ export const cardholderNameValidator = {
         errorMessage: "소유자명의 사이 공백은 최대 한 칸 입력할 수 있습니다",
       };
     }
+
     return { isError: false, errorMessage: null };
   },
 };

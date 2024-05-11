@@ -19,6 +19,10 @@ export const expiryMonthValidator = {
   },
 
   onBlur: (value: string): IErrorStatus => {
+    if (value.length === 0) {
+      return { isError: true, errorMessage: "유효기간 월(月)을 입력해 주세요." };
+    }
+
     if (!REGEX.oneOrMoreDigits.test(value)) {
       return { isError: true, errorMessage: "유효기간 월(月)은 숫자만 포함해야 합니다." };
     }
@@ -61,6 +65,10 @@ export const expiryYearValidator = {
   },
 
   onBlur: (value: string): IErrorStatus => {
+    if (value.length === 0) {
+      return { isError: true, errorMessage: "유효기간 년도(年)을 입력해 주세요." };
+    }
+
     if (!REGEX.oneOrMoreDigits.test(value)) {
       return { isError: true, errorMessage: "유효기간 년도(年)은 숫자만 포함해야 합니다." };
     }
