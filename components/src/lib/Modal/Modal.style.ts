@@ -31,8 +31,8 @@ export const modalStyle = (position: Position, size: Size) =>
     borderRadius: "8px",
     background: COLOR_PALETTE.background,
     ...modalConditionStyle(position),
-    width: sizeConverter[size],
-    height: sizeConverter[size],
+    minWidthwidth: sizeConverter[size],
+    minHeightheight: sizeConverter[size],
   });
 
 export const modalContentStyle = () =>
@@ -45,8 +45,6 @@ export const modalContentStyle = () =>
 
 export const buttonsStyle = css({
   display: "flex",
-  flexDirection: "column",
-  gap: "12px",
 });
 
 export const inputStyle = css({

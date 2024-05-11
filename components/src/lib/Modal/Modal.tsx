@@ -59,6 +59,14 @@ const Modal: React.FC<ModalProps> = ({
       <div css={modalContentStyle}>
         <ModalHeader>{title && <Title>{title}</Title>}</ModalHeader>
         <div>{children}</div>
+        {type === "prompt" && (
+          <input
+            type="text"
+            value={inputValue}
+            onChange={onChange}
+            css={inputStyle}
+          />
+        )}
         <div css={buttonsStyle}>
           {type === "alert" && (
             <Button type="confirm" handleClick={onConfirm}>
@@ -83,12 +91,6 @@ const Modal: React.FC<ModalProps> = ({
           )}
           {type === "prompt" && (
             <>
-              <input
-                type="text"
-                value={inputValue}
-                onChange={onChange}
-                css={inputStyle}
-              />
               <Button type="confirm" handleClick={onConfirm}>
                 확인
               </Button>
