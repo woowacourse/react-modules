@@ -4,10 +4,11 @@ import BasicButton, {
   ButtonSizeType,
 } from "@/lib/Button/Button.tsx";
 
-export type ModalPosition = "center" | "bottom";
+export type ModalPosition = "center" | "bottom" | "top";
 
 export type ModalSize = "small" | "medium" | "large" | "full";
 
+export type ModalContentPosition = "center" | "left";
 export interface ModalMainProps {
   children: React.ReactNode;
   buttons?: React.ReactNode;
@@ -15,6 +16,7 @@ export interface ModalMainProps {
   position?: ModalPosition;
   onClose: () => void;
   size?: ModalSize;
+  contentPosition?: ModalContentPosition;
 }
 
 export const ModalMain = ({
@@ -52,11 +54,12 @@ const CloseIcon = ({ children, onClick }: CloseIconProps) => {
 };
 
 export interface ContentsProps {
+  contentPosition?: ModalContentPosition;
   children: React.ReactNode;
 }
 
-const Content = ({ children }: ContentsProps) => {
-  return <S.Content>{children}</S.Content>;
+const Content = ({ children, contentPosition = "left" }: ContentsProps) => {
+  return <S.Content contentPosition={contentPosition}>{children}</S.Content>;
 };
 
 export interface StyleButtonProps {

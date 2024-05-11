@@ -1,14 +1,11 @@
 import styled, { css } from "styled-components";
+import { ModalContentPosition } from "./Modal";
 
-export type ModalPosition = "center" | "bottom";
+export type ModalPosition = "center" | "bottom" | "top";
 
 export type ModalSize = "small" | "medium" | "large" | "full";
 
 export const ModalBottomStyle = css`
-  top: 50%;
-  transform: translate(-50%, -50%);
-  border-radius: 8px;
-
   @media (max-width: 567px) {
     width: 100%;
     top: auto;
@@ -19,10 +16,21 @@ export const ModalBottomStyle = css`
 `;
 
 export const ModalCenterStyle = css`
-  top: 50%;
-  transform: translate(-50%, -50%);
-  border-radius: 8px;
+  @media (max-width: 567px) {
+    transform: translate(-50%, -50%);
+    top: 50%;
+  }
 `;
+
+export const ModalTopStyle = css`
+  @media (max-width: 567px) {
+    width: 100%;
+    top: 0;
+    transform: translate(-50%);
+    border-radius: 0px 0px 8px 8px;
+  }
+`;
+
 export const MODAL_WIDTH_MAP: Record<ModalSize, string> = {
   small: "320px",
   medium: "480px",
@@ -61,9 +69,13 @@ export const ModalOuter = styled.div<{
   min-height: 150px;
   width: ${({ $size: size }) => MODAL_WIDTH_MAP[size]};
 
+  top: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 8px;
   ${({ $position }) => {
     if ($position === "bottom") return ModalBottomStyle;
     if ($position === "center") return ModalCenterStyle;
+    return ModalTopStyle;
   }};
 `;
 
@@ -72,7 +84,7 @@ export const ModalInner = styled.div`
   padding: 30px;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
+  justify-content: "flex-left";
 `;
 
 export const Title = styled.span`
@@ -103,12 +115,13 @@ export const CloseIcon = styled.button`
   color: black;
 `;
 
-export const Content = styled.div`
+export const Content = styled.div<{ contentPosition: ModalContentPosition }>`
   margin-bottom: 10px;
   text-align: left;
   display: flex;
   align-items: center;
-  justify-content: left;
+  justify-content: ${({ contentPosition }) =>
+    contentPosition === "center" ? "center" : "left"};
 `;
 
 export const Footer = styled.div`
