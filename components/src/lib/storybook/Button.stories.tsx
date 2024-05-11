@@ -7,34 +7,34 @@ const meta = {
   tags: ['autodocs'],
   argTypes: {
     size: {
-      description: '(optional) The size of the button.',
+      description: '(optional) Specifies the size of the button. Choices are "small", "medium" (default), or "large", affecting the button’s padding and font size.',
       control: { type: 'radio' },
       options: ['small', 'medium', 'large'],
     },
     width: {
-      description: "(optional) The width setting for the button's CSS.",
+      description: '(optional) Determines the width setting for the button\'s CSS. "fixed" maintains a constant width, "fit" adjusts to the text size, and "full" expands to the full width of its container.',
       control: { type: 'radio' },
       options: ['fixed', 'fit', 'full'],
     },
     buttonStyle: {
-      description: "he style of the button.",
+      description: '(optional) Specifies the style of the button. "primary" for a solid fill, "border" for a bordered style without fill, and "text" for a flat style without border or background.',
       control: { type: 'radio' },
       options: ['primary', 'border', 'text']
     },
     primaryColor: {
-      description: "(optional) The primary color of the button.",
+      description: '(optional) Sets the primary color of the button, used for the background in "primary" style, and the text and border in "border" and "text" styles.',
       control: { type: 'color' }
     },
     disabled: {
-      description: "(optional) Specifies whether the button is disabled. If set to true, the button will be unclickable and typically styled to indicate it is inactive.",
+      description: '(optional) Specifies whether the button is disabled. When true, the button becomes unclickable and is usually styled to indicate it is inactive.',
       control: { type: 'boolean' }
     },
     text: {
-      description: "(required) The text displayed on the button.",
+      description: '(required) The text displayed on the button. This is the primary content of the button and should clearly communicate its action.',
       control: { type: 'text' }
     },
     onClick: {
-      description: "(required) The function called when the button is clicked."
+      description: '(required) The function that is called when the button is clicked. This handler is triggered on user interaction with the button.',
     }
   },
   args: {

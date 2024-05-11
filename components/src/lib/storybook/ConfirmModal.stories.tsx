@@ -14,48 +14,48 @@ const meta = {
   tags: ['autodocs'],
   argTypes: {
     isOpened: {
-      description: '(optional) The size of the button.',
+      description: '(required) Controls whether the modal is visible. Set to true to show the modal and false to hide it.',
       control: { type: 'boolean' },
     },
     size: {
-      description: '(optional) The size of the button.',
+      description: '(optional) Specifies the size of the modal. Options include "small", "medium" (default), and "large".',
       control: { type: 'radio' },
       options: ['small', 'medium', 'large'],
     },
     showCloseButton: {
-      description: '',
+      description: '(optional) Determines if a close button is displayed on the modal. Set to true to display the button.',
       control: { type: 'boolean' },
     },
     modalPosition: {
-      description: "(optional) The primary color of the button.",
+      description: '(optional) Sets the position of the modal on the screen. Options are "center" (default) or "bottom".',
       control: { type: 'radio' },
       options: ['center', 'bottom']
     },
     buttonPosition: {
-      description: '',
+      description: '(optional) Defines the layout of the buttons within the modal.Options are "row" for horizontal arrangement or "column" for vertical arrangement.',
       control: { type: 'radio' },
       options: ['row', 'column']
     },
     primaryColor: {
-      description: '',
+      description: '(optional) Sets the primary color of the modal, influencing the header, footer, and primary buttons.',
       control: { type: 'color' },
     },
     onClose: {
-      description: ''
+      description: '(required) Function to be called when the modal is requested to be closed, such as clicking on a close button.'
     },
     onConfirm: {
-      description: ''
+      description: '(optional) Function to be called when the confirm action is triggered, typically via a confirm button.',
     },
     title: {
-      description: "he style of the button.",
+      description: '(optional) The title text to display at the top of the modal.',
       control: { type: 'text' },
     },
     description: {
-      description: "(optional) The primary color of the button.",
+      description: '(optional) A brief description or content text that appears inside the modal.',
       control: { type: 'text' }
     },
     children: {
-      description: "(optional) The primary color of the button.",
+      description: '(optional) Custom content to be displayed in the modal, allowing for flexible modal content configuration.',
       control: { type: 'radio' },
       options: ['none', 'customChildren', 'overflowChildren'],
       mapping: {
