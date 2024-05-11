@@ -20,7 +20,7 @@ export default function AlertModal({
       )}
       {children}
       <CompoundModal.buttonContainer align='right'>
-        <CompoundModal.button buttonTheme='primary' confirmButton>
+        <CompoundModal.button buttonTheme='primary' onClick={onConfirm}>
           확인
         </CompoundModal.button>
       </CompoundModal.buttonContainer>

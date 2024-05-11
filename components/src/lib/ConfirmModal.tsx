@@ -27,10 +27,10 @@ export default function ConfirmModal({
       )}
       {children}
       <CompoundModal.buttonContainer align='right'>
-        <CompoundModal.button buttonTheme='secondary' cancelButton>
+        <CompoundModal.button buttonTheme='secondary' onClick={onCancel}>
           취소
         </CompoundModal.button>
-        <CompoundModal.button buttonTheme='primary' confirmButton>
+        <CompoundModal.button buttonTheme='primary' onClick={onConfirm}>
           확인
         </CompoundModal.button>
       </CompoundModal.buttonContainer>
