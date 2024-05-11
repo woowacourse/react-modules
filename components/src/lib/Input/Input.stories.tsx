@@ -4,6 +4,7 @@ import { fn } from '@storybook/test';
 
 const meta = {
   title: 'Input',
+  tags: ['autodocs'],
   component: Input,
   argTypes: {
     value: {
