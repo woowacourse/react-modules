@@ -2,7 +2,7 @@ name: "@seongjinme/react-modal 모듈 Storybook 배포"
 
 on:
   push:
-    branches: ["step1"]
+    branches: ["step2"]
   workflow_dispatch:
 
 permissions:
