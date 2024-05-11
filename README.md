@@ -49,18 +49,23 @@
 
 - [x] 페이먼츠 카드의 다양한 정보에 대한 유효성 검사 로직을 여러 개의 작은 커스텀 훅으로 분리하고, 필요에 따라 조합하여 사용할 수 있도록 한다.
 - [x] 필수적으로 만들어야 하는 커스텀 훅은 페이먼츠 앱에서 다루었던 카드 정보에 대한 부분이다.
-- [ ] 카드 브랜드별 식별 번호 및 카드 번호 유효성 검사 구현
-  - [ ] AMEX
-  - [ ] Diners
-  - [ ] UnionPay
-- [ ] 사용자 입력 시 자동으로 카드사별 규칙에 맞게 포멧팅 기능 구현
+- [x] 카드 브랜드별 식별 번호 및 카드 번호 유효성 검사를 한다.
+  - [x] Diners (36으로 시작하는 14자리 숫자 4-6-4)
+  - [x] AMEX (34, 37로 시작하는 15자리 숫자 4-6-5)
+  - [x] 그 외 16자리인 경우(4-4-4-4)
+    - [x] MasterCard (51~55로 시작)
+    - [x] Visa (4로 시작)
+    - [x] UnionPay (622126~622925, 624~626, 6282~6288로 시작)
+- [ ] 사용자 입력 시 자동으로 카드사별 규칙에 맞게 포멧팅 한다.
 
-### `useCardNumbers` 커스텀 훅
+### `useCardBrand` 커스텀 훅
 
-- [x] useCardNumbers
+- [ ] useCardBrand
+
+### `useCardNumbe` 커스텀 훅
+
 - [x] useCardNumber
 - [x] useCardNumberValidation
-- [x] useCardNumberErrorText
 
 ### `useExpiryDate` 커스텀 훅
 
