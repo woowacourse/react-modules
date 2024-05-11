@@ -1,21 +1,21 @@
-import { CLOSE_BUTTON } from '../../../assets/images';
+import { CLOSE_BUTTON } from '../../../../assets/images';
 import styled from 'styled-components';
 
 export interface ModalHeaderProps {
   title: string;
-  closeIcon?: boolean;
+  isCloseIcon?: boolean;
   onCloseModal: () => void;
 }
 
 function ModalHeader({
   title,
-  closeIcon = false,
+  isCloseIcon = false,
   onCloseModal,
 }: ModalHeaderProps) {
   return (
     <HeaderContainer>
       <Title>{title}</Title>
-      {closeIcon && (
+      {isCloseIcon && (
         <CloseIcon onClick={onCloseModal}>
           <img src={CLOSE_BUTTON} />
         </CloseIcon>
