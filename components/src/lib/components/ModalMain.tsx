@@ -2,7 +2,7 @@ import { ReactNode } from "react";
 import { ModalPosition, ModalSize } from "./modalType";
 import styled from "styled-components";
 
-interface MainModalProps {
+export interface MainModalProps {
   backgroundColor?: string;
   position?: ModalPosition;
   children?: ReactNode;

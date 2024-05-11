@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { BUTTON_COLOR } from "./constant/color";
 import { ButtonSize } from "./modalType";
 
-interface ButtonProps {
+export interface ButtonProps {
   onClick: (e: React.MouseEvent) => void;
   buttonSize?: ButtonSize;
 

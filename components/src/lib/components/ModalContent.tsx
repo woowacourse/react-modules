@@ -1,7 +1,7 @@
 import { ReactNode } from "react";
 import styled from "styled-components";
 
-const ModalContent = ({ children }: { children?: ReactNode }) => {
+export const ModalContent = ({ children }: { children?: ReactNode }) => {
   return <ContentWrapper>{children}</ContentWrapper>;
 };
 

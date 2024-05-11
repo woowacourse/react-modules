@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import xButton from "./asset/xButton.svg";
 
-interface Props {
+export interface Props {
   title: string;
   hasXButton?: boolean;
   setModalClose: (e: React.MouseEvent) => void;

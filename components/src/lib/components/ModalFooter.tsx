@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { ButtonPosition, ModalButtonLayout } from "./modalType";
 import { ReactNode } from "react";
 
-interface FooterProps {
+export interface FooterProps {
   buttonLayout?: ModalButtonLayout;
   buttonPosition?: ButtonPosition;
   children: ReactNode;
