@@ -35,7 +35,8 @@ export const CARD_BRAND = {
     name: 'UnionPay',
     formattingRules: [4, 4, 4, 4],
     requiredLength: 16,
-    condition: /^(6221[2-9][6-9]|622[2-8]\d\d?|624|625|626|628[2-8])\d*$/,
+    condition:
+      /^(622(1[2-9][6-9]|[2-8]\d\d|9[01]\d|925\d|927[0-8]\d)|628[2-8]|624|625|626)\d*$/,
   },
   NONE: {
     name: 'none',
