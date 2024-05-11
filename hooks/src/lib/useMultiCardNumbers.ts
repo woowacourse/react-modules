@@ -1,4 +1,4 @@
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useEffect, useRef, useState } from "react";
 import { validateLength, validateNumber } from "@/validate/validate";
 import { ErrorStatus } from "@/types/errorStatus";
 import { removeNonNumeric } from "@/utils/numberHelper";
@@ -10,9 +10,18 @@ const useMultiCardNumbers = () => {
   const [formattedNumbers, setFormattedNumbers] = useState<string[]>([]);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const { cardBrand, identifyBrand } = useCardBrands();
+  const [cursorPosition, setCursorPosition] = useState(0);
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    if (inputRef.current) {
+      inputRef.current.selectionStart = cursorPosition;
+      inputRef.current.selectionEnd = cursorPosition;
+    }
+  }, [cursorPosition]);
 
   const onChangeValue = (e: ChangeEvent<HTMLInputElement>) => {
-    const { value } = e.target;
+    const { value, selectionStart } = e.target;
 
     const newCardBrand = identifyBrand(value);
     if (value.length > newCardBrand.validLength) return;
@@ -22,12 +31,25 @@ const useMultiCardNumbers = () => {
 
     validateValidLength(value, newCardBrand.validLength);
 
-    const formattedArr = formatCardNumber(
+    const { formattedArr, isEnd } = formatCardNumber(
       pureValue,
       newCardBrand.cardNumbersFormat
     );
+
+    let newSelectionStart = selectionStart || 0;
+    if (isEnd) {
+      newSelectionStart += 1;
+    }
+
+    console.log("new", newSelectionStart);
+
     setFormattedNumbers(formattedArr);
+    setCursorPosition(newSelectionStart);
   };
+
+  useEffect(() => {
+    console.log(cursorPosition);
+  }, [cursorPosition]);
 
   const validateIsNumber = (value: string) => {
     const isValidNumberResult = validateNumber(value);
@@ -51,17 +73,20 @@ const useMultiCardNumbers = () => {
 
   const formatCardNumber = (value: string, numberFormat: number[]) => {
     let startIndex = 0;
+    let lastIndex = 0;
     const formattedArr = [];
-
     for (const number of numberFormat) {
       if (startIndex >= value.length) {
         break;
       }
+      lastIndex = startIndex + number;
       const part = value.slice(startIndex, startIndex + number);
       formattedArr.push(part);
       startIndex += number;
     }
-    return formattedArr;
+
+    const isEnd = lastIndex === value.length;
+    return { formattedArr, isEnd };
   };
 
   const resetErrorMessage = (resolvedError: ErrorStatus) => {
@@ -71,6 +96,7 @@ const useMultiCardNumbers = () => {
   };
 
   return {
+    inputRef,
     onChange: onChangeValue,
     errorMessage:
       errorMessage &&

@@ -139,12 +139,19 @@ return (
 
 (3) `onChange` : 카드 번호을 입력하는 input의 값을 관리하는 onChange 메서드를 필수로 달아야 합니다.
 
+(4) `inputRef` : 인풋의 커서를 조정하기 위해 ref로 달아야 합니다.
+
 ```tsx
-const { onChange, errorMessage, formattedNumbers } = useMultiCardNumbers();
+const { onChange, errorMessage, formattedNumbers, inputRef } =
+  useMultiCardNumbers();
 
 return (
   <>
-    <input onChange={onChange} value={formattedNumbers.join("-")} />
+    <input
+      onChange={onChange}
+      value={formattedNumbers.join("-")}
+      ref={inputRef}
+    />
     <span>{formattedNumbers.join("-")}</span>
     <span>{errorMessage}</span>
   </>

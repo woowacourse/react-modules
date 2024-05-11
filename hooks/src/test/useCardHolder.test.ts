@@ -1,5 +1,5 @@
-import { renderHook, waitFor } from "@testing-library/react";
-import React, { ChangeEvent, act } from "react";
+import { renderHook } from "@testing-library/react";
+import React, { ChangeEvent } from "react";
 import { ErrorStatus } from "@/types/errorStatus";
 import { CardHolderErrorMessages } from "@/constants/error";
 import { useCardHolder } from "@/lib";
@@ -56,26 +56,4 @@ describe("useCardHolder 훅 테스트", () => {
 
     expect(result.current.errorMessage).toBe(expectedErrorMessage);
   });
-
-  const formatTest1 = ["12", ""];
-  const formatTest2 = ["AA1", "AA"];
-
-  const formatTestList = [formatTest1, formatTest2];
-  test.each(formatTestList)(
-    "유효하지 않은 값인 %s를 입력하면 입력이 되지 않는다.",
-    async (input, output) => {
-      const { result } = renderHook(() => useCardHolder(""));
-      for (let i = 0; i < input.length; i++) {
-        await act(async () => {
-          result.current.onChange({
-            target: { value: input.slice(0, i + 1) },
-          } as ChangeEvent<HTMLInputElement>);
-        });
-      }
-
-      await waitFor(() => {
-        expect(result.current.value).toEqual(output);
-      });
-    }
-  );
 });

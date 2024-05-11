@@ -2,10 +2,8 @@ import "./App.css";
 import { useMultiCardNumbers } from "./lib";
 
 function App() {
-  const { onChange, errorMessage, formattedNumbers, cardBrand } =
+  const { onChange, errorMessage, formattedNumbers, cardBrand, inputRef } =
     useMultiCardNumbers();
-
-  console.log("formattedNumbers", formattedNumbers);
 
   return (
     <>
@@ -13,9 +11,10 @@ function App() {
         onChange={onChange}
         value={formattedNumbers.join(" ")}
         name="month"
+        ref={inputRef}
       />
-      <span>{errorMessage}</span>
       <span>{cardBrand}</span>
+      <span>{errorMessage}</span>
     </>
   );
 }
