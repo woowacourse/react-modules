@@ -4,41 +4,95 @@ import { act } from 'react';
 import useCardExpirationDate from './useCardExpirationDate';
 
 describe('useCardExpirationDate custom hook', () => {
+  const maxLength = 4;
+
   test('hook이 초기화될 때 주어진 initValue로 설정된다.', () => {
-    const { result } = renderHook(() => useCardExpirationDate(['12', '23'], 2));
-    expect(result.current.value).toEqual(['12', '23']);
+    const { result } = renderHook(() =>
+      useCardExpirationDate('12/23', maxLength),
+    );
+    expect(result.current.value).toBe('12/23');
+    expect(result.current.isCompleted).toBe(false);
+    expect(result.current.errorMessage).toBe('');
   });
 
-  test('월 input에 01~12 범위를 초가하는 입력값이 입력될 때, onChangeHandler의 결과로 "유효기간 월은 01~12 사이만 입력이 가능해요" 라는 errorMessage를 반환합니다.', () => {
-    const { result } = renderHook(() => useCardExpirationDate(['', ''], 2));
+  test(`${maxLength}글자를 초과하는 값을 입력하면 "각 유효기간은 ${maxLength}글자 까지만 입력이 가능해요." 라는 에러 메시지를 반환한다.`, () => {
+    const { result } = renderHook(() => useCardExpirationDate('', maxLength));
     act(() => {
-      result.current.onChangeHandler({ target: { value: '13' } } as any, 0);
+      result.current.onChangeHandler({
+        target: { value: '12345' },
+      } as React.ChangeEvent<HTMLInputElement>);
     });
+    expect(result.current.value).toBe('');
+    expect(result.current.errorMessage).toBe(
+      `각 유효기간은 ${maxLength}글자 까지만 입력이 가능해요.`,
+    );
+  });
+
+  test('숫자가 아닌 값을 입력하면 "유효기간은 숫자만 입력이 가능해요." 라는 에러 메시지를 반환한다.', () => {
+    const { result } = renderHook(() => useCardExpirationDate('', maxLength));
+    act(() => {
+      result.current.onChangeHandler({
+        target: { value: 'ab/cd' },
+      } as React.ChangeEvent<HTMLInputElement>);
+    });
+    expect(result.current.value).toBe('');
+    expect(result.current.errorMessage).toBe(
+      '유효기간은 숫자만 입력이 가능해요.',
+    );
+  });
+  test(`MM/YY 형식이 아닌 값을 입력하면 "유효기간은 (MM/YY) 형식의 ${maxLength}글자로 입력해 주세요." 라는 에러 메시지를 반환한다.`, async () => {
+    const { result } = renderHook(() => useCardExpirationDate('', maxLength));
+    await act(async () => {
+      await waitFor(() =>
+        result.current.onChangeHandler({
+          target: { value: '123' },
+        } as React.ChangeEvent<HTMLInputElement>),
+      );
+      result.current.onBlurHandler();
+    });
+    expect(result.current.value).toBe('12/3');
+    expect(result.current.errorMessage).toBe(
+      `유효기간은 (MM/YY) 형식의 ${maxLength}글자로 입력해 주세요.`,
+    );
+  });
+
+  test(`월의 값이 01~12 사이의 값이 아니면 "유효기간 월은 01~12 사이만 입력이 가능해요" 라는 에러 메시지를 반환한다.`, () => {
+    const { result } = renderHook(() => useCardExpirationDate('', maxLength));
+    act(() => {
+      result.current.onChangeHandler({
+        target: { value: '1325' },
+      } as React.ChangeEvent<HTMLInputElement>);
+    });
+    act(() => {
+      result.current.onBlurHandler();
+    });
+    expect(result.current.value).toBe('13/25');
     expect(result.current.errorMessage).toBe(
       '유효기간 월은 01~12 사이만 입력이 가능해요',
     );
   });
 
-  test('모든 input의 focus가 해제된 경우, 만료된 카드일 경우 "만료된 카드입니다."라는 errorMessage를 반환합니다.', async () => {
-    const { result } = renderHook(() => useCardExpirationDate(['02', '22'], 2));
+  test('유효기간이 현재 날짜보다 이전이면 "만료된 카드입니다." 라는 에러 메시지를 반환한다.', () => {
+    const { result } = renderHook(() =>
+      useCardExpirationDate('01/21', maxLength),
+    );
     act(() => {
-      result.current.onBlurHandler(0);
-      result.current.onBlurHandler(1);
+      result.current.onBlurHandler();
     });
-    await waitFor(() => {
-      expect(result.current.errorMessage).toBe('만료된 카드입니다.');
-    });
+    expect(result.current.value).toBe('01/21');
+    expect(result.current.isCompleted).toBe(false);
+    expect(result.current.errorMessage).toBe('만료된 카드입니다.');
   });
 
-  test('올바른 입력값에서 onBlur 호출 시 errorMessage 없이 isCompleted가 true가 됩니다.', async () => {
-    const { result } = renderHook(() => useCardExpirationDate(['12', '30'], 2));
+  test('유효기간 입력이 정확하고 현재보다 후일 때는 isCompleted를 true로 설정한다.', () => {
+    const { result } = renderHook(() =>
+      useCardExpirationDate('12/30', maxLength),
+    );
     act(() => {
-      result.current.onBlurHandler(0);
-      result.current.onBlurHandler(1);
+      result.current.onBlurHandler();
     });
-    await waitFor(() => {
-      expect(result.current.isCompleted).toBe(true);
-      expect(result.current.errorMessage).toBe('');
-    });
+    expect(result.current.value).toBe('12/30');
+    expect(result.current.isCompleted).toBe(true);
+    expect(result.current.errorMessage).toBe('');
   });
 });
