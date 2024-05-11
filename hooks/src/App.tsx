@@ -1,11 +1,24 @@
 import React from "react";
-import "./App.css";
+import { useCardNumbers } from "./lib/index";
 
 function App() {
+  const {
+    cardNumbers,
+    cardBrand,
+    getCardNumbersErrorMessage,
+    handleCardNumbersChange,
+  } = useCardNumbers();
+
+  console.log(cardNumbers);
+
   return (
-    <>
-      <h1>Hooks Modules</h1>
-    </>
+    <div style={{ color: "black" }}>
+      <input
+        onChange={(event) => handleCardNumbersChange(event.target.value)}
+      />
+      <div>{cardBrand}</div>
+      <div>{getCardNumbersErrorMessage()}</div>
+    </div>
   );
 }
 

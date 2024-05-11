@@ -1,6 +1,6 @@
 {
   "name": "woowacourse-6th-card-custom-hook",
-  "version": "0.0.4",
+  "version": "0.0.6",
   "description": "for card register application",
   "type": "module",
   "types": "dist/index.d.ts",
@@ -40,7 +40,6 @@
     "typescript": "^5.2.2",
     "vite": "^5.2.0",
     "vite-plugin-dts": "^3.9.0",
-    "woowacourse-6th-card-custom-hook": "^0.0.1",
-    "woowacourse-react-modal-component": "^0.0.0"
+    "woowacourse-6th-card-custom-hook": "^0.0.6"
   }
 }
