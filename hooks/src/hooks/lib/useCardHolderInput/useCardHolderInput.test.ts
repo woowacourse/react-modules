@@ -1,29 +1,45 @@
-import { renderHook } from "@testing-library/react";
+import { renderHook, act } from "@testing-library/react-hooks";
 import useCardHolderInput from "./useCardHolderInput";
 import ERROR_MESSAGE from "../constants/errorMessage";
 
-describe("카드 소지자 이름 입력에 대한 useCardHolderInput 커스텀 훅 테스트", () => {
-  it("모든 조건이 유효할 때, isValid는 true여야 한다", () => {
-    const { result } = renderHook(() => useCardHolderInput({ cardHolder: "John Doe" }));
-    expect(result.current.validationResult.isValid).toBe(true);
-    expect(result.current.validationResult.errorMessage).toBe("");
+describe("useCardHolderInput 커스텀 훅", () => {
+  describe("초기 상태 테스트", () => {
+    it("카드 소유자 이름과 오류 메세지는 초기에 빈 값으로 시작한다.", () => {
+      const { result } = renderHook(() => useCardHolderInput());
+      expect(result.current.CardHolderState.value).toBe("");
+      expect(result.current.CardHolderState.isValid).toBe(false);
+      expect(result.current.CardHolderState.errorMessage).toBe("");
+    });
   });
 
-  it("이름이 비어 있을 경우, 오류 메시지를 반환해야 한다", () => {
-    const { result } = renderHook(() => useCardHolderInput({ cardHolder: "" }));
-    expect(result.current.validationResult.isValid).toBe(false);
-    expect(result.current.validationResult.errorMessage).toBe(ERROR_MESSAGE.EMPTY_VALUE);
+  describe("유효하지 않은 입력 테스트", () => {
+    it("알파벳 이외의 문자를 입력하면 오류 메시지를 반환한다.", () => {
+      const { result } = renderHook(() => useCardHolderInput());
+      act(() => {
+        result.current.handleCardHolderChange({ target: { value: "12345" } } as React.ChangeEvent<HTMLInputElement>);
+      });
+      expect(result.current.CardHolderState.isValid).toBe(false);
+      expect(result.current.CardHolderState.errorMessage).toBe(ERROR_MESSAGE.ONLY_ENGLISH);
+    });
+
+    it("입력 길이가 최대 길이를 초과하면 오류 메시지를 반환한다.", () => {
+      const { result } = renderHook(() => useCardHolderInput());
+      act(() => {
+        result.current.handleCardHolderChange({ target: { value: "ABCDEFGHIJKLMNOPQRSTUVWXYZ" } } as React.ChangeEvent<HTMLInputElement>);
+      });
+      expect(result.current.CardHolderState.isValid).toBe(false);
+      expect(result.current.CardHolderState.errorMessage).toBe(ERROR_MESSAGE.INVALID_HOLDER_LENGTH);
+    });
   });
 
-  it("이름에 영문자 이외의 문자가 포함된 경우, 오류 메시지를 반환해야 한다", () => {
-    const { result } = renderHook(() => useCardHolderInput({ cardHolder: "존도우" }));
-    expect(result.current.validationResult.isValid).toBe(false);
-    expect(result.current.validationResult.errorMessage).toBe(ERROR_MESSAGE.ONLY_ENGLISH);
-  });
-
-  it("이름이 허용된 길이를 초과하는 경우, 오류 메시지를 반환해야 한다", () => {
-    const { result } = renderHook(() => useCardHolderInput({ cardHolder: "ABCDEFGHIJASDSAFGASDSAKLMNOPQRSTUVWXYZ" }));
-    expect(result.current.validationResult.isValid).toBe(false);
-    expect(result.current.validationResult.errorMessage).toBe(ERROR_MESSAGE.INVALID_HOLDER_LENGTH);
+  describe("유효한 입력 테스트", () => {
+    it("유효한 이름을 입력했을 때 올바르게 유효성을 검사해야 한다.", () => {
+      const { result } = renderHook(() => useCardHolderInput());
+      act(() => {
+        result.current.handleCardHolderChange({ target: { value: "JINSIL CHOI" } } as React.ChangeEvent<HTMLInputElement>);
+      });
+      expect(result.current.CardHolderState.isValid).toBe(true);
+      expect(result.current.CardHolderState.errorMessage).toBe("");
+    });
   });
 });
