@@ -36,6 +36,7 @@ describe("usePassword 훅 테스트", () => {
     });
     const expectedErrorMessage =
       PasswordErrorMessages[ErrorStatus.IS_NOT_NUMBER];
+<<<<<<< HEAD
     expect(result.current.errorMessage).toBe(expectedErrorMessage);
   });
 
@@ -51,6 +52,9 @@ describe("usePassword 훅 테스트", () => {
 
     const expectedErrorMessage =
       PasswordErrorMessages[ErrorStatus.INVALID_LENGTH];
+=======
+
+>>>>>>> c04a3007662d19237170a83f917eeba4ed676674
     expect(result.current.errorMessage).toBe(expectedErrorMessage);
   });
 });

@@ -11,7 +11,7 @@ interface Props {
   validLength?: number;
 }
 
-const useInput = <T>({ initialValue = "", validates }: Props) => {
+const useInput = <T>({ initialValue = "", validates, validLength }: Props) => {
   const [value, setValue] = useState(initialValue);
   const [errorStatus, setErrorStatus] = useState<T | null>(null);
 
@@ -19,6 +19,8 @@ const useInput = <T>({ initialValue = "", validates }: Props) => {
     const { value } = e.target;
 
     let newError: T | null = null;
+
+    if (validLength && value.length > validLength) return;
 
     validates.forEach((validate) => {
       const result = validate(value);
@@ -35,7 +37,6 @@ const useInput = <T>({ initialValue = "", validates }: Props) => {
     if (newError) {
       setErrorStatus(newError);
     }
-
     setValue(value);
   };
 
@@ -43,6 +44,8 @@ const useInput = <T>({ initialValue = "", validates }: Props) => {
     value,
     onChange: handleChange,
     errorStatus,
+    setValue,
+    setErrorStatus,
   };
 };
 

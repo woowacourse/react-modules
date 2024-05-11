@@ -27,7 +27,9 @@
     /* Testing */
     "types": ["jest"],
 
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "declaration": true,
+    "declarationDir": "dist"
   },
   "include": ["src/**/*"],
   "exclude": ["node_modules", "dist"],

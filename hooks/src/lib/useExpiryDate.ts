@@ -3,7 +3,7 @@ import {
   validateNumber,
   validateYear,
   validateMonth,
-  validLength,
+  validateLength,
 } from "@/validate/validate";
 import { ChangeEvent } from "react";
 import { ExpiryDateType, ExpiryDateErrorType } from "@/types/expiryDate";
@@ -11,8 +11,8 @@ import { ExpiryDateErrorMessages } from "@/constants/error";
 import { VALID_LENGTH } from "@/constants/system";
 
 const commonValidates = [
+  (value: string) => validateLength(value, VALID_LENGTH.EXPIRY_DATE),
   (value: string) => validateNumber(value),
-  (value: string) => validLength(value, VALID_LENGTH.EXPIRY_DATE),
 ];
 
 const monthValidates = [
@@ -52,14 +52,14 @@ const useExpiryDate = (initialValue: ExpiryDateType) => {
   };
 
   const errorMessages = {
-    month: errorStatusMonth && ExpiryDateErrorMessages[errorStatusMonth],
-    year: errorStatusYear && ExpiryDateErrorMessages[errorStatusYear],
+    month: errorStatusMonth ? ExpiryDateErrorMessages[errorStatusMonth] : "",
+    year: errorStatusYear ? ExpiryDateErrorMessages[errorStatusYear] : "",
   };
 
   return {
     values: {
-      month: monthValue,
-      year: yearValue,
+      month: monthValue || "",
+      year: yearValue || "",
     },
     onChange: handleChange,
     errorMessages,
