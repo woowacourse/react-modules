@@ -1,0 +1,9 @@
+.darr-close-button {
+  outline: none;
+  border: none;
+  background: transparent;
+}
+
+.darr-close-button:hover {
+  cursor: pointer;
+}
