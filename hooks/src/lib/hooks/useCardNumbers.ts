@@ -11,6 +11,17 @@ function useCardNumbers() {
   const [cardNumbers, setCardNumbers] = useState("");
   const [cardNumbersError, setCardNumbersError] = useState(false);
 
+  const formatCardNumber = (value: string) => {
+    const cardNumbers = [...value];
+    const formattedNumbers: string[] = [];
+
+    CARD_BRANDS_INFO[cardBrand].formatting.forEach((formatIndex) => {
+      formattedNumbers.push(cardNumbers.splice(0, formatIndex).join(""));
+    });
+
+    return formattedNumbers;
+  };
+
   const handleCardNumbersChange = (value: string) => {
     handleCardBrandChange(value);
 
@@ -22,16 +33,16 @@ function useCardNumbers() {
     setCardNumbers(value);
   };
 
-  const getCardNumberErrorMessage = () => {
+  const getCardNumbersErrorMessage = () => {
     return cardNumbersError
       ? `${CARD_BRANDS_INFO[cardBrand].maxLength}${ERROR_MESSAGES.maxLengthNumber}`
       : undefined;
   };
 
   return {
-    cardNumbers,
+    cardNumbers: formatCardNumber(cardNumbers),
     cardNumbersError,
-    getCardNumberErrorMessage,
+    getCardNumbersErrorMessage,
     cardBrand,
     handleCardNumbersChange,
   };
