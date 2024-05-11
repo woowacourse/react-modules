@@ -5,9 +5,7 @@ import ValidationResult from '../types/ValidationResult';
 import ErrorMessages from '../types/ErrorMessages';
 import GLOBAL_BRANDS from '../constants/globalBrands';
 
-import getCardGlobalBrand from './subfunctions/getCardGlobalBrand';
-import formatCardNumber from './subfunctions/formatCardNumber';
-import adjustCursorPosition from './subfunctions/adjustCursorPosition';
+import { adjustCursorPosition, formatCardNumber, getCardGlobalBrand } from './useCardNumber.util';
 
 interface CardNumberValidationResult {
   cardNumber: string;
