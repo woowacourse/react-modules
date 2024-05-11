@@ -13,9 +13,9 @@ export default function useCardNumber(
 ) {
   const [cardNumber, setCardNumber] = useState('');
 
-  const onChange = useCallback(() => getOnChange(setCardNumber), []);
+  const onChange = useCallback(getOnChange(setCardNumber), []);
 
-  const onBlur = useCallback(() => getOnBlur(setCardNumber), []);
+  const onBlur = useCallback(getOnBlur(setCardNumber), []);
 
   const checkCardBrandRule = useCallback(
     getCheckCardBrandRule(targetBrandNames),

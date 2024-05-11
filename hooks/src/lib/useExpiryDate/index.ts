@@ -8,11 +8,8 @@ import getOnChange from '../utils/getOnChange';
 
 export default function useExpiryDate() {
   const [expiryMonth, setExpiryMonth] = useState('');
-  const onChangeExpiryMonth = useCallback(
-    () => getOnChange(setExpiryMonth),
-    []
-  );
-  const onBlurExpiryMonth = useCallback(() => getOnBlur(setExpiryMonth), []);
+  const onChangeExpiryMonth = useCallback(getOnChange(setExpiryMonth), []);
+  const onBlurExpiryMonth = useCallback(getOnBlur(setExpiryMonth), []);
 
   const [expiryYear, setExpiryYear] = useState('');
   const onChangeExpiryYear = useCallback(() => getOnChange(setExpiryYear), []);

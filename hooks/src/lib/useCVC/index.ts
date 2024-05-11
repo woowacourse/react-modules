@@ -9,9 +9,9 @@ import getOnChange from '../utils/getOnChange';
 export default function useCVC() {
   const [cvc, setCVC] = useState('');
 
-  const onChange = useCallback(() => getOnChange(setCVC), []);
+  const onChange = useCallback(getOnChange(setCVC), []);
 
-  const onBlur = useCallback(() => getOnBlur(setCVC), []);
+  const onBlur = useCallback(getOnBlur(setCVC), []);
 
   const errorMessage = getErrorMessage(cvc, cvcValidators);
 

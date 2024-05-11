@@ -9,9 +9,9 @@ import getOnChange from '../utils/getOnChange';
 export default function usePasswordPrefix() {
   const [passwordPrefix, setPasswordPrefix] = useState('');
 
-  const onChange = useCallback(() => getOnChange(setPasswordPrefix), []);
+  const onChange = useCallback(getOnChange(setPasswordPrefix), []);
 
-  const onBlur = useCallback(() => getOnBlur(setPasswordPrefix), []);
+  const onBlur = useCallback(getOnBlur(setPasswordPrefix), []);
 
   const errorMessage = getErrorMessage(
     passwordPrefix,

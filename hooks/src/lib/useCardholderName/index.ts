@@ -9,9 +9,9 @@ import getOnChange from '../utils/getOnChange';
 export default function useCardholderName() {
   const [cardholderName, setCardholderName] = useState('');
 
-  const onChange = useCallback(() => getOnChange(setCardholderName), []);
+  const onChange = useCallback(getOnChange(setCardholderName), []);
 
-  const onBlur = useCallback(() => getOnBlur(setCardholderName), []);
+  const onBlur = useCallback(getOnBlur(setCardholderName), []);
 
   const errorMessage = getErrorMessage(
     cardholderName,

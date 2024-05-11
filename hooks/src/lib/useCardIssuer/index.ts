@@ -8,9 +8,9 @@ import getOnChange from '../utils/getOnChange';
 export default function useCardIssuer() {
   const [cardIssuer, setCardIssuer] = useState('');
 
-  const onChange = useCallback(() => getOnChange(setCardIssuer), []);
+  const onChange = useCallback(getOnChange(setCardIssuer), []);
 
-  const onBlur = useCallback(() => getOnBlur(setCardIssuer), []);
+  const onBlur = useCallback(getOnBlur(setCardIssuer), []);
 
   const errorMessage = getErrorMessage(cardIssuer, cardIssuerValidators);
 
