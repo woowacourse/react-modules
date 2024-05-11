@@ -10,6 +10,7 @@ import ModalBody from './ModalBody/ModalBody';
 import ModalDescription from './ModalDescription/ModalDescription';
 import ModalButtonContainer from './ModalButtonContainer/ModalButtonContainer';
 import ModalInputField, { ValidateResult } from './ModalInputField/ModalInputField';
+import { createPortal } from 'react-dom';
 
 interface PromptModalProps {
   size?: ModalSize;
@@ -63,7 +64,7 @@ const PromptModal = ({
 
   const [value, setValue] = useState(initialValue)
 
-  return (
+  return createPortal(
     <>
       {isOpened && (
         <ModalDimmedLayer onClick={onClose}>
@@ -83,7 +84,10 @@ const PromptModal = ({
             <ModalButtonContainer buttonPosition={buttonPosition}>
               <Button
                 text={'확인'}
-                onClick={() => onConfirm(value)}
+                onClick={() => {
+                  onConfirm(value);
+                  onClose();
+                }}
                 size={'small'}
                 width={modalPosition === 'bottom' || buttonPosition === 'column' ? 'full' : 'fixed'}
                 buttonStyle={'primary'}
@@ -102,7 +106,7 @@ const PromptModal = ({
           </ModalContainer>
         </ModalDimmedLayer>
       )}
-    </>
+    </>, document.body
   );
 };
 
