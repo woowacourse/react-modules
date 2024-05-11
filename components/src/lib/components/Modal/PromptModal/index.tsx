@@ -1,5 +1,4 @@
 import React from 'react';
-import useModal from '../../../hooks/useModal';
 import Input from '../../common/Input';
 import Modal from '../../common/Modal';
 import { BasicModal } from '../../types';

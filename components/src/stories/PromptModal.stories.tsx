@@ -1,16 +1,13 @@
-import { Meta, StoryObj } from '@storybook/react';
+import { Meta } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 
-import PromptModal from './index';
+import PromptModal from '../lib/components/Modal/PromptModal/index';
 
-import '../../../../styles/index.css';
+import '../styles/index.css';
 
 const meta: Meta<typeof PromptModal> = {
   title: 'Modal/Examples',
   component: PromptModal,
-  argTypes: {
-    children: { table: { disable: true } },
-  },
 };
 
 export default meta;

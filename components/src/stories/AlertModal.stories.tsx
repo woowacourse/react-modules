@@ -1,16 +1,15 @@
-import { Meta, StoryObj } from '@storybook/react';
+import { Meta } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 
-import AlertModal from './index';
+import AlertModal from '../lib/components/Modal/AlertModal/index';
 
-import '../../../../styles/index.css';
+import '../styles/index.css';
 
 const meta: Meta<typeof AlertModal> = {
   title: 'Modal/Examples',
   component: AlertModal,
   argTypes: {
     $footerDirection: { table: { disable: true } },
-    children: { table: { disable: true } },
   },
 };
 

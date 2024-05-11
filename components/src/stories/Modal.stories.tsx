@@ -1,10 +1,7 @@
 import { Meta, StoryObj } from '@storybook/react';
-import { action } from '@storybook/addon-actions';
+import { Modal, useModal } from '../lib/index';
 
-import { Modal, useModal } from '../../../index';
-import Input from '../Input';
-
-import '../../../../styles/index.css';
+import '../styles/index.css';
 
 const meta: Meta<typeof Modal> = {
   title: 'Modal',

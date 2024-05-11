@@ -1,16 +1,13 @@
-import { Meta, StoryObj } from '@storybook/react';
+import { Meta } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 
-import ConfirmModal from './index';
+import ConfirmModal from '../lib/components/Modal/ConfirmModal/index';
 
-import '../../../../styles/index.css';
+import '../styles/index.css';
 
 const meta: Meta<typeof ConfirmModal> = {
   title: 'Modal/Examples',
   component: ConfirmModal,
-  argTypes: {
-    children: { table: { disable: true } },
-  },
 };
 
 export default meta;
