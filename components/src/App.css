@@ -1,4 +1,9 @@
-.app {
+/* .app {
   width: 375px;
   height: 664px;
+} */
+
+.app {
+  width: 100%;
+  height: 100vh;
 }
