@@ -3,7 +3,7 @@ import useModalEscClose from '../hooks/useModalEscClose';
 import useDisableBackgroundScroll from '../hooks/useDisableBackgroundScroll';
 import * as Styled from './Modal.styled';
 import React, { ButtonHTMLAttributes, HTMLAttributes, useRef } from 'react';
-import CloseImage from '../../assets/close.png';
+import CloseImage from '../assets/close.png';
 
 export interface ModalProps
   extends React.PropsWithChildren,
