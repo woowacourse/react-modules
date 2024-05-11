@@ -22,10 +22,11 @@ const useCardNumber = () => {
   const handleCardNumberChange = (cardNumber: string) => {
     const cardNumberWithoutSpace = cardNumber.replace(/\D/g, '');
     const newCardType = handleCardTypeChange(cardNumberWithoutSpace);
+    const formattedNumber = formatCardNumber(cardNumberWithoutSpace, META_CARD[newCardType].format);
 
     const errors: string[] = [];
     const isNumeric = REGEX.onlyNumber.test(cardNumberWithoutSpace);
-    const isValidNumber = cardNumberWithoutSpace.length === META_CARD[newCardType].maxLength;
+    const isValidNumber = formattedNumber.join('').length === META_CARD[newCardType].maxLength;
 
     if (!isNumeric) {
       errors.push('숫자를 입력해주세요.');
@@ -36,7 +37,7 @@ const useCardNumber = () => {
     }
 
     setCardNumberInfo({
-      cardNumber: formatCardNumber(cardNumberWithoutSpace, META_CARD[newCardType].format),
+      cardNumber: formattedNumber,
       cardType: newCardType,
       isValid: isNumeric && isValidNumber,
       errorMessages: errors,
