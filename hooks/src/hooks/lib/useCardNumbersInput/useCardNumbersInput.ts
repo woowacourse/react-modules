@@ -5,7 +5,7 @@ import CARD_BRAND from "../constants/cardBrand";
 import getCardBrand from "../utils/getCardBrand";
 import { cardNumberFormatter } from "../utils/format";
 
-type CardBrand = "VISA" | "MASTER_CARD" | "DINERS" | "AMEX" | "UNION_PAY" | "UNDEFINED";
+type CardBrand = "VISA" | "MASTER_CARD" | "DINERS" | "AMEX" | "UNION_PAY" | "UNKNOWN";
 
 interface CardNumbersState {
   value: string;
@@ -24,7 +24,7 @@ const useCardNumbersInput = (): Props => {
     value: "",
     isValid: false,
     errorMessage: "",
-    cardBrand: "UNDEFINED",
+    cardBrand: "UNKNOWN",
   });
 
   const handleCardNumbersChange = (e: React.ChangeEvent<HTMLInputElement>) => {
