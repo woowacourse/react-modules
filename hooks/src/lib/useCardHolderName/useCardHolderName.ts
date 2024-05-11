@@ -19,6 +19,12 @@ const useCardHolderName = (initValue: string, maxLength: number = 50) => {
   };
 
   const validateOnBlur = () => {
+    if (value.length === 0) {
+      return {
+        isValid: false,
+        errorMessage: `이름을 입력해 주세요.`,
+      };
+    }
     return { isValid: true, errorMessage: '' };
   };
 
