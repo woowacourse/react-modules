@@ -61,7 +61,7 @@ const useCardNumber = (initialValue = '') => {
       setError({ state: false, message: '' });
     }
 
-    setValue(sliceCreditCardNumber(replaceValue, format).join('-'));
+    setValue(sliceCreditCardNumber(replaceValue, cardInfo.format).join('-'));
   };
 
   const onBlurHandler = (e: FocusEvent<HTMLInputElement>) => {
