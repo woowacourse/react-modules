@@ -13,6 +13,7 @@ const useCardNumber = () => {
   const { cardNumberError, validateCardNumbers } = useCardNumberValidation();
 
   const handleChangeCardNumber = (value: string) => {
+    // formattedCardNumber, '-'와 스페이스를 제거한다.
     value = value.replace(/[\s-]/g, '');
     const { brand, format, length } = checkCardBrand(value);
 
