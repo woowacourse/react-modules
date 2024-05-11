@@ -8,6 +8,7 @@ interface ModalProps {
   modalTitle: string;
   position?: ModalPosition;
   modalSize?: ModalSize;
+  hasCloseButton?: boolean;
   children: React.ReactNode;
   closeModal: () => void;
 }
@@ -17,13 +18,14 @@ const Modal = ({
   position = "center",
   children,
   modalSize = "s",
+  hasCloseButton = false,
   closeModal,
 }: ModalProps) => {
   return (
     <div className="darr-modal">
       <div className="modal-backdrop" onClick={closeModal}></div>
       <div className={`modal-inner ${position} size-${modalSize}`}>
-        <ModalHeader title={modalTitle} />
+        <ModalHeader title={modalTitle} closeModal={closeModal} hasCloseButton={hasCloseButton} />
         {children}
       </div>
     </div>

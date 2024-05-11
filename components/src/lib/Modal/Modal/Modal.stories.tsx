@@ -22,6 +22,9 @@ const meta = {
     modalSize: {
       description: "modal의 크기",
     },
+    hasCloseButton: {
+      description: "모달 헤더의 닫기 버튼 유무",
+    },
     closeModal: {
       description: "modal을 닫을 떄의 action",
     },

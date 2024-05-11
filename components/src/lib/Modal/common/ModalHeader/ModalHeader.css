@@ -1,8 +1,15 @@
 .darr-modal .darr-modal-header {
   width: 100%;
+  position: relative;
 }
 
 .darr-modal .darr-modal-header h3 {
   font-size: 18px;
   font-weight: 700;
+}
+
+.darr-modal .darr-modal-header .close-button-wrapper {
+  position: absolute;
+  top: 0;
+  right: 0;
 }
