@@ -1,6 +1,6 @@
 import React from "react";
 import "./App.css";
-import { useCardNumbersInput, useExpiryDateInput, useCardHolderInput, useCVCInput, usePasswordInput } from "./hooks/lib";
+import { useCardNumbersInput, useExpiryDateInput, useCardHolderInput, useCVCInput, usePasswordInput } from "chlwlstlf-card-validation-hooks";
 import CARD_BRAND from "./hooks/lib/constants/cardBrand";
 
 function App() {
