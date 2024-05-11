@@ -14,6 +14,52 @@ npm install hain-tain-hooks
 
 ### Quick start
 
+> 🤔 **What is the difference between useCardNumber and useCardNumbers?**
+>
+> For useCardNumber, the card number is managed as a **`string`** value, and for useCardNumbers, the card number is managed as a **`string[]`** value.
+>
+> Therefore, useCardNumber can be used with one **`input`**, and useCardNumbers can be used with multiple **`inputs`**.
+
+- **useCardNumber**
+
+```js
+import useCardNumber from 'hain-tain-hooks';
+
+const CardNumber = () => {
+  const {
+    value,
+    formattingValue,
+    errorMessage,
+    cardBrand,
+    onChangeHandler,
+    onBlurHandler,
+    onFocusHandler,
+  } = useCardNumber('');
+
+  return (
+    <>
+      <p>{cardBrand}</p>
+      <input
+        value={formattingValue}
+        onChange={onChangeHandler}
+        onBlur={onBlurHandler}
+        onFocus={onFocusHandler}
+        onKeyDown={(e) => {
+          if (e.key === 'Escape' || e.key === 'Enter') {
+            e.currentTarget.blur();
+          }
+        }}
+      />
+      <p>value: {value}</p>
+      <p>formattingValue : {formattingValue}</p>
+      <p style={{ color: 'red' }}>{errorMessage}</p>
+    </>
+  );
+};
+
+export default CardNumber;
+```
+
 - **useCardNumbers**
 
 ```js
@@ -232,6 +278,7 @@ export default CardPassword;
 
 - `useValidateInput`
 - `useValidateInputs`
+- `useCardNumber`
 - `useCardNumbers`
 - `useCardCompany`
 - `useCardExpiration`
