@@ -1,9 +1,7 @@
 // import "soosoo-react-payments-components/dist/style.css";
 // import { AlertModal } from "soosoo-react-payments-components";
 import type { Meta, StoryObj } from "@storybook/react";
-import { fn } from "@storybook/test";
 import AlertModal from "./AlertModal";
-// import "../../index.css";
 
 const meta = {
   title: "AlertModal",

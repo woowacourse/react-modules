@@ -1,9 +1,7 @@
 // import "soosoo-react-payments-components/dist/style.css";
 // import { ConfirmModal } from "soosoo-react-payments-components";
 import type { Meta, StoryObj } from "@storybook/react";
-import { fn } from "@storybook/test";
 import ConfirmModal from "./ConfirmModal";
-// import "../../index.css";
 
 const meta = {
   title: "ConfirmModal",
@@ -27,8 +25,8 @@ export const Default: Story = {
     size: "medium",
     title: { position: "left", content: "🍀호프를 삭제하시겠습니까?🍀" },
     isOpen: true,
-    onConfirm: fn(),
-    onCancel: fn(),
+    confirmButton: { content: "", onConfirm: () => alert("확인 버튼이 클릭되었습니다.") },
+    cancelButton: { content: "", onCancel: () => alert("취소 버튼이 클릭되었습니다.") },
     children: "삭제하면 복구하실 수 없습니다.",
   },
 };

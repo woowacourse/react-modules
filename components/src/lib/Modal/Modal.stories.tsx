@@ -27,11 +27,11 @@ export const Default: Story = {
     title: { position: "left", content: "🍀호프는 몇 살일까🍀" },
     isOpen: true,
     onClose: fn(),
-    closeButton: { onClose: fn() },
+    closeButton: { onClose: () => alert(`'close' 버튼이 클릭되었습니다.`) },
     footerButtons: [
       {
         content: "동의하고 저장하기",
-        onClick: fn(),
+        onClick: () => alert(`'동의하고 저장하기' 버튼이 클릭되었습니다.`),
         className: "confirmButton",
         style: {
           background: "rgba(51, 51, 51, 1)",

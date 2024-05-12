@@ -1,9 +1,7 @@
 // import "soosoo-react-payments-components/dist/style.css";
 // import { PromptModal } from "soosoo-react-payments-components";
 import type { Meta, StoryObj } from "@storybook/react";
-import { fn } from "@storybook/test";
 import PromptModal from "./PromptModal";
-// import "../../index.css";
 
 const meta = {
   title: "PromptModal",
@@ -26,7 +24,7 @@ export const Default: Story = {
     position: "center",
     title: { position: "left", content: "🍀호프 번호를 입력해 주세요.🍀" },
     isOpen: true,
-    onConfirm: fn(),
-    onCancel: fn(),
+    confirmButton: { content: "", onConfirm: () => alert("확인 버튼이 클릭되었습니다.") },
+    cancelButton: { content: "", onCancel: () => alert("취소 버튼이 클릭되었습니다.") },
   },
 };
