@@ -5,6 +5,7 @@ import PromptModal from "./PromptModal";
 
 import { StoryObj, Meta } from "@storybook/react";
 import { fn } from "@storybook/test";
+import { action } from "@storybook/addon-actions";
 
 const meta = {
   title: "Components/Modal",
@@ -172,7 +173,9 @@ export const 하단_닫기_버튼이_있는_모달: Story = {
         <span>올리와 썬데이의 하단 닫기 버튼이 있는 모달</span>
       </Modal.ModalContent>
       <Modal.ModalFooter>
-        <Modal.ModalButton size={"L"}>확인</Modal.ModalButton>
+        <Modal.ModalButton size={"L"} onClick={args.onClose}>
+          확인
+        </Modal.ModalButton>
       </Modal.ModalFooter>
     </Modal>
   ),
@@ -207,7 +210,9 @@ export const S_사이즈_모달: Story = {
         <span>작은 모달</span>
       </Modal.ModalContent>
       <Modal.ModalFooter>
-        <Modal.ModalButton size={"L"}>확인</Modal.ModalButton>
+        <Modal.ModalButton size={"L"} onClick={args.onClose}>
+          확인
+        </Modal.ModalButton>
       </Modal.ModalFooter>
     </Modal>
   ),
@@ -242,7 +247,9 @@ export const M_사이즈_모달: Story = {
         <span>평범한 모달</span>
       </Modal.ModalContent>
       <Modal.ModalFooter>
-        <Modal.ModalButton size={"L"}>확인</Modal.ModalButton>
+        <Modal.ModalButton size={"L"} onClick={args.onClose}>
+          확인
+        </Modal.ModalButton>
       </Modal.ModalFooter>
     </Modal>
   ),
@@ -277,7 +284,9 @@ export const L_사이즈_모달: Story = {
         <span>큰 모달</span>
       </Modal.ModalContent>
       <Modal.ModalFooter>
-        <Modal.ModalButton size={"L"}>확인</Modal.ModalButton>
+        <Modal.ModalButton size={"L"} onClick={args.onClose}>
+          확인
+        </Modal.ModalButton>
       </Modal.ModalFooter>
     </Modal>
   ),
@@ -367,9 +376,7 @@ export const 확인_모달: Story = {
         content={"삭제하면 복구하실 수 없습니다."}
         size={"M"}
         position={args.position}
-        onConfirm={() => {
-          console.log("Confirm Button Click");
-        }}
+        onConfirm={action("confirm-button-click")}
       ></ConfirmModal>
     );
   },
