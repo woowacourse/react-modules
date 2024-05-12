@@ -1,4 +1,4 @@
-import { LightButton } from "../common/Button";
+import { DarkButton, LightButton } from "../common/Button";
 import { ModalContainer, ModalDim, ModalHeader, ModalContent } from "./Modal.style";
 import { ModalProps } from "./ModalType";
 import { ButtonSet } from "./ButtonSet";
@@ -31,6 +31,11 @@ export const Modal = ({
           )}
         </ModalHeader>
         <ModalContent>{children}</ModalContent>
+        {!modalType && closeButtonPosition === "bottom" && (
+          <DarkButton onClick={onClose} style={{ width: "100%", height: "40px" }}>
+            닫기
+          </DarkButton>
+        )}
         <ButtonSet modalType={modalType} onClose={onClose} />
       </ModalContainer>
     </ModalDim>
