@@ -2,10 +2,11 @@ import React from "react";
 import type { Meta, StoryObj } from "@storybook/react";
 
 import Modal from "../lib/Modal/Modal";
+import theme from "../theme";
+import { ThemeProvider } from "styled-components";
 
 const meta = {
   title: "Modal",
-
   component: Modal,
 
   parameters: {
@@ -19,32 +20,41 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
+    isOpen: true,
     children: (
       <>
-        <Modal.BackDrop
-          onClose={() => {
-            console.log("backdrop clicked");
-          }}
-        />
-        <Modal.Container position="center">
-          <Modal.Header>
-            <Modal.Title text="카드사 선택" />
-          </Modal.Header>
-          <Modal.ButtonContainer direction="column">
-            <Modal.Button
-              theme="dark"
-              onClick={() => console.log("confirmButton clicked")}
-            >
-              동의하고 저장하기
-            </Modal.Button>
-            <Modal.Button
-              theme="white"
-              onClick={() => console.log("closeButton clicked")}
-            >
-              닫기
-            </Modal.Button>
-          </Modal.ButtonContainer>
-        </Modal.Container>
+        <ThemeProvider theme={theme}>
+          <Modal.BackDrop
+            onClose={() => {
+              console.log("backdrop clicked");
+            }}
+          />
+          <Modal.Container position="center" size="large">
+            <>
+              <Modal.Header>
+                <Modal.Title text="카드사 선택" />
+              </Modal.Header>
+              <Modal.ButtonContainer direction="column" position="center">
+                <>
+                  <Modal.Button
+                    color="dark"
+                    size="large"
+                    onClick={() => console.log("confirmButton clicked")}
+                  >
+                    <span>동의</span>
+                  </Modal.Button>
+                  <Modal.Button
+                    color="light"
+                    size="large"
+                    onClick={() => console.log("closeButton clicked")}
+                  >
+                    <span>닫기</span>
+                  </Modal.Button>
+                </>
+              </Modal.ButtonContainer>
+            </>
+          </Modal.Container>
+        </ThemeProvider>
       </>
     ),
   },
@@ -52,32 +62,41 @@ export const Default: Story = {
 
 export const PositionTop: Story = {
   args: {
+    isOpen: true,
     children: (
       <>
-        <Modal.BackDrop
-          onClose={() => {
-            console.log("backdrop clicked");
-          }}
-        />
-        <Modal.Container position="top">
-          <Modal.Header>
-            <Modal.Title text="약관에 동의해 주세요." />
-          </Modal.Header>
-          <Modal.ButtonContainer direction="column">
-            <Modal.Button
-              theme="dark"
-              onClick={() => console.log("confirmButton clicked")}
-            >
-              동의하고 저장하기
-            </Modal.Button>
-            <Modal.Button
-              theme="white"
-              onClick={() => console.log("closeButton clicked")}
-            >
-              닫기
-            </Modal.Button>
-          </Modal.ButtonContainer>
-        </Modal.Container>
+        <ThemeProvider theme={theme}>
+          <Modal.BackDrop
+            onClose={() => {
+              console.log("backdrop clicked");
+            }}
+          />
+          <Modal.Container position="top" size="large">
+            <>
+              <Modal.Header>
+                <Modal.Title text="카드사 선택" />
+              </Modal.Header>
+              <Modal.ButtonContainer direction="column" position="center">
+                <>
+                  <Modal.Button
+                    color="dark"
+                    size="large"
+                    onClick={() => console.log("confirmButton clicked")}
+                  >
+                    <span>동의</span>
+                  </Modal.Button>
+                  <Modal.Button
+                    color="light"
+                    size="large"
+                    onClick={() => console.log("closeButton clicked")}
+                  >
+                    <span>닫기</span>
+                  </Modal.Button>
+                </>
+              </Modal.ButtonContainer>
+            </>
+          </Modal.Container>
+        </ThemeProvider>
       </>
     ),
   },
@@ -85,32 +104,41 @@ export const PositionTop: Story = {
 
 export const PositionBottom: Story = {
   args: {
+    isOpen: true,
     children: (
       <>
-        <Modal.BackDrop
-          onClose={() => {
-            console.log("backdrop clicked");
-          }}
-        />
-        <Modal.Container position="bottom">
-          <Modal.Header>
-            <Modal.Title text="약관에 동의해 주세요." />
-          </Modal.Header>
-          <Modal.ButtonContainer direction="column">
-            <Modal.Button
-              theme="dark"
-              onClick={() => console.log("confirmButton clicked")}
-            >
-              동의하고 저장하기
-            </Modal.Button>
-            <Modal.Button
-              theme="white"
-              onClick={() => console.log("closeButton clicked")}
-            >
-              닫기
-            </Modal.Button>
-          </Modal.ButtonContainer>
-        </Modal.Container>
+        <ThemeProvider theme={theme}>
+          <Modal.BackDrop
+            onClose={() => {
+              console.log("backdrop clicked");
+            }}
+          />
+          <Modal.Container position="bottom" size="large">
+            <>
+              <Modal.Header>
+                <Modal.Title text="카드사 선택" />
+              </Modal.Header>
+              <Modal.ButtonContainer direction="column" position="center">
+                <>
+                  <Modal.Button
+                    color="dark"
+                    size="large"
+                    onClick={() => console.log("confirmButton clicked")}
+                  >
+                    <span>동의</span>
+                  </Modal.Button>
+                  <Modal.Button
+                    color="light"
+                    size="large"
+                    onClick={() => console.log("closeButton clicked")}
+                  >
+                    <span>닫기</span>
+                  </Modal.Button>
+                </>
+              </Modal.ButtonContainer>
+            </>
+          </Modal.Container>
+        </ThemeProvider>
       </>
     ),
   },
@@ -118,35 +146,48 @@ export const PositionBottom: Story = {
 
 export const HasCloseButtonModal: Story = {
   args: {
+    isOpen: true,
     children: (
       <>
-        <Modal.BackDrop
-          onClose={() => {
-            console.log("backdrop clicked");
-          }}
-        />
-        <Modal.Container position="center">
-          <Modal.Header>
-            <Modal.Title text="카드사 선택" />
-            <Modal.CloseButton
-              onCloseButtonClick={() => console.log("closeButton clicked")}
-            />
-          </Modal.Header>
-          <Modal.ButtonContainer direction="column">
-            <Modal.Button
-              theme="dark"
-              onClick={() => console.log("confirmButton clicked")}
-            >
-              동의하고 저장하기
-            </Modal.Button>
-            <Modal.Button
-              theme="white"
-              onClick={() => console.log("closeButton clicked")}
-            >
-              닫기
-            </Modal.Button>
-          </Modal.ButtonContainer>
-        </Modal.Container>
+        <ThemeProvider theme={theme}>
+          <Modal.BackDrop
+            onClose={() => {
+              console.log("backdrop clicked");
+            }}
+          />
+          <Modal.Container position="center" size="large">
+            <>
+              <Modal.Header>
+                <>
+                  <Modal.Title text="카드사 선택" />
+                  <Modal.CloseButton
+                    onCloseButtonClick={() =>
+                      console.log("closeButton clicked")
+                    }
+                  />
+                </>
+              </Modal.Header>
+              <Modal.ButtonContainer direction="column" position="center">
+                <>
+                  <Modal.Button
+                    color="dark"
+                    size="large"
+                    onClick={() => console.log("confirmButton clicked")}
+                  >
+                    <span>동의</span>
+                  </Modal.Button>
+                  <Modal.Button
+                    color="light"
+                    size="large"
+                    onClick={() => console.log("closeButton clicked")}
+                  >
+                    <span>닫기</span>
+                  </Modal.Button>
+                </>
+              </Modal.ButtonContainer>
+            </>
+          </Modal.Container>
+        </ThemeProvider>
       </>
     ),
   },
@@ -154,21 +195,23 @@ export const HasCloseButtonModal: Story = {
 
 export const HasNoButton: Story = {
   args: {
+    isOpen: true,
     children: (
       <>
-        <Modal.BackDrop
-          onClose={() => {
-            console.log("backdrop clicked");
-          }}
-        />
-        <Modal.Container position="center">
-          <Modal.Header>
-            <Modal.Title text="카드사 선택" />
-            <Modal.CloseButton
-              onCloseButtonClick={() => console.log("closeButton clicked")}
-            />
-          </Modal.Header>
-        </Modal.Container>
+        <ThemeProvider theme={theme}>
+          <Modal.BackDrop
+            onClose={() => {
+              console.log("backdrop clicked");
+            }}
+          />
+          <Modal.Container position="center" size="large">
+            <>
+              <Modal.Header>
+                <Modal.Title text="카드사 선택" />
+              </Modal.Header>
+            </>
+          </Modal.Container>
+        </ThemeProvider>
       </>
     ),
   },
@@ -176,29 +219,34 @@ export const HasNoButton: Story = {
 
 export const HasOneButton: Story = {
   args: {
+    isOpen: true,
     children: (
       <>
-        <Modal.BackDrop
-          onClose={() => {
-            console.log("backdrop clicked");
-          }}
-        />
-        <Modal.Container position="center">
-          <Modal.Header>
-            <Modal.Title text="카드사 선택" />
-            <Modal.CloseButton
-              onCloseButtonClick={() => console.log("closeButton clicked")}
-            />
-          </Modal.Header>
-          <Modal.ButtonContainer direction="column">
-            <Modal.Button
-              theme="dark"
-              onClick={() => console.log("confirmButton clicked")}
-            >
-              동의하고 저장하기
-            </Modal.Button>
-          </Modal.ButtonContainer>
-        </Modal.Container>
+        <ThemeProvider theme={theme}>
+          <Modal.BackDrop
+            onClose={() => {
+              console.log("backdrop clicked");
+            }}
+          />
+          <Modal.Container position="center" size="large">
+            <>
+              <Modal.Header>
+                <Modal.Title text="카드사 선택" />
+              </Modal.Header>
+              <Modal.ButtonContainer direction="column" position="center">
+                <>
+                  <Modal.Button
+                    color="dark"
+                    size="large"
+                    onClick={() => console.log("confirmButton clicked")}
+                  >
+                    <span>동의</span>
+                  </Modal.Button>
+                </>
+              </Modal.ButtonContainer>
+            </>
+          </Modal.Container>
+        </ThemeProvider>
       </>
     ),
   },
@@ -206,35 +254,41 @@ export const HasOneButton: Story = {
 
 export const HasTwoButton: Story = {
   args: {
+    isOpen: true,
     children: (
       <>
-        <Modal.BackDrop
-          onClose={() => {
-            console.log("backdrop clicked");
-          }}
-        />
-        <Modal.Container position="center">
-          <Modal.Header>
-            <Modal.Title text="카드사 선택" />
-            <Modal.CloseButton
-              onCloseButtonClick={() => console.log("closeButton clicked")}
-            />
-          </Modal.Header>
-          <Modal.ButtonContainer direction="row">
-            <Modal.Button
-              theme="dark"
-              onClick={() => console.log("confirmButton clicked")}
-            >
-              확인
-            </Modal.Button>
-            <Modal.Button
-              theme="white"
-              onClick={() => console.log("closeButton clicked")}
-            >
-              닫기
-            </Modal.Button>
-          </Modal.ButtonContainer>
-        </Modal.Container>
+        <ThemeProvider theme={theme}>
+          <Modal.BackDrop
+            onClose={() => {
+              console.log("backdrop clicked");
+            }}
+          />
+          <Modal.Container position="center" size="large">
+            <>
+              <Modal.Header>
+                <Modal.Title text="카드사 선택" />
+              </Modal.Header>
+              <Modal.ButtonContainer direction="column" position="center">
+                <>
+                  <Modal.Button
+                    color="dark"
+                    size="large"
+                    onClick={() => console.log("confirmButton clicked")}
+                  >
+                    <span>동의</span>
+                  </Modal.Button>
+                  <Modal.Button
+                    color="light"
+                    size="large"
+                    onClick={() => console.log("closeButton clicked")}
+                  >
+                    <span>닫기</span>
+                  </Modal.Button>
+                </>
+              </Modal.ButtonContainer>
+            </>
+          </Modal.Container>
+        </ThemeProvider>
       </>
     ),
   },
@@ -242,35 +296,541 @@ export const HasTwoButton: Story = {
 
 export const ButtonDirectionColumn: Story = {
   args: {
+    isOpen: true,
     children: (
       <>
-        <Modal.BackDrop
-          onClose={() => {
-            console.log("backdrop clicked");
-          }}
-        />
-        <Modal.Container position="center">
-          <Modal.Header>
-            <Modal.Title text="카드사 선택" />
-            <Modal.CloseButton
-              onCloseButtonClick={() => console.log("closeButton clicked")}
-            />
-          </Modal.Header>
-          <Modal.ButtonContainer direction="column">
-            <Modal.Button
-              theme="dark"
-              onClick={() => console.log("confirmButton clicked")}
-            >
-              동의하고 저장하기
-            </Modal.Button>
-            <Modal.Button
-              theme="white"
-              onClick={() => console.log("closeButton clicked")}
-            >
-              닫기
-            </Modal.Button>
-          </Modal.ButtonContainer>
-        </Modal.Container>
+        <ThemeProvider theme={theme}>
+          <Modal.BackDrop
+            onClose={() => {
+              console.log("backdrop clicked");
+            }}
+          />
+          <Modal.Container position="center" size="large">
+            <>
+              <Modal.Header>
+                <Modal.Title text="카드사 선택" />
+              </Modal.Header>
+              <Modal.ButtonContainer direction="column" position="center">
+                <>
+                  <Modal.Button
+                    color="dark"
+                    size="large"
+                    onClick={() => console.log("confirmButton clicked")}
+                  >
+                    <span>동의</span>
+                  </Modal.Button>
+                  <Modal.Button
+                    color="light"
+                    size="large"
+                    onClick={() => console.log("closeButton clicked")}
+                  >
+                    <span>닫기</span>
+                  </Modal.Button>
+                </>
+              </Modal.ButtonContainer>
+            </>
+          </Modal.Container>
+        </ThemeProvider>
+      </>
+    ),
+  },
+};
+
+export const ButtonDirectionRow: Story = {
+  args: {
+    isOpen: true,
+    children: (
+      <>
+        <ThemeProvider theme={theme}>
+          <Modal.BackDrop
+            onClose={() => {
+              console.log("backdrop clicked");
+            }}
+          />
+          <Modal.Container position="center" size="large">
+            <>
+              <Modal.Header>
+                <Modal.Title text="카드사 선택" />
+              </Modal.Header>
+              <Modal.ButtonContainer direction="row" position="center">
+                <>
+                  <Modal.Button
+                    color="dark"
+                    size="large"
+                    onClick={() => console.log("confirmButton clicked")}
+                  >
+                    <span>동의</span>
+                  </Modal.Button>
+                  <Modal.Button
+                    color="light"
+                    size="large"
+                    onClick={() => console.log("closeButton clicked")}
+                  >
+                    <span>닫기</span>
+                  </Modal.Button>
+                </>
+              </Modal.ButtonContainer>
+            </>
+          </Modal.Container>
+        </ThemeProvider>
+      </>
+    ),
+  },
+};
+
+export const ModalContainerSizeLarge: Story = {
+  args: {
+    isOpen: true,
+    children: (
+      <>
+        <ThemeProvider theme={theme}>
+          <Modal.BackDrop
+            onClose={() => {
+              console.log("backdrop clicked");
+            }}
+          />
+          <Modal.Container position="center" size="large">
+            <>
+              <Modal.Header>
+                <Modal.Title text="카드사 선택" />
+              </Modal.Header>
+              <Modal.ButtonContainer direction="column" position="center">
+                <>
+                  <Modal.Button
+                    color="dark"
+                    size="large"
+                    onClick={() => console.log("confirmButton clicked")}
+                  >
+                    <span>동의</span>
+                  </Modal.Button>
+                  <Modal.Button
+                    color="light"
+                    size="large"
+                    onClick={() => console.log("closeButton clicked")}
+                  >
+                    <span>닫기</span>
+                  </Modal.Button>
+                </>
+              </Modal.ButtonContainer>
+            </>
+          </Modal.Container>
+        </ThemeProvider>
+      </>
+    ),
+  },
+};
+
+export const ModalContainerSizeMedium: Story = {
+  args: {
+    isOpen: true,
+    children: (
+      <>
+        <ThemeProvider theme={theme}>
+          <Modal.BackDrop
+            onClose={() => {
+              console.log("backdrop clicked");
+            }}
+          />
+          <Modal.Container position="center" size="medium">
+            <>
+              <Modal.Header>
+                <Modal.Title text="카드사 선택" />
+              </Modal.Header>
+              <Modal.ButtonContainer direction="column" position="center">
+                <>
+                  <Modal.Button
+                    color="dark"
+                    size="large"
+                    onClick={() => console.log("confirmButton clicked")}
+                  >
+                    <span>동의</span>
+                  </Modal.Button>
+                  <Modal.Button
+                    color="light"
+                    size="large"
+                    onClick={() => console.log("closeButton clicked")}
+                  >
+                    <span>닫기</span>
+                  </Modal.Button>
+                </>
+              </Modal.ButtonContainer>
+            </>
+          </Modal.Container>
+        </ThemeProvider>
+      </>
+    ),
+  },
+};
+
+export const ModalContainerSizeSmall: Story = {
+  args: {
+    isOpen: true,
+    children: (
+      <>
+        <ThemeProvider theme={theme}>
+          <Modal.BackDrop
+            onClose={() => {
+              console.log("backdrop clicked");
+            }}
+          />
+          <Modal.Container position="center" size="small">
+            <>
+              <Modal.Header>
+                <Modal.Title text="카드사 선택" />
+              </Modal.Header>
+              <Modal.ButtonContainer direction="column" position="center">
+                <>
+                  <Modal.Button
+                    color="dark"
+                    size="large"
+                    onClick={() => console.log("confirmButton clicked")}
+                  >
+                    <span>동의</span>
+                  </Modal.Button>
+                  <Modal.Button
+                    color="light"
+                    size="large"
+                    onClick={() => console.log("closeButton clicked")}
+                  >
+                    <span>닫기</span>
+                  </Modal.Button>
+                </>
+              </Modal.ButtonContainer>
+            </>
+          </Modal.Container>
+        </ThemeProvider>
+      </>
+    ),
+  },
+};
+
+export const ButtonSizeLarge: Story = {
+  args: {
+    isOpen: true,
+    children: (
+      <>
+        <ThemeProvider theme={theme}>
+          <Modal.BackDrop
+            onClose={() => {
+              console.log("backdrop clicked");
+            }}
+          />
+          <Modal.Container position="center" size="small">
+            <>
+              <Modal.Header>
+                <Modal.Title text="카드사 선택" />
+              </Modal.Header>
+              <Modal.ButtonContainer direction="row" position="center">
+                <>
+                  <Modal.Button
+                    color="dark"
+                    size="large"
+                    onClick={() => console.log("confirmButton clicked")}
+                  >
+                    <span>동의</span>
+                  </Modal.Button>
+                  <Modal.Button
+                    color="light"
+                    size="large"
+                    onClick={() => console.log("closeButton clicked")}
+                  >
+                    <span>닫기</span>
+                  </Modal.Button>
+                </>
+              </Modal.ButtonContainer>
+            </>
+          </Modal.Container>
+        </ThemeProvider>
+      </>
+    ),
+  },
+};
+
+export const ButtonSizeSmall: Story = {
+  args: {
+    isOpen: true,
+    children: (
+      <>
+        <ThemeProvider theme={theme}>
+          <Modal.BackDrop
+            onClose={() => {
+              console.log("backdrop clicked");
+            }}
+          />
+          <Modal.Container position="center" size="small">
+            <>
+              <Modal.Header>
+                <Modal.Title text="카드사 선택" />
+              </Modal.Header>
+              <Modal.ButtonContainer direction="row" position="center">
+                <>
+                  <Modal.Button
+                    color="dark"
+                    size="small"
+                    onClick={() => console.log("confirmButton clicked")}
+                  >
+                    <span>동의</span>
+                  </Modal.Button>
+                  <Modal.Button
+                    color="light"
+                    size="small"
+                    onClick={() => console.log("closeButton clicked")}
+                  >
+                    <span>닫기</span>
+                  </Modal.Button>
+                </>
+              </Modal.ButtonContainer>
+            </>
+          </Modal.Container>
+        </ThemeProvider>
+      </>
+    ),
+  },
+};
+
+export const ButtonContainerPositionLeft: Story = {
+  args: {
+    isOpen: true,
+    children: (
+      <>
+        <ThemeProvider theme={theme}>
+          <Modal.BackDrop
+            onClose={() => {
+              console.log("backdrop clicked");
+            }}
+          />
+          <Modal.Container position="center" size="small">
+            <>
+              <Modal.Header>
+                <Modal.Title text="카드사 선택" />
+              </Modal.Header>
+              <Modal.ButtonContainer direction="row" position="left">
+                <>
+                  <Modal.Button
+                    color="dark"
+                    size="small"
+                    onClick={() => console.log("confirmButton clicked")}
+                  >
+                    <span>동의</span>
+                  </Modal.Button>
+                  <Modal.Button
+                    color="light"
+                    size="small"
+                    onClick={() => console.log("closeButton clicked")}
+                  >
+                    <span>닫기</span>
+                  </Modal.Button>
+                </>
+              </Modal.ButtonContainer>
+            </>
+          </Modal.Container>
+        </ThemeProvider>
+      </>
+    ),
+  },
+};
+
+export const ButtonContainerPositionCenter: Story = {
+  args: {
+    isOpen: true,
+    children: (
+      <>
+        <ThemeProvider theme={theme}>
+          <Modal.BackDrop
+            onClose={() => {
+              console.log("backdrop clicked");
+            }}
+          />
+          <Modal.Container position="center" size="small">
+            <>
+              <Modal.Header>
+                <Modal.Title text="카드사 선택" />
+              </Modal.Header>
+              <Modal.ButtonContainer direction="row" position="center">
+                <>
+                  <Modal.Button
+                    color="dark"
+                    size="small"
+                    onClick={() => console.log("confirmButton clicked")}
+                  >
+                    <span>동의</span>
+                  </Modal.Button>
+                  <Modal.Button
+                    color="light"
+                    size="small"
+                    onClick={() => console.log("closeButton clicked")}
+                  >
+                    <span>닫기</span>
+                  </Modal.Button>
+                </>
+              </Modal.ButtonContainer>
+            </>
+          </Modal.Container>
+        </ThemeProvider>
+      </>
+    ),
+  },
+};
+
+export const ButtonContainerPositionRight: Story = {
+  args: {
+    isOpen: true,
+    children: (
+      <>
+        <ThemeProvider theme={theme}>
+          <Modal.BackDrop
+            onClose={() => {
+              console.log("backdrop clicked");
+            }}
+          />
+          <Modal.Container position="center" size="small">
+            <>
+              <Modal.Header>
+                <Modal.Title text="카드사 선택" />
+              </Modal.Header>
+              <Modal.ButtonContainer direction="row" position="right">
+                <>
+                  <Modal.Button
+                    color="dark"
+                    size="small"
+                    onClick={() => console.log("confirmButton clicked")}
+                  >
+                    <span>동의</span>
+                  </Modal.Button>
+                  <Modal.Button
+                    color="light"
+                    size="small"
+                    onClick={() => console.log("closeButton clicked")}
+                  >
+                    <span>닫기</span>
+                  </Modal.Button>
+                </>
+              </Modal.ButtonContainer>
+            </>
+          </Modal.Container>
+        </ThemeProvider>
+      </>
+    ),
+  },
+};
+
+export const AlertModal: Story = {
+  args: {
+    isOpen: true,
+    children: (
+      <>
+        <ThemeProvider theme={theme}>
+          <Modal.BackDrop
+            onClose={() => {
+              console.log("backdrop clicked");
+            }}
+          />
+          <Modal.Container position="center" size="medium">
+            <>
+              <Modal.Header>
+                <Modal.Title text="아이디를 입력해주세요." />
+              </Modal.Header>
+              <p>아이디는 필수로 입력해야 합니다.</p>
+              <Modal.ButtonContainer direction="row" position="right">
+                <>
+                  <Modal.Button
+                    color="dark"
+                    size="small"
+                    onClick={() => console.log("closeButton clicked")}
+                  >
+                    <span>확인</span>
+                  </Modal.Button>
+                </>
+              </Modal.ButtonContainer>
+            </>
+          </Modal.Container>
+        </ThemeProvider>
+      </>
+    ),
+  },
+};
+
+export const ConfirmModal: Story = {
+  args: {
+    isOpen: true,
+    children: (
+      <>
+        <ThemeProvider theme={theme}>
+          <Modal.BackDrop
+            onClose={() => {
+              console.log("backdrop clicked");
+            }}
+          />
+          <Modal.Container position="center" size="medium">
+            <>
+              <Modal.Header>
+                <Modal.Title text="카드를 삭제하시겠습니까?" />
+              </Modal.Header>
+              <p>삭제하면 복구하실 수 없습니다.</p>
+              <Modal.ButtonContainer direction="row" position="right">
+                <>
+                  <Modal.Button
+                    color="light"
+                    size="small"
+                    onClick={() => console.log("closeButton clicked")}
+                  >
+                    <span>취소</span>
+                  </Modal.Button>
+                  <Modal.Button
+                    color="dark"
+                    size="small"
+                    onClick={() => console.log("closeButton clicked")}
+                  >
+                    <span>확인</span>
+                  </Modal.Button>
+                </>
+              </Modal.ButtonContainer>
+            </>
+          </Modal.Container>
+        </ThemeProvider>
+      </>
+    ),
+  },
+};
+
+export const PromptModal: Story = {
+  args: {
+    isOpen: true,
+    children: (
+      <>
+        <ThemeProvider theme={theme}>
+          <Modal.BackDrop
+            onClose={() => {
+              console.log("backdrop clicked");
+            }}
+          />
+          <Modal.Container position="center" size="medium">
+            <>
+              <Modal.Header>
+                <Modal.Title text="쿠폰 번호를 입력해 주세요." />
+              </Modal.Header>
+              <input type="text" placeholder="CGEXX46Z" />
+              <Modal.ButtonContainer direction="row" position="right">
+                <>
+                  <Modal.Button
+                    color="light"
+                    size="small"
+                    onClick={() => console.log("closeButton clicked")}
+                  >
+                    <span>취소</span>
+                  </Modal.Button>
+                  <Modal.Button
+                    color="dark"
+                    size="small"
+                    onClick={() => console.log("closeButton clicked")}
+                  >
+                    <span>확인</span>
+                  </Modal.Button>
+                </>
+              </Modal.ButtonContainer>
+            </>
+          </Modal.Container>
+        </ThemeProvider>
       </>
     ),
   },
