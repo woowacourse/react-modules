@@ -1,6 +1,8 @@
 import * as Styled from './Input.styled';
 
-export interface InputProps {
+import { InputHTMLAttributes } from 'react';
+
+export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   value: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 
@@ -19,7 +21,8 @@ const Input = ({
   labelText = '',
   labelPosition = 'row',
   placeholder = '',
-  primaryColor,
+  primaryColor = '#333333',
+  ...props
 }: InputProps) => {
   return (
     <Styled.Label labelPosition={labelPosition}>
@@ -28,7 +31,8 @@ const Input = ({
         value={value}
         onChange={onChange}
         placeholder={placeholder}
-        primaryColor={primaryColor || '#333333'}
+        primaryColor={primaryColor}
+        {...props}
       />
     </Styled.Label>
   );
