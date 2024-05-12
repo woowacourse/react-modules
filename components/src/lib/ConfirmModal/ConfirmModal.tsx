@@ -14,26 +14,26 @@ export default function ConfirmModal({
   size,
   title,
   description,
-  confirmButtonText,
-  cancelButtonText,
+  confirmButtonText = '확인',
+  cancelButtonText = '취소',
   position = 'center',
   hasCloseButton = true,
   isClosableOnClickBackdrop = true,
   zIndex = { backdrop: 999, modal: 1000 },
   backdropOpacity = '50%',
-  buttonsFlexDirection,
+  buttonsFlexDirection = 'row',
   onConfirm,
   onCancel,
   onClose,
 }: ConfirmModalProps) {
   const confirmButton: ButtonInterface = {
-    text: confirmButtonText || '확인',
+    text: confirmButtonText,
     style: 'primary',
     onClick: onConfirm,
   };
 
   const cancelButton: ButtonInterface = {
-    text: cancelButtonText || '취소',
+    text: cancelButtonText,
     style: 'secondary',
     onClick: onCancel,
   };
@@ -45,7 +45,7 @@ export default function ConfirmModal({
       title={title}
       onClose={onClose}
       buttons={[confirmButton, cancelButton]}
-      buttonsFlexDirection={buttonsFlexDirection || 'row'}
+      buttonsFlexDirection={buttonsFlexDirection}
       position={position}
       hasCloseButton={hasCloseButton}
       isClosableOnClickBackdrop={isClosableOnClickBackdrop}

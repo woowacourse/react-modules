@@ -22,14 +22,14 @@ export default function PromptModal({
   size,
   title,
   inputField,
-  submitButtonText,
-  cancelButtonText,
+  submitButtonText = '확인',
+  cancelButtonText = '취소',
   position = 'center',
   hasCloseButton = true,
   isClosableOnClickBackdrop = true,
   zIndex = { backdrop: 999, modal: 1000 },
   backdropOpacity = '50%',
-  buttonsFlexDirection,
+  buttonsFlexDirection = 'row',
   onSubmit,
   onCancel,
   onClose,
@@ -41,13 +41,13 @@ export default function PromptModal({
   };
 
   const submitButton: ButtonInterface = {
-    text: submitButtonText || '확인',
+    text: submitButtonText,
     style: 'primary',
     onClick: handleClickSubmitButton,
   };
 
   const cancelButton: ButtonInterface = {
-    text: cancelButtonText || '취소',
+    text: cancelButtonText,
     style: 'secondary',
     onClick: onCancel,
   };
@@ -59,7 +59,7 @@ export default function PromptModal({
       title={title}
       onClose={onClose}
       buttons={[submitButton, cancelButton]}
-      buttonsFlexDirection={buttonsFlexDirection || 'row'}
+      buttonsFlexDirection={buttonsFlexDirection}
       position={position}
       hasCloseButton={hasCloseButton}
       isClosableOnClickBackdrop={isClosableOnClickBackdrop}

@@ -12,18 +12,18 @@ export default function AlertModal({
   size,
   title,
   description,
-  confirmButtonText,
+  confirmButtonText = '확인',
   position = 'center',
   hasCloseButton = true,
   isClosableOnClickBackdrop = true,
   zIndex = { backdrop: 999, modal: 1000 },
   backdropOpacity = '50%',
-  buttonsFlexDirection,
+  buttonsFlexDirection = 'row',
   onConfirm,
   onClose,
 }: AlertModalProps) {
   const confirmButton: ButtonInterface = {
-    text: confirmButtonText || '확인',
+    text: confirmButtonText,
     style: 'primary',
     onClick: onConfirm,
   };
@@ -35,7 +35,7 @@ export default function AlertModal({
       title={title}
       onClose={onClose}
       buttons={[confirmButton]}
-      buttonsFlexDirection={buttonsFlexDirection || 'row'}
+      buttonsFlexDirection={buttonsFlexDirection}
       position={position}
       hasCloseButton={hasCloseButton}
       isClosableOnClickBackdrop={isClosableOnClickBackdrop}
