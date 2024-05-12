@@ -1,7 +1,7 @@
 import { useInputValidation, IErrorStatus } from "../useInputValidation";
 import { expiryMonthValidator, expiryYearValidator, EXPIRY_MONTH_LENGTH } from "./validator";
 
-interface UseExpiryDateReturn {
+export interface UseExpiryDateReturn {
   month: {
     value: string;
     errorStatus: IErrorStatus;

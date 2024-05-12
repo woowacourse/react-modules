@@ -12,7 +12,7 @@ import {
 import style from "./Modal.module.css";
 import { ReactComponent as CloseIcon } from "./assets/closeIcon.svg";
 
-interface IModal extends React.FC<ModalMainProps> {
+export interface IModal extends React.FC<ModalMainProps> {
   Dimmer: React.FC<ModalDimmerProps>;
   Content: React.FC<ModalContentProps>;
   CloseButton: React.FC<ModalCloseButtonProps>;

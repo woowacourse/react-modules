@@ -1,7 +1,7 @@
 import { useInputValidation, IErrorStatus } from "../useInputValidation";
 import { passwordPrefixValidator } from "./validator";
 
-interface UsePasswordPrefixReturn {
+export interface UsePasswordPrefixReturn {
   value: string;
   errorStatus: IErrorStatus;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;

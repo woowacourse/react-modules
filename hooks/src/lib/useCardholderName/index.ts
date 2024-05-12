@@ -1,7 +1,7 @@
 import { useInputValidation, IErrorStatus } from "../useInputValidation";
 import { cardholderNameValidator } from "./validator";
 
-interface UseCardholderNameReturn {
+export interface UseCardholderNameReturn {
   value: string;
   errorStatus: IErrorStatus;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;

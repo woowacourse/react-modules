@@ -1,7 +1,7 @@
 import { useInputValidation, IErrorStatus } from "../useInputValidation";
 import { CVCValidator } from "./validator";
 
-interface UseCVCReturn {
+export interface UseCVCReturn {
   value: string;
   errorStatus: IErrorStatus;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
