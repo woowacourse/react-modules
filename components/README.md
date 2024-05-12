@@ -21,7 +21,7 @@ npm i badahertz52-react-modules-components
 ### 모달이 열렸을 경우 dom 구조
 
 모달은 `modal-root`안에서 열립니다.
-모달의 너비는 `modal-root` 의 뷰상 너비와 동일하며(기본값은 100vw), 높이는 100vh입니다.
+모달의 너비는 `root` 의 뷰상 너비와 동일하며(기본값은 100vw), 높이는 100vh입니다.
 
 ```html
 <body>
