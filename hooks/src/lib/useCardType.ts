@@ -3,6 +3,7 @@ import {
   CARD_BRAND_NUMBER_LENGTH,
   CARD_CONFIG,
 } from './constants/cardDataValidation';
+import formatFunctions from './constants/formatFunction';
 
 export type CardType = {
   name: keyof typeof CARD_BRAND_NUMBER_LENGTH;
@@ -54,42 +55,9 @@ const useCardType = () => {
     });
   };
 
-  const formatCardNumber = (cardType: CardType) => {
-    switch (cardType.name) {
-      case 'Diners':
-        return (cardNumbers: string) =>
-          cardNumbers.replace(
-            /(\d{1,4})(\d{1,6})?(\d{1,4})?/,
-            (_, p1, p2, p3) => {
-              return [p1, p2, p3].filter(Boolean).join(' ');
-            }
-          );
-      case 'AMEX':
-        return (cardNumbers: string) =>
-          cardNumbers.replace(
-            /(\d{1,4})(\d{1,6})?(\d{1,5})?/,
-            (_, p1, p2, p3) => {
-              return [p1, p2, p3].filter(Boolean).join(' ');
-            }
-          );
-      case 'UnionPay':
-      case 'Visa':
-      case 'MasterCard':
-        return (cardNumbers: string) =>
-          cardNumbers.replace(
-            /(\d{1,4})(\d{1,4})?(\d{1,4})?(\d{1,4})?/,
-            (_, p1, p2, p3, p4) => {
-              return [p1, p2, p3, p4].filter(Boolean).join(' ');
-            }
-          );
-      default:
-        return (cardNumbers: string) => cardNumbers;
-    }
-  };
-
   return {
     cardType,
-    formatCardNumber: formatCardNumber(cardType),
+    formatCardNumber: formatFunctions[cardType.name],
     cardTypeHandler,
   };
 };
