@@ -1,6 +1,6 @@
 {
   "name": "@jaymyong66/payments-hooks",
-  "version": "0.0.2",
+  "version": "0.0.4",
   "description": "A library of Custom Hooks for React to enroll payments card information.",
   "type": "module",
   "types": "dist/lib/index.d.ts",
