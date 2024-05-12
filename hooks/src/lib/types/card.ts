@@ -1,6 +1,6 @@
 export type Brand = 'visa' | 'master' | 'diners' | 'amex' | 'union' | null;
-export interface BrandInfo<T> {
+export interface BrandInfo {
   name: Brand;
-  numbers: T;
+  numbers: number[] | number[][];
   length: number;
 }
