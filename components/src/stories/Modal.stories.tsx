@@ -11,6 +11,9 @@ const meta = {
 
   parameters: {
     layout: "fullscreen",
+    viewport: {
+      defaultViewport: "desktop",
+    },
   },
 } satisfies Meta<typeof Modal>;
 
