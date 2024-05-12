@@ -2,7 +2,7 @@ import { useState } from "react";
 import { ValidationResult } from "../../type";
 import { ERROR_MESSAGE } from "../constants/errorMessage";
 
-export function usePassword(): [string, (value: string) => void, ValidationResult] {
+export function usePassword() {
   const [password, setPassword] = useState("");
   const [isTouched, setIsTouched] = useState(false);
 
@@ -30,5 +30,5 @@ export function usePassword(): [string, (value: string) => void, ValidationResul
     setPassword(value);
   }
 
-  return [password, handlePasswordChange, validatePassword(password)];
+  return { password, handlePasswordChange, validatePassword };
 }

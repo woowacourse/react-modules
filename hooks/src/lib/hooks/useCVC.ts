@@ -2,11 +2,11 @@ import { useState } from "react";
 import { ValidationResult } from "../../type";
 import { ERROR_MESSAGE } from "../constants/errorMessage";
 
-export function useCVC(): [string, (value: string) => void, ValidationResult] {
-  const [password, setPassword] = useState("");
+export function useCVC() {
+  const [CVC, setCVC] = useState("");
   const [isTouched, setIsTouched] = useState(false);
 
-  function validatePassword(value: string): ValidationResult {
+  function validateCVC(value: string): ValidationResult {
     // 인풋을 클릭했지만 아무런 입력이 없다면 에러 발생
     if (isTouched && value === "") {
       return { isValid: false, errorMessage: ERROR_MESSAGE.NO_INPUT };
@@ -25,10 +25,10 @@ export function useCVC(): [string, (value: string) => void, ValidationResult] {
     return { isValid: true };
   }
 
-  function handlePasswordChange(value: string) {
+  function handleCVCChange(value: string) {
     if (!isTouched) setIsTouched(true);
-    setPassword(value);
+    setCVC(value);
   }
 
-  return [password, handlePasswordChange, validatePassword(password)];
+  return { CVC, handleCVCChange, validateCVC };
 }
