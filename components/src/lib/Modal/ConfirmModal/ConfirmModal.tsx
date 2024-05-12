@@ -1,7 +1,7 @@
 import { PropsWithChildren } from "react";
 import Modal, { ModalProps } from "../Modal";
 
-interface ConfirmModalProps extends ModalProps {
+export interface ConfirmModalProps extends ModalProps {
   confirmButton: {
     content: string;
     onConfirm: () => void;

@@ -2,7 +2,7 @@ import { PropsWithChildren, useEffect, useRef } from "react";
 import Modal, { ModalProps } from "../Modal";
 import styles from "../Modal.module.css";
 
-interface PromptModalProps extends ModalProps {
+export interface PromptModalProps extends ModalProps {
   confirmButton: {
     content: string;
     onConfirm: () => void;

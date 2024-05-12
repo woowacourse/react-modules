@@ -8,12 +8,12 @@ import { ButtonProps } from "../Button/Button";
 type PositionProps = "top" | "center" | "bottom";
 type SizeProps = "small" | "medium" | "large";
 
-interface TitleProps {
+export interface TitleProps {
   position: "left" | "center";
   content: string;
 }
 
-interface CloseButtonProps {
+export interface CloseButtonProps {
   onClose: () => void;
 }
 
