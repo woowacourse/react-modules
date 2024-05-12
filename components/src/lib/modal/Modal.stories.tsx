@@ -315,6 +315,35 @@ export const 알림_모달: Story = {
   },
 };
 
+export const 제목이_없는_알림_모달: Story = {
+  args: {
+    isOpen: true,
+    size: "M",
+    position: "center",
+    onClose: fn(),
+  },
+
+  parameters: {
+    docs: {
+      description: {
+        story: "title 없는 AlertModal",
+      },
+    },
+  },
+
+  render: (args) => {
+    return (
+      <AlertModal
+        isOpen={args.isOpen}
+        onClose={args.onClose}
+        content={"아이디는 필수로 입력해야 합니다."}
+        size={"M"}
+        position={args.position}
+      ></AlertModal>
+    );
+  },
+};
+
 export const 확인_모달: Story = {
   args: {
     isOpen: true,

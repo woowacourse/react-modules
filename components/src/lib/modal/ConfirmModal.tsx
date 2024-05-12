@@ -1,7 +1,7 @@
 import Modal, { ModalProps } from "./Modal";
 
 export interface ConfirmModalProps extends ModalProps {
-  title: string;
+  title?: string;
   content: React.ReactNode;
   onConfirm: () => void;
 }
@@ -17,11 +17,14 @@ const ConfirmModal: React.FC<ConfirmModalProps> = ({
 }) => {
   return (
     <Modal isOpen={isOpen} onClose={onClose} size={size} position={position}>
-      <Modal.ModalHeader>{title}</Modal.ModalHeader>
+      {title && (
+        <Modal.ModalHeader>
+          <Modal.ModalTitle>{title}</Modal.ModalTitle>
+        </Modal.ModalHeader>
+      )}
       <Modal.ModalContent>{content}</Modal.ModalContent>
       <Modal.ModalFooter
         style={{
-          display: "flex",
           justifyContent: "flex-end",
         }}
       >

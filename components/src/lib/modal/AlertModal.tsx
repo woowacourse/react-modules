@@ -1,7 +1,7 @@
 import Modal, { ModalProps } from "./Modal";
 
 export interface AlertModalProps extends ModalProps {
-  title: string;
+  title?: string;
   content: React.ReactNode;
 }
 
@@ -15,11 +15,14 @@ const AlertModal: React.FC<AlertModalProps> = ({
 }) => {
   return (
     <Modal isOpen={isOpen} onClose={onClose} size={size} position={position}>
-      <Modal.ModalHeader>{title}</Modal.ModalHeader>
+      {title && (
+        <Modal.ModalHeader>
+          <Modal.ModalTitle>{title}</Modal.ModalTitle>
+        </Modal.ModalHeader>
+      )}
       <Modal.ModalContent>{content}</Modal.ModalContent>
       <Modal.ModalFooter
         style={{
-          display: "flex",
           justifyContent: "flex-end",
           marginRight: "22px",
         }}
