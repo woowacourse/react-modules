@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { ChangeEvent, useRef, useState } from 'react';
 import Modal, { ModalProps } from '../Modal/Modal';
 
 import styles from './PromptModal.module.css';
@@ -25,20 +25,24 @@ const PromptModal: React.FC<PromptModalProps> = ({
   ...rest
 }) => {
   const inputRef = useRef<HTMLInputElement>(null);
+  const [inputValue, setInputValue] = useState('');
   const inputClass = `modalInput${convertPascalCase(size)}`;
 
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setInputValue(e.target.value);
+    if (onChange) onChange(e);
+  };
+
   const handleSubmit = () => {
-    if (inputRef.current) {
-      onSubmit(inputRef.current.value);
-      onToggle();
-    }
+    onSubmit(inputValue);
+    onToggle();
   };
 
   return (
     <Modal className={styles.promptModal} isOpen={isOpen} onToggle={onToggle} position={position} size={size} {...rest}>
       <Modal.ModalHeader title={title} />
       <Modal.ModalContent>
-        <Modal.ModalInput className={styles[inputClass]} value={value} onChange={onChange} ref={inputRef} />
+        <Modal.ModalInput className={styles[inputClass]} value={value} onChange={handleChange} ref={inputRef} />
       </Modal.ModalContent>
       <Modal.ModalFooter className={styles.promptModalFooter}>
         <Modal.ModalButton variant="secondary" onClick={onToggle}>
