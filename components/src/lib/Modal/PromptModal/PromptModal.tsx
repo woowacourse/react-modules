@@ -24,7 +24,6 @@ export interface PromptModalProps {
   description?: string;
   content?: string;
   size?: ModalSize;
-  children?: JSX.Element;
   modalPosition?: ModalPosition;
   buttonJustifyContent?: ButtonJustifyContent;
   primaryColor?: string;
@@ -50,7 +49,7 @@ const PromptModal = ({
   modalPosition = 'center',
   buttonJustifyContent = 'right',
   primaryColor = '#333333',
-}: PromptModalProps) => {
+}: React.PropsWithChildren<PromptModalProps>) => {
   const handleClick = () => {
     handleConfirm();
     closeModal();
@@ -86,11 +85,9 @@ const PromptModal = ({
         onClick: closeModal,
       }}
     >
-      <>
-        <ModalTextBody>{content}</ModalTextBody>
-        <Input {...inputProps} />
-        {children}
-      </>
+      <ModalTextBody>{content}</ModalTextBody>
+      <Input {...inputProps} />
+      {children}
     </Modal>
   );
 };

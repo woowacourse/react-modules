@@ -14,7 +14,6 @@ export interface ConfirmModalProps {
   description?: string;
   content?: string;
   size?: ModalSize;
-  children?: JSX.Element;
   modalPosition?: ModalPosition;
   buttonJustifyContent?: ButtonJustifyContent;
   primaryColor?: string;
@@ -32,7 +31,7 @@ const ConfirmModal = ({
   modalPosition = 'center',
   buttonJustifyContent = 'right',
   primaryColor,
-}: ConfirmModalProps) => {
+}: React.PropsWithChildren<ConfirmModalProps>) => {
   const handleClick = () => {
     handleConfirm();
     closeModal();
@@ -59,10 +58,8 @@ const ConfirmModal = ({
         onClick: closeModal,
       }}
     >
-      <>
-        <ModalTextBody>{content}</ModalTextBody>
-        {children}
-      </>
+      <ModalTextBody>{content}</ModalTextBody>
+      {children}
     </Modal>
   );
 };

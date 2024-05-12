@@ -17,7 +17,6 @@ export interface ModalProps {
   title?: string;
   description?: string;
   size?: ModalSize;
-  children?: JSX.Element;
   modalPosition?: ModalPosition;
   primaryButton?: ButtonProps;
   secondaryButton?: ButtonProps;
@@ -41,7 +40,7 @@ const Modal = ({
   buttonJustifyContent = 'center',
   primaryColor,
   showCloseButton = false,
-}: ModalProps) => {
+}: React.PropsWithChildren<ModalProps>) => {
   useBlockedScroll(isOpened);
   useEscKeyDown(closeModal);
 

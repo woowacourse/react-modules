@@ -14,7 +14,6 @@ export interface AlertModalProps {
   description?: string;
   content?: string;
   size?: ModalSize;
-  children?: JSX.Element;
   modalPosition?: ModalPosition;
   buttonJustifyContent?: ButtonJustifyContent;
   primaryColor?: string;
@@ -32,7 +31,7 @@ const AlertModal = ({
   modalPosition = 'center',
   buttonJustifyContent = 'right',
   primaryColor,
-}: AlertModalProps) => {
+}: React.PropsWithChildren<AlertModalProps>) => {
   const handleClick = () => {
     handleConfirm();
     closeModal();
@@ -55,10 +54,8 @@ const AlertModal = ({
         onClick: handleClick,
       }}
     >
-      <>
-        <ModalTextBody>{content}</ModalTextBody>
-        {children}
-      </>
+      <ModalTextBody>{content}</ModalTextBody>
+      {children}
     </Modal>
   );
 };
