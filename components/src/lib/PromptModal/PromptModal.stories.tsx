@@ -47,6 +47,8 @@ const meta = {
     value: '',
     onChange: fn(),
     onSubmit: fn(),
+    confirmButtonLabel: '확인',
+    cancelButtonLabel: '취소'
   },
   render: ({ ...args }) => {
     return (

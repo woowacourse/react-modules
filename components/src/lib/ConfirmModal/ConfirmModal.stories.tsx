@@ -44,8 +44,11 @@ const meta = {
   args: {
     isOpen: true,
     onToggle: fn(),
+    onConfirm: fn(),
     title: '카드를 삭제하시겠습니까?',
     caption: '삭제하면 복구하실 수 없습니다.',
+    confirmButtonLabel: '확인',
+    cancelButtonLabel: '취소',
   },
   render: ({ ...args }) => {
     return (

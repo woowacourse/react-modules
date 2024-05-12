@@ -44,8 +44,10 @@ const meta = {
   args: {
     isOpen: true,
     onToggle: fn(),
+    onConfirm: fn(),
     title: '아이디를 입력해주세요.',
     caption: '아이디는 필수로 입력해야 합니다.',
+    confirmButtonLabel: '확인',
   },
   render: ({ ...args }) => {
     return (
