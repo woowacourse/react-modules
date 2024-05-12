@@ -51,3 +51,13 @@ export const VALIDATION_MESSAGES = {
   invalidCVC: "3자리의 숫자를 입력해 주세요",
   invalidCardPassword: "비밀번호 앞 2자리 숫자를 입력해주세요.",
 };
+
+export const CONDITION = {
+  threePartFirstStartIndex: 0,
+  threePartSecondStartIndex: 4,
+  threePartThirdStartIndex: 10,
+  fourPartFirstStartIndex: 0,
+  fourPartSecondStartIndex: 4,
+  fourPartThirdStartIndex: 8,
+  fourPartFourthStartIndex: 12,
+};
