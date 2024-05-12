@@ -1,5 +1,3 @@
-// import "soosoo-react-payments-components/dist/style.css";
-// import { AlertModal } from "soosoo-react-payments-components";
 import type { Meta, StoryObj } from "@storybook/react";
 import AlertModal from "./AlertModal";
 
