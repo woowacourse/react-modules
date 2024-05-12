@@ -1,6 +1,6 @@
 {
   "name": "ollie-card-validation-hooks",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "카드 검증 로직을 분리한 커스텀 훅 배포",
   "type": "module",
   "types": "dist/index.d.ts",
