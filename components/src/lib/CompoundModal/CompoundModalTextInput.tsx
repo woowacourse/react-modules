@@ -2,7 +2,7 @@ import COLOR_HEXES from '../constants/colorHexes';
 import styled from '@emotion/styled';
 
 export default function CompoundModalTextInput() {
-  return <TextInput type='text' autoFocus></TextInput>;
+  return <TextInput type='text' autoFocus />;
 }
 const TextInput = styled.input({
   width: '100%',
