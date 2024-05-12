@@ -1,6 +1,6 @@
 {
   "name": "soha-hooks",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Custom hook used in credit card payment input field",
   "type": "module",
   "types": "dist/index.d.ts",

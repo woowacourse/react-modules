@@ -1,6 +1,6 @@
 {
   "name": "soha-components",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Components used in credit card payment",
   "type": "module",
   "types": "dist/index.d.ts",
