@@ -1,17 +1,12 @@
-import { ReactNode, CSSProperties } from "react";
 import "./ModalTitle.css";
+import { ModalTitleProps } from "../type/modal.type";
+import { PropsWithChildren } from "react";
 
-interface ModalTitleProps {
-  children?: ReactNode;
-  customStyle?: CSSProperties;
-  className?: string;
-}
-
-const ModalTitle = ({ children, customStyle = {}, className = "" }: ModalTitleProps) => {
+const ModalTitle = ({ children, style = {}, className = "" }: PropsWithChildren<ModalTitleProps>) => {
   return (
     <div
       className={`modal-title ${className}`}
-      style={customStyle}
+      style={style}
     >
       {children}
     </div>

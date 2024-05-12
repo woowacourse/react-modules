@@ -1,14 +1,6 @@
 import { Modal } from "../../lib";
-import { Type } from "../type/modalType";
+import { ModalButtonContainerProps } from "../type/modal.type";
 import "./ModalButtonContainer.css";
-
-interface ModalButtonContainerProps {
-  type?: Type;
-  onClose: () => void;
-  onConfirm?: () => void;
-  onCancel?: () => void;
-  onSubmit?: () => void;
-}
 
 const ModalButtonContainer = ({ type, onConfirm, onCancel, onClose, onSubmit }: ModalButtonContainerProps) => {
   switch (type) {

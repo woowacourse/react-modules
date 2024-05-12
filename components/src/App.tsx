@@ -119,7 +119,7 @@ export const PromptSample = () => {
         onClose={handleClose}
         onSubmit={handleSubmit}
         onCancel={handleCancel}
-        position="bottom"
+        position="center"
         type="prompt"
       >
         <Modal.Title>쿠폰 번호를 입력해 주세요.</Modal.Title>

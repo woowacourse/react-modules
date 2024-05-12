@@ -1,17 +1,13 @@
-import { ReactNode, CSSProperties } from "react";
 import "./ModalMessage.css";
+import { ModalMessageProps } from "../type/modal.type";
+import { PropsWithChildren } from "react";
 
-interface ModalMessageProps {
-  children?: ReactNode;
-  customStyle?: CSSProperties;
-  className?: string;
-}
-
-const ModalMessage = ({ children, customStyle = {}, className = "" }: ModalMessageProps) => {
+const ModalMessage = ({ children, style = {}, className = "", ...rest }: PropsWithChildren<ModalMessageProps>) => {
   return (
     <div
       className={`modal-message ${className}`}
-      style={customStyle}
+      style={style}
+      {...rest}
     >
       {children}
     </div>

@@ -1,18 +1,11 @@
-import React, { CSSProperties } from "react";
 import "./ModalCloseButton.css";
+import { ModalCloseButtonProps } from "../type/modal.type";
 
-interface ModalCloseButtonProps {
-  onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
-  customStyle?: CSSProperties;
-  className?: string;
-}
-
-const ModalCloseButton = ({ onClick, customStyle = {}, className = "" }: ModalCloseButtonProps) => {
+const ModalCloseButton = ({ ...rest }: ModalCloseButtonProps) => {
   return (
     <button
-      className={`modal-close-btn ${className}`}
-      onClick={onClick}
-      style={customStyle}
+      className="modal-close-btn"
+      {...rest}
     />
   );
 };

@@ -1,22 +1,12 @@
-import { ReactNode, CSSProperties } from "react";
+import { PropsWithChildren } from "react";
+import { ModalButtonProps } from "../type/modal.type";
 import "./ModalButton.css";
-import { ButtonSize, ButtonVariant } from "../type/modalType";
 
-interface ModalButtonProps {
-  onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
-  variant?: ButtonVariant;
-  size?: ButtonSize;
-  children?: ReactNode;
-  className?: string;
-  customStyle?: CSSProperties;
-}
-
-const ModalButton = ({ onClick, variant = "primary", size = "large", className = "", customStyle = {}, children }: ModalButtonProps) => {
+const ModalButton = ({ variant = "primary", size = "large", children, ...rest }: PropsWithChildren<ModalButtonProps>) => {
   return (
     <button
-      className={`modal-btn ${variant} ${size} ${className}`}
-      onClick={onClick}
-      style={customStyle}
+      className={`modal-btn ${variant} ${size}`}
+      {...rest}
     >
       {children}
     </button>
