@@ -1,3 +1,4 @@
+import { useLayoutEffect, useState } from 'react';
 import styled from 'styled-components';
 
 import Backdrop from './Backdrop';
@@ -9,22 +10,40 @@ import { ModalContainerContext } from '@/lib/contexts';
 import { ModalContainerProps } from '@/lib/types/modal';
 import '@/lib/styles/reset.css';
 
-// TODO : width, height, margin props로 받기
-const ModalWrapper = styled.div`
+interface ModalWrapperProps {
+  $width: string | number;
+  $margin: string | number;
+}
+
+const ModalWrapper = styled.div<ModalWrapperProps>`
   position: fixed;
-  width: 100vw;
+  width: ${({ $width }) => $width};
   height: 100vh;
+  margin: ${({ $margin }) => $margin};
 `;
 
 function ModalContainer(props: ModalContainerProps) {
   const { openModal, children, ...rest } = props;
+  const [styleProps, setStyleProps] = useState<ModalWrapperProps>({
+    $width: '100vw',
+    $margin: 'inherit',
+  });
 
+  useLayoutEffect(() => {
+    const rootEl = document.getElementById('root');
+    if (!rootEl) return;
+    const computedStyle = window.getComputedStyle(rootEl);
+    const { width } = rootEl.getBoundingClientRect();
+    const { margin } = computedStyle;
+
+    setStyleProps({ $width: `${width}px`, $margin: margin });
+  }, []);
   return (
     <>
       {openModal && (
         <ModalPortal>
           <ModalContainerContext.Provider value={{ ...rest }}>
-            <ModalWrapper>{children}</ModalWrapper>
+            <ModalWrapper {...styleProps}>{children}</ModalWrapper>
           </ModalContainerContext.Provider>
         </ModalPortal>
       )}

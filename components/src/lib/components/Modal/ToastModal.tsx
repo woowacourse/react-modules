@@ -12,6 +12,9 @@ const ToastModalContents = styled(ModalContents)<ModalContentsStyleProps>`
   -webkit-box-shadow: 0px 0px 18px -4px rgba(0, 0, 0, 0.21);
   box-shadow: 0px 0px 18px -4px rgba(0, 0, 0, 0.21);
   min-height: initial;
+  width: fit-content;
+  min-width: initial;
+  max-width: initial;
   display: flex;
   align-items: center;
   justify-content: center;

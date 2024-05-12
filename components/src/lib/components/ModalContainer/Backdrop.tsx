@@ -6,9 +6,7 @@ import { ModalContainerContext } from '@/lib/contexts';
 import { useModalContext } from '@/lib/hooks';
 
 const ModalBackdrop = styled.div<{ $backgroundColor: string | undefined }>`
-  position: fixed;
-  top: 0;
-  left: 0;
+  position: absolute;
   background-color: ${({ $backgroundColor }) => $backgroundColor};
   width: 100%;
   height: 100%;

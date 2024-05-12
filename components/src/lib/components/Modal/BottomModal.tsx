@@ -9,7 +9,6 @@ import { useBottomModalAnimation, useModalContext } from '@/lib/hooks';
 import { BottomModalProps } from '@/lib/types/modal';
 
 const BottomModalContents = styled(ModalContents)<ModalContentsStyleProps>`
-  max-width: 100vw;
   min-height: 50px;
   position: fixed;
   bottom: 0;
@@ -18,7 +17,9 @@ const BottomModalContents = styled(ModalContents)<ModalContentsStyleProps>`
   border-radius: 0;
   border-top-right-radius: ${({ $borderRadius }) => $borderRadius || BASIC_BORDER_RADIUS};
   border-top-left-radius: ${({ $borderRadius }) => $borderRadius || BASIC_BORDER_RADIUS};
-  width: 100%;
+  width: inherit;
+  min-width: initial;
+  max-width: initial;
   box-sizing: border-box;
 `;
 

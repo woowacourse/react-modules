@@ -22,8 +22,8 @@ export const ModalContents = styled.div<ModalContentsStyleProps>`
   -webkit-box-shadow: 0px 0px 18px 6px rgba(0, 0, 0, 0.19);
   box-shadow: 0px 0px 18px 6px rgba(0, 0, 0, 0.19);
   border-radius: ${({ $borderRadius }) => $borderRadius || BASIC_BORDER_RADIUS};
-  min-width: 50vw;
-  max-width: 90vw;
+  min-width: 50%;
+  max-width: 90%;
   min-height: 1rem;
   max-height: 90vw;
   background-color: ${({ $backgroundColor }) => $backgroundColor?.modal || BASIC_BACKGROUND_COLOR.modal};
