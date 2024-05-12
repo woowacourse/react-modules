@@ -9,7 +9,7 @@ export interface ModalContextType {
   animationTime: number;
   open: boolean;
   closing: boolean;
-  size: "small" | "medium" | "large" | "";
+  size: "small" | "medium" | "large" | "custom";
   sizeClassName: string;
 }
 
