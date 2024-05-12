@@ -1,15 +1,35 @@
 import { useEffect } from 'react';
 import { validateCardNumberFormat, validateNumber } from '../validator';
-import { Options, UseCardNumber } from '../type';
+import { Options } from '../type';
 import useValidations from '../useValidations';
 import useCardNumbersState from './useCardNumbersState';
+import useCardBrand from './useCardBrand';
+import { validateCardNumberLength } from '../validator/validateCardBrand';
+import { cardBrandChecker } from '../constants';
+import { formatCardNumber, formatCardNumberToString } from '../utils';
 
-const useCardNumbers = (initialValue: Record<string, string>, options?: Options): UseCardNumber => {
+const useCardNumbers = (initialValue: Record<string, string>, options?: Options) => {
   const { value, updateCardNumbers } = useCardNumbersState(initialValue);
-  const { errorInfo, checkValidInputs } = useValidations(initialValue);
+  const { errorInfo, updateValidationResult, checkValidInputs } = useValidations(initialValue);
+  const { cardBrand, determineCardBrand, validMaxLength } = useCardBrand();
+
+  const fullCardNumber = Object.values(value).reduce((acc, cur) => acc + cur);
+  const cardNumberFormat = cardBrandChecker[cardBrand]
+    ? cardBrandChecker[cardBrand].format
+    : [4, 4, 4, 4];
+  const formattedCardNumberList = formatCardNumber(fullCardNumber, cardNumberFormat);
+  const formattedCardNumber = formatCardNumberToString(formattedCardNumberList, cardNumberFormat);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>, name: string) => {
     const targetValue = event.target.value;
+    const validCardBrand = determineCardBrand(targetValue);
+    const cardBrandInfo = cardBrandChecker[validCardBrand];
+    const validLength = cardBrandInfo ? cardBrandInfo.validMaxLength : 16;
+
+    if (targetValue.length > validLength) {
+      updateCardNumbers(targetValue.substring(0, validLength), name);
+      return;
+    }
     if (!checkValidInputs(targetValue, name, validateNumber)) return;
     updateCardNumbers(targetValue, name);
 
@@ -19,7 +39,12 @@ const useCardNumbers = (initialValue: Record<string, string>, options?: Options)
   };
 
   const handleBlur = (event: React.FocusEvent<HTMLInputElement, Element>, name: string) => {
-    checkValidInputs(event.target.value, name, validateCardNumberFormat);
+    const cardBrandInfo = cardBrandChecker[cardBrand];
+
+    const validationResult = validateCardNumberLength(cardBrandInfo);
+    if (event.target.value.length < validMaxLength) {
+      updateValidationResult(validationResult, name);
+    }
   };
 
   const autoFocusNextInput = (element: HTMLElement) => {
@@ -40,7 +65,16 @@ const useCardNumbers = (initialValue: Record<string, string>, options?: Options)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  return { value, handleChange, handleBlur, errorInfo };
+  return {
+    value,
+    handleChange,
+    handleBlur,
+    errorInfo,
+    cardBrand,
+    formattedCardNumberList,
+    formattedCardNumber,
+    validMaxLength,
+  };
 };
 
 export default useCardNumbers;
