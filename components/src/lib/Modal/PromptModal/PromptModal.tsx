@@ -1,12 +1,8 @@
 import { PropsWithChildren, useEffect, useRef } from "react";
-import Modal, { PositionProps, SizeProps, TitleProps } from "../Modal";
+import Modal, { ModalProps } from "../Modal";
 import styles from "../Modal.module.css";
 
-interface PromptModalProps {
-  position: PositionProps;
-  size?: SizeProps;
-  title?: TitleProps;
-  isOpen: boolean;
+interface PromptModalProps extends ModalProps {
   confirmButton: {
     content: string;
     onConfirm: () => void;

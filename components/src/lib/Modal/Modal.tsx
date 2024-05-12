@@ -5,19 +5,19 @@ import ModalContent from "./ModalContent/ModalContent";
 import ModalFooter from "./ModalFooter/ModalFooter";
 import { ButtonProps } from "../Button/Button";
 
-export type PositionProps = "top" | "center" | "bottom";
-export type SizeProps = "small" | "medium" | "large";
+type PositionProps = "top" | "center" | "bottom";
+type SizeProps = "small" | "medium" | "large";
 
-export interface TitleProps {
+interface TitleProps {
   position: "left" | "center";
   content: string;
 }
 
-export interface CloseButtonProps {
+interface CloseButtonProps {
   onClose: () => void;
 }
 
-interface ModalProps {
+export interface ModalProps {
   position: PositionProps;
   size?: SizeProps;
   title?: TitleProps;

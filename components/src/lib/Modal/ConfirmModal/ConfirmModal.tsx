@@ -1,11 +1,7 @@
 import { PropsWithChildren } from "react";
-import Modal, { PositionProps, SizeProps, TitleProps } from "../Modal";
+import Modal, { ModalProps } from "../Modal";
 
-interface ConfirmModalProps {
-  position: PositionProps;
-  size?: SizeProps;
-  title?: TitleProps;
-  isOpen: boolean;
+interface ConfirmModalProps extends ModalProps {
   confirmButton: {
     content: string;
     onConfirm: () => void;
