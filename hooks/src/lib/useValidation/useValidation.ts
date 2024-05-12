@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { ValidationType } from "../useInput/useInput";
+import { CardBrand } from "../utils/getCardFormat";
 
 const useValidation = () => {
   const [error, setError] = useState({
@@ -7,11 +8,17 @@ const useValidation = () => {
     message: "",
   });
 
-  const validate = (value: string, validations: ValidationType[]) => {
-    const validationsResult = validations.find(({ validate }) => !validate(value));
+  const validate = (value: string, validations: ValidationType[], cardBrand?: CardBrand | "") => {
+    const validationsResult = validations.find(({ validate }) => !validate(value, cardBrand!));
 
     if (validationsResult) {
-      setError({ state: true, message: validationsResult.message });
+      setError({
+        state: true,
+        message:
+          typeof validationsResult.message === "function"
+            ? validationsResult.message(cardBrand!)
+            : validationsResult.message,
+      });
       return false;
     }
 

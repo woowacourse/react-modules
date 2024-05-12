@@ -1,29 +1,40 @@
 import { useRef, useState } from "react";
 import useValidation from "../useValidation/useValidation";
+import { CardBrand } from "../utils/getCardFormat";
+
+// export interface ValidationType {
+//   validate: (value: string) => boolean;
+//   message: string;
+// }
 
 export interface ValidationType {
-  validate: (value: string) => boolean;
-  message: string;
+  validate: (value: string, cardBrand: CardBrand | "") => boolean;
+  message: string | ((cardBrand: CardBrand | "") => string);
 }
-
 interface UseInputProps {
   initialValue: string;
   inputValidations: ValidationType[];
   preventInputValidations?: ValidationType[];
+  cardBrand?: CardBrand | "";
 }
 
-const useInput = ({ initialValue, inputValidations, preventInputValidations }: UseInputProps) => {
+const useInput = ({
+  initialValue,
+  inputValidations,
+  preventInputValidations,
+  cardBrand,
+}: UseInputProps) => {
   const [value, setValue] = useState(initialValue);
   const { error, setError, validate } = useValidation();
   const ref = useRef<HTMLInputElement>(null);
 
   const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>, maxLength?: number) => {
-    if (preventInputValidations && !validate(e.target.value, preventInputValidations)) {
+    if (preventInputValidations && !validate(e.target.value, preventInputValidations, cardBrand)) {
       return;
     }
 
     if (inputValidations) {
-      validate(e.target.value, inputValidations);
+      validate(e.target.value, inputValidations, cardBrand);
     }
 
     setValue(e.target.value);
@@ -37,11 +48,23 @@ const useInput = ({ initialValue, inputValidations, preventInputValidations }: U
 
   const onBlurHandler = (e: React.FocusEvent<HTMLInputElement>) => {
     if (inputValidations) {
-      validate(e.target.value, inputValidations);
+      validate(e.target.value, inputValidations, cardBrand);
     }
   };
 
-  return { value, onChange: onChangeHandler, onBlur: onBlurHandler, error, setError, ref };
+  const changeValue = (value: string) => {
+    setValue(value);
+  };
+
+  return {
+    value,
+    changeValue,
+    onChange: onChangeHandler,
+    onBlur: onBlurHandler,
+    error,
+    setError,
+    ref,
+  };
 };
 
 export default useInput;

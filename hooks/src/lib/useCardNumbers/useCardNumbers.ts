@@ -1,81 +1,62 @@
 import { useEffect, useState } from "react";
 import useInput, { ValidationType } from "../useInput/useInput";
 import getCardBrand from "../utils/getCardBrand";
+import getCardFormat, { CardBrand } from "../utils/getCardFormat";
 
-export const CARD_NUMBER_LENGTH = 4;
-const CARD_LENGTH: { [key: string]: number } = {
-  visa: 4,
-  mastercard: 4,
+const CARD_NUMBER_LENGTH: Record<CardBrand | "", number> = {
+  visa: 16,
+  mastercard: 16,
   diners: 14,
   amex: 15,
   unionpay: 16,
+  "": 16,
 };
 
-type InitialValueType = [string, string, string, string];
+const useCardNumbers = (initialValue: string = "") => {
+  const [cardBrand, setCardBrand] = useState<CardBrand | "">("");
 
-const isValidLength = (value: string) => {
-  return value.length === CARD_NUMBER_LENGTH;
-};
-
-const isNumber = (value: string) => {
-  return /^\d*$/.test(value);
-};
-
-const useCardNumbers = (initialValue: InitialValueType = ["", "", "", ""]) => {
   const inputValidations: ValidationType[] = [
     {
-      validate: isValidLength,
-      message: `${CARD_NUMBER_LENGTH}자리의 카드 번호를 입력해주세요.`,
+      validate: (value: string, cardBrand?: CardBrand | "") => {
+        return value.length === CARD_NUMBER_LENGTH[cardBrand!];
+      },
+      message: (cardBrand?: CardBrand | "") => {
+        return `${CARD_NUMBER_LENGTH[cardBrand!]}자리의 카드 번호를 입력해 주세요.`;
+      },
     },
   ];
 
   const preventInputValidations: ValidationType[] = [
     {
-      validate: isNumber,
-      message: "숫자만 입력 가능합니다.",
+      validate: (value: string) => {
+        return /^[\d\s]*$/.test(value);
+      },
+      message: "숫자를 입력해 주세요.",
     },
   ];
 
-  const cardNumber1 = useInput({
-    initialValue: initialValue[0],
+  const cardNumbers = useInput({
+    initialValue: initialValue,
     inputValidations,
     preventInputValidations,
+    cardBrand,
   });
 
-  const cardNumber2 = useInput({
-    initialValue: initialValue[1],
-    inputValidations,
-    preventInputValidations,
-  });
-
-  const cardNumber3 = useInput({
-    initialValue: initialValue[2],
-    inputValidations,
-    preventInputValidations,
-  });
-
-  const cardNumber4 = useInput({
-    initialValue: initialValue[3],
-    inputValidations,
-    preventInputValidations,
-  });
-
-  const cardNumbers = [cardNumber1, cardNumber2, cardNumber3, cardNumber4];
-
-  const [cardBrand, setCardBrand] = useState("");
-
-  const isCardNumbersValid = cardNumbers.every(({ value, error }) => value !== "" && !error.state);
+  const isCardNumbersValid = cardNumbers.value !== "" && !cardNumbers.error.state;
 
   useEffect(() => {
-    const currentCardNumbers = cardNumbers.map(({ value }) => value);
-    const brand = getCardBrand(currentCardNumbers);
+    const currentCardNumber = cardNumbers.value.replace(/\s/g, "");
+    const brand = getCardBrand(currentCardNumber) as CardBrand;
 
-    if (brand in CARD_LENGTH && currentCardNumbers.join("").length <= CARD_LENGTH[brand]) {
+    if (brand in CARD_NUMBER_LENGTH && currentCardNumber.length <= CARD_NUMBER_LENGTH[brand]) {
       setCardBrand(brand);
+      const cardFormat = getCardFormat(currentCardNumber, cardBrand);
+
+      cardNumbers.changeValue(cardFormat);
     } else {
       setCardBrand("");
     }
-  }, [...cardNumbers.map(({ value }) => value)]);
+  }, [cardNumbers.value]);
 
   return { cardNumbers, cardBrand, isCardNumbersValid };
 };
