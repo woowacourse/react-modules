@@ -6,9 +6,19 @@ import styles from './AlertModal.module.css';
 interface AlertModalProps extends ModalProps {
   title: string;
   caption: string;
+  onConfirm: () => void;
 }
 
-const AlertModal: React.FC<AlertModalProps> = ({ onToggle, isOpen, position, size, title, caption, ...rest }) => {
+const AlertModal: React.FC<AlertModalProps> = ({
+  onToggle,
+  onConfirm,
+  isOpen,
+  position,
+  size,
+  title,
+  caption,
+  ...rest
+}) => {
   return (
     <Modal className={styles.alertModal} isOpen={isOpen} onToggle={onToggle} position={position} size={size} {...rest}>
       <Modal.ModalHeader title={title} />
@@ -16,7 +26,7 @@ const AlertModal: React.FC<AlertModalProps> = ({ onToggle, isOpen, position, siz
         <Modal.ModalCaption caption={caption}></Modal.ModalCaption>
       </Modal.ModalContent>
       <Modal.ModalFooter className={styles.alertModalFooter}>
-        <Modal.ModalButton variant="primary" onClick={onToggle}>
+        <Modal.ModalButton variant="primary" onClick={onConfirm}>
           확인
         </Modal.ModalButton>
       </Modal.ModalFooter>
