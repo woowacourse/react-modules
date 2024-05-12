@@ -1,19 +1,22 @@
 import { renderHook, act } from "@testing-library/react";
-import useCardPasswordValidation from "../lib/useCardPasswordValidation";
+import useCVC from "../lib/useCVC";
+import { ChangeEvent } from "react";
 
-describe("useCardPasswordValidation 테스트", () => {
+describe("useCVC 테스트", () => {
   it("아직 아무 입력도 수행되지 않았을 때 false를 반환해야 함", () => {
-    const { result } = renderHook(() => useCardPasswordValidation());
+    const { result } = renderHook(() => useCVC());
 
     expect(result.current.validationResult.isValid).toBe(false);
     expect(result.current.validationResult.errorMessages).toHaveLength(0);
   });
 
-  it("올바른 비밀번호 입력이 들어올 때 true를 반환해야 함", () => {
-    const { result } = renderHook(() => useCardPasswordValidation());
+  it("올바른 CVC 입력이 들어올 때 true를 반환해야 함", () => {
+    const { result } = renderHook(() => useCVC());
 
     act(() => {
-      result.current.handleCardPasswordChange("1234", 4);
+      result.current.handleCVCChange({
+        target: { value: "123" },
+      } as ChangeEvent<HTMLInputElement>);
     });
 
     expect(result.current.validationResult.isValid).toBe(true);
@@ -21,10 +24,12 @@ describe("useCardPasswordValidation 테스트", () => {
   });
 
   it("숫자가 아닌 입력이 들어올 때 false와 '숫자로 입력해주세요.' 를 반환해야 함", () => {
-    const { result } = renderHook(() => useCardPasswordValidation());
+    const { result } = renderHook(() => useCVC());
 
     act(() => {
-      result.current.handleCardPasswordChange("ABCD", 4);
+      result.current.handleCVCChange({
+        target: { value: "ABCD" },
+      } as ChangeEvent<HTMLInputElement>);
     });
 
     expect(result.current.validationResult.isValid).toBe(false);
@@ -33,16 +38,18 @@ describe("useCardPasswordValidation 테스트", () => {
     );
   });
 
-  it(`maxLength를 넘는 입력이 들어올 때 false와 '2자 입력해주세요.' 를 반환해야 함`, () => {
-    const { result } = renderHook(() => useCardPasswordValidation());
+  it("maxLength를 넘는 입력이 들어올 때 false와 '3자로 입력해주세요.' 를 반환해야 함", () => {
+    const { result } = renderHook(() => useCVC());
 
     act(() => {
-      result.current.handleCardPasswordChange("123456", 2);
+      result.current.handleCVCChange({
+        target: { value: "1234" },
+      } as ChangeEvent<HTMLInputElement>);
     });
 
     expect(result.current.validationResult.isValid).toBe(false);
     expect(result.current.validationResult.errorMessages).toContain(
-      "2자리 비밀번호를 입력해주세요."
+      "3자로 입력해주세요."
     );
   });
 });
