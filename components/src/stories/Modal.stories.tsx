@@ -1,7 +1,8 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import React from "react";
 import { useModal } from "../lib/Modal";
-import { Modal, ModalProps } from "../lib/Modal/Modal";
+import { Modal } from "../lib/Modal/Modal";
+import { ModalProps } from "../lib/Modal/ModalType";
 
 const meta: Meta<typeof Modal> = {
   title: "Components/Modal",
@@ -50,6 +51,13 @@ const meta: Meta<typeof Modal> = {
       control: {
         type: "radio",
         options: ["small", "medium", "large"],
+      },
+    },
+    modalType: {
+      description: "모달의 타입",
+      control: {
+        type: "radio",
+        options: ["confirm", "alert", "prompt"],
       },
     },
   },
@@ -132,7 +140,7 @@ export const 중앙에_위치한_small_모달: Story = {
   ...Template,
   args: {
     modalPosition: "center",
-    title: "중앙에 위치한 모달",
+    title: "중앙에 위치한 small 모달",
     closeButtonPosition: "bottom",
     children: "이것은 중앙에 위치한 small 사이즈 모달의 내용입니다.",
     isOpen: true,
@@ -144,7 +152,7 @@ export const 중앙에_위치한_medium_모달: Story = {
   ...Template,
   args: {
     modalPosition: "center",
-    title: "중앙에 위치한 모달",
+    title: "중앙에 위치한 medium 모달",
     closeButtonPosition: "bottom",
     children: "이것은 중앙에 위치한 medium 사이즈 모달의 내용입니다.",
     isOpen: true,
@@ -156,10 +164,44 @@ export const 중앙에_위치한_large_모달: Story = {
   ...Template,
   args: {
     modalPosition: "center",
-    title: "중앙에 위치한 모달",
+    title: "중앙에 위치한 large 모달",
     closeButtonPosition: "bottom",
     children: "이것은 중앙에 위치한 large사이즈 모달의 내용입니다.",
     isOpen: true,
     size: "large",
+  },
+};
+
+export const 중앙에_위치한_alert_모달: Story = {
+  ...Template,
+  args: {
+    modalPosition: "center",
+    title: "Alert 모달",
+    closeButtonPosition: "bottom",
+    children: "이것은 중앙에 위치한 Alert 모달의 내용입니다.",
+    isOpen: true,
+    modalType: "alert",
+  },
+};
+
+export const 중앙에_위치한_confirm_모달: Story = {
+  ...Template,
+  args: {
+    modalPosition: "center",
+    title: "Confirm 모달",
+    children: "이것은 중앙에 위치한 Confirm 모달의 내용입니다.",
+    isOpen: true,
+    modalType: "confirm",
+  },
+};
+
+export const 중앙에_위치한_prompt_모달: Story = {
+  ...Template,
+  args: {
+    modalPosition: "center",
+    title: "Prompt 모달",
+    children: "이것은 중앙에 위치한 Prompt 모달의 내용입니다.",
+    isOpen: true,
+    modalType: "prompt",
   },
 };
