@@ -8,7 +8,8 @@ const meta = {
   args: {
     position: 'center',
     size: 'medium',
-    title: MODAL_TITLE_MESSAGE,
+    // @ts-expect-error:argType mapping 인식 오류
+    title: true,
   },
   argTypes: {
     position: { control: 'radio', options: ['center', 'bottom'] },
@@ -17,9 +18,8 @@ const meta = {
       options: ['small', 'medium', 'large', 'full-width'],
     },
     title: {
-      control: 'radio',
-      options: ['exist', 'none'],
-      mapping: { exist: MODAL_TITLE_MESSAGE, none: undefined },
+      control: 'boolean',
+      mapping: { true: MODAL_TITLE_MESSAGE, false: undefined },
     },
   },
 } satisfies Meta<typeof PromptModal>;

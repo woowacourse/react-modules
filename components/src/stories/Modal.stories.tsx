@@ -10,10 +10,12 @@ const meta = {
   args: {
     position: 'center',
     size: 'medium',
-    title: MODAL_TITLE_MESSAGE,
+    // @ts-expect-error:argType mapping 인식 오류
+    title: true,
     hasCloseButton: true,
-    children: MODAL_CHILDREN_MESSAGE,
-    buttonText: MODAL_BUTTON_MESSAGE,
+    children: true,
+    // @ts-expect-error:argType mapping 인식 오류
+    buttonText: true,
   },
   argTypes: {
     position: { control: 'radio', options: ['center', 'bottom'] },
@@ -22,21 +24,18 @@ const meta = {
       options: ['small', 'medium', 'large', 'full-width'],
     },
     title: {
-      control: 'radio',
-      options: ['exist', 'none'],
-      mapping: { exist: MODAL_TITLE_MESSAGE, none: undefined },
+      control: 'boolean',
+      mapping: { true: MODAL_TITLE_MESSAGE, false: undefined },
     },
     hasCloseButton: { control: 'boolean' },
     children: {
-      control: 'radio',
-      options: ['exist', 'none'],
-      mapping: { exist: MODAL_CHILDREN_MESSAGE, none: undefined },
+      control: 'boolean',
+      mapping: { true: MODAL_CHILDREN_MESSAGE, false: undefined },
     },
 
     buttonText: {
-      control: 'radio',
-      options: ['exist', 'none'],
-      mapping: { exist: MODAL_BUTTON_MESSAGE, none: undefined },
+      control: 'boolean',
+      mapping: { true: MODAL_BUTTON_MESSAGE, false: undefined },
     },
   },
 } satisfies Meta<typeof Modal>;
