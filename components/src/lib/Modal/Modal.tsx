@@ -46,7 +46,7 @@ const Modal: React.FC<React.PropsWithChildren<ModalProps>> & {
   ModalInput: ModalInputType;
   ModalCaption: ModalCaptionType;
 } = ({ children, className, isOpen, onToggle, position = 'center', size = 'large' }) => {
-  const modalContainerStyle = position === 'bottom' ? `modalContainer${convertPascalCase(position)}` : '';
+  const modalContainerPositionStyle = `modalContainerPosition${convertPascalCase(position)}`;
 
   useModalControl(isOpen, onToggle);
 
@@ -55,7 +55,7 @@ const Modal: React.FC<React.PropsWithChildren<ModalProps>> & {
       <div className={`${styles.modal} ${styles[MODAL_POSITION_MAP[position]]} `}>
         <div className={styles.dimmed} onClick={onToggle} />
         <div
-          className={`${styles.modalContainer} ${styles[modalContainerStyle]} ${styles[MODAL_SIZE_MAP[size]]} ${className}`}
+          className={`${styles.modalContainer} ${styles[modalContainerPositionStyle]} ${styles[MODAL_SIZE_MAP[size]]} ${className}`}
         >
           {children}
         </div>
