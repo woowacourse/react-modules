@@ -2,7 +2,7 @@
 
 ## 설치 방법
 
-> npm install soosoo-react-payments-components
+> npm install soosoo-react-modal-component
 
 - ### Modal
 
