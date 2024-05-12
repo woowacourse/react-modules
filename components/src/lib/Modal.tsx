@@ -8,6 +8,7 @@ import Container from "./Container";
 import useAnimation from "./hooks/useAnimation";
 import styles from "./container.module.css";
 import ModalAlert from "./ModalAlert";
+import ModalConfirm from "./ModalConfirm";
 
 export default function Modal({
   children,
@@ -63,3 +64,4 @@ Modal.Backdrop = ModalBackdrop;
 Modal.Container = Container;
 Modal.CloseButton = ModalCloseButton;
 Modal.Alert = ModalAlert;
+Modal.Confirm = ModalConfirm;

@@ -1,31 +1,31 @@
 import { CSSProperties, useContext, PropsWithChildren } from "react";
 import { ModalContext } from "./ModalContext";
 import styles from "./container.module.css";
+import { Title, Description } from "./ModalAlert";
+
+type ConfirmButtonProps = {
+  className?: string;
+  onConfirm: () => void;
+};
+
+const ConfirmButton = ({
+  className = "",
+  onConfirm,
+  children,
+}: PropsWithChildren<ConfirmButtonProps>) => {
+  return (
+    <button type="button" onClick={onConfirm} className={className}>
+      {children}
+    </button>
+  );
+};
 
 type Props = {
   className?: string;
   style?: CSSProperties;
 };
 
-type ContentProps = {
-  className?: string;
-};
-
-export const Title = ({
-  className = "",
-  children,
-}: PropsWithChildren<ContentProps>) => {
-  return <h2 className={className}>{children}</h2>;
-};
-
-export const Description = ({
-  className = "",
-  children,
-}: PropsWithChildren<ContentProps>) => {
-  return <p className={className}> {children}</p>;
-};
-
-export default function ModalAlert({
+export default function ModalConfirm({
   children,
   className = "",
   style,
@@ -52,5 +52,6 @@ export default function ModalAlert({
   ) : null;
 }
 
-ModalAlert.Title = Title;
-ModalAlert.Description = Description;
+ModalConfirm.ConfirmButton = ConfirmButton;
+ModalConfirm.Title = Title;
+ModalConfirm.Description = Description;
