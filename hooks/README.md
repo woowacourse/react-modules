@@ -28,6 +28,8 @@ const SimpleComponent = () => {
 }
 ```
 
+> 💡 If the input to this hook is non-numeric, it is not entered and cardNumberError's isError = true, errorMessage is returned.
+
 If you want to show the user a formatted card number from the value of the input tag, you can call the 'formattingValue' function to apply it.
 
 ```tsx
@@ -61,6 +63,8 @@ The following brands are supported for card brand identification and formatting.
 | UNION      | `Six digits of the card number start with a number between 622126 and 622925, or three digits of the card number begin with a number between 624 and 626, orfour digits of the card number start with a number between 6282 and 6288.` | cardNumbers : ['6221','2600','0000','0000'], cardBrand : 'UNION'   |
 | Default    | `default`                                                                                                                                                                                                                              | cardNumbers : ['0000','0000','0000','0000'], cardBrand : 'DEFAULT' |
 
+---
+
 ## useExpiration
 
 > Return validated Card Expiration Date based on the current month. It takes a two-digit month consisting of January through December and a two-digit year. Also can only accept numeric input.
@@ -80,11 +84,16 @@ const SimpleComponent = () => {
 }
 ```
 
+> 💡 If the input for that hook is non-numeric, it is not entered and expirationError's isError = true, errorMessage is returned.
+> Additionally, if the card expiration is not valid, expirationError is returned.
+
 ### Return Value
 
 | Return Value                                              | type     | description                                                                                                                                                       |
-| --------------------------------------------------------- | -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------ |
+| --------------------------------------------------------- | -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- | 
 | `{ expiration, expirationError, handleChangeExpiration }` | `object` | Contains the expiration (`{year : string; month : string;}`), expiration error (`{isError: boolean, errorMessage: string}`) state, and a handler (`(field: 'year' | 'month', value: string) => void`) to change the card number. |
+
+---
 
 ## useOwnerName
 
@@ -104,11 +113,15 @@ const SimpleComponent = () => {
 }
 ```
 
+> 💡 The input value for this hook can only be in upper case English letters, and will be automatically capitalized when lower case letters are entered. If an invalid value is entered, it will not be entered and ownerNameError will be returned.
+
 ### Return Value
 
 | Return Value                                           | type     | description                                                                                                                                                   |
 | ------------------------------------------------------ | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `{ ownerName, ownerNameError, handleChangeOwnerName }` | `object` | Contains owner Name(`string`), ownerNameError(`{isError : boolean; errorMessage : string;}`), and handleChangeOwnerName(`(value : string) => void`) function. |
+
+---
 
 ## useCVCNumber
 
@@ -128,11 +141,15 @@ const SimpleComponent = () => {
 }
 ```
 
+> 💡 If the input for that hook is non-numeric, it is not entered and expirationError's isError = true, errorMessage is returned.
+
 ### Return Value
 
 | Return Value                                           | type     | description                                                                                                                                                      |
 | ------------------------------------------------------ | -------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `{ cvcNumber, cvcNumberError, handleChangeCVCNumber }` | `object` | Contains cvc nuember(`string`), cvc number error(`{isError : boolean; errorMessage : string;}`), and handleChangeCVCNumber(`(value : string) => void`) function. |
+
+---
 
 ## useCardPassword
 
@@ -152,11 +169,15 @@ const SimpleComponent = () => {
 }
 ```
 
+> 💡 If the input for that hook is non-numeric, it is not entered and expirationError's isError = true, errorMessage is returned.
+
 ### Return Value
 
 | Return Value                                                    | type     | description                                                                                                                                                              |
 | --------------------------------------------------------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `{ cardPassword, cardPasswordError, handleChangeCardPassword }` | `object` | Contains card password(`string`), card password error(`{isError : boolean; errorMessage : string;}`), and handleChangeCardPassword(`(value : string) => void`) function. |
+
+---
 
 # util Functions
 
