@@ -1,6 +1,4 @@
-// import { useModal, Modal } from "choco-modal-component";
-import { useModal } from "./lib/Modal/index";
-import { Modal } from "./lib/Modal/Modal";
+import { useModal, Modal } from "choco-modal-component";
 import React from "react";
 import "./App.css";
 
@@ -12,12 +10,12 @@ function App() {
       <Modal
         modalPosition="center"
         title="컴포넌트를 어느정도까지 분리 해야할까요? 또 어떤 경우 컴포넌트를 그룹화해서 하나의 컴포넌트처럼 보이게 하는 것이 좋을까요?"
-        closeButtonPosition="top"
         isOpen={isOpen}
         onClose={closeModal}
         size="large"
+        modalType="confirm"
       >
-        <div style={{ textAlign: "left" }}>
+        <div style={{ textAlign: "justify" }}>
           리액트에서의 컴포넌트도 캡슐화 되어 있고, 재사용 및 재구성할 수 있습니다. 리액트를 이용해
           애플리케이션을 개발한다는 것은 레고를 이용해 조립하는 것과 비슷합니다. 차이점은 부품이
           부족할 일이 없고, 반드시 한 번은 재사용할 컴포넌트를 만들어야 한다는 것입니다. 그리고 이
