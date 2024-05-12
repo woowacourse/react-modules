@@ -21,9 +21,9 @@ const AlertModal: React.FC<PromptModalProps> = ({
         <form>
           {labelText.map((text, index) => (
             <React.Fragment key={htmlFor[index]}>
-              <Modal.ModalLabel htmlFor={htmlFor[index]}>
+              <Modal.ModalInputLabel htmlFor={htmlFor[index]}>
                 {text}
-              </Modal.ModalLabel>
+              </Modal.ModalInputLabel>
               <Modal.ModalInput type={inputType[index]} />
             </React.Fragment>
           ))}

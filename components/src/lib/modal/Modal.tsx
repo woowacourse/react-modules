@@ -23,7 +23,7 @@ const Modal: React.FC<ModalProps> & {
   ModalCloseButton: ModalCloseButtonType;
   ModalButton: ModalButtonType;
   ModalContent: ModalContentType;
-  ModalLabel: ModalLabelType;
+  ModalInputLabel: ModalInputLabelType;
   ModalInput: ModalInputType;
   ModalFooter: ModalFooterType;
 } = ({ children, isOpen, size, position, ...restProps }) => {
@@ -117,7 +117,7 @@ const ModalContent: ModalContentType = ({ children, ...restProps }) => {
   return <Styled.ModalContent {...restProps}>{children}</Styled.ModalContent>;
 };
 
-type ModalLabelType = React.FC<
+type ModalInputLabelType = React.FC<
   React.PropsWithChildren<
     React.HTMLAttributes<HTMLLabelElement> & {
       htmlFor?: string;
@@ -125,7 +125,11 @@ type ModalLabelType = React.FC<
   >
 >;
 
-const ModalLabel: ModalLabelType = ({ htmlFor, children, ...restProps }) => {
+const ModalInputLabel: ModalInputLabelType = ({
+  htmlFor,
+  children,
+  ...restProps
+}) => {
   return (
     <Styled.ModalLabel htmlFor={htmlFor} {...restProps}>
       {children}
@@ -168,7 +172,7 @@ Modal.ModalTitle = ModalTitle;
 Modal.ModalCloseButton = ModalCloseButton;
 Modal.ModalButton = ModalButton;
 Modal.ModalContent = ModalContent;
-Modal.ModalLabel = ModalLabel;
+Modal.ModalInputLabel = ModalInputLabel;
 Modal.ModalInput = ModalInput;
 Modal.ModalFooter = ModalFooter;
 
