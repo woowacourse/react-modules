@@ -19,12 +19,12 @@ export default function useCardNumber(
 
   const checkCardBrandRule = useCallback(
     getCheckCardBrandRule(targetBrandNames),
-    targetBrandNames
+    [targetBrandNames]
   );
 
   const cardNumberValidators = useMemo(
     () => getCardNumberValidator(targetBrandNames),
-    targetBrandNames
+    [targetBrandNames]
   );
 
   const errorMessage = getErrorMessage(cardNumber, cardNumberValidators);

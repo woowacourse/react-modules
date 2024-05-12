@@ -17,24 +17,18 @@ import { useEffect } from 'react';
 export interface CompoundModalProps
   extends React.HTMLAttributes<HTMLDivElement> {
   onClose?: () => void;
-  onConfirm?: () => void;
-  onCancel?: () => void;
   position?: ModalPosition;
   size?: ModalSize;
 }
 
 const CompoundModal = ({
   onClose,
-  onConfirm,
-  onCancel,
   position = 'center',
   size = 'medium',
   children,
 }: CompoundModalProps) => {
   const value = {
     onClose,
-    onConfirm,
-    onCancel,
   };
 
   useEffect(() => {
@@ -46,7 +40,7 @@ const CompoundModal = ({
     };
 
     window.addEventListener('keydown', handleModalKeyDown);
-  }, []);
+  }, [onClose]);
 
   return (
     <CompoundModalContext.Provider value={value}>

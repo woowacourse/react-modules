@@ -30,7 +30,7 @@ export default function Modal({
     };
 
     window.addEventListener('keydown', handleModalKeyDown);
-  }, []);
+  }, [onClose]);
   const titleBarChildren = [];
   if (title)
     titleBarChildren.push(
