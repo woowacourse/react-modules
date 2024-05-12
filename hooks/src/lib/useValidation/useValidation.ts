@@ -9,7 +9,10 @@ const useValidation = () => {
   });
 
   const validate = (value: string, validations: ValidationType[], cardBrand?: CardBrand | "") => {
-    const validationsResult = validations.find(({ validate }) => !validate(value, cardBrand!));
+    const trimmedValue = value.replace(/\s/g, "");
+    const validationsResult = validations.find(
+      ({ validate }) => !validate(trimmedValue, cardBrand!)
+    );
 
     if (validationsResult) {
       setError({
