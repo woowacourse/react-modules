@@ -2,8 +2,17 @@ import { useRef, useState } from 'react';
 import styled from 'styled-components';
 import './App.css';
 
-import { AlertModal, BottomModal, CenterModal, ConfirmModal, PromptModal, ToastModal, usePosition } from './lib';
-import ModalContainer from './lib/components/ModalContainer';
+import {
+  AlertModal,
+  BottomModal,
+  CenterModal,
+  ConfirmModal,
+  ModalContainer,
+  PromptModal,
+  ToastModal,
+  usePosition,
+} from '../dist';
+
 import { BASIC_BORDER_RADIUS } from './lib/constants/modal';
 
 export const ModalTitle = styled.h2`
@@ -19,7 +28,7 @@ export const AppModalContents = styled.div`
   }
 `;
 
-function ConfirmButton() {
+export function AppConfirmButton() {
   return (
     <button
       style={{ backgroundColor: 'black', color: '#ffff', borderRadius: BASIC_BORDER_RADIUS }}
@@ -29,7 +38,7 @@ function ConfirmButton() {
     </button>
   );
 }
-function CancelButton() {
+export function AppCancelButton() {
   return <button style={{ backgroundColor: '#ffff', color: 'black', borderRadius: BASIC_BORDER_RADIUS }}>취소</button>;
 }
 
@@ -109,8 +118,8 @@ function App() {
         }
         buttonContainerJustifyContent="space-between"
       >
-        <ConfirmButton />
-        <CancelButton />
+        <AppConfirmButton />
+        <AppCancelButton />
       </ConfirmModal>
       <PromptModal
         openModal={openPromptModal}
@@ -127,8 +136,8 @@ function App() {
         }
         buttonContainerJustifyContent="space-between"
       >
-        <CancelButton />
-        <ConfirmButton />
+        <AppCancelButton />
+        <AppConfirmButton />
       </PromptModal>
     </>
   );

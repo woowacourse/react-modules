@@ -27,7 +27,9 @@ export const BottomModalSample: Story = {
     children: (
       <>
         <h1>Bottom Modal</h1>
-        <BottomModal.Button isCloseModal={true}>close</BottomModal.Button>
+        <BottomModal.CloseButtonWrapper>
+          <button>close</button>
+        </BottomModal.CloseButtonWrapper>
       </>
     ),
   },

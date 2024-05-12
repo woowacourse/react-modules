@@ -27,7 +27,9 @@ export const CenterModalSample: Story = {
     children: (
       <>
         <h1>Center Modal</h1>
-        <ModalContainer.Button isCloseModal={true}>close button</ModalContainer.Button>
+        <ModalContainer.CloseButtonWrapper>
+          <button>close</button>
+        </ModalContainer.CloseButtonWrapper>
       </>
     ),
   },
