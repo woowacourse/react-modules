@@ -14,12 +14,7 @@ export default function ConfirmModal({
   onConfirm,
 }: ConfirmModalProps) {
   return (
-    <CompoundModal
-      position={position}
-      size={size}
-      onCancel={onCancel}
-      onConfirm={onConfirm}
-    >
+    <CompoundModal position={position} size={size}>
       {title && (
         <CompoundModal.title style={{ marginBottom: '10px' }}>
           {title}

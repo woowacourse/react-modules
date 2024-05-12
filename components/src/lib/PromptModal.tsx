@@ -14,12 +14,7 @@ export default function PromptModal({
   size = 'medium',
 }: PromptModalProps) {
   return (
-    <CompoundModal
-      onCancel={onCancel}
-      onConfirm={onConfirm}
-      position={position}
-      size={size}
-    >
+    <CompoundModal position={position} size={size}>
       {title && (
         <CompoundModal.title style={{ marginBottom: '10px' }}>
           {title}
