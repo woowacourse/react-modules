@@ -22,30 +22,9 @@
 
 - [x] 모달 컴포넌트를 npm으로 배포하고 사용할 수 있어야 한다.
 
-**예시**
-
-```jsx
-<Modal>
-  <Modal.BackDrop onClose={closeModal} />
-  <Modal.Container position=“bottom”>
-    <Modal.Header>
-      <Modal.Title text=“카드사 선택” />
-      <Modal.CloseButton onCloseButtonClick={closeModal} />
-    </Modal.Header>
-    <YourContent /> 😊
-    <Modal.ButtonContainer direction=“column”>
-      <Modal.Button theme=“dark” onClick={closeModal}>
-        동의하고 저장하기
-      </Modal.Button>
-      <Modal.Button theme=“white” onClick={closeModal}>
-        닫기
-      </Modal.Button>
-    </Modal.ButtonContainer>
-  </Modal.Container>
-</Modal>
-```
-
 ## 재사용 가능한 커스텀 훅
+
+### 🎯 기능 요구 사항
 
 - [x] 페이먼츠 카드의 다양한 정보에 대한 유효성 검사 로직을 여러 개의 작은 커스텀 훅으로 분리하고, 필요에 따라 조합하여 사용할 수 있도록 한다.
 - [x] 필수적으로 만들어야 하는 커스텀 훅은 페이먼츠 앱에서 다루었던 카드 정보에 대한 부분이다.
@@ -57,6 +36,8 @@
     - [x] MasterCard (51~55로 시작)
     - [x] Visa (4로 시작)
 - [x] 사용자 입력 시 자동으로 카드사별 규칙에 맞게 포멧팅 한다.
+
+- [x] 페이먼츠 커스텀 훅 모듈을 npm으로 배포하고 사용할 수 있어야 한다.
 
 ### `useCardNumber` 커스텀 훅
 
@@ -88,17 +69,3 @@
 
 - [x] useCardPassword
 - [x] useCardPasswordValidation
-
-커스텀 훅은 카드 정보의 유효성 검사 결과와 에러 정보를 사용자인 개발자에게
-제공할 수 있어야 한다. 예를 들어 useCardNumber hook을 만든다면 카드 번호 유효성 검사 결과를 불리언 값으로 반환해야 한다. 만약 유효성 검사에 실패한 경우, 에러 정보를 문자열 형태로 반환할 수 있어야 한다.
-
-**예시**
-
-```ts
-type ValidationResult = {
-  isValid: boolean;
-  errorMessage?: string;
-};
-```
-
-- [x] 페이먼츠 커스텀 훅 모듈을 npm으로 배포하고 사용할 수 있어야 한다.
