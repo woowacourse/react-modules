@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import { getInputStatus, useInput } from './useInput';
-import { ERROR_MESSAGE } from '../../shared/errorMessages';
-import { VALID_LENGTH } from '../../shared/options';
-import validator from '../../shared/utils/validator/validator';
-import { ExpiryDateType, Status } from '../../shared/types';
+import { ERROR_MESSAGE } from '../shared/errorMessages';
+import { VALID_LENGTH } from '../shared/options';
+import validator from '../shared/utils/validator/validator';
+import { ExpiryDateType, Status } from '../shared/types';
 
 type UseInputExpiryDateReturn = [
   values: { month: string; year: string },

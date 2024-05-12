@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Status } from '../../shared/types';
+import { Status } from '../shared/types';
 
 export const getInputStatus = (value: string, validLength: number): Status => {
   const length = value.length;

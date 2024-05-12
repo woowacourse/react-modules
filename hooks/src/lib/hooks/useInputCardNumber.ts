@@ -1,29 +1,29 @@
 import { useState } from 'react';
 import { getInputStatus, useInput } from './useInput';
-import { ERROR_MESSAGE } from '../../shared/errorMessages';
-import validator from '../../shared/utils/validator/validator';
-import { Status } from '../../shared/types';
-import { VALID_LENGTH } from '../../shared/options';
+import { ERROR_MESSAGE } from '../shared/errorMessages';
+import validator from '../shared/utils/validator/validator';
+import { Status } from '../shared/types';
+import { VALID_LENGTH } from '../shared/options';
 
-type UseInputPasswordPrefixReturn = [
+type UseInputCardNumberReturn = [
   value: string,
   status: Status,
   errorMessage: string,
-  handleChange: (value: string) => void,
+  handleChange: (value: string, validLength?: number) => void,
   handleBlur: () => void
 ];
 
-const useInputPasswordPrefix = (): UseInputPasswordPrefixReturn => {
+const useInputCardNumber = (): UseInputCardNumberReturn => {
   const { value, status, setValue, setStatus } = useInput('');
   const [errorMessage, setErrorMessage] = useState<string>('');
 
-  const handleChange = (value: string) => {
-    // status 업데이트
-    const status = getInputStatus(value, VALID_LENGTH.passwordPrefix);
+  const handleChange = (value: string, validLength: number = VALID_LENGTH.cardNumber) => {
+    //  status 업데이트
+    setStatus(getInputStatus(value, validLength));
 
-    // Default인 경우 : Error 검사
+    // Default가 아닌 경우 : Error 검사
     if (status !== 'default') {
-      const [isValid, errorMessage] = validator.passwordPrefix.isValidInput(value);
+      const [isValid, errorMessage] = validator.cardNumber.isValidInput(value);
 
       // Error인 경우 : 에러 발생
       if (!isValid) {
@@ -35,7 +35,6 @@ const useInputPasswordPrefix = (): UseInputPasswordPrefixReturn => {
 
     // Error가 아닌 경우 : 값 업데이트
     setValue(value);
-    setStatus(status);
     setErrorMessage('');
   };
 
@@ -43,11 +42,11 @@ const useInputPasswordPrefix = (): UseInputPasswordPrefixReturn => {
     // 미완성인 경우 : Error 상태로 판단
     if (['default', 'pending'].includes(status)) {
       setStatus('error');
-      setErrorMessage(ERROR_MESSAGE.passwordPrefix.isNotFulfilled);
+      setErrorMessage(ERROR_MESSAGE.cardNumber.isNotFulfilled);
     }
   };
 
   return [value, status, errorMessage, handleChange, handleBlur];
 };
 
-export default useInputPasswordPrefix;
+export default useInputCardNumber;

@@ -1,4 +1,4 @@
-import { Status } from '../../shared/types';
+import { Status } from '../shared/types';
 import { useInput } from './useInput';
 
 type UseInputCardIssuerReturn = [value: string, status: Status, handleChange: (value: string) => void];

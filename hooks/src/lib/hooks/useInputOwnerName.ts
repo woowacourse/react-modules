@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import { getInputStatus, useInput } from './useInput';
-import { ERROR_MESSAGE } from '../../shared/errorMessages';
-import validator from '../../shared/utils/validator/validator';
-import { Status } from '../../shared/types';
-import { VALID_LENGTH } from '../../shared/options';
+import { ERROR_MESSAGE } from '../shared/errorMessages';
+import validator from '../shared/utils/validator/validator';
+import { Status } from '../shared/types';
+import { VALID_LENGTH } from '../shared/options';
 
 type UseInputOwnerNameReturn = [
   value: string,
