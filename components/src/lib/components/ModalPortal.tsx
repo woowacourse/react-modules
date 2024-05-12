@@ -1,4 +1,4 @@
-import { ReactNode, useEffect, useState } from 'react';
+import { ReactNode, useEffect, useLayoutEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 import styled from 'styled-components';
 
@@ -32,11 +32,14 @@ export default function ModalPortal(props: ModalPortalProps) {
     setModalRoot($modalRoot);
   };
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     createModalRoot();
-    document.getElementsByTagName('body')[0].addEventListener('click', stopModalPropagation);
+  }, []);
+
+  useEffect(() => {
+    document.body.addEventListener('click', stopModalPropagation);
     return () => {
-      document.getElementsByTagName('body')[0].removeEventListener('click', stopModalPropagation);
+      document.body.removeEventListener('click', stopModalPropagation);
       if (modalRoot) document.body.removeChild(modalRoot);
     };
   }, [modalRoot]);
