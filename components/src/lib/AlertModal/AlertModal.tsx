@@ -6,6 +6,7 @@ import styles from './AlertModal.module.css';
 interface AlertModalProps extends ModalProps {
   title: string;
   caption: string;
+  confirmButtonLabel: string;
   onConfirm: () => void;
 }
 
@@ -17,6 +18,7 @@ const AlertModal: React.FC<AlertModalProps> = ({
   size,
   title,
   caption,
+  confirmButtonLabel,
   ...rest
 }) => {
   return (
@@ -27,7 +29,7 @@ const AlertModal: React.FC<AlertModalProps> = ({
       </Modal.ModalContent>
       <Modal.ModalFooter className={styles.alertModalFooter}>
         <Modal.ModalButton variant="primary" onClick={onConfirm}>
-          확인
+          {confirmButtonLabel}
         </Modal.ModalButton>
       </Modal.ModalFooter>
     </Modal>

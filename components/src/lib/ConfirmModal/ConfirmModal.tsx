@@ -6,6 +6,8 @@ import styles from './ConfirmModal.module.css';
 interface ConfirmModalProps extends ModalProps {
   title: string;
   caption: string;
+  confirmButtonLabel: string;
+  cancelButtonLabel: string;
   onConfirm: () => void;
 }
 
@@ -17,6 +19,8 @@ const ConfirmModal: React.FC<ConfirmModalProps> = ({
   size,
   title,
   caption,
+  confirmButtonLabel,
+  cancelButtonLabel,
   ...rest
 }) => {
   return (
@@ -34,10 +38,10 @@ const ConfirmModal: React.FC<ConfirmModalProps> = ({
       </Modal.ModalContent>
       <Modal.ModalFooter className={styles.confirmModalFooter}>
         <Modal.ModalButton variant="secondary" onClick={onToggle}>
-          취소
+          {cancelButtonLabel}
         </Modal.ModalButton>
         <Modal.ModalButton variant="primary" onClick={onConfirm}>
-          확인
+          {confirmButtonLabel}
         </Modal.ModalButton>
       </Modal.ModalFooter>
     </Modal>

@@ -7,6 +7,8 @@ import { convertPascalCase } from '../../utils/string';
 interface PromptModalProps extends ModalProps, Pick<React.InputHTMLAttributes<HTMLInputElement>, 'value' | 'onChange'> {
   onSubmit: (value: string) => void;
   title: string;
+  confirmButtonLabel: string;
+  cancelButtonLabel: string;
 }
 
 const PromptModal: React.FC<PromptModalProps> = ({
@@ -18,6 +20,8 @@ const PromptModal: React.FC<PromptModalProps> = ({
   value,
   onChange,
   onSubmit,
+  confirmButtonLabel,
+  cancelButtonLabel,
   ...rest
 }) => {
   const inputRef = useRef<HTMLInputElement>(null);
@@ -38,10 +42,10 @@ const PromptModal: React.FC<PromptModalProps> = ({
       </Modal.ModalContent>
       <Modal.ModalFooter className={styles.promptModalFooter}>
         <Modal.ModalButton variant="secondary" onClick={onToggle}>
-          취소
+          {cancelButtonLabel}
         </Modal.ModalButton>
         <Modal.ModalButton variant="primary" onClick={handleSubmit}>
-          확인
+          {confirmButtonLabel}
         </Modal.ModalButton>
       </Modal.ModalFooter>
     </Modal>
