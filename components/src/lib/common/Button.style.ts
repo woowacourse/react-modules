@@ -1,22 +1,25 @@
 import styled from "@emotion/styled";
-import { ButtonProps } from "./Button";
 
-export const ButtonWrapper = styled.button<Pick<ButtonProps, "backgroundColor" | "fontColor">>`
-  width: 100%;
-  height: 44px;
+const ButtonWrapper = styled.button`
+  width: 80px;
+  height: 40px;
   border-radius: 5px;
-  border: none;
-  background: ${({ backgroundColor }) => backgroundColor};
   cursor: pointer;
-
-  &:hover {
-    border: 2px solid ${({ fontColor }) => fontColor};
-  }
 
   font-family: Noto Sans KR;
   font-size: 15px;
   font-weight: 700;
-  line-height: 21.72px;
   text-align: center;
-  color: ${({ fontColor }) => fontColor};
+`;
+
+export const DarkButtonWrapper = styled(ButtonWrapper)`
+  background: rgba(0, 0, 0, 0.8);
+  color: rgba(255, 255, 255, 0.87);
+  border: none;
+`;
+
+export const LightButtonWrapper = styled(ButtonWrapper)`
+  background: rgba(255, 255, 255, 1);
+  color: rgba(0, 0, 0, 0.87);
+  border: 1px solid rgba(51, 51, 51, 0.25);
 `;
