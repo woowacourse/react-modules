@@ -17,21 +17,21 @@ export interface ModalProps {
   position?: Position;
   size?: Size;
   children?: ReactNode;
-  dimmed?: string;
+  dimmedColor?: string;
 
   onDimmedClick?: (e: React.MouseEvent) => void;
 }
 const ModalMain: React.FC<ModalProps> = ({
   position = 'center',
   size = 'medium',
-  dimmed,
+  dimmedColor,
   onDimmedClick,
   children,
 }: ModalProps) => {
   return (
     <>
       <ModalDimmed
-        color={dimmed}
+        color={dimmedColor}
         onClick={onDimmedClick}
       />
       <ModalWrapper

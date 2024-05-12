@@ -19,7 +19,7 @@ Modal 컴포넌트는 다음과 같이 사용할 수 있습니다.
       <Modal.Header>
         <Modal.Title title='예시' />
         <Modal.Button
-          style={{
+          buttonColor={{
             backgroundColor: 'white',
             fontColor: '#8B95A1',
           }}
@@ -43,7 +43,7 @@ Modal 컴포넌트는 다음과 같이 사용할 수 있습니다.
 
 - position: 모달의 위치를 결정합니다 ('bottom', 'center'). 기본값은 'center'입니다.
 - size: 모달의 크기를 결정합니다 ('small', 'medium', 'large'). 기본값은 'medium'입니다.
-- dimmed: 모달 배경의 색상을 정의합니다. 기본값은 'rgba(0, 0, 0, 0.35)'입니다.
+- dimmedColor: 모달 배경의 색상을 정의합니다. 기본값은 'rgba(0, 0, 0, 0.35)'입니다.
 - onDimmedClick: 모달 외부를 클릭할 때 실행되는 함수입니다.
 - children: 모달에 포함할 요소들입니다.
 
@@ -68,4 +68,4 @@ Modal 컴포넌트는 다음과 같이 사용할 수 있습니다.
 
 - width : 'default' | 'stretch'하나를 선택해 버튼의 너비를 선택합니다. 기본값은 'default'입니다.
 - onClick: 버튼을 클릭할 때 실행되는 함수입니다.
-- style : 버튼의 색을 설정합니다. 기본값은 { backgroundColor: 'black', fontColor: 'white' }입니다.
+- buttonColor : 버튼의 색을 설정합니다. 기본값은 { backgroundColor: 'black', fontColor: 'white' }입니다.
