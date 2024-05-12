@@ -31,7 +31,7 @@ export const Default: Story = {
       <Modal.Header>
         <Modal.Title title='예시' />
         <Modal.Button
-          style={{
+          buttonColor={{
             backgroundColor: 'white',
             fontColor: '#8B95A1',
           }}
@@ -59,7 +59,7 @@ export const SmallModal: Story = {
       <Modal.Header>
         <Modal.Title title='예시' />
         <Modal.Button
-          style={{
+          buttonColor={{
             backgroundColor: 'white',
             fontColor: '#8B95A1',
           }}
@@ -88,7 +88,7 @@ export const LargeModal: Story = {
       <Modal.Header>
         <Modal.Title title='예시' />
         <Modal.Button
-          style={{
+          buttonColor={{
             backgroundColor: 'white',
             fontColor: '#8B95A1',
           }}
@@ -117,7 +117,7 @@ export const BottomModal: Story = {
       <Modal.Header>
         <Modal.Title title='예시' />
         <Modal.Button
-          style={{
+          buttonColor={{
             backgroundColor: 'white',
             fontColor: '#8B95A1',
           }}
@@ -170,7 +170,7 @@ export const CancelButton: Story = {
       </Modal.Body>
       <Modal.Footer>
         <Modal.Button
-          style={{
+          buttonColor={{
             backgroundColor: 'white',
             fontColor: '#8B95A1',
           }}
@@ -197,7 +197,7 @@ export const ColumnButtonLayout: Story = {
       <Modal.Footer position='column'>
         <Modal.Button
           width='stretch'
-          style={{
+          buttonColor={{
             backgroundColor: 'white',
             fontColor: '#8B95A1',
           }}
@@ -224,7 +224,7 @@ export const ScrollContent: Story = {
       <Modal.Footer position='column'>
         <Modal.Button
           width='stretch'
-          style={{
+          buttonColor={{
             backgroundColor: 'white',
             fontColor: '#8B95A1',
           }}
@@ -269,7 +269,7 @@ export const ConfirmModal: Story = {
       </Modal.Body>
       <Modal.Footer>
         <Modal.Button
-          style={{
+          buttonColor={{
             backgroundColor: 'white',
             fontColor: '#8B95A1',
           }}
@@ -299,7 +299,7 @@ export const PromptModal: Story = {
       </Modal.Body>
       <Modal.Footer>
         <Modal.Button
-          style={{
+          buttonColor={{
             backgroundColor: 'white',
             fontColor: '#8B95A1',
           }}
@@ -311,41 +311,3 @@ export const PromptModal: Story = {
     </Modal>
   ),
 };
-
-//   position: 'bottom',
-//   title: '제목입니다.',
-//   buttonLayout:'column',
-//   isXButton:false,
-//   closeButtonContent:"취소",
-//   confirmButtonContent:'alert',
-//   children: <Temp>d하이</Temp>,
-//   handleConfirm: () => alert("확인")
-//   }
-
-// export const Alert2: Story = {
-//     args: {
-//       title: '제목입니다.',
-//       position: 'bottom',
-//       buttonLayout:'column',
-//       isXButton:false,
-//       closeButtonContent:"취소",
-//       confirmButtonContent:'alert',
-//       children: <Temp2>d하이</Temp2>,
-//       handleConfirm: () => alert("확인")
-//       }
-//   };
-
-//     position: string;
-//   title: string;
-//   isXButton?: boolean;
-//   buttonLayout?: string;
-//   children?: ReactNode;
-
-//   closeButtonContent?: string;
-//   confirmButton?: string;
-//   confirmButtonContent?: string;
-
-//   xButtonContent?:string;
-
-//   handleConfirm?: (e: React.MouseEvent) => void;
-//   handleClose?: (e: React.MouseEvent) => void;

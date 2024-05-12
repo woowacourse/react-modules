@@ -12,17 +12,17 @@ export interface ButtonProps {
   width?: Width;
   onClick?: (e: React.MouseEvent) => void;
   children?: ReactNode;
-  style?: ButtonColor;
+  buttonColor?: ButtonColor;
 }
 const Button: React.FC<ButtonProps> = ({
   width = 'default',
   children,
   onClick,
-  style = { backgroundColor: 'black', fontColor: 'white' },
+  buttonColor = { backgroundColor: 'black', fontColor: 'white' },
 }: ButtonProps) => {
   return (
     <StyledButton
-      $style={style}
+      $style={buttonColor}
       $width={ButtonSize[width]}
       onClick={(e) => onClick?.(e)}
     >
