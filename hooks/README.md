@@ -26,6 +26,22 @@ function App() {
 }
 ```
 
+```tsx
+function App() {
+  const cardNumbersInfo = useCardNumbers({ first: '1234'});
+
+  return (
+        <div>
+          {cardNumbersInfo.cardBrand && <span>카드 브랜드 : {cardNumbersInfo.cardBrand}</span>}
+          <div>
+            <div>포맷팅 제공 : {cardNumbersInfo.formattedCardNumber}</div>
+            <div>포맷팅 커스텀 : {cardNumbersInfo.formattedCardNumberList.join('%')}</div>
+          </div>
+        </div>
+  )
+}
+```
+
 ## useCardHolder
 - 카드 소유자 이름 입력 필드를 위한 커스텀 훅 생성
 
@@ -107,7 +123,10 @@ options: ({ isAutoFocus: boolean }) // 추가 옵션 객체 (오토포커스 여
 - handleChange: 입력된 값의 변경을 처리하고, 유효성 검사를 수행합니다. 입력 값이 숫자가 아니거나 길이가 올바르지 않은 경우 오류 메시지를 설정합니다.
 - handleBlur: 입력된 값의 포커스가 떠날 때, 입력 값의 길이가 올바른지 확인하고 오류 메시지를 설정합니다.
 - errorInfo: 오류 정보를 담고 있는 객체
-
+- cardBrand : 입력값에 따라 카드 브랜드를 체크하여 string으로 제공합니다.
+- formattedCardNumberList : 포맷팅된 카드 번호를 배열로 제공하여 원하는대로 커스텀할 수 있도록 제공합니다.
+- formattedCardNumber : 포맷팅된 카드 번호를 string으로 제공합니다.
+- validMaxLength : 카드 브랜드마다 유효한 maxLength 값을 반환하여 input 태그 속성에 설정할 수 있습니다.
 
 ## useCardType
 카드 타입 선택을 위한 커스텀 훅을 생성합니다. 초기 값으로 주어진 값의 유효성을 검사하고, 필요에 따라 초기화합니다.

@@ -33,12 +33,10 @@ function App() {
       <form>
         <div>
           {cardNumbersInfo.cardBrand && <span>카드 브랜드 : {cardNumbersInfo.cardBrand}</span>}
-          {cardNumbersInfo.formattedCardNumber.length > 0 && (
-            <div>
-              <div>포맷팅 제공 : {cardNumbersInfo.formattedCardNumber}</div>
-              <div>포맷팅 커스텀 : {cardNumbersInfo.formattedCardNumberList.join('%')}</div>
-            </div>
-          )}
+          <div>
+            <div>포맷팅 제공 : {cardNumbersInfo.formattedCardNumber}</div>
+            <div>포맷팅 커스텀 : {cardNumbersInfo.formattedCardNumberList.join('%')}</div>
+          </div>
         </div>
         <fieldset>
           <span>cvc : </span>
