@@ -1,6 +1,7 @@
 import { useState } from "react";
 
 import cardInputValidator from "../validators/cardInputValidator";
+import { CONDITION } from "../constants/cardCustomHook";
 
 export interface CardNumberFormatType {
   first: string;
@@ -34,9 +35,15 @@ const useCardNumberFormat = () => {
     setCardNumberFormat((prevValue) => {
       return {
         ...prevValue,
-        first: cardNumber.slice(0, 4),
-        second: cardNumber.slice(4, 10),
-        third: cardNumber.slice(10),
+        first: cardNumber.slice(
+          CONDITION.threePartFirstStartIndex,
+          CONDITION.threePartSecondStartIndex
+        ),
+        second: cardNumber.slice(
+          CONDITION.threePartSecondStartIndex,
+          CONDITION.threePartThirdStartIndex
+        ),
+        third: cardNumber.slice(CONDITION.threePartThirdStartIndex),
       };
     });
   };
@@ -45,10 +52,19 @@ const useCardNumberFormat = () => {
     setCardNumberFormat((prevValue) => {
       return {
         ...prevValue,
-        first: cardNumber.slice(0, 4),
-        second: cardNumber.slice(4, 8),
-        third: cardNumber.slice(8, 12),
-        fourth: cardNumber.slice(12),
+        first: cardNumber.slice(
+          CONDITION.fourPartFirstStartIndex,
+          CONDITION.fourPartSecondStartIndex
+        ),
+        second: cardNumber.slice(
+          CONDITION.fourPartSecondStartIndex,
+          CONDITION.fourPartThirdStartIndex
+        ),
+        third: cardNumber.slice(
+          CONDITION.fourPartThirdStartIndex,
+          CONDITION.fourPartFourthStartIndex
+        ),
+        fourth: cardNumber.slice(CONDITION.fourPartFourthStartIndex),
       };
     });
   };
