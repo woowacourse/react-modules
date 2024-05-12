@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { ButtonSize } from './constant/buttonSize';
 import { ReactNode } from 'react';
 
-export type Style = {
+export type ButtonColor = {
   backgroundColor: string;
   fontColor: string;
 };
@@ -12,7 +12,7 @@ export interface ButtonProps {
   width?: Width;
   onClick?: (e: React.MouseEvent) => void;
   children?: ReactNode;
-  style?: Style;
+  style?: ButtonColor;
 }
 const Button: React.FC<ButtonProps> = ({
   width = 'default',
@@ -31,7 +31,7 @@ const Button: React.FC<ButtonProps> = ({
   );
 };
 
-const StyledButton = styled.button<{ $style: Style; $width: string }>`
+const StyledButton = styled.button<{ $style: ButtonColor; $width: string }>`
   display: flex;
   justify-content: center;
 
