@@ -94,10 +94,12 @@ const OtherModal = () => {
 | --------- | -------------------------------- | ------------- | ------------------------------------------- |
 | isOpen    | `boolean`                        |               | The state of the modal being open or closed |
 | onToggle  | `() => void`                     |               | The handler function to toggle modal        |
+| onConfirm | `() => void`                     |               | The handler function to click event of confirm button |
 | position  | `'center' \| 'bottom'`           | `center`      | Position of modal on display                |
 | size      | `'large' \| 'medium' \| 'small'` | `large`       | Size of modal on display                    |
 | title     | `string`                         |               | Title of modal header                       |
 | caption   | `string`                         |               | Caption of modal header                     |
+| confirmButtonLabel   | `string`                         |               | Caption of confirm button        |
 
 ### use example
 
@@ -107,6 +109,10 @@ import { AlertModal } from '@jaymyong66/simple-modal';
 const OtherModal = () => {
   const [isOpen, setIsOpen] = useState(false);
   const handleToggle = () => setIsOpen((prev) => !prev);
+  const handleConfirm = () => {
+    console.log('confirm');
+    handleToggle();
+  };
 
   return (
     <AlertModal
@@ -114,8 +120,10 @@ const OtherModal = () => {
       size="small"
       isOpen={isOpen}
       onToggle={handleToggle}
+      onConfirm={handleConfirm}
       title="아이디를 입력해주세요."
       caption="아이디는 필수로 입력해야 합니다."
+      confirmButtonLabel="확인"
     />
   );
 };
@@ -129,10 +137,13 @@ const OtherModal = () => {
 | --------- | -------------------------------- | ------------- | ------------------------------------------- |
 | isOpen    | `boolean`                        |               | The state of the modal being open or closed |
 | onToggle  | `() => void`                     |               | The handler function to toggle modal        |
+| onConfirm | `() => void`                     |               | The handler function to click event of confirm button |
 | position  | `'center' \| 'bottom'`           | `center`      | Position of modal on display                |
 | size      | `'large' \| 'medium' \| 'small'` | `large`       | Size of modal on display                    |
 | title     | `string`                         |               | Title of modal header                       |
 | caption   | `string`                         |               | Caption of modal header                     |
+| confirmButtonLabel   | `string`                         |               | Caption of confirm button        |
+| cancelButtonLabel   | `string`                         |               | Caption of cancel button        |
 
 ### use example
 
@@ -142,6 +153,10 @@ import { ConfirmModal } from '@jaymyong66/simple-modal';
 const OtherModal = () => {
   const [isOpen, setIsOpen] = useState(false);
   const handleToggle = () => setIsOpen((prev) => !prev);
+  const handleConfirm = () => {
+    console.log('confirm');
+    handleToggle();
+  };
 
   return (
     <ConfirmModal
@@ -149,8 +164,11 @@ const OtherModal = () => {
       size="small"
       isOpen={isOpen}
       onToggle={handleToggle}
+      onConfirm={handleConfirm}
       title="카드를 삭제하시겠습니까?"
       caption="삭제하면 복구하실 수 없습니다."
+      confirmButtonLabel="확인"
+      confirmButtonLabel="취소"
     />
   );
 };
@@ -164,12 +182,15 @@ const OtherModal = () => {
 | --------- | -------------------------------- | ------------- | --------------------------------------------------------------- |
 | isOpen    | `boolean`                        |               | The state of the modal being open or closed                     |
 | onToggle  | `() => void`                     |               | The handler function to toggle modal                            |
+| onChange  | `() => void`                     |               | A handler function that receives the value of the change event. |
+| onSubmit  | `(value: string) => void`        |               | A handler function that receives the value of the submit event. |
 | position  | `'center' \| 'bottom'`           | `center`      | Position of modal on display                                    |
 | size      | `'large' \| 'medium' \| 'small'` | `large`       | Size of modal on display                                        |
 | title     | `string`                         |               | Title of modal header                                           |
 | value     | `string`                         |               | Value received from user                                        |
-| onChange  | `() => void`                     |               | A handler function that receives the value of the change event. |
-| onSubmit  | `(value: string) => void`        |               | A handler function that receives the value of the submit event. |
+| confirmButtonLabel   | `string`                         |               | Caption of confirm button        |
+| cancelButtonLabel   | `string`                         |               | Caption of cancel button        |
+
 
 ### use example
 
@@ -181,7 +202,10 @@ const OtherModal = () => {
   const [value, setValue] = useState('');
   const handleToggle = () => setIsOpen((prev) => !prev);
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => setValue(e.target.value);
-  const handleSubmit = (value: string) => console.log(value);
+  const handleSubmit = (value: string) => {
+    console.log(value);
+    handleToggle();
+  }
 
   return (
     <PromptModal
@@ -193,6 +217,8 @@ const OtherModal = () => {
       value={value}
       onChange={handleChange}
       onSubmit={handleSubmit}
+      confirmButtonLabel="확인"
+      confirmButtonLabel="취소"
     />
   );
 };
