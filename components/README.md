@@ -58,6 +58,7 @@ const App = () => {
 - position?(`center` | `bottom`): 모달의 위치를 지정합니다. "bottom", "center" 로 지정 가능하며, 기본값은 "center".
 - isAnimation?(boolean): 모달의 애니메이션 효과를 사용할지 여부를 나타내는 boolean 값입니다. 기본값은 false.
 - duration?(number): 모달 애니메이션의 지속 시간을 지정하는 숫자 값(ms)입니다. isAnimation을 true로 설정하고 duration을 지정하지 않으면 의도하지 않은 애니메이션이 나올 수 있습니다.
+- size(`small` | `medium` | `large`): 모달의 크기를 조절할 수 있습니다.
 
 ### Modal.Dimmed
 - Modal 뒤에 배경으로 깔리는 어두운 영역
