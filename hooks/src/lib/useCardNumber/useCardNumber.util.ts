@@ -65,8 +65,6 @@ export function formattingValue(cardNumbers: string[]): string {
   return filteredCardNumbers.join('-');
 }
 
-export const isFulledCardNumber = (cardNumber: string) => cardNumber.length === 4;
-
 export const isFulledCardNumbers = (cardNumbers: string, cardNumbersLength: number) =>
   cardNumbers.length === cardNumbersLength;
 
