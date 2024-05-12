@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { Modal } from "../lib";
+import { Modal } from "chlwlstlf-modal";
 import { fn } from "@storybook/test";
 
 const meta = {
@@ -43,10 +43,6 @@ const meta = {
     zIndex: {
       control: "number",
       description: "모달 컨테이너의 z-index",
-    },
-    customStyle: {
-      control: "object",
-      description: "모달 컨테이너 인라인 스타일",
     },
     children: {
       description: "모달 컨테이너 내용",

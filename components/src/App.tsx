@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Modal } from "./lib";
+import { Modal } from "chlwlstlf-modal";
 
 const App = () => {
   return (

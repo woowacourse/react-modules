@@ -1,6 +1,6 @@
 # chlwlstlf-modal
 
-텐텐과 버건디가 만든 공용 모달 라이브러리 컴포넌트
+공용 모달 라이브러리 컴포넌트
 
 ## - 설치
 
@@ -59,21 +59,34 @@ export default App;
 
 ## Modal Component Props
 
-| Name        | Datatype            | Default       | Description                            |
-| ----------- | ------------------- | ------------- | -------------------------------------- |
-| isOpen      | boolean             | false         | 모달의 열림 상태                       |
-| onClose     | ()=> void           | none          | 모달이 닫혔을때의 이벤트               |
-| position    | 'center' 'bottom'   | 'center'      | 모달 컨테이너의 위치                   |
-| className   | string              | ''            | 모달 컨테이너의 클래스명               |
-| zIndex      | number              | ''            | 모달 컨테이너의 z-index                |
-| customStyle | React.CSSProperties | ''            | 모달 컨테이너의 커스텀 인라인 스타일링 |
-| portalRoot  | HTMLElement null    | document.body | 스크롤 막고자하는 요소                 |
+| Name       | Datatype                             | Default       | Description                                   |
+| ---------- | ------------------------------------ | ------------- | --------------------------------------------- |
+| isOpen     | boolean                              | false         | 모달의 열림 상태                              |
+| onClose    | ()=> void                            | none          | 모달이 닫혔을 때의 이벤트                     |
+| onConfirm  | ()=> void                            | none          | 확인 버튼 눌렀을 때의 이벤트                  |
+| onCancel   | ()=> void                            | none          | 취소 버튼 눌렀을 때의 이벤트                  |
+| onSubmit   | ()=> void                            | none          | 프롬프트 작성 후 확인 버튼 눌렀을 때의 이벤트 |
+| type       | 'alert' 'confirm' 'prompt' 'default' | 'default'     | 모달 컨테이너의 타입                          |
+| size       | 'small' 'medium' 'large'             | 'medium'      | 모달 컨테이너의 크기                          |
+| position   | 'center' 'bottom'                    | 'center'      | 모달 컨테이너의 위치                          |
+| className  | string                               | ''            | 모달 컨테이너의 클래스명                      |
+| zIndex     | number                               | ''            | 모달 컨테이너의 z-index                       |
+| portalRoot | HTMLElement null                     | document.body | 스크롤 막고자하는 요소                        |
+
+## Modal Component Combinations
+
+| Name            | Description                                |
+| --------------- | ------------------------------------------ |
+| Title           | 모달 제목                                  |
+| Message         | 모달 내용                                  |
+| CloseButton     | x 아이콘 버튼                              |
+| Button          | 모달에 쓰이는 버튼                         |
+| Input           | 모달에 쓰이는 인풋                         |
+| ButtonContainer | 타입에 따라 보여줄 버튼을 감싸는 container |
 
 ## Author
 
 - [tenten github](https://github.com/chlwlstlf)
-
-- [brgndyy github](https://github.com/brgndyy)
 
 ## License
 
