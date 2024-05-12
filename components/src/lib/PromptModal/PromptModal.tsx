@@ -13,8 +13,8 @@ export interface PromptModalProps extends ModalProps {
   };
   submitButtonText?: string;
   cancelButtonText?: string;
-  onSubmit: (value: string) => void;
-  onCancel: () => void;
+  onSubmit: (event: React.MouseEvent<HTMLButtonElement>, value: string) => void;
+  onCancel: (event: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
 export default function PromptModal({
@@ -36,8 +36,8 @@ export default function PromptModal({
 }: PromptModalProps) {
   const [inputValue, setInputValue] = useState('');
 
-  const handleClickSubmitButton = () => {
-    onSubmit(inputValue);
+  const handleClickSubmitButton = (event: React.MouseEvent<HTMLButtonElement>) => {
+    onSubmit(event, inputValue);
   };
 
   const submitButton: ButtonInterface = {

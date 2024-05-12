@@ -4,7 +4,7 @@ import { ButtonInterface } from '../types/ModalTypes';
 export interface AlertModalProps extends ModalProps {
   description: string;
   confirmButtonText?: string;
-  onConfirm: () => void;
+  onConfirm: (event: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
 export default function AlertModal({

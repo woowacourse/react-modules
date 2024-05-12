@@ -5,8 +5,8 @@ export interface ConfirmModalProps extends ModalProps {
   description: string;
   confirmButtonText?: string;
   cancelButtonText?: string;
-  onConfirm: () => void;
-  onCancel: () => void;
+  onConfirm: (event: React.MouseEvent<HTMLButtonElement>) => void;
+  onCancel: (event: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
 export default function ConfirmModal({

@@ -7,5 +7,5 @@ export type ButtonsPositionType = 'row' | 'row-reverse' | 'column';
 export interface ButtonInterface {
   text: string;
   style: ButtonStyleType;
-  onClick: () => void;
+  onClick: (event: React.MouseEvent<HTMLButtonElement>) => void;
 }
