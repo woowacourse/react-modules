@@ -1,7 +1,7 @@
 {
   "name": "soosoo-react-payments-hooks",
-  "version": "0.0.1",
-  "description": "react-payments hooks",
+  "version": "0.0.2",
+  "description": "level2 react-payments hooks",
   "type": "module",
   "types": "dist/index.d.ts",
   "main": "dist/index.js",
@@ -19,7 +19,7 @@
   "dependencies": {
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "soosoo-react-payments-hooks": "^0.0.1"
+    "soosoo-react-payments-hooks": "^0.0.2"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^6.4.2",
