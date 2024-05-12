@@ -78,3 +78,15 @@ export const ModalHeader = styled.div`
     text-overflow: ellipsis;
   }
 `;
+
+export const ModalContent = styled.div`
+  flex: 1;
+  overflow-y: auto;
+`;
+
+export const ModalButtonGroup = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 16px;
+`;
