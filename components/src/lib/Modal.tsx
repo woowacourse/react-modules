@@ -7,6 +7,7 @@ import ModalCloseButton from "./ModalCloseButton";
 import Container from "./Container";
 import useAnimation from "./hooks/useAnimation";
 import styles from "./container.module.css";
+import ModalAlert from "./ModalAlert";
 
 export default function Modal({
   children,
@@ -21,7 +22,7 @@ export default function Modal({
   unMountAnimation = "",
   position = "center",
   animationTime = 300,
-  size = "",
+  size = "custom",
 }: PropsWithChildren<Partial<ModalContextType>>) {
   const { open, closing } = useAnimation({
     unMountEvent: onClose,
@@ -61,3 +62,4 @@ Modal.Portal = ModalPortal;
 Modal.Backdrop = ModalBackdrop;
 Modal.Container = Container;
 Modal.CloseButton = ModalCloseButton;
+Modal.Alert = ModalAlert;
