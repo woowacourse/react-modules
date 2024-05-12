@@ -25,28 +25,27 @@ export default function useCardNumber(
 ): CardNumberValidationResult {
   const [cardNumber, setCardNumber] = useState(initialValues);
 
-  const [cardGlobalBrand, setCardGlobalBrand] = useState<CardGlobalBrand>();
-  const [validCardNumberLength, setValidCardNumberLength] = useState<number>();
-
   const [validationResult, setValidationResult] = useState<ValidationResult>();
 
-  const formattedCardNumber = useMemo(
-    () => cardGlobalBrand && formatCardNumber(cardNumber, cardGlobalBrand),
-    [cardNumber, cardGlobalBrand]
-  );
-
-  const handleUpdateCardNumber = (cardNumber: string) => {
-    try {
+  const { cardGlobalBrand, validCardNumberLength, formattedCardNumber } =
+    useMemo(() => {
       const cardGlobalBrand = identifyCardGlobalBrand(cardNumber);
       const validCardNumberLength =
         calculateValidCardNumberLength(cardGlobalBrand);
+      const formattedCardNumber = formatCardNumber(cardNumber, cardGlobalBrand);
 
+      return { cardGlobalBrand, validCardNumberLength, formattedCardNumber };
+    }, [cardNumber]);
+
+  const handleUpdateCardNumber = (cardNumber: string) => {
+    const cardGlobalBrand = identifyCardGlobalBrand(cardNumber);
+    const validCardNumberLength =
+      calculateValidCardNumberLength(cardGlobalBrand);
+
+    try {
       validateBeforeUpdate(cardNumber, validCardNumberLength);
 
       setCardNumber(cardNumber);
-      setCardGlobalBrand(cardGlobalBrand);
-      setValidCardNumberLength(validCardNumberLength);
-
       setValidationResult({ isValid: true });
 
       validateAfterUpdate(cardNumber, validCardNumberLength);
