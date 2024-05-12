@@ -1,3 +1,5 @@
+import { CardChecker } from '../type';
+
 const validateVisa = (cardNumber: string) => {
   return cardNumber.startsWith('4');
 };
@@ -29,4 +31,20 @@ const isValidPrefix = (value: string, start: number, end: number) => {
   );
 };
 
-export { validateVisa, validateMaster, validateDiners, validateAMEX, validateUnion };
+const validateCardNumberLength = (cardBrandInfo: CardChecker) => {
+  const { name, validMaxLength } = cardBrandInfo;
+
+  return {
+    isValid: false,
+    errorMessage: `${name}카드는 ${validMaxLength}자리로 입력해주세요.`,
+  };
+};
+
+export {
+  validateVisa,
+  validateMaster,
+  validateDiners,
+  validateAMEX,
+  validateUnion,
+  validateCardNumberLength,
+};

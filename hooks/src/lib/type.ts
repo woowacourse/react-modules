@@ -82,3 +82,9 @@ export interface UseSelect {
 export interface UseCardType extends Omit<UseSelect, 'setValue'> {
   errorInfo: ValidationResult;
 }
+
+export interface CardChecker {
+  name: string;
+  format: number[];
+  validMaxLength: number;
+}
