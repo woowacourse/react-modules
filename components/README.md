@@ -6,6 +6,9 @@
 > - Alert Modal
 > - Confirm Modal
 > - Prompt Modal
+>
+
+- [And you can check out the storybook for the modal components at that link!](https://66334cce181d6ad998aac0c9-grppptilvl.chromatic.com/?path=/story/modal-alertmodal--large-centered)
 
 # installation
 
