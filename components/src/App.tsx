@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "./App.css";
 import Modal from "./lib/Modal/Modal";
+
 function App() {
   const [isOpen, setIsOpen] = useState(true);
 
@@ -14,7 +15,7 @@ function App() {
       <Modal isOpen={isOpen}>
         <>
           <Modal.BackDrop onClose={closeModal} />
-          <Modal.Container position="center">
+          <Modal.Container size="large" position="center">
             <>
               <Modal.Header>
                 <>
@@ -23,12 +24,12 @@ function App() {
                 </>
               </Modal.Header>
 
-              <Modal.ButtonContainer direction="column">
+              <Modal.ButtonContainer direction="row" position="right">
                 <>
-                  <Modal.Button color="dark" onClick={closeModal}>
-                    <span>동의하고 저장하기</span>
+                  <Modal.Button color="dark" size="small" onClick={closeModal}>
+                    <span>동의</span>
                   </Modal.Button>
-                  <Modal.Button color="white" onClick={closeModal}>
+                  <Modal.Button color="light" size="small" onClick={closeModal}>
                     <span>닫기</span>
                   </Modal.Button>
                 </>
