@@ -12,7 +12,7 @@ npm install hook-simo
 
 ```jsx
 import React from "react";
-import useCardNumber from "your-library-name";
+import useCardNumber from "hook-simo";
 
 const CardNumberForm = () => {
   const {
@@ -62,7 +62,7 @@ export default CardNumberForm;
 
 ```jsx
 import React from "react";
-import useExpiryDate from "your-library-name";
+import useExpiryDate from "hook-simo";
 
 const ExpiryDateForm = () => {
   const {
@@ -116,7 +116,7 @@ export default ExpiryDateForm;
 
 ```jsx
 import React from "react";
-import useCardHolderName from "your-library-name";
+import useCardHolderName from "hook-simo";
 
 const CardHolderNameForm = () => {
   const { holderName, errorState, errorText, handleCardHolderNameChange } =
@@ -158,7 +158,7 @@ export default CardHolderNameForm;
 
 ```jsx
 import React from "react";
-import useCVC from "your-library-name";
+import useCVC from "hook-simo";
 
 const CVCForm = () => {
   const { cvc, errorState, errorText, handleCVCChange } = useCVC();
@@ -200,7 +200,7 @@ export default CVCForm;
 
 ```jsx
 import React from "react";
-import useCardPassword from "your-library-name";
+import useCardPassword from "hook-simo";
 
 const CardPasswordForm = () => {
   const { cardPassword, errorState, errorText, handleCardPasswordChange } =
