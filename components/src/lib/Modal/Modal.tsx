@@ -4,6 +4,7 @@ import React, { useEffect, useRef } from 'react';
 import ModalContent from './ModalContent';
 import ModalFooter from './ModalFooter/ModalFooter';
 import ModalHeader from './ModalHeader';
+import { ModalZIndex } from './constants';
 
 export type ModalPositionType = 'center' | 'bottom';
 export type ModalSizeType = 'small' | 'medium' | 'large';
@@ -12,7 +13,7 @@ export interface ModalProps {
   isOpen: boolean;
   position?: ModalPositionType;
   size?: ModalSizeType;
-  zIndex?: number;
+  zIndex?: ModalZIndex | number;
   children: React.ReactNode;
   onClose: () => void;
 }
@@ -21,7 +22,7 @@ function Modal({
   isOpen,
   position = 'center',
   size = 'medium',
-  zIndex = 999,
+  zIndex = ModalZIndex.High,
   children,
   onClose,
 }: ModalProps) {
