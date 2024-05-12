@@ -16,13 +16,39 @@ export interface ModalProps {
   closeModal: () => void;
   title?: string;
   description?: string;
+
+  /**
+   * @defaultValue 'large'
+   * @remarks type ModalSize = "small" | "medium" | "large"
+   */
   size?: ModalSize;
+
+  /**
+   * @defaultValue 'center'
+   * @remarks type ModalPosition = "center" | "bottom"
+   */
   modalPosition?: ModalPosition;
+
   primaryButton?: ButtonProps;
   secondaryButton?: ButtonProps;
+
+  /**
+   * @defaultValue 'row'
+   * @remarks type ButtonPosition = "row" | "column"
+   */
   buttonPosition?: ButtonPosition;
+
+  /**
+   * @defaultValue 'center'
+   * @remarks type ButtonJustifyContent = "center" | "left" | "right"
+   */
   buttonJustifyContent?: ButtonJustifyContent;
+
   primaryColor?: string;
+
+  /**
+   * @defaultValue 'false'
+   */
   showCloseButton?: boolean;
 }
 

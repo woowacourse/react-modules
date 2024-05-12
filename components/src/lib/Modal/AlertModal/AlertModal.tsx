@@ -13,8 +13,23 @@ export interface AlertModalProps {
   title?: string;
   description?: string;
   content?: string;
+
+  /**
+   * @defaultValue 'large'
+   * @remarks type ModalSize = "small" | "medium" | "large"
+   */
   size?: ModalSize;
+
+  /**
+   * @defaultValue 'center'
+   * @remarks type ModalPosition = "center" | "bottom"
+   */
   modalPosition?: ModalPosition;
+
+  /**
+   * @defaultValue 'right'
+   * @remarks  type ButtonJustifyContent = "center" | "left" | "right"
+   */
   buttonJustifyContent?: ButtonJustifyContent;
   primaryColor?: string;
 }

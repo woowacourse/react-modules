@@ -7,9 +7,21 @@ export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 
   labelText?: string;
+
+  /**
+   * @defaultValue 'row'
+   * @remarks type LabelPosition = "row" | "column"
+   */
   labelPosition?: LabelPosition;
+
+  /**
+   * @defaultValue ''
+   */
   placeholder?: string;
 
+  /**
+   * @defaultValue '#333333'
+   */
   primaryColor?: string;
 }
 
@@ -18,13 +30,13 @@ export type LabelPosition = 'row' | 'column';
 const Input = ({
   value,
   onChange,
-  labelText = '',
+  labelText,
   labelPosition = 'row',
   placeholder = '',
   primaryColor = '#333333',
   ...props
 }: InputProps) => {
-  return (
+  return labelText ? (
     <Styled.Label labelPosition={labelPosition}>
       {labelText}
       <Styled.Input
@@ -35,6 +47,14 @@ const Input = ({
         {...props}
       />
     </Styled.Label>
+  ) : (
+    <Styled.Input
+      value={value}
+      onChange={onChange}
+      placeholder={placeholder}
+      primaryColor={primaryColor}
+      {...props}
+    />
   );
 };
 
