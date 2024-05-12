@@ -3,8 +3,6 @@ import AlertModal from "./AlertModal";
 import ConfirmModal from "./ConfirmModal";
 import PromptModal from "./PromptModal";
 
-import { PromptModalProps } from "./PromptModal";
-
 import { StoryObj, Meta } from "@storybook/react";
 import { fn } from "@storybook/test";
 
@@ -377,66 +375,68 @@ export const 확인_모달: Story = {
   },
 };
 
-export const 입력_모달: Story<PromptModalProps> = (args: PromptModalProps) => {
-  return (
-    <PromptModal
-      isOpen={args.isOpen}
-      onClose={args.onClose}
-      labelText={["쿠폰 번호를 입력해 주세요."]}
-      htmlFor={["coupon"]}
-      inputType={["text"]}
-      size={args.size}
-      position={args.position}
-    />
-  );
-};
+export const 입력_모달: Story = {
+  args: {
+    isOpen: true,
+    size: "M",
+    position: "center",
+    onClose: fn(),
+  },
 
-입력_모달.args = {
-  isOpen: true,
-  size: "M",
-  position: "center",
-  onClose: fn(),
-};
-
-입력_모달.parameters = {
-  docs: {
-    description: {
-      story: "M 사이즈 PromptModal",
+  parameters: {
+    docs: {
+      description: {
+        story: "M 사이즈 PromptModal",
+      },
     },
+  },
+
+  render: (args) => {
+    return (
+      <PromptModal
+        isOpen={args.isOpen}
+        onClose={args.onClose}
+        labelText={["쿠폰 번호를 입력해 주세요."]}
+        htmlFor={["coupon"]}
+        inputType={["text"]}
+        size={args.size}
+        position={args.position}
+      />
+    );
   },
 };
 
-export const 입력이_3개인_모달: Story<PromptModalProps> = (
-  args: PromptModalProps
-) => {
-  return (
-    <PromptModal
-      isOpen={args.isOpen}
-      onClose={args.onClose}
-      labelText={[
-        "아이디를 입력해 주세요.",
-        "비밀번호를 입력해 주세요.",
-        "비밀번호를 확인해주세요.",
-      ]}
-      htmlFor={["id", "pwd", "re-pwd"]}
-      inputType={["text", "password", "password"]}
-      size={args.size}
-      position={args.position}
-    />
-  );
-};
+export const 입력이_3개인_모달: Story = {
+  args: {
+    isOpen: true,
+    size: "M",
+    position: "center",
+    onClose: fn(),
+  },
 
-입력이_3개인_모달.args = {
-  isOpen: true,
-  size: "M",
-  position: "center",
-  onClose: fn(),
-};
-
-입력이_3개인_모달.parameters = {
-  docs: {
-    description: {
-      story: "Input 필드가 3개인 PromptModal",
+  parameters: {
+    docs: {
+      description: {
+        story: "Input 필드가 3개인 PromptModal",
+      },
     },
+  },
+
+  render: (args) => {
+    return (
+      <PromptModal
+        isOpen={args.isOpen}
+        onClose={args.onClose}
+        labelText={[
+          "아이디를 입력해 주세요.",
+          "비밀번호를 입력해 주세요.",
+          "비밀번호를 확인해주세요.",
+        ]}
+        htmlFor={["id", "pwd", "re-pwd"]}
+        inputType={["text", "password", "password"]}
+        size={args.size}
+        position={args.position}
+      />
+    );
   },
 };
