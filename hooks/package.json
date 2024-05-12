@@ -1,7 +1,7 @@
 {
-  "name": "hook-simo-harry",
-  "version": "0.0.3",
-  "description": "card add form custom hook made by harry & simo",
+  "name": "hook-simo",
+  "version": "0.0.2",
+  "description": "card add form custom hook made by simo",
   "type": "module",
   "types": "dist/index.d.ts",
   "main": "dist/index.js",
@@ -17,6 +17,7 @@
     "test": "jest"
   },
   "dependencies": {
+    "hook-simo": "^0.0.1",
     "hook-simo-harry": "0.0.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"

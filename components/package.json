@@ -1,7 +1,7 @@
 {
-  "name": "harrysimodal",
+  "name": "simodal",
   "version": "0.0.1",
-  "description": "modal of harrysimo",
+  "description": "modal of simo",
   "type": "module",
   "types": "dist/index.d.ts",
   "main": "dist/index.js",
@@ -21,7 +21,7 @@
     "harrysimodal": "^0.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "styled-components": "6.1.8",
+    "styled-components": "^6.1.11",
     "styled-reset": "^4.5.2"
   },
   "devDependencies": {
