@@ -1,10 +1,10 @@
 import { ReactNode } from 'react';
 import styled from 'styled-components';
 
-import { BASIC_BACKGROUND_COLOR, BASIC_BORDER_RADIUS, BASIC_PADDING } from '../../constants/modal';
-import { ModalContainerContext } from '../../contexts';
-import { useModalContext } from '../../hooks';
-import { Background, ModalPosition } from '../../types/modal';
+import { BASIC_BACKGROUND_COLOR, BASIC_BORDER_RADIUS, BASIC_PADDING } from '@/lib/constants/modal';
+import { ModalContainerContext } from '@/lib/contexts';
+import { useModalContext } from '@/lib/hooks';
+import { Background, ModalPosition } from '@/lib/types/modal';
 
 export interface ModalContentsStyleProps {
   $borderRadius: string | undefined;

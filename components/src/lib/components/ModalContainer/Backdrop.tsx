@@ -1,9 +1,9 @@
 import { MouseEvent, useEffect } from 'react';
 import styled from 'styled-components';
 
-import { BASIC_BACKGROUND_COLOR } from '../../constants/modal';
-import { ModalContainerContext } from '../../contexts';
-import { useModalContext } from '../../hooks';
+import { BASIC_BACKGROUND_COLOR } from '@/lib/constants/modal';
+import { ModalContainerContext } from '@/lib/contexts';
+import { useModalContext } from '@/lib/hooks';
 
 const ModalBackdrop = styled.div<{ $backgroundColor: string | undefined }>`
   position: fixed;

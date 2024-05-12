@@ -1,13 +1,13 @@
 import styled from 'styled-components';
 
-import '../../styles/reset.css';
-import { ModalContainerContext } from '../../contexts';
-import { ModalContainerProps } from '../../types/modal';
-import ModalPortal from '../ModalPortal';
-
 import Backdrop from './Backdrop';
 import Contents from './Contents';
-import ModalButton from './ModalButton';
+import ModalCloseButtonWrapper from './ModalCloseButtonWrapper';
+
+import ModalPortal from '@/lib/components/ModalPortal';
+import { ModalContainerContext } from '@/lib/contexts';
+import { ModalContainerProps } from '@/lib/types/modal';
+import '@/lib/styles/reset.css';
 
 const ModalWrapper = styled.div`
   position: fixed;
@@ -32,7 +32,7 @@ function ModalContainer(props: ModalContainerProps) {
 }
 
 ModalContainer.Backdrop = Backdrop;
-ModalContainer.Button = ModalButton;
+ModalContainer.CloseButtonWrapper = ModalCloseButtonWrapper;
 ModalContainer.Contents = Contents;
 
 export default ModalContainer;

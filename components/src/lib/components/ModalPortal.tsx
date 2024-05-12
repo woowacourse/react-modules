@@ -1,7 +1,8 @@
 import { ReactNode, useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
-import '../styles/reset.css';
 import styled from 'styled-components';
+
+import '@/lib/styles/reset.css';
 
 export interface ModalPortalProps {
   children: ReactNode;

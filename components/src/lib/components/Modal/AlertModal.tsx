@@ -1,8 +1,8 @@
-import { BASIC_BUTTON_STYLE } from '../../constants/modal';
-import { AlertModalProps } from '../../types/modal';
-import ButtonContainer from '../ButtonContainer';
-
 import CenterModal from './CenterModal';
+
+import ButtonContainer from '@/lib/components/ButtonContainer';
+import { BASIC_BUTTON_STYLE } from '@/lib/constants/modal';
+import { AlertModalProps } from '@/lib/types/modal';
 
 export default function AlertModal(props: AlertModalProps) {
   const {

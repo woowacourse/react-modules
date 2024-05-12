@@ -30,4 +30,9 @@ export default defineConfig({
       entryRoot: path.resolve(__dirname, 'src/lib'),
     }),
   ],
+  resolve: {
+    alias: {
+      '@': path.resolve(__dirname, 'src'),
+    },
+  },
 });

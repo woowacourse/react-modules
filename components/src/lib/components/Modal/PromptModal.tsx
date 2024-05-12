@@ -1,11 +1,10 @@
-import { useId } from 'react';
+import React, { useId } from 'react';
 import styled from 'styled-components';
 
-import { PromptModalProps } from '../../types/modal';
-import ButtonContainer from '../ButtonContainer';
-import ConfirmAndCancelButtonGroup from '../ConfirmAndCancelButtonGroup';
-
 import CenterModal from './CenterModal';
+
+import ButtonContainer from '@/lib/components/ButtonContainer';
+import { PromptModalProps } from '@/lib/types/modal';
 
 const InputLabel = styled.label`
   position: absolute;

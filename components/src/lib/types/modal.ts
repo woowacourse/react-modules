@@ -1,4 +1,4 @@
-import React, { CSSProperties, Dispatch, MouseEvent, ReactNode, SetStateAction } from 'react';
+import { CSSProperties, Dispatch, ReactElement, ReactNode, SetStateAction } from 'react';
 
 export type ModalType = 'center' | 'bottom' | 'toast';
 

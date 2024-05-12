@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
-import { ModalCommonProps } from '../../types/modal';
-import ModalContainer from '../ModalContainer';
+import ModalContainer from '@/lib/components/ModalContainer';
+import { ModalCommonProps } from '@/lib/types/modal';
 
 const CenterContentsWrapper = styled.div`
   display: flex;

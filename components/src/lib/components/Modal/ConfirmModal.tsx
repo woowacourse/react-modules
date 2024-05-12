@@ -1,8 +1,7 @@
-import { ConfirmModalProps } from '../../types/modal';
-import ButtonContainer from '../ButtonContainer';
-import ConfirmAndCancelButtonGroup from '../ConfirmAndCancelButtonGroup';
-
 import CenterModal from './CenterModal';
+
+import ButtonContainer from '@/lib/components/ButtonContainer';
+import { ConfirmModalProps } from '@/lib/types/modal';
 
 export default function ConfirmModal(props: ConfirmModalProps) {
   const {

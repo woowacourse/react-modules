@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { ButtonContainerJustifyContent } from '../types/modal';
+import { ButtonContainerJustifyContent } from '@/lib/types/modal';
 
 export interface BottomContainerStyleProps {
   $buttonContainerJustifyContent: ButtonContainerJustifyContent;
