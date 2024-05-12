@@ -10,6 +10,7 @@ export interface PromptModalProps extends ModalProps {
     name: string;
     label?: string;
     placeholder?: string;
+    initialValue?: string;
   };
   submitButtonText?: string;
   cancelButtonText?: string;
@@ -34,7 +35,7 @@ export default function PromptModal({
   onCancel,
   onClose,
 }: PromptModalProps) {
-  const [inputValue, setInputValue] = useState('');
+  const [inputValue, setInputValue] = useState(inputField.initialValue || '');
 
   const handleClickSubmitButton = (event: React.MouseEvent<HTMLButtonElement>) => {
     onSubmit(event, inputValue);
@@ -71,6 +72,7 @@ export default function PromptModal({
       )}
       <Styled.Input
         name={inputField.name}
+        defaultValue={inputField.initialValue}
         placeholder={inputField.placeholder}
         onChange={(event: React.ChangeEvent<HTMLInputElement>) => setInputValue(event.target.value)}
       />

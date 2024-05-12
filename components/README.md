@@ -341,12 +341,14 @@ function App() {
   name: 'promptCouponInput'
   label: '쿠폰 번호를 입력해주세요.',
   placeholder: '쿠폰 번호',
+  initialValue: '1234',
 },
 ```
 
 - `name`(필수) : 해당 입력 필드의 `<input>` 요소에 부여할 이름(name)을 정합니다.
 - `label`(옵션) : 입력 필드 상단에 표기할 설명문을 정합니다.
 - `placeholder`(옵션) : 해당 입력 필드의 `<input>` 요소에 위치시킬 예시값(placeholder)을 정합니다.
+- `initialValue`(옵션) : 해당 입력 필드에 미리 입력해놓을 초깃값(defaultValue)을 정합니다. 이 값은 모달이 새로 열릴 때마다 입력 필드에 적용되어 나타납니다.
 
 ### 사용 예시
 
