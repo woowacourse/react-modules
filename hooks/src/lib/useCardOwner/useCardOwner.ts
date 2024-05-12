@@ -21,7 +21,6 @@ const useCardOwner = (initialValue = "") => {
 
   const cardOwner = useInput({ initialValue, inputValidations, preventInputValidations });
   const isCardOwnerValid = cardOwner.value !== "" && !cardOwner.error.state;
-  console.log("cc", isCardOwnerValid);
 
   return { cardOwner, isCardOwnerValid };
 };
