@@ -43,13 +43,13 @@ npm install @seongjinme/react-modal
 
 ### 선택 속성
 
-- `size` : 모달의 폭(width) 길이를 `small`, `medium`(기본값), `large`의 3단계로 정합니다.
+- `size` : 모달의 폭(width) 길이를 `small`, `medium`(기본값), `large`의 3단계로 정합니다. 이 가로폭은 **모달의 위치(`position`)가 화면 정중앙(`center`)으로 지정된 경우에만 적용**됩니다.
   - `small` : 기본 가로폭이 `320px`로 설정됩니다.
   - `medium` : 기본 가로폭이 `480px`로 설정됩니다.
   - `large` : 기본 가로폭이 `600px`로 설정됩니다.
 - `position` : 모달의 위치를 `center`(기본값) 또는 `bottom`으로 정합니다.
   - `'center'` : 모달을 화면의 정중앙에 위치시킵니다.
-  - `'bottom'` : 모달을 화면 하단에 고정시킵니다.
+  - `'bottom'` : 모달을 화면 하단에 고정시킵니다. **화면 하단에 고정된 모달은 `size` 속성의 설정값과 무관하게 가로폭이 화면에 꽉 차도록 조정**됩니다.
 - `hasCloseButton` : 모달의 우측 상단에 '닫기(X)' 버튼 노출 여부를 `true`(기본값) 또는 `false`로 정합니다.
 - `isClosableOnClickBackdrop` : 모달의 배경 영역 클릭 시 `onClose` 콜백 함수의 실행 여부를 `true`(기본값) 또는 `false`로 정합니다.
 - `zIndex` : 모달의 배경 영역(`backdrop`; 기본값 `999`)과 모달 영역(`modal`; 기본값 `1000`)의 z-index 값을 정합니다.
@@ -153,14 +153,14 @@ function App() {
 
 ### 선택 속성
 
-- `size` : 모달의 폭(width) 길이를 `small`, `medium`(기본값), `large`의 3단계로 정합니다.
+- `size` : 모달의 폭(width) 길이를 `small`, `medium`(기본값), `large`의 3단계로 정합니다. 이 가로폭은 **모달의 위치(`position`)가 화면 정중앙(`center`)으로 지정된 경우에만 적용**됩니다.
   - `small` : 기본 가로폭이 `320px`로 설정됩니다.
   - `medium` : 기본 가로폭이 `480px`로 설정됩니다.
   - `large` : 기본 가로폭이 `600px`로 설정됩니다.
 - `confirmButtonText` : "확인" 버튼에 들어갈 텍스트를 설정합니다. 기본값은 `확인`입니다.
 - `position` : 모달의 위치를 `center`(기본값) 또는 `bottom`으로 정합니다.
   - `'center'` : 모달을 화면의 정중앙에 위치시킵니다.
-  - `'bottom'` : 모달을 화면 하단에 고정시킵니다.
+  - `'bottom'` : 모달을 화면 하단에 고정시킵니다. **화면 하단에 고정된 모달은 `size` 속성의 설정값과 무관하게 가로폭이 화면에 꽉 차도록 조정**됩니다.
 - `hasCloseButton` : 모달의 우측 상단에 '닫기(X)' 버튼 노출 여부를 `true`(기본값) 또는 `false`로 정합니다.
 - `isClosableOnClickBackdrop` : 모달의 배경 영역 클릭 시 `onClose` 콜백 함수의 실행 여부를 `true`(기본값) 또는 `false`로 정합니다.
 - `zIndex` : 모달의 배경 영역(`backdrop`; 기본값 `999`)과 모달 영역(`modal`; 기본값 `1000`)의 z-index 값을 정합니다.
@@ -230,7 +230,7 @@ function App() {
 
 ### 선택 속성
 
-- `size` : 모달의 폭(width) 길이를 `small`, `medium`(기본값), `large`의 3단계로 정합니다.
+- `size` : 모달의 폭(width) 길이를 `small`, `medium`(기본값), `large`의 3단계로 정합니다. 이 가로폭은 **모달의 위치(`position`)가 화면 정중앙(`center`)으로 지정된 경우에만 적용**됩니다.
   - `small` : 기본 가로폭이 `320px`로 설정됩니다.
   - `medium` : 기본 가로폭이 `480px`로 설정됩니다.
   - `large` : 기본 가로폭이 `600px`로 설정됩니다.
@@ -238,7 +238,7 @@ function App() {
 - `cancelButtonText` : "취소" 버튼에 들어갈 텍스트를 설정합니다. 기본값은 `취소`입니다.
 - `position` : 모달의 위치를 `center`(기본값) 또는 `bottom`으로 정합니다.
   - `'center'` : 모달을 화면의 정중앙에 위치시킵니다.
-  - `'bottom'` : 모달을 화면 하단에 고정시킵니다.
+  - `'bottom'` : 모달을 화면 하단에 고정시킵니다. **화면 하단에 고정된 모달은 `size` 속성의 설정값과 무관하게 가로폭이 화면에 꽉 차도록 조정**됩니다.
 - `hasCloseButton` : 모달의 우측 상단에 '닫기(X)' 버튼 노출 여부를 `true`(기본값) 또는 `false`로 정합니다.
 - `isClosableOnClickBackdrop` : 모달의 배경 영역 클릭 시 `onClose` 콜백 함수의 실행 여부를 `true`(기본값) 또는 `false`로 정합니다.
 - `zIndex` : 모달의 배경 영역(`backdrop`; 기본값 `999`)과 모달 영역(`modal`; 기본값 `1000`)의 z-index 값을 정합니다.
@@ -310,7 +310,7 @@ function App() {
 
 ### 선택 속성
 
-- `size` : 모달의 폭(width) 길이를 `small`, `medium`(기본값), `large`의 3단계로 정합니다.
+- `size` : 모달의 폭(width) 길이를 `small`, `medium`(기본값), `large`의 3단계로 정합니다. 이 가로폭은 **모달의 위치(`position`)가 화면 정중앙(`center`)으로 지정된 경우에만 적용**됩니다.
   - `small` : 기본 가로폭이 `320px`로 설정됩니다.
   - `medium` : 기본 가로폭이 `480px`로 설정됩니다.
   - `large` : 기본 가로폭이 `600px`로 설정됩니다.
@@ -318,7 +318,7 @@ function App() {
 - `cancelButtonText` : "취소" 버튼에 들어갈 텍스트를 설정합니다. 기본값은 `취소`입니다.
 - `position` : 모달의 위치를 `center`(기본값) 또는 `bottom`으로 정합니다.
   - `'center'` : 모달을 화면의 정중앙에 위치시킵니다.
-  - `'bottom'` : 모달을 화면 하단에 고정시킵니다.
+  - `'bottom'` : 모달을 화면 하단에 고정시킵니다. **화면 하단에 고정된 모달은 `size` 속성의 설정값과 무관하게 가로폭이 화면에 꽉 차도록 조정**됩니다.
 - `hasCloseButton` : 모달의 우측 상단에 '닫기(X)' 버튼 노출 여부를 `true`(기본값) 또는 `false`로 정합니다.
 - `isClosableOnClickBackdrop` : 모달의 배경 영역 클릭 시 `onClose` 콜백 함수의 실행 여부를 `true`(기본값) 또는 `false`로 정합니다.
 - `zIndex` : 모달의 배경 영역(`backdrop`; 기본값 `999`)과 모달 영역(`modal`; 기본값 `1000`)의 z-index 값을 정합니다.
