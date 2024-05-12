@@ -6,27 +6,24 @@ import { CARD_BRAND } from './useCardNumber.constant';
  * @returns {typeof CARD_BRAND[keyof typeof CARD_BRAND]} - 카드 브랜드의 정보입니다.
  */
 export function checkCardBrand(cardNumbers: string): (typeof CARD_BRAND)[keyof typeof CARD_BRAND] {
-  if (cardNumbers[0] === CARD_BRAND.visa.signature) {
+  const firstDigit = Number(cardNumbers[0]);
+  const firstTwoDigits = Number(cardNumbers.slice(0, 2));
+  const firstThreeDigits = Number(cardNumbers.slice(0, 3));
+  const firstFourDigits = Number(cardNumbers.slice(0, 4));
+  const firstSixDigits = Number(cardNumbers.slice(0, 6));
+
+  if (firstDigit === CARD_BRAND.visa.signature) {
     return CARD_BRAND.visa;
-  } else if (
-    Number(cardNumbers.slice(0, 2)) >= Number(CARD_BRAND.master.signature[0]) &&
-    Number(cardNumbers.slice(0, 2)) <= Number(CARD_BRAND.master.signature[1])
-  ) {
+  } else if (firstTwoDigits >= CARD_BRAND.master.signature[0] && firstTwoDigits <= CARD_BRAND.master.signature[1]) {
     return CARD_BRAND.master;
-  } else if (cardNumbers.slice(0, 2) === CARD_BRAND.diners.signature) {
+  } else if (firstTwoDigits === CARD_BRAND.diners.signature) {
     return CARD_BRAND.diners;
-  } else if (
-    cardNumbers.slice(0, 2) === CARD_BRAND.amex.signature[0] ||
-    cardNumbers.slice(0, 2) === CARD_BRAND.amex.signature[1]
-  ) {
+  } else if (CARD_BRAND.amex.signature[0] === firstTwoDigits || CARD_BRAND.amex.signature[1] === firstTwoDigits) {
     return CARD_BRAND.amex;
   } else if (
-    (Number(cardNumbers.slice(0, 6)) >= Number(CARD_BRAND.union.signature[0][0]) &&
-      Number(cardNumbers.slice(0, 6)) <= Number(CARD_BRAND.union.signature[0][1])) ||
-    (Number(cardNumbers.slice(0, 3)) >= Number(CARD_BRAND.union.signature[1][0]) &&
-      Number(cardNumbers.slice(0, 3)) <= Number(CARD_BRAND.union.signature[1][1])) ||
-    (Number(cardNumbers.slice(0, 4)) >= Number(CARD_BRAND.union.signature[2][0]) &&
-      Number(cardNumbers.slice(0, 4)) <= Number(CARD_BRAND.union.signature[2][1]))
+    (firstSixDigits >= CARD_BRAND.union.signature[0][0] && firstSixDigits <= CARD_BRAND.union.signature[0][1]) ||
+    (firstThreeDigits >= CARD_BRAND.union.signature[1][0] && firstThreeDigits <= CARD_BRAND.union.signature[1][1]) ||
+    (firstFourDigits >= CARD_BRAND.union.signature[2][0] && firstFourDigits <= CARD_BRAND.union.signature[2][1])
   ) {
     return CARD_BRAND.union;
   } else {
