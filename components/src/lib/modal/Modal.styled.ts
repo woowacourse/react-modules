@@ -21,7 +21,7 @@ export const ModalWrapper = styled.section<{
   transform: translateX(-50%);
   margin: 0;
   padding: 0;
-  height: fit-content;
+  max-height: 90%;
   background-color: white;
   box-sizing: border-box;
   border: none;
@@ -30,7 +30,7 @@ export const ModalWrapper = styled.section<{
     switch (size) {
       case "S":
         return `
-          width: 20%;
+          width: 30%;
         `;
       case "M":
         return `
@@ -42,7 +42,6 @@ export const ModalWrapper = styled.section<{
         `;
     }
   }}
-
   ${({ position }) => {
     switch (position) {
       case "top":
@@ -61,7 +60,7 @@ export const ModalWrapper = styled.section<{
           transform: translate(-50%, -50%);
         `;
     }
-  }}
+  }};
 `;
 
 export const ModalHeader = styled.header`
@@ -122,20 +121,22 @@ export const ModalButton = styled.button<{
 export const ModalContent = styled.main`
   margin: 20px 25px;
   text-align: left;
-  min-height: 40%;
+  max-height: 500px;
   overflow-wrap: break-word;
+  overflow-y: auto;
 `;
 
 export const ModalLabel = styled.label`
-  font-size: 1.2rem;
+  font-size: 1rem;
   font-weight: bold;
-  margin-bottom: 10px;
+  margin-bottom: 4px;
   display: block;
 `;
 
 export const ModalInput = styled.input`
   width: 95%;
   padding: 5px 8px;
+  margin-bottom: 10px;
 `;
 
 export const ModalFooter = styled.footer`
