@@ -60,21 +60,21 @@ npm install @seongjinme/react-modal
   - `row-reverse` : 버튼들을 모달 하단 우측에 가로-역방향으로 정렬시킵니다.
   - `column`: 버튼들을 모달 하단에 세로 방향으로 하나씩 정렬시킵니다.
 
-### `footerButtons`를 통해 버튼을 추가하는 방법
+### `buttons` 속성을 통해 버튼을 추가하는 방법
 
-`ModalButtonType` 타입의 데이터로 추가할 버튼 항목과 스타일을 지정합니다. 아래 예시를 참고해주세요.
+`ModalButtonType` 타입의 데이터로 추가할 버튼 항목과 스타일을 지정합니다. 이때 `onClick`으로 넘기는 콜백 함수로 `React.MouseEvent<HTMLButtonElement>` 타입의 이벤트(`event`)를 받아오실 수 있습니다. 아래 예시를 참고해주세요.
 
 ```TypeScript
 [
   {
     text: 'Primary Button Style',
     style: 'primary',
-    onClick: () => alert('Clicked primary button!'),
+    onClick: (event: React.MouseEvent<HTMLButtonElement>) => alert('Clicked primary button!'),
   },
   {
     text: 'Secondary Button Style',
     style: 'secondary',
-    onClick: () => alert('Clicked secondary button!'),
+    onClick: (event: React.MouseEvent<HTMLButtonElement>) => alert('Clicked secondary button!'),
   },
 ]
 ```
@@ -138,7 +138,7 @@ function App() {
   zIndex={{ backdrop: 999, modal: 1000 }}
   backdropOpacity="50%"
   buttonsFlexDirection="column"
-  onConfirm={() => handleConfirm()}
+  onConfirm={(event: React.MouseEvent<HTMLButtonElement>) => handleConfirm(event)}
   onClose={() => setIsOpen(false)}
 />
 ```
@@ -148,7 +148,7 @@ function App() {
 - `isOpen` : 모달을 열고 닫을 수 있는 상태값을 주입합니다. (`true` / `false`)
 - `title` : 모달의 제목입니다.
 - `description` : 모달 본문에 출력시킬 내용을 삽입합니다.
-- `onConfirm` : 모달에서 "확인" 버튼을 눌렀을 때 실행시킬 콜백 함수를 설정합니다.
+- `onConfirm` : 모달에서 "확인" 버튼을 눌렀을 때 실행시킬 콜백 함수를 설정합니다. 이때 `React.MouseEvent<HTMLButtonElement>` 타입의 이벤트(`event`)를 인자로 받아오실 수 있습니다.
 - `onClose` : 모달을 닫을 때 실행시킬 콜백 함수를 설정합니다.
 
 ### 선택 속성
@@ -213,8 +213,8 @@ function App() {
   zIndex={{ backdrop: 999, modal: 1000 }}
   backdropOpacity="50%"
   buttonsFlexDirection="column"
-  onConfirm={() => handleConfirm()}
-  onCancel={() => handleCancel()}
+  onConfirm={(event: React.MouseEvent<HTMLButtonElement>) => handleConfirm(event)}
+  onCancel={(event: React.MouseEvent<HTMLButtonElement>) => handleCancel(event)}
   onClose={() => setIsOpen(false)}
 />
 ```
@@ -224,8 +224,8 @@ function App() {
 - `isOpen` : 모달을 열고 닫을 수 있는 상태값을 주입합니다. (`true` / `false`)
 - `title` : 모달의 제목입니다.
 - `description` : 모달 본문에 출력시킬 내용을 삽입합니다.
-- `onConfirm` : 모달에서 "확인" 버튼을 눌렀을 때 실행시킬 콜백 함수를 설정합니다.
-- `onCancel` : 모달에서 "취소" 버튼을 눌렀을 때 실행시킬 콜백 함수를 설정합니다.
+- `onConfirm` : 모달에서 "확인" 버튼을 눌렀을 때 실행시킬 콜백 함수를 설정합니다. 이때 `React.MouseEvent<HTMLButtonElement>` 타입의 이벤트(`event`)를 인자로 받아오실 수 있습니다.
+- `onCancel` : 모달에서 "취소" 버튼을 눌렀을 때 실행시킬 콜백 함수를 설정합니다. 이때 `React.MouseEvent<HTMLButtonElement>` 타입의 이벤트(`event`)를 인자로 받아오실 수 있습니다.
 - `onClose` : 모달을 닫을 때 실행시킬 콜백 함수를 설정합니다.
 
 ### 선택 속성
@@ -293,8 +293,10 @@ function App() {
   zIndex={{ backdrop: 999, modal: 1000 }}
   backdropOpacity="50%"
   buttonsFlexDirection="column"
-  onSubmit={() => handleSubmit()}
-  onCancel={() => handleCancel()}
+  onSubmit={(event: React.MouseEvent<HTMLButtonElement>, value: string) =>
+    handleSubmit(event, value)
+  }
+  onCancel={(event: React.MouseEvent<HTMLButtonElement>) => handleCancel(event)}
   onClose={() => setIsOpen(false)}
 />
 ```
@@ -304,8 +306,10 @@ function App() {
 - `isOpen` : 모달을 열고 닫을 수 있는 상태값을 주입합니다. (`true` / `false`)
 - `title` : 모달의 제목입니다.
 - `inputField` : 모달 본문 영역에 삽입할 입력 필드를 설정합니다.
-- `onSubmit` : 모달에서 "확인" 버튼을 눌렀을 때 실행시킬 콜백 함수를 설정합니다.
-- `onCancel` : 모달에서 "취소" 버튼을 눌렀을 때 실행시킬 콜백 함수를 설정합니다.
+- `onSubmit` : 모달에서 "확인" 버튼을 눌렀을 때 실행시킬 콜백 함수를 설정합니다. 콜백 함수에는 `event`와 `value`의 두 인자가 함께 설정되어야 합니다.
+  - `event` : `React.MouseEvent<HTMLButtonElement>` 타입의 이벤트입니다. 필요하지 않은 경우에는 언더바(`_`)로 표기하여 넘기실 수 있습니다.
+  - `value` : 모달의 입력 필드에 입력된 값을 `string` 타입으로 받아오는 인자입니다.
+- `onCancel` : 모달에서 "취소" 버튼을 눌렀을 때 실행시킬 콜백 함수를 설정합니다. 이때 `React.MouseEvent<HTMLButtonElement>` 타입의 이벤트(`event`)를 인자로 받아오실 수 있습니다.
 - `onClose` : 모달을 닫을 때 실행시킬 콜백 함수를 설정합니다.
 
 ### 선택 속성
@@ -367,7 +371,7 @@ function App() {
           placeholder: '쿠폰 번호',
         }}
         buttonsFlexDirection="row-reverse"
-        onSubmit={(value: string) => setInputValue(value)}
+        onSubmit={(_, value: string) => setInputValue(value)}
         onCancel={() => setIsOpen(false)}
         onClose={() => setIsOpen(false)}
       />
