@@ -1,10 +1,4 @@
-export type CARD_BRAND_TYPE =
-  | 'VISA'
-  | 'MASTERCARD'
-  | 'AMEX'
-  | 'DINERS'
-  | 'UNIONPAY'
-  | 'NONE';
+export type CardBrandType = keyof typeof CARD_BRAND;
 
 export const CARD_BRAND = {
   VISA: {
