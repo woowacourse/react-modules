@@ -55,7 +55,7 @@ npm install @seongjinme/react-modal
 - `zIndex` : 모달의 배경 영역(`backdrop`; 기본값 `999`)과 모달 영역(`modal`; 기본값 `1000`)의 z-index 값을 정합니다.
 - `backdropOpacity` : 모달의 배경 영역에 부여할 투명도를 정합니다. 기본값은 `50%`입니다.
 - `buttons` : 모달 하단에 배치할 버튼들을 설정합니다. 이 버튼들은 `ModalButtonType` 타입의 배열 형태로 추가 가능합니다.
-- `buttonsFlexDirection` : 모달 하단에 배치되는 버튼들의 정렬 방식을 정합니다.
+- `buttonsFlexDirection` : 모달 하단에 배치되는 버튼들의 정렬 방식을 `row`, `row-reverse`, `column`(기본값) 중 하나로 정합니다.
   - `row` : 버튼들을 모달 하단 우측에 가로-순방향으로 정렬시킵니다.
   - `row-reverse` : 버튼들을 모달 하단 우측에 가로-역방향으로 정렬시킵니다.
   - `column`: 버튼들을 모달 하단에 세로 방향으로 하나씩 정렬시킵니다.
@@ -165,7 +165,7 @@ function App() {
 - `isClosableOnClickBackdrop` : 모달의 배경 영역 클릭 시 `onClose` 콜백 함수의 실행 여부를 `true`(기본값) 또는 `false`로 정합니다.
 - `zIndex` : 모달의 배경 영역(`backdrop`; 기본값 `999`)과 모달 영역(`modal`; 기본값 `1000`)의 z-index 값을 정합니다.
 - `backdropOpacity` : 모달의 배경 영역에 부여할 투명도를 정합니다. 기본값은 `50%`입니다.
-- `buttonsFlexDirection` : 모달 하단에 배치되는 버튼들의 정렬 방식을 정합니다.
+- `buttonsFlexDirection` : 모달 하단에 배치되는 버튼들의 정렬 방식을 `row`(기본값), `row-reverse`, `column` 중 하나로 정합니다.
   - `row` : 버튼들을 모달 하단 우측에 가로-순방향으로 정렬시킵니다.
   - `row-reverse` : 버튼들을 모달 하단 우측에 가로-역방향으로 정렬시킵니다.
   - `column`: 버튼들을 모달 하단에 세로 방향으로 하나씩 정렬시킵니다.
@@ -243,7 +243,7 @@ function App() {
 - `isClosableOnClickBackdrop` : 모달의 배경 영역 클릭 시 `onClose` 콜백 함수의 실행 여부를 `true`(기본값) 또는 `false`로 정합니다.
 - `zIndex` : 모달의 배경 영역(`backdrop`; 기본값 `999`)과 모달 영역(`modal`; 기본값 `1000`)의 z-index 값을 정합니다.
 - `backdropOpacity` : 모달의 배경 영역에 부여할 투명도를 정합니다. 기본값은 `50%`입니다.
-- `buttonsFlexDirection` : 모달 하단에 배치되는 버튼들의 정렬 방식을 정합니다.
+- `buttonsFlexDirection` : 모달 하단에 배치되는 버튼들의 정렬 방식을 `row`(기본값), `row-reverse`, `column` 중 하나로 정합니다.
   - `row` : 버튼들을 모달 하단 우측에 가로-순방향으로 정렬시킵니다.
   - `row-reverse` : 버튼들을 모달 하단 우측에 가로-역방향으로 정렬시킵니다.
   - `column`: 버튼들을 모달 하단에 세로 방향으로 하나씩 정렬시킵니다.
@@ -323,7 +323,7 @@ function App() {
 - `isClosableOnClickBackdrop` : 모달의 배경 영역 클릭 시 `onClose` 콜백 함수의 실행 여부를 `true`(기본값) 또는 `false`로 정합니다.
 - `zIndex` : 모달의 배경 영역(`backdrop`; 기본값 `999`)과 모달 영역(`modal`; 기본값 `1000`)의 z-index 값을 정합니다.
 - `backdropOpacity` : 모달의 배경 영역에 부여할 투명도를 정합니다. 기본값은 `50%`입니다.
-- `buttonsFlexDirection` : 모달 하단에 배치되는 버튼들의 정렬 방식을 정합니다.
+- `buttonsFlexDirection` : 모달 하단에 배치되는 버튼들의 정렬 방식을 `row`(기본값), `row-reverse`, `column` 중 하나로 정합니다.
   - `row` : 버튼들을 모달 하단 우측에 가로-순방향으로 정렬시킵니다.
   - `row-reverse` : 버튼들을 모달 하단 우측에 가로-역방향으로 정렬시킵니다.
   - `column`: 버튼들을 모달 하단에 세로 방향으로 하나씩 정렬시킵니다.
