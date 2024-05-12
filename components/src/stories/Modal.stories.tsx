@@ -45,6 +45,13 @@ const meta: Meta<typeof Modal> = {
         type: "text",
       },
     },
+    size: {
+      description: "모달의 크기",
+      control: {
+        type: "radio",
+        options: ["small", "medium", "large"],
+      },
+    },
   },
 };
 
@@ -71,6 +78,7 @@ export const 기본_모달: Story = {
     closeButtonPosition: "top",
     children: "모달 내용",
     isOpen: false,
+    size: "small",
   },
 };
 
@@ -117,5 +125,41 @@ export const 하단에_위치한_모달메_하단_사각형닫기_버튼: Story 
     closeButtonPosition: "bottom",
     children: "이것은 하단에 위치한 모달의 내용입니다.",
     isOpen: true,
+  },
+};
+
+export const 중앙에_위치한_small_모달: Story = {
+  ...Template,
+  args: {
+    modalPosition: "center",
+    title: "중앙에 위치한 모달",
+    closeButtonPosition: "bottom",
+    children: "이것은 중앙에 위치한 small 사이즈 모달의 내용입니다.",
+    isOpen: true,
+    size: "small",
+  },
+};
+
+export const 중앙에_위치한_medium_모달: Story = {
+  ...Template,
+  args: {
+    modalPosition: "center",
+    title: "중앙에 위치한 모달",
+    closeButtonPosition: "bottom",
+    children: "이것은 중앙에 위치한 medium 사이즈 모달의 내용입니다.",
+    isOpen: true,
+    size: "medium",
+  },
+};
+
+export const 중앙에_위치한_large_모달: Story = {
+  ...Template,
+  args: {
+    modalPosition: "center",
+    title: "중앙에 위치한 모달",
+    closeButtonPosition: "bottom",
+    children: "이것은 중앙에 위치한 large사이즈 모달의 내용입니다.",
+    isOpen: true,
+    size: "large",
   },
 };
