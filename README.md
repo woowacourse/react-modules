@@ -15,7 +15,7 @@
 - [x] 모달 event
   - [x] 열기
   - [x] 닫기 - deem 눌러도 닫혀야된다.
-  - [ ] 확인 - optional
+  - [x] 확인 - optional
 - [x] npm으로 배포하기
 - [x] 설치 후 import해서 사용하기
 
@@ -63,19 +63,19 @@
 
 ### Modal component
 
-- [ ] 다양한 모달 종류 대응
-  - [ ] 확인(Alert) 모달 구현
-  - [ ] 확인/취소(Confirm) 모달 구현
-  - [ ] 입력(Prompt) 모달 구현
-- [ ] 모달 크기 옵션 추가
-  - [ ] small, medium, large 크기 옵션 prop 전달받아 모달 크기 조절
+- [x] 다양한 모달 종류 대응
+  - [x] 확인(Alert) 모달 구현
+  - [x] 확인/취소(Confirm) 모달 구현
+  - [x] 입력(Prompt) 모달 구현
+- [x] 모달 크기 옵션 추가
+  - [x] small, medium, large 크기 옵션 prop 전달받아 모달 크기 조절
 
 ### Storybook
 
-- [ ] 확인(Alert) 모달 스토리 작성
-- [ ] 확인/취소(Confirm) 모달 스토리 작성
-- [ ] 입력(Prompt) 모달 스토리 작성
-- [ ] 모달 크기 옵션별 스토리 작성
+- [x] 확인(Alert) 모달 스토리 작성
+- [x] 확인/취소(Confirm) 모달 스토리 작성
+- [x] 입력(Prompt) 모달 스토리 작성
+- [x] 모달 크기 옵션별 스토리 작성
 
 ### Payment custom hook
 
@@ -110,7 +110,7 @@
 
 ### Integrated
 
-- [ ] 구현한 모달과 커스텀 훅 모듈을 이전 프로젝트와 연동하여 직접 사용
+- [x] 구현한 모달과 커스텀 훅 모듈을 이전 프로젝트와 연동하여 직접 사용
 
 </div>
 </details>
