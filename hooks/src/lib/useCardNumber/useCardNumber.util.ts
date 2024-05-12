@@ -1,4 +1,5 @@
 import { GLOBAL_BRANDS_TYPE } from './useCardNumber';
+import GLOBAL_BRANDS from '../constants/globalBrands';
 
 export function getCardGlobalBrand(cardNumber: string): GLOBAL_BRANDS_TYPE {
   if (cardNumber.length >= 1) {
@@ -43,6 +44,17 @@ export function getCardGlobalBrand(cardNumber: string): GLOBAL_BRANDS_TYPE {
   }
 
   return null;
+}
+
+export function getCardFormat(
+  cardGlobalBrand: GLOBAL_BRANDS_TYPE,
+  defaultCardFormat: { allowedLength: number; format: number[] },
+) {
+  const { allowedLength, format } = cardGlobalBrand
+    ? GLOBAL_BRANDS[cardGlobalBrand]
+    : defaultCardFormat;
+
+  return { allowedLength, format };
 }
 
 export function formatCardNumber(cardNumber: string, format: number[]) {

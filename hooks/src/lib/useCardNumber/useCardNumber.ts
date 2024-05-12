@@ -5,11 +5,16 @@ import ValidationResult from '../types/ValidationResult';
 import ErrorMessages from '../types/ErrorMessages';
 import GLOBAL_BRANDS from '../constants/globalBrands';
 
-import { adjustCursorPosition, formatCardNumber, getCardGlobalBrand } from './useCardNumber.util';
+import {
+  adjustCursorPosition,
+  formatCardNumber,
+  getCardGlobalBrand,
+  getCardFormat,
+} from './useCardNumber.util';
 
 interface CardNumberValidationResult {
   cardNumber: string;
-  cardGlobalBrand: string;
+  cardGlobalBrand: string | null;
   cardNumberFormat: number[];
   cardNumberFormatted: string;
   validationResult: ValidationResult;
@@ -20,7 +25,7 @@ interface CardNumberErrorMessages extends ErrorMessages {
   inputLength: (allowedLength: number) => string;
 }
 
-export type GLOBAL_BRANDS_TYPE = keyof typeof GLOBAL_BRANDS;
+export type GLOBAL_BRANDS_TYPE = keyof typeof GLOBAL_BRANDS | null;
 
 export const ALLOWED_MAX_LENGTH = Math.max(
   ...Object.values(GLOBAL_BRANDS).map((brand) => brand.allowedLength),
@@ -28,6 +33,10 @@ export const ALLOWED_MAX_LENGTH = Math.max(
 
 export const DEFAULT_PARAMS = {
   initialValue: '',
+  defaultCardFormat: {
+    allowedLength: 16,
+    format: [4, 4, 4, 4],
+  },
   errorMessages: {
     inputType: '카드 번호는 각 자릿수에 맞춰 숫자로만 입력해 주세요.',
     inputLength: (length: number) =>
@@ -37,14 +46,17 @@ export const DEFAULT_PARAMS = {
 
 export default function useCardNumber(
   initialValue: string = DEFAULT_PARAMS.initialValue,
+  defaultCardFormat: { allowedLength: number; format: number[] } = DEFAULT_PARAMS.defaultCardFormat,
   errorMessages: CardNumberErrorMessages = DEFAULT_PARAMS.errorMessages,
 ): CardNumberValidationResult {
-  const initialCardGlobalBrand = getCardGlobalBrand(initialValue);
-
   const [cardNumber, setCardNumber] = useState(initialValue);
-  const [cardGlobalBrand, setCardGlobalBrand] = useState(initialCardGlobalBrand);
+  const [cardGlobalBrand, setCardGlobalBrand] = useState(getCardGlobalBrand(initialValue));
+
+  const { allowedLength, format } = getCardFormat(cardGlobalBrand, defaultCardFormat);
+  const cardNumberFormatted = formatCardNumber(cardNumber, format);
+
   const [validationResult, setValidationResult] = useState<ValidationResult>(
-    getValidationResult(initialValue, GLOBAL_BRANDS.Default.allowedLength, errorMessages),
+    getValidationResult(initialValue, allowedLength, errorMessages),
   );
 
   const handleUpdateCardNumber = (
@@ -53,7 +65,7 @@ export default function useCardNumber(
   ) => {
     const cardNumber = inputValue.replace(/[^\d]/g, '');
     const cardGlobalBrand = getCardGlobalBrand(cardNumber);
-    const { allowedLength, format } = GLOBAL_BRANDS[cardGlobalBrand];
+    const { allowedLength, format } = getCardFormat(cardGlobalBrand, defaultCardFormat);
 
     if (cardNumber.length > allowedLength) return;
 
@@ -67,8 +79,8 @@ export default function useCardNumber(
   return {
     cardNumber,
     cardGlobalBrand,
-    cardNumberFormat: GLOBAL_BRANDS[cardGlobalBrand].format,
-    cardNumberFormatted: formatCardNumber(cardNumber, GLOBAL_BRANDS[cardGlobalBrand].format),
+    cardNumberFormat: format,
+    cardNumberFormatted,
     validationResult,
     handleUpdateCardNumber,
   };
