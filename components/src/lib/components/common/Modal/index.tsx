@@ -5,6 +5,8 @@ import ModalFooter from './ModalFooter';
 import Button from '../Button';
 import Input from '../Input';
 
+import '../../../styles/index.css';
+
 const Modal = Object.assign(ModalMain, {
   Header: ModalHeader,
   Content: ModalContent,

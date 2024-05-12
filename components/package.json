@@ -1,6 +1,6 @@
 {
   "name": "woowacourse-6th-react-modal-component",
-  "version": "0.0.7",
+  "version": "0.0.12",
   "description": "Simple Modal for custom content",
   "type": "module",
   "types": "dist/index.d.ts",
@@ -48,6 +48,7 @@
     "styled-components": "^6.1.8",
     "typescript": "^5.2.2",
     "vite": "^5.2.0",
-    "vite-plugin-dts": "^3.9.0"
+    "vite-plugin-dts": "^3.9.0",
+    "woowacourse-6th-react-modal-component": "^0.0.12"
   }
 }

@@ -1,5 +1,5 @@
-import styled from 'styled-components';
 import { StyleDirection } from '../../types';
+import styled from 'styled-components';
 
 export interface ModalContentProps {
   message?: string;

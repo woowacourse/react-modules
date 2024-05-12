@@ -1,8 +1,7 @@
 import React, { MouseEvent } from 'react';
-
+import { StyleSize, StylePosition } from '../../types';
 import styled from 'styled-components';
 import { MODAL_SIZE } from '../../constants/styles';
-import { StyleSize, StylePosition } from '../../types';
 
 export interface ModalProps {
   $size?: StyleSize;

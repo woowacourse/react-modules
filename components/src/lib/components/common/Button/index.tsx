@@ -1,6 +1,6 @@
 import React from 'react';
-import styled from 'styled-components';
 import { BUTTON_SIZE } from '../../constants/styles';
+import styled from 'styled-components';
 import { StyleSize } from '../../types';
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {

@@ -1,6 +1,6 @@
+import { StyleDirection, StyleAlign } from '../../types';
 import styled from 'styled-components';
 import { JUSTIFY_CONTENT } from '../../constants/styles';
-import { StyleDirection, StyleAlign } from '../../types';
 
 export interface ModalFooterProps {
   $direction?: StyleDirection;
