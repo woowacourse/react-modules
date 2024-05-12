@@ -1,10 +1,10 @@
-// import "soosoo-react-payments-components/dist/style.css";
-// import { Modal } from "soosoo-react-payments-components";
+import "soosoo-react-modal-component/dist/style.css";
+import { Modal, AlertModal, ConfirmModal, PromptModal } from "soosoo-react-modal-component";
 import React, { useState } from "react";
-import Modal from "./lib/Modal/Modal";
-import AlertModal from "./lib/Modal/AlertModal/AlertModal";
-import ConfirmModal from "./lib/Modal/ConfirmModal/ConfirmModal";
-import PromptModal from "./lib/Modal/PromptModal/PromptModal";
+// import Modal from "./lib/Modal/Modal";
+// import AlertModal from "./lib/Modal/AlertModal/AlertModal";
+// import ConfirmModal from "./lib/Modal/ConfirmModal/ConfirmModal";
+// import PromptModal from "./lib/Modal/PromptModal/PromptModal";
 
 function App() {
   const [isOpen, setIsOpen] = useState(false);
@@ -110,8 +110,8 @@ function App() {
         size="medium"
         title={{ position: "left", content: "🍀호프를 삭제하시겠습니까?🍀" }}
         isOpen={isConfirmModalOpen}
-        onConfirm={() => setIsConfirmModalOpen(false)}
-        onCancel={() => setIsConfirmModalOpen(false)}
+        confirmButton={{ content: "", onConfirm: () => setIsConfirmModalOpen(false) }}
+        cancelButton={{ content: "", onCancel: () => setIsConfirmModalOpen(false) }}
       >
         삭제하면 복구하실 수 없습니다.
       </ConfirmModal>
@@ -121,8 +121,8 @@ function App() {
         size="medium"
         title={{ position: "left", content: "🍀호프 번호를 입력해 주세요.🍀" }}
         isOpen={isPromptModalOpen}
-        onConfirm={() => setIsPromptModalOpen(false)}
-        onCancel={() => setIsPromptModalOpen(false)}
+        confirmButton={{ content: "", onConfirm: () => setIsPromptModalOpen(false) }}
+        cancelButton={{ content: "", onCancel: () => setIsPromptModalOpen(false) }}
       />
     </>
   );
