@@ -89,6 +89,98 @@ export default App;
 </body>
 ```
 
+## Modal Option Contents
+
+There is built-in modal content that you can use right away.
+
+## - Title
+
+A simple Modal Title
+
+```tsx
+<Modal>
+  <Modal.Portal id="modal">
+    <Modal.Backdrop>
+      <Modal.Container className="container">
+        <Modal.Title className="title">Alert Title</Modal.Title>
+      </Modal.Container>
+    </Modal.Backdrop>
+  </Modal.Portal>
+</Modal>
+```
+
+## - Description
+
+A simple Modal Description
+
+```tsx
+<Modal>
+  <Modal.Portal id="modal">
+    <Modal.Backdrop>
+      <Modal.Container>
+        <Modal.Confirm.Description>Modal Description</Modal.Confirm.Description>
+      </Modal.Container>
+    </Modal.Backdrop>
+  </Modal.Portal>
+</Modal>
+```
+
+## - Prompt
+
+Prompt required when receiving user input
+
+```tsx
+const [value, setValue] = useState("");
+
+const handleValue = (e: React.ChangeEvent<HTMLInputElement>) => {
+  setValue(e.target.value);
+};
+
+<Modal>
+  <Modal.Portal id="modal">
+    <Modal.Backdrop>
+      <Modal.Container>
+        <Modal.Title>Coupon Numbers</Modal.Title>
+        <Modal.Prompt
+          value={value}
+          onChange={handleValue}
+          placeholder={"placeholder"}
+        />
+      </Modal.Container>
+    </Modal.Backdrop>
+  </Modal.Portal>
+</Modal>;
+```
+
+## - Confirm Button
+
+```tsx
+const handleOnConfirm = () => {
+  // event when confirm
+  setModalOpen(false);
+};
+
+<Modal
+  isOpen={modalOpen}
+  onClose={handleModalClose}
+  position="center"
+  mountAnimation="modal_enter"
+  unMountAnimation="modal_exit"
+  animationTime={300}
+  size="medium"
+>
+  <Modal.Portal id="modal">
+    <Modal.Backdrop opacity="rgba(255, 255, 255, 0.3)">
+      <Modal.Container className="container">
+        <Modal.ConfirmButton onConfirm={handleOnConfirm}>
+          Confirm
+        </Modal.ConfirmButton>
+      </Modal.Container>
+    </Modal.Backdrop>
+  </Modal.Portal>
+</Modal>;
+```
+
 ## Author
 
 - [brgndyy github](https://github.com/brgndyy)
