@@ -25,19 +25,6 @@ const Description = ({
   return <p className={className}> {children}</p>;
 };
 
-const Button = ({
-  children,
-  className = "",
-}: PropsWithChildren<ContentProps>) => {
-  const { onClose } = useContext(ModalContext);
-
-  return (
-    <button className={className} type="button" onClick={onClose}>
-      {children}
-    </button>
-  );
-};
-
 export default function ModalAlert({
   children,
   className = "",
@@ -65,6 +52,5 @@ export default function ModalAlert({
   ) : null;
 }
 
-ModalAlert.Button = Button;
 ModalAlert.Title = Title;
 ModalAlert.Description = Description;
