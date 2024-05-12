@@ -42,4 +42,6 @@ export const Button = styled.button<{
 
   font-size: 15px;
   font-weight: 700;
+
+  cursor: pointer;
 `;
