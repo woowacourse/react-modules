@@ -37,13 +37,13 @@ const useExpiryDate = (initialValue: ExpiryDateValue) => {
 
     const { value, name } = e.target as HTMLInputElement;
 
-    if (name === "month" && !Validator.checkExpirationMonth(name, value))
+    if (name === "month" && !Validator.checkExpirationMonth(value))
       return setValidationResult({
         isValid: false,
         errorMessage: ERROR_MESSAGE.expiredMonth,
       });
 
-    const newValue = name === "month" ? formattingMonth(value, name) : value;
+    const newValue = name === "month" ? formattingMonth(value) : value;
     updateByNameAndValue({ name, value: newValue });
 
     if (name === "year" && !Validator.checkFillNumber(value, OPTION.expirationDateMaxLength))

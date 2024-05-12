@@ -19,8 +19,8 @@ const ValidatorCondition = {
 };
 
 const Validator = {
-  checkExpirationMonth(name: string, value: string) {
-    const isValidMonth = name === "month" ? ValidatorCondition.checkValidMonth(value) : true;
+  checkExpirationMonth(value: string) {
+    const isValidMonth = ValidatorCondition.checkValidMonth(value);
     if (!isValidMonth) return false;
 
     return true;
