@@ -1,0 +1,112 @@
+.container-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  position: fixed;
+  border-radius: 5px;
+  background-color: #ffffff;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: fit-content;
+  width: 80%;
+}
+
+.container-bottom {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  position: fixed;
+  border-radius: 5px;
+  background-color: #ffffff;
+  bottom: 0;
+  height: fit-content;
+  width: 100%;
+}
+
+.backdrop {
+  position: fixed;
+
+  width: 100vw;
+  height: 100vh;
+
+  background-color: #000000;
+  opacity: 0.4;
+}
+
+.header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin: 15px;
+}
+
+.title-field {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.title {
+  font-size: 18px;
+  text-align: left;
+  font-weight: bold;
+  color: black;
+  width: 100%;
+}
+
+.subtitle {
+  font-size: 12px;
+  font-weight: normal;
+  text-align: left;
+  color: gray;
+  width: 100%;
+}
+
+.button-close {
+  width: 15px;
+  height: 15px;
+
+  position: absolute;
+  right: 15px;
+}
+
+.button-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+
+  width: 95%;
+  margin: 15px 0;
+}
+
+.button-cancel {
+  display: flex;
+  flex-grow: 1;
+  justify-content: center;
+  align-items: center;
+
+  width: 40%;
+  height: 3rem;
+  border-radius: 5px;
+  margin: 0 10px;
+  color: grey;
+  background-color: lightgrey;
+}
+
+.button-confirm {
+  display: flex;
+  flex-grow: 1;
+  justify-content: center;
+  align-items: center;
+  width: 40%;
+  height: 3rem;
+  border-radius: 5px;
+  margin: 0 10px;
+  color: white;
+  background-color: black;
+}

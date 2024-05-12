@@ -1,14 +1,44 @@
-import CancelButton from "./Buttons/CancelButton/CancelButton";
-import CloseButton from "./Buttons/CloseButton/CloseButton";
-import ConfirmButton from "./Buttons/ConfirmButton/ConfirmButton";
-import Container from "./Container/Container";
-import InputForm from "./Input/InputForm";
-import Title from "./Title/Title";
+import React, { useState } from "react";
+import { Modal } from "paran-simple-modal";
 
-export const Modal = Object.assign(Container, {
-  Title: Title,
-  CloseButton: CloseButton,
-  ConfirmButton: ConfirmButton,
-  CancelButton: CancelButton,
-  InputForm: InputForm,
-});
+function App() {
+  const [isOpened, setIsOpened] = useState(false);
+
+  return (
+    <>
+      {isOpened ? (
+        <Modal
+          guidanceSize="large"
+          position="bottom"
+          onBackdropClick={() => setIsOpened(false)}
+        >
+          <Modal.Title
+            title="Modal Title"
+            subtitle="Modal subtitle"
+            position="left"
+          />
+          <div>Children</div>
+          <Modal.InputForm guidanceSize="small" placeholder="placeholder" />
+          <Modal.CancelButton
+            onClick={() => setIsOpened(false)}
+            content="Cancel"
+            guidanceSize="medium"
+          />
+          <Modal.ConfirmButton
+            onClick={() => alert("Confirmed")}
+            content="Confirm"
+            guidanceSize="large"
+          />
+          <Modal.CloseButton
+            onClick={() => setIsOpened(false)}
+            guidanceSize="medium"
+          />
+        </Modal>
+      ) : (
+        <button onClick={() => setIsOpened(true)}>모달 열기</button>
+      )}
+    </>
+  );
+}
+
+export default App;
