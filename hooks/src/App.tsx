@@ -7,7 +7,6 @@ import {
   usePassword,
   useCardType,
   useCardNumbers,
-  useCardBrand,
 } from './lib';
 
 function App() {
@@ -20,8 +19,8 @@ function App() {
     options: ['BC', 'KB', '하나', '우리'],
     placeholder: '카드사를 입력해주세요',
   });
-  const cardNumbersInfo = useCardNumbers({ first: '' });
-  const { cardBrand, formattedCardNumbers } = useCardBrand(cardNumbersInfo.value);
+
+  const cardNumbersInfo = useCardNumbers({ first: '1234' });
 
   const getErrorMessage = () => {
     const errorDetails = Object.values(cardNumbersInfo.errorInfo);
@@ -33,9 +32,12 @@ function App() {
     <div>
       <form>
         <div>
-          {cardBrand && <span>카드 브랜드 : {cardBrand}</span>}
-          {formattedCardNumbers.length > 0 && (
-            <span>카드번호 : {formattedCardNumbers.join('-')}</span>
+          {cardNumbersInfo.cardBrand && <span>카드 브랜드 : {cardNumbersInfo.cardBrand}</span>}
+          {cardNumbersInfo.formattedCardNumber.length > 0 && (
+            <div>
+              <div>포맷팅 제공 : {cardNumbersInfo.formattedCardNumber}</div>
+              <div>포맷팅 커스텀 : {cardNumbersInfo.formattedCardNumberList.join('%')}</div>
+            </div>
           )}
         </div>
         <fieldset>
@@ -131,8 +133,11 @@ function App() {
             onChange={event => {
               cardNumbersInfo.handleChange(event, 'first');
             }}
+            onBlur={event => {
+              cardNumbersInfo.handleBlur(event, 'first');
+            }}
             aria-invalid={!cardNumbersInfo.errorInfo.first.isValid}
-            maxLength={16}
+            maxLength={cardNumbersInfo.validMaxLength}
           />
           <span>{getErrorMessage()}</span>
         </fieldset>
