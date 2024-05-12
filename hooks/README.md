@@ -82,8 +82,8 @@ const SimpleComponent = () => {
 
 ### Return Value
 
-| Return Value  | type  | description  |
-| ------------- | ----- | ------------ | 
+| Return Value                                              | type     | description                                                                                                                                                       |
+| --------------------------------------------------------- | -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------ |
 | `{ expiration, expirationError, handleChangeExpiration }` | `object` | Contains the expiration (`{year : string; month : string;}`), expiration error (`{isError: boolean, errorMessage: string}`) state, and a handler (`(field: 'year' | 'month', value: string) => void`) to change the card number. |
 
 ## useOwnerName
@@ -157,3 +157,31 @@ const SimpleComponent = () => {
 | Return Value                                                    | type     | description                                                                                                                                                              |
 | --------------------------------------------------------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `{ cardPassword, cardPasswordError, handleChangeCardPassword }` | `object` | Contains card password(`string`), card password error(`{isError : boolean; errorMessage : string;}`), and handleChangeCardPassword(`(value : string) => void`) function. |
+
+# util Functions
+
+## formattingValue
+
+The formattingValue function formats the return value of the useCardNumber hook, `cardNumbers: string[]`, as '-'.
+
+### Simple Example
+
+```tsx
+import { useCardNumber, formattingValue } from '@jaymyong66/payments-hooks';
+
+function SimpleComponent() {
+  const { cardNumbers, cardNumberError, handleChangeCardNumber } = useCardNumber();
+  return (
+    <>
+      <h1>Card Numbers</h1>
+      <input value={formattingValue(cardNumbers)} onChange={(e) => handleChangeCardNumber(e.target.value)} />
+    </>
+  );
+}
+```
+
+### Return Value
+
+| Return Value       | type     | description                                                                 |
+| ------------------ | -------- | --------------------------------------------------------------------------- |
+| `joinedCardNumber` | `string` | Returns joinedCardNumber, the argument `cardNumbers:string[]` joined by '-' |
