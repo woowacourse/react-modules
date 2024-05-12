@@ -1,167 +1,131 @@
-import React, { useState } from "react";
-import "./App.css";
+import React from "react";
 import {
-  useCVCValidation,
-  useCardHolderValidation,
-  useCardNumberValidation,
-  useCardPasswordValidation,
-  useCardTypeValidation,
-  useExpiryDateValidation,
-} from "paran-card-validation-hooks";
+  useCardHolder,
+  useCardNumber,
+  useCardPassword,
+  useCardTypeCheck,
+  useCVC,
+  useExpiryDate,
+} from "./lib/index";
 
 function App() {
-  const [cardHolder, setCardHolder] = useState("");
-  const [cardNumber, setCardNumber] = useState(["", "", "", ""]);
-  const [cardPassword, setCardPassword] = useState("");
-  const [cardType, setCardType] = useState("");
-  const [cvc, setCVC] = useState("");
-  const [expiryMonth, setExpiryMonth] = useState("");
-  const [expiryYear, setExpiryYear] = useState("");
+  const {
+    validationResult: holderValidationResult,
+    cardHolder,
+    handleCardHolderChange,
+  } = useCardHolder();
 
-  const { validationResult: holderValidationResult, handleCardHolderChange } =
-    useCardHolderValidation();
-  const { validationResults: numberValidationResults, handleCardNumberChange } =
-    useCardNumberValidation();
+  const {
+    validationResult: numberValidationResult,
+    cardNumber,
+    handleCardNumberChange,
+  } = useCardNumber();
+
   const {
     validationResult: passwordValidationResult,
+    cardPassword,
     handleCardPasswordChange,
-  } = useCardPasswordValidation();
-  const { checkResult: typeCheckResult, handleCardTypeChange } =
-    useCardTypeValidation();
-  const { validationResult: cvcValidationResult, handleCVCChange } =
-    useCVCValidation();
-  const { validationResult: expiryValidationResult, handleExpiryDateChange } =
-    useExpiryDateValidation();
+  } = useCardPassword();
 
-  const handleCardNumberInputChange = (value: string, index: number) => {
-    const newCardNumber = [...cardNumber];
-    newCardNumber[index] = value;
-    setCardNumber(newCardNumber);
-    handleCardNumberChange(value, index);
-  };
+  const { cardType, handleCardTypeChange } = useCardTypeCheck();
+
+  const {
+    validationResult: cvcValidationResult,
+    cvc,
+    handleCVCChange,
+  } = useCVC();
+
+  const {
+    validationResult: expiryValidationResult,
+    expiryDate,
+    handleExpiryDateChange,
+  } = useExpiryDate();
 
   return (
-    <div>
-      <h1>Hooks Modules</h1>
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center",
+        width: "100vw",
+      }}
+    >
+      <div style={{ margin: "30px", fontSize: "20px" }}>
+        Paran Card Validation Hooks
+      </div>
       <div>
-        <label>Card Holder Name: </label>
         <input
           type="text"
           value={cardHolder}
-          onChange={(e) => {
-            setCardHolder(e.target.value);
-            handleCardHolderChange(e.target.value, 15);
-          }}
+          onChange={(e) => handleCardHolderChange(e)}
+          placeholder="Card Holder"
         />
-        {!holderValidationResult.isValid &&
-          holderValidationResult.errorMessages?.map((error, index) => (
-            <p key={index} style={{ color: "red" }}>
-              {error}
-            </p>
+        <div>
+          {holderValidationResult.errorMessages.map((error, index) => (
+            <div key={index}>{error}</div>
           ))}
+        </div>
       </div>
+
       <div>
-        <label>Card Number: </label>
-        {cardNumber.map((number, index) => (
-          <input
-            key={index}
-            type="text"
-            value={number}
-            maxLength={4}
-            onChange={(e) => handleCardNumberInputChange(e.target.value, index)}
-          />
-        ))}
-        {numberValidationResults.map((result, index) => (
-          <div key={index}>
-            {!result.isValid &&
-              result.errorMessages?.map((error, idx) => (
-                <p key={idx} style={{ color: "red" }}>
-                  {error}
-                </p>
-              ))}
-          </div>
-        ))}
+        <div>Card Type: {cardType}</div>
+        <input
+          type="text"
+          value={cardNumber}
+          onChange={(e) => {
+            handleCardNumberChange(e);
+            handleCardTypeChange(e.target.value);
+          }}
+          placeholder="Card Number"
+        />
+        <div>
+          {numberValidationResult.errorMessages.map((error, index) => (
+            <div key={index}>{error}</div>
+          ))}
+        </div>
       </div>
+
       <div>
-        <label>Card Password: </label>
         <input
           type="text"
           value={cardPassword}
-          maxLength={2}
-          onChange={(e) => {
-            setCardPassword(e.target.value);
-            handleCardPasswordChange(e.target.value, 2);
-          }}
+          onChange={(e) => handleCardPasswordChange(e)}
+          placeholder="Card Password"
         />
-        {!passwordValidationResult.isValid &&
-          passwordValidationResult.errorMessages?.map((error, index) => (
-            <p key={index} style={{ color: "red" }}>
-              {error}
-            </p>
+        <div>
+          {passwordValidationResult.errorMessages.map((error, index) => (
+            <div key={index}>{error}</div>
           ))}
+        </div>
       </div>
+
       <div>
-        <label>Card Type: </label>
-        <input
-          type="text"
-          value={cardType}
-          onChange={(e) => {
-            setCardType(e.target.value);
-            handleCardTypeChange(e.target.value);
-          }}
-        />
-        {<p>Card Type: {typeCheckResult.cardType}</p>}
-      </div>
-      <div>
-        <label>CVC: </label>
         <input
           type="text"
           value={cvc}
-          onChange={(e) => {
-            setCVC(e.target.value);
-            handleCVCChange(e.target.value, 4);
-          }}
+          onChange={(e) => handleCVCChange(e)}
+          placeholder="CVC"
         />
-        {!cvcValidationResult.isValid &&
-          cvcValidationResult.errorMessages?.map((error, index) => (
-            <p key={index} style={{ color: "red" }}>
-              {error}
-            </p>
+        <div>
+          {cvcValidationResult.errorMessages.map((error, index) => (
+            <div key={index}>{error}</div>
           ))}
+        </div>
       </div>
+
       <div>
-        <label>Expiry Month: </label>
         <input
           type="text"
-          value={expiryMonth}
-          maxLength={2}
-          onChange={(e) => {
-            setExpiryMonth(e.target.value);
-            handleExpiryDateChange(e.target.value, expiryYear);
-          }}
+          value={expiryDate}
+          onChange={(e) => handleExpiryDateChange(e)}
+          placeholder="Expiry Date"
         />
-        {!expiryValidationResult.isValidMonth &&
-          expiryValidationResult.monthErrorMessages?.map((error, index) => (
-            <p key={index} style={{ color: "red" }}>
-              {error}
-            </p>
+        <div>
+          {expiryValidationResult.errorMessages.map((error, index) => (
+            <div key={index}>{error}</div>
           ))}
-        <label>Expiry Year: </label>
-        <input
-          type="text"
-          value={expiryYear}
-          maxLength={2}
-          onChange={(e) => {
-            setExpiryYear(e.target.value);
-            handleExpiryDateChange(expiryMonth, e.target.value);
-          }}
-        />
-        {!expiryValidationResult.isValidYear &&
-          expiryValidationResult.yearErrorMessages?.map((error, index) => (
-            <p key={index} style={{ color: "red" }}>
-              {error}
-            </p>
-          ))}
+        </div>
       </div>
     </div>
   );
