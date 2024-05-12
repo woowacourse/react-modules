@@ -1,32 +1,30 @@
 import { useState } from "react";
-import { CARD_TYPE } from "./constants";
+import { REGEX } from "./constants";
 
-interface CheckResult {
-  cardType: "Visa" | "Mastercard" | "none";
-}
+const cardRegex = {
+  visa: REGEX.isVisa,
+  mastercard: REGEX.isMastercard,
+  diners: REGEX.isDiners,
+  amex: REGEX.isAmex,
+  unionpay: REGEX.isUnionpay,
+};
 
 const useCardTypeCheck = () => {
-  const [checkResult, setCheckResult] = useState<CheckResult>({
-    cardType: "none",
-  });
+  const [cardType, setCardType] = useState("etc");
 
   const handleCardTypeChange = (value: string) => {
-    if (value.charAt(0) === CARD_TYPE.visaNumber) {
-      setCheckResult({ cardType: "Visa" });
-      return;
+    for (const [type, regex] of Object.entries(cardRegex)) {
+      if (regex.test(value)) {
+        setCardType(type);
+        console.log(type);
+        return type;
+      }
     }
-
-    if (
-      parseInt(value.substring(0, 2), 10) >= CARD_TYPE.minMastercardNumber &&
-      parseInt(value.substring(0, 2), 10) <= CARD_TYPE.maxMastercardNumber
-    ) {
-      setCheckResult({ cardType: "Mastercard" });
-      return;
-    }
-    setCheckResult({ cardType: "none" });
+    setCardType("etc");
+    return "etc";
   };
 
-  return { checkResult, handleCardTypeChange };
+  return { cardType, handleCardTypeChange };
 };
 
 export default useCardTypeCheck;
