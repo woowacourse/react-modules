@@ -6,8 +6,14 @@ interface ConfirmModalProps {
   size?: SizeProps;
   title?: TitleProps;
   isOpen: boolean;
-  onConfirm: () => void;
-  onCancel: () => void;
+  confirmButton: {
+    content: string;
+    onConfirm: () => void;
+  };
+  cancelButton: {
+    content: string;
+    onCancel: () => void;
+  };
 }
 
 const ConfirmModal = ({
@@ -16,14 +22,14 @@ const ConfirmModal = ({
   title,
   children,
   isOpen,
-  onConfirm,
-  onCancel,
+  confirmButton,
+  cancelButton,
 }: PropsWithChildren<ConfirmModalProps>) => {
   const footerClassName = "confirmModalFooter";
   const footerButtons = [
     {
-      content: "취소",
-      onClick: onCancel,
+      content: cancelButton.content || "취소",
+      onClick: cancelButton.onCancel,
       className: "cancelButton",
       style: {
         background: "transparent",
@@ -33,8 +39,8 @@ const ConfirmModal = ({
       },
     },
     {
-      content: "확인",
-      onClick: onConfirm,
+      content: confirmButton.content || "확인",
+      onClick: confirmButton.onConfirm,
       className: "confirmButton",
       style: {
         background: "rgba(51, 51, 51, 1)",

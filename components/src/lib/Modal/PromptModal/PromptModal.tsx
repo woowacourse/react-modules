@@ -7,8 +7,14 @@ interface PromptModalProps {
   size?: SizeProps;
   title?: TitleProps;
   isOpen: boolean;
-  onConfirm: () => void;
-  onCancel: () => void;
+  confirmButton: {
+    content: string;
+    onConfirm: () => void;
+  };
+  cancelButton: {
+    content: string;
+    onCancel: () => void;
+  };
 }
 
 const PromptModal = ({
@@ -17,8 +23,8 @@ const PromptModal = ({
   title,
   children,
   isOpen,
-  onConfirm,
-  onCancel,
+  confirmButton,
+  cancelButton,
 }: PropsWithChildren<PromptModalProps>) => {
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -31,8 +37,8 @@ const PromptModal = ({
   const footerClassName = "promptModalFooter";
   const promptModalButton = [
     {
-      content: "취소",
-      onClick: onCancel,
+      content: cancelButton.content || "취소",
+      onClick: cancelButton.onCancel,
       className: "cancelButton",
       style: {
         background: "transparent",
@@ -42,8 +48,8 @@ const PromptModal = ({
       },
     },
     {
-      content: "확인",
-      onClick: onConfirm,
+      content: confirmButton.content || "확인",
+      onClick: confirmButton.onConfirm,
       className: "confirmButton",
       style: {
         width: "80px",
