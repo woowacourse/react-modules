@@ -25,7 +25,7 @@ interface ButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
   buttonTheme: ButtonTheme;
 }
 
-const buttonStyle: Record<ButtonTheme, any> = {
+const buttonStyle: Record<ButtonTheme, object> = {
   primary: { backgroundColor: COLOR_HEXES.gray1, color: COLOR_HEXES.white },
   secondary: {
     backgroundColor: COLOR_HEXES.white,
