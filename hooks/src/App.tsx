@@ -1,6 +1,12 @@
 import React from 'react';
-import { useCardNumber, useCVCNumber, useExpiration, useCardPassword, useOwnerName } from '@jaymyong66/payments-hooks';
-import { formattingValue } from './lib/useCardNumber/useCardNumber.util';
+import {
+  useCardNumber,
+  useCVCNumber,
+  useExpiration,
+  useCardPassword,
+  useOwnerName,
+  formattingValue,
+} from '@jaymyong66/payments-hooks';
 
 function App() {
   const { cvcNumber, cvcError, handleChangeCVCNumber } = useCVCNumber();

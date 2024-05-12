@@ -14,7 +14,7 @@ function App() {
         <button onClick={handleToggle}>Open</button>
       </div>
       <PromptModal
-        position="bottom"
+        position="center"
         size="medium"
         isOpen={isOpen}
         onToggle={handleToggle}
@@ -22,6 +22,8 @@ function App() {
         value={value}
         onChange={handleChange}
         onSubmit={handleSubmit}
+        confirmButtonLabel="확인버튼"
+        cancelButtonLabel="취소버튼"
       />
     </div>
   );
