@@ -2,12 +2,21 @@ import { useState } from "react";
 
 import cardInputValidator from "../validators/cardInputValidator";
 
-type CardNumberFormatType = "first" | "second" | "third" | "fourth";
+export interface CardNumberFormatType {
+  first: string;
+  second: string;
+  third: string;
+  fourth: string;
+}
 
 const useCardNumberFormat = () => {
-  const [cardNumberFormat, setCardNumberFormat] = useState<
-    Record<CardNumberFormatType, string>
-  >({ first: "", second: "", third: "", fourth: "" });
+  const [cardNumberFormat, setCardNumberFormat] =
+    useState<CardNumberFormatType>({
+      first: "",
+      second: "",
+      third: "",
+      fourth: "",
+    });
 
   const resetCardNumberFormat = () => {
     return setCardNumberFormat((prevValue) => {
