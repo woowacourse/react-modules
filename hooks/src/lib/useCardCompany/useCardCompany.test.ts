@@ -2,7 +2,7 @@ import { renderHook } from "@testing-library/react";
 import { ChangeEvent, act } from "react";
 import useCardCompany from "./useCardCompany";
 
-describe("useCardCompany 테스트", () => {
+describe("useCardCompany", () => {
   const CARD_COMPANY_ERROR_MESSAGE = "카드사를 선택해주세요.";
 
   it(`카드사를 선택하지 않은 경우 에러 상태가 true가 된다.`, () => {
