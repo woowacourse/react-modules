@@ -54,8 +54,8 @@ const TESTING_CARD_NUMBERS = {
   UNKNOWN: "9999".repeat(4),
 } as const;
 
-describe("카드 브랜드 관련 처리에 대한 테스트 케이스", () => {
-  describe("카드 브랜드 식별 기능이 정상적으로 동작한다.", () => {
+describe("useCardNumber (brand 관련 기능)", () => {
+  describe("카드 브랜드 식별", () => {
     test.each([
       {
         cardNumber: TESTING_CARD_NUMBERS.Diners,
@@ -93,34 +93,40 @@ describe("카드 브랜드 관련 처리에 대한 테스트 케이스", () => {
     );
   });
 
-  describe("카드번호가 입력될 때, 포맷팅이 정상적으로 동작한다.", () => {
+  describe("브랜드 별 카드번호 포맷팅", () => {
     test.each([
       {
         cardNumber: TESTING_CARD_NUMBERS.Diners,
+        cardBrand: CARD_BRAND.Diners,
         expectedFormattedCardNumber: "3611 111111 1111",
       },
       {
         cardNumber: TESTING_CARD_NUMBERS.AMEX,
+        cardBrand: CARD_BRAND.AMEX,
         expectedFormattedCardNumber: "3411 111111 11111",
       },
       {
         cardNumber: TESTING_CARD_NUMBERS.UnionPay,
+        cardBrand: CARD_BRAND.UnionPay,
         expectedFormattedCardNumber: "6221 2611 1111 1111",
       },
       {
         cardNumber: TESTING_CARD_NUMBERS.MasterCard,
+        cardBrand: CARD_BRAND.MasterCard,
         expectedFormattedCardNumber: "5111 1111 1111 1111",
       },
       {
         cardNumber: TESTING_CARD_NUMBERS.Visa,
+        cardBrand: CARD_BRAND.Visa,
         expectedFormattedCardNumber: "4111 1111 1111 1111",
       },
       {
         cardNumber: TESTING_CARD_NUMBERS.UNKNOWN,
+        cardBrand: "UNKNOWN",
         expectedFormattedCardNumber: "9999 9999 9999 9999",
       },
     ])(
-      "카드번호가 $cardNumber일 경우, $expectedFormattedCardNumber(으)로 포맷팅한다.",
+      "카드번호가 $cardBrand 경우, $expectedFormattedCardNumber(으)로 포맷팅한다.",
       ({ cardNumber, expectedFormattedCardNumber }) => {
         const { input, getFormattedCardNumber } = setup();
 
@@ -130,36 +136,34 @@ describe("카드 브랜드 관련 처리에 대한 테스트 케이스", () => {
       }
     );
   });
-});
 
-describe("카드번호 입력 시, 에러 처리에 대한 테스트 케이스 (브랜드 추가에 따른 예외적 케이스 테스트)", () => {
-  test("카드번호가 16자리가 아니고, 카드 브랜드가 없는 경우 유효하지 않은 값으로 판단한다.", () => {
-    const { input, getErrorStatus } = setup();
+  describe("카드 번호 유효성 검증 (브랜드에 따른 예외적 케이스)", () => {
+    describe("16자리가 아니지만 브랜드가 존재하는 경우 에러 처리하지 않는다.", () => {
+      test.each([
+        { cardNumber: TESTING_CARD_NUMBERS.Diners, desc: "Diners - 14자리" },
+        { cardNumber: TESTING_CARD_NUMBERS.AMEX, desc: "AMEX - 15자리" },
+      ])("$desc($cardNumber)는 16자리가 아님에도 예외처리하지 않는다.", ({ cardNumber }) => {
+        const { input, getErrorStatus } = setup();
 
-    fireEvent.change(input, { target: { value: "1".repeat(15) } });
-    fireEvent.blur(input);
+        fireEvent.change(input, { target: { value: cardNumber } });
+        fireEvent.blur(input);
 
-    const { isError, errorMessage } = getErrorStatus();
+        const { isError, errorMessage } = getErrorStatus();
 
-    expect(isError).toBe(true);
-    expect(errorMessage).not.toBeNull();
-  });
-
-  // 카드 브랜드가 존재하면서 카드번호 길이가 16자리가 아닌 경우
-  describe("카드 브랜드가 존재하면서 16자리가 아닌 경우 에러 처리하지 않는다.", () => {
-    test.each([
-      { cardNumber: TESTING_CARD_NUMBERS.Diners, desc: "Diners - 14자리" },
-      { cardNumber: TESTING_CARD_NUMBERS.AMEX, desc: "AMEX - 15자리" },
-    ])("$desc($cardNumber)는 16자리가 아님에도 예외처리하지 않는다.", ({ cardNumber }) => {
+        expect(isError).toBe(false);
+        expect(errorMessage).toBeNull();
+      });
+    });
+    test("카드번호가 16자리가 아니고, 카드 브랜드가 없는 경우 유효하지 않은 값으로 판단한다.", () => {
       const { input, getErrorStatus } = setup();
 
-      fireEvent.change(input, { target: { value: cardNumber } });
+      fireEvent.change(input, { target: { value: "1".repeat(15) } });
       fireEvent.blur(input);
 
       const { isError, errorMessage } = getErrorStatus();
 
-      expect(isError).toBe(false);
-      expect(errorMessage).toBeNull();
+      expect(isError).toBe(true);
+      expect(errorMessage).not.toBeNull();
     });
   });
 });
