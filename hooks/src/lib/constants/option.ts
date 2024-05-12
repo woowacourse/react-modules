@@ -14,7 +14,11 @@ export const OPTION = {
   maxMonth: "12",
 };
 
-export const CARD_BRAND_MAX_LENGTH = {
+interface CardBrandMaxLengthType {
+  [key: string]: number;
+}
+
+export const CARD_BRAND_MAX_LENGTH: CardBrandMaxLengthType = {
   Visa: 16,
   MasterCard: 16,
   Diners: 14,
