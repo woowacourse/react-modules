@@ -6,7 +6,7 @@ import {
   useCardTypeCheck,
   useCVC,
   useExpiryDate,
-} from "./lib/index";
+} from "paran-card-validation-hooks";
 
 function App() {
   const {
