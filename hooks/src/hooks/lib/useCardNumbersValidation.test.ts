@@ -27,20 +27,9 @@ describe("카드 숫자 입력에 대한 useCardNumbersValidation 커스텀 훅 
     );
   });
 
-  it("4자리 미만의 숫자가 포함되었을 때, errorMessage로 경고해야 한다", () => {
-    const { result } = renderHook(() =>
-      useCardNumbersValidation({ cardNumbers: ["123", "1234", "5479", "1234"] })
-    );
-
-    expect(result.current.validationResult.isValid).toBe(false);
-    expect(result.current.validationResult.errorMessage).toBe(
-      ERROR_MESSAGE.INVALID_CARD_NUMBER_LENGTH
-    );
-  });
-
   it("빈 문자열이 포함되어 있을 때, errorMessage로 경고해야 한다", () => {
     const { result } = renderHook(() =>
-      useCardNumbersValidation({ cardNumbers: ["", "1234", "5479", "1234"] })
+      useCardNumbersValidation({ cardNumbers: "1234 54791234" })
     );
 
     expect(result.current.validationResult.isValid).toBe(false);

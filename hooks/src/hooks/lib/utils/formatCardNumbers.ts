@@ -3,7 +3,7 @@ type Props = {
   type: "Visa" | "MasterCard" | "Diners" | "AMEX" | "UnionPay" | "";
 };
 
-const SPLIT_INDEX = Object.freeze({
+const SPLIT_INDEX = {
   AMEX: [
     [0, 4],
     [4, 10],
@@ -32,7 +32,7 @@ const SPLIT_INDEX = Object.freeze({
     [8, 12],
     [12, 16],
   ],
-});
+} as const;
 
 const formatCardNumbers = ({ cardNumbers, type }: Props) => {
   const cleanNumber = cardNumbers.replace(/\s+/g, "");

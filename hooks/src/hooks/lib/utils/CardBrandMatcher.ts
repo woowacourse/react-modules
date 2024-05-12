@@ -1,19 +1,19 @@
 import getCardPrefix from "./getCardPrefix";
 
-const DINERS_CONDITION = Object.freeze({
+const DINERS_CONDITION = {
   MATCHED_LENGTH: 14,
   PREFIX_LENGTH: 2,
   MATCHED_PREFIX: 36,
-});
+} as const;
 
-const AMEX_CONDITION = Object.freeze({
+const AMEX_CONDITION = {
   LENGTH: 15,
   PREFIX_LENGTH: 2,
   MIN_MATCHED_PREFIX: 34,
   MAX_MATCHED_PREFIX: 37,
-});
+} as const;
 
-const UNION_PAY_CONDITION = Object.freeze({
+const UNION_PAY_CONDITION = {
   LENGTH: 16,
   SIX_PREFIX_LENGTH: 6,
   THREE_PREFIX_LENGTH: 3,
@@ -24,20 +24,20 @@ const UNION_PAY_CONDITION = Object.freeze({
   MAX_THREE_LENGTH_PREFIX: 626,
   MIN_FOUR_LENGTH_PREFIX: 6282,
   MAX_FOUR_LENGTH_PREFIX: 6288,
-});
+} as const;
 
-const VISA_CONDITION = Object.freeze({
+const VISA_CONDITION = {
   LENGTH: 16,
   PREFIX_LENGTH: 1,
   MATCHED_PREFIX: 4,
-});
+} as const;
 
-const MASTER_CARD_CONDITION = Object.freeze({
+const MASTER_CARD_CONDITION = {
   LENGTH: 16,
   PREFIX_LENGTH: 2,
   MIN_MATCHED_PREFIX: 51,
   MAX_MATCHED_PREFIX: 55,
-});
+} as const;
 
 const CardBrandMatcher = {
   isVisa: (cardNumbers: string) => {
