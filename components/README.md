@@ -2,6 +2,8 @@
 
 **react의 createPortal을 사용한 모달 모듈을 제공하는 라이브러리 입니다.**
 
+  <img src="https://raw.githubusercontent.com/BadaHertz52/react-modules/step2/components/reademeImg/modal.gif" width="500px" style='border:2px solid black'>
+
 ### Skill
 
 - react (with Vite)
@@ -19,6 +21,7 @@ npm i badahertz52-react-modules-components
 ### 모달이 열렸을 경우 dom 구조
 
 모달은 `modal-root`안에서 열립니다.
+모달의 너비는 `modal-root` 의 뷰상 너비와 동일하며(기본값은 100vw), 높이는 100vh입니다.
 
 ```html
 <body>
@@ -216,20 +219,6 @@ function useBottomModalAnimation({ isNeedAnimation, animationDuration, closeModa
   fadeOutModal: () => void;
   timeout: number;
 };
-```
-
-<br/>
-
-**useBottomModalContext**
-
-- BottomModalContext로 전해지는 props값을 BottomModal 내에서 사용할 수 있습니다.
-
-```ts
-interface BottomModalContextType {
-  handleCloseModal: () => void;
-}
-
-const BottomModalContext = createContext<BottomModalContextType | null>(null);
 ```
 
 <br/>
