@@ -38,7 +38,7 @@ function throwIfEmpty(value: string) {
   }
 }
 
-function validateMonth(value: string) {
+function throwIfNoneValidationMonth(value: string) {
   if (throwIfEmpty(value) || value === '0') return;
   const month = Number(value);
   if (!(MONTH_RANGE.MIN <= month && month <= MONTH_RANGE.MAX)) {
@@ -46,7 +46,7 @@ function validateMonth(value: string) {
   }
 }
 
-function validateYear(value: string) {
+function throwIfNoneValidationYear(value: string) {
   if (throwIfEmpty(value)) return;
   const year = Number(value);
   if (!(YEAR_RANGE.MIN <= year && year <= YEAR_RANGE.MAX)) {
@@ -73,11 +73,11 @@ export const validateExpiryDate = (value: string, target: 'month' | 'year') => {
   if (target === 'month') {
     throwIfTrimBlank(value);
     throwIfNoneNumber(value);
-    validateMonth(value);
+    throwIfNoneValidationMonth(value);
   } else {
     throwIfTrimBlank(value);
     throwIfNoneNumber(value);
-    validateYear(value);
+    throwIfNoneValidationYear(value);
   }
 };
 
