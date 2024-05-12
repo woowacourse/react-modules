@@ -42,7 +42,7 @@ export function getCardGlobalBrand(cardNumber: string): GLOBAL_BRANDS_TYPE {
     }
   }
 
-  return 'Default';
+  return null;
 }
 
 export function formatCardNumber(cardNumber: string, format: number[]) {

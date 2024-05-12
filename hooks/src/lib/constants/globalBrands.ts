@@ -24,11 +24,6 @@ export const GLOBAL_BRANDS = {
     allowedLength: 16,
     format: [4, 4, 4, 4],
   },
-  Default: {
-    name: 'Default',
-    allowedLength: 16,
-    format: [4, 4, 4, 4],
-  },
 };
 
 export default GLOBAL_BRANDS;
