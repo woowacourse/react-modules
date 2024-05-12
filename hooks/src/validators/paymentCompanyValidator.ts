@@ -55,22 +55,13 @@ export const getFormattedCardNumbers = (
   paymentCompany: string,
   cardNumbers: string
 ) => {
-  if (paymentCompany === PAYMENT_COMPANY.VISA.name) {
-    return divideNumbers(cardNumbers, PAYMENT_COMPANY.VISA.formatStyle);
-  }
-  if (paymentCompany === PAYMENT_COMPANY.MASTER.name) {
-    return divideNumbers(cardNumbers, PAYMENT_COMPANY.MASTER.formatStyle);
-  }
-  if (paymentCompany === PAYMENT_COMPANY.AMEX.name) {
-    return divideNumbers(cardNumbers, PAYMENT_COMPANY.AMEX.formatStyle);
-  }
-  if (paymentCompany === PAYMENT_COMPANY.DINERS.name) {
-    return divideNumbers(cardNumbers, PAYMENT_COMPANY.DINERS.formatStyle);
-  }
-  if (paymentCompany === PAYMENT_COMPANY.UNION.name) {
-    return divideNumbers(cardNumbers, PAYMENT_COMPANY.UNION.formatStyle);
-  }
+  const company = Object.values(PAYMENT_COMPANY).find(
+    (company) => company.name === paymentCompany
+  );
 
-  // NOTE: Default Case
-  return divideNumbers(cardNumbers, PAYMENT_COMPANY.NONE.formatStyle);
+  const formatStyle = company
+    ? company.formatStyle
+    : PAYMENT_COMPANY.NONE.formatStyle;
+
+  return divideNumbers(cardNumbers, formatStyle);
 };
