@@ -9,6 +9,7 @@ import { ModalContainerContext } from '@/lib/contexts';
 import { ModalContainerProps } from '@/lib/types/modal';
 import '@/lib/styles/reset.css';
 
+// TODO : width, height, margin props로 받기
 const ModalWrapper = styled.div`
   position: fixed;
   width: 100vw;

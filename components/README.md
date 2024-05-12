@@ -45,25 +45,19 @@ children에 모달 타입별 모달들(ex: AlertModal, ConfirmModal)이 들어�
 
 ### ModalContainer 하위 컴포넌트
 
-```ts
-interface ModalButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
-  children: ReactNode;
-  isCloseModal: boolean;
-  handleCloseModal?: () => void;
-}
-//rest: button attributes
-function ModalButton({ isCloseModal, children, onClick, ...rest }: ModalButtonProps): JSX.Element;
+```tsx
+function ModalCloseButtonWrapper({ children }: { children: ReactElement<HTMLButtonElement> }): JSX.Element;
 
 function Backdrop({ handleCloseModal }: { handleCloseModal: () => void }): JSX.Element;
 
-function Contents({ children }: { children: ReactNode }): JSX.Element;
+function Contents({ children }: { children: `ReactNode` }): JSX.Element;
 ```
 
-| 구조                    | 설명                                                                                                                                                                  |
-| ----------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| ModalContainer.Button   | isCloseModal의 값에 따라 클릭 시 모달창을 닫는 기능을 제공하는 버튼                                                                                                   |
-| ModalContainer.Backdrop | <ul><li>모달의 배경을 담당</li> <li>isCloseOnBackdrop이 true이면 배경 클릭 시 모달창 닫힘 </li> <li>isCloseOnEsc이 true이면 esc키를 눌러서 모달창 닫기 가능</li></ul> |
-| ModalContainer.Contents | 모달의 children props가 들어가는 공간으로, 기본적인 스타일이 적용됨                                                                                                   |
+| 구조                              | 설명                                                                                                                                                                                                                                                                                           |
+| --------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| ModalContainer.CloseButtonWrapper | <ul><li>모달 닫기 기능을 제공하는 ModalContainer의 하위 컴포넌트</li><li> ModalContainer.CloseButtonWrapper의 하위에 button element를 두어서 사용하면 됨</li><li>BottomModal의 경우 BottomModal.closeButtonWrapper를 사용하면 애니메이션 효과가 담긴 모달 닫기 기능을 사용할 수 있음</li></ul> |
+| ModalContainer.Backdrop           | <ul><li>모달의 배경을 담당</li> <li>isCloseOnBackdrop이 true이면 배경 클릭 시 모달창 닫힘 </li> <li>isCloseOnEsc이 true이면 esc키를 눌러서 모달창 닫기 가능</li></ul>                                                                                                                          |
+| ModalContainer.Contents           | 모달의 children props가 들어가는 공간으로, 기본적인 스타일이 적용됨                                                                                                                                                                                                                            |
 
 ### Modal props
 
@@ -91,106 +85,102 @@ interface Background {
   backdrop?: string;
 }
 
-type ButtonContainerJustifyContent = 'center' | 'right' | 'left' | 'space-around' | 'space-between' | 'space-evenly';
+type`ButtonContainerJustifyContent` = 'center' | 'right' | 'left' | 'space-around' | 'space-between' | 'space-evenly';
 ```
 
 #### AlertModal
 
-| Prop                          | 설명                                                       | 타입                              | 필수 여부 | 기본값                 |
-| ----------------------------- | ---------------------------------------------------------- | --------------------------------- | --------- | ---------------------- |
-| openModal                     | 모달의 가시성을 제어합니다.                                | boolean                           | Y         | -                      |
-| setOpenModal                  | openModal의 상태를 설정하는 함수입니다.                    | Dispatch<SetStateAction<boolean>> | Y         | -                      |
-| isCloseOnEscEsc               | 키를 눌렀을 때 모달이 닫혀야 하는지 여부를 결정합니다.     | boolean                           | N         | true                   |
-| isCloseOnBackdrop             | 배경을 클릭했을 때 모달이 닫혀야 하는지 여부를 결정합니다. | boolean                           | N         | true                   |
-| contentsPadding               | 모달 내용의 패딩입니다.                                    | string                            | N         | BASIC_PADDING          |
-| borderRadius                  | 모달의 테두리 반경입니다.                                  | string                            | N         | BASIC_BORDER_RADIUS    |
-| backgroundColor               | 모달과 배경의 배경색입니다.                                | Background                        | N         | BASIC_BACKGROUND_COLOR |
-| title                         | 모달의 제목입니다.                                         | ReactNode                         | Y         | -                      |
-| contents                      | 모달의 내용입니다.                                         | ReactNode                         | Y         | -                      |
-| buttonContainerJustifyContent | 버튼 컨테이너의 정렬 방식입니다.                           | ButtonContainerJustifyContent     | Y         | -                      |
-| buttonStyle                   | 버튼의 스타일입니다.                                       | CSSProperties                     | Y         | -                      |
-| buttonContents                | 버튼의 내용입니다.                                         | ReactNode                         | Y         | -                      |
+| Prop                          | 설명                                                       | 타입                                | 필수 여부 | 기본값                   |
+| ----------------------------- | ---------------------------------------------------------- | ----------------------------------- | --------- | ------------------------ |
+| openModal                     | 모달의 가시성을 제어합니다.                                | `boolean`                           | Y         | -                        |
+| setOpenModal                  | openModal의 상태를 설정하는 함수입니다.                    | `Dispatch<SetStateAction<boolean>>` | Y         | -                        |
+| isCloseOnEscEsc               | 키를 눌렀을 때 모달이 닫혀야 하는지 여부를 결정합니다.     | `boolean`                           | N         | `true`                   |
+| isCloseOnBackdrop             | 배경을 클릭했을 때 모달이 닫혀야 하는지 여부를 결정합니다. | `boolean`                           | N         | `true`                   |
+| contentsPadding               | 모달 내용의 패딩입니다.                                    | `string`                            | N         | `BASIC_PADDING`          |
+| borderRadius                  | 모달의 테두리 반경입니다.                                  | `string`                            | N         | `BASIC_BORDER_RADIUS`    |
+| backgroundColor               | 모달과 배경의 배경색입니다.                                | `Background`                        | N         | `BASIC_BACKGROUND_COLOR` |
+| title                         | 모달의 제목입니다.                                         | `ReactNode`                         | Y         | -                        |
+| contents                      | 모달의 내용입니다.                                         | `ReactNode`                         | Y         | -                        |
+| buttonContainerJustifyContent | 버튼 컨테이너의 정렬 방식입니다.                           | `ButtonContainerJustifyContent`     | Y         | -                        |
+| buttonStyle                   | 버튼의 스타일입니다.                                       | `CSSProperties`                     | Y         | -                        |
+| buttonContents                | 버튼의 내용입니다.                                         | `ReactNode`                         | Y         | -                        |
 
 #### BottomModal
 
-| Props             | 설명                                                       | 타입                              | 필수 여부 | 기본값              |
-| ----------------- | ---------------------------------------------------------- | --------------------------------- | --------- | ------------------- |
-| openModal         | 모달의 가시성을 제어합니다.                                | boolean                           | Y         | -                   |
-| setOpenModal      | openModal의 상태를 설정하는 함수입니다.                    | Dispatch<SetStateAction<boolean>> | Y         | -                   |
-| isCloseOnEscEsc   | 키를 눌렀을 때 모달이 닫혀야 하는지 여부를 결정합니다.     | boolean                           | N         | true                |
-| isCloseOnBackdrop | 배경을 클릭했을 때 모달이 닫혀야 하는지 여부를 결정합니다. | boolean                           | N         | true                |
-| contentsPadding   | 모달 내용의 패딩입니다.                                    | string                            | N         | BASIC_PADDING       |
-| borderRadius      | 모달의 테두리 반경입니다.                                  | string                            | N         | BASIC_BORDER_RADIUS |
-| backgroundColor   | 모달과 배경의 배경색입니다.                                | Background                        | N         | -                   |
-| children          | 모달의 내용입니다.                                         | ReactNode                         | Y         | -                   |
-| animationDuration | 애니메이션의 지속 시간(밀리초)입니다.                      | number                            | N         | 600                 |
-| isNeedAnimation   | 애니메이션이 필요한지 여부를 결정합니다.                   | boolean                           | N         | true                |
+| Props             | 설명                                                       | 타입                                | 필수 여부 | 기본값                |
+| ----------------- | ---------------------------------------------------------- | ----------------------------------- | --------- | --------------------- |
+| openModal         | 모달의 가시성을 제어합니다.                                | `boolean`                           | Y         | -                     |
+| setOpenModal      | openModal의 상태를 설정하는 함수입니다.                    | `Dispatch<SetStateAction<boolean>>` | Y         | -                     |
+| isCloseOnEscEsc   | 키를 눌렀을 때 모달이 닫혀야 하는지 여부를 결정합니다.     | `boolean`                           | N         | `true`                |
+| isCloseOnBackdrop | 배경을 클릭했을 때 모달이 닫혀야 하는지 여부를 결정합니다. | `boolean`                           | N         | `true`                |
+| contentsPadding   | 모달 내용의 패딩입니다.                                    | `string`                            | N         | `BASIC_PADDING`       |
+| borderRadius      | 모달의 테두리 반경입니다.                                  | `string`                            | N         | `BASIC_BORDER_RADIUS` |
+| backgroundColor   | 모달과 배경의 배경색입니다.                                | `Background`                        | N         | -                     |
+| children          | 모달의 내용입니다.                                         | `ReactNode`                         | Y         | -                     |
+| animationDuration | 애니메이션의 지속 시간(밀리초)입니다.                      | `number`                            | N         | 600                   |
+| isNeedAnimation   | 애니메이션이 필요한지 여부를 결정합니다.                   | `boolean`                           | N         | `true`                |
 
 #### CenterModal
 
-| Props             | 설명                                                       | 타입                              | 필수 여부 | 기본값              |
-| ----------------- | ---------------------------------------------------------- | --------------------------------- | --------- | ------------------- |
-| openModal         | 모달의 가시성을 제어합니다.                                | boolean                           | Y         | -                   |
-| setOpenModal      | openModal의 상태를 설정하는 함수입니다.                    | Dispatch<SetStateAction<boolean>> | Y         | -                   |
-| isCloseOnEscEsc   | 키를 눌렀을 때 모달이 닫혀야 하는지 여부를 결정합니다.     | boolean                           | N         | true                |
-| isCloseOnBackdrop | 배경을 클릭했을 때 모달이 닫혀야 하는지 여부를 결정합니다. | boolean                           | N         | true                |
-| contentsPadding   | 모달 내용의 패딩입니다.                                    | string                            | N         | BASIC_PADDING       |
-| borderRadius      | 모달의 테두리 반경입니다.                                  | string                            | N         | BASIC_BORDER_RADIUS |
-| backgroundColor   | 모달과 배경의 배경색입니다.                                | Background                        | N         | -                   |
-| children          | 모달의 내용입니다.                                         | ReactNode                         | Y         | -                   |
+| Props             | 설명                                                       | 타입                                | 필수 여부 | 기본값                |
+| ----------------- | ---------------------------------------------------------- | ----------------------------------- | --------- | --------------------- |
+| openModal         | 모달의 가시성을 제어합니다.                                | `boolean`                           | Y         | -                     |
+| setOpenModal      | openModal의 상태를 설정하는 함수입니다.                    | `Dispatch<SetStateAction<boolean>>` | Y         | -                     |
+| isCloseOnEscEsc   | 키를 눌렀을 때 모달이 닫혀야 하는지 여부를 결정합니다.     | `boolean`                           | N         | `true`                |
+| isCloseOnBackdrop | 배경을 클릭했을 때 모달이 닫혀야 하는지 여부를 결정합니다. | `boolean`                           | N         | `true`                |
+| contentsPadding   | 모달 내용의 패딩입니다.                                    | `string`                            | N         | `BASIC_PADDING`       |
+| borderRadius      | 모달의 테두리 반경입니다.                                  | `string`                            | N         | `BASIC_BORDER_RADIUS` |
+| backgroundColor   | 모달과 배경의 배경색입니다.                                | `Background`                        | N         | -                     |
+| children          | 모달의 내용입니다.                                         | `ReactNode`                         | Y         | -                     |
 
 #### ConfirmModal
 
-| Props                         | 설명                                                       | 타입                              | 필수 여부 | 기본값                 |
-| ----------------------------- | ---------------------------------------------------------- | --------------------------------- | --------- | ---------------------- |
-| openModal                     | 모달의 가시성을 제어합니다.                                | boolean                           | Y         | -                      |
-| setOpenModal                  | openModal의 상태를 설정하는 함수입니다.                    | Dispatch<SetStateAction<boolean>> | Y         | -                      |
-| isCloseOnEscEsc               | 키를 눌렀을 때 모달이 닫혀야 하는지 여부를 결정합니다.     | boolean                           | N         | true                   |
-| isCloseOnBackdrop             | 배경을 클릭했을 때 모달이 닫혀야 하는지 여부를 결정합니다. | boolean                           | N         | true                   |
-| contentsPadding               | 모달 내용의 패딩입니다.                                    | string                            | N         | BASIC_PADDING          |
-| borderRadius                  | 모달의 테두리 반경입니다.                                  | string                            | N         | BASIC_BORDER_RADIUS    |
-| backgroundColor               | 모달과 배경의 배경색입니다.                                | Background                        | N         | BASIC_BACKGROUND_COLOR |
-| contents                      | 모달의 내용입니다.                                         | ReactNode                         | Y         | -                      |
-| buttonContainerJustifyContent | 버튼 컨테이너의 정렬 방식입니다.                           | ButtonContainerJustifyContent     | N         | -                      |
-| confirmButton                 | 확인 버튼의 구성입니다.                                    | Button                            | Y         | -                      |
-| cancelButton                  | 취소 버튼의 구성입니다.                                    | Button                            | Y         | -                      |
-| isConfirmButtonFirst          | 확인 버튼이 먼저 배치되어야 하는지 여부를 결정합니다.      | boolean                           | N         | -                      |
+| Props                         | 설명                                                                                                                                                    | 타입                                | 필수 여부 | 기본값                   |
+| ----------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------- | --------- | ------------------------ |
+| openModal                     | 모달의 가시성을 제어합니다.                                                                                                                             | `boolean`                           | Y         | -                        |
+| setOpenModal                  | openModal의 상태를 설정하는 함수입니다.                                                                                                                 | `Dispatch<SetStateAction<boolean>>` | Y         | -                        |
+| isCloseOnEscEsc               | 키를 눌렀을 때 모달이 닫혀야 하는지 여부를 결정합니다.                                                                                                  | `boolean`                           | N         | true                     |
+| isCloseOnBackdrop             | 배경을 클릭했을 때 모달이 닫혀야 하는지 여부를 결정합니다.                                                                                              | `boolean`                           | N         | true                     |
+| contentsPadding               | 모달 내용의 패딩입니다.                                                                                                                                 | `string`                            | N         | `BASIC_PADDING`          |
+| borderRadius                  | 모달의 테두리 반경입니다.                                                                                                                               | `string`                            | N         | `BASIC_BORDER_RADIUS`    |
+| backgroundColor               | 모달과 배경의 배경색입니다.                                                                                                                             | `Background`                        | N         | `BASIC_BACKGROUND_COLOR` |
+| contents                      | 모달의 내용입니다.                                                                                                                                      | `ReactNode`                         | Y         | -                        |
+| buttonContainerJustifyContent | 버튼 컨테이너의 정렬 방식입니다.                                                                                                                        | `ButtonContainerJustifyContent`     | N         | -                        |
+| children                      | <ul><li>확인,취소 버튼으로 사용할 버튼들을 children으로 설정해주세요. </li><li>children안의 버튼이 클릭 되면 모달이 닫히는 기능이 작동합니다.</li></ul> | `ReactNode`                         | Y         | -                        |
 
 #### PromptModal
 
-| Props                         | 설명                                                       | 타입                                                                                                                      | 필수 여부 | 기본값                 |
-| ----------------------------- | ---------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------- | --------- | ---------------------- |
-| openModal                     | 모달의 가시성을 제어합니다                                 | .boolean                                                                                                                  | Y         | -                      |
-| setOpenModal                  | openModal의 상태를 설정하는 함수입니다.                    | Dispatch<SetStateAction<boolean>>                                                                                         | Y         | -                      |
-| isCloseOnEscEsc               | 키를 눌렀을 때 모달이 닫혀야 하는지 여부를 결정합니다.     | boolean                                                                                                                   | N         | true                   |
-| isCloseOnBackdrop             | 배경을 클릭했을 때 모달이 닫혀야 하는지 여부를 결정합니다. | boolean                                                                                                                   | N         | true                   |
-| contentsPadding               | 모달 내용의 패딩입니다.                                    | string                                                                                                                    | N         | BASIC_PADDING          |
-| borderRadius                  | 모달의 테두리 반경입니다.                                  | string                                                                                                                    | N         | BASIC_BORDER_RADIUS    |
-| backgroundColor               | 모달과 배경의 배경색입니다.                                | Background                                                                                                                | N         | BASIC_BACKGROUND_COLOR |
-| title                         | 모달의 제목입니다.                                         | ReactNode                                                                                                                 | N         | -                      |
-| buttonContainerJustifyContent | 버튼 컨테이너의 정렬 방식입니다.                           | ButtonContainerJustifyContent                                                                                             | N         | -                      |
-| confirmButton                 | 확인 버튼의 구성입니다.                                    | Button                                                                                                                    | Y         | -                      |
-| cancelButton                  | 취소 버튼의 구성입니다.                                    | Button                                                                                                                    | Y         | -                      |
-| isConfirmButtonFirst          | 확인 버튼이 먼저 배치되어야 하는지 여부를 결정합니다.      | boolean                                                                                                                   | N         | -                      |
-| label                         | 입력 필드의 레이블입니다.                                  | string                                                                                                                    | Y         | -                      |
-| input                         | 입력 필드의 구성입니다.                                    | { attribute?: Omit<React.HtmlHTMLAttributes<HTMLInputElement>, 'id'>; props: Omit<React.ComponentProps<'input'>, 'id'>; } | Y         | -                      |
+| Props                         | 설명                                                                                                                                                    | 타입                                | 필수 여부 | 기본값                   |
+| ----------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------- | --------- | ------------------------ |
+| openModal                     | 모달의 가시성을 제어합니다                                                                                                                              | .`boolean`                          | Y         | -                        |
+| setOpenModal                  | openModal의 상태를 설정하는 함수입니다.                                                                                                                 | `Dispatch<SetStateAction<boolean>>` | Y         | -                        |
+| isCloseOnEscEsc               | 키를 눌렀을 때 모달이 닫혀야 하는지 여부를 결정합니다.                                                                                                  | `boolean`                           | N         | true                     |
+| isCloseOnBackdrop             | 배경을 클릭했을 때 모달이 닫혀야 하는지 여부를 결정합니다.                                                                                              | `boolean`                           | N         | true                     |
+| contentsPadding               | 모달 내용의 패딩입니다.                                                                                                                                 | `string`                            | N         | `BASIC_PADDING`          |
+| borderRadius                  | 모달의 테두리 반경입니다.                                                                                                                               | `string`                            | N         | `BASIC_BORDER_RADIUS`    |
+| backgroundColor               | 모달과 배경의 배경색입니다.                                                                                                                             | `Background`                        | N         | `BASIC_BACKGROUND_COLOR` |
+| title                         | 모달의 제목입니다.                                                                                                                                      | `ReactNode`                         | N         | -                        |
+| buttonContainerJustifyContent | 버튼 컨테이너의 정렬 방식입니다.                                                                                                                        | `ButtonContainerJustifyContent`     | N         | -                        |
+| children                      | <ul><li>확인,취소 버튼으로 사용할 버튼들을 children으로 설정해주세요. </li><li>children안의 버튼이 클릭 되면 모달이 닫히는 기능이 작동합니다.</li></ul> | `ReactNode`                         | Y         | -                        |
+| label                         | 입력 필드의 레이블입니다.                                                                                                                               | `string`                            | Y         | -                        |
+| input                         | 입력 필드의 구성입니다.                                                                                                                                 | `ReactElement<HTMLInputElement>`    | Y         | -                        |
 
 #### TostModal
 
-| Props             | 설명                                                       | 타입                              | 필수 여부 | 기본값                 |
-| ----------------- | ---------------------------------------------------------- | --------------------------------- | --------- | ---------------------- |
-| openModal         | 모달의 가시성을 제어합니다.                                | boolean                           | Y         | -                      |
-| setOpenModal      | openModal의 상태를 설정하는 함수입니다.                    | Dispatch<SetStateAction<boolean>> | Y         | -                      |
-| isCloseOnEscEsc   | 키를 눌렀을 때 모달이 닫혀야 하는지 여부를 결정합니다.     | boolean                           | N         | true                   |
-| isCloseOnBackdrop | 배경을 클릭했을 때 모달이 닫혀야 하는지 여부를 결정합니다. | boolean                           | N         | true                   |
-| contentsPadding   | 모달 내용의 패딩입니다.                                    | string                            | N         | BASIC_PADDING          |
-| borderRadius      | 모달의 테두리 반경입니다.                                  | string                            | N         | BASIC_BORDER_RADIUS    |
-| backgroundColor   | 모달과 배경의 배경색입니다                                 | .Background                       | N         | BASIC_BACKGROUND_COLOR |
-| children          | 모달의 내용입니다.                                         | ReactNode                         | Y         | -                      |
-| animationDuration | 애니메이션의 지속 시간(밀리초)입니다.                      | number                            | N         | 6000                   |
-| isNeedAnimation   | 애니메이션이 필요한지 여부를 결정합니다.                   | boolean                           | N         | -                      |
-| position          | 토스트 모달의 위치입니다.                                  | ModalPosition                     | Y         | -                      |
-| toastDuration     | 토스트 모달의 지속 시간(밀리초)입니다.                     | number                            | N         | 6000                   |
+| Props             | 설명                                                       | 타입                                | 필수 여부 | 기본값                   |
+| ----------------- | ---------------------------------------------------------- | ----------------------------------- | --------- | ------------------------ |
+| openModal         | 모달의 가시성을 제어합니다.                                | `boolean`                           | Y         | -                        |
+| setOpenModal      | openModal의 상태를 설정하는 함수입니다.                    | `Dispatch<SetStateAction<boolean>>` | Y         | -                        |
+| isCloseOnEscEsc   | 키를 눌렀을 때 모달이 닫혀야 하는지 여부를 결정합니다.     | `boolean`                           | N         | `true`                   |
+| isCloseOnBackdrop | 배경을 클릭했을 때 모달이 닫혀야 하는지 여부를 결정합니다. | `boolean`                           | N         | `true`                   |
+| contentsPadding   | 모달 내용의 패딩입니다.                                    | `string`                            | N         | `BASIC_PADDING`          |
+| borderRadius      | 모달의 테두리 반경입니다.                                  | `string`                            | N         | `BASIC_BORDER_RADIUS`    |
+| backgroundColor   | 모달과 배경의 배경색입니다                                 | .Background                         | N         | `BASIC_BACKGROUND_COLOR` |
+| children          | 모달의 내용입니다.                                         | `ReactNode`                         | Y         | -                        |
+| animationDuration | 애니메이션의 지속 시간(밀리초)입니다.                      | `number`                            | N         | 6000                     |
+| isNeedAnimation   | 애니메이션이 필요한지 여부를 결정합니다.                   | `boolean`                           | N         | -                        |
+| position          | 토스트 모달의 위치입니다.                                  | `ModalPosition`                     | Y         | -                        |
+| toastDuration     | 토스트 모달의 지속 시간(밀리초)입니다.                     | `number`                            | N         | 6000                     |
 
 ### 제공하는 기능
 
@@ -283,4 +273,5 @@ function useToastModalAnimation(): {
 - BottomModal 의 등장,퇴장 애니메이션이 적용된 모달 닫기 기능을 BottomModal 내에서 어디서든 사용할 수 있도록 제공된 context입니다.
 
 **ModalContainerContext**
--ModalContainer의 내부에서 ModalContainer의 props를 쓸 수 있도록 하는 context입니다.
+
+- ModalContainer의 내부에서 ModalContainer의 props를 쓸 수 있도록 하는 context입니다.

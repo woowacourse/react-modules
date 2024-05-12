@@ -13,32 +13,18 @@ const InputLabel = styled.label`
 `;
 
 export default function PromptModal(props: PromptModalProps) {
-  const {
-    setOpenModal,
-    title,
-    label,
-    input,
-    buttonContainerJustifyContent = 'right',
-    confirmButton,
-    cancelButton,
-    isConfirmButtonFirst,
-  } = props;
+  const { setOpenModal, title, label, input, buttonContainerJustifyContent = 'right', children } = props;
 
-  const inputId = `input_${useId()}`;
+  const inputId = `prompt-modal__input-${useId()}`;
   const closeModal = () => setOpenModal(false);
 
   return (
     <CenterModal {...props}>
       {title}
       <InputLabel htmlFor={inputId}>{label}</InputLabel>
-      <input id={inputId} {...input.attribute} {...input.props} />
-      <ButtonContainer $buttonContainerJustifyContent={buttonContainerJustifyContent}>
-        <ConfirmAndCancelButtonGroup
-          confirmButton={confirmButton}
-          cancelButton={cancelButton}
-          isConfirmButtonFirst={isConfirmButtonFirst}
-          closeModal={closeModal}
-        />
+      {React.cloneElement(input, { id: inputId })}
+      <ButtonContainer $buttonContainerJustifyContent={buttonContainerJustifyContent} onClick={closeModal}>
+        {children}
       </ButtonContainer>
     </CenterModal>
   );

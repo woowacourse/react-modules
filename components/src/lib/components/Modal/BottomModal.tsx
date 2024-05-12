@@ -59,23 +59,12 @@ function BottomModal(props: BottomModalProps) {
   );
 }
 
-function BottomModalButton({ children, onClick, isCloseModal, ...rest }: ModalButtonProps) {
+function BottomModalCloseButtonWrapper({ children }: { children: ReactElement<HTMLButtonElement> }) {
   const { handleCloseModal } = useModalContext(BottomModalContext);
 
-  const handleClick = (e: MouseEvent<HTMLButtonElement>) => {
-    if (onClick) onClick(e);
-    if (isCloseModal) {
-      handleCloseModal();
-    }
-  };
-
-  return (
-    <button {...rest} onClick={handleClick}>
-      {children}
-    </button>
-  );
+  return <div onClick={handleCloseModal}>{children}</div>;
 }
 
-BottomModal.Button = BottomModalButton;
+BottomModal.CloseButtonWrapper = BottomModalCloseButtonWrapper;
 
 export default BottomModal;

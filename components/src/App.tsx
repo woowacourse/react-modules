@@ -19,6 +19,20 @@ export const AppModalContents = styled.div`
   }
 `;
 
+function ConfirmButton() {
+  return (
+    <button
+      style={{ backgroundColor: 'black', color: '#ffff', borderRadius: BASIC_BORDER_RADIUS }}
+      onClick={() => alert('확인')}
+    >
+      확인
+    </button>
+  );
+}
+function CancelButton() {
+  return <button style={{ backgroundColor: '#ffff', color: 'black', borderRadius: BASIC_BORDER_RADIUS }}>취소</button>;
+}
+
 function App() {
   const [openCenterModal, setOpenCenterModal] = useState(false);
   const [openBottomModal, setOpenBottomModal] = useState(false);
@@ -40,12 +54,16 @@ function App() {
 
       <BottomModal openModal={openBottomModal} setOpenModal={setOpenBottomModal}>
         <h1>Bottom Modal</h1>
-        <BottomModal.Button isCloseModal={true}>close</BottomModal.Button>
+        <BottomModal.CloseButtonWrapper>
+          <button>close</button>
+        </BottomModal.CloseButtonWrapper>
       </BottomModal>
 
       <CenterModal openModal={openCenterModal} setOpenModal={setOpenCenterModal}>
         <h1>Center Modal</h1>
-        <ModalContainer.Button isCloseModal={true}>close button</ModalContainer.Button>
+        <ModalContainer.CloseButtonWrapper>
+          <button>close</button>
+        </ModalContainer.CloseButtonWrapper>
       </CenterModal>
 
       <ToastModal
@@ -90,43 +108,28 @@ function App() {
           </AppModalContents>
         }
         buttonContainerJustifyContent="space-between"
-        confirmButton={{
-          contents: '확인',
-          style: { backgroundColor: 'black', color: '#ffff', borderRadius: BASIC_BORDER_RADIUS },
-          extraClickAction: () => alert('확인'),
-        }}
-        cancelButton={{
-          contents: '취소',
-          style: { backgroundColor: '#ffff', color: 'black', borderRadius: BASIC_BORDER_RADIUS },
-        }}
-      />
-
+      >
+        <ConfirmButton />
+        <CancelButton />
+      </ConfirmModal>
       <PromptModal
         openModal={openPromptModal}
         setOpenModal={setOpenPromptModal}
         title={<ModalTitle>alert modal</ModalTitle>}
         label="prompt modal"
-        input={{
-          attribute: {
-            className: 'input test',
-          },
-          props: {
-            onChange: (e) => {
+        input={
+          <input
+            className="input-test"
+            onChange={(e) => {
               console.log(e.target.value);
-            },
-          },
-        }}
+            }}
+          />
+        }
         buttonContainerJustifyContent="space-between"
-        confirmButton={{
-          contents: '확인',
-          style: { backgroundColor: 'black', color: '#ffff', borderRadius: BASIC_BORDER_RADIUS },
-          extraClickAction: () => alert('확인'),
-        }}
-        cancelButton={{
-          contents: '취소',
-          style: { backgroundColor: '#ffff', color: 'black', borderRadius: BASIC_BORDER_RADIUS },
-        }}
-      />
+      >
+        <CancelButton />
+        <ConfirmButton />
+      </PromptModal>
     </>
   );
 }

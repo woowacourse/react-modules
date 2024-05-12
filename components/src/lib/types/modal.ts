@@ -26,6 +26,10 @@ export interface ModalCommonProps {
   children: ReactNode;
 }
 
+export interface ModalContainerProps extends Omit<ModalCommonProps, 'setOpenModal'>, AnimationProps {
+  closeModal: () => void;
+}
+
 export interface AnimationProps {
   animationDuration?: number; //단위:ms
   isNeedAnimation?: boolean;
@@ -51,22 +55,7 @@ export interface AlertModalProps extends Omit<ModalCommonProps, 'children'> {
   buttonContents: ReactNode;
 }
 
-export type ExtraClickAction = (e?: MouseEvent<HTMLButtonElement>) => void;
-export interface Button {
-  contents: ReactNode;
-  style?: CSSProperties;
-  extraClickAction?: ExtraClickAction;
-}
-
-export interface ConfirmAndCancelButtonGroupProps {
-  confirmButton: Button;
-  cancelButton: Button;
-  isConfirmButtonFirst?: boolean;
-  closeModal: () => void;
-}
-export interface ConfirmModalProps
-  extends Omit<ModalCommonProps, 'children'>,
-    Omit<ConfirmAndCancelButtonGroupProps, 'closeModal'> {
+export interface ConfirmModalProps extends ModalCommonProps {
   title?: ReactNode;
   contents: ReactNode;
   buttonContainerJustifyContent?: ButtonContainerJustifyContent;
@@ -74,17 +63,5 @@ export interface ConfirmModalProps
 
 export interface PromptModalProps extends Omit<ConfirmModalProps, 'contents'> {
   label: string;
-  input: {
-    attribute?: Omit<React.HtmlHTMLAttributes<HTMLInputElement>, 'id'>;
-    props: Omit<React.ComponentProps<'input'>, 'id'>;
-  };
-}
-export interface ModalContainerProps extends Omit<ModalCommonProps, 'setOpenModal'>, AnimationProps {
-  closeModal: () => void;
-}
-
-export interface ModalButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
-  children: ReactNode;
-  isCloseModal: boolean;
-  handleCloseModal?: () => void;
+  input: ReactElement<HTMLInputElement>;
 }
