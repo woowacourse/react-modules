@@ -4,24 +4,16 @@ import getCardBrand from "./getCardBrand";
 const formattingCardNumber = (cardNumber: string) => {
   const cardBrand = getCardBrand(cardNumber);
 
-  if (cardBrand === "Diners" || cardBrand === "AMEX") {
-    const match = cardNumber.match(REGEX.specificCardFormat);
-    if (!match) return cardNumber;
+  const format =
+    cardBrand === "Diners" || cardBrand === "AMEX"
+      ? REGEX.specificCardFormat
+      : REGEX.normalCardFormat;
 
-    return [match[1], match[2] ? " " : "", match[2], match[3] ? " " : "", match[3]].join("");
-  }
+  const matches = cardNumber.match(format);
+  if (!matches) return cardNumber;
 
-  const match = cardNumber.match(REGEX.normalCardFormat);
-  if (!match) return cardNumber;
-  return [
-    match[1],
-    match[2] ? " " : "",
-    match[2],
-    match[3] ? " " : "",
-    match[3],
-    match[4] ? " " : "",
-    match[4],
-  ].join("");
+  matches[0] = "";
+  return matches.filter(Boolean).join(" ");
 };
 
 export default formattingCardNumber;
