@@ -24,6 +24,7 @@ export const CenterModalSample: Story = {
   args: {
     openModal: true,
     setOpenModal: () => {},
+    modalTargetEl: null,
     children: (
       <>
         <h1>Center Modal</h1>

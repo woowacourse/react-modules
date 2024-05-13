@@ -24,6 +24,7 @@ export const BottomModalSample: Story = {
   args: {
     openModal: true,
     setOpenModal: () => {},
+    modalTargetEl: null,
     children: (
       <>
         <h1>Bottom Modal</h1>

@@ -23,17 +23,17 @@ const ModalWrapper = styled.div<ModalWrapperProps>`
 `;
 
 function ModalContainer(props: ModalContainerProps) {
-  const { openModal, children, ...rest } = props;
+  const { openModal, children, modalTargetEl, ...rest } = props;
   const [styleProps, setStyleProps] = useState<ModalWrapperProps>({
     $width: '100vw',
     $margin: 'inherit',
   });
 
   useLayoutEffect(() => {
-    const rootEl = document.getElementById('root');
-    if (!rootEl) return;
-    const computedStyle = window.getComputedStyle(rootEl);
-    const { width } = rootEl.getBoundingClientRect();
+    if (!modalTargetEl) return;
+
+    const computedStyle = window.getComputedStyle(modalTargetEl);
+    const { width } = modalTargetEl.getBoundingClientRect();
     const { margin } = computedStyle;
 
     setStyleProps({ $width: `${width}px`, $margin: margin });

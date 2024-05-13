@@ -25,6 +25,7 @@ export const ConfirmModalSample: Story = {
   args: {
     openModal: true,
     setOpenModal: () => {},
+    modalTargetEl: null,
     title: <ModalTitle>alert modal</ModalTitle>,
     contents: (
       <AppModalContents>

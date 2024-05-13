@@ -24,6 +24,7 @@ export const PromptModalSample: Story = {
   args: {
     openModal: true,
     setOpenModal: () => {},
+    modalTargetEl: null,
     title: <ModalTitle>alert modal</ModalTitle>,
     label: 'prompt modal',
     input: (

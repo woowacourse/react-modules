@@ -16,6 +16,7 @@ export interface Background {
   backdrop?: string;
 }
 export interface ModalCommonProps {
+  modalTargetEl: HTMLElement | null;
   openModal: boolean;
   setOpenModal: Dispatch<SetStateAction<boolean>>;
   isCloseOnEsc?: boolean;

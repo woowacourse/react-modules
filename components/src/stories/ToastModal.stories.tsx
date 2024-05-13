@@ -24,6 +24,7 @@ export const ToastModalSample: Story = {
   args: {
     openModal: true,
     setOpenModal: () => {},
+    modalTargetEl: null,
     position: { top: '100', left: '100' },
     isNeedAnimation: true,
     backgroundColor: { modal: 'rgb(248, 255, 188)' },

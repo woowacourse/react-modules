@@ -51,7 +51,7 @@ function App() {
   const [openPromptModal, setOpenPromptModal] = useState(false);
   const positionRef = useRef<HTMLDivElement>(null);
   const { position } = usePosition(positionRef.current);
-
+  const rootEl = document.getElementById('root');
   return (
     <>
       <button onClick={() => setOpenCenterModal(true)}> center modal open</button>
@@ -61,14 +61,14 @@ function App() {
       <button onClick={() => setOpenConfirmModal(true)}> confirm modal open</button>
       <button onClick={() => setOpenPromptModal(true)}> prompt modal open</button>
 
-      <BottomModal openModal={openBottomModal} setOpenModal={setOpenBottomModal}>
+      <BottomModal openModal={openBottomModal} setOpenModal={setOpenBottomModal} modalTargetEl={rootEl}>
         <h1>Bottom Modal</h1>
         <BottomModal.CloseButtonWrapper>
           <button>close</button>
         </BottomModal.CloseButtonWrapper>
       </BottomModal>
 
-      <CenterModal openModal={openCenterModal} setOpenModal={setOpenCenterModal}>
+      <CenterModal openModal={openCenterModal} setOpenModal={setOpenCenterModal} modalTargetEl={rootEl}>
         <h1>Center Modal</h1>
         <ModalContainer.CloseButtonWrapper>
           <button>close</button>
@@ -78,6 +78,7 @@ function App() {
       <ToastModal
         openModal={openToastModal}
         setOpenModal={setOpenToastModal}
+        modalTargetEl={rootEl}
         position={position}
         isNeedAnimation={true}
         backgroundColor={{ modal: 'rgb(248, 255, 188)' }}
@@ -94,6 +95,7 @@ function App() {
       <AlertModal
         openModal={openAlertModal}
         setOpenModal={setOpenAlertModal}
+        modalTargetEl={rootEl}
         title={<ModalTitle>alert modal</ModalTitle>}
         contents={
           <AppModalContents>
@@ -109,6 +111,7 @@ function App() {
       <ConfirmModal
         openModal={openConfirmModal}
         setOpenModal={setOpenConfirmModal}
+        modalTargetEl={rootEl}
         title={<ModalTitle>alert modal</ModalTitle>}
         contents={
           <AppModalContents>
@@ -124,6 +127,7 @@ function App() {
       <PromptModal
         openModal={openPromptModal}
         setOpenModal={setOpenPromptModal}
+        modalTargetEl={rootEl}
         title={<ModalTitle>alert modal</ModalTitle>}
         label="prompt modal"
         input={
