@@ -1,0 +1,18 @@
+:root {
+  --default-backdrop-opacity: 0.4;
+
+  --default-border-radius: 5px;
+
+  --default-button-height: 2.5rem;
+  --default-margin: 5px;
+
+  --default-small-width: 30%;
+  --default-medium-width: 40%;
+  --default-large-width: 50%;
+
+  --default-primary-color: white;
+  --default-accent-color: black;
+  --default-secondary-color: grey;
+  --default-title-font-color: black;
+  --default-subtitle-font-color: gray;
+}

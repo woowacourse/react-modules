@@ -10,15 +10,15 @@
 .title {
   width: 100%;
   text-align: left;
-  color: black;
+  color: var(--default-title-font-color);
   font-size: 0.8rem;
 }
 
 .input {
   width: calc(100% - 5px);
   height: 2rem;
-  margin: 5px;
-  border-radius: 5px;
-  border: 1px solid black;
+  margin: var(--default-margin);
+  border-radius: var(--default-border-radius);
+  border: 1px solid var(--default-accent-color);
   padding: 5px;
 }

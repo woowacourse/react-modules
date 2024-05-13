@@ -5,7 +5,7 @@
 
   position: fixed;
   border-radius: 5px;
-  background-color: #ffffff;
+  background-color: var(--default-primary-color);
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -19,21 +19,11 @@
   align-items: center;
 
   position: fixed;
-  border-radius: 5px;
-  background-color: #ffffff;
+  border-radius: var(--default-border-radius);
+  background-color: var(--default-primary-color);
   bottom: 0;
   height: fit-content;
   width: 100%;
-}
-
-.backdrop {
-  position: fixed;
-
-  width: 100vw;
-  height: 100vh;
-
-  background-color: #000000;
-  opacity: 0.4;
 }
 
 .header {
@@ -47,22 +37,6 @@
 .title-field {
   display: flex;
   flex-direction: column;
-  width: 100%;
-}
-
-.title {
-  font-size: 18px;
-  text-align: left;
-  font-weight: bold;
-  color: black;
-  width: 100%;
-}
-
-.subtitle {
-  font-size: 12px;
-  font-weight: normal;
-  text-align: left;
-  color: gray;
   width: 100%;
 }
 
@@ -95,7 +69,6 @@
   border-radius: 5px;
   margin: 0 10px;
   color: grey;
-  background-color: lightgrey;
 }
 
 .button-confirm {
@@ -107,6 +80,6 @@
   height: 3rem;
   border-radius: 5px;
   margin: 0 10px;
-  color: white;
-  background-color: black;
+  color: var(--default-primary-color);
+  background-color: var(--default-accent-color);
 }

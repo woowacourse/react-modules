@@ -4,8 +4,8 @@
   width: 100vw;
   height: 100vh;
 
-  background-color: #000000;
-  opacity: 0.4;
+  background-color: var(--default-accent-color);
+  opacity: var(--default-backdrop-opacity);
 }
 
 .container {
@@ -14,7 +14,7 @@
   align-items: center;
 
   position: fixed;
-  background-color: #ffffff;
+  background-color: var(--default-primary-color);
   min-width: 10%;
   min-height: 5%;
   height: fit-content;
@@ -36,13 +36,13 @@
 }
 
 .small {
-  width: 30%;
+  width: var(--default-small-width);
 }
 
 .medium {
-  width: 40%;
+  width: var(--default-medium-width);
 }
 
 .large {
-  width: 50%;
+  width: var(--default-large-width);
 }
