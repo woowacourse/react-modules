@@ -1,9 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { Modal } from '../lib/index';
+import { Modal } from '../../lib';
 import React from 'react';
 
 const meta = {
-  title: 'Modal',
+  title: 'ModalFeature',
   component: Modal,
 } satisfies Meta<typeof Modal>;
 
@@ -14,7 +14,6 @@ type Story = StoryObj<typeof meta>;
 export const 모달이_열림_Dialog: Story = {
   args: {
     open: true,
-    children: <Modal.Header title="마루" onClose={() => console.log('마루')} />,
     type: 'dialog',
     onClose: () => console.log('마루'),
   },

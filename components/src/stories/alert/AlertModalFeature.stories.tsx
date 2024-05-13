@@ -1,10 +1,10 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { ConfirmModal } from '../lib/index';
+import { AlertModal } from '../../lib/index';
 
 const meta = {
-  title: 'ConfirmModal',
-  component: ConfirmModal,
-} satisfies Meta<typeof ConfirmModal>;
+  title: 'AlertModalFeature',
+  component: AlertModal,
+} satisfies Meta<typeof AlertModal>;
 
 export default meta;
 
