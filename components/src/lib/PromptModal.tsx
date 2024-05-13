@@ -11,20 +11,38 @@ interface PromptModalProps {
   confirmLabel: string;
   cancelLabel: string;
   size: ModalSize;
+  inputLabels?: string[];
+  isDisplayLabel?: boolean;
 }
-function PromptModal({ isOpen, closeModal, title, description, cancelLabel, confirmLabel, size }: PromptModalProps) {
+function PromptModal({
+  isOpen,
+  closeModal,
+  title,
+  description,
+  cancelLabel,
+  confirmLabel,
+  size,
+  inputLabels = ["default"],
+  isDisplayLabel = false,
+}: PromptModalProps) {
   return (
     <Modal isOpen={isOpen} closeModal={closeModal}>
       <Modal.Positioner position="center" size={size}>
         <Modal.Header title={title} closeButton={false} onClose={closeModal} />
         <Modal.Content description={description}>
-          <input
-            className={css`
-              width: 100%;
-              height: 32px;
-              font-size: 11px;
-            `}
-          />
+          {inputLabels.map((label) => (
+            <>
+              {isDisplayLabel && <label key={label}></label>}
+              <input
+                key={`${label}_input`}
+                className={css`
+                  width: 100%;
+                  height: 32px;
+                  font-size: 11px;
+                `}
+              />
+            </>
+          ))}
         </Modal.Content>
         <Modal.Footer
           confirmLabel={confirmLabel}
