@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-import CloseButton from "../CloseButton/CloseButton";
+import CloseButton from "../../CloseButton/CloseButton";
 import x_img from "../assets/images/x_img.png";
 import Button from "../common/Button";
 import { ModalContextProvider, useModalContext } from "../hooks/useModalContext";
+import { ModalProps } from "../type";
 import {
   StyledModalBody,
   StyledModalContainer,
@@ -11,13 +12,6 @@ import {
   StyledModalHeader,
   StyledModalInput,
 } from "./Modal.style";
-
-export interface ModalProps {
-  modalPosition: "center" | "bottom";
-  closeButtonPosition: "top" | "bottom";
-  placeholder?: string;
-  onSubmit?: (value: string) => void | string;
-}
 
 /* -------------------------------------------------------------------------------------------------
  * ModalProvider
