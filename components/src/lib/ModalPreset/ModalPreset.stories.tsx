@@ -43,13 +43,14 @@ export default meta;
 type Story = StoryObj<typeof Modal>;
 
 export const AlertModal: Story = {
-  render: () => {
+  render: (_, context) => {
     const [isOpen, setIsOpen] = useState(false);
 
     return (
       <div style={{ height: '500px' }}>
         <Button text="Modal Open" onClick={() => setIsOpen(true)} />
         <MyAlertModal
+          {...context.args}
           isOpen={isOpen}
           close={() => setIsOpen(false)}
           title="아이디를 입력해주세요."
@@ -62,13 +63,14 @@ export const AlertModal: Story = {
 };
 
 export const ConfirmModal: Story = {
-  render: () => {
+  render: (_, context) => {
     const [isOpen, setIsOpen] = useState(false);
 
     return (
       <div style={{ height: '500px' }}>
         <Button text="Modal Open" onClick={() => setIsOpen(!isOpen)} />
         <MyConfirmModal
+          {...context.args}
           isOpen={isOpen}
           close={() => setIsOpen(false)}
           title="카드를 삭제하시겠습니까?"
@@ -81,7 +83,7 @@ export const ConfirmModal: Story = {
 };
 
 export const PromptModal: Story = {
-  render: () => {
+  render: (_, context) => {
     const [isOpen, setIsOpen] = useState(false);
     const [value, setValue] = useState('');
 
@@ -93,6 +95,7 @@ export const PromptModal: Story = {
       <div style={{ height: '500px' }}>
         <Button text="Modal Open" onClick={() => setIsOpen(!isOpen)} />
         <MyPromptModal
+          {...context.args}
           onConfirm={() => setIsOpen(false)}
           value={value}
           onChange={handleChange}
