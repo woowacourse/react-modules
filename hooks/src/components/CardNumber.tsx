@@ -1,4 +1,4 @@
-import useCardNumbers from '../lib/useCardNumbers/useCardNumbers';
+import useCardNumber from '../lib/useCardNumber/useCardNumber';
 
 const CardNumbers = () => {
   const {
@@ -8,7 +8,7 @@ const CardNumbers = () => {
     onChangeHandler,
     onBlurHandler,
     onFocusHandler,
-  } = useCardNumbers('');
+  } = useCardNumber('');
 
   return (
     <>

@@ -1,10 +1,10 @@
 import { act } from 'react';
 import { renderHook } from '@testing-library/react';
-import useCardNumbers from './useCardNumbers';
+import useCardNumber from './useCardNumber';
 
-describe('useCardNumbers Hook', () => {
+describe('useCardNumber Hook', () => {
   it('initializes correctly with empty values', () => {
-    const { result } = renderHook(() => useCardNumbers(''));
+    const { result } = renderHook(() => useCardNumber(''));
     expect(result.current.value).toBe('');
     expect(result.current.cardBrand).toBe('none');
     expect(result.current.errorMessage).toBe('');
@@ -45,7 +45,7 @@ describe('useCardNumbers Hook', () => {
     ])(
       '$type 카드의 번호는 $formatted와 같이 포맷팅 되어야 한다.',
       async ({ number, formatted }) => {
-        const { result } = renderHook(() => useCardNumbers(''));
+        const { result } = renderHook(() => useCardNumber(''));
         act(() => {
           result.current.onChangeHandler({
             target: { value: number },
@@ -59,7 +59,7 @@ describe('useCardNumbers Hook', () => {
 
   describe('error 처리 테스트', () => {
     it('숫자가 아닌 값이 입력됐을 때, 에러가 발생하고 값이 변경되지 않아야 한다.', () => {
-      const { result } = renderHook(() => useCardNumbers(''));
+      const { result } = renderHook(() => useCardNumber(''));
       act(() => {
         result.current.onChangeHandler({
           target: { value: 'abc' },
@@ -101,7 +101,7 @@ describe('useCardNumbers Hook', () => {
         maxLength: 16,
       },
     ])('formats $type card correctly', ({ number, maxLength }) => {
-      const { result } = renderHook(() => useCardNumbers(''));
+      const { result } = renderHook(() => useCardNumber(''));
       act(() =>
         result.current.onChangeHandler({
           target: { value: number },

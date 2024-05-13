@@ -4,15 +4,15 @@ import CardCVC from './components/CardCVC';
 import CardCompany from './components/CardCompany';
 import CardExpirationDate from './components/CardExpirationDate';
 import CardHolderName from './components/CardHolderName';
-import CardNumbers from './components/CardNumbers';
+import CardNumber from './components/CardNumber';
 import CardPassword from './components/CardPassword';
 import React from 'react';
 
 function App() {
   return (
     <div>
-      <h2>CardNumbers</h2>
-      <CardNumbers />
+      <h2>CardNumber</h2>
+      <CardNumber />
       <h2>CardCompany</h2>
       <CardCompany />
       <h2>CardExpirationDate</h2>

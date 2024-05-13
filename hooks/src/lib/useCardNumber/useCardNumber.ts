@@ -41,7 +41,7 @@ const CARD_BRAND_TABLE: Record<string, CardBrandInfo> = {
   },
 };
 
-const useCardNumbers = (initValue: string) => {
+const useCardNumber = (initValue: string) => {
   const [cardBrand, setCardBrand] = useState('none');
   const maxLength = CARD_BRAND_TABLE[cardBrand].maxLength;
 
@@ -115,4 +115,4 @@ const useCardNumbers = (initValue: string) => {
   };
 };
 
-export default useCardNumbers;
+export default useCardNumber;
