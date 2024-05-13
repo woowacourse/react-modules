@@ -1,31 +1,28 @@
 import { useState } from "react";
 import {
-  CardBrandInfo,
   CardBrands,
   CARD_BRANDS_NAMES,
+  CardBrandsWithNone,
+  CardBrandInfoWithNone,
 } from "@/constants/cardBrand";
 
 const useCardBrands = () => {
-  const [cardBrand, setCardBrand] = useState<CardBrandInfo>(CardBrands["NONE"]);
+  const [cardBrand, setCardBrand] = useState<CardBrandInfoWithNone>(
+    CardBrandsWithNone["NONE"]
+  );
 
   const identifyBrand = (value: string) => {
-    let newCardBrandInfo = CardBrands["NONE"];
+    let newCardBrandInfo = CardBrandsWithNone["NONE"];
 
     CARD_BRANDS_NAMES.forEach((name) => {
       const identifiers = CardBrands[name].identifier;
-      if (identifiers) {
-        if (
-          identifiers.type === "value" &&
-          checkValueMatch(value, identifiers.values)
-        ) {
-          newCardBrandInfo = CardBrands[name];
-        } else if (
-          identifiers.type === "range" &&
-          checkRangeMatch(value, identifiers.values)
-        ) {
-          newCardBrandInfo = CardBrands[name];
-        }
-      }
+      if (
+        (identifiers.type === "value" &&
+          checkValueMatch(value, identifiers.values)) ||
+        (identifiers.type === "range" &&
+          checkRangeMatch(value, identifiers.values))
+      )
+        newCardBrandInfo = CardBrands[name];
     });
 
     setCardBrand(newCardBrandInfo);

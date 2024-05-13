@@ -2,6 +2,7 @@ export const formatNumberToArray = (value: string, numberFormat: number[]) => {
   let startIndex = 0;
   let lastIndex = 0;
   const formattedArr = [];
+
   for (const number of numberFormat) {
     if (startIndex >= value.length) {
       break;

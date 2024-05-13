@@ -8,23 +8,29 @@ interface RangeIdentifier {
   values: [number, number][];
 }
 
-export type Identifier = NumbersIdentifier | RangeIdentifier | null;
-
 export type CardBrandName =
   | "VISA"
   | "MASTER_CARD"
   | "AMEX"
   | "DINERS"
-  | "UNION_PAY"
-  | "NONE";
+  | "UNION_PAY";
 
-export type CardBrandNameExcludedNone = Exclude<CardBrandName, "NONE">;
+export type CardBrandNameWithNone = CardBrandName | "NONE";
+
+export type Identifier = NumbersIdentifier | RangeIdentifier;
 
 export interface CardBrandInfo {
-  name: CardBrandName;
+  name: CardBrandNameWithNone;
   cardNumbersFormat: number[];
   validLength: number;
   identifier: Identifier;
+}
+
+export interface CardBrandInfoWithNone {
+  name: CardBrandNameWithNone;
+  cardNumbersFormat: number[];
+  validLength: number;
+  identifier: Identifier | null;
 }
 
 export const CardBrands: Record<CardBrandName, CardBrandInfo> = {
@@ -71,12 +77,19 @@ export const CardBrands: Record<CardBrandName, CardBrandInfo> = {
       ],
     },
   },
+} as const;
+
+export const CardBrandsWithNone: Record<
+  CardBrandNameWithNone,
+  CardBrandInfoWithNone
+> = {
+  ...CardBrands,
   NONE: {
     name: "NONE",
     cardNumbersFormat: [4, 4, 4, 4],
     validLength: 19,
     identifier: null,
   },
-} as const;
+};
 
 export const CARD_BRANDS_NAMES = Object.keys(CardBrands) as CardBrandName[];
