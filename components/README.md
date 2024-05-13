@@ -15,7 +15,7 @@ click [here](https://663f331668429975639822e1-qfzjoxtovx.chromatic.com/?path=/do
 ### Top-Level Exports
 
 - `<Button>`
-- `<Modal>`
+- `<CustomModal>`
 - `<AlertModal>`
 - `<ConfirmModal>`
 - `<PromptModal>`
@@ -55,14 +55,14 @@ const App = () => {
 | `text`                    | string                                            | The text displayed on the button. This is the primary content of the button and should clearly communicate its action.                                                         |
 | `onClick`                 | Function                                          | The function that is called when the button is clicked. This handler is triggered on user interaction with the button.                                                         |
 
-### `<Modal>`
+### `<CustomModal>`
 
 #### Usage
 
-Add the `<Modal>` component near the top of your application's tree.
+Add the `<CustomModal>` component near the top of your application's tree.
 
 ```tsx
-import { Modal } from 'woowacourse-todari-components';
+import { CustomModal } from 'woowacourse-todari-components';
 
 const App = () => {
   const [modalOpened, setModalOpened] = useState(false);
@@ -85,7 +85,7 @@ const App = () => {
         buttonStyle="primary"
         primaryColor="#1C77C1"
       />
-      <Modal
+      <CustomModal
         isOpened={modalOpened}
         onClose={handleModalClose}
         title="Todal Modal"
@@ -115,7 +115,7 @@ const App = () => {
         >
           Children Area
         </div>
-      </Modal>
+      </CustomModal>
     </>
   );
 };
