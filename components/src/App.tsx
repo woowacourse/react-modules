@@ -2,7 +2,6 @@ import React from 'react';
 import { useState } from 'react';
 import './App.css';
 import { Modal } from 'vwh-wtc-lv2-payments-modal';
-// import Modal from './lib/Modal';
 
 function App() {
   const [isOpen, setIsOpen] = useState(true);
@@ -16,25 +15,7 @@ function App() {
   };
 
   return (
-    <>
-      <h1 style={{ marginBottom: '20px' }}>Component Modules</h1>
-      <button type='button' onClick={openModal}>
-        모달 열기
-      </button>
-
-      <Modal
-        isOpen={isOpen}
-        setIsOpen={setIsOpen}
-        type='prompt'
-        size='medium'
-        title='Modal Title'
-        description='Modal Description'
-        placeholder='Enter Text'
-        confirmLabel='Confirm'
-        cancelLabel='Cancel'
-        onConfirm={onConfirm}
-      ></Modal>
-    </>
+    <h1 style={{ marginBottom: '20px' }}>Hooks Module</h1>
   );
 }
 
