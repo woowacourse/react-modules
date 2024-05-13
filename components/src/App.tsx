@@ -1,7 +1,8 @@
+import React from 'react';
 import { useState } from 'react';
 import './App.css';
-// import { Modal } from "./lib";
-import Modal from './lib/Modal';
+import { Modal } from 'vwh-wtc-lv2-payments-modal';
+// import Modal from './lib/Modal';
 
 function App() {
   const [isOpen, setIsOpen] = useState(true);
