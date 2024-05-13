@@ -7,12 +7,22 @@ import type { ModalProps } from '../types/Modal.type';
 
 export interface PromptModalProps extends ModalProps {
   headerText: string;
+  primaryButtonText?: string;
+  secondaryButtonText?: string;
   inputValue: string;
   onInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onConfirm: () => void;
 }
 
-const PromptModal = ({ headerText, inputValue, onInputChange, onConfirm, ...modalProps }: PromptModalProps) => {
+const PromptModal = ({
+  headerText,
+  primaryButtonText = '확인',
+  secondaryButtonText = '취소',
+  inputValue,
+  onInputChange,
+  onConfirm,
+  ...modalProps
+}: PromptModalProps) => {
   return (
     <MainModal {...modalProps}>
       <ModalHeader>
@@ -22,8 +32,8 @@ const PromptModal = ({ headerText, inputValue, onInputChange, onConfirm, ...moda
         <Input type="text" value={inputValue} onChange={onInputChange} />
       </ModalBody>
       <ModalFooter align="right">
-        <Button type="button" text="취소" mode="secondary" size="sm" onClick={modalProps.close}></Button>
-        <Button type="button" text="확인" size="sm" onClick={onConfirm}></Button>
+        <Button type="button" text={secondaryButtonText} mode="secondary" size="sm" onClick={modalProps.close}></Button>
+        <Button type="button" text={primaryButtonText} size="sm" onClick={onConfirm}></Button>
       </ModalFooter>
     </MainModal>
   );

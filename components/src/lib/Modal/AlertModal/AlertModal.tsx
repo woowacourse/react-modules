@@ -7,9 +7,10 @@ import type { ModalProps } from '../types/Modal.type';
 export interface AlertModalProps extends ModalProps {
   headerText: string;
   bodyText: string;
+  buttonText?: string;
 }
 
-const AlertModal = ({ headerText, bodyText, ...modalProps }: AlertModalProps) => {
+const AlertModal = ({ headerText, bodyText, buttonText = '확인', ...modalProps }: AlertModalProps) => {
   return (
     <MainModal {...modalProps}>
       <ModalHeader>
@@ -17,7 +18,7 @@ const AlertModal = ({ headerText, bodyText, ...modalProps }: AlertModalProps) =>
       </ModalHeader>
       <ModalBody>{bodyText}</ModalBody>
       <ModalFooter align="right">
-        <Button type="button" text="확인" size="sm" onClick={modalProps.close}></Button>
+        <Button type="button" text={buttonText} size="sm" onClick={modalProps.close}></Button>
       </ModalFooter>
     </MainModal>
   );

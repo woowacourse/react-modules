@@ -7,10 +7,19 @@ import type { ModalProps } from '../types/Modal.type';
 export interface ConfirmModalProps extends ModalProps {
   headerText: string;
   bodyText: string;
+  primaryButtonText?: string;
+  secondaryButtonText?: string;
   onConfirm: () => void;
 }
 
-const ConfirmModal = ({ headerText, bodyText, onConfirm, ...modalProps }: ConfirmModalProps) => {
+const ConfirmModal = ({
+  headerText,
+  bodyText,
+  primaryButtonText = '확인',
+  secondaryButtonText = '취소',
+  onConfirm,
+  ...modalProps
+}: ConfirmModalProps) => {
   return (
     <MainModal {...modalProps}>
       <ModalHeader>
@@ -18,8 +27,8 @@ const ConfirmModal = ({ headerText, bodyText, onConfirm, ...modalProps }: Confir
       </ModalHeader>
       <ModalBody>{bodyText}</ModalBody>
       <ModalFooter align="right">
-        <Button type="button" text="취소" mode="secondary" size="sm" onClick={modalProps.close}></Button>
-        <Button type="button" text="확인" size="sm" onClick={onConfirm}></Button>
+        <Button type="button" text={secondaryButtonText} mode="secondary" size="sm" onClick={modalProps.close}></Button>
+        <Button type="button" text={primaryButtonText} size="sm" onClick={onConfirm}></Button>
       </ModalFooter>
     </MainModal>
   );
