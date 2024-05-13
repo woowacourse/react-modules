@@ -43,6 +43,7 @@ export const ModalMain = ({
   shadow = true,
   animation = true,
   zIndex = 100,
+  customSize,
   ...rest
 }: StrictPropsWithChildren<ModalProps>) => {
   usePreventScroll(isOpen);
@@ -50,18 +51,23 @@ export const ModalMain = ({
 
   if (!isOpen) return null;
 
-  const modalStyle = {
+  const modalLayoutStyle = {
     zIndex,
+  };
+
+  const modalContainerStyle = {
+    width: `${customSize}%`,
   };
 
   return (
     <div
-      style={modalStyle}
+      style={modalLayoutStyle}
       className={`${styles.modalLayout} ${styles[position]} ${animation ? styles.animation : ''}`}
     >
       <div onClick={close} className={`${styles.modalBackdrop} ${styles[backdropType]}`} />
       <div
         {...rest}
+        style={modalContainerStyle}
         className={`${styles.modalContainer} ${styles[size]} ${styles[position]} ${shadow ? styles.shadow : ''} ${animation ? styles.animation : ''}`}
       >
         {children}
