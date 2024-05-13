@@ -37,3 +37,4 @@ describe("useCVC 훅 테스트", () => {
     const expectedErrorMessage = CVCErrorMessages[ErrorStatus.IS_NOT_NUMBER];
     expect(result.current.errorMessage).toBe(expectedErrorMessage);
   });
+});

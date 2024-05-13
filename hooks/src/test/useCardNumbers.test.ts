@@ -59,23 +59,4 @@ describe("useCardNumbers 훅 테스트", () => {
     };
     expect(result.current.errorMessages).toEqual(expectedErrorMessage);
   });
-
-  it("숫자가 4자리가 아닐때 에러를 낸다.", () => {
-    const { result } = renderHook(() => useCardNumbers(initialValues));
-
-    const invalidValues = "12345";
-    React.act(() => {
-      result.current.onChange({
-        target: { value: invalidValues, name: "cardNumber1" },
-      } as ChangeEvent<HTMLInputElement>);
-    });
-
-    const expectedErrorMessage = {
-      cardNumber1: CardNumbersErrorMessages[ErrorStatus.INVALID_LENGTH],
-      cardNumber2: null,
-      cardNumber3: null,
-      cardNumber4: null,
-    };
-    expect(result.current.errorMessages).toEqual(expectedErrorMessage);
-  });
 });

@@ -1,10 +1,10 @@
 import { ChangeEvent, useEffect, useRef, useState } from "react";
 import { validateLength, validateNumber } from "@/validate/validate";
-import { ErrorStatus } from "@/types/errorStatus";
 import { removeNonNumeric } from "@/utils/numberHelper";
 import { CardNumbersErrorMessages } from "@/constants/error";
 import { CardNumberErrorType } from "@/types/cardNumbers";
 import useCardBrands from "./useCardBrand";
+import { formatNumberToArray } from "@/utils/formatNumberToArray";
 
 const useMultiCardNumbers = () => {
   const [formattedNumbers, setFormattedNumbers] = useState<string[]>([]);
@@ -31,62 +31,48 @@ const useMultiCardNumbers = () => {
 
     validateValidLength(value, newCardBrand.validLength);
 
-    const { formattedArr, isEnd } = formatCardNumber(
+    const { formattedArr, isEnd } = formatNumberToArray(
       pureValue,
       newCardBrand.cardNumbersFormat
     );
+
+    setFormattedNumbers(formattedArr);
 
     let newSelectionStart = selectionStart || 0;
     if (isEnd) {
       newSelectionStart += 1;
     }
 
-    setFormattedNumbers(formattedArr);
+    if (inputRef.current) {
+      inputRef.current.selectionStart = newSelectionStart;
+      inputRef.current.selectionEnd = newSelectionStart;
+    }
     setCursorPosition(newSelectionStart);
   };
 
   const validateIsNumber = (value: string) => {
     const isValidNumberResult = validateNumber(value);
     const isValidNumber = isValidNumberResult.isValid;
-    if (!isValidNumber) {
-      setErrorMessage(isValidNumberResult.error);
-    } else {
-      resetErrorMessage(isValidNumberResult.error);
-    }
+
+    const numberErrorMessage = CardNumbersErrorMessages.isNotNumber;
+    !isValidNumberResult.isValid
+      ? setErrorMessage(numberErrorMessage)
+      : resetErrorMessage(numberErrorMessage);
+
     return isValidNumber;
   };
 
   const validateValidLength = (value: string, validLength: number) => {
     const isValidLengthResult = validateLength(value, validLength);
-    if (!isValidLengthResult.isValid) {
-      setErrorMessage(isValidLengthResult.error);
-    } else {
-      resetErrorMessage(isValidLengthResult.error);
-    }
+    const lengthErrorMessage = CardNumbersErrorMessages.isNotNumber;
+
+    !isValidLengthResult.isValid
+      ? setErrorMessage(lengthErrorMessage)
+      : resetErrorMessage(lengthErrorMessage);
   };
 
-  const formatCardNumber = (value: string, numberFormat: number[]) => {
-    let startIndex = 0;
-    let lastIndex = 0;
-    const formattedArr = [];
-    for (const number of numberFormat) {
-      if (startIndex >= value.length) {
-        break;
-      }
-      lastIndex = startIndex + number;
-      const part = value.slice(startIndex, startIndex + number);
-      formattedArr.push(part);
-      startIndex += number;
-    }
-
-    const isEnd = lastIndex === value.length;
-    return { formattedArr, isEnd };
-  };
-
-  const resetErrorMessage = (resolvedError: ErrorStatus) => {
-    if (errorMessage === resolvedError) {
-      setErrorMessage(null);
-    }
+  const resetErrorMessage = (resolvedError: string) => {
+    if (errorMessage === resolvedError) setErrorMessage(null);
   };
 
   return {
