@@ -3,9 +3,6 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { Modal } from '../lib';
 import React, { useReducer } from 'react';
 import { INITIAL_VIEWPORTS, MINIMAL_VIEWPORTS } from '@storybook/addon-viewport';
-import AlertModal from '../components/AlertModal';
-import ConfirmModal from '../components/ConfirmModal';
-import PromptModal from '../components/PromptModal';
 
 const meta = {
   title: 'Modal',
@@ -57,7 +54,7 @@ export const 모달_열림_center_animation: Story = {
     isOpen: true,
     position: 'center',
     isAnimation: true,
-    duration: 500,
+    animationDuration: 500,
   },
   render: args => <DefaultModal {...args} />,
 };
@@ -75,7 +72,7 @@ export const 모달_열림_bottom_animation: Story = {
     isOpen: true,
     position: 'bottom',
     isAnimation: true,
-    duration: 500,
+    animationDuration: 500,
   },
   render: args => <DefaultModal {...args} />,
 };
@@ -220,27 +217,6 @@ export const 모달_닫기_아이콘_커스텀_오류: Story = {
       </Modal.Footer>
     </Modal>
   ),
-};
-
-export const 모달_Alert: Story = {
-  args: {
-    isOpen: true,
-  },
-  render: args => <AlertModal toggleIsOpen={() => ''} {...args} />,
-};
-
-export const 모달_Confirm: Story = {
-  args: {
-    isOpen: true,
-  },
-  render: args => <ConfirmModal toggleIsOpen={() => ''} {...args} />,
-};
-
-export const 모달_Prompt: Story = {
-  args: {
-    isOpen: true,
-  },
-  render: args => <PromptModal toggleIsOpen={() => ''} {...args} />,
 };
 
 export const 모달_모바일_반응형: Story = {
