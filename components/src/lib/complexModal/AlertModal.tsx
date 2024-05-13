@@ -1,11 +1,9 @@
-import { Modal } from '.';
+import React from 'react';
+import { Modal } from '..';
 
-interface PromptModalProps {
+interface AlertModalProps {
   isOpen: boolean;
-  value: string;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onCloseIcon?: () => void;
-  onCloseButton?: () => void;
   onConfirmButton?: () => void;
   onDimmedClick?: () => void;
   position?: 'center' | 'bottom';
@@ -15,15 +13,12 @@ interface PromptModalProps {
   animationDuration?: number;
   title?: string;
   showCloseIcon?: boolean;
-  closeButtonLabel?: string;
-  confirmButtonLabel?: string;
-  placeholder?: string;
+  buttonLabel?: string;
 }
 
-const PromptModal = ({
+const AlertModal = ({
   isOpen,
   onCloseIcon,
-  onCloseButton,
   onConfirmButton,
   onDimmedClick,
   position = 'center',
@@ -33,12 +28,8 @@ const PromptModal = ({
   animationDuration,
   title,
   showCloseIcon = true,
-  closeButtonLabel = '취소',
-  confirmButtonLabel = '확인',
-  value,
-  onChange,
-  placeholder = '입력해주세요',
-}: PromptModalProps) => {
+  buttonLabel = '확인',
+}: AlertModalProps) => {
   const handleClickDimmed = () => {
     onDimmedClick && onDimmedClick();
   };
@@ -49,10 +40,6 @@ const PromptModal = ({
 
   const handleConfirmButton = () => {
     onConfirmButton && onConfirmButton();
-  };
-
-  const handleCloseButton = () => {
-    onCloseButton && onCloseButton();
   };
 
   return (
@@ -68,21 +55,12 @@ const PromptModal = ({
         <Modal.Title title={title} />
         <Modal.CloseIcon onClose={handleCloseIcon} showCloseIcon={showCloseIcon} />
       </Modal.Header>
-      {content && (
-        <Modal.Content>
-          <Modal.Input value={value} onChange={onChange} placeholder={placeholder} autoFocus />
-        </Modal.Content>
-      )}
+      {content && <Modal.Content>{content}</Modal.Content>}
       <Modal.Footer position="row" justifyContent="flex-end">
-        <Modal.CloseButton size="small" label={closeButtonLabel} onClose={handleCloseButton} />
-        <Modal.ConfirmButton
-          size="small"
-          label={confirmButtonLabel}
-          onConfirm={handleConfirmButton}
-        />
+        <Modal.ConfirmButton size="small" label={buttonLabel} onConfirm={handleConfirmButton} />
       </Modal.Footer>
     </Modal>
   );
 };
 
-export default PromptModal;
+export default AlertModal;

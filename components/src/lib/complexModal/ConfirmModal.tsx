@@ -1,5 +1,5 @@
 import React from 'react';
-import { Modal } from '.';
+import { Modal } from '..';
 
 interface ConfirmModalProps {
   isOpen: boolean;
