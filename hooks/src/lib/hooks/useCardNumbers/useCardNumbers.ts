@@ -11,51 +11,72 @@ function useCardNumbers() {
   const [formattedCardNumbers, setFormattedCardNumbers] = useState("");
 
   const checkCardBrand = (value: string) => {
-    const twoDigitValue = Number(value.substring(0, 2));
-    const threeDigitValue = Number(value.substring(0, 3));
-    const fourDigitValue = Number(value.substring(0, 4));
-    const sixDigitValue = Number(value.substring(0, 6));
+    const cardBrand = getCardBrand(value);
+    const maxLength = getCardNumbersMaxLength(cardBrand);
 
-    const inputValue = {
-      cardBrand: "domestic",
-    };
+    setCardBrand(cardBrand);
+    setCardNumberMaxLength(maxLength);
+  };
 
-    if (value.startsWith("4")) {
-      inputValue.cardBrand = "visa";
-      setCardNumberMaxLength(16);
-    } else if (twoDigitValue >= 51 && twoDigitValue <= 55) {
-      inputValue.cardBrand = "masterCard";
-      setCardNumberMaxLength(16);
-    } else if (twoDigitValue === 36) {
-      inputValue.cardBrand = "diners";
-      setCardNumberMaxLength(14);
-    } else if (twoDigitValue === 34 || twoDigitValue === 37) {
-      inputValue.cardBrand = "amex";
-      setCardNumberMaxLength(15);
-    } else if (
-      (threeDigitValue >= 624 && threeDigitValue <= 626) ||
-      (fourDigitValue >= 6282 && fourDigitValue <= 6288) ||
-      (sixDigitValue >= 622126 && sixDigitValue <= 622925)
-    ) {
-      inputValue.cardBrand = "unionPay";
-      setCardNumberMaxLength(16);
+  const getCardBrand = (value: string): string => {
+    const prefixes = getCardPrefixes(value);
+
+    if (value.startsWith("4")) return "visa";
+    if (prefixes.two >= 51 && prefixes.two <= 55) return "masterCard";
+    if (prefixes.two === 36) return "diners";
+    if (prefixes.two === 34 || prefixes.two === 37) return "amex";
+    if (
+      (prefixes.three >= 624 && prefixes.three <= 626) ||
+      (prefixes.four >= 6282 && prefixes.four <= 6288) ||
+      (prefixes.six >= 622126 && prefixes.six <= 622925)
+    )
+      return "unionPay";
+
+    return "domestic";
+  };
+
+  const getCardPrefixes = (value: string) => ({
+    two: Number(value.substring(0, 2)),
+    three: Number(value.substring(0, 3)),
+    four: Number(value.substring(0, 4)),
+    six: Number(value.substring(0, 6)),
+  });
+
+  const getCardNumbersMaxLength = (cardBrand: string): number => {
+    switch (cardBrand) {
+      case "visa":
+      case "masterCard":
+      case "unionPay":
+        return 16;
+      case "amex":
+        return 15;
+      case "diners":
+        return 14;
+      default:
+        return 16;
     }
-    return inputValue;
   };
 
   const handleCardNumbersChange = (value: string) => {
-    const { cardBrand } = checkCardBrand(value);
-    setCardBrand(cardBrand);
+    checkCardBrand(value);
 
     const isValidNumber =
       INPUT_REGEX_PARAMS.cardNumber(cardNumberMaxLength).test(value);
     setCardNumberError(!isValidNumber);
     setCardNumbers(value);
 
-    handleCardNumbersFormat(value, cardBrand);
+    formatCardNumbers(value, cardBrand);
   };
 
-  const handleCardNumbersFormat = (value: string, cardBrandValue: string) => {
+  const formatCardNumbers = (value: string, cardBrandValue: string) => {
+    const formattedValue = handleCardNumbersFormat(value, cardBrandValue);
+    setFormattedCardNumbers(formattedValue.trim());
+  };
+
+  const handleCardNumbersFormat = (
+    value: string,
+    cardBrandValue: string
+  ): string => {
     const formattedValue = {
       first: "",
       second: "",
@@ -65,19 +86,17 @@ function useCardNumbers() {
     if (cardBrandValue === "diners" || cardBrandValue === "amex") {
       formattedValue.first = value.substring(0, 4);
       formattedValue.second = value.substring(4, 10);
-      formattedValue.third = value.substring(10, value.length);
+      formattedValue.third = value.substring(10);
     } else {
       formattedValue.first = value.substring(0, 4);
       formattedValue.second = value.substring(4, 8);
       formattedValue.third = value.substring(8, 12);
-      formattedValue.last = value.substring(12, value.length);
+      formattedValue.last = value.substring(12);
     }
-
-    const formattedValueToString = Object.values(formattedValue).join(" ");
-    setFormattedCardNumbers(formattedValueToString.trim());
+    return Object.values(formattedValue).join(" ");
   };
 
-  const getCardNumbersErrorMessage = () => {
+  const getCardNumbersErrorMessage = (): string | null => {
     return cardNumberError
       ? MAX_LENGTH_ERROR_MESSAGE(cardNumberMaxLength)
       : null;
