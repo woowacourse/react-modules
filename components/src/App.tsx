@@ -2,6 +2,9 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Modal } from 'chico-custom-modal';
 import xButton from './lib/asset/xButton.svg';
+import PromptModal from './lib/template/PromptModal';
+import AlertModal from './lib/template/AlertModal';
+import ConfirmModal from './lib/template/ConfirmModal';
 
 function App() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -11,6 +14,7 @@ function App() {
   const handleConfirm = (e: React.MouseEvent) => {
     setIsModalOpen(false);
   };
+
   return (
     <>
       <button onClick={() => setIsModalOpen(true)}>열기</button>
