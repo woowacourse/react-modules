@@ -12,7 +12,7 @@ export interface BasicModal {
   $position?: StylePosition;
   $contentDirection?: StyleDirection;
   $footerDirection?: StyleDirection;
-  $algin?: StyleAlign;
+  $align?: StyleAlign;
   $buttonSize?: StyleSize;
   $buttonBackgroundColor?: string;
   $buttonColor?: string;

@@ -5,25 +5,34 @@ interface AlertModalProps extends BasicModal {
   onConfirmButtonClick: React.MouseEventHandler<HTMLButtonElement>;
 }
 
-function AlertModal({ ...rest }: AlertModalProps) {
+function AlertModal({
+  title,
+  isCloseIcon,
+  message,
+  onModalClose,
+  onConfirmButtonClick,
+  $contentDirection,
+  $footerDirection,
+  $align,
+  $buttonSize,
+  $buttonBackgroundColor,
+  $buttonColor,
+}: AlertModalProps) {
   return (
-    <Modal onCloseModal={rest.onModalClose}>
+    <Modal onCloseModal={onModalClose}>
       <Modal.Header
-        title={rest.title}
-        isCloseIcon={rest.isCloseIcon}
-        onCloseModal={rest.onModalClose}
+        title={title}
+        isCloseIcon={isCloseIcon}
+        onCloseModal={onModalClose}
       ></Modal.Header>
-      <Modal.Content
-        message={rest.message}
-        $direction={rest.$contentDirection}
-      />
-      <Modal.Footer $direction={rest.$footerDirection} $align={rest.$algin}>
+      <Modal.Content message={message} $direction={$contentDirection} />
+      <Modal.Footer $direction={$footerDirection} $align={$align}>
         <Modal.Button
           type="button"
-          onButtonClick={rest.onConfirmButtonClick}
-          $size={rest.$buttonSize}
-          $backgroundColor={rest.$buttonBackgroundColor}
-          $color={rest.$buttonColor}
+          onClick={onConfirmButtonClick}
+          $size={$buttonSize}
+          $backgroundColor={$buttonBackgroundColor}
+          $color={$buttonColor}
         >
           확인
         </Modal.Button>

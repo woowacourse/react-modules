@@ -9,8 +9,6 @@ function App() {
     handleCardNumbersChange,
   } = useCardNumbers();
 
-  console.log(cardNumbers);
-
   return (
     <div style={{ color: "black" }}>
       <input
