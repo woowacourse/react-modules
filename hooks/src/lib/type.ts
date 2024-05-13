@@ -88,3 +88,5 @@ export interface CardChecker {
   format: number[];
   validMaxLength: number;
 }
+
+export type CardBrand = 'DINERS' | 'AMEX' | 'VISA' | 'MASTER' | 'UNION_PAY' | 'NONE';

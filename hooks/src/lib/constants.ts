@@ -1,6 +1,6 @@
-import { CardChecker } from './type';
+import { CardBrand, CardChecker } from './type';
 
-export const CARD_BRAND_INFO: Record<string, CardChecker> = {
+export const CARD_BRAND_INFO: Record<CardBrand, CardChecker> = {
   DINERS: {
     name: 'DINERS',
     format: [4, 6, 4],

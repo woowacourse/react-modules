@@ -7,12 +7,12 @@ import {
   validateVisa,
 } from '../validator/validateCardBrand';
 import { CARD_BRAND_INFO } from '../constants';
+import { CardBrand } from '../type';
 
 type Entries<T> = {
   [K in keyof T]: [K, T[K]];
 }[keyof T][];
 
-type CardBrand = 'DINERS' | 'AMEX' | 'VISA' | 'MASTER' | 'UNION_PAY' | 'NONE';
 type CardBrandChecker = Record<Exclude<CardBrand, 'NONE'>, boolean>;
 
 const useCardBrand = () => {
