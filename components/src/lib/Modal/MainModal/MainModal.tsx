@@ -1,4 +1,3 @@
-import { useRef } from 'react';
 import { createPortal } from 'react-dom';
 import { useEscapeKey, useFocusTrap, usePreventScroll } from '../../hooks';
 import type { ModalProps } from '../types/Modal.type';
@@ -15,11 +14,10 @@ const MainModal = ({
   shadow = true,
   animation = true,
 }: StrictPropsWithChildren<ModalProps>) => {
-  const modalRef = useRef(null);
+  const modalRef = useFocusTrap(isOpen);
 
   useEscapeKey(isOpen, close);
   usePreventScroll(isOpen);
-  useFocusTrap(isOpen, modalRef);
 
   if (!isOpen) return null;
 

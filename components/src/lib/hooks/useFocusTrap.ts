@@ -1,15 +1,16 @@
-import { RefObject, useEffect, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 
 const FOCUSABLE_SELECTORS =
   'button:not([disabled]), input:not([disabled]), select:not([disabled], textarea:not([disabled]), a[href], [tabindex]:not([tabindex="-1"])';
 
-const useFocusTrap = (isOpen: boolean, modalRef: RefObject<HTMLElement>) => {
+const useFocusTrap = (isOpen: boolean) => {
+  const mainRef = useRef<HTMLDivElement>(null);
   const focusableElements = useRef<HTMLElement[]>([]);
 
   useEffect(() => {
-    if (!isOpen || !modalRef.current) return;
+    if (!isOpen || !mainRef.current) return;
 
-    focusableElements.current = Array.from(modalRef.current.querySelectorAll<HTMLElement>(FOCUSABLE_SELECTORS));
+    focusableElements.current = Array.from(mainRef.current.querySelectorAll<HTMLElement>(FOCUSABLE_SELECTORS));
 
     if (focusableElements.current.length === 0) return;
 
@@ -33,7 +34,9 @@ const useFocusTrap = (isOpen: boolean, modalRef: RefObject<HTMLElement>) => {
     document.addEventListener('keydown', handleKeyPress);
 
     return () => document.removeEventListener('keydown', handleKeyPress);
-  }, [isOpen, modalRef]);
+  }, [isOpen, mainRef]);
+
+  return mainRef;
 };
 
 export default useFocusTrap;
