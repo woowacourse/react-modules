@@ -5,6 +5,12 @@ import ErrorMessages from '../types/ErrorMessages';
 
 import { validateAllowedLength } from '../utils/validateInitialParams';
 
+interface CardHolderParams {
+  allowedLength?: number;
+  initialValue?: string;
+  errorMessages?: CardHolderErrorMessages;
+}
+
 interface CardHolderValidationResult {
   cardHolder: string;
   validationResult: ValidationResult;
@@ -35,11 +41,11 @@ export const DEFAULT_PARAMS = {
   },
 };
 
-export default function useCardHolder(
-  allowedLength: number = DEFAULT_PARAMS.allowedLength,
-  initialValue: string = DEFAULT_PARAMS.initialValue,
-  errorMessages: CardHolderErrorMessages = DEFAULT_PARAMS.errorMessages,
-): CardHolderValidationResult {
+export default function useCardHolder({
+  allowedLength = DEFAULT_PARAMS.allowedLength,
+  initialValue = DEFAULT_PARAMS.initialValue,
+  errorMessages = DEFAULT_PARAMS.errorMessages,
+}: CardHolderParams = {}): CardHolderValidationResult {
   validateAllowedLength({
     allowedLength,
     minLength: DEFAULT_LENGTH.minLength,

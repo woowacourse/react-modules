@@ -12,6 +12,12 @@ import {
   getCardFormat,
 } from './useCardNumber.util';
 
+interface CardNumberParams {
+  initialValue?: string;
+  defaultCardFormat?: { allowedLength: number; format: number[] };
+  errorMessages?: CardNumberErrorMessages;
+}
+
 interface CardNumberValidationResult {
   cardNumber: string;
   cardGlobalBrand: string | null;
@@ -44,11 +50,11 @@ export const DEFAULT_PARAMS = {
   },
 };
 
-export default function useCardNumber(
-  initialValue: string = DEFAULT_PARAMS.initialValue,
-  defaultCardFormat: { allowedLength: number; format: number[] } = DEFAULT_PARAMS.defaultCardFormat,
-  errorMessages: CardNumberErrorMessages = DEFAULT_PARAMS.errorMessages,
-): CardNumberValidationResult {
+export default function useCardNumber({
+  initialValue = DEFAULT_PARAMS.initialValue,
+  defaultCardFormat = DEFAULT_PARAMS.defaultCardFormat,
+  errorMessages = DEFAULT_PARAMS.errorMessages,
+}: CardNumberParams = {}): CardNumberValidationResult {
   const [cardNumber, setCardNumber] = useState(initialValue);
   const [cardGlobalBrand, setCardGlobalBrand] = useState(getCardGlobalBrand(initialValue));
 

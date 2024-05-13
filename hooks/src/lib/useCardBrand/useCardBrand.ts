@@ -3,6 +3,12 @@ import ValidationResult from '../types/ValidationResult';
 
 import DEFAULT_CARD_BRANDS from '../constants/defaultCardBrands';
 
+interface CardBrandParams {
+  allowedBrands?: string[];
+  initialValue?: string;
+  errorMessages?: CardBrandErrorMessages;
+}
+
 interface BrandValidationResult {
   brand: string;
   validationResult: ValidationResult;
@@ -27,11 +33,11 @@ export const DEFAULT_PARAMS = {
   },
 };
 
-export default function useCardBrand(
-  allowedBrands: string[] = DEFAULT_PARAMS.allowedBrands,
-  initialValue: string = DEFAULT_PARAMS.initialValue,
-  errorMessages: CardBrandErrorMessages = DEFAULT_PARAMS.errorMessages,
-): BrandValidationResult {
+export default function useCardBrand({
+  allowedBrands = DEFAULT_PARAMS.allowedBrands,
+  initialValue = DEFAULT_PARAMS.initialValue,
+  errorMessages = DEFAULT_PARAMS.errorMessages,
+}: CardBrandParams = {}): BrandValidationResult {
   validateInitialParams(allowedBrands, initialValue, errorMessages);
 
   const [brand, setBrand] = useState(initialValue);

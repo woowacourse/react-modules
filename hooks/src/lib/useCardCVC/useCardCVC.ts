@@ -5,6 +5,12 @@ import ErrorMessages from '../types/ErrorMessages';
 
 import { validateAllowedLength } from '../utils/validateInitialParams';
 
+interface CardCVCParams {
+  allowedLength?: number;
+  initialValue?: string;
+  errorMessages?: ErrorMessages;
+}
+
 interface CVCValidationResult {
   CVC: string;
   validationResult: ValidationResult;
@@ -30,11 +36,11 @@ export const DEFAULT_PARAMS = {
   },
 };
 
-export default function useCardCVC(
-  allowedLength: number = DEFAULT_PARAMS.allowedLength,
-  initialValue: string = DEFAULT_PARAMS.initialValue,
-  errorMessages: ErrorMessages = DEFAULT_PARAMS.errorMessages,
-): CVCValidationResult {
+export default function useCardCVC({
+  allowedLength = DEFAULT_PARAMS.allowedLength,
+  initialValue = DEFAULT_PARAMS.initialValue,
+  errorMessages = DEFAULT_PARAMS.errorMessages,
+}: CardCVCParams = {}): CVCValidationResult {
   validateAllowedLength({
     allowedLength,
     minLength: DEFAULT_LENGTH.minLength,

@@ -7,6 +7,12 @@ interface ExpiryDate {
   year: string;
 }
 
+interface ExpiryDateParams {
+  isYearFourDigits?: boolean;
+  initialValue?: ExpiryDate;
+  errorMessages?: ExpiryDateErrorMessages;
+}
+
 interface ExpiryDateValidationResult {
   expiryDate: ExpiryDate;
   validationResult: ValidationResult;
@@ -35,11 +41,11 @@ export const DEFAULT_PARAMS = {
   },
 };
 
-export default function useCardExpiryDate(
-  isYearFourDigits: boolean = DEFAULT_PARAMS.isYearFourDigits,
-  initialValue: ExpiryDate = DEFAULT_PARAMS.initialValue,
-  errorMessages: ExpiryDateErrorMessages = DEFAULT_PARAMS.errorMessages,
-): ExpiryDateValidationResult {
+export default function useCardExpiryDate({
+  isYearFourDigits = DEFAULT_PARAMS.isYearFourDigits,
+  initialValue = DEFAULT_PARAMS.initialValue,
+  errorMessages = DEFAULT_PARAMS.errorMessages,
+}: ExpiryDateParams = {}): ExpiryDateValidationResult {
   const [expiryDate, setExpiryDate] = useState(initialValue);
   const [validationResult, setValidationResult] = useState<ValidationResult>(
     getValidationResult(initialValue, isYearFourDigits, errorMessages),

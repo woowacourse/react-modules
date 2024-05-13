@@ -9,7 +9,7 @@ describe('useCardNumber', () => {
   describe('초기 설정값 반영 여부 검사', () => {
     it('초기값이 설정되면, cardNumber 상태에 해당 초기값이 저장되어야 한다.', () => {
       const initialValue = '1234567890123456';
-      const { result } = renderHook(() => useCardNumber(initialValue));
+      const { result } = renderHook(() => useCardNumber({ initialValue }));
 
       expect(result.current.cardNumber).toEqual(initialValue);
     });
@@ -34,7 +34,7 @@ describe('useCardNumber', () => {
   });
 
   describe('입력값에 대한 유효성 검증 여부 검사', () => {
-    it('16자리의 cardNumber가 모두 숫자로 입력되었으며 cardGlobalBrand가 Default로 식별된 상태라면, validationResult의 isValid는 true로 반환되어야 한다.', () => {
+    it('16자리의 cardNumber가 모두 숫자로 입력되었으며 cardGlobalBrand가 null인 상태라면, validationResult의 isValid는 true로 반환되어야 한다.', () => {
       const updatedValue = '1234567890123456';
       const { result } = renderHook(() => useCardNumber());
       const event = {
@@ -47,11 +47,11 @@ describe('useCardNumber', () => {
         result.current.handleUpdateCardNumber(updatedValue, event);
       });
 
-      expect(result.current.cardGlobalBrand).toEqual(GLOBAL_BRANDS.Default.name);
+      expect(result.current.cardGlobalBrand).toEqual(null);
       expect(result.current.validationResult).toEqual({ isValid: true });
     });
 
-    it('cardGlobalBrand가 Default인 상태에서 16자리에 못 미치는 cardNumber가 숫자로 입력되었다면, validationResult의 isValid는 false로 반환되며 입력 길이에 대한 에러 메시지가 포함되어야 한다.', () => {
+    it('cardGlobalBrand가 null인 상태에서 16자리에 못 미치는 cardNumber가 숫자로 입력되었다면, validationResult의 isValid는 false로 반환되며 입력 길이에 대한 에러 메시지가 포함되어야 한다.', () => {
       const { result } = renderHook(() => useCardNumber());
       const wrongUpdatedValue = '1234567890';
       const event = {
@@ -64,10 +64,12 @@ describe('useCardNumber', () => {
         result.current.handleUpdateCardNumber(wrongUpdatedValue, event);
       });
 
-      expect(result.current.cardGlobalBrand).toEqual(GLOBAL_BRANDS.Default.name);
+      expect(result.current.cardGlobalBrand).toEqual(null);
       expect(result.current.validationResult).toEqual({
         isValid: false,
-        errorMessage: DEFAULT_PARAMS.errorMessages.inputLength(GLOBAL_BRANDS.Default.allowedLength),
+        errorMessage: DEFAULT_PARAMS.errorMessages.inputLength(
+          DEFAULT_PARAMS.defaultCardFormat.allowedLength,
+        ),
       });
     });
 
@@ -283,7 +285,7 @@ describe('useCardNumber', () => {
       expect(result.current.cardNumberFormat).toEqual(GLOBAL_BRANDS.UnionPay.format);
     });
 
-    it('카드 브랜드 식별 조건에 해당하지 않는 번호가 cardNumber로 입력되었을 경우, cardGlobalBrand는 Default로 설정되고 그에 따른 번호 포맷팅 규칙이 함께 반환되어야 한다.', () => {
+    it('카드 브랜드 식별 조건에 해당하지 않는 번호가 cardNumber로 입력되었을 경우, cardGlobalBrand는 null로 설정되고 그에 따른 번호 포맷팅 규칙이 함께 반환되어야 한다.', () => {
       const etcCardNumber = '2345678901234567';
       const eventEtcCardNumber = {
         target: {
@@ -296,8 +298,8 @@ describe('useCardNumber', () => {
         result.current.handleUpdateCardNumber(etcCardNumber, eventEtcCardNumber);
       });
 
-      expect(result.current.cardGlobalBrand).toEqual(GLOBAL_BRANDS.Default.name);
-      expect(result.current.cardNumberFormat).toEqual(GLOBAL_BRANDS.Default.format);
+      expect(result.current.cardGlobalBrand).toEqual(null);
+      expect(result.current.cardNumberFormat).toEqual(DEFAULT_PARAMS.defaultCardFormat.format);
     });
   });
 });

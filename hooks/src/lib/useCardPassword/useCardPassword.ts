@@ -5,7 +5,13 @@ import ErrorMessages from '../types/ErrorMessages';
 
 import { validateAllowedLength } from '../utils/validateInitialParams';
 
-interface PasswordValidationResult {
+interface CardPasswordParams {
+  allowedLength?: number;
+  initialValue?: string;
+  errorMessages?: ErrorMessages;
+}
+
+interface CardPasswordValidationResult {
   password: string;
   validationResult: ValidationResult;
   handleUpdatePassword: (value: string) => void;
@@ -30,11 +36,11 @@ export const DEFAULT_PARAMS = {
   },
 };
 
-export default function useCardPassword(
-  allowedLength: number = DEFAULT_PARAMS.allowedLength,
-  initialValue: string = DEFAULT_PARAMS.initialValue,
-  errorMessages: ErrorMessages = DEFAULT_PARAMS.errorMessages,
-): PasswordValidationResult {
+export default function useCardPassword({
+  allowedLength = DEFAULT_PARAMS.allowedLength,
+  initialValue = DEFAULT_PARAMS.initialValue,
+  errorMessages = DEFAULT_PARAMS.errorMessages,
+}: CardPasswordParams = {}): CardPasswordValidationResult {
   validateAllowedLength({
     allowedLength,
     minLength: DEFAULT_LENGTH.minLength,

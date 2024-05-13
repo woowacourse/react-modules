@@ -4,11 +4,10 @@ import useCardExpiryDate from './useCardExpiryDate';
 import { DEFAULT_YEAR_LENGTH, DEFAULT_PARAMS } from './useCardExpiryDate';
 
 describe('useCardExpiryDate', () => {
-  const isYearFourDigits = false;
   const initialValue = { month: '12', year: '25' };
 
   it('초기값으로 받은 month와 year는 expiryDate 상태에 저장되어야 한다.', () => {
-    const { result } = renderHook(() => useCardExpiryDate(isYearFourDigits, initialValue));
+    const { result } = renderHook(() => useCardExpiryDate({ initialValue }));
 
     expect(result.current.expiryDate).toEqual(initialValue);
   });
@@ -121,7 +120,9 @@ describe('useCardExpiryDate', () => {
     const newIsYearFourDigits = true;
     const newYearLength = 4;
     const newValue = { month: '12', year: '25' };
-    const { result } = renderHook(() => useCardExpiryDate(newIsYearFourDigits, initialValue));
+    const { result } = renderHook(() =>
+      useCardExpiryDate({ isYearFourDigits: newIsYearFourDigits, initialValue }),
+    );
 
     act(() => {
       result.current.handleUpdateExpiryDate(newValue);
@@ -137,7 +138,9 @@ describe('useCardExpiryDate', () => {
   it('year 길이를 4로 설정한 상태에서 year 입력값이 유효한 기간의 4자리 숫자인 경우, validationResult의 isValid가 true로 반환되어야 한다.', () => {
     const newIsYearFourDigits = true;
     const newValue = { month: '12', year: '2025' };
-    const { result } = renderHook(() => useCardExpiryDate(newIsYearFourDigits, initialValue));
+    const { result } = renderHook(() =>
+      useCardExpiryDate({ isYearFourDigits: newIsYearFourDigits, initialValue }),
+    );
 
     act(() => {
       result.current.handleUpdateExpiryDate(newValue);

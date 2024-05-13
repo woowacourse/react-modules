@@ -5,9 +5,8 @@ import { DEFAULT_LENGTH, DEFAULT_PARAMS } from './useCardPassword';
 
 describe('useCardPassword 테스트', () => {
   it('2자리 숫자의 초기값이 설정되면, password 상태에 해당 초기값이 저장되어야 한다.', () => {
-    const allowedLength = 2;
     const initialValue = '12';
-    const { result } = renderHook(() => useCardPassword(allowedLength, initialValue));
+    const { result } = renderHook(() => useCardPassword({ initialValue }));
 
     expect(result.current.password).toBe(initialValue);
     expect(result.current.validationResult.isValid).toBe(true);
@@ -68,7 +67,7 @@ describe('useCardPassword 테스트', () => {
   it('비밀번호의 길이가 4로 설정된 상태에서 2자리 숫자의 입력값이 handleUpdatePassword로 들어오면, validationResult의 isValid가 false로 반환되고 입력 길이 오류에 따른 에러 메시지가 함께 포함되어야 한다.', () => {
     const newLength = 4;
     const newValue = '12';
-    const { result } = renderHook(() => useCardPassword(newLength));
+    const { result } = renderHook(() => useCardPassword({ allowedLength: newLength }));
 
     act(() => {
       result.current.handleUpdatePassword(newValue);
