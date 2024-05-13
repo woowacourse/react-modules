@@ -1,5 +1,5 @@
 import { PropsWithChildren } from "react";
-import { ModalButtonProps } from "../type/modal.type";
+import { ModalButtonProps } from "../../type/modal.type";
 import "./ModalButton.css";
 
 const ModalButton = ({ variant = "primary", size = "large", children, ...rest }: PropsWithChildren<ModalButtonProps>) => {

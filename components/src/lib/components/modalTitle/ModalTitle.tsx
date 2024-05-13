@@ -1,5 +1,5 @@
 import "./ModalTitle.css";
-import { ModalTitleProps } from "../type/modal.type";
+import { ModalTitleProps } from "../../type/modal.type";
 import { PropsWithChildren } from "react";
 
 const ModalTitle = ({ children, style = {}, className = "", ...rest }: PropsWithChildren<ModalTitleProps>) => {

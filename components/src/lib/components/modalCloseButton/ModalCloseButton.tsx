@@ -1,5 +1,5 @@
 import "./ModalCloseButton.css";
-import { ModalCloseButtonProps } from "../type/modal.type";
+import { ModalCloseButtonProps } from "../../type/modal.type";
 
 const ModalCloseButton = ({ ...rest }: ModalCloseButtonProps) => {
   return (

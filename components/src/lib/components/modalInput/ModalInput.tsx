@@ -1,4 +1,4 @@
-import { ModalInputProps } from "../type/modal.type";
+import { ModalInputProps } from "../../type/modal.type";
 import "./ModalInput.css";
 
 const ModalInput = ({ ...rest }: ModalInputProps) => {

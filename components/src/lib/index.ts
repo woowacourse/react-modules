@@ -1,8 +1,8 @@
-import ModalTitle from "./modalTitle/ModalTitle";
-import ModalMessage from "./modalMessage/ModalMessage";
-import ModalCloseButton from "./modalCloseButton/ModalCloseButton";
-import ModalButton from "./modalButton/ModalButton";
-import ModalInput from "./modalInput/ModalInput";
+import ModalTitle from "./components/modalTitle/ModalTitle";
+import ModalMessage from "./components/modalMessage/ModalMessage";
+import ModalCloseButton from "./components/modalCloseButton/ModalCloseButton";
+import ModalButton from "./components/modalButton/ModalButton";
+import ModalInput from "./components/modalInput/ModalInput";
 
 import { ModalContent, ModalFooter, ModalHeader, ModalMain } from "./Modal";
 
@@ -17,6 +17,6 @@ export const Modal = Object.assign(ModalMain, {
   Input: ModalInput,
 });
 
-export { default as AlertModal } from "./modalType/AlertModal";
-export { default as ConfirmModal } from "./modalType/ConfirmModal";
-export { default as PromptModal } from "./modalType/PromptModal";
+export { default as AlertModal } from "./AlertModal/AlertModal";
+export { default as ConfirmModal } from "./ConfirmModal/ConfirmModal";
+export { default as PromptModal } from "./PromptModal/PromptModal";
