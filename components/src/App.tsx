@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { Modal } from "chlwlstlf-modal";
+// import { Modal } from "chlwlstlf-modal";
+import { AlertModal, ConfirmModal, Modal, PromptModal } from "./lib";
 
 const App = () => {
   return (
@@ -27,8 +28,10 @@ export const DefaultSample = () => {
         onClose={handleClose}
         position="center"
       >
-        <Modal.CloseButton onClick={handleClose}></Modal.CloseButton>
-        <Modal.Title>기본 모달입니다.</Modal.Title>
+        <Modal.Header>
+          <Modal.Title>기본 모달입니다.</Modal.Title>
+          <Modal.CloseButton onClick={handleClose}></Modal.CloseButton>
+        </Modal.Header>
       </Modal>
     </div>
   );
@@ -44,15 +47,12 @@ export const AlertSample = () => {
     <div>
       <button onClick={handleOpen}>Open Alert Modal</button>
 
-      <Modal
+      <AlertModal
         isOpen={isOpen}
         onClose={handleClose}
-        position="center"
-        type="alert"
-      >
-        <Modal.Title>아이디를 입력해 주세요.</Modal.Title>
-        <Modal.Message>아이디는 필수로 입력해야 합니다.</Modal.Message>
-      </Modal>
+        title="아이디를 입력해 주세요."
+        message="아이디는 필수로 입력해야 합니다."
+      ></AlertModal>
     </div>
   );
 };
@@ -75,17 +75,14 @@ export const ConfirmSample = () => {
     <div>
       <button onClick={handleOpen}>Open Confirm Modal</button>
 
-      <Modal
+      <ConfirmModal
         isOpen={isOpen}
         onClose={handleClose}
         onConfirm={handleConfirm}
         onCancel={handleCancel}
-        position="center"
-        type="confirm"
-      >
-        <Modal.Title>카드를 삭제하시겠습니까?</Modal.Title>
-        <Modal.Message>삭제하면 복구하실 수 없습니다.</Modal.Message>
-      </Modal>
+        title="카드를 삭제하시겠습니까?"
+        message="삭제하면 복구하실 수 없습니다."
+      ></ConfirmModal>
     </div>
   );
 };
@@ -96,7 +93,7 @@ export const PromptSample = () => {
 
   const handleClose = () => setIsOpen(false);
   const handleOpen = () => setIsOpen(true);
-  const handleChange = (e) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setCouponCode(e.target.value);
   };
   const handleSubmit = () => {
@@ -114,20 +111,15 @@ export const PromptSample = () => {
     <div>
       <button onClick={handleOpen}>Open Prompt Modal</button>
 
-      <Modal
+      <PromptModal
         isOpen={isOpen}
         onClose={handleClose}
         onSubmit={handleSubmit}
         onCancel={handleCancel}
-        position="center"
-        type="prompt"
-      >
-        <Modal.Title>쿠폰 번호를 입력해 주세요.</Modal.Title>
-        <Modal.Input
-          value={couponCode}
-          onChange={handleChange}
-        ></Modal.Input>
-      </Modal>
+        title="쿠폰 번호를 입력해 주세요."
+        value={couponCode}
+        onChange={handleChange}
+      ></PromptModal>
     </div>
   );
 };

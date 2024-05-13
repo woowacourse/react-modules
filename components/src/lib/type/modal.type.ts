@@ -1,7 +1,5 @@
 import { HTMLAttributes } from "react";
 
-export type Type = "alert" | "confirm" | "prompt" | "default";
-
 export type Size = "small" | "medium" | "large";
 
 export type Position = "center" | "bottom";
@@ -13,16 +11,18 @@ export type ButtonSize = "small" | "large";
 export interface ModalMainProps extends HTMLAttributes<HTMLElement> {
   isOpen: boolean;
   onClose: () => void;
-  onConfirm?: () => void;
-  onCancel?: () => void;
-  onSubmit?: () => void;
-  type?: Type;
   size?: Size;
   position?: Position;
   className?: string;
   zIndex?: number;
   portalRoot?: HTMLElement | null;
 }
+
+export interface ModalHeaderProps extends HTMLAttributes<HTMLElement> {}
+
+export interface ModalContentProps extends HTMLAttributes<HTMLElement> {}
+
+export interface ModalFooterProps extends HTMLAttributes<HTMLElement> {}
 
 export interface ModalTitleProps extends React.HTMLAttributes<HTMLDivElement> {}
 
@@ -36,11 +36,3 @@ export interface ModalButtonProps extends React.ComponentProps<"button"> {
 }
 
 export interface ModalInputProps extends React.ComponentProps<"input"> {}
-
-export interface ModalButtonContainerProps {
-  type?: Type;
-  onClose: () => void;
-  onConfirm?: () => void;
-  onCancel?: () => void;
-  onSubmit?: () => void;
-}
