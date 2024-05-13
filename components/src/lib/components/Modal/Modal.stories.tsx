@@ -88,6 +88,11 @@ export const Bottom: Story = createBasicModalStory({ position: 'bottom' });
 export const Small: Story = createBasicModalStory({ position: 'center', size: 'sm' });
 export const Medium: Story = createBasicModalStory({ position: 'center', size: 'md' });
 export const Large: Story = createBasicModalStory({ position: 'center', size: 'lg' });
+export const CustomSize: Story = createBasicModalStory({
+  position: 'center',
+  customWidth: '100%',
+  customHeight: '100%',
+});
 
 const DefaultFooterPositionModal: ModalFooterStory = {
   args: {
