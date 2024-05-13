@@ -12,7 +12,7 @@ export function useCardIssuer() {
       return { isValid: false, errorMessage: ERROR_MESSAGE.NO_INPUT };
     }
 
-    return { isValid: true };
+    return { isValid: true, errorMessage: "" };
   }
 
   function handleCardIssuerChange(value: string) {

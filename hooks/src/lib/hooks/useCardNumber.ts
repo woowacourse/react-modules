@@ -4,10 +4,16 @@ import { ERROR_MESSAGE } from "../constants/errorMessage";
 import identifyCard, { CardIdentifier } from "../util/cardIdentifier";
 import cardNumberFormatter from "../util/cardNumberFormatter";
 
-export const useCardNumber = () => {
+interface UseCardNumberOptions {
+  useNumberFormatting?: boolean;
+  useCardIdentifier?: boolean;
+}
+
+export const useCardNumber = (options: UseCardNumberOptions = {}) => {
+  const { useNumberFormatting = true, useCardIdentifier = true } = options;
   const [cardNumbers, setCardNumber] = useState<string>("");
   const [isTouched, setIsTouched] = useState(false);
-  const [_, setCardIdentifier] = useState<CardIdentifier>();
+  const [cardIdentifier, setCardIdentifier] = useState<CardIdentifier>();
 
   const cardNumbersValidation = (cardNumber: string): ValidationResult => {
     if (isTouched) {
@@ -26,12 +32,21 @@ export const useCardNumber = () => {
   };
 
   const handleCardNumberChange = (value: string) => {
+    console.log(value);
     if (!isTouched) setIsTouched(true);
-    const cardBrand = identifyCard(value);
-    setCardIdentifier(cardBrand);
-    const numbersFormatted = cardNumberFormatter(value, cardBrand);
-    setCardNumber(numbersFormatted);
+
+    if (useCardIdentifier) {
+      const cardBrand = identifyCard(value);
+      setCardIdentifier(cardBrand);
+    }
+
+    if (useNumberFormatting) {
+      const numbersFormatted = cardNumberFormatter(value, cardIdentifier);
+      setCardNumber(numbersFormatted);
+    } else {
+      setCardNumber(value);
+    }
   };
 
-  return { cardNumbers, handleCardNumberChange, cardNumbersValidation };
+  return { cardNumbers, handleCardNumberChange, cardNumbersValidation, cardIdentifier };
 };
