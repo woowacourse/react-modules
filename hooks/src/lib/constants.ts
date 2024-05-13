@@ -1,6 +1,6 @@
 import { CardChecker } from './type';
 
-export const cardBrandChecker: Record<string, CardChecker> = {
+export const CARD_BRAND_INFO: Record<string, CardChecker> = {
   DINERS: {
     name: 'DINERS',
     format: [4, 6, 4],
@@ -28,8 +28,8 @@ export const cardBrandChecker: Record<string, CardChecker> = {
     format: [4, 4, 4, 4],
     validMaxLength: 16,
   },
-  '': {
-    name: '',
+  NONE: {
+    name: 'NONE',
     format: [4, 4, 4, 4],
     validMaxLength: 16,
   },
