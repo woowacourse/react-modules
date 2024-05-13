@@ -57,6 +57,7 @@ Modal 컴포넌트는 다음과 같은 프로퍼티를 지원합니다.
   - onClose: 모달을 닫을 때 호출되는 함수입니다.
   - position: 모달의 위치를 결정합니다. (top | bottom | center)
 - 선택 프로퍼티
+  - onConfirm: 모달에서 입력된 값을 확인할 때 호출되는 함수입니다.
   - size: 모달의 크기를 결정합니다. (small | medium | large, default: 480px)
   - style: 모달의 스타일을 직접 지정할 수 있습니다. (CSSProperties)
 
@@ -105,8 +106,12 @@ AlertModal 컴포넌트는 다음과 같은 프로퍼티를 지원합니다.
   - onClose: 모달을 닫을 때 호출되는 함수입니다.
   - position: 모달의 위치를 결정합니다. (top | bottom | center)
 - 선택 프로퍼티
+  - onConfirm: 모달에서 입력된 값을 확인할 때 호출되는 함수입니다.
   - size: 모달의 크기를 결정합니다. (small | medium | large, default: 480px)
   - style: 모달의 스타일을 직접 지정할 수 있습니다. (CSSProperties)
+  - buttonText: 모달의 버튼 텍스트를 지정할 수 있습니다. (string, default: 확인)
+  - buttonBackgroundColor: 모달의 버튼 배경 색상을 지정할 수 있습니다. (string, default: #333333)
+  - buttonFontColor: 모달의 버튼 글자 색상을 지정할 수 있습니다. (string, default: #ffffff)
 
 ```
   import React from 'react';
@@ -147,9 +152,16 @@ ConfirmModal 컴포넌트는 다음과 같은 프로퍼티를 지원합니다.
   - title: 모달의 제목을 결정합니다. (string)
   - children: 모달의 내용을 결정합니다. (React.ReactNode)
 - 선택 프로퍼티
+  - onConfirm: 모달에서 입력된 값을 확인할 때 호출되는 함수입니다.
   - position: 모달의 위치를 결정합니다. (top | bottom | center, default: center)
   - size: 모달의 크기를 결정합니다. (small | medium | large, default: medium)
   - style: 모달의 스타일을 직접 지정할 수 있습니다. (CSSProperties)
+  - primaryButtonText: 모달의 메인 버튼 텍스트를 지정할 수 있습니다. (string, default: '확인')
+  - secondaryButtonText: 모달의 서브 버튼 텍스트를 지정할 수 있습니다. (string, default: '취소')
+  - primaryButtonBackgroundColor: 모달의 메인 버튼 배경 색상을 지정할 수 있습니다. (string, default: '#333333')
+  - secondaryButtonBackgroundColor: 모달의 서브 버튼 배경 색상을 지정할 수 있습니다. (string, default: '#ffffff')
+  - primaryButtonFontColor: 모달의 메인 버튼 텍스트 색상을 지정할 수 있습니다. (string, default: '#ffffff')
+  - secondaryButtonFontColor: 모달의 서브 버튼 텍스트 색상을 지정할 수 있습니다. (string, default: '#ffffff')
 
 ```
 import React from 'react';
@@ -192,9 +204,16 @@ Prompt 컴포넌트는 다음과 같은 프로퍼티를 지원합니다.
   - onClose: 모달을 닫을 때 호출되는 함수입니다.
   - title: 모달의 제목을 결정합니다. (string)
 - 선택 프로퍼티
+  - onConfirm: 모달에서 입력된 값을 확인할 때 호출되는 함수입니다.
   - position: 모달의 위치를 결정합니다. (top | bottom | center, default: center)
   - size: 모달의 크기를 결정합니다. (small | medium | large, default: medium)
   - style: 모달의 스타일을 직접 지정할 수 있습니다. (CSSProperties)
+  - primaryButtonText: 모달의 메인 버튼 텍스트를 지정할 수 있습니다. (string, default: '제출')
+  - secondaryButtonText: 모달의 서브 버튼 텍스트를 지정할 수 있습니다. (string, default: '취소')
+  - primaryButtonBackgroundColor: 모달의 메인 버튼 배경 색상을 지정할 수 있습니다. (string, default: '#333333')
+  - secondaryButtonBackgroundColor: 모달의 서브 버튼 배경 색상을 지정할 수 있습니다. (string, default: '#ffffff')
+  - primaryButtonFontColor: 모달의 메인 버튼 텍스트 색상을 지정할 수 있습니다. (string, default: '#ffffff')
+  - secondaryButtonFontColor: 모달의 서브 버튼 텍스트 색상을 지정할 수 있습니다. (string, default: '#ffffff')
 
 ```
 import React from 'react';
