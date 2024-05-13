@@ -16,7 +16,6 @@ const useCardTypeCheck = () => {
     for (const [type, regex] of Object.entries(cardRegex)) {
       if (regex.test(value)) {
         setCardType(type);
-        console.log(type);
         return type;
       }
     }

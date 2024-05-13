@@ -34,9 +34,7 @@ const useExpiryDate = () => {
       year = numericValue.substring(1, 2);
     } else if (month.length === 3) {
       year = month.slice(2);
-      console.log(year);
       month = month.slice(0, 2);
-      console.log(month);
     }
     const formattedValue = `${month}${
       month.length === 0 ||
