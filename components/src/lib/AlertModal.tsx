@@ -3,7 +3,8 @@ import ModalContent from './components/content/ModalContent';
 import ModalFooter from './components/footer/ModalFooter';
 import ModalHeader from './components/header/ModalHeader';
 
-interface AlertModalProps extends Omit<ModalProps, 'type' | 'closeOnOutsideClick'> {
+interface AlertModalProps
+  extends Omit<ModalProps, 'type' | 'closeOnOutsideClick' | 'closeOnESCKeydown' | 'dialogSize'> {
   title: string;
   caption: string;
   onOk?: () => void;
@@ -16,7 +17,13 @@ const AlertModal = ({
   ...props
 }: React.PropsWithChildren<AlertModalProps>) => {
   return (
-    <Modal type="dialog" {...props} closeOnOutsideClick={false} style={{ modal: { gap: 16 } }}>
+    <Modal
+      type="dialog"
+      {...props}
+      closeOnOutsideClick={false}
+      closeOnESCKeydown={false}
+      style={{ modal: { gap: 16 } }}
+    >
       <ModalHeader title={title} onClose={props.onClose} hideCloseIcon />
       <ModalContent>{caption}</ModalContent>
       <ModalFooter

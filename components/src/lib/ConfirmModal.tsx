@@ -3,7 +3,8 @@ import ModalContent from './components/content/ModalContent';
 import ModalFooter from './components/footer/ModalFooter';
 import ModalHeader from './components/header/ModalHeader';
 
-interface ConfirmModalProps extends Omit<ModalProps, 'type' | 'closeOnOutsideClick'> {
+interface ConfirmModalProps
+  extends Omit<ModalProps, 'type' | 'closeOnOutsideClick' | 'closeOnESCKeydown' | 'dialogSize'> {
   title: string;
   caption: string;
   onOk?: () => void;
@@ -18,7 +19,13 @@ const ConfirmModal = ({
   ...props
 }: React.PropsWithChildren<ConfirmModalProps>) => {
   return (
-    <Modal type="dialog" {...props} closeOnOutsideClick={false} style={{ modal: { gap: 16 } }}>
+    <Modal
+      type="dialog"
+      {...props}
+      closeOnOutsideClick={false}
+      closeOnESCKeydown={false}
+      style={{ modal: { gap: 16 } }}
+    >
       <ModalHeader title={title} onClose={props.onClose} hideCloseIcon />
       <ModalContent>
         <p>{caption}</p>
