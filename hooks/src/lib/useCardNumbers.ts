@@ -122,6 +122,23 @@ const useCardNumbers = (
 
   const cardNumbersToArray = Array.from(Object.values(value));
 
+  /**
+   * @example Diners('36xx xxxx') true
+   * @example Diners('35xx xxxx') false
+   *
+   * @example AMEX('34xx xxxx') true
+   * @example AMEX('37xx xxxx') true
+   *
+   * @example UnionPay('6221 16xx') true
+   * @example UnionPay('6229 26xx') false
+   * @example UnionPay('624x xxxx') true
+   * @example UnionPay('626x xxxx') true
+   *
+   * @example VISA('4xxx xxxx') true
+   *
+   * @example MasterCard('51xx xxxx') true
+   * @example MasterCard('56xx xxxx') false
+   */
   const cardTypeCondition: Record<CardBrand, boolean> = {
     Diners: cardNumbersToArray[0].startsWith('36'),
     AMEX: cardNumbersToArray[0].startsWith('34') || cardNumbersToArray[0].startsWith('37'),
