@@ -9,7 +9,7 @@ const cardTypeCheck: ReadonlyArray<CardTypeCheck> = [
   {
     name: 'Visa',
     check: (cardNumber: string) =>
-      Math.floor(parseInt(cardNumber.substring(0, 1), 10) / 10) ===
+      Math.floor(parseInt(cardNumber.substring(0, 2), 10) / 10) ===
       CARD_CONFIG.VISA,
   },
   {
