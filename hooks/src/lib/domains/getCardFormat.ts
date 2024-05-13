@@ -9,8 +9,8 @@ const cardFormats: Record<CardBrand | "none", number[]> = {
   none: [],
 };
 
-const formatter = (value: string, pose: number[]) => {
-  const prefixSum = getPrefixSum(pose);
+const formatter = (value: string, cardFormat: number[]) => {
+  const prefixSum = getPrefixSum(cardFormat);
   return value
     .split("")
     .map((v, i) => (prefixSum.includes(i) ? " " + v : v))
