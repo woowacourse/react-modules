@@ -74,7 +74,7 @@ const ConfirmModal = ({
         onClick: closeModal,
       }}
     >
-      <ModalTextBody>{content}</ModalTextBody>
+      {content && <ModalTextBody>{content}</ModalTextBody>}
       {children}
     </Modal>
   );

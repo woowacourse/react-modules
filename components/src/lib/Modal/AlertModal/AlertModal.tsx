@@ -69,7 +69,7 @@ const AlertModal = ({
         onClick: handleClick,
       }}
     >
-      <ModalTextBody>{content}</ModalTextBody>
+      {content && <ModalTextBody>{content}</ModalTextBody>}
       {children}
     </Modal>
   );

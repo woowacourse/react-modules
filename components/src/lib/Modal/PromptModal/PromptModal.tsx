@@ -100,7 +100,7 @@ const PromptModal = ({
         onClick: closeModal,
       }}
     >
-      <ModalTextBody>{content}</ModalTextBody>
+      {content && <ModalTextBody>{content}</ModalTextBody>}
       <Input {...inputProps} />
       {children}
     </Modal>
