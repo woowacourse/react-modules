@@ -1,5 +1,5 @@
 import { HTMLAttributes } from 'react';
-import type { Size } from '../type/common';
+import type { Size } from '../../type/common';
 
 export type Direction = 'row' | 'column';
 export type Position = 'center' | 'bottom' | 'top';

@@ -1,11 +1,10 @@
 import { ButtonHTMLAttributes } from 'react';
-import type { Size } from '../../type/common';
 import styles from './Button.module.css';
 
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   text: string;
   color?: 'default' | 'none';
-  size?: Size;
+  size?: 'sm' | 'md' | 'lg';
   fullWidth?: boolean;
   variants?: 'normal' | 'border';
 }

@@ -1,4 +1,4 @@
-import type { StrictPropsWithChildren } from '../../type/common';
+import type { StrictPropsWithChildren } from '../../../type/common';
 import styles from './Title.module.css';
 
 const Title = ({ children }: StrictPropsWithChildren) => {

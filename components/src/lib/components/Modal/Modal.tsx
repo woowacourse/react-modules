@@ -1,8 +1,8 @@
 import type { ModalProps, ModalFooterProps, ModalHeaderType, ModalBodyType } from './Modal.type';
 import styles from './Modal.module.css';
-import { StrictPropsWithChildren } from '../type/common';
-import usePreventScroll from '../hooks/usePreventScroll';
-import useKeyPress from '../hooks/useKeyPress';
+import { StrictPropsWithChildren } from '../../type/common';
+import usePreventScroll from '../../hooks/usePreventScroll';
+import useKeyPress from '../../hooks/useKeyPress';
 
 export const ModalHeader = ({ children, ...rest }: StrictPropsWithChildren<ModalHeaderType>) => {
   return (

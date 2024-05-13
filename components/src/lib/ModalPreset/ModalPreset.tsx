@@ -1,6 +1,6 @@
 import { ChangeEvent } from 'react';
 import { Modal } from '..';
-import { ModalProps } from '../Modal/Modal.type';
+import { ModalProps } from '../components/Modal/Modal.type';
 
 type AlertModalProps = ModalProps & {
   title: string;

@@ -1,6 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import Button from '../components/Button/Button';
 import { ChangeEvent, useState } from 'react';
 import { Modal } from '..';
 import {
@@ -8,6 +7,7 @@ import {
   ConfirmModal as MyConfirmModal,
   PromptModal as MyPromptModal,
 } from './ModalPreset';
+import Button from '../components/common/Button/Button';
 
 const meta = {
   title: 'ModalPreset',
