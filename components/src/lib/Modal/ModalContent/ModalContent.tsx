@@ -1,9 +1,5 @@
 import * as Styled from './ModalContent.style';
 
-interface ModalContentProps {
-  children: React.ReactNode;
-}
-
-export default function ModalContent({ children }: ModalContentProps) {
+export default function ModalContent({ children }: React.PropsWithChildren) {
   return <Styled.Content>{children}</Styled.Content>;
 }

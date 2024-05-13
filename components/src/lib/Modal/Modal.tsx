@@ -16,7 +16,6 @@ import * as Styled from './Modal.style';
 export interface ModalProps {
   isOpen: boolean;
   title: string;
-  children?: React.ReactNode;
   size?: ModalSizeType;
   position?: ModalPositionType;
   hasCloseButton?: boolean;
@@ -41,7 +40,7 @@ export default function Modal({
   buttons,
   buttonsFlexDirection = 'column',
   onClose,
-}: ModalProps) {
+}: React.PropsWithChildren<ModalProps>) {
   const modalRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
