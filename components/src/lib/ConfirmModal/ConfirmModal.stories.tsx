@@ -23,7 +23,6 @@ export const Default: Story = {
   args: {
     isOpen: true,
     title: '모달 제목',
-    description: '"확인-취소" 타입 모달(ConfirmModal)의 본문 내용입니다.',
     confirmButtonText: '확인',
     cancelButtonText: '취소',
     position: 'center',
@@ -35,18 +34,33 @@ export const Default: Story = {
     onCancel: () => alert('"onCancel" 메서드가 실행되었습니다!'),
     onClose: () => alert('"onClose" 메서드가 실행되었습니다!'),
   },
+  render: (args) => {
+    return (
+      <ConfirmModal {...args}>
+        <p>"확인-취소" 타입 모달(ConfirmModal)의 본문 내용입니다.</p>
+      </ConfirmModal>
+    );
+  },
 };
 
 export const CenterModal: Story = {
   args: { ...Default.args, position: 'center' },
   render: (args) => {
-    return <ConfirmModal {...args} />;
+    return (
+      <ConfirmModal {...args}>
+        <p>"확인-취소" 타입 모달(ConfirmModal)의 본문 내용입니다.</p>
+      </ConfirmModal>
+    );
   },
 };
 
 export const BottomModal: Story = {
   args: { ...Default.args, position: 'bottom' },
   render: (args) => {
-    return <ConfirmModal {...args} />;
+    return (
+      <ConfirmModal {...args}>
+        <p>"확인-취소" 타입 모달(ConfirmModal)의 본문 내용입니다.</p>
+      </ConfirmModal>
+    );
   },
 };

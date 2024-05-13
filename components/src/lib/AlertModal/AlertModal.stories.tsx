@@ -23,7 +23,6 @@ export const Default: Story = {
   args: {
     isOpen: true,
     title: '모달 제목',
-    description: '"확인" 타입 모달(AlertModal)의 본문 내용입니다.',
     confirmButtonText: '확인',
     position: 'center',
     hasCloseButton: true,
@@ -33,18 +32,33 @@ export const Default: Story = {
     onConfirm: () => alert('"onConfirm 메서드가 실행되었습니다!'),
     onClose: () => alert('"onClose" 메서드가 실행되었습니다!'),
   },
+  render: (args) => {
+    return (
+      <AlertModal {...args}>
+        <p>"확인" 타입 모달(AlertModal)의 본문 내용입니다.</p>
+      </AlertModal>
+    );
+  },
 };
 
 export const CenterModal: Story = {
   args: { ...Default.args, position: 'center' },
   render: (args) => {
-    return <AlertModal {...args} />;
+    return (
+      <AlertModal {...args}>
+        <p>"확인" 타입 모달(AlertModal)의 본문 내용입니다.</p>
+      </AlertModal>
+    );
   },
 };
 
 export const BottomModal: Story = {
   args: { ...Default.args, position: 'bottom' },
   render: (args) => {
-    return <AlertModal {...args} />;
+    return (
+      <AlertModal {...args}>
+        <p>"확인" 타입 모달(AlertModal)의 본문 내용입니다.</p>
+      </AlertModal>
+    );
   },
 };

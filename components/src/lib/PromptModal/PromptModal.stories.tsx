@@ -33,7 +33,7 @@ export const Default: Story = {
     isClosableOnClickBackdrop: true,
     zIndex: { backdrop: 999, modal: 1000 },
     backdropOpacity: '50%',
-    onSubmit: (value: string) => alert(`"onSubmit 메서드를 통해 "${value}"값이 전송되었습니다!`),
+    onSubmit: (_, value: string) => alert(`"onSubmit 메서드를 통해 "${value}"값이 전송되었습니다!`),
     onCancel: () => alert('"onCancel" 메서드가 실행되었습니다!'),
     onClose: () => alert('"onClose" 메서드가 실행되었습니다!'),
   },
