@@ -21,11 +21,9 @@ const UsageModal = () => {
         description="여기는 description 이에요."
         size="small"
         children={
-          <>
-            <div style={{ backgroundColor: '#f3e3da', height: '100px' }}>
-              여기는 children 이에요.
-            </div>
-          </>
+          <div style={{ backgroundColor: '#f3e3da', height: '100px' }}>
+            여기는 children 이에요.
+          </div>
         }
         buttonPosition="column"
         primaryColor="#F66F00"
