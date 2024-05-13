@@ -5,13 +5,12 @@ import * as Styled from './Modal.styled';
 import React, { ButtonHTMLAttributes, HTMLAttributes, useRef } from 'react';
 import CloseImage from '../assets/close.png';
 
-export interface ModalProps
-  extends React.PropsWithChildren,
-    Pick<HTMLAttributes<HTMLElement>, 'style'> {
+export interface ModalProps extends React.PropsWithChildren {
   children?: React.ReactNode;
   isOpen: boolean;
   position: 'top' | 'bottom' | 'center';
   size?: 'small' | 'medium' | 'large';
+  style?: React.CSSProperties;
   onClose: () => void;
   onConfirm?: () => void;
 }
