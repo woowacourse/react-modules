@@ -2,7 +2,7 @@ import { Modal } from ".";
 import { css } from "@emotion/css";
 import { ModalSize } from "./common/Modal";
 
-interface AlertModalProps {
+interface ConfirmModalProps {
   isOpen: boolean;
   closeModal: () => void;
   confirmModal: () => void;
@@ -22,7 +22,7 @@ function ConfirmLabel({
   confirmLabel,
   cancelLabel,
   size,
-}: AlertModalProps) {
+}: ConfirmModalProps) {
   return (
     <Modal isOpen={isOpen} closeModal={closeModal}>
       <Modal.Positioner position="center" size={size}>
