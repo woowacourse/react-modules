@@ -1,4 +1,3 @@
-import { ChangeEvent } from 'react';
 import Modal, { ModalProps } from '../Modal';
 
 interface PromptModalProps extends ModalProps {
