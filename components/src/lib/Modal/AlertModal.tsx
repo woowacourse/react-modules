@@ -3,7 +3,7 @@ import Button from '../Button/Button';
 import { useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import { DefaultModalProps } from './Modal';
-import { ModalProvider } from '.';
+import { ModalProvider } from './ModalProvider';
 
 interface AlertModalProps extends DefaultModalProps {
   onConfirm?: () => void;

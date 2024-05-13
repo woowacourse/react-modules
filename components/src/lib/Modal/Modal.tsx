@@ -1,7 +1,7 @@
 import Button, { ButtonProps } from '../Button/Button';
 
 import { useEffect } from 'react';
-import { ModalProvider } from '.';
+import { ModalProvider } from './ModalProvider';
 import { createPortal } from 'react-dom';
 
 export interface DefaultModalProps {

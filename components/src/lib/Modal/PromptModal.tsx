@@ -3,7 +3,7 @@ import Button from '../Button/Button';
 import { useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { DefaultModalProps } from './Modal';
-import { ModalProvider } from '.';
+import { ModalProvider } from './ModalProvider';
 import { ValidateResult } from './ModalInputField/ModalInputField';
 
 interface PromptModalProps extends DefaultModalProps {
