@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { validateCardNumber } from './validators/newCardInputValidator';
+import { validateCardNumber } from './validators/validateCardNumber';
 import CardBrandService from './domain/CardBrandService';
 import formatCardNumbers from './utils/formatCardNumbers';
 import { CARD_TYPES } from './constants/card';

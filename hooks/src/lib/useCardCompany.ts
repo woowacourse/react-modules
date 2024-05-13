@@ -1,5 +1,5 @@
 import { useState, ChangeEvent } from 'react';
-import { validateCardCompany } from './validators/newCardInputValidator';
+import { validateCardCompany } from './validators/validateCardCompany';
 
 const useCardCompany = () => {
   const [cardCompanyInfo, setCardCompanyInfo] = useState({

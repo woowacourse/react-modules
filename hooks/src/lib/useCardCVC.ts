@@ -1,5 +1,5 @@
 import { useState, ChangeEvent } from 'react';
-import { validateCVC } from './validators/newCardInputValidator';
+import { validateCVC } from './validators/validateCVC';
 
 const useCardCVC = (cardCVCLength: number) => {
   const [cardCVCInfo, setCardCVCInfo] = useState({

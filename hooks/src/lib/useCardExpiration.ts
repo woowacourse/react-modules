@@ -1,5 +1,5 @@
 import { useState, ChangeEvent } from 'react';
-import { validateCardExpiration } from './validators/newCardInputValidator';
+import { validateCardExpiration } from './validators/validateCardExpiration';
 
 const useCardExpiration = () => {
   const [cardExpiration, setCardExpiration] = useState({
