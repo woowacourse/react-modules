@@ -26,12 +26,8 @@ const BUTTON_SETTING_BY_ROLE: Record<ButtonRole, ButtonSetting> = {
   },
 };
 
-const Button = ({ style, customButton, hide, text, role, ...props }: ButtonProps) => {
+const Button = ({ style, hide, text, role, ...props }: ButtonProps) => {
   if (hide) return;
-
-  if (customButton !== undefined) {
-    return customButton;
-  }
 
   return (
     <button

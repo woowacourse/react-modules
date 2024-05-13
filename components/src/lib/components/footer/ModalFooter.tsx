@@ -24,8 +24,10 @@ const ModalFooter = ({ buttonPosition, closeButton, confirmButton, style }: Moda
 
   return (
     <footer className={buttonLayoutStyle} style={style}>
-      <Button role="close" {...closeButton} />
-      <Button role="confirm" {...confirmButton} />
+      {!closeButton?.customButton && <Button role="close" {...closeButton} />}
+      {!confirmButton?.customButton && <Button role="confirm" {...confirmButton} />}
+      {!closeButton?.hide && closeButton?.customButton}
+      {!confirmButton?.hide && confirmButton?.customButton}
     </footer>
   );
 };
