@@ -61,3 +61,17 @@ export const ReverseTheme: Story = {
     theme: window.matchMedia("(prefers-color-scheme: light)").matches ? "dark" : "light",
   },
 };
+
+export const ConfirmMessage: Story = {
+  name: "확인 버튼 메세지",
+  args: {
+    confirmMessage: "Confirm",
+  },
+};
+
+export const TooLongConfirmMessage: Story = {
+  name: "확인 버튼 메세지가 매우 길어졌을 경우",
+  args: {
+    confirmMessage: "확인을할까말까확인을할까말까확인을할까말까확인을할까말까확인을할까말까확인을할까말까",
+  },
+};
