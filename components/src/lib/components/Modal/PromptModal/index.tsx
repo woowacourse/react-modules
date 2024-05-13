@@ -13,7 +13,7 @@ interface PromptModalProps extends BasicModal {
 function PromptModal({
   title,
   isCloseIcon,
-  message,
+  basicDescription,
   label,
   onModalClose,
   onInputChange,
@@ -33,7 +33,10 @@ function PromptModal({
         isCloseIcon={isCloseIcon}
         onCloseModal={onModalClose}
       ></Modal.Header>
-      <Modal.Content message={message} $direction={$contentDirection}>
+      <Modal.Content
+        basicDescription={basicDescription}
+        $direction={$contentDirection}
+      >
         <Input label={label} onChange={onInputChange} />
       </Modal.Content>
       <Modal.Footer $direction={$footerDirection} $align={$align}>

@@ -5,7 +5,7 @@ export type StylePosition = 'center' | 'bottom';
 
 export interface BasicModal {
   title: string;
-  message?: string;
+  basicDescription?: string;
   isCloseIcon?: boolean;
   onModalClose: () => void;
   $modalSize?: StyleSize;

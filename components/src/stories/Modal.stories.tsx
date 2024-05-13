@@ -1,7 +1,7 @@
 import { Meta, StoryObj } from '@storybook/react';
 import { Modal, useModal } from '../lib/index';
 
-import '../styles/index.css';
+import '../lib/styles/index.css';
 
 const meta: Meta<typeof Modal> = {
   title: 'Modal',
@@ -10,7 +10,7 @@ const meta: Meta<typeof Modal> = {
     title: {
       control: 'text',
     },
-    message: {
+    basicDescription: {
       control: 'text',
     },
     isCloseIcon: {
@@ -46,13 +46,9 @@ const DefaultModal: StoryObj<typeof meta.args> = (args) => {
             isCloseIcon={args.isCloseIcon}
             onCloseModal={closeModal}
           ></Modal.Header>
-          <Modal.Content message={args.message} />
+          <Modal.Content basicDescription={args.basicDescription} />
           <Modal.Footer>
-            <Modal.Button
-              type="button"
-              $size="small"
-              onButtonClick={closeModal}
-            >
+            <Modal.Button type="button" $size="small" onClick={closeModal}>
               닫기
             </Modal.Button>
           </Modal.Footer>
@@ -65,7 +61,7 @@ const DefaultModal: StoryObj<typeof meta.args> = (args) => {
 export const SmallModal = DefaultModal.bind({});
 SmallModal.args = {
   title: '작은 모달',
-  message: '이것은 작은 사이즈의 모달입니다.',
+  basicDescription: '이것은 작은 사이즈의 모달입니다.',
   isCloseIcon: true,
   $size: 'small',
   $position: 'center',
@@ -77,7 +73,7 @@ SmallModal.argTypes = {
 export const MediumModal = DefaultModal.bind({});
 MediumModal.args = {
   title: '중간 모달',
-  message: '이것은 중간 사이즈의 모달입니다.',
+  basicDescription: '이것은 중간 사이즈의 모달입니다.',
   isCloseIcon: true,
   $size: 'medium',
   $position: 'center',
@@ -89,7 +85,7 @@ MediumModal.argTypes = {
 export const LargeModal = DefaultModal.bind({});
 LargeModal.args = {
   title: '큰 모달',
-  message: '이것은 큰 사이즈의 모달입니다.',
+  basicDescription: '이것은 큰 사이즈의 모달입니다.',
   isCloseIcon: true,
   $size: 'large',
   $position: 'center',
@@ -101,7 +97,7 @@ LargeModal.argTypes = {
 export const IconCloseModal = DefaultModal.bind({});
 IconCloseModal.args = {
   title: '아이콘으로 닫기',
-  message: '아이콘을 클릭하면 모달이 닫힙니다.',
+  basicDescription: '아이콘을 클릭하면 모달이 닫힙니다.',
   isCloseIcon: true,
   $position: 'center',
 };
@@ -109,7 +105,7 @@ IconCloseModal.args = {
 export const ButtonCloseModal = DefaultModal.bind({});
 ButtonCloseModal.args = {
   title: '버튼으로 닫기',
-  message: '닫기 버튼을 클릭하면 모달이 닫힙니다.',
+  basicDescription: '닫기 버튼을 클릭하면 모달이 닫힙니다.',
   isCloseIcon: false,
   $size: 'medium',
   $position: 'center',

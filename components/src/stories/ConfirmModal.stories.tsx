@@ -3,7 +3,7 @@ import { action } from '@storybook/addon-actions';
 
 import ConfirmModal from '../lib/components/Modal/ConfirmModal/index';
 
-import '../styles/index.css';
+import '../lib/styles/index.css';
 
 const meta: Meta<typeof ConfirmModal> = {
   title: 'Modal/Examples',
@@ -15,7 +15,7 @@ export default meta;
 export const Confirm = ConfirmModal.bind({});
 Confirm.args = {
   title: '확인/취소(Confirm) 모달',
-  message: '사용자에게 선택지를 제공하고 확인 및 취소 버튼을 제공',
+  basicDescription: '사용자에게 선택지를 제공하고 확인 및 취소 버튼을 제공',
   isCloseIcon: false,
   $size: 'medium',
   $position: 'center',

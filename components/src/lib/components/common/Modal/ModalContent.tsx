@@ -2,19 +2,21 @@ import { StyleDirection } from '../../types';
 import styled from 'styled-components';
 
 export interface ModalContentProps {
-  message?: string;
+  basicDescription?: string;
   $direction?: StyleDirection;
   children?: React.ReactNode;
 }
 
 function ModalContent({
-  message,
+  basicDescription,
   $direction = 'column',
   children,
 }: ModalContentProps) {
   return (
     <ContentContainer $direction={$direction}>
-      {message && <Message>{message}</Message>}
+      {basicDescription && (
+        <BasicDescription>{basicDescription}</BasicDescription>
+      )}
       {children}
     </ContentContainer>
   );
@@ -32,6 +34,7 @@ const ContentContainer = styled.div<ContentContainerStyleProps>`
   gap: 2rem;
 `;
 
-const Message = styled.div`
+const BasicDescription = styled.div`
+  width: 100%;
   font-size: var(--font-size-sm);
 `;

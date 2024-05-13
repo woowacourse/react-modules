@@ -9,7 +9,7 @@ interface ConfirmModalProps extends BasicModal {
 function ConfirmModal({
   title,
   isCloseIcon,
-  message,
+  basicDescription,
   onModalClose,
   onCancelButtonClick,
   onConfirmButtonClick,
@@ -27,7 +27,10 @@ function ConfirmModal({
         isCloseIcon={isCloseIcon}
         onCloseModal={onModalClose}
       ></Modal.Header>
-      <Modal.Content message={message} $direction={$contentDirection} />
+      <Modal.Content
+        basicDescription={basicDescription}
+        $direction={$contentDirection}
+      />
       <Modal.Footer $direction={$footerDirection} $align={$align}>
         <Modal.Button
           type="button"

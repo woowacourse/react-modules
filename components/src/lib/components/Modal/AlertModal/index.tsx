@@ -8,7 +8,7 @@ interface AlertModalProps extends BasicModal {
 function AlertModal({
   title,
   isCloseIcon,
-  message,
+  basicDescription,
   onModalClose,
   onConfirmButtonClick,
   $contentDirection,
@@ -25,7 +25,10 @@ function AlertModal({
         isCloseIcon={isCloseIcon}
         onCloseModal={onModalClose}
       ></Modal.Header>
-      <Modal.Content message={message} $direction={$contentDirection} />
+      <Modal.Content
+        basicDescription={basicDescription}
+        $direction={$contentDirection}
+      />
       <Modal.Footer $direction={$footerDirection} $align={$align}>
         <Modal.Button
           type="button"
