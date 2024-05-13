@@ -2,14 +2,14 @@ import { InputHTMLAttributes } from 'react';
 import styles from './input.module.css';
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
-  label: string;
+  description: string;
 }
 
-export default function Input({ label, ...props }: InputProps) {
+export default function Input({ description, ...props }: InputProps) {
   return (
     <div className={styles.inputWrapper}>
       <label className={styles.SROnly} htmlFor={props.name}>
-        {label}
+        {description}
       </label>
       <input className={styles.input} {...props} />
     </div>
