@@ -3,7 +3,7 @@ import useExpiryDate from "../lib/useExpiryDate";
 import { ChangeEvent } from "react";
 
 describe("useExpiryDate 테스트", () => {
-  it("아직 아무 입력도 수행되지 않았을 때 false를 반환해야 함", () => {
+  it("아직 아무 입력도 수행되지 않았을 때 false를 반환하고 아무런 오류 메시지도 반환하지 않아야 함", () => {
     const { result } = renderHook(() => useExpiryDate());
 
     expect(result.current.validationResult.isValid).toBe(false);
