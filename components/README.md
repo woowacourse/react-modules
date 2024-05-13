@@ -44,10 +44,10 @@ The header component for the modal.
 
 The content component for the modal.
 
-| Prop         | Description                                        | Default     |
-| ------------ | -------------------------------------------------- | ----------- |
-| `message`    | The message to display in the content              | `undefined` |
-| `$direction` | The direction of the content (`'row'`, `'column'`) | `'column'`  |
+| Prop               | Description                                        | Default     |
+| ------------------ | -------------------------------------------------- | ----------- |
+| `basicDescription` | The basicDescription to display in the content     | `undefined` |
+| `$direction`       | The direction of the content (`'row'`, `'column'`) | `'column'`  |
 
 ### `Modal.Footer`
 
@@ -85,7 +85,7 @@ The input component for the modal.
 A simple alert modal.
 
 ```jsx
-import { AlertModal } from 'react-modal-library';
+import { AlertModal } from 'woowacourse-6th-react-modal-component';
 
 function App() {
   const handleConfirm = () => {
@@ -99,12 +99,14 @@ function App() {
   return (
     <AlertModal
       title="Alert"
-      message="This is an alert modal."
+      basicDescription="This is an alert modal."
       onConfirmButtonClick={handleConfirm}
       onModalClose={handleClose}
     />
   );
 }
+
+export default App;
 ```
 
 ### `ConfirmModal`
@@ -112,7 +114,7 @@ function App() {
 A confirm/cancel modal.
 
 ```jsx
-import { ConfirmModal } from 'react-modal-library';
+import { ConfirmModal } from 'woowacourse-6th-react-modal-component';
 
 function App() {
   const handleConfirm = () => {
@@ -130,13 +132,15 @@ function App() {
   return (
     <ConfirmModal
       title="Confirm"
-      message="Are you sure you want to proceed?"
+      basicDescription="Are you sure you want to proceed?"
       onConfirmButtonClick={handleConfirm}
       onCancelButtonClick={handleCancel}
       onModalClose={handleClose}
     />
   );
 }
+
+export default App;
 ```
 
 ### `PromptModal`
@@ -144,7 +148,7 @@ function App() {
 A modal that prompts for user input.
 
 ```jsx
-import { PromptModal } from 'react-modal-library';
+import { PromptModal } from 'woowacourse-6th-react-modal-component';
 
 function App() {
   const handleConfirm = () => {
@@ -166,7 +170,7 @@ function App() {
   return (
     <PromptModal
       title="Prompt"
-      message="Please enter your name:"
+      basicDescription="Please enter your name:"
       label="Name"
       onConfirmButtonClick={handleConfirm}
       onCancelButtonClick={handleCancel}
@@ -175,4 +179,6 @@ function App() {
     />
   );
 }
+
+export default App;
 ```
