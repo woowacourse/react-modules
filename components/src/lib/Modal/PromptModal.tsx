@@ -1,17 +1,10 @@
 import Button from '../Button/Button';
 
 import { useEffect, useState } from 'react';
-import ModalDimmedLayer from './ModalDimmedLayer/ModalDimmedLayer';
-import ModalContainer from './ModalContainer/ModalContainer';
-import ModalHeader from './ModalHeader/ModalHeader';
-import ModalTitle from './ModalTitle/ModalTitle';
-import ModalCloseButton from './ModalCloseButton/ModalCloseButton';
-import ModalBody from './ModalBody/ModalBody';
-import ModalDescription from './ModalDescription/ModalDescription';
-import ModalButtonContainer from './ModalButtonContainer/ModalButtonContainer';
-import ModalInputField, { ValidateResult } from './ModalInputField/ModalInputField';
 import { createPortal } from 'react-dom';
 import { DefaultModalProps } from './Modal';
+import { ModalProvider } from '.';
+import { ValidateResult } from './ModalInputField/ModalInputField';
 
 interface PromptModalProps extends DefaultModalProps {
   placeholder?: string;
@@ -57,21 +50,21 @@ const PromptModal = ({
   return createPortal(
     <>
       {isOpened && (
-        <ModalDimmedLayer onClick={onClose}>
-          <ModalContainer
+        <ModalProvider.DimmedLayer onClick={onClose}>
+          <ModalProvider.Container
             size={size}
             modalPosition={modalPosition}
           >
-            <ModalHeader>
-              <ModalTitle title={title} />
-              <ModalCloseButton showCloseButton={showCloseButton} onClick={onClose} />
-            </ModalHeader>
-            <ModalBody>
-              <ModalDescription description={description} />
-              <ModalInputField placeholder={placeholder} value={value} updateValue={setValue} validateOnChange={validateOnChange} validateOnBlur={validateOnBlur} />
+            <ModalProvider.Header>
+              <ModalProvider.Title title={title} />
+              <ModalProvider.CloseButton showCloseButton={showCloseButton} onClick={onClose} />
+            </ModalProvider.Header>
+            <ModalProvider.Body>
+              <ModalProvider.Description description={description} />
+              <ModalProvider.InputField placeholder={placeholder} value={value} updateValue={setValue} validateOnChange={validateOnChange} validateOnBlur={validateOnBlur} />
               <>{children}</>
-            </ModalBody>
-            <ModalButtonContainer buttonPosition={buttonPosition}>
+            </ModalProvider.Body>
+            <ModalProvider.ButtonContainer buttonPosition={buttonPosition}>
               <Button
                 text={'확인'}
                 onClick={() => {
@@ -92,9 +85,9 @@ const PromptModal = ({
                 width={modalPosition === 'bottom' || buttonPosition === 'column' ? 'full' : 'fixed'}
                 buttonStyle={'border'}
               />
-            </ModalButtonContainer>
-          </ModalContainer>
-        </ModalDimmedLayer>
+            </ModalProvider.ButtonContainer>
+          </ModalProvider.Container>
+        </ModalProvider.DimmedLayer>
       )}
     </>, document.body
   );

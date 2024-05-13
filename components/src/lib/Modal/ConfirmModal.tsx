@@ -1,16 +1,9 @@
 import Button from '../Button/Button';
 
 import { useEffect } from 'react';
-import ModalDimmedLayer from './ModalDimmedLayer/ModalDimmedLayer';
-import ModalContainer from './ModalContainer/ModalContainer';
-import ModalHeader from './ModalHeader/ModalHeader';
-import ModalTitle from './ModalTitle/ModalTitle';
-import ModalCloseButton from './ModalCloseButton/ModalCloseButton';
-import ModalBody from './ModalBody/ModalBody';
-import ModalDescription from './ModalDescription/ModalDescription';
-import ModalButtonContainer from './ModalButtonContainer/ModalButtonContainer';
 import { createPortal } from 'react-dom';
 import { DefaultModalProps } from './Modal';
+import { ModalProvider } from '.';
 
 interface ConfirmModalProps extends DefaultModalProps {
   onConfirm: () => void;
@@ -46,20 +39,20 @@ const ConfirmModal = ({
   return createPortal(
     <>
       {isOpened && (
-        <ModalDimmedLayer onClick={onClose}>
-          <ModalContainer
+        <ModalProvider.DimmedLayer onClick={onClose}>
+          <ModalProvider.Container
             size={size}
             modalPosition={modalPosition}
           >
-            <ModalHeader>
-              <ModalTitle title={title} />
-              <ModalCloseButton showCloseButton={showCloseButton} onClick={onClose} />
-            </ModalHeader>
-            <ModalBody>
-              <ModalDescription description={description} />
+            <ModalProvider.Header>
+              <ModalProvider.Title title={title} />
+              <ModalProvider.CloseButton showCloseButton={showCloseButton} onClick={onClose} />
+            </ModalProvider.Header>
+            <ModalProvider.Body>
+              <ModalProvider.Description description={description} />
               <>{children}</>
-            </ModalBody>
-            <ModalButtonContainer buttonPosition={buttonPosition}>
+            </ModalProvider.Body>
+            <ModalProvider.ButtonContainer buttonPosition={buttonPosition}>
               <Button
                 text={'확인'}
                 onClick={() => {
@@ -80,9 +73,9 @@ const ConfirmModal = ({
                 width={modalPosition === 'bottom' || buttonPosition === 'column' ? 'full' : 'fixed'}
                 buttonStyle={'border'}
               />
-            </ModalButtonContainer>
-          </ModalContainer>
-        </ModalDimmedLayer>
+            </ModalProvider.ButtonContainer>
+          </ModalProvider.Container>
+        </ModalProvider.DimmedLayer>
       )}
     </>, document.body
   );
