@@ -31,6 +31,9 @@ const meta = {
     onClose: {
       description: 'modal을 열고 닫기 위한 핸들러 함수',
     },
+    onConfirm: {
+      description: 'modal에서 입력된 값을 확인하여 제출하는 함수',
+    },
     style: {
       control: 'object',
       table: {
@@ -54,6 +57,7 @@ const meta = {
   },
   args: {
     onClose: fn(),
+    onConfirm: fn(),
   },
   render: ({ style, ...args }) => {
     return (
@@ -61,7 +65,7 @@ const meta = {
         <Modal.Content style={style}>
           <span>지그😊 기본 모달이에요.</span>
         </Modal.Content>
-        <Modal.TextButton actionFn={args.onClose}>확인</Modal.TextButton>
+        <Modal.TextButton onClick={args.onClose}>확인</Modal.TextButton>
       </Modal>
     );
   },
@@ -112,7 +116,7 @@ export const 이미지_버튼이_있는_모달: Story = {
     >
       <Modal.Header>
         <Modal.Title>지그🥰</Modal.Title>
-        <Modal.IconButton actionFn={args.onClose} src={CloseImage} />
+        <Modal.IconButton onClick={args.onClose} src={CloseImage} />
       </Modal.Header>
       <Modal.Content>
         <span>이미지 버튼이 있는 모달이에요.</span>
@@ -150,7 +154,7 @@ export const 텍스트_버튼이_있는_모달: Story = {
         <span>텍스트 버튼이 있는 모달이에요.</span>
       </Modal.Content>
       <Modal.Footer>
-        <Modal.TextButton actionFn={args.onClose}>확인</Modal.TextButton>
+        <Modal.TextButton onClick={args.onClose}>확인</Modal.TextButton>
       </Modal.Footer>
     </Modal>
   ),
@@ -180,13 +184,13 @@ export const 이미지_버튼과_텍스트_버튼이_있는_모달: Story = {
     >
       <Modal.Header>
         <Modal.Title>지그🌞</Modal.Title>
-        <Modal.IconButton actionFn={args.onClose} src={CloseImage} />
+        <Modal.IconButton onClick={args.onClose} src={CloseImage} />
       </Modal.Header>
       <Modal.Content>
         <span>이미지 버튼과 텍스트 버튼이 있는 모달이에요.</span>
       </Modal.Content>
       <Modal.Footer>
-        <Modal.TextButton actionFn={args.onClose}>확인</Modal.TextButton>
+        <Modal.TextButton onClick={args.onClose}>확인</Modal.TextButton>
       </Modal.Footer>
     </Modal>
   ),
@@ -198,6 +202,7 @@ export const 확인_모달: Story = {
     isOpen: true,
     position: 'center',
     onClose: fn(),
+    onConfirm: fn(),
     size: 'medium',
   },
   parameters: {
@@ -215,6 +220,7 @@ export const 확인_모달: Story = {
       size={args.size}
       title='아이디를 입력해 주세요.'
       onClose={args.onClose}
+      onConfirm={args.onConfirm}
       message='아이디는 필수로 입력해야 합니다.'
     />
   ),
@@ -225,6 +231,7 @@ export const 확인_취소_모달: Story = {
     isOpen: true,
     position: 'center',
     onClose: fn(),
+    onConfirm: fn(),
     size: 'medium',
   },
   parameters: {
@@ -242,6 +249,7 @@ export const 확인_취소_모달: Story = {
       size={args.size}
       title='카드를 삭제하시겠습니까?'
       onClose={args.onClose}
+      onConfirm={args.onConfirm}
     >
       <span>삭제하면 복구하실 수 없습니다.</span>
     </ConfirmModal>
@@ -253,6 +261,7 @@ export const 입력_모달: Story = {
     isOpen: true,
     position: 'center',
     onClose: fn(),
+    onConfirm: fn(),
     size: 'medium',
   },
   parameters: {
@@ -271,6 +280,7 @@ export const 입력_모달: Story = {
       size={args.size}
       title='쿠폰 번호를 입력해 주세요.'
       onClose={args.onClose}
+      onConfirm={args.onConfirm}
     />
   ),
 };
