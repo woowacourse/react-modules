@@ -50,6 +50,7 @@ interface FooterProps extends React.HTMLAttributes<HTMLDivElement> {
   cancelLabel?: string;
   confirmLabel?: string;
   align?: "vertical" | "horizontal";
+  buttonWidth?: string;
   onConfirm?: () => void;
   onClose?: () => void;
 }
@@ -60,11 +61,12 @@ const Footer = ({
   onConfirm = () => {},
   onClose = () => {},
   align = "vertical",
+  buttonWidth = "100%",
   ...restProps
 }: FooterProps) => {
   return (
     (confirmLabel || cancelLabel) && (
-      <div className={css(buttonContainerCSS[align])} {...restProps}>
+      <div className={css(buttonContainerCSS[align], `button{width:${buttonWidth}}`)} {...restProps}>
         {confirmLabel && (
           <button className={css(buttonCSS, confirmButtonCSS)} onClick={onConfirm}>
             {confirmLabel}
@@ -158,7 +160,6 @@ const buttonContainerCSS = {
   horizontal: `
   display:flex;
   flex-direction: row-reverse;
-  justify-content: flex-end;
   gap:12px;`,
 };
 

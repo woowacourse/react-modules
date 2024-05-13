@@ -1,5 +1,4 @@
 import { Modal } from ".";
-import { css } from "@emotion/css";
 import { ModalSize } from "./common/Modal";
 
 interface AlertModalProps {
@@ -17,18 +16,7 @@ function AlertModal({ isOpen, closeModal, title, description, confirmLabel, size
       <Modal.Positioner position="center" size={size}>
         <Modal.Header title={title} closeButton={true} onClose={closeModal} />
         <Modal.Content description={description} />
-        <Modal.Footer
-          confirmLabel={confirmLabel}
-          onConfirm={closeModal}
-          className={css`
-            display: flex;
-            flex-direction: row-reverse;
-            gap: 12px;
-            button {
-              width: 80px;
-            }
-          `}
-        />
+        <Modal.Footer confirmLabel={confirmLabel} onConfirm={closeModal} align="horizontal" buttonWidth="80px" />
       </Modal.Positioner>
     </Modal>
   );

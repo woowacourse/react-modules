@@ -1,5 +1,4 @@
 import { Modal } from ".";
-import { css } from "@emotion/css";
 import { ModalSize } from "./common/Modal";
 
 interface ConfirmModalProps {
@@ -33,14 +32,8 @@ function ConfirmLabel({
           cancelLabel={cancelLabel}
           onConfirm={confirmModal}
           onClose={closeModal}
-          className={css`
-            display: flex;
-            flex-direction: row-reverse;
-            gap: 12px;
-            button {
-              width: 80px;
-            }
-          `}
+          align="horizontal"
+          buttonWidth="80px"
         />
       </Modal.Positioner>
     </Modal>

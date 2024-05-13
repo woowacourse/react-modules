@@ -30,14 +30,9 @@ function PromptModal({ isOpen, closeModal, title, description, cancelLabel, conf
           confirmLabel={confirmLabel}
           cancelLabel={cancelLabel}
           onConfirm={closeModal}
-          className={css`
-            display: flex;
-            flex-direction: row-reverse;
-            gap: 12px;
-            button {
-              width: 80px;
-            }
-          `}
+          onClose={closeModal}
+          buttonWidth="80px"
+          align="horizontal"
         />
       </Modal.Positioner>
     </Modal>
