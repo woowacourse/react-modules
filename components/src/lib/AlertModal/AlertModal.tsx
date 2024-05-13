@@ -2,7 +2,6 @@ import Modal, { ModalProps } from '../Modal/Modal';
 import { ButtonInterface } from '../types/ModalTypes';
 
 export interface AlertModalProps extends ModalProps {
-  description: string;
   confirmButtonText?: string;
   onConfirm: (event: React.MouseEvent<HTMLButtonElement>) => void;
 }
@@ -11,7 +10,7 @@ export default function AlertModal({
   isOpen,
   size,
   title,
-  description,
+  children,
   confirmButtonText = '확인',
   position = 'center',
   hasCloseButton = true,
@@ -21,7 +20,7 @@ export default function AlertModal({
   buttonsFlexDirection = 'row',
   onConfirm,
   onClose,
-}: AlertModalProps) {
+}: React.PropsWithChildren<AlertModalProps>) {
   const confirmButton: ButtonInterface = {
     text: confirmButtonText,
     style: 'primary',
@@ -42,7 +41,7 @@ export default function AlertModal({
       zIndex={zIndex}
       backdropOpacity={backdropOpacity}
     >
-      <p>{description}</p>
+      {children}
     </Modal>
   );
 }

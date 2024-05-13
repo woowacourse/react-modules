@@ -75,20 +75,22 @@ function App() {
         <AlertModal
           isOpen={isOpenAlertModal}
           title="아이디를 입력해 주세요."
-          description="아이디는 필수로 입력해야 합니다."
           onClose={() => setIsOpenAlertModal(false)}
           onConfirm={() => setIsOpenAlertModal(false)}
-        />
+        >
+          <p>아이디는 필수로 입력해야 합니다.</p>
+        </AlertModal>
 
         <ConfirmModal
           isOpen={isOpenConfirmModal}
           title="카드를 삭제하시겠습니까?"
-          description="삭제하면 복구하실 수 없습니다."
           buttonsFlexDirection="row-reverse"
           onClose={() => setIsOpenConfirmModal(false)}
           onCancel={() => setIsOpenConfirmModal(false)}
           onConfirm={() => setIsOpenConfirmModal(false)}
-        />
+        >
+          <p>삭제하면 복구하실 수 없습니다.</p>
+        </ConfirmModal>
 
         <PromptModal
           isOpen={isOpenPromptModal}

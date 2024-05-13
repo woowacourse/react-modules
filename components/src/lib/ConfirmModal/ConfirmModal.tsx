@@ -2,7 +2,6 @@ import Modal, { ModalProps } from '../Modal/Modal';
 import { ButtonInterface } from '../types/ModalTypes';
 
 export interface ConfirmModalProps extends ModalProps {
-  description: string;
   confirmButtonText?: string;
   cancelButtonText?: string;
   onConfirm: (event: React.MouseEvent<HTMLButtonElement>) => void;
@@ -13,7 +12,7 @@ export default function ConfirmModal({
   isOpen,
   size,
   title,
-  description,
+  children,
   confirmButtonText = '확인',
   cancelButtonText = '취소',
   position = 'center',
@@ -25,7 +24,7 @@ export default function ConfirmModal({
   onConfirm,
   onCancel,
   onClose,
-}: ConfirmModalProps) {
+}: React.PropsWithChildren<ConfirmModalProps>) {
   const confirmButton: ButtonInterface = {
     text: confirmButtonText,
     style: 'primary',
@@ -52,7 +51,7 @@ export default function ConfirmModal({
       zIndex={zIndex}
       backdropOpacity={backdropOpacity}
     >
-      <p>{description}</p>
+      {children}
     </Modal>
   );
 }
