@@ -31,8 +31,6 @@ const useCardExpirationDate = ({ month = '', year = '' }: useCardExpirationDateP
 
     if (month.length < VALID_DATE_LENGTH) return '';
 
-    // if (!isValidNumberLength(month, VALID_DATE_LENGTH)) return EXPIRATION_DATE_ERROR_MESSAGES.INVALID_MONTH;
-
     if (!isValidNumberRange(Number(month), 1, 12)) return EXPIRATION_DATE_ERROR_MESSAGES.INVALID_MONTH;
 
     if (isExpiredDate === 'INVALID_MONTH') return EXPIRATION_DATE_ERROR_MESSAGES.EXPIRED_DATE;
@@ -44,8 +42,6 @@ const useCardExpirationDate = ({ month = '', year = '' }: useCardExpirationDateP
     if (isNotNumber(year)) return EXPIRATION_DATE_ERROR_MESSAGES.NOT_NUMBER;
 
     if (year.length < VALID_DATE_LENGTH) return '';
-
-    // if (!isValidNumberLength(year, VALID_DATE_LENGTH)) return EXPIRATION_DATE_ERROR_MESSAGES.INVALID_YEAR;
 
     if (isExpiredDate === 'INVALID_YEAR') return EXPIRATION_DATE_ERROR_MESSAGES.EXPIRED_DATE;
 
