@@ -7,15 +7,16 @@ interface PromptModalProps extends ModalProps {
   size?: SizeType;
   existCloseButton: boolean;
   title: string;
-  onConfirm: (e: MouseEvent<HTMLButtonElement>) => void;
+  onConfirm: (e: MouseEvent<HTMLButtonElement>) => boolean;
 }
 
 export default function PromptModal({ size = 'medium', existCloseButton, title, onConfirm, children, ...props }: PropsWithChildren<PromptModalProps>) {
   const { isOpen, position, onClose } = props;
 
   const onConfirmHandler = (e: MouseEvent<HTMLButtonElement>) => {
-    onConfirm(e);
-    onClose();
+    const response = onConfirm(e);
+
+    if (response) onClose();
   };
 
   return (

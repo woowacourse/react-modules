@@ -8,13 +8,14 @@ export interface AlertModalProps extends ModalProps {
   title: string;
   label: string;
   existCloseButton: boolean;
-  onConfirm: (e: MouseEvent<HTMLButtonElement>) => void;
+  onConfirm: (e: MouseEvent<HTMLButtonElement>) => boolean;
 }
 
 export default function AlertModal({ size = 'medium', title, label, position, isOpen, onClose, onConfirm, existCloseButton }: AlertModalProps) {
   const onConfirmHandler = (e: MouseEvent<HTMLButtonElement>) => {
-    onConfirm(e);
-    onClose();
+    const response = onConfirm(e);
+
+    if (response) onClose();
   };
 
   return (

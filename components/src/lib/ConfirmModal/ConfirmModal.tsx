@@ -8,15 +8,16 @@ export interface ConfirmModalProps extends ModalProps {
   title: string;
   label: string;
   existCloseButton: boolean;
-  onConfirm: (e: MouseEvent<HTMLButtonElement>) => void;
+  onConfirm: (e: MouseEvent<HTMLButtonElement>) => boolean;
 }
 
 export default function ConfirmModal({ size = 'medium', title, label, existCloseButton, onConfirm, ...props }: ConfirmModalProps) {
   const { position, isOpen, onClose } = props;
 
   const onConfirmHandler = (e: MouseEvent<HTMLButtonElement>) => {
-    onConfirm(e);
-    onClose();
+    const response = onConfirm(e);
+
+    if (response) onClose();
   };
 
   return (
