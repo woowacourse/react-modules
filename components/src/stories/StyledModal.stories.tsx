@@ -1,6 +1,6 @@
 import { ConfirmModal, PromptModal } from "@/lib";
 import AlertModal from "@/lib/Modal/AlertModal/AlertModal";
-import Modal from "@/lib/Modal/Modal/Modal";
+import Modal from "@/lib/Modal/Modal";
 import useInput from "@/lib/hooks/useInput";
 import { StoryObj } from "@storybook/react";
 
@@ -16,7 +16,7 @@ export const BasicAlertModal: AlertModalStory = {
     position: "bottom",
     isOpen: true,
     title: "경고 모달",
-    message: "경고 모달입니다.",
+    children: <span>"경고 모달입니다."</span>,
   },
   parameters: {
     docs: {

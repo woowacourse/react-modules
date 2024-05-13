@@ -1,36 +1,29 @@
-import Modal, { ModalPosition, ModalSize } from "../Modal/Modal";
+import { ModalMainProps } from "../Modal";
+import Modal, { ModalSize } from "../Modal";
 
-export interface ConfirmModalProps {
-  isOpen: boolean;
-  onClose: () => void;
+export interface ConfirmModalProps extends ModalMainProps {
   onConfirm: () => void;
   title: string;
   message: string;
   confirmButtonText?: string;
   cancelButtonText?: string;
-  position?: ModalPosition;
-  modalSize?: ModalSize;
+  size?: ModalSize;
 }
 const ConfirmModal = ({
   isOpen,
   onClose,
   onConfirm,
   title,
-  message,
-  modalSize = "medium",
+  children,
+  size = "medium",
   confirmButtonText = "확인",
   cancelButtonText = "취소",
   position = "center",
 }: ConfirmModalProps) => {
   return (
-    <Modal
-      isOpen={isOpen}
-      onClose={onClose}
-      position={position}
-      size={modalSize}
-    >
+    <Modal isOpen={isOpen} onClose={onClose} position={position} size={size}>
       <Modal.Title>{title}</Modal.Title>
-      <Modal.Content>{message}</Modal.Content>
+      <Modal.Content>{children}</Modal.Content>
       <Modal.Footer>
         <Modal.StyledButton
           onClickEvent={onClose}

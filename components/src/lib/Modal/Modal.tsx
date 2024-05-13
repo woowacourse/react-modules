@@ -4,24 +4,28 @@ import BasicButton, {
   ButtonSizeType,
 } from "@/lib/Button/Button.tsx";
 
-export type ModalPosition = "center" | "bottom";
+export type ModalPosition = "center" | "bottom" | "top";
 
 export type ModalSize = "small" | "medium" | "large" | "full";
 
+export type ModalContentPosition = "center" | "left";
+
 export interface ModalMainProps {
   children?: React.ReactNode;
+  buttons?: React.ReactNode;
   isOpen: boolean;
-  position: ModalPosition;
+  position?: ModalPosition;
   onClose: () => void;
   size?: ModalSize;
+  contentPosition?: ModalContentPosition;
 }
 
 export const ModalMain = ({
   children,
   isOpen,
-  position,
+  position = "center",
   onClose,
-  size = "small",
+  size = "medium",
 }: ModalMainProps) => {
   return (
     <S.ModalWrapper open={isOpen}>
@@ -51,11 +55,12 @@ const CloseIcon = ({ children, onClick }: CloseIconProps) => {
 };
 
 export interface ContentsProps {
+  contentPosition?: ModalContentPosition;
   children: React.ReactNode;
 }
 
-const Content = ({ children }: ContentsProps) => {
-  return <S.Content>{children}</S.Content>;
+const Content = ({ children, contentPosition = "left" }: ContentsProps) => {
+  return <S.Content contentPosition={contentPosition}>{children}</S.Content>;
 };
 
 export interface StyleButtonProps {
@@ -94,12 +99,21 @@ const CloseButton = ({ label, onClose, size = "full" }: CloseButtonProps) => {
   return <BasicButton onClick={onClose} label={label} size={size} />;
 };
 
+export interface FooterProps {
+  children?: React.ReactNode;
+}
+
+const Footer = ({ children }: FooterProps) => {
+  return <S.Footer>{children}</S.Footer>;
+};
+
 const Modal = Object.assign(ModalMain, {
   Title,
   CloseIcon,
   Content,
   StyledButton,
   CloseButton,
+  Footer,
 });
 
 export default Modal;

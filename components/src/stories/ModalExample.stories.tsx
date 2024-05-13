@@ -3,7 +3,7 @@ import { CardCompanyType, CardCompanies } from "../data/CardCompany.ts";
 import styled from "styled-components";
 import DeleteIcon from "../assets/deleteIcon.svg?react";
 import { StoryObj } from "@storybook/react";
-import { ModalMainProps } from "@/lib/Modal/Modal/Modal.tsx";
+import { ModalMainProps } from "@/lib/Modal/Modal.tsx";
 
 export default { title: "Modal/Example", component: Modal };
 
@@ -44,14 +44,14 @@ const CardCompaniesBox = () => {
   );
 };
 
-const CardSelectModal = (args: ModalMainProps) => {
+const CardSelectModal = ({ contentPosition, ...args }: ModalMainProps) => {
   return (
     <Modal {...args}>
       <Modal.Title> 카드사 선택 </Modal.Title>
       <Modal.CloseIcon onClick={() => {}}>
         <DeleteIcon />
       </Modal.CloseIcon>
-      <Modal.Content contentPosition="center">
+      <Modal.Content contentPosition={contentPosition}>
         <CardCompaniesBox />
       </Modal.Content>
     </Modal>
@@ -62,6 +62,7 @@ export const CardSelectModalExample: Story = {
   args: {
     position: "bottom",
     isOpen: true,
+    contentPosition: "left",
   },
   parameters: {
     docs: {
@@ -71,6 +72,10 @@ export const CardSelectModalExample: Story = {
       position: {
         control: { type: "radio" },
         option: ["bottom", "center"],
+      },
+      contentPosition: {
+        control: { type: "radio" },
+        option: ["left", "center"],
       },
     },
   },

@@ -2,7 +2,7 @@ import * as S from "./Button.style";
 export type ButtonColorType = "black" | "white";
 
 export type ButtonSizeType = "small" | "medium" | "large" | "full";
-interface ButtonProps {
+interface ButtonProps extends React.ComponentProps<"button"> {
   label: string;
   onClick: () => void;
   backgroundColor?: ButtonColorType | string;
@@ -16,6 +16,7 @@ const Button = ({
   backgroundColor = "white",
   textColor = "black",
   size = "full",
+  ...rest
 }: ButtonProps) => {
   return (
     <S.ButtonWrapper
@@ -23,6 +24,7 @@ const Button = ({
       $backgroundColor={backgroundColor}
       $textColor={textColor}
       $size={size}
+      {...rest}
     >
       {label}
     </S.ButtonWrapper>

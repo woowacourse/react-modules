@@ -1,20 +1,23 @@
 import { forwardRef } from "react";
-import { InputBox } from "./Input.style";
-
-export interface InputProps extends React.HTMLProps<HTMLInputElement> {
+import * as S from "./Input.style";
+export interface InputProps extends React.ComponentProps<"input"> {
   isError: boolean;
   maxLength?: number;
+  label?: string;
 }
 
 const Input = forwardRef<HTMLInputElement, InputProps>(
-  ({ isError, maxLength, ...restProps }, ref) => {
+  ({ isError, maxLength, label, ...restProps }, ref) => {
     return (
-      <InputBox
-        ref={ref}
-        $isError={isError}
-        maxLength={maxLength}
-        {...restProps}
-      />
+      <S.FlexBox>
+        <span>{label}</span>
+        <S.InputBox
+          ref={ref}
+          $isError={isError}
+          maxLength={maxLength}
+          {...restProps}
+        />
+      </S.FlexBox>
     );
   }
 );

@@ -1,49 +1,47 @@
 import Input, { InputProps } from "@/lib/Input/Input";
-import Modal, { ModalPosition, ModalSize } from "../Modal/Modal";
+import Modal from "../Modal";
 import { ChangeEvent } from "react";
+import { ModalMainProps } from "../Modal";
 
-export interface PromptModalProps {
-  isOpen: boolean;
-  onClose: () => void;
+export interface PromptModalProps extends ModalMainProps {
   onConfirm: () => void;
   title: string;
   message: string;
   confirmButtonText?: string;
   cancelButtonText?: string;
-  position?: ModalPosition;
-  modalSize?: ModalSize;
   inputProps?: InputProps;
   value: string;
   onChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  label?: string;
 }
+
 const PromptModal = ({
   isOpen,
   onClose,
   onConfirm,
   title,
-  modalSize = "medium",
+  size = "medium",
   confirmButtonText = "확인",
   cancelButtonText = "취소",
   position = "center",
   inputProps,
   value,
   onChange,
+  children,
+  label,
 }: PromptModalProps) => {
   return (
-    <Modal
-      isOpen={isOpen}
-      onClose={onClose}
-      position={position}
-      size={modalSize}
-    >
+    <Modal isOpen={isOpen} onClose={onClose} position={position} size={size}>
       <Modal.Title>{title}</Modal.Title>
       <Modal.Content>
         <Input
+          label={label}
           isError={false}
           onChange={onChange}
           value={value}
           {...inputProps}
         />
+        {children}
       </Modal.Content>
       <Modal.Footer>
         <Modal.StyledButton

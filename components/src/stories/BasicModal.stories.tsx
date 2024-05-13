@@ -4,7 +4,7 @@ import type { StoryObj } from "@storybook/react";
 import styled from "styled-components";
 
 export default {
-  title: "Components/Modal",
+  title: "Modal",
   component: Modal,
 };
 
