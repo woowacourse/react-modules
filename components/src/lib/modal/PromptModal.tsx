@@ -44,7 +44,7 @@ const PromptModal: React.FC<PromptModalProps> = ({
         </Modal.TextButton>
         <Modal.TextButton
           type='submit'
-          onSubmit={onConfirm}
+          onClick={onConfirm}
           buttonWidth='80px'
           buttonHeight='36px'
           backgroundColor={primaryButtonBackgroundColor}

@@ -50,7 +50,7 @@ const ConfirmModal: React.FC<ConfirmModalProps> = ({
           {secondaryButtonText}
         </Modal.TextButton>
         <Modal.TextButton
-          onSubmit={onConfirm}
+          onClick={onConfirm}
           buttonWidth='80px'
           buttonHeight='36px'
           backgroundColor={primaryButtonBackgroundColor}

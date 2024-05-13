@@ -37,7 +37,7 @@ const AlertModal: React.FC<AlertModalProps> = ({
       </Modal.Content>
       <Modal.Footer buttonPosition='right'>
         <Modal.TextButton
-          onSubmit={onConfirm}
+          onClick={onConfirm}
           buttonWidth='80px'
           buttonHeight='36px'
           backgroundColor={buttonBackgroundColor}
