@@ -26,7 +26,7 @@ function App() {
     brand,
     validationResult: brandValidationResult,
     handleUpdateBrand,
-  } = useCardBrand(cardBrands);
+  } = useCardBrand({ allowedBrands: cardBrands });
   const {
     expiryDate,
     validationResult: expiryDateValidationResult,

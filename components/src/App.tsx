@@ -2,14 +2,13 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import './App.css';
 
-// import {
-//   Modal,
-//   AlertModal,
-//   ConfirmModal,
-//   PromptModal,
-//   ButtonInterface,
-// } from '@seongjinme/react-modal';
-import { Modal, AlertModal, ConfirmModal, PromptModal, ButtonInterface } from './lib';
+import {
+  Modal,
+  AlertModal,
+  ConfirmModal,
+  PromptModal,
+  ButtonInterface,
+} from '@seongjinme/react-modal';
 
 function App() {
   const [isOpenAlertModal, setIsOpenAlertModal] = useState(false);
@@ -96,7 +95,10 @@ function App() {
           isOpen={isOpenPromptModal}
           size="medium"
           title="쿠폰 번호를 입력해 주세요."
-          inputField={{ name: 'promptInput', placeholder: '쿠폰 번호' }}
+          inputField={{
+            name: 'promptInput',
+            placeholder: '쿠폰 번호',
+          }}
           buttonsFlexDirection="row-reverse"
           onClose={() => setIsOpenPromptModal(false)}
           onCancel={() => setIsOpenPromptModal(false)}
