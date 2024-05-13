@@ -1,6 +1,6 @@
 import Button from './lib/Button/Button';
 
-import { Modal, AlertModal, ConfirmModal, PromptModal } from './lib/index'
+import { CustomModal, AlertModal, ConfirmModal, PromptModal } from './lib/index'
 import React, { useState } from 'react';
 
 const App = () => {
@@ -79,7 +79,7 @@ const App = () => {
         />
       </div>
 
-      <Modal
+      <CustomModal
         isOpened={modalOpened}
         onClose={handleModalClose}
         title="Todal Modal"
@@ -109,7 +109,7 @@ const App = () => {
         >
           Children Area
         </div>
-      </Modal>
+      </CustomModal>
 
       <AlertModal
         isOpened={alertModalOpened}
