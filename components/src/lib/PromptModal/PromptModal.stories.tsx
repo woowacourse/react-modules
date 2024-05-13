@@ -1,6 +1,6 @@
 import '../../../index.css';
 import { useState } from 'react';
-import { PromptModal, Modal } from '../../';
+import { PromptModal, Modal } from '..';
 import type { Meta, StoryObj } from '@storybook/react';
 
 const meta: Meta<typeof PromptModal> = {
@@ -29,7 +29,7 @@ const meta: Meta<typeof PromptModal> = {
           모달열기
         </Modal.Button>
         <PromptModal {...args} isOpen={isOpen} onClose={onClose} onConfirm={onConfirm}>
-          <Modal.Input placeholder='입력해주세요.' label='inputModal' value={value} onChange={(e) => setValue(e.target.value)} />
+          <Modal.Input placeholder='입력해주세요.' description='inputModal' value={value} onChange={(e) => setValue(e.target.value)} />
         </PromptModal>
       </>
     );

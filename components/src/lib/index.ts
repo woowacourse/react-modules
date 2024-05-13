@@ -23,6 +23,6 @@ export const Modal = Object.assign(ModalContainer, {
   Input: Input,
 });
 
-export { default as AlertModal } from './Modal/AlertModal/AlertModal';
-export { default as ConfirmModal } from './Modal/ConfirmModal/ConfirmModal';
-export { default as PromptModal } from './Modal/PromptModal/PromptModal';
+export { default as AlertModal } from './AlertModal/AlertModal';
+export { default as ConfirmModal } from './ConfirmModal/ConfirmModal';
+export { default as PromptModal } from './PromptModal/PromptModal';

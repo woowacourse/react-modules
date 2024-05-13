@@ -1,6 +1,6 @@
-import { Modal } from '../..';
-import { SizeType } from '../Content/Content';
-import { ModalProps } from '../ModalContainer';
+import { Modal } from '..';
+import { SizeType } from '../Modal/Content/Content';
+import { ModalProps } from '../Modal/ModalContainer';
 
 export interface AlertModalProps extends ModalProps {
   size?: SizeType;

@@ -1,17 +1,17 @@
-import { PropsWithChildren } from 'react';
-import { Modal } from '../..';
-import { ModalProps } from '../ModalContainer';
-import { SizeType } from '../Content/Content';
+import { Modal } from '..';
+import { SizeType } from '../Modal/Content/Content';
+import { ModalProps } from '../Modal/ModalContainer';
 
-interface PromptModalProps extends ModalProps {
+export interface ConfirmModalProps extends ModalProps {
   size?: SizeType;
-  existCloseButton: boolean;
   title: string;
+  label: string;
+  existCloseButton: boolean;
   onConfirm: () => void;
 }
 
-export default function PromptModal({ size = 'medium', existCloseButton, title, onConfirm, children, ...props }: PropsWithChildren<PromptModalProps>) {
-  const { isOpen, position, onClose } = props;
+export default function ConfirmModal({ size = 'medium', title, label, existCloseButton, onConfirm, ...props }: ConfirmModalProps) {
+  const { position, isOpen, onClose } = props;
 
   const onConfirmHandler = () => {
     onConfirm();
@@ -26,7 +26,9 @@ export default function PromptModal({ size = 'medium', existCloseButton, title, 
           <Modal.Title>{title}</Modal.Title>
           {existCloseButton && <Modal.CloseButton onClick={onClose} />}
         </Modal.Header>
-        <Modal.Main>{children}</Modal.Main>
+        <Modal.Main>
+          <Modal.Label color='basic'>{label}</Modal.Label>
+        </Modal.Main>
         {position === 'center' && (
           <Modal.Footer align='row' position='right'>
             <Modal.Button backgroundColor='secondary' onClick={onConfirmHandler} size='small'>
