@@ -2,6 +2,12 @@ import Modal, { ModalProps } from './Modal';
 
 export interface PromptModalProps extends ModalProps {
   title: string;
+  primaryButtonText?: string;
+  secondaryButtonText?: string;
+  primaryButtonBackgroundColor?: string;
+  secondaryButtonBackgroundColor?: string;
+  primaryButtonFontColor?: string;
+  secondaryButtonFontColor?: string;
 }
 
 const PromptModal: React.FC<PromptModalProps> = ({
@@ -10,6 +16,12 @@ const PromptModal: React.FC<PromptModalProps> = ({
   title,
   position = 'center',
   size = 'medium',
+  primaryButtonText = '제출',
+  secondaryButtonText = '취소',
+  primaryButtonBackgroundColor = '#333333',
+  secondaryButtonBackgroundColor = '#ffffff',
+  primaryButtonFontColor = '#ffffff',
+  secondaryButtonFontColor = '#333333',
 }) => {
   return (
     <Modal isOpen={isOpen} position={position} onClose={onClose} size={size}>
@@ -24,19 +36,20 @@ const PromptModal: React.FC<PromptModalProps> = ({
           actionFn={onClose}
           buttonWidth='80px'
           buttonHeight='36px'
-          backgroundColor='#ffffff'
-          fontColor='#333333'
+          backgroundColor={secondaryButtonBackgroundColor}
+          fontColor={secondaryButtonFontColor}
         >
-          취소
+          {secondaryButtonText}
         </Modal.TextButton>
         <Modal.TextButton
           type='submit'
           actionFn={onClose}
           buttonWidth='80px'
           buttonHeight='36px'
-          fontColor='#ffffff'
+          backgroundColor={primaryButtonBackgroundColor}
+          fontColor={primaryButtonFontColor}
         >
-          제출
+          {primaryButtonText}
         </Modal.TextButton>
       </Modal.Footer>
     </Modal>

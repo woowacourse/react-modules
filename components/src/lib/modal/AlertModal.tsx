@@ -4,6 +4,9 @@ import Modal, { ModalProps } from './Modal';
 export interface AlertModalProps extends ModalProps {
   title: string;
   message: string;
+  buttonText?: string;
+  buttonBackgroundColor?: string;
+  buttonFontColor?: string;
 }
 
 const AlertModal: React.FC<AlertModalProps> = ({
@@ -13,6 +16,9 @@ const AlertModal: React.FC<AlertModalProps> = ({
   message,
   position = 'center',
   size = 'small',
+  buttonText = '확인',
+  buttonBackgroundColor = '#333333',
+  buttonFontColor = '#ffffff',
 }) => {
   return (
     <Modal isOpen={isOpen} position={position} size={size} onClose={onClose}>
@@ -27,8 +33,10 @@ const AlertModal: React.FC<AlertModalProps> = ({
           actionFn={onClose}
           buttonWidth='80px'
           buttonHeight='36px'
+          backgroundColor={buttonBackgroundColor}
+          fontColor={buttonFontColor}
         >
-          확인
+          {buttonText}
         </Modal.TextButton>
       </Modal.Footer>
     </Modal>
