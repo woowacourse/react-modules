@@ -1,3 +1,4 @@
+import { MouseEvent } from 'react';
 import { Modal } from '..';
 import { SizeType } from '../Modal/Content/Content';
 import { ModalProps } from '../Modal/ModalContainer';
@@ -7,12 +8,12 @@ export interface AlertModalProps extends ModalProps {
   title: string;
   label: string;
   existCloseButton: boolean;
-  onConfirm: () => void;
+  onConfirm: (e: MouseEvent<HTMLButtonElement>) => void;
 }
 
 export default function AlertModal({ size = 'medium', title, label, position, isOpen, onClose, onConfirm, existCloseButton }: AlertModalProps) {
-  const onConfirmHandler = () => {
-    onConfirm();
+  const onConfirmHandler = (e: MouseEvent<HTMLButtonElement>) => {
+    onConfirm(e);
     onClose();
   };
 

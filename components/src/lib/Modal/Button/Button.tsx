@@ -1,10 +1,10 @@
-import { PropsWithChildren } from 'react';
+import { MouseEvent, PropsWithChildren } from 'react';
 import styles from './button.module.css';
 
 interface ButtonProps {
   size: 'small' | 'full';
   backgroundColor: 'primary' | 'secondary';
-  onClick: () => void;
+  onClick: (e: MouseEvent<HTMLButtonElement>) => void;
 }
 
 export default function Button({ size, backgroundColor, onClick, children }: PropsWithChildren<ButtonProps>) {
