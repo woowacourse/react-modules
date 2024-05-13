@@ -12,7 +12,7 @@ export interface ModalFooterProps extends HTMLAttributes<HTMLElement> {
 
 export const ModalHeader = ({ children, ...rest }: StrictPropsWithChildren<HTMLAttributes<HTMLElement>>) => {
   return (
-    <header {...rest} className={styles.modalHeader}>
+    <header {...rest} className={`${styles.modalHeader} ${rest.className || ''}`}>
       {children}
     </header>
   );
@@ -20,7 +20,7 @@ export const ModalHeader = ({ children, ...rest }: StrictPropsWithChildren<HTMLA
 
 export const ModalBody = ({ children, ...rest }: StrictPropsWithChildren<HTMLAttributes<HTMLElement>>) => {
   return (
-    <section {...rest} className={styles.modalBody}>
+    <section {...rest} className={`${styles.modalBody} ${rest.className || ''}`}>
       {children}
     </section>
   );
@@ -33,7 +33,7 @@ export const ModalFooter = ({
   ...rest
 }: StrictPropsWithChildren<ModalFooterProps>) => {
   return (
-    <footer {...rest} className={`${styles.modalFooter} ${styles[align]} ${styles[direction]}`}>
+    <footer {...rest} className={`${styles.modalFooter} ${styles[align]} ${styles[direction]} ${rest.className || ''}`}>
       {children}
     </footer>
   );
