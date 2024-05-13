@@ -3,7 +3,7 @@ import { SizeType } from '../Content/Content';
 import { ModalProps } from '../ModalContainer';
 
 export interface AlertModalProps extends ModalProps {
-  size: SizeType;
+  size?: SizeType;
   title: string;
   label: string;
   existCloseButton: boolean;
