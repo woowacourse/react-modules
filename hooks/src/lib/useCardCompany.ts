@@ -19,7 +19,7 @@ export const cardCompanyValidator: Validator = {
 };
 const validators: Validator[] = [cardCompanyValidator];
 
-const usePassword = () => {
+const useCardCompany = () => {
   const cardCompany: InputState = useInput("");
 
   const { inputState, onChange, onBlur } = useValidation(cardCompany, validators);
@@ -27,4 +27,4 @@ const usePassword = () => {
   return { inputState, onChange, onBlur };
 };
 
-export default usePassword;
+export default useCardCompany;
