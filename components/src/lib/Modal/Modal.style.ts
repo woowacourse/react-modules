@@ -7,15 +7,21 @@ const WIDTH_SIZE = {
     large: "90%",
   },
   tablet: {
+    small: "400px",
+    medium: "420px",
+    large: "560px",
+  },
+
+  desktop: {
     small: "640px",
     medium: "768px",
     large: "900px",
   },
-  desktop: {
-    small: "1024px",
-    medium: "1280px",
-    large: "1440px",
-  },
+  // desktop: {
+  //   small: "1024px",
+  //   medium: "1280px",
+  //   large: "1440px",
+  // },
 };
 
 const getWidth = (
