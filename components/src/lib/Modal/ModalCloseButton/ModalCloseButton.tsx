@@ -2,20 +2,16 @@ import CLOSE_BUTTON from '../../../asset/close-button.svg';
 import { StyledModalCloseButton } from './ModalCloseButton.styled';
 
 interface ModalCloseButtonProps {
-  showCloseButton: boolean;
   onClick: () => void
 }
 
-const ModalCloseButton = ({ showCloseButton, onClick }: ModalCloseButtonProps) => {
+const ModalCloseButton = ({ onClick }: ModalCloseButtonProps) => {
 
-  return (<>
-    {showCloseButton && (
-      <StyledModalCloseButton
-        src={CLOSE_BUTTON}
-        onClick={onClick}
-      />
-    )}
-  </>
+  return (
+    <StyledModalCloseButton
+      src={CLOSE_BUTTON}
+      onClick={onClick}
+    />
   )
 }
 

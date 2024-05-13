@@ -43,7 +43,7 @@ const PromptModal = ({
           >
             <Modal.Header>
               <Modal.Title title={title} />
-              <Modal.CloseButton showCloseButton={showCloseButton} onClick={onClose} />
+              {showCloseButton && <Modal.CloseButton onClick={onClose} />}
             </Modal.Header>
             <Modal.Body>
               <Modal.Description description={description} />
