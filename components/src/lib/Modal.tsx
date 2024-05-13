@@ -1,9 +1,41 @@
 import { MouseEvent, PropsWithChildren, useEffect } from "react";
-import { Modal } from "../lib";
 import "./Modal.css";
-import { ModalMainProps } from "./type/modal.type";
+import { ModalContentProps, ModalFooterProps, ModalHeaderProps, ModalMainProps } from "./type/modal.type";
 
-export const ModalMain = ({ isOpen, onClose, onConfirm, onCancel, onSubmit, type = "default", size = "medium", position = "center", className = "", zIndex = 999, children, portalRoot = document.body, ...rest }: PropsWithChildren<ModalMainProps>) => {
+export const ModalHeader = ({ children, ...rest }: PropsWithChildren<ModalHeaderProps>) => {
+  return (
+    <header
+      {...rest}
+      className="modal-header"
+    >
+      {children}
+    </header>
+  );
+};
+
+export const ModalContent = ({ children, ...rest }: PropsWithChildren<ModalContentProps>) => {
+  return (
+    <section
+      {...rest}
+      className="modal-content"
+    >
+      {children}
+    </section>
+  );
+};
+
+export const ModalFooter = ({ children, ...rest }: PropsWithChildren<ModalFooterProps>) => {
+  return (
+    <section
+      {...rest}
+      className="modal-footer"
+    >
+      {children}
+    </section>
+  );
+};
+
+export const ModalMain = ({ isOpen, onClose, size = "medium", position = "center", className = "", zIndex = 999, children, portalRoot = document.body, ...rest }: PropsWithChildren<ModalMainProps>) => {
   useEffect(() => {
     if (portalRoot) {
       portalRoot.style.overflow = isOpen ? "hidden" : "auto";
@@ -31,13 +63,6 @@ export const ModalMain = ({ isOpen, onClose, onConfirm, onCancel, onSubmit, type
         onClick={handleModalContainerClick}
       >
         {children}
-        <Modal.ButtonContainer
-          type={type}
-          onClose={onClose}
-          onConfirm={onConfirm}
-          onCancel={onCancel}
-          onSubmit={onSubmit}
-        />
       </div>
     </div>
   );

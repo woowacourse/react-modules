@@ -24,6 +24,22 @@
   padding: 24px 32px;
 }
 
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.modal-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.modal-footer {
+  display: flex;
+  flex-direction: row-reverse;
+  gap: 12px;
+}
+
 /* size */
 .modal-content-container.small {
   width: 320px;
