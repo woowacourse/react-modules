@@ -100,6 +100,7 @@
   z-index: 1001;
 
   row-gap: 14px;
+  box-sizing: border-box;
 }
 
 .modalContainer.animation {
@@ -119,17 +120,14 @@
 }
 
 .modalContainer.top {
-  max-height: 90vh;
   border-radius: 0 0 8px 8px;
 }
 
 .modalContainer.center {
-  max-height: 70vh;
   border-radius: 8px;
 }
 
 .modalContainer.bottom {
-  max-height: 90vh;
   border-radius: 8px 8px 0 0;
 }
 

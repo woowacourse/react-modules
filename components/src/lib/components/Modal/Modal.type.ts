@@ -14,7 +14,8 @@ export interface ModalProps extends HTMLAttributes<HTMLElement> {
   shadow?: boolean;
   animation?: boolean;
   zIndex?: number;
-  customSize?: number;
+  customWidth?: string;
+  customHeight?: string;
 }
 
 export interface ModalFooterProps extends HTMLAttributes<HTMLElement> {

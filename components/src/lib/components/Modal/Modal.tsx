@@ -43,7 +43,8 @@ export const ModalMain = ({
   shadow = true,
   animation = true,
   zIndex = 100,
-  customSize,
+  customWidth,
+  customHeight,
   ...rest
 }: StrictPropsWithChildren<ModalProps>) => {
   usePreventScroll(isOpen);
@@ -56,7 +57,8 @@ export const ModalMain = ({
   };
 
   const modalContainerStyle = {
-    width: `${customSize}%`,
+    width: customWidth,
+    height: customHeight,
   };
 
   return (
