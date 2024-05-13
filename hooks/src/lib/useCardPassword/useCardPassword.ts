@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import ValidationResult from '../types/ValidationResult';
-import Validation from '../utils/Validation';
 import ErrorMessages from '../types/ErrorMessages';
 
 import { validateAllowedLength } from '../utils/validateInitialParams';
+import { getValidationResult } from './useCardPassword.util';
 
 interface CardPasswordParams {
   allowedLength?: number;
@@ -63,20 +63,4 @@ export default function useCardPassword({
     validationResult,
     handleUpdatePassword,
   };
-}
-
-function getValidationResult(value: string, allowedLength: number, errorMessages: ErrorMessages) {
-  if (value === DEFAULT_PARAMS.initialValue) {
-    return { isValid: null };
-  }
-
-  if (!Validation.isNumeric(value)) {
-    return { isValid: false, errorMessage: errorMessages.inputType };
-  }
-
-  if (!Validation.hasLength(value, allowedLength)) {
-    return { isValid: false, errorMessage: errorMessages.inputLength!(allowedLength) };
-  }
-
-  return { isValid: true };
 }

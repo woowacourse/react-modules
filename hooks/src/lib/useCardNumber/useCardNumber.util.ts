@@ -1,5 +1,26 @@
-import { GLOBAL_BRANDS_TYPE } from './useCardNumber';
+import { CardNumberErrorMessages, GLOBAL_BRANDS_TYPE } from './useCardNumber';
 import GLOBAL_BRANDS from '../constants/globalBrands';
+import Validation from '../utils/Validation';
+
+export function getValidationResult(
+  cardNumber: string,
+  allowedLength: number,
+  errorMessages: CardNumberErrorMessages,
+) {
+  if (cardNumber.length === 0) {
+    return { isValid: null };
+  }
+
+  if (!Validation.isNumeric(cardNumber)) {
+    return { isValid: false, errorMessage: errorMessages.inputType };
+  }
+
+  if (!Validation.hasLength(cardNumber, allowedLength)) {
+    return { isValid: false, errorMessage: errorMessages.inputLength(allowedLength) };
+  }
+
+  return { isValid: true };
+}
 
 export function getCardGlobalBrand(cardNumber: string): GLOBAL_BRANDS_TYPE {
   if (cardNumber.length >= 1) {

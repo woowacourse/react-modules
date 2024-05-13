@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import ValidationResult from '../types/ValidationResult';
-import Validation from '../utils/Validation';
 import ErrorMessages from '../types/ErrorMessages';
 
 import { validateAllowedLength } from '../utils/validateInitialParams';
+import { getValidationResult } from './useCardHolder.util';
 
 interface CardHolderParams {
   allowedLength?: number;
@@ -17,7 +17,7 @@ interface CardHolderValidationResult {
   handleUpdateCardHolder: (value: string) => void;
 }
 
-interface CardHolderErrorMessages extends ErrorMessages {
+export interface CardHolderErrorMessages extends ErrorMessages {
   inputLength: (allowedLength: number) => string;
 }
 
@@ -68,30 +68,4 @@ export default function useCardHolder({
     validationResult,
     handleUpdateCardHolder,
   };
-}
-
-function getValidationResult(
-  value: string,
-  allowedLength: number,
-  errorMessages: CardHolderErrorMessages,
-) {
-  if (value === DEFAULT_PARAMS.initialValue) {
-    return { isValid: null };
-  }
-
-  if (!Validation.isEnglishWithSpace(value)) {
-    return { isValid: false, errorMessage: errorMessages.inputType };
-  }
-
-  if (
-    !Validation.isNumberInRange({
-      min: DEFAULT_LENGTH.minLength,
-      max: allowedLength,
-      value: value.length,
-    })
-  ) {
-    return { isValid: false, errorMessage: errorMessages.inputLength(allowedLength) };
-  }
-
-  return { isValid: true };
 }

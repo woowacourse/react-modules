@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import Validation from '../utils/Validation';
 
 import ValidationResult from '../types/ValidationResult';
 import ErrorMessages from '../types/ErrorMessages';
@@ -10,6 +9,7 @@ import {
   formatCardNumber,
   getCardGlobalBrand,
   getCardFormat,
+  getValidationResult,
 } from './useCardNumber.util';
 
 interface CardNumberParams {
@@ -27,7 +27,7 @@ interface CardNumberValidationResult {
   handleUpdateCardNumber: (inputValue: string, event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-interface CardNumberErrorMessages extends ErrorMessages {
+export interface CardNumberErrorMessages extends ErrorMessages {
   inputLength: (allowedLength: number) => string;
 }
 
@@ -90,24 +90,4 @@ export default function useCardNumber({
     validationResult,
     handleUpdateCardNumber,
   };
-}
-
-function getValidationResult(
-  cardNumber: string,
-  allowedLength: number,
-  errorMessages: CardNumberErrorMessages,
-) {
-  if (cardNumber.length === 0) {
-    return { isValid: null };
-  }
-
-  if (!Validation.isNumeric(cardNumber)) {
-    return { isValid: false, errorMessage: errorMessages.inputType };
-  }
-
-  if (!Validation.hasLength(cardNumber, allowedLength)) {
-    return { isValid: false, errorMessage: errorMessages.inputLength(allowedLength) };
-  }
-
-  return { isValid: true };
 }
