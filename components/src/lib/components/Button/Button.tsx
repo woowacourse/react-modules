@@ -1,5 +1,5 @@
 import { ButtonHTMLAttributes } from 'react';
-import type { Size } from '../../types/common';
+import type { Size } from '../../Modal/types/Modal.type';
 import styles from './Button.module.css';
 
 type ButtonMode = 'primary' | 'secondary';
