@@ -8,7 +8,7 @@ interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
 function Input({ label, ...rest }: InputProps) {
   return (
     <InputContainer>
-      {label && <label>{label}</label>}
+      {label && <StyledLabel>{label}</StyledLabel>}
       <StyledInput {...rest} />
     </InputContainer>
   );
@@ -28,4 +28,9 @@ const StyledInput = styled.input`
   padding: 0.4rem;
   border: 1px solid var(--black-color);
   border-radius: 0.2rem;
+`;
+
+const StyledLabel = styled.label`
+  color: var(--gray-color-500);
+  font-size: var(--font-size-xs);
 `;
