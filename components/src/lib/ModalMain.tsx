@@ -10,7 +10,6 @@ import ModalContent from './modalContent/ModalContent';
 import CloseButton from './closeButton/CloseButton';
 import ConfirmButton from './confirmButton/ConfirmButton';
 import ModalFooter from './modalFooter/ModalFooter';
-import ModalInput from './modalInput/ModalInput';
 
 type ModalPosition = 'center' | 'bottom';
 type ModalSize = 'small' | 'medium' | 'large';
@@ -91,7 +90,6 @@ const Modal = Object.assign(ModalMain, {
   CloseButton: CloseButton,
   ConfirmButton: ConfirmButton,
   Footer: ModalFooter,
-  Input: ModalInput,
 });
 
 export default Modal;

@@ -1,4 +1,4 @@
-import { Modal } from '..';
+import { Input, Modal } from '..';
 
 interface PromptModalProps {
   isOpen: boolean;
@@ -70,7 +70,7 @@ const PromptModal = ({
       </Modal.Header>
       {content && (
         <Modal.Content>
-          <Modal.Input value={value} onChange={onChange} placeholder={placeholder} autoFocus />
+          <Input value={value} onChange={onChange} placeholder={placeholder} autoFocus />
         </Modal.Content>
       )}
       <Modal.Footer position="row" justifyContent="flex-end">
