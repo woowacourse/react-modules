@@ -7,7 +7,12 @@ interface CardBrandInfo {
   maxLength: number;
 }
 
-const CARD_BRAND_TABLE: Record<string, CardBrandInfo> = {
+type CardBrand = 'Visa' | 'MasterCard' | 'Diners' | 'AMEX' | 'UnionPay';
+
+const defaultMaxLength = 16;
+const defaultReplaceProps = { regex: /(\d{1,4})/g, group: '$1-' };
+
+const CARD_BRAND_TABLE: Record<CardBrand, CardBrandInfo> = {
   Visa: {
     validate: /^4\d*$/,
     replaceProps: { regex: /(\d{1,4})/g, group: '$1-' },
@@ -34,16 +39,13 @@ const CARD_BRAND_TABLE: Record<string, CardBrandInfo> = {
     replaceProps: { regex: /(\d{1,4})/g, group: '$1-' },
     maxLength: 16,
   },
-  none: {
-    validate: /^$/,
-    replaceProps: { regex: /(\d{1,4})/g, group: '$1-' },
-    maxLength: 16,
-  },
 };
 
 const useCardNumber = (initValue: string) => {
-  const [cardBrand, setCardBrand] = useState('none');
-  const maxLength = CARD_BRAND_TABLE[cardBrand].maxLength;
+  const [cardBrand, setCardBrand] = useState<CardBrand | null>(null);
+  const maxLength = cardBrand
+    ? CARD_BRAND_TABLE[cardBrand].maxLength
+    : defaultMaxLength;
 
   const getPureNumbers = (value: string) => value.replace(/-/g, '');
 
@@ -75,13 +77,17 @@ const useCardNumber = (initValue: string) => {
   };
 
   const formatValue = (value: string) => {
-    const brandWithRegex = Object.entries(CARD_BRAND_TABLE).find((info) =>
-      info[1].validate.test(getPureNumbers(value)),
-    );
-    const newCardBrand = brandWithRegex ? brandWithRegex[0] : 'none';
+    const brandWithRegex = (
+      Object.entries(CARD_BRAND_TABLE) as [CardBrand, CardBrandInfo][]
+    ).find((info) => info[1].validate.test(getPureNumbers(value)));
+    const newCardBrand = brandWithRegex ? brandWithRegex[0] : null;
     setCardBrand(newCardBrand);
 
     const numberValue = getPureNumbers(value);
+    if (!newCardBrand)
+      return numberValue
+        .replace(defaultReplaceProps.regex, defaultReplaceProps.group)
+        .replace(/-+$/, '');
     return numberValue
       .replace(
         CARD_BRAND_TABLE[newCardBrand].replaceProps.regex,
