@@ -3,7 +3,6 @@ import AlertModal from './AlertModal';
 
 const meta = {
   title: 'AlertModal',
-  tags: ['autodocs'],
   component: AlertModal,
 } satisfies Meta<typeof AlertModal>;
 

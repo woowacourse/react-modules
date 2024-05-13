@@ -3,7 +3,6 @@ import ConfirmModal from './ConfirmModal';
 
 const meta = {
   title: 'ConfirmModal',
-  tags: ['autodocs'],
   component: ConfirmModal,
 } satisfies Meta<typeof ConfirmModal>;
 
