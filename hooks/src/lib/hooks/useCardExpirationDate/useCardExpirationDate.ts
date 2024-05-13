@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { isNotNumber, isValidNumberRange, validateExpiredDate } from '../../utils/validation/validation';
 import type { EXPIRED_TYPE } from '../..//utils/validation/validation.type';
+import { formatMonth } from '../../utils/formatMonth';
 
 export const EXPIRATION_DATE_ERROR_MESSAGES = {
   NOT_NUMBER: '숫자를 입력해주세요.',
@@ -59,12 +60,6 @@ const useCardExpirationDate = ({ month = '', year = '' }: useCardExpirationDateP
       month: monthErrorMessage === '' && month.length === VALID_DATE_LENGTH,
       year: yearErrorMessage === '' && year.length === VALID_DATE_LENGTH,
     });
-  };
-
-  const formatMonth = (month: string) => {
-    if (isValidNumberRange(Number(month), 2, 9)) return month.padStart(2, '0');
-
-    return month;
   };
 
   const handleMonthChange = (month: string) => {
