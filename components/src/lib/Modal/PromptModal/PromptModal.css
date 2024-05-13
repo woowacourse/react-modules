@@ -5,4 +5,9 @@
   height: 32px;
   box-sizing: border-box;
   outline: none;
+  border: 1px solid #8b95a1;
+}
+
+.darr-modal .modal-input:focus {
+  border: 1px solid black;
 }

@@ -5,6 +5,11 @@
   border: none;
   outline: none;
   border-radius: 5px;
+  cursor: pointer;
+}
+
+.darr-button:active {
+  opacity: 0.8;
 }
 
 .darr-button.small {
