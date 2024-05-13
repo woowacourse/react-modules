@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import Modal from '../Modal/Modal';
+import CustomModal from '../Modal/CustomModal';
 import { useState } from 'react';
 import Button from '../Button/Button';
 
@@ -9,8 +9,8 @@ const overflowChildren = <div style={{ display: 'flex', flexDirection: 'column',
 </div>
 
 const meta = {
-  title: 'Components/Modal',
-  component: Modal,
+  title: 'Components/CustomModal',
+  component: CustomModal,
   tags: ['autodocs'],
   argTypes: {
     isOpened: {
@@ -93,7 +93,7 @@ const meta = {
       buttonStyle: 'border',
     },
   },
-} satisfies Meta<typeof Modal>;
+} satisfies Meta<typeof CustomModal>;
 
 export default meta;
 
@@ -105,7 +105,7 @@ export const Playground: Story = {
     return (
       <>
         <Button text='show modal' onClick={() => setIsOpened(true)} />
-        <Modal {...args} title="title" description='description' isOpened={isOpened} onClose={() => setIsOpened(false)} />
+        <CustomModal {...args} title="title" description='description' isOpened={isOpened} onClose={() => setIsOpened(false)} />
       </>)
   }
 };
