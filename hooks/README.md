@@ -50,16 +50,23 @@ const {
 
 ```TypeScript
 // 훅에 설정되어 있는 파라미터별 기본값
-useCardNumbers(
+useCardNumbers({
   initialValue: '',
+  defaultCardFormat: {
+    allowedLength: 16,
+    format: [4, 4, 4, 4],
+  },
   errorMessages: {
     inputType: '카드 번호는 각 자릿수에 맞춰 숫자로만 입력해 주세요.',
     inputLength: `[ERROR] 카드 번호는 총합 16자리 이내로만 설정 가능합니다. 다시 확인해 주세요.`,
   },
-);
+});
 ```
 
 - `initialValue` : 초기 상태값으로 지정하고 싶은 카드 번호를 `string` 타입으로 지정합니다.
+- `defaultCardFormat` : 어떠한 글로벌 브랜드에도 해당하지 않는 카드 번호를 어떤 형식으로 관리할지 지정합니다.
+  - `allowedLength` : 몇 자리의 숫자값을 허용할 것인지 `number` 타입으로 지정합니다. 기본값은 `16`입니다.
+  - `format` : 어떠한 유형의 카드 번호 형식을 지정할 것인지 `number[]` 타입으로 지정합니다. 기본값은 `[4, 4, 4, 4]`입니다.
 - `errorMessages` : 유형별 에러 메시지를 직접 지정하실 수 있습니다.
   - `inputType` : 입력값에 숫자 이외의 문자가 입력되었을 경우 출력되는 에러 메시지입니다.
   - `inputLength` : 입력값의 길이가 해당 카드 브랜드의 형식에 맞지 않을 경우 출력되는 에러 메시지입니다. `number` 타입의 `length`를 인자로 받아 메시지가 생성되는 구조를 가지고 있습니다.
@@ -121,15 +128,15 @@ function CardNumberForm() {
 const { brand, validationResult, handleUpdateBrand } = useCardBrand();
 
 // 카드사 목록을 직접 삽입하는 경우
-const cardBrands = ['신한카드', '현대카드', '카카오뱅크'];
-const { brand, validationResult, handleUpdateBrand } = useCardBrand(cardBrands);
+const myCardBrands = ['신한카드', '현대카드', '카카오뱅크'];
+const { brand, validationResult, handleUpdateBrand } = useCardBrand({ allowedBrands: myCardBrands });
 ```
 
 ### 훅을 선언할 때 사용 가능한 파라미터들
 
 ```TypeScript
 // 훅에 설정되어 있는 파라미터별 기본값
-useCardBrand(
+useCardBrand({
   allowedBrands: ['BC카드', '신한카드', '카카오뱅크', '현대카드', '우리카드', '롯데카드', '하나카드', '국민카드'],
   initialValue: '',
   errorMessages: {
@@ -139,7 +146,7 @@ useCardBrand(
     initialValueNotExistsInAllowedBrands:
       '[ERROR] 카드사 목록에 포함되지 않은 카드를 초기값으로 설정하실 수 없습니다. 다시 확인해주세요.',
   },
-)
+})
 ```
 
 - `allowedBrands` : 카드사 검증에 필요한 전체 카드사 목록을 `string[]` 타입으로 입력합니다.
@@ -170,7 +177,9 @@ import { useCardBrand } from '@seongjinme/card-validation';
 const CARD_BRANDS = ['신한카드', '카카오뱅크', '현대카드'];
 
 function CardBrandSelectBox() {
-  const { brand, validationResult, handleUpdateBrand } = useCardBrand(CARD_BRANDS);
+  const { brand, validationResult, handleUpdateBrand } = useCardBrand({
+    allowedBrands: CARD_BRANDS,
+  });
 
   const handleChangeCardBrand = (event: React.ChangeEvent<HTMLSelectElement>) => {
     handleUpdateBrand(event.target.value);
@@ -201,14 +210,14 @@ const { expiryDate, validationResult, handleUpdateExpiryDate } = useCardExpiryDa
 
 // 연도를 4자리로 받도록 설정
 const isYearFourDigits = true;
-const { expiryDate, validationResult, handleUpdateExpiryDate } = useCardExpiryDate(isYearFourDigits);
+const { expiryDate, validationResult, handleUpdateExpiryDate } = useCardExpiryDate({ isYearFourDigits });
 ```
 
 ### 훅을 선언할 때 사용 가능한 파라미터들
 
 ```TypeScript
 // 훅에 설정되어 있는 파라미터별 기본값
-useCardExpiryDate(
+useCardExpiryDate({
   isYearFourDigits: false,
   initialValue: { month: '', year: '' },
   errorMessages: {
@@ -216,7 +225,7 @@ useCardExpiryDate(
     invalidYear: `유효 기간의 연도는 2자리 숫자로 입력해 주세요.`,
     expiredDate: '유효 기간이 만료되었습니다. 확인 후 다시 입력해 주세요.',
   },
-)
+})
 ```
 
 - `isYearFourDigits` : 유효 기간 연도를 4자리로 받을 것인지 `boolean` 타입으로 지정합니다.
@@ -285,14 +294,14 @@ function CardBrandSelectBox() {
 const { cardHolder, validationResult, handleUpdateCardHolder } = useCardHolder();
 
 // 입력 제한 길이를 30으로 설정
-const { cardHolder, validationResult, handleUpdateCardHolder } = useCardHolder(30);
+const { cardHolder, validationResult, handleUpdateCardHolder } = useCardHolder({ allowedLength: 30 });
 ```
 
 ### 훅을 선언할 때 사용 가능한 파라미터들
 
 ```TypeScript
 // 훅에 설정되어 있는 파라미터별 기본값
-useCardHolder(
+useCardHolder({
   allowedLength: 20,
   initialValue: '',
   errorMessages: {
@@ -300,7 +309,7 @@ useCardHolder(
     allowedLengthOutOfRange: `[ERROR] 카드 소유자의 길이는 3~30 사이의 숫자로 설정되어야 합니다. 다시 확인해 주세요.`,
     inputLength: `카드 소유자는 3~20자 이내로 입력해 주세요.`,
   },
-)
+})
 ```
 
 - `allowedLength` : 입력을 허용할 제한 길이를 `number` 타입으로 설정합니다. `3`~`30` 사이의 범위로만 설정 가능합니다.
@@ -353,14 +362,14 @@ function CardHolderForm() {
 const { CVC, validationResult, handleUpdateCVC } = useCardCVC();
 
 // CVC 입력 형식을 4자리로 설정할 경우
-const { CVC, validationResult, handleUpdateCVC } = useCardCVC(4);
+const { CVC, validationResult, handleUpdateCVC } = useCardCVC({ allowedLength: 4 });
 ```
 
 ### 훅을 선언할 때 사용 가능한 파라미터들
 
 ```TypeScript
 // 훅에 설정되어 있는 파라미터별 기본값
-useCardCVC(
+useCardCVC({
   allowedLength: 3,
   initialValue: '',
   errorMessages: {
@@ -368,7 +377,7 @@ useCardCVC(
     inputLength: `CVC 번호는 3자리의 숫자로 입력해 주세요.`,
     allowedLengthOutOfRange: `[ERROR] CVC 자릿수는 3~4 사이의 숫자로 설정되어야 합니다. 다시 확인해 주세요.`,
   },
-)
+})
 ```
 
 - `allowedLength` : 입력을 허용할 제한 길이를 `number` 타입으로 설정합니다. `3` 또는 `4`로 설정 가능합니다.
@@ -421,14 +430,14 @@ function CardCVCForm() {
 const {password, validationResult, handleUpdatePassword } = useCardPassword();
 
 // 비밀번호 자릿수를 4자리로 설정할 경우
-const {password, validationResult, handleUpdatePassword } = useCardPassword(4);
+const {password, validationResult, handleUpdatePassword } = useCardPassword({ allowedLength: 4 });
 ```
 
 ### 훅을 선언할 때 사용 가능한 파라미터들
 
 ```TypeScript
 // 훅에 설정되어 있는 파라미터별 기본값
-useCardPassword(
+useCardPassword({
   allowedLength: 2,
   initialValue: '',
   errorMessages: {
@@ -436,7 +445,7 @@ useCardPassword(
     inputLength: `비밀번호는 2자리의 숫자로 입력해주세요.`,
     allowedLengthOutOfRange: `[ERROR] 비밀번호 자릿수는 2~4 사이의 숫자로 설정되어야 합니다. 다시 확인해 주세요.`,
   },
-)
+})
 ```
 
 - `allowedLength` : 입력을 허용할 제한 길이를 `number` 타입으로 설정합니다. `2`~`4` 범위 안에서 설정 가능합니다.

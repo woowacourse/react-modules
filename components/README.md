@@ -123,14 +123,13 @@ function App() {
 
 ## `AlertModal` 컴포넌트
 
-간단한 내용 출력과 "확인" 버튼이 지원되는 모달 컴포넌트입니다. 기본 모달의 축약형 컴포넌트로, `buttons`와 `children`이 지원되지 않습니다.
+간단한 내용 출력과 "확인" 버튼이 지원되는 모달 컴포넌트입니다. 기본 모달의 축약형 컴포넌트로, 내부에 원하시는 포맷의 `children`을 설정하실 수 있으나 `buttons` 속성은 지원되지 않습니다.
 
 ```tsx
 <AlertModal
   isOpen={isOpen}
   size="medium"
   title="Title"
-  description="Description"
   confirmButtonText="확인"
   position="center"
   hasCloseButton={true}
@@ -140,14 +139,15 @@ function App() {
   buttonsFlexDirection="column"
   onConfirm={(event: React.MouseEvent<HTMLButtonElement>) => handleConfirm(event)}
   onClose={() => setIsOpen(false)}
-/>
+>
+  <p>Sample Modal!</p>
+</AlertModal>
 ```
 
 ### 필수 속성
 
 - `isOpen` : 모달을 열고 닫을 수 있는 상태값을 주입합니다. (`true` / `false`)
 - `title` : 모달의 제목입니다.
-- `description` : 모달 본문에 출력시킬 내용을 삽입합니다.
 - `onConfirm` : 모달에서 "확인" 버튼을 눌렀을 때 실행시킬 콜백 함수를 설정합니다. 이때 `React.MouseEvent<HTMLButtonElement>` 타입의 이벤트(`event`)를 인자로 받아오실 수 있습니다.
 - `onClose` : 모달을 닫을 때 실행시킬 콜백 함수를 설정합니다.
 
@@ -187,9 +187,10 @@ function App() {
         isOpen={isOpen}
         title="Title"
         onConfirm={() => setIsOpen(false)}
-        description="Description"
         onClose={() => setIsOpen(false)}
-      />
+      >
+        <p>This is the sample of AlertModal!</p>
+      <AlertModal>
     </>
   );
 }
@@ -197,14 +198,13 @@ function App() {
 
 ## `ConfirmModal` 컴포넌트
 
-간단한 내용 출력과 "확인", "취소" 버튼이 지원되는 모달 컴포넌트입니다. 기본 모달의 축약형 컴포넌트로, `buttons`와 `children`이 지원되지 않습니다.
+간단한 내용 출력과 "확인", "취소" 버튼이 지원되는 모달 컴포넌트입니다. 기본 모달의 축약형 컴포넌트로, 내부에 원하시는 포맷의 `children`을 설정하실 수 있으나 `buttons` 속성은 지원되지 않습니다.
 
 ```tsx
 <ConfirmModal
   isOpen={isOpen}
   size="medium"
   title="Title"
-  description="Description"
   confirmButtonText="확인"
   cancelButtonText="취소"
   position="center"
@@ -216,14 +216,15 @@ function App() {
   onConfirm={(event: React.MouseEvent<HTMLButtonElement>) => handleConfirm(event)}
   onCancel={(event: React.MouseEvent<HTMLButtonElement>) => handleCancel(event)}
   onClose={() => setIsOpen(false)}
-/>
+>
+  <p>Sample Modal!</p>
+</ConfirmModal>
 ```
 
 ### 필수 속성
 
 - `isOpen` : 모달을 열고 닫을 수 있는 상태값을 주입합니다. (`true` / `false`)
 - `title` : 모달의 제목입니다.
-- `description` : 모달 본문에 출력시킬 내용을 삽입합니다.
 - `onConfirm` : 모달에서 "확인" 버튼을 눌렀을 때 실행시킬 콜백 함수를 설정합니다. 이때 `React.MouseEvent<HTMLButtonElement>` 타입의 이벤트(`event`)를 인자로 받아오실 수 있습니다.
 - `onCancel` : 모달에서 "취소" 버튼을 눌렀을 때 실행시킬 콜백 함수를 설정합니다. 이때 `React.MouseEvent<HTMLButtonElement>` 타입의 이벤트(`event`)를 인자로 받아오실 수 있습니다.
 - `onClose` : 모달을 닫을 때 실행시킬 콜백 함수를 설정합니다.
@@ -269,7 +270,9 @@ function App() {
         onConfirm={() => setIsOpen(false)}
         onCancel={() => setIsOpen(false)}
         onClose={() => setIsOpen(false)}
-      />
+      >
+        <p>This is the sample of ConfirmModal!</p>
+      </ConfirmModal>
     </>
   );
 }
@@ -342,6 +345,7 @@ function App() {
   label: '쿠폰 번호를 입력해주세요.',
   placeholder: '쿠폰 번호',
   initialValue: '1234',
+  errorMessage: '올바르지 않은 형식의 값입니다. 다시 입력해주세요.',
 },
 ```
 
@@ -349,6 +353,7 @@ function App() {
 - `label`(옵션) : 입력 필드 상단에 표기할 설명문을 정합니다.
 - `placeholder`(옵션) : 해당 입력 필드의 `<input>` 요소에 위치시킬 예시값(placeholder)을 정합니다.
 - `initialValue`(옵션) : 해당 입력 필드에 미리 입력해놓을 초깃값(defaultValue)을 정합니다. 이 값은 모달이 새로 열릴 때마다 입력 필드에 적용되어 나타납니다.
+- `errorMessage`(옵션) : 입력 받은 값에 대한 `string` 타입의 에러 메시지를 담아 전달합니다. 이 값이 `undefined` 또는 `null`이 아닐 경우, 입력 필드의 `<input>` 요소 하단에 이 메시지가 적색(`#FF0000`)으로 노출되며 `<input>` 요소 또한 같은 색상의 border를 가지게 됩니다.
 
 ### 사용 예시
 
