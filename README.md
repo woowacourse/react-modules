@@ -50,3 +50,24 @@
   - [ ] 다양한 입력 값에 대한 커스텀 훅의 결과
     - [ ] 유효성 통과하는 경우
     - [ ] 유효성 통과하지 않는 경우
+
+---
+
+step2 기능 구현 목록
+
+### Modal
+
+- [x] Alert 모달 구현
+- [x] Confirm 모달 구현
+- [x] Prompt 모달 구현
+- [x] Modal Size Option 제공
+  - [x] 모바일,태블릿,pc 화면 별로 small,medium,large 사이즈 옵션 제공
+
+### Hooks
+
+- [x] 카드 식별 모듈
+  - [x] AMEX,Diners,UnionPay 추가
+- [x] 카드 번호 포맷팅 기능 추가
+
+- [x] 커스텀 훅스에 대한 RTL 작성
+- [ ] Storybook 구현
