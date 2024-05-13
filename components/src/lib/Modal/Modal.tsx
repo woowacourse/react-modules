@@ -26,18 +26,18 @@ const Modal = ({
   modalPosition,
   preventCloseOnOutsideClick,
 }: ModalProps) => {
-  const modalWidth = (): CSSProperties['width'] => {
-    if (modalSize) {
-      switch (modalSize.width) {
-        case 'small':
-          return '320px';
-        case 'medium':
-          return '480px';
-        case 'large':
-          return '600px';
-        default:
-          return modalSize.width;
-      }
+  const modalWidth = (): CSSProperties['width'] | undefined => {
+    if (!modalSize) return;
+
+    switch (modalSize.width) {
+      case 'small':
+        return '320px';
+      case 'medium':
+        return '480px';
+      case 'large':
+        return '600px';
+      default:
+        return modalSize.width;
     }
   };
 
