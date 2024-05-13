@@ -33,10 +33,11 @@ export const modalContentStyle = () =>
     flexDirection: "column",
     gap: "16px",
     padding: "24px 32px",
-    "&>div": {
-      width: "100%",
-    },
   });
+
+export const contentStyle = css({
+  width: "100%",
+});
 
 export const buttonsStyle = (direction: "column" | "row") =>
   css({

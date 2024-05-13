@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import { MouseEventHandler, PropsWithChildren, ReactNode } from "react";
-import { buttonsStyle, modalContentStyle, modalStyle } from "./Modal.style";
+import { buttonsStyle, contentStyle, modalContentStyle, modalStyle } from "./Modal.style";
 
 import ModalHeader from "../ModalHeader/ModalHeader";
 import { MainButtonStyleType } from "../MainButton/constants";
@@ -63,7 +63,7 @@ const Dialog = ({
     <dialog onClick={clickBackdrop} ref={dialogRef} css={modalStyle(position, width, theme)}>
       <div css={modalContentStyle}>
         <ModalHeader hasCloseButton={closeButtonPosition === ButtonPosition.Top}>{title}</ModalHeader>
-        <div>{children}</div>
+        <div css={contentStyle}>{children}</div>
         <div css={buttonsStyle(buttonAlign)}>
           {hasConfirmButton && (
             <MainButton
