@@ -1,6 +1,6 @@
 {
   "name": "nakta-react-payments-components",
-  "version": "0.0.1",
+  "version": "0.1.1",
   "description": "react-payments modal",
   "type": "module",
   "types": "dist/index.d.ts",
@@ -18,7 +18,6 @@
     "build-storybook": "storybook build"
   },
   "dependencies": {
-    "nakta-react-payments-components": "^0.0.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
@@ -39,6 +38,7 @@
     "@typescript-eslint/eslint-plugin": "^7.2.0",
     "@typescript-eslint/parser": "^7.2.0",
     "@vitejs/plugin-react-swc": "^3.5.0",
+    "chromatic": "^11.3.2",
     "eslint": "^8.57.0",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.6",
