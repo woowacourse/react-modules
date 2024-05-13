@@ -9,7 +9,7 @@ yarn add maru-nice-modal
 ```
 
 ## 사용 예시
-
+합성 컴포넌트를 조합하여 Modal을 구현할 수 있습니다.
 ```jsx
 const App = () => {
   const [isOpen, toggleIsOpen] = useReducer(prev => !prev, false);
@@ -98,4 +98,121 @@ const App = () => {
 - children으로 내용 삽입
 - position?('row' | 'row-reverse' | 'column' | 'column-reverse'): 사용자가 직접 레이아웃을 구현할 수 있도록 제공하지만 필요할 경우 position으로 children들에 대해 flex 레이아웃을 제공하고 있습니다.
 
+## 사용 예시 (각각의 Modal 제공)
+AlertModal, ConfirmModal, PromptModal을 제공합니다. 각각은 props를 통해 속성값을 조작할 수 있습니다.
 
+```jsx
+function App() {
+  const [isOpenAlert, toggleAlertModal] = useReducer(prev => !prev, false);
+  const [isOpenConfirm, toggleConfirmModal] = useReducer(prev => !prev, false);
+  const [isOpenPrompt, togglePromptModal] = useReducer(prev => !prev, false);
+  const [inputValue, setInputValue] = useState('');
+
+  return (
+    <>
+      <button onClick={toggleAlertModal}>Alert 모달열기</button>
+      <button onClick={toggleConfirmModal}>Confirm 모달열기</button>
+      <button onClick={togglePromptModal}>Prompt 모달열기</button>
+
+      <AlertModal
+        isOpen={isOpenAlert}
+        onDimmedClick={() => toggleAlertModal()}
+        onCloseIcon={() => toggleAlertModal()}
+        onConfirmButton={() => toggleAlertModal()}
+        title="AlertModal 제목입니다."
+        content="AlertModal content 입니다."
+        isAnimation
+        animationDuration={300}
+        buttonLabel="테스트"
+      />
+      <ConfirmModal
+        isOpen={isOpenConfirm}
+        onDimmedClick={() => toggleConfirmModal()}
+        onCloseIcon={() => toggleConfirmModal()}
+        onCloseButton={() => toggleConfirmModal()}
+        onConfirmButton={() => toggleConfirmModal()}
+        title="ConfirmModal 제목입니다."
+        content="ConfirmModal content 입니다."
+        isAnimation
+        animationDuration={300}
+        closeButtonLabel="취소?"
+        confirmButtonLabel="확인?"
+      />
+      <PromptModal
+        isOpen={isOpenPrompt}
+        value={inputValue}
+        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setInputValue(e.target.value)}
+        onDimmedClick={() => togglePromptModal()}
+        onCloseIcon={() => togglePromptModal()}
+        onCloseButton={() => togglePromptModal()}
+        onConfirmButton={() => togglePromptModal()}
+        title="ConfirmModal 제목입니다."
+        content="ConfirmModal content 입니다."
+        isAnimation
+        animationDuration={300}
+        closeButtonLabel="취소!"
+        confirmButtonLabel="확인!"
+      />
+    </>
+  );
+}
+```
+
+### AlertModal
+```ts
+interface AlertModalProps {
+  isOpen: boolean;
+  onCloseIcon?: () => void; // 우측 상단 닫기 아이콘 클릭 시 동작하는 이벤트 핸들러
+  onConfirmButton?: () => void; // 확인 버튼 클릭 시 동작하는 이벤트 핸들러
+  onDimmedClick?: () => void; // modal 밖의 dimmed 영역 클릭 시 동작하는 이벤트 핸들러
+  position?: 'center' | 'bottom'; // modal 위치 결정
+  modalSize?: 'small' | 'medium' | 'large'; // modal 크기 결정
+  content?: React.ReactNode;
+  isAnimation?: boolean; // animation 적용 여부
+  animationDuration?: number; // animation 동작 시간
+  title?: string; // modal 제목
+  showCloseIcon?: boolean; // 우측 상단 닫기 아이콘 보여줌 여부
+  buttonLabel?: string; // 버튼 텍스트
+}
+```
+### ConfirmModal
+```ts
+interface ConfirmModalProps {
+  isOpen: boolean;
+  onCloseIcon?: () => void; // 우측 상단 닫기 아이콘 클릭 시 동작하는 이벤트 핸들러
+  onCloseButton?: () => void; // 취소 버튼 클릭 시 동작하는 이벤트 핸들러
+  onConfirmButton?: () => void; // 확인 버튼 클릭 시 동작하는 이벤트 핸들러
+  onDimmedClick?: () => void; // modal 밖의 dimmed 영역 클릭 시 동작하는 이벤트 핸들러
+  position?: 'center' | 'bottom'; // modal 위치 결정
+  modalSize?: 'small' | 'medium' | 'large'; // modal 크기 결정
+  content?: React.ReactNode;
+  isAnimation?: boolean; // animation 적용 여부
+  animationDuration?: number; // animation 동작 시간
+  title?: string; // modal 제목
+  showCloseIcon?: boolean; // 우측 상단 닫기 아이콘 보여줌 여부
+  closeButtonLabel?: string; // 닫기 버튼 텍스트
+  confirmButtonLabel?: string; // 확인 버튼 텍스트
+}
+```
+### PromptModal
+```ts
+interface PromptModalProps {
+  isOpen: boolean;
+  value: string;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onCloseIcon?: () => void; // 우측 상단 닫기 아이콘 클릭 시 동작하는 이벤트 핸들러
+  onCloseButton?: () => void; // 취소 버튼 클릭 시 동작하는 이벤트 핸들러
+  onConfirmButton?: () => void; // 확인 버튼 클릭 시 동작하는 이벤트 핸들러
+  onDimmedClick?: () => void; // modal 밖의 dimmed 영역 클릭 시 동작하는 이벤트 핸들러
+  position?: 'center' | 'bottom'; // modal 위치 결정
+  modalSize?: 'small' | 'medium' | 'large'; // modal 크기 결정
+  content?: React.ReactNode;
+  isAnimation?: boolean; // animation 적용 여부
+  animationDuration?: number; // animation 동작 시간
+  title?: string; // modal 제목
+  showCloseIcon?: boolean; // 우측 상단 닫기 아이콘 보여줌 여부
+  closeButtonLabel?: string; // 닫기 버튼 텍스트
+  confirmButtonLabel?: string; // 확인 버튼 텍스트
+  placeholder?: string; // placeholder
+}
+```
