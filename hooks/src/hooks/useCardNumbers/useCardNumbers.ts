@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { ChangeEvent, useState } from "react";
 import {
   validAMEXNumbers,
   validDinersNumbers,
@@ -7,8 +7,8 @@ import {
   validUnionPaySecondNumbers,
   validVisaNumbers,
 } from "./cardNumberValidator";
-
-type NumberState = readonly [string, (value: string) => void];
+import useRegister, { RegisterErrorType } from "../useRegister";
+import { RestrictedErrorType } from "../useRestrictedState";
 
 type CardBrand = "Visa" | "Master" | "AMEX" | "Diners" | "UnionPay";
 
@@ -20,16 +20,25 @@ const CardInputMaxLength = {
   UnionPay: [4, 4, 4, 4],
 } as const;
 
+interface InputAttr {
+  name: string;
+  ref: React.RefObject<HTMLInputElement>;
+  value: string;
+  onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
+  errorType?: RestrictedErrorType | RegisterErrorType | undefined;
+}
+
+type InputInfoObj = { attribute: InputAttr; error?: string; isValid?: boolean };
+
 interface CardNumberReturn {
-  numbers: {
-    firstState: NumberState;
-    secondState: NumberState;
-    thirdState: NumberState;
-    fourthState: NumberState;
+  inputInfo: {
+    first: InputInfoObj;
+    second: InputInfoObj;
+    third: InputInfoObj;
+    fourth: InputInfoObj;
   };
-  errorTypeList: (string | undefined)[];
+  inputCount: number;
   cardBrand?: CardBrand;
-  inputMaxLengthList?: (typeof CardInputMaxLength)[keyof typeof CardInputMaxLength];
 }
 
 enum CardNumberErrorType {
@@ -57,15 +66,11 @@ const findCardBrand = (value: string): CardBrand | undefined => {
 
 const useCardNumbers = (): CardNumberReturn => {
   const [cardBrand, setCardBrand] = useState<CardBrand | undefined>(undefined);
-
-  const [first, setFirst] = useState("");
-  const [second, setSecond] = useState("");
-  const [third, setThird] = useState("");
-  const [fourth, setFourth] = useState("");
-
   const [errorTypeList, setErrorTypeList] = useState<(string | undefined)[]>(Array(4).fill(undefined));
+  const inputMaxLengthList = cardBrand && CardInputMaxLength[cardBrand];
+  const DEFAULT_INPUT_LENGTH = 4;
 
-  const setWrapper = (value: string, setState: (value: string) => void, index: number) => {
+  const isNumber = (value: string, index: number) => {
     const number = Number(value);
     if (Number.isNaN(number)) {
       setErrorTypeList((prev) => {
@@ -73,9 +78,9 @@ const useCardNumbers = (): CardNumberReturn => {
         arr[index] = CardNumberErrorType.CardNumberError;
         return arr;
       });
-      return;
+      return false;
     }
-    setState(value);
+    return true;
   };
 
   const setFirstWrapper = (value: string) => {
@@ -90,28 +95,70 @@ const useCardNumbers = (): CardNumberReturn => {
       });
     }
     setCardBrand(brand);
-    setWrapper(value, setFirst, 0);
+    if (isNumber(value, 0)) return value;
   };
+
+  const { errorType: firstErrType, ...firstNumberAttrs } = useRegister("firstNumber", {
+    validator: setFirstWrapper,
+    customType: "number",
+    required: true,
+    maxLength: inputMaxLengthList ? inputMaxLengthList[0] : DEFAULT_INPUT_LENGTH,
+  });
 
   const setSecondWrapper = (value: string) => {
-    if (validUnionPaySecondNumbers(first, value)) {
+    if (validUnionPaySecondNumbers(firstNumberAttrs.value, value)) {
       setCardBrand("UnionPay");
-    } else {
+    } else if (cardBrand === "UnionPay") {
       setCardBrand(undefined);
     }
-    setWrapper(value, setSecond, 1);
+    if (isNumber(value, 1)) return value;
   };
 
+  const { errorType: secondErrType, ...secondNumberAttrs } = useRegister("secondNumber", {
+    validator: setSecondWrapper,
+    customType: "number",
+    maxLength: inputMaxLengthList ? inputMaxLengthList[1] : DEFAULT_INPUT_LENGTH,
+  });
+
+  const { errorType: thirdErrType, ...thirdNumberAttrs } = useRegister("thirdNumber", {
+    customType: "number",
+    maxLength: inputMaxLengthList ? inputMaxLengthList[2] : DEFAULT_INPUT_LENGTH,
+  });
+
+  const { errorType: fourthErrType, ...fourthNumberAttrs } = useRegister("fourthNumber", {
+    customType: "number",
+    maxLength: inputMaxLengthList ? inputMaxLengthList[3] : DEFAULT_INPUT_LENGTH,
+    disabled: !(inputMaxLengthList && inputMaxLengthList[3]),
+  });
+
   return {
-    numbers: {
-      firstState: [first, setFirstWrapper] as const,
-      secondState: [second, setSecondWrapper] as const,
-      thirdState: [third, (value: string) => setWrapper(value, setThird, 2)] as const,
-      fourthState: [fourth, (value: string) => setWrapper(value, setFourth, 3)] as const,
+    inputInfo: {
+      first: {
+        attribute: { ...firstNumberAttrs },
+        error: firstErrType || errorTypeList[0],
+        isValid: !errorTypeList[0] && inputMaxLengthList && firstNumberAttrs.value.length === inputMaxLengthList[0],
+      },
+      second: {
+        attribute: { ...secondNumberAttrs },
+        error: secondErrType || errorTypeList[1],
+        isValid: !errorTypeList[1] && inputMaxLengthList && secondNumberAttrs.value.length === inputMaxLengthList[1],
+      },
+      third: {
+        attribute: { ...thirdNumberAttrs },
+        error: thirdErrType || errorTypeList[2],
+        isValid: !errorTypeList[2] && inputMaxLengthList && thirdNumberAttrs.value.length === inputMaxLengthList[2],
+      },
+      fourth: {
+        attribute: { ...fourthNumberAttrs },
+        error: fourthErrType || errorTypeList[3],
+        isValid:
+          !errorTypeList[3] &&
+          inputMaxLengthList &&
+          (thirdNumberAttrs.value.length === inputMaxLengthList[3] || !inputMaxLengthList[3]),
+      },
     },
-    errorTypeList: errorTypeList,
+    inputCount: inputMaxLengthList ? inputMaxLengthList.length : DEFAULT_INPUT_LENGTH,
     cardBrand,
-    inputMaxLengthList: cardBrand && CardInputMaxLength[cardBrand],
   };
 };
 

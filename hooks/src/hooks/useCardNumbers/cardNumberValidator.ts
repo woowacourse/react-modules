@@ -42,7 +42,6 @@ export const validUnionPaySecondNumbers = (firstNumbers: string, secondNumbers: 
   const START_CONDITION_MIN_NUMBER = 26;
   const END_NUMBER = 6229;
   const END_CONDITION_MAX_NUMBER = 25;
-  console.log(firstNumbers === String(START_NUMBER) && START_CONDITION_MIN_NUMBER <= Number(secondNumbers.slice(0, 2)));
   return (
     (firstNumbers === String(START_NUMBER) && START_CONDITION_MIN_NUMBER <= Number(secondNumbers.slice(0, 2))) ||
     (firstNumbers === String(END_NUMBER) && END_CONDITION_MAX_NUMBER >= Number(secondNumbers.slice(0, 2)))

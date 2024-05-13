@@ -1,59 +1,37 @@
-import React, { ChangeEvent } from "react";
+import React from "react";
 import "./App.css";
 
-import { useCardNumbers, useRegister } from "./lib";
-
-const DEFAULT_INPUT_LENGTH = 4;
+import { useCardNumbers } from "./lib";
 
 function App() {
   const {
-    numbers: { firstState, secondState, thirdState, fourthState },
-    errorTypeList: [firstErrorType, secondErrorType, thirdErrorType, fourthErrorType],
+    inputInfo: {
+      first: { attribute: firstNumberAttrs, error: firstErrType, isValid: firstValid },
+      second: { attribute: secondNumberAttrs, error: secondErrType, isValid: secondValid },
+      third: { attribute: thirdNumberAttrs, error: thirdErrType, isValid: thirdValid },
+      fourth: { attribute: fourthNumberAttrs, error: fourthErrType, isValid: fourthValid },
+    },
+    inputCount,
     cardBrand,
-    inputMaxLengthList,
   } = useCardNumbers();
-
-  const { errorType: firstErrType, ...firstNumberAttrs } = useRegister("firstNumber", {
-    value: firstState[0],
-    onChange: (e: ChangeEvent<HTMLInputElement>) => firstState[1](e.target.value),
-    customType: "number",
-    required: true,
-    maxLength: DEFAULT_INPUT_LENGTH,
-  });
-
-  const { errorType: secondErrType, ...secondNumberAttrs } = useRegister("secondNumber", {
-    value: secondState[0],
-    onChange: (e: ChangeEvent<HTMLInputElement>) => secondState[1](e.target.value),
-    customType: "number",
-    maxLength: inputMaxLengthList ? inputMaxLengthList[1] : DEFAULT_INPUT_LENGTH,
-  });
-
-  const { errorType: thirdErrType, ...thirdNumberAttrs } = useRegister("secondNumber", {
-    value: thirdState[0],
-    onChange: (e: ChangeEvent<HTMLInputElement>) => thirdState[1](e.target.value),
-    customType: "number",
-    maxLength: inputMaxLengthList ? inputMaxLengthList[2] : DEFAULT_INPUT_LENGTH,
-  });
-
-  const { errorType: fourthErrType, ...fourthNumberAttrs } = useRegister("secondNumber", {
-    value: fourthState[0],
-    onChange: (e: ChangeEvent<HTMLInputElement>) => fourthState[1](e.target.value),
-    customType: "number",
-    maxLength: inputMaxLengthList ? inputMaxLengthList[3] : DEFAULT_INPUT_LENGTH,
-  });
 
   return (
     <>
       <h1>Hooks Modules</h1>
       <div>cardBrand : {cardBrand}</div>
       <input {...firstNumberAttrs}></input>
-      <div>{firstErrType ?? firstErrorType}</div>
+      <div>{firstErrType}</div>
       <input {...secondNumberAttrs}></input>
-      <div>{secondErrorType ?? secondErrType}</div>
+      <div>{secondErrType}</div>
       <input {...thirdNumberAttrs}></input>
-      <div>{thirdErrType ?? thirdErrorType}</div>
-      <input {...fourthNumberAttrs} disabled={!(inputMaxLengthList && inputMaxLengthList[3])}></input>
-      <div>{fourthErrType ?? fourthErrorType}</div>
+      <div>{thirdErrType}</div>
+      {inputCount < 4 ? null : (
+        <>
+          <input {...fourthNumberAttrs}></input>
+          <div>{fourthErrType}</div>
+        </>
+      )}
+      <div> {firstValid && secondValid && thirdValid && fourthValid ? "OK" : "FAIL"}</div>
     </>
   );
 }

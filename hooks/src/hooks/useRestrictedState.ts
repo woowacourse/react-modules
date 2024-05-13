@@ -5,7 +5,7 @@ interface UseRestrictedStateProps {
   maxLength?: number;
 }
 
-enum RestrictedErrorType {
+export enum RestrictedErrorType {
   EnglishTypeError = "englishTypeError",
   NumberTypeError = "numberTypeError",
   MaxLengthError = "maxLengthError",
@@ -19,14 +19,14 @@ const useRestrictedState = ({ type, maxLength }: UseRestrictedStateProps = {}) =
     if (type === "english" && !/^[a-zA-Z ]+$/.test(value)) {
       setErrorType(RestrictedErrorType.EnglishTypeError);
       return;
-    }
-    if (type === "number" && Number.isNaN(Number(value))) {
+    } else if (type === "number" && Number.isNaN(Number(value))) {
       setErrorType(RestrictedErrorType.NumberTypeError);
       return;
-    }
-    if (maxLength && value.length > maxLength) {
+    } else if (maxLength && value.length > maxLength) {
       setErrorType(RestrictedErrorType.MaxLengthError);
       return;
+    } else {
+      setErrorType(undefined);
     }
     setValue(value);
   };
