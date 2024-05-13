@@ -86,16 +86,16 @@ const ModalIconButton: ModalIconButtonType = ({
   );
 };
 
+interface ModalTextButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+  buttonWidth?: string;
+  buttonHeight?: string;
+  fontSize?: string;
+  backgroundColor?: string;
+  fontColor?: string;
+}
+
 type ModalTextButtonType = React.FC<
-  React.PropsWithChildren<
-    {
-      buttonWidth?: string;
-      buttonHeight?: string;
-      fontSize?: string;
-      backgroundColor?: string;
-      fontColor?: string;
-    } & ButtonHTMLAttributes<HTMLButtonElement>
-  >
+  React.PropsWithChildren<ModalTextButtonProps>
 >;
 
 const ModalTextButton: ModalTextButtonType = ({
