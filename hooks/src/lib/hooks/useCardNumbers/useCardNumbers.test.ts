@@ -72,9 +72,7 @@ describe("useCardNumbers 테스트", () => {
       ({ input, expected }) => {
         const { result } = renderHook(() => useCardNumbers());
         act(() => {
-          // input.forEach((value) => {
           result.current.handleCardNumbersChange(input);
-          // });
         });
         expect(result.current.cardBrand).toBe(expected);
       }
