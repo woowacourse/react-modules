@@ -17,11 +17,6 @@ const WIDTH_SIZE = {
     medium: "768px",
     large: "900px",
   },
-  // desktop: {
-  //   small: "1024px",
-  //   medium: "1280px",
-  //   large: "1440px",
-  // },
 };
 
 const getWidth = (

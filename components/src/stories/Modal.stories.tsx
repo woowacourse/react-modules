@@ -1,11 +1,10 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import React from "react";
-import { Modal } from "../lib/Modal/Modal";
-import { ModalProvider } from "../lib/hooks/useModalContext";
+import { Modal, ModalContent } from "../lib/Modal/Modal";
 
-const meta: Meta<typeof Modal> = {
+const meta: Meta<typeof ModalContent> = {
   title: "Components/Modal",
-  component: Modal,
+  component: ModalContent,
   tags: ["autodocs"],
   argTypes: {
     modalPosition: {
@@ -15,9 +14,6 @@ const meta: Meta<typeof Modal> = {
         options: ["center", "bottom"],
       },
     },
-    title: {
-      description: "모달의 제목",
-    },
     closeButtonPosition: {
       description: "닫기 버튼의 위치",
       control: {
@@ -25,124 +21,204 @@ const meta: Meta<typeof Modal> = {
         options: ["top", "bottom"],
       },
     },
+    size: {
+      description: "모달 가로 길이",
+      control: {
+        type: "radio",
+        options: ["small", "medium", "large"],
+      },
+    },
   },
 };
 
 export default meta;
-type Story = StoryObj<typeof Modal>;
+type Story = StoryObj<typeof ModalContent>;
 
-export const 중앙에위치한모달에상단X닫기버튼: Story = {
-  render: () => {
-    return (
-      <ModalProvider>
-        <Modal
-          modalPosition="center"
-          title="중앙에 위치한 모달"
-          closeButtonPosition="top"
-          isOpenValue={true}
-        >
-          <div>
-            이것은 중앙에 위치한 모달의 내용입니다.이것은 중앙에 위치한 모달의 내용입니다.이것은
-            중앙에 위치한 모달의 내용입니다.이것은 중앙에 위치한 모달의 내용입니다.이것은 중앙에
-            위치한 모달의 내용입니다.이것은 하단에 위치한 모달의 내용입니다.이것은 하단에 위치한
-            모달의 내용입니다.이것은 하단에 위치한 모달의 내용입니다.이것은 하단에 위치한 모달의
-            내용입니다.이것은 하단에 위치한 모달의 내용입니다.이것은 하단에 위치한 모달의
-            내용입니다.이것은 하단에 위치한 모달의 내용입니다.
-          </div>
-        </Modal>
-      </ModalProvider>
-    );
+export const CenterSmall: Story = {
+  args: {
+    modalPosition: "center",
+    closeButtonPosition: "top",
+    size: "small",
+    title: "Center Small Modal",
+    containClose: true,
+    footerAlign: "end",
+    children: <div>This is a center small modal.</div>,
   },
+  render: ({
+    title,
+    footerAlign,
+    children,
+    containClose,
+    modalPosition,
+    closeButtonPosition,
+    size,
+  }) => (
+    <Modal.Provider>
+      <Modal.Trigger>Open Modal</Modal.Trigger>
+      <ModalContent
+        modalPosition={modalPosition}
+        closeButtonPosition={closeButtonPosition}
+        size={size}
+        containClose={containClose}
+        footerAlign={footerAlign}
+        title={title}
+      >
+        <Modal.Header title={title} containClose={containClose} />
+        <Modal.Body>{children}</Modal.Body>
+        <Modal.Footer align={footerAlign}>
+          <Modal.Close>
+            <button>Cancel</button>
+          </Modal.Close>
+          <Modal.Close>
+            <button>Confirm</button>
+          </Modal.Close>
+        </Modal.Footer>
+      </ModalContent>
+    </Modal.Provider>
+  ),
 };
 
-export const 중앙에위치한모달에하단사각형닫기버튼: Story = {
-  render: () => {
-    return (
-      <ModalProvider>
-        <Modal
-          modalPosition="center"
-          title="중앙에 위치한 모달"
-          closeButtonPosition="bottom"
-          isOpenValue={true}
-        >
-          <div>이것은 중앙에 위치한 모달의 내용입니다.</div>
-        </Modal>
-      </ModalProvider>
-    );
+export const CenterMedium: Story = {
+  args: {
+    modalPosition: "center",
+    closeButtonPosition: "top",
+    size: "medium",
+    title: "Center Medium Modal",
+    containClose: true,
+    footerAlign: "end",
+    children: <div>This is a center medium modal.</div>,
   },
+  render: (args) => (
+    <Modal.Provider>
+      <Modal.Trigger>Open Modal</Modal.Trigger>
+      <ModalContent {...args}>
+        <Modal.Header title={args.title} containClose={args.containClose} />
+        <Modal.Body>{args.children}</Modal.Body>
+        <Modal.Footer align={args.footerAlign}>
+          <Modal.Close>
+            <button>Cancel</button>
+          </Modal.Close>
+          <Modal.Close>
+            <button>Confirm</button>
+          </Modal.Close>
+        </Modal.Footer>
+      </ModalContent>
+    </Modal.Provider>
+  ),
 };
 
-export const 하단에위치한모달메상단X닫기버튼: Story = {
-  render: () => {
-    return (
-      <ModalProvider>
-        <Modal
-          modalPosition="bottom"
-          title="하단에 위치한 모달"
-          closeButtonPosition="top"
-          isOpenValue={true}
-        >
-          <div>이것은 하단에 위치한 모달의 내용입니다.</div>
-        </Modal>
-      </ModalProvider>
-    );
+export const CenterLarge: Story = {
+  args: {
+    modalPosition: "center",
+    closeButtonPosition: "top",
+    size: "large",
+    title: "Center Large Modal",
+    containClose: true,
+    footerAlign: "end",
+    children: <div>This is a center large modal.</div>,
   },
-};
-export const 하단에위치한모달메상단사각형닫기버튼: Story = {
-  render: () => {
-    return (
-      <ModalProvider>
-        <Modal
-          modalPosition="bottom"
-          title="하단에 위치한 모달"
-          closeButtonPosition="bottom"
-          isOpenValue={true}
-        >
-          <div>
-            이것은 하단에 위치한 모달의 내용입니다.이것은 하단에 위치한 모달의 내용입니다.이것은
-            하단에 위치한 모달의 내용입니다.이것은 하단에 위치한 모달의 내용입니다.이것은 하단에
-            위치한 모달의 내용입니다.이것은 하단에 위치한 모달의 내용입니다.이것은 하단에 위치한
-            모달의 내용입니다.이것은 하단에 위치한 모달의 내용입니다.이것은 하단에 위치한 모달의
-            내용입니다.이것은 하단에 위치한 모달의 내용입니다.이것은 하단에 위치한 모달의
-            내용입니다.이것은 하단에 위치한 모달의 내용입니다.이것은 하단에 위치한 모달의
-            내용입니다.이것은 하단에 위치한 모달의 내용입니다.
-          </div>
-        </Modal>
-      </ModalProvider>
-    );
-  },
+  render: (args) => (
+    <Modal.Provider>
+      <Modal.Trigger>Open Modal</Modal.Trigger>
+      <ModalContent {...args}>
+        <Modal.Header title={args.title} containClose={args.containClose} />
+        <Modal.Body>{args.children}</Modal.Body>
+        <Modal.Footer align={args.footerAlign}>
+          <Modal.Close>
+            <button>Cancel</button>
+          </Modal.Close>
+          <Modal.Close>
+            <button>Confirm</button>
+          </Modal.Close>
+        </Modal.Footer>
+      </ModalContent>
+    </Modal.Provider>
+  ),
 };
 
-export const 중앙에위치한모달에긴제목: Story = {
-  render: () => {
-    return (
-      <ModalProvider>
-        <Modal
-          modalPosition="center"
-          title="이것은 매우 긴 제목으로, 줄임표로 잘려야 합니다."
-          closeButtonPosition="top"
-          isOpenValue={true}
-        >
-          <div>이 모달은 긴 제목을 가지고 있어 줄임표로 표시됩니다.</div>
-        </Modal>
-      </ModalProvider>
-    );
+export const BottomSmall: Story = {
+  args: {
+    modalPosition: "bottom",
+    closeButtonPosition: "bottom",
+    size: "small",
+    title: "Bottom Small Modal",
+    containClose: true,
+    footerAlign: "end",
+    children: <div>This is a bottom small modal.</div>,
   },
+  render: (args) => (
+    <Modal.Provider>
+      <Modal.Trigger>Open Modal</Modal.Trigger>
+      <ModalContent {...args}>
+        <Modal.Header title={args.title} containClose={args.containClose} />
+        <Modal.Body>{args.children}</Modal.Body>
+        <Modal.Footer align={args.footerAlign}>
+          <Modal.Close>
+            <button>Cancel</button>
+          </Modal.Close>
+          <Modal.Close>
+            <button>Confirm</button>
+          </Modal.Close>
+        </Modal.Footer>
+      </ModalContent>
+    </Modal.Provider>
+  ),
 };
 
-export const 하단에위치한모달에긴제목: Story = {
-  render: () => {
-    return (
-      <ModalProvider>
-        <Modal
-          modalPosition="bottom"
-          title="이것은 매우 긴 제목으로, 줄임표로 잘려야 합니다. 이것은 매우 긴 제목으로, 줄임표로 잘려야 합니다."
-          closeButtonPosition="top"
-          isOpenValue={true}
-        >
-          <div>이 모달은 긴 제목을 가지고 있어 줄임표로 표시됩니다.</div>
-        </Modal>
-      </ModalProvider>
-    );
+export const BottomMedium: Story = {
+  args: {
+    modalPosition: "bottom",
+    closeButtonPosition: "bottom",
+    size: "medium",
+    title: "Bottom Medium Modal",
+    containClose: true,
+    footerAlign: "end",
+    children: <div>This is a bottom medium modal.</div>,
   },
+  render: (args) => (
+    <Modal.Provider>
+      <Modal.Trigger>Open Modal</Modal.Trigger>
+      <ModalContent {...args}>
+        <Modal.Header title={args.title} containClose={args.containClose} />
+        <Modal.Body>{args.children}</Modal.Body>
+        <Modal.Footer align={args.footerAlign}>
+          <Modal.Close>
+            <button>Cancel</button>
+          </Modal.Close>
+          <Modal.Close>
+            <button>Confirm</button>
+          </Modal.Close>
+        </Modal.Footer>
+      </ModalContent>
+    </Modal.Provider>
+  ),
+};
+
+export const BottomLarge: Story = {
+  args: {
+    modalPosition: "bottom",
+    closeButtonPosition: "bottom",
+    size: "large",
+    title: "Bottom Large Modal",
+    containClose: true,
+    footerAlign: "end",
+    children: <div>This is a bottom large modal.</div>,
+  },
+  render: (args) => (
+    <Modal.Provider>
+      <Modal.Trigger>Open Modal</Modal.Trigger>
+      <ModalContent {...args}>
+        <Modal.Header title={args.title} containClose={args.containClose} />
+        <Modal.Body>{args.children}</Modal.Body>
+        <Modal.Footer align={args.footerAlign}>
+          <Modal.Close>
+            <button>Cancel</button>
+          </Modal.Close>
+          <Modal.Close>
+            <button>Confirm</button>
+          </Modal.Close>
+        </Modal.Footer>
+      </ModalContent>
+    </Modal.Provider>
+  ),
 };

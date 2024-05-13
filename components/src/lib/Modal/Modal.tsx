@@ -64,7 +64,7 @@ export const ModalClose: React.FC<React.PropsWithChildren<{ onClick?: () => void
     onClick && onClick();
     closeModal();
   };
-  // return <StyledModalButton onClick={handleClick}>{children}</StyledModalButton>;
+
   return <div onClick={handleClick}>{children}</div>;
 };
 

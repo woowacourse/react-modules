@@ -32,7 +32,6 @@ export const useCardNumber = (options: UseCardNumberOptions = {}) => {
   };
 
   const handleCardNumberChange = (value: string) => {
-    console.log(value);
     if (!isTouched) setIsTouched(true);
 
     if (useCardIdentifier) {
