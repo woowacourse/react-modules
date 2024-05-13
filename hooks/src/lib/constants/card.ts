@@ -27,12 +27,12 @@ export const CARD_TYPES = {
 
 export const ERROR_MESSAGES = {
   ONLY_NUMBERS: '숫자만 입력 가능합니다.',
-  STANDARD_CARD_LENGTH: '일반 카드는 16자리 숫자여야 합니다.',
-  VISA_CARD_LENGTH: 'Visa 카드는 16자리 숫자여야 합니다.',
-  MASTER_CARD_LENGTH: 'Master 카드는 16자리 숫자여야 합니다.',
-  DINERS_CARD_LENGTH: 'Diners 카드는 14자리 숫자여야 합니다.',
-  AMEX_CARD_LENGTH: 'AMEX 카드는 15자리 숫자여야 합니다.',
-  UNIONPAY_CARD_LENGTH: 'UnionPay 카드는 16자리 숫자여야 합니다.',
+  STANDARD_CARD_LENGTH: `일반 카드는 ${CARD_TYPES.NONE.INPUT_COUNT}자리 숫자여야 합니다.`,
+  VISA_CARD_LENGTH: `Visa 카드는 ${CARD_TYPES.VISA.INPUT_COUNT}자리 숫자여야 합니다.`,
+  MASTER_CARD_LENGTH: `Master 카드는 ${CARD_TYPES.MASTER.INPUT_COUNT}자리 숫자여야 합니다.`,
+  DINERS_CARD_LENGTH: `Diners 카드는 ${CARD_TYPES.DINERS.INPUT_COUNT}자리 숫자여야 합니다.`,
+  AMEX_CARD_LENGTH: `AMEX 카드는 ${CARD_TYPES.AMEX.INPUT_COUNT}자리 숫자여야 합니다.`,
+  UNIONPAY_CARD_LENGTH: `UnionPay 카드는 ${CARD_TYPES.UNION_PAY.INPUT_COUNT}자리 숫자여야 합니다.`,
   SELECT_CARD_COMPANY: '카드사를 선택해주세요.',
   ENTER_TWO_DIGITS: '숫자 2개를 입력해주세요.',
   MONTH_RANGE: '월은 1이상 12이하여야 합니다.',

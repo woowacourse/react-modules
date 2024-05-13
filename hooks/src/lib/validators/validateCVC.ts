@@ -1,10 +1,12 @@
+import { ERROR_MESSAGES } from '../constants/card';
+
 export const validateCVC = (value: string, cardCVCLength: number): string => {
   if (value !== '' && Number.isNaN(Number(value))) {
-    return '숫자만 입력 가능합니다.';
+    return ERROR_MESSAGES.ONLY_NUMBERS;
   }
 
   if (value !== '' && value.length !== cardCVCLength) {
-    return `${cardCVCLength}자리를 입력해주세요.`;
+    return ERROR_MESSAGES.CVC_LENGTH(cardCVCLength);
   }
 
   return '';
