@@ -69,3 +69,9 @@ Modal 컴포넌트는 다음과 같이 사용할 수 있습니다.
 - width : 'default' | 'stretch'하나를 선택해 버튼의 너비를 선택합니다. 기본값은 'default'입니다.
 - onClick: 버튼을 클릭할 때 실행되는 함수입니다.
 - buttonColor : 버튼의 색을 설정합니다. 기본값은 { backgroundColor: 'black', fontColor: 'white' }입니다.
+
+
+## 모달 템플릿
+- **AlertModal** (확인 모달) : 사용자에게 메세지를 전달하고 확인 버튼만을 제공
+- **ConfirmModal** (확인/취소 모달) : 사용자에게 선택지를 제공하고 확인 및 취소 버튼 제공
+- **PromptModal** (입력 모달) : 사용자로부터 입력값을 받을 수 있는 입력 필드와 확인/취소 버튼 제공
