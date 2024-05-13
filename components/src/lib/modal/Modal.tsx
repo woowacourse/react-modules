@@ -65,7 +65,6 @@ const ModalTitle: ModalTitleType = ({ children, ...restProps }) => {
 type ModalIconButtonType = React.FC<
   React.PropsWithChildren<
     {
-      onClose: () => void;
       src: string;
       imgSize?: string;
     } & ButtonHTMLAttributes<HTMLButtonElement>
@@ -73,14 +72,13 @@ type ModalIconButtonType = React.FC<
 >;
 
 const ModalIconButton: ModalIconButtonType = ({
-  onClose,
   type = 'button',
   src = CloseImage,
   imgSize,
   ...restProps
 }) => {
   return (
-    <Styled.ModalIconButton type={type} onClick={onClose} {...restProps}>
+    <Styled.ModalIconButton type={type} {...restProps}>
       <img src={src} style={{ width: imgSize }} />
     </Styled.ModalIconButton>
   );
