@@ -3,7 +3,7 @@ import { Modal } from '../../lib';
 import React from 'react';
 
 const meta = {
-  title: 'ModalFeature',
+  title: 'Modal',
   component: Modal,
 } satisfies Meta<typeof Modal>;
 

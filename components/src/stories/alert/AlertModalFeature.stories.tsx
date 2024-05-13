@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { AlertModal } from '../../lib/index';
 
 const meta = {
-  title: 'AlertModalFeature',
+  title: 'AlertModal',
   component: AlertModal,
 } satisfies Meta<typeof AlertModal>;
 
