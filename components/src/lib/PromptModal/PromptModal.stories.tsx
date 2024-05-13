@@ -52,3 +52,18 @@ export const BottomModal: Story = {
     return <PromptModal {...args} />;
   },
 };
+
+export const ModalWithErrorMessage: Story = {
+  args: {
+    ...Default.args,
+    inputField: {
+      name: 'promptInput',
+      placeholder: '값을 입력해주세요',
+      initialValue: '1234',
+      errorMessage: '에러 메시지가 노출되는 영역입니다.',
+    },
+  },
+  render: (args) => {
+    return <PromptModal {...args} />;
+  },
+};

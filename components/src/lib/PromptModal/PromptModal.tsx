@@ -11,6 +11,7 @@ export interface PromptModalProps extends ModalProps {
     label?: string;
     placeholder?: string;
     initialValue?: string;
+    errorMessage?: string;
   };
   submitButtonText?: string;
   cancelButtonText?: string;
@@ -74,8 +75,12 @@ export default function PromptModal({
         name={inputField.name}
         defaultValue={inputField.initialValue}
         placeholder={inputField.placeholder}
+        $isError={!!inputField.errorMessage}
         onChange={(event: React.ChangeEvent<HTMLInputElement>) => setInputValue(event.target.value)}
       />
+      {inputField.errorMessage && (
+        <Styled.ErrorMessage>{inputField.errorMessage}</Styled.ErrorMessage>
+      )}
     </Modal>
   );
 }
