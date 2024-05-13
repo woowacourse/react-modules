@@ -248,6 +248,8 @@ npm install nakta-react-payments-components
 
 아래와 같은 방식으로 조합하여 사용할 수 있습니다.
 
+![image](https://github.com/woowacourse/react-modules/assets/106071687/d38599a8-7f56-4a74-95e2-b468bac0b20b)
+
 ```tsx
 import React from 'react';
 import { Modal } from 'nakta-react-payments-components';
@@ -304,6 +306,8 @@ export default App;
 
 > 페이먼츠 Alert Modal 컴포넌트입니다. 위의 컴포넌트를 조합하여 Alert를 위한 컴포넌트를 제공합니다.
 
+![image](https://github.com/woowacourse/react-modules/assets/106071687/e5d13e4c-dbfa-433b-90ec-e1a4f834a441)
+
 **Props**
 
 | prop             | description                                                                                                                             | defaultValue |
@@ -355,6 +359,8 @@ export default App;
 
 > 페이먼츠 확인 모달 컴포넌트입니다. 위의 컴포넌트를 조합하여 Confirm을 위한 컴포넌트를 제공합니다.
 
+![image](https://github.com/woowacourse/react-modules/assets/106071687/a5816c87-5dc9-48ac-9b88-f0adfb757363)
+
 **Props**
 
 | prop             | description                                                                                                                             | defaultValue |
@@ -404,6 +410,8 @@ export default App;
 > 페이먼츠 Prompt Modal 컴포넌트입니다. 위의 컴포넌트를 조합하여 Prompt 작성을 위한 컴포넌트를 제공합니다.
 >
 > 다양한 input 형태를 사용할 수 있도록 아래의 예시와 같이 children으로 Input컴포넌트를 주입하여 사용합니다.
+
+![image](https://github.com/woowacourse/react-modules/assets/106071687/4fde897f-9042-46b2-8e9b-6292afe06cc9)
 
 **Props**
 
