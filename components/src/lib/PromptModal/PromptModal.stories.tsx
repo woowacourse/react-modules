@@ -21,7 +21,10 @@ const meta: Meta<typeof PromptModal> = {
     const [value, setValue] = useState('');
 
     const onClose = () => setIsOpen(false);
-    const onConfirm = () => console.log('confirm');
+    const onConfirm = () => {
+      console.log('confirm');
+      return true;
+    };
 
     return (
       <>

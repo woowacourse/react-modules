@@ -20,7 +20,10 @@ const meta: Meta<typeof ConfirmModal> = {
     const [isOpen, setIsOpen] = useState(true);
 
     const onClose = () => setIsOpen(false);
-    const onConfirm = () => console.log('confirm');
+    const onConfirm = () => {
+      console.log('confirm');
+      return true;
+    };
 
     return (
       <>

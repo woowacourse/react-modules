@@ -22,6 +22,7 @@ const meta: Meta<typeof AlertModal> = {
     const onClose = () => setIsOpen(false);
     const onConfirm = () => {
       console.log('confirm');
+      return true;
     };
 
     return (
