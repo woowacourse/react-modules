@@ -9,7 +9,7 @@ interface AlertModalProps {
   message: string;
   modalPosition: 'center' | 'bottom';
   modalSize: ModalSizeProps;
-  closeButton: CloseButtonProps;
+  closeButton: Omit<CloseButtonProps, 'display'>;
   confirmButton: ConfirmButtonProps;
   backgroundColor?: CSSProperties['backgroundColor'];
   borderRadius?: CSSProperties['borderRadius'];

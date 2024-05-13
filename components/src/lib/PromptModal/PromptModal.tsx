@@ -15,7 +15,7 @@ interface PromptModalProps {
   subtitle?: SubtitleProps;
   modalPosition: 'center' | 'bottom';
   modalSize: ModalSizeProps;
-  closeButton: CloseButtonProps;
+  closeButton: Omit<CloseButtonProps, 'display'>;
   cancelButton: CancelButtonProps;
   confirmButton: ConfirmButtonProps;
   backgroundColor?: CSSProperties['backgroundColor'];
