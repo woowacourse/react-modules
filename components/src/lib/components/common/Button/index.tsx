@@ -4,21 +4,15 @@ import styled from 'styled-components';
 import { StyleSize } from '../../types';
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  onButtonClick: React.MouseEventHandler<HTMLButtonElement>;
   children: React.ReactNode;
   $size?: StyleSize;
   $backgroundColor?: string;
   $color?: string;
 }
 
-function Button({
-  onButtonClick,
-  children,
-  $size = 'medium',
-  ...rest
-}: ButtonProps) {
+function Button({ children, $size = 'medium', ...rest }: ButtonProps) {
   return (
-    <StyledButton onClick={onButtonClick} $size={$size} {...rest}>
+    <StyledButton $size={$size} {...rest}>
       {children}
     </StyledButton>
   );
