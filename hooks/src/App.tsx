@@ -15,9 +15,13 @@ function App() {
 
   return (
     <div>
+      <h1>커스텀 훅 테스트</h1>
       <div>
-        <h1>카드 번호 입력</h1>
+        <label htmlFor="cardNumberInput">
+          <h2>카드 번호 입력</h2>
+        </label>
         <input
+          id="cardNumberInput"
           onChange={cardNumber.handleCardNumberChange}
           onBlur={cardNumber.handleCardNumberBlur}
           value={cardNumber.inputValue}
@@ -26,8 +30,11 @@ function App() {
         <div>errorMessage: {cardNumber.validationResult.errorMessage}</div>
       </div>
       <div>
-        <h1>카드 소유자 입력</h1>
+        <label htmlFor="cardHolderInput">
+          <h2>카드 소유자 입력</h2>
+        </label>
         <input
+          id="cardHolderInput"
           onChange={cardHolder.handleCardHolderChange}
           onBlur={cardHolder.handleCardHolderBlur}
           value={cardHolder.inputValue}
@@ -36,8 +43,11 @@ function App() {
         <div>errorMessage: {cardHolder.validationResult.errorMessage}</div>
       </div>
       <div>
-        <h1>카드 CVC 입력</h1>
+        <label htmlFor="cardCvcInput">
+          <h2>카드 CVC 입력</h2>
+        </label>
         <input
+          id="cardCvcInput"
           onChange={cardCVC.handleCvcChange}
           onBlur={cardCVC.handleCvcBlur}
           value={cardCVC.inputValue}
@@ -46,8 +56,11 @@ function App() {
         <div>errorMessage: {cardCVC.validationResult.errorMessage}</div>
       </div>
       <div>
-        <h1>카드 소유자 패스워드</h1>
+        <label htmlFor="cardPasswordInput">
+          <h2>카드 소유자 패스워드</h2>
+        </label>
         <input
+          id="cardPasswordInput"
           onChange={cardPassword.handlePasswordChange}
           onBlur={cardPassword.handlePasswordBlur}
           value={cardPassword.inputValue}
@@ -56,8 +69,11 @@ function App() {
         <div>errorMessage: {cardPassword.validationResult.errorMessage}</div>
       </div>
       <div>
-        <h1>카드 유효기간</h1>
+        <label htmlFor="cardExpiryDateInput">
+          <h2>카드 유효기간</h2>
+        </label>
         <input
+          id="cardExpiryDateInput"
           onChange={cardExpiryDate.handleExpiryChange}
           onBlur={cardExpiryDate.handleExpiryDateBlur}
           name="month"
