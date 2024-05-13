@@ -39,12 +39,10 @@ const useCardNumber = () => {
 
     const newCardType = handleCardTypeChange(numericValue);
 
-    const isNumericInput = (value: string) => REGEX.onlyNumber.test(value);
-    const isValidateCardNumber = (value: string) =>
-      value.length === CARD_FORMAT[newCardType].maxNumberLength;
     const errors: string[] = [];
-    const isNumeric = isNumericInput(numericValue);
-    const isValidNumber = isValidateCardNumber(numericValue);
+    const isNumeric = REGEX.onlyNumber.test(numericValue);
+    const isValidNumber =
+      numericValue.length === CARD_FORMAT[newCardType].maxNumberLength;
 
     if (!isNumeric) {
       errors.push("숫자를 입력해주세요.");
