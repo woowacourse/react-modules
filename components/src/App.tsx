@@ -17,6 +17,9 @@ function App() {
   const onConfirmModalClose = () => setIsConfirmModalOpen(false);
   const onPromptModalClose = () => setIsPromptModalOpen(false);
 
+  const onConfirmTrue = () => true;
+  const onConfirmFalse = () => false;
+
   return (
     <div style={{ height: '300vh', display: 'flex', flexDirection: 'column', gap: '20px' }}>
       <button style={{ border: '1px solid black', padding: '10px 20px' }} onClick={() => setIsModalOpen(true)}>
@@ -64,7 +67,7 @@ function App() {
         title='Alert Modal'
         isOpen={isAlertModalOpen}
         onClose={onAlertModalClose}
-        onConfirm={onAlertModalClose}
+        onConfirm={onConfirmTrue}
       />
 
       <ConfirmModal
@@ -74,16 +77,13 @@ function App() {
         title='Confirm Modal'
         isOpen={isConfirmModalOpen}
         onClose={onConfirmModalClose}
-        onConfirm={onConfirmModalClose}
+        onConfirm={onConfirmTrue}
       />
 
       <PromptModal
         size='large'
         existCloseButton={true}
-        onConfirm={() => {
-          console.log(value);
-          setValue('');
-        }}
+        onConfirm={onConfirmFalse}
         isOpen={isPromptModalOpen}
         onClose={onPromptModalClose}
         position='center'

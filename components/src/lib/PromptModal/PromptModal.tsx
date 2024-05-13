@@ -30,7 +30,7 @@ export default function PromptModal({ size = 'medium', existCloseButton, title, 
         <Modal.Main>{children}</Modal.Main>
         {position === 'center' && (
           <Modal.Footer align='row' position='right'>
-            <Modal.Button backgroundColor='secondary' onClick={onConfirmHandler} size='small'>
+            <Modal.Button backgroundColor='secondary' onClick={onClose} size='small'>
               취소
             </Modal.Button>
             <Modal.Button backgroundColor='primary' onClick={onConfirmHandler} size='small'>
@@ -43,7 +43,7 @@ export default function PromptModal({ size = 'medium', existCloseButton, title, 
             <Modal.Button backgroundColor='primary' onClick={onConfirmHandler} size='full'>
               확인
             </Modal.Button>
-            <Modal.Button backgroundColor='secondary' onClick={onConfirmHandler} size='full'>
+            <Modal.Button backgroundColor='secondary' onClick={onClose} size='full'>
               취소
             </Modal.Button>
           </Modal.Footer>
