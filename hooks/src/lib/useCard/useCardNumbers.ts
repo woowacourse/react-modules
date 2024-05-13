@@ -5,7 +5,7 @@ import useValidations from '../useValidations';
 import useCardNumbersState from './useCardNumbersState';
 import useCardBrand from './useCardBrand';
 import { validateCardNumberLength } from '../validator/validateCardBrand';
-import { cardBrandChecker } from '../constants';
+import { CARD_BRAND_INFO } from '../constants';
 import { formatCardNumber, formatCardNumberToString } from '../utils';
 
 const useCardNumbers = (initialValue: Record<string, string>, options?: Options) => {
@@ -14,22 +14,22 @@ const useCardNumbers = (initialValue: Record<string, string>, options?: Options)
   const { cardBrand, determineCardBrand, validMaxLength } = useCardBrand();
 
   const fullCardNumber = Object.values(value).reduce((acc, cur) => acc + cur);
-  const cardNumberFormat = cardBrandChecker[cardBrand]
-    ? cardBrandChecker[cardBrand].format
-    : [4, 4, 4, 4];
+  const cardNumberFormat = CARD_BRAND_INFO[cardBrand] && CARD_BRAND_INFO[cardBrand].format;
   const formattedCardNumberList = formatCardNumber(fullCardNumber, cardNumberFormat);
   const formattedCardNumber = formatCardNumberToString(formattedCardNumberList, cardNumberFormat);
 
+  // cardBrand 체크 로직
+  const cardBrandInfo = CARD_BRAND_INFO[cardBrand];
+  const currentValidLength = cardBrandInfo ? cardBrandInfo.validMaxLength : 16;
+
+  if (fullCardNumber.length > currentValidLength) {
+    updateCardNumbers(fullCardNumber.substring(0, currentValidLength), 'first');
+  }
+
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>, name: string) => {
     const targetValue = event.target.value;
-    const validCardBrand = determineCardBrand(targetValue);
-    const cardBrandInfo = cardBrandChecker[validCardBrand];
-    const validLength = cardBrandInfo ? cardBrandInfo.validMaxLength : 16;
+    determineCardBrand(targetValue);
 
-    if (targetValue.length > validLength) {
-      updateCardNumbers(targetValue.substring(0, validLength), name);
-      return;
-    }
     if (!checkValidInputs(targetValue, name, validateNumber)) return;
     updateCardNumbers(targetValue, name);
 
@@ -39,7 +39,7 @@ const useCardNumbers = (initialValue: Record<string, string>, options?: Options)
   };
 
   const handleBlur = (event: React.FocusEvent<HTMLInputElement, Element>, name: string) => {
-    const cardBrandInfo = cardBrandChecker[cardBrand];
+    const cardBrandInfo = CARD_BRAND_INFO[cardBrand];
 
     const validationResult = validateCardNumberLength(cardBrandInfo);
     if (event.target.value.length < validMaxLength) {

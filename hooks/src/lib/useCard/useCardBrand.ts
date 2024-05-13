@@ -39,7 +39,6 @@ const useCardBrand = () => {
     const validBrand = validBrandList.length > 0 ? validBrandList[0][0] : 'NONE';
 
     setCardBrand(validBrand);
-    return validBrand;
   };
 
   return {
