@@ -11,19 +11,9 @@ import ModalDescription from './ModalDescription/ModalDescription';
 import ModalButtonContainer from './ModalButtonContainer/ModalButtonContainer';
 import ModalInputField, { ValidateResult } from './ModalInputField/ModalInputField';
 import { createPortal } from 'react-dom';
+import { DefaultModalProps } from './Modal';
 
-interface PromptModalProps {
-  size?: ModalSize;
-  isOpened: boolean;
-  onClose: () => void;
-  title?: string;
-  description?: string;
-  children?: JSX.Element;
-  modalPosition?: ModalPosition;
-  buttonPosition?: ButtonPosition;
-  primaryColor?: string;
-  showCloseButton?: boolean;
-
+interface PromptModalProps extends DefaultModalProps {
   placeholder?: string;
   onConfirm: (value: string) => void;
   initialValue?: string;

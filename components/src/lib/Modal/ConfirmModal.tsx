@@ -10,19 +10,9 @@ import ModalBody from './ModalBody/ModalBody';
 import ModalDescription from './ModalDescription/ModalDescription';
 import ModalButtonContainer from './ModalButtonContainer/ModalButtonContainer';
 import { createPortal } from 'react-dom';
+import { DefaultModalProps } from './Modal';
 
-interface ConfirmModalProps {
-  size?: ModalSize;
-  isOpened: boolean;
-  onClose: () => void;
-  title?: string;
-  description?: string;
-  children?: JSX.Element;
-  modalPosition?: ModalPosition;
-  buttonPosition?: ButtonPosition;
-  primaryColor?: string;
-  showCloseButton?: boolean;
-
+interface ConfirmModalProps extends DefaultModalProps {
   onConfirm: () => void;
 }
 

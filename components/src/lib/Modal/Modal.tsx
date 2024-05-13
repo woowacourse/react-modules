@@ -11,7 +11,7 @@ import ModalDescription from './ModalDescription/ModalDescription';
 import ModalButtonContainer from './ModalButtonContainer/ModalButtonContainer';
 import { createPortal } from 'react-dom';
 
-interface ModalProps {
+export interface DefaultModalProps {
   size?: ModalSize;
   isOpened: boolean;
   onClose: () => void;
@@ -19,11 +19,14 @@ interface ModalProps {
   description?: string;
   children?: JSX.Element;
   modalPosition?: ModalPosition;
-  primaryButton?: ButtonProps;
-  secondaryButton?: ButtonProps;
   buttonPosition?: ButtonPosition;
   primaryColor?: string;
   showCloseButton?: boolean;
+}
+
+interface ModalProps extends DefaultModalProps {
+  primaryButton?: ButtonProps;
+  secondaryButton?: ButtonProps;
 }
 
 const Modal = ({
