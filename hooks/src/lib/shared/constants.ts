@@ -9,3 +9,11 @@ export const VALID_LENGTH = {
   ownerName: 1,
   passwordPrefix: 2,
 };
+
+export const BRAND = {
+  visa: "visa",
+  masterCard: "masterCard",
+  amex: "amex",
+  diners: "diners",
+  unionPay: "unionPay",
+};

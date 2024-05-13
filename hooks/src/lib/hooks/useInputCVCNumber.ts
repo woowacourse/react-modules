@@ -3,7 +3,7 @@ import { getInputStatus, useInput } from './useInput';
 import { ERROR_MESSAGE } from '../shared/errorMessages';
 import validator from '../shared/utils/validator/validator';
 import { Status } from '../shared/types';
-import { VALID_LENGTH } from '../shared/options';
+import { VALID_LENGTH } from '../shared/constants';
 
 type UseInputCVCNumberReturn = [
   value: string,

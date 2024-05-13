@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { getInputStatus, useInput } from './useInput';
 import { ERROR_MESSAGE } from '../shared/errorMessages';
-import { VALID_LENGTH } from '../shared/options';
+import { VALID_LENGTH } from '../shared/constants';
 import validator from '../shared/utils/validator/validator';
 import { ExpiryDateType, Status } from '../shared/types';
 
