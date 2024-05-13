@@ -8,7 +8,7 @@ import {
   TitleProps,
 } from '../interfaces';
 import Modal from '../Modal/Modal';
-import ModalInput from '../ModalInput/ModalInput';
+import Input from '../Input/Input';
 
 interface PromptModalProps {
   title: TitleProps;
@@ -67,7 +67,7 @@ const PromptModal = ({
       modalContent={{
         children: (
           <>
-            <ModalInput onChange={(e) => console.log(e.target.value)} />
+            <Input onChange={(e) => console.log(e.target.value)} />
           </>
         ),
       }}
