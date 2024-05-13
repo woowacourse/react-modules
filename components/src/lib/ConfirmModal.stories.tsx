@@ -2,7 +2,7 @@ import ConfirmModal from "./ConfirmModal";
 import type { Meta, StoryObj } from "@storybook/react";
 import useModalState from "./common/useModalState";
 
-const AlertModalWrapper = () => {
+const ConfirmModalWrapper = () => {
   const { isOpen, closeModal, confirmModal } = useModalState(true, {});
   return (
     <ConfirmModal
@@ -26,5 +26,5 @@ export const Default: Story = {
   parameters: {
     docs: { description: { story: "기본 상태" } },
   },
-  render: AlertModalWrapper,
+  render: ConfirmModalWrapper,
 };
