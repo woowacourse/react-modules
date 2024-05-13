@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 export interface Callbacks {
   onOpen?: () => void;
@@ -12,13 +12,14 @@ const useModalState = (
 ) => {
   const [isOpen, setIsOpen] = useState(initialIsOpen);
 
-  useEffect(() => {
-    if (isOpen) onOpen();
-    else onClose();
-  }, [isOpen]);
-
-  const openModal = () => setIsOpen(true);
-  const closeModal = () => setIsOpen(false);
+  const openModal = () => {
+    setIsOpen(true);
+    onOpen && onOpen();
+  };
+  const closeModal = () => {
+    setIsOpen(false);
+    onClose && onClose();
+  };
 
   const confirmModal = () => {
     onConfirm && onConfirm();
