@@ -3,14 +3,13 @@ import styled from 'styled-components';
 
 interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   label?: string;
-  onChange: React.ChangeEventHandler<HTMLInputElement>;
 }
 
-function Input({ label, onChange, ...rest }: InputProps) {
+function Input({ label, ...rest }: InputProps) {
   return (
     <InputContainer>
       {label && <label>{label}</label>}
-      <StyledInput onChange={onChange} {...rest} />
+      <StyledInput {...rest} />
     </InputContainer>
   );
 }
