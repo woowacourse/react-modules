@@ -2,6 +2,7 @@ import * as path from "path";
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react-swc";
 import dts from "vite-plugin-dts";
+import libCss from "vite-plugin-libcss";
 
 export default defineConfig({
   build: {
@@ -10,6 +11,7 @@ export default defineConfig({
       name: "index",
       fileName: "index",
     },
+    cssCodeSplit: true,
     rollupOptions: {
       external: ["react"],
       output: {
@@ -22,5 +24,5 @@ export default defineConfig({
       esmExternals: ["react"],
     },
   },
-  plugins: [react(), dts()],
+  plugins: [react(), dts(), libCss()],
 });

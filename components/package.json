@@ -1,6 +1,6 @@
 {
   "name": "darr-modal-components",
-  "version": "0.0.3",
+  "version": "0.0.5",
   "description": "Modal component that is easy and simple to use",
   "type": "module",
   "types": "dist/index.d.ts",
@@ -48,6 +48,7 @@
     "storybook": "^8.0.9",
     "typescript": "^5.2.2",
     "vite": "^5.2.0",
-    "vite-plugin-dts": "^3.9.0"
+    "vite-plugin-dts": "^3.9.0",
+    "vite-plugin-libcss": "^1.1.1"
   }
 }
