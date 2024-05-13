@@ -5,14 +5,14 @@ import { ValidationResult } from '../lib/types';
 const initialValue = { first: '1234', second: '1234', third: '2344', fourth: '5623' };
 
 describe('useCardNumbers 커스텀 훅 테스트', () => {
-  describe('초기값 설정 검사', () => {
+  describe('context: 초기값 설정 검사', () => {
     it('초기값이 정확히 설정되어야 한다.', () => {
       const { result } = renderHook(() => useCardNumbers(initialValue));
       expect(result.current.value).toEqual(initialValue);
     });
   });
 
-  describe('업데이트 검사', () => {
+  describe('context: 업데이트 검사', () => {
     it('입력값이 정확히 업데이트 되어야 한다.', () => {
       const userInput = '1453';
       const expected = { first: '1234', second: '1453', third: '2344', fourth: '5623' };
@@ -31,7 +31,7 @@ describe('useCardNumbers 커스텀 훅 테스트', () => {
     });
   });
 
-  describe('입력 유효성: field type', () => {
+  describe('context: 입력 유효성: field type', () => {
     it('userInput에 숫자가 아닌 입력이 들어올 경우 field type 에러이다.', () => {
       const userInput = 'cookie';
       const { result } = renderHook(() => useCardNumbers(initialValue));
@@ -49,7 +49,7 @@ describe('useCardNumbers 커스텀 훅 테스트', () => {
     });
   });
 
-  describe('입력 유효성: field rules', () => {
+  describe('context: 입력 유효성: field rules', () => {
     it('userInput에 4자리가 아닌 아닌 입력이 들어올 경우 field rule 에러이다.', () => {
       const userInput = '123';
       const { result } = renderHook(() => useCardNumbers(initialValue));
@@ -67,7 +67,7 @@ describe('useCardNumbers 커스텀 훅 테스트', () => {
     });
   });
 
-  describe('초기값 유효성 검사', () => {
+  describe('context: 초기값 유효성 검사', () => {
     it('초기값에 숫자가 아닌 입력이 들어올 경우 필드들이 초기화된다.', () => {
       const initialValue = { first: '마루', second: '쿠키', third: '치코', fourth: '해리' };
       const expected = { first: '', second: '', third: '', fourth: '' };
@@ -77,7 +77,7 @@ describe('useCardNumbers 커스텀 훅 테스트', () => {
     });
   });
 
-  describe('커스텀 validate 함수', () => {
+  describe('context: 커스텀 validate 함수', () => {
     it('영어만 허용하는 함수가 주어지고 초기값으로 문자들을 주면 초기화되지 않는다.', () => {
       const customValidateInputType = (value: string) => {
         const isEnglish = /^$|^[a-zA-Z ]+$/.test(value);
@@ -103,7 +103,7 @@ describe('useCardNumbers 커스텀 훅 테스트', () => {
     });
   });
 
-  describe('카드 브랜드 테스트', () => {
+  describe('context: 카드 브랜드 테스트', () => {
     it('카드번호가 36으로 시작하면 Diners카드로 인식한다.', () => {
       const initialValue = { first: '', second: '', third: '', fourth: '' };
       const userInput = '36';
