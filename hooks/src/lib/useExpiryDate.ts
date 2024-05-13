@@ -20,23 +20,14 @@ const useExpiryDate = () => {
     let month = numericValue.substring(0, 2);
     let year = numericValue.substring(2);
 
-    if (
-      month.length === 1 &&
-      parseInt(month, 10) >= 2 &&
-      parseInt(month, 10) <= 9
-    ) {
+    if (/^[2-9]$/.test(month)) {
       month = `0${month}`;
-    } else if (
-      (month.length === 2 && parseInt(month, 10) < 1) ||
-      parseInt(month, 10) > 12
-    ) {
+    } else if (/^(?:0[1-9]|1[0-2])$/.test(month)) {
       month = "01";
       year = numericValue.substring(1, 2);
     }
     const formattedValue = `${month}${
-      month.length === 0 ||
-      month.length === 1 ||
-      (expiryDate.length === 6 && !year)
+      /^$||^.$/.test(month) || (expiryDate.length === 6 && !year)
         ? ""
         : ` / ${year}`
     }`;
