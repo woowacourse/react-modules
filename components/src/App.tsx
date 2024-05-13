@@ -45,7 +45,7 @@ function App() {
         <Modal.Trigger> confirm 열기</Modal.Trigger>
         <Modal.Confirm
           title="카드를 삭제하시겠습니까?"
-          modalPosition="center"
+          modalPosition="bottom"
           closeButtonPosition="top"
           size="medium"
         >

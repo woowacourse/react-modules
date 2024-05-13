@@ -1,23 +1,21 @@
-import {
-  useCVC,
-  useCardHolder,
-  useCardIssuer,
-  useCardNumber,
-  useExpiryDate,
-  usePassword,
-} from "choriver-payments-validation-hooks";
 import React from "react";
 import "./App.css";
 
-function App() {
-  const [cardHolder, handleCardHolderChange, cardHolderValidation] = useCardHolder();
-  const [cardPassword, handleCardPasswordChange, cardPasswordValidation] = usePassword();
-  const [cardCVC, handleCardCVCChange, cardCVCValidation] = useCVC();
-  const [cardExpiryDate, handleCardExpiryDateChange, cardExpiryDateValidation] = useExpiryDate();
-  const [cardNumbers, handleCardNumbersChange, cardNumbersValidation] = useCardNumber();
-  const [cardIssuer, handleCardIssuerChange, cardIssuerValidation] = useCardIssuer();
+import { useCVC } from "../src/lib/hooks/useCVC";
+import { useCardHolder } from "../src/lib/hooks/useCardHolder";
+import { useCardIssuer } from "../src/lib/hooks/useCardIssuer";
+import { useCardNumber } from "../src/lib/hooks/useCardNumber";
+import { useExpiryDate } from "../src/lib/hooks/useExpiryDate";
+import { usePassword } from "../src/lib/hooks/usePassword";
 
-  const cardNumberKeys = Object.keys(cardNumbers) as Array<keyof typeof cardNumbers>;
+function App() {
+  const { cardHolder, handleCardHolderChange, validateCardHolder } = useCardHolder();
+  const { password, handlePasswordChange, validatePassword } = usePassword();
+  const { CVC, handleCVCChange, validateCVC } = useCVC();
+  const { expiryDate, handleExpiryDateChange, validateExpiryDate } = useExpiryDate();
+  const { cardNumbers, handleCardNumberChange, cardNumbersValidation, cardIdentifier } =
+    useCardNumber();
+  const { cardIssuer, handleCardIssuerChange, validateCardIssuer } = useCardIssuer();
 
   const cardTypes = [
     { name: "현대카드" },
@@ -38,8 +36,8 @@ function App() {
           value={cardHolder}
           onChange={(e) => handleCardHolderChange(e.target.value)}
         />
-        {!cardHolderValidation.isValid && (
-          <span style={{ color: "red" }}>{cardHolderValidation.errorMessage}</span>
+        {!validateCardHolder(cardHolder).isValid && (
+          <span style={{ color: "red" }}>{validateCardHolder(cardHolder).errorMessage}</span>
         )}
       </div>
 
@@ -49,11 +47,11 @@ function App() {
         <input
           type="text"
           id="cardPassword"
-          value={cardPassword}
-          onChange={(e) => handleCardPasswordChange(e.target.value)}
+          value={password}
+          onChange={(e) => handlePasswordChange(e.target.value)}
         />
-        {!cardPasswordValidation.isValid && (
-          <span style={{ color: "red" }}>{cardPasswordValidation.errorMessage}</span>
+        {!validatePassword(password).isValid && (
+          <span style={{ color: "red" }}>{validatePassword(password).errorMessage}</span>
         )}
       </div>
 
@@ -63,11 +61,11 @@ function App() {
         <input
           type="text"
           id="cardCVC"
-          value={cardCVC}
-          onChange={(e) => handleCardCVCChange(e.target.value)}
+          value={CVC}
+          onChange={(e) => handleCVCChange(e.target.value)}
         />
-        {!cardCVCValidation.isValid && (
-          <span style={{ color: "red" }}>{cardCVCValidation.errorMessage}</span>
+        {!validateCVC(CVC).isValid && (
+          <span style={{ color: "red" }}>{validateCVC(CVC).errorMessage}</span>
         )}
       </div>
 
@@ -77,34 +75,33 @@ function App() {
         <input
           type="text"
           id="cardExpiryDate"
-          value={cardExpiryDate.month}
-          onChange={(e) => handleCardExpiryDateChange("month", e.target.value)}
+          value={expiryDate.month}
+          onChange={(e) => handleExpiryDateChange("month", e.target.value)}
         />
         <input
           type="text"
           id="cardExpiryDate"
-          value={cardExpiryDate.year}
-          onChange={(e) => handleCardExpiryDateChange("year", e.target.value)}
+          value={expiryDate.year}
+          onChange={(e) => handleExpiryDateChange("year", e.target.value)}
         />
-        {!cardExpiryDateValidation.isValid && (
-          <span style={{ color: "red" }}>{cardExpiryDateValidation.errorMessage}</span>
+        {!validateExpiryDate(expiryDate).isValid && (
+          <span style={{ color: "red" }}>{validateExpiryDate(expiryDate).errorMessage}</span>
         )}
       </div>
 
       {/* 카드 번호 입력 */}
       <div>
         <label htmlFor="cardNumber">Card Number:</label>
-        {cardNumberKeys.map((key, index) => (
-          <input
-            key={index}
-            type="text"
-            id={`cardNumber-${index}`}
-            value={cardNumbers[key]}
-            onChange={(e) => handleCardNumbersChange(key, e.target.value)}
-          />
-        ))}
-        {!cardNumbersValidation.isValid && (
-          <span style={{ color: "red" }}>{cardNumbersValidation.errorMessage}</span>
+
+        <input
+          type="text"
+          id={`cardNumber`}
+          value={cardNumbers}
+          onChange={(e) => handleCardNumberChange(e.target.value)}
+        />
+
+        {!cardNumbersValidation(cardNumbers).isValid && (
+          <span style={{ color: "red" }}>{cardNumbersValidation(cardNumbers).errorMessage}</span>
         )}
       </div>
 
@@ -129,8 +126,8 @@ function App() {
             </div>
           ))}
         </div>
-        {!cardIssuerValidation.isValid && (
-          <span style={{ color: "red" }}>{cardIssuerValidation.errorMessage}</span>
+        {!validateCardIssuer(cardIssuer).isValid && (
+          <span style={{ color: "red" }}>{validateCardIssuer(cardIssuer).errorMessage}</span>
         )}
       </div>
     </>
