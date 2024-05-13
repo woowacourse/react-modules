@@ -3,16 +3,19 @@ import { InputHTMLAttributes, useState } from "react";
 import Modal from "../Modal";
 import { useModalAction } from "..";
 import Input from "../../Input/Input";
+import { ModalWidth } from "../constant";
 
 export interface Props {
   title?: string;
   width?: number;
   theme?: ThemeType;
+  confirmMessage?: string;
+  cancelMessage?: string;
   onSubmit?: (value?: string) => void;
   inputAttrs?: InputHTMLAttributes<HTMLInputElement>;
 }
 
-const PromptModal = ({ title, width, onSubmit, theme, inputAttrs }: Props) => {
+const PromptModal = ({ title, width, onSubmit, theme, confirmMessage, cancelMessage, inputAttrs }: Props) => {
   const action = useModalAction();
 
   const [value, setValue] = useState<string>();
@@ -26,8 +29,8 @@ const PromptModal = ({ title, width, onSubmit, theme, inputAttrs }: Props) => {
       hasConfirmButton
       theme={theme}
       buttonAlign="row"
-      confirmMessage="확인"
-      cancelMessage="취소"
+      confirmMessage={confirmMessage || "확인"}
+      cancelMessage={cancelMessage || "취소"}
       onConfirm={() => {
         if (onSubmit) onSubmit(value);
         action.handleClose();
@@ -38,12 +41,6 @@ const PromptModal = ({ title, width, onSubmit, theme, inputAttrs }: Props) => {
     </Modal>
   );
 };
-
-enum ModalWidth {
-  Small = 320,
-  Medium = 480,
-  Large = 600,
-}
 
 const SmallPromptModal = ({ ...props }: Props) => {
   return <PromptModal {...props} width={ModalWidth.Small} />;

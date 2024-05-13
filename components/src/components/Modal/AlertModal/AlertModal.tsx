@@ -1,15 +1,17 @@
 import { PropsWithChildren } from "react";
 import Modal from "../Modal";
 import { useModalAction } from "..";
+import { ModalWidth } from "../constant";
 
 export interface Props {
   title: string;
   width?: number;
   theme?: ThemeType;
+  confirmMessage?: string;
   onConfirm?: () => void;
 }
 
-const AlertModal = ({ title, width, children, theme, onConfirm }: PropsWithChildren<Props>) => {
+const AlertModal = ({ title, width, children, theme, confirmMessage, onConfirm }: PropsWithChildren<Props>) => {
   const action = useModalAction();
 
   return (
@@ -19,7 +21,7 @@ const AlertModal = ({ title, width, children, theme, onConfirm }: PropsWithChild
       theme={theme}
       hasConfirmButton
       buttonAlign="row"
-      confirmMessage="확인"
+      confirmMessage={confirmMessage || "확인"}
       onConfirm={() => {
         if (onConfirm) onConfirm();
         action.handleClose();
@@ -29,12 +31,6 @@ const AlertModal = ({ title, width, children, theme, onConfirm }: PropsWithChild
     </Modal>
   );
 };
-
-enum ModalWidth {
-  Small = 320,
-  Medium = 480,
-  Large = 600,
-}
 
 const SmallAlertModal = ({ ...props }: PropsWithChildren<Props>) => {
   return <AlertModal {...props} width={ModalWidth.Small}></AlertModal>;

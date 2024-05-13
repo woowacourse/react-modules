@@ -1,15 +1,26 @@
 import { PropsWithChildren } from "react";
 import Modal from "../Modal";
 import { useModalAction } from "..";
+import { ModalWidth } from "../constant";
 
 export interface Props {
   title: string;
   width?: number;
   theme?: ThemeType;
+  confirmMessage?: string;
+  cancelMessage?: string;
   onConfirm?: () => void;
 }
 
-const ConfirmModal = ({ title, width, children, theme, onConfirm }: PropsWithChildren<Props>) => {
+const ConfirmModal = ({
+  title,
+  width,
+  children,
+  confirmMessage,
+  cancelMessage,
+  theme,
+  onConfirm,
+}: PropsWithChildren<Props>) => {
   const action = useModalAction();
 
   return (
@@ -19,8 +30,8 @@ const ConfirmModal = ({ title, width, children, theme, onConfirm }: PropsWithChi
       theme={theme}
       hasConfirmButton
       buttonAlign="row"
-      confirmMessage="확인"
-      cancelMessage="취소"
+      confirmMessage={confirmMessage || "확인"}
+      cancelMessage={cancelMessage || "취소"}
       onConfirm={() => {
         if (onConfirm) onConfirm();
         action.handleClose();
@@ -31,12 +42,6 @@ const ConfirmModal = ({ title, width, children, theme, onConfirm }: PropsWithChi
     </Modal>
   );
 };
-
-enum ModalWidth {
-  Small = 320,
-  Medium = 480,
-  Large = 600,
-}
 
 const SmallConfirmModal = ({ ...props }: PropsWithChildren<Props>) => {
   return <ConfirmModal {...props} width={ModalWidth.Small}></ConfirmModal>;
