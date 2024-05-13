@@ -8,7 +8,7 @@ const AlertModal = ({ isOpen, toggleIsOpen }) => {
 
   return (
     <>
-      <Modal isOpen={isOpen} position="center" size="small" isAnimation duration={300}>
+      <Modal isOpen={isOpen} position="center" size="small" isAnimation animationDuration={300}>
         <Modal.Dimmed onDimmedClick={handleClose} />
         <Modal.Header>
           <Modal.Title title="아이디를 입력해 주세요." />

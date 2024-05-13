@@ -12,6 +12,9 @@ import ConfirmButton from './confirmButton/ConfirmButton';
 import ModalFooter from './modalFooter/ModalFooter';
 import ModalInput from './modalInput/ModalInput';
 
+type ModalPosition = 'center' | 'bottom';
+type ModalSize = 'small' | 'medium' | 'large';
+
 const MODAL_WRAPPER_TYPE: Record<ModalPosition, string> = {
   center: styles.modalWrapper,
   bottom: styles.modalBottomWrapper,
@@ -28,15 +31,12 @@ const MODAL_SIZE: Record<ModalSize, string> = {
   large: styles.large,
 };
 
-type ModalPosition = 'center' | 'bottom';
-type ModalSize = 'small' | 'medium' | 'large';
-
 interface ModalMainProps extends React.HTMLAttributes<HTMLDivElement> {
   isOpen: boolean;
   size?: ModalSize;
   position?: ModalPosition;
   isAnimation?: boolean;
-  duration?: number;
+  animationDuration?: number;
 }
 
 const ModalMain = ({
@@ -44,7 +44,7 @@ const ModalMain = ({
   size,
   position = 'center',
   isAnimation = false,
-  duration,
+  animationDuration,
   style,
   children,
   ...rest
@@ -53,7 +53,7 @@ const ModalMain = ({
     isAnimation,
     isOpen,
     position,
-    delay: duration,
+    delay: animationDuration,
   });
 
   const modalClass = isAnimation ? modalAnimationClass : MODAL_TYPE[position];
@@ -68,11 +68,14 @@ const ModalMain = ({
     <>
       {createPortal(
         <div className={`${modalWrapperClass} ${modalSizeClass}`} style={style}>
-          <div className={modalClass} style={{ animationDuration: `${duration}ms` }} {...rest}>
+          <div
+            className={modalClass}
+            style={{ animationDuration: `${animationDuration}ms` }}
+            {...rest}
+          >
             {children}
           </div>
         </div>,
-
         document.body,
       )}
     </>
