@@ -34,7 +34,7 @@ const useCardNumber = () => {
   const { handleCardTypeChange } = useCardTypeCheck();
 
   const handleCardNumberChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
+    const { value } = e.target;
     const numericValue = value.replace(/\s/g, "");
 
     const newCardType = handleCardTypeChange(numericValue);

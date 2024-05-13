@@ -16,7 +16,7 @@ const useCVC = () => {
   });
 
   const handleCVCChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
+    const { value } = e.target;
     const errors: string[] = [];
     const isNumericInput = REGEX.onlyNumber.test(value);
     const isValidLength = value.length === MAX_LENGTH;

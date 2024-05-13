@@ -14,7 +14,7 @@ const useExpiryDate = () => {
   });
 
   const handleExpiryDateChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
+    const { value } = e.target;
     const numericValue = value.replace(/\D/g, "");
 
     let month = numericValue.substring(0, 2);

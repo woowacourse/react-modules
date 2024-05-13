@@ -16,7 +16,7 @@ const useCardHolder = () => {
   });
 
   const handleCardHolderChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
+    const { value } = e.target;
     const errors: string[] = [];
     const isValidNameFormat = REGEX.onlyUpperAlphabetAndOneBlank.test(value);
     const isValidLength = value.length <= MAX_LENGTH;
