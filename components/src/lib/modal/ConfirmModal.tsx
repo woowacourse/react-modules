@@ -14,6 +14,7 @@ export interface ConfirmModalProps extends ModalProps {
 
 const ConfirmModal: React.FC<ConfirmModalProps> = ({
   isOpen,
+  onConfirm,
   onClose,
   title,
   children,
@@ -27,14 +28,20 @@ const ConfirmModal: React.FC<ConfirmModalProps> = ({
   secondaryButtonFontColor = '#333333',
 }) => {
   return (
-    <Modal isOpen={isOpen} position={position} size={size} onClose={onClose}>
+    <Modal
+      isOpen={isOpen}
+      position={position}
+      size={size}
+      onClose={onClose}
+      onConfirm={onConfirm}
+    >
       <Modal.Header>
         <Modal.Title>{title}</Modal.Title>
       </Modal.Header>
       <Modal.Content>{children}</Modal.Content>
       <Modal.Footer buttonPosition='right' buttonGap='10px'>
         <Modal.TextButton
-          actionFn={onClose}
+          onClick={onClose}
           buttonWidth='80px'
           buttonHeight='36px'
           backgroundColor={secondaryButtonBackgroundColor}
@@ -43,7 +50,7 @@ const ConfirmModal: React.FC<ConfirmModalProps> = ({
           {secondaryButtonText}
         </Modal.TextButton>
         <Modal.TextButton
-          actionFn={onClose}
+          onSubmit={onConfirm}
           buttonWidth='80px'
           buttonHeight='36px'
           backgroundColor={primaryButtonBackgroundColor}

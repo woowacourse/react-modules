@@ -13,6 +13,7 @@ export interface ModalProps
   position: 'top' | 'bottom' | 'center';
   size?: 'small' | 'medium' | 'large';
   onClose: () => void;
+  onConfirm?: () => void;
 }
 
 const Modal: React.FC<ModalProps> & {
@@ -65,7 +66,7 @@ const ModalTitle: ModalTitleType = ({ children, ...restProps }) => {
 type ModalIconButtonType = React.FC<
   React.PropsWithChildren<
     {
-      actionFn: () => void;
+      onClose: () => void;
       src: string;
       imgSize?: string;
     } & ButtonHTMLAttributes<HTMLButtonElement>
@@ -73,14 +74,14 @@ type ModalIconButtonType = React.FC<
 >;
 
 const ModalIconButton: ModalIconButtonType = ({
-  actionFn,
+  onClose,
   type = 'button',
   src = CloseImage,
   imgSize,
   ...restProps
 }) => {
   return (
-    <Styled.ModalIconButton type={type} onClick={actionFn} {...restProps}>
+    <Styled.ModalIconButton type={type} onClick={onClose} {...restProps}>
       <img src={src} style={{ width: imgSize }} />
     </Styled.ModalIconButton>
   );
@@ -89,7 +90,6 @@ const ModalIconButton: ModalIconButtonType = ({
 type ModalTextButtonType = React.FC<
   React.PropsWithChildren<
     {
-      actionFn: () => void;
       buttonWidth?: string;
       buttonHeight?: string;
       fontSize?: string;
@@ -100,7 +100,6 @@ type ModalTextButtonType = React.FC<
 >;
 
 const ModalTextButton: ModalTextButtonType = ({
-  actionFn,
   type = 'button',
   buttonWidth,
   buttonHeight,
@@ -112,7 +111,6 @@ const ModalTextButton: ModalTextButtonType = ({
   return (
     <Styled.ModalTextButton
       type={type}
-      onClick={actionFn}
       buttonWidth={buttonWidth}
       buttonHeight={buttonHeight}
       fontSize={fontSize}

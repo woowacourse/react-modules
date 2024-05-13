@@ -12,6 +12,7 @@ export interface PromptModalProps extends ModalProps {
 
 const PromptModal: React.FC<PromptModalProps> = ({
   isOpen,
+  onConfirm,
   onClose,
   title,
   position = 'center',
@@ -33,7 +34,7 @@ const PromptModal: React.FC<PromptModalProps> = ({
       </Modal.Content>
       <Modal.Footer buttonPosition='right' buttonGap='10px'>
         <Modal.TextButton
-          actionFn={onClose}
+          onClick={onClose}
           buttonWidth='80px'
           buttonHeight='36px'
           backgroundColor={secondaryButtonBackgroundColor}
@@ -43,7 +44,7 @@ const PromptModal: React.FC<PromptModalProps> = ({
         </Modal.TextButton>
         <Modal.TextButton
           type='submit'
-          actionFn={onClose}
+          onSubmit={onConfirm}
           buttonWidth='80px'
           buttonHeight='36px'
           backgroundColor={primaryButtonBackgroundColor}

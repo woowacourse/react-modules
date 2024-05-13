@@ -12,6 +12,7 @@ export interface AlertModalProps extends ModalProps {
 const AlertModal: React.FC<AlertModalProps> = ({
   isOpen,
   onClose,
+  onConfirm,
   title,
   message,
   position = 'center',
@@ -21,7 +22,13 @@ const AlertModal: React.FC<AlertModalProps> = ({
   buttonFontColor = '#ffffff',
 }) => {
   return (
-    <Modal isOpen={isOpen} position={position} size={size} onClose={onClose}>
+    <Modal
+      isOpen={isOpen}
+      position={position}
+      size={size}
+      onConfirm={onConfirm}
+      onClose={onClose}
+    >
       <Modal.Header>
         <Modal.Title>{title}</Modal.Title>
       </Modal.Header>
@@ -30,7 +37,7 @@ const AlertModal: React.FC<AlertModalProps> = ({
       </Modal.Content>
       <Modal.Footer buttonPosition='right'>
         <Modal.TextButton
-          actionFn={onClose}
+          onSubmit={onConfirm}
           buttonWidth='80px'
           buttonHeight='36px'
           backgroundColor={buttonBackgroundColor}
