@@ -9,7 +9,7 @@ function App() {
       <h1>Component Modules</h1>
       <button onClick={handleOpen}></button>
       {/* <Modal.Small
-        buttonAlign="row"
+        buttonDirection="row"
         position="center"
         title="카드사 선택"
         confirmMessage="확인 메세지"

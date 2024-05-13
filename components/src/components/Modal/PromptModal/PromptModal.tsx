@@ -28,7 +28,7 @@ const PromptModal = ({ title, width, onSubmit, theme, confirmMessage, cancelMess
       width={width}
       hasConfirmButton
       theme={theme}
-      buttonAlign="row"
+      buttonDirection="row"
       confirmMessage={confirmMessage || "확인"}
       cancelMessage={cancelMessage || "취소"}
       onConfirm={() => {

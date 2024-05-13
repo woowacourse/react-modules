@@ -29,7 +29,7 @@ const ConfirmModal = ({
       width={width}
       theme={theme}
       hasConfirmButton
-      buttonAlign="row"
+      buttonDirection="row"
       confirmMessage={confirmMessage || "확인"}
       cancelMessage={cancelMessage || "취소"}
       onConfirm={() => {

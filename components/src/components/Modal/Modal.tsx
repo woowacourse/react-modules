@@ -16,7 +16,7 @@ export interface ModalProps {
   width?: number;
   position?: "center" | "bottom";
   theme?: "light" | "dark";
-  buttonAlign?: "column" | "row";
+  buttonDirection?: "column" | "row";
   closeButtonPosition?: "bottom" | "top";
   hasConfirmButton?: boolean;
   onConfirm?: () => void;
@@ -32,7 +32,7 @@ enum ButtonPosition {
   Bottom = "bottom",
 }
 
-enum ButtonAlign {
+enum ButtonDirection {
   Column = "column",
   Row = "row",
 }
@@ -41,7 +41,7 @@ const Dialog = ({
   title,
   width = 242,
   position = "center",
-  buttonAlign = "column",
+  buttonDirection = "column",
   closeButtonPosition = "top",
   hasConfirmButton = true,
   onConfirm,
@@ -64,11 +64,13 @@ const Dialog = ({
       <div css={modalContentStyle}>
         <ModalHeader hasCloseButton={closeButtonPosition === ButtonPosition.Top}>{title}</ModalHeader>
         <div css={contentStyle}>{children}</div>
-        <div css={buttonsStyle(buttonAlign)}>
+        <div css={buttonsStyle(buttonDirection)}>
           {hasConfirmButton && (
             <MainButton
               type="submit"
-              buttonType={buttonAlign === ButtonAlign.Row ? MainButtonStyleType.Short : MainButtonStyleType.Long}
+              buttonType={
+                buttonDirection === ButtonDirection.Row ? MainButtonStyleType.Short : MainButtonStyleType.Long
+              }
               isHighLight={true}
               handleClick={() => {
                 if (onConfirm) onConfirm();
@@ -80,7 +82,9 @@ const Dialog = ({
           {closeButtonPosition === ButtonPosition.Bottom && (
             <MainButton
               type="button"
-              buttonType={buttonAlign === ButtonAlign.Row ? MainButtonStyleType.Short : MainButtonStyleType.Long}
+              buttonType={
+                buttonDirection === ButtonDirection.Row ? MainButtonStyleType.Short : MainButtonStyleType.Long
+              }
               isHighLight={false}
               handleClick={() => {
                 action.handleClose();

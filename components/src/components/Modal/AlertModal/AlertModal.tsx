@@ -20,7 +20,7 @@ const AlertModal = ({ title, width, children, theme, confirmMessage, onConfirm }
       width={width}
       theme={theme}
       hasConfirmButton
-      buttonAlign="row"
+      buttonDirection="row"
       confirmMessage={confirmMessage || "확인"}
       onConfirm={() => {
         if (onConfirm) onConfirm();

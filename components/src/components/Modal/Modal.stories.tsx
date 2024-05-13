@@ -104,17 +104,17 @@ export const Theme: Story = {
   },
 };
 
-export const ButtonAlignRow: Story = {
+export const ButtonDirectionRow: Story = {
   name: "버튼 정렬 row",
   args: {
-    buttonAlign: "row",
+    buttonDirection: "row",
   },
 };
 
-export const ButtonAlignRowAndConfirm: Story = {
+export const ButtonDirectionRowAndConfirm: Story = {
   name: "버튼 정렬 row, 확인 버튼을 가짐",
   args: {
-    buttonAlign: "row",
+    buttonDirection: "row",
     hasConfirmButton: true,
   },
 };
@@ -122,7 +122,7 @@ export const ButtonAlignRowAndConfirm: Story = {
 export const HasAllButton: Story = {
   name: "버튼 정렬 row, 확인, 취소 버튼을 가짐",
   args: {
-    buttonAlign: "row",
+    buttonDirection: "row",
     hasConfirmButton: true,
     closeButtonPosition: "bottom",
   },
@@ -131,7 +131,7 @@ export const HasAllButton: Story = {
 export const HasAllButtonAndSmallWidth: Story = {
   name: "버튼 정렬 row, 확인 버튼을 가짐. 작은 사이즈",
   args: {
-    buttonAlign: "row",
+    buttonDirection: "row",
     hasConfirmButton: true,
     closeButtonPosition: "bottom",
     width: ModalWidth.Small,
@@ -141,7 +141,7 @@ export const HasAllButtonAndSmallWidth: Story = {
 export const HasAllButtonAndMediumWidth: Story = {
   name: "버튼 정렬 row, 확인 버튼을 가짐. 중간 사이즈",
   args: {
-    buttonAlign: "row",
+    buttonDirection: "row",
     hasConfirmButton: true,
     closeButtonPosition: "bottom",
     width: ModalWidth.Medium,
@@ -151,7 +151,7 @@ export const HasAllButtonAndMediumWidth: Story = {
 export const HasAllButtonAndLargeWidth: Story = {
   name: "버튼 정렬 row, 확인 버튼을 가짐. 큰 사이즈",
   args: {
-    buttonAlign: "row",
+    buttonDirection: "row",
     hasConfirmButton: true,
     closeButtonPosition: "bottom",
     width: ModalWidth.Large,
