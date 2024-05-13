@@ -18,7 +18,7 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
   args: {
     value: '',
-    label: 'input label',
+    description: 'input label',
     onChange: action('onChange'),
   },
 };
