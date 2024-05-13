@@ -1,5 +1,5 @@
 import { renderHook, act } from '@testing-library/react';
-import useInputCardIssuer from '../../lib/hooks/InputField/useInputCardIssuer';
+import useInputCardIssuer from '../../lib/hooks/useInputCardIssuer';
 
 describe('useInputCardIssuer', () => {
   test('기본값 테스트', () => {

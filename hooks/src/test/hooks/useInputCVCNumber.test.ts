@@ -1,5 +1,5 @@
 import { renderHook, act, waitFor } from '@testing-library/react';
-import useInputCVCNumber from '../../lib/hooks/InputField/useInputCVCNumber';
+import useInputCVCNumber from '../../lib/hooks/useInputCVCNumber';
 import { ERROR_MESSAGE } from '../../lib/shared/errorMessages';
 
 describe('useInputCVCNumber', () => {

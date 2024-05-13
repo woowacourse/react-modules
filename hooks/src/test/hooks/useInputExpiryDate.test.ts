@@ -1,5 +1,5 @@
 import { renderHook, act } from '@testing-library/react';
-import useInputExpiryDate from '../../lib/hooks/InputField/useInputExpiryDate';
+import useInputExpiryDate from '../../lib/hooks/useInputExpiryDate';
 import { ERROR_MESSAGE } from '../../lib/shared/errorMessages';
 
 describe('useInputExpiryDate', () => {

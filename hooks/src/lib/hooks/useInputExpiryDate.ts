@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { getInputStatus, useInput } from './useInput';
 import { ERROR_MESSAGE } from '../shared/errorMessages';
-import { VALID_LENGTH } from '../shared/constants';
+import { VALID_INPUT_LENGTH } from '../shared/constants';
 import validator from '../shared/utils/validator/validator';
 import { ExpiryDateType, Status } from '../shared/types';
 
@@ -23,9 +23,9 @@ const useInputExpiryDate = (): UseInputExpiryDateReturn => {
   const handleChange = (value: string, type: ExpiryDateType) => {
     // 연/월 status 업데이트
     const status = {
-      year: getInputStatus(states.year.value, VALID_LENGTH.expiryDate.year),
-      month: getInputStatus(states.month.value, VALID_LENGTH.expiryDate.month),
-      [type]: getInputStatus(value, VALID_LENGTH.expiryDate[type]),
+      year: getInputStatus(states.year.value, VALID_INPUT_LENGTH.expiryDate.year),
+      month: getInputStatus(states.month.value, VALID_INPUT_LENGTH.expiryDate.month),
+      [type]: getInputStatus(value, VALID_INPUT_LENGTH.expiryDate[type]),
     };
     console.log(status.month, status.year);
 

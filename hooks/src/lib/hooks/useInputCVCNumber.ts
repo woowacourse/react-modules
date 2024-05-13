@@ -3,7 +3,7 @@ import { getInputStatus, useInput } from './useInput';
 import { ERROR_MESSAGE } from '../shared/errorMessages';
 import validator from '../shared/utils/validator/validator';
 import { Status } from '../shared/types';
-import { VALID_LENGTH } from '../shared/constants';
+import { VALID_INPUT_LENGTH } from '../shared/constants';
 
 type UseInputCVCNumberReturn = [
   value: string,
@@ -19,7 +19,7 @@ const useInputCVCNumber = (): UseInputCVCNumberReturn => {
 
   const handleChange = (value: string) => {
     //  status 업데이트
-    setStatus(getInputStatus(value, VALID_LENGTH.cvcNumber));
+    setStatus(getInputStatus(value, VALID_INPUT_LENGTH.cvcNumber));
 
     // Default인 경우 : Error 검사
     if (status !== 'default') {

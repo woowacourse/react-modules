@@ -1,6 +1,7 @@
 import { renderHook, act } from '@testing-library/react';
-import useInputCardNumber from '../../lib/hooks/InputField/useInputCardNumber';
+import useInputCardNumber from '../../lib/hooks/useInputCardNumber';
 import { ERROR_MESSAGE } from '../../lib/shared/errorMessages';
+import { CARD_BRAND } from '../../lib/index';
 
 describe('useInputCardNumber', () => {
   test('기본값 테스트', () => {
@@ -8,81 +9,92 @@ describe('useInputCardNumber', () => {
 
     expect(result.current[0]).toBe('');
     expect(result.current[1]).toBe('default');
-    expect(result.current[2]).toBe('');
+    expect(result.current[2]).toBe(null);
+    expect(result.current[3]).toBe('');
   });
 
   describe('Change 이벤트 테스트', () => {
-    test('빈 문자열을 입력하면 Default 상태가 되고, value가 업데이트 되어야 한다.', () => {
+    test('빈 문자열 입력 : [value 업데이트] [status default] [brand null] [errorMsg empty]', () => {
       const { result } = renderHook(() => useInputCardNumber());
 
-      act(() => result.current[3]('', 16));
+      act(() => result.current[4]('', 16));
 
       expect(result.current[0]).toBe('');
       expect(result.current[1]).toBe('default');
-      expect(result.current[2]).toBe('');
+      expect(result.current[2]).toBe(null);
+      expect(result.current[3]).toBe('');
     });
 
-    test('유효한 값(숫자)을 입력 중이라면 Pending 상태가 되고, value가 업데이트 되어야 한다.', () => {
+    test('유효한 값(숫자)을 입력 : [value 업데이트] [status pending] [brand 업데이트] [errorMsg empty]', () => {
       const { result } = renderHook(() => useInputCardNumber());
 
-      act(() => result.current[3]('1234', 16));
+      act(() => result.current[4]('4000', 16));
 
-      expect(result.current[0]).toBe('1234');
+      expect(result.current[0]).toBe('4000');
       expect(result.current[1]).toBe('pending');
-      expect(result.current[2]).toBe('');
+      expect(result.current[2]).toBe(CARD_BRAND.visa);
+      expect(result.current[3]).toBe('');
     });
 
-    test('유효한 값(숫자)으로 입력을 완성하면 Complete 상태가 되고, value가 업데이트 되어야 한다.', () => {
+    test('유효한 값(숫자)으로 입력 완성 :  [value 업데이트] [status complete] [brand 업데이트] [errorMsg empty]', () => {
       const { result } = renderHook(() => useInputCardNumber());
 
-      act(() => result.current[3]('1111222233334444', 16));
+      act(() => result.current[4]('4000111122223333', 16));
 
-      expect(result.current[0]).toBe('1111222233334444');
+      expect(result.current[0]).toBe('4000111122223333');
       expect(result.current[1]).toBe('complete');
-      expect(result.current[2]).toBe('');
+      expect(result.current[2]).toBe(CARD_BRAND.visa);
+      expect(result.current[3]).toBe('');
     });
 
-    test('유효하지 않은 값(문자 포함)을 입력하면 Error 상태 및 에러메시지가 설정 되고, value가 업데이트 되지 않아야 한다.', () => {
+    test('유효하지 않은 값(문자 포함)을 입력 : [value 불변] [status error] [brand 업데이트] [errorMsg 업데이트]', () => {
       const { result } = renderHook(() => useInputCardNumber());
 
-      act(() => result.current[3]('1234', 16));
-      act(() => result.current[3]('1234a', 16));
+      act(() => result.current[4]('4000', 16));
+      act(() => result.current[4]('4000a', 16));
 
-      expect(result.current[0]).toBe('1234');
+      expect(result.current[0]).toBe('4000');
       expect(result.current[1]).toBe('error');
-      expect(result.current[2]).toBe(ERROR_MESSAGE.cardNumber.isNotNumeric);
+      expect(result.current[2]).toBe(CARD_BRAND.visa);
+      expect(result.current[3]).toBe(ERROR_MESSAGE.cardNumber.isNotNumeric);
     });
   });
 
   describe('Blur 이벤트 테스트', () => {
-    test('Default 상태일 때 Blur 된다면 Error 상태 및 에러메시지가 설정 되어야 한다.', () => {
+    test('Default 상태일 때 Blur : [value 불변] [status error] [brand null] [errorMsg 업데이트]', () => {
       const { result } = renderHook(() => useInputCardNumber());
 
-      act(() => result.current[3]('', 16));
-      act(() => result.current[4]());
+      act(() => result.current[4]('', 16));
+      act(() => result.current[5]());
 
+      expect(result.current[0]).toBe('');
       expect(result.current[1]).toBe('error');
-      expect(result.current[2]).toBe(ERROR_MESSAGE.cardNumber.isNotFulfilled);
+      expect(result.current[2]).toBe(null);
+      expect(result.current[3]).toBe(ERROR_MESSAGE.cardNumber.isNotFulfilled);
     });
 
-    test('Pending 상태일 때 Blur 된다면 Error 상태 및 에러메시지가 설정 되어야 한다.', () => {
+    test('Pending 상태일 때 Blur : [value 불변] [status error] [brand 불변] [errorMsg 업데이트]', () => {
       const { result } = renderHook(() => useInputCardNumber());
 
-      act(() => result.current[3]('1234', 16));
-      act(() => result.current[4]());
+      act(() => result.current[4]('4000', 16));
+      act(() => result.current[5]());
 
+      expect(result.current[0]).toBe('4000');
       expect(result.current[1]).toBe('error');
-      expect(result.current[2]).toBe(ERROR_MESSAGE.cardNumber.isNotFulfilled);
+      expect(result.current[2]).toBe(CARD_BRAND.visa);
+      expect(result.current[3]).toBe(ERROR_MESSAGE.cardNumber.isNotFulfilled);
     });
 
-    test('Complete 상태일 때 Blur 된다면 에러가 발생하지 않아야 한다.', () => {
+    test('Complete 상태일 때 Blur : [value 불변] [status complete] [brand 불변] [errorMsg empty]', () => {
       const { result } = renderHook(() => useInputCardNumber());
 
-      act(() => result.current[3]('1111222233334444', 16));
-      act(() => result.current[4]());
+      act(() => result.current[4]('4000111122223333', 16));
+      act(() => result.current[5]());
 
+      expect(result.current[0]).toBe('4000111122223333');
       expect(result.current[1]).toBe('complete');
-      expect(result.current[2]).toBe('');
+      expect(result.current[2]).toBe(CARD_BRAND.visa);
+      expect(result.current[3]).toBe('');
     });
   });
 });

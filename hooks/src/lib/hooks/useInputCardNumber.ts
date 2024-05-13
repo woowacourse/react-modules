@@ -2,12 +2,14 @@ import { useState } from 'react';
 import { getInputStatus, useInput } from './useInput';
 import { ERROR_MESSAGE } from '../shared/errorMessages';
 import validator from '../shared/utils/validator/validator';
-import { Status } from '../shared/types';
-import { VALID_LENGTH } from '../shared/constants';
+import { CardBrand, Status } from '../shared/types';
+import { CARD_NUMBER_FORMAT, VALID_INPUT_LENGTH } from '../shared/constants';
+import detectCardBrand from '../shared/utils/useCardBrand';
 
 type UseInputCardNumberReturn = [
   value: string,
   status: Status,
+  brand: CardBrand | null,
   errorMessage: string,
   handleChange: (value: string, validLength?: number) => void,
   handleBlur: () => void
@@ -15,9 +17,15 @@ type UseInputCardNumberReturn = [
 
 const useInputCardNumber = (): UseInputCardNumberReturn => {
   const { value, status, setValue, setStatus } = useInput('');
+  const [cardBrand, setCardBrand] = useState<CardBrand | null>(null);
   const [errorMessage, setErrorMessage] = useState<string>('');
 
-  const handleChange = (value: string, validLength: number = VALID_LENGTH.cardNumber) => {
+  const handleChange = (value: string, validLength: number = VALID_INPUT_LENGTH.cardNumber) => {
+    // 최대길이 검사
+    if (cardBrand && value.length > CARD_NUMBER_FORMAT[cardBrand].maxLength) {
+      return;
+    }
+
     //  status 업데이트
     setStatus(getInputStatus(value, validLength));
 
@@ -36,6 +44,7 @@ const useInputCardNumber = (): UseInputCardNumberReturn => {
     // Error가 아닌 경우 : 값 업데이트
     setValue(value);
     setErrorMessage('');
+    setCardBrand(detectCardBrand({ cardNumber: value }));
   };
 
   const handleBlur = () => {
@@ -46,7 +55,7 @@ const useInputCardNumber = (): UseInputCardNumberReturn => {
     }
   };
 
-  return [value, status, errorMessage, handleChange, handleBlur];
+  return [value, status, cardBrand, errorMessage, handleChange, handleBlur];
 };
 
 export default useInputCardNumber;

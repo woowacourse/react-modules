@@ -1,5 +1,5 @@
 import { renderHook, act } from '@testing-library/react';
-import useInputOwnerName from '../../lib/hooks/InputField/useInputOwnerName';
+import useInputOwnerName from '../../lib/hooks/useInputOwnerName';
 import { ERROR_MESSAGE } from '../../lib/shared/errorMessages';
 
 describe('useInputOwnerName', () => {

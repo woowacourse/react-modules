@@ -1,5 +1,5 @@
 import { renderHook, act } from '@testing-library/react';
-import useInputPasswordPrefix from '../../lib/hooks/InputField/useInputPasswordPrefix';
+import useInputPasswordPrefix from '../../lib/hooks/useInputPasswordPrefix';
 import { ERROR_MESSAGE } from '../../lib/shared/errorMessages';
 
 describe('useInputPasswordPrefix', () => {

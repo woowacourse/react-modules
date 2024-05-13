@@ -3,7 +3,7 @@ import { getInputStatus, useInput } from './useInput';
 import { ERROR_MESSAGE } from '../shared/errorMessages';
 import validator from '../shared/utils/validator/validator';
 import { Status } from '../shared/types';
-import { VALID_LENGTH } from '../shared/constants';
+import { VALID_INPUT_LENGTH } from '../shared/constants';
 
 type UseInputOwnerNameReturn = [
   value: string,
@@ -19,7 +19,7 @@ const useInputOwnerName = (): UseInputOwnerNameReturn => {
 
   const handleChange = (value: string) => {
     //  status 업데이트
-    setStatus(getInputStatus(value, VALID_LENGTH.ownerName));
+    setStatus(getInputStatus(value, VALID_INPUT_LENGTH.ownerName));
 
     // Default가 아닌 경우 : Error 검사
     if (status !== 'default') {

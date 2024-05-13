@@ -3,7 +3,7 @@ import { getInputStatus, useInput } from './useInput';
 import { ERROR_MESSAGE } from '../shared/errorMessages';
 import validator from '../shared/utils/validator/validator';
 import { Status } from '../shared/types';
-import { VALID_LENGTH } from '../shared/constants';
+import { VALID_INPUT_LENGTH } from '../shared/constants';
 
 type UseInputPasswordPrefixReturn = [
   value: string,
@@ -19,7 +19,7 @@ const useInputPasswordPrefix = (): UseInputPasswordPrefixReturn => {
 
   const handleChange = (value: string) => {
     // status 업데이트
-    const status = getInputStatus(value, VALID_LENGTH.passwordPrefix);
+    const status = getInputStatus(value, VALID_INPUT_LENGTH.passwordPrefix);
 
     // Default인 경우 : Error 검사
     if (status !== 'default') {
