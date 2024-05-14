@@ -13,8 +13,16 @@ describe('useCardCVC 커스텀 훅 테스트', () => {
     act(() => result.current.handleCVCNumberChange(cvcNumber));
   };
 
-  describe('올바른 CVC 번호를 입력한 경우', () => {
-    it('올바른 CVC 번호를 입력하면 유효하다', () => {
+  it('초기값을 전달해주면 해당 값으로 초기값을 세팅한다.', () => {
+    const cvcNumber = '123';
+
+    const result = setup(cvcNumber);
+
+    expect(result.current.cvcNumber).toBe(cvcNumber);
+  });
+
+  describe('3자의 올바른 CVC 번호를 입력한 경우', () => {
+    it('3자의 올바른 CVC 번호를 입력하면 유효하다', () => {
       const result = setup();
 
       setCVCNumber(result, '123');
@@ -22,7 +30,7 @@ describe('useCardCVC 커스텀 훅 테스트', () => {
       expect(result.current.isValidCVCNumber).toBe(true);
     });
 
-    it('올바른 CVC 번호를 입력하면 해당 값을 저장한다.', () => {
+    it('3자의 올바른 CVC 번호를 입력하면 해당 값을 저장한다.', () => {
       const cvcNumber = '123';
       const result = setup();
 
