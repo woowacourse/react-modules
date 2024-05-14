@@ -1,5 +1,6 @@
 import { CSSProperties } from "react";
 import { ModalButtonSize, ModalButtonTheme, ModalButtonWidth, ModalPosition, ModalSize } from "../types/modal";
+import { RuleSet, css } from "styled-components";
 
 export const FLEX_DIRECTION = {
   row: "row",
@@ -39,23 +40,23 @@ export const MODAL_BORDER_RADIUS: Record<ModalPosition, CSSProperties["borderRad
   bottom: "10px 10px 0px 0px",
 };
 
-export const MODAL_BUTTON_SIZE: Record<ModalButtonSize, string> = {
-  small: `
+export const MODAL_BUTTON_SIZE: Record<ModalButtonSize, RuleSet<object>> = {
+  small: css`
     height: 24px;
     line-height: 16px;
     font-size: 12px;
   `,
-  medium: `
+  medium: css`
     height: 36px;
     line-height: 18px;
     font-size: 14px;
   `,
-  large: `
+  large: css`
     height: 44px;
     line-height: 22px;
     font-size: 18px;
   `,
-  xLarge: `
+  xLarge: css`
     height: 56px;
     line-height: 28px;
     font-size: 24px;
@@ -71,38 +72,36 @@ export const MODAL_BUTTON_WIDTH: Record<ModalButtonWidth | ModalButtonSize, CSSP
   fit: "fit-content",
 };
 
-export const MODAL_BUTTON_THEME: Record<ModalButtonTheme, string> = {
-  dark: `
-    background-color: #333333; 
+export const MODAL_BUTTON_THEME: Record<ModalButtonTheme, RuleSet<object>> = {
+  dark: css`
+    background-color: #333333;
 
     color: #ffffff;
 
     &:hover {
-      background-color: #1f1f1f; 
+      background-color: #1f1f1f;
     }
 
     &:disabled {
-      background-color: #555555; 
-      color: #aaaaaa; 
-      cursor: not-allowed;
+      background-color: #555555;
+      color: #aaaaaa;
     }
-    `,
+  `,
 
-  white: `
-    background-color: #ffffff; 
+  white: css`
+    background-color: #ffffff;
 
-    color: #8B95A1;
+    color: #8b95a1;
 
     &:hover {
       border: 0.5px solid #dfdfdf;
-      background-color: #f0f0f0; 
+      background-color: #f0f0f0;
     }
 
     &:disabled {
-      background-color: #eeeeee; 
-      color: #cccccc; 
-      border: 0.5px solid #cccccc; 
-      cursor: not-allowed;
+      background-color: #eeeeee;
+      color: #cccccc;
+      border: 0.5px solid #cccccc;
     }
-    `,
+  `,
 };
