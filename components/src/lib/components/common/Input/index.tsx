@@ -28,6 +28,7 @@ const StyledInput = styled.input`
   padding: 0.4rem;
   border: 1px solid var(--black-color);
   border-radius: 0.2rem;
+  color: var(--black-color);
 `;
 
 const StyledLabel = styled.label`

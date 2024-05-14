@@ -36,5 +36,6 @@ const ContentContainer = styled.div<ContentContainerStyleProps>`
 
 const BasicDescription = styled.div`
   width: 100%;
+  color: var(--black-color);
   font-size: var(--font-size-sm);
 `;

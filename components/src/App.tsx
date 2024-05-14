@@ -1,17 +1,13 @@
 import React from 'react';
 
-import {
-  Modal,
-  PromptModal,
-  useModal,
-} from 'woowacourse-6th-react-modal-component';
+import { PromptModal, useModal } from 'woowacourse-6th-react-modal-component';
 
 function App() {
   const { isModalOpen, openModal, closeModal } = useModal();
 
   return (
     <>
-      <Modal.Button onClick={openModal}>Prompt 모달 열기</Modal.Button>
+      <button onClick={openModal}>Prompt 모달 열기</button>
       {isModalOpen && (
         <PromptModal
           title="prompt 모달"
