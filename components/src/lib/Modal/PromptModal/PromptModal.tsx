@@ -5,7 +5,7 @@ import useKeyDown from "../../hooks/useKeyDown";
 
 import { ModalProps, ModalSize } from "../../types/modal";
 
-interface PromptModal extends ModalProps {
+export interface PromptModal extends ModalProps {
   title: string;
   inputValue: string;
   onSubmit: () => void;

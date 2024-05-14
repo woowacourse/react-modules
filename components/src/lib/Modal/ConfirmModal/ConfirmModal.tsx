@@ -5,7 +5,7 @@ import useKeyDown from "../../hooks/useKeyDown";
 
 import { ModalProps, ModalSize } from "../../types/modal";
 
-interface ConfirmModalProps extends ModalProps {
+export interface ConfirmModalProps extends ModalProps {
   title: string;
   confirmText: string;
   onConfirm: () => void;

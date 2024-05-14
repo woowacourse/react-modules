@@ -4,7 +4,7 @@ import { ModalProps, ModalSize } from "../../types/modal";
 import useKeyDown from "../../hooks/useKeyDown";
 import useBlockScroll from "../../hooks/useBlockScroll";
 
-interface AlertModalProps extends ModalProps {
+export interface AlertModalProps extends ModalProps {
   title: string;
   alertText: string;
   size?: ModalSize;
