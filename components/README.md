@@ -63,7 +63,7 @@ Modal 컴포넌트는 다음과 같은 프로퍼티를 지원합니다.
 
 ```ts
 import React, { useState } from 'react';
-import Modal from '@roqkftjs/react-payments-module';
+import { Modal } from '@roqkftjs/react-payments-module';
 import Image from '../asset/example.png'
 function App() {
   const [isOpen, setIsOpen] = useState(false);
@@ -115,7 +115,7 @@ AlertModal 컴포넌트는 다음과 같은 프로퍼티를 지원합니다.
 
 ```
   import React from 'react';
-  import AlertModal from '@roqkftjs/react-payments-module';
+  import { AlertModal } from '@roqkftjs/react-payments-module';
 
   function App() {
     const [isOpen, setIsOpen] = React.useState(false);
