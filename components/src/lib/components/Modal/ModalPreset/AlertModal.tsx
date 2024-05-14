@@ -2,7 +2,7 @@ import { Modal } from '../../..';
 import { ButtonProps } from '../../common/Button/Button';
 import { ModalFooterProps, ModalProps } from '../Modal.type';
 
-type AlertModalProps = ModalProps & {
+export type AlertModalProps = ModalProps & {
   title: string;
   description?: string;
   onConfirm: () => void;

@@ -2,7 +2,7 @@ import { Modal } from '../../..';
 import { ButtonProps } from '../../common/Button/Button';
 import { ModalFooterProps, ModalProps } from '../Modal.type';
 
-type ConformModalProps = ModalProps & {
+export type ConfirmModalProps = ModalProps & {
   title: string;
   description?: string;
   onConfirm: () => void;
@@ -21,7 +21,7 @@ export const ConfirmModal = ({
   cancelButtonProps,
   confirmButtonProps,
   ...rest
-}: ConformModalProps) => {
+}: ConfirmModalProps) => {
   return (
     <Modal {...rest}>
       <Modal.Header>

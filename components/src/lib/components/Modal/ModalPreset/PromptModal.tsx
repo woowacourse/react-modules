@@ -4,7 +4,7 @@ import { Modal } from '../../..';
 import { InputProps } from '../../common/Input/Input';
 import { ButtonProps } from '../../common/Button/Button';
 
-type PromptModalProps = ModalProps & {
+export type PromptModalProps = ModalProps & {
   title: string;
   onConfirm: () => void;
   onCancel?: () => void;
