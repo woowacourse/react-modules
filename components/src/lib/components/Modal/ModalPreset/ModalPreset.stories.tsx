@@ -45,10 +45,11 @@ const meta = {
 
 export default meta;
 
-type AlertModalStory = StoryObj<typeof AlertModalProps>;
-type ConfirmModalStory = StoryObj<typeof ConfirmModalProps>;
-type PromptModalStory = StoryObj<typeof PromptModalProps>;
+type AlertModalStory = StoryObj<AlertModalProps>;
+type ConfirmModalStory = StoryObj<ConfirmModalProps>;
+type PromptModalStory = StoryObj<PromptModalProps>;
 
+//
 export const AlertModal: AlertModalStory = {
   args: {
     confirmButtonProps: {
