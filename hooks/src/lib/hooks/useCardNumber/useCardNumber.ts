@@ -13,27 +13,41 @@ const useCardNumber = (initialCardNumber: string = '') => {
   const [isValidCardNumber, setIsValidCardNumber] = useState<boolean>(false);
   const [cardNumberErrorMessage, setCardNumberErrorMessage] = useState<string>('');
 
+  const updateErrorMessage = (joinedNumber: string, maxLength: number) => {
+    const errorMessage = getNumberErrorMessage(joinedNumber, maxLength);
+    setCardNumberErrorMessage(errorMessage);
+
+    return errorMessage;
+  };
+
+  const updateValidation = (errorMessage: string) => {
+    setIsValidCardNumber(errorMessage === '');
+  };
+
+  const updateCardType = (joinedNumber: string) => {
+    const detectedCardType = detectCardType(joinedNumber);
+    setCardType(detectedCardType);
+    return detectedCardType;
+  };
+
   const handleCardNumberChange = (number: string) => {
     const joinedNumber = number.replace(/\s+/g, '');
-    const detectedCardType = detectCardType(joinedNumber);
-    const maxLength = CARD_TYPE[detectedCardType].MAX_LENGTH;
+    const newCardType = updateCardType(joinedNumber);
+    const maxLength = CARD_TYPE[newCardType].MAX_LENGTH;
 
     if (joinedNumber.length > maxLength) return;
 
-    const errorMessage = getNumberErrorMessage(joinedNumber, maxLength);
+    const errorMessage = updateErrorMessage(joinedNumber, maxLength);
+    updateValidation(errorMessage);
 
-    if (isNotNumber(joinedNumber)) {
-      setCardNumberErrorMessage(errorMessage);
-      return;
-    }
+    if (isNotNumber(joinedNumber)) return;
 
-    const slicedNumber = joinedNumber.slice(0, CARD_TYPE[detectedCardType].MAX_LENGTH);
-    const formattedNumber = formatCardNumber(slicedNumber, CARD_TYPE[detectedCardType].PATTERN);
-
-    setCardNumberErrorMessage(errorMessage);
-    setIsValidCardNumber(errorMessage === '');
+    const formattedNumber = formatCardNumber(
+      joinedNumber,
+      CARD_TYPE[newCardType].PATTERN,
+      CARD_TYPE[newCardType].MAX_LENGTH,
+    );
     setCardNumber(formattedNumber);
-    setCardType(detectedCardType);
   };
 
   return {
