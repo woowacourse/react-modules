@@ -81,15 +81,16 @@ export const 기본: Story = {
   },
   args: {
     isOpen: true,
+    size: "M",
     position: "center",
   },
 };
 
 export const 제목이_있는_모달: Story = {
   args: {
-    isOpen: true,
-    position: "center",
+    ...기본.args,
   },
+
   parameters: {
     docs: {
       description: {
@@ -111,9 +112,7 @@ export const 제목이_있는_모달: Story = {
 
 export const 상단_닫기_버튼이_있는_모달: Story = {
   args: {
-    isOpen: true,
-    size: "M",
-    position: "center",
+    ...기본.args,
     onClose: fn(),
   },
   parameters: {
@@ -146,9 +145,7 @@ export const 상단_닫기_버튼이_있는_모달: Story = {
 
 export const 하단_닫기_버튼이_있는_모달: Story = {
   args: {
-    isOpen: true,
-    size: "M",
-    position: "center",
+    ...기본.args,
     onClose: fn(),
   },
   parameters: {
@@ -163,7 +160,7 @@ export const 하단_닫기_버튼이_있는_모달: Story = {
     <Modal
       isOpen={args.isOpen}
       onClose={args.onClose}
-      size={"M"}
+      size={args.size}
       position={args.position}
     >
       <Modal.ModalHeader>
@@ -183,9 +180,8 @@ export const 하단_닫기_버튼이_있는_모달: Story = {
 
 export const S_사이즈_모달: Story = {
   args: {
-    isOpen: true,
+    ...기본.args,
     size: "S",
-    position: "center",
     onClose: fn(),
   },
   parameters: {
@@ -200,7 +196,7 @@ export const S_사이즈_모달: Story = {
     <Modal
       isOpen={args.isOpen}
       onClose={args.onClose}
-      size={"S"}
+      size={args.size}
       position={args.position}
     >
       <Modal.ModalHeader>
@@ -220,9 +216,7 @@ export const S_사이즈_모달: Story = {
 
 export const M_사이즈_모달: Story = {
   args: {
-    isOpen: true,
-    size: "M",
-    position: "center",
+    ...기본.args,
     onClose: fn(),
   },
   parameters: {
@@ -237,7 +231,7 @@ export const M_사이즈_모달: Story = {
     <Modal
       isOpen={args.isOpen}
       onClose={args.onClose}
-      size={"M"}
+      size={args.size}
       position={args.position}
     >
       <Modal.ModalHeader>
@@ -257,9 +251,8 @@ export const M_사이즈_모달: Story = {
 
 export const L_사이즈_모달: Story = {
   args: {
-    isOpen: true,
+    ...기본.args,
     size: "L",
-    position: "center",
     onClose: fn(),
   },
   parameters: {
@@ -274,7 +267,7 @@ export const L_사이즈_모달: Story = {
     <Modal
       isOpen={args.isOpen}
       onClose={args.onClose}
-      size={"L"}
+      size={args.size}
       position={args.position}
     >
       <Modal.ModalHeader>
@@ -294,9 +287,7 @@ export const L_사이즈_모달: Story = {
 
 export const 알림_모달: Story = {
   args: {
-    isOpen: true,
-    size: "M",
-    position: "center",
+    ...기본.args,
     onClose: fn(),
   },
 
@@ -315,7 +306,7 @@ export const 알림_모달: Story = {
         onClose={args.onClose}
         title={"아이디를 입력해 주세요."}
         content={"아이디는 필수로 입력해야 합니다."}
-        size={"M"}
+        size={args.size}
         position={args.position}
       ></AlertModal>
     );
@@ -324,9 +315,7 @@ export const 알림_모달: Story = {
 
 export const 제목이_없는_알림_모달: Story = {
   args: {
-    isOpen: true,
-    size: "M",
-    position: "center",
+    ...기본.args,
     onClose: fn(),
   },
 
@@ -344,7 +333,7 @@ export const 제목이_없는_알림_모달: Story = {
         isOpen={args.isOpen}
         onClose={args.onClose}
         content={"아이디는 필수로 입력해야 합니다."}
-        size={"M"}
+        size={args.size}
         position={args.position}
       ></AlertModal>
     );
@@ -353,9 +342,7 @@ export const 제목이_없는_알림_모달: Story = {
 
 export const 확인_모달: Story = {
   args: {
-    isOpen: true,
-    size: "M",
-    position: "center",
+    ...기본.args,
     onClose: fn(),
   },
 
@@ -374,7 +361,7 @@ export const 확인_모달: Story = {
         onClose={args.onClose}
         title={"카드를 삭제하시겠습니까?"}
         content={"삭제하면 복구하실 수 없습니다."}
-        size={"M"}
+        size={args.size}
         position={args.position}
         onConfirm={action("confirm-button-click")}
       ></ConfirmModal>
@@ -384,9 +371,7 @@ export const 확인_모달: Story = {
 
 export const 입력_모달: Story = {
   args: {
-    isOpen: true,
-    size: "M",
-    position: "center",
+    ...기본.args,
     onClose: fn(),
   },
 
@@ -415,9 +400,7 @@ export const 입력_모달: Story = {
 
 export const 입력이_3개인_모달: Story = {
   args: {
-    isOpen: true,
-    size: "M",
-    position: "center",
+    ...기본.args,
     onClose: fn(),
   },
 
