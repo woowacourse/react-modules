@@ -9,19 +9,16 @@ export interface ButtonProps {
   onClick: () => void;
   /**
    * @defaultValue 'medium'
-   * @remarks type ButtonSize = "small" | "medium" | "large"
    */
   size?: ButtonSize;
 
   /**
    * @defaultValue 'fixed'
-   * @remarks type ButtonWidth = "fixed" | "fit" | "full"
    */
   width?: ButtonWidth;
 
   /**
    * @defaultValue 'primary'
-   * @remarks type ButtonStyle = "primary" | "border" | "text"
    */
   buttonStyle?: ButtonStyle;
 

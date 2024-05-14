@@ -10,7 +10,6 @@ export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
 
   /**
    * @defaultValue 'row'
-   * @remarks type LabelPosition = "row" | "column"
    */
   labelPosition?: LabelPosition;
 

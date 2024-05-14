@@ -8,13 +8,11 @@ export interface CustomModalContainerProps {
 
   /**
    * @defaultValue 'center'
-   * @remarks type ModalPosition = "center" | "bottom"
    */
   modalPosition?: ModalPosition;
 
   /**
    * @defaultValue 'large'
-   * @remarks type ModalSize = "small" | "medium" | "large"
    */
   size?: ModalSize;
 }

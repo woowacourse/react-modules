@@ -5,13 +5,11 @@ import { ButtonContainer } from '../Modal.styled';
 export interface CustomModalFooter {
   /**
    * @defaultValue 'row'
-   * @remarks type ButtonPosition = "row" | "column"
    */
   buttonPosition?: ButtonPosition;
 
   /**
    * @defaultValue 'right'
-   * @remarks type ButtonJustifyContent = "center" | "left" | "right"
    */
   buttonJustifyContent?: ButtonJustifyContent;
 }

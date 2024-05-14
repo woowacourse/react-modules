@@ -19,13 +19,11 @@ export interface ModalProps {
 
   /**
    * @defaultValue 'large'
-   * @remarks type ModalSize = "small" | "medium" | "large"
    */
   size?: ModalSize;
 
   /**
    * @defaultValue 'center'
-   * @remarks type ModalPosition = "center" | "bottom"
    */
   modalPosition?: ModalPosition;
 
@@ -34,13 +32,11 @@ export interface ModalProps {
 
   /**
    * @defaultValue 'row'
-   * @remarks type ButtonPosition = "row" | "column"
    */
   buttonPosition?: ButtonPosition;
 
   /**
    * @defaultValue 'center'
-   * @remarks type ButtonJustifyContent = "center" | "left" | "right"
    */
   buttonJustifyContent?: ButtonJustifyContent;
 
