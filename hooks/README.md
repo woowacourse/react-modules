@@ -161,7 +161,7 @@ const CardPasswordComponent = () => {
 
 ```ts
 import React from 'react';
-import useCardUserName from '@roqkftjs/react-payments-custom-hooks';
+import { useCardUserName } from '@roqkftjs/react-payments-custom-hooks';
 
 function CardUserNameInput({ cardUserNameLength }) {
   const { cardUserNameInfo, handleCardUserName } =
