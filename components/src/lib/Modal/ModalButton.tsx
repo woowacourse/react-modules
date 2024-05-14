@@ -35,4 +35,8 @@ const StyledButton = styled.button<{ $theme: ModalButtonTheme; $size: ModalButto
   ${({ $size }) => MODAL_BUTTON_SIZE[$size]};
   ${({ $theme }) => MODAL_BUTTON_THEME[$theme]};
   width: ${({ $width, $size }) => ($width === "fixed" ? MODAL_BUTTON_WIDTH[$size] : MODAL_BUTTON_WIDTH[$width])};
+
+  &:disabled {
+    cursor: not-allowed;
+  }
 `;
