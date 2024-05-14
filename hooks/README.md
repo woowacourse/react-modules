@@ -175,16 +175,16 @@ export const MyComponent = () => {
 
 ### `useCardExpirationDate` 반환 값
 
-| Name                 | Type       | Description                                        |
-| -------------------- | ---------- | -------------------------------------------------- |
-| `month`              | `string`   | 현재 입력된 카드 만료 월입니다.                    |
-| `year`               | `string`   | 현재 입력된 카드 만료 연도입니다.                  |
-| `handleMonthChange`  | `function` | 카드 만료 월을 변경하는 함수입니다.                |
-| `handleYearChange`   | `function` | 카드 만료 연도를 변경하는 함수입니다.              |
-| `monthErrorMessages` | `string`   | 카드 만료 월 입력 시 발생하는 오류 메시지입니다.   |
-| `yearErrorMessages`  | `string`   | 카드 만료 연도 입력 시 발생하는 오류 메시지입니다. |
-| `isValidMonth`       | `boolean`  | 입력된 카드 만료 월의 유효성 여부입니다.           |
-| `isValidYear`        | `boolean`  | 입력된 카드 만료 연도의 유효성 여부입니다.         |
+| Name                | Type       | Description                                        |
+| ------------------- | ---------- | -------------------------------------------------- |
+| `month`             | `string`   | 현재 입력된 카드 만료 월입니다.                    |
+| `year`              | `string`   | 현재 입력된 카드 만료 연도입니다.                  |
+| `handleMonthChange` | `function` | 카드 만료 월을 변경하는 함수입니다.                |
+| `handleYearChange`  | `function` | 카드 만료 연도를 변경하는 함수입니다.              |
+| `monthErrorMessage` | `string`   | 카드 만료 월 입력 시 발생하는 오류 메시지입니다.   |
+| `yearErrorMessage`  | `string`   | 카드 만료 연도 입력 시 발생하는 오류 메시지입니다. |
+| `isValidMonth`      | `boolean`  | 입력된 카드 만료 월의 유효성 여부입니다.           |
+| `isValidYear`       | `boolean`  | 입력된 카드 만료 연도의 유효성 여부입니다.         |
 
 <br />
 
@@ -200,8 +200,8 @@ export const MyComponent = () => {
     year,
     handleMonthChange,
     handleYearChange,
-    monthErrorMessages,
-    yearErrorMessages,
+    monthErrorMessage,
+    yearErrorMessage,
     isValidMonth,
     isValidYear,
   } = useCardExpirationDate();
@@ -219,13 +219,13 @@ export const MyComponent = () => {
           placeholder='MM'
         />
         <p>{isValidMonth ? 'Valid Month' : 'Invalid Month'}</p>
-        <p>{monthErrorMessages}</p>
+        <p>{monthErrorMessage}</p>
       </div>
       <div>
         <label htmlFor='year'>Year:</label>
         <input type='text' id='year' value={year} onChange={(e) => handleYearChange(e.target.value)} placeholder='YY' />
         <p>{isValidYear ? 'Valid Year' : 'Invalid Year'}</p>
-        <p>{yearErrorMessages}</p>
+        <p>{yearErrorMessage}</p>
       </div>
     </>
   );
