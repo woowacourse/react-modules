@@ -1,90 +1,33 @@
-import { ChangeEvent, FocusEvent, useState } from 'react';
-import Validation from '../utils/validation';
+import { ChangeEvent, useState } from 'react';
 import sliceCreditCardNumber from '../utils/sliceCreditCardNumber';
-
-type ErrorType = {
-  state: boolean;
-  message: string;
-};
-
-type CardBrandType = 'visa' | 'mastercard' | 'diners' | 'amex' | 'unionpay' | '';
-
-interface ValidateCardBrandProps {
-  brand: CardBrandType;
-  format: number[];
-}
-
-type ValidateCardBrandType = (value: string) => ValidateCardBrandProps;
-
-const validateCardBrand: ValidateCardBrandType = (value: string) => {
-  if (Validation.isVisa(value)) {
-    return { brand: 'visa', format: [4, 4, 4, 4] };
-  }
-
-  if (Validation.isMastercard(value)) {
-    return { brand: 'mastercard', format: [4, 4, 4, 4] };
-  }
-
-  if (Validation.isDiners(value)) {
-    return { brand: 'diners', format: [4, 6, 4] };
-  }
-
-  if (Validation.isAmex(value)) {
-    return { brand: 'amex', format: [4, 6, 5] };
-  }
-
-  if (Validation.isUnionpay(value)) {
-    return { brand: 'unionpay', format: [4, 4, 4, 4] };
-  }
-
-  return { brand: '', format: [4, 4, 4, 4] };
-};
+import useCardInfo from './useCardInfo';
+import useCardNumberValidation from './useCardNumberValidation';
 
 const useCardNumber = (initialValue = '') => {
   const [value, setValue] = useState(initialValue);
-  const [error, setError] = useState<ErrorType>({ state: false, message: '' });
-  const [brand, setBrand] = useState<CardBrandType>('');
-  const [format, setFormat] = useState<number[]>([4, 4, 4, 4]);
-  const number = value.replaceAll('-', '');
+  const { error, checkNumericPattern, checkLength } = useCardNumberValidation();
+  const { brand, updateCardInfo } = useCardInfo();
 
+  const number = value.replaceAll('-', '');
   const isValid = value !== '' && !error.state;
 
   const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
-    if (!Validation.isNumericPattern(e.target.value)) {
-      setError({ state: true, message: '숫자만 입력할 수 있습니다.' });
-      return;
-    }
+    const inputValue = e.target.value;
 
-    const cardInfo = validateCardBrand(e.target.value);
-    const cardLength = cardInfo.format.reduce((acc, cur) => acc + cur);
-    const replaceValue = e.target.value.replaceAll('-', '');
+    if (!checkNumericPattern(inputValue)) return;
 
-    setBrand(cardInfo.brand);
-    setFormat(cardInfo.format);
+    const format = updateCardInfo(inputValue);
+    const replaceValue = inputValue.replaceAll('-', '');
+    const formatCardNumber = sliceCreditCardNumber(replaceValue, format).join('-');
+    const cardLength = format.reduce((acc, cur) => acc + cur);
 
     if (replaceValue.length > cardLength) return;
 
-    if (!Validation.isExactLength(cardLength, replaceValue)) {
-      setError({ state: true, message: `${cardLength}자리를 입력해주세요.` });
-    } else {
-      setError({ state: false, message: '' });
-    }
-
-    setValue(sliceCreditCardNumber(replaceValue, cardInfo.format).join('-'));
+    checkLength(replaceValue, cardLength);
+    setValue(formatCardNumber);
   };
 
-  const onBlurHandler = (e: FocusEvent<HTMLInputElement>) => {
-    const length = format.reduce((acc, cur) => acc + cur);
-    const replaceValue = e.target.value.replaceAll('-', '');
-
-    if (!Validation.isExactLength(length, replaceValue)) {
-      setError({ state: true, message: `${length}자리를 입력해주세요.` });
-    } else {
-      setError({ state: false, message: '' });
-    }
-  };
-
-  return { value, error, isValid, number, brand, onChange: onChangeHandler, onBlur: onBlurHandler };
+  return { value, error, isValid, number, brand, onChange: onChangeHandler };
 };
 
 export default useCardNumber;
