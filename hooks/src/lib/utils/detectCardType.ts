@@ -7,6 +7,8 @@ const detectCardType = (cardNumber: string): CardType => {
   if (new RegExp(CARD_TYPE.DINERS.REGEX).test(cardNumber)) return 'DINERS';
   if (new RegExp(CARD_TYPE.AMEX.REGEX).test(cardNumber)) return 'AMEX';
   if (new RegExp(CARD_TYPE.UNION_PAY.REGEX).test(cardNumber)) return 'UNION_PAY';
+  if (new RegExp(CARD_TYPE.JCB.REGEX).test(cardNumber)) return 'JCB';
+  if (new RegExp(CARD_TYPE.DISCOVER.REGEX).test(cardNumber)) return 'DISCOVER';
 
   return 'UNKNOWN';
 };
