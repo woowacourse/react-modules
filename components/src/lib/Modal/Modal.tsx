@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 import ModalBackDrop from "./ModalBackDrop";
 import ModalContent from "./ModalContent";
@@ -15,17 +15,9 @@ import useKeyDown from "../hooks/useKeyDown";
 
 import { DEVICE_WIDTH, MODAL_BORDER_RADIUS, MODAL_POSITION } from "../constants/modal";
 
-import { Device, ModalPosition } from "../types/modal";
+import { Device, ModalPosition, ModalProps } from "../types/modal";
 
-export interface ModalProps extends React.HTMLAttributes<HTMLElement> {
-  children: React.ReactNode;
-  isOpen: boolean;
-  position?: ModalPosition;
-  device?: Device;
-  onClose: () => void;
-}
-
-const Modal = ({ children, isOpen, position = "center", device = "desktop", onClose }: ModalProps) => {
+const Modal = ({ children, isOpen, position = "center", device, onClose }: ModalProps) => {
   useKeyDown("Escape", onClose);
 
   useBlockScroll(isOpen);
@@ -51,10 +43,9 @@ Modal.ModalButton = ModalButton;
 
 export default Modal;
 
-const StyledModal = styled.section<{ $position: ModalPosition; $device: Device }>`
+const StyledModal = styled.section<{ $position: ModalPosition; $device?: Device }>`
   height: 100vh;
   width: 100%;
-  max-width: ${({ $device }) => DEVICE_WIDTH[$device]};
   position: fixed;
   inset: 0;
 
@@ -66,4 +57,21 @@ const StyledModal = styled.section<{ $position: ModalPosition; $device: Device }
   & > div:nth-child(2) {
     border-radius: ${({ $position }) => MODAL_BORDER_RADIUS[$position]};
   }
+
+  ${({ $device }) =>
+    $device
+      ? css`
+          max-width: ${DEVICE_WIDTH[$device]};
+        `
+      : css`
+          @media (min-width: 375px) {
+            max-width: 375px;
+          }
+          @media (min-width: 768px) {
+            max-width: 768px;
+          }
+          @media (min-width: 1024px) {
+            max-width: 100%;
+          }
+        `};
 `;
