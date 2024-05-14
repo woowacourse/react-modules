@@ -1,6 +1,6 @@
 {
   "name": "harrysimodal",
-  "version": "0.0.4",
+  "version": "0.0.6",
   "description": "modal of harrysimo",
   "type": "module",
   "types": "dist/index.d.ts",
@@ -19,7 +19,7 @@
     "build-storybook": "storybook build"
   },
   "dependencies": {
-    "harrysimodal": "0.0.0",
+    "harrysimodal": "0.0.5",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "styled-components": "6.1.8"
