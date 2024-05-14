@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { META_CARD, CardBrand } from './constants';
-import useCardType from './useCardType';
 import { formatCardNumber } from './../utils/formatCardNumber';
+import { checkCardType } from './../utils/checkCardType';
 
 interface CardNumberInfo {
   cardNumber: string[];
@@ -17,11 +17,10 @@ const useCardNumber = () => {
     isValid: true,
     errorMessages: [],
   });
-  const { handleCardTypeChange } = useCardType();
 
   const handleCardNumberChange = (cardNumber: string) => {
     const cardNumberWithoutSpace = cardNumber.replace(/\D/g, '');
-    const newCardType = handleCardTypeChange(cardNumberWithoutSpace);
+    const newCardType = checkCardType(cardNumberWithoutSpace);
     const formattedNumber = formatCardNumber(cardNumberWithoutSpace, META_CARD[newCardType].format);
 
     const errors: string[] = [];
