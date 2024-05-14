@@ -4,6 +4,7 @@ export { default as Input } from './Input/Input';
 export { default as AlertModal } from './Modal/AlertModal/AlertModal';
 export { default as ConfirmModal } from './Modal/ConfirmModal/ConfirmModal';
 export { default as PromptModal } from './Modal/PromptModal/PromptModal';
+export { default as CustomModal } from './Modal/CustomModal/CustomModal';
 
 export { default as useInput } from './hooks/useInput';
 export { default as useModal } from './hooks/useModal';

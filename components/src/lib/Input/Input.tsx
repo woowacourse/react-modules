@@ -37,9 +37,10 @@ const Input = ({
   ...props
 }: InputProps) => {
   return labelText ? (
-    <Styled.Label labelPosition={labelPosition}>
+    <Styled.Label labelPosition={labelPosition} htmlFor={props.id}>
       {labelText}
       <Styled.Input
+        id={props.id}
         value={value}
         onChange={onChange}
         placeholder={placeholder}

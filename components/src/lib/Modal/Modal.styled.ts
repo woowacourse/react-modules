@@ -59,6 +59,8 @@ export const ModalHeader = styled.div`
 export const ModalCloseButton = styled.img`
   width: 18px;
   height: 18px;
+
+  cursor: pointer;
 `;
 
 export const ModalTitle = styled.h2`
