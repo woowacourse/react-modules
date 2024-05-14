@@ -20,16 +20,10 @@ const useCardCompany = (validCardCompanyList: string[], initialSelected: string 
 
   const handleCardCompanyChange = (company: string) => {
     const errorMessage = getErrorMessage(company);
-
     setCardCompanyErrorMessage(errorMessage);
+    setIsValidCardCompany(errorMessage === '');
 
-    if (errorMessage !== '') {
-      setIsValidCardCompany(false);
-      return;
-    }
-
-    setIsValidCardCompany(true);
-    setCardCompany(company);
+    if (errorMessage === '') setCardCompany(company);
   };
 
   return {
