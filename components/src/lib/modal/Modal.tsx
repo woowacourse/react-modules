@@ -160,11 +160,17 @@ const ModalInput: ModalInputType = ({
 };
 
 type ModalFooterType = React.FC<
-  React.PropsWithChildren<HTMLAttributes<HTMLDivElement>>
+  React.PropsWithChildren<HTMLAttributes<HTMLDivElement>> & {
+    align: "left" | "center" | "right";
+  }
 >;
 
-const ModalFooter: ModalFooterType = ({ children, ...restProps }) => {
-  return <Styled.ModalFooter {...restProps}>{children}</Styled.ModalFooter>;
+const ModalFooter: ModalFooterType = ({ align, children, ...restProps }) => {
+  return (
+    <Styled.ModalFooter align={align} {...restProps}>
+      {children}
+    </Styled.ModalFooter>
+  );
 };
 
 Modal.ModalHeader = ModalHeader;

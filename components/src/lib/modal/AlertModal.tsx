@@ -22,8 +22,8 @@ const AlertModal: React.FC<AlertModalProps> = ({
       )}
       <Modal.ModalContent>{content}</Modal.ModalContent>
       <Modal.ModalFooter
+        align="right"
         style={{
-          justifyContent: "flex-end",
           marginRight: "22px",
         }}
       >

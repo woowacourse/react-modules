@@ -23,11 +23,7 @@ const ConfirmModal: React.FC<ConfirmModalProps> = ({
         </Modal.ModalHeader>
       )}
       <Modal.ModalContent>{content}</Modal.ModalContent>
-      <Modal.ModalFooter
-        style={{
-          justifyContent: "flex-end",
-        }}
-      >
+      <Modal.ModalFooter align="right">
         <Modal.ModalButton size={"S"} onClick={onClose}>
           취소
         </Modal.ModalButton>

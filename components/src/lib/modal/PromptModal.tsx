@@ -29,11 +29,7 @@ const AlertModal: React.FC<PromptModalProps> = ({
           ))}
         </form>
       </Modal.ModalContent>
-      <Modal.ModalFooter
-        style={{
-          justifyContent: "flex-end",
-        }}
-      >
+      <Modal.ModalFooter align="right">
         <Modal.ModalButton
           size={"S"}
           style={{ marginRight: "22px" }}

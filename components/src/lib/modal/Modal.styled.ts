@@ -139,9 +139,27 @@ export const ModalInput = styled.input`
   margin-bottom: 10px;
 `;
 
-export const ModalFooter = styled.footer`
+export const ModalFooter = styled.footer<{
+  align: "left" | "center" | "right";
+}>`
   margin: 15px 5px;
   display: flex;
-  justify-content: center;
   gap: 15px;
+  
+  ${({ align }) => {
+    switch (align) {
+      case "left":
+        return `
+        justify-content: flex-start;
+      `;
+      case "center":
+        return `
+        justify-content: center;
+      `;
+      case "right":
+        return `
+        justify-content:  flex-end;
+      `;
+    }
+  }}
 `;
