@@ -31,6 +31,12 @@ const meta: Meta<typeof Modal> = {
     animation: {
       control: { type: 'boolean' },
     },
+    customWidth: {
+      control: { type: 'text' },
+    },
+    customHeight: {
+      control: { type: 'text' },
+    },
   },
 };
 
