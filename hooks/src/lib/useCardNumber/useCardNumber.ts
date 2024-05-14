@@ -16,8 +16,8 @@ const useCardNumber = (initialValue = '') => {
 
     if (!checkNumericPattern(inputValue)) return;
 
-    const format = updateCardInfo(inputValue);
     const replaceValue = inputValue.replaceAll('-', '');
+    const format = updateCardInfo(replaceValue);
     const formatCardNumber = sliceCreditCardNumber(replaceValue, format).join('-');
     const cardLength = format.reduce((acc, cur) => acc + cur);
 
