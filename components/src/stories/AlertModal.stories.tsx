@@ -11,8 +11,6 @@ const meta = {
     layout: 'fullscreen',
   },
 
-  tags: ['autodocs'],
-
   decorators: [
     (Story, { args }) => {
       const [isOpen, setIsOpen] = useState(false);
@@ -30,7 +28,7 @@ const meta = {
               <Story
                 args={{
                   ...args,
-                  closeButton: { onClose: handleClose, display: true },
+                  closeButton: { onClose: handleClose },
                 }}
               />
             )}
@@ -48,7 +46,7 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
   args: {
     title: { content: 'Alert modal title', position: 'left' },
-    closeButton: { display: false, onClose: () => {} },
+    closeButton: { onClose: () => {} },
     confirmButton: {
       content: '확인',
       onConfirm: () => {

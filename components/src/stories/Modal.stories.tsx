@@ -11,8 +11,6 @@ const meta = {
     layout: 'fullscreen',
   },
 
-  tags: ['autodocs'],
-
   decorators: [
     (Story, { args }) => {
       const [isOpen, setIsOpen] = useState(false);
