@@ -35,15 +35,19 @@ export const ModalContainer = styled.div<
   color: rgba(0, 0, 0, 1);
 
   ${({ modalPosition, size }) => {
+    const sizeMap = {
+      small: "320px",
+      medium: "480px",
+      large: "600px",
+    };
+
     switch (modalPosition) {
       case "center":
         return `
           top: 50%;
           left: 50%;
           transform: translate(-50%, -50%);
-          ${size === "small" ? "width: 320px;" : "width: 320px;"}
-          ${size === "medium" ? "width: 480px;" : "width: 320px;"}
-          ${size === "large" ? "width: 600px;" : "width: 320px;"}
+          width: ${sizeMap[size] || "320px"};
         `;
       case "bottom":
         return `
