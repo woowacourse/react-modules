@@ -12,7 +12,7 @@ npm install nakta-react-payments-hooks
 
 ### props
 
-- `initialValue`: 카드번호 초기값
+- `initialValue`: 카드번호 초기값. 선택적으로 값을 사용할 수 있으며, 입력하지 않을 시 기본값은 빈 문자열(`''`)입니다.
 
 ### return
 
@@ -70,7 +70,7 @@ export default App;
 
 ### props
 
-- `initialValue`: 카드사 상태 초기값 설정
+- `initialValue`: 카드사 상태 초기값 설정. 선택적으로 값을 사용할 수 있으며, 입력하지 않을 시 기본값은 빈 문자열(`''`)입니다.
 
 ### return
 
@@ -192,7 +192,7 @@ export default App;
 
 ### props
 
-- `initialValue`: 카드 소유자 상태 초기값 설정
+- `initialValue`: 카드 소유자 상태 초기값 설정. 선택적으로 값을 사용할 수 있으며, 입력하지 않을 시 기본값은 빈 문자열(`''`)입니다.
 
 ### return
 
@@ -237,7 +237,7 @@ export default App;
 
 ### props
 
-- `initialValue`: CVC번호 상태 초기값 설정
+- `initialValue`: CVC번호 상태 초기값 설정. 선택적으로 값을 사용할 수 있으며, 입력하지 않을 시 기본값은 빈 문자열(`''`)입니다.
 
 ### return
 
@@ -283,7 +283,7 @@ export default App;
 
 ### props
 
-- `initialValue`: 비밀번호 상태 초기값 설정
+- `initialValue`: 비밀번호 상태 초기값 설정. 선택적으로 값을 사용할 수 있으며, 입력하지 않을 시 기본값은 빈 문자열(`''`)입니다.
 
 ### return
 
