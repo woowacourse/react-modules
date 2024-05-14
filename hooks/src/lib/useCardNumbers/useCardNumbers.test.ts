@@ -3,158 +3,311 @@ import { renderHook } from "@testing-library/react";
 
 import useCardNumbers from "./useCardNumbers";
 
-import { VALIDATION_MESSAGES } from "../constants/card-custom-hook";
+import { CARD_INPUT_RULES, VALIDATION_MESSAGES } from "../constants/card-custom-hook";
 
-describe("useCardNumbers 커스텀 훅 동작 테스트", () => {
-  it("초기값이 정확히 설정되어야 한다.", () => {
-    const EXPECTED_INITIAL_VALUE = [] as string[];
-
+describe("useCardNumbers", () => {
+  const enterCardNumbers = (cardNumberInputScenario: string[]) => {
     const { result } = renderHook(() => useCardNumbers());
-    const { cardNumbers } = result.current;
 
-    expect(cardNumbers).toEqual(EXPECTED_INITIAL_VALUE);
+    cardNumberInputScenario.forEach((input) => {
+      React.act(() => {
+        result.current.handleCardNumberChange(input);
+      });
+    });
+
+    const { cardNumbers, validationResult } = result.current;
+
+    return { cardNumbers, validationResult };
+  };
+
+  describe("초기값 설정", () => {
+    it("초기값이 정확히 설정되어야 한다.", () => {
+      const EXPECTED_INITIAL_VALUE = [] as string[];
+
+      const { result } = renderHook(() => useCardNumbers());
+      const { cardNumbers } = result.current;
+
+      expect(cardNumbers).toEqual(EXPECTED_INITIAL_VALUE);
+    });
   });
 
-  const CARD_FORMATTING_TEST_CASES = [
-    ["4123123412341234", ["4123", "1234", "1234", "1234"]], // Visa
-    ["5123123412341234", ["5123", "1234", "1234", "1234"]], // Master
-    ["5523123412341234", ["5523", "1234", "1234", "1234"]], // Master
-    ["36121234561234", ["3612", "123456", "1234"]], // Diners
-    ["341212345612345", ["3412", "123456", "12345"]], // Amex
-    ["371212345612345", ["3712", "123456", "12345"]], // Amex
-    ["6241123412341234", ["6241", "1234", "1234", "1234"]], // UnionPay
-    ["6261123412341234", ["6261", "1234", "1234", "1234"]], // UnionPay
-    ["6282123412341234", ["6282", "1234", "1234", "1234"]], // UnionPay
-    ["6288123412341234", ["6288", "1234", "1234", "1234"]], // UnionPay
-    ["6221261212341234", ["6221", "2612", "1234", "1234"]], // UnionPay
-    ["6229251212341234", ["6229", "2512", "1234", "1234"]], // UnionPay
-    ["1234123412341234", ["1234", "1234", "1234", "1234"]], // None
-  ];
+  describe("카드 번호 포매팅", () => {
+    describe("visa", () => {
+      it.each([[["4" + "1".repeat(15)], ["4111", "1111", "1111", "1111"]]])(
+        "visa 카드 번호가 올바르게 포매팅된다.",
+        (cardNumberInputs, expectedFormattedCardNumbers) => {
+          const { cardNumbers, validationResult } = enterCardNumbers(cardNumberInputs);
 
-  it.each(CARD_FORMATTING_TEST_CASES)(
-    "유효한 %s 카드 입력일 경우, 포매팅 규칙에 맞게 올바른 형태로 포매팅되어야 한다",
-    (cardNumberInput, expectedFormattedCardNumber) => {
-      const { result } = renderHook(() => useCardNumbers());
+          expect(cardNumbers).toEqual(expectedFormattedCardNumbers);
+          expect(validationResult.isValid).toBeTruthy();
+        }
+      );
+    });
 
-      React.act(() => {
-        result.current.handleCardNumberChange(cardNumberInput as string);
+    describe("master", () => {
+      it.each([
+        [["51" + "1".repeat(14)], ["5111", "1111", "1111", "1111"]],
+        [["55" + "1".repeat(14)], ["5511", "1111", "1111", "1111"]],
+      ])("master 카드 번호가 올바르게 포매팅된다.", (cardNumberInputs, expectedFormattedCardNumbers) => {
+        const { cardNumbers, validationResult } = enterCardNumbers(cardNumberInputs);
+
+        expect(cardNumbers).toEqual(expectedFormattedCardNumbers);
+        expect(validationResult.isValid).toBeTruthy();
+      });
+    });
+
+    describe("diners", () => {
+      it.each([[["36" + "1".repeat(12)], ["3611", "111111", "1111"]]])(
+        "diners 카드 번호가 올바르게 포매팅된다.",
+        (cardNumberInputs, expectedFormattedCardNumbers) => {
+          const { cardNumbers, validationResult } = enterCardNumbers(cardNumberInputs);
+
+          expect(cardNumbers).toEqual(expectedFormattedCardNumbers);
+          expect(validationResult.isValid).toBeTruthy();
+        }
+      );
+    });
+
+    describe("amex", () => {
+      it.each([
+        [["34" + "1".repeat(13)], ["3411", "111111", "11111"]],
+        [["37" + "1".repeat(13)], ["3711", "111111", "11111"]],
+      ])("amex 카드 번호가 올바르게 포매팅된다.", (cardNumberInputs, expectedFormattedCardNumbers) => {
+        const { cardNumbers, validationResult } = enterCardNumbers(cardNumberInputs);
+
+        expect(cardNumbers).toEqual(expectedFormattedCardNumbers);
+        expect(validationResult.isValid).toBeTruthy();
+      });
+    });
+
+    describe("unionpay", () => {
+      it.each([
+        [["624" + "1".repeat(13)], ["6241", "1111", "1111", "1111"]],
+        [["626" + "1".repeat(13)], ["6261", "1111", "1111", "1111"]],
+        [["6282" + "1".repeat(12)], ["6282", "1111", "1111", "1111"]],
+        [["6288" + "1".repeat(12)], ["6288", "1111", "1111", "1111"]],
+        [["622126" + "1".repeat(10)], ["6221", "2611", "1111", "1111"]],
+        [["622925" + "1".repeat(10)], ["6229", "2511", "1111", "1111"]],
+      ])("unionpay 카드 번호가 올바르게 포매팅된다.", (cardNumberInputs, expectedFormattedCardNumbers) => {
+        const { cardNumbers, validationResult } = enterCardNumbers(cardNumberInputs);
+
+        expect(cardNumbers).toEqual(expectedFormattedCardNumbers);
+        expect(validationResult.isValid).toBeTruthy();
+      });
+    });
+  });
+
+  describe("카드 브랜드 포매팅 경계값", () => {
+    describe("diners 카드 경계값인 경우", () => {
+      it.each([[["35" + "1".repeat(14)], ["3511", "1111", "1111", "1111"]]])(
+        "카드 번호가 %s인 경우, 기본 포매팅 규칙이 적용된다.",
+        (cardNumberInputs, expectedFormattedCardNumbers) => {
+          const { cardNumbers } = enterCardNumbers(cardNumberInputs);
+
+          expect(cardNumbers).toEqual(expectedFormattedCardNumbers);
+        }
+      );
+    });
+
+    describe("amex 카드 경계값인 경우", () => {
+      it.each([
+        [["33" + "1".repeat(14)], ["3311", "1111", "1111", "1111"]],
+        [["38" + "1".repeat(14)], ["3811", "1111", "1111", "1111"]],
+      ])("카드 번호가 %s인 경우, 기본 포매팅 규칙이 적용된다.", (cardNumberInputs, expectedFormattedCardNumbers) => {
+        const { cardNumbers } = enterCardNumbers(cardNumberInputs);
+
+        expect(cardNumbers).toEqual(expectedFormattedCardNumbers);
+      });
+    });
+  });
+
+  describe("카드 브랜드별 유효성 검증", () => {
+    describe("visa", () => {
+      it.each([
+        [["4", "4a"], ["4"], VALIDATION_MESSAGES.onlyNumbersAllowed],
+        [["41111", "41111a"], ["4111", "1"], VALIDATION_MESSAGES.onlyNumbersAllowed],
+        [["411111111", "411111111a"], ["4111", "1111", "1"], VALIDATION_MESSAGES.onlyNumbersAllowed],
+        [["4111111111111", "4111111111111a"], ["4111", "1111", "1111", "1"], VALIDATION_MESSAGES.onlyNumbersAllowed],
+      ])(
+        "visa 카드 번호의 각 필드에 문자를 입력할 경우 예외가 발생하고, 문자 입력이 반영되지 않는다.",
+        (cardNumberInputScenario, expectedFormattedCardNumber, expectedErrorText) => {
+          const { cardNumbers, validationResult } = enterCardNumbers(cardNumberInputScenario);
+
+          expect(cardNumbers).toEqual(expectedFormattedCardNumber);
+          expect(validationResult.isValid).toBeFalsy();
+          expect(validationResult.errorText).toBe(expectedErrorText);
+        }
+      );
+
+      it("15자를 입력할 경우, 예외가 발생하고 에러 메시지가 설정된다.", () => {
+        const CARD_NUMBER_INPUT = ["411111111111111"];
+
+        const { validationResult } = enterCardNumbers(CARD_NUMBER_INPUT);
+
+        expect(validationResult.isValid).toBeFalsy();
+        expect(validationResult.errorText).toBe(CARD_INPUT_RULES.visa.errorText);
       });
 
-      const { cardNumbers, validationResult } = result.current;
+      it("17자를 입력할 경우, 입력이 반영되지 않는다", () => {
+        const CARD_NUMBER_INPUT = ["4" + "1".repeat(15), "4" + "1".repeat(16)];
+        const EXPECTED_FORMATTED_CARD_NUMBERS = ["4111", "1111", "1111", "1111"];
 
-      expect(cardNumbers).toEqual(expectedFormattedCardNumber);
-      expect(validationResult.isValid).toBeTruthy();
-    }
-  );
+        const { cardNumbers, validationResult } = enterCardNumbers(CARD_NUMBER_INPUT);
 
-  const MASTER_CARD_BOUNDARY_VALUE_TEST_CASES = [
-    ["5012123412341234", ["5012", "1234", "1234", "1234"]],
-    ["5612123412341234", ["5612", "1234", "1234", "1234"]],
-  ];
+        expect(cardNumbers).toEqual(EXPECTED_FORMATTED_CARD_NUMBERS);
+        expect(validationResult.isValid).toBeTruthy();
+        expect(validationResult.errorText).toBe("");
+      });
+    });
 
-  it.each(MASTER_CARD_BOUNDARY_VALUE_TEST_CASES)(
-    "master 카드 브랜드가 아닌 경계값을 입력할 경우, 기본 포매팅 규칙이 적용되어야 한다.",
-    (cardNumberInput, expectedFormattedCardNumber) => {
-      const { result } = renderHook(() => useCardNumbers());
+    describe("master", () => {
+      it.each([
+        [["51", "51a"], ["51"], VALIDATION_MESSAGES.onlyNumbersAllowed],
+        [["51111", "51111a"], ["5111", "1"], VALIDATION_MESSAGES.onlyNumbersAllowed],
+        [["511111111", "511111111a"], ["5111", "1111", "1"], VALIDATION_MESSAGES.onlyNumbersAllowed],
+        [["5111111111111", "5111111111111a"], ["5111", "1111", "1111", "1"], VALIDATION_MESSAGES.onlyNumbersAllowed],
+      ])(
+        "master 카드 번호의 각 필드에 문자를 입력할 경우 예외가 발생하고, 문자 입력이 반영되지 않는다.",
+        (cardNumberInputScenario, expectedFormattedCardNumber, expectedErrorText) => {
+          const { cardNumbers, validationResult } = enterCardNumbers(cardNumberInputScenario);
 
-      React.act(() => {
-        result.current.handleCardNumberChange(cardNumberInput as string);
+          expect(cardNumbers).toEqual(expectedFormattedCardNumber);
+          expect(validationResult.isValid).toBeFalsy();
+          expect(validationResult.errorText).toBe(expectedErrorText);
+        }
+      );
+
+      it("15자를 입력할 경우, 예외가 발생하고 에러 메시지가 설정된다.", () => {
+        const CARD_NUMBER_INPUT = ["5" + "1".repeat(14)];
+
+        const { validationResult } = enterCardNumbers(CARD_NUMBER_INPUT);
+
+        expect(validationResult.isValid).toBeFalsy();
+        expect(validationResult.errorText).toBe(CARD_INPUT_RULES.master.errorText);
       });
 
-      const { cardNumbers, validationResult } = result.current;
+      it("17자를 입력할 경우, 입력이 반영되지 않는다", () => {
+        const CARD_NUMBER_INPUT = ["5" + "1".repeat(15), "5" + "1".repeat(16)];
+        const EXPECTED_FORMATTED_CARD_NUMBERS = ["5111", "1111", "1111", "1111"];
 
-      expect(cardNumbers).toEqual(expectedFormattedCardNumber);
-      expect(validationResult.isValid).toBeTruthy();
-    }
-  );
+        const { cardNumbers, validationResult } = enterCardNumbers(CARD_NUMBER_INPUT);
 
-  const AMEX_CARD_BOUNDARY_VALUE_TEST_CASES = [
-    ["3312123412341234", ["3312", "1234", "1234", "1234"]],
-    ["3812123412341234", ["3812", "1234", "1234", "1234"]],
-  ];
+        expect(cardNumbers).toEqual(EXPECTED_FORMATTED_CARD_NUMBERS);
+        expect(validationResult.isValid).toBeTruthy();
+        expect(validationResult.errorText).toBe("");
+      });
+    });
 
-  it.each(AMEX_CARD_BOUNDARY_VALUE_TEST_CASES)(
-    "amex 카드 브랜드가 아닌 경계값을 입력할 경우, 기본 포매팅 규칙이 적용되어야 한다.",
-    (cardNumberInput, expectedFormattedCardNumber) => {
-      const { result } = renderHook(() => useCardNumbers());
+    describe("diners", () => {
+      it.each([
+        [["36", "36a"], ["36"], VALIDATION_MESSAGES.onlyNumbersAllowed],
+        [["36111", "36111a"], ["3611", "1"], VALIDATION_MESSAGES.onlyNumbersAllowed],
+        [["36111111111", "36111111111a"], ["3611", "111111", "1"], VALIDATION_MESSAGES.onlyNumbersAllowed],
+      ])(
+        "diners 카드 번호의 각 필드에 문자를 입력할 경우 예외가 발생하고, 문자 입력이 반영되지 않는다.",
+        (cardNumberInputScenario, expectedFormattedCardNumber, expectedErrorText) => {
+          const { cardNumbers, validationResult } = enterCardNumbers(cardNumberInputScenario);
 
-      React.act(() => {
-        result.current.handleCardNumberChange(cardNumberInput as string);
+          expect(cardNumbers).toEqual(expectedFormattedCardNumber);
+          expect(validationResult.isValid).toBeFalsy();
+          expect(validationResult.errorText).toBe(expectedErrorText);
+        }
+      );
+
+      it("13자를 입력할 경우, 예외가 발생하고 에러 메시지가 설정된다.", () => {
+        const CARD_NUMBER_INPUT = ["36" + "1".repeat(11)];
+
+        const { validationResult } = enterCardNumbers(CARD_NUMBER_INPUT);
+
+        expect(validationResult.isValid).toBeFalsy();
+        expect(validationResult.errorText).toBe(CARD_INPUT_RULES.diners.errorText);
       });
 
-      const { cardNumbers, validationResult } = result.current;
+      it("15자를 입력할 경우, 입력이 반영되지 않는다", () => {
+        const CARD_NUMBER_INPUT = ["36" + "1".repeat(12), "36" + "1".repeat(13)];
+        const EXPECTED_FORMATTED_CARD_NUMBERS = ["3611", "111111", "1111"];
 
-      expect(cardNumbers).toEqual(expectedFormattedCardNumber);
-      expect(validationResult.isValid).toBeTruthy();
-    }
-  );
+        const { cardNumbers, validationResult } = enterCardNumbers(CARD_NUMBER_INPUT);
 
-  const UNIONPAY_BOUNDARY_VALUE_TEST_CASES = [
-    ["6231123412341234", ["6231", "1234", "1234", "1234"]],
-    ["6271123412341234", ["6271", "1234", "1234", "1234"]],
-    ["6281123412341234", ["6281", "1234", "1234", "1234"]],
-    ["6289123412341234", ["6289", "1234", "1234", "1234"]],
-    ["6221251212341234", ["6221", "2512", "1234", "1234"]],
-    ["6229261212341234", ["6229", "2612", "1234", "1234"]],
-  ];
+        expect(cardNumbers).toEqual(EXPECTED_FORMATTED_CARD_NUMBERS);
+        expect(validationResult.isValid).toBeTruthy();
+        expect(validationResult.errorText).toBe("");
+      });
+    });
 
-  it.each(UNIONPAY_BOUNDARY_VALUE_TEST_CASES)(
-    "unionPay 카드 브랜드가 아닌 경계값을 입력할 경우, 기본 포매팅 규칙이 적용되어야 한다.",
-    (cardNumberInput, expectedFormattedCardNumber) => {
-      const { result } = renderHook(() => useCardNumbers());
+    describe("amex", () => {
+      it.each([
+        [["34", "34a"], ["34"], VALIDATION_MESSAGES.onlyNumbersAllowed],
+        [["34111", "34111a"], ["3411", "1"], VALIDATION_MESSAGES.onlyNumbersAllowed],
+        [["34111111111", "34111111111a"], ["3411", "111111", "1"], VALIDATION_MESSAGES.onlyNumbersAllowed],
+      ])(
+        "amex 카드 번호의 각 필드에 문자를 입력할 경우 예외가 발생하고, 문자 입력이 반영되지 않는다.",
+        (cardNumberInputScenario, expectedFormattedCardNumber, expectedErrorText) => {
+          const { cardNumbers, validationResult } = enterCardNumbers(cardNumberInputScenario);
 
-      React.act(() => {
-        result.current.handleCardNumberChange(cardNumberInput as string);
+          expect(cardNumbers).toEqual(expectedFormattedCardNumber);
+          expect(validationResult.isValid).toBeFalsy();
+          expect(validationResult.errorText).toBe(expectedErrorText);
+        }
+      );
+
+      it("14자를 입력할 경우, 예외가 발생하고 에러 메시지가 설정된다.", () => {
+        const CARD_NUMBER_INPUT = ["34" + "1".repeat(12)];
+
+        const { validationResult } = enterCardNumbers(CARD_NUMBER_INPUT);
+
+        expect(validationResult.isValid).toBeFalsy();
+        expect(validationResult.errorText).toBe(CARD_INPUT_RULES.amex.errorText);
       });
 
-      const { cardNumbers, validationResult } = result.current;
+      it("16자를 입력할 경우, 입력이 반영되지 않는다", () => {
+        const CARD_NUMBER_INPUT = ["34" + "1".repeat(13), "34" + "1".repeat(14)];
+        const EXPECTED_FORMATTED_CARD_NUMBERS = ["3411", "111111", "11111"];
 
-      expect(cardNumbers).toEqual(expectedFormattedCardNumber);
-      expect(validationResult.isValid).toBeTruthy();
-    }
-  );
+        const { cardNumbers, validationResult } = enterCardNumbers(CARD_NUMBER_INPUT);
 
-  const INVALID_INPUT_TEST_CASES: [string[], string[], string][] = [
-    [["4", "4a"], ["4"], VALIDATION_MESSAGES.onlyNumbersAllowed], // visa - first section input error
-    [["41231", "41231a"], ["4123", "1"], VALIDATION_MESSAGES.onlyNumbersAllowed], // visa - second section input error
-    [["412312341", "412312341a"], ["4123", "1234", "1"], VALIDATION_MESSAGES.onlyNumbersAllowed], // visa - third section input error
-    [["4123123412341", "4123123412341a"], ["4123", "1234", "1234", "1"], VALIDATION_MESSAGES.onlyNumbersAllowed], // visa - fourth section input error
-    [["51", "51a"], ["51"], VALIDATION_MESSAGES.onlyNumbersAllowed], // master - first section input error
-    [["51231", "51231a"], ["5123", "1"], VALIDATION_MESSAGES.onlyNumbersAllowed], // master - second section input error
-    [["512312341", "512312341a"], ["5123", "1234", "1"], VALIDATION_MESSAGES.onlyNumbersAllowed], // master - third section input error
-    [["5123123412341", "5123123412341a"], ["5123", "1234", "1234", "1"], VALIDATION_MESSAGES.onlyNumbersAllowed], // master - fourth section input error
-    [["36", "36a"], ["36"], VALIDATION_MESSAGES.onlyNumbersAllowed], // diners - first section input error
-    [["36121", "36121a"], ["3612", "1"], VALIDATION_MESSAGES.onlyNumbersAllowed], // diners - second section input error
-    [["36121234561", "36121234561a"], ["3612", "123456", "1"], VALIDATION_MESSAGES.onlyNumbersAllowed], // diners - third section input error
-    [["34", "34a"], ["34"], VALIDATION_MESSAGES.onlyNumbersAllowed], // amex - first section input error
-    [["34121", "34121a"], ["3412", "1"], VALIDATION_MESSAGES.onlyNumbersAllowed], // amex - second section input error
-    [["34121234561", "34121234561a"], ["3412", "123456", "1"], VALIDATION_MESSAGES.onlyNumbersAllowed], // amex - third section input error,
-    [["624", "624a"], ["624"], VALIDATION_MESSAGES.onlyNumbersAllowed], // unionPay - first section input error
-    [["62411", "62411a"], ["6241", "1"], VALIDATION_MESSAGES.onlyNumbersAllowed], // unionPay - second section input error
-    [["624112341", "624112341a"], ["6241", "1234", "1"], VALIDATION_MESSAGES.onlyNumbersAllowed], // unionPay - third section input error
-    [["6241123412341", "6241123412341a"], ["6241", "1234", "1234", "1"], VALIDATION_MESSAGES.onlyNumbersAllowed], // unionPay - fourth section input error
-    [["9", "9a"], ["9"], VALIDATION_MESSAGES.onlyNumbersAllowed], // none brand - first section input error
-    [["91231", "91231a"], ["9123", "1"], VALIDATION_MESSAGES.onlyNumbersAllowed], // none brand - second section input error
-    [["912312341", "9123412341a"], ["9123", "1234", "1"], VALIDATION_MESSAGES.onlyNumbersAllowed], // none brand - third section input error
-    [["9123123412341", "9123123412341a"], ["9123", "1234", "1234", "1"], VALIDATION_MESSAGES.onlyNumbersAllowed], // none brand - fourth section input error
-  ];
+        expect(cardNumbers).toEqual(EXPECTED_FORMATTED_CARD_NUMBERS);
+        expect(validationResult.isValid).toBeTruthy();
+        expect(validationResult.errorText).toBe("");
+      });
+    });
 
-  it.each(INVALID_INPUT_TEST_CASES)(
-    "카드 번호 입력칸에 문자를 입력할 경우, 예외가 발생하고 상태 업데이트가 되지 않아야 한다.",
-    (cardNumberInputScenario, expectedFormattedCardNumber, expectedErrorText) => {
-      const { result } = renderHook(() => useCardNumbers());
+    describe("unionpay", () => {
+      it.each([
+        [["624", "624a"], ["624"], VALIDATION_MESSAGES.onlyNumbersAllowed],
+        [["62411", "62411a"], ["6241", "1"], VALIDATION_MESSAGES.onlyNumbersAllowed],
+        [["624111111", "624111111a"], ["6241", "1111", "1"], VALIDATION_MESSAGES.onlyNumbersAllowed],
+        [["6241111111111", "6241111111111a"], ["6241", "1111", "1111", "1"], VALIDATION_MESSAGES.onlyNumbersAllowed],
+      ])(
+        "amex 카드 번호의 각 필드에 문자를 입력할 경우 예외가 발생하고, 문자 입력이 반영되지 않는다.",
+        (cardNumberInputScenario, expectedFormattedCardNumber, expectedErrorText) => {
+          const { cardNumbers, validationResult } = enterCardNumbers(cardNumberInputScenario);
 
-      cardNumberInputScenario.forEach((input) => {
-        React.act(() => {
-          result.current.handleCardNumberChange(input);
-        });
+          expect(cardNumbers).toEqual(expectedFormattedCardNumber);
+          expect(validationResult.isValid).toBeFalsy();
+          expect(validationResult.errorText).toBe(expectedErrorText);
+        }
+      );
+
+      it("15자를 입력할 경우, 예외가 발생하고 에러 메시지가 설정된다.", () => {
+        const CARD_NUMBER_INPUT = ["624" + "1".repeat(12)];
+
+        const { validationResult } = enterCardNumbers(CARD_NUMBER_INPUT);
+
+        expect(validationResult.isValid).toBeFalsy();
+        expect(validationResult.errorText).toBe(CARD_INPUT_RULES.unionPay.errorText);
       });
 
-      const { cardNumbers, validationResult } = result.current;
+      it("17자를 입력할 경우, 입력이 반영되지 않는다", () => {
+        const CARD_NUMBER_INPUT = ["624" + "1".repeat(13), "624" + "1".repeat(14)];
+        const EXPECTED_FORMATTED_CARD_NUMBERS = ["6241", "1111", "1111", "1111"];
 
-      expect(cardNumbers).toEqual(expectedFormattedCardNumber);
-      expect(validationResult.isValid).toBeFalsy();
-      expect(validationResult.errorText).toBe(expectedErrorText);
-    }
-  );
+        const { cardNumbers, validationResult } = enterCardNumbers(CARD_NUMBER_INPUT);
+
+        expect(cardNumbers).toEqual(EXPECTED_FORMATTED_CARD_NUMBERS);
+        expect(validationResult.isValid).toBeTruthy();
+        expect(validationResult.errorText).toBe("");
+      });
+    });
+  });
 });
