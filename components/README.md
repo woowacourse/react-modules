@@ -68,16 +68,18 @@ export const MyComponent = () => {
 
 ### `ModalMain` 컴포넌트
 
-| Name           | Type                              | Default    | Description                            |
-| -------------- | --------------------------------- | ---------- | -------------------------------------- |
-| `isOpen`       | `boolean`                         | -          | 모달이 열려 있는지 여부를 결정합니다.  |
-| `close`        | `function`                        | -          | 모달을 닫는 함수입니다.                |
-| `position`     | `'bottom' , 'center', 'top'`      | `'center'` | 모달의 위치를 설정합니다.              |
-| `size`         | `'sm', 'md', 'lg'`                | `'lg'`     | 모달의 크기를 설정합니다.              |
-| `backdropType` | `'transparent', 'blur', 'opaque'` | `'opaque'` | 원하는 배경 효과 유형을 정의합니다.    |
-| `shadow`       | `boolean`                         | `true`     | 모달에 그림자 효과를 설정합니다.       |
-| `animation`    | `boolean`                         | `true`     | 모달 트랜지션 애니메이션을 설정합니다. |
-| `zIndex`       | `number`                          | `100`      | 모달의 z-인덱스를 설정합니다.          |
+| Name           | Type                                    | Default    | Description                                                |
+| -------------- | --------------------------------------- | ---------- | ---------------------------------------------------------- |
+| `isOpen`       | `boolean`                               | -          | 모달이 열려 있는지 여부를 결정합니다.                      |
+| `close`        | `function`                              | -          | 모달을 닫는 함수입니다.                                    |
+| `position`     | `'bottom' , 'center', 'top'`            | `'center'` | 모달의 위치를 설정합니다.                                  |
+| `size`         | `'sm'(320px), 'md'(480px), 'lg'(600px)` | `'lg'`     | 모달의 크기를 설정합니다.                                  |
+| `backdropType` | `'transparent', 'blur', 'opaque'`       | `'opaque'` | 원하는 배경 효과 유형을 정의합니다.                        |
+| `shadow`       | `boolean`                               | `true`     | 모달에 그림자 효과를 설정합니다.                           |
+| `animation`    | `boolean`                               | `true`     | 모달 트랜지션 애니메이션을 설정합니다.                     |
+| `zIndex`       | `number`                                | `100`      | 모달의 z-인덱스를 설정합니다.                              |
+| `customWidth`  | `string`                                | -          | 모달의 사용자 지정 너비를 설정합니다.(ex. '200px', '100%') |
+| `customHeight` | `string`                                | -          | 모달의 사용자 지정 높이를 설정합니다.(ex. '200px', '100%') |
 
 ### `Modal.Footer` 컴포넌트
 
@@ -88,13 +90,13 @@ export const MyComponent = () => {
 
 ### `Modal.Button` 컴포넌트
 
-| Name        | Type                 | Default     | Description                                    |
-| ----------- | -------------------- | ----------- | ---------------------------------------------- |
-| `text`      | `string`             | -           | 버튼에 표시될 텍스트입니다.                    |
-| `color`     | `'default', 'none'`  | `'default'` | 버튼의 색상 스타일을 설정합니다.               |
-| `size`      | `'sm', 'md', 'lg'`   | `'lg'`      | 버튼의 크기를 설정합니다.                      |
-| `fullWidth` | `boolean`            | `false`     | 버튼이 전체 너비를 차지할지 여부를 설정합니다. |
-| `variants`  | `'normal', 'border'` | `'normal'`  | 버튼의 스타일 변형을 설정합니다.               |
+| Name        | Type                                                 | Default     | Description                                    |
+| ----------- | ---------------------------------------------------- | ----------- | ---------------------------------------------- |
+| `text`      | `string`                                             | -           | 버튼에 표시될 텍스트입니다.                    |
+| `color`     | `'default', 'none'`                                  | `'default'` | 버튼의 색상 스타일을 설정합니다.               |
+| `size`      | `'sm'(60 * 30px), 'md'(80 * 36px), 'lg'(100 * 40px)` | `'lg'`      | 버튼의 크기를 설정합니다.                      |
+| `fullWidth` | `boolean`                                            | `false`     | 버튼이 전체 너비를 차지할지 여부를 설정합니다. |
+| `variants`  | `'normal', 'border'`                                 | `'normal'`  | 버튼의 스타일 변형을 설정합니다.               |
 
 <br />
 <br />
@@ -139,6 +141,8 @@ export const MyComponent = () => {
 
 ### 사용 예시
 
+(스냅샷의 모습과 정확히 일치하는 props가 아닙니다.)
+
 ```js
 <AlertModal
   isOpen={isOpen}
@@ -146,6 +150,10 @@ export const MyComponent = () => {
   title="아이디를 입력해주세요."
   description="아이디는 필수로 입력해야 합니다."
   onConfirm={() => setIsOpen(false)}
+  size="sm"
+  backdropType="blur"
+  confirmButtonProps={{ size: 'sm', fullWidth: true }}
+  footerProps={{ direction: 'column', position: 'center' }}
 />
 ```
 
@@ -157,6 +165,8 @@ export const MyComponent = () => {
 
 ### 사용 예시
 
+(스냅샷의 모습과 정확히 일치하는 props가 아닙니다.)
+
 ```js
 <ConfirmModal
   isOpen={isOpen}
@@ -164,6 +174,11 @@ export const MyComponent = () => {
   title="카드를 삭제하시겠습니까?"
   description="삭제하면 복구하실 수 없습니다."
   onConfirm={() => setIsOpen(false)}
+  size="sm"
+  backdropType="blur"
+  confirmButtonProps={{ size: 'sm', fullWidth: true }}
+  cancelButtonProps={{ size: 'sm', fullWidth: true }}
+  footerProps={{ direction: 'column', position: 'center' }}
 />
 ```
 
@@ -175,6 +190,8 @@ export const MyComponent = () => {
 
 ### 사용 예시
 
+(스냅샷의 모습과 정확히 일치하는 props가 아닙니다.)
+
 ```js
 <PromptModal
   onConfirm={() => setIsOpen(false)}
@@ -183,5 +200,9 @@ export const MyComponent = () => {
   isOpen={isOpen}
   close={() => setIsOpen(false)}
   title="쿠폰 번호를 입력해 주세요."
+  size="sm"
+  backdropType="blur"
+  confirmButtonProps={{ size: 'sm', fullWidth: true }}
+  inputProps={{ placeholder: '입력' }}
 />
 ```
