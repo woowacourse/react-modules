@@ -25,7 +25,7 @@ const useCardNumber = (initValue: string, formattingChar: string = '-') => {
     return { isValid: true, errorMessage: '' };
   };
 
-  const decorator = (newValue: string) => {
+  const formatter = (newValue: string) => {
     return newValue.split(formattingChar).join('');
   };
 
@@ -53,7 +53,7 @@ const useCardNumber = (initValue: string, formattingChar: string = '-') => {
     initValue,
     validateOnChange,
     validateOnBlur,
-    decorator,
+    formatter,
   });
 
   const formattingValue = splitByLengthList(
