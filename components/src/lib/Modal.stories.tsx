@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 // import { Modal } from "chlwlstlf-modal";
 import { Modal } from "../lib";
 import { fn } from "@storybook/test";
+import { useState } from "react";
 
 const meta = {
   title: "Modal",
@@ -11,21 +12,41 @@ const meta = {
     layout: "centered",
   },
   decorators: [
-    (Story) => (
-      <div style={{ width: "1000px", height: "700px" }}>
-        <Story />
-      </div>
-    ),
+    (Story, context) => {
+      const [isOpen, setIsOpen] = useState(false);
+
+      const handleClose = () => {
+        setIsOpen(false);
+      };
+
+      return (
+        <>
+          <button onClick={() => setIsOpen(true)}>Open Modal</button>
+          <div style={{ width: "1000px", height: "700px" }}>
+            {isOpen && (
+              <Story
+                {...context}
+                args={{
+                  ...context.args,
+                  isOpen: isOpen,
+                  onClose: handleClose,
+                }}
+              />
+            )}
+          </div>
+        </>
+      );
+    },
   ],
+
   argTypes: {
     isOpen: {
       control: "boolean",
       description: "모달 열림 상태",
     },
-    type: {
-      options: ["alert", "confirm", "prompt", "default"],
-      control: { type: "radio" },
-      description: "모달 타입",
+    onClose: {
+      action: "closed",
+      description: "모달을 닫을 때 호출되는 함수",
     },
     size: {
       options: ["small", "medium", "large"],
@@ -39,11 +60,11 @@ const meta = {
     },
     className: {
       control: "text",
-      description: "모달 컨테이너의 클래스명",
+      description: "모달 컨테이너에 추가할 CSS 클래스 이름",
     },
     zIndex: {
       control: "number",
-      description: "모달 컨테이너의 z-index",
+      description: "모달의 스택 순서 설정",
     },
     children: {
       description: "모달 컨테이너 내용",
@@ -52,12 +73,6 @@ const meta = {
       control: ["HTMLElement", "null"],
       description: "스크롤 막고자하는 요소",
     },
-  },
-  args: {
-    onClose: fn(),
-    onConfirm: fn(),
-    onCancel: fn(),
-    onSubmit: fn(),
   },
 } satisfies Meta<typeof Modal>;
 
@@ -68,7 +83,6 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
   args: {
     isOpen: true,
-    type: "default",
     size: "medium",
     position: "center",
     children: [
@@ -80,39 +94,8 @@ export const Default: Story = {
         <Modal.Button variant="secondary">닫기</Modal.Button>
       </>,
     ],
-  },
-};
-
-export const 모달_타입_변경: Story = {
-  args: {
-    isOpen: true,
     onClose: fn(),
-    type: "default",
   },
-  parameters: {
-    docs: {
-      description: {
-        story: "모달의 타입을 변경하는 스토리입니다.",
-      },
-    },
-  },
-  argTypes: {
-    type: {
-      options: ["alert", "confirm", "prompt", "default"],
-      control: { type: "radio" },
-    },
-  },
-  render: (args) => (
-    <Modal
-      isOpen={args.isOpen}
-      onClose={args.onClose}
-      type={args.type}
-    >
-      <Modal.Title>모달 타입 변경 스토리</Modal.Title>
-      <Modal.Message>모달의 타입은 {args.type}입니다.</Modal.Message>
-      {args.type === "prompt" && <Modal.Message>prompt는 보통 submit을 할 때 쓰입니다.</Modal.Message>}
-    </Modal>
-  ),
 };
 
 export const 모달_크기_변경: Story = {
