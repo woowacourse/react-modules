@@ -6,16 +6,26 @@ const useCardPassword = (validLength: number = 2) => {
   const [isValidPassword, setIsValidPassword] = useState(false);
   const [passwordErrorMessage, setPasswordErrorMessage] = useState('');
 
-  const handlePasswordChange = (number: string) => {
-    if (number.length > validLength) return;
-
-    const errorMessage = getNumberErrorMessage(number, validLength);
+  const updateErrorMessage = (password: string, validLength: number) => {
+    const errorMessage = getNumberErrorMessage(password, validLength);
     setPasswordErrorMessage(errorMessage);
 
-    if (isNotNumber(number)) return;
+    return errorMessage;
+  };
 
-    setIsValidPassword(!errorMessage);
-    setPassword(number);
+  const updateValidation = (errorMessage: string) => {
+    setIsValidPassword(errorMessage === '');
+  };
+
+  const handlePasswordChange = (password: string) => {
+    if (password.length > validLength) return;
+
+    const errorMessage = updateErrorMessage(password, validLength);
+    updateValidation(errorMessage);
+
+    if (isNotNumber(password)) return;
+
+    setPassword(password);
   };
 
   return {

@@ -13,19 +13,26 @@ const useCardCVC = ({ validLength = VALID_CVC_NUMBER_LENGTH, initialCVCNumber = 
   const [isValidCVCNumber, setIsValidCVCNumber] = useState(false);
   const [cvcNumberErrorMessage, setCVCNumberErrorMessage] = useState('');
 
-  const handleCVCNumberChange = (number: string) => {
-    if (number.length > validLength) return; // 입력이 초과로 들어오는 경우 오류 메세지 없이 그냥 무시
-
-    const errorMessage = getNumberErrorMessage(number, validLength);
-
-    if (isNotNumber(number)) {
-      setCVCNumberErrorMessage(errorMessage);
-      return;
-    }
-
+  const updateErrorMessage = (cvcNumber: string, validLength: number) => {
+    const errorMessage = getNumberErrorMessage(cvcNumber, validLength);
     setCVCNumberErrorMessage(errorMessage);
+
+    return errorMessage;
+  };
+
+  const updateValidation = (errorMessage: string) => {
     setIsValidCVCNumber(errorMessage === '');
-    setCVCNumber(number);
+  };
+
+  const handleCVCNumberChange = (cvcNumber: string) => {
+    if (cvcNumber.length > validLength) return; // 입력이 초과로 들어오는 경우 오류 메세지 없이 그냥 무시
+
+    const errorMessage = updateErrorMessage(cvcNumber, validLength);
+    updateValidation(errorMessage);
+
+    if (isNotNumber(cvcNumber)) return;
+
+    setCVCNumber(cvcNumber);
   };
 
   return {
