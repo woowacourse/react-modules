@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-type ModalInputProps = React.HTMLAttributes<HTMLInputElement>;
+type ModalInputProps = React.InputHTMLAttributes<HTMLInputElement>;
 
 const ModalInput = ({ ...props }: ModalInputProps) => {
   return <StyledInput {...props} />;
