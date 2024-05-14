@@ -9,6 +9,7 @@ export const Modal = ({
   children,
   isOpen,
   onClose,
+  onConfirm,
   size,
   modalType,
   closeButtonPosition,
@@ -36,7 +37,7 @@ export const Modal = ({
             닫기
           </DarkButton>
         )}
-        <ButtonSet modalType={modalType} onClose={onClose} />
+        <ButtonSet modalType={modalType} onClose={onClose} onConfirm={onConfirm} />
       </ModalContainer>
     </ModalDim>
   );

@@ -3,7 +3,11 @@ import { InputWrapper } from "../common/Input.style";
 import { ModalButtonGroup } from "./Modal.style";
 import { ModalProps } from "./ModalType";
 
-export const ButtonSet = ({ modalType, onClose }: Pick<ModalProps, "modalType" | "onClose">) => {
+export const ButtonSet = ({
+  modalType,
+  onClose,
+  onConfirm,
+}: Pick<ModalProps, "modalType" | "onClose" | "onConfirm">) => {
   switch (modalType) {
     case "alert":
       return (
@@ -15,7 +19,7 @@ export const ButtonSet = ({ modalType, onClose }: Pick<ModalProps, "modalType" |
       return (
         <ModalButtonGroup>
           <LightButton children="취소" onClick={onClose} />
-          <DarkButton children="확인" onClick={onClose} />
+          <DarkButton children="확인" onClick={onConfirm} />
         </ModalButtonGroup>
       );
     case "prompt":
@@ -24,7 +28,7 @@ export const ButtonSet = ({ modalType, onClose }: Pick<ModalProps, "modalType" |
           <InputWrapper type="text" />
           <ModalButtonGroup>
             <LightButton children="취소" onClick={onClose} />
-            <DarkButton children="확인" onClick={onClose} />
+            <DarkButton children="확인" onClick={onConfirm} />
           </ModalButtonGroup>
         </>
       );

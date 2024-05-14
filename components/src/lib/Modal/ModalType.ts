@@ -9,6 +9,7 @@ export interface ModalProps {
   children: React.ReactNode;
   isOpen: boolean;
   onClose: (e: React.MouseEvent<HTMLDivElement | HTMLButtonElement>) => void;
+  onConfirm: (e: React.MouseEvent<HTMLDivElement | HTMLButtonElement>) => void;
   size: ModalSize;
   modalType?: ModalType;
   closeButtonPosition?: CloseButtonPosition;
