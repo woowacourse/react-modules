@@ -1,6 +1,6 @@
 {
   "name": "@roqkftjs/react-payments-custom-hooks",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "리액트 페이먼츠 커스텀 훅",
   "type": "module",
   "types": "dist/index.d.ts",
@@ -17,6 +17,7 @@
     "test": "jest"
   },
   "dependencies": {
+    "@roqkftjs/react-payments-custom-hooks": "^0.0.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
