@@ -7,7 +7,16 @@ type ErrorType = {
   message: string;
 };
 
-const validateCardBrand = (value: string) => {
+type CardBrandType = 'visa' | 'mastercard' | 'diners' | 'amex' | 'unionpay' | '';
+
+interface ValidateCardBrandProps {
+  brand: CardBrandType;
+  format: number[];
+}
+
+type ValidateCardBrandType = (value: string) => ValidateCardBrandProps;
+
+const validateCardBrand: ValidateCardBrandType = (value: string) => {
   if (Validation.isVisa(value)) {
     return { brand: 'visa', format: [4, 4, 4, 4] };
   }
@@ -34,7 +43,7 @@ const validateCardBrand = (value: string) => {
 const useCardNumber = (initialValue = '') => {
   const [value, setValue] = useState(initialValue);
   const [error, setError] = useState<ErrorType>({ state: false, message: '' });
-  const [brand, setBrand] = useState('');
+  const [brand, setBrand] = useState<CardBrandType>('');
   const [format, setFormat] = useState<number[]>([4, 4, 4, 4]);
   const number = value.replaceAll('-', '');
 
