@@ -9,27 +9,30 @@ export const VALID_CARD_NUMBER_LENGTH = 16;
 
 const useCardNumber = (initialCardNumber: string = '') => {
   const [cardNumber, setCardNumber] = useState<string>(initialCardNumber);
-  const [cardType, setCardType] = useState<CardType | null>(null); // 이전 카드 타입을 위해서 상태로 저장
+  const [cardType, setCardType] = useState<CardType | null>(null);
   const [isValidCardNumber, setIsValidCardNumber] = useState<boolean>(false);
   const [cardNumberErrorMessage, setCardNumberErrorMessage] = useState<string>('');
 
   const handleCardNumberChange = (number: string) => {
-    let joinedNumber = number.replace(/\s+/g, '');
+    const joinedNumber = number.replace(/\s+/g, '');
     const detectedCardType = detectCardType(joinedNumber);
-    joinedNumber = joinedNumber.slice(0, CARD_TYPE[detectedCardType].MAX_LENGTH);
+    const maxLength = CARD_TYPE[detectedCardType].MAX_LENGTH;
 
-    if (joinedNumber.length > CARD_TYPE[detectedCardType].MAX_LENGTH) return;
+    if (joinedNumber.length > maxLength) return;
 
-    const errorMessage = getNumberErrorMessage(joinedNumber, CARD_TYPE[detectedCardType].MAX_LENGTH);
+    const errorMessage = getNumberErrorMessage(joinedNumber, maxLength);
+
+    if (isNotNumber(joinedNumber)) {
+      setCardNumberErrorMessage(errorMessage);
+      return;
+    }
+
+    const slicedNumber = joinedNumber.slice(0, CARD_TYPE[detectedCardType].MAX_LENGTH);
+    const formattedNumber = formatCardNumber(slicedNumber, CARD_TYPE[detectedCardType].PATTERN);
+
     setCardNumberErrorMessage(errorMessage);
-
-    if (isNotNumber(joinedNumber)) return;
-
     setIsValidCardNumber(errorMessage === '');
-
-    const formattedNumber = formatCardNumber(joinedNumber, CARD_TYPE[detectedCardType].PATTERN);
     setCardNumber(formattedNumber);
-
     setCardType(detectedCardType);
   };
 
