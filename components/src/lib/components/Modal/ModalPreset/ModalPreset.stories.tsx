@@ -2,9 +2,9 @@ import type { Meta, StoryObj } from '@storybook/react';
 
 import { ChangeEvent, useState } from 'react';
 import { Modal } from '../../..';
-import { AlertModal as MyAlertModal } from './AlertModal';
-import { ConfirmModal as MyConfirmModal } from './ConfirmModal';
-import { PromptModal as MyPromptModal } from './PromptModal';
+import { AlertModal as MyAlertModal, AlertModalProps } from './AlertModal';
+import { ConfirmModal as MyConfirmModal, ConfirmModalProps } from './ConfirmModal';
+import { PromptModal as MyPromptModal, PromptModalProps } from './PromptModal';
 
 import Button from '../../common/Button/Button';
 
@@ -34,14 +34,28 @@ const meta = {
     animation: {
       control: { type: 'boolean' },
     },
+    customWidth: {
+      control: { type: 'text' },
+    },
+    customHeight: {
+      control: { type: 'text' },
+    },
   },
 } satisfies Meta<typeof Modal>;
 
 export default meta;
 
-type Story = StoryObj<typeof Modal>;
+type AlertModalStory = StoryObj<typeof AlertModalProps>;
+type ConfirmModalStory = StoryObj<typeof ConfirmModalProps>;
+type PromptModalStory = StoryObj<typeof PromptModalProps>;
 
-export const AlertModal: Story = {
+export const AlertModal: AlertModalStory = {
+  args: {
+    confirmButtonProps: {
+      size: 'lg',
+      fullWidth: true,
+    },
+  },
   render: (_, context) => {
     const [isOpen, setIsOpen] = useState(false);
 
@@ -61,7 +75,17 @@ export const AlertModal: Story = {
   },
 };
 
-export const ConfirmModal: Story = {
+export const ConfirmModal: ConfirmModalStory = {
+  args: {
+    confirmButtonProps: {
+      size: 'sm',
+      fullWidth: true,
+    },
+    cancelButtonProps: {
+      size: 'sm',
+      fullWidth: true,
+    },
+  },
   render: (_, context) => {
     const [isOpen, setIsOpen] = useState(false);
 
@@ -81,7 +105,7 @@ export const ConfirmModal: Story = {
   },
 };
 
-export const PromptModal: Story = {
+export const PromptModal: PromptModalStory = {
   render: (_, context) => {
     const [isOpen, setIsOpen] = useState(false);
     const [value, setValue] = useState('');
