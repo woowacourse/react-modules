@@ -17,7 +17,7 @@ type Date<T> = {
 
 const VALID_DATE_LENGTH = 2;
 
-type useCardExpirationDateProps = {
+export type useCardExpirationDateProps = {
   month?: string;
   year?: string;
 };
@@ -80,8 +80,8 @@ const useCardExpirationDate = ({ month = '', year = '' }: useCardExpirationDateP
     year: date.year,
     handleMonthChange,
     handleYearChange,
-    monthErrorMessages: errorMessages.month,
-    yearErrorMessages: errorMessages.year,
+    monthErrorMessage: errorMessages.month,
+    yearErrorMessage: errorMessages.year,
     isValidMonth: isValid.month,
     isValidYear: isValid.year,
   };
