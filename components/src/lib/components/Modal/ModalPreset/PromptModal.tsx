@@ -27,17 +27,9 @@ export const PromptModal = ({ title, onConfirm, onCancel, onChange, value, ...re
           color="none"
           onClick={() => {
             if (onCancel) onCancel();
-            rest.close();
           }}
         ></Modal.Button>
-        <Modal.Button
-          size="md"
-          text="확인"
-          onClick={() => {
-            onConfirm();
-            rest.close();
-          }}
-        ></Modal.Button>
+        <Modal.Button size="md" text="확인" onClick={onConfirm}></Modal.Button>
       </Modal.Footer>
     </Modal>
   );
