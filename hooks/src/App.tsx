@@ -145,8 +145,8 @@ function App() {
         <div>
           <span>{expirationDate.isValidMonth ? 'true' : 'false'} </span>
           <span>{expirationDate.isValidYear ? 'true' : 'false'}</span>
-          <p className='m'>{expirationDate.monthErrorMessages}</p>
-          <p className='y'>{expirationDate.yearErrorMessages}</p>
+          <p className='m'>month: {expirationDate.monthErrorMessage}</p>
+          <p className='y'>year: {expirationDate.yearErrorMessage}</p>
         </div>
       </div>
     </>
