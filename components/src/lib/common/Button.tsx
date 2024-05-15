@@ -1,4 +1,4 @@
-import { DarkButtonWrapper, LightButtonWrapper } from "./Button.style";
+import { StyledDarkButton, StyledLightButton } from "./Button.style";
 
 export interface ButtonProps {
   onClick: React.MouseEventHandler<HTMLButtonElement>;
@@ -8,16 +8,16 @@ export interface ButtonProps {
 
 export const DarkButton = ({ children, onClick, style }: ButtonProps) => {
   return (
-    <DarkButtonWrapper onClick={onClick} style={style}>
+    <StyledDarkButton onClick={onClick} style={style}>
       {children}
-    </DarkButtonWrapper>
+    </StyledDarkButton>
   );
 };
 
 export const LightButton = ({ children, onClick, style }: ButtonProps) => {
   return (
-    <LightButtonWrapper onClick={onClick} style={style}>
+    <StyledLightButton onClick={onClick} style={style}>
       {children}
-    </LightButtonWrapper>
+    </StyledLightButton>
   );
 };
