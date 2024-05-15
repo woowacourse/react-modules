@@ -8,9 +8,9 @@ const useEscapeKey = (isOpen: boolean, close: () => void) => {
       if (event.key === 'Escape') close();
     };
 
-    document.addEventListener('keydown', handleEscapePress);
+    document.addEventListener('keydown', handleEscapePress, true);
 
-    return () => document.removeEventListener('keydown', handleEscapePress);
+    return () => document.removeEventListener('keydown', handleEscapePress, true);
   }, [isOpen, close]);
 };
 
