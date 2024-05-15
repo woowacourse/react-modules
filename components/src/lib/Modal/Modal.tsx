@@ -1,9 +1,9 @@
+import { CSSProperties } from 'react';
 import styles from './Modal.module.css';
 import { ModalSizeProps } from '../interfaces';
 import ModalHeader, { ModalHeaderProps } from '../ModalHeader/ModalHeader';
 import ModalContent, { ModalContentProps } from '../ModalContent/ModalContent';
 import ModalFooter, { ModalFooterProps } from '../ModalFooter/ModalFooter';
-import { CSSProperties } from 'react';
 
 export interface ModalProps {
   modalHeader: ModalHeaderProps;
