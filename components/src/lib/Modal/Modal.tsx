@@ -1,6 +1,6 @@
 import { DarkButton, LightButton } from "../common/Button";
 import { ModalContainer, ModalDim, ModalHeader, ModalContent } from "./Modal.style";
-import { ModalProps } from "./ModalType";
+import { ModalProps } from "./types";
 import { ButtonSet } from "./ButtonSet";
 
 export const Modal = ({

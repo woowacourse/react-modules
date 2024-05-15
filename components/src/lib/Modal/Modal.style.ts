@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { ModalProps } from "./ModalType";
+import { ModalProps } from "./types";
 
 interface ModalDimProps {
   isOpen: boolean;
