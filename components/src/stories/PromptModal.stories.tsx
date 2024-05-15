@@ -20,6 +20,18 @@ const meta = {
         args.closeButton.onClose();
       };
 
+      const handleConfirm = () => {
+        alert('확인!');
+        setIsOpen(false);
+        args.confirmButton.onConfirm();
+      };
+
+      const handleCancel = () => {
+        alert('취소!');
+        setIsOpen(false);
+        args.cancelButton.onCancel();
+      };
+
       return (
         <>
           <Button onClick={() => setIsOpen(true)} />
@@ -29,6 +41,8 @@ const meta = {
                 args={{
                   ...args,
                   closeButton: { onClose: handleClose },
+                  cancelButton: { ...args.cancelButton, onCancel: handleCancel },
+                  confirmButton: { ...args.confirmButton, onConfirm: handleConfirm },
                 }}
               />
             )}
@@ -48,15 +62,11 @@ export const Default: Story = {
     closeButton: { onClose: () => {} },
     confirmButton: {
       content: '확인',
-      onConfirm: () => {
-        alert('확인');
-      },
+      onConfirm: () => {},
     },
     cancelButton: {
       content: '취소',
-      onCancel: () => {
-        alert('취소');
-      },
+      onCancel: () => {},
     },
     modalPosition: 'center',
     modalSize: { width: 'medium' },

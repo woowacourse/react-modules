@@ -20,6 +20,12 @@ const meta = {
         args.closeButton.onClose();
       };
 
+      const handleConfirm = () => {
+        alert('확인!');
+        setIsOpen(false);
+        args.confirmButton.onConfirm();
+      };
+
       return (
         <>
           <Button onClick={() => setIsOpen(true)} />
@@ -29,6 +35,7 @@ const meta = {
                 args={{
                   ...args,
                   closeButton: { onClose: handleClose },
+                  confirmButton: { ...args.confirmButton, onConfirm: handleConfirm },
                 }}
               />
             )}
@@ -49,9 +56,7 @@ export const Default: Story = {
     closeButton: { onClose: () => {} },
     confirmButton: {
       content: '확인',
-      onConfirm: () => {
-        alert('확인');
-      },
+      onConfirm: () => {},
     },
     modalPosition: 'center',
     message: 'Alert modal message',
