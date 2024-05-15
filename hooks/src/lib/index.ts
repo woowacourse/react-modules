@@ -2,7 +2,6 @@ export { default as useCardNumber } from './useCardNumber';
 export { default as useCardHolderValidation } from './useCardHolderValidation';
 export { default as useCardPasswordValidation } from './useCardPasswordValidation';
 export { default as useCVCValidation } from './useCVCValidation';
-export { default as useCardType } from './useCardType';
 export { default as useExpiryDateValidation } from './useExpiryDateValidation';
 
 export type { CardNumberInfo } from './useCardNumber';
