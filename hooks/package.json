@@ -1,6 +1,6 @@
 {
   "name": "chlwlstlf-card-input-hooks",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "카드 정보 입력과 유효성 검사 커스텀 훅 모음집",
   "type": "module",
   "types": "dist/index.d.ts",
@@ -17,7 +17,7 @@
     "test": "jest"
   },
   "dependencies": {
-    "chlwlstlf-card-input-hooks": "^0.0.2",
+    "chlwlstlf-card-input-hooks": "^0.0.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
