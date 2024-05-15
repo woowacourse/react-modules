@@ -26,12 +26,12 @@ export const ModalContent = ({ children, ...rest }: PropsWithChildren<ModalConte
 
 export const ModalFooter = ({ children, ...rest }: PropsWithChildren<ModalFooterProps>) => {
   return (
-    <section
+    <footer
       {...rest}
       className="modal-footer"
     >
       {children}
-    </section>
+    </footer>
   );
 };
 
