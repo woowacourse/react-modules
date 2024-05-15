@@ -12,7 +12,7 @@ export default function useCVC(): UseCVCResult {
   const [cardCVC, setCardCVC] = useState("");
   const [isTouched, setIsTouched] = useState(false);
 
-  function validatePassword(value: string): ValidationResult {
+  function validateCVC(value: string): ValidationResult {
     // 인풋을 클릭했지만 아무런 입력이 없다면 에러 발생
     if (isTouched && value === "") {
       return { isValid: false, errorMessage: ERROR_MESSAGE.NO_INPUT };
@@ -36,5 +36,5 @@ export default function useCVC(): UseCVCResult {
     setCardCVC(value);
   }
 
-  return { cardCVC, handleCardCVCChange, cardCVCValidation: validatePassword(cardCVC) };
+  return { cardCVC, handleCardCVCChange, cardCVCValidation: validateCVC(cardCVC) };
 }
