@@ -1,4 +1,4 @@
-export default function useCardBrandIdentification(value: string): string {
+export default function identifyCardBrand(value: string): string {
   // 36으로 시작하고 뒤에 12자리 숫자가 오면 Diners
   if (/^36\d{12}$/.test(value)) {
     return "Diners";
