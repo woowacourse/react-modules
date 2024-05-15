@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-// import { Modal } from "chlwlstlf-modal";
-import { AlertModal, ConfirmModal, Modal, PromptModal } from "./lib";
+import { Modal, AlertModal, ConfirmModal, PromptModal } from "chlwlstlf-modal";
 
 const App = () => {
   return (

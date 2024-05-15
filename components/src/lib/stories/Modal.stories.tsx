@@ -1,8 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
-// import { Modal } from "chlwlstlf-modal";
-import { Modal } from "../lib";
+import { Modal } from "chlwlstlf-modal";
 import { fn } from "@storybook/test";
-import { useState } from "react";
 
 const meta = {
   title: "Modal",
@@ -12,33 +10,12 @@ const meta = {
     layout: "centered",
   },
   decorators: [
-    (Story, context) => {
-      const [isOpen, setIsOpen] = useState(false);
-
-      const handleClose = () => {
-        setIsOpen(false);
-      };
-
-      return (
-        <>
-          <button onClick={() => setIsOpen(true)}>Open Modal</button>
-          <div style={{ width: "1000px", height: "700px" }}>
-            {isOpen && (
-              <Story
-                {...context}
-                args={{
-                  ...context.args,
-                  isOpen: isOpen,
-                  onClose: handleClose,
-                }}
-              />
-            )}
-          </div>
-        </>
-      );
-    },
+    (Story) => (
+      <div style={{ width: "1000px", height: "700px" }}>
+        <Story />
+      </div>
+    ),
   ],
-
   argTypes: {
     isOpen: {
       control: "boolean",
