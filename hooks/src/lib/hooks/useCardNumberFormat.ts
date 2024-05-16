@@ -12,15 +12,17 @@ export default function useCardNumberFormat(value: string): string {
     return value;
   }
 
-  let startIndex = 0;
-  const formattedParts = formatPattern.map((length) => {
-    const endIndex = startIndex + length;
-    const part = value.slice(startIndex, endIndex);
-    startIndex = endIndex;
-    return part;
-  });
-
-  const formatted = formattedParts.join(" ");
+  const formatted = formatPattern
+    .reduce(
+      (acc, length, index) => {
+        const part = value.slice(acc.startIndex, acc.startIndex + length);
+        acc.startIndex += length;
+        acc.parts.push(part);
+        return acc;
+      },
+      { startIndex: 0, parts: [] as string[] }
+    )
+    .parts.join(" ");
 
   return formatted;
 }
