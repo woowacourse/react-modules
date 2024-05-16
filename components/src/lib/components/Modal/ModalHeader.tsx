@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import xButton from "./asset/xButton.svg";
+import xButton from "../asset/xButton.svg";
 
 export interface Props {
   title: string;

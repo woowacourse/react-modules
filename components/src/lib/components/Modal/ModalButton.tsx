@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import { BUTTON_COLOR } from "./constant/color";
-import { ButtonSize } from "./modalType";
+import { BUTTON_COLOR } from "../constant/color";
+import { ButtonSize, ButtonType } from "./modalType";
 
 export interface ButtonProps {
   onClick: (e: React.MouseEvent) => void;
@@ -10,6 +10,8 @@ export interface ButtonProps {
   backgroundHoverColor?: string;
   fontColor?: string;
   content?: string;
+
+  type?: ButtonType;
 }
 
 const getButtonSize = {
@@ -26,6 +28,7 @@ const ModalButton = ({
   backgroundHoverColor = BUTTON_COLOR.defaultButton.backgroundHoverColor,
   fontColor = BUTTON_COLOR.defaultButton.fontColor,
   content = "확인",
+  type = "button",
 }: ButtonProps) => {
   return (
     <StyledButton
@@ -34,6 +37,7 @@ const ModalButton = ({
       $backgroundHoverColor={backgroundHoverColor}
       $fontColor={fontColor}
       onClick={(e) => onClick(e)}
+      type={type}
     >
       {content}
     </StyledButton>
