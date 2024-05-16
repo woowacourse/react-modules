@@ -1,6 +1,6 @@
 import {
+  identifyCardBrand,
   useCVC,
-  useCardBrandIdentification,
   useCardHolder,
   useCardIssuer,
   useCardNumber,
@@ -96,7 +96,7 @@ function App() {
       </div>
 
       <div>
-        <p>Card Brand Identification: {useCardBrandIdentification(cardNumbers)}</p>
+        <p>Card Brand Identification: {identifyCardBrand(cardNumbers)}</p>
         <p>Card Number Format: {useCardNumberFormat(cardNumbers)}</p>
       </div>
 

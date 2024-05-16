@@ -14,7 +14,7 @@ export default function useCardNumberFormat(value: string): string {
 
   const formatted = formatPattern
     .reduce(
-      (acc, length, index) => {
+      (acc, length) => {
         const part = value.slice(acc.startIndex, acc.startIndex + length);
         acc.startIndex += length;
         acc.parts.push(part);
