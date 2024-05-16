@@ -1,6 +1,4 @@
-// import { useModal, Modal } from "choco-modal-component";
-import { useModal } from "./lib/Modal/index";
-import { Modal } from "./lib/Modal/Modal";
+import { useModal, Modal } from "choco-modal-component";
 import React from "react";
 import "./App.css";
 
@@ -21,7 +19,7 @@ function App() {
         onClose={closeModal}
         onConfirm={handleConfirm}
         size="large"
-        modalType="confirm"
+        modalType="prompt"
       >
         <div style={{ textAlign: "justify" }}>
           리액트에서의 컴포넌트도 캡슐화 되어 있고, 재사용 및 재구성할 수 있습니다. 리액트를 이용해
