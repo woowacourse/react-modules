@@ -21,7 +21,7 @@ const useCardNumberValidation = () => {
 
     if (!cardInputValidator.validateCardNumberExactLength(value)) {
       setErrorState(true);
-      setErrorText(VALIDATION_MESSAGES.invalidCardNumberLength(value));
+      setErrorText(cardInputValidator.invalidCardNumberLengthMessage(value));
 
       return true;
     }

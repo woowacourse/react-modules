@@ -2,10 +2,9 @@ import { useState } from "react";
 
 import useCardNumberFormat from "./useCardNumberFormat";
 import useCardNumberValidation from "./useCardNumberValidation";
+import cardInputValidator from "../validators/cardInputValidator";
 
-import { INPUT_RULES } from "../constants/cardCustomHook";
-
-type CardBrandType =
+export type CardBrandType =
   | "None"
   | "Diners"
   | "AMEX"
@@ -32,7 +31,7 @@ const useCardNumber = () => {
     if (!canUpdate) return;
 
     setCardNumber(value);
-    setCardBrand(INPUT_RULES.validCardBrand(value));
+    setCardBrand(cardInputValidator.validateCardBrand(value));
 
     updateCardNumberFormat(value);
   };

@@ -1,4 +1,4 @@
-import cardInputValidator from "../validators/cardInputValidator";
+import { CardBrandType } from "../useCardNumber/useCardNumber";
 
 export const INPUT_RULES = {
   minMonth: 1,
@@ -14,19 +14,15 @@ export const INPUT_RULES = {
   },
   validMasterCardNumber: { first: 51, last: 55 },
   validVisaCardNumber: "4",
-  validCardNumberLength: (value: string) => {
-    if (cardInputValidator.validateDinersCardNumber(value)) return 14;
-    if (cardInputValidator.validateAMEXCardNumber(value)) return 15;
-    return 16;
-  },
-  validCardBrand: (value: string) => {
-    if (cardInputValidator.validateDinersCardNumber(value)) return "Diners";
-    if (cardInputValidator.validateAMEXCardNumber(value)) return "AMEX";
-    if (cardInputValidator.validateUnionPayCardNumber(value)) return "UnionPay";
-    if (cardInputValidator.validateMasterCardNumber(value)) return "MasterCard";
-    if (cardInputValidator.validateVisaCardNumber(value)) return "Visa";
-    return "None";
-  },
+  validDinersCardNumberLength: 14,
+  validAMEXCardNumberLength: 15,
+  validOtherCardNumberLength: 16,
+  validDiners: "Diners" as CardBrandType,
+  validAMEX: "AMEX" as CardBrandType,
+  validUnionPay: "UnionPay" as CardBrandType,
+  validMasterCard: "MasterCard" as CardBrandType,
+  validVisa: "Visa" as CardBrandType,
+  validOther: "None" as CardBrandType,
   validExpiryDateLength: 2,
   validCVCLength: 3,
   validCardPasswordLength: 2,
@@ -35,15 +31,9 @@ export const INPUT_RULES = {
 export const VALIDATION_MESSAGES = {
   onlyNumbersAllowed: "숫자를 입력해 주세요.",
   onlyEnglishAllowed: "영문자를 입력해 주세요.",
-  invalidCardNumberLength: (value: string) => {
-    if (cardInputValidator.validateDinersCardNumber(value))
-      return "Diners 카드번호는 14자리 숫자여야 합니다.";
-
-    if (cardInputValidator.validateAMEXCardNumber(value))
-      return "AMEX 카드번호는 15자리 숫자여야 합니다.";
-
-    return "카드번호는 16자리 숫자여야 합니다.";
-  },
+  invalidDinersCardNumberLength: "Diners 카드번호는 14자리 숫자여야 합니다.",
+  invalidAMEXCardNumberLength: "AMEX 카드번호는 15자리 숫자여야 합니다.",
+  invalidOtherCardNumberLength: "카드번호는 16자리 숫자여야 합니다.",
   invalidMonthRange: "월 입력은 01 ~ 12 사이의 입력이어야해요",
   expiredYear: "이미 지난 년도는 입력할 수 없어요.",
   expiredDate: "이미 지난 유효기간이에요",

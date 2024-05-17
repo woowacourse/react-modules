@@ -1,4 +1,4 @@
-import { INPUT_RULES } from "../constants/cardCustomHook";
+import { INPUT_RULES, VALIDATION_MESSAGES } from "../constants/cardCustomHook";
 
 const cardInputValidator = {
   validateNumericInput(value: string) {
@@ -58,17 +58,45 @@ const cardInputValidator = {
   },
 
   validateCardNumberExactLength(value: string) {
-    return this.validateInputLength(
-      value,
-      INPUT_RULES.validCardNumberLength(value)
-    );
+    return this.validateInputLength(value, this.validCardNumberLength(value));
   },
 
   validateCardNumberLength(value: string) {
     const isOverDinersCardNumberLength =
-      value.length <= INPUT_RULES.validCardNumberLength(value);
+      value.length <= this.validCardNumberLength(value);
 
     return isOverDinersCardNumberLength;
+  },
+
+  validCardNumberLength: (value: string) => {
+    if (cardInputValidator.validateDinersCardNumber(value))
+      return INPUT_RULES.validDinersCardNumberLength;
+    if (cardInputValidator.validateAMEXCardNumber(value))
+      return INPUT_RULES.validAMEXCardNumberLength;
+    return INPUT_RULES.validOtherCardNumberLength;
+  },
+
+  validateCardBrand: (value: string) => {
+    if (cardInputValidator.validateDinersCardNumber(value))
+      return INPUT_RULES.validDiners;
+    if (cardInputValidator.validateAMEXCardNumber(value))
+      return INPUT_RULES.validAMEX;
+    if (cardInputValidator.validateUnionPayCardNumber(value))
+      return INPUT_RULES.validUnionPay;
+    if (cardInputValidator.validateMasterCardNumber(value))
+      return INPUT_RULES.validMasterCard;
+    if (cardInputValidator.validateVisaCardNumber(value))
+      return INPUT_RULES.validVisa;
+    return INPUT_RULES.validOther;
+  },
+
+  invalidCardNumberLengthMessage: (value: string) => {
+    if (cardInputValidator.validateDinersCardNumber(value))
+      return VALIDATION_MESSAGES.invalidDinersCardNumberLength;
+    if (cardInputValidator.validateAMEXCardNumber(value))
+      return VALIDATION_MESSAGES.invalidAMEXCardNumberLength;
+
+    return VALIDATION_MESSAGES.invalidOtherCardNumberLength;
   },
 
   validatePastYear(year: string) {
