@@ -40,7 +40,8 @@ function ModalButton({
 }: ModalButtonType) {
   const handleModalButton = () => {
     if (category === 'alert') {
-      return handleCloseButton();
+      handleCloseButton();
+      return;
     }
     onConfirm && onConfirm();
     handleCloseButton();
