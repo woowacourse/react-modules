@@ -19,11 +19,12 @@ const ModalInputStyle = styled.input`
 `;
 
 interface ModalInputType {
+  value: string;
   onChangeInput: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-function ModalInput({ onChangeInput }: ModalInputType) {
-  return <ModalInputStyle onChange={onChangeInput} />;
+function ModalInput({ value, onChangeInput }: ModalInputType) {
+  return <ModalInputStyle value={value} onChange={onChangeInput} />;
 }
 
 export default ModalInput;

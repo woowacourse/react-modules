@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './reset.css';
 
 import styled from 'styled-components';
@@ -13,10 +13,18 @@ function App() {
   const { isOpen: isConfirmOpen, toggleModal: toggleConfirmModal } = useModal();
   const { isOpen: isPromptOpen, toggleModal: togglePromptModal } = useModal();
 
+  const [inputValue, setInputValue] = useState('');
+
+  useEffect(() => {
+    if (!isPromptOpen) {
+      setInputValue('');
+    }
+  }, [isPromptOpen]);
+
   const onChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     console.log('onChangeInput 실행');
-    console.log(value);
+    setInputValue(value);
   };
 
   const onConfirm = () => {
@@ -74,7 +82,7 @@ function App() {
           closeOption="button"
           handleCloseButton={togglePromptModal}
         />
-        <Modal.Input onChangeInput={onChangeInput} />
+        <Modal.Input value={inputValue} onChangeInput={onChangeInput} />
         <Modal.Button
           category="prompt"
           handleCloseButton={togglePromptModal}
