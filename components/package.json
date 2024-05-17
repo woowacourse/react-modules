@@ -21,7 +21,7 @@
   "dependencies": {
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "soosoo-react-modal-component": "^0.0.2"
+    "soosoo-react-modal-component": "^0.0.5"
   },
   "devDependencies": {
     "@chromatic-com/storybook": "^1.3.3",

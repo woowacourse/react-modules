@@ -17,10 +17,6 @@ function App() {
       content: "동의하고 저장하기",
       onClick: () => setIsOpen(false),
       className: "confirmButton",
-      style: {
-        background: "rgba(51, 51, 51, 1)",
-        color: "white",
-      },
     },
   ];
 
