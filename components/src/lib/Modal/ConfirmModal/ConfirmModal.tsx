@@ -27,22 +27,11 @@ const ConfirmModal = ({
       content: cancelButton.content || "취소",
       onClick: cancelButton.onCancel,
       className: "cancelButton",
-      style: {
-        background: "transparent",
-        color: "rgba(139, 149, 161, 1)",
-        border: "1px solid rgba(51, 51, 51, 0.25)",
-        width: "80px",
-      },
     },
     {
       content: confirmButton.content || "확인",
       onClick: confirmButton.onConfirm,
       className: "confirmButton",
-      style: {
-        background: "rgba(51, 51, 51, 1)",
-        color: "white",
-        width: "80px",
-      },
     },
   ];
 

@@ -4,12 +4,11 @@
 
 .modalFooter.footerContainer {
   flex-direction: column;
-  gap: 10px;
 }
 
 .alertModalFooter.footerContainer,
 .confirmModalFooter.footerContainer,
 .promptModalFooter.footerContainer {
   justify-content: flex-end;
-  gap: 10px;
+  gap: 12px;
 }

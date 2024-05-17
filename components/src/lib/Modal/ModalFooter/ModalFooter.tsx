@@ -16,7 +16,6 @@ const ModalFooter = ({ className, buttons }: ModalFooterProps) => {
             content={button.content}
             onClick={button.onClick}
             className={button.className}
-            style={button.style}
           />
         );
       })}

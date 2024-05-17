@@ -22,11 +22,6 @@ const AlertModal = ({
       content: confirmButton.content || "확인",
       onClick: confirmButton.onConfirm,
       className: "confirmButton",
-      style: {
-        background: "rgba(51, 51, 51, 1)",
-        color: "white",
-        width: "80px",
-      },
     },
   ];
 
