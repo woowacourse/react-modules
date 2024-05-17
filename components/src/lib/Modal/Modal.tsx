@@ -43,7 +43,7 @@ const Modal = ({
     <>
       {isOpen && (
         <div className={`${styles.modal} ${styles.container} ${styles[position]}`}>
-          <div className={styles.backDrop} onClick={onClose}></div>
+          <div className={styles.backDrop} onClick={onClose} />
           <div className={`${styles.modalSection} ${styles[size!]}`}>
             <ModalHeader title={title} closeButton={closeButton} />
             <ModalContent>{children}</ModalContent>
