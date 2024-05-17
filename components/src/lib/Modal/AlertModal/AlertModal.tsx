@@ -26,18 +26,16 @@ const AlertModal = ({
   ];
 
   return (
-    <>
-      <Modal
-        position={position}
-        size={size}
-        title={title}
-        isOpen={isOpen}
-        footerClassName={footerClassName}
-        footerButtons={footerButtons}
-      >
-        {children}
-      </Modal>
-    </>
+    <Modal
+      position={position}
+      size={size}
+      title={title}
+      isOpen={isOpen}
+      footerClassName={footerClassName}
+      footerButtons={footerButtons}
+    >
+      {children}
+    </Modal>
   );
 };
 
