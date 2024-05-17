@@ -10,7 +10,6 @@ const ModalInputStyle = styled.input`
   border-radius: 0.4rem;
   border: 0.1rem solid var(--black-color);
 
-  font-family: Inter;
   font-size: 11px;
   font-weight: 400;
   line-height: 14.88px;

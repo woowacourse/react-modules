@@ -14,7 +14,7 @@ const ButtonStyle = styled.button`
   border-radius: 0.5rem;
   border: none;
 
-  font-family: Noto Sans KR;
+  font-family: var(--font-Noto-Sans-KR);
   font-size: 15px;
   font-weight: 700;
   line-height: 21.72px;

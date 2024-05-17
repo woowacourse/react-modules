@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 const SubTitleContainer = styled.div`
   color: var(--sub-black-color);
-  font-family: Noto Sans;
+  font-family: var(--font-Noto-Sans);
   font-size: 12px;
   font-weight: 500;
   line-height: 15px;
