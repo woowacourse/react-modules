@@ -31,10 +31,6 @@ export const Default: Story = {
         content: "동의하고 저장하기",
         onClick: () => alert(`'동의하고 저장하기' 버튼이 클릭되었습니다.`),
         className: "confirmButton",
-        style: {
-          background: "rgba(51, 51, 51, 1)",
-          color: "white",
-        },
       },
     ],
     children: (
@@ -73,4 +69,8 @@ export const Default: Story = {
       </div>
     ),
   },
+};
+
+Default.parameters = {
+  controls: { exclude: "children" },
 };

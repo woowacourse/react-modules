@@ -13,10 +13,9 @@ const meta = {
     },
   },
   argTypes: {
+    className: { control: { disable: true } },
     content: { control: "text" },
     onClick: { action: "clicked" },
-    className: { control: "text" },
-    style: { control: "object" },
   },
 } satisfies Meta<typeof Button>;
 
@@ -29,9 +28,5 @@ export const Default: Story = {
     content: "버튼",
     onClick: fn(),
     className: "modalFooter",
-    style: {
-      background: "rgba(51, 51, 51, 1)",
-      color: "white",
-    },
   },
 };
