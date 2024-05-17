@@ -6,7 +6,7 @@ import useCardNumberValidation from "./useCardNumberValidation";
 import { INPUT_RULES } from "../constants/cardCustomHook";
 
 type CardBrandType =
-  | ""
+  | "None"
   | "Diners"
   | "AMEX"
   | "UnionPay"
@@ -15,7 +15,7 @@ type CardBrandType =
 
 const useCardNumber = () => {
   const [cardNumber, setCardNumber] = useState("");
-  const [cardBrand, setCardBrand] = useState<CardBrandType>("");
+  const [cardBrand, setCardBrand] = useState<CardBrandType>("None");
 
   const { cardNumberFormat, updateCardNumberFormat } = useCardNumberFormat();
 

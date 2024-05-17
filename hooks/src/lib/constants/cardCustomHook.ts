@@ -25,7 +25,7 @@ export const INPUT_RULES = {
     if (cardInputValidator.validateUnionPayCardNumber(value)) return "UnionPay";
     if (cardInputValidator.validateMasterCardNumber(value)) return "MasterCard";
     if (cardInputValidator.validateVisaCardNumber(value)) return "Visa";
-    return "";
+    return "None";
   },
   validExpiryDateLength: 2,
   validCVCLength: 3,

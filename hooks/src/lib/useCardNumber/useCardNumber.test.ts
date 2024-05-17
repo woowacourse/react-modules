@@ -7,7 +7,7 @@ import useCardNumber from "./useCardNumber";
 import { CardNumberFormatType } from "./useCardNumberFormat";
 
 describe("useCardNumber 커스텀 훅 동작 테스트", () => {
-  it("초기값이 정확히 설정된다.", () => {
+  it("초기값으로 빈 값이 설정된다.", () => {
     const EXPECTED_INITIAL_VALUE = "";
 
     const { result } = renderHook(() => useCardNumber());
