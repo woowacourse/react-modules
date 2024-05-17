@@ -1,11 +1,6 @@
 import { useRef, useState } from "react";
 import useValidation from "../useValidation/useValidation";
-import { CardBrand } from "../utils/getCardFormat";
-
-// export interface ValidationType {
-//   validate: (value: string) => boolean;
-//   message: string;
-// }
+import { CardBrand } from "../utils/getCardBrand";
 
 export interface ValidationType {
   validate: (value: string, cardBrand: CardBrand | "") => boolean;

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import useInput, { ValidationType } from "../useInput/useInput";
-import getCardBrand from "../utils/getCardBrand";
-import getCardFormat, { CardBrand } from "../utils/getCardFormat";
+import getCardBrand, { CardBrand } from "../utils/getCardBrand";
+import getCardFormat from "../utils/getCardFormat";
 
 const CARD_NUMBER_LENGTH: Record<CardBrand | "", number> = {
   visa: 16,
