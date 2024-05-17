@@ -14,6 +14,9 @@ const buttonContainerPosition = (position: ButtonContainerPositionType) => {
 
     case "right":
       return "flex-end";
+
+    default:
+      return "center";
   }
 };
 

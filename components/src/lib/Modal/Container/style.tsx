@@ -35,6 +35,9 @@ const containerSize = (size: ContainerSizeType) => {
 
     case "small":
       return "30%";
+
+    default:
+      return "60%";
   }
 };
 

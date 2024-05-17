@@ -10,7 +10,7 @@ export interface ButtonContainerProps {
 
 const ButtonContainer = ({
   direction = "row",
-  position,
+  position = "center",
   children,
 }: ButtonContainerProps) => {
   return (

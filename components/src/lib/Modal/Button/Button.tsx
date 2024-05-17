@@ -10,7 +10,13 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   children: JSX.Element;
 }
 
-const Button = ({ color, size, onClick, children, ...props }: ButtonProps) => {
+const Button = ({
+  color,
+  size = "large",
+  onClick,
+  children,
+  ...props
+}: ButtonProps) => {
   return (
     <Styled.Button $color={color} $size={size} onClick={onClick} {...props}>
       {children}

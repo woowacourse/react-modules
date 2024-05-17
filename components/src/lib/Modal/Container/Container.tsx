@@ -8,7 +8,11 @@ export interface ContainerProps {
   children: JSX.Element;
 }
 
-const Container = ({ position, size, children }: ContainerProps) => {
+const Container = ({
+  position = "center",
+  size = "large",
+  children,
+}: ContainerProps) => {
   return (
     <Styled.Container $position={position} $size={size}>
       {children}
