@@ -20,26 +20,26 @@ Feel free to utilize the modal by adding events to your children components!
 
 ### Modal
 
-| argument    | description           | type                 | default value |
-| ----------- | --------------------- | -------------------- | ------------- |
-| toggleModal | open/close the modal  | `function`           | -             |
-| isOpen      | state of the modal    | `boolean`            | false         |
-| position    | position of the modal | center, bottom       | -             |
-| size        | size of the modal     | small, medium, large | -             |
+| argument    | description                          | type                 | default value |
+| ----------- | ------------------------------------ | -------------------- | ------------- |
+| toggleModal | Open/Close the modal                 | `function`           | -             |
+| isOpen      | The state of the modal               | `boolean`            | false         |
+| position    | The position of the modal (optional) | center, bottom       | center        |
+| size        | The size of the modal (optional)     | small, medium, large | medium        |
 
 ### Modal Button
 
-| argument          | description                                        | type                   | default value |
-| ----------------- | -------------------------------------------------- | ---------------------- | ------------- |
-| category          | Type of button                                     | alert, confirm, prompt | -             |
-| handleCloseButton | Function to close the modal                        | `function`             | -             |
-| onConfirm         | Function called when the confirm button is clicked | `function`             | -             |
+| argument          | description                                                   | type                   | default value |
+| ----------------- | ------------------------------------------------------------- | ---------------------- | ------------- |
+| category          | The type of the button                                        | alert, confirm, prompt | -             |
+| handleCloseButton | Function to close the modal                                   | `function`             | -             |
+| onConfirm         | Function called when the confirm button is clicked (optional) | `function`             | -             |
 
 ### Modal Header
 
 | argument          | description                  | type         | default value |
 | ----------------- | ---------------------------- | ------------ | ------------- |
-| title             | Modal title                  | `string`     | -             |
+| title             | The title of the modal       | `string`     | -             |
 | closeOption       | Option for closing the modal | icon, button | -             |
 | handleCloseButton | Function to close the modal  | `function`   | -             |
 
@@ -47,6 +47,8 @@ Feel free to utilize the modal by adding events to your children components!
 
 | argument      | description                                  | type       | default value                                      |
 | ------------- | -------------------------------------------- | ---------- | -------------------------------------------------- |
+| value         | The value of Modal Input                     | `string`   | -                                                  |
+| isOpen        | The state of the modal                       | `boolean`  | false                                              |
 | onChangeInput | Function called when the input value changes | `function` | `(e: React.ChangeEvent<HTMLInputElement>) => void` |
 
 ### Modal SubTitle
@@ -64,7 +66,7 @@ Feel free to utilize the modal by adding events to your children components!
 ## **Usage**
 
 ```tsx
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './reset.css';
 
 import styled from 'styled-components';
@@ -79,14 +81,23 @@ function App() {
   const { isOpen: isConfirmOpen, toggleModal: toggleConfirmModal } = useModal();
   const { isOpen: isPromptOpen, toggleModal: togglePromptModal } = useModal();
 
+  const [inputValue, setInputValue] = useState('');
+
+  // Reset Input Value
+  useEffect(() => {
+    if (!isPromptOpen) {
+      setInputValue('');
+    }
+  }, [isPromptOpen]);
+
   const onChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+    console.log('onChangeInput');
     const value = e.target.value;
-    console.log('onChangeInput 실행');
-    console.log(value);
+    setInputValue(value);
   };
 
   const onConfirm = () => {
-    console.log('onConfirm 실행');
+    console.log('onConfirm');
   };
 
   return (
@@ -98,12 +109,7 @@ function App() {
       </ButtonContainer>
 
       {/* alert modal */}
-      <Modal
-        toggleModal={toggleAlertModal}
-        position="center"
-        isOpen={isAlertOpen}
-        size="small"
-      >
+      <Modal toggleModal={toggleAlertModal} isOpen={isAlertOpen}>
         <Modal.Header
           title="아이디를 입력해 주세요."
           closeOption="button"
@@ -145,7 +151,11 @@ function App() {
           closeOption="button"
           handleCloseButton={togglePromptModal}
         />
-        <Modal.Input onChangeInput={onChangeInput} />
+        <Modal.Input
+          value={inputValue}
+          isOpen={isPromptOpen}
+          onChangeInput={onChangeInput}
+        />
         <Modal.Button
           category="prompt"
           handleCloseButton={togglePromptModal}

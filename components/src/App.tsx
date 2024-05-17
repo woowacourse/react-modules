@@ -15,6 +15,7 @@ function App() {
 
   const [inputValue, setInputValue] = useState('');
 
+  // Reset Input Value
   useEffect(() => {
     if (!isPromptOpen) {
       setInputValue('');
@@ -22,13 +23,13 @@ function App() {
   }, [isPromptOpen]);
 
   const onChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+    console.log('onChangeInput');
     const value = e.target.value;
-    console.log('onChangeInput 실행');
     setInputValue(value);
   };
 
   const onConfirm = () => {
-    console.log('onConfirm 실행');
+    console.log('onConfirm');
   };
 
   return (
