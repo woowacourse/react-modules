@@ -8,7 +8,6 @@ describe("useCardNumbers", () => {
     it.each(["soosoo", "현수연", "26살", "^,^~"])(
       "숫자가 아닌 값(%s)을 입력하면 에러 상태가 true가 된다.",
       (userInput) => {
-        // const userInput = "soosoo";
         const { result } = renderHook(() => useCardNumbers());
         act(() => {
           result.current.cardNumbers.onChange({
@@ -107,13 +106,6 @@ describe("useCardNumbers", () => {
     it("visa 카드일 경우, 입력된 카드 번호를 visa 규칙에 맞게 포맷하여 표시한다.", () => {
       const cardNumber = "4444333322221111";
       const formattedCardNumber = "4444 3333 2222 1111";
-      // const { result } = renderHook(() => useCardNumbers());
-
-      // act(() => {
-      //   result.current.cardNumbers.onChange({
-      //     target: { value: userInput },
-      //   } as ChangeEvent<HTMLInputElement>);
-      // });
 
       const formattedInput = getCardFormat(cardNumber, "visa");
 
