@@ -1,13 +1,14 @@
-const cardNumberFormatter = (cardNumbers: string, cardIdentifier?: string) => {
+const cardNumberFormatter = (cardNumbers: string, cardIdentifier: string) => {
   const dehyphenatedCardNumberString = cardNumbers.replace(/\D/g, "");
 
-  if (cardIdentifier === "Diners") {
-    return dehyphenatedCardNumberString.replace(/(\d{4})(\d{6})(\d{4})/, "$1 $2 $3").trim();
-  } else if (cardIdentifier === "AMEX") {
-    return dehyphenatedCardNumberString.replace(/(\d{4})(\d{6})(\d{5})/, "$1 $2 $3").trim();
-  } else {
-    return dehyphenatedCardNumberString.replace(/(\d{4})(?=\d)/g, "$1 ").trim();
-  }
+  const formatPatterns: Record<string, RegExp> = {
+    Diners: /(\d{4})(\d{6})(\d{4})/,
+    AMEX: /(\d{4})(\d{6})(\d{5})/,
+    default: /(\d{4})(?=\d)/g,
+  };
+
+  const formatPattern = formatPatterns[cardIdentifier] ?? formatPatterns.default;
+  return dehyphenatedCardNumberString.replace(formatPattern, "$1 ").trim();
 };
 
 export default cardNumberFormatter;
