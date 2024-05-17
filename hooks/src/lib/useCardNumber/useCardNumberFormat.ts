@@ -20,9 +20,8 @@ const useCardNumberFormat = () => {
     });
 
   const resetCardNumberFormat = () => {
-    return setCardNumberFormat((prevValue) => {
+    return setCardNumberFormat(() => {
       return {
-        ...prevValue,
         first: "",
         second: "",
         third: "",
@@ -49,9 +48,8 @@ const useCardNumberFormat = () => {
   };
 
   const setFourPartCardNumberFormat = (cardNumber: string) => {
-    setCardNumberFormat((prevValue) => {
+    setCardNumberFormat(() => {
       return {
-        ...prevValue,
         first: cardNumber.slice(
           CONDITION.fourPartFirstStartIndex,
           CONDITION.fourPartSecondStartIndex
