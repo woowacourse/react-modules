@@ -1,4 +1,4 @@
-export type CardBrand = "visa" | "mastercard" | "diners" | "amex" | "unionpay";
+import { CardBrand } from "./getCardBrand";
 
 const CARD_FORMAT: Record<CardBrand | "", number[]> = {
   visa: [4, 4, 4, 4],
