@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import styled from 'styled-components';
 
 const ModalInputStyle = styled.input`
@@ -20,11 +20,22 @@ const ModalInputStyle = styled.input`
 
 interface ModalInputType {
   value: string;
+  isOpen: boolean;
   onChangeInput: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-function ModalInput({ value, onChangeInput }: ModalInputType) {
-  return <ModalInputStyle value={value} onChange={onChangeInput} />;
+function ModalInput({ value, isOpen, onChangeInput }: ModalInputType) {
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    if (inputRef.current && isOpen) {
+      inputRef.current.focus();
+    }
+  }, [isOpen]);
+
+  return (
+    <ModalInputStyle value={value} onChange={onChangeInput} ref={inputRef} />
+  );
 }
 
 export default ModalInput;

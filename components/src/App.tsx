@@ -82,7 +82,11 @@ function App() {
           closeOption="button"
           handleCloseButton={togglePromptModal}
         />
-        <Modal.Input value={inputValue} onChangeInput={onChangeInput} />
+        <Modal.Input
+          value={inputValue}
+          isOpen={isPromptOpen}
+          onChangeInput={onChangeInput}
+        />
         <Modal.Button
           category="prompt"
           handleCloseButton={togglePromptModal}
