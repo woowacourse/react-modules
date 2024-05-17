@@ -32,12 +32,7 @@ function App() {
       </ButtonContainer>
 
       {/* alert modal */}
-      <Modal
-        toggleModal={toggleAlertModal}
-        position="center"
-        isOpen={isAlertOpen}
-        size="small"
-      >
+      <Modal toggleModal={toggleAlertModal} isOpen={isAlertOpen}>
         <Modal.Header
           title="아이디를 입력해 주세요."
           closeOption="button"

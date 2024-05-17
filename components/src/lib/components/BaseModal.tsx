@@ -2,7 +2,7 @@ import styled, { css } from 'styled-components';
 import { MouseEvent } from 'react';
 
 interface ContainerProps {
-  $position: string;
+  $position: 'center' | 'bottom';
   $size: 'small' | 'medium' | 'large';
 }
 
@@ -23,7 +23,7 @@ const BackDrop = styled.div<BackDropProps>`
   `}
 `;
 
-const calculateModalPosition = (position: string) => {
+const calculateModalPosition = (position = 'center') => {
   switch (position) {
     case 'center':
       return css({
@@ -36,10 +36,6 @@ const calculateModalPosition = (position: string) => {
         top: 'auto',
         bottom: 0,
         transform: 'translate(-50%, 0)',
-      });
-    default:
-      return css({
-        top: '0',
       });
   }
 };
@@ -82,15 +78,15 @@ const Container = styled.div<ContainerProps>`
 interface ModalProps {
   toggleModal: () => void;
   isOpen: boolean;
-  position: 'center' | 'bottom';
-  size: 'small' | 'medium' | 'large';
+  position?: 'center' | 'bottom';
+  size?: 'small' | 'medium' | 'large';
 }
 
 function BaseModal({
   toggleModal,
   isOpen,
-  position,
-  size,
+  position = 'center',
+  size = 'medium',
   children,
 }: React.PropsWithChildren<ModalProps>) {
   const handleCloseButton = () => {
@@ -104,6 +100,7 @@ function BaseModal({
       handleCloseButton();
     }
   };
+
   return (
     <BackDrop
       onClick={(e) => handleBackdropClick(e)}
