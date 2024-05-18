@@ -11,7 +11,7 @@ describe("useExpiryDate", () => {
       result.current.handleExpiryDateChange("year", "25");
     });
 
-    expect(result.current.validateExpiryDate(result.current.expiryDate).isValid).toBe(true);
+    expect(result.current.cardExpiryDateValidationResult.isValid).toBe(true);
   });
 
   test("사용자가 유효하지 않은 월을 입력하면 유효성 검사에 실패한다", () => {
@@ -21,8 +21,8 @@ describe("useExpiryDate", () => {
       result.current.handleExpiryDateChange("month", "13");
     });
 
-    expect(result.current.validateExpiryDate(result.current.expiryDate).isValid).toBe(false);
-    expect(result.current.validateExpiryDate(result.current.expiryDate).errorMessage).toBe(
+    expect(result.current.cardExpiryDateValidationResult.isValid).toBe(false);
+    expect(result.current.cardExpiryDateValidationResult.errorMessage).toBe(
       ERROR_MESSAGE.CARD_EXPIRY_DATE.MONTH_OUT_OF_RANGE
     );
   });
@@ -34,8 +34,8 @@ describe("useExpiryDate", () => {
       result.current.handleExpiryDateChange("year", "2023");
     });
 
-    expect(result.current.validateExpiryDate(result.current.expiryDate).isValid).toBe(false);
-    expect(result.current.validateExpiryDate(result.current.expiryDate).errorMessage).toBe(
+    expect(result.current.cardExpiryDateValidationResult.isValid).toBe(false);
+    expect(result.current.cardExpiryDateValidationResult.errorMessage).toBe(
       ERROR_MESSAGE.CARD_EXPIRY_DATE.INVALID_YEAR_FORMAT
     );
   });
@@ -48,8 +48,8 @@ describe("useExpiryDate", () => {
       result.current.handleExpiryDateChange("year", "20");
     });
 
-    expect(result.current.validateExpiryDate(result.current.expiryDate).isValid).toBe(false);
-    expect(result.current.validateExpiryDate(result.current.expiryDate).errorMessage).toBe(
+    expect(result.current.cardExpiryDateValidationResult.isValid).toBe(false);
+    expect(result.current.cardExpiryDateValidationResult.errorMessage).toBe(
       ERROR_MESSAGE.CARD_EXPIRY_DATE.EXPIRED_CARD
     );
   });
@@ -62,9 +62,7 @@ describe("useExpiryDate", () => {
       result.current.handleExpiryDateChange("year", "");
     });
 
-    expect(result.current.validateExpiryDate(result.current.expiryDate).isValid).toBe(false);
-    expect(result.current.validateExpiryDate(result.current.expiryDate).errorMessage).toBe(
-      ERROR_MESSAGE.NO_INPUT
-    );
+    expect(result.current.cardExpiryDateValidationResult.isValid).toBe(false);
+    expect(result.current.cardExpiryDateValidationResult.errorMessage).toBe(ERROR_MESSAGE.NO_INPUT);
   });
 });

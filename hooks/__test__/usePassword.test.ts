@@ -10,7 +10,7 @@ describe("usePassword", () => {
       result.current.handlePasswordChange("12");
     });
 
-    expect(result.current.validatePassword(result.current.password).isValid).toBe(true);
+    expect(result.current.cardPasswordValidationResult.isValid).toBe(true);
   });
 
   test("사용자가 숫자가 아닌 문자를 입력하면 유효성 검사에 실패한다", () => {
@@ -20,8 +20,8 @@ describe("usePassword", () => {
       result.current.handlePasswordChange("1a");
     });
 
-    expect(result.current.validatePassword(result.current.password).isValid).toBe(false);
-    expect(result.current.validatePassword(result.current.password).errorMessage).toBe(
+    expect(result.current.cardPasswordValidationResult.isValid).toBe(false);
+    expect(result.current.cardPasswordValidationResult.errorMessage).toBe(
       ERROR_MESSAGE.CARD_PASSWORD.INVALID_CHARACTERS
     );
   });
@@ -33,8 +33,8 @@ describe("usePassword", () => {
       result.current.handlePasswordChange("123");
     });
 
-    expect(result.current.validatePassword(result.current.password).isValid).toBe(false);
-    expect(result.current.validatePassword(result.current.password).errorMessage).toBe(
+    expect(result.current.cardPasswordValidationResult.isValid).toBe(false);
+    expect(result.current.cardPasswordValidationResult.errorMessage).toBe(
       ERROR_MESSAGE.CARD_PASSWORD.MAX_LENGTH_EXCEEDED
     );
   });
@@ -46,9 +46,7 @@ describe("usePassword", () => {
       result.current.handlePasswordChange("");
     });
 
-    expect(result.current.validatePassword(result.current.password).isValid).toBe(false);
-    expect(result.current.validatePassword(result.current.password).errorMessage).toBe(
-      ERROR_MESSAGE.NO_INPUT
-    );
+    expect(result.current.cardPasswordValidationResult.isValid).toBe(false);
+    expect(result.current.cardPasswordValidationResult.errorMessage).toBe(ERROR_MESSAGE.NO_INPUT);
   });
 });

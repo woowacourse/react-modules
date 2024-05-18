@@ -10,7 +10,7 @@ describe("useCardNumber", () => {
       result.current.handleCardNumberChange("4111111111111111");
     });
 
-    expect(result.current.cardNumbersValidation(result.current.cardNumbers).isValid).toBe(true);
+    expect(result.current.cardNumbersValidationResult.isValid).toBe(true);
   });
 
   test("사용자가 아무런 입력을 하지 않으면 유효성 검사에 실패한다", () => {
@@ -20,10 +20,8 @@ describe("useCardNumber", () => {
       result.current.handleCardNumberChange("");
     });
 
-    expect(result.current.cardNumbersValidation(result.current.cardNumbers).isValid).toBe(false);
-    expect(result.current.cardNumbersValidation(result.current.cardNumbers).errorMessage).toBe(
-      ERROR_MESSAGE.NO_INPUT
-    );
+    expect(result.current.cardNumbersValidationResult.isValid).toBe(false);
+    expect(result.current.cardNumbersValidationResult.errorMessage).toBe(ERROR_MESSAGE.NO_INPUT);
   });
 
   test("useNumberFormatting 옵션을 사용하면 카드 번호가 포맷팅된다", () => {
@@ -46,7 +44,7 @@ describe("useCardNumber", () => {
     expect(result.current.cardNumbers).toBe("4111111111111111");
   });
 
-  test("useCardIdentifier 옵션을 사용하면 카드 종류가 식별된다", () => {
+  test("cardIdentifier 옵션을 사용하면 카드 종류가 식별된다", () => {
     const { result } = renderHook(() => useCardNumber({ useCardIdentifier: true }));
 
     act(() => {

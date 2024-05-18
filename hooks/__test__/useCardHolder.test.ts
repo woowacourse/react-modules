@@ -10,7 +10,7 @@ describe("useCardHolder", () => {
       result.current.handleCardHolderChange("CHOI RIVER");
     });
 
-    expect(result.current.validateCardHolder(result.current.cardHolder).isValid).toBe(true);
+    expect(result.current.cardHolderValidationResult.isValid).toBe(true);
   });
 
   test("사용자가 유효하지 않은 문자를 입력하면 유효성 검사에 실패한다", () => {
@@ -20,8 +20,8 @@ describe("useCardHolder", () => {
       result.current.handleCardHolderChange("Choi River");
     });
 
-    expect(result.current.validateCardHolder(result.current.cardHolder).isValid).toBe(false);
-    expect(result.current.validateCardHolder(result.current.cardHolder).errorMessage).toBe(
+    expect(result.current.cardHolderValidationResult.isValid).toBe(false);
+    expect(result.current.cardHolderValidationResult.errorMessage).toBe(
       "카드 소유자 이름은 영어 대문자와 공백만 입력 가능합니다."
     );
   });
@@ -33,8 +33,8 @@ describe("useCardHolder", () => {
       result.current.handleCardHolderChange("CHOI RIVER ABCDEF");
     });
 
-    expect(result.current.validateCardHolder(result.current.cardHolder).isValid).toBe(false);
-    expect(result.current.validateCardHolder(result.current.cardHolder).errorMessage).toBe(
+    expect(result.current.cardHolderValidationResult.isValid).toBe(false);
+    expect(result.current.cardHolderValidationResult.errorMessage).toBe(
       ERROR_MESSAGE.CARD_HOLDER.MAX_LENGTH_EXCEEDED
     );
   });
@@ -46,9 +46,7 @@ describe("useCardHolder", () => {
       result.current.handleCardHolderChange("");
     });
 
-    expect(result.current.validateCardHolder(result.current.cardHolder).isValid).toBe(false);
-    expect(result.current.validateCardHolder(result.current.cardHolder).errorMessage).toBe(
-      ERROR_MESSAGE.NO_INPUT
-    );
+    expect(result.current.cardHolderValidationResult.isValid).toBe(false);
+    expect(result.current.cardHolderValidationResult.errorMessage).toBe(ERROR_MESSAGE.NO_INPUT);
   });
 });

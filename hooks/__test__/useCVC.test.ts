@@ -10,7 +10,7 @@ describe("useCVC", () => {
       result.current.handleCVCChange("123");
     });
 
-    expect(result.current.validateCVC(result.current.CVC).isValid).toBe(true);
+    expect(result.current.cardCVCValidationResult.isValid).toBe(true);
   });
 
   test("사용자가 숫자가 아닌 문자를 입력하면 유효성 검사에 실패한다", () => {
@@ -20,8 +20,8 @@ describe("useCVC", () => {
       result.current.handleCVCChange("12a");
     });
 
-    expect(result.current.validateCVC(result.current.CVC).isValid).toBe(false);
-    expect(result.current.validateCVC(result.current.CVC).errorMessage).toBe(
+    expect(result.current.cardCVCValidationResult.isValid).toBe(false);
+    expect(result.current.cardCVCValidationResult.errorMessage).toBe(
       ERROR_MESSAGE.CARD_CVC.INVALID_CHARACTERS
     );
   });
@@ -33,8 +33,8 @@ describe("useCVC", () => {
       result.current.handleCVCChange("1234");
     });
 
-    expect(result.current.validateCVC(result.current.CVC).isValid).toBe(false);
-    expect(result.current.validateCVC(result.current.CVC).errorMessage).toBe(
+    expect(result.current.cardCVCValidationResult.isValid).toBe(false);
+    expect(result.current.cardCVCValidationResult.errorMessage).toBe(
       ERROR_MESSAGE.CARD_CVC.MAX_LENGTH_EXCEEDED
     );
   });
@@ -46,9 +46,7 @@ describe("useCVC", () => {
       result.current.handleCVCChange("");
     });
 
-    expect(result.current.validateCVC(result.current.CVC).isValid).toBe(false);
-    expect(result.current.validateCVC(result.current.CVC).errorMessage).toBe(
-      ERROR_MESSAGE.NO_INPUT
-    );
+    expect(result.current.cardCVCValidationResult.isValid).toBe(false);
+    expect(result.current.cardCVCValidationResult.errorMessage).toBe(ERROR_MESSAGE.NO_INPUT);
   });
 });
