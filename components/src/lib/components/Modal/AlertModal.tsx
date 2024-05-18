@@ -1,18 +1,10 @@
 import CenterModal from './CenterModal';
 
 import ButtonContainer from '@/lib/components/ButtonContainer';
-import { BASIC_BUTTON_STYLE } from '@/lib/constants/modal';
 import { AlertModalProps } from '@/lib/types/modal';
 
 export default function AlertModal(props: AlertModalProps) {
-  const {
-    setOpenModal,
-    title,
-    contents,
-    buttonContainerJustifyContent = 'right',
-    buttonStyle = BASIC_BUTTON_STYLE,
-    buttonContents,
-  } = props;
+  const { setOpenModal, title, contents, buttonContainerJustifyContent = 'right', button } = props;
 
   const closeModal = () => setOpenModal(false);
 
@@ -20,10 +12,8 @@ export default function AlertModal(props: AlertModalProps) {
     <CenterModal {...props}>
       {title}
       {contents}
-      <ButtonContainer $buttonContainerJustifyContent={buttonContainerJustifyContent}>
-        <button onClick={closeModal} style={buttonStyle}>
-          {buttonContents}
-        </button>
+      <ButtonContainer $buttonContainerJustifyContent={buttonContainerJustifyContent} onClick={closeModal}>
+        {button}
       </ButtonContainer>
     </CenterModal>
   );

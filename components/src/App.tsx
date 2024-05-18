@@ -104,8 +104,11 @@ function App() {
           </AppModalContents>
         }
         buttonContainerJustifyContent="right"
-        buttonStyle={{ backgroundColor: '#111111ed', color: '#ffff', borderRadius: BASIC_BORDER_RADIUS }}
-        buttonContents="확인"
+        button={
+          <button style={{ backgroundColor: '#111111ed', color: '#ffff', borderRadius: BASIC_BORDER_RADIUS }}>
+            확인
+          </button>
+        }
       />
 
       <ConfirmModal

@@ -1,4 +1,4 @@
-import { CSSProperties, Dispatch, ReactElement, ReactNode, SetStateAction } from 'react';
+import { Dispatch, ReactElement, ReactNode, SetStateAction } from 'react';
 
 export type ModalType = 'center' | 'bottom' | 'toast';
 
@@ -52,8 +52,7 @@ export interface AlertModalProps extends Omit<ModalCommonProps, 'children'> {
   title?: ReactNode;
   contents: ReactNode;
   buttonContainerJustifyContent?: ButtonContainerJustifyContent;
-  buttonStyle: CSSProperties;
-  buttonContents: ReactNode;
+  button: ReactNode;
 }
 
 export interface ConfirmModalProps extends ModalCommonProps {
