@@ -1,10 +1,6 @@
 import styled from "@emotion/styled";
+import { isValidColorCode } from "./../../util/index";
 import { ButtonProps } from "./Button";
-
-const isValidColorCode = (color: string): boolean => {
-  const colorCodeRegex = /^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/;
-  return colorCodeRegex.test(color);
-};
 
 export const ButtonWrapper = styled.button<ButtonProps>`
   padding: 6px 21px;
