@@ -1,4 +1,4 @@
-import { useModalContext } from "../lib/hooks/useModalContext";
+import { useModalContext } from "../../../hooks/useModalContext";
 import { ButtonWrapper } from "./CloseButton.style";
 
 const CloseButton: React.FC<React.PropsWithChildren> = ({ children }) => {
