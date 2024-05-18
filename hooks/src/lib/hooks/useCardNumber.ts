@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { ValidationResult } from "../../type";
 import { ERROR_MESSAGE } from "../constants/errorMessage";
 import identifyCard, { CardIdentifier } from "../util/cardIdentifier";
@@ -40,12 +40,19 @@ export const useCardNumber = (options: UseCardNumberOptions = {}) => {
     }
 
     if (useNumberFormatting) {
-      const numbersFormatted = cardNumberFormatter(value, cardIdentifier);
+      const numbersFormatted = cardIdentifier
+        ? cardNumberFormatter(value, cardIdentifier)
+        : cardNumberFormatter(value, "default");
       setCardNumber(numbersFormatted);
     } else {
       setCardNumber(value);
     }
   };
 
-  return { cardNumbers, handleCardNumberChange, cardNumbersValidation, cardIdentifier };
+  const cardNumbersValidationResult = useMemo(
+    () => cardNumbersValidation(cardNumbers),
+    [cardNumbers, isTouched]
+  );
+
+  return { cardNumbers, handleCardNumberChange, cardNumbersValidationResult, cardIdentifier };
 };

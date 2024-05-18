@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { ERROR_MESSAGE } from "../constants/errorMessage";
 import { ValidationResult } from "./../../type.d";
 
@@ -65,5 +65,10 @@ export function useExpiryDate() {
     setExpiryDate((prev) => ({ ...prev, [option]: value }));
   }
 
-  return { expiryDate, handleExpiryDateChange, validateExpiryDate };
+  const cardExpiryDateValidationResult = useMemo(
+    () => validateExpiryDate(expiryDate),
+    [expiryDate, isTouched]
+  );
+
+  return { expiryDate, handleExpiryDateChange, cardExpiryDateValidationResult };
 }

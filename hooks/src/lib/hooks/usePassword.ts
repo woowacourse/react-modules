@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { ValidationResult } from "../../type";
 import { ERROR_MESSAGE } from "../constants/errorMessage";
 
@@ -30,5 +30,10 @@ export function usePassword() {
     setPassword(value);
   }
 
-  return { password, handlePasswordChange, validatePassword };
+  const cardPasswordValidationResult = useMemo(
+    () => validatePassword(password),
+    [password, isTouched]
+  );
+
+  return { password, handlePasswordChange, cardPasswordValidationResult };
 }

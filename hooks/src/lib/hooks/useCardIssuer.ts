@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { ValidationResult } from "../../type";
 import { ERROR_MESSAGE } from "../constants/errorMessage";
 
@@ -20,5 +20,10 @@ export function useCardIssuer() {
     setCardIssuer(value);
   }
 
-  return { cardIssuer, handleCardIssuerChange, validateCardIssuer };
+  const cardIssuerValidationResult = useMemo(
+    () => validateCardIssuer(cardIssuer),
+    [cardIssuer, isTouched]
+  );
+
+  return { cardIssuer, handleCardIssuerChange, cardIssuerValidationResult };
 }

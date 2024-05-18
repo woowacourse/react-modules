@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { ValidationResult } from "../../type";
 import { ERROR_MESSAGE } from "../constants/errorMessage";
 
@@ -30,5 +30,7 @@ export function useCVC() {
     setCVC(value);
   }
 
-  return { CVC, handleCVCChange, validateCVC };
+  const cardCVCValidationResult = useMemo(() => validateCVC(CVC), [CVC, isTouched]);
+
+  return { CVC, handleCVCChange, cardCVCValidationResult };
 }
