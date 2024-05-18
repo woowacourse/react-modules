@@ -1,6 +1,6 @@
 export type CardIdentifier = (typeof cardIdentifiers)[number]["name"];
 
-const cardIdentifiers = [
+export const cardIdentifiers = [
   { name: "Diners", regex: /^36\d{12}$/ },
   { name: "AMEX", regex: /^(?:34|37)\d{13}$/ },
   {
@@ -12,7 +12,7 @@ const cardIdentifiers = [
   { name: "Visa", regex: /^4/ },
 ];
 
-const identifyCard = (value: string): CardIdentifier | undefined => {
+export const identifyCard = (value: string): CardIdentifier | undefined => {
   const clearedValue = value.replace(/\D/g, "");
   for (const { name, regex } of cardIdentifiers) {
     if (regex.test(clearedValue)) {
@@ -21,5 +21,3 @@ const identifyCard = (value: string): CardIdentifier | undefined => {
   }
   return undefined;
 };
-
-export default identifyCard;

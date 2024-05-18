@@ -1,7 +1,7 @@
 import { useMemo, useState } from "react";
 import { ValidationResult } from "../../type";
 import { ERROR_MESSAGE } from "../constants/errorMessage";
-import identifyCard, { CardIdentifier } from "../util/cardIdentifier";
+import { CardIdentifier, identifyCard } from "../util/cardIdentifier";
 import cardNumberFormatter from "../util/cardNumberFormatter";
 
 interface UseCardNumberOptions {
