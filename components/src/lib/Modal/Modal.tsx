@@ -1,5 +1,4 @@
 import React from "react";
-import CloseButton from "../../CloseButton/CloseButton";
 import x_img from "../assets/images/x_img.png";
 import { ModalContextProvider, useModalContext } from "../hooks/useModalContext";
 import { ModalProps } from "../type";
@@ -10,14 +9,12 @@ import {
   StyledModalFooter,
   StyledModalHeader,
 } from "./Modal.style";
+import CloseButton from "./components/CloseButton/CloseButton";
 
 export const ModalProvider: React.FC<React.PropsWithChildren<{}>> = ({ children }) => {
   return <ModalContextProvider>{children}</ModalContextProvider>;
 };
 
-/* -------------------------------------------------------------------------------------------------
- * ModalContent
- * -----------------------------------------------------------------------------------------------*/
 export const ModalContent: React.FC<
   React.PropsWithChildren<ModalProps & { size?: "small" | "medium" | "large" }>
 > = ({ children, modalPosition, closeButtonPosition, size }) => {
@@ -39,17 +36,11 @@ export const ModalContent: React.FC<
   );
 };
 
-/* -------------------------------------------------------------------------------------------------
- * ModalTrigger
- * -----------------------------------------------------------------------------------------------*/
 export const ModalTrigger: React.FC<React.PropsWithChildren<{}>> = ({ children }) => {
   const { openModal } = useModalContext();
   return <button onClick={openModal}>{children}</button>;
 };
 
-/* -------------------------------------------------------------------------------------------------
- * ModalClose
- * -----------------------------------------------------------------------------------------------*/
 export const ModalClose: React.FC<React.PropsWithChildren<{ onClick?: () => void }>> = ({
   children,
   onClick,
@@ -63,9 +54,6 @@ export const ModalClose: React.FC<React.PropsWithChildren<{ onClick?: () => void
   return <div onClick={handleClick}>{children}</div>;
 };
 
-/* -------------------------------------------------------------------------------------------------
- * ModalHeader
- * -----------------------------------------------------------------------------------------------*/
 export const ModalHeader: React.FC<{ title?: string; containClose: boolean }> = ({
   title,
   containClose,
@@ -82,16 +70,10 @@ export const ModalHeader: React.FC<{ title?: string; containClose: boolean }> = 
   );
 };
 
-/* -------------------------------------------------------------------------------------------------
- * ModalBody
- * -----------------------------------------------------------------------------------------------*/
 export const ModalBody: React.FC<React.PropsWithChildren<{}>> = ({ children }) => {
   return <StyledModalBody>{children}</StyledModalBody>;
 };
 
-/* -------------------------------------------------------------------------------------------------
- * ModalFooter
- * -----------------------------------------------------------------------------------------------*/
 export const ModalFooter: React.FC<React.PropsWithChildren<{ align: "center" | "end" }>> = ({
   children,
   align,
@@ -99,9 +81,6 @@ export const ModalFooter: React.FC<React.PropsWithChildren<{ align: "center" | "
   return <StyledModalFooter align={align}>{children}</StyledModalFooter>;
 };
 
-/* -------------------------------------------------------------------------------------------------
- * Modal
- * -----------------------------------------------------------------------------------------------*/
 export const Modal = {
   Provider: ModalProvider,
   Trigger: ModalTrigger,
