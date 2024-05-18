@@ -31,5 +31,3 @@ export const AlertModal: React.FC<
     </>
   );
 };
-
-export default AlertModal;

@@ -1,7 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 import CloseButton from "../../CloseButton/CloseButton";
 import x_img from "../assets/images/x_img.png";
-import Button from "../common/Button";
 import { ModalContextProvider, useModalContext } from "../hooks/useModalContext";
 import { ModalProps } from "../type";
 import {
@@ -10,7 +9,6 @@ import {
   StyledModalDimmer,
   StyledModalFooter,
   StyledModalHeader,
-  StyledModalInput,
 } from "./Modal.style";
 
 export const ModalProvider: React.FC<React.PropsWithChildren<{}>> = ({ children }) => {
@@ -99,68 +97,6 @@ export const ModalFooter: React.FC<React.PropsWithChildren<{ align: "center" | "
   align,
 }) => {
   return <StyledModalFooter align={align}>{children}</StyledModalFooter>;
-};
-
-/* -------------------------------------------------------------------------------------------------
- * ConfirmModal
- * -----------------------------------------------------------------------------------------------*/
-export const ConfirmModal: React.FC<
-  React.PropsWithChildren<ModalProps & { title: string; size: "small" | "medium" | "large" }>
-> = ({ children, title, ...props }) => {
-  return (
-    <ModalContent {...props}>
-      <ModalHeader containClose={false} title={title} />
-      <ModalBody>{children}</ModalBody>
-      <ModalFooter align="end">
-        <ModalClose>
-          <Button backgroundColor="#333" fontColor="#fff">
-            확인
-          </Button>
-        </ModalClose>
-      </ModalFooter>
-    </ModalContent>
-  );
-};
-
-/* -------------------------------------------------------------------------------------------------
- * PromptModal
- * -----------------------------------------------------------------------------------------------*/
-export const PromptModal: React.FC<
-  React.PropsWithChildren<ModalProps & { title: string; size: "small" | "medium" | "large" }>
-> = ({ children, title, placeholder, onSubmit, size, ...props }) => {
-  const [value, setValue] = useState("");
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const newValue = e.target.value;
-    setValue(newValue);
-  };
-
-  const handleSubmit = () => {
-    onSubmit && onSubmit(value);
-    setValue("");
-  };
-
-  return (
-    <ModalContent {...props} size={size}>
-      <ModalHeader containClose={false} title={title} />
-      <ModalBody>
-        {children}
-        <StyledModalInput value={value} onChange={handleChange} placeholder={placeholder} />
-      </ModalBody>
-      <ModalFooter align="end">
-        <ModalClose>
-          <Button backgroundColor="#fff" fontColor="#333" borderColor="#33333340">
-            취소
-          </Button>
-        </ModalClose>
-        <ModalClose>
-          <Button backgroundColor="#333" fontColor="#fff" onClick={() => handleSubmit()}>
-            확인
-          </Button>
-        </ModalClose>
-      </ModalFooter>
-    </ModalContent>
-  );
 };
 
 /* -------------------------------------------------------------------------------------------------
