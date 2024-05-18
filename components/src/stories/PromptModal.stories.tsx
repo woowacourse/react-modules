@@ -4,7 +4,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import Modal from "../lib/Modal/Modal";
 
 const meta = {
-  title: "Modal",
+  title: "ModalExample",
   component: Modal,
 
   parameters: {
@@ -20,7 +20,7 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {
+export const PromptModal: Story = {
   args: {
     isOpen: true,
 
@@ -31,31 +31,27 @@ export const Default: Story = {
             console.log("backdrop clicked");
           }}
         />
-        <Modal.Container position="center" size="large">
+        <Modal.Container position="center" size="medium">
           <>
             <Modal.Header>
-              <>
-                <Modal.Title text="카드사 선택" />
-                <Modal.CloseButton
-                  onCloseButtonClick={() => console.log("closeButton clicked")}
-                />
-              </>
+              <Modal.Title text="쿠폰 번호를 입력해 주세요." />
             </Modal.Header>
-            <Modal.ButtonContainer direction="column" position="center">
+            <input type="text" placeholder="CGEXX46Z" />
+            <Modal.ButtonContainer direction="row" position="right">
               <>
-                <Modal.Button
-                  color="dark"
-                  size="large"
-                  onClick={() => console.log("confirmButton clicked")}
-                >
-                  <span>동의</span>
-                </Modal.Button>
                 <Modal.Button
                   color="light"
-                  size="large"
+                  size="small"
                   onClick={() => console.log("closeButton clicked")}
                 >
-                  <span>닫기</span>
+                  <span>취소</span>
+                </Modal.Button>
+                <Modal.Button
+                  color="dark"
+                  size="small"
+                  onClick={() => console.log("closeButton clicked")}
+                >
+                  <span>확인</span>
                 </Modal.Button>
               </>
             </Modal.ButtonContainer>

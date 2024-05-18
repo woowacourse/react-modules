@@ -4,7 +4,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import Modal from "../lib/Modal/Modal";
 
 const meta = {
-  title: "Modal",
+  title: "ModalExample",
   component: Modal,
 
   parameters: {
@@ -20,10 +20,9 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {
+export const AlertModal: Story = {
   args: {
     isOpen: true,
-
     children: (
       <>
         <Modal.BackDrop
@@ -31,31 +30,20 @@ export const Default: Story = {
             console.log("backdrop clicked");
           }}
         />
-        <Modal.Container position="center" size="large">
+        <Modal.Container position="center" size="medium">
           <>
             <Modal.Header>
-              <>
-                <Modal.Title text="카드사 선택" />
-                <Modal.CloseButton
-                  onCloseButtonClick={() => console.log("closeButton clicked")}
-                />
-              </>
+              <Modal.Title text="아이디를 입력해주세요." />
             </Modal.Header>
-            <Modal.ButtonContainer direction="column" position="center">
+            <p>아이디는 필수로 입력해야 합니다.</p>
+            <Modal.ButtonContainer direction="row" position="right">
               <>
                 <Modal.Button
                   color="dark"
-                  size="large"
-                  onClick={() => console.log("confirmButton clicked")}
-                >
-                  <span>동의</span>
-                </Modal.Button>
-                <Modal.Button
-                  color="light"
-                  size="large"
+                  size="small"
                   onClick={() => console.log("closeButton clicked")}
                 >
-                  <span>닫기</span>
+                  <span>확인</span>
                 </Modal.Button>
               </>
             </Modal.ButtonContainer>
