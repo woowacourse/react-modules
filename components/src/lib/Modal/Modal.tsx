@@ -13,9 +13,6 @@ import {
   StyledModalInput,
 } from "./Modal.style";
 
-/* -------------------------------------------------------------------------------------------------
- * ModalProvider
- * -----------------------------------------------------------------------------------------------*/
 export const ModalProvider: React.FC<React.PropsWithChildren<{}>> = ({ children }) => {
   return <ModalContextProvider>{children}</ModalContextProvider>;
 };
@@ -105,32 +102,6 @@ export const ModalFooter: React.FC<React.PropsWithChildren<{ align: "center" | "
 };
 
 /* -------------------------------------------------------------------------------------------------
- * AlertModal
- * -----------------------------------------------------------------------------------------------*/
-export const AlertModal: React.FC<
-  React.PropsWithChildren<ModalProps & { title: string; size: "small" | "medium" | "large" }>
-> = ({ children, title, ...props }) => {
-  return (
-    <ModalContent {...props}>
-      <ModalHeader containClose={false} title={title} />
-      <ModalBody>{children}</ModalBody>
-      <ModalFooter align="end">
-        <ModalClose>
-          <Button backgroundColor="#fff" fontColor="#333" borderColor="#33333340">
-            취소
-          </Button>
-        </ModalClose>
-        <ModalClose>
-          <Button backgroundColor="#333" fontColor="#fff">
-            확인
-          </Button>
-        </ModalClose>
-      </ModalFooter>
-    </ModalContent>
-  );
-};
-
-/* -------------------------------------------------------------------------------------------------
  * ConfirmModal
  * -----------------------------------------------------------------------------------------------*/
 export const ConfirmModal: React.FC<
@@ -203,7 +174,4 @@ export const Modal = {
   Body: ModalBody,
   Footer: ModalFooter,
   Content: ModalContent,
-  Alert: AlertModal,
-  Confirm: ConfirmModal,
-  Prompt: PromptModal,
 };
