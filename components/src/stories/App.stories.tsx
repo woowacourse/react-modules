@@ -11,7 +11,9 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {
+export const Default: Story = {};
+
+export const OpenModal: Story = {
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
 
@@ -26,5 +28,28 @@ export const Default: Story = {
     await userEvent.click(openButton);
 
     expect(canvas.getByText("모달열림")).toBeVisible();
+  },
+};
+
+export const CloseModal: Story = {
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    const openButton = canvas.getByRole("button", {
+      name: "모달 열기 버튼",
+    });
+    await userEvent.click(openButton);
+
+    const modalText = canvas.getByText("모달열림");
+    if (modalText) {
+      expect(modalText).toBeVisible();
+    }
+
+    const closeButton = canvas.getByRole("img", {
+      name: "닫기 버튼",
+    });
+    await userEvent.click(closeButton);
+
+    expect(canvas.getByText("모달열림")).not.toBeVisible();
   },
 };
