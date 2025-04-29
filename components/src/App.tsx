@@ -1,18 +1,24 @@
 import Modal from './lib/Modal.tsx';
 import './App.css';
+import { useState } from 'react';
 
 function App() {
+  const [isShowModal, setIsShowModal] = useState(false);
+
   return (
     <div>
-      <Modal
-        position="bottom"
-        title="모달"
-        onClose={() => {
-          console.log('닫기');
-        }}
-      >
-        모달 내용
-      </Modal>
+      {isShowModal && (
+        <Modal
+          position="bottom"
+          title="모달"
+          onClose={() => {
+            setIsShowModal(false);
+          }}
+        >
+          <div>모달 내용</div>
+        </Modal>
+      )}
+      <button onClick={() => setIsShowModal(true)}>모달 열기</button>
     </div>
   );
 }
