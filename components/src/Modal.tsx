@@ -1,20 +1,38 @@
 import styled from 'styled-components';
 import closeIcon from './assets/close-icon.png';
-import { useEffect } from 'react';
+import { useContext, useEffect } from 'react';
+import { createContext } from 'react';
 
-interface ModalProps {
+type ModalProps = {
   isOpen: boolean;
   title: string;
   onClose: () => void;
   showCloseButton?: boolean;
-}
+  children: React.ReactNode;
+};
+
+const ModalContext = createContext<ModalProps>({
+  isOpen: true,
+  title: '제목',
+  onClose: () => {},
+  showCloseButton: true,
+  children: <></>,
+});
 
 const Modal = ({
   isOpen = true,
   title = '제목',
   onClose,
   showCloseButton = true,
+  children,
 }: ModalProps) => {
+  const value = {
+    isOpen,
+    title,
+    onClose,
+    showCloseButton,
+    children,
+  };
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === 'Escape') {
@@ -32,17 +50,25 @@ const Modal = ({
   return (
     <>
       {isOpen && (
-        <>
+        <ModalContext.Provider value={value}>
           <BackDrop onClick={onClose} />
           <ModalLayout>
-            <ModalTitle>{title}</ModalTitle>
+            {children}
             {showCloseButton && <CloseIcon onClick={onClose} />}
           </ModalLayout>
-        </>
+        </ModalContext.Provider>
       )}
     </>
   );
 };
+
+const Title = () => {
+  const modalContext = useContext(ModalContext);
+
+  return <ModalTitle>{modalContext.title}</ModalTitle>;
+};
+
+Modal.Title = Title;
 
 export default Modal;
 

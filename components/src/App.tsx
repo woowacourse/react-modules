@@ -9,7 +9,9 @@ function App() {
   };
   return (
     <>
-      <Modal isOpen={isOpen} title="sdlfk" onClose={handleClose} />
+      <Modal isOpen={isOpen} title="sdlfk" onClose={handleClose}>
+        <Modal.Title />
+      </Modal>
     </>
   );
 }
