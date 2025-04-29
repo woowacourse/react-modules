@@ -1,8 +1,12 @@
 import styled from 'styled-components';
 
-function ModalCloseButton() {
+interface ModalCloseButtonProps {
+  onClose: () => void;
+}
+
+function ModalCloseButton({ onClose }: ModalCloseButtonProps) {
   return (
-    <Button>
+    <Button onClick={onClose}>
       <img src="./Close.svg" />
     </Button>
   );

@@ -13,7 +13,7 @@ function Modal({ isOpen, children, position, width }: ModalProps) {
   }
 
   return (
-    <StyledModal position={position} width={width}>
+    <StyledModal isOpen={isOpen} position={position} width={width}>
       {children}
     </StyledModal>
   );
@@ -21,7 +21,7 @@ function Modal({ isOpen, children, position, width }: ModalProps) {
 
 export default Modal;
 
-type modalStyledProps = Pick<ModalProps, 'position' | 'width'>;
+type modalStyledProps = Pick<ModalProps, 'isOpen' | 'position' | 'width'>;
 const StyledModal = styled.div<modalStyledProps>`
   width: ${(props) =>
     props.position === 'center' ? `${props.width}px` : '100%'};
@@ -31,6 +31,7 @@ const StyledModal = styled.div<modalStyledProps>`
   border-radius: 8px;
   box-sizing: border-box;
   position: absolute;
+  display: ${(props) => (props.isOpen ? 'block' : 'none')};
   top: ${(props) => (props.position === 'top' ? '0px' : 'auto')};
   bottom: ${(props) => (props.position === 'bottom' ? '0px' : 'auto')};
 `;
