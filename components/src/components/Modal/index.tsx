@@ -2,10 +2,12 @@ import { PropsWithChildren } from "react";
 import styles from "./Modal.module.css";
 import CloseIcon from "@assets/close.svg";
 
+export type ModalPositionType = "center" | "bottom";
 interface ModalProps {
   isOpen: boolean;
   title: string;
   onClose: () => void;
+  position?: ModalPositionType;
 }
 
 function Modal({
@@ -13,6 +15,7 @@ function Modal({
   title,
   onClose,
   children,
+  position = "bottom",
 }: PropsWithChildren<ModalProps>) {
   if (!isOpen) {
     return null;
@@ -20,7 +23,7 @@ function Modal({
 
   return (
     <div className={styles.backdrop}>
-      <div className={styles.container}>
+      <div className={`${styles.container} ${styles[position]}`}>
         <div className={styles.modalHeader}>
           <h2 className={styles.title}>{title}</h2>
           <button
