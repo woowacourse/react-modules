@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import Modal from "./index";
+import Modal from "./Modal";
 import "../../styles/reset.css";
 
 const meta = {
