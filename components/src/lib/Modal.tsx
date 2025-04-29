@@ -19,10 +19,10 @@ export const Modal = ({
     <>
       <div
         className={`${styles["modal-background"]} ${
-          isModalOpen ? styles.active : ""
-        }`}
+          styles[`background${position}`]
+        } ${isModalOpen ? styles.active : ""}`}
       >
-        <div className={`${styles.modal} ${styles[position]}`}>
+        <div className={`${styles.modal} ${styles[`modal${position}`]}`}>
           <div className={styles.modalHeader}>
             <h4>{title}</h4>
             <button className={styles.closeButton} onClick={onClose}>
