@@ -1,18 +1,20 @@
 import styled from "@emotion/styled";
 import Close from "/Close.svg";
 import { ReactNode, useEffect } from "react";
+import Button from "./common/Button";
 
 interface ModalProps {
   title: string;
   isOpen: boolean;
-  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  onClose: () => void;
+  onConfirm?: () => void;
   content: ReactNode;
 }
 
-function Modal({ title, isOpen, setIsOpen, content }: ModalProps) {
+function Modal({ title, isOpen, onClose, onConfirm, content }: ModalProps) {
   useEffect(() => {
     function handleKeyDown(e: KeyboardEvent) {
-      if (e.key === "Escape") setIsOpen(false);
+      if (e.key === "Escape") onClose();
     }
 
     addEventListener("keydown", handleKeyDown);
@@ -24,20 +26,16 @@ function Modal({ title, isOpen, setIsOpen, content }: ModalProps) {
 
   return (
     <ModalContainer isOpen={isOpen}>
-      <ModalOverlay
-        data-testid="modal-overlay"
-        onClick={() => setIsOpen(false)}
-      />
+      <ModalOverlay data-testid="modal-overlay" onClick={onClose} />
       <ModalContent>
         <TitleSection>
           <TitleText>{title}</TitleText>
-          <CloseButton
-            src={Close}
-            alt="닫기 버튼"
-            onClick={() => setIsOpen(false)}
-          />
+          <CloseButton src={Close} alt="닫기 버튼" onClick={onClose} />
         </TitleSection>
-        {content}
+        <MainSection>
+          {content}
+          <Button text="동의하고 저장하기" onClick={onConfirm} />
+        </MainSection>
       </ModalContent>
     </ModalContainer>
   );
@@ -60,6 +58,9 @@ const ModalContent = styled.div`
   padding: 24px 32px;
   border-radius: 8px;
   color: #000;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 `;
 
 const ModalOverlay = styled.div`
@@ -85,4 +86,11 @@ const TitleSection = styled.section`
 const TitleText = styled.p`
   font-size: 18px;
   font-weight: bold;
+`;
+
+const MainSection = styled.section`
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 `;

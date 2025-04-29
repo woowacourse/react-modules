@@ -17,7 +17,8 @@ export const Default = () => {
       title="테스트"
       content={<p>테스트</p>}
       isOpen={isOpen}
-      setIsOpen={setIsOpen}
+      onClose={() => setIsOpen(false)}
+      onConfirm={() => setIsOpen(false)}
     />
   );
 };

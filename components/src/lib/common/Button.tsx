@@ -3,11 +3,16 @@ import { ButtonHTMLAttributes } from "react";
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   text: string;
-  color: string;
-  backgroundColor: string;
+  color?: string;
+  backgroundColor?: string;
 }
 
-function Button({ text, color, backgroundColor, ...rest }: ButtonProps) {
+function Button({
+  text,
+  color = "#fff",
+  backgroundColor = "#333",
+  ...rest
+}: ButtonProps) {
   return (
     <StyleButton color={color} backgroundColor={backgroundColor} {...rest}>
       {text}
