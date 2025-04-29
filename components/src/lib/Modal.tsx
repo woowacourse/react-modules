@@ -1,14 +1,21 @@
 import styled from "@emotion/styled";
+import Close from "/Close.svg";
 
 interface ModalProps {
   isOpen: boolean;
+  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-function Modal({ isOpen }: ModalProps) {
+function Modal({ isOpen, setIsOpen }: ModalProps) {
   return (
     <ModalContainer isOpen={isOpen}>
       <ModalOverlay />
       <ModalContent>
+        <CloseButton
+          src={Close}
+          alt="닫기 버튼"
+          onClick={() => setIsOpen(false)}
+        />
         <p>모달열림</p>
       </ModalContent>
     </ModalContainer>
@@ -41,4 +48,11 @@ const ModalOverlay = styled.div`
   right: 0;
   bottom: 0;
   background-color: rgba(0, 0, 0, 0.35);
+`;
+
+const CloseButton = styled.img`
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  cursor: pointer;
 `;

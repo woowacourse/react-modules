@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import "./App.css";
 import Modal from "./lib/Modal";
 
@@ -7,7 +7,7 @@ function App() {
 
   return (
     <>
-      <Modal isOpen={isOpen} />
+      <Modal isOpen={isOpen} setIsOpen={setIsOpen} />
       <button onClick={() => setIsOpen(true)}>모달 열기 버튼</button>
     </>
   );
