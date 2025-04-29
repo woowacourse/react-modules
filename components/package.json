@@ -1,6 +1,6 @@
 {
-  "name": "compoents",
-  "version": "0.0.1",
+  "name": "@sebin0580/react-modules",
+  "version": "0.0.5",
   "description": "npm modules",
   "type": "module",
   "types": "dist/index.d.ts",
@@ -21,6 +21,7 @@
     "@emotion/css": "^11.13.5",
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.0",
+    "@sebin0580/react-modules": "^0.0.5",
     "react": "^19.1.0",
     "react-dom": "^19.1.0"
   },

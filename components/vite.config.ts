@@ -23,7 +23,14 @@ export default defineConfig({
       esmExternals: ['react'],
     },
   },
-  plugins: [react(), dts()],
+  plugins: [
+    react(),
+    dts({
+      include: ['src/lib'],
+      insertTypesEntry: true,
+      tsconfigPath: './tsconfig.app.json',
+    }),
+  ],
   resolve: {
     alias: {
       '@': '/src',
