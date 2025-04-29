@@ -1,7 +1,8 @@
 import styled from "@emotion/styled";
 import "./App.css";
-import Modal from "./lib/Modal";
+import { Modal } from "woowa-modal-payments";
 import { useState } from "react";
+import React from "react";
 
 function App() {
   const [isOpen, setIsOpen] = useState(true);
