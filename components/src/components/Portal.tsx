@@ -1,4 +1,4 @@
-import { Component, PropsWithChildren, useEffect, useState } from 'react';
+import { PropsWithChildren, useEffect, useState } from 'react';
 
 import { createPortal } from 'react-dom';
 
@@ -24,7 +24,7 @@ type Props = {
   children: React.ReactNode;
 } & PropsWithChildren;
 
-const Portal = ({ isOpen, children }: Props) => {
+export const Portal = ({ isOpen, children }: Props) => {
   if (!isOpen) return null;
 
   return (
@@ -33,5 +33,3 @@ const Portal = ({ isOpen, children }: Props) => {
     </PortalWrapper>
   );
 };
-
-export default Portal;
