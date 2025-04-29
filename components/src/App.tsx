@@ -1,10 +1,11 @@
-import React from "react";
-import "./App.css";
+import React from 'react';
+import './App.css';
+import Modal from './Modal';
 
 function App() {
   return (
     <>
-      <h1>Component Modules</h1>
+      <Modal />
     </>
   );
 }
