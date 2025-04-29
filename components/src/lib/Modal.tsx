@@ -9,7 +9,10 @@ interface ModalProps {
 function Modal({ isOpen, setIsOpen }: ModalProps) {
   return (
     <ModalContainer isOpen={isOpen}>
-      <ModalOverlay data-testid="modal-overlay" />
+      <ModalOverlay
+        data-testid="modal-overlay"
+        onClick={() => setIsOpen(false)}
+      />
       <ModalContent>
         <CloseButton
           src={Close}
