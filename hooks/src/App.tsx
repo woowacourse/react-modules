@@ -1,11 +1,19 @@
-import React from "react";
 import "./App.css";
+import useCardCVC from "./lib/useCardCVC";
 
 function App() {
+  const { handleCVCValidate, isValid, errorMessage } = useCardCVC();
+
+  const handleBlur = (e) => {
+    handleCVCValidate(e.target.value);
+  };
+
+  console.log(isValid, errorMessage);
   return (
-    <>
-      <h1>Hooks Modules</h1>
-    </>
+    <div>
+      {errorMessage}
+      <input onBlur={handleBlur}></input>
+    </div>
   );
 }
 

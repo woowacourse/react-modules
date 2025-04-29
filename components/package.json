@@ -1,6 +1,6 @@
 {
   "name": "woowa-modal-payments",
-  "version": "0.0.2",
+  "version": "0.0.4",
   "description": "우아한테크코스 payments 모달",
   "type": "module",
   "types": "dist/index.d.ts",
@@ -22,7 +22,7 @@
     "@emotion/styled": "^11.14.0",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
-    "woowa-modal-payments": "^0.0.1"
+    "woowa-modal-payments": "^0.0.4"
   },
   "devDependencies": {
     "@chromatic-com/storybook": "^3.2.6",
