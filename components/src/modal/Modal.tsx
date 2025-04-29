@@ -1,12 +1,12 @@
 import { css } from '@emotion/css';
-import { ButtonHTMLAttributes, ReactNode } from 'react';
+import { ReactNode, useEffect } from 'react';
 
 type Position = 'center' | 'bottom';
-type ButtonType = 'confirm' | 'cancel';
 
-interface ButtonProps {
-  button: ButtonHTMLAttributes<HTMLButtonElement>;
-  type: ButtonType;
+interface ActionDef {
+  label: string;
+  style: string;
+  onClick: () => void;
 }
 
 interface ModalProps {
@@ -16,23 +16,15 @@ interface ModalProps {
   onOpen?: () => void;
   title?: string;
   showCloseButton?: boolean;
-  actions?: ButtonProps[];
-  onConfirm?: () => void;
+  actions?: ActionDef[];
 }
 
-const Modal = ({
-  position,
-  content,
-  onOpen,
-  onClose,
-  actions,
-  title,
-  onConfirm,
-  showCloseButton = true,
-}: ModalProps) => {
-  if (onOpen) {
-    onOpen();
-  }
+const Modal = ({ position, content, onOpen, onClose, actions, title, showCloseButton = true }: ModalProps) => {
+  useEffect(() => {
+    if (onOpen) {
+      onOpen();
+    }
+  }, []);
 
   return (
     <div className={ModalBackdrop}>
@@ -41,16 +33,16 @@ const Modal = ({
           {title && <h2>{title}</h2>}
           {showCloseButton && (
             <button className={ModalCloseButton} onClick={onClose}>
-              &times;
+              X
             </button>
           )}
         </div>
         <div>{content}</div>
         {actions && (
           <div className={ButtonBar}>
-            {actions.map(({ button, type }, index) => (
-              <button key={index} onClick={type === 'confirm' ? onConfirm : onClose} {...button}>
-                {button.children}
+            {actions.map(({ label, style, onClick }) => (
+              <button key={label} className={style} onClick={onClick}>
+                {label}
               </button>
             ))}
           </div>
@@ -88,7 +80,7 @@ const ModalFrame = (position: Position) => css`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 10px;
+  gap: 20px;
 `;
 
 const ModalHeader = css`
@@ -100,10 +92,11 @@ const ModalHeader = css`
 
 const ModalCloseButton = css`
   all: unset;
-  width: 24px;
-  height: 24px;
+  width: 32px;
+  height: 32px;
   cursor: pointer;
   border-radius: 50%;
+  font-size: 16px;
 
   &:hover {
     background-color: rgba(0, 0, 0, 0.1);
