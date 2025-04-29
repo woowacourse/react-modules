@@ -1,5 +1,6 @@
+import React from "react";
 import "./App.css";
-import { Modal } from "./lib";
+import { Modal } from "@kaori-killer/modal-component";
 
 function App() {
   return (
