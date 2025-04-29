@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import { MouseEvent, ReactNode } from "react";
 import { Backdrop, ModalBox, Title } from "./Modal.styles";
 
 interface Props {
@@ -20,9 +20,17 @@ const Modal = ({
   titleColor,
   position = "center",
 }: Props) => {
+  const stopPropagation = (e: MouseEvent<HTMLDivElement>) => {
+    e.stopPropagation();
+  };
+
   return (
     <Backdrop $isOpen={isOpen} $position={position} onClick={onClose}>
-      <ModalBox $backgroundColor={backgroundColor} $position={position}>
+      <ModalBox
+        $backgroundColor={backgroundColor}
+        $position={position}
+        onClick={stopPropagation}
+      >
         {title && <Title $titleColor={titleColor}>{title}</Title>}
         {children}
       </ModalBox>
