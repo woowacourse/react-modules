@@ -17,7 +17,12 @@ function App() {
     <>
       <h1>Component Modules</h1>
       <button onClick={() => setModalOpen(true)}>열기</button>
-      <Modal isOpen={modalOpen} onClose={onClose} contents={getContent()} />
+      <Modal
+        title="모달"
+        isOpen={modalOpen}
+        onClose={onClose}
+        contents={getContent()}
+      />
     </>
   );
 }
