@@ -12,6 +12,7 @@ type Story = StoryObj<typeof Modal>;
 
 export const Default: Story = {
   args: {
+    title: "제목",
     children: "Center Modal",
   },
 };

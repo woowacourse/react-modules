@@ -1,14 +1,18 @@
 import { ReactNode } from "react";
-import { Backdrop, ModalBox } from "./Modal.styles";
+import { Backdrop, ModalBox, Title } from "./Modal.styles";
 
 interface Props {
+  title?: string;
   children: ReactNode;
 }
 
-const Modal = ({ children }: Props) => {
+const Modal = ({ title, children }: Props) => {
   return (
     <Backdrop>
-      <ModalBox>{children}</ModalBox>
+      <ModalBox>
+        {title && <Title>{title}</Title>}
+        {children}
+      </ModalBox>
     </Backdrop>
   );
 };

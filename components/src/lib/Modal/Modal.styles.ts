@@ -12,9 +12,16 @@ export const Backdrop = styled.div`
 `;
 
 export const ModalBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
   position: absolute;
   padding: 10px;
   background-color: #fff;
   border-radius: 10px;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+`;
+
+export const Title = styled.h1`
+  margin: 0;
 `;
