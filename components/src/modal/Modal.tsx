@@ -1,10 +1,31 @@
 import { css } from '@emotion/css';
+import { ReactNode } from 'react';
 
-const Modal = () => {
+interface ModalProps {
+  position: 'center' | 'bottom';
+  content: ReactNode;
+  onOpen: () => void;
+  onClose: () => void;
+  title?: string;
+  showCloseButton?: boolean;
+  actions?: ReactNode;
+  onConfirm?: () => void;
+}
+
+const Modal = ({
+  position,
+  content,
+  onOpen,
+  onClose,
+  showCloseButton = true,
+  actions,
+  title = '',
+  onConfirm,
+}: ModalProps) => {
   return (
     <div className={ModalBackdrop}>
       <div className={ModalFrame}>
-        <button>&times;</button>
+        <button className={ModalCloseButton}>&times;</button>
         <h2>Modal Header</h2>
         <p>This is a simple modal.</p>
       </div>
@@ -34,4 +55,19 @@ const ModalFrame = css`
   min-width: 300px;
   max-width: 80dvw;
   border-radius: 8px;
+`;
+
+const ModalCloseButton = css`
+  all: unset;
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+  border-radius: 50%;
+
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+  }
+  &:focus {
+    outline: none;
+  }
 `;
