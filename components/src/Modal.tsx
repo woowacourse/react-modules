@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import closeIcon from './assets/close-icon.png';
 
 const BackDrop = styled.div`
   position: fixed;
@@ -21,11 +22,23 @@ const ModalLayout = styled.div`
   border-radius: 8px;
 `;
 
+const CloseIcon = styled.img.attrs({
+  src: closeIcon,
+  alt: 'Close Icon',
+})`
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+`;
+
 const Modal = () => {
   return (
     <>
       <BackDrop />
-      <ModalLayout />
+      <ModalLayout>
+        <CloseIcon />
+      </ModalLayout>
     </>
   );
 };
