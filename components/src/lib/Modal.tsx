@@ -8,7 +8,7 @@ interface ModalPropsType {
   onClose: () => void;
 }
 
-export const Modal = ({
+const Modal = ({
   isModalOpen,
   position,
   title,
@@ -35,3 +35,5 @@ export const Modal = ({
     </>
   );
 };
+
+export default Modal;

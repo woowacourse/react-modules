@@ -1,6 +1,7 @@
+import { Modal } from "happyjurung-modal";
 import "./App.css";
-import { Modal } from "./lib/Modal";
 import { useState } from "react";
+import "happyjurung-modal/dist/index.css";
 
 function App() {
   const [isModalOpen, setIsModalOpen] = useState(false);
