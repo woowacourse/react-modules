@@ -1,7 +1,15 @@
-import { useEffect, useRef } from 'react';
+import { ReactNode, useEffect, useRef } from 'react';
 import styles from './Modal.module.css';
 
-function Modal({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) {
+function Modal({
+  isOpen,
+  onClose,
+  contents,
+}: {
+  isOpen: boolean;
+  onClose: () => void;
+  contents: ReactNode;
+}) {
   const modalRef = useRef<HTMLDialogElement>(null);
 
   useEffect(() => {
@@ -30,6 +38,7 @@ function Modal({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) {
 
   return (
     <dialog onClose={onClose} className={styles.modal} ref={modalRef}>
+      {contents}
       <button onClick={onClose}>닫기</button>
     </dialog>
   );

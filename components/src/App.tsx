@@ -2,6 +2,10 @@ import { useState } from 'react';
 import './App.css';
 import Modal from './modal/Modal';
 
+function getContent() {
+  return <div>컨텐츠</div>;
+}
+
 function App() {
   const [modalOpen, setModalOpen] = useState(false);
 
@@ -13,7 +17,7 @@ function App() {
     <>
       <h1>Component Modules</h1>
       <button onClick={() => setModalOpen(true)}>열기</button>
-      <Modal isOpen={modalOpen} onClose={onClose} />
+      <Modal isOpen={modalOpen} onClose={onClose} contents={getContent()} />
     </>
   );
 }
