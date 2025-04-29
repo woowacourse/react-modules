@@ -3,6 +3,7 @@ import { Backdrop, ModalBox, Title } from "./Modal.styles";
 
 interface Props {
   isOpen: boolean;
+  onClose: () => void;
   title?: string;
   children: ReactNode;
   backgroundColor?: string;
@@ -11,13 +12,14 @@ interface Props {
 
 const Modal = ({
   isOpen,
+  onClose,
   title,
   children,
   backgroundColor,
   titleColor,
 }: Props) => {
   return (
-    <Backdrop $isOpen={isOpen}>
+    <Backdrop $isOpen={isOpen} onClick={onClose}>
       <ModalBox $backgroundColor={backgroundColor}>
         {title && <Title $titleColor={titleColor}>{title}</Title>}
         {children}
