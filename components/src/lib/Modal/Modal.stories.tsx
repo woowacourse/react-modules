@@ -2,6 +2,11 @@ import type { Meta, StoryObj } from "@storybook/react";
 import Modal from "./Modal";
 import { useState } from "react";
 
+const defaultArgs = {
+  isOpen: true,
+  onClose: () => {},
+};
+
 const meta = {
   title: "components/Modal",
   component: Modal,
@@ -32,30 +37,27 @@ export const Default = () => {
 
 export const ModalInDarkMode: Story = {
   args: {
+    ...defaultArgs,
     title: "Dark Mode",
     titleColor: "#fff",
     backgroundColor: "#000",
     children: <div style={{ color: "#fff" }}>Dark Mode Contents</div>,
-    isOpen: true,
-    onClose: () => {},
   },
 };
 
 export const ModalInLightMode: Story = {
   args: {
+    ...defaultArgs,
     title: "Light Mode",
     children: "Light Mode Contents",
-    isOpen: true,
-    onClose: () => {},
   },
 };
 
 export const BottomModal: Story = {
   args: {
+    ...defaultArgs,
     position: "bottom",
     title: "Bottom Modal",
     children: "Bottom Modal Contents",
-    isOpen: true,
-    onClose: () => {},
   },
 };
