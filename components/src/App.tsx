@@ -1,14 +1,19 @@
-import styled from '@emotion/styled';
-import './App.css';
-import Modal from './lib/Modal';
-import { useState } from 'react';
+import styled from "@emotion/styled";
+import "./App.css";
+import Modal from "./lib/Modal";
+import { useState } from "react";
 
 function App() {
   const [isOpen, setIsOpen] = useState(true);
   return (
     <div>
       <h1>My App</h1>
-      <Modal isOpen={isOpen} setIsOpen={setIsOpen} title='타이틀입니다' position='center'>
+      <Modal
+        isOpen={isOpen}
+        setIsOpen={setIsOpen}
+        title="타이틀입니다"
+        position="center"
+      >
         <h2>Modal Title</h2>
         <p>This is a modal content.</p>
       </Modal>

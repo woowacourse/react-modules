@@ -1,4 +1,4 @@
-import styled from '@emotion/styled';
+import styled from "@emotion/styled";
 
 const positionCenter = `top: 50%;
 transform: translate(-50%, -50%);
@@ -9,9 +9,12 @@ const positionBottom = `bottom: 0; left:0 right:0;`;
 export const Background = styled.div`
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.1);
+  background-color: rgba(0, 0, 0, 0.7);
   color: black;
   position: relative;
+  position: fixed;
+  top: 0;
+  left: 0;
 `;
 
 export const ModalContainer = styled.div<{ position: string }>`
@@ -27,7 +30,8 @@ export const ModalContainer = styled.div<{ position: string }>`
   box-sizing: border-box;
   gap: 16px;
 
-  ${({ position }) => (position === 'center' ? positionCenter : positionBottom)};
+  ${({ position }) =>
+    position === "center" ? positionCenter : positionBottom};
 `;
 
 export const HeaderSection = styled.div`
