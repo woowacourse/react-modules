@@ -4,7 +4,7 @@ import "./App.css";
 function App() {
   return (
     <>
-      <h1>Component Modules</h1>
+      <button>모달 열기 버튼</button>
     </>
   );
 }
