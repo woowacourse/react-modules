@@ -9,13 +9,22 @@ interface ModalProps {
 }
 
 function Modal({ position, title, children, isOpen, onClose }: ModalProps) {
-  const containerClassName = `${styles.modalContainer} ${styles[position]}`;
+  const containerClassName = `${styles.modalContents} ${styles[position]}`;
 
   return (
     <>
       {isOpen && (
-        <div className={styles.modalBackground}>
-          <div className={`${containerClassName}`}>
+        <div className={styles.modalContainer}>
+          <div
+            className={styles.modalBackground}
+            onClick={() => {
+              onClose();
+            }}
+          />
+          <div
+            className={`${containerClassName}`}
+            onClick={(e) => e.stopPropagation()}
+          >
             <header className={styles.modalHeader}>
               <p className={styles.title}>{title}</p>
               <img
