@@ -10,7 +10,11 @@ interface ModalProps {
 }
 
 function Modal({ position, title, children, isOpen, onClose }: ModalProps) {
-  const containerClassName = `${styles.modalContents} ${styles[position]}`;
+  const containerClassName = `${styles.modalContents} ${
+    styles[`${position}Width`]
+  }`;
+  const backgroundClassName = `${styles[position]} ${styles.modalBackground}`;
+
   useEffect(() => {
     if (!isOpen) return;
     const handleKeydown = (e: KeyboardEvent) => {
@@ -26,13 +30,12 @@ function Modal({ position, title, children, isOpen, onClose }: ModalProps) {
   return (
     <>
       {isOpen && (
-        <div className={styles.modalContainer}>
-          <div
-            className={styles.modalBackground}
-            onClick={() => {
-              onClose();
-            }}
-          />
+        <div
+          className={backgroundClassName}
+          onClick={() => {
+            onClose();
+          }}
+        >
           <div
             className={`${containerClassName}`}
             onClick={(e) => e.stopPropagation()}
