@@ -2,11 +2,21 @@ import styled from "@emotion/styled";
 import { CloseIcon } from "./common";
 
 const ModalContainer = styled.div`
-  width: 304px;
-  background-color: #f5f5f5;
+  width: 280px;
+
+  background-color: white;
   padding: 24px 32px;
 
   border-radius: 8px;
+
+  position: fixed;
+
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+
+  top: 50%;
+  transform: translateY(-50%);
 `;
 
 const ModalTop = styled.div`
@@ -25,6 +35,7 @@ export default function Modal({}) {
     <ModalContainer>
       <ModalTop>
         <Title>카드사 선택</Title>
+
         <CloseIcon />
       </ModalTop>
     </ModalContainer>
