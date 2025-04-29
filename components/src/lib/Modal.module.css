@@ -1,0 +1,33 @@
+.layout {
+  position: fixed;
+  display: flex;
+  inset: 0;
+  background-color: #00000059;
+  z-index: 10;
+
+  width: 100vw;
+  height: 100vh;
+}
+
+.modalContainer {
+  position: relative;
+  background-color: #ffffff;
+  border: none;
+  padding: 24px 32px 24px 32px;
+  overflow-y: auto;
+}
+
+.center {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  position: absolute;
+  border-radius: 8px;
+}
+
+.bottom {
+  width: 376px;
+  height: 206px;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+}
