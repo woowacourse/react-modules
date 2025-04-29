@@ -17,6 +17,39 @@
   overflow-y: auto;
 }
 
+.titleContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.title {
+  margin: 0;
+  padding: 0;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 100%;
+}
+
+.closeButton {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+
+  width: 24px;
+  height: 24px;
+  border: none;
+  background-color: unset;
+  outline: none;
+}
+
+.closeButtonImage {
+  width: 24px;
+  height: 24px;
+}
+
 .center {
   top: 50%;
   left: 50%;
