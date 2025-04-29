@@ -1,4 +1,6 @@
-export default function CloseIcon({ ...props }) {
+export default function CloseIcon(
+  props: React.HTMLAttributes<HTMLOrSVGElement>
+) {
   return (
     <svg
       width="15"

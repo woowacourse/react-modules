@@ -1,5 +1,9 @@
+/** @jsxImportSource @emotion/react */
+
 import styled from "@emotion/styled";
 import { CloseIcon } from "./common";
+import { PropsWithChildren } from "react";
+import { css } from "@emotion/react";
 
 const ModalContainer = styled.div`
   width: 280px;
@@ -44,17 +48,36 @@ const ModalBackdrop = styled.div`
   margin: auto;
 `;
 
-export default function Modal({}) {
+interface ModalInterface {
+  position?: "center" | "bottom";
+  title: string;
+  onClose: () => void;
+  isOpen: boolean;
+}
+
+export default function Modal({
+  position = "center",
+  title,
+  onClose,
+  children,
+  isOpen,
+}: PropsWithChildren<ModalInterface>) {
+  if (!isOpen) return;
   return (
     <>
       <ModalContainer>
         <ModalTop>
-          <Title>카드사 선택</Title>
-          <CloseIcon />
+          <Title>{title}</Title>
+          <CloseIcon onClick={onClose} css={closeIconStyle} />
         </ModalTop>
-      </ModalContainer>
 
-      <ModalBackdrop />
+        {children}
+      </ModalContainer>
+      <ModalBackdrop onClick={onClose} />
     </>
   );
 }
+
+const closeIconStyle = css`
+  cursor: pointer;
+`;
