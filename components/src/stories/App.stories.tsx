@@ -74,3 +74,23 @@ export const CloseByOverlayClick: Story = {
     expect(canvas.getByText("모달열림")).not.toBeVisible();
   },
 };
+
+export const CloseByEsc: Story = {
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    const openButton = canvas.getByRole("button", {
+      name: "모달 열기 버튼",
+    });
+    await userEvent.click(openButton);
+
+    const modalText = canvas.getByText("모달열림");
+    if (modalText) {
+      expect(modalText).toBeVisible();
+    }
+
+    await userEvent.keyboard("{Escape}");
+
+    expect(canvas.getByText("모달열림")).not.toBeVisible();
+  },
+};

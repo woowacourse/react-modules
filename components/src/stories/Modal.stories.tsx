@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import Modal from "../lib/Modal";
+import { useState } from "react";
 
 const meta = {
   title: "Modal",
@@ -8,10 +9,8 @@ const meta = {
 
 export default meta;
 
-type Story = StoryObj<typeof meta>;
+export const Default = () => {
+  const [isOpen, setIsOpen] = useState(true);
 
-export const Default: Story = {
-  args: {
-    isOpen: true,
-  },
+  return <Modal isOpen={isOpen} setIsOpen={setIsOpen} />;
 };
