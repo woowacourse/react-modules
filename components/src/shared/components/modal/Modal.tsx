@@ -1,14 +1,15 @@
 import { createPortal } from 'react-dom';
-import { ModalContainer, ModalLayout } from './Modal.css';
+import { bottom, center, ModalLayout } from './Modal.css';
 import { PropsWithChildren, useId } from 'react';
 import useEscapeModal from '../../../hooks/useEscapeModal';
 
 interface ModalProps extends PropsWithChildren {
   closeModal: () => void;
+  position?: 'center' | 'bottom';
 }
 
 function Modal(props: ModalProps) {
-  const { children, closeModal, ...rest } = props;
+  const { children, closeModal, position = 'center', ...rest } = props;
   const id = useId();
 
   const { handleClickOverlay } = useEscapeModal(closeModal);
@@ -21,7 +22,7 @@ function Modal(props: ModalProps) {
           id={id}
           onClick={(e) => handleClickOverlay(e, id)}
         >
-          <div css={ModalContainer} {...rest}>
+          <div css={position === 'center' ? center : bottom} {...rest}>
             {children}
           </div>
         </div>,

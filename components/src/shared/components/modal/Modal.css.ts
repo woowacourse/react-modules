@@ -13,6 +13,14 @@ export const ModalLayout = css`
   background-color: rgba(0, 0, 0, 0.5);
 `;
 
-export const ModalContainer = css`
+export const center = css`
+  background-color: white;
+`;
+
+export const bottom = css`
+  position: fixed;
+  width: 100%;
+  bottom: 0;
+  left: 0;
   background-color: white;
 `;
