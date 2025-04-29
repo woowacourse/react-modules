@@ -1,5 +1,5 @@
 import { css } from '@emotion/css';
-import { ReactNode, useEffect } from 'react';
+import { MouseEvent, ReactNode, useEffect } from 'react';
 
 type Position = 'center' | 'bottom';
 
@@ -24,10 +24,27 @@ const Modal = ({ position, content, onOpen, onClose, actions, title, showCloseBu
     if (onOpen) {
       onOpen();
     }
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+    };
   }, []);
 
+  const handleKeyDown = (e: KeyboardEvent) => {
+    if (e.key === 'Escape') {
+      onClose();
+    }
+  };
+
+  const handleBackdropClick = (e: MouseEvent<HTMLDivElement>) => {
+    if (e.target === e.currentTarget) {
+      onClose();
+    }
+  };
+
   return (
-    <div className={ModalBackdrop}>
+    <div className={ModalBackdrop} onClick={handleBackdropClick}>
       <div className={ModalFrame(position)}>
         <div className={ModalHeader}>
           {title && <h2>{title}</h2>}
