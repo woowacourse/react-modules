@@ -23,10 +23,8 @@ function Modal({ isOpen, children, position, width }: ModalProps) {
 
 export default Modal;
 
-const StyledModal = styled.div<{
-  position: 'top' | 'bottom' | 'center';
-  width?: number;
-}>`
+type modalStyledProps = Pick<ModalProps, 'position' | 'width'>;
+const StyledModal = styled.div<modalStyledProps>`
   display: flex;
   width: ${(props) =>
     props.position === 'center' ? `${props.width}px` : '100%'};
