@@ -1,3 +1,5 @@
+import { ComponentProps } from 'react';
+
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 
@@ -35,7 +37,7 @@ type Props = {
    * The content of the modal
    */
   children: React.ReactNode;
-};
+} & ComponentProps<'div'>;
 
 export const Modal = ({
   isOpen,
@@ -49,11 +51,17 @@ export const Modal = ({
 }: Props) => {
   return (
     <Portal isOpen={isOpen}>
-      <StyledBackDrop onClick={onOutsideClick} />
-      <StyledModalContainer position={position} {...props}>
-        <StyledModalHeader>
+      <StyledBackDrop onClick={onOutsideClick} aria-hidden="true" />
+      <StyledModalContainer role="dialog" aria-modal="true" position={position} {...props}>
+        <StyledModalHeader aria-label={title}>
           {title}
-          {showCloseButton && <StyledCloseButton src="/close.png" onClick={onClose} />}
+          {showCloseButton && (
+            <StyledCloseIconButton
+              src="/close.png"
+              onClick={onClose}
+              aria-label="closeModalButton"
+            />
+          )}
         </StyledModalHeader>
         {children}
       </StyledModalContainer>
@@ -81,7 +89,7 @@ const positionStyle = {
     left: 50%;
     transform: translate(-50%, -50%);
     border-radius: 16px;
-    animation: fadeIn 0.3s ease-out forwards;
+    animation: fadeIn 0.2s ease-out forwards;
 
     @keyframes fadeIn {
       from {
@@ -97,7 +105,7 @@ const positionStyle = {
     left: 50%;
     transform: translate(-50%, 0);
     border-radius: 16px 16px 0 0;
-    animation: slideUp 300ms ease-out forwards;
+    animation: slideUp 0.2s ease-out forwards;
 
     @keyframes slideUp {
       0% {
@@ -129,7 +137,7 @@ const StyledModalHeader = styled.div`
   font-weight: 600;
 `;
 
-const StyledCloseButton = styled.img`
+const StyledCloseIconButton = styled.img`
   width: 27px;
   height: 27px;
   border: none;
