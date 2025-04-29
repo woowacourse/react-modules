@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import closeIcon from './assets/close-icon.png';
+import { useEffect } from 'react';
 
 interface ModalProps {
   isOpen: boolean;
@@ -8,11 +9,25 @@ interface ModalProps {
 }
 
 const Modal = ({ isOpen = true, title = '제목', onClose }: ModalProps) => {
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        onClose();
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [isOpen, onClose]);
+
   return (
     <>
       {isOpen && (
         <>
-          <BackDrop />
+          <BackDrop onClick={onClose} />
           <ModalLayout>
             <ModalTitle>{title}</ModalTitle>
             <CloseIcon onClick={onClose} />
