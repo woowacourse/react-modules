@@ -1,0 +1,39 @@
+.backdrop {
+  background-color: rgba(0, 0, 0, 0.5);
+  width: 500px;
+  height: 100vh;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 0;
+}
+
+.container {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 8px;
+  background: #fff;
+  padding: 1.5rem 2rem;
+  width: 350px;
+  height: 220px;
+}
+
+.modalHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.title {
+  color: #000;
+  font-family: "Noto Sans KR";
+  font-size: 1.125rem;
+  font-weight: 700;
+}
+
+.closeButton {
+  width: 1.5rem;
+  height: 1.5rem;
+}
