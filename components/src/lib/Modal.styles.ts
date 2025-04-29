@@ -1,24 +1,24 @@
 import styled from "@emotion/styled";
 
-const positionCenter = `top: 50%;
+const positionCenter = `
+width: 304px;
+top: 50%;
 transform: translate(-50%, -50%);
 left: 50%;`;
 
-const positionBottom = `bottom: 0; left:0 right:0;`;
+const positionBottom = `width: 100vw ;bottom: 0; left:0 right:20;`;
 
 export const Background = styled.div`
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.7);
   color: black;
-  position: relative;
   position: fixed;
   top: 0;
   left: 0;
 `;
 
 export const ModalContainer = styled.div<{ position: string }>`
-  width: 304px;
   height: 216px;
   border-radius: 8px;
   background-color: #fff;

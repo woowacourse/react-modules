@@ -5,7 +5,7 @@ import { useState } from "react";
 import React from "react";
 
 function App() {
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
   const handleCloseModal = () => {
     setIsOpen(false);
   };
@@ -16,7 +16,7 @@ function App() {
         isOpen={isOpen}
         handleCloseModal={handleCloseModal}
         title="타이틀입니다"
-        position="center"
+        position="bottom"
       >
         <h2>Modal Title</h2>
         <p>This is a modal content.</p>

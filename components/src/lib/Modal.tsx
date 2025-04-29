@@ -16,6 +16,7 @@ const Modal = ({
   children,
   position = "center",
 }: ModalProps) => {
+  console.log(position);
   useEffect(() => {
     window.addEventListener("keyup", handleCloseModal);
   }, []);
