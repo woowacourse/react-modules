@@ -6,9 +6,15 @@ interface ModalProps {
   isOpen: boolean;
   title: string;
   onClose: () => void;
+  showCloseButton?: boolean;
 }
 
-const Modal = ({ isOpen = true, title = '제목', onClose }: ModalProps) => {
+const Modal = ({
+  isOpen = true,
+  title = '제목',
+  onClose,
+  showCloseButton = true,
+}: ModalProps) => {
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === 'Escape') {
@@ -30,7 +36,7 @@ const Modal = ({ isOpen = true, title = '제목', onClose }: ModalProps) => {
           <BackDrop onClick={onClose} />
           <ModalLayout>
             <ModalTitle>{title}</ModalTitle>
-            <CloseIcon onClick={onClose} />
+            {showCloseButton && <CloseIcon onClick={onClose} />}
           </ModalLayout>
         </>
       )}
