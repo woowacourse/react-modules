@@ -1,5 +1,6 @@
 import styled from "@emotion/styled";
 import Close from "/Close.svg";
+import { useEffect } from "react";
 
 interface ModalProps {
   isOpen: boolean;
@@ -7,6 +8,18 @@ interface ModalProps {
 }
 
 function Modal({ isOpen, setIsOpen }: ModalProps) {
+  useEffect(() => {
+    function handleKeyDown(e: KeyboardEvent) {
+      if (e.key === "Escape") setIsOpen(false);
+    }
+
+    addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      removeEventListener("keydown", handleKeyDown);
+    };
+  }, [isOpen]);
+
   return (
     <ModalContainer isOpen={isOpen}>
       <ModalOverlay
