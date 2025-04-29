@@ -1,33 +1,35 @@
 import styles from "./Modal.module.css";
 
 interface ModalPropsType {
-  title: string;
   isModalOpen: boolean;
-  setIsModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  position: string;
+  title: string;
+  children: React.ReactNode;
+  onClose: () => void;
 }
 
 export const Modal = ({
-  title,
   isModalOpen,
-  setIsModalOpen,
+  position,
+  title,
+  children,
+  onClose,
 }: ModalPropsType) => {
   return (
     <>
       <div
         className={`${styles["modal-background"]} ${
-          isModalOpen && styles.active
+          isModalOpen ? styles.active : ""
         }`}
       >
-        <div className={styles.modal}>
+        <div className={`${styles.modal} ${styles[position]}`}>
           <div className={styles.modalHeader}>
             <h4>{title}</h4>
-            <button
-              className={styles.closeButton}
-              onClick={() => setIsModalOpen(false)}
-            >
+            <button className={styles.closeButton} onClick={onClose}>
               X
             </button>
           </div>
+          {children}
         </div>
       </div>
     </>
