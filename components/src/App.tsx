@@ -1,5 +1,4 @@
-import { Modal } from './components/Modal';
-import { useModal } from './hooks/useModal';
+import { Modal, useModal } from '@sebin0580/react-modules';
 
 function App() {
   const { isOpen, handleOpenModal, handleCloseModal, handleOutsideClick } = useModal();
@@ -9,10 +8,10 @@ function App() {
       <button onClick={handleOpenModal}>버튼</button>
       <Modal
         isOpen={isOpen}
-        onClose={handleCloseModal}
-        onOutsideClick={handleOutsideClick}
         title="모달 제목"
         showCloseButton
+        onClose={handleCloseModal}
+        onOutsideClick={handleOutsideClick}
       >
         <h1>안녕</h1>
       </Modal>
