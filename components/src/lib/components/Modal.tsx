@@ -1,3 +1,4 @@
+import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 
 import Portal from './Portal';
@@ -11,7 +12,7 @@ type ModalProps = {
    * position of the modal
    * @default 'center'
    */
-  position?: 'top' | 'center' | 'bottom';
+  position?: 'center' | 'bottom';
   /**
    * The title of the modal
    */
@@ -34,7 +35,7 @@ type ModalProps = {
 
 export const Modal = ({
   isOpen,
-  position,
+  position = 'center',
   title,
   showCloseButton,
   onClose,
@@ -54,9 +55,39 @@ export const Modal = ({
   );
 };
 
-const StyledBackDrop = styled.div``;
+const StyledBackDrop = styled.div`
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(31, 41, 55, 0.5);
+`;
 
-const StyledModalContainer = styled.div<{ position?: 'top' | 'center' | 'bottom' }>``;
+const positionStyle = {
+  center: css`
+    top: 25%;
+    left: 25%;
+  `,
+  bottom: css`
+    bottom: 0;
+    left: 50%;
+    width: 100%;
+    max-width: 600px;
+    height: auto;
+    max-height: 80%;
+    border-radius: 16px 16px 0 0;
+  `,
+} as const;
+
+const StyledModalContainer = styled.div<{ position?: 'center' | 'bottom' }>`
+  position: absolute;
+  ${({ position }) => positionStyle[position ?? 'center']};
+`;
 
 const StyledModalHeader = styled.div``;
 
