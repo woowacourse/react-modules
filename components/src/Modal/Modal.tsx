@@ -7,32 +7,33 @@ import {
 } from './Modal.styled';
 import { useContext, useEffect } from 'react';
 import { createContext } from 'react';
+import { createPortal } from 'react-dom';
 
 type ModalProps = {
   isOpen: boolean;
-  title: string;
   onClose: () => void;
   children: React.ReactNode;
+  position?: 'center' | 'bottom';
 };
 
 const ModalContext = createContext<ModalProps>({
   isOpen: true,
-  title: '제목',
   onClose: () => {},
   children: <></>,
+  position: 'center',
 });
 
 const Modal = ({
   isOpen = true,
-  title = '제목',
   onClose,
   children,
+  position = 'center',
 }: ModalProps) => {
   const value = {
     isOpen,
-    title,
     onClose,
     children,
+    position,
   };
 
   useEffect(() => {
@@ -51,20 +52,30 @@ const Modal = ({
 
   return (
     <>
-      {isOpen && (
-        <ModalContext.Provider value={value}>
-          <BackDrop onClick={onClose} />
-          <ModalLayout>{children}</ModalLayout>
-        </ModalContext.Provider>
-      )}
+      {isOpen &&
+        createPortal(
+          <ModalContext.Provider value={value}>
+            <BackDrop onClick={onClose} $position={position}>
+              <ModalLayout
+                $position={position}
+                onClick={(event) => event.stopPropagation()}
+              >
+                {children}
+              </ModalLayout>
+            </BackDrop>
+          </ModalContext.Provider>,
+          document.getElementById('root') as HTMLElement
+        )}
     </>
   );
 };
 
-const Title = () => {
-  const modalContext = useContext(ModalContext);
+interface ModalTitleProps {
+  title: string;
+}
 
-  return <ModalTitle>{modalContext.title}</ModalTitle>;
+const Title = ({ title }: ModalTitleProps) => {
+  return <ModalTitle>{title}</ModalTitle>;
 };
 
 const CloseButton = () => {

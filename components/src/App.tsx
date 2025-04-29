@@ -7,20 +7,11 @@ function App() {
   const handleClose = () => {
     setIsOpen(false);
   };
-  const contents = (
-    <div>
-      <p>내용</p>
-      <p>내용</p>
-      <p>내용</p>
-      <p>내용</p>
-      <p>내용</p>
-      <p>내용</p>
-    </div>
-  );
+
   return (
     <>
-      <Modal isOpen={isOpen} title="sdlfk" onClose={handleClose}>
-        <Modal.Title />
+      <Modal isOpen={isOpen} onClose={handleClose}>
+        <Modal.Title title="제목" />
         <Modal.CloseButton />
         <Modal.Contents>
           <div>안녕하세요~</div>

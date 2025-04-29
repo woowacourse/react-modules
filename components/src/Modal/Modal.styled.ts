@@ -1,10 +1,16 @@
 import styled from 'styled-components';
 import closeIcon from '../assets/close-icon.png';
 
-const BackDrop = styled.div`
+type PositionProps = {
+  $position: 'center' | 'bottom';
+};
+const BackDrop = styled.div<PositionProps>`
   position: fixed;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  justify-content: ${({ $position }) =>
+    $position === 'center' ? 'center' : 'flex-end'};
+  align-items: center;
   top: 0;
   left: 0;
   width: 100%;
@@ -13,10 +19,11 @@ const BackDrop = styled.div`
   background-color: rgba(0, 0, 0, 0.5);
 `;
 
-const ModalLayout = styled.div`
+const ModalLayout = styled.div<PositionProps>`
   position: relative;
-  width: 500px;
-  height: 500px;
+  width: ${({ $position }) => ($position === 'bottom' ? '100%' : '500px')};
+  min-width: 500px;
+  min-height: 500px;
   z-index: 500;
   background-color: white;
   border-radius: 8px;
@@ -46,7 +53,6 @@ const ModalTitle = styled.div`
 `;
 
 const ModalContents = styled.div`
-  background-color: pink;
   display: flex;
   margin-top: 56px;
   height: 100%;
