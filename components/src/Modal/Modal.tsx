@@ -36,6 +36,8 @@ const Modal = ({
     position,
   };
 
+  console.log('렌더링!');
+
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === 'Escape') {
