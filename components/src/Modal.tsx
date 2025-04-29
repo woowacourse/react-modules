@@ -1,6 +1,29 @@
 import styled from 'styled-components';
 import closeIcon from './assets/close-icon.png';
 
+interface ModalProps {
+  isOpen: boolean;
+  title: string;
+}
+
+const Modal = ({ isOpen = true, title = '제목' }: ModalProps) => {
+  return (
+    <>
+      {isOpen && (
+        <>
+          <BackDrop />
+          <ModalLayout>
+            <ModalTitle>{title}</ModalTitle>
+            <CloseIcon />
+          </ModalLayout>
+        </>
+      )}
+    </>
+  );
+};
+
+export default Modal;
+
 const BackDrop = styled.div`
   position: fixed;
   display: flex;
@@ -20,6 +43,10 @@ const ModalLayout = styled.div`
   z-index: 500;
   background-color: white;
   border-radius: 8px;
+  padding: 20px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
 `;
 
 const CloseIcon = styled.img.attrs({
@@ -32,19 +59,11 @@ const CloseIcon = styled.img.attrs({
   cursor: pointer;
 `;
 
-const Modal = ({ isOpen = true }) => {
-  return (
-    <>
-      {isOpen && (
-        <>
-          <BackDrop />
-          <ModalLayout>
-            <CloseIcon />
-          </ModalLayout>
-        </>
-      )}
-    </>
-  );
-};
-
-export default Modal;
+const ModalTitle = styled.div`
+  font-size: 24px;
+  font-weight: 900;
+  position: relative;
+  top: 10px;
+  left: 10px;
+  text-align: start;
+`;
