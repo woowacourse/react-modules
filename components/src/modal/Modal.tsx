@@ -45,7 +45,16 @@ const Modal = ({
             </button>
           )}
         </div>
-        
+        <div>{content}</div>
+        {actions && (
+          <div className={ButtonBar}>
+            {actions.map(({ button, type }, index) => (
+              <button key={index} onClick={type === 'confirm' ? onConfirm : onClose} {...button}>
+                {button.children}
+              </button>
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );
@@ -102,4 +111,12 @@ const ModalCloseButton = css`
   &:focus {
     outline: none;
   }
+`;
+
+const ButtonBar = css`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
 `;
