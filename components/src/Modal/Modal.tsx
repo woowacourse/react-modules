@@ -12,7 +12,6 @@ type ModalProps = {
   isOpen: boolean;
   title: string;
   onClose: () => void;
-  contents: React.ReactNode;
   children: React.ReactNode;
 };
 
@@ -20,7 +19,6 @@ const ModalContext = createContext<ModalProps>({
   isOpen: true,
   title: '제목',
   onClose: () => {},
-  contents: <></>,
   children: <></>,
 });
 
@@ -28,14 +26,12 @@ const Modal = ({
   isOpen = true,
   title = '제목',
   onClose,
-  contents,
   children,
 }: ModalProps) => {
   const value = {
     isOpen,
     title,
     onClose,
-    contents,
     children,
   };
 
@@ -58,10 +54,7 @@ const Modal = ({
       {isOpen && (
         <ModalContext.Provider value={value}>
           <BackDrop onClick={onClose} />
-          <ModalLayout>
-            {children}
-            {contents && <ModalContents>{contents}</ModalContents>}
-          </ModalLayout>
+          <ModalLayout>{children}</ModalLayout>
         </ModalContext.Provider>
       )}
     </>
@@ -80,11 +73,16 @@ const CloseButton = () => {
   return <CloseIcon onClick={modalContext.onClose} />;
 };
 
-// const Contents = ({ contents }) => {
-//   return <ModalContents>{contents}</ModalContents>;
-// };
+interface ModalContentsProps {
+  children: React.ReactNode;
+}
+
+const Contents = ({ children }: ModalContentsProps) => {
+  return <ModalContents>{children}</ModalContents>;
+};
 
 Modal.Title = Title;
 Modal.CloseButton = CloseButton;
+Modal.Contents = Contents;
 
 export default Modal;

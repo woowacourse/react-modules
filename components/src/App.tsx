@@ -19,14 +19,12 @@ function App() {
   );
   return (
     <>
-      <Modal
-        isOpen={isOpen}
-        title="sdlfk"
-        onClose={handleClose}
-        contents={contents}
-      >
+      <Modal isOpen={isOpen} title="sdlfk" onClose={handleClose}>
         <Modal.Title />
         <Modal.CloseButton />
+        <Modal.Contents>
+          <div>안녕하세요~</div>
+        </Modal.Contents>
       </Modal>
     </>
   );
