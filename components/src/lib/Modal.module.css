@@ -4,12 +4,12 @@
   inset: 0;
   background-color: #00000059;
   z-index: 10;
-
   width: 100vw;
   height: 100vh;
 }
 
 .modalContainer {
+  box-sizing: border-box;
   position: relative;
   background-color: #ffffff;
   border: none;
@@ -59,8 +59,8 @@
 }
 
 .bottom {
-  width: 376px;
-  height: 206px;
   border-top-left-radius: 8px;
   border-top-right-radius: 8px;
+  position: absolute;
+  bottom: 0px;
 }
