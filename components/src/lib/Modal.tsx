@@ -1,14 +1,15 @@
 import styled from "@emotion/styled";
 import Close from "/Close.svg";
-import { useEffect } from "react";
+import { ReactNode, useEffect } from "react";
 
 interface ModalProps {
   title: string;
   isOpen: boolean;
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  content: ReactNode;
 }
 
-function Modal({ title, isOpen, setIsOpen }: ModalProps) {
+function Modal({ title, isOpen, setIsOpen, content }: ModalProps) {
   useEffect(() => {
     function handleKeyDown(e: KeyboardEvent) {
       if (e.key === "Escape") setIsOpen(false);
@@ -36,7 +37,7 @@ function Modal({ title, isOpen, setIsOpen }: ModalProps) {
             onClick={() => setIsOpen(false)}
           />
         </TitleSection>
-        <p>모달열림</p>
+        {content}
       </ModalContent>
     </ModalContainer>
   );

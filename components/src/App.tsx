@@ -7,7 +7,12 @@ function App() {
 
   return (
     <>
-      <Modal title="테스트" isOpen={isOpen} setIsOpen={setIsOpen} />
+      <Modal
+        title="테스트"
+        isOpen={isOpen}
+        setIsOpen={setIsOpen}
+        content={<p>모달열림</p>}
+      />
       <button onClick={() => setIsOpen(true)}>모달 열기 버튼</button>
     </>
   );

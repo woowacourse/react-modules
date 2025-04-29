@@ -12,5 +12,12 @@ export default meta;
 export const Default = () => {
   const [isOpen, setIsOpen] = useState(true);
 
-  return <Modal title="테스트" isOpen={isOpen} setIsOpen={setIsOpen} />;
+  return (
+    <Modal
+      title="테스트"
+      content={<p>테스트</p>}
+      isOpen={isOpen}
+      setIsOpen={setIsOpen}
+    />
+  );
 };
