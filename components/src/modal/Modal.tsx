@@ -1,16 +1,22 @@
 import { css } from '@emotion/css';
-import { ReactNode } from 'react';
+import { ButtonHTMLAttributes, ReactNode } from 'react';
 
 type Position = 'center' | 'bottom';
+type ButtonType = 'confirm' | 'cancel';
+
+interface ButtonProps {
+  button: ButtonHTMLAttributes<HTMLButtonElement>;
+  type: ButtonType;
+}
 
 interface ModalProps {
   position: Position;
   content: ReactNode;
-  onOpen: () => void;
   onClose: () => void;
+  onOpen?: () => void;
   title?: string;
   showCloseButton?: boolean;
-  actions?: ReactNode;
+  actions?: ButtonProps[];
   onConfirm?: () => void;
 }
 
@@ -19,17 +25,27 @@ const Modal = ({
   content,
   onOpen,
   onClose,
-  showCloseButton = true,
   actions,
-  title = '',
+  title,
   onConfirm,
+  showCloseButton = true,
 }: ModalProps) => {
+  if (onOpen) {
+    onOpen();
+  }
+
   return (
     <div className={ModalBackdrop}>
       <div className={ModalFrame(position)}>
-        <button className={ModalCloseButton}>&times;</button>
-        <h2>Modal Header</h2>
-        <p>This is a simple modal.</p>
+        <div className={ModalHeader}>
+          {title && <h2>{title}</h2>}
+          {showCloseButton && (
+            <button className={ModalCloseButton} onClick={onClose}>
+              &times;
+            </button>
+          )}
+        </div>
+        
       </div>
     </div>
   );
@@ -59,6 +75,18 @@ const ModalFrame = (position: Position) => css`
   border-radius: ${position === 'center' ? '8px' : '8px 8px 0 0'};
   position: ${position === 'bottom' ? 'absolute' : null};
   bottom: ${position === 'bottom' ? '0' : null};
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+`;
+
+const ModalHeader = css`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
 `;
 
 const ModalCloseButton = css`
