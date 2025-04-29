@@ -26,7 +26,9 @@ const StyledModalOverlay = styled.div<ModalOverlayStyledProps>`
   position: relative;
   width: 100%;
   height: 100%;
-  display: ${(props) => (props.isOpen ? 'block' : 'none')};
+  display: ${(props) => (props.isOpen ? 'flex' : 'none')};
+  justify-content: center;
+  align-items: center;
   position: absolute;
   top: 0px;
   left: 0px;
