@@ -12,13 +12,18 @@
     "isolatedModules": true,
     "moduleDetection": "force",
     "jsx": "react-jsx",
+    "noEmit": true,
 
     /* Linting */
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
-    "noUncheckedSideEffectImports": true
+    "noUncheckedSideEffectImports": true,
+    "allowImportingTsExtensions": true,
+
+    "declaration": true,
+    "declarationDir": "dist"
   },
   "include": ["src"]
 }
