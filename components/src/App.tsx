@@ -1,12 +1,9 @@
 import React from "react";
 import "./App.css";
+import { Modal } from "./components/Modal/Modal";
 
 function App() {
-  return (
-    <>
-      <h1>Component Modules</h1>
-    </>
-  );
+  return <Modal title="카드사 선택" />;
 }
 
 export default App;
