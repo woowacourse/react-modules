@@ -5,12 +5,15 @@ import { useState } from "react";
 
 function App() {
   const [isOpen, setIsOpen] = useState(true);
+  const handleCloseModal = () => {
+    setIsOpen(false);
+  };
   return (
     <div>
       <h1>My App</h1>
       <Modal
         isOpen={isOpen}
-        setIsOpen={setIsOpen}
+        handleCloseModal={handleCloseModal}
         title="타이틀입니다"
         position="center"
       >

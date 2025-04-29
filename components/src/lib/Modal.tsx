@@ -1,8 +1,9 @@
 import * as S from "./Modal.styles";
+import { useEffect } from "react";
 
 interface ModalProps {
   isOpen: boolean;
-  setIsOpen: (isOpen: boolean) => void;
+  handleCloseModal: () => void;
   children: React.ReactNode;
   title: string;
   position: "center" | "bottom";
@@ -10,19 +11,19 @@ interface ModalProps {
 
 const Modal = ({
   isOpen,
-  setIsOpen,
+  handleCloseModal,
   title,
   children,
   position = "center",
 }: ModalProps) => {
-  const handleCloseModal = () => {
-    setIsOpen(!isOpen);
-  };
+  useEffect(() => {
+    window.addEventListener("keyup", handleCloseModal);
+  }, []);
 
   return (
     <>
       {isOpen && (
-        <S.Background>
+        <S.Background onClick={handleCloseModal}>
           <S.ModalContainer position={position}>
             <S.HeaderSection>
               <S.Title>{title}</S.Title>
