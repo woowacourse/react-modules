@@ -2,23 +2,23 @@ import { MouseEvent, ReactNode } from "react";
 import { Backdrop, ModalBox, Title } from "./Modal.styles";
 
 interface Props {
+  position?: "center" | "bottom";
+  title?: string;
+  titleColor?: string;
+  backgroundColor?: string;
+  children: ReactNode;
   isOpen: boolean;
   onClose: () => void;
-  title?: string;
-  children: ReactNode;
-  backgroundColor?: string;
-  titleColor?: string;
-  position?: "center" | "bottom";
 }
 
 const Modal = ({
+  position = "center",
+  title,
+  titleColor,
+  backgroundColor,
+  children,
   isOpen,
   onClose,
-  title,
-  children,
-  backgroundColor,
-  titleColor,
-  position = "center",
 }: Props) => {
   const stopPropagation = (e: MouseEvent<HTMLDivElement>) => {
     e.stopPropagation();

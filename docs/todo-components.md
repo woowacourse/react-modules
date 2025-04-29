@@ -14,5 +14,5 @@
   - [x] titleColor: 글씨 색상
   - [x] position: 모달창 위치
 
-- [ ] 모달 UI 테스트: Storybook 구현
+- [x] 모달 UI 테스트: Storybook 구현
 - [ ] 모달 npm 배포

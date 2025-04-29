@@ -24,29 +24,38 @@ export const Default = () => {
         테스트 열기 버튼
       </button>
       <Modal isOpen={isOpen} onClose={closeModal}>
-        Contents
+        Default Contents
       </Modal>
     </>
   );
 };
 
-export const WithCustomColor: Story = {
+export const ModalInDarkMode: Story = {
   args: {
-    title: "Title",
-    children: "Center Modal",
-    backgroundColor: "#9ec5ff",
+    title: "Dark Mode",
     titleColor: "#fff",
+    backgroundColor: "#000",
+    children: <div style={{ color: "#fff" }}>Dark Mode Contents</div>,
     isOpen: true,
+    onClose: () => {},
+  },
+};
+
+export const ModalInLightMode: Story = {
+  args: {
+    title: "Light Mode",
+    children: "Light Mode Contents",
+    isOpen: true,
+    onClose: () => {},
   },
 };
 
 export const BottomModal: Story = {
   args: {
-    title: "Title",
-    children: "Center Modal",
-    backgroundColor: "#9ec5ff",
-    titleColor: "#fff",
-    isOpen: true,
     position: "bottom",
+    title: "Bottom Modal",
+    children: "Bottom Modal Contents",
+    isOpen: true,
+    onClose: () => {},
   },
 };
