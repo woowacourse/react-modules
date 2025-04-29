@@ -1,13 +1,15 @@
 .center {
   position: absolute;
+  width: 300px;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
 }
 
 .bottom {
-  position: absolute;
-  bottom: 0;
+  position: fixed;
+  width: 372px;
+  bottom: 0px;
   left: 50%;
   transform: translate(-50%, -50%);
 }
@@ -16,6 +18,31 @@
   position: relative;
   background-color: #00000059;
 }
+
 .modalContainer {
+  padding: 24px 32px;
   background: white;
+  color: black;
+}
+
+.modalHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.closeButton {
+  width: 24px;
+  height: 24px;
+}
+
+.title {
+  font-family: Noto Sans KR;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 100%;
+  letter-spacing: 0%;
+  vertical-align: middle;
+  width: fit-content;
+  white-space: nowrap;
 }
