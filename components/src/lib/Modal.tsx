@@ -8,10 +8,22 @@ interface ModalProps {
   isOpen: boolean;
   onClose: () => void;
   onConfirm?: () => void;
+  hasTopCloseButton?: boolean;
+  hasBottomCloseButton?: boolean;
+  hasConfirmButton?: boolean;
   content: ReactNode;
 }
 
-function Modal({ title, isOpen, onClose, onConfirm, content }: ModalProps) {
+function Modal({
+  title,
+  isOpen,
+  onClose,
+  onConfirm,
+  content,
+  hasTopCloseButton = true,
+  hasBottomCloseButton = false,
+  hasConfirmButton = false,
+}: ModalProps) {
   useEffect(() => {
     function handleKeyDown(e: KeyboardEvent) {
       if (e.key === "Escape") onClose();
@@ -30,11 +42,23 @@ function Modal({ title, isOpen, onClose, onConfirm, content }: ModalProps) {
       <ModalContent>
         <TitleSection>
           <TitleText>{title}</TitleText>
-          <CloseButton src={Close} alt="닫기 버튼" onClick={onClose} />
+          {hasTopCloseButton ? (
+            <CloseButton src={Close} alt="닫기 버튼" onClick={onClose} />
+          ) : null}
         </TitleSection>
         <MainSection>
           {content}
-          <Button text="동의하고 저장하기" onClick={onConfirm} />
+          {hasConfirmButton ? (
+            <Button text="동의하고 저장하기" onClick={onConfirm} />
+          ) : null}
+          {hasBottomCloseButton ? (
+            <Button
+              text="닫기"
+              onClick={onClose}
+              color="#8b95a1"
+              backgroundColor="transparent"
+            />
+          ) : null}
         </MainSection>
       </ModalContent>
     </ModalContainer>

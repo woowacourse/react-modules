@@ -27,6 +27,7 @@ const StyleButton = styled.button<{ color: string; backgroundColor: string }>`
 
   width: 100%;
   height: 44px;
+  border: none;
   border-radius: 5px;
   font-size: 15px;
   font-weight: 700;
