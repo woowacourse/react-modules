@@ -4,8 +4,13 @@ import './App.css';
 function App() {
   return (
     <div>
-      <h1>Component Modules</h1>
-      <Modal position="bottom" title="모달" onClose={() => {}}>
+      <Modal
+        position="bottom"
+        title="모달"
+        onClose={() => {
+          console.log('닫기');
+        }}
+      >
         모달 내용
       </Modal>
     </div>
