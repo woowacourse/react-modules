@@ -32,13 +32,17 @@ const CloseIcon = styled.img.attrs({
   cursor: pointer;
 `;
 
-const Modal = () => {
+const Modal = ({ isOpen = true }) => {
   return (
     <>
-      <BackDrop />
-      <ModalLayout>
-        <CloseIcon />
-      </ModalLayout>
+      {isOpen && (
+        <>
+          <BackDrop />
+          <ModalLayout>
+            <CloseIcon />
+          </ModalLayout>
+        </>
+      )}
     </>
   );
 };
