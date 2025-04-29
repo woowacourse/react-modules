@@ -8,9 +8,9 @@ import {
   CloseButton,
   ModalHeader,
   ModalLayout,
-} from '../css/Modal.css';
-import useEscapeModal from '../../../../hooks/useEscapeModal';
-import { closeButton } from '../../../../assets';
+} from './Modal.css';
+import useEscapeModal from './hooks/useEscapeModal';
+import { closeButton } from './assets';
 
 export interface ModalProps extends PropsWithChildren {
   closeModal: () => void;

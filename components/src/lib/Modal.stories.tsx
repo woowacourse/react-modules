@@ -1,6 +1,6 @@
 import { Meta, StoryObj } from '@storybook/react';
-import Modal from '../ui/Modal';
-import useBoolean from '../../../../hooks/useBoolean';
+import Modal from './Modal';
+import useBoolean from './hooks/useBoolean';
 
 const meta = {
   title: 'Modal',

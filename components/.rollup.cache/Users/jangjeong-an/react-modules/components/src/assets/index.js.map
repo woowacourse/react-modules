@@ -1,0 +1,1 @@
+{"version":3,"file":"index.js","sourceRoot":"","sources":["index.ts"],"names":[],"mappings":"AAAA,iBAAiB;AACjB,MAAM,CAAC,MAAM,WAAW,GAAG,GAAG,CAAC","sourcesContent":["// 이미지 대신 문자열로 대체\nexport const closeButton = 'X';\n"]}

@@ -1,28 +1,23 @@
-import { useState } from 'react';
-import Modal from './shared/components/modal/Modal';
+import useBoolean from './lib/hooks/useBoolean';
+import { Modal } from './lib';
 
 function App() {
-  const [isOpen, setIsOpen] = useState(true);
-
-  function closeModal() {
-    setIsOpen(false);
-  }
-
-  function handleEscClick(e: React.KeyboardEvent<HTMLDivElement>) {
-    if (e.key === 'Escape') {
-      closeModal();
-    }
-    console.log('esc 클릭!');
-  }
+  const { value: isOpen, setTrue, setFalse } = useBoolean(false);
 
   return (
     <>
       <h1>Component Modules</h1>
-      <button onClick={() => setIsOpen(true)}>Open Modal</button>
+      <button onClick={() => setTrue()}>Open Modal</button>
+
       {isOpen && (
-        <Modal closeModal={closeModal}>
+        <Modal
+          closeModal={() => setFalse()}
+          position="center"
+          maxWidth={500}
+          title="Modal Title"
+          isVisibleCloseButton={true}
+        >
           <p>Modal Content</p>
-          <button>X</button>
         </Modal>
       )}
     </>
