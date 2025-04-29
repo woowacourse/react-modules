@@ -1,10 +1,15 @@
 import { MouseEvent, ReactNode } from "react";
 import { Backdrop, ModalBox, Title } from "./Modal.styles";
 
+interface TitleProps {
+  text?: string;
+  color?: string;
+  size?: number;
+}
+
 interface Props {
   position?: "center" | "bottom";
-  title?: string;
-  titleColor?: string;
+  title?: TitleProps;
   backgroundColor?: string;
   children: ReactNode;
   isOpen: boolean;
@@ -14,7 +19,6 @@ interface Props {
 const Modal = ({
   position = "center",
   title,
-  titleColor,
   backgroundColor,
   children,
   isOpen,
@@ -31,7 +35,11 @@ const Modal = ({
         $position={position}
         onClick={stopPropagation}
       >
-        {title && <Title $titleColor={titleColor}>{title}</Title>}
+        {title && (
+          <Title $color={title.color} $size={title.size}>
+            {title.text}
+          </Title>
+        )}
         {children}
       </ModalBox>
     </Backdrop>

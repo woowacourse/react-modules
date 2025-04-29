@@ -36,7 +36,8 @@ export const ModalBox = styled.div<{
     `}
 `;
 
-export const Title = styled.h1<{ $titleColor?: string }>`
+export const Title = styled.h1<{ $color?: string; $size?: number }>`
   margin: 0;
-  color: ${({ $titleColor }) => $titleColor ?? "#000"};
+  color: ${({ $color }) => $color ?? "#000"};
+  font-size: ${({ $size }) => ($size ? `${$size}px` : "24px")};
 `;
