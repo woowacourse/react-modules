@@ -5,10 +5,12 @@ function Modal({
   isOpen,
   onClose,
   contents,
+  position = 'center',
 }: {
   isOpen: boolean;
   onClose: () => void;
   contents: ReactNode;
+  position?: 'center' | 'bottom';
 }) {
   const modalRef = useRef<HTMLDialogElement>(null);
 
@@ -37,7 +39,11 @@ function Modal({
   }, [isOpen, onClose]);
 
   return (
-    <dialog onClose={onClose} className={styles.modal} ref={modalRef}>
+    <dialog
+      onClose={onClose}
+      className={`${styles.modal} ${position === 'bottom' ? styles.modalBottom : ''}`}
+      ref={modalRef}
+    >
       {contents}
       <button onClick={onClose}>닫기</button>
     </dialog>

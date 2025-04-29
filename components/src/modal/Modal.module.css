@@ -12,8 +12,20 @@
   opacity: 0.35;
 }
 
+.modalBottom {
+  margin-bottom: 0;
+  width: 100%;
+  max-width: 100%;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
 @media (max-width: 600px) {
   .modal {
     width: calc(100vw - 72px);
+  }
+
+  .modalBottom {
+    width: 100%;
   }
 }
