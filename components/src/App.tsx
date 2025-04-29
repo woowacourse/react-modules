@@ -9,7 +9,11 @@ function App() {
   return (
     <>
       <button onClick={() => setIsModalOpen(true)}>Modal Open</button>
-      <Modal title="카드사 선택" isModalOpen={isModalOpen} />
+      <Modal
+        title="카드사 선택"
+        isModalOpen={isModalOpen}
+        setIsModalOpen={setIsModalOpen}
+      />
     </>
   );
 }

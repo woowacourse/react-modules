@@ -3,9 +3,14 @@ import styles from "./Modal.module.css";
 interface ModalPropsType {
   title: string;
   isModalOpen: boolean;
+  setIsModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export const Modal = ({ title, isModalOpen }: ModalPropsType) => {
+export const Modal = ({
+  title,
+  isModalOpen,
+  setIsModalOpen,
+}: ModalPropsType) => {
   return (
     <>
       <div
@@ -15,7 +20,7 @@ export const Modal = ({ title, isModalOpen }: ModalPropsType) => {
       >
         <div className={styles.modal}>
           <h4>{title}</h4>
-          <button>X</button>
+          <button onClick={() => setIsModalOpen(false)}>X</button>
         </div>
       </div>
     </>

@@ -24,7 +24,7 @@
 
 - 사용자 정의 이벤트 핸들러
   - [x] modalOpen으로 모달 열기
-  - [] modalClose으로 모달 닫기
+  - [x] modalClose으로 모달 닫기
 
 ### 모달 컴포넌트
 
