@@ -12,7 +12,15 @@ type Story = StoryObj<typeof Modal>;
 
 export const Default: Story = {
   args: {
-    title: "제목",
     children: "Center Modal",
+  },
+};
+
+export const WithCustomColor: Story = {
+  args: {
+    title: "Title",
+    children: "Center Modal",
+    backgroundColor: "#9ec5ff",
+    titleColor: "#fff",
   },
 };

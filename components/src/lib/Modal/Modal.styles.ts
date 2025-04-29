@@ -11,17 +11,18 @@ export const Backdrop = styled.div`
   inset: 0;
 `;
 
-export const ModalBox = styled.div`
+export const ModalBox = styled.div<{ $backgroundColor?: string }>`
   display: flex;
   flex-direction: column;
   gap: 5px;
   position: absolute;
   padding: 10px;
-  background-color: #fff;
+  background-color: ${({ $backgroundColor }) => $backgroundColor ?? "#fff"};
   border-radius: 10px;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
 `;
 
-export const Title = styled.h1`
+export const Title = styled.h1<{ $titleColor?: string }>`
   margin: 0;
+  color: ${({ $titleColor }) => $titleColor ?? "#000"};
 `;

@@ -4,13 +4,15 @@ import { Backdrop, ModalBox, Title } from "./Modal.styles";
 interface Props {
   title?: string;
   children: ReactNode;
+  backgroundColor?: string;
+  titleColor?: string;
 }
 
-const Modal = ({ title, children }: Props) => {
+const Modal = ({ title, children, backgroundColor, titleColor }: Props) => {
   return (
     <Backdrop>
-      <ModalBox>
-        {title && <Title>{title}</Title>}
+      <ModalBox $backgroundColor={backgroundColor}>
+        {title && <Title $titleColor={titleColor}>{title}</Title>}
         {children}
       </ModalBox>
     </Backdrop>
