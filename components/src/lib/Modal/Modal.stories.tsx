@@ -35,6 +35,17 @@ export const Default = () => {
   );
 };
 
+export const WithoutCloseButton: Story = {
+  args: {
+    ...defaultArgs,
+    title: {
+      text: "Without Close Button",
+    },
+    showCloseButton: false,
+    children: "Without Close Button Contents",
+  },
+};
+
 export const ModalInDarkMode: Story = {
   args: {
     ...defaultArgs,

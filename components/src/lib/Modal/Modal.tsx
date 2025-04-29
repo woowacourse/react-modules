@@ -1,5 +1,12 @@
 import { MouseEvent, ReactNode } from "react";
-import { Backdrop, ModalBox, Title } from "./Modal.styles";
+import {
+  Backdrop,
+  CloseButton,
+  ModalBox,
+  Title,
+  TopWrapper,
+} from "./Modal.styles";
+import { IoClose } from "react-icons/io5";
 
 interface TitleProps {
   text?: string;
@@ -10,6 +17,7 @@ interface TitleProps {
 interface Props {
   position?: "center" | "bottom";
   title?: TitleProps;
+  showCloseButton?: boolean;
   backgroundColor?: string;
   children: ReactNode;
   isOpen: boolean;
@@ -19,6 +27,7 @@ interface Props {
 const Modal = ({
   position = "center",
   title,
+  showCloseButton = true,
   backgroundColor,
   children,
   isOpen,
@@ -35,11 +44,21 @@ const Modal = ({
         $position={position}
         onClick={stopPropagation}
       >
-        {title && (
-          <Title $color={title.color} $size={title.size}>
-            {title.text}
-          </Title>
-        )}
+        <TopWrapper $titleText={title?.text}>
+          {title && (
+            <Title $color={title.color} $size={title.size}>
+              {title.text}
+            </Title>
+          )}
+          {showCloseButton && (
+            <CloseButton type="button" onClick={onClose}>
+              <IoClose
+                color={backgroundColor === "#000" ? "#fff" : "#000"}
+                size={30}
+              />
+            </CloseButton>
+          )}
+        </TopWrapper>
         {children}
       </ModalBox>
     </Backdrop>
