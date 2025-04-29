@@ -1,10 +1,10 @@
-import { ReactNode } from 'react';
-import { StyledModal } from './Modal.styled';
+import { ReactNode } from "react";
+import { StyledModal } from "./Modal.styled";
 
 export interface ModalProps {
   isOpen: boolean;
   children: ReactNode;
-  position?: 'bottom' | 'center';
+  position?: "bottom" | "center";
 }
 
 const Modal = ({ children, ...props }: ModalProps) => {

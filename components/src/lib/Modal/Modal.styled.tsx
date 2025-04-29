@@ -1,21 +1,22 @@
-import styled from '@emotion/styled';
+import styled from "@emotion/styled";
 
-import { ModalProps } from './Modal';
+import { ModalProps } from "./Modal";
 
 const modalPositionVariants = {
   bottom: {
-    bottom: '0',
-    width: '100%',
-    'border-top-left-radius': '8px',
-    'border-top-right-radius': '8px'
+    left: "0",
+    bottom: "0",
+    width: "100%",
+    borderTopLeftRadius: "8px",
+    borderTopRightRadius: "8px",
   },
   center: {
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    width: '90%',
-    borderRadius: '8px'
-  }
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+    width: "90%",
+    borderRadius: "8px",
+  },
 };
 
 export const StyledModal = styled.div<ModalProps>`
@@ -24,6 +25,6 @@ export const StyledModal = styled.div<ModalProps>`
   min-height: 216px;
   background-color: #fff;
   border: 1px solid red;
-  ${({ position = 'center' }) => modalPositionVariants[position]}
-  ${({ isOpen }) => (isOpen ? 'display: block' : 'display: none')}
+  ${({ position = "center" }) => modalPositionVariants[position]}
+  ${({ isOpen }) => (isOpen ? "display: block" : "display: none")}
 `;
