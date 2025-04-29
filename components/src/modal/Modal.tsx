@@ -1,23 +1,6 @@
 import { css } from '@emotion/css';
-import { MouseEvent, ReactNode, useEffect } from 'react';
-
-type Position = 'center' | 'bottom';
-
-interface ActionDef {
-  label: string;
-  style: string;
-  onClick: () => void;
-}
-
-interface ModalProps {
-  position: Position;
-  content: ReactNode;
-  onClose: () => void;
-  onOpen?: () => void;
-  title?: string;
-  showCloseButton?: boolean;
-  actions?: ActionDef[];
-}
+import { MouseEvent, useEffect } from 'react';
+import { ModalProps, Position } from './Modal.type';
 
 const Modal = ({ position, content, onOpen, onClose, actions, title, showCloseButton = true }: ModalProps) => {
   useEffect(() => {
