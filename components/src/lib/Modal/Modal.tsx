@@ -8,6 +8,7 @@ interface Props {
   children: ReactNode;
   backgroundColor?: string;
   titleColor?: string;
+  position?: "center" | "bottom";
 }
 
 const Modal = ({
@@ -17,10 +18,11 @@ const Modal = ({
   children,
   backgroundColor,
   titleColor,
+  position = "center",
 }: Props) => {
   return (
-    <Backdrop $isOpen={isOpen} onClick={onClose}>
-      <ModalBox $backgroundColor={backgroundColor}>
+    <Backdrop $isOpen={isOpen} $position={position} onClick={onClose}>
+      <ModalBox $backgroundColor={backgroundColor} $position={position}>
         {title && <Title $titleColor={titleColor}>{title}</Title>}
         {children}
       </ModalBox>

@@ -39,3 +39,14 @@ export const WithCustomColor: Story = {
     isOpen: true,
   },
 };
+
+export const BottomModal: Story = {
+  args: {
+    title: "Title",
+    children: "Center Modal",
+    backgroundColor: "#9ec5ff",
+    titleColor: "#fff",
+    isOpen: true,
+    position: "bottom",
+  },
+};
