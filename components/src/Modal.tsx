@@ -4,9 +4,10 @@ import closeIcon from './assets/close-icon.png';
 interface ModalProps {
   isOpen: boolean;
   title: string;
+  onClose: () => void;
 }
 
-const Modal = ({ isOpen = true, title = '제목' }: ModalProps) => {
+const Modal = ({ isOpen = true, title = '제목', onClose }: ModalProps) => {
   return (
     <>
       {isOpen && (
@@ -14,7 +15,7 @@ const Modal = ({ isOpen = true, title = '제목' }: ModalProps) => {
           <BackDrop />
           <ModalLayout>
             <ModalTitle>{title}</ModalTitle>
-            <CloseIcon />
+            <CloseIcon onClick={onClose} />
           </ModalLayout>
         </>
       )}
