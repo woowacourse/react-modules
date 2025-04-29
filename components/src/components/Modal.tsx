@@ -17,6 +17,8 @@ const ModalContainer = styled.div`
 
   top: 50%;
   transform: translateY(-50%);
+
+  z-index: 2;
 `;
 
 const ModalTop = styled.div`
@@ -30,14 +32,29 @@ const Title = styled.div`
   font-weight: 700;
 `;
 
+const ModalBackdrop = styled.div`
+  background-color: #000;
+  opacity: 35%;
+
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+`;
+
 export default function Modal({}) {
   return (
-    <ModalContainer>
-      <ModalTop>
-        <Title>카드사 선택</Title>
+    <>
+      <ModalContainer>
+        <ModalTop>
+          <Title>카드사 선택</Title>
+          <CloseIcon />
+        </ModalTop>
+      </ModalContainer>
 
-        <CloseIcon />
-      </ModalTop>
-    </ModalContainer>
+      <ModalBackdrop />
+    </>
   );
 }
