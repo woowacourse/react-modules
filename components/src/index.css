@@ -1,21 +1,11 @@
-/* @font-face {
-  font-family: Pretendard;
-  font-weight: 45 920;
-  font-style: normal;
-  font-display: swap;
-  src: url('/fonts/PretendardVariable.woff2') format('woff2-variations');
-}
-
-*,
+*/ *,
 *::before,
 *::after {
   box-sizing: border-box;
-  font-family: Pretendard;
   margin: 0;
   padding: 0;
-} */
-
-html {
+}
+*/ html {
   -moz-text-size-adjust: none;
   -webkit-text-size-adjust: none;
   text-size-adjust: none;
