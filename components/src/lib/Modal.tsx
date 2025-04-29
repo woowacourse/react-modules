@@ -3,11 +3,12 @@ import Close from "/Close.svg";
 import { useEffect } from "react";
 
 interface ModalProps {
+  title: string;
   isOpen: boolean;
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-function Modal({ isOpen, setIsOpen }: ModalProps) {
+function Modal({ title, isOpen, setIsOpen }: ModalProps) {
   useEffect(() => {
     function handleKeyDown(e: KeyboardEvent) {
       if (e.key === "Escape") setIsOpen(false);
@@ -27,11 +28,14 @@ function Modal({ isOpen, setIsOpen }: ModalProps) {
         onClick={() => setIsOpen(false)}
       />
       <ModalContent>
-        <CloseButton
-          src={Close}
-          alt="닫기 버튼"
-          onClick={() => setIsOpen(false)}
-        />
+        <TitleSection>
+          <TitleText>{title}</TitleText>
+          <CloseButton
+            src={Close}
+            alt="닫기 버튼"
+            onClick={() => setIsOpen(false)}
+          />
+        </TitleSection>
         <p>모달열림</p>
       </ModalContent>
     </ModalContainer>
@@ -68,7 +72,16 @@ const ModalOverlay = styled.div`
 
 const CloseButton = styled.img`
   cursor: pointer;
-  position: absolute;
-  top: 16px;
-  right: 16px;
+`;
+
+const TitleSection = styled.section`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+`;
+
+const TitleText = styled.p`
+  font-size: 18px;
+  font-weight: bold;
 `;
