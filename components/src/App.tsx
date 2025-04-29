@@ -1,8 +1,8 @@
 import styled from "@emotion/styled";
 import "./App.css";
-import { Modal } from "woowa-modal-payments";
 import { useState } from "react";
 import React from "react";
+import Modal from "./lib/Modal";
 
 function App() {
   const [isOpen, setIsOpen] = useState(false);
@@ -16,7 +16,7 @@ function App() {
         isOpen={isOpen}
         handleCloseModal={handleCloseModal}
         title="타이틀입니다"
-        position="bottom"
+        position="center"
       >
         <h2>Modal Title</h2>
         <p>This is a modal content.</p>

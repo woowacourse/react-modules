@@ -1,12 +1,19 @@
 import styled from "@emotion/styled";
+import { css } from "@emotion/react";
 
-const positionCenter = `
-width: 304px;
-top: 50%;
-transform: translate(-50%, -50%);
-left: 50%;`;
+const positionCenter = css`
+  width: 80%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  left: 50%;
+`;
 
-const positionBottom = `width: 100vw ;bottom: 0; left:0 right:20;`;
+const positionBottom = css`
+  width: 100vw;
+  bottom: 0;
+  left: 0;
+  right: 20;
+`;
 
 export const Background = styled.div`
   width: 100%;
@@ -22,7 +29,7 @@ export const ModalContainer = styled.div<{ position: string }>`
   height: 216px;
   border-radius: 8px;
   background-color: #fff;
-  position: absolute;
+  position: fixed;
   z-index: 100;
   padding: 24px 32px;
   display: flex;
