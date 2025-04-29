@@ -28,7 +28,7 @@ const Modal = ({ position, content, onOpen, onClose, actions, title, showCloseBu
 
   return (
     <div className={ModalBackdrop} onClick={handleBackdropClick}>
-      <div className={ModalFrame(position)}>
+      <div className={ModalFrame(position)} data-testid="modal">
         <div className={ModalHeader}>
           {title && <h2>{title}</h2>}
           {showCloseButton && (
