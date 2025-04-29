@@ -27,4 +27,7 @@ const StyledModalOverlay = styled.div<ModalOverlayStyledProps>`
   width: 100%;
   height: 100%;
   display: ${(props) => (props.isOpen ? 'block' : 'none')};
+  position: absolute;
+  top: 0px;
+  left: 0px;
 `;
