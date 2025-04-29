@@ -1,5 +1,6 @@
 import styles from "./Modal.module.css";
 import closeIcon from "../asset/close.png";
+import { useEffect } from "react";
 interface ModalProps {
   position: "bottom" | "center";
   title: string;
@@ -10,6 +11,17 @@ interface ModalProps {
 
 function Modal({ position, title, children, isOpen, onClose }: ModalProps) {
   const containerClassName = `${styles.modalContents} ${styles[position]}`;
+  useEffect(() => {
+    if (!isOpen) return;
+    const handleKeydown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        onClose();
+      }
+    };
+
+    window.addEventListener("keydown", handleKeydown);
+    return () => window.removeEventListener("keydown", handleKeydown);
+  }, [isOpen, onClose]);
 
   return (
     <>
