@@ -5,7 +5,7 @@ import styled from '@emotion/styled';
 
 import { Portal } from './Portal';
 
-type Props = {
+export type Props = {
   /**
    * If true, the modal will be open
    */
