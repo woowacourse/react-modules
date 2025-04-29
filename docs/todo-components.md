@@ -6,7 +6,7 @@
 - [x] 모달창 UI 구현
 - [ ] 모달 Props에 따른 기능 구현
 
-  - [ ] isOpen: 모달 열림 상태
+  - [x] isOpen: 모달 열림 상태
   - [ ] onClose: 모달 닫힘 핸들러
   - [x] title: 제목
   - [x] contents: 내용
