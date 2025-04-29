@@ -9,7 +9,7 @@ interface ModalProps {
 function Modal({ isOpen, setIsOpen }: ModalProps) {
   return (
     <ModalContainer isOpen={isOpen}>
-      <ModalOverlay />
+      <ModalOverlay data-testid="modal-overlay" />
       <ModalContent>
         <CloseButton
           src={Close}
@@ -51,8 +51,8 @@ const ModalOverlay = styled.div`
 `;
 
 const CloseButton = styled.img`
+  cursor: pointer;
   position: absolute;
   top: 16px;
   right: 16px;
-  cursor: pointer;
 `;

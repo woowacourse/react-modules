@@ -31,7 +31,7 @@ export const OpenModal: Story = {
   },
 };
 
-export const CloseModal: Story = {
+export const CloseByButton: Story = {
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
 
@@ -49,6 +49,27 @@ export const CloseModal: Story = {
       name: "닫기 버튼",
     });
     await userEvent.click(closeButton);
+
+    expect(canvas.getByText("모달열림")).not.toBeVisible();
+  },
+};
+
+export const CloseByOverlayClick: Story = {
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    const openButton = canvas.getByRole("button", {
+      name: "모달 열기 버튼",
+    });
+    await userEvent.click(openButton);
+
+    const modalText = canvas.getByText("모달열림");
+    if (modalText) {
+      expect(modalText).toBeVisible();
+    }
+
+    const overlay = canvas.getByTestId("modal-overlay");
+    await userEvent.click(overlay);
 
     expect(canvas.getByText("모달열림")).not.toBeVisible();
   },
