@@ -2,15 +2,32 @@ import styled from 'styled-components';
 
 const BackDrop = styled.div`
   position: fixed;
+  display: flex;
+  justify-content: center;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
+  z-index: 20;
   background-color: rgba(0, 0, 0, 0.5);
 `;
 
+const ModalLayout = styled.div`
+  position: relative;
+  width: 500px;
+  height: 500px;
+  z-index: 500;
+  background-color: white;
+  border-radius: 8px;
+`;
+
 const Modal = () => {
-  return <BackDrop></BackDrop>;
+  return (
+    <>
+      <BackDrop />
+      <ModalLayout />
+    </>
+  );
 };
 
 export default Modal;
