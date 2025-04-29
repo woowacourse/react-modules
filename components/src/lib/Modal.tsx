@@ -3,11 +3,14 @@ import Close from "/Close.svg";
 import { ReactNode, useEffect } from "react";
 import Button from "./common/Button";
 
+type Position = "center" | "bottom";
+
 interface ModalProps {
   title: string;
   isOpen: boolean;
   onClose: () => void;
   onConfirm?: () => void;
+  position?: Position;
   hasTopCloseButton?: boolean;
   hasBottomCloseButton?: boolean;
   hasConfirmButton?: boolean;
@@ -19,6 +22,7 @@ function Modal({
   isOpen,
   onClose,
   onConfirm,
+  position = "center",
   content,
   hasTopCloseButton = true,
   hasBottomCloseButton = false,
@@ -39,7 +43,7 @@ function Modal({
   return (
     <ModalContainer isOpen={isOpen}>
       <ModalOverlay data-testid="modal-overlay" onClick={onClose} />
-      <ModalContent>
+      <ModalContent position={position}>
         <TitleSection>
           <TitleText>{title}</TitleText>
           {hasTopCloseButton ? (
@@ -71,9 +75,9 @@ const ModalContainer = styled.div<{ isOpen: boolean }>`
   display: ${({ isOpen }) => (isOpen ? "block" : "none")};
 `;
 
-const ModalContent = styled.div`
-  width: 304px;
+const ModalContent = styled.div<{ position: Position }>`
   height: 216px;
+  width: 304px;
   position: fixed;
   top: 50%;
   left: 50%;
@@ -85,6 +89,16 @@ const ModalContent = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+
+  ${({ position }) =>
+    position === "bottom" &&
+    `
+      width: 100%;
+      top: auto;
+      left: 0;
+      transform: none;
+      bottom: 0;
+    `}
 `;
 
 const ModalOverlay = styled.div`
