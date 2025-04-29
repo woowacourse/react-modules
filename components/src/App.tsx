@@ -22,6 +22,7 @@ function App() {
         isOpen={modalOpen}
         onClose={onClose}
         contents={getContent()}
+        showCloseButton={true}
       />
     </>
   );

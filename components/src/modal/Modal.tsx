@@ -7,11 +7,13 @@ function Modal({
   onClose,
   contents,
   position = 'center',
+  showCloseButton = true,
 }: {
   title: string;
   isOpen: boolean;
   onClose: () => void;
   contents: ReactNode;
+  showCloseButton?: boolean;
   position?: 'center' | 'bottom';
 }) {
   const modalRef = useRef<HTMLDialogElement>(null);
@@ -46,7 +48,18 @@ function Modal({
       className={`${styles.modal} ${position === 'bottom' ? styles.modalBottom : ''}`}
       ref={modalRef}
     >
-      <h2 className={styles.title}>{title}</h2>
+      <div className={styles.modalHeader}>
+        <h2 className={styles.title}>{title}</h2>
+        {showCloseButton && (
+          <button
+            type="button"
+            onClick={onClose}
+            className={styles.closeButton}
+          >
+            <img src="./close-button.png" alt="모달 닫기 버튼" />
+          </button>
+        )}
+      </div>
       {contents}
       <button onClick={onClose}>닫기</button>
     </dialog>
