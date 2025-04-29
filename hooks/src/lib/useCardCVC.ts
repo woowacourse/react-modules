@@ -1,12 +1,10 @@
 import { useState } from "react";
 
 const useCardCVC = () => {
-  const [, setInput] = useState<string>("");
   const [isValid, setIsValid] = useState(true);
   const [errorMessage, setErrorMessage] = useState("");
 
   const handleCVCValidate = (input: string) => {
-    setInput(input);
     validateCVC(input);
   };
 
