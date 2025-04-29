@@ -1,4 +1,3 @@
-import { createPortal } from 'react-dom';
 import styled from 'styled-components';
 
 interface ModalProps {
@@ -13,11 +12,10 @@ function Modal({ isOpen, children, position, width }: ModalProps) {
     return null;
   }
 
-  return createPortal(
+  return (
     <StyledModal position={position} width={width}>
       {children}
-    </StyledModal>,
-    document.body
+    </StyledModal>
   );
 }
 
