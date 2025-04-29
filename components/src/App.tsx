@@ -1,9 +1,10 @@
 import './App.css';
+import Modal from './modal/Modal';
 
 function App() {
   return (
     <>
-      <h1>Component Modules</h1>
+      <Modal />
     </>
   );
 }
