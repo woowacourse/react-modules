@@ -1,11 +1,34 @@
 import styled from "@emotion/styled";
-import { css } from "@emotion/react";
+import { css, keyframes } from "@emotion/react";
+
+const slideUpCenter = keyframes`
+  from {
+    opacity: 0;
+    transform: translate(-50%, -30%);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%);
+  }
+`;
+
+const slideUpBottom = keyframes`
+  from {
+    opacity: 0;
+    transform: translateY(50%);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+`;
 
 const positionCenter = css`
   width: 80%;
   top: 50%;
   transform: translate(-50%, -50%);
   left: 50%;
+  animation: 0.5s ease ${slideUpCenter};
 `;
 
 const positionBottom = css`
@@ -13,6 +36,7 @@ const positionBottom = css`
   bottom: 0;
   left: 0;
   right: 20;
+  animation: 0.5s ease ${slideUpBottom};
 `;
 
 export const Background = styled.div`
