@@ -5,10 +5,12 @@ interface ModalProps {
   title: string;
   children: React.ReactNode;
   isOpen: boolean;
+  onClose: () => void;
 }
 
-function Modal({ position, title, children, isOpen }: ModalProps) {
+function Modal({ position, title, children, isOpen, onClose }: ModalProps) {
   const containerClassName = `${styles.modalContainer} ${styles[position]}`;
+
   return (
     <>
       {isOpen && (
@@ -20,6 +22,7 @@ function Modal({ position, title, children, isOpen }: ModalProps) {
                 className={styles.closeButton}
                 src={closeIcon}
                 alt="닫기버튼"
+                onClick={onClose}
               />
             </header>
             <div>{children}</div>
