@@ -19,8 +19,15 @@ export const Modal = ({
         }`}
       >
         <div className={styles.modal}>
-          <h4>{title}</h4>
-          <button onClick={() => setIsModalOpen(false)}>X</button>
+          <div className={styles.modalHeader}>
+            <h4>{title}</h4>
+            <button
+              className={styles.closeButton}
+              onClick={() => setIsModalOpen(false)}
+            >
+              X
+            </button>
+          </div>
         </div>
       </div>
     </>
