@@ -35,8 +35,8 @@ function useExpiryDate() {
     const expiryYear = 2000 + Number(year);
     const expiryMonth = Number(month);
 
-    if (expiryYear > currentYear) return true;
-    if (expiryYear === currentYear && expiryMonth >= currentMonth) return true;
+    if (expiryYear < currentYear) return true;
+    if (expiryYear === currentYear && expiryMonth <= currentMonth) return true;
     return false;
   };
 
