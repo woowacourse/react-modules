@@ -1,5 +1,5 @@
 import { PropsWithChildren } from "react";
-import styles from "./Modal.module.css";
+import * as S from "./Modal.styled";
 import CloseIcon from "@assets/close.svg";
 
 export type ModalPositionType = "center" | "bottom";
@@ -22,21 +22,17 @@ function Modal({
   }
 
   return (
-    <div className={styles.backdrop}>
-      <div className={`${styles.container} ${styles[position]}`}>
-        <div className={styles.modalHeader}>
-          <h2 className={styles.title}>{title}</h2>
-          <button
-            type="button"
-            onClick={onClose}
-            className={styles.closeButton}
-          >
+    <S.Backdrop>
+      <S.Container position={position}>
+        <S.ModalHeader>
+          <S.Title>{title}</S.Title>
+          <S.CloseButton type="button" onClick={onClose}>
             <img src={CloseIcon} alt="닫기 버튼" />
-          </button>
-        </div>
+          </S.CloseButton>
+        </S.ModalHeader>
         {children}
-      </div>
-    </div>
+      </S.Container>
+    </S.Backdrop>
   );
 }
 

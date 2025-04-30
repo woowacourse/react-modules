@@ -1,6 +1,6 @@
 {
   "name": "bunju-summit-modal",
-  "version": "0.0.2",
+  "version": "0.0.4",
   "description": "A modal component for Bunju Summit",
   "type": "module",
   "types": "dist/index.d.ts",
@@ -18,9 +18,11 @@
     "build-storybook": "storybook build"
   },
   "dependencies": {
-    "bunju-summit-modal": "^0.0.0",
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.0",
     "react": "^19.1.0",
-    "react-dom": "^19.1.0"
+    "react-dom": "^19.1.0",
+    "tsup": "^8.4.0"
   },
   "devDependencies": {
     "@chromatic-com/storybook": "^3.2.6",
