@@ -79,7 +79,10 @@ function Modal({
           <Title>{title}</Title>
           {showCloseButton && (
             <CloseButton type="button" onClick={onClose}>
-              <img src="./close-button.png" alt="모달 닫기 버튼" />
+              <img
+                src={new URL('./assets/close-button.png', import.meta.url).href}
+                alt="모달 닫기 버튼"
+              />
             </CloseButton>
           )}
         </ModalHeader>
