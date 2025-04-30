@@ -1,4 +1,5 @@
 import { isNumeric } from ".";
+import { CARD_NUMBER_LENGTH, ERROR_MESSAGE } from "../constants/index";
 
 function sliceCardNumber(cardNumber: string) {
   const cardNumberFirstGroup = cardNumber.slice(0, 4);
@@ -25,10 +26,15 @@ export function validateCardNetwork(cardNumber: string): CardNetwork {
   return "DEFAULT";
 }
 
-export function isCardNumberNumeric(cardNumber: string) {
+export function validateCardNumber(cardNumber: string) {
+  if (cardNumber.length !== CARD_NUMBER_LENGTH)
+    return ERROR_MESSAGE.INVALID_CARD_LENGTH;
   const cardNumbers = sliceCardNumber(cardNumber);
-  Object.values(cardNumbers).forEach((cardNumberGroup) => {
-    if (!isNumeric(cardNumberGroup)) return false;
-  });
-  return true;
+
+  for (const cardNumberGroup of Object.values(cardNumbers)) {
+    console.log(Object.values(cardNumbers));
+    console.log("aa : ", !isNumeric(cardNumberGroup));
+    if (!isNumeric(cardNumberGroup)) return ERROR_MESSAGE.NOT_NUMERIC;
+  }
+  return "";
 }
