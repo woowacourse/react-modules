@@ -7,6 +7,7 @@ import {
   TopWrapper,
 } from "./Modal.styles";
 import { IoClose } from "react-icons/io5";
+import { createPortal } from "react-dom";
 
 interface TitleProps {
   text?: string;
@@ -46,7 +47,7 @@ const Modal = ({
     return () => document.removeEventListener("keydown", handleEscape);
   }, [onClose]);
 
-  return (
+  return createPortal(
     <Backdrop $isOpen={isOpen} $position={position} onClick={onClose}>
       <ModalBox
         $backgroundColor={backgroundColor}
@@ -70,7 +71,8 @@ const Modal = ({
         </TopWrapper>
         {children}
       </ModalBox>
-    </Backdrop>
+    </Backdrop>,
+    document.body
   );
 };
 
