@@ -10,7 +10,7 @@ const ERROR_MESSAGE = {
 
 const useExpirationMonth = () => {
 	const [isValid, setIsValid] = useState<boolean>(true);
-	const [errorMessage, setErrorMessage] = useState<string[]>([]);
+	const [errorMessage, setErrorMessage] = useState<string>("");
 
 	const checkLength = (value: string) => {
 		if (value.length < MONTH_VALID_LENGTH) {
@@ -27,7 +27,10 @@ const useExpirationMonth = () => {
 	};
 
 	const checkMonthRange = (value: string) => {
-		if (Number(value) < 1 && Number(value) > 12) return false;
+		if (Number(value) < 1 || Number(value) > 12) {
+			return false;
+		}
+		return true;
 	};
 
 	const validate = (value: string) => {
@@ -36,19 +39,18 @@ const useExpirationMonth = () => {
 		const isValidRange = checkMonthRange(value);
 
 		if (!isValidLength) {
-			setErrorMessage([...errorMessage, ERROR_MESSAGE.INVALID_MONTH_FORMAT]);
+			setErrorMessage(ERROR_MESSAGE.INVALID_MONTH_FORMAT);
+			setIsValid(false);
 		}
 		if (!isNumber) {
-			setErrorMessage([ERROR_MESSAGE.INVALID_NUMBER]);
+			setErrorMessage(ERROR_MESSAGE.INVALID_NUMBER);
 			setIsValid(false);
 		}
 
 		if (!isValidRange) {
-			setErrorMessage([ERROR_MESSAGE.INVALID_MONTH_RANGE]);
+			setErrorMessage(ERROR_MESSAGE.INVALID_MONTH_RANGE);
 			setIsValid(false);
 		}
-
-		setIsValid(errorMessage.length === 0);
 	};
 
 	return { isValid, errorMessage, validate };
