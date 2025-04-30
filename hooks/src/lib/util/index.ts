@@ -6,5 +6,5 @@
 
 export function isNumeric(value: unknown) {
   const parsedNumber = Number(value);
-  return typeof value !== "number" && Number.isNaN(parsedNumber);
+  return !Number.isNaN(parsedNumber);
 }
