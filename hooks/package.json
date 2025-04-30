@@ -1,6 +1,6 @@
 {
-  "name": "@sebin0580/payments-hooks",
-  "version": "0.0.3",
+  "name": "@sinjuk1/payments-hooks",
+  "version": "0.0.1",
   "description": "npm modules",
   "type": "module",
   "types": "dist/index.d.ts",
