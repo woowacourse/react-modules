@@ -1,24 +1,24 @@
-import * as path from "path";
-import { defineConfig } from "vite";
-import react from "@vitejs/plugin-react-swc";
-import dts from "vite-plugin-dts";
+import * as path from 'path';
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react-swc';
+import dts from 'vite-plugin-dts';
 export default defineConfig({
   build: {
     lib: {
-      entry: path.resolve(__dirname, "src/lib/index.ts"),
-      name: "index",
-      fileName: "index",
+      entry: path.resolve(__dirname, 'src/lib/index.ts'),
+      name: 'index',
+      fileName: 'index',
     },
     rollupOptions: {
-      external: ["react", "react-dom", "@emotion/react", "@emotion/styled"],
+      external: ['react', 'react-dom', '@emotion/react', '@emotion/styled'],
       output: {
         globals: {
-          react: "React",
+          react: 'React',
         },
       },
     },
     commonjsOptions: {
-      esmExternals: ["react"],
+      esmExternals: ['react'],
     },
   },
   plugins: [
@@ -26,14 +26,18 @@ export default defineConfig({
       // @ts-expect-error
       emotion: {
         sourceMap: true,
-        autoLabel: "dev-only",
-        labelFormat: "[local]",
+        autoLabel: 'dev-only',
+        labelFormat: '[local]',
         cssPropOptimization: true,
       },
     }),
     dts({
       insertTypesEntry: true,
-      outDir: "dist",
+      outDir: 'dist',
     }),
   ],
+  test: {
+    globals: true,
+    environment: 'jsdom', // ✅ jsdom 환경 설정 (중요!)
+  },
 });
