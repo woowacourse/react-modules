@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import useError from '../useCardNumbers/useError';
+import useError from '../useError/useError';
 import isUnderMaxLength from '../../validate/isUnderMaxLength';
 import isInteger from '../../validate/isInteger';
 

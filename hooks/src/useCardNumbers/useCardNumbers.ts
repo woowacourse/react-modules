@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import isInteger from '../../validate/isInteger';
 import isUnderMaxLength from '../../validate/isUnderMaxLength';
-import useError from './useError';
+import useError from '../useError/useError';
 
 type CardNumbers = {
   FIRST: string;
@@ -27,7 +27,7 @@ const INITIAL_IS_ERROR: CardNumbers = {
 const CARD_NUMBER_MAX_LENGTH = 4;
 
 const CARD_NUMBER_ERROR_MESSAGE = {
-  INVALID_LENGTH: `카드 번호는 자리 ${CARD_NUMBER_MAX_LENGTH}숫자여야 합니다.`,
+  INVALID_LENGTH: `카드 번호는 ${CARD_NUMBER_MAX_LENGTH}자리 숫자여야 합니다.`,
   NOT_NUMBERIC: '숫자만 입력 가능합니다.',
 } as const;
 
