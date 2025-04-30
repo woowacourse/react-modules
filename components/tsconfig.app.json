@@ -41,6 +41,6 @@
     "allowSyntheticDefaultImports": true,
     "isolatedModules": true
   },
-  "include": ["src/lib/Modal"],
+  "include": ["src", "src/lib"],
   "exclude": ["node_modules", "dist"]
 }
