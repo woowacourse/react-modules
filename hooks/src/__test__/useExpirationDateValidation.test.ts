@@ -1,6 +1,6 @@
 import { renderHook } from "@testing-library/react";
-import useExpirationDateValidation from "../lib/hooks/useExpirationDateValidation";
 import { ERROR_MESSAGE } from "../lib/constants/error";
+import useExpirationDateValidation from "../lib/hooks/useExpirationDateValidation";
 
 const defaultErrorState = {
   isError: false,

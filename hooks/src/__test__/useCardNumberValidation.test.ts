@@ -1,6 +1,6 @@
 import { renderHook } from "@testing-library/react";
-import useCardNumberValidation from "../lib/hooks/useCardNumberValidation";
 import { ERROR_MESSAGE } from "../lib/constants/error";
+import useCardNumberValidation from "../lib/hooks/useCardNumberValidation";
 
 const defaultErrorState = {
   isError: false,

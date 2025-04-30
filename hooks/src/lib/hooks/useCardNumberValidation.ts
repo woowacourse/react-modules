@@ -1,9 +1,7 @@
 import { useEffect, useState } from "react";
 import { ValidationType } from "../../types/validation";
 import { ERROR_MESSAGE } from "../constants/error";
-import isPositiveInteger from "../utils/isPositiveInteger";
-import isLengthEqual from "../utils/isLengthEqual";
-import isEmpty from "../utils/isEmpty";
+import { isEmpty, isLengthEqual, isPositiveInteger } from "../utils/validation";
 
 interface CardNumberValidationType {
   first: ValidationType;
