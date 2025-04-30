@@ -1,20 +1,32 @@
-import React from 'react';
-import { Modal } from './lib';
-import { ModalBackdrop, Container, Wrapper } from './lib';
+import { ModalComponent, useModal } from './lib';
+import { ModalProps } from './lib/types/modalTypes';
 import './App.css';
 
-function App() {
+function App({ modalType, closeType, titleText, ...otherProps }: ModalProps) {
+  const { openModalHandler } = useModal();
+  const onClickHandler = () => {
+    openModalHandler();
+  };
+
   return (
-    <div style={{ width: '100%', height: '100%', position: 'relative' }}>
-      <ModalBackdrop />
-      <Container>
-        <Wrapper>
-          <Modal modalType="center" titleText="카드사 선택" closeType="top">
-            카드사 선택
-          </Modal>
-        </Wrapper>
-      </Container>
-    </div>
+    <>
+      <ModalComponent
+        modalType={modalType}
+        closeType={closeType}
+        titleText={titleText}
+        {...otherProps}
+      >
+        <p>Test!!!!!!</p>
+        <p>Test!!!!!!</p>
+        <p>Test!!!!!!</p>
+        <p>Test!!!!!!</p>
+      </ModalComponent>
+      <div className="button-container">
+        <button className="click-me-button" onClick={onClickHandler}>
+          click me!!
+        </button>
+      </div>
+    </>
   );
 }
 
