@@ -1,11 +1,11 @@
 {
   "name": "pesu-hooks",
-  "version": "0.0.2",
+  "version": "0.0.4",
   "description": "npm modules",
   "type": "module",
-  "types": "dist/index.d.ts",
-  "main": "dist/index.js",
-  "module": "dist/index.js",
+  "types": "dist/lib/index.d.ts",
+  "main": "dist/lib/index.js",
+  "module": "dist/lib/index.js",
   "files": [
     "dist"
   ],
@@ -18,6 +18,7 @@
   },
   "dependencies": {
     "@testing-library/dom": "^10.4.0",
+    "pesu-hooks": "^0.0.3",
     "react": "^19.1.0",
     "react-dom": "^19.1.0"
   },

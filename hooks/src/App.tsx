@@ -1,8 +1,8 @@
-import React from "react";
 import "./App.css";
-import useExpiryDate from "./lib/useExpiryDate";
 
-function App() {
+import { useExpiryDate } from "pesu-hooks";
+
+export default function App() {
   const { expiryDate, handleExpiryDateChange, errorMessage } = useExpiryDate();
 
   console.log(expiryDate, errorMessage);
@@ -22,5 +22,3 @@ function App() {
     </>
   );
 }
-
-export default App;

@@ -4,8 +4,7 @@ import useExpiryDate from "./useExpiryDate";
 
 test("사용자가 정상적인 월을 입력하면 에러가 발생하지 않는다.", async () => {
   const { result } = renderHook(() => useExpiryDate());
-  const { errorMessage, isValid, expiryDate, handleExpiryDateChange } =
-    result.current;
+  const { isValid, handleExpiryDateChange } = result.current;
 
   const event = {
     target: {
@@ -26,8 +25,7 @@ test("사용자가 정상적인 월을 입력하면 에러가 발생하지 않�
 
 test("사용자가 정상적인 연을 입력하면 에러가 발생하지 않는다.", async () => {
   const { result } = renderHook(() => useExpiryDate());
-  const { errorMessage, isValid, expiryDate, handleExpiryDateChange } =
-    result.current;
+  const { isValid, handleExpiryDateChange } = result.current;
 
   const event = {
     target: {
@@ -48,8 +46,7 @@ test("사용자가 정상적인 연을 입력하면 에러가 발생하지 않�
 
 test("사용자가 월에 문자를 입력하면 입력이 안된다.", async () => {
   const { result } = renderHook(() => useExpiryDate());
-  const { errorMessage, isValid, expiryDate, handleExpiryDateChange } =
-    result.current;
+  const { handleExpiryDateChange } = result.current;
 
   const event = {
     target: {
@@ -71,8 +68,7 @@ test("사용자가 월에 문자를 입력하면 입력이 안된다.", async ()
 
 test("사용자가 연에 문자를 입력하면 입력이 안된다.", async () => {
   const { result } = renderHook(() => useExpiryDate());
-  const { errorMessage, isValid, expiryDate, handleExpiryDateChange } =
-    result.current;
+  const { handleExpiryDateChange } = result.current;
 
   const event = {
     target: {
@@ -132,8 +128,7 @@ test("사용자가 과거의 월을 입력했을 때 에러가 발생한다.", a
 
 test("사용자가 과거의 년도를 입력했을 때 에러가 발생한다.", async () => {
   const { result } = renderHook(() => useExpiryDate());
-  const { errorMessage, isValid, expiryDate, handleExpiryDateChange } =
-    result.current;
+  const { handleExpiryDateChange } = result.current;
 
   const event = {
     target: {

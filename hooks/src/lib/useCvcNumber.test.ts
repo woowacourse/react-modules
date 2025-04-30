@@ -4,8 +4,7 @@ import useCvcNumber from "./useCvcNumber";
 
 test("사용자가 정상적인 값을 입력하면 에러가 발생하지 않는다.", async () => {
   const { result } = renderHook(() => useCvcNumber());
-  const { errorMessage, isValid, cvcNumber, handleCvcNumberChange } =
-    result.current;
+  const { isValid, handleCvcNumberChange } = result.current;
 
   const event = {
     target: {
@@ -23,8 +22,7 @@ test("사용자가 정상적인 값을 입력하면 에러가 발생하지 않�
 
 test("사용자가 두 글자를 입력하면 에러가 발생한다.", async () => {
   const { result } = renderHook(() => useCvcNumber());
-  const { errorMessage, isValid, cvcNumber, handleCvcNumberChange } =
-    result.current;
+  const { handleCvcNumberChange } = result.current;
 
   const event = {
     target: {
@@ -44,8 +42,7 @@ test("사용자가 두 글자를 입력하면 에러가 발생한다.", async ()
 
 test("사용자가 문자열을 입력하면 값이 바뀌지 않는다.", async () => {
   const { result } = renderHook(() => useCvcNumber());
-  const { errorMessage, isValid, cvcNumber, handleCvcNumberChange } =
-    result.current;
+  const { handleCvcNumberChange } = result.current;
 
   const event = {
     target: {
