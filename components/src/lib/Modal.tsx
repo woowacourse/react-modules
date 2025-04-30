@@ -36,8 +36,8 @@ Modal.Footer = ({ children }: { children: React.ReactNode }) => {
   return <div>{children}</div>;
 };
 
-Modal.Title = ({ children }: { children: React.ReactNode }) => {
-  return <span>{children}</span>;
+Modal.Title = ({ color = "#000", children }: { color?: string; children: React.ReactNode }) => {
+  return <span css={ModalTitleStyle(color)}>{children}</span>;
 };
 
 export default Modal;
@@ -48,6 +48,7 @@ const ModalWrapperStyle = css`
   height: 100vh;
   top: 0;
   left: 0;
+  min-width: 300px;
 `;
 
 const backGroundStyle = (background: boolean) => css`
@@ -82,4 +83,12 @@ const ModalHeaderStyle = css`
   justify-content: space-between;
   align-items: center;
   width: 100%;
+`;
+
+const ModalTitleStyle = (color: string) => css`
+  color: ${color};
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
 `;

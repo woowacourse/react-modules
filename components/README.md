@@ -12,4 +12,4 @@
   - [x] Modal.Body 제작
   - [x] Modal.Footer 제작
   - [x] Modal.Title 제작
-    - [ ] font, color 스타일
+    - [x] font, color 스타일 (color 동적)
