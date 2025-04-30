@@ -24,6 +24,22 @@ describe("useCardNumberValidation", () => {
     expect(result.current).toEqual(defaultCardNumberValidationValue);
   });
 
+  it("카드 번호가 올바른 경우 에러가 발생하지 않는다.", () => {
+    // given
+    const initialValue = {
+      first: "1111",
+      second: "2222",
+      third: "3333",
+      fourth: "4444",
+    };
+
+    // when
+    const { result } = renderHook(() => useCardNumberValidation(initialValue));
+
+    // then
+    expect(result.current).toEqual(defaultCardNumberValidationValue);
+  });
+
   it("사용자는 카드 번호 4자리 중 선택적으로 유효성 검사를 수행할 수 있다.", () => {
     // given
     const initialValue = {
