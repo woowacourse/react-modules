@@ -43,7 +43,7 @@ Modal.Title = ({ children }: { children: React.ReactNode }) => {
 export default Modal;
 
 const ModalWrapperStyle = css`
-  position: absolute;
+  position: fixed;
   width: 100%;
   height: 100vh;
   top: 0;
