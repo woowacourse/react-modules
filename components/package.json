@@ -18,6 +18,8 @@
     "build-storybook": "storybook build"
   },
   "dependencies": {
+    "@emotion/css": "^11.13.5",
+    "@emotion/styled": "^11.14.0",
     "react": "^19.1.0",
     "react-dom": "^19.1.0"
   },
