@@ -25,7 +25,7 @@ export const validateExpiryDate = (value: string, index: number) => {
   if (index === EXPIRE_DATE_INDEX.YEAR && Number(value) < currentYear) {
     return {
       isValid: false,
-      errorMessage: `유효기간의 연도는 현재 연도(${currentYear})보다 크거나 같아야 합니다.`,
+      errorMessage: `유효기간의 년도는 현재 년도(${currentYear})보다 크거나 같아야 합니다.`,
     };
   }
 
