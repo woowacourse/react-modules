@@ -1,17 +1,11 @@
 import { useState } from 'react';
+import { getValidLength } from '../utils/getValidLength';
+import { parseNumber } from '../utils/parseNumber';
 
 function useCardNumber() {
   const [cardNumber, setCardNumber] = useState(['', '', '', '']);
   const [isError, setIsError] = useState([false, false, false, false]);
   const [errorMessage, setErrorMessage] = useState('');
-
-  const getValidLength = (value: string, maxLength: number) => {
-    return value.length < maxLength;
-  };
-
-  const parseNumber = (value: string) => {
-    return value.replace(/[^0-9]/g, '');
-  };
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>, n: number) => {
     const originValue = e.target.value;
