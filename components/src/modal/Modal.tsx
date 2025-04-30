@@ -56,28 +56,37 @@ function Modal({
       className={`${styles.modal} ${position === 'bottom' ? styles.modalBottom : ''}`}
       ref={modalRef}
     >
-      <div className={styles.modalHeader}>
-        <h2 className={styles.title}>{title}</h2>
-        {showCloseButton && (
-          <button
-            type="button"
-            onClick={onClose}
-            className={styles.closeButton}
-          >
-            <img src="./close-button.png" alt="모달 닫기 버튼" />
-          </button>
-        )}
-      </div>
-      {contents}
-      <button className={styles.primaryButton} onClick={onPrimaryButtonClick}>
-        {primaryButtonText}
-      </button>
-      <button
-        className={styles.secondaryButton}
-        onClick={onSecondaryButtonClick}
+      <div
+        className={`${styles.modalWrapper} ${position === 'bottom' ? styles.modalWrapperBottom : ''}`}
       >
-        {secondaryButtonText}
-      </button>
+        <div className={styles.modalHeader}>
+          <h2 className={styles.title}>{title}</h2>
+          {showCloseButton && (
+            <button
+              type="button"
+              onClick={onClose}
+              className={styles.closeButton}
+            >
+              <img src="./close-button.png" alt="모달 닫기 버튼" />
+            </button>
+          )}
+        </div>
+        {contents}
+        <div className={styles.buttonWrapper}>
+          <button
+            className={styles.primaryButton}
+            onClick={onPrimaryButtonClick}
+          >
+            {primaryButtonText}
+          </button>
+          <button
+            className={styles.secondaryButton}
+            onClick={onSecondaryButtonClick}
+          >
+            {secondaryButtonText}
+          </button>
+        </div>
+      </div>
     </dialog>
   );
 }

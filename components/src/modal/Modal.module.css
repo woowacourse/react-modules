@@ -7,6 +7,12 @@
   border-radius: 8px;
 }
 
+.modalWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
 .modal::backdrop {
   background-color: #000000;
   opacity: 0.35;
@@ -18,6 +24,12 @@
   max-width: 100%;
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;
+}
+
+.modalWrapperBottom {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 }
 
 .title {
@@ -38,6 +50,12 @@
   background: none;
 
   cursor: pointer;
+}
+
+.buttonWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }
 
 .primaryButton {
