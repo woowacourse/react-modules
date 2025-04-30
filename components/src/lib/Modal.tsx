@@ -1,6 +1,6 @@
 import React, { createContext, useContext } from "react";
-import closeIcon from "./assets/close.svg";
 import { css } from "@emotion/react";
+import useKeyEscClose from "./useKeyEscClose";
 
 export interface ChildrenProps {
   /** 자식 요소 (JSX.Element 또는 문자열 등) */
@@ -37,10 +37,11 @@ export interface ModalTitleProps extends ChildrenProps {
 const ModalContext = createContext<(() => void) | undefined>(undefined);
 
 const Modal = ({ show, onHide, background = true, position = "center", gap = 16, children }: ModalProps) => {
+  useKeyEscClose(onHide);
   return (
     <ModalContext.Provider value={onHide}>
       <div css={ModalWrapperStyle(show)}>
-        <div css={backGroundStyle(background)}></div>
+        <div css={backGroundStyle(background)} onClick={onHide}></div>
         <div css={ModalContainerStyle(position, gap)}>{children}</div>
       </div>
     </ModalContext.Provider>
@@ -53,7 +54,16 @@ Modal.Header = ({ closeButton = false, children }: ModalHeaderProps) => {
   return (
     <div css={ModalHeaderStyle}>
       <span>{children}</span>
-      {closeButton && <img src={closeIcon} alt="X" onClick={onHide} />}
+      {closeButton && (
+        <div css={ModalCloseStyle} onClick={onHide}>
+          <svg width="15" height="14" viewBox="0 0 15 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path
+              d="M14.4922 1.41L13.0822 0L7.49219 5.59L1.90219 0L0.492188 1.41L6.08219 7L0.492188 12.59L1.90219 14L7.49219 8.41L13.0822 14L14.4922 12.59L8.90219 7L14.4922 1.41Z"
+              fill="black"
+            />
+          </svg>
+        </div>
+      )}
     </div>
   );
 };
@@ -132,6 +142,10 @@ const ModalBodyStyle = css`
 
 const ModalFooterStyle = css`
   width: 100%;
+`;
+
+const ModalCloseStyle = css`
+  cursor: pointer;
 `;
 
 const getPositionStyle = (position: string) => {
