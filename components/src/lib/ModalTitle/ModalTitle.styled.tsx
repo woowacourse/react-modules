@@ -7,7 +7,6 @@ const createStyledModalTitle = (tag: keyof JSX.IntrinsicElements) =>
   styled(tag)<ModalTitleProps>`
     font-size: ${({ fontSize }) => fontSize};
     font-weight: ${({ fontWeight }) => fontWeight};
-    color: black;
   `;
 
 export default createStyledModalTitle;
