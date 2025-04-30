@@ -1,7 +1,7 @@
 {
-  "name": "hooks",
+  "name": "db0111-react-payments-hooks",
   "version": "0.0.1",
-  "description": "npm modules",
+  "description": "payment hooks",
   "type": "module",
   "types": "dist/index.d.ts",
   "main": "dist/index.js",
