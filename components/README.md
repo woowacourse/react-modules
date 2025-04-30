@@ -6,6 +6,7 @@
     - [x] background 스타일
     - [x] Modal Container position 동적 할당
     - [x] Modal Container 스타일
+    - [x] Modal Container gap 속성추가
   - [x] Modal.Header 제작
     - [x] close Button 유무 (header에 종속)
     - [x] close 버튼과 children 스타일

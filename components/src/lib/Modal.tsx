@@ -9,19 +9,21 @@ const Modal = ({
   onHide,
   background = true,
   position = "center",
+  gap = 16,
   children,
 }: {
   show: boolean;
   onHide: () => void;
   background?: boolean;
   position?: string;
+  gap?: number;
   children: React.ReactNode;
 }) => {
   return (
     <ModalContext.Provider value={onHide}>
       <div css={ModalWrapperStyle(show)}>
         <div css={backGroundStyle(background)}></div>
-        <div css={ModalContainerStyle(position)}>{children}</div>
+        <div css={ModalContainerStyle(position, gap)}>{children}</div>
       </div>
     </ModalContext.Provider>
   );
@@ -72,13 +74,13 @@ const backGroundStyle = (background: boolean) => css`
   visibility: ${background ? "visible" : "hidden"};
 `;
 
-const ModalContainerStyle = (position: string) => css`
+const ModalContainerStyle = (position: string, gap: number) => css`
   display: flex;
   width: ${position === "center" ? "calc(100% - 72px)" : "100%"};
   padding: 24px 32px;
   flex-direction: column;
   align-items: center;
-  gap: 16px;
+  gap: ${gap}px;
   border-radius: 8px;
   background: #fff;
   position: absolute;
