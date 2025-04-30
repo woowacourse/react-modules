@@ -8,10 +8,11 @@ import {
   ModalBody,
 } from "@kaori-killer/modal-component";
 
+import ModalFooter from "./lib/ModalFooter/ModalFooter";
+
 function App() {
   return (
     <>
-      <h1>Component Modules</h1>
       <ModalOverlay onClose={() => console.log("clicked")} />
       <Modal isOpen={true} position="bottom">
         <ModalHeader direction="row" align="start" justify="start">
@@ -20,6 +21,9 @@ function App() {
           </ModalTitle>
         </ModalHeader>
         <ModalBody>몸통이다!</ModalBody>
+        <ModalFooter direction="row" align="end" justify="center">
+          Footer이다!
+        </ModalFooter>
       </Modal>
     </>
   );
