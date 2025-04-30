@@ -9,14 +9,20 @@ const ERROR_MESSAGE = {
 
 const useCardCvc = () => {
 	const [isValid, setIsValid] = useState<boolean>(true);
-	const [errorMessage, setErrorMessage] = useState<string[]>([]);
+	const [errorMessage, setErrorMessage] = useState<string>("");
 
 	const checkNumber = (value: string) => {
-		if (!/^\d+$/.test(value)) return false;
+		if (!/^\d+$/.test(value)) {
+			return false;
+		}
+		return true;
 	};
 
 	const checkLength = (value: string) => {
-		if (value.length < CVC_VALID_LENGTH) return false;
+		if (value.length < CVC_VALID_LENGTH) {
+			return false;
+		}
+		return true;
 	};
 
 	const validate = (value: string) => {
@@ -24,15 +30,14 @@ const useCardCvc = () => {
 		const isValidLength = checkLength(value);
 
 		if (!isNumber) {
-			setErrorMessage([ERROR_MESSAGE.INVALID_NUMBER]);
+			setErrorMessage(ERROR_MESSAGE.INVALID_NUMBER);
 			setIsValid(false);
 		}
 
 		if (!isValidLength) {
-			setErrorMessage([...errorMessage, ERROR_MESSAGE.INPUT_LENGTH_LIMIT]);
+			setErrorMessage(ERROR_MESSAGE.INPUT_LENGTH_LIMIT);
+			setIsValid(false);
 		}
-
-		setIsValid(errorMessage.length === 0);
 	};
 
 	return { isValid, errorMessage, validate };

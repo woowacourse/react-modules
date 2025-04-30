@@ -13,11 +13,17 @@ const useExpirationYear = () => {
 	const [errorMessage, setErrorMessage] = useState<string[]>([]);
 
 	const checkLength = (value: string) => {
-		if (value.length < YEAR_VALID_LENGTH) return false;
+		if (value.length < YEAR_VALID_LENGTH) {
+			return false;
+		}
+		return true;
 	};
 
 	const checkNumber = (value: string) => {
-		if (!/^\d+$/.test(value)) return false;
+		if (!/^\d+$/.test(value)) {
+			return false;
+		}
+		return true;
 	};
 
 	const checkYearRange = (value: string) => {

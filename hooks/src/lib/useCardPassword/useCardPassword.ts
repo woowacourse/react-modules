@@ -12,11 +12,17 @@ const useCardPassword = () => {
 	const [errorMessage, setErrorMessage] = useState<string[]>([]);
 
 	const checkNumber = (value: string) => {
-		if (!/^\d+$/.test(value)) return false;
+		if (!/^\d+$/.test(value)) {
+			return false;
+		}
+		return true;
 	};
 
 	const checkLength = (value: string) => {
-		if (value.length < PASSWORD_VALID_LENGTH) return false;
+		if (value.length < PASSWORD_VALID_LENGTH) {
+			return false;
+		}
+		return true;
 	};
 
 	const validate = (value: string) => {
