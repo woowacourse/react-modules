@@ -19,6 +19,8 @@ function App() {
         <Modal.Contents>
           <div>안녕하세요~</div>
         </Modal.Contents>
+        // TODO: Modal.Button 만들기 // TODO: footer 만들기 // TODO: 모달 최소
+        크기 0으로 설정
       </Modal>
     </>
   );
