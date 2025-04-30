@@ -32,11 +32,13 @@ const useCardCvc = () => {
 		if (!isNumber) {
 			setErrorMessage(ERROR_MESSAGE.INVALID_NUMBER);
 			setIsValid(false);
+			return;
 		}
 
 		if (!isValidLength) {
 			setErrorMessage(ERROR_MESSAGE.INPUT_LENGTH_LIMIT);
 			setIsValid(false);
+			return;
 		}
 	};
 

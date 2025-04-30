@@ -41,15 +41,18 @@ const useExpirationMonth = () => {
 		if (!isValidLength) {
 			setErrorMessage(ERROR_MESSAGE.INVALID_MONTH_FORMAT);
 			setIsValid(false);
+			return;
 		}
 		if (!isNumber) {
 			setErrorMessage(ERROR_MESSAGE.INVALID_NUMBER);
 			setIsValid(false);
+			return;
 		}
 
 		if (!isValidRange) {
 			setErrorMessage(ERROR_MESSAGE.INVALID_MONTH_RANGE);
 			setIsValid(false);
+			return;
 		}
 	};
 

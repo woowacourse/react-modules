@@ -12,6 +12,7 @@ const useCardCompany = () => {
 		if (!value) {
 			setIsValid(false);
 			setErrorMessage(ERROR_MESSAGE.EMPTY_CARD_COMPANY);
+			return;
 		}
 	};
 
