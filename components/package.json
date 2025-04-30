@@ -1,6 +1,6 @@
 {
   "name": "pesu-modal",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "npm modules",
   "type": "module",
   "types": "dist/index.d.ts",
@@ -21,6 +21,7 @@
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.0",
     "@storybook/addon-viewport": "^8.6.12",
+    "pesu-modal": "^0.0.2",
     "react": "^19.1.0",
     "react-dom": "^19.1.0"
   },
