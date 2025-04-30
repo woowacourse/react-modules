@@ -7,20 +7,26 @@ export default defineConfig({
   build: {
     lib: {
       entry: path.resolve(__dirname, "src/lib/index.ts"),
-      name: "index",
-      fileName: "index",
+      name: "bunju-summit-modal",
+      fileName: (format) => `index.${format === "es" ? "js" : format}`,
     },
     rollupOptions: {
-      external: ["react"],
+      external: ["react", "react-dom"],
       output: {
         globals: {
           react: "React",
+          "react-dom": "ReactDOM",
+        },
+        assetFileNames: (assetInfo) => {
+          if (assetInfo.name === "style.css") return "bunju-summit-modal.css"; // 이름 변경
+          return assetInfo.name;
         },
       },
     },
     commonjsOptions: {
       esmExternals: ["react"],
     },
+    cssCodeSplit: false,
   },
   plugins: [
     react(),
