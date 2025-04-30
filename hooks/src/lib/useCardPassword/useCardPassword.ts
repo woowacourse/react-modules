@@ -1,5 +1,5 @@
 import { useState, ChangeEvent } from 'react';
-import { CARD_CVC, CARD_PASSWORD } from '../constants/cardConfig';
+import { CARD_PASSWORD } from '../constants/cardConfig';
 import { isOnlyDigits } from '../utils/validateNumber';
 import { CARD_PASSWORD_ERROR } from '../constants/errorMessages';
 
