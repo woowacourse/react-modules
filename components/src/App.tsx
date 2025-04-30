@@ -3,7 +3,7 @@ import Modal from "./lib/Modal";
 function App() {
   return (
     <>
-      <Modal background>
+      <Modal>
         <Modal.Header closeButton>
           <Modal.Title>Title</Modal.Title>
         </Modal.Header>

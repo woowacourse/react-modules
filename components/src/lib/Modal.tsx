@@ -2,7 +2,7 @@ import React from "react";
 import closeIcon from "./assets/close.svg";
 import { css } from "@emotion/react";
 
-const Modal = ({ background = true, children }: { background: boolean; children: React.ReactNode }) => {
+const Modal = ({ background = true, children }: { background?: boolean; children: React.ReactNode }) => {
   return (
     <div css={ModalWrapperStyle}>
       <div css={backGroundStyle(background)}></div>
