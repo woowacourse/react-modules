@@ -8,7 +8,7 @@
     - [x] Modal Container 스타일
   - [x] Modal.Header 제작
     - [x] close Button 유무 (header에 종속)
-    - [ ] close 버튼과 children 스타일
+    - [x] close 버튼과 children 스타일
   - [x] Modal.Body 제작
   - [x] Modal.Footer 제작
   - [x] Modal.Title 제작

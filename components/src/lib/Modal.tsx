@@ -19,9 +19,9 @@ const Modal = ({
   );
 };
 
-Modal.Header = ({ closeButton = false, children }: { closeButton: boolean; children: React.ReactNode }) => {
+Modal.Header = ({ closeButton = false, children }: { closeButton: boolean; children?: React.ReactNode }) => {
   return (
-    <div>
+    <div css={ModalHeaderStyle}>
       <span>{children}</span>
       {closeButton && <img src={closeIcon} alt="X" />}
     </div>
@@ -75,4 +75,11 @@ const ModalContainerStyle = (position: string) => css`
   transform: translate(-50%, -50%);
   z-index: 99;
   box-sizing: border-box;
+`;
+
+const ModalHeaderStyle = css`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
 `;
