@@ -1,6 +1,6 @@
 {
   "name": "db0111-react-modal",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "react-modal",
   "type": "module",
   "types": "dist/index.d.ts",
