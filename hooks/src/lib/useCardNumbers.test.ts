@@ -1,6 +1,16 @@
 import { renderHook, act } from "@testing-library/react";
 import useCardNumbers from "./useCardNumbers";
 
+test("4자리 숫자가 입력되면 정상 작동된다.", () => {
+  const { result } = renderHook(() => useCardNumbers());
+
+  act(() => {
+    result.current.validate("1234", 0);
+  });
+
+  expect(result.current.error[0].errorMessage).toBe("");
+});
+
 test("숫자가 아닌 값을 validate 하면 에러 메시지가 세팅된다", () => {
   const { result } = renderHook(() => useCardNumbers());
 
