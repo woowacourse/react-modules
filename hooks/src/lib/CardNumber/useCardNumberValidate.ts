@@ -40,7 +40,7 @@ const useCardNumbersValidate = (): CardNumberValidateResult => {
       return;
     }
 
-    if (validateMaxLength(cardNumber, 4)) {
+    if (!validateMaxLength(cardNumber, 4)) {
       setIsValid({
         ...isValid,
         [key]: false
