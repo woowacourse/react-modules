@@ -1,5 +1,10 @@
-import styles from "./Modal.module.css";
-
+// import styles from "./Modal.module.css";
+import {
+  ModalBackground,
+  ModalConatiner,
+  ModalHeader,
+  CloseButton,
+} from "./Modal.styles";
 interface ModalPropsType {
   isModalOpen: boolean;
   position: string;
@@ -17,21 +22,15 @@ const Modal = ({
 }: ModalPropsType) => {
   return (
     <>
-      <div
-        className={`${styles["modal-background"]} ${
-          styles[`background${position}`]
-        } ${isModalOpen ? styles.active : ""}`}
-      >
-        <div className={`${styles.modal} ${styles[`modal${position}`]}`}>
-          <div className={styles.modalHeader}>
+      <ModalBackground isModalOpen={isModalOpen} position={position}>
+        <ModalConatiner position={position}>
+          <ModalHeader>
             <h4>{title}</h4>
-            <button className={styles.closeButton} onClick={onClose}>
-              X
-            </button>
-          </div>
-          {children}
-        </div>
-      </div>
+            <CloseButton onClick={onClose}>X</CloseButton>
+            {children}
+          </ModalHeader>
+        </ModalConatiner>
+      </ModalBackground>
     </>
   );
 };
