@@ -4,7 +4,7 @@ import { isOnlyDigits } from '../utils/validateNumber';
 import { CARD_EXPIRATION_ERROR } from '../constants/errorMessages';
 import { CARD_EXPIRATION } from '../constants/cardConfig';
 
-export const useCardExpiry = (
+export const useCardExpiryPeriod = (
   initialCardExpiryDate: CardExpiryDate,
   initialCardExpiryDateError: CardExpiryDateError,
 ) => {

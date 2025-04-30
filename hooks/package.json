@@ -1,7 +1,7 @@
 {
-  "name": "hooks",
+  "name": "lume_hooks",
   "version": "0.0.1",
-  "description": "npm modules",
+  "description": "페이먼츠 유효성 검증을 위한 커스텀 훅입니다.",
   "type": "module",
   "types": "dist/index.d.ts",
   "main": "dist/index.js",
@@ -14,9 +14,11 @@
     "build": "tsc && vite build",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
-    "test": "jest"
+    "test": "jest",
+    "deploy": "vite build --base=/react-modules/ --minify=false && npx gh-pages -d dist"
   },
   "dependencies": {
+    "lume_hooks": "^0.0.1",
     "react": "^19.1.0",
     "react-dom": "^19.1.0"
   },
@@ -40,5 +42,8 @@
     "typescript": "^5.8.3",
     "vite": "^6.2.6",
     "vite-plugin-dts": "^4.5.3"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }
