@@ -23,7 +23,7 @@ export default function useExpiryDate() {
     const value = event.target.value;
     const dateType = event.target.dataset.dateType;
 
-    if (!dateType || numberRegex.test(value)) return;
+    if (!dateType || !numberRegex.test(value)) return;
 
     setExpiryDate({ ...expiryDate, [dateType]: value });
 

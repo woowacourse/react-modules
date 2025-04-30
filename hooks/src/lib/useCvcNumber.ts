@@ -14,7 +14,7 @@ export default function useCvcNumber() {
   ) => {
     const value = event.target.value;
 
-    if (numberRegex.test(value)) return;
+    if (!numberRegex.test(value)) return;
 
     setCvcNumber(value);
 
