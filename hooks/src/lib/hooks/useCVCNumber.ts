@@ -1,4 +1,5 @@
 import { Dispatch, useState } from "react";
+import validateCVCNumber from "../util/validateCVCNumber";
 
 interface useCVCNumberReturn {
   CVCNumber: string;
@@ -9,7 +10,7 @@ interface useCVCNumberReturn {
 
 export default function useCVCNumber(): useCVCNumberReturn {
   const [CVCNumber, setCVCNumber] = useState("");
-  const errorMessage = "";
+  const errorMessage = validateCVCNumber(CVCNumber);
 
   return {
     CVCNumber,
