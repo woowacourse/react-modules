@@ -46,7 +46,7 @@ function Modal({
         <TitleSection>
           <TitleText>{title}</TitleText>
           {hasTopCloseButton ? (
-            <CloseButton src={"Close.svg"} alt="닫기 버튼" onClick={onClose} />
+            <CloseButton onClick={onClose}>✕</CloseButton>
           ) : null}
         </TitleSection>
         <MainSection>
@@ -109,7 +109,7 @@ const ModalOverlay = styled.div`
   background-color: rgba(0, 0, 0, 0.35);
 `;
 
-const CloseButton = styled.img`
+const CloseButton = styled.div`
   cursor: pointer;
 `;
 
