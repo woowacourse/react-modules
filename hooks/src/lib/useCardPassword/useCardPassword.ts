@@ -1,5 +1,5 @@
 import { useState, ChangeEvent } from 'react';
-import { CARD_CVC } from '../constants/cardConfig';
+import { CARD_CVC, CARD_PASSWORD } from '../constants/cardConfig';
 import { isOnlyDigits } from '../utils/validateNumber';
 import { CARD_PASSWORD_ERROR } from '../constants/errorMessages';
 
@@ -25,7 +25,7 @@ export const useCardPassword = (initialPassword: string, initialError: string) =
   };
 
   const isCardPasswordValid = () => {
-    return cardPassword !== null && cardPassword.toString().length === CARD_CVC.maxLength && !cardPasswordError;
+    return cardPassword !== null && cardPassword.toString().length === CARD_PASSWORD.maxLength && !cardPasswordError;
   };
 
   return {
