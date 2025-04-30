@@ -45,7 +45,7 @@ function Modal({ width = '304px', height = '216px', position, title, onClose, ch
         <TitleContainer>
           <Title>{title}</Title>
           <CloseButton onClick={onClose}>
-            <CloseButtonImage src="images/close.png" alt="close" />
+            <CloseButtonImage src="/close.svg" alt="close" />
           </CloseButton>
         </TitleContainer>
         {children}
