@@ -17,8 +17,9 @@ test("사용자가 정상적인 월을 입력하면 에러가 발생하지 않�
   };
 
   act(() =>
-    // @ts-ignore
-    handleExpiryDateChange(event)
+    handleExpiryDateChange(
+      event as unknown as React.ChangeEvent<HTMLInputElement>
+    )
   );
   expect(isValid).toBeTruthy();
 });
@@ -38,8 +39,9 @@ test("사용자가 정상적인 연을 입력하면 에러가 발생하지 않�
   };
 
   act(() =>
-    // @ts-ignore
-    handleExpiryDateChange(event)
+    handleExpiryDateChange(
+      event as unknown as React.ChangeEvent<HTMLInputElement>
+    )
   );
   expect(isValid).toBeTruthy();
 });
@@ -58,8 +60,9 @@ test("사용자가 월에 문자를 입력하면 입력이 안된다.", async ()
     },
   };
   act(() => {
-    // @ts-ignore
-    handleExpiryDateChange(event);
+    handleExpiryDateChange(
+      event as unknown as React.ChangeEvent<HTMLInputElement>
+    );
   });
 
   expect(result.current.expiryDate.month).toBe("");
@@ -80,8 +83,9 @@ test("사용자가 연에 문자를 입력하면 입력이 안된다.", async ()
     },
   };
   act(() => {
-    // @ts-ignore
-    handleExpiryDateChange(event);
+    handleExpiryDateChange(
+      event as unknown as React.ChangeEvent<HTMLInputElement>
+    );
   });
 
   expect(result.current.expiryDate.year).toBe("");
@@ -110,13 +114,15 @@ test("사용자가 과거의 월을 입력했을 때 에러가 발생한다.", a
   };
 
   act(() => {
-    // @ts-ignore
-    result.current.handleExpiryDateChange(monthEvent);
+    result.current.handleExpiryDateChange(
+      monthEvent as unknown as React.ChangeEvent<HTMLInputElement>
+    );
   });
   rerender();
   act(() => {
-    // @ts-ignore
-    result.current.handleExpiryDateChange(yearEvent);
+    result.current.handleExpiryDateChange(
+      yearEvent as unknown as React.ChangeEvent<HTMLInputElement>
+    );
   });
 
   expect(result.current.expiryDate.year).toBe("25");
@@ -139,8 +145,9 @@ test("사용자가 과거의 년도를 입력했을 때 에러가 발생한다."
   };
 
   act(() => {
-    // @ts-ignore
-    handleExpiryDateChange(event);
+    handleExpiryDateChange(
+      event as unknown as React.ChangeEvent<HTMLInputElement>
+    );
   });
 
   expect(result.current.expiryDate.year).toBe("24");

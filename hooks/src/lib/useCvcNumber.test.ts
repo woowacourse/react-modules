@@ -14,8 +14,9 @@ test("사용자가 정상적인 값을 입력하면 에러가 발생하지 않�
   };
 
   act(() =>
-    // @ts-ignore
-    handleCvcNumberChange(event)
+    handleCvcNumberChange(
+      event as unknown as React.ChangeEvent<HTMLInputElement>
+    )
   );
   expect(isValid).toBeTruthy();
 });
@@ -31,8 +32,9 @@ test("사용자가 두 글자를 입력하면 에러가 발생한다.", async ()
     },
   };
   act(() => {
-    // @ts-ignore
-    handleCvcNumberChange(event);
+    handleCvcNumberChange(
+      event as unknown as React.ChangeEvent<HTMLInputElement>
+    );
   });
 
   expect(result.current.cvcNumber).toBe("11");
@@ -52,8 +54,9 @@ test("사용자가 문자열을 입력하면 값이 바뀌지 않는다.", async
   };
 
   act(() => {
-    // @ts-ignore
-    handleCvcNumberChange(event);
+    handleCvcNumberChange(
+      event as unknown as React.ChangeEvent<HTMLInputElement>
+    );
   });
 
   expect(result.current.cvcNumber).toBe("");
