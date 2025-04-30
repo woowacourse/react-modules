@@ -1,5 +1,5 @@
 function useIsNumber(value: string) {
-  return Number.isInteger(Number(value)) && Number(value) >= 0;
+  return Number.isInteger(Number(value));
 }
 
 export default useIsNumber;

@@ -34,5 +34,6 @@ describe("useCardNumberValidation 테스트", () => {
       false,
       false,
     ]);
+    expect(result.current.errorText).toBe("입력값은 숫자여야합니다.");
   });
 });
