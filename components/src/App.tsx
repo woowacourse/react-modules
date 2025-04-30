@@ -1,8 +1,12 @@
 import "./App.css";
 
-import { Modal, ModalHeader, ModalTitle } from "@kaori-killer/modal-component";
-import ModalOverlay from "./lib/ModalOverlay/ModalOverlay";
-import ModalBody from "./lib/ModalBody/ModalBody";
+import {
+  Modal,
+  ModalHeader,
+  ModalTitle,
+  ModalOverlay,
+  ModalBody,
+} from "@kaori-killer/modal-component";
 
 function App() {
   return (
