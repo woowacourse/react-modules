@@ -1,0 +1,20 @@
+{
+  "compilerOptions": {
+    "emitDeclarationOnly": true, // JS 없이 d.ts만
+    "declaration": true,
+    "outDir": "dist",
+    "rootDir": "src/lib",
+    "jsx": "react-jsx",
+    "module": "ESNext",
+    "target": "ES2020",
+    "strict": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "moduleResolution": "node",
+    "types": ["react", "react-dom", "node"] // JSX·DOM 타입
+  },
+  "include": [
+    "src/lib/**/*" // 라이브러리 소스
+  ]
+}
