@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'react';
 import { CardExpiration } from './types/card';
-import { validateMonthRangeError, validateNumberError, validateYearLengthError } from '../utils/cardInputValidations';
+import { validateMonthRangeError, validateNumberError, validateYearLengthError } from './utils/cardInputValidations';
 
 export function useCardExpirationInput() {
   const [cardExpiration, setCardExpiration] = useState<CardExpiration>({ month: '', year: '' });

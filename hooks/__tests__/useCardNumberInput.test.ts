@@ -1,5 +1,5 @@
 import { renderHook, act } from '@testing-library/react';
-import { useCardNumberInput } from '../lib/useCardNumberInput';
+import { useCardNumberInput } from '../src/lib/useCardNumberInput';
 
 describe('useCardNumberInput custom hook 테스트', () => {
   it('카드 번호를 입력하면, 에러가 발생하지 않는다.', () => {

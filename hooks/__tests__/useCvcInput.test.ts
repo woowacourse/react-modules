@@ -1,5 +1,5 @@
 import { renderHook, act } from '@testing-library/react';
-import { useCvcInput } from '../lib/useCvcInput';
+import { useCvcInput } from '../src/lib/useCvcInput';
 
 describe('useCvcInput custom hook 테스트', () => {
   it('숫자 3자리를 입력하면, 에러가 발생하지 않는다.', () => {

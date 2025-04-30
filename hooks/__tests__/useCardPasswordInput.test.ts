@@ -1,5 +1,5 @@
 import { renderHook, act } from '@testing-library/react';
-import { useCardPasswordInput } from '../lib/useCardPasswordInput';
+import { useCardPasswordInput } from '../src/lib/useCardPasswordInput';
 
 describe('useCardPasswordInput custom hook 테스트', () => {
   it('비밀번호 앞 2자리를 입력하면, 에러가 발생하지 않는다.', () => {

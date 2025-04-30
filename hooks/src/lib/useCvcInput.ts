@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react';
-import { validateNumberError, validateCvcLengthError } from '../utils/cardInputValidations';
+import { validateNumberError, validateCvcLengthError } from './utils/cardInputValidations';
 
 export function useCvcInput() {
   const [cvc, setCvc] = useState<string>('');
