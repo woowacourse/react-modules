@@ -19,6 +19,7 @@
     "deploy": "vite build --base=/react-modules/ --minify=false && npx gh-pages -d dist"
   },
   "dependencies": {
+    "lume_modal": "^0.0.2",
     "react": "^19.1.0",
     "react-dom": "^19.1.0"
   },
