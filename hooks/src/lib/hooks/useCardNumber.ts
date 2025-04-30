@@ -1,8 +1,8 @@
 import { Dispatch, useState } from "react";
 import {
   CardNetwork,
-  isCardNumberNumeric,
   validateCardNetwork,
+  validateCardNumber,
 } from "../util/validateCardNumber";
 
 interface UseCardNumberReturn {
@@ -17,13 +17,7 @@ export default function useCardNumber(): UseCardNumberReturn {
   const [cardNumber, setCardNumber] = useState("");
 
   const cardNetwork: CardNetwork = validateCardNetwork(cardNumber);
-  let errorMessage: string = "";
-
-  if (!isCardNumberNumeric(cardNumber))
-    errorMessage = "카드 번호는 숫자만 입력 가능합니다.";
-
-  if (cardNumber.length !== 16)
-    errorMessage = "16자리의 공백 없는 숫자만 입력 가능합니다.";
+  const errorMessage: string = validateCardNumber(cardNumber);
 
   return {
     cardNumber,
