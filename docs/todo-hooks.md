@@ -2,8 +2,8 @@
 
 ## 기능 요구사항
 
-- [ ] utils/isPositiveInteger
-- [ ] utils/isLengthEqual
+- [x] utils/isPositiveInteger
+- [x] utils/isLengthEqual
 
 ```javascript
 const ERROR_MESSAGE = {
