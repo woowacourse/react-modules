@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import './App.css';
-import Modal from './modal/Modal';
 import { css } from '@emotion/css';
+import { Modal } from '@eunoia-jaxson/modal';
 
 function App() {
   const [isOpen, setIsOpen] = useState<boolean>(false);
