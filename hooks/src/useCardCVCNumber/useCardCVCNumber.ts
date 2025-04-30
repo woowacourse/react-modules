@@ -3,7 +3,7 @@ import useError from '../useError/useError';
 import isInteger from '../../validate/isInteger';
 import isUnderMaxLength from '../../validate/isUnderMaxLength';
 
-const KEY = 'CVC';
+const KEY = 'cardCVCNumber';
 
 const CARD_CVC_MAX_LENGTH = 3;
 
@@ -21,22 +21,21 @@ export default function useCardCVCNumber(userCardCVCNumber = '') {
   function handleCardCVCNumberChange(
     event: React.ChangeEvent<HTMLInputElement>
   ) {
-    const { isError, errorMessage } = getCVCNumberError(
-      event.target.value.trim()
-    );
+    const input = event.target.value.trim();
+    const { inputError, inputErrorMessage } = getCVCNumberError(input);
 
-    if (isError) {
-      changeError(KEY, errorMessage);
+    if (inputError) {
+      changeError(KEY, inputErrorMessage);
       return;
     }
 
     clearError(KEY);
-    setCardCVCNumber(event.target.value.trim());
+    setCardCVCNumber(input);
   }
 
   return {
     cardCVCNumber,
-    error: error.isError[KEY],
+    isError: error.isError[KEY],
     errorMessage: error.errorMessage[KEY],
     handleCardCVCNumberChange,
   };
@@ -45,19 +44,19 @@ export default function useCardCVCNumber(userCardCVCNumber = '') {
 function getCVCNumberError(input: string) {
   if (!isInteger(input)) {
     return {
-      isError: true,
-      errorMessage: CARD_CVC_ERROR_MESSAGE.NOT_NUMBERIC,
+      inputError: true,
+      inputErrorMessage: CARD_CVC_ERROR_MESSAGE.NOT_NUMBERIC,
     };
   }
 
   if (!isUnderMaxLength(input, CARD_CVC_MAX_LENGTH)) {
     return {
-      isError: true,
-      errorMessage: CARD_CVC_ERROR_MESSAGE.INVALID_LENGTH,
+      inputError: true,
+      inputErrorMessage: CARD_CVC_ERROR_MESSAGE.INVALID_LENGTH,
     };
   }
   return {
-    isError: false,
-    errorMessage: '',
+    inputError: false,
+    inputErrorMessage: '',
   };
 }

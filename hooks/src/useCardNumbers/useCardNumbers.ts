@@ -41,19 +41,18 @@ export default function useCardNumbers(userCardNumbers = INITIAL_CARD_NUMBER) {
 
   function handleCardNumbersChange({ target }: CardNumbersKeys) {
     return function (event: React.ChangeEvent<HTMLInputElement>) {
-      const { isError, errorMessage } = getCardNumbersError(
-        event.target.value.trim()
-      );
+      const input = event.target.value.trim();
+      const { inputError, inputErrorMessage } = getCardNumbersError(input);
 
-      if (isError) {
-        changeError(target, errorMessage);
+      if (inputError) {
+        changeError(target, inputErrorMessage);
         return;
       }
 
       clearError(target);
       setCardNumbers((prev) => ({
         ...prev,
-        [target]: event.target.value.trim(),
+        [target]: input,
       }));
     };
   }
@@ -69,20 +68,20 @@ export default function useCardNumbers(userCardNumbers = INITIAL_CARD_NUMBER) {
 function getCardNumbersError(input: string) {
   if (!isInteger(input)) {
     return {
-      isError: true,
-      errorMessage: CARD_NUMBER_ERROR_MESSAGE.NOT_NUMBERIC,
+      inputError: true,
+      inputErrorMessage: CARD_NUMBER_ERROR_MESSAGE.NOT_NUMBERIC,
     };
   }
 
   if (!isUnderMaxLength(input, 4)) {
     return {
-      isError: true,
-      errorMessage: CARD_NUMBER_ERROR_MESSAGE.INVALID_LENGTH,
+      inputError: true,
+      inputErrorMessage: CARD_NUMBER_ERROR_MESSAGE.INVALID_LENGTH,
     };
   }
 
   return {
-    isError: false,
-    errorMessage: '',
+    inputError: false,
+    inputErrorMessage: '',
   };
 }
