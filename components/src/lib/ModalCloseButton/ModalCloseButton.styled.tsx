@@ -7,4 +7,5 @@ export const StyledModalCloseButton = styled.button`
   font-size: 1.5rem;
   border: none;
   background-color: transparent;
+  cursor: pointer;
 `;
