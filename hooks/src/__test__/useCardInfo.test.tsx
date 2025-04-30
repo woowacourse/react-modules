@@ -1,6 +1,6 @@
 import { renderHook, act } from "@testing-library/react";
 import useCardInfo from "../lib/useCardInfo";
-import { CardInfo } from "../types/Card";
+import { CardInfo } from "../lib/types/Card";
 
 describe("useCardInfo 테스트", () => {
   it("초기 상태가 올바르게 설정되어야 한다", () => {

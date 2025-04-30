@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { CardInfo, CardNumber, Expiration } from "../types/Card";
+import { CardInfo, CardNumber, Expiration } from "./types/Card";
 
 export function useCardInfo() {
   const [cardInfo, setCardInfo] = useState<CardInfo>({

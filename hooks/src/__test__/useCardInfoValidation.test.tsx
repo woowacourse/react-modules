@@ -4,7 +4,7 @@ import * as useCardCvcValidation from "../lib/useCardCvcValidation";
 import * as useCardExpirationValidation from "../lib/useCardExpirationValidation";
 import * as useCardNumberValidation from "../lib/useCardNumberValidation";
 import * as useCardPasswordValidation from "../lib/useCardPasswordValidation";
-import { CompanyType } from "../types/Card";
+import { CompanyType } from "../lib/types/Card";
 
 jest.mock("../lib/useCardCvcValidation");
 jest.mock("../lib/useCardExpirationValidation");

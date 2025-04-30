@@ -1,4 +1,4 @@
-import { CardNumber } from "../types/Card";
+import { CardNumber } from "./types/Card";
 import useIsNumber from "./useIsNumber";
 import useIsValidLength from "./useIsValidLength";
 

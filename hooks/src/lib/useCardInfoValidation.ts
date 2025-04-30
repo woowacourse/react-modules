@@ -1,4 +1,4 @@
-import { CardInfo } from "../types/Card";
+import { CardInfo } from "./types/Card";
 import useCardCvcValidation from "./useCardCvcValidation";
 import useCardExpirationValidation from "./useCardExpirationValidation";
 import useCardNumberValidation from "./useCardNumberValidation";
