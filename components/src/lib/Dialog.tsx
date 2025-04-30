@@ -1,8 +1,13 @@
 import { createContext, useContext, useId } from 'react';
 import { createPortal } from 'react-dom';
-import './Dialog.css';
 import useBoolean from './hooks/useBoolean';
 import useEscapeModal from './hooks/useEscapeModal';
+import {
+  StyledCloseButton,
+  StyledContent,
+  StyledHeader,
+  StyledOverlay,
+} from './Dialog.css';
 
 interface DialogContextType {
   open: () => void;
@@ -34,10 +39,20 @@ function useDialogContext() {
   return context;
 }
 
-function Trigger({ children }: { children: React.ReactNode }) {
+function Trigger({
+  children,
+  className,
+}: {
+  children: React.ReactNode;
+  className?: string;
+}) {
   const { open } = useDialogContext();
 
-  return <div onClick={open}>{children}</div>;
+  return (
+    <div onClick={open} className={className}>
+      {children}
+    </div>
+  );
 }
 
 function Root({ children }: { children: React.ReactNode }) {
@@ -45,40 +60,68 @@ function Root({ children }: { children: React.ReactNode }) {
   return createPortal(isOpen ? children : null, document.body);
 }
 
-function Overlay({ children }: { children: React.ReactNode }) {
+function Overlay({
+  children,
+  className,
+}: {
+  children: React.ReactNode;
+  className?: string;
+}) {
   const { close } = useDialogContext();
   const id = useId();
   const { handleClickOverlay } = useEscapeModal(close);
 
   return (
-    <div
-      className="dialog-overlay"
+    <StyledOverlay
       id={id}
       onClick={(e) => handleClickOverlay(e, id)}
+      className={className}
     >
       {children}
-    </div>
+    </StyledOverlay>
   );
 }
 
-function Header({ children }: { children: React.ReactNode }) {
-  return <div>{children}</div>;
+function Header({
+  children,
+  className,
+}: {
+  children: React.ReactNode;
+  className?: string;
+}) {
+  return <StyledHeader className={className}>{children}</StyledHeader>;
 }
 
-function CloseButton({ children }: { children: React.ReactNode }) {
+function CloseButton({
+  children,
+  className,
+}: {
+  children: React.ReactNode;
+  className?: string;
+}) {
   const { close } = useDialogContext();
 
-  return <button onClick={close}>{children}</button>;
+  return (
+    <StyledCloseButton onClick={close} className={className}>
+      {children}
+    </StyledCloseButton>
+  );
 }
 
 function Content({
   children,
   position = 'center',
+  className,
 }: {
   children: React.ReactNode;
   position?: 'center' | 'bottom';
+  className?: string;
 }) {
-  return <div className={`dialog-content ${position}`}>{children}</div>;
+  return (
+    <StyledContent position={position} className={className}>
+      {children}
+    </StyledContent>
+  );
 }
 
 Dialog.Root = Root;
