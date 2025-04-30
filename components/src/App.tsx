@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import Modal from './modal/Modal';
+import PrimaryButton from './modal/PrimaryButton';
+import SecondaryButton from './modal/SecondaryButton';
 
 function getContent() {
   return <div>컨텐츠</div>;
@@ -12,6 +14,11 @@ function App() {
     setModalOpen(false);
   };
 
+  const buttons = [
+    <PrimaryButton label="동의하고 저장하기" onClick={() => alert('클릭됨')} />,
+    <SecondaryButton label="닫기" onClick={onClose} />,
+  ];
+
   return (
     <>
       <h1>Component Modules</h1>
@@ -22,10 +29,7 @@ function App() {
         onClose={onClose}
         contents={getContent()}
         showCloseButton={true}
-        primaryButtonText="동의하고 저장하기"
-        onPrimaryButtonClick={() => alert('클릭됨')}
-        secondaryButtonText="닫기"
-        onSecondaryButtonClick={onClose}
+        buttons={buttons}
       />
     </>
   );

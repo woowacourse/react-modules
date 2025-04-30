@@ -1,29 +1,34 @@
-import { ReactNode, useEffect, useRef } from 'react';
+import {
+  Fragment,
+  isValidElement,
+  ReactElement,
+  ReactNode,
+  useEffect,
+  useRef,
+} from 'react';
 import styles from './Modal.module.css';
+import PrimaryButton from './PrimaryButton';
+import SecondaryButton from './SecondaryButton';
+
+interface ModalProps {
+  title: string;
+  isOpen: boolean;
+  onClose: () => void;
+  contents: ReactNode;
+  buttons: ReactElement<typeof PrimaryButton | typeof SecondaryButton>[];
+  showCloseButton?: boolean;
+  position?: 'center' | 'bottom';
+}
 
 function Modal({
   title,
   isOpen,
   onClose,
   contents,
-  primaryButtonText,
-  secondaryButtonText,
-  onPrimaryButtonClick,
-  onSecondaryButtonClick,
+  buttons,
   position = 'center',
   showCloseButton = true,
-}: {
-  title: string;
-  isOpen: boolean;
-  onClose: () => void;
-  contents: ReactNode;
-  primaryButtonText: string;
-  secondaryButtonText: string;
-  onPrimaryButtonClick: () => void;
-  onSecondaryButtonClick: () => void;
-  showCloseButton?: boolean;
-  position?: 'center' | 'bottom';
-}) {
+}: ModalProps) {
   const modalRef = useRef<HTMLDialogElement>(null);
 
   useEffect(() => {
@@ -50,6 +55,19 @@ function Modal({
     };
   }, [isOpen, onClose]);
 
+  useEffect(() => {
+    buttons.forEach((button, idx) => {
+      if (
+        !isValidElement(button) ||
+        (button.type !== PrimaryButton && button.type !== SecondaryButton)
+      ) {
+        throw new Error(
+          `Modal: buttons[${idx}]는 PrimaryButton 또는 SecondaryButton이어야 합니다.`
+        );
+      }
+    });
+  }, [buttons]);
+
   return (
     <dialog
       onClose={onClose}
@@ -73,18 +91,9 @@ function Modal({
         </div>
         {contents}
         <div className={styles.buttonWrapper}>
-          <button
-            className={styles.primaryButton}
-            onClick={onPrimaryButtonClick}
-          >
-            {primaryButtonText}
-          </button>
-          <button
-            className={styles.secondaryButton}
-            onClick={onSecondaryButtonClick}
-          >
-            {secondaryButtonText}
-          </button>
+          {buttons.map((buttonComponent, index) => (
+            <Fragment key={index}>{buttonComponent}</Fragment>
+          ))}
         </div>
       </div>
     </dialog>
