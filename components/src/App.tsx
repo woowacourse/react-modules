@@ -1,12 +1,21 @@
+import { useState } from "react";
 import "./App.css";
-import { Modal } from "@sooyeoniya/components";
+import { Modal } from "./lib";
+// import { Modal } from "@sooyeoniya/components";
 
 function App() {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const closeModal = () => setIsOpen(false);
+  const openModal = () => setIsOpen(true);
+
   return (
     <>
-      <h1>Component Modules</h1>
-      <Modal title="Title" isOpen={true} onClose={() => {}}>
-        Contents
+      <button type="button" onClick={openModal}>
+        테스트 열기 버튼
+      </button>
+      <Modal isOpen={isOpen} onClose={closeModal}>
+        Default Contents
       </Modal>
     </>
   );

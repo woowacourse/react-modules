@@ -1,4 +1,4 @@
-import { MouseEvent, ReactNode } from "react";
+import { MouseEvent, ReactNode, useEffect } from "react";
 import {
   Backdrop,
   CloseButton,
@@ -36,6 +36,15 @@ const Modal = ({
   const stopPropagation = (e: MouseEvent<HTMLDivElement>) => {
     e.stopPropagation();
   };
+
+  useEffect(() => {
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === "Escape") onClose();
+    };
+
+    document.addEventListener("keydown", handleEscape);
+    return () => document.removeEventListener("keydown", handleEscape);
+  }, [onClose]);
 
   return (
     <Backdrop $isOpen={isOpen} $position={position} onClick={onClose}>
