@@ -1,24 +1,14 @@
-// import {
-//   Modal,
-//   ModalOverlay,
-//   ModalContent,
-//   ModalHeader,
-//   ModalTitle,
-//   ModalCloseButton,
-//   ModalBody,
-//   ModalFooter,
-// } from "@kaori-killer/modal-component";
-
-import Modal from "./lib/components/Modal/Modal";
-import ModalOverlay from "./lib/components/ModalOverlay/ModalOverlay";
-import ModalContent from "./lib/components/ModalContent/ModalContent";
-import ModalHeader from "./lib/components/ModalHeader/ModalHeader";
-import ModalTitle from "./lib/components/ModalTitle/ModalTitle";
-import ModalCloseButton from "./lib/components/ModalCloseButton/ModalCloseButton";
-import ModalBody from "./lib/components/ModalBody/ModalBody";
-import ModalFooter from "./lib/components/ModalFooter/ModalFooter";
-
-import useModal from "./lib/hooks/useModal";
+import {
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalTitle,
+  ModalCloseButton,
+  ModalBody,
+  ModalFooter,
+  useModal,
+} from "@kaori-killer/modal-component";
 
 function App() {
   const { isOpen, handleOpen, handleClose } = useModal();
