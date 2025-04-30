@@ -9,7 +9,7 @@ export const validateCardInput = (value: string, validLength: number) => {
   if (value.length < validLength) {
     return {
       isValid: false,
-      errorMessage: `${validLength}보다 작을 수 없습니다.`,
+      errorMessage: `숫자 ${validLength}자리를 입력해주세요.`,
     };
   }
 
