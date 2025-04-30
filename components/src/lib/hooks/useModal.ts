@@ -38,7 +38,7 @@ export const useModal = () => {
     return () => {
       window.removeEventListener('keydown', handleKeyDown);
     };
-  });
+  }, []);
 
   return { isOpen, handleOpenModal, handleCloseModal, handleOutsideClick };
 };
