@@ -44,11 +44,17 @@ export default function useCardNumbers(): ValitationResult {
 
   const validate = (value: string, index: number) => {
     if (value.length > CARD_NUMBER_RULE.MAX_LENGTH) return;
+
     setNumbers((prev) => {
       const newNumbers = [...prev];
       newNumbers[index] = value;
       return newNumbers;
     });
+
+    if (value === "") {
+      updateCardNumber(index, false, "");
+      return;
+    }
 
     if (!/^\d*$/.test(value)) {
       updateCardNumber(index, true, CARD_NUMBER_RULE.NOT_A_NUMBER);

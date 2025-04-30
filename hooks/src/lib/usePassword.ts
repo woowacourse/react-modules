@@ -21,6 +21,11 @@ export default function usePassword(): ValitationResult {
 
     setPassword(value);
 
+    if (value === "") {
+      setError({ isValid: false, errorMessage: "" });
+      return;
+    }
+
     if (!/^\d*$/.test(value)) {
       setError({ isValid: true, errorMessage: PASSWORD_RULE.NOT_A_NUMBER });
       return;

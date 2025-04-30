@@ -59,6 +59,11 @@ export default function useExpiryDate(): ValitationResult {
       if (value.length > EXPIRYDATE_RULE.DATE_MAX_LENGTH) return;
       setDate((prev) => ({ ...prev, month: value }));
 
+      if (value === "") {
+        updateDate(0, false, "");
+        return;
+      }
+
       if (!/^\d*$/.test(value)) {
         updateDate(0, true, EXPIRYDATE_RULE.MONTH_IS_NOT_A_NUMBER);
         return;
@@ -80,6 +85,11 @@ export default function useExpiryDate(): ValitationResult {
     if (dateName === "year") {
       if (value.length > EXPIRYDATE_RULE.DATE_MAX_LENGTH) return;
       setDate((prev) => ({ ...prev, year: value }));
+
+      if (value === "") {
+        updateDate(0, false, "");
+        return;
+      }
 
       if (!/^\d*$/.test(value)) {
         updateDate(1, true, EXPIRYDATE_RULE.YEAR_IS_NOT_A_NUMBER);

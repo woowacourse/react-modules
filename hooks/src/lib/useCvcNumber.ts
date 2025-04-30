@@ -21,6 +21,11 @@ export default function useCvcNumber(): ValitationResult {
 
     setCvc(value);
 
+    if (value === "") {
+      setError({ isValid: true, errorMessage: "" });
+      return;
+    }
+
     if (!/^\d*$/.test(value)) {
       setError({ isValid: true, errorMessage: CVC_RULE.NOT_A_NUMBER });
       return;
