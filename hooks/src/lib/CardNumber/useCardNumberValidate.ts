@@ -49,6 +49,13 @@ const useCardNumbersValidate = (): CardNumberValidateResult => {
       setErrorMessage('4자리만 입력해주세요.');
       return;
     }
+
+    setIsValid({
+      ...isValid,
+      [key]: true
+    });
+
+    setErrorMessage(null);
   };
 
   return { isValid, errorMessage, validateCardNumber };
