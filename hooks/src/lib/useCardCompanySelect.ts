@@ -2,9 +2,9 @@ import { useState } from 'react';
 import { CardCompany } from './types/card';
 
 export function useCardCompanySelect() {
-  const [cardCompany, setCardCompany] = useState<CardCompany>('');
-  const handleSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setCardCompany(e.target.value as CardCompany);
+  const [cardCompany, setCardCompany] = useState<CardCompany | ''>('');
+  const handleSelectChange = (value: CardCompany) => {
+    setCardCompany(value);
   };
 
   return { cardCompany, handleSelectChange };
