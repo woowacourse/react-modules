@@ -86,7 +86,7 @@ export default function useExpiryDate(): ValitationResult {
         return;
       }
       if (value.length < EXPIRYDATE_RULE.DATE_MAX_LENGTH) {
-        updateDate(1, true, EXPIRYDATE_RULE.YEAR_IS_NOT_A_NUMBER);
+        updateDate(1, true, EXPIRYDATE_RULE.INVALID_YEAR_LENGTH_ERROR);
         return;
       }
       if (Number(value) < EXPIRYDATE_RULE.DATE_YEAR_MIN) {
