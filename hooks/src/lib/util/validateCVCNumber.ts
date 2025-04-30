@@ -5,4 +5,5 @@ export default function validateCVCNumber(CVCNumber: string) {
 
   if (CVCNumber.length !== CVC_LENGTH)
     return ERROR_MESSAGE.INVALID_LENGTH(CVC_LENGTH);
+  return "";
 }
