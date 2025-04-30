@@ -50,6 +50,16 @@
   border-radius: 4px;
 }
 
+.secondaryButton {
+  font-weight: 700;
+  font-size: 18px;
+  width: 100%;
+  height: 44px;
+  background-color: #ffffff;
+  color: #8b95a1;
+  border-radius: 4px;
+}
+
 @media (max-width: 600px) {
   .modal {
     width: calc(100vw - 72px);

@@ -24,6 +24,8 @@ function App() {
         showCloseButton={true}
         primaryButtonText="동의하고 저장하기"
         onPrimaryButtonClick={() => alert('클릭됨')}
+        secondaryButtonText="닫기"
+        onSecondaryButtonClick={onClose}
       />
     </>
   );

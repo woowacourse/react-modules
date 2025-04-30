@@ -7,7 +7,9 @@ function Modal({
   onClose,
   contents,
   primaryButtonText,
+  secondaryButtonText,
   onPrimaryButtonClick,
+  onSecondaryButtonClick,
   position = 'center',
   showCloseButton = true,
 }: {
@@ -16,7 +18,9 @@ function Modal({
   onClose: () => void;
   contents: ReactNode;
   primaryButtonText: string;
+  secondaryButtonText: string;
   onPrimaryButtonClick: () => void;
+  onSecondaryButtonClick: () => void;
   showCloseButton?: boolean;
   position?: 'center' | 'bottom';
 }) {
@@ -68,7 +72,12 @@ function Modal({
       <button className={styles.primaryButton} onClick={onPrimaryButtonClick}>
         {primaryButtonText}
       </button>
-      <button onClick={onClose}>닫기</button>
+      <button
+        className={styles.secondaryButton}
+        onClick={onSecondaryButtonClick}
+      >
+        {secondaryButtonText}
+      </button>
     </dialog>
   );
 }
