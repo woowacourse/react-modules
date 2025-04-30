@@ -1,7 +1,7 @@
 {
-  "name": "hooks",
+  "name": "@sooyeoniya/hooks",
   "version": "0.0.1",
-  "description": "npm modules",
+  "description": "Card form validation hooks module",
   "type": "module",
   "types": "dist/index.d.ts",
   "main": "dist/index.js",
