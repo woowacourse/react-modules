@@ -9,18 +9,25 @@ export default defineConfig({
       entry: path.resolve(__dirname, "src/lib/index.ts"),
       name: "index",
       fileName: "index",
+      formats: ["es", "cjs"],
     },
     rollupOptions: {
-      external: ["react"],
+      external: ["react", "react-dom"],
       output: {
         globals: {
           react: "React",
+          "react-dom": "ReactDOM",
         },
+        exports: "named",
       },
     },
-    commonjsOptions: {
-      esmExternals: ["react"],
-    },
   },
-  plugins: [react(), dts()],
+
+  plugins: [
+    react(),
+    dts({
+      tsconfigPath: "./tsconfig.build.json",
+      insertTypesEntry: true,
+    }),
+  ],
 });

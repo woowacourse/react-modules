@@ -1,6 +1,6 @@
 {
-  "name": "hooks",
-  "version": "0.0.1",
+  "name": "hooks-spoy-test",
+  "version": "0.0.3",
   "description": "npm modules",
   "type": "module",
   "types": "dist/index.d.ts",
@@ -16,9 +16,9 @@
     "preview": "vite preview",
     "test": "jest"
   },
-  "dependencies": {
-    "react": "^19.1.0",
-    "react-dom": "^19.1.0"
+  "peerDependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^6.6.3",
