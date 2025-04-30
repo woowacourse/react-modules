@@ -1,6 +1,6 @@
 import { useState } from "react";
 import "./App.css";
-import useCardNumberValidation from "./lib/hooks/useCardNumberValidation";
+import { useCardNumberValidation } from "@sooyeoniya/hooks";
 
 function App() {
   const [input, setInput] = useState({
