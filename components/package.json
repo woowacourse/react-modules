@@ -1,14 +1,18 @@
 {
   "name": "bunju-summit-modal",
-  "version": "0.0.4",
+  "version": "0.0.7",
   "description": "A modal component for Bunju Summit",
   "type": "module",
   "types": "dist/index.d.ts",
   "main": "dist/index.js",
-  "module": "dist/index.js",
   "files": [
     "dist"
   ],
+  ".": {
+    "types": "./dist/index.d.ts",
+    "import": "./dist/index.js",
+    "require": "./dist/index.cjs"
+  },
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
@@ -21,8 +25,7 @@
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.0",
     "react": "^19.1.0",
-    "react-dom": "^19.1.0",
-    "tsup": "^8.4.0"
+    "react-dom": "^19.1.0"
   },
   "devDependencies": {
     "@chromatic-com/storybook": "^3.2.6",
@@ -38,7 +41,6 @@
     "@types/node": "^22.14.1",
     "@types/react": "^19.1.1",
     "@types/react-dom": "^19.1.2",
-    "@typescript-eslint/eslint-plugin": "^8.29.1",
     "@typescript-eslint/parser": "^8.29.1",
     "@vitejs/plugin-react-swc": "^3.8.1",
     "eslint": "^9.24.0",

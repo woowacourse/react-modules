@@ -1,7 +1,6 @@
 {
   "compilerOptions": {
     "baseUrl": "./",
-    "declaration": true,
     "emitDeclarationOnly": true,
     "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo",
     "target": "ES2020",
@@ -9,9 +8,9 @@
     "lib": ["ES2020", "DOM", "DOM.Iterable"],
     "module": "ESNext",
     "skipLibCheck": true,
-    "rootDir": "./src",
-    "outDir": "./dist",
+    "declaration": true,
     "declarationDir": "./dist",
+    "outDir": "./dist",
     "esModuleInterop": true,
 
     /* Bundler mode */
