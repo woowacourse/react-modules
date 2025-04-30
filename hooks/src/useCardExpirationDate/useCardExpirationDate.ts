@@ -22,10 +22,10 @@ type CardExpirationDateKeys = {
   target: 'MONTH' | 'YEAR';
 };
 
-export default function useCardExpirationDate() {
-  const [expriationDate, setExpriationDate] = useState(
-    INITIAL_CARD_EXPIRATION_DATE
-  );
+export default function useCardExpirationDate(
+  userCardExpirationDate = INITIAL_CARD_EXPIRATION_DATE
+) {
+  const [expriationDate, setExpriationDate] = useState(userCardExpirationDate);
   const { error, changeError, clearError } = useError(INITIAL_IS_ERROR);
 
   function handleCardExpirationDateChange({ target }: CardExpirationDateKeys) {
@@ -51,7 +51,8 @@ export default function useCardExpirationDate() {
 
   return {
     expriationDate,
-    error,
+    isError: error.isError,
+    errorMessage: error.errorMessage,
     handleCardExpirationDateChange,
   };
 }

@@ -35,8 +35,8 @@ type CardNumbersKeys = {
   target: 'FIRST' | 'SECOND' | 'THIRD' | 'FOURTH';
 };
 
-export default function useCardNumbers() {
-  const [cardNumbers, setCardNumbers] = useState(INITIAL_CARD_NUMBER);
+export default function useCardNumbers(userCardNumbers = INITIAL_CARD_NUMBER) {
+  const [cardNumbers, setCardNumbers] = useState<CardNumbers>(userCardNumbers);
   const { error, changeError, clearError } = useError(INITIAL_IS_ERROR);
 
   function handleCardNumbersChange({ target }: CardNumbersKeys) {
@@ -60,7 +60,8 @@ export default function useCardNumbers() {
 
   return {
     cardNumbers,
-    error,
+    isError: error.isError,
+    errorMessage: error.errorMessage,
     handleCardNumbersChange,
   };
 }
