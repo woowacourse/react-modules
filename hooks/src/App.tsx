@@ -2,22 +2,27 @@ import "./App.css";
 import { useCardNumbers } from "happyjurung-hooks";
 import { useExpiryDate } from "happyjurung-hooks";
 import { usePassword } from "happyjurung-hooks";
+import { useCvcNumber } from "happyjurung-hooks";
 
 function App() {
-  const {
-    password,
-    error: passwordError,
-    validate: passwordValidate,
-  } = usePassword();
-  const { date, error: dateError, validate: dateValidate } = useExpiryDate();
   const {
     numbers,
     error: cardNumbersError,
     validate: cardNumbersValidate,
   } = useCardNumbers();
+  const { date, error: dateError, validate: dateValidate } = useExpiryDate();
+  const { cvc, error: cvcError, validate: cvcValidate } = useCvcNumber();
+  const {
+    password,
+    error: passwordError,
+    validate: passwordValidate,
+  } = usePassword();
 
-  const handlePassword = (e: React.ChangeEvent<HTMLInputElement>) => {
-    passwordValidate(e.target.value);
+  const handleCardNumber = (
+    e: React.ChangeEvent<HTMLInputElement>,
+    index: number
+  ) => {
+    cardNumbersValidate(e.target.value, index);
   };
 
   const handleExpiryDate = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -28,20 +33,33 @@ function App() {
     }
   };
 
-  const handleCardNumber = (
-    e: React.ChangeEvent<HTMLInputElement>,
-    index: number
-  ) => {
-    cardNumbersValidate(e.target.value, index);
+  const handlePassword = (e: React.ChangeEvent<HTMLInputElement>) => {
+    passwordValidate(e.target.value);
   };
+
+  const handleCvcNumber = (e: React.ChangeEvent<HTMLInputElement>) => {
+    cvcValidate(e.target.value);
+  };
+
   return (
     <>
       <div>
-        <h1>Password</h1>
-        <input type="text" value={password} onChange={handlePassword} />
-        <p>{passwordError.errorMessage}</p>
+        <h1>CardNumbers</h1>
+        {numbers.map((number, index) => (
+          <input
+            key={index}
+            type="text"
+            value={number}
+            onChange={(e) => handleCardNumber(e, index)}
+          />
+        ))}
+        <p>
+          {cardNumbersError.find((error) => error.errorMessage !== "")
+            ?.errorMessage ?? ""}
+        </p>
       </div>
       <div>
+        <h1>Date</h1>
         <input
           type="text"
           value={date.month}
@@ -58,19 +76,14 @@ function App() {
         <p>{dateError[1].errorMessage}</p>
       </div>
       <div>
-        <h1>CardNumbers</h1>
-        {numbers.map((number, index) => (
-          <input
-            key={index}
-            type="text"
-            value={number}
-            onChange={(e) => handleCardNumber(e, index)}
-          />
-        ))}
-        <p>
-          {cardNumbersError.find((error) => error.errorMessage !== "")
-            ?.errorMessage ?? ""}
-        </p>
+        <h1>CVC</h1>
+        <input type="text" value={cvc} onChange={handleCvcNumber} />
+        <p>{cvcError.errorMessage}</p>
+      </div>
+      <div>
+        <h1>Password</h1>
+        <input type="text" value={password} onChange={handlePassword} />
+        <p>{passwordError.errorMessage}</p>
       </div>
     </>
   );
