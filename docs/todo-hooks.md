@@ -18,3 +18,10 @@ const ERROR_MESSAGE = {
 - [x] useExpirationDateValidation
 - [x] useCvcValidation
 - [x] usePasswordValidation
+
+## 테스트 RTL
+
+- [x] useCardNumberValidation
+- [ ] useExpirationDateValidation
+- [ ] useCvcValidation
+- [ ] usePasswordValidation
