@@ -1,7 +1,7 @@
 import styles from "./Modal.module.css";
 import closeIcon from "../asset/close.png";
 import { useEffect } from "react";
-interface ModalProps {
+export interface ModalProps {
   position: "bottom" | "center";
   title: string;
   children: React.ReactNode;
