@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 interface ModalProps {
   isOpen: boolean;
-  children: React.ReactElement;
+  children: React.ReactNode;
   position: 'top' | 'bottom' | 'center';
   width?: number;
 }
