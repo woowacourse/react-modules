@@ -1,5 +1,8 @@
 import { useState } from 'react';
 
+import validateNumber from '../utils/validateNumber';
+import validateMaxLength from '../utils/validateMaxLength';
+
 type CardNumbersValidate = {
   first: boolean;
   second: boolean;
@@ -27,11 +30,7 @@ const useCardNumbersValidate = (): CardNumberValidateResult => {
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   const validateCardNumber = (cardNumber: string, key: string) => {
-    const isAllNumber = cardNumber
-      .split('')
-      .every((char) => !isNaN(Number(char)));
-
-    if (!isAllNumber) {
+    if (!validateNumber(cardNumber)) {
       setIsValid({
         ...isValid,
         [key]: false
@@ -41,7 +40,7 @@ const useCardNumbersValidate = (): CardNumberValidateResult => {
       return;
     }
 
-    if (cardNumber.length > 4) {
+    if (validateMaxLength(cardNumber, 4)) {
       setIsValid({
         ...isValid,
         [key]: false
