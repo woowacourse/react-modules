@@ -9,14 +9,15 @@
 //   ModalFooter,
 // } from "@kaori-killer/modal-component";
 
-import Modal from "./lib/Modal/Modal";
-import ModalOverlay from "./lib/ModalOverlay/ModalOverlay";
-import ModalContent from "./lib/ModalContent/ModalContent";
-import ModalHeader from "./lib/ModalHeader/ModalHeader";
-import ModalTitle from "./lib/ModalTitle/ModalTitle";
-import ModalCloseButton from "./lib/ModalCloseButton/ModalCloseButton";
-import ModalBody from "./lib/ModalBody/ModalBody";
-import ModalFooter from "./lib/ModalFooter/ModalFooter";
+import Modal from "./lib/components/Modal/Modal";
+import ModalOverlay from "./lib/components/ModalOverlay/ModalOverlay";
+import ModalContent from "./lib/components/ModalContent/ModalContent";
+import ModalHeader from "./lib/components/ModalHeader/ModalHeader";
+import ModalTitle from "./lib/components/ModalTitle/ModalTitle";
+import ModalCloseButton from "./lib/components/ModalCloseButton/ModalCloseButton";
+import ModalBody from "./lib/components/ModalBody/ModalBody";
+import ModalFooter from "./lib/components/ModalFooter/ModalFooter";
+
 import useModal from "./lib/hooks/useModal";
 
 function App() {
