@@ -33,9 +33,8 @@ const useCardNumber = () => {
         setErrorMessage("카드 번호는 4자리로 입력해주세요.");
       }
     });
-
-    return { handleCardNumber, isValid, errorMessage };
   };
+  return { handleCardNumber, isValid, errorMessage };
 };
 
 const isNumber = (value: string) => {
