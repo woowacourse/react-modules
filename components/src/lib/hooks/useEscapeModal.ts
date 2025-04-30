@@ -20,6 +20,7 @@ function useEscapeModal(closeModal: () => void) {
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [closeModal]);
+
   return { handleClickOverlay };
 }
 
