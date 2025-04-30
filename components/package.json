@@ -16,7 +16,8 @@
     "preview": "vite preview",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "deploy": "vite build --base=/react-modules/ --minify=false && npx gh-pages -d dist"
+    "deploy": "vite build --base=/react-modules/ --minify=false && npx gh-pages -d dist",
+    "chromatic": "npx chromatic --project-token=chpt_3248c2f54315348"
   },
   "dependencies": {
     "lume_modal": "^0.0.2",
@@ -40,6 +41,7 @@
     "@typescript-eslint/eslint-plugin": "^8.29.1",
     "@typescript-eslint/parser": "^8.29.1",
     "@vitejs/plugin-react-swc": "^3.8.1",
+    "chromatic": "^11.28.2",
     "eslint": "^9.24.0",
     "eslint-plugin-react-hooks": "^5.2.0",
     "eslint-plugin-react-refresh": "^0.4.19",
