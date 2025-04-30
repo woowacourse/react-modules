@@ -1,6 +1,5 @@
 import { useState } from "react";
 import "./App.css";
-// import { Modal } from "./lib";
 import { Modal } from "@sooyeoniya/components";
 
 function App() {
