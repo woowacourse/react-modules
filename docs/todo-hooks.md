@@ -15,6 +15,6 @@ const ERROR_MESSAGE = {
 ```
 
 - [x] useCardNumberValidation
-- [ ] useExpirationDateValidation
+- [x] useExpirationDateValidation
 - [x] useCvcValidation
 - [x] usePasswordValidation
