@@ -8,7 +8,7 @@ export default defineConfig({
     lib: {
       entry: path.resolve(__dirname, "src/lib/index.ts"),
       name: "index",
-      fileName: (format) => `index.${format}`,
+      fileName: "index",
     },
     rollupOptions: {
       external: ["react"],
@@ -16,23 +16,17 @@ export default defineConfig({
         globals: {
           react: "React",
         },
-        assetFileNames: (assetInfo) => {
-          if (assetInfo.name === "style.css") return "index.css";
-          return assetInfo.name;
-        },
       },
     },
     commonjsOptions: {
       esmExternals: ["react"],
     },
-    cssCodeSplit: false, // CSS를 하나의 파일로 번들링
   },
-  plugins: [react(), dts()],
-  resolve: {
-    alias: {
-      "@": path.resolve(__dirname, "./src"),
-      "@assets": path.resolve(__dirname, "./src/assets"),
-      "@components": path.resolve(__dirname, "./src/components"),
-    },
-  },
+  plugins: [
+    react(),
+    dts({
+      include: ["src/lib"],
+      tsconfigPath: "./tsconfig.app.json",
+    }),
+  ],
 });
