@@ -1,1 +1,1 @@
-export const INITIAL_EXPIRE_DATE_STATE = { value: "" };
+export const INITIAL_EXPIRY_DATE_STATE = { value: "" };

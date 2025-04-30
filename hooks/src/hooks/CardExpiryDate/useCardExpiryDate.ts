@@ -1,11 +1,11 @@
 import { useState } from "react";
-import { INITIAL_EXPIRE_DATE_STATE } from "./constants";
+import { INITIAL_EXPIRY_DATE_STATE } from "./constants";
 import { ExpireDateState } from "./types";
 import { validateCardExpiryDate } from "./utils";
 
-export const useCardExpiryDate = () => {
+const useCardExpiryDate = () => {
   const [expiryDate, setExpiryDate] = useState<ExpireDateState>(
-    INITIAL_EXPIRE_DATE_STATE
+    INITIAL_EXPIRY_DATE_STATE
   );
 
   const handleExpiryChange = (value: string) => {
@@ -22,3 +22,5 @@ export const useCardExpiryDate = () => {
     errorState: validateCardExpiryDate(expiryDate.value),
   };
 };
+
+export default useCardExpiryDate;

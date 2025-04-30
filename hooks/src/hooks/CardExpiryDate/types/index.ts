@@ -1,3 +1,3 @@
-import { INITIAL_EXPIRE_DATE_STATE } from "../constants";
+import { INITIAL_EXPIRY_DATE_STATE } from "../constants";
 
-export type ExpireDateState = typeof INITIAL_EXPIRE_DATE_STATE;
+export type ExpireDateState = typeof INITIAL_EXPIRY_DATE_STATE;
