@@ -1,17 +1,15 @@
 import { renderHook } from "@testing-library/react";
-import { ERROR_MESSAGE } from "../lib/constants/error";
+import {
+  ERROR_MESSAGE,
+  defaultValidationValue,
+} from "../lib/constants/validation";
 import useCardNumberValidation from "../lib/hooks/useCardNumberValidation";
 
-const defaultErrorState = {
-  isError: false,
-  errorMessage: null,
-};
-
 const defaultCardNumberValidationValue = {
-  first: defaultErrorState,
-  second: defaultErrorState,
-  third: defaultErrorState,
-  fourth: defaultErrorState,
+  first: defaultValidationValue,
+  second: defaultValidationValue,
+  third: defaultValidationValue,
+  fourth: defaultValidationValue,
 };
 
 describe("useCardNumberValidation", () => {

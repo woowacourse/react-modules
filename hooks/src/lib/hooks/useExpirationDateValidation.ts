@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { ValidationType } from "../../types/validation";
-import { ERROR_MESSAGE } from "../constants/error";
+import { ERROR_MESSAGE, defaultValidationValue } from "../constants/validation";
 import { isEmpty, isLengthEqual, isPositiveInteger } from "../utils/validation";
 
 interface ExpirationDateValidationType {
@@ -13,14 +13,9 @@ interface ExpirationDateArgs {
   year?: string;
 }
 
-const defaultErrorState = {
-  isError: false,
-  errorMessage: null,
-};
-
 const defaultExpirationDateValidationValue = {
-  month: defaultErrorState,
-  year: defaultErrorState,
+  month: defaultValidationValue,
+  year: defaultValidationValue,
 };
 
 const MAX_LENGTH = 2;

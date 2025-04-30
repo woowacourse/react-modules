@@ -1,15 +1,13 @@
 import { renderHook } from "@testing-library/react";
-import { ERROR_MESSAGE } from "../lib/constants/error";
+import {
+  ERROR_MESSAGE,
+  defaultValidationValue,
+} from "../lib/constants/validation";
 import useExpirationDateValidation from "../lib/hooks/useExpirationDateValidation";
 
-const defaultErrorState = {
-  isError: false,
-  errorMessage: null,
-};
-
 const defaultExpirationDateValidationValue = {
-  month: defaultErrorState,
-  year: defaultErrorState,
+  month: defaultValidationValue,
+  year: defaultValidationValue,
 };
 
 describe("useExpirationDateValidation", () => {

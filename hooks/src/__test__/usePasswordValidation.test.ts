@@ -1,5 +1,8 @@
 import { renderHook } from "@testing-library/react";
-import { ERROR_MESSAGE } from "../lib/constants/error";
+import {
+  ERROR_MESSAGE,
+  defaultValidationValue,
+} from "../lib/constants/validation";
 import usePasswordValidation from "../lib/hooks/usePasswordValidation";
 
 describe("usePasswordValidation", () => {
@@ -11,10 +14,7 @@ describe("usePasswordValidation", () => {
     const { result } = renderHook(() => usePasswordValidation(initialValue));
 
     // then
-    expect(result.current).toEqual({
-      isError: false,
-      errorMessage: null,
-    });
+    expect(result.current).toEqual(defaultValidationValue);
   });
 
   it("비밀번호가 숫자가 아닌 경우 에러가 발생한다.", () => {

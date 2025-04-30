@@ -1,5 +1,8 @@
 import { renderHook } from "@testing-library/react";
-import { ERROR_MESSAGE } from "../lib/constants/error";
+import {
+  ERROR_MESSAGE,
+  defaultValidationValue,
+} from "../lib/constants/validation";
 import useCvcValidation from "../lib/hooks/useCvcValidation";
 
 describe("useCvcValidation", () => {
@@ -11,10 +14,7 @@ describe("useCvcValidation", () => {
     const { result } = renderHook(() => useCvcValidation(initialValue));
 
     // then
-    expect(result.current).toEqual({
-      isError: false,
-      errorMessage: null,
-    });
+    expect(result.current).toEqual(defaultValidationValue);
   });
 
   it("CVC번호가 숫자가 아닌 경우 에러가 발생한다.", () => {

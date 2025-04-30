@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { ValidationType } from "../../types/validation";
-import { ERROR_MESSAGE } from "../constants/error";
+import { ERROR_MESSAGE, defaultValidationValue } from "../constants/validation";
 import { isEmpty, isLengthEqual, isPositiveInteger } from "../utils/validation";
 
 interface CardNumberValidationType {
@@ -17,16 +17,11 @@ interface CardNumberArgs {
   fourth?: string;
 }
 
-const defaultErrorState = {
-  isError: false,
-  errorMessage: null,
-};
-
 const defaultCardNumberValidationValue = {
-  first: defaultErrorState,
-  second: defaultErrorState,
-  third: defaultErrorState,
-  fourth: defaultErrorState,
+  first: defaultValidationValue,
+  second: defaultValidationValue,
+  third: defaultValidationValue,
+  fourth: defaultValidationValue,
 };
 
 const MAX_LENGTH = 4;

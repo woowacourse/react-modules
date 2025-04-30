@@ -1,18 +1,13 @@
 import { useEffect, useState } from "react";
 import { ValidationType } from "../../types/validation";
-import { ERROR_MESSAGE } from "../constants/error";
+import { ERROR_MESSAGE, defaultValidationValue } from "../constants/validation";
 import { isEmpty, isLengthEqual, isPositiveInteger } from "../utils/validation";
 
 const MAX_LENGTH = 3;
 
-const defaultErrorState = {
-  isError: false,
-  errorMessage: null,
-};
-
 const useCvcValidation = (value: string): ValidationType => {
   const [cvcValidationResult, setCvcValidationResult] =
-    useState<ValidationType>(defaultErrorState);
+    useState<ValidationType>(defaultValidationValue);
 
   useEffect(() => {
     if (isEmpty(value)) return;
