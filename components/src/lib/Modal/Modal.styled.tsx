@@ -25,6 +25,8 @@ export const StyledModal = styled.div<ModalProps>`
   min-height: 216px;
   background-color: #fff;
   border: 1px solid red;
-  ${({ position = "center" }) => modalPositionVariants[position]}
-  ${({ isOpen }) => (isOpen ? "display: block" : "display: none")}
+  flex-direction: column;
+  justify-content: space-between;
+  ${({ position = "center" }) => modalPositionVariants[position]};
+  ${({ isOpen }) => (isOpen ? "display: flex" : "display: none")};
 `;
