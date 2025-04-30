@@ -3,9 +3,9 @@ import { ERROR_MESSAGE } from "../constants/error";
 import isLengthEqual from "../utils/isLengthEqual";
 import isPositiveInteger from "../utils/isPositiveInteger";
 
-const MAX_LENGTH = 2;
+const MAX_LENGTH = 3;
 
-const usePasswordValidation = (value: string): ValidationType => {
+const useCvcValidation = (value: string): ValidationType => {
   if (!isPositiveInteger(value)) {
     return {
       isError: true,
@@ -26,4 +26,4 @@ const usePasswordValidation = (value: string): ValidationType => {
   };
 };
 
-export default usePasswordValidation;
+export default useCvcValidation;
