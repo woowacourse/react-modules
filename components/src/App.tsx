@@ -1,4 +1,4 @@
-import { Modal, useModal } from '@sebin0580/modal';
+import { Modal, useModal } from '@sinjuk1/modal';
 
 function App() {
   const { isOpen, handleOpenModal, handleCloseModal, handleOutsideClick } = useModal();
