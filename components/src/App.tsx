@@ -1,7 +1,6 @@
 import "./App.css";
 
-import { Modal, ModalHeader } from "@kaori-killer/modal-component";
-import ModalTitle from "./lib/ModalTitle/ModalTitle";
+import { Modal, ModalHeader, ModalTitle } from "@kaori-killer/modal-component";
 
 function App() {
   return (
