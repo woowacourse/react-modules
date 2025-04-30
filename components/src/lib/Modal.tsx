@@ -1,5 +1,4 @@
 import styled from "@emotion/styled";
-import Close from "/Close.svg";
 import { ReactNode, useEffect } from "react";
 import Button from "./common/Button";
 
@@ -47,7 +46,7 @@ function Modal({
         <TitleSection>
           <TitleText>{title}</TitleText>
           {hasTopCloseButton ? (
-            <CloseButton src={Close} alt="닫기 버튼" onClick={onClose} />
+            <CloseButton src={"Close.svg"} alt="닫기 버튼" onClick={onClose} />
           ) : null}
         </TitleSection>
         <MainSection>
