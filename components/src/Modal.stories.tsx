@@ -1,14 +1,15 @@
-import { useState } from 'react';
-import type { Meta, StoryObj } from '@storybook/react';
-import Modal from './Modal';
+import { useState } from "react";
+import type { Meta, StoryObj } from "@storybook/react";
+import { Modal } from "woowa-modal-payments";
+import React from "react";
 
 const meta: Meta<typeof Modal> = {
-  title: 'Components/Modal',
+  title: "Components/Modal",
   component: Modal,
   argTypes: {
     position: {
-      control: { type: 'radio' },
-      options: ['center', 'bottom'],
+      control: { type: "radio" },
+      options: ["center", "bottom"],
     },
   },
 };
@@ -28,13 +29,13 @@ export const Default: Story = {
       <>
         <button onClick={() => setIsOpen(true)}>Open Modal</button>
         <Modal {...args} isOpen={isOpen} handleCloseModal={handleCloseModal}>
-          <div style={{ padding: '20px' }}>This is the modal content.</div>
+          <div style={{ padding: "20px" }}>This is the modal content.</div>
         </Modal>
       </>
     );
   },
   args: {
-    title: 'Storybook Modal',
-    position: 'center',
+    title: "Storybook Modal",
+    position: "center",
   },
 };
