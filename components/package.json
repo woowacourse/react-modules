@@ -1,11 +1,11 @@
 {
   "name": "pesu-modal",
-  "version": "0.0.2",
+  "version": "0.0.4",
   "description": "npm modules",
   "type": "module",
-  "types": "dist/index.d.ts",
-  "main": "dist/index.js",
-  "module": "dist/index.js",
+  "types": "dist/components/index.d.ts",
+  "main": "dist/components/index.js",
+  "module": "dist/components/index.js",
   "files": [
     "dist"
   ],
@@ -21,7 +21,7 @@
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.0",
     "@storybook/addon-viewport": "^8.6.12",
-    "pesu-modal": "^0.0.2",
+    "pesu-modal": "^0.0.4",
     "react": "^19.1.0",
     "react-dom": "^19.1.0"
   },
