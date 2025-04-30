@@ -4,7 +4,13 @@ import isInteger from '../../validate/isInteger';
 import isUnderMaxLength from '../../validate/isUnderMaxLength';
 
 const KEY = 'cardPassword';
+
 const CARD_PASSWORD_MAX_LENGTH = 2;
+
+const CARD_PASSWORD_ERROR_MESSAGE = {
+  NOT_NUMBERIC: '숫자만 입력 가능합니다.',
+  INVALID_LENGTH: `카드 비밀번호는 ${CARD_PASSWORD_MAX_LENGTH}자리 숫자여야 합니다.`,
+};
 
 export default function useCardPassword(userCardPassword = '') {
   const [cardPassword, setCardPassword] = useState(userCardPassword);
@@ -39,14 +45,14 @@ function getCardPasswordError(input: string) {
   if (!isInteger(input)) {
     return {
       inputError: true,
-      inputErrorMessage: '숫자만 입력 가능합니다.',
+      inputErrorMessage: CARD_PASSWORD_ERROR_MESSAGE.NOT_NUMBERIC,
     };
   }
 
   if (!isUnderMaxLength(input, CARD_PASSWORD_MAX_LENGTH)) {
     return {
       inputError: true,
-      inputErrorMessage: `카드 비밀번호는 ${CARD_PASSWORD_MAX_LENGTH}자리 숫자여야 합니다.`,
+      inputErrorMessage: CARD_PASSWORD_ERROR_MESSAGE.INVALID_LENGTH,
     };
   }
 

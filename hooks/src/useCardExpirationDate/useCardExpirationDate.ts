@@ -22,6 +22,13 @@ type CardExpirationDateKeys = {
   target: 'MONTH' | 'YEAR';
 };
 
+const CARD_EXPIRATION_DATE_ERROR_MESSAGE = {
+  INVALID_LENGTH: '유효기간은 2자리 숫자여야 합니다.',
+  NOT_NUMBERIC: '유효기간은 숫자만 입력 가능합니다.',
+  INVALID_MONTH_RANGE: '1~12 사이의 숫자를 입력해주세요.',
+  INVALID_DATE: '유효기간은 현재 날짜보다 이후여야 합니다.',
+} as const;
+
 export default function useCardExpirationDate(
   userCardExpirationDate = INITIAL_CARD_EXPIRATION_DATE
 ) {
@@ -68,13 +75,13 @@ function getCardExpirationDateError(
   if (!isUnderMaxLength(input, 2))
     return {
       inputError: true,
-      inputErrorMessage: '유효기간은 2자리 숫자여야 합니다.',
+      inputErrorMessage: CARD_EXPIRATION_DATE_ERROR_MESSAGE.INVALID_LENGTH,
     };
 
   if (!isInteger(input))
     return {
       inputError: true,
-      inputErrorMessage: '유효기간은 숫자만 입력 가능합니다.',
+      inputErrorMessage: CARD_EXPIRATION_DATE_ERROR_MESSAGE.NOT_NUMBERIC,
     };
 
   if (input.length < 2) return { inputError: false, inputErrorMessage: '' };
@@ -82,13 +89,13 @@ function getCardExpirationDateError(
   if (target === 'MONTH' && isValidMonth(Number(input)))
     return {
       inputError: true,
-      inputErrorMessage: '유효기간은 1~12 사이의 숫자여야 합니다.',
+      inputErrorMessage: CARD_EXPIRATION_DATE_ERROR_MESSAGE.INVALID_MONTH_RANGE,
     };
 
   if (isValidDate(target, Number(input), CardExpirationDate))
     return {
       inputError: true,
-      inputErrorMessage: '유효기간은 현재 날짜보다 이후여야 합니다.',
+      inputErrorMessage: CARD_EXPIRATION_DATE_ERROR_MESSAGE.INVALID_DATE,
     };
 
   return { inputError: false, inputErrorMessage: '' };
