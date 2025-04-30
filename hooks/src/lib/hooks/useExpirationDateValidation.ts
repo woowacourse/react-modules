@@ -25,7 +25,7 @@ const defaultExpirationDateValidationValue = {
   year: defaultErrorState,
 };
 
-const MAX_LENGTH = 4;
+const MAX_LENGTH = 2;
 const currentYear = new Date().getFullYear() % 100;
 
 const useExpirationDateValidation = (
@@ -82,7 +82,7 @@ const useExpirationDateValidation = (
             ...prev,
             [key]: {
               isError: true,
-              errorMessage: `${ERROR_MESSAGE.INVALID_MONTH}(${currentYear}년 이상)`,
+              errorMessage: `${ERROR_MESSAGE.INVALID_YEAR}(${currentYear}년 이상)`,
             },
           }));
         }

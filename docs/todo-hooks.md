@@ -22,6 +22,6 @@ const ERROR_MESSAGE = {
 ## 테스트 RTL
 
 - [x] useCardNumberValidation
-- [ ] useExpirationDateValidation
+- [x] useExpirationDateValidation
 - [x] useCvcValidation
 - [x] usePasswordValidation
