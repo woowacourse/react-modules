@@ -7,9 +7,23 @@ const ERROR_MESSAGE = {
 	INPUT_LENGTH_LIMIT: `${CARDNUMBER_VALID_LENGTH}자리를 입력해주세요.`,
 };
 
+interface CardNumberValid {
+	first: boolean;
+	second: boolean;
+	third: boolean;
+	fourth: boolean;
+}
+
+interface CardNumberErrorMessage {
+	first: string;
+	second: string;
+	third: string;
+	fourth: string;
+}
+
 const useCardNumber = () => {
-	const [isValid, setIsValid] = useState<boolean>(true);
-	const [errorMessage, setErrorMessage] = useState<string>("");
+	const [isValid, setIsValid] = useState<CardNumberValid>({ first: true, second: true, third: true, fourth: true });
+	const [errorMessage, setErrorMessage] = useState<CardNumberErrorMessage>({ first: "", second: "", third: "", fourth: "" });
 
 	const checkNumber = (value: string) => {
 		if (!/^\d+$/.test(value)) {
@@ -25,19 +39,20 @@ const useCardNumber = () => {
 		return true;
 	};
 
-	const validate = (value: string) => {
+	const validate = (label: string, value: string) => {
 		const isNumber = checkNumber(value);
 		const isValidLength = checkLength(value);
 
 		if (!isNumber) {
-			setErrorMessage(ERROR_MESSAGE.INVALID_NUMBER);
-			setIsValid(false);
+			setErrorMessage({ ...errorMessage, [label]: ERROR_MESSAGE.INVALID_NUMBER });
+			setIsValid({ ...isValid, [label]: false });
+
 			return;
 		}
 
 		if (!isValidLength) {
-			setErrorMessage(ERROR_MESSAGE.INPUT_LENGTH_LIMIT);
-			setIsValid(false);
+			setErrorMessage({ ...errorMessage, [label]: ERROR_MESSAGE.INPUT_LENGTH_LIMIT });
+			setIsValid({ ...isValid, [label]: false });
 			return;
 		}
 	};
