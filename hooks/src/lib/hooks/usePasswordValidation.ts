@@ -3,6 +3,7 @@ import { ValidationType } from "../../types/validation";
 import { ERROR_MESSAGE } from "../constants/error";
 import isLengthEqual from "../utils/isLengthEqual";
 import isPositiveInteger from "../utils/isPositiveInteger";
+import isEmpty from "../utils/isEmpty";
 
 const MAX_LENGTH = 2;
 
@@ -16,6 +17,8 @@ const usePasswordValidation = (value: string): ValidationType => {
     useState<ValidationType>(defaultErrorState);
 
   useEffect(() => {
+    if (isEmpty(value)) return;
+
     if (!isPositiveInteger(value)) {
       setPasswordValidationResult({
         isError: true,

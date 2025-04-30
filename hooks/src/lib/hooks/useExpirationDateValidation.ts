@@ -3,6 +3,7 @@ import { ValidationType } from "../../types/validation";
 import { ERROR_MESSAGE } from "../constants/error";
 import isPositiveInteger from "../utils/isPositiveInteger";
 import isLengthEqual from "../utils/isLengthEqual";
+import isEmpty from "../utils/isEmpty";
 
 interface ExpirationDateValidationType {
   month: ValidationType;
@@ -10,8 +11,8 @@ interface ExpirationDateValidationType {
 }
 
 interface ExpirationDateArgs {
-  month: string;
-  year: string;
+  month?: string;
+  year?: string;
 }
 
 const defaultErrorState = {
@@ -28,7 +29,7 @@ const MAX_LENGTH = 4;
 const currentYear = new Date().getFullYear() % 100;
 
 const useExpirationDateValidation = (
-  args: ExpirationDateArgs
+  args: ExpirationDateArgs = {}
 ): ExpirationDateValidationType => {
   const [expirationDateValidationResult, setExpirationDateValidationResult] =
     useState<ExpirationDateValidationType>(
@@ -37,6 +38,8 @@ const useExpirationDateValidation = (
 
   useEffect(() => {
     Object.entries(args).forEach(([key, value]) => {
+      if (!value || isEmpty(value)) return;
+
       if (!isPositiveInteger(value)) {
         setExpirationDateValidationResult((prev) => ({
           ...prev,

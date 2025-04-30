@@ -3,6 +3,7 @@ import { ValidationType } from "../../types/validation";
 import { ERROR_MESSAGE } from "../constants/error";
 import isPositiveInteger from "../utils/isPositiveInteger";
 import isLengthEqual from "../utils/isLengthEqual";
+import isEmpty from "../utils/isEmpty";
 
 interface CardNumberValidationType {
   first: ValidationType;
@@ -12,10 +13,10 @@ interface CardNumberValidationType {
 }
 
 interface CardNumberArgs {
-  first: string;
-  second: string;
-  third: string;
-  fourth: string;
+  first?: string;
+  second?: string;
+  third?: string;
+  fourth?: string;
 }
 
 const defaultErrorState = {
@@ -33,13 +34,15 @@ const defaultCardNumberValidationValue = {
 const MAX_LENGTH = 4;
 
 const useCardNumberValidation = (
-  args: CardNumberArgs
+  args: CardNumberArgs = {}
 ): CardNumberValidationType => {
   const [cardNumberValidationResult, setCardNumberValidationResult] =
     useState<CardNumberValidationType>(defaultCardNumberValidationValue);
 
   useEffect(() => {
     Object.entries(args).forEach(([key, value]) => {
+      if (!value || isEmpty(value)) return;
+
       if (!isPositiveInteger(value)) {
         setCardNumberValidationResult((prev) => ({
           ...prev,
