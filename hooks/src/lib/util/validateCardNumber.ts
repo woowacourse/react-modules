@@ -28,12 +28,10 @@ export function validateCardNetwork(cardNumber: string): CardNetwork {
 
 export function validateCardNumber(cardNumber: string) {
   if (cardNumber.length !== CARD_NUMBER_LENGTH)
-    return ERROR_MESSAGE.INVALID_CARD_LENGTH;
+    return ERROR_MESSAGE.INVALID_LENGTH(CARD_NUMBER_LENGTH);
   const cardNumbers = sliceCardNumber(cardNumber);
 
   for (const cardNumberGroup of Object.values(cardNumbers)) {
-    console.log(Object.values(cardNumbers));
-    console.log("aa : ", !isNumeric(cardNumberGroup));
     if (!isNumeric(cardNumberGroup)) return ERROR_MESSAGE.NOT_NUMERIC;
   }
   return "";

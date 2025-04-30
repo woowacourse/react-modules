@@ -1,4 +1,4 @@
-import { ERROR_MESSAGE } from "../constants";
+import { ERROR_MESSAGE, CARD_NUMBER_LENGTH } from "../constants";
 import { validateCardNetwork, validateCardNumber } from "./validateCardNumber";
 
 describe(`cardNumber 유효성 검사`, () => {
@@ -10,10 +10,12 @@ describe(`cardNumber 유효성 검사`, () => {
     const cardNumber = "111144443333444a";
     expect(validateCardNumber(cardNumber)).toBe(ERROR_MESSAGE.NOT_NUMERIC);
   });
-  it(`카드번호가 16자가 아니면 "${ERROR_MESSAGE.INVALID_CARD_LENGTH}"에러를 보여준다.`, () => {
+  it(`카드번호가 16자가 아니면 "${ERROR_MESSAGE.INVALID_LENGTH(
+    CARD_NUMBER_LENGTH
+  )}"에러를 보여준다.`, () => {
     const cardNumber = "11114444333344";
     expect(validateCardNumber(cardNumber)).toBe(
-      ERROR_MESSAGE.INVALID_CARD_LENGTH
+      ERROR_MESSAGE.INVALID_LENGTH(CARD_NUMBER_LENGTH)
     );
   });
 });
