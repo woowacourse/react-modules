@@ -1,16 +1,16 @@
 import React, { useEffect } from 'react';
 import s from './Modal.module.css';
 
-type ModalStyle = 'center' | 'bottom';
+type ModalPosition = 'center' | 'bottom';
 
-type ModalProps = {
+interface ModalProps {
   width?: string;
   height?: string;
-  position: ModalStyle;
+  position: ModalPosition;
   title?: string;
   children?: React.ReactNode;
   onClose: () => void;
-};
+}
 
 function Modal({ width = '304px', height = '216px', position, title, onClose, children }: ModalProps) {
   const customWidth = position === 'center' ? width : '100%';

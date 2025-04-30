@@ -1,6 +1,6 @@
-import Modal from './lib/Modal.tsx';
-import './App.css';
 import { useState } from 'react';
+import './App.css';
+import { Modal } from 'lume_modal';
 
 function App() {
   const [isShowModal, setIsShowModal] = useState(false);
