@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState } from 'react';
 
 interface ExpirationDateInput {
   month: string;
@@ -7,7 +7,7 @@ interface ExpirationDateInput {
 
 const useExpirationDate = () => {
   const [isValid, setIsValid] = useState({ month: true, year: true });
-  const [errorMessage, setErrorMessage] = useState("");
+  const [errorMessage, setErrorMessage] = useState('');
 
   const handleExpirationDate = (date: ExpirationDateInput) => {
     validateExpirationDate(date);
@@ -20,24 +20,24 @@ const useExpirationDate = () => {
 
     if (!validateYear(year)) return;
 
-    setErrorMessage("");
+    setErrorMessage('');
   };
 
   const validateMonth = (month: string) => {
     if (!isNumber(month)) {
       setIsValid((prev) => ({ ...prev, month: false }));
-      setErrorMessage("숫자만 입력해 주세요.");
+      setErrorMessage('숫자만 입력해 주세요.');
       return false;
     }
     if (!isTwoDigits(month)) {
-      setIsValid((prev) => ({ ...prev, year: false }));
-      setErrorMessage("2자리의 숫자를 입력해 주세요.");
+      setIsValid((prev) => ({ ...prev, month: false }));
+      setErrorMessage('2자리의 숫자를 입력해 주세요.');
       return false;
     }
 
     if (!isValidMonth(month)) {
       setIsValid((prev) => ({ ...prev, month: false }));
-      setErrorMessage("1~12 사이의 숫자를 입력해 주세요.");
+      setErrorMessage('1~12 사이의 숫자를 입력해 주세요.');
       return false;
     }
 
@@ -48,12 +48,12 @@ const useExpirationDate = () => {
   const validateYear = (year: string) => {
     if (!isNumber(year)) {
       setIsValid((prev) => ({ ...prev, year: false }));
-      setErrorMessage("숫자만 입력해 주세요.");
+      setErrorMessage('숫자만 입력해 주세요.');
       return false;
     }
     if (!isTwoDigits(year)) {
       setIsValid((prev) => ({ ...prev, year: false }));
-      setErrorMessage("2자리의 숫자를 입력해 주세요.");
+      setErrorMessage('2자리의 숫자를 입력해 주세요.');
       return false;
     }
 
