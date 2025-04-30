@@ -33,14 +33,14 @@ const CardChoose = () => {
 				<Title>카드사 선택</Title>
 			</Header>
 			<CardContainer>
-				<CardImg src="./images/CardIcon.svg"></CardImg>
-				<CardImg src="./images/CardIcon.svg"></CardImg>
-				<CardImg src="./images/CardIcon.svg"></CardImg>
-				<CardImg src="./images/CardIcon.svg"></CardImg>
-				<CardImg src="./images/CardIcon.svg"></CardImg>
-				<CardImg src="./images/CardIcon.svg"></CardImg>
-				<CardImg src="./images/CardIcon.svg"></CardImg>
-				<CardImg src="./images/CardIcon.svg"></CardImg>
+				<CardImg src="../../src/assets/images/CardIcon.svg"></CardImg>
+				<CardImg src="../../src/assets/images/CardIcon.svg"></CardImg>
+				<CardImg src="../../src/assets/images/CardIcon.svg"></CardImg>
+				<CardImg src="../../src/assets/images/CardIcon.svg"></CardImg>
+				<CardImg src="../../src/assets/images/CardIcon.svg"></CardImg>
+				<CardImg src="../../src/assets/images/CardIcon.svg"></CardImg>
+				<CardImg src="../../src/assets/images/CardIcon.svg"></CardImg>
+				<CardImg src="../../src/assets/images/CardIcon.svg"></CardImg>
 			</CardContainer>
 		</Container>
 	);
