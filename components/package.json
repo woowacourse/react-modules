@@ -1,6 +1,6 @@
 {
-  "name": "exceptanyone-modal",
-  "version": "0.0.13",
+  "name": "except-woody-modal",
+  "version": "0.0.1",
   "description": "npm modules",
   "type": "module",
   "types": "dist/index.d.ts",
