@@ -1,3 +1,4 @@
+import styled from '@emotion/styled';
 import {
   Fragment,
   isValidElement,
@@ -6,7 +7,6 @@ import {
   useEffect,
   useRef,
 } from 'react';
-import styles from './Modal.module.css';
 import PrimaryButton from './PrimaryButton';
 import SecondaryButton from './SecondaryButton';
 
@@ -69,35 +69,83 @@ function Modal({
   }, [buttons]);
 
   return (
-    <dialog
+    <ModalContainer
       onClose={onClose}
-      className={`${styles.modal} ${position === 'bottom' ? styles.modalBottom : ''}`}
+      isBottom={position === 'bottom'}
       ref={modalRef}
     >
-      <div
-        className={`${styles.modalWrapper} ${position === 'bottom' ? styles.modalWrapperBottom : ''}`}
-      >
-        <div className={styles.modalHeader}>
-          <h2 className={styles.title}>{title}</h2>
+      <ModalWrapper isBottom={position === 'bottom'}>
+        <ModalHeader>
+          <Title>{title}</Title>
           {showCloseButton && (
-            <button
-              type="button"
-              onClick={onClose}
-              className={styles.closeButton}
-            >
+            <CloseButton type="button" onClick={onClose}>
               <img src="./close-button.png" alt="모달 닫기 버튼" />
-            </button>
+            </CloseButton>
           )}
-        </div>
+        </ModalHeader>
         {contents}
-        <div className={styles.buttonWrapper}>
+        <ButtonWrapper>
           {buttons.map((buttonComponent, index) => (
             <Fragment key={index}>{buttonComponent}</Fragment>
           ))}
-        </div>
-      </div>
-    </dialog>
+        </ButtonWrapper>
+      </ModalWrapper>
+    </ModalContainer>
   );
 }
+
+const ModalContainer = styled.dialog<{ isBottom: boolean }>`
+  box-sizing: border-box;
+  min-width: 400px;
+  padding: 24px 32px;
+
+  border: none;
+  border-radius: 8px;
+
+  margin-bottom: ${(props) => (props.isBottom ? 0 : null)};
+  width: ${(props) => (props.isBottom ? '100%' : null)};
+  max-width: ${(props) => (props.isBottom ? '100%' : null)};
+  border-bottom-left-radius: ${(props) => (props.isBottom ? 0 : null)};
+  border-bottom-right-radius: ${(props) => (props.isBottom ? 0 : null)};
+
+  &::backdrop {
+    background-color: #000000;
+    opacity: 0.35;
+  }
+
+  @media (max-width: 600px) {
+    width: ${(props) => (props.isBottom ? '100%' : 'calc(100vw - 72px)')};
+  }
+`;
+
+const ModalWrapper = styled.div<{ isBottom: boolean }>`
+  display: flex;
+  flex-direction: column;
+  gap: ${(props) => (props.isBottom ? '16px' : '24px')};
+`;
+
+const ModalHeader = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`;
+
+const Title = styled.h2`
+  margin: 0;
+  justify-self: flex-start;
+  font-size: 24px;
+`;
+
+const CloseButton = styled.button`
+  border: none;
+  background: none;
+  cursor: pointer;
+`;
+
+const ButtonWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+`;
 
 export default Modal;
