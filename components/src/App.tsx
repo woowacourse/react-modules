@@ -1,25 +1,25 @@
-import useBoolean from './lib/hooks/useBoolean';
-import { Modal } from './lib';
+import { Dialog } from './lib';
 
 function App() {
-  const { value: isOpen, setTrue, setFalse } = useBoolean(false);
-
   return (
     <>
-      <h1>Component Modules</h1>
-      <button onClick={() => setTrue()}>Open Modal</button>
-
-      {isOpen && (
-        <Modal
-          closeModal={() => setFalse()}
-          position="center"
-          maxWidth={500}
-          title="Modal Title"
-          isVisibleCloseButton={true}
-        >
-          <p>Modal Content</p>
-        </Modal>
-      )}
+      <Dialog>
+        <Dialog.Trigger>
+          <button>Open Dialog</button>
+        </Dialog.Trigger>
+        <Dialog.Root>
+          <Dialog.Overlay>
+            <Dialog.Content>
+              <Dialog.Header>
+                <Dialog.CloseButton>Close</Dialog.CloseButton>
+              </Dialog.Header>
+              <div style={{ padding: '16px' }}>
+                <p>Dialog Content</p>
+              </div>
+            </Dialog.Content>
+          </Dialog.Overlay>
+        </Dialog.Root>
+      </Dialog>
     </>
   );
 }
