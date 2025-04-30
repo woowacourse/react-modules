@@ -1,5 +1,3 @@
-import { useState } from "react";
-
 // import {
 //   Modal,
 //   ModalOverlay,
@@ -19,21 +17,22 @@ import ModalTitle from "./lib/ModalTitle/ModalTitle";
 import ModalCloseButton from "./lib/ModalCloseButton/ModalCloseButton";
 import ModalBody from "./lib/ModalBody/ModalBody";
 import ModalFooter from "./lib/ModalFooter/ModalFooter";
+import useModal from "./lib/hooks/useModal";
 
 function App() {
-  const [isOpen, setIsOpen] = useState(false);
+  const { isOpen, handleOpen, handleClose } = useModal();
 
   return (
     <>
-      <button onClick={() => setIsOpen(true)}>Open</button>
+      <button onClick={handleOpen}>Open</button>
       <Modal isOpen={isOpen}>
-        <ModalOverlay onClose={() => setIsOpen(false)} />
+        <ModalOverlay onClose={handleClose} />
         <ModalContent position="center">
           <ModalHeader direction="row" align="start" justify="start">
             <ModalTitle tag="h1" fontSize="25px" fontWeight="700">
               Title이다!
             </ModalTitle>
-            <ModalCloseButton onClose={() => setIsOpen(false)} />
+            <ModalCloseButton onClose={handleClose} />
           </ModalHeader>
           <ModalBody>몸통이다!</ModalBody>
           <ModalFooter direction="row" align="end" justify="center">
