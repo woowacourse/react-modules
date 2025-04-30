@@ -15,7 +15,7 @@ interface TitleProps {
   size?: number;
 }
 
-interface Props {
+export interface ModalProps {
   position?: "center" | "bottom";
   title?: TitleProps;
   showCloseButton?: boolean;
@@ -33,7 +33,7 @@ const Modal = ({
   children,
   isOpen,
   onClose,
-}: Props) => {
+}: ModalProps) => {
   const stopPropagation = (e: MouseEvent<HTMLDivElement>) => {
     e.stopPropagation();
   };

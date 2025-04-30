@@ -1,11 +1,6 @@
-import type { Meta, StoryObj } from "@storybook/react";
-import Modal from "./Modal";
+import type { Meta } from "@storybook/react";
+import Modal, { ModalProps } from "./Modal";
 import { useState } from "react";
-
-const defaultArgs = {
-  isOpen: true,
-  onClose: () => {},
-};
 
 const meta = {
   title: "components/Modal",
@@ -15,9 +10,7 @@ const meta = {
 
 export default meta;
 
-type Story = StoryObj<typeof Modal>;
-
-export const Default = () => {
+export const Default = (args: ModalProps) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const closeModal = () => setIsOpen(false);
@@ -28,53 +21,41 @@ export const Default = () => {
       <button type="button" onClick={openModal}>
         테스트 열기 버튼
       </button>
-      <Modal isOpen={isOpen} onClose={closeModal}>
-        Default Contents
+      <Modal {...args} isOpen={isOpen} onClose={closeModal}>
+        {args.children ?? "Default Contents"}
       </Modal>
     </>
   );
 };
 
-export const WithoutCloseButton: Story = {
-  args: {
-    ...defaultArgs,
-    title: {
-      text: "Without Close Button",
-    },
-    showCloseButton: false,
-    children: "Without Close Button Contents",
-  },
-};
+export const WithoutCloseButton = (args: ModalProps) => (
+  <Default
+    {...args}
+    title={{ text: "Without Close Button" }}
+    showCloseButton={false}
+  >
+    Without Close Button Contents
+  </Default>
+);
 
-export const ModalInDarkMode: Story = {
-  args: {
-    ...defaultArgs,
-    title: {
-      text: "Dark Mode",
-      color: "#fff",
-    },
-    backgroundColor: "#000",
-    children: <div style={{ color: "#fff" }}>Dark Mode Contents</div>,
-  },
-};
+export const ModalInDarkMode = (args: ModalProps) => (
+  <Default
+    {...args}
+    title={{ text: "Dark Mode", color: "#fff" }}
+    backgroundColor="#000"
+  >
+    <div style={{ color: "#fff" }}>Dark Mode Contents</div>
+  </Default>
+);
 
-export const ModalInLightMode: Story = {
-  args: {
-    ...defaultArgs,
-    title: {
-      text: "Light Mode",
-    },
-    children: "Light Mode Contents",
-  },
-};
+export const ModalInLightMode = (args: ModalProps) => (
+  <Default {...args} title={{ text: "Light Mode" }}>
+    Light Mode Contents
+  </Default>
+);
 
-export const BottomModal: Story = {
-  args: {
-    ...defaultArgs,
-    position: "bottom",
-    title: {
-      text: "Bottom Mode",
-    },
-    children: "Bottom Modal Contents",
-  },
-};
+export const BottomModal = (args: ModalProps) => (
+  <Default {...args} position="bottom" title={{ text: "Bottom Mode" }}>
+    Bottom Modal Contents
+  </Default>
+);
