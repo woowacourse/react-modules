@@ -1,7 +1,7 @@
 {
-  "name": "hooks",
-  "version": "0.0.1",
-  "description": "npm modules",
+  "name": "@kimyouk/payments-validation",
+  "version": "0.0.4",
+  "description": "payments validation",
   "type": "module",
   "types": "dist/index.d.ts",
   "main": "dist/index.js",
@@ -17,6 +17,7 @@
     "test": "jest"
   },
   "dependencies": {
+    "@kimyouk/payments-validation": "^0.0.4",
     "react": "^19.1.0",
     "react-dom": "^19.1.0"
   },
