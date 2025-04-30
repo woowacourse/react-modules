@@ -2,23 +2,29 @@ import React, { createContext, useContext } from "react";
 import closeIcon from "./assets/close.svg";
 import { css } from "@emotion/react";
 
-const ModalContext = createContext<(() => void) | undefined>(undefined);
+interface ChildrenProps {
+  children: React.ReactNode;
+}
 
-const Modal = ({
-  show,
-  onHide,
-  background = true,
-  position = "center",
-  gap = 16,
-  children,
-}: {
+interface ModalProps extends ChildrenProps {
   show: boolean;
   onHide: () => void;
   background?: boolean;
-  position?: string;
+  position?: "center" | "top" | "bottom";
   gap?: number;
-  children: React.ReactNode;
-}) => {
+}
+
+interface ModalHeaderProps extends ChildrenProps {
+  closeButton?: boolean;
+}
+
+interface ModalTitleProps extends ChildrenProps {
+  color?: string;
+}
+
+const ModalContext = createContext<(() => void) | undefined>(undefined);
+
+const Modal = ({ show, onHide, background = true, position = "center", gap = 16, children }: ModalProps) => {
   return (
     <ModalContext.Provider value={onHide}>
       <div css={ModalWrapperStyle(show)}>
@@ -29,7 +35,7 @@ const Modal = ({
   );
 };
 
-Modal.Header = ({ closeButton = false, children }: { closeButton: boolean; children?: React.ReactNode }) => {
+Modal.Header = ({ closeButton = false, children }: ModalHeaderProps) => {
   const onHide = useContext(ModalContext);
 
   return (
@@ -40,15 +46,15 @@ Modal.Header = ({ closeButton = false, children }: { closeButton: boolean; child
   );
 };
 
-Modal.Body = ({ children }: { children: React.ReactNode }) => {
-  return <div>{children}</div>;
+Modal.Body = ({ children }: ChildrenProps) => {
+  return <div css={ModalBodyStyle}>{children}</div>;
 };
 
-Modal.Footer = ({ children }: { children: React.ReactNode }) => {
-  return <div>{children}</div>;
+Modal.Footer = ({ children }: ChildrenProps) => {
+  return <div css={ModalFooterStyle}>{children}</div>;
 };
 
-Modal.Title = ({ color = "#000", children }: { color?: string; children: React.ReactNode }) => {
+Modal.Title = ({ color = "#000", children }: ModalTitleProps) => {
   return <span css={ModalTitleStyle(color)}>{children}</span>;
 };
 
@@ -73,23 +79,21 @@ const backGroundStyle = (background: boolean) => css`
   background-color: rgba(0, 0, 0, 0.35);
   visibility: ${background ? "visible" : "hidden"};
 `;
+const ModalContainerStyle = (position: string, gap: number) => {
+  const positionStyle = getPositionStyle(position);
 
-const ModalContainerStyle = (position: string, gap: number) => css`
-  display: flex;
-  width: ${position === "center" ? "calc(100% - 72px)" : "100%"};
-  padding: 24px 32px;
-  flex-direction: column;
-  align-items: center;
-  gap: ${gap}px;
-  border-radius: 8px;
-  background: #fff;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 99;
-  box-sizing: border-box;
-`;
+  return css`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: #fff;
+    z-index: 99;
+    box-sizing: border-box;
+    padding: 24px 32px;
+    gap: ${gap}px;
+    ${positionStyle}
+  `;
+};
 
 const ModalHeaderStyle = css`
   display: flex;
@@ -109,3 +113,43 @@ const ModalTitleStyle = (color: string) => css`
   font-weight: 700;
   line-height: normal;
 `;
+
+const ModalBodyStyle = css`
+  width: 100%;
+`;
+
+const ModalFooterStyle = css`
+  width: 100%;
+`;
+
+const getPositionStyle = (position: string) => {
+  switch (position) {
+    case "center":
+      return css`
+        width: calc(100% - 72px);
+        border-radius: 8px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      `;
+    case "bottom":
+      return css`
+        width: 100%;
+        border-radius: 8px 8px 0 0;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+      `;
+    case "top":
+      return css`
+        width: 100%;
+        border-radius: 0 0 8px 8px;
+        position: fixed;
+        top: 0;
+        left: 0;
+      `;
+    default:
+      return css``;
+  }
+};

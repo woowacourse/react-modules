@@ -14,3 +14,6 @@
   - [x] Modal.Footer 제작
   - [x] Modal.Title 제작
     - [x] font, color 스타일 (color 동적)
+  - [x] Modal Component 타입스크립트 적용
+  - [ ] Modal Component 스토리북 제작
+  - [ ] Modal Component 배포
