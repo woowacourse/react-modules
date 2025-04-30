@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import './App.css';
 import Modal from './modal/Modal';
 
 function getContent() {
@@ -23,6 +22,8 @@ function App() {
         onClose={onClose}
         contents={getContent()}
         showCloseButton={true}
+        primaryButtonText="동의하고 저장하기"
+        onPrimaryButtonClick={() => alert('클릭됨')}
       />
     </>
   );

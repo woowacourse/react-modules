@@ -6,6 +6,8 @@ function Modal({
   isOpen,
   onClose,
   contents,
+  primaryButtonText,
+  onPrimaryButtonClick,
   position = 'center',
   showCloseButton = true,
 }: {
@@ -13,6 +15,8 @@ function Modal({
   isOpen: boolean;
   onClose: () => void;
   contents: ReactNode;
+  primaryButtonText: string;
+  onPrimaryButtonClick: () => void;
   showCloseButton?: boolean;
   position?: 'center' | 'bottom';
 }) {
@@ -61,6 +65,9 @@ function Modal({
         )}
       </div>
       {contents}
+      <button className={styles.primaryButton} onClick={onPrimaryButtonClick}>
+        {primaryButtonText}
+      </button>
       <button onClick={onClose}>닫기</button>
     </dialog>
   );
