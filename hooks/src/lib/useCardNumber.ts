@@ -17,23 +17,39 @@ const useCardNumber = () => {
   const [errorMessage, setErrorMessage] = useState("");
 
   const handleCardNumber = (numbers: CardNumberInput) => {
-    validateCardNumber(numbers);
+    const numbersArray = Object.values(numbers);
+    validateCardNumber(numbersArray);
   };
 
-  const validateCardNumber = (numbers: CardNumberInput) => {
-    Object.entries(numbers).forEach(([key, value]) => {
-      if (isNumber(value) && isFourDigits(value)) {
-        setIsValid((prev) => ({ ...prev, [key]: true }));
-        setErrorMessage("");
-      } else if (!isNumber(value)) {
-        setIsValid((prev) => ({ ...prev, [key]: false }));
-        setErrorMessage("카드 번호는 숫자만 입력해주세요.");
-      } else if (!isFourDigits(value)) {
-        setIsValid((prev) => ({ ...prev, [key]: false }));
-        setErrorMessage("카드 번호는 4자리로 입력해주세요.");
+  const validateCardNumber = (numbers: string[]) => {
+    let isValid = true;
+
+    for (let i = 0; i < numbers.length; i++) {
+      const number = numbers[i];
+      if (number.length === 0) continue;
+      if (!isNumber(number)) {
+        setErrorMessage("숫자만 입력해 주세요.");
+        setIsValid((prev) => ({ ...prev, [`input${i + 1}`]: false }));
+        isValid = false;
+        continue;
       }
-    });
+      if (!isFourDigits(number)) {
+        setErrorMessage("4자리의 숫자를 입력해 주세요.");
+        setIsValid((prev) => ({ ...prev, [`input${i + 1}`]: false }));
+        isValid = false;
+      }
+    }
+    if (isValid) {
+      setIsValid({
+        input1: true,
+        input2: true,
+        input3: true,
+        input4: true,
+      });
+      setErrorMessage("");
+    }
   };
+
   return { handleCardNumber, isValid, errorMessage };
 };
 

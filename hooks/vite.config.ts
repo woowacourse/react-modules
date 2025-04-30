@@ -2,6 +2,7 @@ import * as path from "path";
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react-swc";
 import dts from "vite-plugin-dts";
+
 export default defineConfig({
   build: {
     lib: {
@@ -20,6 +21,11 @@ export default defineConfig({
     commonjsOptions: {
       esmExternals: ["react"],
     },
+  },
+  test: {
+    globals: true,
+    environment: "jsdom",
+    include: ["**/*.{test,spec}.{ts,tsx}"],
   },
   plugins: [
     react({

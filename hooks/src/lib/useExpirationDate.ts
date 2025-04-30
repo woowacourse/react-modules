@@ -30,7 +30,7 @@ const useExpirationDate = () => {
       return false;
     }
     if (!isTwoDigits(month)) {
-      setIsValid((prev) => ({ ...prev, year: false }));
+      setIsValid((prev) => ({ ...prev, month: false }));
       setErrorMessage("2자리의 숫자를 입력해 주세요.");
       return false;
     }

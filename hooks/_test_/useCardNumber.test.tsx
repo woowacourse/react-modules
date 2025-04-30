@@ -1,6 +1,6 @@
 import { describe, it, expect } from "vitest";
 import { renderHook, act } from "@testing-library/react";
-import useCardNumber from "../lib/useCardNumber";
+import useCardNumber from "../src/lib/useCardNumber";
 
 describe("useCardNumber 테스트", () => {
   it("모든 입력이 유효한 경우 isValid는 true고 errorMessage는 비어있어야 한다", () => {
