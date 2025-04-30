@@ -48,6 +48,7 @@ const useCardNumberValidation = (
             errorMessage: ERROR_MESSAGE.INVALID_NUMBER,
           },
         }));
+        return;
       }
 
       if (!isLengthEqual(value, MAX_LENGTH)) {
@@ -58,6 +59,7 @@ const useCardNumberValidation = (
             errorMessage: `${MAX_LENGTH}${ERROR_MESSAGE.INVALID_LENGTH}`,
           },
         }));
+        return;
       }
     });
   }, [args]);

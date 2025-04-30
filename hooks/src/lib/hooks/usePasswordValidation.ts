@@ -21,6 +21,7 @@ const usePasswordValidation = (value: string): ValidationType => {
         isError: true,
         errorMessage: ERROR_MESSAGE.INVALID_NUMBER,
       });
+      return;
     }
 
     if (!isLengthEqual(value, MAX_LENGTH)) {
