@@ -4,7 +4,10 @@ import Modal from './lib/Modal';
 function App() {
   return (
     <>
-      <Modal>hii</Modal>
+      <Modal>
+        ㅁㅁㅁㅁ
+        <Modal.Header closeButton>안녕하세여ㅛ</Modal.Header>
+      </Modal>
     </>
   );
 }
