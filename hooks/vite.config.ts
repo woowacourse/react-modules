@@ -26,8 +26,6 @@ export default defineConfig({
     react(),
     dts({
       tsconfigPath: "./tsconfig.app.json",
-      // tsconfigPath: "./tsconfig.build.json",
-      // insertTypesEntry: true,
       include: ["src/lib"],
     }),
   ],
