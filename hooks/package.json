@@ -1,7 +1,7 @@
 {
-  "name": "hooks",
+  "name": "@eunoia-jaxson/card-field-hooks",
   "version": "0.0.1",
-  "description": "npm modules",
+  "description": "A set of hooks for managing card fields in React",
   "type": "module",
   "types": "dist/index.d.ts",
   "main": "dist/index.js",
@@ -40,5 +40,8 @@
     "typescript": "^5.8.3",
     "vite": "^6.2.6",
     "vite-plugin-dts": "^4.5.3"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }

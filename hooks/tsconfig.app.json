@@ -20,7 +20,9 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
-    "noUncheckedSideEffectImports": true
+    "noUncheckedSideEffectImports": true,
+    "declaration": true,
+    "declarationDir": "dist"
   },
-  "include": ["src", "__test__"]
+  "include": ["src", "src/lib", "__tests__"]
 }
