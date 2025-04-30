@@ -1,17 +1,18 @@
 import "./App.css";
-import useCvcNumber from "./lib/useCvcNumber";
+// import useCvcNumber from "./lib/useCvcNumber";
+import usePassword from "./lib/usePassword";
 
 function App() {
-  const { cvc, error, validate } = useCvcNumber();
+  const { password, error, validate } = usePassword();
 
-  const handleCVC = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handlePassword = (e: React.ChangeEvent<HTMLInputElement>) => {
     validate(e.target.value);
   };
 
   return (
     <>
       <h1>Hooks Modules</h1>
-      <input type="text" value={cvc} onChange={handleCVC} maxLength={3} />
+      <input type="text" value={password} onChange={handlePassword} />
       <p>{error.errorMessage}</p>
     </>
   );
