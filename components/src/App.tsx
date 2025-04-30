@@ -1,4 +1,4 @@
-import { Modal, useModal } from '@sebin0580/react-modules';
+import { Modal, useModal } from '@sebin0580/modal';
 
 function App() {
   const { isOpen, handleOpenModal, handleCloseModal, handleOutsideClick } = useModal();
