@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 import useCardNumbers from './useCardNumbers';
-import { CARD_NUMBERS_KEY } from './constants';
+import { CARD_NUMBERS_KEY } from './cardNumber/constants';
 
 function App() {
   const { cardNumbers, isValid, errorMessage, handleCardNumbersChange } =
