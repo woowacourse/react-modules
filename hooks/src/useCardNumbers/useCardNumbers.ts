@@ -31,15 +31,16 @@ const CARD_NUMBER_ERROR_MESSAGE = {
   NOT_NUMBERIC: '숫자만 입력 가능합니다.',
 } as const;
 
-type CardNumbersKeys = 'FIRST' | 'SECOND' | 'THIRD' | 'FOURTH';
+type CardNumbersKeys = {
+  target: 'FIRST' | 'SECOND' | 'THIRD' | 'FOURTH';
+};
 
 export default function useCardNumbers() {
   const [cardNumbers, setCardNumbers] = useState(INITIAL_CARD_NUMBER);
   const { error, changeError, clearError } = useError(INITIAL_IS_ERROR);
 
-  const handleCardNumbersChange =
-    (target: CardNumbersKeys) =>
-    (event: React.ChangeEvent<HTMLInputElement>) => {
+  function handleCardNumbersChange({ target }: CardNumbersKeys) {
+    return function (event: React.ChangeEvent<HTMLInputElement>) {
       const { isError, errorMessage } = getCardNumbersError(
         event.target.value.trim()
       );
@@ -55,6 +56,7 @@ export default function useCardNumbers() {
         [target]: event.target.value.trim(),
       }));
     };
+  }
 
   return {
     cardNumbers,
