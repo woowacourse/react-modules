@@ -10,6 +10,8 @@ const useCvcValidation = (value: string): ValidationType => {
     useState<ValidationType>(defaultValidationValue);
 
   useEffect(() => {
+    setCvcValidationResult(defaultValidationValue);
+
     if (isEmpty(value)) return;
 
     if (!isPositiveInteger(value)) {

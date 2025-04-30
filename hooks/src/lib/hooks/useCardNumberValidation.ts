@@ -33,6 +33,8 @@ const useCardNumberValidation = (
     useState<CardNumberValidationType>(defaultCardNumberValidationValue);
 
   useEffect(() => {
+    setCardNumberValidationResult(defaultCardNumberValidationValue);
+
     Object.entries(args).forEach(([key, value]) => {
       if (!value || isEmpty(value)) return;
 

@@ -30,6 +30,8 @@ const useExpirationDateValidation = (
     );
 
   useEffect(() => {
+    setExpirationDateValidationResult(defaultExpirationDateValidationValue);
+
     Object.entries(args).forEach(([key, value]) => {
       if (!value || isEmpty(value)) return;
 

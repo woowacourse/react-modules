@@ -10,6 +10,8 @@ const usePasswordValidation = (value: string): ValidationType => {
     useState<ValidationType>(defaultValidationValue);
 
   useEffect(() => {
+    setPasswordValidationResult(defaultValidationValue);
+
     if (isEmpty(value)) return;
 
     if (!isPositiveInteger(value)) {
