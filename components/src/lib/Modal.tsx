@@ -5,7 +5,6 @@ const Modal = ({ children }: { children: React.ReactNode }) => {
   return <div>{children}</div>;
 };
 
-export default Modal;
 
 Modal.Header = ({
   closeButton = false,
@@ -21,3 +20,17 @@ Modal.Header = ({
     </div>
   );
 };
+
+Modal.Body = ({ children }: { children: React.ReactNode }) => {
+  return <div>{children}</div>;
+};
+
+Modal.Footer = ({ children }: { children: React.ReactNode }) => {
+  return <div>{children}</div>;
+};
+
+Modal.Title = ({ children }: { children: React.ReactNode }) => {
+  return <span>{children}</span>;
+};
+
+export default Modal;

@@ -5,6 +5,6 @@
     - [ ] show, onhide props
   - [x] Modal.Header 제작
     - [x] close Button 유무 (header에 종속)
-  - [ ] Modal.Body 제작
-  - [ ] Modal.Footer 제작
-  - [ ] Modal.Title 제작
+  - [x] Modal.Body 제작
+  - [x] Modal.Footer 제작
+  - [x] Modal.Title 제작

@@ -6,7 +6,11 @@ function App() {
     <>
       <Modal>
         ㅁㅁㅁㅁ
-        <Modal.Header closeButton>안녕하세여ㅛ</Modal.Header>
+        <Modal.Header closeButton>
+          <Modal.Title>hihi</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>hihihihihihihihihih</Modal.Body>
+        <Modal.Footer>hihihihihihihihihih</Modal.Footer>
       </Modal>
     </>
   );
