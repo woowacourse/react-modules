@@ -31,12 +31,14 @@ function Modal({ position, title, children, isOpen, onClose }: ModalProps) {
     <>
       {isOpen && (
         <div
+          id="modal-background"
           className={backgroundClassName}
           onClick={() => {
             onClose();
           }}
         >
           <div
+            id="modal-container"
             className={`${containerClassName}`}
             onClick={(e) => e.stopPropagation()}
           >
@@ -47,6 +49,7 @@ function Modal({ position, title, children, isOpen, onClose }: ModalProps) {
                 src={closeIcon}
                 alt="닫기버튼"
                 onClick={onClose}
+                id="modal-close-button"
               />
             </header>
             <div>{children}</div>
