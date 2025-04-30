@@ -16,15 +16,15 @@
   - [] useCardNumber
     - [] cardNumber는 숫자여야 한다. (errorMessage: "카드 번호는 숫자로 입력해 주세요.")
     - [] cardNumber는 각 칸마다 4자리여야 한다. (errorMessage: "카드 번호는 4자리로 입력해 주세요.")
-  - [] useExpiryDate
-    - [] month
-      - [] month는 숫자여야 한다. (errorMessage: "월은 숫자로 입력해 주세요.")
-      - [] month는 두 자리여야 한다. (errorMessage: "월은 2자리로 입력해 주세요.")
-      - [] month는 1~12 사이의 숫자여야 한다. (errorMessage: "유효하지 않은 월입니다.")
-    - [] year
-      - [] year는 숫자여야 한다. (errorMessage: "연도는 숫자로 입력해 주세요.")
-      - [] year는 두 자리여야 한다. (errorMessage: "연도는 2자리로 입력해 주세요.")
-      - [] year는 25 이상의 숫자여야 한다. (errorMessage: "유효하지 않은 연도입니다.")
+  - [x] useExpiryDate
+    - [x] month
+      - [x] month는 숫자여야 한다. (errorMessage: "월은 숫자로 입력해 주세요.")
+      - [x] month는 두 자리여야 한다. (errorMessage: "월은 2자리로 입력해 주세요.")
+      - [x] month는 1~12 사이의 숫자여야 한다. (errorMessage: "유효하지 않은 월입니다.")
+    - [x] year
+      - [x] year는 숫자여야 한다. (errorMessage: "연도는 숫자로 입력해 주세요.")
+      - [x] year는 두 자리여야 한다. (errorMessage: "연도는 2자리로 입력해 주세요.")
+      - [x] year는 25 이상의 숫자여야 한다. (errorMessage: "유효하지 않은 연도입니다.")
   - [x] useCVC
     - [x] cvc는 숫자여야 한다. (errorMessage: "CVC는 숫자로 입력해 주세요.")
     - [x] cvc는 세 자리여야 한다. (errorMessage: "CVC는 3자리로 입력해 주세요.")
