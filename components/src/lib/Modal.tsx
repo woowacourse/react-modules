@@ -1,29 +1,39 @@
-import React from "react";
+import React, { createContext, useContext } from "react";
 import closeIcon from "./assets/close.svg";
 import { css } from "@emotion/react";
 
+const ModalContext = createContext<(() => void) | undefined>(undefined);
+
 const Modal = ({
+  show,
+  onHide,
   background = true,
   position = "center",
   children,
 }: {
+  show: boolean;
+  onHide: () => void;
   background?: boolean;
   position?: string;
   children: React.ReactNode;
 }) => {
   return (
-    <div css={ModalWrapperStyle}>
-      <div css={backGroundStyle(background)}></div>
-      <div css={ModalContainerStyle(position)}>{children}</div>
-    </div>
+    <ModalContext.Provider value={onHide}>
+      <div css={ModalWrapperStyle(show)}>
+        <div css={backGroundStyle(background)}></div>
+        <div css={ModalContainerStyle(position)}>{children}</div>
+      </div>
+    </ModalContext.Provider>
   );
 };
 
 Modal.Header = ({ closeButton = false, children }: { closeButton: boolean; children?: React.ReactNode }) => {
+  const onHide = useContext(ModalContext);
+
   return (
     <div css={ModalHeaderStyle}>
       <span>{children}</span>
-      {closeButton && <img src={closeIcon} alt="X" />}
+      {closeButton && <img src={closeIcon} alt="X" onClick={onHide} />}
     </div>
   );
 };
@@ -42,13 +52,14 @@ Modal.Title = ({ color = "#000", children }: { color?: string; children: React.R
 
 export default Modal;
 
-const ModalWrapperStyle = css`
+const ModalWrapperStyle = (show: boolean) => css`
   position: fixed;
   width: 100%;
   height: 100vh;
   top: 0;
   left: 0;
   min-width: 300px;
+  display: ${show ? "block" : "none"};
 `;
 
 const backGroundStyle = (background: boolean) => css`
@@ -83,6 +94,10 @@ const ModalHeaderStyle = css`
   justify-content: space-between;
   align-items: center;
   width: 100%;
+
+  img {
+    cursor: pointer;
+  }
 `;
 
 const ModalTitleStyle = (color: string) => css`

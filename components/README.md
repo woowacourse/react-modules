@@ -1,8 +1,8 @@
 # Modal Module
 
-- [ ] 모달 컴포넌트 모듈 제작
+- [x] 모달 컴포넌트 모듈 제작
   - [x] Modal component 제작 (껍데기)
-    - [ ] show, onhide props
+    - [x] show, onhide props
     - [x] background 스타일
     - [x] Modal Container position 동적 할당
     - [x] Modal Container 스타일
