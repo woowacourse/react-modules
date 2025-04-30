@@ -4,7 +4,7 @@
  * @returns 값이 숫자 타입이면서 NaN이면 true, 그렇지 않으면 false를 반환합니다.
  */
 
-export function isNumber(value: unknown) {
+export function isNumeric(value: unknown) {
   const parsedNumber = Number(value);
   return typeof value !== "number" && Number.isNaN(parsedNumber);
 }
