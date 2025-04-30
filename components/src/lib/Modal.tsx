@@ -1,16 +1,19 @@
 import React, { useEffect } from 'react';
-import s from './Modal.module.css';
+import { Layout, Overlay, ModalContainer, TitleContainer, Title, CloseButton, CloseButtonImage } from './Modal.styles';
 
-type ModalPosition = 'center' | 'bottom';
+export type ModalPosition = 'center' | 'bottom';
 
-interface ModalProps {
+export type ModalContainerProps = {
   width?: string;
   height?: string;
   position: ModalPosition;
+};
+
+type ModalProps = ModalContainerProps & {
   title?: string;
   children?: React.ReactNode;
   onClose: () => void;
-}
+};
 
 function Modal({ width = '304px', height = '216px', position, title, onClose, children }: ModalProps) {
   const customWidth = position === 'center' ? width : '100%';
@@ -36,18 +39,18 @@ function Modal({ width = '304px', height = '216px', position, title, onClose, ch
   };
 
   return (
-    <div className={s.layout} onClick={handleClickOverlay}>
-      <div className={s.overlay} onClick={onClose} />
-      <div className={[s.modalContainer, s[position]].join(' ')} style={{ width: customWidth, height: height }}>
-        <div className={s.titleContainer}>
-          <h3 className={s.title}>{title}</h3>
-          <button className={s.closeButton} onClick={onClose}>
-            <img className={s.closeButtonImage} src="images/close.png" alt="close" />
-          </button>
-        </div>
+    <Layout onClick={handleClickOverlay}>
+      <Overlay onClick={onClose} />
+      <ModalContainer width={customWidth} height={height} position={position}>
+        <TitleContainer>
+          <Title>{title}</Title>
+          <CloseButton onClick={onClose}>
+            <CloseButtonImage src="images/close.png" alt="close" />
+          </CloseButton>
+        </TitleContainer>
         {children}
-      </div>
-    </div>
+      </ModalContainer>
+    </Layout>
   );
 }
 

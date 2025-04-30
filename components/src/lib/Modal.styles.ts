@@ -1,0 +1,75 @@
+import styled from '@emotion/styled';
+import { css } from '@emotion/react';
+import { ModalContainerProps } from './Modal';
+
+export const Layout = styled.div`
+  position: fixed;
+  display: flex;
+  inset: 0;
+  background-color: #00000059;
+  z-index: 10;
+  width: 100vw;
+  height: 100vh;
+`;
+
+export const Overlay = styled.div`
+  position: absolute;
+  inset: 0;
+`;
+
+export const ModalContainer = styled.div<ModalContainerProps>`
+  box-sizing: border-box;
+  position: absolute;
+  background-color: #ffffff;
+  border: none;
+  padding: 24px 32px;
+  overflow-y: auto;
+  width: ${({ width }) => width};
+  height: ${({ height }) => height};
+
+  ${({ position }) =>
+    position === 'center'
+      ? css`
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          border-radius: 8px;
+        `
+      : css`
+          bottom: 0;
+          border-top-left-radius: 8px;
+          border-top-right-radius: 8px;
+        `}
+`;
+
+export const TitleContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+`;
+
+export const Title = styled.h3`
+  margin: 0;
+  padding: 0;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 100%;
+`;
+
+export const CloseButton = styled.button`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 24px;
+  height: 24px;
+  border: none;
+  background: none;
+  outline: none;
+  cursor: pointer;
+`;
+
+export const CloseButtonImage = styled.img`
+  width: 24px;
+  height: 24px;
+`;
