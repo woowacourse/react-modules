@@ -15,19 +15,13 @@ function useCardNumber() {
       return;
     }
 
-    const newIsError = [...isError];
+    const newCardNumber = [...cardNumber];
+    newCardNumber[n] = value;
 
-    for (let i = 0; i < cardNumber.length; i++) {
-      if (i === n) {
-        const isValid = getValidLength(value, 4);
-        newIsError[i] = isValid ? false : true;
-      }
+    const newIsError = newCardNumber.map((val) =>
+      getValidLength(val, 4) ? false : true
+    );
 
-      if (i !== n) {
-        const isValid = getValidLength(cardNumber[i], 4);
-        newIsError[i] = isValid ? false : true;
-      }
-    }
     setIsError(newIsError);
 
     setErrorMessage(

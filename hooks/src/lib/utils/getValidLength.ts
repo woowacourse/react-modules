@@ -1,3 +1,4 @@
 export const getValidLength = (value: string, maxLength: number) => {
-  return value.length < maxLength;
+  if (value.length === 0) return true;
+  return value.length === maxLength;
 };
