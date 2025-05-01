@@ -30,7 +30,7 @@ const INITIAL_IS_ERROR: TYPE_OF_CARD_NUMBERS_IS_ERROR = {
   FOURTH: false,
 };
 
-const CARD_NUMBER_MAX_LENGTH = 4;
+export const CARD_NUMBER_MAX_LENGTH = 4;
 
 export const CARD_NUMBER_ERROR_MESSAGE = {
   INVALID_LENGTH: `카드 번호는 ${CARD_NUMBER_MAX_LENGTH}자리 숫자여야 합니다.`,
