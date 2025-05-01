@@ -1,6 +1,6 @@
 {
-  "name": "woowa-modal-payments",
-  "version": "0.0.4",
+  "name": "hanheel-modal-payments",
+  "version": "0.0.0",
   "description": "우아한테크코스 payments 모달",
   "type": "module",
   "types": "dist/index.d.ts",
@@ -21,9 +21,9 @@
   "dependencies": {
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.0",
+    "hanheel-modal-payments": "^0.0.0",
     "react": "^19.1.0",
-    "react-dom": "^19.1.0",
-    "woowa-modal-payments": "^0.0.4"
+    "react-dom": "^19.1.0"
   },
   "devDependencies": {
     "@chromatic-com/storybook": "^3.2.6",

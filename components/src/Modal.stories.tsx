@@ -1,6 +1,6 @@
 import { useState } from "react";
 import type { Meta, StoryObj } from "@storybook/react";
-import { Modal } from "woowa-modal-payments";
+import { Modal } from "hanheel-modal-payments";
 import React from "react";
 
 const meta: Meta<typeof Modal> = {

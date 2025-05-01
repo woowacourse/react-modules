@@ -3,7 +3,7 @@ import "./App.css";
 import { useState } from "react";
 import React from "react";
 // import Modal from "./lib/Modal";
-import { Modal } from "woowa-modal-payments";
+import { Modal } from "hanheel-modal-payments";
 
 function App() {
   const [isOpen, setIsOpen] = useState(false);
