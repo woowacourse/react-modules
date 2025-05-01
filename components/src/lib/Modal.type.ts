@@ -2,20 +2,14 @@ import { ReactNode } from 'react';
 
 type Position = 'center' | 'bottom';
 
-interface ActionDef {
-  label: string;
-  style: string;
-  onClick: () => void;
-}
-
 interface ModalProps {
+  children: ReactNode;
+  isOpen: boolean;
   position: Position;
-  content: ReactNode;
   onClose: () => void;
-  onOpen?: () => void;
+  onAfterOpen?: () => void;
   title?: string;
   showCloseButton?: boolean;
-  actions?: ActionDef[];
 }
 
-export type { Position, ActionDef, ModalProps };
+export type { Position, ModalProps };
