@@ -6,7 +6,7 @@ import {
   useCardNumbersInput,
   useCardCVCInput,
   useCardCompanyInput,
-} from './lib';
+} from 'laireca-custom-hooks';
 
 export interface InputProps extends ComponentProps<'input'> {
   isValid?: boolean;
