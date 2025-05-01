@@ -11,7 +11,7 @@ export const Backdrop = styled.div`
   top: 0;
 `;
 
-export const Container = styled.div<{ position: ModalPositionType }>`
+export const Modal = styled.div<{ position: ModalPositionType }>`
   position: fixed;
   background: #fff;
   padding: 1.5rem 2rem;

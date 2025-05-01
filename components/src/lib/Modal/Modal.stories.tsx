@@ -4,8 +4,8 @@ import Modal from "./index";
 const meta = {
   title: "Component/Modal",
   component: Modal,
+  tags: ["autodocs"],
   args: {
-    isOpen: true,
     title: "Modal Title",
     onClose: () => {},
     position: "center",
