@@ -1,4 +1,4 @@
-import { ModalComponent, useModal } from './lib';
+import { ModalComponent, useModal } from 'laireca-modal-components';
 import { ModalProps } from './lib/types/modalTypes';
 import './App.css';
 
