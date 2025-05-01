@@ -34,7 +34,7 @@ export function Dialog({ children }: { children: React.ReactNode }) {
 function useDialogContext() {
   const context = useContext(DialogContext);
   if (!context) {
-    throw new Error('useDialogContext must be used within a Dialog');
+    throw new Error('컨텍스트가 존재하지 않습니다.');
   }
   return context;
 }
