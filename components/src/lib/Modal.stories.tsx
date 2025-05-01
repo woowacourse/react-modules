@@ -44,9 +44,9 @@ export const CenterModal: Story = {
     const modalContainer = document.body.querySelector(
       "#modal-container"
     ) as HTMLDivElement;
-    await waitFor(() =>
-      expect(modalContainer).toHaveTextContent("중앙 모달 제목입니다")
-    );
+    await waitFor(() => {
+      expect(modalContainer).toHaveTextContent("중앙 모달 제목입니다");
+    });
 
     // close button 클릭시 모달 닫히기
     await userEvent.click(triggerButton);
