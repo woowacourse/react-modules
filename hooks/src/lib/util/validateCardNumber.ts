@@ -27,9 +27,11 @@ export function validateCardNetwork(cardNumber: string): CardNetwork {
 }
 
 export function validateCardNumber(cardNumber: string) {
-  if (cardNumber.length !== CARD_NUMBER_LENGTH)
+  const trimCardNumber = cardNumber.trim();
+
+  if (trimCardNumber.length !== CARD_NUMBER_LENGTH)
     return ERROR_MESSAGE.INVALID_LENGTH(CARD_NUMBER_LENGTH);
-  const cardNumbers = sliceCardNumber(cardNumber);
+  const cardNumbers = sliceCardNumber(trimCardNumber);
 
   for (const cardNumberGroup of Object.values(cardNumbers)) {
     if (!isNumeric(cardNumberGroup)) return ERROR_MESSAGE.NOT_NUMERIC;
