@@ -1,7 +1,7 @@
 import { renderHook, act } from "@testing-library/react";
 import useCardNumber from "./index";
 
-describe("useInput", () => {
+describe("useCardNumber", () => {
   it("입력값이 정확히 업데이트 되어야 한다.", () => {
     const userInput = "1234";
     const { result } = renderHook(() => useCardNumber());
