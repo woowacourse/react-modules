@@ -22,8 +22,10 @@ describe('useCardNumbers', () => {
       result.current.validateCardNumbers('part1', 'aaaa');
     });
 
-    expect(result.current.isValid.part1).toBe(false);
-    expect(result.current.errorMessage).toBe('숫자만 입력해주세요.');
+    const { isValid, errorMessage } = result.current.validationResults.part1;
+
+    expect(isValid).toBe(false);
+    expect(errorMessage).toBe('숫자만 입력해주세요.');
   });
 
   it('입력값이 네 자리가 아닐 때 isValid로 false를 반환하고 에러 메시지를 반환한다.', () => {
@@ -33,9 +35,9 @@ describe('useCardNumbers', () => {
       result.current.validateCardNumbers('part1', '12345');
     });
 
-    expect(result.current.isValid.part1).toBe(false);
-    expect(result.current.errorMessage).toBe(
-      '카드 번호는 네 자리만 입력해야 합니다.'
-    );
+    const { isValid, errorMessage } = result.current.validationResults.part1;
+
+    expect(isValid).toBe(false);
+    expect(errorMessage).toBe('카드 번호는 네 자리만 입력해야 합니다.');
   });
 });

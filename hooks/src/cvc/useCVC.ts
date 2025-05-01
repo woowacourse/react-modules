@@ -1,11 +1,13 @@
 import { ChangeEvent, useState } from 'react';
+import { ValidationResult } from '../types';
 
 function useCVC() {
   const [CVC, setCVC] = useState('');
 
-  const [isValid, setIsValid] = useState(true);
-
-  const [errorMessage, setErrorMessage] = useState('');
+  const [validationResult, setValidationResult] = useState<ValidationResult>({
+    isValid: true,
+    errorMessage: '',
+  });
 
   const checkIsNumber = (value: string) => {
     const regex = /^[0-9]*$/;
@@ -21,19 +23,25 @@ function useCVC() {
     const isValidLength = checkIsValidLength(value);
 
     if (!isNumber) {
-      setIsValid(false);
-      setErrorMessage('숫자만 입력해주세요.');
+      setValidationResult({
+        isValid: false,
+        errorMessage: '숫자만 입력해주세요.',
+      });
       return;
     }
 
     if (!isValidLength) {
-      setIsValid(false);
-      setErrorMessage('CVC는 세 자리만 입력해야 합니다.');
+      setValidationResult({
+        isValid: false,
+        errorMessage: 'CVC는 세 자리만 입력해야 합니다.',
+      });
       return;
     }
 
-    setIsValid(true);
-    setErrorMessage('');
+    setValidationResult({
+      isValid: true,
+      errorMessage: '',
+    });
   };
 
   const handleCVCChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -43,8 +51,7 @@ function useCVC() {
 
   return {
     CVC,
-    isValid,
-    errorMessage,
+    validationResult,
     validateCVC,
     handleCVCChange,
   };

@@ -22,8 +22,10 @@ describe('useExpiryDate', () => {
       result.current.validateExpiryDate('month', 'aa');
     });
 
-    expect(result.current.isValid.month).toBe(false);
-    expect(result.current.errorMessage).toBe('숫자만 입력해주세요.');
+    const { isValid, errorMessage } = result.current.validationResults.month;
+
+    expect(isValid).toBe(false);
+    expect(errorMessage).toBe('숫자만 입력해주세요.');
   });
 
   it('입력값이 두 자리가 아닐 때 isValid로 false를 반환하고 에러 메시지를 반환한다.', () => {
@@ -33,10 +35,10 @@ describe('useExpiryDate', () => {
       result.current.validateExpiryDate('month', '123');
     });
 
-    expect(result.current.isValid.month).toBe(false);
-    expect(result.current.errorMessage).toBe(
-      '유효기간은 두 자리만 입력해야 합니다.'
-    );
+    const { isValid, errorMessage } = result.current.validationResults.month;
+
+    expect(isValid).toBe(false);
+    expect(errorMessage).toBe('유효기간은 두 자리만 입력해야 합니다.');
   });
 
   it('입력값이 1 이상 12이하가 아닐 때 isValid로 false를 반환하고 에러 메시지를 반환한다.', () => {
@@ -46,10 +48,10 @@ describe('useExpiryDate', () => {
       result.current.validateExpiryDate('month', '13');
     });
 
-    expect(result.current.isValid.month).toBe(false);
-    expect(result.current.errorMessage).toBe(
-      '유효한 월(1~12)을 입력해야 합니다.'
-    );
+    const { isValid, errorMessage } = result.current.validationResults.month;
+
+    expect(isValid).toBe(false);
+    expect(errorMessage).toBe('유효한 월(1~12)을 입력해야 합니다.');
   });
 
   it('입력값이 1 이상 12이하가 아닐 때 isValid로 false를 반환하고 에러 메시지를 반환한다.', () => {
@@ -65,9 +67,9 @@ describe('useExpiryDate', () => {
       result.current.validateIsExpiredDate('year', '23');
     });
 
-    expect(result.current.isValid.year).toBe(false);
-    expect(result.current.errorMessage).toBe(
-      '유효기간은 현재 날짜 이후로 입력해야 합니다.'
-    );
+    const { isValid, errorMessage } = result.current.validationResults.year;
+
+    expect(isValid).toBe(false);
+    expect(errorMessage).toBe('유효기간은 현재 날짜 이후로 입력해야 합니다.');
   });
 });

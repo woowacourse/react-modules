@@ -1,5 +1,6 @@
 import { ChangeEvent, useState } from 'react';
 import { CardNumbersKey } from './constants';
+import { ValidationResult } from '../types';
 
 function useCardNumbers() {
   const [cardNumbers, setCardNumbers] = useState<
@@ -11,14 +12,14 @@ function useCardNumbers() {
     part4: '',
   });
 
-  const [isValid, setIsValid] = useState<Record<CardNumbersKey, boolean>>({
-    part1: true,
-    part2: true,
-    part3: true,
-    part4: true,
+  const [validationResults, setValidationResults] = useState<
+    Record<CardNumbersKey, ValidationResult>
+  >({
+    part1: { isValid: true, errorMessage: '' },
+    part2: { isValid: true, errorMessage: '' },
+    part3: { isValid: true, errorMessage: '' },
+    part4: { isValid: true, errorMessage: '' },
   });
-
-  const [errorMessage, setErrorMessage] = useState<string>('');
 
   const checkIsNumber = (value: string) => {
     const regex = /^[0-9]*$/;
@@ -34,19 +35,30 @@ function useCardNumbers() {
     const isValidLength = checkIsValidLength(value);
 
     if (!isNumber) {
-      setIsValid((prev) => ({ ...prev, [name]: false }));
-      setErrorMessage('숫자만 입력해주세요.');
+      setValidationResults((prev) => ({
+        ...prev,
+        [name]: { isValid: false, errorMessage: '숫자만 입력해주세요.' },
+      }));
       return;
     }
 
     if (!isValidLength) {
-      setIsValid((prev) => ({ ...prev, [name]: false }));
-      setErrorMessage('카드 번호는 네 자리만 입력해야 합니다.');
+      setValidationResults((prev) => ({
+        ...prev,
+        [name]: {
+          isValid: false,
+          errorMessage: '카드 번호는 네 자리만 입력해야 합니다.',
+        },
+      }));
       return;
     }
-
-    setIsValid((prev) => ({ ...prev, [name]: true }));
-    setErrorMessage('');
+    setValidationResults((prev) => ({
+      ...prev,
+      [name]: {
+        isValid: true,
+        errorMessage: '',
+      },
+    }));
   };
 
   const handleCardNumbersChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -56,8 +68,7 @@ function useCardNumbers() {
 
   return {
     cardNumbers,
-    isValid,
-    errorMessage,
+    validationResults,
     validateCardNumbers,
     handleCardNumbersChange,
   };

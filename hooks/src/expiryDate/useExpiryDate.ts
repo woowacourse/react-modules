@@ -1,5 +1,6 @@
 import { ChangeEvent, useState } from 'react';
 import { EXPIRY_DATE_KEY, ExpiryDateKey } from './constants';
+import { ValidationResult } from '../types';
 
 function useExpiryDate() {
   const [expiryDate, setExpiryDate] = useState<Record<ExpiryDateKey, string>>({
@@ -7,12 +8,12 @@ function useExpiryDate() {
     year: '',
   });
 
-  const [isValid, setIsValid] = useState<Record<ExpiryDateKey, boolean>>({
-    month: true,
-    year: true,
+  const [validationResults, setValidationResults] = useState<
+    Record<ExpiryDateKey, ValidationResult>
+  >({
+    month: { isValid: true, errorMessage: '' },
+    year: { isValid: true, errorMessage: '' },
   });
-
-  const [errorMessage, setErrorMessage] = useState<string>('');
 
   const checkIsNumber = (value: string) => {
     const regex = /^[0-9]*$/;
@@ -46,25 +47,42 @@ function useExpiryDate() {
     const isMonthInRange = checkIsMonthInRange(value);
 
     if (!isNumber) {
-      setIsValid((prev) => ({ ...prev, [name]: false }));
-      setErrorMessage('숫자만 입력해주세요.');
+      setValidationResults((prev) => ({
+        ...prev,
+        [name]: { isValid: false, errorMessage: '숫자만 입력해주세요.' },
+      }));
       return;
     }
 
     if (!isValidLength) {
-      setIsValid((prev) => ({ ...prev, [name]: false }));
-      setErrorMessage('유효기간은 두 자리만 입력해야 합니다.');
+      setValidationResults((prev) => ({
+        ...prev,
+        [name]: {
+          isValid: false,
+          errorMessage: '유효기간은 두 자리만 입력해야 합니다.',
+        },
+      }));
       return;
     }
 
     if (name === EXPIRY_DATE_KEY.month && !isMonthInRange) {
-      setIsValid((prev) => ({ ...prev, [name]: false }));
-      setErrorMessage('유효한 월(1~12)을 입력해야 합니다.');
+      setValidationResults((prev) => ({
+        ...prev,
+        [name]: {
+          isValid: false,
+          errorMessage: '유효한 월(1~12)을 입력해야 합니다.',
+        },
+      }));
       return;
     }
 
-    setIsValid((prev) => ({ ...prev, [name]: true }));
-    setErrorMessage('');
+    setValidationResults((prev) => ({
+      ...prev,
+      [name]: {
+        isValid: true,
+        errorMessage: '',
+      },
+    }));
   };
 
   const validateIsExpiredDate = (name: ExpiryDateKey, value: string) => {
@@ -74,8 +92,13 @@ function useExpiryDate() {
     const isExpiredDate = checkIsExpiredDate(targetMonth, targetYear);
 
     if (isExpiredDate) {
-      setIsValid((prev) => ({ ...prev, [name]: false }));
-      setErrorMessage('유효기간은 현재 날짜 이후로 입력해야 합니다.');
+      setValidationResults((prev) => ({
+        ...prev,
+        [name]: {
+          isValid: false,
+          errorMessage: '유효기간은 현재 날짜 이후로 입력해야 합니다.',
+        },
+      }));
       return;
     }
   };
@@ -87,8 +110,7 @@ function useExpiryDate() {
 
   return {
     expiryDate,
-    isValid,
-    errorMessage,
+    validationResults,
     validateExpiryDate,
     validateIsExpiredDate,
     handleExpiryDateChange,
