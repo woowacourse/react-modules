@@ -5,9 +5,9 @@ import isUnderMaxLength from '../../validate/isUnderMaxLength';
 
 const KEY = 'cardCVCNumber';
 
-const CARD_CVC_MAX_LENGTH = 3;
+export const CARD_CVC_MAX_LENGTH = 3;
 
-const CARD_CVC_ERROR_MESSAGE = {
+export const CARD_CVC_ERROR_MESSAGE = {
   INVALID_LENGTH: `CVC 번호는  ${CARD_CVC_MAX_LENGTH}자리 숫자여야 합니다.`,
   NOT_NUMBERIC: '숫자만 입력 가능합니다.',
 } as const;
