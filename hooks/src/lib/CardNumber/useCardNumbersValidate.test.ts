@@ -1,5 +1,6 @@
 import { renderHook, act } from '@testing-library/react';
-import { useCardNumbersValidate } from '@ohgus/payment-hooks';
+
+import useCardNumbersValidate from './useCardNumbersValidate';
 
 describe('useCardNumbersValidate', () => {
   it('숫자로 이루어진 4자리 값이 들어오면 isValid가 true이고 에러 메시지가 null이다.', () => {
