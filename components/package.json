@@ -1,6 +1,6 @@
 {
-  "name": "@hakukudh/modal-components",
-  "version": "0.0.2",
+  "name": "@kimyouk/modal-components",
+  "version": "0.0.4",
   "description": "npm modal modules",
   "type": "module",
   "types": "dist/index.d.ts",
@@ -34,6 +34,7 @@
     "@storybook/react": "^8.6.12",
     "@storybook/react-vite": "^8.6.12",
     "@storybook/test": "^8.6.12",
+    "@testing-library/react": "^16.3.0",
     "@types/jest": "^29.5.14",
     "@types/node": "^22.14.1",
     "@types/react": "^19.1.1",
