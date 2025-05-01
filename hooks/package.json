@@ -1,6 +1,6 @@
 {
-  "name": "hooks",
-  "version": "0.0.1",
+  "name": "meta-seo-hooks",
+  "version": "0.0.2",
   "description": "npm modules",
   "type": "module",
   "types": "dist/index.d.ts",
@@ -17,6 +17,7 @@
     "test": "jest"
   },
   "dependencies": {
+    "meta-seo-hooks": "^0.0.2",
     "react": "^19.1.0",
     "react-dom": "^19.1.0"
   },

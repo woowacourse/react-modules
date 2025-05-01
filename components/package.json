@@ -1,7 +1,8 @@
 {
-  "name": "compoents",
-  "version": "0.0.1",
+  "name": "seo-meta-react-modal",
+  "version": "0.0.2",
   "description": "npm modules",
+  "license": "MIT",
   "type": "module",
   "types": "dist/index.d.ts",
   "main": "dist/index.js",
@@ -10,16 +11,19 @@
     "dist"
   ],
   "scripts": {
-    "dev": "vite",
+    "dev": "vite --host",
     "build": "tsc && vite build",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "chromatic": "npx chromatic --project-token=chpt_cf31abeab610bc2"
   },
   "dependencies": {
+    "@emotion/styled": "^11.14.0",
     "react": "^19.1.0",
-    "react-dom": "^19.1.0"
+    "react-dom": "^19.1.0",
+    "seo-meta-react-modal": "^0.0.2"
   },
   "devDependencies": {
     "@chromatic-com/storybook": "^3.2.6",
@@ -38,6 +42,7 @@
     "@typescript-eslint/eslint-plugin": "^8.29.1",
     "@typescript-eslint/parser": "^8.29.1",
     "@vitejs/plugin-react-swc": "^3.8.1",
+    "chromatic": "^11.28.2",
     "eslint": "^9.24.0",
     "eslint-plugin-react-hooks": "^5.2.0",
     "eslint-plugin-react-refresh": "^0.4.19",
