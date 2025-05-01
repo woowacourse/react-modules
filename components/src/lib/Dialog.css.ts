@@ -1,4 +1,4 @@
-import styled from '@emotion/styled/macro';
+import styled from "@emotion/styled";
 
 export const StyledOverlay = styled.div`
   position: fixed;
@@ -9,13 +9,13 @@ export const StyledOverlay = styled.div`
   background-color: rgba(0, 0, 0, 0.5);
 `;
 
-export const StyledContent = styled.div<{ position?: 'center' | 'bottom' }>`
+export const StyledContent = styled.div<{ position?: "center" | "bottom" }>`
   position: fixed;
   background-color: white;
   border-radius: 10px;
 
   ${(props) =>
-    props.position === 'bottom'
+    props.position === "bottom"
       ? `
     bottom: 0;
     left: 50%;
