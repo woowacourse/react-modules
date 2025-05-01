@@ -5,9 +5,9 @@ import isUnderMaxLength from '../../validate/isUnderMaxLength';
 
 const KEY = 'cardPassword';
 
-const CARD_PASSWORD_MAX_LENGTH = 2;
+export const CARD_PASSWORD_MAX_LENGTH = 2;
 
-const CARD_PASSWORD_ERROR_MESSAGE = {
+export const CARD_PASSWORD_ERROR_MESSAGE = {
   NOT_NUMBERIC: '숫자만 입력 가능합니다.',
   INVALID_LENGTH: `카드 비밀번호는 ${CARD_PASSWORD_MAX_LENGTH}자리 숫자여야 합니다.`,
 };
