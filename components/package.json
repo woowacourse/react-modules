@@ -1,6 +1,6 @@
 {
   "name": "laireca-modal-components",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Easily create modal components with this lightweight npm package",
   "type": "module",
   "types": "dist/index.d.ts",
@@ -9,9 +9,6 @@
   "files": [
     "dist"
   ],
-  "publishConfig": {
-    "access": "public"
-  },
   "scripts": {
     "dev": "vite dev --host 0.0.0.0",
     "build": "tsc && vite build",
