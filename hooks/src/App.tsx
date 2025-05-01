@@ -1,174 +1,45 @@
-import React from "react";
-import "./App.css";
-import { useState } from "react";
-
-interface ValidationResult {
-  isValid: boolean;
-  errorMessage: string;
-}
-
-export const validateCardNumber = (cardNumber: string): ValidationResult => {
-    if (isNaN(Number(cardNumber))) {
-      return {
-        isValid: false,
-        errorMessage: "숫자만 입력해주세요.",
-      };
-    }
-  if (cardNumber.length !== 4) {
-    return {
-      isValid: false,
-      errorMessage: "카드 번호는 4자리여야 합니다.",
-    };
-  }
-
-  return {
-    isValid: true,
-    errorMessage: "",
-  };
-};
-
-//0627 형태로 입력된다고 가정 (무조건 4자리를 입력한다고 생각함.)
-
-export const validateCardExpirationDate = (
-  expirationDate: string
-): ValidationResult => {
-    if (isNaN(Number(expirationDate))) {
-      return {
-        isValid: false,
-        errorMessage: "숫자만 입력해주세요.",
-      };
-    }
-  if (expirationDate.length !== 4) {
-    return {
-      isValid: false,
-      errorMessage: "유효기간은 4자리여야 합니다.",
-    };
-  }
-
-
-
-  const month = Number(expirationDate.slice(0, 2));
-  const year = Number(expirationDate.slice(2, 4));
-
-  if (month < 1 || month > 12) {
-    return {
-      isValid: false,
-      errorMessage: "월은 1~12 사이여야 합니다.",
-    };
-  }
-
-  const currentDate = new Date();
-  const currentYear = currentDate.getFullYear() % 100;
-  const currentMonth = currentDate.getMonth() + 1;
-
-  const hasYearPassed = year < currentYear;
-  const hasMonthPassed = year === currentYear && month < currentMonth;
-
-  if (hasYearPassed || hasMonthPassed) {
-    return {
-      isValid: false,
-      errorMessage: "유효기간이 만료되었습니다.",
-    };
-  }
-
-  return {
-    isValid: true,
-    errorMessage: "",
-  };
-};
-
-export const validateCardCVC = (cvc: string): ValidationResult => {
-  if (isNaN(Number(cvc))) {
-      return {
-        isValid: false,
-        errorMessage: "숫자만 입력해주세요.",
-      };
-    }
-
-  if (cvc.length !== 3) {
-    return {
-      isValid: false,
-      errorMessage: "CVC는 3자리여야 합니다.",
-    };
-  }
-  return {
-    isValid: true,
-    errorMessage: "",
-  };
-};
-
-export const validateCardSecretNumber = (
-  secretNumber: string
-): ValidationResult => {
-
-
-  if (isNaN(Number(secretNumber))) {
-    return {
-      isValid: false,
-      errorMessage: "숫자만 입력해주세요.",
-    };
-  }
-  
-  if (secretNumber.length !== 2) {
-    return {
-      isValid: false,
-      errorMessage: "비밀번호는 2자리여야 합니다.",
-    };
-  }
-
-  return {
-    isValid: true,
-    errorMessage: "",
-  };
-};
-
+import useCardNumber from "./lib/hooks/CardNumber";
 function App() {
-  const [cardNumber, setCardNumber] = useState("");
-  const [expiryDate, setExpiryDate] = useState("");
-  const [cvc, setCvc] = useState("");
-  const [secretNumber, setSecretNumber] = useState("");
+  const { cardNumberState, handleCardNumberChange, errorState } =
+    useCardNumber();
 
-
+  console.log(errorState);
   return (
     <>
+      <div onClick={undefined}>123</div>
       <input
-        placeholder="카드 번호"
+        placeholder="1"
         type="text"
-        value={cardNumber}
+        value={cardNumberState.first.value}
         onChange={(e) => {
-          setCardNumber(e.target.value);
-          console.log(validateCardNumber(e.target.value));
+          handleCardNumberChange("first", e.target.value);
         }}
       />
       <input
-        placeholder="유효기간"
+        placeholder="1"
         type="text"
-        value={expiryDate}
+        value={cardNumberState.second.value}
         onChange={(e) => {
-          setExpiryDate(e.target.value);
-          console.log(validateCardExpirationDate(e.target.value));
+          handleCardNumberChange("second", e.target.value);
         }}
       />
       <input
-        placeholder="cvc"
+        placeholder="1"
         type="text"
-        value={cvc}
+        value={cardNumberState.third.value}
         onChange={(e) => {
-          setCvc(e.target.value);
-          console.log(validateCardCVC(e.target.value));
-        }
-
-        }
-      />
-      <input
-        placeholder="비밀번호"
-        type="text"
-        value={secretNumber}
-        onChange={(e) => {
-          setSecretNumber(e.target.value);
-          console.log(validateCardSecretNumber(e.target.value));
+          handleCardNumberChange("third", e.target.value);
         }}
       />
+      <input
+        placeholder="1"
+        type="text"
+        value={cardNumberState.fourth.value}
+        onChange={(e) => {
+          handleCardNumberChange("fourth", e.target.value);
+        }}
+      />
+      <button disabled={!errorState.isValid}>123</button>
     </>
   );
 }
