@@ -1,12 +1,12 @@
-import { useState } from "react";
+import { useState } from 'react';
 
 const EXPIRYDATE_RULE = {
-  INVALID_YEAR_LENGTH_ERROR: "연도는 2자리로 입력해 주세요.",
-  INVALID_MONTH_LENGTH_ERROR: "월은 2자리로 입력해 주세요.",
-  YEAR_IS_NOT_A_NUMBER: "연도는 숫자로 입력해 주세요.",
-  MONTH_IS_NOT_A_NUMBER: "월은 숫자로 입력해 주세요.",
-  INVALID_YEAR: "유효하지 않은 연도입니다.",
-  INVALID_MONTH: "유효하지 않은 월입니다.",
+  INVALID_YEAR_LENGTH_ERROR: '연도는 2자리로 입력해 주세요.',
+  INVALID_MONTH_LENGTH_ERROR: '월은 2자리로 입력해 주세요.',
+  YEAR_IS_NOT_A_NUMBER: '연도는 숫자로 입력해 주세요.',
+  MONTH_IS_NOT_A_NUMBER: '월은 숫자로 입력해 주세요.',
+  INVALID_YEAR: '유효하지 않은 연도입니다.',
+  INVALID_MONTH: '유효하지 않은 월입니다.',
   DATE_MAX_LENGTH: 2,
   DATE_MONTH_MIN: 1,
   DATE_MONTH_MAX: 12,
@@ -32,16 +32,16 @@ type errorType = {
 const initialDate = [
   {
     isValidate: false,
-    errorMessage: "",
+    errorMessage: '',
   },
   {
     isValidate: false,
-    errorMessage: "",
+    errorMessage: '',
   },
 ];
 
 export default function useExpiryDate(): ValitationResult {
-  const [date, setDate] = useState<dateType>({ month: "", year: "" });
+  const [date, setDate] = useState<dateType>({ month: '', year: '' });
   const [error, setError] = useState<errorType[]>(initialDate);
 
   const updateDate = (index: number, isError: boolean, message: string) => {
@@ -55,12 +55,12 @@ export default function useExpiryDate(): ValitationResult {
   };
 
   const validate = (value: string, dateName: string) => {
-    if (dateName === "month") {
+    if (dateName === 'month') {
       if (value.length > EXPIRYDATE_RULE.DATE_MAX_LENGTH) return;
       setDate((prev) => ({ ...prev, month: value }));
 
-      if (value === "") {
-        updateDate(0, false, "");
+      if (value === '') {
+        updateDate(0, false, '');
         return;
       }
 
@@ -79,15 +79,15 @@ export default function useExpiryDate(): ValitationResult {
         updateDate(0, true, EXPIRYDATE_RULE.INVALID_MONTH);
         return;
       }
-      updateDate(0, false, "");
+      updateDate(0, false, '');
     }
 
-    if (dateName === "year") {
+    if (dateName === 'year') {
       if (value.length > EXPIRYDATE_RULE.DATE_MAX_LENGTH) return;
       setDate((prev) => ({ ...prev, year: value }));
 
-      if (value === "") {
-        updateDate(0, false, "");
+      if (value === '') {
+        updateDate(1, false, '');
         return;
       }
 
@@ -103,7 +103,7 @@ export default function useExpiryDate(): ValitationResult {
         updateDate(1, true, EXPIRYDATE_RULE.INVALID_YEAR);
         return;
       }
-      updateDate(1, false, "");
+      updateDate(1, false, '');
     }
   };
 
