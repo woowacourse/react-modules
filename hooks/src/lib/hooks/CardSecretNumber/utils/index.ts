@@ -1,4 +1,4 @@
-import { ValidationResult } from "@types";
+import { ValidationResult } from "../../../types";
 
 export const validateCardSecretNumber = (
   secretNumber: string

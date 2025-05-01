@@ -29,9 +29,4 @@ export default defineConfig({
       tsconfigPath: "./tsconfig.app.json",
     }),
   ],
-  resolve: {
-    alias: {
-      "@types": path.resolve(__dirname, "src/types/*"),
-    },
-  },
 });

@@ -12,9 +12,6 @@
     "declarationDir": "./dist",
     "outDir": "./dist",
     "esModuleInterop": true,
-    "paths": {
-      "@types": ["src/types"]
-    },
 
     /* Bundler mode */
     "moduleResolution": "bundler",
