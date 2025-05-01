@@ -1,6 +1,6 @@
 import { useState } from "react";
 import "./App.css";
-import { Modal } from "compoents-modal-test-spoy";
+import { Modal } from "compoents-modal-test-kangoll";
 
 function App() {
   const [isOpen, setIsOpen] = useState(true);

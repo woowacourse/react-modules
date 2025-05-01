@@ -1,6 +1,6 @@
 {
-  "name": "compoents-modal-test-spoy",
-  "version": "0.0.30",
+  "name": "compoents-modal-test-kangoll",
+  "version": "0.0.18",
   "description": "npm modules",
   "type": "module",
   "main": "dist/index.cjs",
@@ -58,5 +58,8 @@
     "vite": "^6.2.6",
     "vite-plugin-css-injected-by-js": "^3.5.2",
     "vite-plugin-dts": "^4.5.3"
+  },
+  "dependencies": {
+    "compoents-modal-test-kangoll": "^0.0.18"
   }
 }
