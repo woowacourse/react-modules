@@ -1,6 +1,6 @@
 {
   "name": "compoents-modal-test-spoy",
-  "version": "0.0.17",
+  "version": "0.0.30",
   "description": "npm modules",
   "type": "module",
   "main": "dist/index.cjs",
@@ -47,6 +47,7 @@
     "@typescript-eslint/eslint-plugin": "^8.29.1",
     "@typescript-eslint/parser": "^8.29.1",
     "@vitejs/plugin-react-swc": "^3.8.1",
+    "chromatic": "^11.28.2",
     "eslint": "^9.24.0",
     "eslint-plugin-react-hooks": "^5.2.0",
     "eslint-plugin-react-refresh": "^0.4.19",
