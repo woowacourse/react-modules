@@ -3,7 +3,14 @@ import useCVCNumber from "./useCVCNumber";
 import useExpiryDateNumber from "./useExpiryDateNumber";
 import usePasswordNumber from "./usePasswordNumber";
 
-export default function useCardValidation() {
+interface UseCardValidationReturn {
+  card: ReturnType<typeof useCardNumber>;
+  cvc: ReturnType<typeof useCVCNumber>;
+  expiry: ReturnType<typeof useExpiryDateNumber>;
+  password: ReturnType<typeof usePasswordNumber>;
+}
+
+export default function useCardValidation(): UseCardValidationReturn {
   const card = useCardNumber();
   const cvc = useCVCNumber();
   const expiry = useExpiryDateNumber();
