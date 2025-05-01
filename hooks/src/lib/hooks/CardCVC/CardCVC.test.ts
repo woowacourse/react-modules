@@ -1,10 +1,10 @@
 import { renderHook, act } from "@testing-library/react";
-import useCardNumber from "./index";
+import useCardCVC from "./index";
 
 describe("useCVC", () => {
   it("입력값이 정확히 업데이트 되어야 한다.", () => {
     const userInput = "123";
-    const { result } = renderHook(() => useCardNumber());
+    const { result } = renderHook(() => useCardCVC());
 
     act(() => {
       result.current.handleCVCState(userInput);
@@ -14,7 +14,7 @@ describe("useCVC", () => {
 
   it("카드 번호에 문자열을 입력하면 오류가 발생해야한다.", () => {
     const invalidKoreanInput = "ㅁㅁㅁ";
-    const { result } = renderHook(() => useCardNumber());
+    const { result } = renderHook(() => useCardCVC());
 
     act(() => {
       result.current.handleCVCState(invalidKoreanInput);
@@ -26,7 +26,7 @@ describe("useCVC", () => {
 
   it("카드번호에 2자리를 입력하면 오류가 발생해야한다.", () => {
     const invalidLengthInput = "12";
-    const { result } = renderHook(() => useCardNumber());
+    const { result } = renderHook(() => useCardCVC());
 
     act(() => {
       result.current.handleCVCState(invalidLengthInput);
@@ -40,7 +40,7 @@ describe("useCVC", () => {
 
   it("카드번호에 숫자 3자리를 입력하면 유효하게 작동해야한다. ", () => {
     const validInput = "123";
-    const { result } = renderHook(() => useCardNumber());
+    const { result } = renderHook(() => useCardCVC());
 
     act(() => {
       result.current.handleCVCState(validInput);
