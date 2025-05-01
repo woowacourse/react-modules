@@ -17,7 +17,7 @@ export const ModalBackground = styled.div<{
   z-index: 10;
   visibility: hidden;
   visibility: ${({ isModalOpen }) => isModalOpen === true && 'visible'};
-  opacity: ${({ isModalOpen }) => isModalOpen === true && '1'}
+  opacity: ${({ isModalOpen }) => isModalOpen === true && '1'};
   transition: opacity 0.3s ease, visibility 0.3s ease;
   margin: 0 auto;
   align-items: ${({ position }) => {
@@ -30,7 +30,7 @@ export const ModalBackground = styled.div<{
   }};
 `;
 
-export const ModalConatiner = styled.div<{
+export const ModalContainer = styled.div<{
   position: string;
 }>`
   background-color: #ffffff;
@@ -41,7 +41,7 @@ export const ModalConatiner = styled.div<{
   position: relative;
   width: 304px;
   height: 216px;
-  width:  ${({ position }) => position === 'bottom' && '100%'}
+  width:  ${({ position }) => position === 'bottom' && '100%;'}
   border-radius:  ${({ position }) => position === 'bottom' && '10px 10px 0 0;'}
 `;
 

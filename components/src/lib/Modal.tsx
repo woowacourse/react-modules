@@ -1,9 +1,9 @@
 import {
   ModalBackground,
-  ModalConatiner,
+  ModalContainer,
   ModalHeader,
   CloseButton,
-} from "./Modal.styles";
+} from './Modal.styles.ts';
 interface ModalPropsType {
   isModalOpen: boolean;
   position: string;
@@ -22,13 +22,13 @@ const Modal = ({
   return (
     <>
       <ModalBackground isModalOpen={isModalOpen} position={position}>
-        <ModalConatiner position={position}>
+        <ModalContainer position={position}>
           <ModalHeader>
             <h4>{title}</h4>
             <CloseButton onClick={onClose}>X</CloseButton>
-            {children}
           </ModalHeader>
-        </ModalConatiner>
+          {children}
+        </ModalContainer>
       </ModalBackground>
     </>
   );
