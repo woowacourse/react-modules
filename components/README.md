@@ -1,54 +1,45 @@
-# Button Module
+# Modal Module 라이브러리
 
-## 기능
+## 소개
 
-### 모달 컴포넌트
+@happyjurung/modal은 React 애플리케이션에서 모달 창을 쉽고 일관되게 구현할 수 있도록 돕는 라이브러리입니다.
 
-- 모달 컴포넌트를 npm으로 배포하고 사용할 수 있어야 한다.
+## 설치
 
-  - [x] 컴포넌트 생성
-  - [x] 컴포넌트 스토리북 테스트
-  - [x] 컴포넌트 빌드 및 배포
-  - [x] 컴포넌트 설치 및 사용
+```bash
+npm install @happyjurung/modal
+```
 
-- 피그마 시안 예시처럼 모바일에서 사용 가능한 모달 컴포넌트를 만들어야 한다.
+## 주요 기능
 
-  - [x] 모바일에서 사용 가능한 레이아웃으로 만든다.
+- 헤더 & 닫기 버튼: title과 CloseButton으로 기본 헤더 레이아웃과 닫기 기능 제공
+- 위치 제어: position prop으로 center/bottom 등 원하는 위치에 배치 가능
+- 포함 콘텐츠: children에 어떤 JSX든 전달해 자유롭게 본문 구성
+- 열림/닫힘 상태: isModalOpen과 onClose로 모달 제어
 
-- 모달 위치 및 내용 구성 옵션을 prop으로 전달받아 유연하게 모달을 구성할 수 있어야 한다.
+## 사용 예시
 
-  - [x] isModalOpen을 전달받을 수 있다. : 모달 열기
-  - [x] position을 전달받을 수 있다. : 모달 위치
-  - [x] title을 전달받을 수 있다. : 모달 제목
-  - [x] children을 전달받을 수 있다. : 모달 내용
-  - [x] onClose 전달받을 수 있다. : 모달 닫기
+```js
+import React, { useState } from "react";
+import Modal from "@happyjurung/modal";
 
-- 사용자 정의 이벤트 핸들러
-  - [x] modalOpen으로 모달 열기
-  - [x] modalClose으로 모달 닫기
+function App() {
+  const [open, setOpen] = useState(false);
 
-### 모달 컴포넌트
+  return (
+    <>
+      <button onClick={() => setOpen(true)}>모달 열기</button>
+      <Modal
+        isModalOpen={open}
+        position="center"
+        title="모달 제목"
+        onClose={() => setOpen(false)}
+      >
+        <p>여기 모달 본문 내용을 작성하세요.</p>
+      </Modal>
+    </>
+  );
+}
 
-- Modal
-- CardBrand
-- Button
-- AgreementCheckList
-
-### storybook
-
-모달 컴포넌트
-
-- [x] 카드사 선택 컴포넌트
-  - [x] 중앙에 위치하는지
-- [x] 동의 컴포넌트
-  - [x] 하단에 위치하는지
-
-## 커밋메시지
-
-- feat : 새로운 기능을 추가한 경우
-- fix : 버그 수정
-- docs : 문서를 수정한 경우
-- style : 코드 스타일, 포멧, 주석을 변경
-- refactor : 코드 리팩토링
-- test : 테스트 관련 코드를 수정한 경우
-- chore : 코드 수정이 아닌, 단순 폴더명 파일명 등을 수정한 경우
+export default App;
+```
