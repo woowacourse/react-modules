@@ -31,7 +31,7 @@ const Modal = ({ children, position, isOpen, onAfterOpen, onClose, title, showCl
   if (!isOpen) return null;
 
   return (
-    <div className={ModalBackdrop} onClick={handleBackdropClick}>
+    <div className={ModalBackdrop} onClick={handleBackdropClick} data-testid="modal-backdrop">
       <div className={ModalFrame(position)} data-testid="modal">
         <section className={ModalHeader}>
           {title && <h2>{title}</h2>}
