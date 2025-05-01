@@ -27,7 +27,7 @@ npm i @jae-o/hooks-module
 ## 사용 예시: useCardNumbers
 
 ```tsx
-import { useCardNumbers } from 'react-payment-hooks';
+import { useCardNumbers } from '@jae-o/hooks-module';
 
 function CardInputForm() {
   const { cardNumbers, validationResults, handleCardNumbersChange } =

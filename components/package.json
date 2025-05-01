@@ -1,6 +1,6 @@
 {
   "name": "@jae-o/modal-component-module",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "modal component module",
   "type": "module",
   "types": "dist/index.d.ts",
@@ -15,7 +15,8 @@
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "chromatic": "npx chromatic --project-token=chpt_984c2cec99e798a"
   },
   "dependencies": {
     "@emotion/react": "^11.14.0",
