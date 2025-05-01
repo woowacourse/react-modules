@@ -1,9 +1,19 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import Modal from "../lib/Modal";
+import { useEffect, useState } from "react";
 
-const meta = {
+const meta: Meta<typeof Modal> = {
   title: "Modal",
   component: Modal,
+  argTypes: {
+    show: { control: "boolean" },
+  },
+  args: {
+    show: true,
+    background: true,
+    position: "center",
+    gap: 16,
+  },
   parameters: {
     docs: {
       description: {
@@ -12,35 +22,36 @@ const meta = {
       },
     },
   },
-} satisfies Meta<typeof Modal>;
+};
 
 export default meta;
 
-type Story = StoryObj<typeof meta>;
+type Story = StoryObj<typeof Modal>;
 
 export const ModalComponent: Story = {
-  args: {
-    show: true,
-    onHide: () => {},
-    background: true,
-    position: "center",
-    gap: 16,
-    children: (
-      <>
-        <Modal.Header closeButton>
-          <Modal.Title>Title</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>Body</Modal.Body>
-        <Modal.Footer>Footer</Modal.Footer>
-      </>
-    ),
-  },
+  render: (args, { updateArgs }) => {
+    const [internalShow, setInternalShow] = useState(args.show);
 
-  render: (args) => {
+    // args.show가 바뀌면 내부 상태도 따라감 (Controls -> 컴포넌트)
+    useEffect(() => {
+      setInternalShow(args.show);
+    }, [args.show]);
+
+    const handleHide = () => {
+      setInternalShow(false); // UI상 꺼짐
+      updateArgs?.({ show: false }); // Controls 상태도 꺼짐
+    };
+
     return (
-      <Modal background={args.background} show={args.show} onHide={args.onHide} position={args.position} gap={args.gap}>
-        {args.children}
-      </Modal>
+      <div style={{ height: "50vh", display: "flex", alignItems: "center", justifyContent: "center" }}>
+        <Modal {...args} show={internalShow} onHide={handleHide}>
+          <Modal.Header closeButton>
+            <Modal.Title>Title</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>Body</Modal.Body>
+          <Modal.Footer>Footer</Modal.Footer>
+        </Modal>
+      </div>
     );
   },
 };
