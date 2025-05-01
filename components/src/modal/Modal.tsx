@@ -1,34 +1,20 @@
 import styled from '@emotion/styled';
-import {
-  Fragment,
-  isValidElement,
-  ReactElement,
-  ReactNode,
-  useEffect,
-  useRef,
-} from 'react';
+import { PropsWithChildren, useEffect, useRef } from 'react';
 import PrimaryButton from './PrimaryButton';
 import SecondaryButton from './SecondaryButton';
 
 interface ModalProps {
-  title: string;
   isOpen: boolean;
   onClose: () => void;
-  contents: ReactNode;
-  buttons: ReactElement<typeof PrimaryButton | typeof SecondaryButton>[];
-  showCloseButton?: boolean;
   position?: 'center' | 'bottom';
 }
 
-function Modal({
-  title,
+function ModalContainer({
   isOpen,
   onClose,
-  contents,
-  buttons,
   position = 'center',
-  showCloseButton = true,
-}: ModalProps) {
+  children,
+}: PropsWithChildren<ModalProps>) {
   const modalRef = useRef<HTMLDialogElement>(null);
 
   useEffect(() => {
@@ -55,52 +41,37 @@ function Modal({
     };
   }, [isOpen, onClose]);
 
-  useEffect(() => {
-    buttons.forEach((button, idx) => {
-      if (
-        !isValidElement(button) ||
-        (button.type !== PrimaryButton && button.type !== SecondaryButton)
-      ) {
-        throw new Error(
-          `Modal: buttons[${idx}]는 PrimaryButton 또는 SecondaryButton이어야 합니다.`
-        );
-      }
-    });
-  }, [buttons]);
-
   return (
-    <ModalContainer
+    <StyledModalContainer
       onClose={onClose}
       isBottom={position === 'bottom'}
       ref={modalRef}
     >
-      <ModalWrapper isBottom={position === 'bottom'}>
-        <ModalHeader>
-          <Title>{title}</Title>
-          {showCloseButton && (
-            <CloseButton type="button" onClick={onClose}>
-              <img
-                src={new URL('./assets/close-button.png', import.meta.url).href}
-                alt="모달 닫기 버튼"
-              />
-            </CloseButton>
-          )}
-        </ModalHeader>
-        {contents}
-        <ButtonWrapper>
-          {buttons.map((buttonComponent, index) => (
-            <Fragment key={index}>{buttonComponent}</Fragment>
-          ))}
-        </ButtonWrapper>
-      </ModalWrapper>
-    </ModalContainer>
+      <ModalWrapper isBottom={position === 'bottom'}>{children}</ModalWrapper>
+    </StyledModalContainer>
   );
 }
 
-const ModalContainer = styled.dialog<{ isBottom: boolean }>`
+function CloseButton({ onClose }: { onClose: () => void }) {
+  return (
+    <StyledCloseButton type="button" onClick={onClose}>
+      <img
+        src={new URL('./assets/close-button.png', import.meta.url).href}
+        alt="모달 닫기 버튼"
+      />
+    </StyledCloseButton>
+  );
+}
+
+function Title({ text }: { text: string }) {
+  return <StyledTitle>{text}</StyledTitle>;
+}
+
+const StyledModalContainer = styled.dialog<{ isBottom: boolean }>`
   box-sizing: border-box;
   min-width: 400px;
   padding: 24px 32px;
+  position: relative;
 
   border: none;
   border-radius: 8px;
@@ -127,28 +98,25 @@ const ModalWrapper = styled.div<{ isBottom: boolean }>`
   gap: ${(props) => (props.isBottom ? '16px' : '24px')};
 `;
 
-const ModalHeader = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-`;
-
-const Title = styled.h2`
+const StyledTitle = styled.h2`
   margin: 0;
   justify-self: flex-start;
   font-size: 24px;
 `;
 
-const CloseButton = styled.button`
+const StyledCloseButton = styled.button`
   border: none;
   background: none;
+  position: absolute;
+  top: 24px;
+  right: 32px;
   cursor: pointer;
 `;
 
-const ButtonWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-`;
-
-export default Modal;
+export default {
+  Container: ModalContainer,
+  CloseButton,
+  Title,
+  PrimaryButton,
+  SecondaryButton,
+};

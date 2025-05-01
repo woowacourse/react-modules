@@ -1,11 +1,6 @@
+import styled from '@emotion/styled';
 import { useState } from 'react';
 import Modal from './modal/Modal';
-import PrimaryButton from './modal/PrimaryButton';
-import SecondaryButton from './modal/SecondaryButton';
-
-function getContent() {
-  return <div>컨텐츠</div>;
-}
 
 function App() {
   const [modalOpen, setModalOpen] = useState(false);
@@ -14,25 +9,32 @@ function App() {
     setModalOpen(false);
   };
 
-  const buttons = [
-    <PrimaryButton label="동의하고 저장하기" onClick={() => alert('클릭됨')} />,
-    <SecondaryButton label="닫기" onClick={onClose} />,
-  ];
-
   return (
     <>
       <h1>Component Modules</h1>
       <button onClick={() => setModalOpen(true)}>열기</button>
-      <Modal
-        title="모달"
-        isOpen={modalOpen}
-        onClose={onClose}
-        contents={getContent()}
-        showCloseButton={true}
-        buttons={buttons}
-      />
+      <Modal.Container isOpen={modalOpen} onClose={onClose}>
+        <Modal.Title text="모달" />
+        <Modal.CloseButton onClose={onClose} />
+
+        <div>컨텐츠</div>
+
+        <ButtonWrapper>
+          <Modal.PrimaryButton
+            label="동의하고 저장하기"
+            onClick={() => alert('클릭됨')}
+          />
+          <Modal.SecondaryButton label="닫기" onClick={onClose} />
+        </ButtonWrapper>
+      </Modal.Container>
     </>
   );
 }
+
+const ButtonWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+`;
 
 export default App;
