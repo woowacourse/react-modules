@@ -29,13 +29,13 @@ export const Default: Story = {
       <>
         <button onClick={() => setIsOpen(true)}>Open Modal</button>
         <Modal {...args} isOpen={isOpen} handleCloseModal={handleCloseModal}>
-          <div style={{ padding: "20px" }}>This is the modal content.</div>
+          <div style={{ padding: "20px" }}>모달 content 입니다</div>
         </Modal>
       </>
     );
   },
   args: {
-    title: "Storybook Modal",
+    title: "모달 타이틀",
     position: "center",
   },
 };
