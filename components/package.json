@@ -1,6 +1,6 @@
 {
-  "name": "compoents-modal-test-spoy",
-  "version": "0.0.30",
+  "name": "woowacourse-modal-component-marvin",
+  "version": "0.0.1",
   "description": "npm modules",
   "type": "module",
   "main": "dist/index.cjs",

@@ -5,14 +5,14 @@ React 애플리케이션을 위한 유연하고 커스터마이징이 가능한 
 ## 설치 방법
 
 ```bash
-npm install compoents-modal-test-spoy
+npm i woowacourse-modal-component-marvin
 
 ```
 
 ## 사용 방법
 
 ```tsx
-import { Modal } from "compoents-modal-test-spoy";
+import { Modal } from "woowacourse-modal-component-marvin";
 
 function App() {
   const [isOpen, setIsOpen] = useState(false);
