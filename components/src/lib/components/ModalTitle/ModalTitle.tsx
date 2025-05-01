@@ -1,13 +1,6 @@
-import { JSX, ReactNode } from "react";
-
 import createStyledModalTitle from "./ModalTitle.styled";
 
-export interface ModalTitleProps {
-  children: ReactNode;
-  fontSize: string;
-  fontWeight: string;
-  tag?: keyof JSX.IntrinsicElements;
-}
+import { ModalTitleProps } from "./ModalTitle.types";
 
 const ModalTitle = ({
   children,

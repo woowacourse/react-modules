@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 
-import { ModalHeaderProps } from "./ModalHeader";
+import { ModalHeaderProps } from "./ModalHeader.types";
 
 export const StyledModalHeader = styled.header<ModalHeaderProps>`
   position: relative;

@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 import { JSX } from "react";
 
-import { ModalTitleProps } from "./ModalTitle";
+import { ModalTitleProps } from "./ModalTitle.types";
 
 const createStyledModalTitle = (tag: keyof JSX.IntrinsicElements) =>
   styled(tag)<ModalTitleProps>`

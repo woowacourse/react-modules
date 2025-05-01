@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 
-import { ModalProps } from "./Modal";
+import { ModalProps } from "./Modal.types";
 
 export const StyledModal = styled.div<ModalProps>`
   width: 100%;

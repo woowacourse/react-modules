@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 
-import { ModalFooterProps } from "./ModalFooter";
+import { ModalFooterProps } from "./ModalFooter.types";
 
 export const StyledModalFooter = styled.footer<ModalFooterProps>`
   display: flex;

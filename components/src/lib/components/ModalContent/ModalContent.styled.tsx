@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 
-import { ModalContentProps } from "./ModalContent";
+import { ModalContentProps } from "./ModalContent.types";
 
 const modalPositionVariants = {
   bottom: {
