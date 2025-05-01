@@ -2,7 +2,7 @@ import { useState } from 'react';
 import useError from '../useError/useError';
 const KEY = 'cardBrand';
 
-const CARD_BRAND_ERROR_MESSAGE = {
+export const CARD_BRAND_ERROR_MESSAGE = {
   NOT_SELECTED: '카드 브랜드를 선택해주세요.',
 };
 
