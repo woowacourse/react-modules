@@ -5,7 +5,7 @@
 ## 설치 방법
 
 ```bash
-npm install
+npm install npm i hooks-kangoll-test
 ```
 
 ## 사용 가능한 Hooks

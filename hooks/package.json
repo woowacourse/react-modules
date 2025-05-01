@@ -1,6 +1,6 @@
 {
-  "name": "hooks-spoy-test",
-  "version": "0.0.8",
+  "name": "hooks-kangoll-test",
+  "version": "0.0.1",
   "description": "npm modules",
   "type": "module",
   "types": "dist/index.d.ts",
