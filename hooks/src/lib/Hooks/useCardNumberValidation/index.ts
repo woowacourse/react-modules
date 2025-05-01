@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import { isNumber } from './utils/validation';
-import checkNoError from './utils/checkNoError';
+import { isNumber } from '../../utils/validation';
+import checkNoError from '../../utils/checkNoError';
 
 const useCardNumberValidation = () => {
   const [errors, setErrors] = useState([false, false, false, false]);

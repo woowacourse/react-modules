@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import { isExpirationDate } from './utils/validation';
-import checkNoError from './utils/checkNoError';
+import { isExpirationDate } from '../../utils/validation';
+import checkNoError from '../../utils/checkNoError';
 
 const useExpirationDateValidation = () => {
   const [errors, setErrors] = useState([false, false]);

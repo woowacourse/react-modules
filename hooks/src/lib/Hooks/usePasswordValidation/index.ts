@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import { isNumber } from './utils/validation';
-import checkNoError from './utils/checkNoError';
+import { isNumber } from '../../utils/validation';
+import checkNoError from '../../utils/checkNoError';
 
-const useCvcNumberValidation = () => {
+const usePasswordValidation = () => {
   const [errors, setErrors] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
 
@@ -10,7 +10,6 @@ const useCvcNumberValidation = () => {
     const { error, message } = isNumber(value);
 
     setErrors(error);
-
     setErrorMessage(message);
   };
 
@@ -24,4 +23,4 @@ const useCvcNumberValidation = () => {
   };
 };
 
-export default useCvcNumberValidation;
+export default usePasswordValidation;

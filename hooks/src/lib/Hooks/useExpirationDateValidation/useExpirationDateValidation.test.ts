@@ -1,5 +1,5 @@
 import { renderHook, act } from '@testing-library/react';
-import useExpirationDateValidation from './useExpirationDateValidation';
+import useExpirationDateValidation from '.';
 
 describe('useExpirationDateValidation', () => {
   it('useExpirationDateValidation의 초기 에러 상태가 반환된다.', () => {

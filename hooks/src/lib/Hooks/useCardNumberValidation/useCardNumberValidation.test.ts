@@ -1,5 +1,5 @@
 import { renderHook, act } from '@testing-library/react';
-import useCardNumberValidation from './useCardNumberValidation';
+import useCardNumberValidation from '.';
 
 describe('useCardNumberValidation', () => {
   it('useCardNumberValidation의 초기 에러 상태가 반환된다.', () => {

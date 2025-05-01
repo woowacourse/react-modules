@@ -1,5 +1,5 @@
 import { renderHook, act } from '@testing-library/react';
-import useCvcNumberValidation from './useCvcNumberValidation';
+import useCvcNumberValidation from '.';
 
 describe('useCvcNumberValidation', () => {
   it('useCvcNumberValidation 초기 에러 상태가 반환된다.', () => {
