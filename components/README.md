@@ -47,13 +47,13 @@ const App = () => {
 
 ### `Modal`
 
-| Prop         | Type         | Default | Description           |
-| ------------ | ------------ | ------- | --------------------- | ---------- | -------------- |
-| `show`       | `boolean`    | –       | 모달 표시 여부        |
-| `onHide`     | `() => void` | –       | 모달 닫기 함수        |
-| `background` | `boolean`    | `true`  | 배경 어두움 표시 여부 |
-| `position`   | `"center"`   | `"top"` | `"bottom"`            | `"center"` | 모달 위치 설정 |
-| `gap`        | `number`     | `16`    | 내부 flex 간격 설정   |
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `show` | `boolean` | – | 모달 표시 여부 |
+| `onHide` | `() => void` | – | 모달 닫기 함수 |
+| `background` | `boolean` | `true` | 배경 어두움 표시 여부 |
+| `position` | `"center"` | `"top"` | `"bottom"` | `"center"` | 모달 위치 설정 |
+| `gap` | `number` | `16` | 내부 flex 간격 설정 |
 
 ### `Modal.Header`
 
