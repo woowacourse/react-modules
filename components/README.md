@@ -1,6 +1,6 @@
 # Modal 라이브러리
 
-@kaori-killer/modal-component는 모달을 쉽게 사용할 수 있도록 돕는 컴포넌트 라이브러리입니다.
+@ohgus/modal-component는 모달을 쉽게 사용할 수 있도록 돕는 컴포넌트 라이브러리입니다.
 
 ## useModal
 
@@ -96,4 +96,4 @@ export default App;
 
 ## 스토리북
 
-<스토리북 링크>
+[스토리북 링크](https://68131cc0b137fee9cef1c4d3-ebxcqpiiik.chromatic.com/?path=/docs/modal--docs)
