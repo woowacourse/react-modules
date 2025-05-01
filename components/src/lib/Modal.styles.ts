@@ -69,7 +69,31 @@ export const CloseButton = styled.button`
   cursor: pointer;
 `;
 
-export const CloseButtonImage = styled.img`
-  width: 24px;
-  height: 24px;
+export const CloseIcon = styled.span`
+  width: 100%;
+  height: 100%;
+  display: inline-block;
+  position: relative;
+  background: transparent;
+  cursor: pointer;
+
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 16px;
+    height: 2px;
+    background-color: currentColor;
+    transform-origin: center;
+  }
+
+  &::before {
+    transform: translate(-50%, -50%) rotate(45deg);
+  }
+
+  &::after {
+    transform: translate(-50%, -50%) rotate(-45deg);
+  }
 `;

@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Layout, Overlay, ModalContainer, TitleContainer, Title, CloseButton, CloseButtonImage } from './Modal.styles';
+import { Layout, Overlay, ModalContainer, TitleContainer, Title, CloseButton, CloseIcon } from './Modal.styles';
 
 export type ModalPosition = 'center' | 'bottom';
 
@@ -45,7 +45,7 @@ function Modal({ width = '304px', height = '216px', position, title, onClose, ch
         <TitleContainer>
           <Title>{title}</Title>
           <CloseButton onClick={onClose}>
-            <CloseButtonImage src="/close.svg" alt="close" />
+            <CloseIcon />
           </CloseButton>
         </TitleContainer>
         {children}
