@@ -4,9 +4,7 @@ import useCvcNumberValidation from '.';
 describe('useCvcNumberValidation', () => {
   it('useCvcNumberValidation 초기 에러 상태가 반환된다.', () => {
     const initialErrors = false;
-    const { result } = renderHook(
-      (): { errors: boolean; errorMessage: string } => useCvcNumberValidation()
-    );
+    const { result } = renderHook(() => useCvcNumberValidation());
 
     expect(result.current.errors).toEqual(initialErrors);
   });
@@ -16,7 +14,7 @@ describe('useCvcNumberValidation', () => {
     const { result } = renderHook(() => useCvcNumberValidation());
 
     act(() => {
-      result.current.validateInput(userInput);
+      (result.current.validateInput as (value: string) => void)(userInput);
     });
 
     expect(result.current.errorMessage).toBe('숫자만 입력 가능합니다.');
@@ -27,7 +25,7 @@ describe('useCvcNumberValidation', () => {
     const { result } = renderHook(() => useCvcNumberValidation());
 
     act(() => {
-      result.current.validateInput(userInput);
+      (result.current.validateInput as (value: string) => void)(userInput);
     });
 
     expect(result.current.noError).toBeTruthy();

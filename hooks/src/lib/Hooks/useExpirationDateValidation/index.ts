@@ -1,12 +1,18 @@
 import { useState } from 'react';
 import { isExpirationDate } from '../../utils/validation';
 import checkNoError from '../../utils/checkNoError';
+import {
+  ErrorMessageType,
+  ListErrorType,
+  ValidationHookReturnType,
+  ValidInputFuncType,
+} from '../../types';
 
-const useExpirationDateValidation = () => {
-  const [errors, setErrors] = useState([false, false]);
-  const [errorMessage, setErrorMessage] = useState('');
+const useExpirationDateValidation = (): ValidationHookReturnType => {
+  const [errors, setErrors] = useState<ListErrorType>([false, false]);
+  const [errorMessage, setErrorMessage] = useState<ErrorMessageType>('');
 
-  const validateInput = (index: number, value: string) => {
+  const validateInput: ValidInputFuncType = (value: string, index: number) => {
     const inputType = index === 0 ? 'month' : 'year';
     const { error, message } = isExpirationDate(inputType, value);
 

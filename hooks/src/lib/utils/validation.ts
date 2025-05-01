@@ -5,15 +5,19 @@ import {
   MIN_MONTH,
   NUMBER_REGEX,
 } from '../constants';
+import { ValidateFuncReturnType } from '../types';
 
-export const isNumber = (value: string) => {
+export const isNumber = (value: string): ValidateFuncReturnType => {
   const error = !NUMBER_REGEX.test(value);
 
   if (error) return { error, message: ERROR_MESSAGE.NUMBER_ONLY };
   return { error, message: '' };
 };
 
-export const isExpirationDate = (type: 'month' | 'year', value: string) => {
+export const isExpirationDate = (
+  type: 'month' | 'year',
+  value: string
+): ValidateFuncReturnType => {
   const isNumberError = isNumber(value);
   if (isNumberError.error) return isNumberError;
 

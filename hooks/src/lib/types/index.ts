@@ -12,9 +12,14 @@ export interface ValidateFuncReturnType {
   message: ErrorMessageType;
 }
 
+type ValidWithoutIndex = (value: string) => void;
+type ValidWithIndex = (value: string, index: number) => void;
+
+export type ValidInputFuncType = ValidWithoutIndex | ValidWithIndex;
+
 export interface ValidationHookReturnType {
   errors: SingleErrorType | ListErrorType;
   errorMessage: ErrorMessageType;
-  validateInput: (value: string, index?: number) => void;
+  validateInput:  ValidInputFuncType;
   noError: boolean;
 }

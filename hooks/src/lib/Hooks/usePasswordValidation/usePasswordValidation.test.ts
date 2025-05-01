@@ -4,9 +4,7 @@ import usePasswordValidation from '.';
 describe('usePasswordValidation', () => {
   it('usePasswordValidation 초기 에러 상태가 반환된다.', () => {
     const initialErrors = false;
-    const { result } = renderHook(
-      (): { errors: boolean; errorMessage: string } => usePasswordValidation()
-    );
+    const { result } = renderHook(() => usePasswordValidation());
 
     expect(result.current.errors).toEqual(initialErrors);
   });
@@ -16,7 +14,7 @@ describe('usePasswordValidation', () => {
     const { result } = renderHook(() => usePasswordValidation());
 
     act(() => {
-      result.current.validateInput(userInput);
+      (result.current.validateInput as (value: string) => void)(userInput);
     });
 
     expect(result.current.errorMessage).toBe('숫자만 입력 가능합니다.');
@@ -27,7 +25,7 @@ describe('usePasswordValidation', () => {
     const { result } = renderHook(() => usePasswordValidation());
 
     act(() => {
-      result.current.validateInput(userInput);
+      (result.current.validateInput as (value: string) => void)(userInput);
     });
 
     expect(result.current.noError).toBeTruthy();

@@ -4,10 +4,7 @@ import useExpirationDateValidation from '.';
 describe('useExpirationDateValidation', () => {
   it('useExpirationDateValidation의 초기 에러 상태가 반환된다.', () => {
     const initialErrors = [false, false];
-    const { result } = renderHook(
-      (): { errors: boolean[]; errorMessage: string } =>
-        useExpirationDateValidation()
-    );
+    const { result } = renderHook(() => useExpirationDateValidation());
 
     expect(result.current.errors).toEqual(initialErrors);
   });
@@ -18,7 +15,7 @@ describe('useExpirationDateValidation', () => {
     const { result } = renderHook(() => useExpirationDateValidation());
 
     act(() => {
-      result.current.validateInput(index, month);
+      result.current.validateInput(month, index);
     });
 
     expect(result.current.errorMessage).toBe('유효하지 않은 월입니다.');
@@ -30,7 +27,7 @@ describe('useExpirationDateValidation', () => {
     const { result } = renderHook(() => useExpirationDateValidation());
 
     act(() => {
-      result.current.validateInput(index, year);
+      result.current.validateInput(year, index);
     });
 
     expect(result.current.errorMessage).toBe('유효하지 않은 연도입니다.');
@@ -42,7 +39,7 @@ describe('useExpirationDateValidation', () => {
     const { result } = renderHook(() => useExpirationDateValidation());
 
     act(() => {
-      result.current.validateInput(index, month);
+      result.current.validateInput(month, index);
     });
 
     expect(result.current.noError).toBeTruthy();

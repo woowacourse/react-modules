@@ -4,10 +4,7 @@ import useCardNumberValidation from '.';
 describe('useCardNumberValidation', () => {
   it('useCardNumberValidation의 초기 에러 상태가 반환된다.', () => {
     const initialErrors = [false, false, false, false];
-    const { result } = renderHook(
-      (): { errors: boolean[]; errorMessage: string } =>
-        useCardNumberValidation()
-    );
+    const { result } = renderHook(() => useCardNumberValidation());
 
     expect(result.current.errors).toEqual(initialErrors);
   });
@@ -18,7 +15,7 @@ describe('useCardNumberValidation', () => {
     const { result } = renderHook(() => useCardNumberValidation());
 
     act(() => {
-      result.current.validateInput(index, userInput);
+      result.current.validateInput(userInput, index);
     });
 
     expect(result.current.errorMessage).toBe('숫자만 입력 가능합니다.');
@@ -30,7 +27,7 @@ describe('useCardNumberValidation', () => {
     const { result } = renderHook(() => useCardNumberValidation());
 
     act(() => {
-      result.current.validateInput(index, userInput);
+      result.current.validateInput(userInput, index);
     });
 
     expect(result.current.noError).toBeTruthy();

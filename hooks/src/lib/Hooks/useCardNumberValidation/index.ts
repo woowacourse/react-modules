@@ -1,12 +1,23 @@
 import { useState } from 'react';
 import { isNumber } from '../../utils/validation';
 import checkNoError from '../../utils/checkNoError';
+import {
+  ErrorMessageType,
+  ListErrorType,
+  ValidationHookReturnType,
+  ValidInputFuncType,
+} from '../../types';
 
-const useCardNumberValidation = () => {
-  const [errors, setErrors] = useState([false, false, false, false]);
-  const [errorMessage, setErrorMessage] = useState('');
+const useCardNumberValidation = (): ValidationHookReturnType => {
+  const [errors, setErrors] = useState<ListErrorType>([
+    false,
+    false,
+    false,
+    false,
+  ]);
+  const [errorMessage, setErrorMessage] = useState<ErrorMessageType>('');
 
-  const validateInput = (index: number, value: string) => {
+  const validateInput: ValidInputFuncType = (value: string, index: number) => {
     const { error, message } = isNumber(value);
 
     setErrors((prev) => {

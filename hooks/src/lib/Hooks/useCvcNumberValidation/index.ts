@@ -1,12 +1,18 @@
 import { useState } from 'react';
 import { isNumber } from '../../utils/validation';
 import checkNoError from '../../utils/checkNoError';
+import {
+  ErrorMessageType,
+  SingleErrorType,
+  ValidationHookReturnType,
+  ValidInputFuncType,
+} from '../../types';
 
-const useCvcNumberValidation = () => {
-  const [errors, setErrors] = useState(false);
-  const [errorMessage, setErrorMessage] = useState('');
+const useCvcNumberValidation = (): ValidationHookReturnType => {
+  const [errors, setErrors] = useState<SingleErrorType>(false);
+  const [errorMessage, setErrorMessage] = useState<ErrorMessageType>('');
 
-  const validateInput = (value: string) => {
+  const validateInput: ValidInputFuncType = (value: string) => {
     const { error, message } = isNumber(value);
 
     setErrors(error);
