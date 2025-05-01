@@ -1,4 +1,5 @@
 import { renderHook, act } from '@testing-library/react';
+import usePasswordValidation from './usePasswordValidation';
 
 describe('usePasswordValidation', () => {
   it('usePasswordValidation 초기 에러 상태가 반환된다.', () => {
