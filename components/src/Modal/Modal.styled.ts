@@ -21,7 +21,7 @@ const BackDrop = styled.div<PositionProps>`
 
 const ModalLayout = styled.div<PositionProps>`
   position: relative;
-  width: ${({ $position }) => ($position === 'bottom' ? '100%' : '500px')};
+  width: ${({ $position }) => ($position === 'bottom' ? '100%' : '')};
 
   z-index: 500;
   background-color: white;
