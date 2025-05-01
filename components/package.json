@@ -1,6 +1,6 @@
 {
   "name": "bunju-summit-modal",
-  "version": "0.0.7",
+  "version": "1.0.0",
   "description": "A modal component for Bunju Summit",
   "type": "module",
   "types": "dist/index.d.ts",
