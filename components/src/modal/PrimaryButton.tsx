@@ -1,15 +1,19 @@
 import styled from '@emotion/styled';
-import { ReactElement } from 'react';
+import { CSSProperties, ReactElement } from 'react';
 
 function PrimaryButton({
   label,
   onClick,
+  style,
 }: {
   label: string;
   onClick: () => void;
+  style?: CSSProperties;
 }): ReactElement<HTMLButtonElement, 'button'> {
   return (
-    <PrimaryButtonContainer onClick={onClick}>{label}</PrimaryButtonContainer>
+    <PrimaryButtonContainer style={style} onClick={onClick}>
+      {label}
+    </PrimaryButtonContainer>
   );
 }
 

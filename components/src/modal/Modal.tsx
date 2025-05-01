@@ -1,5 +1,11 @@
 import styled from '@emotion/styled';
-import { PropsWithChildren, ReactNode, useEffect, useRef } from 'react';
+import {
+  CSSProperties,
+  PropsWithChildren,
+  ReactNode,
+  useEffect,
+  useRef,
+} from 'react';
 import PrimaryButton from './PrimaryButton';
 import SecondaryButton from './SecondaryButton';
 import { ModalProps } from './types';
@@ -8,6 +14,7 @@ function ModalContainer({
   open,
   onClose,
   position = 'center',
+  style,
   children,
 }: PropsWithChildren<ModalProps>) {
   const modalRef = useRef<HTMLDialogElement>(null);
@@ -40,6 +47,7 @@ function ModalContainer({
     <StyledModalContainer
       onClose={onClose}
       isBottom={position === 'bottom'}
+      style={style}
       ref={modalRef}
     >
       <ModalWrapper isBottom={position === 'bottom'}>{children}</ModalWrapper>
@@ -47,9 +55,15 @@ function ModalContainer({
   );
 }
 
-function CloseButton({ onClose }: { onClose: () => void }) {
+function CloseButton({
+  style,
+  onClose,
+}: {
+  style?: CSSProperties;
+  onClose: () => void;
+}) {
   return (
-    <StyledCloseButton type="button" onClick={onClose}>
+    <StyledCloseButton type="button" style={style} onClick={onClose}>
       <img
         src={new URL('./assets/close-button.png', import.meta.url).href}
         alt="모달 닫기 버튼"
@@ -58,8 +72,14 @@ function CloseButton({ onClose }: { onClose: () => void }) {
   );
 }
 
-function Title({ children }: { children: ReactNode }) {
-  return <StyledTitle>{children}</StyledTitle>;
+function Title({
+  style,
+  children,
+}: {
+  style?: CSSProperties;
+  children: ReactNode;
+}) {
+  return <StyledTitle style={style}>{children}</StyledTitle>;
 }
 
 const StyledModalContainer = styled.dialog<{ isBottom: boolean }>`

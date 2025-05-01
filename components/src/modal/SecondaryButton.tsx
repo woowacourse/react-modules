@@ -1,15 +1,17 @@
 import styled from '@emotion/styled';
-import { ReactElement } from 'react';
+import { CSSProperties, ReactElement } from 'react';
 
 function SecondaryButton({
   label,
   onClick,
+  style,
 }: {
   label: string;
   onClick: () => void;
+  style?: CSSProperties;
 }): ReactElement<HTMLButtonElement, 'button'> {
   return (
-    <SecondaryButtonContainer onClick={onClick}>
+    <SecondaryButtonContainer style={style} onClick={onClick}>
       {label}
     </SecondaryButtonContainer>
   );
