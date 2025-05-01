@@ -1,43 +1,31 @@
 import './App.css';
-import useCardNumbers from './cardNumber/useCardNumbers';
-import { CARD_NUMBERS_KEY } from './cardNumber/constants';
+import { EXPIRY_DATE_KEY } from './expiryDate/constants';
+import useExpiryDate from './expiryDate/useExpiryDate';
 
 function App() {
-  const { cardNumbers, validationResults, handleCardNumbersChange } =
-    useCardNumbers();
+  const { expiryDate, validationResults, handleExpiryDateChange } =
+    useExpiryDate();
 
   return (
     <>
       <h1>Hooks Modules</h1>
       <input
         type="text"
-        name={CARD_NUMBERS_KEY.part1}
-        onChange={handleCardNumbersChange}
-        value={cardNumbers.part1}
+        name={EXPIRY_DATE_KEY.month}
+        onChange={handleExpiryDateChange}
+        value={expiryDate.month}
       />
-      <p>{validationResults.part1.isValid}</p>
+      <p>{validationResults.month.isValid}</p>
       <input
         type="text"
-        name={CARD_NUMBERS_KEY.part2}
-        onChange={handleCardNumbersChange}
-        value={cardNumbers.part2}
+        name={EXPIRY_DATE_KEY.year}
+        onChange={(e) => handleExpiryDateChange(e, false)}
+        value={expiryDate.year}
       />
-      <p>{validationResults.part2.isValid}</p>
-      <input
-        type="text"
-        name={CARD_NUMBERS_KEY.part3}
-        onChange={handleCardNumbersChange}
-        value={cardNumbers.part3}
-      />
-      <p>{validationResults.part3.isValid}</p>
-      <input
-        type="text"
-        name={CARD_NUMBERS_KEY.part4}
-        onChange={(e) => handleCardNumbersChange(e, false)}
-        value={cardNumbers.part4}
-      />
-      <p>{validationResults.part4.isValid}</p>
-      <p>{validationResults.part1.errorMessage}</p>
+      <p>{validationResults.year.isValid}</p>
+
+      <p>{validationResults.month.errorMessage}</p>
+      <p>{validationResults.year.errorMessage}</p>
     </>
   );
 }

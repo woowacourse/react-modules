@@ -1,7 +1,7 @@
 import { ChangeEvent, useState } from 'react';
-import { EXPIRY_DATE_KEY, ExpiryDateKey } from './constants';
+import { ERROR_MESSAGE, EXPIRY_DATE_ERROR_TYPES } from '../constants';
 import { ValidationResult } from '../types';
-import { ERROR_MESSAGE } from '../constants';
+import { EXPIRY_DATE_KEY, ExpiryDateKey } from './constants';
 
 function useExpiryDate() {
   const [expiryDate, setExpiryDate] = useState<Record<ExpiryDateKey, string>>({
@@ -22,7 +22,7 @@ function useExpiryDate() {
   };
 
   const checkIsValidLength = (value: string) => {
-    return value.length === 2;
+    return value.length <= 2;
   };
 
   const checkIsMonthInRange = (value: string) => {
@@ -30,6 +30,8 @@ function useExpiryDate() {
   };
 
   const checkIsExpiredDate = (month: string, year: string) => {
+    if (month.length !== 2 || year.length !== 2) return false;
+
     const today = new Date();
     const currentYear = today.getFullYear();
     const currentMonth = today.getMonth() + 1;
@@ -42,51 +44,24 @@ function useExpiryDate() {
     return false;
   };
 
-  const validateExpiryDate = (name: string, value: string) => {
+  const validateExpiryDate = (name: ExpiryDateKey, value: string) => {
     const isNumber = checkIsNumber(value);
     const isValidLength = checkIsValidLength(value);
     const isMonthInRange = checkIsMonthInRange(value);
 
     if (!isNumber) {
-      setValidationResults((prev) => ({
-        ...prev,
-        [name]: {
-          isValid: false,
-          errorMessage: ERROR_MESSAGE.expiryDate.notNumber,
-        },
-      }));
-      return;
+      return EXPIRY_DATE_ERROR_TYPES.notNumber;
     }
 
     if (!isValidLength) {
-      setValidationResults((prev) => ({
-        ...prev,
-        [name]: {
-          isValid: false,
-          errorMessage: ERROR_MESSAGE.expiryDate.invalidLength,
-        },
-      }));
-      return;
+      return EXPIRY_DATE_ERROR_TYPES.invalidLength;
     }
 
     if (name === EXPIRY_DATE_KEY.month && !isMonthInRange) {
-      setValidationResults((prev) => ({
-        ...prev,
-        [name]: {
-          isValid: false,
-          errorMessage: ERROR_MESSAGE.expiryDate.invalidMonthRange,
-        },
-      }));
-      return;
+      return EXPIRY_DATE_ERROR_TYPES.invalidMonthRange;
     }
 
-    setValidationResults((prev) => ({
-      ...prev,
-      [name]: {
-        isValid: true,
-        errorMessage: '',
-      },
-    }));
+    return null;
   };
 
   const validateIsExpiredDate = (name: ExpiryDateKey, value: string) => {
@@ -96,19 +71,44 @@ function useExpiryDate() {
     const isExpiredDate = checkIsExpiredDate(targetMonth, targetYear);
 
     if (isExpiredDate) {
+      return EXPIRY_DATE_ERROR_TYPES.expiredDate;
+    }
+
+    return null;
+  };
+
+  const handleExpiryDateChange = (
+    event: ChangeEvent<HTMLInputElement>,
+    restrictChange: boolean = true
+  ) => {
+    const { name, value } = event.target;
+    const errorType = validateExpiryDate(name as ExpiryDateKey, value);
+
+    if (restrictChange && errorType) {
+      return;
+    }
+
+    if (!restrictChange) {
       setValidationResults((prev) => ({
         ...prev,
         [name]: {
-          isValid: false,
-          errorMessage: '유효기간은 현재 날짜 이후로 입력해야 합니다.',
+          isValid: !Boolean(errorType),
+          errorMessage: errorType ? ERROR_MESSAGE.expiryDate[errorType] : '',
         },
       }));
-      return;
     }
-  };
 
-  const handleExpiryDateChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = event.target;
+    const isExpiredDate = validateIsExpiredDate(name as ExpiryDateKey, value);
+    setValidationResults((prev) => ({
+      ...prev,
+      [name]: {
+        isValid: !Boolean(isExpiredDate),
+        errorMessage: isExpiredDate
+          ? ERROR_MESSAGE.expiryDate[isExpiredDate]
+          : '',
+      },
+    }));
+
     setExpiryDate((prev) => ({ ...prev, [name]: value }));
   };
 

@@ -1,6 +1,6 @@
 import { ChangeEvent, useState } from 'react';
 import { ValidationResult } from '../types';
-import { ERROR_MESSAGE } from '../constants';
+import { CVC_ERROR_TYPES, ERROR_MESSAGE } from '../constants';
 
 function useCVC() {
   const [CVC, setCVC] = useState('');
@@ -16,7 +16,7 @@ function useCVC() {
   };
 
   const checkIsValidLength = (value: string) => {
-    return value.length === 3;
+    return value.length <= 3;
   };
 
   const validateCVC = (value: string) => {
@@ -24,29 +24,34 @@ function useCVC() {
     const isValidLength = checkIsValidLength(value);
 
     if (!isNumber) {
-      setValidationResult({
-        isValid: false,
-        errorMessage: ERROR_MESSAGE.CVC.notNumber,
-      });
-      return;
+      return CVC_ERROR_TYPES.notNumber;
     }
 
     if (!isValidLength) {
-      setValidationResult({
-        isValid: false,
-        errorMessage: ERROR_MESSAGE.CVC.invalidLength,
-      });
+      return CVC_ERROR_TYPES.invalidLength;
+    }
+
+    return null;
+  };
+
+  const handleCVCChange = (
+    event: ChangeEvent<HTMLInputElement>,
+    restrictChange: boolean = true
+  ) => {
+    const { value } = event.target;
+    const errorType = validateCVC(value);
+
+    if (restrictChange && errorType) {
       return;
     }
 
-    setValidationResult({
-      isValid: true,
-      errorMessage: '',
-    });
-  };
+    if (!restrictChange) {
+      setValidationResult({
+        isValid: !Boolean(errorType),
+        errorMessage: errorType ? ERROR_MESSAGE.cardNumber[errorType] : '',
+      });
+    }
 
-  const handleCVCChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const { value } = event.target;
     setCVC(value);
   };
 
