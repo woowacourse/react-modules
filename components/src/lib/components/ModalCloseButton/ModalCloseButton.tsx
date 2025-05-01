@@ -1,8 +1,6 @@
 import { StyledModalCloseButton } from "./ModalCloseButton.styled";
 
-interface ModalCloseButtonProps {
-  onClose: () => void;
-}
+import { ModalCloseButtonProps } from "./ModalCloseButton.types";
 
 const ModalCloseButton = ({ onClose }: ModalCloseButtonProps) => {
   return (
