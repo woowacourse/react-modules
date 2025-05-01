@@ -1,8 +1,8 @@
-import { useRef, useState } from "react";
+import { useState } from "react";
 import { INITIAL_CARD_NUMBER_STATE } from "./constants";
 import { CardNumberKey, CardNumberState } from "./types";
 import { validateCardNumber } from "./utils";
-import { ValidationResult } from "src/types";
+import { ValidationResult } from "../../../types";
 
 const validateCardNumbers = (cardNumber: CardNumberState) => {
   let errorState: ValidationResult = {
