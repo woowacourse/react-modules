@@ -6,8 +6,7 @@ React 애플리케이션을 위한 유연하고 커스터마이징이 가능한 
 
 ```bash
 npm install compoents-modal-test-spoy
-# 또는
-yarn add compoents-modal-test-spoy
+
 ```
 
 ## 사용 방법
@@ -34,6 +33,10 @@ function App() {
 }
 ```
 
+## 스토리북
+
+https://step1--6812ddd3aa5be0c9ccb7572d.chromatic.com
+
 ## Props
 
 | Prop     | Type      | 필수 여부 | 기본값   | 설명                                  |
@@ -51,7 +54,3 @@ function App() {
 - 부드러운 열기/닫기 애니메이션
 - 외부 클릭 시 닫힘
 - 키보드 지원 (ESC 키로 닫기)
-
-## 라이센스
-
-MIT
