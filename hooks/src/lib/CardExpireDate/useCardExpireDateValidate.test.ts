@@ -7,10 +7,13 @@ describe('CardExpireDateValidate', () => {
       const { result } = renderHook(() => useCardExpireDateValidate());
 
       act(() => {
-        result.current.validateCardExpireDate('month', {
-          month: '12',
-          year: ''
-        });
+        result.current.validateCardExpireDate(
+          {
+            month: '12',
+            year: ''
+          },
+          'month'
+        );
       });
 
       expect(result.current.isValid.month).toBe(true);
@@ -21,10 +24,13 @@ describe('CardExpireDateValidate', () => {
       const { result } = renderHook(() => useCardExpireDateValidate());
 
       act(() => {
-        result.current.validateCardExpireDate('year', {
-          month: '',
-          year: '25'
-        });
+        result.current.validateCardExpireDate(
+          {
+            month: '',
+            year: '25'
+          },
+          'year'
+        );
       });
 
       expect(result.current.isValid.year).toBe(true);
@@ -37,10 +43,13 @@ describe('CardExpireDateValidate', () => {
       const { result } = renderHook(() => useCardExpireDateValidate());
 
       act(() => {
-        result.current.validateCardExpireDate('month', {
-          month: '1a',
-          year: ''
-        });
+        result.current.validateCardExpireDate(
+          {
+            month: '1a',
+            year: ''
+          },
+          'month'
+        );
       });
 
       expect(result.current.isValid.month).toBe(false);
@@ -51,10 +60,13 @@ describe('CardExpireDateValidate', () => {
       const { result } = renderHook(() => useCardExpireDateValidate());
 
       act(() => {
-        result.current.validateCardExpireDate('year', {
-          month: '',
-          year: '2a'
-        });
+        result.current.validateCardExpireDate(
+          {
+            month: '',
+            year: '2a'
+          },
+          'year'
+        );
       });
 
       expect(result.current.isValid.year).toBe(false);
@@ -67,10 +79,13 @@ describe('CardExpireDateValidate', () => {
       const { result } = renderHook(() => useCardExpireDateValidate());
 
       act(() => {
-        result.current.validateCardExpireDate('month', {
-          month: '13',
-          year: ''
-        });
+        result.current.validateCardExpireDate(
+          {
+            month: '13',
+            year: ''
+          },
+          'month'
+        );
       });
 
       expect(result.current.isValid.month).toBe(false);
@@ -83,10 +98,13 @@ describe('CardExpireDateValidate', () => {
       const { result } = renderHook(() => useCardExpireDateValidate());
 
       act(() => {
-        result.current.validateCardExpireDate('year', {
-          month: '',
-          year: '23'
-        });
+        result.current.validateCardExpireDate(
+          {
+            month: '',
+            year: '23'
+          },
+          'year'
+        );
       });
 
       expect(result.current.isValid.year).toBe(false);
@@ -99,10 +117,13 @@ describe('CardExpireDateValidate', () => {
       const { result } = renderHook(() => useCardExpireDateValidate());
 
       act(() => {
-        result.current.validateCardExpireDate('month', {
-          month: '04',
-          year: '25'
-        });
+        result.current.validateCardExpireDate(
+          {
+            month: '04',
+            year: '25'
+          },
+          'month'
+        );
       });
 
       expect(result.current.isValid.month).toBe(false);
@@ -113,10 +134,13 @@ describe('CardExpireDateValidate', () => {
       const { result } = renderHook(() => useCardExpireDateValidate());
 
       act(() => {
-        result.current.validateCardExpireDate('year', {
-          month: '04',
-          year: '25'
-        });
+        result.current.validateCardExpireDate(
+          {
+            month: '04',
+            year: '25'
+          },
+          'year'
+        );
       });
 
       expect(result.current.isValid.month).toBe(false);

@@ -19,8 +19,8 @@ const useCardExpireDateValidate = () => {
   const currentMonth = new Date().getMonth() + 1;
 
   const validateCardExpireDate = (
-    key: 'month' | 'year',
-    expireDate: CardExpireDate
+    expireDate: CardExpireDate,
+    key: 'month' | 'year'
   ) => {
     if (!validateNumber(expireDate[key])) {
       setIsValid({
