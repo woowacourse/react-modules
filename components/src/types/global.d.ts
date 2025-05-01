@@ -1,1 +1,1 @@
-declare module "@sooyeoniya/components";
+declare module '@muffin2219/components';
