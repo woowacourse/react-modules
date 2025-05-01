@@ -8,6 +8,7 @@ const useCardBrandValidate = (cardBrands: string[]) => {
     if (!cardBrands.includes(cardBrand)) {
       setIsValid(false);
       setErrorMessage('카드 브랜드가 올바르지 않습니다.');
+      return;
     }
 
     setIsValid(true);
