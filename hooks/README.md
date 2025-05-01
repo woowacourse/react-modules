@@ -14,12 +14,12 @@
   - [x] 유효성 검증 + 상태 변경 함수
   - [x] 모든 에러가 없는지 변수
 
-- [ ] useCvcNumberValidation
+- [x] useCvcNumberValidation
 
   - [x] 테스트 코드 작성
-  - [ ] errors, errorMessage 상태 생성
-  - [ ] 유효성 검증 + 상태 변경 함수
-  - [ ] 모든 에러가 없는지 변수
+  - [x] errors, errorMessage 상태 생성
+  - [x] 유효성 검증 + 상태 변경 함수
+  - [x] 모든 에러가 없는지 변수
 
 - [ ] usePasswordValidation
 
