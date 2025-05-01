@@ -7,14 +7,14 @@ const CardCompany = () => {
 				<Title>카드사 선택</Title>
 			</Header>
 			<CardContainer>
-				<CardImg src="../../src/assets/images/CardIcon.svg"></CardImg>
-				<CardImg src="../../src/assets/images/CardIcon.svg"></CardImg>
-				<CardImg src="../../src/assets/images/CardIcon.svg"></CardImg>
-				<CardImg src="../../src/assets/images/CardIcon.svg"></CardImg>
-				<CardImg src="../../src/assets/images/CardIcon.svg"></CardImg>
-				<CardImg src="../../src/assets/images/CardIcon.svg"></CardImg>
-				<CardImg src="../../src/assets/images/CardIcon.svg"></CardImg>
-				<CardImg src="../../src/assets/images/CardIcon.svg"></CardImg>
+				<CardImg src="./images/CardIcon.svg"></CardImg>
+				<CardImg src="./images/CardIcon.svg"></CardImg>
+				<CardImg src="./images/CardIcon.svg"></CardImg>
+				<CardImg src="./images/CardIcon.svg"></CardImg>
+				<CardImg src="./images/CardIcon.svg"></CardImg>
+				<CardImg src="./images/CardIcon.svg"></CardImg>
+				<CardImg src="./images/CardIcon.svg"></CardImg>
+				<CardImg src="./images/CardIcon.svg"></CardImg>
 			</CardContainer>
 		</Container>
 	);
@@ -48,5 +48,5 @@ const CardContainer = styled.div`
 	display: grid;
 	grid-template-columns: repeat(4, 1fr);
 	gap: 12px;
-	margin: 24px 0;
+	margin-top: 24px;
 `;

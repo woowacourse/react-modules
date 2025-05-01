@@ -56,7 +56,7 @@ export const Default: Story = {
 	},
 };
 
-export const ModalWithCofirmButton: Story = {
+export const AgreeModal: Story = {
 	args: {
 		position: "bottom",
 		isConfirmButton: true,

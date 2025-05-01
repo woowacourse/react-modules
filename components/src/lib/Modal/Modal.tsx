@@ -16,10 +16,12 @@ const Modal = ({ position, isOpen, children = null, onClose, isCloseButton = fal
 			<ModalLayout isOpen={isOpen}>
 				<ModalContainer position={position}>
 					{children}
-					<ButtonWrap>
-						{isConfirmButton && <ConfirmButton onClick={onClose}>확인</ConfirmButton>}
-						{isCloseButton && <CloseButton onClick={onClose}>닫기</CloseButton>}
-					</ButtonWrap>
+					{(isCloseButton || isConfirmButton) && (
+						<ButtonWrap>
+							{isConfirmButton && <ConfirmButton onClick={onClose}>확인</ConfirmButton>}
+							{isCloseButton && <CloseButton onClick={onClose}>닫기</CloseButton>}
+						</ButtonWrap>
+					)}
 				</ModalContainer>
 			</ModalLayout>
 		</>
@@ -80,4 +82,5 @@ const ButtonWrap = styled.div`
 	display: flex;
 	flex-direction: column;
 	gap: 12px;
+	margin-top: 12px;
 `;
