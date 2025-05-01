@@ -1,6 +1,6 @@
 {
-  "name": "@sooyeoniya/components",
-  "version": "0.0.3",
+  "name": "@muffin2219/components",
+  "version": "0.0.0",
   "description": "Modal components module",
   "type": "module",
   "types": "dist/index.d.ts",
