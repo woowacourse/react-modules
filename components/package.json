@@ -1,6 +1,6 @@
 {
   "name": "pongda-modal-component",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "Pongju&Daiane's Modal Component",
   "type": "module",
   "types": "dist/lib/index.d.ts",

@@ -19,8 +19,15 @@ function App() {
         <Modal.Contents>
           <div>안녕하세요~</div>
         </Modal.Contents>
-        // TODO: Modal.Button 만들기 // TODO: footer 만들기 // TODO: 모달 최소
-        크기 0으로 설정
+        <Modal.Button
+          title="확인"
+          backgroundColor="#007bff"
+          textColor="#ffffff"
+          size="large"
+          onClick={() => {
+            console.log('확인 버튼 클릭!');
+          }}
+        />
       </Modal>
     </>
   );
