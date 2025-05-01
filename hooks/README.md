@@ -1,39 +1,69 @@
-# Hooks Module
+## 📦 kirin-payment-hook
 
-- [x] useCardNumberValidation
+> payment앱 관련 입력 폼 유효성 검사 로직을 커스텀 훅으로 제공합니다. 카드 결제 정보와 관련된 입력값 유효성 검증에 최적화되어 있습니다.
+> 
 
-  - [x] 테스트 코드 작성
-  - [x] errors, errorMessage 상태 생성
-  - [x] 유효성 검증 + 상태 변경 함수
-  - [x] 모든 에러가 없는지 변수
+---
 
-- [x] useExpirationDateValidation
+## 🛠 설치
 
-  - [x] 테스트 코드 작성
-  - [x] errors, errorMessage 상태 생성
-  - [x] 유효성 검증 + 상태 변경 함수
-  - [x] 모든 에러가 없는지 변수
+```bash
+npm install kirin-payment-hook
+```
 
-- [x] useCvcNumberValidation
+---
 
-  - [x] 테스트 코드 작성
-  - [x] errors, errorMessage 상태 생성
-  - [x] 유효성 검증 + 상태 변경 함수
-  - [x] 모든 에러가 없는지 변수
+## 🚀 제공 훅 목록
 
-- [x] usePasswordValidation
+```jsx
+import {
+  useCardNumberValidation,
+  useExpirationDateValidation,
+  useCvcNumberValidation,
+  usePasswordValidation,
+} from 'kirin-payment-hook';
+```
 
-  - [x] 테스트 코드 작성
-  - [x] errors, errorMessage 상태 생성
-  - [x] 유효성 검증 + 상태 변경 함수
-  - [x] 모든 에러가 없는지 변수
+| Hook 이름 | 설명 |
+| --- | --- |
+| `useCardNumberValidation` | 카드 번호 (4자리 x 4칸) 입력 유효성 검사 |
+| `useExpirationDateValidation` | 만료일 (MM/YY) 형식 유효성 검사 |
+| `useCvcNumberValidation` | CVC 번호 3자리 유효성 검사 |
+| `usePasswordValidation` | 비밀번호 숫자 2자리 입력 유효성 검사 |
 
-- [x] 유효성 검증 함수 분리
+---
 
-  - [x] 숫자 검증
-  - [x] 월 검증
-  - [x] 년 검증
+## 🧪 사용 예시
 
-- [x] 모든 에러가 없는지 체크하는 함수
+```tsx
+const { errors, errorMessage, validateInput, noError } = useCardNumberValidation();
 
-- [x] 훅 및 함수 매개변수 및 return 타입 추가
+const handleChange = (value: string, index: number) => {
+  validateInput(value, index);
+};
+
+```
+
+## 🧩 타입
+
+모든 훅은 아래와 같은 형태의 객체를 반환합니다:
+
+```
+
+{
+  errors: boolean | boolean[];
+  errorMessage: string;
+  validateInput: (value: string, index?: number) => void;
+  noError: boolean;
+}
+
+```
+
+### 🔍 리턴 타입 설명 표
+
+| 필드명 | 타입 | 설명 |
+| --- | --- | --- |
+| `errors` | `boolean` | `boolean[]` | 유효성 검사 결과. 단일 필드일 경우 `boolean`, 다중 필드일 경우 `boolean[]`로 각 필드의 에러 상태를 나타냄 (`true` = 에러 있음). |
+| `errorMessage` | `string` | 현재 입력에 해당하는 에러 메시지 문자열. 에러가 없으면 빈 문자열일 수 있음. |
+| `validateInput` | `(value: string, index?: number) => void` | 입력값 유효성 검사를 수행하는 함수. index가 필요한 훅(ex. 카드번호 4자리 배열 등)에서는 `index`를 함께 전달. |
+| `noError` | `boolean` | `errors`가 `false`거나 `errors` 배열의 모든 값이 `false`일 때 `true`. 즉, **모든 입력값이 유효한 상태**를 의미함. |
