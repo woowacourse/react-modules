@@ -9,17 +9,11 @@ export const isExpirationDate = (type: 'month' | 'year', value: string) => {
   const isNumberError = isNumber(value);
   if (isNumberError.error) return isNumberError;
 
-  if (type === 'month') {
-    const month = parseInt(value, 10);
-    if (month < 1 || month > 12) {
-      return { error: true, message: '유효하지 않은 월입니다.' };
-    }
-  } else if (type === 'year') {
-    const year = parseInt(value, 10);
-    const currentYear = new Date().getFullYear() % 100;
-    if (year < currentYear) {
-      return { error: true, message: '유효하지 않은 연도입니다.' };
-    }
+  const num = parseInt(value);
+  if (type === 'month' && (num < 1 || num > 12)) {
+    return { error: true, message: '유효하지 않은 월입니다.' };
+  } else if (type === 'year' && num < new Date().getFullYear() % 100) {
+    return { error: true, message: '유효하지 않은 연도입니다.' };
   }
 
   return { error: false, message: '' };
