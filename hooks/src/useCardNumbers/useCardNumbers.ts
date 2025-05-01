@@ -17,16 +17,22 @@ const INITIAL_CARD_NUMBER: CardNumbers = {
   FOURTH: '',
 };
 
-const INITIAL_IS_ERROR: CardNumbers = {
-  FIRST: '',
-  SECOND: '',
-  THIRD: '',
-  FOURTH: '',
+type TYPE_OF_CARD_NUMBERS_IS_ERROR = {
+  FIRST: boolean;
+  SECOND: boolean;
+  THIRD: boolean;
+  FOURTH: boolean;
+};
+const INITIAL_IS_ERROR: TYPE_OF_CARD_NUMBERS_IS_ERROR = {
+  FIRST: false,
+  SECOND: false,
+  THIRD: false,
+  FOURTH: false,
 };
 
 const CARD_NUMBER_MAX_LENGTH = 4;
 
-const CARD_NUMBER_ERROR_MESSAGE = {
+export const CARD_NUMBER_ERROR_MESSAGE = {
   INVALID_LENGTH: `카드 번호는 ${CARD_NUMBER_MAX_LENGTH}자리 숫자여야 합니다.`,
   NOT_NUMBERIC: '숫자만 입력 가능합니다.',
 } as const;

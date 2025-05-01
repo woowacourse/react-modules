@@ -12,10 +12,13 @@ const INITIAL_CARD_EXPIRATION_DATE: CardExpirationDate = {
   MONTH: '',
   YEAR: '',
 };
-
-const INITIAL_IS_ERROR: CardExpirationDate = {
-  MONTH: '',
-  YEAR: '',
+type TYPE_OF_CARD_EXPIRATION_DATE_IS_ERROR = {
+  MONTH: boolean;
+  YEAR: boolean;
+};
+const INITIAL_IS_ERROR: TYPE_OF_CARD_EXPIRATION_DATE_IS_ERROR = {
+  MONTH: false,
+  YEAR: false,
 };
 
 type CardExpirationDateKeys = {
