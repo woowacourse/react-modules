@@ -27,7 +27,11 @@ export default defineConfig({
     dts({
       include: ["src/lib"],
       tsconfigPath: "./tsconfig.app.json",
-      rollupTypes: true,
     }),
   ],
+  resolve: {
+    alias: {
+      "@types": path.resolve(__dirname, "src/types/*"),
+    },
+  },
 });

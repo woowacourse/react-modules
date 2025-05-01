@@ -1,4 +1,4 @@
-import { ValidationResult } from "../../../../types";
+import { ValidationResult } from "@types";
 
 export const validateCardNumber = (cardNumber: string): ValidationResult => {
   if (isNaN(Number(cardNumber))) {
