@@ -1,6 +1,6 @@
 {
   "name": "@sinjuk1/modal",
-  "version": "0.0.4",
+  "version": "0.0.6",
   "description": "npm modules",
   "type": "module",
   "types": "dist/index.d.ts",
@@ -16,7 +16,7 @@
     "preview": "vite preview",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "deploy-storybook":"chromatic --project-token=chpt_3f8effea44f1441"
+    "deploy-storybook": "chromatic --project-token=chpt_3f8effea44f1441"
   },
   "dependencies": {
     "@emotion/css": "^11.13.5",
