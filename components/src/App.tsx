@@ -14,7 +14,7 @@ function App() {
       <h1>Component Modules</h1>
       <button onClick={() => setModalOpen(true)}>열기</button>
       <Modal.Container isOpen={modalOpen} onClose={onClose}>
-        <Modal.Title text="모달" />
+        <Modal.Title>모달</Modal.Title>
         <Modal.CloseButton onClose={onClose} />
 
         <div>컨텐츠</div>

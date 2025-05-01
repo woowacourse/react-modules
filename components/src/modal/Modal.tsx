@@ -1,13 +1,8 @@
 import styled from '@emotion/styled';
-import { PropsWithChildren, useEffect, useRef } from 'react';
+import { PropsWithChildren, ReactNode, useEffect, useRef } from 'react';
 import PrimaryButton from './PrimaryButton';
 import SecondaryButton from './SecondaryButton';
-
-interface ModalProps {
-  isOpen: boolean;
-  onClose: () => void;
-  position?: 'center' | 'bottom';
-}
+import { ModalProps } from './types';
 
 function ModalContainer({
   isOpen,
@@ -63,8 +58,8 @@ function CloseButton({ onClose }: { onClose: () => void }) {
   );
 }
 
-function Title({ text }: { text: string }) {
-  return <StyledTitle>{text}</StyledTitle>;
+function Title({ children }: { children: ReactNode }) {
+  return <StyledTitle>{children}</StyledTitle>;
 }
 
 const StyledModalContainer = styled.dialog<{ isBottom: boolean }>`

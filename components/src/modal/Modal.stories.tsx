@@ -1,14 +1,12 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import Modal from './Modal';
 import { useState } from 'react';
-import PrimaryButton from './PrimaryButton';
-import SecondaryButton from './SecondaryButton';
+import styled from '@emotion/styled';
 
 const meta = {
-  title: 'Modal',
-  component: Modal,
-  args: {},
-} satisfies Meta<typeof Modal>;
+  title: 'ModalContainer',
+  component: Modal.Container,
+} satisfies Meta<typeof Modal.Container>;
 
 export default meta;
 
@@ -16,11 +14,8 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
-    title: '약관에 동의해 주세요',
-    contents: <div>컨텐츠</div>,
     isOpen: true,
     onClose: () => {},
-    buttons: [],
   },
 
   render: function App(args) {
@@ -34,7 +29,10 @@ export const Default: Story = {
       <>
         <h1>Component Modules</h1>
         <button onClick={() => setModalOpen(true)}>열기</button>
-        <Modal {...args} onClose={onClose} isOpen={modalOpen} />
+        <Modal.Container {...args} onClose={onClose} isOpen={modalOpen}>
+          <Modal.Title>약관에 동의해 주세요</Modal.Title>
+          <div>컨텐츠</div>
+        </Modal.Container>
       </>
     );
   },
@@ -42,11 +40,8 @@ export const Default: Story = {
 
 export const BottomPosition: Story = {
   args: {
-    title: '약관에 동의해 주세요',
-    contents: <div>컨텐츠</div>,
     isOpen: true,
     onClose: () => {},
-    buttons: [],
     position: 'bottom',
   },
 
@@ -61,20 +56,19 @@ export const BottomPosition: Story = {
       <>
         <h1>Component Modules</h1>
         <button onClick={() => setModalOpen(true)}>열기</button>
-        <Modal {...args} onClose={onClose} isOpen={modalOpen} />
+        <Modal.Container {...args} onClose={onClose} isOpen={modalOpen}>
+          <Modal.Title>약관에 동의해 주세요</Modal.Title>
+          <div>컨텐츠</div>
+        </Modal.Container>
       </>
     );
   },
 };
 
-export const HiddenCloseButton: Story = {
+export const ShowCloseButton: Story = {
   args: {
-    title: '약관에 동의해 주세요',
-    contents: <div>컨텐츠</div>,
     isOpen: true,
     onClose: () => {},
-    buttons: [],
-    showCloseButton: false,
   },
 
   render: function App(args) {
@@ -88,7 +82,11 @@ export const HiddenCloseButton: Story = {
       <>
         <h1>Component Modules</h1>
         <button onClick={() => setModalOpen(true)}>열기</button>
-        <Modal {...args} onClose={onClose} isOpen={modalOpen} />
+        <Modal.Container {...args} onClose={onClose} isOpen={modalOpen}>
+          <Modal.Title>약관에 동의해 주세요</Modal.Title>
+          <Modal.CloseButton onClose={onClose} />
+          <div>컨텐츠</div>
+        </Modal.Container>
       </>
     );
   },
@@ -96,11 +94,8 @@ export const HiddenCloseButton: Story = {
 
 export const ShowAllButtons: Story = {
   args: {
-    title: '약관에 동의해 주세요',
-    contents: <div>컨텐츠</div>,
     isOpen: true,
     onClose: () => {},
-    buttons: [],
   },
 
   render: function App(args) {
@@ -110,25 +105,28 @@ export const ShowAllButtons: Story = {
       setModalOpen(false);
     };
 
-    const buttons = [
-      <PrimaryButton
-        label="동의하고 저장하기"
-        onClick={() => alert('클릭됨')}
-      />,
-      <SecondaryButton label="닫기" onClick={onClose} />,
-    ];
-
     return (
       <>
-        <h1>Component Modules</h1>
         <button onClick={() => setModalOpen(true)}>열기</button>
-        <Modal
-          {...args}
-          onClose={onClose}
-          isOpen={modalOpen}
-          buttons={buttons}
-        />
+        <Modal.Container {...args} onClose={onClose} isOpen={modalOpen}>
+          <Modal.Title>약관에 동의해 주세요</Modal.Title>
+          <Modal.CloseButton onClose={onClose} />
+          <div>컨텐츠</div>
+          <ButtonWrapper>
+            <Modal.PrimaryButton
+              label="동의하고 저장하기"
+              onClick={() => alert('클릭됨')}
+            />
+            <Modal.SecondaryButton label="닫기" onClick={onClose} />
+          </ButtonWrapper>
+        </Modal.Container>
       </>
     );
   },
 };
+
+const ButtonWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+`;
