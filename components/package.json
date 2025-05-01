@@ -1,5 +1,5 @@
 {
-  "name": "@eunoia-jaxson/modal",
+  "name": "@sanghee01/modal",
   "version": "0.0.4",
   "description": "A modal component for React",
   "type": "module",
@@ -19,6 +19,7 @@
   },
   "dependencies": {
     "@eunoia-jaxson/modal": "^0.0.4",
+    "@sanghee01/modal": "^0.0.4",
     "react": "^19.1.0",
     "react-dom": "^19.1.0"
   },

@@ -1,5 +1,5 @@
 import './App.css';
-import { useCvcInput } from '@eunoia-jaxson/card-field-hooks';
+import { useCvcInput } from '@sanghee01/card-field-hooks';
 
 function App() {
   const { cvc, handleCvcChange, cvcError } = useCvcInput();
