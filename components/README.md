@@ -22,7 +22,7 @@ npm install @except-woody-modal
 가장 기본적인 다이얼로그 사용법:
 
 ```tsx
-import { Dialog } from '@except-woody-modal';
+import { Dialog } from "@except-woody-modal";
 
 function App() {
   return (
@@ -54,7 +54,7 @@ function App() {
 화면 하단에 표시되는 다이얼로그:
 
 ```tsx
-import { Dialog } from '@except-woody-modal';
+import { Dialog } from "@except-woody-modal";
 
 function App() {
   return (
@@ -85,9 +85,9 @@ function App() {
 
 ### `Dialog` 컴포넌트
 
-다이얼로그의 상태와 콘텍스트를 관리하는 핵심 컴포넌트입니다.
+다이얼로그의 상태와 콘텍스트를 관리하는 컴포넌트입니다.
 
-#### 프롭스
+#### Props
 
 - `children`: React 노드
 
@@ -126,17 +126,6 @@ function App() {
 #### CloseButton
 
 - `children`: React 노드
-
-## 스타일링
-
-기본 스타일은 CSS 클래스를 통해 제공됩니다:
-
-- `.dialog-overlay`: 오버레이 스타일 (배경색, 위치 등)
-- `.dialog-content`: 콘텐츠 컨테이너 스타일
-- `.center`: 중앙 정렬 다이얼로그 위치 스타일
-- `.bottom`: 하단 시트 다이얼로그 위치 스타일
-
-인라인 스타일을 사용하여 각 컴포넌트를 커스터마이징할 수 있습니다.
 
 ## 접근성 기능
 

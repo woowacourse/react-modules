@@ -1,4 +1,4 @@
-import { Dialog } from './lib';
+import { Dialog } from "./lib";
 
 function App() {
   return (
@@ -11,9 +11,10 @@ function App() {
           <Dialog.Overlay>
             <Dialog.Content>
               <Dialog.Header>
+                <h1>모달의 헤더입니다.</h1>
                 <Dialog.CloseButton>Close</Dialog.CloseButton>
               </Dialog.Header>
-              <div style={{ padding: '16px' }}>
+              <div style={{ padding: "16px" }}>
                 <p>Dialog Content</p>
               </div>
             </Dialog.Content>

@@ -1,13 +1,13 @@
-import { createContext, useContext, useId } from 'react';
-import { createPortal } from 'react-dom';
-import useBoolean from './hooks/useBoolean';
-import useEscapeModal from './hooks/useEscapeModal';
+import { createContext, useContext, useId } from "react";
+import { createPortal } from "react-dom";
+import useBoolean from "./hooks/useBoolean";
+import useEscapeModal from "./hooks/useEscapeModal";
 import {
   StyledCloseButton,
   StyledContent,
   StyledHeader,
   StyledOverlay,
-} from './Dialog.css';
+} from "./Dialog.css";
 
 interface DialogContextType {
   open: () => void;
@@ -34,7 +34,7 @@ export function Dialog({ children }: { children: React.ReactNode }) {
 function useDialogContext() {
   const context = useContext(DialogContext);
   if (!context) {
-    throw new Error('useDialogContext must be used within a Dialog');
+    throw new Error("컨텍스트가 존재하지 않는다.");
   }
   return context;
 }
@@ -68,8 +68,8 @@ function Overlay({
   className?: string;
 }) {
   const { close } = useDialogContext();
-  const id = useId();
   const { handleClickOverlay } = useEscapeModal(close);
+  const id = useId();
 
   return (
     <StyledOverlay
@@ -110,11 +110,11 @@ function CloseButton({
 
 function Content({
   children,
-  position = 'center',
+  position = "center",
   className,
 }: {
   children: React.ReactNode;
-  position?: 'center' | 'bottom';
+  position?: "center" | "bottom";
   className?: string;
 }) {
   return (
