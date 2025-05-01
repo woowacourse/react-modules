@@ -6,8 +6,8 @@ interface ModalCloseButtonProps {
 
 function ModalCloseButton({ onClose }: ModalCloseButtonProps) {
   return (
-    <Button onClick={onClose}>
-      <img src="./Close.svg" />
+    <Button onClick={onClose} className="close-button">
+      <span>X</span>
     </Button>
   );
 }
@@ -20,4 +20,5 @@ const Button = styled.button`
   border: none;
   background: transparent;
   padding: 0px;
+  cursor: pointer;
 `;
