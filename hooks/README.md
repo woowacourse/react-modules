@@ -1,6 +1,6 @@
 # Payment 라이브러리
 
-@ohgus/payment-hooks는 카드 유효성 검증을 쉽게 할 수 있도록 돕는 라이브러리 입니다.
+@kaori-killer/payment-hooks는 카드 유효성 검증을 쉽게 할 수 있도록 돕는 라이브러리 입니다.
 
 ## useCardNumbersValidate
 

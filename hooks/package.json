@@ -1,5 +1,5 @@
 {
-  "name": "@ohgus/payment-hooks",
+  "name": "@kaori-killer/payment-hooks",
   "version": "0.0.6",
   "description": "npm modules",
   "type": "module",
@@ -17,7 +17,7 @@
     "test": "jest"
   },
   "dependencies": {
-    "@ohgus/payment-hooks": "^0.0.6",
+    "@kaori-killer/payment-hooks": "^0.0.5",
     "react": "^19.1.0",
     "react-dom": "^19.1.0"
   },
