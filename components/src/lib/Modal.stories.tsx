@@ -41,7 +41,7 @@ export const CenterModal: Story = {
       "#trigger-button"
     ) as HTMLButtonElement;
     await userEvent.click(triggerButton);
-    const modalContainer = canvasElement.querySelector(
+    const modalContainer = document.body.querySelector(
       "#modal-container"
     ) as HTMLDivElement;
     await waitFor(() =>
@@ -50,7 +50,7 @@ export const CenterModal: Story = {
 
     // close button 클릭시 모달 닫히기
     await userEvent.click(triggerButton);
-    const closeButton = canvasElement.querySelector(
+    const closeButton = document.body.querySelector(
       "#modal-close-button"
     ) as HTMLImageElement;
     await userEvent.click(closeButton);
@@ -59,7 +59,7 @@ export const CenterModal: Story = {
 
     // background 클릭시 모달 닫히기
     await userEvent.click(triggerButton);
-    const modalBackground = canvasElement.querySelector(
+    const modalBackground = document.body.querySelector(
       "#modal-background"
     ) as HTMLImageElement;
     await userEvent.click(modalBackground);
