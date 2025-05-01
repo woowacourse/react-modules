@@ -28,7 +28,7 @@ const Modal = ({
       <Wrapper position={position} onClick={handleBackdropClick}>
         <ModalContainer
           position={position}
-          onClick={(e) => e.stopPropagation()} // 모달 내부 클릭 시 backdrop 이벤트 방지
+          onClick={(e) => e.stopPropagation()}
         >
           <ModalHeader>
             <ModalTitle>{title}</ModalTitle>
