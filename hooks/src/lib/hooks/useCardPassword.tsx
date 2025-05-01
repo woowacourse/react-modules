@@ -19,7 +19,7 @@ function useCardPassword() {
 
     setIsCardPasswordError(!isValid);
 
-    setErrorMessage(isValid ? '한 칸은 2자리 숫자를 입력해야합니다.' : '');
+    setErrorMessage(!isValid ? '한 칸은 2자리 숫자를 입력해야합니다.' : '');
 
     setCardPassword(value);
   };

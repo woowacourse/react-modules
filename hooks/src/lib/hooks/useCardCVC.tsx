@@ -19,7 +19,7 @@ function useCardCVC() {
 
     setIsCardCVCError(!isValid);
 
-    setErrorMessage(isValid ? '한 칸은 3자리 숫자를 입력해야합니다.' : '');
+    setErrorMessage(!isValid ? '한 칸은 3자리 숫자를 입력해야합니다.' : '');
 
     setCardCVC(value);
   };
