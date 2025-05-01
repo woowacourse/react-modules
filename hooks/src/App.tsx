@@ -1,44 +1,43 @@
-import React from 'react';
 import './App.css';
-import useCardNumbers from './useCardNumbers';
+import useCardNumbers from './cardNumber/useCardNumbers';
 import { CARD_NUMBERS_KEY } from './cardNumber/constants';
 
 function App() {
-  const { cardNumbers, isValid, errorMessage, handleCardNumbersChange } =
+  const { cardNumbers, validationResults, handleCardNumbersChange } =
     useCardNumbers();
 
   return (
     <>
       <h1>Hooks Modules</h1>
       <input
-        type='text'
+        type="text"
         name={CARD_NUMBERS_KEY.part1}
-        onChange={handleCardNumbersChange}
+        onChange={(e) => handleCardNumbersChange(e, true)}
         value={cardNumbers.part1}
       />
-      <p>{isValid.part1}</p>
+      <p>{validationResults.part1.isValid}</p>
       <input
-        type='text'
+        type="text"
         name={CARD_NUMBERS_KEY.part2}
-        onChange={handleCardNumbersChange}
+        onChange={(e) => handleCardNumbersChange(e, true)}
         value={cardNumbers.part2}
       />
-      <p>{isValid.part2}</p>
+      <p>{validationResults.part2.isValid}</p>
       <input
-        type='text'
+        type="text"
         name={CARD_NUMBERS_KEY.part3}
-        onChange={handleCardNumbersChange}
+        onChange={(e) => handleCardNumbersChange(e, true)}
         value={cardNumbers.part3}
       />
-      <p>{isValid.part3}</p>
+      <p>{validationResults.part3.isValid}</p>
       <input
-        type='text'
+        type="text"
         name={CARD_NUMBERS_KEY.part4}
-        onChange={handleCardNumbersChange}
+        onChange={(e) => handleCardNumbersChange(e, false)}
         value={cardNumbers.part4}
       />
-      <p>{isValid.part4}</p>
-      <p>{errorMessage}</p>
+      <p>{validationResults.part4.isValid}</p>
+      <p>{validationResults.part1.errorMessage}</p>
     </>
   );
 }

@@ -2,6 +2,11 @@ import { ChangeEvent, useState } from 'react';
 import { CardNumbersKey } from './constants';
 import { ValidationResult } from '../types';
 
+const ERROR_MESSAGE = {
+  notNumber: '숫자만 입력해주세요.',
+  invalidLength: '카드 번호는 네 자리만 입력해야 합니다.',
+};
+
 function useCardNumbers() {
   const [cardNumbers, setCardNumbers] = useState<
     Record<CardNumbersKey, string>
@@ -27,42 +32,45 @@ function useCardNumbers() {
   };
 
   const checkIsValidLength = (value: string) => {
-    return value.length === 4;
+    return value.length <= 4;
   };
 
-  const validateCardNumbers = (name: string, value: string) => {
+  const validateCardNumbers = (value: string) => {
     const isNumber = checkIsNumber(value);
     const isValidLength = checkIsValidLength(value);
 
     if (!isNumber) {
-      setValidationResults((prev) => ({
-        ...prev,
-        [name]: { isValid: false, errorMessage: '숫자만 입력해주세요.' },
-      }));
-      return;
+      return 'notNumber';
     }
 
     if (!isValidLength) {
+      return 'invalidLength';
+    }
+
+    return null;
+  };
+
+  const handleCardNumbersChange = (
+    event: ChangeEvent<HTMLInputElement>,
+    restrictChange: boolean = true
+  ) => {
+    const { name, value } = event.target;
+    const errorType = validateCardNumbers(value);
+
+    if (restrictChange && errorType) {
+      return;
+    }
+
+    if (!restrictChange) {
       setValidationResults((prev) => ({
         ...prev,
         [name]: {
-          isValid: false,
-          errorMessage: '카드 번호는 네 자리만 입력해야 합니다.',
+          isValid: !Boolean(errorType),
+          errorMessage: errorType ? ERROR_MESSAGE[errorType] : '',
         },
       }));
-      return;
     }
-    setValidationResults((prev) => ({
-      ...prev,
-      [name]: {
-        isValid: true,
-        errorMessage: '',
-      },
-    }));
-  };
 
-  const handleCardNumbersChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = event.target;
     setCardNumbers((prev) => ({ ...prev, [name]: value }));
   };
 
