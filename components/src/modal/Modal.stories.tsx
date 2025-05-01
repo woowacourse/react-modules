@@ -14,7 +14,7 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
-    isOpen: true,
+    open: true,
     onClose: () => {},
   },
 
@@ -29,7 +29,7 @@ export const Default: Story = {
       <>
         <h1>Component Modules</h1>
         <button onClick={() => setModalOpen(true)}>열기</button>
-        <Modal.Container {...args} onClose={onClose} isOpen={modalOpen}>
+        <Modal.Container {...args} onClose={onClose} open={modalOpen}>
           <Modal.Title>약관에 동의해 주세요</Modal.Title>
           <div>컨텐츠</div>
         </Modal.Container>
@@ -40,7 +40,7 @@ export const Default: Story = {
 
 export const BottomPosition: Story = {
   args: {
-    isOpen: true,
+    open: true,
     onClose: () => {},
     position: 'bottom',
   },
@@ -56,7 +56,7 @@ export const BottomPosition: Story = {
       <>
         <h1>Component Modules</h1>
         <button onClick={() => setModalOpen(true)}>열기</button>
-        <Modal.Container {...args} onClose={onClose} isOpen={modalOpen}>
+        <Modal.Container {...args} onClose={onClose} open={modalOpen}>
           <Modal.Title>약관에 동의해 주세요</Modal.Title>
           <div>컨텐츠</div>
         </Modal.Container>
@@ -67,7 +67,7 @@ export const BottomPosition: Story = {
 
 export const ShowCloseButton: Story = {
   args: {
-    isOpen: true,
+    open: true,
     onClose: () => {},
   },
 
@@ -82,7 +82,7 @@ export const ShowCloseButton: Story = {
       <>
         <h1>Component Modules</h1>
         <button onClick={() => setModalOpen(true)}>열기</button>
-        <Modal.Container {...args} onClose={onClose} isOpen={modalOpen}>
+        <Modal.Container {...args} onClose={onClose} open={modalOpen}>
           <Modal.Title>약관에 동의해 주세요</Modal.Title>
           <Modal.CloseButton onClose={onClose} />
           <div>컨텐츠</div>
@@ -94,7 +94,7 @@ export const ShowCloseButton: Story = {
 
 export const ShowAllButtons: Story = {
   args: {
-    isOpen: true,
+    open: true,
     onClose: () => {},
   },
 
@@ -108,7 +108,7 @@ export const ShowAllButtons: Story = {
     return (
       <>
         <button onClick={() => setModalOpen(true)}>열기</button>
-        <Modal.Container {...args} onClose={onClose} isOpen={modalOpen}>
+        <Modal.Container {...args} onClose={onClose} open={modalOpen}>
           <Modal.Title>약관에 동의해 주세요</Modal.Title>
           <Modal.CloseButton onClose={onClose} />
           <div>컨텐츠</div>

@@ -5,7 +5,7 @@ import SecondaryButton from './SecondaryButton';
 import { ModalProps } from './types';
 
 function ModalContainer({
-  isOpen,
+  open,
   onClose,
   position = 'center',
   children,
@@ -13,12 +13,12 @@ function ModalContainer({
   const modalRef = useRef<HTMLDialogElement>(null);
 
   useEffect(() => {
-    if (isOpen) {
+    if (open) {
       modalRef.current?.showModal();
     } else {
       modalRef.current?.close();
     }
-  }, [isOpen]);
+  }, [open]);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -27,14 +27,14 @@ function ModalContainer({
       }
     };
 
-    if (isOpen) {
+    if (open) {
       document.addEventListener('mousedown', handleClickOutside);
     }
 
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
-  }, [isOpen, onClose]);
+  }, [open, onClose]);
 
   return (
     <StyledModalContainer

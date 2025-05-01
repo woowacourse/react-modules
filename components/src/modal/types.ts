@@ -1,5 +1,5 @@
 export interface ModalProps {
-  isOpen: boolean;
+  open: boolean;
   onClose: () => void;
   position?: 'center' | 'bottom';
 }
