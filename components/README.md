@@ -2,9 +2,8 @@
 
 > 페이먼츠 모듈 1단계
 
-[🔗 웹페이지 배포 주소]()  
-[🎨 스토리북 배포 주소]()  
-[🗂️ 배포 npm 링크]()
+[🎨 스토리북 배포 주소](https://6811b32435027dad59e3902b-hdzpptbvyn.chromatic.com/?path=/story/components-modal--center)  
+[🗂️ 배포 npm 링크](https://www.npmjs.com/package/lumes_modal)
 
 <br>
 
