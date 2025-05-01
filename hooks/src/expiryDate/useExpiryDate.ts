@@ -1,6 +1,7 @@
 import { ChangeEvent, useState } from 'react';
 import { EXPIRY_DATE_KEY, ExpiryDateKey } from './constants';
 import { ValidationResult } from '../types';
+import { ERROR_MESSAGE } from '../constants';
 
 function useExpiryDate() {
   const [expiryDate, setExpiryDate] = useState<Record<ExpiryDateKey, string>>({
@@ -49,7 +50,10 @@ function useExpiryDate() {
     if (!isNumber) {
       setValidationResults((prev) => ({
         ...prev,
-        [name]: { isValid: false, errorMessage: '숫자만 입력해주세요.' },
+        [name]: {
+          isValid: false,
+          errorMessage: ERROR_MESSAGE.expiryDate.notNumber,
+        },
       }));
       return;
     }
@@ -59,7 +63,7 @@ function useExpiryDate() {
         ...prev,
         [name]: {
           isValid: false,
-          errorMessage: '유효기간은 두 자리만 입력해야 합니다.',
+          errorMessage: ERROR_MESSAGE.expiryDate.invalidLength,
         },
       }));
       return;
@@ -70,7 +74,7 @@ function useExpiryDate() {
         ...prev,
         [name]: {
           isValid: false,
-          errorMessage: '유효한 월(1~12)을 입력해야 합니다.',
+          errorMessage: ERROR_MESSAGE.expiryDate.invalidMonthRange,
         },
       }));
       return;

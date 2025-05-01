@@ -12,21 +12,21 @@ function App() {
       <input
         type="text"
         name={CARD_NUMBERS_KEY.part1}
-        onChange={(e) => handleCardNumbersChange(e, true)}
+        onChange={handleCardNumbersChange}
         value={cardNumbers.part1}
       />
       <p>{validationResults.part1.isValid}</p>
       <input
         type="text"
         name={CARD_NUMBERS_KEY.part2}
-        onChange={(e) => handleCardNumbersChange(e, true)}
+        onChange={handleCardNumbersChange}
         value={cardNumbers.part2}
       />
       <p>{validationResults.part2.isValid}</p>
       <input
         type="text"
         name={CARD_NUMBERS_KEY.part3}
-        onChange={(e) => handleCardNumbersChange(e, true)}
+        onChange={handleCardNumbersChange}
         value={cardNumbers.part3}
       />
       <p>{validationResults.part3.isValid}</p>

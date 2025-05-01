@@ -1,5 +1,6 @@
 import { ChangeEvent, useState } from 'react';
 import { ValidationResult } from '../types';
+import { ERROR_MESSAGE } from '../constants';
 
 function useCVC() {
   const [CVC, setCVC] = useState('');
@@ -25,7 +26,7 @@ function useCVC() {
     if (!isNumber) {
       setValidationResult({
         isValid: false,
-        errorMessage: '숫자만 입력해주세요.',
+        errorMessage: ERROR_MESSAGE.CVC.notNumber,
       });
       return;
     }
@@ -33,7 +34,7 @@ function useCVC() {
     if (!isValidLength) {
       setValidationResult({
         isValid: false,
-        errorMessage: 'CVC는 세 자리만 입력해야 합니다.',
+        errorMessage: ERROR_MESSAGE.CVC.invalidLength,
       });
       return;
     }

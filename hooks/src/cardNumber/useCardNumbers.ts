@@ -1,11 +1,7 @@
 import { ChangeEvent, useState } from 'react';
-import { CardNumbersKey } from './constants';
+import { CARD_NUMBER_ERROR_TYPES, ERROR_MESSAGE } from '../constants';
 import { ValidationResult } from '../types';
-
-const ERROR_MESSAGE = {
-  notNumber: '숫자만 입력해주세요.',
-  invalidLength: '카드 번호는 네 자리만 입력해야 합니다.',
-};
+import { CardNumbersKey } from './constants';
 
 function useCardNumbers() {
   const [cardNumbers, setCardNumbers] = useState<
@@ -40,11 +36,11 @@ function useCardNumbers() {
     const isValidLength = checkIsValidLength(value);
 
     if (!isNumber) {
-      return 'notNumber';
+      return CARD_NUMBER_ERROR_TYPES.notNumber;
     }
 
     if (!isValidLength) {
-      return 'invalidLength';
+      return CARD_NUMBER_ERROR_TYPES.invalidLength;
     }
 
     return null;
@@ -66,7 +62,7 @@ function useCardNumbers() {
         ...prev,
         [name]: {
           isValid: !Boolean(errorType),
-          errorMessage: errorType ? ERROR_MESSAGE[errorType] : '',
+          errorMessage: errorType ? ERROR_MESSAGE.cardNumber[errorType] : '',
         },
       }));
     }

@@ -1,6 +1,7 @@
 import { renderHook, act } from '@testing-library/react';
 import useCardNumbers from './useCardNumbers';
 import { ChangeEvent } from 'react';
+import { CARD_NUMBER_ERROR_TYPES } from '../constants';
 
 describe('useCardNumbers', () => {
   it('입력값이 정확히 업데이트 되어야 한다.', () => {
@@ -18,26 +19,16 @@ describe('useCardNumbers', () => {
   it('입력값이 숫자가 아닐 때 isValid로 false를 반환하고 에러 메시지를 반환한다.', () => {
     const { result } = renderHook(() => useCardNumbers());
 
-    act(() => {
-      result.current.validateCardNumbers('part1', 'aaaa');
-    });
-
-    const { isValid, errorMessage } = result.current.validationResults.part1;
-
-    expect(isValid).toBe(false);
-    expect(errorMessage).toBe('숫자만 입력해주세요.');
+    expect(result.current.validateCardNumbers('aaaa')).toBe(
+      CARD_NUMBER_ERROR_TYPES.notNumber
+    );
   });
 
   it('입력값이 네 자리가 아닐 때 isValid로 false를 반환하고 에러 메시지를 반환한다.', () => {
     const { result } = renderHook(() => useCardNumbers());
 
-    act(() => {
-      result.current.validateCardNumbers('part1', '12345');
-    });
-
-    const { isValid, errorMessage } = result.current.validationResults.part1;
-
-    expect(isValid).toBe(false);
-    expect(errorMessage).toBe('카드 번호는 네 자리만 입력해야 합니다.');
+    expect(result.current.validateCardNumbers('12345')).toBe(
+      CARD_NUMBER_ERROR_TYPES.invalidLength
+    );
   });
 });
