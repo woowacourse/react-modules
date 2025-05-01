@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import useError from '../useError/useError';
-import isUnderMaxLength from '../../validate/isUnderMaxLength';
-import isInteger from '../../validate/isInteger';
+import isUnderMaxLength from '../validate/isUnderMaxLength';
+import isInteger from '../validate/isInteger';
 
 type CardExpirationDate = {
   MONTH: string;

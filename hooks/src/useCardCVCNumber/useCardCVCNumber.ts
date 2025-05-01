@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import useError from '../useError/useError';
-import isInteger from '../../validate/isInteger';
-import isUnderMaxLength from '../../validate/isUnderMaxLength';
+import isInteger from '../validate/isInteger';
+import isUnderMaxLength from '../validate/isUnderMaxLength';
 
 const KEY = 'cardCVCNumber';
 
