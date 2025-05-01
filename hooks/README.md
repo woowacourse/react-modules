@@ -6,7 +6,7 @@
 ## 💡 Installation
 
 ```
-npm i @sooyeoniya/hooks
+npm i @muffin2219/hooks
 ```
 
 ## 📌 How to use: useCardNumberValidation
@@ -14,24 +14,24 @@ npm i @sooyeoniya/hooks
 ### 📍 Example
 
 ```tsx
-import { useState } from "react";
-import { useCardNumberValidation } from "@sooyeoniya/hooks";
+import {useState} from 'react';
+import {useCardNumberValidation} from '@muffin2219/hooks';
 
 function App() {
   const [cardNumber, setCardNumber] = useState({
-    first: "",
-    second: "",
-    third: "",
-    fourth: "",
+    first: '',
+    second: '',
+    third: '',
+    fourth: '',
   });
   const cardNumberValidationResult = useCardNumberValidation(cardNumber);
 
   const handleCardNumberChange = (
     e: React.ChangeEvent<HTMLInputElement>,
-    field: "first" | "second" | "third" | "fourth"
+    field: 'first' | 'second' | 'third' | 'fourth'
   ) => {
     const inputValue = e.target.value;
-    setCardNumber((prev) => ({ ...prev, [field]: inputValue }));
+    setCardNumber((prev) => ({...prev, [field]: inputValue}));
   };
 
   return (
@@ -42,28 +42,28 @@ function App() {
         value={cardNumber.first}
         type="text"
         maxLength={4}
-        onChange={(e) => handleCardNumberChange(e, "first")}
+        onChange={(e) => handleCardNumberChange(e, 'first')}
       />
       <input
         key="second"
         value={cardNumber.second}
         type="text"
         maxLength={4}
-        onChange={(e) => handleCardNumberChange(e, "second")}
+        onChange={(e) => handleCardNumberChange(e, 'second')}
       />
       <input
         key="third"
         value={cardNumber.third}
         type="text"
         maxLength={4}
-        onChange={(e) => handleCardNumberChange(e, "third")}
+        onChange={(e) => handleCardNumberChange(e, 'third')}
       />
       <input
         key="fourth"
         value={cardNumber.fourth}
         type="text"
         maxLength={4}
-        onChange={(e) => handleCardNumberChange(e, "fourth")}
+        onChange={(e) => handleCardNumberChange(e, 'fourth')}
       />
 
       {cardNumberValidationResult.first.isError && (
@@ -132,24 +132,24 @@ export default App;
 ### 📍 Example
 
 ```tsx
-import { useState } from "react";
-import "./App.css";
-import { useExpirationDateValidation } from "@sooyeoniya/hooks";
+import {useState} from 'react';
+import './App.css';
+import {useExpirationDateValidation} from '@muffin2219/hooks';
 
 function App() {
   const [expirationDate, setExpirationDate] = useState({
-    month: "",
-    year: "",
+    month: '',
+    year: '',
   });
   const expirationDateValidationResult =
     useExpirationDateValidation(expirationDate);
 
   const handleExpirationDateChange = (
     e: React.ChangeEvent<HTMLInputElement>,
-    field: "month" | "year"
+    field: 'month' | 'year'
   ) => {
     const inputValue = e.target.value;
-    setExpirationDate((prev) => ({ ...prev, [field]: inputValue }));
+    setExpirationDate((prev) => ({...prev, [field]: inputValue}));
   };
 
   return (
@@ -159,13 +159,13 @@ function App() {
         value={expirationDate.month}
         type="text"
         maxLength={2}
-        onChange={(e) => handleExpirationDateChange(e, "month")}
+        onChange={(e) => handleExpirationDateChange(e, 'month')}
       />
       <input
         value={expirationDate.year}
         type="text"
         maxLength={2}
-        onChange={(e) => handleExpirationDateChange(e, "year")}
+        onChange={(e) => handleExpirationDateChange(e, 'year')}
       />
 
       {expirationDateValidationResult.month.isError && (
@@ -220,12 +220,12 @@ export default App;
 ### 📍 Example
 
 ```tsx
-import { useState } from "react";
-import "./App.css";
-import { useCvcValidation } from "@sooyeoniya/hooks";
+import {useState} from 'react';
+import './App.css';
+import {useCvcValidation} from '@muffin2219/hooks';
 
 function App() {
-  const [cvc, setCvc] = useState("");
+  const [cvc, setCvc] = useState('');
   const cvcValidationResult = useCvcValidation(cvc);
 
   const handleCvcChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -270,12 +270,12 @@ export default App;
 ### 📍 Example
 
 ```tsx
-import { useState } from "react";
-import "./App.css";
-import { usePasswordValidation } from "@sooyeoniya/hooks";
+import {useState} from 'react';
+import './App.css';
+import {usePasswordValidation} from '@muffin2219/hooks';
 
 function App() {
-  const [password, setPassword] = useState("");
+  const [password, setPassword] = useState('');
   const passwordValidationResult = usePasswordValidation(password);
 
   const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
