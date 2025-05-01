@@ -78,7 +78,7 @@ const isCardValid = validateCardNumber('1234 5678 9012 3456');
 
 ```tsx
 iimport React from 'react';
-import { useCardNumberInput, useCardExpirationInput, useCardPasswordInput, useCvcInput, useCardCompanySelect, CardCompany } from '@eunoia-jaxson/card-field-hooks';
+import { useCardNumberInput, useCardExpirationInput, useCardPasswordInput, useCvcInput, useCardCompanySelect } from '@eunoia-jaxson/card-field-hooks';
 
 const CardForm = () => {
   const { cardNumber, handleCardNumberChange } = useCardNumberInput();
