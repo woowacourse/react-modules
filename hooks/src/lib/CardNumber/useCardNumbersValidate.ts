@@ -20,7 +20,7 @@ const initialCardNumberValidate: CardNumbersValidate = {
 type CardNumberValidateResult = {
   isValid: CardNumbersValidate;
   errorMessage: string | null;
-  validateCardNumber: (cardNumber: string, key: string) => void;
+  validateCardNumbers: (cardNumber: string, key: string) => void;
 };
 
 const useCardNumbersValidate = (): CardNumberValidateResult => {
@@ -29,7 +29,7 @@ const useCardNumbersValidate = (): CardNumberValidateResult => {
   );
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
-  const validateCardNumber = (cardNumber: string, key: string) => {
+  const validateCardNumbers = (cardNumber: string, key: string) => {
     if (!validateNumber(cardNumber)) {
       setIsValid({
         ...isValid,
@@ -58,7 +58,7 @@ const useCardNumbersValidate = (): CardNumberValidateResult => {
     setErrorMessage(null);
   };
 
-  return { isValid, errorMessage, validateCardNumber };
+  return { isValid, errorMessage, validateCardNumbers };
 };
 
 export default useCardNumbersValidate;

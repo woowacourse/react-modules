@@ -1,12 +1,12 @@
 import { renderHook, act } from '@testing-library/react';
-import useCardNumbersValidate from './useCardNumberValidate';
+import { useCardNumbersValidate } from '@ohgus/payment-hooks';
 
 describe('useCardNumbersValidate', () => {
   it('숫자로 이루어진 4자리 값이 들어오면 isValid가 true이고 에러 메시지가 null이다.', () => {
     const { result } = renderHook(() => useCardNumbersValidate());
 
     act(() => {
-      result.current.validateCardNumber('1234', 'first');
+      result.current.validateCardNumbers('1234', 'first');
     });
 
     expect(result.current.isValid.first).toBe(true);
@@ -17,7 +17,7 @@ describe('useCardNumbersValidate', () => {
     const { result } = renderHook(() => useCardNumbersValidate());
 
     act(() => {
-      result.current.validateCardNumber('-1', 'first');
+      result.current.validateCardNumbers('-1', 'first');
     });
 
     expect(result.current.isValid.first).toBe(false);
@@ -28,7 +28,7 @@ describe('useCardNumbersValidate', () => {
     const { result } = renderHook(() => useCardNumbersValidate());
 
     act(() => {
-      result.current.validateCardNumber('12345', 'third');
+      result.current.validateCardNumbers('12345', 'third');
     });
 
     expect(result.current.isValid.third).toBe(false);
