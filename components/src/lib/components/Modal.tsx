@@ -5,6 +5,8 @@ import styled from '@emotion/styled';
 
 import { Portal } from './Portal';
 
+import Close from '../assets/Close.svg';
+
 export type Props = {
   /**
    * If true, the modal will be open
@@ -56,11 +58,7 @@ export const Modal = ({
         <StyledModalHeader aria-label={title}>
           {title}
           {showCloseButton && (
-            <StyledCloseIconButton
-              src="/close.png"
-              onClick={onClose}
-              aria-label="closeModalButton"
-            />
+            <StyledCloseIconButton src={Close} onClick={onClose} aria-label="closeModalButton" />
           )}
         </StyledModalHeader>
         {children}

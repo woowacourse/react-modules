@@ -1,6 +1,6 @@
 {
   "name": "@sebin0580/modal",
-  "version": "0.0.3",
+  "version": "0.0.8",
   "description": "npm modules",
   "type": "module",
   "types": "dist/index.d.ts",
@@ -21,7 +21,6 @@
     "@emotion/css": "^11.13.5",
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.0",
-    "@sebin0580/modal": "^0.0.1",
     "react": "^19.1.0",
     "react-dom": "^19.1.0"
   },
