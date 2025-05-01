@@ -1,6 +1,6 @@
 {
   "name": "@muffin2219/components",
-  "version": "0.0.1",
+  "version": "0.0.3",
   "description": "Modal components module",
   "type": "module",
   "types": "dist/index.d.ts",
@@ -21,6 +21,7 @@
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.0",
     "@muffin2219/components": "^0.0.1",
+    "@muffin2219/hooks": "^0.0.1",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "react-icons": "^5.5.0"
@@ -42,6 +43,7 @@
     "@typescript-eslint/eslint-plugin": "^8.29.1",
     "@typescript-eslint/parser": "^8.29.1",
     "@vitejs/plugin-react-swc": "^3.8.1",
+    "chromatic": "^11.28.2",
     "eslint": "^9.24.0",
     "eslint-plugin-react-hooks": "^5.2.0",
     "eslint-plugin-react-refresh": "^0.4.19",

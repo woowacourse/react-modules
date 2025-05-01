@@ -12,7 +12,7 @@ npm i @muffin2219/components
 
 모달 컴포넌트의 사용 방법과 예제를 확인하려면 Storybook 문서를 참조하세요.
 
-[📖 Storybook으로 확인하기]()
+[📖 Storybook으로 확인하기](https://681300d422622e22ef68e834-bjxrcyyjur.chromatic.com/?path=/docs/components-modal--docs)
 
 Storybook에서는 다음과 같은 정보를 확인할 수 있습니다.
 
