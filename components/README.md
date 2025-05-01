@@ -5,7 +5,7 @@
 ## 💡 Installation
 
 ```
-npm i @sooyeoniya/components
+npm i @muffin2219/components
 ```
 
 ## 📚 Documentation
@@ -35,9 +35,9 @@ Storybook에서는 다음과 같은 정보를 확인할 수 있습니다.
 ## 📌 How to use
 
 ```tsx
-import { Modal } from "@sooyeoniya/components";
-import { useState } from "react";
-import "./App.css";
+import {Modal} from '@muffin2219/components';
+import {useState} from 'react';
+import './App.css';
 
 function App() {
   const [isOpen, setIsOpen] = useState(false);
@@ -51,7 +51,7 @@ function App() {
         모달 열기
       </button>
       <Modal isOpen={isOpen} onClose={closeModal}>
-        <div style={{ padding: "20px" }}>
+        <div style={{padding: '20px'}}>
           <h3>모달 내용</h3>
           <p>
             모달 컴포넌트의 children으로 다양한 콘텐츠를 추가할 수 있습니다.
@@ -69,9 +69,9 @@ export default App;
 ## 🎨 Customizing Modal
 
 ```tsx
-import { Modal } from "@sooyeoniya/components";
-import { useState } from "react";
-import "./App.css";
+import {Modal} from '@muffin2219/components';
+import {useState} from 'react';
+import './App.css';
 
 function App() {
   const [isOpen, setIsOpen] = useState(false);
@@ -89,13 +89,13 @@ function App() {
         onClose={() => setIsOpen(false)}
         position="bottom"
         title={{
-          text: "알림",
-          color: "#4a154b",
+          text: '알림',
+          color: '#4a154b',
           size: 24,
         }}
         backgroundColor="#f5f5f5"
       >
-        <div style={{ padding: "20px" }}>
+        <div style={{padding: '20px'}}>
           <p>다양한 props를 통해 모달을 커스터마이징할 수 있습니다.</p>
           <button onClick={() => setIsOpen(false)}>확인</button>
         </div>
