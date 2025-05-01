@@ -1,6 +1,6 @@
 {
-  "name": "woowa-hooks-payments",
-  "version": "0.0.1",
+  "name": "hanheel-hooks-payments",
+  "version": "0.0.0",
   "description": "우아한테크코스 payments 카드폼 훅입니다",
   "type": "module",
   "types": "dist/index.d.ts",
