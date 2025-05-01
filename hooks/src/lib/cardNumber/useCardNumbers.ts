@@ -1,7 +1,7 @@
 import { ChangeEvent, useState } from 'react';
 import { CARD_NUMBER_ERROR_TYPES, ERROR_MESSAGE } from '../constants';
 import { ValidationResult } from '../types';
-import { CardNumbersKey } from './constants';
+import { CardNumbersKey } from '../constants';
 
 function useCardNumbers() {
   const [cardNumbers, setCardNumbers] = useState<

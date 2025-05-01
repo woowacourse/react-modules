@@ -1,6 +1,6 @@
 import './App.css';
-import { EXPIRY_DATE_KEY } from './expiryDate/constants';
-import useExpiryDate from './expiryDate/useExpiryDate';
+import { EXPIRY_DATE_KEY } from './lib/constants';
+import useExpiryDate from './lib/expiryDate/useExpiryDate';
 
 function App() {
   const { expiryDate, validationResults, handleExpiryDateChange } =
