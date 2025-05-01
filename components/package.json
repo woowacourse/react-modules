@@ -1,6 +1,6 @@
 {
-  "name": "kirin-modal-component",
-  "version": "0.0.4",
+  "name": "hoyychoi-modal-component",
+  "version": "0.0.2",
   "description": "npm modules",
   "type": "module",
   "types": "dist/index.d.ts",
@@ -17,7 +17,7 @@
     "preview": "vite preview",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build --output-dir storybook-static",
-    "chromatic": "npx chromatic --project-token=chpt_e0c34a306a5d035"
+    "chromatic": "npx chromatic --project-token=chpt_c2b9f1d7ffc23ff"
   },
   "dependencies": {
     "@emotion/css": "^11.13.5",
