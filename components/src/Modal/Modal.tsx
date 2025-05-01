@@ -4,6 +4,8 @@ import {
   CloseIcon,
   ModalTitle,
   ModalContents,
+  ModalButton,
+  ModalButtonContainer,
 } from './Modal.styled';
 import { useContext, useEffect } from 'react';
 import { createContext } from 'react';
@@ -92,8 +94,38 @@ const Contents = ({ children }: ModalContentsProps) => {
   return <ModalContents>{children}</ModalContents>;
 };
 
+type ButtonProps = {
+  title: string;
+  backgroundColor?: string;
+  textColor?: string;
+  size?: 'small' | 'medium' | 'large';
+  onClick?: () => void;
+};
+
+const Button = ({
+  title,
+  backgroundColor,
+  textColor,
+  size,
+  onClick,
+}: ButtonProps) => {
+  return (
+    <ModalButtonContainer>
+      <ModalButton
+        $backgroundColor={backgroundColor}
+        $textColor={textColor}
+        $size={size}
+        onClick={onClick}
+      >
+        {title}
+      </ModalButton>
+    </ModalButtonContainer>
+  );
+};
+
 Modal.Title = Title;
 Modal.CloseButton = CloseButton;
 Modal.Contents = Contents;
+Modal.Button = Button;
 
 export default Modal;

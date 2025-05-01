@@ -57,4 +57,55 @@ const ModalContents = styled.div`
   height: 100%;
 `;
 
-export { BackDrop, ModalLayout, CloseIcon, ModalTitle, ModalContents };
+type ModalButtonProps = {
+  $backgroundColor: string;
+  $textColor: string;
+  $size: 'small' | 'medium' | 'large';
+};
+
+const ModalButton = styled.button<ModalButtonProps>`
+  background-color: ${({ $backgroundColor }) => $backgroundColor || '#ffffff'};
+  color: ${({ $textColor }) => $textColor || '#000000'};
+  width: ${({ $size }) => getSize($size)};
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-top: 20px;
+  &:focus {
+    border: none;
+    outline: none;
+  }
+`;
+
+function getSize(size: 'small' | 'medium' | 'large') {
+  switch (size) {
+    case 'small':
+      return '120px';
+    case 'medium':
+      return '200px';
+    case 'large':
+      return '400px';
+    default:
+      return '100%';
+  }
+}
+
+const ModalButtonContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  width: 100%;
+`;
+
+export {
+  BackDrop,
+  ModalLayout,
+  CloseIcon,
+  ModalTitle,
+  ModalContents,
+  ModalButton,
+  ModalButtonContainer,
+};
