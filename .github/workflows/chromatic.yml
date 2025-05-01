@@ -19,7 +19,7 @@ jobs:
           cd components
           yarn install
       - name: Run Chromatic
-        working-directory: components
+        working-directory: ./components
         uses: chromaui/action@latest
         with:
           projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
