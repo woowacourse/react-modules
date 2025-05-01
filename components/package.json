@@ -1,6 +1,6 @@
 {
   "name": "lumes_modal",
-  "version": "0.0.1",
+  "version": "0.0.3",
   "description": "재사용 가능한 모달입니다.",
   "type": "module",
   "types": "dist/index.d.ts",
@@ -22,7 +22,6 @@
   "dependencies": {
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.0",
-    "lume_modal": "^0.0.3",
     "react": "^19.1.0",
     "react-dom": "^19.1.0"
   },
