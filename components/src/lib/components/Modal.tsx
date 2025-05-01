@@ -5,6 +5,8 @@ import styled from '@emotion/styled';
 
 import { Portal } from './Portal';
 
+import closeIcon from '../assets/Close.svg';
+
 export type Props = {
   /**
    * If true, the modal will be open
@@ -57,7 +59,7 @@ export const Modal = ({
           {title}
           {showCloseButton && (
             <StyledCloseIconButton
-              src="/close.png"
+              src={closeIcon}
               onClick={onClose}
               aria-label="closeModalButton"
             />
