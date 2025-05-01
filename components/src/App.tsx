@@ -1,6 +1,6 @@
-import { Modal } from "happyjurung-modal";
-import "./App.css";
-import { useState } from "react";
+import { Modal } from 'happyjurung-modal';
+import './App.css';
+import { useState } from 'react';
 
 function App() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -13,8 +13,11 @@ function App() {
         position="center"
         title="카드사 선택"
         onClose={() => setIsModalOpen(false)}
-        children="이것은 모달 내용입니다."
-      />
+      >
+        <div className="modal-content">
+          <h1>카드사 선택</h1>
+        </div>
+      </Modal>
     </>
   );
 }

@@ -1,59 +1,183 @@
 # Hooks Module
 
-## 기능
+### 소개
 
-### 페이먼츠 커스텀 훅
+카드 등록 시 필요한 입력 값에 대한 유효성 검사를 진행할 수 있는 훅입니다.
 
-- 페이먼츠 커스텀 훅 모듈을 npm으로 배포하고 사용할 수 있어야 한다.
+### 설치 방법
 
-  - [x] 커스텀 훅 생성
-  - [x] 커스텀 훅 RTL 테스트
-  - [x] 커스텀 훅 빌드 및 배포
-  - [x] 커스텀 훅 설치 및 사용
+`npm install happyjurung-hooks`
 
-- 페이먼츠 카드의 다양한 정보에 대한 유효성 검사 로직을 여러 개의 작은 커스텀 훅으로 분리하고, 필요에 따라 조합하여 사용할 수 있도록 한다.
+### 주요 hooks
 
-  - [x] useCardNumber
-    - [x] cardNumber는 숫자여야 한다. (errorMessage: "카드 번호는 숫자로 입력해 주세요.")
-    - [x] cardNumber는 각 칸마다 4자리여야 한다. (errorMessage: "카드 번호는 4자리로 입력해 주세요.")
-  - [x] useExpiryDate
-    - [x] month
-      - [x] month는 숫자여야 한다. (errorMessage: "월은 숫자로 입력해 주세요.")
-      - [x] month는 두 자리여야 한다. (errorMessage: "월은 2자리로 입력해 주세요.")
-      - [x] month는 1~12 사이의 숫자여야 한다. (errorMessage: "유효하지 않은 월입니다.")
-    - [x] year
-      - [x] year는 숫자여야 한다. (errorMessage: "연도는 숫자로 입력해 주세요.")
-      - [x] year는 두 자리여야 한다. (errorMessage: "연도는 2자리로 입력해 주세요.")
-      - [x] year는 25 이상의 숫자여야 한다. (errorMessage: "유효하지 않은 연도입니다.")
-  - [x] useCVC
-    - [x] cvc는 숫자여야 한다. (errorMessage: "CVC는 숫자로 입력해 주세요.")
-    - [x] cvc는 세 자리여야 한다. (errorMessage: "CVC는 3자리로 입력해 주세요.")
-  - [x] usePassword
-    - [x] password는 숫자여야 한다. (errorMessage: "카드 비밀번호는 숫자로 입력해 주세요.")
-    - [x] password는 두 자리여야 한다. (errorMessage: "카드 비밀번호는 2자리로 입력해 주세요.")
+- useCardNumbers : 카드 번호 유효성 검증할 수 있습니다.
+- useExpiryDate : 카드 유효 날짜 유효성 검증할 수 있습니다.
+- useCvcNumber : 카드 CVC 번호 유효성 검증할 수 있습니다.
+- usePassword : 카드 비밀번호 2자리 검증할 수 있습니다.
 
-- 커스텀 훅은 카드 정보의 유효성 검사 결과와 에러 정보를 사용자인 개발자에게 제공할 수 있어야 한다. 예를 들어 useCardNumber hook을 만든다면 카드 번호 유효성 검사 결과를 불리언 값으로 반환해야 한다. 만약 유효성 검사에 실패한 경우, 에러 정보를 문자열 형태로 반환할 수 있어야 한다.
-  - [x] useCardNumber 훅에서 유효성 검사 결과로 불리언 값과 에러 메시지를 반환할 수 있다.
-  - [x] useExpiryDate 훅에서 유효성 검사 결과를 불리언 값과 에러 메시지를 반환할 수 있다.
-  - [x] useCVC 훅에서 유효성 검사 결과를 불리언 값과 에러 메시지를 반환할 수 있다.
-  - [x] usePassword 훅에서 유효성 검사 결과를 불리언 값과 에러 메시지를 반환할 수 있다.
+### 사용 예시
 
-### 페이먼츠 커스텀 훅
+**useCardNumbers**
 
-- useCardNumber
-- useExpiryDate
-- useCVC
-- usePassword
-- useCardBrand
+- numbers : 카드 번호 (4\*4) 배열
+- error : isValidate(boolean)와 errorMassage(string)를 담고 있는 객체 배열
+- validate : 유효성 검증 함수
 
-### storybook
+```js
+import { useCardNumbers } from 'happyjurung-hooks';
 
-## 커밋메시지
+function App() {
+  const {
+    numbers,
+    error: cardNumbersError,
+    validate: cardNumbersValidate,
+  } = useCardNumbers();
 
-- feat : 새로운 기능을 추가한 경우
-- fix : 버그 수정
-- docs : 문서를 수정한 경우
-- style : 코드 스타일, 포멧, 주석을 변경
-- refactor : 코드 리팩토링
-- test : 테스트 관련 코드를 수정한 경우
-- chore : 코드 수정이 아닌, 단순 폴더명 파일명 등을 수정한 경우
+  const handleCardNumber = (
+    e: React.ChangeEvent<HTMLInputElement>,
+    index: number
+  ) => {
+    cardNumbersValidate(e.target.value, index);
+  };
+
+  return (
+    <>
+      <div>
+        <h1>CardNumbers</h1>
+        {numbers.map((number, index) => (
+          <input
+            key={index}
+            type="text"
+            value={number}
+            onChange={(e) => handleCardNumber(e, index)}
+          />
+        ))}
+        <p>
+          {cardNumbersError.find((error) => error.errorMessage !== '')
+            ?.errorMessage ?? ''}
+        </p>
+      </div>
+    </>
+  );
+}
+
+export default App;
+```
+
+**useExpiryDate**
+
+- date : {month: string, year: string} 객체
+- error : isValidate(boolean)와 errorMassage(string)를 담고 있는 객체 배열
+- validate : 유효성 검증 함수
+
+```js
+import { useExpiryDate } from 'happyjurung-hooks';
+
+function App() {
+  const { date, error: dateError, validate: dateValidate } = useExpiryDate();
+
+  const handleCardNumber = (
+    e: React.ChangeEvent<HTMLInputElement>,
+    index: number
+  ) => {
+    cardNumbersValidate(e.target.value, index);
+  };
+
+  const handleExpiryDate = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.name === 'month') {
+      dateValidate(e.target.value, 'month');
+    } else if (e.target.name === 'year') {
+      dateValidate(e.target.value, 'year');
+    }
+  };
+
+  return (
+    <>
+      <div>
+        <h1>Date</h1>
+        <input
+          type="text"
+          value={date.month}
+          name="month"
+          onChange={handleExpiryDate}
+        />
+        <p>{dateError[0].errorMessage}</p>
+        <input
+          type="text"
+          value={date.year}
+          name="year"
+          onChange={handleExpiryDate}
+        />
+        <p>{dateError[1].errorMessage}</p>
+      </div>
+    </>
+  );
+}
+
+export default App;
+```
+
+**useCvcNumber**
+
+- cvc : 카드 cvc 번호 (string)
+- error : isValidate(boolean)와 errorMassage(string)를 담고 있는 객체
+- validate : 유효성 검증 함수
+
+```js
+import './App.css';
+import { useCvcNumber } from 'happyjurung-hooks';
+
+function App() {
+  const { cvc, error: cvcError, validate: cvcValidate } = useCvcNumber();
+
+  const handleCvcNumber = (e: React.ChangeEvent<HTMLInputElement>) => {
+    cvcValidate(e.target.value);
+  };
+
+  return (
+    <>
+      <div>
+        <h1>CVC</h1>
+        <input type="text" value={cvc} onChange={handleCvcNumber} />
+        <p>{cvcError.errorMessage}</p>
+      </div>
+    </>
+  );
+}
+
+export default App;
+```
+
+**usePassword**
+
+- password : 카드 비밀번호 2자리 (string)
+- error : isValidate(boolean)와 errorMassage(string)를 담고 있는 객체
+- validate : 유효성 검증 함수
+
+```js
+import { usePassword } from 'happyjurung-hooks';
+
+function App() {
+  const {
+    password,
+    error: passwordError,
+    validate: passwordValidate,
+  } = usePassword();
+
+  const handlePassword = (e: React.ChangeEvent<HTMLInputElement>) => {
+    passwordValidate(e.target.value);
+  };
+
+  return (
+    <>
+      <div>
+        <h1>Password</h1>
+        <input type="text" value={password} onChange={handlePassword} />
+        <p>{passwordError.errorMessage}</p>
+      </div>
+    </>
+  );
+}
+
+export default App;
+```
