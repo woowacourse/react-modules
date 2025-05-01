@@ -1,6 +1,6 @@
 {
-  "name": "lume_modal",
-  "version": "0.0.6",
+  "name": "lumes_modal",
+  "version": "0.0.1",
   "description": "재사용 가능한 모달입니다.",
   "type": "module",
   "types": "dist/index.d.ts",
