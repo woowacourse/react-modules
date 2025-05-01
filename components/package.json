@@ -1,6 +1,6 @@
 {
-  "name": "@kaori-killer/modal-component",
-  "version": "0.0.13",
+  "name": "@ohgus/modal-component",
+  "version": "0.0.16",
   "description": "헤일리와 오거스가 개발한 모달 컴포넌트 라이브러리",
   "type": "module",
   "types": "dist/index.d.ts",
@@ -42,6 +42,7 @@
     "@typescript-eslint/eslint-plugin": "^8.29.1",
     "@typescript-eslint/parser": "^8.29.1",
     "@vitejs/plugin-react-swc": "^3.8.1",
+    "chromatic": "^11.28.2",
     "eslint": "^9.24.0",
     "eslint-plugin-react-hooks": "^5.2.0",
     "eslint-plugin-react-refresh": "^0.4.19",
