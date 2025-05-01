@@ -1,6 +1,6 @@
 # Modal Module 라이브러리
 
-@happyjurung/modal은 React 애플리케이션에서 모달 창을 쉽고 일관되게 구현할 수 있도록 돕는 라이브러리입니다.
+jurunghappy-modal은 React 애플리케이션에서 모달 창을 쉽고 일관되게 구현할 수 있도록 돕는 라이브러리입니다.
 
 ## 주요 기능
 
@@ -12,14 +12,14 @@
 ## 설치
 
 ```bash
-npm install @happyjurung/modal
+npm install jurunghappy-modal
 ```
 
 ## 사용 예시
 
 ```js
 import React, { useState } from 'react';
-import Modal from '@happyjurung/modal';
+import Modal from 'jurunghappy-modal';
 function App() {
   const [open, setOpen] = useState(false);
   return (

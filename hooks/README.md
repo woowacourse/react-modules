@@ -6,7 +6,7 @@
 
 ### 설치 방법
 
-`npm install happyjurung-hooks`
+`npm install jurunghappy-hooks`
 
 ### 주요 hooks
 
@@ -24,7 +24,7 @@
 - validate : 유효성 검증 함수
 
 ```js
-import { useCardNumbers } from 'happyjurung-hooks';
+import { useCardNumbers } from 'jurunghappy-hooks';
 
 function App() {
   const {
@@ -71,7 +71,7 @@ export default App;
 - validate : 유효성 검증 함수
 
 ```js
-import { useExpiryDate } from 'happyjurung-hooks';
+import { useExpiryDate } from 'jurunghappy-hooks';
 
 function App() {
   const { date, error: dateError, validate: dateValidate } = useExpiryDate();
@@ -125,7 +125,7 @@ export default App;
 
 ```js
 import './App.css';
-import { useCvcNumber } from 'happyjurung-hooks';
+import { useCvcNumber } from 'jurunghappy-hooks';
 
 function App() {
   const { cvc, error: cvcError, validate: cvcValidate } = useCvcNumber();
@@ -155,7 +155,7 @@ export default App;
 - validate : 유효성 검증 함수
 
 ```js
-import { usePassword } from 'happyjurung-hooks';
+import { usePassword } from 'jurunghappy-hooks';
 
 function App() {
   const {

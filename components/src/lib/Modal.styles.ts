@@ -1,4 +1,4 @@
-import styled from "@emotion/styled";
+import styled from '@emotion/styled';
 
 export const ModalBackground = styled.div<{
   isModalOpen: boolean;
@@ -16,16 +16,16 @@ export const ModalBackground = styled.div<{
   justify-content: center;
   z-index: 10;
   visibility: hidden;
-  visibility: ${({ isModalOpen }) => isModalOpen === true && "visible"};
-  opacity: ${({ isModalOpen }) => isModalOpen === true && "1"}
+  visibility: ${({ isModalOpen }) => isModalOpen === true && 'visible'};
+  opacity: ${({ isModalOpen }) => isModalOpen === true && '1'}
   transition: opacity 0.3s ease, visibility 0.3s ease;
   margin: 0 auto;
   align-items: ${({ position }) => {
     switch (position) {
-      case "center":
-        return "center";
-      case "bottom":
-        return "flex-end";
+      case 'center':
+        return 'center';
+      case 'bottom':
+        return 'flex-end';
     }
   }};
 `;
@@ -41,8 +41,8 @@ export const ModalConatiner = styled.div<{
   position: relative;
   width: 304px;
   height: 216px;
-  width:  ${({ position }) => position === "bottom" && "100%"}
-  border-radius:  ${({ position }) => position === "bottom" && "10px 10px 0 0;"}
+  width:  ${({ position }) => position === 'bottom' && '100%'}
+  border-radius:  ${({ position }) => position === 'bottom' && '10px 10px 0 0;'}
 `;
 
 export const ModalHeader = styled.div`

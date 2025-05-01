@@ -1,4 +1,4 @@
-import { Modal } from 'happyjurung-modal';
+import { Modal } from 'jurunghappy-modal';
 import './App.css';
 import { useState } from 'react';
 
@@ -10,13 +10,11 @@ function App() {
       <button onClick={() => setIsModalOpen(true)}>Modal Open</button>
       <Modal
         isModalOpen={isModalOpen}
-        position="center"
+        position="bottom"
         title="카드사 선택"
         onClose={() => setIsModalOpen(false)}
       >
-        <div className="modal-content">
-          <h1>카드사 선택</h1>
-        </div>
+        <h1>카드사 선택</h1>
       </Modal>
     </>
   );

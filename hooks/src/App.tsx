@@ -1,8 +1,10 @@
-import "./App.css";
-import { useCardNumbers } from "happyjurung-hooks";
-import { useExpiryDate } from "happyjurung-hooks";
-import { usePassword } from "happyjurung-hooks";
-import { useCvcNumber } from "happyjurung-hooks";
+import './App.css';
+import {
+  useCardNumbers,
+  useExpiryDate,
+  useCvcNumber,
+  usePassword,
+} from 'jurunghappy-hooks';
 
 function App() {
   const {
@@ -26,10 +28,10 @@ function App() {
   };
 
   const handleExpiryDate = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.name === "month") {
-      dateValidate(e.target.value, "month");
-    } else if (e.target.name === "year") {
-      dateValidate(e.target.value, "year");
+    if (e.target.name === 'month') {
+      dateValidate(e.target.value, 'month');
+    } else if (e.target.name === 'year') {
+      dateValidate(e.target.value, 'year');
     }
   };
 
@@ -54,8 +56,8 @@ function App() {
           />
         ))}
         <p>
-          {cardNumbersError.find((error) => error.errorMessage !== "")
-            ?.errorMessage ?? ""}
+          {cardNumbersError.find((error) => error.errorMessage !== '')
+            ?.errorMessage ?? ''}
         </p>
       </div>
       <div>
