@@ -1,18 +1,9 @@
 import { css } from '@emotion/css';
-import { MouseEvent, useEffect } from 'react';
+import { Children, MouseEvent, useEffect } from 'react';
 import { ModalProps, Position } from './Modal.type';
 
-const Modal = ({ position, content, onOpen, onClose, actions, title, showCloseButton = true }: ModalProps) => {
-  useEffect(() => {
-    if (onOpen) {
-      onOpen();
-    }
-
-    window.addEventListener('keydown', handleKeyDown);
-    return () => {
-      window.removeEventListener('keydown', handleKeyDown);
-    };
-  }, []);
+const Modal = ({ children, position, isOpen, onAfterOpen, onClose, title, showCloseButton = true }: ModalProps) => {
+  const [content, actions] = Children.toArray(children);
 
   const handleKeyDown = (e: KeyboardEvent) => {
     if (e.key === 'Escape') {
@@ -26,27 +17,32 @@ const Modal = ({ position, content, onOpen, onClose, actions, title, showCloseBu
     }
   };
 
+  useEffect(() => {
+    if (isOpen && onAfterOpen) {
+      onAfterOpen();
+    }
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [isOpen]);
+
+  if (!isOpen) return null;
+
   return (
     <div className={ModalBackdrop} onClick={handleBackdropClick}>
       <div className={ModalFrame(position)} data-testid="modal">
-        <div className={ModalHeader}>
+        <section className={ModalHeader}>
           {title && <h2>{title}</h2>}
           {showCloseButton && (
             <button className={ModalCloseButton} onClick={onClose}>
               X
             </button>
           )}
-        </div>
-        <div>{content}</div>
-        {actions && (
-          <div className={ButtonBar}>
-            {actions.map(({ label, style, onClick }) => (
-              <button key={label} className={style} onClick={onClick}>
-                {label}
-              </button>
-            ))}
-          </div>
-        )}
+        </section>
+        <section>{content}</section>
+        <section className={ButtonBar}>{actions}</section>
       </div>
     </div>
   );
