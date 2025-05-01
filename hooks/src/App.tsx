@@ -34,12 +34,11 @@ function Input({ isValid, ...props }: InputProps) {
 export interface InputFieldProps {
   title: string;
   label: string;
-  description?: string;
   feedbackMessage?: string;
   children: React.ReactNode;
 }
 
-function InputField({ title, label, description, feedbackMessage, children }: InputFieldProps) {
+function InputField({ title, label, feedbackMessage, children }: InputFieldProps) {
   return (
     <div>
       <div>
@@ -105,7 +104,7 @@ const CardCVCInput = () => {
 };
 
 const CardPasswordInput = () => {
-  const { password, onChangeHandler, errorMessage } = useCardPasswordInput();
+  const { cardPassword, onChangeHandler, errorMessage } = useCardPasswordInput();
   return (
     <InputField
       title="비밀번호"
@@ -114,7 +113,7 @@ const CardPasswordInput = () => {
       feedbackMessage={errorMessage}
     >
       <Input type="password" name="cardPassword" onChange={onChangeHandler} autoFocus />
-      <p>인풋 실시간 value : {password}</p>
+      <p>인풋 실시간 value : {cardPassword}</p>
     </InputField>
   );
 };
