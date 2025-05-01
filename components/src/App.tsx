@@ -1,43 +1,54 @@
-import { useState } from 'react';
 import './App.css';
 import { css } from '@emotion/css';
-import { Modal } from '@eunoia-jaxson/modal';
+import Modal from './lib/Modal';
+import useModal from './lib/useModal';
 
 function App() {
-  const [isOpen, setIsOpen] = useState<boolean>(false);
-
-  const handleOpen = () => {
-    console.log('모달이 열렸습니다.');
-  };
-
-  const handleClose = () => {
-    console.log('모달이 닫혔습니다.');
-    setIsOpen(false);
-  };
+  const { isOpen, handleOpen, handleClose } = useModal();
 
   const handleConfirm = () => {
-    console.log('모달이 확인되었습니다.');
-    setIsOpen(false);
+    alert('동의하고 저장하기 버튼 클릭');
+    handleClose();
   };
 
-  const actionDefs = [
-    { label: '닫기', style: CancelButton, onClick: handleClose },
-    { label: '동의하고 저장하기', style: ConfirmButton, onClick: handleConfirm },
-  ];
+  const handleAfterOpen = () => {
+    console.log('열기 버튼 클릭');
+  };
+
+  const ModalContent = () => {
+    return (
+      <div>
+        <p>모달 내용입니다.</p>
+        <p>모달 내용입니다.</p>
+        <p>모달 내용입니다.</p>
+        <p>모달 내용입니다.</p>
+      </div>
+    );
+  };
+
+  const ModalActions = () => {
+    return (
+      <>
+        <button className={CancelButton} onClick={handleClose}>
+          닫기
+        </button>
+        <button className={ConfirmButton} onClick={handleConfirm}>
+          동의하고 저장하기
+        </button>
+      </>
+    );
+  };
 
   return (
     <>
-      <button onClick={() => setIsOpen(true)}>열기</button>
-      {isOpen && (
-        <Modal
-          position="center"
-          title="알림"
-          content="모달 내용"
-          actions={actionDefs}
-          onClose={handleClose}
-          onOpen={handleOpen}
-        />
-      )}
+      <h1>Modal Component</h1>
+      <button className={OpenButton} onClick={handleOpen}>
+        열기
+      </button>
+      <Modal isOpen={isOpen} position="center" title="알림" onAfterOpen={handleAfterOpen} onClose={handleClose}>
+        <ModalContent />
+        <ModalActions />
+      </Modal>
     </>
   );
 }
@@ -54,6 +65,11 @@ const Button = css`
   &:focus {
     outline: none;
   }
+`;
+
+const OpenButton = css`
+  ${Button}
+  margin-top: 20px;
 `;
 
 const ConfirmButton = css`
