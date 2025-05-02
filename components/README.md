@@ -144,14 +144,3 @@ const CustomModal = styled(Modal)`
   <h2>커스텀 스타일 모달</h2>
 </CustomModal>;
 ```
-
-## 구현 세부 사항
-
-### 컴포넌트 구조
-
-모달 컴포넌트는 다음 요소로 구성됩니다:
-
-1. `ModalLayout`: 전체 화면을 덮는 오버레이 배경
-2. `ModalContainer`: 실제 모달 콘텐츠를 포함하는 컨테이너
-3. `ButtonWrap`: 확인 및 닫기 버튼을 포함하는 래퍼
-4. `ConfirmButton` & `CloseButton`: 액션 버튼들
