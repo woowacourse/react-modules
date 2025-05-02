@@ -1,24 +1,13 @@
-import React from "react";
+import React, { useCallback } from "react";
 import "./App.css";
 import { useCardValidation } from "./lib";
 
 function App() {
-  const { card, cvc, expiry, password } = useCardValidation();
+  const { card, cvc, expiry, password, network } = useCardValidation();
 
   const handleCardNumberChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    card.setCardNumber(e.target.value);
-  };
-
-  const handleCVCChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    cvc.setCVCNumber(e.target.value);
-  };
-
-  const handleExpiryChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    expiry.setExpiryDateNumber(e.target.value);
-  };
-
-  const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    password.setPasswordNumber(e.target.value);
+    card.onCardNumberChange(e);
+    network.onChange(e);
   };
 
   return (
@@ -35,8 +24,8 @@ function App() {
             placeholder="1234 5678 9012 3456"
           />
           {card.errorMessage && <p className="error">{card.errorMessage}</p>}
-          {card.cardNetwork !== "DEFAULT" && (
-            <p className="card-network">{card.cardNetwork}</p>
+          {network.cardNetwork !== "DEFAULT" && (
+            <p className="card-network">{network.cardNetwork}</p>
           )}
         </div>
 
@@ -46,7 +35,7 @@ function App() {
             id="cvc"
             type="text"
             value={cvc.CVCNumber}
-            onChange={handleCVCChange}
+            onChange={cvc.onCVCNumberChange}
             placeholder="123"
           />
           {cvc.errorMessage && <p className="error">{cvc.errorMessage}</p>}
@@ -58,7 +47,7 @@ function App() {
             id="expiry"
             type="text"
             value={expiry.expiryDateNumber}
-            onChange={handleExpiryChange}
+            onChange={expiry.onExpiryDateNumberChange}
             placeholder="MM/YY"
           />
           {expiry.errorMessage && (
@@ -72,7 +61,7 @@ function App() {
             id="password"
             type="password"
             value={password.passwordNumber}
-            onChange={handlePasswordChange}
+            onChange={password.onPasswordNumberChange}
             placeholder="비밀번호 앞 2자리"
           />
           {password.errorMessage && (
