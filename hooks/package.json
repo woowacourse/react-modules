@@ -1,6 +1,6 @@
 {
   "name": "payments-custom-hooks",
-  "version": "0.0.0",
+  "version": "0.0.2",
   "description": "woowacourse payments custom hooks",
   "type": "module",
   "types": "dist/index.d.ts",
