@@ -5,8 +5,8 @@ import { CloseIcon } from "./common";
 import { PropsWithChildren } from "react";
 import { css } from "@emotion/react";
 
-const ModalContainer = styled.div<Pick<ModalInterface, "position">>`
-  width: calc(100% - 40px);
+const ModalContainer = styled.div<Pick<ModalInterface, "position" | "margin">>`
+  width: calc(100% - ${(props) => (props.margin ?? 20) * 2}px);
   box-sizing: border-box;
   height: fit-content;
 
@@ -54,23 +54,25 @@ const ModalBackdrop = styled.div`
 `;
 
 interface ModalInterface {
-  position?: "center" | "bottom";
   title: string;
   onClose: () => void;
   isOpen: boolean;
+  position?: "center" | "bottom";
+  margin?: number;
 }
 
 export default function Modal({
-  position = "center",
   title,
   onClose,
   children,
   isOpen,
+  position = "center",
+  margin = 20,
 }: PropsWithChildren<ModalInterface>) {
   if (!isOpen) return;
   return (
     <>
-      <ModalContainer position={position}>
+      <ModalContainer position={position} margin={margin}>
         <ModalTop>
           <Title>{title}</Title>
           <CloseIcon onClick={onClose} css={closeIconStyle} />
