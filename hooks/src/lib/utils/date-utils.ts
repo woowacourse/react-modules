@@ -25,12 +25,8 @@ export function isValidExpiryYear(value: string): boolean {
  * 유효기간이 만료되지 않았는지 검사
  */
 export function isNotExpiredDate(value: string): boolean {
-  if (!isNumeric(value) || value.length !== EXPIRY_DATE_LENGTH) return false;
-
   const month = Number(value.slice(0, 2));
   const year = Number(value.slice(2, 4));
-
-  if (month < 1 || month > 12) return false;
 
   const currentDate = new Date();
   const currentYear = currentDate.getFullYear() % 100;

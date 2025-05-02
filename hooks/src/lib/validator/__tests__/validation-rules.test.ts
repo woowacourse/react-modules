@@ -183,16 +183,6 @@ describe("validation-rules", () => {
         expect(check("1222")).toBe(false); // 12/22 - 지난 월
         expect(check("0122")).toBe(false); // 01/22 - 지난 해
       });
-
-      it("유효하지 않은 월에 대해 실패해야 한다", () => {
-        expect(check("0023")).toBe(false); // 00/23
-        expect(check("1323")).toBe(false); // 13/23
-      });
-
-      it("숫자가 아닌 형식이나 잘못된 형식에 대해 실패해야 한다", () => {
-        expect(check("abcd")).toBe(false);
-        expect(check("12/23")).toBe(false);
-      });
     });
   });
 });

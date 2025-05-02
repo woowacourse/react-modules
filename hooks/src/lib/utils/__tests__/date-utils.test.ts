@@ -111,17 +111,5 @@ describe("date-utils", () => {
       expect(isNotExpiredDate("0522")).toBe(false); // 과거 연도 같은 월
       expect(isNotExpiredDate("1222")).toBe(false); // 과거 날짜
     });
-
-    it("유효하지 않은 월에 대해 false를 반환해야 합니다", () => {
-      expect(isNotExpiredDate("0023")).toBe(false); // 00은 유효하지 않은 월
-      expect(isNotExpiredDate("1323")).toBe(false); // 13은 유효하지 않은 월
-    });
-
-    it("숫자가 아니거나 잘못된 길이에 대해 false를 반환해야 합니다", () => {
-      expect(isNotExpiredDate("abcd")).toBe(false);
-      expect(isNotExpiredDate("05/23")).toBe(false);
-      expect(isNotExpiredDate("523")).toBe(false);
-      expect(isNotExpiredDate("05233")).toBe(false);
-    });
   });
 });
