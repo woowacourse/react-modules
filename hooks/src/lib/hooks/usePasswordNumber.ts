@@ -1,21 +1,21 @@
 import { Dispatch, useState } from "react";
-import validatePasswordNumber from "../util/validatePasswordNumber";
+import { validatePassword } from "../validator/validators";
 
 interface UsePasswordNumberReturn {
   passwordNumber: string;
-  setPasswordNumber: Dispatch<string>;
+  onPasswordNumberChange: Dispatch<string>;
   errorMessage?: string;
   isError: boolean;
 }
 
 export default function usePasswordNumber(): UsePasswordNumberReturn {
   const [passwordNumber, setPasswordNumber] = useState("");
-  const errorMessage = validatePasswordNumber(passwordNumber);
+  const { errors } = validatePassword(passwordNumber);
 
   return {
     passwordNumber,
-    setPasswordNumber,
-    errorMessage,
-    isError: !!errorMessage,
+    onPasswordNumberChange: setPasswordNumber,
+    errorMessage: errors.at(-1)?.message,
+    isError: !!errors.at(-1)?.message,
   };
 }

@@ -1,21 +1,21 @@
 import { Dispatch, useState } from "react";
-import validateCVCNumber from "../util/validateCVCNumber";
+import { validateCVC } from "../validator";
 
 interface useCVCNumberReturn {
   CVCNumber: string;
-  setCVCNumber: Dispatch<string>;
+  onCVCNumberChange: Dispatch<string>;
   errorMessage?: string;
   isError: boolean;
 }
 
 export default function useCVCNumber(): useCVCNumberReturn {
   const [CVCNumber, setCVCNumber] = useState("");
-  const errorMessage = validateCVCNumber(CVCNumber);
+  const { errors } = validateCVC(CVCNumber);
 
   return {
     CVCNumber,
-    setCVCNumber,
-    errorMessage,
-    isError: !!errorMessage,
+    onCVCNumberChange: setCVCNumber,
+    errorMessage: errors.at(-1)?.message,
+    isError: !!errors.at(-1)?.message,
   };
 }

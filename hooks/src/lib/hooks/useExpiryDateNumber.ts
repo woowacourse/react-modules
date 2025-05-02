@@ -1,21 +1,21 @@
 import { Dispatch, useState } from "react";
-import validateExpiryDateNumber from "../util/validateExpiryDateNumber";
+import { validateExpiryDate } from "../validator/validators";
 
 interface UseExpiryDateNumberReturn {
   expiryDateNumber: string;
-  setExpiryDateNumber: Dispatch<string>;
+  onExpiryDateNumberChange: Dispatch<string>;
   errorMessage?: string;
   isError: boolean;
 }
 
 export default function useExpiryDateNumber(): UseExpiryDateNumberReturn {
   const [expiryDateNumber, setExpiryDateNumber] = useState("");
-  const errorMessage = validateExpiryDateNumber(expiryDateNumber);
+  const { errors } = validateExpiryDate(expiryDateNumber);
 
   return {
     expiryDateNumber,
-    setExpiryDateNumber,
-    errorMessage,
-    isError: !!errorMessage,
+    onExpiryDateNumberChange: setExpiryDateNumber,
+    errorMessage: errors.at(-1)?.message,
+    isError: !!errors.at(-1)?.message,
   };
 }
