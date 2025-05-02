@@ -16,10 +16,10 @@ export const getCardNetwork = (cardNumber: string): CardNetwork => {
 export default function useCardNetwork(initial = "") {
   const [cardNumber, setCardNumber] = useState(initial);
 
-  const onChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
-    setCardNumber(e.target.value.trim());
+  const onChange = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
+    const { value } = event.target;
+    setCardNumber(value.replace(/\D/g, ""));
   }, []);
-
   const cardNetwork = useMemo(() => getCardNetwork(cardNumber), [cardNumber]);
 
   return { cardNumber, onChange, cardNetwork };

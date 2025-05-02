@@ -1,9 +1,9 @@
-import { Dispatch, useState } from "react";
+import { Dispatch, useCallback, useState } from "react";
 import { validateExpiryDate } from "../validator/validators";
 
 interface UseExpiryDateNumberReturn {
   expiryDateNumber: string;
-  onExpiryDateNumberChange: Dispatch<string>;
+  onExpiryDateNumberChange: Dispatch<React.ChangeEvent<HTMLInputElement>>;
   errorMessage?: string;
   isError: boolean;
 }
@@ -12,14 +12,16 @@ export default function useExpiryDateNumber(): UseExpiryDateNumberReturn {
   const [expiryDateNumber, setExpiryDateNumber] = useState("");
   const { errors } = validateExpiryDate(expiryDateNumber);
 
-  const handleExpiryDateNumberChange = (value: string) => {
-    setExpiryDateNumber(value.trim());
-  };
-
+  const handleExpiryDateNumberChange = useCallback(
+    (event: React.ChangeEvent<HTMLInputElement>) => {
+      setExpiryDateNumber(event.target.value.trim());
+    },
+    []
+  );
   return {
     expiryDateNumber,
     onExpiryDateNumberChange: handleExpiryDateNumberChange,
-    errorMessage: errors.at(-1)?.message,
-    isError: !!errors.at(-1)?.message,
+    errorMessage: errors.at(0)?.message,
+    isError: !!errors.at(0)?.message,
   };
 }

@@ -1,9 +1,9 @@
-import { Dispatch, useState } from "react";
+import { Dispatch, useCallback, useState } from "react";
 import { validateCVC } from "../validator";
 
 interface useCVCNumberReturn {
   CVCNumber: string;
-  onCVCNumberChange: Dispatch<string>;
+  onCVCNumberChange: Dispatch<React.ChangeEvent<HTMLInputElement>>;
   errorMessage?: string;
   isError: boolean;
 }
@@ -11,9 +11,13 @@ interface useCVCNumberReturn {
 export default function useCVCNumber(): useCVCNumberReturn {
   const [CVCNumber, setCVCNumber] = useState("");
   const { errors } = validateCVC(CVCNumber);
-  const handleCVCNumberChange = (value: string) => {
-    setCVCNumber(value.trim());
-  };
+  const handleCVCNumberChange = useCallback(
+    (event: React.ChangeEvent<HTMLInputElement>) => {
+      setCVCNumber(event.target.value.trim());
+    },
+    []
+  );
+
   return {
     CVCNumber,
     onCVCNumberChange: handleCVCNumberChange,

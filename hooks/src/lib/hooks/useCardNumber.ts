@@ -1,21 +1,22 @@
-import { Dispatch, useState } from "react";
-import { validateCardNumber } from "../validator/validators";
+// useCardNumber.ts
+import { useCallback, useState } from "react";
+import { validateCardNumber } from "../validator";
 
 interface UseCardNumberReturn {
   cardNumber: string;
-  onCardNumberChange: Dispatch<string>;
+  onCardNumberChange: React.ChangeEventHandler<HTMLInputElement>;
   errorMessage?: string;
   isError: boolean;
 }
 
 export default function useCardNumber(): UseCardNumberReturn {
   const [cardNumber, setCardNumber] = useState("");
-
   const { errors } = validateCardNumber(cardNumber);
 
-  const handleCardNumberChange = (value: string) => {
-    setCardNumber(value.trim());
-  };
+  const handleCardNumberChange: React.ChangeEventHandler<HTMLInputElement> =
+    useCallback((e) => {
+      setCardNumber(e.target.value);
+    }, []);
 
   return {
     cardNumber,

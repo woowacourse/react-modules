@@ -1,9 +1,9 @@
-import { Dispatch, useState } from "react";
+import { Dispatch, useCallback, useState } from "react";
 import { validatePassword } from "../validator/validators";
 
 interface UsePasswordNumberReturn {
   passwordNumber: string;
-  onPasswordNumberChange: Dispatch<string>;
+  onPasswordNumberChange: Dispatch<React.ChangeEvent<HTMLInputElement>>;
   errorMessage?: string;
   isError: boolean;
 }
@@ -12,9 +12,12 @@ export default function usePasswordNumber(): UsePasswordNumberReturn {
   const [passwordNumber, setPasswordNumber] = useState("");
   const { errors } = validatePassword(passwordNumber);
 
-  const handlePasswordNumberChange = (value: string) => {
-    setPasswordNumber(value.trim());
-  };
+  const handlePasswordNumberChange = useCallback(
+    (event: React.ChangeEvent<HTMLInputElement>) => {
+      setPasswordNumber(event.target.value.trim());
+    },
+    []
+  );
 
   return {
     passwordNumber,

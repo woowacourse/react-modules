@@ -19,11 +19,5 @@ export default function useCardValidation(): UseCardValidationReturn {
   const password = usePasswordNumber();
   const network = useCardNetwork();
 
-  // 각 훅 결과에서 필요한 정보를 조합합니다
-  const combinedNetwork = {
-    ...network,
-    cardNetwork: network.getCardNetwork(card.cardNumber),
-  };
-
-  return { card, cvc, expiry, password, network: combinedNetwork };
+  return { card, cvc, expiry, password, network };
 }
