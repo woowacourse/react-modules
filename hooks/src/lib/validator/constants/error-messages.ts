@@ -26,7 +26,7 @@ export const CARD_NUMBER_ERROR_MESSAGES = {
 export const PASSWORD_ERROR_MESSAGES = {
   INVALID_CHARACTER: "비밀번호에 허용되지 않은 문자가 포함되어 있습니다",
   INVALID_FORMAT: "비밀번호 형식이 올바르지 않습니다",
-  INVALID_LENGTH: "비밀번호는 2자리 이상이어야 합니다",
+  INVALID_LENGTH: "비밀번호는 앞 2자리만 입력 가능합니다",
 } as const;
 
 // Expiry date error messages
