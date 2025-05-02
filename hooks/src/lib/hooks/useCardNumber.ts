@@ -13,9 +13,13 @@ export default function useCardNumber(): UseCardNumberReturn {
 
   const { errors } = validateCardNumber(cardNumber);
 
+  const handleCardNumberChange = (value: string) => {
+    setCardNumber(value.trim());
+  };
+
   return {
     cardNumber,
-    onCardNumberChange: setCardNumber,
+    onCardNumberChange: handleCardNumberChange,
     errorMessage: errors.at(-1)?.message,
     isError: !!errors.at(-1)?.message,
   };

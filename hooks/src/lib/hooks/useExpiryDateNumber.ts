@@ -12,9 +12,13 @@ export default function useExpiryDateNumber(): UseExpiryDateNumberReturn {
   const [expiryDateNumber, setExpiryDateNumber] = useState("");
   const { errors } = validateExpiryDate(expiryDateNumber);
 
+  const handleExpiryDateNumberChange = (value: string) => {
+    setExpiryDateNumber(value.trim());
+  };
+
   return {
     expiryDateNumber,
-    onExpiryDateNumberChange: setExpiryDateNumber,
+    onExpiryDateNumberChange: handleExpiryDateNumberChange,
     errorMessage: errors.at(-1)?.message,
     isError: !!errors.at(-1)?.message,
   };

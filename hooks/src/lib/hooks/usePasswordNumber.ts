@@ -12,9 +12,13 @@ export default function usePasswordNumber(): UsePasswordNumberReturn {
   const [passwordNumber, setPasswordNumber] = useState("");
   const { errors } = validatePassword(passwordNumber);
 
+  const handlePasswordNumberChange = (value: string) => {
+    setPasswordNumber(value.trim());
+  };
+
   return {
     passwordNumber,
-    onPasswordNumberChange: setPasswordNumber,
+    onPasswordNumberChange: handlePasswordNumberChange,
     errorMessage: errors.at(-1)?.message,
     isError: !!errors.at(-1)?.message,
   };

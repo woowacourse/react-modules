@@ -11,10 +11,12 @@ interface useCVCNumberReturn {
 export default function useCVCNumber(): useCVCNumberReturn {
   const [CVCNumber, setCVCNumber] = useState("");
   const { errors } = validateCVC(CVCNumber);
-
+  const handleCVCNumberChange = (value: string) => {
+    setCVCNumber(value.trim());
+  };
   return {
     CVCNumber,
-    onCVCNumberChange: setCVCNumber,
+    onCVCNumberChange: handleCVCNumberChange,
     errorMessage: errors.at(-1)?.message,
     isError: !!errors.at(-1)?.message,
   };
