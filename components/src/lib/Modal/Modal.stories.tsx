@@ -15,10 +15,10 @@ const meta: Meta<typeof Modal> = {
       control: "text",
       description: "모달 위치",
     },
-    isCloseButton: {
+    showCloseButton: {
       description: "닫기 버튼 여부",
     },
-    isConfirmButton: {
+    showConfirmButton: {
       description: "확인 버튼 여부",
     },
   },
@@ -31,7 +31,7 @@ type Story = StoryObj<typeof Modal>;
 export const Default: Story = {
   args: {
     position: "center",
-    isCloseButton: true,
+    showCloseButton: true,
   },
   render: (args) => {
     const [isOpen, setIsOpen] = useState(false);
@@ -52,8 +52,8 @@ export const Default: Story = {
           isOpen={isOpen}
           position={args.position}
           onClose={closeModal}
-          isCloseButton={args.isCloseButton}
-          isConfirmButton={args.isConfirmButton}
+          showCloseButton={args.showCloseButton}
+          showConfirmButton={args.showConfirmButton}
         >
           <CardCompany />
         </Modal>
@@ -65,8 +65,8 @@ export const Default: Story = {
 export const ModalWithCofirmButton: Story = {
   args: {
     position: "bottom",
-    isConfirmButton: true,
-    isCloseButton: false,
+    showConfirmButton: true,
+    showCloseButton: false,
   },
   render: (args) => {
     const [isOpen, setIsOpen] = useState(false);
@@ -87,8 +87,8 @@ export const ModalWithCofirmButton: Story = {
           isOpen={isOpen}
           position={args.position}
           onClose={closeModal}
-          isCloseButton={args.isCloseButton}
-          isConfirmButton={args.isConfirmButton}
+          showCloseButton={args.showCloseButton}
+          showConfirmButton={args.showConfirmButton}
         >
           <AgreeTermModal />
         </Modal>
