@@ -5,7 +5,7 @@ import { CloseIcon } from "./common";
 import { PropsWithChildren } from "react";
 import { css } from "@emotion/react";
 
-const ModalContainer = styled.div<{ position: "center" | "bottom" }>`
+const ModalContainer = styled.div<Pick<ModalInterface, "position">>`
   width: calc(100% - 40px);
   box-sizing: border-box;
   height: fit-content;
