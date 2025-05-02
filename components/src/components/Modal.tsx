@@ -53,6 +53,12 @@ const ModalBackdrop = styled.div`
   margin: auto;
 `;
 
+const Button = styled.button`
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+`;
+
 interface ModalInterface {
   title: string;
   onClose: () => void;
@@ -75,7 +81,9 @@ export default function Modal({
       <ModalContainer position={position} margin={margin}>
         <ModalTop>
           <Title>{title}</Title>
-          <CloseIcon onClick={onClose} css={closeIconStyle} />
+          <Button onClick={onClose}>
+            <CloseIcon />
+          </Button>
         </ModalTop>
 
         {children}
@@ -84,7 +92,3 @@ export default function Modal({
     </>
   );
 }
-
-const closeIconStyle = css`
-  cursor: pointer;
-`;
