@@ -40,5 +40,3 @@ function createValidator<T extends ValidateField>(
   };
 }
 export { createValidator, type ValidationRule, type ValidationResult };
-
-export * from "./validators";

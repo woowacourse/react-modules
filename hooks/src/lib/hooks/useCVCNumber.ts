@@ -1,5 +1,5 @@
 import { Dispatch, useCallback, useState } from "react";
-import { validateCVC } from "../validator";
+import { validateCVC } from "../validator/validators";
 
 interface useCVCNumberReturn {
   CVCNumber: string;

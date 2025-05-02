@@ -1,6 +1,5 @@
-// useCardNumber.ts
 import { useCallback, useState } from "react";
-import { validateCardNumber } from "../validator";
+import { validateCardNumber } from "../validator/validators";
 
 interface UseCardNumberReturn {
   cardNumber: string;
