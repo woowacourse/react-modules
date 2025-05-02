@@ -2,7 +2,7 @@
 
 import styled from "@emotion/styled";
 import { CloseIcon } from "./common";
-import { PropsWithChildren } from "react";
+import { PropsWithChildren, useEffect } from "react";
 import { css } from "@emotion/react";
 
 const ModalContainer = styled.div<Pick<ModalInterface, "position" | "margin">>`
@@ -75,6 +75,16 @@ export default function Modal({
   position = "center",
   margin = 20,
 }: PropsWithChildren<ModalInterface>) {
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) =>
+      event.key === "Escape" && onClose();
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [onClose]);
+
   if (!isOpen) return;
   return (
     <>
