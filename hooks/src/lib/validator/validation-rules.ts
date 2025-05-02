@@ -13,6 +13,7 @@ import {
   isValidExpiryYear,
   isNotExpiredDate,
 } from "../utils/date-utils";
+import { isValidLuhn } from "../utils/isValidLuhn";
 
 export const validationRules = {
   cvc: {
@@ -40,7 +41,24 @@ export const validationRules = {
       message: CARD_NUMBER_ERROR_MESSAGES.INVALID_FORMAT,
     },
   },
-
+  strictCardNumber: {
+    INVALID_NUMBER: {
+      check: (value: string) => isNumeric(value),
+      message: CARD_NUMBER_ERROR_MESSAGES.INVALID_NUMBER,
+    },
+    INVALID_LENGTH: {
+      check: (value: string) => value.length === CARD_NUMBER_LENGTH,
+      message: CARD_NUMBER_ERROR_MESSAGES.INVALID_LENGTH,
+    },
+    INVALID_FORMAT: {
+      check: (value: string) => /^\d+$/.test(value),
+      message: CARD_NUMBER_ERROR_MESSAGES.INVALID_FORMAT,
+    },
+    INVALID_CHECKSUM: {
+      check: (value: string) => isValidLuhn(value),
+      message: CARD_NUMBER_ERROR_MESSAGES.INVALID_CHECKSUM,
+    },
+  },
   password: {
     INVALID_CHARACTER: {
       check: (value: string) => isNumeric(value),
@@ -56,7 +74,6 @@ export const validationRules = {
     },
   },
 
-  // 만료일 검증 규칙
   expiryDate: {
     INVALID_FORMAT: {
       check: (value: string) => isValidExpiryDateFormat(value),

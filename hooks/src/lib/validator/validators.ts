@@ -26,6 +26,10 @@ const cardNumberRules = createFieldRules(
   "cardNumber",
   validationRules.cardNumber
 );
+const strictCardNumberRules = createFieldRules(
+  "cardNumber",
+  validationRules.strictCardNumber
+);
 
 const passwordRules = createFieldRules("password", validationRules.password);
 
@@ -38,10 +42,14 @@ const validateCVC = createValidator<"cvc">(cvcRules);
 const validateCardNumber = createValidator<"cardNumber">(cardNumberRules);
 const validatePassword = createValidator<"password">(passwordRules);
 const validateExpiryDate = createValidator<"expiryDate">(expiryDateRules);
+const validateStrictCardNumber = createValidator<"cardNumber">(
+  strictCardNumberRules
+);
 
 export {
   validateCVC,
   validateCardNumber,
   validatePassword,
   validateExpiryDate,
+  validateStrictCardNumber,
 };
