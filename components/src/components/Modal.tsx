@@ -6,7 +6,8 @@ import { PropsWithChildren } from "react";
 import { css } from "@emotion/react";
 
 const ModalContainer = styled.div<{ position: "center" | "bottom" }>`
-  width: 280px;
+  width: calc(100% - 40px);
+  box-sizing: border-box;
   height: fit-content;
 
   background-color: white;
