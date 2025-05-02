@@ -6,6 +6,10 @@ interface ExpirationDateInput {
 }
 
 const useExpirationDate = () => {
+  const [expirationDate, setExpirationDate] = useState<ExpirationDateInput>({
+    month: '',
+    year: '',
+  });
   const [isValid, setIsValid] = useState({ month: true, year: true });
   const [errorMessage, setErrorMessage] = useState('');
 
@@ -61,7 +65,7 @@ const useExpirationDate = () => {
     return true;
   };
 
-  return { handleExpirationDate, isValid, errorMessage };
+  return { expirationDate, setExpirationDate, handleExpirationDate, isValid, errorMessage };
 };
 
 const isNumber = (value: string) => {

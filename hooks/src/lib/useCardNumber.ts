@@ -8,6 +8,12 @@ interface CardNumberInput {
 }
 
 const useCardNumber = () => {
+  const [cardNumber, setCardNumber] = useState<CardNumberInput>({
+    input1: '',
+    input2: '',
+    input3: '',
+    input4: '',
+  });
   const [isValid, setIsValid] = useState({
     input1: true,
     input2: true,
@@ -47,7 +53,7 @@ const useCardNumber = () => {
     setErrorMessage(message);
   };
 
-  return { handleCardNumber, isValid, errorMessage };
+  return { cardNumber, setCardNumber, handleCardNumber, isValid, errorMessage };
 };
 
 const isNumber = (value: string) => {

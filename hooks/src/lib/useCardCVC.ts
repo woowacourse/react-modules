@@ -1,6 +1,7 @@
 import { useState } from 'react';
 
 const useCardCVC = () => {
+  const [cardCVC, setCardCVC] = useState('');
   const [isValid, setIsValid] = useState(true);
   const [errorMessage, setErrorMessage] = useState('');
 
@@ -25,7 +26,7 @@ const useCardCVC = () => {
     return true;
   };
 
-  return { handleCVCValidate, isValid, errorMessage };
+  return { cardCVC, setCardCVC, handleCVCValidate, isValid, errorMessage };
 };
 
 export default useCardCVC;
