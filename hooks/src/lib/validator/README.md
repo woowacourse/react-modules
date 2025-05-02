@@ -117,8 +117,3 @@ const newFieldRules: ValidationRule<"newField">[] = Object.entries(
 
 export const validateNewField = createValidator<"newField">(newFieldRules);
 ```
-
-## 테스트
-
-각 유효성 검사 규칙에 대한 단위 테스트가 `validation-rules.test.ts`에 작성되어 있습니다.
-validator의 테스트는 `validators.test.ts`에서 확인할 수 있습니다.
