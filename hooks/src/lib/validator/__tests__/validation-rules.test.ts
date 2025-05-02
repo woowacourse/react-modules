@@ -113,12 +113,14 @@ describe("validation-rules", () => {
 
       it("올바른 길이에 대해 통과해야 한다", () => {
         expect(check("12")).toBe(true);
-        expect(check("12345678")).toBe(true);
       });
 
       it("너무 짧은 비밀번호에 대해 실패해야 한다", () => {
         expect(check("1")).toBe(false);
         expect(check("")).toBe(false);
+      });
+      it("너무 긴 비밀번호에 대해 실패해야 한다", () => {
+        expect(check("123")).toBe(false);
       });
     });
 

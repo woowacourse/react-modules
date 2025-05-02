@@ -51,7 +51,7 @@ export const validationRules = {
       message: PASSWORD_ERROR_MESSAGES.INVALID_FORMAT,
     },
     INVALID_LENGTH: {
-      check: (value: string) => value.length >= PASSWORD_LENGTH,
+      check: (value: string) => value.length === PASSWORD_LENGTH,
       message: PASSWORD_ERROR_MESSAGES.INVALID_LENGTH,
     },
   },
