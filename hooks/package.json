@@ -1,7 +1,14 @@
 {
   "name": "woowacourse-hooks-marvin",
   "version": "0.0.1",
-  "description": "npm modules",
+  "description": "카드번호 검증 훅",
+  "author": "marvin",
+  "keywords": [
+    "react",
+    "hooks",
+    "card",
+    "validation"
+  ],
   "type": "module",
   "types": "dist/index.d.ts",
   "main": "dist/index.js",
