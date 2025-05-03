@@ -1,6 +1,14 @@
 import { useState } from 'react';
 
-const useCardBrandValidate = (cardBrands: string[]) => {
+export type CardBrandValidateResult = {
+  isValid: boolean;
+  errorMessage: string | null;
+  validateCardBrand: (cardBrand: string) => void;
+};
+
+const useCardBrandValidate = (
+  cardBrands: string[]
+): CardBrandValidateResult => {
   const [isValid, setIsValid] = useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 

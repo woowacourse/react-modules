@@ -2,7 +2,13 @@ import { useState } from 'react';
 import validateMaxLength from '../utils/validateMaxLength';
 import validateNumber from '../utils/validateNumber';
 
-const useCardCVCValidate = () => {
+export type CardCVCValidateResult = {
+  isValid: boolean;
+  errorMessage: string | null;
+  validateCardCVC: (cardCVC: string) => void;
+};
+
+const useCardCVCValidate = (): CardCVCValidateResult => {
   const [isValid, setIsValid] = useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 

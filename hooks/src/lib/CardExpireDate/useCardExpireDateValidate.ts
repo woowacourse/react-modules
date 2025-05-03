@@ -8,7 +8,19 @@ type CardExpireDate = {
   year: string;
 };
 
-const useCardExpireDateValidate = () => {
+export type CardExpireDateValidateResult = {
+  isValid: {
+    month: boolean;
+    year: boolean;
+  };
+  errorMessage: string | null;
+  validateCardExpireDate: (
+    expireDate: CardExpireDate,
+    key: 'month' | 'year'
+  ) => void;
+};
+
+const useCardExpireDateValidate = (): CardExpireDateValidateResult => {
   const [isValid, setIsValid] = useState({
     month: true,
     year: true

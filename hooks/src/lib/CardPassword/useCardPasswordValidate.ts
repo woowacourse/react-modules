@@ -2,7 +2,13 @@ import { useState } from 'react';
 import validateNumber from '../utils/validateNumber';
 import validateMaxLength from '../utils/validateMaxLength';
 
-const useCardPasswordValidate = () => {
+export type CardPasswordValidateResult = {
+  isValid: boolean;
+  errorMessage: string | null;
+  validateCardPassword: (cardPassword: string) => void;
+};
+
+const useCardPasswordValidate = (): CardPasswordValidateResult => {
   const [isValid, setIsValid] = useState<boolean>(true);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
