@@ -17,7 +17,7 @@ const initialCardNumberValidate: CardNumbersValidate = {
   fourth: true
 };
 
-type CardNumberValidateResult = {
+export type CardNumberValidateResult = {
   isValid: CardNumbersValidate;
   errorMessage: string | null;
   validateCardNumbers: (cardNumber: string, key: string) => void;
