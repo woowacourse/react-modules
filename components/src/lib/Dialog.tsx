@@ -50,14 +50,16 @@ function useDialogContext() {
 function Trigger({
   children,
   className,
+  style,
 }: {
   children: React.ReactNode;
   className?: string;
+  style?: Record<string, string>;
 }) {
   const { modalOpen } = useDialogContext();
 
   return (
-    <button onClick={modalOpen} className={className}>
+    <button style={style} onClick={modalOpen} className={className}>
       {children}
     </button>
   );
@@ -71,9 +73,11 @@ function Root({ children }: { children: React.ReactNode }) {
 function Overlay({
   children,
   className,
+  style,
 }: {
   children: React.ReactNode;
   className?: string;
+  style?: Record<string, string>;
 }) {
   const { modalClose } = useDialogContext();
   const { handleClickOverlay } = useEscapeModal(modalClose);
@@ -82,6 +86,7 @@ function Overlay({
   return (
     <StyledOverlay
       id={id}
+      style={style}
       onClick={(e) => handleClickOverlay(e, id)}
       className={className}
     >
@@ -93,24 +98,32 @@ function Overlay({
 function Header({
   children,
   className,
+  style,
 }: {
   children: React.ReactNode;
   className?: string;
+  style?: Record<string, string>;
 }) {
-  return <StyledHeader className={className}>{children}</StyledHeader>;
+  return (
+    <StyledHeader style={style} className={className}>
+      {children}
+    </StyledHeader>
+  );
 }
 
 function CloseButton({
   children,
   className,
+  style,
 }: {
   children: React.ReactNode;
   className?: string;
+  style?: Record<string, string>;
 }) {
   const { modalClose } = useDialogContext();
 
   return (
-    <StyledCloseButton onClick={modalClose} className={className}>
+    <StyledCloseButton style={style} onClick={modalClose} className={className}>
       {children}
     </StyledCloseButton>
   );
@@ -119,14 +132,16 @@ function CloseButton({
 function Content({
   children,
   className,
+  style,
 }: {
   children: React.ReactNode;
   className?: string;
+  style?: Record<string, string>;
 }) {
   const { position } = useDialogContext();
 
   return (
-    <StyledContent position={position} className={className}>
+    <StyledContent style={style} position={position} className={className}>
       {children}
     </StyledContent>
   );

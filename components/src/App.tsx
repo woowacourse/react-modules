@@ -10,7 +10,7 @@ function App() {
         <Dialog.Root>
           <Dialog.Overlay>
             <Dialog.Content>
-              <Dialog.Header>
+              <Dialog.Header style={{ backgroundColor: "red" }}>
                 <h1>모달의 헤더입니다.</h1>
                 <Dialog.CloseButton>Close</Dialog.CloseButton>
               </Dialog.Header>
