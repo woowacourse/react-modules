@@ -1,6 +1,6 @@
-import { ValidationResult } from "../../../types";
+import { ErrorState } from "../../../types";
 
-export const validateCardCVC = (cvc: string): ValidationResult => {
+export const getCardCVCError = (cvc: string): ErrorState => {
   if (isNaN(Number(cvc))) {
     return {
       isValid: false,

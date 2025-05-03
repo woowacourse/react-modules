@@ -1,8 +1,6 @@
-import { ValidationResult } from "../../../types";
+import { ErrorState } from "../../../types";
 
-export const validateCardPassword = (
-  secretNumber: string
-): ValidationResult => {
+export const getCardPasswordError = (secretNumber: string): ErrorState => {
   if (isNaN(Number(secretNumber))) {
     return {
       isValid: false,

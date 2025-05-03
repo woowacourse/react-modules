@@ -1,8 +1,8 @@
-import { ValidationResult } from "../../../types";
+import { ErrorState } from "../../../types";
 import { CardNumberState } from "../types";
 
-export const validateCardNumbers = (cardNumber: CardNumberState) => {
-  let errorState: ValidationResult = {
+export const getCardNumbersError = (cardNumber: CardNumberState) => {
+  let errorState: ErrorState = {
     isValid: true,
     errorMessage: "",
   };
@@ -10,7 +10,7 @@ export const validateCardNumbers = (cardNumber: CardNumberState) => {
   Object.values(cardNumber).every(({ value }) => {
     console.log(cardNumber);
 
-    const { isValid, errorMessage } = validateCardNumber(value);
+    const { isValid, errorMessage } = getCardNumberError(value);
     errorState = { isValid, errorMessage };
 
     if (!isValid) {
@@ -21,7 +21,7 @@ export const validateCardNumbers = (cardNumber: CardNumberState) => {
   return errorState;
 };
 
-const validateCardNumber = (cardNumber: string): ValidationResult => {
+const getCardNumberError = (cardNumber: string): ErrorState => {
   if (isNaN(Number(cardNumber))) {
     return {
       isValid: false,

@@ -1,8 +1,6 @@
-import { ValidationResult } from "../../../types";
+import { ErrorState } from "../../../types";
 
-export const validateCardExpiryDate = (
-  expiryDate: string
-): ValidationResult => {
+export const getCardExpiryDateError = (expiryDate: string): ErrorState => {
   if (isNaN(Number(expiryDate))) {
     return {
       isValid: false,

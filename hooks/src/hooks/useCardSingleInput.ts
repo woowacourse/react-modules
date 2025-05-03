@@ -1,16 +1,16 @@
 import { useState } from "react";
-import { BaseInputState, ValidationResult } from "../lib/types";
+import { BaseInputState, ErrorState } from "../lib/types";
 
 interface UseInputStateParams {
   initialValue: BaseInputState;
   maxLength: number;
-  validateFn: (value: string) => ValidationResult;
+  getErrorFn: (value: string) => ErrorState;
 }
 
 const useCardSingleInput = ({
   initialValue,
   maxLength,
-  validateFn,
+  getErrorFn,
 }: UseInputStateParams) => {
   const [inputState, setInputState] = useState<BaseInputState>(initialValue);
 
@@ -28,7 +28,7 @@ const useCardSingleInput = ({
   return {
     inputState,
     handleInputChange,
-    errorState: validateFn(inputState.value),
+    errorState: getErrorFn(inputState.value),
   };
 };
 
