@@ -4,7 +4,7 @@ import { renderHook, act } from "@testing-library/react";
 
 test("사용자가 정상적인 값을 입력하면 에러가 발생하지 않는다.", async () => {
   const { result } = renderHook(() => useCardNumber());
-  const { isValid, handleCardNumberChange } = result.current;
+  const { handleCardNumberChange } = result.current;
 
   const event = {
     target: {
@@ -18,7 +18,7 @@ test("사용자가 정상적인 값을 입력하면 에러가 발생하지 않�
       "first"
     )
   );
-  expect(isValid).toBeTruthy();
+  expect(result.current.isValid).toBeTruthy();
 });
 
 test("사용자가 문자열을 입력하면 값이 바뀌지 않는다.", async () => {
@@ -30,6 +30,7 @@ test("사용자가 문자열을 입력하면 값이 바뀌지 않는다.", async
       value: "11",
     },
   };
+
   act(() => {
     handleCardNumberChange(
       event as unknown as React.ChangeEvent<HTMLInputElement>,

@@ -4,14 +4,11 @@ import useExpiryDate from "./useExpiryDate";
 
 test("사용자가 정상적인 월을 입력하면 에러가 발생하지 않는다.", async () => {
   const { result } = renderHook(() => useExpiryDate());
-  const { isValid, handleExpiryDateChange } = result.current;
+  const { handleExpiryDateChange } = result.current;
 
   const event = {
     target: {
-      value: "1",
-      dataset: {
-        dateType: "month",
-      },
+      value: "12",
     },
   };
 
@@ -21,19 +18,16 @@ test("사용자가 정상적인 월을 입력하면 에러가 발생하지 않�
       "month"
     )
   );
-  expect(isValid).toBeTruthy();
+  expect(result.current.isValid).toBeTruthy();
 });
 
 test("사용자가 정상적인 연을 입력하면 에러가 발생하지 않는다.", async () => {
   const { result } = renderHook(() => useExpiryDate());
-  const { isValid, handleExpiryDateChange } = result.current;
+  const { handleExpiryDateChange } = result.current;
 
   const event = {
     target: {
       value: "99",
-      dataset: {
-        dateType: "year",
-      },
     },
   };
 
@@ -43,7 +37,7 @@ test("사용자가 정상적인 연을 입력하면 에러가 발생하지 않�
       "year"
     )
   );
-  expect(isValid).toBeTruthy();
+  expect(result.current.isValid).toBeTruthy();
 });
 
 test("사용자가 월에 문자를 입력하면 입력이 안된다.", async () => {
