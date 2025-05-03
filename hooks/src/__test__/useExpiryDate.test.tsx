@@ -2,7 +2,9 @@ import { act, renderHook } from '@testing-library/react';
 import { useExpiryDate } from '../lib/hooks/useExpiryDate/useExpiryDate';
 
 describe('유효기간 검증 테스트입니다.', () => {
-  test('사용자가 입력한 value값의 길이와 validLength(2)가 같다면, errorMessage를 빈 값으로 반환한다.', () => {
+  const expiryDateLength = 2;
+  const currentYear = new Date().getFullYear() % 100;
+  test(`사용자가 입력한 value값의 길이와 validLength(${expiryDateLength})가 같다면, errorMessage를 빈 값으로 반환한다.`, () => {
     const { result } = renderHook(() => useExpiryDate());
 
     const mockEvent = {
@@ -43,7 +45,7 @@ describe('유효기간 검증 테스트입니다.', () => {
     expect(result.current.errorMessage).toBe('유효기간의 월은 1~12월만 가능합니다.');
   });
 
-  test('사용자가 입력한 year 값이 현재 년도(25)보다 작다면 errorMessage를 반환준다.', () => {
+  test(`사용자가 입력한 year 값이 현재 년도(${currentYear})보다 작다면 errorMessage를 반환준다.`, () => {
     const { result } = renderHook(() => useExpiryDate());
 
     const mockEvent = {
@@ -55,7 +57,7 @@ describe('유효기간 검증 테스트입니다.', () => {
     });
 
     expect(result.current.errorMessage).toBe(
-      '유효기간의 년도는 현재 년도(25)보다 크거나 같아야 합니다.'
+      `유효기간의 년도는 현재 년도(${currentYear})보다 크거나 같아야 합니다.`
     );
   });
 });
