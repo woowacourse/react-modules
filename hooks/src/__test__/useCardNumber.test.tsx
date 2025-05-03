@@ -40,6 +40,6 @@ describe('카드 번호 검증 테스트입니다.', () => {
       result.current.handleCardNumberChange(mockEvent, 0);
     });
 
-    expect(result.current.errorMessage).toBe('숫자 4자리를 입력해주세요.');
+    expect(result.current.errorMessage).toBe('숫자 4자리를 정확히 입력해주세요.');
   });
 });
