@@ -7,7 +7,7 @@ const meta = {
   tags: ["autodocs"],
   args: {
     title: "Modal Title",
-    onClose: () => {},
+    onRequestClose: () => {},
     position: "center",
   },
 } satisfies Meta<typeof Modal>;
