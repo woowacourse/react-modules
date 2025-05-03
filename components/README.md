@@ -14,12 +14,14 @@ useModal 훅과 Modal 컴포넌트를 함께 사용하면 간편하게 모달 �
 - handleOutsideClick: 모달 외부 클릭 핸들러
 
 ### Modal
-- isOpen: 모달이 보이는지 여부(`boolean`)
+- isOpen: 모달이 보이는지 여부 (`boolean`)
 - position: 모달 위치 설정 (`center` | `bottom`): 
-- title: 모달 상단에 표시할 제목(`string`)
+- title: 모달 상단에 표시할 제목 (`string`)
 - showCloseButton: 우측 상단에 닫기 버튼을 표시할지 여부 (`boolean`)
+- maxWidth: 모달의 최대 너비를 지정 (`number | string`)
+- zIndex: 모달의 쌓임 순서를 지정 (`number | string`)
 - onClose: 모달 닫기 시 호출되는 함수
-- onOutsideClick: 모달 외부 영역 클릭 시 호출되는 함수
+- onOutsideClick: 모달 외부 영역 클릭 시 호출되는 함수 
 
 ```tsx
 import { Modal, useModal } from '@sebin0580/modal';
