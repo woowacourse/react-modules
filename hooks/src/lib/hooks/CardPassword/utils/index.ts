@@ -1,6 +1,6 @@
 import { ValidationResult } from "../../../types";
 
-export const validateCardSecretNumber = (
+export const validateCardPassword = (
   secretNumber: string
 ): ValidationResult => {
   if (isNaN(Number(secretNumber))) {

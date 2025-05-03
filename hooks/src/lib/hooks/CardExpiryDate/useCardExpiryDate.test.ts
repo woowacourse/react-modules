@@ -68,7 +68,7 @@ describe("useCardExpiryDate", () => {
     );
   });
 
-  it("키드만료일에 옳은 숫자 4자리를 입력하면 유효하게 작동해야한다. ", () => {
+  it("키드 만료일에 옳은 숫자 4자리를 입력하면 유효하게 작동해야한다. ", () => {
     const validInput = "1227";
     const { result } = renderHook(() => useCardExpiryDate());
 
@@ -77,5 +77,18 @@ describe("useCardExpiryDate", () => {
     });
 
     expect(result.current.errorState.isValid).toBe(true);
+  });
+
+  it("카드 만료일에 5자리를 입력하여도 무시되어 4자리만 입력 가능하다.", () => {
+    const { result } = renderHook(() => useCardExpiryDate());
+
+    act(() => {
+      Array.from({ length: 5 }).forEach((_, index) => {
+        const userInput = "1".repeat(index + 1);
+        result.current.handleExpiryChange(userInput);
+      });
+    });
+
+    expect(result.current.expiryDate.value).toHaveLength(4);
   });
 });

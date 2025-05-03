@@ -57,4 +57,17 @@ describe("useCardNumber", () => {
 
     expect(result.current.errorState.isValid).toBe(true);
   });
+
+  it("카드 번호에 5자리를 입력하여도 무시되어 4자리만 입력 가능하다.", () => {
+    const { result } = renderHook(() => useCardNumber());
+
+    act(() => {
+      Array.from({ length: 5 }).forEach((_, index) => {
+        const userInput = "1".repeat(index + 1);
+        result.current.handleCardNumberChange("first", userInput);
+      });
+    });
+
+    expect(result.current.cardNumberState.first.value).toHaveLength(4);
+  });
 });
