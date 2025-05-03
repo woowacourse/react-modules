@@ -41,6 +41,11 @@ export const validateExpirationDate = (date: ExpirationDateInput): ExpirationDat
     result.year = false;
     if (!hasError) message = '2자리의 숫자를 입력해 주세요.';
     hasError = true;
+  } else if (!validateExpiry(month, year)) {
+    result.month = false;
+    result.year = false;
+    if (!hasError) message = '만료일이 유효하지 않습니다.';
+    hasError = true;
   }
 
   return { isValid: result, message };
@@ -51,4 +56,18 @@ const isTwoDigits = (value: string) => value.length === 2;
 const isValidMonth = (month: string) => {
   const monthNumber = Number(month);
   return monthNumber >= 1 && monthNumber <= 12;
+};
+const validateExpiry = (month: string, year: string) => {
+  const currentDate = new Date();
+  const currentYear = currentDate.getFullYear() % 100;
+  const currentMonth = currentDate.getMonth() + 1;
+
+  const inputYear = Number(year);
+  const inputMonth = Number(month);
+
+  if (inputYear < currentYear || (inputYear === currentYear && inputMonth < currentMonth)) {
+    return false;
+  }
+
+  return true;
 };
