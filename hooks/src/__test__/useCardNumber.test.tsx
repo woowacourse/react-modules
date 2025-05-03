@@ -10,8 +10,12 @@ describe('카드 번호 검증 테스트입니다.', () => {
       target: { value: '1234' },
     } as React.ChangeEvent<HTMLInputElement>;
 
-    act(() => {
-      result.current.handleCardNumberChange(mockEvent, 0);
+    [0, 1, 2, 3].forEach((index) => {
+      act(() => {
+        result.current.handleCardNumberChange(mockEvent, index);
+      });
+
+      expect(result.current.errorMessage).toBe('');
     });
 
     expect(result.current.errorMessage).toBe('');
