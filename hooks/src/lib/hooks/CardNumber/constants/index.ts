@@ -3,4 +3,4 @@ export const INITIAL_CARD_NUMBER_STATE = {
   second: { value: "" },
   third: { value: "" },
   fourth: { value: "" },
-} as const;
+};
