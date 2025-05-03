@@ -7,7 +7,7 @@ describe('useCardPasswordInput custom hook 테스트', () => {
     act(() => {
       result.current.handleCardPasswordChange('12');
     });
-    expect(result.current.cardPasswordError).toBe('');
+    expect(result.current.cardPasswordErrorMessage).toBe('');
     expect(result.current.cardPassword).toBe('12');
   });
 
@@ -16,7 +16,7 @@ describe('useCardPasswordInput custom hook 테스트', () => {
     act(() => {
       result.current.handleCardPasswordChange('12a');
     });
-    expect(result.current.cardPasswordError).toBe('숫자만 입력 가능합니다.');
+    expect(result.current.cardPasswordErrorMessage).toBe('숫자만 입력 가능합니다.');
   });
 
   it('자리수가 2자리 미만이면, 에러가 발생한다.', () => {
@@ -24,6 +24,6 @@ describe('useCardPasswordInput custom hook 테스트', () => {
     act(() => {
       result.current.handleCardPasswordChange('1');
     });
-    expect(result.current.cardPasswordError).toBe('비밀번호는 2자리여야 합니다.');
+    expect(result.current.cardPasswordErrorMessage).toBe('비밀번호는 2자리여야 합니다.');
   });
 });

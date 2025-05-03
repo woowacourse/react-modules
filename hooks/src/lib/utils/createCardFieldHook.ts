@@ -1,16 +1,16 @@
 import { useMemo, useState } from 'react';
-import { CardFieldHook } from '../types/card';
+import { CardFieldHook, validationResult } from '../types/card';
 
 function createCardField<T extends string>(
   initialState: T,
-  validationFunctions: Array<(value: T) => string | undefined>,
+  validationFunctions: Array<(value: T) => validationResult>,
 ): CardFieldHook<T> {
   const [value, setValue] = useState<T>(initialState);
 
-  const error = useMemo(() => {
+  const errorMessage = useMemo(() => {
     for (const validateFn of validationFunctions) {
-      const error = validateFn(value);
-      if (error) return error;
+      const { isValid, errorMessage } = validateFn(value);
+      if (!isValid && errorMessage) return errorMessage;
     }
     return '';
   }, [value]);
@@ -19,7 +19,7 @@ function createCardField<T extends string>(
     setValue(newValue);
   };
 
-  return { value, handleChange, error };
+  return { value, handleChange, errorMessage };
 }
 
 export default createCardField;

@@ -2,6 +2,6 @@ import { validateNumberError, validateCvcLengthError } from './utils/cardInputVa
 import createCardFieldHook from './utils/createCardFieldHook';
 
 export function useCvcInput() {
-  const { value, handleChange, error } = createCardFieldHook<string>('', [validateNumberError, validateCvcLengthError]);
-  return { cvc: value, handleCvcChange: handleChange, cvcError: error };
+  const { value, handleChange, errorMessage } = createCardFieldHook<string>('', [validateNumberError, validateCvcLengthError]);
+  return { cvc: value, handleCvcChange: handleChange, cvcErrorMessage: errorMessage };
 }

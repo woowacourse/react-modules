@@ -13,19 +13,19 @@ export function useCardExpirationInput() {
 
     if (cardExpiration.month !== '') {
       const numError = validateNumberError(cardExpiration.month);
-      if (numError) errors.month = numError;
+      if (!numError.isValid && numError.errorMessage) errors.month = numError.errorMessage;
 
       const monthRangeError = validateMonthRangeError(cardExpiration.month);
-      if (monthRangeError) errors.month = monthRangeError;
+      if (!monthRangeError.isValid && monthRangeError.errorMessage) errors.month = monthRangeError.errorMessage;
     }
 
     if (cardExpiration.year !== '') {
       const numError = validateNumberError(cardExpiration.year);
-      if (numError) {
-        errors.year = numError;
+      if (!numError.isValid && numError.errorMessage) {
+        errors.year = numError.errorMessage;
       } else {
         const yearLengthError = validateYearLengthError(cardExpiration.year);
-        if (yearLengthError) errors.year = yearLengthError;
+        if (!yearLengthError.isValid && yearLengthError.errorMessage) errors.year = yearLengthError.errorMessage;
       }
     }
 

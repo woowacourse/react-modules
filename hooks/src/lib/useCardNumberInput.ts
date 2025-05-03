@@ -11,8 +11,8 @@ export function useCardNumberInput() {
 
       if (value === '') continue;
 
-      const numError = validateNumberError(value);
-      if (numError) return numError;
+      const { isValid, errorMessage } = validateNumberError(value);
+      if (!isValid) return errorMessage;
 
       if (value.length !== 4) return '4자리 숫자를 입력해주세요.';
     }

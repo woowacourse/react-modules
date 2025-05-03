@@ -23,7 +23,12 @@ interface CardNumber {
 interface CardFieldHook<T extends string> {
   value: T;
   handleChange: (newValue: T) => void;
-  error: string;
+  errorMessage: string;
 }
 
-export type { CardCompany, CardExpiration, CardNumber, CardFieldHook };
+interface validationResult {
+  isValid: boolean;
+  errorMessage?: string;
+}
+
+export type { CardCompany, CardExpiration, CardNumber, CardFieldHook, validationResult };
