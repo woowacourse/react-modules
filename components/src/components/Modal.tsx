@@ -57,12 +57,28 @@ const Button = styled.button`
   cursor: pointer;
 `;
 
+/**
+ * 모달 컴포넌트의 props
+ *
+ * @property title - 모달의 제목입니다.
+ * @property onClose - 모달을 닫을 때 호출되는 콜백 함수입니다.
+ * @property isOpen - 모달이 열려 있는지 여부를 나타냅니다.
+ * @property position - 모달의 위치를 지정합니다. 'center'(기본값) 또는 'bottom'을 사용할 수 있습니다.
+ * @property margin - 모달의 좌우 마진(px)입니다. 기본값은 20입니다.
+ * @property zIndex - 모달의 z-index 값입니다. 기본값은 10입니다.
+ */
 interface ModalInterface {
+  /** 모달의 제목 */
   title: string;
+  /** 모달을 닫을 때 호출되는 콜백 함수 */
   onClose: () => void;
+  /** 모달이 열려 있는지 여부 */
   isOpen: boolean;
+  /** 모달의 위치 (center | bottom) */
   position?: 'center' | 'bottom';
+  /** 모달의 좌우 여백(px) */
   margin?: number;
+  /** 모달의 z-index 값 */
   zIndex?: number;
 }
 
