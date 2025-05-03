@@ -15,7 +15,11 @@ const useExpirationDate = () => {
   const [errorMessage, setErrorMessage] = useState('');
 
   const handleExpirationDate = (date: ExpirationDateInput) => {
-    validateExpirationDate({ date, setIsValid, setErrorMessage });
+    setExpirationDate(date);
+
+    const { isValid: newIsValid, message } = validateExpirationDate(date);
+    setIsValid(newIsValid);
+    setErrorMessage(message);
   };
 
   return { expirationDate, setExpirationDate, handleExpirationDate, isValid, errorMessage };
