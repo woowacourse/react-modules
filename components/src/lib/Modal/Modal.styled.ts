@@ -3,11 +3,10 @@ import { ModalPositionType } from ".";
 
 export const Backdrop = styled.div`
   background-color: rgba(0, 0, 0, 0.5);
-  width: 500px;
+  width: 100vw;
   height: 100vh;
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
+  position: fixed;
+  left: 0;
   top: 0;
 `;
 
