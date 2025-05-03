@@ -15,10 +15,10 @@ export const Default = () => {
   return (
     <Modal
       title="테스트"
-      content={<p>테스트</p>}
       isOpen={isOpen}
       onClose={() => setIsOpen(false)}
       onConfirm={() => setIsOpen(false)}
+      children={<p>테스트</p>}
     />
   );
 };
@@ -29,7 +29,7 @@ export const CenterModal = () => {
   return (
     <Modal
       title="테스트"
-      content={<p>테스트</p>}
+      children={<p>테스트</p>}
       isOpen={isOpen}
       onClose={() => setIsOpen(false)}
       position="center"
@@ -43,7 +43,7 @@ export const BottomModal = () => {
   return (
     <Modal
       title="테스트"
-      content={<p>테스트</p>}
+      children={<p>테스트</p>}
       isOpen={isOpen}
       onClose={() => setIsOpen(false)}
       position="bottom"
@@ -57,11 +57,12 @@ export const ConfirmButtonModal = () => {
   return (
     <Modal
       title="테스트"
-      content={<p>테스트</p>}
+      children={<p>테스트</p>}
       isOpen={isOpen}
       onClose={() => setIsOpen(false)}
       onConfirm={() => setIsOpen(false)}
-      hasConfirmButton={true}
+      primaryButton={true}
+      primaryButtonText="확인"
       position="center"
     />
   );
@@ -73,13 +74,15 @@ export const CloseButtonModal = () => {
   return (
     <Modal
       title="테스트"
-      content={<p>테스트</p>}
+      children={<p>테스트</p>}
       isOpen={isOpen}
       onClose={() => setIsOpen(false)}
       onConfirm={() => setIsOpen(false)}
-      hasConfirmButton={true}
+      primaryButton={true}
+      primaryButtonText="확인"
       hasTopCloseButton={false}
-      hasBottomCloseButton={true}
+      secondaryButton={true}
+      secondaryButtonText="닫기"
       position="center"
     />
   );
