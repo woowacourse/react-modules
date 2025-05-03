@@ -1,11 +1,11 @@
 /** @jsxImportSource @emotion/react */
 
-import styled from "@emotion/styled";
-import { CloseIcon } from "./common";
-import { PropsWithChildren, useEffect } from "react";
-import { css } from "@emotion/react";
+import styled from '@emotion/styled';
+import { CloseIcon } from './common';
+import { PropsWithChildren, useEffect } from 'react';
+import { css } from '@emotion/react';
 
-const ModalContainer = styled.div<Pick<ModalInterface, "position" | "margin">>`
+const ModalContainer = styled.div<Pick<ModalInterface, 'position' | 'margin'>>`
   width: calc(100% - ${(props) => (props.margin ?? 20) * 2}px);
   box-sizing: border-box;
   height: fit-content;
@@ -13,8 +13,7 @@ const ModalContainer = styled.div<Pick<ModalInterface, "position" | "margin">>`
   background-color: white;
   padding: 24px 32px;
 
-  border-radius: ${(props) =>
-    props.position === "center" ? "8px" : "8px 8px 0 0"};
+  border-radius: ${(props) => (props.position === 'center' ? '8px' : '8px 8px 0 0')};
 
   position: fixed;
 
@@ -22,7 +21,7 @@ const ModalContainer = styled.div<Pick<ModalInterface, "position" | "margin">>`
   right: 0;
   margin: 0 auto;
 
-  top: ${(props) => (props.position === "center" ? "50%" : "auto")};
+  top: ${(props) => (props.position === 'center' ? '50%' : 'auto')};
   transform: translateY(-50%);
 
   bottom: 0;
@@ -63,7 +62,7 @@ interface ModalInterface {
   title: string;
   onClose: () => void;
   isOpen: boolean;
-  position?: "center" | "bottom";
+  position?: 'center' | 'bottom';
   margin?: number;
 }
 
@@ -72,16 +71,15 @@ export default function Modal({
   onClose,
   children,
   isOpen,
-  position = "center",
+  position = 'center',
   margin = 20,
 }: PropsWithChildren<ModalInterface>) {
   useEffect(() => {
-    const handleKeyDown = (event: KeyboardEvent) =>
-      event.key === "Escape" && onClose();
+    const handleKeyDown = (event: KeyboardEvent) => event.key === 'Escape' && onClose();
 
-    window.addEventListener("keydown", handleKeyDown);
+    window.addEventListener('keydown', handleKeyDown);
     return () => {
-      window.removeEventListener("keydown", handleKeyDown);
+      window.removeEventListener('keydown', handleKeyDown);
     };
   }, [onClose]);
 

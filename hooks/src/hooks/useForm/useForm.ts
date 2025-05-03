@@ -1,6 +1,6 @@
-import { useState } from "react";
-import { Validation } from "./types";
-import { validate } from "./utils";
+import { useState } from 'react';
+import { Validation } from './types';
+import { validate } from './utils';
 
 type UseFormProps<T extends Record<string, string>> = {
   defaultValues: T;
@@ -20,16 +20,12 @@ export default function useForm<T extends Record<string, string>>({
     currentKey: keyof T,
     options?: {
       onChange?: (event: React.ChangeEvent<E>) => void;
-    }
+    },
   ) => {
     return {
       value: value[currentKey],
       onChange: (event: React.ChangeEvent<E>) => {
-        if (
-          inputRegex?.[currentKey] &&
-          !inputRegex[currentKey].test(event.target.value)
-        )
-          return;
+        if (inputRegex?.[currentKey] && !inputRegex[currentKey].test(event.target.value)) return;
 
         options?.onChange?.(event);
         setValue((prev) => ({ ...prev, [currentKey]: event.target.value }));
@@ -43,10 +39,9 @@ export default function useForm<T extends Record<string, string>>({
     };
   };
 
-  const isDirty = Object.values(errors).some((error) => error === "");
-  const isAllDirty = Object.values(value).every((value) => value !== "");
-  const isValid =
-    isAllDirty && Object.values(errors).every((error) => error === "");
+  const isDirty = Object.values(errors).some((error) => error === '');
+  const isAllDirty = Object.values(value).every((value) => value !== '');
+  const isValid = isAllDirty && Object.values(errors).every((error) => error === '');
 
   return { value, errors, register, isValid, isDirty, isAllDirty };
 }

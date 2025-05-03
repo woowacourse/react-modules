@@ -1,10 +1,10 @@
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from '@storybook/react';
 
-import Modal from "./Modal";
-import { useState } from "react";
+import Modal from './Modal';
+import { useState } from 'react';
 
 const meta: Meta<typeof Modal> = {
-  tags: ["autodocs"],
+  tags: ['autodocs'],
   component: Modal,
   args: {
     isOpen: true,
@@ -31,12 +31,7 @@ export const Center: Story = {
         <button type="button" onClick={openModal}>
           열기
         </button>
-        <Modal
-          title="제목"
-          onClose={handleModalClose}
-          isOpen={isOpen}
-          position={"center"}
-        >
+        <Modal title="제목" onClose={handleModalClose} isOpen={isOpen} position={'center'}>
           ㅇㅇㅇ
         </Modal>
       </>
@@ -61,12 +56,7 @@ export const Bottom: Story = {
         <button type="button" onClick={openModal}>
           열기
         </button>
-        <Modal
-          title="제목"
-          onClose={handleModalClose}
-          isOpen={isOpen}
-          position={"bottom"}
-        >
+        <Modal title="제목" onClose={handleModalClose} isOpen={isOpen} position={'bottom'}>
           ㅇㅇㅇ
         </Modal>
       </>
