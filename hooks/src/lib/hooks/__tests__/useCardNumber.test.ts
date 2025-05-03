@@ -34,7 +34,7 @@ describe("useCardNumber 훅", () => {
     });
 
     expect(result.current.errorMessage).toBe(
-      CARD_NUMBER_ERROR_MESSAGES.INVALID_NUMBER
+      CARD_NUMBER_ERROR_MESSAGES.INVALID_FORMAT
     );
     expect(result.current.isError).toBe(true);
 
