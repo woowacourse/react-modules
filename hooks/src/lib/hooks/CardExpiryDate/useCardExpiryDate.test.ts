@@ -68,8 +68,12 @@ describe("useCardExpiryDate", () => {
     );
   });
 
-  it("키드 만료일에 옳은 숫자 4자리를 입력하면 유효하게 작동해야한다. ", () => {
-    const validInput = "1227";
+  it("월과 년도가 유효한 경우 에러가 발생하지 않는다.", () => {
+    const validMonth = "12";
+    const date = new Date();
+    const nextYear = date.getFullYear() + 1;
+    const validInput = validMonth + nextYear.toString().slice(-2);
+
     const { result } = renderHook(() => useCardExpiryDate());
 
     act(() => {
