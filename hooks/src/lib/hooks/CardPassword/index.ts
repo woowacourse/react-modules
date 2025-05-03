@@ -1,25 +1,18 @@
-import { useState } from "react";
 import { INITIAL_CARD_PASSWORD } from "./constants";
-import { CardPasswordState } from "./types";
 import { validateCardPassword } from "./utils";
+import useCardSingleInput from "../../../hooks/useCardSingleInput";
 
 const useCardPassword = () => {
-  const [cardPassword, setCardPassword] = useState<CardPasswordState>(
-    INITIAL_CARD_PASSWORD
-  );
-
-  const handleCardPasswordChange = (value: string) => {
-    if (value.length > 2) {
-      return;
-    }
-
-    setCardPassword({ value });
-  };
+  const { inputState, handleInputChange, errorState } = useCardSingleInput({
+    initialValue: INITIAL_CARD_PASSWORD,
+    maxLength: 2,
+    validateFn: validateCardPassword,
+  });
 
   return {
-    cardPassword,
-    handleCardPasswordChange,
-    errorState: validateCardPassword(cardPassword.value),
+    cardPassword: inputState,
+    handleCardPasswordChange: handleInputChange,
+    errorState,
   };
 };
 

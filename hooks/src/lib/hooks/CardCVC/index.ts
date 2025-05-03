@@ -1,23 +1,18 @@
-import { useState } from "react";
-import { CardCVCState } from "./types";
 import { INITIAL_CVC_STATE } from "./constants";
 import { validateCardCVC } from "./utils";
+import useCardSingleInput from "../../../hooks/useCardSingleInput";
 
 const useCardCVC = () => {
-  const [cvcState, setCVCState] = useState<CardCVCState>(INITIAL_CVC_STATE);
-
-  const handleCVCStateChange = (value: string) => {
-    if (value.length > 3) {
-      return;
-    }
-
-    setCVCState({ value });
-  };
+  const { inputState, handleInputChange, errorState } = useCardSingleInput({
+    initialValue: INITIAL_CVC_STATE,
+    maxLength: 3,
+    validateFn: validateCardCVC,
+  });
 
   return {
-    cvcState,
-    handleCVCStateChange,
-    errorState: validateCardCVC(cvcState.value),
+    cvcState: inputState,
+    handleCVCStateChange: handleInputChange,
+    errorState,
   };
 };
 

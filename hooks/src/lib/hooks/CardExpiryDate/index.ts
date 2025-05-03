@@ -1,25 +1,18 @@
-import { useState } from "react";
 import { INITIAL_EXPIRY_DATE_STATE } from "./constants";
-import { ExpireDateState } from "./types";
 import { validateCardExpiryDate } from "./utils";
+import useCardSingleInput from "../../../hooks/useCardSingleInput";
 
 const useCardExpiryDate = () => {
-  const [expiryDate, setExpiryDate] = useState<ExpireDateState>(
-    INITIAL_EXPIRY_DATE_STATE
-  );
-
-  const handleExpiryChange = (value: string) => {
-    if (value.length > 4) {
-      return;
-    }
-
-    setExpiryDate({ value });
-  };
+  const { inputState, handleInputChange, errorState } = useCardSingleInput({
+    initialValue: INITIAL_EXPIRY_DATE_STATE,
+    maxLength: 4,
+    validateFn: validateCardExpiryDate,
+  });
 
   return {
-    expiryDate,
-    handleExpiryChange,
-    errorState: validateCardExpiryDate(expiryDate.value),
+    expiryDate: inputState,
+    handleExpiryChange: handleInputChange,
+    errorState,
   };
 };
 
