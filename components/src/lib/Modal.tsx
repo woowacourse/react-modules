@@ -46,14 +46,21 @@ function Modal({
   return (
     <ModalContainer isOpen={isOpen}>
       <ModalOverlay data-testid="modal-overlay" onClick={onClose} />
-      <ModalContent position={position}>
+      <ModalContent
+        position={position}
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="modal-title"
+        aria-describedby="modal-description"
+        aria-hidden={!isOpen}
+      >
         <TitleSection>
-          <TitleText>{title}</TitleText>
+          <TitleText id="modal-title">{title}</TitleText>
           {hasTopCloseButton ? (
             <CloseButton onClick={onClose}>✕</CloseButton>
           ) : null}
         </TitleSection>
-        <MainSection>
+        <MainSection id="modal-description">
           {children}
           {primaryButton ? (
             <Button onClick={onConfirm} text={primaryButtonText} />
