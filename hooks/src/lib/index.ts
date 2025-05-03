@@ -1,3 +1,3 @@
-export { default as useCardCVC } from './useCardCVC';
-export { default as useExpirationDate } from './useExpirationDate';
-export { default as useCardNumber } from './useCardNumber';
+export { default as useCardCVC } from './hooks/useCardCVC';
+export { default as useExpirationDate } from './hooks/useExpirationDate';
+export { default as useCardNumber } from './hooks/useCardNumber';
