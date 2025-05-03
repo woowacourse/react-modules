@@ -13,7 +13,7 @@ export interface ModalProps {
   children: React.ReactNode;
 }
 
-function Modal({ isOpen, onClose, position, children }: ModalProps) {
+function Modal({ isOpen, onClose, position = "center", children }: ModalProps) {
   useEffect(() => {
     if (!isOpen) return;
     const handler = (e: KeyboardEvent) => {
