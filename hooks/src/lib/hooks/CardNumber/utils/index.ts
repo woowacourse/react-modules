@@ -1,24 +1,17 @@
 import { ErrorState } from "../../../types";
 import { CardNumberState } from "../types";
 
-export const getCardNumbersError = (cardNumber: CardNumberState) => {
-  let errorState: ErrorState = {
-    isValid: true,
-    errorMessage: "",
-  };
-
-  Object.values(cardNumber).every(({ value }) => {
-    console.log(cardNumber);
-
-    const { isValid, errorMessage } = getCardNumberError(value);
-    errorState = { isValid, errorMessage };
-
-    if (!isValid) {
-      return false;
+export const getCardNumbersError = (
+  cardNumbers: CardNumberState
+): ErrorState => {
+  for (const { value } of Object.values(cardNumbers)) {
+    const error = getCardNumberError(value);
+    if (!error.isValid) {
+      return error;
     }
-    return true;
-  });
-  return errorState;
+  }
+
+  return { isValid: true, errorMessage: "" };
 };
 
 const getCardNumberError = (cardNumber: string): ErrorState => {
