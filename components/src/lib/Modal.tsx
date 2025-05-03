@@ -63,15 +63,25 @@ const ModalBackdrop = css`
   top: 0;
 `;
 
+const modalPosionStyle = {
+  center: css`
+    width: 100%;
+    min-width: 300px;
+    max-width: 80dvw;
+    border-radius: 8px;
+  `,
+  bottom: css`
+    width: 100dvw;
+    border-radius: 8px 8px 0 0;
+    position: absolute;
+    bottom: 0;
+  `,
+};
+
 const ModalFrame = (position: Position) => css`
+  ${modalPosionStyle[position]}
   background-color: white;
   padding: 20px;
-  width: ${position === 'center' ? '100%' : '100dvw'};
-  min-width: ${position === 'center' ? '300px' : null};
-  max-width: ${position === 'center' ? '80dvw' : null};
-  border-radius: ${position === 'center' ? '8px' : '8px 8px 0 0'};
-  position: ${position === 'bottom' ? 'absolute' : null};
-  bottom: ${position === 'bottom' ? '0' : null};
   display: flex;
   flex-direction: column;
   align-items: center;
