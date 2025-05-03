@@ -49,9 +49,9 @@ function Trigger({
   const { open } = useDialogContext();
 
   return (
-    <div onClick={open} className={className}>
+    <button onClick={open} className={className}>
       {children}
-    </div>
+    </button>
   );
 }
 
