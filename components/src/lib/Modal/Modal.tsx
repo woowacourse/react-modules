@@ -21,7 +21,7 @@ const Modal = ({
   return (
     <>
       {isOpen && (
-        <ModalBackDrop>
+        <ModalBackDrop position={position}>
           <ModalContainer position={position}>
             {children}
             <ButtonWrap>
@@ -41,21 +41,26 @@ const Modal = ({
 
 export default Modal;
 
-const ModalBackDrop = styled.div`
-  position: absolute;
+const ModalBackDrop = styled.div<{ position: "center" | "bottom" }>`
+  position: fixed;
+  top: 0;
+  left: 0;
   z-index: 2;
   width: 100vw;
   height: 100vh;
   background-color: rgba(0, 0, 0, 0.35);
+  display: flex;
+  justify-content: center;
+  align-items: ${(props: { position: "center" | "bottom" }) =>
+    props.position === "center" ? "center" : "flex-end"};
+  padding: 0;
 `;
-
-const ModalContainer = styled.div<{ position: string }>`
+const ModalContainer = styled.div<{ position: "center" | "bottom" }>`
   z-index: 3;
   position: relative;
   display: flex;
   flex-direction: column;
   width: ${(props) => (props.position === "bottom" ? "100%" : "60%")};
-  margin: ${(props) => (props.position === "bottom" ? "auto 0 0 0" : "auto")};
   height: auto;
   padding: 24px 32px;
   border-radius: 8px;
