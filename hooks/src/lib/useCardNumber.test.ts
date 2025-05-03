@@ -9,15 +9,13 @@ test("사용자가 정상적인 값을 입력하면 에러가 발생하지 않�
   const event = {
     target: {
       value: "1111",
-      dataset: {
-        sequence: "first",
-      },
     },
   };
 
   act(() =>
     handleCardNumberChange(
-      event as unknown as React.ChangeEvent<HTMLInputElement>
+      event as unknown as React.ChangeEvent<HTMLInputElement>,
+      "first"
     )
   );
   expect(isValid).toBeTruthy();
@@ -30,14 +28,12 @@ test("사용자가 문자열을 입력하면 값이 바뀌지 않는다.", async
   const event = {
     target: {
       value: "11",
-      dataset: {
-        sequence: "first",
-      },
     },
   };
   act(() => {
     handleCardNumberChange(
-      event as unknown as React.ChangeEvent<HTMLInputElement>
+      event as unknown as React.ChangeEvent<HTMLInputElement>,
+      "first"
     );
   });
 
@@ -53,15 +49,13 @@ test("사용자가 두 글자를 입력하면 에러가 발생한다.", async ()
   const event = {
     target: {
       value: "안녕",
-      dataset: {
-        sequence: "first",
-      },
     },
   };
 
   act(() => {
     handleCardNumberChange(
-      event as unknown as React.ChangeEvent<HTMLInputElement>
+      event as unknown as React.ChangeEvent<HTMLInputElement>,
+      "first"
     );
   });
 

@@ -22,12 +22,12 @@ export default function useCardNumber() {
   );
 
   const handleCardNumberChange = (
-    event: React.ChangeEvent<HTMLInputElement>
+    event: React.ChangeEvent<HTMLInputElement>,
+    sequence: string
   ) => {
     const value = event.target.value;
-    const sequence = event.target.dataset.sequence;
 
-    if (!sequence || !numberRegex.test(value)) return;
+    if (!numberRegex.test(value)) return;
 
     setCardNumber({ ...cardNumber, [sequence]: value });
 

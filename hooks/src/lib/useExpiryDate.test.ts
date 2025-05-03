@@ -17,7 +17,8 @@ test("사용자가 정상적인 월을 입력하면 에러가 발생하지 않�
 
   act(() =>
     handleExpiryDateChange(
-      event as unknown as React.ChangeEvent<HTMLInputElement>
+      event as unknown as React.ChangeEvent<HTMLInputElement>,
+      "month"
     )
   );
   expect(isValid).toBeTruthy();
@@ -38,7 +39,8 @@ test("사용자가 정상적인 연을 입력하면 에러가 발생하지 않�
 
   act(() =>
     handleExpiryDateChange(
-      event as unknown as React.ChangeEvent<HTMLInputElement>
+      event as unknown as React.ChangeEvent<HTMLInputElement>,
+      "year"
     )
   );
   expect(isValid).toBeTruthy();
@@ -51,14 +53,12 @@ test("사용자가 월에 문자를 입력하면 입력이 안된다.", async ()
   const event = {
     target: {
       value: "안녕",
-      dataset: {
-        dateType: "month",
-      },
     },
   };
   act(() => {
     handleExpiryDateChange(
-      event as unknown as React.ChangeEvent<HTMLInputElement>
+      event as unknown as React.ChangeEvent<HTMLInputElement>,
+      "month"
     );
   });
 
@@ -73,14 +73,12 @@ test("사용자가 연에 문자를 입력하면 입력이 안된다.", async ()
   const event = {
     target: {
       value: "안녕",
-      dataset: {
-        dateType: "year",
-      },
     },
   };
   act(() => {
     handleExpiryDateChange(
-      event as unknown as React.ChangeEvent<HTMLInputElement>
+      event as unknown as React.ChangeEvent<HTMLInputElement>,
+      "year"
     );
   });
 
@@ -94,30 +92,26 @@ test("사용자가 과거의 월을 입력했을 때 에러가 발생한다.", a
   const yearEvent = {
     target: {
       value: "25",
-      dataset: {
-        dateType: "year",
-      },
     },
   };
 
   const monthEvent = {
     target: {
       value: "1",
-      dataset: {
-        dateType: "month",
-      },
     },
   };
 
   act(() => {
     result.current.handleExpiryDateChange(
-      monthEvent as unknown as React.ChangeEvent<HTMLInputElement>
+      monthEvent as unknown as React.ChangeEvent<HTMLInputElement>,
+      "month"
     );
   });
   rerender();
   act(() => {
     result.current.handleExpiryDateChange(
-      yearEvent as unknown as React.ChangeEvent<HTMLInputElement>
+      yearEvent as unknown as React.ChangeEvent<HTMLInputElement>,
+      "year"
     );
   });
 
@@ -133,15 +127,13 @@ test("사용자가 과거의 년도를 입력했을 때 에러가 발생한다."
   const event = {
     target: {
       value: "24",
-      dataset: {
-        dateType: "year",
-      },
     },
   };
 
   act(() => {
     handleExpiryDateChange(
-      event as unknown as React.ChangeEvent<HTMLInputElement>
+      event as unknown as React.ChangeEvent<HTMLInputElement>,
+      "year"
     );
   });
 

@@ -18,10 +18,10 @@ export default function useExpiryDate() {
   );
 
   const handleExpiryDateChange = (
-    event: React.ChangeEvent<HTMLInputElement>
+    event: React.ChangeEvent<HTMLInputElement>,
+    dateType: string
   ) => {
     const value = event.target.value;
-    const dateType = event.target.dataset.dateType;
 
     if (!dateType || !numberRegex.test(value)) return;
 
