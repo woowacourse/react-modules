@@ -1,7 +1,7 @@
 {
-  "name": "hooks",
-  "version": "0.0.1",
-  "description": "npm modules",
+  "name": "@eunoia-jaxson/card-field-hooks",
+  "version": "0.0.4",
+  "description": "A set of hooks for managing card fields in React",
   "type": "module",
   "types": "dist/index.d.ts",
   "main": "dist/index.js",
@@ -10,13 +10,14 @@
     "dist"
   ],
   "scripts": {
-    "dev": "vite",
+    "dev": "vite --host",
     "build": "tsc && vite build",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "test": "jest"
   },
   "dependencies": {
+    "@eunoia-jaxson/card-field-hooks": "^0.0.4",
     "react": "^19.1.0",
     "react-dom": "^19.1.0"
   },
@@ -40,5 +41,8 @@
     "typescript": "^5.8.3",
     "vite": "^6.2.6",
     "vite-plugin-dts": "^4.5.3"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }
