@@ -3,7 +3,7 @@ import useStrictCardNumber from "../useStrictCardNumber";
 import { CARD_NUMBER_ERROR_MESSAGES } from "../../validator/constants/error-messages";
 
 describe("useStrictCardNumber hook", () => {
-  test("initial state should have empty card number and error message", () => {
+  test("초기 상태에는 카드 번호와 에러 메시지가 비어 있어야 한다.", () => {
     const { result } = renderHook(() => useStrictCardNumber());
 
     expect(result.current.cardNumber).toBe("");
