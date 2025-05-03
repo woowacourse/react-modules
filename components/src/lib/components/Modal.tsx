@@ -36,6 +36,11 @@ export type Props = {
    */
   onOutsideClick?: (e: React.MouseEvent) => void;
   /**
+   * The z-index of the modal
+   * @default 10
+   */
+  zIndex: number;
+  /**
    * The content of the modal
    */
   children: React.ReactNode;
@@ -48,13 +53,20 @@ export const Modal = ({
   showCloseButton,
   onClose,
   onOutsideClick,
+  zIndex = 10,
   children,
   ...props
 }: Props) => {
   return (
     <Portal isOpen={isOpen}>
       <StyledBackDrop onClick={onOutsideClick} aria-hidden="true" />
-      <StyledModalContainer role="dialog" aria-modal="true" position={position} {...props}>
+      <StyledModalContainer
+        role="dialog"
+        aria-modal="true"
+        position={position}
+        zIndex={zIndex}
+        {...props}
+      >
         <StyledModalHeader aria-label={title}>
           {title}
           {showCloseButton && (
@@ -118,12 +130,12 @@ const positionStyle = {
   `,
 } as const;
 
-const StyledModalContainer = styled.div<Pick<Props, 'position'>>`
+const StyledModalContainer = styled.div<Pick<Props, 'position' | 'zIndex'>>`
   width: 100%;
   max-width: 400px;
   height: auto;
   position: absolute;
-  z-index: 20;
+  z-index: ${({ zIndex }) => zIndex ?? 10};
   background-color: white;
   padding: 24px 32px;
   ${({ position }) => positionStyle[position ?? 'center']};
