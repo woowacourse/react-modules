@@ -1,13 +1,14 @@
 {
   "name": "db0111-react-modal",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "react-modal",
   "type": "module",
   "types": "dist/index.d.ts",
   "main": "dist/index.js",
   "module": "dist/index.js",
   "files": [
-    "dist"
+    "dist",
+    "types"
   ],
   "scripts": {
     "dev": "vite",
