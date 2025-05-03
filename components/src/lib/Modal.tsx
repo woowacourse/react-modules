@@ -120,7 +120,7 @@ const ModalOverlay = styled.div`
   background-color: rgba(0, 0, 0, 0.35);
 `;
 
-const CloseButton = styled.div`
+const CloseButton = styled.button`
   cursor: pointer;
 `;
 
