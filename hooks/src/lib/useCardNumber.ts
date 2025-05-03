@@ -1,3 +1,4 @@
+import { ERROR_MESSAGE } from "../constants";
 import { useForm } from "../hooks/useForm";
 import { CardNumberInput } from "../types/input";
 
@@ -18,22 +19,22 @@ export default function useCardNumber() {
       first: {
         required: true,
         length: 4,
-        errorMessage: "카드 번호는 4자리의 숫자로 입력해주세요.",
+        errorMessage: ERROR_MESSAGE.cardNumber,
       },
       second: {
         required: true,
         length: 4,
-        errorMessage: "카드 번호는 4자리의 숫자로 입력해주세요.",
+        errorMessage: ERROR_MESSAGE.cardNumber,
       },
       third: {
         required: true,
         length: 4,
-        errorMessage: "카드 번호는 4자리의 숫자로 입력해주세요.",
+        errorMessage: ERROR_MESSAGE.cardNumber,
       },
       fourth: {
         required: true,
         length: 4,
-        errorMessage: "카드 번호는 4자리의 숫자로 입력해주세요.",
+        errorMessage: ERROR_MESSAGE.cardNumber,
       },
     },
   });

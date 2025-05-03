@@ -16,7 +16,7 @@ export default function useCvcNumber() {
       cvc: {
         required: true,
         length: 3,
-        errorMessage: ERROR_MESSAGE.cardCVCNumber.length,
+        errorMessage: ERROR_MESSAGE.cardCVCNumber,
       },
     },
   });

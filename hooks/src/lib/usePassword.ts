@@ -16,8 +16,7 @@ export default function usePassword() {
       password: {
         required: true,
         length: 2,
-        errorMessage:
-          ERROR_MESSAGE.cardPassword?.length || "비밀번호는 2자여야 합니다.",
+        errorMessage: ERROR_MESSAGE.cardPassword,
       },
     },
   });
