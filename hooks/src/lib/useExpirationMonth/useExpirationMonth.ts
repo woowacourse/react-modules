@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { checkNumber, checkValidLength } from "../validator/inputValidator";
 
 const MONTH_VALID_LENGTH = 2;
 
@@ -12,35 +13,30 @@ const useExpirationMonth = () => {
   const [isValid, setIsValid] = useState<boolean>(true);
   const [errorMessage, setErrorMessage] = useState<string>("");
 
-  const isValidLength = (value: string) => {
-    return value.length < MONTH_VALID_LENGTH;
+  const checkMonthRange = (value: string) => {
+    return Number(value) >= 1 && Number(value) <= 12;
   };
 
-  const isNumber = (value: string) => {
-    return !/^\d+$/.test(value);
-  };
-
-  const isValidRange = (value: string) => {
-    return Number(value) < 1 || Number(value) > 12;
-  };
-
-  const validate = () => {
-    if (!isValidLength) {
+  const validate = (value: string) => {
+    if (!checkValidLength(value, MONTH_VALID_LENGTH)) {
       setErrorMessage(ERROR_MESSAGE.INVALID_MONTH_FORMAT);
       setIsValid(false);
       return;
     }
-    if (!isNumber) {
+    if (!checkNumber(value)) {
       setErrorMessage(ERROR_MESSAGE.INVALID_NUMBER);
       setIsValid(false);
       return;
     }
 
-    if (!isValidRange) {
+    if (!checkMonthRange(value)) {
       setErrorMessage(ERROR_MESSAGE.INVALID_MONTH_RANGE);
       setIsValid(false);
       return;
     }
+
+    setErrorMessage("");
+    setIsValid(true);
   };
 
   return { isValid, errorMessage, validate };
