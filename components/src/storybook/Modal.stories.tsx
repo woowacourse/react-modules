@@ -29,6 +29,8 @@ export const Default: Story = {
     showCloseButton: true,
     onClose: () => {},
     onOutsideClick: () => {},
+    maxWidth: '400px',
+    zIndex: 10,
     children: <></>,
   },
   argTypes: {
@@ -58,6 +60,91 @@ export const Default: Story = {
     return (
       <div>
         <button onClick={handleOpenModal}>버튼</button>
+        <Modal
+          {...args}
+          isOpen={isOpen}
+          onClose={handleCloseModal}
+          onOutsideClick={handleOutsideClick}
+        >
+          세라와 로건의 페어 프로그래밍
+        </Modal>
+      </div>
+    );
+  },
+};
+
+export const NoCloseButton: Story = {
+  args: {
+    isOpen: false,
+    position: 'center',
+    title: 'close 버튼 없는 버전 모달',
+    showCloseButton: false,
+    onClose: () => {},
+    children: <></>,
+  },
+
+  render: (args) => {
+    const { isOpen, handleOpenModal, handleCloseModal, handleOutsideClick } = useModal();
+
+    return (
+      <div>
+        <button onClick={handleOpenModal}>close 버튼 없는 버전 모달 버튼</button>
+        <Modal
+          {...args}
+          isOpen={isOpen}
+          onClose={handleCloseModal}
+          onOutsideClick={handleOutsideClick}
+        >
+          세라와 로건의 페어 프로그래밍
+        </Modal>
+      </div>
+    );
+  },
+};
+
+export const PositionBottom: Story = {
+  args: {
+    isOpen: false,
+    title: 'Bottom 모달',
+    position: 'bottom',
+    showCloseButton: true,
+    onClose: () => {},
+    children: <></>,
+  },
+  render: (args) => {
+    const { isOpen, handleOpenModal, handleCloseModal, handleOutsideClick } = useModal();
+
+    return (
+      <div>
+        <button onClick={handleOpenModal}>Bottom 모달 버튼</button>
+        <Modal
+          {...args}
+          isOpen={isOpen}
+          onClose={handleCloseModal}
+          onOutsideClick={handleOutsideClick}
+        >
+          세라와 로건의 페어 프로그래밍
+        </Modal>
+      </div>
+    );
+  },
+};
+
+export const PositionBottomNoCloseButton: Story = {
+  args: {
+    isOpen: false,
+    title: 'Bottom 모달',
+    position: 'bottom',
+    showCloseButton: false,
+    onClose: () => {},
+    children: <></>,
+  },
+  render: (args) => {
+    const { isOpen, handleOpenModal, handleCloseModal, handleOutsideClick } = useModal();
+
+    return (
+      <div>
+        <button onClick={handleOpenModal}>Bottom close 버튼 없는 버전 모달 버튼</button>
         <Modal
           {...args}
           isOpen={isOpen}
