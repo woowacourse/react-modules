@@ -1,10 +1,18 @@
 import { renderHook, act } from '@testing-library/react';
-import useCardPasswordValidate from './useCardPasswordValidate';
+
+import useCardPasswordValidate, {
+  CardPasswordValidateResult
+} from './useCardPasswordValidate';
 
 describe('useCardPasswordValidate', () => {
-  it('숫자로 이루어진 2자리 값이 들어오면 isValid가 true이고 에러 메시지가 null이다.', () => {
-    const { result } = renderHook(() => useCardPasswordValidate());
+  let result: { current: CardPasswordValidateResult };
 
+  beforeEach(() => {
+    const rendered = renderHook(() => useCardPasswordValidate());
+    result = rendered.result;
+  });
+
+  it('숫자로 이루어진 2자리 값이 들어오면 isValid가 true이고 에러 메시지가 null이다.', () => {
     act(() => {
       result.current.validateCardPassword('12');
     });
@@ -14,8 +22,6 @@ describe('useCardPasswordValidate', () => {
   });
 
   it('숫자로 이루어지지 않은 값이 들어오면 isValid가 false이고 에러 메시지가 나온다.', () => {
-    const { result } = renderHook(() => useCardPasswordValidate());
-
     act(() => {
       result.current.validateCardPassword('1a');
     });
@@ -25,8 +31,6 @@ describe('useCardPasswordValidate', () => {
   });
 
   it('2자리 이상의 값이 들어오면 isValid가 false이고 에러 메시지가 나온다.', () => {
-    const { result } = renderHook(() => useCardPasswordValidate());
-
     act(() => {
       result.current.validateCardPassword('123');
     });

@@ -1,11 +1,19 @@
 import { renderHook, act } from '@testing-library/react';
-import useCardExpireDateValidate from './useCardExpireDateValidate';
+
+import useCardExpireDateValidate, {
+  CardExpireDateValidateResult
+} from './useCardExpireDateValidate';
 
 describe('CardExpireDateValidate', () => {
+  let result: { current: CardExpireDateValidateResult };
+
+  beforeEach(() => {
+    const rendered = renderHook(() => useCardExpireDateValidate());
+    result = rendered.result;
+  });
+
   describe('숫자로 이루어진 2자리 값이 들어오면 isValid가 true이고 에러 메시지가 null이다.', () => {
     it('month', () => {
-      const { result } = renderHook(() => useCardExpireDateValidate());
-
       act(() => {
         result.current.validateCardExpireDate(
           {
@@ -21,8 +29,6 @@ describe('CardExpireDateValidate', () => {
     });
 
     it('year', () => {
-      const { result } = renderHook(() => useCardExpireDateValidate());
-
       act(() => {
         result.current.validateCardExpireDate(
           {
@@ -40,8 +46,6 @@ describe('CardExpireDateValidate', () => {
 
   describe('숫자로 이루어지지 않은 값이 들어오면 isValid가 false이고 에러 메시지가 나온다.', () => {
     it('month', () => {
-      const { result } = renderHook(() => useCardExpireDateValidate());
-
       act(() => {
         result.current.validateCardExpireDate(
           {
@@ -57,8 +61,6 @@ describe('CardExpireDateValidate', () => {
     });
 
     it('year', () => {
-      const { result } = renderHook(() => useCardExpireDateValidate());
-
       act(() => {
         result.current.validateCardExpireDate(
           {
@@ -76,8 +78,6 @@ describe('CardExpireDateValidate', () => {
 
   describe('숫자로 이루어진 2자리 값이 들어오면 범위를 검증하여 유효하지 않으면 isValid가 false이고 에러 메시지가 나온다.', () => {
     it('month', () => {
-      const { result } = renderHook(() => useCardExpireDateValidate());
-
       act(() => {
         result.current.validateCardExpireDate(
           {
@@ -95,8 +95,6 @@ describe('CardExpireDateValidate', () => {
     });
 
     it('year', () => {
-      const { result } = renderHook(() => useCardExpireDateValidate());
-
       act(() => {
         result.current.validateCardExpireDate(
           {
@@ -114,8 +112,6 @@ describe('CardExpireDateValidate', () => {
 
   describe('년도가 올해인데 월이 현재 월보다 이전이면 month의 isValid가 false이고 에러 메시지가 나온다.', () => {
     it('month', () => {
-      const { result } = renderHook(() => useCardExpireDateValidate());
-
       act(() => {
         result.current.validateCardExpireDate(
           {
@@ -131,8 +127,6 @@ describe('CardExpireDateValidate', () => {
     });
 
     it('year', () => {
-      const { result } = renderHook(() => useCardExpireDateValidate());
-
       act(() => {
         result.current.validateCardExpireDate(
           {

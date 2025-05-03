@@ -1,11 +1,18 @@
 import { renderHook, act } from '@testing-library/react';
 
-import useCardNumbersValidate from './useCardNumbersValidate';
+import useCardNumbersValidate, {
+  CardNumberValidateResult
+} from './useCardNumbersValidate';
 
 describe('useCardNumbersValidate', () => {
-  it('숫자로 이루어진 4자리 값이 들어오면 isValid가 true이고 에러 메시지가 null이다.', () => {
-    const { result } = renderHook(() => useCardNumbersValidate());
+  let result: { current: CardNumberValidateResult };
 
+  beforeEach(() => {
+    const rendered = renderHook(() => useCardNumbersValidate());
+    result = rendered.result;
+  });
+
+  it('숫자로 이루어진 4자리 값이 들어오면 isValid가 true이고 에러 메시지가 null이다.', () => {
     act(() => {
       result.current.validateCardNumbers('1234', 'first');
     });
@@ -15,8 +22,6 @@ describe('useCardNumbersValidate', () => {
   });
 
   it('숫자로 이루어지지 않은 값이 들어오면 isValid가 false이고 에러 메시지가 나온다.', () => {
-    const { result } = renderHook(() => useCardNumbersValidate());
-
     act(() => {
       result.current.validateCardNumbers('-1', 'first');
     });
@@ -26,8 +31,6 @@ describe('useCardNumbersValidate', () => {
   });
 
   it('4자리 이상의 값이 들어오면 isValid가 false이고 에러 메시지가 나온다.', () => {
-    const { result } = renderHook(() => useCardNumbersValidate());
-
     act(() => {
       result.current.validateCardNumbers('12345', 'third');
     });
