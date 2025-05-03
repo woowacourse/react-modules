@@ -2,6 +2,11 @@ export type FieldErrorCode = {
   cvc: "INVALID_LENGTH" | "INVALID_NUMBER";
   password: "INVALID_LENGTH" | "INVALID_FORMAT" | "INVALID_CHARACTER";
   cardNumber: "INVALID_LENGTH" | "INVALID_FORMAT" | "INVALID_NUMBER";
+  strictCardNumber:
+    | "INVALID_LENGTH"
+    | "INVALID_FORMAT"
+    | "INVALID_NUMBER"
+    | "INVALID_CHECKSUM";
   expiryDate:
     | "INVALID_FORMAT"
     | "INVALID_MONTH"

@@ -3,6 +3,7 @@ import {
   validateCardNumber,
   validateExpiryDate,
   validatePassword,
+  validateStrictCardNumber,
 } from "../validators";
 
 describe("유효성 검사기", () => {
@@ -114,6 +115,26 @@ describe("유효성 검사기", () => {
         expect.objectContaining({
           field: "expiryDate",
           code: "INVALID_FORMAT",
+        })
+      );
+    });
+  });
+
+  // 엄격한 카드 번호 테스트
+  describe("validateStrictCardNumber", () => {
+    it("유효한 카드 번호에 대해 유효함을 반환해야 함", () => {
+      const result = validateStrictCardNumber("4111111111111111");
+      expect(result.valid).toBe(true);
+      expect(result.errors).toHaveLength(0);
+    });
+
+    it("유효하지 않은 카드 번호에 대해 유효하지 않음을 반환해야 함", () => {
+      const result = validateStrictCardNumber("4111111111111121");
+      expect(result.valid).toBe(false);
+      expect(result.errors).toContainEqual(
+        expect.objectContaining({
+          field: "strictCardNumber",
+          code: "INVALID_CHECKSUM",
         })
       );
     });

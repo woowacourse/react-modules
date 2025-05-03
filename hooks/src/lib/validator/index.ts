@@ -23,20 +23,25 @@ function createValidator<T extends ValidateField>(
   rules: ValidationRule<T>[]
 ): (value: FieldValueType[T]) => ValidationResult {
   return (value: FieldValueType[T]) => {
-    const v = value.trim();
-    const errors = rules
-      .map(({ check, errorMeta }) => {
-        if (!check(v)) {
-          // 타입 안정성이 확보가 된 상황인데.. 꼭 코드 수를 늘릴 필요는 없어서 이렇게 했습니다.
-          const field = errorMeta.field;
-          const code = errorMeta.code;
-          const message = (validationRules[field] as any)[code].message;
-          return { ...errorMeta, message };
-        }
-        return null;
-      })
-      .filter((x): x is NonNullable<typeof x> => x !== null);
+    if (value === "") {
+      return { errors: [], valid: true };
+    }
+
+    const errors: ValidationResult["errors"] = [];
+    rules.forEach(({ check, errorMeta }) => {
+      if (!check(value)) {
+        const { field, code } = errorMeta;
+        console.log(`Rules for field:`, validationRules[field]);
+        const message = (validationRules[field] as any)[code]?.message;
+
+        console.log(`Message:`, (validationRules[field] as any)[code]?.message);
+
+        errors.push({ field, code, message });
+      }
+    });
+
     return { valid: errors.length === 0, errors };
   };
 }
+
 export { createValidator, type ValidationRule, type ValidationResult };
