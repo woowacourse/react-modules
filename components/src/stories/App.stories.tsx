@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { expect, userEvent, within } from "@storybook/test";
+import { expect, screen, userEvent, within } from "@storybook/test";
 import App from "../App";
 
 const meta = {
@@ -17,7 +17,7 @@ export const OpenModal: Story = {
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
 
-    const modalText = canvas.getByText("모달열림");
+    const modalText = screen.queryByText("모달열림");
     if (modalText) {
       expect(modalText).not.toBeVisible();
     }
@@ -27,7 +27,7 @@ export const OpenModal: Story = {
     });
     await userEvent.click(openButton);
 
-    expect(canvas.getByText("모달열림")).toBeVisible();
+    expect(screen.getByText("모달열림")).toBeVisible();
   },
 };
 
@@ -40,17 +40,17 @@ export const CloseByButton: Story = {
     });
     await userEvent.click(openButton);
 
-    const modalText = canvas.getByText("모달열림");
+    const modalText = canvas.queryByText("모달열림");
     if (modalText) {
       expect(modalText).toBeVisible();
     }
 
-    const closeButton = canvas.getByRole("img", {
-      name: "닫기 버튼",
+    const closeButton = screen.getByRole("button", {
+      name: "✕",
     });
     await userEvent.click(closeButton);
 
-    expect(canvas.getByText("모달열림")).not.toBeVisible();
+    expect(screen.queryByText("모달열림")).not.toBeInTheDocument();
   },
 };
 
@@ -63,15 +63,15 @@ export const CloseByOverlayClick: Story = {
     });
     await userEvent.click(openButton);
 
-    const modalText = canvas.getByText("모달열림");
+    const modalText = screen.queryByText("모달열림");
     if (modalText) {
       expect(modalText).toBeVisible();
     }
 
-    const overlay = canvas.getByTestId("modal-overlay");
+    const overlay = screen.getByTestId("modal-overlay");
     await userEvent.click(overlay);
 
-    expect(canvas.getByText("모달열림")).not.toBeVisible();
+    expect(screen.queryByText("모달열림")).not.toBeInTheDocument();
   },
 };
 
@@ -84,13 +84,13 @@ export const CloseByEsc: Story = {
     });
     await userEvent.click(openButton);
 
-    const modalText = canvas.getByText("모달열림");
+    const modalText = screen.queryByText("모달열림");
     if (modalText) {
       expect(modalText).toBeVisible();
     }
 
     await userEvent.keyboard("{Escape}");
 
-    expect(canvas.getByText("모달열림")).not.toBeVisible();
+    expect(screen.queryByText("모달열림")).not.toBeInTheDocument();
   },
 };
