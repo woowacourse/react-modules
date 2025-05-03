@@ -35,7 +35,6 @@ const positionBottom = css`
   width: 100vw;
   bottom: 0;
   left: 0;
-  right: 20px;
   animation: 0.5s ease ${slideUpBottom};
 `;
 
