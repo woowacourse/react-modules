@@ -1,6 +1,6 @@
 import { createContext, useContext, useId } from "react";
 import { createPortal } from "react-dom";
-import useBoolean from "./hooks/useBoolean";
+import useModalState from "./hooks/useModalState";
 import useEscapeModal from "./hooks/useEscapeModal";
 import {
   StyledCloseButton,
@@ -10,16 +10,16 @@ import {
 } from "./Dialog.css";
 
 interface DialogContextType {
-  open: () => void;
-  close: () => void;
+  modalOpen: () => void;
+  modalClose: () => void;
   isOpen: boolean;
   position: "center" | "bottom";
 }
 
 export const DialogContext = createContext<DialogContextType>({
   isOpen: false,
-  open: () => {},
-  close: () => {},
+  modalOpen: () => {},
+  modalClose: () => {},
   position: "center",
 });
 
@@ -30,10 +30,10 @@ export function Dialog({
   children: React.ReactNode;
   position?: "bottom" | "center";
 }) {
-  const { value: isOpen, setTrue: open, setFalse: close } = useBoolean(false);
+  const { isOpen, modalOpen, modalClose } = useModalState(false);
 
   return (
-    <DialogContext.Provider value={{ isOpen, open, close, position }}>
+    <DialogContext.Provider value={{ isOpen, modalOpen, modalClose, position }}>
       {children}
     </DialogContext.Provider>
   );
@@ -54,10 +54,10 @@ function Trigger({
   children: React.ReactNode;
   className?: string;
 }) {
-  const { open } = useDialogContext();
+  const { modalOpen } = useDialogContext();
 
   return (
-    <button onClick={open} className={className}>
+    <button onClick={modalOpen} className={className}>
       {children}
     </button>
   );
@@ -75,8 +75,8 @@ function Overlay({
   children: React.ReactNode;
   className?: string;
 }) {
-  const { close } = useDialogContext();
-  const { handleClickOverlay } = useEscapeModal(close);
+  const { modalClose } = useDialogContext();
+  const { handleClickOverlay } = useEscapeModal(modalClose);
   const id = useId();
 
   return (
@@ -107,10 +107,10 @@ function CloseButton({
   children: React.ReactNode;
   className?: string;
 }) {
-  const { close } = useDialogContext();
+  const { modalClose } = useDialogContext();
 
   return (
-    <StyledCloseButton onClick={close} className={className}>
+    <StyledCloseButton onClick={modalClose} className={className}>
       {children}
     </StyledCloseButton>
   );
