@@ -1,6 +1,6 @@
-import { useState } from 'react';
-import { NO_ERROR } from './constants';
-import { CheckValidationType, UseErrorProps } from './types';
+import { useState } from "react";
+import { NO_ERROR } from "./constants";
+import { CheckValidationType, UseErrorProps } from "./types";
 
 export default function useError<T extends Record<string, string>>({
   initError,
@@ -12,9 +12,13 @@ export default function useError<T extends Record<string, string>>({
     const validationFns = getValidationFns(length, value);
     const validation = validationFns.find((v) => v.condition());
     setError((prev: T) => {
+      const errorMsg = validation ? validation.errorMsg : NO_ERROR;
+
+      if (prev[type] === errorMsg) return prev;
+
       return {
         ...prev,
-        [type]: validation ? validation.errorMsg : NO_ERROR,
+        [type]: errorMsg,
       };
     });
   }
