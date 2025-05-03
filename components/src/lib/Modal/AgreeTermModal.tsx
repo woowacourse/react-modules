@@ -82,16 +82,3 @@ const Title = styled.h2`
   font-size: 18px;
   font-weight: 700;
 `;
-
-const AgreementButton = styled.button`
-  width: 100%;
-  padding: 8px 0px;
-  border: none;
-  text-align: center;
-  font-size: 15px;
-  font-weight: 700;
-  border-radius: 5px;
-  color: #fff;
-  background: #333;
-  cursor: pointer;
-`;
