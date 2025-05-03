@@ -20,6 +20,8 @@ pnpm add bunju-summit-modal
 - children: 모달 내부에 들어갈 요소
 
 ```ts
+import { ReactNode } from "react";
+
 interface ModalProps {
   title: string;
   onRequestClose: () => void;
