@@ -2,7 +2,7 @@ import { renderHook, act } from '@testing-library/react';
 import { useCardExpirationInput } from '../src/lib/useCardExpirationInput';
 
 describe('useCardExpirationInput custom hook 테스트', () => {
-  it('카드 유효기간을 입력하면, 에러가 발생하지 않는다.', () => {
+  it('카드 유효기간 2자리를 입력하면, 에러가 발생하지 않는다.', () => {
     const { result } = renderHook(() => useCardExpirationInput());
     act(() => {
       result.current.handleCardExpirationChange('month', '12');
