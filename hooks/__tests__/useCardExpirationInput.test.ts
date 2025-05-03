@@ -13,7 +13,7 @@ describe('useCardExpirationInput custom hook 테스트', () => {
     expect(result.current.cardExpiration.month).toBe('12');
     expect(result.current.cardExpiration.year).toBe('25');
   });
-  it('숫자가 아닌 입력에는 에러가 발생한다.', () => {
+  it('문자가 입력되었을 때, 에러가 발생한다.', () => {
     const { result } = renderHook(() => useCardExpirationInput());
     act(() => {
       result.current.handleCardExpirationChange('month', '12a');

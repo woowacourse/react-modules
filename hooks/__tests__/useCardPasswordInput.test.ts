@@ -11,7 +11,7 @@ describe('useCardPasswordInput custom hook 테스트', () => {
     expect(result.current.cardPassword).toBe('12');
   });
 
-  it('숫자가 아닌 입력에는 에러가 발생한다.', () => {
+  it('문자가 입력되었을 때, 에러가 발생한다.', () => {
     const { result } = renderHook(() => useCardPasswordInput());
     act(() => {
       result.current.handleCardPasswordChange('12a');
