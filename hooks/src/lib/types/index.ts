@@ -6,3 +6,8 @@ export interface ErrorState {
 export interface BaseInputState {
   value: string;
 }
+
+export type ValidationRule = {
+  condition: (value: string) => boolean;
+  errorMessage: string;
+};

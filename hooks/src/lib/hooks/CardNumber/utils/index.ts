@@ -1,4 +1,8 @@
-import { ErrorState } from "../../../types";
+import {
+  commonConditions,
+  getErrorByRules,
+} from "../../../../utils/validation";
+import { ErrorState, ValidationRule } from "../../../types";
 import { CardNumberState } from "../types";
 
 export const getCardNumbersError = (
@@ -14,23 +18,17 @@ export const getCardNumbersError = (
   return { isValid: true, errorMessage: "" };
 };
 
+const cardNumberValidationRules: ValidationRule[] = [
+  {
+    condition: commonConditions.isNumeric,
+    errorMessage: "숫자만 입력해주세요.",
+  },
+  {
+    condition: commonConditions.hasLength(4),
+    errorMessage: "카드 번호는 4자리여야 합니다.",
+  },
+];
+
 const getCardNumberError = (cardNumber: string): ErrorState => {
-  if (isNaN(Number(cardNumber))) {
-    return {
-      isValid: false,
-      errorMessage: "숫자만 입력해주세요.",
-    };
-  }
-
-  if (cardNumber.length !== 4) {
-    return {
-      isValid: false,
-      errorMessage: "카드 번호는 4자리여야 합니다.",
-    };
-  }
-
-  return {
-    isValid: true,
-    errorMessage: "",
-  };
+  return getErrorByRules(cardNumber, cardNumberValidationRules);
 };
