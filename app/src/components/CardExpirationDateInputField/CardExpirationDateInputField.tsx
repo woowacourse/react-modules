@@ -26,15 +26,7 @@ export default function CardExpirationDate({ register, cardExpirationDateErrors 
           data-expiry="month"
           data-sequence="6"
           inputMode="numeric"
-          {...register('month', {
-            inputRegex: /^[0-9]*$/,
-            validation: {
-              required: true,
-              length: 2,
-              errorMessage: ERROR_MESSAGE.cardExpirationDate.month,
-              validateRegex: /^(0?[1-9]|1[0-2])$/,
-            },
-          })}
+          {...register('month')}
         />
         <Input
           placeholder="YY"

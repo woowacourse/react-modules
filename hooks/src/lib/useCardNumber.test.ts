@@ -1,62 +1,60 @@
-import '@testing-library/jest-dom';
-import useCardNumber from './useCardNumber';
 import { renderHook, act } from '@testing-library/react';
+import useCardNumber from './useCardNumber';
 
-test('사용자가 정상적인 값을 입력하면 에러가 발생하지 않는다.', async () => {
-  const { result } = renderHook(() => useCardNumber());
+function mockInputEvent(value: string) {
+  return {
+    target: { value },
+    preventDefault: () => {},
+    stopPropagation: () => {},
+  } as unknown as React.ChangeEvent<HTMLInputElement>;
+}
 
-  const { isValid, handleCardNumberChange } = result.current;
-
-  const event = {
-    target: {
-      value: '1111',
-      dataset: {
-        sequence: 'first',
-      },
-    },
-  };
-
-  act(() => handleCardNumberChange(event as unknown as React.ChangeEvent<HTMLInputElement>));
-  expect(isValid).toBeTruthy();
-});
-
-test('사용자가 문자열을 입력하면 값이 바뀌지 않는다.', async () => {
-  const { result } = renderHook(() => useCardNumber());
-  const { handleCardNumberChange } = result.current;
-
-  const event = {
-    target: {
-      value: '11',
-      dataset: {
-        sequence: 'first',
-      },
-    },
-  };
-  act(() => {
-    handleCardNumberChange(event as unknown as React.ChangeEvent<HTMLInputElement>);
+describe('useCardNumber', () => {
+  it('초기값은 빈 문자열이다', () => {
+    const { result } = renderHook(() => useCardNumber());
+    expect(result.current.cardNumber).toEqual({ first: '', second: '', third: '', fourth: '' });
+    expect(result.current.cardNumberErrors).toEqual({ first: '', second: '', third: '', fourth: '' });
+    expect(result.current.isCardNumberIsValid).toBe(false);
   });
 
-  expect(result.current.cardNumber.first).toBe('11');
-  expect(result.current.isValid).toBeFalsy();
-  expect(result.current.errorMessage.first).toBe('4글자를 입력해 주세요.');
-});
+  it('각 자리 4글자 숫자를 입력하면 isCardNumberIsValid가 true가 된다', () => {
+    const { result } = renderHook(() => useCardNumber());
+    const { cardNumberRegister } = result.current;
 
-test('사용자가 두 글자를 입력하면 에러가 발생한다.', async () => {
-  const { result } = renderHook(() => useCardNumber());
-  const { handleCardNumberChange } = result.current;
+    act(() => {
+      cardNumberRegister('first').onChange(mockInputEvent('1234'));
+      cardNumberRegister('second').onChange(mockInputEvent('5678'));
+      cardNumberRegister('third').onChange(mockInputEvent('9012'));
+      cardNumberRegister('fourth').onChange(mockInputEvent('3456'));
+    });
 
-  const event = {
-    target: {
-      value: '안녕',
-      dataset: {
-        sequence: 'first',
-      },
-    },
-  };
-
-  act(() => {
-    handleCardNumberChange(event as unknown as React.ChangeEvent<HTMLInputElement>);
+    expect(result.current.cardNumber).toEqual({ first: '1234', second: '5678', third: '9012', fourth: '3456' });
+    expect(result.current.isCardNumberIsValid).toBe(true);
   });
 
-  expect(result.current.cardNumber.first).toBe('');
+  it('4글자가 아닌 값이 있으면 isCardNumberIsValid가 false가 된다', () => {
+    const { result } = renderHook(() => useCardNumber());
+    const { cardNumberRegister } = result.current;
+
+    act(() => {
+      cardNumberRegister('first').onChange(mockInputEvent('12'));
+      cardNumberRegister('second').onChange(mockInputEvent('5678'));
+      cardNumberRegister('third').onChange(mockInputEvent('9012'));
+      cardNumberRegister('fourth').onChange(mockInputEvent('3456'));
+    });
+
+    expect(result.current.isCardNumberIsValid).toBe(false);
+    expect(result.current.cardNumberErrors.first).not.toBe('');
+  });
+
+  it('숫자가 아닌 값이 입력되면 값이 반영되지 않는다', () => {
+    const { result, rerender } = renderHook(() => useCardNumber());
+    const { cardNumberRegister } = result.current;
+
+    act(() => {
+      cardNumberRegister('first').onChange(mockInputEvent('abcd'));
+    });
+
+    expect(result.current.cardNumber.first).toBe('');
+  });
 });

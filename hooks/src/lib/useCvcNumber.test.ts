@@ -1,52 +1,54 @@
-import '@testing-library/jest-dom';
 import { renderHook, act } from '@testing-library/react';
 import useCvcNumber from './useCvcNumber';
 
-test('사용자가 정상적인 값을 입력하면 에러가 발생하지 않는다.', async () => {
-  const { result } = renderHook(() => useCvcNumber());
-  const { isValid, handleCvcNumberChange } = result.current;
+function mockInputEvent(value: string) {
+  return {
+    target: { value },
+    preventDefault: () => {},
+    stopPropagation: () => {},
+  } as unknown as React.ChangeEvent<HTMLInputElement>;
+}
 
-  const event = {
-    target: {
-      value: '111',
-    },
-  };
-
-  act(() => handleCvcNumberChange(event as unknown as React.ChangeEvent<HTMLInputElement>));
-  expect(isValid).toBeTruthy();
-});
-
-test('사용자가 두 글자를 입력하면 에러가 발생한다.', async () => {
-  const { result } = renderHook(() => useCvcNumber());
-  const { handleCvcNumberChange } = result.current;
-
-  const event = {
-    target: {
-      value: '11',
-    },
-  };
-  act(() => {
-    handleCvcNumberChange(event as unknown as React.ChangeEvent<HTMLInputElement>);
+describe('useCvcNumber', () => {
+  it('초기값은 빈 문자열이다', () => {
+    const { result } = renderHook(() => useCvcNumber());
+    expect(result.current.cvcNumber).toEqual({ cvc: '' });
+    expect(result.current.cvcNumberErrors).toEqual({ cvc: '' });
+    expect(result.current.isCvcNumberIsValid).toBe(false);
   });
 
-  expect(result.current.cvcNumber).toBe('11');
-  expect(result.current.isValid).toBeFalsy();
-  expect(result.current.errorMessage).toBe('3글자를 입력해 주세요.');
-});
+  it('3자리 숫자를 입력하면 isCvcNumberIsValid가 true가 된다', () => {
+    const { result } = renderHook(() => useCvcNumber());
+    const { cvcNumberRegister } = result.current;
 
-test('사용자가 문자열을 입력하면 값이 바뀌지 않는다.', async () => {
-  const { result } = renderHook(() => useCvcNumber());
-  const { handleCvcNumberChange } = result.current;
+    act(() => {
+      cvcNumberRegister('cvc').onChange(mockInputEvent('123'));
+    });
 
-  const event = {
-    target: {
-      value: '안녕',
-    },
-  };
-
-  act(() => {
-    handleCvcNumberChange(event as unknown as React.ChangeEvent<HTMLInputElement>);
+    expect(result.current.cvcNumber.cvc).toBe('123');
+    expect(result.current.isCvcNumberIsValid).toBe(true);
   });
 
-  expect(result.current.cvcNumber).toBe('');
+  it('3자리가 아니면 isCvcNumberIsValid가 false가 된다', () => {
+    const { result } = renderHook(() => useCvcNumber());
+    const { cvcNumberRegister } = result.current;
+
+    act(() => {
+      cvcNumberRegister('cvc').onChange(mockInputEvent('12'));
+    });
+
+    expect(result.current.isCvcNumberIsValid).toBe(false);
+    expect(result.current.cvcNumberErrors.cvc).not.toBe('');
+  });
+
+  it('숫자가 아닌 값이 입력되면 값이 반영되지 않는다', () => {
+    const { result } = renderHook(() => useCvcNumber());
+    const { cvcNumberRegister } = result.current;
+
+    act(() => {
+      cvcNumberRegister('cvc').onChange(mockInputEvent('abc'));
+    });
+
+    expect(result.current.cvcNumber.cvc).toBe('');
+  });
 });
