@@ -12,7 +12,7 @@ export const validateCVC = ({ input, setIsValid, setErrorMessage }: ValidateCVCP
   }
   if (input.length !== 3) {
     setIsValid(false);
-    setErrorMessage('3글자의 숫자를 입력해 주세요.');
+    setErrorMessage('3자리 숫자를 입력해 주세요.');
     return false;
   }
 
