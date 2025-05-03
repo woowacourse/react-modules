@@ -7,25 +7,25 @@ import useKeyDown from "@/hooks/useKeyDown";
 export type ModalPositionType = "center" | "bottom";
 interface ModalProps {
   title: string;
-  onClose: () => void;
+  onRequestClose: () => void;
   position?: ModalPositionType;
 }
 
 function Modal({
   title,
-  onClose,
+  onRequestClose,
   children,
   position = "bottom",
 }: PropsWithChildren<ModalProps>) {
-  const modalRef = useOutsideClick<HTMLDivElement>(() => onClose());
-  useKeyDown({ keys: ["Escape"], callback: () => onClose() });
+  const modalRef = useOutsideClick<HTMLDivElement>(() => onRequestClose());
+  useKeyDown({ keys: ["Escape"], callback: () => onRequestClose() });
 
   return (
     <S.Backdrop>
       <S.Modal position={position} ref={modalRef}>
         <S.ModalHeader>
           <S.Title>{title}</S.Title>
-          <S.CloseButton type="button" onClick={onClose}>
+          <S.CloseButton type="button" onClick={onRequestClose}>
             <img src={CloseIcon} alt="닫기 버튼" />
           </S.CloseButton>
         </S.ModalHeader>

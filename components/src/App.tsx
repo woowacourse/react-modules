@@ -10,7 +10,7 @@ function App() {
       {isOpen && (
         <Modal
           title="카드사 선택"
-          onClose={() => setIsOpen(false)}
+          onRequestClose={() => setIsOpen(false)}
           position="center"
         />
       )}
