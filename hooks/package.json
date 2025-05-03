@@ -1,6 +1,6 @@
 {
   "name": "@eunoia-jaxson/card-field-hooks",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "A set of hooks for managing card fields in React",
   "type": "module",
   "types": "dist/index.d.ts",
@@ -17,7 +17,7 @@
     "test": "jest"
   },
   "dependencies": {
-    "@eunoia-jaxson/card-field-hooks": "^0.0.3",
+    "@eunoia-jaxson/card-field-hooks": "^0.0.4",
     "react": "^19.1.0",
     "react-dom": "^19.1.0"
   },

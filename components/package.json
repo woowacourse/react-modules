@@ -1,6 +1,6 @@
 {
   "name": "@eunoia-jaxson/modal",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "A modal component for React",
   "type": "module",
   "types": "dist/index.d.ts",
@@ -18,7 +18,7 @@
     "build-storybook": "storybook build"
   },
   "dependencies": {
-    "@eunoia-jaxson/modal": "^0.0.5",
+    "@eunoia-jaxson/modal": "^0.0.6",
     "react": "^19.1.0",
     "react-dom": "^19.1.0"
   },
