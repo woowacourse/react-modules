@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
 import { CardInputItem } from '../../types/cardInputItem.types';
-import { validateExpiryDate } from '../../validation/expiryDate';
+import { EXPIRE_DATE_INDEX, validateExpiryDate } from '../../validation/expiryDate';
 
 const EXPIRY_DATE_INPUTS_LENGTH = 2;
 
@@ -40,12 +40,17 @@ export const useExpiryDate = () => {
   const handleExpiryDateChange = (event: React.ChangeEvent<HTMLInputElement>, index: number) => {
     const newValue = event.target.value;
 
-    const { isValid, errorMessage } = validateExpiryDate(newValue, index);
+    const { isValid, isExpired, errorMessage } = validateExpiryDate(expiryDate, newValue, index);
 
     setExpiryDate((prev) => {
       const newExpiryDate = [...prev];
       newExpiryDate[index].value = newValue;
-      newExpiryDate[index].isValid = isValid;
+      if (index === EXPIRE_DATE_INDEX.YEAR && isExpired) {
+        newExpiryDate[0].isValid = false;
+      }
+      if (!(index === EXPIRE_DATE_INDEX.YEAR && isExpired)) {
+        newExpiryDate[index].isValid = isValid;
+      }
       return newExpiryDate;
     });
 
