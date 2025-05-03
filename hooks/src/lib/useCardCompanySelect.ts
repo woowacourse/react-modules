@@ -1,11 +1,8 @@
-import { useState } from 'react';
 import { CardCompany } from './types/card';
+import createCardField from './utils/createCardFieldHook';
 
 export function useCardCompanySelect() {
-  const [cardCompany, setCardCompany] = useState<CardCompany | ''>('');
-  const handleSelectChange = (value: CardCompany) => {
-    setCardCompany(value);
-  };
+  const { value, handleChange } = createCardField<CardCompany | ''>('', []);
 
-  return { cardCompany, handleSelectChange };
+  return { cardCompany: value, handleSelectChange: handleChange };
 }

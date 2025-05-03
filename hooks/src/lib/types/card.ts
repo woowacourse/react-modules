@@ -1,4 +1,4 @@
-export type CardCompany =
+type CardCompany =
   | 'BC카드'
   | '신한카드'
   | '카카오뱅크'
@@ -8,14 +8,22 @@ export type CardCompany =
   | '하나카드'
   | '국민카드';
 
-export type CardExpiration = {
+interface CardExpiration {
   month: string;
   year: string;
-};
+}
 
-export type CardNumber = {
+interface CardNumber {
   first: string;
   second: string;
   third: string;
   fourth: string;
-};
+}
+
+interface CardFieldHook<T extends string> {
+  value: T;
+  handleChange: (newValue: T) => void;
+  error: string;
+}
+
+export type { CardCompany, CardExpiration, CardNumber, CardFieldHook };

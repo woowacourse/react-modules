@@ -1,22 +1,10 @@
-import { useMemo, useState } from 'react';
 import { validateNumberError, validateCardPasswordLengthError } from './utils/cardInputValidations';
+import createCardFieldHook from './utils/createCardFieldHook';
 
 export function useCardPasswordInput() {
-  const [cardPassword, setCardPassword] = useState<string>('');
-
-  const cardPasswordError = useMemo(() => {
-    const numError = validateNumberError(cardPassword);
-    if (numError) return numError;
-
-    const cardPasswordLengthError = validateCardPasswordLengthError(cardPassword);
-    if (cardPasswordLengthError) return cardPasswordLengthError;
-
-    return '';
-  }, [cardPassword]);
-
-  const handleCardPasswordChange = (value: string) => {
-    setCardPassword(value);
-  };
-
-  return { cardPassword, handleCardPasswordChange, cardPasswordError };
+  const { value, handleChange, error } = createCardFieldHook<string>('', [
+    validateNumberError,
+    validateCardPasswordLengthError,
+  ]);
+  return { cardPassword: value, handleCardPasswordChange: handleChange, cardPasswordError: error };
 }
