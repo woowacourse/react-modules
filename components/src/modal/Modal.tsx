@@ -85,17 +85,15 @@ function Title({
 const StyledModalContainer = styled.dialog<{ isBottom: boolean }>`
   box-sizing: border-box;
   min-width: 400px;
-  padding: 24px 32px;
+  padding: 0;
   position: relative;
+  background-color: transparent;
 
   border: none;
-  border-radius: 8px;
 
   margin-bottom: ${(props) => (props.isBottom ? 0 : null)};
   width: ${(props) => (props.isBottom ? '100%' : null)};
   max-width: ${(props) => (props.isBottom ? '100%' : null)};
-  border-bottom-left-radius: ${(props) => (props.isBottom ? 0 : null)};
-  border-bottom-right-radius: ${(props) => (props.isBottom ? 0 : null)};
 
   &::backdrop {
     background-color: #000000;
@@ -110,6 +108,13 @@ const StyledModalContainer = styled.dialog<{ isBottom: boolean }>`
 const ModalWrapper = styled.div<{ isBottom: boolean }>`
   display: flex;
   flex-direction: column;
+
+  padding: 24px 32px;
+  background-color: white;
+  border-radius: 8px;
+
+  border-bottom-left-radius: ${(props) => (props.isBottom ? 0 : null)};
+  border-bottom-right-radius: ${(props) => (props.isBottom ? 0 : null)};
   gap: ${(props) => (props.isBottom ? '16px' : '24px')};
 `;
 
