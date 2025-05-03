@@ -1,6 +1,7 @@
 import styled from "@emotion/styled";
 import { ReactNode, useEffect } from "react";
 import Button from "./common/Button";
+import useEscapeKeyClose from "./useEscapeKeyClose";
 
 type Position = "center" | "bottom";
 
@@ -31,17 +32,7 @@ function Modal({
   primaryButtonText,
   secondaryButtonText,
 }: ModalProps) {
-  useEffect(() => {
-    function handleKeyDown(e: KeyboardEvent) {
-      if (e.key === "Escape") onClose();
-    }
-
-    addEventListener("keydown", handleKeyDown);
-
-    return () => {
-      removeEventListener("keydown", handleKeyDown);
-    };
-  }, [isOpen]);
+  useEscapeKeyClose({ isOpen, onClose });
 
   return (
     <ModalContainer isOpen={isOpen}>
