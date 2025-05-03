@@ -36,10 +36,19 @@ export type Props = {
    */
   onOutsideClick?: (e: React.MouseEvent) => void;
   /**
-   * The z-index of the modal
+   * The maximum width of the modal
+   * @type {string | number}
+   * @description It can be a string (e.g. '400px') or a number (e.g. 400).
+   * @default '400px'
+   */
+  maxWidth?: string | number;
+  /**
+   * The z-index of the modal.
+   * @type {number}
+   * @description It can be a number (e.g. 10).
    * @default 10
    */
-  zIndex: number;
+  zIndex?: number;
   /**
    * The content of the modal
    */
@@ -53,6 +62,7 @@ export const Modal = ({
   showCloseButton,
   onClose,
   onOutsideClick,
+  maxWidth = '400px',
   zIndex = 10,
   children,
   ...props
@@ -64,6 +74,7 @@ export const Modal = ({
         role="dialog"
         aria-modal="true"
         position={position}
+        maxWidth={maxWidth}
         zIndex={zIndex}
         {...props}
       >
@@ -130,11 +141,11 @@ const positionStyle = {
   `,
 } as const;
 
-const StyledModalContainer = styled.div<Pick<Props, 'position' | 'zIndex'>>`
+const StyledModalContainer = styled.div<Pick<Props, 'maxWidth' | 'position' | 'zIndex'>>`
   width: 100%;
-  max-width: 400px;
+  max-width: ${({ maxWidth }) => (typeof maxWidth === 'number' ? `${maxWidth}px` : maxWidth)};
   height: auto;
-  position: absolute;
+  position: fixed;
   z-index: ${({ zIndex }) => zIndex ?? 10};
   background-color: white;
   padding: 24px 32px;
@@ -147,11 +158,10 @@ const StyledModalHeader = styled.div`
   align-items: center;
   font-size: 20px;
   font-weight: 600;
-  line-height: 1.1%;
 `;
 const StyledIcon = styled.img`
-  width: 100%;
-  height: 100%;
+  width: auto;
+  height: auto;
 `;
 
 const StyledCloseButton = styled.button`
@@ -161,6 +171,9 @@ const StyledCloseButton = styled.button`
   cursor: pointer;
   z-index: 0;
   background-color: transparent;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
   &:hover {
     background-color: rgba(31, 41, 55, 0.1);
