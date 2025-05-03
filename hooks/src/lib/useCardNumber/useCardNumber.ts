@@ -22,6 +22,8 @@ interface CardNumberErrorMessage {
   fourth: string;
 }
 
+export type CardNumberLabel = "first" | "second" | "third" | "fourth";
+
 const useCardNumber = () => {
   const [isValid, setIsValid] = useState<CardNumberValid>({
     first: true,
@@ -36,7 +38,7 @@ const useCardNumber = () => {
     fourth: "",
   });
 
-  const validate = (label: string, value: string) => {
+  const validate = (label: CardNumberLabel, value: string) => {
     if (!checkNumber(value)) {
       setErrorMessage({
         ...errorMessage,
