@@ -73,3 +73,61 @@ export const Bottom: Story = {
     );
   },
 };
+
+export const NestedModals: Story = {
+  render: () => {
+    const [isOpenModal1, setIsOpenModal1] = useState(true);
+    const [isOpenModal2, setIsOpenModal2] = useState(true);
+
+    const handleModal1Close = () => {
+      setIsOpenModal1(false);
+    };
+
+    const openModal1 = () => {
+      setIsOpenModal1(true);
+    };
+
+    const handleModal2Close = () => {
+      setIsOpenModal2(false);
+    };
+
+    const openModal2 = () => {
+      setIsOpenModal2(true);
+    };
+
+    const openAllModal = () => {
+      setIsOpenModal1(true);
+      setIsOpenModal2(true);
+    };
+
+    return (
+      <>
+        <button type="button" onClick={openAllModal}>
+          모든 모달 열기
+        </button>
+        <button type="button" onClick={openModal1}>
+          모달1 열기
+        </button>
+        <button type="button" onClick={openModal2}>
+          모달2 열기
+        </button>
+        <Modal
+          title="제목"
+          onClose={handleModal1Close}
+          isOpen={isOpenModal1}
+          position={"center"}
+        >
+          모달1
+        </Modal>
+        <Modal
+          title="제목"
+          onClose={handleModal2Close}
+          isOpen={isOpenModal2}
+          position={"center"}
+        >
+          모달2
+        </Modal>
+      </>
+    );
+  },
+};

@@ -74,7 +74,6 @@ export default function Modal({
           <Title>{title}</Title>
           <CloseIcon onClick={onClose} css={closeIconStyle} />
         </ModalTop>
-
         {children}
       </ModalContainer>
       <ModalBackdrop onClick={onClose} />
