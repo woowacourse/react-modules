@@ -1,71 +1,60 @@
-import { renderHook, act } from "@testing-library/react";
+import { renderHook } from "@testing-library/react";
 import useCardExpiryDate from "./index";
+import {
+  testInputUpdate,
+  testInvalidInput,
+  testValidInput,
+  testMaxLength,
+} from "../../../utils/test/index";
 
 describe("useCardExpiryDate", () => {
   it("입력값이 정확히 업데이트 되어야 한다.", () => {
-    const userInput = "0727";
-    const { result } = renderHook(() => useCardExpiryDate());
-
-    act(() => {
-      result.current.handleExpiryChange(userInput);
+    testInputUpdate({
+      renderHookFn: () => renderHook(() => useCardExpiryDate()),
+      handleChangeKey: "handleExpiryChange",
+      stateKey: "expiryDate",
+      input: "0727",
     });
-    expect(result.current.expiryDate.value).toBe(userInput);
   });
 
-  it("카드만료일에 문자열을 입력하면 오류가 발생해야한다.", () => {
-    const invalidKoreanInput = "ㅁㅁㅁㅁ";
-    const { result } = renderHook(() => useCardExpiryDate());
-
-    act(() => {
-      result.current.handleExpiryChange(invalidKoreanInput);
+  it("카드 만료일에 문자열을 입력하면 에러가 발생한다.", () => {
+    testInvalidInput({
+      renderHookFn: () => renderHook(() => useCardExpiryDate()),
+      handleChangeKey: "handleExpiryChange",
+      errorStateKey: "errorState",
+      input: "ㅁㅁㅁ",
+      errorMessage: "숫자만 입력해주세요.",
     });
-
-    expect(result.current.errorState.isValid).toBe(false);
-    expect(result.current.errorState.errorMessage).toBe("숫자만 입력해주세요.");
   });
 
-  it("카드만료일에 3자리를 입력하면 오류가 발생해야한다.", () => {
-    const invalidLengthInput = "122";
-    const { result } = renderHook(() => useCardExpiryDate());
-
-    act(() => {
-      result.current.handleExpiryChange(invalidLengthInput);
+  it("카드 만료일에 3자리를 입력하면 에러가 발생한다.", () => {
+    testInvalidInput({
+      renderHookFn: () => renderHook(() => useCardExpiryDate()),
+      handleChangeKey: "handleExpiryChange",
+      errorStateKey: "errorState",
+      input: "122",
+      errorMessage: "유효기간은 4자리여야 합니다.",
     });
-
-    expect(result.current.errorState.isValid).toBe(false);
-    expect(result.current.errorState.errorMessage).toBe(
-      "유효기간은 4자리여야 합니다."
-    );
   });
 
   it("카드 만료일에 유효하지 않은 월(1~12월)을 입력하면 에러가 발생한다.", () => {
-    const invalidMonthInput = "1325";
-
-    const { result } = renderHook(() => useCardExpiryDate());
-
-    act(() => {
-      result.current.handleExpiryChange(invalidMonthInput);
+    testInvalidInput({
+      renderHookFn: () => renderHook(() => useCardExpiryDate()),
+      handleChangeKey: "handleExpiryChange",
+      errorStateKey: "errorState",
+      input: "1325",
+      errorMessage: "월은 1~12 사이여야 합니다.",
     });
-
-    expect(result.current.errorState.isValid).toBe(false);
-    expect(result.current.errorState.errorMessage).toBe(
-      "월은 1~12 사이여야 합니다."
-    );
   });
 
   it("카드 만료일에 년도는 유효하지만 기간이 지난 월을 입력하면 에러가 발생한다.", () => {
-    const invalidMonthInput = "0325";
-
-    const { result } = renderHook(() => useCardExpiryDate());
-
-    act(() => {
-      result.current.handleExpiryChange(invalidMonthInput);
+    testInvalidInput({
+      renderHookFn: () => renderHook(() => useCardExpiryDate()),
+      handleChangeKey: "handleExpiryChange",
+      errorStateKey: "errorState",
+      input: "0325",
+      errorMessage: "유효기간이 만료되었습니다.",
     });
-
-    expect(result.current.errorState.isValid).toBe(false);
-    expect(result.current.errorState.errorMessage).toBe(
-      "유효기간이 만료되었습니다."
-    );
   });
 
   it("월과 년도가 유효한 경우 에러가 발생하지 않는다.", () => {
@@ -74,25 +63,20 @@ describe("useCardExpiryDate", () => {
     const nextYear = date.getFullYear() + 1;
     const validInput = validMonth + nextYear.toString().slice(-2);
 
-    const { result } = renderHook(() => useCardExpiryDate());
-
-    act(() => {
-      result.current.handleExpiryChange(validInput);
+    testValidInput({
+      renderHookFn: () => renderHook(() => useCardExpiryDate()),
+      handleChangeKey: "handleExpiryChange",
+      errorStateKey: "errorState",
+      input: validInput,
     });
-
-    expect(result.current.errorState.isValid).toBe(true);
   });
 
   it("카드 만료일에 5자리를 입력하여도 무시되어 4자리만 입력 가능하다.", () => {
-    const { result } = renderHook(() => useCardExpiryDate());
-
-    act(() => {
-      Array.from({ length: 5 }).forEach((_, index) => {
-        const userInput = "1".repeat(index + 1);
-        result.current.handleExpiryChange(userInput);
-      });
+    testMaxLength({
+      renderHookFn: () => renderHook(() => useCardExpiryDate()),
+      handleChangeKey: "handleExpiryChange",
+      stateKey: "expiryDate",
+      maxLength: 4,
     });
-
-    expect(result.current.expiryDate.value).toHaveLength(4);
   });
 });
