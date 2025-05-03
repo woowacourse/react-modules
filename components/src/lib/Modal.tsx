@@ -2,6 +2,7 @@ import styled from "@emotion/styled";
 import { ReactNode, useEffect } from "react";
 import Button from "./common/Button";
 import useEscapeKeyClose from "./useEscapeKeyClose";
+import { createPortal } from "react-dom";
 
 type Position = "center" | "bottom";
 
@@ -34,47 +35,50 @@ function Modal({
 }: ModalProps) {
   useEscapeKeyClose({ isOpen, onClose });
 
-  return (
-    <ModalContainer isOpen={isOpen}>
-      <ModalOverlay data-testid="modal-overlay" onClick={onClose} />
-      <ModalContent
-        position={position}
-        role="dialog"
-        aria-modal="true"
-        aria-labelledby="modal-title"
-        aria-describedby="modal-description"
-        aria-hidden={!isOpen}
-      >
-        <TitleSection>
-          <TitleText id="modal-title">{title}</TitleText>
-          {hasTopCloseButton ? (
-            <CloseButton onClick={onClose}>✕</CloseButton>
-          ) : null}
-        </TitleSection>
-        <MainSection id="modal-description">
-          {children}
-          {primaryButton ? (
-            <Button onClick={onConfirm} text={primaryButtonText} />
-          ) : null}
-          {secondaryButton ? (
-            <Button
-              text={secondaryButtonText}
-              onClick={onClose}
-              color="#8b95a1"
-              backgroundColor="transparent"
-            />
-          ) : null}
-        </MainSection>
-      </ModalContent>
-    </ModalContainer>
-  );
+  return isOpen
+    ? createPortal(
+        <>
+          <ModalOverlay data-testid="modal-overlay" onClick={onClose} />
+          <ModalContainer>
+            <ModalContent
+              position={position}
+              role="dialog"
+              aria-modal="true"
+              aria-labelledby="modal-title"
+              aria-describedby="modal-description"
+              aria-hidden={!isOpen}
+            >
+              <TitleSection>
+                <TitleText id="modal-title">{title}</TitleText>
+                {hasTopCloseButton ? (
+                  <CloseButton onClick={onClose}>✕</CloseButton>
+                ) : null}
+              </TitleSection>
+              <MainSection id="modal-description">
+                {children}
+                {primaryButton ? (
+                  <Button onClick={onConfirm} text={primaryButtonText} />
+                ) : null}
+                {secondaryButton ? (
+                  <Button
+                    text={secondaryButtonText}
+                    onClick={onClose}
+                    color="#8b95a1"
+                    backgroundColor="transparent"
+                  />
+                ) : null}
+              </MainSection>
+            </ModalContent>
+          </ModalContainer>
+        </>,
+        document.body
+      )
+    : null;
 }
 
 export default Modal;
 
-const ModalContainer = styled.div<{ isOpen: boolean }>`
-  display: ${({ isOpen }) => (isOpen ? "block" : "none")};
-`;
+const ModalContainer = styled.div``;
 
 const ModalContent = styled.div<{ position: Position }>`
   height: 216px;
