@@ -1,0 +1,25 @@
+.modalHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.closeButton {
+  width: 24px;
+  height: 24px;
+}
+
+.closeButton:hover {
+  cursor: pointer;
+}
+
+.title {
+  font-family: Noto Sans KR;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 100%;
+  letter-spacing: 0%;
+  vertical-align: middle;
+  width: fit-content;
+  white-space: nowrap;
+}

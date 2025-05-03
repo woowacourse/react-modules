@@ -1,8 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { expect, userEvent, waitFor } from "@storybook/test";
-
 import { useState } from "react";
-import Modal from "./Modal";
+import Modal from ".";
 
 const meta: Meta<typeof Modal> = {
   title: "Modal",
@@ -15,7 +14,6 @@ type Story = StoryObj<typeof Modal>;
 export const CenterModal: Story = {
   args: {
     position: "center",
-    title: "중앙 모달 제목입니다",
   },
   render: function Render(args) {
     const [isOpen, setIsOpen] = useState(false);
@@ -24,14 +22,16 @@ export const CenterModal: Story = {
         <button onClick={() => setIsOpen((prev) => !prev)} id="trigger-button">
           모달창 trigger
         </button>
-        <Modal
-          {...args}
-          isOpen={isOpen}
-          onClose={() => {
-            setIsOpen(false);
-          }}
-        >
-          <p>중앙 모달 내용 입니다.</p>
+
+        <Modal {...args} isOpen={isOpen} onClose={() => setIsOpen(false)}>
+          <Modal.Background>
+            <Modal.Container>
+              <Modal.Header>중앙 모달 제목입니다</Modal.Header>
+              <Modal.Content>
+                <p>중앙 모달 내용 입니다.</p>
+              </Modal.Content>
+            </Modal.Container>
+          </Modal.Background>
         </Modal>
       </>
     );
@@ -54,14 +54,13 @@ export const CenterModal: Story = {
       "#modal-close-button"
     ) as HTMLImageElement;
     await userEvent.click(closeButton);
-
     await waitFor(() => expect(modalContainer).not.toBeInTheDocument());
 
     // background 클릭시 모달 닫히기
     await userEvent.click(triggerButton);
     const modalBackground = document.body.querySelector(
       "#modal-background"
-    ) as HTMLImageElement;
+    ) as HTMLDivElement;
     await userEvent.click(modalBackground);
     await waitFor(() => expect(modalContainer).not.toBeInTheDocument());
 
@@ -75,23 +74,27 @@ export const CenterModal: Story = {
 export const BottomModal: Story = {
   args: {
     position: "bottom",
-    title: "하단 모달 제목입니다",
   },
   render: function Render(args) {
     const [isOpen, setIsOpen] = useState(false);
     return (
       <>
-        <button onClick={() => setIsOpen((prev) => !prev)}>
+        <button
+          onClick={() => setIsOpen((prev) => !prev)}
+          id="trigger-button-bottom"
+        >
           모달창 trigger
         </button>
-        <Modal
-          {...args}
-          isOpen={isOpen}
-          onClose={() => {
-            setIsOpen(false);
-          }}
-        >
-          <p>하단 모달 내용 입니다.</p>
+
+        <Modal {...args} isOpen={isOpen} onClose={() => setIsOpen(false)}>
+          <Modal.Background>
+            <Modal.Container>
+              <Modal.Header>하단 모달 제목입니다</Modal.Header>
+              <Modal.Content>
+                <p>하단 모달 내용 입니다.</p>
+              </Modal.Content>
+            </Modal.Container>
+          </Modal.Background>
         </Modal>
       </>
     );
