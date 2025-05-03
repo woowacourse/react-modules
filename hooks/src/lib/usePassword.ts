@@ -1,23 +1,22 @@
-import { useState } from "react";
-
-const numberRegex = /^[0-9]*$/;
+import { useForm } from "../hooks/useForm";
+import { CardPasswordInput } from "../types/input";
 
 export default function usePassword() {
-  const [password, setPassword] = useState("");
+  const {
+    value: password,
+    errors: passwordErrors,
+    register: passwordRegister,
+    isValid: isPasswordIsValid,
+  } = useForm<CardPasswordInput>({
+    defaultValues: {
+      password: "",
+    },
+  });
 
-  const [errorMessage, setErrorMessage] = useState("");
-
-  const isValid = !errorMessage;
-
-  const handlePasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const value = event.target.value;
-
-    if (!numberRegex.test(value)) return;
-
-    setPassword(value);
-
-    if (value.length < 2) setErrorMessage("2글자를 입력해 주세요.");
+  return {
+    passwordErrors,
+    isPasswordIsValid,
+    password,
+    passwordRegister,
   };
-
-  return { errorMessage, isValid, password, handlePasswordChange };
 }
