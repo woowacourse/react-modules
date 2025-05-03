@@ -6,6 +6,7 @@ const ERROR_MESSAGES = {
   INVALID_LENGTH: '2자리의 숫자를 입력해 주세요.',
   INVALID_CHARACTERS: '숫자만 입력해 주세요.',
   INVALID_MONTH: '1~12 사이의 숫자를 입력해 주세요.',
+  INVALID_DATE: '만료일이 유효하지 않습니다.',
 };
 
 describe('useExpirationDate 훅 테스트', () => {
@@ -73,5 +74,16 @@ describe('useExpirationDate 훅 테스트', () => {
 
     expect(result.current.isValid.year).toBe(false);
     expect(result.current.errorMessage).toBe(ERROR_MESSAGES.INVALID_LENGTH);
+  });
+
+  it('만료 날짜가 지났을 때 오류를 반환한다.', () => {
+    const { result } = renderHook(() => useExpirationDate());
+
+    act(() => {
+      result.current.handleExpirationDate({ month: '05', year: '23' });
+    });
+
+    expect(result.current.isValid.year).toBe(false);
+    expect(result.current.errorMessage).toBe(ERROR_MESSAGES.INVALID_DATE);
   });
 });
