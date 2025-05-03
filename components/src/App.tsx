@@ -20,6 +20,10 @@ function App() {
         isOpen={isOpen}
         onClose={handleClose}
         onConfirm={handleConfirm}
+        primaryButton={true}
+        secondaryButton={true}
+        primaryButtonText="동의하고 저장하기"
+        secondaryButtonText="닫기"
       >
         <p>모달열림</p>
       </Modal>

@@ -2,7 +2,7 @@ import styled from "@emotion/styled";
 import { ButtonHTMLAttributes } from "react";
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  text: string;
+  text?: string;
   color?: string;
   backgroundColor?: string;
 }

@@ -11,9 +11,11 @@ interface ModalProps {
   onConfirm?: () => void;
   position?: Position;
   hasTopCloseButton?: boolean;
-  hasBottomCloseButton?: boolean;
-  hasConfirmButton?: boolean;
+  primaryButton?: boolean;
+  secondaryButton?: boolean;
   children: ReactNode;
+  primaryButtonText?: string;
+  secondaryButtonText?: string;
 }
 
 function Modal({
@@ -24,8 +26,10 @@ function Modal({
   position = "center",
   children,
   hasTopCloseButton = true,
-  hasBottomCloseButton = false,
-  hasConfirmButton = false,
+  primaryButton = false,
+  secondaryButton = false,
+  primaryButtonText,
+  secondaryButtonText,
 }: ModalProps) {
   useEffect(() => {
     function handleKeyDown(e: KeyboardEvent) {
@@ -51,12 +55,12 @@ function Modal({
         </TitleSection>
         <MainSection>
           {children}
-          {hasConfirmButton ? (
-            <Button text="동의하고 저장하기" onClick={onConfirm} />
+          {primaryButton ? (
+            <Button onClick={onConfirm} text={primaryButtonText} />
           ) : null}
-          {hasBottomCloseButton ? (
+          {secondaryButton ? (
             <Button
-              text="닫기"
+              text={secondaryButtonText}
               onClick={onClose}
               color="#8b95a1"
               backgroundColor="transparent"
