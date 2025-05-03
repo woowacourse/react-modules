@@ -6,10 +6,10 @@ export const validateCardInput = (value: string, validLength: number) => {
     };
   }
 
-  if (value.length < validLength) {
+  if (value.length !== validLength) {
     return {
       isValid: false,
-      errorMessage: `숫자 ${validLength}자리를 입력해주세요.`,
+      errorMessage: `숫자 ${validLength}자리를 정확히 입력해주세요.`,
     };
   }
 
