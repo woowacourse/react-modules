@@ -1,9 +1,10 @@
 import { useState } from 'react';
 import { CardExpiration } from './types/card';
 import { validateMonthRangeError, validateNumberError, validateYearLengthError } from './utils/cardInputValidations';
+import { CARD_EXPIRATION_KEYS, INITIAL_CARD_EXPIRATION } from './constants/card';
 
 export function useCardExpirationInput() {
-  const [cardExpiration, setCardExpiration] = useState<CardExpiration>({ month: '', year: '' });
+  const [cardExpiration, setCardExpiration] = useState<CardExpiration>(INITIAL_CARD_EXPIRATION);
 
   const validateCardExpiration = () => {
     const errors: CardExpiration = {
@@ -11,21 +12,32 @@ export function useCardExpirationInput() {
       year: '',
     };
 
-    if (cardExpiration.month !== '') {
-      const numError = validateNumberError(cardExpiration.month);
-      if (!numError.isValid && numError.errorMessage) errors.month = numError.errorMessage;
+    for (const key of CARD_EXPIRATION_KEYS) {
+      const value = cardExpiration[key];
+      if (value === '') continue;
 
-      const monthRangeError = validateMonthRangeError(cardExpiration.month);
-      if (!monthRangeError.isValid && monthRangeError.errorMessage) errors.month = monthRangeError.errorMessage;
-    }
+      if (key === 'month') {
+        const numErr = validateNumberError(value);
+        if (!numErr.isValid && numErr.errorMessage) {
+          errors.month = numErr.errorMessage;
+          continue;
+        }
+        const rangeErr = validateMonthRangeError(value);
+        if (!rangeErr.isValid && rangeErr.errorMessage) {
+          errors.month = rangeErr.errorMessage;
+        }
+      }
 
-    if (cardExpiration.year !== '') {
-      const numError = validateNumberError(cardExpiration.year);
-      if (!numError.isValid && numError.errorMessage) {
-        errors.year = numError.errorMessage;
-      } else {
-        const yearLengthError = validateYearLengthError(cardExpiration.year);
-        if (!yearLengthError.isValid && yearLengthError.errorMessage) errors.year = yearLengthError.errorMessage;
+      if (key === 'year') {
+        const numErr = validateNumberError(value);
+        if (!numErr.isValid && numErr.errorMessage) {
+          errors.year = numErr.errorMessage;
+          continue;
+        }
+        const lengthErr = validateYearLengthError(value);
+        if (!lengthErr.isValid && lengthErr.errorMessage) {
+          errors.year = lengthErr.errorMessage;
+        }
       }
     }
 
