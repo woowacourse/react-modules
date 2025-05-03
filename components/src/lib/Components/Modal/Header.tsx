@@ -1,12 +1,16 @@
-import { useContext } from "react";
+import { ComponentProps, useContext } from "react";
 import { ModalContext } from "./ModalContext";
 import styles from "./ModalHeader.module.css";
 import closeIcon from "../../../asset/close.png";
 
-function Header({ children }: { children: React.ReactNode }) {
+interface HeaderProps extends ComponentProps<"header"> {
+  children: React.ReactNode;
+}
+
+function Header({ children, ...props }: HeaderProps) {
   const ctx = useContext(ModalContext);
   return (
-    <header className={styles.modalHeader}>
+    <header {...props} className={styles.modalHeader}>
       <h2 className={styles.title}>{children}</h2>
       <img
         id="modal-close-button"
