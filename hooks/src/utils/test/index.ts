@@ -2,7 +2,7 @@ import { act } from "@testing-library/react";
 import { BaseInputState, ErrorState } from "../../lib/types";
 import {
   handleChangeFn,
-  TesInvalidInputParams,
+  TestInvalidInputParams,
   TestInputUpdateParams,
   TestMaxLengthParams,
   TestValidInputParams,
@@ -29,7 +29,7 @@ export function testInvalidInput<T, K extends keyof T>({
   errorStateKey,
   input,
   errorMessage,
-}: TesInvalidInputParams<T, K>) {
+}: TestInvalidInputParams<T, K>) {
   const { result } = renderHookFn();
 
   act(() => {

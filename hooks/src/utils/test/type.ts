@@ -13,7 +13,7 @@ export interface TestInputUpdateParams<T, K extends keyof T>
   input: string;
 }
 
-export interface TesInvalidInputParams<T, K extends keyof T>
+export interface TestInvalidInputParams<T, K extends keyof T>
   extends TestInputBaseParams<T, K> {
   errorStateKey: K;
   input: string;
