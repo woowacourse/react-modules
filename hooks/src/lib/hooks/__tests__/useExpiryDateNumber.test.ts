@@ -1,5 +1,6 @@
 import { renderHook, act } from "@testing-library/react";
 import useExpiryDateNumber from "../useExpiryDateNumber";
+import { EXPIRY_DATE_ERROR_MESSAGES } from "../../validator/constants/error-messages";
 
 describe("useExpiryDateNumber", () => {
   it("초기 상태값이 올바르게 설정되어야 한다", () => {
@@ -23,6 +24,21 @@ describe("useExpiryDateNumber", () => {
     expect(result.current.isError).toBe(false);
     expect(result.current.errorMessage).toBeUndefined();
   });
+  it("지난 유효기간은 유효하지 않은 만료일이라는 에러를 발생시켜야 한다", () => {
+    const { result } = renderHook(() => useExpiryDateNumber());
+
+    act(() => {
+      result.current.onExpiryDateNumberChange({
+        target: { value: "0125" },
+      } as React.ChangeEvent<HTMLInputElement>);
+    });
+
+    expect(result.current.expiryDateNumber).toBe("0125");
+    expect(result.current.isError).toBe(true);
+    expect(result.current.errorMessage).toBe(
+      EXPIRY_DATE_ERROR_MESSAGES.EXPIRED_DATE
+    );
+  });
 
   it("유효하지 않은 만료일을 입력하면 에러가 발생해야 한다", () => {
     const { result } = renderHook(() => useExpiryDateNumber());
@@ -35,7 +51,9 @@ describe("useExpiryDateNumber", () => {
 
     expect(result.current.expiryDateNumber).toBe("1325");
     expect(result.current.isError).toBe(true);
-    expect(result.current.errorMessage).toBeDefined();
+    expect(result.current.errorMessage).toBe(
+      EXPIRY_DATE_ERROR_MESSAGES.INVALID_MONTH
+    );
   });
 
   it("입력값의 앞뒤 공백이 제거되어야 한다", () => {
