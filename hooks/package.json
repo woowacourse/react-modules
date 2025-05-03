@@ -1,6 +1,6 @@
 {
   "name": "pesu-hooks",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "npm modules",
   "type": "module",
   "types": "dist/lib/index.d.ts",
@@ -14,6 +14,25 @@
       "types": "./dist/lib/index.d.ts",
       "default": "./dist/lib/index.js"
     }
+  },
+  "author": "박규성 <gueit214@naver.com>",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/guesung/react-modules"
+  },
+  "homepage": "https://github.com/guesung/react-modules#readme",
+  "bugs": {
+    "url": "https://github.com/guesung/react-modules/issues"
+  },
+  "keywords": [
+    "react",
+    "hooks",
+    "ui",
+    "component"
+  ],
+  "license": "MIT",
+  "engines": {
+    "node": ">=18.0.0"
   },
   "scripts": {
     "dev": "vite",
