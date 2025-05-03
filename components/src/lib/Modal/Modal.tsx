@@ -20,29 +20,30 @@ const Modal = ({
 }: ModalProps) => {
   return (
     <>
-      <ModalLayout isOpen={isOpen}>
-        <ModalContainer position={position}>
-          {children}
-          <ButtonWrap>
-            {showConfirmButton && (
-              <ConfirmButton onClick={onClose}>확인</ConfirmButton>
-            )}
-            {showCloseButton && (
-              <CloseButton onClick={onClose}>닫기</CloseButton>
-            )}
-          </ButtonWrap>
-        </ModalContainer>
-      </ModalLayout>
+      {isOpen && (
+        <ModalBackDrop>
+          <ModalContainer position={position}>
+            {children}
+            <ButtonWrap>
+              {showConfirmButton && (
+                <ConfirmButton onClick={onClose}>확인</ConfirmButton>
+              )}
+              {showCloseButton && (
+                <CloseButton onClick={onClose}>닫기</CloseButton>
+              )}
+            </ButtonWrap>
+          </ModalContainer>
+        </ModalBackDrop>
+      )}
     </>
   );
 };
 
 export default Modal;
 
-const ModalLayout = styled.div<{ isOpen: boolean }>`
+const ModalBackDrop = styled.div`
   position: absolute;
   z-index: 2;
-  display: ${(props) => (props.isOpen ? "flex" : "none")};
   width: 100vw;
   height: 100vh;
   background-color: rgba(0, 0, 0, 0.35);
