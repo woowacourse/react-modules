@@ -9,6 +9,25 @@
   "files": [
     "dist"
   ],
+  "author": "박규성 <gueit214@naver.com>",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/guesung/react-modules"
+  },
+  "homepage": "https://github.com/guesung/react-modules#readme",
+  "bugs": {
+    "url": "https://github.com/guesung/react-modules/issues"
+  },
+  "keywords": [
+    "react",
+    "modal",
+    "ui",
+    "component"
+  ],
+  "license": "MIT",
+  "engines": {
+    "node": ">=18.0.0"
+  },
   "scripts": {
     "dev": "vite --host",
     "build": "tsc && vite build",
