@@ -1,6 +1,6 @@
-import { ERROR_MESSAGE } from "../constants";
-import { useForm } from "../hooks/useForm";
-import { CardNumberInput } from "../types/input";
+import { ERROR_MESSAGE } from '../constants';
+import { useForm } from '../hooks/useForm';
+import { CardNumberInput } from '../types/input';
 
 export default function useCardNumber() {
   const {
@@ -10,10 +10,10 @@ export default function useCardNumber() {
     isValid: isCardNumberIsValid,
   } = useForm<CardNumberInput>({
     defaultValues: {
-      first: "",
-      second: "",
-      third: "",
-      fourth: "",
+      first: '',
+      second: '',
+      third: '',
+      fourth: '',
     },
     validation: {
       first: {
@@ -38,10 +38,10 @@ export default function useCardNumber() {
       },
     },
     inputRegex: {
-      first: /^\d{1,4}$/,
-      second: /^\d{1,4}$/,
-      third: /^\d{1,4}$/,
-      fourth: /^\d{1,4}$/,
+      first: /^\d{0,4}$/,
+      second: /^\d{0,4}$/,
+      third: /^\d{0,4}$/,
+      fourth: /^\d{0,4}$/,
     },
   });
 

@@ -1,6 +1,6 @@
-import { ERROR_MESSAGE } from "../constants";
-import { useForm } from "../hooks/useForm";
-import { CardCVCNumberInput } from "../types/input";
+import { ERROR_MESSAGE } from '../constants';
+import { useForm } from '../hooks/useForm';
+import { CardCVCNumberInput } from '../types/input';
 
 export default function useCvcNumber() {
   const {
@@ -10,7 +10,7 @@ export default function useCvcNumber() {
     isValid: isCvcNumberIsValid,
   } = useForm<CardCVCNumberInput>({
     defaultValues: {
-      cvc: "",
+      cvc: '',
     },
     validation: {
       cvc: {
@@ -20,7 +20,7 @@ export default function useCvcNumber() {
       },
     },
     inputRegex: {
-      cvc: /^\d{1,3}$/,
+      cvc: /^\d{0,3}$/,
     },
   });
 

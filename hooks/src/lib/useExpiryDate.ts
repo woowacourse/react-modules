@@ -1,6 +1,6 @@
-import { ERROR_MESSAGE } from "../constants";
-import { useForm } from "../hooks/useForm";
-import { CardExpirationDateInput } from "../types/input";
+import { ERROR_MESSAGE } from '../constants';
+import { useForm } from '../hooks/useForm';
+import { CardExpirationDateInput } from '../types/input';
 
 export default function useExpiryDate() {
   const {
@@ -10,8 +10,8 @@ export default function useExpiryDate() {
     isValid: isExpiryDateIsValid,
   } = useForm<CardExpirationDateInput>({
     defaultValues: {
-      month: "",
-      year: "",
+      month: '',
+      year: '',
     },
     validation: {
       month: {
@@ -22,13 +22,13 @@ export default function useExpiryDate() {
       },
       year: {
         required: true,
-        length: 4,
+        length: 2,
         errorMessage: ERROR_MESSAGE.cardExpirationDate.year,
       },
     },
     inputRegex: {
-      month: /^(0?[1-9]|1[0-2])$/,
-      year: /^\d{1,4}$/,
+      month: /^\d{0,2}$/,
+      year: /^\d{0,2}$/,
     },
   });
 

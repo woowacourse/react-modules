@@ -1,6 +1,6 @@
-import { ERROR_MESSAGE } from "../constants";
-import { useForm } from "../hooks/useForm";
-import { CardPasswordInput } from "../types/input";
+import { ERROR_MESSAGE } from '../constants';
+import { useForm } from '../hooks/useForm';
+import { CardPasswordInput } from '../types/input';
 
 export default function usePassword() {
   const {
@@ -10,7 +10,7 @@ export default function usePassword() {
     isValid: isPasswordIsValid,
   } = useForm<CardPasswordInput>({
     defaultValues: {
-      password: "",
+      password: '',
     },
     validation: {
       password: {
@@ -20,7 +20,7 @@ export default function usePassword() {
       },
     },
     inputRegex: {
-      password: /^\d{1,2}$/,
+      password: /^\d{0,2}$/,
     },
   });
 
