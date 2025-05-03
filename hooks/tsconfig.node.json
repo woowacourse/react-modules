@@ -30,5 +30,5 @@
     "declarationMap": true
   },
   "include": ["vite.config.ts", "src"],
-  "exclude": ["node_modules", "dist", "**/*.test.ts"]
+  "exclude": ["node_modules", "dist"]
 }
