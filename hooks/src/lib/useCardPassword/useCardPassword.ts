@@ -1,48 +1,35 @@
 import { useState } from "react";
+import { checkNumber, checkValidLength } from "../validator/inputValidator";
 
 const PASSWORD_VALID_LENGTH = 2;
 
 const ERROR_MESSAGE = {
-	INVALID_NUMBER: "숫자만 입력 가능합니다.",
-	INPUT_LENGTH_LIMIT: `${PASSWORD_VALID_LENGTH}자리를 입력해주세요.`,
+  INVALID_NUMBER: "숫자만 입력 가능합니다.",
+  INPUT_LENGTH_LIMIT: `${PASSWORD_VALID_LENGTH}자리를 입력해주세요.`,
 };
 
 const useCardPassword = () => {
-	const [isValid, setIsValid] = useState<boolean>(true);
-	const [errorMessage, setErrorMessage] = useState<string>("");
+  const [isValid, setIsValid] = useState<boolean>(true);
+  const [errorMessage, setErrorMessage] = useState<string>("");
 
-	const checkNumber = (value: string) => {
-		if (!/^\d+$/.test(value)) {
-			return false;
-		}
-		return true;
-	};
+  const validate = (value: string) => {
+    if (!checkNumber(value)) {
+      setErrorMessage(ERROR_MESSAGE.INVALID_NUMBER);
+      setIsValid(false);
+      return;
+    }
 
-	const checkLength = (value: string) => {
-		if (value.length < PASSWORD_VALID_LENGTH) {
-			return false;
-		}
-		return true;
-	};
+    if (!checkValidLength(value, PASSWORD_VALID_LENGTH)) {
+      setErrorMessage(ERROR_MESSAGE.INPUT_LENGTH_LIMIT);
+      setIsValid(false);
+      return;
+    }
 
-	const validate = (value: string) => {
-		const isNumber = checkNumber(value);
-		const isValidLength = checkLength(value);
+    setErrorMessage("");
+    setIsValid(true);
+  };
 
-		if (!isNumber) {
-			setErrorMessage(ERROR_MESSAGE.INVALID_NUMBER);
-			setIsValid(false);
-			return;
-		}
-
-		if (!isValidLength) {
-			setErrorMessage(ERROR_MESSAGE.INPUT_LENGTH_LIMIT);
-			setIsValid(false);
-			return;
-		}
-	};
-
-	return { isValid, errorMessage, validate };
+  return { isValid, errorMessage, validate };
 };
 
 export default useCardPassword;
