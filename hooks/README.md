@@ -15,27 +15,44 @@ npm i woowacourse-hooks-marvin
 - 카드 번호 입력을 관리하는 훅
 - 16자리 숫자 입력 제한
 - 4자리마다 하이픈(-) 자동 추가
+- `onCardNumberChange` 핸들러 제공
 
-### 2. useExpiryDateNumber
+### 2. useStrictCardNumber
+
+- 카드 번호의 엄격한 유효성 검사를 수행하는 훅
+- Luhn 알고리즘을 통한 체크섬 검증
+- 실제 존재하는 카드 번호인지 검증
+- `onCardNumberChange` 핸들러 제공
+
+### 3. useExpiryDateNumber
 
 - 카드 유효기간 입력을 관리하는 훅
 - MM/YY 형식으로 입력 제한
 - 월(1-12)과 연도 유효성 검사
+- `onExpiryDateNumberChange` 핸들러 제공
 
-### 3. useCVCNumber
+### 4. useCVCNumber
 
 - CVC 번호 입력을 관리하는 훅
 - 3자리 숫자 입력 제한
+- `onCVCNumberChange` 핸들러 제공
 
-### 4. usePasswordNumber
+### 5. usePasswordNumber
 
 - 카드 비밀번호 입력을 관리하는 훅
 - 2자리 숫자 입력 제한
+- `onPasswordNumberChange` 핸들러 제공
 
-### 5. useCardValidation
+### 6. useCardNetwork
+
+- 카드 번호를 기반으로 카드사(VISA, MASTERCARD 등)를 식별하는 훅
+- `onChange` 핸들러 제공
+
+### 7. useCardValidation
 
 - 전체 카드 정보의 유효성을 검사하는 훅
 - 모든 필드의 입력 상태와 유효성 검사 결과 제공
+- 각 필드별 onChange 핸들러 제공
 
 ## 사용 예시
 
@@ -44,22 +61,11 @@ import React from "react";
 import { useCardValidation } from "./lib";
 
 function App() {
-  const { card, cvc, expiry, password } = useCardValidation();
-
+  const { card, cvc, expiry, password, network, strictCard } =
+    useCardValidation();
   const handleCardNumberChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    card.setCardNumber(e.target.value);
-  };
-
-  const handleCVCChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    cvc.setCVCNumber(e.target.value);
-  };
-
-  const handleExpiryChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    expiry.setExpiryDateNumber(e.target.value);
-  };
-
-  const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    password.setPasswordNumber(e.target.value);
+    card.onCardNumberChange(e);
+    network.onChange(e);
   };
 
   return (
@@ -76,8 +82,8 @@ function App() {
             placeholder="1234 5678 9012 3456"
           />
           {card.errorMessage && <p className="error">{card.errorMessage}</p>}
-          {card.cardNetwork !== "DEFAULT" && (
-            <p className="card-network">{card.cardNetwork}</p>
+          {network.cardNetwork !== "DEFAULT" && (
+            <p className="card-network">{network.cardNetwork}</p>
           )}
         </div>
 
@@ -87,7 +93,7 @@ function App() {
             id="cvc"
             type="text"
             value={cvc.CVCNumber}
-            onChange={handleCVCChange}
+            onChange={cvc.onCVCNumberChange}
             placeholder="123"
           />
           {cvc.errorMessage && <p className="error">{cvc.errorMessage}</p>}
@@ -99,7 +105,7 @@ function App() {
             id="expiry"
             type="text"
             value={expiry.expiryDateNumber}
-            onChange={handleExpiryChange}
+            onChange={expiry.onExpiryDateNumberChange}
             placeholder="MM/YY"
           />
           {expiry.errorMessage && (
@@ -113,7 +119,7 @@ function App() {
             id="password"
             type="password"
             value={password.passwordNumber}
-            onChange={handlePasswordChange}
+            onChange={password.onPasswordNumberChange}
             placeholder="비밀번호 앞 2자리"
           />
           {password.errorMessage && (

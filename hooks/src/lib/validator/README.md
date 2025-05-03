@@ -2,9 +2,21 @@
 
 이 라이브러리는 결제 정보 입력에 필요한 유효성 검사를 제공합니다.
 
+## 목차
+
+- [Validator 라이브러리](#validator-라이브러리)
+  - [목차](#목차)
+  - [구조](#구조)
+  - [사용 방법](#사용-방법)
+  - [유효성 검사 규칙](#유효성-검사-규칙)
+  - [커스텀 validator 만들기](#커스텀-validator-만들기)
+  - [에러 처리](#에러-처리)
+
 ## 구조
 
-- `constants.ts`: 유효성 검사에 필요한 타입 정의
+라이브러리는 다음과 같은 파일들로 구성되어 있습니다:
+
+- `constants.ts`: 유효성 검사에 필요한 타입 정의와 상수값
 - `validation-rules.ts`: 필드별, 에러 코드별 유효성 검사 규칙과 에러 메시지 정의
 - `validators.ts`: 각 필드에 대한 validator 구현체
 - `index.ts`: 핵심 validator 팩토리 및 모든 validator 내보내기
@@ -15,6 +27,7 @@
 import {
   validateCVC,
   validateCardNumber,
+  validateStrictCardNumber,
   validatePassword,
   validateExpiryDate,
 } from "src/lib/validator";
@@ -29,8 +42,16 @@ if (cvcResult.valid) {
   const errorMessages = errors.map((error) => error.message);
 }
 
-// 카드 번호 유효성 검사
+// 카드 번호 유효성 검사 (기본)
+// - 숫자만 입력 가능
+// - 16자리 길이 검증
 const cardResult = validateCardNumber("4111111111111111");
+// ...
+
+// 카드 번호 유효성 검사 (엄격)
+// - 기본 검증 + Luhn 알고리즘을 통한 체크섬 검증
+// - 실제 유효한 카드 번호인지 확인
+const strictCardResult = validateStrictCardNumber("4111111111111111");
 // ...
 
 // 비밀번호 유효성 검사
@@ -65,7 +86,7 @@ const rules = {
 
 ## 커스텀 validator 만들기
 
-새로운 validator를 만드는 과정:
+새로운 validator를 만드는 과정은 다음과 같습니다:
 
 1. `constants.ts`에 필드와 에러 코드 추가:
 
@@ -116,4 +137,30 @@ const newFieldRules: ValidationRule<"newField">[] = Object.entries(
 }));
 
 export const validateNewField = createValidator<"newField">(newFieldRules);
+```
+
+## 에러 처리
+
+validator는 다음과 같은 형식의 결과를 반환합니다:
+
+```typescript
+type ValidationResult = {
+  valid: boolean;
+  errors: Array<{
+    field: ValidateField;
+    code: string;
+    message: string;
+  }>;
+};
+```
+
+에러 처리 예시:
+
+```typescript
+const result = validateCardNumber("1234");
+if (!result.valid) {
+  result.errors.forEach((error) => {
+    console.error(`${error.field} 필드 오류: ${error.message}`);
+  });
+}
 ```
