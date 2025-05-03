@@ -18,7 +18,12 @@ export default function useCvcNumber() {
 
     setCvcNumber(value);
 
-    if (value.length < 3) setErrorMessage("3글자를 입력해 주세요.");
+    if (value.length < 3) {
+      setErrorMessage("3글자를 입력해 주세요.");
+      return;
+    }
+
+    setErrorMessage("");
   };
 
   return { errorMessage, isValid, cvcNumber, handleCvcNumberChange };

@@ -1,6 +1,8 @@
 import { useState } from "react";
 
 const numberRegex = /^[0-9]*$/;
+const MONTH_MIN = 1;
+const MONTH_MAX = 12;
 
 export default function useExpiryDate() {
   const [expiryDate, setExpiryDate] = useState({
@@ -39,6 +41,7 @@ export default function useExpiryDate() {
           ...errorMessage,
           [dateType]: "유효 기간이 만료된 카드 입니다.",
         });
+        return;
       }
 
       if (year === currentYear && month < currentMonth) {
@@ -46,7 +49,13 @@ export default function useExpiryDate() {
           ...errorMessage,
           [dateType]: "유효 기간이 만료된 카드 입니다.",
         });
+        return;
       }
+
+      setErrorMessage({
+        ...errorMessage,
+        [dateType]: "",
+      });
     }
 
     if (dateType === "month") {
@@ -56,12 +65,27 @@ export default function useExpiryDate() {
       const currentYear = current.getFullYear() % 100;
       const currentMonth = current.getMonth() + 1;
 
+      if (month < MONTH_MIN || month > MONTH_MAX) {
+        setErrorMessage({
+          ...errorMessage,
+          [dateType]: "1~12 사이의 숫자를 입력해 주세요.",
+        });
+        return;
+      }
+
       if (year === currentYear && month < currentMonth) {
         setErrorMessage({
           ...errorMessage,
           [dateType]: "유효 기간이 만료된 카드 입니다.",
         });
+
+        return;
       }
+
+      setErrorMessage({
+        ...errorMessage,
+        [dateType]: "",
+      });
     }
   };
 

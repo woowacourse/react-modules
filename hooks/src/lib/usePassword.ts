@@ -16,7 +16,12 @@ export default function usePassword() {
 
     setPassword(value);
 
-    if (value.length < 2) setErrorMessage("2글자를 입력해 주세요.");
+    if (value.length < 2) {
+      setErrorMessage("2글자를 입력해 주세요.");
+      return;
+    }
+
+    setErrorMessage("");
   };
 
   return { errorMessage, isValid, password, handlePasswordChange };

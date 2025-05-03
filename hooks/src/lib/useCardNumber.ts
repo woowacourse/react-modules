@@ -31,11 +31,18 @@ export default function useCardNumber() {
 
     setCardNumber({ ...cardNumber, [sequence]: value });
 
-    if (value.length < 4)
+    if (value.length < 4) {
       setErrorMessage({
         ...errorMessage,
         [sequence]: "4글자를 입력해 주세요.",
       });
+      return;
+    }
+
+    setErrorMessage({
+      ...errorMessage,
+      [sequence]: "",
+    });
   };
 
   return { errorMessage, isValid, cardNumber, handleCardNumberChange };
