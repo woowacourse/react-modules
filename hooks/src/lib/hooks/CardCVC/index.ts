@@ -6,7 +6,7 @@ import { validateCardCVC } from "./utils";
 const useCardCVC = () => {
   const [cvcState, setCVCState] = useState<CardCVCState>(INITIAL_CVC_STATE);
 
-  const handleCVCState = (value: string) => {
+  const handleCVCStateChange = (value: string) => {
     if (value.length > 3) {
       return;
     }
@@ -16,7 +16,7 @@ const useCardCVC = () => {
 
   return {
     cvcState,
-    handleCVCState,
+    handleCVCStateChange,
     errorState: validateCardCVC(cvcState.value),
   };
 };

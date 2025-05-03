@@ -7,7 +7,7 @@ describe("useCVC", () => {
     const { result } = renderHook(() => useCardCVC());
 
     act(() => {
-      result.current.handleCVCState(userInput);
+      result.current.handleCVCStateChange(userInput);
     });
     expect(result.current.cvcState.value).toBe(userInput);
   });
@@ -17,7 +17,7 @@ describe("useCVC", () => {
     const { result } = renderHook(() => useCardCVC());
 
     act(() => {
-      result.current.handleCVCState(invalidKoreanInput);
+      result.current.handleCVCStateChange(invalidKoreanInput);
     });
 
     expect(result.current.errorState.isValid).toBe(false);
@@ -29,7 +29,7 @@ describe("useCVC", () => {
     const { result } = renderHook(() => useCardCVC());
 
     act(() => {
-      result.current.handleCVCState(invalidLengthInput);
+      result.current.handleCVCStateChange(invalidLengthInput);
     });
 
     expect(result.current.errorState.isValid).toBe(false);
@@ -43,7 +43,7 @@ describe("useCVC", () => {
     const { result } = renderHook(() => useCardCVC());
 
     act(() => {
-      result.current.handleCVCState(validInput);
+      result.current.handleCVCStateChange(validInput);
     });
 
     expect(result.current.errorState.isValid).toBe(true);
