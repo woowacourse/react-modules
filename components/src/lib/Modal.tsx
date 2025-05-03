@@ -13,7 +13,7 @@ interface ModalProps {
   hasTopCloseButton?: boolean;
   hasBottomCloseButton?: boolean;
   hasConfirmButton?: boolean;
-  content: ReactNode;
+  children: ReactNode;
 }
 
 function Modal({
@@ -22,7 +22,7 @@ function Modal({
   onClose,
   onConfirm,
   position = "center",
-  content,
+  children,
   hasTopCloseButton = true,
   hasBottomCloseButton = false,
   hasConfirmButton = false,
@@ -50,7 +50,7 @@ function Modal({
           ) : null}
         </TitleSection>
         <MainSection>
-          {content}
+          {children}
           {hasConfirmButton ? (
             <Button text="동의하고 저장하기" onClick={onConfirm} />
           ) : null}
