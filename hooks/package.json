@@ -1,6 +1,6 @@
 {
   "name": "pesu-hooks",
-  "version": "0.0.4",
+  "version": "0.0.6",
   "description": "npm modules",
   "type": "module",
   "types": "dist/lib/index.d.ts",
@@ -9,6 +9,12 @@
   "files": [
     "dist"
   ],
+  "exports": {
+    ".": {
+      "types": "./dist/lib/index.d.ts",
+      "default": "./dist/lib/index.js"
+    }
+  },
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",

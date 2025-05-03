@@ -10,18 +10,13 @@ import {
   Spacing,
 } from '@/components';
 import { CARD_COMPANIES } from '@/constants';
-import { useForm } from '@/hooks';
-import {
-  CardCompanyInput,
-  CardCVCNumberInput,
-  CardExpirationDateInput,
-  CardNumberInput,
-  CardPasswordInput,
-} from '@/types';
+import { CardCompanyInput, CardCVCNumberInput, CardExpirationDateInput, CardPasswordInput } from '@/types';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import * as S from './RegisterPage.styles';
 import { $, isInputElement } from '@/utils';
+import { useCardNumber, useExpiryDate, useCvcNumber, usePassword } from '../../../../hooks/src/lib';
+import { useForm } from '../../../../hooks/src/hooks/useForm';
 
 type Step = 1 | 2 | 3 | 4 | 5 | 6;
 
@@ -32,19 +27,9 @@ export default function RegisterPage() {
   const [currentStep, setCurrentStep] = useState<Step>(1);
 
   // 1. 카드 번호
-  const {
-    value: cardNumber,
-    errors: cardNumberErrors,
-    register: cardNumberRegister,
-    isValid: isCardNumberIsValid,
-  } = useForm<CardNumberInput>({
-    defaultValues: {
-      first: '',
-      second: '',
-      third: '',
-      fourth: '',
-    },
-  });
+  const { cardNumber, cardNumberErrors, cardNumberRegister, isCardNumberIsValid } = useCardNumber();
+
+  console.log(cardNumberErrors);
 
   // 2. 카드사
   const {
@@ -58,40 +43,13 @@ export default function RegisterPage() {
   });
 
   // 3. 카드 유효기간
-  const {
-    value: cardExpirationDate,
-    errors: cardExpirationDateErrors,
-    register: cardExpirationDateRegister,
-    isValid: isExpirationDateValid,
-  } = useForm<CardExpirationDateInput>({
-    defaultValues: {
-      month: '',
-      year: '',
-    },
-  });
+  const { expiryDate, expiryDateErrors, expiryDateRegister, isExpiryDateIsValid } = useExpiryDate();
 
   // 4. 카드 CVC 번호
-  const {
-    value: cardCVCNumber,
-    errors: cardCVCNumberErrors,
-    register: cardCVCNumberRegister,
-    isValid: isCVCNumberValid,
-  } = useForm<CardCVCNumberInput>({
-    defaultValues: {
-      cvc: '',
-    },
-  });
+  const { cvcNumber, cvcNumberErrors, cvcNumberRegister, isCvcNumberIsValid } = useCvcNumber();
 
   // 5. 비밀번호
-  const {
-    errors: cardPasswordErrors,
-    register: cardPasswordRegister,
-    isValid: isPasswordValid,
-  } = useForm<CardPasswordInput>({
-    defaultValues: {
-      password: '',
-    },
-  });
+  const { password, passwordErrors, passwordRegister, isPasswordIsValid } = usePassword();
 
   // 카드 뒤집기 상태
   const [isCardFlipped, setIsCardFlipped] = useState(false);
@@ -119,26 +77,26 @@ export default function RegisterPage() {
 
       if (nextInput) nextInput.focus();
     },
-    [cardNumber, cardExpirationDate, cardCVCNumber],
+    [cardNumber, expiryDate, cvcNumber],
   );
 
   useEffect(() => {
     if (!isCardNumberIsValid) setCurrentStep(1);
     else if (!isCardCompanyValid) setCurrentStep(2);
-    else if (!isExpirationDateValid) setCurrentStep(3);
-    else if (!isCVCNumberValid) setCurrentStep(4);
-    else if (!isPasswordValid) setCurrentStep(5);
+    else if (!isExpiryDateIsValid) setCurrentStep(3);
+    else if (!isCvcNumberIsValid) setCurrentStep(4);
+    else if (!isPasswordIsValid) setCurrentStep(5);
     else setCurrentStep(6);
-  }, [isCardNumberIsValid, isCardCompanyValid, isExpirationDateValid, isCVCNumberValid, isPasswordValid]);
+  }, [isCardNumberIsValid, isCardCompanyValid, isExpiryDateIsValid, isCvcNumberIsValid, isPasswordIsValid]);
 
   return (
     <S.Wrapper>
       <S.CardPreviewWrapper>
         <CardPreview
           cardNumber={cardNumber}
-          cardExpirationDate={cardExpirationDate}
+          cardExpirationDate={expiryDate}
           selectedCompany={selectedCompany}
-          cardCVCNumber={cardCVCNumber}
+          cardCVCNumber={cvcNumber}
           isFlipped={isCardFlipped}
         />
       </S.CardPreviewWrapper>
@@ -153,23 +111,20 @@ export default function RegisterPage() {
         </If>
 
         <If condition={currentStep >= 5}>
-          <CardPasswordInputField register={cardPasswordRegister} cardPasswordErrors={cardPasswordErrors} />
+          <CardPasswordInputField register={passwordRegister} cardPasswordErrors={passwordErrors} />
         </If>
 
         <If condition={currentStep >= 4}>
           <CardCVCNumberInputField
-            register={cardCVCNumberRegister}
-            cardCVCNumberErrors={cardCVCNumberErrors}
+            register={cvcNumberRegister}
+            cardCVCNumberErrors={cvcNumberErrors}
             onFocus={() => setIsCardFlipped(true)}
             onBlur={() => setIsCardFlipped(false)}
           />
         </If>
 
         <If condition={currentStep >= 3}>
-          <CardExpirationDateInputField
-            register={cardExpirationDateRegister}
-            cardExpirationDateErrors={cardExpirationDateErrors}
-          />
+          <CardExpirationDateInputField register={expiryDateRegister} cardExpirationDateErrors={expiryDateErrors} />
         </If>
 
         <If condition={currentStep >= 2}>
