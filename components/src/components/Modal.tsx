@@ -1,11 +1,10 @@
 /** @jsxImportSource @emotion/react */
 
 import styled from '@emotion/styled';
-import { CloseIcon } from './common';
 import { PropsWithChildren, useEffect } from 'react';
-import { css } from '@emotion/react';
+import { CloseIcon } from './common';
 
-const ModalContainer = styled.div<Pick<ModalInterface, 'position' | 'margin'>>`
+const ModalContainer = styled.div<Pick<ModalInterface, 'position' | 'margin' | 'zIndex'>>`
   width: calc(100% - ${(props) => (props.margin ?? 20) * 2}px);
   box-sizing: border-box;
   height: fit-content;
@@ -26,7 +25,7 @@ const ModalContainer = styled.div<Pick<ModalInterface, 'position' | 'margin'>>`
 
   bottom: 0;
 
-  z-index: 2;
+  z-index: ${(props) => props.zIndex};
 `;
 
 const ModalTop = styled.div`
@@ -64,6 +63,7 @@ interface ModalInterface {
   isOpen: boolean;
   position?: 'center' | 'bottom';
   margin?: number;
+  zIndex?: number;
 }
 
 export default function Modal({
@@ -73,6 +73,7 @@ export default function Modal({
   isOpen,
   position = 'center',
   margin = 20,
+  zIndex = 10,
 }: PropsWithChildren<ModalInterface>) {
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => event.key === 'Escape' && onClose();
@@ -86,7 +87,7 @@ export default function Modal({
   if (!isOpen) return;
   return (
     <>
-      <ModalContainer position={position} margin={margin}>
+      <ModalContainer position={position} margin={margin} zIndex={zIndex}>
         <ModalTop>
           <Title>{title}</Title>
           <Button onClick={onClose}>
