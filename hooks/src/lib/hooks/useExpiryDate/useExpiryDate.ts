@@ -49,9 +49,7 @@ export const useExpiryDate = () => {
       return newExpiryDate;
     });
 
-    if (!isValid) {
-      setErrorMessage(errorMessage);
-    }
+    setErrorMessage(isValid ? '' : errorMessage);
   };
 
   return {

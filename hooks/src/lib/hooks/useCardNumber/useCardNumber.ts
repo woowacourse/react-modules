@@ -43,9 +43,7 @@ export const useCardNumber = () => {
       return newCardNumbers;
     });
 
-    if (!isValid) {
-      setErrorMessage(errorMessage);
-    }
+    setErrorMessage(isValid ? '' : errorMessage);
   };
 
   return {

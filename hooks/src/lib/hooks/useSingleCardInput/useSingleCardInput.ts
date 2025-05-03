@@ -40,9 +40,7 @@ export const useSingleCardInput = (validLength: number) => {
       isValid,
     });
 
-    if (!isValid) {
-      setErrorMessage(errorMessage);
-    }
+    setErrorMessage(isValid ? '' : errorMessage);
   };
 
   return {
