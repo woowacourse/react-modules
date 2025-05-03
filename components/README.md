@@ -15,14 +15,14 @@ pnpm add bunju-summit-modal
 ## 인터페이스
 
 - title: 모달 상단에 표시할 제목(`string`)
-- onClose: 모달 닫기 시 호출되는 함수
+- onRequestClose: 모달 닫기 시 호출되는 함수
 - position: 모달 위치 설정 (`center` | `bottom`):
 - children: 모달 내부에 들어갈 요소
 
 ```ts
 interface ModalProps {
   title: string;
-  onClose: () => void;
+  onRequestClose: () => void;
   position?: "center" | "bottom"; // 기본 값은 center입니다.
   children?: ReactNode;
 }
@@ -53,7 +53,11 @@ function App() {
     <div>
       <button onClick={handleOpenModal}>모달 열기</button>
       {isOpen && (
-        <Modal title="예시 제목" onClose={handleCloseModal} position="bottom">
+        <Modal
+          title="예시 제목"
+          onRequestClose={handleCloseModal}
+          position="bottom"
+        >
           <div>모달 내용입니다.</div>
         </Modal>
       )}
