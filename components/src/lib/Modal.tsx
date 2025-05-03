@@ -1,23 +1,26 @@
-import * as S from "./Modal.styles";
-import { useEffect } from "react";
+import * as S from './Modal.styles';
+import { useEffect } from 'react';
 
 interface ModalProps {
   isOpen: boolean;
   handleCloseModal: () => void;
   children: React.ReactNode;
   title: string;
-  position: "center" | "bottom";
+  position: 'center' | 'bottom';
 }
 
-const Modal = ({
-  isOpen,
-  handleCloseModal,
-  title,
-  children,
-  position = "center",
-}: ModalProps) => {
+const Modal = ({ isOpen, handleCloseModal, title, children, position = 'center' }: ModalProps) => {
   useEffect(() => {
-    window.addEventListener("keyup", handleCloseModal);
+    const handleKeyUp = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        handleCloseModal();
+      }
+    };
+
+    window.addEventListener('keyup', handleKeyUp);
+    return () => {
+      window.removeEventListener('keyup', handleKeyUp);
+    };
   }, []);
 
   return (
@@ -28,7 +31,7 @@ const Modal = ({
             <S.HeaderSection>
               <S.Title>{title}</S.Title>
               <S.ModalCloseButton onClick={handleCloseModal}>
-                <img src="./closeIcon.png" />
+                <img src='./closeIcon.png' />
               </S.ModalCloseButton>
             </S.HeaderSection>
 
