@@ -1,6 +1,6 @@
 import "./App.css";
 
-import { useExpiryDate } from "pesu-hooks";
+import { useExpiryDate } from "./lib";
 
 export default function App() {
   const { expiryDate, handleExpiryDateChange, errorMessage } = useExpiryDate();

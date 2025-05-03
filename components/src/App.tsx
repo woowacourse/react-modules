@@ -1,6 +1,6 @@
 import { useState } from "react";
 import "./App.css";
-import { Modal } from "pesu-modal";
+import { Modal } from "./components";
 
 function App() {
   const [isOpen, setIsOpen] = useState(true);
