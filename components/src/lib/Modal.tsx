@@ -112,6 +112,8 @@ const ModalOverlay = styled.div`
 `;
 
 const CloseButton = styled.button`
+  border: none;
+  background-color: white;
   cursor: pointer;
 `;
 
@@ -122,7 +124,7 @@ const TitleSection = styled.section`
   margin-bottom: 24px;
 `;
 
-const TitleText = styled.p`
+const TitleText = styled.h2`
   font-size: 18px;
   font-weight: bold;
 `;
