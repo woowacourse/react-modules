@@ -37,6 +37,12 @@ export default function useCardNumber() {
         errorMessage: ERROR_MESSAGE.cardNumber,
       },
     },
+    inputRegex: {
+      first: /^\d{1,4}$/,
+      second: /^\d{1,4}$/,
+      third: /^\d{1,4}$/,
+      fourth: /^\d{1,4}$/,
+    },
   });
 
   return {

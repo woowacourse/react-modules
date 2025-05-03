@@ -19,6 +19,9 @@ export default function usePassword() {
         errorMessage: ERROR_MESSAGE.cardPassword,
       },
     },
+    inputRegex: {
+      password: /^\d{1,2}$/,
+    },
   });
 
   return {

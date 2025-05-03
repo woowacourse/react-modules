@@ -19,6 +19,9 @@ export default function useCvcNumber() {
         errorMessage: ERROR_MESSAGE.cardCVCNumber,
       },
     },
+    inputRegex: {
+      cvc: /^\d{1,3}$/,
+    },
   });
 
   return {

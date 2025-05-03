@@ -4,6 +4,7 @@ import { renderHook, act } from "@testing-library/react";
 
 test("사용자가 정상적인 값을 입력하면 에러가 발생하지 않는다.", async () => {
   const { result } = renderHook(() => useCardNumber());
+
   const { isValid, handleCardNumberChange } = result.current;
 
   const event = {

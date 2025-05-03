@@ -26,6 +26,10 @@ export default function useExpiryDate() {
         errorMessage: ERROR_MESSAGE.cardExpirationDate.year,
       },
     },
+    inputRegex: {
+      month: /^(0?[1-9]|1[0-2])$/,
+      year: /^\d{1,4}$/,
+    },
   });
 
   return {
