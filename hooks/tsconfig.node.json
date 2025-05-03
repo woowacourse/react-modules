@@ -11,7 +11,7 @@
     "allowImportingTsExtensions": true,
     "isolatedModules": true,
     "moduleDetection": "force",
-    "noEmit": true,
+    "noEmit": false,
 
     "esModuleInterop": true,
 
@@ -29,5 +29,6 @@
     "declarationDir": "dist",
     "declarationMap": true
   },
-  "include": ["vite.config.ts"]
+  "include": ["vite.config.ts", "src"],
+  "exclude": ["node_modules", "dist", "**/*.test.ts"]
 }
