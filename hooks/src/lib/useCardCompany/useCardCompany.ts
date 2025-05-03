@@ -9,7 +9,7 @@ const useCardCompany = () => {
   const [errorMessage, setErrorMessage] = useState<string>("");
 
   const validate = (value: string) => {
-    if (!value) {
+    if (value.length === 0) {
       setIsValid(false);
       setErrorMessage(ERROR_MESSAGE.EMPTY_CARD_COMPANY);
       return;
