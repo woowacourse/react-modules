@@ -1,25 +1,30 @@
-import { useState } from "react";
-
-const numberRegex = /^[0-9]*$/;
+import { ERROR_MESSAGE } from "../constants";
+import { useForm } from "../hooks/useForm";
+import { CardCVCNumberInput } from "../types/input";
 
 export default function useCvcNumber() {
-  const [cvcNumber, setCvcNumber] = useState("");
+  const {
+    value: cvcNumber,
+    errors: cvcNumberErrors,
+    register: cvcNumberRegister,
+    isValid: isCvcNumberIsValid,
+  } = useForm<CardCVCNumberInput>({
+    defaultValues: {
+      cvc: "",
+    },
+    validation: {
+      cvc: {
+        required: true,
+        length: 3,
+        errorMessage: ERROR_MESSAGE.cardCVCNumber.length,
+      },
+    },
+  });
 
-  const [errorMessage, setErrorMessage] = useState("");
-
-  const isValid = !errorMessage;
-
-  const handleCvcNumberChange = (
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    const value = event.target.value;
-
-    if (!numberRegex.test(value)) return;
-
-    setCvcNumber(value);
-
-    if (value.length < 3) setErrorMessage("3글자를 입력해 주세요.");
+  return {
+    cvcNumberErrors,
+    isCvcNumberIsValid,
+    cvcNumber,
+    cvcNumberRegister,
   };
-
-  return { errorMessage, isValid, cvcNumber, handleCvcNumberChange };
 }
