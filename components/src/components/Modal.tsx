@@ -2,6 +2,7 @@
 
 import styled from '@emotion/styled';
 import { PropsWithChildren, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import { CloseIcon } from './common';
 
 const ModalContainer = styled.div<Pick<ModalInterface, 'position' | 'margin' | 'zIndex'>>`
@@ -100,8 +101,9 @@ export default function Modal({
     };
   }, [onClose]);
 
-  if (!isOpen) return;
-  return (
+  if (!isOpen) return null;
+
+  return createPortal(
     <>
       <ModalContainer position={position} margin={margin} zIndex={zIndex}>
         <ModalTop>
@@ -114,6 +116,7 @@ export default function Modal({
         {children}
       </ModalContainer>
       <ModalBackdrop onClick={onClose} />
-    </>
+    </>,
+    typeof window !== 'undefined' && window.document.body ? window.document.body : document.body,
   );
 }
