@@ -10,15 +10,31 @@ interface ModalProps {
   title: string;
   isOpen: boolean;
   onClose: () => void;
+  children: ReactNode;
   onConfirm?: () => void;
   position?: Position;
   hasTopCloseButton?: boolean;
   primaryButton?: boolean;
   secondaryButton?: boolean;
-  children: ReactNode;
   primaryButtonText?: string;
   secondaryButtonText?: string;
 }
+/**
+ * 모달 생성
+ *
+ @typedef {Object} ModalProps
+ * @property {string} title - 모달의 제목
+ * @property {boolean} isOpen - 모달 열림 여부
+ * @property {() => void} onClose - 모달 닫기 핸들러
+ * @property {React.ReactNode} children - 모달 내용
+ * @property {() => void} [onConfirm] - (선택) 확인 버튼 클릭 시 실행할 함수
+ * @property {'center' | 'bottom'} [position] - (선택) 모달 위치
+ * @property {boolean} [hasTopCloseButton] - (선택) 상단 닫기 버튼 표시 여부
+ * @property {boolean} [primaryButton] - (선택) 확인 버튼 표시 여부
+ * @property {boolean} [secondaryButton] - (선택) 취소 버튼 표시 여부
+ * @property {string} [primaryButtonText] - (선택) 확인 버튼 텍스트
+ * @property {string} [secondaryButtonText] - (선택) 취소 버튼 텍스트
+ */
 
 function Modal({
   title,
