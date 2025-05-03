@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useState } from 'react';
 import { CardFieldHook, validationResult } from '../types/card';
 
 function createCardField<T extends string>(
@@ -7,19 +7,19 @@ function createCardField<T extends string>(
 ): CardFieldHook<T> {
   const [value, setValue] = useState<T>(initialState);
 
-  const errorMessage = useMemo(() => {
+  const validate = () => {
     for (const validateFn of validationFunctions) {
       const { isValid, errorMessage } = validateFn(value);
       if (!isValid && errorMessage) return errorMessage;
     }
     return '';
-  }, [value]);
+  };
 
   const handleChange = (newValue: T) => {
     setValue(newValue);
   };
 
-  return { value, handleChange, errorMessage };
+  return { value, handleChange, errorMessage: validate() };
 }
 
 export default createCardField;
