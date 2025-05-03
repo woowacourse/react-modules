@@ -13,19 +13,27 @@ interface DialogContextType {
   open: () => void;
   close: () => void;
   isOpen: boolean;
+  position: "center" | "bottom";
 }
 
 export const DialogContext = createContext<DialogContextType>({
   isOpen: false,
   open: () => {},
   close: () => {},
+  position: "center",
 });
 
-export function Dialog({ children }: { children: React.ReactNode }) {
+export function Dialog({
+  children,
+  position = "center",
+}: {
+  children: React.ReactNode;
+  position?: "bottom" | "center";
+}) {
   const { value: isOpen, setTrue: open, setFalse: close } = useBoolean(false);
 
   return (
-    <DialogContext.Provider value={{ isOpen, open, close }}>
+    <DialogContext.Provider value={{ isOpen, open, close, position }}>
       {children}
     </DialogContext.Provider>
   );
@@ -110,13 +118,13 @@ function CloseButton({
 
 function Content({
   children,
-  position = "center",
   className,
 }: {
   children: React.ReactNode;
-  position?: "center" | "bottom";
   className?: string;
 }) {
+  const { position } = useDialogContext();
+
   return (
     <StyledContent position={position} className={className}>
       {children}
