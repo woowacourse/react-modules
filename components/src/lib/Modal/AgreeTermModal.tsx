@@ -9,27 +9,17 @@ const AgreeTermModal = ({ setIsOpen }: any) => {
       <Header>
         <Title>약관에 동의해주세요</Title>
         <CloseButton onClick={onClose}>
-          <img src="../../src/assets/images/Close.svg" />
+          <img src="./Close.svg" />
         </CloseButton>
       </Header>
 
       <AgreementWrap>
         <AgreementItem>
-          <img
-            src="../../src/assets/images/check.png"
-            alt=""
-            width={20}
-            height={20}
-          />
+          <img src="./check.png" alt="" width={20} height={20} />
           <Text>[필수] 개인정보 수집이용 동의</Text>
         </AgreementItem>
         <AgreementItem>
-          <img
-            src="../../src/assets/images/check.png"
-            alt=""
-            width={20}
-            height={20}
-          />
+          <img src="./check.png" alt="" width={20} height={20} />
           <Text>[필수] 고객정보 제 3자 제공동의</Text>
         </AgreementItem>
       </AgreementWrap>

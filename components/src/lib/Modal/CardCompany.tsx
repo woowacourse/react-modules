@@ -7,14 +7,14 @@ const CardCompany = () => {
         <Title>카드사 선택</Title>
       </Header>
       <CardContainer>
-        <CardImg src="../../src/assets/images/CardIcon.svg"></CardImg>
-        <CardImg src="../../src/assets/images/CardIcon.svg"></CardImg>
-        <CardImg src="../../src/assets/images/CardIcon.svg"></CardImg>
-        <CardImg src="../../src/assets/images/CardIcon.svg"></CardImg>
-        <CardImg src="../../src/assets/images/CardIcon.svg"></CardImg>
-        <CardImg src="../../src/assets/images/CardIcon.svg"></CardImg>
-        <CardImg src="../../src/assets/images/CardIcon.svg"></CardImg>
-        <CardImg src="../../src/assets/images/CardIcon.svg"></CardImg>
+        <CardImg src="./CardIcon.svg"></CardImg>
+        <CardImg src="./CardIcon.svg"></CardImg>
+        <CardImg src="./CardIcon.svg"></CardImg>
+        <CardImg src="./CardIcon.svg"></CardImg>
+        <CardImg src="./CardIcon.svg"></CardImg>
+        <CardImg src="./CardIcon.svg"></CardImg>
+        <CardImg src="./CardIcon.svg"></CardImg>
+        <CardImg src="./CardIcon.svg"></CardImg>
       </CardContainer>
     </Container>
   );
