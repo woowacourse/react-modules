@@ -27,7 +27,10 @@ const useCardNumber = () => {
 
   const handleCardNumber = (numbers: CardNumberInput) => {
     setCardNumber(numbers);
-    validateCardNumber({ numbers, isValid, setIsValid, setErrorMessage });
+
+    const { isValid: newIsValid, message } = validateCardNumber(numbers);
+    setIsValid(newIsValid);
+    setErrorMessage(message);
   };
 
   return { cardNumber, setCardNumber, handleCardNumber, isValid, errorMessage };
