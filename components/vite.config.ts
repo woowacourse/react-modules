@@ -11,15 +11,28 @@ export default defineConfig({
       fileName: 'index',
     },
     rollupOptions: {
-      external: ['react'],
+      external: [
+        'react',
+        'react-dom',
+        '@emotion/react',
+        '@emotion/styled',
+      ],
       output: {
         globals: {
           react: 'React',
+          'react-dom': 'ReactDOM',
+          '@emotion/react': 'emotionReact',
+          '@emotion/styled': 'emotionStyled',
         },
       },
     },
     commonjsOptions: {
-      esmExternals: ['react'],
+      esmExternals: [
+        'react',
+        'react-dom',
+        '@emotion/react',
+        '@emotion/styled',
+      ],
     },
   },
   plugins: [
