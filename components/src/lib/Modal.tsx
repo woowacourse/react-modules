@@ -1,6 +1,6 @@
 import {
   ModalBackground,
-  ModalConatiner,
+  ModalContainer,
   ModalHeader,
   CloseButton,
 } from "./Modal.styles";
@@ -20,17 +20,15 @@ const Modal = ({
   onClose,
 }: ModalPropsType) => {
   return (
-    <>
-      <ModalBackground isModalOpen={isModalOpen} position={position}>
-        <ModalConatiner position={position}>
-          <ModalHeader>
-            <h4>{title}</h4>
-            <CloseButton onClick={onClose}>X</CloseButton>
-            {children}
-          </ModalHeader>
-        </ModalConatiner>
-      </ModalBackground>
-    </>
+    <ModalBackground isModalOpen={isModalOpen} position={position}>
+      <ModalContainer position={position}>
+        <ModalHeader>
+          <h4>{title}</h4>
+          <CloseButton onClick={onClose}>X</CloseButton>
+          {children}
+        </ModalHeader>
+      </ModalContainer>
+    </ModalBackground>
   );
 };
 

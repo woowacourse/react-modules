@@ -30,7 +30,7 @@ export const ModalBackground = styled.div<{
   }};
 `;
 
-export const ModalConatiner = styled.div<{
+export const ModalContainer = styled.div<{
   position: string;
 }>`
   background-color: #ffffff;
