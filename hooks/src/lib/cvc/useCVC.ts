@@ -48,7 +48,7 @@ function useCVC() {
     if (!restrictChange) {
       setValidationResult({
         isValid: !Boolean(errorType),
-        errorMessage: errorType ? ERROR_MESSAGE.cardNumber[errorType] : '',
+        errorMessage: errorType ? ERROR_MESSAGE.CVC[errorType] : '',
       });
     }
 
