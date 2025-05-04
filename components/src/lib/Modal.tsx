@@ -9,7 +9,7 @@ import {
 } from "./Modal.styles";
 interface ModalPropsType {
   isModalOpen: boolean;
-  position: string;
+  position: "center" | "bottom";
   title: string;
   children: React.ReactNode;
   onClose: () => void;
