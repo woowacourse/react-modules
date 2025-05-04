@@ -1,13 +1,10 @@
+import { css } from '@emotion/react';
 import styled from '@emotion/styled';
-import {
-  CSSProperties,
-  PropsWithChildren,
-  ReactNode,
-  useEffect,
-  useRef,
-} from 'react';
+import { PropsWithChildren, useEffect, useRef } from 'react';
+import CloseButton from './CloseButton';
 import PrimaryButton from './PrimaryButton';
 import SecondaryButton from './SecondaryButton';
+import Title from './Title';
 import { ModalProps } from './types';
 
 function ModalContainer({
@@ -55,33 +52,6 @@ function ModalContainer({
   );
 }
 
-function CloseButton({
-  style,
-  onClose,
-}: {
-  style?: CSSProperties;
-  onClose: () => void;
-}) {
-  return (
-    <StyledCloseButton type="button" style={style} onClick={onClose}>
-      <img
-        src={new URL('./assets/close-button.png', import.meta.url).href}
-        alt="모달 닫기 버튼"
-      />
-    </StyledCloseButton>
-  );
-}
-
-function Title({
-  style,
-  children,
-}: {
-  style?: CSSProperties;
-  children: ReactNode;
-}) {
-  return <StyledTitle style={style}>{children}</StyledTitle>;
-}
-
 const StyledModalContainer = styled.dialog<{ isBottom: boolean }>`
   box-sizing: border-box;
   min-width: 400px;
@@ -116,21 +86,6 @@ const ModalWrapper = styled.div<{ isBottom: boolean }>`
   border-bottom-left-radius: ${(props) => (props.isBottom ? 0 : null)};
   border-bottom-right-radius: ${(props) => (props.isBottom ? 0 : null)};
   gap: ${(props) => (props.isBottom ? '16px' : '24px')};
-`;
-
-const StyledTitle = styled.h2`
-  margin: 0;
-  justify-self: flex-start;
-  font-size: 24px;
-`;
-
-const StyledCloseButton = styled.button`
-  border: none;
-  background: none;
-  position: absolute;
-  top: 24px;
-  right: 32px;
-  cursor: pointer;
 `;
 
 export default {
