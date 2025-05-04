@@ -32,16 +32,19 @@ function Modal({ width = '304px', height = '216px', position, title, onClose, ch
     };
   }, [onClose]);
 
-  const handleClickOverlay = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (e.target === e.currentTarget) {
-      onClose();
-    }
+  const handleClickOverlay = () => {
+    onClose();
   };
 
   return (
     <Layout onClick={handleClickOverlay}>
-      <Overlay onClick={onClose} />
-      <ModalContainer width={customWidth} height={height} position={position}>
+      <Overlay />
+      <ModalContainer
+        width={customWidth}
+        height={height}
+        position={position}
+        onClick={(e) => e.stopPropagation()}
+      >
         <TitleContainer>
           <Title>{title}</Title>
           <CloseButton onClick={onClose}>
