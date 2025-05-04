@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { CSSProperties, ReactElement } from 'react';
+import { CSSProperties } from 'react';
 
 function SecondaryButton({
   label,
@@ -9,7 +9,7 @@ function SecondaryButton({
   label: string;
   onClick: () => void;
   style?: CSSProperties;
-}): ReactElement<HTMLButtonElement, 'button'> {
+}) {
   return (
     <SecondaryButtonContainer style={style} onClick={onClick}>
       {label}
@@ -25,6 +25,8 @@ const SecondaryButtonContainer = styled.button`
   background-color: #ffffff;
   color: #8b95a1;
   border-radius: 4px;
+
+  cursor: pointer;
 `;
 
 export default SecondaryButton;

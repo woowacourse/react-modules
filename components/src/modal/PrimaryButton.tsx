@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { CSSProperties, ReactElement } from 'react';
+import { CSSProperties } from 'react';
 
 function PrimaryButton({
   label,
@@ -9,7 +9,7 @@ function PrimaryButton({
   label: string;
   onClick: () => void;
   style?: CSSProperties;
-}): ReactElement<HTMLButtonElement, 'button'> {
+}) {
   return (
     <PrimaryButtonContainer style={style} onClick={onClick}>
       {label}
@@ -25,6 +25,8 @@ const PrimaryButtonContainer = styled.button`
   background-color: #333333;
   color: white;
   border-radius: 4px;
+
+  cursor: pointer;
 `;
 
 export default PrimaryButton;
