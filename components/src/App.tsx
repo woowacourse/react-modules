@@ -1,10 +1,19 @@
-import React from "react";
-import "./App.css";
+import { useState } from "react";
+import { Modal } from "./lib";
 
 function App() {
+  const [isOpen, setIsOpen] = useState(false);
+
   return (
     <>
-      <h1>Component Modules</h1>
+      <button onClick={() => setIsOpen(true)}>모달 열기</button>
+      {isOpen && (
+        <Modal
+          title="카드사 선택"
+          onRequestClose={() => setIsOpen(false)}
+          position="center"
+        />
+      )}
     </>
   );
 }

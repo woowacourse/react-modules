@@ -22,5 +22,19 @@ export default defineConfig({
       esmExternals: ["react"],
     },
   },
-  plugins: [react(), dts()],
+  plugins: [
+    react(),
+    dts({
+      exclude: ["**/*.stories.tsx"],
+      include: ["src/lib", "src/svg.d.ts"],
+      tsconfigPath: "./tsconfig.app.json",
+    }),
+  ],
+  resolve: {
+    alias: {
+      "@": path.resolve(__dirname, "./src"),
+      "@assets": path.resolve(__dirname, "./src/assets"),
+      "@components": path.resolve(__dirname, "./src/components"),
+    },
+  },
 });
