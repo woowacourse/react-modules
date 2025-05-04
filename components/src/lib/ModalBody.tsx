@@ -5,7 +5,7 @@ interface ModalBodyProps {
 }
 
 function ModalBody({ children }: ModalBodyProps) {
-  return <div>{children}</div>;
+  return <section>{children}</section>;
 }
 
 export default ModalBody;
