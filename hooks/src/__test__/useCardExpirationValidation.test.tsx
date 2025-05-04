@@ -1,7 +1,7 @@
 import { renderHook } from "@testing-library/react";
-import useCardExpirationValidation from "../lib/useCardExpirationValidation";
+import cardExpirationValidation from "../lib/cardExpirationValidation";
 
-describe("useCardExpirationValidation 테스트", () => {
+describe("cardExpirationValidation 테스트", () => {
   it("유효기간이 유효한 형태인지 확인한다.", () => {
     const expirationPeriod = {
       month: "12",
@@ -9,7 +9,7 @@ describe("useCardExpirationValidation 테스트", () => {
     };
 
     const { result } = renderHook(() =>
-      useCardExpirationValidation(expirationPeriod.month, expirationPeriod.year)
+      cardExpirationValidation(expirationPeriod.month, expirationPeriod.year)
     );
     expect(result.current.isCardExpirationError).toEqual([false, false]);
   });
@@ -21,7 +21,7 @@ describe("useCardExpirationValidation 테스트", () => {
     };
 
     const { result } = renderHook(() =>
-      useCardExpirationValidation(expirationPeriod.month, expirationPeriod.year)
+      cardExpirationValidation(expirationPeriod.month, expirationPeriod.year)
     );
     expect(result.current.isCardExpirationError).toEqual([true, true]);
   });
@@ -33,7 +33,7 @@ describe("useCardExpirationValidation 테스트", () => {
     };
 
     const { result } = renderHook(() =>
-      useCardExpirationValidation(expirationPeriod.month, expirationPeriod.year)
+      cardExpirationValidation(expirationPeriod.month, expirationPeriod.year)
     );
     expect(result.current.isCardExpirationError).toEqual([false, true]);
   });
@@ -45,7 +45,7 @@ describe("useCardExpirationValidation 테스트", () => {
     };
 
     const { result } = renderHook(() =>
-      useCardExpirationValidation(expirationPeriod.month, expirationPeriod.year)
+      cardExpirationValidation(expirationPeriod.month, expirationPeriod.year)
     );
     expect(result.current.isCardExpirationError).toEqual([true, false]);
   });

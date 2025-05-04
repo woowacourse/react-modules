@@ -1,39 +1,39 @@
-import useIsNumber from "./useIsNumber";
-import useIsPositiveNumber from "./useIsPositiveNumber";
-import useIsValidLength from "./useIsValidLength";
+import isNumber from "./isNumber";
+import isPositiveNumber from "./isPositiveNumber";
+import isValidLength from "./isValidLength";
 
-function useCardExpirationValidation(month: string, year: string) {
+function cardExpirationValidation(month: string, year: string) {
   const isCardExpirationError = [
     !isValidMonth(month) ||
-      !useIsValidLength(month, 0, 2) ||
-      !useIsNumber(month) ||
-      !useIsPositiveNumber(month),
+      !isValidLength(month, 0, 2) ||
+      !isNumber(month) ||
+      !isPositiveNumber(month),
     !isValidYear(year) ||
-      !useIsValidLength(year, 0, 2) ||
-      !useIsNumber(year) ||
-      !useIsPositiveNumber(year),
+      !isValidLength(year, 0, 2) ||
+      !isNumber(year) ||
+      !isPositiveNumber(year),
   ];
 
   const errorText = (() => {
-    if (!useIsNumber(month)) {
+    if (!isNumber(month)) {
       return "입력값은 숫자여야합니다.";
     }
-    if (!useIsPositiveNumber(month)) {
+    if (!isPositiveNumber(month)) {
       return "입력값은 양수여야합니다.";
     }
-    if (!useIsValidLength(month, 0, 2)) {
+    if (!isValidLength(month, 0, 2)) {
       return "입력값은 2자리이어야합니다.";
     }
     if (!isValidMonth(month)) {
       return "월은 1~12 이어야합니다.";
     }
-    if (!useIsNumber(year)) {
+    if (!isNumber(year)) {
       return "입력값은 숫자여야합니다.";
     }
-    if (!useIsPositiveNumber(year)) {
+    if (!isPositiveNumber(year)) {
       return "입력값은 양수여야합니다.";
     }
-    if (!useIsValidLength(year, 0, 2)) {
+    if (!isValidLength(year, 0, 2)) {
       return "입력값은 2자리이어야합니다.";
     }
     if (!isValidYear(year)) {
@@ -44,7 +44,7 @@ function useCardExpirationValidation(month: string, year: string) {
   return { isCardExpirationError, errorText };
 }
 
-export default useCardExpirationValidation;
+export default cardExpirationValidation;
 
 const isValidMonth = (value: string) => {
   const num = Number(value);
