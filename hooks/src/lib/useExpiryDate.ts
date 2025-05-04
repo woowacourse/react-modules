@@ -16,13 +16,15 @@ const EXPIRYDATE_RULE = {
 type ValitationResult = {
   date: dateType;
   error: errorType[];
-  handleExpiryDateChange: (value: string, dateName: string) => void;
+  handleExpiryDateChange: (value: string, dateName: ExpiryField) => void;
 };
 
 type dateType = {
   month: string;
   year: string;
 };
+
+type ExpiryField = keyof dateType;
 
 type errorType = {
   isValidate: boolean;
