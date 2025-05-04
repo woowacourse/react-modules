@@ -15,8 +15,7 @@ export const ModalBackground = styled.div<{
   display: flex;
   justify-content: center;
   z-index: 10;
-  visibility: hidden;
-  visibility: ${({ isOpen }) => isOpen === true && 'visible'};
+  visibility: ${({ isOpen }) => (isOpen ? 'visible' : 'hidden')};
   opacity: ${({ isOpen }) => isOpen === true && '1'};
   transition: opacity 0.3s ease, visibility 0.3s ease;
   margin: 0 auto;
