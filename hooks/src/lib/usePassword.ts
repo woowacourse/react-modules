@@ -9,14 +9,14 @@ const PASSWORD_RULE = {
 type ValitationResult = {
   password: string;
   error: { isValid: boolean; errorMessage: string };
-  validate: (value: string) => void;
+  handlePasswordChange: (value: string) => void;
 };
 
 export default function usePassword(): ValitationResult {
   const [password, setPassword] = useState("");
   const [error, setError] = useState({ isValid: false, errorMessage: "" });
 
-  const validate = (value: string) => {
+  const handlePasswordChange = (value: string) => {
     if (value.length > PASSWORD_RULE.MAX_LENGTH) return;
 
     setPassword(value);
@@ -40,5 +40,5 @@ export default function usePassword(): ValitationResult {
     setError({ isValid: false, errorMessage: "" });
   };
 
-  return { password, error, validate };
+  return { password, error, handlePasswordChange };
 }

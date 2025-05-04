@@ -1,44 +1,48 @@
 import "./App.css";
-import { useCardNumbers } from "happyjurung-hooks";
-import { useExpiryDate } from "happyjurung-hooks";
-import { usePassword } from "happyjurung-hooks";
-import { useCvcNumber } from "happyjurung-hooks";
+// import { useCardNumbers } from "happyjurung-hooks";
+// import { useExpiryDate } from "happyjurung-hooks";
+// import { usePassword } from "happyjurung-hooks";
+// import { useCvcNumber } from "happyjurung-hooks";
+import useCardNumbers from "./lib/useCardNumbers";
+import useExpiryDate from "./lib/useExpiryDate";
+import usePassword from "./lib/usePassword";
+import useCvcNumber from "./lib/useCvcNumber";
 
 function App() {
   const {
     numbers,
     error: cardNumbersError,
-    validate: cardNumbersValidate,
+    handleCardNumberChange,
   } = useCardNumbers();
-  const { date, error: dateError, validate: dateValidate } = useExpiryDate();
-  const { cvc, error: cvcError, validate: cvcValidate } = useCvcNumber();
+  const { date, error: dateError, handleExpiryDateChange } = useExpiryDate();
+  const { cvc, error: cvcError, handleCvcNumberChange } = useCvcNumber();
   const {
     password,
     error: passwordError,
-    validate: passwordValidate,
+    handlePasswordChange,
   } = usePassword();
 
   const handleCardNumber = (
     e: React.ChangeEvent<HTMLInputElement>,
     index: number
   ) => {
-    cardNumbersValidate(e.target.value, index);
+    handleCardNumberChange(e.target.value, index);
   };
 
   const handleExpiryDate = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.name === "month") {
-      dateValidate(e.target.value, "month");
+      handleExpiryDateChange(e.target.value, "month");
     } else if (e.target.name === "year") {
-      dateValidate(e.target.value, "year");
+      handleExpiryDateChange(e.target.value, "year");
     }
   };
 
   const handlePassword = (e: React.ChangeEvent<HTMLInputElement>) => {
-    passwordValidate(e.target.value);
+    handlePasswordChange(e.target.value);
   };
 
   const handleCvcNumber = (e: React.ChangeEvent<HTMLInputElement>) => {
-    cvcValidate(e.target.value);
+    handleCvcNumberChange(e.target.value);
   };
 
   return (

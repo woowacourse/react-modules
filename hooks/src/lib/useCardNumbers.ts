@@ -6,10 +6,10 @@ const CARD_NUMBER_RULE = {
   MAX_LENGTH: 4,
 } as const;
 
-type ValitationResult = {
+type ValidationResult = {
   numbers: string[];
   error: errorType[];
-  validate: (value: string, index: number) => void;
+  handleCardNumberChange: (value: string, index: number) => void;
 };
 
 type errorType = {
@@ -22,7 +22,7 @@ const initialDate = {
   errorMessage: "",
 };
 
-export default function useCardNumbers(): ValitationResult {
+export default function useCardNumbers(): ValidationResult {
   const [numbers, setNumbers] = useState(["", "", "", ""]);
   const [error, setError] = useState<errorType[]>(
     Array.from({ length: 4 }, () => initialDate)
@@ -44,7 +44,7 @@ export default function useCardNumbers(): ValitationResult {
     });
   };
 
-  const validate = (value: string, index: number) => {
+  const handleCardNumberChange = (value: string, index: number) => {
     if (value.length > CARD_NUMBER_RULE.MAX_LENGTH) return;
 
     setNumbers((prev) => {
@@ -69,5 +69,5 @@ export default function useCardNumbers(): ValitationResult {
     updateCardNumber(index, false, "");
   };
 
-  return { numbers, error, validate };
+  return { numbers, error, handleCardNumberChange };
 }

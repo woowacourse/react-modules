@@ -16,7 +16,7 @@ const EXPIRYDATE_RULE = {
 type ValitationResult = {
   date: dateType;
   error: errorType[];
-  validate: (value: string, dateName: string) => void;
+  handleExpiryDateChange: (value: string, dateName: string) => void;
 };
 
 type dateType = {
@@ -55,7 +55,7 @@ export default function useExpiryDate(): ValitationResult {
     });
   };
 
-  const validate = (value: string, dateName: string) => {
+  const handleExpiryDateChange = (value: string, dateName: string) => {
     if (dateName === "month") {
       if (value.length > EXPIRYDATE_RULE.DATE_MAX_LENGTH) return;
       setDate((prev) => ({ ...prev, month: value }));
@@ -108,5 +108,5 @@ export default function useExpiryDate(): ValitationResult {
     }
   };
 
-  return { date, error, validate };
+  return { date, error, handleExpiryDateChange };
 }

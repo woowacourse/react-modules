@@ -9,14 +9,14 @@ const CVC_RULE = {
 type ValitationResult = {
   cvc: string;
   error: { isValid: boolean; errorMessage: string };
-  validate: (value: string) => void;
+  handleCvcNumberChange: (value: string) => void;
 };
 
 export default function useCvcNumber(): ValitationResult {
   const [cvc, setCvc] = useState("");
   const [error, setError] = useState({ isValid: false, errorMessage: "" });
 
-  const validate = (value: string) => {
+  const handleCvcNumberChange = (value: string) => {
     if (value.length > 3) return;
 
     setCvc(value);
@@ -37,5 +37,5 @@ export default function useCvcNumber(): ValitationResult {
     setError({ isValid: false, errorMessage: "" });
   };
 
-  return { cvc, error, validate };
+  return { cvc, error, handleCvcNumberChange };
 }
