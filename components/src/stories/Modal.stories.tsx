@@ -5,6 +5,19 @@ const meta: Meta<typeof Modal> = {
   title: "Components/Modal",
   component: Modal,
   tags: ["autodocs"],
+  parameters: {
+    docs: {
+      description: {
+        component: `
+- \`isModalOpen: boolean\` — 모달 열림/닫힘 여부
+- \`position: "center" | "bottom"\` — 표시 위치
+- \`title: string\` — 헤더에 표시할 제목
+- \`onClose: () => void\` — 닫기 버튼 클릭 시 호출되는 콜백
+- \`children: React.ReactNode\` — 모달 본문에 렌더링할 내용
+        `,
+      },
+    },
+  },
 };
 
 export default meta;
