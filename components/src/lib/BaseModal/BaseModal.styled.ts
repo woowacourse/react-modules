@@ -26,7 +26,7 @@ export const Backdrop = styled.div`
   animation: ${fadeIn} 0.3s ease;
 `;
 
-export const Modal = styled.div<ModalLayoutProps>`
+export const Modal = styled.div<Required<ModalLayoutProps>>`
   position: fixed;
   background: #fff;
   padding: 1.5rem 2rem;

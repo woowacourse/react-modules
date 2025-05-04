@@ -1,6 +1,6 @@
 import { ModalPositionType, ModalSizeType } from "@/lib/types";
 
-export const getModalPositionStyle = (position?: ModalPositionType) => {
+export const getModalPositionStyle = (position: ModalPositionType) => {
   switch (position) {
     case "bottom":
       return `
@@ -18,7 +18,7 @@ export const getModalPositionStyle = (position?: ModalPositionType) => {
   }
 };
 
-export const getModalSizeStyle = (size?: ModalSizeType) => {
+export const getModalSizeStyle = (size: ModalSizeType) => {
   switch (size) {
     case "small":
       return `
@@ -35,7 +35,7 @@ export const getModalSizeStyle = (size?: ModalSizeType) => {
   }
 };
 
-export const getModalAnimation = (position?: ModalPositionType) => {
+export const getModalAnimation = (position: ModalPositionType) => {
   switch (position) {
     case "bottom":
       return {
