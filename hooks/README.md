@@ -1,48 +1,83 @@
 # 페이먼츠 커스텀 훅
 
-> 페이먼츠 모듈 1단계
+# lume_hooks
 
-[🗂️ 배포 npm 링크](https://www.npmjs.com/package/lume_hooks)
+React 기반의 **카드 결제 정보 유효성 검증을 위한 커스텀 훅 모음 라이브러리**입니다.  
+카드 번호, 비밀번호, CVC, 유효기간, 카드사 등 다양한 항목에 대한 입력값 검증과 상태 관리를 제공합니다.
 
-<br>
+---
 
-## 🎯 기능 요구 사항
+## 🛠 설치
 
-## [Step1] ⚙️ Module
+```bash
+npm install lume_hooks
+# 또는
+yarn add lume_hooks
+```
 
-### 1. 커스텀 훅 분리
+> **Peer dependencies**
+>
+> * `react` (`^18.0.0 || ^19.0.0`)
+> * `react-dom`
 
-- [x] 페이먼츠 카드의 다양한 정보에 대한 유효성 검사 로직을 여러 개의 작은 커스텀 훅으로 분리하기
-  - 페이먼츠 앱에서 다루었던 카드 정보를 필수적으로 커스텀 훅으로 만들기
+---
 
-### 2. 유효성 검사하기
+## 🚀 사용 예시
 
-- [x] 카드 정보의 유효성 검사 결과와 에러 정보를 사용자인 개발자에게 제공하기
-- [x] 유효성 검사에 실패한 경우, 에러 정보를 문자열 형태로 반환하기
+```tsx
+import {
+  useCardNumber,
+  useCardExpiryPeriod,
+  useCardCVC,
+  useCardPassword,
+  useCardCompany,
+} from 'lumes_hooks';
 
-### 3. npm 배포
+function PaymentForm() {
+  const { cardNumber, handleCardNumberChange } = useCardNumber();
+  const { expiry, handleExpiryChange } = useCardExpiryPeriod();
 
-- [x] 페이먼츠 커스텀 훅 모듈을 npm으로 배포하기
+  return (
+    <form>
+      <input
+        name="cardNumber"
+        value={cardNumber.first || ''}
+        onChange={handleCardNumberChange}
+      />
+      <input
+        name="expiry"
+        value={expiry.month || ''}
+        onChange={handleExpiryChange}
+      />
+    </form>
+  );
+}
+```
 
-<br>
+---
 
-## [Step1] ✅ 프로그래밍 요구사항
+## 📘 제공 훅 목록
 
-- RTL
-  - [x] 각 커스텀 훅에 대해 독립적으로 테스트를 작성한다.
-  - [x] 정상 입력과 비정상 입력(성공 시나리오 / 실패 시나리오)을 모두 테스트한다.
-  - [x] 다양한 잘못된 입력(경계값 초과, 빈 입력, 형식 오류 등)에 대해 폭넓게 테스트한다.
+| 훅 이름                  | 설명                     |
+| --------------------- | ---------------------- |
+| `useCardNumber`       | 카드 번호 4칸 입력 및 유효성 관리   |
+| `useCardExpiryPeriod` | 카드 유효기간(월/년) 입력 관리     |
+| `useCardCVC`          | CVC 번호 입력 및 숫자 제한      |
+| `useCardPassword`     | 카드 비밀번호 앞 2자리 입력       |
+| `useCardCompany`      | 카드 BIN 번호를 기반으로 카드사 판별 |
 
-<br>
+---
 
-## 📝 커밋 메시지
+## 🔎 유틸 함수
 
-- feat : 새로운 기능을 추가한 경우
-- fix : 버그 수정
-- docs : 문서를 수정한 경우
-- style : 코드 스타일, 포멧, 주석을 변경
-- design: CSS 등 사용자 UI 디자인 변경
-- refactor : 코드 리팩토링
-- test : 테스트 관련 코드를 수정한 경우
-- chore : 코드 수정이 아닌, 단순 폴더명 파일명 등을 수정한 경우
-- remove: 파일이나 로직을 삭제한 경우
+| 함수 이름          | 설명                  |
+| -------------- | ------------------- |
+| `isOnlyDigits` | 숫자로만 구성되어 있는지 여부 확인 |
+
+---
+
+## ✅ 특징
+
+* 각 입력 필드별로 분리된 커스텀 훅 → 관심사의 분리
+* 타입스크립트 기반 안전한 타입 제공
+* 간단한 API, 유효성 상태와 값 상태를 함께 반환
