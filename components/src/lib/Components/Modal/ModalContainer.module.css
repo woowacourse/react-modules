@@ -1,0 +1,14 @@
+.modalContents {
+  padding: 24px 32px;
+  background: white;
+  color: black;
+  border-radius: 8px;
+}
+
+.centerWidth {
+  width: 80%;
+}
+
+.bottomWidth {
+  width: 100%;
+}

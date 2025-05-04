@@ -9,18 +9,43 @@ export default defineConfig({
       entry: path.resolve(__dirname, "src/lib/index.ts"),
       name: "index",
       fileName: "index",
+      formats: ["es", "cjs"],
     },
     rollupOptions: {
-      external: ["react"],
+      // react/react-dom과 테스트 파일(.test/.spec, __tests__)은 external 처리
+      external: (id: string) => {
+        // 런타임 의존
+        if (id === "react" || id === "react-dom") {
+          return true;
+        }
+
+        // __tests__ 폴더 제외
+        if (/__tests__/.test(id)) {
+          return true;
+        }
+
+        // .test.ts, .test.tsx, .spec.ts, .spec.tsx 제외
+        if (/\.test\.[jt]sx?$/.test(id) || /\.spec\.[jt]sx?$/.test(id)) {
+          return true;
+        }
+
+        return false;
+      },
       output: {
         globals: {
           react: "React",
+          "react-dom": "ReactDOM",
         },
+        exports: "named",
       },
     },
-    commonjsOptions: {
-      esmExternals: ["react"],
-    },
   },
-  plugins: [react(), dts()],
+
+  plugins: [
+    react(),
+    dts({
+      tsconfigPath: "./tsconfig.build.json",
+      insertTypesEntry: true,
+    }),
+  ],
 });

@@ -1,0 +1,30 @@
+import { useState, useCallback, useMemo } from "react";
+
+export type CardNetwork = "VISA" | "MASTERCARD" | "DEFAULT";
+
+export const getCardNetwork = (cardNumber: string): CardNetwork => {
+  const cleaned = cardNumber.replace(/\D/g, "");
+  if (cleaned.startsWith("4")) return "VISA";
+  if (/^5[1-5]/.test(cleaned)) return "MASTERCARD";
+  if (cleaned.length >= 4) {
+    const prefix = parseInt(cleaned.slice(0, 4), 10);
+
+    // 2221 <= prefix <= 2720 일 경우 MASTERCARD
+    // 2016년 이후로는 이렇게 바뀌었다고... 하네요?
+
+    if (2221 <= prefix && prefix <= 2720) return "MASTERCARD";
+  }
+  return "DEFAULT";
+};
+
+export default function useCardNetwork(initial = "") {
+  const [cardNumber, setCardNumber] = useState(initial);
+
+  const onChange = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
+    const { value } = event.target;
+    setCardNumber(value.replace(/\D/g, ""));
+  }, []);
+  const cardNetwork = useMemo(() => getCardNetwork(cardNumber), [cardNumber]);
+
+  return { cardNumber, onChange, cardNetwork };
+}
