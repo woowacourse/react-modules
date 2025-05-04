@@ -1,6 +1,6 @@
 {
   "name": "happyjurung-hooks",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "description": "npm modules",
   "type": "module",
   "types": "dist/index.d.ts",
@@ -17,9 +17,9 @@
     "test": "jest"
   },
   "dependencies": {
-    "happyjurung-hooks": "^0.0.8",
-    "react": "^19.1.0",
-    "react-dom": "^19.1.0"
+    "happyjurung-hooks": "^0.0.9",
+    "react": "^18 || ^19",
+    "react-dom": "^18 || ^19"
   },
   "peerDependencies": {
     "react": "^18 || ^19",
