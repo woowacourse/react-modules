@@ -3,6 +3,8 @@ import { CSSProperties } from 'react';
 export interface ModalProps {
   open: boolean;
   onClose: () => void;
-  position?: 'center' | 'bottom';
+  position?: ModalPositionType;
   style?: CSSProperties;
 }
+
+export type ModalPositionType = 'center' | 'bottom';

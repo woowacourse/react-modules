@@ -1,6 +1,10 @@
-import { css } from '@emotion/react';
+import { css, SerializedStyles } from '@emotion/react';
+import { ModalPositionType } from './types';
 
-export const MODAL_CONTAINER_POSITION_STYLES = {
+export const MODAL_CONTAINER_POSITION_STYLES: Record<
+  ModalPositionType,
+  SerializedStyles
+> = {
   center: css``,
   bottom: css`
     bottom: 0;
@@ -10,7 +14,10 @@ export const MODAL_CONTAINER_POSITION_STYLES = {
   `,
 };
 
-export const MODAL_CONTAINER_RESPONSIVE_WIDTH_STYLES = {
+export const MODAL_CONTAINER_RESPONSIVE_WIDTH_STYLES: Record<
+  ModalPositionType,
+  SerializedStyles
+> = {
   center: css`
     width: calc(100vw - 72px);
   `,
@@ -19,7 +26,10 @@ export const MODAL_CONTAINER_RESPONSIVE_WIDTH_STYLES = {
   `,
 };
 
-export const MODAL_WRAPPER_POSITION_STYLES = {
+export const MODAL_WRAPPER_POSITION_STYLES: Record<
+  ModalPositionType,
+  SerializedStyles
+> = {
   center: css`
     gap: 24px;
     border-radius: 8px;

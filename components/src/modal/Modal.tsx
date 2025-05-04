@@ -9,7 +9,7 @@ import {
 import PrimaryButton from './PrimaryButton';
 import SecondaryButton from './SecondaryButton';
 import Title from './Title';
-import { ModalProps } from './types';
+import { ModalPositionType, ModalProps } from './types';
 
 function ModalContainer({
   open,
@@ -56,7 +56,7 @@ function ModalContainer({
   );
 }
 
-const StyledModalContainer = styled.dialog<{ position: 'center' | 'bottom' }>`
+const StyledModalContainer = styled.dialog<{ position: ModalPositionType }>`
   box-sizing: border-box;
   min-width: 400px;
   padding: 0;
@@ -77,7 +77,7 @@ const StyledModalContainer = styled.dialog<{ position: 'center' | 'bottom' }>`
   }
 `;
 
-const ModalWrapper = styled.div<{ position: 'center' | 'bottom' }>`
+const ModalWrapper = styled.div<{ position: ModalPositionType }>`
   display: flex;
   flex-direction: column;
 
