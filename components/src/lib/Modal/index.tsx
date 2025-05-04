@@ -16,8 +16,8 @@ function Modal({
   size,
   children,
 }: PropsWithChildren<ModalProps>) {
-  const modalRef = useOutsideClickRef<HTMLDivElement>(() => onRequestClose());
-  useKeyDown({ keys: ["Escape"], callback: () => onRequestClose() });
+  const modalRef = useOutsideClickRef<HTMLDivElement>(onRequestClose);
+  useKeyDown({ keys: ["Escape"], callback: onRequestClose });
 
   return (
     <BaseModal

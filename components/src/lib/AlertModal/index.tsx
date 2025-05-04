@@ -18,15 +18,15 @@ function AlertModal({
   onRequestClose,
   size,
 }: AlertModalProps) {
-  const modalRef = useOutsideClickRef<HTMLDivElement>(() => onRequestClose());
-  useKeyDown({ keys: ["Escape"], callback: () => onRequestClose() });
+  const modalRef = useOutsideClickRef<HTMLDivElement>(onRequestClose);
+  useKeyDown({ keys: ["Escape"], callback: onRequestClose });
 
   return (
     <BaseModal
       title={title}
-      onRequestClose={onRequestClose}
       modalRef={modalRef}
       size={size}
+      hasCloseButton={false}
     >
       <S.Container>
         <S.AlertText>{alertText}</S.AlertText>

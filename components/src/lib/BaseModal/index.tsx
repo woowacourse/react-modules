@@ -5,7 +5,7 @@ import { ModalLayoutProps } from "../types";
 
 interface BaseModalProps extends ModalLayoutProps {
   title: string;
-  onRequestClose: () => void;
+  onRequestClose?: () => void;
   hasCloseButton?: boolean;
   modalRef?: React.RefObject<HTMLDivElement | null>;
 }
