@@ -1,7 +1,7 @@
 import { PropsWithChildren } from "react";
 import * as S from "./Modal.styled";
 import CloseIcon from "@assets/close.svg";
-import useModalCloseEvent from "../../hooks/useOutsideClick";
+import useModalCloseEvent from "../../hooks/useModalCloseEvent";
 
 export type ModalPositionType = "center" | "bottom";
 interface ModalProps {
