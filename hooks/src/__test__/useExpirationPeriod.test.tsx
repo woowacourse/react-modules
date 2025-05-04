@@ -29,14 +29,14 @@ describe('useExpirationPeriod 훅', () => {
     act(() => {
       result.current.onChangeExpirationPeriod(
         {
-          target: { value: '25' },
+          target: { value: '99' },
         } as React.ChangeEvent<HTMLInputElement>,
         'year'
       );
     });
     expect(result.current.expirationPeriod).toEqual({
       month: '12',
-      year: '25',
+      year: '99',
     });
     expect(result.current.isExpirationPeriodError).toEqual({
       month: false,
@@ -72,8 +72,6 @@ describe('useExpirationPeriod 훅', () => {
       month: true,
       year: false,
     });
-    expect(result.current.errorMessage).toBe(
-      '현재보다 이전값을 유효기간으로 선택할 수 없습니다.'
-    );
+    expect(result.current.errorMessage).toBe('현재보다 이전값을 유효기간으로 선택할 수 없습니다.');
   });
 });
