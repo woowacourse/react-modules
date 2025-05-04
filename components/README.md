@@ -1,52 +1,70 @@
 # 모달 컴포넌트
 
-> 페이먼츠 모듈 1단계
+# lumes-modal
 
-[🎨 스토리북 배포 주소](https://6811b32435027dad59e3902b-hdzpptbvyn.chromatic.com/?path=/story/components-modal--center)  
-[🗂️ 배포 npm 링크](https://www.npmjs.com/package/lumes_modal)
+React 기반의 재사용 가능한 모달 컴포넌트입니다.  
+중앙 또는 하단 위치로 띄울 수 있으며, 닫기 버튼, 오버레이 클릭, ESC 키로 닫을 수 있도록 기본 동작을 제공합니다.
 
-<br>
+---
 
-## 🎯 기능 요구 사항
+## 📦 설치
 
-## [Step1] ⚙️ Module
+```bash
+npm install lumes_modal
+# 또는
+yarn add lumes_modal
+```
 
-### 1. 모달 UI 구현
+> **Peer dependencies**로 다음 패키지가 필요합니다:
+>
+> * `react` (`^18.0.0 || ^19.0.0`)
+> * `react-dom`
+> * `@emotion/react`
+> * `@emotion/styled`
 
-- [x] 레이아웃 구현하기
-- [x] Title 구현하기
-- [x] close 버튼 UI 구현하기
-- [x] 모달 스타일 적용하기
-  - 모달 위치: 중앙, 하단 등
-  - 모달 내용: 제목, 버튼 등
+---
 
-### 2. 이벤트 핸들러 등록
+## 🚀 사용 예시
 
-- [x] 모달 위치 및 내용 구성 옵션을 prop으로 전달받아 유연하게 모달을 구성하기
-- [x] 사용자 정의 이벤트 핸들러를 연결하기
-  - 모달 열기, 닫기, 확인 등의 동작에 대한 이벤트 핸들러
+```tsx
+import Modal from '@your-org/lumes-modal';
 
-### 3. npm 배포
+function App() {
+  const [isOpen, setIsOpen] = useState(false);
 
-- [x] 모달 컴포넌트를 npm으로 배포하기
+  return (
+    <>
+      <button onClick={() => setIsOpen(true)}>Open Modal</button>
+      {isOpen && (
+        <Modal
+          title="알림"
+          position="center"
+          onClose={() => setIsOpen(false)}
+        >
+          <p>모달 내용입니다</p>
+        </Modal>
+      )}
+    </>
+  );
+}
+```
 
-<br>
+---
 
-## [Step1] ✅ 프로그래밍 요구사항
+## 📘 Props
 
-- Storybook
-  - [x] 모달의 위치, 내용, 이벤트 핸들러 등 다양한 prop에 대한 Storybook 테스트 시나리오를 작성한다.
+| 이름         | 타입                       | 필수 여부 | 설명                    |
+| ---------- | ------------------------ | ----- | --------------------- |
+| `title`    | `string`                 | 선택    | 모달 상단 타이틀             |
+| `position` | `'center'` \| `'bottom'` | ✔️    | 모달 위치 설정              |
+| `onClose`  | `() => void`             | ✔️    | 모달 닫기 켈받              |
+| `width`    | `string`                 | 선택    | 모달 너비 (기본값 `'304px'`) |
+| `height`   | `string`                 | 선택    | 모달 높이 (기본값 `'216px'`) |
 
-<br>
+---
 
-## 📝 커밋 메시지
+## ⚙️ 동작
 
-- feat : 새로운 기능을 추가한 경우
-- fix : 버그 수정
-- docs : 문서를 수정한 경우
-- style : 코드 스타일, 포멧, 주석을 변경
-- design: CSS 등 사용자 UI 디자인 변경
-- refactor : 코드 리팩토링
-- test : 테스트 관련 코드를 수정한 경우
-- chore : 코드 수정이 아닌, 단순 폴더명 파일명 등을 수정한 경우
-- remove: 파일이나 로직을 삭제한 경우
+* `Esc` 키를 누르면 모달이 닫힌다.
+* 모달 외부(오버레이)를 클릭하면 닫힌다.
+* 닫기 버튼(X)을 누르면 닫힌다.
