@@ -5,7 +5,7 @@
 ## useModal
 
 - isOpen: 모달이 보이는지 여부
-  - `(boolean)`
+  - `boolean`
 
 - handleOpen: 모달을 여는 함수
   - `() => void`  
@@ -22,7 +22,7 @@
 
 - onClose: 모달 외부를 클릭 시 닫는 함수를 받는다.
 
-# ModalContent
+## ModalContent
 
 - position: 모달을 표시할 위치를 받는다. `(center | bottom )`
 - children: 하위 컴포넌트를 받는다.
