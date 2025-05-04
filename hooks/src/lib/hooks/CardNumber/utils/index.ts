@@ -16,7 +16,7 @@ export const validateCardNumbers = (cardNumber: CardNumberState) => {
 };
 
 const validateCardNumber = (cardNumber: string): ValidationResult => {
-  if (isNaN(Number(cardNumber))) {
+  if (!/^\d+$/.test(cardNumber)) {
     return {
       isValid: false,
       errorMessage: "숫자만 입력해주세요.",
