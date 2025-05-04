@@ -36,11 +36,11 @@ const useCardNumberInput = (): Props => {
     let isValid = true;
     let errorMessage = "";
 
-    if (validator.hasNonNumericValue(inputValue)) {
+    if (validator.hasNaN(inputValue)) {
       isValid = false;
       errorMessage = ERROR_MESSAGE.REQUIRE.NUMBER;
     } else if (
-      validator.hasIncorrectLength(inputValue, CARD_INPUT.MAX_LENGTH.CARD)
+      !validator.hascorrectLength(inputValue, CARD_INPUT.MAX_LENGTH.CARD)
     ) {
       isValid = false;
       errorMessage = `숫자 ${CARD_INPUT.MAX_LENGTH.CARD}${ERROR_MESSAGE.REQUIRE.SPECIFIC_LENGTH}`;

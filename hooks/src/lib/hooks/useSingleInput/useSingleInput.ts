@@ -27,10 +27,10 @@ const useSingleInput = (maxLength: number): Props => {
     let isValid = true;
     let errorMessage = "";
 
-    if (validator.hasNonNumericValue(inputValue)) {
+    if (validator.hasNaN(inputValue)) {
       isValid = false;
       errorMessage = ERROR_MESSAGE.REQUIRE.NUMBER;
-    } else if (validator.hasIncorrectLength(inputValue, maxLength)) {
+    } else if (!validator.hascorrectLength(inputValue, maxLength)) {
       isValid = false;
       errorMessage = `숫자 ${maxLength}${ERROR_MESSAGE.REQUIRE.SPECIFIC_LENGTH}`;
     }
