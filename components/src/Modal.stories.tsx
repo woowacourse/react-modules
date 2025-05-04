@@ -27,7 +27,16 @@ export const Default: Story = {
 
     return (
       <>
-        <button onClick={() => setIsOpen(true)}>Open Modal</button>
+        <button
+          style={{
+            border: "1px solid #000",
+            backgroundColor: "#cccccc",
+            cursor: "pointer",
+          }}
+          onClick={() => setIsOpen(true)}
+        >
+          Open Modal
+        </button>
         <Modal {...args} isOpen={isOpen} handleCloseModal={handleCloseModal}>
           <div style={{ padding: "20px" }}>모달 content 입니다</div>
         </Modal>
