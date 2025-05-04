@@ -8,7 +8,7 @@ const config: StorybookConfig = {
     "@storybook/addon-essentials",
     "@chromatic-com/storybook",
     "@storybook/addon-interactions",
-    "@storybook/docs-addon",
+    "@storybook/addon-docs",
   ],
   framework: {
     name: "@storybook/react-vite",
@@ -16,6 +16,9 @@ const config: StorybookConfig = {
   },
   docs: {
     autodocs: true,
+  },
+  typescript: {
+    reactDocgen: "react-docgen-typescript",
   },
 };
 export default config;

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import type { Meta, StoryObj } from "@storybook/react";
-import { Modal } from "hanheel-modal-payments";
+import Modal from "../src/lib/Modal";
 import React from "react";
 
 const meta: Meta<typeof Modal> = {
@@ -26,7 +26,7 @@ export const Default: Story = {
     };
 
     return (
-      <>
+      <div style={{ minHeight: "700px" }}>
         <button
           style={{
             border: "1px solid #000",
@@ -40,7 +40,7 @@ export const Default: Story = {
         <Modal {...args} isOpen={isOpen} handleCloseModal={handleCloseModal}>
           <div style={{ padding: "20px" }}>모달 content 입니다</div>
         </Modal>
-      </>
+      </div>
     );
   },
   args: {

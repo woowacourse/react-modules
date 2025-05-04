@@ -9,6 +9,10 @@ const preview: Preview = {
         date: /Date$/i,
       },
     },
+    story: {
+      inline: false,
+      iframeHeight: 700,
+    },
   },
 };
 
