@@ -7,7 +7,7 @@ import {
 interface ModalPropsType {
   children: React.ReactNode;
   isOpen: boolean;
-  position: string;
+  position: 'center' | 'bottom';
   title: string;
   onClose: () => void;
 }
