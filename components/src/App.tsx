@@ -15,11 +15,9 @@ function App() {
 
       <Modal isOpen={isOpen} onClose={onClose}>
         <Modal.ModalContainer isOpen={isOpen} position="top" width={400}>
-          <>
-            <Modal.ModalCloseButton onClose={onClose} />
-            <Modal.ModalTitle>제목</Modal.ModalTitle>
-            <Modal.ModalBody>내용1!</Modal.ModalBody>
-          </>
+          <Modal.ModalCloseButton onClose={onClose} />
+          <Modal.ModalTitle>제목</Modal.ModalTitle>
+          <Modal.ModalBody>내용1!</Modal.ModalBody>
         </Modal.ModalContainer>
       </Modal>
     </>
