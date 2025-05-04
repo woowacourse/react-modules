@@ -54,13 +54,15 @@ const ModalBackdrop = styled.div`
 
 interface ModalInterface {
   position?: "center" | "bottom";
-  title: string;
+  renderHeader?: boolean;
+  title?: string;
   onClose: () => void;
   isOpen: boolean;
 }
 
 export default function Modal({
   position = "center",
+  renderHeader,
   title,
   onClose,
   children,
@@ -70,10 +72,12 @@ export default function Modal({
   return (
     <>
       <ModalContainer position={position}>
-        <ModalTop>
-          <Title>{title}</Title>
-          <CloseIcon onClick={onClose} css={closeIconStyle} />
-        </ModalTop>
+        {renderHeader && (
+          <ModalTop>
+            {title && <Title>{title}</Title>}
+            <CloseIcon onClick={onClose} css={closeIconStyle} />
+          </ModalTop>
+        )}
         {children}
       </ModalContainer>
       <ModalBackdrop onClick={onClose} />

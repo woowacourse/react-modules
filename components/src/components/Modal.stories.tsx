@@ -31,13 +31,8 @@ export const Center: Story = {
         <button type="button" onClick={openModal}>
           열기
         </button>
-        <Modal
-          title="제목"
-          onClose={handleModalClose}
-          isOpen={isOpen}
-          position={"center"}
-        >
-          ㅇㅇㅇ
+        <Modal onClose={handleModalClose} isOpen={isOpen} position={"center"}>
+          content
         </Modal>
       </>
     );
@@ -61,13 +56,39 @@ export const Bottom: Story = {
         <button type="button" onClick={openModal}>
           열기
         </button>
+        <Modal onClose={handleModalClose} isOpen={isOpen} position={"bottom"}>
+          content
+        </Modal>
+      </>
+    );
+  },
+};
+
+export const Header: Story = {
+  render: () => {
+    const [isOpen, setIsOpen] = useState(true);
+
+    const handleModalClose = () => {
+      setIsOpen(false);
+    };
+
+    const openModal = () => {
+      setIsOpen(true);
+    };
+
+    return (
+      <>
+        <button type="button" onClick={openModal}>
+          열기
+        </button>
         <Modal
-          title="제목"
+          renderHeader={true}
+          title="title"
           onClose={handleModalClose}
           isOpen={isOpen}
-          position={"bottom"}
+          position={"center"}
         >
-          ㅇㅇㅇ
+          content
         </Modal>
       </>
     );
