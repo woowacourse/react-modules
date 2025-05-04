@@ -86,7 +86,7 @@ function App() {
       </button>
       <Modal
         isOpen={isOpen}
-        onClose={() => setIsOpen(false)}
+        onClose={closeModal}
         position="bottom"
         title={{
           text: '알림',
@@ -97,7 +97,7 @@ function App() {
       >
         <div style={{padding: '20px'}}>
           <p>다양한 props를 통해 모달을 커스터마이징할 수 있습니다.</p>
-          <button onClick={() => setIsOpen(false)}>확인</button>
+          <button onClick={closeModal}>확인</button>
         </div>
       </Modal>
     </>
