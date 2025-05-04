@@ -27,7 +27,7 @@ const Modal = ({
   children,
   position = 'center',
 }: ModalProps) => {
-  const value = {
+  const value: ModalProps = {
     isOpen,
     onClose,
     children,
