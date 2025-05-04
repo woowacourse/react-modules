@@ -27,7 +27,7 @@ const useSingleInput = (maxLength: number): Props => {
     let isValid = true;
     let errorMessage = "";
 
-    if (validator.hasNaN(inputValue)) {
+    if (validator.isNotNumber(inputValue)) {
       isValid = false;
       errorMessage = ERROR_MESSAGE.REQUIRE.NUMBER;
     } else if (!validator.hascorrectLength(inputValue, maxLength)) {

@@ -1,7 +1,7 @@
 import { EXPIRATION } from "../constants/cardValidationInfo";
 
 const validator = {
-  hasNaN(number: string) {
+  isNotNumber(number: string) {
     if (isNaN(Number(number))) return true;
     return false;
   },
