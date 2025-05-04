@@ -1,8 +1,8 @@
-import { useState } from "react";
+import { useState } from 'react';
 
 const CARD_NUMBER_RULE = {
-  INVALID_LENGTH_ERROR: "카드 번호는 4자리로 입력해 주세요.",
-  NOT_A_NUMBER: "카드 번호는 숫자로 입력해 주세요.",
+  INVALID_LENGTH_ERROR: '카드 번호는 4자리로 입력해 주세요.',
+  NOT_A_NUMBER: '카드 번호는 숫자로 입력해 주세요.',
   MAX_LENGTH: 4,
 } as const;
 
@@ -17,22 +17,18 @@ type errorType = {
   errorMessage: string;
 };
 
-const initialDate = {
+const initialError = {
   isValidate: false,
-  errorMessage: "",
+  errorMessage: '',
 };
 
 export default function useCardNumbers(): ValitationResult {
-  const [numbers, setNumbers] = useState(["", "", "", ""]);
+  const [numbers, setNumbers] = useState(['', '', '', '']);
   const [error, setError] = useState<errorType[]>(
-    Array.from({ length: 4 }, () => initialDate)
+    Array.from({ length: CARD_NUMBER_RULE.MAX_LENGTH }, () => initialError)
   );
 
-  const updateCardNumber = (
-    index: number,
-    isError: boolean,
-    message: string
-  ) => {
+  const updateError = (index: number, isError: boolean, message: string) => {
     setError((prev) => {
       prev[index] = {
         isValidate: isError,
@@ -51,20 +47,20 @@ export default function useCardNumbers(): ValitationResult {
       return newNumbers;
     });
 
-    if (value === "") {
-      updateCardNumber(index, false, "");
+    if (value === '') {
+      updateError(index, false, '');
       return;
     }
 
     if (!/^\d*$/.test(value)) {
-      updateCardNumber(index, true, CARD_NUMBER_RULE.NOT_A_NUMBER);
+      updateError(index, true, CARD_NUMBER_RULE.NOT_A_NUMBER);
       return;
     }
     if (value.length < CARD_NUMBER_RULE.MAX_LENGTH) {
-      updateCardNumber(index, true, CARD_NUMBER_RULE.INVALID_LENGTH_ERROR);
+      updateError(index, true, CARD_NUMBER_RULE.INVALID_LENGTH_ERROR);
       return;
     }
-    updateCardNumber(index, false, "");
+    updateError(index, false, '');
   };
 
   return { numbers, error, validate };
