@@ -30,13 +30,13 @@ export default function useCardNumbers(): ValitationResult {
 
   const updateCardNumber = (
     index: number,
-    isError: boolean,
+    isValid: boolean,
     message: string
   ) => {
     setError((prev) => {
       const newError = [...prev];
       newError[index] = {
-        isValidate: isError,
+        isValidate: isValid,
         errorMessage: message,
       };
 

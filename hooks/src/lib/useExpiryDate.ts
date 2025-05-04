@@ -44,11 +44,11 @@ export default function useExpiryDate(): ValitationResult {
   const [date, setDate] = useState<dateType>({ month: "", year: "" });
   const [error, setError] = useState<errorType[]>(initialDate);
 
-  const updateDate = (index: number, isError: boolean, message: string) => {
+  const updateDate = (index: number, isValid: boolean, message: string) => {
     setError((prev) => {
       const newError = [...prev];
       newError[index] = {
-        isValidate: isError,
+        isValidate: isValid,
         errorMessage: message,
       };
       return newError;
