@@ -133,7 +133,8 @@ export const NestedModals: Story = {
           모달2 열기
         </button>
         <Modal
-          title="제목"
+          renderHeader={true}
+          title="모달1 title"
           onClose={handleModal1Close}
           isOpen={isOpenModal1}
           position={"center"}
@@ -141,7 +142,8 @@ export const NestedModals: Story = {
           모달1
         </Modal>
         <Modal
-          title="제목"
+          renderHeader={true}
+          title="모달2 title"
           onClose={handleModal2Close}
           isOpen={isOpenModal2}
           position={"center"}
