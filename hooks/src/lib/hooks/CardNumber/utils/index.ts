@@ -8,8 +8,6 @@ export const validateCardNumbers = (cardNumber: CardNumberState) => {
   };
 
   Object.values(cardNumber).every(({ value }) => {
-    console.log(cardNumber);
-
     const { isValid, errorMessage } = validateCardNumber(value);
     errorState = { isValid, errorMessage };
 

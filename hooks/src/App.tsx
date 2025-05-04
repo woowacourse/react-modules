@@ -3,7 +3,6 @@ function App() {
   const { cardNumberState, handleCardNumberChange, errorState } =
     useCardNumber();
 
-  console.log(errorState);
   return (
     <>
       <div onClick={undefined}>123</div>
