@@ -1,6 +1,6 @@
 {
   "name": "beomgo-modal",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "description": "npm modules pair programming",
   "type": "module",
   "types": "dist/index.d.ts",

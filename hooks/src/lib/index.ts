@@ -1,5 +1,4 @@
-export { default as useCardInfo } from "./useCardInfo";
-export { default as cardNumberValidation } from "./cardNumberValidation";
-export { default as cardCvcValidation } from "./cardCvcValidation";
-export { default as cardExpirationValidation } from "./cardExpirationValidation";
-export { default as cardPasswordValidation } from "./useCardInfo";
+export { default as useCardNumber } from "./useCardNumber";
+export { default as useCardExpirationDate } from "./useCardExpirationDate";
+export { default as useCardCVC } from "./useCardCVC";
+export { default as useCardPassword } from "./useCardPassword";
