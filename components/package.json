@@ -1,6 +1,6 @@
 {
   "name": "@ohgus/modal-component",
-  "version": "0.0.16",
+  "version": "0.0.17",
   "description": "헤일리와 오거스가 개발한 모달 컴포넌트 라이브러리",
   "type": "module",
   "types": "dist/index.d.ts",
@@ -17,15 +17,15 @@
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build"
   },
-  "dependencies": {
+  "peerDependencies": {
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
     "@emotion/css": "^11.13.5",
     "@emotion/react": "^11.14.0",
-    "@emotion/styled": "^11.14.0",
-    "@kaori-killer/modal-component": "^0.0.13",
-    "react": "^19.1.0",
-    "react-dom": "^19.1.0"
+    "@emotion/styled": "^11.14.0"
   },
   "devDependencies": {
+    "@kaori-killer/modal-component": "^0.0.13",
     "@chromatic-com/storybook": "^3.2.6",
     "@storybook/addon-essentials": "^8.6.12",
     "@storybook/addon-interactions": "^8.6.12",
