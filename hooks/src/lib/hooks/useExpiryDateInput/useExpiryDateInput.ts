@@ -36,16 +36,16 @@ const useExpiryDateInput = (): Props => {
     let isValid = true;
     let errorMessage = "";
 
-    if (validator.hasNonNumericValue(inputValue)) {
+    if (validator.hasNaN(inputValue)) {
       isValid = false;
       errorMessage = ERROR_MESSAGE.REQUIRE.NUMBER;
-    } else if (validator.hasIncorrectLength(inputValue, MAX_LENGTH)) {
+    } else if (!validator.hascorrectLength(inputValue, MAX_LENGTH)) {
       isValid = false;
       errorMessage = `숫자 ${CARD_INPUT.MAX_LENGTH.EXPIRE_DATE}${ERROR_MESSAGE.REQUIRE.SPECIFIC_LENGTH}`;
-    } else if (validator.isInValidMonth(inputValue) && index === 0) {
+    } else if (!validator.isValidMonth(inputValue) && index === 0) {
       isValid = false;
       errorMessage = ERROR_MESSAGE.EXPIRY.INVALID_MONTH;
-    } else if (validator.isInValidYear(inputValue) && index === 1) {
+    } else if (!validator.isValidYear(inputValue) && index === 1) {
       isValid = false;
       errorMessage = ERROR_MESSAGE.EXPIRY.INVALID_YEAR;
     }
