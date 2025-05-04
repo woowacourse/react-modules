@@ -16,7 +16,7 @@ function Modal({
   children,
   position = "bottom",
 }: PropsWithChildren<ModalProps>) {
-  useModalCloseEvent(() => onClose());
+  useModalCloseEvent(onClose);
 
   return (
     <S.Backdrop id="backdrop">
