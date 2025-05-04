@@ -2,6 +2,7 @@ import {
   ModalBackground,
   ModalContainer,
   ModalHeader,
+  ModalBody,
   CloseButton,
 } from "./Modal.styles";
 interface ModalPropsType {
@@ -25,8 +26,8 @@ const Modal = ({
         <ModalHeader as="h4">
           {title}
           <CloseButton onClick={onClose}>X</CloseButton>
-          {children}
         </ModalHeader>
+        <ModalBody>{children}</ModalBody>
       </ModalContainer>
     </ModalBackground>
   );

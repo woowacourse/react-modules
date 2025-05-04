@@ -54,6 +54,8 @@ export const ModalHeader = styled.div`
   margin: 0 auto;
 `;
 
+export const ModalBody = styled.div``;
+
 export const CloseButton = styled.button`
   background-color: transparent;
   cursor: pointer;
