@@ -35,7 +35,7 @@ const positionBottom = css`
   width: 100vw;
   bottom: 0;
   left: 0;
-  right: 20;
+  right: 20px;
   animation: 0.5s ease ${slideUpBottom};
 `;
 
@@ -49,8 +49,8 @@ export const Background = styled.div`
   left: 0;
 `;
 
-export const ModalContainer = styled.div<{ position: string }>`
-  height: 216px;
+export const ModalContainer = styled.div<{ $position: string }>`
+  min-height: 216px;
   border-radius: 8px;
   background-color: #fff;
   position: fixed;
@@ -61,8 +61,8 @@ export const ModalContainer = styled.div<{ position: string }>`
   box-sizing: border-box;
   gap: 16px;
 
-  ${({ position }) =>
-    position === "center" ? positionCenter : positionBottom};
+  ${({ $position }) =>
+    $position === "center" ? positionCenter : positionBottom};
 `;
 
 export const HeaderSection = styled.div`

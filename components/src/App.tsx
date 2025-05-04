@@ -13,7 +13,7 @@ const App = () => {
       <Modal isOpen={isOpen} handleCloseModal={handleCloseModal}>
         <Modal.Background onClick={handleCloseModal}>
           <Modal.ModalContainer
-            position="center"
+            $position="center"
             onClick={(e) => e.stopPropagation()}
           >
             <Modal.HeaderSection>
