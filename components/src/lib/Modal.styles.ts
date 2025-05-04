@@ -24,7 +24,8 @@ export const ModalBackground = styled.div<{
   justify-content: center;
   background-color: ${Common.colors.grey};
   backdrop-filter: blur(10px);
-  width: 376px;
+  width: 35%;
+  min-width: 376px;
   height: 100%;
   margin: 0 auto;
   z-index: ${Common.zIndex.modalBackground};
@@ -47,13 +48,15 @@ export const ModalContainer = styled.div<{
   position: relative;
   background-color: ${Common.colors.white};
   color: ${Common.colors.black};
-  height: 216px;
+  height: 30%;
+  min-height: 216px;
   padding: 20px;
   z-index: ${Common.zIndex.modalContainer};
 
   ${({ position }) =>
     position === 'center' &&
-    ` width: 304px;
+    ` width: 80%;
+      min-width: 304px;
       border-radius: 16px;`}
   ${({ position }) =>
     position === 'bottom' &&
@@ -65,7 +68,7 @@ export const ModalHeader = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 240px;
+  width: 100%;
   height: 26px;
   margin: 0 auto;
 `;
