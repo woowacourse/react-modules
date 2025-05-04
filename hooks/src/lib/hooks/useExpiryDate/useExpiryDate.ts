@@ -40,7 +40,14 @@ export const useExpiryDate = () => {
   const handleExpiryDateChange = (event: React.ChangeEvent<HTMLInputElement>, index: number) => {
     const newValue = event.target.value;
 
-    const { isValid, isExpired, errorMessage } = validateExpiryDate(expiryDate, newValue, index);
+    const updatedExpiryDate = [...expiryDate];
+    updatedExpiryDate[index].value = newValue;
+
+    const { isValid, isExpired, errorMessage } = validateExpiryDate(
+      updatedExpiryDate,
+      newValue,
+      index
+    );
 
     setExpiryDate((prev) => {
       const newExpiryDate = [...prev];

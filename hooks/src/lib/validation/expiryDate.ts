@@ -36,9 +36,10 @@ export const validateExpiryDate = (data: CardInputItem[], value: string, index: 
   }
 
   if (
+    index === EXPIRE_DATE_INDEX.YEAR &&
     data[EXPIRE_DATE_INDEX.YEAR].value &&
-    Number(data[EXPIRE_DATE_INDEX.YEAR].value) === currentYear &&
-    Number(value) < currentMonth
+    Number(data[EXPIRE_DATE_INDEX.MONTH].value) < currentMonth &&
+    Number(data[EXPIRE_DATE_INDEX.YEAR].value) === currentYear
   ) {
     return {
       isValid: false,
