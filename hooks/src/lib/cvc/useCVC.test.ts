@@ -1,7 +1,7 @@
-import { renderHook, act } from '@testing-library/react';
-import useCVC from './useCVC';
+import { act, renderHook } from '@testing-library/react';
 import { ChangeEvent } from 'react';
-import { CVC_ERROR_TYPES } from '../constants';
+import { CVC_ERROR_TYPES } from '../config';
+import useCVC from './useCVC';
 
 describe('useCVC', () => {
   it('입력값이 정확히 업데이트 되어야 한다.', () => {

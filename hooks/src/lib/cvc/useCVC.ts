@@ -1,6 +1,6 @@
 import { ChangeEvent, useState } from 'react';
+import { CVC_ERROR_TYPES, ERROR_MESSAGE } from '../config';
 import { ValidationResult } from '../types';
-import { CVC_ERROR_TYPES, ERROR_MESSAGE } from '../constants';
 import { checkIsNumber, checkIsValidLength } from '../validators';
 
 function useCVC() {

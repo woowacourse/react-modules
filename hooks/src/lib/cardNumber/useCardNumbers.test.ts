@@ -1,7 +1,7 @@
-import { renderHook, act } from '@testing-library/react';
-import useCardNumbers from './useCardNumbers';
+import { act, renderHook } from '@testing-library/react';
 import { ChangeEvent } from 'react';
-import { CARD_NUMBER_ERROR_TYPES } from '../constants';
+import { CARD_NUMBER_ERROR_TYPES } from '../config';
+import useCardNumbers from './useCardNumbers';
 
 describe('useCardNumbers', () => {
   it('입력값이 정확히 업데이트 되어야 한다.', () => {

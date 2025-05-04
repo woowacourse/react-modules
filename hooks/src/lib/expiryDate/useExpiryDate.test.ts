@@ -1,7 +1,7 @@
-import { renderHook, act } from '@testing-library/react';
-import useExpiryDate from './useExpiryDate';
+import { act, renderHook } from '@testing-library/react';
 import { ChangeEvent } from 'react';
-import { EXPIRY_DATE_ERROR_TYPES } from '../constants';
+import { EXPIRY_DATE_ERROR_TYPES } from '../config';
+import useExpiryDate from './useExpiryDate';
 
 describe('useExpiryDate', () => {
   it('입력값이 정확히 업데이트 되어야 한다.', () => {

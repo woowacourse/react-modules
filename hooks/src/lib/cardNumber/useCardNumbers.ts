@@ -1,7 +1,10 @@
 import { ChangeEvent, useState } from 'react';
-import { CARD_NUMBER_ERROR_TYPES, ERROR_MESSAGE } from '../constants';
+import {
+  CARD_NUMBER_ERROR_TYPES,
+  CardNumbersKey,
+  ERROR_MESSAGE,
+} from '../config';
 import { ValidationResult } from '../types';
-import { CardNumbersKey } from '../constants';
 import { checkIsNumber, checkIsValidLength } from '../validators';
 
 function useCardNumbers() {

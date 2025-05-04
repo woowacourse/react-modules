@@ -1,7 +1,11 @@
 import { ChangeEvent, useState } from 'react';
-import { EXPIRY_DATE_KEY, ExpiryDateKey } from '../constants';
+import {
+  ERROR_MESSAGE,
+  EXPIRY_DATE_ERROR_TYPES,
+  EXPIRY_DATE_KEY,
+  ExpiryDateKey,
+} from '../config';
 import { ValidationResult } from '../types';
-import { ERROR_MESSAGE, EXPIRY_DATE_ERROR_TYPES } from '../constants';
 import {
   checkIsExpiredDate,
   checkIsInRange,
