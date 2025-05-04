@@ -22,7 +22,7 @@ export default function useCvcNumber(): ValitationResult {
     setCvc(value);
 
     if (value === "") {
-      setError({ isValid: true, errorMessage: "" });
+      setError({ isValid: false, errorMessage: "" });
       return;
     }
 
