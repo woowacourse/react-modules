@@ -25,9 +25,9 @@ const Modal = ({
 }: ModalProps) => {
   return (
     <Overlay>
-      <Wrapper position={position} onClick={handleBackdropClick}>
+      <Wrapper className={position} onClick={handleBackdropClick}>
         <ModalContainer
-          position={position}
+          className={position}
           onClick={(e) => e.stopPropagation()}
         >
           <ModalHeader>
@@ -63,33 +63,45 @@ const Overlay = styled.div`
   z-index: 1000;
 `;
 
-const Wrapper = styled.div<{ position: "center" | "bottom" | "top" }>`
+const Wrapper = styled.div`
   display: flex;
   justify-content: center;
-  align-items: ${({ position }) =>
-    position === "bottom"
-      ? "flex-end"
-      : position === "top"
-      ? "flex-start"
-      : "center"};
   width: 100%;
   height: 100%;
+
+  &.center {
+    align-items: center;
+  }
+
+  &.bottom {
+    align-items: flex-end;
+  }
+
+  &.top {
+    align-items: flex-start;
+  }
 `;
 
-const ModalContainer = styled.div<{ position: "center" | "bottom" | "top" }>`
+const ModalContainer = styled.div`
   display: flex;
   flex-direction: column;
   background-color: white;
-  border-radius: ${({ position }) =>
-    position === "bottom"
-      ? "8px 8px 0 0"
-      : position === "top"
-      ? "0 0 8px 8px"
-      : "8px"};
   width: 304px;
   min-height: 216px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   padding: 24px 32px;
+
+  &.center {
+    border-radius: 8px;
+  }
+
+  &.bottom {
+    border-radius: 8px 8px 0 0;
+  }
+
+  &.top {
+    border-radius: 0 0 8px 8px;
+  }
 `;
 
 const ModalHeader = styled.div`
