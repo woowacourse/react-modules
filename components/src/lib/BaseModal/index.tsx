@@ -1,4 +1,4 @@
-import { PropsWithChildren } from "react";
+import { PropsWithChildren, RefObject } from "react";
 import * as S from "./BaseModal.styled";
 import CloseIcon from "@assets/close.svg";
 import { ModalLayoutProps } from "../types";
@@ -7,7 +7,7 @@ interface BaseModalProps extends ModalLayoutProps {
   title: string;
   onRequestClose?: () => void;
   hasCloseButton?: boolean;
-  modalRef?: React.RefObject<HTMLDivElement | null>;
+  modalRef?: RefObject<HTMLDivElement | null>;
 }
 
 function BaseModal({
