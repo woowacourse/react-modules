@@ -1,4 +1,3 @@
-import { useState } from "react";
 import type { Meta, StoryObj } from "@storybook/react";
 import Modal from "../src/lib/Modal";
 import React from "react";

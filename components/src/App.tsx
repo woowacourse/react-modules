@@ -1,40 +1,35 @@
-import styled from "@emotion/styled";
-import "./App.css";
+import Modal from "./lib/Modal";
 import { useState } from "react";
 import React from "react";
-// import Modal from "./lib/Modal";
-import { Modal } from "hanheel-modal-payments";
 
-function App() {
+const App = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const handleCloseModal = () => {
-    setIsOpen(false);
-  };
-  return (
-    <div>
-      <h1>My App</h1>
-      <Modal
-        isOpen={isOpen}
-        handleCloseModal={handleCloseModal}
-        title="타이틀입니다"
-        position="center"
-      >
-        <h2>Modal Title</h2>
-        <p>This is a modal content.</p>
-      </Modal>
-      <OpenModal onClick={() => setIsOpen(!isOpen)}>모달 켜지는 버튼</OpenModal>
-    </div>
-  );
-}
 
-const OpenModal = styled.button`
-  width: 100px;
-  height: 50px;
-  background-color: #007bff;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-`;
+  const handleCloseModal = () => setIsOpen(false);
+
+  return (
+    <>
+      <button onClick={() => setIsOpen(true)}>모달 열기</button>
+      <Modal isOpen={isOpen} handleCloseModal={handleCloseModal}>
+        <Modal.Background onClick={handleCloseModal}>
+          <Modal.ModalContainer
+            position="center"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <Modal.HeaderSection>
+              <Modal.Title>모달 타이틀</Modal.Title>
+              <Modal.ModalCloseButton onClick={handleCloseModal}>
+                <img src="./closeIcon.png" />
+              </Modal.ModalCloseButton>
+            </Modal.HeaderSection>
+            <Modal.ModalContent>
+              <p>모달 내용입니다.</p>
+            </Modal.ModalContent>
+          </Modal.ModalContainer>
+        </Modal.Background>
+      </Modal>
+    </>
+  );
+};
 
 export default App;

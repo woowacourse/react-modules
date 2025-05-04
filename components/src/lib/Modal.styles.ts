@@ -84,6 +84,7 @@ export const ModalCloseButton = styled.button`
   align-items: center;
   justify-content: center;
   color: black;
+  cursor: pointer;
 `;
 
 export const ModalContent = styled.main`
