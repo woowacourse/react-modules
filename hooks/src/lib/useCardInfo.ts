@@ -1,47 +1,46 @@
-import { useState } from "react";
-import { CardInfo, CardNumber, Expiration } from "./types/Card";
+import { useState } from 'react';
+import { CardInfo } from './types/Card';
+import { DeepPartial } from './types/utils';
 
 export function useCardInfo() {
   const [cardInfo, setCardInfo] = useState<CardInfo>({
     number: {
-      first: "",
-      second: "",
-      third: "",
-      fourth: "",
+      first: '',
+      second: '',
+      third: '',
+      fourth: '',
     },
     expiration: {
-      month: "",
-      year: "",
+      month: '',
+      year: '',
     },
-    company: "",
-    cvc: "",
-    passwordFront: "",
+    company: '',
+    cvc: '',
+    passwordFront: '',
   });
 
-  function handleCardInfo(
-    field: keyof CardInfo,
-    value: string,
-    subfield?: keyof CardNumber | keyof Expiration
-  ) {
-    if ((field === "number" || field === "expiration") && subfield) {
-      setCardInfo({
-        ...cardInfo,
-        [field]: {
-          ...cardInfo[field],
-          [subfield]: value,
+  function setCardInfoDetail(patch: DeepPartial<CardInfo>) {
+    setCardInfo((prev) => ({
+      ...prev,
+      ...(patch.number && {
+        number: {
+          ...prev.number,
+          ...patch.number,
         },
-      });
-    }
-
-    if (field === "company" || field === "cvc" || field === "passwordFront") {
-      setCardInfo({
-        ...cardInfo,
-        [field]: value,
-      });
-    }
+      }),
+      ...(patch.expiration && {
+        expiration: {
+          ...prev.expiration,
+          ...patch.expiration,
+        },
+      }),
+      ...(patch.company !== undefined && { company: patch.company }),
+      ...(patch.cvc !== undefined && { cvc: patch.cvc }),
+      ...(patch.passwordFront !== undefined && { passwordFront: patch.passwordFront }),
+    }));
   }
 
-  return { cardInfo, handleCardInfo };
+  return { cardInfo, setCardInfoDetail };
 }
 
 export default useCardInfo;
