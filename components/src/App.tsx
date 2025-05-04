@@ -13,8 +13,9 @@ function App() {
         position="center"
         title="카드사 선택"
         onClose={() => setIsModalOpen(false)}
-        children="이것은 모달 내용입니다."
-      />
+      >
+        이것은 모달 내용입니다.
+      </Modal>
     </>
   );
 }
