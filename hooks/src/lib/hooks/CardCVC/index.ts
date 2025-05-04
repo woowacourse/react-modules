@@ -3,8 +3,8 @@ import { CardCVCState } from "./types";
 import { INITIAL_CVC_STATE } from "./constants";
 import { validateCardCVC } from "./utils";
 
-const useCardCVC = () => {
-  const [cvcState, setCVCState] = useState<CardCVCState>(INITIAL_CVC_STATE);
+const useCardCVC = (initialState: CardCVCState = INITIAL_CVC_STATE) => {
+  const [cvcState, setCVCState] = useState<CardCVCState>(initialState);
 
   const handleCVCState = (value: string) => {
     if (value.length > 3) {
