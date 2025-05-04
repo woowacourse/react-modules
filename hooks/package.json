@@ -1,6 +1,6 @@
 {
   "name": "pesu-hooks",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "npm modules",
   "type": "module",
   "types": "dist/lib/index.d.ts",
