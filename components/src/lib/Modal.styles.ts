@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
 
 export const ModalBackground = styled.div<{
-  isModalOpen: boolean;
+  isOpen: boolean;
   position: string;
 }>`
   position: fixed;
@@ -16,8 +16,8 @@ export const ModalBackground = styled.div<{
   justify-content: center;
   z-index: 10;
   visibility: hidden;
-  visibility: ${({ isModalOpen }) => isModalOpen === true && 'visible'};
-  opacity: ${({ isModalOpen }) => isModalOpen === true && '1'};
+  visibility: ${({ isOpen }) => isOpen === true && 'visible'};
+  opacity: ${({ isOpen }) => isOpen === true && '1'};
   transition: opacity 0.3s ease, visibility 0.3s ease;
   margin: 0 auto;
   align-items: ${({ position }) => {

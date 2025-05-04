@@ -5,23 +5,23 @@ import {
   CloseButton,
 } from './Modal.styles.ts';
 interface ModalPropsType {
-  isModalOpen: boolean;
+  children: React.ReactNode;
+  isOpen: boolean;
   position: string;
   title: string;
-  children: React.ReactNode;
   onClose: () => void;
 }
 
 const Modal = ({
-  isModalOpen,
+  children,
+  isOpen,
   position,
   title,
-  children,
   onClose,
 }: ModalPropsType) => {
   return (
     <>
-      <ModalBackground isModalOpen={isModalOpen} position={position}>
+      <ModalBackground isOpen={isOpen} position={position}>
         <ModalContainer position={position}>
           <ModalHeader>
             <h4>{title}</h4>
