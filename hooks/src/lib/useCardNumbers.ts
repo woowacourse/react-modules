@@ -13,12 +13,12 @@ type ValidationResult = {
 };
 
 type errorType = {
-  isValidate: boolean;
+  isValid: boolean;
   errorMessage: string;
 };
 
 const initialDate = {
-  isValidate: false,
+  isValid: false,
   errorMessage: "",
 };
 
@@ -36,7 +36,7 @@ export default function useCardNumbers(): ValidationResult {
     setError((prev) => {
       const newError = [...prev];
       newError[index] = {
-        isValidate: isValid,
+        isValid: isValid,
         errorMessage: message,
       };
 

@@ -9,6 +9,8 @@ test("3자리 숫자가 입력되면 정상 작동한다.", () => {
   });
 
   expect(result.current.error.errorMessage).toBe("");
+  expect(result.current.error.isValid).toBe(false);
+  expect(result.current.cvc).toBe("123");
 });
 
 test("숫자가 아닌 값을 validate 하면 에러 메시지가 세팅된다", () => {
@@ -19,6 +21,8 @@ test("숫자가 아닌 값을 validate 하면 에러 메시지가 세팅된다",
   });
 
   expect(result.current.error.errorMessage).toBe("CVC는 숫자로 입력해 주세요.");
+  expect(result.current.error.isValid).toBe(true);
+  expect(result.current.cvc).toBe("ab");
 });
 
 test("3자리 이하의 숫자를 validate 하면 에러 메시지가 세팅된다", () => {
@@ -31,4 +35,6 @@ test("3자리 이하의 숫자를 validate 하면 에러 메시지가 세팅된�
   expect(result.current.error.errorMessage).toBe(
     "CVC는 3자리로 입력해 주세요."
   );
+  expect(result.current.error.isValid).toBe(true);
+  expect(result.current.cvc).toBe("12");
 });
