@@ -1,8 +1,8 @@
-export { useCardCompany } from './useCardCompany/useCardCompany';
-export { useCardCVC } from './useCardCVC/useCardCVC';
-export { useCardExpiryPeriod } from './useCardExpiryPeriod/useCardExpiryPeriod';
-export { useCardNumber } from './useCardNumber/useCardNumber';
-export { useCardPassword } from './useCardPassword/useCardPassword';
+export * from './useCardCompany';
+export * from './useCardCVC';
+export * from './useCardExpiryPeriod';
+export * from './useCardNumber';
+export * from './useCardPassword';
 
 export * from './types/cardTypes';
 export { isOnlyDigits } from './utils/validateNumber';
