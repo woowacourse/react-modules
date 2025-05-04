@@ -7,9 +7,10 @@ import {
   ModalButton,
   ModalButtonContainer,
 } from './Modal.styled';
-import { useContext, useEffect } from 'react';
+import { useEffect } from 'react';
 import { createContext } from 'react';
 import { createPortal } from 'react-dom';
+import useModalContext from './hooks/useModalContext';
 
 type ModalProps = {
   isOpen: boolean;
@@ -18,12 +19,7 @@ type ModalProps = {
   position?: 'center' | 'bottom';
 };
 
-const ModalContext = createContext<ModalProps>({
-  isOpen: true,
-  onClose: () => {},
-  children: <></>,
-  position: 'center',
-});
+export const ModalContext = createContext<ModalProps | null>(null);
 
 const Modal = ({
   isOpen = true,
@@ -81,7 +77,7 @@ const Title = ({ title }: ModalTitleProps) => {
 };
 
 const CloseButton = () => {
-  const modalContext = useContext(ModalContext);
+  const modalContext = useModalContext();
 
   return <CloseIcon onClick={modalContext.onClose} />;
 };
