@@ -27,7 +27,7 @@ yarn add lumes_modal
 ## 🚀 사용 예시
 
 ```tsx
-import Modal from '@your-org/lumes-modal';
+import Modal from 'lumes-modal';
 
 function App() {
   const [isOpen, setIsOpen] = useState(false);

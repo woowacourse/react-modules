@@ -31,7 +31,7 @@ import {
   useCardCVC,
   useCardPassword,
   useCardCompany,
-} from 'lumes_hooks';
+} from 'lume_hooks';
 
 function PaymentForm() {
   const { cardNumber, handleCardNumberChange } = useCardNumber();
