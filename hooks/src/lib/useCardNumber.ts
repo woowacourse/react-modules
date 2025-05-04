@@ -2,7 +2,13 @@ import { useState } from "react";
 
 const numberRegex = /^[0-9]*$/;
 
-export default function useCardNumber() {
+interface CustomErrorMessagesType {
+  length?: string;
+}
+
+export default function useCardNumber(
+  customErrorMessage?: CustomErrorMessagesType
+) {
   const [cardNumber, setCardNumber] = useState({
     first: "",
     second: "",
@@ -34,7 +40,7 @@ export default function useCardNumber() {
     if (value.length < 4) {
       setErrorMessage({
         ...errorMessage,
-        [sequence]: "4자리 숫자를 입력해 주세요.",
+        [sequence]: customErrorMessage?.length ?? "4자리 숫자를 입력해 주세요.",
       });
       return;
     }

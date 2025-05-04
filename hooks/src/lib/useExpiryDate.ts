@@ -4,7 +4,14 @@ const numberRegex = /^[0-9]*$/;
 const MONTH_MIN = 1;
 const MONTH_MAX = 12;
 
-export default function useExpiryDate() {
+interface CustomErrorMessagesType {
+  month?: string;
+  expiry?: string;
+}
+
+export default function useExpiryDate(
+  customErrorMessage?: CustomErrorMessagesType
+) {
   const [expiryDate, setExpiryDate] = useState({
     month: "",
     year: "",
@@ -39,7 +46,8 @@ export default function useExpiryDate() {
       if (year < currentYear) {
         setErrorMessage({
           ...errorMessage,
-          [dateType]: "유효 기간이 만료된 카드 입니다.",
+          [dateType]:
+            customErrorMessage?.expiry ?? "유효 기간이 만료된 카드 입니다.",
         });
         return;
       }
@@ -47,7 +55,8 @@ export default function useExpiryDate() {
       if (year === currentYear && month < currentMonth) {
         setErrorMessage({
           ...errorMessage,
-          [dateType]: "유효 기간이 만료된 카드 입니다.",
+          [dateType]:
+            customErrorMessage?.expiry ?? "유효 기간이 만료된 카드 입니다.",
         });
         return;
       }
@@ -68,7 +77,8 @@ export default function useExpiryDate() {
       if (month < MONTH_MIN || month > MONTH_MAX) {
         setErrorMessage({
           ...errorMessage,
-          [dateType]: "1~12 사이의 숫자를 입력해 주세요.",
+          [dateType]:
+            customErrorMessage?.month ?? "1~12 사이의 숫자를 입력해 주세요.",
         });
         return;
       }
@@ -76,7 +86,8 @@ export default function useExpiryDate() {
       if (year === currentYear && month < currentMonth) {
         setErrorMessage({
           ...errorMessage,
-          [dateType]: "유효 기간이 만료된 카드 입니다.",
+          [dateType]:
+            customErrorMessage?.expiry ?? "유효 기간이 만료된 카드 입니다.",
         });
 
         return;

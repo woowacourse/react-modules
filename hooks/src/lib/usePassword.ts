@@ -2,7 +2,13 @@ import { useState } from "react";
 
 const numberRegex = /^[0-9]*$/;
 
-export default function usePassword() {
+interface CustomErrorMessagesType {
+  length?: string;
+}
+
+export default function usePassword(
+  customErrorMessage?: CustomErrorMessagesType
+) {
   const [password, setPassword] = useState("");
 
   const [errorMessage, setErrorMessage] = useState("");
@@ -17,7 +23,9 @@ export default function usePassword() {
     setPassword(value);
 
     if (value.length < 2) {
-      setErrorMessage("2자리 숫자를 입력해 주세요.");
+      setErrorMessage(
+        customErrorMessage?.length ?? "2자리 숫자를 입력해 주세요."
+      );
       return;
     }
 

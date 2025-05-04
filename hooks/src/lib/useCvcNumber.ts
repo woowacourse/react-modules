@@ -2,7 +2,13 @@ import { useState } from "react";
 
 const numberRegex = /^[0-9]*$/;
 
-export default function useCvcNumber() {
+interface CustomErrorMessagesType {
+  length?: string;
+}
+
+export default function useCvcNumber(
+  customErrorMessage?: CustomErrorMessagesType
+) {
   const [cvcNumber, setCvcNumber] = useState("");
 
   const [errorMessage, setErrorMessage] = useState("");
@@ -19,7 +25,9 @@ export default function useCvcNumber() {
     setCvcNumber(value);
 
     if (value.length < 3) {
-      setErrorMessage("3자리 숫자를 입력해 주세요.");
+      setErrorMessage(
+        customErrorMessage?.length ?? "3자리 숫자를 입력해 주세요."
+      );
       return;
     }
 
