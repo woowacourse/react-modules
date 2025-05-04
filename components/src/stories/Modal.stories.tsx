@@ -1,86 +1,96 @@
-import type { Meta } from "@storybook/react";
-import Modal from "../lib/Modal";
-import { useState } from "react";
+import type { Meta, StoryObj } from '@storybook/react';
+import Modal from '../lib/Modal';
+import { useState } from 'react';
 
-const meta = {
-  title: "Modal",
+const meta: Meta<typeof Modal> = {
+  title: 'Modal',
   component: Modal,
-} satisfies Meta<typeof Modal>;
+  argTypes: {
+    title: { control: 'text' },
+    content: { control: 'text' },
+    position: {
+      control: { type: 'radio' },
+      options: ['center', 'bottom'],
+    },
+    hasConfirmButton: { control: 'boolean' },
+    hasTopCloseButton: { control: 'boolean' },
+    hasBottomCloseButton: { control: 'boolean' },
+  },
+};
 
 export default meta;
 
-export const Default = () => {
-  const [isOpen, setIsOpen] = useState(true);
+type Story = StoryObj<typeof Modal>;
 
+const ModalTemplate = (args: any) => {
+  const [isOpen, setIsOpen] = useState(true);
   return (
     <Modal
-      title="테스트"
-      content={<p>테스트</p>}
+      {...args}
       isOpen={isOpen}
       onClose={() => setIsOpen(false)}
       onConfirm={() => setIsOpen(false)}
+      content={<p>{args.content}</p>}
     />
   );
 };
 
-export const CenterModal = () => {
-  const [isOpen, setIsOpen] = useState(true);
-
-  return (
-    <Modal
-      title="테스트"
-      content={<p>테스트</p>}
-      isOpen={isOpen}
-      onClose={() => setIsOpen(false)}
-      position="center"
-    />
-  );
+export const Default: Story = {
+  render: ModalTemplate,
+  args: {
+    title: '테스트',
+    content: '테스트',
+    hasConfirmButton: true,
+    hasTopCloseButton: true,
+    hasBottomCloseButton: false,
+    position: 'center',
+  },
 };
 
-export const BottomModal = () => {
-  const [isOpen, setIsOpen] = useState(true);
-
-  return (
-    <Modal
-      title="테스트"
-      content={<p>테스트</p>}
-      isOpen={isOpen}
-      onClose={() => setIsOpen(false)}
-      position="bottom"
-    />
-  );
+export const CenterModal: Story = {
+  render: ModalTemplate,
+  args: {
+    title: '테스트',
+    content: '테스트',
+    position: 'center',
+    hasConfirmButton: false,
+    hasTopCloseButton: true,
+    hasBottomCloseButton: false,
+  },
 };
 
-export const ConfirmButtonModal = () => {
-  const [isOpen, setIsOpen] = useState(true);
-
-  return (
-    <Modal
-      title="테스트"
-      content={<p>테스트</p>}
-      isOpen={isOpen}
-      onClose={() => setIsOpen(false)}
-      onConfirm={() => setIsOpen(false)}
-      hasConfirmButton={true}
-      position="center"
-    />
-  );
+export const BottomModal: Story = {
+  render: ModalTemplate,
+  args: {
+    title: '테스트',
+    content: '테스트',
+    position: 'bottom',
+    hasConfirmButton: false,
+    hasTopCloseButton: true,
+    hasBottomCloseButton: false,
+  },
 };
 
-export const CloseButtonModal = () => {
-  const [isOpen, setIsOpen] = useState(true);
+export const ConfirmButtonModal: Story = {
+  render: ModalTemplate,
+  args: {
+    title: '테스트',
+    content: '테스트',
+    position: 'center',
+    hasConfirmButton: true,
+    hasTopCloseButton: true,
+    hasBottomCloseButton: false,
+  },
+};
 
-  return (
-    <Modal
-      title="테스트"
-      content={<p>테스트</p>}
-      isOpen={isOpen}
-      onClose={() => setIsOpen(false)}
-      onConfirm={() => setIsOpen(false)}
-      hasConfirmButton={true}
-      hasTopCloseButton={false}
-      hasBottomCloseButton={true}
-      position="center"
-    />
-  );
+export const CloseButtonModal: Story = {
+  render: ModalTemplate,
+  args: {
+    title: '테스트',
+    content: '테스트',
+    position: 'center',
+    hasConfirmButton: true,
+    hasTopCloseButton: false,
+    hasBottomCloseButton: true,
+  },
 };
