@@ -4,9 +4,14 @@
 
 ## useModal
 
-- isOpen: 모달이 보이는지 여부 `(boolean)`
+- isOpen: 모달이 보이는지 여부
+  - `(boolean)`
+
 - handleOpen: 모달을 여는 함수
+  - `() => void`  
+
 - handleClose: 모달을 닫는 함수
+  - `() => void`  
 
 ## Modal
 
