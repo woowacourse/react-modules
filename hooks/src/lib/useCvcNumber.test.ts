@@ -1,6 +1,13 @@
 import { renderHook, act } from "@testing-library/react";
 import useCvcNumber from "./useCvcNumber";
 
+test("초기 상태는 에러가 뜨지 않는다,", () => {
+  const { result } = renderHook(() => useCvcNumber());
+  expect(result.current.cvc).toBe("");
+  expect(result.current.error.errorMessage).toBe("");
+  expect(result.current.error.isValid).toBe(false);
+});
+
 test("3자리 숫자가 입력되면 정상 작동한다.", () => {
   const { result } = renderHook(() => useCvcNumber());
 
@@ -13,7 +20,7 @@ test("3자리 숫자가 입력되면 정상 작동한다.", () => {
   expect(result.current.cvc).toBe("123");
 });
 
-test("숫자가 아닌 값을 validate 하면 에러 메시지가 세팅된다", () => {
+test("숫자가 아닌 값을 validate 하면 에러 메시지가 뜬다.", () => {
   const { result } = renderHook(() => useCvcNumber());
 
   act(() => {
@@ -25,7 +32,7 @@ test("숫자가 아닌 값을 validate 하면 에러 메시지가 세팅된다",
   expect(result.current.cvc).toBe("ab");
 });
 
-test("3자리 이하의 숫자를 validate 하면 에러 메시지가 세팅된다", () => {
+test("3자리가 아닌 숫자를 validate 하면 에러 메시지가 뜬다.", () => {
   const { result } = renderHook(() => useCvcNumber());
 
   act(() => {
@@ -37,4 +44,28 @@ test("3자리 이하의 숫자를 validate 하면 에러 메시지가 세팅된�
   );
   expect(result.current.error.isValid).toBe(true);
   expect(result.current.cvc).toBe("12");
+});
+
+test("4자리 이상 입력 시 무시된다.", () => {
+  const { result } = renderHook(() => useCvcNumber());
+
+  act(() => {
+    result.current.handleCvcNumberChange("1234");
+  });
+
+  expect(result.current.error.errorMessage).toBe("");
+  expect(result.current.error.isValid).toBe(false);
+  expect(result.current.cvc).toBe("");
+});
+
+test("빈 문자열 입력 시 에러가 사라진다.", () => {
+  const { result } = renderHook(() => useCvcNumber());
+
+  act(() => {
+    result.current.handleCvcNumberChange("");
+  });
+
+  expect(result.current.error.errorMessage).toBe("");
+  expect(result.current.error.isValid).toBe(false);
+  expect(result.current.cvc).toBe("");
 });
