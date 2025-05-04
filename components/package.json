@@ -1,7 +1,7 @@
 {
-  "name": "compoents",
-  "version": "0.0.1",
-  "description": "npm modules",
+  "name": "beomgo-modal",
+  "version": "0.0.9",
+  "description": "npm modules pair programming",
   "type": "module",
   "types": "dist/index.d.ts",
   "main": "dist/index.js",
@@ -15,9 +15,12 @@
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "lint:package": "publint"
   },
   "dependencies": {
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.0",
     "react": "^19.1.0",
     "react-dom": "^19.1.0"
   },
@@ -43,6 +46,7 @@
     "eslint-plugin-react-refresh": "^0.4.19",
     "eslint-plugin-storybook": "^0.12.0",
     "path": "^0.12.7",
+    "publint": "^0.3.12",
     "storybook": "^8.6.12",
     "typescript": "^5.8.3",
     "vite": "^6.2.6",
