@@ -1,18 +1,20 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import Modal from "./index";
+import BaseModal from "./index";
 
 const meta = {
-  title: "Component/Modal",
-  component: Modal,
+  title: "Component/BaseModal",
+  component: BaseModal,
   tags: ["autodocs"],
   args: {
     title: "Modal Title",
     onRequestClose: () => {},
+    hasCloseButton: true,
     position: "center",
     size: "medium",
+    modalRef: { current: null },
     children: "Modal Content",
   },
-} satisfies Meta<typeof Modal>;
+} satisfies Meta<typeof BaseModal>;
 
 export default meta;
 

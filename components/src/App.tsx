@@ -11,7 +11,8 @@ function App() {
         <Modal
           title="카드사 선택"
           onRequestClose={() => setIsOpen(false)}
-          position="center"
+          position="bottom"
+          size="small"
         />
       )}
     </>
