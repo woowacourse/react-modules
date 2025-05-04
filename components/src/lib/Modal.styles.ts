@@ -14,23 +14,23 @@ const Common = {
 
 export const ModalBackground = styled.div<{
   isOpen: boolean;
-  position: string;
+  position: 'center' | 'bottom';
 }>`
   position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 376px;
-  height: 100%;
-  background-color: ${Common.colors.grey};
-  backdrop-filter: blur(10px);
   display: flex;
   justify-content: center;
-  z-index: ${Common.zIndex.modalBackground};
-  visibility: ${({ isOpen }) => (isOpen ? 'visible' : 'hidden')};
-  opacity: ${({ isOpen }) => isOpen === true && '1'};
-  transition: opacity 0.3s ease, visibility 0.3s ease;
+  background-color: ${Common.colors.grey};
+  backdrop-filter: blur(10px);
+  width: 376px;
+  height: 100%;
   margin: 0 auto;
+  z-index: ${Common.zIndex.modalBackground};
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+  visibility: ${({ isOpen }) => (isOpen ? 'visible' : 'hidden')};
+  opacity: ${({ isOpen }) => isOpen && '1'};
   align-items: ${({ position }) => {
     switch (position) {
       case 'center':
@@ -42,18 +42,23 @@ export const ModalBackground = styled.div<{
 `;
 
 export const ModalContainer = styled.div<{
-  position: string;
+  position: 'center' | 'bottom';
 }>`
-  background-color: ${Common.colors.white};
-  padding: 20px;
-  border-radius: 16px;
-  color: ${Common.colors.black};
-  z-index: ${Common.zIndex.modalContainer};
   position: relative;
-  width: 304px;
+  background-color: ${Common.colors.white};
+  color: ${Common.colors.black};
   height: 216px;
-  width:  ${({ position }) => position === 'bottom' && '100%;'}
-  border-radius:  ${({ position }) => position === 'bottom' && '10px 10px 0 0;'}
+  padding: 20px;
+  z-index: ${Common.zIndex.modalContainer};
+
+  ${({ position }) =>
+    position === 'center' &&
+    ` width: 304px;
+      border-radius: 16px;`}
+  ${({ position }) =>
+    position === 'bottom' &&
+    ` width: 100%;
+      border-radius: 10px 10px 0 0;`}
 `;
 
 export const ModalHeader = styled.div`
