@@ -16,34 +16,43 @@
 ## Modal
 
 - isOpen: 모달이 보여지는지 여부를 받는다.
+  - `boolean`
+
 - children: 하위 컴포넌트를 받는다.
 
 ## ModalOverlay
 
 - onClose: 모달 외부를 클릭 시 닫는 함수를 받는다.
+  - `() => void`  
 
 ## ModalContent
 
-- position: 모달을 표시할 위치를 받는다. `(center | bottom )`
+- position (`center | bottom`): 모달을 표시할 위치를 받는다.
+  - 기본 값: `center`
 - children: 하위 컴포넌트를 받는다.
 
 ## ModalHeader
 
-- direction: 내부 요소의 Flex 방향을 설정한다. `(row | column)`
-- align: Flex 방향에 따른 축을 설정한다. `(start | center | end)`
-- justify: Flex 방향에 따른 축을 설정한다. `(start | center | end)`
+- direction (`row | column`): 내부 요소의 Flex 방향을 설정한다.
+  - 기본 값: `row`
+- align( `start | center | end`): Flex 방향에 따른 축을 설정한다.
+  - 기본 값: `start`
+- justify(`start | center | end`): Flex 방향에 따른 축을 설정한다.
+  - 기본 값: `start`
 - children: 하위 컴포넌트를 받는다.
 
 ## ModalTitle
 
-- fontSize: 모달의 제목의 폰트 사이즈를 설정한다.
-- fontWeight: 모달의 제목의 폰트 두께를 설정한다.
-- tag: 모달의 제목에 사용할 태그를 설정한다.
+- fontSize(폰트 사이즈 문자열): 모달의 제목의 폰트 사이즈를 설정한다.
+- fontWeight(폰트 두께 문자열): 모달의 제목의 폰트 두께를 설정한다.
+- tag(폰트 태크 문자열): 모달의 제목에 사용할 태그를 설정한다.
+  - 기본 값: `h1`
 - children: 하위 컴포넌트를 받는다.
 
 ## ModalCloseButton
 
 - onClose: 모달을 닫는 함수를 받는다.
+  - `() => void`  
 
 ## ModalBody
 
@@ -51,9 +60,12 @@
 
 ## ModalFooter
 
-- direction: 내부 요소의 Flex 방향을 설정한다. `(row | column)`
-- align: Flex 방향에 따른 축을 설정한다. `(start | center | end)`
-- justify: Flex 방향에 따른 축을 설정한다. `(start | center | end)`
+- direction (`row | column`): 내부 요소의 Flex 방향을 설정한다.
+  - 기본 값: `row`
+- align( `start | center | end`): Flex 방향에 따른 축을 설정한다.
+  - 기본 값: `start`
+- justify(`start | center | end`): Flex 방향에 따른 축을 설정한다.
+  - 기본 값: `start`
 - children: 하위 컴포넌트를 받는다.
 
 ## 사용 예시
