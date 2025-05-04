@@ -2,21 +2,17 @@ import { ValidationResult } from "../../../types";
 import { CardNumberState } from "../types";
 
 export const validateCardNumbers = (cardNumber: CardNumberState) => {
-  let errorState: ValidationResult = {
-    isValid: true,
-    errorMessage: "",
-  };
-
-  Object.values(cardNumber).every(({ value }) => {
-    const { isValid, errorMessage } = validateCardNumber(value);
-    errorState = { isValid, errorMessage };
-
-    if (!isValid) {
-      return false;
-    }
-    return true;
+  const invalidEntry = Object.values(cardNumber).find(({ value }) => {
+    const result = validateCardNumber(value);
+    return !result.isValid;
   });
-  return errorState;
+
+  if (invalidEntry) {
+    const { isValid, errorMessage } = validateCardNumber(invalidEntry.value);
+    return { isValid, errorMessage };
+  }
+
+  return { isValid: true, errorMessage: "" };
 };
 
 const validateCardNumber = (cardNumber: string): ValidationResult => {
