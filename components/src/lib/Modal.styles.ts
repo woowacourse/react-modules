@@ -1,5 +1,17 @@
 import styled from '@emotion/styled';
 
+const Common = {
+  colors: {
+    white: ' #ffffff',
+    black: '#000000',
+    grey: '#00000080',
+  },
+  zIndex: {
+    modalBackground: 100,
+    modalContainer: 200,
+  },
+};
+
 export const ModalBackground = styled.div<{
   isOpen: boolean;
   position: string;
@@ -10,11 +22,11 @@ export const ModalBackground = styled.div<{
   transform: translate(-50%, -50%);
   width: 376px;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: ${Common.colors.grey};
   backdrop-filter: blur(10px);
   display: flex;
   justify-content: center;
-  z-index: 10;
+  z-index: ${Common.zIndex.modalBackground};
   visibility: ${({ isOpen }) => (isOpen ? 'visible' : 'hidden')};
   opacity: ${({ isOpen }) => isOpen === true && '1'};
   transition: opacity 0.3s ease, visibility 0.3s ease;
@@ -32,11 +44,11 @@ export const ModalBackground = styled.div<{
 export const ModalContainer = styled.div<{
   position: string;
 }>`
-  background-color: #ffffff;
+  background-color: ${Common.colors.white};
   padding: 20px;
   border-radius: 16px;
-  color: #000000;
-  z-index: 2;
+  color: ${Common.colors.black};
+  z-index: ${Common.zIndex.modalContainer};
   position: relative;
   width: 304px;
   height: 216px;
