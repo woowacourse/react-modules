@@ -1,9 +1,6 @@
 import { useState } from 'react';
 import './App.css';
 import Modal from './Modal/Modal';
-// import { Modal } from 'pongda-modal-component';
-// import { Modal } from 'pongda-modal-component';
-import React from 'react';
 
 function App() {
   const [isOpen, setIsOpen] = useState(true);
