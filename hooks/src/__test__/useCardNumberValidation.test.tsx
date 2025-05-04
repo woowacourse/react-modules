@@ -28,7 +28,6 @@ describe("cardNumberValidation 테스트", () => {
       result.current.handleCardNumber("1234", "third");
       result.current.handleCardNumber("1234", "fourth");
     });
-    console.log(result);
 
     expect(result.current.isCardNumberError).toEqual([
       false,
