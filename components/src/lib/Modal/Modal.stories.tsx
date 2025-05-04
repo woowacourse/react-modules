@@ -28,7 +28,7 @@ export default meta;
 
 type Story = StoryObj<typeof Modal>;
 
-export const Default: Story = {
+export const CardCompanyModal: Story = {
 	args: {
 		position: "center",
 		isCloseButton: true,
