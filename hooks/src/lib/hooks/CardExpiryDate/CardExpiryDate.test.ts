@@ -69,7 +69,12 @@ describe("useCardExpiryDate", () => {
   });
 
   it("키드만료일에 옳은 숫자 4자리를 입력하면 유효하게 작동해야한다. ", () => {
-    const validInput = "1227";
+    const currentDate = new Date();
+    const futureYear = (currentDate.getFullYear() + 3) % 100;
+    const futureMonth = currentDate.getMonth() + 1;
+
+    const validInput = `${futureMonth.toString().padStart(2, "0")}${futureYear.toString().padStart(2, "0")}`;
+
     const { result } = renderHook(() => useCardExpiryDate());
 
     act(() => {
