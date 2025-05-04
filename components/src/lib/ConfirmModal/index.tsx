@@ -1,43 +1,55 @@
-// import useOutsideClickRef from "../../hooks/useOutsideClickRef";
-// import useKeyDown from "@/hooks/useKeyDown";
-// import BaseModal from "../BaseModal";
-// import type { ModalSizeType } from "../types";
-// import Button from "@/components/Button";
-// import * as S from "./AlertModal.styled";
+import useOutsideClickRef from "../../hooks/useOutsideClickRef";
+import useKeyDown from "@/hooks/useKeyDown";
+import type { ModalSizeType } from "../types";
+import Button from "@/components/Button";
+import * as S from "./ConfirmModal.styled";
+import ContentModal from "../ContentModal";
 
-// interface ConfirmModalProps {
-//   title: string;
-//   alertText: string;
-//   onRequestClose: () => void;
-//   size?: ModalSizeType;
-// }
+interface ConfirmModalProps {
+  title: string;
+  confirmText: string;
+  size?: ModalSizeType;
+  onRequestClose: () => void;
+  onConfirm: () => void;
+}
 
-// function ConfirmModal({
-//   title,
-//   alertText,
-//   onRequestClose,
-//   size,
-// }: ConfirmModalProps) {
-//   const modalRef = useOutsideClickRef<HTMLDivElement>(onRequestClose);
-//   useKeyDown({ keys: ["Escape"], callback: onRequestClose });
+function ConfirmModal({
+  title,
+  confirmText,
+  size,
+  onRequestClose,
+  onConfirm,
+}: ConfirmModalProps) {
+  const modalRef = useOutsideClickRef<HTMLDivElement>(onRequestClose);
+  useKeyDown({ keys: ["Escape"], callback: onRequestClose });
 
-//   return (
-//     <BaseModal
-//       title={title}
-//       modalRef={modalRef}
-//       size={size}
-//       hasCloseButton={false}
-//     >
-//       <S.Container>
-//         <S.AlertText>{alertText}</S.AlertText>
-//         <S.ButtonBox>
-//           <Button variant="primary" type="button" onClick={onRequestClose}>
-//             확인
-//           </Button>
-//         </S.ButtonBox>
-//       </S.Container>
-//     </BaseModal>
-//   );
-// }
+  return (
+    <ContentModal
+      title={title}
+      size={size}
+      hasCloseButton={false}
+      modalRef={modalRef}
+      content={<S.ConfirmText>{confirmText}</S.ConfirmText>}
+      buttonElements={[
+        <Button
+          key="secondary"
+          variant="secondary"
+          type="button"
+          onClick={onRequestClose}
+        >
+          취소
+        </Button>,
+        <Button
+          key="primary"
+          variant="primary"
+          type="button"
+          onClick={onConfirm}
+        >
+          확인
+        </Button>,
+      ]}
+    />
+  );
+}
 
-// export default ConfirmModal;
+export default ConfirmModal;
