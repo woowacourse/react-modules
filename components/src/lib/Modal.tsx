@@ -49,19 +49,19 @@ function Modal({
           <ModalContent position={position}>
             <TitleSection>
               <TitleText>{title}</TitleText>
-              {hasTopCloseButton ? <CloseButton onClick={onClose}>✕</CloseButton> : null}
+              {hasTopCloseButton && <CloseButton onClick={onClose}>✕</CloseButton>}
             </TitleSection>
             <MainSection>
               {content}
-              {hasConfirmButton ? <Button text="동의하고 저장하기" onClick={onConfirm} /> : null}
-              {hasBottomCloseButton ? (
+              {hasConfirmButton && <Button text="동의하고 저장하기" onClick={onConfirm} />}
+              {hasBottomCloseButton && (
                 <Button
                   text="닫기"
                   onClick={onClose}
                   color="#8b95a1"
                   backgroundColor="transparent"
                 />
-              ) : null}
+              )}
             </MainSection>
           </ModalContent>
         </div>
