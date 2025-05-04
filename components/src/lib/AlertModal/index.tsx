@@ -1,21 +1,23 @@
-import { PropsWithChildren } from "react";
 import useOutsideClickRef from "../../hooks/useOutsideClickRef";
 import useKeyDown from "@/hooks/useKeyDown";
 import BaseModal from "../BaseModal";
-import { ModalLayoutProps } from "../types";
+import type { ModalSizeType } from "../types";
+import Button from "@/components/Button";
+import * as S from "./AlertModal.styled";
 
-interface ModalProps extends ModalLayoutProps {
+interface AlertModalProps {
   title: string;
+  alertText: string;
   onRequestClose: () => void;
+  size?: ModalSizeType;
 }
 
-function Modal({
+function AlertModal({
   title,
+  alertText,
   onRequestClose,
-  position,
   size,
-  children,
-}: PropsWithChildren<ModalProps>) {
+}: AlertModalProps) {
   const modalRef = useOutsideClickRef<HTMLDivElement>(() => onRequestClose());
   useKeyDown({ keys: ["Escape"], callback: () => onRequestClose() });
 
@@ -24,12 +26,18 @@ function Modal({
       title={title}
       onRequestClose={onRequestClose}
       modalRef={modalRef}
-      position={position}
       size={size}
     >
-      {children}
+      <S.Container>
+        <S.AlertText>{alertText}</S.AlertText>
+        <S.ButtonBox>
+          <Button variant="primary" type="button" onClick={onRequestClose}>
+            확인
+          </Button>
+        </S.ButtonBox>
+      </S.Container>
     </BaseModal>
   );
 }
 
-export default Modal;
+export default AlertModal;

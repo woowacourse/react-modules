@@ -28,9 +28,11 @@ export const Backdrop = styled.div`
 
 export const Modal = styled.div<Required<ModalLayoutProps>>`
   position: fixed;
+  display: flex;
+  flex-direction: column;
   background: #fff;
   padding: 1.5rem 2rem;
-  min-height: 220px;
+  min-height: 180px;
   ${({ size }) => getModalSizeStyle(size)}
   ${({ position }) => getModalPositionStyle(position)}
   animation: ${({ position }) => {

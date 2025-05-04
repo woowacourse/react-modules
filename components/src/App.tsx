@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Modal } from "./lib";
+import { AlertModal } from "./lib";
 
 function App() {
   const [isOpen, setIsOpen] = useState(false);
@@ -8,11 +8,11 @@ function App() {
     <>
       <button onClick={() => setIsOpen(true)}>모달 열기</button>
       {isOpen && (
-        <Modal
+        <AlertModal
           title="카드사 선택"
+          alertText="카드사 선택 모달입니다."
           onRequestClose={() => setIsOpen(false)}
-          position="bottom"
-          size="small"
+          size="medium"
         />
       )}
     </>
