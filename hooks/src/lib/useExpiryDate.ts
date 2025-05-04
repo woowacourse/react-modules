@@ -46,11 +46,12 @@ export default function useExpiryDate(): ValitationResult {
 
   const updateDate = (index: number, isError: boolean, message: string) => {
     setError((prev) => {
-      prev[index] = {
+      const newError = [...prev];
+      newError[index] = {
         isValidate: isError,
         errorMessage: message,
       };
-      return prev;
+      return newError;
     });
   };
 
@@ -60,7 +61,7 @@ export default function useExpiryDate(): ValitationResult {
       setDate((prev) => ({ ...prev, month: value }));
 
       if (value === "") {
-        updateDate(0, false, "");
+        updateDate(1, false, "");
         return;
       }
 

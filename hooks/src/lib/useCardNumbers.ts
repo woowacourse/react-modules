@@ -34,11 +34,13 @@ export default function useCardNumbers(): ValitationResult {
     message: string
   ) => {
     setError((prev) => {
-      prev[index] = {
+      const newError = [...prev];
+      newError[index] = {
         isValidate: isError,
         errorMessage: message,
       };
-      return prev;
+
+      return newError;
     });
   };
 
