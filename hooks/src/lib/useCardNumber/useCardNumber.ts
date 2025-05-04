@@ -1,0 +1,72 @@
+import { useState } from "react";
+import { checkNumber, checkValidLength } from "../validator/inputValidator";
+
+const CARDNUMBER_VALID_LENGTH = 4;
+
+const ERROR_MESSAGE = {
+  INVALID_NUMBER: "숫자만 입력 가능합니다.",
+  INPUT_LENGTH_LIMIT: `${CARDNUMBER_VALID_LENGTH}자리를 입력해주세요.`,
+};
+
+interface CardNumberValid {
+  first: boolean;
+  second: boolean;
+  third: boolean;
+  fourth: boolean;
+}
+
+interface CardNumberErrorMessage {
+  first: string;
+  second: string;
+  third: string;
+  fourth: string;
+}
+
+export type CardNumberLabel = "first" | "second" | "third" | "fourth";
+
+const useCardNumber = () => {
+  const [isValid, setIsValid] = useState<CardNumberValid>({
+    first: true,
+    second: true,
+    third: true,
+    fourth: true,
+  });
+  const [errorMessage, setErrorMessage] = useState<CardNumberErrorMessage>({
+    first: "",
+    second: "",
+    third: "",
+    fourth: "",
+  });
+
+  const validate = (label: CardNumberLabel, value: string) => {
+    if (!checkNumber(value)) {
+      setErrorMessage({
+        ...errorMessage,
+        [label]: ERROR_MESSAGE.INVALID_NUMBER,
+      });
+      setIsValid({ ...isValid, [label]: false });
+
+      return;
+    }
+
+    if (!checkValidLength(value, CARDNUMBER_VALID_LENGTH)) {
+      setErrorMessage({
+        ...errorMessage,
+        [label]: ERROR_MESSAGE.INPUT_LENGTH_LIMIT,
+      });
+      setIsValid({ ...isValid, [label]: false });
+      return;
+    }
+    setErrorMessage({
+      ...errorMessage,
+      [label]: "",
+    });
+    setIsValid({
+      ...isValid,
+      [label]: true,
+    });
+  };
+
+  return { isValid, errorMessage, validate };
+};
+export default useCardNumber;
