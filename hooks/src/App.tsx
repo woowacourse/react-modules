@@ -1,12 +1,24 @@
-import React from "react";
 import "./App.css";
 
-function App() {
+import { useExpiryDate } from "pesu-hooks";
+
+export default function App() {
+  const { expiryDate, handleExpiryDateChange, errorMessage } = useExpiryDate();
+
+  console.log(expiryDate, errorMessage);
+
   return (
     <>
-      <h1>Hooks Modules</h1>
+      <input
+        type="text"
+        onChange={handleExpiryDateChange}
+        data-date-type="year"
+      />
+      <input
+        type="text"
+        onChange={handleExpiryDateChange}
+        data-date-type="month"
+      />
     </>
   );
 }
-
-export default App;
