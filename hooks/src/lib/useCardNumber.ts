@@ -34,7 +34,7 @@ export default function useCardNumber() {
     if (value.length < 4) {
       setErrorMessage({
         ...errorMessage,
-        [sequence]: "4글자를 입력해 주세요.",
+        [sequence]: "4자리 숫자를 입력해 주세요.",
       });
       return;
     }

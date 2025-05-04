@@ -19,7 +19,7 @@ export default function useCvcNumber() {
     setCvcNumber(value);
 
     if (value.length < 3) {
-      setErrorMessage("3글자를 입력해 주세요.");
+      setErrorMessage("3자리 숫자를 입력해 주세요.");
       return;
     }
 
