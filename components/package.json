@@ -16,8 +16,7 @@
     "preview": "vite preview",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "deploy": "vite build --base=/react-modules/ --minify=false && npx gh-pages -d dist",
-    "chromatic": "npx chromatic --project-token=chpt_3248c2f54315348"
+    "deploy": "vite build --base=/react-modules/ --minify=false && npx gh-pages -d dist"
   },
   "dependencies": {
     "@emotion/react": "^11.14.0",
