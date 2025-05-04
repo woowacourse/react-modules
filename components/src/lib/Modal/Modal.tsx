@@ -26,10 +26,7 @@ const Modal = ({
   return (
     <Overlay>
       <Wrapper className={position} onClick={handleBackdropClick}>
-        <ModalContainer
-          className={position}
-          onClick={(e) => e.stopPropagation()}
-        >
+        <ModalContainer className={position}>
           <ModalHeader>
             <ModalTitle>{title}</ModalTitle>
             <CloseButtonWrapper>
