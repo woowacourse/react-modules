@@ -1,3 +1,5 @@
+import React from "react";
+import { createPortal } from "react-dom";
 import {
   ModalBackground,
   ModalContainer,
@@ -20,7 +22,9 @@ const Modal = ({
   children,
   onClose,
 }: ModalPropsType) => {
-  return (
+  if (!isModalOpen) return null;
+
+  const modalContent = (
     <ModalBackground isModalOpen={isModalOpen} position={position}>
       <ModalContainer position={position}>
         <ModalHeader as="h4">
@@ -31,6 +35,8 @@ const Modal = ({
       </ModalContainer>
     </ModalBackground>
   );
+  const portalRoot = document.getElementById("modal-root")!;
+  return createPortal(modalContent, portalRoot);
 };
 
 export default Modal;
