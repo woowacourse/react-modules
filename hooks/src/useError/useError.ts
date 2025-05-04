@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-const useError = <T>(initialError: T) => {
+const useError = <T extends Record<string, boolean>>(initialError: T) => {
   const [isError, setIsError] = useState<T>(initialError);
   const [errorMessage, setErrorMessage] = useState(initialError);
 
