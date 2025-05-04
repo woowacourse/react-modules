@@ -2,6 +2,12 @@ import { ChangeEvent, useState } from 'react';
 import { EXPIRY_DATE_KEY, ExpiryDateKey } from '../constants';
 import { ValidationResult } from '../types';
 import { ERROR_MESSAGE, EXPIRY_DATE_ERROR_TYPES } from '../constants';
+import {
+  checkIsExpiredDate,
+  checkIsInRange,
+  checkIsNumber,
+  checkIsValidLength,
+} from '../validators';
 
 function useExpiryDate() {
   const [expiryDate, setExpiryDate] = useState<Record<ExpiryDateKey, string>>({
@@ -16,38 +22,10 @@ function useExpiryDate() {
     year: { isValid: true, errorMessage: '' },
   });
 
-  const checkIsNumber = (value: string) => {
-    const regex = /^[0-9]*$/;
-    return regex.test(value);
-  };
-
-  const checkIsValidLength = (value: string) => {
-    return value.length <= 2;
-  };
-
-  const checkIsMonthInRange = (value: string) => {
-    return Number(value) >= 1 && Number(value) <= 12;
-  };
-
-  const checkIsExpiredDate = (month: string, year: string) => {
-    if (month.length !== 2 || year.length !== 2) return false;
-
-    const today = new Date();
-    const currentYear = today.getFullYear();
-    const currentMonth = today.getMonth() + 1;
-
-    const expiryYear = 2000 + Number(year);
-    const expiryMonth = Number(month);
-
-    if (expiryYear < currentYear) return true;
-    if (expiryYear === currentYear && expiryMonth <= currentMonth) return true;
-    return false;
-  };
-
   const validateExpiryDate = (name: ExpiryDateKey, value: string) => {
     const isNumber = checkIsNumber(value);
-    const isValidLength = checkIsValidLength(value);
-    const isMonthInRange = checkIsMonthInRange(value);
+    const isValidLength = checkIsValidLength(value, 2);
+    const isMonthInRange = checkIsInRange(Number(value), 1, 12);
 
     if (!isNumber) {
       return EXPIRY_DATE_ERROR_TYPES.notNumber;

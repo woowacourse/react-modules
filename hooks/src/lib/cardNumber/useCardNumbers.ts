@@ -2,6 +2,7 @@ import { ChangeEvent, useState } from 'react';
 import { CARD_NUMBER_ERROR_TYPES, ERROR_MESSAGE } from '../constants';
 import { ValidationResult } from '../types';
 import { CardNumbersKey } from '../constants';
+import { checkIsNumber, checkIsValidLength } from '../validators';
 
 function useCardNumbers() {
   const [cardNumbers, setCardNumbers] = useState<
@@ -22,18 +23,9 @@ function useCardNumbers() {
     part4: { isValid: true, errorMessage: '' },
   });
 
-  const checkIsNumber = (value: string) => {
-    const regex = /^[0-9]*$/;
-    return regex.test(value);
-  };
-
-  const checkIsValidLength = (value: string) => {
-    return value.length <= 4;
-  };
-
   const validateCardNumbers = (value: string) => {
     const isNumber = checkIsNumber(value);
-    const isValidLength = checkIsValidLength(value);
+    const isValidLength = checkIsValidLength(value, 4);
 
     if (!isNumber) {
       return CARD_NUMBER_ERROR_TYPES.notNumber;
