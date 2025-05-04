@@ -1,7 +1,11 @@
-import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 import { PropsWithChildren, useEffect, useRef } from 'react';
 import CloseButton from './CloseButton';
+import {
+  MODAL_CONTAINER_POSITION_STYLES,
+  MODAL_CONTAINER_RESPONSIVE_WIDTH_STYLES,
+  MODAL_WRAPPER_POSITION_STYLES,
+} from './Modal.styles';
 import PrimaryButton from './PrimaryButton';
 import SecondaryButton from './SecondaryButton';
 import Title from './Title';
@@ -43,27 +47,24 @@ function ModalContainer({
   return (
     <StyledModalContainer
       onClose={onClose}
-      isBottom={position === 'bottom'}
+      position={position}
       style={style}
       ref={modalRef}
     >
-      <ModalWrapper isBottom={position === 'bottom'}>{children}</ModalWrapper>
+      <ModalWrapper position={position}>{children}</ModalWrapper>
     </StyledModalContainer>
   );
 }
 
-const StyledModalContainer = styled.dialog<{ isBottom: boolean }>`
+const StyledModalContainer = styled.dialog<{ position: 'center' | 'bottom' }>`
   box-sizing: border-box;
   min-width: 400px;
   padding: 0;
   position: relative;
   background-color: transparent;
-
   border: none;
 
-  margin-bottom: ${(props) => (props.isBottom ? 0 : null)};
-  width: ${(props) => (props.isBottom ? '100%' : null)};
-  max-width: ${(props) => (props.isBottom ? '100%' : null)};
+  ${(props) => MODAL_CONTAINER_POSITION_STYLES[props.position]}
 
   &::backdrop {
     background-color: #000000;
@@ -71,21 +72,19 @@ const StyledModalContainer = styled.dialog<{ isBottom: boolean }>`
   }
 
   @media (max-width: 600px) {
-    width: ${(props) => (props.isBottom ? '100%' : 'calc(100vw - 72px)')};
+    width: ${(props) =>
+      MODAL_CONTAINER_RESPONSIVE_WIDTH_STYLES[props.position]};
   }
 `;
 
-const ModalWrapper = styled.div<{ isBottom: boolean }>`
+const ModalWrapper = styled.div<{ position: 'center' | 'bottom' }>`
   display: flex;
   flex-direction: column;
 
   padding: 24px 32px;
   background-color: white;
-  border-radius: 8px;
 
-  border-bottom-left-radius: ${(props) => (props.isBottom ? 0 : null)};
-  border-bottom-right-radius: ${(props) => (props.isBottom ? 0 : null)};
-  gap: ${(props) => (props.isBottom ? '16px' : '24px')};
+  ${(props) => MODAL_WRAPPER_POSITION_STYLES[props.position]}
 `;
 
 export default {
