@@ -1,8 +1,8 @@
-import styled from "@emotion/styled";
-import { ReactNode, useEffect } from "react";
-import Button from "./common/Button";
+import styled from '@emotion/styled';
+import { ReactNode, useEffect } from 'react';
+import Button from './common/Button';
 
-type Position = "center" | "bottom";
+type Position = 'center' | 'bottom';
 
 interface ModalProps {
   title: string;
@@ -21,7 +21,7 @@ function Modal({
   isOpen,
   onClose,
   onConfirm,
-  position = "center",
+  position = 'center',
   content,
   hasTopCloseButton = true,
   hasBottomCloseButton = false,
@@ -29,52 +29,48 @@ function Modal({
 }: ModalProps) {
   useEffect(() => {
     if (!isOpen) return;
-    
+
     function handleKeyDown(e: KeyboardEvent) {
-      if (e.key === "Escape") onClose();
+      if (e.key === 'Escape') onClose();
     }
 
-    addEventListener("keydown", handleKeyDown);
+    addEventListener('keydown', handleKeyDown);
 
     return () => {
-      removeEventListener("keydown", handleKeyDown);
+      removeEventListener('keydown', handleKeyDown);
     };
   }, [isOpen]);
 
   return (
-    <ModalContainer isOpen={isOpen}>
-      <ModalOverlay data-testid="modal-overlay" onClick={onClose} />
-      <ModalContent position={position}>
-        <TitleSection>
-          <TitleText>{title}</TitleText>
-          {hasTopCloseButton ? (
-            <CloseButton onClick={onClose}>✕</CloseButton>
-          ) : null}
-        </TitleSection>
-        <MainSection>
-          {content}
-          {hasConfirmButton ? (
-            <Button text="동의하고 저장하기" onClick={onConfirm} />
-          ) : null}
-          {hasBottomCloseButton ? (
-            <Button
-              text="닫기"
-              onClick={onClose}
-              color="#8b95a1"
-              backgroundColor="transparent"
-            />
-          ) : null}
-        </MainSection>
-      </ModalContent>
-    </ModalContainer>
+    <>
+      {isOpen && (
+        <div id="modal">
+          <ModalOverlay data-testid="modal-overlay" onClick={onClose} />
+          <ModalContent position={position}>
+            <TitleSection>
+              <TitleText>{title}</TitleText>
+              {hasTopCloseButton ? <CloseButton onClick={onClose}>✕</CloseButton> : null}
+            </TitleSection>
+            <MainSection>
+              {content}
+              {hasConfirmButton ? <Button text="동의하고 저장하기" onClick={onConfirm} /> : null}
+              {hasBottomCloseButton ? (
+                <Button
+                  text="닫기"
+                  onClick={onClose}
+                  color="#8b95a1"
+                  backgroundColor="transparent"
+                />
+              ) : null}
+            </MainSection>
+          </ModalContent>
+        </div>
+      )}
+    </>
   );
 }
 
 export default Modal;
-
-const ModalContainer = styled.div<{ isOpen: boolean }>`
-  display: ${({ isOpen }) => (isOpen ? "block" : "none")};
-`;
 
 const ModalContent = styled.div<{ position: Position }>`
   height: 216px;
@@ -92,7 +88,7 @@ const ModalContent = styled.div<{ position: Position }>`
   justify-content: space-between;
 
   ${({ position }) =>
-    position === "bottom" &&
+    position === 'bottom' &&
     `
       width: 100%;
       top: auto;
