@@ -9,7 +9,6 @@ function App() {
     setIsOpen(false);
   };
 
-  console.log('sdfghbsdfg');
   return (
     <>
       <button onClick={() => setIsOpen(true)}>열림!</button>
