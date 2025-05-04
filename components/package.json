@@ -8,10 +8,12 @@
   "files": [
     "dist"
   ],
-  ".": {
-    "types": "./dist/index.d.ts",
-    "import": "./dist/index.js",
-    "require": "./dist/index.cjs"
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    }
   },
   "scripts": {
     "dev": "vite",
@@ -25,7 +27,6 @@
   "dependencies": {
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.0",
-    "bunju-summit-modal": "^0.0.7",
     "react": "^19.1.0",
     "react-dom": "^19.1.0"
   },
