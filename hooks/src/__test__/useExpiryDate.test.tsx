@@ -6,6 +6,9 @@ describe('유효기간 검증 테스트입니다.', () => {
   const currentYear = new Date().getFullYear() % 100;
   const currentMonth = new Date().getMonth() + 1;
 
+  const pastMonth = (currentMonth - 1).toString().padStart(2, '0');
+  const yearForTest = (currentYear - 1).toString();
+
   test(`사용자가 입력한 value값의 길이와 validLength(${expiryDateLength})가 같다면, errorMessage를 빈 값으로 반환한다.`, () => {
     const { result } = renderHook(() => useExpiryDate());
 
@@ -50,8 +53,16 @@ describe('유효기간 검증 테스트입니다.', () => {
   test(`사용자가 입력한 year 값이 현재 년도(${currentYear})보다 작다면 errorMessage를 반환준다.`, () => {
     const { result } = renderHook(() => useExpiryDate());
 
+    const monthMockEvent = {
+      target: { value: '12' },
+    } as React.ChangeEvent<HTMLInputElement>;
+
+    act(() => {
+      result.current.handleExpiryDateChange(monthMockEvent, 0);
+    });
+
     const mockEvent = {
-      target: { value: '24' },
+      target: { value: yearForTest },
     } as React.ChangeEvent<HTMLInputElement>;
 
     act(() => {
@@ -67,7 +78,7 @@ describe('유효기간 검증 테스트입니다.', () => {
     const { result } = renderHook(() => useExpiryDate());
 
     const monthMockEvent = {
-      target: { value: '04' },
+      target: { value: pastMonth },
     } as React.ChangeEvent<HTMLInputElement>;
     act(() => {
       result.current.handleExpiryDateChange(monthMockEvent, 0);
