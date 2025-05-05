@@ -34,16 +34,9 @@
     "build-storybook": "storybook build",
     "chromatic": "npx chromatic --project-token=chpt_2e72a208f146985"
   },
-  "dependencies": {
-    "@emotion/react": "^11.14.0",
-    "@emotion/styled": "^11.14.0",
-    "happyjurung-modal": "^0.0.5",
-    "react": "^19.1.0",
-    "react-dom": "^19.1.0"
-  },
   "peerDependencies": {
-    "react": "^18 || ^19",
-    "react-dom": "^18 || ^19"
+    "react": ">=16.8.0 <20.0.0",
+    "react-dom": ">=16.8.0 <20.0.0"
   },
   "devDependencies": {
     "@chromatic-com/storybook": "^3.2.6",
