@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { CSSProperties } from 'react';
+import { CSSProperties, useMemo } from 'react';
 
 function SecondaryButton({
   label,
@@ -10,8 +10,14 @@ function SecondaryButton({
   onClick: () => void;
   style?: CSSProperties;
 }) {
+  const memoizedStyle = useMemo(() => {
+    return {
+      ...style,
+    };
+  }, [JSON.stringify(style)]);
+
   return (
-    <SecondaryButtonContainer style={style} onClick={onClick}>
+    <SecondaryButtonContainer style={memoizedStyle} onClick={onClick}>
       {label}
     </SecondaryButtonContainer>
   );

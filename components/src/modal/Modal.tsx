@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { PropsWithChildren, useEffect, useRef } from 'react';
+import { PropsWithChildren, useEffect, useMemo, useRef } from 'react';
 import CloseButton from './CloseButton';
 import {
   MODAL_CONTAINER_POSITION_STYLES,
@@ -19,6 +19,12 @@ function ModalContainer({
   children,
 }: PropsWithChildren<ModalProps>) {
   const modalRef = useRef<HTMLDialogElement>(null);
+
+  const memoizedStyle = useMemo(() => {
+    return {
+      ...style,
+    };
+  }, [JSON.stringify(style)]);
 
   useEffect(() => {
     if (open) {
@@ -48,7 +54,7 @@ function ModalContainer({
     <StyledModalContainer
       onClose={onClose}
       position={position}
-      style={style}
+      style={memoizedStyle}
       ref={modalRef}
     >
       <ModalWrapper position={position}>{children}</ModalWrapper>

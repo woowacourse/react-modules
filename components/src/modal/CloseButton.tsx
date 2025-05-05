@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { CSSProperties } from 'react';
+import { CSSProperties, useMemo } from 'react';
 
 function CloseButton({
   style,
@@ -8,8 +8,14 @@ function CloseButton({
   style?: CSSProperties;
   onClose: () => void;
 }) {
+  const memoizedStyle = useMemo(() => {
+    return {
+      ...style,
+    };
+  }, [JSON.stringify(style)]);
+
   return (
-    <StyledCloseButton type="button" style={style} onClick={onClose}>
+    <StyledCloseButton type="button" style={memoizedStyle} onClick={onClose}>
       <img
         src={new URL('./assets/close-button.png', import.meta.url).href}
         alt="모달 닫기 버튼"

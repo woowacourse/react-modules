@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { CSSProperties, ReactNode } from 'react';
+import { CSSProperties, ReactNode, useMemo } from 'react';
 
 function Title({
   style,
@@ -8,7 +8,13 @@ function Title({
   style?: CSSProperties;
   children: ReactNode;
 }) {
-  return <StyledTitle style={style}>{children}</StyledTitle>;
+  const memoizedStyle = useMemo(() => {
+    return {
+      ...style,
+    };
+  }, [JSON.stringify(style)]);
+
+  return <StyledTitle style={memoizedStyle}>{children}</StyledTitle>;
 }
 
 const StyledTitle = styled.h2`
