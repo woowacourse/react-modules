@@ -1,7 +1,7 @@
 {
-  "name": "compoents",
-  "version": "0.0.1",
-  "description": "npm modules",
+  "name": "beomgo-modal",
+  "version": "0.0.10",
+  "description": "npm modules pair programming",
   "type": "module",
   "types": "dist/index.d.ts",
   "main": "dist/index.js",
@@ -18,6 +18,9 @@
     "build-storybook": "storybook build"
   },
   "dependencies": {
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.0",
+    "beomgo-modal": "^0.0.9",
     "react": "^19.1.0",
     "react-dom": "^19.1.0"
   },
