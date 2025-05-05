@@ -9,7 +9,7 @@ const useKeyEscClose = (onHide: () => void) => {
     };
     window.addEventListener("keydown", escKeyModalClose);
     return () => window.removeEventListener("keydown", escKeyModalClose);
-  }, []);
+  }, [onHide]);
 };
 
 export default useKeyEscClose;

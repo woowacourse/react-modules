@@ -94,7 +94,7 @@ Module
 - [ ] expriationDate 훅 -> 인덱스 기반 접근 대신 month와 year 상태를 각각 관리
   - [ ] cardNumber 훅 -> 객체로 상태 관리
 - [ ] 유효성 훅 길이 체크
-- [ ] useKeyEscClose 훅 의존성 배열 onHide 함수 채우기
+- [x] useKeyEscClose 훅 의존성 배열 onHide 함수 채우기
 - [ ] Context API 기본 디폴트값 타입 처리
 - [ ] (모달) closButton (div 태그 -> button 태그로 변경)
 - [ ] (모달) React Portal 적용
