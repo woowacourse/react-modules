@@ -1,4 +1,4 @@
-import { Modal, useModal } from "./lib";
+import { Modal, useModal } from "@dev-dino22/modal-components";
 import "./App.css";
 
 function App({
