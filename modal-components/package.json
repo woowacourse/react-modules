@@ -1,5 +1,5 @@
 {
-  "name": "laireca-modal-components",
+  "name": "@dev-dino22/modal-components",
   "version": "0.0.0",
   "description": "Easily create modal components with this lightweight npm package",
   "type": "module",
@@ -20,11 +20,13 @@
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build"
   },
-  "dependencies": {
-    "@emotion/css": "^11.13.5",
-    "@emotion/styled": "^11.14.0",
+  "peerDependencies": {
     "react": "^19.1.0",
     "react-dom": "^19.1.0"
+  },
+  "dependencies": {
+    "@emotion/css": "^11.13.5",
+    "@emotion/styled": "^11.14.0"
   },
   "devDependencies": {
     "@chromatic-com/storybook": "^3.2.6",

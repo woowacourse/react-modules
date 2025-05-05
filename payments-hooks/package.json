@@ -1,7 +1,7 @@
 {
-  "name": "hooks",
-  "version": "0.0.1",
-  "description": "npm modules",
+  "name": "@dev-dino22/payments-hooks",
+  "version": "0.0.0",
+  "description": "Custom React hooks for credit card input validation and state management.",
   "type": "module",
   "types": "dist/index.d.ts",
   "main": "dist/index.js",
@@ -16,7 +16,7 @@
     "preview": "vite preview",
     "test": "jest"
   },
-  "dependencies": {
+  "peerDependencies": {
     "react": "^19.1.0",
     "react-dom": "^19.1.0"
   },
