@@ -1,4 +1,5 @@
-import Modal from "../src/lib/components/Modal/Modal";
+// import Modal from "../src/lib/components/Modal/Modal";
+import { Modal } from "@kaori-killer/modal-component";
 
 function App() {
   const { isOpen, handleOpen, handleClose } = Modal.useModal();
