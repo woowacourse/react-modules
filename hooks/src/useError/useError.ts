@@ -4,12 +4,12 @@ const useError = <T extends Record<string, boolean>>(initialError: T) => {
   const [isError, setIsError] = useState<T>(initialError);
   const [errorMessage, setErrorMessage] = useState(initialError);
 
-  const clearError = (target: string) => {
+  const clearError = (target: keyof T) => {
     setIsError((prev) => ({ ...prev, [target]: false }));
     setErrorMessage((prev) => ({ ...prev, [target]: '' }));
   };
 
-  const changeError = (target: string, message: string) => {
+  const changeError = (target: keyof T, message: string) => {
     setIsError((prev) => ({ ...prev, [target]: true }));
     setErrorMessage((prev) => ({ ...prev, [target]: message }));
   };
