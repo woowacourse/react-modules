@@ -1,18 +1,24 @@
-import { MouseEvent, ReactNode, useRef, useEffect } from 'react';
+import { MouseEvent, ReactNode, useRef } from 'react';
 import * as S from './Modal.styles';
 import { ComponentProps } from 'react';
 import ModalPortal from './ModalPortal';
 import useEscClick from './useEscKey';
 import useScrollBlock from './useScrollBlock';
+import { ModalContext, useModalContext } from './ModalContext';
 
 function ModalMain({ onClose, children }: { onClose: () => void; children: ReactNode }) {
   useEscClick(onClose);
   useScrollBlock();
 
-  return <ModalPortal>{children}</ModalPortal>;
+  return (
+    <ModalContext.Provider value={{ onClose }}>
+      <ModalPortal>{children}</ModalPortal>
+    </ModalContext.Provider>
+  );
 }
 
-function ModalBackDrop({ onClose, backgroundColor, ...props }: { onClose: () => void; backgroundColor?: string } & ComponentProps<'div'>) {
+function ModalBackDrop({ backgroundColor, ...props }: { backgroundColor?: string } & ComponentProps<'div'>) {
+  const { onClose } = useModalContext();
   const outsideRef = useRef<HTMLDivElement>(null);
   const handleBackClick = (e: MouseEvent<HTMLDivElement>) => {
     if (outsideRef.current === e.target) {
@@ -41,9 +47,11 @@ function ModalTitle({ children, ...props }: { children: ReactNode } & ComponentP
   return <h2 {...props}>{children}</h2>;
 }
 
-function ModalCloseButton({ onClick, children, ...props }: { onClick: () => void; children: ReactNode } & ComponentProps<'button'>) {
+function ModalCloseButton({ children, ...props }: { children: ReactNode } & ComponentProps<'button'>) {
+  const { onClose } = useModalContext();
+
   return (
-    <button onClick={onClick} {...props}>
+    <button onClick={onClose} {...props}>
       {children}
     </button>
   );
