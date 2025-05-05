@@ -20,8 +20,8 @@
 **useCardNumbers**
 
 - numbers : 카드 번호 (4\*4) 배열
-- error : isValidate(boolean)와 errorMassage(string)를 담고 있는 객체 배열
-- validate : 유효성 검증 함수
+- error : isValid(boolean)와 errorMassage(string)를 담고 있는 객체 배열
+- handleCardNumbers : numbers 상태 업데이트 및 유효성 검증 함수
 
 ```js
 import { useCardNumbers } from 'jurunghappy-hooks';
@@ -30,15 +30,8 @@ function App() {
   const {
     numbers,
     error: cardNumbersError,
-    validate: cardNumbersValidate,
+    handleCardNumbers,
   } = useCardNumbers();
-
-  const handleCardNumber = (
-    e: React.ChangeEvent<HTMLInputElement>,
-    index: number
-  ) => {
-    cardNumbersValidate(e.target.value, index);
-  };
 
   return (
     <>
@@ -49,7 +42,7 @@ function App() {
             key={index}
             type="text"
             value={number}
-            onChange={(e) => handleCardNumber(e, index)}
+            onChange={(e) => handleCardNumbers(e, index)}
           />
         ))}
         <p>
@@ -67,29 +60,14 @@ export default App;
 **useExpiryDate**
 
 - date : {month: string, year: string} 객체
-- error : isValidate(boolean)와 errorMassage(string)를 담고 있는 객체 배열
-- validate : 유효성 검증 함수
+- error : isValid(boolean)와 errorMassage(string)를 담고 있는 객체 배열
+- handleExpiryDate : date 상태 업데이트 및 유효성 검증 함수
 
 ```js
 import { useExpiryDate } from 'jurunghappy-hooks';
 
 function App() {
-  const { date, error: dateError, validate: dateValidate } = useExpiryDate();
-
-  const handleCardNumber = (
-    e: React.ChangeEvent<HTMLInputElement>,
-    index: number
-  ) => {
-    cardNumbersValidate(e.target.value, index);
-  };
-
-  const handleExpiryDate = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.name === 'month') {
-      dateValidate(e.target.value, 'month');
-    } else if (e.target.name === 'year') {
-      dateValidate(e.target.value, 'year');
-    }
-  };
+  const { date, error: dateError, useExpiryDate } = useExpiryDate();
 
   return (
     <>
@@ -99,14 +77,14 @@ function App() {
           type="text"
           value={date.month}
           name="month"
-          onChange={handleExpiryDate}
+          onChange={(e) => useExpiryDate(e, 'month')}
         />
         <p>{dateError[0].errorMessage}</p>
         <input
           type="text"
           value={date.year}
           name="year"
-          onChange={handleExpiryDate}
+          onChange={(e) => useExpiryDate(e, 'year')}
         />
         <p>{dateError[1].errorMessage}</p>
       </div>
@@ -120,25 +98,21 @@ export default App;
 **useCvcNumber**
 
 - cvc : 카드 cvc 번호 (string)
-- error : isValidate(boolean)와 errorMassage(string)를 담고 있는 객체
-- validate : 유효성 검증 함수
+- error : isValid(boolean)와 errorMassage(string)를 담고 있는 객체
+- handleCvc : cvc 상태 업데이트 및 유효성 검증 함수
 
 ```js
 import './App.css';
 import { useCvcNumber } from 'jurunghappy-hooks';
 
 function App() {
-  const { cvc, error: cvcError, validate: cvcValidate } = useCvcNumber();
-
-  const handleCvcNumber = (e: React.ChangeEvent<HTMLInputElement>) => {
-    cvcValidate(e.target.value);
-  };
+  const { cvc, error: cvcError, handleCvc } = useCvcNumber();
 
   return (
     <>
       <div>
         <h1>CVC</h1>
-        <input type="text" value={cvc} onChange={handleCvcNumber} />
+        <input type="text" value={cvc} onChange={(e) => handleCvc(e)} />
         <p>{cvcError.errorMessage}</p>
       </div>
     </>
@@ -151,28 +125,24 @@ export default App;
 **usePassword**
 
 - password : 카드 비밀번호 2자리 (string)
-- error : isValidate(boolean)와 errorMassage(string)를 담고 있는 객체
-- validate : 유효성 검증 함수
+- error : isValid(boolean)와 errorMassage(string)를 담고 있는 객체
+- handlePassword : password 상태 업데이트 및 유효성 검증 함수
 
 ```js
 import { usePassword } from 'jurunghappy-hooks';
 
 function App() {
-  const {
-    password,
-    error: passwordError,
-    validate: passwordValidate,
-  } = usePassword();
-
-  const handlePassword = (e: React.ChangeEvent<HTMLInputElement>) => {
-    passwordValidate(e.target.value);
-  };
+  const { password, error: passwordError, handlePassword } = usePassword();
 
   return (
     <>
       <div>
         <h1>Password</h1>
-        <input type="text" value={password} onChange={handlePassword} />
+        <input
+          type="text"
+          value={password}
+          onChange={(e) => handlePassword(e)}
+        />
         <p>{passwordError.errorMessage}</p>
       </div>
     </>
