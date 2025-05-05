@@ -76,4 +76,32 @@ describe('useCardNumberValidation', () => {
     });
     expect(result.current.errorMessage).toBe('');
   });
+
+  it('자릿수가 부족한 경우 에러 메시지를 반환한다.', () => {
+    const { result } = renderHook(() => useCardNumberValidation());
+    const shortValueEvent = {
+      target: { value: '12' }, // format[index]는 4자리
+    } as React.ChangeEvent<HTMLInputElement>;
+
+    act(() => {
+      result.current.onChange(0)(shortValueEvent);
+    });
+
+    expect(result.current.errorMessage).toBe(
+      '올바른 길이의 숫자를 입력해주세요.'
+    );
+  });
+
+  it('올바른 자릿수를 입력하면 에러 메시지가 없다.', () => {
+    const { result } = renderHook(() => useCardNumberValidation());
+    const correctValueEvent = {
+      target: { value: '1234' },
+    } as React.ChangeEvent<HTMLInputElement>;
+
+    act(() => {
+      result.current.onChange(0)(correctValueEvent);
+    });
+
+    expect(result.current.errorMessage).toBe('');
+  });
 });

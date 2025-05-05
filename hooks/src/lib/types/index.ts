@@ -5,7 +5,8 @@ export type ErrorMessageType =
   | ''
   | '숫자만 입력 가능합니다.'
   | '유효하지 않은 월입니다.'
-  | '유효하지 않은 연도입니다.';
+  | '유효하지 않은 연도입니다.'
+  | '올바른 길이의 숫자를 입력해주세요.';
 
 export interface ValidateFuncReturnType {
   error: boolean;
