@@ -110,7 +110,7 @@ function useExpirationPeriod() {
 
     setValue((prev) => ({
       ...prev,
-      [type]: value,
+      [type]: parsedValue,
     }));
   };
 
