@@ -6,7 +6,7 @@ import {
   useCardNumbersInput,
   useCardCVCInput,
   useCardCompanyInput,
-} from "@dev-dino22/payments-hooks";
+} from "./lib";
 
 export interface InputProps extends ComponentProps<"input"> {
   isValid?: boolean;
@@ -59,19 +59,24 @@ function InputField({
 }
 
 const CardNumberInput = () => {
-  const { cardNumbers, onChangeHandler, errorMessage } = useCardNumbersInput();
+  const { cardNumbersInfo, onChangeHandler, cardBrand, cardBlocks } =
+    useCardNumbersInput();
+
   return (
-    <InputField
-      title="카드 번호"
-      label="라벨 cardNumbers"
-      feedbackMessage={errorMessage}
-    >
-      <Input type="text" name="0" onChange={onChangeHandler} autoFocus />
-      <Input type="text" name="1" onChange={onChangeHandler} autoFocus />
-      <Input type="text" name="2" onChange={onChangeHandler} autoFocus />
-      <Input type="text" name="3" onChange={onChangeHandler} autoFocus />
-      <p>인풋 실시간 value : {cardNumbers}</p>
-    </InputField>
+    <div className="card-number-inputs">
+      {cardNumbersInfo.map(({ value }, i) => (
+        <Input
+          key={i}
+          type="text"
+          value={value}
+          onChange={onChangeHandler(i)}
+          maxLength={cardBlocks[i]}
+          inputMode="numeric"
+          autoComplete="cc-number"
+        />
+      ))}
+      <p>Detected brand: {cardBrand}</p>
+    </div>
   );
 };
 
