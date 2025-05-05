@@ -10,9 +10,6 @@ const meta: Meta<typeof Modal> = {
   },
   args: {
     show: true,
-    background: true,
-    position: "center",
-    gap: 16,
   },
   parameters: {
     docs: {
@@ -45,11 +42,15 @@ export const ModalComponent: Story = {
     return (
       <div style={{ height: "50vh", display: "flex", alignItems: "center", justifyContent: "center" }}>
         <Modal {...args} show={internalShow} onHide={handleHide}>
-          <Modal.Header closeButton>
-            <Modal.Title>Title</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>Body</Modal.Body>
-          <Modal.Footer>Footer</Modal.Footer>
+          <Modal.Background>
+            <Modal.Container>
+              <Modal.Header style={{ color: "red" }} closeButton>
+                <Modal.Title>Title</Modal.Title>
+              </Modal.Header>
+              <Modal.Body>Body</Modal.Body>
+              <Modal.Footer>Footer</Modal.Footer>
+            </Modal.Container>
+          </Modal.Background>
         </Modal>
       </div>
     );
