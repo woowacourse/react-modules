@@ -4,7 +4,7 @@ import { validationRules } from "./validation-rules";
 import { FieldErrorCode } from "./constants/error-messages";
 type ValidationRuleObj = {
   check: (value: string) => boolean;
-  message: string;
+  message: string | ((value: string) => string);
 };
 
 function createFieldRules<T extends ValidateField>(
