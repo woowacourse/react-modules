@@ -4,7 +4,7 @@ import ERROR_MESSAGE from "../constants/errorMessage";
 import { CARD_INPUT } from "../constants/cardValidationInfo";
 
 describe("useCardNumberInput", () => {
-  it("초기 상태는 빈 문자열 배열이며 유효하지 않음", () => {
+  it("초기 상태는 빈 문자열 배열이며 유효함", () => {
     const { result } = renderHook(() => useCardNumberInput());
 
     expect(result.current.cardNumberState).toEqual([
