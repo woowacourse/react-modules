@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { checkLength, checkMonthRange, checkNumber } from "../utils/vaildate";
 
 const MONTH_VALID_LENGTH = 2;
 
@@ -12,29 +13,8 @@ const useExpirationMonth = () => {
 	const [isValid, setIsValid] = useState<boolean>(true);
 	const [errorMessage, setErrorMessage] = useState<string>("");
 
-	const checkLength = (value: string) => {
-		if (value.length < MONTH_VALID_LENGTH) {
-			return false;
-		}
-		return true;
-	};
-
-	const checkNumber = (value: string) => {
-		if (!/^\d+$/.test(value)) {
-			return false;
-		}
-		return true;
-	};
-
-	const checkMonthRange = (value: string) => {
-		if (Number(value) < 1 || Number(value) > 12) {
-			return false;
-		}
-		return true;
-	};
-
 	const validate = (value: string) => {
-		const isValidLength = checkLength(value);
+		const isValidLength = checkLength(value, MONTH_VALID_LENGTH);
 		const isNumber = checkNumber(value);
 		const isValidRange = checkMonthRange(value);
 

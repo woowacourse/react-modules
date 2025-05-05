@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { checkLength, checkNumber } from "../utils/vaildate";
 
 const CVC_VALID_LENGTH = 3;
 
@@ -11,23 +12,9 @@ const useCardCvc = () => {
 	const [isValid, setIsValid] = useState<boolean>(true);
 	const [errorMessage, setErrorMessage] = useState<string>("");
 
-	const checkNumber = (value: string) => {
-		if (!/^\d+$/.test(value)) {
-			return false;
-		}
-		return true;
-	};
-
-	const checkLength = (value: string) => {
-		if (value.length < CVC_VALID_LENGTH) {
-			return false;
-		}
-		return true;
-	};
-
 	const validate = (value: string) => {
 		const isNumber = checkNumber(value);
-		const isValidLength = checkLength(value);
+		const isValidLength = checkLength(value, CVC_VALID_LENGTH);
 
 		if (!isNumber) {
 			setErrorMessage(ERROR_MESSAGE.INVALID_NUMBER);

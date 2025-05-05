@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { checkLength, checkNumber, checkYearRange } from "../utils/vaildate";
 
 const YEAR_VALID_LENGTH = 2;
 
@@ -12,31 +13,8 @@ const useExpirationYear = () => {
 	const [isValid, setIsValid] = useState<boolean>(true);
 	const [errorMessage, setErrorMessage] = useState<string>("");
 
-	const checkLength = (value: string) => {
-		if (value.length < YEAR_VALID_LENGTH) {
-			return false;
-		}
-		return true;
-	};
-
-	const checkNumber = (value: string) => {
-		if (!/^\d+$/.test(value)) {
-			return false;
-		}
-		return true;
-	};
-
-	const checkYearRange = (value: string) => {
-		const currentYear = new Date().getFullYear() % 1000;
-
-		if (Number(value) < currentYear) {
-			return false;
-		}
-		return true;
-	};
-
 	const validate = (value: string) => {
-		const isValidLength = checkLength(value);
+		const isValidLength = checkLength(value, YEAR_VALID_LENGTH);
 		const isNumber = checkNumber(value);
 		const isValidRange = checkYearRange(value);
 

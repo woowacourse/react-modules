@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { checkLength, checkNumber } from "../utils/vaildate";
 
 const CARDNUMBER_VALID_LENGTH = 4;
 
@@ -25,23 +26,9 @@ const useCardNumber = () => {
 	const [isValid, setIsValid] = useState<CardNumberValid>({ first: true, second: true, third: true, fourth: true });
 	const [errorMessage, setErrorMessage] = useState<CardNumberErrorMessage>({ first: "", second: "", third: "", fourth: "" });
 
-	const checkNumber = (value: string) => {
-		if (!/^\d+$/.test(value)) {
-			return false;
-		}
-		return true;
-	};
-
-	const checkLength = (value: string) => {
-		if (value.length < CARDNUMBER_VALID_LENGTH) {
-			return false;
-		}
-		return true;
-	};
-
 	const validate = (label: string, value: string) => {
 		const isNumber = checkNumber(value);
-		const isValidLength = checkLength(value);
+		const isValidLength = checkLength(value, CARDNUMBER_VALID_LENGTH);
 
 		if (!isNumber) {
 			setErrorMessage({ ...errorMessage, [label]: ERROR_MESSAGE.INVALID_NUMBER });
