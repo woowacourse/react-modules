@@ -10,6 +10,7 @@ import { ModalProps } from "./types/modalTypes";
 
 const Modal = ({
   modalPosition = "center",
+  modalSize = "medium",
   titleText = "",
   children,
   closeType,
@@ -31,7 +32,7 @@ const Modal = ({
   return (
     <ModalContainer modalPosition={modalPosition}>
       <ModalBackdrop onClick={onClose} />
-      <Container>
+      <Container modalSize={modalSize}>
         <Wrapper>
           <ModalBox
             modalPosition={modalPosition}

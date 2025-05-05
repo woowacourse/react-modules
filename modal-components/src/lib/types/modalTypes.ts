@@ -2,6 +2,7 @@ import { ReactNode } from "react";
 
 export interface ModalProps {
   modalPosition: "center" | "bottom";
+  modalSize?: "small" | "medium" | "large";
   titleText?: string;
   children: ReactNode;
   closeType: "top" | "bottom";

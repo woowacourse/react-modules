@@ -17,6 +17,7 @@ function CardNumberInput() {
       <div style={{ display: "flex", width: "100%" }}>
         {cardNumbersInfo.map((info, index) => (
           <input
+            style={{ width: "100%", marginRight: "5px" }}
             key={index}
             type="text"
             value={info.value}

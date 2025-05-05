@@ -1,7 +1,8 @@
 import styled from "@emotion/styled";
-import { ModalStyledProps } from "../types/modalTypes";
 
-export const ModalContainer = styled.div<ModalStyledProps>`
+export const ModalContainer = styled.div<{
+  modalPosition: "center" | "bottom";
+}>`
   width: 100%;
   height: 100%;
   display: flex;
@@ -17,8 +18,21 @@ export const ModalBackdrop = styled.div`
   background-color: rgba(0, 0, 0, 0.5);
 `;
 
-export const Container = styled.div`
-  width: 100%;
+export const Container = styled.div<{
+  modalSize: "small" | "medium" | "large";
+}>`
+  width: ${({ modalSize }) => {
+    switch (modalSize) {
+      case "small":
+        return "320px";
+      case "medium":
+        return "480px";
+      case "large":
+        return "600px";
+      default:
+        return "480px";
+    }
+  }};
   position: absolute;
 `;
 
@@ -30,7 +44,9 @@ export const Wrapper = styled.div`
   align-items: center;
 `;
 
-export const ModalBoxContainer = styled.div<ModalStyledProps>`
+export const ModalBoxContainer = styled.div<{
+  modalPosition: "center" | "bottom";
+}>`
   width: ${({ modalPosition }) =>
     modalPosition === "center" ? "70%" : "100%"};
   max-width: ${({ modalPosition }) =>
