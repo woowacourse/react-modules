@@ -29,7 +29,7 @@ describe("useCardNumber 훅", () => {
 
     act(() => {
       result.current.onCardNumberChange({
-        target: { value: "invalid" },
+        target: { value: "invalidinvalidin" },
       } as React.ChangeEvent<HTMLInputElement>);
     });
 

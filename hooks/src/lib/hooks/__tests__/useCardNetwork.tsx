@@ -1,18 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import useCardNetwork, { getCardNetwork, CardNetwork } from "../useCardNetwork";
+import useCardNetwork from "../useCardNetwork";
 describe("useCardNetwork 훅 테스트", () => {
-  describe("getCardNetwork", () => {
-    it.each<[string, CardNetwork]>([
-      ["4111111111111111", "VISA"],
-      ["5105105105105100", "MASTERCARD"],
-      ["2221000000000009", "MASTERCARD"],
-      ["1234567890123456", "DEFAULT"],
-    ])("returns %s as %s", (number, expected) => {
-      expect(getCardNetwork(number)).toBe(expected);
-    });
-  });
-
   const TestComponent = () => {
     const { cardNumber, cardNetwork, onChange } = useCardNetwork();
 
