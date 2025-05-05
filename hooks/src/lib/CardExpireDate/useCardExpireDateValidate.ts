@@ -45,7 +45,7 @@ const useCardExpireDateValidate = () => {
     if (key === "month" && expireDate[key].length === 2) {
       if (
         !validateRange({
-          value: expireDate[key],
+          value: Number(expireDate[key]),
           min: 1,
           max: 12,
         })
@@ -63,7 +63,7 @@ const useCardExpireDateValidate = () => {
     if (key === "year" && expireDate[key].length === 2) {
       if (
         !validateRange({
-          value: expireDate[key],
+          value: Number(expireDate[key]),
           min: currentYear,
           max: currentYear + 5,
         })

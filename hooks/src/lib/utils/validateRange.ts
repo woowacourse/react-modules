@@ -1,10 +1,10 @@
 type validateRange = {
-  value: string;
+  value: number;
   min: number;
   max: number;
 };
 const validateRange = ({ value, min, max }: validateRange) => {
-  return Number(value) <= max && Number(value) >= min;
+  return value <= max && value >= min;
 };
 
 export default validateRange;
