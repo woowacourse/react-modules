@@ -28,6 +28,7 @@ export default defineConfig({
       exclude: ["**/*.stories.tsx"],
       include: ["src/lib", "src/svg.d.ts"],
       tsconfigPath: "./tsconfig.app.json",
+      rollupTypes: true,
     }),
   ],
   resolve: {
