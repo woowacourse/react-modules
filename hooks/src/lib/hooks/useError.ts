@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { NO_ERROR } from "./constants";
-import { CheckValidationType, UseErrorProps } from "./types";
+import { NO_ERROR } from "../constants";
+import { CheckValidationType, UseErrorProps } from "../types";
 
 export default function useError<T extends Record<string, string>>({
   initError,
@@ -42,9 +42,9 @@ export default function useError<T extends Record<string, string>>({
     return !!findFirstError(error);
   }
 
-  function resetErrors() {
+  function resetError() {
     setError(initError);
   }
 
-  return { error, checkValidation, getErrorMessage, isError, resetErrors };
+  return { error, checkValidation, getErrorMessage, isError, resetError };
 }
