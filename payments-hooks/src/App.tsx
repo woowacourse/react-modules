@@ -34,7 +34,6 @@ function Input({ isValid, ...props }: InputProps) {
 export interface InputFieldProps {
   title: string;
   label: string;
-  description?: string;
   feedbackMessage?: string;
   children: React.ReactNode;
 }
@@ -42,7 +41,6 @@ export interface InputFieldProps {
 function InputField({
   title,
   label,
-  description,
   feedbackMessage,
   children,
 }: InputFieldProps) {
@@ -66,7 +64,6 @@ const CardNumberInput = () => {
     <InputField
       title="카드 번호"
       label="라벨 cardNumbers"
-      description="설명설명"
       feedbackMessage={errorMessage}
     >
       <Input type="text" name="0" onChange={onChangeHandler} autoFocus />
@@ -85,7 +82,6 @@ const CardExpirationDateInput = () => {
     <InputField
       title="유효기간"
       label="라벨 cardExpDate"
-      description="설명설명"
       feedbackMessage={errorMessage}
     >
       <Input type="text" name="month" onChange={onChangeHandler} autoFocus />
@@ -99,12 +95,7 @@ const CardExpirationDateInput = () => {
 const CardCVCInput = () => {
   const { cardCVC, onChangeHandler, errorMessage } = useCardCVCInput();
   return (
-    <InputField
-      title="CVC"
-      label="라벨 cardCVC"
-      description="설명설명"
-      feedbackMessage={errorMessage}
-    >
+    <InputField title="CVC" label="라벨 cardCVC" feedbackMessage={errorMessage}>
       <Input type="text" name="cvc" onChange={onChangeHandler} autoFocus />
       <p>인풋 실시간 value : {cardCVC}</p>
     </InputField>
@@ -112,12 +103,12 @@ const CardCVCInput = () => {
 };
 
 const CardPasswordInput = () => {
-  const { password, onChangeHandler, errorMessage } = useCardPasswordInput();
+  const { cardPassword, onChangeHandler, errorMessage } =
+    useCardPasswordInput();
   return (
     <InputField
       title="비밀번호"
       label="라벨 비밀번호"
-      description="설명설명"
       feedbackMessage={errorMessage}
     >
       <Input
@@ -126,7 +117,7 @@ const CardPasswordInput = () => {
         onChange={onChangeHandler}
         autoFocus
       />
-      <p>인풋 실시간 value : {password}</p>
+      <p>인풋 실시간 value : {cardPassword}</p>
     </InputField>
   );
 };

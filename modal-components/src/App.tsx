@@ -1,8 +1,16 @@
 import { Modal, useModal } from "./lib";
-import { ModalProps } from "./lib/types/modalTypes";
 import "./App.css";
 
-function App({ modalType, closeType, titleText }: ModalProps) {
+function App({
+  modalType,
+  closeType,
+  titleText,
+}: {
+  modalType: "center" | "bottom";
+  closeType: "top" | "bottom";
+  titleText: string;
+  children?: React.ReactNode;
+}) {
   const { isModalOpened, openModalHandler, closeModalHandler } = useModal();
   const onClickHandler = () => {
     openModalHandler();
