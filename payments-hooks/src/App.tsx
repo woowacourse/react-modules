@@ -1,14 +1,14 @@
-import React, { ComponentProps } from 'react';
-import './App.css';
+import React, { ComponentProps } from "react";
+import "./App.css";
 import {
   useCardPasswordInput,
-  useCardExpDateInput,
+  useCardExpirationDateInput,
   useCardNumbersInput,
   useCardCVCInput,
   useCardCompanyInput,
-} from './lib';
+} from "./lib";
 
-export interface InputProps extends ComponentProps<'input'> {
+export interface InputProps extends ComponentProps<"input"> {
   isValid?: boolean;
 }
 
@@ -39,7 +39,13 @@ export interface InputFieldProps {
   children: React.ReactNode;
 }
 
-function InputField({ title, label, description, feedbackMessage, children }: InputFieldProps) {
+function InputField({
+  title,
+  label,
+  description,
+  feedbackMessage,
+  children,
+}: InputFieldProps) {
   return (
     <div>
       <div>
@@ -72,8 +78,9 @@ const CardNumberInput = () => {
   );
 };
 
-const CardExpDateInput = () => {
-  const { cardExpDate, onChangeHandler, errorMessage } = useCardExpDateInput();
+const CardExpirationDateInput = () => {
+  const { cardExpirationDate, onChangeHandler, errorMessage } =
+    useCardExpirationDateInput();
   return (
     <InputField
       title="유효기간"
@@ -83,8 +90,8 @@ const CardExpDateInput = () => {
     >
       <Input type="text" name="month" onChange={onChangeHandler} autoFocus />
       <Input type="text" name="year" onChange={onChangeHandler} autoFocus />
-      <p>인풋 실시간 value - month : {cardExpDate.month}</p>
-      <p>인풋 실시간 value - year : {cardExpDate.year}</p>
+      <p>인풋 실시간 value - month : {cardExpirationDate.month}</p>
+      <p>인풋 실시간 value - year : {cardExpirationDate.year}</p>
     </InputField>
   );
 };
@@ -113,7 +120,12 @@ const CardPasswordInput = () => {
       description="설명설명"
       feedbackMessage={errorMessage}
     >
-      <Input type="password" name="cardPassword" onChange={onChangeHandler} autoFocus />
+      <Input
+        type="password"
+        name="cardPassword"
+        onChange={onChangeHandler}
+        autoFocus
+      />
       <p>인풋 실시간 value : {password}</p>
     </InputField>
   );
@@ -126,7 +138,7 @@ function App() {
         <div>
           <CardBrandSelect />
           <CardNumberInput />
-          <CardExpDateInput />
+          <CardExpirationDateInput />
           <CardCVCInput />
           <CardPasswordInput />
         </div>
