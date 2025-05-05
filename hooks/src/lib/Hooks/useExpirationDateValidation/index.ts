@@ -1,39 +1,33 @@
 import { useState } from 'react';
-import { isExpirationDate } from '../../utils/validation';
+import { validateExpirationDate } from '../../utils/validation';
 import checkNoError from '../../utils/checkNoError';
 import {
   ErrorMessageType,
-  ListErrorType,
-  CurriedInputChangeHandler,
-  ValidationHookReturnType,
+  ExpirationDateErrors,
+  ExpirationDateInputs,
+  ExpirationDateValidationReturnType,
 } from '../../types';
 
-const useExpirationDateValidation = (
-  format: number[] = [2, 2]
-): ValidationHookReturnType => {
-  const [inputStates, setInputStates] = useState<string[]>(
-    format.map(() => '')
-  );
-  const [errors, setErrors] = useState<ListErrorType>(format.map(() => false));
+const useExpirationDateValidation = (): ExpirationDateValidationReturnType => {
+  const [inputStates, setInputStates] = useState<ExpirationDateInputs>({
+    month: '',
+    year: '',
+  });
+  const [errors, setErrors] = useState<ExpirationDateErrors>({
+    month: false,
+    year: false,
+  });
   const [errorMessage, setErrorMessage] = useState<ErrorMessageType>('');
 
-  const onChange: CurriedInputChangeHandler =
-    (index: number) => (e: React.ChangeEvent<HTMLInputElement>) => {
+  const onChange =
+    (type: keyof ExpirationDateInputs) =>
+    (e: React.ChangeEvent<HTMLInputElement>) => {
       const value = e.target.value;
+      setInputStates((prev) => ({ ...prev, [type]: value }));
 
-      const updatedValues = [...inputStates];
-      updatedValues[index] = value;
-      setInputStates(updatedValues);
+      const { error, message } = validateExpirationDate[type](value);
 
-      const inputType = index === 0 ? 'month' : 'year';
-      const { error, message } = isExpirationDate(inputType, value);
-
-      setErrors((prev) => {
-        const updated = [...prev];
-        updated[index] = error;
-        return updated;
-      });
-
+      setErrors((prev) => ({ ...prev, [type]: error }));
       setErrorMessage(message);
     };
 

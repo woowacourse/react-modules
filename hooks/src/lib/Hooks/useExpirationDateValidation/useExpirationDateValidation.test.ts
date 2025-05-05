@@ -2,34 +2,33 @@ import { renderHook, act } from '@testing-library/react';
 import useExpirationDateValidation from '.';
 
 describe('useExpirationDateValidation', () => {
-  it('useExpirationDateValidation 초기 noError 상태는 true이다.', () => {
-    const initialNoError = true;
+  it('초기 noError 상태는 true이다.', () => {
     const { result } = renderHook(() => useExpirationDateValidation());
 
-    expect(result.current.noError).toEqual(initialNoError);
+    expect(result.current.noError).toBe(true);
   });
 
   it('월이 아닌 값이 들어오면 에러메시지를 반환한다.', () => {
     const { result } = renderHook(() => useExpirationDateValidation());
-    const badEvent = {
+    const badMonthEvent = {
       target: { value: '14' },
     } as React.ChangeEvent<HTMLInputElement>;
 
     act(() => {
-      result.current.onChange(0)(badEvent); //month
+      result.current.onChange('month')(badMonthEvent);
     });
 
     expect(result.current.errorMessage).toBe('유효하지 않은 월입니다.');
   });
 
-  it('올해 년도 이전인 값이 들어오면 에러메시지를 반환한다.', () => {
+  it('올해 이전 연도 값이 들어오면 에러메시지를 반환한다.', () => {
     const { result } = renderHook(() => useExpirationDateValidation());
-    const badEvent = {
+    const badYearEvent = {
       target: { value: '24' },
     } as React.ChangeEvent<HTMLInputElement>;
 
     act(() => {
-      result.current.onChange(1)(badEvent); // year
+      result.current.onChange('year')(badYearEvent);
     });
 
     expect(result.current.errorMessage).toBe('유효하지 않은 연도입니다.');
@@ -45,8 +44,8 @@ describe('useExpirationDateValidation', () => {
     } as React.ChangeEvent<HTMLInputElement>;
 
     act(() => {
-      result.current.onChange(0)(goodMonthEvent); // month
-      result.current.onChange(1)(goodYearEvent); // year
+      result.current.onChange('month')(goodMonthEvent);
+      result.current.onChange('year')(goodYearEvent);
     });
 
     expect(result.current.noError).toBe(true);
