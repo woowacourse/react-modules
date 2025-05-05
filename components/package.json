@@ -1,6 +1,6 @@
 {
   "name": "dslgpgh-modal",
-  "version": "0.0.3",
+  "version": "1.0.0",
   "description": "woowahan react-modal",
   "type": "module",
   "types": "dist/index.d.ts",
