@@ -1,7 +1,14 @@
 {
   "name": "happyjurung-hooks",
   "version": "0.0.9",
-  "description": "npm modules",
+  "description": "카드 등록 시 필요한 입력 값에 대한 유효성 검사를 진행할 수 있는 훅",
+  "keywords": [
+    "react",
+    "hooks",
+    "validation",
+    "form"
+  ],
+  "author": "AHHYUNJU <wndkgus0225@naver.com>",
   "type": "module",
   "types": "dist/index.d.ts",
   "main": "dist/index.js",

@@ -1,7 +1,14 @@
 {
   "name": "happyjurung-modal",
   "version": "0.0.5",
-  "description": "npm modules",
+  "description": "React 애플리케이션에서 모달 창을 쉽고 일관되게 구현할 수 있도록 돕는 라이브러리",
+  "keywords": [
+    "react",
+    "modal",
+    "ui",
+    "component"
+  ],
+  "author": "AHHYUNJU <wndkgus0225@naver.com>",
   "type": "module",
   "main": "dist/index.cjs",
   "module": "dist/index.js",
