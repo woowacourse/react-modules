@@ -1,11 +1,11 @@
-import { useState } from 'react';
-import type { ChangeEvent } from 'react';
-import { validateCardNumber } from './validator/validateCardInput';
-import { getFirstErrorMessage } from './validator/getFirstErrorMessage';
+import { useState } from "react";
+import type { ChangeEvent } from "react";
+import { validateCardNumber } from "./validator/validateCardInput";
+import { getFirstErrorMessage } from "./validator/getFirstErrorMessage";
 
 export function useCardNumbersInput() {
-  const [cardNumbers, setCardNumbers] = useState(['', '', '', '']);
-  const [errorMessage, setErrorMessage] = useState('');
+  const [cardNumbers, setCardNumbers] = useState(["", "", "", ""]);
+  const [errorMessages, setErrorMessage] = useState(["", "", "", ""]);
 
   function onChangeHandler(e: ChangeEvent<HTMLInputElement>) {
     const { name, value } = e.target;
@@ -14,12 +14,16 @@ export function useCardNumbersInput() {
     setCardNumbers(cardNumbers.map((num, i) => (i === index ? value : num)));
 
     const errorResult = validateCardNumber(value);
-    setErrorMessage(getFirstErrorMessage(errorResult, 'NUMBER'));
+    setErrorMessage(
+      errorMessages.map((message, i) =>
+        i === index ? getFirstErrorMessage(errorResult, "NUMBER") : message
+      )
+    );
   }
 
   return {
     cardNumbers,
     onChangeHandler,
-    errorMessage,
+    errorMessages,
   };
 }

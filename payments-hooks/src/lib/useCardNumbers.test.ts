@@ -33,9 +33,27 @@ describe("useCardNumbersInput", () => {
         target: { name: "0", value: userInput },
       } as ChangeEvent<HTMLInputElement>);
     });
+    act(() => {
+      result.current.onChangeHandler({
+        target: { name: "1", value: "1234" },
+      } as ChangeEvent<HTMLInputElement>);
+    });
+    act(() => {
+      result.current.onChangeHandler({
+        target: { name: "2", value: userInput },
+      } as ChangeEvent<HTMLInputElement>);
+    });
+    act(() => {
+      result.current.onChangeHandler({
+        target: { name: "3", value: "1234" },
+      } as ChangeEvent<HTMLInputElement>);
+    });
 
-    expect(result.current.errorMessage).toBe(
-      ERROR_MESSAGE.NUMBER.IS_NUMBER_STRING
-    );
+    expect(result.current.errorMessages).toEqual([
+      ERROR_MESSAGE.NUMBER.IS_NUMBER_STRING,
+      "",
+      ERROR_MESSAGE.NUMBER.IS_NUMBER_STRING,
+      "",
+    ]);
   });
 });
