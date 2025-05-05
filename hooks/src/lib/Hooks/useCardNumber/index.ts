@@ -9,6 +9,8 @@ import {
   ValidInputFuncType,
 } from "../../types";
 import useCheckErrorComplete from "../common/useCheckErrorComplete";
+import useCheckLengthComplete from "../common/useCheckLengthComplete";
+import { MAX_LENGTH } from "../../constants";
 
 const KEY_INDEX_MATCH = ["first", "second", "third", "forth"];
 
@@ -21,19 +23,11 @@ const useCardNumber = (): HookReturnType<"cardNumber"> => {
     forth: "",
   });
 
-  const [errors, setErrors] = useState<ListErrorType>([
-    false,
-    false,
-    false,
-    false,
-  ]);
+  const [errors, setErrors] = useState<ListErrorType>([false, false, false, false]);
   const [errorMessage, setErrorMessage] = useState<ErrorMessageType>("");
 
   /** setter(상태업데이트) */
-  const onChange: SetValueFn<CardNumberType[keyof CardNumberType]> = (
-    value,
-    index
-  ) => {
+  const onChange: SetValueFn<CardNumberType[keyof CardNumberType]> = (value, index) => {
     if (index === undefined) return;
 
     // setter 상태업데이트
@@ -55,6 +49,7 @@ const useCardNumber = (): HookReturnType<"cardNumber"> => {
     setErrorMessage(message);
   };
 
+  const isLengthComplete = useCheckLengthComplete(cardNumber, MAX_LENGTH.CARD_NUMBER);
   const isErrorComplete = useCheckErrorComplete(errors);
 
   return {
@@ -63,6 +58,7 @@ const useCardNumber = (): HookReturnType<"cardNumber"> => {
     errors,
     errorMessage,
     validateInput,
+    isLengthComplete,
     isErrorComplete,
   };
 };

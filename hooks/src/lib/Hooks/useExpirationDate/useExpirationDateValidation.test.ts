@@ -71,4 +71,17 @@ describe("useExpirationDate", () => {
 
     expect(result.current.isErrorComplete).toBeTruthy();
   });
+
+  it("현재 입력이 모두 다 채워져 있다면 isLengthComplete가 true를 반환한다.", () => {
+    const userInput = ["12", "26"];
+    const { result } = renderHook(() => useExpirationDate());
+
+    act(() => {
+      userInput.forEach((input, index) => {
+        result.current.onChange(input, index);
+      });
+    });
+
+    expect(result.current.isLengthComplete).toBeTruthy();
+  });
 });

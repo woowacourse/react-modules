@@ -9,6 +9,8 @@ import {
   ValidInputFuncType,
 } from "../../types";
 import useCheckErrorComplete from "../common/useCheckErrorComplete";
+import useCheckLengthComplete from "../common/useCheckLengthComplete";
+import { MAX_LENGTH } from "../../constants";
 
 const usePassword = (): HookReturnType<"password"> => {
   const [password, setPassword] = useState<PasswordType>("");
@@ -23,6 +25,7 @@ const usePassword = (): HookReturnType<"password"> => {
     setErrorMessage(message);
   };
 
+  const isLengthComplete = useCheckLengthComplete(password, MAX_LENGTH.PASSWORD);
   const isErrorComplete = useCheckErrorComplete(errors);
 
   return {
@@ -31,6 +34,7 @@ const usePassword = (): HookReturnType<"password"> => {
     errors,
     errorMessage,
     validateInput,
+    isLengthComplete,
     isErrorComplete,
   };
 };

@@ -50,4 +50,15 @@ describe("usePassword", () => {
 
     expect(result.current.isErrorComplete).toBeTruthy();
   });
+
+  it("현재 입력이 모두 다 채워져 있다면 isLengthComplete가 true를 반환한다.", () => {
+    const userInput = "12";
+    const { result } = renderHook(() => usePassword());
+
+    act(() => {
+      result.current.onChange(userInput);
+    });
+
+    expect(result.current.isLengthComplete).toBeTruthy();
+  });
 });

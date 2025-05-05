@@ -40,7 +40,7 @@ describe("useCvcNumber", () => {
     expect(result.current.errorMessage).toBe("숫자만 입력 가능합니다.");
   });
 
-  it("현재 에러 상태에 에러가 없다면 noError가 true를 반환한다.", () => {
+  it("현재 에러 상태에 에러가 없다면 isErrorComplete가 true를 반환한다.", () => {
     const userInput = "124";
     const { result } = renderHook(() => useCvcNumber());
 
@@ -49,5 +49,16 @@ describe("useCvcNumber", () => {
     });
 
     expect(result.current.isErrorComplete).toBeTruthy();
+  });
+
+  it("현재 입력이 모두 다 채워져 있다면 isLengthComplete가 true를 반환한다.", () => {
+    const userInput = "124";
+    const { result } = renderHook(() => useCvcNumber());
+
+    act(() => {
+      result.current.onChange(userInput);
+    });
+
+    expect(result.current.isLengthComplete).toBeTruthy();
   });
 });

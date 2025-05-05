@@ -9,6 +9,8 @@ import {
   ValidInputFuncType,
 } from "../../types";
 import useCheckErrorComplete from "../common/useCheckErrorComplete";
+import useCheckLengthComplete from "../common/useCheckLengthComplete";
+import { MAX_LENGTH } from "../../constants";
 
 const useCvcNumber = (): HookReturnType<"cvcNumber"> => {
   const [cvcNumber, setCvcNumber] = useState<CvcNumberType>("");
@@ -23,6 +25,7 @@ const useCvcNumber = (): HookReturnType<"cvcNumber"> => {
     setErrorMessage(message);
   };
 
+  const isLengthComplete = useCheckLengthComplete(cvcNumber, MAX_LENGTH.CVC_NUMBER);
   const isErrorComplete = useCheckErrorComplete(errors);
 
   return {
@@ -31,6 +34,7 @@ const useCvcNumber = (): HookReturnType<"cvcNumber"> => {
     errors,
     errorMessage,
     validateInput,
+    isLengthComplete,
     isErrorComplete,
   };
 };

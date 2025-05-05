@@ -9,6 +9,8 @@ import {
   ValidInputFuncType,
 } from "../../types";
 import useCheckErrorComplete from "../common/useCheckErrorComplete";
+import useCheckLengthComplete from "../common/useCheckLengthComplete";
+import { MAX_LENGTH } from "../../constants";
 
 const KEY_INDEX_MATCH = ["month", "year"];
 
@@ -22,10 +24,7 @@ const useExpirationDate = (): HookReturnType<"expirationDate"> => {
   const [errorMessage, setErrorMessage] = useState<ErrorMessageType>("");
 
   /** setter(상태업데이트) */
-  const onChange: SetValueFn<ExpirationDateType[keyof ExpirationDateType]> = (
-    value,
-    index
-  ) => {
+  const onChange: SetValueFn<ExpirationDateType[keyof ExpirationDateType]> = (value, index) => {
     if (index === undefined) return;
 
     // setter 상태업데이트
@@ -48,6 +47,7 @@ const useExpirationDate = (): HookReturnType<"expirationDate"> => {
     setErrorMessage(message);
   };
 
+  const isLengthComplete = useCheckLengthComplete(expirationDate, MAX_LENGTH.EXPIRATION_DATE);
   const isErrorComplete = useCheckErrorComplete(errors);
 
   return {
@@ -56,6 +56,7 @@ const useExpirationDate = (): HookReturnType<"expirationDate"> => {
     errors,
     errorMessage,
     validateInput,
+    isLengthComplete,
     isErrorComplete,
   };
 };

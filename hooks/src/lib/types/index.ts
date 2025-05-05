@@ -17,20 +17,14 @@ type ValidWithIndex = (value: string, index: number) => void;
 
 export type ValidInputFuncType = ValidWithoutIndex | ValidWithIndex;
 
-export interface ValidationHookReturnType {
-  errors: SingleErrorType | ListErrorType;
-  errorMessage: ErrorMessageType;
-  validateInput: ValidInputFuncType;
-  noError: boolean;
-}
-
 export interface HookReturnType<T extends keyof CardInformationType> {
   state: CardInformationType[T];
   onChange: setCardInformationType[T];
   errors: SingleErrorType | ListErrorType;
   errorMessage: ErrorMessageType;
   validateInput: ValidInputFuncType;
-  noError: boolean;
+  isLengthComplete: boolean;
+  isErrorComplete: boolean;
 }
 
 export type CardInformationType = {
@@ -54,5 +48,11 @@ export type CardNumberType = Record<
 export type ExpirationDateType = Record<"month" | "year", string>;
 export type CvcNumberType = string;
 export type PasswordType = string;
+
+export type cardStateType =
+  | CardNumberType
+  | ExpirationDateType
+  | CvcNumberType
+  | PasswordType;
 
 export type SetValueFn<T> = (value: T, index?: number) => void;
