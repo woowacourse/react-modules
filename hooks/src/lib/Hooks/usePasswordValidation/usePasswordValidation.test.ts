@@ -2,32 +2,70 @@ import { renderHook, act } from '@testing-library/react';
 import usePasswordValidation from '.';
 
 describe('usePasswordValidation', () => {
-  it('usePasswordValidation 초기 에러 상태가 반환된다.', () => {
-    const initialErrors = false;
+  it('초기 noError 상태는 true이다.', () => {
     const { result } = renderHook(() => usePasswordValidation());
 
-    expect(result.current.errors).toEqual(initialErrors);
+    expect(result.current.noError).toBe(true);
   });
 
   it('숫자가 아닌 값이 들어오면 에러메시지를 반환한다.', () => {
-    const userInput = 'hi';
     const { result } = renderHook(() => usePasswordValidation());
+    const badEvent = {
+      target: { value: 'hi' },
+    } as React.ChangeEvent<HTMLInputElement>;
 
     act(() => {
-      (result.current.validateInput as (value: string) => void)(userInput);
+      result.current.onChange(0)(badEvent);
+    });
+
+    expect(result.current.errorMessage).toBe('숫자만 입력 가능합니다.');
+    expect(result.current.noError).toBe(false);
+  });
+
+  it('숫자만 입력하면 noError가 true이다.', () => {
+    const { result } = renderHook(() => usePasswordValidation());
+    const goodEvent = {
+      target: { value: '12' },
+    } as React.ChangeEvent<HTMLInputElement>;
+
+    act(() => {
+      result.current.onChange(0)(goodEvent);
+    });
+
+    expect(result.current.noError).toBe(true);
+    expect(result.current.errorMessage).toBe('');
+  });
+
+  it('숫자가 아닌 입력 시 에러 메시지가 나타난다.', () => {
+    const { result } = renderHook(() => usePasswordValidation());
+    const badEvent = {
+      target: { value: '1a' },
+    } as React.ChangeEvent<HTMLInputElement>;
+
+    act(() => {
+      result.current.onChange(0)(badEvent);
     });
 
     expect(result.current.errorMessage).toBe('숫자만 입력 가능합니다.');
   });
 
-  it('현재 에러 상태에 에러가 없다면 noError가 true를 반환한다.', () => {
-    const userInput = '12';
+  it('숫자 입력 시 에러 메시지가 사라진다.', () => {
     const { result } = renderHook(() => usePasswordValidation());
+    const badEvent = {
+      target: { value: 'abc' },
+    } as React.ChangeEvent<HTMLInputElement>;
+    const goodEvent = {
+      target: { value: '45' },
+    } as React.ChangeEvent<HTMLInputElement>;
 
     act(() => {
-      (result.current.validateInput as (value: string) => void)(userInput);
+      result.current.onChange(0)(badEvent);
     });
+    expect(result.current.errorMessage).toBe('숫자만 입력 가능합니다.');
 
-    expect(result.current.noError).toBeTruthy();
+    act(() => {
+      result.current.onChange(0)(goodEvent);
+    });
+    expect(result.current.errorMessage).toBe('');
   });
 });

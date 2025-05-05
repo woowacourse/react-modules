@@ -4,17 +4,20 @@ import checkNoError from '../../utils/checkNoError';
 import {
   ErrorMessageType,
   SingleErrorType,
+  CurriedInputChangeHandler,
   ValidationHookReturnType,
-  ValidInputFuncType,
 } from '../../types';
 
 const usePasswordValidation = (): ValidationHookReturnType => {
+  const [inputStates, setInputStates] = useState<string>('');
   const [errors, setErrors] = useState<SingleErrorType>(false);
   const [errorMessage, setErrorMessage] = useState<ErrorMessageType>('');
 
-  const validateInput: ValidInputFuncType = (value: string) => {
-    const { error, message } = isNumber(value);
+  const onChange: CurriedInputChangeHandler = () => (e) => {
+    const value = e.target.value;
+    setInputStates(value);
 
+    const { error, message } = isNumber(value);
     setErrors(error);
     setErrorMessage(message);
   };
@@ -22,9 +25,9 @@ const usePasswordValidation = (): ValidationHookReturnType => {
   const noError = checkNoError(errors);
 
   return {
-    errors,
+    inputStates,
     errorMessage,
-    validateInput,
+    onChange,
     noError,
   };
 };
