@@ -61,6 +61,10 @@ export const useCardExpiryPeriod = (
     const monthValue = Number(month);
     const yearValue = Number(year);
 
+    const currentDate = new Date();
+    const currentYear = currentDate.getFullYear() % 100;
+    const currentMonth = currentDate.getMonth() + 1;
+
     return (
       month.length === CARD_EXPIRATION.monthLength &&
       year.length === CARD_EXPIRATION.yearLength &&
@@ -68,6 +72,7 @@ export const useCardExpiryPeriod = (
       monthValue <= CARD_EXPIRATION.maxMonth &&
       yearValue >= CARD_EXPIRATION.minYear &&
       yearValue <= CARD_EXPIRATION.maxYear &&
+      (yearValue > currentYear || (yearValue === currentYear && monthValue >= currentMonth)) &&
       !cardExpirationDateError.month &&
       !cardExpirationDateError.year
     );
