@@ -11,7 +11,7 @@ test("초기 상태는 에러가 뜨지 않는다.", () => {
   });
 });
 
-test("4자리 숫자가 입력되면 정상 작동된다.", () => {
+test("4자리 숫자가 입력되면 정상 작동한다.", () => {
   const { result } = renderHook(() => useCardNumbers());
 
   act(() => {
