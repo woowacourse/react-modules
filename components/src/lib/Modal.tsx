@@ -12,7 +12,7 @@ function ModalMain({ onClose, children }: { onClose: () => void; children: React
   return <ModalPortal>{children}</ModalPortal>;
 }
 
-function ModalBackDrop({ onClose, backgroundColor, ...props }: { onClose: () => void; backgroundColor: string } & ComponentProps<'div'>) {
+function ModalBackDrop({ onClose, backgroundColor, ...props }: { onClose: () => void; backgroundColor?: string } & ComponentProps<'div'>) {
   const outsideRef = useRef<HTMLDivElement>(null);
   const handleBackClick = (e: MouseEvent<HTMLDivElement>) => {
     if (outsideRef.current === e.target) {

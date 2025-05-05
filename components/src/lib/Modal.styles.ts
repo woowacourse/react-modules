@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 
-export const BackDrop = styled.div<{ backgroundColor: string }>`
+export const BackDrop = styled.div<{ backgroundColor: string | undefined }>`
   position: absolute;
   left: 0;
   top: 0;
