@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { StyledModal } from "./Modal.styled";
 
 import ModalOverlay from "../ModalOverlay/ModalOverlay";
 import ModalContent from "../ModalContent/ModalContent";
@@ -9,20 +9,7 @@ import ModalBody from "../ModalBody/ModalBody";
 import ModalFooter from "../ModalFooter/ModalFooter";
 import useModal from "../../hooks/useModal";
 
-import { StyledModal } from "./Modal.styled";
-
-import { ModalProps } from "./Modal.types";
-
-interface ModalCompoundComponent extends FC<ModalProps> {
-  Overlay: typeof ModalOverlay;
-  Content: typeof ModalContent;
-  Header: typeof ModalHeader;
-  Title: typeof ModalTitle;
-  CloseButton: typeof ModalCloseButton;
-  Body: typeof ModalBody;
-  Footer: typeof ModalFooter;
-  useModal: typeof useModal;
-}
+import { ModalCompoundComponent } from "./Modal.types";
 
 const Modal: ModalCompoundComponent = ({ children, ...props }) => {
   return <StyledModal {...props}>{children}</StyledModal>;
