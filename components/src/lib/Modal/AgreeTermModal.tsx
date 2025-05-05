@@ -1,18 +1,8 @@
 import styled from "@emotion/styled";
 
-const AgreeTermModal = ({ setIsOpen }: any) => {
-	const onClose = () => {
-		setIsOpen((prev: any) => !prev);
-	};
+const AgreeTermModal = () => {
 	return (
 		<AgreementContainer>
-			<Header>
-				<Title>약관에 동의해주세요</Title>
-				<CloseButton onClick={onClose}>
-					<img src="./images/Close.svg" />
-				</CloseButton>
-			</Header>
-
 			<AgreementWrap>
 				<AgreementItem>
 					<img src="./images/check.png" alt="" width={20} height={20} />
@@ -42,12 +32,6 @@ const AgreementWrap = styled.div`
 	gap: 8px;
 `;
 
-const CloseButton = styled.button`
-	padding: 0;
-	border: none;
-	background-color: transparent;
-`;
-
 const AgreementItem = styled.div`
 	display: flex;
 	align-items: center;
@@ -59,29 +43,4 @@ const Text = styled.p`
 	font-size: 12px;
 	font-weight: 500;
 	color: #8b95a1;
-`;
-
-const Header = styled.div`
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-`;
-
-const Title = styled.h2`
-	margin: 0;
-	font-size: 18px;
-	font-weight: 700;
-`;
-
-const AgreementButton = styled.button`
-	width: 100%;
-	padding: 8px 0px;
-	border: none;
-	text-align: center;
-	font-size: 15px;
-	font-weight: 700;
-	border-radius: 5px;
-	color: #fff;
-	background: #333;
-	cursor: pointer;
 `;
