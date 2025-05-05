@@ -1,13 +1,13 @@
-import { MouseEvent, ReactNode, useEffect } from "react";
+import {MouseEvent, ReactNode, useEffect} from 'react';
 import {
   Backdrop,
   CloseButton,
   ModalBox,
   Title,
   TopWrapper,
-} from "./Modal.styles";
-import { IoClose } from "react-icons/io5";
-import { createPortal } from "react-dom";
+} from './Modal.styles';
+import {IoClose} from 'react-icons/io5';
+import {createPortal} from 'react-dom';
 
 interface TitleProps {
   text?: string;
@@ -16,7 +16,7 @@ interface TitleProps {
 }
 
 export interface ModalProps {
-  position?: "center" | "bottom";
+  position?: 'center' | 'bottom';
   title?: TitleProps;
   showCloseButton?: boolean;
   backgroundColor?: string;
@@ -26,7 +26,7 @@ export interface ModalProps {
 }
 
 const Modal = ({
-  position = "center",
+  position = 'center',
   title,
   showCloseButton = true,
   backgroundColor,
@@ -40,39 +40,42 @@ const Modal = ({
 
   useEffect(() => {
     const handleEscape = (e: KeyboardEvent) => {
-      if (e.key === "Escape") onClose();
+      if (e.key === 'Escape') onClose();
     };
 
-    document.addEventListener("keydown", handleEscape);
-    return () => document.removeEventListener("keydown", handleEscape);
+    document.addEventListener('keydown', handleEscape);
+    return () => document.removeEventListener('keydown', handleEscape);
   }, [onClose]);
 
-  return createPortal(
-    <Backdrop $isOpen={isOpen} $position={position} onClick={onClose}>
-      <ModalBox
-        $backgroundColor={backgroundColor}
-        $position={position}
-        onClick={stopPropagation}
-      >
-        <TopWrapper $titleText={title?.text}>
-          {title && (
-            <Title $color={title.color} $size={title.size}>
-              {title.text}
-            </Title>
-          )}
-          {showCloseButton && (
-            <CloseButton type="button" onClick={onClose}>
-              <IoClose
-                color={backgroundColor === "#000" ? "#fff" : "#000"}
-                size={30}
-              />
-            </CloseButton>
-          )}
-        </TopWrapper>
-        {children}
-      </ModalBox>
-    </Backdrop>,
-    document.body
+  return (
+    isOpen &&
+    createPortal(
+      <Backdrop $position={position} onClick={onClose}>
+        <ModalBox
+          $backgroundColor={backgroundColor}
+          $position={position}
+          onClick={stopPropagation}
+        >
+          <TopWrapper $titleText={title?.text}>
+            {title && (
+              <Title $color={title.color} $size={title.size}>
+                {title.text}
+              </Title>
+            )}
+            {showCloseButton && (
+              <CloseButton type="button" onClick={onClose}>
+                <IoClose
+                  color={backgroundColor === '#000' ? '#fff' : '#000'}
+                  size={30}
+                />
+              </CloseButton>
+            )}
+          </TopWrapper>
+          {children}
+        </ModalBox>
+      </Backdrop>,
+      document.body
+    )
   );
 };
 
