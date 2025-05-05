@@ -5,43 +5,22 @@ import {
   useCvcNumber,
   usePassword,
 } from 'jurunghappy-hooks';
+// import {
+//   useCardNumbers,
+//   useExpiryDate,
+//   useCvcNumber,
+//   usePassword,
+// } from './lib';
 
 function App() {
   const {
     numbers,
     error: cardNumbersError,
-    validate: cardNumbersValidate,
+    handleCardNumbers,
   } = useCardNumbers();
-  const { date, error: dateError, validate: dateValidate } = useExpiryDate();
-  const { cvc, error: cvcError, validate: cvcValidate } = useCvcNumber();
-  const {
-    password,
-    error: passwordError,
-    validate: passwordValidate,
-  } = usePassword();
-
-  const handleCardNumber = (
-    e: React.ChangeEvent<HTMLInputElement>,
-    index: number
-  ) => {
-    cardNumbersValidate(e.target.value, index);
-  };
-
-  const handleExpiryDate = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.name === 'month') {
-      dateValidate(e.target.value, 'month');
-    } else if (e.target.name === 'year') {
-      dateValidate(e.target.value, 'year');
-    }
-  };
-
-  const handlePassword = (e: React.ChangeEvent<HTMLInputElement>) => {
-    passwordValidate(e.target.value);
-  };
-
-  const handleCvcNumber = (e: React.ChangeEvent<HTMLInputElement>) => {
-    cvcValidate(e.target.value);
-  };
+  const { date, error: dateError, handleExpiryDate } = useExpiryDate();
+  const { cvc, error: cvcError, handleCvc } = useCvcNumber();
+  const { password, error: passwordError, handlePassword } = usePassword();
 
   return (
     <>
@@ -52,7 +31,7 @@ function App() {
             key={index}
             type="text"
             value={number}
-            onChange={(e) => handleCardNumber(e, index)}
+            onChange={(e) => handleCardNumbers(e.target.value, index)}
           />
         ))}
         <p>
@@ -66,25 +45,33 @@ function App() {
           type="text"
           value={date.month}
           name="month"
-          onChange={handleExpiryDate}
+          onChange={(e) => handleExpiryDate(e.target.value, 'month')}
         />
         <p>{dateError[0].errorMessage}</p>
         <input
           type="text"
           value={date.year}
           name="year"
-          onChange={handleExpiryDate}
+          onChange={(e) => handleExpiryDate(e.target.value, 'year')}
         />
         <p>{dateError[1].errorMessage}</p>
       </div>
       <div>
         <h1>CVC</h1>
-        <input type="text" value={cvc} onChange={handleCvcNumber} />
+        <input
+          type="text"
+          value={cvc}
+          onChange={(e) => handleCvc(e.target.value)}
+        />
         <p>{cvcError.errorMessage}</p>
       </div>
       <div>
         <h1>Password</h1>
-        <input type="text" value={password} onChange={handlePassword} />
+        <input
+          type="text"
+          value={password}
+          onChange={(e) => handlePassword(e.target.value)}
+        />
         <p>{passwordError.errorMessage}</p>
       </div>
     </>

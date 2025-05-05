@@ -1,6 +1,6 @@
 {
   "name": "jurunghappy-hooks",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "npm modules",
   "type": "module",
   "types": "dist/index.d.ts",
@@ -17,7 +17,7 @@
     "test": "jest"
   },
   "dependencies": {
-    "jurunghappy-hooks": "^0.0.3",
+    "jurunghappy-hooks": "^0.0.4",
     "react": "^19.1.0",
     "react-dom": "^19.1.0"
   },

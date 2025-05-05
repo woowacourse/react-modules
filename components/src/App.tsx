@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import { Modal } from './lib';
+// import { Modal } from './lib';
+import { Modal } from 'jurunghappy-modal';
 import './App.css';
 
 function App() {

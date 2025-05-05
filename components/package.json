@@ -1,6 +1,6 @@
 {
   "name": "jurunghappy-modal",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "npm modules",
   "type": "module",
   "main": "dist/index.cjs",
@@ -31,7 +31,7 @@
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.0",
     "happyjurung-modal": "^0.0.4",
-    "jurunghappy-modal": "^0.0.4",
+    "jurunghappy-modal": "^0.0.5",
     "react": "^19.1.0",
     "react-dom": "^19.1.0"
   },
