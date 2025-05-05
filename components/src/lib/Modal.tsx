@@ -27,8 +27,8 @@ const Modal = ({
   const modalContent = (
     <ModalBackground isModalOpen={isModalOpen} position={position}>
       <ModalContainer position={position}>
-        <ModalHeader as="h4">
-          {title}
+        <ModalHeader>
+          <h4>{title}</h4>
           <CloseButton onClick={onClose}>X</CloseButton>
         </ModalHeader>
         <ModalBody>{children}</ModalBody>
