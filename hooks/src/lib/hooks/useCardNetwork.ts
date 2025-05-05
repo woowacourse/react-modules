@@ -1,5 +1,5 @@
 import { useState, useCallback, useMemo } from "react";
-import { strictCardBrandChecker } from "../utils/card-brand-checker";
+import { strictCheckCardBrand } from "../utils/card-brand-checker";
 
 export default function useCardNetwork(initial = "") {
   const [cardNumber, setCardNumber] = useState(initial);
@@ -9,7 +9,7 @@ export default function useCardNetwork(initial = "") {
     setCardNumber(value.replace(/\D/g, ""));
   }, []);
   const cardNetwork = useMemo(
-    () => strictCardBrandChecker(cardNumber),
+    () => strictCheckCardBrand(cardNumber),
     [cardNumber]
   );
 

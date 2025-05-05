@@ -15,7 +15,7 @@ import {
 } from "../utils/date-utils";
 import { isValidLuhn } from "../utils/isValidLuhn";
 import { isValidLength } from "../utils/isValidLength";
-import { cardBrandChecker } from "../utils/card-brand-checker";
+import { checkCardBrand } from "../utils/card-brand-checker";
 import { CardBrand } from "../constants/CardBrand";
 import { CARD_NUMBER_LENGTH } from "./constants/card-number-length";
 
@@ -53,7 +53,7 @@ export const validationRules = {
     INVALID_LENGTH: {
       check: (value: string) => isValidLength(value),
       message: (value: string) =>
-        makeMessageForInvalidLength(cardBrandChecker(value)),
+        makeMessageForInvalidLength(checkCardBrand(value)),
     },
   },
   strictCardNumber: {
@@ -72,7 +72,7 @@ export const validationRules = {
     INVALID_LENGTH: {
       check: (value: string) => isValidLength(value),
       message: (value: string) =>
-        makeMessageForInvalidLength(cardBrandChecker(value)),
+        makeMessageForInvalidLength(checkCardBrand(value)),
     },
   },
   password: {

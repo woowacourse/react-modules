@@ -1,4 +1,3 @@
-// strictCardBrandChecker.ts
 import type { CardBrand } from "../constants/CardBrand";
 import { CARD_NUMBER_LENGTH } from "../validator/constants/card-number-length";
 
@@ -19,7 +18,7 @@ const BRAND_PATTERNS: { brand: KnownBrand; regex: RegExp }[] = [
   },
 ];
 
-export function strictCardBrandChecker(cardNumber: string): CardBrand {
+export function strictCheckCardBrand(cardNumber: string): CardBrand {
   const cleaned = cardNumber.replace(/\D/g, "");
   const len = cleaned.length;
 
@@ -32,7 +31,7 @@ export function strictCardBrandChecker(cardNumber: string): CardBrand {
   return "DEFAULT";
 }
 
-export function cardBrandChecker(cardNumber: string): CardBrand {
+export function checkCardBrand(cardNumber: string): CardBrand {
   const cleaned = cardNumber.replace(/\D/g, "");
 
   for (const { brand, regex } of BRAND_PATTERNS) {

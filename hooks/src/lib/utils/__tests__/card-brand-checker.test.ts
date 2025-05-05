@@ -1,9 +1,6 @@
 // __tests__/cardBrandChecker.test.ts
 import type { CardBrand } from "../../constants/CardBrand";
-import {
-  strictCardBrandChecker,
-  cardBrandChecker,
-} from "../card-brand-checker";
+import { checkCardBrand, strictCheckCardBrand } from "../card-brand-checker";
 
 describe("strictCardBrandChecker", () => {
   interface TestCase {
@@ -42,12 +39,12 @@ describe("strictCardBrandChecker", () => {
 
   cases.forEach(({ input, expected }) => {
     it(`"${input}" → ${expected}`, () => {
-      expect(strictCardBrandChecker(input)).toBe(expected);
+      expect(strictCheckCardBrand(input)).toBe(expected);
     });
   });
 });
 
-describe("cardBrandChecker", () => {
+describe("checkCardBrand", () => {
   interface TestCase {
     input: string;
     expected: CardBrand;
@@ -67,7 +64,7 @@ describe("cardBrandChecker", () => {
 
   cases.forEach(({ input, expected }) => {
     it(`"${input}" → ${expected}`, () => {
-      expect(cardBrandChecker(input)).toBe(expected);
+      expect(checkCardBrand(input)).toBe(expected);
     });
   });
 });
