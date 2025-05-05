@@ -3,33 +3,34 @@ import { getValidLength } from '../utils/getValidLength';
 import { parseNumber } from '../utils/parseNumber';
 
 function useCardCVC() {
-  const [cardCVC, setCardCVC] = useState('');
-  const [isCardCVCError, setIsCardCVCError] = useState(false);
+  const [value, setValue] = useState('');
+  const [isError, setIsError] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
 
-  const onChangeCVC = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const originValue = e.target.value;
-    const value = parseNumber(originValue);
+    const parsedValue = parseNumber(originValue);
 
-    if (value.length > 3) {
+    if (parsedValue.length > 3) {
       return;
     }
 
-    const isValid = getValidLength(value, 3);
+    const isValid = getValidLength(parsedValue, 3);
 
-    setIsCardCVCError(!isValid);
+    setIsError(!isValid);
 
     setErrorMessage(!isValid ? '한 칸은 3자리 숫자를 입력해야합니다.' : '');
 
-    setCardCVC(value);
+    setValue(parsedValue);
   };
 
-  return {
-    cardCVC,
-    isCardCVCError,
-    onChangeCVC,
+  const cardCVC = {
+    value,
+    isError,
+    onChange,
     errorMessage,
   };
+  return cardCVC;
 }
 
 export default useCardCVC;

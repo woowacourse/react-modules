@@ -57,33 +57,29 @@ const validateExpiry = (
 };
 
 function useExpirationPeriod() {
-  const [expirationPeriod, setExpirationPeriod] = useState<ExpirationPeriod>({
+  const [value, setValue] = useState<ExpirationPeriod>({
     month: '',
     year: '',
   });
-  const [isExpirationPeriodError, setExpirationPeriodError] = useState({
+  const [isError, setIsError] = useState({
     month: false,
     year: false,
   });
   const [errorMessage, setErrorMessage] = useState('');
 
-  const onChangeExpirationPeriod = (
+  const onChange = (
     e: React.ChangeEvent<HTMLInputElement>,
     type: ExpiryField
   ) => {
     const originValue = e.target.value;
-    const value = parseNumber(originValue);
+    const parsedValue = parseNumber(originValue);
 
-    if (value.length > 2) {
+    if (parsedValue.length > 2) {
       return;
     }
 
     if (type === 'month') {
-      const { message, field } = validateExpiry(
-        value,
-        expirationPeriod.year,
-        type
-      );
+      const { message, field } = validateExpiry(parsedValue, value.year, type);
 
       const isError = field
         ? {
@@ -93,16 +89,12 @@ function useExpirationPeriod() {
           }
         : { month: false, year: false };
 
-      setExpirationPeriodError(isError);
+      setIsError(isError);
       setErrorMessage(message);
     }
 
     if (type === 'year') {
-      const { message, field } = validateExpiry(
-        expirationPeriod.month,
-        value,
-        type
-      );
+      const { message, field } = validateExpiry(value.month, parsedValue, type);
 
       const isError = field
         ? {
@@ -112,22 +104,23 @@ function useExpirationPeriod() {
           }
         : { month: false, year: false };
 
-      setExpirationPeriodError(isError);
+      setIsError(isError);
       setErrorMessage(message);
     }
 
-    setExpirationPeriod((prev) => ({
+    setValue((prev) => ({
       ...prev,
       [type]: value,
     }));
   };
 
-  return {
-    expirationPeriod,
-    isExpirationPeriodError,
-    onChangeExpirationPeriod,
+  const cardExpirationPeriod = {
+    value,
+    isError,
+    onChange,
     errorMessage,
   };
+  return cardExpirationPeriod;
 }
 
 export default useExpirationPeriod;

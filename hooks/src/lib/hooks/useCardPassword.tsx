@@ -3,33 +3,34 @@ import { getValidLength } from '../utils/getValidLength';
 import { parseNumber } from '../utils/parseNumber';
 
 function useCardPassword() {
-  const [cardPassword, setCardPassword] = useState('');
-  const [isCardPasswordError, setIsCardPasswordError] = useState(false);
+  const [value, setValue] = useState('');
+  const [isError, setIsError] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
 
-  const onChangeCardPassword = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const originValue = e.target.value;
-    const value = parseNumber(originValue);
+    const parsedValue = parseNumber(originValue);
 
-    if (value.length > 2) {
+    if (parsedValue.length > 2) {
       return;
     }
 
-    const isValid = getValidLength(value, 2);
+    const isValid = getValidLength(parsedValue, 2);
 
-    setIsCardPasswordError(!isValid);
+    setIsError(!isValid);
 
     setErrorMessage(!isValid ? '한 칸은 2자리 숫자를 입력해야합니다.' : '');
 
-    setCardPassword(value);
+    setValue(parsedValue);
   };
 
-  return {
-    cardPassword,
-    isCardPasswordError,
-    onChangeCardPassword,
+  const cardPassword = {
+    value,
+    isError,
+    onChange,
     errorMessage,
   };
+  return cardPassword;
 }
 
 export default useCardPassword;
