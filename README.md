@@ -75,3 +75,24 @@ Module
 - [x] 모든 에러가 없는지 체크하는 함수
 
 - [x] 훅 및 함수 매개변수 및 return 타입 추가
+
+## 피드백 바탕 수정사항
+
+- [ ] (모달) svg 아이콘 컴포넌트 분리
+- [ ] (모달) 각각의 합성 컴포넌트 className 과 style을 부여
+
+- [ ] (훅) 에러 로직 훅 단일화 처리 (base error 훅)
+- [ ] (훅) 실제 입력 상태값 함께 관리
+  - [ ] `const { cardNumber, onChange, isValid, errorMessage } = useCardNumber();`
+  - [ ] 상태값 (base state 훅 제작)
+- [ ] errors와 errorMsesage도 일반 변수로 관리 (상태 x -> 실제 입력값에 의존)
+- [ ] isNumber 유틸 함수 이름 변경 (validateNumericString)
+- [ ] error변수 -> isValid 변수로 네이밍 변경 (긍정)
+- [ ] 월 검증 및 년 검증 함수 분리 (validateMonth, validateYear)
+- [ ] expriationDate 훅 -> 인덱스 기반 접근 대신 month와 year 상태를 각각 관리
+  - [ ] cardNumber 훅 -> 객체로 상태 관리
+- [ ] 유효성 훅 길이 체크
+- [ ] useKeyEscClose 훅 의존성 배열 onHide 함수 채우기
+- [ ] Context API 기본 디폴트값 타입 처리
+- [ ] (모달) closButton (div 태그 -> button 태그로 변경)
+- [ ] (모달) React Portal 적용
