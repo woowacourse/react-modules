@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { isNumber } from '../../utils/validation';
+import { validateNumericString } from '../../utils/validation';
 import checkNoError from '../../utils/checkNoError';
 import {
   ErrorMessageType,
@@ -14,7 +14,7 @@ const usePasswordValidation = (): ValidationHookReturnType => {
     error,
     message,
   }: { error: SingleErrorType; message: ErrorMessageType } =
-    isNumber(inputStates); //inputState 바뀌면 자동 계산
+    validateNumericString(inputStates); //inputState 바뀌면 자동 계산
 
   const onChange: CurriedInputChangeHandler = () => (e) => {
     const value = e.target.value;

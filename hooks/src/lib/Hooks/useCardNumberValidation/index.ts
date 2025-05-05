@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { isNumber } from '../../utils/validation';
+import { validateNumericString } from '../../utils/validation';
 import checkNoError from '../../utils/checkNoError';
 import {
   ErrorMessageType,
@@ -25,7 +25,7 @@ const useCardNumberValidation = (
       updatedValues[index] = value;
       setInputStates(updatedValues);
 
-      const { error, message } = isNumber(value);
+      const { error, message } = validateNumericString(value);
 
       setErrors((prev) => {
         const updated = [...prev];

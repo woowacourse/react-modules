@@ -7,7 +7,9 @@ import {
 } from '../constants';
 import { ValidateFuncReturnType } from '../types';
 
-export const isNumber = (value: string): ValidateFuncReturnType => {
+export const validateNumericString = (
+  value: string
+): ValidateFuncReturnType => {
   const error = !NUMBER_REGEX.test(value);
 
   if (error) return { error, message: ERROR_MESSAGE.NUMBER_ONLY };
@@ -18,7 +20,7 @@ export const isExpirationDate = (
   type: 'month' | 'year',
   value: string
 ): ValidateFuncReturnType => {
-  const isNumberError = isNumber(value);
+  const isNumberError = validateNumericString(value);
   if (isNumberError.error) return isNumberError;
 
   const num = parseInt(value);
