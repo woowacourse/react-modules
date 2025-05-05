@@ -1,4 +1,4 @@
-import { CARD_EXPIRATION_DATE_ERROR_MESSAGE } from './../src/useCardExpirationDate/useCardExpirationDate';
+import { CARD_EXPIRATION_DATE_ERROR_MESSAGE } from '../src/useCardExpirationDate/useCardExpirationDate';
 import { renderHook } from '@testing-library/react';
 import { act } from 'react';
 import useCardExpirationDate, {
