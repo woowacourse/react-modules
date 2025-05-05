@@ -1,7 +1,7 @@
 import { ReactNode } from "react";
 
 export interface ModalProps {
-  modalType: "center" | "bottom";
+  modalPosition: "center" | "bottom";
   titleText?: string;
   children: ReactNode;
   closeType: "top" | "bottom";
@@ -14,6 +14,6 @@ export interface ModalHeaderProps {
   onClose?: () => void;
 }
 
-export interface ModalTypeProps {
-  modalType: "center" | "bottom";
+export interface ModalStyledProps {
+  modalPosition: "center" | "bottom";
 }

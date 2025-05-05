@@ -3,7 +3,7 @@ import { ModalBoxContainer, ModalBottomCloseBtn } from "./styles/ModalStyle";
 import { ModalProps } from "./types/modalTypes";
 
 const ModalBox = ({
-  modalType,
+  modalPosition,
   titleText = "",
   children,
   closeType,
@@ -11,7 +11,7 @@ const ModalBox = ({
 }: ModalProps) => {
   const hasHeaderCloseButton = closeType === "top" ? true : false;
   return (
-    <ModalBoxContainer modalType={modalType}>
+    <ModalBoxContainer modalPosition={modalPosition}>
       <ModalHeader
         titleText={titleText}
         hasCloseButton={hasHeaderCloseButton}

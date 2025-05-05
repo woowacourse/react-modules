@@ -9,7 +9,7 @@ import {
 import { ModalProps } from "./types/modalTypes";
 
 const Modal = ({
-  modalType,
+  modalPosition = "center",
   titleText = "",
   children,
   closeType,
@@ -29,12 +29,12 @@ const Modal = ({
   }, []);
 
   return (
-    <ModalContainer modalType={modalType}>
+    <ModalContainer modalPosition={modalPosition}>
       <ModalBackdrop onClick={onClose} />
       <Container>
         <Wrapper>
           <ModalBox
-            modalType={modalType}
+            modalPosition={modalPosition}
             titleText={titleText}
             closeType={closeType}
             onClose={onClose}
