@@ -1,9 +1,9 @@
-type validateRange = {
+type ValidateRangeParams = {
   value: number;
   min: number;
   max: number;
 };
-const validateRange = ({ value, min, max }: validateRange) => {
+const validateRange = ({ value, min, max }: ValidateRangeParams) => {
   return value <= max && value >= min;
 };
 
