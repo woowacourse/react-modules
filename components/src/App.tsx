@@ -1,7 +1,6 @@
 import Modal from "./lib/Modal";
 import { useState } from "react";
 import { css } from "@emotion/react";
-
 function App() {
   const [show, setShow] = useState(true);
 
@@ -9,11 +8,17 @@ function App() {
     <>
       <div css={wrapper}>
         <Modal show={show} onHide={() => setShow(false)}>
-          <Modal.Header closeButton>
-            <Modal.Title>Title</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>Body</Modal.Body>
-          <Modal.Footer>Footer</Modal.Footer>
+          <Modal.Background>
+            <Modal.Container>
+              <Modal.Header className="blue" style={{ color: "red" }} closeButton>
+                <Modal.Title>Title</Modal.Title>
+              </Modal.Header>
+              <Modal.Body className="blue" style={{ color: "red" }}>
+                Body
+              </Modal.Body>
+              <Modal.Footer>Footer</Modal.Footer>
+            </Modal.Container>
+          </Modal.Background>
         </Modal>
       </div>
     </>
