@@ -1,35 +1,25 @@
-import {
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalTitle,
-  ModalCloseButton,
-  ModalBody,
-  ModalFooter,
-  useModal,
-} from "@kaori-killer/modal-component";
+import Modal from "../src/lib/components/Modal/Modal";
 
 function App() {
-  const { isOpen, handleOpen, handleClose } = useModal();
+  const { isOpen, handleOpen, handleClose } = Modal.useModal();
 
   return (
     <>
       <button onClick={handleOpen}>Open</button>
       <Modal isOpen={isOpen}>
-        <ModalOverlay onClose={handleClose} />
-        <ModalContent position="center">
-          <ModalHeader direction="row" align="start" justify="start">
-            <ModalTitle tag="h1" fontSize="25px" fontWeight="700">
+        <Modal.Overlay onClose={handleClose} />
+        <Modal.Content position="center">
+          <Modal.Header direction="row" align="start" justify="start">
+            <Modal.Title tag="h1" fontSize="25px" fontWeight="700">
               Title이다!
-            </ModalTitle>
-            <ModalCloseButton onClose={handleClose} />
-          </ModalHeader>
-          <ModalBody>몸통이다!</ModalBody>
-          <ModalFooter direction="row" align="end" justify="center">
+            </Modal.Title>
+            <Modal.CloseButton onClose={handleClose} />
+          </Modal.Header>
+          <Modal.Body>몸통이다!</Modal.Body>
+          <Modal.Footer direction="row" align="end" justify="center">
             Footer이다!
-          </ModalFooter>
-        </ModalContent>
+          </Modal.Footer>
+        </Modal.Content>
       </Modal>
     </>
   );
