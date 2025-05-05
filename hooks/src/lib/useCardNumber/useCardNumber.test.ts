@@ -8,21 +8,21 @@ describe('useCardNumber 훅 테스트', () => {
     first: '',
     second: '',
     third: '',
-    forth: '',
+    fourth: '',
   };
 
   const validCardNumber: CardNumber = {
     first: '1234',
     second: '5678',
     third: '9012',
-    forth: '3456',
+    fourth: '3456',
   };
 
   const emptyCardNumberError: CardNumberError = {
     first: '',
     second: '',
     third: '',
-    forth: '',
+    fourth: '',
   };
 
   it('초기값이 올바르게 설정되어야 한다', () => {
@@ -91,10 +91,10 @@ describe('useCardNumber 훅 테스트', () => {
 
   it('여러 필드가 유효하지 않으면 isCardNumberValid가 false를 반환해야 한다', () => {
     const invalidCardNumber: CardNumber = {
-      first: '123', 
+      first: '123',
       second: '56',
       third: '9012',
-      forth: '3456',
+      fourth: '3456',
     };
 
     const { result } = renderHook(() => useCardNumber(invalidCardNumber, emptyCardNumberError));

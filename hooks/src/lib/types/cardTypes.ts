@@ -1,4 +1,4 @@
-export type CardNumberKey = 'first' | 'second' | 'third' | 'forth';
+export type CardNumberKey = 'first' | 'second' | 'third' | 'fourth';
 
 export type CardPeriodKey = 'month' | 'year';
 

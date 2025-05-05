@@ -10,9 +10,9 @@ export const useCardNumber = (initialCardNumber: CardNumber, initialError: CardN
 
   const handleCardNumberChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    
+
     const updatedError = { ...cardNumberError };
-    const cardFields: Array<keyof CardNumberError> = ['first', 'second', 'third', 'forth'];
+    const cardFields: Array<keyof CardNumberError> = ['first', 'second', 'third', 'fourth'];
 
     cardFields.forEach((field) => {
       if (field !== name && updatedError[field] === CARD_NUMBER_ERROR.onlyNumbers) {
@@ -43,13 +43,13 @@ export const useCardNumber = (initialCardNumber: CardNumber, initialError: CardN
   };
 
   const isCardNumberValid = () => {
-    const { first, second, third, forth } = cardNumber;
+    const { first, second, third, fourth } = cardNumber;
 
     return (
       first.length === CARD_NUMBER.maxLength &&
       second.length === CARD_NUMBER.maxLength &&
       third.length === CARD_NUMBER.maxLength &&
-      forth.length === CARD_NUMBER.maxLength
+      fourth.length === CARD_NUMBER.maxLength
     );
   };
 
