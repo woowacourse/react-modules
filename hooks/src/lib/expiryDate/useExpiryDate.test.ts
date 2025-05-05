@@ -13,39 +13,50 @@ describe('useExpiryDate', () => {
     expect(result.current.expiryDate.month).toBe('04');
   });
 
-  it('입력값이 숫자가 아닐 때 isValid로 false를 반환하고 에러 메시지를 반환한다.', () => {
-    const { result } = renderHook(() => useExpiryDate());
+  describe('getExpiryDateValidationError', () => {
+    const invalidCases = [
+      {
+        name: '숫자가 아닌 값',
+        input: 'aa',
+        expected: EXPIRY_DATE_ERROR_TYPES.notNumber,
+      },
+      {
+        name: '세 자리 이상',
+        input: '123',
+        expected: EXPIRY_DATE_ERROR_TYPES.invalidLength,
+      },
+      {
+        name: '13 이상 입력',
+        input: '13',
+        expected: EXPIRY_DATE_ERROR_TYPES.invalidMonthRange,
+      },
+    ];
 
-    expect(result.current.getExpiryDateValidationError('month', 'aa')).toBe(
-      EXPIRY_DATE_ERROR_TYPES.notNumber
+    it.each(invalidCases)(
+      '%s 상황일 때 isValid로 false를 반환하고 에러 메시지를 반환해야 한다.',
+      ({ input, expected }) => {
+        const { result } = renderHook(() => useExpiryDate());
+
+        const error = result.current.getExpiryDateValidationError(
+          'month',
+          input
+        );
+        expect(error).toBe(expected);
+      }
     );
   });
 
-  it('입력값이 두 자리가 아닐 때 isValid로 false를 반환하고 에러 메시지를 반환한다.', () => {
-    const { result } = renderHook(() => useExpiryDate());
+  describe('getExpiryDateExpiredError', () => {
+    it('과거 날짜일 경우 expiredDate 에러를 반환해야 한다.', () => {
+      const { result } = renderHook(() => useExpiryDate());
 
-    expect(result.current.getExpiryDateValidationError('month', '123')).toBe(
-      EXPIRY_DATE_ERROR_TYPES.invalidLength
-    );
-  });
+      act(() => {
+        result.current.handleExpiryDateChange('month', '04');
+      });
 
-  it('입력값이 1 이상 12이하가 아닐 때 isValid로 false를 반환하고 에러 메시지를 반환한다.', () => {
-    const { result } = renderHook(() => useExpiryDate());
-
-    expect(result.current.getExpiryDateValidationError('month', '13')).toBe(
-      EXPIRY_DATE_ERROR_TYPES.invalidMonthRange
-    );
-  });
-
-  it('입력값이 1 이상 12이하가 아닐 때 isValid로 false를 반환하고 에러 메시지를 반환한다.', () => {
-    const { result } = renderHook(() => useExpiryDate());
-
-    act(() => {
-      result.current.handleExpiryDateChange('month', '04');
+      expect(result.current.getExpiryDateExpiredError('year', '12')).toBe(
+        EXPIRY_DATE_ERROR_TYPES.expiredDate
+      );
     });
-
-    expect(result.current.getExpiryDateExpiredError('year', '12')).toBe(
-      EXPIRY_DATE_ERROR_TYPES.expiredDate
-    );
   });
 });

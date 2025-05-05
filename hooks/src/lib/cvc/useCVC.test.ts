@@ -13,19 +13,28 @@ describe('useCVC', () => {
     expect(result.current.CVC).toBe('123');
   });
 
-  it('입력값이 숫자가 아닐 때 isValid로 false를 반환하고 에러 메시지를 반환한다.', () => {
-    const { result } = renderHook(() => useCVC());
+  describe('getCVCValidationError', () => {
+    const invalidCases = [
+      {
+        name: '숫자가 아닌 값',
+        input: 'aaa',
+        expected: CVC_ERROR_TYPES.notNumber,
+      },
+      {
+        name: '세 자리가 넘는 값',
+        input: '1234',
+        expected: CVC_ERROR_TYPES.invalidLength,
+      },
+    ];
 
-    expect(result.current.getCVCValidationError('aaa')).toBe(
-      CVC_ERROR_TYPES.notNumber
-    );
-  });
+    it.each(invalidCases)(
+      '%s 상황일 때 isValid로 false를 반환하고 에러 메시지를 반환해야 한다.',
+      ({ input, expected }) => {
+        const { result } = renderHook(() => useCVC());
 
-  it('입력값이 세 자리가 아닐 때 isValid로 false를 반환하고 에러 메시지를 반환한다.', () => {
-    const { result } = renderHook(() => useCVC());
-
-    expect(result.current.getCVCValidationError('1234')).toBe(
-      CVC_ERROR_TYPES.invalidLength
+        const error = result.current.getCVCValidationError(input);
+        expect(error).toBe(expected);
+      }
     );
   });
 });

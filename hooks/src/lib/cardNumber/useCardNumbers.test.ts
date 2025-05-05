@@ -13,19 +13,28 @@ describe('useCardNumbers', () => {
     expect(result.current.cardNumbers.part1).toBe('1234');
   });
 
-  it('입력값이 숫자가 아닐 때 isValid로 false를 반환하고 에러 메시지를 반환한다.', () => {
-    const { result } = renderHook(() => useCardNumbers());
+  describe('getCardNumberValidationError', () => {
+    const invalidCases = [
+      {
+        name: '숫자가 아닌 값',
+        input: 'aaaa',
+        expected: CARD_NUMBER_ERROR_TYPES.notNumber,
+      },
+      {
+        name: '다섯 자릿수 입력',
+        input: '12345',
+        expected: CARD_NUMBER_ERROR_TYPES.invalidLength,
+      },
+    ];
 
-    expect(result.current.getCardNumberValidationError('aaaa')).toBe(
-      CARD_NUMBER_ERROR_TYPES.notNumber
-    );
-  });
+    it.each(invalidCases)(
+      '%s 상황일 때 isValid로 false를 반환하고 에러 메시지를 반환해야 한다.',
+      ({ input, expected }) => {
+        const { result } = renderHook(() => useCardNumbers());
 
-  it('입력값이 네 자리가 아닐 때 isValid로 false를 반환하고 에러 메시지를 반환한다.', () => {
-    const { result } = renderHook(() => useCardNumbers());
-
-    expect(result.current.getCardNumberValidationError('12345')).toBe(
-      CARD_NUMBER_ERROR_TYPES.invalidLength
+        const error = result.current.getCardNumberValidationError(input);
+        expect(error).toBe(expected);
+      }
     );
   });
 });
