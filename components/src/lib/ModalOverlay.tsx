@@ -5,12 +5,12 @@ import { createPortal } from 'react-dom';
 interface ModalOverlayProps {
   isOpen: boolean;
   children: React.ReactNode;
-  onClose: () => void;
+  onCloseClick: () => void;
 }
 
-function ModalOverlay({ isOpen, children, onClose }: ModalOverlayProps) {
+function ModalOverlay({ isOpen, children, onCloseClick }: ModalOverlayProps) {
   return createPortal(
-    <StyledModalOverlay isOpen={isOpen} onClick={onClose}>
+    <StyledModalOverlay isOpen={isOpen} onClick={onCloseClick}>
       {children}
     </StyledModalOverlay>,
     document.body

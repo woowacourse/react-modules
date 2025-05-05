@@ -5,7 +5,7 @@ import { Modal } from './lib/index';
 function App() {
   const [isOpen, setIsOpen] = useState(false);
 
-  const onClose = () => {
+  const handleCloseClick = () => {
     setIsOpen(false);
   };
 
@@ -13,10 +13,10 @@ function App() {
     <>
       <button onClick={() => setIsOpen(true)}>열림!</button>
 
-      <Modal isOpen={isOpen} onClose={onClose}>
+      <Modal isOpen={isOpen} onCloseClick={handleCloseClick}>
         <Modal.Container isOpen={isOpen} position="top" width={400}>
           <>
-            <Modal.CloseButton onClose={onClose} />
+            <Modal.CloseButton onCloseClick={handleCloseClick} />
             <Modal.Title>제목</Modal.Title>
             <Modal.Body>내용1!</Modal.Body>
           </>

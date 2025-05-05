@@ -2,9 +2,9 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { Modal } from '.';
 import { useArgs } from '@storybook/preview-api';
 
-const meta: Meta<typeof Modal.ModalContainer> = {
+const meta: Meta<typeof Modal.Container> = {
   title: 'Components/Modal',
-  component: Modal.ModalContainer,
+  component: Modal.Container,
   argTypes: {
     position: {
       control: { type: 'radio' },
@@ -29,7 +29,7 @@ const meta: Meta<typeof Modal.ModalContainer> = {
 };
 
 export default meta;
-type Story = StoryObj<typeof Modal.ModalContainer>;
+type Story = StoryObj<typeof Modal.Container>;
 
 export const Default: Story = {
   args: {
@@ -38,22 +38,22 @@ export const Default: Story = {
   render: (args) => {
     const [{ isOpen }, updateArgs] = useArgs();
 
-    function onClose() {
+    function handleCloseClick() {
       updateArgs({ isOpen: !isOpen });
     }
     return (
       <>
-        <button onClick={onClose}>열림버튼</button>
-        <Modal {...args} onClose={onClose}>
-          <Modal.ModalContainer
+        <button onClick={handleCloseClick}>열림버튼</button>
+        <Modal {...args} onCloseClick={handleCloseClick}>
+          <Modal.Container
             isOpen={isOpen}
             position={args.position}
             width={args.width}
           >
-            <Modal.ModalCloseButton onClose={onClose} />
-            <Modal.ModalTitle children={args.children}></Modal.ModalTitle>
-            <Modal.ModalBody>이것은 모달의 본문입니다.</Modal.ModalBody>
-          </Modal.ModalContainer>
+            <Modal.CloseButton onCloseClick={handleCloseClick} />
+            <Modal.Title children={args.children}></Modal.Title>
+            <Modal.Body>이것은 모달의 본문입니다.</Modal.Body>
+          </Modal.Container>
         </Modal>
       </>
     );
@@ -69,22 +69,22 @@ export const Open: Story = {
   render: (args) => {
     const [{ isOpen }, updateArgs] = useArgs();
 
-    function onClose() {
+    function handleCloseClick() {
       updateArgs({ isOpen: !isOpen });
     }
     return (
       <>
-        <button onClick={onClose}>열림버튼</button>
-        <Modal {...args} onClose={onClose}>
-          <Modal.ModalContainer
+        <button onClick={handleCloseClick}>열림버튼</button>
+        <Modal {...args} onCloseClick={handleCloseClick}>
+          <Modal.Container
             isOpen={isOpen}
             position={args.position}
             width={args.width}
           >
-            <Modal.ModalCloseButton onClose={onClose} />
-            <Modal.ModalTitle children={args.children}></Modal.ModalTitle>
-            <Modal.ModalBody>이것은 모달의 본문입니다.</Modal.ModalBody>
-          </Modal.ModalContainer>
+            <Modal.CloseButton onCloseClick={handleCloseClick} />
+            <Modal.Title children={args.children}></Modal.Title>
+            <Modal.Body>이것은 모달의 본문입니다.</Modal.Body>
+          </Modal.Container>
         </Modal>
       </>
     );
@@ -100,21 +100,21 @@ export const TopModal: Story = {
   render: (args) => {
     const [{ isOpen }, updateArgs] = useArgs();
 
-    function onClose() {
+    function handleCloseClick() {
       updateArgs({ isOpen: !isOpen });
     }
     return (
       <>
-        <Modal {...args} onClose={onClose}>
-          <Modal.ModalContainer
+        <Modal {...args} onCloseClick={handleCloseClick}>
+          <Modal.Container
             isOpen={isOpen}
             position={args.position}
             width={args.width}
           >
-            <Modal.ModalCloseButton onClose={onClose} />
-            <Modal.ModalTitle children={args.children}></Modal.ModalTitle>
-            <Modal.ModalBody>이것은 모달의 본문입니다.</Modal.ModalBody>
-          </Modal.ModalContainer>
+            <Modal.CloseButton onCloseClick={handleCloseClick} />
+            <Modal.Title children={args.children}></Modal.Title>
+            <Modal.Body>이것은 모달의 본문입니다.</Modal.Body>
+          </Modal.Container>
         </Modal>
       </>
     );
@@ -130,21 +130,21 @@ export const BottomModal: Story = {
   render: (args) => {
     const [{ isOpen }, updateArgs] = useArgs();
 
-    function onClose() {
+    function handleCloseClick() {
       updateArgs({ isOpen: !isOpen });
     }
     return (
       <>
-        <Modal {...args} onClose={onClose}>
-          <Modal.ModalContainer
+        <Modal {...args} onCloseClick={handleCloseClick}>
+          <Modal.Container
             isOpen={isOpen}
             position={args.position}
             width={args.width}
           >
-            <Modal.ModalCloseButton onClose={onClose} />
-            <Modal.ModalTitle children={args.children}></Modal.ModalTitle>
-            <Modal.ModalBody>이것은 모달의 본문입니다.</Modal.ModalBody>
-          </Modal.ModalContainer>
+            <Modal.CloseButton onCloseClick={handleCloseClick} />
+            <Modal.Title children={args.children}></Modal.Title>
+            <Modal.Body>이것은 모달의 본문입니다.</Modal.Body>
+          </Modal.Container>
         </Modal>
       </>
     );
@@ -161,21 +161,21 @@ export const CenterModal: Story = {
   render: (args) => {
     const [{ isOpen }, updateArgs] = useArgs();
 
-    function onClose() {
+    function handleCloseClick() {
       updateArgs({ isOpen: !isOpen });
     }
     return (
       <>
-        <Modal {...args} onClose={onClose}>
-          <Modal.ModalContainer
+        <Modal {...args} onCloseClick={handleCloseClick}>
+          <Modal.Container
             isOpen={isOpen}
             position={args.position}
             width={args.width}
           >
-            <Modal.ModalCloseButton onClose={onClose} />
-            <Modal.ModalTitle children={args.children}></Modal.ModalTitle>
-            <Modal.ModalBody>이것은 모달의 본문입니다.</Modal.ModalBody>
-          </Modal.ModalContainer>
+            <Modal.CloseButton onCloseClick={handleCloseClick} />
+            <Modal.Title children={args.children}></Modal.Title>
+            <Modal.Body>이것은 모달의 본문입니다.</Modal.Body>
+          </Modal.Container>
         </Modal>
       </>
     );
