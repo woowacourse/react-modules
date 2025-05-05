@@ -1,6 +1,7 @@
+import Polymorphic from "@/components/Polymorphic";
 import styled from "@emotion/styled";
 
-export const Container = styled.div`
+export const StyledPolymorphic = styled(Polymorphic)`
   display: flex;
   flex-direction: column;
   margin-top: 1rem;
