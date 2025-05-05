@@ -6,11 +6,11 @@ interface ModalProps {
 	isOpen: boolean;
 	isCloseButton?: boolean;
 	isConfirmButton?: boolean;
-	children: ReactNode;
+	children?: ReactNode;
 	onClose: () => void;
 }
 
-const Modal = ({ position, isOpen, children = null, onClose, isCloseButton = false, isConfirmButton = false }: ModalProps) => {
+const Modal = ({ position, isOpen, children, onClose, isCloseButton = false, isConfirmButton = false }: ModalProps) => {
 	return (
 		<>
 			<ModalLayout isOpen={isOpen}>
