@@ -1,4 +1,4 @@
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, useCallback, useState } from 'react';
 import { CVC_ERROR_TYPES, ERROR_MESSAGE } from '../config';
 import { ValidationResult } from '../types';
 import { checkIsNumber, checkIsValidLength } from '../validators';
@@ -11,7 +11,7 @@ function useCVC() {
     errorMessage: '',
   });
 
-  const getCVCValidationError = (value: string) => {
+  const getCVCValidationError = useCallback((value: string) => {
     const isNumber = checkIsNumber(value);
     const isValidLength = checkIsValidLength(value, 3);
 
@@ -19,30 +19,33 @@ function useCVC() {
     if (!isValidLength) return CVC_ERROR_TYPES.invalidLength;
 
     return null;
-  };
+  }, []);
 
-  const handleCVCChange = (
-    event: ChangeEvent<HTMLInputElement>,
-    options?: { skipValidation?: boolean }
-  ) => {
-    const { value } = event.target;
-    const errorType = getCVCValidationError(value);
+  const handleCVCChange = useCallback(
+    (
+      event: ChangeEvent<HTMLInputElement>,
+      options?: { skipValidation?: boolean }
+    ) => {
+      const { value } = event.target;
+      const errorType = getCVCValidationError(value);
 
-    const shouldSkipValidation = options?.skipValidation ?? false;
+      const shouldSkipValidation = options?.skipValidation ?? false;
 
-    if (!shouldSkipValidation && errorType) {
-      return;
-    }
+      if (!shouldSkipValidation && errorType) {
+        return;
+      }
 
-    if (shouldSkipValidation) {
-      setValidationResult({
-        isValid: !Boolean(errorType),
-        errorMessage: errorType ? ERROR_MESSAGE.CVC[errorType] : '',
-      });
-    }
+      if (shouldSkipValidation) {
+        setValidationResult({
+          isValid: !Boolean(errorType),
+          errorMessage: errorType ? ERROR_MESSAGE.CVC[errorType] : '',
+        });
+      }
 
-    setCVC(value);
-  };
+      setCVC(value);
+    },
+    [getCVCValidationError]
+  );
 
   return {
     CVC,

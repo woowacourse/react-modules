@@ -1,4 +1,4 @@
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, useCallback, useState } from 'react';
 import {
   CARD_NUMBER_ERROR_TYPES,
   CardNumbersKey,
@@ -26,7 +26,7 @@ function useCardNumbers() {
     part4: { isValid: true, errorMessage: '' },
   });
 
-  const getCardNumberValidationError = (value: string) => {
+  const getCardNumberValidationError = useCallback((value: string) => {
     const isNumber = checkIsNumber(value);
     const isValidLength = checkIsValidLength(value, 4);
 
@@ -34,33 +34,36 @@ function useCardNumbers() {
     if (!isValidLength) return CARD_NUMBER_ERROR_TYPES.invalidLength;
 
     return null;
-  };
+  }, []);
 
-  const handleCardNumbersChange = (
-    event: ChangeEvent<HTMLInputElement>,
-    options?: { skipValidation?: boolean }
-  ) => {
-    const { name, value } = event.target;
-    const errorType = getCardNumberValidationError(value);
+  const handleCardNumbersChange = useCallback(
+    (
+      event: ChangeEvent<HTMLInputElement>,
+      options?: { skipValidation?: boolean }
+    ) => {
+      const { name, value } = event.target;
+      const errorType = getCardNumberValidationError(value);
 
-    const shouldSkipValidation = options?.skipValidation ?? false;
+      const shouldSkipValidation = options?.skipValidation ?? false;
 
-    if (!shouldSkipValidation && errorType) {
-      return;
-    }
+      if (!shouldSkipValidation && errorType) {
+        return;
+      }
 
-    if (shouldSkipValidation) {
-      setValidationResults((prev) => ({
-        ...prev,
-        [name]: {
-          isValid: !Boolean(errorType),
-          errorMessage: errorType ? ERROR_MESSAGE.cardNumber[errorType] : '',
-        },
-      }));
-    }
+      if (shouldSkipValidation) {
+        setValidationResults((prev) => ({
+          ...prev,
+          [name]: {
+            isValid: !Boolean(errorType),
+            errorMessage: errorType ? ERROR_MESSAGE.cardNumber[errorType] : '',
+          },
+        }));
+      }
 
-    setCardNumbers((prev) => ({ ...prev, [name]: value }));
-  };
+      setCardNumbers((prev) => ({ ...prev, [name]: value }));
+    },
+    [getCardNumberValidationError]
+  );
 
   return {
     cardNumbers,
