@@ -1,10 +1,6 @@
 import { useState } from 'react';
-
-const CVC_RULE = {
-  INVALID_LENGTH_ERROR: 'CVC는 3자리로 입력해 주세요.',
-  NOT_A_NUMBER: 'CVC는 숫자로 입력해 주세요.',
-  MAX_LENGTH: 3,
-} as const;
+import { VALIDATION_RULE } from './constants/validationRule';
+import { ERROR_MESSAGE } from './constants/errorMessage';
 
 type ValitationResult = {
   cvc: string;
@@ -41,13 +37,16 @@ export default function useCvcNumber(): ValitationResult {
     }
 
     if (!/^\d*$/.test(value)) {
-      setError({ isValidate: true, errorMessage: CVC_RULE.NOT_A_NUMBER });
-      return;
-    }
-    if (value.length < CVC_RULE.MAX_LENGTH) {
       setError({
         isValidate: true,
-        errorMessage: CVC_RULE.INVALID_LENGTH_ERROR,
+        errorMessage: ERROR_MESSAGE.CVC.NOT_A_NUMBER,
+      });
+      return;
+    }
+    if (value.length < VALIDATION_RULE.CVC.MAX_LENGTH) {
+      setError({
+        isValidate: true,
+        errorMessage: ERROR_MESSAGE.CVC.INVALID_LENGTH,
       });
       return;
     }

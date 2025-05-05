@@ -1,5 +1,6 @@
 import { renderHook, act } from '@testing-library/react';
 import usePassword from './usePassword';
+import { ERROR_MESSAGE } from './constants/errorMessage';
 
 test('3자리 숫자를 입력하면 정상 작동한다.', () => {
   const { result } = renderHook(() => usePassword());
@@ -19,7 +20,7 @@ test('숫자가 아닌 값을 validate 하면 에러 메시지가 세팅된다',
   });
 
   expect(result.current.error.errorMessage).toBe(
-    '카드 비밀번호는 숫자로 입력해 주세요.'
+    ERROR_MESSAGE.PASSWORD.NOT_A_NUMBER
   );
 });
 
@@ -31,6 +32,6 @@ test('2자리가 아닌 숫자를 validate 하면 에러 메시지가 세팅된�
   });
 
   expect(result.current.error.errorMessage).toBe(
-    '카드 비밀번호는 2자리로 입력해 주세요.'
+    ERROR_MESSAGE.PASSWORD.INVALID_LENGTH
   );
 });

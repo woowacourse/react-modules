@@ -1,23 +1,29 @@
 import { useState } from 'react';
-
-const PASSWORD_RULE = {
-  INVALID_LENGTH_ERROR: '카드 비밀번호는 2자리로 입력해 주세요.',
-  NOT_A_NUMBER: '카드 비밀번호는 숫자로 입력해 주세요.',
-  MAX_LENGTH: 2,
-} as const;
+import { VALIDATION_RULE } from './constants/validationRule';
+import { ERROR_MESSAGE } from './constants/errorMessage';
 
 type ValitationResult = {
   password: string;
-  error: { isValid: boolean; errorMessage: string };
+  error: errorType;
   updatePassword: (value: string) => void;
+};
+
+type errorType = {
+  isValid: boolean;
+  errorMessage: string;
+};
+
+const InitialError = {
+  isValid: false,
+  errorMessage: '',
 };
 
 export default function usePassword(): ValitationResult {
   const [password, setPassword] = useState('');
-  const [error, setError] = useState({ isValid: false, errorMessage: '' });
+  const [error, setError] = useState(InitialError);
 
   const updatePassword = (value: string) => {
-    if (value.length > PASSWORD_RULE.MAX_LENGTH) return;
+    if (value.length > VALIDATION_RULE.PASSWORD.MAX_LENGTH) return;
 
     validate(value);
 
@@ -31,13 +37,16 @@ export default function usePassword(): ValitationResult {
     }
 
     if (!/^\d*$/.test(value)) {
-      setError({ isValid: true, errorMessage: PASSWORD_RULE.NOT_A_NUMBER });
-      return;
-    }
-    if (value.length < PASSWORD_RULE.MAX_LENGTH) {
       setError({
         isValid: true,
-        errorMessage: PASSWORD_RULE.INVALID_LENGTH_ERROR,
+        errorMessage: ERROR_MESSAGE.PASSWORD.NOT_A_NUMBER,
+      });
+      return;
+    }
+    if (value.length < VALIDATION_RULE.PASSWORD.MAX_LENGTH) {
+      setError({
+        isValid: true,
+        errorMessage: ERROR_MESSAGE.PASSWORD.INVALID_LENGTH,
       });
       return;
     }

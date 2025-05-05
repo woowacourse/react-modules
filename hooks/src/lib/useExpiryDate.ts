@@ -1,17 +1,6 @@
 import { useState } from 'react';
-
-const EXPIRYDATE_RULE = {
-  INVALID_YEAR_LENGTH_ERROR: '연도는 2자리로 입력해 주세요.',
-  INVALID_MONTH_LENGTH_ERROR: '월은 2자리로 입력해 주세요.',
-  YEAR_IS_NOT_A_NUMBER: '연도는 숫자로 입력해 주세요.',
-  MONTH_IS_NOT_A_NUMBER: '월은 숫자로 입력해 주세요.',
-  INVALID_YEAR: '유효하지 않은 연도입니다.',
-  INVALID_MONTH: '유효하지 않은 월입니다.',
-  MAX_LENGTH: 2,
-  MONTH_MIN: 1,
-  MONTH_MAX: 12,
-  YEAR_MIN: 25,
-} as const;
+import { VALIDATION_RULE } from './constants/validationRule';
+import { ERROR_MESSAGE } from './constants/errorMessage';
 
 type ValitationResult = {
   date: dateType;
@@ -37,7 +26,10 @@ const initialError = {
 export default function useExpiryDate(): ValitationResult {
   const [date, setDate] = useState<dateType>({ month: '', year: '' });
   const [error, setError] = useState<errorType[]>(
-    Array.from({ length: EXPIRYDATE_RULE.MAX_LENGTH }, () => initialError)
+    Array.from(
+      { length: VALIDATION_RULE.EXPIRY_DATE.MAX_LENGTH },
+      () => initialError
+    )
   );
 
   const updateError = (index: number, isError: boolean, message: string) => {
@@ -51,7 +43,7 @@ export default function useExpiryDate(): ValitationResult {
   };
 
   const updateExpiryDate = (value: string, dateUnit: 'month' | 'year') => {
-    if (value.length > EXPIRYDATE_RULE.MAX_LENGTH) return;
+    if (value.length > VALIDATION_RULE.EXPIRY_DATE.MAX_LENGTH) return;
 
     if (dateUnit === 'month') {
       validateMonth(value);
@@ -71,18 +63,18 @@ export default function useExpiryDate(): ValitationResult {
     }
 
     if (!/^\d*$/.test(value)) {
-      updateError(0, true, EXPIRYDATE_RULE.MONTH_IS_NOT_A_NUMBER);
+      updateError(0, true, ERROR_MESSAGE.EXPIRY_DATE.MONTH_IS_NOT_A_NUMBER);
       return;
     }
-    if (value.length < EXPIRYDATE_RULE.MAX_LENGTH) {
-      updateError(0, true, EXPIRYDATE_RULE.INVALID_MONTH_LENGTH_ERROR);
+    if (value.length < VALIDATION_RULE.EXPIRY_DATE.MAX_LENGTH) {
+      updateError(0, true, ERROR_MESSAGE.EXPIRY_DATE.INVALID_MONTH_LENGTH);
       return;
     }
     if (
-      Number(value) < EXPIRYDATE_RULE.MONTH_MIN ||
-      Number(value) > EXPIRYDATE_RULE.MONTH_MAX
+      Number(value) < VALIDATION_RULE.EXPIRY_DATE.MONTH_MIN ||
+      Number(value) > VALIDATION_RULE.EXPIRY_DATE.MONTH_MAX
     ) {
-      updateError(0, true, EXPIRYDATE_RULE.INVALID_MONTH);
+      updateError(0, true, ERROR_MESSAGE.EXPIRY_DATE.INVALID_MONTH);
       return;
     }
     updateError(0, false, '');
@@ -95,15 +87,15 @@ export default function useExpiryDate(): ValitationResult {
     }
 
     if (!/^\d*$/.test(value)) {
-      updateError(1, true, EXPIRYDATE_RULE.YEAR_IS_NOT_A_NUMBER);
+      updateError(1, true, ERROR_MESSAGE.EXPIRY_DATE.YEAR_IS_NOT_A_NUMBER);
       return;
     }
-    if (value.length < EXPIRYDATE_RULE.MAX_LENGTH) {
-      updateError(1, true, EXPIRYDATE_RULE.INVALID_YEAR_LENGTH_ERROR);
+    if (value.length < VALIDATION_RULE.EXPIRY_DATE.MAX_LENGTH) {
+      updateError(1, true, ERROR_MESSAGE.EXPIRY_DATE.INVALID_YEAR_LENGTH);
       return;
     }
-    if (Number(value) < EXPIRYDATE_RULE.YEAR_MIN) {
-      updateError(1, true, EXPIRYDATE_RULE.INVALID_YEAR);
+    if (Number(value) < VALIDATION_RULE.EXPIRY_DATE.YEAR_MIN) {
+      updateError(1, true, ERROR_MESSAGE.EXPIRY_DATE.INVALID_YEAR);
       return;
     }
     updateError(1, false, '');
