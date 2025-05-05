@@ -4,33 +4,45 @@ import checkNoError from '../../utils/checkNoError';
 import {
   ErrorMessageType,
   ListErrorType,
+  CurriedInputChangeHandler,
   ValidationHookReturnType,
-  ValidInputFuncType,
 } from '../../types';
 
-const useExpirationDateValidation = (): ValidationHookReturnType => {
-  const [errors, setErrors] = useState<ListErrorType>([false, false]);
+const useExpirationDateValidation = (
+  format: number[] = [2, 2]
+): ValidationHookReturnType => {
+  const [inputStates, setInputStates] = useState<string[]>(
+    format.map(() => '')
+  );
+  const [errors, setErrors] = useState<ListErrorType>(format.map(() => false));
   const [errorMessage, setErrorMessage] = useState<ErrorMessageType>('');
 
-  const validateInput: ValidInputFuncType = (value: string, index: number) => {
-    const inputType = index === 0 ? 'month' : 'year';
-    const { error, message } = isExpirationDate(inputType, value);
+  const onChange: CurriedInputChangeHandler =
+    (index: number) => (e: React.ChangeEvent<HTMLInputElement>) => {
+      const value = e.target.value;
 
-    setErrors((prev) => {
-      const updated = [...prev];
-      updated[index] = error;
-      return updated;
-    });
+      const updatedValues = [...inputStates];
+      updatedValues[index] = value;
+      setInputStates(updatedValues);
 
-    setErrorMessage(message);
-  };
+      const inputType = index === 0 ? 'month' : 'year';
+      const { error, message } = isExpirationDate(inputType, value);
+
+      setErrors((prev) => {
+        const updated = [...prev];
+        updated[index] = error;
+        return updated;
+      });
+
+      setErrorMessage(message);
+    };
 
   const noError = checkNoError(errors);
 
   return {
-    errors,
+    inputStates,
     errorMessage,
-    validateInput,
+    onChange,
     noError,
   };
 };

@@ -2,46 +2,54 @@ import { renderHook, act } from '@testing-library/react';
 import useExpirationDateValidation from '.';
 
 describe('useExpirationDateValidation', () => {
-  it('useExpirationDateValidation의 초기 에러 상태가 반환된다.', () => {
-    const initialErrors = [false, false];
+  it('useExpirationDateValidation 초기 noError 상태는 true이다.', () => {
+    const initialNoError = true;
     const { result } = renderHook(() => useExpirationDateValidation());
 
-    expect(result.current.errors).toEqual(initialErrors);
+    expect(result.current.noError).toEqual(initialNoError);
   });
 
   it('월이 아닌 값이 들어오면 에러메시지를 반환한다.', () => {
-    const month = '14';
-    const index = 0; // month 위치
     const { result } = renderHook(() => useExpirationDateValidation());
+    const badEvent = {
+      target: { value: '14' },
+    } as React.ChangeEvent<HTMLInputElement>;
 
     act(() => {
-      result.current.validateInput(month, index);
+      result.current.onChange(0)(badEvent); //month
     });
 
     expect(result.current.errorMessage).toBe('유효하지 않은 월입니다.');
   });
 
   it('올해 년도 이전인 값이 들어오면 에러메시지를 반환한다.', () => {
-    const year = '14';
-    const index = 1; // year 위치
     const { result } = renderHook(() => useExpirationDateValidation());
+    const badEvent = {
+      target: { value: '24' },
+    } as React.ChangeEvent<HTMLInputElement>;
 
     act(() => {
-      result.current.validateInput(year, index);
+      result.current.onChange(1)(badEvent); // year
     });
 
     expect(result.current.errorMessage).toBe('유효하지 않은 연도입니다.');
   });
 
-  it('현재 에러 상태에 에러가 없다면 noError가 true를 반환한다.', () => {
-    const month = '12';
-    const index = 0; // month 위치
+  it('유효한 월과 연도를 입력하면 noError는 true, 에러 메시지는 없다.', () => {
     const { result } = renderHook(() => useExpirationDateValidation());
+    const goodMonthEvent = {
+      target: { value: '12' },
+    } as React.ChangeEvent<HTMLInputElement>;
+    const goodYearEvent = {
+      target: { value: '30' },
+    } as React.ChangeEvent<HTMLInputElement>;
 
     act(() => {
-      result.current.validateInput(month, index);
+      result.current.onChange(0)(goodMonthEvent); // month
+      result.current.onChange(1)(goodYearEvent); // year
     });
 
-    expect(result.current.noError).toBeTruthy();
+    expect(result.current.noError).toBe(true);
+    expect(result.current.errorMessage).toBe('');
   });
 });
