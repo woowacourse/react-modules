@@ -8,7 +8,7 @@ import {
   SingleErrorType,
   ValidInputFuncType,
 } from "../../types";
-import useErrorCheckComplete from "../common/useErrorCheckComplete";
+import useCheckErrorComplete from "../common/useCheckErrorComplete";
 
 const useCvcNumber = (): HookReturnType<"cvcNumber"> => {
   const [cvcNumber, setCvcNumber] = useState<CvcNumberType>("");
@@ -23,7 +23,7 @@ const useCvcNumber = (): HookReturnType<"cvcNumber"> => {
     setErrorMessage(message);
   };
 
-  const isErrorComplete = useErrorCheckComplete(errors);
+  const isErrorComplete = useCheckErrorComplete(errors);
 
   return {
     state: cvcNumber,

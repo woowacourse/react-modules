@@ -8,7 +8,7 @@ import {
   SetValueFn,
   ValidInputFuncType,
 } from "../../types";
-import useErrorCheckComplete from "../common/useErrorCheckComplete";
+import useCheckErrorComplete from "../common/useCheckErrorComplete";
 
 const KEY_INDEX_MATCH = ["month", "year"];
 
@@ -48,7 +48,7 @@ const useExpirationDate = (): HookReturnType<"expirationDate"> => {
     setErrorMessage(message);
   };
 
-  const isErrorComplete = useErrorCheckComplete(errors);
+  const isErrorComplete = useCheckErrorComplete(errors);
 
   return {
     state: expirationDate,

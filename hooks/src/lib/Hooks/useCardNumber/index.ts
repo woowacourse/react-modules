@@ -8,7 +8,7 @@ import {
   SetValueFn,
   ValidInputFuncType,
 } from "../../types";
-import useErrorCheckComplete from "../common/useErrorCheckComplete";
+import useCheckErrorComplete from "../common/useCheckErrorComplete";
 
 const KEY_INDEX_MATCH = ["first", "second", "third", "forth"];
 
@@ -55,7 +55,7 @@ const useCardNumber = (): HookReturnType<"cardNumber"> => {
     setErrorMessage(message);
   };
 
-  const isErrorComplete = useErrorCheckComplete(errors);
+  const isErrorComplete = useCheckErrorComplete(errors);
 
   return {
     state: cardNumber,

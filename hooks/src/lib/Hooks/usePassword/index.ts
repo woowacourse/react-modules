@@ -8,7 +8,7 @@ import {
   SingleErrorType,
   ValidInputFuncType,
 } from "../../types";
-import useErrorCheckComplete from "../common/useErrorCheckComplete";
+import useCheckErrorComplete from "../common/useCheckErrorComplete";
 
 const usePassword = (): HookReturnType<"password"> => {
   const [password, setPassword] = useState<PasswordType>("");
@@ -23,7 +23,7 @@ const usePassword = (): HookReturnType<"password"> => {
     setErrorMessage(message);
   };
 
-  const isErrorComplete = useErrorCheckComplete(errors);
+  const isErrorComplete = useCheckErrorComplete(errors);
 
   return {
     state: password,
