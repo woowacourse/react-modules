@@ -10,8 +10,10 @@ const ERROR_MESSAGE = {
 };
 
 const useExpirationMonth = () => {
-	const [isValid, setIsValid] = useState<boolean>(true);
-	const [errorMessage, setErrorMessage] = useState<string>("");
+	const [error, setError] = useState({
+		isValid: true,
+		errorMessage: "",
+	});
 
 	const validate = (value: string) => {
 		const isValidLength = checkLength(value, MONTH_VALID_LENGTH);
@@ -19,24 +21,24 @@ const useExpirationMonth = () => {
 		const isValidRange = checkMonthRange(value);
 
 		if (!isValidLength) {
-			setErrorMessage(ERROR_MESSAGE.INVALID_MONTH_FORMAT);
-			setIsValid(false);
+			setError({ isValid: false, errorMessage: ERROR_MESSAGE.INVALID_MONTH_FORMAT });
+
 			return;
 		}
 		if (!isNumber) {
-			setErrorMessage(ERROR_MESSAGE.INVALID_NUMBER);
-			setIsValid(false);
+			setError({ isValid: false, errorMessage: ERROR_MESSAGE.INVALID_NUMBER });
+
 			return;
 		}
 
 		if (!isValidRange) {
-			setErrorMessage(ERROR_MESSAGE.INVALID_MONTH_RANGE);
-			setIsValid(false);
+			setError({ isValid: false, errorMessage: ERROR_MESSAGE.INVALID_MONTH_RANGE });
+
 			return;
 		}
 	};
 
-	return { isValid, errorMessage, validate };
+	return { error, validate };
 };
 
 export default useExpirationMonth;

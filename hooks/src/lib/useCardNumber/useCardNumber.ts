@@ -8,42 +8,65 @@ const ERROR_MESSAGE = {
 	INPUT_LENGTH_LIMIT: `${CARDNUMBER_VALID_LENGTH}자리를 입력해주세요.`,
 };
 
-interface CardNumberValid {
-	first: boolean;
-	second: boolean;
-	third: boolean;
-	fourth: boolean;
+interface FieldErrorState {
+	isValid: boolean;
+	errorMessage: string;
 }
 
-interface CardNumberErrorMessage {
-	first: string;
-	second: string;
-	third: string;
-	fourth: string;
-}
+type CardNumberField = "first" | "second" | "third" | "fourth";
+type CardNumberError = Record<CardNumberField, FieldErrorState>;
 
 const useCardNumber = () => {
-	const [isValid, setIsValid] = useState<CardNumberValid>({ first: true, second: true, third: true, fourth: true });
-	const [errorMessage, setErrorMessage] = useState<CardNumberErrorMessage>({ first: "", second: "", third: "", fourth: "" });
+	const [error, setError] = useState<CardNumberError>({
+		first: {
+			isValid: true,
+			errorMessage: "",
+		},
+		second: {
+			isValid: true,
+			errorMessage: "",
+		},
+		third: {
+			isValid: true,
+			errorMessage: "",
+		},
+		fourth: {
+			isValid: true,
+			errorMessage: "",
+		},
+	});
 
 	const validate = (label: string, value: string) => {
 		const isNumber = checkNumber(value);
 		const isValidLength = checkLength(value, CARDNUMBER_VALID_LENGTH);
 
 		if (!isNumber) {
-			setErrorMessage({ ...errorMessage, [label]: ERROR_MESSAGE.INVALID_NUMBER });
-			setIsValid({ ...isValid, [label]: false });
+			setError({
+				...error,
+				[label]: {
+					...error[label as CardNumberField],
+					isValid: false,
+					errorMessage: ERROR_MESSAGE.INVALID_NUMBER,
+				},
+			});
 
 			return;
 		}
 
 		if (!isValidLength) {
-			setErrorMessage({ ...errorMessage, [label]: ERROR_MESSAGE.INPUT_LENGTH_LIMIT });
-			setIsValid({ ...isValid, [label]: false });
+			setError({
+				...error,
+				[label]: {
+					...error[label as CardNumberField],
+					isValid: false,
+					errorMessage: ERROR_MESSAGE.INPUT_LENGTH_LIMIT,
+				},
+			});
+
 			return;
 		}
 	};
 
-	return { isValid, errorMessage, validate };
+	return { error, validate };
 };
 export default useCardNumber;

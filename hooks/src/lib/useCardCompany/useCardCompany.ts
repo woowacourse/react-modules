@@ -6,20 +6,22 @@ const ERROR_MESSAGE = {
 };
 
 const useCardCompany = () => {
-	const [isValid, setIsValid] = useState<boolean>(true);
-	const [errorMessage, setErrorMessage] = useState<string>("");
+	const [error, setError] = useState({
+		isValid: true,
+		errorMessage: "",
+	});
 
 	const validate = (value: string) => {
 		const isEmptyValue = checkEmptyValue(value);
 
 		if (!isEmptyValue) {
-			setIsValid(false);
-			setErrorMessage(ERROR_MESSAGE.EMPTY_CARD_COMPANY);
+			setError({ isValid: false, errorMessage: ERROR_MESSAGE.EMPTY_CARD_COMPANY });
+
 			return;
 		}
 	};
 
-	return { isValid, errorMessage, validate };
+	return { error, validate };
 };
 
 export default useCardCompany;

@@ -10,8 +10,10 @@ const ERROR_MESSAGE = {
 };
 
 const useExpirationYear = () => {
-	const [isValid, setIsValid] = useState<boolean>(true);
-	const [errorMessage, setErrorMessage] = useState<string>("");
+	const [error, setError] = useState({
+		isValid: true,
+		errorMessage: "",
+	});
 
 	const validate = (value: string) => {
 		const isValidLength = checkLength(value, YEAR_VALID_LENGTH);
@@ -19,23 +21,23 @@ const useExpirationYear = () => {
 		const isValidRange = checkYearRange(value);
 
 		if (!isValidLength) {
-			setErrorMessage(ERROR_MESSAGE.INVALID_YEAR_FORMAT);
-			setIsValid(false);
+			setError({ isValid: false, errorMessage: ERROR_MESSAGE.INVALID_YEAR_FORMAT });
+
 			return;
 		}
 		if (!isNumber) {
-			setErrorMessage(ERROR_MESSAGE.INVALID_NUMBER);
-			setIsValid(false);
+			setError({ isValid: false, errorMessage: ERROR_MESSAGE.INVALID_NUMBER });
+
 			return;
 		}
 		if (!isValidRange) {
-			setErrorMessage(ERROR_MESSAGE.INVALID_YEAR_RANGE);
-			setIsValid(false);
+			setError({ isValid: false, errorMessage: ERROR_MESSAGE.INVALID_YEAR_RANGE });
+
 			return;
 		}
 	};
 
-	return { isValid, errorMessage, validate };
+	return { error, validate };
 };
 
 export default useExpirationYear;

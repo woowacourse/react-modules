@@ -13,8 +13,12 @@ describe("useCardNumber 테스트", () => {
 			});
 		}
 
-		expect(result.current.isValid).toEqual({ first: true, second: true, third: true, fourth: true });
-		expect(result.current.errorMessage).toEqual({ first: "", second: "", third: "", fourth: "" });
+		expect(result.current.error).toEqual({
+			first: { isValid: true, errorMessage: "" },
+			second: { isValid: true, errorMessage: "" },
+			third: { isValid: true, errorMessage: "" },
+			fourth: { isValid: true, errorMessage: "" },
+		});
 	});
 
 	it("카드 번호에 문자가 포함되었을 때 isValid는 false, errorMessage 값이 반환되는지 확인한다.", () => {
@@ -27,8 +31,12 @@ describe("useCardNumber 테스트", () => {
 			});
 		}
 
-		expect(result.current.isValid).toEqual({ first: false, second: true, third: true, fourth: true });
-		expect(result.current.errorMessage).toEqual({ first: "숫자만 입력 가능합니다.", second: "", third: "", fourth: "" });
+		expect(result.current.error).toEqual({
+			first: { isValid: false, errorMessage: "숫자만 입력 가능합니다." },
+			second: { isValid: true, errorMessage: "" },
+			third: { isValid: true, errorMessage: "" },
+			fourth: { isValid: true, errorMessage: "" },
+		});
 	});
 
 	it("카드 번호 길이가 4자 미만일 경우 isValid는 false, errorMessage 값이 반환되는지 확인한다.", () => {
@@ -42,7 +50,11 @@ describe("useCardNumber 테스트", () => {
 			});
 		}
 
-		expect(result.current.isValid).toEqual({ first: false, second: true, third: true, fourth: true });
-		expect(result.current.errorMessage).toEqual({ first: "4자리를 입력해주세요.", second: "", third: "", fourth: "" });
+		expect(result.current.error).toEqual({
+			first: { isValid: false, errorMessage: "4자리를 입력해주세요." },
+			second: { isValid: true, errorMessage: "" },
+			third: { isValid: true, errorMessage: "" },
+			fourth: { isValid: true, errorMessage: "" },
+		});
 	});
 });
