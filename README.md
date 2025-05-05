@@ -89,8 +89,8 @@ Module
   - [x] `const { cardNumber, onChange, isValid, errorMessage } = useCardNumber();`
   - [x] useCardNumber 훅
     - [x] cardNumber -> 객체로 상태 관리
-  - [ ] useExpirationDate 훅
-    - [ ] ExpirationDate -> 객체로 상태 관리
+  - [x] useExpirationDate 훅
+    - [x] ExpirationDate -> 객체로 상태 관리
   - [ ] useCvcNumber 훅
   - [ ] usePassword 훅
 - [ ] isComplete 변수 return (모든 필드가 최대 입력을 쳤는지 확인)

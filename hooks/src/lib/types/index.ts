@@ -42,7 +42,7 @@ export type CardInformationType = {
 
 export type setCardInformationType = {
   cardNumber: SetValueFn<CardNumberType[keyof CardNumberType]>;
-  expirationDate: SetValueFn<ExpirationDateType[number]>;
+  expirationDate: SetValueFn<ExpirationDateType[keyof ExpirationDateType]>;
   cvcNumber: SetValueFn<CvcNumberType>;
   password: SetValueFn<PasswordType>;
 };
@@ -51,7 +51,7 @@ export type CardNumberType = Record<
   "first" | "second" | "third" | "forth",
   string
 >;
-export type ExpirationDateType = [string, string];
+export type ExpirationDateType = Record<"month" | "year", string>;
 export type CvcNumberType = string;
 export type PasswordType = string;
 
