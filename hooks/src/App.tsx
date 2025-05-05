@@ -1,4 +1,3 @@
-import React, { useCallback } from "react";
 import "./App.css";
 import { useCardValidation } from "./lib";
 
