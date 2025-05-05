@@ -1,7 +1,12 @@
 {
-  "name": "seo-meta-react-modal",
-  "version": "0.0.2",
-  "description": "npm modules",
+  "name": "@seo/react-modal",
+  "version": "0.0.1",
+  "description": "포커스 트랩, ESC 키 종료, 포털 렌더링을 지원하는 커스터마이징 가능한 React 모달 컴포넌트입니다.",
+  "keywords": [
+    "react",
+    "modal",
+    "dialog"
+  ],
   "license": "MIT",
   "type": "module",
   "types": "dist/index.d.ts",

@@ -1,7 +1,15 @@
 {
-  "name": "meta-seo-hooks",
-  "version": "0.0.2",
-  "description": "npm modules",
+  "name": "@seo/hooks",
+  "version": "0.0.1",
+  "description": "신용카드 입력을 위한 React 커스텀 훅과 유효성 검사 함수 모음입니다. 카드 번호, CVC, 만료일, 비밀번호 입력을 안전하게 처리할 수 있습니다.",
+  "keywords": [
+    "react",
+    "form validation",
+    "credit card",
+    "custom hook",
+    "card input"
+  ],
+  "license": "MIT",
   "type": "module",
   "types": "dist/index.d.ts",
   "main": "dist/index.js",
