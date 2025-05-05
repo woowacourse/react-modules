@@ -1,4 +1,4 @@
-import { CVC_LENGTH, CARD_NUMBER_LENGTH, PASSWORD_LENGTH } from "../constants";
+import { CVC_LENGTH, PASSWORD_LENGTH } from "../constants";
 
 import {
   CVC_ERROR_MESSAGES,
@@ -14,6 +14,16 @@ import {
   isNotExpiredDate,
 } from "../utils/date-utils";
 import { isValidLuhn } from "../utils/isValidLuhn";
+import { isValidLength } from "../utils/isValidLength";
+import { cardBrandChecker } from "../utils/card-brand-checker";
+import { CardBrand } from "../constants/CardBrand";
+import { CARD_NUMBER_LENGTH } from "./constants/card-number-length";
+
+function makeMessageForInvalidLength(cardBrand: CardBrand): string {
+  return `카드 번호는 ${CARD_NUMBER_LENGTH[cardBrand].join(
+    ", "
+  )} 자리여야 합니다.`;
+}
 
 export const validationRules = {
   cvc: {
@@ -32,23 +42,21 @@ export const validationRules = {
       check: (value: string) => isNumeric(value),
       message: CARD_NUMBER_ERROR_MESSAGES.INVALID_NUMBER,
     },
-    INVALID_LENGTH: {
-      check: (value: string) => value.length === CARD_NUMBER_LENGTH,
-      message: CARD_NUMBER_ERROR_MESSAGES.INVALID_LENGTH,
-    },
+
     INVALID_FORMAT: {
       check: (value: string) => /^\d+$/.test(value),
       message: CARD_NUMBER_ERROR_MESSAGES.INVALID_FORMAT,
+    },
+    INVALID_LENGTH: {
+      check: (value: string) => isValidLength(value),
+      message: (value: string) =>
+        makeMessageForInvalidLength(cardBrandChecker(value)),
     },
   },
   strictCardNumber: {
     INVALID_NUMBER: {
       check: (value: string) => isNumeric(value),
       message: CARD_NUMBER_ERROR_MESSAGES.INVALID_NUMBER,
-    },
-    INVALID_LENGTH: {
-      check: (value: string) => value.length === CARD_NUMBER_LENGTH,
-      message: CARD_NUMBER_ERROR_MESSAGES.INVALID_LENGTH,
     },
     INVALID_FORMAT: {
       check: (value: string) => /^\d+$/.test(value),
@@ -57,6 +65,11 @@ export const validationRules = {
     INVALID_CHECKSUM: {
       check: (value: string) => isValidLuhn(value),
       message: CARD_NUMBER_ERROR_MESSAGES.INVALID_CHECKSUM,
+    },
+    INVALID_LENGTH: {
+      check: (value: string) => isValidLength(value),
+      message: (value: string) =>
+        makeMessageForInvalidLength(cardBrandChecker(value)),
     },
   },
   password: {
