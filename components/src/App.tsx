@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import './App.css';
-// import { Modal } from 'seo-meta-react-modal';
-import Modal from './lib/Modal';
+import { Modal } from '@seo_dev/react-modal';
 function App() {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -14,7 +13,7 @@ function App() {
       <button onClick={handleButtonToggle}>모달 열기</button>
       {isOpen && (
         <Modal onClose={handleButtonToggle}>
-          <Modal.BackDrop backgroundColor={'rgba(0,0,255,0.35)'} onClose={handleButtonToggle} />
+          <Modal.BackDrop backgroundColor={'rgba(0,0,255,0.35)'} />
           <Modal.Content position="center" style={{ width: '300px', height: '300px', backgroundColor: 'white' }}>
             <Modal.Title>하이</Modal.Title>
             <Modal.CloseButton style={{ position: 'absolute', right: '24px', top: '24px' }} onClick={handleButtonToggle}>

@@ -27,7 +27,7 @@ export const CenteredModal: Story = {
         <button onClick={open}>모달 열기</button>
         {isOpen && (
           <Modal onClose={close}>
-            <Modal.BackDrop onClose={close} />
+            <Modal.BackDrop />
             <Modal.Content position="center" style={{ width: '300px', height: '300px', backgroundColor: 'white' }}>
               <Modal.Title>중앙 모달</Modal.Title>
               <p>이곳은 중앙에 위치한 모달입니다.</p>
@@ -49,7 +49,7 @@ export const BottomSheetModal: Story = {
         <button onClick={open}>바텀시트 열기</button>
         {isOpen && (
           <Modal onClose={close}>
-            <Modal.BackDrop onClose={close} />
+            <Modal.BackDrop />
             <Modal.Content position="bottom" style={{ width: '100%', height: '300px', backgroundColor: 'white' }}>
               <Modal.Title>바텀 시트 모달</Modal.Title>
               <p>이 모달은 화면 하단에서 올라옵니다.</p>
