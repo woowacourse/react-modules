@@ -76,7 +76,9 @@ export default App;
 1. 각 카드 번호는 숫자여야한다.
 2. 각 카드 번호는 4자리여야한다.
 
-### 🔧 Props (Object)
+### ⛏️ Return Value
+
+### cardNumber (Object)
 
 | Name   | Datatype | Description  |
 | ------ | -------- | ------------ |
@@ -85,7 +87,7 @@ export default App;
 | third  | string   | 세 번째 자리 |
 | fourth | string   | 네 번째 자리 |
 
-### ⛏️ Return Value (Object)
+### cardNumberValidationResult (Object)
 
 ```
 {
@@ -112,6 +114,12 @@ export default App;
 | ------------ | -------- | ----------- |
 | isError      | boolean  | 에러 여부   |
 | errorMessage | string   | 에러 메시지 |
+
+### onChange
+
+| Name     | Datatype                                 | Description   |
+| -------- | ---------------------------------------- | ------------- |
+| onChange | (label : string, value : string) => void | onChange 함수 |
 
 ## 📌 How to use: useExpirationDateValidation
 
