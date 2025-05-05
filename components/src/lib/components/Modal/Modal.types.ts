@@ -10,12 +10,16 @@ import ModalBody from "../ModalBody/ModalBody";
 import ModalFooter from "../ModalFooter/ModalFooter";
 import useModal from "../../hooks/useModal";
 
+import { ModalOverlayProps } from "../ModalOverlay/ModalOverlay.types";
+
+export interface ModalInternalProps extends ModalProps, ModalOverlayProps {}
+
 export interface ModalProps {
   isOpen: boolean;
   children: ReactNode;
 }
 
-export interface ModalCompoundComponent extends FC<ModalProps> {
+export interface ModalCompoundComponent extends FC<ModalInternalProps> {
   Overlay: typeof ModalOverlay;
   Content: typeof ModalContent;
   Header: typeof ModalHeader;

@@ -34,6 +34,7 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
   args: {
     isOpen: true,
+    onClose: () => {},
     children: "",
   },
 
@@ -43,8 +44,7 @@ export const Default: Story = {
     return (
       <>
         <button onClick={handleOpen}>Open</button>
-        <Modal isOpen={isOpen}>
-          <ModalOverlay onClose={handleClose} />
+        <Modal isOpen={isOpen} onClose={handleClose}>
           <ModalContent position="center">
             <ModalHeader direction="row" align="start" justify="start">
               <ModalTitle tag="h1" fontSize="25px" fontWeight="700">

@@ -1,5 +1,5 @@
-// import Modal from "../src/lib/components/Modal/Modal";
-import { Modal } from "@kaori-killer/modal-component";
+import Modal from "../src/lib/components/Modal/Modal";
+// import { Modal } from "@kaori-killer/modal-component";
 
 function App() {
   const { isOpen, handleOpen, handleClose } = Modal.useModal();
@@ -7,8 +7,7 @@ function App() {
   return (
     <>
       <button onClick={handleOpen}>Open</button>
-      <Modal isOpen={isOpen}>
-        <Modal.Overlay onClose={handleClose} />
+      <Modal isOpen={isOpen} onClose={handleClose}>
         <Modal.Content position="center">
           <Modal.Header direction="row" align="start" justify="start">
             <Modal.Title tag="h1" fontSize="25px" fontWeight="700">
