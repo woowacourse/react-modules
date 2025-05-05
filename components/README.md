@@ -28,6 +28,7 @@ yarn add lumes_modal
 
 ```tsx
 import Modal from 'lumes-modal';
+import React, { useState } from 'react';
 
 function App() {
   const [isOpen, setIsOpen] = useState(false);
