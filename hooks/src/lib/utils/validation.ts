@@ -24,11 +24,25 @@ export const isExpirationDate = (
   if (isNumberError.error) return isNumberError;
 
   const num = parseInt(value);
-  if (type === 'month' && (num < MIN_MONTH || num > MAX_MONTH)) {
-    return { error: true, message: ERROR_MESSAGE.MONTH_VALID };
-  } else if (type === 'year' && num < CURRENT_YEAR) {
-    return { error: true, message: ERROR_MESSAGE.YEAR_VALID };
+  if (type === 'month') {
+    return validateMonth(num);
+  } else if (type === 'year') {
+    return validateYear(num);
   }
 
+  return { error: false, message: '' };
+};
+
+export const validateMonth = (month: number): ValidateFuncReturnType => {
+  if (month < MIN_MONTH || month > MAX_MONTH) {
+    return { error: true, message: ERROR_MESSAGE.MONTH_VALID };
+  }
+  return { error: false, message: '' };
+};
+
+export const validateYear = (year: number): ValidateFuncReturnType => {
+  if (year < CURRENT_YEAR) {
+    return { error: true, message: ERROR_MESSAGE.YEAR_VALID };
+  }
   return { error: false, message: '' };
 };
