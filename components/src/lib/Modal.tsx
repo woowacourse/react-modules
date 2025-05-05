@@ -10,6 +10,7 @@ interface ModalPropsType {
   position: 'center' | 'bottom';
   title: string;
   onClose: () => void;
+  onBackdropClick: (e: React.MouseEvent<HTMLDivElement>) => void;
 }
 
 const Modal = ({
@@ -18,10 +19,15 @@ const Modal = ({
   position,
   title,
   onClose,
+  onBackdropClick,
 }: ModalPropsType) => {
   return (
     <>
-      <ModalBackground isOpen={isOpen} position={position}>
+      <ModalBackground
+        isOpen={isOpen}
+        position={position}
+        onClick={(e) => onBackdropClick(e)}
+      >
         <ModalContainer position={position}>
           <ModalHeader>
             <h4>{title}</h4>
