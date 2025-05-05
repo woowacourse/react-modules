@@ -9,6 +9,18 @@ describe('useCardCVC 훅', () => {
     expect(result.current.errorMessage).toBe('');
   });
 
+  test('입력 수 초과시 입력 안됨', () => {
+    const { result } = renderHook(() => useCardCVC());
+    act(() => {
+      result.current.onChange({
+        target: { value: '1234' },
+      } as React.ChangeEvent<HTMLInputElement>);
+    });
+    expect(result.current.value).toBe('');
+    expect(result.current.isError).toBe(false);
+    expect(result.current.errorMessage).toBe('');
+  });
+
   test('유효한 입력 시 에러 없음', () => {
     const { result } = renderHook(() => useCardCVC());
     act(() => {

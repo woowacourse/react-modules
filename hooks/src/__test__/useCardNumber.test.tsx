@@ -9,6 +9,19 @@ describe('useCardNumber 훅', () => {
     expect(result.current.errorMessage).toBe('');
   });
 
+  test('입력 수 초과시 입력 안됨', () => {
+    const { result } = renderHook(() => useCardNumber());
+    act(() => {
+      result.current.onChange(
+        { target: { value: '12345' } } as React.ChangeEvent<HTMLInputElement>,
+        0
+      );
+    });
+    expect(result.current.value[0]).toBe('');
+    expect(result.current.isError[0]).toBe(false);
+    expect(result.current.errorMessage).toBe('');
+  });
+
   test('유효한 입력 시 에러 없음', () => {
     const { result } = renderHook(() => useCardNumber());
     act(() => {
