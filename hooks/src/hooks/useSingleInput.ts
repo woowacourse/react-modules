@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { BaseInputState, ErrorState } from "../lib/types";
+import { isNonNumericNonEmpty } from "../utils/validation";
 
 interface UseInputStateParams {
   initialValue: BaseInputState;
@@ -7,7 +8,7 @@ interface UseInputStateParams {
   getErrorFn: (value: string) => ErrorState;
 }
 
-const useSingleInput = ({
+const useSingleNumberInput = ({
   initialValue,
   maxLength,
   getErrorFn,
@@ -15,7 +16,7 @@ const useSingleInput = ({
   const [inputState, setInputState] = useState<BaseInputState>(initialValue);
 
   const handleInputChange = (value: string) => {
-    if (value.length > maxLength) {
+    if (value.length > maxLength || isNonNumericNonEmpty(value)) {
       return;
     }
 
@@ -32,4 +33,4 @@ const useSingleInput = ({
   };
 };
 
-export default useSingleInput;
+export default useSingleNumberInput;

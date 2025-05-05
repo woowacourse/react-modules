@@ -1,9 +1,9 @@
 import { INITIAL_CVC_STATE } from "./constants";
 import { getCardCVCError } from "./utils";
-import useSingleInput from "../../../hooks/useSingleInput";
+import useSingleNumberInput from "../../../hooks/useSingleInput";
 
 const useCardCVC = () => {
-  const { inputState, handleInputChange, errorState } = useSingleInput({
+  const { inputState, handleInputChange, errorState } = useSingleNumberInput({
     initialValue: INITIAL_CVC_STATE,
     maxLength: 3,
     getErrorFn: getCardCVCError,

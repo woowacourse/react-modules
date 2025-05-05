@@ -6,10 +6,6 @@ import {
 
 const cardPasswordValidationRules: ValidationRule[] = [
   {
-    condition: commonConditions.isNumeric,
-    errorMessage: "숫자만 입력해주세요.",
-  },
-  {
     condition: commonConditions.hasLength(2),
     errorMessage: "비밀번호는 2자리여야 합니다.",
   },

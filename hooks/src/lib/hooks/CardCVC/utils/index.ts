@@ -6,10 +6,6 @@ import { ErrorState, ValidationRule } from "../../../types";
 
 const cvcValidationRules: ValidationRule[] = [
   {
-    condition: commonConditions.isNumeric,
-    errorMessage: "숫자만 입력해주세요.",
-  },
-  {
     condition: commonConditions.hasLength(3),
     errorMessage: "CVC는 3자리여야 합니다.",
   },

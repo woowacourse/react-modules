@@ -17,16 +17,6 @@ describe("useCardExpiryDate", () => {
     });
   });
 
-  it("카드 만료일에 문자열을 입력하면 에러가 발생한다.", () => {
-    testInvalidInput({
-      renderHookFn: () => renderHook(() => useCardExpiryDate()),
-      handleChangeKey: "handleExpiryChange",
-      errorStateKey: "errorState",
-      input: "ㅁㅁㅁ",
-      errorMessage: "숫자만 입력해주세요.",
-    });
-  });
-
   it("카드 만료일에 3자리를 입력하면 에러가 발생한다.", () => {
     testInvalidInput({
       renderHookFn: () => renderHook(() => useCardExpiryDate()),

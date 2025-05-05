@@ -17,16 +17,6 @@ describe("useCardCVC", () => {
     });
   });
 
-  it("CVC 입력에 문자열을 입력하면 오류가 발생해야한다.", () => {
-    testInvalidInput({
-      renderHookFn: () => renderHook(() => useCardCVC()),
-      handleChangeKey: "handleCVCStateChange",
-      errorStateKey: "errorState",
-      input: "ㅁㅁㅁ",
-      errorMessage: "숫자만 입력해주세요.",
-    });
-  });
-
   it("CVC 입력에 2자리를 입력하면 오류가 발생해야한다.", () => {
     testInvalidInput({
       renderHookFn: () => renderHook(() => useCardCVC()),

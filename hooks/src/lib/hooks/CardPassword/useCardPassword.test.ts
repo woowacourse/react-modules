@@ -17,16 +17,6 @@ describe("useCardPassword", () => {
     });
   });
 
-  it("카드 비밀번호에 문자열을 입력하면 오류가 발생해야한다.", () => {
-    testInvalidInput({
-      renderHookFn: () => renderHook(() => useCardPassword()),
-      handleChangeKey: "handleCardPasswordChange",
-      errorStateKey: "errorState",
-      input: "ㅁㅁ",
-      errorMessage: "숫자만 입력해주세요.",
-    });
-  });
-
   it("카드 비밀번호에 1자리를 입력하면 오류가 발생해야한다.", () => {
     testInvalidInput({
       renderHookFn: () => renderHook(() => useCardPassword()),
