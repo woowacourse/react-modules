@@ -63,5 +63,3 @@ https://step1--6812ddd3aa5be0c9ccb7572d.chromatic.com
 - 부드러운 열기/닫기 애니메이션
 - 외부 클릭 시 닫힘
 - 키보드 지원 (ESC 키로 닫기)
-
-step2 init
