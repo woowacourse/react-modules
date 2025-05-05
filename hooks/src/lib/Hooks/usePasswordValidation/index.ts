@@ -10,23 +10,22 @@ import {
 
 const usePasswordValidation = (): ValidationHookReturnType => {
   const [inputStates, setInputStates] = useState<string>('');
-  const [errors, setErrors] = useState<SingleErrorType>(false);
-  const [errorMessage, setErrorMessage] = useState<ErrorMessageType>('');
+  const {
+    error,
+    message,
+  }: { error: SingleErrorType; message: ErrorMessageType } =
+    isNumber(inputStates); //inputState 바뀌면 자동 계산
 
   const onChange: CurriedInputChangeHandler = () => (e) => {
     const value = e.target.value;
     setInputStates(value);
-
-    const { error, message } = isNumber(value);
-    setErrors(error);
-    setErrorMessage(message);
   };
 
-  const noError = checkNoError(errors);
+  const noError = checkNoError(error);
 
   return {
     inputStates,
-    errorMessage,
+    errorMessage: message,
     onChange,
     noError,
   };
