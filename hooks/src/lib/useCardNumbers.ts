@@ -9,7 +9,7 @@ const CARD_NUMBER_RULE = {
 type ValitationResult = {
   numbers: string[];
   error: errorType[];
-  validate: (value: string, index: number) => void;
+  updateCardNumbers: (value: string, index: number) => void;
 };
 
 type errorType = {
@@ -38,15 +38,19 @@ export default function useCardNumbers(): ValitationResult {
     });
   };
 
-  const validate = (value: string, index: number) => {
+  const updateCardNumbers = (value: string, index: number) => {
     if (value.length > CARD_NUMBER_RULE.MAX_LENGTH) return;
+
+    validate(value, index);
 
     setNumbers((prev) => {
       const newNumbers = [...prev];
       newNumbers[index] = value;
       return newNumbers;
     });
+  };
 
+  const validate = (value: string, index: number) => {
     if (value === '') {
       updateError(index, false, '');
       return;
@@ -63,5 +67,5 @@ export default function useCardNumbers(): ValitationResult {
     updateError(index, false, '');
   };
 
-  return { numbers, error, validate };
+  return { numbers, error, updateCardNumbers };
 }

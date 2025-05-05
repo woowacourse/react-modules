@@ -1,41 +1,58 @@
-import { useState } from "react";
+import { useState } from 'react';
 
 const CVC_RULE = {
-  INVALID_LENGTH_ERROR: "CVC는 3자리로 입력해 주세요.",
-  NOT_A_NUMBER: "CVC는 숫자로 입력해 주세요.",
+  INVALID_LENGTH_ERROR: 'CVC는 3자리로 입력해 주세요.',
+  NOT_A_NUMBER: 'CVC는 숫자로 입력해 주세요.',
   MAX_LENGTH: 3,
 } as const;
 
 type ValitationResult = {
   cvc: string;
-  error: { isValid: boolean; errorMessage: string };
-  validate: (value: string) => void;
+  error: errorType;
+  updateCvc: (value: string) => void;
+};
+
+type errorType = {
+  isValidate: boolean;
+  errorMessage: string;
+};
+
+const initialError = {
+  isValidate: false,
+  errorMessage: '',
 };
 
 export default function useCvcNumber(): ValitationResult {
-  const [cvc, setCvc] = useState("");
-  const [error, setError] = useState({ isValid: false, errorMessage: "" });
+  const [cvc, setCvc] = useState('');
+  const [error, setError] = useState<errorType>(initialError);
 
-  const validate = (value: string) => {
+  const updateCvc = (value: string) => {
     if (value.length > 3) return;
 
-    setCvc(value);
+    validate(value);
 
-    if (value === "") {
-      setError({ isValid: true, errorMessage: "" });
+    setCvc(value);
+  };
+
+  const validate = (value: string) => {
+    if (value === '') {
+      setError({ isValidate: true, errorMessage: '' });
       return;
     }
 
     if (!/^\d*$/.test(value)) {
-      setError({ isValid: true, errorMessage: CVC_RULE.NOT_A_NUMBER });
+      setError({ isValidate: true, errorMessage: CVC_RULE.NOT_A_NUMBER });
       return;
     }
     if (value.length < CVC_RULE.MAX_LENGTH) {
-      setError({ isValid: true, errorMessage: CVC_RULE.INVALID_LENGTH_ERROR });
+      setError({
+        isValidate: true,
+        errorMessage: CVC_RULE.INVALID_LENGTH_ERROR,
+      });
       return;
     }
-    setError({ isValid: false, errorMessage: "" });
+    setError({ isValidate: false, errorMessage: '' });
   };
 
-  return { cvc, error, validate };
+  return { cvc, error, updateCvc };
 }
