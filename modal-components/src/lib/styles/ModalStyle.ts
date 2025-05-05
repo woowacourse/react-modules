@@ -1,12 +1,13 @@
-import styled from '@emotion/styled';
-import { ModalTypeProps } from '../types/modalTypes';
+import styled from "@emotion/styled";
+import { ModalTypeProps } from "../types/modalTypes";
 
 export const ModalContainer = styled.div<ModalTypeProps>`
   width: 100%;
   height: 100%;
   display: flex;
   justify-content: center;
-  align-items: ${({ modalType }) => (modalType === 'center' ? 'center' : 'flex-end')};
+  align-items: ${({ modalType }) =>
+    modalType === "center" ? "center" : "flex-end"};
   position: fixed;
 `;
 export const ModalBackdrop = styled.div`
@@ -30,8 +31,8 @@ export const Wrapper = styled.div`
 `;
 
 export const ModalBoxContainer = styled.div<ModalTypeProps>`
-  width: ${({ modalType }) => (modalType === 'center' ? '70%' : '100%')};
-  max-width: ${({ modalType }) => (modalType === 'center' ? '800px' : 'none')};
+  width: ${({ modalType }) => (modalType === "center" ? "70%" : "100%")};
+  max-width: ${({ modalType }) => (modalType === "center" ? "800px" : "none")};
   height: fit-content;
   max-height: 90vh;
   display: flex;
@@ -39,7 +40,7 @@ export const ModalBoxContainer = styled.div<ModalTypeProps>`
   background-color: #ffffff;
   padding: 1.5rem;
   border-radius: ${({ modalType }) =>
-    modalType === 'center' ? '0.5rem' : '0.5rem 0.5rem 0rem 0rem'};
+    modalType === "center" ? "0.5rem" : "0.5rem 0.5rem 0rem 0rem"};
 `;
 
 export const ModalHeaderContainer = styled.div`

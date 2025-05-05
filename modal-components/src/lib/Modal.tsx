@@ -1,35 +1,36 @@
-import { useContext, useEffect } from 'react';
-import ModalBox from './ModalBox';
-import { ModalContainer, ModalBackdrop, Container, Wrapper } from './styles/ModalStyle';
-import { ModalContext, useModal } from './contexts/ModalContext';
-import { ModalProps } from './types/modalTypes';
+import { useEffect } from "react";
+import ModalBox from "./ModalBox";
+import {
+  ModalContainer,
+  ModalBackdrop,
+  Container,
+  Wrapper,
+} from "./styles/ModalStyle";
+import { ModalProps } from "./types/modalTypes";
 
-const Modal = ({ modalType, titleText = '', children, closeType, onClose }: ModalProps) => {
-  const context = useContext(ModalContext);
-  const { closeModalHandler } = useModal();
-
+const Modal = ({
+  modalType,
+  titleText = "",
+  children,
+  closeType,
+  onClose,
+}: ModalProps) => {
   const handleKeyDown = (event: KeyboardEvent) => {
-    if (event.key === 'Escape') {
-      closeModalHandler();
+    if (event.key === "Escape") {
+      onClose();
     }
   };
 
   useEffect(() => {
-    if (context && context.isModalOpened) {
-      window.addEventListener('keydown', handleKeyDown);
-      return () => {
-        window.removeEventListener('keydown', handleKeyDown);
-      };
-    }
-  }, [closeModalHandler, context]);
-
-  if (!context) return null;
-  const { isModalOpened } = context;
-  if (!isModalOpened) return null;
+    window.addEventListener("keydown", handleKeyDown);
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, []);
 
   return (
     <ModalContainer modalType={modalType}>
-      <ModalBackdrop onClick={closeModalHandler} />
+      <ModalBackdrop onClick={onClose} />
       <Container>
         <Wrapper>
           <ModalBox

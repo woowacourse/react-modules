@@ -1,4 +1,4 @@
-export { default as ModalComponent } from './ModalComponent';
-export { ModalProvider, useModal } from './contexts/ModalContext';
-export * from './styles/ModalStyle';
-export * from './styles/ModalTextStyle';
+export { useModal } from "./hook/useModal";
+export { default as Modal } from "./Modal";
+export * from "./styles/ModalStyle";
+export * from "./styles/ModalTextStyle";

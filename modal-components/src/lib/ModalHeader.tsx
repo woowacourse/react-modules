@@ -1,21 +1,19 @@
-import CloseIconSVG from './assets/CloseIconSVG';
-import { ModalHeaderContainer } from './styles/ModalStyle';
-import { ModalTitle } from './styles/ModalTextStyle';
-import { useModal } from './contexts/ModalContext';
-import { ModalHeaderProps } from './types/modalTypes';
+import CloseIconSVG from "./assets/CloseIconSVG";
+import { ModalHeaderContainer } from "./styles/ModalStyle";
+import { ModalTitle } from "./styles/ModalTextStyle";
+import { ModalHeaderProps } from "./types/modalTypes";
 
-const ModalHeader = ({ titleText, hasCloseButton, onClose }: ModalHeaderProps) => {
-  const { closeModalHandler } = useModal();
-  function closeHandler() {
-    if (onClose) onClose();
-    closeModalHandler();
-  }
+const ModalHeader = ({
+  titleText,
+  hasCloseButton,
+  onClose,
+}: ModalHeaderProps) => {
   return (
     <ModalHeaderContainer>
       <ModalTitle>{titleText}</ModalTitle>
       {hasCloseButton && (
-        <button style={{ cursor: 'pointer' }} type="button" onClick={closeHandler}>
-          <CloseIconSVG sizeName={'md'}></CloseIconSVG>
+        <button style={{ cursor: "pointer" }} type="button" onClick={onClose}>
+          <CloseIconSVG sizeName={"md"}></CloseIconSVG>
         </button>
       )}
     </ModalHeaderContainer>
