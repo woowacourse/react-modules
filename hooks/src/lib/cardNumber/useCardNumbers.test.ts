@@ -3,8 +3,8 @@ import useCardNumbers from './useCardNumbers';
 import { ChangeEvent } from 'react';
 import {
   CARD_NUMBER_ERROR_TYPES,
-  CardNumberErrorType,
   CardNumbersKey,
+  ValidateCardNumbersResult,
 } from '../constants';
 import { ValidationResult } from '../types';
 
@@ -15,7 +15,7 @@ interface RenderHookResult {
 interface RenderHookCurrent {
   cardNumbers: Record<CardNumbersKey, string>;
   validationResults: Record<CardNumbersKey, ValidationResult>;
-  validateCardNumbers: (value: string) => CardNumberErrorType | null;
+  validateCardNumbers: (value: string) => ValidateCardNumbersResult;
   handleCardNumbersChange: (
     event: ChangeEvent<HTMLInputElement>,
     restrictChange?: boolean
@@ -39,15 +39,17 @@ describe('useCardNumbers', () => {
     expect(result.current.cardNumbers.part1).toBe('1234');
   });
 
-  it('입력값이 숫자가 아닐 때 notNumber 에러 타입을 반환한다.', () => {
-    expect(result.current.validateCardNumbers('aaaa')).toBe(
-      CARD_NUMBER_ERROR_TYPES.notNumber
-    );
+  it('입력값이 숫자가 아닐 때 isValid로 false를 반환하고 notNumber 에러 타입을 반환한다.', () => {
+    expect(result.current.validateCardNumbers('aaaa')).toEqual({
+      isValid: false,
+      errorType: CARD_NUMBER_ERROR_TYPES.notNumber,
+    });
   });
 
-  it('입력값이 네 자리가 아닐 때 invalidLength 에러 타입을 반환한다.', () => {
-    expect(result.current.validateCardNumbers('12345')).toBe(
-      CARD_NUMBER_ERROR_TYPES.invalidLength
-    );
+  it('입력값이 네 자리가 아닐 때 isValid로 false를 반환하고 invalidLength 에러 타입을 반환한다.', () => {
+    expect(result.current.validateCardNumbers('12345')).toEqual({
+      isValid: false,
+      errorType: CARD_NUMBER_ERROR_TYPES.invalidLength,
+    });
   });
 });

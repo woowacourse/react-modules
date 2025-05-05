@@ -1,7 +1,7 @@
 import { renderHook, act } from '@testing-library/react';
 import useCVC from './useCVC';
 import { ChangeEvent } from 'react';
-import { CVC_ERROR_TYPES, CVCErrorType } from '../constants';
+import { CVC_ERROR_TYPES, ValidateCVCResult } from '../constants';
 import { ValidationResult } from '../types';
 
 interface RenderHookResult {
@@ -11,7 +11,7 @@ interface RenderHookResult {
 interface RenderHookCurrent {
   CVC: string;
   validationResult: ValidationResult;
-  validateCVC: (value: string) => CVCErrorType | null;
+  validateCVC: (value: string) => ValidateCVCResult;
   handleCVCChange: (
     event: ChangeEvent<HTMLInputElement>,
     restrictChange?: boolean
@@ -35,13 +35,17 @@ describe('useCVC', () => {
     expect(result.current.CVC).toBe('123');
   });
 
-  it('입력값이 숫자가 아닐 때 notNumber 에러 타입을 반환한다.', () => {
-    expect(result.current.validateCVC('aaa')).toBe(CVC_ERROR_TYPES.notNumber);
+  it('입력값이 숫자가 아닐 때 isValid로 false를 반환하고 notNumber 에러 타입을 반환한다.', () => {
+    expect(result.current.validateCVC('aaa')).toEqual({
+      isValid: false,
+      errorType: CVC_ERROR_TYPES.notNumber,
+    });
   });
 
-  it('입력값이 세 자리가 아닐 때 invalidLength 에러 타입을 반환한다.', () => {
-    expect(result.current.validateCVC('1234')).toBe(
-      CVC_ERROR_TYPES.invalidLength
-    );
+  it('입력값이 세 자리가 아닐 때 isValid로 false를 반환하고 invalidLength 에러 타입을 반환한다.', () => {
+    expect(result.current.validateCVC('1234')).toEqual({
+      isValid: false,
+      errorType: CVC_ERROR_TYPES.invalidLength,
+    });
   });
 });
