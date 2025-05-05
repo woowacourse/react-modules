@@ -46,8 +46,8 @@ export const ModalHeaderStyle = css`
   }
 `;
 
-export const ModalTitleStyle = (color: string) => css`
-  color: ${color};
+export const ModalTitleStyle = css`
+  color: #000;
   font-size: 18px;
   font-style: normal;
   font-weight: 700;

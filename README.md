@@ -79,7 +79,7 @@ Module
 ## 피드백 바탕 수정사항
 
 - [x] (모달) svg 아이콘 컴포넌트 분리
-- [ ] (모달) 각각의 합성 컴포넌트 className 과 style을 부여
+- [x] (모달) 각각의 합성 컴포넌트 className 과 style을 부여
 - [x] (모달) 타입, 스타일, 훅, context 파일 별도 분리
 
 - [ ] (훅) 에러 로직 훅 단일화 처리 (base error 훅)

@@ -1,6 +1,6 @@
 import useKeyEscClose from "./hooks/useKeyEscClose";
 import IconClose from "./components/IconClose";
-import { ChildrenProps, ModalHeaderProps, ModalProps, ModalTitleProps } from "./types";
+import { BaseProps, ModalHeaderProps, ModalProps } from "./types";
 import {
   backGroundStyle,
   ModalBodyStyle,
@@ -25,27 +25,39 @@ const Modal = ({ show, onHide, background = true, position = "center", gap = 16,
   );
 };
 
-Modal.Header = ({ closeButton = false, children }: ModalHeaderProps) => {
+Modal.Header = ({ closeButton = false, children, ...props }: ModalHeaderProps) => {
   const onHide = useModalContext();
-
   return (
-    <div css={ModalHeaderStyle}>
+    <div css={ModalHeaderStyle} {...props}>
       <span>{children}</span>
       {closeButton && <IconClose css={ModalCloseStyle} onClick={onHide} />}
     </div>
   );
 };
 
-Modal.Body = ({ children }: ChildrenProps) => {
-  return <div css={ModalBodyStyle}>{children}</div>;
+Modal.Body = ({ children, ...props }: BaseProps) => {
+  console.log(props);
+  return (
+    <div css={ModalBodyStyle} {...props}>
+      {children}
+    </div>
+  );
 };
 
-Modal.Footer = ({ children }: ChildrenProps) => {
-  return <div css={ModalFooterStyle}>{children}</div>;
+Modal.Footer = ({ children, ...props }: BaseProps) => {
+  return (
+    <div css={ModalFooterStyle} {...props}>
+      {children}
+    </div>
+  );
 };
 
-Modal.Title = ({ color = "#000", children }: ModalTitleProps) => {
-  return <span css={ModalTitleStyle(color)}>{children}</span>;
+Modal.Title = ({ children, ...props }: BaseProps) => {
+  return (
+    <span css={ModalTitleStyle} {...props}>
+      {children}
+    </span>
+  );
 };
 
 export default Modal;

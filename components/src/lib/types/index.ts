@@ -1,9 +1,13 @@
-export interface ChildrenProps {
+export interface BaseProps {
   /** 자식 요소 (JSX.Element 또는 문자열 등) */
   children: React.ReactNode;
+  /** className 지정 (style) */
+  className?: string;
+  /** inline style 지정 (style) */
+  style?: React.CSSProperties;
 }
 
-export interface ModalProps extends ChildrenProps {
+export interface ModalProps extends BaseProps {
   /** 모달을 보여줄지 여부 */
   show: boolean;
 
@@ -20,12 +24,7 @@ export interface ModalProps extends ChildrenProps {
   gap?: number;
 }
 
-export interface ModalHeaderProps extends ChildrenProps {
+export interface ModalHeaderProps extends BaseProps {
   /** 닫기 버튼(X)을 표시할지 여부 */
   closeButton?: boolean;
-}
-
-export interface ModalTitleProps extends ChildrenProps {
-  /** 텍스트 색상 설정 */
-  color?: string;
 }
