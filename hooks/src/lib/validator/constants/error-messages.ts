@@ -1,3 +1,5 @@
+import { CardBrand } from "../../constants/CardBrand";
+
 export type FieldErrorCode = {
   cvc: "INVALID_LENGTH" | "INVALID_NUMBER";
   password: "INVALID_LENGTH" | "INVALID_FORMAT" | "INVALID_CHARACTER";
@@ -23,7 +25,6 @@ export const CVC_ERROR_MESSAGES = {
 // Card number error messages
 export const CARD_NUMBER_ERROR_MESSAGES = {
   INVALID_NUMBER: "카드 번호는 숫자만 입력 가능합니다",
-  INVALID_LENGTH: "카드 번호는 16자리여야 합니다",
   INVALID_FORMAT: "카드 번호 형식이 올바르지 않습니다",
   INVALID_CHECKSUM: "실제 존재하지 않는 카드 번호입니다",
 } as const;
