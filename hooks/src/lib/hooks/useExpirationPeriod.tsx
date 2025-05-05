@@ -88,7 +88,8 @@ const expiryRules: Rule[] = [
 
 const validateExpiry = (
   monthString: string,
-  yearString: string
+  yearString: string,
+  rules: Rule[] = []
 ): ValidationResult => {
   if (monthString === '' && yearString === '')
     return { message: '', field: null };
@@ -96,9 +97,9 @@ const validateExpiry = (
   const month = Number(monthString);
   const year = Number(yearString);
 
-  const invalid = expiryRules.find(
-    (rule) => !rule.test({ monthString, yearString, month, year })
-  );
+  const invalid = expiryRules
+    .concat(rules)
+    .find((rule) => !rule.test({ monthString, yearString, month, year }));
 
   if (invalid) {
     return { message: invalid.message, field: invalid.field };
@@ -106,7 +107,7 @@ const validateExpiry = (
   return { message: '', field: null };
 };
 
-function useExpirationPeriod() {
+function useExpirationPeriod(rules?: Rule[]) {
   const [value, setValue] = useState<ExpirationPeriod>({
     month: '',
     year: '',
@@ -131,7 +132,8 @@ function useExpirationPeriod() {
 
   const { message: errorMessage, field } = validateExpiry(
     value.month,
-    value.year
+    value.year,
+    rules
   );
 
   const isError = field
