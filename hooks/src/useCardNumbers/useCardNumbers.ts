@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { ChangeEvent, useState } from 'react';
 import isInteger from '../validate/isInteger';
 import isUnderMaxLength from '../validate/isUnderMaxLength';
 import useError from '../useError/useError';

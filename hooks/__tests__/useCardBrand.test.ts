@@ -2,7 +2,6 @@ import { renderHook } from '@testing-library/react';
 import { act } from 'react';
 import useCardBrand from '../src/useCardBrand/useCardBrand';
 import { CARD_BRAND_ERROR_MESSAGE } from '../src/useCardBrand/useCardBrand';
-import { create } from 'domain';
 import createInputChangeEvent from './utils/createInputChangeEvent';
 
 describe('useCardBrand hook 테스트', () => {
