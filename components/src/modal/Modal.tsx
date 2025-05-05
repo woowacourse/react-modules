@@ -28,24 +28,16 @@ function ModalContainer({
     }
   }, [open]);
 
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (modalRef.current && event.target === modalRef.current) {
-        onClose();
-      }
-    };
-
-    if (open) {
-      document.addEventListener('mousedown', handleClickOutside);
+  const handleClickOutside = (event: React.MouseEvent<HTMLDialogElement>) => {
+    const { target } = event;
+    if (target === event.currentTarget) {
+      onClose();
     }
-
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
-  }, [open, onClose]);
+  };
 
   return (
     <StyledModalContainer
+      onClick={handleClickOutside}
       onClose={onClose}
       isBottom={position === 'bottom'}
       style={style}
@@ -86,7 +78,7 @@ function Title({
 const StyledModalContainer = styled.dialog<{ isBottom: boolean }>`
   box-sizing: border-box;
   min-width: 400px;
-  padding: 24px 32px;
+  padding: 0px;
   position: relative;
 
   border: none;
@@ -119,6 +111,8 @@ const bottomModalContainer = css`
 `;
 
 const ModalWrapper = styled.div<{ isBottom: boolean }>`
+  padding: 24px 32px;
+
   display: flex;
   flex-direction: column;
   gap: ${(props) => (props.isBottom ? '16px' : '24px')};
