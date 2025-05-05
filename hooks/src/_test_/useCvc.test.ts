@@ -45,11 +45,20 @@ describe('useCvc 실패 케이스', () => {
     expect(result.current.errorState.errorMessage).toBe('숫자만 입력하세요.');
   });
 
-  it('3자리 숫자가 아니면 "3자리 숫자를 입력하세요." 에러가 반환된다', () => {
+  it('4자리 숫자일 경우 "3자리 숫자를 입력하세요." 에러가 반환된다', () => {
     const { result } = renderHook(() => useCvc());
 
     act(() => {
       result.current.handleCvcChange({ target: { value: '1234' } } as ChangeEvent<HTMLInputElement>);
+    });
+
+    expect(result.current.errorState.errorMessage).toBe('3자리 숫자를 입력하세요.');
+  });
+
+  it('2자리 숫자일 경우 "3자리 숫자를 입력하세요." 에러가 반환된다', () => {
+    const { result } = renderHook(() => useCvc());
+
+    act(() => {
       result.current.handleCvcChange({ target: { value: '34' } } as ChangeEvent<HTMLInputElement>);
     });
 

@@ -45,11 +45,20 @@ describe('usePassword 실패 케이스', () => {
     expect(result.current.errorState.errorMessage).toBe('숫자만 입력하세요.');
   });
 
-  it('3자리 숫자가 아니면 "3자리 숫자를 입력하세요." 에러가 반환된다', () => {
+  it('3자리 숫자일 경우 "2자리 숫자를 입력하세요." 에러가 반환된다', () => {
     const { result } = renderHook(() => usePassword());
 
     act(() => {
       result.current.handlePasswordChange({ target: { value: '123' } } as ChangeEvent<HTMLInputElement>);
+    });
+
+    expect(result.current.errorState.errorMessage).toBe('2자리 숫자를 입력하세요.');
+  });
+
+  it('1자리 숫자일 경우 "2자리 숫자를 입력하세요." 에러가 반환된다', () => {
+    const { result } = renderHook(() => usePassword());
+
+    act(() => {
       result.current.handlePasswordChange({ target: { value: '3' } } as ChangeEvent<HTMLInputElement>);
     });
 

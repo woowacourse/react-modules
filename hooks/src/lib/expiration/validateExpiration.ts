@@ -31,7 +31,7 @@ const validateExpiration = (expiration: ExpirationStateType) => {
 
     if (!validation.isValidYear(value) && key === 'year' && value !== '') {
       errorState[key] = true;
-      errorMessage = '유효한 연도를 입력하세요.';
+      errorMessage = '지나지 않은 연도를 입력해주세요.';
       break;
     }
 

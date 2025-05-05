@@ -59,12 +59,28 @@ describe('useExpiration 실패 케이스', () => {
     expect(result.current.errorState.errorMessage).toBe('2자리 숫자를 입력하세요.');
   });
 
-  it('유효하지 않은 연도를 입력하면 "유효한 연도를 입력하세요." 에러가 반환된다', () => {
+  it('0월일 경우 "유효한 월을 입력하세요." 에러가 반환된다', () => {
+    const { result } = renderHook(() => useExpiration());
+    act(() => {
+      result.current.handleExpirationChange({ target: { value: '00' } } as ChangeEvent<HTMLInputElement>, 'month');
+    });
+    expect(result.current.errorState.errorMessage).toBe('유효한 월을 입력하세요.');
+  });
+
+  it('13월일 경우 "유효한 월을 입력하세요." 에러가 반환된다', () => {
+    const { result } = renderHook(() => useExpiration());
+    act(() => {
+      result.current.handleExpirationChange({ target: { value: '13' } } as ChangeEvent<HTMLInputElement>, 'month');
+    });
+    expect(result.current.errorState.errorMessage).toBe('유효한 월을 입력하세요.');
+  });
+
+  it('현재 연도보다 전년도를 입력하면 "지나지 않은 날짜를 입력해주세요." 에러가 반환된다', () => {
     const { result } = renderHook(() => useExpiration());
     act(() => {
       result.current.handleExpirationChange({ target: { value: '23' } } as ChangeEvent<HTMLInputElement>, 'year');
     });
-    expect(result.current.errorState.errorMessage).toBe('유효한 연도를 입력하세요.');
+    expect(result.current.errorState.errorMessage).toBe('지나지 않은 연도를 입력해주세요.');
   });
 
   it('유효한 형식이지만 현재보다 이전 날짜면 "지나지 않은 날짜를 입력해주세요." 에러가 반환된다', () => {
