@@ -1,24 +1,17 @@
 {
+  "extends": "./tsconfig.app.json",
   "compilerOptions": {
-    "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.node.tsbuildinfo",
-    "target": "ES2022",
-    "lib": ["ES2023"],
-    "module": "ESNext",
-    "skipLibCheck": true,
-
-    /* Bundler mode */
-    "moduleResolution": "bundler",
-    "allowImportingTsExtensions": true,
-    "isolatedModules": true,
-    "moduleDetection": "force",
-    "noEmit": true,
-
-    /* Linting */
-    "strict": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "noFallthroughCasesInSwitch": true,
-    "noUncheckedSideEffectImports": true
+    "composite": true, // 프로젝트 참조 빌드 허용
+    "declaration": true, // .d.ts 생성
+    "declarationMap": true, // 선택 사항: .d.ts.map 생성
+    "emitDeclarationOnly": true, // JS 출력 없이 선언만
+    "declarationDir": "dist", // 선언 파일 출력 경로
+    "outDir": "dist", // tsc 단독 실행 시 JS 출력 경로
+    "rootDir": "src", // 소스 루트
+    "jsx": "react-jsx", // JSX → React 트랜스파일
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true
   },
-  "include": ["vite.config.ts"]
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "dist", "**/*.stories.tsx"]
 }

@@ -1,0 +1,6 @@
+*.test.*
+**/*.stories.*
+dist/Dialog.stories.tsx
+.vscode/
+.env
+tsconfig.json
