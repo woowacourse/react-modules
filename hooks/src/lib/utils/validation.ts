@@ -16,33 +16,29 @@ export const validateNumericString = (
   return { error: false, message: '' };
 };
 
-export const isExpirationDate = (
-  type: 'month' | 'year',
-  value: string
-): ValidateFuncReturnType => {
+export const validateMonth = (value: string): ValidateFuncReturnType => {
   const isNumberError = validateNumericString(value);
   if (isNumberError.error) return isNumberError;
 
-  const num = parseInt(value);
-  if (type === 'month') {
-    return validateMonth(num);
-  } else if (type === 'year') {
-    return validateYear(num);
-  }
-
-  return { error: false, message: '' };
-};
-
-export const validateMonth = (month: number): ValidateFuncReturnType => {
+  const month = parseInt(value, 10);
   if (month < MIN_MONTH || month > MAX_MONTH) {
     return { error: true, message: ERROR_MESSAGE.MONTH_VALID };
   }
   return { error: false, message: '' };
 };
 
-export const validateYear = (year: number): ValidateFuncReturnType => {
+export const validateYear = (value: string): ValidateFuncReturnType => {
+  const isNumberError = validateNumericString(value);
+  if (isNumberError.error) return isNumberError;
+
+  const year = parseInt(value, 10);
   if (year < CURRENT_YEAR) {
     return { error: true, message: ERROR_MESSAGE.YEAR_VALID };
   }
   return { error: false, message: '' };
+};
+
+export const validateExpirationDate = {
+  month: validateMonth,
+  year: validateYear,
 };
