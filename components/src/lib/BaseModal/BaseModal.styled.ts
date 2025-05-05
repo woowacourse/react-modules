@@ -59,4 +59,10 @@ export const Title = styled.h2`
 export const CloseButton = styled.button`
   width: 1.5rem;
   height: 1.5rem;
+
+  &:focus {
+    outline: 2px solid #005fcc;
+    outline-offset: 2px;
+    box-shadow: 0 0 0 4px rgba(0, 95, 204, 0.15);
+  }
 `;

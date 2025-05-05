@@ -12,7 +12,7 @@ function App() {
           title="카드사 선택"
           size="medium"
           onRequestClose={() => setIsOpen(false)}
-          onSubmit={(value: string) => {
+          onSubmit={(value) => {
             alert(value);
           }}
         />

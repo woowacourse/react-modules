@@ -30,4 +30,10 @@ export const StyledPolymorphic = styled(Polymorphic)<{
   font-weight: 700;
   ${({ variant }) => getButtonStyle(variant)}
   cursor: pointer;
+
+  &:focus {
+    outline: 2px solid #005fcc;
+    outline-offset: 2px;
+    box-shadow: 0 0 0 4px rgba(0, 95, 204, 0.15);
+  }
 `;

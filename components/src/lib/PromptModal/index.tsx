@@ -40,7 +40,7 @@ function PromptModal({
       size={size}
       hasCloseButton={false}
       containerAs="form"
-      content={<Input ref={inputRef} {...inputAttributes} />}
+      content={<Input autoFocus ref={inputRef} {...inputAttributes} />}
       buttonElements={[
         <Button
           key="secondary"

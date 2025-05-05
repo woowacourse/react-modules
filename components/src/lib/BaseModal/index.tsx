@@ -25,7 +25,7 @@ function BaseModal({
         <S.ModalHeader>
           <S.Title>{title}</S.Title>
           {hasCloseButton && (
-            <S.CloseButton type="button" onClick={onRequestClose}>
+            <S.CloseButton autoFocus type="button" onClick={onRequestClose}>
               <img src={CloseIcon} alt="닫기 버튼" />
             </S.CloseButton>
           )}

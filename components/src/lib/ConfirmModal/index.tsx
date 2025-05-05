@@ -32,6 +32,7 @@ function ConfirmModal({
       content={<S.ConfirmText>{confirmText}</S.ConfirmText>}
       buttonElements={[
         <Button
+          autoFocus
           key="secondary"
           variant="secondary"
           type="button"

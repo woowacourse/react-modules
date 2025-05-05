@@ -29,7 +29,12 @@ function AlertModal({
       modalRef={modalRef}
       content={<S.AlertText>{alertText}</S.AlertText>}
       buttonElements={[
-        <Button variant="primary" type="button" onClick={onRequestClose}>
+        <Button
+          autoFocus
+          variant="primary"
+          type="button"
+          onClick={onRequestClose}
+        >
           확인
         </Button>,
       ]}
