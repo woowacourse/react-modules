@@ -1,6 +1,14 @@
 import { useState } from 'react';
-import { VALIDATION_RULE } from './constants/validationRule';
+import { INPUT_RULE } from './constants/inputRule';
 import { ERROR_MESSAGE } from './constants/errorMessage';
+import { isOverInputLength } from './utils/overInputLength';
+import {
+  isEmpty,
+  isNumber,
+  isValidLength,
+  isValidMonth,
+  isValidYear,
+} from './utils/validate';
 
 type ValitationResult = {
   date: dateType;
@@ -31,7 +39,7 @@ export default function useExpiryDate(): ValitationResult {
   const [date, setDate] = useState<dateType>({ month: '', year: '' });
   const [error, setError] = useState<errorType[]>(
     Array.from(
-      { length: VALIDATION_RULE.EXPIRY_DATE.MAX_LENGTH },
+      { length: INPUT_RULE.EXPIRY_DATE.MAX_LENGTH },
       () => initialError
     )
   );
@@ -48,7 +56,7 @@ export default function useExpiryDate(): ValitationResult {
   };
 
   const updateExpiryDate = (value: string, dateUnit: 'month' | 'year') => {
-    if (value.length > VALIDATION_RULE.EXPIRY_DATE.MAX_LENGTH) return;
+    if (isOverInputLength(value, INPUT_RULE.EXPIRY_DATE.MAX_LENGTH)) return;
 
     if (dateUnit === 'month') {
       validateMonth(value);
@@ -62,12 +70,12 @@ export default function useExpiryDate(): ValitationResult {
   };
 
   const validateMonth = (value: string) => {
-    if (value === '') {
+    if (isEmpty(value)) {
       updateError({ index: 0, isValid: false });
       return;
     }
 
-    if (!/^\d*$/.test(value)) {
+    if (!isNumber(value)) {
       updateError({
         index: 0,
         isValid: true,
@@ -75,7 +83,7 @@ export default function useExpiryDate(): ValitationResult {
       });
       return;
     }
-    if (value.length < VALIDATION_RULE.EXPIRY_DATE.MAX_LENGTH) {
+    if (!isValidLength(value, INPUT_RULE.EXPIRY_DATE.MAX_LENGTH)) {
       updateError({
         index: 0,
         isValid: true,
@@ -83,10 +91,7 @@ export default function useExpiryDate(): ValitationResult {
       });
       return;
     }
-    if (
-      Number(value) < VALIDATION_RULE.EXPIRY_DATE.MONTH_MIN ||
-      Number(value) > VALIDATION_RULE.EXPIRY_DATE.MONTH_MAX
-    ) {
+    if (!isValidMonth(value)) {
       updateError({
         index: 0,
         isValid: true,
@@ -98,12 +103,12 @@ export default function useExpiryDate(): ValitationResult {
   };
 
   const validateYear = (value: string) => {
-    if (value === '') {
+    if (isEmpty(value)) {
       updateError({ index: 1, isValid: false });
       return;
     }
 
-    if (!/^\d*$/.test(value)) {
+    if (!isNumber(value)) {
       updateError({
         index: 1,
         isValid: true,
@@ -111,7 +116,7 @@ export default function useExpiryDate(): ValitationResult {
       });
       return;
     }
-    if (value.length < VALIDATION_RULE.EXPIRY_DATE.MAX_LENGTH) {
+    if (!isValidLength(value, INPUT_RULE.EXPIRY_DATE.MAX_LENGTH)) {
       updateError({
         index: 1,
         isValid: true,
@@ -119,7 +124,7 @@ export default function useExpiryDate(): ValitationResult {
       });
       return;
     }
-    if (Number(value) < VALIDATION_RULE.EXPIRY_DATE.YEAR_MIN) {
+    if (!isValidYear(value)) {
       updateError({
         index: 1,
         isValid: true,

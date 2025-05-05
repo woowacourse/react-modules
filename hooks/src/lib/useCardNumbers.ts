@@ -1,6 +1,8 @@
 import { useState } from 'react';
-import { VALIDATION_RULE } from './constants/validationRule';
+import { INPUT_RULE } from './constants/inputRule';
 import { ERROR_MESSAGE } from './constants/errorMessage';
+import { isEmpty, isValidLength, isNumber } from './utils/validate';
+import { isOverInputLength } from './utils/overInputLength';
 
 type ValitationResult = {
   numbers: string[];
@@ -26,7 +28,7 @@ export default function useCardNumbers(): ValitationResult {
   const [numbers, setNumbers] = useState(['', '', '', '']);
   const [error, setError] = useState<ErrorType[]>(
     Array.from(
-      { length: VALIDATION_RULE.CARD_NUMBERS.MAX_LENGTH },
+      { length: INPUT_RULE.CARD_NUMBERS.MAX_LENGTH },
       () => initialError
     )
   );
@@ -43,7 +45,7 @@ export default function useCardNumbers(): ValitationResult {
   };
 
   const updateCardNumbers = (value: string, index: number) => {
-    if (value.length > VALIDATION_RULE.CARD_NUMBERS.MAX_LENGTH) return;
+    if (isOverInputLength(value, INPUT_RULE.CARD_NUMBERS.MAX_LENGTH)) return;
 
     validate(value, index);
 
@@ -55,12 +57,12 @@ export default function useCardNumbers(): ValitationResult {
   };
 
   const validate = (value: string, index: number) => {
-    if (value === '') {
+    if (isEmpty(value)) {
       updateError({ index, isValid: false });
       return;
     }
 
-    if (!/^\d*$/.test(value)) {
+    if (!isNumber(value)) {
       updateError({
         index,
         isValid: true,
@@ -68,7 +70,7 @@ export default function useCardNumbers(): ValitationResult {
       });
       return;
     }
-    if (value.length < VALIDATION_RULE.CARD_NUMBERS.MAX_LENGTH) {
+    if (!isValidLength(value, INPUT_RULE.CARD_NUMBERS.MAX_LENGTH)) {
       updateError({
         index,
         isValid: true,

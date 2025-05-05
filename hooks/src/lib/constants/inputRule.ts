@@ -1,4 +1,4 @@
-export const VALIDATION_RULE = {
+export const INPUT_RULE = {
   CARD_NUMBERS: {
     MAX_LENGTH: 4,
   },

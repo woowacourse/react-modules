@@ -1,6 +1,8 @@
 import { useState } from 'react';
-import { VALIDATION_RULE } from './constants/validationRule';
+import { INPUT_RULE } from './constants/inputRule';
 import { ERROR_MESSAGE } from './constants/errorMessage';
+import { isEmpty, isValidLength, isNumber } from './utils/validate';
+import { isOverInputLength } from './utils/overInputLength';
 
 type ValitationResult = {
   cvc: string;
@@ -34,7 +36,7 @@ export default function useCvcNumber(): ValitationResult {
   };
 
   const updateCvc = (value: string) => {
-    if (value.length > 3) return;
+    if (isOverInputLength(value, INPUT_RULE.CVC.MAX_LENGTH)) return;
 
     validate(value);
 
@@ -42,19 +44,19 @@ export default function useCvcNumber(): ValitationResult {
   };
 
   const validate = (value: string) => {
-    if (value === '') {
+    if (isEmpty(value)) {
       updateError({ isValid: false });
       return;
     }
 
-    if (!/^\d*$/.test(value)) {
+    if (!isNumber(value)) {
       updateError({
         isValid: true,
         errorMessage: ERROR_MESSAGE.CVC.NOT_A_NUMBER,
       });
       return;
     }
-    if (value.length < VALIDATION_RULE.CVC.MAX_LENGTH) {
+    if (!isValidLength(value, INPUT_RULE.CVC.MAX_LENGTH)) {
       updateError({
         isValid: true,
         errorMessage: ERROR_MESSAGE.CVC.INVALID_LENGTH,
