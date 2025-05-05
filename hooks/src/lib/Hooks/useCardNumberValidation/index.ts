@@ -1,21 +1,47 @@
-import { useState } from 'react';
-import { isNumber } from '../../utils/validation';
-import checkNoError from '../../utils/checkNoError';
+import { useState } from "react";
+import { isNumber } from "../../utils/validation";
+import checkNoError from "../../utils/checkNoError";
 import {
+  CardNumberType,
   ErrorMessageType,
+  HookReturnType,
   ListErrorType,
-  ValidationHookReturnType,
+  SetValueFn,
   ValidInputFuncType,
-} from '../../types';
+} from "../../types";
 
-const useCardNumberValidation = (): ValidationHookReturnType => {
+const KEY_INDEX_MATCH = ["first", "second", "third", "forth"];
+
+const useCardNumber = (): HookReturnType<"cardNumber"> => {
+  /** 상태 및 변수 관리 */
+  const [cardNumber, setCardNumber] = useState<CardNumberType>({
+    first: "",
+    second: "",
+    third: "",
+    forth: "",
+  });
+
   const [errors, setErrors] = useState<ListErrorType>([
     false,
     false,
     false,
     false,
   ]);
-  const [errorMessage, setErrorMessage] = useState<ErrorMessageType>('');
+  const [errorMessage, setErrorMessage] = useState<ErrorMessageType>("");
+
+  /** setter(상태업데이트) */
+  const onChange: SetValueFn<CardNumberType[keyof CardNumberType]> = (
+    value,
+    index
+  ) => {
+    if (index === undefined) return;
+
+    // setter 상태업데이트
+    setCardNumber((prev) => ({
+      ...prev,
+      [KEY_INDEX_MATCH[index]]: value,
+    }));
+  };
 
   const validateInput: ValidInputFuncType = (value: string, index: number) => {
     const { error, message } = isNumber(value);
@@ -32,6 +58,8 @@ const useCardNumberValidation = (): ValidationHookReturnType => {
   const noError = checkNoError(errors);
 
   return {
+    state: cardNumber,
+    onChange,
     errors,
     errorMessage,
     validateInput,
@@ -39,4 +67,4 @@ const useCardNumberValidation = (): ValidationHookReturnType => {
   };
 };
 
-export default useCardNumberValidation;
+export default useCardNumber;

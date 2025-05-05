@@ -2,10 +2,10 @@ export type SingleErrorType = boolean;
 export type ListErrorType = boolean[];
 
 export type ErrorMessageType =
-  | ''
-  | '숫자만 입력 가능합니다.'
-  | '유효하지 않은 월입니다.'
-  | '유효하지 않은 연도입니다.';
+  | ""
+  | "숫자만 입력 가능합니다."
+  | "유효하지 않은 월입니다."
+  | "유효하지 않은 연도입니다.";
 
 export interface ValidateFuncReturnType {
   error: boolean;
@@ -20,6 +20,39 @@ export type ValidInputFuncType = ValidWithoutIndex | ValidWithIndex;
 export interface ValidationHookReturnType {
   errors: SingleErrorType | ListErrorType;
   errorMessage: ErrorMessageType;
-  validateInput:  ValidInputFuncType;
+  validateInput: ValidInputFuncType;
   noError: boolean;
 }
+
+export interface HookReturnType<T extends keyof CardInformationType> {
+  state: CardInformationType[T];
+  onChange: setCardInformationType[T];
+  errors: SingleErrorType | ListErrorType;
+  errorMessage: ErrorMessageType;
+  validateInput: ValidInputFuncType;
+  noError: boolean;
+}
+
+export type CardInformationType = {
+  cardNumber: CardNumberType;
+  expirationDate: ExpirationDateType;
+  cvcNumber: CvcNumberType;
+  password: PasswordType;
+};
+
+export type setCardInformationType = {
+  cardNumber: SetValueFn<CardNumberType[keyof CardNumberType]>;
+  expirationDate: SetValueFn<ExpirationDateType[number]>;
+  cvcNumber: SetValueFn<CvcNumberType>;
+  password: SetValueFn<PasswordType>;
+};
+
+export type CardNumberType = Record<
+  "first" | "second" | "third" | "forth",
+  string
+>;
+export type ExpirationDateType = [string, string];
+export type CvcNumberType = string;
+export type PasswordType = string;
+
+export type SetValueFn<T> = (value: T, index?: number) => void;

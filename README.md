@@ -84,15 +84,22 @@ Module
 - [x] (모달) 타입, 스타일, 훅, context 파일 별도 분리
 
 - [ ] (훅) 에러 로직 훅 단일화 처리 (base error 훅)
+- [ ] 상태값 (base state 훅 제작)
 - [ ] (훅) 실제 입력 상태값 함께 관리
-  - [ ] `const { cardNumber, onChange, isValid, errorMessage } = useCardNumber();`
-  - [ ] 상태값 (base state 훅 제작)
-- [ ] errors와 errorMsesage도 일반 변수로 관리 (상태 x -> 실제 입력값에 의존)
+  - [x] `const { cardNumber, onChange, isValid, errorMessage } = useCardNumber();`
+  - [x] useCardNumber 훅
+    - [x] cardNumber -> 객체로 상태 관리
+  - [ ] useExpirationDate 훅
+    - [ ] ExpirationDate -> 객체로 상태 관리
+  - [ ] useCvcNumber 훅
+  - [ ] usePassword 훅
+- [ ] isComplete 변수 return (모든 필드가 최대 입력을 쳤는지 확인)
+  - [ ] noError -> isErrorComplete으로 이름 변경
+  - [ ] isComplete & isErrorComplete 합쳐서 -> isValid 변수 return
+- [ ] errors와 errorMessage도 일반 변수로 관리 (상태 x -> 실제 입력값에 의존)
 - [ ] isNumber 유틸 함수 이름 변경 (validateNumericString)
-- [ ] error변수 -> isValid 변수로 네이밍 변경 (긍정)
 - [ ] 월 검증 및 년 검증 함수 분리 (validateMonth, validateYear)
-- [ ] expriationDate 훅 -> 인덱스 기반 접근 대신 month와 year 상태를 각각 관리
-  - [ ] cardNumber 훅 -> 객체로 상태 관리
+- [ ] expirationDate 훅 -> 인덱스 기반 접근 대신 month와 year 상태를 각각 관리
 - [ ] 유효성 훅 길이 체크
 - [x] useKeyEscClose 훅 의존성 배열 onHide 함수 채우기
 - [x] Context API 단일 값 수정 / null 타입 제거
