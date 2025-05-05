@@ -14,25 +14,11 @@ npm i @muffin2219/hooks
 ### 📍 Example
 
 ```tsx
-import {useState} from 'react';
 import {useCardNumberValidation} from '@muffin2219/hooks';
 
 function App() {
-  const [cardNumber, setCardNumber] = useState({
-    first: '',
-    second: '',
-    third: '',
-    fourth: '',
-  });
-  const cardNumberValidationResult = useCardNumberValidation(cardNumber);
-
-  const handleCardNumberChange = (
-    e: React.ChangeEvent<HTMLInputElement>,
-    field: 'first' | 'second' | 'third' | 'fourth'
-  ) => {
-    const inputValue = e.target.value;
-    setCardNumber((prev) => ({...prev, [field]: inputValue}));
-  };
+  const {cardNumber, onChange, cardNumberValidationResult} =
+    useCardNumberValidation();
 
   return (
     <>
@@ -42,28 +28,28 @@ function App() {
         value={cardNumber.first}
         type="text"
         maxLength={4}
-        onChange={(e) => handleCardNumberChange(e, 'first')}
+        onChange={(e) => onChange('first', e.target.value)}
       />
       <input
         key="second"
         value={cardNumber.second}
         type="text"
         maxLength={4}
-        onChange={(e) => handleCardNumberChange(e, 'second')}
+        onChange={(e) => onChange('second', e.target.value)}
       />
       <input
         key="third"
         value={cardNumber.third}
         type="text"
         maxLength={4}
-        onChange={(e) => handleCardNumberChange(e, 'third')}
+        onChange={(e) => onChange('third', e.target.value)}
       />
       <input
         key="fourth"
         value={cardNumber.fourth}
         type="text"
         maxLength={4}
-        onChange={(e) => handleCardNumberChange(e, 'fourth')}
+        onChange={(e) => onChange('fourth', e.target.value)}
       />
 
       {cardNumberValidationResult.first.isError && (
