@@ -1,7 +1,7 @@
 {
-  "name": "bunju-summit-modal",
-  "version": "1.0.0",
-  "description": "A modal component for Bunju Summit",
+  "name": "summit-modal",
+  "version": "0.0.0",
+  "description": "A modal component for Summit",
   "type": "module",
   "types": "dist/index.d.ts",
   "main": "dist/index.js",
@@ -10,7 +10,7 @@
   ],
   "scripts": {
     "dev": "vite",
-    "build": "vite build && tsc --emitDeclarationOnly --outDir dist",
+    "build": "vite build && tsc ",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "storybook": "storybook dev -p 6006",
