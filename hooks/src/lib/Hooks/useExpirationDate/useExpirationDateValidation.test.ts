@@ -1,5 +1,5 @@
 import { renderHook, act } from "@testing-library/react";
-import useExpirationDateValidation from ".";
+import useExpirationDate from ".";
 
 describe("useExpirationDate", () => {
   it("useExpirationDate의 초기 상태가 반환된다.", () => {
@@ -7,7 +7,7 @@ describe("useExpirationDate", () => {
       month: "",
       year: "",
     };
-    const { result } = renderHook(() => useExpirationDateValidation());
+    const { result } = renderHook(() => useExpirationDate());
 
     expect(result.current.state).toEqual(initialState);
   });
@@ -20,7 +20,7 @@ describe("useExpirationDate", () => {
     const userInput = "12";
     const index = 0; // input 위치
 
-    const { result } = renderHook(() => useExpirationDateValidation());
+    const { result } = renderHook(() => useExpirationDate());
 
     act(() => {
       result.current.onChange(userInput, index);
@@ -31,7 +31,7 @@ describe("useExpirationDate", () => {
 
   it("useExpirationDate의 초기 에러 상태가 반환된다.", () => {
     const initialErrors = [false, false];
-    const { result } = renderHook(() => useExpirationDateValidation());
+    const { result } = renderHook(() => useExpirationDate());
 
     expect(result.current.errors).toEqual(initialErrors);
   });
@@ -39,7 +39,7 @@ describe("useExpirationDate", () => {
   it("월이 아닌 값이 들어오면 에러메시지를 반환한다.", () => {
     const month = "14";
     const index = 0; // month 위치
-    const { result } = renderHook(() => useExpirationDateValidation());
+    const { result } = renderHook(() => useExpirationDate());
 
     act(() => {
       result.current.validateInput(month, index);
@@ -51,7 +51,7 @@ describe("useExpirationDate", () => {
   it("올해 년도 이전인 값이 들어오면 에러메시지를 반환한다.", () => {
     const year = "14";
     const index = 1; // year 위치
-    const { result } = renderHook(() => useExpirationDateValidation());
+    const { result } = renderHook(() => useExpirationDate());
 
     act(() => {
       result.current.validateInput(year, index);
@@ -63,7 +63,7 @@ describe("useExpirationDate", () => {
   it("현재 에러 상태에 에러가 없다면 noError가 true를 반환한다.", () => {
     const month = "12";
     const index = 0; // month 위치
-    const { result } = renderHook(() => useExpirationDateValidation());
+    const { result } = renderHook(() => useExpirationDate());
 
     act(() => {
       result.current.validateInput(month, index);
