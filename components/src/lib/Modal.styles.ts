@@ -24,8 +24,8 @@ export const ModalContainer = styled.div<ModalContainerProps>`
   border: none;
   padding: 24px 32px;
   overflow-y: auto;
-  width: ${({ width }) => width};
-  height: ${({ height }) => height};
+  width: ${({ width }) => width || 'auto'};
+  height: ${({ height }) => height || 'auto'};
 
   ${({ position }) =>
     position === 'center'
