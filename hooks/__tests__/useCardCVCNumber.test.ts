@@ -4,6 +4,8 @@ import useCardCVCNumber, {
   CARD_CVC_MAX_LENGTH,
 } from '../src/useCardCVCNumber/useCardCVCNumber';
 import { CARD_CVC_ERROR_MESSAGE } from '../src/useCardCVCNumber/useCardCVCNumber';
+import { create } from 'domain';
+import createInputChangeEvent from './utils/createInputChangeEvent';
 
 describe('useCardCVCNumber hook 테스트', () => {
   it('초깃값은 빈 문자열이다', () => {
@@ -19,9 +21,7 @@ describe('useCardCVCNumber hook 테스트', () => {
   it('올바른 숫자를 입력하면 상태가 업데이트된다', () => {
     const { result } = renderHook(() => useCardCVCNumber());
 
-    const event = {
-      target: { value: '123' },
-    } as React.ChangeEvent<HTMLInputElement>;
+    const event = createInputChangeEvent('123');
 
     act(() => {
       result.current.handleCardCVCNumberChange(event);
@@ -34,9 +34,7 @@ describe('useCardCVCNumber hook 테스트', () => {
   it('숫자가 아니면 에러 상태를 반환한다', () => {
     const { result } = renderHook(() => useCardCVCNumber());
 
-    const event = {
-      target: { value: '12a' },
-    } as React.ChangeEvent<HTMLInputElement>;
+    const event = createInputChangeEvent('1bc');
 
     act(() => {
       result.current.handleCardCVCNumberChange(event);
@@ -51,9 +49,7 @@ describe('useCardCVCNumber hook 테스트', () => {
   it(`${CARD_CVC_MAX_LENGTH}자리를 초과하면 에러 상태를 반환한다`, () => {
     const { result } = renderHook(() => useCardCVCNumber());
 
-    const event = {
-      target: { value: '1234' },
-    } as React.ChangeEvent<HTMLInputElement>;
+    const event = createInputChangeEvent('1234');
 
     act(() => {
       result.current.handleCardCVCNumberChange(event);

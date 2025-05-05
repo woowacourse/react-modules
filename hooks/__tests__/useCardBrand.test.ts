@@ -2,6 +2,8 @@ import { renderHook } from '@testing-library/react';
 import { act } from 'react';
 import useCardBrand from '../src/useCardBrand/useCardBrand';
 import { CARD_BRAND_ERROR_MESSAGE } from '../src/useCardBrand/useCardBrand';
+import { create } from 'domain';
+import createInputChangeEvent from './utils/createInputChangeEvent';
 
 describe('useCardBrand hook 테스트', () => {
   const optionValues = ['Visa', 'MasterCard', 'Amex'];
@@ -21,9 +23,7 @@ describe('useCardBrand hook 테스트', () => {
   it('올바른 브랜드를 입력하면 상태가 업데이트된다', () => {
     const { result } = renderHook(() => useCardBrand({ optionValues }));
 
-    const event = {
-      target: { value: 'MasterCard' },
-    } as React.ChangeEvent<HTMLInputElement>;
+    const event = createInputChangeEvent('MasterCard');
 
     act(() => {
       result.current.handleCardBrandChange(event);
@@ -36,9 +36,7 @@ describe('useCardBrand hook 테스트', () => {
   it('옵션에 없는 값을 입력하면 에러 상태를 반환한다', () => {
     const { result } = renderHook(() => useCardBrand({ optionValues }));
 
-    const event = {
-      target: { value: 'NotABrand' },
-    } as React.ChangeEvent<HTMLInputElement>;
+    const event = createInputChangeEvent('NotAValidBrand');
 
     act(() => {
       result.current.handleCardBrandChange(event);

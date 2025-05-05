@@ -4,6 +4,8 @@ import useCardPassword, {
   CARD_PASSWORD_MAX_LENGTH,
 } from '../src/useCardPassword/useCardPassword';
 import { CARD_PASSWORD_ERROR_MESSAGE } from '../src/useCardPassword/useCardPassword';
+import { create } from 'domain';
+import createInputChangeEvent from './utils/createInputChangeEvent';
 
 describe('useCardPassword hook 테스트', () => {
   it('초깃값은 빈 문자열이다', () => {
@@ -19,9 +21,7 @@ describe('useCardPassword hook 테스트', () => {
   it('올바른 숫자를 입력하면 상태가 업데이트된다', () => {
     const { result } = renderHook(() => useCardPassword());
 
-    const event = {
-      target: { value: '12' },
-    } as React.ChangeEvent<HTMLInputElement>;
+    const event = createInputChangeEvent('12');
 
     act(() => {
       result.current.handleCardPasswordChange(event);
@@ -34,9 +34,7 @@ describe('useCardPassword hook 테스트', () => {
   it('숫자가 아니면 에러 상태를 반환한다', () => {
     const { result } = renderHook(() => useCardPassword());
 
-    const event = {
-      target: { value: '1a' },
-    } as React.ChangeEvent<HTMLInputElement>;
+    const event = createInputChangeEvent('1b');
 
     act(() => {
       result.current.handleCardPasswordChange(event);
@@ -51,9 +49,7 @@ describe('useCardPassword hook 테스트', () => {
   it(`${CARD_PASSWORD_MAX_LENGTH}자리를 초과하면 에러 상태를 반환한다`, () => {
     const { result } = renderHook(() => useCardPassword());
 
-    const event = {
-      target: { value: '123' },
-    } as React.ChangeEvent<HTMLInputElement>;
+    const event = createInputChangeEvent('123');
 
     act(() => {
       result.current.handleCardPasswordChange(event);

@@ -4,6 +4,8 @@ import { act } from 'react';
 import useCardExpirationDate, {
   CARD_EXPIRATION_DATE_MAX_LENGTH,
 } from '../src/useCardExpirationDate/useCardExpirationDate';
+import { create } from 'domain';
+import createInputChangeEvent from './utils/createInputChangeEvent';
 
 describe('useCardExpirationDate hook 테스트', () => {
   it('초깃값은 빈 문자열이다', () => {
@@ -37,11 +39,7 @@ describe('useCardExpirationDate hook 테스트', () => {
       })
     );
 
-    const event = {
-      target: {
-        value: '11',
-      },
-    } as React.ChangeEvent<HTMLInputElement>;
+    const event = createInputChangeEvent('11');
 
     act(() => {
       result.current.handleCardExpirationDateChange({ target: 'MONTH' })(event);
@@ -56,11 +54,7 @@ describe('useCardExpirationDate hook 테스트', () => {
     it(`${CARD_EXPIRATION_DATE_MAX_LENGTH}자리 이상의 input이 들어오면 에러 상태를 반환한다`, () => {
       const { result } = renderHook(() => useCardExpirationDate());
 
-      const event = {
-        target: {
-          value: '123',
-        },
-      } as React.ChangeEvent<HTMLInputElement>;
+      const event = createInputChangeEvent('123');
 
       act(() => {
         result.current.handleCardExpirationDateChange({ target: 'MONTH' })(
@@ -76,11 +70,7 @@ describe('useCardExpirationDate hook 테스트', () => {
     it('숫자가 아닌 input이 들어오면 에러 상태를 반환한다', () => {
       const { result } = renderHook(() => useCardExpirationDate());
 
-      const event = {
-        target: {
-          value: '1a',
-        },
-      } as React.ChangeEvent<HTMLInputElement>;
+      const event = createInputChangeEvent('1a');
 
       act(() => {
         result.current.handleCardExpirationDateChange({ target: 'MONTH' })(
@@ -97,11 +87,7 @@ describe('useCardExpirationDate hook 테스트', () => {
       it('입력된 달이 1보다 작으면 오류를 발생시킨다.', () => {
         const { result } = renderHook(() => useCardExpirationDate());
 
-        const event = {
-          target: {
-            value: '00',
-          },
-        } as React.ChangeEvent<HTMLInputElement>;
+        const event = createInputChangeEvent('00');
 
         act(() => {
           result.current.handleCardExpirationDateChange({ target: 'MONTH' })(
@@ -117,11 +103,7 @@ describe('useCardExpirationDate hook 테스트', () => {
       it('입력된 달이 12보다 크면 오류를 발생시킨다.', () => {
         const { result } = renderHook(() => useCardExpirationDate());
 
-        const event = {
-          target: {
-            value: '13',
-          },
-        } as React.ChangeEvent<HTMLInputElement>;
+        const event = createInputChangeEvent('13');
 
         act(() => {
           result.current.handleCardExpirationDateChange({ target: 'MONTH' })(
@@ -147,11 +129,9 @@ describe('useCardExpirationDate hook 테스트', () => {
         })
       );
 
-      const event = {
-        target: {
-          value: '0' + String(Number(currentMonth) - 1),
-        },
-      } as React.ChangeEvent<HTMLInputElement>;
+      const event = createInputChangeEvent(
+        '0' + String(Number(currentMonth) - 1)
+      );
 
       act(() => {
         result.current.handleCardExpirationDateChange({ target: 'MONTH' })(
@@ -175,11 +155,7 @@ describe('useCardExpirationDate hook 테스트', () => {
         })
       );
 
-      const event = {
-        target: {
-          value: String(currentYear - 1),
-        },
-      } as React.ChangeEvent<HTMLInputElement>;
+      const event = createInputChangeEvent(String(currentYear - 1));
 
       act(() => {
         result.current.handleCardExpirationDateChange({ target: 'YEAR' })(
@@ -204,11 +180,7 @@ describe('useCardExpirationDate hook 테스트', () => {
       })
     );
 
-    const event = {
-      target: {
-        value: '0',
-      },
-    } as React.ChangeEvent<HTMLInputElement>;
+    const event = createInputChangeEvent('0');
 
     act(() => {
       result.current.handleCardExpirationDateChange({ target: 'MONTH' })(event);

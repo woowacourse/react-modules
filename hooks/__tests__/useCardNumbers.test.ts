@@ -4,6 +4,8 @@ import useCardNumbers, {
   CARD_NUMBER_MAX_LENGTH,
 } from '../src/useCardNumbers/useCardNumbers';
 import { act } from 'react';
+import { create } from 'domain';
+import createInputChangeEvent from './utils/createInputChangeEvent';
 
 describe('useCardNumbers hook 테스트', () => {
   it('초깃값은 빈 문자열이다', () => {
@@ -38,11 +40,7 @@ describe('useCardNumbers hook 테스트', () => {
   it('handleCardNumbersChange를 호출하면 카드 번호가 변경된다', () => {
     const { result } = renderHook(() => useCardNumbers());
 
-    const event = {
-      target: {
-        value: '1234',
-      },
-    } as React.ChangeEvent<HTMLInputElement>;
+    const event = createInputChangeEvent('1234');
 
     act(() => {
       result.current.handleCardNumbersChange({ target: 'FIRST' })(event);
@@ -59,11 +57,7 @@ describe('useCardNumbers hook 테스트', () => {
     it(`${CARD_NUMBER_MAX_LENGTH}자리 이상의 input이 들어오면 에러 상태를 반환한다`, () => {
       const { result } = renderHook(() => useCardNumbers());
 
-      const event = {
-        target: {
-          value: '12345',
-        },
-      } as React.ChangeEvent<HTMLInputElement>;
+      const event = createInputChangeEvent('12345');
 
       act(() => {
         result.current.handleCardNumbersChange({ target: 'FIRST' })(event);
@@ -77,11 +71,7 @@ describe('useCardNumbers hook 테스트', () => {
     it('숫자가 아닌 input이 들어오면 에러 상태를 반환한다', () => {
       const { result } = renderHook(() => useCardNumbers());
 
-      const event = {
-        target: {
-          value: '11a',
-        },
-      } as React.ChangeEvent<HTMLInputElement>;
+      const event = createInputChangeEvent('1a');
 
       act(() => {
         result.current.handleCardNumbersChange({ target: 'FIRST' })(event);
