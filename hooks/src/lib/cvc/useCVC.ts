@@ -1,4 +1,4 @@
-import { ChangeEvent, useCallback, useState } from 'react';
+import { useCallback, useState } from 'react';
 import { CVC_ERROR_TYPES, ERROR_MESSAGE } from '../config';
 import { ValidationResult } from '../types';
 import { checkIsNumber, checkIsValidLength } from '../validators';
@@ -22,11 +22,7 @@ function useCVC() {
   }, []);
 
   const handleCVCChange = useCallback(
-    (
-      event: ChangeEvent<HTMLInputElement>,
-      options?: { skipValidation?: boolean }
-    ) => {
-      const { value } = event.target;
+    (value: string, options?: { skipValidation?: boolean }) => {
       const errorType = getCVCValidationError(value);
 
       const shouldSkipValidation = options?.skipValidation ?? false;

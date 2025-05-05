@@ -1,5 +1,4 @@
 import { act, renderHook } from '@testing-library/react';
-import { ChangeEvent } from 'react';
 import { CVC_ERROR_TYPES } from '../config';
 import useCVC from './useCVC';
 
@@ -8,9 +7,7 @@ describe('useCVC', () => {
     const { result } = renderHook(() => useCVC());
 
     act(() => {
-      result.current.handleCVCChange({
-        target: { value: '123' },
-      } as ChangeEvent<HTMLInputElement>);
+      result.current.handleCVCChange('123');
     });
 
     expect(result.current.CVC).toBe('123');

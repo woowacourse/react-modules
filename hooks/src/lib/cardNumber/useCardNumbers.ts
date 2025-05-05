@@ -1,4 +1,4 @@
-import { ChangeEvent, useCallback, useState } from 'react';
+import { useCallback, useState } from 'react';
 import {
   CARD_NUMBER_ERROR_TYPES,
   CardNumbersKey,
@@ -38,10 +38,10 @@ function useCardNumbers() {
 
   const handleCardNumbersChange = useCallback(
     (
-      event: ChangeEvent<HTMLInputElement>,
+      key: CardNumbersKey,
+      value: string,
       options?: { skipValidation?: boolean }
     ) => {
-      const { name, value } = event.target;
       const errorType = getCardNumberValidationError(value);
 
       const shouldSkipValidation = options?.skipValidation ?? false;
@@ -53,14 +53,14 @@ function useCardNumbers() {
       if (shouldSkipValidation) {
         setValidationResults((prev) => ({
           ...prev,
-          [name]: {
+          [key]: {
             isValid: !Boolean(errorType),
             errorMessage: errorType ? ERROR_MESSAGE.cardNumber[errorType] : '',
           },
         }));
       }
 
-      setCardNumbers((prev) => ({ ...prev, [name]: value }));
+      setCardNumbers((prev) => ({ ...prev, [key]: value }));
     },
     [getCardNumberValidationError]
   );

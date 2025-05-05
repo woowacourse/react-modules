@@ -12,14 +12,20 @@ function App() {
       <input
         type="text"
         name={EXPIRY_DATE_KEY.month}
-        onChange={handleExpiryDateChange}
+        onChange={(event) =>
+          handleExpiryDateChange('month', event.target.value)
+        }
         value={expiryDate.month}
       />
       <p>{validationResults.month.isValid}</p>
       <input
         type="text"
         name={EXPIRY_DATE_KEY.year}
-        onChange={(e) => handleExpiryDateChange(e, { skipValidation: true })}
+        onChange={(event) =>
+          handleExpiryDateChange('year', event?.target.value, {
+            skipValidation: true,
+          })
+        }
         value={expiryDate.year}
       />
       <p>{validationResults.year.isValid}</p>

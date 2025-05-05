@@ -1,4 +1,4 @@
-import { ChangeEvent, useCallback, useState } from 'react';
+import { useCallback, useState } from 'react';
 import {
   ERROR_MESSAGE,
   EXPIRY_DATE_ERROR_TYPES,
@@ -58,14 +58,11 @@ function useExpiryDate() {
 
   const handleExpiryDateChange = useCallback(
     (
-      event: ChangeEvent<HTMLInputElement>,
+      key: ExpiryDateKey,
+      value: string,
       options?: { skipValidation?: boolean }
     ) => {
-      const { name, value } = event.target;
-      const errorType = getExpiryDateValidationError(
-        name as ExpiryDateKey,
-        value
-      );
+      const errorType = getExpiryDateValidationError(key, value);
 
       const shouldSkipValidation = options?.skipValidation ?? false;
 
@@ -76,20 +73,17 @@ function useExpiryDate() {
       if (shouldSkipValidation) {
         setValidationResults((prev) => ({
           ...prev,
-          [name]: {
+          [key]: {
             isValid: !Boolean(errorType),
             errorMessage: errorType ? ERROR_MESSAGE.expiryDate[errorType] : '',
           },
         }));
       }
 
-      const isExpiredDate = getExpiryDateExpiredError(
-        name as ExpiryDateKey,
-        value
-      );
+      const isExpiredDate = getExpiryDateExpiredError(key, value);
       setValidationResults((prev) => ({
         ...prev,
-        [name]: {
+        [key]: {
           isValid: !Boolean(isExpiredDate),
           errorMessage: isExpiredDate
             ? ERROR_MESSAGE.expiryDate[isExpiredDate]
@@ -97,7 +91,7 @@ function useExpiryDate() {
         },
       }));
 
-      setExpiryDate((prev) => ({ ...prev, [name]: value }));
+      setExpiryDate((prev) => ({ ...prev, [key]: value }));
     },
     [getExpiryDateValidationError, getExpiryDateExpiredError]
   );

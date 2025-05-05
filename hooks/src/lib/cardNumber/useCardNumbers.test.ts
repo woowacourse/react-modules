@@ -1,5 +1,4 @@
 import { act, renderHook } from '@testing-library/react';
-import { ChangeEvent } from 'react';
 import { CARD_NUMBER_ERROR_TYPES } from '../config';
 import useCardNumbers from './useCardNumbers';
 
@@ -8,9 +7,7 @@ describe('useCardNumbers', () => {
     const { result } = renderHook(() => useCardNumbers());
 
     act(() => {
-      result.current.handleCardNumbersChange({
-        target: { name: 'part1', value: '1234' },
-      } as ChangeEvent<HTMLInputElement>);
+      result.current.handleCardNumbersChange('part1', '1234');
     });
 
     expect(result.current.cardNumbers.part1).toBe('1234');

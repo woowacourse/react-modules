@@ -1,5 +1,4 @@
 import { act, renderHook } from '@testing-library/react';
-import { ChangeEvent } from 'react';
 import { EXPIRY_DATE_ERROR_TYPES } from '../config';
 import useExpiryDate from './useExpiryDate';
 
@@ -8,9 +7,7 @@ describe('useExpiryDate', () => {
     const { result } = renderHook(() => useExpiryDate());
 
     act(() => {
-      result.current.handleExpiryDateChange({
-        target: { name: 'month', value: '04' },
-      } as ChangeEvent<HTMLInputElement>);
+      result.current.handleExpiryDateChange('month', '04');
     });
 
     expect(result.current.expiryDate.month).toBe('04');
@@ -44,9 +41,7 @@ describe('useExpiryDate', () => {
     const { result } = renderHook(() => useExpiryDate());
 
     act(() => {
-      result.current.handleExpiryDateChange({
-        target: { name: 'month', value: '04' },
-      } as ChangeEvent<HTMLInputElement>);
+      result.current.handleExpiryDateChange('month', '04');
     });
 
     expect(result.current.getExpiryDateExpiredError('year', '12')).toBe(
