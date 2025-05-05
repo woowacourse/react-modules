@@ -9,7 +9,7 @@ import { ErrorType } from './types/errorType';
 type ValitationResult = {
   numbers: string[];
   error: ErrorType[];
-  updateCardNumbers: (value: string, index: number) => void;
+  handleCardNumbers: (value: string, index: number) => void;
 };
 
 type UpdateErrorArgs =
@@ -36,7 +36,7 @@ export default function useCardNumbers(): ValitationResult {
     });
   };
 
-  const updateCardNumbers = (value: string, index: number) => {
+  const handleCardNumbers = (value: string, index: number) => {
     if (isOverInputLength(value, INPUT_RULE.CARD_NUMBERS.MAX_LENGTH)) return;
 
     validate(value, index);
@@ -73,5 +73,5 @@ export default function useCardNumbers(): ValitationResult {
     updateError({ index, isValid: false });
   };
 
-  return { numbers, error, updateCardNumbers };
+  return { numbers, error, handleCardNumbers };
 }

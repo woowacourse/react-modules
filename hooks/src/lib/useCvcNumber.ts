@@ -9,7 +9,7 @@ import { ErrorType } from './types/errorType';
 type ValitationResult = {
   cvc: string;
   error: ErrorType;
-  updateCvc: (value: string) => void;
+  handleCvc: (value: string) => void;
 };
 
 type UpdateErrorArgs =
@@ -27,7 +27,7 @@ export default function useCvcNumber(): ValitationResult {
     });
   };
 
-  const updateCvc = (value: string) => {
+  const handleCvc = (value: string) => {
     if (isOverInputLength(value, INPUT_RULE.CVC.MAX_LENGTH)) return;
 
     validate(value);
@@ -58,5 +58,5 @@ export default function useCvcNumber(): ValitationResult {
     updateError({ isValid: false });
   };
 
-  return { cvc, error, updateCvc };
+  return { cvc, error, handleCvc };
 }

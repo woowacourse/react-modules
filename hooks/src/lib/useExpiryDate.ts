@@ -15,7 +15,7 @@ import { ErrorType } from './types/errorType';
 type ValitationResult = {
   date: dateType;
   error: ErrorType[];
-  updateExpiryDate: (value: string, dateName: 'month' | 'year') => void;
+  handleExpiryDate: (value: string, dateName: 'month' | 'year') => void;
 };
 
 type UpdateErrorArgs =
@@ -47,7 +47,7 @@ export default function useExpiryDate(): ValitationResult {
     });
   };
 
-  const updateExpiryDate = (value: string, dateUnit: 'month' | 'year') => {
+  const handleExpiryDate = (value: string, dateUnit: 'month' | 'year') => {
     if (isOverInputLength(value, INPUT_RULE.EXPIRY_DATE.MAX_LENGTH)) return;
 
     if (dateUnit === 'month') {
@@ -127,5 +127,5 @@ export default function useExpiryDate(): ValitationResult {
     updateError({ index: 1, isValid: false });
   };
 
-  return { date, error, updateExpiryDate };
+  return { date, error, handleExpiryDate };
 }

@@ -9,7 +9,7 @@ import { ErrorType } from './types/errorType';
 type ValitationResult = {
   password: string;
   error: ErrorType;
-  updatePassword: (value: string) => void;
+  handlePassword: (value: string) => void;
 };
 
 type UpdateErrorArgs =
@@ -27,7 +27,7 @@ export default function usePassword(): ValitationResult {
     });
   };
 
-  const updatePassword = (value: string) => {
+  const handlePassword = (value: string) => {
     if (isOverInputLength(value, INPUT_RULE.PASSWORD.MAX_LENGTH)) return;
 
     validate(value);
@@ -58,5 +58,5 @@ export default function usePassword(): ValitationResult {
     updateError({ isValid: false });
   };
 
-  return { password, error, updatePassword };
+  return { password, error, handlePassword };
 }

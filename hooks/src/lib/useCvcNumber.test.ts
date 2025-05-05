@@ -6,7 +6,7 @@ test('3자리 숫자가 입력되면 정상 작동한다.', () => {
   const { result } = renderHook(() => useCvcNumber());
 
   act(() => {
-    result.current.updateCvc('123');
+    result.current.handleCvc('123');
   });
 
   expect(result.current.error.errorMessage).toBe('');
@@ -16,7 +16,7 @@ test('숫자가 아닌 값을 validate 하면 에러 메시지가 세팅된다',
   const { result } = renderHook(() => useCvcNumber());
 
   act(() => {
-    result.current.updateCvc('ab');
+    result.current.handleCvc('ab');
   });
 
   expect(result.current.error.errorMessage).toBe(
@@ -28,7 +28,7 @@ test('3자리 이하의 숫자를 validate 하면 에러 메시지가 세팅된�
   const { result } = renderHook(() => useCvcNumber());
 
   act(() => {
-    result.current.updateCvc('12');
+    result.current.handleCvc('12');
   });
 
   expect(result.current.error.errorMessage).toBe(

@@ -6,7 +6,7 @@ test('3자리 숫자를 입력하면 정상 작동한다.', () => {
   const { result } = renderHook(() => usePassword());
 
   act(() => {
-    result.current.updatePassword('123');
+    result.current.handlePassword('123');
   });
 
   expect(result.current.error.errorMessage).toBe('');
@@ -16,7 +16,7 @@ test('숫자가 아닌 값을 validate 하면 에러 메시지가 세팅된다',
   const { result } = renderHook(() => usePassword());
 
   act(() => {
-    result.current.updatePassword('ab');
+    result.current.handlePassword('ab');
   });
 
   expect(result.current.error.errorMessage).toBe(
@@ -28,7 +28,7 @@ test('2자리가 아닌 숫자를 validate 하면 에러 메시지가 세팅된�
   const { result } = renderHook(() => usePassword());
 
   act(() => {
-    result.current.updatePassword('1');
+    result.current.handlePassword('1');
   });
 
   expect(result.current.error.errorMessage).toBe(
