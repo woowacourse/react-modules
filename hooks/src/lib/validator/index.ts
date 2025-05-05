@@ -31,10 +31,10 @@ function createValidator<T extends ValidateField>(
     rules.forEach(({ check, errorMeta }) => {
       if (!check(value)) {
         const { field, code } = errorMeta;
-        console.log(`Rules for field:`, validationRules[field]);
-        const message = (validationRules[field] as any)[code]?.message;
 
-        console.log(`Message:`, (validationRules[field] as any)[code]?.message);
+        const rawMessage = (validationRules[field] as any)[code]?.message;
+        const message =
+          typeof rawMessage === "function" ? rawMessage(value) : rawMessage;
 
         errors.push({ field, code, message });
       }
