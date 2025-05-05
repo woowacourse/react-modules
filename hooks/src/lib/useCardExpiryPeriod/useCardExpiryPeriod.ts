@@ -46,7 +46,7 @@ export const useCardExpiryPeriod = (
 
     if (name === 'year' && value.length === CARD_EXPIRATION.yearLength) {
       const yearValue = Number(value);
-      if (yearValue < CARD_EXPIRATION.minYear) {
+      if (yearValue < CARD_EXPIRATION.minYear || yearValue > CARD_EXPIRATION.maxYear) {
         setCardExpirationDateError({
           ...cardExpirationDateError,
           year: CARD_EXPIRATION_ERROR.invalidYear,
@@ -67,6 +67,7 @@ export const useCardExpiryPeriod = (
       monthValue >= CARD_EXPIRATION.minMonth &&
       monthValue <= CARD_EXPIRATION.maxMonth &&
       yearValue >= CARD_EXPIRATION.minYear &&
+      yearValue <= CARD_EXPIRATION.maxYear &&
       !cardExpirationDateError.month &&
       !cardExpirationDateError.year
     );

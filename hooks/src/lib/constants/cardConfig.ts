@@ -6,10 +6,10 @@ export const CARD_NUMBER = {
 export const CARD_EXPIRATION = {
   minMonth: 1,
   maxMonth: 12,
-  minYear: 25,
+  minYear: new Date().getFullYear() % 100,
+  maxYear: new Date().getFullYear() % 100 + 10,
   monthLength: 2,
   yearLength: 2,
-  maxLength: 2,
 };
 
 export const CARD_CVC = {
