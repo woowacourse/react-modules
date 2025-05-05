@@ -52,8 +52,7 @@ const expiryRules: Rule[] = [
   },
   {
     test: ({ month }) => {
-      if (!month) return false;
-      return month >= 1 && month <= 12;
+      return month! >= 1 && month! <= 12;
     },
     field: 'month',
     message: MESSAGE.MONTH_RANGE_MSG,
@@ -61,8 +60,7 @@ const expiryRules: Rule[] = [
   {
     test: ({ year }) => {
       const currentYear = Number(new Date().getFullYear().toString().slice(2));
-      if (!year) return false;
-      return year >= currentYear;
+      return year! >= currentYear;
     },
     field: 'year',
     message: MESSAGE.INVALID_DATE_MSG,
@@ -76,10 +74,8 @@ const expiryRules: Rule[] = [
       );
       const currentMonth = now.getMonth() + 1;
 
-      if (!month || !year) return false;
-
-      if (currentYear < year) return true;
-      return currentYear === year && month >= currentMonth;
+      if (currentYear < year!) return true;
+      return currentYear === year && month! >= currentMonth;
     },
     field: 'month',
     message: MESSAGE.INVALID_DATE_MSG,
