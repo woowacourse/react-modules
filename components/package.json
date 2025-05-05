@@ -1,16 +1,35 @@
 {
-  "name": "compoents",
-  "version": "0.0.1",
+  "name": "pesu-modal",
+  "version": "0.0.5",
   "description": "npm modules",
   "type": "module",
-  "types": "dist/index.d.ts",
-  "main": "dist/index.js",
-  "module": "dist/index.js",
+  "types": "dist/components/index.d.ts",
+  "main": "dist/components/index.js",
+  "module": "dist/components/index.js",
   "files": [
     "dist"
   ],
+  "author": "박규성 <gueit214@naver.com>",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/guesung/react-modules"
+  },
+  "homepage": "https://github.com/guesung/react-modules#readme",
+  "bugs": {
+    "url": "https://github.com/guesung/react-modules/issues"
+  },
+  "keywords": [
+    "react",
+    "modal",
+    "ui",
+    "component"
+  ],
+  "license": "MIT",
+  "engines": {
+    "node": ">=18.0.0"
+  },
   "scripts": {
-    "dev": "vite",
+    "dev": "vite --host",
     "build": "tsc && vite build",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
@@ -18,8 +37,9 @@
     "build-storybook": "storybook build"
   },
   "dependencies": {
-    "react": "^19.1.0",
-    "react-dom": "^19.1.0"
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.0",
+    "@storybook/addon-viewport": "^8.6.12"
   },
   "devDependencies": {
     "@chromatic-com/storybook": "^3.2.6",
@@ -38,6 +58,7 @@
     "@typescript-eslint/eslint-plugin": "^8.29.1",
     "@typescript-eslint/parser": "^8.29.1",
     "@vitejs/plugin-react-swc": "^3.8.1",
+    "chromatic": "^11.28.2",
     "eslint": "^9.24.0",
     "eslint-plugin-react-hooks": "^5.2.0",
     "eslint-plugin-react-refresh": "^0.4.19",
@@ -47,5 +68,9 @@
     "typescript": "^5.8.3",
     "vite": "^6.2.6",
     "vite-plugin-dts": "^4.5.3"
+  },
+  "peerDependencies": {
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
   }
 }
