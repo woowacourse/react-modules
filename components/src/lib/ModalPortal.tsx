@@ -8,9 +8,7 @@ interface Props {
 export default function ModalPortal({ children }: Props) {
   const elementRef = useRef<HTMLDivElement | null>(null);
 
-  if (!elementRef.current) {
-    elementRef.current = document.createElement('div');
-  }
+  elementRef.current ??= document.createElement('div');
 
   useEffect(() => {
     const modalRoot = elementRef.current!;
