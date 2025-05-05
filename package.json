@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "format": "prettier . --write"
+    "format": "prettier . --write",
+    "dev-app": "pnpm --filter app dev",
+    "storybook-components": "pnpm --filter pesu-modal storybook"
   },
   "keywords": [],
   "author": "",
