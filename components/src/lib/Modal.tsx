@@ -1,3 +1,4 @@
+import { useRef } from "react";
 import useKeyEscClose from "./hooks/useKeyEscClose";
 import IconClose from "./components/IconClose";
 import { BaseProps, ModalHeaderProps, ModalProps, ModalContainerProps } from "./types";
@@ -12,7 +13,6 @@ import {
   ModalWrapperStyle,
 } from "./Modal.style";
 import ModalContext, { useModalContext } from "./contexts/ModalContext";
-import { useRef } from "react";
 
 const Modal = ({ show, onHide, children, ...props }: ModalProps) => {
   useKeyEscClose(onHide);
@@ -59,7 +59,6 @@ Modal.Header = ({ closeButton = false, children, ...props }: ModalHeaderProps) =
 };
 
 Modal.Body = ({ children, ...props }: BaseProps) => {
-  console.log(props);
   return (
     <div css={ModalBodyStyle} {...props}>
       {children}
