@@ -1,5 +1,5 @@
 {
-  "name": "@seo/react-modal",
+  "name": "@seo_dev/react-modal",
   "version": "0.0.1",
   "description": "포커스 트랩, ESC 키 종료, 포털 렌더링을 지원하는 커스터마이징 가능한 React 모달 컴포넌트입니다.",
   "keywords": [
@@ -7,6 +7,9 @@
     "modal",
     "dialog"
   ],
+  "publishConfig": {
+    "access": "public"
+  },
   "license": "MIT",
   "type": "module",
   "types": "dist/index.d.ts",
@@ -26,7 +29,7 @@
   },
   "dependencies": {
     "@emotion/styled": "^11.14.0",
-    "seo-meta-react-modal": "^0.0.2"
+    "@seo_dev/react-modal": "^0.0.1"
   },
   "peerDependencies": {
     "react": "^18.0.0 || ^19.0.0",
