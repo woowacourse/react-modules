@@ -51,4 +51,19 @@ describe('useExpirationDateValidation', () => {
     expect(result.current.noError).toBe(true);
     expect(result.current.errorMessage).toBe('');
   });
+
+  it('1자리 숫자를 입력하면 자릿수 에러 메시지를 반환한다.', () => {
+    const { result } = renderHook(() => useExpirationDateValidation());
+    const shortMonthEvent = {
+      target: { value: '2' },
+    } as React.ChangeEvent<HTMLInputElement>;
+
+    act(() => {
+      result.current.onChange('month')(shortMonthEvent);
+    });
+
+    expect(result.current.errorMessage).toBe(
+      '올바른 길이의 숫자를 입력해주세요.'
+    );
+  });
 });
