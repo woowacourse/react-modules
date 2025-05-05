@@ -29,7 +29,7 @@ describe('useCardNumbers', () => {
     result = renderHook(() => useCardNumbers()).result;
   });
 
-  it('입력값이 정확히 업데이트 되어야 한다.', () => {
+  it('이벤트 핸들러가 감지한 입력값이 hook 내부의 cardNumbers 상태(state)로 변경된다.', () => {
     act(() => {
       result.current.handleCardNumbersChange({
         target: { name: 'part1', value: '1234' },
