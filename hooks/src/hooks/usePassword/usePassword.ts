@@ -1,6 +1,6 @@
-import { ERROR_MESSAGE } from '../constants';
-import { useForm } from '../hooks/useForm';
-import { CardPasswordInput } from '../types/input';
+import { ERROR_MESSAGE } from '@/constants';
+import { useForm } from '@/hooks/useForm';
+import { CardPasswordInput } from '@/types/input';
 
 export default function usePassword() {
   const {

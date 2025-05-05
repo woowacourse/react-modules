@@ -1,6 +1,6 @@
-import { ERROR_MESSAGE } from '../constants';
-import { useForm } from '../hooks/useForm';
-import { CardNumberInput } from '../types/input';
+import { ERROR_MESSAGE } from '@/constants';
+import { useForm } from '@/hooks/useForm';
+import { CardNumberInput } from '@/types/input';
 
 export default function useCardNumber() {
   const {

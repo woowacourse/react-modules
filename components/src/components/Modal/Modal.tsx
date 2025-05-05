@@ -3,7 +3,7 @@
 import styled from '@emotion/styled';
 import { PropsWithChildren, useEffect } from 'react';
 import { createPortal } from 'react-dom';
-import { CloseIcon } from './common';
+import { CloseIcon } from '../common';
 
 const ModalContainer = styled.div<Pick<ModalInterface, 'position' | 'margin' | 'zIndex'>>`
   width: calc(100% - ${(props) => (props.margin ?? 20) * 2}px);

@@ -1,5 +1,5 @@
 import { renderHook, act } from '@testing-library/react';
-import useCvcNumber from './useCvcNumber';
+import useCvcNumber from './useCVCNumber';
 
 function mockInputEvent(value: string) {
   return {

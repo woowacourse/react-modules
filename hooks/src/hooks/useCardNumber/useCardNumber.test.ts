@@ -48,7 +48,7 @@ describe('useCardNumber', () => {
   });
 
   it('숫자가 아닌 값이 입력되면 값이 반영되지 않는다', () => {
-    const { result, rerender } = renderHook(() => useCardNumber());
+    const { result } = renderHook(() => useCardNumber());
     const { cardNumberRegister } = result.current;
 
     act(() => {

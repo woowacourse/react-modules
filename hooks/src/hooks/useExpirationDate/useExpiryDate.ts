@@ -1,6 +1,6 @@
-import { ERROR_MESSAGE } from '../constants';
-import { useForm } from '../hooks/useForm';
-import { CardExpirationDateInput } from '../types/input';
+import { ERROR_MESSAGE } from '@/constants';
+import { useForm } from '@/hooks/useForm';
+import { CardExpirationDateInput } from '@/types/input';
 
 export default function useExpiryDate() {
   const {
