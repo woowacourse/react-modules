@@ -61,4 +61,15 @@ describe("usePassword", () => {
 
     expect(result.current.isLengthComplete).toBeTruthy();
   });
+
+  it("현재 입력이 모두 채워졌고, 에러 상태가 없다면 isValid가 true를 반환한다.", () => {
+    const userInput = "12";
+    const { result } = renderHook(() => usePassword());
+
+    act(() => {
+      result.current.onChange(userInput);
+    });
+
+    expect(result.current.isValid).toBeTruthy();
+  });
 });

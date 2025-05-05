@@ -27,6 +27,7 @@ const useCvcNumber = (): HookReturnType<"cvcNumber"> => {
 
   const isLengthComplete = useCheckLengthComplete(cvcNumber, MAX_LENGTH.CVC_NUMBER);
   const isErrorComplete = useCheckErrorComplete(errors);
+  const isValid = isLengthComplete && isErrorComplete;
 
   return {
     state: cvcNumber,
@@ -36,6 +37,7 @@ const useCvcNumber = (): HookReturnType<"cvcNumber"> => {
     validateInput,
     isLengthComplete,
     isErrorComplete,
+    isValid,
   };
 };
 

@@ -76,4 +76,17 @@ describe("useCardNumber", () => {
 
     expect(result.current.isLengthComplete).toBeTruthy();
   });
+
+  it("현재 입력이 모두 채워졌고, 에러 상태가 없다면 isValid가 true를 반환한다.", () => {
+    const userInput = ["1243", "1243", "1243", "1243"];
+    const { result } = renderHook(() => useCardNumber());
+
+    act(() => {
+      userInput.forEach((input, index) => {
+        result.current.onChange(input, index);
+      });
+    });
+
+    expect(result.current.isValid).toBeTruthy();
+  });
 });

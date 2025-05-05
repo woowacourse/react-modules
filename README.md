@@ -85,7 +85,7 @@ Module
 
 - [ ] (훅) 에러 로직 훅 단일화 처리 (base error 훅)
 - [ ] 상태값 (base state 훅 제작)
-- [ ] (훅) 실제 입력 상태값 함께 관리
+- [x] (훅) 실제 입력 상태값 함께 관리
   - [x] `const { cardNumber, onChange, isValid, errorMessage } = useCardNumber();`
   - [x] useCardNumber 훅
     - [x] cardNumber -> 객체로 상태 관리
@@ -96,7 +96,7 @@ Module
 - [x] useErrorCheckComplete 공통 훅으로 변경
 - [x] isComplete 변수 return (모든 필드가 최대 입력을 쳤는지 확인)
   - [x] noError -> isErrorComplete으로 이름 변경
-  - [ ] isComplete & isErrorComplete 합쳐서 -> isValid 변수 return
+  - [x] isComplete & isErrorComplete 합쳐서 -> isValid 변수 return
 - [ ] errors와 errorMessage도 일반 변수로 관리 (상태 x -> 실제 입력값에 의존)
 - [ ] isNumber 유틸 함수 이름 변경 (validateNumericString)
 - [ ] 월 검증 및 년 검증 함수 분리 (validateMonth, validateYear)

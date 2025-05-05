@@ -27,6 +27,7 @@ const usePassword = (): HookReturnType<"password"> => {
 
   const isLengthComplete = useCheckLengthComplete(password, MAX_LENGTH.PASSWORD);
   const isErrorComplete = useCheckErrorComplete(errors);
+  const isValid = isLengthComplete && isErrorComplete;
 
   return {
     state: password,
@@ -36,6 +37,7 @@ const usePassword = (): HookReturnType<"password"> => {
     validateInput,
     isLengthComplete,
     isErrorComplete,
+    isValid,
   };
 };
 

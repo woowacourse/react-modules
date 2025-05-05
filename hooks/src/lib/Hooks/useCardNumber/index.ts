@@ -51,6 +51,7 @@ const useCardNumber = (): HookReturnType<"cardNumber"> => {
 
   const isLengthComplete = useCheckLengthComplete(cardNumber, MAX_LENGTH.CARD_NUMBER);
   const isErrorComplete = useCheckErrorComplete(errors);
+  const isValid = isLengthComplete && isErrorComplete;
 
   return {
     state: cardNumber,
@@ -60,6 +61,7 @@ const useCardNumber = (): HookReturnType<"cardNumber"> => {
     validateInput,
     isLengthComplete,
     isErrorComplete,
+    isValid,
   };
 };
 

@@ -49,6 +49,7 @@ const useExpirationDate = (): HookReturnType<"expirationDate"> => {
 
   const isLengthComplete = useCheckLengthComplete(expirationDate, MAX_LENGTH.EXPIRATION_DATE);
   const isErrorComplete = useCheckErrorComplete(errors);
+  const isValid = isLengthComplete && isErrorComplete;
 
   return {
     state: expirationDate,
@@ -58,6 +59,7 @@ const useExpirationDate = (): HookReturnType<"expirationDate"> => {
     validateInput,
     isLengthComplete,
     isErrorComplete,
+    isValid,
   };
 };
 
