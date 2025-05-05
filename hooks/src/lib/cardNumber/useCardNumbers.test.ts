@@ -39,13 +39,13 @@ describe('useCardNumbers', () => {
     expect(result.current.cardNumbers.part1).toBe('1234');
   });
 
-  it('입력값이 숫자가 아닐 때 isValid로 false를 반환하고 에러 메시지를 반환한다.', () => {
+  it('입력값이 숫자가 아닐 때 notNumber 에러 타입을 반환한다.', () => {
     expect(result.current.validateCardNumbers('aaaa')).toBe(
       CARD_NUMBER_ERROR_TYPES.notNumber
     );
   });
 
-  it('입력값이 네 자리가 아닐 때 isValid로 false를 반환하고 에러 메시지를 반환한다.', () => {
+  it('입력값이 네 자리가 아닐 때 invalidLength 에러 타입을 반환한다.', () => {
     expect(result.current.validateCardNumbers('12345')).toBe(
       CARD_NUMBER_ERROR_TYPES.invalidLength
     );
