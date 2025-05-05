@@ -1,1 +1,2 @@
-export const isOnlyDigits = (value: string) => /^\d*$/.test(value);
+export const isOnlyDigits = (value: string) => /^\d+$/.test(value);
+
