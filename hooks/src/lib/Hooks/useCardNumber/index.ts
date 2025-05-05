@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { isNumber } from "../../utils/validation";
+import { validateNumericString } from "../../utils/validation";
 import {
   CardNumberType,
   ErrorMessageType,
@@ -38,7 +38,7 @@ const useCardNumber = (): HookReturnType<"cardNumber"> => {
   };
 
   const validateInput: ValidInputFuncType = (value: string, index: number) => {
-    const { error, message } = isNumber(value);
+    const { error, message } = validateNumericString(value);
 
     setErrors((prev) => {
       const updated = [...prev];

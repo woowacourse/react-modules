@@ -98,7 +98,7 @@ Module
   - [x] noError -> isErrorComplete으로 이름 변경
   - [x] isComplete & isErrorComplete 합쳐서 -> isValid 변수 return
 - [ ] errors와 errorMessage도 일반 변수로 관리 (상태 x -> 실제 입력값에 의존)
-- [ ] isNumber 유틸 함수 이름 변경 (validateNumericString)
+- [x] isNumber 유틸 함수 이름 변경 (validateNumericString)
 - [ ] 월 검증 및 년 검증 함수 분리 (validateMonth, validateYear)
 - [ ] expirationDate 훅 -> 인덱스 기반 접근 대신 month와 year 상태를 각각 관리
 - [ ] 유효성 훅 길이 체크

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { isNumber } from "../../utils/validation";
+import { validateNumericString } from "../../utils/validation";
 import {
   CvcNumberType,
   ErrorMessageType,
@@ -20,7 +20,7 @@ const useCvcNumber = (): HookReturnType<"cvcNumber"> => {
   const onChange: SetValueFn<CvcNumberType> = (value) => setCvcNumber(value);
 
   const validateInput: ValidInputFuncType = (value: string) => {
-    const { error, message } = isNumber(value);
+    const { error, message } = validateNumericString(value);
     setErrors(error);
     setErrorMessage(message);
   };

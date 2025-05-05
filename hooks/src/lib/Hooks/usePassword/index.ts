@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { isNumber } from "../../utils/validation";
+import { validateNumericString } from "../../utils/validation";
 import {
   ErrorMessageType,
   HookReturnType,
@@ -20,7 +20,7 @@ const usePassword = (): HookReturnType<"password"> => {
   const onChange: SetValueFn<PasswordType> = (value) => setPassword(value);
 
   const validateInput: ValidInputFuncType = (value: string) => {
-    const { error, message } = isNumber(value);
+    const { error, message } = validateNumericString(value);
     setErrors(error);
     setErrorMessage(message);
   };
