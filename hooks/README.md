@@ -35,22 +35,20 @@ const CardNumberForm = () => {
 import { useExpiryDate } from '@sebin0580/payments-hooks';
 
 const ExpiryDateInput = () => {
-  const { month, year,, handleChangeExpiryDate, errorMessage } = useExpiryDate();
+  const { expiryDate, handleChangeExpiryDate, errorMessage } = useExpiryDate();
 
   return (
     <div>
+    {expiryDate.map((date, index) => {
       <input
+        key={index}
         type="text"
-        value={month}
-        onChange={(e) => handleChangeExpiryDate(e,0)}
+        maxLength={2}
+        value={date}
+        onChange={(e) => handleChangeExpiryDate(e,index)}
         placeholder="MM"
       />
-      <input
-        type="text"
-        value={year}
-        onChange={(e) => handleChangeExpiryDate(e,1)}
-        placeholder="YY"
-      />
+    )}
       {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
     </div>
   );
