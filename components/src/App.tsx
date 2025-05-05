@@ -15,13 +15,13 @@ function App() {
       <button onClick={() => setIsOpen(true)}>열림!</button>
 
       <Modal isOpen={isOpen} onClose={onClose}>
-        <Modal.ModalContainer isOpen={isOpen} position="top" width={400}>
+        <Modal.Container isOpen={isOpen} position="top" width={400}>
           <>
-            <Modal.ModalCloseButton onClose={onClose} />
-            <Modal.ModalTitle>제목</Modal.ModalTitle>
-            <Modal.ModalBody>내용1!</Modal.ModalBody>
+            <Modal.CloseButton onClose={onClose} />
+            <Modal.Title>제목</Modal.Title>
+            <Modal.Body>내용1!</Modal.Body>
           </>
-        </Modal.ModalContainer>
+        </Modal.Container>
       </Modal>
     </>
   );

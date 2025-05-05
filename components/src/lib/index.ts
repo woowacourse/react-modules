@@ -5,8 +5,8 @@ import ModalOverlay from './ModalOverlay';
 import ModalTitle from './ModalTitle';
 
 export const Modal = Object.assign(ModalOverlay, {
-  ModalContainer: ModalContainer,
-  ModalBody: ModalBody,
-  ModalCloseButton: ModalCloseButton,
-  ModalTitle: ModalTitle,
+  Container: ModalContainer,
+  Body: ModalBody,
+  CloseButton: ModalCloseButton,
+  Title: ModalTitle,
 });
