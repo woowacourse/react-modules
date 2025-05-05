@@ -202,7 +202,7 @@ function App() {
 ```ts
 interface PromptModalProps {
   title: string;
-  size?: ModalSizeType;
+  size?: "small" | "medium" | "large";
   inputAttributes?: ComponentProps<"input">;
   onRequestClose: () => void;
   onSubmit: (value: string) => void;
