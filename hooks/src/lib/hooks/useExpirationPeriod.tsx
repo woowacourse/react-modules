@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { parseNumber } from '../utils/parseNumber';
-import { checkValidDate } from '../utils/checkValidDate';
 
 export type ExpirationPeriod = {
   month: string;
@@ -14,39 +13,96 @@ interface ValidationResult {
   field: ExpiryField | null;
 }
 
+type TestType = {
+  monthString?: string;
+  yearString?: string;
+  month?: number;
+  year?: number;
+};
+
+type Rule = {
+  test: ({ monthString, yearString, month, year }: TestType) => boolean;
+  field: 'month' | 'year';
+  message: string;
+};
+
+const MESSAGE = {
+  INVALID_DATE_MSG: '현재보다 이전값을 유효기간으로 선택할 수 없습니다.',
+  FORMAT_MONTH_MSG: 'MM형식으로 입력해주세요. (ex. 01)',
+  FORMAT_YEAR_MSG: 'YY형식으로 입력해주세요. (ex. 01)',
+  MONTH_RANGE_MSG: '1~12사이의 올바른 월을 입력해 주세요.',
+};
+
+const expiryRules: Rule[] = [
+  {
+    test: ({ monthString }) => {
+      if (!monthString) return false;
+      return monthString.length === 2;
+    },
+    field: 'month',
+    message: MESSAGE.FORMAT_MONTH_MSG,
+  },
+  {
+    test: ({ yearString }) => {
+      if (!yearString) return false;
+      return yearString.length === 2;
+    },
+    field: 'year',
+    message: MESSAGE.FORMAT_YEAR_MSG,
+  },
+  {
+    test: ({ month }) => {
+      if (!month) return false;
+      return month >= 1 && month <= 12;
+    },
+    field: 'month',
+    message: MESSAGE.MONTH_RANGE_MSG,
+  },
+  {
+    test: ({ year }) => {
+      const currentYear = Number(new Date().getFullYear().toString().slice(2));
+      if (!year) return false;
+      return year >= currentYear;
+    },
+    field: 'year',
+    message: MESSAGE.INVALID_DATE_MSG,
+  },
+  {
+    test: ({ month, year }) => {
+      const now = new Date();
+      const currentYear = Number.parseInt(
+        new Date().getFullYear().toString().slice(2),
+        10
+      );
+      const currentMonth = now.getMonth() + 1;
+
+      if (!month || !year) return false;
+
+      if (currentYear < year) return true;
+      return currentYear === year && month >= currentMonth;
+    },
+    field: 'month',
+    message: MESSAGE.INVALID_DATE_MSG,
+  },
+];
+
 const validateExpiry = (
-  monthStr: string,
-  yearStr: string
+  monthString: string,
+  yearString: string
 ): ValidationResult => {
-  const INVALID_DATE_MSG = '현재보다 이전값을 유효기간으로 선택할 수 없습니다.';
-  const FORMAT_MSG = 'MM형식으로 입력해주세요. (ex. 01)';
-  const MONTH_RANGE_MSG = '1~12사이의 올바른 월을 입력해 주세요.';
+  if (monthString === '' && yearString === '')
+    return { message: '', field: null };
 
-  if (monthStr === '' && yearStr === '') return { message: '', field: null };
+  const month = Number(monthString);
+  const year = Number(yearString);
 
-  const month = Number(monthStr);
-  const year = Number(yearStr);
-  const currentYear = Number(new Date().getFullYear().toString().slice(2));
+  const invalid = expiryRules.find(
+    (rule) => !rule.test({ monthString, yearString, month, year })
+  );
 
-  if (monthStr.length < 2) return { message: FORMAT_MSG, field: 'month' };
-  if (month < 1 || month > 12)
-    return { message: MONTH_RANGE_MSG, field: 'month' };
-
-  if (yearStr.length < 2) return { message: FORMAT_MSG, field: 'year' };
-  if (year < currentYear) return { message: INVALID_DATE_MSG, field: 'year' };
-
-  const invalidField = checkValidDate(monthStr, yearStr);
-  if (invalidField) {
-    return { message: INVALID_DATE_MSG, field: invalidField };
+  if (invalid) {
+    return { message: invalid.message, field: invalid.field };
   }
-
-  if (year < currentYear) return { message: INVALID_DATE_MSG, field: 'year' };
-  if (yearStr.length < 2) return { message: FORMAT_MSG, field: 'year' };
-
-  if (month < 1 || month > 12)
-    return { message: MONTH_RANGE_MSG, field: 'month' };
-  if (monthStr.length < 2) return { message: FORMAT_MSG, field: 'month' };
-
   return { message: '', field: null };
 };
 
