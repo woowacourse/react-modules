@@ -1,6 +1,6 @@
 import useKeyEscClose from "./hooks/useKeyEscClose";
 import IconClose from "./components/IconClose";
-import { BaseProps, ModalHeaderProps, ModalProps } from "./types";
+import { BaseProps, ModalHeaderProps, ModalProps, ModalContainerProps } from "./types";
 import {
   backGroundStyle,
   ModalBodyStyle,
@@ -13,15 +13,31 @@ import {
 } from "./Modal.style";
 import ModalContext, { useModalContext } from "./contexts/ModalContext";
 
-const Modal = ({ show, onHide, background = true, position = "center", gap = 16, children }: ModalProps) => {
+const Modal = ({ show, onHide, children, ...props }: ModalProps) => {
   useKeyEscClose(onHide);
   return (
     <ModalContext.Provider value={onHide}>
-      <div css={ModalWrapperStyle(show)}>
-        <div css={backGroundStyle(background)} onClick={onHide}></div>
-        <div css={ModalContainerStyle(position, gap)}>{children}</div>
+      <div css={ModalWrapperStyle(show)} {...props}>
+        {children}
       </div>
     </ModalContext.Provider>
+  );
+};
+
+Modal.Background = ({ children, ...props }: BaseProps) => {
+  const onHide = useModalContext();
+  return (
+    <div css={backGroundStyle} onClick={onHide} {...props}>
+      {children}
+    </div>
+  );
+};
+
+Modal.Container = ({ position = "center", gap = 16, children, ...props }: ModalContainerProps) => {
+  return (
+    <div css={ModalContainerStyle(position, gap)} {...props}>
+      {children}
+    </div>
   );
 };
 

@@ -13,10 +13,9 @@ export interface ModalProps extends BaseProps {
 
   /** 모달을 닫는 함수 (배경 클릭이나 X 버튼 클릭 시 호출) */
   onHide: () => void;
+}
 
-  /** 배경 어두움 여부  */
-  background?: boolean;
-
+export interface ModalContainerProps extends BaseProps {
   /** 모달 위치 설정: 가운데(center), 상단(top), 하단(bottom) */
   position?: "center" | "top" | "bottom";
 

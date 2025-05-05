@@ -10,14 +10,13 @@ export const ModalWrapperStyle = (show: boolean) => css`
   display: ${show ? "block" : "none"};
 `;
 
-export const backGroundStyle = (background: boolean) => css`
+export const backGroundStyle = css`
   width: 100%;
   height: 100vh;
   position: absolute;
   top: 0;
   left: 0;
   background-color: rgba(0, 0, 0, 0.35);
-  visibility: ${background ? "visible" : "hidden"};
 `;
 export const ModalContainerStyle = (position: string, gap: number) => {
   const positionStyle = getPositionStyle(position);
