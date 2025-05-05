@@ -4,11 +4,11 @@ import useExpirationPeriod from '../lib/hooks/useExpirationPeriod';
 describe('useExpirationPeriod 훅', () => {
   test('초기 상태', () => {
     const { result } = renderHook(() => useExpirationPeriod());
-    expect(result.current.expirationPeriod).toEqual({
+    expect(result.current.value).toEqual({
       month: '',
       year: '',
     });
-    expect(result.current.isExpirationPeriodError).toEqual({
+    expect(result.current.isError).toEqual({
       month: false,
       year: false,
     });
@@ -18,7 +18,7 @@ describe('useExpirationPeriod 훅', () => {
   test('유효한 입력 시 에러 없음', () => {
     const { result } = renderHook(() => useExpirationPeriod());
     act(() => {
-      result.current.onChangeExpirationPeriod(
+      result.current.onChange(
         {
           target: { value: '12' },
         } as React.ChangeEvent<HTMLInputElement>,
@@ -27,18 +27,18 @@ describe('useExpirationPeriod 훅', () => {
     });
 
     act(() => {
-      result.current.onChangeExpirationPeriod(
+      result.current.onChange(
         {
           target: { value: '25' },
         } as React.ChangeEvent<HTMLInputElement>,
         'year'
       );
     });
-    expect(result.current.expirationPeriod).toEqual({
+    expect(result.current.value).toEqual({
       month: '12',
       year: '25',
     });
-    expect(result.current.isExpirationPeriodError).toEqual({
+    expect(result.current.isError).toEqual({
       month: false,
       year: false,
     });
@@ -48,7 +48,7 @@ describe('useExpirationPeriod 훅', () => {
   test('유효하지 않은 기간 입력시 에러 메시지', () => {
     const { result } = renderHook(() => useExpirationPeriod());
     act(() => {
-      result.current.onChangeExpirationPeriod(
+      result.current.onChange(
         {
           target: { value: '25' },
         } as React.ChangeEvent<HTMLInputElement>,
@@ -57,18 +57,18 @@ describe('useExpirationPeriod 훅', () => {
     });
 
     act(() => {
-      result.current.onChangeExpirationPeriod(
+      result.current.onChange(
         {
           target: { value: '04' },
         } as React.ChangeEvent<HTMLInputElement>,
         'month'
       );
     });
-    expect(result.current.expirationPeriod).toEqual({
+    expect(result.current.value).toEqual({
       month: '04',
       year: '25',
     });
-    expect(result.current.isExpirationPeriodError).toEqual({
+    expect(result.current.isError).toEqual({
       month: true,
       year: false,
     });

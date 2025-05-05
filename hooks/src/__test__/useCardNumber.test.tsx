@@ -4,7 +4,7 @@ import useCardNumber from '../lib/hooks/useCardNumber';
 describe('useCardNumber 훅', () => {
   test('초기 상태', () => {
     const { result } = renderHook(() => useCardNumber());
-    expect(result.current.cardNumber).toEqual(['', '', '', '']);
+    expect(result.current.value).toEqual(['', '', '', '']);
     expect(result.current.isError).toEqual([false, false, false, false]);
     expect(result.current.errorMessage).toBe('');
   });
@@ -17,7 +17,7 @@ describe('useCardNumber 훅', () => {
         0
       );
     });
-    expect(result.current.cardNumber[0]).toBe('1234');
+    expect(result.current.value[0]).toBe('1234');
     expect(result.current.isError[0]).toBe(false);
     expect(result.current.errorMessage).toBe('');
   });
