@@ -22,3 +22,24 @@ export interface ValidationHookReturnType {
   onChange: CurriedInputChangeHandler;
   noError: boolean;
 }
+
+export type ExpirationDateChangeHandler = (
+  type: keyof ExpirationDateInputs
+) => (e: React.ChangeEvent<HTMLInputElement>) => void;
+
+export interface ExpirationDateInputs {
+  month: string;
+  year: string;
+}
+
+export interface ExpirationDateErrors {
+  month: SingleErrorType;
+  year: SingleErrorType;
+}
+
+export interface ExpirationDateValidationReturnType {
+  inputStates: ExpirationDateInputs;
+  errorMessage: ErrorMessageType;
+  onChange: ExpirationDateChangeHandler;
+  noError: boolean;
+}
