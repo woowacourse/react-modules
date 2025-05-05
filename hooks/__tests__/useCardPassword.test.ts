@@ -4,8 +4,7 @@ import useCardPassword, {
   CARD_PASSWORD_MAX_LENGTH,
 } from '../src/useCardPassword/useCardPassword';
 import { CARD_PASSWORD_ERROR_MESSAGE } from '../src/useCardPassword/useCardPassword';
-import { create } from 'domain';
-import createInputChangeEvent from './utils/createInputChangeEvent';
+import createInputChangeEvent from '../src/utils/createInputChangeEvent';
 
 describe('useCardPassword hook 테스트', () => {
   it('초깃값은 빈 문자열이다', () => {
@@ -18,46 +17,55 @@ describe('useCardPassword hook 테스트', () => {
     expect(result.current.cardPassword).toBe('12');
   });
 
-  it('올바른 숫자를 입력하면 상태가 업데이트된다', () => {
-    const { result } = renderHook(() => useCardPassword());
+  describe('handleCardPasswordChange', () => {
+    let result;
 
-    const event = createInputChangeEvent('12');
-
-    act(() => {
-      result.current.handleCardPasswordChange(event);
+    beforeEach(() => {
+      const hook = renderHook(() => useCardPassword());
+      result = hook.result;
     });
 
-    expect(result.current.cardPassword).toBe('12');
-    expect(result.current.isError).toBe(false);
-  });
+    it('올바른 숫자를 입력하면 상태가 업데이트된다', () => {
+      const { result } = renderHook(() => useCardPassword());
 
-  it('숫자가 아니면 에러 상태를 반환한다', () => {
-    const { result } = renderHook(() => useCardPassword());
+      const event = createInputChangeEvent('12');
 
-    const event = createInputChangeEvent('1b');
+      act(() => {
+        result.current.handleCardPasswordChange(event);
+      });
 
-    act(() => {
-      result.current.handleCardPasswordChange(event);
+      expect(result.current.cardPassword).toBe('12');
+      expect(result.current.isError).toBe(false);
     });
 
-    expect(result.current.isError).toBe(true);
-    expect(result.current.errorMessage).toBe(
-      CARD_PASSWORD_ERROR_MESSAGE.NOT_NUMBERIC
-    );
-  });
+    it('숫자가 아니면 에러 상태를 반환한다', () => {
+      const { result } = renderHook(() => useCardPassword());
 
-  it(`${CARD_PASSWORD_MAX_LENGTH}자리를 초과하면 에러 상태를 반환한다`, () => {
-    const { result } = renderHook(() => useCardPassword());
+      const event = createInputChangeEvent('1b');
 
-    const event = createInputChangeEvent('123');
+      act(() => {
+        result.current.handleCardPasswordChange(event);
+      });
 
-    act(() => {
-      result.current.handleCardPasswordChange(event);
+      expect(result.current.isError).toBe(true);
+      expect(result.current.errorMessage).toBe(
+        CARD_PASSWORD_ERROR_MESSAGE.NOT_NUMBERIC
+      );
     });
 
-    expect(result.current.isError).toBe(true);
-    expect(result.current.errorMessage).toBe(
-      CARD_PASSWORD_ERROR_MESSAGE.INVALID_LENGTH
-    );
+    it(`${CARD_PASSWORD_MAX_LENGTH}자리를 초과하면 에러 상태를 반환한다`, () => {
+      const { result } = renderHook(() => useCardPassword());
+
+      const event = createInputChangeEvent('123');
+
+      act(() => {
+        result.current.handleCardPasswordChange(event);
+      });
+
+      expect(result.current.isError).toBe(true);
+      expect(result.current.errorMessage).toBe(
+        CARD_PASSWORD_ERROR_MESSAGE.INVALID_LENGTH
+      );
+    });
   });
 });

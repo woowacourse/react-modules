@@ -4,8 +4,7 @@ import { act } from 'react';
 import useCardExpirationDate, {
   CARD_EXPIRATION_DATE_MAX_LENGTH,
 } from '../src/useCardExpirationDate/useCardExpirationDate';
-import { create } from 'domain';
-import createInputChangeEvent from './utils/createInputChangeEvent';
+import createInputChangeEvent from '../src/utils/createInputChangeEvent';
 
 describe('useCardExpirationDate hook 테스트', () => {
   it('초깃값은 빈 문자열이다', () => {

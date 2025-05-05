@@ -4,7 +4,7 @@ import useCardNumbers, {
   CARD_NUMBER_MAX_LENGTH,
 } from '../src/useCardNumbers/useCardNumbers';
 import { act } from 'react';
-import createInputChangeEvent from './utils/createInputChangeEvent';
+import createInputChangeEvent from '../src/utils/createInputChangeEvent';
 
 describe('useCardNumbers hook 테스트', () => {
   it('초깃값은 빈 문자열이다', () => {
