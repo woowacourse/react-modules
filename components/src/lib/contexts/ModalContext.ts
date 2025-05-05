@@ -1,11 +1,18 @@
 import { createContext, useContext } from "react";
 
-const ModalContext = createContext<(() => void) | null>(null);
+interface ModalContextType {
+  onHide: () => void;
+}
+
+const ModalContext = createContext<ModalContextType>({
+  onHide: () => {
+    throw new Error("ModalContext must be used within a ModalProvider");
+  },
+});
 
 export const useModalContext = () => {
-  const context = useContext(ModalContext);
-  if (!context) throw new Error("에러!!");
-  return context;
+  const { onHide } = useContext(ModalContext);
+  return { onHide };
 };
 
 export default ModalContext;

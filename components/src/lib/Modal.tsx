@@ -17,7 +17,7 @@ import ModalContext, { useModalContext } from "./contexts/ModalContext";
 const Modal = ({ show, onHide, children, ...props }: ModalProps) => {
   useKeyEscClose(onHide);
   return (
-    <ModalContext.Provider value={onHide}>
+    <ModalContext.Provider value={{ onHide }}>
       <div css={ModalWrapperStyle(show)} {...props}>
         {children}
       </div>
@@ -26,7 +26,7 @@ const Modal = ({ show, onHide, children, ...props }: ModalProps) => {
 };
 
 Modal.Background = ({ children, ...props }: BaseProps) => {
-  const onHide = useModalContext();
+  const { onHide } = useModalContext();
   const ref = useRef<HTMLDivElement>(null);
 
   const handleClick = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -49,7 +49,7 @@ Modal.Container = ({ position = "center", gap = 16, children, ...props }: ModalC
 };
 
 Modal.Header = ({ closeButton = false, children, ...props }: ModalHeaderProps) => {
-  const onHide = useModalContext();
+  const { onHide } = useModalContext();
   return (
     <div css={ModalHeaderStyle} {...props}>
       <span>{children}</span>
