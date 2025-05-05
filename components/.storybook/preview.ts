@@ -9,6 +9,12 @@ const preview: Preview = {
         date: /Date$/i,
       },
     },
+    docs: {
+      story: {
+        inline: false, // 인라인 요소
+        iframeHeight: 500, //높이
+      },
+    },
   },
 };
 
