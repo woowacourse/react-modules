@@ -36,10 +36,10 @@ export const useCardNumber = (initialCardNumber: CardNumber, initialError: CardN
       [name]: value,
     });
 
-    setCardNumberError({
-      ...updatedError,
-      [name]: '',
-    });
+    setCardNumberError(prevErrors => ({
+      ...prevErrors,
+      [name]: CARD_NUMBER_ERROR.onlyNumbers,
+    }));
   };
 
   const isCardNumberValid = () => {

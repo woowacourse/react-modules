@@ -29,28 +29,28 @@ export const useCardExpiryPeriod = (
       [name]: value,
     });
 
-    setCardExpirationDateError({
-      ...cardExpirationDateError,
-      [name]: '',
-    });
+    setCardExpirationDateError(prevErrors => ({
+      ...prevErrors,
+      [name]: CARD_EXPIRATION_ERROR.onlyNumbers,
+    }));
 
     if (name === 'month' && value.length > 0) {
       const monthValue = Number(value);
       if (monthValue < CARD_EXPIRATION.minMonth || monthValue > CARD_EXPIRATION.maxMonth) {
-        setCardExpirationDateError({
-          ...cardExpirationDateError,
+        setCardExpirationDateError(prevErrors => ({
+          ...prevErrors,
           month: CARD_EXPIRATION_ERROR.invalidMonth,
-        });
+        }));
       }
     }
 
     if (name === 'year' && value.length === CARD_EXPIRATION.yearLength) {
       const yearValue = Number(value);
       if (yearValue < CARD_EXPIRATION.minYear || yearValue > CARD_EXPIRATION.maxYear) {
-        setCardExpirationDateError({
-          ...cardExpirationDateError,
+        setCardExpirationDateError(prevErrors => ({
+          ...prevErrors,
           year: CARD_EXPIRATION_ERROR.invalidYear,
-        });
+        }));
       }
     }
   };
