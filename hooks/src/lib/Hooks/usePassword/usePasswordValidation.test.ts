@@ -48,6 +48,6 @@ describe("usePassword", () => {
       (result.current.validateInput as (value: string) => void)(userInput);
     });
 
-    expect(result.current.noError).toBeTruthy();
+    expect(result.current.isErrorComplete).toBeTruthy();
   });
 });

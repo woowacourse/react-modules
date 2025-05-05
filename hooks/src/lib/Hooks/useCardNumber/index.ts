@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { isNumber } from "../../utils/validation";
-import checkNoError from "../../utils/checkNoError";
 import {
   CardNumberType,
   ErrorMessageType,
@@ -9,6 +8,7 @@ import {
   SetValueFn,
   ValidInputFuncType,
 } from "../../types";
+import useErrorCheckComplete from "../common/useErrorCheckComplete";
 
 const KEY_INDEX_MATCH = ["first", "second", "third", "forth"];
 
@@ -55,7 +55,7 @@ const useCardNumber = (): HookReturnType<"cardNumber"> => {
     setErrorMessage(message);
   };
 
-  const noError = checkNoError(errors);
+  const isErrorComplete = useErrorCheckComplete(errors);
 
   return {
     state: cardNumber,
@@ -63,7 +63,7 @@ const useCardNumber = (): HookReturnType<"cardNumber"> => {
     errors,
     errorMessage,
     validateInput,
-    noError,
+    isErrorComplete,
   };
 };
 

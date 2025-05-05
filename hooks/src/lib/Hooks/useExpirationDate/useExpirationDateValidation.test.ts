@@ -69,6 +69,6 @@ describe("useExpirationDate", () => {
       result.current.validateInput(month, index);
     });
 
-    expect(result.current.noError).toBeTruthy();
+    expect(result.current.isErrorComplete).toBeTruthy();
   });
 });

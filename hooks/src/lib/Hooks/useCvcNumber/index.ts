@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { isNumber } from "../../utils/validation";
-import checkNoError from "../../utils/checkNoError";
 import {
   CvcNumberType,
   ErrorMessageType,
@@ -9,6 +8,7 @@ import {
   SingleErrorType,
   ValidInputFuncType,
 } from "../../types";
+import useErrorCheckComplete from "../common/useErrorCheckComplete";
 
 const useCvcNumber = (): HookReturnType<"cvcNumber"> => {
   const [cvcNumber, setCvcNumber] = useState<CvcNumberType>("");
@@ -23,7 +23,7 @@ const useCvcNumber = (): HookReturnType<"cvcNumber"> => {
     setErrorMessage(message);
   };
 
-  const noError = checkNoError(errors);
+  const isErrorComplete = useErrorCheckComplete(errors);
 
   return {
     state: cvcNumber,
@@ -31,7 +31,7 @@ const useCvcNumber = (): HookReturnType<"cvcNumber"> => {
     errors,
     errorMessage,
     validateInput,
-    noError,
+    isErrorComplete,
   };
 };
 

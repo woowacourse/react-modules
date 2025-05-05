@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { isExpirationDate } from "../../utils/validation";
-import checkNoError from "../../utils/checkNoError";
 import {
   ErrorMessageType,
   ExpirationDateType,
@@ -9,6 +8,7 @@ import {
   SetValueFn,
   ValidInputFuncType,
 } from "../../types";
+import useErrorCheckComplete from "../common/useErrorCheckComplete";
 
 const KEY_INDEX_MATCH = ["month", "year"];
 
@@ -48,7 +48,7 @@ const useExpirationDate = (): HookReturnType<"expirationDate"> => {
     setErrorMessage(message);
   };
 
-  const noError = checkNoError(errors);
+  const isErrorComplete = useErrorCheckComplete(errors);
 
   return {
     state: expirationDate,
@@ -56,7 +56,7 @@ const useExpirationDate = (): HookReturnType<"expirationDate"> => {
     errors,
     errorMessage,
     validateInput,
-    noError,
+    isErrorComplete,
   };
 };
 

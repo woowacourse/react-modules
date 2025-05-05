@@ -61,6 +61,6 @@ describe("useCardNumber", () => {
       result.current.validateInput(userInput, index);
     });
 
-    expect(result.current.noError).toBeTruthy();
+    expect(result.current.isErrorComplete).toBeTruthy();
   });
 });

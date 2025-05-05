@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { isNumber } from "../../utils/validation";
-import checkNoError from "../../utils/checkNoError";
 import {
   ErrorMessageType,
   HookReturnType,
@@ -9,6 +8,7 @@ import {
   SingleErrorType,
   ValidInputFuncType,
 } from "../../types";
+import useErrorCheckComplete from "../common/useErrorCheckComplete";
 
 const usePassword = (): HookReturnType<"password"> => {
   const [password, setPassword] = useState<PasswordType>("");
@@ -23,7 +23,7 @@ const usePassword = (): HookReturnType<"password"> => {
     setErrorMessage(message);
   };
 
-  const noError = checkNoError(errors);
+  const isErrorComplete = useErrorCheckComplete(errors);
 
   return {
     state: password,
@@ -31,7 +31,7 @@ const usePassword = (): HookReturnType<"password"> => {
     errors,
     errorMessage,
     validateInput,
-    noError,
+    isErrorComplete,
   };
 };
 
