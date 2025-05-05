@@ -19,7 +19,7 @@ describe('useCardNumbers', () => {
   it('입력값이 숫자가 아닐 때 isValid로 false를 반환하고 에러 메시지를 반환한다.', () => {
     const { result } = renderHook(() => useCardNumbers());
 
-    expect(result.current.validateCardNumbers('aaaa')).toBe(
+    expect(result.current.getCardNumberValidationError('aaaa')).toBe(
       CARD_NUMBER_ERROR_TYPES.notNumber
     );
   });
@@ -27,7 +27,7 @@ describe('useCardNumbers', () => {
   it('입력값이 네 자리가 아닐 때 isValid로 false를 반환하고 에러 메시지를 반환한다.', () => {
     const { result } = renderHook(() => useCardNumbers());
 
-    expect(result.current.validateCardNumbers('12345')).toBe(
+    expect(result.current.getCardNumberValidationError('12345')).toBe(
       CARD_NUMBER_ERROR_TYPES.invalidLength
     );
   });

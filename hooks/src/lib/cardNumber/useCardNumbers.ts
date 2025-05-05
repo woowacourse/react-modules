@@ -26,17 +26,12 @@ function useCardNumbers() {
     part4: { isValid: true, errorMessage: '' },
   });
 
-  const validateCardNumbers = (value: string) => {
+  const getCardNumberValidationError = (value: string) => {
     const isNumber = checkIsNumber(value);
     const isValidLength = checkIsValidLength(value, 4);
 
-    if (!isNumber) {
-      return CARD_NUMBER_ERROR_TYPES.notNumber;
-    }
-
-    if (!isValidLength) {
-      return CARD_NUMBER_ERROR_TYPES.invalidLength;
-    }
+    if (!isNumber) return CARD_NUMBER_ERROR_TYPES.notNumber;
+    if (!isValidLength) return CARD_NUMBER_ERROR_TYPES.invalidLength;
 
     return null;
   };
@@ -46,7 +41,7 @@ function useCardNumbers() {
     restrictChange: boolean = true
   ) => {
     const { name, value } = event.target;
-    const errorType = validateCardNumbers(value);
+    const errorType = getCardNumberValidationError(value);
 
     if (restrictChange && errorType) {
       return;
@@ -68,7 +63,7 @@ function useCardNumbers() {
   return {
     cardNumbers,
     validationResults,
-    validateCardNumbers,
+    getCardNumberValidationError,
     handleCardNumbersChange,
   };
 }

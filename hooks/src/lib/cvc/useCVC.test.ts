@@ -19,13 +19,15 @@ describe('useCVC', () => {
   it('입력값이 숫자가 아닐 때 isValid로 false를 반환하고 에러 메시지를 반환한다.', () => {
     const { result } = renderHook(() => useCVC());
 
-    expect(result.current.validateCVC('aaa')).toBe(CVC_ERROR_TYPES.notNumber);
+    expect(result.current.getCVCValidationError('aaa')).toBe(
+      CVC_ERROR_TYPES.notNumber
+    );
   });
 
   it('입력값이 세 자리가 아닐 때 isValid로 false를 반환하고 에러 메시지를 반환한다.', () => {
     const { result } = renderHook(() => useCVC());
 
-    expect(result.current.validateCVC('1234')).toBe(
+    expect(result.current.getCVCValidationError('1234')).toBe(
       CVC_ERROR_TYPES.invalidLength
     );
   });

@@ -11,17 +11,12 @@ function useCVC() {
     errorMessage: '',
   });
 
-  const validateCVC = (value: string) => {
+  const getCVCValidationError = (value: string) => {
     const isNumber = checkIsNumber(value);
     const isValidLength = checkIsValidLength(value, 3);
 
-    if (!isNumber) {
-      return CVC_ERROR_TYPES.notNumber;
-    }
-
-    if (!isValidLength) {
-      return CVC_ERROR_TYPES.invalidLength;
-    }
+    if (!isNumber) return CVC_ERROR_TYPES.notNumber;
+    if (!isValidLength) return CVC_ERROR_TYPES.invalidLength;
 
     return null;
   };
@@ -31,7 +26,7 @@ function useCVC() {
     restrictChange: boolean = true
   ) => {
     const { value } = event.target;
-    const errorType = validateCVC(value);
+    const errorType = getCVCValidationError(value);
 
     if (restrictChange && errorType) {
       return;
@@ -50,7 +45,7 @@ function useCVC() {
   return {
     CVC,
     validationResult,
-    validateCVC,
+    getCVCValidationError,
     handleCVCChange,
   };
 }

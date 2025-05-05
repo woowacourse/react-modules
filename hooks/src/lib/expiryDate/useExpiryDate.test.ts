@@ -19,7 +19,7 @@ describe('useExpiryDate', () => {
   it('입력값이 숫자가 아닐 때 isValid로 false를 반환하고 에러 메시지를 반환한다.', () => {
     const { result } = renderHook(() => useExpiryDate());
 
-    expect(result.current.validateExpiryDate('month', 'aa')).toBe(
+    expect(result.current.getExpiryDateValidationError('month', 'aa')).toBe(
       EXPIRY_DATE_ERROR_TYPES.notNumber
     );
   });
@@ -27,7 +27,7 @@ describe('useExpiryDate', () => {
   it('입력값이 두 자리가 아닐 때 isValid로 false를 반환하고 에러 메시지를 반환한다.', () => {
     const { result } = renderHook(() => useExpiryDate());
 
-    expect(result.current.validateExpiryDate('month', '123')).toBe(
+    expect(result.current.getExpiryDateValidationError('month', '123')).toBe(
       EXPIRY_DATE_ERROR_TYPES.invalidLength
     );
   });
@@ -35,7 +35,7 @@ describe('useExpiryDate', () => {
   it('입력값이 1 이상 12이하가 아닐 때 isValid로 false를 반환하고 에러 메시지를 반환한다.', () => {
     const { result } = renderHook(() => useExpiryDate());
 
-    expect(result.current.validateExpiryDate('month', '13')).toBe(
+    expect(result.current.getExpiryDateValidationError('month', '13')).toBe(
       EXPIRY_DATE_ERROR_TYPES.invalidMonthRange
     );
   });
@@ -49,7 +49,7 @@ describe('useExpiryDate', () => {
       } as ChangeEvent<HTMLInputElement>);
     });
 
-    expect(result.current.validateIsExpiredDate('year', '12')).toBe(
+    expect(result.current.getExpiryDateExpiredError('year', '12')).toBe(
       EXPIRY_DATE_ERROR_TYPES.expiredDate
     );
   });

@@ -26,35 +26,26 @@ function useExpiryDate() {
     year: { isValid: true, errorMessage: '' },
   });
 
-  const validateExpiryDate = (name: ExpiryDateKey, value: string) => {
+  const getExpiryDateValidationError = (name: ExpiryDateKey, value: string) => {
     const isNumber = checkIsNumber(value);
     const isValidLength = checkIsValidLength(value, 2);
     const isMonthInRange = checkIsInRange(Number(value), 1, 12);
 
-    if (!isNumber) {
-      return EXPIRY_DATE_ERROR_TYPES.notNumber;
-    }
-
-    if (!isValidLength) {
-      return EXPIRY_DATE_ERROR_TYPES.invalidLength;
-    }
-
-    if (name === EXPIRY_DATE_KEY.month && !isMonthInRange) {
+    if (!isNumber) return EXPIRY_DATE_ERROR_TYPES.notNumber;
+    if (!isValidLength) return EXPIRY_DATE_ERROR_TYPES.invalidLength;
+    if (name === EXPIRY_DATE_KEY.month && !isMonthInRange)
       return EXPIRY_DATE_ERROR_TYPES.invalidMonthRange;
-    }
 
     return null;
   };
 
-  const validateIsExpiredDate = (name: ExpiryDateKey, value: string) => {
+  const getExpiryDateExpiredError = (name: ExpiryDateKey, value: string) => {
     const { month, year } = expiryDate;
     const targetMonth = name === EXPIRY_DATE_KEY.month ? value : month;
     const targetYear = name === EXPIRY_DATE_KEY.year ? value : year;
     const isExpiredDate = checkIsExpiredDate(targetMonth, targetYear);
 
-    if (isExpiredDate) {
-      return EXPIRY_DATE_ERROR_TYPES.expiredDate;
-    }
+    if (isExpiredDate) return EXPIRY_DATE_ERROR_TYPES.expiredDate;
 
     return null;
   };
@@ -64,7 +55,10 @@ function useExpiryDate() {
     restrictChange: boolean = true
   ) => {
     const { name, value } = event.target;
-    const errorType = validateExpiryDate(name as ExpiryDateKey, value);
+    const errorType = getExpiryDateValidationError(
+      name as ExpiryDateKey,
+      value
+    );
 
     if (restrictChange && errorType) {
       return;
@@ -80,7 +74,10 @@ function useExpiryDate() {
       }));
     }
 
-    const isExpiredDate = validateIsExpiredDate(name as ExpiryDateKey, value);
+    const isExpiredDate = getExpiryDateExpiredError(
+      name as ExpiryDateKey,
+      value
+    );
     setValidationResults((prev) => ({
       ...prev,
       [name]: {
@@ -97,8 +94,8 @@ function useExpiryDate() {
   return {
     expiryDate,
     validationResults,
-    validateExpiryDate,
-    validateIsExpiredDate,
+    getExpiryDateValidationError,
+    getExpiryDateExpiredError,
     handleExpiryDateChange,
   };
 }
