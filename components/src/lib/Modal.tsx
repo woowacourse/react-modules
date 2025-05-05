@@ -35,8 +35,7 @@ const Modal = ({
       </ModalContainer>
     </ModalBackground>
   );
-  const portalRoot = document.getElementById("modal-root")!;
-  return createPortal(modalContent, portalRoot);
+  return createPortal(modalContent, document.body);
 };
 
 export default Modal;
