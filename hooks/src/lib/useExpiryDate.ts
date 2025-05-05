@@ -8,18 +8,22 @@ type ValitationResult = {
   updateExpiryDate: (value: string, dateName: 'month' | 'year') => void;
 };
 
+type UpdateErrorArgs =
+  | { index: number; isValid: true; errorMessage: string }
+  | { index: number; isValid: false };
+
 type dateType = {
   month: string;
   year: string;
 };
 
 type errorType = {
-  isValidate: boolean;
+  isValid: boolean;
   errorMessage: string;
 };
 
 const initialError = {
-  isValidate: false,
+  isValid: false,
   errorMessage: '',
 };
 
@@ -32,13 +36,14 @@ export default function useExpiryDate(): ValitationResult {
     )
   );
 
-  const updateError = (index: number, isError: boolean, message: string) => {
+  const updateError = (args: UpdateErrorArgs) => {
     setError((prev) => {
-      prev[index] = {
-        isValidate: isError,
-        errorMessage: message,
+      const updated = [...prev];
+      updated[args.index] = {
+        isValid: args.isValid,
+        errorMessage: args.isValid ? args.errorMessage : '',
       };
-      return prev;
+      return updated;
     });
   };
 
@@ -58,47 +63,71 @@ export default function useExpiryDate(): ValitationResult {
 
   const validateMonth = (value: string) => {
     if (value === '') {
-      updateError(0, false, '');
+      updateError({ index: 0, isValid: false });
       return;
     }
 
     if (!/^\d*$/.test(value)) {
-      updateError(0, true, ERROR_MESSAGE.EXPIRY_DATE.MONTH_IS_NOT_A_NUMBER);
+      updateError({
+        index: 0,
+        isValid: true,
+        errorMessage: ERROR_MESSAGE.EXPIRY_DATE.MONTH_IS_NOT_A_NUMBER,
+      });
       return;
     }
     if (value.length < VALIDATION_RULE.EXPIRY_DATE.MAX_LENGTH) {
-      updateError(0, true, ERROR_MESSAGE.EXPIRY_DATE.INVALID_MONTH_LENGTH);
+      updateError({
+        index: 0,
+        isValid: true,
+        errorMessage: ERROR_MESSAGE.EXPIRY_DATE.INVALID_MONTH_LENGTH,
+      });
       return;
     }
     if (
       Number(value) < VALIDATION_RULE.EXPIRY_DATE.MONTH_MIN ||
       Number(value) > VALIDATION_RULE.EXPIRY_DATE.MONTH_MAX
     ) {
-      updateError(0, true, ERROR_MESSAGE.EXPIRY_DATE.INVALID_MONTH);
+      updateError({
+        index: 0,
+        isValid: true,
+        errorMessage: ERROR_MESSAGE.EXPIRY_DATE.INVALID_MONTH,
+      });
       return;
     }
-    updateError(0, false, '');
+    updateError({ index: 0, isValid: false });
   };
 
   const validateYear = (value: string) => {
     if (value === '') {
-      updateError(1, false, '');
+      updateError({ index: 1, isValid: false });
       return;
     }
 
     if (!/^\d*$/.test(value)) {
-      updateError(1, true, ERROR_MESSAGE.EXPIRY_DATE.YEAR_IS_NOT_A_NUMBER);
+      updateError({
+        index: 1,
+        isValid: true,
+        errorMessage: ERROR_MESSAGE.EXPIRY_DATE.YEAR_IS_NOT_A_NUMBER,
+      });
       return;
     }
     if (value.length < VALIDATION_RULE.EXPIRY_DATE.MAX_LENGTH) {
-      updateError(1, true, ERROR_MESSAGE.EXPIRY_DATE.INVALID_YEAR_LENGTH);
+      updateError({
+        index: 1,
+        isValid: true,
+        errorMessage: ERROR_MESSAGE.EXPIRY_DATE.INVALID_YEAR_LENGTH,
+      });
       return;
     }
     if (Number(value) < VALIDATION_RULE.EXPIRY_DATE.YEAR_MIN) {
-      updateError(1, true, ERROR_MESSAGE.EXPIRY_DATE.INVALID_YEAR);
+      updateError({
+        index: 1,
+        isValid: true,
+        errorMessage: ERROR_MESSAGE.EXPIRY_DATE.INVALID_YEAR,
+      });
       return;
     }
-    updateError(1, false, '');
+    updateError({ index: 1, isValid: false });
   };
 
   return { date, error, updateExpiryDate };

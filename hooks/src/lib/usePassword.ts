@@ -8,6 +8,10 @@ type ValitationResult = {
   updatePassword: (value: string) => void;
 };
 
+type UpdateErrorArgs =
+  | { isValid: true; errorMessage: string }
+  | { isValid: false };
+
 type errorType = {
   isValid: boolean;
   errorMessage: string;
@@ -22,6 +26,13 @@ export default function usePassword(): ValitationResult {
   const [password, setPassword] = useState('');
   const [error, setError] = useState(InitialError);
 
+  const updateError = (args: UpdateErrorArgs) => {
+    setError({
+      isValid: args.isValid,
+      errorMessage: args.isValid ? args.errorMessage : '',
+    });
+  };
+
   const updatePassword = (value: string) => {
     if (value.length > VALIDATION_RULE.PASSWORD.MAX_LENGTH) return;
 
@@ -32,25 +43,25 @@ export default function usePassword(): ValitationResult {
 
   const validate = (value: string) => {
     if (value === '') {
-      setError({ isValid: false, errorMessage: '' });
+      updateError({ isValid: false });
       return;
     }
 
     if (!/^\d*$/.test(value)) {
-      setError({
+      updateError({
         isValid: true,
         errorMessage: ERROR_MESSAGE.PASSWORD.NOT_A_NUMBER,
       });
       return;
     }
     if (value.length < VALIDATION_RULE.PASSWORD.MAX_LENGTH) {
-      setError({
+      updateError({
         isValid: true,
         errorMessage: ERROR_MESSAGE.PASSWORD.INVALID_LENGTH,
       });
       return;
     }
-    setError({ isValid: false, errorMessage: '' });
+    updateError({ isValid: false });
   };
 
   return { password, error, updatePassword };
