@@ -1,7 +1,7 @@
 import validation from '../validation';
-import { CardNumberStateKey, CarNumberStateType } from './useCardNumber';
+import { CardNumberStateKey, CardNumberStateType } from './useCardNumber';
 
-const validateCardNumber = (cardNumber: CarNumberStateType) => {
+const validateCardNumber = (cardNumber: CardNumberStateType) => {
   const errorState = {
     first: false,
     second: false,

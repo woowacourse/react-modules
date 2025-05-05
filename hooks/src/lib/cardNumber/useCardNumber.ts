@@ -1,7 +1,7 @@
 import { ChangeEvent, useState } from 'react';
 import validateCardNumber from './validateCardNumber';
 
-export type CarNumberStateType = typeof initialCardNumberState;
+export type CardNumberStateType = typeof initialCardNumberState;
 
 const initialCardNumberState = {
   first: '',
@@ -10,10 +10,10 @@ const initialCardNumberState = {
   fourth: ''
 };
 
-export type CardNumberStateKey = keyof CarNumberStateType;
+export type CardNumberStateKey = keyof CardNumberStateType;
 
 function useCardNumber() {
-  const [cardNumber, setCardNumber] = useState<CarNumberStateType>(initialCardNumberState);
+  const [cardNumber, setCardNumber] = useState<CardNumberStateType>(initialCardNumberState);
 
   const handleCardNumberChange = (e: ChangeEvent<HTMLInputElement>, field: CardNumberStateKey) => {
     const value = e.target.value;
