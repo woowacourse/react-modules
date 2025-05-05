@@ -24,14 +24,14 @@ function useCVC() {
     const isValidLength = checkIsValidLength(value);
 
     if (!isNumber) {
-      return CVC_ERROR_TYPES.notNumber;
+      return { isValid: false, errorType: CVC_ERROR_TYPES.notNumber };
     }
 
     if (!isValidLength) {
-      return CVC_ERROR_TYPES.invalidLength;
+      return { isValid: false, errorType: CVC_ERROR_TYPES.invalidLength };
     }
 
-    return null;
+    return { isValid: true };
   };
 
   const handleCVCChange = (
@@ -39,7 +39,7 @@ function useCVC() {
     restrictChange: boolean = true
   ) => {
     const { value } = event.target;
-    const errorType = validateCVC(value);
+    const { isValid, errorType } = validateCVC(value);
 
     if (restrictChange && errorType) {
       return;
@@ -47,7 +47,7 @@ function useCVC() {
 
     if (!restrictChange) {
       setValidationResult({
-        isValid: !Boolean(errorType),
+        isValid,
         errorMessage: errorType ? ERROR_MESSAGE.cardNumber[errorType] : '',
       });
     }

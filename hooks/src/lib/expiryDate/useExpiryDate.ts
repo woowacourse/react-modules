@@ -50,18 +50,24 @@ function useExpiryDate() {
     const isMonthInRange = checkIsMonthInRange(value);
 
     if (!isNumber) {
-      return EXPIRY_DATE_ERROR_TYPES.notNumber;
+      return { isValid: false, errorType: EXPIRY_DATE_ERROR_TYPES.notNumber };
     }
 
     if (!isValidLength) {
-      return EXPIRY_DATE_ERROR_TYPES.invalidLength;
+      return {
+        isValid: false,
+        errorType: EXPIRY_DATE_ERROR_TYPES.invalidLength,
+      };
     }
 
     if (name === EXPIRY_DATE_KEY.month && !isMonthInRange) {
-      return EXPIRY_DATE_ERROR_TYPES.invalidMonthRange;
+      return {
+        isValid: false,
+        errorType: EXPIRY_DATE_ERROR_TYPES.invalidMonthRange,
+      };
     }
 
-    return null;
+    return { isValid: true };
   };
 
   const validateIsExpiredDate = (name: ExpiryDateKey, value: string) => {
@@ -71,10 +77,10 @@ function useExpiryDate() {
     const isExpiredDate = checkIsExpiredDate(targetMonth, targetYear);
 
     if (isExpiredDate) {
-      return EXPIRY_DATE_ERROR_TYPES.expiredDate;
+      return { isValid: false, errorType: EXPIRY_DATE_ERROR_TYPES.expiredDate };
     }
 
-    return null;
+    return { isValid: true };
   };
 
   const handleExpiryDateChange = (
@@ -82,7 +88,10 @@ function useExpiryDate() {
     restrictChange: boolean = true
   ) => {
     const { name, value } = event.target;
-    const errorType = validateExpiryDate(name as ExpiryDateKey, value);
+    const { isValid, errorType } = validateExpiryDate(
+      name as ExpiryDateKey,
+      value
+    );
 
     if (restrictChange && errorType) {
       return;
@@ -92,19 +101,22 @@ function useExpiryDate() {
       setValidationResults((prev) => ({
         ...prev,
         [name]: {
-          isValid: !Boolean(errorType),
+          isValid,
           errorMessage: errorType ? ERROR_MESSAGE.expiryDate[errorType] : '',
         },
       }));
     }
 
-    const isExpiredDate = validateIsExpiredDate(name as ExpiryDateKey, value);
+    const validateDateResult = validateIsExpiredDate(
+      name as ExpiryDateKey,
+      value
+    );
     setValidationResults((prev) => ({
       ...prev,
       [name]: {
-        isValid: !Boolean(isExpiredDate),
-        errorMessage: isExpiredDate
-          ? ERROR_MESSAGE.expiryDate[isExpiredDate]
+        isValid: validateDateResult.isValid,
+        errorMessage: validateDateResult.errorType
+          ? ERROR_MESSAGE.expiryDate[validateDateResult.errorType]
           : '',
       },
     }));

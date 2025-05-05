@@ -17,6 +17,10 @@ export const CARD_NUMBER_ERROR_TYPES = {
   invalidLength: 'invalidLength',
 } as const;
 export type CardNumberErrorType = keyof typeof CARD_NUMBER_ERROR_TYPES;
+export type ValidateCardNumbersResult = {
+  isValid: boolean;
+  errorType?: CardNumberErrorType;
+};
 
 export const EXPIRY_DATE_ERROR_TYPES = {
   notNumber: 'notNumber',
@@ -25,12 +29,20 @@ export const EXPIRY_DATE_ERROR_TYPES = {
   expiredDate: 'expiredDate',
 } as const;
 export type ExpiryDateErrorType = keyof typeof EXPIRY_DATE_ERROR_TYPES;
+export type ValidateExpiryDateResult = {
+  isValid: boolean;
+  errorType?: ExpiryDateErrorType;
+};
 
 export const CVC_ERROR_TYPES = {
   notNumber: 'notNumber',
   invalidLength: 'invalidLength',
 } as const;
 export type CVCErrorType = keyof typeof CVC_ERROR_TYPES;
+export type ValidateCVCResult = {
+  isValid: boolean;
+  errorType?: CVCErrorType;
+};
 
 const COMMON_ERROR_MESSAGE = {
   notNumber: '숫자만 입력해주세요.',

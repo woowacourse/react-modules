@@ -36,14 +36,17 @@ function useCardNumbers() {
     const isValidLength = checkIsValidLength(value);
 
     if (!isNumber) {
-      return CARD_NUMBER_ERROR_TYPES.notNumber;
+      return { isValid: false, errorType: CARD_NUMBER_ERROR_TYPES.notNumber };
     }
 
     if (!isValidLength) {
-      return CARD_NUMBER_ERROR_TYPES.invalidLength;
+      return {
+        isValid: false,
+        errorType: CARD_NUMBER_ERROR_TYPES.invalidLength,
+      };
     }
 
-    return null;
+    return { isValid: true };
   };
 
   const handleCardNumbersChange = (
@@ -51,7 +54,7 @@ function useCardNumbers() {
     restrictChange: boolean = true
   ) => {
     const { name, value } = event.target;
-    const errorType = validateCardNumbers(value);
+    const { isValid, errorType } = validateCardNumbers(value);
 
     if (restrictChange && errorType) {
       return;
@@ -61,7 +64,7 @@ function useCardNumbers() {
       setValidationResults((prev) => ({
         ...prev,
         [name]: {
-          isValid: !Boolean(errorType),
+          isValid,
           errorMessage: errorType ? ERROR_MESSAGE.cardNumber[errorType] : '',
         },
       }));
