@@ -12,14 +12,13 @@ export interface ValidateFuncReturnType {
   message: ErrorMessageType;
 }
 
-type ValidWithoutIndex = (value: string) => void;
-type ValidWithIndex = (value: string, index: number) => void;
-
-export type ValidInputFuncType = ValidWithoutIndex | ValidWithIndex;
+export type CurriedInputChangeHandler = (
+  index: number
+) => (e: React.ChangeEvent<HTMLInputElement>) => void;
 
 export interface ValidationHookReturnType {
-  errors: SingleErrorType | ListErrorType;
+  inputStates: string | string[];
   errorMessage: ErrorMessageType;
-  validateInput:  ValidInputFuncType;
+  onChange: CurriedInputChangeHandler;
   noError: boolean;
 }
