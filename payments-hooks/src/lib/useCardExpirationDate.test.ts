@@ -4,14 +4,14 @@ import { ChangeEvent } from "react";
 import { ERROR_MESSAGE } from "./validator/constants/errorMessage";
 
 describe("useCardExpirationDate", () => {
-  it("초기값이 정확히 설정되어야 한다.", () => {
+  it('초기 렌더링 시 빈 문자열("")을 상태값으로 가진다.', () => {
     const { result } = renderHook(() => useCardExpirationDateInput());
 
     expect(result.current.cardExpirationDate).toEqual({ month: "", year: "" });
     expect(result.current.errorMessage).toBe("");
   });
 
-  it("month 입력값이 정확히 업데이트 되어야 한다.", () => {
+  it('사용자가 month 인풋에 "3"을 입력하면 month 상태값도 "3"으로 설정된다.', () => {
     const userInput = "3";
     const { result } = renderHook(() => useCardExpirationDateInput());
 
@@ -24,7 +24,7 @@ describe("useCardExpirationDate", () => {
     expect(result.current.cardExpirationDate.month).toBe(userInput);
   });
 
-  it("year 입력값이 정확히 업데이트 되어야 한다.", () => {
+  it("사용자가 year 인풋에 '3'을 입력하면 year 상태값도 '3'으로 설정된다.", () => {
     const userInput = "3";
     const { result } = renderHook(() => useCardExpirationDateInput());
 
@@ -88,26 +88,6 @@ describe("useCardExpirationDate", () => {
       ERROR_MESSAGE.EXPIRATION.MONTH.IS_EXPIRATION
     );
   });
-
-  // it('숫자가 아닌 year 입력값에 에러메세지가 출력된다.', () => {
-  //   const userInputMonth = '12';
-  //   const userInputYear = 'k';
-  //   const { result } = renderHook(() => useCardExpirationDateInput());
-
-  //   act(() => {
-  //     result.current.onChangeHandler({
-  //       target: { name: 'month', value: userInputMonth },
-  //     } as ChangeEvent<HTMLInputElement>);
-  //   });
-
-  //   act(() => {
-  //     result.current.onChangeHandler({
-  //       target: { name: 'year', value: userInputYear },
-  //     } as ChangeEvent<HTMLInputElement>);
-  //   });
-
-  //   expect(result.current.errorMessage).toBe(ERROR_MESSAGE.EXPIRATION.YEAR.IS_NUMBER);
-  // });
 
   it("현재 만료된 유효 기간을 입력 시 에러메세지가 출력된다.", () => {
     const userMonthInput = "12";
