@@ -23,16 +23,18 @@ function useCVC() {
 
   const handleCVCChange = (
     event: ChangeEvent<HTMLInputElement>,
-    restrictChange: boolean = true
+    options?: { skipValidation?: boolean }
   ) => {
     const { value } = event.target;
     const errorType = getCVCValidationError(value);
 
-    if (restrictChange && errorType) {
+    const shouldSkipValidation = options?.skipValidation ?? false;
+
+    if (!shouldSkipValidation && errorType) {
       return;
     }
 
-    if (!restrictChange) {
+    if (shouldSkipValidation) {
       setValidationResult({
         isValid: !Boolean(errorType),
         errorMessage: errorType ? ERROR_MESSAGE.CVC[errorType] : '',

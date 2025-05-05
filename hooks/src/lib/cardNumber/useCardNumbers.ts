@@ -38,16 +38,18 @@ function useCardNumbers() {
 
   const handleCardNumbersChange = (
     event: ChangeEvent<HTMLInputElement>,
-    restrictChange: boolean = true
+    options?: { skipValidation?: boolean }
   ) => {
     const { name, value } = event.target;
     const errorType = getCardNumberValidationError(value);
 
-    if (restrictChange && errorType) {
+    const shouldSkipValidation = options?.skipValidation ?? false;
+
+    if (!shouldSkipValidation && errorType) {
       return;
     }
 
-    if (!restrictChange) {
+    if (shouldSkipValidation) {
       setValidationResults((prev) => ({
         ...prev,
         [name]: {

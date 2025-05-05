@@ -1,5 +1,5 @@
 import './App.css';
-import { EXPIRY_DATE_KEY } from './lib/constants';
+import { EXPIRY_DATE_KEY } from './lib';
 import useExpiryDate from './lib/expiryDate/useExpiryDate';
 
 function App() {
@@ -19,7 +19,7 @@ function App() {
       <input
         type="text"
         name={EXPIRY_DATE_KEY.year}
-        onChange={(e) => handleExpiryDateChange(e, false)}
+        onChange={(e) => handleExpiryDateChange(e, { skipValidation: true })}
         value={expiryDate.year}
       />
       <p>{validationResults.year.isValid}</p>
