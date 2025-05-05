@@ -16,24 +16,23 @@ describe("useError", () => {
     forth: "",
   };
 
-  test("카드 번호 초기 값을 가져온다.", () => {
-    const { result } = renderHook(() =>
+  let result: any;
+
+  beforeEach(() => {
+    const hook = renderHook(() =>
       useCardNumber({
         initCardNumber: cardNumber,
         initCardNumberError: cardNumberError,
       })
     );
+    result = hook.result;
+  });
 
+  test("카드 번호 초기 값을 가져온다.", () => {
     expect(result.current.cardNumber).toEqual(cardNumber);
   });
 
   test("카드 번호 값을 변경할 수 있다.", () => {
-    const { result } = renderHook(() =>
-      useCardNumber({
-        initCardNumber: cardNumber,
-        initCardNumberError: cardNumberError,
-      })
-    );
     const type = "first";
     const changeValue = "1001";
 
@@ -45,13 +44,6 @@ describe("useError", () => {
   });
 
   test("카드 번호가 올바르지 않은 경우 에러를 반환한다.", () => {
-    const { result } = renderHook(() =>
-      useCardNumber({
-        initCardNumber: cardNumber,
-        initCardNumberError: cardNumberError,
-      })
-    );
-
     const type = "first";
     const changeValue = "100a";
     const maxLength = 4;
@@ -69,13 +61,6 @@ describe("useError", () => {
   });
 
   test("카드 번호가 올바르지 않은 경우 에러 메시지를 반환한다.", () => {
-    const { result } = renderHook(() =>
-      useCardNumber({
-        initCardNumber: cardNumber,
-        initCardNumberError: cardNumberError,
-      })
-    );
-
     const type = "first";
     const changeValue = "100a";
     const maxLength = 4;

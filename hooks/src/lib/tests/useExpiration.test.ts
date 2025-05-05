@@ -15,26 +15,24 @@ describe("유효 기간 테스트", () => {
     year: "",
   };
 
-  test("유효 기간 초기 값을 가져온다.", () => {
-    const { result } = renderHook(() =>
+  let result: any;
+
+  beforeEach(() => {
+    const hook = renderHook(() =>
       useExpiration({
         initExpiration: expiration,
         initMonthError: monthError,
         initYearError: yearError,
       })
     );
+    result = hook.result;
+  });
 
+  test("유효 기간 초기 값을 가져온다.", () => {
     expect(result.current.expiration).toEqual(expiration);
   });
 
   test("유효 기간 값을 변경할 수 있다.", () => {
-    const { result } = renderHook(() =>
-      useExpiration({
-        initExpiration: expiration,
-        initMonthError: monthError,
-        initYearError: yearError,
-      })
-    );
     const type = "month";
     const changeValue = "12";
 
@@ -46,14 +44,6 @@ describe("유효 기간 테스트", () => {
   });
 
   test("유효 기간 달이 올바르지 않은 경우 에러를 반환한다.", () => {
-    const { result } = renderHook(() =>
-      useExpiration({
-        initExpiration: expiration,
-        initMonthError: monthError,
-        initYearError: yearError,
-      })
-    );
-
     const type = "month";
     const changeValue = "1ㅁ";
     const maxLength = 2;
@@ -71,14 +61,6 @@ describe("유효 기간 테스트", () => {
   });
 
   test("유효 기간 년이 올바르지 않은 경우 에러를 반환한다.", () => {
-    const { result } = renderHook(() =>
-      useExpiration({
-        initExpiration: expiration,
-        initMonthError: monthError,
-        initYearError: yearError,
-      })
-    );
-
     const type = "year";
     const changeValue = "1a";
     const maxLength = 2;
@@ -96,14 +78,6 @@ describe("유효 기간 테스트", () => {
   });
 
   test("유효 기간 달이 올바르지 않은 경우 에러 메시지를 반환한다.", () => {
-    const { result } = renderHook(() =>
-      useExpiration({
-        initExpiration: expiration,
-        initMonthError: monthError,
-        initYearError: yearError,
-      })
-    );
-
     const type = "month";
     const changeValue = "1a";
     const maxLength = 2;
@@ -123,14 +97,6 @@ describe("유효 기간 테스트", () => {
   });
 
   test("유효 기간 년이 올바르지 않은 경우 에러 메시지를 반환한다.", () => {
-    const { result } = renderHook(() =>
-      useExpiration({
-        initExpiration: expiration,
-        initMonthError: monthError,
-        initYearError: yearError,
-      })
-    );
-
     const type = "year";
     const changeValue = "1a";
     const maxLength = 2;
