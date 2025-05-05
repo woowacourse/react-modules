@@ -20,7 +20,10 @@ import { CardBrand } from "../constants/CardBrand";
 import { CARD_NUMBER_LENGTH } from "./constants/card-number-length";
 
 function makeMessageForInvalidLength(cardBrand: CardBrand): string {
-  return `카드 번호는 ${CARD_NUMBER_LENGTH[cardBrand].join(
+  if (cardBrand === "DEFAULT") {
+    return "카드 번호는 16 자리여야 합니다.";
+  }
+  return `${cardBrand} 카드 번호는 ${CARD_NUMBER_LENGTH[cardBrand].join(
     ", "
   )} 자리여야 합니다.`;
 }
