@@ -12,6 +12,7 @@ import {
   ModalWrapperStyle,
 } from "./Modal.style";
 import ModalContext, { useModalContext } from "./contexts/ModalContext";
+import { useRef } from "react";
 
 const Modal = ({ show, onHide, children, ...props }: ModalProps) => {
   useKeyEscClose(onHide);
@@ -26,8 +27,14 @@ const Modal = ({ show, onHide, children, ...props }: ModalProps) => {
 
 Modal.Background = ({ children, ...props }: BaseProps) => {
   const onHide = useModalContext();
+  const ref = useRef<HTMLDivElement>(null);
+
+  const handleClick = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (e.target === ref.current) onHide();
+  };
+
   return (
-    <div css={backGroundStyle} onClick={onHide} {...props}>
+    <div ref={ref} css={backGroundStyle} onClick={handleClick} {...props}>
       {children}
     </div>
   );
