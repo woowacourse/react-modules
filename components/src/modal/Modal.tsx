@@ -9,6 +9,7 @@ import {
 import PrimaryButton from './PrimaryButton';
 import SecondaryButton from './SecondaryButton';
 import { ModalProps } from './types';
+import { css } from '@emotion/react';
 
 function ModalContainer({
   open,
@@ -91,19 +92,29 @@ const StyledModalContainer = styled.dialog<{ isBottom: boolean }>`
   border: none;
   border-radius: 8px;
 
-  margin-bottom: ${(props) => (props.isBottom ? 0 : null)};
-  width: ${(props) => (props.isBottom ? '100%' : null)};
-  max-width: ${(props) => (props.isBottom ? '100%' : null)};
-  border-bottom-left-radius: ${(props) => (props.isBottom ? 0 : null)};
-  border-bottom-right-radius: ${(props) => (props.isBottom ? 0 : null)};
-
   &::backdrop {
     background-color: #000000;
     opacity: 0.35;
   }
 
+  ${({ isBottom }) => (isBottom ? bottomModalContainer : defaultModalContainer)}
+`;
+
+const defaultModalContainer = css`
   @media (max-width: 600px) {
-    width: ${(props) => (props.isBottom ? '100%' : 'calc(100vw - 72px)')};
+    width: calc(100vw - 72px);
+  }
+`;
+
+const bottomModalContainer = css`
+  margin-bottom: 0;
+  width: 100%;
+  max-width: 100%;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+
+  @media (max-width: 600px) {
+    width: 100%;
   }
 `;
 
