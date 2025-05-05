@@ -96,4 +96,4 @@ Module
 - [ ] 유효성 훅 길이 체크
 - [x] useKeyEscClose 훅 의존성 배열 onHide 함수 채우기
 - [x] Context API 단일 값 수정 / null 타입 제거
-- [ ] (모달) React Portal 적용
+- [x] (모달) React Portal 적용
