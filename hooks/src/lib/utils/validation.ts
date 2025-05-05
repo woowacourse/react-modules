@@ -10,10 +10,10 @@ import { ValidateFuncReturnType } from '../types';
 export const validateNumericString = (
   value: string
 ): ValidateFuncReturnType => {
-  const error = !NUMBER_REGEX.test(value);
+  const isValid = NUMBER_REGEX.test(value);
 
-  if (error) return { error, message: ERROR_MESSAGE.NUMBER_ONLY };
-  return { error, message: '' };
+  if (!isValid) return { error: true, message: ERROR_MESSAGE.NUMBER_ONLY };
+  return { error: false, message: '' };
 };
 
 export const isExpirationDate = (
