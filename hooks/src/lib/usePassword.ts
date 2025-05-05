@@ -3,10 +3,12 @@ import { INPUT_RULE } from './constants/inputRule';
 import { ERROR_MESSAGE } from './constants/errorMessage';
 import { isEmpty, isValidLength, isNumber } from './utils/validate';
 import { isOverInputLength } from './utils/overInputLength';
+import { initialError } from './utils/initial';
+import { ErrorType } from './types/errorType';
 
 type ValitationResult = {
   password: string;
-  error: errorType;
+  error: ErrorType;
   updatePassword: (value: string) => void;
 };
 
@@ -14,19 +16,9 @@ type UpdateErrorArgs =
   | { isValid: true; errorMessage: string }
   | { isValid: false };
 
-type errorType = {
-  isValid: boolean;
-  errorMessage: string;
-};
-
-const InitialError = {
-  isValid: false,
-  errorMessage: '',
-};
-
 export default function usePassword(): ValitationResult {
   const [password, setPassword] = useState('');
-  const [error, setError] = useState(InitialError);
+  const [error, setError] = useState<ErrorType>(initialError);
 
   const updateError = (args: UpdateErrorArgs) => {
     setError({

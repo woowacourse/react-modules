@@ -3,6 +3,8 @@ import { INPUT_RULE } from './constants/inputRule';
 import { ERROR_MESSAGE } from './constants/errorMessage';
 import { isEmpty, isValidLength, isNumber } from './utils/validate';
 import { isOverInputLength } from './utils/overInputLength';
+import { initialError } from './utils/initial';
+import { ErrorType } from './types/errorType';
 
 type ValitationResult = {
   cvc: string;
@@ -13,16 +15,6 @@ type ValitationResult = {
 type UpdateErrorArgs =
   | { isValid: true; errorMessage: string }
   | { isValid: false };
-
-type ErrorType = {
-  isValid: boolean;
-  errorMessage: string;
-};
-
-const initialError = {
-  isValid: false,
-  errorMessage: '',
-};
 
 export default function useCvcNumber(): ValitationResult {
   const [cvc, setCvc] = useState('');

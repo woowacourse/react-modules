@@ -9,10 +9,12 @@ import {
   isValidMonth,
   isValidYear,
 } from './utils/validate';
+import { initialError } from './utils/initial';
+import { ErrorType } from './types/errorType';
 
 type ValitationResult = {
   date: dateType;
-  error: errorType[];
+  error: ErrorType[];
   updateExpiryDate: (value: string, dateName: 'month' | 'year') => void;
 };
 
@@ -25,19 +27,9 @@ type dateType = {
   year: string;
 };
 
-type errorType = {
-  isValid: boolean;
-  errorMessage: string;
-};
-
-const initialError = {
-  isValid: false,
-  errorMessage: '',
-};
-
 export default function useExpiryDate(): ValitationResult {
   const [date, setDate] = useState<dateType>({ month: '', year: '' });
-  const [error, setError] = useState<errorType[]>(
+  const [error, setError] = useState<ErrorType[]>(
     Array.from(
       { length: INPUT_RULE.EXPIRY_DATE.MAX_LENGTH },
       () => initialError
