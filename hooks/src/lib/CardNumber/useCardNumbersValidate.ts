@@ -1,7 +1,7 @@
-import { useState } from 'react';
+import { useState } from "react";
 
-import validateNumber from '../utils/validateNumber';
-import validateMaxLength from '../utils/validateMaxLength';
+import validateNumber from "../utils/validateNumber";
+import validateMaxLength from "../utils/validateMaxLength";
 
 type CardNumbersValidate = {
   first: boolean;
@@ -14,51 +14,51 @@ const initialCardNumberValidate: CardNumbersValidate = {
   first: true,
   second: true,
   third: true,
-  fourth: true
+  fourth: true,
 };
 
 type CardNumberValidateResult = {
-  isValid: CardNumbersValidate;
+  validationState: CardNumbersValidate;
   errorMessage: string | null;
   validateCardNumbers: (cardNumber: string, key: string) => void;
 };
 
 const useCardNumbersValidate = (): CardNumberValidateResult => {
-  const [isValid, setIsValid] = useState<CardNumbersValidate>(
+  const [validationState, setValidationState] = useState<CardNumbersValidate>(
     initialCardNumberValidate
   );
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   const validateCardNumbers = (cardNumber: string, key: string) => {
     if (!validateNumber(cardNumber)) {
-      setIsValid({
-        ...isValid,
-        [key]: false
+      setValidationState({
+        ...validationState,
+        [key]: false,
       });
 
-      setErrorMessage('숫자만 입력해주세요.');
+      setErrorMessage("숫자만 입력해주세요.");
       return;
     }
 
     if (!validateMaxLength(cardNumber, 4)) {
-      setIsValid({
-        ...isValid,
-        [key]: false
+      setValidationState({
+        ...validationState,
+        [key]: false,
       });
 
-      setErrorMessage('4자리만 입력해주세요.');
+      setErrorMessage("4자리만 입력해주세요.");
       return;
     }
 
-    setIsValid({
-      ...isValid,
-      [key]: true
+    setValidationState({
+      ...validationState,
+      [key]: true,
     });
 
     setErrorMessage(null);
   };
 
-  return { isValid, errorMessage, validateCardNumbers };
+  return { validationState, errorMessage, validateCardNumbers };
 };
 
 export default useCardNumbersValidate;

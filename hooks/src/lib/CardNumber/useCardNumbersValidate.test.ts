@@ -10,7 +10,7 @@ describe("useCardNumbersValidate", () => {
       result.current.validateCardNumbers("1234", "first");
     });
 
-    expect(result.current.isValid.first).toBe(true);
+    expect(result.current.validationState.first).toBe(true);
     expect(result.current.errorMessage).toBeNull();
   });
 
@@ -21,7 +21,7 @@ describe("useCardNumbersValidate", () => {
       result.current.validateCardNumbers("-1", "first");
     });
 
-    expect(result.current.isValid.first).toBe(false);
+    expect(result.current.validationState.first).toBe(false);
     expect(result.current.errorMessage).toBe("숫자만 입력해주세요.");
   });
 
@@ -32,7 +32,7 @@ describe("useCardNumbersValidate", () => {
       result.current.validateCardNumbers("12345", "third");
     });
 
-    expect(result.current.isValid.third).toBe(false);
+    expect(result.current.validationState.third).toBe(false);
     expect(result.current.errorMessage).toBe("4자리만 입력해주세요.");
   });
 });
