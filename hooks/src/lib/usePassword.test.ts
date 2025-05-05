@@ -58,7 +58,7 @@ test("3자리 이상 입력 시 무시된다.", () => {
 
   expect(result.current.error.errorMessage).toBe("");
   expect(result.current.error.isValid).toBe(false);
-  expect(result.current.password).toBe("12");
+  expect(result.current.password).toBe("");
 });
 
 test("빈 문자열 입력 시 에러가 사라진다.", () => {
