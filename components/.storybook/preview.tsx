@@ -1,4 +1,4 @@
-import type { Preview } from "@storybook/react";
+import type { Preview, Decorator } from "@storybook/react";
 import { Global } from "@emotion/react";
 import { resetCss } from "@/styles/reset";
 import {
@@ -6,11 +6,11 @@ import {
   INITIAL_VIEWPORTS,
 } from "@storybook/addon-viewport";
 
-export const decorators = [
-  (Story) => (
+export const decorators: Decorator[] = [
+  (Story, context) => (
     <>
       <Global styles={resetCss} />
-      <Story />
+      {Story(context)}
     </>
   ),
 ];
