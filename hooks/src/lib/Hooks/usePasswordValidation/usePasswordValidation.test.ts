@@ -68,4 +68,34 @@ describe('usePasswordValidation', () => {
     });
     expect(result.current.errorMessage).toBe('');
   });
+
+  it('3자리가 아닌 숫자가 들어오면 에러메시지를 반환한다.', () => {
+    const { result } = renderHook(() => usePasswordValidation());
+    const shortEvent = {
+      target: { value: '1' },
+    } as React.ChangeEvent<HTMLInputElement>;
+
+    act(() => {
+      result.current.onChange(0)(shortEvent);
+    });
+
+    expect(result.current.errorMessage).toBe(
+      '올바른 길이의 숫자를 입력해주세요.'
+    );
+    expect(result.current.noError).toBe(false);
+  });
+
+  it('정상적인 2자리 숫자 입력 시 noError가 true가 된다.', () => {
+    const { result } = renderHook(() => usePasswordValidation());
+    const goodEvent = {
+      target: { value: '13' },
+    } as React.ChangeEvent<HTMLInputElement>;
+
+    act(() => {
+      result.current.onChange(0)(goodEvent);
+    });
+
+    expect(result.current.noError).toBe(true);
+    expect(result.current.errorMessage).toBe('');
+  });
 });
