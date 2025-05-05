@@ -1,5 +1,6 @@
 import styled from "@emotion/styled";
 import { ButtonVariants } from ".";
+import Polymorphic from "../Polymorphic";
 
 export const getButtonStyle = (variant: ButtonVariants) => {
   switch (variant) {
@@ -17,7 +18,9 @@ export const getButtonStyle = (variant: ButtonVariants) => {
   }
 };
 
-export const Button = styled.button<{ variant: ButtonVariants }>`
+export const StyledPolymorphic = styled(Polymorphic)<{
+  variant: ButtonVariants;
+}>`
   width: 5rem;
   height: 2.25rem;
   border-radius: 4px;
@@ -26,4 +29,5 @@ export const Button = styled.button<{ variant: ButtonVariants }>`
   font-size: 0.9375rem;
   font-weight: 700;
   ${({ variant }) => getButtonStyle(variant)}
+  cursor: pointer;
 `;

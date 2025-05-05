@@ -7,6 +7,8 @@ const meta = {
   tags: ["autodocs"],
   args: {
     variant: "primary",
+    as: "button",
+    type: "button",
     children: "Button",
   },
 } satisfies Meta<typeof Button>;
