@@ -1,7 +1,6 @@
 import { useState } from "react";
-import validator from "../utils/validate";
 import { CARD_INPUT } from "../constants/cardValidationInfo";
-import ERROR_MESSAGE from "../constants/errorMessage";
+import { validateNumericInput } from "../utils/inputValidation";
 
 type CardNumberState = {
   value: string;
@@ -27,24 +26,17 @@ const useCardNumberInput = (): Props => {
 
   const [errorMessage, setErrorMessage] = useState("");
 
+  const validateCardNumber = (value: string) => {
+    return validateNumericInput(value, CARD_INPUT.MAX_LENGTH.CARD);
+  };
+
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement>,
     index: number
   ) => {
     const inputValue = e.target.value;
 
-    let isValid = true;
-    let errorMessage = "";
-
-    if (validator.isNotNumber(inputValue)) {
-      isValid = false;
-      errorMessage = ERROR_MESSAGE.REQUIRE.NUMBER;
-    } else if (
-      !validator.hascorrectLength(inputValue, CARD_INPUT.MAX_LENGTH.CARD)
-    ) {
-      isValid = false;
-      errorMessage = `숫자 ${CARD_INPUT.MAX_LENGTH.CARD}${ERROR_MESSAGE.REQUIRE.SPECIFIC_LENGTH}`;
-    }
+    const { isValid, errorMessage } = validateCardNumber(inputValue);
 
     const updatedState = cardNumberState.map((item, i) =>
       i === index ? { value: inputValue, isValid } : item

@@ -1,6 +1,5 @@
 import { useState } from "react";
-import validator from "../utils/validate";
-import ERROR_MESSAGE from "../constants/errorMessage";
+import { validateNumericInput } from "../utils/inputValidation";
 
 type singleState = {
   value: string;
@@ -21,19 +20,14 @@ const useSingleInput = (maxLength: number): Props => {
 
   const [errorMessage, setErrorMessage] = useState("");
 
+  const validateSingleInput = (value: string) => {
+    return validateNumericInput(value, maxLength);
+  };
+
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const inputValue = e.target.value;
 
-    let isValid = true;
-    let errorMessage = "";
-
-    if (validator.isNotNumber(inputValue)) {
-      isValid = false;
-      errorMessage = ERROR_MESSAGE.REQUIRE.NUMBER;
-    } else if (!validator.hascorrectLength(inputValue, maxLength)) {
-      isValid = false;
-      errorMessage = `숫자 ${maxLength}${ERROR_MESSAGE.REQUIRE.SPECIFIC_LENGTH}`;
-    }
+    const { isValid, errorMessage } = validateSingleInput(inputValue);
 
     const updatedState = { value: inputValue, isValid };
 
