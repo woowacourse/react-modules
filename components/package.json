@@ -1,6 +1,6 @@
 {
   "name": "happyjurung-modal",
-  "version": "0.0.5",
+  "version": "0.0.7",
   "description": "React 애플리케이션에서 모달 창을 쉽고 일관되게 구현할 수 있도록 돕는 라이브러리",
   "keywords": [
     "react",
@@ -66,5 +66,9 @@
     "vite": "^6.2.6",
     "vite-plugin-css-injected-by-js": "^3.5.2",
     "vite-plugin-dts": "^4.5.3"
+  },
+  "dependencies": {
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.0"
   }
 }
