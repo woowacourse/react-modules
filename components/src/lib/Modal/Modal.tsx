@@ -24,16 +24,21 @@ const Modal = ({
   onConfirm,
 }: ModalProps) => {
   return (
-    <Overlay>
+    <Overlay
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="modal-title"
+      aria-describedby="modal-content"
+    >
       <Wrapper className={position} onClick={handleBackdropClick}>
         <ModalContainer className={position}>
           <ModalHeader>
-            <ModalTitle>{title}</ModalTitle>
+            <ModalTitle id="modal-title">{title}</ModalTitle>
             <CloseButtonWrapper>
               {hasCloseButton && <CloseButton onClose={onClose} />}
             </CloseButtonWrapper>
           </ModalHeader>
-          <ModalContent>{content}</ModalContent>
+          <ModalContent id="modal-content">{content}</ModalContent>{" "}
           <ModalFooter>
             {onConfirm && (
               <ConfirmButton confirmText={confirmText} onClick={onConfirm} />
