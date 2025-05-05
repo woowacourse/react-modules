@@ -1,4 +1,4 @@
-import type { ModalSizeType } from "../types";
+import type { ModalDefaultProps } from "../types";
 import Button from "@/components/Button";
 import ContentModal from "../ContentModal";
 import { type ComponentProps, FormEvent, useRef } from "react";
@@ -11,11 +11,8 @@ export const defaultInputAttributes: ComponentProps<"input"> = {
   required: true,
 };
 
-interface PromptModalProps {
-  title: string;
-  size?: ModalSizeType;
+interface PromptModalProps extends ModalDefaultProps {
   inputAttributes?: ComponentProps<"input">;
-  onRequestClose: () => void;
   onSubmit: (value: string) => void;
 }
 

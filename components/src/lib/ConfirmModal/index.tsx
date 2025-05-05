@@ -1,15 +1,12 @@
 import useOutsideClickRef from "../../hooks/useOutsideClickRef";
 import useKeyDown from "@/hooks/useKeyDown";
-import type { ModalSizeType } from "../types";
+import type { ModalDefaultProps } from "../types";
 import Button from "@/components/Button";
 import * as S from "./ConfirmModal.styled";
 import ContentModal from "../ContentModal";
 
-interface ConfirmModalProps {
-  title: string;
+interface ConfirmModalProps extends ModalDefaultProps {
   confirmText: string;
-  size?: ModalSizeType;
-  onRequestClose: () => void;
   onConfirm: () => void;
 }
 

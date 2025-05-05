@@ -2,12 +2,11 @@ import { PropsWithChildren } from "react";
 import useOutsideClickRef from "../../hooks/useOutsideClickRef";
 import useKeyDown from "@/hooks/useKeyDown";
 import BaseModal from "../BaseModal";
-import { ModalLayoutProps } from "../types";
+import { ModalLayoutProps, ModalDefaultProps } from "../types";
 
-interface ModalProps extends ModalLayoutProps {
-  title: string;
-  onRequestClose: () => void;
-}
+interface ModalProps
+  extends Omit<ModalDefaultProps, "size">,
+    ModalLayoutProps {}
 
 function Modal({
   title,
