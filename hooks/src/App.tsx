@@ -3,12 +3,19 @@ import { useCardValidation } from "./lib";
 
 function App() {
   const { card, cvc, expiry, password, network } = useCardValidation();
-
+  const { format } = useCardValidation({ format: { splitter: "-" } });
   const handleCardNumberChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    card.onCardNumberChange(e);
-    network.onChange(e);
-  };
+    format.onChange(e);
 
+    const digits = e.target.value.replace(/\D/g, "");
+
+    const sanitizedEvent = {
+      ...e,
+      target: { ...e.target, value: digits },
+    };
+    network.onChange(sanitizedEvent);
+    card.onCardNumberChange(sanitizedEvent);
+  };
   return (
     <div className="App">
       <h1>카드 정보 입력</h1>
@@ -18,7 +25,7 @@ function App() {
           <input
             id="cardNumber"
             type="text"
-            value={card.cardNumber}
+            value={format.formatted}
             onChange={handleCardNumberChange}
             placeholder="1234 5678 9012 3456"
           />
