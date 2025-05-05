@@ -46,7 +46,7 @@ export default App;
 
 ## 스토리북
 
-https://step1--6812ddd3aa5be0c9ccb7572d.chromatic.com
+https://step2--6812ddd3aa5be0c9ccb7572d.chromatic.com
 
 ## Props
 
