@@ -15,7 +15,6 @@ import { MAX_LENGTH } from "../../constants";
 const KEY_INDEX_MATCH = ["first", "second", "third", "forth"];
 
 const useCardNumber = (): HookReturnType<"cardNumber"> => {
-  /** 상태 및 변수 관리 */
   const [cardNumber, setCardNumber] = useState<CardNumberType>({
     first: "",
     second: "",
@@ -26,14 +25,10 @@ const useCardNumber = (): HookReturnType<"cardNumber"> => {
   const [errors, setErrors] = useState<ListErrorType>([false, false, false, false]);
   const [errorMessage, setErrorMessage] = useState<ErrorMessageType>("");
 
-  /** setter(상태업데이트) */
   const onChange: SetValueFn<CardNumberType[keyof CardNumberType]> = (value, index) => {
-    if (index === undefined) return;
-
-    // setter 상태업데이트
     setCardNumber((prev) => ({
       ...prev,
-      [KEY_INDEX_MATCH[index]]: value,
+      [KEY_INDEX_MATCH[index!]]: value,
     }));
   };
 

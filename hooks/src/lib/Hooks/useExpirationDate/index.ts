@@ -15,7 +15,6 @@ import { MAX_LENGTH } from "../../constants";
 const KEY_INDEX_MATCH = ["month", "year"];
 
 const useExpirationDate = (): HookReturnType<"expirationDate"> => {
-  /** 상태 및 변수 관리 */
   const [expirationDate, setExpirationDate] = useState<ExpirationDateType>({
     month: "",
     year: "",
@@ -23,14 +22,10 @@ const useExpirationDate = (): HookReturnType<"expirationDate"> => {
   const [errors, setErrors] = useState<ListErrorType>([false, false]);
   const [errorMessage, setErrorMessage] = useState<ErrorMessageType>("");
 
-  /** setter(상태업데이트) */
   const onChange: SetValueFn<ExpirationDateType[keyof ExpirationDateType]> = (value, index) => {
-    if (index === undefined) return;
-
-    // setter 상태업데이트
     setExpirationDate((prev) => ({
       ...prev,
-      [KEY_INDEX_MATCH[index]]: value,
+      [KEY_INDEX_MATCH[index!]]: value,
     }));
   };
 
