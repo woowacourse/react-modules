@@ -1,9 +1,8 @@
 import { renderHook, act } from "@testing-library/react";
-
 import useCardNumbersValidate from "./useCardNumbersValidate";
 
 describe("useCardNumbersValidate", () => {
-  it("숫자로 이루어진 4자리 값이 들어오면 isValid가 true이고 에러 메시지가 null이다.", () => {
+  it("값이 '1234'이면 isValid 값이 true이고 errorMessage 값이 null로 설정되어야 한다.", () => {
     const { result } = renderHook(() => useCardNumbersValidate());
 
     act(() => {
@@ -14,7 +13,7 @@ describe("useCardNumbersValidate", () => {
     expect(result.current.errorMessage).toBeNull();
   });
 
-  it("숫자로 이루어지지 않은 값이 들어오면 isValid가 false이고 에러 메시지가 나온다.", () => {
+  it("값이 '-1'이면 isValid 값이 false이고 errorMessage 값이 '숫자만 입력해주세요.'로 설정되어야 한다.", () => {
     const { result } = renderHook(() => useCardNumbersValidate());
 
     act(() => {
@@ -25,7 +24,7 @@ describe("useCardNumbersValidate", () => {
     expect(result.current.errorMessage).toBe("숫자만 입력해주세요.");
   });
 
-  it("4자리 이상의 값이 들어오면 isValid가 false이고 에러 메시지가 나온다.", () => {
+  it("값이 '12345'이면 isValid 값이 false이고 errorMessage 값이 '4자리만 입력해주세요.'로 설정되어야 한다.", () => {
     const { result } = renderHook(() => useCardNumbersValidate());
 
     act(() => {
