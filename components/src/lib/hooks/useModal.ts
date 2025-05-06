@@ -21,10 +21,8 @@ export const useModal = () => {
     setIsOpen(false);
   };
 
-  const handleOutsideClick = (e: React.MouseEvent) => {
-    if (e.target instanceof HTMLElement && e.target === e.currentTarget) {
-      handleCloseModal();
-    }
+  const handleOutsideClick = () => {
+    handleCloseModal();
   };
 
   const handleKeyDown = (e: KeyboardEvent) => {
