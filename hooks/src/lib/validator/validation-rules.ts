@@ -17,13 +17,19 @@ import { isValidLuhn } from "../utils/isValidLuhn";
 import { isValidLength } from "../utils/isValidLength";
 import { checkCardBrand } from "../utils/card-brand-checker";
 import { CardBrand } from "../constants/CardBrand";
-import { CARD_NUMBER_LENGTH } from "./constants/card-number-length";
+import {
+  CARD_NUMBER_LENGTH,
+  CLIENT_CARD_NUMBER_LENGTH,
+} from "./constants/card-number-length";
 
-function makeMessageForInvalidLength(cardBrand: CardBrand): string {
+function makeMessageForInvalidLength(
+  cardBrand: CardBrand,
+  cardNumberLength: Record<CardBrand, number[]>
+): string {
   if (cardBrand === "DEFAULT") {
     return "카드 번호는 16 자리여야 합니다.";
   }
-  return `${cardBrand} 카드 번호는 ${CARD_NUMBER_LENGTH[cardBrand].join(
+  return `${cardBrand} 카드 번호는 ${cardNumberLength[cardBrand].join(
     ", "
   )} 자리여야 합니다.`;
 }
@@ -51,9 +57,12 @@ export const validationRules = {
       message: CARD_NUMBER_ERROR_MESSAGES.INVALID_FORMAT,
     },
     INVALID_LENGTH: {
-      check: (value: string) => isValidLength(value),
+      check: (value: string) => isValidLength(value, CLIENT_CARD_NUMBER_LENGTH),
       message: (value: string) =>
-        makeMessageForInvalidLength(checkCardBrand(value)),
+        makeMessageForInvalidLength(
+          checkCardBrand(value),
+          CLIENT_CARD_NUMBER_LENGTH
+        ),
     },
   },
   strictCardNumber: {
@@ -70,9 +79,9 @@ export const validationRules = {
       message: CARD_NUMBER_ERROR_MESSAGES.INVALID_CHECKSUM,
     },
     INVALID_LENGTH: {
-      check: (value: string) => isValidLength(value),
+      check: (value: string) => isValidLength(value, CARD_NUMBER_LENGTH),
       message: (value: string) =>
-        makeMessageForInvalidLength(checkCardBrand(value)),
+        makeMessageForInvalidLength(checkCardBrand(value), CARD_NUMBER_LENGTH),
     },
   },
   password: {

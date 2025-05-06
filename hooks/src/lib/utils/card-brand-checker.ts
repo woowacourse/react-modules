@@ -1,5 +1,4 @@
 import type { CardBrand } from "../constants/CardBrand";
-import { CARD_NUMBER_LENGTH } from "../validator/constants/card-number-length";
 
 type KnownBrand = Exclude<CardBrand, "DEFAULT">;
 
@@ -18,12 +17,15 @@ const BRAND_PATTERNS: { brand: KnownBrand; regex: RegExp }[] = [
   },
 ];
 
-export function strictCheckCardBrand(cardNumber: string): CardBrand {
+export function strictCheckCardBrand(
+  cardNumber: string,
+  cardNumberLength: Record<CardBrand, number[]>
+): CardBrand {
   const cleaned = cardNumber.replace(/\D/g, "");
   const len = cleaned.length;
 
   for (const { brand, regex } of BRAND_PATTERNS) {
-    if (regex.test(cleaned) && CARD_NUMBER_LENGTH[brand].includes(len)) {
+    if (regex.test(cleaned) && cardNumberLength[brand].includes(len)) {
       return brand;
     }
   }

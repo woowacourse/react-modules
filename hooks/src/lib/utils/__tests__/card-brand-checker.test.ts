@@ -1,5 +1,6 @@
 // __tests__/cardBrandChecker.test.ts
 import type { CardBrand } from "../../constants/CardBrand";
+import { CARD_NUMBER_LENGTH } from "../../validator/constants/card-number-length";
 import { checkCardBrand, strictCheckCardBrand } from "../card-brand-checker";
 
 describe("strictCardBrandChecker", () => {
@@ -39,7 +40,7 @@ describe("strictCardBrandChecker", () => {
 
   cases.forEach(({ input, expected }) => {
     it(`"${input}" → ${expected}`, () => {
-      expect(strictCheckCardBrand(input)).toBe(expected);
+      expect(strictCheckCardBrand(input, CARD_NUMBER_LENGTH)).toBe(expected);
     });
   });
 });
