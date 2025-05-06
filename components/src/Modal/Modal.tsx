@@ -1,15 +1,12 @@
-import {
-  BackDrop,
-  ModalLayout,
-  CloseIcon,
-  ModalTitle,
-  ModalContents,
-  ModalButton,
-  ModalButtonContainer,
-} from "./Modal.styled";
-import { useContext, useEffect } from "react";
+import { useEffect } from "react";
 import { createContext } from "react";
 import { createPortal } from "react-dom";
+import { BackDrop } from "./BackDrop/BackDrop";
+import { Frame } from "./Frame/Frame";
+import { Title } from "./Title/Title";
+import { Button } from "./Button/Button";
+import { CloseButton } from "./CloseButton/CloseButton";
+import { Body } from "./Body/Body";
 
 type ModalProps = {
   isOpen: boolean;
@@ -18,7 +15,7 @@ type ModalProps = {
   position?: "center" | "bottom";
 };
 
-const ModalContext = createContext<ModalProps>({
+export const ModalContext = createContext<ModalProps>({
   isOpen: true,
   onClose: () => {},
   children: <></>,
@@ -57,14 +54,7 @@ const Modal = ({
       {isOpen &&
         createPortal(
           <ModalContext.Provider value={value}>
-            <BackDrop onClick={onClose} $position={position}>
-              <ModalLayout
-                $position={position}
-                onClick={(event) => event.stopPropagation()}
-              >
-                {children}
-              </ModalLayout>
-            </BackDrop>
+            {children}
           </ModalContext.Provider>,
           document.getElementById("root") as HTMLElement
         )}
@@ -72,60 +62,11 @@ const Modal = ({
   );
 };
 
-interface ModalTitleProps {
-  title: string;
-}
-
-const Title = ({ title }: ModalTitleProps) => {
-  return <ModalTitle>{title}</ModalTitle>;
-};
-
-const CloseButton = () => {
-  const modalContext = useContext(ModalContext);
-
-  return <CloseIcon onClick={modalContext.onClose} />;
-};
-
-interface ModalContentsProps {
-  children: React.ReactNode;
-}
-
-const Contents = ({ children }: ModalContentsProps) => {
-  return <ModalContents>{children}</ModalContents>;
-};
-
-type ButtonProps = {
-  title: string;
-  backgroundColor?: string;
-  textColor?: string;
-  size?: "small" | "medium" | "large";
-  onClick?: () => void;
-};
-
-const Button = ({
-  title,
-  backgroundColor,
-  textColor,
-  size,
-  onClick,
-}: ButtonProps) => {
-  return (
-    <ModalButtonContainer>
-      <ModalButton
-        $backgroundColor={backgroundColor}
-        $textColor={textColor}
-        $size={size}
-        onClick={onClick}
-      >
-        {title}
-      </ModalButton>
-    </ModalButtonContainer>
-  );
-};
-
+Modal.Backdrop = BackDrop;
+Modal.Frame = Frame;
 Modal.Title = Title;
 Modal.CloseButton = CloseButton;
-Modal.Contents = Contents;
+Modal.Body = Body;
 Modal.Button = Button;
 
 export default Modal;
