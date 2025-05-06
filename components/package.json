@@ -31,6 +31,7 @@
     "react-dom": "^19.1.0"
   },
   "devDependencies": {
+    "bunju-react-modal": "^1.0.0",
     "@chromatic-com/storybook": "^3.2.6",
     "@storybook/addon-essentials": "^8.6.12",
     "@storybook/addon-interactions": "^8.6.12",
