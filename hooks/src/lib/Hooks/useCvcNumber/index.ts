@@ -1,25 +1,31 @@
 import { validateNumericString } from "../../utils/validation";
 import { HookReturnType, ValidInputFuncType } from "../../types";
 
-import useBaseField from "../common/useBaseField";
+import useBaseField from "../common/useInputValue";
 import { MAX_LENGTH } from "../../constants";
+import useErrors from "../common/useErrors";
 
 const useCvcNumber = (): HookReturnType<"cvcNumber"> => {
-  const { state, errors, errorMessage, onChange, clearError, changeError, isLengthComplete, isErrorComplete, isValid } =
-    useBaseField({
-      initialState: "",
-      maxLength: MAX_LENGTH.CVC_NUMBER,
-    });
+  const { state, onChange, isLengthComplete } = useBaseField({
+    initialState: "",
+    maxLength: MAX_LENGTH.CVC_NUMBER,
+  });
+
+  const { errors, errorMessage, clearError, changeError, isErrorComplete } = useErrors({
+    initialErrorState: { cvc: false },
+  });
 
   const validateInput: ValidInputFuncType = (value: string) => {
     const { error, message } = validateNumericString(value);
 
     if (error) {
-      changeError(message);
+      changeError("cvc", message);
     } else {
-      clearError();
+      clearError("cvc");
     }
   };
+
+  const isValid = isLengthComplete && isErrorComplete;
 
   return {
     state,

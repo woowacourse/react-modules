@@ -30,7 +30,10 @@ describe("useExpirationDate", () => {
   });
 
   it("useExpirationDate의 초기 에러 상태가 반환된다.", () => {
-    const initialErrors = [false, false];
+    const initialErrors = {
+      month: false,
+      year: false,
+    };
     const { result } = renderHook(() => useExpirationDate());
 
     expect(result.current.errors).toEqual(initialErrors);

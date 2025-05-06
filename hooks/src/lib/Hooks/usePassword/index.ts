@@ -1,24 +1,29 @@
 import { validateNumericString } from "../../utils/validation";
 import { HookReturnType, ValidInputFuncType } from "../../types";
 import { MAX_LENGTH } from "../../constants";
-import useBaseField from "../common/useBaseField";
+import useBaseField from "../common/useInputValue";
+import useErrors from "../common/useErrors";
 
 const usePassword = (): HookReturnType<"password"> => {
-  const { state, errors, errorMessage, onChange, clearError, changeError, isLengthComplete, isErrorComplete, isValid } =
-    useBaseField({
-      initialState: "",
-      maxLength: MAX_LENGTH.PASSWORD,
-    });
+  const { state, onChange, isLengthComplete } = useBaseField({
+    initialState: "",
+    maxLength: MAX_LENGTH.PASSWORD,
+  });
 
+  const { errors, errorMessage, clearError, changeError, isErrorComplete } = useErrors({
+    initialErrorState: { password: false },
+  });
   const validateInput: ValidInputFuncType = (value: string) => {
     const { error, message } = validateNumericString(value);
 
     if (error) {
-      changeError(message);
+      changeError("password", message);
     } else {
-      clearError();
+      clearError("password");
     }
   };
+
+  const isValid = isLengthComplete && isErrorComplete;
 
   return {
     state,

@@ -34,7 +34,7 @@ describe("useCardNumber", () => {
   });
 
   it("useCardNumber 초기 에러 상태가 반환된다.", () => {
-    const initialErrors = [false, false, false, false];
+    const initialErrors = { first: false, second: false, third: false, forth: false };
     const { result } = renderHook(() => useCardNumber());
 
     expect(result.current.errors).toEqual(initialErrors);

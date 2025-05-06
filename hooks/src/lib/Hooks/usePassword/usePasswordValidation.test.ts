@@ -23,7 +23,7 @@ describe("usePassword", () => {
   });
 
   it("usePassword 초기 에러 상태가 반환된다.", () => {
-    const initialErrors = false;
+    const initialErrors = { password: false };
     const { result } = renderHook(() => usePassword());
 
     expect(result.current.errors).toEqual(initialErrors);

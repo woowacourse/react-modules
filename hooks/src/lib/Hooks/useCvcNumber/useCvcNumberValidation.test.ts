@@ -23,7 +23,7 @@ describe("useCvcNumber", () => {
   });
 
   it("useCvcNumber 초기 에러 상태가 반환된다.", () => {
-    const initialErrors = false;
+    const initialErrors = { cvc: false };
     const { result } = renderHook(() => useCvcNumber());
 
     expect(result.current.errors).toEqual(initialErrors);

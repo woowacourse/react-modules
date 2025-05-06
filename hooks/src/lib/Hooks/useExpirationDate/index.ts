@@ -1,30 +1,36 @@
 import { isExpirationDate } from "../../utils/validation";
 import { HookReturnType, ValidInputFuncType } from "../../types";
 import { MAX_LENGTH } from "../../constants";
-import useBaseField from "../common/useBaseField";
+import useBaseField from "../common/useInputValue";
+import useErrors from "../common/useErrors";
 
-const KEY_INDEX_MATCH = ["month", "year"];
+const KEY_INDEX_MATCH: ("month" | "year")[] = ["month", "year"];
 
 const useExpirationDate = (): HookReturnType<"expirationDate"> => {
-  const { state, errors, errorMessage, onChange, clearError, changeError, isLengthComplete, isErrorComplete, isValid } =
-    useBaseField({
-      initialState: {
-        month: "",
-        year: "",
-      },
-      maxLength: MAX_LENGTH.EXPIRATION_DATE,
-      keyIndexMap: KEY_INDEX_MATCH,
-    });
+  const { state, onChange, isLengthComplete } = useBaseField({
+    initialState: {
+      month: "",
+      year: "",
+    },
+    maxLength: MAX_LENGTH.EXPIRATION_DATE,
+    keyIndexMap: KEY_INDEX_MATCH,
+  });
+
+  const { errors, errorMessage, clearError, changeError, isErrorComplete } = useErrors({
+    initialErrorState: { month: false, year: false },
+  });
 
   const validateInput: ValidInputFuncType = (value: string, index: number) => {
-    const inputType = index === 0 ? "month" : "year";
-    const { error, message } = isExpirationDate(inputType, value);
+    const type = KEY_INDEX_MATCH[index];
+    const { error, message } = isExpirationDate(type, value);
     if (error) {
-      changeError(message, index);
+      changeError(type, message);
     } else {
-      clearError(index);
+      clearError(type);
     }
   };
+
+  const isValid = isLengthComplete && isErrorComplete;
 
   return {
     state,
