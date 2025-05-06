@@ -16,10 +16,13 @@ function dynamicChunks(length: number, chunkSize = 4): number[] {
 /** 카드사별 “특수” 포맷 패턴 */
 // AMEX, DINERS, UNIONPAY 외 다른 카드사는 무시.
 
-const SPECIAL_RULES: Partial<Record<CardBrand, number[]>> = {
-  AMEX: [4, 6, 5], // 15자리 → 4-6-5
-  DINERS: [4, 6, 4], // 14자리 → 4-6-4
-  UNIONPAY: [4, 4, 4, 4], // 16자리 → 4-4-4-4
+const SPECIAL_RULES: Record<CardBrand, number[]> = {
+  AMEX: [4, 6, 5],
+  DINERS: [4, 6, 4],
+  UNIONPAY: [4, 4, 4, 4],
+  VISA: [4, 4, 4, 4],
+  MASTERCARD: [4, 4, 4, 4],
+  DEFAULT: [4, 4, 4, 4],
 };
 
 export function createFormatRulesFromLengths(): Record<CardBrand, FormatRule> {
@@ -28,7 +31,6 @@ export function createFormatRulesFromLengths(): Record<CardBrand, FormatRule> {
     if (SPECIAL_RULES[brand]) {
       rules[brand] = SPECIAL_RULES[brand];
     } else {
-      // 나머지(예: VISA, MASTERCARD, DEFAULT)는 4자리씩
       rules[brand] = (len: number) => dynamicChunks(len, 4);
     }
   });
