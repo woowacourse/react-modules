@@ -1,0 +1,44 @@
+import {
+  CURRENT_YEAR,
+  ERROR_MESSAGE,
+  MAX_MONTH,
+  MIN_MONTH,
+  NUMBER_REGEX,
+} from '../constants';
+import { ValidateFuncReturnType } from '../types';
+
+export const validateNumericString = (
+  value: string
+): ValidateFuncReturnType => {
+  const isValid = NUMBER_REGEX.test(value);
+
+  if (!isValid) return { error: true, message: ERROR_MESSAGE.NUMBER_ONLY };
+  return { error: false, message: '' };
+};
+
+export const validateMonth = (value: string): ValidateFuncReturnType => {
+  const isNumberError = validateNumericString(value);
+  if (isNumberError.error) return isNumberError;
+
+  const month = parseInt(value, 10);
+  if (month < MIN_MONTH || month > MAX_MONTH) {
+    return { error: true, message: ERROR_MESSAGE.MONTH_VALID };
+  }
+  return { error: false, message: '' };
+};
+
+export const validateYear = (value: string): ValidateFuncReturnType => {
+  const isNumberError = validateNumericString(value);
+  if (isNumberError.error) return isNumberError;
+
+  const year = parseInt(value, 10);
+  if (year < CURRENT_YEAR) {
+    return { error: true, message: ERROR_MESSAGE.YEAR_VALID };
+  }
+  return { error: false, message: '' };
+};
+
+export const validateExpirationDate = {
+  month: validateMonth,
+  year: validateYear,
+};

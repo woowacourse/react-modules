@@ -22,5 +22,14 @@ export default defineConfig({
       esmExternals: ["react"],
     },
   },
-  plugins: [react(), dts()],
+  plugins: [
+    react({
+      jsxImportSource: "@emotion/react",
+    }),
+    ,
+    dts({
+      include: ["src/lib"],
+      tsconfigPath: "./tsconfig.app.json",
+    }),
+  ],
 });
