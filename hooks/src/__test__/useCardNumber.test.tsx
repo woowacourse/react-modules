@@ -42,4 +42,18 @@ describe('카드 번호 검증 테스트입니다.', () => {
 
     expect(result.current.errorMessage).toBe('숫자 4자리를 입력해주세요.');
   });
+
+  test('사용자가 입력한 value값의 길이가 validLength(4)보다 크다면 errorMessage를 반환한다.', () => {
+    const { result } = renderHook(() => useCardNumber());
+
+    const mockEvent = {
+      target: { value: '12345' },
+    } as React.ChangeEvent<HTMLInputElement>;
+
+    act(() => {
+      result.current.handleCardNumberChange(mockEvent, 0);
+    });
+
+    expect(result.current.errorMessage).toBe('숫자 4자리를 입력해주세요.');
+  });
 });
