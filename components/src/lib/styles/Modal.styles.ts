@@ -64,6 +64,8 @@ export const ModalFooterStyle = css`
 `;
 
 export const ModalCloseStyle = css`
+  background-color: transparent;
+  border: 0;
   cursor: pointer;
 `;
 
