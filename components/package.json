@@ -1,6 +1,6 @@
 {
 	"name": "dslgpgh-modal",
-	"version": "1.1.0",
+	"version": "1.1.1",
 	"description": "woowahan react-modal",
 	"type": "module",
 	"main": "dist/index.cjs.js",
@@ -28,7 +28,6 @@
 	},
 	"dependencies": {
 		"@emotion/styled": "^11.14.0",
-		"dslgpgh-modal": "^0.0.1",
 		"react": "^19.1.0",
 		"react-dom": "^19.1.0"
 	},
