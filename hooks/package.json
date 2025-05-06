@@ -3,9 +3,16 @@
 	"version": "0.0.2",
 	"description": "woowahan payments-hooks",
 	"type": "module",
-	"types": "dist/index.d.ts",
-	"main": "dist/index.js",
-	"module": "dist/index.js",
+	"main": "dist/index.cjs.js",
+	"module": "dist/index.es.js",
+	"types": "dist/types/dslgpgh-payments-hooks.d.ts",
+	"exports": {
+		".": {
+			"import": "./dist/index.es.js",
+			"require": "./dist/index.cjs.js",
+			"types": "./dist/types/dslgpgh-payments-hooks.d.ts"
+		}
+	},
 	"files": [
 		"dist"
 	],
