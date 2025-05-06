@@ -12,7 +12,12 @@
     ".": {
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js",
-      "require": "./dist/index.cjs"
+      "require": "./dist/index.umd.cjs"
+    },
+    "./lib/*": {
+      "types": "./dist/lib/*/index.d.ts",
+      "import": "./dist/lib/*/index.js",
+      "require": "./dist/lib/*/index.umd.cjs"
     }
   },
   "scripts": {
