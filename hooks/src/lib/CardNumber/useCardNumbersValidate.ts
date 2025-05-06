@@ -3,6 +3,7 @@ import { useState } from "react";
 import validateNumber from "../utils/validateNumber";
 import validateMaxLength from "../utils/validateMaxLength";
 import { validationMessages } from "../../constants/validationMessages";
+import { checkBasicValidation } from "../utils/checkBasicValidation";
 
 type CardNumbersValidate = {
   first: boolean;
@@ -31,32 +32,16 @@ const useCardNumbersValidate = (): CardNumberValidateResult => {
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   const validateCardNumbers = (cardNumber: string, key: string) => {
-    if (!validateNumber(cardNumber)) {
-      setValidationState({
-        ...validationState,
-        [key]: false,
-      });
-
-      setErrorMessage(validationMessages.numberOnly);
-      return;
-    }
-
-    if (!validateMaxLength(cardNumber, 4)) {
-      setValidationState({
-        ...validationState,
-        [key]: false,
-      });
-
-      setErrorMessage(validationMessages.limitedLength(4));
-      return;
-    }
-
-    setValidationState({
-      ...validationState,
-      [key]: true,
+    const result = checkBasicValidation({
+      value: cardNumber,
+      maxLength: 4,
     });
 
-    setErrorMessage(null);
+    setValidationState((prev) => ({
+      ...prev,
+      [key]: result.isValid,
+    }));
+    setErrorMessage(result.errorMessage);
   };
 
   return { validationState, errorMessage, validateCardNumbers };

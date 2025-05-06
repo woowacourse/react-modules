@@ -5,6 +5,7 @@ import validateMaxLength from "../utils/validateMaxLength";
 import validateRange from "../utils/validateRange";
 
 import { validationMessages } from "../../constants/validationMessages";
+import { checkBasicValidation } from "../utils/checkBasicValidation";
 
 type CardExpireDate = {
   month: string;
@@ -25,23 +26,17 @@ const useCardExpireDateValidate = () => {
     expireDate: CardExpireDate,
     key: "month" | "year"
   ) => {
-    if (!validateNumber(expireDate[key])) {
-      setIsValid({
-        ...isValid,
-        [key]: false,
-      });
+    const result = checkBasicValidation({
+      value: expireDate[key],
+      maxLength: 2,
+    });
 
-      setErrorMessage(validationMessages.numberOnly);
-      return;
-    }
-
-    if (!validateMaxLength(expireDate[key], 2)) {
-      setIsValid({
-        ...isValid,
-        [key]: false,
-      });
-
-      setErrorMessage(validationMessages.limitedLength(2));
+    if (!result.isValid) {
+      setIsValid((prev) => ({
+        ...prev,
+        [key]: result.isValid,
+      }));
+      setErrorMessage(result.errorMessage);
       return;
     }
 
