@@ -15,9 +15,9 @@ type Story = StoryObj<typeof Button>;
 export const Confirm: Story = {
   render: () => (
     <>
-      <Button text="버튼" onclick={() => {}} />
-      <Button type="confirm" onclick={() => {}} />
-      <Button type="cancel" onclick={() => {}} />
+      <Button size="medium" text="버튼" onclick={() => {}} />
+      <Button size="medium" type="confirm" onclick={() => {}} />
+      <Button size="medium" type="cancel" onclick={() => {}} />
     </>
   ),
 };

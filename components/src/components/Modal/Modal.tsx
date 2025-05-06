@@ -109,9 +109,15 @@ export default function Modal({
 
         <ModalBottom>
           {confirmButton && (
-            <Button type="confirm" onclick={onConfirm ? onConfirm : onClose} />
+            <Button
+              type="confirm"
+              size={size}
+              onclick={onConfirm ? onConfirm : onClose}
+            />
           )}
-          {cancelButton && <Button type="cancel" onclick={onClose} />}
+          {cancelButton && (
+            <Button type="cancel" size={size} onclick={onClose} />
+          )}
         </ModalBottom>
       </ModalContainer>
       <ModalBackdrop onClick={onClose} />

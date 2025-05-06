@@ -1,11 +1,11 @@
 import styled from "@emotion/styled";
 import { css } from "@emotion/react";
 
-const ButtonContainer = styled.div<{ type?: "confirm" | "cancel" }>`
-  width: 80px;
-  height: 36px;
-  font-size: 15px;
-  font-weight: 700;
+const ButtonContainer = styled.div<{
+  type?: "confirm" | "cancel";
+  size: "small" | "medium" | "large";
+}>`
+  ${({ size }) => sizeStyles[size]}
 
   ${({ type }) =>
     type
@@ -31,12 +31,13 @@ const ButtonContainer = styled.div<{ type?: "confirm" | "cancel" }>`
 
 interface ButtonInterface {
   type?: "confirm" | "cancel";
+  size: "small" | "medium" | "large";
   onclick: () => void;
 
   text?: string;
 }
 
-export default function Button({ type, onclick, text }: ButtonInterface) {
+export default function Button({ type, size, onclick, text }: ButtonInterface) {
   const textMap: Record<"confirm" | "cancel", string> = {
     confirm: "확인",
     cancel: "취소",
@@ -45,7 +46,7 @@ export default function Button({ type, onclick, text }: ButtonInterface) {
   const buttonText = type ? textMap[type] : text ?? "";
 
   return (
-    <ButtonContainer type={type} onClick={onclick}>
+    <ButtonContainer size={size} type={type} onClick={onclick}>
       {buttonText}
     </ButtonContainer>
   );
@@ -60,5 +61,26 @@ const typeStyles = {
     background-color: white;
     color: gray;
     border: 1px solid lightgray;
+  `,
+};
+
+const sizeStyles = {
+  small: css`
+    width: 70px;
+    height: 30px;
+    font-size: 12px;
+    font-weight: 500;
+  `,
+  medium: css`
+    width: 80px;
+    height: 35px;
+    font-size: 14px;
+    font-weight: 600;
+  `,
+  large: css`
+    width: 90px;
+    height: 40px;
+    font-size: 16px;
+    font-weight: 700;
   `,
 };
