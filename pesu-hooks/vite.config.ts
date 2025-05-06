@@ -6,7 +6,7 @@ import dts from 'vite-plugin-dts';
 export default defineConfig({
   build: {
     lib: {
-      entry: path.resolve(__dirname, 'src/hooks/index.js'),
+      entry: path.resolve(__dirname, 'src/index.ts'),
       name: 'index',
       fileName: 'index',
     },
@@ -16,8 +16,6 @@ export default defineConfig({
         globals: {
           react: 'React',
         },
-        entryFileNames: 'hooks/index.js',
-        assetFileNames: 'hooks/index.css',
       },
     },
     commonjsOptions: {
@@ -29,7 +27,7 @@ export default defineConfig({
   plugins: [
     react(),
     dts({
-      include: ['src/hooks'],
+      include: ['src'],
       tsconfigPath: './tsconfig.app.json',
     }),
   ],

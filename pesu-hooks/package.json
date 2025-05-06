@@ -3,16 +3,16 @@
   "version": "0.0.9",
   "description": "npm modules",
   "type": "module",
-  "types": "dist/hooks/index.d.ts",
-  "main": "dist/hooks/index.js",
-  "module": "dist/hooks/index.js",
+  "types": "dist/index.d.ts",
+  "main": "dist/index.js",
+  "module": "dist/index.js",
   "files": [
     "dist"
   ],
   "exports": {
     ".": {
-      "types": "./dist/hooks/index.d.ts",
-      "default": "./dist/hooks/index.js"
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
     }
   },
   "author": "박규성 <gueit214@naver.com>",

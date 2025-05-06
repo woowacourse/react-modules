@@ -23,12 +23,12 @@ importers:
       '@storybook/addon-themes':
         specifier: ^8.6.12
         version: 8.6.12(storybook@8.6.12(prettier@3.5.3))
+      pesu-components:
+        specifier: workspace:*
+        version: link:../pesu-components
       pesu-hooks:
-        specifier: '*'
-        version: 0.0.9
-      pesu-modal:
-        specifier: '*'
-        version: 0.0.5(@types/react@19.1.2)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(storybook@8.6.12(prettier@3.5.3))
+        specifier: workspace:*
+        version: link:../pesu-hooks
       react:
         specifier: ^19.1.0
         version: 19.1.0
@@ -118,7 +118,7 @@ importers:
         specifier: ^6.2.6
         version: 6.3.4(@types/node@22.15.3)
 
-  components:
+  pesu-components:
     dependencies:
       '@emotion/react':
         specifier: ^11.14.0
@@ -215,7 +215,7 @@ importers:
         specifier: ^4.5.3
         version: 4.5.3(@types/node@22.15.3)(rollup@4.40.1)(typescript@5.8.3)(vite@6.3.4(@types/node@22.15.3))
 
-  hooks:
+  pesu-hooks:
     dependencies:
       react:
         specifier: ^19.1.0
@@ -2957,17 +2957,6 @@ packages:
   pathval@2.0.0:
     resolution: {integrity: sha512-vE7JKRyES09KiunauX7nd2Q9/L7lhok4smP9RZTDeD4MVs72Dp2qNFVz39Nz5a0FVEW0BJR6C0DYrq6unoziZA==}
     engines: {node: '>= 14.16'}
-
-  pesu-hooks@0.0.9:
-    resolution: {integrity: sha512-tC3xTn7mhlMCZnEDUErRbq7rNkkKieltGOE8ubC11BoTyiLlRdsP0+5DGUOFKZmIIPuTba4O7hr/BDYCmjFV1A==}
-    engines: {node: '>=18.0.0'}
-
-  pesu-modal@0.0.5:
-    resolution: {integrity: sha512-VQAQKJeyaSlQKjR+nlFgvS5NouK+z5/2G3aQGFVcXCpF9fRb7+qyWtGV03R16teLA1vo5GR9iViHEAviSpidxA==}
-    engines: {node: '>=18.0.0'}
-    peerDependencies:
-      react: ^18.3.1
-      react-dom: ^18.3.1
 
   picocolors@1.1.1:
     resolution: {integrity: sha512-xceH2snhtb5M9liqDsmEw56le376mTZkEX/jEb/RxNFyegNul7eNslCXP9FDj/Lcu0X8KEyMceP2ntpaHrDEVA==}
@@ -6912,23 +6901,6 @@ snapshots:
   pathe@2.0.3: {}
 
   pathval@2.0.0: {}
-
-  pesu-hooks@0.0.9:
-    dependencies:
-      react: 19.1.0
-      react-dom: 19.1.0(react@19.1.0)
-
-  pesu-modal@0.0.5(@types/react@19.1.2)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(storybook@8.6.12(prettier@3.5.3)):
-    dependencies:
-      '@emotion/react': 11.14.0(@types/react@19.1.2)(react@19.1.0)
-      '@emotion/styled': 11.14.0(@emotion/react@11.14.0(@types/react@19.1.2)(react@19.1.0))(@types/react@19.1.2)(react@19.1.0)
-      '@storybook/addon-viewport': 8.6.12(storybook@8.6.12(prettier@3.5.3))
-      react: 19.1.0
-      react-dom: 19.1.0(react@19.1.0)
-    transitivePeerDependencies:
-      - '@types/react'
-      - storybook
-      - supports-color
 
   picocolors@1.1.1: {}
 
