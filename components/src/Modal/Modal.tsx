@@ -1,6 +1,5 @@
 import { useEffect } from "react";
 import { createContext } from "react";
-import { createPortal } from "react-dom";
 import { BackDrop } from "./BackDrop/BackDrop";
 import { Frame } from "./Frame/Frame";
 import { Title } from "./Title/Title";
@@ -51,13 +50,9 @@ const Modal = ({
 
   return (
     <>
-      {isOpen &&
-        createPortal(
-          <ModalContext.Provider value={value}>
-            {children}
-          </ModalContext.Provider>,
-          document.getElementById("root") as HTMLElement
-        )}
+      {isOpen && (
+        <ModalContext.Provider value={value}>{children}</ModalContext.Provider>
+      )}
     </>
   );
 };
