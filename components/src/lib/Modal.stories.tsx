@@ -99,3 +99,40 @@ export const BottomModal: Story = {
     );
   },
 };
+
+export const CustomHeaderModal: Story = {
+  args: {
+    id: "modal-container",
+    position: "center",
+  },
+  render: function Render(args) {
+    const [isOpen, setIsOpen] = useState(false);
+
+    const customHeader = () => {
+      return (
+        <header>
+          <h3 style={{ textAlign: "center", color: "#e02d2d" }}>
+            사용자 정의 헤더 스타일을 적용합니다
+          </h3>
+        </header>
+      );
+    };
+    return (
+      <>
+        <button onClick={() => setIsOpen((prev) => !prev)}>
+          모달창 trigger
+        </button>
+        <Modal
+          {...args}
+          isOpen={isOpen}
+          onClose={() => {
+            setIsOpen(false);
+          }}
+          renderHeader={customHeader}
+        >
+          <p>사용자 정의 헤더가 적용된 모달입니다</p>
+        </Modal>
+      </>
+    );
+  },
+};
