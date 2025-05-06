@@ -23,13 +23,13 @@ yarn add dslgpgh-payments-hooks
 
 ## 사용 방법
 
-각 훅은 `isValid`, `errorMessage`, `validate` 속성을 반환합니다.
+각 훅은 `error`, `validate` 속성을 반환합니다.
 
 ```jsx
 import { useCardNumber } from 'dslgpgh-payments-hooks';
 
 function CardForm() {
-  const { isValid, errorMessage, validate } = useCardNumber();
+  const { error, validate } = useCardNumber();
   
   const handleCardNumberChange = (e) => {
     const value = e.target.value;
@@ -39,7 +39,7 @@ function CardForm() {
   return (
     <div>
       <input type="text" onChange={handleCardNumberChange} />
-      {!isValid.first && <p className="error">{errorMessage.first}</p>}
+      {!error.first.isValid && <p className="error">{error.first.errorMessage}</p>}
     </div>
   );
 }
@@ -52,11 +52,10 @@ function CardForm() {
 카드 번호를 4개의 그룹으로 나누어 각각 검증합니다.
 
 ```jsx
-const { isValid, errorMessage, validate } = useCardNumber();
+const { error, validate } = useCardNumber();
 ```
 
-- `isValid`: { first: boolean, second: boolean, third: boolean, fourth: boolean } - 각 그룹의 유효성 상태
-- `errorMessage`: { first: string, second: string, third: string, fourth: string } - 각 그룹의 오류 메시지
+- `error`: `first`: { `isValid`: `true`, `errorMessage`: `""` }, - 각 그룹의 유효성 상태와 오류 메시지 
 - `validate(label: string, value: string)`: 지정된 그룹(`first`, `second`, `third`, `fourth`)의 카드 번호를 검증
 
 검증 규칙:
@@ -68,11 +67,11 @@ const { isValid, errorMessage, validate } = useCardNumber();
 카드 비밀번호를 검증합니다.
 
 ```jsx
-const { isValid, errorMessage, validate } = useCardPassword();
+const { error, validate } = useCardPassword();
 ```
 
-- `isValid`: boolean - 유효성 상태
-- `errorMessage`: string - 오류 메시지
+- `error.isValid`: boolean - 유효성 상태
+- `error.errorMessage`: string - 오류 메시지
 - `validate(value: string)`: 비밀번호 검증
 
 검증 규칙:
@@ -84,11 +83,11 @@ const { isValid, errorMessage, validate } = useCardPassword();
 카드 CVC 코드를 검증합니다.
 
 ```jsx
-const { isValid, errorMessage, validate } = useCardCvc();
+const { error, validate } = useCardCvc();
 ```
 
-- `isValid`: boolean - 유효성 상태
-- `errorMessage`: string - 오류 메시지
+- `error.isValid`: boolean - 유효성 상태
+- `error.errorMessage`: string - 오류 메시지
 - `validate(value: string)`: CVC 코드 검증
 
 검증 규칙:
@@ -100,11 +99,11 @@ const { isValid, errorMessage, validate } = useCardCvc();
 카드 만료 월을 검증합니다.
 
 ```jsx
-const { isValid, errorMessage, validate } = useExpirationMonth();
+const { error, validate } = useExpirationMonth();
 ```
 
-- `isValid`: boolean - 유효성 상태
-- `errorMessage`: string - 오류 메시지
+- `error.isValid`: boolean - 유효성 상태
+- `error.errorMessage`: string - 오류 메시지
 - `validate(value: string)`: 만료 월 검증
 
 검증 규칙:
@@ -117,11 +116,11 @@ const { isValid, errorMessage, validate } = useExpirationMonth();
 카드 만료 연도를 검증합니다.
 
 ```jsx
-const { isValid, errorMessage, validate } = useExpirationYear();
+const { error, validate } = useExpirationYear();
 ```
 
-- `isValid`: boolean - 유효성 상태
-- `errorMessage`: string - 오류 메시지
+- `error.isValid`: boolean - 유효성 상태
+- `error.errorMessage`: string - 오류 메시지
 - `validate(value: string)`: 만료 연도 검증
 
 검증 규칙:
@@ -134,11 +133,11 @@ const { isValid, errorMessage, validate } = useExpirationYear();
 카드사 선택을 검증합니다.
 
 ```jsx
-const { isValid, errorMessage, validate } = useCardCompany();
+const { error, validate } = useCardCompany();
 ```
 
-- `isValid`: boolean - 유효성 상태
-- `errorMessage`: string - 오류 메시지
+- `error.isValid`: boolean - 유효성 상태
+- `error.errorMessage`: string - 오류 메시지
 - `validate(value: string)`: 카드사 선택 검증
 
 검증 규칙:
