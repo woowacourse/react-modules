@@ -1,12 +1,15 @@
 /** @jsxImportSource @emotion/react */
 
 import styled from "@emotion/styled";
-import { CloseIcon } from "./common";
+import { CloseIcon } from "../common";
 import { PropsWithChildren } from "react";
 import { css } from "@emotion/react";
 
-const ModalContainer = styled.div<{ position: "center" | "bottom" }>`
-  width: 280px;
+const ModalContainer = styled.div<{
+  position: "center" | "bottom";
+  size: "small" | "medium" | "large";
+}>`
+  ${({ size }) => sizeStyles[size]}
   height: fit-content;
 
   background-color: white;
@@ -58,6 +61,7 @@ interface ModalInterface {
   title?: string;
   onClose: () => void;
   isOpen: boolean;
+  size: "small" | "medium" | "large";
 }
 
 export default function Modal({
@@ -67,11 +71,12 @@ export default function Modal({
   onClose,
   children,
   isOpen,
+  size,
 }: PropsWithChildren<ModalInterface>) {
   if (!isOpen) return;
   return (
     <>
-      <ModalContainer position={position}>
+      <ModalContainer position={position} size={size}>
         {renderHeader && (
           <ModalTop>
             {title && <Title>{title}</Title>}
@@ -88,3 +93,15 @@ export default function Modal({
 const closeIconStyle = css`
   cursor: pointer;
 `;
+
+const sizeStyles = {
+  small: css`
+    width: 320px;
+  `,
+  medium: css`
+    width: 480px;
+  `,
+  large: css`
+    width: 600px;
+  `,
+};

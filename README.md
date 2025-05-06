@@ -2,7 +2,7 @@
 
 ### Modal
 
-- [] size(small, medium, large)
+- [x] size(small, medium, large)
 - [] Button 컴포넌트
   - [] 확인
   - [] 취소

@@ -19,7 +19,7 @@ const preview: Preview = {
     },
     viewport: {
       viewports: INITIAL_VIEWPORTS,
-      defaultViewport: "iphone12",
+      // defaultViewport: "iphone12",
     },
   },
 };
