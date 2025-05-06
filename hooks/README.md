@@ -5,6 +5,7 @@
 ## 사용 예시
 
 ### 카드 번호 4자리 입력 필드 관리 – `useCardNumber`
+
 ```tsx
 import { useCardNumber } from '@sebin0580/payments-hooks';
 
@@ -29,8 +30,8 @@ const CardNumberForm = () => {
 };
 ```
 
-
 ### 카드 유효기간 입력 필드 관리 – `useExpiryDate`
+
 ```tsx
 import { useExpiryDate } from '@sebin0580/payments-hooks';
 
@@ -41,14 +42,14 @@ const ExpiryDateInput = () => {
     <div>
       <input
         type="text"
-        value={expiryDate}
-        onChange={(e) => handleChangeExpiryDate(e,0)}
+        value={expiryDate[0].value}
+        onChange={(e) => handleChangeExpiryDate(e, 0)}
         placeholder="MM"
       />
       <input
         type="text"
-        value={expiryDate}
-        onChange={(e) => handleChangeExpiryDate(e,1)}
+        value={expiryDate[1].value}
+        onChange={(e) => handleChangeExpiryDate(e, 1)}
         placeholder="YY"
       />
       {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
@@ -57,8 +58,8 @@ const ExpiryDateInput = () => {
 };
 ```
 
-
 ### 카드 CVC/Password 입력 필드 관리 – `useSingleCardInput`
+
 ```tsx
 import { useSingleCardInput } from '@sebin0580/payments-hooks';
 
@@ -98,4 +99,5 @@ const CardPasswordInput = () => {
 ```
 
 ## 라이센스
+
 @keemsebin @dlsxjzld
