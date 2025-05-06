@@ -9,7 +9,7 @@ export const CARD_CVC_MAX_LENGTH = 3;
 
 export const CARD_CVC_ERROR_MESSAGE = {
   INVALID_LENGTH: `CVC 번호는  ${CARD_CVC_MAX_LENGTH}자리 숫자여야 합니다.`,
-  NOT_NUMBERIC: "숫자만 입력 가능합니다.",
+  NOT_NUMERIC: "숫자만 입력 가능합니다.",
 } as const;
 
 export default function useCardCVCNumber(userCardCVCNumber = "") {
@@ -50,7 +50,7 @@ function getCVCNumberError(input: string) {
   if (!isInteger(input)) {
     return {
       inputError: true,
-      inputErrorMessage: CARD_CVC_ERROR_MESSAGE.NOT_NUMBERIC,
+      inputErrorMessage: CARD_CVC_ERROR_MESSAGE.NOT_NUMERIC,
     };
   }
 

@@ -48,7 +48,7 @@ export const CARD_NUMBER_MAX_LENGTH = 4;
 
 export const CARD_NUMBER_ERROR_MESSAGE = {
   INVALID_LENGTH: `카드 번호는 ${CARD_NUMBER_MAX_LENGTH}자리 숫자여야 합니다.`,
-  NOT_NUMBERIC: "숫자만 입력 가능합니다.",
+  NOT_NUMERIC: "숫자만 입력 가능합니다.",
 } as const;
 
 type CardNumbersKeys = {
@@ -92,7 +92,7 @@ function getCardNumbersError(input: string) {
   if (!isInteger(input)) {
     return {
       inputError: true,
-      inputErrorMessage: CARD_NUMBER_ERROR_MESSAGE.NOT_NUMBERIC,
+      inputErrorMessage: CARD_NUMBER_ERROR_MESSAGE.NOT_NUMERIC,
     };
   }
 

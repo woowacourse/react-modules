@@ -40,7 +40,7 @@ export const CARD_EXPIRATION_DATE_MAX_LENGTH = 2;
 
 export const CARD_EXPIRATION_DATE_ERROR_MESSAGE = {
   INVALID_LENGTH: `유효기간은 ${CARD_EXPIRATION_DATE_MAX_LENGTH}자리 숫자여야 합니다.`,
-  NOT_NUMBERIC: "유효기간은 숫자만 입력 가능합니다.",
+  NOT_NUMERIC: "유효기간은 숫자만 입력 가능합니다.",
   INVALID_MONTH_RANGE: "1~12 사이의 숫자를 입력해주세요.",
   INVALID_DATE: "유효기간은 현재 날짜보다 이후여야 합니다.",
 } as const;
@@ -100,7 +100,7 @@ function getCardExpirationDateError(
   if (!isInteger(input))
     return {
       inputError: true,
-      inputErrorMessage: CARD_EXPIRATION_DATE_ERROR_MESSAGE.NOT_NUMBERIC,
+      inputErrorMessage: CARD_EXPIRATION_DATE_ERROR_MESSAGE.NOT_NUMERIC,
     };
 
   if (input.length < CARD_EXPIRATION_DATE_MAX_LENGTH)
