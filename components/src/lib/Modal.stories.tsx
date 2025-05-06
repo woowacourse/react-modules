@@ -136,3 +136,44 @@ export const CustomHeaderModal: Story = {
     );
   },
 };
+
+export const NestedModal: Story = {
+  args: {
+    title: "중첩된 부모 모달창",
+    id: "modal-container",
+    position: "center",
+  },
+  render: function Render(args) {
+    const [isOpen, setIsOpen] = useState(false);
+    const [isNestedOpen, setIsNestedOpen] = useState(false);
+
+    return (
+      <>
+        <button onClick={() => setIsOpen((prev) => !prev)}>
+          모달창 trigger
+        </button>
+        <Modal
+          {...args}
+          isOpen={isOpen}
+          onClose={() => {
+            setIsOpen(false);
+          }}
+        >
+          <button onClick={() => setIsNestedOpen((prev) => !prev)}>
+            2번째 모달창 trigger
+          </button>
+          <Modal
+            {...args}
+            title="중첩된 자식 모달창"
+            isOpen={isNestedOpen}
+            onClose={() => {
+              setIsNestedOpen(false);
+            }}
+          >
+            중첩된 모달창 내용
+          </Modal>
+        </Modal>
+      </>
+    );
+  },
+};
