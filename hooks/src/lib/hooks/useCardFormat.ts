@@ -12,6 +12,11 @@ export interface UseCardFormatReturn {
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   placeholder: string;
 }
+export interface UseCardValidationOptions {
+  format?: {
+    splitter?: string;
+  };
+}
 
 export default function useCardFormat(
   splitter: string = " "
