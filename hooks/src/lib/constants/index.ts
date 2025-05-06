@@ -11,4 +11,4 @@ export const CVC_LENGTH = 3;
 
 export const PASSWORD_LENGTH = 2;
 
-export const EXPIRY_DATE_LENGTH = 4;
+export const EXPIRY_DATE_LENGTH = 2;

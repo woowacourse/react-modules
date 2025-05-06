@@ -60,15 +60,22 @@ function App() {
     cvc.setCVCNumber(e.target.value);
   };
 
-  const handleExpiryChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    expiry.setExpiryDateNumber(e.target.value);
+  const handleExpiryChange = (
+    e: React.ChangeEvent<HTMLInputElement>,
+    index: number
+  ) => {
+    const value = e.target.value;
+    const updated = [...expiry.expiryDateNumber];
+    updated[index] = value;
+
+    expiry.setExpiryDateNumber(updated);
   };
 
   const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     password.setPasswordNumber(e.target.value);
   };
 
-  console.log(card.errorMessage);
+  console.log(expiry.errorMessage);
 
   return (
     <div className="App">
@@ -111,14 +118,23 @@ function App() {
         <div className="input-group">
           <label htmlFor="expiry">유효기간</label>
           <input
-            id="expiry"
+            id="expiry-month"
             type="text"
-            value={expiry.expiryDateNumber}
-            onChange={handleExpiryChange}
-            placeholder="MM/YY"
+            value={expiry.expiryDateNumber[0]}
+            onChange={(e) => handleExpiryChange(e, 0)}
+            placeholder="MM"
+          />
+          <input
+            id="expiry-year"
+            type="text"
+            value={expiry.expiryDateNumber[1]}
+            onChange={(e) => handleExpiryChange(e, 1)}
+            placeholder="YY"
           />
           {expiry.errorMessage && (
-            <p className="error">{expiry.errorMessage}</p>
+            <p className="error">
+              {expiry.errorMessage.find((msg) => msg !== "")}
+            </p>
           )}
         </div>
 
