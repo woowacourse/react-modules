@@ -6,7 +6,7 @@ import { createPortal } from 'react-dom';
 import { CloseIcon } from '../common';
 
 const ModalContainer = styled.div<Pick<ModalInterface, 'position' | 'margin' | 'zIndex'>>`
-  width: calc(100% - ${(props) => (props.margin ?? 20) * 2}px);
+  width: ${(props) => (props.position === 'center' ? 'calc(100% - 40px)' : '100%')};
   box-sizing: border-box;
   height: fit-content;
 
@@ -72,7 +72,7 @@ interface ModalInterface {
   /** 모달의 제목 */
   title: string;
   /** 모달을 닫을 때 호출되는 콜백 함수 */
-  onClose: () => void;
+  onClose?: () => void;
   /** 모달이 열려 있는지 여부 */
   isOpen: boolean;
   /** 모달의 위치 (center | bottom) */
@@ -93,7 +93,7 @@ export default function Modal({
   zIndex = 10,
 }: PropsWithChildren<ModalInterface>) {
   useEffect(() => {
-    const handleKeyDown = (event: KeyboardEvent) => event.key === 'Escape' && onClose();
+    const handleKeyDown = (event: KeyboardEvent) => event.key === 'Escape' && onClose?.();
 
     window.addEventListener('keydown', handleKeyDown);
     return () => {
