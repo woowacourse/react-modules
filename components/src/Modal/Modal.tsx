@@ -11,6 +11,7 @@ type ModalProps = {
   isOpen: boolean;
   onClose: () => void;
   children: React.ReactNode;
+  autoCloseOnESC?: boolean;
   position?: "center" | "bottom";
 };
 
@@ -25,6 +26,7 @@ const Modal = ({
   isOpen = true,
   onClose,
   children,
+  autoCloseOnESC = true,
   position = "center",
 }: ModalProps) => {
   const value = {
@@ -36,7 +38,7 @@ const Modal = ({
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape") {
+      if (autoCloseOnESC && event.key === "Escape") {
         onClose();
       }
     };
