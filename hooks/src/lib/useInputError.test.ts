@@ -2,15 +2,15 @@ import { renderHook, act } from '@testing-library/react';
 import useInputError from './useInputError';
 import { NO_ERROR } from './constants';
 
-describe('useError', () => {
+describe('useInputError', () => {
   const initError = {
     name: NO_ERROR,
     email: NO_ERROR,
   };
 
-  const getValidationFns = (length: number, value: string) => [
+  const getValidationFns = (value: string) => [
     {
-      condition: () => length === 0,
+      condition: () => value.length === 0,
       errorMsg: 'FIELD_REQUIRED',
     },
     {
@@ -42,7 +42,6 @@ describe('useError', () => {
 
     act(() => {
       result.current.checkValidation({
-        length: 0,
         value: '',
         type: 'name',
       });
@@ -63,7 +62,6 @@ describe('useError', () => {
 
     act(() => {
       result.current.checkValidation({
-        length: 0,
         value: '',
         type: 'name',
       });

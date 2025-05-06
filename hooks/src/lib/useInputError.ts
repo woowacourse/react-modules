@@ -6,10 +6,10 @@ export default function useInputError<T extends Record<string, string>>({
   initError,
   getValidationFns,
 }: UseInputErrorProps<T>) {
-  const [error, setError] = useState<T>(initError);
+  const [error, setError] = useState(initError);
 
-  function checkValidation({ length, value, type }: CheckValidationType<T>) {
-    const validationFns = getValidationFns(length, value);
+  function checkValidation({ value, type }: CheckValidationType<T>) {
+    const validationFns = getValidationFns(value);
     const validation = validationFns.find((v) => v.condition());
     setError((prev: T) => {
       return {
