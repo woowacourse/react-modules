@@ -88,66 +88,108 @@ const handleChange = (value: string, index: number) => {
 
 ---
 
-## 🧱 useBaseField
+## 🧱 (base) 입력 필드 상태 및 에러 관리 훅
 
-> 입력값 상태와 에러 상태를 공통적으로 관리할 수 있는 내부 기반 훅입니다.
-> 카드번호, 만료일 등 단일 필드/다중 필드 입력의 상태 관리 및 유효성 처리를 위한 베이스 역할을 합니다.
+> 입력값 상태와 에러 상태를 분리하여 관리할 수 있도록 useInputValue와 useErrors 훅을 제공합니다.
+> 카드번호, 만료일 등 단일/다중 필드의 입력 관리 및 유효성 검증 로직 구현 시 활용됩니다.
 
-📌 시그니처
+---
+
+### 📦 훅 구성
+
+| 훅 이름         | 역할                                                              |
+| --------------- | ----------------------------------------------------------------- |
+| `useInputValue` | 입력값 상태 및 변경 핸들러, 길이 검증 (`isLengthComplete`) 관리   |
+| `useErrors`     | 에러 상태 및 메시지 관리, 전체 에러 통과 여부 (`isErrorComplete`) |
+
+## 🔧 `useInputValue`
+
+입력값의 상태 및 길이 완료 여부를 관리합니다.
 
 ```ts
-const { state, onChange, errors, errorMessage, clearError, changeError, isLengthComplete, isErrorComplete, isValid } =
-  useBaseField<T>(props);
-```
-
-#### ✅ 제네릭 파라미터
-
-##### T: 입력 상태 타입 (string 또는 Record<string, string>)
-
-📥 파라미터
-
-```ts
-interface PropsType<T> {
-  initialState: T; // 초기 입력 상태 (예: "", { first: "", second: "" } 등)
-  maxLength: number; // 각 필드의 최대 입력 길이
-  keyIndexMap?: string[]; // 다중 필드일 경우 index ↔ key 매핑 (예: ["first", "second", ...])
+interface InputValueType<T> {
+  initialState: T; // 예: "", 또는 { first: "", second: "" }
+  maxLength: number; // 각 필드 최대 입력 길이
+  keyIndexMap?: string[]; // 다중 필드일 경우 index → key 매핑
 }
 ```
 
-### 🔄 반환 값
-
-| 키                 | 타입                                        | 설명                                                           |
-| ------------------ | ------------------------------------------- | -------------------------------------------------------------- |
-| `state`            | `T`                                         | 현재 입력값 상태                                               |
-| `onChange`         | `(value: string, index?: number) => void`   | 상태 변경 함수. 다중 필드일 경우 index 필수                    |
-| `errors`           | `boolean` or `boolean[]`                    | 에러 여부. 다중 필드일 경우 각 필드별 boolean 배열             |
-| `errorMessage`     | `string`                                    | 현재 가장 최근 발생한 에러 메시지                              |
-| `clearError`       | `(index?: number) => void`                  | 특정 필드 혹은 전체 에러 상태 초기화                           |
-| `changeError`      | `(message: string, index?: number) => void` | 특정 필드 혹은 전체에 에러 설정                                |
-| `isLengthComplete` | `boolean`                                   | 모든 필드가 최대 입력 길이를 만족했는지 여부                   |
-| `isErrorComplete`  | `boolean`                                   | 모든 필드가 에러 없이 통과했는지 여부                          |
-| `isValid`          | `boolean`                                   | 입력값이 완전한지 (`isLengthComplete && isErrorComplete`) 여부 |
-
-✅ 예시: 카드번호
+### 사용 예시 (다중 필드)
 
 ```ts
-const { state, onChange, errors, errorMessage, clearError, changeError, isLengthComplete, isErrorComplete, isValid } =
-  useBaseField({
-    initialState: {
-      first: "",
-      second: "",
-      third: "",
-      forth: "",
-    },
-    maxLength: 4,
-    keyIndexMap: ["first", "second", "third", "forth"],
-  });
+const { state, onChange, isLengthComplete } = useInputValue({
+  initialState: {
+    first: "",
+    second: "",
+    third: "",
+    forth: "",
+  },
+  maxLength: 4,
+  keyIndexMap: ["first", "second", "third", "forth"],
+});
 ```
 
-### 💡 팁
+### 반환값
 
-- 단일 필드라면 initialState를 문자열로, 다중 필드라면 객체로 넘기면 됩니다.
+| 키                 | 타입                                      | 설명                                         |
+| ------------------ | ----------------------------------------- | -------------------------------------------- |
+| `state`            | `T`                                       | 현재 입력값 상태                             |
+| `onChange`         | `(value: string, index?: number) => void` | 상태 변경 함수                               |
+| `isLengthComplete` | `boolean`                                 | 모든 필드가 최대 입력 길이를 만족했는지 여부 |
 
-- 외부에서 validateInput 함수 안에서 changeError, clearError를 조합해 유효성 체크 로직을 커스터마이징할 수 있습니다.
+---
 
-- onChange와 validateInput은 분리되어 있어 UX 흐름에 맞게 유연하게 사용할 수 있습니다.
+## 🔧 `useErrors`
+
+에러 상태, 메시지 및 전체 에러 완료 여부를 관리합니다.
+
+```ts
+interface UseErrorsProps<T> {
+  initialErrorState: T; // 예: { first: false, second: false, ... }
+}
+```
+
+### 사용 예시
+
+```ts
+const { errors, errorMessage, clearError, changeError, isErrorComplete } = useErrors({
+  initialErrorState: {
+    first: false,
+    second: false,
+    third: false,
+    forth: false,
+  },
+});
+```
+
+### 반환값
+
+| 키                | 타입                                      | 설명                                  |
+| ----------------- | ----------------------------------------- | ------------------------------------- |
+| `errors`          | `Record<string, boolean>`                 | 각 필드의 에러 상태                   |
+| `errorMessage`    | `string`                                  | 가장 최근 설정된 에러 메시지          |
+| `clearError`      | `(type: string) => void`                  | 특정 필드 에러 상태 초기화            |
+| `changeError`     | `(type: string, message: string) => void` | 특정 필드에 에러 상태 및 메시지 설정  |
+| `isErrorComplete` | `boolean`                                 | 모든 필드가 에러 없이 통과했는지 여부 |
+
+---
+
+## ✨ 함께 사용하기
+
+`useInputValue`와 `useErrors`를 조합해 입력 상태와 유효성 검증을 분리된 책임으로 관리할 수 있습니다.
+
+### 조합 예시
+
+```ts
+const input = useInputValue({
+  initialState: { first: "", second: "" },
+  maxLength: 4,
+  keyIndexMap: ["first", "second"],
+});
+
+const errors = useErrors({
+  initialErrorState: { first: false, second: false },
+});
+
+const isValid = input.isLengthComplete && errors.isErrorComplete;
+```
