@@ -8,8 +8,7 @@
     "format": "prettier . --write",
     "app": "pnpm --filter app",
     "hooks": "pnpm --filter pesu-hooks",
-    "components": "pnpm --filter pesu-modal",
-    "storybook-components": "pnpm --filter pesu-modal storybook"
+    "components": "pnpm --filter pesu-components"
   },
   "keywords": [],
   "author": "",

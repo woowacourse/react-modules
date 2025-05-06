@@ -1,4 +1,4 @@
 packages:
   - 'app'
-  - 'components'
-  - 'hooks'
+  - 'pesu-components'
+  - 'pesu-hooks'
