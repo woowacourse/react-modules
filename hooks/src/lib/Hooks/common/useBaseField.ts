@@ -63,7 +63,6 @@ const useBaseField = <T>(props: PropsType<T>) => {
     errors,
     errorMessage,
     onChange,
-    // validateInput,
     clearError,
     changeError,
     isLengthComplete,
