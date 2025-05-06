@@ -119,6 +119,8 @@ export const ConfirmButton: Story = {
         <Button text="열기" onclick={openModal} />
         <Modal
           onClose={closeModal}
+          renderHeader={true}
+          title="모달을 닫으려면"
           isOpen={isOpened}
           position={"center"}
           confirmButton={true}
@@ -126,6 +128,37 @@ export const ConfirmButton: Story = {
           size={"small"}
         >
           확인 버튼을 누르세요!
+        </Modal>
+      </>
+    );
+  },
+};
+
+export const ConfirmCancelButton: Story = {
+  render: () => {
+    const [isOpened, setIsOpened] = useState(true);
+    const openModal = () => {
+      setIsOpened(true);
+    };
+    const closeModal = () => {
+      setIsOpened(false);
+    };
+
+    return (
+      <>
+        <Button text="열기" onclick={openModal} />
+        <Modal
+          onClose={closeModal}
+          renderHeader={true}
+          title="모달을 닫으려면"
+          isOpen={isOpened}
+          position={"center"}
+          confirmButton={true}
+          cancelButton={true}
+          onConfirm={() => {}}
+          size={"small"}
+        >
+          취소 버튼을 누르세요!
         </Modal>
       </>
     );

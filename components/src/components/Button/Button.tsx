@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { css } from "@emotion/react";
 
 const ButtonContainer = styled.div<{ type?: "confirm" | "cancel" }>`
   width: 80px;
@@ -6,8 +7,12 @@ const ButtonContainer = styled.div<{ type?: "confirm" | "cancel" }>`
   font-size: 15px;
   font-weight: 700;
 
-  background-color: black;
-  color: white;
+  ${({ type }) =>
+    type
+      ? typeStyles[type]
+      : css`
+          background-color: white;
+        `}
 
   border-radius: 5px;
   display: flex;
@@ -16,11 +21,11 @@ const ButtonContainer = styled.div<{ type?: "confirm" | "cancel" }>`
   cursor: pointer;
 
   &:hover {
-    background-color: gray;
+    background-color: lightgray;
   }
 
   &:active {
-    background-color: lightgray;
+    background-color: gray;
   }
 `;
 
@@ -45,3 +50,15 @@ export default function Button({ type, onclick, text }: ButtonInterface) {
     </ButtonContainer>
   );
 }
+
+const typeStyles = {
+  confirm: css`
+    background-color: black;
+    color: white;
+  `,
+  cancel: css`
+    background-color: white;
+    color: gray;
+    border: 1px solid lightgray;
+  `,
+};

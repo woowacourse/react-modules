@@ -31,6 +31,14 @@ const ModalContainer = styled.div<{
   bottom: 0;
 
   z-index: 2;
+
+  font-size: 12px;
+  font-weight: 500;
+  color: #0a0d13;
+
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
 `;
 
 const ModalTop = styled.div`
@@ -67,6 +75,7 @@ interface ModalInterface {
   position?: "center" | "bottom";
   renderHeader?: boolean;
   confirmButton?: boolean;
+  cancelButton?: boolean;
   onConfirm?: () => void;
   title?: string;
   onClose: () => void;
@@ -78,6 +87,7 @@ export default function Modal({
   position = "center",
   renderHeader,
   confirmButton,
+  cancelButton,
   onConfirm,
   title,
   onClose,
@@ -101,6 +111,7 @@ export default function Modal({
           {confirmButton && (
             <Button type="confirm" onclick={onConfirm ? onConfirm : onClose} />
           )}
+          {cancelButton && <Button type="cancel" onclick={onClose} />}
         </ModalBottom>
       </ModalContainer>
       <ModalBackdrop onClick={onClose} />
