@@ -1,4 +1,4 @@
-import { createContext, useContext, useId } from 'react';
+import { createContext, PropsWithChildren, useContext, useId } from 'react';
 import { createPortal } from 'react-dom';
 import useBoolean from './hooks/useBoolean';
 import {
@@ -39,13 +39,11 @@ function useDialogContext() {
   return context;
 }
 
-function Trigger({
-  children,
-  className,
-}: {
-  children: React.ReactNode;
+interface TriggerProps extends PropsWithChildren {
   className?: string;
-}) {
+}
+
+function Trigger({ children, className }: TriggerProps) {
   const { open } = useDialogContext();
 
   return (
@@ -55,18 +53,20 @@ function Trigger({
   );
 }
 
-function Root({ children }: { children: React.ReactNode }) {
-  const { isOpen } = useDialogContext();
-  return createPortal(isOpen ? children : null, document.body);
+interface RootProps extends PropsWithChildren {
+  root?: HTMLElement;
 }
 
-function Overlay({
-  children,
-  className,
-}: {
-  children: React.ReactNode;
+function Root({ children, root = document.body }: RootProps) {
+  const { isOpen } = useDialogContext();
+  return createPortal(isOpen ? children : null, root);
+}
+
+interface OverlayProps extends PropsWithChildren {
   className?: string;
-}) {
+}
+
+function Overlay({ children, className }: OverlayProps) {
   const { close } = useDialogContext();
   const id = useId();
   const { handleClickOverlay } = useOverlay(close);
@@ -82,23 +82,19 @@ function Overlay({
   );
 }
 
-function Header({
-  children,
-  className,
-}: {
-  children: React.ReactNode;
+interface HeaderProps extends PropsWithChildren {
   className?: string;
-}) {
+}
+
+function Header({ children, className }: HeaderProps) {
   return <StyledHeader className={className}>{children}</StyledHeader>;
 }
 
-function CloseButton({
-  children,
-  className,
-}: {
-  children: React.ReactNode;
+interface CloseButtonProps extends PropsWithChildren {
   className?: string;
-}) {
+}
+
+function CloseButton({ children, className }: CloseButtonProps) {
   const { close } = useDialogContext();
 
   return (
@@ -108,15 +104,12 @@ function CloseButton({
   );
 }
 
-function Content({
-  children,
-  position = 'center',
-  className,
-}: {
-  children: React.ReactNode;
+interface ContentProps extends PropsWithChildren {
   position?: 'center' | 'bottom';
   className?: string;
-}) {
+}
+
+function Content({ children, position = 'center', className }: ContentProps) {
   return (
     <StyledContent position={position} className={className}>
       {children}
