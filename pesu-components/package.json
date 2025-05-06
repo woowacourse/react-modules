@@ -1,6 +1,6 @@
 {
-  "name": "pesu-modal",
-  "version": "0.0.5",
+  "name": "pesu-components",
+  "version": "0.0.1",
   "description": "npm modules",
   "type": "module",
   "types": "dist/components/index.d.ts",
