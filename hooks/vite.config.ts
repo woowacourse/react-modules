@@ -11,7 +11,7 @@ export default defineConfig({
       fileName: "index",
     },
     rollupOptions: {
-      external: ["react"],
+      external: ["react", "react-dom", "@emotion/react", "@emotion/styled"],
       output: {
         globals: {
           react: "React",
@@ -22,5 +22,24 @@ export default defineConfig({
       esmExternals: ["react"],
     },
   },
-  plugins: [react(), dts()],
+  test: {
+    globals: true,
+    environment: "jsdom",
+    include: ["**/*.{test,spec}.{ts,tsx}"],
+  },
+  plugins: [
+    react({
+      // @ts-expect-error
+      emotion: {
+        sourceMap: true,
+        autoLabel: "dev-only",
+        labelFormat: "[local]",
+        cssPropOptimization: true,
+      },
+    }),
+    dts({
+      insertTypesEntry: true,
+      outDir: "dist",
+    }),
+  ],
 });
