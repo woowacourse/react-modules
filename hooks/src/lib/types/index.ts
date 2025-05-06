@@ -16,7 +16,7 @@ export type ValidInputFuncType = ValidWithoutIndex | ValidWithIndex;
 export interface HookReturnType<T extends keyof CardInformationType> {
   state: CardInformationType[T];
   onChange: setCardInformationType[T];
-  errors: SingleErrorType | ListErrorType;
+  errors: Record<string, boolean>;
   errorMessage: ErrorMessageType;
   validateInput: ValidInputFuncType;
   isLengthComplete: boolean;
