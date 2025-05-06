@@ -23,7 +23,8 @@
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "test": "jest",
-    "deploy": "vite build --base=/react-modules/ --minify=false && npx gh-pages -d dist"
+    "build:pages": "vite build --config vite.config.pages.ts",
+    "deploy": "npm run build:pages && npx gh-pages -d dist-app"
   },
   "peerDependencies": {
     "react": "^18.0.0 || ^19.0.0",
