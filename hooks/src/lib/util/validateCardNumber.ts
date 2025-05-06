@@ -1,11 +1,11 @@
 import { isNumeric } from ".";
 import { CARD_NUMBER_LENGTH, ERROR_MESSAGE } from "../constants/index";
 
-function sliceCardNumber(cardNumber: string) {
-  const cardNumberFirstGroup = cardNumber.slice(0, 4);
-  const cardNumberSecondGroup = cardNumber.slice(4, 8);
-  const cardNumberThirdGroup = cardNumber.slice(8, 12);
-  const cardNumberFourthGroup = cardNumber.slice(12, 16);
+function sliceCardNumber(cardNumber: string[]) {
+  const cardNumberFirstGroup = cardNumber[0];
+  const cardNumberSecondGroup = cardNumber[1];
+  const cardNumberThirdGroup = cardNumber[2];
+  const cardNumberFourthGroup = cardNumber[3];
 
   return {
     cardNumberFirstGroup,
@@ -15,10 +15,18 @@ function sliceCardNumber(cardNumber: string) {
   };
 }
 
+function getCardNumberGroupError(cardNumber: string) {
+  if (!isNumeric(cardNumber)) return ERROR_MESSAGE.NOT_NUMERIC;
+  if (cardNumber.length !== CARD_NUMBER_LENGTH) {
+    return ERROR_MESSAGE.INVALID_LENGTH(CARD_NUMBER_LENGTH);
+  }
+  return "";
+}
+
 export type CardNetwork = "VISA" | "MASTER" | "DEFAULT";
 
-export function validateCardNetwork(cardNumber: string): CardNetwork {
-  const { cardNumberFirstGroup } = sliceCardNumber(cardNumber);
+export function validateCardNetwork(cardNumbers: string[]): CardNetwork {
+  const { cardNumberFirstGroup } = sliceCardNumber(cardNumbers);
   const cardPrefix = Number(cardNumberFirstGroup.slice(0, 2));
 
   if (cardNumberFirstGroup.startsWith("4")) return "VISA";
@@ -26,15 +34,13 @@ export function validateCardNetwork(cardNumber: string): CardNetwork {
   return "DEFAULT";
 }
 
-export function validateCardNumber(cardNumber: string) {
-  const trimCardNumber = cardNumber.trim();
+export function validateCardNumber(cardNumbers: string[]) {
+  const cardNumberErrors = ["", "", "", ""];
 
-  if (trimCardNumber.length !== CARD_NUMBER_LENGTH)
-    return ERROR_MESSAGE.INVALID_LENGTH(CARD_NUMBER_LENGTH);
-  const cardNumbers = sliceCardNumber(trimCardNumber);
+  cardNumbers.forEach((cardNumber, index) => {
+    const trimCardNumber = cardNumber.trim();
+    cardNumberErrors[index] = getCardNumberGroupError(trimCardNumber);
+  });
 
-  for (const cardNumberGroup of Object.values(cardNumbers)) {
-    if (!isNumeric(cardNumberGroup)) return ERROR_MESSAGE.NOT_NUMERIC;
-  }
-  return "";
+  return cardNumberErrors;
 }

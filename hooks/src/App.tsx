@@ -5,8 +5,14 @@ import { useCardValidation } from "./lib";
 function App() {
   const { card, cvc, expiry, password } = useCardValidation();
 
-  const handleCardNumberChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    card.setCardNumber(e.target.value);
+  const handleCardNumberChange = (
+    e: React.ChangeEvent<HTMLInputElement>,
+    index: number
+  ) => {
+    const value = e.target.value;
+    const updated = [...card.cardNumber];
+    updated[index] = value;
+    card.setCardNumber(updated);
   };
 
   const handleCVCChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -21,20 +27,29 @@ function App() {
     password.setPasswordNumber(e.target.value);
   };
 
+  console.log(card.errorMessage);
+
   return (
     <div className="App">
       <h1>카드 정보 입력</h1>
       <div className="card-form">
         <div className="input-group">
           <label htmlFor="cardNumber">카드 번호</label>
-          <input
-            id="cardNumber"
-            type="text"
-            value={card.cardNumber}
-            onChange={handleCardNumberChange}
-            placeholder="1234 5678 9012 3456"
-          />
-          {card.errorMessage && <p className="error">{card.errorMessage}</p>}
+          {Array.from({ length: 4 }).map((_, index) => (
+            <input
+              id={`cardNumber-${index}`}
+              type="text"
+              value={card.cardNumber[index]}
+              onChange={(e) => handleCardNumberChange(e, index)}
+              placeholder="1234"
+            />
+          ))}
+
+          {card.errorMessage && (
+            <p className="error">
+              {card.errorMessage.find((msg) => msg !== "")}
+            </p>
+          )}
           {card.cardNetwork !== "DEFAULT" && (
             <p className="card-network">{card.cardNetwork}</p>
           )}
