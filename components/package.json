@@ -1,7 +1,7 @@
 {
-  "name": "pongda-modal-component",
-  "version": "0.0.8",
-  "description": "Pongju&Daiane's Modal Component",
+  "name": "pongju-modal-component",
+  "version": "0.0.0",
+  "description": "Pongju's Modal Component",
   "type": "module",
   "types": "dist/lib/index.d.ts",
   "main": "dist/index.js",
@@ -20,6 +20,7 @@
   },
   "dependencies": {
     "pongda-modal-component": "^0.0.7",
+    "pongju-modal-component": "^0.0.0",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "styled-components": "^6.1.17"

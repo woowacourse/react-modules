@@ -1,6 +1,6 @@
 import { useState } from "react";
 import "./App.css";
-import Modal from "./Modal/Modal";
+import { Modal } from "pongju-modal-component";
 import React from "react";
 
 function App() {
