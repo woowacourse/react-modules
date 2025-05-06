@@ -1,11 +1,11 @@
 import { useState } from 'react';
 import { NO_ERROR } from './constants';
-import { CheckValidationType, UseErrorProps } from './types';
+import { CheckValidationType, UseInputErrorProps } from './types';
 
-export default function useError<T extends Record<string, string>>({
+export default function useInputError<T extends Record<string, string>>({
   initError,
   getValidationFns,
-}: UseErrorProps<T>) {
+}: UseInputErrorProps<T>) {
   const [error, setError] = useState<T>(initError);
 
   function checkValidation({ length, value, type }: CheckValidationType<T>) {

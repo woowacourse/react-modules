@@ -14,7 +14,7 @@ export type GetValidationFnsType = (
   value: string
 ) => ValidationFn[];
 
-export type UseErrorProps<T extends Record<string, string>> = {
+export type UseInputErrorProps<T extends Record<string, string>> = {
   initError: T;
   getValidationFns: GetValidationFnsType;
 };

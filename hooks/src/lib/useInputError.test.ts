@@ -1,5 +1,5 @@
 import { renderHook, act } from '@testing-library/react';
-import useError from './useInputError';
+import useInputError from './useInputError';
 import { NO_ERROR } from './constants';
 
 describe('useError', () => {
@@ -21,7 +21,7 @@ describe('useError', () => {
 
   test('에러 상태를 초기화한다.', () => {
     const { result } = renderHook(() =>
-      useError({
+      useInputError({
         initError,
         getValidationFns,
       })
@@ -34,7 +34,7 @@ describe('useError', () => {
 
   test('유효성 검사에 실패했을 때 에러 상태를 설정해야한다.', () => {
     const { result } = renderHook(() =>
-      useError({
+      useInputError({
         initError,
         getValidationFns,
       })
@@ -55,7 +55,7 @@ describe('useError', () => {
 
   test('에러를 리셋해야한다.', () => {
     const { result } = renderHook(() =>
-      useError({
+      useInputError({
         initError,
         getValidationFns,
       })
