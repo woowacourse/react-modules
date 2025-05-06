@@ -1,7 +1,10 @@
 import { useState } from "react";
+
 import validateNumber from "../utils/validateNumber";
 import validateMaxLength from "../utils/validateMaxLength";
 import validateRange from "../utils/validateRange";
+
+import { validationMessages } from "../../constants/validationMessages";
 
 type CardExpireDate = {
   month: string;
@@ -28,7 +31,7 @@ const useCardExpireDateValidate = () => {
         [key]: false,
       });
 
-      setErrorMessage("숫자만 입력해주세요.");
+      setErrorMessage(validationMessages.numberOnly);
       return;
     }
 
@@ -38,7 +41,7 @@ const useCardExpireDateValidate = () => {
         [key]: false,
       });
 
-      setErrorMessage("2자리만 입력해주세요.");
+      setErrorMessage(validationMessages.limitedLength(2));
       return;
     }
 
@@ -55,7 +58,7 @@ const useCardExpireDateValidate = () => {
           month: false,
         });
 
-        setErrorMessage("1~12 사이의 숫자를 입력해주세요.");
+        setErrorMessage(validationMessages.rangeMonth);
         return;
       }
     }
@@ -73,7 +76,7 @@ const useCardExpireDateValidate = () => {
           year: false,
         });
 
-        setErrorMessage("유효한 년도를 입력해주세요.");
+        setErrorMessage(validationMessages.invalidYear);
         return;
       }
     }
@@ -91,7 +94,7 @@ const useCardExpireDateValidate = () => {
         month: false,
       });
 
-      setErrorMessage("유효한 만료일을 입력해주세요.");
+      setErrorMessage(validationMessages.invalidExpire);
       return;
     }
 

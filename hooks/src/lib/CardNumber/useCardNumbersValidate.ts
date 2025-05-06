@@ -2,6 +2,7 @@ import { useState } from "react";
 
 import validateNumber from "../utils/validateNumber";
 import validateMaxLength from "../utils/validateMaxLength";
+import { validationMessages } from "../../constants/validationMessages";
 
 type CardNumbersValidate = {
   first: boolean;
@@ -36,7 +37,7 @@ const useCardNumbersValidate = (): CardNumberValidateResult => {
         [key]: false,
       });
 
-      setErrorMessage("숫자만 입력해주세요.");
+      setErrorMessage(validationMessages.numberOnly);
       return;
     }
 
@@ -46,7 +47,7 @@ const useCardNumbersValidate = (): CardNumberValidateResult => {
         [key]: false,
       });
 
-      setErrorMessage("4자리만 입력해주세요.");
+      setErrorMessage(validationMessages.limitedLength(4));
       return;
     }
 

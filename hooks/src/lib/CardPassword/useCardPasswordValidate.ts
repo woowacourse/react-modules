@@ -1,6 +1,7 @@
-import { useState } from 'react';
-import validateNumber from '../utils/validateNumber';
-import validateMaxLength from '../utils/validateMaxLength';
+import { useState } from "react";
+import validateNumber from "../utils/validateNumber";
+import validateMaxLength from "../utils/validateMaxLength";
+import { validationMessages } from "../../constants/validationMessages";
 
 const useCardPasswordValidate = () => {
   const [isValid, setIsValid] = useState<boolean>(true);
@@ -9,13 +10,13 @@ const useCardPasswordValidate = () => {
   const validateCardPassword = (cardPassword: string) => {
     if (!validateNumber(cardPassword)) {
       setIsValid(false);
-      setErrorMessage('숫자만 입력해주세요.');
+      setErrorMessage(validationMessages.numberOnly);
       return;
     }
 
     if (!validateMaxLength(cardPassword, 2)) {
       setIsValid(false);
-      setErrorMessage('2자리만 입력해주세요.');
+      setErrorMessage(validationMessages.limitedLength(2));
       return;
     }
 

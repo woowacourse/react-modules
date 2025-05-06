@@ -1,4 +1,6 @@
-import { useState } from 'react';
+import { useState } from "react";
+
+import { validationMessages } from "../../constants/validationMessages";
 
 const useCardBrandValidate = (cardBrands: string[]) => {
   const [isValid, setIsValid] = useState<boolean>(false);
@@ -7,7 +9,7 @@ const useCardBrandValidate = (cardBrands: string[]) => {
   const validateCardBrand = (cardBrand: string) => {
     if (!cardBrands.includes(cardBrand)) {
       setIsValid(false);
-      setErrorMessage('카드 브랜드가 올바르지 않습니다.');
+      setErrorMessage(validationMessages.invalidBrand);
       return;
     }
 
