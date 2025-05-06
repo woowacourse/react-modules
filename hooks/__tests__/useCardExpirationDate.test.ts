@@ -67,7 +67,7 @@ describe("useCardExpirationDate hook 테스트", () => {
           event
         );
       });
-      expect(result.current.isError.MONTH).toBe(true);
+      expect(result.current.error.MONTH).toBe(true);
       expect(result.current.errorMessage.MONTH).toEqual(
         CARD_EXPIRATION_DATE_ERROR_MESSAGE.INVALID_LENGTH
       );
@@ -87,7 +87,7 @@ describe("useCardExpirationDate hook 테스트", () => {
           event
         );
       });
-      expect(result.current.isError.MONTH).toBe(true);
+      expect(result.current.error.MONTH).toBe(true);
       expect(result.current.errorMessage.MONTH).toEqual(
         CARD_EXPIRATION_DATE_ERROR_MESSAGE.NOT_NUMERIC
       );
@@ -108,7 +108,7 @@ describe("useCardExpirationDate hook 테스트", () => {
             event
           );
         });
-        expect(result.current.isError.MONTH).toBe(true);
+        expect(result.current.error.MONTH).toBe(true);
         expect(result.current.errorMessage.MONTH).toEqual(
           CARD_EXPIRATION_DATE_ERROR_MESSAGE.INVALID_MONTH_RANGE
         );
@@ -128,7 +128,7 @@ describe("useCardExpirationDate hook 테스트", () => {
             event
           );
         });
-        expect(result.current.isError.MONTH).toBe(true);
+        expect(result.current.error.MONTH).toBe(true);
         expect(result.current.errorMessage.MONTH).toEqual(
           CARD_EXPIRATION_DATE_ERROR_MESSAGE.INVALID_MONTH_RANGE
         );
@@ -158,7 +158,7 @@ describe("useCardExpirationDate hook 테스트", () => {
           event
         );
       });
-      expect(result.current.isError.MONTH).toBe(true);
+      expect(result.current.error.MONTH).toBe(true);
       expect(result.current.errorMessage.MONTH).toEqual(
         CARD_EXPIRATION_DATE_ERROR_MESSAGE.INVALID_DATE
       );
@@ -186,7 +186,7 @@ describe("useCardExpirationDate hook 테스트", () => {
           event
         );
       });
-      expect(result.current.isError.YEAR).toBe(true);
+      expect(result.current.error.YEAR).toBe(true);
       expect(result.current.errorMessage.YEAR).toEqual(
         CARD_EXPIRATION_DATE_ERROR_MESSAGE.INVALID_DATE
       );
@@ -213,7 +213,7 @@ describe("useCardExpirationDate hook 테스트", () => {
     act(() => {
       result.current.handleCardExpirationDateChange({ target: "MONTH" })(event);
     });
-    expect(result.current.isError.MONTH).toBe(false);
+    expect(result.current.error.MONTH).toBe(false);
     expect(result.current.errorMessage.MONTH).toEqual("");
   });
 });

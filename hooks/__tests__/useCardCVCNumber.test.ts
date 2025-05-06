@@ -28,7 +28,7 @@ describe("useCardCVCNumber hook 테스트", () => {
     });
 
     expect(result.current.cardCVCNumber).toBe("123");
-    expect(result.current.isError).toBe(false);
+    expect(result.current.error).toBe(false);
   });
 
   it("숫자가 아니면 에러 상태를 반환한다", () => {
@@ -42,7 +42,7 @@ describe("useCardCVCNumber hook 테스트", () => {
       result.current.handleCardCVCNumberChange(event);
     });
 
-    expect(result.current.isError).toBe(true);
+    expect(result.current.error).toBe(true);
     expect(result.current.errorMessage).toBe(
       CARD_CVC_ERROR_MESSAGE.NOT_NUMERIC
     );
@@ -59,7 +59,7 @@ describe("useCardCVCNumber hook 테스트", () => {
       result.current.handleCardCVCNumberChange(event);
     });
 
-    expect(result.current.isError).toBe(true);
+    expect(result.current.error).toBe(true);
     expect(result.current.errorMessage).toBe(
       CARD_CVC_ERROR_MESSAGE.INVALID_LENGTH
     );

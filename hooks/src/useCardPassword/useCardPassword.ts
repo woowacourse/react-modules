@@ -14,7 +14,7 @@ export const CARD_PASSWORD_ERROR_MESSAGE = {
 
 export default function useCardPassword(userCardPassword = "") {
   const [cardPassword, setCardPassword] = useState(userCardPassword);
-  const { error, changeError, clearError } = useError(
+  const { error, errorMessage, changeError, clearError } = useError(
     {
       [KEY]: false,
     },
@@ -40,8 +40,8 @@ export default function useCardPassword(userCardPassword = "") {
 
   return {
     cardPassword,
-    isError: error.isError[KEY],
-    errorMessage: error.errorMessage[KEY],
+    error: error[KEY],
+    errorMessage: errorMessage[KEY],
     handleCardPasswordChange,
   };
 }

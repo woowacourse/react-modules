@@ -51,7 +51,7 @@ export default function useCardExpirationDate(
   const [cardExpirationDate, setCardExpirationDate] = useState(
     userCardExpirationDate
   );
-  const { error, changeError, clearError } = useError(
+  const { error, errorMessage, changeError, clearError } = useError(
     INITIAL_IS_ERROR,
     INITIAL_CARD_EXPIRATION_DATE_ERROR_MESSAGE
   );
@@ -80,8 +80,8 @@ export default function useCardExpirationDate(
 
   return {
     cardExpirationDate,
-    isError: error.isError,
-    errorMessage: error.errorMessage,
+    error: error,
+    errorMessage: errorMessage,
     handleCardExpirationDateChange,
   };
 }

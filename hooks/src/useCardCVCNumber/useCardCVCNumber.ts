@@ -14,7 +14,7 @@ export const CARD_CVC_ERROR_MESSAGE = {
 
 export default function useCardCVCNumber(userCardCVCNumber = "") {
   const [cardCVCNumber, setCardCVCNumber] = useState(userCardCVCNumber);
-  const { error, changeError, clearError } = useError(
+  const { error, errorMessage, changeError, clearError } = useError(
     {
       [KEY]: false,
     },
@@ -40,8 +40,8 @@ export default function useCardCVCNumber(userCardCVCNumber = "") {
 
   return {
     cardCVCNumber,
-    isError: error.isError[KEY],
-    errorMessage: error.errorMessage[KEY],
+    error: error[KEY],
+    errorMessage: errorMessage[KEY],
     handleCardCVCNumberChange,
   };
 }

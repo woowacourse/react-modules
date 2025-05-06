@@ -16,7 +16,7 @@ export default function useCardBrand({
   optionValues,
 }: useCardBrandProps) {
   const [cardBrand, setCardBrand] = useState(userCardBrand);
-  const { error, changeError, clearError } = useError(
+  const { error, errorMessage, changeError, clearError } = useError(
     {
       [KEY]: false,
     },
@@ -43,8 +43,8 @@ export default function useCardBrand({
 
   return {
     cardBrand,
-    isError: error.isError[KEY],
-    errorMessage: error.errorMessage[KEY],
+    error: error[KEY],
+    errorMessage: errorMessage[KEY],
     handleCardBrandChange,
   };
 }

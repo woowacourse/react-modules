@@ -68,7 +68,7 @@ describe("useCardNumbers hook 테스트", () => {
       act(() => {
         result.current.handleCardNumbersChange({ target: "FIRST" })(event);
       });
-      expect(result.current.isError.FIRST).toBe(true);
+      expect(result.current.error.FIRST).toBe(true);
       expect(result.current.errorMessage.FIRST).toEqual(
         CARD_NUMBER_ERROR_MESSAGE.INVALID_LENGTH
       );
@@ -86,7 +86,7 @@ describe("useCardNumbers hook 테스트", () => {
       act(() => {
         result.current.handleCardNumbersChange({ target: "FIRST" })(event);
       });
-      expect(result.current.isError.FIRST).toBe(true);
+      expect(result.current.error.FIRST).toBe(true);
       expect(result.current.errorMessage.FIRST).toEqual(
         CARD_NUMBER_ERROR_MESSAGE.NOT_NUMERIC
       );
