@@ -13,18 +13,16 @@ import {
   ModalWrapperStyle,
 } from "./Modal.style";
 import ModalContext, { useModalContext } from "./contexts/ModalContext";
-import { createPortal } from "react-dom";
 
 const Modal = ({ show, onHide, children, ...props }: ModalProps) => {
   useKeyEscClose(onHide);
 
-  return createPortal(
+  return (
     <ModalContext.Provider value={{ onHide }}>
       <div css={ModalWrapperStyle(show)} {...props}>
         {children}
       </div>
-    </ModalContext.Provider>,
-    document.body,
+    </ModalContext.Provider>
   );
 };
 
