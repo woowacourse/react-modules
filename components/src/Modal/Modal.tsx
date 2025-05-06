@@ -6,30 +6,30 @@ import {
   ModalContents,
   ModalButton,
   ModalButtonContainer,
-} from './Modal.styled';
-import { useContext, useEffect } from 'react';
-import { createContext } from 'react';
-import { createPortal } from 'react-dom';
+} from "./Modal.styled";
+import { useContext, useEffect } from "react";
+import { createContext } from "react";
+import { createPortal } from "react-dom";
 
 type ModalProps = {
   isOpen: boolean;
   onClose: () => void;
   children: React.ReactNode;
-  position?: 'center' | 'bottom';
+  position?: "center" | "bottom";
 };
 
 const ModalContext = createContext<ModalProps>({
   isOpen: true,
   onClose: () => {},
   children: <></>,
-  position: 'center',
+  position: "center",
 });
 
 const Modal = ({
   isOpen = true,
   onClose,
   children,
-  position = 'center',
+  position = "center",
 }: ModalProps) => {
   const value = {
     isOpen,
@@ -40,15 +40,15 @@ const Modal = ({
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') {
+      if (event.key === "Escape") {
         onClose();
       }
     };
 
-    window.addEventListener('keydown', handleKeyDown);
+    window.addEventListener("keydown", handleKeyDown);
 
     return () => {
-      window.removeEventListener('keydown', handleKeyDown);
+      window.removeEventListener("keydown", handleKeyDown);
     };
   }, [isOpen, onClose]);
 
@@ -66,7 +66,7 @@ const Modal = ({
               </ModalLayout>
             </BackDrop>
           </ModalContext.Provider>,
-          document.getElementById('root') as HTMLElement
+          document.getElementById("root") as HTMLElement
         )}
     </>
   );
@@ -98,7 +98,7 @@ type ButtonProps = {
   title: string;
   backgroundColor?: string;
   textColor?: string;
-  size?: 'small' | 'medium' | 'large';
+  size?: "small" | "medium" | "large";
   onClick?: () => void;
 };
 

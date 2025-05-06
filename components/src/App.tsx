@@ -1,9 +1,7 @@
-import { useState } from 'react';
-import './App.css';
-import Modal from './Modal/Modal';
-// import { Modal } from 'pongda-modal-component';
-// import { Modal } from 'pongda-modal-component';
-import React from 'react';
+import { useState } from "react";
+import "./App.css";
+import Modal from "./Modal/Modal";
+import React from "react";
 
 function App() {
   const [isOpen, setIsOpen] = useState(true);
@@ -25,7 +23,7 @@ function App() {
           textColor="#ffffff"
           size="large"
           onClick={() => {
-            console.log('확인 버튼 클릭!');
+            console.log("확인 버튼 클릭!");
           }}
         />
       </Modal>
