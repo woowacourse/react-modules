@@ -41,7 +41,7 @@ export const ModalComponent: Story = {
 
     return (
       <Modal {...args} show={internalShow} onHide={handleHide}>
-        <Modal.Background>
+        <Modal.BackDrop>
           <Modal.Container>
             <Modal.Header style={{ color: "red" }} closeButton>
               <Modal.Title>Title</Modal.Title>
@@ -49,7 +49,7 @@ export const ModalComponent: Story = {
             <Modal.Body>Body</Modal.Body>
             <Modal.Footer>Footer</Modal.Footer>
           </Modal.Container>
-        </Modal.Background>
+        </Modal.BackDrop>
       </Modal>
     );
   },

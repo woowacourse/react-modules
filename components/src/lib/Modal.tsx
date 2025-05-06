@@ -28,7 +28,7 @@ const Modal = ({ show, onHide, children, ...props }: ModalProps) => {
   );
 };
 
-Modal.Background = ({ children, ...props }: BaseProps) => {
+Modal.BackDrop = ({ children, ...props }: BaseProps) => {
   const { onHide } = useModalContext();
   const ref = useRef<HTMLDivElement>(null);
 

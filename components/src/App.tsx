@@ -8,7 +8,7 @@ function App() {
     <>
       <div css={wrapper}>
         <Modal show={show} onHide={() => setShow(false)}>
-          <Modal.Background>
+          <Modal.BackDrop>
             <Modal.Container>
               <Modal.Header className="blue" style={{ color: "red" }} closeButton>
                 <Modal.Title>Title</Modal.Title>
@@ -18,7 +18,7 @@ function App() {
               </Modal.Body>
               <Modal.Footer>Footer</Modal.Footer>
             </Modal.Container>
-          </Modal.Background>
+          </Modal.BackDrop>
         </Modal>
       </div>
     </>
