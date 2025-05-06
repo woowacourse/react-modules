@@ -14,5 +14,6 @@
     "moduleResolution": "node",
     "types": ["react", "react-dom", "node"] // JSX·DOM 타입
   },
+  "exclude": ["node_modules", "**/__tests__", "**/*.test.ts", "**/*.test.tsx"],
   "include": ["src/lib/**/*"]
 }

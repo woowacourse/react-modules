@@ -1,6 +1,6 @@
 {
   "name": "compoents-modal-test-kangoll",
-  "version": "0.0.20",
+  "version": "0.0.21",
   "description": "npm modules",
   "type": "module",
   "main": "dist/index.cjs",
@@ -60,6 +60,6 @@
     "vite-plugin-dts": "^4.5.3"
   },
   "dependencies": {
-    "compoents-modal-test-kangoll": "^0.0.20"
+    "compoents-modal-test-kangoll": "^0.0.21"
   }
 }

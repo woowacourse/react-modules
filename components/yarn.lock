@@ -1510,6 +1510,27 @@ compare-versions@^6.1.1:
   resolved "https://registry.npmjs.org/compare-versions/-/compare-versions-6.1.1.tgz"
   integrity sha512-4hm4VPpIecmlg59CHXnRDnqGplJFrbLG4aFEl5vl6cK1u76ws3LLvX7ikFnTDl5vo39sjWD6AaDPYodJp/NNHg==
 
+compoents-modal-test-kangoll@^0.0.19:
+  version "0.0.19"
+  resolved "https://registry.npmjs.org/compoents-modal-test-kangoll/-/compoents-modal-test-kangoll-0.0.19.tgz"
+  integrity sha512-/vAlAOdCj8bl1gyYQxN/Rbk1svnSInrWV1chYvgdeOgsVYZSd94uYGWNPXBcdQbdz7GJLYkLQLCbTHzIXCsT3g==
+  dependencies:
+    compoents-modal-test-kangoll "^0.0.19"
+
+compoents-modal-test-kangoll@^0.0.20:
+  version "0.0.20"
+  resolved "https://registry.npmjs.org/compoents-modal-test-kangoll/-/compoents-modal-test-kangoll-0.0.20.tgz"
+  integrity sha512-cj+w2b16qdTDNy0UBio8uW3wVa3rdwoVipKcYHOeJLWU61NT+7DtEdkTpVfvBM/tNtyUhtzjkMoWnLoHO+N9NQ==
+  dependencies:
+    compoents-modal-test-kangoll "^0.0.19"
+
+compoents-modal-test-kangoll@^0.0.21:
+  version "0.0.21"
+  resolved "https://registry.npmjs.org/compoents-modal-test-kangoll/-/compoents-modal-test-kangoll-0.0.21.tgz"
+  integrity sha512-b+qoGvGRs3vbOweM5vRBBjU84CJ7uV0kTRK1vYkP7+ZccgX7HBjpkbd3KIjh5uF8J1TIxzDa5Dyx3R9Arl7wcw==
+  dependencies:
+    compoents-modal-test-kangoll "^0.0.20"
+
 concat-map@0.0.1:
   version "0.0.1"
   resolved "https://registry.npmjs.org/concat-map/-/concat-map-0.0.1.tgz"
