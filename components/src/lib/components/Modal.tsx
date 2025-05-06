@@ -90,11 +90,9 @@ export const Modal = ({
         <StyledModalHeader aria-label={title}>
           {title}
           {showCloseButton && (
-            <StyledCloseIconButton
-              src={closeIcon}
-              onClick={onClose}
-              aria-label="closeModalButton"
-            />
+            <StyledCloseButton type="button" onClick={onClose} aria-label="closeModalButton">
+              <StyledCloseIconButton src={closeIcon} alt="closeIcon" />
+            </StyledCloseButton>
           )}
         </StyledModalHeader>
         {children}
@@ -174,15 +172,19 @@ const StyledModalHeader = styled.div`
   font-weight: 600;
 `;
 
-const StyledCloseIconButton = styled.img`
-  width: 27px;
-  height: 27px;
+const StyledCloseButton = styled.button`
+  padding: 0;
+  background-color: transparent;
   border: none;
   cursor: pointer;
   z-index: 0;
-
   &:hover {
     background-color: rgba(31, 41, 55, 0.1);
     border-radius: 20%;
   }
+`;
+
+const StyledCloseIconButton = styled.img`
+  width: 27px;
+  height: 27px;
 `;
