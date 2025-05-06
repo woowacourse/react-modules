@@ -77,13 +77,15 @@ export const CloseButton = styled.button`
 	cursor: pointer;
 `;
 
-export const Modal = Object.assign(ModalRoot, {
+const Modal = Object.assign(ModalRoot, {
 	Header: ModalHeader,
 	Body: ModalBody,
 	Footer: ModalFooter,
 	ConfirmButton,
 	CloseButton,
 });
+
+export default Modal;
 
 const Overlay = styled.div`
 	position: fixed;

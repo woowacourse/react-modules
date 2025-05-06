@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { Modal } from "./Modal";
+import Modal from "./Modal";
 import Button from "../../modules/Button/Button";
 import { useState } from "react";
 import styled from "@emotion/styled";
