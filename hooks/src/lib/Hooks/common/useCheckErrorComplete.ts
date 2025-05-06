@@ -1,11 +1,9 @@
 import { useMemo } from "react";
-import { ListErrorType, SingleErrorType } from "../../types";
 
-const useCheckErrorComplete = (isError: SingleErrorType | ListErrorType) => {
+const useCheckErrorComplete = <T extends Record<string, boolean>>(errors: T) => {
   return useMemo(() => {
-    if (Array.isArray(isError)) return isError.every((error) => !error);
-    return !isError;
-  }, [isError]);
+    return Object.values(errors).every((error) => !error);
+  }, [errors]);
 };
 
 export default useCheckErrorComplete;
