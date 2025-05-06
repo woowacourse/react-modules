@@ -43,12 +43,20 @@ export interface ModalTitleProps extends ChildrenProps {
   color?: string;
 }
 
-const ModalContext = createContext<(() => void) | undefined>(undefined);
+interface ModalContextType {
+  onHide: () => void;
+}
+
+const ModalContext = createContext<ModalContextType>({
+  onHide: () => {
+    throw new Error("ModalContext must be used within a ModalProvider");
+  },
+});
 
 const Modal = ({ show, onHide, background = true, position = "center", gap = 16, children }: ModalProps) => {
   useKeyEscClose(onHide);
   return (
-    <ModalContext.Provider value={onHide}>
+    <ModalContext.Provider value={{ onHide }}>
       <div css={ModalWrapperStyle(show)}>
         <div css={backGroundStyle(background)} onClick={onHide}></div>
         <div css={ModalContainerStyle(position, gap)}>{children}</div>
@@ -58,7 +66,7 @@ const Modal = ({ show, onHide, background = true, position = "center", gap = 16,
 };
 
 Modal.Header = ({ closeButton = false, children }: ModalHeaderProps) => {
-  const onHide = useContext(ModalContext);
+  const { onHide } = useContext(ModalContext);
 
   return (
     <div css={ModalHeaderStyle}>
