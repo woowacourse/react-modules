@@ -2,7 +2,7 @@ import styled from "@emotion/styled";
 
 export const ModalBackground = styled.div<{
   isModalOpen: boolean;
-  position: string;
+  position: "center" | "bottom";
 }>`
   position: fixed;
   top: 0;
