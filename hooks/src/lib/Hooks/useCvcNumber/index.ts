@@ -1,36 +1,28 @@
-import { useState } from "react";
 import { validateNumericString } from "../../utils/validation";
-import {
-  CvcNumberType,
-  ErrorMessageType,
-  HookReturnType,
-  SetValueFn,
-  SingleErrorType,
-  ValidInputFuncType,
-} from "../../types";
-import useCheckErrorComplete from "../common/useCheckErrorComplete";
-import useCheckLengthComplete from "../common/useCheckLengthComplete";
+import { HookReturnType, ValidInputFuncType } from "../../types";
+
+import useBaseField from "../common/useBaseField";
 import { MAX_LENGTH } from "../../constants";
 
 const useCvcNumber = (): HookReturnType<"cvcNumber"> => {
-  const [cvcNumber, setCvcNumber] = useState<CvcNumberType>("");
-  const [errors, setErrors] = useState<SingleErrorType>(false);
-  const [errorMessage, setErrorMessage] = useState<ErrorMessageType>("");
-
-  const onChange: SetValueFn<CvcNumberType> = (value) => setCvcNumber(value);
+  const { state, errors, errorMessage, onChange, clearError, changeError, isLengthComplete, isErrorComplete, isValid } =
+    useBaseField({
+      initialState: "",
+      maxLength: MAX_LENGTH.CVC_NUMBER,
+    });
 
   const validateInput: ValidInputFuncType = (value: string) => {
     const { error, message } = validateNumericString(value);
-    setErrors(error);
-    setErrorMessage(message);
+
+    if (error) {
+      changeError(message);
+    } else {
+      clearError();
+    }
   };
 
-  const isLengthComplete = useCheckLengthComplete(cvcNumber, MAX_LENGTH.CVC_NUMBER);
-  const isErrorComplete = useCheckErrorComplete(errors);
-  const isValid = isLengthComplete && isErrorComplete;
-
   return {
-    state: cvcNumber,
+    state,
     onChange,
     errors,
     errorMessage,

@@ -1,36 +1,27 @@
-import { useState } from "react";
 import { validateNumericString } from "../../utils/validation";
-import {
-  ErrorMessageType,
-  HookReturnType,
-  PasswordType,
-  SetValueFn,
-  SingleErrorType,
-  ValidInputFuncType,
-} from "../../types";
-import useCheckErrorComplete from "../common/useCheckErrorComplete";
-import useCheckLengthComplete from "../common/useCheckLengthComplete";
+import { HookReturnType, ValidInputFuncType } from "../../types";
 import { MAX_LENGTH } from "../../constants";
+import useBaseField from "../common/useBaseField";
 
 const usePassword = (): HookReturnType<"password"> => {
-  const [password, setPassword] = useState<PasswordType>("");
-  const [errors, setErrors] = useState<SingleErrorType>(false);
-  const [errorMessage, setErrorMessage] = useState<ErrorMessageType>("");
-
-  const onChange: SetValueFn<PasswordType> = (value) => setPassword(value);
+  const { state, errors, errorMessage, onChange, clearError, changeError, isLengthComplete, isErrorComplete, isValid } =
+    useBaseField({
+      initialState: "",
+      maxLength: MAX_LENGTH.PASSWORD,
+    });
 
   const validateInput: ValidInputFuncType = (value: string) => {
     const { error, message } = validateNumericString(value);
-    setErrors(error);
-    setErrorMessage(message);
+
+    if (error) {
+      changeError(message);
+    } else {
+      clearError();
+    }
   };
 
-  const isLengthComplete = useCheckLengthComplete(password, MAX_LENGTH.PASSWORD);
-  const isErrorComplete = useCheckErrorComplete(errors);
-  const isValid = isLengthComplete && isErrorComplete;
-
   return {
-    state: password,
+    state,
     onChange,
     errors,
     errorMessage,

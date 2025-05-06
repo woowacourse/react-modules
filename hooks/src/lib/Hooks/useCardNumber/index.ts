@@ -1,55 +1,35 @@
-import { useState } from "react";
 import { validateNumericString } from "../../utils/validation";
-import {
-  CardNumberType,
-  ErrorMessageType,
-  HookReturnType,
-  ListErrorType,
-  SetValueFn,
-  ValidInputFuncType,
-} from "../../types";
-import useCheckErrorComplete from "../common/useCheckErrorComplete";
-import useCheckLengthComplete from "../common/useCheckLengthComplete";
+import { CardNumberType, HookReturnType, ValidInputFuncType } from "../../types";
+import useBaseField from "../common/useBaseField";
 import { MAX_LENGTH } from "../../constants";
 
 const KEY_INDEX_MATCH = ["first", "second", "third", "forth"];
 
 const useCardNumber = (): HookReturnType<"cardNumber"> => {
-  const [cardNumber, setCardNumber] = useState<CardNumberType>({
-    first: "",
-    second: "",
-    third: "",
-    forth: "",
-  });
-
-  const [errors, setErrors] = useState<ListErrorType>([false, false, false, false]);
-  const [errorMessage, setErrorMessage] = useState<ErrorMessageType>("");
-
-  const onChange: SetValueFn<CardNumberType[keyof CardNumberType]> = (value, index) => {
-    setCardNumber((prev) => ({
-      ...prev,
-      [KEY_INDEX_MATCH[index!]]: value,
-    }));
-  };
+  const { state, errors, errorMessage, onChange, clearError, changeError, isLengthComplete, isErrorComplete, isValid } =
+    useBaseField<CardNumberType>({
+      initialState: {
+        first: "",
+        second: "",
+        third: "",
+        forth: "",
+      },
+      maxLength: MAX_LENGTH.CARD_NUMBER,
+      keyIndexMap: KEY_INDEX_MATCH,
+    });
 
   const validateInput: ValidInputFuncType = (value: string, index: number) => {
     const { error, message } = validateNumericString(value);
 
-    setErrors((prev) => {
-      const updated = [...prev];
-      updated[index] = error;
-      return updated;
-    });
-
-    setErrorMessage(message);
+    if (error) {
+      changeError(message, index);
+    } else {
+      clearError(index);
+    }
   };
 
-  const isLengthComplete = useCheckLengthComplete(cardNumber, MAX_LENGTH.CARD_NUMBER);
-  const isErrorComplete = useCheckErrorComplete(errors);
-  const isValid = isLengthComplete && isErrorComplete;
-
   return {
-    state: cardNumber,
+    state,
     onChange,
     errors,
     errorMessage,
