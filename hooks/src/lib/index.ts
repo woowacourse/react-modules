@@ -1,4 +1,4 @@
-export { default as useCardNumberValidation } from "./hooks/useCardNumberValidation";
-export { default as useCvcValidation } from "./hooks/useCvcValidation";
-export { default as useExpirationDateValidation } from "./hooks/useExpirationDateValidation";
-export { default as usePasswordValidation } from "./hooks/usePasswordValidation";
+export { default as useCardNumber } from "./hooks/useCardNumber";
+export { default as useCvcNumber } from "./hooks/useCvcNumber";
+export { default as useExpirationDate } from "./hooks/useExpirationDate";
+export { default as usePassword } from "./hooks/usePassword";
