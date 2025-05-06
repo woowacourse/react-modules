@@ -1,19 +1,15 @@
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import { NO_ERROR } from './constants';
 import { CheckValidationType, UseInputErrorProps } from './types';
-
-function findFirstError(errorObj: Record<string, string>) {
-  const firstError = Object.entries(errorObj).find(
-    ([_, value]) => value !== NO_ERROR
-  );
-  return firstError ? { key: firstError[0], value: firstError[1] } : null;
-}
+import { findFirstError } from '../utils';
 
 export default function useInputError<T extends Record<string, string>>({
   initError,
   getValidationFns,
 }: UseInputErrorProps<T>) {
   const [error, setError] = useState(initError);
+
+  const firstError = useMemo(() => findFirstError(error), [error]);
 
   function checkValidation({ value, type }: CheckValidationType<T>) {
     const validationFns = getValidationFns(value);
@@ -27,12 +23,11 @@ export default function useInputError<T extends Record<string, string>>({
   }
 
   function getErrorMessage() {
-    const result = findFirstError(error);
-    return result?.value;
+    return firstError?.value;
   }
 
   function isError() {
-    return !!findFirstError(error);
+    return !!firstError;
   }
 
   function resetErrors() {
