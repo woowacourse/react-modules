@@ -1,5 +1,5 @@
 {
-  "name": "bunju-summit-modal",
+  "name": "bunju-react-modal",
   "version": "1.0.0",
   "description": "A modal component for Bunju Summit",
   "type": "module",

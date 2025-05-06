@@ -14,7 +14,6 @@ pnpm add bunju-summit-modal
 
 ## 인터페이스
 
-- title: 모달 상단에 표시할 제목(`string`)
 - onClose: 모달 닫기 시 호출되는 함수
 - position: 모달 위치 설정 (`center` | `bottom`):
 - children: 모달 내부에 들어갈 요소
@@ -37,6 +36,7 @@ interface ModalProps {
 
 ```tsx
 import { Modal } from "bunju-summit-modal"; // Modal 컴포넌트를 불러옵니다.
+import React from "react"; // React 추가
 
 function App() {
   const [isOpen, setIsOpen] = React.useState(false);
@@ -53,8 +53,14 @@ function App() {
     <div>
       <button onClick={handleOpenModal}>모달 열기</button>
       {isOpen && (
-        <Modal title="예시 제목" onClose={handleCloseModal} position="bottom">
-          <div>모달 내용입니다.</div>
+        <Modal onClose={handleCloseModal} position="bottom">
+          <Modal.Header>
+            <Modal.Title>예시 제목</Modal.Title>
+            <Modal.CloseButton onClick={handleCloseModal} />
+          </Modal.Header>
+          <Modal.Content>
+            <div>모달 내용입니다.</div>
+          </Modal.Content>
         </Modal>
       )}
     </div>
