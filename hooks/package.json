@@ -1,18 +1,18 @@
 {
   "name": "pesu-hooks",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "description": "npm modules",
   "type": "module",
-  "types": "dist/lib/index.d.ts",
-  "main": "dist/lib/index.js",
-  "module": "dist/lib/index.js",
+  "types": "dist/hooks/index.d.ts",
+  "main": "dist/hooks/index.js",
+  "module": "dist/hooks/index.js",
   "files": [
     "dist"
   ],
   "exports": {
     ".": {
-      "types": "./dist/lib/index.d.ts",
-      "default": "./dist/lib/index.js"
+      "types": "./dist/hooks/index.d.ts",
+      "default": "./dist/hooks/index.js"
     }
   },
   "author": "박규성 <gueit214@naver.com>",

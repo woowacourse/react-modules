@@ -1,5 +1,5 @@
 import { renderHook, act } from '@testing-library/react';
-import useExpiryDate from './useExpiryDate';
+import useExpirationDate from './useExpirationDate';
 
 function mockInputEvent(value: string) {
   return {
@@ -11,14 +11,14 @@ function mockInputEvent(value: string) {
 
 describe('useExpiryDate', () => {
   it('초기값은 빈 문자열이다', () => {
-    const { result } = renderHook(() => useExpiryDate());
+    const { result } = renderHook(() => useExpirationDate());
     expect(result.current.expiryDate).toEqual({ month: '', year: '' });
     expect(result.current.expiryDateErrors).toEqual({ month: '', year: '' });
     expect(result.current.isExpiryDateIsValid).toBe(false);
   });
 
   it('월과 연도를 올바르게 입력하면 isExpiryDateIsValid가 true가 된다', () => {
-    const { result } = renderHook(() => useExpiryDate());
+    const { result } = renderHook(() => useExpirationDate());
     const { expiryDateRegister } = result.current;
 
     act(() => {
@@ -31,7 +31,7 @@ describe('useExpiryDate', () => {
   });
 
   it('월이 1~12가 아니면 isExpiryDateIsValid가 false가 된다', () => {
-    const { result } = renderHook(() => useExpiryDate());
+    const { result } = renderHook(() => useExpirationDate());
     const { expiryDateRegister } = result.current;
 
     act(() => {
@@ -44,7 +44,7 @@ describe('useExpiryDate', () => {
   });
 
   it('연도가 2자리가 아니면 isExpiryDateIsValid가 false가 된다', () => {
-    const { result } = renderHook(() => useExpiryDate());
+    const { result } = renderHook(() => useExpirationDate());
     const { expiryDateRegister } = result.current;
 
     act(() => {
@@ -57,7 +57,7 @@ describe('useExpiryDate', () => {
   });
 
   it('숫자가 아닌 값이 입력되면 값이 반영되지 않는다', () => {
-    const { result } = renderHook(() => useExpiryDate());
+    const { result } = renderHook(() => useExpirationDate());
     const { expiryDateRegister } = result.current;
 
     act(() => {
