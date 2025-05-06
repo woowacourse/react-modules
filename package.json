@@ -6,7 +6,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "format": "prettier . --write",
-    "dev-app": "pnpm --filter app dev",
+    "app": "pnpm --filter app",
+    "hooks": "pnpm --filter pesu-hooks",
+    "components": "pnpm --filter pesu-modal",
     "storybook-components": "pnpm --filter pesu-modal storybook"
   },
   "keywords": [],
