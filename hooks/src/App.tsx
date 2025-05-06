@@ -1,12 +1,8 @@
 import "./App.css";
-// import { useCardNumbers } from "happyjurung-hooks";
-// import { useExpiryDate } from "happyjurung-hooks";
-// import { usePassword } from "happyjurung-hooks";
-// import { useCvcNumber } from "happyjurung-hooks";
-import { useCardNumbers } from ".";
-import { useExpiryDate } from ".";
-import { usePassword } from ".";
-import { useCvcNumber } from ".";
+import { useCardNumbers } from "happyjurung-hooks";
+import { useExpiryDate } from "happyjurung-hooks";
+import { usePassword } from "happyjurung-hooks";
+import { useCvcNumber } from "happyjurung-hooks";
 
 function App() {
   const {
