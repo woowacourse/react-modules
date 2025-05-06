@@ -5,13 +5,10 @@ import useModalCloseEvent from "../../hooks/useModalCloseEvent";
 
 export type ModalPositionType = "center" | "bottom";
 interface ModalProps {
-  title: string;
   onClose: () => void;
   position?: ModalPositionType;
 }
-
 function Modal({
-  title,
   onClose,
   children,
   position = "bottom",
@@ -20,17 +17,29 @@ function Modal({
 
   return (
     <S.Backdrop id="backdrop">
-      <S.Modal position={position}>
-        <S.ModalHeader>
-          <S.Title>{title}</S.Title>
-          <S.CloseButton type="button" onClick={onClose}>
-            <img src={CloseIcon} alt="닫기 버튼" />
-          </S.CloseButton>
-        </S.ModalHeader>
-        {children}
-      </S.Modal>
+      <S.Modal position={position}>{children}</S.Modal>
     </S.Backdrop>
   );
 }
+
+Modal.Header = function Header({ children }: PropsWithChildren) {
+  return <S.ModalHeader>{children}</S.ModalHeader>;
+};
+
+Modal.Title = function Title({ children }: PropsWithChildren) {
+  return <S.Title>{children}</S.Title>;
+};
+
+Modal.CloseButton = function CloseButton({ onClick }: { onClick: () => void }) {
+  return (
+    <S.CloseButton type="button" onClick={onClick}>
+      <img src={CloseIcon} alt="닫기 버튼" />
+    </S.CloseButton>
+  );
+};
+
+Modal.Content = function Content({ children }: PropsWithChildren) {
+  return <>{children}</>;
+};
 
 export default Modal;
