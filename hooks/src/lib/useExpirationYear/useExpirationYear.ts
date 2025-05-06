@@ -1,43 +1,37 @@
 import { useState } from "react";
-import { checkLength, checkNumber, checkYearRange } from "../utils/vaildate";
 
-const YEAR_VALID_LENGTH = 2;
-
-const ERROR_MESSAGE = {
-	INVALID_NUMBER: "숫자만 입력 가능합니다.",
-	INVALID_YEAR_RANGE: "현재보다 이전년도는 입력할 수 없습니다.",
-	INVALID_YEAR_FORMAT: "YY형태로 입력해주세요.",
+type ValidationResult = {
+	isValid: boolean;
+	errorMessage: string;
 };
 
-const useExpirationYear = () => {
+type Validator = (value: string) => ValidationResult;
+
+const useExpirationYear = (validators: Validator[]) => {
+	const [value, setValue] = useState("");
 	const [error, setError] = useState({
 		isValid: true,
 		errorMessage: "",
 	});
 
 	const validate = (value: string) => {
-		const isValidLength = checkLength(value, YEAR_VALID_LENGTH);
-		const isNumber = checkNumber(value);
-		const isValidRange = checkYearRange(value);
-
-		if (!isValidLength) {
-			setError({ isValid: false, errorMessage: ERROR_MESSAGE.INVALID_YEAR_FORMAT });
-
-			return;
+		for (const validator of validators) {
+			const result = validator(value);
+			if (!result.isValid) {
+				setError({ isValid: result.isValid, errorMessage: result.errorMessage });
+				return;
+			}
 		}
-		if (!isNumber) {
-			setError({ isValid: false, errorMessage: ERROR_MESSAGE.INVALID_NUMBER });
-
-			return;
-		}
-		if (!isValidRange) {
-			setError({ isValid: false, errorMessage: ERROR_MESSAGE.INVALID_YEAR_RANGE });
-
-			return;
-		}
+		setError({ isValid: true, errorMessage: "" });
 	};
 
-	return { error, validate };
+	const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+		const newValue = e.target.value;
+		setValue(newValue);
+		validate(newValue);
+	};
+
+	return { value, error, onChange, validate };
 };
 
 export default useExpirationYear;

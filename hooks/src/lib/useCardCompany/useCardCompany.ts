@@ -1,27 +1,37 @@
 import { useState } from "react";
-import { checkEmptyValue } from "../utils/vaildate";
 
-const ERROR_MESSAGE = {
-	EMPTY_CARD_COMPANY: "카드사를 선택해주세요.",
+type ValidationResult = {
+	isValid: boolean;
+	errorMessage: string;
 };
 
-const useCardCompany = () => {
+type Validator = (value: string) => ValidationResult;
+
+const useCardCompany = (validators: Validator[]) => {
+	const [value, setValue] = useState("");
 	const [error, setError] = useState({
 		isValid: true,
 		errorMessage: "",
 	});
 
 	const validate = (value: string) => {
-		const isEmptyValue = checkEmptyValue(value);
-
-		if (!isEmptyValue) {
-			setError({ isValid: false, errorMessage: ERROR_MESSAGE.EMPTY_CARD_COMPANY });
-
-			return;
+		for (const validator of validators) {
+			const result = validator(value);
+			if (!result.isValid) {
+				setError({ isValid: result.isValid, errorMessage: result.errorMessage });
+				return;
+			}
 		}
+		setError({ isValid: true, errorMessage: "" });
 	};
 
-	return { error, validate };
+	const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+		const newValue = e.target.value;
+		setValue(newValue);
+		validate(newValue);
+	};
+
+	return { value, error, onChange, validate };
 };
 
 export default useCardCompany;
