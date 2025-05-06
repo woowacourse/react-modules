@@ -5,16 +5,14 @@ export const ModalBackground = styled.div<{
   position: string;
 }>`
   position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 376px;
+  top: 0;
+  left: 0;
+  width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.5);
   backdrop-filter: blur(10px);
   display: flex;
   justify-content: center;
-  z-index: 10;
   visibility: hidden;
   visibility: ${({ isModalOpen }) => isModalOpen === true && "visible"};
   opacity: ${({ isModalOpen }) => isModalOpen === true && "1"}
@@ -33,14 +31,12 @@ export const ModalBackground = styled.div<{
 export const ModalContainer = styled.div<{
   position: string;
 }>`
-  background-color: #ffffff;
+  min-width: 300px;
+  background-color: white;
   padding: 20px;
   border-radius: 16px;
   color: #000000;
-  z-index: 2;
   position: relative;
-  width: 304px;
-  height: 216px;
   width:  ${({ position }) => position === "bottom" && "100%"}
   border-radius:  ${({ position }) => position === "bottom" && "10px 10px 0 0;"}
 `;
@@ -49,14 +45,16 @@ export const ModalHeader = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 240px;
-  height: 26px;
-  margin: 0 auto;
+
+  & h4 {
+    font-size: 18px;
+    font-weight: 700;
+  }
 `;
 
 export const ModalBody = styled.div``;
 
 export const CloseButton = styled.button`
-  background-color: transparent;
+  font-size: 18px;
   cursor: pointer;
 `;

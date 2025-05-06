@@ -1,4 +1,6 @@
-import { Modal } from "happyjurung-modal";
+// import { Modal } from "happyjurung-modal";
+import { Modal } from "./lib";
+import "./styles/reset.css";
 import "./App.css";
 import { useState } from "react";
 
