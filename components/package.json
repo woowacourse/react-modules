@@ -1,6 +1,6 @@
 {
   "name": "woowacourse-modal-component-marvin",
-  "version": "0.0.4",
+  "version": "0.0.12",
   "description": "npm modules",
   "type": "module",
   "main": "dist/index.cjs",
@@ -16,6 +16,10 @@
   },
   "files": [
     "dist"
+  ],
+  "sideEffects": [
+    "**/*.css",
+    "**/*.module.css"
   ],
   "scripts": {
     "dev": "vite",
@@ -56,7 +60,6 @@
     "storybook": "^8.6.12",
     "typescript": "^5.8.3",
     "vite": "^6.2.6",
-    "vite-plugin-css-injected-by-js": "^3.5.2",
     "vite-plugin-dts": "^4.5.3"
   }
 }
