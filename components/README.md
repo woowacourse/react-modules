@@ -20,7 +20,8 @@ useModal 훅과 Modal 컴포넌트를 함께 사용하면 간편하게 모달 �
 - title: 모달 상단에 표시할 제목(`string`)
 - showCloseButton: 우측 상단에 닫기 버튼을 표시할지 여부 (`boolean`)
 - onClose: 모달 닫기 시 호출되는 함수
-- onOutsideClick: 모달 외부 영역 클릭 시 호출되는 함수
+- $zIndex: 모달의 기본 z-index, modalBackdrop = 1000, modalContainer = 1001 (`number`)
+- containerStyle: 모달 컨테이너의 커스텀 스타일 (`React.CSSProperties`)
 
 ```tsx
 import { Modal, useModal } from '@sinjuk1/modal';
