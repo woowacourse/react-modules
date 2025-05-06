@@ -83,8 +83,8 @@ Module
 - [x] (모달) BackDrop 및 중앙 정렬에 사용되는 레이아웃 컴포넌트 커스터마이징
 - [x] (모달) 타입, 스타일, 훅, context 파일 별도 분리
 
-- [ ] (훅) 에러 로직 훅 단일화 처리 (base error 훅)
-- [ ] 상태값 (base state 훅 제작)
+- [x] (훅) 에러 로직 훅 단일화 처리 (base error 훅)
+- [x] 상태값 (base state 훅 제작)
 - [x] (훅) 실제 입력 상태값 함께 관리
   - [x] `const { cardNumber, onChange, isValid, errorMessage } = useCardNumber();`
   - [x] useCardNumber 훅
