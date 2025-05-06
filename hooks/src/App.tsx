@@ -28,7 +28,7 @@ function App() {
             value={format.formatted}
             onChange={handleCardNumberChange}
             maxLength={format.totalLength}
-            placeholder={format.placeHolder}
+            placeholder={format.placeholder}
           />
           {card.errorMessage && <p className="error">{card.errorMessage}</p>}
           {network.cardNetwork !== "DEFAULT" && (

@@ -10,7 +10,7 @@ export interface UseCardFormatReturn {
   raw: string;
   totalLength: number;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  placeHolder: string;
+  placeholder: string;
 }
 
 export default function useCardFormat(
@@ -50,7 +50,7 @@ export default function useCardFormat(
   const separatorCount =
     lengthsForTotal.length > 0 ? lengthsForTotal.length - 1 : 0;
   const totalLength = digitCount + separatorCount;
-  const placeHolder = lengthsForTotal
+  const placeholder = lengthsForTotal
     .map((len, idx) => {
       if (idx === lengthsForTotal.length - 1) {
         return "X".repeat(len);
@@ -60,5 +60,5 @@ export default function useCardFormat(
     .join("")
     .trim();
 
-  return { formatted, raw, totalLength, placeHolder, onChange };
+  return { formatted, raw, totalLength, placeholder, onChange };
 }
