@@ -1,7 +1,7 @@
-import { ValidationType } from "../../types/validation";
 import { useState } from "react";
+import { ValidationType } from "../../types/validation";
 import { ERROR_MESSAGE, defaultValidationValue } from "../constants/validation";
-import { isEmpty, isLengthEqual, isPositiveInteger } from "../utils/validation";
+import { isEmpty, validateNumberFieldWithLength } from "../utils/validation";
 
 type ExpirationDateFieldType = "month" | "year";
 
@@ -41,40 +41,28 @@ const validateExpirationDateField = (
   field: ExpirationDateFieldType,
   value: string
 ): ValidationType => {
-  if (!value || isEmpty(value)) return defaultValidationValue;
+  const numberValidation = validateNumberFieldWithLength(value, MAX_LENGTH);
+  if (numberValidation.isError || isEmpty(value)) return numberValidation;
 
-  if (!isPositiveInteger(value)) {
-    return {
-      isError: true,
-      errorMessage: ERROR_MESSAGE.INVALID_NUMBER,
-    };
-  }
+  const numValue = parseInt(value, 10);
+  switch (field) {
+    case "month":
+      if (numValue < 1 || numValue > 12) {
+        return {
+          isError: true,
+          errorMessage: ERROR_MESSAGE.INVALID_MONTH,
+        };
+      }
+      break;
 
-  if (!isLengthEqual(value, MAX_LENGTH)) {
-    return {
-      isError: true,
-      errorMessage: `${MAX_LENGTH}${ERROR_MESSAGE.INVALID_LENGTH}`,
-    };
-  }
-
-  if (field === "month") {
-    const monthNumber = parseInt(value, 10);
-    if (monthNumber < 1 || monthNumber > 12) {
-      return {
-        isError: true,
-        errorMessage: ERROR_MESSAGE.INVALID_MONTH,
-      };
-    }
-  }
-
-  if (field === "year") {
-    const yearNumber = parseInt(value, 10);
-    if (yearNumber < currentYear) {
-      return {
-        isError: true,
-        errorMessage: `${ERROR_MESSAGE.INVALID_YEAR}(${currentYear}년 이상)`,
-      };
-    }
+    case "year":
+      if (numValue < currentYear) {
+        return {
+          isError: true,
+          errorMessage: `${ERROR_MESSAGE.INVALID_YEAR}(${currentYear}년 이상)`,
+        };
+      }
+      break;
   }
 
   return defaultValidationValue;

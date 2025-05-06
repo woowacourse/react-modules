@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { ValidationType } from "../../types/validation";
-import { ERROR_MESSAGE, defaultValidationValue } from "../constants/validation";
-import { isEmpty, isLengthEqual, isPositiveInteger } from "../utils/validation";
+import { defaultValidationValue } from "../constants/validation";
+import { validateNumberFieldWithLength } from "../utils/validation";
 
 type CardNumberFieldType = "first" | "second" | "third" | "fourth";
 
@@ -41,23 +41,6 @@ const initialCardNumberValidation = {
 
 const MAX_LENGTH = 4;
 
-const validateCardNumberField = (value: string): ValidationType => {
-  if (!value || isEmpty(value)) return defaultValidationValue;
-
-  if (!isPositiveInteger(value)) {
-    return { isError: true, errorMessage: ERROR_MESSAGE.INVALID_NUMBER };
-  }
-
-  if (!isLengthEqual(value, MAX_LENGTH)) {
-    return {
-      isError: true,
-      errorMessage: `${MAX_LENGTH}${ERROR_MESSAGE.INVALID_LENGTH}`,
-    };
-  }
-
-  return defaultValidationValue;
-};
-
 const useCardNumber = (): UseCardNumberReturn => {
   const [cardNumber, setCardNumber] =
     useState<CardNumberType>(initialCardNumber);
@@ -69,7 +52,7 @@ const useCardNumber = (): UseCardNumberReturn => {
     value: string
   ) => {
     setCardNumber((prev) => ({ ...prev, [field]: value }));
-    const validationResult = validateCardNumberField(value);
+    const validationResult = validateNumberFieldWithLength(value, MAX_LENGTH);
     setCardNumberValidation((prev) => ({ ...prev, [field]: validationResult }));
   };
 
