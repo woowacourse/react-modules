@@ -9,7 +9,7 @@ import {
 } from "./Modal.styles";
 interface ModalPropsType {
   isModalOpen: boolean;
-  position: "center" | "bottom";
+  position?: "center" | "bottom";
   title: string;
   children: React.ReactNode;
   onClose: () => void;
@@ -17,7 +17,7 @@ interface ModalPropsType {
 
 const Modal = ({
   isModalOpen,
-  position,
+  position = "center",
   title,
   children,
   onClose,
