@@ -1,7 +1,8 @@
 # Hooks Module
 
-본 모듈은 결제 정보 입력 시 필요한 다양한 유효성 검증 Hook을 제공합니다. </br>
-카드 번호, 유효 기간, CVC, 비밀번호 등의 입력값을 쉽고 효율적으로 검증할 수 있습니다.
+본 모듈은 결제 정보 입력 시 필요한 상태 관리와 다양한 유효성 검증을 위한 Hook을 제공합니다. </br>
+카드 번호, 유효 기간, CVC, 비밀번호의 입력값을 쉽고 효율적으로 관리하고 검증할 수 있습니다. </br>
+각 훅은 입력 상태 관리, 유효성 검증, 에러 메시지 처리를 모두 포함하고 있어 별도의 상태 관리 로직 없이도 완전한 폼 기능을 구현할 수 있습니다.
 
 ## 💡 Installation
 
@@ -9,30 +10,17 @@
 npm i @sooyeoniya/hooks
 ```
 
-## 📌 How to use: useCardNumberValidation
+## 📌 How to use: useCardNumber
 
 ### 📍 Example
 
 ```tsx
 import { useState } from "react";
-import { useCardNumberValidation } from "@sooyeoniya/hooks";
+import { useCardNumber } from "@sooyeoniya/hooks";
 
 function App() {
-  const [cardNumber, setCardNumber] = useState({
-    first: "",
-    second: "",
-    third: "",
-    fourth: "",
-  });
-  const cardNumberValidationResult = useCardNumberValidation(cardNumber);
-
-  const handleCardNumberChange = (
-    e: React.ChangeEvent<HTMLInputElement>,
-    field: "first" | "second" | "third" | "fourth"
-  ) => {
-    const inputValue = e.target.value;
-    setCardNumber((prev) => ({ ...prev, [field]: inputValue }));
-  };
+  const { cardNumber, cardNumberValidation, handleCardNumberChange } =
+    useCardNumber();
 
   return (
     <>
@@ -42,41 +30,41 @@ function App() {
         value={cardNumber.first}
         type="text"
         maxLength={4}
-        onChange={(e) => handleCardNumberChange(e, "first")}
+        onChange={(e) => handleCardNumberChange("first", e.target.value)}
       />
       <input
         key="second"
         value={cardNumber.second}
         type="text"
         maxLength={4}
-        onChange={(e) => handleCardNumberChange(e, "second")}
+        onChange={(e) => handleCardNumberChange("second", e.target.value)}
       />
       <input
         key="third"
         value={cardNumber.third}
         type="text"
         maxLength={4}
-        onChange={(e) => handleCardNumberChange(e, "third")}
+        onChange={(e) => handleCardNumberChange("third", e.target.value)}
       />
       <input
         key="fourth"
         value={cardNumber.fourth}
         type="text"
         maxLength={4}
-        onChange={(e) => handleCardNumberChange(e, "fourth")}
+        onChange={(e) => handleCardNumberChange("fourth", e.target.value)}
       />
 
-      {cardNumberValidationResult.first.isError && (
-        <span>{cardNumberValidationResult.first.errorMessage}</span>
+      {cardNumberValidation.first.isError && (
+        <span>{cardNumberValidation.first.errorMessage}</span>
       )}
-      {cardNumberValidationResult.second.isError && (
-        <span>{cardNumberValidationResult.second.errorMessage}</span>
+      {cardNumberValidation.second.isError && (
+        <span>{cardNumberValidation.second.errorMessage}</span>
       )}
-      {cardNumberValidationResult.third.isError && (
-        <span>{cardNumberValidationResult.third.errorMessage}</span>
+      {cardNumberValidation.third.isError && (
+        <span>{cardNumberValidation.third.errorMessage}</span>
       )}
-      {cardNumberValidationResult.fourth.isError && (
-        <span>{cardNumberValidationResult.fourth.errorMessage}</span>
+      {cardNumberValidation.fourth.isError && (
+        <span>{cardNumberValidation.fourth.errorMessage}</span>
       )}
     </>
   );
@@ -90,67 +78,79 @@ export default App;
 1. 각 카드 번호는 숫자여야한다.
 2. 각 카드 번호는 4자리여야한다.
 
-### 🔧 Props (Object)
+### ⛏️ Return Value
 
-| Name   | Datatype | Description  |
-| ------ | -------- | ------------ |
-| first  | string   | 첫 번째 자리 |
-| second | string   | 두 번째 자리 |
-| third  | string   | 세 번째 자리 |
-| fourth | string   | 네 번째 자리 |
-
-### ⛏️ Return Value (Object)
-
-```
+```tsx
 {
-  first: {
-    isError: string
-    errorMessage: string
+  // 카드 번호 입력값
+  cardNumber: {
+    first: string,   // 첫 번째 필드 (4자리)
+    second: string,  // 두 번째 필드 (4자리)
+    third: string,   // 세 번째 필드 (4자리)
+    fourth: string   // 네 번째 필드 (4자리)
   },
-  second: {
-    isError: string,
-    errorMessage: string,
+
+  // 유효성 검증 결과
+  cardNumberValidation: {
+    first: {
+      isError: boolean,
+      errorMessage: string | null
+    },
+    second: {
+      isError: boolean,
+      errorMessage: string | null
+    },
+    third: {
+      isError: boolean,
+      errorMessage: string | null
+    },
+    fourth: {
+      isError: boolean,
+      errorMessage: string | null
+    }
   },
-  third: {
-    isError: string
-    errorMessage: string
-  },
-  fourth: {
-    isError: string,
-    errorMessage: string,
-  }
+
+  // 입력값 변경 핸들러
+  handleCardNumberChange: (field: "first" | "second" | "third" | "fourth", value: string) => void
 }
 ```
 
-| Name         | Datatype | Description |
-| ------------ | -------- | ----------- |
-| isError      | boolean  | 에러 여부   |
-| errorMessage | string   | 에러 메시지 |
+| attribute              | type     | description                                  |
+| ---------------------- | -------- | -------------------------------------------- |
+| cardNumber             | Object   | 카드 번호 4개 필드의 입력값을 담고 있는 객체 |
+| cardNumberValidation   | Object   | 각 필드별 유효성 검증 결과를 담고 있는 객체  |
+| handleCardNumberChange | Function | 각 필드의 입력값 변경을 처리하는 함수        |
 
-## 📌 How to use: useExpirationDateValidation
+### cardNumber
+
+| attribute | type   | description                    |
+| --------- | ------ | ------------------------------ |
+| first     | string | 첫 번째 카드 번호 필드 (4자리) |
+| second    | string | 두 번째 카드 번호 필드 (4자리) |
+| third     | string | 세 번째 카드 번호 필드 (4자리) |
+| fourth    | string | 네 번째 카드 번호 필드 (4자리) |
+
+### cardNumberValidation의 각 필드
+
+| attribute    | type           | description                                 |
+| ------------ | -------------- | ------------------------------------------- |
+| isError      | boolean        | 해당 필드의 유효성 검증 에러 여부           |
+| errorMessage | string \| null | 에러가 있을 경우 표시될 메시지, 없으면 null |
+
+## 📌 How to use: useExpirationDate
 
 ### 📍 Example
 
 ```tsx
 import { useState } from "react";
-import "./App.css";
-import { useExpirationDateValidation } from "@sooyeoniya/hooks";
+import { useExpirationDate } from "@sooyeoniya/hooks";
 
 function App() {
-  const [expirationDate, setExpirationDate] = useState({
-    month: "",
-    year: "",
-  });
-  const expirationDateValidationResult =
-    useExpirationDateValidation(expirationDate);
-
-  const handleExpirationDateChange = (
-    e: React.ChangeEvent<HTMLInputElement>,
-    field: "month" | "year"
-  ) => {
-    const inputValue = e.target.value;
-    setExpirationDate((prev) => ({ ...prev, [field]: inputValue }));
-  };
+  const {
+    expirationDate,
+    expirationDateValidation,
+    handleExpirationDateChange,
+  } = useExpirationDate();
 
   return (
     <>
@@ -159,20 +159,20 @@ function App() {
         value={expirationDate.month}
         type="text"
         maxLength={2}
-        onChange={(e) => handleExpirationDateChange(e, "month")}
+        onChange={(e) => handleExpirationDateChange("month", e.target.value)}
       />
       <input
         value={expirationDate.year}
         type="text"
         maxLength={2}
-        onChange={(e) => handleExpirationDateChange(e, "year")}
+        onChange={(e) => handleExpirationDateChange("year", e.target.value)}
       />
 
-      {expirationDateValidationResult.month.isError && (
-        <span>{expirationDateValidationResult.month.errorMessage}</span>
+      {expirationDateValidation.month.isError && (
+        <span>{expirationDateValidation.month.errorMessage}</span>
       )}
-      {expirationDateValidationResult.year.isError && (
-        <span>{expirationDateValidationResult.year.errorMessage}</span>
+      {expirationDateValidation.year.isError && (
+        <span>{expirationDateValidation.year.errorMessage}</span>
       )}
     </>
   );
@@ -188,57 +188,76 @@ export default App;
 3. 월은 1부터 12 사이의 숫자여야한다.
 4. 연도는 현재 연도보다 크거나 같아야한다.
 
-### 🔧 Props
+### ⛏️ Return Value
 
-| Name  | Datatype | Description |
-| ----- | -------- | ----------- |
-| month | string   | 월          |
-| year  | string   | 연도        |
-
-### ⛏️ Return Value (Object)
-
-```
+```tsx
 {
-  month: {
-    isError: string
-    errorMessage: string
+  // 유효 기간 입력값
+  expirationDate: {
+    month: string,  // 월 (2자리)
+    year: string    // 연도 (2자리)
   },
-  year: {
-    isError: string,
-    errorMessage: string,
-  }
+
+  // 유효성 검증 결과
+  expirationDateValidation: {
+    month: {
+      isError: boolean,
+      errorMessage: string | null
+    },
+    year: {
+      isError: boolean,
+      errorMessage: string | null
+    }
+  },
+
+  // 입력값 변경 핸들러
+  handleExpirationDateChange: (field: "month" | "year", value: string) => void
 }
 ```
 
-| Name         | Datatype | Description |
-| ------------ | -------- | ----------- |
-| isError      | boolean  | 에러 여부   |
-| errorMessage | string   | 에러 메시지 |
+| attribute                  | type     | description                             |
+| -------------------------- | -------- | --------------------------------------- |
+| expirationDate             | Object   | 유효기간(월, 연도)의 입력값을 담는 객체 |
+| expirationDateValidation   | Object   | 각 필드별 유효성 검증 결과를 담는 객체  |
+| handleExpirationDateChange | Function | 각 필드의 입력값 변경을 처리하는 함수   |
 
-## 📌 How to use: useCvcValidation
+### expirationDate
+
+| attribute | type   | description         |
+| --------- | ------ | ------------------- |
+| month     | string | 월 입력값 (2자리)   |
+| year      | string | 연도 입력값 (2자리) |
+
+### expirationDateValidation의 각 필드
+
+| attribute    | type           | description                                 |
+| ------------ | -------------- | ------------------------------------------- |
+| isError      | boolean        | 해당 필드의 유효성 검증 에러 여부           |
+| errorMessage | string \| null | 에러가 있을 경우 표시될 메시지, 없으면 null |
+
+## 📌 How to use: useCvcNumber
 
 ### 📍 Example
 
 ```tsx
 import { useState } from "react";
-import "./App.css";
-import { useCvcValidation } from "@sooyeoniya/hooks";
+import { useCvcNumber } from "@sooyeoniya/hooks";
 
 function App() {
-  const [cvc, setCvc] = useState("");
-  const cvcValidationResult = useCvcValidation(cvc);
-
-  const handleCvcChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const inputValue = e.target.value;
-    setCvc(inputValue);
-  };
+  const { cvcNumber, cvcNumberValidation, handleCvcNumberChange } =
+    useCvcNumber();
 
   return (
     <>
       <h2>CVC 번호</h2>
-      <input value={cvc} type="text" maxLength={3} onChange={handleCvcChange} />
-      {cvcValidationResult.isError && (
-        <span>{cvcValidationResult.errorMessage}</span>
+      <input
+        value={cvcNumber}
+        type="text"
+        maxLength={3}
+        onChange={(e) => handleCvcNumberChange(e.target.value)}
+      />
+      {cvcNumberValidation.isError && (
+        <span>{cvcNumberValidation.errorMessage}</span>
       )}
     </>
   );
@@ -252,36 +271,47 @@ export default App;
 1. CVC 번호는 숫자여야한다.
 2. CVC 번호는 3자리여야한다.
 
-### 🔧 Props
+### ⛏️ Return Value
 
-| Name | Datatype | Description |
-| ---- | -------- | ----------- |
-| cvc  | string   | CVC 번호    |
+```tsx
+{
+  // CVC 번호 입력값
+  cvcNumber: string,  // CVC 번호 (3자리)
 
-### ⛏️ Return Value (Object)
+  // 유효성 검증 결과
+  cvcNumberValidation: {
+    isError: boolean,
+    errorMessage: string | null
+  },
 
-| Name         | Datatype | Description |
-| ------------ | -------- | ----------- |
-| isError      | boolean  | 에러 여부   |
-| errorMessage | string   | 에러 메시지 |
+  // 입력값 변경 핸들러
+  handleCvcNumberChange: (value: string) => void
+}
+```
 
-## 📌 How to use: usePasswordValidation
+| attribute             | type     | description                                  |
+| --------------------- | -------- | -------------------------------------------- |
+| cvcNumber             | string   | CVC 번호 입력값 (3자리)                      |
+| cvcNumberValidation   | Object   | CVC 번호의 유효성 검증 결과를 담고 있는 객체 |
+| handleCvcNumberChange | Function | CVC 번호 입력값 변경을 처리하는 함수         |
+
+### cvcNumberValidation
+
+| attribute    | type           | description                                 |
+| ------------ | -------------- | ------------------------------------------- |
+| isError      | boolean        | 유효성 검증 에러 여부                       |
+| errorMessage | string \| null | 에러가 있을 경우 표시될 메시지, 없으면 null |
+
+## 📌 How to use: usePassword
 
 ### 📍 Example
 
 ```tsx
 import { useState } from "react";
-import "./App.css";
-import { usePasswordValidation } from "@sooyeoniya/hooks";
+import { usePassword } from "@sooyeoniya/hooks";
 
 function App() {
-  const [password, setPassword] = useState("");
-  const passwordValidationResult = usePasswordValidation(password);
-
-  const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const inputValue = e.target.value;
-    setPassword(inputValue);
-  };
+  const { password, passwordValidation, handlePasswordChange } = usePassword();
 
   return (
     <>
@@ -290,10 +320,10 @@ function App() {
         value={password}
         type="text"
         maxLength={2}
-        onChange={handlePasswordChange}
+        onChange={(e) => handlePasswordChange(e.target.value)}
       />
-      {passwordValidationResult.isError && (
-        <span>{passwordValidationResult.errorMessage}</span>
+      {passwordValidation.isError && (
+        <span>{passwordValidation.errorMessage}</span>
       )}
     </>
   );
@@ -307,18 +337,36 @@ export default App;
 1. 비밀번호는 숫자여야한다.
 2. 비밀번호는 2자리여야한다.
 
-### 🔧 Props
+### ⛏️ Return Value
 
-| Name     | Datatype | Description            |
-| -------- | -------- | ---------------------- |
-| password | string   | 카드 비밀번호 앞 2자리 |
+```tsx
+{
+  // 비밀번호 입력값
+  password: string,  // 비밀번호 (2자리)
 
-### ⛏️ Return Value (Object)
+  // 유효성 검증 결과
+  passwordValidation: {
+    isError: boolean,
+    errorMessage: string | null
+  },
 
-| Name         | Datatype | Description |
-| ------------ | -------- | ----------- |
-| isError      | boolean  | 에러 여부   |
-| errorMessage | string   | 에러 메시지 |
+  // 입력값 변경 핸들러
+  handlePasswordChange: (value: string) => void
+}
+```
+
+| attribute            | type     | description                                  |
+| -------------------- | -------- | -------------------------------------------- |
+| password             | string   | 비밀번호 입력값 (2자리)                      |
+| passwordValidation   | Object   | 비밀번호의 유효성 검증 결과를 담고 있는 객체 |
+| handlePasswordChange | Function | 비밀번호 입력값 변경을 처리하는 함수         |
+
+### passwordValidation
+
+| attribute    | type           | description                                 |
+| ------------ | -------------- | ------------------------------------------- |
+| isError      | boolean        | 유효성 검증 에러 여부                       |
+| errorMessage | string \| null | 에러가 있을 경우 표시될 메시지, 없으면 null |
 
 ## 👥 Author
 
