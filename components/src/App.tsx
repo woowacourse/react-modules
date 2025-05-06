@@ -11,21 +11,32 @@ function App() {
 
   return (
     <>
-      <Modal isOpen={isOpen} onClose={handleClose}>
-        <Modal.Title title="제목" />
-        <Modal.CloseButton />
-        <Modal.Contents>
-          <div>안녕하세요~</div>
-        </Modal.Contents>
-        <Modal.Button
-          title="확인"
-          backgroundColor="#007bff"
-          textColor="#ffffff"
-          size="large"
-          onClick={() => {
-            console.log("확인 버튼 클릭!");
-          }}
-        />
+      <Modal isOpen={isOpen} onClose={handleClose} autoCloseOnESC={true}>
+        <Modal.Backdrop>
+          <Modal.Frame>
+            <Modal.Title title="제목" />
+            <Modal.CloseButton />
+            <Modal.Body>
+              <div>안녕하세요~</div>
+            </Modal.Body>
+            <Modal.Button
+              variant="primary"
+              title="확인"
+              size="large"
+              onClick={() => {
+                console.log("확인 버튼 클릭!");
+              }}
+            />
+            <Modal.Button
+              variant="secondary"
+              title="확인"
+              size="large"
+              onClick={() => {
+                console.log("확인 버튼 클릭!");
+              }}
+            />
+          </Modal.Frame>
+        </Modal.Backdrop>
       </Modal>
     </>
   );
