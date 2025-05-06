@@ -31,10 +31,7 @@ export type Props = {
    * @default 'Close'
    */
   onClose: VoidFunction;
-  /**
-   * Function to be called when the backdrop is clicked
-   */
-  onOutsideClick?: (e: React.MouseEvent) => void;
+
   /**
    * The content of the modal
    */
@@ -47,13 +44,12 @@ export const Modal = ({
   title,
   showCloseButton,
   onClose,
-  onOutsideClick,
   children,
   ...props
 }: Props) => {
   return (
     <Portal isOpen={isOpen}>
-      <StyledBackDrop onClick={onOutsideClick} aria-hidden="true" />
+      <StyledBackDrop onClick={onClose} aria-hidden="true" />
       <StyledModalContainer role="dialog" aria-modal="true" position={position} {...props}>
         <StyledModalHeader aria-label={title}>
           {title}

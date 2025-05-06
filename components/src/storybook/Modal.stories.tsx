@@ -28,7 +28,6 @@ export const Default: Story = {
     title: '모달 제목',
     showCloseButton: true,
     onClose: () => {},
-    onOutsideClick: () => {},
     children: <></>,
   },
   argTypes: {
@@ -53,17 +52,12 @@ export const Default: Story = {
     },
   },
   render: (args) => {
-    const { isOpen, handleOpenModal, handleCloseModal, handleOutsideClick } = useModal();
+    const { isOpen, handleOpenModal, handleCloseModal } = useModal();
 
     return (
       <div>
         <button onClick={handleOpenModal}>버튼</button>
-        <Modal
-          {...args}
-          isOpen={isOpen}
-          onClose={handleCloseModal}
-          onOutsideClick={handleOutsideClick}
-        >
+        <Modal {...args} isOpen={isOpen} onClose={handleCloseModal}>
           세라와 로건의 페어 프로그래밍
         </Modal>
       </div>

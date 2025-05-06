@@ -12,7 +12,6 @@ useModal 훅과 Modal 컴포넌트를 함께 사용하면 간편하게 모달 �
 - isOpen: 모달이 보이는지 여부
 - handleOpenModal: 모달을 여는 함수
 - handleCloseModal: 모달을 닫는 함수
-- handleOutsideClick: 모달 외부 클릭 핸들러
 
 ### Modal
 
@@ -27,18 +26,12 @@ useModal 훅과 Modal 컴포넌트를 함께 사용하면 간편하게 모달 �
 import { Modal, useModal } from '@sinjuk1/modal';
 
 function App() {
-  const { isOpen, handleOpenModal, handleCloseModal, handleOutsideClick } = useModal();
+  const { isOpen, handleOpenModal, handleCloseModal } = useModal();
 
   return (
     <>
       <button onClick={handleOpenModal}>버튼</button>
-      <Modal
-        isOpen={isOpen}
-        title="모달 제목"
-        showCloseButton
-        onClose={handleCloseModal}
-        onOutsideClick={handleOutsideClick}
-      >
+      <Modal isOpen={isOpen} title="모달 제목" showCloseButton onClose={handleCloseModal}>
         <h1>안녕</h1>
       </Modal>
     </>

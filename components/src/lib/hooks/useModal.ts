@@ -8,7 +8,6 @@ import { useState, useEffect } from 'react';
  * @returns isOpen 모달 열림 상태
  * @returns handleOpenModal 모달 열기 핸들러
  * @returns handleCloseModal 모달 닫기 핸들러
- * @returns handleOutsideClick 외부 클릭 핸들러
  */
 export const useModal = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -19,10 +18,6 @@ export const useModal = () => {
 
   const handleCloseModal = () => {
     setIsOpen(false);
-  };
-
-  const handleOutsideClick = () => {
-    handleCloseModal();
   };
 
   const handleKeyDown = (e: KeyboardEvent) => {
@@ -38,5 +33,5 @@ export const useModal = () => {
     };
   });
 
-  return { isOpen, handleOpenModal, handleCloseModal, handleOutsideClick };
+  return { isOpen, handleOpenModal, handleCloseModal };
 };
