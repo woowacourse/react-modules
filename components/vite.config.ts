@@ -74,7 +74,7 @@ export default defineConfig({
       fileName: "index",
       // 출력 파일 이름 형식을 지정합니다. 결과물은 index.js, index.cjs 등이 됩니다.
 
-      formats: ["es", "cjs"],
+      formats: ["es"],
       // 생성할 번들 형식을 지정합니다:
       // - es: ES 모듈 (import/export) - 최신 브라우저와 번들러용
       // - cjs: CommonJS (require/module.exports) - Node.js 환경용
@@ -101,11 +101,7 @@ export default defineConfig({
             Object.keys(bundle).forEach((id) => {
               const chunk = bundle[id];
               // JS 파일에만 적용하되, .cjs 파일은 제외
-              if (
-                chunk.type === "chunk" &&
-                id.endsWith(".js") &&
-                !id.endsWith(".cjs")
-              ) {
+              if (chunk.type === "chunk" && id.endsWith(".js")) {
                 // 관련 CSS 파일 존재 여부 확인
                 const cssFileName = id.replace(/\.js$/, ".css");
                 if (bundle[cssFileName]) {
