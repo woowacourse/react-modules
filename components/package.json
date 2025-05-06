@@ -1,6 +1,6 @@
 {
   "name": "bunju-react-modal",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A modal component for Bunju Summit",
   "type": "module",
   "types": "dist/index.d.ts",
@@ -31,7 +31,6 @@
     "react-dom": "^19.1.0"
   },
   "devDependencies": {
-    "bunju-react-modal": "^1.0.0",
     "@chromatic-com/storybook": "^3.2.6",
     "@storybook/addon-essentials": "^8.6.12",
     "@storybook/addon-interactions": "^8.6.12",
@@ -47,6 +46,7 @@
     "@types/react-dom": "^19.1.2",
     "@typescript-eslint/parser": "^8.29.1",
     "@vitejs/plugin-react-swc": "^3.8.1",
+    "bunju-react-modal": "^1.0.0",
     "chromatic": "^11.28.2",
     "eslint": "^9.24.0",
     "eslint-plugin-react-hooks": "^5.2.0",

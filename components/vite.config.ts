@@ -28,6 +28,8 @@ export default defineConfig({
       exclude: ["**/*.stories.tsx"],
       include: ["src/lib", "src/svg.d.ts"],
       tsconfigPath: "./tsconfig.app.json",
+      outDir: "dist", // 이 옵션 추가
+      insertTypesEntry: true, // 이 옵션 추가 (루트에 index.d.ts 파일 생성)
     }),
   ],
   resolve: {
