@@ -16,6 +16,34 @@ describe('유효기간 검증 테스트입니다.', () => {
     expect(result.current.errorMessage).toBe('');
   });
 
+  test('사용자가 입력한 value값의 길이가 validLength(2)보다 작다면, errorMessage를 반환한다.', () => {
+    const { result } = renderHook(() => useExpiryDate());
+
+    const mockEvent = {
+      target: { value: '1' },
+    } as React.ChangeEvent<HTMLInputElement>;
+
+    act(() => {
+      result.current.handleExpiryDateChange(mockEvent, 0);
+    });
+
+    expect(result.current.errorMessage).toBe('숫자 2자리를 입력해주세요.');
+  });
+
+  test('사용자가 입력한 value값의 길이가 validLength(2)보다 크다면, errorMessage를 반환한다.', () => {
+    const { result } = renderHook(() => useExpiryDate());
+
+    const mockEvent = {
+      target: { value: '123' },
+    } as React.ChangeEvent<HTMLInputElement>;
+
+    act(() => {
+      result.current.handleExpiryDateChange(mockEvent, 0);
+    });
+
+    expect(result.current.errorMessage).toBe('숫자 2자리를 입력해주세요.');
+  });
+
   test('숫자를 입력하지 않은 경우, 숫자를 입력하라는 errorMessage를 반환한다.', () => {
     const { result } = renderHook(() => useExpiryDate());
     const mockEvent = {
