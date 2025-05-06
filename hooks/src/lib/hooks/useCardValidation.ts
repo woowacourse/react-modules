@@ -1,4 +1,3 @@
-// hooks/useCardValidation.ts
 import useCardNumber from "./useCardNumber";
 import useStrictCardNumber from "./useStrictCardNumber";
 import useCVCNumber from "./useCVCNumber";
@@ -7,6 +6,7 @@ import usePasswordNumber from "./usePasswordNumber";
 import useCardNetwork from "./useCardNetwork";
 import useCardFormat from "./useCardFormat";
 import type { UseCardValidationOptions } from "./useCardFormat";
+
 export default function useCardValidation(
   options: UseCardValidationOptions = {}
 ) {

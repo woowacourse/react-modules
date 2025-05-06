@@ -1,7 +1,7 @@
 import { Dispatch, useCallback, useState } from "react";
 import { validateExpiryDate } from "../validator/validators";
 
-interface UseExpiryDateNumberReturn {
+export interface UseExpiryDateNumberReturn {
   expiryDateNumber: string;
   onExpiryDateNumberChange: Dispatch<React.ChangeEvent<HTMLInputElement>>;
   errorMessage?: string;

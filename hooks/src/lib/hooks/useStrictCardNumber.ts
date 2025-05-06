@@ -1,7 +1,7 @@
 import { useCallback, useState } from "react";
 import { validateStrictCardNumber } from "../validator/validators";
 
-interface UseStrictCardNumberReturn {
+export interface UseStrictCardNumberReturn {
   cardNumber: string;
   onCardNumberChange: React.ChangeEventHandler<HTMLInputElement>;
   errorMessage?: string;

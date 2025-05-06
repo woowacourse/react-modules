@@ -1,7 +1,7 @@
 import { Dispatch, useCallback, useState } from "react";
 import { validateCVC } from "../validator/validators";
 
-interface useCVCNumberReturn {
+export interface useCVCNumberReturn {
   CVCNumber: string;
   onCVCNumberChange: Dispatch<React.ChangeEvent<HTMLInputElement>>;
   errorMessage?: string;
