@@ -1,4 +1,10 @@
-import { createContext, PropsWithChildren, useContext, useId } from 'react';
+import {
+  ButtonHTMLAttributes,
+  createContext,
+  PropsWithChildren,
+  useContext,
+  useId,
+} from 'react';
 import { createPortal } from 'react-dom';
 import useBoolean from './hooks/useBoolean';
 import {
@@ -39,17 +45,19 @@ function useDialogContext() {
   return context;
 }
 
-interface TriggerProps extends PropsWithChildren {
+interface TriggerProps
+  extends PropsWithChildren,
+    ButtonHTMLAttributes<HTMLButtonElement> {
   className?: string;
 }
 
-function Trigger({ children, className }: TriggerProps) {
+function Trigger({ children, className, ...props }: TriggerProps) {
   const { open } = useDialogContext();
 
   return (
-    <div onClick={open} className={className}>
+    <button onClick={open} className={className} {...props}>
       {children}
-    </div>
+    </button>
   );
 }
 

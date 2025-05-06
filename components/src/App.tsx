@@ -4,9 +4,7 @@ function App() {
   return (
     <>
       <Dialog>
-        <Dialog.Trigger>
-          <button>Open Dialog</button>
-        </Dialog.Trigger>
+        <Dialog.Trigger>Open Dialog</Dialog.Trigger>
         <Dialog.Root>
           <Dialog.Overlay>
             <Dialog.Content>
