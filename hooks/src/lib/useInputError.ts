@@ -3,13 +3,10 @@ import { NO_ERROR } from './constants';
 import { CheckValidationType, UseInputErrorProps } from './types';
 
 function findFirstError(errorObj: Record<string, string>) {
-  for (const key in errorObj) {
-    const typedKey = key as keyof typeof errorObj;
-    if (errorObj[typedKey] !== NO_ERROR) {
-      return { key: typedKey, value: errorObj[typedKey] };
-    }
-  }
-  return null;
+  const firstError = Object.entries(errorObj).find(
+    ([_, value]) => value !== NO_ERROR
+  );
+  return firstError ? { key: firstError[0], value: firstError[1] } : null;
 }
 
 export default function useInputError<T extends Record<string, string>>({
