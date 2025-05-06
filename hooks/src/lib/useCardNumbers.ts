@@ -1,0 +1,77 @@
+import { useState } from 'react';
+import { INPUT_RULE } from './constants/inputRule';
+import { ERROR_MESSAGE } from './constants/errorMessage';
+import { isEmpty, isValidLength, isNumber } from './utils/validate';
+import { isOverInputLength } from './utils/overInputLength';
+import { initialError } from './utils/initial';
+import { ErrorType } from './types/errorType';
+
+type ValitationResult = {
+  numbers: string[];
+  error: ErrorType[];
+  handleCardNumbers: (value: string, index: number) => void;
+};
+
+type UpdateErrorArgs =
+  | { index: number; isValid: true; errorMessage: string }
+  | { index: number; isValid: false };
+
+export default function useCardNumbers(): ValitationResult {
+  const [numbers, setNumbers] = useState(['', '', '', '']);
+  const [error, setError] = useState<ErrorType[]>(
+    Array.from(
+      { length: INPUT_RULE.CARD_NUMBERS.MAX_LENGTH },
+      () => initialError
+    )
+  );
+
+  const updateError = (args: UpdateErrorArgs) => {
+    setError((prev) => {
+      const updated = [...prev];
+      updated[args.index] = {
+        isValid: args.isValid,
+        errorMessage: args.isValid ? args.errorMessage : '',
+      };
+      return updated;
+    });
+  };
+
+  const handleCardNumbers = (value: string, index: number) => {
+    if (isOverInputLength(value, INPUT_RULE.CARD_NUMBERS.MAX_LENGTH)) return;
+
+    validate(value, index);
+
+    setNumbers((prev) => {
+      const newNumbers = [...prev];
+      newNumbers[index] = value;
+      return newNumbers;
+    });
+  };
+
+  const validate = (value: string, index: number) => {
+    if (isEmpty(value)) {
+      updateError({ index, isValid: false });
+      return;
+    }
+
+    if (!isNumber(value)) {
+      updateError({
+        index,
+        isValid: true,
+        errorMessage: ERROR_MESSAGE.CARD_NUMBERS.NOT_A_NUMBER,
+      });
+      return;
+    }
+    if (!isValidLength(value, INPUT_RULE.CARD_NUMBERS.MAX_LENGTH)) {
+      updateError({
+        index,
+        isValid: true,
+        errorMessage: ERROR_MESSAGE.CARD_NUMBERS.INVALID_LENGTH,
+      });
+      return;
+    }
+    updateError({ index, isValid: false });
+  };
+
+  return { numbers, error, handleCardNumbers };
+}
