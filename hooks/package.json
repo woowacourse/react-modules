@@ -1,7 +1,7 @@
 {
-  "name": "hooks",
+  "name": "pongju-payments-hooks",
   "version": "0.0.1",
-  "description": "npm modules",
+  "description": "Pongju&Daiane's payments hooks",
   "type": "module",
   "types": "dist/index.d.ts",
   "main": "dist/index.js",
@@ -14,9 +14,11 @@
     "build": "tsc && vite build",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
-    "test": "jest"
+    "test": "jest --coverage"
   },
   "dependencies": {
+    "pongda-payments-hooks": "^0.0.1",
+    "pongju-payments-hooks": "^0.0.1",
     "react": "^19.1.0",
     "react-dom": "^19.1.0"
   },

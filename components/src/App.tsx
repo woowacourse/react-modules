@@ -1,10 +1,43 @@
-import React from "react";
+import { useState } from "react";
 import "./App.css";
+import { Modal } from "pongju-modal-component";
+import React from "react";
 
 function App() {
+  const [isOpen, setIsOpen] = useState(true);
+  const handleClose = () => {
+    setIsOpen(false);
+  };
+
   return (
     <>
-      <h1>Component Modules</h1>
+      <Modal isOpen={isOpen} onClose={handleClose} autoCloseOnESC={true}>
+        <Modal.Backdrop>
+          <Modal.Frame>
+            <Modal.Title title="제목" />
+            <Modal.CloseButton />
+            <Modal.Body>
+              <div>안녕하세요~</div>
+            </Modal.Body>
+            <Modal.Button
+              variant="primary"
+              title="확인"
+              size="large"
+              onClick={() => {
+                console.log("확인 버튼 클릭!");
+              }}
+            />
+            <Modal.Button
+              variant="secondary"
+              title="확인"
+              size="large"
+              onClick={() => {
+                console.log("확인 버튼 클릭!");
+              }}
+            />
+          </Modal.Frame>
+        </Modal.Backdrop>
+      </Modal>
     </>
   );
 }
