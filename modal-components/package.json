@@ -1,7 +1,7 @@
 {
-  "name": "compoents",
-  "version": "0.0.1",
-  "description": "npm modules",
+  "name": "@dev-dino22/modal-components",
+  "version": "0.0.0",
+  "description": "Easily create modal components with this lightweight npm package",
   "type": "module",
   "types": "dist/index.d.ts",
   "main": "dist/index.js",
@@ -9,17 +9,24 @@
   "files": [
     "dist"
   ],
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
-    "dev": "vite",
+    "dev": "vite dev --host 0.0.0.0",
     "build": "tsc && vite build",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build"
   },
-  "dependencies": {
+  "peerDependencies": {
     "react": "^19.1.0",
     "react-dom": "^19.1.0"
+  },
+  "dependencies": {
+    "@emotion/css": "^11.13.5",
+    "@emotion/styled": "^11.14.0"
   },
   "devDependencies": {
     "@chromatic-com/storybook": "^3.2.6",
