@@ -25,7 +25,7 @@ export default defineConfig({
   plugins: [
     react(),
     dts({
-      include: ["src/**/*"],
+      include: ["src/lib/**/*", "src/types/**/*"],
       exclude: ["**/*.test.ts", "**/*.test.tsx"],
       rollupTypes: true,
       tsconfigPath: "./tsconfig.app.json",
