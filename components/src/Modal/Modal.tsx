@@ -8,10 +8,15 @@ import { CloseButton } from "./CloseButton/CloseButton";
 import { Body } from "./Body/Body";
 
 type ModalProps = {
+  /** 모달 열림/닫힘 상태 */
   isOpen: boolean;
+  /** 모달 닫기 함수 */
   onClose: () => void;
+  /** 모달 내용 */
   children: React.ReactNode;
+  /** ESC 키 입력 시 자동으로 닫힘 여부 (기본값: true) */
   autoCloseOnESC?: boolean;
+  /** 모달 위치 */
   position?: "center" | "bottom";
 };
 
