@@ -4,6 +4,7 @@ import styled from "@emotion/styled";
 import { CloseIcon } from "../common";
 import { PropsWithChildren } from "react";
 import { css } from "@emotion/react";
+import Button from "../Button/Button";
 
 const ModalContainer = styled.div<{
   position: "center" | "bottom";
@@ -38,6 +39,13 @@ const ModalTop = styled.div`
   align-items: center;
 `;
 
+const ModalBottom = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  align-itmes: center;
+  gap: 10px;
+`;
+
 const Title = styled.div`
   font-size: 18px;
   font-weight: 700;
@@ -58,6 +66,8 @@ const ModalBackdrop = styled.div`
 interface ModalInterface {
   position?: "center" | "bottom";
   renderHeader?: boolean;
+  confirmButton?: boolean;
+  onConfirm?: () => void;
   title?: string;
   onClose: () => void;
   isOpen: boolean;
@@ -67,6 +77,8 @@ interface ModalInterface {
 export default function Modal({
   position = "center",
   renderHeader,
+  confirmButton,
+  onConfirm,
   title,
   onClose,
   children,
@@ -84,6 +96,12 @@ export default function Modal({
           </ModalTop>
         )}
         {children}
+
+        <ModalBottom>
+          {confirmButton && (
+            <Button type="confirm" onclick={onConfirm ? onConfirm : onClose} />
+          )}
+        </ModalBottom>
       </ModalContainer>
       <ModalBackdrop onClick={onClose} />
     </>

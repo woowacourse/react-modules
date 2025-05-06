@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
-
 import Modal from "./Modal";
+import Button from "../Button/Button";
 import { useState } from "react";
 
 const meta: Meta<typeof Modal> = {
@@ -72,15 +72,9 @@ export const Size: Story = {
 
     return (
       <>
-        <button type="button" onClick={openSmallModal}>
-          small
-        </button>
-        <button type="button" onClick={openMediumModal}>
-          medium
-        </button>
-        <button type="button" onClick={openLargeModal}>
-          large
-        </button>
+        <Button text="small" onclick={openSmallModal} />
+        <Button text="medium" onclick={openMediumModal} />
+        <Button text="large" onclick={openLargeModal} />
         <Modal
           onClose={closeSmallModal}
           isOpen={isSmallOpened}
@@ -104,6 +98,34 @@ export const Size: Story = {
           size={"large"}
         >
           large Modal
+        </Modal>
+      </>
+    );
+  },
+};
+
+export const ConfirmButton: Story = {
+  render: () => {
+    const [isOpened, setIsOpened] = useState(true);
+    const openModal = () => {
+      setIsOpened(true);
+    };
+    const closeModal = () => {
+      setIsOpened(false);
+    };
+
+    return (
+      <>
+        <Button text="열기" onclick={openModal} />
+        <Modal
+          onClose={closeModal}
+          isOpen={isOpened}
+          position={"center"}
+          confirmButton={true}
+          onConfirm={closeModal}
+          size={"small"}
+        >
+          확인 버튼을 누르세요!
         </Modal>
       </>
     );

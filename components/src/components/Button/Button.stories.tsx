@@ -16,6 +16,7 @@ export const Confirm: Story = {
   render: () => (
     <>
       <Button text="버튼" onclick={() => {}} />
+      <Button type="confirm" onclick={() => {}} />
     </>
   ),
 };

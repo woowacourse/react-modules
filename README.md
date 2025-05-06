@@ -4,7 +4,7 @@
 
 - [x] size(small, medium, large)
 - [x] Button 컴포넌트
-  - [] 확인
+  - [x] 확인
   - [] 취소
 - [] Input 컴포넌트
 - [] 반응형
