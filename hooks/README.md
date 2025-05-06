@@ -6,7 +6,7 @@
 
 ### 데이터 타입 (output)
 
-- isValid
+- validationState
 
 ```ts
 {
@@ -33,7 +33,7 @@
 
 ### 데이터 타입 (output)
 
-- isValid
+- validationState
 
 ```ts
 {
