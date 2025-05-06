@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { BaseInputState, ErrorState } from "../lib/types";
 import { isNonNumericNonEmpty } from "../utils/validation";
 
@@ -15,7 +15,7 @@ const useSingleNumberInput = ({
 }: UseInputStateParams) => {
   const [inputState, setInputState] = useState<BaseInputState>(initialValue);
 
-  const handleInputChange = (value: string) => {
+  const handleInputChange = useCallback((value: string) => {
     if (value.length > maxLength || isNonNumericNonEmpty(value)) {
       return;
     }
@@ -24,11 +24,11 @@ const useSingleNumberInput = ({
       ...prev,
       value,
     }));
-  };
+  }, []);
 
   return {
-    inputState,
-    handleInputChange,
+    value: inputState,
+    onChange: handleInputChange,
     errorState: getErrorFn(inputState.value),
   };
 };
