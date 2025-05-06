@@ -6,13 +6,13 @@ const CVC_RULE = {
   MAX_LENGTH: 3,
 } as const;
 
-type ValitationResult = {
+type ValidationResult = {
   cvc: string;
   error: { isValid: boolean; errorMessage: string };
   handleCvcNumberChange: (value: string) => void;
 };
 
-export default function useCvcNumber(): ValitationResult {
+export default function useCvcNumber(): ValidationResult {
   const [cvc, setCvc] = useState("");
   const [error, setError] = useState({ isValid: false, errorMessage: "" });
 

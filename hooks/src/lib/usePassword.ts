@@ -6,13 +6,13 @@ const PASSWORD_RULE = {
   MAX_LENGTH: 2,
 } as const;
 
-type ValitationResult = {
+type ValidationResult = {
   password: string;
   error: { isValid: boolean; errorMessage: string };
   handlePasswordChange: (value: string) => void;
 };
 
-export default function usePassword(): ValitationResult {
+export default function usePassword(): ValidationResult {
   const [password, setPassword] = useState("");
   const [error, setError] = useState({ isValid: false, errorMessage: "" });
 
