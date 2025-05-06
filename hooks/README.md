@@ -23,23 +23,27 @@ yarn add dslgpgh-payments-hooks
 
 ## 사용 방법
 
-각 훅은 `error`, `validate` 속성을 반환합니다.
+각 훅은 `value`, `error`, `onChange`, `validate` 속성을 반환합니다.
 
 ```jsx
-import { useCardNumber } from 'dslgpgh-payments-hooks';
+import { useCardNumber, checkNumber, checkLength } from 'dslgpgh-payments-hooks';
 
 function CardForm() {
-  const { error, validate } = useCardNumber();
-  
-  const handleCardNumberChange = (e) => {
-    const value = e.target.value;
-    validate('first', value);
-  };
+  const { value, error, onChange, validate } = useCardNumber([
+    checkNumber,
+    (value) => checkLength(value, 4)
+  ]);
   
   return (
     <div>
-      <input type="text" onChange={handleCardNumberChange} />
+      <input 
+        type="text" 
+        value={value.first}
+        onChange={(e) => onChange(e, 'first')} 
+      />
       {!error.first.isValid && <p className="error">{error.first.errorMessage}</p>}
+      
+      {/* 다른 카드번호 필드들도 유사하게 구현 */}
     </div>
   );
 }
@@ -52,93 +56,146 @@ function CardForm() {
 카드 번호를 4개의 그룹으로 나누어 각각 검증합니다.
 
 ```jsx
-const { error, validate } = useCardNumber();
+const { value, error, onChange, validate } = useCardNumber([validators]);
 ```
 
-- `error`: `first`: { `isValid`: `true`, `errorMessage`: `""` }, - 각 그룹의 유효성 상태와 오류 메시지 
+- `value`: { first: "", second: "", third: "", fourth: "" } - 각 필드의 현재 값
+- `error`: { first: { isValid: true, errorMessage: "" }, ... } - 각 그룹의 유효성 상태와 오류 메시지
+- `onChange(e: React.ChangeEvent<HTMLInputElement>, label: CardNumberField)`: 입력 변경 핸들러
 - `validate(label: string, value: string)`: 지정된 그룹(`first`, `second`, `third`, `fourth`)의 카드 번호를 검증
-
-검증 규칙:
-- 숫자만 입력 가능
-- 각 그룹은 4자리여야 함
 
 ### useCardPassword
 
 카드 비밀번호를 검증합니다.
 
 ```jsx
-const { error, validate } = useCardPassword();
+const { value, error, onChange, validate } = useCardPassword([validators]);
 ```
 
-- `error.isValid`: boolean - 유효성 상태
-- `error.errorMessage`: string - 오류 메시지
+- `value`: string - 현재 입력 값
+- `error`: { isValid: boolean, errorMessage: string } - 유효성 상태와 오류 메시지
+- `onChange(e: React.ChangeEvent<HTMLInputElement>)`: 입력 변경 핸들러
 - `validate(value: string)`: 비밀번호 검증
-
-검증 규칙:
-- 숫자만 입력 가능
-- 2자리여야 함
 
 ### useCardCvc
 
 카드 CVC 코드를 검증합니다.
 
 ```jsx
-const { error, validate } = useCardCvc();
+const { value, error, onChange, validate } = useCardCvc([validators]);
 ```
 
-- `error.isValid`: boolean - 유효성 상태
-- `error.errorMessage`: string - 오류 메시지
+- `value`: string - 현재 입력 값
+- `error`: { isValid: boolean, errorMessage: string } - 유효성 상태와 오류 메시지
+- `onChange(e: React.ChangeEvent<HTMLInputElement>)`: 입력 변경 핸들러
 - `validate(value: string)`: CVC 코드 검증
-
-검증 규칙:
-- 숫자만 입력 가능
-- 3자리여야 함
 
 ### useExpirationMonth
 
 카드 만료 월을 검증합니다.
 
 ```jsx
-const { error, validate } = useExpirationMonth();
+const { value, error, onChange, validate } = useExpirationMonth([validators]);
 ```
 
-- `error.isValid`: boolean - 유효성 상태
-- `error.errorMessage`: string - 오류 메시지
+- `value`: string - 현재 입력 값
+- `error`: { isValid: boolean, errorMessage: string } - 유효성 상태와 오류 메시지
+- `onChange(e: React.ChangeEvent<HTMLInputElement>)`: 입력 변경 핸들러
 - `validate(value: string)`: 만료 월 검증
-
-검증 규칙:
-- 숫자만 입력 가능
-- 2자리 형식(MM)이어야 함
-- 1~12 사이의 값이어야 함
 
 ### useExpirationYear
 
 카드 만료 연도를 검증합니다.
 
 ```jsx
-const { error, validate } = useExpirationYear();
+const { value, error, onChange, validate } = useExpirationYear([validators]);
 ```
 
-- `error.isValid`: boolean - 유효성 상태
-- `error.errorMessage`: string - 오류 메시지
+- `value`: string - 현재 입력 값
+- `error`: { isValid: boolean, errorMessage: string } - 유효성 상태와 오류 메시지
+- `onChange(e: React.ChangeEvent<HTMLInputElement>)`: 입력 변경 핸들러
 - `validate(value: string)`: 만료 연도 검증
-
-검증 규칙:
-- 숫자만 입력 가능
-- 2자리 형식(YY)이어야 함
-- 현재 연도 이후여야 함
 
 ### useCardCompany
 
 카드사 선택을 검증합니다.
 
 ```jsx
-const { error, validate } = useCardCompany();
+const { value, error, onChange, validate } = useCardCompany([validators]);
 ```
 
-- `error.isValid`: boolean - 유효성 상태
-- `error.errorMessage`: string - 오류 메시지
+- `value`: string - 현재 입력 값
+- `error`: { isValid: boolean, errorMessage: string } - 유효성 상태와 오류 메시지
+- `onChange(e: React.ChangeEvent<HTMLInputElement>)`: 입력 변경 핸들러
 - `validate(value: string)`: 카드사 선택 검증
 
-검증 규칙:
-- 값이 비어있지 않아야 함
+## 유효성 검증 함수
+
+패키지는 다음과 같은 유효성 검증 함수를 제공합니다:
+
+### checkEmptyValue(value: string)
+
+값이 비어있는지 확인합니다.
+
+```jsx
+import { checkEmptyValue } from 'dslgpgh-payments-hooks';
+
+// 사용 예시
+const { value, error, onChange, validate } = useCardCompany([checkEmptyValue]);
+```
+
+### checkNumber(value: string)
+
+숫자만 입력되었는지 확인합니다.
+
+```jsx
+import { checkNumber } from 'dslgpgh-payments-hooks';
+
+// 사용 예시
+const { value, error, onChange, validate } = useCardPassword([checkNumber]);
+```
+
+### checkLength(value: string, validLength: number)
+
+지정된 길이와 일치하는지 확인합니다.
+
+```jsx
+import { checkLength } from 'dslgpgh-payments-hooks';
+
+// 사용 예시
+const { value, error, onChange, validate } = useCardCvc([
+  checkNumber,
+  (value) => checkLength(value, 3)
+]);
+```
+
+### checkMonthRange(value: string)
+
+월 범위(1~12)가 유효한지 확인합니다.
+
+```jsx
+import { checkMonthRange } from 'dslgpgh-payments-hooks';
+
+// 사용 예시
+const { value, error, onChange, validate } = useExpirationMonth([
+  checkNumber,
+  checkMonthRange
+]);
+```
+
+### checkYearRange(value: string)
+
+연도가 현재 연도 이후인지 확인합니다.
+
+```jsx
+import { checkYearRange } from 'dslgpgh-payments-hooks';
+
+// 사용 예시
+const { value, error, onChange, validate } = useExpirationYear([
+  checkNumber,
+  checkYearRange
+]);
+```
+
+## 라이선스
+MIT
