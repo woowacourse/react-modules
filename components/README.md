@@ -9,7 +9,7 @@ React + Emotion 기반의 재사용 가능한 모달 컴포넌트입니다.
 - 위치 지정: `center`, `top`, `bottom`
 - 배경 클릭 시 모달 닫기
 - ESC 키로 모달 닫기
-- `Header`, `Body`, `Footer`, `Title`, `Background`, `Container` 등 slot형 하위 컴포넌트 제공
+- `Header`, `Body`, `Footer`, `Title`, `BackDrop`, `Container` 등 slot형 하위 컴포넌트 제공
 - Emotion 기반 스타일 커스터마이징 지원
 - `createPortal` 사용 → z-index, overflow 문제 없음
 
@@ -32,7 +32,7 @@ const App = () => {
       <button onClick={() => setShow(true)}>Open Modal</button>
 
       <Modal show={show} onHide={() => setShow(false)}>
-        <Modal.Background>
+        <Modal.BackDrop>
           <Modal.Container position="center" gap={24}>
             <Modal.Header closeButton>
               <Modal.Title>제목</Modal.Title>
@@ -42,7 +42,7 @@ const App = () => {
               <button onClick={() => setShow(false)}>닫기</button>
             </Modal.Footer>
           </Modal.Container>
-        </Modal.Background>
+        </Modal.BackDrop>
       </Modal>
     </>
   );
@@ -53,32 +53,32 @@ const App = () => {
 
 ### `Modal`
 
-| Prop | Type | Default | Description |
-| --- | --- | --- | --- |
-| `show` | `boolean` | – | 모달 표시 여부 |
-| `onHide` | `() => void` | – | 모달 닫기 핸들러 |
-| `...props` | `HTMLDivProps` | – | `className`, `style` 등 지원 |
+| Prop       | Type           | Default | Description                  |
+| ---------- | -------------- | ------- | ---------------------------- |
+| `show`     | `boolean`      | –       | 모달 표시 여부               |
+| `onHide`   | `() => void`   | –       | 모달 닫기 핸들러             |
+| `...props` | `HTMLDivProps` | –       | `className`, `style` 등 지원 |
 
-### `Modal.Background`
+### `Modal.BackDrop`
 
-| Prop | Type | Description |
-| --- | --- | --- |
-| `children` | `ReactNode` | 컨텐츠를 감싸는 배경 요소 |
-| `onClick` | – | 배경 클릭 시 자동으로 onHide 호출됨 |
+| Prop       | Type        | Description                         |
+| ---------- | ----------- | ----------------------------------- |
+| `children` | `ReactNode` | 컨텐츠를 감싸는 배경 요소           |
+| `onClick`  | –           | 배경 클릭 시 자동으로 onHide 호출됨 |
 
 ### `Modal.Container`
 
-| Prop | Type | Default | Description |
-| --- | --- | --- | --- |
-| `position` | `"center","top","bottom"` | `"center"` | 모달 위치 |
-| `gap` | `number` | `16` | 내부 요소 간 flex 간격 |
+| Prop       | Type                      | Default    | Description            |
+| ---------- | ------------------------- | ---------- | ---------------------- |
+| `position` | `"center","top","bottom"` | `"center"` | 모달 위치              |
+| `gap`      | `number`                  | `16`       | 내부 요소 간 flex 간격 |
 
 ### `Modal.Header`
 
-| Prop | Type | Default | Description |
-| --- | --- | --- | --- |
-| `closeButton` | `boolean` | `false` | 우측 상단 닫기 버튼 표시 여부 |
-| `...props` | `HTMLDivProps` | – | `className`, `style` 지원 |
+| Prop          | Type           | Default | Description                   |
+| ------------- | -------------- | ------- | ----------------------------- |
+| `closeButton` | `boolean`      | `false` | 우측 상단 닫기 버튼 표시 여부 |
+| `...props`    | `HTMLDivProps` | –       | `className`, `style` 지원     |
 
 ### `Modal.Title`, `Modal.Body`, `Modal.Footer`
 
