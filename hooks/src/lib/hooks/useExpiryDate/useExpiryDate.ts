@@ -17,6 +17,7 @@ const EXPIRY_DATE_INPUTS_LENGTH = 2;
  * @returns handleExpiryDateChange 카드 만료일 입력 핸들러
  * @example
  * const { expiryDate, errorMessage, handleExpiryDateChange } = useExpiryDate();
+ *
  * <input
  *   type="text"
  *   value={expiryDate[0].value}
@@ -51,6 +52,8 @@ export const useExpiryDate = () => {
 
     if (!isValid) {
       setErrorMessage(errorMessage);
+    } else {
+      setErrorMessage('');
     }
   };
 
