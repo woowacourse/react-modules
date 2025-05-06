@@ -36,6 +36,17 @@ export type Props = {
    * The content of the modal
    */
   children: React.ReactNode;
+
+  /**
+   * The z-index of the modal
+   * @default 1000
+   */
+  $zIndex?: number;
+
+  /**
+   * Custom styles for the modal
+   */
+  containerStyle?: React.CSSProperties;
 } & ComponentProps<'div'>;
 
 export const Modal = ({
@@ -45,8 +56,13 @@ export const Modal = ({
   showCloseButton,
   onClose,
   children,
+  $zIndex = 1000,
+  containerStyle = {},
   ...props
 }: Props) => {
+  const backdropZIndex = $zIndex;
+  const modalZIndex = $zIndex + 1;
+
   const handleKeyDown = (e: KeyboardEvent) => {
     if (e.key === 'Escape') {
       onClose();
@@ -62,8 +78,15 @@ export const Modal = ({
 
   return (
     <Portal isOpen={isOpen}>
-      <StyledBackDrop onClick={onClose} aria-hidden="true" />
-      <StyledModalContainer role="dialog" aria-modal="true" position={position} {...props}>
+      <StyledBackDrop onClick={onClose} aria-hidden="true" backdropZIndex={backdropZIndex} />
+      <StyledModalContainer
+        role="dialog"
+        aria-modal="true"
+        position={position}
+        modalZIndex={modalZIndex}
+        containerStyle={containerStyle}
+        {...props}
+      >
         <StyledModalHeader aria-label={title}>
           {title}
           {showCloseButton && (
@@ -80,14 +103,14 @@ export const Modal = ({
   );
 };
 
-const StyledBackDrop = styled.div`
+const StyledBackDrop = styled.div<{ backdropZIndex: number }>`
   width: 100%;
   position: fixed;
   top: 0;
   right: 0;
   bottom: 0;
   left: 0;
-  z-index: 10;
+  z-index: ${({ backdropZIndex }) => backdropZIndex};
   display: flex;
   align-items: center;
   justify-content: center;
@@ -129,15 +152,18 @@ const positionStyle = {
   `,
 } as const;
 
-const StyledModalContainer = styled.div<Pick<Props, 'position'>>`
+const StyledModalContainer = styled.div<
+  { modalZIndex: number } & Pick<Props, 'position' | 'containerStyle'>
+>`
   width: 100%;
   max-width: 400px;
   height: auto;
   position: absolute;
-  z-index: 20;
   background-color: white;
   padding: 24px 32px;
   ${({ position }) => positionStyle[position ?? 'center']};
+  ${({ containerStyle }) => ({ ...containerStyle })};
+  z-index: ${({ modalZIndex }) => modalZIndex};
 `;
 
 const StyledModalHeader = styled.div`
