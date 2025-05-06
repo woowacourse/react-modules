@@ -16,7 +16,7 @@ export const ConfirmButton = styled.button`
   }
 `;
 
-export const CancelButton = styled.button`
+export const CloseButton = styled.button`
   width: 80px;
   height: 36px;
   color: #333333;
