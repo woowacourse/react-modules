@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 
-function useEscapeModal(closeModal: () => void) {
+function useOverlay(closeModal: () => void) {
   function handleClickOverlay(
     e: React.MouseEvent<HTMLDivElement, MouseEvent>,
     id: string
@@ -24,4 +24,4 @@ function useEscapeModal(closeModal: () => void) {
   return { handleClickOverlay };
 }
 
-export default useEscapeModal;
+export default useOverlay;

@@ -1,13 +1,13 @@
 import { createContext, useContext, useId } from 'react';
 import { createPortal } from 'react-dom';
 import useBoolean from './hooks/useBoolean';
-import useEscapeModal from './hooks/useEscapeModal';
 import {
   StyledCloseButton,
   StyledContent,
   StyledHeader,
   StyledOverlay,
 } from './Dialog.css';
+import useOverlay from './hooks/useOverlay';
 
 interface DialogContextType {
   open: () => void;
@@ -69,7 +69,7 @@ function Overlay({
 }) {
   const { close } = useDialogContext();
   const id = useId();
-  const { handleClickOverlay } = useEscapeModal(close);
+  const { handleClickOverlay } = useOverlay(close);
 
   return (
     <StyledOverlay
