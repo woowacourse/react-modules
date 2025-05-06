@@ -1,4 +1,4 @@
-import { ComponentProps } from 'react';
+import { ComponentProps, useEffect } from 'react';
 
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
@@ -47,6 +47,19 @@ export const Modal = ({
   children,
   ...props
 }: Props) => {
+  const handleKeyDown = (e: KeyboardEvent) => {
+    if (e.key === 'Escape') {
+      onClose();
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener('keydown', handleKeyDown);
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, []);
+
   return (
     <Portal isOpen={isOpen}>
       <StyledBackDrop onClick={onClose} aria-hidden="true" />
