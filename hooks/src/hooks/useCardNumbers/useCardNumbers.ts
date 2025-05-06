@@ -1,21 +1,12 @@
 import { useState } from "react";
+import { ValidationResult } from "./type";
+import { ErrorType } from "../../types/errorType";
 
 const CARD_NUMBER_RULE = {
   INVALID_LENGTH_ERROR: "카드 번호는 4자리로 입력해 주세요.",
   NOT_A_NUMBER: "카드 번호는 숫자로 입력해 주세요.",
   MAX_LENGTH: 4,
 } as const;
-
-type ValidationResult = {
-  numbers: string[];
-  error: errorType[];
-  handleCardNumberChange: (value: string, index: number) => void;
-};
-
-type errorType = {
-  isValid: boolean;
-  errorMessage: string;
-};
 
 const initialDate = {
   isValid: false,
@@ -24,7 +15,7 @@ const initialDate = {
 
 export default function useCardNumbers(): ValidationResult {
   const [numbers, setNumbers] = useState(["", "", "", ""]);
-  const [error, setError] = useState<errorType[]>(
+  const [error, setError] = useState<ErrorType[]>(
     Array.from({ length: 4 }, () => initialDate)
   );
 

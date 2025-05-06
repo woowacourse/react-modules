@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { ValidationResult, DateType } from "./type";
+import { ErrorType } from "../../types/errorType";
 
 const EXPIRY_DATE_RULE = {
   INVALID_YEAR_LENGTH_ERROR: "연도는 2자리로 입력해 주세요.",
@@ -13,24 +15,6 @@ const EXPIRY_DATE_RULE = {
   DATE_YEAR_MIN: 25,
 } as const;
 
-type ValidationResult = {
-  date: dateType;
-  error: errorType[];
-  handleExpiryDateChange: (value: string, dateName: ExpiryField) => void;
-};
-
-type dateType = {
-  month: string;
-  year: string;
-};
-
-type ExpiryField = keyof dateType;
-
-type errorType = {
-  isValid: boolean;
-  errorMessage: string;
-};
-
 const initialDate = [
   {
     isValid: false,
@@ -43,8 +27,8 @@ const initialDate = [
 ];
 
 export default function useExpiryDate(): ValidationResult {
-  const [date, setDate] = useState<dateType>({ month: "", year: "" });
-  const [error, setError] = useState<errorType[]>(initialDate);
+  const [date, setDate] = useState<DateType>({ month: "", year: "" });
+  const [error, setError] = useState<ErrorType[]>(initialDate);
 
   const updateDate = (index: number, isValid: boolean, message: string) => {
     setError((prev) => {

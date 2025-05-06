@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { ValidationResult } from "./type";
+import { ErrorType } from "../../types/errorType";
 
 const CVC_RULE = {
   INVALID_LENGTH_ERROR: "CVC는 3자리로 입력해 주세요.",
@@ -6,15 +8,12 @@ const CVC_RULE = {
   MAX_LENGTH: 3,
 } as const;
 
-type ValidationResult = {
-  cvc: string;
-  error: { isValid: boolean; errorMessage: string };
-  handleCvcNumberChange: (value: string) => void;
-};
-
 export default function useCvcNumber(): ValidationResult {
   const [cvc, setCvc] = useState("");
-  const [error, setError] = useState({ isValid: false, errorMessage: "" });
+  const [error, setError] = useState<ErrorType>({
+    isValid: false,
+    errorMessage: "",
+  });
 
   const handleCvcNumberChange = (value: string) => {
     if (value.length > 3) return;

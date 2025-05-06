@@ -164,3 +164,29 @@ function App() {
 }
 export default App;
 ```
+
+components
+hooks (hooks에 관련된 라이브러리)
+/**test**
+/src
+/hooks
+/types을 import해서 사용
+
+    /types
+      /공통된 타입 관리
+
+hooks (hooks에 관련된 라이브러리)
+/src
+/hooks
+/useCardNumbers
+/useCardNumbers.test.ts
+/useCardNumbers.ts
+/types.ts // useCardNumbers에서만 쓰는 타입
+
+    /types
+      /공통된 타입 관리
+
+    /styles
+
+    App.tsx
+    main.tsx

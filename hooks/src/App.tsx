@@ -3,10 +3,10 @@ import "./App.css";
 // import { useExpiryDate } from "happyjurung-hooks";
 // import { usePassword } from "happyjurung-hooks";
 // import { useCvcNumber } from "happyjurung-hooks";
-import { useCardNumbers } from "./lib";
-import { useExpiryDate } from "./lib";
-import { usePassword } from "./lib";
-import { useCvcNumber } from "./lib";
+import { useCardNumbers } from ".";
+import { useExpiryDate } from ".";
+import { usePassword } from ".";
+import { useCvcNumber } from ".";
 
 function App() {
   const {

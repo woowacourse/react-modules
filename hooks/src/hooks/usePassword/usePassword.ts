@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { ValidationResult } from "./type";
+import { ErrorType } from "../../types/errorType";
 
 const PASSWORD_RULE = {
   INVALID_LENGTH_ERROR: "카드 비밀번호는 2자리로 입력해 주세요.",
@@ -6,15 +8,12 @@ const PASSWORD_RULE = {
   MAX_LENGTH: 2,
 } as const;
 
-type ValidationResult = {
-  password: string;
-  error: { isValid: boolean; errorMessage: string };
-  handlePasswordChange: (value: string) => void;
-};
-
 export default function usePassword(): ValidationResult {
   const [password, setPassword] = useState("");
-  const [error, setError] = useState({ isValid: false, errorMessage: "" });
+  const [error, setError] = useState<ErrorType>({
+    isValid: false,
+    errorMessage: "",
+  });
 
   const handlePasswordChange = (value: string) => {
     if (value.length > PASSWORD_RULE.MAX_LENGTH) return;
