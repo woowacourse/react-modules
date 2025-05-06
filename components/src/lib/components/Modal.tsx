@@ -156,7 +156,7 @@ const StyledModalContainer = styled.div<
   width: 100%;
   max-width: 400px;
   height: auto;
-  position: absolute;
+  position: fixed;
   background-color: white;
   padding: 24px 32px;
   ${({ position }) => positionStyle[position ?? 'center']};
