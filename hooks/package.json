@@ -1,6 +1,6 @@
 {
   "name": "@kaori-killer/payment-hooks",
-  "version": "0.0.7",
+  "version": "1.0.7",
   "description": "헤일리와 오거스가 개발한 카드 유효성 검증 훅 라이브러리",
   "type": "module",
   "types": "dist/index.d.ts",
@@ -17,7 +17,7 @@
     "test": "jest"
   },
   "dependencies": {
-    "@kaori-killer/payment-hooks": "^0.0.7",
+    "@kaori-killer/payment-hooks": "^1.0.7",
     "react": "^19.1.0",
     "react-dom": "^19.1.0"
   },
