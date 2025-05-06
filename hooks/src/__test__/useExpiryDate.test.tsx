@@ -29,7 +29,7 @@ describe('유효기간 검증 테스트입니다.', () => {
     expect(result.current.errorMessage).toBe('숫자(0~9)만 입력 가능합니다.');
   });
 
-  test('사용자가 입력한 month 값이 1~12에 포함되지 않는다면 errorMessage를 반환준다.', () => {
+  test('사용자가 입력한 month 값이 1~12에 포함되지 않는다면 errorMessage를 반환한다.', () => {
     const { result } = renderHook(() => useExpiryDate());
 
     const mockEvent = {
