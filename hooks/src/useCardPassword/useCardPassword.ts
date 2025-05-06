@@ -1,22 +1,27 @@
-import { useState } from 'react';
-import useError from '../useError/useError';
-import isInteger from '../validate/isInteger';
-import isUnderMaxLength from '../validate/isUnderMaxLength';
+import { useState } from "react";
+import useError from "../useError/useError";
+import isInteger from "../validate/isInteger";
+import isUnderMaxLength from "../validate/isUnderMaxLength";
 
-const KEY = 'cardPassword';
+const KEY = "cardPassword";
 
 export const CARD_PASSWORD_MAX_LENGTH = 2;
 
 export const CARD_PASSWORD_ERROR_MESSAGE = {
-  NOT_NUMBERIC: '숫자만 입력 가능합니다.',
+  NOT_NUMBERIC: "숫자만 입력 가능합니다.",
   INVALID_LENGTH: `카드 비밀번호는 ${CARD_PASSWORD_MAX_LENGTH}자리 숫자여야 합니다.`,
 };
 
-export default function useCardPassword(userCardPassword = '') {
+export default function useCardPassword(userCardPassword = "") {
   const [cardPassword, setCardPassword] = useState(userCardPassword);
-  const { error, changeError, clearError } = useError({
-    [KEY]: false,
-  });
+  const { error, changeError, clearError } = useError(
+    {
+      [KEY]: false,
+    },
+    {
+      [KEY]: "",
+    }
+  );
 
   function handleCardPasswordChange(
     event: React.ChangeEvent<HTMLInputElement>
@@ -58,6 +63,6 @@ function getCardPasswordError(input: string) {
 
   return {
     inputError: false,
-    inputErrorMessage: '',
+    inputErrorMessage: "",
   };
 }

@@ -1,9 +1,9 @@
-import { useState } from 'react';
-import useError from '../useError/useError';
-const KEY = 'cardBrand';
+import { useState } from "react";
+import useError from "../useError/useError";
+const KEY = "cardBrand";
 
 export const CARD_BRAND_ERROR_MESSAGE = {
-  NOT_SELECTED: '카드 브랜드를 선택해주세요.',
+  NOT_SELECTED: "카드 브랜드를 선택해주세요.",
 };
 
 type useCardBrandProps = {
@@ -12,13 +12,18 @@ type useCardBrandProps = {
 };
 
 export default function useCardBrand({
-  userCardBrand = '',
+  userCardBrand = "",
   optionValues,
 }: useCardBrandProps) {
   const [cardBrand, setCardBrand] = useState(userCardBrand);
-  const { error, changeError, clearError } = useError({
-    [KEY]: false,
-  });
+  const { error, changeError, clearError } = useError(
+    {
+      [KEY]: false,
+    },
+    {
+      [KEY]: "",
+    }
+  );
 
   function handleCardBrandChange(event: React.ChangeEvent<HTMLInputElement>) {
     const input = event.target.value.trim();
@@ -60,6 +65,6 @@ function getCardBrandError({
 
   return {
     inputError: false,
-    inputErrorMessage: '',
+    inputErrorMessage: "",
   };
 }

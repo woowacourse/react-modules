@@ -1,22 +1,27 @@
-import { useState } from 'react';
-import useError from '../useError/useError';
-import isInteger from '../validate/isInteger';
-import isUnderMaxLength from '../validate/isUnderMaxLength';
+import { useState } from "react";
+import useError from "../useError/useError";
+import isInteger from "../validate/isInteger";
+import isUnderMaxLength from "../validate/isUnderMaxLength";
 
-const KEY = 'cardCVCNumber';
+const KEY = "cardCVCNumber";
 
 export const CARD_CVC_MAX_LENGTH = 3;
 
 export const CARD_CVC_ERROR_MESSAGE = {
   INVALID_LENGTH: `CVC 번호는  ${CARD_CVC_MAX_LENGTH}자리 숫자여야 합니다.`,
-  NOT_NUMBERIC: '숫자만 입력 가능합니다.',
+  NOT_NUMBERIC: "숫자만 입력 가능합니다.",
 } as const;
 
-export default function useCardCVCNumber(userCardCVCNumber = '') {
+export default function useCardCVCNumber(userCardCVCNumber = "") {
   const [cardCVCNumber, setCardCVCNumber] = useState(userCardCVCNumber);
-  const { error, changeError, clearError } = useError({
-    [KEY]: false,
-  });
+  const { error, changeError, clearError } = useError(
+    {
+      [KEY]: false,
+    },
+    {
+      [KEY]: "",
+    }
+  );
 
   function handleCardCVCNumberChange(
     event: React.ChangeEvent<HTMLInputElement>
@@ -57,6 +62,6 @@ function getCVCNumberError(input: string) {
   }
   return {
     inputError: false,
-    inputErrorMessage: '',
+    inputErrorMessage: "",
   };
 }

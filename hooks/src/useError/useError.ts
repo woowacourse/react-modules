@@ -1,12 +1,18 @@
-import { useState } from 'react';
+import { useState } from "react";
 
-const useError = <T>(initialError: T) => {
-  const [isError, setIsError] = useState<T>(initialError);
-  const [errorMessage, setErrorMessage] = useState(initialError);
+const useError = <
+  E extends Record<string, boolean>,
+  M extends Record<string, string>
+>(
+  initialIsError: E,
+  initialErrorMessage: M
+) => {
+  const [isError, setIsError] = useState<E>(initialIsError);
+  const [errorMessage, setErrorMessage] = useState<M>(initialErrorMessage);
 
   const clearError = (target: string) => {
     setIsError((prev) => ({ ...prev, [target]: false }));
-    setErrorMessage((prev) => ({ ...prev, [target]: '' }));
+    setErrorMessage((prev) => ({ ...prev, [target]: "" }));
   };
 
   const changeError = (target: string, message: string) => {

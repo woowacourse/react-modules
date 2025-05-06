@@ -1,7 +1,7 @@
-import { useState } from 'react';
-import useError from '../useError/useError';
-import isUnderMaxLength from '../validate/isUnderMaxLength';
-import isInteger from '../validate/isInteger';
+import { useState } from "react";
+import useError from "../useError/useError";
+import isUnderMaxLength from "../validate/isUnderMaxLength";
+import isInteger from "../validate/isInteger";
 
 type CardExpirationDate = {
   MONTH: string;
@@ -9,8 +9,8 @@ type CardExpirationDate = {
 };
 
 const INITIAL_CARD_EXPIRATION_DATE: CardExpirationDate = {
-  MONTH: '',
-  YEAR: '',
+  MONTH: "",
+  YEAR: "",
 };
 type TYPE_OF_CARD_EXPIRATION_DATE_IS_ERROR = {
   MONTH: boolean;
@@ -21,17 +21,28 @@ const INITIAL_IS_ERROR: TYPE_OF_CARD_EXPIRATION_DATE_IS_ERROR = {
   YEAR: false,
 };
 
+type TYPE_OF_CARD_EXPIRATION_DATE_ERROR_MESSAGE = {
+  MONTH: string;
+  YEAR: string;
+};
+
+const INITIAL_CARD_EXPIRATION_DATE_ERROR_MESSAGE: TYPE_OF_CARD_EXPIRATION_DATE_ERROR_MESSAGE =
+  {
+    MONTH: "",
+    YEAR: "",
+  };
+
 type CardExpirationDateKeys = {
-  target: 'MONTH' | 'YEAR';
+  target: "MONTH" | "YEAR";
 };
 
 export const CARD_EXPIRATION_DATE_MAX_LENGTH = 2;
 
 export const CARD_EXPIRATION_DATE_ERROR_MESSAGE = {
   INVALID_LENGTH: `유효기간은 ${CARD_EXPIRATION_DATE_MAX_LENGTH}자리 숫자여야 합니다.`,
-  NOT_NUMBERIC: '유효기간은 숫자만 입력 가능합니다.',
-  INVALID_MONTH_RANGE: '1~12 사이의 숫자를 입력해주세요.',
-  INVALID_DATE: '유효기간은 현재 날짜보다 이후여야 합니다.',
+  NOT_NUMBERIC: "유효기간은 숫자만 입력 가능합니다.",
+  INVALID_MONTH_RANGE: "1~12 사이의 숫자를 입력해주세요.",
+  INVALID_DATE: "유효기간은 현재 날짜보다 이후여야 합니다.",
 } as const;
 
 export default function useCardExpirationDate(
@@ -40,7 +51,10 @@ export default function useCardExpirationDate(
   const [cardExpirationDate, setCardExpirationDate] = useState(
     userCardExpirationDate
   );
-  const { error, changeError, clearError } = useError(INITIAL_IS_ERROR);
+  const { error, changeError, clearError } = useError(
+    INITIAL_IS_ERROR,
+    INITIAL_CARD_EXPIRATION_DATE_ERROR_MESSAGE
+  );
 
   function handleCardExpirationDateChange({ target }: CardExpirationDateKeys) {
     return function (event: React.ChangeEvent<HTMLInputElement>) {
@@ -90,9 +104,9 @@ function getCardExpirationDateError(
     };
 
   if (input.length < CARD_EXPIRATION_DATE_MAX_LENGTH)
-    return { inputError: false, inputErrorMessage: '' };
+    return { inputError: false, inputErrorMessage: "" };
 
-  if (target === 'MONTH' && !isValidMonth(Number(input)))
+  if (target === "MONTH" && !isValidMonth(Number(input)))
     return {
       inputError: true,
       inputErrorMessage: CARD_EXPIRATION_DATE_ERROR_MESSAGE.INVALID_MONTH_RANGE,
@@ -104,7 +118,7 @@ function getCardExpirationDateError(
       inputErrorMessage: CARD_EXPIRATION_DATE_ERROR_MESSAGE.INVALID_DATE,
     };
 
-  return { inputError: false, inputErrorMessage: '' };
+  return { inputError: false, inputErrorMessage: "" };
 }
 
 function isValidMonth(month: number) {
@@ -120,9 +134,9 @@ function isValidDate(
   const currentYear = currentDate.getFullYear() % 100;
   const currentMonth = currentDate.getMonth() + 1;
 
-  if (target === 'YEAR' && input < currentYear) return false;
+  if (target === "YEAR" && input < currentYear) return false;
   if (
-    target === 'MONTH' &&
+    target === "MONTH" &&
     Number(CardExpirationDate.YEAR) === currentYear &&
     input < currentMonth
   )
