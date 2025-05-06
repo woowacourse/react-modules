@@ -14,6 +14,7 @@ type Story = StoryObj<typeof Modal>;
 
 export const CenterModal: Story = {
   args: {
+    id: "modal-container",
     position: "center",
     title: "중앙 모달 제목입니다",
   },
@@ -74,6 +75,7 @@ export const CenterModal: Story = {
 
 export const BottomModal: Story = {
   args: {
+    id: "modal-container",
     position: "bottom",
     title: "하단 모달 제목입니다",
   },

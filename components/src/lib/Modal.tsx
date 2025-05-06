@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import { createPortal } from "react-dom";
 
 export interface ModalProps {
+  id: string;
   position: "bottom" | "center";
   title: string;
   children: React.ReactNode;
@@ -11,7 +12,7 @@ export interface ModalProps {
   onClose: () => void;
 }
 
-function Modal({ position, title, children, isOpen, onClose }: ModalProps) {
+function Modal({ id, position, title, children, isOpen, onClose }: ModalProps) {
   const containerClassName = `${styles.modalContents} ${
     styles[`${position}Width`]
   }`;
@@ -33,14 +34,14 @@ function Modal({ position, title, children, isOpen, onClose }: ModalProps) {
 
   return createPortal(
     <div
-      id="modal-background"
+      id={`${id}-background`}
       className={backgroundClassName}
       onClick={() => {
         onClose();
       }}
     >
       <div
-        id="modal-container"
+        id={id}
         className={`${containerClassName}`}
         onClick={(e) => e.stopPropagation()}
       >
