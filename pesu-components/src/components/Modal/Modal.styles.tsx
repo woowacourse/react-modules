@@ -46,8 +46,10 @@ export const ModalContainer = styled.div<
 
 export const ModalTop = styled.div`
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+`;
+
+export const ModalContent = styled.div`
+  margin-top: 24px;
 `;
 
 export const Title = styled.div`
@@ -67,8 +69,10 @@ export const ModalBackdrop = styled.div`
   margin: auto;
 `;
 
-export const Button = styled.button`
+export const CloseButton = styled.button`
   background-color: transparent;
   border: none;
   cursor: pointer;
+
+  margin-left: auto;
 `;

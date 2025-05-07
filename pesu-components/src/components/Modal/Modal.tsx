@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
 
-import { PropsWithChildren, useEffect } from 'react';
+import { PropsWithChildren, ReactNode, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import useDevice from '../../hooks/useDevice';
 import { CloseIcon } from '../common';
@@ -35,7 +35,7 @@ export interface ModalInterface {
   size?: 'small' | 'medium' | 'large';
 }
 
-export default function Modal({
+function Modal({
   title,
   onClose,
   children,
@@ -49,29 +49,53 @@ export default function Modal({
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => event.key === 'Escape' && onClose?.();
-
     window.addEventListener('keydown', handleKeyDown);
-    return () => {
-      window.removeEventListener('keydown', handleKeyDown);
-    };
+    return () => window.removeEventListener('keydown', handleKeyDown);
   }, [onClose]);
 
   if (!isOpen) return null;
+
+  const Title = children?.find((child: any) => child?.type?.displayName === 'ModalTitle');
+  const CloseButton = children?.find((child: any) => child?.type?.displayName === 'ModalCloseButton');
+  const Content = children?.find((child: any) => child?.type?.displayName === 'ModalContent');
 
   return createPortal(
     <>
       <S.ModalContainer position={position} margin={margin} zIndex={zIndex} device={device} size={size}>
         <S.ModalTop>
-          <S.Title>{title}</S.Title>
-          <S.Button onClick={onClose}>
-            <CloseIcon />
-          </S.Button>
+          {Title}
+          {CloseButton}
         </S.ModalTop>
-
-        {children}
+        <S.ModalContent>{Content}</S.ModalContent>
       </S.ModalContainer>
       <S.ModalBackdrop onClick={onClose} />
     </>,
     typeof window !== 'undefined' && window.document.body ? window.document.body : document.body,
   );
 }
+
+function Title({ children }: { children: ReactNode }) {
+  return <S.Title>{children}</S.Title>;
+}
+Title.displayName = 'ModalTitle';
+
+// 닫기 버튼 Slot 컴포넌트
+function CloseButton({ onClick }: { onClick?: () => void }) {
+  return (
+    <S.CloseButton onClick={onClick}>
+      <CloseIcon />
+    </S.CloseButton>
+  );
+}
+CloseButton.displayName = 'ModalCloseButton';
+
+function Content({ children }: { children: ReactNode }) {
+  return <S.ModalContent>{children}</S.ModalContent>;
+}
+Content.displayName = 'ModalContent';
+
+Modal.Title = Title;
+Modal.CloseButton = CloseButton;
+Modal.Content = Content;
+
+export default Modal;
