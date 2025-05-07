@@ -1,11 +1,11 @@
 import { validateNumericString } from "../../utils/validation";
 import { HookReturnType, ValidInputFuncType } from "../../types";
 import { MAX_LENGTH } from "../../constants";
-import useBaseField from "../common/useInputValue";
+import useInputValue from "../common/useInputValue";
 import useErrors from "../common/useErrors";
 
 const usePassword = (): HookReturnType<"password"> => {
-  const { state, onChange, isLengthComplete } = useBaseField({
+  const { state, onChange, isLengthComplete } = useInputValue({
     initialState: "",
     maxLength: MAX_LENGTH.PASSWORD,
   });

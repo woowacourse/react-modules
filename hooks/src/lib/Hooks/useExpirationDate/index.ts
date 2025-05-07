@@ -1,13 +1,13 @@
 import { isExpirationDate } from "../../utils/validation";
 import { HookReturnType, ValidInputFuncType } from "../../types";
 import { MAX_LENGTH } from "../../constants";
-import useBaseField from "../common/useInputValue";
+import useInputValue from "../common/useInputValue";
 import useErrors from "../common/useErrors";
 
 const KEY_INDEX_MATCH: ("month" | "year")[] = ["month", "year"];
 
 const useExpirationDate = (): HookReturnType<"expirationDate"> => {
-  const { state, onChange, isLengthComplete } = useBaseField({
+  const { state, onChange, isLengthComplete } = useInputValue({
     initialState: {
       month: "",
       year: "",

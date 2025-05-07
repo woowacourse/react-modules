@@ -1,12 +1,12 @@
 import { validateNumericString } from "../../utils/validation";
 import { HookReturnType, ValidInputFuncType } from "../../types";
 
-import useBaseField from "../common/useInputValue";
+import useInputValue from "../common/useInputValue";
 import { MAX_LENGTH } from "../../constants";
 import useErrors from "../common/useErrors";
 
 const useCvcNumber = (): HookReturnType<"cvcNumber"> => {
-  const { state, onChange, isLengthComplete } = useBaseField({
+  const { state, onChange, isLengthComplete } = useInputValue({
     initialState: "",
     maxLength: MAX_LENGTH.CVC_NUMBER,
   });
