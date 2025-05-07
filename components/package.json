@@ -1,6 +1,6 @@
 {
   "name": "@sanghee01/modal",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "A modal component for React",
   "type": "module",
   "types": "dist/index.d.ts",
@@ -15,7 +15,8 @@
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "chromatic": "npx chromatic --project-token=chpt_68267e42fea9959"
   },
   "peerDependencies": {
     "react": "^19.1.0",
@@ -54,6 +55,6 @@
     "access": "public"
   },
   "dependencies": {
-    "@sanghee01/modal": "^0.0.7"
+    "@sanghee01/modal": "^0.0.8"
   }
 }
