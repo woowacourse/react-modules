@@ -6,9 +6,24 @@ import { createPortal } from 'react-dom';
 import { CloseIcon } from '../common';
 import useDevice, { Device } from '../../hooks/useDevice';
 
-const ModalContainer = styled.div<Pick<ModalInterface, 'position' | 'margin' | 'zIndex'> & { device: Device }>`
-  width: ${(props) =>
-    props.device !== 'mobile' ? '450px' : props.position === 'center' ? 'calc(100% - 40px)' : '100%'};
+const getModalWidth = (size: 'small' | 'medium' | 'large', position: 'center' | 'bottom') => {
+  if (position === 'center') {
+    switch (size) {
+      case 'small':
+        return '320px';
+      case 'large':
+        return '600px';
+      case 'medium':
+      default:
+        return '480px';
+    }
+  } else {
+    return '100%';
+  }
+};
+
+const ModalContainer = styled.div<Pick<ModalInterface, 'position' | 'margin' | 'zIndex' | 'size'> & { device: Device }>`
+  width: ${(props) => getModalWidth(props.size ?? 'medium', props.position ?? 'center')};
   box-sizing: border-box;
   height: fit-content;
 
@@ -69,6 +84,7 @@ const Button = styled.button`
  * @property position - 모달의 위치를 지정합니다. 'center'(기본값) 또는 'bottom'을 사용할 수 있습니다.
  * @property margin - 모달의 좌우 마진(px)입니다. 기본값은 20입니다.
  * @property zIndex - 모달의 z-index 값입니다. 기본값은 10입니다.
+ * @property size - 모달의 크기 (small | medium | large)
  */
 interface ModalInterface {
   /** 모달의 제목 */
@@ -83,6 +99,8 @@ interface ModalInterface {
   margin?: number;
   /** 모달의 z-index 값 */
   zIndex?: number;
+  /** 모달의 크기 (small | medium | large) */
+  size?: 'small' | 'medium' | 'large';
 }
 
 export default function Modal({
@@ -93,6 +111,7 @@ export default function Modal({
   position = 'center',
   margin = 20,
   zIndex = 10,
+  size = 'medium',
 }: PropsWithChildren<ModalInterface>) {
   const device = useDevice();
 
@@ -109,7 +128,7 @@ export default function Modal({
 
   return createPortal(
     <>
-      <ModalContainer position={position} margin={margin} zIndex={zIndex} device={device}>
+      <ModalContainer position={position} margin={margin} zIndex={zIndex} device={device} size={size}>
         <ModalTop>
           <Title>{title}</Title>
           <Button onClick={onClose}>
