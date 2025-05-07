@@ -9,6 +9,7 @@ const preview: Preview = {
         date: /Date$/i,
       },
     },
+    layout: 'fullscreen',
     backgrounds: {
       values: [
         { name: 'Dark', value: '#333' },
@@ -19,7 +20,6 @@ const preview: Preview = {
     },
     viewport: {
       viewports: INITIAL_VIEWPORTS,
-      defaultViewport: 'iphone12',
     },
   },
 };
