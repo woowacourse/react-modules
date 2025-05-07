@@ -43,5 +43,8 @@
   },
   "publishConfig": {
     "access": "public"
+  },
+  "dependencies": {
+    "@sanghee01/card-field-hooks": "^0.0.2"
   }
 }
