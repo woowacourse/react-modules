@@ -17,8 +17,6 @@
     "test": "jest"
   },
   "dependencies": {
-    "@eunoia-jaxson/card-field-hooks": "^0.0.1",
-    "@sanghee01/card-field-hooks": "^0.0.1",
     "react": "^19.1.0",
     "react-dom": "^19.1.0"
   },
