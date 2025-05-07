@@ -1,10 +1,17 @@
+import { createContext, useContext, MouseEvent, useEffect } from 'react';
 import { css } from '@emotion/css';
-import { Children, MouseEvent, useEffect } from 'react';
-import { ModalProps, Position } from '../types/Modal.type';
+import {
+  Position,
+  ModalProps,
+  ModalContextType,
+  ModalContentProps,
+  ModalFooterProps,
+  ModalHeaderProps,
+} from '../types/Modal.type';
 
-const Modal = ({ children, position, isOpen, onAfterOpen, onClose, title, showCloseButton = true }: ModalProps) => {
-  const [content, actions] = Children.toArray(children);
+const ModalContext = createContext<ModalContextType | undefined>(undefined);
 
+const Modal = ({ children, isOpen, onAfterOpen, onClose, position = 'center' }: ModalProps) => {
   const handleKeyDown = (e: KeyboardEvent) => {
     if (e.key === 'Escape') {
       onClose();
@@ -31,29 +38,55 @@ const Modal = ({ children, position, isOpen, onAfterOpen, onClose, title, showCl
   if (!isOpen) return null;
 
   return (
-    <div
-      className={ModalBackdrop}
-      onClick={handleBackdropClick}
-      role="dialog"
-      aria-modal="true"
-      aria-labelledby="modal-title"
-      data-testid="modal-backdrop"
-    >
-      <div className={ModalFrame(position)} data-testid="modal">
-        <section className={ModalHeader}>
-          {title && <h2 id="modal-title">{title}</h2>}
-          {showCloseButton && (
-            <button className={ModalCloseButton} onClick={onClose}>
-              X
-            </button>
-          )}
-        </section>
-        <section>{content}</section>
-        <section className={ButtonBar}>{actions}</section>
+    <ModalContext.Provider value={{ onClose, position }}>
+      <div
+        className={ModalBackdrop}
+        onClick={handleBackdropClick}
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="modal-title"
+        data-testid="modal-backdrop"
+      >
+        <div className={ModalFrame(position)} data-testid="modal">
+          {children}
+        </div>
       </div>
-    </div>
+    </ModalContext.Provider>
   );
 };
+
+const Header = ({ title, showCloseButton = true }: ModalHeaderProps) => {
+  const context = useContext(ModalContext);
+
+  if (!context) {
+    throw new Error('Modal.Header는 반드시 Modal 컴포넌트 내부에서 사용해야 합니다.');
+  }
+
+  const { onClose } = context;
+
+  return (
+    <section className={ModalHeader}>
+      {title && <h2 id="modal-title">{title}</h2>}
+      {showCloseButton && (
+        <button className={ModalCloseButton} onClick={onClose}>
+          X
+        </button>
+      )}
+    </section>
+  );
+};
+
+const Content = ({ children }: ModalContentProps) => {
+  return <section className={ModalContent}>{children}</section>;
+};
+
+const Footer = ({ children }: ModalFooterProps) => {
+  return <section className={ButtonBar}>{children}</section>;
+};
+
+Modal.Header = Header;
+Modal.Content = Content;
+Modal.Footer = Footer;
 
 export default Modal;
 
@@ -107,6 +140,11 @@ const ModalCloseButton = css`
   &:focus {
     outline: none;
   }
+`;
+
+const ModalContent = css`
+  width: 100%;
+  padding: 10px 0;
 `;
 
 const ButtonBar = css`
