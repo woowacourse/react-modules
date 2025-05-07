@@ -16,6 +16,7 @@ function ModalContainer({
   open,
   onClose,
   position = 'center',
+  size = 'medium',
   style,
   children,
 }: PropsWithChildren<ModalProps>) {
@@ -41,6 +42,7 @@ function ModalContainer({
       onClick={handleClickOutside}
       onClose={onClose}
       isBottom={position === 'bottom'}
+      size={size}
       style={style}
       ref={modalRef}
     >
@@ -76,7 +78,10 @@ function Title({
   return <StyledTitle style={style}>{children}</StyledTitle>;
 }
 
-const StyledModalContainer = styled.dialog<{ isBottom: boolean }>`
+const StyledModalContainer = styled.dialog<{
+  isBottom: boolean;
+  size: 'small' | 'medium' | 'large';
+}>`
   box-sizing: border-box;
   min-width: 400px;
   padding: 0px;
@@ -91,6 +96,8 @@ const StyledModalContainer = styled.dialog<{ isBottom: boolean }>`
   }
 
   ${({ isBottom }) => (isBottom ? bottomModalContainer : defaultModalContainer)}
+
+  ${({ isBottom, size }) => !isBottom && sizeStyles[size]}
 `;
 
 const defaultModalContainer = css`
@@ -110,6 +117,24 @@ const bottomModalContainer = css`
     width: 100%;
   }
 `;
+
+const smallModalContainer = css`
+  width: 320px;
+`;
+
+const mediumModalContainer = css`
+  width: 480px;
+`;
+
+const largeModalContainer = css`
+  width: 600px;
+`;
+
+const sizeStyles = {
+  small: smallModalContainer,
+  medium: mediumModalContainer,
+  large: largeModalContainer,
+};
 
 const ModalWrapper = styled.div<{ isBottom: boolean }>`
   padding: 24px 32px;

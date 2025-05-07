@@ -13,7 +13,7 @@ function App() {
     <>
       <h1>Component Modules</h1>
       <button onClick={() => setModalOpen(true)}>열기</button>
-      <Modal.Container open={modalOpen} onClose={onClose}>
+      <Modal.Container open={modalOpen} onClose={onClose} size="small">
         <Modal.Title style={{ color: 'red' }}>모달</Modal.Title>
         <Modal.CloseButton onClose={onClose} />
 
