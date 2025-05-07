@@ -1,5 +1,5 @@
 import { ComponentProps } from "react";
-import styles from "./ModalHeader.module.css";
+import styles from "../styles/ModalHeader.module.css";
 
 interface HeaderProps extends ComponentProps<"header"> {
   children: React.ReactNode;

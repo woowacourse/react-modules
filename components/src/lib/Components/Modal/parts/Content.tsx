@@ -1,5 +1,5 @@
 import { ComponentProps } from "react";
-import styles from "./ModalContent.module.css";
+import styles from "../styles/ModalContent.module.css";
 interface ModalContentProps extends ComponentProps<"div"> {}
 
 function Content({ children, ...props }: ModalContentProps) {

@@ -1,6 +1,6 @@
 import React from "react";
-import Modal, { ModalProps } from "./index";
-import styles from "./DialogPresets.module.css";
+import Modal, { ModalProps } from "../index";
+import styles from "../styles/DialogPresets.module.css";
 
 export interface AlertDialogProps
   extends Omit<ModalProps, "children" | "dialogType"> {

@@ -1,7 +1,7 @@
 import { ComponentProps, useContext } from "react";
-import { ModalContext } from "./ModalContext";
-import styles from "./ModalContainer.module.css";
-import closeIcon from "../../../asset/close.png";
+import { ModalContext } from "../ModalContext";
+import styles from "../styles/ModalContainer.module.css";
+import closeIcon from "../../../../asset/close.png";
 interface ContainerProps extends ComponentProps<"div"> {
   children: React.ReactNode;
   size?: "small" | "medium" | "large";

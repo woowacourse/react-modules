@@ -1,11 +1,15 @@
 import React, { useEffect } from "react";
 import { createPortal } from "react-dom";
 import { ModalContext } from "./ModalContext";
-import Background from "./Background";
-import Container from "./Container";
-import Header from "./Header";
-import Content from "./Content";
-import { AlertDialog, ConfirmDialog, PromptDialog } from "./DialogPresets";
+import Background from "./parts/Background";
+import Container from "./parts/Container";
+import Header from "./parts/Header";
+import Content from "./parts/Content";
+import {
+  AlertDialog,
+  ConfirmDialog,
+  PromptDialog,
+} from "./parts/DialogPresets";
 
 export interface ModalProps {
   isOpen: boolean;

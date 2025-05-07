@@ -1,7 +1,7 @@
 import { ComponentProps, useContext } from "react";
-import styles from "./ModalBackground.module.css";
+import styles from "../styles/ModalBackground.module.css";
 
-import { ModalContext } from "./ModalContext";
+import { ModalContext } from "../ModalContext";
 
 interface BackgroundProps extends ComponentProps<"div"> {
   children: React.ReactNode;
