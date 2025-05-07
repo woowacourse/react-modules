@@ -2,28 +2,29 @@ import { renderHook, act } from '@testing-library/react';
 import { useCardPasswordInput } from '../src/lib/hooks/useCardPasswordInput';
 
 describe('useCardPasswordInput custom hook 테스트', () => {
-  it('비밀번호 앞 2자리를 입력하면, 에러가 발생하지 않는다.', () => {
+  it('유효한 비밀번호 입력 처리', () => {
     const { result } = renderHook(() => useCardPasswordInput());
+
     act(() => {
       result.current.handleCardPasswordChange('12');
     });
-    expect(result.current.cardPasswordError).toBe('');
+
     expect(result.current.cardPassword).toBe('12');
+    expect(result.current.cardPasswordError).toBe('');
   });
 
-  it('숫자가 아닌 입력에는 에러가 발생한다.', () => {
-    const { result } = renderHook(() => useCardPasswordInput());
-    act(() => {
-      result.current.handleCardPasswordChange('12a');
-    });
-    expect(result.current.cardPasswordError).toBe('숫자만 입력 가능합니다.');
-  });
+  describe('비밀번호 입력 유효성 검사', () => {
+    it.each([
+      ['1a', '숫자만 입력 가능합니다.', '숫자가 아닌 입력'],
+      ['1', '비밀번호는 2자리여야 합니다.', '자리수가 부족한 입력'],
+    ])('비밀번호 입력이 %s일 때 에러: %s (%s)', (input, error, _) => {
+      const { result } = renderHook(() => useCardPasswordInput());
 
-  it('자리수가 2자리 미만이면, 에러가 발생한다.', () => {
-    const { result } = renderHook(() => useCardPasswordInput());
-    act(() => {
-      result.current.handleCardPasswordChange('1');
+      act(() => {
+        result.current.handleCardPasswordChange(input);
+      });
+
+      expect(result.current.cardPasswordError).toBe(error);
     });
-    expect(result.current.cardPasswordError).toBe('비밀번호는 2자리여야 합니다.');
   });
 });
