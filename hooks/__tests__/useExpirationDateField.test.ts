@@ -1,9 +1,9 @@
 import { renderHook, act } from '@testing-library/react';
-import { useCardExpirationInput } from '../src/lib/hooks/useCardExpirationInput';
+import { useExpirationDateField } from '../src/lib/hooks/useExpirationDateField';
 
 describe('useCardExpirationInput custom hook 테스트', () => {
   it('유효한 카드 유효기간 입력 처리', () => {
-    const { result } = renderHook(() => useCardExpirationInput());
+    const { result } = renderHook(() => useExpirationDateField());
 
     act(() => {
       result.current.handleCardExpirationChange('month', '12');
@@ -21,7 +21,7 @@ describe('useCardExpirationInput custom hook 테스트', () => {
       ['1a', '숫자만 입력 가능합니다.', '숫자가 아닌 입력'],
       ['13', '1부터 12 사이의 숫자를 입력해주세요.', '범위 외의 숫자'],
     ])('월 입력이 %s일 때 에러: %s (%s)', (input, error, _) => {
-      const { result } = renderHook(() => useCardExpirationInput());
+      const { result } = renderHook(() => useExpirationDateField());
 
       act(() => {
         result.current.handleCardExpirationChange('month', input);
@@ -35,7 +35,7 @@ describe('useCardExpirationInput custom hook 테스트', () => {
       ['1a', '숫자만 입력 가능합니다.', '숫자가 아닌 입력'],
       ['2', '2자리 숫자를 입력해주세요.', '자리수가 부족한 입력'],
     ])('년도 입력이 %s일 때 에러: %s (%s)', (input, error, _) => {
-      const { result } = renderHook(() => useCardExpirationInput());
+      const { result } = renderHook(() => useExpirationDateField());
 
       act(() => {
         result.current.handleCardExpirationChange('year', input);

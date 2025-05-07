@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { CardCompany } from '../types/card';
 
-export function useCardCompanySelect() {
+export function useCardCompanyField() {
   const [cardCompany, setCardCompany] = useState<CardCompany | ''>('');
   const handleSelectChange = (value: CardCompany) => {
     setCardCompany(value);

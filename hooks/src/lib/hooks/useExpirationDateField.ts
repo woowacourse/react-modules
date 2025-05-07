@@ -2,7 +2,7 @@ import { useMemo, useState } from 'react';
 import { CardExpiration } from '../types/card';
 import { validateMonthRangeError, validateNumberError, validateYearLengthError } from '../utils/cardInputValidations';
 
-export function useCardExpirationInput() {
+export function useExpirationDateField() {
   const [cardExpiration, setCardExpiration] = useState<CardExpiration>({ month: '', year: '' });
 
   const cardExpirationError = useMemo(() => {

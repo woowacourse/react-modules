@@ -1,9 +1,9 @@
 import { renderHook, act } from '@testing-library/react';
-import { useCvcInput } from '../src/lib/hooks/useCvcInput';
+import { useCvcField } from '../src/lib/hooks/useCvcField';
 
 describe('useCvcInput custom hook 테스트', () => {
   it('유효한 CVC 입력 처리', () => {
-    const { result } = renderHook(() => useCvcInput());
+    const { result } = renderHook(() => useCvcField());
     act(() => {
       result.current.handleCvcChange('123');
     });
@@ -16,7 +16,7 @@ describe('useCvcInput custom hook 테스트', () => {
       ['12a', '숫자만 입력 가능합니다.', '숫자가 아닌 입력'],
       ['12', 'CVC는 3자리여야 합니다.', '자리수가 부족한 입력'],
     ])('CVC 입력이 %s일 때 에러: %s (%s)', (input, error, _) => {
-      const { result } = renderHook(() => useCvcInput());
+      const { result } = renderHook(() => useCvcField());
       act(() => {
         result.current.handleCvcChange(input);
       });

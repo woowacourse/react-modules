@@ -1,7 +1,7 @@
 import { useMemo, useState } from 'react';
 import { validateNumberError, validateCardPasswordLengthError } from '../utils/cardInputValidations';
 
-export function useCardPasswordInput() {
+export function useCardPasswordField() {
   const [cardPassword, setCardPassword] = useState<string>('');
 
   const cardPasswordError = useMemo(() => {

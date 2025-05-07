@@ -2,7 +2,7 @@ import { useMemo, useState } from 'react';
 import { CardNumber } from '../types/card';
 import { validateNumberError } from '../utils/cardInputValidations';
 
-export function useCardNumberInput() {
+export function useCardNumberField() {
   const [cardNumbers, setCardNumbers] = useState<CardNumber>({ first: '', second: '', third: '', fourth: '' });
 
   const cardNumberError = useMemo(() => {
