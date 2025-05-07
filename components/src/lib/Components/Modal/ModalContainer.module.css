@@ -1,14 +1,70 @@
 .modalContents {
-  padding: 24px 32px;
+  padding: 32px 32px;
   background: white;
   color: black;
   border-radius: 8px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+
+  gap: 16px;
+  align-items: flex-start;
+  animation: slideIn 0.3s ease-in-out;
 }
 
-.centerWidth {
-  width: 80%;
+@keyframes slideIn {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
 }
 
-.bottomWidth {
+.full {
   width: 100%;
+  animation: slideUp 0.3s ease-in-out;
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+.small {
+  min-width: 400px;
+  animation: zoomIn 0.3s ease-in-out;
+}
+
+@keyframes zoomIn {
+  from {
+    transform: scale(0.95);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.medium {
+  min-width: 550px;
+  animation: zoomIn 0.3s ease-in-out;
+}
+
+.large {
+  min-width: 800px;
+  animation: zoomIn 0.3s ease-in-out;
+}
+
+.closeButton {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 24px;
+  height: 24px;
 }
