@@ -16,48 +16,48 @@ npm install @sanghee01/card-field-hooks
 
 이 패키지는 신용카드 입력 필드를 관리하기 위한 다음과 같은 커스텀 훅을 제공합니다.
 
-### useCardNumberInput
+### useCardNumberField
 
 - 카드 번호 입력 관리
 - 입력값 포매팅 및 유효성 검사 자동 처리
 
 ```tsx
-const { cardNumber, handleCardNumberChange, cardNumberError } = useCardNumberInput();
+const { cardNumber, handleCardNumberChange, cardNumberErrors } = useCardNumberField();
 ```
 
-### useCardExpirationInput
+### useExpirationDateField
 
 - 카드 유효기간 입력 관리
 - MM/YY 형식 자동 처리 및 유효성 검사
 
 ```tsx
-const { expirationDate, handleExpirationChange, expirationError } = useCardExpirationInput();
+const { expirationDate, handleExpirationChange, expirationError } = useExpirationDateField();
 ```
 
-### useCardPasswordInput
+### useCardPasswordField
 
 - 카드 비밀번호 입력 관리 (앞 2자리)
 - 유효성 검사 및 마스킹 처리
 
 ```tsx
-const { password, handlePasswordChange, passwordError } = useCardPasswordInput();
+const { password, handlePasswordChange, passwordError } = useCardPasswordField();
 ```
 
-### useCvcInput
+### useCvcField
 
 - 카드 CVC 입력 관리
 - 입력값 유효성 검사 자동 처리
 
 ```tsx
-const { cvc, handleCvcChange, cvcError } = useCvcInput();
+const { cvc, handleCvcChange, cvcError } = useCvcField();
 ```
 
-### useCardCompanySelect
+### useCardCompanyField
 
 - 카드 회사 선택 관리
 
 ```tsx
-const { cardCompany, handleSelectChange } = useCardCompanySelect();
+const { cardCompany, handleSelectChange } = useCardCompanyField();
 ```
 
 ---
@@ -67,7 +67,7 @@ const { cardCompany, handleSelectChange } = useCardCompanySelect();
 - **cardInputValidations**: 카드 번호, 유효기간, 비밀번호, CVC 입력에 대한 유효성 검사 로직을 제공합니다.
 
 ```tsx
-import { validateCardNumber, validateExpiration, validatePassword, validateCvc } from 'your-card-input-package';
+import { validateCardNumber, validateExpiration, validatePassword, validateCvc } from '@sanghee01-field-hooks';
 
 const isCardValid = validateCardNumber('1234 5678 9012 3456');
 ```
@@ -78,14 +78,14 @@ const isCardValid = validateCardNumber('1234 5678 9012 3456');
 
 ```tsx
 iimport React from 'react';
-import { useCardNumberInput, useCardExpirationInput, useCardPasswordInput, useCvcInput, useCardCompanySelect, CardCompany } from '@sanghee01-field-hooks';
+import { useCardNumberField, useExpirationDateField, useCardPasswordField, useCvcField, useCardCompanyField, CardCompany } from '@sanghee01-field-hooks';
 
 const CardForm = () => {
-  const { cardNumber, handleCardNumberChange } = useCardNumberInput();
-  const { expirationDate, handleExpirationChange } = useCardExpirationInput();
-  const { password, handlePasswordChange } = useCardPasswordInput();
-  const { cvc, handleCvcChange } = useCvcInput();
-  const { cardCompany, handleSelectChange } = useCardCompanySelect();
+  const { cardNumber, handleCardNumberChange } = useCardNumberField();
+  const { expirationDate, handleExpirationChange } = useExpirationDateField();
+  const { password, handlePasswordChange } = useCardPasswordField();
+  const { cvc, handleCvcChange } = useCvcField();
+  const { cardCompany, handleSelectChange } = useCardCompanyField();
 
   return (
     <form>
