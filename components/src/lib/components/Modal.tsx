@@ -67,11 +67,11 @@ const ModalFrame = (position: Position) => css`
   background-color: white;
   padding: 20px;
   width: ${position === 'center' ? '100%' : '100dvw'};
-  min-width: ${position === 'center' ? '300px' : null};
-  max-width: ${position === 'center' ? '80dvw' : null};
+  min-width: ${position === 'center' && '300px'};
+  max-width: ${position === 'center' && '80dvw'};
   border-radius: ${position === 'center' ? '8px' : '8px 8px 0 0'};
-  position: ${position === 'bottom' ? 'absolute' : null};
-  bottom: ${position === 'bottom' ? '0' : null};
+  position: ${position === 'bottom' && 'absolute'};
+  bottom: ${position === 'bottom' && '0'};
   display: flex;
   flex-direction: column;
   align-items: center;
