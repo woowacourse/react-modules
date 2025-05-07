@@ -31,10 +31,17 @@ const Modal = ({ children, position, isOpen, onAfterOpen, onClose, title, showCl
   if (!isOpen) return null;
 
   return (
-    <div className={ModalBackdrop} onClick={handleBackdropClick} data-testid="modal-backdrop">
+    <div
+      className={ModalBackdrop}
+      onClick={handleBackdropClick}
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="modal-title"
+      data-testid="modal-backdrop"
+    >
       <div className={ModalFrame(position)} data-testid="modal">
         <section className={ModalHeader}>
-          {title && <h2>{title}</h2>}
+          {title && <h2 id="modal-title">{title}</h2>}
           {showCloseButton && (
             <button className={ModalCloseButton} onClick={onClose}>
               X
