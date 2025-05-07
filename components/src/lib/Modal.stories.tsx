@@ -4,22 +4,21 @@ import Modal from './Modal';
 
 const meta: Meta<typeof Modal> = {
   title: 'Components/Modal',
-  component: Modal,
-  tags: ['autodocs']
+  component: Modal
 };
 
 export default meta;
 type Story = StoryObj<typeof Modal>;
 
-function useModalState(defaultOpen = false) {
-  const [isOpen, setIsOpen] = useState(defaultOpen);
-  const open = () => setIsOpen(true);
-  const close = () => setIsOpen(false);
-  return { isOpen, open, close };
-}
-
 export const CenteredModal: Story = {
   render: () => {
+    function useModalState(defaultOpen = false) {
+      const [isOpen, setIsOpen] = useState(defaultOpen);
+      const open = () => setIsOpen(true);
+      const close = () => setIsOpen(false);
+      return { isOpen, open, close };
+    }
+
     const { isOpen, open, close } = useModalState();
 
     return (
@@ -42,6 +41,13 @@ export const CenteredModal: Story = {
 
 export const BottomSheetModal: Story = {
   render: () => {
+    function useModalState(defaultOpen = false) {
+      const [isOpen, setIsOpen] = useState(defaultOpen);
+      const open = () => setIsOpen(true);
+      const close = () => setIsOpen(false);
+      return { isOpen, open, close };
+    }
+
     const { isOpen, open, close } = useModalState();
 
     return (

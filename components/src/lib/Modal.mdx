@@ -1,0 +1,74 @@
+import { Meta, Story, Canvas } from '@storybook/blocks';
+import Modal from './Modal';
+import { useState } from 'react';
+import ModalStory from './Modal.stories';
+
+<Meta title="Components/Modal" component={Modal} of={ModalStory} />
+
+# Modal 모달 컴포넌트
+
+`Modal`은 포털 기반으로 렌더링되는 React 컴포넌트입니다.  
+컴파운드 패턴을 기반으로 하여 다음과 같은 하위 컴포넌트로 구성됩니다:
+
+- `Modal.Content`: 모달의 실제 콘텐츠를 감싸는 영역입니다.
+- `Modal.Title`: 모달 상단 제목 영역입니다.
+- `Modal.CloseButton`: 닫기 버튼으로, 사용자 액션에 따라 모달을 닫습니다.
+- `Modal.BackDrop`: 클릭 시 모달 외부 클릭으로 닫기를 유도하는 배경입니다.
+
+이 모달은 포커스 트랩, ESC 키 처리, 스크롤 차단 기능을 포함하고 있습니다.
+
+---
+
+## 📍 중앙 정렬 모달 예시
+
+<Canvas>
+  <Story name="Centered Modal">
+    {() => {
+      const [open, setOpen] = useState(false);
+      const handleClose = () => setOpen(false);
+      return (
+        <>
+          <button onClick={() => setOpen(true)}>모달 열기</button>
+          {open && (
+            <Modal onClose={handleClose}>
+              <Modal.BackDrop onClose={handleClose} />
+              <Modal.Content position="center">
+                <Modal.Title>중앙 정렬 모달</Modal.Title>
+                <p>모달 본문 내용입니다.</p>
+                <Modal.CloseButton onClick={handleClose}>닫기</Modal.CloseButton>
+              </Modal.Content>
+            </Modal>
+          )}
+        </>
+      );
+    }}
+  </Story>
+</Canvas>
+
+---
+
+## 📍 바텀 시트 모달 예시
+
+<Canvas>
+  <Story name="Bottom Modal">
+    {() => {
+      const [open, setOpen] = useState(false);
+      const handleClose = () => setOpen(false);
+      return (
+        <>
+          <button onClick={() => setOpen(true)}>바텀 모달 열기</button>
+          {open && (
+            <Modal onClose={handleClose}>
+              <Modal.BackDrop onClose={handleClose} />
+              <Modal.Content position="bottom">
+                <Modal.Title>바텀 모달</Modal.Title>
+                <p>바텀 시트 스타일의 모달입니다.</p>
+                <Modal.CloseButton onClick={handleClose}>닫기</Modal.CloseButton>
+              </Modal.Content>
+            </Modal>
+          )}
+        </>
+      );
+    }}
+  </Story>
+</Canvas>
