@@ -52,9 +52,16 @@ export function useCardNumbersInput() {
     const blockCount = CARD_NUMBER_BLOCKS[cardBrand].length;
 
     setCardNumbersInfo((prev) => {
-      const next = [...prev.slice(0, blockCount)];
-      while (next.length < blockCount)
-        next.push({ value: "", errorMessage: "" });
+      const next = prev.slice(0, blockCount).map((item) => ({ ...item }));
+      if (next.length < blockCount) {
+        next.push(
+          ...Array(blockCount - next.length).fill({
+            value: "",
+            errorMessage: "",
+          })
+        );
+      }
+
       return next;
     });
   }, [cardBrand]);
