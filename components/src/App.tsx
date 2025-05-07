@@ -14,7 +14,7 @@ function App() {
       <button onClick={() => setIsOpen(true)}>열림!</button>
 
       <Modal isOpen={isOpen} onClose={onClose}>
-        <Modal.ModalContainer isOpen={isOpen} position="top" width={400}>
+        <Modal.ModalContainer isOpen={isOpen} position="top" width="large">
           <Modal.ModalCloseButton onClose={onClose} />
           <Modal.ModalTitle>제목</Modal.ModalTitle>
           <Modal.ModalBody>내용1!</Modal.ModalBody>
