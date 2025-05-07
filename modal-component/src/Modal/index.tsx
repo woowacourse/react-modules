@@ -6,6 +6,7 @@ import {
   ModalContents,
   ModalButton,
   ModalButtonContainer,
+  ModalInput,
 } from './Modal.styled';
 import { useEffect } from 'react';
 import { createContext } from 'react';
@@ -125,9 +126,14 @@ const Button = ({
   );
 };
 
+const Input = ({ placeholder }) => {
+  return <ModalInput placeholder={placeholder} />;
+};
+
 Modal.Title = Title;
 Modal.CloseButton = CloseButton;
 Modal.Contents = Contents;
 Modal.Button = Button;
+Modal.Input = Input;
 
 export default Modal;

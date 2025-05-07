@@ -117,6 +117,13 @@ const ModalButtonContainer = styled.div`
   width: 100%;
 `;
 
+const ModalInput = styled.input`
+  width: 100%;
+  padding: 10px;
+  border: 1px solid;
+  border-radius: 4px;
+`;
+
 export {
   BackDrop,
   ModalLayout,
@@ -125,4 +132,5 @@ export {
   ModalContents,
   ModalButton,
   ModalButtonContainer,
+  ModalInput,
 };
