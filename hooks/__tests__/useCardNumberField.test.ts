@@ -10,7 +10,7 @@ describe('useCardNumberInput custom hook 테스트', () => {
     });
 
     expect(result.current.cardNumbers.first).toBe('1234');
-    expect(result.current.cardNumberError).toBe('');
+    expect(result.current.cardNumberErrors.first).toBe('');
   });
 
   describe('숫자 입력 유효성 검사', () => {
@@ -22,7 +22,7 @@ describe('useCardNumberInput custom hook 테스트', () => {
       act(() => {
         result.current.handleCardNumberChange('first', input);
       });
-      expect(result.current.cardNumberError).toBe(error);
+      expect(result.current.cardNumberErrors.first).toBe(error);
     });
   });
 });
