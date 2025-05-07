@@ -18,6 +18,8 @@ type ModalProps = {
   autoCloseOnESC?: boolean;
   /** 모달 위치 */
   position?: "center" | "bottom";
+  /** 모달 크기 */
+  size?: "small" | "medium" | "large";
 };
 
 export const ModalContext = createContext<ModalProps>({
@@ -25,6 +27,7 @@ export const ModalContext = createContext<ModalProps>({
   onClose: () => {},
   children: <></>,
   position: "center",
+  size: "medium",
 });
 
 const Modal = ({
@@ -33,12 +36,14 @@ const Modal = ({
   children,
   autoCloseOnESC = true,
   position = "center",
+  size = "medium",
 }: ModalProps) => {
   const value = {
     isOpen,
     onClose,
     children,
     position,
+    size,
   };
 
   useEffect(() => {

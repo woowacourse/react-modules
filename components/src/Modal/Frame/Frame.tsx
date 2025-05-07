@@ -21,6 +21,7 @@ export const Frame = ({
       $position={modalContext.position}
       onClick={(event) => event.stopPropagation()}
       style={styled}
+      size={modalContext.size}
     >
       {children}
     </ModalFrame>
