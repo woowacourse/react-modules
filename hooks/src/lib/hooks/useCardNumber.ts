@@ -34,7 +34,7 @@ const useCardNumber = () => {
     setErrorMessage(message);
   };
 
-  const cardBrand = matchCardBrand(cardNumber.input1);
+  const cardBrand = matchCardBrand(cardNumber.input1, cardNumber.input2);
 
   return { cardNumber, setCardNumber, handleCardNumber, isValid, errorMessage, cardBrand };
 };
