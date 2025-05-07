@@ -96,6 +96,7 @@ type ButtonProps = {
   textColor?: string;
   size?: 'small' | 'medium' | 'large';
   onClick?: () => void;
+  border?: string;
 };
 
 const Button = ({
@@ -103,6 +104,7 @@ const Button = ({
   backgroundColor,
   textColor,
   size,
+  border,
   onClick,
 }: ButtonProps) => {
   return (
@@ -111,6 +113,7 @@ const Button = ({
         $backgroundColor={backgroundColor}
         $textColor={textColor}
         $size={size}
+        $border={border}
         onClick={onClick}
       >
         {title}

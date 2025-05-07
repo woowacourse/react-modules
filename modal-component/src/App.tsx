@@ -17,10 +17,11 @@ function App() {
           <div>안녕하세요~</div>
         </Modal.Contents>
         <Modal.Button
-          title="확인"
-          backgroundColor="#007bff"
-          textColor="#ffffff"
-          size="large"
+          title="취소"
+          backgroundColor="#ffffff"
+          textColor="#000000"
+          border="1px solid #000000"
+          // size=""
           onClick={() => {
             console.log('확인 버튼 클릭!');
           }}
