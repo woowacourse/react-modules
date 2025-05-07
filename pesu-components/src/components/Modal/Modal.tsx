@@ -1,79 +1,11 @@
 /** @jsxImportSource @emotion/react */
 
-import styled from '@emotion/styled';
 import { PropsWithChildren, useEffect } from 'react';
 import { createPortal } from 'react-dom';
+import useDevice from '../../hooks/useDevice';
 import { CloseIcon } from '../common';
-import useDevice, { Device } from '../../hooks/useDevice';
 
-const getModalWidth = (size: 'small' | 'medium' | 'large', position: 'center' | 'bottom') => {
-  if (position === 'center') {
-    switch (size) {
-      case 'small':
-        return '320px';
-      case 'large':
-        return '600px';
-      case 'medium':
-      default:
-        return '480px';
-    }
-  } else {
-    return '100%';
-  }
-};
-
-const ModalContainer = styled.div<Pick<ModalInterface, 'position' | 'margin' | 'zIndex' | 'size'> & { device: Device }>`
-  width: ${(props) => getModalWidth(props.size ?? 'medium', props.position ?? 'center')};
-  box-sizing: border-box;
-  height: fit-content;
-
-  background-color: white;
-  padding: 24px 32px;
-
-  border-radius: ${(props) => (props.position === 'center' ? '8px' : '8px 8px 0 0')};
-
-  position: fixed;
-
-  left: 0;
-  right: 0;
-  margin: 0 auto;
-
-  top: ${(props) => (props.position === 'center' ? '50%' : 'auto')};
-  transform: translateY(-50%);
-
-  bottom: 0;
-
-  z-index: ${(props) => props.zIndex};
-`;
-
-const ModalTop = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-`;
-
-const Title = styled.div`
-  font-size: 18px;
-  font-weight: 700;
-`;
-
-const ModalBackdrop = styled.div`
-  background-color: #000;
-  opacity: 35%;
-
-  position: fixed;
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  margin: auto;
-`;
-
-const Button = styled.button`
-  background-color: transparent;
-  border: none;
-  cursor: pointer;
-`;
+import * as S from './Modal.styles';
 
 /**
  * 모달 컴포넌트의 props
@@ -86,7 +18,7 @@ const Button = styled.button`
  * @property zIndex - 모달의 z-index 값입니다. 기본값은 10입니다.
  * @property size - 모달의 크기 (small | medium | large)
  */
-interface ModalInterface {
+export interface ModalInterface {
   /** 모달의 제목 */
   title: string;
   /** 모달을 닫을 때 호출되는 콜백 함수 */
@@ -128,17 +60,17 @@ export default function Modal({
 
   return createPortal(
     <>
-      <ModalContainer position={position} margin={margin} zIndex={zIndex} device={device} size={size}>
-        <ModalTop>
-          <Title>{title}</Title>
-          <Button onClick={onClose}>
+      <S.ModalContainer position={position} margin={margin} zIndex={zIndex} device={device} size={size}>
+        <S.ModalTop>
+          <S.Title>{title}</S.Title>
+          <S.Button onClick={onClose}>
             <CloseIcon />
-          </Button>
-        </ModalTop>
+          </S.Button>
+        </S.ModalTop>
 
         {children}
-      </ModalContainer>
-      <ModalBackdrop onClick={onClose} />
+      </S.ModalContainer>
+      <S.ModalBackdrop onClick={onClose} />
     </>,
     typeof window !== 'undefined' && window.document.body ? window.document.body : document.body,
   );
