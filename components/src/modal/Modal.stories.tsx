@@ -156,6 +156,38 @@ export const Alert: Story = {
   },
 };
 
+export const Confirm: Story = {
+  args: {
+    open: true,
+    onClose: () => {},
+  },
+
+  render: function App(args) {
+    const [modalOpen, setModalOpen] = useState(false);
+
+    const onClose = () => {
+      setModalOpen(false);
+    };
+
+    return (
+      <>
+        <button onClick={() => setModalOpen(true)}>열기</button>
+        <Modal.Container {...args} onClose={onClose} open={modalOpen}>
+          <Modal.Title>카드를 삭제하시겠습니까?</Modal.Title>
+          <div>삭제하면 복구하실 수 없습니다.</div>
+          <ButtonRowWrapper>
+            <Modal.SecondaryButton label="취소" onClick={onClose} />
+            <Modal.PrimaryButton
+              label="확인"
+              onClick={() => alert('확인 클릭')}
+            />
+          </ButtonRowWrapper>
+        </Modal.Container>
+      </>
+    );
+  },
+};
+
 export const Prompt: Story = {
   args: {
     open: true,
@@ -175,13 +207,13 @@ export const Prompt: Story = {
         <Modal.Container {...args} onClose={onClose} open={modalOpen}>
           <Modal.Title>쿠폰 번호를 입력해 주세요.</Modal.Title>
           <Modal.Input />
-          <PromptButtonWrapper>
+          <ButtonRowWrapper>
             <Modal.SecondaryButton label="취소" onClick={onClose} />
             <Modal.PrimaryButton
               label="확인"
               onClick={() => alert('확인 클릭')}
             />
-          </PromptButtonWrapper>
+          </ButtonRowWrapper>
         </Modal.Container>
       </>
     );
@@ -199,8 +231,8 @@ const AlertButtonWrapper = styled.div`
   margin-left: auto;
 `;
 
-const PromptButtonWrapper = styled.div`
-  width: 50%;
+const ButtonRowWrapper = styled.div`
+  width: 160px;
   margin-left: auto;
 
   display: flex;
