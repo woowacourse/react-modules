@@ -207,23 +207,20 @@ export default App;
 ### 📍 Example
 
 ```tsx
-import {useState} from 'react';
-import './App.css';
-import {useCvcValidation} from '@muffin2219/hooks';
+import {useCvc} from '@muffin2219/hooks';
 
 function App() {
-  const [cvc, setCvc] = useState('');
-  const cvcValidationResult = useCvcValidation(cvc);
-
-  const handleCvcChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const inputValue = e.target.value;
-    setCvc(inputValue);
-  };
+  const {onChange, cvc, cvcValidationResult} = useCvc();
 
   return (
     <>
       <h2>CVC 번호</h2>
-      <input value={cvc} type="text" maxLength={3} onChange={handleCvcChange} />
+      <input
+        value={cvc}
+        type="text"
+        maxLength={3}
+        onChange={(e) => onChange(e.target.value)}
+      />
       {cvcValidationResult.isError && (
         <span>{cvcValidationResult.errorMessage}</span>
       )}
@@ -239,18 +236,33 @@ export default App;
 1. CVC 번호는 숫자여야한다.
 2. CVC 번호는 3자리여야한다.
 
-### 🔧 Props
+### ⛏️ Return Value
+
+### cvc
 
 | Name | Datatype | Description |
 | ---- | -------- | ----------- |
-| cvc  | string   | CVC 번호    |
+| cvc  | string   | cvc번호     |
 
-### ⛏️ Return Value (Object)
+### cvcValidationResult (Object)
+
+```
+  {
+    isError: string
+    errorMessage: string
+  }
+```
 
 | Name         | Datatype | Description |
 | ------------ | -------- | ----------- |
 | isError      | boolean  | 에러 여부   |
 | errorMessage | string   | 에러 메시지 |
+
+### onChange
+
+| Name     | Datatype                  | Description   |
+| -------- | ------------------------- | ------------- |
+| onChange | ( value : string) => void | onChange 함수 |
 
 ## 📌 How to use: usePasswordValidation
 
