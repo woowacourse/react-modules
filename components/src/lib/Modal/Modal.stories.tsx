@@ -24,9 +24,11 @@ const meta = {
       control: { type: "boolean" },
       table: { defaultValue: { summary: "true" } },
     },
-    backgroundColor: {
-      description: "모달 배경색",
-      control: { type: "color" },
+    theme: {
+      description: "모달 테마 설정",
+      control: { type: "radio" },
+      options: ["light", "dark"],
+      table: { defaultValue: { summary: "light" } },
     },
     children: {
       description: "모달 내부에 표시될 콘텐츠",
@@ -83,17 +85,13 @@ export const WithoutCloseButton = (args: ModalProps) => (
 );
 
 export const ModalInDarkMode = (args: ModalProps) => (
-  <Default
-    {...args}
-    title={{ text: "Dark Mode", color: "#fff" }}
-    backgroundColor="#000"
-  >
+  <Default {...args} title={{ text: "Dark Mode" }} theme="dark">
     <div style={{ color: "#fff" }}>Dark Mode Contents</div>
   </Default>
 );
 
 export const ModalInLightMode = (args: ModalProps) => (
-  <Default {...args} title={{ text: "Light Mode" }}>
+  <Default {...args} title={{ text: "Light Mode" }} theme="light">
     Light Mode Contents
   </Default>
 );

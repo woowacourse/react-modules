@@ -1,4 +1,7 @@
 import { MouseEvent, ReactNode, useEffect } from "react";
+import { createPortal } from "react-dom";
+import { IoClose } from "react-icons/io5";
+import { THEME_MAP, ThemeMode } from "../constants/theme";
 import {
   Backdrop,
   CloseButton,
@@ -6,12 +9,9 @@ import {
   Title,
   TopWrapper,
 } from "./Modal.styles";
-import { IoClose } from "react-icons/io5";
-import { createPortal } from "react-dom";
 
 interface TitleProps {
   text?: string;
-  color?: string;
   size?: number;
 }
 
@@ -19,7 +19,7 @@ export interface ModalProps {
   position?: "center" | "bottom";
   title?: TitleProps;
   showCloseButton?: boolean;
-  backgroundColor?: string;
+  theme?: ThemeMode;
   children: ReactNode;
   isOpen: boolean;
   onClose: () => void;
@@ -29,11 +29,13 @@ const Modal = ({
   position = "center",
   title,
   showCloseButton = true,
-  backgroundColor,
+  theme = "light",
   children,
   isOpen,
   onClose,
 }: ModalProps) => {
+  const currentTheme = THEME_MAP[theme];
+
   const stopPropagation = (e: MouseEvent<HTMLDivElement>) => {
     e.stopPropagation();
   };
@@ -50,22 +52,19 @@ const Modal = ({
   return createPortal(
     <Backdrop $isOpen={isOpen} $position={position} onClick={onClose}>
       <ModalBox
-        $backgroundColor={backgroundColor}
+        $backgroundColor={currentTheme.background}
         $position={position}
         onClick={stopPropagation}
       >
         <TopWrapper $titleText={title?.text}>
           {title && (
-            <Title $color={title.color} $size={title.size}>
+            <Title $color={currentTheme.title} $size={title.size}>
               {title.text}
             </Title>
           )}
           {showCloseButton && (
             <CloseButton type="button" onClick={onClose}>
-              <IoClose
-                color={backgroundColor === "#000" ? "#fff" : "#000"}
-                size={30}
-              />
+              <IoClose color={currentTheme.icon} size={30} />
             </CloseButton>
           )}
         </TopWrapper>

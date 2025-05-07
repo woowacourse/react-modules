@@ -1,5 +1,6 @@
 import { css } from "@emotion/react";
 import styled from "@emotion/styled";
+import { ModalColor } from "../constants/theme";
 
 export const Backdrop = styled.div<{
   $isOpen: boolean;
@@ -17,14 +18,14 @@ export const Backdrop = styled.div<{
 `;
 
 export const ModalBox = styled.div<{
-  $backgroundColor?: string;
+  $backgroundColor: ModalColor;
   $position: "center" | "bottom";
 }>`
   display: flex;
   flex-direction: column;
   gap: 5px;
   padding: 15px;
-  background-color: ${({ $backgroundColor }) => $backgroundColor ?? "#fff"};
+  background-color: ${({ $backgroundColor }) => $backgroundColor};
   border-radius: 10px;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
 
@@ -44,9 +45,9 @@ export const TopWrapper = styled.div<{ $titleText?: string }>`
     $titleText ? "space-between" : "end"};
 `;
 
-export const Title = styled.h1<{ $color?: string; $size?: number }>`
+export const Title = styled.h1<{ $color: ModalColor; $size?: number }>`
   margin: 0;
-  color: ${({ $color }) => $color ?? "#000"};
+  color: ${({ $color }) => $color};
   font-size: ${({ $size }) => ($size ? `${$size}px` : "24px")};
 `;
 
