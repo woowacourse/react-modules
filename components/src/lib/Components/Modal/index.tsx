@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useRef } from "react";
 import { createPortal } from "react-dom";
 import { ModalContext } from "./ModalContext";
 import Background from "./parts/Background";
@@ -10,6 +10,8 @@ import {
   ConfirmDialog,
   PromptDialog,
 } from "./parts/DialogPresets";
+import { useFocusTrap } from "./hooks/useFocusTrap";
+import { useEscapeClose } from "./hooks/useEscapeClose";
 
 export interface ModalProps {
   isOpen: boolean;
@@ -26,21 +28,17 @@ function Modal({
   dialogType = "default",
   children,
 }: ModalProps) {
-  useEffect(() => {
-    if (!isOpen) return;
-    const handler = (e: KeyboardEvent) => {
-      if (e.key === "Escape") onClose();
-    };
-    window.addEventListener("keydown", handler);
-    return () => window.removeEventListener("keydown", handler);
-  }, [isOpen, onClose]);
-
+  const modalRef = useRef<HTMLDivElement>(null);
+  useFocusTrap(modalRef, isOpen, onClose);
+  useEscapeClose(isOpen, onClose);
   if (!isOpen) return null;
 
   return createPortal(
-    <ModalContext.Provider value={{ onClose, position, dialogType }}>
-      {children}
-    </ModalContext.Provider>,
+    <div ref={modalRef}>
+      <ModalContext.Provider value={{ onClose, position, dialogType }}>
+        {children}
+      </ModalContext.Provider>
+    </div>,
     document.body
   );
 }
