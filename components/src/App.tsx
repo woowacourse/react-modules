@@ -16,12 +16,16 @@ function App() {
 
   const ModalContent = () => {
     return (
-      <div>
-        <p>모달 내용입니다.</p>
-        <p>모달 내용입니다.</p>
-        <p>모달 내용입니다.</p>
-        <p>모달 내용입니다.</p>
-      </div>
+      <>
+        <div>
+          <p>모달 내용입니다.</p>
+          <p>모달 내용입니다.</p>
+          <p>모달 내용입니다.</p>
+        </div>
+        <div>
+          <span>모달 내용입니다.2</span>
+        </div>
+      </>
     );
   };
 
@@ -44,9 +48,14 @@ function App() {
       <button className={OpenButton} onClick={handleOpen}>
         열기
       </button>
-      <Modal isOpen={isOpen} position="center" title="알림" onAfterOpen={handleAfterOpen} onClose={handleClose}>
-        <ModalContent />
-        <ModalActions />
+      <Modal isOpen={isOpen} onClose={handleClose} onAfterOpen={handleAfterOpen} position="center">
+        <Modal.Header title="알림" />
+        <Modal.Content>
+          <ModalContent />
+        </Modal.Content>
+        <Modal.Footer>
+          <ModalActions />
+        </Modal.Footer>
       </Modal>
     </>
   );
