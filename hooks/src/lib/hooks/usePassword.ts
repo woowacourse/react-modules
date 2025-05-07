@@ -36,6 +36,7 @@ const usePassword = () => {
       });
       return;
     }
+
     setPasswordValidationResult(defaultValidationValue);
   };
 
