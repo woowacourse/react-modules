@@ -4,9 +4,11 @@ import styled from '@emotion/styled';
 import { PropsWithChildren, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import { CloseIcon } from '../common';
+import useDevice, { Device } from '../../hooks/useDevice';
 
-const ModalContainer = styled.div<Pick<ModalInterface, 'position' | 'margin' | 'zIndex'>>`
-  width: ${(props) => (props.position === 'center' ? 'calc(100% - 40px)' : '100%')};
+const ModalContainer = styled.div<Pick<ModalInterface, 'position' | 'margin' | 'zIndex'> & { device: Device }>`
+  width: ${(props) =>
+    props.device !== 'mobile' ? '450px' : props.position === 'center' ? 'calc(100% - 40px)' : '100%'};
   box-sizing: border-box;
   height: fit-content;
 
@@ -92,6 +94,8 @@ export default function Modal({
   margin = 20,
   zIndex = 10,
 }: PropsWithChildren<ModalInterface>) {
+  const device = useDevice();
+
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => event.key === 'Escape' && onClose?.();
 
@@ -105,7 +109,7 @@ export default function Modal({
 
   return createPortal(
     <>
-      <ModalContainer position={position} margin={margin} zIndex={zIndex}>
+      <ModalContainer position={position} margin={margin} zIndex={zIndex} device={device}>
         <ModalTop>
           <Title>{title}</Title>
           <Button onClick={onClose}>
