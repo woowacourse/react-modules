@@ -16,8 +16,10 @@
   font-weight: 700;
   font-size: 18px;
   margin: 0;
+  margin-block: 0;
+  margin-inline: 0;
   line-height: 100%;
-  letter-spacing: 0.1px;
+  letter-spacing: 0px;
   vertical-align: middle;
   width: fit-content;
   white-space: nowrap;
