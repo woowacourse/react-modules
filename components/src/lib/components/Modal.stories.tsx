@@ -100,7 +100,7 @@ export const CenterWithAction: Story = {
     expect(openButton).toBeDefined();
     userEvent.click(openButton);
 
-    const modal = await canvas.findByTestId('modal');
+    const modal = await canvas.findByRole('dialog', { name: '모달 제목' });
     expect(modal).toBeDefined();
 
     const closeButton = canvas.getByRole('button', { name: '닫기' });
@@ -111,7 +111,7 @@ export const CenterWithAction: Story = {
 
     userEvent.click(confirmButton);
     await waitFor(() => {
-      expect(canvas.queryByTestId('modal')).toBeNull();
+      expect(canvas.queryByRole('dialog', { name: '모달 제목' })).toBeNull();
     });
   },
 };
@@ -129,7 +129,7 @@ export const Bottom: Story = {
     expect(openButton).toBeDefined();
     userEvent.click(openButton);
 
-    const modal = await canvas.findByTestId('modal');
+    const modal = await canvas.findByRole('dialog', { name: '모달 제목' });
     expect(modal).toBeDefined();
 
     expect(modal).toHaveStyle({
@@ -151,12 +151,12 @@ export const ESCClose: Story = {
     expect(openButton).toBeDefined();
     userEvent.click(openButton);
 
-    const modal = await canvas.findByTestId('modal');
+    const modal = await canvas.findByRole('dialog', { name: '모달 제목' });
     expect(modal).toBeDefined();
 
     await userEvent.keyboard('{Escape}');
     await waitFor(() => {
-      expect(canvas.queryByTestId('modal')).toBeNull();
+      expect(canvas.queryByRole('dialog', { name: '모달 제목' })).toBeNull();
     });
   },
 };
@@ -173,7 +173,7 @@ export const BackdropClose: Story = {
     expect(openButton).toBeDefined();
     userEvent.click(openButton);
 
-    const modal = await canvas.findByTestId('modal');
+    const modal = await canvas.findByRole('dialog', { name: '모달 제목' });
     expect(modal).toBeDefined();
 
     const backdrop = await canvas.findByTestId('modal-backdrop');
@@ -181,7 +181,7 @@ export const BackdropClose: Story = {
 
     userEvent.click(backdrop);
     await waitFor(() => {
-      expect(canvas.queryByTestId('modal')).toBeNull();
+      expect(canvas.queryByRole('dialog', { name: '모달 제목' })).toBeNull();
     });
   },
 };
