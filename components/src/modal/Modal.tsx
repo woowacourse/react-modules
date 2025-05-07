@@ -10,6 +10,7 @@ import PrimaryButton from './PrimaryButton';
 import SecondaryButton from './SecondaryButton';
 import { ModalProps } from './types';
 import { css } from '@emotion/react';
+import Input from './Input';
 
 function ModalContainer({
   open,
@@ -139,4 +140,5 @@ export default {
   Title,
   PrimaryButton,
   SecondaryButton,
+  Input,
 };
