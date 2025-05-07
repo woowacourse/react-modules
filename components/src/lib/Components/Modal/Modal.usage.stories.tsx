@@ -36,7 +36,7 @@ export const AlertModal: AlertStory = {
     message: { control: { type: "text" }, defaultValue: "모달창 내용" },
   },
   render(args) {
-    const [isOpen, setIsOpen] = useState(false);
+    const [isOpen, setIsOpen] = useState(true);
     return (
       <>
         <button onClick={() => setIsOpen((p) => !p)} id="trigger-button">
@@ -100,7 +100,7 @@ export const ConfirmModal: ConfirmStory = {
     message: { control: { type: "text" }, defaultValue: "모달창 내용" },
   },
   render(args) {
-    const [isOpen, setIsOpen] = useState(false);
+    const [isOpen, setIsOpen] = useState(true);
     return (
       <>
         <button onClick={() => setIsOpen((p) => !p)} id="trigger-button">
@@ -162,9 +162,10 @@ export const PromptModal: PromptStory = {
     position: { control: { type: "radio" }, options: ["center", "bottom"] },
     size: { control: { type: "radio" }, options: ["small", "medium", "large"] },
     title: { control: { type: "text" }, defaultValue: "모달창 제목" },
+    placeholder: { control: { type: "text" }, defaultValue: "쿠폰 번호" },
   },
   render(args) {
-    const [isOpen, setIsOpen] = useState(false);
+    const [isOpen, setIsOpen] = useState(true);
     return (
       <>
         <button onClick={() => setIsOpen((p) => !p)} id="trigger-button">
