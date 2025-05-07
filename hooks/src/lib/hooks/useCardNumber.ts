@@ -39,7 +39,16 @@ const useCardNumberValidation = () => {
   const validation = (label: string, value: string) => {
     setCardNumberValidationResult(defaultCardNumberValidationValue);
 
-    if (!value || isEmpty(value)) return;
+    if (!value || isEmpty(value)) {
+      if (!value || isEmpty(value)) {
+        setCardNumberValidationResult((prev) => ({
+          ...prev,
+          [label]: defaultValidationValue,
+        }));
+
+        return;
+      }
+    }
 
     if (!isPositiveInteger(value)) {
       setCardNumberValidationResult((prev) => ({

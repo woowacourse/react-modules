@@ -14,7 +14,7 @@ npm i @muffin2219/hooks
 ### 📍 Example
 
 ```tsx
-import {useCardNumberValidation} from '@muffin2219/hooks';
+import {useCardNumber} from '@muffin2219/hooks';
 
 function App() {
   const {cardNumber, onChange, cardNumberValidationResult} =
@@ -126,25 +126,12 @@ export default App;
 ### 📍 Example
 
 ```tsx
-import {useState} from 'react';
 import './App.css';
-import {useExpirationDateValidation} from '@muffin2219/hooks';
+import {useExpirationDate} from '@muffin2219/hooks';
 
 function App() {
-  const [expirationDate, setExpirationDate] = useState({
-    month: '',
-    year: '',
-  });
-  const expirationDateValidationResult =
-    useExpirationDateValidation(expirationDate);
-
-  const handleExpirationDateChange = (
-    e: React.ChangeEvent<HTMLInputElement>,
-    field: 'month' | 'year'
-  ) => {
-    const inputValue = e.target.value;
-    setExpirationDate((prev) => ({...prev, [field]: inputValue}));
-  };
+  const {onChange, expirationDate, expirationDateValidationResult} =
+    useExpirationDateValidation();
 
   return (
     <>
@@ -153,13 +140,13 @@ function App() {
         value={expirationDate.month}
         type="text"
         maxLength={2}
-        onChange={(e) => handleExpirationDateChange(e, 'month')}
+        onChange={(e) => onChange('month', e.target.value)}
       />
       <input
         value={expirationDate.year}
         type="text"
         maxLength={2}
-        onChange={(e) => handleExpirationDateChange(e, 'year')}
+        onChange={(e) => onChange('year', e.target.value)}
       />
 
       {expirationDateValidationResult.month.isError && (
@@ -182,14 +169,14 @@ export default App;
 3. 월은 1부터 12 사이의 숫자여야한다.
 4. 연도는 현재 연도보다 크거나 같아야한다.
 
-### 🔧 Props
+### expirationDate (Object)
 
 | Name  | Datatype | Description |
 | ----- | -------- | ----------- |
 | month | string   | 월          |
 | year  | string   | 연도        |
 
-### ⛏️ Return Value (Object)
+### expirationDateValidationResult (Object)
 
 ```
 {
@@ -200,7 +187,7 @@ export default App;
   year: {
     isError: string,
     errorMessage: string,
-  }
+  },
 }
 ```
 
@@ -208,6 +195,12 @@ export default App;
 | ------------ | -------- | ----------- |
 | isError      | boolean  | 에러 여부   |
 | errorMessage | string   | 에러 메시지 |
+
+### onChange
+
+| Name     | Datatype                                 | Description   |
+| -------- | ---------------------------------------- | ------------- |
+| onChange | (label : string, value : string) => void | onChange 함수 |
 
 ## 📌 How to use: useCvcValidation
 
