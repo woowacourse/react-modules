@@ -29,8 +29,8 @@ function ModalContainer({
   }, [open]);
 
   const handleClickOutside = (event: React.MouseEvent<HTMLDialogElement>) => {
-    const { target } = event;
-    if (target === event.currentTarget) {
+    const { target, currentTarget } = event;
+    if (target === currentTarget) {
       onClose();
     }
   };
