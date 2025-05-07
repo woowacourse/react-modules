@@ -1,6 +1,6 @@
 {
   "name": "@dev-dino22/modal-components",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Easily create modal components with this lightweight npm package",
   "type": "module",
   "types": "dist/index.d.ts",
@@ -18,13 +18,15 @@
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "chromatic": "dotenv -e .env -- npx chromatic --project-token=$CHROMATIC_PROJECT_TOKEN"
   },
   "peerDependencies": {
     "react": "^19.1.0",
     "react-dom": "^19.1.0"
   },
   "dependencies": {
+    "@dev-dino22/modal-components": "^0.0.1",
     "@emotion/css": "^11.13.5",
     "@emotion/styled": "^11.14.0"
   },
@@ -45,6 +47,7 @@
     "@typescript-eslint/eslint-plugin": "^8.29.1",
     "@typescript-eslint/parser": "^8.29.1",
     "@vitejs/plugin-react-swc": "^3.8.1",
+    "dotenv-cli": "^8.0.0",
     "eslint": "^9.24.0",
     "eslint-plugin-react-hooks": "^5.2.0",
     "eslint-plugin-react-refresh": "^0.4.19",
