@@ -1,23 +1,14 @@
-<<<<<<< HEAD
 import {MouseEvent, ReactNode, useEffect} from 'react';
-=======
-import { MouseEvent, ReactNode, useEffect } from "react";
->>>>>>> beaab83 ([1단계 - 페이먼츠 모듈] 머핀(서민지) 미션 제출합니다.  (#88))
 import {
   Backdrop,
   CloseButton,
   ModalBox,
   Title,
   TopWrapper,
-<<<<<<< HEAD
 } from './Modal.styles';
 import {IoClose} from 'react-icons/io5';
 import {createPortal} from 'react-dom';
-=======
-} from "./Modal.styles";
-import { IoClose } from "react-icons/io5";
-import { createPortal } from "react-dom";
->>>>>>> beaab83 ([1단계 - 페이먼츠 모듈] 머핀(서민지) 미션 제출합니다.  (#88))
+import Alert from './content/Alert';
 
 interface TitleProps {
   text?: string;
@@ -25,18 +16,22 @@ interface TitleProps {
   size?: number;
 }
 
+interface AlertProps {
+  message: string;
+  btnText: string;
+}
+
 export interface ModalProps {
-<<<<<<< HEAD
   position?: 'center' | 'bottom';
-=======
-  position?: "center" | "bottom";
->>>>>>> beaab83 ([1단계 - 페이먼츠 모듈] 머핀(서민지) 미션 제출합니다.  (#88))
   title?: TitleProps;
   showCloseButton?: boolean;
   backgroundColor?: string;
   children: ReactNode;
+  alert?: AlertProps;
+
   isOpen: boolean;
   onClose: () => void;
+  onConfirm?: () => void;
 }
 
 const Modal = ({
@@ -45,8 +40,10 @@ const Modal = ({
   showCloseButton = true,
   backgroundColor,
   children,
+  alert,
   isOpen,
   onClose,
+  onConfirm,
 }: ModalProps) => {
   const stopPropagation = (e: MouseEvent<HTMLDivElement>) => {
     e.stopPropagation();
@@ -85,7 +82,14 @@ const Modal = ({
               </CloseButton>
             )}
           </TopWrapper>
-          {children}
+          {/* {children} */}
+          {alert && (
+            <Alert
+              message={alert.message}
+              btnText={alert.btnText}
+              onConfirm={onConfirm}
+            />
+          )}
         </ModalBox>
       </Backdrop>,
       document.body
