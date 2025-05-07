@@ -80,8 +80,7 @@ export const Size: Story = {
           isOpen={isSmallOpened}
           position={"center"}
           size={"small"}
-          confirmButton={true}
-          cancelButton={true}
+          closeButton={true}
         >
           작은 모달입니다!
         </Modal>
@@ -90,8 +89,7 @@ export const Size: Story = {
           isOpen={isMediumOpened}
           position={"center"}
           size={"medium"}
-          confirmButton={true}
-          cancelButton={true}
+          closeButton={true}
         >
           중간 모달입니다!
         </Modal>
@@ -100,8 +98,7 @@ export const Size: Story = {
           isOpen={isLargeOpened}
           position={"center"}
           size={"large"}
-          confirmButton={true}
-          cancelButton={true}
+          closeButton={true}
         >
           큰 모달입니다!
         </Modal>
@@ -125,7 +122,6 @@ export const ConfirmButton: Story = {
         <Button size="medium" text="열기" onclick={openModal} />
         <Modal
           onClose={closeModal}
-          renderHeader={true}
           title="모달을 닫으려면"
           isOpen={isOpened}
           position={"center"}
@@ -155,7 +151,6 @@ export const ConfirmCancelButton: Story = {
         <Button size="medium" text="열기" onclick={openModal} />
         <Modal
           onClose={closeModal}
-          renderHeader={true}
           title="모달을 닫으려면"
           isOpen={isOpened}
           position={"center"}

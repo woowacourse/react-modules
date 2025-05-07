@@ -43,7 +43,6 @@ const ModalContainer = styled.div<{
 
 const ModalTop = styled.div`
   display: flex;
-  justify-content: space-between;
   align-items: center;
 `;
 
@@ -57,6 +56,7 @@ const ModalBottom = styled.div`
 const Title = styled.div`
   font-size: 18px;
   font-weight: 700;
+  margin-right: auto;
 `;
 
 const ModalBackdrop = styled.div`
@@ -73,7 +73,7 @@ const ModalBackdrop = styled.div`
 
 interface ModalInterface {
   position?: "center" | "bottom";
-  renderHeader?: boolean;
+  closeButton?: boolean;
   confirmButton?: boolean;
   cancelButton?: boolean;
   onConfirm?: () => void;
@@ -85,7 +85,7 @@ interface ModalInterface {
 
 export default function Modal({
   position = "center",
-  renderHeader,
+  closeButton,
   confirmButton,
   cancelButton,
   onConfirm,
@@ -99,14 +99,11 @@ export default function Modal({
   return (
     <>
       <ModalContainer position={position} size={size}>
-        {renderHeader && (
-          <ModalTop>
-            {title && <Title>{title}</Title>}
-            <CloseIcon onClick={onClose} css={closeIconStyle} />
-          </ModalTop>
-        )}
+        <ModalTop>
+          {title && <Title>{title}</Title>}
+          {closeButton && <CloseIcon onClick={onClose} css={closeIconStyle} />}
+        </ModalTop>
         {children}
-
         <ModalBottom>
           {confirmButton && (
             <Button
