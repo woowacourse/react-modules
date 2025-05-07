@@ -20,4 +20,5 @@ function Background({ children, ...props }: BackgroundProps) {
     </div>
   );
 }
+
 export default Background;

@@ -1,21 +1,35 @@
 import { ComponentProps, useContext } from "react";
 import { ModalContext } from "./ModalContext";
 import styles from "./ModalContainer.module.css";
-
+import closeIcon from "../../../asset/close.png";
 interface ContainerProps extends ComponentProps<"div"> {
   children: React.ReactNode;
+  size?: "small" | "medium" | "large";
+  position?: "center" | "bottom";
 }
 
-function Container({ children, ...props }: ContainerProps) {
+function Container({ children, size = "medium", ...props }: ContainerProps) {
   const ctx = useContext(ModalContext);
   if (!ctx) return null;
+
+  const sizeClass = ctx.position === "bottom" ? styles.full : styles[size];
+
+  const combined = [styles.modalContents, sizeClass].join(" ");
+
   return (
     <div
       {...props}
       id="modal-container"
-      className={`${styles.modalContents} ${styles[`${ctx.position}Width`]}`}
+      className={combined}
       onClick={(e) => e.stopPropagation()}
     >
+      <img
+        id="modal-close-button"
+        className={styles.closeButton}
+        src={closeIcon}
+        alt="닫기"
+        onClick={ctx?.onClose}
+      />
       {children}
     </div>
   );
