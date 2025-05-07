@@ -1,5 +1,4 @@
 import { CVC_LENGTH, PASSWORD_LENGTH } from "../constants";
-
 import {
   CVC_ERROR_MESSAGES,
   CARD_NUMBER_ERROR_MESSAGES,
@@ -16,7 +15,7 @@ import {
 import { isValidLuhn } from "../utils/isValidLuhn";
 import { isValidLength } from "../utils/isValidLength";
 import { checkCardBrand } from "../utils/card-brand-checker";
-import { CardBrand } from "../constants/CardBrand";
+import type { CardBrand } from "../constants/CardBrand";
 import {
   CARD_NUMBER_LENGTH,
   CLIENT_CARD_NUMBER_LENGTH,
