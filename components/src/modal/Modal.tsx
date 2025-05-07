@@ -8,7 +8,7 @@ import {
 } from 'react';
 import PrimaryButton from './PrimaryButton';
 import SecondaryButton from './SecondaryButton';
-import { ModalProps } from './types';
+import { ModalProps, PositionType, SizeType } from './types';
 import { css } from '@emotion/react';
 import Input from './Input';
 
@@ -79,8 +79,8 @@ function Title({
 }
 
 const StyledModalContainer = styled.dialog<{
-  position: 'center' | 'bottom';
-  size: 'small' | 'medium' | 'large';
+  position: PositionType;
+  size: SizeType;
 }>`
   box-sizing: border-box;
   min-width: 400px;
@@ -136,7 +136,7 @@ const modalContainerSize = {
   `,
 };
 
-const ModalWrapper = styled.div<{ position: 'center' | 'bottom' }>`
+const ModalWrapper = styled.div<{ position: PositionType }>`
   padding: 24px 32px;
 
   display: flex;
