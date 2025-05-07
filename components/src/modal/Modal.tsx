@@ -122,7 +122,9 @@ const ModalWrapper = styled.div<{ isBottom: boolean }>`
 const StyledTitle = styled.h2`
   margin: 0;
   justify-self: flex-start;
+
   font-size: 24px;
+  font-weight: 700;
 `;
 
 const StyledCloseButton = styled.button`
