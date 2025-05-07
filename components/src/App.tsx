@@ -1,12 +1,36 @@
-import React from "react";
-import "./App.css";
-
+import Modal from "./lib/Modal";
+import { useState } from "react";
+import { css } from "@emotion/react";
 function App() {
+  const [show, setShow] = useState(true);
+
   return (
     <>
-      <h1>Component Modules</h1>
+      <div css={wrapper}>
+        <Modal show={show} onHide={() => setShow(false)}>
+          <Modal.BackDrop>
+            <Modal.Container>
+              <Modal.Header className="blue" style={{ color: "red" }} closeButton>
+                <Modal.Title>Title</Modal.Title>
+              </Modal.Header>
+              <Modal.Body className="blue" style={{ color: "red" }}>
+                Body
+              </Modal.Body>
+              <Modal.Footer>Footer</Modal.Footer>
+            </Modal.Container>
+          </Modal.BackDrop>
+        </Modal>
+      </div>
     </>
   );
 }
 
 export default App;
+
+const wrapper = css`
+  position: relative;
+  width: 500px;
+  height: 100vh;
+  background-color: red;
+  margin: auto;
+`;
