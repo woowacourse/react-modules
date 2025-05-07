@@ -1,7 +1,15 @@
 {
-  "name": "hooks",
-  "version": "0.0.1",
-  "description": "npm modules",
+  "name": "@seo_dev/react-card-hooks",
+  "version": "0.0.4",
+  "description": "신용카드 입력을 위한 React 커스텀 훅과 유효성 검사 함수 모음입니다. 카드 번호, CVC, 만료일, 비밀번호 입력을 안전하게 처리할 수 있습니다.",
+  "keywords": [
+    "react",
+    "form validation",
+    "credit card",
+    "custom hook",
+    "card input"
+  ],
+  "license": "MIT",
   "type": "module",
   "types": "dist/index.d.ts",
   "main": "dist/index.js",
@@ -14,13 +22,16 @@
     "build": "tsc && vite build",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
-    "test": "jest"
+    "test": "jest",
+    "build:pages": "vite build --config vite.config.pages.ts",
+    "deploy": "npm run build:pages && npx gh-pages -d dist-app"
   },
-  "dependencies": {
-    "react": "^19.1.0",
-    "react-dom": "^19.1.0"
+  "peerDependencies": {
+    "react": "^18.0.0 || ^19.0.0",
+    "react-dom": "^18.0.0 || ^19.0.0"
   },
   "devDependencies": {
+    "@seo_dev/react-card-hooks": "^0.0.4",
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.3.0",
     "@types/jest": "^29.5.14",
@@ -36,6 +47,8 @@
     "jest": "^29.7.0",
     "jest-environment-jsdom": "^29.7.0",
     "path": "^0.12.7",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
     "ts-jest": "^29.3.2",
     "typescript": "^5.8.3",
     "vite": "^6.2.6",
