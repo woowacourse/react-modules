@@ -3,10 +3,9 @@ import styled from "@emotion/styled";
 import { ModalColor } from "../constants/theme";
 
 export const Backdrop = styled.div<{
-  $isOpen: boolean;
   $position: "center" | "bottom";
 }>`
-  display: ${({ $isOpen }) => ($isOpen ? "flex" : "none")};
+  display: flex;
   position: fixed;
   width: 100%;
   height: 100%;

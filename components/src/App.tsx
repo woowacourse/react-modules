@@ -22,7 +22,7 @@ function App() {
           <p>
             모달 컴포넌트의 children으로 다양한 콘텐츠를 추가할 수 있습니다.
           </p>
-          <button onClick={closeModal}>닫기</button>
+          <button onClick={closeModal}>모달 닫기</button>
         </div>
       </Modal>
     </>

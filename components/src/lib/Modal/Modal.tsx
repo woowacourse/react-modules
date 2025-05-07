@@ -47,41 +47,42 @@ const Modal = ({
   };
 
   return createPortal(
-    <Backdrop
-      $isOpen={isOpen}
-      $position={position}
-      onClick={onClose}
-      role="presentation"
-    >
-      <ModalBox
-        $backgroundColor={currentTheme.background}
-        $position={position}
-        onClick={stopPropagation}
-        role="dialog"
-        aria-modal="true"
-        aria-labelledby={titleId}
-        aria-describedby={contentId}
-      >
-        <TopWrapper $titleText={title?.text}>
-          {title && (
-            <Title $color={currentTheme.title} $size={title.size} id={titleId}>
-              {title.text}
-            </Title>
-          )}
-          {showCloseButton && (
-            <CloseButton type="button" onClick={onClose} aria-label="close">
-              <IoClose
-                color={currentTheme.icon}
-                size={30}
-                aria-hidden="true"
-                focusable="false"
-              />
-            </CloseButton>
-          )}
-        </TopWrapper>
-        <div id={contentId}>{children}</div>
-      </ModalBox>
-    </Backdrop>,
+    isOpen && (
+      <Backdrop $position={position} onClick={onClose} role="presentation">
+        <ModalBox
+          $backgroundColor={currentTheme.background}
+          $position={position}
+          onClick={stopPropagation}
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby={titleId}
+          aria-describedby={contentId}
+        >
+          <TopWrapper $titleText={title?.text}>
+            {title && (
+              <Title
+                $color={currentTheme.title}
+                $size={title.size}
+                id={titleId}
+              >
+                {title.text}
+              </Title>
+            )}
+            {showCloseButton && (
+              <CloseButton type="button" onClick={onClose} aria-label="close">
+                <IoClose
+                  color={currentTheme.icon}
+                  size={30}
+                  aria-hidden="true"
+                  focusable="false"
+                />
+              </CloseButton>
+            )}
+          </TopWrapper>
+          <div id={contentId}>{children}</div>
+        </ModalBox>
+      </Backdrop>
+    ),
     document.body
   );
 };
