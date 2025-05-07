@@ -75,7 +75,7 @@ export const Default: Story = {
   render: (args) => <Wrapper {...args} />,
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    const openButton = await canvas.findByRole('button', { name: '열기' });
+    const openButton = canvas.getByRole('button', { name: '열기' });
     expect(openButton).toBeDefined();
     userEvent.click(openButton);
 
@@ -96,17 +96,17 @@ export const CenterWithAction: Story = {
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
 
-    const openButton = await canvas.findByRole('button', { name: '열기' });
+    const openButton = canvas.getByRole('button', { name: '열기' });
     expect(openButton).toBeDefined();
     userEvent.click(openButton);
 
     const modal = await canvas.findByTestId('modal');
     expect(modal).toBeDefined();
 
-    const closeButton = await canvas.findByRole('button', { name: '닫기' });
+    const closeButton = canvas.getByRole('button', { name: '닫기' });
     expect(closeButton).toBeDefined();
 
-    const confirmButton = await canvas.findByRole('button', { name: '동의하고 저장하기' });
+    const confirmButton = canvas.getByRole('button', { name: '동의하고 저장하기' });
     expect(confirmButton).toBeDefined();
 
     userEvent.click(confirmButton);
@@ -125,7 +125,7 @@ export const Bottom: Story = {
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
 
-    const openButton = await canvas.findByRole('button', { name: '열기' });
+    const openButton = canvas.getByRole('button', { name: '열기' });
     expect(openButton).toBeDefined();
     userEvent.click(openButton);
 
@@ -147,7 +147,7 @@ export const ESCClose: Story = {
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
 
-    const openButton = await canvas.findByRole('button', { name: '열기' });
+    const openButton = canvas.getByRole('button', { name: '열기' });
     expect(openButton).toBeDefined();
     userEvent.click(openButton);
 
@@ -169,7 +169,7 @@ export const BackdropClose: Story = {
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
 
-    const openButton = await canvas.findByRole('button', { name: '열기' });
+    const openButton = canvas.getByRole('button', { name: '열기' });
     expect(openButton).toBeDefined();
     userEvent.click(openButton);
 
