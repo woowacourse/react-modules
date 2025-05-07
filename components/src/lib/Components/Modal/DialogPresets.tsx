@@ -60,7 +60,11 @@ export const AlertDialog: React.FC<AlertDialogProps> = ({
               justifyContent: "flex-end",
             }}
           >
-            <button className={styles.button} onClick={handleConfirm}>
+            <button
+              className={styles.button}
+              onClick={handleConfirm}
+              id="confirm-button"
+            >
               확인
             </button>
           </div>
@@ -105,10 +109,15 @@ export const ConfirmDialog: React.FC<ConfirmDialogProps> = ({
             <button
               className={`${styles.button} ${styles.cancelButton}`}
               onClick={handleCancel}
+              id="cancel-button"
             >
               취소
             </button>
-            <button className={styles.button} onClick={handleConfirm}>
+            <button
+              className={styles.button}
+              onClick={handleConfirm}
+              id="confirm-button"
+            >
               확인
             </button>
           </div>
@@ -159,16 +168,22 @@ export const PromptDialog: React.FC<PromptDialogProps> = ({
               onChange={(e) => setValue(e.target.value)}
               placeholder={placeholder}
               className={styles.input}
+              id="modal-input"
             />
 
             <div className={styles.buttonContainer}>
               <button
                 className={`${styles.button} ${styles.cancelButton}`}
                 onClick={handleCancel}
+                id="cancel-button"
               >
                 취소
               </button>
-              <button className={styles.button} type="submit">
+              <button
+                className={styles.button}
+                type="submit"
+                id="confirm-button"
+              >
                 확인
               </button>
             </div>
