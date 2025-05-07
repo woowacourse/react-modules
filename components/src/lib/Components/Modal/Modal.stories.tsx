@@ -86,7 +86,12 @@ export const BottomModal: Story = {
           모달창 trigger
         </button>
 
-        <Modal {...args} isOpen={isOpen} onClose={() => setIsOpen(false)}>
+        <Modal
+          {...args}
+          isOpen={isOpen}
+          onClose={() => setIsOpen(false)}
+          dialogType="default"
+        >
           <Modal.Background>
             <Modal.Container>
               <Modal.Header>하단 모달 제목입니다</Modal.Header>
