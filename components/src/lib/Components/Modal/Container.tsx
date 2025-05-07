@@ -29,6 +29,7 @@ function Container({ children, size = "medium", ...props }: ContainerProps) {
         src={closeIcon}
         alt="닫기"
         onClick={ctx?.onClose}
+        hidden={ctx.dialogType !== "default"}
       />
       {children}
     </div>
