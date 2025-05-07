@@ -1,4 +1,4 @@
-import { Modal } from "happyjurung-modal";
+import AlertModal from "./lib/AlertModal";
 import "./styles/reset.css";
 import "./App.css";
 import { useState } from "react";
@@ -9,14 +9,12 @@ function App() {
   return (
     <>
       <button onClick={() => setIsModalOpen(true)}>Modal Open</button>
-      <Modal
+      <AlertModal
         isModalOpen={isModalOpen}
-        position="center"
-        title="카드사 선택"
+        title="아이디를 입력해 주세요."
+        description="아이디는 필수로 입력해야 합니다."
         onClose={() => setIsModalOpen(false)}
-      >
-        이것은 모달 내용입니다.
-      </Modal>
+      />
     </>
   );
 }
