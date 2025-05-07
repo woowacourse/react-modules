@@ -1,7 +1,8 @@
-import { MouseEvent, ReactNode, useEffect } from "react";
+import { MouseEvent, ReactNode } from "react";
 import { createPortal } from "react-dom";
 import { IoClose } from "react-icons/io5";
 import { THEME_MAP, ThemeMode } from "../constants/theme";
+import useEscapeKey from "../hooks/useEscapeKey";
 import {
   Backdrop,
   CloseButton,
@@ -34,20 +35,12 @@ const Modal = ({
   isOpen,
   onClose,
 }: ModalProps) => {
+  useEscapeKey(onClose);
   const currentTheme = THEME_MAP[theme];
 
   const stopPropagation = (e: MouseEvent<HTMLDivElement>) => {
     e.stopPropagation();
   };
-
-  useEffect(() => {
-    const handleEscape = (e: KeyboardEvent) => {
-      if (e.key === "Escape") onClose();
-    };
-
-    document.addEventListener("keydown", handleEscape);
-    return () => document.removeEventListener("keydown", handleEscape);
-  }, [onClose]);
 
   return createPortal(
     <Backdrop $isOpen={isOpen} $position={position} onClick={onClose}>
