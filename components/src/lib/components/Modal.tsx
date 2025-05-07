@@ -1,6 +1,6 @@
 import { css } from '@emotion/css';
 import { Children, MouseEvent, useEffect } from 'react';
-import { ModalProps, Position } from './Modal.type';
+import { ModalProps, Position } from '../types/Modal.type';
 
 const Modal = ({ children, position, isOpen, onAfterOpen, onClose, title, showCloseButton = true }: ModalProps) => {
   const [content, actions] = Children.toArray(children);
