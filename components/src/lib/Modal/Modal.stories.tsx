@@ -15,6 +15,10 @@ const meta: Meta<typeof Modal> = {
 			control: "text",
 			description: "모달 위치 (center, bottom)",
 		},
+		size: {
+			control: "select",
+			description: "모달 사이즈 (small, medium, large)",
+		},
 	},
 };
 
@@ -24,6 +28,7 @@ type Story = StoryObj<typeof Modal>;
 export const CardCompanyModal: Story = {
 	args: {
 		position: "center",
+		size: "small",
 	},
 	render: (args) => {
 		const [isOpen, setIsOpen] = useState(false);
@@ -33,7 +38,7 @@ export const CardCompanyModal: Story = {
 				<ButtonWrap>
 					<Button onclick={() => setIsOpen(true)} />
 				</ButtonWrap>
-				<Modal isOpen={isOpen} onClose={() => setIsOpen(false)} position={args.position}>
+				<Modal isOpen={isOpen} onClose={() => setIsOpen(false)} position={args.position} size={args.size}>
 					<Modal.Header showCloseButton>카드사 선택</Modal.Header>
 					<Modal.Body>
 						<CardCompany />
@@ -47,6 +52,7 @@ export const CardCompanyModal: Story = {
 export const AgreeModal: Story = {
 	args: {
 		position: "bottom",
+		size: "medium",
 	},
 	render: (args) => {
 		const [isOpen, setIsOpen] = useState(false);
@@ -56,7 +62,7 @@ export const AgreeModal: Story = {
 				<ButtonWrap>
 					<Button onclick={() => setIsOpen(true)} />
 				</ButtonWrap>
-				<Modal isOpen={isOpen} onClose={() => setIsOpen(false)} position={args.position}>
+				<Modal isOpen={isOpen} onClose={() => setIsOpen(false)} position={args.position} size={args.size}>
 					<Modal.Header showCloseButton>약관 동의</Modal.Header>
 					<Modal.Body>
 						<AgreeTermModal />

@@ -12,15 +12,24 @@ export interface ModalRootProps {
 	onClose: () => void;
 	position?: "center" | "bottom";
 	children?: ReactNode;
+	size?: "small" | "medium" | "large";
 }
 
-const ModalRoot = ({ isOpen, onClose, position = "center", children }: ModalRootProps) => {
+const WIDTH_MAP = {
+	small: "320px",
+	medium: "480px",
+	large: "600px",
+};
+
+const ModalRoot = ({ isOpen, onClose, position = "center", children, size = "medium" }: ModalRootProps) => {
 	if (!isOpen) return null;
 
 	return (
 		<ModalContext.Provider value={{ onClose }}>
 			<Overlay onClick={onClose}>
-				<Container position={position}>{children}</Container>
+				<Container position={position} size={size}>
+					{children}
+				</Container>
 			</Overlay>
 		</ModalContext.Provider>
 	);
@@ -100,14 +109,14 @@ const Overlay = styled.div`
 	align-items: center;
 `;
 
-const Container = styled.div<{ position: "center" | "bottom" }>`
+const Container = styled.div<{ position: "center" | "bottom"; size: "small" | "medium" | "large" }>`
 	box-sizing: border-box;
 	display: flex;
 	flex-direction: column;
 	background: #fff;
 	padding: 24px 32px;
 	border-radius: 8px;
-	width: ${(props) => (props.position === "bottom" ? "100%" : "60%")};
+	width: ${(props) => WIDTH_MAP[props.size]};
 	position: ${(props) => (props.position === "bottom" ? "fixed" : "relative")};
 	bottom: ${(props) => (props.position === "bottom" ? "0" : "auto")};
 `;
