@@ -1,25 +1,42 @@
 {
-  "name": "compoents",
-  "version": "0.0.1",
-  "description": "npm modules",
+  "name": "happyjurung-modal",
+  "version": "0.0.8",
+  "description": "React 애플리케이션에서 모달 창을 쉽고 일관되게 구현할 수 있도록 돕는 라이브러리",
+  "keywords": [
+    "react",
+    "modal",
+    "ui",
+    "component"
+  ],
+  "author": "AHHYUNJU <wndkgus0225@naver.com>",
   "type": "module",
-  "types": "dist/index.d.ts",
-  "main": "dist/index.js",
+  "main": "dist/index.cjs",
   "module": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "style": "dist/index.css",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs",
+      "types": "./dist/index.d.ts"
+    }
+  },
   "files": [
     "dist"
   ],
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build",
+    "clean": "rm -rf dist",
+    "build": "npm run clean && vite build",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "chromatic": "npx chromatic --project-token=chpt_2e72a208f146985"
   },
-  "dependencies": {
-    "react": "^19.1.0",
-    "react-dom": "^19.1.0"
+  "peerDependencies": {
+    "react": ">=16.8.0 <20.0.0",
+    "react-dom": ">=16.8.0 <20.0.0"
   },
   "devDependencies": {
     "@chromatic-com/storybook": "^3.2.6",
@@ -38,6 +55,7 @@
     "@typescript-eslint/eslint-plugin": "^8.29.1",
     "@typescript-eslint/parser": "^8.29.1",
     "@vitejs/plugin-react-swc": "^3.8.1",
+    "chromatic": "^11.28.2",
     "eslint": "^9.24.0",
     "eslint-plugin-react-hooks": "^5.2.0",
     "eslint-plugin-react-refresh": "^0.4.19",
@@ -46,6 +64,11 @@
     "storybook": "^8.6.12",
     "typescript": "^5.8.3",
     "vite": "^6.2.6",
+    "vite-plugin-css-injected-by-js": "^3.5.2",
     "vite-plugin-dts": "^4.5.3"
+  },
+  "dependencies": {
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.0"
   }
 }

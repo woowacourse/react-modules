@@ -1,0 +1,64 @@
+import { useState } from "react";
+import { ValidationResult } from "./type";
+import { ErrorType } from "../../types/errorType";
+
+const CARD_NUMBER_RULE = {
+  INVALID_LENGTH_ERROR: "카드 번호는 4자리로 입력해 주세요.",
+  NOT_A_NUMBER: "카드 번호는 숫자로 입력해 주세요.",
+  MAX_LENGTH: 4,
+} as const;
+
+const initialDate = {
+  isValid: false,
+  errorMessage: "",
+};
+
+export default function useCardNumbers(): ValidationResult {
+  const [numbers, setNumbers] = useState(["", "", "", ""]);
+  const [error, setError] = useState<ErrorType[]>(
+    Array.from({ length: 4 }, () => initialDate)
+  );
+
+  const updateCardNumber = (
+    index: number,
+    isValid: boolean,
+    message: string
+  ) => {
+    setError((prev) => {
+      const newError = [...prev];
+      newError[index] = {
+        isValid: isValid,
+        errorMessage: message,
+      };
+
+      return newError;
+    });
+  };
+
+  const handleCardNumberChange = (value: string, index: number) => {
+    if (value.length > CARD_NUMBER_RULE.MAX_LENGTH) return;
+
+    setNumbers((prev) => {
+      const newNumbers = [...prev];
+      newNumbers[index] = value;
+      return newNumbers;
+    });
+
+    if (value === "") {
+      updateCardNumber(index, false, "");
+      return;
+    }
+
+    if (!/^\d*$/.test(value)) {
+      updateCardNumber(index, true, CARD_NUMBER_RULE.NOT_A_NUMBER);
+      return;
+    }
+    if (value.length < CARD_NUMBER_RULE.MAX_LENGTH) {
+      updateCardNumber(index, true, CARD_NUMBER_RULE.INVALID_LENGTH_ERROR);
+      return;
+    }
+    updateCardNumber(index, false, "");
+  };
+
+  return { numbers, error, handleCardNumberChange };
+}
