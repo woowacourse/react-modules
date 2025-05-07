@@ -38,15 +38,8 @@ const Modal = ({ children, isOpen, onAfterOpen, onClose, position = 'center' }: 
 
   return (
     <ModalContext.Provider value={{ onClose, position }}>
-      <div
-        className={ModalBackdrop}
-        onClick={handleBackdropClick}
-        role="dialog"
-        aria-modal="true"
-        aria-labelledby="modal-title"
-        data-testid="modal-backdrop"
-      >
-        <div className={ModalFrame(position)} data-testid="modal">
+      <div className={ModalBackdrop} onClick={handleBackdropClick} aria-label="modal-backdrop">
+        <div className={ModalFrame(position)} role="dialog" aria-modal="true" aria-labelledby="modal-title">
           {children}
         </div>
       </div>

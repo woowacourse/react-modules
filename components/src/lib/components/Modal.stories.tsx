@@ -176,7 +176,7 @@ export const BackdropClose: Story = {
     const modal = await canvas.findByRole('dialog', { name: '모달 제목' });
     expect(modal).toBeDefined();
 
-    const backdrop = await canvas.findByTestId('modal-backdrop');
+    const backdrop = await canvas.findByLabelText('modal-backdrop');
     expect(backdrop).toBeDefined();
 
     userEvent.click(backdrop);
