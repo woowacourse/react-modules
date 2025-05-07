@@ -13,9 +13,12 @@ function App() {
       <button type="button" onClick={openModal}>
         모달 열기
       </button>
-      <Modal isOpen={isOpen} onClose={closeModal}>
+      <Modal
+        isOpen={isOpen}
+        onClose={closeModal}
+        title={{ text: "Modal Title" }}
+      >
         <div style={{ padding: "20px" }}>
-          <h3>모달 내용</h3>
           <p>
             모달 컴포넌트의 children으로 다양한 콘텐츠를 추가할 수 있습니다.
           </p>
