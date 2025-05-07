@@ -45,9 +45,19 @@ function getSize(size: "small" | "medium" | "large") {
   }
 }
 
-export const ModalButtonContainer = styled.div`
+type ModalButtonContainerProps = {
+  $position: "left" | "right" | "center";
+};
+
+export const ModalButtonContainer = styled.div<ModalButtonContainerProps>`
   display: flex;
-  justify-content: center;
+  flex-direction: row;
   margin-top: 20px;
   width: 100%;
+  justify-content: ${({ $position }) =>
+    $position === "left"
+      ? "flex-start"
+      : $position === "right"
+      ? "flex-end"
+      : "center"};
 `;

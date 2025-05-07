@@ -6,6 +6,7 @@ type ButtonProps = {
   size?: "small" | "medium" | "large";
   onClick?: () => void;
   styled?: React.CSSProperties;
+  position?: "left" | "right" | "center";
 };
 
 export const Button = ({
@@ -14,9 +15,10 @@ export const Button = ({
   size = "medium",
   onClick,
   styled,
+  position = "center",
 }: ButtonProps) => {
   return (
-    <ModalButtonContainer>
+    <ModalButtonContainer $position={position}>
       <ModalButton
         $variant={variant}
         $size={size}
