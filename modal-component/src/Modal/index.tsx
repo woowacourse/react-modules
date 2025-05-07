@@ -17,6 +17,7 @@ type ModalProps = {
   onClose: () => void;
   children: React.ReactNode;
   position?: 'center' | 'bottom';
+  size?: 'small' | 'medium' | 'large';
 };
 
 export const ModalContext = createContext<ModalProps | null>(null);
@@ -26,6 +27,7 @@ const Modal = ({
   onClose,
   children,
   position = 'center',
+  size = 'small',
 }: ModalProps) => {
   const value: ModalProps = {
     isOpen,
@@ -56,6 +58,7 @@ const Modal = ({
             <BackDrop onClick={onClose} $position={position}>
               <ModalLayout
                 $position={position}
+                $size={size}
                 onClick={(event) => event.stopPropagation()}
               >
                 {children}
