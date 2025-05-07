@@ -41,12 +41,12 @@ function ModalContainer({
     <StyledModalContainer
       onClick={handleClickOutside}
       onClose={onClose}
-      isBottom={position === 'bottom'}
+      position={position}
       size={size}
       style={style}
       ref={modalRef}
     >
-      <ModalWrapper isBottom={position === 'bottom'}>{children}</ModalWrapper>
+      <ModalWrapper position={position}>{children}</ModalWrapper>
     </StyledModalContainer>
   );
 }
@@ -79,7 +79,7 @@ function Title({
 }
 
 const StyledModalContainer = styled.dialog<{
-  isBottom: boolean;
+  position: 'center' | 'bottom';
   size: 'small' | 'medium' | 'large';
 }>`
   box-sizing: border-box;
@@ -95,9 +95,8 @@ const StyledModalContainer = styled.dialog<{
     opacity: 0.35;
   }
 
-  ${({ isBottom }) => (isBottom ? bottomModalContainer : defaultModalContainer)}
-
-  ${({ isBottom, size }) => !isBottom && sizeStyles[size]}
+  ${({ position }) => positionStyles[position]}
+  ${({ position, size }) => position !== 'bottom' && modalContainerSize[size]}
 `;
 
 const defaultModalContainer = css`
@@ -118,31 +117,43 @@ const bottomModalContainer = css`
   }
 `;
 
-const smallModalContainer = css`
-  width: 320px;
-`;
-
-const mediumModalContainer = css`
-  width: 480px;
-`;
-
-const largeModalContainer = css`
-  width: 600px;
-`;
-
-const sizeStyles = {
-  small: smallModalContainer,
-  medium: mediumModalContainer,
-  large: largeModalContainer,
+const positionStyles = {
+  center: defaultModalContainer,
+  bottom: bottomModalContainer,
 };
 
-const ModalWrapper = styled.div<{ isBottom: boolean }>`
+const modalContainerSize = {
+  small: css`
+    width: 320px;
+  `,
+
+  medium: css`
+    width: 480px;
+  `,
+
+  large: css`
+    width: 600px;
+  `,
+};
+
+const ModalWrapper = styled.div<{ position: 'center' | 'bottom' }>`
   padding: 24px 32px;
 
   display: flex;
   flex-direction: column;
-  gap: ${(props) => (props.isBottom ? '16px' : '24px')};
+
+  ${({ position }) => modalWrapperGap[position]}
 `;
+
+const modalWrapperGap = {
+  center: css`
+    gap: 16px;
+  `,
+
+  bottom: css`
+    gap: 24px;
+  `,
+};
 
 const StyledTitle = styled.h2`
   margin: 0;
