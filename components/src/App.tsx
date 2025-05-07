@@ -1,22 +1,79 @@
 import { useState } from "react";
-
-//import { Modal } from "bunju-react-modal";
-import { Modal } from "./lib";
+import Modal, { ModalType } from "./lib/Modal";
 
 function App() {
   const [isOpen, setIsOpen] = useState(false);
+  const [modalType, setModalType] = useState<ModalType>("alert");
+  const [inputValue, setInputValue] = useState("");
+
   const handleClose = () => setIsOpen(false);
+  const handleConfirm = () => {
+    console.log("확인 버튼 클릭", inputValue);
+    handleClose();
+  };
 
   return (
     <>
-      <button onClick={() => setIsOpen(true)}>모달 열기</button>
+      <div style={{ display: "flex", gap: "10px", marginBottom: "20px" }}>
+        <button
+          onClick={() => {
+            setModalType("alert");
+            setIsOpen(true);
+          }}
+        >
+          Alert 모달 열기
+        </button>
+        <button
+          onClick={() => {
+            setModalType("confirm");
+            setIsOpen(true);
+          }}
+        >
+          Confirm 모달 열기
+        </button>
+        <button
+          onClick={() => {
+            setModalType("prompt");
+            setIsOpen(true);
+          }}
+        >
+          Prompt 모달 열기
+        </button>
+      </div>
+
       {isOpen && (
-        <Modal onClose={handleClose} position="center">
+        <Modal onClose={handleClose} modalType={modalType} modalSize="small">
           <Modal.Header>
-            <Modal.Title>카드사 선택</Modal.Title>
+            <Modal.Title>
+              {modalType === "alert"
+                ? "아이디를 입력해주세요"
+                : modalType === "confirm"
+                  ? "확인 메시지"
+                  : "입력해주세요"}
+            </Modal.Title>
             <Modal.CloseButton onClick={handleClose} />
           </Modal.Header>
-          <Modal.Content></Modal.Content>
+
+          <Modal.Content>
+            {modalType === "alert" && <p>아이디는 필수로 입력해야합니다.</p>}
+            {modalType === "confirm" && <p>이 작업을 진행하시겠습니까?</p>}
+            {modalType === "prompt" && (
+              <Modal.Input
+                value={inputValue}
+                onChange={(e) => setInputValue(e.target.value)}
+                placeholder="아이디를 입력하세요"
+              />
+            )}
+          </Modal.Content>
+
+          <Modal.Footer>
+            {(modalType === "confirm" || modalType === "prompt") && (
+              <Modal.Button onClick={handleClose}>취소</Modal.Button>
+            )}
+            <Modal.Button primary onClick={handleConfirm}>
+              확인
+            </Modal.Button>
+          </Modal.Footer>
         </Modal>
       )}
     </>
