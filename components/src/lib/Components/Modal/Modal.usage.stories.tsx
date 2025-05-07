@@ -65,11 +65,6 @@ export const AlertModal: AlertStory = {
     args.onConfirm = confirmSpy;
     args.onClose = closeSpy;
 
-    await userEvent.click(
-      canvas.getByRole("button", { name: /모달창 trigger/ })
-    );
-
-    // 확인 버튼이 있는지 확인
     const confirmButton = document.getElementById("confirm-button");
     if (confirmButton) {
       await userEvent.click(confirmButton);
@@ -132,11 +127,6 @@ export const ConfirmModal: ConfirmStory = {
     args.onConfirm = confirmSpy;
     args.onCancel = cancelSpy;
 
-    // 모달 열기
-    await userEvent.click(
-      canvas.getByRole("button", { name: /모달창 trigger/ })
-    );
-
     // 확인 버튼 클릭
     await userEvent.click(document.getElementById("confirm-button")!);
     await expect(confirmSpy).toHaveBeenCalled();
@@ -196,11 +186,6 @@ export const PromptModal: PromptStory = {
     const cancelSpy = jest.fn();
     args.onConfirm = confirmSpy;
     args.onCancel = cancelSpy;
-
-    // 모달 열기
-    await userEvent.click(
-      canvas.getByRole("button", { name: /모달창 trigger/ })
-    );
 
     // 입력 및 확인
     const input = document.getElementById("modal-input")!;
