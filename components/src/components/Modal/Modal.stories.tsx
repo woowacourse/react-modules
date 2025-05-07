@@ -107,7 +107,7 @@ export const Size: Story = {
   },
 };
 
-export const ConfirmButton: Story = {
+export const AlertModal: Story = {
   render: () => {
     const [isOpened, setIsOpened] = useState(true);
     const openModal = () => {
@@ -122,21 +122,21 @@ export const ConfirmButton: Story = {
         <Button size="medium" text="열기" onclick={openModal} />
         <Modal
           onClose={closeModal}
-          title="모달을 닫으려면"
+          title="아이디를 입력해 주세요."
           isOpen={isOpened}
           position={"center"}
           confirmButton={true}
           onConfirm={closeModal}
-          size={"small"}
+          size={"medium"}
         >
-          확인 버튼을 누르세요!
+          아이디는 필수로 입력해야 합니다.
         </Modal>
       </>
     );
   },
 };
 
-export const ConfirmCancelButton: Story = {
+export const ConfirmModal: Story = {
   render: () => {
     const [isOpened, setIsOpened] = useState(true);
     const openModal = () => {
@@ -151,16 +151,50 @@ export const ConfirmCancelButton: Story = {
         <Button size="medium" text="열기" onclick={openModal} />
         <Modal
           onClose={closeModal}
-          title="모달을 닫으려면"
+          title="카드를 삭제하시겠습니까?"
           isOpen={isOpened}
           position={"center"}
           confirmButton={true}
           cancelButton={true}
           onConfirm={() => {}}
-          size={"small"}
+          size={"medium"}
         >
-          취소 버튼을 누르세요!
+          삭제하면 복구하실 수 없습니다.
         </Modal>
+      </>
+    );
+  },
+};
+
+export const PromptModal: Story = {
+  render: () => {
+    const [isOpened, setIsOpened] = useState(true);
+    const [inputValue, setInputValue] = useState("");
+    const openModal = () => {
+      setIsOpened(true);
+    };
+    const closeModal = () => {
+      setIsOpened(false);
+    };
+    const handleSetInputValue = (v: string) => {
+      setInputValue(v);
+    };
+
+    return (
+      <>
+        <Button size="small" text="열기" onclick={openModal} />
+        <Modal
+          title="쿠폰 번호를 입력해 주세요."
+          onClose={closeModal}
+          isOpen={isOpened}
+          size="medium"
+          confirmButton={true}
+          cancelButton={true}
+          onConfirm={() => {}}
+          input={true}
+          inputValue={inputValue}
+          onInputChange={(e) => handleSetInputValue(e.target.value)}
+        />
       </>
     );
   },

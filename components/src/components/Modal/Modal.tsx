@@ -5,6 +5,7 @@ import { CloseIcon } from "../common";
 import { PropsWithChildren } from "react";
 import { css } from "@emotion/react";
 import Button from "../Button/Button";
+import Input from "../Input/Input";
 
 const ModalContainer = styled.div<{
   position: "center" | "bottom";
@@ -81,6 +82,9 @@ interface ModalInterface {
   onClose: () => void;
   isOpen: boolean;
   size: "small" | "medium" | "large";
+  input?: boolean;
+  inputValue?: string;
+  onInputChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 export default function Modal({
@@ -94,8 +98,12 @@ export default function Modal({
   children,
   isOpen,
   size,
+  input,
+  inputValue,
+  onInputChange,
 }: PropsWithChildren<ModalInterface>) {
   if (!isOpen) return;
+
   return (
     <>
       <ModalContainer position={position} size={size}>
@@ -104,16 +112,19 @@ export default function Modal({
           {closeButton && <CloseIcon onClick={onClose} css={closeIconStyle} />}
         </ModalTop>
         {children}
+        {input && (
+          <Input height={"32px"} value={inputValue} onChange={onInputChange} />
+        )}
         <ModalBottom>
+          {cancelButton && (
+            <Button type="cancel" size={size} onclick={onClose} />
+          )}
           {confirmButton && (
             <Button
               type="confirm"
               size={size}
               onclick={onConfirm ? onConfirm : onClose}
             />
-          )}
-          {cancelButton && (
-            <Button type="cancel" size={size} onclick={onClose} />
           )}
         </ModalBottom>
       </ModalContainer>
