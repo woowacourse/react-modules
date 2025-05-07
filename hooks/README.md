@@ -246,13 +246,6 @@ export default App;
 
 ### cvcValidationResult (Object)
 
-```
-  {
-    isError: string
-    errorMessage: string
-  }
-```
-
 | Name         | Datatype | Description |
 | ------------ | -------- | ----------- |
 | isError      | boolean  | 에러 여부   |
@@ -264,23 +257,15 @@ export default App;
 | -------- | ------------------------- | ------------- |
 | onChange | ( value : string) => void | onChange 함수 |
 
-## 📌 How to use: usePasswordValidation
+## 📌 How to use: usePassword
 
 ### 📍 Example
 
 ```tsx
-import {useState} from 'react';
-import './App.css';
-import {usePasswordValidation} from '@muffin2219/hooks';
+import {usePassword} from '@muffin2219/usePassword';
 
 function App() {
-  const [password, setPassword] = useState('');
-  const passwordValidationResult = usePasswordValidation(password);
-
-  const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const inputValue = e.target.value;
-    setPassword(inputValue);
-  };
+  const {onChange, password, passwordValidationResult} = usePassword();
 
   return (
     <>
@@ -289,7 +274,7 @@ function App() {
         value={password}
         type="text"
         maxLength={2}
-        onChange={handlePasswordChange}
+        onChange={(e) => onChange(e.target.value)}
       />
       {passwordValidationResult.isError && (
         <span>{passwordValidationResult.errorMessage}</span>
@@ -306,18 +291,26 @@ export default App;
 1. 비밀번호는 숫자여야한다.
 2. 비밀번호는 2자리여야한다.
 
-### 🔧 Props
+### ⛏️ Return Value (Object)
+
+### password
 
 | Name     | Datatype | Description            |
 | -------- | -------- | ---------------------- |
 | password | string   | 카드 비밀번호 앞 2자리 |
 
-### ⛏️ Return Value (Object)
+### passwordValidationResult (Object)
 
 | Name         | Datatype | Description |
 | ------------ | -------- | ----------- |
 | isError      | boolean  | 에러 여부   |
 | errorMessage | string   | 에러 메시지 |
+
+### onChange
+
+| Name     | Datatype                  | Description   |
+| -------- | ------------------------- | ------------- |
+| onChange | ( value : string) => void | onChange 함수 |
 
 ## 👥 Author
 
