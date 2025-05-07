@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { CardCompany } from './types/card';
+import { CardCompany } from '../types/card';
 
 export function useCardCompanySelect() {
   const [cardCompany, setCardCompany] = useState<CardCompany | ''>('');

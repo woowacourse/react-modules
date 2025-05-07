@@ -1,5 +1,5 @@
 import { renderHook, act } from '@testing-library/react';
-import { useCardCompanySelect } from '../src/lib/useCardCompanySelect';
+import { useCardCompanySelect } from '../src/lib/hooks/useCardCompanySelect';
 import { CardCompany } from '../src/lib/types/card';
 
 describe('useCardCompanySelect custom hook 테스트', () => {
