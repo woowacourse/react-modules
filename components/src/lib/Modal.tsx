@@ -32,14 +32,8 @@ function Modal({ width = '304px', height = '216px', position, title, onClose, ch
     };
   }, [onClose]);
 
-  const handleClickOverlay = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (e.target === e.currentTarget) {
-      onClose();
-    }
-  };
-
   return (
-    <Layout onClick={handleClickOverlay}>
+    <Layout>
       <Overlay onClick={onClose} />
       <ModalContainer width={customWidth} height={height} position={position}>
         <TitleContainer>
