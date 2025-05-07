@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { validateCardNumber } from '../validation/validateCardNumber';
+import { matchCardBrand } from '../utils/matchCardBrand';
 
 interface CardNumberInput {
   input1: string;
@@ -33,7 +34,9 @@ const useCardNumber = () => {
     setErrorMessage(message);
   };
 
-  return { cardNumber, setCardNumber, handleCardNumber, isValid, errorMessage };
+  const cardBrand = matchCardBrand(cardNumber.input1);
+
+  return { cardNumber, setCardNumber, handleCardNumber, isValid, errorMessage, cardBrand };
 };
 
 export default useCardNumber;
