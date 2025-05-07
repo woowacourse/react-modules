@@ -79,10 +79,10 @@ export const Default: Story = {
     expect(openButton).toBeDefined();
     userEvent.click(openButton);
 
-    const title = await canvas.findByText('모달 제목');
-    expect(title).toBeDefined();
+    const modal = canvas.getByRole('dialog', { name: '모달 제목' });
+    expect(modal).toBeDefined();
 
-    const content = await canvas.findAllByText('모달 내용입니다.');
+    const content = canvas.getAllByText('모달 내용입니다.');
     expect(content).toBeDefined();
   },
 };
@@ -100,7 +100,7 @@ export const CenterWithAction: Story = {
     expect(openButton).toBeDefined();
     userEvent.click(openButton);
 
-    const modal = await canvas.findByRole('dialog', { name: '모달 제목' });
+    const modal = canvas.getByRole('dialog', { name: '모달 제목' });
     expect(modal).toBeDefined();
 
     const closeButton = canvas.getByRole('button', { name: '닫기' });
@@ -129,7 +129,7 @@ export const Bottom: Story = {
     expect(openButton).toBeDefined();
     userEvent.click(openButton);
 
-    const modal = await canvas.findByRole('dialog', { name: '모달 제목' });
+    const modal = canvas.getByRole('dialog', { name: '모달 제목' });
     expect(modal).toBeDefined();
 
     expect(modal).toHaveStyle({
@@ -151,7 +151,7 @@ export const ESCClose: Story = {
     expect(openButton).toBeDefined();
     userEvent.click(openButton);
 
-    const modal = await canvas.findByRole('dialog', { name: '모달 제목' });
+    const modal = canvas.getByRole('dialog', { name: '모달 제목' });
     expect(modal).toBeDefined();
 
     await userEvent.keyboard('{Escape}');
@@ -173,10 +173,10 @@ export const BackdropClose: Story = {
     expect(openButton).toBeDefined();
     userEvent.click(openButton);
 
-    const modal = await canvas.findByRole('dialog', { name: '모달 제목' });
+    const modal = canvas.getByRole('dialog', { name: '모달 제목' });
     expect(modal).toBeDefined();
 
-    const backdrop = await canvas.findByLabelText('modal-backdrop');
+    const backdrop = canvas.getByLabelText('modal-backdrop');
     expect(backdrop).toBeDefined();
 
     userEvent.click(backdrop);
