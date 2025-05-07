@@ -7,7 +7,7 @@ describe("useCardNumber", () => {
       first: "",
       second: "",
       third: "",
-      forth: "",
+      fourth: "",
     };
     const { result } = renderHook(() => useCardNumber());
 
@@ -19,7 +19,7 @@ describe("useCardNumber", () => {
       first: "1234",
       second: "",
       third: "",
-      forth: "",
+      fourth: "",
     };
     const userInput = "1234";
     const index = 0; // input 위치
@@ -34,7 +34,7 @@ describe("useCardNumber", () => {
   });
 
   it("useCardNumber 초기 에러 상태가 반환된다.", () => {
-    const initialErrors = { first: false, second: false, third: false, forth: false };
+    const initialErrors = { first: false, second: false, third: false, fourth: false };
     const { result } = renderHook(() => useCardNumber());
 
     expect(result.current.errors).toEqual(initialErrors);

@@ -32,7 +32,7 @@ import { useCardNumber, useExpirationDate, useCvcNumber, usePassword } from "hoy
 
 ```tsx
 const {
-  state, // { first: "", second: "", third: "", forth: "" }
+  state, // { first: "", second: "", third: "", fourth: "" }
   onChange,
   errors,
   errorMessage,
@@ -69,16 +69,16 @@ const handleChange = (value: string, index: number) => {
 
 ### 🔍 리턴 타입 설명 표
 
-| 필드명             | 타입                                      | 설명                                                               |
-| ------------------ | ----------------------------------------- | ------------------------------------------------------------------ |
-| `state`            | `string` 또는 `Record<string, string>`    | 현재 입력 상태. (예: 카드번호는 `{ first, second, third, forth }`) |
-| `onChange`         | `(value: string, index?: number) => void` | 입력값 변경 핸들러                                                 |
-| `validateInput`    | `(value: string, index?: number) => void` | 입력값에 대한 유효성 검사 함수                                     |
-| `errors`           | `boolean` 또는 `boolean[]`                | 유효하지 않은 입력 여부                                            |
-| `errorMessage`     | `string`                                  | 현재 에러에 대한 메시지                                            |
-| `isLengthComplete` | `boolean`                                 | 모든 필드가 최대 길이까지 입력되었는지 여부                        |
-| `isErrorComplete`  | `boolean`                                 | 모든 필드가 에러 없이 통과되었는지 여부                            |
-| `isValid`          | `boolean`                                 | 전체 유효성 통과 여부 (`isLengthComplete` && `isErrorComplete`)    |
+| 필드명             | 타입                                      | 설명                                                                |
+| ------------------ | ----------------------------------------- | ------------------------------------------------------------------- |
+| `state`            | `string` 또는 `Record<string, string>`    | 현재 입력 상태. (예: 카드번호는 `{ first, second, third, fourth }`) |
+| `onChange`         | `(value: string, index?: number) => void` | 입력값 변경 핸들러                                                  |
+| `validateInput`    | `(value: string, index?: number) => void` | 입력값에 대한 유효성 검사 함수                                      |
+| `errors`           | `boolean` 또는 `boolean[]`                | 유효하지 않은 입력 여부                                             |
+| `errorMessage`     | `string`                                  | 현재 에러에 대한 메시지                                             |
+| `isLengthComplete` | `boolean`                                 | 모든 필드가 최대 길이까지 입력되었는지 여부                         |
+| `isErrorComplete`  | `boolean`                                 | 모든 필드가 에러 없이 통과되었는지 여부                             |
+| `isValid`          | `boolean`                                 | 전체 유효성 통과 여부 (`isLengthComplete` && `isErrorComplete`)     |
 
 ### 💡 팁
 
@@ -122,10 +122,10 @@ const { state, onChange, isLengthComplete } = useInputValue({
     first: "",
     second: "",
     third: "",
-    forth: "",
+    fourth: "",
   },
   maxLength: 4,
-  keyIndexMap: ["first", "second", "third", "forth"],
+  keyIndexMap: ["first", "second", "third", "fourth"],
 });
 ```
 
@@ -157,7 +157,7 @@ const { errors, errorMessage, clearError, changeError, isErrorComplete } = useEr
     first: false,
     second: false,
     third: false,
-    forth: false,
+    fourth: false,
   },
 });
 ```

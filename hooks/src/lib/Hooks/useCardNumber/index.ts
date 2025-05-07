@@ -4,7 +4,7 @@ import useInputValue from "../common/useInputValue";
 import { MAX_LENGTH } from "../../constants";
 import useErrors from "../common/useErrors";
 
-const KEY_INDEX_MATCH = ["first", "second", "third", "forth"];
+const KEY_INDEX_MATCH = ["first", "second", "third", "fourth"];
 
 const useCardNumber = (): HookReturnType<"cardNumber"> => {
   const { state, onChange, isLengthComplete } = useInputValue<CardNumberType>({
@@ -12,14 +12,14 @@ const useCardNumber = (): HookReturnType<"cardNumber"> => {
       first: "",
       second: "",
       third: "",
-      forth: "",
+      fourth: "",
     },
     maxLength: MAX_LENGTH.CARD_NUMBER,
     keyIndexMap: KEY_INDEX_MATCH,
   });
 
   const { errors, errorMessage, clearError, changeError, isErrorComplete } = useErrors({
-    initialErrorState: { first: false, second: false, third: false, forth: false },
+    initialErrorState: { first: false, second: false, third: false, fourth: false },
   });
 
   const validateInput: ValidInputFuncType = (value: string, index: number) => {

@@ -38,7 +38,7 @@ export type setCardInformationType = {
   password: SetValueFn<PasswordType>;
 };
 
-export type CardNumberType = Record<"first" | "second" | "third" | "forth", string>;
+export type CardNumberType = Record<"first" | "second" | "third" | "fourth", string>;
 export type ExpirationDateType = Record<"month" | "year", string>;
 export type CvcNumberType = string;
 export type PasswordType = string;
