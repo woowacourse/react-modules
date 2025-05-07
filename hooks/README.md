@@ -7,7 +7,7 @@
 ## 🚀 설치 방법
 
 ```bash
-npm install @eunoia-jaxson/card-field-hooks
+npm install @sanghee01/card-field-hooks
 ```
 
 ---
@@ -78,7 +78,7 @@ const isCardValid = validateCardNumber('1234 5678 9012 3456');
 
 ```tsx
 iimport React from 'react';
-import { useCardNumberInput, useCardExpirationInput, useCardPasswordInput, useCvcInput, useCardCompanySelect, CardCompany } from '@eunoia-jaxson/card-field-hooks';
+import { useCardNumberInput, useCardExpirationInput, useCardPasswordInput, useCvcInput, useCardCompanySelect, CardCompany } from '@sanghee01-field-hooks';
 
 const CardForm = () => {
   const { cardNumber, handleCardNumberChange } = useCardNumberInput();

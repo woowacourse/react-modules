@@ -7,7 +7,7 @@
 ## 🚀 설치 방법
 
 ```bash
-npm install @eunoia-jaxson/modal
+npm install @sanghee01/modal
 ```
 
 ## 🛠️ 사용 방법
@@ -15,7 +15,7 @@ npm install @eunoia-jaxson/modal
 ### 기본 사용법
 
 ```tsx
-import { Modal, useModal } from '@eunoia-jaxson/modal';
+import { Modal, useModal } from '@sanghee01/modal';
 
 const App = () => {
   const { isOpen, handleOpen, handleClose } = useModal();
@@ -53,15 +53,15 @@ const { isOpen, handleOpen, handleClose } = useModal();
 
 ## 📌 Props
 
-| 이름            | 타입                     | 필수 여부         | 설명                                         |
-| --------------- | ------------------------ | ----------------- | -------------------------------------------- |
-| isOpen          | boolean                  | ✅                | 모달이 열려 있는지 여부                      |
-| onClose         | () => void               | ✅                | 모달 닫기 함수                               |
-| children        | ReactNode                | ✅                | 모달 컨텐츠 |
-| position        | `'center'` \| `'bottom'` | ✅                | 모달 위치                                    |
-| onAfterOpen     | () => void               | ❌                | 모달 열린 후 실행될 콜백                     |
-| title           | string                   | ❌                | 모달 제목                                    |
-| showCloseButton | boolean                  | ❌ (기본값: true) | 닫기 버튼 표시 여부                          |
+| 이름            | 타입                     | 필수 여부         | 설명                     |
+| --------------- | ------------------------ | ----------------- | ------------------------ |
+| isOpen          | boolean                  | ✅                | 모달이 열려 있는지 여부  |
+| onClose         | () => void               | ✅                | 모달 닫기 함수           |
+| children        | ReactNode                | ✅                | 모달 컨텐츠              |
+| position        | `'center'` \| `'bottom'` | ✅                | 모달 위치                |
+| onAfterOpen     | () => void               | ❌                | 모달 열린 후 실행될 콜백 |
+| title           | string                   | ❌                | 모달 제목                |
+| showCloseButton | boolean                  | ❌ (기본값: true) | 닫기 버튼 표시 여부      |
 
 ---
 
