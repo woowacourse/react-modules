@@ -26,7 +26,7 @@ const defaultCardNumberValidationValue = {
 
 const MAX_LENGTH = 4;
 
-const useCardNumberValidation = () => {
+const useCardNumber = () => {
   const [cardNumber, setCardNumber] = useState(defaultCardNumberValue);
   const [cardNumberValidationResult, setCardNumberValidationResult] =
     useState<CardNumberValidationType>(defaultCardNumberValidationValue);
@@ -37,17 +37,13 @@ const useCardNumberValidation = () => {
   };
 
   const validation = (label: string, value: string) => {
-    setCardNumberValidationResult(defaultCardNumberValidationValue);
-
     if (!value || isEmpty(value)) {
-      if (!value || isEmpty(value)) {
-        setCardNumberValidationResult((prev) => ({
-          ...prev,
-          [label]: defaultValidationValue,
-        }));
+      setCardNumberValidationResult((prev) => ({
+        ...prev,
+        [label]: defaultValidationValue,
+      }));
 
-        return;
-      }
+      return;
     }
 
     if (!isPositiveInteger(value)) {
@@ -69,10 +65,16 @@ const useCardNumberValidation = () => {
           errorMessage: `${MAX_LENGTH}${ERROR_MESSAGE.INVALID_LENGTH}`,
         },
       }));
+      return;
     }
+
+    setCardNumberValidationResult((prev) => ({
+      ...prev,
+      [label]: defaultValidationValue,
+    }));
   };
 
   return {onChange, cardNumber, cardNumberValidationResult};
 };
 
-export default useCardNumberValidation;
+export default useCardNumber;
