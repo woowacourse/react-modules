@@ -42,7 +42,6 @@ const useCardNumber = () => {
         ...prev,
         [label]: defaultValidationValue,
       }));
-
       return;
     }
 

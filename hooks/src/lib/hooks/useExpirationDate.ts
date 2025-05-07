@@ -21,7 +21,7 @@ const defaultExpirationDateValidationValue = {
 const MAX_LENGTH = 2;
 const currentYear = new Date().getFullYear() % 100;
 
-const useExpirationDateValidation = () => {
+const useExpirationDate = () => {
   const [expirationDate, setExpirationDate] = useState(defaultExpirationDate);
   const [expirationDateValidationResult, setExpirationDateValidationResult] =
     useState<ExpirationDateValidationType>(
@@ -39,7 +39,6 @@ const useExpirationDateValidation = () => {
         ...prev,
         [label]: defaultValidationValue,
       }));
-
       return;
     }
 
@@ -75,6 +74,7 @@ const useExpirationDateValidation = () => {
             errorMessage: ERROR_MESSAGE.INVALID_MONTH,
           },
         }));
+        return;
       }
     }
 
@@ -88,11 +88,17 @@ const useExpirationDateValidation = () => {
             errorMessage: `${ERROR_MESSAGE.INVALID_YEAR}(${currentYear}년 이상)`,
           },
         }));
+        return;
       }
     }
+
+    setExpirationDateValidationResult((prev) => ({
+      ...prev,
+      [label]: defaultValidationValue,
+    }));
   };
 
   return {onChange, expirationDate, expirationDateValidationResult};
 };
 
-export default useExpirationDateValidation;
+export default useExpirationDate;

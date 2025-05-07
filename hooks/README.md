@@ -9,7 +9,7 @@
 npm i @muffin2219/hooks
 ```
 
-## 📌 How to use: useCardNumberValidation
+## 📌 How to use: useCardNumber
 
 ### 📍 Example
 
@@ -17,8 +17,7 @@ npm i @muffin2219/hooks
 import {useCardNumber} from '@muffin2219/hooks';
 
 function App() {
-  const {cardNumber, onChange, cardNumberValidationResult} =
-    useCardNumberValidation();
+  const {cardNumber, onChange, cardNumberValidationResult} = useCardNumber();
 
   return (
     <>
@@ -121,17 +120,16 @@ export default App;
 | -------- | ---------------------------------------- | ------------- |
 | onChange | (label : string, value : string) => void | onChange 함수 |
 
-## 📌 How to use: useExpirationDateValidation
+## 📌 How to use: useExpirationDate
 
 ### 📍 Example
 
 ```tsx
-import './App.css';
 import {useExpirationDate} from '@muffin2219/hooks';
 
 function App() {
   const {onChange, expirationDate, expirationDateValidationResult} =
-    useExpirationDateValidation();
+    useExpirationDate();
 
   return (
     <>
@@ -169,6 +167,8 @@ export default App;
 3. 월은 1부터 12 사이의 숫자여야한다.
 4. 연도는 현재 연도보다 크거나 같아야한다.
 
+### ⛏️ Return Value
+
 ### expirationDate (Object)
 
 | Name  | Datatype | Description |
@@ -202,7 +202,7 @@ export default App;
 | -------- | ---------------------------------------- | ------------- |
 | onChange | (label : string, value : string) => void | onChange 함수 |
 
-## 📌 How to use: useCvcValidation
+## 📌 How to use: useCvc
 
 ### 📍 Example
 
