@@ -2,15 +2,14 @@ import {Button, Container} from './Alert.styles';
 
 interface Props {
   message: string;
-  btnText: string;
   onConfirm?: () => void;
 }
 
-const Alert = ({message, btnText, onConfirm}: Props) => {
+const Alert = ({message, onConfirm}: Props) => {
   return (
     <Container>
       {message}
-      <Button onClick={onConfirm}>{btnText}</Button>
+      <Button onClick={onConfirm}>확인</Button>
     </Container>
   );
 };
