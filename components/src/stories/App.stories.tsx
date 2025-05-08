@@ -43,3 +43,19 @@ export const CloseByButton: Story = {
     expect(canvas.queryByText('모달열림')).toBeNull();
   },
 };
+
+export const CloseByOverlay: Story = {
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    const openButton = canvas.getByRole('button', {
+      name: '모달열기',
+    });
+    await userEvent.click(openButton);
+
+    const closeButton = canvas.getByTestId('modal-overlay');
+    await userEvent.click(closeButton);
+
+    expect(canvas.queryByText('모달열림')).toBeNull();
+  },
+};
