@@ -6,7 +6,8 @@ import useDevice from '../../hooks/useDevice';
 import { CloseIcon } from '../common';
 
 import * as S from './Modal.styles';
-import Button from '../common/Button/Button';
+import Button, { ButtonProps } from '../common/Button/Button';
+import Input from '../common/Input/Input';
 
 /**
  * 모달 컴포넌트의 props
@@ -95,6 +96,11 @@ function Content({ children }: { children: ReactNode }) {
 }
 Content.displayName = 'ModalContent';
 
+function PromptInput() {
+  return <Input />;
+}
+PromptInput.displayName = 'ModalPromptInput';
+
 /**
  * Bottom
  */
@@ -104,13 +110,18 @@ function Bottom({ children }: { children: ReactNode }) {
 }
 Bottom.displayName = 'ModalBottom';
 
+function ButtonContainer({ children }: { children: ReactNode }) {
+  return <S.ButtonContainer>{children}</S.ButtonContainer>;
+}
+ButtonContainer.displayName = 'ModalButtonContainer';
+
 function CancelButton({ children }: { children: ReactNode }) {
-  return <Button>{children}</Button>;
+  return <Button variant="outline">{children}</Button>;
 }
 CancelButton.displayName = 'ModalCancelButton';
 
-function ConfirmButton({ children }: { children: ReactNode }) {
-  return <Button>{children}</Button>;
+function ConfirmButton({ ...props }: ButtonProps) {
+  return <Button {...props} />;
 }
 ConfirmButton.displayName = 'ModalConfirmButton';
 
@@ -119,9 +130,11 @@ const Modal = Object.assign(ModalMain, {
   Title,
   CloseButton,
   Content,
+  PromptInput,
   Bottom,
   CancelButton,
   ConfirmButton,
+  ButtonContainer,
 });
 
 export default Modal;
