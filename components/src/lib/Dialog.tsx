@@ -70,11 +70,11 @@ function Root({ children, root = document.body }: RootProps) {
   return createPortal(isOpen ? children : null, root);
 }
 
-interface OverlayProps extends PropsWithChildren {
+interface OverlayProps {
   className?: string;
 }
 
-function Overlay({ children, className }: OverlayProps) {
+function Overlay({ className }: OverlayProps) {
   const { close } = useDialogContext();
   const id = useId();
   const { handleClickOverlay } = useOverlay(close);
@@ -84,9 +84,7 @@ function Overlay({ children, className }: OverlayProps) {
       id={id}
       onClick={(e) => handleClickOverlay(e, id)}
       className={className}
-    >
-      {children}
-    </StyledOverlay>
+    />
   );
 }
 
@@ -98,15 +96,17 @@ function Header({ children, className }: HeaderProps) {
   return <StyledHeader className={className}>{children}</StyledHeader>;
 }
 
-interface CloseButtonProps extends PropsWithChildren {
+interface CloseButtonProps
+  extends PropsWithChildren,
+    ButtonHTMLAttributes<HTMLButtonElement> {
   className?: string;
 }
 
-function CloseButton({ children, className }: CloseButtonProps) {
+function CloseButton({ children, className, ...props }: CloseButtonProps) {
   const { close } = useDialogContext();
 
   return (
-    <StyledCloseButton onClick={close} className={className}>
+    <StyledCloseButton onClick={close} className={className} {...props}>
       {children}
     </StyledCloseButton>
   );
