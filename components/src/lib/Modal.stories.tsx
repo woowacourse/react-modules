@@ -1,17 +1,19 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { Modal } from '.';
 import { useArgs } from '@storybook/preview-api';
+import ModalContent from './ModalContent';
 
 const meta: Meta<typeof Modal.Content> = {
   title: 'Components/Modal',
-  component: Modal,
+  component: ModalContent,
   argTypes: {
     position: {
       control: { type: 'radio' },
       options: ['top', 'bottom', 'center'],
     },
-    width: {
-      control: 'number',
+    size: {
+      control: { type: 'radio' },
+      options: ['small', 'medium', 'large'],
     },
     children: {
       control: 'text',
@@ -19,7 +21,7 @@ const meta: Meta<typeof Modal.Content> = {
   },
   args: {
     position: 'center',
-    width: 400,
+    size: 'medium',
   },
 };
 
@@ -28,7 +30,7 @@ type Story = StoryObj<typeof Modal.Content>;
 
 export const Default: Story = {
   args: {
-    width: 800,
+    size: 'medium',
   },
   render: (args) => {
     const [{ isOpen }, updateArgs] = useArgs();
@@ -54,7 +56,7 @@ export const Default: Story = {
 
 export const Open: Story = {
   args: {
-    width: 400,
+    size: 'medium',
   },
   render: (args) => {
     function handleCloseClick() {}
@@ -63,7 +65,7 @@ export const Open: Story = {
         <button onClick={handleCloseClick}>열림버튼</button>
         <Modal isOpen={true}>
           <Modal.Overlay onClick={handleCloseClick} />
-          <Modal.Content position={args.position} width={args.width}>
+          <Modal.Content position={args.position} size={args.size}>
             <Modal.CloseButton onCloseClick={handleCloseClick} />
             <Modal.Title>기본 모달 제목</Modal.Title>
             <Modal.Body>이것은 모달의 본문입니다.</Modal.Body>
@@ -116,7 +118,7 @@ export const BottomModal: Story = {
 
 export const CenterModal: Story = {
   args: {
-    width: 400,
+    size: 'medium',
     position: 'center',
   },
   render: (args) => {
@@ -124,7 +126,7 @@ export const CenterModal: Story = {
       <>
         <Modal isOpen={true}>
           <Modal.Overlay onClick={() => {}} />
-          <Modal.Content {...args}>
+          <Modal.Content {...args} size={args.size}>
             <Modal.CloseButton onCloseClick={() => {}} />
             <Modal.Title>중앙 모달 제목</Modal.Title>
             <Modal.Body>이것은 모달의 본문입니다.</Modal.Body>
