@@ -1,4 +1,4 @@
-import AlertModal from "./lib/AlertModal";
+import AlertModal from "./lib/AlertModal/AlertModal";
 import "./styles/reset.css";
 import "./App.css";
 import { useState } from "react";
