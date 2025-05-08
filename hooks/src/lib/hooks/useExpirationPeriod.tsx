@@ -132,13 +132,10 @@ function useExpirationPeriod(rules?: Rule[]) {
     rules
   );
 
-  const isError = field
-    ? {
-        month: false,
-        year: false,
-        [field]: true,
-      }
-    : { month: false, year: false };
+  const isError = {
+    month: field === 'month',
+    year: field === 'year',
+  };
 
   return {
     value,
