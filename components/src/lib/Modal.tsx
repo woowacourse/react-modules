@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+import { useEffect } from 'react';
 
 interface ModalProps {
   isOpen: boolean;
@@ -6,6 +7,20 @@ interface ModalProps {
 }
 
 const Modal = ({ isOpen, onClose }: ModalProps) => {
+  useEffect(() => {
+    if (!isOpen) return;
+
+    function handleKeyDown(e: KeyboardEvent) {
+      if (e.key === 'Escape') onClose();
+    }
+
+    addEventListener('keydown', handleKeyDown);
+
+    return () => {
+      removeEventListener('keydown', handleKeyDown);
+    };
+  }, [isOpen]);
+
   return (
     <>
       {isOpen && (
