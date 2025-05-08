@@ -34,6 +34,8 @@ const useCardNumber = () => {
     setErrorMessage(message);
   };
 
+  console.log('??', isValid);
+
   const cardBrand = matchCardBrand(cardNumber.input1, cardNumber.input2);
 
   return { cardNumber, setCardNumber, handleCardNumber, isValid, errorMessage, cardBrand };

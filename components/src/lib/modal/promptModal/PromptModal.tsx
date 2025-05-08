@@ -8,7 +8,6 @@ export default function PromptModal({ onClose, onSubmit }: ModalProps) {
   const [input, setInput] = useState('');
 
   const handleSubmit = (e: React.FormEvent) => {
-    console.log('ㄷ니ㅓ리ㅏ러');
     e.preventDefault();
     if (!onSubmit) {
       console.error('onSubmit function is not provided');
@@ -16,7 +15,6 @@ export default function PromptModal({ onClose, onSubmit }: ModalProps) {
     }
 
     onSubmit(input);
-    console.log('asfd??', input);
     setInput('');
     onClose();
   };
