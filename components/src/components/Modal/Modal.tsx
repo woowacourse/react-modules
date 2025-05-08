@@ -6,6 +6,7 @@ import { PropsWithChildren } from "react";
 import { css } from "@emotion/react";
 import Button from "../Button/Button";
 import Input from "../Input/Input";
+import useFocus from "./useFocus";
 
 const ModalContainer = styled.div<{
   position: "center" | "bottom";
@@ -104,12 +105,17 @@ export default function Modal({
 }: PropsWithChildren<ModalInterface>) {
   if (!isOpen) return;
 
+  const { modalRef }: { modalRef: React.RefObject<HTMLDivElement | null> } =
+    useFocus(isOpen);
+
   return (
     <>
-      <ModalContainer position={position} size={size}>
+      <ModalContainer position={position} size={size} ref={modalRef}>
         <ModalTop>
           {title && <Title>{title}</Title>}
-          {closeButton && <CloseIcon onClick={onClose} css={closeIconStyle} />}
+          {closeButton && (
+            <CloseIcon onClick={onClose} css={closeIconStyle} tabIndex={0} />
+          )}
         </ModalTop>
         {children}
         {input && (
@@ -117,11 +123,11 @@ export default function Modal({
         )}
         <ModalBottom>
           {cancelButton && (
-            <Button type="cancel" size={size} onclick={onClose} />
+            <Button variant="cancel" size={size} onclick={onClose} />
           )}
           {confirmButton && (
             <Button
-              type="confirm"
+              variant="confirm"
               size={size}
               onclick={onConfirm ? onConfirm : onClose}
             />

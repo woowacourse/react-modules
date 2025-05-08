@@ -1,15 +1,15 @@
 import styled from "@emotion/styled";
 import { css } from "@emotion/react";
 
-const ButtonContainer = styled.div<{
-  type?: "confirm" | "cancel";
+const ButtonContainer = styled.button<{
+  variant?: "confirm" | "cancel";
   size: "small" | "medium" | "large";
 }>`
   ${({ size }) => sizeStyles[size]}
 
-  ${({ type }) =>
-    type
-      ? typeStyles[type]
+  ${({ variant }) =>
+    variant
+      ? variantStyles[variant]
       : css`
           background-color: white;
         `}
@@ -30,29 +30,34 @@ const ButtonContainer = styled.div<{
 `;
 
 interface ButtonInterface {
-  type?: "confirm" | "cancel";
+  variant?: "confirm" | "cancel";
   size: "small" | "medium" | "large";
   onclick: () => void;
-
+  tabIndex?: number;
   text?: string;
 }
 
-export default function Button({ type, size, onclick, text }: ButtonInterface) {
+export default function Button({
+  variant,
+  size,
+  onclick,
+  text,
+}: ButtonInterface) {
   const textMap: Record<"confirm" | "cancel", string> = {
     confirm: "확인",
     cancel: "취소",
   };
 
-  const buttonText = type ? textMap[type] : text ?? "";
+  const buttonText = variant ? textMap[variant] : text ?? "";
 
   return (
-    <ButtonContainer size={size} type={type} onClick={onclick}>
+    <ButtonContainer size={size} variant={variant} onClick={onclick}>
       {buttonText}
     </ButtonContainer>
   );
 }
 
-const typeStyles = {
+const variantStyles = {
   confirm: css`
     background-color: black;
     color: white;

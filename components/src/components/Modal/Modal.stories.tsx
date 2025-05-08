@@ -153,7 +153,6 @@ export const ConfirmModal: Story = {
           onClose={closeModal}
           title="카드를 삭제하시겠습니까?"
           isOpen={isOpened}
-          position={"center"}
           confirmButton={true}
           cancelButton={true}
           onConfirm={() => {}}
