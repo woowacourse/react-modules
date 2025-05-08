@@ -9,7 +9,7 @@ interface ModalPropsType {
   isOpen: boolean;
   position: 'center' | 'bottom';
   title: string;
-  isXButton: boolean;
+  showCloseButton: boolean;
   size: 'small' | 'medium' | 'large';
   onClose: () => void;
   onBackdropClick: (e: React.MouseEvent<HTMLDivElement>) => void;
@@ -20,7 +20,7 @@ const Modal = ({
   isOpen,
   position,
   title,
-  isXButton,
+  showCloseButton,
   size,
   onClose,
   onBackdropClick,
@@ -35,7 +35,7 @@ const Modal = ({
         <ModalContainer position={position} size={size}>
           <ModalHeader>
             <h4>{title}</h4>
-            <CloseButton isXButton={isXButton} onClick={onClose}>
+            <CloseButton showCloseButton={showCloseButton} onClick={onClose}>
               X
             </CloseButton>
           </ModalHeader>

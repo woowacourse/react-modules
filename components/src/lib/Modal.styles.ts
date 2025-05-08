@@ -81,8 +81,8 @@ export const ModalHeader = styled.div`
   margin: 0 auto;
 `;
 
-export const CloseButton = styled.button<{ isXButton: boolean }>`
+export const CloseButton = styled.button<{ showCloseButton: boolean }>`
   background-color: transparent;
   cursor: pointer;
-  display: ${({ isXButton }) => (isXButton ? 'block;' : 'none;')};
+  display: ${({ showCloseButton }) => (showCloseButton ? 'block;' : 'none;')};
 `;

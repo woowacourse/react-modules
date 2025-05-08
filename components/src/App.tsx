@@ -19,7 +19,7 @@ function App() {
         isOpen={isOpen}
         position="bottom"
         title="카드사 선택"
-        isXButton={true}
+        showCloseButton={true}
         size="small"
         onClose={() => setIsOpen(false)}
         onBackdropClick={handleBackdropClick}

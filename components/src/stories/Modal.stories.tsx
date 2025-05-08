@@ -19,6 +19,7 @@ export const centerOpen: Story = {
     title: '제목',
     children: '이것은 모달 내용입니다.',
     size: 'small',
+    showCloseButton: true,
     onClose: () => {},
     onBackdropClick: () => {},
   },
@@ -31,6 +32,7 @@ export const bottomOpen: Story = {
     title: '제목',
     children: '이것은 모달 내용입니다.',
     size: 'small',
+    showCloseButton: true,
     onClose: () => {},
     onBackdropClick: () => {},
   },
@@ -42,7 +44,7 @@ export const withXButton: Story = {
     position: 'bottom',
     title: '제목',
     children: '이것은 모달 내용입니다.',
-    isXButton: true,
+    showCloseButton: true,
     size: 'small',
     onClose: () => {},
     onBackdropClick: () => {},
@@ -55,7 +57,7 @@ export const withoutXButton: Story = {
     position: 'bottom',
     title: '제목',
     children: '이것은 모달 내용입니다.',
-    isXButton: false,
+    showCloseButton: false,
     size: 'small',
     onClose: () => {},
     onBackdropClick: () => {},
@@ -68,7 +70,7 @@ export const sizeSmall: Story = {
     position: 'bottom',
     title: '제목',
     children: '이것은 모달 내용입니다.',
-    isXButton: false,
+    showCloseButton: false,
     size: 'small',
     onClose: () => {},
     onBackdropClick: () => {},
@@ -81,7 +83,7 @@ export const sizeMedium: Story = {
     position: 'bottom',
     title: '제목',
     children: '이것은 모달 내용입니다.',
-    isXButton: false,
+    showCloseButton: false,
     size: 'medium',
     onClose: () => {},
     onBackdropClick: () => {},
@@ -94,7 +96,7 @@ export const sizeLarge: Story = {
     position: 'bottom',
     title: '제목',
     children: '이것은 모달 내용입니다.',
-    isXButton: false,
+    showCloseButton: false,
     size: 'large',
     onClose: () => {},
     onBackdropClick: () => {},
@@ -116,7 +118,7 @@ export const InteractiveModalCenter = {
           isOpen={isOpen}
           position="center"
           title="제목"
-          isXButton={true}
+          showCloseButton={true}
           size="small"
           onClose={() => setIsOpen(false)}
           onBackdropClick={handleBackdropClick}
@@ -143,7 +145,7 @@ export const InteractiveModalBottom = {
           isOpen={isOpen}
           position="bottom"
           title="제목"
-          isXButton={true}
+          showCloseButton={true}
           size="small"
           onClose={() => setIsOpen(false)}
           onBackdropClick={handleBackdropClick}
