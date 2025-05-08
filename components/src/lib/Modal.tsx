@@ -22,7 +22,6 @@ interface ModalProps {
  * 모달 생성
  *
  @typedef {Object} ModalProps
- * @property {string} title - 모달의 제목
  * @property {boolean} isOpen - 모달 열림 여부
  * @property {() => void} onClose - 모달 닫기 핸들러
  * @property {React.ReactNode} children - 모달 내용
