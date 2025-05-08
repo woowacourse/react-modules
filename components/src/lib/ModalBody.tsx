@@ -12,6 +12,7 @@ function ModalBody({ children }: ModalBodyProps) {
 const StyledModalBody = styled.section`
   display: flex;
   flex-direction: column;
+  gap: 16px;
 `;
 
 export default ModalBody;
