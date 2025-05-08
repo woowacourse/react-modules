@@ -6,6 +6,9 @@ import { formatByBrand } from "../utils/cardFormatter";
 import { getCardBrand } from "../utils/cardIdentifier";
 import { validateNumberWithLengthRange } from "../utils/validation";
 
+const CARD_NUMBER_MIN_LENGTH = 14;
+const CARD_NUMBER_MAX_LENGTH = 16;
+
 interface UseCardNumberReturn {
   cardNumber: string;
   cardNumberValidation: ValidationType;
@@ -24,7 +27,11 @@ const useCardNumber = (): UseCardNumberReturn => {
   const handleCardNumberChange = (value: string) => {
     setCardNumber(value);
 
-    const validationResult = validateNumberWithLengthRange(value, 14, 16);
+    const validationResult = validateNumberWithLengthRange(
+      value,
+      CARD_NUMBER_MIN_LENGTH,
+      CARD_NUMBER_MAX_LENGTH
+    );
     setCardNumberValidation(validationResult);
 
     if (validationResult.isError) {
