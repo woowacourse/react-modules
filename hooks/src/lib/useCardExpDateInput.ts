@@ -3,7 +3,7 @@ import {
   validateExpirationDateMonth,
   validateExpirationDateYear,
 } from './validator/validateCardInput';
-import { getExpirationFirstErrorMessage } from './validator/getFirstErrorMessage';
+import { getFirstErrorMessage } from './validator/getFirstErrorMessage';
 
 export function useCardExpDateInput() {
   const [cardExpDate, setCardExpDate] = useState({
@@ -22,8 +22,8 @@ export function useCardExpDateInput() {
     const monthErrorResult = validateExpirationDateMonth(nextExpDate.month, nextExpDate.year);
     const yearErrorResult = validateExpirationDateYear(nextExpDate.month, nextExpDate.year);
 
-    const monthErrorMessage = getExpirationFirstErrorMessage(monthErrorResult, 'MONTH');
-    const yearErrorMessage = getExpirationFirstErrorMessage(yearErrorResult, 'YEAR');
+    const monthErrorMessage = getFirstErrorMessage(monthErrorResult, 'MONTH');
+    const yearErrorMessage = getFirstErrorMessage(yearErrorResult, 'YEAR');
 
     setErrorMessage(monthErrorMessage || yearErrorMessage || '');
   }
