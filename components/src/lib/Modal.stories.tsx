@@ -80,3 +80,61 @@ export const Bottom: Story = {
     );
   },
 };
+
+export const NestedModal: Story = {
+  render: () => {
+    const [isParentModalOpen, setIsParentModalOpen] = useState(false);
+    const [isChildModalOpen, setIsChildModalOpen] = useState(false);
+
+    return (
+      <>
+        <button onClick={() => setIsParentModalOpen(true)}>첫 번째 모달 열기</button>
+
+        {isParentModalOpen && (
+          <Modal
+            position="center"
+            title="첫 번째 모달"
+            onClose={() => {
+              action('첫 번째 모달 닫기')();
+              setIsParentModalOpen(false);
+            }}
+          >
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', padding: '16px' }}>
+              <p>첫 번째 모달 내용</p>
+              <button
+                onClick={() => setIsChildModalOpen(true)}
+                style={{
+                  padding: '8px 12px',
+                  background: '#007BFF',
+                  color: 'white',
+                  border: 'none',
+                  borderRadius: '4px',
+                  cursor: 'pointer',
+                }}
+              >
+                두 번째 모달 열기
+              </button>
+            </div>
+          </Modal>
+        )}
+
+        {isChildModalOpen && (
+          <Modal
+            position="center"
+            title="두 번째 모달"
+            width="280px"
+            height="180px"
+            onClose={() => {
+              action('두 번째 모달 닫기')();
+              setIsChildModalOpen(false);
+            }}
+          >
+            <div style={{ padding: '16px' }}>
+              <p>첫 번째 모달 위에 열린 두 번째 모달</p>
+            </div>
+          </Modal>
+        )}
+      </>
+    );
+  },
+};
