@@ -7,6 +7,8 @@ export interface AlertModalProps {
   /** 모달을 닫는 함수 (배경 클릭이나 X 버튼 클릭 시 호출) */
   onHide: () => void;
 
+  onConfirm?: () => void;
+
   /** 배경 어두움 여부  */
   background?: boolean;
 
@@ -32,6 +34,7 @@ export interface AlertModalProps {
 const AlertModal = ({
   show,
   onHide,
+  onConfirm,
   position = "center",
   gap = 16,
   title,
@@ -47,7 +50,7 @@ const AlertModal = ({
       )}
       <Modal.Body>{content}</Modal.Body>
       <Modal.Footer buttonAlign="right">
-        <ConfirmButton onClick={onHide} />
+        <ConfirmButton onHide={onHide} onConfirm={onConfirm} />
       </Modal.Footer>
     </Modal>
   );
