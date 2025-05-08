@@ -6,6 +6,7 @@ import useDevice from '../../hooks/useDevice';
 import { CloseIcon } from '../common';
 
 import * as S from './Modal.styles';
+import Button from '../common/Button/Button';
 
 /**
  * 모달 컴포넌트의 props
@@ -19,8 +20,6 @@ import * as S from './Modal.styles';
  * @property size - 모달의 크기 (small | medium | large)
  */
 export interface ModalInterface {
-  /** 모달의 제목 */
-  title: string;
   /** 모달을 닫을 때 호출되는 콜백 함수 */
   onClose?: () => void;
   /** 모달이 열려 있는지 여부 */
@@ -35,8 +34,7 @@ export interface ModalInterface {
   size?: 'small' | 'medium' | 'large';
 }
 
-function Modal({
-  title,
+function ModalMain({
   onClose,
   children,
   isOpen,
@@ -55,31 +53,31 @@ function Modal({
 
   if (!isOpen) return null;
 
-  const Title = children?.find((child: any) => child?.type?.displayName === 'ModalTitle');
-  const CloseButton = children?.find((child: any) => child?.type?.displayName === 'ModalCloseButton');
-  const Content = children?.find((child: any) => child?.type?.displayName === 'ModalContent');
-
   return createPortal(
     <>
       <S.ModalContainer position={position} margin={margin} zIndex={zIndex} device={device} size={size}>
-        <S.ModalTop>
-          {Title}
-          {CloseButton}
-        </S.ModalTop>
-        <S.ModalContent>{Content}</S.ModalContent>
+        {children}
       </S.ModalContainer>
       <S.ModalBackdrop onClick={onClose} />
     </>,
-    typeof window !== 'undefined' && window.document.body ? window.document.body : document.body,
+    document.body,
   );
 }
+
+/**
+ * Top
+ */
+
+function Top({ children }: { children: ReactNode }) {
+  return <S.ModalTop>{children}</S.ModalTop>;
+}
+Top.displayName = 'ModalTop';
 
 function Title({ children }: { children: ReactNode }) {
   return <S.Title>{children}</S.Title>;
 }
 Title.displayName = 'ModalTitle';
 
-// 닫기 버튼 Slot 컴포넌트
 function CloseButton({ onClick }: { onClick?: () => void }) {
   return (
     <S.CloseButton onClick={onClick}>
@@ -89,13 +87,41 @@ function CloseButton({ onClick }: { onClick?: () => void }) {
 }
 CloseButton.displayName = 'ModalCloseButton';
 
+/**
+ * Middle
+ */
 function Content({ children }: { children: ReactNode }) {
   return <S.ModalContent>{children}</S.ModalContent>;
 }
 Content.displayName = 'ModalContent';
 
-Modal.Title = Title;
-Modal.CloseButton = CloseButton;
-Modal.Content = Content;
+/**
+ * Bottom
+ */
+
+function Bottom({ children }: { children: ReactNode }) {
+  return <S.ModalBottom>{children}</S.ModalBottom>;
+}
+Bottom.displayName = 'ModalBottom';
+
+function CancelButton({ children }: { children: ReactNode }) {
+  return <Button>{children}</Button>;
+}
+CancelButton.displayName = 'ModalCancelButton';
+
+function ConfirmButton({ children }: { children: ReactNode }) {
+  return <Button>{children}</Button>;
+}
+ConfirmButton.displayName = 'ModalConfirmButton';
+
+const Modal = Object.assign(ModalMain, {
+  Top,
+  Title,
+  CloseButton,
+  Content,
+  Bottom,
+  CancelButton,
+  ConfirmButton,
+});
 
 export default Modal;
