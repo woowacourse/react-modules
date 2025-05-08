@@ -13,15 +13,14 @@ npm i woowacourse-hooks-marvin
 ### 1. useCardNumber
 
 - 카드 번호 입력을 관리하는 훅
-- 16자리 숫자 입력 제한
-- 4자리마다 하이픈(-) 자동 추가
+- 브랜드 별로 자리수 검증(ex/AMEX: 15자리)
 - `onCardNumberChange` 핸들러 제공
 
 ### 2. useStrictCardNumber
 
 - 카드 번호의 엄격한 유효성 검사를 수행하는 훅
-- Luhn 알고리즘을 통한 체크섬 검증
-- 실제 존재하는 카드 번호인지 검증
+- Luhn 알고리즘을 통해 실제 존재하는 카드 번호인지 검증
+- 다양한 카드 길이 (비자의 경우에는 14, 16, 19자리) 지원
 - `onCardNumberChange` 핸들러 제공
 
 ### 3. useExpiryDateNumber
@@ -46,13 +45,23 @@ npm i woowacourse-hooks-marvin
 ### 6. useCardNetwork
 
 - 카드 번호를 기반으로 카드사(VISA, MASTERCARD 등)를 식별하는 훅
-- `onChange` 핸들러 제공
+- `onCardNumberChange` 핸들러 제공
 
-### 7. useCardValidation
+### 7. useCardFormat
+
+- 카드 번호의 형식을 관리하는 훅
+- 카드 브랜드에 따른 자동 형식 지정
+- 형식이 적용된 문자열과 원시 숫자 문자열 제공
+- 플레이스홀더 자동 생성
+- `onCardNumberChange` 핸들러 제공
+- 구분자(splitter) 커스터마이징 가능
+
+### 8. useCardValidation
 
 - 전체 카드 정보의 유효성을 검사하는 훅
 - 모든 필드의 입력 상태와 유효성 검사 결과 제공
 - 각 필드별 onChange 핸들러 제공
+- 형식 지정 옵션 커스터마이징 가능
 
 ## 사용 예시
 
@@ -61,11 +70,22 @@ import React from "react";
 import { useCardValidation } from "./lib";
 
 function App() {
-  const { card, cvc, expiry, password, network, strictCard } =
-    useCardValidation();
+  const { card, cvc, expiry, password, network, strictCard, format } =
+    useCardValidation({
+      format: { splitter: " " }, // 카드 번호 구분자 설정 (기본값: " ")
+    });
+
   const handleCardNumberChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    card.onCardNumberChange(e);
-    network.onChange(e);
+    format.onCardNumberChange(e);
+
+    const digits = e.target.value.replace(/\D/g, "");
+
+    const sanitizedEvent = {
+      ...e,
+      target: { ...e.target, value: digits },
+    };
+    network.onCardNumberChange(sanitizedEvent);
+    card.onCardNumberChange(sanitizedEvent);
   };
 
   return (
@@ -77,9 +97,9 @@ function App() {
           <input
             id="cardNumber"
             type="text"
-            value={card.cardNumber}
+            value={format.formatted || card.cardNumber}
             onChange={handleCardNumberChange}
-            placeholder="1234 5678 9012 3456"
+            placeholder={format.placeholder || "1234 5678 9012 3456"}
           />
           {card.errorMessage && <p className="error">{card.errorMessage}</p>}
           {network.cardNetwork !== "DEFAULT" && (
