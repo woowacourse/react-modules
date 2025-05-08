@@ -64,9 +64,12 @@ export const ModalContainer = styled.div<{
     ` width: 100%;
       border-radius: 10px 10px 0 0;`}
 
-  ${({ size }) => size === 'small' && `width: 25%`}
-  ${({ size }) => size === 'medium' && ` width: 40%;`}
-  ${({ size }) => size === 'large' && ` width: 55%;`}
+      ${({ position, size }) =>
+    position === 'center' && size === 'small' && `width: 25%`}
+      ${({ position, size }) =>
+    position === 'center' && size === 'medium' && ` width: 40%;`}
+      ${({ position, size }) =>
+    position === 'center' && size === 'large' && ` width: 55%;`}
 `;
 
 export const ModalHeader = styled.div`

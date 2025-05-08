@@ -17,7 +17,7 @@ function App() {
       <button onClick={() => setIsOpen(true)}>Modal Open</button>
       <Modal
         isOpen={isOpen}
-        position="center"
+        position="bottom"
         title="카드사 선택"
         isXButton={true}
         size="small"
