@@ -1,6 +1,5 @@
+import ConfirmButton from "../buttons/ConfirmButton";
 import Modal from "../Modal";
-import { ConfirmButtonStyle } from "../styles";
-
 export interface AlertModalProps {
   /** 모달을 보여줄지 여부 */
   show: boolean;
@@ -48,9 +47,7 @@ const AlertModal = ({
       )}
       <Modal.Body>{content}</Modal.Body>
       <Modal.Footer buttonAlign="right">
-        <button css={ConfirmButtonStyle} onClick={onHide}>
-          확인
-        </button>
+        <ConfirmButton onClick={onHide} />
       </Modal.Footer>
     </Modal>
   );
