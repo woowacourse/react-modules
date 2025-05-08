@@ -9,15 +9,13 @@ jobs:
   chromatic:
     name: 'Run Chromatic'
     runs-on: ubuntu-latest
-    # Job steps
     steps:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
+
       - run: yarn
-        #👇 Adds Chromatic as a step in the workflow
-      - uses: chromaui/action@latest
-        # Options required for Chromatic's GitHub Action
-        with:
-          projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
-          token: ${{ secrets.GITHUB_TOKEN }}
+        working-directory: components
+
+      - run: npx chromatic --project-token=${{ secrets.CHROMATIC_PROJECT_TOKEN }}
+        working-directory: components
