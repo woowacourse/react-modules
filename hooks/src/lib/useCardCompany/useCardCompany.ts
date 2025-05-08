@@ -1,11 +1,10 @@
-import { ChangeEvent, useState } from 'react';
+import { useState } from 'react';
 
 export const useCardCompany = () => {
   const [brand, setBrand] = useState<string | null>(null);
 
-  const handleCardCompanyChange = (e: ChangeEvent<HTMLSelectElement>) => {
-    const selectedBrand = e.target.value;
-    setBrand(selectedBrand || null);
+  const handleCardCompanyChange = (value: string) => {
+    setBrand(value || null);
   };
 
   const isBrandSelected = (): boolean => {

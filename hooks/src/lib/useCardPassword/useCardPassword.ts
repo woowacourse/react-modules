@@ -1,4 +1,4 @@
-import { useState, ChangeEvent } from 'react';
+import { useState } from 'react';
 import { CARD_PASSWORD } from '../constants/cardConfig';
 import { isOnlyDigits } from '../utils/validateNumber';
 import { CARD_PASSWORD_ERROR } from '../constants/errorMessages';
@@ -7,8 +7,7 @@ export const useCardPassword = (initialPassword: string, initialError: string) =
   const [cardPassword, setCardPassword] = useState<string>(initialPassword);
   const [cardPasswordError, setCardPasswordError] = useState<string>(initialError);
 
-  const handleCardPasswordChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const { value } = e.target;
+  const handleCardPasswordChange = (value: string) => {
     const isNumber = isOnlyDigits(value);
 
     if (!isNumber && value !== '') {

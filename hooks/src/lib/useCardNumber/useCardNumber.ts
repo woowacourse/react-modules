@@ -1,4 +1,4 @@
-import { useState, ChangeEvent } from 'react';
+import { useState } from 'react';
 import { CardNumber, CardNumberError } from '../types/cardTypes';
 import { CARD_NUMBER_ERROR } from '../constants/errorMessages';
 import { isOnlyDigits } from '../utils/validateNumber';
@@ -8,9 +8,7 @@ export const useCardNumber = (initialCardNumber: CardNumber, initialError: CardN
   const [cardNumber, setCardNumber] = useState<CardNumber>(initialCardNumber);
   const [cardNumberError, setCardNumberError] = useState<CardNumberError>(initialError);
 
-  const handleCardNumberChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    
+  const handleCardNumberChange = ({ name, value }: { name: string; value: string }) => {
     const updatedError = { ...cardNumberError };
     const cardFields: Array<keyof CardNumberError> = ['first', 'second', 'third', 'forth'];
 

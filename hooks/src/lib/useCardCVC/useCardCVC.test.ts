@@ -17,9 +17,7 @@ describe('useCardCVC 훅 테스트', () => {
     const { result } = renderHook(() => useCardCVC('', ''));
 
     act(() => {
-      result.current.handleCardCVCChange({
-        target: { value: 'a' },
-      } as React.ChangeEvent<HTMLInputElement>);
+      result.current.handleCardCVCChange('a');
     });
 
     expect(result.current.cardCVCError).toBe(CARD_CVC_ERROR.onlyNumbers);
@@ -30,9 +28,7 @@ describe('useCardCVC 훅 테스트', () => {
     const { result } = renderHook(() => useCardCVC('', '초기 에러'));
 
     act(() => {
-      result.current.handleCardCVCChange({
-        target: { value: '123' },
-      } as React.ChangeEvent<HTMLInputElement>);
+      result.current.handleCardCVCChange('123');
     });
 
     expect(result.current.cardCVC).toBe('123');
@@ -43,9 +39,7 @@ describe('useCardCVC 훅 테스트', () => {
     const { result } = renderHook(() => useCardCVC('123', ''));
 
     act(() => {
-      result.current.handleCardCVCChange({
-        target: { value: '' },
-      } as React.ChangeEvent<HTMLInputElement>);
+      result.current.handleCardCVCChange('');
     });
 
     expect(result.current.cardCVC).toBe('');

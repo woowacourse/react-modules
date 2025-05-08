@@ -12,8 +12,7 @@ export const useCardExpiryPeriod = (
   const [cardExpirationDateError, setCardExpirationDateError] =
     useState<CardExpiryDateError>(initialCardExpiryDateError);
 
-  const handleCardExpiryChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
+  const handleCardExpiryChange = ({ name, value }: { name: string; value: string }) => {
     const isNumber = isOnlyDigits(value);
 
     if (!isNumber && value !== '') {

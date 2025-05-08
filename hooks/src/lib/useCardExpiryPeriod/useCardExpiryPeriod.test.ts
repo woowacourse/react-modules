@@ -2,7 +2,6 @@ import { renderHook, act } from '@testing-library/react';
 import { useCardExpiryPeriod } from './useCardExpiryPeriod';
 import { CARD_EXPIRATION_ERROR } from '../constants/errorMessages';
 
-
 describe('useCardExpiryPeriod 훅 테스트', () => {
   it('초기값이 올바르게 설정되어야 한다', () => {
     const initialCardExpiryDate = { month: '05', year: '25' };
@@ -21,9 +20,7 @@ describe('useCardExpiryPeriod 훅 테스트', () => {
     const { result } = renderHook(() => useCardExpiryPeriod(initialCardExpiryDate, initialCardExpiryDateError));
 
     act(() => {
-      result.current.handleCardExpiryChange({
-        target: { name: 'month', value: '06' },
-      } as React.ChangeEvent<HTMLInputElement>);
+      result.current.handleCardExpiryChange({ name: 'month', value: '06' });
     });
 
     expect(result.current.cardExpirationDate.month).toBe('06');
@@ -37,9 +34,7 @@ describe('useCardExpiryPeriod 훅 테스트', () => {
     const { result } = renderHook(() => useCardExpiryPeriod(initialCardExpiryDate, initialCardExpiryDateError));
 
     act(() => {
-      result.current.handleCardExpiryChange({
-        target: { name: 'year', value: '25' },
-      } as React.ChangeEvent<HTMLInputElement>);
+      result.current.handleCardExpiryChange({ name: 'year', value: '25' });
     });
 
     expect(result.current.cardExpirationDate.year).toBe('25');
@@ -62,9 +57,7 @@ describe('useCardExpiryPeriod 훅 테스트', () => {
     const { result } = renderHook(() => useCardExpiryPeriod(initialCardExpiryDate, initialCardExpiryDateError));
 
     act(() => {
-      result.current.handleCardExpiryChange({
-        target: { name: 'month', value: 'ab' },
-      } as React.ChangeEvent<HTMLInputElement>);
+      result.current.handleCardExpiryChange({ name: 'month', value: 'ab' });
     });
 
     expect(result.current.cardExpirationDateError.month).toBe(CARD_EXPIRATION_ERROR.onlyNumbers);
@@ -77,9 +70,7 @@ describe('useCardExpiryPeriod 훅 테스트', () => {
     const { result } = renderHook(() => useCardExpiryPeriod(initialCardExpiryDate, initialCardExpiryDateError));
 
     act(() => {
-      result.current.handleCardExpiryChange({
-        target: { name: 'month', value: '00' },
-      } as React.ChangeEvent<HTMLInputElement>);
+      result.current.handleCardExpiryChange({ name: 'month', value: '00' });
     });
 
     expect(result.current.cardExpirationDate.month).toBe('00');
@@ -93,9 +84,7 @@ describe('useCardExpiryPeriod 훅 테스트', () => {
     const { result } = renderHook(() => useCardExpiryPeriod(initialCardExpiryDate, initialCardExpiryDateError));
 
     act(() => {
-      result.current.handleCardExpiryChange({
-        target: { name: 'month', value: '13' },
-      } as React.ChangeEvent<HTMLInputElement>);
+      result.current.handleCardExpiryChange({ name: 'month', value: '13' });
     });
 
     expect(result.current.cardExpirationDate.month).toBe('13');
@@ -109,9 +98,7 @@ describe('useCardExpiryPeriod 훅 테스트', () => {
     const { result } = renderHook(() => useCardExpiryPeriod(initialCardExpiryDate, initialCardExpiryDateError));
 
     act(() => {
-      result.current.handleCardExpiryChange({
-        target: { name: 'year', value: '20' },
-      } as React.ChangeEvent<HTMLInputElement>);
+      result.current.handleCardExpiryChange({ name: 'year', value: '20' });
     });
 
     expect(result.current.cardExpirationDate.year).toBe('20');
@@ -146,7 +133,7 @@ describe('useCardExpiryPeriod 훅 테스트', () => {
   });
 
   it('월이나 연도의 길이가 올바르지 않으면 isCardExpirationValid가 false를 반환해야 한다', () => {
-    const initialCardExpiryDate = { month: '6', year: '25' }; 
+    const initialCardExpiryDate = { month: '6', year: '25' };
     const initialCardExpiryDateError = { month: '', year: '' };
 
     const { result } = renderHook(() => useCardExpiryPeriod(initialCardExpiryDate, initialCardExpiryDateError));

@@ -36,9 +36,7 @@ describe('useCardNumber 훅 테스트', () => {
     const { result } = renderHook(() => useCardNumber(emptyCardNumber, emptyCardNumberError));
 
     act(() => {
-      result.current.handleCardNumberChange({
-        target: { name: 'first', value: '1234' },
-      } as React.ChangeEvent<HTMLInputElement>);
+      result.current.handleCardNumberChange({ name: 'first', value: '1234' });
     });
 
     expect(result.current.cardNumber.first).toBe('1234');
@@ -55,9 +53,7 @@ describe('useCardNumber 훅 테스트', () => {
     const { result } = renderHook(() => useCardNumber(emptyCardNumber, emptyCardNumberError));
 
     act(() => {
-      result.current.handleCardNumberChange({
-        target: { name: 'first', value: 'abcd' },
-      } as React.ChangeEvent<HTMLInputElement>);
+      result.current.handleCardNumberChange({ name: 'first', value: 'abcd' });
     });
 
     expect(result.current.cardNumberError.first).toBe(CARD_NUMBER_ERROR.onlyNumbers);
@@ -69,9 +65,7 @@ describe('useCardNumber 훅 테스트', () => {
     const { result } = renderHook(() => useCardNumber(initialCardNumber, emptyCardNumberError));
 
     act(() => {
-      result.current.handleCardNumberChange({
-        target: { name: 'first', value: '' },
-      } as React.ChangeEvent<HTMLInputElement>);
+      result.current.handleCardNumberChange({ name: 'first', value: '' });
     });
 
     expect(result.current.cardNumber.first).toBe('');
@@ -91,7 +85,7 @@ describe('useCardNumber 훅 테스트', () => {
 
   it('여러 필드가 유효하지 않으면 isCardNumberValid가 false를 반환해야 한다', () => {
     const invalidCardNumber: CardNumber = {
-      first: '123', 
+      first: '123',
       second: '56',
       third: '9012',
       forth: '3456',

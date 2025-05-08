@@ -1,4 +1,4 @@
-import { useState, ChangeEvent } from 'react';
+import { useState } from 'react';
 import { isOnlyDigits } from '../utils/validateNumber';
 import { CARD_CVC_ERROR } from '../constants/errorMessages';
 import { CARD_CVC } from '../constants/cardConfig';
@@ -7,8 +7,7 @@ export const useCardCVC = (initialCVC: string, initialError: string) => {
   const [cardCVC, setCardCVC] = useState<string>(initialCVC);
   const [cardCVCError, setCardCVCError] = useState(initialError);
 
-  const handleCardCVCChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const { value } = e.target;
+  const handleCardCVCChange = (value: string) => {
     const isNumber = isOnlyDigits(value);
 
     if (!isNumber && value !== '') {
@@ -16,7 +15,7 @@ export const useCardCVC = (initialCVC: string, initialError: string) => {
       return;
     }
 
-    setCardCVC(value === '' ? '' : value);
+    setCardCVC(value);
     setCardCVCError('');
   };
 

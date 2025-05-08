@@ -17,9 +17,7 @@ describe('useCardPassword 훅 테스트', () => {
     const { result } = renderHook(() => useCardPassword('', ''));
 
     act(() => {
-      result.current.handleCardPasswordChange({
-        target: { value: '1234' },
-      } as React.ChangeEvent<HTMLInputElement>);
+      result.current.handleCardPasswordChange('1234');
     });
 
     expect(result.current.cardPassword).toBe('1234');
@@ -36,9 +34,7 @@ describe('useCardPassword 훅 테스트', () => {
     const { result } = renderHook(() => useCardPassword('', ''));
 
     act(() => {
-      result.current.handleCardPasswordChange({
-        target: { value: 'abcd' },
-      } as React.ChangeEvent<HTMLInputElement>);
+      result.current.handleCardPasswordChange('abcd');
     });
 
     expect(result.current.cardPasswordError).toBe(CARD_PASSWORD_ERROR.onlyNumbers);

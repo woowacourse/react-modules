@@ -13,9 +13,7 @@ describe('useCardCompany 훅 테스트', () => {
     const { result } = renderHook(() => useCardCompany());
 
     act(() => {
-      result.current.handleCardCompanyChange({
-        target: { value: 'visa' },
-      } as React.ChangeEvent<HTMLSelectElement>);
+      result.current.handleCardCompanyChange('visa');
     });
 
     expect(result.current.brand).toBe('visa');
@@ -26,17 +24,13 @@ describe('useCardCompany 훅 테스트', () => {
     const { result } = renderHook(() => useCardCompany());
 
     act(() => {
-      result.current.handleCardCompanyChange({
-        target: { value: 'mastercard' },
-      } as React.ChangeEvent<HTMLSelectElement>);
+      result.current.handleCardCompanyChange('mastercard');
     });
 
     expect(result.current.brand).toBe('mastercard');
 
     act(() => {
-      result.current.handleCardCompanyChange({
-        target: { value: '' },
-      } as React.ChangeEvent<HTMLSelectElement>);
+      result.current.handleCardCompanyChange('');
     });
 
     expect(result.current.brand).toBeNull();
