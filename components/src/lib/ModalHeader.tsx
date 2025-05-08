@@ -7,7 +7,7 @@ import { ModalHeaderProps } from './types/modalTypes';
 const ModalHeader = ({ titleText, hasCloseButton, onClose }: ModalHeaderProps) => {
   const { closeModalHandler } = useModal();
   function closeHandler() {
-    if (onClose) onClose();
+    onClose?.();
     closeModalHandler();
   }
   return (
