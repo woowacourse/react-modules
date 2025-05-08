@@ -9,27 +9,37 @@ const ERROR_MESSAGE = {
 };
 
 const useCardPassword = () => {
-  const [isValid, setIsValid] = useState<boolean>(true);
-  const [errorMessage, setErrorMessage] = useState<string>("");
+  const [cardPassword, setCardPassword] = useState("");
+  const [validationResult, setValidationResult] = useState({
+    state: false,
+    message: "",
+  });
 
   const validate = (value: string) => {
     if (!checkNumber(value)) {
-      setErrorMessage(ERROR_MESSAGE.INVALID_NUMBER);
-      setIsValid(false);
-      return;
+      const result = { state: true, message: ERROR_MESSAGE.INVALID_NUMBER };
+      setValidationResult(result);
+      return result;
     }
 
     if (!checkValidLength(value, PASSWORD_VALID_LENGTH)) {
-      setErrorMessage(ERROR_MESSAGE.INPUT_LENGTH_LIMIT);
-      setIsValid(false);
-      return;
+      const result = { state: true, message: ERROR_MESSAGE.INPUT_LENGTH_LIMIT };
+      setValidationResult(result);
+      return result;
     }
 
-    setErrorMessage("");
-    setIsValid(true);
+    const result = { state: false, message: "" };
+    setValidationResult(result);
+    return result;
   };
 
-  return { isValid, errorMessage, validate };
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const inputValue = e.target.value;
+    setCardPassword(inputValue);
+    validate(inputValue);
+  };
+
+  return { cardPassword, handleChange, validationResult };
 };
 
 export default useCardPassword;
