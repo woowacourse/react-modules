@@ -1,14 +1,15 @@
 import ModalHeader from './ModalHeader';
 import { useModal } from './contexts/ModalContext';
 import { ModalBoxContainer, ModalBottomCloseBtn } from './styles/ModalStyle';
-import { ModalProps } from './types/modalTypes';
+import { ModalChildrenProps } from './types/modalTypes';
 
-const ModalBox = ({ modalType, titleText = '', children, closeType, onClose }: ModalProps) => {
+const ModalBox = ({ children }: ModalChildrenProps) => {
+  const { modalType, closeType, closeModalHandler } = useModal();
   const hasHeaderCloseButton = closeType === 'top' ? true : false;
-  const { closeModalHandler } = useModal();
+
   return (
     <ModalBoxContainer modalType={modalType}>
-      <ModalHeader titleText={titleText} hasCloseButton={hasHeaderCloseButton} onClose={onClose} />
+      <ModalHeader />
       {children}
       {!hasHeaderCloseButton && (
         <ModalBottomCloseBtn onClick={closeModalHandler}>닫기</ModalBottomCloseBtn>

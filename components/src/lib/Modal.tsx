@@ -1,12 +1,11 @@
-import { useContext, useEffect } from 'react';
+import { useEffect } from 'react';
 import ModalBox from './ModalBox';
 import { ModalContainer, ModalBackdrop, Container, Wrapper } from './styles/ModalStyle';
-import { ModalContext, useModal } from './contexts/ModalContext';
-import { ModalProps } from './types/modalTypes';
+import { useModal } from './contexts/ModalContext';
+import { ModalChildrenProps } from './types/modalTypes';
 
-const Modal = ({ modalType, titleText = '', children, closeType, onClose }: ModalProps) => {
-  const context = useContext(ModalContext);
-  const { closeModalHandler } = useModal();
+const Modal = ({ children }: ModalChildrenProps) => {
+  const { isModalOpened, closeModalHandler, modalType } = useModal();
 
   const handleKeyDown = (event: KeyboardEvent) => {
     if (event.key === 'Escape') {
@@ -15,16 +14,14 @@ const Modal = ({ modalType, titleText = '', children, closeType, onClose }: Moda
   };
 
   useEffect(() => {
-    if (context && context.isModalOpened) {
+    if (isModalOpened) {
       window.addEventListener('keydown', handleKeyDown);
       return () => {
         window.removeEventListener('keydown', handleKeyDown);
       };
     }
-  }, [closeModalHandler, context]);
+  }, [closeModalHandler, isModalOpened]);
 
-  if (!context) return null;
-  const { isModalOpened } = context;
   if (!isModalOpened) return null;
 
   return (
@@ -32,14 +29,7 @@ const Modal = ({ modalType, titleText = '', children, closeType, onClose }: Moda
       <ModalBackdrop onClick={closeModalHandler} />
       <Container>
         <Wrapper>
-          <ModalBox
-            modalType={modalType}
-            titleText={titleText}
-            closeType={closeType}
-            onClose={onClose}
-          >
-            {children}
-          </ModalBox>
+          <ModalBox>{children}</ModalBox>
         </Wrapper>
       </Container>
     </ModalContainer>

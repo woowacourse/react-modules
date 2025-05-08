@@ -1,12 +1,12 @@
 import { Modal, useModal, ModalProvider, ModalProps } from './lib';
 import './App.css';
 
-function ModalContent({ modalType, closeType, titleText, ...otherProps }: ModalProps) {
+function ModalContent() {
   const { openModalHandler } = useModal();
 
   return (
     <>
-      <Modal modalType={modalType} closeType={closeType} titleText={titleText} {...otherProps}>
+      <Modal>
         <p style={{ color: 'black' }}>Test!!!!!!</p>
         <p style={{ color: 'black' }}>Test!!!!!!</p>
         <p style={{ color: 'black' }}>Test!!!!!!</p>
@@ -23,13 +23,13 @@ function ModalContent({ modalType, closeType, titleText, ...otherProps }: ModalP
 
 function App({ modalType, closeType, titleText, ...otherProps }: ModalProps) {
   return (
-    <ModalProvider>
-      <ModalContent
-        modalType={modalType}
-        closeType={closeType}
-        titleText={titleText}
-        {...otherProps}
-      />
+    <ModalProvider
+      modalType={modalType}
+      closeType={closeType}
+      titleText={titleText}
+      {...otherProps}
+    >
+      <ModalContent />
     </ModalProvider>
   );
 }
