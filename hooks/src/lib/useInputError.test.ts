@@ -1,6 +1,6 @@
 import { renderHook, act } from '@testing-library/react';
-import useInputError from './useInputError';
-import { NO_ERROR } from './constants';
+import useInputError from './hooks/useInputError';
+import { NO_ERROR } from './constants/message';
 
 describe('useInputError', () => {
   const initError = {
