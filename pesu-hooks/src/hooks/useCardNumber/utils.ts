@@ -36,10 +36,10 @@ export function formatCardNumber(cardNumber: string, cardBrand: CardBrandOrUnkno
 
   switch (cardBrand) {
     case 'diners':
-      return cardNumber.replace(/(\d{4})(\d{6})(\d{0,4})/, '$1 $2 $3').trim();
+      return cardNumber.replace(/(\d{4})(\d{6})(\d{0,4})/, '$1 $2 $3').split(' ');
     case 'amex':
-      return cardNumber.replace(/(\d{4})(\d{6})(\d{5})/, '$1 $2 $3').trim();
+      return cardNumber.replace(/(\d{4})(\d{6})(\d{5})/, '$1 $2 $3').split(' ');
     default:
-      return cardNumber.replace(/(\d{4})(\d{4})(\d{4})(\d{4})/, '$1 $2 $3 $4').trim();
+      return cardNumber.replace(/(\d{4})(\d{4})(\d{4})(\d{4})/, '$1 $2 $3 $4').split(' ');
   }
 }

@@ -72,6 +72,72 @@ describe('useCardNumber', () => {
 
       expect(result.current.brand).toBe('master');
     });
+
+    it('모르는 카드 브랜드는 unknown을 반환한다.', () => {
+      const { result } = renderHook(() => useCardNumber());
+      const { cardNumberRegister } = result.current;
+
+      act(() => {
+        cardNumberRegister('cardNumber').onChange(mockInputEvent('1234567890123456'));
+      });
+
+      expect(result.current.brand).toBe('unknown');
+    });
+  });
+
+  describe('카드 번호 최대 길이', () => {
+    it('Diners 카드 번호는 14자리이다.', () => {
+      const { result } = renderHook(() => useCardNumber());
+      const { cardNumberRegister } = result.current;
+
+      act(() => {
+        cardNumberRegister('cardNumber').onChange(mockInputEvent('36123456789012'));
+      });
+
+      expect(result.current.isCardNumberValid).toBe(true);
+    });
+
+    it('Amex 카드 번호는 15자리이다.', () => {
+      const { result } = renderHook(() => useCardNumber());
+      const { cardNumberRegister } = result.current;
+
+      act(() => {
+        cardNumberRegister('cardNumber').onChange(mockInputEvent('341234567890123'));
+      });
+
+      expect(result.current.isCardNumberValid).toBe(true);
+    });
+
+    it('Master 카드 번호는 16자리이다.', () => {
+      const { result } = renderHook(() => useCardNumber());
+      const { cardNumberRegister } = result.current;
+
+      act(() => {
+        cardNumberRegister('cardNumber').onChange(mockInputEvent('5112345678901234'));
+      });
+
+      expect(result.current.isCardNumberValid).toBe(true);
+    });
+
+    it('UnionPay 카드 번호는 16자리이다.', () => {
+      const { result } = renderHook(() => useCardNumber());
+      const { cardNumberRegister } = result.current;
+
+      act(() => {
+        cardNumberRegister('cardNumber').onChange(mockInputEvent('6221261234567890'));
+      });
+
+      expect(result.current.isCardNumberValid).toBe(true);
+    });
+
+    it('unknown 카드 번호는 16자리이다.', () => {
+      const { result } = renderHook(() => useCardNumber());
+      const { cardNumberRegister } = result.current;
+
+      act(() => {
+        cardNumberRegister('cardNumber').onChange(mockInputEvent('1234567890123456'));
+      });
+    });
   });
 
   it('', () => {
