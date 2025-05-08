@@ -5,6 +5,7 @@ interface ModalContentProps {
   children: ReactElement[] | ReactElement;
   position: 'top' | 'bottom' | 'center';
   width?: number;
+  styleProps?: React.CSSProperties;
 }
 
 const radius = {
@@ -13,9 +14,19 @@ const radius = {
   bottom: '8px 8px 0px 0px',
 };
 
-function ModalContent({ children, position, width }: ModalContentProps) {
+function ModalContent({
+  children,
+  position,
+  width,
+  styleProps,
+}: ModalContentProps) {
   return (
-    <StyledModal id="modal-content" position={position} width={width}>
+    <StyledModal
+      id="modal-content"
+      position={position}
+      width={width}
+      styleProps={styleProps}
+    >
       {children}
     </StyledModal>
   );
@@ -23,8 +34,16 @@ function ModalContent({ children, position, width }: ModalContentProps) {
 
 export default ModalContent;
 
-type modalStyledProps = Pick<ModalContentProps, 'position' | 'width'>;
-const StyledModal = styled.div<modalStyledProps>`
+interface BoxProps {
+  styleProps?: React.CSSProperties;
+}
+
+type modalStyledProps = Pick<ModalContentProps, 'position' | 'width'> &
+  BoxProps;
+
+const StyledModal = styled.div.attrs<modalStyledProps>((props) => ({
+  style: props.styleProps,
+}))<modalStyledProps>`
   width: ${(props) =>
     props.position === 'center' ? `${props.width}px` : '100%'};
   padding: 24px 32px;
