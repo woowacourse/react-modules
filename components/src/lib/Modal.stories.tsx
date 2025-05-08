@@ -1,6 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { Modal } from '.';
 import { useArgs } from '@storybook/preview-api';
+import Input from './Input';
+import Button from './Button';
 
 const meta: Meta<typeof Modal.ModalContainer> = {
   title: 'Components/Modal',
@@ -11,7 +13,8 @@ const meta: Meta<typeof Modal.ModalContainer> = {
       options: ['top', 'bottom', 'center'],
     },
     width: {
-      control: 'number',
+      control: { type: 'radio' },
+      options: ['small', 'medium', 'large'],
     },
     isOpen: {
       control: 'boolean',
@@ -23,7 +26,7 @@ const meta: Meta<typeof Modal.ModalContainer> = {
   args: {
     isOpen: true,
     position: 'center',
-    width: 400,
+    width: 'large',
     children: '기본 모달 제목',
   },
 };
@@ -32,27 +35,28 @@ export default meta;
 type Story = StoryObj<typeof Modal.ModalContainer>;
 
 export const Default: Story = {
-  args: {
-    width: 800,
-  },
+  args: {},
   render: (args) => {
     const [{ isOpen }, updateArgs] = useArgs();
 
     function onClose() {
       updateArgs({ isOpen: !isOpen });
     }
+
+    function onChange(e: React.ChangeEvent<HTMLInputElement>) {
+      console.log(e.target.value);
+    }
     return (
       <>
         <button onClick={onClose}>열림버튼</button>
         <Modal {...args} onClose={onClose}>
-          <Modal.ModalContainer
-            isOpen={isOpen}
-            position={args.position}
-            width={args.width}
-          >
+          <Modal.ModalContainer isOpen={isOpen} position={args.position} width={args.width}>
             <Modal.ModalCloseButton onClose={onClose} />
             <Modal.ModalTitle children={args.children}></Modal.ModalTitle>
-            <Modal.ModalBody>이것은 모달의 본문입니다.</Modal.ModalBody>
+            <Modal.ModalBody>
+              이것은 모달의 본문입니다. <Input type="text" onChange={onChange}></Input>{' '}
+              <Button position="right">확인</Button>
+            </Modal.ModalBody>
           </Modal.ModalContainer>
         </Modal>
       </>
@@ -62,7 +66,6 @@ export const Default: Story = {
 
 export const Open: Story = {
   args: {
-    width: 800,
     isOpen: true,
     children: '기본 모달 제목',
   },
@@ -76,11 +79,7 @@ export const Open: Story = {
       <>
         <button onClick={onClose}>열림버튼</button>
         <Modal {...args} onClose={onClose}>
-          <Modal.ModalContainer
-            isOpen={isOpen}
-            position={args.position}
-            width={args.width}
-          >
+          <Modal.ModalContainer isOpen={isOpen} position={args.position} width={args.width}>
             <Modal.ModalCloseButton onClose={onClose} />
             <Modal.ModalTitle children={args.children}></Modal.ModalTitle>
             <Modal.ModalBody>이것은 모달의 본문입니다.</Modal.ModalBody>
@@ -106,11 +105,7 @@ export const TopModal: Story = {
     return (
       <>
         <Modal {...args} onClose={onClose}>
-          <Modal.ModalContainer
-            isOpen={isOpen}
-            position={args.position}
-            width={args.width}
-          >
+          <Modal.ModalContainer isOpen={isOpen} position={args.position} width={args.width}>
             <Modal.ModalCloseButton onClose={onClose} />
             <Modal.ModalTitle children={args.children}></Modal.ModalTitle>
             <Modal.ModalBody>이것은 모달의 본문입니다.</Modal.ModalBody>
@@ -136,11 +131,7 @@ export const BottomModal: Story = {
     return (
       <>
         <Modal {...args} onClose={onClose}>
-          <Modal.ModalContainer
-            isOpen={isOpen}
-            position={args.position}
-            width={args.width}
-          >
+          <Modal.ModalContainer isOpen={isOpen} position={args.position} width={args.width}>
             <Modal.ModalCloseButton onClose={onClose} />
             <Modal.ModalTitle children={args.children}></Modal.ModalTitle>
             <Modal.ModalBody>이것은 모달의 본문입니다.</Modal.ModalBody>
@@ -153,7 +144,6 @@ export const BottomModal: Story = {
 
 export const CenterModal: Story = {
   args: {
-    width: 400,
     isOpen: true,
     position: 'center',
     children: '중앙 모달 제목',
@@ -167,11 +157,7 @@ export const CenterModal: Story = {
     return (
       <>
         <Modal {...args} onClose={onClose}>
-          <Modal.ModalContainer
-            isOpen={isOpen}
-            position={args.position}
-            width={args.width}
-          >
+          <Modal.ModalContainer isOpen={isOpen} position={args.position} width={args.width}>
             <Modal.ModalCloseButton onClose={onClose} />
             <Modal.ModalTitle children={args.children}></Modal.ModalTitle>
             <Modal.ModalBody>이것은 모달의 본문입니다.</Modal.ModalBody>
