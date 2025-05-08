@@ -1,19 +1,36 @@
-import { Dispatch, SetStateAction, createContext, useState } from 'react';
+import { createContext, useState, useContext, ReactNode } from 'react';
 
-export const ModalContext = createContext<{ isModalOpened: boolean } | undefined>(undefined);
+interface ModalContextType {
+  isModalOpened: boolean;
+  openModalHandler: () => void;
+  closeModalHandler: () => void;
+}
 
-var _setIsModalOpened: Dispatch<SetStateAction<boolean>>;
+interface ModalProviderProps {
+  children: ReactNode;
+}
 
-export const ModalProvider = ({ children }: any) => {
+export const ModalContext = createContext<ModalContextType | undefined>(undefined);
+
+export const ModalProvider = ({ children }: ModalProviderProps) => {
   const [isModalOpened, setIsModalOpened] = useState(false);
 
-  _setIsModalOpened = setIsModalOpened;
-  return <ModalContext.Provider value={{ isModalOpened }}>{children}</ModalContext.Provider>;
+  const openModalHandler = () => setIsModalOpened(true);
+  const closeModalHandler = () => setIsModalOpened(false);
+
+  return (
+    <ModalContext.Provider value={{ isModalOpened, openModalHandler, closeModalHandler }}>
+      {children}
+    </ModalContext.Provider>
+  );
 };
 
 export const useModal = () => {
-  const openModalHandler = () => _setIsModalOpened(true);
-  const closeModalHandler = () => _setIsModalOpened(false);
+  const context = useContext(ModalContext);
 
-  return { openModalHandler, closeModalHandler };
+  if (context === undefined) {
+    throw new Error('useModal은 ModalProvider 내부에서 사용해야 합니다');
+  }
+
+  return context;
 };
