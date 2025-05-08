@@ -4,9 +4,17 @@ import styled from 'styled-components';
 interface ModalContentProps {
   children: ReactElement[] | ReactElement;
   position: 'top' | 'bottom' | 'center';
-  width?: number;
+  size?: 'small' | 'medium' | 'large';
   styleProps?: React.CSSProperties;
 }
+
+type SizeKey = 'small' | 'medium' | 'large';
+
+const pxBySize: Record<SizeKey, number> = {
+  small: 320,
+  medium: 400,
+  large: 600,
+};
 
 const radius = {
   top: '0px 0px 8px 8px',
@@ -17,14 +25,14 @@ const radius = {
 function ModalContent({
   children,
   position,
-  width,
+  size,
   styleProps,
 }: ModalContentProps) {
   return (
     <StyledModal
       id="modal-content"
       position={position}
-      width={width}
+      size={size}
       styleProps={styleProps}
     >
       {children}
@@ -36,16 +44,15 @@ export default ModalContent;
 
 interface BoxProps {
   styleProps?: React.CSSProperties;
+  size?: SizeKey;
 }
 
-type modalStyledProps = Pick<ModalContentProps, 'position' | 'width'> &
-  BoxProps;
+type modalStyledProps = Pick<ModalContentProps, 'position'> & BoxProps;
 
 const StyledModal = styled.div.attrs<modalStyledProps>((props) => ({
   style: props.styleProps,
 }))<modalStyledProps>`
-  width: ${(props) =>
-    props.position === 'center' ? `${props.width}px` : '100%'};
+  width: ${(props) => (props.size ? `${pxBySize[props.size]}px` : '100%')};
   padding: 24px 32px;
   background: #fff;
   box-sizing: border-box;
