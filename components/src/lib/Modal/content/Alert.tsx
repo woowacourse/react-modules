@@ -1,4 +1,4 @@
-import {Button, Container} from './Alert.styles';
+import {BtnWrapper, Button, Container} from './Content.styles';
 
 interface Props {
   message: string;
@@ -9,7 +9,9 @@ const Alert = ({message, onConfirm}: Props) => {
   return (
     <Container>
       {message}
-      <Button onClick={onConfirm}>확인</Button>
+      <BtnWrapper>
+        <Button onClick={onConfirm}>확인</Button>
+      </BtnWrapper>
     </Container>
   );
 };
