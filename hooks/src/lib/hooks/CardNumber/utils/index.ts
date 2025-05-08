@@ -1,21 +1,14 @@
 import { ValidationResult } from "../../../types";
-import { CardNumberState } from "../types";
 
-export const validateCardNumbers = (cardNumber: CardNumberState) => {
-  const invalidEntry = Object.values(cardNumber).find(({ value }) => {
-    const result = validateCardNumber(value);
-    return !result.isValid;
-  });
-
-  if (invalidEntry) {
-    const { isValid, errorMessage } = validateCardNumber(invalidEntry.value);
-    return { isValid, errorMessage };
-  }
-
-  return { isValid: true, errorMessage: "" };
+export const validateCardNumbers = (cardNumber: string, cardType: string) => {
+  const result = validateCardNumber(cardNumber, cardType);
+  return result;
 };
 
-const validateCardNumber = (cardNumber: string): ValidationResult => {
+export const validateCardNumber = (
+  cardNumber: string,
+  cardType: string
+): ValidationResult => {
   if (!/^\d+$/.test(cardNumber)) {
     return {
       isValid: false,
@@ -23,11 +16,31 @@ const validateCardNumber = (cardNumber: string): ValidationResult => {
     };
   }
 
-  if (cardNumber.length !== 4) {
-    return {
-      isValid: false,
-      errorMessage: "카드 번호는 4자리여야 합니다.",
-    };
+  if (cardType === "diners") {
+    if (cardNumber.length !== 14) {
+      return {
+        isValid: false,
+        errorMessage: "Diners 카드 번호는 14자리여야 합니다.",
+      };
+    }
+  }
+
+  if (cardType === "amex") {
+    if (cardNumber.length !== 15) {
+      return {
+        isValid: false,
+        errorMessage: "AMEX 카드 번호는 15자리여야 합니다.",
+      };
+    }
+  }
+
+  if (cardType === "unionpay") {
+    if (cardNumber.length !== 16) {
+      return {
+        isValid: false,
+        errorMessage: "UnionPay 카드 번호는 16자리여야 합니다.",
+      };
+    }
   }
 
   return {

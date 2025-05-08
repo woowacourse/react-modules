@@ -1,45 +1,28 @@
 import useCardNumber from "./lib/hooks/CardNumber";
+
 function App() {
-  const { cardNumberState, handleCardNumberChange, errorState } =
+  const { cardNumber, handleCardNumberChange, cardType, isValid } =
     useCardNumber();
 
   return (
-    <>
-      <div onClick={undefined}>123</div>
-      <input
-        placeholder="1"
-        type="text"
-        value={cardNumberState.first.value}
-        onChange={(e) => {
-          handleCardNumberChange("first", e.target.value);
-        }}
-      />
-      <input
-        placeholder="1"
-        type="text"
-        value={cardNumberState.second.value}
-        onChange={(e) => {
-          handleCardNumberChange("second", e.target.value);
-        }}
-      />
-      <input
-        placeholder="1"
-        type="text"
-        value={cardNumberState.third.value}
-        onChange={(e) => {
-          handleCardNumberChange("third", e.target.value);
-        }}
-      />
-      <input
-        placeholder="1"
-        type="text"
-        value={cardNumberState.fourth.value}
-        onChange={(e) => {
-          handleCardNumberChange("fourth", e.target.value);
-        }}
-      />
-      <button disabled={!errorState.isValid}>123</button>
-    </>
+    <div style={{ padding: "20px" }}>
+      <h2>CardNumber 훅 테스트</h2>
+      <div style={{ marginBottom: "20px" }}>
+        <input
+          type="text"
+          value={cardNumber}
+          onChange={(e) => handleCardNumberChange(e.target.value)}
+          placeholder="카드 번호를 입력하세요"
+          style={{ width: "200px" }}
+        />
+        <div style={{ marginTop: "10px" }}>
+          <p>카드 타입: {cardType}</p>
+          <p>
+            유효성: {isValid ? "유효한 카드 번호" : "유효하지 않은 카드 번호"}
+          </p>
+        </div>
+      </div>
+    </div>
   );
 }
 
