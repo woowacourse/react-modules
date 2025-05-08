@@ -1,34 +1,40 @@
-const CARD_NETWORKS = [
+import { CardNetWorks } from './useCardNumbers';
+
+const CARD_NETWORKS: {
+  prefixes: string[];
+  length: number;
+  name: CardNetWorks;
+}[] = [
   {
     prefixes: ['4'],
     length: 16,
-    name: 'visa',
+    name: 'VISA',
   },
   {
     prefixes: ['51', '52', '53', '54', '55'],
     length: 16,
-    name: 'master',
+    name: 'MASTER',
   },
   {
     prefixes: ['36'],
     length: 14,
-    name: 'diners',
+    name: 'DINERS',
   },
 
   {
     prefixes: ['34', '37'],
     length: 15,
-    name: 'amex',
+    name: 'AMEX',
   },
 
   {
     prefixes: ['62'],
     length: 16,
-    name: 'unionPay',
+    name: 'UNIONPAY',
   },
 ];
 
-const getCardNetwork = (cardNumbers: string) => {
+const getCardNetwork = (cardNumbers: string): CardNetWorks => {
   const cardNetwork = CARD_NETWORKS.find(
     (network) =>
       matchesPrefix(network.prefixes, cardNumbers) &&
