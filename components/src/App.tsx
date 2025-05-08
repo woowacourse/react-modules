@@ -1,6 +1,7 @@
 import './App.css';
 import { useState } from 'react';
 import { Modal } from './lib/index';
+import Button from './lib/Button';
 
 function App() {
   const [isOpen, setIsOpen] = useState(false);
@@ -17,7 +18,9 @@ function App() {
         <Modal.ModalContainer isOpen={isOpen} position="top" width="large">
           <Modal.ModalCloseButton onClose={onClose} />
           <Modal.ModalTitle>제목</Modal.ModalTitle>
-          <Modal.ModalBody>내용1!</Modal.ModalBody>
+          <Modal.ModalBody>
+            내용1! <Button position="right">확인</Button>
+          </Modal.ModalBody>
         </Modal.ModalContainer>
       </Modal>
     </>
