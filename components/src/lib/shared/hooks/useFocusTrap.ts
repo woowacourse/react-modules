@@ -5,23 +5,23 @@ export function useFocusTrap(containerRef: React.RefObject<HTMLElement>) {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key !== 'Tab' || !containerRef.current) return;
 
-      const focusableEls = containerRef.current.querySelectorAll<HTMLElement>(
+      const focusableElements = containerRef.current.querySelectorAll<HTMLElement>(
         'a[href], button, textarea, input, select, [tabindex]:not([tabindex="-1"])'
       );
-      const firstEl = focusableEls[0];
-      const lastEl = focusableEls[focusableEls.length - 1];
+      const firstElement = focusableElements[0];
+      const lastElement = focusableElements[focusableElements.length - 1];
 
-      if (!firstEl || !lastEl) return;
+      if (!firstElement || !lastElement) return;
 
       if (e.shiftKey) {
-        if (document.activeElement === firstEl) {
+        if (document.activeElement === firstElement) {
           e.preventDefault();
-          lastEl.focus();
+          lastElement.focus();
         }
       } else {
-        if (document.activeElement === lastEl) {
+        if (document.activeElement === lastElement) {
           e.preventDefault();
-          firstEl.focus();
+          firstElement.focus();
         }
       }
     };
