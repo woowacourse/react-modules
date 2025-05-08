@@ -2,10 +2,28 @@ import * as S from '../Modal.styles';
 import { ModalProps } from '../../shared/types/modal';
 import { CloseButton, ConfirmButton } from '../../shared/ui/Button.styles';
 import styled from '@emotion/styled';
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 export default function PromptModal({ onClose, onSubmit }: ModalProps) {
   const [input, setInput] = useState('');
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    inputRef.current?.focus();
+  }, []);
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        onClose();
+      }
+    };
+
+    document.addEventListener('keydown', handleKeyDown);
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [onClose]);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -22,6 +40,7 @@ export default function PromptModal({ onClose, onSubmit }: ModalProps) {
   return (
     <PromptModalForm onSubmit={handleSubmit}>
       <PromptModalInput
+        ref={inputRef}
         value={input}
         onChange={(e) => setInput(e.target.value)}
         type='text'
