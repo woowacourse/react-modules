@@ -2,25 +2,51 @@ import { useState } from "react";
 import Modal from "./lib/Modal";
 import AlertModal from "./lib/modals/AlertModal";
 import ConfirmModal from "./lib/modals/ConfirmModal";
+import PromptModal from "./lib/modals/PromptModal";
+import styled from "@emotion/styled";
 
 function App() {
-  const [isOpen, setIsOpen] = useState(false);
+  const [ModalIsOpen, setModalIsOpen] = useState(false);
+  const [AlertIsOpen, setAlertIsOpen] = useState(false);
+  const [ConfirmIsOpen, setConfirmIsOpen] = useState(false);
+  const [PromptIsOpen, setpromptIsOpen] = useState(false);
 
-  function handleClose() {
-    setIsOpen(false);
+  function handleModalClose() {
+    setModalIsOpen(false);
+  }
+  function handleAlertClose() {
+    setAlertIsOpen(false);
+  }
+  function handleConfirmClose() {
+    setConfirmIsOpen(false);
+  }
+  function handlePromptClose() {
+    setpromptIsOpen(false);
   }
 
-  function handleConfirm() {
+  function handleModalConfirm() {
     alert("확인");
-    setIsOpen(false);
+    setModalIsOpen(false);
+  }
+  function handleAlertConfirm() {
+    alert("확인");
+    setAlertIsOpen(false);
+  }
+  function handleConfirmConfirm() {
+    alert("확인");
+    setConfirmIsOpen(false);
+  }
+  function handlePromptConfirm() {
+    alert("확인");
+    setpromptIsOpen(false);
   }
 
   return (
     <>
-      {/* <Modal
-        isOpen={isOpen}
-        onClose={handleClose}
-        onConfirm={handleConfirm}
+      <Modal
+        isOpen={ModalIsOpen}
+        onClose={handleModalClose}
+        onConfirm={handleModalConfirm}
         position="center"
         primaryButton={true}
         secondaryButton={true}
@@ -32,25 +58,43 @@ function App() {
           <p>모달열림</p>
         </Modal.Body>
         <Modal.Footer />
-      </Modal> */}
-      {/* <AlertModal
-        isOpen={isOpen}
-        onClose={handleClose}
-        onConfirm={handleConfirm}
+      </Modal>
+      <AlertModal
+        isOpen={AlertIsOpen}
+        onClose={handleAlertClose}
+        onConfirm={handleAlertConfirm}
         title="아이디를 입력해 주세요."
         content="아이디는 필수로 입력해야 합니다."
-      /> */}
+      />
       <ConfirmModal
-        isOpen={isOpen}
-        onClose={handleClose}
-        onConfirm={handleConfirm}
+        isOpen={ConfirmIsOpen}
+        onClose={handleConfirmClose}
+        onConfirm={handleConfirmConfirm}
         title="카드를 삭제하시겠습니까?"
         content="삭제하면 복구하실 수 없습니다."
       />
+      <PromptModal
+        isOpen={PromptIsOpen}
+        onClose={handlePromptClose}
+        onConfirm={handlePromptConfirm}
+        title="카드를 삭제하시겠습니까?"
+        content={<Input />}
+      />
 
-      <button onClick={() => setIsOpen(true)}>모달 열기 버튼</button>
+      <button onClick={() => setModalIsOpen(true)}>모달 열기 버튼</button>
+      <button onClick={() => setAlertIsOpen(true)}>Alert 모달 열기 버튼</button>
+      <button onClick={() => setConfirmIsOpen(true)}>
+        Confirm 모달 열기 버튼
+      </button>
+      <button onClick={() => setpromptIsOpen(true)}>
+        Prompt 모달 열기 버튼
+      </button>
     </>
   );
 }
 
 export default App;
+
+const Input = styled.input`
+  height: 32px;
+`;

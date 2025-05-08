@@ -204,10 +204,9 @@ const TitleText = styled.h2`
 `;
 
 const MainSection = styled.section`
-  flex-grow: 1;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  height: 100%;
 `;
 
 const ButtonContainer = styled.div<{ position: Position }>`
