@@ -14,7 +14,7 @@ describe("useExpirationDate 훅 테스트", () => {
     });
 
     expect(result.current.validationResult.month).toEqual({
-      state: false,
+      errorState: false,
       message: "",
     });
   });
@@ -29,7 +29,7 @@ describe("useExpirationDate 훅 테스트", () => {
     });
 
     expect(result.current.validationResult.month).toEqual({
-      state: true,
+      errorState: true,
       message: "숫자만 입력 가능합니다.",
     });
   });
@@ -44,7 +44,7 @@ describe("useExpirationDate 훅 테스트", () => {
     });
 
     expect(result.current.validationResult.month).toEqual({
-      state: true,
+      errorState: true,
       message: "MM형태로 입력해주세요.",
     });
   });
@@ -59,7 +59,7 @@ describe("useExpirationDate 훅 테스트", () => {
     });
 
     expect(result.current.validationResult.month).toEqual({
-      state: true,
+      errorState: true,
       message: "1~12까지의 범위만 입력 가능합니다.",
     });
   });
@@ -74,7 +74,7 @@ describe("useExpirationDate 훅 테스트", () => {
     });
 
     expect(result.current.validationResult.year).toEqual({
-      state: true,
+      errorState: true,
       message: "숫자만 입력 가능합니다.",
     });
   });
@@ -89,7 +89,7 @@ describe("useExpirationDate 훅 테스트", () => {
     });
 
     expect(result.current.validationResult.year).toEqual({
-      state: true,
+      errorState: true,
       message: "YY형태로 입력해주세요.",
     });
   });
@@ -106,7 +106,7 @@ describe("useExpirationDate 훅 테스트", () => {
     });
 
     expect(result.current.validationResult.year).toEqual({
-      state: true,
+      errorState: true,
       message: "현재보다 이전년도는 입력할 수 없습니다.",
     });
   });

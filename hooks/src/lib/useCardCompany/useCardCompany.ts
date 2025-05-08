@@ -7,19 +7,19 @@ const ERROR_MESSAGE = {
 const useCardCompany = () => {
   const [cardCompany, setCardCompany] = useState("");
   const [validationResult, setValidationResult] = useState({
-    state: false,
+    errorState: false,
     message: "",
   });
 
   const validate = (inputValue: string) => {
     if (inputValue.length === 0) {
       setValidationResult({
-        state: true,
+        errorState: true,
         message: ERROR_MESSAGE.EMPTY_CARD_COMPANY,
       });
       return;
     }
-    setValidationResult({ state: false, message: "" });
+    setValidationResult({ errorState: false, message: "" });
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {

@@ -21,10 +21,10 @@ describe("useCardNumber 테스트", () => {
     }
 
     expect(result.current.validationResult).toEqual({
-      first: { state: false, message: "" },
-      second: { state: false, message: "" },
-      third: { state: false, message: "" },
-      fourth: { state: false, message: "" },
+      first: { errorState: false, message: "" },
+      second: { errorState: false, message: "" },
+      third: { errorState: false, message: "" },
+      fourth: { errorState: false, message: "" },
     });
   });
 
@@ -45,10 +45,10 @@ describe("useCardNumber 테스트", () => {
     }
 
     expect(result.current.validationResult).toEqual({
-      first: { state: true, message: "숫자만 입력 가능합니다." },
-      second: { state: false, message: "" },
-      third: { state: false, message: "" },
-      fourth: { state: false, message: "" },
+      first: { errorState: true, message: "숫자만 입력 가능합니다." },
+      second: { errorState: false, message: "" },
+      third: { errorState: false, message: "" },
+      fourth: { errorState: false, message: "" },
     });
   });
 
@@ -71,10 +71,10 @@ describe("useCardNumber 테스트", () => {
     }
 
     expect(result.current.validationResult).toEqual({
-      first: { state: true, message: "4자리를 입력해주세요." },
-      second: { state: false, message: "" },
-      third: { state: false, message: "" },
-      fourth: { state: false, message: "" },
+      first: { errorState: true, message: "4자리를 입력해주세요." },
+      second: { errorState: false, message: "" },
+      third: { errorState: false, message: "" },
+      fourth: { errorState: false, message: "" },
     });
   });
 });

@@ -11,24 +11,30 @@ const ERROR_MESSAGE = {
 const useCardPassword = () => {
   const [cardPassword, setCardPassword] = useState("");
   const [validationResult, setValidationResult] = useState({
-    state: false,
+    errorState: false,
     message: "",
   });
 
   const validate = (value: string) => {
     if (!checkNumber(value)) {
-      const result = { state: true, message: ERROR_MESSAGE.INVALID_NUMBER };
+      const result = {
+        errorState: true,
+        message: ERROR_MESSAGE.INVALID_NUMBER,
+      };
       setValidationResult(result);
       return result;
     }
 
     if (!checkValidLength(value, PASSWORD_VALID_LENGTH)) {
-      const result = { state: true, message: ERROR_MESSAGE.INPUT_LENGTH_LIMIT };
+      const result = {
+        errorState: true,
+        message: ERROR_MESSAGE.INPUT_LENGTH_LIMIT,
+      };
       setValidationResult(result);
       return result;
     }
 
-    const result = { state: false, message: "" };
+    const result = { errorState: false, message: "" };
     setValidationResult(result);
     return result;
   };

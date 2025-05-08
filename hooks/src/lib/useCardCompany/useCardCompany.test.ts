@@ -11,7 +11,7 @@ describe("useCardCompany 테스트", () => {
       } as React.ChangeEvent<HTMLInputElement>);
     });
 
-    expect(result.current.validationResult.state).toBe(false);
+    expect(result.current.validationResult.errorState).toBe(false);
     expect(result.current.validationResult.message).toEqual("");
   });
 
@@ -23,7 +23,7 @@ describe("useCardCompany 테스트", () => {
       } as React.ChangeEvent<HTMLInputElement>);
     });
 
-    expect(result.current.validationResult.state).toBe(true);
+    expect(result.current.validationResult.errorState).toBe(true);
     expect(result.current.validationResult.message).toEqual(
       "카드사를 선택해주세요."
     );

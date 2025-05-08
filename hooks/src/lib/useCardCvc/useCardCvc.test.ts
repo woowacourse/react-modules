@@ -11,7 +11,7 @@ describe("useCardCvc 테스트", () => {
       } as React.ChangeEvent<HTMLInputElement>);
     });
 
-    expect(result.current.validationResult.state).toBe(false);
+    expect(result.current.validationResult.errorState).toBe(false);
     expect(result.current.validationResult.message).toEqual("");
   });
 
@@ -24,7 +24,7 @@ describe("useCardCvc 테스트", () => {
       } as React.ChangeEvent<HTMLInputElement>);
     });
 
-    expect(result.current.validationResult.state).toBe(true);
+    expect(result.current.validationResult.errorState).toBe(true);
     expect(result.current.validationResult.message).toEqual(
       "숫자만 입력 가능합니다."
     );
@@ -39,7 +39,7 @@ describe("useCardCvc 테스트", () => {
       } as React.ChangeEvent<HTMLInputElement>);
     });
 
-    expect(result.current.validationResult.state).toBe(true);
+    expect(result.current.validationResult.errorState).toBe(true);
     expect(result.current.validationResult.message).toEqual(
       "3자리를 입력해주세요."
     );

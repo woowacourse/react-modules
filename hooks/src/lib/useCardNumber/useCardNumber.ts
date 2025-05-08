@@ -9,7 +9,7 @@ const ERROR_MESSAGE = {
 };
 
 interface SingleCardNumberError {
-  state: boolean;
+  errorState: boolean;
   message: string;
 }
 
@@ -30,10 +30,10 @@ const useCardNumber = () => {
     fourth: "",
   });
   const [validationResult, setValidationResult] = useState<CardNumberError>({
-    first: { state: false, message: "" },
-    second: { state: false, message: "" },
-    third: { state: false, message: "" },
-    fourth: { state: false, message: "" },
+    first: { errorState: false, message: "" },
+    second: { errorState: false, message: "" },
+    third: { errorState: false, message: "" },
+    fourth: { errorState: false, message: "" },
   });
 
   const validate = (label: CardNumberLabel, inputValue: string) => {
@@ -48,7 +48,7 @@ const useCardNumber = () => {
       isError = true;
     }
 
-    const result = { state: isError, message };
+    const result = { errorState: isError, message };
 
     setValidationResult((prev) => ({
       ...prev,

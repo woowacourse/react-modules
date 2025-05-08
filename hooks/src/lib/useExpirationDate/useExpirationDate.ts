@@ -15,8 +15,8 @@ const ERROR_MESSAGE = {
 const useExpirationDate = () => {
   const [expDate, setExpDate] = useState({ month: "", year: "" });
   const [validationResult, setValidationResult] = useState({
-    month: { state: false, message: "" },
-    year: { state: false, message: "" },
+    month: { errorState: false, message: "" },
+    year: { errorState: false, message: "" },
   });
 
   const checkMonthRange = (value: string) => {
@@ -58,10 +58,10 @@ const useExpirationDate = () => {
 
     setValidationResult((prev) => ({
       ...prev,
-      [label]: { state: isError, message },
+      [label]: { errorState: isError, message },
     }));
 
-    return { state: isError, message };
+    return { errorState: isError, message };
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
