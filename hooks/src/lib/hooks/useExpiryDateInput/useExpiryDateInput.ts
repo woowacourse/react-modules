@@ -11,7 +11,7 @@ type ExpiryDateInputState = {
 
 interface Props {
   expiryDateState: ExpiryDateInputState[];
-  errorMessages: string[];
+  errorMessage: string;
   handleInputChange: (
     e: React.ChangeEvent<HTMLInputElement>,
     index: number
@@ -28,9 +28,7 @@ const useExpiryDateInput = (): Props => {
     }))
   );
 
-  const [errorMessages, setErrorMessages] = useState<string[]>(
-    Array(CARD_INPUT.EXPIRY_DATE_INPUTS).fill("")
-  );
+  const [errorMessage, setErrorMessage] = useState("");
 
   const validateExpiryDate = (value: string, index: number) => {
     const extraValidations = [];
@@ -65,16 +63,14 @@ const useExpiryDateInput = (): Props => {
     const updatedState = expiryDateState.map((item, i) =>
       i === index ? { value: inputValue, isValid } : item
     );
-    setExpiryDateState(updatedState);
 
-    const updatedErrors = [...errorMessages];
-    updatedErrors[index] = errorMessage;
-    setErrorMessages(updatedErrors);
+    setExpiryDateState(updatedState);
+    setErrorMessage(errorMessage);
   };
 
   return {
     expiryDateState,
-    errorMessages,
+    errorMessage,
     handleInputChange,
   };
 };
