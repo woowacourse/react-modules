@@ -1,7 +1,7 @@
 import { useState, useMemo } from 'react';
 import { CheckValidationType, UseInputErrorProps } from '../types/types';
-import { findFirstError } from '../../utils';
 import { NO_ERROR } from '../constants/message';
+import { findFirstError } from '../utils/errorUtils';
 
 export default function useInputError<T extends Record<string, string>>({
   initError,
