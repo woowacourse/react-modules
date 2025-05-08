@@ -29,7 +29,7 @@ export const ModalBox = styled.div<
 >`
   display: flex;
   flex-direction: column;
-  gap: 5px;
+  gap: 10px;
   padding: 15px;
   background-color: ${({$backgroundColor}) => $backgroundColor ?? '#fff'};
   color: #000;

@@ -3,7 +3,6 @@ import styled from '@emotion/styled';
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: center;
   gap: 20px;
 `;
 
@@ -23,6 +22,8 @@ export const CancelButton = styled(Button)`
 `;
 
 export const Input = styled.input`
+  width: 100%;
+  box-sizing: border-box;
   background-color: #fff;
   color: #000;
   outline: none;
