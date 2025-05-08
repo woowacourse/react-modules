@@ -1,5 +1,7 @@
 import { matchCardBrand } from '../utils/matchCardBrand';
 
+const EXP_FOR_VALID_NUMBER = /^\d+$/;
+
 interface CardNumberInput {
   input1: string;
   input2: string;
@@ -41,7 +43,7 @@ export const validateCardNumber = (cardNumbers: CardNumberInput) => {
 };
 
 const isValidFirstCardNumber = (input1: string, input2: string): { isValid: boolean; message: string } => {
-  if (!/^\d+$/.test(input1)) {
+  if (!EXP_FOR_VALID_NUMBER.test(input1)) {
     return { isValid: false, message: '숫자만 입력해주세요.' };
   }
 
@@ -76,7 +78,7 @@ const validateDigits = (cardNumbers: CardNumberInput) => {
 
   if (['Visa', 'Master', 'UnionPay', 'Unknown'].includes(cardBrand)) {
     for (const [key, value] of entries) {
-      if (!/^\d+$/.test(value)) {
+      if (!EXP_FOR_VALID_NUMBER.test(value)) {
         setInvalid(key, '카드 번호는 숫자만 입력해주세요.');
       } else if (value.length !== 4) {
         setInvalid(key, '카드 번호는 4자리로 입력해주세요.');
