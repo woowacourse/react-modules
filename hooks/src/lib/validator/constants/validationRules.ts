@@ -6,4 +6,5 @@ export const VALIDATION_LENGTH = {
   CVC: 3,
   PASSWORD: 2,
   CARD_NUMBER: 4,
+  CARD_NUMBER_FULL: 16,
 };

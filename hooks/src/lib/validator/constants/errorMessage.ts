@@ -25,5 +25,6 @@ export const ERROR_MESSAGE = {
   NUMBER: {
     IS_NUMBER_STRING: '숫자를 입력해주세요',
     IS_VALID_LENGTH: `카드번호는 ${VALIDATION_LENGTH.CARD_NUMBER}자리를 입력해주세요`,
+    IS_VALID_NUMBERS_FULL_LENGTH: `카드번호는 총 ${VALIDATION_LENGTH.CARD_NUMBER_FULL}자리를 입력해주세요`,
   },
 };

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import type { ChangeEvent } from 'react';
-import { validateCardNumber } from './validator/validateCardInput';
+import { validateCardNumber, validateFullCardNumber } from './validator/validateCardInput';
 import { getFirstErrorMessage } from './validator/getFirstErrorMessage';
 
 export function useCardNumbersInput() {
@@ -13,7 +13,7 @@ export function useCardNumbersInput() {
 
     setCardNumbers(cardNumbers.map((num, i) => (i === index ? value : num)));
 
-    const errorResult = validateCardNumber(value);
+    const errorResult = validateCardNumber(value) || validateFullCardNumber(cardNumbers.join(''));
     setErrorMessage(getFirstErrorMessage(errorResult, 'NUMBER'));
   }
 

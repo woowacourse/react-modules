@@ -40,3 +40,12 @@ export function validateCardNumber(cardNumber: string) {
     IS_VALID_LENGTH: validatorUtils.isValidLength(cardNumber, VALIDATION_LENGTH.CARD_NUMBER),
   };
 }
+
+export function validateFullCardNumber(fullCardNumber: string) {
+  return {
+    IS_VALID_NUMBERS_FULL_LENGTH: validatorUtils.isValidLength(
+      fullCardNumber,
+      VALIDATION_LENGTH.CARD_NUMBER_FULL,
+    ),
+  };
+}
