@@ -17,7 +17,7 @@ interface UseCardNumberReturn {
   formatCardNumber: string[];
 }
 
-const CARD_NUMBER_MAX_LENGTH = {
+const CARD_NUMBER_MAX_LENGTH: Record<CardBrand, number> = {
   visa: 16,
   masterCard: 16,
   diners: 14,
@@ -67,27 +67,27 @@ const getCardBrand = (value: string): CardBrandType => {
   return null;
 };
 
+const CARD_FORMAT_SEGMENTS: Record<CardBrand, number[]> = {
+  visa: [4, 4, 4, 4],
+  masterCard: [4, 4, 4, 4],
+  diners: [4, 6, 4],
+  amex: [4, 6, 5],
+  unionPay: [4, 4, 4, 4],
+};
+
 const formatByBrand = (cardBrand: CardBrandType, value: string): string[] => {
-  switch (cardBrand) {
-    case "visa":
-    case "masterCard":
-    case "unionPay":
-      return [
-        value.slice(0, 4),
-        value.slice(4, 8),
-        value.slice(8, 12),
-        value.slice(12, 16),
-      ];
+  if (!cardBrand) return [];
 
-    case "amex":
-      return [value.slice(0, 4), value.slice(4, 10), value.slice(10, 15)];
+  const formatInfo = CARD_FORMAT_SEGMENTS[cardBrand];
+  if (!formatInfo) return [];
 
-    case "diners":
-      return [value.slice(0, 4), value.slice(4, 10), value.slice(10, 14)];
+  return formatInfo.map((segmentLength, index) => {
+    const startIndex = formatInfo
+      .slice(0, index)
+      .reduce((sum, length) => sum + length, 0);
 
-    default:
-      return [];
-  }
+    return value.slice(startIndex, startIndex + segmentLength);
+  });
 };
 
 const useCardNumber = (): UseCardNumberReturn => {
