@@ -4,7 +4,7 @@ import { validate } from './utils';
 
 type UseFormProps<T extends Record<string, string>> = {
   defaultValues: T;
-  validation?: Record<keyof T, Validation>;
+  validation?: Record<keyof T, Validation> | ((value: T) => Record<keyof T, Validation>);
   inputRegex?: Record<keyof T, RegExp>;
 };
 
@@ -30,11 +30,13 @@ export default function useForm<T extends Record<string, string>>({
         options?.onChange?.(event);
         setValue((prev) => ({ ...prev, [currentKey]: event.target.value }));
 
-        if (validation?.[currentKey])
+        if (validation) {
+          const validationObject = typeof validation === 'function' ? validation(value) : validation;
           setErrors((prev) => ({
             ...prev,
-            [currentKey]: validate(validation[currentKey], event.target.value),
+            [currentKey]: validate(validationObject[currentKey], event.target.value),
           }));
+        }
       },
     };
   };

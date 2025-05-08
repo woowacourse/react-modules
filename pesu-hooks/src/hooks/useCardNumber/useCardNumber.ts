@@ -1,34 +1,38 @@
-import { ERROR_MESSAGE } from '@/constants';
 import { useForm } from '@/hooks/useForm';
 import { CardNumberInput } from '@/types/input';
-import { isValidCardNumber, getCardBrand } from './hooks';
+import { getCardBrand, getCardNumberMaxLength } from './utils';
 
 export default function useCardNumber() {
   const {
     value: cardNumber,
     errors: cardNumberErrors,
     register: cardNumberRegister,
+    isValid: cardNumberIsValid,
   } = useForm<CardNumberInput>({
     defaultValues: {
       cardNumber: '',
     },
-    validation: {
-      cardNumber: {
-        required: true,
-        length: 4,
-        errorMessage: ERROR_MESSAGE.cardNumber,
-      },
+    validation: (value) => {
+      const brand = getCardBrand(value.cardNumber);
+      const maxLength = getCardNumberMaxLength(brand);
+
+      return {
+        cardNumber: {
+          required: true,
+          length: maxLength,
+          errorMessage: brand === 'unknown' ? '' : `${brand}사의 카드 번호는 ${maxLength}자리여야 합니다.`,
+        },
+      };
+    },
+    inputRegex: {
+      cardNumber: /^\d{0,16}$/,
     },
   });
 
-  // 기존 isValid 대신 아래처럼 사용
-  const isCardNumberIsValid = isValidCardNumber(cardNumber.cardNumber);
-  const cardBrand = getCardBrand(cardNumber.cardNumber);
-
   return {
     cardNumberErrors,
-    isCardNumberIsValid,
     cardNumber,
     cardNumberRegister,
+    cardNumberIsValid,
   };
 }
