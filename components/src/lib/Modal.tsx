@@ -13,6 +13,7 @@ import {
   ModalWrapperStyle,
 } from "./Modal.style";
 import ModalContext, { useModalContext } from "./contexts/ModalContext";
+import React, { HTMLAttributes } from "react";
 
 const Modal = ({ show, onHide, children, ...props }: ModalProps) => {
   useKeyEscClose(onHide);
@@ -88,6 +89,23 @@ Modal.Button = ({
       {children}
     </button>
   );
+};
+
+Modal.Trigger = ({ children }: BaseProps) => {
+  const { onHide } = useModalContext();
+
+  return React.Children.map(children, (child) => {
+    if (React.isValidElement(child)) {
+      const element = child as React.ReactElement<HTMLAttributes<Element>>;
+      return React.cloneElement(element, {
+        onClick: (e: React.MouseEvent) => {
+          element.props.onClick?.(e);
+          onHide();
+        },
+      });
+    }
+    return child;
+  });
 };
 
 export default Modal;

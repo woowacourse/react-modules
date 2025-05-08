@@ -15,7 +15,7 @@
   - [ ] 확인(Alert) 모달: 사용자에게 메시지를 전달하고 확인 버튼만 제공
     - [x] 버튼 제작 (모달 전용) (기본값 - onClick, children / 기본 css - color,backgroundColor, borderColor, borderRadius, fontSize )
   - [ ] 확인/취소(Confirm) 모달: 사용자에게 선택지를 제공하고 확인 및 취소 버튼 제공
-  - [ ] trigger 버튼 wrapper 제작 (여기 안에 들어가는 버튼은 무조건 onhide 이벤트를 디폴트로 실행한다.)
+  - [x] trigger wrapper 제작 (여기 안에 들어가는 버튼은 무조건 onhide 이벤트를 디폴트로 실행한다.)
   - [ ] 입력(Prompt) 모달: 사용자로부터 입력값을 받을 수 있는 입력 필드와 확인/취소 버튼 제공
     - [ ] 입력 필드 컴포넌트 제작 (기본 값 : value / onChange)
 - [ ] 모달 크기 옵션 추가 (container)
