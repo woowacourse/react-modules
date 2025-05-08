@@ -18,6 +18,7 @@ export const centerOpen: Story = {
     position: 'center',
     title: '제목',
     children: '이것은 모달 내용입니다.',
+    size: 'small',
     onClose: () => {},
     onBackdropClick: () => {},
   },
@@ -29,6 +30,7 @@ export const bottomOpen: Story = {
     position: 'bottom',
     title: '제목',
     children: '이것은 모달 내용입니다.',
+    size: 'small',
     onClose: () => {},
     onBackdropClick: () => {},
   },
@@ -41,6 +43,7 @@ export const withXButton: Story = {
     title: '제목',
     children: '이것은 모달 내용입니다.',
     isXButton: true,
+    size: 'small',
     onClose: () => {},
     onBackdropClick: () => {},
   },
@@ -53,6 +56,46 @@ export const withoutXButton: Story = {
     title: '제목',
     children: '이것은 모달 내용입니다.',
     isXButton: false,
+    size: 'small',
+    onClose: () => {},
+    onBackdropClick: () => {},
+  },
+};
+
+export const sizeSmall: Story = {
+  args: {
+    isOpen: true,
+    position: 'bottom',
+    title: '제목',
+    children: '이것은 모달 내용입니다.',
+    isXButton: false,
+    size: 'small',
+    onClose: () => {},
+    onBackdropClick: () => {},
+  },
+};
+
+export const sizeMedium: Story = {
+  args: {
+    isOpen: true,
+    position: 'bottom',
+    title: '제목',
+    children: '이것은 모달 내용입니다.',
+    isXButton: false,
+    size: 'medium',
+    onClose: () => {},
+    onBackdropClick: () => {},
+  },
+};
+
+export const sizeLarge: Story = {
+  args: {
+    isOpen: true,
+    position: 'bottom',
+    title: '제목',
+    children: '이것은 모달 내용입니다.',
+    isXButton: false,
+    size: 'large',
     onClose: () => {},
     onBackdropClick: () => {},
   },
@@ -74,6 +117,7 @@ export const InteractiveModalCenter = {
           position="center"
           title="제목"
           isXButton={true}
+          size="small"
           onClose={() => setIsOpen(false)}
           onBackdropClick={handleBackdropClick}
         >
@@ -100,6 +144,7 @@ export const InteractiveModalBottom = {
           position="bottom"
           title="제목"
           isXButton={true}
+          size="small"
           onClose={() => setIsOpen(false)}
           onBackdropClick={handleBackdropClick}
         >

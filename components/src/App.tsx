@@ -1,6 +1,6 @@
 import { useState } from 'react';
-// import { Modal } from './lib';
-import { Modal } from 'jurunghappy-modal';
+import { Modal } from './lib';
+// import { Modal } from 'jurunghappy-modal';
 import './App.css';
 
 function App() {
@@ -17,8 +17,10 @@ function App() {
       <button onClick={() => setIsOpen(true)}>Modal Open</button>
       <Modal
         isOpen={isOpen}
-        position="bottom"
+        position="center"
         title="카드사 선택"
+        isXButton={true}
+        size="small"
         onClose={() => setIsOpen(false)}
         onBackdropClick={handleBackdropClick}
       >
