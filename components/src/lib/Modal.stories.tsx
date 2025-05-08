@@ -136,3 +136,66 @@ export const CenterModal: Story = {
     );
   },
 };
+
+export const SmallModal: Story = {
+  args: {
+    size: 'small',
+    position: 'center',
+  },
+  render: (args) => {
+    return (
+      <>
+        <Modal isOpen={true}>
+          <Modal.Overlay onClick={() => {}} />
+          <Modal.Content {...args} size={args.size}>
+            <Modal.CloseButton onCloseClick={() => {}} />
+            <Modal.Title>스몰 모달 제목</Modal.Title>
+            <Modal.Body>이것은 모달의 본문입니다.</Modal.Body>
+          </Modal.Content>
+        </Modal>
+      </>
+    );
+  },
+};
+
+export const MediumModal: Story = {
+  args: {
+    size: 'medium',
+    position: 'center',
+  },
+  render: (args) => {
+    return (
+      <>
+        <Modal isOpen={true}>
+          <Modal.Overlay onClick={() => {}} />
+          <Modal.Content {...args} size={args.size}>
+            <Modal.CloseButton onCloseClick={() => {}} />
+            <Modal.Title>미디엄 모달 제목</Modal.Title>
+            <Modal.Body>이것은 모달의 본문입니다.</Modal.Body>
+          </Modal.Content>
+        </Modal>
+      </>
+    );
+  },
+};
+
+export const LargeModal: Story = {
+  args: {
+    size: 'large',
+    position: 'center',
+  },
+  render: (args) => {
+    return (
+      <>
+        <Modal isOpen={true}>
+          <Modal.Overlay onClick={() => {}} />
+          <Modal.Content {...args} size={args.size}>
+            <Modal.CloseButton onCloseClick={() => {}} />
+            <Modal.Title>라지 모달 제목</Modal.Title>
+            <Modal.Body>이것은 모달의 본문입니다.</Modal.Body>
+          </Modal.Content>
+        </Modal>
+      </>
+    );
+  },
+};
