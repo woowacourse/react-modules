@@ -1,1 +1,52 @@
-# Button Module
+# 모달 컴포넌트
+
+> 페이먼츠 모듈 1단계
+
+[🎨 스토리북 배포 주소](https://6811b32435027dad59e3902b-hdzpptbvyn.chromatic.com/?path=/story/components-modal--center)  
+[🗂️ 배포 npm 링크](https://www.npmjs.com/package/lumes_modal)
+
+<br>
+
+## 🎯 기능 요구 사항
+
+## [Step1] ⚙️ Module
+
+### 1. 모달 UI 구현
+
+- [x] 레이아웃 구현하기
+- [x] Title 구현하기
+- [x] close 버튼 UI 구현하기
+- [x] 모달 스타일 적용하기
+  - 모달 위치: 중앙, 하단 등
+  - 모달 내용: 제목, 버튼 등
+
+### 2. 이벤트 핸들러 등록
+
+- [x] 모달 위치 및 내용 구성 옵션을 prop으로 전달받아 유연하게 모달을 구성하기
+- [x] 사용자 정의 이벤트 핸들러를 연결하기
+  - 모달 열기, 닫기, 확인 등의 동작에 대한 이벤트 핸들러
+
+### 3. npm 배포
+
+- [x] 모달 컴포넌트를 npm으로 배포하기
+
+<br>
+
+## [Step1] ✅ 프로그래밍 요구사항
+
+- Storybook
+  - [x] 모달의 위치, 내용, 이벤트 핸들러 등 다양한 prop에 대한 Storybook 테스트 시나리오를 작성한다.
+
+<br>
+
+## 📝 커밋 메시지
+
+- feat : 새로운 기능을 추가한 경우
+- fix : 버그 수정
+- docs : 문서를 수정한 경우
+- style : 코드 스타일, 포멧, 주석을 변경
+- design: CSS 등 사용자 UI 디자인 변경
+- refactor : 코드 리팩토링
+- test : 테스트 관련 코드를 수정한 경우
+- chore : 코드 수정이 아닌, 단순 폴더명 파일명 등을 수정한 경우
+- remove: 파일이나 로직을 삭제한 경우
