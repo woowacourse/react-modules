@@ -2,29 +2,29 @@ import { useState } from 'react';
 import { Validation } from './types';
 import { validate } from './utils';
 
-type UseFormProps<T extends Record<string, string>> = {
-  defaultValues: T;
-  validation?: Record<keyof T, Validation> | ((value: T) => Record<keyof T, Validation>);
-  inputRegex?: Record<keyof T, RegExp>;
+type UseFormProps<TState extends Record<string, string>> = {
+  defaultValues: TState;
+  validation?: Record<keyof TState, Validation> | ((value: TState) => Record<keyof TState, Validation>);
+  inputRegex?: Record<keyof TState, RegExp>;
 };
 
-export default function useForm<T extends Record<string, string>>({
+export default function useForm<TState extends Record<string, string>>({
   defaultValues,
   validation,
   inputRegex,
-}: UseFormProps<T>) {
-  const [value, setValue] = useState<T>(defaultValues);
-  const [errors, setErrors] = useState<T>(defaultValues);
+}: UseFormProps<TState>) {
+  const [value, setValue] = useState<TState>(defaultValues);
+  const [errors, setErrors] = useState<TState>(defaultValues);
 
-  const register = <E extends HTMLInputElement | HTMLSelectElement>(
-    currentKey: keyof T,
+  const register = <UElement extends HTMLInputElement | HTMLSelectElement>(
+    currentKey: keyof TState,
     options?: {
-      onChange?: (event: React.ChangeEvent<E>) => void;
+      onChange?: (event: React.ChangeEvent<UElement>) => void;
     },
   ) => {
     return {
       value: value[currentKey],
-      onChange: (event: React.ChangeEvent<E>) => {
+      onChange: (event: React.ChangeEvent<UElement>) => {
         if (inputRegex?.[currentKey] && !inputRegex[currentKey].test(event.target.value)) return;
 
         options?.onChange?.(event);
