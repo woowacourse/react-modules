@@ -1,6 +1,9 @@
 import styled from "@emotion/styled";
 import { css, keyframes } from "@emotion/react";
 
+type SizeProps = "small" | "medium" | "large";
+type ButtonTypeProps = "cancel" | "confirm";
+
 const slideUpCenter = keyframes`
   from {
     opacity: 0;
@@ -15,11 +18,11 @@ const slideUpCenter = keyframes`
 const slideUpBottom = keyframes`
   from {
     opacity: 0;
-    transform: translateY(50%);
+    transform: translate(-50%,50%);
   }
   to {
     opacity: 1;
-    transform: translateY(0);
+    transform: translate(-50%,0);
   }
 `;
 
@@ -34,7 +37,8 @@ const positionCenter = css`
 const positionBottom = css`
   width: 100vw;
   bottom: 0;
-  left: 0;
+  left: 50%;
+  transform: translateX(-50%);
   right: 20px;
   animation: 0.5s ease ${slideUpBottom};
   border-bottom-left-radius: 0;
@@ -51,8 +55,11 @@ export const Background = styled.div`
   left: 0;
 `;
 
-export const ModalContainer = styled.div<{ $position: string }>`
-  min-height: 216px;
+export const ModalContainer = styled.div<{
+  $position: string;
+  $size: SizeProps;
+}>`
+  width: 100%;
   border-radius: 8px;
   background-color: #fff;
   position: fixed;
@@ -63,8 +70,12 @@ export const ModalContainer = styled.div<{ $position: string }>`
   box-sizing: border-box;
   gap: 16px;
 
-  ${({ $position }) =>
-    $position === "center" ? positionCenter : positionBottom};
+  ${({ $position }) => $position === "center" && positionCenter};
+  ${({ $position }) => $position === "bottom" && positionBottom};
+
+  ${({ $size }) => $size === "small" && "max-width: 320px"}
+  ${({ $size }) => $size === "medium" && "max-width: 480px"}
+  ${({ $size }) => $size === "large" && "max-width: 600px"}
 `;
 
 export const HeaderSection = styled.div`
@@ -79,6 +90,16 @@ export const Title = styled.span`
   font-size: 18px;
 `;
 
+const cancelButton = css`
+  border: 1px solid #cccccc;
+  background-color: #fff;
+`;
+
+const confirmButton = css`
+  background-color: #333333;
+  color: #ffffff;
+`;
+
 export const ModalCloseButton = styled.button`
   width: 24px;
   height: 24px;
@@ -87,6 +108,22 @@ export const ModalCloseButton = styled.button`
   justify-content: center;
   color: black;
   cursor: pointer;
+`;
+
+export const ModalButtonContainer = styled.div`
+  display: flex;
+  gap: 12px;
+  justify-content: right;
+`;
+
+export const ModalButton = styled.button<{ $type: ButtonTypeProps }>`
+  max-width: 80px;
+  border-radius: 4px;
+  padding: 8px 20px;
+  cursor: pointer;
+
+  ${({ $type }) => $type === "cancel" && cancelButton}
+  ${({ $type }) => $type === "confirm" && confirmButton}
 `;
 
 export const ModalContent = styled.main`

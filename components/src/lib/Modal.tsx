@@ -8,7 +8,7 @@ interface ModalProps {
   /** 모달의 열림 여부 */
   isOpen: boolean;
   /** 모달을 닫을 때 호출되는 함수 */
-  handleCloseModal: () => void;
+  onModalClose: () => void;
   /** 모달 내부에 표시될 내용 */
   children: ReactNode;
 }
@@ -25,6 +25,8 @@ interface ModalComponent extends FC<ModalProps> {
   Title: typeof S.Title;
   ModalCloseButton: typeof S.ModalCloseButton;
   ModalContent: typeof S.ModalContent;
+  ModalButton: typeof S.ModalButton;
+  ModalButtonContainer: typeof S.ModalButtonContainer;
 }
 
 /**
@@ -34,14 +36,14 @@ interface ModalComponent extends FC<ModalProps> {
  * - `handleCloseModal`은 클릭 또는 키보드 이벤트로 닫기 동작을 수행합니다.
  * - 내부 구조 커스터마이징이 가능합니다.
  */
-const Modal: ModalComponent = ({ isOpen, handleCloseModal, children }) => {
+const Modal: ModalComponent = ({ isOpen, onModalClose, children }) => {
   useEffect(() => {
     const handleEsc = (e: KeyboardEvent) => {
-      if (e.key === "Escape") handleCloseModal();
+      if (e.key === "Escape") onModalClose();
     };
     window.addEventListener("keyup", handleEsc);
     return () => window.removeEventListener("keyup", handleEsc);
-  }, [handleCloseModal]);
+  }, [onModalClose]);
 
   return isOpen ? <>{children}</> : null;
 };
@@ -53,5 +55,7 @@ Modal.HeaderSection = S.HeaderSection;
 Modal.Title = S.Title;
 Modal.ModalCloseButton = S.ModalCloseButton;
 Modal.ModalContent = S.ModalContent;
+Modal.ModalButtonContainer = S.ModalButtonContainer;
+Modal.ModalButton = S.ModalButton;
 
 export default Modal;
