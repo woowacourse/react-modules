@@ -21,3 +21,12 @@ export const CancelButton = styled(Button)`
   color: #000;
   border: 1px solid #000;
 `;
+
+export const Input = styled.input`
+  background-color: #fff;
+  color: #000;
+  outline: none;
+  border: 2px solid #000;
+  border-radius: 5px;
+  padding: 8px;
+`;
