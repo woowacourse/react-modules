@@ -1,3 +1,4 @@
+import FocusTrap from "./FocusTrap";
 import * as S from "./Modal.styles";
 import { FC, ReactNode, useEffect } from "react";
 
@@ -27,6 +28,7 @@ interface ModalComponent extends FC<ModalProps> {
   ModalContent: typeof S.ModalContent;
   ModalButton: typeof S.ModalButton;
   ModalButtonContainer: typeof S.ModalButtonContainer;
+  ModalFocusTrap: typeof FocusTrap;
 }
 
 /**
@@ -57,5 +59,6 @@ Modal.ModalCloseButton = S.ModalCloseButton;
 Modal.ModalContent = S.ModalContent;
 Modal.ModalButtonContainer = S.ModalButtonContainer;
 Modal.ModalButton = S.ModalButton;
+Modal.ModalFocusTrap = FocusTrap;
 
 export default Modal;

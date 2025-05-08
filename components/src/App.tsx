@@ -26,12 +26,14 @@ const App = () => {
               <p>모달 내용입니다.</p>
             </Modal.ModalContent>
             <Modal.ModalButtonContainer>
-              <Modal.ModalButton $size="small" $type="confirm">
-                확인
-              </Modal.ModalButton>
-              <Modal.ModalButton $size="small" $type="cancel">
-                취소
-              </Modal.ModalButton>
+              <Modal.ModalFocusTrap>
+                <Modal.ModalButton $size="small" $type="confirm">
+                  확인
+                </Modal.ModalButton>
+                <Modal.ModalButton $size="small" $type="cancel">
+                  취소
+                </Modal.ModalButton>
+              </Modal.ModalFocusTrap>
             </Modal.ModalButtonContainer>
           </Modal.ModalContainer>
         </Modal.Background>
