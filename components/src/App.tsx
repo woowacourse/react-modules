@@ -21,7 +21,6 @@ function App() {
         onConfirm={() => {}}
         size='large'
         // onSubmit={(input) => {
-        //   console.log('input', input);
         // }}
       />
       {/* <h2>Modal Title</h2>
