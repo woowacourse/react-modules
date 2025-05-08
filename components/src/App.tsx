@@ -18,8 +18,8 @@ function App() {
           </Modal.Header>
           <Modal.Body>몸통이다!</Modal.Body>
           <Modal.Footer direction="row" align="end" justify="center">
-            <Button>확인</Button>
-            <Button>취소</Button>
+            <Button color="light">확인</Button>
+            <Button color="dark">취소</Button>
           </Modal.Footer>
         </Modal.Content>
       </Modal>

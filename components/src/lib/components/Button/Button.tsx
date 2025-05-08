@@ -1,7 +1,8 @@
-import { ReactNode } from "react";
+import { StyledButton } from "./Button.styled";
+import { ButtonProps } from "./Button.types";
 
-const Button = ({ children }: { children: ReactNode }) => {
-  return <button>{children}</button>;
+const Button = ({ children, color }: ButtonProps) => {
+  return <StyledButton color={color}>{children}</StyledButton>;
 };
 
 export default Button;
