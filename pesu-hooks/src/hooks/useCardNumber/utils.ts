@@ -32,8 +32,6 @@ export function getCardNumberMaxLength(cardBrand: CardBrandOrUnknown) {
 }
 
 export function formatCardNumber(cardNumber: string, cardBrand: CardBrandOrUnknown) {
-  if (cardBrand === 'unknown') return cardNumber;
-
   switch (cardBrand) {
     case 'diners':
       return cardNumber.replace(/(\d{4})(\d{6})(\d{0,4})/, '$1 $2 $3').split(' ');

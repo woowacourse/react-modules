@@ -140,14 +140,58 @@ describe('useCardNumber', () => {
     });
   });
 
-  it('', () => {
-    const { result } = renderHook(() => useCardNumber());
-    const { cardNumberRegister } = result.current;
+  describe('카드 번호 포맷팅', () => {
+    it('Diners 카드 번호는 4-6-4 포맷으로 포맷팅된다.', () => {
+      const { result } = renderHook(() => useCardNumber());
+      const { cardNumberRegister } = result.current;
 
-    act(() => {
-      cardNumberRegister('cardNumber').onChange(mockInputEvent('abcd'));
+      act(() => {
+        cardNumberRegister('cardNumber').onChange(mockInputEvent('36123456789012'));
+      });
+
+      expect(result.current.formattedCardNumber).toEqual(['3612', '345678', '9012']);
     });
 
-    expect(result.current.cardNumber.cardNumber).toBe('');
+    it('Amex 카드 번호는 4-6-5 포맷으로 포맷팅된다.', () => {
+      const { result } = renderHook(() => useCardNumber());
+      const { cardNumberRegister } = result.current;
+
+      act(() => {
+        cardNumberRegister('cardNumber').onChange(mockInputEvent('341234567890123'));
+      });
+    });
+
+    it('UnionPay 카드 번호는 4-4-4-4-4 포맷으로 포맷팅된다.', () => {
+      const { result } = renderHook(() => useCardNumber());
+      const { cardNumberRegister } = result.current;
+
+      act(() => {
+        cardNumberRegister('cardNumber').onChange(mockInputEvent('6221261234567890'));
+      });
+
+      expect(result.current.formattedCardNumber).toEqual(['6221', '2612', '3456', '7890']);
+    });
+
+    it('Master 카드 번호는 4-4-4-4 포맷으로 포맷팅된다.', () => {
+      const { result } = renderHook(() => useCardNumber());
+      const { cardNumberRegister } = result.current;
+
+      act(() => {
+        cardNumberRegister('cardNumber').onChange(mockInputEvent('5112345678901234'));
+      });
+
+      expect(result.current.formattedCardNumber).toEqual(['5112', '3456', '7890', '1234']);
+    });
+
+    it('unknown 카드 번호는 16자리이다.', () => {
+      const { result } = renderHook(() => useCardNumber());
+      const { cardNumberRegister } = result.current;
+
+      act(() => {
+        cardNumberRegister('cardNumber').onChange(mockInputEvent('1234567890123456'));
+      });
+
+      expect(result.current.formattedCardNumber).toEqual(['1234', '5678', '9012', '3456']);
+    });
   });
 });
