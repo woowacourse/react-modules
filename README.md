@@ -150,7 +150,7 @@
   - [x] isOpen (prop)
   - [x] position (prop)
   - [x] title (prop)
-  - [ ] XButton (prop)
+  - [x] XButton (prop)
   - [ ] size (prop)
   - [x] onClose (prop)
   - [x] onBackdropClick (prop)
@@ -162,9 +162,9 @@
 ## Storybook
 
 - [ ] 모달 컴포넌트의 PC 대응 스토리 작성
-  - [ ] 닫기 버튼
-    - [ ] X 사용할 때
-    - [ ] X 사용하지 않을 때
+  - [x] 닫기 버튼
+    - [x] X 사용할 때
+    - [x] X 사용하지 않을 때
   - [ ] 사이즈 테스트
     - [ ] small 옵션
     - [ ] medium 옵션

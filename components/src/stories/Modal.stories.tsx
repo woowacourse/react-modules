@@ -19,6 +19,7 @@ export const centerOpen: Story = {
     title: '제목',
     children: '이것은 모달 내용입니다.',
     onClose: () => {},
+    onBackdropClick: () => {},
   },
 };
 
@@ -29,6 +30,31 @@ export const bottomOpen: Story = {
     title: '제목',
     children: '이것은 모달 내용입니다.',
     onClose: () => {},
+    onBackdropClick: () => {},
+  },
+};
+
+export const withXButton: Story = {
+  args: {
+    isOpen: true,
+    position: 'bottom',
+    title: '제목',
+    children: '이것은 모달 내용입니다.',
+    isXButton: true,
+    onClose: () => {},
+    onBackdropClick: () => {},
+  },
+};
+
+export const withoutXButton: Story = {
+  args: {
+    isOpen: true,
+    position: 'bottom',
+    title: '제목',
+    children: '이것은 모달 내용입니다.',
+    isXButton: false,
+    onClose: () => {},
+    onBackdropClick: () => {},
   },
 };
 
@@ -47,6 +73,7 @@ export const InteractiveModalCenter = {
           isOpen={isOpen}
           position="center"
           title="제목"
+          isXButton={true}
           onClose={() => setIsOpen(false)}
           onBackdropClick={handleBackdropClick}
         >
@@ -72,6 +99,7 @@ export const InteractiveModalBottom = {
           isOpen={isOpen}
           position="bottom"
           title="제목"
+          isXButton={true}
           onClose={() => setIsOpen(false)}
           onBackdropClick={handleBackdropClick}
         >

@@ -73,7 +73,8 @@ export const ModalHeader = styled.div`
   margin: 0 auto;
 `;
 
-export const CloseButton = styled.button`
+export const CloseButton = styled.button<{ isXButton: boolean }>`
   background-color: transparent;
   cursor: pointer;
+  display: ${({ isXButton }) => (isXButton ? 'block;' : 'none;')};
 `;
