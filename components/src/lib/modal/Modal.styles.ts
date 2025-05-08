@@ -86,6 +86,11 @@ export const ModalCloseButton = styled.button`
   justify-content: center;
   color: black;
   cursor: pointer;
+
+  :focus {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(51, 51, 51, 0.5);
+  }
 `;
 
 export const ModalContentSection = styled.main`

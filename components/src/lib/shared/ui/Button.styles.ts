@@ -14,6 +14,10 @@ export const ConfirmButton = styled.button`
   :hover {
     background-color: rgb(100, 100, 100);
   }
+  :focus {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(51, 51, 51, 0.5);
+  }
 `;
 
 export const CloseButton = styled.button`
@@ -27,5 +31,10 @@ export const CloseButton = styled.button`
   transition: background-color 0.1s ease-in-out;
   :hover {
     background-color: rgb(238, 238, 238);
+  }
+
+  :focus {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(51, 51, 51, 0.5);
   }
 `;
