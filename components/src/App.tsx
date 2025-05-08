@@ -1,11 +1,36 @@
-import React from "react";
-import "./App.css";
+import { Modal, useModal, ModalProvider, ModalProps } from './lib';
+import './App.css';
 
-function App() {
+function ModalContent() {
+  const { openModalHandler } = useModal();
+
   return (
     <>
-      <h1>Component Modules</h1>
+      <Modal>
+        <p style={{ color: 'black' }}>Test!!!!!!</p>
+        <p style={{ color: 'black' }}>Test!!!!!!</p>
+        <p style={{ color: 'black' }}>Test!!!!!!</p>
+        <p style={{ color: 'black' }}>Test!!!!!!</p>
+      </Modal>
+      <div className="button-container">
+        <button className="click-me-button" onClick={openModalHandler}>
+          click me!!
+        </button>
+      </div>
     </>
+  );
+}
+
+function App({ modalType, closeType, titleText, ...otherProps }: ModalProps) {
+  return (
+    <ModalProvider
+      modalType={modalType}
+      closeType={closeType}
+      titleText={titleText}
+      {...otherProps}
+    >
+      <ModalContent />
+    </ModalProvider>
   );
 }
 
