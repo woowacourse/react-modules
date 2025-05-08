@@ -32,12 +32,6 @@ export default defineConfig({
       tsconfigPath: "./tsconfig.build.json",
       // 타입 정의 파일 생성에 사용할 TypeScript 설정 파일 경로를 지정합니다.
       // 기본 tsconfig.json과 별도로 빌드용 설정을 분리할 수 있습니다.
-
-      // insertTypesEntry: true,
-      // 타입 진입점 파일을 자동으로 생성합니다.
-      // package.json의 types 필드 또는 기본값(outDir/index.d.ts)을 사용합니다.
-      // 이 옵션은 타입 시스템 설정을 자동화하여 개발자 경험을 향상시킵니다.
-      // TypeScript 라이브러리를 배포할 때 사용자가 쉽게 타입을 가져올 수 있도록 합니다.
     }),
   ],
 
