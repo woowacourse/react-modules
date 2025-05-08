@@ -60,7 +60,7 @@ function Modal({
   onConfirm,
   position = "center",
   children,
-  hasTopCloseButton = true,
+  hasTopCloseButton = false,
   primaryButton = false,
   secondaryButton = false,
   primaryButtonText,
