@@ -140,13 +140,12 @@ function useExpirationPeriod(rules?: Rule[]) {
       }
     : { month: false, year: false };
 
-  const cardExpirationPeriod = {
+  return {
     value,
     isError,
     onChange,
     errorMessage,
   };
-  return cardExpirationPeriod;
 }
 
 export default useExpirationPeriod;

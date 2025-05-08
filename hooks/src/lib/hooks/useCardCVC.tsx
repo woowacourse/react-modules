@@ -17,13 +17,10 @@ function useCardCVC() {
   const isError = !getValidLength(value, 3);
   const errorMessage = isError ? '한 칸은 3자리 숫자를 입력해야합니다.' : '';
 
-  const cardCVC = {
+  return {
     value,
     isError,
     onChange,
     errorMessage,
   };
-  return cardCVC;
 }
-
-export default useCardCVC;

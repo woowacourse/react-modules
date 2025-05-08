@@ -23,13 +23,12 @@ function useCardNumber() {
     ? '한 칸은 4자리 숫자를 입력해야합니다.'
     : '';
 
-  const cardNumber = {
+  return {
     value,
     isError,
     errorMessage,
     onChange,
   };
-  return cardNumber;
 }
 
 export default useCardNumber;
