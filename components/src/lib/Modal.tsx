@@ -1,30 +1,55 @@
 import styled from '@emotion/styled';
 import useEscapeKeyClose from './hooks/useEscapePress';
+import { createContext, useContext } from 'react';
 
-interface ModalProps {
+interface BaseProps {
+  children?: React.ReactNode;
+}
+
+interface ModalProps extends BaseProps {
   isOpen: boolean;
   onClose: () => void;
 }
 
-const Modal = ({ isOpen, onClose }: ModalProps) => {
+const ModalContext = createContext<{ onClose: () => void }>({ onClose: () => {} });
+
+const Modal = ({ children, isOpen, onClose }: ModalProps) => {
   useEscapeKeyClose(isOpen, onClose);
 
   return (
     <>
       {isOpen && (
-        <div id="modal">
-          <ModalOverlay data-testid="modal-overlay" onClick={onClose} />
-          <ModalContent>
-            <p>모달열림</p>
-            <div data-testid="modal-close" onClick={() => onClose()}>
-              모달닫기
-            </div>
-          </ModalContent>
-        </div>
+        <ModalContext.Provider value={{ onClose }}>
+          <div id="modal">{children}</div>
+        </ModalContext.Provider>
       )}
     </>
   );
 };
+
+const Overlay = () => {
+  const { onClose } = useContext(ModalContext);
+
+  return <ModalOverlay data-testid="modal-overlay" onClick={onClose} />;
+};
+
+const Content = ({ children }: BaseProps) => {
+  return <ModalContent>{children}</ModalContent>;
+};
+
+const CloseButton = () => {
+  const { onClose } = useContext(ModalContext);
+
+  return (
+    <div data-testid="modal-close" onClick={() => onClose()}>
+      모달닫기
+    </div>
+  );
+};
+
+Modal.Overlay = Overlay;
+Modal.Content = Content;
+Modal.CloseButton = CloseButton;
 
 export default Modal;
 

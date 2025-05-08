@@ -9,7 +9,13 @@ function App() {
     <>
       <h1>Component Modules</h1>
       <button onClick={() => setIsOpen(true)}>모달열기</button>
-      <Modal isOpen={isOpen} onClose={() => setIsOpen(false)} />
+      <Modal isOpen={isOpen} onClose={() => setIsOpen(false)}>
+        <Modal.Overlay />
+        <Modal.Content>
+          <Modal.CloseButton />
+          <p>모달열림</p>
+        </Modal.Content>
+      </Modal>
     </>
   );
 }

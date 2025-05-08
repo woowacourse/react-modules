@@ -13,7 +13,15 @@ type Story = StoryObj<typeof meta>;
 
 const ModalTemplate = () => {
   const [isOpen, setIsOpen] = useState(true);
-  return <Modal isOpen={isOpen} onClose={() => setIsOpen(false)} />;
+  return (
+    <Modal isOpen={isOpen} onClose={() => setIsOpen(false)}>
+      <Modal.Overlay />
+      <Modal.Content>
+        <Modal.CloseButton />
+        <p>모달열림</p>
+      </Modal.Content>
+    </Modal>
+  );
 };
 
 export const Default: Story = {
