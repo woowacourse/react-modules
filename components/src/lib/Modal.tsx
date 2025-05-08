@@ -43,6 +43,10 @@ export interface ModalTitleProps extends ChildrenProps {
   color?: string;
 }
 
+export interface ModalFooterProps extends ChildrenProps {
+  buttonAlign?: "left" | "center" | "right";
+}
+
 interface ModalContextType {
   onHide: () => void;
 }
@@ -89,8 +93,8 @@ Modal.Body = ({ children }: ChildrenProps) => {
   return <div css={ModalBodyStyle}>{children}</div>;
 };
 
-Modal.Footer = ({ children }: ChildrenProps) => {
-  return <div css={ModalFooterStyle}>{children}</div>;
+Modal.Footer = ({ buttonAlign = "right", children }: ModalFooterProps) => {
+  return <div css={ModalFooterStyle(buttonAlign)}>{children}</div>;
 };
 
 Modal.Title = ({ color = "#000", children }: ModalTitleProps) => {
