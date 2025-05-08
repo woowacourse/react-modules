@@ -8,7 +8,7 @@ import {
   ModalButtonContainer,
   ModalInput,
 } from './Modal.styled';
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { createContext } from 'react';
 import { createPortal } from 'react-dom';
 import useModalContext from './hooks/useModalContext';
@@ -23,6 +23,13 @@ type ModalProps = {
 
 export const ModalContext = createContext<ModalProps | null>(null);
 
+const FOCUSABLE_SELECTORS = `
+  a[href], area[href], input:not([disabled]),
+  select:not([disabled]), textarea:not([disabled]),
+  button:not([disabled]), iframe, object, embed,
+  [tabindex]:not([tabindex="-1"])
+`;
+
 const Modal = ({
   isOpen = true,
   onClose,
@@ -36,11 +43,31 @@ const Modal = ({
     children,
     position,
   };
+  const modalRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    const focusableElements =
+      modalRef.current.querySelectorAll<HTMLElement>(FOCUSABLE_SELECTORS);
+    const first = focusableElements[0];
+    const last = focusableElements[focusableElements.length - 1];
+    first?.focus();
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === 'Escape') {
         onClose();
+      }
+
+      if (event.shiftKey) {
+        // Shift + Tab
+        if (document.activeElement === first) {
+          event.preventDefault();
+          last?.focus();
+        }
+      } else {
+        // Tab
+        if (document.activeElement === last) {
+          event.preventDefault();
+          first?.focus();
+        }
       }
     };
 
@@ -58,6 +85,7 @@ const Modal = ({
           <ModalContext.Provider value={value}>
             <BackDrop onClick={onClose} $position={position}>
               <ModalLayout
+                ref={modalRef}
                 $position={position}
                 $size={size}
                 onClick={(event) => event.stopPropagation()}

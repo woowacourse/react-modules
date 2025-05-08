@@ -23,7 +23,37 @@ function App() {
         </Modal.Contents>
         <Modal.Button
           title="취소"
-          backgroundColor="#ffffff"
+          backgroundColor="#000000"
+          textColor="#000000"
+          border="1px solid #000000"
+          size="small"
+          onClick={() => {
+            console.log('확인 버튼 클릭!');
+          }}
+        />
+        <Modal.Button
+          title="취소"
+          backgroundColor="#00ffff"
+          textColor="#000000"
+          border="1px solid #000000"
+          size="small"
+          onClick={() => {
+            console.log('확인 버튼 클릭!');
+          }}
+        />
+        <Modal.Button
+          title="취소"
+          backgroundColor="#00ffff"
+          textColor="#000000"
+          border="1px solid #000000"
+          size="small"
+          onClick={() => {
+            console.log('확인 버튼 클릭!');
+          }}
+        />
+        <Modal.Button
+          title="취소"
+          backgroundColor="#00ffff"
           textColor="#000000"
           border="1px solid #000000"
           size="small"
