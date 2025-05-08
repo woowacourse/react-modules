@@ -1,6 +1,6 @@
-import CancelButton from "../buttons/CancelButton";
-import ConfirmButton from "../buttons/ConfirmButton";
-import Modal from "../Modal";
+import CancelButton from "../../buttons/CancelButton";
+import ConfirmButton from "../../buttons/ConfirmButton";
+import Modal from "../../Modal";
 export interface ConfirmModalProps {
   /** 모달을 보여줄지 여부 */
   show: boolean;
