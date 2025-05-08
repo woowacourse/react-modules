@@ -7,7 +7,10 @@ import {
 } from '../constants/cardNumberlengthByPosition';
 import { useCardNumbers } from '../lib';
 import getCardNetwork from '../useCardNumbers/getCardNetwork';
-import { CardNetWorks } from '../useCardNumbers/useCardNumbers';
+import {
+  CardNetWorks,
+  CardNumbersKeys,
+} from '../useCardNumbers/useCardNumbers';
 
 export default function useFormattedCardNumbers() {
   const { cardNumbers, handleCardNumbersChange, isError, errorMessage } =
@@ -18,53 +21,32 @@ export default function useFormattedCardNumbers() {
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
     const input = event.target.value.trim().replaceAll(' ', '');
-    console.log('input', input);
     if (!cardNetWorks) {
       handleCardNumbersChange({ target: 'FIRST' })(event);
       return;
     }
 
-    const cardNumberLengthByPosition =
+    const CARD_NUMBER_LENGTH_BY_POSITION =
       getCardNumberLengthByPosition(cardNetWorks);
+    const positionKeys: CardNumbersKeys[] = [
+      'FIRST',
+      'SECOND',
+      'THIRD',
+      'FOURTH',
+    ] as const;
 
-    const firstNumber = input.slice(0, cardNumberLengthByPosition.FIRST);
-    const secondNumber = input.slice(
-      cardNumberLengthByPosition.FIRST,
-      cardNumberLengthByPosition.FIRST + cardNumberLengthByPosition.SECOND
-    );
-    const thirdNumber = input.slice(
-      cardNumberLengthByPosition.FIRST + cardNumberLengthByPosition.SECOND,
-      cardNumberLengthByPosition.FIRST +
-        cardNumberLengthByPosition.SECOND +
-        cardNumberLengthByPosition.THIRD
-    );
-    const fourthNumber = input.slice(
-      cardNumberLengthByPosition.FIRST +
-        cardNumberLengthByPosition.SECOND +
-        cardNumberLengthByPosition.THIRD,
-      cardNumberLengthByPosition.FIRST +
-        cardNumberLengthByPosition.SECOND +
-        cardNumberLengthByPosition.THIRD +
-        cardNumberLengthByPosition.FOURTH
-    );
+    let currentIndex = 0;
+    for (const key of positionKeys) {
+      const length = CARD_NUMBER_LENGTH_BY_POSITION[key];
+      const part = input.slice(currentIndex, currentIndex + length);
+      currentIndex += length;
 
-    const firstEvent = {
-      target: { value: firstNumber },
-    } as React.ChangeEvent<HTMLInputElement>;
-    const secondEvent = {
-      target: { value: secondNumber },
-    } as React.ChangeEvent<HTMLInputElement>;
-    const thirdEvent = {
-      target: { value: thirdNumber },
-    } as React.ChangeEvent<HTMLInputElement>;
-    const fourthEvent = {
-      target: { value: fourthNumber },
-    } as React.ChangeEvent<HTMLInputElement>;
+      const syntheticEvent = {
+        target: { value: part },
+      } as React.ChangeEvent<HTMLInputElement>;
 
-    handleCardNumbersChange({ target: 'FIRST' })(firstEvent);
-    handleCardNumbersChange({ target: 'SECOND' })(secondEvent);
-    handleCardNumbersChange({ target: 'THIRD' })(thirdEvent);
-    handleCardNumbersChange({ target: 'FOURTH' })(fourthEvent);
+      handleCardNumbersChange({ target: key })(syntheticEvent);
+    }
   };
 
   return {

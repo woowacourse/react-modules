@@ -42,16 +42,14 @@ export const CARD_NUMBER_ERROR_MESSAGE = {
   NOT_NUMBERIC: '숫자만 입력 가능합니다.',
 } as const;
 
-type CardNumbersKeys = {
-  target: 'FIRST' | 'SECOND' | 'THIRD' | 'FOURTH';
-};
+export type CardNumbersKeys = 'FIRST' | 'SECOND' | 'THIRD' | 'FOURTH';
 
 export default function useCardNumbers(userCardNumbers = INITIAL_CARD_NUMBER) {
   const [cardNumbers, setCardNumbers] = useState<CardNumbers>(userCardNumbers);
   const { error, changeError, clearError } = useError(INITIAL_IS_ERROR);
   const cardNetwork = getCardNetwork(Object.values(cardNumbers).join(''));
 
-  function handleCardNumbersChange({ target }: CardNumbersKeys) {
+  function handleCardNumbersChange({ target }: { target: CardNumbersKeys }) {
     return function (event: React.ChangeEvent<HTMLInputElement>) {
       const input = event.target.value.trim();
       const { inputError, inputErrorMessage } = getCardNumbersError({
