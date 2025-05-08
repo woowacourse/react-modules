@@ -32,17 +32,16 @@ const App = () => {
       <button onClick={() => setShow(true)}>Open Modal</button>
 
       <Modal show={show} onHide={() => setShow(false)}>
-        <Modal.BackDrop>
-          <Modal.Container position="center" gap={24}>
-            <Modal.Header closeButton>
-              <Modal.Title>제목</Modal.Title>
-            </Modal.Header>
-            <Modal.Body>내용 영역입니다.</Modal.Body>
-            <Modal.Footer>
-              <button onClick={() => setShow(false)}>닫기</button>
-            </Modal.Footer>
-          </Modal.Container>
-        </Modal.BackDrop>
+        <Modal.BackDrop />
+        <Modal.Container position="center" gap={24}>
+          <Modal.Header closeButton>
+            <Modal.Title>제목</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>내용 영역입니다.</Modal.Body>
+          <Modal.Footer>
+            <button onClick={() => setShow(false)}>닫기</button>
+          </Modal.Footer>
+        </Modal.Container>
       </Modal>
     </>
   );
@@ -60,11 +59,6 @@ const App = () => {
 | `...props` | `HTMLDivProps` | –       | `className`, `style` 등 지원 |
 
 ### `Modal.BackDrop`
-
-| Prop       | Type        | Description                         |
-| ---------- | ----------- | ----------------------------------- |
-| `children` | `ReactNode` | 컨텐츠를 감싸는 배경 요소           |
-| `onClick`  | –           | 배경 클릭 시 자동으로 onHide 호출됨 |
 
 ### `Modal.Container`
 

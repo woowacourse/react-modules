@@ -1,4 +1,3 @@
-import { useRef } from "react";
 import useKeyEscClose from "./hooks/useKeyEscClose";
 import IconClose from "./components/IconClose";
 import { BaseProps, ModalHeaderProps, ModalProps, ModalContainerProps } from "./types";
@@ -19,31 +18,20 @@ const Modal = ({ show, onHide, children, ...props }: ModalProps) => {
 
   return (
     <ModalContext.Provider value={{ onHide }}>
-      <div css={ModalWrapperStyle(show)} {...props}>
+      <div css={ModalWrapperStyle(show)} onClick={onHide} {...props}>
         {children}
       </div>
     </ModalContext.Provider>
   );
 };
 
-Modal.BackDrop = ({ children, ...props }: BaseProps) => {
-  const { onHide } = useModalContext();
-  const ref = useRef<HTMLDivElement>(null);
-
-  const handleClick = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (e.target === ref.current) onHide();
-  };
-
-  return (
-    <div ref={ref} css={backGroundStyle} onClick={handleClick} {...props}>
-      {children}
-    </div>
-  );
+Modal.BackDrop = (props: Omit<BaseProps, "children">) => {
+  return <div css={backGroundStyle} {...props}></div>;
 };
 
 Modal.Container = ({ position = "center", gap = 16, children, ...props }: ModalContainerProps) => {
   return (
-    <div css={ModalContainerStyle(position, gap)} {...props}>
+    <div css={ModalContainerStyle(position, gap)} onClick={(e: React.MouseEvent) => e.stopPropagation()} {...props}>
       {children}
     </div>
   );
