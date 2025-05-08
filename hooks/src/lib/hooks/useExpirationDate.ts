@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { ValidationType } from "../../types/validation";
 import { ERROR_MESSAGE, defaultValidationValue } from "../constants/validation";
-import { isEmpty, validateNumberFieldWithLength } from "../utils/validation";
+import { isEmpty, validateNumberWithLength } from "../utils/validation";
 
 type ExpirationDateFieldType = "month" | "year";
 
@@ -41,7 +41,7 @@ const validateExpirationDateField = (
   field: ExpirationDateFieldType,
   value: string
 ): ValidationType => {
-  const numberValidation = validateNumberFieldWithLength(value, MAX_LENGTH);
+  const numberValidation = validateNumberWithLength(value, MAX_LENGTH);
   if (numberValidation.isError || isEmpty(value)) return numberValidation;
 
   const numValue = parseInt(value, 10);

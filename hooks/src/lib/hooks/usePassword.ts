@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { defaultValidationValue } from "../constants/validation";
-import { validateNumberFieldWithLength } from "../utils/validation";
+import { validateNumberWithLength } from "../utils/validation";
 import { ValidationType } from "./../../types/validation";
 
 interface UsePasswordReturn {
@@ -19,7 +19,7 @@ const usePassword = (): UsePasswordReturn => {
 
   const handlePasswordChange = (value: string) => {
     setPassword(value);
-    const validationResult = validateNumberFieldWithLength(value, MAX_LENGTH);
+    const validationResult = validateNumberWithLength(value, MAX_LENGTH);
     setPasswordValidation(validationResult);
   };
 
