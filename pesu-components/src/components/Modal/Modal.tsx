@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
 
-import { PropsWithChildren, ReactNode, useEffect } from 'react';
+import { createContext, PropsWithChildren, ReactNode, useContext, useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 import useDevice from '../../hooks/useDevice';
 import { CloseIcon } from '../common';
@@ -8,6 +8,16 @@ import { CloseIcon } from '../common';
 import * as S from './Modal.styles';
 import Button, { ButtonProps } from '../common/Button/Button';
 import Input from '../common/Input/Input';
+
+type ModalContext = {
+  isOpen: boolean;
+  setIsOpen: (isOpen: boolean) => void;
+};
+
+const ModalContext = createContext<ModalContext>({
+  isOpen: false,
+  setIsOpen: () => {},
+});
 
 /**
  * 모달 컴포넌트의 props
@@ -21,10 +31,6 @@ import Input from '../common/Input/Input';
  * @property size - 모달의 크기 (small | medium | large)
  */
 export interface ModalInterface {
-  /** 모달을 닫을 때 호출되는 콜백 함수 */
-  onClose?: () => void;
-  /** 모달이 열려 있는지 여부 */
-  isOpen: boolean;
   /** 모달의 위치 (center | bottom) */
   position?: 'center' | 'bottom';
   /** 모달의 좌우 여백(px) */
@@ -36,31 +42,32 @@ export interface ModalInterface {
 }
 
 function ModalMain({
-  onClose,
   children,
-  isOpen,
   position = 'center',
   margin = 20,
   zIndex = 10,
   size = 'medium',
 }: PropsWithChildren<ModalInterface>) {
+  const [isOpen, setIsOpen] = useState(true);
   const device = useDevice();
 
   useEffect(() => {
-    const handleKeyDown = (event: KeyboardEvent) => event.key === 'Escape' && onClose?.();
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') setIsOpen(false);
+    };
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [onClose]);
+  }, []);
 
   if (!isOpen) return null;
 
   return createPortal(
-    <>
+    <ModalContext.Provider value={{ isOpen, setIsOpen }}>
       <S.ModalContainer position={position} margin={margin} zIndex={zIndex} device={device} size={size}>
         {children}
       </S.ModalContainer>
-      <S.ModalBackdrop onClick={onClose} />
-    </>,
+      <S.ModalBackdrop />
+    </ModalContext.Provider>,
     document.body,
   );
 }
@@ -79,14 +86,13 @@ function Title({ children }: { children: ReactNode }) {
 }
 Title.displayName = 'ModalTitle';
 
-function CloseButton({ onClick }: { onClick?: () => void }) {
-  return (
-    <S.CloseButton onClick={onClick}>
-      <CloseIcon />
-    </S.CloseButton>
-  );
+function Trigger({ children }: { children: ReactNode }) {
+  const { setIsOpen } = useContext(ModalContext);
+  const closeModal = () => setIsOpen(false);
+
+  return <S.Trigger onClick={closeModal}>{children}</S.Trigger>;
 }
-CloseButton.displayName = 'ModalCloseButton';
+Trigger.displayName = 'ModalTriggerButton';
 
 /**
  * Middle
@@ -128,7 +134,8 @@ ConfirmButton.displayName = 'ModalConfirmButton';
 const Modal = Object.assign(ModalMain, {
   Top,
   Title,
-  CloseButton,
+  Trigger,
+  CloseIcon,
   Content,
   PromptInput,
   Bottom,

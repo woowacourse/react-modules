@@ -5,9 +5,6 @@ import Modal from './Modal';
 const meta: Meta<typeof Modal> = {
   tags: ['autodocs'],
   component: Modal,
-  args: {
-    isOpen: true,
-  },
 };
 
 export default meta;
@@ -16,7 +13,7 @@ type Story = StoryObj<typeof Modal>;
 export const AlertModal: Story = {
   render: () => {
     return (
-      <Modal isOpen position="center">
+      <Modal>
         <Modal.Top>
           <Modal.Title>아이디를 입력해 주세요.</Modal.Title>
         </Modal.Top>
@@ -34,7 +31,7 @@ export const AlertModal: Story = {
 export const ConfirmModal: Story = {
   render: () => {
     return (
-      <Modal isOpen position="center">
+      <Modal>
         <Modal.Top>
           <Modal.Title>카드를 삭제하시겠습니까?</Modal.Title>
         </Modal.Top>
@@ -53,7 +50,7 @@ export const ConfirmModal: Story = {
 export const PromptModal: Story = {
   render: () => {
     return (
-      <Modal isOpen position="center">
+      <Modal>
         <Modal.Top>
           <Modal.Title>쿠폰 번호를 입력해 주세요.</Modal.Title>
         </Modal.Top>
@@ -74,10 +71,12 @@ export const PromptModal: Story = {
 export const SmallModal: Story = {
   render: () => {
     return (
-      <Modal isOpen position="center" size="small">
+      <Modal size="small">
         <Modal.Top>
           <Modal.Title>약관에 동의해 주세요</Modal.Title>
-          <Modal.CloseButton />
+          <Modal.Trigger>
+            <Modal.CloseIcon />
+          </Modal.Trigger>
         </Modal.Top>
         <Modal.Content>
           <p>[필수] 개인정보 수집이용 동의</p>
@@ -96,10 +95,12 @@ export const SmallModal: Story = {
 export const MediumModal: Story = {
   render: () => {
     return (
-      <Modal isOpen position="center" size="medium">
+      <Modal size="medium">
         <Modal.Top>
           <Modal.Title>약관에 동의해 주세요</Modal.Title>
-          <Modal.CloseButton />
+          <Modal.Trigger>
+            <Modal.CloseIcon />
+          </Modal.Trigger>
         </Modal.Top>
         <Modal.Content>
           <p>[필수] 개인정보 수집이용 동의</p>
@@ -118,10 +119,12 @@ export const MediumModal: Story = {
 export const LargeModal: Story = {
   render: () => {
     return (
-      <Modal isOpen position="center" size="large">
+      <Modal size="large">
         <Modal.Top>
           <Modal.Title>약관에 동의해 주세요</Modal.Title>
-          <Modal.CloseButton />
+          <Modal.Trigger>
+            <Modal.CloseIcon />
+          </Modal.Trigger>
         </Modal.Top>
         <Modal.Content>
           <p>[필수] 개인정보 수집이용 동의</p>

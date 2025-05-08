@@ -68,6 +68,8 @@ export const ModalBottom = styled.div`
 export const Title = styled.div`
   font-size: 18px;
   font-weight: 700;
+
+  flex: 1;
 `;
 
 export const ModalBackdrop = styled.div`
@@ -82,9 +84,8 @@ export const ModalBackdrop = styled.div`
   margin: auto;
 `;
 
-export const CloseButton = styled.button`
+export const Trigger = styled.button`
   background-color: transparent;
   border: none;
-
-  margin-left: auto;
+  cursor: pointer;
 `;
