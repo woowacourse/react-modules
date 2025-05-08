@@ -7,6 +7,7 @@ type ModalProps = {
   content: React.ReactNode;
   hasCloseButton?: boolean;
   onClose: () => void;
+  buttonElements?: React.ReactNode;
 };
 
 const handleWrapperClick =
@@ -22,6 +23,7 @@ const BaseModal = ({
   content,
   hasCloseButton = true,
   onClose,
+  buttonElements,
 }: ModalProps) => {
   return (
     <Overlay
@@ -39,6 +41,7 @@ const BaseModal = ({
             </CloseButtonWrapper>
           </ModalHeader>
           <ModalContent id="modal-content">{content}</ModalContent>
+          {buttonElements && <ModalFooter>{buttonElements}</ModalFooter>}
         </ModalContainer>
       </Wrapper>
     </Overlay>
@@ -107,5 +110,12 @@ const CloseButtonWrapper = styled.div`
 `;
 
 const ModalContent = styled.div`
+  margin-top: 24px;
+`;
+
+const ModalFooter = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
   margin-top: 24px;
 `;

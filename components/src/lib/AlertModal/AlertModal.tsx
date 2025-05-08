@@ -7,6 +7,7 @@ type AlertModalProps = {
   position?: "center" | "bottom";
   hasCloseButton?: boolean;
   onClose: () => void;
+  onConfirm: () => void;
 };
 
 const AlertModal = ({
@@ -15,7 +16,10 @@ const AlertModal = ({
   position = "center",
   hasCloseButton = true,
   onClose,
+  onConfirm,
 }: AlertModalProps) => {
+  const buttonElements = <button onClick={onConfirm}>확인</button>;
+
   return (
     <BaseModal
       title={title}
@@ -23,6 +27,7 @@ const AlertModal = ({
       position={position}
       hasCloseButton={hasCloseButton}
       onClose={onClose}
+      buttonElements={buttonElements}
     />
   );
 };

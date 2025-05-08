@@ -4,11 +4,11 @@ import AlertModal from "./lib/AlertModal/AlertModal";
 function App() {
   const [isOpen, setIsOpen] = useState(false);
 
-  const handleOpenModal = () => {
-    setIsOpen(true);
-  };
+  const handleOpenModal = () => setIsOpen(true);
+  const handleCloseModal = () => setIsOpen(false);
 
-  const handleCloseModal = () => {
+  const handleConfirm = () => {
+    alert("확인되었습니다.");
     setIsOpen(false);
   };
 
@@ -22,6 +22,7 @@ function App() {
           hasCloseButton
           position="center"
           onClose={handleCloseModal}
+          onConfirm={handleConfirm}
         />
       )}
     </>
