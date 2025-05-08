@@ -22,8 +22,8 @@ function App() {
         position="center"
         primaryButton={true}
         secondaryButton={true}
-        primaryButtonText="확인"
-        secondaryButtonText="닫기"
+        primaryButtonText="취소"
+        secondaryButtonText="확인"
       >
         <Modal.Header>테스트 제목</Modal.Header>
         <Modal.Body>

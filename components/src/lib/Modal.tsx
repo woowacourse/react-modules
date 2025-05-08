@@ -133,16 +133,16 @@ Modal.Footer = () => {
   return (
     <ButtonContainer position={position}>
       {primaryButton ? (
-        <Button onClick={onConfirm} text={primaryButtonText} />
-      ) : null}
-
-      {secondaryButton ? (
         <Button
-          text={secondaryButtonText}
           onClick={onClose}
+          text={primaryButtonText}
           color="#8b95a1"
           backgroundColor="transparent"
         />
+      ) : null}
+
+      {secondaryButton ? (
+        <Button text={secondaryButtonText} onClick={onConfirm} />
       ) : null}
     </ButtonContainer>
   );
