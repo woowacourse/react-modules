@@ -15,8 +15,8 @@ export const decorators = [
 const preview: Preview = {
   parameters: {
     docs: {
-      canvas: {
-        iframeHeight: 700,
+      story: {
+        height: "500px",
       },
     },
     controls: {

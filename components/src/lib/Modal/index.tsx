@@ -7,11 +7,43 @@ export type ModalType = "alert" | "confirm" | "prompt";
 export type ModalSizeType = "small" | "medium" | "large";
 export type ModalPositionType = "bottom" | "center";
 
-interface ModalProps {
+export interface ModalProps {
   onClose: () => void;
   modalType?: ModalType;
   modalSize?: ModalSizeType;
   position?: ModalPositionType;
+}
+
+export interface HeaderProps {
+  children: ReactNode;
+}
+
+export interface TitleProps {
+  children: ReactNode;
+}
+
+export interface CloseButtonProps {
+  onClick: () => void;
+}
+
+export interface ContentProps {
+  children: ReactNode;
+}
+
+export interface InputProps {
+  value: string;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  placeholder?: string;
+}
+
+export interface FooterProps {
+  children: ReactNode;
+}
+
+export interface ButtonProps {
+  onClick: () => void;
+  primary?: boolean;
+  children: ReactNode;
 }
 
 function Modal({
@@ -36,25 +68,13 @@ function Modal({
   );
 }
 
-interface HeaderProps {
-  children: ReactNode;
-}
-
 Modal.Header = function Header({ children }: HeaderProps) {
   return <S.ModalHeader>{children}</S.ModalHeader>;
 };
 
-interface TitleProps {
-  children: ReactNode;
-}
-
 Modal.Title = function Title({ children }: TitleProps) {
   return <S.Title>{children}</S.Title>;
 };
-
-interface CloseButtonProps {
-  onClick: () => void;
-}
 
 Modal.CloseButton = function CloseButton({ onClick }: CloseButtonProps) {
   return (
@@ -64,19 +84,9 @@ Modal.CloseButton = function CloseButton({ onClick }: CloseButtonProps) {
   );
 };
 
-interface ContentProps {
-  children: ReactNode;
-}
-
 Modal.Content = function Content({ children }: ContentProps) {
   return <S.ModalContent>{children}</S.ModalContent>;
 };
-
-interface InputProps {
-  value: string;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  placeholder?: string;
-}
 
 Modal.Input = function Input({ value, onChange, placeholder }: InputProps) {
   return (
@@ -90,19 +100,9 @@ Modal.Input = function Input({ value, onChange, placeholder }: InputProps) {
   );
 };
 
-interface FooterProps {
-  children: ReactNode;
-}
-
 Modal.Footer = function Footer({ children }: FooterProps) {
   return <S.ModalFooter>{children}</S.ModalFooter>;
 };
-
-interface ButtonProps {
-  onClick: () => void;
-  primary?: boolean;
-  children: ReactNode;
-}
 
 Modal.Button = function Button({
   onClick,
