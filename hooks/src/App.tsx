@@ -6,7 +6,7 @@ import {
   useCardNumbersInput,
   useCardCVCInput,
   useCardCompanyInput,
-} from 'laireca-custom-hooks';
+} from './lib';
 
 export interface InputProps extends ComponentProps<'input'> {
   isValid?: boolean;
@@ -34,11 +34,11 @@ function Input({ isValid, ...props }: InputProps) {
 export interface InputFieldProps {
   title: string;
   label: string;
-  feedbackMessage?: string;
+  error: { isValid: boolean; errorMessage: string };
   children: React.ReactNode;
 }
 
-function InputField({ title, label, feedbackMessage, children }: InputFieldProps) {
+function InputField({ title, label, error, children }: InputFieldProps) {
   return (
     <div>
       <div>
@@ -47,21 +47,16 @@ function InputField({ title, label, feedbackMessage, children }: InputFieldProps
       <div>
         <label className="tx-lg">{label}</label>
         <div>{children}</div>
-        <p>{feedbackMessage}</p>
+        <p>{!error.isValid && error.errorMessage}</p>
       </div>
     </div>
   );
 }
 
 const CardNumberInput = () => {
-  const { cardNumbers, onChangeHandler, errorMessage } = useCardNumbersInput();
+  const { cardNumbers, onChangeHandler, error } = useCardNumbersInput();
   return (
-    <InputField
-      title="카드 번호"
-      label="라벨 cardNumbers"
-      description="설명설명"
-      feedbackMessage={errorMessage}
-    >
+    <InputField title="카드 번호" label="라벨 cardNumbers" error={error}>
       <Input type="text" name="0" onChange={onChangeHandler} autoFocus />
       <Input type="text" name="1" onChange={onChangeHandler} autoFocus />
       <Input type="text" name="2" onChange={onChangeHandler} autoFocus />
@@ -72,14 +67,9 @@ const CardNumberInput = () => {
 };
 
 const CardExpDateInput = () => {
-  const { cardExpDate, onChangeHandler, errorMessage } = useCardExpDateInput();
+  const { cardExpDate, onChangeHandler, error } = useCardExpDateInput();
   return (
-    <InputField
-      title="유효기간"
-      label="라벨 cardExpDate"
-      description="설명설명"
-      feedbackMessage={errorMessage}
-    >
+    <InputField title="유효기간" label="라벨 cardExpDate" error={error}>
       <Input type="text" name="month" onChange={onChangeHandler} autoFocus />
       <Input type="text" name="year" onChange={onChangeHandler} autoFocus />
       <p>인풋 실시간 value - month : {cardExpDate.month}</p>
@@ -89,14 +79,9 @@ const CardExpDateInput = () => {
 };
 
 const CardCVCInput = () => {
-  const { cardCVC, onChangeHandler, errorMessage } = useCardCVCInput();
+  const { cardCVC, onChangeHandler, error } = useCardCVCInput();
   return (
-    <InputField
-      title="CVC"
-      label="라벨 cardCVC"
-      description="설명설명"
-      feedbackMessage={errorMessage}
-    >
+    <InputField title="CVC" label="라벨 cardCVC" error={error}>
       <Input type="text" name="cvc" onChange={onChangeHandler} autoFocus />
       <p>인풋 실시간 value : {cardCVC}</p>
     </InputField>
@@ -104,14 +89,9 @@ const CardCVCInput = () => {
 };
 
 const CardPasswordInput = () => {
-  const { cardPassword, onChangeHandler, errorMessage } = useCardPasswordInput();
+  const { cardPassword, onChangeHandler, error } = useCardPasswordInput();
   return (
-    <InputField
-      title="비밀번호"
-      label="라벨 비밀번호"
-      description="설명설명"
-      feedbackMessage={errorMessage}
-    >
+    <InputField title="비밀번호" label="라벨 비밀번호" error={error}>
       <Input type="password" name="cardPassword" onChange={onChangeHandler} autoFocus />
       <p>인풋 실시간 value : {cardPassword}</p>
     </InputField>

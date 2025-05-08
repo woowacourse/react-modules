@@ -11,7 +11,10 @@ export function useCardExpDateInput() {
     year: '',
   });
 
-  const [errorMessage, setErrorMessage] = useState('');
+  const [error, setError] = useState<{ isValid: boolean; errorMessage: string }>({
+    isValid: true,
+    errorMessage: '',
+  });
 
   function onChangeHandler(e: React.ChangeEvent<HTMLInputElement>) {
     const { name, value } = e.target;
@@ -25,12 +28,17 @@ export function useCardExpDateInput() {
     const monthErrorMessage = getFirstErrorMessage(monthErrorResult, 'MONTH');
     const yearErrorMessage = getFirstErrorMessage(yearErrorResult, 'YEAR');
 
-    setErrorMessage(monthErrorMessage || yearErrorMessage || '');
+    const finalErrorMessage = monthErrorMessage || yearErrorMessage || '';
+
+    setError({
+      isValid: !finalErrorMessage,
+      errorMessage: finalErrorMessage,
+    });
   }
 
   return {
     cardExpDate,
     onChangeHandler,
-    errorMessage,
+    error,
   };
 }

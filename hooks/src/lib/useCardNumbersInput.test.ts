@@ -33,6 +33,6 @@ describe('useCardNumbersInput', () => {
       } as ChangeEvent<HTMLInputElement>);
     });
 
-    expect(result.current.errorMessage).toBe(ERROR_MESSAGE.NUMBER.IS_NUMBER_STRING);
+    expect(result.current.error.errorMessage).toBe(ERROR_MESSAGE.NUMBER.IS_NUMBER_STRING);
   });
 });

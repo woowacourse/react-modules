@@ -5,7 +5,10 @@ import { getFirstErrorMessage } from './validator/getFirstErrorMessage';
 
 export function useCardNumbersInput() {
   const [cardNumbers, setCardNumbers] = useState(['', '', '', '']);
-  const [errorMessage, setErrorMessage] = useState('');
+  const [error, setError] = useState<{ isValid: boolean; errorMessage: string }>({
+    isValid: true,
+    errorMessage: '',
+  });
 
   function onChangeHandler(e: ChangeEvent<HTMLInputElement>) {
     const { name, value } = e.target;
@@ -14,12 +17,17 @@ export function useCardNumbersInput() {
     setCardNumbers(cardNumbers.map((num, i) => (i === index ? value : num)));
 
     const errorResult = validateCardNumber(value) || validateFullCardNumber(cardNumbers.join(''));
-    setErrorMessage(getFirstErrorMessage(errorResult, 'NUMBER'));
+    const errorMessage = getFirstErrorMessage(errorResult, 'NUMBER');
+
+    setError({
+      isValid: !errorMessage,
+      errorMessage: errorMessage || '',
+    });
   }
 
   return {
     cardNumbers,
     onChangeHandler,
-    errorMessage,
+    error,
   };
 }

@@ -8,7 +8,7 @@ describe('useCardExpDate', () => {
     const { result } = renderHook(() => useCardExpDateInput());
 
     expect(result.current.cardExpDate).toEqual({ month: '', year: '' });
-    expect(result.current.errorMessage).toBe('');
+    expect(result.current.error.errorMessage).toBe('');
   });
 
   it('month 입력값이 정확히 업데이트 되어야 한다.', () => {
@@ -47,7 +47,7 @@ describe('useCardExpDate', () => {
       } as ChangeEvent<HTMLInputElement>);
     });
 
-    expect(result.current.errorMessage).toBe(ERROR_MESSAGE.EXPIRATION.MONTH.IS_NUMBER);
+    expect(result.current.error.errorMessage).toBe(ERROR_MESSAGE.EXPIRATION.MONTH.IS_NUMBER);
   });
 
   it('1월에서 12월 사이가 아닌 month 입력값에 에러메세지가 출력된다.', () => {
@@ -60,7 +60,7 @@ describe('useCardExpDate', () => {
       } as ChangeEvent<HTMLInputElement>);
     });
 
-    expect(result.current.errorMessage).toBe(ERROR_MESSAGE.EXPIRATION.MONTH.IS_NUMBER_RANGE);
+    expect(result.current.error.errorMessage).toBe(ERROR_MESSAGE.EXPIRATION.MONTH.IS_NUMBER_RANGE);
   });
 
   it('유효기간이 지난 month 입력값에 에러메세지가 출력된다.', () => {
@@ -80,7 +80,7 @@ describe('useCardExpDate', () => {
       } as ChangeEvent<HTMLInputElement>);
     });
 
-    expect(result.current.errorMessage).toBe(ERROR_MESSAGE.EXPIRATION.MONTH.IS_EXPIRATION);
+    expect(result.current.error.errorMessage).toBe(ERROR_MESSAGE.EXPIRATION.MONTH.IS_EXPIRATION);
   });
 
   // it('숫자가 아닌 year 입력값에 에러메세지가 출력된다.', () => {
@@ -120,6 +120,6 @@ describe('useCardExpDate', () => {
       } as ChangeEvent<HTMLInputElement>);
     });
 
-    expect(result.current.errorMessage).toBe(ERROR_MESSAGE.EXPIRATION.YEAR.IS_EXPIRATION);
+    expect(result.current.error.errorMessage).toBe(ERROR_MESSAGE.EXPIRATION.YEAR.IS_EXPIRATION);
   });
 });

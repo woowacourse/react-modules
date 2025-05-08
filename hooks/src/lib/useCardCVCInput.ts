@@ -4,18 +4,26 @@ import { getFirstErrorMessage } from './validator/getFirstErrorMessage';
 
 export function useCardCVCInput() {
   const [cardCVC, setCardCVC] = useState('');
-  const [errorMessage, setErrorMessage] = useState('');
+  const [error, setError] = useState<{ isValid: boolean; errorMessage: string }>({
+    isValid: true,
+    errorMessage: '',
+  });
 
   function onChangeHandler(e: React.ChangeEvent<HTMLInputElement>) {
     const { value } = e.target;
     setCardCVC(value);
     const errorResult = validateCVC(value);
-    setErrorMessage(getFirstErrorMessage(errorResult, 'CVC'));
+    const errorMessage = getFirstErrorMessage(errorResult, 'CVC');
+
+    setError({
+      isValid: !errorMessage,
+      errorMessage: errorMessage || '',
+    });
   }
 
   return {
     cardCVC,
     onChangeHandler,
-    errorMessage,
+    error,
   };
 }
