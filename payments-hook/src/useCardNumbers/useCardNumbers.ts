@@ -2,8 +2,11 @@ import { useState } from 'react';
 import isInteger from '../validate/isInteger';
 import isUnderMaxLength from '../validate/isUnderMaxLength';
 import useError from '../useError/useError';
-import { get } from 'http';
 import getCardNetwork from './getCardNetwork';
+import {
+  AMEX_CARD_NUMBER_LENGTH_BY_POSITION,
+  DINERS_CARD_NUMBER_LENGTH_BY_POSITION,
+} from '../constants/cardNumberlengthByPosition';
 
 type CardNumbers = {
   FIRST: string;
@@ -46,6 +49,7 @@ type CardNumbersKeys = {
 export default function useCardNumbers(userCardNumbers = INITIAL_CARD_NUMBER) {
   const [cardNumbers, setCardNumbers] = useState<CardNumbers>(userCardNumbers);
   const { error, changeError, clearError } = useError(INITIAL_IS_ERROR);
+  const cardNetwork = getCardNetwork(Object.values(cardNumbers).join(''));
 
   function handleCardNumbersChange({ target }: CardNumbersKeys) {
     return function (event: React.ChangeEvent<HTMLInputElement>) {
@@ -53,7 +57,7 @@ export default function useCardNumbers(userCardNumbers = INITIAL_CARD_NUMBER) {
       const { inputError, inputErrorMessage } = getCardNumbersError({
         input,
         target,
-        cardNetwork: getCardNetwork(Object.values(cardNumbers).join('')),
+        cardNetwork,
       });
 
       if (inputError) {
@@ -118,28 +122,40 @@ function getCardNumbersError({
   }
 
   if (cardNetwork === 'DINERS') {
-    if (target === 'FIRST' && !isUnderMaxLength(input, 4)) {
+    if (
+      target === 'FIRST' &&
+      !isUnderMaxLength(input, DINERS_CARD_NUMBER_LENGTH_BY_POSITION.FIRST)
+    ) {
       return {
         inputError: true,
         inputErrorMessage: CARD_NUMBER_ERROR_MESSAGE.INVALID_LENGTH,
       };
     }
 
-    if (target === 'SECOND' && !isUnderMaxLength(input, 6)) {
+    if (
+      target === 'SECOND' &&
+      !isUnderMaxLength(input, DINERS_CARD_NUMBER_LENGTH_BY_POSITION.SECOND)
+    ) {
       return {
         inputError: true,
         inputErrorMessage: `6자리 숫자여야 합니다.`,
       };
     }
 
-    if (target === 'THIRD' && !isUnderMaxLength(input, 4)) {
+    if (
+      target === 'THIRD' &&
+      !isUnderMaxLength(input, DINERS_CARD_NUMBER_LENGTH_BY_POSITION.THIRD)
+    ) {
       return {
         inputError: true,
         inputErrorMessage: CARD_NUMBER_ERROR_MESSAGE.INVALID_LENGTH,
       };
     }
 
-    if (target === 'FOURTH' && !isUnderMaxLength(input, 0)) {
+    if (
+      target === 'FOURTH' &&
+      !isUnderMaxLength(input, DINERS_CARD_NUMBER_LENGTH_BY_POSITION.FOURTH)
+    ) {
       return {
         inputError: true,
         inputErrorMessage: `해당 자리는 입력할 수 없습니다.`,
@@ -148,28 +164,40 @@ function getCardNumbersError({
   }
 
   if (cardNetwork === 'AMEX') {
-    if (target === 'FIRST' && !isUnderMaxLength(input, 4)) {
+    if (
+      target === 'FIRST' &&
+      !isUnderMaxLength(input, AMEX_CARD_NUMBER_LENGTH_BY_POSITION.FIRST)
+    ) {
       return {
         inputError: true,
         inputErrorMessage: CARD_NUMBER_ERROR_MESSAGE.INVALID_LENGTH,
       };
     }
 
-    if (target === 'SECOND' && !isUnderMaxLength(input, 6)) {
+    if (
+      target === 'SECOND' &&
+      !isUnderMaxLength(input, AMEX_CARD_NUMBER_LENGTH_BY_POSITION.SECOND)
+    ) {
       return {
         inputError: true,
         inputErrorMessage: `6자리 숫자여야 합니다.`,
       };
     }
 
-    if (target === 'THIRD' && !isUnderMaxLength(input, 5)) {
+    if (
+      target === 'THIRD' &&
+      !isUnderMaxLength(input, AMEX_CARD_NUMBER_LENGTH_BY_POSITION.THIRD)
+    ) {
       return {
         inputError: true,
         inputErrorMessage: `5자리 숫자여야 합니다.`,
       };
     }
 
-    if (target === 'FOURTH' && !isUnderMaxLength(input, 0)) {
+    if (
+      target === 'FOURTH' &&
+      !isUnderMaxLength(input, AMEX_CARD_NUMBER_LENGTH_BY_POSITION.FOURTH)
+    ) {
       return {
         inputError: true,
         inputErrorMessage: `해당 자리는 입력할 수 없습니다.`,
