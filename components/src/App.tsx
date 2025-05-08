@@ -10,10 +10,11 @@ const App = () => {
   return (
     <>
       <button onClick={() => setIsOpen(true)}>모달 열기</button>
-      <Modal isOpen={isOpen} handleCloseModal={handleCloseModal}>
+      <Modal isOpen={isOpen} onModalClose={handleCloseModal}>
         <Modal.Background onClick={handleCloseModal}>
           <Modal.ModalContainer
-            $position="bottom"
+            $position="center"
+            $size="small"
             onClick={(e) => e.stopPropagation()}
           >
             <Modal.HeaderSection>
@@ -25,6 +26,10 @@ const App = () => {
             <Modal.ModalContent>
               <p>모달 내용입니다.</p>
             </Modal.ModalContent>
+            <Modal.ModalButtonContainer>
+              <Modal.ModalButton $type="confirm">확인</Modal.ModalButton>
+              <Modal.ModalButton $type="cancel">취소</Modal.ModalButton>
+            </Modal.ModalButtonContainer>
           </Modal.ModalContainer>
         </Modal.Background>
       </Modal>
