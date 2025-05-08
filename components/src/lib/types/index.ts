@@ -16,6 +16,8 @@ export interface ModalProps extends BaseProps {
 }
 
 export interface ModalContainerProps extends BaseProps {
+  /** 모달 사이즈 설정:  */
+  size?: "small" | "medium" | "large" | "default";
   /** 모달 위치 설정: 가운데(center), 상단(top), 하단(bottom) */
   position?: "center" | "top" | "bottom";
 

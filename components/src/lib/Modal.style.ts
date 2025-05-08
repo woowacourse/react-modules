@@ -19,9 +19,9 @@ export const backGroundStyle = css`
   left: 0;
   background-color: rgba(0, 0, 0, 0.35);
 `;
-export const ModalContainerStyle = (position: string, gap: number) => {
+export const ModalContainerStyle = (size: string, position: string, gap: number) => {
   const positionStyle = getPositionStyle(position);
-
+  const sizeStyle = getSizeStyle(size);
   return css`
     display: flex;
     flex-direction: column;
@@ -32,6 +32,7 @@ export const ModalContainerStyle = (position: string, gap: number) => {
     padding: 24px 32px;
     gap: ${gap}px;
     ${positionStyle}
+    ${sizeStyle}
   `;
 };
 
@@ -82,11 +83,31 @@ export const ModalButtonStyle = (cssProps: ModalButtonCSSProps) => css`
   padding: 7px 21px;
 `;
 
+export const getSizeStyle = (size: string) => {
+  switch (size) {
+    case "small":
+      return css`
+        width: 320px;
+      `;
+    case "medium":
+      return css`
+        width: 480px;
+      `;
+    case "large":
+      return css`
+        width: 600px;
+      `;
+    default:
+      return css`
+        width: calc(100% - 72px);
+      `;
+  }
+};
+
 export const getPositionStyle = (position: string) => {
   switch (position) {
     case "center":
       return css`
-        width: calc(100% - 72px);
         border-radius: 8px;
         position: absolute;
         top: 50%;
@@ -95,7 +116,6 @@ export const getPositionStyle = (position: string) => {
       `;
     case "bottom":
       return css`
-        width: 100%;
         border-radius: 8px 8px 0 0;
         position: fixed;
         bottom: 0;
@@ -103,7 +123,6 @@ export const getPositionStyle = (position: string) => {
       `;
     case "top":
       return css`
-        width: 100%;
         border-radius: 0 0 8px 8px;
         position: fixed;
         top: 0;

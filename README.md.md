@@ -18,8 +18,8 @@
   - [x] trigger wrapper 제작 (여기 안에 들어가는 버튼은 무조건 onhide 이벤트를 디폴트로 실행한다.)
   - [ ] 입력(Prompt) 모달: 사용자로부터 입력값을 받을 수 있는 입력 필드와 확인/취소 버튼 제공
     - [ ] 입력 필드 컴포넌트 제작 (기본 값 : value / onChange)
-- [ ] 모달 크기 옵션 추가 (container)
-  - [ ] small, medium, large 등의 크기 옵션을 prop으로 전달받아 모달 크기 조절
+- [x] 모달 크기 옵션 추가 (container)
+  - [x] small, medium, large 등의 크기 옵션을 prop으로 전달받아 모달 크기 조절
 - [ ] 모달 컴포넌트 별 스토리 작성
 - [ ] 베포시) dependencies 제거 -> peer dependencies 설정
 

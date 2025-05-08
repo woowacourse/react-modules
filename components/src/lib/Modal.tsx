@@ -31,9 +31,13 @@ Modal.BackDrop = (props: Omit<BaseProps, "children">) => {
   return <div css={backGroundStyle} {...props}></div>;
 };
 
-Modal.Container = ({ position = "center", gap = 16, children, ...props }: ModalContainerProps) => {
+Modal.Container = ({ size = "default", position = "center", gap = 16, children, ...props }: ModalContainerProps) => {
   return (
-    <div css={ModalContainerStyle(position, gap)} onClick={(e: React.MouseEvent) => e.stopPropagation()} {...props}>
+    <div
+      css={ModalContainerStyle(size, position, gap)}
+      onClick={(e: React.MouseEvent) => e.stopPropagation()}
+      {...props}
+    >
       {children}
     </div>
   );
