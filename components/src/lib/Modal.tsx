@@ -93,7 +93,7 @@ Modal.Body = ({ children }: ChildrenProps) => {
   return <div css={ModalBodyStyle}>{children}</div>;
 };
 
-Modal.Footer = ({ buttonAlign = "right", children }: ModalFooterProps) => {
+Modal.Footer = ({ buttonAlign = "left", children }: ModalFooterProps) => {
   return <div css={ModalFooterStyle(buttonAlign)}>{children}</div>;
 };
 
