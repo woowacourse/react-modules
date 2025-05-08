@@ -144,11 +144,16 @@
 
 ### 컴포넌트 설계
 
-- [ ] Modal 모듈이 기본적으로 가지고 있을 레이아웃
-  - [ ] background (default)
-  - [ ] title (prop)
+- [ ] Modal 모듈이 기본적으로 가지고 있을 레이아웃 & 상태
+  - [x] modal background (default)
+  - [x] modal container (default)
+  - [x] isOpen (prop)
+  - [x] position (prop)
+  - [x] title (prop)
   - [ ] XButton (prop)
   - [ ] size (prop)
+  - [x] onClose (prop)
+  - [x] onBackdropClick (prop)
 - [ ] Modal 모듈을 사용해서 다양한 모달 컴포넌트를 구현한다.
   - [ ] AlertModal : 사용자에게 메시지를 전달하고 확인 버튼 제공
   - [ ] ConfirmModal : 확인 & 취소 버튼 제공
@@ -166,8 +171,11 @@
     - [ ] large 옵션
 - 다양한 모달 컴포넌트 스토리북 작성
   - [ ] AlertModal
+    - [ ] 사용자 메시지와 함께 확인 버튼이 화면에 표시되는지
   - [ ] ConfirmModal
+    - [ ] 확인과 취소 버튼이 화면에 표시되는지
   - [ ] PromptModal
+    - [ ] 입력 필드와 확인과 취소 버튼이 화면에 표시되는지
 
 ## Hooks Module
 
