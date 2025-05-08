@@ -13,14 +13,10 @@ const ERROR_MESSAGE = {
 };
 
 const useExpirationDate = () => {
-  const [isValid, setIsValid] = useState({
-    month: true,
-    year: true,
-  });
-
-  const [errorMessage, setErrorMessage] = useState({
-    month: "",
-    year: "",
+  const [expDate, setExpDate] = useState({ month: "", year: "" });
+  const [validationResult, setValidationResult] = useState({
+    month: { state: false, message: "" },
+    year: { state: false, message: "" },
   });
 
   const checkMonthRange = (value: string) => {
@@ -34,7 +30,7 @@ const useExpirationDate = () => {
   };
 
   const validate = (label: "month" | "year", value: string) => {
-    let valid = true;
+    let isError = false;
     let message = "";
 
     const validLength =
@@ -45,10 +41,10 @@ const useExpirationDate = () => {
         label === "month"
           ? ERROR_MESSAGE.INVALID_MONTH_FORMAT
           : ERROR_MESSAGE.INVALID_YEAR_FORMAT;
-      valid = false;
+      isError = true;
     } else if (!checkNumber(value)) {
       message = ERROR_MESSAGE.INVALID_NUMBER;
-      valid = false;
+      isError = true;
     } else if (
       (label === "month" && !checkMonthRange(value)) ||
       (label === "year" && !checkYearRange(value))
@@ -57,24 +53,34 @@ const useExpirationDate = () => {
         label === "month"
           ? ERROR_MESSAGE.INVALID_MONTH_RANGE
           : ERROR_MESSAGE.INVALID_YEAR_RANGE;
-      valid = false;
+      isError = true;
     }
 
-    setIsValid((prev) => ({
+    setValidationResult((prev) => ({
       ...prev,
-      [label]: valid,
+      [label]: { state: isError, message },
     }));
 
-    setErrorMessage((prev) => ({
+    return { state: isError, message };
+  };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+
+    if (name !== "month" && name !== "year") return;
+
+    setExpDate((prev) => ({
       ...prev,
-      [label]: message,
+      [name]: value,
     }));
+
+    validate(name, value);
   };
 
   return {
-    isValid,
-    errorMessage,
-    validate,
+    expDate,
+    handleChange,
+    validationResult,
   };
 };
 
