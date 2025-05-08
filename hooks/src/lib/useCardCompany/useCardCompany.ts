@@ -5,20 +5,30 @@ const ERROR_MESSAGE = {
 };
 
 const useCardCompany = () => {
-  const [isValid, setIsValid] = useState<boolean>(true);
-  const [errorMessage, setErrorMessage] = useState<string>("");
+  const [cardCompany, setCardCompany] = useState("");
+  const [validationResult, setValidationResult] = useState({
+    state: false,
+    message: "",
+  });
 
-  const validate = (value: string) => {
-    if (value.length === 0) {
-      setIsValid(false);
-      setErrorMessage(ERROR_MESSAGE.EMPTY_CARD_COMPANY);
+  const validate = (inputValue: string) => {
+    if (inputValue.length === 0) {
+      setValidationResult({
+        state: true,
+        message: ERROR_MESSAGE.EMPTY_CARD_COMPANY,
+      });
       return;
     }
-    setErrorMessage("");
-    setIsValid(true);
+    setValidationResult({ state: false, message: "" });
   };
 
-  return { isValid, errorMessage, validate };
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const inputValue = e.target.value;
+    setCardCompany(inputValue);
+    validate(inputValue);
+  };
+
+  return { cardCompany, handleChange, validationResult };
 };
 
 export default useCardCompany;
