@@ -12,15 +12,13 @@ function App() {
   return (
     <>
       <button onClick={() => setIsOpen(true)}>열림!</button>
-
-      <Modal isOpen={isOpen} onCloseClick={handleCloseClick}>
-        <Modal.Container isOpen={isOpen} position="top" width={400}>
-          <>
-            <Modal.CloseButton onCloseClick={handleCloseClick} />
-            <Modal.Title>제목</Modal.Title>
-            <Modal.Body>내용1!</Modal.Body>
-          </>
-        </Modal.Container>
+      <Modal isOpen={isOpen}>
+        <Modal.Overlay onClick={handleCloseClick} />
+        <Modal.Content position="top" width={400}>
+          <Modal.CloseButton onCloseClick={handleCloseClick} />
+          <Modal.Title>제목</Modal.Title>
+          <Modal.Body>내용1!</Modal.Body>
+        </Modal.Content>
       </Modal>
     </>
   );

@@ -1,32 +1,20 @@
-import React from 'react';
 import styled from 'styled-components';
-import { createPortal } from 'react-dom';
 
 interface ModalOverlayProps {
-  isOpen: boolean;
-  children: React.ReactNode;
-  onCloseClick: () => void;
+  onClick: () => void;
 }
 
-function ModalOverlay({ isOpen, children, onCloseClick }: ModalOverlayProps) {
-  return createPortal(
-    <StyledModalOverlay isOpen={isOpen} onClick={onCloseClick}>
-      {children}
-    </StyledModalOverlay>,
-    document.body
-  );
+function ModalOverlay({ onClick }: ModalOverlayProps) {
+  return <StyledModalOverlay onClick={onClick} />;
 }
 
 export default ModalOverlay;
 
-type ModalOverlayStyledProps = Pick<ModalOverlayProps, 'isOpen'>;
-
-const StyledModalOverlay = styled.div<ModalOverlayStyledProps>`
+const StyledModalOverlay = styled.div`
   background-color: rgba(0, 0, 0, 0.35);
   position: relative;
   width: 100%;
   height: 100%;
-  display: ${(props) => (props.isOpen ? 'flex' : 'none')};
   justify-content: center;
   align-items: center;
   position: absolute;

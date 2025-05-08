@@ -1,8 +1,8 @@
+import { ReactElement } from 'react';
 import styled from 'styled-components';
 
-interface ModalProps {
-  isOpen: boolean;
-  children: React.ReactNode;
+interface ModalContentProps {
+  children: ReactElement[] | ReactElement;
   position: 'top' | 'bottom' | 'center';
   width?: number;
 }
@@ -13,21 +13,17 @@ const radius = {
   bottom: '8px 8px 0px 0px',
 };
 
-function Modal({ isOpen, children, position, width }: ModalProps) {
-  if (!isOpen) {
-    return null;
-  }
-
+function ModalContent({ children, position, width }: ModalContentProps) {
   return (
-    <StyledModal isOpen={isOpen} position={position} width={width}>
+    <StyledModal id="modal-content" position={position} width={width}>
       {children}
     </StyledModal>
   );
 }
 
-export default Modal;
+export default ModalContent;
 
-type modalStyledProps = Pick<ModalProps, 'isOpen' | 'position' | 'width'>;
+type modalStyledProps = Pick<ModalContentProps, 'position' | 'width'>;
 const StyledModal = styled.div<modalStyledProps>`
   width: ${(props) =>
     props.position === 'center' ? `${props.width}px` : '100%'};
@@ -35,8 +31,8 @@ const StyledModal = styled.div<modalStyledProps>`
   background: #fff;
   box-sizing: border-box;
   position: absolute;
-  display: ${(props) => (props.isOpen ? 'block' : 'none')};
   top: ${(props) => (props.position === 'top' ? '0px' : 'auto')};
   border-radius: ${(props) => radius[props.position]};
   bottom: ${(props) => (props.position === 'bottom' ? '0px' : 'auto')};
+  z-index: 10;
 `;
