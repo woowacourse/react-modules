@@ -1,6 +1,6 @@
-type CardBrand = 'diners' | 'amex' | 'unionpay' | 'visa' | 'master';
+import { CardBrandOrUnknown } from './type';
 
-export function getCardBrand(cardNumber: string): CardBrand | 'unknown' {
+export function getCardBrand(cardNumber: string): CardBrandOrUnknown {
   if (cardNumber.startsWith('36')) return 'diners';
   if (cardNumber.startsWith('34') || cardNumber.startsWith('37')) return 'amex';
 
@@ -20,7 +20,7 @@ export function getCardBrand(cardNumber: string): CardBrand | 'unknown' {
   return 'unknown';
 }
 
-export function getCardNumberMaxLength(cardBrand: string) {
+export function getCardNumberMaxLength(cardBrand: CardBrandOrUnknown) {
   switch (cardBrand) {
     case 'diners':
       return 14;
@@ -31,7 +31,7 @@ export function getCardNumberMaxLength(cardBrand: string) {
   }
 }
 
-export function formatCardNumber(cardNumber: string, cardBrand: CardBrand | 'unknown') {
+export function formatCardNumber(cardNumber: string, cardBrand: CardBrandOrUnknown) {
   if (cardBrand === 'unknown') return cardNumber;
 
   switch (cardBrand) {
