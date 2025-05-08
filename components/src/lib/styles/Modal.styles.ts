@@ -6,7 +6,7 @@ export const ModalWrapperStyle = (show: boolean) => css`
   height: 100vh;
   top: 0;
   left: 0;
-  min-width: 300px;
+  min-width: 320px;
   display: ${show ? "block" : "none"};
 `;
 
@@ -31,6 +31,8 @@ export const ModalContainerStyle = (position: string, gap: number) => {
     z-index: 99;
     box-sizing: border-box;
     padding: 24px 32px;
+    min-width: 320px;
+    max-width: 600px;
     gap: ${gap}px;
     ${positionStyle}
   `;
@@ -62,6 +64,7 @@ export const ModalBodyStyle = css`
 export const ModalFooterStyle = (align: "left" | "center" | "right" = "right") => css`
   display: flex;
   justify-content: ${align === "left" ? "flex-start" : align === "center" ? "center" : "flex-end"};
+  gap: 10px;
 `;
 
 export const ModalCloseStyle = css`
