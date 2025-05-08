@@ -1,9 +1,10 @@
 import useKeyEscClose from "./hooks/useKeyEscClose";
 import IconClose from "./components/IconClose";
-import { BaseProps, ModalHeaderProps, ModalProps, ModalContainerProps } from "./types";
+import { BaseProps, ModalHeaderProps, ModalProps, ModalContainerProps, ModalButtonProps } from "./types";
 import {
   backGroundStyle,
   ModalBodyStyle,
+  ModalButtonStyle,
   ModalCloseStyle,
   ModalContainerStyle,
   ModalFooterStyle,
@@ -68,6 +69,24 @@ Modal.Title = ({ children, ...props }: BaseProps) => {
     <span css={ModalTitleStyle} {...props}>
       {children}
     </span>
+  );
+};
+
+Modal.Button = ({
+  onClick,
+  fontSize = 16,
+  color = "#fff",
+  backgroundColor = "#333",
+  borderColor = "#333",
+  borderRadius = 5,
+  children,
+  ...props
+}: ModalButtonProps) => {
+  const cssProps = { fontSize, color, backgroundColor, borderColor, borderRadius };
+  return (
+    <button css={ModalButtonStyle(cssProps)} onClick={onClick} {...props}>
+      {children}
+    </button>
   );
 };
 

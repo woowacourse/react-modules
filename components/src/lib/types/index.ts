@@ -27,3 +27,14 @@ export interface ModalHeaderProps extends BaseProps {
   /** 닫기 버튼(X)을 표시할지 여부 */
   closeButton?: boolean;
 }
+
+export interface ModalButtonCSSProps {
+  fontSize?: number;
+  color?: string;
+  backgroundColor?: string;
+  borderColor?: string;
+  borderRadius?: number;
+}
+export interface ModalButtonProps extends ModalButtonCSSProps, BaseProps {
+  onClick?: () => void;
+}

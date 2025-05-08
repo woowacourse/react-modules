@@ -1,4 +1,5 @@
 import { css } from "@emotion/react";
+import { ModalButtonCSSProps } from "./types";
 
 export const ModalWrapperStyle = (show: boolean) => css`
   position: fixed;
@@ -63,6 +64,22 @@ export const ModalFooterStyle = css`
 
 export const ModalCloseStyle = css`
   cursor: pointer;
+`;
+
+export const ModalButtonStyle = (cssProps: ModalButtonCSSProps) => css`
+  background: ${cssProps.backgroundColor};
+  border: 1px solid ${cssProps.borderColor};
+  box-shadow: none;
+  border-radius: ${cssProps.borderRadius}px;
+  padding: 0;
+  overflow: visible;
+  cursor: pointer;
+  color: ${cssProps.color};
+  font-size: ${cssProps.fontSize}px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  padding: 7px 21px;
 `;
 
 export const getPositionStyle = (position: string) => {
