@@ -1,10 +1,22 @@
-import React from "react";
-import "./App.css";
+import { Dialog } from './lib';
 
 function App() {
   return (
     <>
-      <h1>Component Modules</h1>
+      <Dialog>
+        <Dialog.Trigger>Open Dialog</Dialog.Trigger>
+        <Dialog.Root>
+          <Dialog.Overlay />
+          <Dialog.Content>
+            <Dialog.Header>
+              <Dialog.CloseButton>Close</Dialog.CloseButton>
+            </Dialog.Header>
+            <div style={{ padding: '16px' }}>
+              <p>Dialog Content</p>
+            </div>
+          </Dialog.Content>
+        </Dialog.Root>
+      </Dialog>
     </>
   );
 }
