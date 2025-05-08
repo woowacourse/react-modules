@@ -1,5 +1,5 @@
 import { renderHook, act } from "@testing-library/react";
-import useCardNumber, { CardNumberLabel } from "./useCardNumber";
+import useCardNumber from "./useCardNumber";
 
 describe("useCardNumber 테스트", () => {
   it("카드 번호가 유효하게 입력되었을 때 isValid는 true, errorMessage는 빈 문자열인지 확인한다.", () => {
@@ -14,21 +14,17 @@ describe("useCardNumber 테스트", () => {
 
     for (const [label, value] of Object.entries(testValue)) {
       act(() => {
-        result.current.validate(label as CardNumberLabel, value);
+        result.current.handleChange({
+          target: { name: label, value: value },
+        } as React.ChangeEvent<HTMLInputElement>);
       });
     }
 
-    expect(result.current.isValid).toEqual({
-      first: true,
-      second: true,
-      third: true,
-      fourth: true,
-    });
-    expect(result.current.errorMessage).toEqual({
-      first: "",
-      second: "",
-      third: "",
-      fourth: "",
+    expect(result.current.validationResult).toEqual({
+      first: { state: false, message: "" },
+      second: { state: false, message: "" },
+      third: { state: false, message: "" },
+      fourth: { state: false, message: "" },
     });
   });
 
@@ -40,24 +36,19 @@ describe("useCardNumber 테스트", () => {
       third: "3333",
       fourth: "1234",
     };
-
     for (const [label, value] of Object.entries(testValue)) {
       act(() => {
-        result.current.validate(label as CardNumberLabel, value);
+        result.current.handleChange({
+          target: { name: label, value: value },
+        } as React.ChangeEvent<HTMLInputElement>);
       });
     }
 
-    expect(result.current.isValid).toEqual({
-      first: false,
-      second: true,
-      third: true,
-      fourth: true,
-    });
-    expect(result.current.errorMessage).toEqual({
-      first: "숫자만 입력 가능합니다.",
-      second: "",
-      third: "",
-      fourth: "",
+    expect(result.current.validationResult).toEqual({
+      first: { state: true, message: "숫자만 입력 가능합니다." },
+      second: { state: false, message: "" },
+      third: { state: false, message: "" },
+      fourth: { state: false, message: "" },
     });
   });
 
@@ -73,21 +64,17 @@ describe("useCardNumber 테스트", () => {
 
     for (const [label, value] of Object.entries(testValue)) {
       act(() => {
-        result.current.validate(label as CardNumberLabel, value);
+        result.current.handleChange({
+          target: { name: label, value: value },
+        } as React.ChangeEvent<HTMLInputElement>);
       });
     }
 
-    expect(result.current.isValid).toEqual({
-      first: false,
-      second: true,
-      third: true,
-      fourth: true,
-    });
-    expect(result.current.errorMessage).toEqual({
-      first: "4자리를 입력해주세요.",
-      second: "",
-      third: "",
-      fourth: "",
+    expect(result.current.validationResult).toEqual({
+      first: { state: true, message: "4자리를 입력해주세요." },
+      second: { state: false, message: "" },
+      third: { state: false, message: "" },
+      fourth: { state: false, message: "" },
     });
   });
 });

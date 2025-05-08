@@ -8,65 +8,69 @@ const ERROR_MESSAGE = {
   INPUT_LENGTH_LIMIT: `${CARDNUMBER_VALID_LENGTH}자리를 입력해주세요.`,
 };
 
-interface CardNumberValid {
-  first: boolean;
-  second: boolean;
-  third: boolean;
-  fourth: boolean;
+interface SingleCardNumberError {
+  state: boolean;
+  message: string;
 }
 
-interface CardNumberErrorMessage {
-  first: string;
-  second: string;
-  third: string;
-  fourth: string;
+interface CardNumberError {
+  first: SingleCardNumberError;
+  second: SingleCardNumberError;
+  third: SingleCardNumberError;
+  fourth: SingleCardNumberError;
 }
 
 export type CardNumberLabel = "first" | "second" | "third" | "fourth";
 
 const useCardNumber = () => {
-  const [isValid, setIsValid] = useState<CardNumberValid>({
-    first: true,
-    second: true,
-    third: true,
-    fourth: true,
-  });
-  const [errorMessage, setErrorMessage] = useState<CardNumberErrorMessage>({
+  const [cardNumber, setCardNumber] = useState({
     first: "",
     second: "",
     third: "",
     fourth: "",
   });
+  const [validationResult, setValidationResult] = useState<CardNumberError>({
+    first: { state: false, message: "" },
+    second: { state: false, message: "" },
+    third: { state: false, message: "" },
+    fourth: { state: false, message: "" },
+  });
 
-  const validate = (label: CardNumberLabel, value: string) => {
-    if (!checkNumber(value)) {
-      setErrorMessage({
-        ...errorMessage,
-        [label]: ERROR_MESSAGE.INVALID_NUMBER,
-      });
-      setIsValid({ ...isValid, [label]: false });
+  const validate = (label: CardNumberLabel, inputValue: string) => {
+    let isError = false;
+    let message = "";
 
-      return;
+    if (!checkNumber(inputValue)) {
+      message = ERROR_MESSAGE.INVALID_NUMBER;
+      isError = true;
+    } else if (!checkValidLength(inputValue, CARDNUMBER_VALID_LENGTH)) {
+      message = ERROR_MESSAGE.INPUT_LENGTH_LIMIT;
+      isError = true;
     }
 
-    if (!checkValidLength(value, CARDNUMBER_VALID_LENGTH)) {
-      setErrorMessage({
-        ...errorMessage,
-        [label]: ERROR_MESSAGE.INPUT_LENGTH_LIMIT,
-      });
-      setIsValid({ ...isValid, [label]: false });
-      return;
-    }
-    setErrorMessage({
-      ...errorMessage,
-      [label]: "",
-    });
-    setIsValid({
-      ...isValid,
-      [label]: true,
-    });
+    const result = { state: isError, message };
+
+    setValidationResult((prev) => ({
+      ...prev,
+      [label]: result,
+    }));
+
+    return result;
   };
 
-  return { isValid, errorMessage, validate };
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+
+    if (!["first", "second", "third", "fourth"].includes(name)) return;
+
+    setCardNumber((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+
+    validate(name as CardNumberLabel, value);
+  };
+
+  return { cardNumber, handleChange, validationResult };
 };
 export default useCardNumber;
