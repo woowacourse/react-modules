@@ -22,7 +22,9 @@ function App() {
           </Modal.Body>
           <Modal.Footer direction="row" align="end" justify="center">
             <Button color="light">확인</Button>
-            <Button color="dark">취소</Button>
+            <Button color="dark" onClick={handleClose}>
+              취소
+            </Button>
           </Modal.Footer>
         </Modal.Content>
       </Modal>

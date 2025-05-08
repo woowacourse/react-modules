@@ -16,6 +16,7 @@ const ButtonColors = {
 };
 
 export const StyledButton = styled.div<ButtonProps>`
+  cursor: pointer;
   width: 80px;
   height: 36px;
   line-height: 36px;
