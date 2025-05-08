@@ -24,6 +24,7 @@ interface MessageProps {
 
 export interface ModalProps {
   position?: 'center' | 'bottom';
+  size?: 'small' | 'medium' | 'large';
   title?: TitleProps;
   showCloseButton?: boolean;
   backgroundColor?: string;
@@ -40,6 +41,7 @@ export interface ModalProps {
 
 const Modal = ({
   position = 'center',
+  size,
   title,
   showCloseButton = true,
   backgroundColor,
@@ -63,7 +65,6 @@ const Modal = ({
     document.addEventListener('keydown', handleEscape);
     return () => document.removeEventListener('keydown', handleEscape);
   }, [onClose]);
-
   return (
     isOpen &&
     createPortal(
@@ -71,6 +72,7 @@ const Modal = ({
         <ModalBox
           $backgroundColor={backgroundColor}
           $position={position}
+          $size={size}
           onClick={stopPropagation}
         >
           <TopWrapper $titleText={title?.text}>
