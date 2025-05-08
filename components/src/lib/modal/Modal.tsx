@@ -1,9 +1,10 @@
 import AlertModal from './alertModal/AlertModal';
 import ConfirmModal from './confirmModal/ConfirmModal';
 import * as S from './Modal.styles';
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import PromptModal from './promptModal/PromptModal';
 import { ModalProps } from '../shared/types/modal';
+import { useFocusTrap } from '../shared/hooks/useFocusTrap';
 
 const Modal = ({
   isOpen,
@@ -17,6 +18,9 @@ const Modal = ({
   size = 'medium',
   position = 'center',
 }: ModalProps) => {
+  const modalRef = useRef<HTMLDivElement>(null);
+  useFocusTrap(modalRef);
+
   useEffect(() => {
     const keyHandler = (e: KeyboardEvent) => e.key === 'Escape' && onClose();
     window.addEventListener('keyup', keyHandler);
@@ -31,7 +35,7 @@ const Modal = ({
     <>
       {isOpen && (
         <S.Background onClick={handleBackgroundClick}>
-          <S.ModalContainer size={size} position={position}>
+          <S.ModalContainer ref={modalRef} size={size} position={position}>
             <S.HeaderSection>
               <S.Title>{title}</S.Title>
               <S.ModalCloseButton onClick={onClose}>
