@@ -1,6 +1,7 @@
 // import { Modal } from "@kaori-killer/modal-component";
 import Modal from "../src/lib/components/Modal/Modal";
 import Button from "./lib/components/Button/Button";
+import Input from "./lib/components/Input/Input";
 
 function App() {
   const { isOpen, handleOpen, handleClose } = Modal.useModal();
@@ -16,7 +17,9 @@ function App() {
             </Modal.Title>
             <Modal.CloseButton onClose={handleClose} />
           </Modal.Header>
-          <Modal.Body>몸통이다!</Modal.Body>
+          <Modal.Body>
+            <Input placeholder="쿠폰 번호 입력" />
+          </Modal.Body>
           <Modal.Footer direction="row" align="end" justify="center">
             <Button color="light">확인</Button>
             <Button color="dark">취소</Button>
