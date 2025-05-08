@@ -36,6 +36,7 @@ export default function useCardNumber() {
     cardNumber,
     formattedCardNumber,
     cardNumberRegister,
+    brand: getCardBrand(cardNumber.cardNumber),
     isCardNumberValid,
   };
 }
