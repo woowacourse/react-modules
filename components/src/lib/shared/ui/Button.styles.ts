@@ -30,7 +30,7 @@ export const CloseButton = styled.button`
 
   transition: background-color 0.1s ease-in-out;
   :hover {
-    background-color: rgb(238, 238, 238);
+    background-color: rgb(220, 220, 220);
   }
 
   :focus {
