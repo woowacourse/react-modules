@@ -1,6 +1,6 @@
-import { useCardField, ValidationConfig } from './useCardFields';
+import useCardField, { ValidationConfig } from './useCardFields';
 
-export const useCardExpiry = () => {
+export default function useCardExpiry() {
   const monthValidationConfig: ValidationConfig = {
     minValue: 1,
     maxValue: 12,
@@ -62,4 +62,4 @@ export const useCardExpiry = () => {
     isValid,
     hasError: month.error || year.error,
   };
-};
+}

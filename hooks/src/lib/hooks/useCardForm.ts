@@ -1,6 +1,6 @@
-import { useCardCVC } from './useCardCVC';
-import { useCardExpiry } from './useCardExpiry';
-import { useCardNumber } from './useCardNumber';
+import useCardCVC from './useCardCVC';
+import useCardExpiry from './useCardExpiry';
+import useCardNumber from './useCardNumber';
 
 export interface CardFormData {
   cardNumber: string;
@@ -9,7 +9,7 @@ export interface CardFormData {
   cardCVC: string;
 }
 
-export const useCardForm = () => {
+export default function useCardForm() {
   const cardNumber = useCardNumber();
   const cardExpiry = useCardExpiry();
   const cardCVC = useCardCVC(cardNumber.cardType);
@@ -46,4 +46,4 @@ export const useCardForm = () => {
     getFormData,
     hasErrors,
   };
-};
+}

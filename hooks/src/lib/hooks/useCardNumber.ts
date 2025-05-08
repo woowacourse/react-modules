@@ -1,6 +1,6 @@
-import { useCardField, ValidationConfig } from './useCardFields';
+import useCardField, { ValidationConfig } from './useCardFields';
 
-export const useCardNumber = () => {
+export default function useCardNumber() {
   const validationConfig: ValidationConfig = {
     requiredLength: 16,
     errorMessages: {
@@ -51,4 +51,4 @@ export const useCardNumber = () => {
     getErrorMessage,
     cardType: detectCardType(value),
   };
-};
+}

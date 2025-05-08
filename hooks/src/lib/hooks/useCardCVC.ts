@@ -1,7 +1,7 @@
 import { CardCVC } from '../types/types';
-import { useCardField, ValidationConfig } from './useCardFields';
+import useCardField, { ValidationConfig } from './useCardFields';
 
-export const useCardCVC = (cardType?: string | null) => {
+export default function useCardCVC(cardType?: string | null) {
   const requiredLength = cardType === 'American Express' ? 4 : 3;
 
   const validationConfig: ValidationConfig = {
@@ -37,4 +37,4 @@ export const useCardCVC = (cardType?: string | null) => {
     isValid: isCVCValid,
     getErrorMessage,
   };
-};
+}

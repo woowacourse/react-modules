@@ -12,7 +12,7 @@ export interface ValidationConfig {
   };
 }
 
-export const useCardField = (validationConfig: ValidationConfig) => {
+export default function useCardField(validationConfig: ValidationConfig) {
   const [value, setValue] = useState<string>('');
   const [error, setError] = useState<boolean>(false);
 
@@ -95,4 +95,4 @@ export const useCardField = (validationConfig: ValidationConfig) => {
     isValid,
     getErrorMessage,
   };
-};
+}
