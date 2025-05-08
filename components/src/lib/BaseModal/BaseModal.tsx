@@ -27,7 +27,7 @@ const BaseModal = ({
 }: ModalPropsType) => {
   if (!isModalOpen) return null;
 
-  const modalContent = (
+  const BaseModalContent = (
     <ModalBackground isModalOpen={isModalOpen} position={position}>
       <ModalContainer position={position}>
         <ModalHeader>
@@ -40,7 +40,7 @@ const BaseModal = ({
       </ModalContainer>
     </ModalBackground>
   );
-  return createPortal(modalContent, document.body);
+  return createPortal(BaseModalContent, document.body);
 };
 
 export default BaseModal;
