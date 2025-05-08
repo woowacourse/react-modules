@@ -1,5 +1,6 @@
-import Modal from "../src/lib/components/Modal/Modal";
 // import { Modal } from "@kaori-killer/modal-component";
+import Modal from "../src/lib/components/Modal/Modal";
+import Button from "./lib/components/Button/Button";
 
 function App() {
   const { isOpen, handleOpen, handleClose } = Modal.useModal();
@@ -17,7 +18,8 @@ function App() {
           </Modal.Header>
           <Modal.Body>몸통이다!</Modal.Body>
           <Modal.Footer direction="row" align="end" justify="center">
-            Footer이다!
+            <Button>확인</Button>
+            <Button>취소</Button>
           </Modal.Footer>
         </Modal.Content>
       </Modal>
