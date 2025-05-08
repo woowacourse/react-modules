@@ -32,7 +32,7 @@ export const ModalContainerStyle = (position: string, gap: number) => {
     box-sizing: border-box;
     padding: 24px 32px;
     min-width: 320px;
-    max-width: 600px;
+    ${position === "center" && "max-width: 600px;"}
     gap: ${gap}px;
     ${positionStyle}
   `;
