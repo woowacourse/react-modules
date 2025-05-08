@@ -1,6 +1,6 @@
 import { renderHook, act } from '@testing-library/react';
 import useCardNumbers from './useCardNumbers';
-import { ERROR_MESSAGE } from './constants/errorMessage';
+import { ERROR_MESSAGE } from '../constants/errorMessage';
 
 test('4자리 숫자가 입력되면 정상 작동된다.', () => {
   const { result } = renderHook(() => useCardNumbers());
