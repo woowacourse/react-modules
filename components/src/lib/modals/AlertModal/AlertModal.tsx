@@ -1,5 +1,5 @@
-import ConfirmButton from "../buttons/ConfirmButton";
-import Modal from "../Modal";
+import ConfirmButton from "../../buttons/ConfirmButton";
+import Modal from "../../Modal";
 export interface AlertModalProps {
   /** 모달을 보여줄지 여부 */
   show: boolean;
@@ -52,7 +52,7 @@ const AlertModal = ({
       <Modal.Footer buttonAlign="right">
         <ConfirmButton onHide={onHide} onConfirm={onConfirm} />
       </Modal.Footer>
-    </Modal>
+    </Modal>  
   );
 };
 
