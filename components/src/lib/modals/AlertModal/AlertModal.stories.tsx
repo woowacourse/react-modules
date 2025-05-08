@@ -33,28 +33,16 @@ type Story = StoryObj<typeof AlertModal>;
 
 export const Default: Story = {
   render: (args, { updateArgs }) => {
-    const [internalShow, setInternalShow] = useState(args.show);
-
-    useEffect(() => {
-      setInternalShow(args.show);
-    }, [args.show]);
-
-    const handleHide = () => {
-      setInternalShow(false);
-      updateArgs?.({ show: false });
-    };
-
     const handleConfirm = () => {
       console.log("✅ 확인 클릭됨!");
-      handleHide();
+      updateArgs?.({ show: false }); // Controls에서도 반영됨
     };
 
-    return <AlertModal {...args} show={internalShow} onHide={handleHide} onConfirm={handleConfirm} />;
+    return <AlertModal {...args} onHide={() => updateArgs?.({ show: false })} onConfirm={handleConfirm} />;
   },
 
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-
     const confirmButton = await canvas.findByRole("button", { name: /확인/i });
     await userEvent.click(confirmButton);
   },
