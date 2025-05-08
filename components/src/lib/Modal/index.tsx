@@ -5,11 +5,13 @@ import useModalCloseEvent from "../../hooks/useModalCloseEvent";
 
 export type ModalType = "alert" | "confirm" | "prompt";
 export type ModalSizeType = "small" | "medium" | "large";
+export type ModalPositionType = "bottom" | "center";
 
 interface ModalProps {
   onClose: () => void;
   modalType?: ModalType;
   modalSize?: ModalSizeType;
+  position?: ModalPositionType;
 }
 
 function Modal({
@@ -17,12 +19,17 @@ function Modal({
   children,
   modalType = "alert",
   modalSize = "medium",
+  position = "center",
 }: PropsWithChildren<ModalProps>) {
   useModalCloseEvent(onClose);
 
   return (
     <S.Backdrop id="backdrop">
-      <S.ModalContainer modalType={modalType} modalSize={modalSize}>
+      <S.ModalContainer
+        modalType={modalType}
+        modalSize={modalSize}
+        position={position}
+      >
         {children}
       </S.ModalContainer>
     </S.Backdrop>

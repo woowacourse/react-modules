@@ -2,6 +2,7 @@ import styled, { css } from "styled-components";
 
 export type ModalType = "alert" | "confirm" | "prompt";
 export type ModalSizeType = "small" | "medium" | "large";
+export type ModalPositionType = "bottom" | "center";
 
 export const Backdrop = styled.div`
   position: fixed;
@@ -19,6 +20,7 @@ export const Backdrop = styled.div`
 export const ModalContainer = styled.div<{
   modalType: ModalType;
   modalSize: ModalSizeType;
+  position: ModalPositionType;
 }>`
   position: fixed;
   background: #fff;
@@ -27,31 +29,41 @@ export const ModalContainer = styled.div<{
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
   display: flex;
   flex-direction: column;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  border-radius: 8px;
 
-  ${({ modalSize }) => {
-    switch (modalSize) {
-      case "small":
-        return css`
-          width: 320px;
-        `;
-      case "medium":
-        return css`
-          width: 480px;
-        `;
-      case "large":
-        return css`
-          width: 600px;
-        `;
-      default:
-        return css`
-          width: 320px;
-        `;
-    }
-  }}
+  ${({ position, modalSize }) =>
+    position === "bottom"
+      ? css`
+          width: 100%;
+          bottom: 0;
+          left: 0;
+          border-radius: 8px 8px 0 0;
+        `
+      : css`
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          border-radius: 8px;
+          ${() => {
+            switch (modalSize) {
+              case "small":
+                return css`
+                  width: 320px;
+                `;
+              case "medium":
+                return css`
+                  width: 480px;
+                `;
+              case "large":
+                return css`
+                  width: 600px;
+                `;
+              default:
+                return css`
+                  width: 320px;
+                `;
+            }
+          }}
+        `}
 `;
 
 export const ModalHeader = styled.div`
