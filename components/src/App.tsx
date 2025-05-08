@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Modal } from "./lib";
+import AlertModal from "./lib/AlertModal/AlertModal";
 
 function App() {
   const [isOpen, setIsOpen] = useState(false);
@@ -12,29 +12,16 @@ function App() {
     setIsOpen(false);
   };
 
-  const handleBackdropClick = (e: React.MouseEvent<HTMLDivElement>): void => {
-    if (e.target === e.currentTarget) {
-      handleCloseModal();
-    }
-  };
-
-  const handleConfirm = () => {
-    console.log('확인 버튼이 클릭되었습니다.')
-  };
-
   return (
     <>
       <button onClick={handleOpenModal}>모달 열기</button>
       {isOpen && (
-        <Modal
-          onClose={handleCloseModal}
-          title="제목"
+        <AlertModal
+          title="아이디를 입력해 주세요."
+          content={<p>아이디는 필수로 입력해야 합니다.</p>}
+          hasCloseButton
           position="center"
-          content="내용"
-          hasCloseButton={true}
-          handleBackdropClick={handleBackdropClick}
-          confirmText="확인"
-          onConfirm={handleConfirm}
+          onClose={handleCloseModal}
         />
       )}
     </>

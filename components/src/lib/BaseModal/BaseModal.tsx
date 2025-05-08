@@ -1,27 +1,27 @@
 import styled from "@emotion/styled";
 import CloseButton from "../components/CloseButton/CloseButton";
-import ConfirmButton from "../components/ConfirmButton/ConfirmButton";
 
 type ModalProps = {
-  position: "center" | "bottom" | "top";
+  position?: "center" | "bottom";
   title: string;
   content: React.ReactNode;
-  hasCloseButton: boolean;
+  hasCloseButton?: boolean;
   onClose: () => void;
-  handleBackdropClick?: (e: React.MouseEvent<HTMLDivElement>) => void;
-  confirmText?: string;
-  onConfirm?: () => void;
 };
 
-const Modal = ({
-  position,
+const handleWrapperClick =
+  (onClose: () => void) => (e: React.MouseEvent<HTMLDivElement>) => {
+    if (e.target === e.currentTarget) {
+      onClose();
+    }
+  };
+
+const BaseModal = ({
+  position = "center",
   title,
   content,
-  hasCloseButton,
+  hasCloseButton = true,
   onClose,
-  handleBackdropClick,
-  confirmText = "확인",
-  onConfirm,
 }: ModalProps) => {
   return (
     <Overlay
@@ -30,7 +30,7 @@ const Modal = ({
       aria-labelledby="modal-title"
       aria-describedby="modal-content"
     >
-      <Wrapper className={position} onClick={handleBackdropClick}>
+      <Wrapper className={position} onClick={handleWrapperClick(onClose)}>
         <ModalContainer className={position}>
           <ModalHeader>
             <ModalTitle id="modal-title">{title}</ModalTitle>
@@ -38,19 +38,14 @@ const Modal = ({
               {hasCloseButton && <CloseButton onClose={onClose} />}
             </CloseButtonWrapper>
           </ModalHeader>
-          <ModalContent id="modal-content">{content}</ModalContent>{" "}
-          <ModalFooter>
-            {onConfirm && (
-              <ConfirmButton confirmText={confirmText} onClick={onConfirm} />
-            )}
-          </ModalFooter>
+          <ModalContent id="modal-content">{content}</ModalContent>
         </ModalContainer>
       </Wrapper>
     </Overlay>
   );
 };
 
-export default Modal;
+export default BaseModal;
 
 const Overlay = styled.div`
   position: fixed;
@@ -78,10 +73,6 @@ const Wrapper = styled.div`
   &.bottom {
     align-items: flex-end;
   }
-
-  &.top {
-    align-items: flex-start;
-  }
 `;
 
 const ModalContainer = styled.div`
@@ -89,7 +80,6 @@ const ModalContainer = styled.div`
   flex-direction: column;
   background-color: white;
   width: 304px;
-  min-height: 216px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   padding: 24px 32px;
 
@@ -99,10 +89,6 @@ const ModalContainer = styled.div`
 
   &.bottom {
     border-radius: 8px 8px 0 0;
-  }
-
-  &.top {
-    border-radius: 0 0 8px 8px;
   }
 `;
 
@@ -122,10 +108,4 @@ const CloseButtonWrapper = styled.div`
 
 const ModalContent = styled.div`
   margin-top: 24px;
-`;
-
-const ModalFooter = styled.div`
-  margin-top: auto;
-  text-align: center;
-  justify-content: flex-end;
 `;
