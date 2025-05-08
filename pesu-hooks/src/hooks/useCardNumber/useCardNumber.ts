@@ -1,13 +1,13 @@
 import { useForm } from '@/hooks/useForm';
 import { CardNumberInput } from '@/types/input';
-import { getCardBrand, getCardNumberMaxLength } from './utils';
+import { formatCardNumber, getCardBrand, getCardNumberMaxLength } from './utils';
 
 export default function useCardNumber() {
   const {
     value: cardNumber,
     errors: cardNumberErrors,
     register: cardNumberRegister,
-    isValid: cardNumberIsValid,
+    isValid: isCardNumberValid,
   } = useForm<CardNumberInput>({
     defaultValues: {
       cardNumber: '',
@@ -29,10 +29,13 @@ export default function useCardNumber() {
     },
   });
 
+  const formattedCardNumber = formatCardNumber(cardNumber.cardNumber, getCardBrand(cardNumber.cardNumber));
+
   return {
     cardNumberErrors,
     cardNumber,
+    formattedCardNumber,
     cardNumberRegister,
-    cardNumberIsValid,
+    isCardNumberValid,
   };
 }

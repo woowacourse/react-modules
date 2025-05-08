@@ -1,5 +1,6 @@
-// 카드 브랜드 식별 함수
-export function getCardBrand(cardNumber: string) {
+type CardBrand = 'diners' | 'amex' | 'unionpay' | 'visa' | 'master';
+
+export function getCardBrand(cardNumber: string): CardBrand | 'unknown' {
   if (cardNumber.startsWith('36')) return 'diners';
   if (cardNumber.startsWith('34') || cardNumber.startsWith('37')) return 'amex';
 
@@ -27,5 +28,18 @@ export function getCardNumberMaxLength(cardBrand: string) {
       return 15;
     default:
       return 16;
+  }
+}
+
+export function formatCardNumber(cardNumber: string, cardBrand: CardBrand | 'unknown') {
+  if (cardBrand === 'unknown') return cardNumber;
+
+  switch (cardBrand) {
+    case 'diners':
+      return cardNumber.replace(/(\d{4})(\d{6})(\d{0,4})/, '$1 $2 $3').trim();
+    case 'amex':
+      return cardNumber.replace(/(\d{4})(\d{6})(\d{5})/, '$1 $2 $3').trim();
+    default:
+      return cardNumber.replace(/(\d{4})(\d{4})(\d{4})(\d{4})/, '$1 $2 $3 $4').trim();
   }
 }
