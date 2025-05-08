@@ -16,7 +16,7 @@ function Modal({
   onClose,
   children,
   modalType = "alert",
-  modalSize = "small",
+  modalSize = "medium",
 }: PropsWithChildren<ModalProps>) {
   useModalCloseEvent(onClose);
 

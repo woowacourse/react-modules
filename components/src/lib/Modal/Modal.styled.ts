@@ -23,24 +23,14 @@ export const ModalContainer = styled.div<{
   position: fixed;
   background: #fff;
   padding: 1.5rem 2rem;
-  min-height: 220px;
+  min-height: 157px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
   display: flex;
   flex-direction: column;
-
-  ${({ modalType }) =>
-    modalType === "alert"
-      ? css`
-          top: 50%;
-          left: 50%;
-          transform: translate(-50%, -50%);
-          border-radius: 8px;
-        `
-      : css`
-          width: 100%;
-          bottom: 0;
-          border-radius: 8px 8px 0 0;
-        `}
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 8px;
 
   ${({ modalSize }) => {
     switch (modalSize) {
@@ -110,21 +100,26 @@ export const ModalFooter = styled.div`
 `;
 
 export const Button = styled.button<{ primary?: boolean }>`
-  padding: 0.5rem 1rem;
+  padding: 0;
   border-radius: 4px;
   font-weight: 500;
   cursor: pointer;
+  width: 80px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
   ${({ primary }) =>
     primary
       ? css`
-          background-color: #1a73e8;
+          background-color: #333333;
           color: white;
           border: none;
         `
       : css`
           background-color: white;
-          color: #1a73e8;
-          border: 1px solid #1a73e8;
+          color: #333333;
+          border: 1px solid #333333;
         `}
 `;

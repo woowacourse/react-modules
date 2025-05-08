@@ -42,21 +42,21 @@ function App() {
       </div>
 
       {isOpen && (
-        <Modal onClose={handleClose} modalType={modalType} modalSize="small">
+        <Modal onClose={handleClose} modalType={modalType} modalSize="medium">
           <Modal.Header>
             <Modal.Title>
               {modalType === "alert"
                 ? "아이디를 입력해주세요"
                 : modalType === "confirm"
-                  ? "확인 메시지"
-                  : "입력해주세요"}
+                  ? "카드를 삭제하시겠습니다?"
+                  : "쿠폰번호를 입력해주세요"}
             </Modal.Title>
             <Modal.CloseButton onClick={handleClose} />
           </Modal.Header>
 
           <Modal.Content>
             {modalType === "alert" && <p>아이디는 필수로 입력해야합니다.</p>}
-            {modalType === "confirm" && <p>이 작업을 진행하시겠습니까?</p>}
+            {modalType === "confirm" && <p>삭제하면 복구하실 수 없습니다.</p>}
             {modalType === "prompt" && (
               <Modal.Input
                 value={inputValue}
