@@ -18,7 +18,7 @@ describe("useCardFormat 훅 테스트", () => {
   it("숫자 외 문자를 제거하고 4자리씩 공백으로 그룹핑해야 한다", () => {
     const { result } = renderHook(() => useCardFormat());
     act(() => {
-      result.current.onChange({
+      result.current.onCardNumberChange({
         target: { value: "1234-5678 ab90_cd12 3456" },
       } as React.ChangeEvent<HTMLInputElement>);
     });
@@ -32,7 +32,7 @@ describe("useCardFormat 훅 테스트", () => {
   it("커스텀 splitter('-')를 사용하면 하이픈으로 그룹핑된다", () => {
     const { result } = renderHook(() => useCardFormat("-"));
     act(() => {
-      result.current.onChange({
+      result.current.onCardNumberChange({
         target: { value: "4111111111111111" },
       } as React.ChangeEvent<HTMLInputElement>);
     });
@@ -48,7 +48,7 @@ describe("useCardFormat 훅 테스트", () => {
   it("AMEX 번호(15자리)는 4-6-5 패턴으로 포맷팅한다", () => {
     const { result } = renderHook(() => useCardFormat());
     act(() => {
-      result.current.onChange({
+      result.current.onCardNumberChange({
         target: { value: "341234567890123" },
       } as React.ChangeEvent<HTMLInputElement>);
     });
@@ -66,7 +66,7 @@ describe("useCardFormat 훅 테스트", () => {
   it("Diners 번호(14자리)는 4-6-4 패턴으로 포맷팅한다", () => {
     const { result } = renderHook(() => useCardFormat());
     act(() => {
-      result.current.onChange({
+      result.current.onCardNumberChange({
         target: { value: "36123456789012" },
       } as React.ChangeEvent<HTMLInputElement>);
     });
@@ -83,7 +83,7 @@ describe("useCardFormat 훅 테스트", () => {
   it("UnionPay 번호(16자리)는 4-4-4-4 패턴으로 포맷팅한다", () => {
     const { result } = renderHook(() => useCardFormat());
     act(() => {
-      result.current.onChange({
+      result.current.onCardNumberChange({
         target: { value: "6521231241414324" },
       } as React.ChangeEvent<HTMLInputElement>);
     });
@@ -100,7 +100,7 @@ describe("useCardFormat 훅 테스트", () => {
   it("잘못된 카드 번호는 formatted와 raw가 Default 규칙을 따라야 한다", () => {
     const { result } = renderHook(() => useCardFormat());
     act(() => {
-      result.current.onChange({
+      result.current.onCardNumberChange({
         target: { value: "1234524124141411" },
       } as React.ChangeEvent<HTMLInputElement>);
     });

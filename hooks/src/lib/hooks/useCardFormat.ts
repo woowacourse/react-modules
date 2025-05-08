@@ -9,7 +9,7 @@ export interface UseCardFormatReturn {
   formatted: string;
   raw: string;
   totalLength: number;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onCardNumberChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   placeholder: string;
 }
 export interface UseCardValidationOptions {
@@ -24,7 +24,7 @@ export default function useCardFormat(
   const [formatted, setFormatted] = useState("");
   const [raw, setRaw] = useState("");
 
-  const onChange = useCallback(
+  const onCardNumberChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
       const digits = e.target.value.replace(/\D/g, "");
       setRaw(digits);
@@ -65,5 +65,5 @@ export default function useCardFormat(
     .join("")
     .trim();
 
-  return { formatted, raw, totalLength, placeholder, onChange };
+  return { formatted, raw, totalLength, placeholder, onCardNumberChange };
 }

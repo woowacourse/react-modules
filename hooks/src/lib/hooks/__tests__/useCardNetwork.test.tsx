@@ -4,13 +4,13 @@ import useCardNetwork from "../useCardNetwork";
 
 describe("useCardNetwork 훅 테스트", () => {
   const TestComponent = () => {
-    const { cardNumber, cardNetwork, onChange } = useCardNetwork();
+    const { cardNumber, cardNetwork, onCardNumberChange } = useCardNetwork();
     return (
       <div>
         <input
           data-testid="card-input"
           value={cardNumber}
-          onChange={onChange}
+          onChange={onCardNumberChange}
         />
         <div data-testid="card-network">{cardNetwork}</div>
       </div>

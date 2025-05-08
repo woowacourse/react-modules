@@ -5,14 +5,17 @@ import { CLIENT_CARD_NUMBER_LENGTH } from "../validator/constants/card-number-le
 export default function useCardNetwork() {
   const [cardNumber, setCardNumber] = useState("");
 
-  const onChange = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
-    const { value } = event.target;
-    setCardNumber(value.replace(/\D/g, ""));
-  }, []);
+  const onCardNumberChange = useCallback(
+    (event: React.ChangeEvent<HTMLInputElement>) => {
+      const { value } = event.target;
+      setCardNumber(value.replace(/\D/g, ""));
+    },
+    []
+  );
   const cardNetwork = useMemo(
     () => strictCheckCardBrand(cardNumber, CLIENT_CARD_NUMBER_LENGTH),
     [cardNumber]
   );
 
-  return { cardNumber, onChange, cardNetwork };
+  return { cardNumber, onCardNumberChange, cardNetwork };
 }
