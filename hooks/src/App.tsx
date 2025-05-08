@@ -1,8 +1,13 @@
 import useCardNumber from "./lib/hooks/CardNumber";
 
 function App() {
-  const { cardNumber, handleCardNumberChange, cardType, isValid } =
-    useCardNumber();
+  const {
+    cardNumber,
+    handleCardNumberChange,
+    cardType,
+    isValid,
+    getFormattedCardNumber,
+  } = useCardNumber();
 
   return (
     <div style={{ padding: "20px" }}>
@@ -20,6 +25,7 @@ function App() {
           <p>
             유효성: {isValid ? "유효한 카드 번호" : "유효하지 않은 카드 번호"}
           </p>
+          <p>포멧팅된 카드 번호: {getFormattedCardNumber()}</p>
         </div>
       </div>
     </div>

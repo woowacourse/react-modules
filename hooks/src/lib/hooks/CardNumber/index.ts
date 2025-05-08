@@ -28,7 +28,6 @@ const useCardNumber = (initialState: string = "") => {
     }
 
     // UnionPay: 16자리
-
     // 622126~622925로 시작
     if (firstSixDigits >= "622126" && firstSixDigits <= "622925") {
       return "unionpay";
@@ -52,12 +51,29 @@ const useCardNumber = (initialState: string = "") => {
     getCardType()
   );
 
+  const getFormattedCardNumber = () => {
+    const cardType = getCardType();
+    if (cardType === "unknown") {
+      return cardNumber;
+    } else if (cardType === "diners") {
+      // 3612 345678 9012
+      return cardNumber.replace(/(\d{4})(\d{6})(\d{4})/, "$1 $2 $3");
+    } else if (cardType === "amex") {
+      // 3412 345678 90123
+      return cardNumber.replace(/(\d{4})(\d{6})(\d{5})/, "$1 $2 $3");
+    } else if (cardType === "unionpay") {
+      // 6221 2612 3456 7890
+      return cardNumber.replace(/(\d{4})(\d{4})(\d{4})(\d{4})/, "$1 $2 $3 $4");
+    }
+  };
+
   return {
     cardNumber,
     handleCardNumberChange,
     cardType: getCardType(),
     isValid,
     errorMessage,
+    getFormattedCardNumber,
   };
 };
 
