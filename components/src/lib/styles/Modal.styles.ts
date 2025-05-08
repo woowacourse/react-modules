@@ -26,7 +26,7 @@ export const ModalContainerStyle = (position: string, gap: number) => {
   return css`
     display: flex;
     flex-direction: column;
-    align-items: center;
+    /* align-items: center; */
     background: #fff;
     z-index: 99;
     box-sizing: border-box;
@@ -59,8 +59,9 @@ export const ModalBodyStyle = css`
   width: 100%;
 `;
 
-export const ModalFooterStyle = css`
-  width: 100%;
+export const ModalFooterStyle = (align: "left" | "center" | "right" = "right") => css`
+  display: flex;
+  justify-content: ${align === "left" ? "flex-start" : align === "center" ? "center" : "flex-end"};
 `;
 
 export const ModalCloseStyle = css`
@@ -100,3 +101,13 @@ export const getPositionStyle = (position: string) => {
       return css``;
   }
 };
+
+export const ConfirmButtonStyle = css`
+  border: 0;
+  background-color: #333333;
+  color: #ffffff;
+  width: 80px;
+  height: 36px;
+  border-radius: 5px;
+  cursor: pointer;
+`;
