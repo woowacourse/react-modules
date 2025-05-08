@@ -9,6 +9,7 @@ import {
 import {IoClose} from 'react-icons/io5';
 import {createPortal} from 'react-dom';
 import Alert from './content/Alert';
+import Confirm from './content/Confirm';
 
 interface TitleProps {
   text?: string;
@@ -16,9 +17,8 @@ interface TitleProps {
   size?: number;
 }
 
-interface AlertProps {
+interface MessageProps {
   message: string;
-  btnText: string;
 }
 
 export interface ModalProps {
@@ -27,7 +27,9 @@ export interface ModalProps {
   showCloseButton?: boolean;
   backgroundColor?: string;
   children: ReactNode;
-  alert?: AlertProps;
+
+  alert?: MessageProps;
+  confirm?: MessageProps;
 
   isOpen: boolean;
   onClose: () => void;
@@ -41,6 +43,7 @@ const Modal = ({
   backgroundColor,
   children,
   alert,
+  confirm,
   isOpen,
   onClose,
   onConfirm,
@@ -83,11 +86,12 @@ const Modal = ({
             )}
           </TopWrapper>
           {/* {children} */}
-          {alert && (
-            <Alert
-              message={alert.message}
-              btnText={alert.btnText}
+          {alert && <Alert message={alert.message} onConfirm={onConfirm} />}
+          {confirm && (
+            <Confirm
+              message={confirm.message}
               onConfirm={onConfirm}
+              onClose={onClose}
             />
           )}
         </ModalBox>
