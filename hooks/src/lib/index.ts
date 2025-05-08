@@ -13,4 +13,4 @@ export type {
   GetValidationFnsType,
   UseInputErrorProps,
 } from './types/types';
-export { findFirstError } from '../utils/errorUtils';
+export { findFirstError } from './utils/errorUtils';

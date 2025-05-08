@@ -1,4 +1,4 @@
-import { NO_ERROR } from '../lib/constants/message';
+import { NO_ERROR } from '../constants/message';
 
 export function findFirstError(errorObj: Record<string, string>) {
   const firstError = Object.entries(errorObj).find(

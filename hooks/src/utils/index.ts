@@ -1,1 +1,1 @@
-export * from './errorUtils';
+export * from '../lib/utils/errorUtils';
