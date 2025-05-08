@@ -2,6 +2,17 @@ import { CardBrand } from "../constants/CardBrand";
 import { CARD_NUMBER_LENGTH } from "../validator/constants/card-number-length";
 type FormatRule = number[] | ((len: number) => number[]);
 
+/** 카드사별 “특수” 포맷 패턴 */
+// AMEX, DINERS, UNIONPAY 외 다른 카드사는 무시.
+export const SPECIAL_RULES: Record<CardBrand, number[]> = {
+  AMEX: [4, 6, 5],
+  DINERS: [4, 6, 4],
+  UNIONPAY: [4, 4, 4, 4],
+  VISA: [4, 4, 4, 4],
+  MASTERCARD: [4, 4, 4, 4],
+  DEFAULT: [4, 4, 4, 4],
+};
+
 /** default: 4자리씩 잘라주는 헬퍼 */
 function dynamicChunks(length: number, chunkSize = 4): number[] {
   const parts: number[] = [];
@@ -13,25 +24,16 @@ function dynamicChunks(length: number, chunkSize = 4): number[] {
   return parts;
 }
 
-/** 카드사별 “특수” 포맷 패턴 */
-// AMEX, DINERS, UNIONPAY 외 다른 카드사는 무시.
-
-const SPECIAL_RULES: Record<CardBrand, number[]> = {
-  AMEX: [4, 6, 5],
-  DINERS: [4, 6, 4],
-  UNIONPAY: [4, 4, 4, 4],
-  VISA: [4, 4, 4, 4],
-  MASTERCARD: [4, 4, 4, 4],
-  DEFAULT: [4, 4, 4, 4],
-};
-
-export function createFormatRulesFromLengths(): Record<CardBrand, FormatRule> {
+/** 카드사별 포맷 규칙을 생성하는 헬퍼 */
+// 가변하는 카드사별 포맷을 생성할수 있지만,
+// 현재는 카드사별로 고정된 포맷을 사용하고 있음.
+function createFormatRulesFromLengths(): Record<CardBrand, FormatRule> {
   const rules = {} as Record<CardBrand, FormatRule>;
   (Object.keys(CARD_NUMBER_LENGTH) as CardBrand[]).forEach((brand) => {
     if (SPECIAL_RULES[brand]) {
       rules[brand] = SPECIAL_RULES[brand];
     } else {
-      rules[brand] = (len: number) => dynamicChunks(len, 4);
+      rules[brand] = (len: number) => dynamicChunks(len);
     }
   });
   return rules;

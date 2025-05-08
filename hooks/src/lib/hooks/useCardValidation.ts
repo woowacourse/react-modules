@@ -5,13 +5,22 @@ import useExpiryDateNumber from "./useExpiryDateNumber";
 import usePasswordNumber from "./usePasswordNumber";
 import useCardNetwork from "./useCardNetwork";
 import useCardFormat from "./useCardFormat";
-import type { UseCardValidationOptions } from "./useCardFormat";
+import { UseCardFormatOptions } from "./useCardFormat";
+
+interface UseCardValidationOptions {
+  formatOptions?: UseCardFormatOptions;
+}
 
 export default function useCardValidation(
-  options: UseCardValidationOptions = {}
+  option: UseCardValidationOptions = {
+    formatOptions: { placeholderChar: "X", splitter: " " },
+  }
 ) {
-  const { format: formatOptions = {} } = options;
-  const { splitter = " " } = formatOptions;
+  const { formatOptions } = option;
+  const { splitter, placeholderChar } = formatOptions || {
+    splitter: " ",
+    placeholderChar: "X",
+  };
 
   const card = useCardNumber();
   const strictCard = useStrictCardNumber();
@@ -19,7 +28,7 @@ export default function useCardValidation(
   const expiry = useExpiryDateNumber();
   const password = usePasswordNumber();
   const network = useCardNetwork();
-  const format = useCardFormat(splitter);
+  const format = useCardFormat({ splitter, placeholderChar });
 
   return { card, cvc, expiry, password, network, strictCard, format };
 }
