@@ -17,7 +17,7 @@ function ModalMain({ onClose, children }: { onClose: () => void; children: React
   );
 }
 
-function ModalBackDrop({ backgroundColor, ...props }: { backgroundColor?: string } & ComponentProps<'div'>) {
+function ModalBackDrop({ backgroundColor, zIndex, ...props }: { backgroundColor?: string; zIndex?: number } & ComponentProps<'div'>) {
   const { onClose } = useModalContext();
   const outsideRef = useRef<HTMLDivElement>(null);
   const handleBackClick = (e: MouseEvent<HTMLDivElement>) => {
@@ -25,19 +25,21 @@ function ModalBackDrop({ backgroundColor, ...props }: { backgroundColor?: string
       onClose();
     }
   };
-  return <S.BackDrop {...props} ref={outsideRef} backgroundColor={backgroundColor} onClick={handleBackClick} />;
+  return <S.BackDrop {...props} ref={outsideRef} backgroundColor={backgroundColor} zIndex={zIndex} onClick={handleBackClick} />;
 }
 
 function ModalContent({
   children,
   position,
+  zIndex,
   ...props
 }: {
   children: ReactNode;
   position: 'center' | 'bottom';
+  zIndex: number;
 } & ComponentProps<'div'>) {
   return (
-    <S.ModalWrapper position={position} {...props}>
+    <S.ModalWrapper position={position} zIndex={zIndex} {...props}>
       {children}
     </S.ModalWrapper>
   );
