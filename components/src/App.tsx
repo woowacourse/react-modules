@@ -4,7 +4,6 @@ import React from "react";
 
 const App = () => {
   const [isOpen, setIsOpen] = useState(false);
-
   const handleCloseModal = () => setIsOpen(false);
 
   return (
@@ -27,8 +26,12 @@ const App = () => {
               <p>모달 내용입니다.</p>
             </Modal.ModalContent>
             <Modal.ModalButtonContainer>
-              <Modal.ModalButton $type="confirm">확인</Modal.ModalButton>
-              <Modal.ModalButton $type="cancel">취소</Modal.ModalButton>
+              <Modal.ModalButton $size="small" $type="confirm">
+                확인
+              </Modal.ModalButton>
+              <Modal.ModalButton $size="small" $type="cancel">
+                취소
+              </Modal.ModalButton>
             </Modal.ModalButtonContainer>
           </Modal.ModalContainer>
         </Modal.Background>

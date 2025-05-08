@@ -116,14 +116,20 @@ export const ModalButtonContainer = styled.div`
   justify-content: right;
 `;
 
-export const ModalButton = styled.button<{ $type: ButtonTypeProps }>`
-  max-width: 80px;
+export const ModalButton = styled.button<{
+  $size: SizeProps;
+  $type: ButtonTypeProps;
+}>`
+  width: 100%;
   border-radius: 4px;
   padding: 8px 20px;
   cursor: pointer;
 
   ${({ $type }) => $type === "cancel" && cancelButton}
   ${({ $type }) => $type === "confirm" && confirmButton}
+
+  ${({ $size }) => $size === "small" && "max-width: 80px"}
+  ${({ $size }) => $size === "large" && "max-width: 100%"}
 `;
 
 export const ModalContent = styled.main`
