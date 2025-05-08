@@ -1,5 +1,5 @@
 import { renderHook, act } from '@testing-library/react';
-import { useCardCompanyInput } from './useCardCompany';
+import { useCardCompanyInput } from './useCardCompanyInput';
 import { ChangeEvent } from 'react';
 
 describe('useCardCompanyInput', () => {

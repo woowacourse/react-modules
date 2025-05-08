@@ -1,5 +1,5 @@
 import { renderHook, act } from '@testing-library/react';
-import { useCardNumbersInput } from './useCardNumbers';
+import { useCardNumbersInput } from './useCardNumbersInput';
 import { ChangeEvent } from 'react';
 import { ERROR_MESSAGE } from './validator/constants/errorMessage';
 

@@ -1,5 +1,5 @@
 import { renderHook, act } from '@testing-library/react';
-import { useCardExpDateInput } from './useCardExpDate';
+import { useCardExpDateInput } from './useCardExpDateInput';
 import { ChangeEvent } from 'react';
 import { ERROR_MESSAGE } from './validator/constants/errorMessage';
 
