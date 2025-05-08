@@ -19,9 +19,10 @@ function App() {
         isOpen={isOpen}
         onClose={handleClose}
         onConfirm={handleConfirm}
+        position="center"
         primaryButton={true}
         secondaryButton={true}
-        primaryButtonText="동의하고 저장하기"
+        primaryButtonText="확인"
         secondaryButtonText="닫기"
       >
         <Modal.Header>테스트 제목</Modal.Header>

@@ -37,10 +37,11 @@ interface ModalProps {
 interface ModalContextType {
   onClose: () => void;
   onConfirm?: () => void;
-  hasTopCloseButton: boolean;
-  primaryButton: boolean;
+  position: Position;
+  hasTopCloseButton?: boolean;
+  primaryButton?: boolean;
   primaryButtonText?: string;
-  secondaryButton: boolean;
+  secondaryButton?: boolean;
   secondaryButtonText?: string;
 }
 
@@ -73,6 +74,7 @@ function Modal({
           value={{
             onClose,
             onConfirm,
+            position,
             hasTopCloseButton,
             primaryButton,
             primaryButtonText,
@@ -121,6 +123,7 @@ Modal.Footer = () => {
   const {
     onClose,
     onConfirm,
+    position,
     primaryButton,
     primaryButtonText,
     secondaryButton,
@@ -128,7 +131,7 @@ Modal.Footer = () => {
   } = useModalContext();
 
   return (
-    <>
+    <ButtonContainer position={position}>
       {primaryButton ? (
         <Button onClick={onConfirm} text={primaryButtonText} />
       ) : null}
@@ -141,7 +144,7 @@ Modal.Footer = () => {
           backgroundColor="transparent"
         />
       ) : null}
-    </>
+    </ButtonContainer>
   );
 };
 
@@ -149,7 +152,7 @@ const ModalContainer = styled.div``;
 
 const ModalContent = styled.div<{ position: Position }>`
   height: 216px;
-  width: 304px;
+  width: 480px;
   position: fixed;
   top: 50%;
   left: 50%;
@@ -205,4 +208,20 @@ const MainSection = styled.section`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+`;
+
+const ButtonContainer = styled.div<{ position: Position }>`
+  display: flex;
+  justify-content: end;
+  gap: 12px;
+  width: ${({ position }) =>
+    position === "bottom" &&
+    `
+      flex-grow:1;
+      width:100%;
+
+      ${Button} button{
+        width:100%;
+      }
+    `};
 `;

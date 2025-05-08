@@ -25,9 +25,9 @@ export default Button;
 const StyleButton = styled.button<{ color: string; backgroundColor: string }>`
   cursor: pointer;
 
-  width: 100%;
+  width: 80px;
   height: 44px;
-  border: none;
+  border: 1px solid #333;
   border-radius: 5px;
   font-size: 15px;
   font-weight: 700;
