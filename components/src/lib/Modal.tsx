@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { ReactNode, useEffect } from "react";
+import { createContext, ReactNode, useContext } from "react";
 import Button from "./common/Button";
 import useEscapeKeyClose from "./useEscapeKeyClose";
 import { createPortal } from "react-dom";
@@ -7,7 +7,6 @@ import { createPortal } from "react-dom";
 type Position = "center" | "bottom";
 
 interface ModalProps {
-  title: string;
   isOpen: boolean;
   onClose: () => void;
   children: ReactNode;
@@ -36,8 +35,26 @@ interface ModalProps {
  * @property {string} [secondaryButtonText] - (선택) 취소 버튼 텍스트
  */
 
+interface ModalContextType {
+  onClose: () => void;
+  onConfirm?: () => void;
+  hasTopCloseButton: boolean;
+  primaryButton: boolean;
+  primaryButtonText?: string;
+  secondaryButton: boolean;
+  secondaryButtonText?: string;
+}
+
+const ModalContext = createContext<ModalContextType | undefined>(undefined);
+
+const useModalContext = () => {
+  const context = useContext(ModalContext);
+  if (!context)
+    throw new Error("Modal compound components must be used inside <Modal>");
+  return context;
+};
+
 function Modal({
-  title,
   isOpen,
   onClose,
   onConfirm,
@@ -53,46 +70,81 @@ function Modal({
 
   return isOpen
     ? createPortal(
-        <>
-          <ModalOverlay data-testid="modal-overlay" onClick={onClose} />
-          <ModalContainer>
-            <ModalContent
-              position={position}
-              role="dialog"
-              aria-modal="true"
-              aria-labelledby="modal-title"
-              aria-describedby="modal-description"
-              aria-hidden={!isOpen}
-            >
-              <TitleSection>
-                <TitleText id="modal-title">{title}</TitleText>
-                {hasTopCloseButton ? (
-                  <CloseButton onClick={onClose}>✕</CloseButton>
-                ) : null}
-              </TitleSection>
-              <MainSection id="modal-description">
+        <ModalContext.Provider
+          value={{
+            onClose,
+            onConfirm,
+            hasTopCloseButton,
+            primaryButton,
+            primaryButtonText,
+            secondaryButton,
+            secondaryButtonText,
+          }}
+        >
+          <>
+            <ModalOverlay data-testid="modal-overlay" onClick={onClose} />
+            <ModalContainer>
+              <ModalContent
+                position={position}
+                role="dialog"
+                aria-modal="true"
+                aria-labelledby="modal-title"
+                aria-describedby="modal-description"
+                aria-hidden={!isOpen}
+              >
                 {children}
-                {primaryButton ? (
-                  <Button onClick={onConfirm} text={primaryButtonText} />
-                ) : null}
-                {secondaryButton ? (
-                  <Button
-                    text={secondaryButtonText}
-                    onClick={onClose}
-                    color="#8b95a1"
-                    backgroundColor="transparent"
-                  />
-                ) : null}
-              </MainSection>
-            </ModalContent>
-          </ModalContainer>
-        </>,
+              </ModalContent>
+            </ModalContainer>
+          </>
+        </ModalContext.Provider>,
         document.body
       )
     : null;
 }
 
 export default Modal;
+
+Modal.Header = ({ children }: { children: ReactNode }) => {
+  const { onClose, hasTopCloseButton } = useModalContext();
+  return (
+    <TitleSection>
+      <TitleText>{children}</TitleText>
+      {hasTopCloseButton && <CloseButton onClick={onClose}>✕</CloseButton>}
+    </TitleSection>
+  );
+};
+
+Modal.Body = ({ children }: { children: ReactNode }) => {
+  return <MainSection id="modal-description">{children}</MainSection>;
+};
+
+Modal.Footer = () => {
+  const {
+    onClose,
+    onConfirm,
+    primaryButton,
+    primaryButtonText,
+    secondaryButton,
+    secondaryButtonText,
+  } = useModalContext();
+
+  return (
+    <>
+      {primaryButton ? (
+        <Button onClick={onConfirm} text={primaryButtonText} />
+      ) : null}
+
+      {secondaryButton ? (
+        <Button
+          text={secondaryButtonText}
+          onClick={onClose}
+          color="#8b95a1"
+          backgroundColor="transparent"
+        />
+      ) : null}
+    </>
+  );
+};
 
 const ModalContainer = styled.div``;
 

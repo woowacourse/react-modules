@@ -16,7 +16,6 @@ function App() {
   return (
     <>
       <Modal
-        title="테스트"
         isOpen={isOpen}
         onClose={handleClose}
         onConfirm={handleConfirm}
@@ -25,7 +24,11 @@ function App() {
         primaryButtonText="동의하고 저장하기"
         secondaryButtonText="닫기"
       >
-        <p>모달열림</p>
+        <Modal.Header>테스트 제목</Modal.Header>
+        <Modal.Body>
+          <p>모달열림</p>
+        </Modal.Body>
+        <Modal.Footer />
       </Modal>
       <button onClick={() => setIsOpen(true)}>모달 열기 버튼</button>
     </>
