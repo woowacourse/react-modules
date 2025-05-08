@@ -1,4 +1,4 @@
-import BaseModal from "./BaseModal";
+import BaseModal from "../BaseModal/BaseModal";
 import * as S from "./AlertModal.styles";
 
 interface ModalPropsType {
