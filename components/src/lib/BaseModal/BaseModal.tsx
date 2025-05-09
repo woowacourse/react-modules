@@ -22,7 +22,7 @@ interface ModalPropsType {
 const BaseModal = ({
   isModalOpen,
   position = "center",
-  size = "medium",
+  size = "small",
   title,
   children,
   onClose,
