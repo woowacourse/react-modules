@@ -32,6 +32,8 @@ export interface PromptModalProps {
    * 경고 메시지 등 사용자에게 전달할 핵심 내용을 표시
    */
   content?: React.ReactNode;
+  value: string;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 const PromptModal = ({
@@ -43,6 +45,8 @@ const PromptModal = ({
   title,
   content,
   background = true,
+  value,
+  onChange,
 }: PromptModalProps) => {
   return (
     <Modal show={show} onHide={onHide} gap={gap} position={position} background={background}>
@@ -53,11 +57,11 @@ const PromptModal = ({
       )}
       <Modal.Body>
         {content}
-        <input css={ModalInputStyle} type="text" />
+        <input css={ModalInputStyle} type="text" value={value} onChange={onChange} />
       </Modal.Body>
       <Modal.Footer buttonAlign="right">
         <CancelButton onClick={onHide} />
-        <ConfirmButton onHide={onHide} onConfirm={onConfirm} />
+        <ConfirmButton onHide={onHide} onConfirm={onConfirm} disabled={!value.trim()} />
       </Modal.Footer>
     </Modal>
   );
