@@ -34,7 +34,7 @@ export const ModalContainer = styled.div<Pick<ModalInterface, 'position' | 'zInd
   margin: 0 auto;
 
   top: ${(props) => (props.position === 'center' ? '50%' : 'auto')};
-  transform: translateY(-50%);
+  transform: ${(props) => (props.position === 'center' ? 'translateY(-50%)' : 'translateY(0)')};
 
   bottom: 0;
 
