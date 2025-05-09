@@ -2,7 +2,7 @@
 
 import { createContext, PropsWithChildren, ReactNode, useContext, useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
-import useDevice from '../../hooks/useDevice';
+import { useDevice, useAutoFocus } from '../../hooks';
 import { CloseIcon } from '../common';
 
 import * as S from './Modal.styles';
@@ -68,14 +68,23 @@ function ModalMain({
   size = 'medium',
 }: PropsWithChildren<ModalInterface>) {
   const device = useDevice();
-  const { isOpen, close, open } = useContext(ModalContext);
+  const { isOpen, close } = useContext(ModalContext);
+
+  const { modalRef } = useAutoFocus(isOpen);
 
   return (
     <>
       {isOpen &&
         createPortal(
           <>
-            <S.ModalContainer position={position} margin={margin} zIndex={zIndex} device={device} size={size}>
+            <S.ModalContainer
+              position={position}
+              margin={margin}
+              zIndex={zIndex}
+              device={device}
+              size={size}
+              ref={modalRef}
+            >
               {children}
             </S.ModalContainer>
             <S.ModalBackdrop onClick={close} />
