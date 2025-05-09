@@ -9,25 +9,25 @@ export function useFocusTrap<T extends HTMLElement>(
 
     const prevActive = document.activeElement as HTMLElement | null;
     const nodes = Array.from(
-      modalEl.querySelectorAll<HTMLElement>("button, input")
+      modalEl.querySelectorAll<HTMLElement>(
+        'a[href], button, input, select, textarea, [tabindex]:not([tabindex="-1"])'
+      )
     );
     const first = nodes[0];
     const last = nodes[nodes.length - 1];
     first?.focus();
 
     const onKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Tab") {
-        if (e.shiftKey) {
-          if (document.activeElement === first) {
-            e.preventDefault();
-            last?.focus();
-          }
-        } else {
-          if (document.activeElement === last) {
-            e.preventDefault();
-            first?.focus();
-          }
-        }
+      if (e.key === "Tab" && e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last?.focus();
+      } else if (
+        e.key === "Tab" &&
+        !e.shiftKey &&
+        document.activeElement === last
+      ) {
+        e.preventDefault();
+        first?.focus();
       }
     };
 
