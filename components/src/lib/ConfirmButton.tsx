@@ -25,4 +25,6 @@ const StyledButton = styled.button<StyledButtonProps>`
   border-radius: 5px;
   font-weight: bold;
   background-color: #333333;
+  cursor: pointer;
+  float: right;
 `;
