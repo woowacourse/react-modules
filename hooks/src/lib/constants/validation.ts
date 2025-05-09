@@ -4,6 +4,8 @@ export const ERROR_MESSAGE = {
   generateInvalidLengthMsg: (number: number) => `${number}자리를 입력해주세요.`,
   generateInvalidYearMsg: (year: number) =>
     `유효한 연도(YY)를 입력해주세요.(${year}년 이상)`,
+  generateInvalidBetweenMsg: (min: number, max: number) =>
+    `${min}자리 이상 ${max}자리 이내로 입력해주세요.`,
 };
 
 export const defaultValidationValue = {
