@@ -1,6 +1,6 @@
 import { useForm } from '../../hooks/useForm';
 import { CardNumberInput } from '../../types/input';
-import { formatCardNumber, getCardBrand, getCardNumberMaxLength } from './utils';
+import { formatCardNumber, getCardBrand, getCardNumberMaxLength } from './util';
 
 export default function useCardNumber() {
   const {
