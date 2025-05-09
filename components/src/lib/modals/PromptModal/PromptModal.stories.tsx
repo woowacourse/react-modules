@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { within, userEvent } from "@storybook/testing-library";
 import PromptModal from "./PromptModal";
+import { useState } from "react";
 
 const meta: Meta<typeof PromptModal> = {
   title: "Modal/PromptModal",
@@ -30,18 +31,24 @@ type Story = StoryObj<typeof PromptModal>;
 
 export const Default: Story = {
   render: (args, { updateArgs }) => {
+    const [value, setValue] = useState("");
+
     const handleHide = () => {
       updateArgs?.({ show: false });
     };
 
     const handleConfirm = () => {
-      console.log("✅ 입력 완료!");
+      console.log("✅ 입력 완료:", value);
       updateArgs?.({ show: false });
+    };
+
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+      setValue(e.target.value);
     };
 
     return (
       <div style={{ height: "100vh", display: "flex", alignItems: "center", justifyContent: "center" }}>
-        <PromptModal {...args} onHide={handleHide} onConfirm={handleConfirm} />
+        <PromptModal {...args} onHide={handleHide} onConfirm={handleConfirm} onChange={handleChange} value={value} />
       </div>
     );
   },
