@@ -36,7 +36,7 @@
 }
 
 .small {
-  min-width: 400px;
+  min-width: min(400px, 95vw);
   animation: zoomIn 0.3s ease-in-out;
 }
 
@@ -52,12 +52,12 @@
 }
 
 .medium {
-  min-width: 550px;
+  min-width: min(550px, 95vw);
   animation: zoomIn 0.3s ease-in-out;
 }
 
 .large {
-  min-width: 800px;
+  min-width: min(800px, 95vw);
   animation: zoomIn 0.3s ease-in-out;
 }
 
@@ -67,4 +67,20 @@
   right: 16px;
   width: 24px;
   height: 24px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  background-color: transparent;
+  border: none;
+  border-radius: 4px;
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+  }
+}
+
+@media (max-width: 480px) {
+  .small,
+  .medium,
+  .large {
+    min-width: 95vw;
+  }
 }
