@@ -1,6 +1,6 @@
-import Modal from "./lib/Modal";
 import { useState } from "react";
 import "./App.css";
+import Modal from "./lib";
 
 function App() {
   const [modalOpen, setModalOpen] = useState(true);
@@ -26,6 +26,7 @@ function App() {
           default로 제공되는 모달 title 사용시 <br />
           close 버튼과 폰트가 적용되어 보입니다
         </Modal.Content>
+        <Modal.Footer>모달 하단 내용</Modal.Footer>
       </Modal>
       <Modal
         position="center"
@@ -41,6 +42,7 @@ function App() {
             수 있습니다
           </p>
         </Modal.Content>
+        <Modal.Footer>모달 하단 내용</Modal.Footer>
       </Modal>
     </>
   );

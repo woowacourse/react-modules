@@ -1,17 +1,21 @@
 import { createPortal } from "react-dom";
-import closeIcon from "../asset/close.png";
-import { useKeyPress } from "../hooks/useKeyPress";
+import { useKeyPress } from "../../hooks/useKeyPress";
 import styles from "./Modal.module.css";
-import { ModalContext, useModal } from "./ModalContext";
+import { ModalContext } from "../ModalContext";
 
-export interface ModalProps {
+export interface ModalComponentProps {
   position: "bottom" | "center";
   isOpen: boolean;
   onClose: () => void;
   children: React.ReactNode;
 }
 
-function Modal({ position, isOpen, onClose, children }: ModalProps) {
+export default function ModalComponent({
+  position,
+  isOpen,
+  onClose,
+  children,
+}: ModalComponentProps) {
   const backgroundClassName = `${styles[position]} ${styles.modalBackground}`;
   const containerClassName = `${styles.modalContents} ${
     styles[`${position}Width`]
@@ -41,37 +45,3 @@ function Modal({ position, isOpen, onClose, children }: ModalProps) {
     document.body
   );
 }
-
-interface ContentProps {
-  children: React.ReactNode;
-}
-
-function Content({ children }: ContentProps) {
-  return <div>{children}</div>;
-}
-
-interface HeaderProps {
-  children: React.ReactNode;
-}
-
-function Header({ children }: HeaderProps) {
-  const { onClose } = useModal();
-
-  return (
-    <header className={styles.modalHeader}>
-      <p className={styles.title}>{children}</p>
-      <img
-        className={styles.closeButton}
-        src={closeIcon}
-        alt="닫기버튼"
-        onClick={onClose}
-        id="modal-close-button"
-      />
-    </header>
-  );
-}
-
-Modal.Content = Content;
-Modal.Header = Header;
-
-export default Modal;
