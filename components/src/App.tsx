@@ -25,6 +25,7 @@ function App() {
         checkButtonText="확인"
         size="medium"
         position="center"
+        onCheckButtonClick={() => console.log("확인 버튼 클릭")}
       />
     </>
   );

@@ -12,6 +12,7 @@ type ConfirmProps = {
   content: string;
   closeButtonText?: string;
   checkButtonText?: string;
+  onCheckButtonClick?: () => void;
 };
 
 export default function Confirm({
@@ -23,6 +24,7 @@ export default function Confirm({
   content,
   closeButtonText = "취소",
   checkButtonText = "확인",
+  onCheckButtonClick,
 }: ConfirmProps) {
   return (
     <Dialog position={position} size={size} open={open} modalClose={modalClose}>
@@ -45,7 +47,11 @@ export default function Confirm({
                 }}
               >
                 <DialogButton type="basic" text={closeButtonText} />
-                <DialogButton type="primary" text={checkButtonText} />
+                <DialogButton
+                  type="primary"
+                  text={checkButtonText}
+                  onClick={onCheckButtonClick}
+                />
               </div>
             </Dialog.CloseButton>
           </Dialog.Content>
