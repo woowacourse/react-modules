@@ -32,7 +32,14 @@ const Modal = ({ show, onHide, children, ...props }: ModalProps) => {
   return (
     <ModalContext.Provider value={{ onHide }}>
       <FocusTrap>
-        <div css={ModalWrapperStyle(show)} onClick={onHide} {...props}>
+        <div
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="modal-title"
+          css={ModalWrapperStyle(show)}
+          onClick={onHide}
+          {...props}
+        >
           {children}
         </div>
       </FocusTrap>
@@ -84,7 +91,7 @@ Modal.Footer = ({ children, ...props }: BaseProps) => {
 
 Modal.Title = ({ children, ...props }: BaseProps) => {
   return (
-    <span css={ModalTitleStyle} {...props}>
+    <span id="modal-title" css={ModalTitleStyle} {...props}>
       {children}
     </span>
   );

@@ -27,6 +27,7 @@
 - [x] 모달 레이아웃 style 수정
 - [x] 모달 내부 자동 포커스 기능 구현
   - [x] focusTrap wrapper 구현
+- [x] 웹접근성 적용
 - [ ] 모달 컴포넌트 별 스토리 작성
 - [ ] 베포시) dependencies 제거 -> peer dependencies 설정
 - [ ] 컴포넌트 타입 재정의 - componentProps 이용 태그들 타입 재정의
@@ -42,3 +43,19 @@
   - [ ] 카드사별 포맷팅 규칙 적용
 - [ ] 카드사 식별 (AMEX, Diners, UnionPay 포함) 및 유효성 검사 로직 테스트
 - [ ] 카드 번호 포맷팅 기능 테스트
+
+### 웹접근성
+
+✅ 역할 정리
+
+#### role="dialog"
+
+- 이 요소가 **대화 상자(modal dialog)**임을 알림
+- 스크린 리더가 이 영역을 독립적인 인터랙션 단위로 인식하게 함
+- 보통 title, description도 함께 제공되어야 함 (aria-labelledby, aria-describedby)
+
+#### aria-modal="true"
+
+- 이 dialog가 modal임을 명시
+- 즉, "현재 dialog 외의 콘텐츠는 일시적으로 접근 불가하다"고 알림
+- 스크린 리더는 이 속성을 보고 배경 콘텐츠를 무시하거나 skip함
