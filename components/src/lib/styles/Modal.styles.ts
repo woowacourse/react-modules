@@ -1,5 +1,11 @@
 import { css } from "@emotion/react";
 
+const SIZE_MAP = {
+  small: 320,
+  medium: 480,
+  large: 600,
+};
+
 export const ModalWrapperStyle = (show: boolean) => css`
   position: fixed;
   width: 100%;
@@ -20,8 +26,9 @@ export const backGroundStyle = (background: boolean) => css`
   visibility: ${background ? "visible" : "hidden"};
 `;
 
-export const ModalContainerStyle = (position: string, gap: number) => {
+export const ModalContainerStyle = (position: string, gap: number, size: "small" | "medium" | "large" = "medium") => {
   const positionStyle = getPositionStyle(position);
+  const maxWidth = SIZE_MAP[size];
 
   return css`
     display: flex;
@@ -32,7 +39,7 @@ export const ModalContainerStyle = (position: string, gap: number) => {
     box-sizing: border-box;
     padding: 24px 32px;
     min-width: 320px;
-    ${position === "center" && "max-width: 600px;"}
+    ${position === "center" && `max-width: ${maxWidth}px;`}
     gap: ${gap}px;
     ${positionStyle}
   `;
