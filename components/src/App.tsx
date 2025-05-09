@@ -21,7 +21,7 @@ function App() {
       <PromptModal
         isOpen={isOpen}
         position="center"
-        size="small"
+        size="large"
         onClose={() => setIsOpen(false)}
         onBackdropClick={handleBackdropClick}
       />
