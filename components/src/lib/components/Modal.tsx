@@ -53,6 +53,10 @@ type ModalContainerProps = {
   containerStyle?: React.CSSProperties;
 };
 
+type ModalBackdropProps = {
+  closeByBackdrop?: boolean;
+};
+
 type ModalTitleProps = {
   /**
    * The title of the modal
@@ -72,10 +76,16 @@ const useModalContext = () => {
   return props;
 };
 
-const ModalBackdrop = () => {
+const ModalBackdrop = ({ closeByBackdrop = true }: ModalBackdropProps) => {
   const { onClose, $zIndex = 1000 } = useModalContext();
 
-  return <StyledBackDrop onClick={onClose} aria-hidden="true" backdropZIndex={$zIndex} />;
+  const handleCloseModal = () => {
+    if (closeByBackdrop) {
+      onClose();
+    }
+  };
+
+  return <StyledBackDrop onClick={handleCloseModal} aria-hidden="true" backdropZIndex={$zIndex} />;
 };
 
 const ModalContainer = ({
