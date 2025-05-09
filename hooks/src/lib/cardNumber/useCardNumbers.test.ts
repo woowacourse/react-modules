@@ -3,7 +3,6 @@ import useCardNumbers from './useCardNumbers';
 import { ChangeEvent } from 'react';
 import {
   CARD_NUMBER_ERROR_TYPES,
-  CardNumbersKey,
   ValidateCardNumbersResult,
 } from '../constants';
 import { ValidationResult } from '../types';
@@ -13,8 +12,8 @@ interface RenderHookResult {
 }
 
 interface RenderHookCurrent {
-  cardNumbers: Record<CardNumbersKey, string>;
-  validationResults: Record<CardNumbersKey, ValidationResult>;
+  cardNumbers: string;
+  validationResults: ValidationResult;
   validateCardNumbers: (value: string) => ValidateCardNumbersResult;
   handleCardNumbersChange: (
     event: ChangeEvent<HTMLInputElement>,
@@ -32,11 +31,11 @@ describe('useCardNumbers', () => {
   it('이벤트 핸들러가 감지한 입력값이 hook 내부의 cardNumbers 상태(state)로 변경된다.', () => {
     act(() => {
       result.current.handleCardNumbersChange({
-        target: { name: 'part1', value: '1234' },
+        target: { value: '1234' },
       } as ChangeEvent<HTMLInputElement>);
     });
 
-    expect(result.current.cardNumbers.part1).toBe('1234');
+    expect(result.current.cardNumbers).toBe('1234');
   });
 
   it('입력값이 숫자가 아닐 때 isValid로 false를 반환하고 notNumber 에러 타입을 반환한다.', () => {
