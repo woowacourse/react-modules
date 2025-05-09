@@ -1,6 +1,5 @@
 import { createContext, useContext, useId } from "react";
 import { createPortal } from "react-dom";
-import useModalState from "./hooks/useModalState";
 import useEscapeModal from "./hooks/useEscapeModal";
 import {
   StyledCloseButton,
@@ -10,16 +9,14 @@ import {
 } from "./Dialog.css";
 
 interface DialogContextType {
-  modalOpen: () => void;
   modalClose: () => void;
-  isOpen: boolean;
+  open: boolean;
   position: "center" | "bottom";
   size?: "small" | "medium" | "large";
 }
 
 export const DialogContext = createContext<DialogContextType>({
-  isOpen: false,
-  modalOpen: () => {},
+  open: false,
   modalClose: () => {},
   position: "center",
   size: "medium",
@@ -27,19 +24,19 @@ export const DialogContext = createContext<DialogContextType>({
 
 export function Dialog({
   children,
+  open,
+  modalClose,
   position = "center",
   size = "medium",
 }: {
   children: React.ReactNode;
+  open: boolean;
+  modalClose: () => void;
   position?: "bottom" | "center";
   size?: "small" | "medium" | "large";
 }) {
-  const { isOpen, modalOpen, modalClose } = useModalState(false);
-
   return (
-    <DialogContext.Provider
-      value={{ isOpen, modalOpen, modalClose, position, size }}
-    >
+    <DialogContext.Provider value={{ open, modalClose, position, size }}>
       {children}
     </DialogContext.Provider>
   );
@@ -53,27 +50,9 @@ function useDialogContext() {
   return context;
 }
 
-function Trigger({
-  children,
-  className,
-  style,
-}: {
-  children: React.ReactNode;
-  className?: string;
-  style?: Record<string, string>;
-}) {
-  const { modalOpen } = useDialogContext();
-
-  return (
-    <button style={style} onClick={modalOpen} className={className}>
-      {children}
-    </button>
-  );
-}
-
 function Root({ children }: { children: React.ReactNode }) {
-  const { isOpen } = useDialogContext();
-  return createPortal(isOpen ? children : null, document.body);
+  const { open } = useDialogContext();
+  return createPortal(open ? children : null, document.body);
 }
 
 function Overlay({
@@ -163,6 +142,5 @@ Dialog.Overlay = Overlay;
 Dialog.Header = Header;
 Dialog.CloseButton = CloseButton;
 Dialog.Content = Content;
-Dialog.Trigger = Trigger;
 
 export default Dialog;

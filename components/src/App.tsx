@@ -1,26 +1,21 @@
-import { Dialog } from "./lib";
+import Alert from "./lib/Alert";
+import useModalState from "./lib/hooks/useModalState";
 
 function App() {
+  const { isOpen, modalClose, modalOpen } = useModalState(true);
+
   return (
     <>
-      <Dialog position="bottom" size="small">
-        <Dialog.Trigger>
-          <button>Open Dialog</button>
-        </Dialog.Trigger>
-        <Dialog.Root>
-          <Dialog.Overlay>
-            <Dialog.Content>
-              <Dialog.Header style={{ backgroundColor: "red" }}>
-                <h1>모달의 헤더입니다.</h1>
-                <Dialog.CloseButton>Close</Dialog.CloseButton>
-              </Dialog.Header>
-              <div style={{ padding: "16px" }}>
-                <p>Dialog Content</p>
-              </div>
-            </Dialog.Content>
-          </Dialog.Overlay>
-        </Dialog.Root>
-      </Dialog>
+      <button onClick={() => modalOpen()}>모달 열기</button>
+      <Alert
+        open={isOpen}
+        modalClose={modalClose}
+        title="아이디를 입력해 주세요."
+        content="아이디는 필수로 입력해야 합니다."
+        buttonText="확인"
+        size="medium"
+        position="center"
+      />
     </>
   );
 }
