@@ -51,7 +51,7 @@ function App() {
       <ConsentModal
         isModalOpen={isConsentModalOpen}
         title="약관에 동의해 주세요."
-        onClose={() => setIsAlertModalOpen(false)}
+        onClose={() => setIsConsentModalOpen(false)}
       />
     </>
   );

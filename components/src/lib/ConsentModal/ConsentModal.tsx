@@ -8,7 +8,7 @@ interface ModalPropsType {
   onClose: () => void;
 }
 
-const AlertModal = ({ isModalOpen, title, onClose }: ModalPropsType) => {
+const ConsentModal = ({ isModalOpen, title, onClose }: ModalPropsType) => {
   const [firstAgreed, setFirstAgreed] = useState(false);
   const [secondAgreed, setSecondAgreed] = useState(false);
   const handleFirstCheckbox = (e: ChangeEvent<HTMLInputElement>) => {
@@ -49,4 +49,4 @@ const AlertModal = ({ isModalOpen, title, onClose }: ModalPropsType) => {
   );
 };
 
-export default AlertModal;
+export default ConsentModal;
