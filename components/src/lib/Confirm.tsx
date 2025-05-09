@@ -2,6 +2,8 @@ import Dialog from "./Dialog";
 import DialogButton from "./DialogButton";
 import DialogHeader from "./DialogHeader";
 import DialogContent from "./DialogContent";
+import useFocus from "./hooks/useFocus";
+import useFirstNodeFocus from "./hooks/useFirstNodeFocus";
 
 type ConfirmProps = {
   open: boolean;
@@ -26,8 +28,17 @@ export default function Confirm({
   checkButtonText = "확인",
   onCheckButtonClick,
 }: ConfirmProps) {
+  const { modalRef } = useFocus(open);
+  useFirstNodeFocus({ isOpen: open, ref: modalRef });
+
   return (
-    <Dialog position={position} size={size} open={open} modalClose={modalClose}>
+    <Dialog
+      ref={modalRef}
+      position={position}
+      size={size}
+      open={open}
+      modalClose={modalClose}
+    >
       <Dialog.Root>
         <Dialog.Overlay>
           <Dialog.Content

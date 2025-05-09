@@ -2,6 +2,8 @@ import { useRef } from "react";
 import Dialog from "./Dialog";
 import DialogButton from "./DialogButton";
 import DialogHeader from "./DialogHeader";
+import useFocus from "./hooks/useFocus";
+import useFirstNodeFocus from "./hooks/useFirstNodeFocus";
 
 type ConfirmProps = {
   open: boolean;
@@ -28,6 +30,9 @@ export default function Prompt({
   checkButtonText = "확인",
   onCheckButtonClick,
 }: ConfirmProps) {
+  const { modalRef } = useFocus(open);
+  useFirstNodeFocus({ isOpen: open, ref: modalRef });
+
   const checkButtonRef = useRef<HTMLButtonElement>(null);
   function handleEnterKeyDown(e: React.KeyboardEvent<HTMLInputElement>) {
     if (e.key === "Enter") {
@@ -37,7 +42,13 @@ export default function Prompt({
   }
 
   return (
-    <Dialog position={position} size={size} open={open} modalClose={modalClose}>
+    <Dialog
+      ref={modalRef}
+      position={position}
+      size={size}
+      open={open}
+      modalClose={modalClose}
+    >
       <Dialog.Root>
         <Dialog.Overlay>
           <Dialog.Content
@@ -85,8 +96,6 @@ function Input({
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   handleEnterKeyDown: (e: React.KeyboardEvent<HTMLInputElement>) => void;
 }) {
-  const inputRef = useRef<HTMLInputElement>(null);
-
   return (
     <div>
       <input
@@ -97,10 +106,6 @@ function Input({
           border: "1px solid black",
           boxSizing: "border-box",
           marginBottom: "16px",
-        }}
-        ref={(node) => {
-          inputRef.current = node;
-          inputRef.current?.focus();
         }}
         type="text"
         value={value}

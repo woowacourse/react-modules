@@ -1,4 +1,10 @@
-import { createContext, useContext, useId } from "react";
+import {
+  ComponentProps,
+  createContext,
+  useContext,
+  useId,
+  RefObject,
+} from "react";
 import { createPortal } from "react-dom";
 import useEscapeModal from "./hooks/useEscapeModal";
 import {
@@ -8,11 +14,20 @@ import {
   StyledOverlay,
 } from "./Dialog.css";
 
+type DialogProps = ComponentProps<"div"> & {
+  open: boolean;
+  modalClose: () => void;
+  position?: "bottom" | "center";
+  size?: "small" | "medium" | "large";
+  ref?: RefObject<HTMLDivElement | null>;
+};
+
 interface DialogContextType {
   modalClose: () => void;
   open: boolean;
   position: "center" | "bottom";
   size?: "small" | "medium" | "large";
+  ref?: RefObject<HTMLDivElement | null>;
 }
 
 export const DialogContext = createContext<DialogContextType>({
@@ -28,15 +43,10 @@ export function Dialog({
   modalClose,
   position = "center",
   size = "medium",
-}: {
-  children: React.ReactNode;
-  open: boolean;
-  modalClose: () => void;
-  position?: "bottom" | "center";
-  size?: "small" | "medium" | "large";
-}) {
+  ref,
+}: DialogProps) {
   return (
-    <DialogContext.Provider value={{ open, modalClose, position, size }}>
+    <DialogContext.Provider value={{ open, modalClose, position, size, ref }}>
       {children}
     </DialogContext.Provider>
   );
@@ -123,10 +133,11 @@ function Content({
   className?: string;
   style?: Record<string, string>;
 }) {
-  const { position, size } = useDialogContext();
+  const { position, size, ref } = useDialogContext();
 
   return (
     <StyledContent
+      ref={ref}
       style={style}
       position={position}
       size={size}
