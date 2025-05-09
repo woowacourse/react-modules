@@ -112,7 +112,7 @@ const ModalCloseButton = ({ showCloseButton = true }: ModalCloseButtonProps) => 
     <>
       {showCloseButton && (
         <StyledCloseButton type="button" onClick={onClose} aria-label="closeModalButton">
-          <StyledCloseIconButton src={closeIcon} alt="closeIcon" />
+          <StyledCloseIcon src={closeIcon} alt="closeIcon" />
         </StyledCloseButton>
       )}
     </>
@@ -232,7 +232,7 @@ const StyledCloseButton = styled.button`
   }
 `;
 
-const StyledCloseIconButton = styled.img`
+const StyledCloseIcon = styled.img`
   width: 27px;
   height: 27px;
 `;
