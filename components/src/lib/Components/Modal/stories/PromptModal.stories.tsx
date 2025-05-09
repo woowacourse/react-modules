@@ -36,13 +36,15 @@ export const Display: PromptStory = {
 
 export const WithTests: PromptStory = {
   ...Display,
+  args: {
+    ...Display.args,
+    onConfirm: jest.fn(),
+    onCancel: jest.fn(),
+  },
   play: async ({ canvasElement, args }) => {
     const canvas = within(canvasElement);
-    const confirmSpy = jest.fn();
-    const cancelSpy = jest.fn();
-    args.onConfirm = confirmSpy;
-    args.onCancel = cancelSpy;
-
+    const confirmSpy = args.onConfirm as jest.Mock;
+    const cancelSpy = args.onCancel as jest.Mock;
     const input = screen.getByRole("textbox", {
       name: args.title,
     });

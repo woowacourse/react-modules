@@ -36,12 +36,15 @@ export const Display: ConfirmStory = {
 
 export const WithTests: ConfirmStory = {
   ...Display,
+  args: {
+    ...Display.args,
+    onConfirm: jest.fn(),
+    onCancel: jest.fn(),
+  },
   play: async ({ canvasElement, args }) => {
     const canvas = within(canvasElement);
-    const confirmSpy = jest.fn();
-    const cancelSpy = jest.fn();
-    args.onConfirm = confirmSpy;
-    args.onCancel = cancelSpy;
+    const confirmSpy = args.onConfirm as jest.Mock;
+    const cancelSpy = args.onCancel as jest.Mock;
     await userEvent.click(screen.getByRole("button", { name: /확인/ }));
     await expect(confirmSpy).toHaveBeenCalled();
 

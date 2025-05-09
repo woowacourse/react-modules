@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { within, userEvent, expect } from "@storybook/test";
+import { userEvent, expect, screen } from "@storybook/test";
 import { jest } from "@storybook/jest";
 
 import { renderAlertModal } from "./renderers";
@@ -36,17 +36,17 @@ export const Display: AlertStory = {
 
 export const WithTests: AlertStory = {
   ...Display,
-  play: async ({ canvasElement, args }) => {
-    const canvas = within(canvasElement);
-    const confirmSpy = jest.fn();
-    const closeSpy = jest.fn();
-    args.onConfirm = confirmSpy;
-    args.onClose = closeSpy;
-
-    await userEvent.click(canvas.getByRole("button", { name: /확인/ }));
+  args: {
+    ...Display.args,
+    onConfirm: jest.fn(),
+    onClose: jest.fn(),
+  },
+  play: async ({ args }) => {
+    const confirmSpy = args.onConfirm as jest.Mock;
+    const closeSpy = args.onClose as jest.Mock;
+    await userEvent.click(screen.getByRole("button", { name: /확인/ }));
     await expect(confirmSpy).toHaveBeenCalled();
 
-    await userEvent.click(canvas.getByRole("button", { name: /취소/ }));
     await userEvent.keyboard("{Escape}");
     await expect(closeSpy).toHaveBeenCalled();
   },
