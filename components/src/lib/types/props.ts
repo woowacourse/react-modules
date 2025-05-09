@@ -9,6 +9,10 @@ export interface ModalProps extends BaseProps {
   onClose: () => void;
 }
 
+export interface OverlayProps extends BaseProps {
+  closeOnClick?: boolean;
+}
+
 export type Position = 'center' | 'bottom';
 
 export interface ModalContentProps extends BaseProps {

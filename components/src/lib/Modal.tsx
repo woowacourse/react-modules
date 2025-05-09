@@ -2,7 +2,7 @@ import styled from '@emotion/styled';
 import useEscapeKeyClose from './hooks/useEscapePress';
 import { createContext, useContext } from 'react';
 import CloseIconButton from './components/CloseIconButton';
-import { ModalContentProps, ModalProps, Position } from './types/Props';
+import { ModalContentProps, ModalProps, OverlayProps, Position } from './types/Props';
 
 const ModalContext = createContext<{ onClose: () => void }>({ onClose: () => {} });
 
@@ -20,10 +20,15 @@ const Modal = ({ children, isOpen, onClose }: ModalProps) => {
   );
 };
 
-const Overlay = () => {
+const Overlay = ({ closeOnClick = true }: OverlayProps) => {
   const { onClose } = useContext(ModalContext);
 
-  return <ModalOverlay data-testid="modal-overlay" onClick={onClose} />;
+  const handleClick = () => {
+    if (!closeOnClick) return;
+    onClose();
+  };
+
+  return <ModalOverlay data-testid="modal-overlay" onClick={handleClick} />;
 };
 
 const Content = ({
