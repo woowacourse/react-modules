@@ -13,7 +13,7 @@ const defaultCardNumberValidationValue = {
   fourth: defaultValidationValue,
 };
 
-describe('useCardNumberValidation', () => {
+describe('useCardNumber', () => {
   it('카드 번호가 올바른 경우 에러가 발생하지 않는다.', () => {
     // when
     const {result} = renderHook(() => useCardNumber());

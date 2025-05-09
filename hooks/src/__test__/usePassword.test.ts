@@ -6,7 +6,7 @@ import {
 import usePassword from '../lib/hooks/usePassword';
 import {act} from 'react';
 
-describe('usePasswordValidation', () => {
+describe('usePassword', () => {
   it('비밀번호가 올바른 경우 에러가 발생하지 않는다.', () => {
     // given
     const value = '12';

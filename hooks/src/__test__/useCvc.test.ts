@@ -6,7 +6,7 @@ import {
 import useCvc from '../lib/hooks/useCvc';
 import {act} from 'react';
 
-describe('useCvcValidation', () => {
+describe('useCvc', () => {
   it('CVC번호가 올바른 경우 에러가 발생하지 않는다.', () => {
     // given
     const value = '123';

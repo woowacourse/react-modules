@@ -11,7 +11,7 @@ const defaultExpirationDateValidationValue = {
   year: defaultValidationValue,
 };
 
-describe('useExpirationDateValidation', () => {
+describe('useExpirationDate', () => {
   it('유효 기간이 올바른 경우 에러가 발생하지 않는다.', () => {
     // when
     const {result} = renderHook(() => useExpirationDate());
