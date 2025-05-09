@@ -81,18 +81,14 @@ export const CenterModal = () => {
   const [isOpen, setIsOpen] = useState(true);
 
   return (
-    <Modal
-      isOpen={isOpen}
-      onClose={() => setIsOpen(false)}
-      position="center"
-      secondaryButton={true}
-      secondaryButtonText="확인"
-    >
+    <Modal isOpen={isOpen} onClose={() => setIsOpen(false)} position="center">
       <Modal.Header>테스트 제목</Modal.Header>
       <Modal.Body>
         <p>모달열림</p>
       </Modal.Body>
-      <Modal.Footer />
+      <Modal.Footer>
+        <Modal.SecondaryButton>확인</Modal.SecondaryButton>
+      </Modal.Footer>
     </Modal>
   );
 };
@@ -105,15 +101,15 @@ export const BottomModal = () => {
       isOpen={isOpen}
       onClose={() => setIsOpen(false)}
       onConfirm={() => setIsOpen(false)}
-      secondaryButton={true}
-      secondaryButtonText="확인"
       position="bottom"
     >
       <Modal.Header>테스트 제목</Modal.Header>
       <Modal.Body>
         <p>모달열림</p>
       </Modal.Body>
-      <Modal.Footer />
+      <Modal.Footer>
+        <Modal.SecondaryButton>확인</Modal.SecondaryButton>
+      </Modal.Footer>
     </Modal>
   );
 };
@@ -126,15 +122,15 @@ export const ConfirmButtonModal = () => {
       isOpen={isOpen}
       onClose={() => setIsOpen(false)}
       onConfirm={() => setIsOpen(false)}
-      secondaryButton={true}
-      secondaryButtonText="확인"
       position="center"
     >
       <Modal.Header>테스트 제목</Modal.Header>
       <Modal.Body>
         <p>모달열림</p>
       </Modal.Body>
-      <Modal.Footer />
+      <Modal.Footer>
+        <Modal.SecondaryButton>확인</Modal.SecondaryButton>
+      </Modal.Footer>
     </Modal>
   );
 };
@@ -147,15 +143,15 @@ export const CloseButtonModal = () => {
       isOpen={isOpen}
       onClose={() => setIsOpen(false)}
       onConfirm={() => setIsOpen(false)}
-      primaryButton={true}
-      primaryButtonText="취소"
       position="center"
     >
       <Modal.Header>테스트 제목</Modal.Header>
       <Modal.Body>
         <p>모달열림</p>
       </Modal.Body>
-      <Modal.Footer />
+      <Modal.Footer>
+        <Modal.PrimaryButton>취소</Modal.PrimaryButton>
+      </Modal.Footer>
     </Modal>
   );
 };
