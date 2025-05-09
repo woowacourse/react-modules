@@ -125,10 +125,12 @@ Modal.Trigger = ({ children }: BaseProps) => {
 Modal.AlertContainer = ({ title, description, ...props }: ModalAlertContainerProps) => {
   return (
     <Modal.Container {...props}>
-      <Modal.Header>
-        <Modal.Title>{title}</Modal.Title>
-      </Modal.Header>
-      <Modal.Body>{description}</Modal.Body>
+      {title && (
+        <Modal.Header>
+          <Modal.Title>{title}</Modal.Title>
+        </Modal.Header>
+      )}
+      {description && <Modal.Body>{description}</Modal.Body>}
       <Modal.Footer style={{ display: "flex", justifyContent: "flex-end" }}>
         <Modal.Trigger>
           <Modal.Button>확인</Modal.Button>
