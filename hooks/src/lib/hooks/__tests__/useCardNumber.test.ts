@@ -1,6 +1,8 @@
 import { renderHook, act } from "@testing-library/react";
 import useCardNumber from "../useCardNumber";
 
+import { CARD_NUMBER_ERROR_MESSAGES } from "../../validator/constants/error-messages";
+
 describe("useCardNumber 훅", () => {
   it("빈 카드 번호와 에러 없이 초기화되어야 한다.", () => {
     const { result } = renderHook(() => useCardNumber());
@@ -23,7 +25,7 @@ describe("useCardNumber 훅", () => {
     expect(result.current.cardNumber).toBe(newNumber);
   });
 
-  it("유효하지 않은 카드 번호일 경우, 유효성 검사 에러를 반영해야 한다.", () => {
+  it(`올바르지 않은 포멧팅인 경우, ${CARD_NUMBER_ERROR_MESSAGES.INVALID_NUMBER} 메세지를 띄워야 한다.`, () => {
     const { result } = renderHook(() => useCardNumber());
 
     act(() => {
@@ -32,7 +34,9 @@ describe("useCardNumber 훅", () => {
       } as React.ChangeEvent<HTMLInputElement>);
     });
 
-    expect(result.current.errorMessage).toBe("카드 번호는 16 자리여야 합니다.");
+    expect(result.current.errorMessage).toBe(
+      CARD_NUMBER_ERROR_MESSAGES.INVALID_NUMBER
+    );
     expect(result.current.isError).toBe(true);
 
     act(() => {
@@ -58,7 +62,7 @@ describe("useCardNumber 훅", () => {
     expect(result.current.isError).toBe(false);
   });
 
-  it(`카드 번호수가 모자랄때 적절한 메세지를 보여줘야한다.`, () => {
+  it(`카드 번호수가 모자랄때 카드번호는 16 자리여야 합니다. 를 보여준다.`, () => {
     const { result } = renderHook(() => useCardNumber());
 
     act(() => {
