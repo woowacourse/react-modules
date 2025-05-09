@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import { CardNumber } from './types/card';
+import { CardNumber } from './card.type';
 import { validateNumberError } from './utils/cardInputValidations';
-import { CARD_NUMBER_KEYS, INITIAL_CARD_NUMBER } from './constants/card';
+import { CARD_NUMBER_KEYS, INITIAL_CARD_NUMBER } from './card.contant';
 
 export function useCardNumberInput() {
   const [cardNumbers, setCardNumbers] = useState<CardNumber>(INITIAL_CARD_NUMBER);

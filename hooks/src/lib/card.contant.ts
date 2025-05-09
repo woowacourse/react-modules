@@ -1,4 +1,4 @@
-import { CardExpiration, CardNumber } from '../types/card';
+import { CardExpiration, CardNumber } from './card.type';
 
 const INITIAL_CARD_NUMBER: CardNumber = {
   first: '',

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { CardFieldHook, validationResult } from '../types/card';
+import { CardFieldHook, validationResult } from '../card.type';
 
 function createCardField<T extends string>(
   initialState: T,

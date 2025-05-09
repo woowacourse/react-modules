@@ -79,7 +79,6 @@ const modalPosionStyle = {
 };
 
 const ModalFrame = (position: Position) => css`
-  ${modalPosionStyle[position]}
   background-color: white;
   padding: 20px;
   display: flex;
@@ -87,6 +86,7 @@ const ModalFrame = (position: Position) => css`
   align-items: center;
   justify-content: center;
   gap: 20px;
+  ${modalPosionStyle[position]}
 `;
 
 const ModalHeader = css`

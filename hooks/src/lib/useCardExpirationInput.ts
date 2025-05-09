@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import { CardExpiration } from './types/card';
+import { CardExpiration } from './card.type';
 import { validateMonthRangeError, validateNumberError, validateYearLengthError } from './utils/cardInputValidations';
-import { CARD_EXPIRATION_KEYS, INITIAL_CARD_EXPIRATION } from './constants/card';
+import { CARD_EXPIRATION_KEYS, INITIAL_CARD_EXPIRATION } from './card.contant';
 
 export function useCardExpirationInput() {
   const [cardExpiration, setCardExpiration] = useState<CardExpiration>(INITIAL_CARD_EXPIRATION);
