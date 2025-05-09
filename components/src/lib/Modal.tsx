@@ -1,11 +1,12 @@
-import { PropsWithChildren, useEffect } from 'react';
+import { Children, isValidElement, PropsWithChildren, useEffect } from 'react';
 import { css } from '@emotion/css';
 import { ModalProps, Position } from './Modal.type';
 import ModalBackdrop from './components/ModalBackdrop';
 import ModalHeader from './components/ModalHeader';
 import useModalKeyboard from './hooks/useModalKeyboard';
 import { ModalProvider, useModalContext } from './ModalContext';
-
+import ConfirmButton from './components/ConfirmButton';
+import CancelButton from './components/CancelButton';
 const Modal = ({ children, position, isOpen, onClose, onAfterOpen }: ModalProps) => {
   if (!isOpen) return null;
 
@@ -20,6 +21,12 @@ const Modal = ({ children, position, isOpen, onClose, onAfterOpen }: ModalProps)
       <ModalBackdrop>
         <div className={ModalFrame(position)} data-testid="modal">
           {children}
+          {Children.toArray(children).every((child) => isValidElement(child) && child.type !== Modal.Actions) && (
+            <div className={ButtonBar}>
+              <CancelButton />
+              <ConfirmButton />
+            </div>
+          )}
         </div>
       </ModalBackdrop>
     </ModalProvider>
@@ -70,7 +77,7 @@ const ModalFrame = (position: Position) => css`
 
 const ButtonBar = css`
   display: flex;
-  justify-content: center;
+  justify-content: flex-end;
   align-items: center;
   gap: 10px;
   width: 100%;

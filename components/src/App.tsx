@@ -6,11 +6,6 @@ import useModal from './lib/hooks/useModal';
 function App() {
   const { isOpen, handleOpen, handleClose } = useModal();
 
-  const handleConfirm = () => {
-    alert('동의하고 저장하기 버튼 클릭');
-    handleClose();
-  };
-
   const handleAfterOpen = () => {
     console.log('열기 버튼 클릭');
   };
@@ -26,19 +21,6 @@ function App() {
     );
   };
 
-  const ModalActions = () => {
-    return (
-      <div className={ButtonBar}>
-        <button className={CancelButton} onClick={handleClose}>
-          닫기
-        </button>
-        <button className={ConfirmButton} onClick={handleConfirm}>
-          동의하고 저장하기
-        </button>
-      </div>
-    );
-  };
-
   return (
     <>
       <h1>Modal Component</h1>
@@ -50,9 +32,6 @@ function App() {
         <Modal.Body>
           <ModalContent />
         </Modal.Body>
-        <Modal.Actions>
-          <ModalActions />
-        </Modal.Actions>
       </Modal>
     </>
   );
@@ -75,24 +54,4 @@ const Button = css`
 const OpenButton = css`
   ${Button}
   margin-top: 20px;
-`;
-
-const ConfirmButton = css`
-  ${Button}
-  background-color: #333333;
-  color: white;
-`;
-
-const CancelButton = css`
-  ${Button}
-  background-color: white;
-  color: #8b95a1;
-`;
-
-const ButtonBar = css`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 10px;
-  width: 100%;
 `;
