@@ -82,6 +82,7 @@ export const ModalContainer = styled.div<{
   width: ${({ position }) => position === "bottom" && "100%"};
   border-radius: ${({ position }) => position === "bottom" && "10px 10px 0 0;"};
   ${({ size }) => sizeStyles(size)};
+  width: calc(100% - 72px);
 `;
 
 export const ModalHeader = styled.div`
