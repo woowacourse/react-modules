@@ -5,6 +5,7 @@ interface ModalPropsType {
   isModalOpen: boolean;
   title: string;
   description: string;
+  size?: "small" | "medium" | "large";
   onClose: () => void;
 }
 
@@ -13,6 +14,7 @@ const AlertModal = ({
   title,
   description,
   onClose,
+  size = "small",
 }: ModalPropsType) => {
   return (
     <BaseModal
@@ -21,6 +23,7 @@ const AlertModal = ({
       onClose={onClose}
       position="center"
       showCloseButton={false}
+      size={size}
     >
       <p>{description}</p>
       <S.ConfirmButton type="button" onClick={onClose}>

@@ -5,14 +5,16 @@ import { ChangeEvent } from "react";
 interface ModalPropsType {
   isModalOpen: boolean;
   title: string;
+  size?: "small" | "medium" | "large";
   inputValue: string;
   onChangeInput: (e: ChangeEvent<HTMLInputElement>) => void;
   onClose: () => void;
 }
 
-const ConfirmModal = ({
+const PromptModal = ({
   isModalOpen,
   title,
+  size = "small",
   inputValue,
   onChangeInput,
   onClose,
@@ -24,6 +26,7 @@ const ConfirmModal = ({
       onClose={onClose}
       position="center"
       showCloseButton={false}
+      size={size}
     >
       <S.Input
         type="text"
@@ -43,4 +46,4 @@ const ConfirmModal = ({
   );
 };
 
-export default ConfirmModal;
+export default PromptModal;
