@@ -19,6 +19,18 @@ const modalPositionVariants = {
   },
 };
 
+const modalSizeVariants = {
+  small: {
+    width: "320px",
+  },
+  medium: {
+    width: "480px",
+  },
+  large: {
+    width: "600px",
+  },
+};
+
 export const StyledModalContent = styled.div<ModalContentProps>`
   position: fixed;
   padding: 24px 32px;
@@ -29,4 +41,5 @@ export const StyledModalContent = styled.div<ModalContentProps>`
   flex-direction: column;
   justify-content: space-between;
   ${({ position = "center" }) => modalPositionVariants[position]};
+  ${({ size = "medium" }) => modalSizeVariants[size]}
 `;
