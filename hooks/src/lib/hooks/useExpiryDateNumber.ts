@@ -21,7 +21,7 @@ export default function useExpiryDateNumber(): UseExpiryDateNumberReturn {
   return {
     expiryDateNumber,
     onExpiryDateNumberChange: handleExpiryDateNumberChange,
-    errorMessage: errors.at(0)?.message,
-    isError: !!errors.at(0)?.message,
+    errorMessage: errors.at(-1)?.message,
+    isError: !!errors.at(-1)?.message,
   };
 }
