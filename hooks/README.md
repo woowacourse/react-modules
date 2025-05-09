@@ -2,6 +2,10 @@
 
 이 프로젝트는 신용카드 입력 폼을 위한 커스텀 React Hooks 모음입니다.
 
+해당 훅은 ESM import 방식만을 지원하고,
+
+react, react-dom 의존을 필요로 합니다.
+
 ## 설치 방법
 
 ```bash
