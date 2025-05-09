@@ -6,34 +6,16 @@ const sizeStyles = (size: string) => {
     case "small":
       return css`
         width: 320px;
-        height: 206px;
-        border-radius: 8px;
-        padding: 24px 32px;
-        display: flex;
-        flex-direction: column;
-        gap: 16px;
       `;
 
     case "medium":
       return css`
         width: 480px;
-        height: 206px;
-        border-radius: 8px;
-        padding: 24px 32px;
-        display: flex;
-        flex-direction: column;
-        gap: 16px;
       `;
 
     case "large":
       return css`
         width: 600px;
-        height: 206px;
-        border-radius: 8px;
-        padding: 24px 32px;
-        display: flex;
-        flex-direction: column;
-        gap: 16px;
       `;
 
     default:
@@ -75,14 +57,16 @@ export const ModalContainer = styled.div<{
 }>`
   min-width: 300px;
   background-color: white;
-  padding: 20px;
-  border-radius: 16px;
   color: #000000;
   position: relative;
+  ${({ size }) => sizeStyles(size)};
+  border-radius: 8px;
+  padding: 24px 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
   width: ${({ position }) => position === "bottom" && "100%"};
   border-radius: ${({ position }) => position === "bottom" && "10px 10px 0 0;"};
-  ${({ size }) => sizeStyles(size)};
-  width: calc(100% - 72px);
 `;
 
 export const ModalHeader = styled.div`
@@ -96,7 +80,11 @@ export const ModalHeader = styled.div`
   }
 `;
 
-export const ModalBody = styled.div``;
+export const ModalBody = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+`;
 
 export const CloseButton = styled.button`
   font-size: 18px;
