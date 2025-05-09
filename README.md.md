@@ -24,7 +24,7 @@
     - [x] props로 받아야할 것 - title / value / setValue / 확인에 대한 액션 onClick
 - [x] 모달 크기 옵션 추가 (container)
   - [x] small, medium, large 등의 크기 옵션을 prop으로 전달받아 모달 크기 조절
-- [ ] 모달 레이아웃 style 수정
+- [x] 모달 레이아웃 style 수정
 - [ ] 모달 컴포넌트 별 스토리 작성
 - [ ] 베포시) dependencies 제거 -> peer dependencies 설정
 - [ ] 컴포넌트 타입 재정의 - componentProps 이용 태그들 타입 재정의

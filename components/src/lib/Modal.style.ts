@@ -2,18 +2,15 @@ import { css } from "@emotion/react";
 import { ModalButtonCSSProps } from "./types";
 
 export const ModalWrapperStyle = (show: boolean) => css`
-  position: fixed;
   width: 100%;
-  height: 100vh;
-  top: 0;
-  left: 0;
+  height: 100%;
   min-width: 300px;
   display: ${show ? "block" : "none"};
 `;
 
 export const backGroundStyle = css`
   width: 100%;
-  height: 100vh;
+  height: 100%;
   position: absolute;
   top: 0;
   left: 0;
@@ -23,6 +20,7 @@ export const ModalContainerStyle = (size: string, position: string, gap: number)
   const positionStyle = getPositionStyle(position);
   const sizeStyle = getSizeStyle(size);
   return css`
+    width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -112,15 +110,15 @@ export const getSizeStyle = (size: string) => {
   switch (size) {
     case "small":
       return css`
-        width: 320px;
+        max-width: 320px;
       `;
     case "medium":
       return css`
-        width: 480px;
+        max-width: 480px;
       `;
     case "large":
       return css`
-        width: 600px;
+        max-width: 600px;
       `;
     default:
       return css`
