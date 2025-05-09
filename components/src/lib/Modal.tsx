@@ -2,24 +2,7 @@ import styled from '@emotion/styled';
 import useEscapeKeyClose from './hooks/useEscapePress';
 import { createContext, useContext } from 'react';
 import CloseIconButton from './components/CloseIconButton';
-
-interface BaseProps {
-  children?: React.ReactNode;
-  className?: string;
-  style?: React.CSSProperties;
-}
-
-interface ModalProps extends BaseProps {
-  isOpen: boolean;
-  onClose: () => void;
-}
-
-type Position = 'center' | 'bottom';
-
-interface ModalContentProps extends BaseProps {
-  hasTopCloseButton?: boolean;
-  position?: Position;
-}
+import { ModalContentProps, ModalProps, Position } from './types/Props';
 
 const ModalContext = createContext<{ onClose: () => void }>({ onClose: () => {} });
 
