@@ -18,7 +18,6 @@ export const Default: Story = {
       <Modal isOpen={isOpen} onClose={() => setIsOpen(false)}>
         <Modal.Overlay />
         <Modal.Content>
-          <Modal.CloseButton />
           <p>모달열림</p>
         </Modal.Content>
       </Modal>
@@ -36,7 +35,6 @@ export const TitleModal: Story = {
         <Modal.Content>
           <Modal.Title title="모달 타이틀" />
           <p>모달열림</p>
-          <Modal.CloseButton />
         </Modal.Content>
       </Modal>
     );
