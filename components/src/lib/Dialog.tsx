@@ -9,12 +9,7 @@ import {
 import { createPortal } from 'react-dom';
 import useBoolean from './hooks/useBoolean';
 import useFocus from './hooks/useFocus';
-import {
-  StyledCloseButton,
-  StyledContent,
-  StyledHeader,
-  StyledOverlay,
-} from './Dialog.css';
+import { closeButton, content, header, overlay } from './Dialog.css';
 import useOverlay from './hooks/useOverlay';
 
 interface DialogContextType {
@@ -82,7 +77,8 @@ function Overlay({ className }: OverlayProps) {
   const { handleClickOverlay } = useOverlay(close);
 
   return (
-    <StyledOverlay
+    <div
+      css={overlay}
       id={id}
       onClick={(e) => handleClickOverlay(e, id)}
       className={className}
@@ -95,7 +91,11 @@ interface HeaderProps extends PropsWithChildren {
 }
 
 function Header({ children, className }: HeaderProps) {
-  return <StyledHeader className={className}>{children}</StyledHeader>;
+  return (
+    <div css={header} className={className}>
+      {children}
+    </div>
+  );
 }
 
 interface CloseButtonProps
@@ -108,9 +108,9 @@ function CloseButton({ children, className, ...props }: CloseButtonProps) {
   const { close } = useDialogContext();
 
   return (
-    <StyledCloseButton onClick={close} className={className} {...props}>
+    <button css={closeButton} onClick={close} className={className} {...props}>
       {children}
-    </StyledCloseButton>
+    </button>
   );
 }
 
@@ -132,14 +132,13 @@ function Content({
   const { modalRef } = useFocus(isOpen);
 
   return (
-    <StyledContent
-      position={position}
-      size={size}
+    <div
+      css={content(position, size)}
       className={className}
       ref={ref || modalRef}
     >
       {children}
-    </StyledContent>
+    </div>
   );
 }
 
