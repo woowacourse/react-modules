@@ -18,6 +18,7 @@ interface TitleProps {
 
 export interface ModalProps {
   position?: "center" | "bottom";
+  size?: "small" | "medium" | "large";
   title?: TitleProps;
   showCloseButton?: boolean;
   theme?: ThemeMode;
@@ -28,6 +29,7 @@ export interface ModalProps {
 
 const Modal = ({
   position = "center",
+  size = "medium",
   title,
   showCloseButton = true,
   theme = "light",
@@ -50,8 +52,9 @@ const Modal = ({
     isOpen && (
       <Backdrop $position={position} onClick={onClose} role="presentation">
         <ModalBox
-          $backgroundColor={currentTheme.background}
           $position={position}
+          $size={size}
+          $backgroundColor={currentTheme.background}
           onClick={stopPropagation}
           role="dialog"
           aria-modal="true"

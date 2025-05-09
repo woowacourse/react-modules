@@ -14,6 +14,12 @@ const meta = {
       options: ["center", "bottom"],
       table: { defaultValue: { summary: "center" } },
     },
+    size: {
+      description: "모달 가로 크기 설정",
+      control: { type: "radio" },
+      options: ["small", "medium", "large"],
+      table: { defaultValue: { summary: "medium" } },
+    },
     title: {
       description: "모달의 제목 및 스타일 설정",
       table: {
@@ -100,6 +106,24 @@ export const ModalInLightMode = (args: ModalProps) => (
 export const BottomModal = (args: ModalProps) => (
   <Default {...args} position="bottom" title={{ text: "Bottom Mode" }}>
     Bottom Modal Contents
+  </Default>
+);
+
+export const SmallSizeModal = (args: ModalProps) => (
+  <Default {...args} size="small" title={{ text: "Small Size Modal" }}>
+    Small Size Modal Contents
+  </Default>
+);
+
+export const MediumSizeModal = (args: ModalProps) => (
+  <Default {...args} size="medium" title={{ text: "Medium Size Modal" }}>
+    Medium Size Modal Contents
+  </Default>
+);
+
+export const LargeSizeModal = (args: ModalProps) => (
+  <Default {...args} size="large" title={{ text: "Large Size Modal" }}>
+    Large Size Modal Contents
   </Default>
 );
 
