@@ -26,6 +26,7 @@ const StyleButton = styled.button<{ color: string; backgroundColor: string }>`
   border-radius: 5px;
   font-size: 15px;
   font-weight: 700;
+  padding: 5px 20px;
 
   color: ${({ color }) => color};
   background-color: ${({ backgroundColor }) => backgroundColor};

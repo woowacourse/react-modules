@@ -2,7 +2,16 @@ import styled from '@emotion/styled';
 import useEscapeKeyClose from './hooks/useEscapePress';
 import { createContext, useContext } from 'react';
 import CloseIconButton from './components/CloseIconButton';
-import { ModalContentProps, ModalProps, OverlayProps, Position } from './types/Props';
+import {
+  AlertContentProps,
+  ButtonContainerProps,
+  Direction,
+  ModalContentProps,
+  ModalProps,
+  OverlayProps,
+  Position,
+} from './types/Props';
+import TextButton from './components/TextButton';
 
 const ModalContext = createContext<{ onClose: () => void }>({ onClose: () => {} });
 
@@ -47,12 +56,48 @@ const Content = ({
   );
 };
 
+const AlertContent = ({
+  children,
+  hasTopCloseButton = true,
+  position = 'center',
+  onAlert,
+  alertButtonText = '확인',
+  alertButtonColor = '#fff',
+  alertButtonBackgroundColor = '#333',
+  ...props
+}: AlertContentProps) => {
+  const { onClose } = useContext(ModalContext);
+
+  return (
+    <ModalContent
+      position={position}
+      style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}
+      {...props}>
+      {hasTopCloseButton && <CloseIconButton data-testid="modal-close" onClick={() => onClose()} />}
+      {children}
+      <ButtonContainer>
+        <TextButton
+          text={alertButtonText}
+          color={alertButtonColor}
+          backgroundColor={alertButtonBackgroundColor}
+          onClick={onAlert ? onAlert : onClose}
+        />
+      </ButtonContainer>
+    </ModalContent>
+  );
+};
+
+const ButtonContainer = ({ children, direction = 'row' }: ButtonContainerProps) => {
+  return <ButtonContainerStyle direction={direction}>{children}</ButtonContainerStyle>;
+};
+
 const Title = ({ title }: { title: string }) => {
   return <TitleText>{title}</TitleText>;
 };
 
 Modal.Overlay = Overlay;
 Modal.Content = Content;
+Modal.AlertContent = AlertContent;
 Modal.Title = Title;
 
 export default Modal;
@@ -68,9 +113,6 @@ const ModalContent = styled.div<{ position: Position }>`
   padding: 24px 32px;
   border-radius: 8px;
   color: #000;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
 
   ${({ position }) =>
     position === 'bottom' &&
@@ -95,5 +137,16 @@ const ModalOverlay = styled.div`
 const TitleText = styled.p`
   font-size: 18px;
   font-weight: bold;
-  margin-bottom: 5px;
+  margin-bottom: 10px;
+`;
+
+const ButtonContainerStyle = styled.div<{ direction: Direction }>`
+  display: flex;
+  flex-direction: ${({ direction }) => direction};
+  justify-content: end;
+  gap: 12px;
+
+  & > button {
+    ${({ direction }) => direction === 'row' && `width: auto;`}
+  }
 `;
