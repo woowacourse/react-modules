@@ -31,11 +31,6 @@ export function useFocusTrap(isOpen: boolean, onClose: () => void) {
     const lastElement = nodes[nodes.length - 1];
 
     function handleKeyDown(e: KeyboardEvent) {
-      if (e.key === 'Escape') {
-        e.preventDefault();
-        onClose();
-        return;
-      }
       if (e.key !== 'Tab') return;
 
       if (e.shiftKey) {
