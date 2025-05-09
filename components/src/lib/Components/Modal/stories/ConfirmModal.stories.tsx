@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { within, userEvent, expect } from "@storybook/test";
+import { within, userEvent, expect, screen } from "@storybook/test";
 import { jest } from "@storybook/jest";
 import Modal from "..";
 import { renderConfirmModal } from "./renderers";
@@ -42,14 +42,18 @@ export const WithTests: ConfirmStory = {
     const cancelSpy = jest.fn();
     args.onConfirm = confirmSpy;
     args.onCancel = cancelSpy;
-
-    await userEvent.click(document.getElementById("confirm-button")!);
+    await userEvent.click(screen.getByRole("button", { name: /확인/ }));
     await expect(confirmSpy).toHaveBeenCalled();
 
     await userEvent.click(
       canvas.getByRole("button", { name: /모달창 trigger/ })
     );
-    await userEvent.click(document.getElementById("cancel-button")!);
+    await userEvent.click(screen.getByRole("button", { name: /확인/ }));
+    await expect(confirmSpy).toHaveBeenCalled();
+    await userEvent.click(
+      canvas.getByRole("button", { name: /모달창 trigger/ })
+    );
+    await userEvent.click(screen.getByRole("button", { name: /취소/ }));
     await expect(cancelSpy).toHaveBeenCalled();
   },
   parameters: {

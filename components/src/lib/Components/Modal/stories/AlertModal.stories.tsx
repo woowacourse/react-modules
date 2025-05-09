@@ -43,12 +43,10 @@ export const WithTests: AlertStory = {
     args.onConfirm = confirmSpy;
     args.onClose = closeSpy;
 
-    await userEvent.click(document.getElementById("confirm-button")!);
+    await userEvent.click(canvas.getByRole("button", { name: /확인/ }));
     await expect(confirmSpy).toHaveBeenCalled();
 
-    await userEvent.click(
-      canvas.getByRole("button", { name: /모달창 trigger/ })
-    );
+    await userEvent.click(canvas.getByRole("button", { name: /취소/ }));
     await userEvent.keyboard("{Escape}");
     await expect(closeSpy).toHaveBeenCalled();
   },

@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { within, userEvent, expect } from "@storybook/test";
+import { within, userEvent, expect, screen } from "@storybook/test";
 import { jest } from "@storybook/jest";
 import Modal from "..";
 import { renderPromptModal } from "./renderers";
@@ -43,15 +43,17 @@ export const WithTests: PromptStory = {
     args.onConfirm = confirmSpy;
     args.onCancel = cancelSpy;
 
-    const input = document.getElementById("modal-input")! as HTMLInputElement;
+    const input = screen.getByRole("textbox", {
+      name: args.title,
+    });
     await userEvent.type(input, "TEST123");
-    await userEvent.click(document.getElementById("confirm-button")!);
+    await userEvent.click(screen.getByRole("button", { name: /확인/ }));
     await expect(confirmSpy).toHaveBeenCalledWith("TEST123");
 
     await userEvent.click(
       canvas.getByRole("button", { name: /모달창 trigger/ })
     );
-    await userEvent.click(document.getElementById("cancel-button")!);
+    await userEvent.click(screen.getByRole("button", { name: /취소/ }));
     await expect(cancelSpy).toHaveBeenCalled();
   },
   parameters: {

@@ -27,7 +27,6 @@ export interface PromptDialogProps
   size?: "small" | "medium" | "large";
   placeholder?: string;
 }
-
 export const AlertDialog: React.FC<AlertDialogProps> = ({
   isOpen,
   onClose,
@@ -37,6 +36,9 @@ export const AlertDialog: React.FC<AlertDialogProps> = ({
   position = "center",
   size = "medium",
 }) => {
+  const headerId = "alert-dialog-title";
+  const descId = "alert-dialog-description";
+
   const handleConfirm = () => {
     onConfirm();
     onClose();
@@ -50,9 +52,15 @@ export const AlertDialog: React.FC<AlertDialogProps> = ({
       dialogType="alert"
     >
       <Modal.Background>
-        <Modal.Container size={size}>
-          <Modal.Header>{title}</Modal.Header>
-          <Modal.Content>{message}</Modal.Content>
+        <Modal.Container
+          size={size}
+          role="alertdialog"
+          aria-modal="true"
+          aria-labelledby={headerId}
+          aria-describedby={descId}
+        >
+          <Modal.Header id={headerId}>{title}</Modal.Header>
+          <Modal.Content id={descId}>{message}</Modal.Content>
           <div
             style={{
               width: "100%",
@@ -61,9 +69,9 @@ export const AlertDialog: React.FC<AlertDialogProps> = ({
             }}
           >
             <button
+              type="button"
               className={styles.button}
               onClick={handleConfirm}
-              id="confirm-button"
             >
               확인
             </button>
@@ -81,9 +89,12 @@ export const ConfirmDialog: React.FC<ConfirmDialogProps> = ({
   message,
   onConfirm,
   onCancel,
-  size,
+  size = "medium",
   position = "center",
 }) => {
+  const headerId = "confirm-dialog-title";
+  const descId = "confirm-dialog-description";
+
   const handleConfirm = () => {
     onConfirm();
     onClose();
@@ -102,21 +113,27 @@ export const ConfirmDialog: React.FC<ConfirmDialogProps> = ({
       dialogType="confirm"
     >
       <Modal.Background>
-        <Modal.Container size={size}>
-          <Modal.Header>{title}</Modal.Header>
-          <Modal.Content>{message}</Modal.Content>
+        <Modal.Container
+          size={size}
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby={headerId}
+          aria-describedby={descId}
+        >
+          <Modal.Header id={headerId}>{title}</Modal.Header>
+          <Modal.Content id={descId}>{message}</Modal.Content>
           <div className={styles.buttonContainer}>
             <button
+              type="button"
               className={`${styles.button} ${styles.cancelButton}`}
               onClick={handleCancel}
-              id="cancel-button"
             >
               취소
             </button>
             <button
+              type="button"
               className={styles.button}
               onClick={handleConfirm}
-              id="confirm-button"
             >
               확인
             </button>
@@ -139,12 +156,11 @@ export const PromptDialog: React.FC<PromptDialogProps> = ({
 }) => {
   const [value, setValue] = React.useState("");
 
-  const handleConfirm = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleConfirm = (e: React.FormEvent) => {
     e.preventDefault();
     onConfirm(value);
     onClose();
   };
-
   const handleCancel = () => {
     onCancel();
     onClose();
@@ -158,32 +174,37 @@ export const PromptDialog: React.FC<PromptDialogProps> = ({
       dialogType="prompt"
     >
       <Modal.Background>
-        <Modal.Container size={size}>
-          <Modal.Header>{title}</Modal.Header>
-          <Modal.Content></Modal.Content>
+        <Modal.Container
+          size={size}
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="prompt-dialog-title"
+        >
+          <Modal.Header id="prompt-dialog-title">{title}</Modal.Header>
+
           <form className={styles.form} onSubmit={handleConfirm}>
+            <label htmlFor="prompt-dialog-input" className={styles.srOnly}>
+              {title}
+            </label>
             <input
+              id="prompt-dialog-input"
               type="text"
               value={value}
               onChange={(e) => setValue(e.target.value)}
               placeholder={placeholder}
               className={styles.input}
-              id="modal-input"
+              autoFocus
             />
 
             <div className={styles.buttonContainer}>
               <button
+                type="button"
                 className={`${styles.button} ${styles.cancelButton}`}
                 onClick={handleCancel}
-                id="cancel-button"
               >
                 취소
               </button>
-              <button
-                className={styles.button}
-                type="submit"
-                id="confirm-button"
-              >
+              <button type="submit" className={styles.button}>
                 확인
               </button>
             </div>
