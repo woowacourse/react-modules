@@ -72,7 +72,7 @@ export const Default = (args: ModalProps) => {
   return (
     <>
       <button type="button" onClick={openModal}>
-        테스트 열기 버튼
+        모달 열기
       </button>
       <Modal {...args} isOpen={isOpen} onClose={closeModal}>
         {args.children ?? "Default Contents"}
