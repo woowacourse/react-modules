@@ -10,4 +10,16 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {};
+export const Default: Story = {
+  args: {
+    text: '동의하고 저장하기',
+  },
+};
+
+export const CancelButton: Story = {
+  args: {
+    text: '취소',
+    backgroundColor: 'transparent',
+    color: '#8B95A1',
+  },
+};
