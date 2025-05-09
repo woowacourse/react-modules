@@ -10,10 +10,19 @@ export const StyledOverlay = styled.div`
   z-index: 1_000_000_000;
 `;
 
-export const StyledContent = styled.div<{ position?: "center" | "bottom" }>`
+export const StyledContent = styled.div<{
+  position?: "center" | "bottom";
+  size?: "small" | "medium" | "large";
+}>`
   position: fixed;
   background-color: white;
   border-radius: 10px;
+
+  width: ${(props) => {
+    if (props.size === "small") return "320px";
+    if (props.size === "medium") return "480px";
+    if (props.size === "large") return "600px";
+  }};
 
   ${(props) =>
     props.position === "bottom"
@@ -26,7 +35,7 @@ export const StyledContent = styled.div<{ position?: "center" | "bottom" }>`
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-  `}
+  `};
 `;
 
 export const StyledHeader = styled.div`

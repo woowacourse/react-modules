@@ -3,7 +3,7 @@ import { Dialog } from "./lib";
 function App() {
   return (
     <>
-      <Dialog position="bottom">
+      <Dialog position="bottom" size="small">
         <Dialog.Trigger>
           <button>Open Dialog</button>
         </Dialog.Trigger>

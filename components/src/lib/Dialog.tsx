@@ -14,6 +14,7 @@ interface DialogContextType {
   modalClose: () => void;
   isOpen: boolean;
   position: "center" | "bottom";
+  size?: "small" | "medium" | "large";
 }
 
 export const DialogContext = createContext<DialogContextType>({
@@ -21,19 +22,24 @@ export const DialogContext = createContext<DialogContextType>({
   modalOpen: () => {},
   modalClose: () => {},
   position: "center",
+  size: "medium",
 });
 
 export function Dialog({
   children,
   position = "center",
+  size = "medium",
 }: {
   children: React.ReactNode;
   position?: "bottom" | "center";
+  size?: "small" | "medium" | "large";
 }) {
   const { isOpen, modalOpen, modalClose } = useModalState(false);
 
   return (
-    <DialogContext.Provider value={{ isOpen, modalOpen, modalClose, position }}>
+    <DialogContext.Provider
+      value={{ isOpen, modalOpen, modalClose, position, size }}
+    >
       {children}
     </DialogContext.Provider>
   );
@@ -138,10 +144,15 @@ function Content({
   className?: string;
   style?: Record<string, string>;
 }) {
-  const { position } = useDialogContext();
+  const { position, size } = useDialogContext();
 
   return (
-    <StyledContent style={style} position={position} className={className}>
+    <StyledContent
+      style={style}
+      position={position}
+      size={size}
+      className={className}
+    >
       {children}
     </StyledContent>
   );
