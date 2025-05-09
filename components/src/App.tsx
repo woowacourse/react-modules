@@ -1,8 +1,8 @@
 import { useState } from "react";
-import Modal from "./lib/Modal";
-import AlertModal from "./lib/modals/AlertModal";
-import ConfirmModal from "./lib/modals/ConfirmModal";
-import PromptModal from "./lib/modals/PromptModal";
+import Modal from "./lib/Modal/Modal";
+import AlertModal from "./lib/ModalVariants/AlertModal";
+import ConfirmModal from "./lib/ModalVariants/ConfirmModal";
+import PromptModal from "./lib/ModalVariants/PromptModal";
 import styled from "@emotion/styled";
 
 function App() {

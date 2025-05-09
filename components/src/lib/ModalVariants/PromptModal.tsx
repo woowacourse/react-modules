@@ -1,20 +1,21 @@
-import Modal from "../Modal";
+import { ReactNode } from "react";
+import Modal from "../Modal/Modal";
 
-interface ConfirmModalProps {
+interface PromptModalProps {
   isOpen: boolean;
   onClose: () => void;
   onConfirm: () => void;
   title: string;
-  content: string;
+  content: ReactNode;
 }
 
-function ConfirmModal({
+function PromptModal({
   isOpen,
   onClose,
   onConfirm,
   title,
   content,
-}: ConfirmModalProps) {
+}: PromptModalProps) {
   return (
     <>
       <Modal
@@ -35,4 +36,4 @@ function ConfirmModal({
   );
 }
 
-export default ConfirmModal;
+export default PromptModal;

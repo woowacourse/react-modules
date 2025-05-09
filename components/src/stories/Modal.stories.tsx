@@ -1,5 +1,5 @@
 import type { Meta, StoryFn, StoryObj } from "@storybook/react";
-import Modal from "../lib/Modal";
+import Modal from "../lib/Modal/Modal";
 import { useState } from "react";
 import { expect, screen, userEvent, within } from "@storybook/test";
 

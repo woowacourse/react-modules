@@ -1,6 +1,6 @@
-import Modal from "../Modal";
+import Modal from "../Modal/Modal";
 
-interface AlertModalProps {
+interface ConfirmModalProps {
   isOpen: boolean;
   onClose: () => void;
   onConfirm: () => void;
@@ -8,19 +8,22 @@ interface AlertModalProps {
   content: string;
 }
 
-function AlertModal({
+function ConfirmModal({
   isOpen,
   onClose,
   onConfirm,
   title,
   content,
-}: AlertModalProps) {
+}: ConfirmModalProps) {
   return (
     <>
       <Modal
         isOpen={isOpen}
         onClose={onClose}
         onConfirm={onConfirm}
+        hasTopCloseButton={false}
+        primaryButton={true}
+        primaryButtonText="취소"
         secondaryButton={true}
         secondaryButtonText="확인"
       >
@@ -32,4 +35,4 @@ function AlertModal({
   );
 }
 
-export default AlertModal;
+export default ConfirmModal;

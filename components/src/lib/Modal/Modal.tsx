@@ -1,10 +1,10 @@
 import styled from "@emotion/styled";
-import { createContext, ReactNode, useContext } from "react";
-import Button from "./common/Button";
-import useEscapeKeyClose from "./useEscapeKeyClose";
+import { ReactNode } from "react";
+import Button from "../common/Button";
+import useEscapeKeyClose from "../useEscapeKeyClose";
 import { createPortal } from "react-dom";
-
-type Position = "center" | "bottom";
+import { ModalContext, Position, useModalContext } from "../useModalContext";
+import Header from "./Header";
 
 interface ModalProps {
   isOpen: boolean;
@@ -33,26 +33,6 @@ interface ModalProps {
  * @property {string} [primaryButtonText] - (선택) 확인 버튼 텍스트
  * @property {string} [secondaryButtonText] - (선택) 취소 버튼 텍스트
  */
-
-interface ModalContextType {
-  onClose: () => void;
-  onConfirm?: () => void;
-  position: Position;
-  hasTopCloseButton?: boolean;
-  primaryButton?: boolean;
-  primaryButtonText?: string;
-  secondaryButton?: boolean;
-  secondaryButtonText?: string;
-}
-
-const ModalContext = createContext<ModalContextType | undefined>(undefined);
-
-const useModalContext = () => {
-  const context = useContext(ModalContext);
-  if (!context)
-    throw new Error("Modal compound components must be used inside <Modal>");
-  return context;
-};
 
 function Modal({
   isOpen,
@@ -105,15 +85,7 @@ function Modal({
 
 export default Modal;
 
-Modal.Header = ({ children }: { children: ReactNode }) => {
-  const { onClose, hasTopCloseButton } = useModalContext();
-  return (
-    <TitleSection>
-      <TitleText>{children}</TitleText>
-      {hasTopCloseButton && <CloseButton onClick={onClose}>✕</CloseButton>}
-    </TitleSection>
-  );
-};
+Modal.Header = Header;
 
 Modal.Body = ({ children }: { children: ReactNode }) => {
   return <MainSection id="modal-description">{children}</MainSection>;
@@ -183,24 +155,6 @@ const ModalOverlay = styled.div`
   right: 0;
   bottom: 0;
   background-color: rgba(0, 0, 0, 0.35);
-`;
-
-const CloseButton = styled.button`
-  border: none;
-  background-color: white;
-  cursor: pointer;
-`;
-
-const TitleSection = styled.section`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 24px;
-`;
-
-const TitleText = styled.h2`
-  font-size: 18px;
-  font-weight: bold;
 `;
 
 const MainSection = styled.section`

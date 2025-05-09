@@ -1,30 +1,26 @@
-import { ReactNode } from "react";
-import Modal from "../Modal";
+import Modal from "../Modal/Modal";
 
-interface PromptModalProps {
+interface AlertModalProps {
   isOpen: boolean;
   onClose: () => void;
   onConfirm: () => void;
   title: string;
-  content: ReactNode;
+  content: string;
 }
 
-function PromptModal({
+function AlertModal({
   isOpen,
   onClose,
   onConfirm,
   title,
   content,
-}: PromptModalProps) {
+}: AlertModalProps) {
   return (
     <>
       <Modal
         isOpen={isOpen}
         onClose={onClose}
         onConfirm={onConfirm}
-        hasTopCloseButton={false}
-        primaryButton={true}
-        primaryButtonText="취소"
         secondaryButton={true}
         secondaryButtonText="확인"
       >
@@ -36,4 +32,4 @@ function PromptModal({
   );
 }
 
-export default PromptModal;
+export default AlertModal;
