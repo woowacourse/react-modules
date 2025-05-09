@@ -82,4 +82,25 @@ describe("useCardNumber 테스트", () => {
       expect(result.current.isValid).toBeFalsy();
     });
   });
+
+  describe("포맷", () => {
+    test("visa 카드를 입력할 경우 4자리씩 띄어서 반환한다.", () => {
+      const { result, rerender } = renderHook(() => useCardNumber());
+      changeCardNumber(result, rerender, "4111111111111111");
+
+      expect(result.current.formatCardNumber()).toEqual([
+        "4111",
+        "1111",
+        "1111",
+        "1111",
+      ]);
+    });
+
+    test("visa 카드를 입력할 경우 4자리씩 띄어서 반환한다.", () => {
+      const { result, rerender } = renderHook(() => useCardNumber());
+      changeCardNumber(result, rerender, "411111");
+
+      expect(result.current.formatCardNumber()).toEqual(["4111", "11", "", ""]);
+    });
+  });
 });
