@@ -14,9 +14,7 @@ type Story = StoryObj<typeof Modal>;
 
 export const CenterModal: Story = {
   args: {
-    id: "modal-container",
     position: "center",
-    title: "중앙 모달 제목입니다",
   },
   render: function Render(args) {
     const [isOpen, setIsOpen] = useState(false);
@@ -32,7 +30,8 @@ export const CenterModal: Story = {
             setIsOpen(false);
           }}
         >
-          <p>중앙 모달 내용 입니다.</p>
+          <Modal.Header>중앙 모달 제목입니다</Modal.Header>
+          <Modal.Content>중앙 모달 내용 입니다.</Modal.Content>
         </Modal>
       </>
     );
@@ -75,9 +74,7 @@ export const CenterModal: Story = {
 
 export const BottomModal: Story = {
   args: {
-    id: "modal-container",
     position: "bottom",
-    title: "하단 모달 제목입니다",
   },
   render: function Render(args) {
     const [isOpen, setIsOpen] = useState(false);
@@ -93,7 +90,8 @@ export const BottomModal: Story = {
             setIsOpen(false);
           }}
         >
-          <p>하단 모달 내용 입니다.</p>
+          <Modal.Header>하단 모달 제목입니다</Modal.Header>
+          <Modal.Content>하단 모달 내용 입니다.</Modal.Content>
         </Modal>
       </>
     );
@@ -102,7 +100,6 @@ export const BottomModal: Story = {
 
 export const CustomHeaderModal: Story = {
   args: {
-    id: "modal-container",
     position: "center",
   },
   render: function Render(args) {
@@ -128,9 +125,9 @@ export const CustomHeaderModal: Story = {
           onClose={() => {
             setIsOpen(false);
           }}
-          renderHeader={customHeader}
         >
-          <p>사용자 정의 헤더가 적용된 모달입니다</p>
+          {customHeader()}
+          <Modal.Content>사용자 정의 헤더가 적용된 모달입니다</Modal.Content>
         </Modal>
       </>
     );
@@ -139,8 +136,6 @@ export const CustomHeaderModal: Story = {
 
 export const NestedModal: Story = {
   args: {
-    title: "중첩된 부모 모달창",
-    id: "modal-container",
     position: "center",
   },
   render: function Render(args) {
@@ -159,19 +154,22 @@ export const NestedModal: Story = {
             setIsOpen(false);
           }}
         >
-          <button onClick={() => setIsNestedOpen((prev) => !prev)}>
-            2번째 모달창 trigger
-          </button>
-          <Modal
-            {...args}
-            title="중첩된 자식 모달창"
-            isOpen={isNestedOpen}
-            onClose={() => {
-              setIsNestedOpen(false);
-            }}
-          >
-            중첩된 모달창 내용
-          </Modal>
+          <Modal.Header>중첩된 부모 모달창</Modal.Header>
+          <Modal.Content>
+            <button onClick={() => setIsNestedOpen((prev) => !prev)}>
+              2번째 모달창 trigger
+            </button>
+            <Modal
+              {...args}
+              isOpen={isNestedOpen}
+              onClose={() => {
+                setIsNestedOpen(false);
+              }}
+            >
+              <Modal.Header>중첩된 자식 모달창</Modal.Header>
+              <Modal.Content>중첩된 모달창 내용</Modal.Content>
+            </Modal>
+          </Modal.Content>
         </Modal>
       </>
     );
