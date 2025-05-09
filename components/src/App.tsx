@@ -21,8 +21,10 @@ function App() {
             <Input placeholder="쿠폰 번호 입력" />
           </Modal.Body>
           <Modal.Footer direction="row" align="end" justify="center">
-            <Button color="light">확인</Button>
-            <Button color="dark" onClick={handleClose}>
+            <Button color="light" size="small">
+              확인
+            </Button>
+            <Button color="dark" size="small" onClick={handleClose}>
               취소
             </Button>
           </Modal.Footer>

@@ -2,6 +2,18 @@ import styled from "@emotion/styled";
 
 import { ButtonProps } from "./Button.types";
 
+const ButtonSizes = {
+  small: {
+    width: "80px",
+  },
+  medium: {
+    width: "50%",
+  },
+  large: {
+    width: "100%",
+  },
+};
+
 const ButtonColors = {
   light: {
     backgroundColor: "#FFFFFF",
@@ -17,11 +29,11 @@ const ButtonColors = {
 
 export const StyledButton = styled.div<ButtonProps>`
   cursor: pointer;
-  width: 80px;
   height: 36px;
   line-height: 36px;
   text-align: center;
   border-radius: 5px;
   font-weight: 700;
   ${({ color = "light" }) => ButtonColors[color]};
+  ${({ size = "small" }) => ButtonSizes[size]};
 `;
