@@ -21,6 +21,9 @@ export interface PromptModalProps {
   /** 모달 내부의 flex 간격 설정 */
   gap?: number;
 
+  /**모달의 넓이를 설정 */
+  size?: "small" | "medium" | "large";
+
   /**
    * 모달 상단에 표시할 제목 (선택)
    * React 컴포넌트 또는 문자열 등 노드 형태로 전달 가능
@@ -42,6 +45,7 @@ const PromptModal = ({
   onConfirm,
   position = "center",
   gap = 16,
+  size,
   title,
   content,
   background = true,
@@ -49,7 +53,7 @@ const PromptModal = ({
   onChange,
 }: PromptModalProps) => {
   return (
-    <Modal show={show} onHide={onHide} gap={gap} position={position} background={background}>
+    <Modal show={show} onHide={onHide} gap={gap} size={size} position={position} background={background}>
       {title && (
         <Modal.Header>
           <Modal.Title>{title}</Modal.Title>

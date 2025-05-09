@@ -1,6 +1,7 @@
 import CancelButton from "../../buttons/CancelButton";
 import ConfirmButton from "../../buttons/ConfirmButton";
 import Modal from "../../Modal";
+
 export interface ConfirmModalProps {
   /** 모달을 보여줄지 여부 */
   show: boolean;
@@ -18,6 +19,9 @@ export interface ConfirmModalProps {
 
   /** 모달 내부의 flex 간격 설정 */
   gap?: number;
+
+  /**모달의 넓이를 설정 */
+  size?: "small" | "medium" | "large";
 
   /**
    * 모달 상단에 표시할 제목 (선택)
@@ -38,12 +42,13 @@ const ConfirmModal = ({
   onConfirm,
   position = "center",
   gap = 16,
+  size,
   title,
   content,
   background = true,
 }: ConfirmModalProps) => {
   return (
-    <Modal show={show} onHide={onHide} gap={gap} position={position} background={background}>
+    <Modal show={show} onHide={onHide} gap={gap} size={size} position={position} background={background}>
       {title && (
         <Modal.Header>
           <Modal.Title>{title}</Modal.Title>
