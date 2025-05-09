@@ -17,6 +17,7 @@ export const ModalFrame = styled.div<ModalFrameProps>`
   padding: 20px;
   box-sizing: border-box;
   display: flex;
+  min-width: 300px;
   flex-direction: column;
 `;
 
