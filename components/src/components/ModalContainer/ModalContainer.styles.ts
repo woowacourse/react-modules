@@ -18,7 +18,7 @@ export const ModalWrapper = styled.div<{
   flex-direction: column;
   gap: 5px;
   margin: 0 20px;
-  padding: 15px;
+  padding: 24px 32px;
   background-color: ${({ $backgroundColor }) => $backgroundColor};
   border-radius: 10px;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
