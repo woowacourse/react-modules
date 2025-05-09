@@ -44,7 +44,9 @@ function App() {
             수 있습니다
           </p>
         </Modal.Content>
-        <Modal.Footer>모달 하단 내용</Modal.Footer>
+        <Modal.Footer>
+          <Modal.ConfirmButton />
+        </Modal.Footer>
       </Modal>
     </>
   );

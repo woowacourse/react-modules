@@ -5,15 +5,29 @@
   align-items: center;
 }
 
-.alertButton {
+.buttonContainer {
+  display: flex;
+  gap: 12px;
+}
+
+.button {
   width: 80;
   height: 36;
   border-radius: 5px;
-  background-color: #333333;
-  color: white;
   font-family: Noto Sans KR;
   font-weight: 700;
   font-size: 15px;
   text-align: center;
   vertical-align: middle;
+}
+
+.primaryButton {
+  background-color: #333333;
+  color: white;
+}
+
+.secondaryButton {
+  color: #333333;
+  border: 1px solid #333333;
+  background-color: white;
 }
