@@ -6,50 +6,50 @@ interface CustomErrorMessagesType {
   length?: string;
 }
 
+const getCardBrand = (value: string) => {
+  if (value[0] === "4") return "Visa";
+  return "none";
+};
+
 export default function useCardNumber(
   customErrorMessage?: CustomErrorMessagesType
 ) {
-  const [cardNumber, setCardNumber] = useState({
-    first: "",
-    second: "",
-    third: "",
-    fourth: "",
-  });
-
-  const [errorMessage, setErrorMessage] = useState({
-    first: "",
-    second: "",
-    third: "",
-    fourth: "",
-  });
-
-  const isValid = Object.values(errorMessage).every(
-    (message) => message === ""
-  );
+  const [cardNumber, setCardNumber] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
+  const isValid = errorMessage === "";
 
   const handleCardNumberChange = (
-    event: React.ChangeEvent<HTMLInputElement>,
-    sequence: string
+    event: React.ChangeEvent<HTMLInputElement>
   ) => {
     const value = event.target.value;
 
     if (!numberRegex.test(value)) return;
 
-    setCardNumber({ ...cardNumber, [sequence]: value });
+    if (getCardBrand(value) === "Visa") {
+      if (value.length > 16) {
+        return;
+      }
 
-    if (value.length < 4) {
-      setErrorMessage({
-        ...errorMessage,
-        [sequence]: customErrorMessage?.length ?? "4자리 숫자를 입력해 주세요.",
-      });
-      return;
+      setCardNumber(value);
+
+      if (value.length < 16) {
+        setErrorMessage("16자리를 입력해 주세요.");
+        return;
+      }
+
+      setErrorMessage("");
     }
-
-    setErrorMessage({
-      ...errorMessage,
-      [sequence]: "",
-    });
   };
 
-  return { errorMessage, isValid, cardNumber, handleCardNumberChange };
+  const cardBrand = () => {
+    return getCardBrand(cardNumber);
+  };
+
+  return {
+    cardNumber,
+    errorMessage,
+    isValid,
+    handleCardNumberChange,
+    cardBrand,
+  };
 }

@@ -5,119 +5,81 @@ import useCardNumber from "./useCardNumber";
 const changeCardNumber = (
   result: { current: ReturnType<typeof useCardNumber> },
   rerender: () => void,
-  field: keyof ReturnType<typeof useCardNumber>["cardNumber"],
   value: string
 ) => {
   act(() => {
-    result.current.handleCardNumberChange(
-      {
-        target: { value },
-      } as React.ChangeEvent<HTMLInputElement>,
-      field
-    );
+    result.current.handleCardNumberChange({
+      target: { value },
+    } as React.ChangeEvent<HTMLInputElement>);
   });
   rerender();
 };
 
 describe("useCardNumber 테스트", () => {
   describe("초기 상태", () => {
-    test("cardNumber 4칸이 초기화 되어 있어야 한다.", () => {
-      const { result } = renderHook(() => useCardNumber());
-      expect(result.current.cardNumber).toEqual({
-        first: "",
-        second: "",
-        third: "",
-        fourth: "",
-      });
+    const { result } = renderHook(() => useCardNumber());
+    test("cardNumber 값이 초기화 되어 있어야 한다.", () => {
+      expect(result.current.cardNumber).toBe("");
     });
 
-    test("cardNumber의 각 errorMessage가 초기화 되어 있어야 한다.", () => {
-      const { result } = renderHook(() => useCardNumber());
-      expect(result.current.errorMessage).toEqual({
-        first: "",
-        second: "",
-        third: "",
-        fourth: "",
-      });
+    test("errorMessage 값이 초기화 되어 있어야 한다.", () => {
+      expect(result.current.errorMessage).toBe("");
     });
 
-    test("isValid의 초기 값은 true여야 한다.", () => {
-      const { result } = renderHook(() => useCardNumber());
-      expect(result.current.isValid).toBe(true);
+    test("isValid가 true여야 한다.", () => {
+      expect(result.current.isValid).toBeTruthy();
     });
   });
 
   describe("입력 처리", () => {
-    test("각 칸에 숫자 입력 시 해당 칸에 반영된다.", () => {
+    test("숫자 입력 시 cardNumber 상태 값에 반영된다.", () => {
       const { result, rerender } = renderHook(() => useCardNumber());
+      changeCardNumber(result, rerender, "411111111111");
 
-      changeCardNumber(result, rerender, "first", "1111");
-      changeCardNumber(result, rerender, "second", "2222");
-      changeCardNumber(result, rerender, "third", "3333");
-      changeCardNumber(result, rerender, "fourth", "4444");
-
-      expect(result.current.cardNumber).toEqual({
-        first: "1111",
-        second: "2222",
-        third: "3333",
-        fourth: "4444",
-      });
+      expect(result.current.cardNumber).toBe("411111111111");
     });
 
-    test("각 칸에 문자열 입력 시 해당 칸에 반영되지 않는다.", () => {
+    test("문자 입력 시 cardNumber 상태 값에 반영되지 않는다.", () => {
+      const { result, rerender } = renderHook(() => useCardNumber());
+      changeCardNumber(result, rerender, "안녕");
+
+      expect(result.current.cardNumber).toBe("");
+    });
+
+    test("최대 길이를 초과한 값을 입력시 cardNumber 상태 값에 반영되지 않는다.", () => {
+      const { result, rerender } = renderHook(() => useCardNumber());
+      changeCardNumber(result, rerender, "4111111111111111");
+      changeCardNumber(result, rerender, "41111111111111111");
+
+      expect(result.current.cardNumber).toBe("4111111111111111");
+    });
+  });
+
+  describe("브랜드 식별", () => {
+    test("cardNumber가 4로 시작할 경우 Visa 카드를 반환한다.", () => {
       const { result, rerender } = renderHook(() => useCardNumber());
 
-      changeCardNumber(result, rerender, "first", "메롱");
-      changeCardNumber(result, rerender, "second", "메롱롱");
-      changeCardNumber(result, rerender, "third", "메롱롱롱");
-      changeCardNumber(result, rerender, "fourth", "메룽");
+      changeCardNumber(result, rerender, "4");
 
-      expect(result.current.cardNumber).toEqual({
-        first: "",
-        second: "",
-        third: "",
-        fourth: "",
-      });
+      expect(result.current.cardBrand()).toBe("Visa");
     });
   });
 
   describe("유효성 검증", () => {
-    test("각 칸에 유효한 값을 입력하면 에러가 발생하지 않는다.", () => {
+    test("visa 카드일 경우 16자리일 경우 에러가 발생하지 않는다.", () => {
       const { result, rerender } = renderHook(() => useCardNumber());
 
-      changeCardNumber(result, rerender, "first", "1111");
-      changeCardNumber(result, rerender, "second", "1111");
-      changeCardNumber(result, rerender, "third", "1111");
-      changeCardNumber(result, rerender, "fourth", "1111");
+      changeCardNumber(result, rerender, "4111111111111111");
 
       expect(result.current.isValid).toBeTruthy();
     });
 
-    test("한 칸이라도 4자리 미만의 숫자 입력 시 에러가 발생한다.", () => {
+    test("visa 카드일 경우 12자리 미만일 시 에러가 발생한다.", () => {
       const { result, rerender } = renderHook(() => useCardNumber());
 
-      changeCardNumber(result, rerender, "first", "111");
-      changeCardNumber(result, rerender, "second", "1111");
-      changeCardNumber(result, rerender, "third", "1111");
-      changeCardNumber(result, rerender, "fourth", "1111");
+      changeCardNumber(result, rerender, "4");
 
       expect(result.current.isValid).toBeFalsy();
-    });
-
-    test("4자리 미만의 숫자 입력 시 각 칸에 에러 메시지를 표시한다.", () => {
-      const { result, rerender } = renderHook(() => useCardNumber());
-
-      changeCardNumber(result, rerender, "first", "1");
-      changeCardNumber(result, rerender, "second", "11");
-      changeCardNumber(result, rerender, "third", "111");
-      changeCardNumber(result, rerender, "fourth", "111");
-
-      expect(result.current.errorMessage).toEqual({
-        first: "4자리 숫자를 입력해 주세요.",
-        second: "4자리 숫자를 입력해 주세요.",
-        third: "4자리 숫자를 입력해 주세요.",
-        fourth: "4자리 숫자를 입력해 주세요.",
-      });
     });
   });
 });
