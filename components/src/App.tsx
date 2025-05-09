@@ -4,6 +4,7 @@ import { Modal } from './lib';
 import './App.css';
 import AlertModal from './components/AlertModal/AlertModal';
 import ConfirmModal from './components/ConfirmModal/ConfirmModal';
+import PromptModal from './components/PromptModal/PromptModal';
 
 function App() {
   const [isOpen, setIsOpen] = useState(false);
@@ -17,7 +18,7 @@ function App() {
   return (
     <>
       <button onClick={() => setIsOpen(true)}>AlertModal Open</button>
-      <ConfirmModal
+      <PromptModal
         isOpen={isOpen}
         position="center"
         size="small"
