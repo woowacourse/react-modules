@@ -1,4 +1,4 @@
-import { createValidator, ValidationRule } from "./index";
+import { createValidator, ValidationRuleParam } from "./index";
 import { ValidateField } from "./constants";
 import { validationRules } from "./validation-rules";
 import { FieldErrorCode } from "./constants/error-messages";
@@ -10,7 +10,7 @@ type ValidationRuleObj = {
 function createFieldRules<T extends ValidateField>(
   field: T,
   rules: Record<string, ValidationRuleObj>
-): ValidationRule<T>[] {
+): ValidationRuleParam<T>[] {
   return Object.entries(rules).map(([code, { check }]) => ({
     check,
     errorMeta: {
