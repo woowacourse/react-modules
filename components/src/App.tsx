@@ -1,10 +1,13 @@
-import { useState } from 'react';
 import AlertModal from './lib/alertModal/AlertModal';
+import ConfirmModal from './lib/confirmModal/confirmModal';
+import { useState } from 'react';
 import { Modal } from './lib';
+
 function App() {
   const [isOpen, setIsOpen] = useState({
     base: false,
-    alert: false
+    alert: false,
+    confirm: false
   });
 
   const handleBaseModalButtonToggle = () => {
@@ -15,11 +18,16 @@ function App() {
     setIsOpen({ ...isOpen, alert: !isOpen.alert });
   };
 
+  const handleConfirmButtonToggle = () => {
+    setIsOpen({ ...isOpen, confirm: !isOpen.confirm });
+  };
+
   return (
     <>
       <div style={{ display: 'flex', gap: '10px' }}>
         <button onClick={handleBaseModalButtonToggle}>Base 모달 열기</button>
         <button onClick={handleAlertButtonToggle}>Alert 모달 열기</button>
+        <button onClick={handleConfirmButtonToggle}>Confirm 모달 열기</button>
       </div>
       {isOpen.base && (
         <Modal onClose={handleBaseModalButtonToggle}>
@@ -46,6 +54,16 @@ function App() {
           position="center"
           buttonText="확인"
           size="small"
+        />
+      )}
+      {isOpen.confirm && (
+        <ConfirmModal
+          title="카드를 삭제하시겠습니까?"
+          description="삭제하면 복구하실 수 없습니다."
+          onClose={handleConfirmButtonToggle}
+          onConfirmButtonClick={handleConfirmButtonToggle}
+          position="center"
+          buttonText="확인"
         />
       )}
     </>
