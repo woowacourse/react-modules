@@ -20,20 +20,18 @@ function PromptModal({
   ...props
 }: PromptModalProps) {
   return (
-    <>
-      <Modal isOpen={isOpen}>
-        <Modal.Overlay onClick={onCloseClick} />
-        <Modal.Content position="center" size={size}>
-          <Modal.Title>{title}</Modal.Title>
-          <Modal.Input {...props} />
-          <Modal.AlertActions
-            width={alertActionsWidth}
-            onCancelClick={onCloseClick}
-            onConfirmClick={onConfirmClick}
-          />
-        </Modal.Content>
-      </Modal>
-    </>
+    <Modal isOpen={isOpen}>
+      <Modal.Overlay onClick={onCloseClick} />
+      <Modal.Content position="center" size={size}>
+        <Modal.Title>{title}</Modal.Title>
+        <Modal.Input {...props} autoFocus />
+        <Modal.AlertActions
+          width={alertActionsWidth}
+          onCancelClick={onCloseClick}
+          onConfirmClick={onConfirmClick}
+        />
+      </Modal.Content>
+    </Modal>
   );
 }
 
