@@ -12,8 +12,8 @@
 - [x] 백드롭 해제시에도 백그라운드 누를 시, 모달 닫힘 구현
 - [x] 백드롭 내부 props 변경 및 구조 위치 변경
 - [ ] 새로운 타입의 모달 형태 구현 -> container 부분만 만들어준다. -> Modal과 Backdrop은 기존꺼 써야함.
-  - [ ] 확인(Alert) 모달: 사용자에게 메시지를 전달하고 확인 버튼만 제공
-    - [ ] props로 받아야할 것 - title / description
+  - [x] 확인(Alert) 모달: 사용자에게 메시지를 전달하고 확인 버튼만 제공
+    - [x] props로 받아야할 것 - title / description
     - [x] 버튼 제작 (모달 전용) (기본값 - onClick, children / 기본 css - color,backgroundColor, borderColor, borderRadius, fontSize )
   - [ ] 확인/취소(Confirm) 모달: 사용자에게 선택지를 제공하고 확인 및 취소 버튼 제공
     - [ ] props로 받아야할 것 - title / description / 확인에 대한 액션 onClick

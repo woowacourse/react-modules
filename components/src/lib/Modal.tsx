@@ -1,6 +1,13 @@
 import useKeyEscClose from "./hooks/useKeyEscClose";
 import IconClose from "./components/IconClose";
-import { BaseProps, ModalHeaderProps, ModalProps, ModalContainerProps, ModalButtonProps } from "./types";
+import {
+  BaseProps,
+  ModalHeaderProps,
+  ModalProps,
+  ModalContainerProps,
+  ModalButtonProps,
+  ModalAlertContainerProps,
+} from "./types";
 import {
   backGroundStyle,
   ModalBodyStyle,
@@ -110,6 +117,25 @@ Modal.Trigger = ({ children }: BaseProps) => {
     }
     return child;
   });
+};
+
+/** 커스텀 모달 Container */
+/**확인(Alert) 모달 */
+
+Modal.AlertContainer = ({ title, description, ...props }: ModalAlertContainerProps) => {
+  return (
+    <Modal.Container {...props}>
+      <Modal.Header>
+        <Modal.Title>{title}</Modal.Title>
+      </Modal.Header>
+      <Modal.Body>{description}</Modal.Body>
+      <Modal.Footer style={{ display: "flex", justifyContent: "flex-end" }}>
+        <Modal.Trigger>
+          <Modal.Button>확인</Modal.Button>
+        </Modal.Trigger>
+      </Modal.Footer>
+    </Modal.Container>
+  );
 };
 
 export default Modal;
