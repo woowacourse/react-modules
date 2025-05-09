@@ -14,8 +14,11 @@ interface ModalProps extends BaseProps {
   onClose: () => void;
 }
 
+type Position = 'center' | 'bottom';
+
 interface ModalContentProps extends BaseProps {
   hasTopCloseButton?: boolean;
+  position?: Position;
 }
 
 const ModalContext = createContext<{ onClose: () => void }>({ onClose: () => {} });
@@ -40,11 +43,16 @@ const Overlay = () => {
   return <ModalOverlay data-testid="modal-overlay" onClick={onClose} />;
 };
 
-const Content = ({ children, hasTopCloseButton = true, ...props }: ModalContentProps) => {
+const Content = ({
+  children,
+  hasTopCloseButton = true,
+  position = 'center',
+  ...props
+}: ModalContentProps) => {
   const { onClose } = useContext(ModalContext);
 
   return (
-    <ModalContent {...props}>
+    <ModalContent position={position} {...props}>
       {hasTopCloseButton && <CloseIconButton data-testid="modal-close" onClick={() => onClose()} />}
       {children}
     </ModalContent>
@@ -61,7 +69,7 @@ Modal.Title = Title;
 
 export default Modal;
 
-const ModalContent = styled.div`
+const ModalContent = styled.div<{ position: Position }>`
   height: 216px;
   width: 304px;
   position: fixed;
@@ -72,6 +80,19 @@ const ModalContent = styled.div`
   padding: 24px 32px;
   border-radius: 8px;
   color: #000;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  ${({ position }) =>
+    position === 'bottom' &&
+    `
+      width: 100%;
+      top: auto;
+      left: 0;
+      transform: none;
+      bottom: 0;
+    `}
 `;
 
 const ModalOverlay = styled.div`
