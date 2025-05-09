@@ -37,7 +37,7 @@ const Overlay = ({ closeOnClick = true }: OverlayProps) => {
     onClose();
   };
 
-  return <ModalOverlay data-testid="modal-overlay" onClick={handleClick} />;
+  return <S.ModalOverlay data-testid="modal-overlay" onClick={handleClick} />;
 };
 
 const Content = ({
@@ -49,10 +49,10 @@ const Content = ({
   const { onClose } = useContext(ModalContext);
 
   return (
-    <ModalContent position={position} {...props}>
+    <S.ModalContent position={position} {...props}>
       {hasTopCloseButton && <CloseIconButton data-testid="modal-close" onClick={() => onClose()} />}
       {children}
-    </ModalContent>
+    </S.ModalContent>
   );
 };
 
@@ -69,7 +69,7 @@ const AlertContent = ({
   const { onClose } = useContext(ModalContext);
 
   return (
-    <ModalContent
+    <S.ModalContent
       position={position}
       style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}
       {...props}>
@@ -83,16 +83,16 @@ const AlertContent = ({
           onClick={onAlert ? onAlert : onClose}
         />
       </ButtonContainer>
-    </ModalContent>
+    </S.ModalContent>
   );
 };
 
 const ButtonContainer = ({ children, direction = 'row' }: ButtonContainerProps) => {
-  return <ButtonContainerStyle direction={direction}>{children}</ButtonContainerStyle>;
+  return <S.ButtonContainerStyle direction={direction}>{children}</S.ButtonContainerStyle>;
 };
 
 const Title = ({ title }: { title: string }) => {
-  return <TitleText>{title}</TitleText>;
+  return <S.TitleText>{title}</S.TitleText>;
 };
 
 Modal.Overlay = Overlay;
@@ -102,51 +102,53 @@ Modal.Title = Title;
 
 export default Modal;
 
-const ModalContent = styled.div<{ position: Position }>`
-  height: 216px;
-  width: 304px;
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: white;
-  padding: 24px 32px;
-  border-radius: 8px;
-  color: #000;
+const S = {
+  ModalContent: styled.div<{ position: Position }>`
+    height: 216px;
+    width: 304px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 24px 32px;
+    border-radius: 8px;
+    color: #000;
 
-  ${({ position }) =>
-    position === 'bottom' &&
-    `
+    ${({ position }) =>
+      position === 'bottom' &&
+      `
       width: 100%;
       top: auto;
       left: 0;
       transform: none;
       bottom: 0;
     `}
-`;
+  `,
 
-const ModalOverlay = styled.div`
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.35);
-`;
+  ModalOverlay: styled.div`
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.35);
+  `,
 
-const TitleText = styled.p`
-  font-size: 18px;
-  font-weight: bold;
-  margin-bottom: 10px;
-`;
+  TitleText: styled.p`
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  `,
 
-const ButtonContainerStyle = styled.div<{ direction: Direction }>`
-  display: flex;
-  flex-direction: ${({ direction }) => direction};
-  justify-content: end;
-  gap: 12px;
+  ButtonContainerStyle: styled.div<{ direction: Direction }>`
+    display: flex;
+    flex-direction: ${({ direction }) => direction};
+    justify-content: end;
+    gap: 12px;
 
-  & > button {
-    ${({ direction }) => direction === 'row' && `width: auto;`}
-  }
-`;
+    & > button {
+      ${({ direction }) => direction === 'row' && `width: auto;`}
+    }
+  `,
+};
