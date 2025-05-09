@@ -11,7 +11,8 @@ function App() {
       <Modal isOpen={isOpen} onClose={handleCloseModal}>
         <Modal.Backdrop />
         <Modal.Container>
-          <Modal.Header title="모달 제목" showCloseButton />
+          <Modal.Title title="모달 제목" />
+          <Modal.CloseButton />
           <h1>안녕</h1>
         </Modal.Container>
       </Modal>

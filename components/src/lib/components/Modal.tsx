@@ -47,11 +47,14 @@ type ModalContainerProps = {
   containerStyle?: React.CSSProperties;
 };
 
-type ModalHeaderProps = {
+type ModalTitleProps = {
   /**
    * The title of the modal
    */
   title: string;
+};
+
+type ModalCloseButtonProps = {
   /**
    * Indicate close button visibility
    * @default true
@@ -98,18 +101,21 @@ const ModalContainer = ({
   );
 };
 
-const ModalHeader = ({ title, showCloseButton = true }: ModalHeaderProps) => {
+const ModalTitle = ({ title }: ModalTitleProps) => {
+  return <StyledModalTitle aria-label={title}>{title}</StyledModalTitle>;
+};
+
+const ModalCloseButton = ({ showCloseButton = true }: ModalCloseButtonProps) => {
   const { onClose } = useModalContext();
 
   return (
-    <StyledModalHeader aria-label={title}>
-      {title}
+    <>
       {showCloseButton && (
         <StyledCloseButton type="button" onClick={onClose} aria-label="closeModalButton">
           <StyledCloseIconButton src={closeIcon} alt="closeIcon" />
         </StyledCloseButton>
       )}
-    </StyledModalHeader>
+    </>
   );
 };
 
@@ -139,7 +145,8 @@ export const Modal = (props: ModalProps) => {
 
 Modal.Backdrop = ModalBackdrop;
 Modal.Container = ModalContainer;
-Modal.Header = ModalHeader;
+Modal.Title = ModalTitle;
+Modal.CloseButton = ModalCloseButton;
 
 const StyledBackDrop = styled.div<{ backdropZIndex: number }>`
   width: 100%;
@@ -196,13 +203,13 @@ const StyledModalContainer = styled.div<{ modalZIndex: number } & ModalContainer
   height: auto;
   position: fixed;
   background-color: white;
-  padding: 24px 32px;
+  padding: 12px 24px;
   ${({ position }) => positionStyle[position ?? 'center']};
   ${({ containerStyle }) => ({ ...containerStyle })};
   z-index: ${({ modalZIndex }) => modalZIndex};
 `;
 
-const StyledModalHeader = styled.div`
+const StyledModalTitle = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -211,6 +218,9 @@ const StyledModalHeader = styled.div`
 `;
 
 const StyledCloseButton = styled.button`
+  position: absolute;
+  top: 12px;
+  right: 12px;
   padding: 0;
   background-color: transparent;
   border: none;
