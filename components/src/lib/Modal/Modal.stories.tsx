@@ -46,6 +46,7 @@ type Story = StoryObj<typeof Modal>;
 
 export const Default: Story = {
   args: {
+    size: "medium",
     position: "center",
     isOpen: false,
     showCloseButton: true,
@@ -68,6 +69,91 @@ export const Default: Story = {
           <Button onclick={openModal} />
         </ButtonWrap>
         <Modal
+          size={args.size}
+          isOpen={isOpen}
+          position={args.position}
+          onClose={closeModal}
+          showCloseButton={args.showCloseButton}
+          showConfirmButton={args.showConfirmButton}
+        >
+          <ModalContent>
+            <h3>기본 모달</h3>
+            <p>이것은 기본 모달 콘텐츠입니다.</p>
+          </ModalContent>
+        </Modal>
+      </>
+    );
+  },
+};
+
+export const SmallModal: Story = {
+  args: {
+    size: "small",
+    position: "center",
+    isOpen: false,
+    showCloseButton: true,
+    showConfirmButton: false,
+  },
+  render: (args) => {
+    const [isOpen, setIsOpen] = useState(args.isOpen);
+
+    const openModal = () => {
+      setIsOpen(true);
+    };
+
+    const closeModal = () => {
+      setIsOpen(false);
+    };
+
+    return (
+      <>
+        <ButtonWrap>
+          <Button onclick={openModal} />
+        </ButtonWrap>
+        <Modal
+          size={args.size}
+          isOpen={isOpen}
+          position={args.position}
+          onClose={closeModal}
+          showCloseButton={args.showCloseButton}
+          showConfirmButton={args.showConfirmButton}
+        >
+          <ModalContent>
+            <h3>기본 모달</h3>
+            <p>이것은 기본 모달 콘텐츠입니다.</p>
+          </ModalContent>
+        </Modal>
+      </>
+    );
+  },
+};
+
+export const LargeModal: Story = {
+  args: {
+    size: "large",
+    position: "center",
+    isOpen: false,
+    showCloseButton: true,
+    showConfirmButton: false,
+  },
+  render: (args) => {
+    const [isOpen, setIsOpen] = useState(args.isOpen);
+
+    const openModal = () => {
+      setIsOpen(true);
+    };
+
+    const closeModal = () => {
+      setIsOpen(false);
+    };
+
+    return (
+      <>
+        <ButtonWrap>
+          <Button onclick={openModal} />
+        </ButtonWrap>
+        <Modal
+          size={args.size}
           isOpen={isOpen}
           position={args.position}
           onClose={closeModal}
@@ -86,6 +172,7 @@ export const Default: Story = {
 
 export const BottomModal: Story = {
   args: {
+    size: "medium",
     position: "bottom",
     isOpen: false,
     showConfirmButton: true,
@@ -108,6 +195,7 @@ export const BottomModal: Story = {
           <Button onclick={openModal} />
         </ButtonWrap>
         <Modal
+          size={args.size}
           isOpen={isOpen}
           position={args.position}
           onClose={closeModal}
@@ -121,80 +209,6 @@ export const BottomModal: Story = {
               사용되는 UI 패턴입니다.
             </p>
           </ModalContent>
-        </Modal>
-      </>
-    );
-  },
-};
-
-export const TermsAgreementModal: Story = {
-  args: {
-    position: "center",
-    isOpen: false,
-    showConfirmButton: true,
-    showCloseButton: true,
-  },
-  render: (args) => {
-    const [isOpen, setIsOpen] = useState(args.isOpen);
-
-    const openModal = () => {
-      setIsOpen(true);
-    };
-
-    const closeModal = () => {
-      setIsOpen(false);
-    };
-
-    return (
-      <>
-        <ButtonWrap>
-          <Button onclick={openModal} />
-        </ButtonWrap>
-        <Modal
-          isOpen={isOpen}
-          position={args.position}
-          onClose={closeModal}
-          showCloseButton={args.showCloseButton}
-          showConfirmButton={args.showConfirmButton}
-        >
-          <AgreeTermModal />
-        </Modal>
-      </>
-    );
-  },
-};
-
-export const CompanyCardModal: Story = {
-  args: {
-    position: "center",
-    isOpen: false,
-    showCloseButton: true,
-    showConfirmButton: false,
-  },
-  render: (args) => {
-    const [isOpen, setIsOpen] = useState(args.isOpen);
-
-    const openModal = () => {
-      setIsOpen(true);
-    };
-
-    const closeModal = () => {
-      setIsOpen(false);
-    };
-
-    return (
-      <>
-        <ButtonWrap>
-          <Button onclick={openModal} />
-        </ButtonWrap>
-        <Modal
-          isOpen={isOpen}
-          position={args.position}
-          onClose={closeModal}
-          showCloseButton={args.showCloseButton}
-          showConfirmButton={args.showConfirmButton}
-        >
-          <CardCompany />
         </Modal>
       </>
     );

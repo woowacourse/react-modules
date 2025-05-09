@@ -2,6 +2,7 @@ import { ReactNode } from "react";
 import styled from "@emotion/styled";
 
 interface ModalProps {
+  size: "small" | "medium" | "large";
   position: "center" | "bottom";
   isOpen: boolean;
   showCloseButton?: boolean;
@@ -11,6 +12,7 @@ interface ModalProps {
 }
 
 const Modal = ({
+  size,
   position,
   isOpen,
   children,
@@ -22,7 +24,7 @@ const Modal = ({
     <>
       {isOpen && (
         <ModalBackDrop position={position}>
-          <ModalContainer position={position}>
+          <ModalContainer size={size} position={position}>
             {children}
             <ButtonWrap>
               {showConfirmButton && (
@@ -55,18 +57,32 @@ const ModalBackDrop = styled.div<{ position: "center" | "bottom" }>`
     props.position === "center" ? "center" : "flex-end"};
   padding: 0;
 `;
-const ModalContainer = styled.div<{ position: "center" | "bottom" }>`
+const ModalContainer = styled.div<{
+  position: "center" | "bottom";
+  size: "small" | "medium" | "large";
+}>`
   z-index: 3;
   position: relative;
   display: flex;
   flex-direction: column;
-  width: ${(props) => (props.position === "bottom" ? "100%" : "60%")};
+  width: ${(props) => {
+    if (props.position === "bottom") return "100%";
+    switch (props.size) {
+      case "small":
+        return "320px";
+      case "medium":
+        return "480px";
+      case "large":
+        return "600px";
+      default:
+        return "60%";
+    }
+  }};
   height: auto;
   padding: 24px 32px;
   border-radius: 8px;
   background-color: #fff;
 `;
-
 const CloseButton = styled.button`
   width: 100%;
   padding: 8px 0px;
