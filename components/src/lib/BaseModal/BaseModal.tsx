@@ -7,6 +7,7 @@ import {
   ModalBody,
   CloseButton,
 } from "./BaseModal.styles";
+import { IconClose } from "../IconClose";
 
 interface ModalPropsType {
   isModalOpen: boolean;
@@ -33,7 +34,9 @@ const BaseModal = ({
         <ModalHeader>
           <h4>{title}</h4>
           {showCloseButton && onClose && (
-            <CloseButton onClick={onClose}>X</CloseButton>
+            <CloseButton onClick={onClose}>
+              <IconClose />
+            </CloseButton>
           )}
         </ModalHeader>
         <ModalBody>{children}</ModalBody>
