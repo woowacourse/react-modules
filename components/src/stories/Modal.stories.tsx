@@ -11,20 +11,34 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-const ModalTemplate = () => {
-  const [isOpen, setIsOpen] = useState(true);
-  return (
-    <Modal isOpen={isOpen} onClose={() => setIsOpen(false)}>
-      <Modal.Overlay />
-      <Modal.Content>
-        <Modal.CloseButton />
-        <p>모달열림</p>
-      </Modal.Content>
-    </Modal>
-  );
+export const Default: Story = {
+  render: () => {
+    const [isOpen, setIsOpen] = useState(true);
+    return (
+      <Modal isOpen={isOpen} onClose={() => setIsOpen(false)}>
+        <Modal.Overlay />
+        <Modal.Content>
+          <Modal.CloseButton />
+          <p>모달열림</p>
+        </Modal.Content>
+      </Modal>
+    );
+  },
+  args: {},
 };
 
-export const Default: Story = {
-  render: ModalTemplate,
-  args: {},
+export const TitleModal: Story = {
+  render: () => {
+    const [isOpen, setIsOpen] = useState(true);
+    return (
+      <Modal isOpen={isOpen} onClose={() => setIsOpen(false)}>
+        <Modal.Overlay />
+        <Modal.Content>
+          <Modal.Title title="모달 타이틀" />
+          <p>모달열림</p>
+          <Modal.CloseButton />
+        </Modal.Content>
+      </Modal>
+    );
+  },
 };
