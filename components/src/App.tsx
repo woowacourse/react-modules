@@ -47,6 +47,7 @@ function App() {
         onClose={handleModalClose}
         onConfirm={handleModalConfirm}
         position="center"
+        size="large"
       >
         <Modal.Header>테스트 제목</Modal.Header>
         <Modal.Body>
@@ -70,6 +71,7 @@ function App() {
         onConfirm={handleConfirmConfirm}
         title="카드를 삭제하시겠습니까?"
         content="삭제하면 복구하실 수 없습니다."
+        size="medium"
       />
       <PromptModal
         isOpen={PromptIsOpen}

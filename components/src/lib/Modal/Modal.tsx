@@ -9,6 +9,7 @@ import Footer from "./Footer";
 import PrimaryButton from "./PrimaryButton";
 import SecondaryButton from "./SecondaryButton";
 
+type Size = "small" | "medium" | "large";
 interface ModalProps {
   isOpen: boolean;
   onClose: () => void;
@@ -16,6 +17,7 @@ interface ModalProps {
   onConfirm?: () => void;
   position?: Position;
   hasTopCloseButton?: boolean;
+  size?: Size;
 }
 /**
  * 모달 생성
@@ -27,6 +29,7 @@ interface ModalProps {
  * @property {() => void} [onConfirm] - (선택) 확인 버튼 클릭 시 실행할 함수
  * @property {'center' | 'bottom'} [position] - (선택) 모달 위치
  * @property {boolean} [hasTopCloseButton] - (선택) 상단 닫기 버튼 표시 여부
+ * @property {Size} [size] - (선택) 모달 사이즈
 
  */
 
@@ -37,6 +40,7 @@ function Modal({
   position = "center",
   children,
   hasTopCloseButton = false,
+  size = "small",
 }: ModalProps) {
   useEscapeKeyClose({ isOpen, onClose });
 
@@ -55,6 +59,7 @@ function Modal({
             <ModalContainer>
               <ModalContent
                 position={position}
+                size={size}
                 role="dialog"
                 aria-modal="true"
                 aria-labelledby="modal-title"
@@ -81,9 +86,7 @@ Modal.SecondaryButton = SecondaryButton;
 
 const ModalContainer = styled.div``;
 
-const ModalContent = styled.div<{ position: Position }>`
-  height: 216px;
-  width: 480px;
+const ModalContent = styled.div<{ position: Position; size: Size }>`
   position: fixed;
   top: 50%;
   left: 50%;
@@ -95,6 +98,26 @@ const ModalContent = styled.div<{ position: Position }>`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+
+  ${({ size }) => {
+    switch (size) {
+      case "small":
+        return `
+        width: 320px;
+        height: 206px;
+      `;
+      case "medium":
+        return `
+        width: 480px;
+        height: 206px;
+      `;
+      default:
+        return `
+        width: 600px;
+        height: 206px;
+      `;
+    }
+  }}
 
   ${({ position }) =>
     position === "bottom" &&

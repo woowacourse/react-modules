@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Modal from "../Modal/Modal";
+import Modal, { Size } from "../Modal/Modal";
 import styled from "@emotion/styled";
 
 interface PromptModalProps {
@@ -7,9 +7,16 @@ interface PromptModalProps {
   onClose: () => void;
   onConfirm: () => void;
   title: string;
+  size: Size;
 }
 
-function PromptModal({ isOpen, onClose, onConfirm, title }: PromptModalProps) {
+function PromptModal({
+  isOpen,
+  onClose,
+  onConfirm,
+  title,
+  size,
+}: PromptModalProps) {
   const [input, setInput] = useState("");
   return (
     <>
@@ -18,6 +25,7 @@ function PromptModal({ isOpen, onClose, onConfirm, title }: PromptModalProps) {
         onClose={onClose}
         onConfirm={onConfirm}
         hasTopCloseButton={false}
+        size={size}
       >
         <Modal.Header>{title}</Modal.Header>
         <Modal.Body>

@@ -1,4 +1,4 @@
-import Modal from "../Modal/Modal";
+import Modal, { Size } from "../Modal/Modal";
 
 interface ConfirmModalProps {
   isOpen: boolean;
@@ -6,6 +6,7 @@ interface ConfirmModalProps {
   onConfirm: () => void;
   title: string;
   content: string;
+  size: Size;
 }
 
 function ConfirmModal({
@@ -14,6 +15,7 @@ function ConfirmModal({
   onConfirm,
   title,
   content,
+  size,
 }: ConfirmModalProps) {
   return (
     <>
@@ -22,6 +24,7 @@ function ConfirmModal({
         onClose={onClose}
         onConfirm={onConfirm}
         hasTopCloseButton={false}
+        size={size}
       >
         <Modal.Header>{title}</Modal.Header>
         <Modal.Body>{content}</Modal.Body>

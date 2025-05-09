@@ -1,4 +1,4 @@
-import Modal from "../Modal/Modal";
+import Modal, { Size } from "../Modal/Modal";
 
 interface AlertModalProps {
   isOpen: boolean;
@@ -6,6 +6,7 @@ interface AlertModalProps {
   onConfirm: () => void;
   title: string;
   content: string;
+  size: Size;
 }
 
 function AlertModal({
@@ -14,10 +15,16 @@ function AlertModal({
   onConfirm,
   title,
   content,
+  size,
 }: AlertModalProps) {
   return (
     <>
-      <Modal isOpen={isOpen} onClose={onClose} onConfirm={onConfirm}>
+      <Modal
+        isOpen={isOpen}
+        onClose={onClose}
+        onConfirm={onConfirm}
+        size={size}
+      >
         <Modal.Header>{title}</Modal.Header>
         <Modal.Body>{content}</Modal.Body>
         <Modal.Footer>
