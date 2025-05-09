@@ -21,13 +21,13 @@ const modalPositionVariants = {
 
 const modalSizeVariants = {
   small: {
-    width: "320px",
+    width: "40%",
   },
   medium: {
-    width: "480px",
+    width: "60%",
   },
   large: {
-    width: "600px",
+    width: "80%",
   },
 };
 
