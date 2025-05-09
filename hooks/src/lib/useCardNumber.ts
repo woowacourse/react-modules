@@ -20,6 +20,8 @@ const getCardBrand = (value: string) => {
   const number = Number(value.slice(0, 2));
   if (number <= 55 && number >= 51) return "MasterCard";
 
+  if (number === 36) return "Diners";
+
   return "none";
 };
 
@@ -63,6 +65,10 @@ export default function useCardNumber(
     if (getCardBrand(value) === "MasterCard") {
       validateCardNumberLength(value, 16);
       return;
+    }
+
+    if (getCardBrand(value) === "Diners") {
+      validateCardNumberLength(value, 14);
     }
   };
 

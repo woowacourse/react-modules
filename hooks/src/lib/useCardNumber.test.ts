@@ -56,7 +56,7 @@ describe("useCardNumber 테스트", () => {
   });
 
   describe("브랜드 식별", () => {
-    test("cardNumber가 4로 시작할 경우 Visa 카드를 반환한다.", () => {
+    test("cardNumber가 4로 시작할 경우 Visa를 반환한다.", () => {
       const { result, rerender } = renderHook(() => useCardNumber());
 
       changeCardNumber(result, rerender, "4");
@@ -65,13 +65,24 @@ describe("useCardNumber 테스트", () => {
     });
 
     test.each([["51"], ["5311"], ["55111111"]])(
-      "cardNumber 첫 두 자리가 51~55인 경우 MasterCard 카드를 반환한다.",
+      "cardNumber 첫 두 자리가 51~55인 경우 MasterCard를 반환한다.",
       (cardNumber) => {
         const { result, rerender } = renderHook(() => useCardNumber());
 
         changeCardNumber(result, rerender, cardNumber);
 
         expect(result.current.cardBrand()).toBe("MasterCard");
+      }
+    );
+
+    test.each([["36"], ["3611"]])(
+      "cardNumber가 36으로 시작하면 Diners를 반환한다.",
+      (cardNumber) => {
+        const { result, rerender } = renderHook(() => useCardNumber());
+
+        changeCardNumber(result, rerender, cardNumber);
+
+        expect(result.current.cardBrand()).toBe("Diners");
       }
     );
   });
@@ -102,6 +113,17 @@ describe("useCardNumber 테스트", () => {
         expect(result.current.isValid).toBeFalsy();
       }
     );
+
+    test.each([["3611"], ["3611111111111"]])(
+      "diners 카드는 14자리 미만인 경우 에러가 발생한다.",
+      (cardNumber) => {
+        const { result, rerender } = renderHook(() => useCardNumber());
+
+        changeCardNumber(result, rerender, cardNumber);
+
+        expect(result.current.isValid).toBeFalsy();
+      }
+    );
   });
 
   describe("포맷", () => {
@@ -111,6 +133,20 @@ describe("useCardNumber 테스트", () => {
       ["55111", "5511 1"],
     ])(
       "visa/master 카드는 4자리씩 띄어서 반환한다.",
+      (cardNumber, formattedCardNumber) => {
+        const { result, rerender } = renderHook(() => useCardNumber());
+
+        changeCardNumber(result, rerender, cardNumber);
+
+        expect(result.current.formatCardNumber()).toBe(formattedCardNumber);
+      }
+    );
+
+    test.each([
+      ["36111111111111", "3611 111111 1111"],
+      ["3611111", "3611 111"],
+    ])(
+      "visa/master 카드는 4/6/4자리씩 띄어서 반환한다.",
       (cardNumber, formattedCardNumber) => {
         const { result, rerender } = renderHook(() => useCardNumber());
 
