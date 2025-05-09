@@ -12,7 +12,6 @@ function App() {
       <Modal isOpen={isOpen} onClose={() => setIsOpen(false)}>
         <Modal.Overlay />
         <Modal.Content>
-          <Modal.CloseButton />
           <p>모달열림</p>
         </Modal.Content>
       </Modal>

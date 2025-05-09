@@ -1,6 +1,7 @@
 import styled from '@emotion/styled';
 import useEscapeKeyClose from './hooks/useEscapePress';
 import { createContext, useContext } from 'react';
+import CloseIconButton from './components/CloseIconButton';
 
 interface BaseProps {
   children?: React.ReactNode;
@@ -9,6 +10,10 @@ interface BaseProps {
 interface ModalProps extends BaseProps {
   isOpen: boolean;
   onClose: () => void;
+}
+
+interface ModalContentProps extends BaseProps {
+  hasTopCloseButton?: boolean;
 }
 
 const ModalContext = createContext<{ onClose: () => void }>({ onClose: () => {} });
@@ -33,17 +38,14 @@ const Overlay = () => {
   return <ModalOverlay data-testid="modal-overlay" onClick={onClose} />;
 };
 
-const Content = ({ children }: BaseProps) => {
-  return <ModalContent>{children}</ModalContent>;
-};
-
-const CloseButton = () => {
+const Content = ({ children, hasTopCloseButton = true }: ModalContentProps) => {
   const { onClose } = useContext(ModalContext);
 
   return (
-    <div data-testid="modal-close" onClick={() => onClose()}>
-      모달닫기
-    </div>
+    <ModalContent>
+      {hasTopCloseButton && <CloseIconButton data-testid="modal-close" onClick={() => onClose()} />}
+      {children}
+    </ModalContent>
   );
 };
 
@@ -53,7 +55,6 @@ const Title = ({ title }: { title: string }) => {
 
 Modal.Overlay = Overlay;
 Modal.Content = Content;
-Modal.CloseButton = CloseButton;
 Modal.Title = Title;
 
 export default Modal;
@@ -69,9 +70,6 @@ const ModalContent = styled.div`
   padding: 24px 32px;
   border-radius: 8px;
   color: #000;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
 `;
 
 const ModalOverlay = styled.div`
@@ -86,4 +84,5 @@ const ModalOverlay = styled.div`
 const TitleText = styled.p`
   font-size: 18px;
   font-weight: bold;
+  margin-bottom: 5px;
 `;
