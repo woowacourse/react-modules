@@ -16,6 +16,10 @@ type CardBrandType =
 
 const getCardBrand = (value: string) => {
   if (value[0] === "4") return "Visa";
+
+  const number = Number(value.slice(0, 2));
+  if (number <= 55 && number >= 51) return "MasterCard";
+
   return "none";
 };
 
@@ -24,7 +28,25 @@ export default function useCardNumber(
 ) {
   const [cardNumber, setCardNumber] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
-  const isValid = errorMessage === "";
+  const isValid = !errorMessage;
+
+  const validateCardNumberLength = (
+    value: string,
+    cardNumberLength: number
+  ) => {
+    if (value.length > cardNumberLength) {
+      return;
+    }
+
+    setCardNumber(value);
+
+    if (value.length < cardNumberLength) {
+      setErrorMessage(`${cardNumberLength}자리를 입력해 주세요.`);
+      return;
+    }
+
+    setErrorMessage("");
+  };
 
   const handleCardNumberChange = (
     event: React.ChangeEvent<HTMLInputElement>
@@ -34,18 +56,13 @@ export default function useCardNumber(
     if (!numberRegex.test(value)) return;
 
     if (getCardBrand(value) === "Visa") {
-      if (value.length > 16) {
-        return;
-      }
+      validateCardNumberLength(value, 16);
+      return;
+    }
 
-      setCardNumber(value);
-
-      if (value.length < 16) {
-        setErrorMessage("16자리를 입력해 주세요.");
-        return;
-      }
-
-      setErrorMessage("");
+    if (getCardBrand(value) === "MasterCard") {
+      validateCardNumberLength(value, 16);
+      return;
     }
   };
 
@@ -69,7 +86,7 @@ export default function useCardNumber(
       start += len;
     }
 
-    return result;
+    return result.join(" ").trim();
   };
 
   const cardBrand = () => {

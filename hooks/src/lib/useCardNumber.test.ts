@@ -63,44 +63,61 @@ describe("useCardNumber 테스트", () => {
 
       expect(result.current.cardBrand()).toBe("Visa");
     });
+
+    test.each([["51"], ["5311"], ["55111111"]])(
+      "cardNumber 첫 두 자리가 51~55인 경우 MasterCard 카드를 반환한다.",
+      (cardNumber) => {
+        const { result, rerender } = renderHook(() => useCardNumber());
+
+        changeCardNumber(result, rerender, cardNumber);
+
+        expect(result.current.cardBrand()).toBe("MasterCard");
+      }
+    );
   });
 
   describe("유효성 검증", () => {
-    test("visa 카드일 경우 16자리일 경우 에러가 발생하지 않는다.", () => {
-      const { result, rerender } = renderHook(() => useCardNumber());
+    test.each([
+      ["4111111111111111"],
+      ["5111111111111111"],
+      ["5511111111111111"],
+    ])(
+      "visa/master 카드는 16자리일 경우 에러가 발생하지 않는다.",
+      (cardNumber) => {
+        const { result, rerender } = renderHook(() => useCardNumber());
 
-      changeCardNumber(result, rerender, "4111111111111111");
+        changeCardNumber(result, rerender, cardNumber);
 
-      expect(result.current.isValid).toBeTruthy();
-    });
+        expect(result.current.isValid).toBeTruthy();
+      }
+    );
 
-    test("visa 카드일 경우 12자리 미만일 시 에러가 발생한다.", () => {
-      const { result, rerender } = renderHook(() => useCardNumber());
+    test.each([["411111111111111"], ["51111111111111"], ["551111111111"]])(
+      "visa/master 카드는 16자리 미만인 경우 에러가 발생한다.",
+      (cardNumber) => {
+        const { result, rerender } = renderHook(() => useCardNumber());
 
-      changeCardNumber(result, rerender, "4");
+        changeCardNumber(result, rerender, cardNumber);
 
-      expect(result.current.isValid).toBeFalsy();
-    });
+        expect(result.current.isValid).toBeFalsy();
+      }
+    );
   });
 
   describe("포맷", () => {
-    test("visa 카드를 입력할 경우 4자리씩 띄어서 반환한다.", () => {
-      const { result, rerender } = renderHook(() => useCardNumber());
-      changeCardNumber(result, rerender, "4111111111111111");
+    test.each([
+      ["4111111111111111", "4111 1111 1111 1111"],
+      ["51111111", "5111 1111"],
+      ["55111", "5511 1"],
+    ])(
+      "visa/master 카드는 4자리씩 띄어서 반환한다.",
+      (cardNumber, formattedCardNumber) => {
+        const { result, rerender } = renderHook(() => useCardNumber());
 
-      expect(result.current.formatCardNumber()).toEqual([
-        "4111",
-        "1111",
-        "1111",
-        "1111",
-      ]);
-    });
+        changeCardNumber(result, rerender, cardNumber);
 
-    test("visa 카드를 입력할 경우 4자리씩 띄어서 반환한다.", () => {
-      const { result, rerender } = renderHook(() => useCardNumber());
-      changeCardNumber(result, rerender, "411111");
-
-      expect(result.current.formatCardNumber()).toEqual(["4111", "11", "", ""]);
-    });
+        expect(result.current.formatCardNumber()).toBe(formattedCardNumber);
+      }
+    );
   });
 });
