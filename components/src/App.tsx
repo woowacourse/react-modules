@@ -26,7 +26,9 @@ function App() {
           default로 제공되는 모달 title 사용시 <br />
           close 버튼과 폰트가 적용되어 보입니다
         </Modal.Content>
-        <Modal.Footer>모달 하단 내용</Modal.Footer>
+        <Modal.Footer>
+          <Modal.AlertButton />
+        </Modal.Footer>
       </Modal>
       <Modal
         position="center"

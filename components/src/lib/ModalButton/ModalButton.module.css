@@ -1,0 +1,19 @@
+.alertButtonContainer {
+  width: 100%;
+  display: flex;
+  justify-content: right;
+  align-items: center;
+}
+
+.alertButton {
+  width: 80;
+  height: 36;
+  border-radius: 5px;
+  background-color: #333333;
+  color: white;
+  font-family: Noto Sans KR;
+  font-weight: 700;
+  font-size: 15px;
+  text-align: center;
+  vertical-align: middle;
+}
