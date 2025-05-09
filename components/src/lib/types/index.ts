@@ -45,3 +45,9 @@ export interface ModalAlertContainerProps extends ModalContainerProps {
   title?: string;
   description?: string;
 }
+
+export interface ModalConfirmContainerProps extends ModalContainerProps {
+  title?: string;
+  description?: string;
+  onClick?: () => void;
+}

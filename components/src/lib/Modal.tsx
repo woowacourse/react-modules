@@ -7,6 +7,7 @@ import {
   ModalContainerProps,
   ModalButtonProps,
   ModalAlertContainerProps,
+  ModalConfirmContainerProps,
 } from "./types";
 import {
   backGroundStyle,
@@ -121,7 +122,6 @@ Modal.Trigger = ({ children }: BaseProps) => {
 
 /** 커스텀 모달 Container */
 /**확인(Alert) 모달 */
-
 Modal.AlertContainer = ({ title, description, ...props }: ModalAlertContainerProps) => {
   return (
     <Modal.Container {...props}>
@@ -138,4 +138,25 @@ Modal.AlertContainer = ({ title, description, ...props }: ModalAlertContainerPro
   );
 };
 
+/**확인/취소(Confirm) 모달 */
+Modal.ConfirmContainer = ({ title, description, onClick, ...props }: ModalConfirmContainerProps) => {
+  return (
+    <Modal.Container {...props}>
+      {title && (
+        <Modal.Header>
+          <Modal.Title>{title}</Modal.Title>
+        </Modal.Header>
+      )}
+      {description && <Modal.Body>{description}</Modal.Body>}
+      <Modal.Footer style={{ display: "flex", gap: "12px", justifyContent: "flex-end" }}>
+        <Modal.Trigger>
+          <Modal.Button color="rgba(51, 51, 51, 0.75)" backgroundColor="#fff" borderColor="rgba(51, 51, 51, 0.25)">
+            취소
+          </Modal.Button>
+          <Modal.Button onClick={onClick}>확인</Modal.Button>
+        </Modal.Trigger>
+      </Modal.Footer>
+    </Modal.Container>
+  );
+};
 export default Modal;
