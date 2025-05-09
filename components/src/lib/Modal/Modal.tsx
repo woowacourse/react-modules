@@ -130,7 +130,7 @@ const Container = styled.div<{ position: "center" | "bottom"; size: "small" | "m
 	padding: 24px 32px;
 	border-radius: 8px;
 	width: ${(props) => WIDTH_MAP[props.size]};
-	position: ${(props) => (props.position === "bottom" ? "fixed" : "relative")};
+	position: ${(props) => (props.position === "bottom" ? "absolute" : "relative")};
 	bottom: ${(props) => (props.position === "bottom" ? "0" : "auto")};
 `;
 
