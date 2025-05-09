@@ -11,10 +11,10 @@ jobs:
         with:
           fetch-depth: 0
       - run: npm install
-        working-directory: components
+        working-directory: pesu-components
 
       - uses: chromaui/action@latest
         with:
           projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
           token: ${{ secrets.GITHUB_TOKEN }}
-          workingDir: components
+          workingDir: pesu-components
