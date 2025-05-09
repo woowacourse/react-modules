@@ -61,28 +61,31 @@ const AlertContent = ({
   children,
   hasTopCloseButton = true,
   position = 'center',
-  onAlert,
-  alertButtonText = '확인',
-  alertButtonColor = '#fff',
-  alertButtonBackgroundColor = '#333',
+  alertButton = {},
   ...props
 }: AlertContentProps) => {
   const { onClose } = useContext(ModalContext);
 
+  const {
+    text = '확인',
+    color = '#fff',
+    backgroundColor = '#333',
+    onClick = onClose,
+  } = alertButton;
+
   return (
     <S.ModalContent
       position={position}
-      style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'space-between',
+      }}
       {...props}>
-      {hasTopCloseButton && <CloseIconButton data-testid="modal-close" onClick={() => onClose()} />}
+      {hasTopCloseButton && <CloseIconButton data-testid="modal-close" onClick={onClose} />}
       {children}
       <ButtonContainer>
-        <TextButton
-          text={alertButtonText}
-          color={alertButtonColor}
-          backgroundColor={alertButtonBackgroundColor}
-          onClick={onAlert ? onAlert : onClose}
-        />
+        <TextButton text={text} color={color} backgroundColor={backgroundColor} onClick={onClick} />
       </ButtonContainer>
     </S.ModalContent>
   );
