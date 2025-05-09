@@ -20,20 +20,18 @@ function AlertModal({
   alertActionsWidth,
 }: AlertModalProps) {
   return (
-    <>
-      <Modal isOpen={isOpen}>
-        <Modal.Overlay onClick={onCloseClick} />
-        <Modal.Content position="center" size={size}>
-          <Modal.Title>{title}</Modal.Title>
-          <Modal.Body>{content}</Modal.Body>
-          <Modal.AlertActions
-            width={alertActionsWidth}
-            onCancelClick={onCloseClick}
-            onConfirmClick={onConfirmClick}
-          />
-        </Modal.Content>
-      </Modal>
-    </>
+    <Modal isOpen={isOpen}>
+      <Modal.Overlay onClick={onCloseClick} />
+      <Modal.Content position="center" size={size}>
+        <Modal.Title>{title}</Modal.Title>
+        <Modal.Body>{content}</Modal.Body>
+        <Modal.AlertActions
+          width={alertActionsWidth}
+          onCancelClick={onCloseClick}
+          onConfirmClick={onConfirmClick}
+        />
+      </Modal.Content>
+    </Modal>
   );
 }
 
