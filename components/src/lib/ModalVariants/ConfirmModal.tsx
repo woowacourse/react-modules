@@ -22,14 +22,13 @@ function ConfirmModal({
         onClose={onClose}
         onConfirm={onConfirm}
         hasTopCloseButton={false}
-        primaryButton={true}
-        primaryButtonText="취소"
-        secondaryButton={true}
-        secondaryButtonText="확인"
       >
         <Modal.Header>{title}</Modal.Header>
         <Modal.Body>{content}</Modal.Body>
-        <Modal.Footer />
+        <Modal.Footer>
+          <Modal.PrimaryButton>취소</Modal.PrimaryButton>
+          <Modal.SecondaryButton>확인</Modal.SecondaryButton>
+        </Modal.Footer>
       </Modal>
     </>
   );
