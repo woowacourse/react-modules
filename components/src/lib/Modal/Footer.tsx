@@ -3,7 +3,7 @@ import Button from "../common/Button";
 import { Position, useModalContext } from "../useModalContext";
 import { ReactNode } from "react";
 
-const Footer = ({ children }: { children: ReactNode }) => {
+const Footer = ({ children }: { children?: ReactNode }) => {
   const { position } = useModalContext();
 
   return <ButtonContainer position={position}>{children}</ButtonContainer>;

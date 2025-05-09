@@ -17,16 +17,12 @@ function AlertModal({
 }: AlertModalProps) {
   return (
     <>
-      <Modal
-        isOpen={isOpen}
-        onClose={onClose}
-        onConfirm={onConfirm}
-        secondaryButton={true}
-        secondaryButtonText="확인"
-      >
+      <Modal isOpen={isOpen} onClose={onClose} onConfirm={onConfirm}>
         <Modal.Header>{title}</Modal.Header>
         <Modal.Body>{content}</Modal.Body>
-        <Modal.Footer />
+        <Modal.Footer>
+          <Modal.SecondaryButton>확인</Modal.SecondaryButton>
+        </Modal.Footer>
       </Modal>
     </>
   );
