@@ -51,3 +51,10 @@ export interface ModalConfirmContainerProps extends ModalContainerProps {
   description?: string;
   onClick?: () => void;
 }
+
+export interface ModalPromptContainerProps extends ModalContainerProps {
+  title?: string;
+  value?: string | number | readonly string[];
+  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  onClick?: () => void;
+}

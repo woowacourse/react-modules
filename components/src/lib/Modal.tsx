@@ -8,6 +8,7 @@ import {
   ModalButtonProps,
   ModalAlertContainerProps,
   ModalConfirmContainerProps,
+  ModalPromptContainerProps,
 } from "./types";
 import {
   backGroundStyle,
@@ -166,4 +167,29 @@ Modal.ConfirmContainer = ({ title, description, onClick, ...props }: ModalConfir
     </Modal.Container>
   );
 };
+
+/**입력(Prompt) 모달 */
+Modal.PromptContainer = ({ title, value, onChange, onClick, ...props }: ModalPromptContainerProps) => {
+  return (
+    <Modal.Container {...props}>
+      {title && (
+        <Modal.Header>
+          <Modal.Title>{title}</Modal.Title>
+        </Modal.Header>
+      )}
+      <Modal.Body>
+        <Modal.Input value={value} onChange={onChange} />
+      </Modal.Body>
+      <Modal.Footer style={{ display: "flex", gap: "12px", justifyContent: "flex-end" }}>
+        <Modal.Trigger>
+          <Modal.Button color="rgba(51, 51, 51, 0.75)" backgroundColor="#fff" borderColor="rgba(51, 51, 51, 0.25)">
+            취소
+          </Modal.Button>
+          <Modal.Button onClick={onClick}>확인</Modal.Button>
+        </Modal.Trigger>
+      </Modal.Footer>
+    </Modal.Container>
+  );
+};
+
 export default Modal;
