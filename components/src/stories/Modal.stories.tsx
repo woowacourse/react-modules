@@ -129,10 +129,19 @@ export const ConfirmModal: Story = {
 export const PromptModal: Story = {
   render: () => {
     const [isOpen, setIsOpen] = useState(true);
+    const [inputValue, setInputValue] = useState('');
+
     return (
       <Modal isOpen={isOpen} onClose={() => setIsOpen(false)}>
         <Modal.Overlay closeOnClick={false} />
-        <Modal.PromptContent>
+        <Modal.PromptContent
+          inputValue={inputValue}
+          setInputValue={setInputValue}
+          confirmButton={{
+            onClick: () => {
+              alert('입력된 정보: ' + inputValue);
+            },
+          }}>
           <Modal.Title title="쿠폰 번호를 입력해 주세요." />
         </Modal.PromptContent>
       </Modal>

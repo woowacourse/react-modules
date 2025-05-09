@@ -37,6 +37,13 @@ export interface ConfirmContentProps extends ModalContentProps {
   cancelButton?: ButtonProps;
 }
 
+export interface PromptContentProps extends ModalContentProps {
+  inputValue: string;
+  setInputValue: React.Dispatch<React.SetStateAction<string>>;
+  confirmButton?: ButtonProps;
+  cancelButton?: ButtonProps;
+}
+
 export interface ButtonContainerProps extends BaseProps {
   direction?: Direction;
 }

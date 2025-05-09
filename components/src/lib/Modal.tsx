@@ -11,6 +11,7 @@ import {
   ModalProps,
   OverlayProps,
   Position,
+  PromptContentProps,
 } from './types/Props';
 import TextButton from './components/TextButton';
 
@@ -144,6 +145,62 @@ const ConfirmContent = ({
   );
 };
 
+const PromptContent = ({
+  inputValue,
+  setInputValue,
+  children,
+  hasTopCloseButton = true,
+  position = 'center',
+  confirmButton = {},
+  cancelButton = {},
+  ...props
+}: PromptContentProps) => {
+  const { onClose } = useContext(ModalContext);
+
+  const {
+    text: confirmText = '확인',
+    color: confirmColor = '#fff',
+    backgroundColor: confirmBackgroundColor = '#333',
+    onClick: onConfirmClick = onClose,
+  } = confirmButton;
+
+  const {
+    text: cancelText = '취소',
+    color: cancelColor = '#8B95A1',
+    backgroundColor: cancelBackgroundColor = 'transparent',
+    onClick: onCancelClick = onClose,
+  } = cancelButton;
+
+  return (
+    <S.ModalContent
+      position={position}
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'space-between',
+      }}
+      {...props}>
+      {hasTopCloseButton && <CloseIconButton data-testid="modal-close" onClick={onClose} />}
+      {children}
+      <S.Input value={inputValue} onChange={(e) => setInputValue(e.target.value)} />
+      <ButtonContainer>
+        <TextButton
+          text={cancelText}
+          color={cancelColor}
+          backgroundColor={cancelBackgroundColor}
+          onClick={onCancelClick}
+        />
+        <TextButton
+          text={confirmText}
+          color={confirmColor}
+          backgroundColor={confirmBackgroundColor}
+          onClick={onConfirmClick}
+        />
+      </ButtonContainer>
+    </S.ModalContent>
+  );
+};
+
 const ButtonContainer = ({ children, direction = 'row' }: ButtonContainerProps) => {
   return <S.ButtonContainerStyle direction={direction}>{children}</S.ButtonContainerStyle>;
 };
@@ -156,6 +213,7 @@ Modal.Overlay = Overlay;
 Modal.Content = Content;
 Modal.AlertContent = AlertContent;
 Modal.ConfirmContent = ConfirmContent;
+Modal.PromptContent = PromptContent;
 Modal.Title = Title;
 
 export default Modal;
@@ -208,5 +266,11 @@ const S = {
     & > button {
       ${({ direction }) => direction === 'row' && `width: auto;`}
     }
+  `,
+
+  Input: styled.input`
+    border: 2px solid black;
+    border-radius: 2px;
+    padding: 8px;
   `,
 };
