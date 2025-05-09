@@ -110,3 +110,18 @@ export const AlertModal: Story = {
     );
   },
 };
+
+export const ConfirmModal: Story = {
+  render: () => {
+    const [isOpen, setIsOpen] = useState(true);
+    return (
+      <Modal isOpen={isOpen} onClose={() => setIsOpen(false)}>
+        <Modal.Overlay closeOnClick={false} />
+        <Modal.ConfirmContent>
+          <Modal.Title title="카드를 삭제하시겠습니까?" />
+          <p>삭제하면 복구하실 수 없습니다.</p>
+        </Modal.ConfirmContent>
+      </Modal>
+    );
+  },
+};
