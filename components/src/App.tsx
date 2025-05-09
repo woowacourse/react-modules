@@ -1,6 +1,4 @@
-import AlertModal from "./lib/AlertModal/AlertModal";
-import ConfirmModal from "./lib/ConfirmModal/ConfirmModal";
-import PromptModal from "./lib/PromptModal/PromptModal";
+import { AlertModal, ConfirmModal, PromptModal } from "./lib";
 import "./styles/reset.css";
 import "./App.css";
 import { useState } from "react";
