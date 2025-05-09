@@ -7,7 +7,8 @@ import useModalKeyboard from './hooks/useModalKeyboard';
 import { ModalProvider, useModalContext } from './ModalContext';
 import ConfirmButton from './components/ConfirmButton';
 import CancelButton from './components/CancelButton';
-const Modal = ({ children, position, isOpen, onClose, onAfterOpen }: ModalProps) => {
+
+const Modal = ({ children, position, isOpen, onClose, onAfterOpen, type }: ModalProps) => {
   if (!isOpen) return null;
 
   useEffect(() => {
@@ -23,7 +24,7 @@ const Modal = ({ children, position, isOpen, onClose, onAfterOpen }: ModalProps)
           {children}
           {Children.toArray(children).every((child) => isValidElement(child) && child.type !== Modal.Actions) && (
             <div className={ButtonBar}>
-              <CancelButton />
+              {(type === 'confirm' || type === 'prompt') && <CancelButton />}
               <ConfirmButton />
             </div>
           )}

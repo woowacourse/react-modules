@@ -27,7 +27,7 @@ function App() {
       <button className={OpenButton} onClick={handleOpen}>
         열기
       </button>
-      <Modal isOpen={isOpen} position="center" onAfterOpen={handleAfterOpen} onClose={handleClose}>
+      <Modal isOpen={isOpen} position="center" onAfterOpen={handleAfterOpen} onClose={handleClose} type="prompt">
         <Modal.Header title="알림" showCloseButton />
         <Modal.Body>
           <ModalContent />

@@ -1,7 +1,7 @@
 import { ReactNode } from 'react';
 
 type Position = 'center' | 'bottom';
-
+type ModalType = 'confirm' | 'alert' | 'prompt';
 interface ModalProps {
   children: ReactNode;
   isOpen: boolean;
@@ -10,6 +10,7 @@ interface ModalProps {
   onAfterOpen?: () => void;
   title?: string;
   showCloseButton?: boolean;
+  type?: ModalType;
 }
 
 export type { Position, ModalProps };
