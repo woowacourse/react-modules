@@ -4,7 +4,6 @@ import Modal from './Modal';
 import Button from '../common/Button/Button';
 
 const meta: Meta<typeof Modal> = {
-  tags: ['autodocs'],
   component: Modal,
 };
 
@@ -12,14 +11,14 @@ export default meta;
 type Story = StoryObj<typeof Modal>;
 
 export const AlertModal: Story = {
-  render: () => {
+  render: (args) => {
     return (
       <Modal.Wrapper>
         <Modal.Trigger>
           <Button>모달 열기</Button>
         </Modal.Trigger>
 
-        <Modal>
+        <Modal {...args}>
           <Modal.Top>
             <Modal.Title>아이디를 입력해 주세요.</Modal.Title>
           </Modal.Top>
@@ -36,14 +35,14 @@ export const AlertModal: Story = {
 };
 
 export const ConfirmModal: Story = {
-  render: () => {
+  render: (args) => {
     return (
       <Modal.Wrapper>
         <Modal.Trigger>
           <Button>모달 열기</Button>
         </Modal.Trigger>
 
-        <Modal>
+        <Modal {...args}>
           <Modal.Top>
             <Modal.Title>카드를 삭제하시겠습니까?</Modal.Title>
           </Modal.Top>
@@ -61,14 +60,14 @@ export const ConfirmModal: Story = {
 };
 
 export const PromptModal: Story = {
-  render: () => {
+  render: (args) => {
     return (
       <Modal.Wrapper>
         <Modal.Trigger>
           <Button>모달 열기</Button>
         </Modal.Trigger>
 
-        <Modal>
+        <Modal {...args}>
           <Modal.Top>
             <Modal.Title>쿠폰 번호를 입력해 주세요.</Modal.Title>
           </Modal.Top>
@@ -88,14 +87,14 @@ export const PromptModal: Story = {
 };
 
 export const SmallModal: Story = {
-  render: () => {
+  render: (args) => {
     return (
       <Modal.Wrapper>
         <Modal.Trigger>
           <Button>모달 열기</Button>
         </Modal.Trigger>
 
-        <Modal size="small">
+        <Modal {...args} size="small">
           <Modal.Top>
             <Modal.Title>약관에 동의해 주세요</Modal.Title>
             <Modal.Close>
@@ -118,14 +117,14 @@ export const SmallModal: Story = {
 };
 
 export const MediumModal: Story = {
-  render: () => {
+  render: (args) => {
     return (
       <Modal.Wrapper>
         <Modal.Trigger>
           <Button>모달 열기</Button>
         </Modal.Trigger>
 
-        <Modal size="medium">
+        <Modal {...args} size="medium">
           <Modal.Top>
             <Modal.Title>약관에 동의해 주세요</Modal.Title>
             <Modal.Close>
@@ -148,14 +147,14 @@ export const MediumModal: Story = {
 };
 
 export const LargeModal: Story = {
-  render: () => {
+  render: (args) => {
     return (
       <Modal.Wrapper>
         <Modal.Trigger>
           <Button>모달 열기</Button>
         </Modal.Trigger>
 
-        <Modal size="large">
+        <Modal {...args} size="large">
           <Modal.Top>
             <Modal.Title>약관에 동의해 주세요</Modal.Title>
             <Modal.Close>

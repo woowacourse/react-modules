@@ -32,12 +32,12 @@ const ModalContext = createContext<ModalContext>({
 export interface ModalInterface {
   /** 모달의 위치 (center | bottom) */
   position?: 'center' | 'bottom';
-  /** 모달의 좌우 여백(px) */
-  margin?: number;
   /** 모달의 z-index 값 */
   zIndex?: number;
   /** 모달의 크기 (small | medium | large) */
   size?: 'small' | 'medium' | 'large';
+  /** 배경 클릭 시 모달 닫기 여부 */
+  isBackdropClose?: boolean;
 }
 
 function Wrapper({ children }: { children: ReactNode }) {
@@ -61,9 +61,9 @@ Wrapper.displayName = 'ModalWrapper';
 function ModalMain({
   children,
   position = 'center',
-  margin = 20,
   zIndex = 10,
   size = 'medium',
+  isBackdropClose = false,
 }: PropsWithChildren<ModalInterface>) {
   const { isOpen, close } = useContext(ModalContext);
 
@@ -74,10 +74,10 @@ function ModalMain({
       {isOpen &&
         createPortal(
           <>
-            <S.ModalContainer position={position} margin={margin} zIndex={zIndex} size={size} ref={modalRef}>
+            <S.ModalContainer position={position} zIndex={zIndex} size={size} ref={modalRef}>
               {children}
             </S.ModalContainer>
-            <S.ModalBackdrop onClick={close} />
+            <S.ModalBackdrop onClick={isBackdropClose ? close : undefined} />
           </>,
           document.body,
         )}
@@ -156,7 +156,14 @@ function CancelButton({ children }: { children: ReactNode }) {
 CancelButton.displayName = 'ModalCancelButton';
 
 function ConfirmButton({ ...props }: ButtonProps) {
-  return <Button {...props} />;
+  const { close } = useContext(ModalContext);
+
+  const handleConfirmButtonClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    close();
+    props.onClick?.(event);
+  };
+
+  return <Button onClick={handleConfirmButtonClick} {...props} />;
 }
 ConfirmButton.displayName = 'ModalConfirmButton';
 

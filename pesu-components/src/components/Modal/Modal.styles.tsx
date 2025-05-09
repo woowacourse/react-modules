@@ -17,7 +17,7 @@ const getModalWidth = (size: 'small' | 'medium' | 'large', position: 'center' | 
   }
 };
 
-export const ModalContainer = styled.div<Pick<ModalInterface, 'position' | 'margin' | 'zIndex' | 'size'>>`
+export const ModalContainer = styled.div<Pick<ModalInterface, 'position' | 'zIndex' | 'size'>>`
   width: ${(props) => getModalWidth(props.size ?? 'medium', props.position ?? 'center')};
   box-sizing: border-box;
   height: fit-content;
