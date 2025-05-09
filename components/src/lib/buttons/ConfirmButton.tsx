@@ -6,14 +6,15 @@ interface ConfirmButtonProps extends React.ComponentProps<typeof ModalButton> {
   onHide: () => void;
 }
 
-const ConfirmButton = ({ children = "확인", onConfirm, onHide, ...rest }: ConfirmButtonProps) => {
+const ConfirmButton = ({ children = "확인", onConfirm, onHide, disabled, ...rest }: ConfirmButtonProps) => {
   const handleClick = () => {
+    if (disabled) return;
     onConfirm?.(); // 사용자 정의 동작
     onHide(); // 모달 닫기
   };
 
   return (
-    <ModalButton css={ConfirmButtonStyle} onClick={handleClick} {...rest}>
+    <ModalButton css={ConfirmButtonStyle(disabled)} onClick={handleClick} disabled={disabled} {...rest}>
       {children}
     </ModalButton>
   );

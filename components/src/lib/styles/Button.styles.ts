@@ -1,15 +1,15 @@
 import { css } from "@emotion/react";
 
-export const ConfirmButtonStyle = css`
+export const ConfirmButtonStyle = (disabled?: boolean) => css`
   border: 0;
-  background-color: #333333;
-  color: #ffffff;
+  background-color: ${disabled ? "#ccc" : "#333333"};
+  color: ${disabled ? "#666" : "#ffffff"};
   /* width: 80px; */
   padding-left: 18px;
   padding-right: 18px;
   height: 36px;
   border-radius: 5px;
-  cursor: pointer;
+  cursor: ${disabled ? "not-allowed" : "pointer"};
 `;
 
 export const CancelButtonStyle = css`

@@ -5,9 +5,9 @@ export interface ModalButtonProps extends React.ButtonHTMLAttributes<HTMLButtonE
   css?: any;
 }
 
-const ModalButton = ({ children, css: overrideCss, ...rest }: ModalButtonProps) => {
+const ModalButton = ({ children, css: overrideCss, disabled, ...rest }: ModalButtonProps) => {
   return (
-    <button {...rest} css={[baseButtonStyle, overrideCss]}>
+    <button {...rest} css={[baseButtonStyle, overrideCss]} disabled={disabled}>
       {children}
     </button>
   );
