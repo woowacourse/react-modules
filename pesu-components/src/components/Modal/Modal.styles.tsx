@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
-import { ModalInterface } from './Modal';
-import { Device } from '../../hooks/useDevice/type';
+import type { ModalInterface } from './Modal';
+import type { Device } from '../../hooks';
 
 const getModalWidth = (size: 'small' | 'medium' | 'large', position: 'center' | 'bottom') => {
   if (position === 'center') {

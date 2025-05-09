@@ -1,2 +1,2 @@
-export { default as useDevice } from './useDevice/useDevice';
-export { default as useAutoFocus } from './useAutoFocus/useAutoFocus';
+export * from './useDevice';
+export * from './useAutoFocus';
