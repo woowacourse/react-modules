@@ -27,6 +27,7 @@ function dynamicChunks(length: number, chunkSize = 4): number[] {
 /** 카드사별 포맷 규칙을 생성하는 헬퍼 */
 // 가변하는 카드사별 포맷을 생성할수 있지만,
 // 현재는 카드사별로 고정된 포맷을 사용하고 있음.
+// 카드사별 포맷을 생성하는 헬퍼는 나중에 사용하기 위해 남겨두고, 지금은 사용하지 않음.
 function createFormatRulesFromLengths(): Record<CardBrand, FormatRule> {
   const rules = {} as Record<CardBrand, FormatRule>;
   (Object.keys(CARD_NUMBER_LENGTH) as CardBrand[]).forEach((brand) => {
