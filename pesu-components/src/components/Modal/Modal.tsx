@@ -43,15 +43,8 @@ export interface ModalInterface {
   size?: 'small' | 'medium' | 'large';
 }
 
-function ModalMain({
-  children,
-  position = 'center',
-  margin = 20,
-  zIndex = 10,
-  size = 'medium',
-}: PropsWithChildren<ModalInterface>) {
+function Wrapper({ children }: { children: ReactNode }) {
   const [isOpen, setIsOpen] = useState(true);
-  const device = useDevice();
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
@@ -64,17 +57,32 @@ function ModalMain({
   const close = () => setIsOpen(false);
   const open = () => setIsOpen(true);
 
+  return <ModalContext.Provider value={{ isOpen, close, open }}>{children}</ModalContext.Provider>;
+}
+
+function ModalMain({
+  children,
+  position = 'center',
+  margin = 20,
+  zIndex = 10,
+  size = 'medium',
+}: PropsWithChildren<ModalInterface>) {
+  const device = useDevice();
+  const { isOpen, close, open } = useContext(ModalContext);
+
   return (
-    isOpen &&
-    createPortal(
-      <ModalContext.Provider value={{ isOpen, close, open }}>
-        <S.ModalContainer position={position} margin={margin} zIndex={zIndex} device={device} size={size}>
-          {children}
-        </S.ModalContainer>
-        <S.ModalBackdrop onClick={close} />
-      </ModalContext.Provider>,
-      document.body,
-    )
+    <>
+      {isOpen &&
+        createPortal(
+          <>
+            <S.ModalContainer position={position} margin={margin} zIndex={zIndex} device={device} size={size}>
+              {children}
+            </S.ModalContainer>
+            <S.ModalBackdrop onClick={close} />
+          </>,
+          document.body,
+        )}
+    </>
   );
 }
 /**
@@ -136,7 +144,13 @@ function ButtonContainer({ children }: { children: ReactNode }) {
 ButtonContainer.displayName = 'ModalButtonContainer';
 
 function CancelButton({ children }: { children: ReactNode }) {
-  return <Button variant="outline">{children}</Button>;
+  const { close } = useContext(ModalContext);
+
+  return (
+    <Button variant="outline" onClick={close}>
+      {children}
+    </Button>
+  );
 }
 CancelButton.displayName = 'ModalCancelButton';
 
@@ -146,6 +160,7 @@ function ConfirmButton({ ...props }: ButtonProps) {
 ConfirmButton.displayName = 'ModalConfirmButton';
 
 const Modal = Object.assign(ModalMain, {
+  Wrapper,
   Top,
   Title,
   Close,
