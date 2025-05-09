@@ -11,7 +11,7 @@
 - 모달
 - [x] 백드롭 해제시에도 백그라운드 누를 시, 모달 닫힘 구현
 - [x] 백드롭 내부 props 변경 및 구조 위치 변경
-- [ ] 새로운 타입의 모달 형태 구현 -> container 부분만 만들어준다. -> Modal과 Backdrop은 기존꺼 써야함.
+- [x] 새로운 타입의 모달 형태 구현 -> container 부분만 만들어준다. -> Modal과 Backdrop은 기존꺼 써야함.
   - [x] 확인(Alert) 모달: 사용자에게 메시지를 전달하고 확인 버튼만 제공
     - [x] props로 받아야할 것 - title / description
     - [x] 버튼 제작 (모달 전용) (기본값 - onClick, children / 기본 css - color,backgroundColor, borderColor, borderRadius, fontSize )
@@ -25,6 +25,8 @@
 - [x] 모달 크기 옵션 추가 (container)
   - [x] small, medium, large 등의 크기 옵션을 prop으로 전달받아 모달 크기 조절
 - [x] 모달 레이아웃 style 수정
+- [x] 모달 내부 자동 포커스 기능 구현
+  - [x] focusTrap wrapper 구현
 - [ ] 모달 컴포넌트 별 스토리 작성
 - [ ] 베포시) dependencies 제거 -> peer dependencies 설정
 - [ ] 컴포넌트 타입 재정의 - componentProps 이용 태그들 타입 재정의
