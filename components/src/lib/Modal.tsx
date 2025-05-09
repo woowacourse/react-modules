@@ -17,11 +17,12 @@ import {
   ModalContainerStyle,
   ModalFooterStyle,
   ModalHeaderStyle,
+  ModalInputStyle,
   ModalTitleStyle,
   ModalWrapperStyle,
 } from "./Modal.style";
 import ModalContext, { useModalContext } from "./contexts/ModalContext";
-import React, { HTMLAttributes } from "react";
+import React, { ComponentProps, HTMLAttributes } from "react";
 
 const Modal = ({ show, onHide, children, ...props }: ModalProps) => {
   useKeyEscClose(onHide);
@@ -101,6 +102,10 @@ Modal.Button = ({
       {children}
     </button>
   );
+};
+
+Modal.Input = (props: ComponentProps<"input">) => {
+  return <input css={ModalInputStyle} {...props} />;
 };
 
 Modal.Trigger = ({ children }: BaseProps) => {

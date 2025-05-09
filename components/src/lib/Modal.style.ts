@@ -83,6 +83,31 @@ export const ModalButtonStyle = (cssProps: ModalButtonCSSProps) => css`
   padding: 7px 21px;
 `;
 
+export const ModalInputStyle = css`
+  width: 100%;
+  display: flex;
+  padding: 8px;
+  align-items: center;
+  gap: 8px;
+  align-self: stretch;
+  border-radius: 2px;
+  border: 1.015px solid #000;
+  box-sizing: border-box;
+
+  &::placeholder {
+    font-weight: 400;
+    font-size: 11px;
+    line-height: 14.88px;
+    letter-spacing: 0%;
+    vertical-align: middle;
+    color: #acacac;
+  }
+
+  &:focus {
+    outline-color: #000000;
+  }
+`;
+
 export const getSizeStyle = (size: string) => {
   switch (size) {
     case "small":
