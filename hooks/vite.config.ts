@@ -9,7 +9,7 @@ export default defineConfig({
       entry: path.resolve(__dirname, "src/lib/index.ts"),
       name: "index",
       fileName: "index",
-      formats: ["es", "cjs"],
+      formats: ["es"],
     },
     rollupOptions: {
       // react/react-dom과 테스트 파일(.test/.spec, __tests__)은 external 처리

@@ -11,7 +11,12 @@ function App() {
         모달창 trigger
       </button>
 
-      <Modal isOpen={isOpen} onClose={() => setIsOpen(false)} position="bottom">
+      <Modal
+        isOpen={isOpen}
+        onClose={() => setIsOpen(false)}
+        position="bottom"
+        dialogType="default"
+      >
         <Modal.Background>
           <Modal.Container>
             <Modal.Header>중앙 모달 제목입니다</Modal.Header>

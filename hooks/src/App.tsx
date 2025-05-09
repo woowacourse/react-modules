@@ -1,15 +1,23 @@
-import React, { useCallback } from "react";
 import "./App.css";
 import { useCardValidation } from "./lib";
 
 function App() {
   const { card, cvc, expiry, password, network } = useCardValidation();
-
+  const { format } = useCardValidation({
+    formatOptions: { placeholderChar: "O", splitter: "-" },
+  });
   const handleCardNumberChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    card.onCardNumberChange(e);
-    network.onChange(e);
-  };
+    format.onCardNumberChange(e);
 
+    const digits = e.target.value.replace(/\D/g, "");
+
+    const sanitizedEvent = {
+      ...e,
+      target: { ...e.target, value: digits },
+    };
+    network.onCardNumberChange(sanitizedEvent);
+    card.onCardNumberChange(sanitizedEvent);
+  };
   return (
     <div className="App">
       <h1>카드 정보 입력</h1>
@@ -19,9 +27,10 @@ function App() {
           <input
             id="cardNumber"
             type="text"
-            value={card.cardNumber}
+            value={format.formatted}
             onChange={handleCardNumberChange}
-            placeholder="1234 5678 9012 3456"
+            maxLength={format.totalLength}
+            placeholder={format.placeholder}
           />
           {card.errorMessage && <p className="error">{card.errorMessage}</p>}
           {network.cardNetwork !== "DEFAULT" && (

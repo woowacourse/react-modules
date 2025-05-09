@@ -16,5 +16,6 @@
   },
   "include": [
     "src/lib/**/*" // 라이브러리 소스
-  ]
+  ],
+  "exclude": ["**/*.test.ts", "**/*.test.tsx", "**/*.stories.tsx"] // 테스트 파일, 빌드 결과물
 }
