@@ -179,8 +179,15 @@
       - [x] small
       - [x] medium
       - [x] large
-  - [ ] ConfirmModal
-    - [ ] 확인과 취소 버튼이 화면에 표시되는지
+  - [x] ConfirmModal
+    - [x] 확인과 취소 버튼이 화면에 표시되는지
+    - position
+      - [x] center일 때
+      - [x] bottom일 때
+    - size
+      - [x] small
+      - [x] medium
+      - [x] large
   - [ ] PromptModal
     - [ ] 입력 필드와 확인과 취소 버튼이 화면에 표시되는지
 

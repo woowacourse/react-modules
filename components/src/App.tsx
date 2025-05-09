@@ -3,6 +3,7 @@ import { Modal } from './lib';
 // import { Modal } from 'jurunghappy-modal';
 import './App.css';
 import AlertModal from './components/AlertModal/AlertModal';
+import ConfirmModal from './components/ConfirmModal/ConfirmModal';
 
 function App() {
   const [isOpen, setIsOpen] = useState(false);
@@ -16,7 +17,7 @@ function App() {
   return (
     <>
       <button onClick={() => setIsOpen(true)}>AlertModal Open</button>
-      <AlertModal
+      <ConfirmModal
         isOpen={isOpen}
         position="center"
         size="small"
