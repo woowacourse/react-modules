@@ -10,7 +10,7 @@ function App() {
     <>
       <button onClick={handleOpen}>Open</button>
       <Modal isOpen={isOpen} onClose={handleClose}>
-        <Modal.Content position="center" size="small">
+        <Modal.Content position="bottom" size="small">
           <Modal.Header direction="row" align="start" justify="start">
             <Modal.Title tag="h1" fontSize="25px" fontWeight="700">
               Title이다!

@@ -4,8 +4,9 @@ import { ModalContentProps } from "./ModalContent.types";
 
 const modalPositionVariants = {
   bottom: {
-    left: "0",
+    left: "50%",
     bottom: "0",
+    transform: "translateX(-50%)",
     width: "100%",
     borderTopLeftRadius: "8px",
     borderTopRightRadius: "8px",
