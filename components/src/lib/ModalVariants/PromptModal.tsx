@@ -7,7 +7,7 @@ interface PromptModalProps {
   onClose: () => void;
   onConfirm: () => void;
   title: string;
-  size: Size;
+  size?: Size;
 }
 
 function PromptModal({

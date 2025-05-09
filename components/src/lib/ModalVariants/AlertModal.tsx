@@ -6,7 +6,7 @@ interface AlertModalProps {
   onConfirm: () => void;
   title: string;
   content: string;
-  size: Size;
+  size?: Size;
 }
 
 function AlertModal({
