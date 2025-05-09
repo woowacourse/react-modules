@@ -1,21 +1,16 @@
-import { ReactNode } from "react";
+import { useState } from "react";
 import Modal from "../Modal/Modal";
+import styled from "@emotion/styled";
 
 interface PromptModalProps {
   isOpen: boolean;
   onClose: () => void;
   onConfirm: () => void;
   title: string;
-  content: ReactNode;
 }
 
-function PromptModal({
-  isOpen,
-  onClose,
-  onConfirm,
-  title,
-  content,
-}: PromptModalProps) {
+function PromptModal({ isOpen, onClose, onConfirm, title }: PromptModalProps) {
+  const [input, setInput] = useState("");
   return (
     <>
       <Modal
@@ -25,7 +20,9 @@ function PromptModal({
         hasTopCloseButton={false}
       >
         <Modal.Header>{title}</Modal.Header>
-        <Modal.Body>{content}</Modal.Body>
+        <Modal.Body>
+          <Input value={input} onChange={(e) => setInput(e.target.value)} />
+        </Modal.Body>
         <Modal.Footer>
           <Modal.PrimaryButton>취소</Modal.PrimaryButton>
           <Modal.SecondaryButton>확인</Modal.SecondaryButton>
@@ -36,3 +33,7 @@ function PromptModal({
 }
 
 export default PromptModal;
+
+const Input = styled.input`
+  height: 32px;
+`;

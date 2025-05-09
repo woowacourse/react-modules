@@ -3,7 +3,6 @@ import Modal from "./lib/Modal/Modal";
 import AlertModal from "./lib/ModalVariants/AlertModal";
 import ConfirmModal from "./lib/ModalVariants/ConfirmModal";
 import PromptModal from "./lib/ModalVariants/PromptModal";
-import styled from "@emotion/styled";
 
 function App() {
   const [ModalIsOpen, setModalIsOpen] = useState(false);
@@ -77,7 +76,6 @@ function App() {
         onClose={handlePromptClose}
         onConfirm={handlePromptConfirm}
         title="쿠폰 번호를 입력해 주세요."
-        content={<Input />}
       />
 
       <button onClick={() => setModalIsOpen(true)}>모달 열기 버튼</button>
@@ -93,7 +91,3 @@ function App() {
 }
 
 export default App;
-
-const Input = styled.input`
-  height: 32px;
-`;

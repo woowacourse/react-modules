@@ -16,6 +16,5 @@ export const OpenPromptModal: Story = {
     onClose: () => {},
     onConfirm: () => {},
     title: "테스트",
-    content: <input></input>,
   },
 };
