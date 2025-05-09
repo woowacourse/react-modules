@@ -1,5 +1,3 @@
-import { CardBrand } from "../../constants/CardBrand";
-
 export type FieldErrorCode = {
   cvc: "INVALID_LENGTH" | "INVALID_NUMBER";
   password: "INVALID_LENGTH" | "INVALID_FORMAT" | "INVALID_CHARACTER";

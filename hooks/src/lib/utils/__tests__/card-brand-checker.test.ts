@@ -1,4 +1,3 @@
-// __tests__/cardBrandChecker.test.ts
 import type { CardBrand } from "../../constants/CardBrand";
 import { CARD_NUMBER_LENGTH } from "../../validator/constants/card-number-length";
 import { checkCardBrand, strictCheckCardBrand } from "../card-brand-checker";
