@@ -19,7 +19,11 @@ const Prompt = ({message, onConfirm, onClose}: Props) => {
   return (
     <Container>
       {message}
-      <Input value={input} onChange={(e) => setInput(e.target.value)} />
+      <Input
+        value={input}
+        onChange={(e) => setInput(e.target.value)}
+        autoFocus
+      />
       <BtnWrapper>
         <CancelButton onClick={onClose}>취소</CancelButton>
         <Button onClick={() => onConfirm?.(input)}>확인</Button>

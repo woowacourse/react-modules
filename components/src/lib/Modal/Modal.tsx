@@ -1,4 +1,4 @@
-import {MouseEvent, ReactNode, useEffect} from 'react';
+import {MouseEvent, ReactNode} from 'react';
 import {
   Backdrop,
   CloseButton,
@@ -11,6 +11,7 @@ import {createPortal} from 'react-dom';
 import Alert from './content/Alert';
 import Confirm from './content/Confirm';
 import Prompt from './content/Prompt';
+import useFocusTrap from './useFocusTrap';
 
 interface TitleProps {
   text?: string;
@@ -118,24 +119,18 @@ const Modal = ({
   onClose,
   onConfirm,
 }: ModalProps) => {
+  const trapRef = useFocusTrap(onClose);
+
   const stopPropagation = (e: MouseEvent<HTMLDivElement>) => {
     e.stopPropagation();
   };
-
-  useEffect(() => {
-    const handleEscape = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') onClose();
-    };
-
-    document.addEventListener('keydown', handleEscape);
-    return () => document.removeEventListener('keydown', handleEscape);
-  }, [onClose]);
 
   return (
     isOpen &&
     createPortal(
       <Backdrop $position={position} onClick={onClose}>
         <ModalContainer
+          ref={trapRef}
           $backgroundColor={backgroundColor}
           $position={position}
           $size={size}
