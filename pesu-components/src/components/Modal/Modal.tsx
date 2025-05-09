@@ -11,12 +11,14 @@ import Input from '../common/Input/Input';
 
 type ModalContext = {
   isOpen: boolean;
-  setIsOpen: (isOpen: boolean) => void;
+  close: () => void;
+  open: () => void;
 };
 
 const ModalContext = createContext<ModalContext>({
   isOpen: false,
-  setIsOpen: () => {},
+  close: () => {},
+  open: () => {},
 });
 
 /**
@@ -59,18 +61,31 @@ function ModalMain({
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, []);
 
-  if (!isOpen) return null;
+  const close = () => setIsOpen(false);
+  const open = () => setIsOpen(true);
 
-  return createPortal(
-    <ModalContext.Provider value={{ isOpen, setIsOpen }}>
-      <S.ModalContainer position={position} margin={margin} zIndex={zIndex} device={device} size={size}>
-        {children}
-      </S.ModalContainer>
-      <S.ModalBackdrop />
-    </ModalContext.Provider>,
-    document.body,
+  return (
+    isOpen &&
+    createPortal(
+      <ModalContext.Provider value={{ isOpen, close, open }}>
+        <S.ModalContainer position={position} margin={margin} zIndex={zIndex} device={device} size={size}>
+          {children}
+        </S.ModalContainer>
+        <S.ModalBackdrop onClick={close} />
+      </ModalContext.Provider>,
+      document.body,
+    )
   );
 }
+/**
+ * Outside
+ */
+function Trigger({ children }: { children: ReactNode }) {
+  const { open } = useContext(ModalContext);
+
+  return <S.TransparentButton onClick={open}>{children}</S.TransparentButton>;
+}
+Trigger.displayName = 'ModalTrigger';
 
 /**
  * Top
@@ -86,13 +101,12 @@ function Title({ children }: { children: ReactNode }) {
 }
 Title.displayName = 'ModalTitle';
 
-function Trigger({ children }: { children: ReactNode }) {
-  const { setIsOpen } = useContext(ModalContext);
-  const closeModal = () => setIsOpen(false);
+function Close({ children }: { children: ReactNode }) {
+  const { close } = useContext(ModalContext);
 
-  return <S.Trigger onClick={closeModal}>{children}</S.Trigger>;
+  return <S.TransparentButton onClick={close}>{children}</S.TransparentButton>;
 }
-Trigger.displayName = 'ModalTriggerButton';
+Close.displayName = 'ModalClose';
 
 /**
  * Middle
@@ -134,6 +148,7 @@ ConfirmButton.displayName = 'ModalConfirmButton';
 const Modal = Object.assign(ModalMain, {
   Top,
   Title,
+  Close,
   Trigger,
   CloseIcon,
   Content,

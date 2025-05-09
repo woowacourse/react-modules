@@ -8,7 +8,6 @@ interface ButtonProps {
 
 export const Button = styled.button<ButtonProps>`
   width: ${(props) => (props.isExpanded ? '100%' : '100px')};
-  max-width: 480px;
   height: 48px;
   background-color: ${(props) => (props.variant === 'outline' ? 'transparent' : '#000')};
   color: ${(props) => (props.variant === 'outline' ? '#333333BF' : '#fff')};
@@ -27,7 +26,6 @@ export const Button = styled.button<ButtonProps>`
     left: 50%;
     transform: translateX(-50%);
     border-radius: 0;
-    max-width: 480px;
     z-index: 1;
   `}
 

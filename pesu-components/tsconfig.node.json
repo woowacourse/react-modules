@@ -25,7 +25,12 @@
     "declarationDir": "dist",
     "emitDeclarationOnly": true,
     "outDir": "dist",
-    "declarationMap": true
+    "declarationMap": true,
+
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"]
+    }
   },
   "include": ["vite.config.ts"]
 }

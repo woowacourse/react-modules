@@ -74,9 +74,9 @@ export const SmallModal: Story = {
       <Modal size="small">
         <Modal.Top>
           <Modal.Title>약관에 동의해 주세요</Modal.Title>
-          <Modal.Trigger>
+          <Modal.Close>
             <Modal.CloseIcon />
-          </Modal.Trigger>
+          </Modal.Close>
         </Modal.Top>
         <Modal.Content>
           <p>[필수] 개인정보 수집이용 동의</p>
@@ -98,9 +98,9 @@ export const MediumModal: Story = {
       <Modal size="medium">
         <Modal.Top>
           <Modal.Title>약관에 동의해 주세요</Modal.Title>
-          <Modal.Trigger>
+          <Modal.Close>
             <Modal.CloseIcon />
-          </Modal.Trigger>
+          </Modal.Close>
         </Modal.Top>
         <Modal.Content>
           <p>[필수] 개인정보 수집이용 동의</p>
@@ -122,9 +122,9 @@ export const LargeModal: Story = {
       <Modal size="large">
         <Modal.Top>
           <Modal.Title>약관에 동의해 주세요</Modal.Title>
-          <Modal.Trigger>
+          <Modal.Close>
             <Modal.CloseIcon />
-          </Modal.Trigger>
+          </Modal.Close>
         </Modal.Top>
         <Modal.Content>
           <p>[필수] 개인정보 수집이용 동의</p>

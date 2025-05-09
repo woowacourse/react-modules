@@ -84,7 +84,7 @@ export const ModalBackdrop = styled.div`
   margin: auto;
 `;
 
-export const Trigger = styled.button`
+export const TransparentButton = styled.button`
   background-color: transparent;
   border: none;
   cursor: pointer;
