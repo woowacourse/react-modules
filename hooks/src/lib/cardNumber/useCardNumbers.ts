@@ -1,6 +1,11 @@
 import { ChangeEvent, useState } from 'react';
 import { CARD_NUMBER_ERROR_TYPES, ERROR_MESSAGE } from '../constants';
 import { ValidationResult } from '../types';
+import {
+  formatNumbersByNetwork,
+  identifyNetworkByList,
+  identifyNetworkByRange,
+} from '../utils/cardNetwork';
 
 function useCardNumbers() {
   const [cardNumbers, setCardNumbers] = useState('');
@@ -58,11 +63,21 @@ function useCardNumbers() {
     setCardNumbers(value);
   };
 
+  function identifiedNetwork(cardNumbers: string) {
+    return (
+      identifyNetworkByList(cardNumbers) ?? identifyNetworkByRange(cardNumbers)
+    );
+  }
+
+  const network = identifiedNetwork(cardNumbers);
+
   return {
     cardNumbers,
     validationResults,
     validateCardNumbers,
     handleCardNumbersChange,
+    network,
+    formatNumbersByNetwork,
   };
 }
 
