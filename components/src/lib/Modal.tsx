@@ -5,6 +5,7 @@ import CloseIconButton from './components/CloseIconButton';
 import {
   AlertContentProps,
   ButtonContainerProps,
+  ConfirmContentProps,
   Direction,
   ModalContentProps,
   ModalProps,
@@ -87,6 +88,59 @@ const AlertContent = ({
   );
 };
 
+const ConfirmContent = ({
+  children,
+  hasTopCloseButton = true,
+  position = 'center',
+  confirmButton = {},
+  cancelButton = {},
+  ...props
+}: ConfirmContentProps) => {
+  const { onClose } = useContext(ModalContext);
+
+  const {
+    text: confirmText = '확인',
+    color: confirmColor = '#fff',
+    backgroundColor: confirmBackgroundColor = '#333',
+    onClick: onConfirmClick = onClose,
+  } = confirmButton;
+
+  const {
+    text: cancelText = '취소',
+    color: cancelColor = '#8B95A1',
+    backgroundColor: cancelBackgroundColor = 'transparent',
+    onClick: onCancelClick = onClose,
+  } = cancelButton;
+
+  return (
+    <S.ModalContent
+      position={position}
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'space-between',
+      }}
+      {...props}>
+      {hasTopCloseButton && <CloseIconButton data-testid="modal-close" onClick={onClose} />}
+      {children}
+      <ButtonContainer>
+        <TextButton
+          text={cancelText}
+          color={cancelColor}
+          backgroundColor={cancelBackgroundColor}
+          onClick={onCancelClick}
+        />
+        <TextButton
+          text={confirmText}
+          color={confirmColor}
+          backgroundColor={confirmBackgroundColor}
+          onClick={onConfirmClick}
+        />
+      </ButtonContainer>
+    </S.ModalContent>
+  );
+};
+
 const ButtonContainer = ({ children, direction = 'row' }: ButtonContainerProps) => {
   return <S.ButtonContainerStyle direction={direction}>{children}</S.ButtonContainerStyle>;
 };
@@ -98,6 +152,7 @@ const Title = ({ title }: { title: string }) => {
 Modal.Overlay = Overlay;
 Modal.Content = Content;
 Modal.AlertContent = AlertContent;
+Modal.ConfirmContent = ConfirmContent;
 Modal.Title = Title;
 
 export default Modal;
