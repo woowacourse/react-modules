@@ -1,67 +1,29 @@
 import { css } from '@emotion/css';
-import { Children, MouseEvent, useEffect } from 'react';
+import { Children } from 'react';
 import { ModalProps, Position } from './Modal.type';
+import ModalBackdrop from './components/ModalBackdrop';
+import ModalHeader from './components/ModalHeader';
+import useModalKeyboard from './hooks/useModalKeyboard';
 
-const Modal = ({ children, position, isOpen, onAfterOpen, onClose, title, showCloseButton = true }: ModalProps) => {
+const Modal = ({ children, position, isOpen, onClose, title = '', showCloseButton = true }: ModalProps) => {
   const [content, actions] = Children.toArray(children);
-
-  const handleKeyDown = (e: KeyboardEvent) => {
-    if (e.key === 'Escape') {
-      onClose();
-    }
-  };
-
-  const handleBackdropClick = (e: MouseEvent<HTMLDivElement>) => {
-    if (e.target === e.currentTarget) {
-      onClose();
-    }
-  };
-
-  useEffect(() => {
-    if (isOpen && onAfterOpen) {
-      onAfterOpen();
-    }
-
-    window.addEventListener('keydown', handleKeyDown);
-    return () => {
-      window.removeEventListener('keydown', handleKeyDown);
-    };
-  }, [isOpen]);
 
   if (!isOpen) return null;
 
+  useModalKeyboard(onClose);
+
   return (
-    <div className={ModalBackdrop} onClick={handleBackdropClick} data-testid="modal-backdrop">
+    <ModalBackdrop onClose={onClose}>
       <div className={ModalFrame(position)} data-testid="modal">
-        <section className={ModalHeader}>
-          {title && <h2>{title}</h2>}
-          {showCloseButton && (
-            <button className={ModalCloseButton} onClick={onClose}>
-              X
-            </button>
-          )}
-        </section>
+        <ModalHeader title={title} showCloseButton={showCloseButton} onClose={onClose} />
         <section>{content}</section>
         <section className={ButtonBar}>{actions}</section>
       </div>
-    </div>
+    </ModalBackdrop>
   );
 };
 
 export default Modal;
-
-const ModalBackdrop = css`
-  width: 100dvw;
-  height: 100dvh;
-  background-color: rgba(0, 0, 0, 0.5);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: fixed;
-  z-index: 0;
-  left: 0;
-  top: 0;
-`;
 
 const modalPosionStyle = {
   center: css`
@@ -87,29 +49,6 @@ const ModalFrame = (position: Position) => css`
   justify-content: center;
   gap: 20px;
   ${modalPosionStyle[position]}
-`;
-
-const ModalHeader = css`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-`;
-
-const ModalCloseButton = css`
-  all: unset;
-  width: 32px;
-  height: 32px;
-  cursor: pointer;
-  border-radius: 50%;
-  font-size: 16px;
-
-  &:hover {
-    background-color: rgba(0, 0, 0, 0.1);
-  }
-  &:focus {
-    outline: none;
-  }
 `;
 
 const ButtonBar = css`
