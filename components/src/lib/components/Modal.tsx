@@ -54,14 +54,6 @@ type ModalTitleProps = {
   title: string;
 };
 
-type ModalCloseButtonProps = {
-  /**
-   * Indicate close button visibility
-   * @default true
-   */
-  showCloseButton?: boolean;
-};
-
 const ModalContext = createContext<ModalProps | undefined>(undefined);
 
 const useModalContext = () => {
@@ -105,7 +97,7 @@ const ModalTitle = ({ title }: ModalTitleProps) => {
   return <StyledModalTitle aria-label={title}>{title}</StyledModalTitle>;
 };
 
-const ModalCloseButton = ({ showCloseButton = true }: ModalCloseButtonProps) => {
+const ModalCloseButton = ({ showCloseButton = true }: { showCloseButton?: boolean }) => {
   const { onClose } = useModalContext();
 
   return (
@@ -119,14 +111,44 @@ const ModalCloseButton = ({ showCloseButton = true }: ModalCloseButtonProps) => 
   );
 };
 
+const ModalButtonWrapper = ({ children }: { children: React.ReactNode }) => {
+  return <StyledModalButtonWrapper>{children}</StyledModalButtonWrapper>;
+};
+
+const ModalCancelButton = ({ children }: { children: React.ReactNode }) => {
+  const { onClose } = useModalContext();
+
+  return (
+    <StyledCancelButton type="button" onClick={onClose} aria-label="cancelButton">
+      {children}
+    </StyledCancelButton>
+  );
+};
+
+const ModalConfirmButton = ({
+  onClick,
+  children,
+}: {
+  onClick: () => void;
+  children: React.ReactNode;
+}) => {
+  return (
+    <StyledConfirmButton type="button" onClick={onClick} aria-label="confirmButton">
+      {children}
+    </StyledConfirmButton>
+  );
+};
+
 export const Modal = (props: ModalProps) => {
+  const { isOpen, onClose, children } = props;
+
   const handleKeyDown = useCallback(
     (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
-        props.onClose();
+        onClose();
       }
     },
-    [props]
+    [onClose]
   );
 
   useEffect(() => {
@@ -138,7 +160,7 @@ export const Modal = (props: ModalProps) => {
 
   return (
     <ModalContext.Provider value={props}>
-      <Portal isOpen={props.isOpen}>{props.children}</Portal>
+      <Portal isOpen={isOpen}>{children}</Portal>
     </ModalContext.Provider>
   );
 };
@@ -147,6 +169,9 @@ Modal.Backdrop = ModalBackdrop;
 Modal.Container = ModalContainer;
 Modal.Title = ModalTitle;
 Modal.CloseButton = ModalCloseButton;
+Modal.ButtonWrapper = ModalButtonWrapper;
+Modal.CancelButton = ModalCancelButton;
+Modal.ConfirmButton = ModalConfirmButton;
 
 const StyledBackDrop = styled.div<{ backdropZIndex: number }>`
   width: 100%;
@@ -203,7 +228,7 @@ const StyledModalContainer = styled.div<{ modalZIndex: number } & ModalContainer
   height: auto;
   position: fixed;
   background-color: white;
-  padding: 12px 24px;
+  padding: 18px 24px;
   ${({ position }) => positionStyle[position ?? 'center']};
   ${({ containerStyle }) => ({ ...containerStyle })};
   z-index: ${({ modalZIndex }) => modalZIndex};
@@ -235,4 +260,34 @@ const StyledCloseButton = styled.button`
 const StyledCloseIcon = styled.img`
   width: 27px;
   height: 27px;
+`;
+
+const StyledModalButtonWrapper = styled.div`
+  display: flex;
+  width: 100%;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 8px;
+`;
+
+const StyledCancelButton = styled.button`
+  width: 80px;
+  height: 40px;
+  padding: 8px 0;
+  background-color: #f3f4f6;
+  color: #333333;
+  cursor: pointer;
+  border: 1px solid #333333;
+  border-radius: 4px;
+`;
+
+const StyledConfirmButton = styled.button`
+  width: 80px;
+  height: 40px;
+  padding: 8px 4px;
+  background-color: #333333;
+  color: white;
+  cursor: pointer;
+  border: none;
+  border-radius: 4px;
 `;
