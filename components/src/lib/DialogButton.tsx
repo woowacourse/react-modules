@@ -1,23 +1,33 @@
+import { ComponentProps } from "react";
+
+type DialogButtonProps = Omit<ComponentProps<"button">, "type"> & {
+  type: "primary" | "basic";
+  text: string;
+};
+
+const buttonStyle = {
+  primary: {
+    backgroundColor: "#333333",
+    color: "white",
+    border: "none",
+  },
+  basic: {
+    backgroundColor: "white",
+    color: "#333333",
+    border: "1px solid rgba(51,51,51,0.25)",
+  },
+};
+
 export default function DialogButton({
   type,
   text,
-  onClick,
-}: {
-  type: "primary" | "basic";
-  text: string;
-  onClick?: () => void;
-}) {
-  const backgroundColor = type === "primary" ? "#333333" : "white";
-  const color = type === "primary" ? "white" : "#333333";
-  const border = type === "primary" ? "none" : "1px solid rgba(51,51,51,0.25)";
-
+  ...rest
+}: DialogButtonProps) {
   return (
     <button
-      onClick={onClick}
+      {...rest}
       style={{
-        backgroundColor,
-        color,
-        border: border,
+        ...buttonStyle[type],
         cursor: "pointer",
         fontSize: "15px",
         fontWeight: 700,

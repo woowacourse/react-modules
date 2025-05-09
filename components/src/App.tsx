@@ -1,8 +1,13 @@
-import Confirm from "./lib/Confirm";
+import { useState } from "react";
 import useModalState from "./lib/hooks/useModalState";
+import Prompt from "./lib/Prompt";
 
 function App() {
   const { isOpen, modalClose, modalOpen } = useModalState(true);
+  const [value, setValue] = useState("");
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setValue(e.target.value);
+  };
 
   return (
     <>
@@ -16,7 +21,7 @@ function App() {
         size="medium"
         position="center"
       /> */}
-      <Confirm
+      {/* <Confirm
         open={isOpen}
         modalClose={modalClose}
         title="아이디를 입력해 주세요."
@@ -26,6 +31,21 @@ function App() {
         size="medium"
         position="center"
         onCheckButtonClick={() => console.log("확인 버튼 클릭")}
+      /> */}
+      <Prompt
+        open={isOpen}
+        modalClose={modalClose}
+        title="아이디를 입력해 주세요."
+        value={value}
+        onChange={handleChange}
+        closeButtonText="취소"
+        checkButtonText="확인"
+        size="medium"
+        position="center"
+        onCheckButtonClick={() => {
+          console.log(value);
+          setValue("");
+        }}
       />
     </>
   );
