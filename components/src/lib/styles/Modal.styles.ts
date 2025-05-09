@@ -58,6 +58,9 @@ export const ModalTitleStyle = (color: string) => css`
 `;
 
 export const ModalBodyStyle = css`
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
   width: 100%;
 `;
 
