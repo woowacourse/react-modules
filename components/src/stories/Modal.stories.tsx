@@ -65,3 +65,18 @@ export const ModalWithBottomCancelButton: Story = {
     );
   },
 };
+
+export const BottomModal: Story = {
+  render: () => {
+    const [isOpen, setIsOpen] = useState(true);
+    return (
+      <Modal isOpen={isOpen} onClose={() => setIsOpen(false)}>
+        <Modal.Overlay />
+        <Modal.Content position="bottom">
+          <Modal.Title title="하단 모달 타이틀" />
+          <p>모달열림</p>
+        </Modal.Content>
+      </Modal>
+    );
+  },
+};
