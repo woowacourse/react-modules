@@ -3,8 +3,6 @@ import Modal from "./Modal";
 import Button from "../../modules/Button/Button";
 import { useState } from "react";
 import styled from "@emotion/styled";
-import CardCompany from "./CardCompany";
-import AgreeTermModal from "./AgreeTermModal";
 
 const meta: Meta<typeof Modal> = {
   title: "Components/Modal",
@@ -15,6 +13,11 @@ const meta: Meta<typeof Modal> = {
       description: "모달의 위치",
       control: { type: "radio" },
       options: ["center", "bottom"],
+    },
+    size: {
+      description: "모달의 크기",
+      control: { type: "radio" },
+      options: ["small", "medium", "large"],
     },
     isOpen: {
       description: "모달의 표시 여부",
