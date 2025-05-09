@@ -1,25 +1,13 @@
 import { ChangeEvent, useState } from 'react';
 import { CARD_NUMBER_ERROR_TYPES, ERROR_MESSAGE } from '../constants';
 import { ValidationResult } from '../types';
-import { CardNumbersKey } from '../constants';
 
 function useCardNumbers() {
-  const [cardNumbers, setCardNumbers] = useState<
-    Record<CardNumbersKey, string>
-  >({
-    part1: '',
-    part2: '',
-    part3: '',
-    part4: '',
-  });
+  const [cardNumbers, setCardNumbers] = useState('');
 
-  const [validationResults, setValidationResults] = useState<
-    Record<CardNumbersKey, ValidationResult>
-  >({
-    part1: { isValid: true, errorMessage: '' },
-    part2: { isValid: true, errorMessage: '' },
-    part3: { isValid: true, errorMessage: '' },
-    part4: { isValid: true, errorMessage: '' },
+  const [validationResults, setValidationResults] = useState<ValidationResult>({
+    isValid: true,
+    errorMessage: '',
   });
 
   const checkIsNumber = (value: string) => {
@@ -53,7 +41,7 @@ function useCardNumbers() {
     event: ChangeEvent<HTMLInputElement>,
     restrictChange: boolean = true
   ) => {
-    const { name, value } = event.target;
+    const { value } = event.target;
     const { isValid, errorType } = validateCardNumbers(value);
 
     if (restrictChange && errorType) {
@@ -61,16 +49,13 @@ function useCardNumbers() {
     }
 
     if (!restrictChange) {
-      setValidationResults((prev) => ({
-        ...prev,
-        [name]: {
-          isValid,
-          errorMessage: errorType ? ERROR_MESSAGE.cardNumber[errorType] : '',
-        },
-      }));
+      setValidationResults({
+        isValid,
+        errorMessage: errorType ? ERROR_MESSAGE.cardNumber[errorType] : '',
+      });
     }
 
-    setCardNumbers((prev) => ({ ...prev, [name]: value }));
+    setCardNumbers(value);
   };
 
   return {
