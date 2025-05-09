@@ -76,7 +76,7 @@ function App() {
         isOpen={PromptIsOpen}
         onClose={handlePromptClose}
         onConfirm={handlePromptConfirm}
-        title="카드를 삭제하시겠습니까?"
+        title="쿠폰 번호를 입력해 주세요."
         content={<Input />}
       />
 
