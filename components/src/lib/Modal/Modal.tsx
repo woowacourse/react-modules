@@ -10,24 +10,25 @@ const ModalContext = createContext<ModalContextProps | undefined>(undefined);
 export interface ModalRootProps {
 	isOpen: boolean;
 	onClose: () => void;
-	position?: "center" | "bottom";
+	modalPosition?: "center" | "bottom";
 	children?: ReactNode;
-	size?: "small" | "medium" | "large";
+	size?: "small" | "medium" | "large" | "full";
 }
 
 const WIDTH_MAP = {
 	small: "320px",
 	medium: "480px",
 	large: "600px",
+	full: "100%",
 };
 
-const ModalRoot = ({ isOpen, onClose, position = "center", children, size = "medium" }: ModalRootProps) => {
+const ModalRoot = ({ isOpen, onClose, modalPosition = "center", children, size = "medium" }: ModalRootProps) => {
 	if (!isOpen) return null;
 
 	return (
 		<ModalContext.Provider value={{ onClose }}>
-			<Overlay onClick={onClose}>
-				<Container position={position} size={size}>
+			<Overlay>
+				<Container position={modalPosition} size={size}>
 					{children}
 				</Container>
 			</Overlay>
@@ -51,6 +52,10 @@ const ModalHeader = ({ children, showCloseButton }: ModalHeaderProps) => {
 	);
 };
 
+export const ModalInput = ({ placeholder, onChange }: { placeholder: string; onChange?: () => void }) => {
+	return <Input placeholder={placeholder} onChange={onChange} />;
+};
+
 export const ModalBody = styled.div`
 	width: 100%;
 `;
@@ -62,7 +67,14 @@ export const ModalFooter = styled.div`
 	margin-top: 12px;
 `;
 
-export const ConfirmButton = styled.button`
+export const Input = styled.input`
+	width: 100%;
+	margin-top: 16px;
+	padding: 8.5px 0 8.5px 8px;
+	font-size: 11px;
+`;
+
+export const ActionButton = styled.button`
 	width: 100%;
 	padding: 8px 0;
 	border: none;
@@ -90,8 +102,9 @@ const Modal = Object.assign(ModalRoot, {
 	Header: ModalHeader,
 	Body: ModalBody,
 	Footer: ModalFooter,
-	ConfirmButton,
+	ActionButton,
 	CloseButton,
+	ModalInput,
 });
 
 export default Modal;
@@ -109,7 +122,7 @@ const Overlay = styled.div`
 	align-items: center;
 `;
 
-const Container = styled.div<{ position: "center" | "bottom"; size: "small" | "medium" | "large" }>`
+const Container = styled.div<{ position: "center" | "bottom"; size: "small" | "medium" | "large" | "full" }>`
 	box-sizing: border-box;
 	display: flex;
 	flex-direction: column;
