@@ -1,9 +1,9 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import Modal from "../lib/Modal.tsx";
+import BaseModal from "../lib/BaseModal/BaseModal";
 
-const meta: Meta<typeof Modal> = {
+const meta: Meta<typeof BaseModal> = {
   title: "Components/Modal",
-  component: Modal,
+  component: BaseModal,
   tags: ["autodocs"],
   parameters: {
     docs: {
@@ -22,7 +22,7 @@ const meta: Meta<typeof Modal> = {
 
 export default meta;
 
-type Story = StoryObj<typeof Modal>;
+type Story = StoryObj<typeof BaseModal>;
 
 export const centerOpen: Story = {
   args: {
