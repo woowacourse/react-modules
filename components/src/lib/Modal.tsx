@@ -47,9 +47,14 @@ const CloseButton = () => {
   );
 };
 
+const Title = ({ title }: { title: string }) => {
+  return <TitleText>{title}</TitleText>;
+};
+
 Modal.Overlay = Overlay;
 Modal.Content = Content;
 Modal.CloseButton = CloseButton;
+Modal.Title = Title;
 
 export default Modal;
 
@@ -76,4 +81,9 @@ const ModalOverlay = styled.div`
   right: 0;
   bottom: 0;
   background-color: rgba(0, 0, 0, 0.35);
+`;
+
+const TitleText = styled.p`
+  font-size: 18px;
+  font-weight: bold;
 `;
