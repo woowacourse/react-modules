@@ -1,79 +1,62 @@
 import {useState} from 'react';
 import {ValidationType} from '../../types/validation';
 import {ERROR_MESSAGE, defaultValidationValue} from '../constants/validation';
-import {isEmpty, isLengthEqual, isPositiveInteger} from '../utils/validation';
+import {isEmpty, isLengthBetween, isPositiveInteger} from '../utils/validation';
+import useCardBrand from './useCardBrand';
 
-interface CardNumberValidationType {
-  first: ValidationType;
-  second: ValidationType;
-  third: ValidationType;
-  fourth: ValidationType;
-}
+type CardBrand =
+  | 'Diners'
+  | 'AMEX'
+  | 'Visa'
+  | 'MasterCard'
+  | 'Union'
+  | undefined;
 
-const defaultCardNumberValue = {
-  first: '',
-  second: '',
-  third: '',
-  fourth: '',
-};
-
-const defaultCardNumberValidationValue = {
-  first: defaultValidationValue,
-  second: defaultValidationValue,
-  third: defaultValidationValue,
-  fourth: defaultValidationValue,
-};
-
-const MAX_LENGTH = 4;
+const MIN_LENGTH = 14;
+const MAX_LENGTH = 16;
 
 const useCardNumber = () => {
-  const [cardNumber, setCardNumber] = useState(defaultCardNumberValue);
+  const [cardNumber, setCardNumber] = useState('');
   const [cardNumberValidationResult, setCardNumberValidationResult] =
-    useState<CardNumberValidationType>(defaultCardNumberValidationValue);
+    useState<ValidationType>(defaultValidationValue);
+  const [cardBrand, setCardBrand] = useState<CardBrand>();
+  const {findBrand} = useCardBrand();
 
-  const onChange = (label: string, value: string) => {
-    validation(label, value);
-    setCardNumber((prev) => ({...prev, [label]: value}));
+  const onChange = (value: string) => {
+    validation(value);
+    setCardNumber(value);
   };
 
-  const validation = (label: string, value: string) => {
+  const validation = (value: string) => {
     if (!value || isEmpty(value)) {
-      setCardNumberValidationResult((prev) => ({
-        ...prev,
-        [label]: defaultValidationValue,
-      }));
+      setCardNumberValidationResult(defaultValidationValue);
       return;
     }
 
     if (!isPositiveInteger(value)) {
-      setCardNumberValidationResult((prev) => ({
-        ...prev,
-        [label]: {
-          isError: true,
-          errorMessage: ERROR_MESSAGE.INVALID_NUMBER,
-        },
-      }));
+      setCardNumberValidationResult({
+        isError: true,
+        errorMessage: ERROR_MESSAGE.INVALID_NUMBER,
+      });
       return;
     }
 
-    if (!isLengthEqual(value, MAX_LENGTH)) {
-      setCardNumberValidationResult((prev) => ({
-        ...prev,
-        [label]: {
-          isError: true,
-          errorMessage: `${MAX_LENGTH}${ERROR_MESSAGE.INVALID_LENGTH}`,
-        },
-      }));
+    if (!isLengthBetween(value, MIN_LENGTH, MAX_LENGTH)) {
+      setCardNumberValidationResult({
+        isError: true,
+        errorMessage: ERROR_MESSAGE.generateInvalidBetweenMsg(
+          MIN_LENGTH,
+          MAX_LENGTH
+        ),
+      });
       return;
     }
 
-    setCardNumberValidationResult((prev) => ({
-      ...prev,
-      [label]: defaultValidationValue,
-    }));
+    setCardNumberValidationResult(defaultValidationValue);
+    setCardBrand(findBrand(value));
   };
 
-  return {onChange, cardNumber, cardNumberValidationResult};
+  return {cardBrand, onChange, cardNumber, cardNumberValidationResult};
 };
 
 export default useCardNumber;
