@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Modal } from './lib';
 // import { Modal } from 'jurunghappy-modal';
 import './App.css';
+import AlertModal from './components/AlertModal/AlertModal';
 
 function App() {
   const [isOpen, setIsOpen] = useState(false);
@@ -14,18 +15,14 @@ function App() {
 
   return (
     <>
-      <button onClick={() => setIsOpen(true)}>Modal Open</button>
-      <Modal
+      <button onClick={() => setIsOpen(true)}>AlertModal Open</button>
+      <AlertModal
         isOpen={isOpen}
-        position="bottom"
-        title="카드사 선택"
-        showCloseButton={true}
+        position="center"
         size="small"
         onClose={() => setIsOpen(false)}
         onBackdropClick={handleBackdropClick}
-      >
-        <h1>카드사 선택</h1>
-      </Modal>
+      />
     </>
   );
 }

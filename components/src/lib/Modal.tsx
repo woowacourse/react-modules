@@ -34,7 +34,7 @@ const Modal = ({
       >
         <ModalContainer position={position} size={size}>
           <ModalHeader>
-            <h4>{title}</h4>
+            <h2>{title}</h2>
             <CloseButton showCloseButton={showCloseButton} onClick={onClose}>
               X
             </CloseButton>

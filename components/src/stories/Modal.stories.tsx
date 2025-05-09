@@ -38,7 +38,7 @@ export const bottomOpen: Story = {
   },
 };
 
-export const withXButton: Story = {
+export const withCloseButton: Story = {
   args: {
     isOpen: true,
     position: 'bottom',
@@ -51,7 +51,7 @@ export const withXButton: Story = {
   },
 };
 
-export const withoutXButton: Story = {
+export const withoutCloseButton: Story = {
   args: {
     isOpen: true,
     position: 'bottom',

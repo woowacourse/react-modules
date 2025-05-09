@@ -131,7 +131,7 @@
 
 - 다양한 모달 사용을 위한 요구사항에 대응할 수 있어야 한다.
 
-  - [ ] 확인(Alert) 모달: 사용자에게 메시지를 전달하고 확인 버튼만 제공한다.
+  - [x] 확인(Alert) 모달: 사용자에게 메시지를 전달하고 확인 버튼만 제공한다.
   - [ ] 확인/취소(Confirm) 모달: 사용자에게 선택지를 제공하고 확인 및 취소 버튼을 제공한다.
   - [ ] 입력(Prompt) 모달: 사용자로부터 입력값을 받을 수 있는 입력 필드와 확인/취소 버튼을 제공한다.
   - [x] small, medium, large 등의 크기 옵션을 prop으로 전달받아 모달 크기를 조절한다.
@@ -144,7 +144,7 @@
 
 ### 컴포넌트 설계
 
-- [ ] Modal 모듈이 기본적으로 가지고 있을 레이아웃 & 상태
+- [x] Modal 모듈이 기본적으로 가지고 있을 레이아웃 & 상태
   - [x] modal background (default)
   - [x] modal container (default)
   - [x] isOpen (prop)
@@ -154,8 +154,8 @@
   - [x] size (prop)
   - [x] onClose (prop)
   - [x] onBackdropClick (prop)
-- [ ] Modal 모듈을 사용해서 다양한 모달 컴포넌트를 구현한다.
-  - [ ] AlertModal : 사용자에게 메시지를 전달하고 확인 버튼 제공
+- [x] Modal 모듈을 사용해서 다양한 모달 컴포넌트를 구현한다.
+  - [x] AlertModal : 사용자에게 메시지를 전달하고 확인 버튼 제공
   - [ ] ConfirmModal : 확인 & 취소 버튼 제공
   - [ ] PromptModal : 입력 필드와 확인 & 취소 버튼 제공
 
@@ -170,8 +170,15 @@
     - [x] medium 옵션
     - [x] large 옵션
 - 다양한 모달 컴포넌트 스토리북 작성
-  - [ ] AlertModal
-    - [ ] 사용자 메시지와 함께 확인 버튼이 화면에 표시되는지
+  - [x] AlertModal
+    - [x] 사용자 메시지와 함께 확인 버튼이 화면에 표시되는지
+    - position
+      - [x] center일 때
+      - [x] bottom일 때
+    - size
+      - [x] small
+      - [x] medium
+      - [x] large
   - [ ] ConfirmModal
     - [ ] 확인과 취소 버튼이 화면에 표시되는지
   - [ ] PromptModal
@@ -179,7 +186,7 @@
 
 ### 배포 & 설치
 
-- [ ] 모닯 배포
+- [ ] 모달 배포
 - [ ] 모달 리드미 수정
 
 ## Hooks Module

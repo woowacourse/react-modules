@@ -49,10 +49,12 @@ export const ModalContainer = styled.div<{
   position: relative;
   background-color: ${Common.colors.white};
   color: ${Common.colors.black};
-  height: 30%;
-  min-height: 216px;
-  padding: 20px;
+  height: 20%;
+  min-height: 150px;
+  padding: 30px 35px;
   z-index: ${Common.zIndex.modalContainer};
+  display: flex;
+  flex-direction: column;
 
   ${({ position }) =>
     position === 'center' &&
