@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { ReactNode } from "react";
+import { ReactNode, useRef } from "react";
 import useEscapeKeyClose from "../useEscapeKeyClose";
 import { createPortal } from "react-dom";
 import { ModalContext, Position } from "../useModalContext";
@@ -8,8 +8,9 @@ import Body from "./Body";
 import Footer from "./Footer";
 import PrimaryButton from "./PrimaryButton";
 import SecondaryButton from "./SecondaryButton";
+import { useFocusTrap } from "../useFocusTrap";
 
-type Size = "small" | "medium" | "large";
+export type Size = "small" | "medium" | "large";
 interface ModalProps {
   isOpen: boolean;
   onClose: () => void;
@@ -42,6 +43,8 @@ function Modal({
   hasTopCloseButton = false,
   size = "small",
 }: ModalProps) {
+  const modalRef = useRef<HTMLDivElement>(null);
+  useFocusTrap(modalRef, isOpen);
   useEscapeKeyClose({ isOpen, onClose });
 
   return isOpen
@@ -56,7 +59,7 @@ function Modal({
         >
           <>
             <ModalOverlay data-testid="modal-overlay" onClick={onClose} />
-            <ModalContainer>
+            <ModalContainer ref={modalRef}>
               <ModalContent
                 position={position}
                 size={size}
