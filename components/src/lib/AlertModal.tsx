@@ -1,6 +1,6 @@
 import { Modal } from '.';
 
-interface AlertModal {
+interface AlertModalProps {
   isOpen: boolean;
   title: string;
   content: string;
@@ -18,7 +18,7 @@ function AlertModal({
   onConfirmClick,
   size,
   alertActionsWidth,
-}: AlertModal) {
+}: AlertModalProps) {
   return (
     <>
       <Modal isOpen={isOpen}>
