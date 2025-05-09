@@ -1,4 +1,4 @@
-import { ValidationType } from "../../types/validation";
+import { ValidationType } from "../types/validation";
 import { defaultValidationValue, ERROR_MESSAGE } from "../constants/validation";
 
 export const isEmpty = (value: string) => {

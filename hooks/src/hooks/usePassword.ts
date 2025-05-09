@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { defaultValidationValue } from "../constants/validation";
 import { validateNumberWithLength } from "../utils/validation";
-import { ValidationType } from "./../../types/validation";
+import { ValidationType } from "../types/validation";
 
 interface UsePasswordReturn {
   password: string;

@@ -1,4 +1,4 @@
-import { CardBrand, CardBrandType } from "../../types/cardBrand";
+import { CardBrand, CardBrandType } from "../types/cardBrand";
 
 const CARD_FORMAT_SEGMENTS: Record<CardBrand, number[]> = {
   visa: [4, 4, 4, 4],

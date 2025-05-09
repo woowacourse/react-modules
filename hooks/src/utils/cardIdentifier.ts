@@ -1,4 +1,4 @@
-import { CardBrand, CardBrandType } from "../../types/cardBrand";
+import { CardBrand, CardBrandType } from "../types/cardBrand";
 import { isLengthEqual } from "./validation";
 
 const CARD_NUMBER_MAX_LENGTH: Record<CardBrand, number> = {

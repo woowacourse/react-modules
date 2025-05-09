@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { CardBrandType } from "../../types/cardBrand";
-import { ValidationType } from "../../types/validation";
+import { CardBrandType } from "../types/cardBrand";
+import { ValidationType } from "../types/validation";
 import { defaultValidationValue } from "../constants/validation";
 import { formatByBrand } from "../utils/cardFormatter";
 import { getCardBrand } from "../utils/cardIdentifier";

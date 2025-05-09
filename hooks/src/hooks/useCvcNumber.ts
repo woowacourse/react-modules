@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ValidationType } from "../../types/validation";
+import { ValidationType } from "../types/validation";
 import { defaultValidationValue } from "../constants/validation";
 import { validateNumberWithLength } from "../utils/validation";
 
