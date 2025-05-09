@@ -1,31 +1,48 @@
+import { PropsWithChildren, useEffect } from 'react';
 import { css } from '@emotion/css';
-import { Children } from 'react';
 import { ModalProps, Position } from './Modal.type';
 import ModalBackdrop from './components/ModalBackdrop';
 import ModalHeader from './components/ModalHeader';
 import useModalKeyboard from './hooks/useModalKeyboard';
+import { ModalProvider, useModalContext } from './ModalContext';
 
-const Modal = ({ children, position, isOpen, onClose, title = '', showCloseButton = true }: ModalProps) => {
-  const [content, actions] = Children.toArray(children);
-
+const Modal = ({ children, position, isOpen, onClose, onAfterOpen }: ModalProps) => {
   if (!isOpen) return null;
+
+  useEffect(() => {
+    if (onAfterOpen) onAfterOpen();
+  }, [onAfterOpen]);
 
   useModalKeyboard(onClose);
 
   return (
-    <ModalBackdrop onClose={onClose}>
-      <div className={ModalFrame(position)} data-testid="modal">
-        <ModalHeader title={title} showCloseButton={showCloseButton} onClose={onClose} />
-        <section>{content}</section>
-        <section className={ButtonBar}>{actions}</section>
-      </div>
-    </ModalBackdrop>
+    <ModalProvider onClose={onClose}>
+      <ModalBackdrop>
+        <div className={ModalFrame(position)} data-testid="modal">
+          {children}
+        </div>
+      </ModalBackdrop>
+    </ModalProvider>
   );
+};
+
+Modal.Header = function Header({ title, showCloseButton = false }: { title: string; showCloseButton?: boolean }) {
+  const context = useModalContext();
+  if (!context) throw new Error('Modal.Header must be used within a Modal');
+  return <ModalHeader title={title} showCloseButton={showCloseButton} onClose={context.onClose} />;
+};
+
+Modal.Body = function Body({ children }: PropsWithChildren) {
+  return <section>{children}</section>;
+};
+
+Modal.Actions = function Actions({ children }: PropsWithChildren) {
+  return <>{children}</>;
 };
 
 export default Modal;
 
-const modalPosionStyle = {
+const modalPositionStyle = {
   center: css`
     width: 100%;
     min-width: 300px;
@@ -48,7 +65,7 @@ const ModalFrame = (position: Position) => css`
   align-items: center;
   justify-content: center;
   gap: 20px;
-  ${modalPosionStyle[position]}
+  ${modalPositionStyle[position]}
 `;
 
 const ButtonBar = css`

@@ -1,15 +1,13 @@
 import { css } from '@emotion/css';
-import { MouseEvent } from 'react';
+import { MouseEvent, PropsWithChildren } from 'react';
+import { useModalContext } from '../ModalContext';
 
-interface BackdropProps {
-  children: React.ReactNode;
-  onClose: () => void;
-}
+const ModalBackdrop: React.FC<PropsWithChildren> = ({ children }) => {
+  const context = useModalContext();
 
-const ModalBackdrop: React.FC<BackdropProps> = ({ children, onClose }) => {
   const handleBackdropClick = (e: MouseEvent<HTMLDivElement>) => {
     if (e.target === e.currentTarget) {
-      onClose();
+      context.onClose();
     }
   };
 

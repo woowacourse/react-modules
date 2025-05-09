@@ -17,25 +17,25 @@ function App() {
 
   const ModalContent = () => {
     return (
-      <div>
+      <>
         <p>모달 내용입니다.</p>
         <p>모달 내용입니다.</p>
         <p>모달 내용입니다.</p>
         <p>모달 내용입니다.</p>
-      </div>
+      </>
     );
   };
 
   const ModalActions = () => {
     return (
-      <>
+      <div className={ButtonBar}>
         <button className={CancelButton} onClick={handleClose}>
           닫기
         </button>
         <button className={ConfirmButton} onClick={handleConfirm}>
           동의하고 저장하기
         </button>
-      </>
+      </div>
     );
   };
 
@@ -45,9 +45,14 @@ function App() {
       <button className={OpenButton} onClick={handleOpen}>
         열기
       </button>
-      <Modal isOpen={isOpen} position="center" title="알림" onAfterOpen={handleAfterOpen} onClose={handleClose}>
-        <ModalContent />
-        <ModalActions />
+      <Modal isOpen={isOpen} position="center" onAfterOpen={handleAfterOpen} onClose={handleClose}>
+        <Modal.Header title="알림" showCloseButton />
+        <Modal.Body>
+          <ModalContent />
+        </Modal.Body>
+        <Modal.Actions>
+          <ModalActions />
+        </Modal.Actions>
       </Modal>
     </>
   );
@@ -82,4 +87,12 @@ const CancelButton = css`
   ${Button}
   background-color: white;
   color: #8b95a1;
+`;
+
+const ButtonBar = css`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
 `;
