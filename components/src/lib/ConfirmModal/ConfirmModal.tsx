@@ -27,7 +27,7 @@ const ConfirmModal = ({
     >
       <p>{description}</p>
       <S.ButtonContainer>
-        <S.CancelButton type="button" onClick={onClose}>
+        <S.CancelButton type="button" onClick={onClose} autoFocus>
           취소
         </S.CancelButton>
         <S.ConfirmButton type="button" onClick={onClose}>
