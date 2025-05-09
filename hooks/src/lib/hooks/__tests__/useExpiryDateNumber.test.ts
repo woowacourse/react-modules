@@ -56,13 +56,15 @@ describe("useExpiryDateNumber", () => {
   });
   it(`지난 유효기간은 ${EXPIRY_DATE_ERROR_MESSAGES.EXPIRED_DATE} 에러를 발생시켜야 한다`, () => {
     const { result } = renderHook(() => useExpiryDateNumber());
+    jest.useFakeTimers();
+    jest.setSystemTime(new Date("2025-02-01").getTime());
 
     act(() => {
       result.current.onExpiryDateNumberChange({
         target: { value: "0125" },
       } as React.ChangeEvent<HTMLInputElement>);
     });
-
+    jest.useRealTimers();
     expect(result.current.expiryDateNumber).toBe("0125");
     expect(result.current.isError).toBe(true);
     expect(result.current.errorMessage).toBe(
