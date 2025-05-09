@@ -58,7 +58,7 @@ const useExpirationDate = () => {
         ...prev,
         [label]: {
           isError: true,
-          errorMessage: `${MAX_LENGTH}${ERROR_MESSAGE.INVALID_LENGTH}`,
+          errorMessage: ERROR_MESSAGE.generateInvalidLengthMsg(MAX_LENGTH),
         },
       }));
       return;
@@ -85,7 +85,7 @@ const useExpirationDate = () => {
           ...prev,
           [label]: {
             isError: true,
-            errorMessage: `${ERROR_MESSAGE.INVALID_YEAR}(${currentYear}년 이상)`,
+            errorMessage: ERROR_MESSAGE.generateInvalidYearMsg(currentYear),
           },
         }));
         return;

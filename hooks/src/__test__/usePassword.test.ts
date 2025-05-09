@@ -57,7 +57,7 @@ describe('usePassword', () => {
     // then
     expect(result.current.passwordValidationResult).toEqual({
       isError: true,
-      errorMessage: `${MAX_LENGTH}${ERROR_MESSAGE.INVALID_LENGTH}`,
+      errorMessage: ERROR_MESSAGE.generateInvalidLengthMsg(MAX_LENGTH),
     });
   });
 });

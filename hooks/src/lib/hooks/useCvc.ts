@@ -32,7 +32,7 @@ const useCvc = () => {
     if (!isLengthEqual(value, MAX_LENGTH)) {
       setCvcValidationResult({
         isError: true,
-        errorMessage: `${MAX_LENGTH}${ERROR_MESSAGE.INVALID_LENGTH}`,
+        errorMessage: ERROR_MESSAGE.generateInvalidLengthMsg(MAX_LENGTH),
       });
       return;
     }

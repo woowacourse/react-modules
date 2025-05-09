@@ -55,7 +55,7 @@ describe('useCvc', () => {
     // then
     expect(result.current.cvcValidationResult).toEqual({
       isError: true,
-      errorMessage: `${MAX_LENGTH}${ERROR_MESSAGE.INVALID_LENGTH}`,
+      errorMessage: ERROR_MESSAGE.generateInvalidLengthMsg(MAX_LENGTH),
     });
   });
 });

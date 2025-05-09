@@ -59,7 +59,7 @@ describe('useCardNumber', () => {
       ...defaultCardNumberValidationValue,
       first: {
         isError: true,
-        errorMessage: `${MAX_LENGTH}${ERROR_MESSAGE.INVALID_LENGTH}`,
+        errorMessage: ERROR_MESSAGE.generateInvalidLengthMsg(MAX_LENGTH),
       },
     });
   });
@@ -81,7 +81,7 @@ describe('useCardNumber', () => {
       ...defaultCardNumberValidationValue,
       first: {
         isError: true,
-        errorMessage: `${MAX_LENGTH}${ERROR_MESSAGE.INVALID_LENGTH}`,
+        errorMessage: ERROR_MESSAGE.generateInvalidLengthMsg(MAX_LENGTH),
       },
       second: {
         isError: true,

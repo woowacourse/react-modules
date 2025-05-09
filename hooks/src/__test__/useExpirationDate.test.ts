@@ -54,7 +54,7 @@ describe('useExpirationDate', () => {
 
     const expectedErrorResult = {
       isError: true,
-      errorMessage: `${MAX_LENGTH}${ERROR_MESSAGE.INVALID_LENGTH}`,
+      errorMessage: ERROR_MESSAGE.generateInvalidLengthMsg(MAX_LENGTH),
     };
 
     // when
@@ -109,7 +109,7 @@ describe('useExpirationDate', () => {
       ...defaultExpirationDateValidationValue,
       year: {
         isError: true,
-        errorMessage: `${ERROR_MESSAGE.INVALID_YEAR}(${currentYear}년 이상)`,
+        errorMessage: ERROR_MESSAGE.generateInvalidYearMsg(currentYear),
       },
     });
   });
