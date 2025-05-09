@@ -22,6 +22,8 @@ const getCardBrand = (value: string) => {
 
   if (number === 36) return "Diners";
 
+  if (number === 34 || number === 37) return "Amex";
+
   return "none";
 };
 
@@ -69,6 +71,10 @@ export default function useCardNumber(
 
     if (getCardBrand(value) === "Diners") {
       validateCardNumberLength(value, 14);
+    }
+
+    if (getCardBrand(value) === "Amex") {
+      validateCardNumberLength(value, 16);
     }
   };
 

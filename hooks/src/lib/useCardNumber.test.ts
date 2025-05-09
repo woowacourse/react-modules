@@ -85,6 +85,17 @@ describe("useCardNumber 테스트", () => {
         expect(result.current.cardBrand()).toBe("Diners");
       }
     );
+
+    test.each([["34"], ["37"]])(
+      "cardNumber가 34/37으로 시작하면 Amex를 반환한다.",
+      (cardNumber) => {
+        const { result, rerender } = renderHook(() => useCardNumber());
+
+        changeCardNumber(result, rerender, cardNumber);
+
+        expect(result.current.cardBrand()).toBe("Amex");
+      }
+    );
   });
 
   describe("유효성 검증", () => {
@@ -124,6 +135,17 @@ describe("useCardNumber 테스트", () => {
         expect(result.current.isValid).toBeFalsy();
       }
     );
+
+    test.each([["3411"], ["371111111111111"]])(
+      "amex 카드는 16자리 미만인 경우 에러가 발생한다.",
+      (cardNumber) => {
+        const { result, rerender } = renderHook(() => useCardNumber());
+
+        changeCardNumber(result, rerender, cardNumber);
+
+        expect(result.current.isValid).toBeFalsy();
+      }
+    );
   });
 
   describe("포맷", () => {
@@ -147,6 +169,20 @@ describe("useCardNumber 테스트", () => {
       ["3611111", "3611 111"],
     ])(
       "visa/master 카드는 4/6/4자리씩 띄어서 반환한다.",
+      (cardNumber, formattedCardNumber) => {
+        const { result, rerender } = renderHook(() => useCardNumber());
+
+        changeCardNumber(result, rerender, cardNumber);
+
+        expect(result.current.formatCardNumber()).toBe(formattedCardNumber);
+      }
+    );
+
+    test.each([
+      ["341111111111111", "3411 111111 11111"],
+      ["3611111111", "3611 111111"],
+    ])(
+      "amex 카드는 4/6/5자리씩 띄어서 반환한다.",
       (cardNumber, formattedCardNumber) => {
         const { result, rerender } = renderHook(() => useCardNumber());
 
