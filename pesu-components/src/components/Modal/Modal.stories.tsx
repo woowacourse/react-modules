@@ -72,7 +72,7 @@ export const PromptModal: Story = {
             <Modal.Title>쿠폰 번호를 입력해 주세요.</Modal.Title>
           </Modal.Top>
           <Modal.Content>
-            <Modal.PromptInput />
+            <Modal.PromptInput placeholder="4자리의 쿠폰 번호를 입력해 주세요." />
           </Modal.Content>
           <Modal.Bottom>
             <Modal.ButtonContainer>
@@ -102,8 +102,8 @@ export const SmallModal: Story = {
             </Modal.Close>
           </Modal.Top>
           <Modal.Content>
-            <p>[필수] 개인정보 수집이용 동의</p>
-            <p>[필수] 고객정보 제 3자 제공동의</p>
+            <p style={{ color: '#8B95A1' }}>[필수] 개인정보 수집이용 동의</p>
+            <p style={{ color: '#8B95A1' }}>[필수] 고객정보 제 3자 제공동의</p>
           </Modal.Content>
           <Modal.Bottom>
             <Modal.ButtonContainer>
@@ -132,8 +132,8 @@ export const MediumModal: Story = {
             </Modal.Close>
           </Modal.Top>
           <Modal.Content>
-            <p>[필수] 개인정보 수집이용 동의</p>
-            <p>[필수] 고객정보 제 3자 제공동의</p>
+            <p style={{ color: '#8B95A1' }}>[필수] 개인정보 수집이용 동의</p>
+            <p style={{ color: '#8B95A1' }}>[필수] 고객정보 제 3자 제공동의</p>
           </Modal.Content>
           <Modal.Bottom>
             <Modal.ButtonContainer>
@@ -162,8 +162,8 @@ export const LargeModal: Story = {
             </Modal.Close>
           </Modal.Top>
           <Modal.Content>
-            <p>[필수] 개인정보 수집이용 동의</p>
-            <p>[필수] 고객정보 제 3자 제공동의</p>
+            <p style={{ color: '#8B95A1' }}>[필수] 개인정보 수집이용 동의</p>
+            <p style={{ color: '#8B95A1' }}>[필수] 고객정보 제 3자 제공동의</p>
           </Modal.Content>
           <Modal.Bottom>
             <Modal.ButtonContainer>

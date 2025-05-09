@@ -6,7 +6,7 @@ import { useAutoFocus } from '../../hooks';
 import { CloseIcon } from '../common';
 
 import Button, { ButtonProps } from '../common/Button/Button';
-import Input from '../common/Input/Input';
+import Input, { InputProps } from '../common/Input/Input';
 import * as S from './Modal.styles';
 
 type ModalContext = {
@@ -125,8 +125,8 @@ function Content({ children }: { children: ReactNode }) {
 }
 Content.displayName = 'ModalContent';
 
-function PromptInput() {
-  return <Input />;
+function PromptInput({ ...props }: InputProps) {
+  return <Input {...props} />;
 }
 PromptInput.displayName = 'ModalPromptInput';
 

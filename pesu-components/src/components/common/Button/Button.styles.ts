@@ -8,11 +8,11 @@ interface ButtonProps {
 
 export const Button = styled.button<ButtonProps>`
   width: ${(props) => (props.isExpanded ? '100%' : '100px')};
-  height: 48px;
+  height: 42px;
   background-color: ${(props) => (props.variant === 'outline' ? 'transparent' : '#000')};
   color: ${(props) => (props.variant === 'outline' ? '#333333BF' : '#fff')};
   border: ${(props) => (props.variant === 'outline' ? '1px solid #000' : 'none')};
-  border-radius: 12px;
+  border-radius: 8px;
   font-size: 16px;
   font-weight: 700;
   cursor: pointer;
