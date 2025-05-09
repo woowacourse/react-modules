@@ -2,6 +2,7 @@ import styles from "./Modal.module.css";
 import closeIcon from "../asset/close.png";
 import { useEffect } from "react";
 import { createPortal } from "react-dom";
+import { useKeyPress } from "../hooks/useKeyPress";
 
 export interface ModalProps {
   id: string;
@@ -27,17 +28,7 @@ function Modal({
   }`;
   const backgroundClassName = `${styles[position]} ${styles.modalBackground}`;
 
-  useEffect(() => {
-    if (!isOpen) return;
-    const handleKeydown = (e: KeyboardEvent) => {
-      if (e.key === "Escape") {
-        onClose();
-      }
-    };
-
-    window.addEventListener("keydown", handleKeydown);
-    return () => window.removeEventListener("keydown", handleKeydown);
-  }, [isOpen, onClose]);
+  useKeyPress({ targetKey: "Escape", isOpen, onClose });
 
   if (!isOpen) return null;
 
