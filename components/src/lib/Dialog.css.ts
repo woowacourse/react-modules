@@ -9,7 +9,10 @@ export const StyledOverlay = styled.div`
   background-color: rgba(0, 0, 0, 0.5);
 `;
 
-export const StyledContent = styled.div<{ position?: 'center' | 'bottom' }>`
+export const StyledContent = styled.div<{
+  position?: 'center' | 'bottom';
+  size?: 'small' | 'medium' | 'large';
+}>`
   position: fixed;
   background-color: white;
   border-radius: 10px;
@@ -26,6 +29,30 @@ export const StyledContent = styled.div<{ position?: 'center' | 'bottom' }>`
     left: 50%;
     transform: translate(-50%, -50%);
   `}
+
+  ${(props) => {
+    switch (props.size) {
+      case 'small':
+        return `
+          width: 320px;
+          max-width: 90%;
+          padding: 16px;
+        `;
+      case 'large':
+        return `
+          width: 800px;
+          max-width: 90%;
+          padding: 24px;
+        `;
+      case 'medium':
+      default:
+        return `
+          width: 500px;
+          max-width: 90%;
+          padding: 20px;
+        `;
+    }
+  }}
 `;
 
 export const StyledHeader = styled.div`

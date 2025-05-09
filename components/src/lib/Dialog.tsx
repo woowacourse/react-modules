@@ -116,6 +116,7 @@ function CloseButton({ children, className, ...props }: CloseButtonProps) {
 
 interface ContentProps extends PropsWithChildren {
   position?: 'center' | 'bottom';
+  size?: 'small' | 'medium' | 'large';
   className?: string;
   ref?: RefObject<HTMLDivElement | null>;
 }
@@ -123,6 +124,7 @@ interface ContentProps extends PropsWithChildren {
 function Content({
   children,
   position = 'center',
+  size = 'medium',
   className,
   ref,
 }: ContentProps) {
@@ -132,6 +134,7 @@ function Content({
   return (
     <StyledContent
       position={position}
+      size={size}
       className={className}
       ref={ref || modalRef}
     >
