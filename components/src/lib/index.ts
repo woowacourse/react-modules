@@ -4,6 +4,9 @@ import ModalBody from './ModalBody';
 import ModalCloseButton from './ModalCloseButton';
 import ModalOverlay from './ModalOverlay';
 import ModalTitle from './ModalTitle';
+import CancelButton from './CancelButton';
+import ConfirmButton from './ConfirmButton';
+import AlertActions from './AlertActions';
 
 export const Modal = Object.assign(ModalContainer, {
   Overlay: ModalOverlay,
@@ -11,4 +14,7 @@ export const Modal = Object.assign(ModalContainer, {
   Body: ModalBody,
   CloseButton: ModalCloseButton,
   Title: ModalTitle,
+  CancelButton: CancelButton,
+  ConfirmButton: ConfirmButton,
+  AlertActions: AlertActions,
 });
