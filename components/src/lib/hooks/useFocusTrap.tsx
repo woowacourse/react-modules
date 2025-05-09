@@ -9,7 +9,7 @@ type FocusableSelector =
   | '[tabindex]:not([tabindex="-1"])';
 
 export function useFocusTrap(isOpen: boolean, onClose: () => void) {
-  const ref = useRef<HTMLElement | null>(null);
+  const ref = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     if (!isOpen || !ref.current) return;

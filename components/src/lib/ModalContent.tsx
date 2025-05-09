@@ -6,7 +6,7 @@ interface ModalContentProps {
   position: 'top' | 'bottom' | 'center';
   size?: 'small' | 'medium' | 'large';
   styleProps?: React.CSSProperties;
-  modalRef?: React.RefObject<HTMLInputElement | null>;
+  modalRef?: React.RefObject<HTMLDivElement | null>;
 }
 
 type SizeKey = 'small' | 'medium' | 'large';
