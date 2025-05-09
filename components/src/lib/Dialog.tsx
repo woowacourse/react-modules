@@ -2,11 +2,13 @@ import {
   ButtonHTMLAttributes,
   createContext,
   PropsWithChildren,
+  RefObject,
   useContext,
   useId,
 } from 'react';
 import { createPortal } from 'react-dom';
 import useBoolean from './hooks/useBoolean';
+import useFocus from './hooks/useFocus';
 import {
   StyledCloseButton,
   StyledContent,
@@ -37,7 +39,7 @@ export function Dialog({ children }: { children: React.ReactNode }) {
   );
 }
 
-function useDialogContext() {
+export function useDialogContext() {
   const context = useContext(DialogContext);
   if (!context) {
     throw new Error('컨텍스트가 존재하지 않습니다.');
@@ -115,11 +117,24 @@ function CloseButton({ children, className, ...props }: CloseButtonProps) {
 interface ContentProps extends PropsWithChildren {
   position?: 'center' | 'bottom';
   className?: string;
+  ref?: RefObject<HTMLDivElement | null>;
 }
 
-function Content({ children, position = 'center', className }: ContentProps) {
+function Content({
+  children,
+  position = 'center',
+  className,
+  ref,
+}: ContentProps) {
+  const { isOpen } = useDialogContext();
+  const { modalRef } = useFocus(isOpen);
+
   return (
-    <StyledContent position={position} className={className}>
+    <StyledContent
+      position={position}
+      className={className}
+      ref={ref || modalRef}
+    >
       {children}
     </StyledContent>
   );
