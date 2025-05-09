@@ -22,6 +22,8 @@ function Container({ children, size = "medium", ...props }: ContainerProps) {
       id="modal-container"
       className={combined}
       onClick={(e) => e.stopPropagation()}
+      role={ctx.dialogType === "alert" ? "alertdialog" : "dialog"}
+      aria-modal="true"
     >
       <img
         id="modal-close-button"
