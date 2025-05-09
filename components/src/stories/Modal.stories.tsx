@@ -125,3 +125,17 @@ export const ConfirmModal: Story = {
     );
   },
 };
+
+export const PromptModal: Story = {
+  render: () => {
+    const [isOpen, setIsOpen] = useState(true);
+    return (
+      <Modal isOpen={isOpen} onClose={() => setIsOpen(false)}>
+        <Modal.Overlay closeOnClick={false} />
+        <Modal.PromptContent>
+          <Modal.Title title="쿠폰 번호를 입력해 주세요." />
+        </Modal.PromptContent>
+      </Modal>
+    );
+  },
+};
