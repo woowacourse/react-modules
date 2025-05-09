@@ -5,6 +5,8 @@ import CloseIconButton from './components/CloseIconButton';
 
 interface BaseProps {
   children?: React.ReactNode;
+  className?: string;
+  style?: React.CSSProperties;
 }
 
 interface ModalProps extends BaseProps {
@@ -38,11 +40,11 @@ const Overlay = () => {
   return <ModalOverlay data-testid="modal-overlay" onClick={onClose} />;
 };
 
-const Content = ({ children, hasTopCloseButton = true }: ModalContentProps) => {
+const Content = ({ children, hasTopCloseButton = true, ...props }: ModalContentProps) => {
   const { onClose } = useContext(ModalContext);
 
   return (
-    <ModalContent>
+    <ModalContent {...props}>
       {hasTopCloseButton && <CloseIconButton data-testid="modal-close" onClick={() => onClose()} />}
       {children}
     </ModalContent>
