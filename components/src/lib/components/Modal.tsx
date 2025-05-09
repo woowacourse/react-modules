@@ -29,6 +29,12 @@ export type ModalProps = {
    * @default 1000
    */
   $zIndex?: number;
+
+  /**
+   * If true, the modal will be closed by Escape key press
+   * @default true
+   */
+  closeByEscapeKey?: boolean;
 } & ComponentProps<'div'>;
 
 type ModalContainerProps = {
@@ -136,15 +142,15 @@ const ModalConfirmButton = ({
 };
 
 export const Modal = (props: ModalProps) => {
-  const { isOpen, onClose, children } = props;
+  const { isOpen, onClose, children, closeByEscapeKey = true } = props;
 
   const handleKeyDown = useCallback(
     (e: KeyboardEvent) => {
-      if (e.key === 'Escape') {
+      if (e.key === 'Escape' && closeByEscapeKey) {
         onClose();
       }
     },
-    [onClose]
+    [closeByEscapeKey, onClose]
   );
 
   useEffect(() => {
