@@ -38,7 +38,11 @@ export const Default: Story = {
       updateArgs?.({ show: false }); // Controls에서도 반영됨
     };
 
-    return <AlertModal {...args} onHide={() => updateArgs?.({ show: false })} onConfirm={handleConfirm} />;
+    return (
+      <div style={{ height: "100vh", display: "flex", alignItems: "center", justifyContent: "center" }}>
+        <AlertModal {...args} onHide={() => updateArgs?.({ show: false })} onConfirm={handleConfirm} />;
+      </div>
+    );
   },
 
   play: async ({ canvasElement }) => {

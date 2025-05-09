@@ -41,7 +41,7 @@ export const Default: Story = {
     };
 
     return (
-      <div style={{ height: "50vh", display: "flex", alignItems: "center", justifyContent: "center" }}>
+      <div style={{ height: "100vh", display: "flex", alignItems: "center", justifyContent: "center" }}>
         <ConfirmModal {...args} onHide={handleHide} onConfirm={handleConfirm} />
       </div>
     );
