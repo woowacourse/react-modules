@@ -15,6 +15,14 @@
   - [x] contents: 내용 (children)
   - [x] isOpen: 모달 열림 상태
   - [x] onClose: 모달 닫힘 핸들러
+  - [x] size: 모달 크기
+
+- [x] 모달 컨텐츠 구현
+
+  - [x] Alert모달
+  - [x] Confirm모달
+  - [x] Prompt모달
 
 - [x] 모달 UI 테스트: Storybook 구현
-- [x] 모달 npm 배포
+- [ ] 모달 npm 배포
+- [ ] README 수정하기
