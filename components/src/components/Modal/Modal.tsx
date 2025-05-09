@@ -1,12 +1,12 @@
 import { ReactNode, useId } from "react";
 import { THEME_MAP, ThemeMode } from "../../constants/theme";
 import useEscapeKey from "../../hooks/useEscapeKey";
-import { ModalBackdrop } from "./Modal.styles";
+import { ModalPosition, ModalSize } from "../../types/modal";
 import ModalContainer from "../ModalContainer/ModalContainer";
 import ModalContent from "../ModalContent/ModalContent";
 import ModalHeader from "../ModalHeader/ModalHeader";
 import Portal from "../Portal/Portal";
-import { ModalPosition, ModalSize } from "../../../types/modal";
+import { ModalBackdrop } from "./Modal.styles";
 
 interface TitleProps {
   text?: string;

@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { ModalPosition } from "../../../types/modal";
+import { ModalPosition } from "../../types/modal";
 
 export const ModalBackdrop = styled.div<{
   $position: ModalPosition;

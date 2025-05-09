@@ -1,6 +1,6 @@
 import { MouseEvent, ReactNode } from "react";
-import { ModalPosition, ModalSize } from "../../../types/modal";
 import { ModalColor } from "../../constants/theme";
+import { ModalPosition, ModalSize } from "../../types/modal";
 import { ModalBox } from "./ModalContainer.styles";
 
 interface ModalContainerProps {

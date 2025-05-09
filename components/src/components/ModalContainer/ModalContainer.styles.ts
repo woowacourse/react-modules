@@ -1,7 +1,7 @@
 import { css } from "@emotion/react";
 import styled from "@emotion/styled";
-import { ModalPosition, ModalSize } from "../../../types/modal";
 import { ModalColor } from "../../constants/theme";
+import { ModalPosition, ModalSize } from "../../types/modal";
 
 const SIZE_MAP = {
   small: "320px",
