@@ -9,7 +9,6 @@ import { isNumeric } from "../utils/isNumeric";
 import {
   isValidExpiryDateFormat,
   isValidExpiryMonth,
-  isValidExpiryYear,
   isNotExpiredDate,
 } from "../utils/date-utils";
 import { isValidLuhn } from "../utils/isValidLuhn";
@@ -39,7 +38,13 @@ export const validationRules = {
       check: (value: string) => isNumeric(value),
       message: CVC_ERROR_MESSAGES.INVALID_NUMBER,
     },
+    INVALID_FORMAT: {
+      applyWhen: isNumeric,
+      check: (value: string) => /^\d+$/.test(value),
+      message: CARD_NUMBER_ERROR_MESSAGES.INVALID_FORMAT,
+    },
     INVALID_LENGTH: {
+      applyWhen: (value: string) => /^\d+$/.test(value),
       check: (value: string) => value.length === CVC_LENGTH,
       message: CVC_ERROR_MESSAGES.INVALID_LENGTH,
     },
@@ -52,10 +57,12 @@ export const validationRules = {
     },
 
     INVALID_FORMAT: {
+      applyWhen: isNumeric,
       check: (value: string) => /^\d+$/.test(value),
       message: CARD_NUMBER_ERROR_MESSAGES.INVALID_FORMAT,
     },
     INVALID_LENGTH: {
+      applyWhen: (value: string) => /^\d+$/.test(value),
       check: (value: string) => isValidLength(value, CLIENT_CARD_NUMBER_LENGTH),
       message: (value: string) =>
         makeMessageForInvalidLength(
@@ -70,17 +77,21 @@ export const validationRules = {
       message: CARD_NUMBER_ERROR_MESSAGES.INVALID_NUMBER,
     },
     INVALID_FORMAT: {
+      applyWhen: isNumeric,
       check: (value: string) => /^\d+$/.test(value),
       message: CARD_NUMBER_ERROR_MESSAGES.INVALID_FORMAT,
     },
-    INVALID_CHECKSUM: {
-      check: (value: string) => isValidLuhn(value),
-      message: CARD_NUMBER_ERROR_MESSAGES.INVALID_CHECKSUM,
-    },
+
     INVALID_LENGTH: {
+      applyWhen: (value: string) => /^\d+$/.test(value),
       check: (value: string) => isValidLength(value, CARD_NUMBER_LENGTH),
       message: (value: string) =>
         makeMessageForInvalidLength(checkCardBrand(value), CARD_NUMBER_LENGTH),
+    },
+    INVALID_CHECKSUM: {
+      applyWhen: (value: string) => isValidLength(value, CARD_NUMBER_LENGTH),
+      check: (value: string) => isValidLuhn(value),
+      message: CARD_NUMBER_ERROR_MESSAGES.INVALID_CHECKSUM,
     },
   },
   password: {
@@ -89,10 +100,12 @@ export const validationRules = {
       message: PASSWORD_ERROR_MESSAGES.INVALID_CHARACTER,
     },
     INVALID_FORMAT: {
+      applyWhen: isNumeric,
       check: (value: string) => /^\d+$/.test(value),
       message: PASSWORD_ERROR_MESSAGES.INVALID_FORMAT,
     },
     INVALID_LENGTH: {
+      applyWhen: (value: string) => /^\d+$/.test(value),
       check: (value: string) => value.length === PASSWORD_LENGTH,
       message: PASSWORD_ERROR_MESSAGES.INVALID_LENGTH,
     },
@@ -100,19 +113,17 @@ export const validationRules = {
 
   expiryDate: {
     INVALID_FORMAT: {
-      check: (value: string) => isValidExpiryDateFormat(value),
+      check: isValidExpiryDateFormat,
       message: EXPIRY_DATE_ERROR_MESSAGES.INVALID_FORMAT,
     },
     INVALID_MONTH: {
-      check: (value: string) => isValidExpiryMonth(value),
+      applyWhen: isValidExpiryDateFormat,
+      check: isValidExpiryMonth,
       message: EXPIRY_DATE_ERROR_MESSAGES.INVALID_MONTH,
     },
-    INVALID_YEAR: {
-      check: (value: string) => isValidExpiryYear(value),
-      message: EXPIRY_DATE_ERROR_MESSAGES.INVALID_YEAR,
-    },
     EXPIRED_DATE: {
-      check: (value: string) => isNotExpiredDate(value),
+      applyWhen: isValidExpiryDateFormat,
+      check: isNotExpiredDate,
       message: EXPIRY_DATE_ERROR_MESSAGES.EXPIRED_DATE,
     },
   },
