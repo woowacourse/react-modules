@@ -95,3 +95,18 @@ export const BottomModal: Story = {
     );
   },
 };
+
+export const AlertModal: Story = {
+  render: () => {
+    const [isOpen, setIsOpen] = useState(true);
+    return (
+      <Modal isOpen={isOpen} onClose={() => setIsOpen(false)}>
+        <Modal.Overlay closeOnClick={false} />
+        <Modal.AlertContent>
+          <Modal.Title title="아이디를 입력해 주세요." />
+          <p>아이디는 필수로 입력해야 합니다.</p>
+        </Modal.AlertContent>
+      </Modal>
+    );
+  },
+};
