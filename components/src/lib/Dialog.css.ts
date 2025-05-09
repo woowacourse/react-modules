@@ -16,7 +16,6 @@ export const StyledContent = styled.div<{
 }>`
   position: fixed;
   background-color: white;
-  border-radius: 10px;
 
   width: ${(props) => {
     if (props.size === "small") return "320px";
@@ -42,17 +41,12 @@ export const StyledHeader = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 16px;
 `;
 
-export const StyledCloseButton = styled.button`
+export const StyledCloseButton = styled.div`
   background: none;
   border: none;
   cursor: pointer;
   font-size: 18px;
   color: #666;
-
-  &:hover {
-    color: #000;
-  }
 `;

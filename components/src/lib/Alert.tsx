@@ -23,8 +23,10 @@ export default function Alert({
     <Dialog position={position} size={size} open={open} modalClose={modalClose}>
       <Dialog.Root>
         <Dialog.Overlay>
-          <Dialog.Content style={{ padding: "26px 32px" }}>
-            <Dialog.Header style={{ padding: "0" }}>
+          <Dialog.Content
+            style={{ padding: "26px 32px", borderRadius: "10px" }}
+          >
+            <Dialog.Header>
               <AlertHeader title={title} />
             </Dialog.Header>
             <AlertContent content={content} />
