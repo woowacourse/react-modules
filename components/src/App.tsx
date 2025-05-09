@@ -1,22 +1,32 @@
 import { useState } from 'react';
-import './App.css';
-import { Modal } from '@seo_dev/react-modal';
+import AlertModal from './lib/alertModal/AlertModal';
+import { Modal } from './lib';
 function App() {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState({
+    base: false,
+    alert: false
+  });
 
-  const handleButtonToggle = () => {
-    setIsOpen((prev) => !prev);
+  const handleBaseModalButtonToggle = () => {
+    setIsOpen({ ...isOpen, base: !isOpen.base });
+  };
+
+  const handleAlertButtonToggle = () => {
+    setIsOpen({ ...isOpen, alert: !isOpen.alert });
   };
 
   return (
     <>
-      <button onClick={handleButtonToggle}>모달 열기</button>
-      {isOpen && (
-        <Modal onClose={handleButtonToggle}>
+      <div style={{ display: 'flex', gap: '10px' }}>
+        <button onClick={handleBaseModalButtonToggle}>Base 모달 열기</button>
+        <button onClick={handleAlertButtonToggle}>Alert 모달 열기</button>
+      </div>
+      {isOpen.base && (
+        <Modal onClose={handleBaseModalButtonToggle}>
           <Modal.BackDrop backgroundColor={'rgba(0,0,255,0.35)'} />
           <Modal.Content position="center" style={{ width: '300px', height: '300px', backgroundColor: 'white' }}>
             <Modal.Title>하이</Modal.Title>
-            <Modal.CloseButton style={{ position: 'absolute', right: '24px', top: '24px' }} onClick={handleButtonToggle}>
+            <Modal.CloseButton style={{ position: 'absolute', right: '24px', top: '24px' }}>
               <svg width="15" height="14" viewBox="0 0 15 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path
                   d="M14.8167 1.41L13.4067 0L7.81665 5.59L2.22665 0L0.81665 1.41L6.40665 7L0.81665 12.59L2.22665 14L7.81665 8.41L13.4067 14L14.8167 12.59L9.22665 7L14.8167 1.41Z"
@@ -26,6 +36,17 @@ function App() {
             </Modal.CloseButton>
           </Modal.Content>
         </Modal>
+      )}
+      {isOpen.alert && (
+        <AlertModal
+          title="아이디를 입력해 주세요."
+          description="아이디는 필수로 입력해야 합니다."
+          onClose={handleAlertButtonToggle}
+          onConfirmButtonClick={handleAlertButtonToggle}
+          position="center"
+          buttonText="확인"
+          size="small"
+        />
       )}
     </>
   );
