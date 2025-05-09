@@ -30,4 +30,5 @@ const Wrapper = styled.div<WrapperProps>`
   gap: 12px;
   width: ${(props) => (props.width ? `${props.width}px` : '100%')};
   float: right;
+  margin-top: 22px;
 `;
