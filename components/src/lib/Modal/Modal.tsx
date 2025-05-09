@@ -5,6 +5,7 @@ import useEscapeKeyClose from "../useEscapeKeyClose";
 import { createPortal } from "react-dom";
 import { ModalContext, Position, useModalContext } from "../useModalContext";
 import Header from "./Header";
+import Body from "./Body";
 
 interface ModalProps {
   isOpen: boolean;
@@ -86,10 +87,7 @@ function Modal({
 export default Modal;
 
 Modal.Header = Header;
-
-Modal.Body = ({ children }: { children: ReactNode }) => {
-  return <MainSection id="modal-description">{children}</MainSection>;
-};
+Modal.Body = Body;
 
 Modal.Footer = () => {
   const {
@@ -155,12 +153,6 @@ const ModalOverlay = styled.div`
   right: 0;
   bottom: 0;
   background-color: rgba(0, 0, 0, 0.35);
-`;
-
-const MainSection = styled.section`
-  display: flex;
-  flex-direction: column;
-  height: 100%;
 `;
 
 const ButtonContainer = styled.div<{ position: Position }>`
