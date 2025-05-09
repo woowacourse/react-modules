@@ -13,7 +13,10 @@ export const BtnWrapper = styled.div`
   gap: 10px;
 `;
 
-export const Button = styled.button``;
+export const Button = styled.button`
+  background-color: #000;
+  color: #fff;
+`;
 
 export const CancelButton = styled(Button)`
   background-color: #fff;

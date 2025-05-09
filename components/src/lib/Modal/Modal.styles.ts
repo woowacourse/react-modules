@@ -24,7 +24,7 @@ export const Backdrop = styled.div<Pick<ModalStyledProps, '$position'>>`
   inset: 0;
 `;
 
-export const ModalBox = styled.div<
+export const ModalContainer = styled.div<
   Pick<ModalStyledProps, '$position' | '$backgroundColor' | '$size'>
 >`
   display: flex;
