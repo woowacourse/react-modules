@@ -1,4 +1,4 @@
-import { ComponentProps, createContext, useContext, useEffect } from 'react';
+import { ComponentProps, createContext, useCallback, useContext, useEffect } from 'react';
 
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
@@ -114,18 +114,21 @@ const ModalHeader = ({ title, showCloseButton = true }: ModalHeaderProps) => {
 };
 
 export const Modal = (props: ModalProps) => {
-  const handleKeyDown = (e: KeyboardEvent) => {
-    if (e.key === 'Escape') {
-      props.onClose();
-    }
-  };
+  const handleKeyDown = useCallback(
+    (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        props.onClose();
+      }
+    },
+    [props]
+  );
 
   useEffect(() => {
     window.addEventListener('keydown', handleKeyDown);
     return () => {
       window.removeEventListener('keydown', handleKeyDown);
     };
-  }, []);
+  }, [handleKeyDown]);
 
   return (
     <ModalContext.Provider value={props}>
