@@ -1,7 +1,6 @@
 import AlertModal from "./lib/AlertModal/AlertModal";
 import ConfirmModal from "./lib/ConfirmModal/ConfirmModal";
 import PromptModal from "./lib/PromptModal/PromptModal";
-import ConsentModal from "./lib/ConsentModal/ConsentModal";
 import "./styles/reset.css";
 import "./App.css";
 import { useState } from "react";
@@ -10,7 +9,6 @@ function App() {
   const [isAlertModalOpen, setIsAlertModalOpen] = useState(false);
   const [isConfirmModalOpen, setIsConfirmModalOpen] = useState(false);
   const [isPromptModalOpen, setIsPromptModalOpen] = useState(false);
-  const [isConsentModalOpen, setIsConsentModalOpen] = useState(false);
   const [couponCode, setCouponCode] = useState("");
 
   return (
@@ -24,9 +22,6 @@ function App() {
         </button>
         <button onClick={() => setIsPromptModalOpen(true)}>
           PromptModal Open
-        </button>
-        <button onClick={() => setIsConsentModalOpen(true)}>
-          ConsentModal Open
         </button>
       </div>
       <AlertModal
@@ -47,11 +42,6 @@ function App() {
         inputValue={couponCode}
         onChangeInput={(e) => setCouponCode(e.target.value)}
         onClose={() => setIsPromptModalOpen(false)}
-      />
-      <ConsentModal
-        isModalOpen={isConsentModalOpen}
-        title="약관에 동의해 주세요."
-        onClose={() => setIsConsentModalOpen(false)}
       />
     </>
   );
