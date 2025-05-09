@@ -97,17 +97,13 @@ const ModalTitle = ({ title }: ModalTitleProps) => {
   return <StyledModalTitle aria-label={title}>{title}</StyledModalTitle>;
 };
 
-const ModalCloseButton = ({ showCloseButton = true }: { showCloseButton?: boolean }) => {
+const ModalCloseButton = () => {
   const { onClose } = useModalContext();
 
   return (
-    <>
-      {showCloseButton && (
-        <StyledCloseButton type="button" onClick={onClose} aria-label="closeModalButton">
-          <StyledCloseIcon src={closeIcon} alt="closeIcon" />
-        </StyledCloseButton>
-      )}
-    </>
+    <StyledCloseButton type="button" onClick={onClose} aria-label="closeModalButton">
+      <StyledCloseIcon src={closeIcon} alt="closeIcon" />
+    </StyledCloseButton>
   );
 };
 
