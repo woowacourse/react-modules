@@ -1,21 +1,21 @@
 import styled from "@emotion/styled";
-import { ButtonHTMLAttributes } from "react";
+import { ButtonHTMLAttributes, ReactNode } from "react";
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  text?: string;
+  children: ReactNode;
   color?: string;
   backgroundColor?: string;
 }
 
 function Button({
-  text,
+  children,
   color = "#fff",
   backgroundColor = "#333",
   ...rest
 }: ButtonProps) {
   return (
     <StyleButton color={color} backgroundColor={backgroundColor} {...rest}>
-      {text}
+      {children}
     </StyleButton>
   );
 }

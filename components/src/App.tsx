@@ -48,16 +48,15 @@ function App() {
         onClose={handleModalClose}
         onConfirm={handleModalConfirm}
         position="center"
-        primaryButton={true}
-        secondaryButton={true}
-        primaryButtonText="취소"
-        secondaryButtonText="확인"
       >
         <Modal.Header>테스트 제목</Modal.Header>
         <Modal.Body>
           <p>모달열림</p>
         </Modal.Body>
-        <Modal.Footer />
+        <Modal.Footer>
+          <Modal.PrimaryButton>취소</Modal.PrimaryButton>
+          <Modal.SecondaryButton>확인</Modal.SecondaryButton>
+        </Modal.Footer>
       </Modal>
       <AlertModal
         isOpen={AlertIsOpen}

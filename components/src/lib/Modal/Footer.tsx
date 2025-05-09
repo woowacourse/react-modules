@@ -1,34 +1,12 @@
 import styled from "@emotion/styled";
 import Button from "../common/Button";
 import { Position, useModalContext } from "../useModalContext";
+import { ReactNode } from "react";
 
-const Footer = () => {
-  const {
-    onClose,
-    onConfirm,
-    position,
-    primaryButton,
-    primaryButtonText,
-    secondaryButton,
-    secondaryButtonText,
-  } = useModalContext();
+const Footer = ({ children }: { children: ReactNode }) => {
+  const { position } = useModalContext();
 
-  return (
-    <ButtonContainer position={position}>
-      {primaryButton ? (
-        <Button
-          onClick={onClose}
-          text={primaryButtonText}
-          color="#8b95a1"
-          backgroundColor="transparent"
-        />
-      ) : null}
-
-      {secondaryButton ? (
-        <Button text={secondaryButtonText} onClick={onConfirm} />
-      ) : null}
-    </ButtonContainer>
-  );
+  return <ButtonContainer position={position}>{children}</ButtonContainer>;
 };
 
 export default Footer;

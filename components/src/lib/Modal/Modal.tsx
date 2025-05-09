@@ -1,12 +1,13 @@
 import styled from "@emotion/styled";
 import { ReactNode } from "react";
-import Button from "../common/Button";
 import useEscapeKeyClose from "../useEscapeKeyClose";
 import { createPortal } from "react-dom";
-import { ModalContext, Position, useModalContext } from "../useModalContext";
+import { ModalContext, Position } from "../useModalContext";
 import Header from "./Header";
 import Body from "./Body";
 import Footer from "./Footer";
+import PrimaryButton from "./PrimaryButton";
+import SecondaryButton from "./SecondaryButton";
 
 interface ModalProps {
   isOpen: boolean;
@@ -15,10 +16,6 @@ interface ModalProps {
   onConfirm?: () => void;
   position?: Position;
   hasTopCloseButton?: boolean;
-  primaryButton?: boolean;
-  secondaryButton?: boolean;
-  primaryButtonText?: string;
-  secondaryButtonText?: string;
 }
 /**
  * 모달 생성
@@ -30,10 +27,7 @@ interface ModalProps {
  * @property {() => void} [onConfirm] - (선택) 확인 버튼 클릭 시 실행할 함수
  * @property {'center' | 'bottom'} [position] - (선택) 모달 위치
  * @property {boolean} [hasTopCloseButton] - (선택) 상단 닫기 버튼 표시 여부
- * @property {boolean} [primaryButton] - (선택) 확인 버튼 표시 여부
- * @property {boolean} [secondaryButton] - (선택) 취소 버튼 표시 여부
- * @property {string} [primaryButtonText] - (선택) 확인 버튼 텍스트
- * @property {string} [secondaryButtonText] - (선택) 취소 버튼 텍스트
+
  */
 
 function Modal({
@@ -43,10 +37,6 @@ function Modal({
   position = "center",
   children,
   hasTopCloseButton = false,
-  primaryButton = false,
-  secondaryButton = false,
-  primaryButtonText,
-  secondaryButtonText,
 }: ModalProps) {
   useEscapeKeyClose({ isOpen, onClose });
 
@@ -58,10 +48,6 @@ function Modal({
             onConfirm,
             position,
             hasTopCloseButton,
-            primaryButton,
-            primaryButtonText,
-            secondaryButton,
-            secondaryButtonText,
           }}
         >
           <>
@@ -90,6 +76,8 @@ export default Modal;
 Modal.Header = Header;
 Modal.Body = Body;
 Modal.Footer = Footer;
+Modal.PrimaryButton = PrimaryButton;
+Modal.SecondaryButton = SecondaryButton;
 
 const ModalContainer = styled.div``;
 
