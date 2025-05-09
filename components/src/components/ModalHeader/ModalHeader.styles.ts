@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 import { ModalColor } from "../../constants/theme";
 
-export const TopWrapper = styled.div<{ $titleText?: string }>`
+export const HeaderWrapper = styled.div<{ $titleText?: string }>`
   display: flex;
   gap: 4px;
   align-items: center;

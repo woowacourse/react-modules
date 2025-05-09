@@ -1,6 +1,6 @@
 import { IoClose } from "react-icons/io5";
 import { ModalColor } from "../../constants/theme";
-import { CloseButton, Title, TopWrapper } from "./ModalHeader.styles";
+import { CloseButton, HeaderWrapper, Title } from "./ModalHeader.styles";
 
 interface ModalHeaderProps {
   titleId: string;
@@ -22,7 +22,7 @@ const ModalHeader = ({
   onClose,
 }: ModalHeaderProps) => {
   return (
-    <TopWrapper $titleText={titleText}>
+    <HeaderWrapper $titleText={titleText}>
       {titleText && (
         <Title $color={titleColor} $size={titleSize} id={titleId}>
           {titleText}
@@ -38,7 +38,7 @@ const ModalHeader = ({
           />
         </CloseButton>
       )}
-    </TopWrapper>
+    </HeaderWrapper>
   );
 };
 

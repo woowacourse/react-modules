@@ -1,7 +1,7 @@
 import { MouseEvent, ReactNode } from "react";
 import { ModalColor } from "../../constants/theme";
 import { ModalPosition, ModalSize } from "../../types/modal";
-import { ModalBox } from "./ModalContainer.styles";
+import { ModalWrapper } from "./ModalContainer.styles";
 
 interface ModalContainerProps {
   position: ModalPosition;
@@ -25,7 +25,7 @@ const ModalContainer = ({
   };
 
   return (
-    <ModalBox
+    <ModalWrapper
       $position={position}
       $size={size}
       $backgroundColor={backgroundColor}
@@ -36,7 +36,7 @@ const ModalContainer = ({
       aria-modal="true"
     >
       {children}
-    </ModalBox>
+    </ModalWrapper>
   );
 };
 

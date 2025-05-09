@@ -9,7 +9,7 @@ const SIZE_MAP = {
   large: "600px",
 };
 
-export const ModalBox = styled.div<{
+export const ModalWrapper = styled.div<{
   $position: ModalPosition;
   $size: ModalSize;
   $backgroundColor: ModalColor;
