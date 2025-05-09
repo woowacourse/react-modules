@@ -1,4 +1,4 @@
-import { ComponentProps, useEffect } from 'react';
+import { ComponentProps, createContext, useContext, useEffect } from 'react';
 
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
@@ -7,25 +7,12 @@ import { Portal } from './Portal';
 
 import closeIcon from '../assets/Close.svg';
 
-export type Props = {
+export type ModalProps = {
   /**
    * If true, the modal will be open
    */
   isOpen: boolean;
-  /**
-   * position of the modal
-   * @default 'center'
-   */
-  position?: 'center' | 'bottom';
-  /**
-   * The title of the modal
-   */
-  title: string;
-  /**
-   * Indicate close button visibility
-   * @default true
-   */
-  showCloseButton?: boolean;
+
   /**
    * close function to be called when the close button is clicked
    * @default 'Close'
@@ -42,30 +29,94 @@ export type Props = {
    * @default 1000
    */
   $zIndex?: number;
+} & ComponentProps<'div'>;
 
+type ModalContainerProps = {
+  /**
+   * The content of the modal
+   */
+  children: React.ReactNode;
+  /**
+   * position of the modal
+   * @default 'center'
+   */
+  position?: 'center' | 'bottom';
   /**
    * Custom styles for the modal
    */
   containerStyle?: React.CSSProperties;
-} & ComponentProps<'div'>;
+};
 
-export const Modal = ({
-  isOpen,
-  position = 'center',
-  title,
-  showCloseButton,
-  onClose,
+type ModalHeaderProps = {
+  /**
+   * The title of the modal
+   */
+  title: string;
+  /**
+   * Indicate close button visibility
+   * @default true
+   */
+  showCloseButton?: boolean;
+};
+
+const ModalContext = createContext<ModalProps | undefined>(undefined);
+
+const useModalContext = () => {
+  const props = useContext(ModalContext);
+
+  if (!props) {
+    throw new Error('useModalContext must be used within a ModalProvider');
+  }
+
+  return props;
+};
+
+const ModalBackdrop = () => {
+  const { onClose, $zIndex = 1000 } = useModalContext();
+
+  return <StyledBackDrop onClick={onClose} aria-hidden="true" backdropZIndex={$zIndex} />;
+};
+
+const ModalContainer = ({
   children,
-  $zIndex = 1000,
+  position = 'center',
   containerStyle = {},
-  ...props
-}: Props) => {
-  const backdropZIndex = $zIndex;
-  const modalZIndex = $zIndex + 1;
+}: ModalContainerProps) => {
+  const { $zIndex = 1000, ...props } = useModalContext();
 
+  return (
+    <StyledModalContainer
+      role="dialog"
+      aria-modal="true"
+      position={position}
+      modalZIndex={$zIndex + 1}
+      containerStyle={containerStyle}
+      {...props}
+    >
+      {children}
+    </StyledModalContainer>
+  );
+};
+
+const ModalHeader = ({ title, showCloseButton = true }: ModalHeaderProps) => {
+  const { onClose } = useModalContext();
+
+  return (
+    <StyledModalHeader aria-label={title}>
+      {title}
+      {showCloseButton && (
+        <StyledCloseButton type="button" onClick={onClose} aria-label="closeModalButton">
+          <StyledCloseIconButton src={closeIcon} alt="closeIcon" />
+        </StyledCloseButton>
+      )}
+    </StyledModalHeader>
+  );
+};
+
+export const Modal = (props: ModalProps) => {
   const handleKeyDown = (e: KeyboardEvent) => {
     if (e.key === 'Escape') {
-      onClose();
+      props.onClose();
     }
   };
 
@@ -77,29 +128,15 @@ export const Modal = ({
   }, []);
 
   return (
-    <Portal isOpen={isOpen}>
-      <StyledBackDrop onClick={onClose} aria-hidden="true" backdropZIndex={backdropZIndex} />
-      <StyledModalContainer
-        role="dialog"
-        aria-modal="true"
-        position={position}
-        modalZIndex={modalZIndex}
-        containerStyle={containerStyle}
-        {...props}
-      >
-        <StyledModalHeader aria-label={title}>
-          {title}
-          {showCloseButton && (
-            <StyledCloseButton type="button" onClick={onClose} aria-label="closeModalButton">
-              <StyledCloseIconButton src={closeIcon} alt="closeIcon" />
-            </StyledCloseButton>
-          )}
-        </StyledModalHeader>
-        {children}
-      </StyledModalContainer>
-    </Portal>
+    <ModalContext.Provider value={props}>
+      <Portal isOpen={props.isOpen}>{props.children}</Portal>
+    </ModalContext.Provider>
   );
 };
+
+Modal.Backdrop = ModalBackdrop;
+Modal.Container = ModalContainer;
+Modal.Header = ModalHeader;
 
 const StyledBackDrop = styled.div<{ backdropZIndex: number }>`
   width: 100%;
@@ -150,9 +187,7 @@ const positionStyle = {
   `,
 } as const;
 
-const StyledModalContainer = styled.div<
-  { modalZIndex: number } & Pick<Props, 'position' | 'containerStyle'>
->`
+const StyledModalContainer = styled.div<{ modalZIndex: number } & ModalContainerProps>`
   width: 100%;
   max-width: 400px;
   height: auto;
