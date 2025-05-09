@@ -12,6 +12,7 @@ import { IconClose } from "../IconClose";
 interface ModalPropsType {
   isModalOpen: boolean;
   position?: "center" | "bottom";
+  size?: "small" | "medium" | "large";
   title: string;
   children: React.ReactNode;
   onClose: () => void;
@@ -21,6 +22,7 @@ interface ModalPropsType {
 const BaseModal = ({
   isModalOpen,
   position = "center",
+  size = "medium",
   title,
   children,
   onClose,
@@ -30,7 +32,7 @@ const BaseModal = ({
 
   const BaseModalContent = (
     <ModalBackground isModalOpen={isModalOpen} position={position}>
-      <ModalContainer position={position}>
+      <ModalContainer position={position} size={size}>
         <ModalHeader>
           <h4>{title}</h4>
           {showCloseButton && onClose && (

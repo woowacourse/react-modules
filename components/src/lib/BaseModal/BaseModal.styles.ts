@@ -1,4 +1,45 @@
 import styled from "@emotion/styled";
+import { css } from "@emotion/react";
+
+const sizeStyles = (size: string) => {
+  switch (size) {
+    case "small":
+      return css`
+        width: 320px;
+        height: 206px;
+        border-radius: 8px;
+        padding: 24px 32px;
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+      `;
+
+    case "medium":
+      return css`
+        width: 480px;
+        height: 206px;
+        border-radius: 8px;
+        padding: 24px 32px;
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+      `;
+
+    case "large":
+      return css`
+        width: 600px;
+        height: 206px;
+        border-radius: 8px;
+        padding: 24px 32px;
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+      `;
+
+    default:
+      return css``;
+  }
+};
 
 export const ModalBackground = styled.div<{
   isModalOpen: boolean;
@@ -26,10 +67,11 @@ export const ModalBackground = styled.div<{
         return "flex-end";
     }
   }};
-`;
+      `;
 
 export const ModalContainer = styled.div<{
   position: string;
+  size: string;
 }>`
   min-width: 300px;
   background-color: white;
@@ -37,8 +79,9 @@ export const ModalContainer = styled.div<{
   border-radius: 16px;
   color: #000000;
   position: relative;
-  width:  ${({ position }) => position === "bottom" && "100%"}
-  border-radius:  ${({ position }) => position === "bottom" && "10px 10px 0 0;"}
+  width: ${({ position }) => position === "bottom" && "100%"};
+  border-radius: ${({ position }) => position === "bottom" && "10px 10px 0 0;"};
+  ${({ size }) => sizeStyles(size)};
 `;
 
 export const ModalHeader = styled.div`
