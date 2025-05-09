@@ -6,6 +6,7 @@ import { createPortal } from "react-dom";
 import { ModalContext, Position, useModalContext } from "../useModalContext";
 import Header from "./Header";
 import Body from "./Body";
+import Footer from "./Footer";
 
 interface ModalProps {
   isOpen: boolean;
@@ -88,35 +89,7 @@ export default Modal;
 
 Modal.Header = Header;
 Modal.Body = Body;
-
-Modal.Footer = () => {
-  const {
-    onClose,
-    onConfirm,
-    position,
-    primaryButton,
-    primaryButtonText,
-    secondaryButton,
-    secondaryButtonText,
-  } = useModalContext();
-
-  return (
-    <ButtonContainer position={position}>
-      {primaryButton ? (
-        <Button
-          onClick={onClose}
-          text={primaryButtonText}
-          color="#8b95a1"
-          backgroundColor="transparent"
-        />
-      ) : null}
-
-      {secondaryButton ? (
-        <Button text={secondaryButtonText} onClick={onConfirm} />
-      ) : null}
-    </ButtonContainer>
-  );
-};
+Modal.Footer = Footer;
 
 const ModalContainer = styled.div``;
 
@@ -153,20 +126,4 @@ const ModalOverlay = styled.div`
   right: 0;
   bottom: 0;
   background-color: rgba(0, 0, 0, 0.35);
-`;
-
-const ButtonContainer = styled.div<{ position: Position }>`
-  display: flex;
-  justify-content: end;
-  gap: 12px;
-  width: ${({ position }) =>
-    position === "bottom" &&
-    `
-      flex-grow:1;
-      width:100%;
-
-      ${Button} button{
-        width:100%;
-      }
-    `};
 `;
