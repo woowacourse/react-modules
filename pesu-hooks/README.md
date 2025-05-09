@@ -1,143 +1,121 @@
-# `pesu-hooks` – React Custom Hooks Library
+# Pesu Hooks
 
-React 프로젝트에서 카드 결제 입력 폼 구현에 특화된 커스텀 훅 모음입니다.  
-카드 번호, 만료일, CVC, 비밀번호 입력 등 복잡한 입력 검증과 포맷팅을 간결하게 처리할 수 있습니다.
-
-## 목차
-
-- [설치](#설치)
-- [훅 목록 및 시그니처](#훅-목록-및-시그니처)
-  - [useCardNumber](#usecardnumber)
-  - [useExpiryDate](#useexpirydate)
-  - [useCvcNumber](#usecvcnumber)
-  - [usePassword](#usepassword)
-- [예제 코드](#예제-코드)
+카드 결제 입력 폼 등에서 사용할 수 있는 입력 관리 및 검증용 커스텀 훅들이 모여 있습니다.  
+각 훅은 입력값 상태, 유효성 검사, 포맷팅, 에러 메시지 관리 등 실무에 바로 쓸 수 있는 기능을 제공합니다.
 
 ---
 
-## 설치
+## 주요 특징
 
-```bash
-npm install pesu-hooks
-# 또는
-yarn add pesu-hooks
-```
-
----
-
-## 훅 목록 및 시그니처
-
-### `useCardNumber`
-
-카드 번호 입력값을 관리하고, 자동 포맷팅 및 유효성 검사를 제공합니다.
-
-```typescript
-const { value, setValue, isValid, error, handleChange, handleBlur } = useCardNumber();
-```
-
-- **value**: 현재 입력값 (string)
-- **setValue**: 입력값 직접 설정 함수 (string → void)
-- **isValid**: 유효성 여부 (boolean)
-- **error**: 에러 메시지 (string | null)
-- **handleChange**: input의 onChange에 연결 (event → void)
-- **handleBlur**: input의 onBlur에 연결 (event → void)
+- 입력값 상태 관리: 각 입력 필드별 value, setValue, isValid, error 등 상태 제공
+- 자동 포맷팅 및 유효성 검사: 카드 번호, 만료일, CVC, 비밀번호 등 실시간 검증 및 포맷팅
+- 핸들러 제공: input의 onChange, onBlur에 바로 연결 가능한 핸들러 제공
+- 폼 전체 관리: useForm을 통한 폼 단위의 상태 및 유효성 관리
 
 ---
 
-### `useExpiryDate`
+## 폴더 구조
 
-카드 만료일(MM/YY) 입력값을 관리하고, 자동 포맷팅 및 유효성 검사를 제공합니다.
+- **useCardNumber/**  
+  카드 번호 입력 및 검증 훅
 
-```typescript
-const { value, setValue, isValid, error, handleChange, handleBlur } = useExpiryDate();
-```
+- **useExpirationDate/**  
+  카드 만료일(MM/YY) 입력 및 검증 훅
 
-- **value**: 현재 입력값 (string)
-- **setValue**: 입력값 직접 설정 함수 (string → void)
-- **isValid**: 유효성 여부 (boolean)
-- **error**: 에러 메시지 (string | null)
-- **handleChange**: input의 onChange에 연결 (event → void)
-- **handleBlur**: input의 onBlur에 연결 (event → void)
+- **useCVCNumber/**  
+  CVC(카드 뒷면 3~4자리) 입력 및 검증 훅
 
----
+- **usePassword/**  
+  카드 비밀번호(앞 2자리) 입력 및 검증 훅
 
-### `useCvcNumber`
+- **useForm/**  
+  폼 전체의 입력 상태 및 유효성 관리 훅
 
-CVC(카드 뒷면 3~4자리) 입력값을 관리하고, 유효성 검사를 제공합니다.
-
-```typescript
-const { value, setValue, isValid, error, handleChange, handleBlur } = useCvcNumber();
-```
-
-- **value**: 현재 입력값 (string)
-- **setValue**: 입력값 직접 설정 함수 (string → void)
-- **isValid**: 유효성 여부 (boolean)
-- **error**: 에러 메시지 (string | null)
-- **handleChange**: input의 onChange에 연결 (event → void)
-- **handleBlur**: input의 onBlur에 연결 (event → void)
+- **index.ts**  
+  각 훅을 한 번에 export하는 엔트리 파일
 
 ---
 
-### `usePassword`
-
-카드 비밀번호(숫자 2자리) 입력값을 관리하고, 유효성 검사를 제공합니다.
-
-```typescript
-const { value, setValue, isValid, error, handleChange, handleBlur } = usePassword();
-```
-
-- **value**: 현재 입력값 (string)
-- **setValue**: 입력값 직접 설정 함수 (string → void)
-- **isValid**: 유효성 여부 (boolean)
-- **error**: 에러 메시지 (string | null)
-- **handleChange**: input의 onChange에 연결 (event → void)
-- **handleBlur**: input의 onBlur에 연결 (event → void)
-
----
-
-## 예제 코드
+## 예시 코드
 
 ```tsx
-import { useCardNumber, useExpiryDate, useCvcNumber, usePassword } from '@lib';
+import { useCardNumber, useExpirationDate, useCVCNumber, usePassword } from 'pesu-hooks';
+import { useForm } from '@/hooks'; // 프로젝트별 커스텀 useForm 사용 가능
 
-function CardForm() {
-  const cardNumber = useCardNumber();
-  const expiryDate = useExpiryDate();
-  const cvc = useCvcNumber();
-  const password = usePassword();
+function CardRegisterForm() {
+  // 1. 카드 번호
+  const { cardNumber, cardNumberErrors, cardNumberRegister, isCardNumberIsValid } = useCardNumber();
+
+  // 2. 카드사 (예시: useForm 활용)
+  const {
+    value: { company: selectedCompany },
+    register: cardCompanyRegister,
+    isValid: isCardCompanyValid,
+  } = useForm({
+    defaultValues: { company: '' },
+  });
+
+  // 3. 카드 유효기간
+  const { expiryDate, expiryDateErrors, expiryDateRegister, isExpiryDateIsValid } = useExpirationDate();
+
+  // 4. 카드 CVC 번호
+  const { cvcNumber, cvcNumberErrors, cvcNumberRegister, isCvcNumberIsValid } = useCVCNumber();
+
+  // 5. 비밀번호
+  const { password, passwordErrors, passwordRegister, isPasswordIsValid } = usePassword();
 
   return (
     <form>
-      <input
-        type="text"
-        value={cardNumber.value}
-        onChange={cardNumber.handleChange}
-        onBlur={cardNumber.handleBlur}
-        placeholder="카드 번호"
-      />
-      {cardNumber.error && <span>{cardNumber.error}</span>}
+      {/* 카드 번호 */}
+      <input {...cardNumberRegister} />
+      {cardNumberErrors && <span>{cardNumberErrors}</span>}
 
-      <input
-        type="text"
-        value={expiryDate.value}
-        onChange={expiryDate.handleChange}
-        onBlur={expiryDate.handleBlur}
-        placeholder="MM/YY"
-      />
-      {expiryDate.error && <span>{expiryDate.error}</span>}
+      {/* 카드사 */}
+      <select {...cardCompanyRegister}>
+        <option value="">카드사 선택</option>
+        {/* ...카드사 옵션들 */}
+      </select>
 
-      <input type="text" value={cvc.value} onChange={cvc.handleChange} onBlur={cvc.handleBlur} placeholder="CVC" />
-      {cvc.error && <span>{cvc.error}</span>}
+      {/* 유효기간 */}
+      <input {...expiryDateRegister} />
+      {expiryDateErrors && <span>{expiryDateErrors}</span>}
 
-      <input
-        type="password"
-        value={password.value}
-        onChange={password.handleChange}
-        onBlur={password.handleBlur}
-        placeholder="비밀번호 앞 2자리"
-      />
-      {password.error && <span>{password.error}</span>}
+      {/* CVC */}
+      <input {...cvcNumberRegister} />
+      {cvcNumberErrors && <span>{cvcNumberErrors}</span>}
+
+      {/* 비밀번호 */}
+      <input {...passwordRegister} />
+      {passwordErrors && <span>{passwordErrors}</span>}
+
+      <button
+        type="submit"
+        disabled={
+          !isCardNumberIsValid ||
+          !isCardCompanyValid ||
+          !isExpiryDateIsValid ||
+          !isCvcNumberIsValid ||
+          !isPasswordIsValid
+        }
+      >
+        등록
+      </button>
     </form>
   );
 }
+```
+
+---
+
+### 반환값 예시
+
+각 훅은 아래와 같은 형태의 값을 반환합니다(실제 구현에 따라 다를 수 있습니다).
+
+```typescript
+const {
+  cardNumber, // 입력값(string)
+  cardNumberErrors, // 에러 메시지(string | null)
+  cardNumberRegister, // input에 spread할 등록 함수
+  isCardNumberIsValid, // 유효성(boolean)
+} = useCardNumber();
 ```

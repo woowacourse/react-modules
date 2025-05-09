@@ -1,83 +1,98 @@
-# `pesu-components` – React UI Components Library
+# Pesu Components / Modal 컴포넌트
 
-React 프로젝트에서 바로 사용할 수 있는 UI 컴포넌트 모음입니다.  
-현재는 모달(Modal) 컴포넌트를 제공합니다.
-
----
-
-## 목차
-
-- [설치](#설치)
-- [컴포넌트 목록 및 시그니처](#컴포넌트-목록-및-시그니처)
-  - [Modal](#modal)
-- [예제 코드](#예제-코드)
+`Modal.tsx`는 React 환경에서 재사용 가능한 모달 UI를 제공하는 컴포넌트입니다.  
+컨텍스트 기반의 제어, 다양한 위치/크기/마진/z-index 옵션, 트리거 및 내부 구조 분할 등 확장성과 커스터마이즈에 중점을 두고 설계되었습니다.
 
 ---
 
-## 설치
+## 주요 특징
 
-```bash
-npm install pesu-components
-# 또는
-yarn add pesu-components
-```
+- **컨텍스트 기반 제어**: `ModalContext`를 통해 모달의 열림/닫힘 상태를 전역적으로 관리
+- **다양한 옵션**: 위치(`center`/`bottom`), 마진, z-index, 크기(`small`/`medium`/`large`) 등 다양한 UI 옵션 제공
+- **컴포지션 패턴**: `Modal.Top`, `Modal.Content`, `Modal.Bottom` 등 slot 기반의 구조적 분할
+- **트리거/닫기/확인/취소 버튼 등 내장**
+- **포커스 관리 및 ESC 키 닫기 지원**
 
 ---
 
-## 컴포넌트 목록 및 시그니처
-
-### `Modal`
-
-화면 중앙 또는 하단에 띄울 수 있는 모달 컴포넌트입니다.  
-제목, 닫기 버튼, 위치, 마진, z-index 등 다양한 옵션을 제공합니다.
-
-#### 시그니처
+## 사용 예시
 
 ```tsx
-import Modal from 'pesu-components/Modal';
-
-<Modal
-  title="모달 제목"
-  isOpen={isOpen}
-  onClose={handleClose}
-  position="center" // 또는 "bottom"
-  margin={20}
-  zIndex={10}
->
-  {/* 모달 내용 */}
-</Modal>;
-```
-
-#### Props
-
-| 이름     | 타입                 | 필수 | 기본값   | 설명                    |
-| -------- | -------------------- | ---- | -------- | ----------------------- |
-| title    | string               | ✔   | -        | 모달의 제목             |
-| isOpen   | boolean              | ✔   | -        | 모달 표시 여부          |
-| onClose  | () => void           | ✔   | -        | 모달 닫기 콜백          |
-| position | 'center' \| 'bottom' |      | 'center' | 모달 위치               |
-| margin   | number               |      | 20       | 좌우 마진(px)           |
-| zIndex   | number               |      | 10       | z-index 값              |
-| children | React.ReactNode      |      | -        | 모달 내부에 표시할 내용 |
-
----
-
-## 예제 코드
-
-```tsx
-import Modal from 'pesu-components/Modal';
-import { useState } from 'react';
+import Modal from 'pesu-components/src/components/Modal/Modal';
 
 function Example() {
-  const [isOpen, setIsOpen] = useState(false);
-
   return (
-    <>
-      <button onClick={() => setIsOpen(true)}>모달 열기</button>
-      <Modal title="안내" isOpen={isOpen} onClose={() => setIsOpen(false)} position="center">
-        <p>이곳에 원하는 내용을 넣으세요.</p>
+    <Modal.Wrapper>
+      <Modal.Trigger>모달 열기</Modal.Trigger>
+      <Modal position="center" size="medium">
+        <Modal.Top>
+          <Modal.Title>제목</Modal.Title>
+          <Modal.Close>
+            <Modal.CloseIcon />
+          </Modal.Close>
+        </Modal.Top>
+        <Modal.Content>모달 내용</Modal.Content>
+        <Modal.Bottom>
+          <Modal.ButtonContainer>
+            <Modal.CancelButton>취소</Modal.CancelButton>
+            <Modal.ConfirmButton onClick={() => alert('확인')}>확인</Modal.ConfirmButton>
+          </Modal.ButtonContainer>
+        </Modal.Bottom>
       </Modal>
-    </>
+    </Modal.Wrapper>
   );
 }
 ```
+
+---
+
+## 컴포넌트 구조
+
+- **Modal.Wrapper**  
+  모달의 컨텍스트를 제공하며, 내부에서 모달 상태를 관리합니다.
+
+- **Modal.Trigger**  
+  모달을 여는 버튼 역할을 합니다.
+
+- **Modal**  
+  실제 모달 UI를 렌더링합니다.  
+  주요 props:
+
+  - `position`: `'center' | 'bottom'` (기본값: `'center'`)
+  - `margin`: `number` (기본값: `20`)
+  - `zIndex`: `number` (기본값: `10`)
+  - `size`: `'small' | 'medium' | 'large'` (기본값: `'medium'`)
+
+- **Modal.Top / Modal.Title / Modal.Close**  
+  모달 상단 영역, 제목, 닫기 버튼
+
+- **Modal.Content**  
+  모달 본문 영역
+
+- **Modal.Bottom / Modal.ButtonContainer / Modal.CancelButton / Modal.ConfirmButton**  
+  하단 버튼 영역 및 버튼들
+
+- **Modal.PromptInput**  
+  입력이 필요한 모달에서 사용
+
+---
+
+## 컨텍스트 API
+
+```ts
+type ModalContext = {
+  isOpen: boolean;
+  close: () => void;
+  open: () => void;
+};
+```
+
+- `useContext(ModalContext)`로 모달 상태 및 제어 함수 사용 가능
+
+---
+
+## 기타
+
+- ESC 키로 모달 닫기 지원
+- 포커스 자동 이동 지원 (`useAutoFocus` 사용)
+- `createPortal`로 body에 모달 렌더링
