@@ -1,4 +1,5 @@
 import AlertModal from './lib/components/AlertModal';
+import ConfirmModal from './lib/components/ConfirmModal';
 import { Modal } from './lib/components/Modal';
 import { useModal } from './lib/hooks/useModal';
 
@@ -9,6 +10,12 @@ function App() {
     isOpen: isOpenAlertModal,
     handleOpenModal: handleOpenAlertModal,
     handleCloseModal: handleCloseAlertModal,
+  } = useModal();
+
+  const {
+    isOpen: isOpenConfirmModal,
+    handleOpenModal: handleOpenConfirmModal,
+    handleCloseModal: handleCloseConfirmModal,
   } = useModal();
 
   return (
@@ -37,6 +44,20 @@ function App() {
         >
           <p>아이디는 필수로 입력해야 합니다.</p>
         </AlertModal>
+      </div>
+      <div>
+        <button onClick={handleOpenConfirmModal}>confirm 모달 버튼</button>
+        <ConfirmModal
+          isOpen={isOpenConfirmModal}
+          onClose={handleCloseConfirmModal}
+          onConfirm={() => {
+            console.log('confirm 확인!');
+            handleCloseConfirmModal();
+          }}
+          title="카드를 삭제하시겠습니까?"
+        >
+          <p>삭제하면 복구하실 수 없습니다.</p>
+        </ConfirmModal>
       </div>
     </>
   );
