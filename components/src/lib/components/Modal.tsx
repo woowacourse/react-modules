@@ -27,12 +27,15 @@ const Modal = ({ children, isOpen, onAfterOpen, onClose, position = 'center' }: 
     if (isOpen && onAfterOpen) {
       onAfterOpen();
     }
+  }, [isOpen, onAfterOpen]);
 
+  useEffect(() => {
     window.addEventListener('keydown', handleKeyDown);
+
     return () => {
       window.removeEventListener('keydown', handleKeyDown);
     };
-  }, [isOpen]);
+  }, [handleKeyDown]);
 
   if (!isOpen) return null;
 
