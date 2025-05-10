@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 import styled from '@emotion/styled';
-import { Modal } from './lib';
+import { Modal } from '..';
 
 const meta: Meta<typeof Modal> = {
   title: 'Components/Modal',
@@ -39,16 +39,26 @@ export const Default: Story = {
         <OpenModal onClick={() => setIsOpen(true)}>모달 열기</OpenModal>
 
         <Modal isOpen={isOpen} onClose={onClose} {...args}>
-          <div>
-            <label>
-              <input type='checkbox' checked={checked1} onChange={() => setChecked1(!checked1)} />
-              [필수] 개인정보 수집이용 동의
-            </label>
-            <br />
-            <label>
-              <input type='checkbox' checked={checked2} onChange={() => setChecked2(!checked2)} />
-              [필수] 고객정보 제 3자 제공동의
-            </label>
+          <div
+            style={{
+              width: '100%',
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}
+          >
+            <div>
+              <label>
+                <input type='checkbox' checked={checked1} onChange={() => setChecked1(!checked1)} />
+                [필수] 개인정보 수집이용 동의
+              </label>
+              <br />
+              <label>
+                <input type='checkbox' checked={checked2} onChange={() => setChecked2(!checked2)} />
+                [필수] 고객정보 제 3자 제공동의
+              </label>
+            </div>
             <br />
             <SaveButton onClick={handleClick} disabled={!(checked1 && checked2)}>
               동의하고 저장하기
