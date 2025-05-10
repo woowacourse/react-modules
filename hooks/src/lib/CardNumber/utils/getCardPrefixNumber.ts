@@ -1,4 +1,4 @@
-import CardNumbersKey from "../../../types/CardNumbersKey";
+import CardNumbersKey from "../types/CardNumbersKey";
 
 type getCardPrefixNumberType = {
   key: CardNumbersKey;

@@ -1,8 +1,9 @@
 import calculateNetWork from "./calculateNetwork";
 import getCardPrefixNumber from "./getCardPrefixNumber";
 
-import validateCardNumbersType from "../../../types/validateCardNumbersType";
-import { validationMessages } from "../../../../../constants/validationMessages";
+import validateCardNumbersType from "../types/validateCardNumbersType";
+
+import { validationMessages } from "../../../constants/validationMessages";
 
 const checkCardNetworkValidation = ({
   key,

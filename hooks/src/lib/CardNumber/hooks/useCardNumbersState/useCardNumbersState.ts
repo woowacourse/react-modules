@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import getCardNetwork from "../useCardNumbersValidate/utils/getCardNetwork";
+import getCardNetwork from "../../utils/getCardNetwork";
 
 import validateCardNumbersType from "../../types/validateCardNumbersType";
 import CardNumbersState from "../../types/CardNumberState";

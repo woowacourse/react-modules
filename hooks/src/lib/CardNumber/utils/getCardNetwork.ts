@@ -1,8 +1,8 @@
 import calculateNetwork from "./calculateNetwork";
 import getCardPrefixNumber from "./getCardPrefixNumber";
 
-import validateCardNumbersType from "../../../types/validateCardNumbersType";
-import CardNextWork from "../../../types/CardNextWork";
+import validateCardNumbersType from "../types/validateCardNumbersType";
+import CardNextWork from "../types/CardNextWork";
 
 const getCardNetwork = ({
   key,
