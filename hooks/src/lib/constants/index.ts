@@ -1,4 +1,4 @@
-import { CardPrefixRuleType, ErrorMessageType } from "../types";
+import { CardPrefixRuleType, CardType, ErrorMessageType } from "../types";
 
 export const NUMBER_REGEX = /^[0-9]*$/;
 export const ERROR_MESSAGE: Record<string, ErrorMessageType> = {
@@ -36,3 +36,13 @@ export const cardPrefixRule: CardPrefixRuleType[] = [
   // MasterCard: 51–55
   { type: "master", length: 2, start: 51, end: 55 },
 ];
+
+const defaultParsingRule = [4, 4, 4, 4];
+const uniqueParsingRule: Record<string, number[]> = {
+  diners: [4, 6, 4],
+  amex: [4, 6, 5],
+};
+
+export const cardParsingRule = (type: CardType) => {
+  return uniqueParsingRule[type] ?? defaultParsingRule;
+};
