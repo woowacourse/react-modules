@@ -12,18 +12,10 @@ import {
   TitleContainer,
 } from './Modal.styles';
 import { CloseIcon } from './CloseIcon';
-import useModalContext, { ModalContext, ModalSize } from './hooks/useModalContext';
+import useModalContext, { ModalContext } from './hooks/useModalContext';
 import useFocusTrap from './hooks/useFocusTrap';
 import Button from '../Button/Button';
-
-type BaseProps = {
-  children?: React.ReactNode;
-  className?: string;
-};
-
-type ModalProps = BaseProps & {
-  size?: ModalSize;
-};
+import { ActionButtonType, BaseProps, ModalProps } from './Modal.types';
 
 function Modal({ children, className, size = 'medium' }: ModalProps) {
   const [open, setOpen] = useState(false);
@@ -63,7 +55,6 @@ function Trigger({ children, className, asChild }: BaseProps & { asChild?: boole
 
 function Content({ children, className }: BaseProps) {
   const { open, setOpen, size } = useModalContext();
-
   const contentRef = useFocusTrap(open, setOpen);
 
   if (!open) return null;
@@ -127,8 +118,6 @@ function HeaderTitleWrapper({ children, className }: BaseProps) {
     </>
   );
 }
-
-type ActionButtonType = 'confirm' | 'cancel' | 'default';
 
 function ActionButton({
   children,
