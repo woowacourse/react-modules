@@ -4,7 +4,7 @@ import isValidLength from "./isValidLength";
 
 function cardCvcValidation(cvc: string) {
   const isCvcError =
-    !isNumber(cvc) || !isValidLength(cvc, 0, 3) || !isPositiveNumber(cvc);
+    !isNumber(cvc) || !isValidLength(cvc, 3) || !isPositiveNumber(cvc);
 
   const errorText = (() => {
     if (!isNumber(cvc)) {
@@ -13,7 +13,7 @@ function cardCvcValidation(cvc: string) {
     if (!isPositiveNumber(cvc)) {
       return "입력값은 양수여야합니다.";
     }
-    if (!isValidLength(cvc, 0, 3)) {
+    if (!isValidLength(cvc, 3)) {
       return "입력값은 3자리이어야합니다.";
     }
     return "";

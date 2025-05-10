@@ -9,20 +9,14 @@ export function getCardType(cardNumber: CardNumber): CardType {
   const prefix4 = cardNumberPrefix.slice(0, 4);
   const prefix6 = cardNumberPrefix.slice(0, 6);
 
-  const totalLength = cardNumberPrefix.length;
-
   if (prefix1 === "4") {
     return "VISA";
   } else if (Number(prefix2) >= 51 && Number(prefix2) <= 55) {
     return "MasterCard";
   } else if (prefix2 === "34" || prefix2 === "37") {
-    if (totalLength === 15) {
-      return "AMEX";
-    }
+    return "AMEX";
   } else if (prefix2 === "36") {
-    if (totalLength === 14) {
-      return "Diners";
-    }
+    return "Diners";
   } else if (
     (Number(prefix6) >= 622126 && Number(prefix6) <= 622925) ||
     (Number(prefix3) >= 624 && Number(prefix3) <= 626) ||

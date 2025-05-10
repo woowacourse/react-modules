@@ -23,7 +23,13 @@ function useCardNumber() {
     cardType
   );
 
-  return { cardNumber, handleCardNumber, isCardNumberError, errorText };
+  return {
+    cardNumber,
+    handleCardNumber,
+    cardType,
+    isCardNumberError,
+    errorText,
+  };
 }
 
 export default useCardNumber;
