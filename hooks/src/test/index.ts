@@ -1,5 +1,5 @@
 import { act } from "@testing-library/react";
-import { BaseInputState, ErrorState } from "../../lib/types";
+import { BaseInputState, ErrorState } from "../lib/types";
 import {
   handleChangeFn,
   TestInvalidInputParams,
@@ -20,7 +20,22 @@ export function testInputUpdate<T, K extends keyof T>({
     (result.current[handleChangeKey] as handleChangeFn)(input);
   });
 
-  expect((result.current[stateKey] as BaseInputState).value).toBe(input);
+  expect(result.current[stateKey] as BaseInputState).toBe(input);
+}
+
+export function testInputEmptyUpdate<T, K extends keyof T>({
+  renderHookFn,
+  handleChangeKey,
+  stateKey,
+  input,
+}: TestInputUpdateParams<T, K>) {
+  const { result } = renderHookFn();
+
+  act(() => {
+    (result.current[handleChangeKey] as handleChangeFn)(input);
+  });
+
+  expect(result.current[stateKey] as BaseInputState).toBe("");
 }
 
 export function testInvalidInput<T, K extends keyof T>({
@@ -71,7 +86,5 @@ export function testMaxLength<T, K extends keyof T>({
     });
   });
 
-  expect((result.current[stateKey] as BaseInputState).value).toHaveLength(
-    maxLength
-  );
+  expect(result.current[stateKey] as BaseInputState).toHaveLength(maxLength);
 }
