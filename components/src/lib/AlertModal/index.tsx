@@ -27,6 +27,7 @@ function AlertModal({
       content={<S.ModalText>{alertText}</S.ModalText>}
       buttonElements={[
         <Button
+          key="confirm"
           autoFocus
           variant="primary"
           type="button"

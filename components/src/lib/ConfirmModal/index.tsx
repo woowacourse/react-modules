@@ -30,7 +30,7 @@ function ConfirmModal({
       buttonElements={[
         <Button
           autoFocus
-          key="secondary"
+          key="cancel"
           variant="secondary"
           type="button"
           onClick={onRequestClose}
@@ -38,7 +38,7 @@ function ConfirmModal({
           취소
         </Button>,
         <Button
-          key="primary"
+          key="confirm"
           variant="primary"
           type="button"
           onClick={onConfirm}

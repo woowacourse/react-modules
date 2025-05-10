@@ -13,10 +13,10 @@ const meta = {
     containerAs: "div",
     size: "medium",
     buttonElements: [
-      <Button variant="secondary" type="button">
+      <Button key="cancel" variant="secondary" type="button">
         취소
       </Button>,
-      <Button variant="primary" type="submit">
+      <Button key="confirm" variant="primary" type="submit">
         확인
       </Button>,
     ],
