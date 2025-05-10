@@ -1,4 +1,4 @@
-import { ModalButton, ModalButtonContainer } from "./Button.styled";
+import { ModalButton } from "./Button.styled";
 
 type ButtonProps = {
   title: string;
@@ -6,7 +6,6 @@ type ButtonProps = {
   size?: "small" | "medium" | "large";
   onClick?: () => void;
   styled?: React.CSSProperties;
-  position?: "left" | "right" | "center";
 };
 
 export const Button = ({
@@ -15,18 +14,15 @@ export const Button = ({
   size = "medium",
   onClick,
   styled,
-  position = "center",
 }: ButtonProps) => {
   return (
-    <ModalButtonContainer $position={position}>
-      <ModalButton
-        $variant={variant}
-        $size={size}
-        onClick={onClick}
-        style={styled}
-      >
-        {title}
-      </ModalButton>
-    </ModalButtonContainer>
+    <ModalButton
+      $variant={variant}
+      $size={size}
+      onClick={onClick}
+      style={styled}
+    >
+      {title}
+    </ModalButton>
   );
 };

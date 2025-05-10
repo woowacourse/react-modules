@@ -28,6 +28,7 @@ export const ModalButton = styled.button<ModalButtonProps>`
   border-radius: 4px;
   cursor: pointer;
   font-size: 16px;
+  margin: 10px 0 0 0;
   &:hover {
   }
 `;
@@ -44,20 +45,3 @@ function getSize(size: "small" | "medium" | "large") {
       return "100%";
   }
 }
-
-type ModalButtonContainerProps = {
-  $position: "left" | "right" | "center";
-};
-
-export const ModalButtonContainer = styled.div<ModalButtonContainerProps>`
-  display: flex;
-  flex-direction: row;
-  margin-top: 20px;
-  width: 100%;
-  justify-content: ${({ $position }) =>
-    $position === "left"
-      ? "flex-start"
-      : $position === "right"
-      ? "flex-end"
-      : "center"};
-`;
