@@ -1,40 +1,53 @@
 import styled from '@emotion/styled';
-// import { css } from '@emotion/react';
 
-export const ConfirmButton = styled.button`
-  width: 80px;
-  height: 36px;
-  background-color: #333333;
-  color: white;
-  border: none;
-  border-radius: 5px;
+const COLORS = {
+  primary: '#333333',
+  primaryHover: 'rgb(100, 100, 100)',
+  secondary: 'rgb(220, 220, 220)',
+  focusShadow: 'rgba(51, 51, 51, 0.5)',
+  white: 'white',
+};
+
+const SIZES = {
+  buttonWidth: '80px',
+  buttonHeight: '36px',
+  borderRadius: '5px',
+};
+
+const BaseButton = styled.button`
+  width: ${SIZES.buttonWidth};
+  height: ${SIZES.buttonHeight};
+  border-radius: ${SIZES.borderRadius};
   cursor: pointer;
-
   transition: background-color 0.1s ease-in-out;
-  :hover {
-    background-color: rgb(100, 100, 100);
-  }
+
   :focus {
     outline: none;
-    box-shadow: 0 0 0 2px rgba(51, 51, 51, 0.5);
+    box-shadow: 0 0 0 2px ${COLORS.focusShadow};
+  }
+
+  :disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
   }
 `;
 
-export const CloseButton = styled.button`
-  width: 80px;
-  height: 36px;
-  color: #333333;
-  border: 1px solid #333333;
-  border-radius: 5px;
-  cursor: pointer;
+export const ConfirmButton = styled(BaseButton)`
+  background-color: ${COLORS.primary};
+  color: ${COLORS.white};
+  border: none;
 
-  transition: background-color 0.1s ease-in-out;
-  :hover {
-    background-color: rgb(220, 220, 220);
+  :hover:not(:disabled) {
+    background-color: ${COLORS.primaryHover};
   }
+`;
 
-  :focus {
-    outline: none;
-    box-shadow: 0 0 0 2px rgba(51, 51, 51, 0.5);
+export const CloseButton = styled(BaseButton)`
+  color: ${COLORS.primary};
+  border: 1px solid ${COLORS.primary};
+  background-color: transparent;
+
+  :hover:not(:disabled) {
+    background-color: ${COLORS.secondary};
   }
 `;
