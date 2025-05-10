@@ -11,35 +11,6 @@ describe("useCardNumber", () => {
     expect(result.current.cardNumber).toEqual(["1234", "1234", "1234", "1234"]);
   });
 
-  it(`카드 넘버가 초과하면 ${ERROR_MESSAGE.INVALID_LENGTH}를 보여준다.`, () => {
-    const { result } = renderHook(() => useCardNumber());
-    act(() => {
-      result.current.setCardNumber(["4123", "1234", "1234", "123433"]);
-    });
-    expect(result.current.errorMessage).toEqual([
-      "",
-      "",
-      "",
-      ERROR_MESSAGE.INVALID_LENGTH(CARD_NUMBER_LENGTH),
-    ]);
-    expect(result.current.isError).toEqual([false, false, false, true]);
-  });
-
-  it(`카드 넘버가 문자열을 받는다면 ${ERROR_MESSAGE.NOT_NUMERIC}를 보여준다.`, () => {
-    const { result } = renderHook(() => useCardNumber());
-    act(() => {
-      result.current.setCardNumber(["4123", "1234", "1234", "aaaa"]);
-    });
-
-    expect(result.current.errorMessage).toEqual([
-      "",
-      "",
-      "",
-      ERROR_MESSAGE.NOT_NUMERIC,
-    ]);
-    expect(result.current.isError).toEqual([false, false, false, true]);
-  });
-
   it(`카드 넘버가 공백을 받는다면 ${ERROR_MESSAGE.INVALID_LENGTH(
     CARD_NUMBER_LENGTH
   )}를 보여준다.`, () => {

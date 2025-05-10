@@ -23,3 +23,13 @@ export type CardNetwork =
   | "UNIONPAY"
   | "PENDING"
   | "DEFAULT";
+
+export const CARD_INPUT_LENGTH: Record<CardNetwork, number[]> = {
+  VISA: [4, 4, 4, 4],
+  MASTER: [4, 4, 4, 4],
+  DINERS: [4, 6, 4],
+  AMEX: [4, 6, 5],
+  UNIONPAY: [4, 4, 4, 4],
+  PENDING: [4, 4, 4, 4],
+  DEFAULT: [4, 4, 4, 4],
+};
