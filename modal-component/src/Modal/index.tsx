@@ -151,13 +151,23 @@ const Button = ({
   border,
   onClick,
 }: ButtonProps) => {
+  const { onClose } = useModalContext();
+
+  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.stopPropagation();
+    if (onClick) {
+      onClick();
+    }
+    onClose();
+  };
+
   return (
     <ModalButton
       $backgroundColor={backgroundColor}
       $textColor={textColor}
       $size={size}
       $border={border}
-      onClick={onClick}
+      onClick={handleClick}
     >
       {title}
     </ModalButton>

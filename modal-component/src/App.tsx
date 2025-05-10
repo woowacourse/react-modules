@@ -44,7 +44,7 @@ function App() {
             border="1px solid #000000"
             size="small"
             onClick={() => {
-              console.log('확인 버튼 클릭!');
+              console.log('취소 버튼 클릭!');
             }}
           />
         </Modal.ButtonContainer>
