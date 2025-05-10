@@ -1,5 +1,5 @@
 import { Dispatch, useState } from "react";
-import validateExpiryDateNumber from "../util/validateExpiryDateNumber";
+import validateExpiryDateNumber from "../util/validateExpiryDateNumber/validateExpiryDateNumber";
 
 interface UseExpiryDateNumberReturn {
   expiryDateNumber: string[];

@@ -1,4 +1,4 @@
-import { ERROR_MESSAGE, PASSWORD_LENGTH } from "../constants";
+import { ERROR_MESSAGE, PASSWORD_LENGTH } from "../../constants";
 
 import validatePasswordNumber from "./validatePasswordNumber";
 

@@ -1,4 +1,4 @@
-import { CARD_NUMBER_LENGTH, ERROR_MESSAGE } from "../constants";
+import { CARD_NUMBER_LENGTH, ERROR_MESSAGE } from "../../constants";
 import { validateCardNumber } from "./validateCardNumber";
 
 describe(`cardNumber 유효성 검사`, () => {

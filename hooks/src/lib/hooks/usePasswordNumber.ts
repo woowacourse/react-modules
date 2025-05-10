@@ -1,5 +1,5 @@
 import { Dispatch, useState } from "react";
-import validatePasswordNumber from "../util/validatePasswordNumber";
+import validatePasswordNumber from "../util/validatePasswordNumber/validatePasswordNumber";
 
 interface UsePasswordNumberReturn {
   passwordNumber: string;

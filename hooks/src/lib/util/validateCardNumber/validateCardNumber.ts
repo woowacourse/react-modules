@@ -1,5 +1,5 @@
-import { isNumeric } from ".";
-import { CARD_NUMBER_LENGTH, ERROR_MESSAGE } from "../constants/index";
+import { isNumeric } from "..";
+import { CARD_NUMBER_LENGTH, ERROR_MESSAGE } from "../../constants/index";
 
 function getCardNumberGroupError(cardNumber: string) {
   if (!isNumeric(cardNumber)) return ERROR_MESSAGE.NOT_NUMERIC;

@@ -1,4 +1,4 @@
-import { ERROR_MESSAGE, CVC_LENGTH } from "../constants";
+import { ERROR_MESSAGE, CVC_LENGTH } from "../../constants";
 
 import validateCVCNumber from "./validateCVCNumber";
 
