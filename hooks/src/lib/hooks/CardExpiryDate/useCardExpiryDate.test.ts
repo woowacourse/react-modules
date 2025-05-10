@@ -2,10 +2,11 @@ import { renderHook } from "@testing-library/react";
 import useCardExpiryDate from "./index";
 import {
   testInputUpdate,
+  testInputEmptyUpdate,
   testInvalidInput,
   testValidInput,
   testMaxLength,
-} from "../../../utils/test/index";
+} from "../../../test/index";
 
 describe("useCardExpiryDate", () => {
   it("입력값이 정확히 업데이트 되어야 한다.", () => {
@@ -14,6 +15,15 @@ describe("useCardExpiryDate", () => {
       handleChangeKey: "onChange",
       stateKey: "value",
       input: "0727",
+    });
+  });
+
+  it("카드 만료일에 숫자 이외의 입력 값은 입력되지 않는다.", () => {
+    testInputEmptyUpdate({
+      renderHookFn: () => renderHook(() => useCardExpiryDate()),
+      handleChangeKey: "onChange",
+      stateKey: "value",
+      input: "ㅁ",
     });
   });
 

@@ -5,15 +5,25 @@ import {
   testInvalidInput,
   testValidInput,
   testMaxLength,
-} from "../../../utils/test/index";
+  testInputEmptyUpdate,
+} from "../../../test/index";
 
 describe("useCardCVC", () => {
-  it("입력값이 정확히 업데이트 되어야 한다.", () => {
+  it("입력 값이 정확히 업데이트 되어야 한다.", () => {
     testInputUpdate({
       renderHookFn: () => renderHook(() => useCardCVC()),
       handleChangeKey: "onChange",
       stateKey: "value",
       input: "123",
+    });
+  });
+
+  it("CVC 입력에 숫자 이외의 입력 값은 입력되지 않는다.", () => {
+    testInputEmptyUpdate({
+      renderHookFn: () => renderHook(() => useCardCVC()),
+      handleChangeKey: "onChange",
+      stateKey: "value",
+      input: "ㅁ",
     });
   });
 

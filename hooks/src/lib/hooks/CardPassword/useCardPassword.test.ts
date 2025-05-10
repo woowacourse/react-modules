@@ -2,10 +2,11 @@ import { renderHook } from "@testing-library/react";
 import useCardPassword from "./index";
 import {
   testInputUpdate,
+  testInputEmptyUpdate,
   testInvalidInput,
   testValidInput,
   testMaxLength,
-} from "../../../utils/test/index";
+} from "../../../test/index";
 
 describe("useCardPassword", () => {
   it("입력값이 정확히 업데이트 되어야 한다.", () => {
@@ -14,6 +15,15 @@ describe("useCardPassword", () => {
       handleChangeKey: "onChange",
       stateKey: "value",
       input: "12",
+    });
+  });
+
+  it("카드 비밀번호에 숫자 이외의 입력 값은 입력되지 않는다.", () => {
+    testInputEmptyUpdate({
+      renderHookFn: () => renderHook(() => useCardPassword()),
+      handleChangeKey: "onChange",
+      stateKey: "value",
+      input: "ㅁ",
     });
   });
 
