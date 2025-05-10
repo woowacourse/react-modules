@@ -3,6 +3,7 @@ import CloseButton from "../components/CloseButton/CloseButton";
 
 type ModalProps = {
   position?: "center" | "bottom";
+  size: "small" | "medium" | "large";
   title: string;
   content: React.ReactNode;
   hasCloseButton?: boolean;
@@ -19,6 +20,7 @@ const handleWrapperClick =
 
 const BaseModal = ({
   position = "center",
+  size,
   title,
   content,
   hasCloseButton = true,
@@ -33,7 +35,7 @@ const BaseModal = ({
       aria-describedby="modal-content"
     >
       <Wrapper className={position} onClick={handleWrapperClick(onClose)}>
-        <ModalContainer className={position}>
+        <ModalContainer className={`${position} ${size}`}>
           <ModalHeader>
             <ModalTitle id="modal-title">{title}</ModalTitle>
             <CloseButtonWrapper>
@@ -82,7 +84,6 @@ const ModalContainer = styled.div`
   display: flex;
   flex-direction: column;
   background-color: white;
-  width: 304px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   padding: 24px 32px;
 
@@ -92,6 +93,18 @@ const ModalContainer = styled.div`
 
   &.bottom {
     border-radius: 8px 8px 0 0;
+  }
+
+  &.small {
+    width: 320px;
+  }
+
+  &.medium {
+    width: 480px;
+  }
+
+  &.large {
+    width: 600px;
   }
 `;
 
