@@ -99,7 +99,7 @@ const ModalBody = styled.div`
 
 const TitleContainer = styled.div`
   flex: 1;
-  padding-right: 1rem; /* 닫기 버튼과의 간격 */
+  padding-right: 1rem;
 `;
 
 export {

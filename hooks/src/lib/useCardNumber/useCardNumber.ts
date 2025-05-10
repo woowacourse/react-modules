@@ -2,7 +2,11 @@ import { useState } from 'react';
 import { CardNumber, CardNumberError } from '../types/cardTypes';
 import { CARD_NUMBER_ERROR } from '../constants/errorMessages';
 import { isOnlyDigits } from '../utils/validateNumber';
-import { CARD_NUMBER } from '../constants/cardConfig';
+
+export const CARD_NUMBER = {
+  maxLength: 4,
+  fieldCount: 4,
+};
 
 export const useCardNumber = (initialCardNumber: CardNumber, initialError: CardNumberError) => {
   const [cardNumber, setCardNumber] = useState<CardNumber>(initialCardNumber);
