@@ -1,9 +1,6 @@
 import { Dispatch, useState } from "react";
-import {
-  CardNetwork,
-  validateCardNetwork,
-  validateCardNumber,
-} from "../util/validateCardNumber";
+import { validateCardNumber } from "../util/validateCardNumber";
+import { CardNetwork, validateCardNetwork } from "../util/validateCardNetwork";
 
 interface UseCardNumberReturn {
   cardNumber: string[];

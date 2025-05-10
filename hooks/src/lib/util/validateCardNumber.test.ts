@@ -1,5 +1,5 @@
-import { ERROR_MESSAGE, CARD_NUMBER_LENGTH } from "../constants";
-import { validateCardNetwork, validateCardNumber } from "./validateCardNumber";
+import { CARD_NUMBER_LENGTH, ERROR_MESSAGE } from "../constants";
+import { validateCardNumber } from "./validateCardNumber";
 
 describe(`cardNumber 유효성 검사`, () => {
   it("카드 번호가 정상적으로 들어왔을떄 에러메시지는 보여주지 않는다.", () => {
@@ -25,22 +25,5 @@ describe(`cardNumber 유효성 검사`, () => {
       "",
       ERROR_MESSAGE.INVALID_LENGTH(CARD_NUMBER_LENGTH),
     ]);
-  });
-});
-
-describe("cardNetwork 타입 검사", () => {
-  it("앞자리가 4로 시작한다면 'VISA'를 반환한다.", () => {
-    const cardNumbers = ["4123", "1234", "1234", "1234"];
-    expect(validateCardNetwork(cardNumbers)).toBe("VISA");
-  });
-  it("앞자리가 51보다 크고 54보다 작다면 'MASTER'를 반환한다.", () => {
-    const cardNumbers1 = ["5123", "1234", "1234", "1234"];
-    const cardNumbers2 = ["5412", "1234", "1234", "1234"];
-    expect(validateCardNetwork(cardNumbers1)).toBe("MASTER");
-    expect(validateCardNetwork(cardNumbers2)).toBe("MASTER");
-  });
-  it("VISA 또는 MASTER 카드가 아니라면 'DEFAULT'를 반환한다.", () => {
-    const cardNumbers = ["1234", "1234", "1234", "1234"];
-    expect(validateCardNetwork(cardNumbers)).toBe("DEFAULT");
   });
 });
