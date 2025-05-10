@@ -1,5 +1,5 @@
 import { useState } from "react";
-import * as P from "./checkPrefix";
+import * as P from "./utils/checkPrefix";
 
 type CardBrandTypes =
   | "visa"
@@ -76,9 +76,12 @@ const useCardBrand = () => {
     for (let i = 0; i < format.length; i++) {
       const length = format[i];
       const slice = cardInput.slice(offset, offset + length);
+      if (slice.length === 0) break;
+
       offset += length;
       result.push(slice);
     }
+
     return result.join("-");
   };
 

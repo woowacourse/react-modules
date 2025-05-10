@@ -1,64 +1,79 @@
 import { useState } from "react";
+import { DEFAULT_ERROR_MESSAGE } from "./constants/messages";
 
 interface ExpirationDateInput {
   month: string;
   year: string;
 }
 
-const useExpirationDate = () => {
+interface ErrorMessageProps {
+  customErrorMessages?: {
+    format?: string;
+    twoDigits?: string;
+    invalidMonth?: string;
+  };
+}
+
+const useExpirationDate = ({ customErrorMessages }: ErrorMessageProps) => {
   const [isValid, setIsValid] = useState({ month: true, year: true });
   const [errorMessage, setErrorMessage] = useState("");
 
-  const handleExpirationDate = (date: ExpirationDateInput) => {
-    validateExpirationDate(date);
-  };
+  const handleExpirationDate = ({ month, year }: ExpirationDateInput) => {
+    const monthResult = validateMonth(month);
+    const yearResult = validateYear(year);
 
-  const validateExpirationDate = (date: ExpirationDateInput) => {
-    const { month, year } = date;
-
-    if (!validateMonth(month)) return;
-
-    if (!validateYear(year)) return;
-
-    setErrorMessage("");
+    setIsValid({ month: monthResult.isValid, year: yearResult.isValid });
+    setErrorMessage(monthResult.errorMessage || yearResult.errorMessage || "");
   };
 
   const validateMonth = (month: string) => {
     if (!isNumber(month)) {
-      setIsValid((prev) => ({ ...prev, month: false }));
-      setErrorMessage("숫자만 입력해 주세요.");
-      return false;
+      return {
+        isValid: false,
+        errorMessage:
+          customErrorMessages.format ??
+          DEFAULT_ERROR_MESSAGE.INVALID_EXPIRATION_NUMBER_FORMAT,
+      };
     }
     if (!isTwoDigits(month)) {
-      setIsValid((prev) => ({ ...prev, month: false }));
-      setErrorMessage("2자리의 숫자를 입력해 주세요.");
-      return false;
+      return {
+        isValid: false,
+        errorMessage:
+          customErrorMessages.twoDigits ??
+          DEFAULT_ERROR_MESSAGE.INVALID_EXPIRATION_TWO_DIGITS,
+      };
     }
-
     if (!isValidMonth(month)) {
-      setIsValid((prev) => ({ ...prev, month: false }));
-      setErrorMessage("1~12 사이의 숫자를 입력해 주세요.");
-      return false;
+      return {
+        isValid: false,
+        errorMessage:
+          customErrorMessages.invalidMonth ??
+          DEFAULT_ERROR_MESSAGE.INVALID_EXPIRATION_MONTH_RANGE,
+      };
     }
 
-    setIsValid((prev) => ({ ...prev, month: true }));
-    return true;
+    return { isValid: true, errorMessage: "" };
   };
 
   const validateYear = (year: string) => {
     if (!isNumber(year)) {
-      setIsValid((prev) => ({ ...prev, year: false }));
-      setErrorMessage("숫자만 입력해 주세요.");
-      return false;
+      return {
+        isValid: false,
+        errorMessage:
+          customErrorMessages.format ??
+          DEFAULT_ERROR_MESSAGE.INVALID_EXPIRATION_NUMBER_FORMAT,
+      };
     }
     if (!isTwoDigits(year)) {
-      setIsValid((prev) => ({ ...prev, year: false }));
-      setErrorMessage("2자리의 숫자를 입력해 주세요.");
-      return false;
+      return {
+        isValid: false,
+        errorMessage:
+          customErrorMessages.twoDigits ??
+          DEFAULT_ERROR_MESSAGE.INVALID_EXPIRATION_TWO_DIGITS,
+      };
     }
 
-    setIsValid((prev) => ({ ...prev, year: true }));
-    return true;
+    return { isValid: true, errorMessage: "" };
   };
 
   return { handleExpirationDate, isValid, errorMessage };
