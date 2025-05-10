@@ -7,70 +7,59 @@ import { ErrorType } from '../types/errorType';
 import { INPUT_RULE } from '../constants/inputRule';
 
 type ValitationResult = {
-  numbers: string[];
-  error: ErrorType[];
-  handleCardNumbers: (value: string, index: number) => void;
+  numbers: string;
+  error: ErrorType;
+  handleCardNumbers: (value: string) => void;
 };
 
 type UpdateErrorArgs =
-  | { index: number; isValid: true; errorMessage: string }
-  | { index: number; isValid: false };
+  | { isValid: true; errorMessage: string }
+  | { isValid: false };
 
 export default function useCardNumbers(): ValitationResult {
-  const [numbers, setNumbers] = useState(['', '', '', '']);
-  const [error, setError] = useState<ErrorType[]>(
-    Array.from(
-      { length: INPUT_RULE.CARD_NUMBERS.MAX_LENGTH },
-      () => initialError
-    )
-  );
+  const [numbers, setNumbers] = useState('');
+  const [error, setError] = useState<ErrorType>(initialError);
 
   const updateError = (args: UpdateErrorArgs) => {
-    setError((prev) => {
-      const updated = [...prev];
-      updated[args.index] = {
-        isValid: args.isValid,
-        errorMessage: args.isValid ? args.errorMessage : '',
-      };
-      return updated;
+    setError({
+      isValid: args.isValid,
+      errorMessage: args.isValid ? args.errorMessage : '',
     });
   };
 
-  const handleCardNumbers = (value: string, index: number) => {
+  const handleCardNumbers = (value: string) => {
+    // length 수정 필요
     if (isOverInputLength(value, INPUT_RULE.CARD_NUMBERS.MAX_LENGTH)) return;
 
-    validate(value, index);
+    validate(value);
 
-    setNumbers((prev) => {
-      const newNumbers = [...prev];
-      newNumbers[index] = value;
-      return newNumbers;
-    });
+    setNumbers(value);
   };
 
-  const validate = (value: string, index: number) => {
+  const validate = (value: string) => {
     if (isEmpty(value)) {
-      updateError({ index, isValid: false });
+      updateError({ isValid: false });
       return;
     }
 
     if (!isNumber(value)) {
       updateError({
-        index,
         isValid: true,
         errorMessage: ERROR_MESSAGE.CARD_NUMBERS.NOT_A_NUMBER,
       });
       return;
     }
+    // length 매개변수 수정 필요
     if (!isValidLength(value, INPUT_RULE.CARD_NUMBERS.MAX_LENGTH)) {
       updateError({
-        index,
         isValid: true,
-        errorMessage: ERROR_MESSAGE.CARD_NUMBERS.INVALID_LENGTH,
+        errorMessage: ERROR_MESSAGE.CARD_NUMBERS.INVALID_LENGTH(
+          INPUT_RULE.CARD_NUMBERS.MAX_LENGTH
+        ),
       });
       return;
     }
-    updateError({ index, isValid: false });
+    updateError({ isValid: false });
   };
 
   return { numbers, error, handleCardNumbers };

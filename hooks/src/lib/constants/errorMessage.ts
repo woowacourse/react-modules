@@ -1,6 +1,7 @@
 export const ERROR_MESSAGE = {
   CARD_NUMBERS: {
-    INVALID_LENGTH: '카드 번호는 4자리로 입력해 주세요.',
+    INVALID_LENGTH: (requiredLength: number) =>
+      `카드 번호는 ${requiredLength}자리로 입력해 주세요.`,
     NOT_A_NUMBER: '카드 번호는 숫자로 입력해 주세요.',
   },
   EXPIRY_DATE: {

@@ -1,10 +1,11 @@
 import './App.css';
 import {
-  useCardNumbers,
+  // useCardNumbers,
   useExpiryDate,
   useCvcNumber,
   usePassword,
 } from 'jurunghappy-hooks';
+import { useCardNumbers } from './lib';
 // import {
 //   useCardNumbers,
 //   useExpiryDate,
@@ -26,18 +27,12 @@ function App() {
     <>
       <div>
         <h1>CardNumbers</h1>
-        {numbers.map((number, index) => (
-          <input
-            key={index}
-            type="text"
-            value={number}
-            onChange={(e) => handleCardNumbers(e.target.value, index)}
-          />
-        ))}
-        <p>
-          {cardNumbersError.find((error) => error.errorMessage !== '')
-            ?.errorMessage ?? ''}
-        </p>
+        <input
+          type="text"
+          value={numbers}
+          onChange={(e) => handleCardNumbers(e.target.value)}
+        />
+        <p>{cardNumbersError.errorMessage}</p>
       </div>
       <div>
         <h1>Date</h1>
