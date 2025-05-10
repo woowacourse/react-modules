@@ -1,5 +1,5 @@
 export interface ButtonProps {
-  onConfirm: () => void;
+  onClick: () => void;
   buttonText: string;
   width?: string;
   type: 'confirm' | 'cancel';

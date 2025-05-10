@@ -1,9 +1,9 @@
 import { ButtonProps } from '../types/Button.type';
 import { ButtonStyle } from './Button.styles';
 
-const Button = ({ type, onConfirm, buttonText, width = '100%' }: ButtonProps) => {
+const Button = ({ type, onClick, buttonText, width = '100%' }: ButtonProps) => {
   return (
-    <button className={ButtonStyle(type, width)} onClick={onConfirm}>
+    <button className={ButtonStyle(type, width)} onClick={onClick}>
       {buttonText}
     </button>
   );
