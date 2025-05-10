@@ -1,6 +1,6 @@
 import { renderHook, act } from "@testing-library/react";
 import useCVCNumber from "../useCVCNumber";
-import { CARD_NUMBER_LENGTH, CVC_LENGTH, ERROR_MESSAGE } from "../../constants";
+import { CVC_LENGTH, ERROR_MESSAGE } from "../../constants";
 
 describe("useCVCNumber", () => {
   it("초기 상태를 올바르게 반환한다", () => {
@@ -38,7 +38,7 @@ describe("useCVCNumber", () => {
   });
 
   it(`CVC 넘버가 공백을 받는다면 ${ERROR_MESSAGE.INVALID_LENGTH(
-    CARD_NUMBER_LENGTH
+    CVC_LENGTH
   )}를 보여준다.`, () => {
     const { result } = renderHook(() => useCVCNumber());
     act(() => {

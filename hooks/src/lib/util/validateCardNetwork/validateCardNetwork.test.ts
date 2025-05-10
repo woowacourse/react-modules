@@ -26,7 +26,7 @@ describe("cardNetwork 타입 검사", () => {
   });
 
   it("앞 6자리가 622126 ~ 622925, 624~626(3자리), 6282~6288(4자리)라면 'UNIONPAY'를 반환한다.", () => {
-    const bin6 = ["622126", "3456", "7890", "1234"];
+    const bin6 = ["6221", "2656", "7890", "1234"];
     const bin3 = ["6241", "5678", "9012", "3456"];
     const bin4 = ["6282", "5678", "9012", "3456"];
     expect(validateCardNetwork(bin6)).toBe("UNIONPAY");
@@ -34,7 +34,7 @@ describe("cardNetwork 타입 검사", () => {
     expect(validateCardNetwork(bin4)).toBe("UNIONPAY");
   });
 
-  it("카드 번호가 3자리 미만이면 'PENDING'을 반환한다.", () => {
+  it("카드 번호가 6자리 미만이면 'PENDING'을 반환한다.", () => {
     const cardNumbers = ["62", "", "", ""];
     expect(validateCardNetwork(cardNumbers)).toBe("PENDING");
   });
