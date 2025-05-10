@@ -4,7 +4,7 @@ import styled from '@emotion/styled';
 import { Modal } from '..';
 
 const meta: Meta<typeof Modal> = {
-  title: 'Components/Modal',
+  title: 'Components/CustomModal',
   component: Modal,
   argTypes: {
     title: { control: { type: 'text' } },
@@ -36,9 +36,9 @@ export const Default: Story = {
 
     return (
       <div>
-        <OpenModal onClick={() => setIsOpen(true)}>모달 열기</OpenModal>
+        <OpenModal onClick={() => setIsOpen(true)}>Custom 모달 열기</OpenModal>
 
-        <Modal isOpen={isOpen} onClose={onClose} {...args}>
+        <Modal isOpen={isOpen} onClose={onClose} {...args} type='custom'>
           <div
             style={{
               width: '100%',
@@ -69,7 +69,6 @@ export const Default: Story = {
     );
   },
   args: {
-    type: 'custom',
     title: '약관에 동의해 주세요.',
     message: '',
     position: 'center',

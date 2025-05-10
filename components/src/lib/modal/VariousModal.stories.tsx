@@ -1,13 +1,17 @@
 import { useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
-import AlertModal from './AlertModal';
-import Modal from '../Modal';
 import styled from '@emotion/styled';
+import Modal from './Modal';
+import PromptModal from './promptModal/PromptModal';
 
-const meta: Meta<typeof AlertModal> = {
-  title: 'Components/AlertModal',
-  component: AlertModal,
+const meta: Meta<typeof PromptModal> = {
+  title: 'Components/VariousModal',
+  component: PromptModal,
   argTypes: {
+    type: {
+      control: { type: 'radio' },
+      options: ['alert', 'confirm', 'prompt'],
+    },
     title: {
       control: { type: 'text' },
     },
@@ -26,7 +30,7 @@ const meta: Meta<typeof AlertModal> = {
 };
 export default meta;
 
-type Story = StoryObj<typeof AlertModal>;
+type Story = StoryObj<typeof PromptModal>;
 
 export const Default: Story = {
   render: (args) => {
@@ -36,13 +40,20 @@ export const Default: Story = {
     };
     return (
       <div>
-        <Modal isOpen={isOpen} onClose={onClose} {...args} type='alert' />
-        <OpenModal onClick={() => setIsOpen(!isOpen)}>Alert 모달 버튼</OpenModal>
+        <Modal isOpen={isOpen} onClose={onClose} {...args} />
+        <OpenModal onClick={() => setIsOpen(!isOpen)}>3 Type 모달 버튼</OpenModal>
       </div>
     );
   },
   args: {
+    type: 'prompt',
     title: '아이디를 입력해 주세요.',
+    onConfirm: () => {
+      alert('확인 버튼 클릭');
+    },
+    onSubmit: (input) => {
+      alert(`입력한 아이디: ${input}`);
+    },
     message: '아이디는 필수로 입력해야 합니다.',
     position: 'center',
     size: 'large',

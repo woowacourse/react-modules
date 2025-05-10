@@ -36,13 +36,12 @@ export const Default: Story = {
     };
     return (
       <div>
-        <Modal isOpen={isOpen} onClose={onClose} {...args} />
+        <Modal isOpen={isOpen} onClose={onClose} {...args} type='confirm' />
         <OpenModal onClick={() => setIsOpen(!isOpen)}>Confirm 모달 버튼</OpenModal>
       </div>
     );
   },
   args: {
-    type: 'confirm',
     title: '아이디를 입력해 주세요.',
     onConfirm: () => {
       alert('확인 버튼 클릭');

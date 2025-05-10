@@ -36,13 +36,12 @@ export const Default: Story = {
     };
     return (
       <div>
-        <Modal isOpen={isOpen} onClose={onClose} {...args} />
+        <Modal isOpen={isOpen} onClose={onClose} {...args} type='prompt' />
         <OpenModal onClick={() => setIsOpen(!isOpen)}>Prompt 모달 버튼</OpenModal>
       </div>
     );
   },
   args: {
-    type: 'prompt',
     title: '아이디를 입력해 주세요.',
     onSubmit: (input) => {
       alert(`입력한 아이디: ${input}`);
