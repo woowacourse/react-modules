@@ -1,62 +1,138 @@
-# Hooks Module 2
+# 💳 useCardFormHooks
 
-📍 학습 목표
-✔️ 모듈화된 컴포넌트의 재사용성 및 확장성 경험
-✔️ 실제 프로젝트에서의 컴포넌트 통합 및 활용
-✔️ 요구사항 변경에 따른 컴포넌트 리팩터링 및 개선
+Reusable React custom hooks for building validated credit card forms. Supports card number, expiration date, and CVC input with automatic brand detection and validation.
 
-# 기능 요구 명세
+## ✨ Features
 
-# Modal Component
+💡 Modular hooks for card number, expiration date, and CVC
+✅ Built-in validation and error message handling
+🧠 Automatic card brand detection (Visa, Master, AMEX, Diners, UnionPay)
+⚛️ React state integration for controlled components
 
-- [x] PC 환경에서의 사용을 고려하여 대응
-- [x] 새로운 타입의 모달 형태 구현 (반응형 디자인 확장)
+## 🚀 Usage - example
 
-- 다양한 모달 종류를 대응 가능하게 구현해야 한다.
-  - 확인(Alert) 모달: 사용자에게 메시지를 전달하고 확인 버튼만 제공
-  - 확인/취소(Confirm) 모달: 사용자에게 선택지를 제공하고 확인 및 취소 버튼 제공
-  - 입력(Prompt) 모달: 사용자로부터 입력값을 받을 수 있는 입력 필드와 확인/취소 버튼 제공
-- 모달 크기 옵션 추가
+```tsx
+import { useCardNumber, useExpirationDate, useCardCVC } from 'use-card-form-hooks';
 
-  - small, medium, large 등의 크기 옵션을 prop으로 전달받아 모달 크기 조절
+const CardForm = () => {
+  const {
+    cardNumber,
+    setCardNumber,
+    handleCardNumber,
+    isValid: numberValid,
+    errorMessage: numberError,
+    cardBrand,
+  } = useCardNumber();
+  const { expirationDate, handleExpirationDate, isValid: dateValid, errorMessage: dateError } = useExpirationDate();
+  const { cardCVC, setCardCVC, handleCVCValidate, isValid: cvcValid, errorMessage: cvcError } = useCardCVC();
 
-## 모달 컴포넌트 웹 접근성(A11y) 개선
+  return (
+    <>
+      <input value={cardNumber.input1} onChange={(e) => handleCardNumber({ ...cardNumber, input1: e.target.value })} />
+      <input
+        value={expirationDate.month}
+        onChange={(e) => handleExpirationDate({ ...expirationDate, month: e.target.value })}
+      />
+      <input
+        value={cardCVC}
+        onChange={(e) => {
+          setCardCVC(e.target.value);
+          handleCVCValidate(e.target.value);
+        }}
+      />
+      <p>Card brand: {cardBrand}</p>
+    </>
+  );
+};
+```
 
-- [x] 키보드 사용자를 고려하여 모달 내부 포커스 제어를 구현한다.
-  - 모달이 열릴 때 모달 내부의 첫 번째 포커스 가능한 요소로 자동 포커스를 이동시킨다.
-  - TAB 키로 모달 내부의 포커스 가능한 요소를 순서대로 탐색할 수 있어야 한다.
-  - Shift+TAB 키로 역순 탐색이 가능해야 하며, 마지막 요소에서 첫 번째 요소로 순환되어야 한다.
+## 🧩 Hook APIs
 
-# Custom Hooks
+### useCardNumber()
 
-## 다양한 카드사
+Manages state and validation for a 4-field credit card number input.
 
-- [x]다양한 카드 브랜드 지원 확장
-  - Visa, Mastercard 외에 AMEX, Diners, UnionPay 등의 주요 카드사 식별 및 유효성 검사 로직 추가
-  - 카드 브랜드별 식별 번호 및 카드 번호 유효성 검사 구현
-- [x] 카드 번호 포맷팅 기능 추가
-  - 사용자 입력 시 자동으로 카드사별 규칙에 맞게 카드 번호를 구분하여 표시
-  - 카드사별 포맷팅 규칙 적용
+| Key                | Description                            |
+| ------------------ | -------------------------------------- |
+| `cardNumber`       | Object of 4 inputs (`input1`–`input4`) |
+| `setCardNumber`    | State setter function                  |
+| `handleCardNumber` | Validates and updates number           |
+| `isValid`          | Per-input validity object              |
+| `errorMessage`     | Latest validation error message        |
+| `cardBrand`        | Detected card brand (e.g., 'Visa')     |
 
-### 카드사 식별 번호 구분 규칙
+### useExpirationDate()
 
-카드사별 번호의 규칙은 아래로 통일해서 진행한다.
+Handles expiration date validation for month/year inputs.
 
-- 💡 카드 브랜드 구분 로직 (Diners / AMEX / UnionPay)
-  Diners: 36으로 시작하는 14자리 숫자
-  예시: 3612 345678 9012
-  AMEX: 34, 37로 시작하는 15자리 숫자
-  예시 (34로 시작): 3412 345678 90123
-  예시 (37로 시작): 3712 345678 90123
-  유니온페이: 카드의 앞 번호가 아래 3가지 조건을 만족하는 16자리 숫자
-  622126~622925로 시작하는 경우: 6221 2612 3456 7890
-  624~626로 시작하는 경우: 6240 1234 5678 9012
-  6282~6288로 시작하는 경우: 6282 1234 5678 9012
+| Key                    | Description                         |
+| ---------------------- | ----------------------------------- |
+| `expirationDate`       | Object with `month` and `year`      |
+| `handleExpirationDate` | Updates + validates date            |
+| `isValid`              | `{ month: boolean, year: boolean }` |
+| `errorMessage`         | Validation message                  |
 
-## Storybook 및 RTL
+### useCardCVC()
 
-- [x] Storybook
-  - 모달 컴포넌트의 PC 대응 스토리 작성
-- [x] RTL
-  - 카드사 식별 (AMEX, Diners, UnionPay 포함) 및 유효성 검사 로직 테스트
-  - 카드 번호 포맷팅 기능 테스트
+Validates 3-digit CVC values.
+
+| Key                 | Description             |
+| ------------------- | ----------------------- |
+| `cardCVC`           | Current CVC input       |
+| `setCardCVC`        | State setter            |
+| `handleCVCValidate` | Validation trigger      |
+| `isValid`           | Boolean                 |
+| `errorMessage`      | Validation error string |
+
+## 🔍 Validation Rules
+
+### Card Number
+
+- 4 input fields: input1 to input4
+- Brand-specific digit length and format checks:
+  - Visa/Master: 4-4-4-4
+  - AMEX: 4-6-5
+  - Diners: 4-6-4
+  - UnionPay supported with range matching
+
+### Expiration Date
+
+- 2-digit month (01–12)
+- 2-digit year (current or future)
+- Date must be valid (not expired)
+
+### CVC
+
+- Must be a 3-digit number
+
+## Card Brand Detection
+
+Card brand is inferred from the first few digits using IIN ranges.
+
+Supported brands:
+
+- Visa (4)
+- MasterCard (51–55)
+- AMEX (34, 37)
+- Diners Club (36)
+- UnionPay (62, or valid 6/3/4-digit ranges)
+- etc: Unknown
+
+# 🛠 Utils
+
+All validations are exposed internally. You can customize or override the logic by modifying:
+
+- validateCardNumber(cardNumbers)
+- validateExpirationDate({ month, year })
+- validateCVC({ input, setIsValid, setErrorMessage })
+- matchCardBrand(input1, input2)
+
+# 📦 Installation
+
+```bash
+npm install use-card-form-hooks
+```
+
+```bash
+yarn add use-card-form-hooks
+```
