@@ -1,6 +1,6 @@
 import AlertModal from './lib/components/AlertModal';
+import { Modal } from './lib/components/common/Modal';
 import ConfirmModal from './lib/components/ConfirmModal';
-import { Modal } from './lib/components/Modal';
 import PromptModal from './lib/components/PromptModal';
 import { useModal } from './lib/hooks/useModal';
 

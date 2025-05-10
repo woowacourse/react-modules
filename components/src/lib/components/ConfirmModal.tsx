@@ -1,4 +1,4 @@
-import { Modal, ModalProps } from './Modal';
+import { Modal, ModalProps } from './common/Modal';
 
 type ConfirmModalProps = {
   onConfirm: () => void;

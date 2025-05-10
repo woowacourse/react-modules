@@ -2,7 +2,7 @@ import { useRef } from 'react';
 
 import styled from '@emotion/styled';
 
-import { Modal, ModalProps } from './Modal';
+import { Modal, ModalProps } from './common/Modal';
 
 type PromptModalProps = {
   onConfirm: (value: string) => void;

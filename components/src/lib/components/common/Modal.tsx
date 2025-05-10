@@ -5,7 +5,7 @@ import styled from '@emotion/styled';
 
 import { Portal } from './Portal';
 
-import closeIcon from '../assets/Close.svg';
+import closeIcon from '../../assets/Close.svg';
 
 export type ModalProps = {
   /**
