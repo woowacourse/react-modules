@@ -1,4 +1,4 @@
-import { createContext, useContext, ReactNode } from "react";
+import { createContext, useContext, ReactNode, useRef, useEffect } from "react";
 import styled from "@emotion/styled";
 
 interface ModalContextProps {
@@ -6,7 +6,13 @@ interface ModalContextProps {
 }
 
 const ModalContext = createContext<ModalContextProps | undefined>(undefined);
+const FOCUSABLE_SELECTOR = "button, input";
 
+const focusFirstElement = (container: HTMLElement | null) => {
+	if (!container) return;
+	const elements = container.querySelectorAll<HTMLElement>(FOCUSABLE_SELECTOR);
+	elements[0]?.focus();
+};
 export interface ModalRootProps {
 	isOpen: boolean;
 	onClose: () => void;
@@ -23,14 +29,25 @@ const WIDTH_MAP = {
 };
 
 const ModalRoot = ({ isOpen, onClose, modalPosition = "center", children, size = "medium" }: ModalRootProps) => {
+	const containerRef = useRef<HTMLDivElement>(null);
+
+	useEffect(() => {
+		if (!isOpen) return;
+
+		const modalContainer = containerRef.current;
+		focusFirstElement(modalContainer);
+	}, [isOpen]);
+
 	if (!isOpen) return null;
 
 	return (
 		<ModalContext.Provider value={{ onClose }}>
 			<Overlay>
-				<Container position={modalPosition} size={size}>
-					{children}
-				</Container>
+				<div>
+					<Container position={modalPosition} size={size} ref={containerRef}>
+						{children}
+					</Container>
+				</div>
 			</Overlay>
 		</ModalContext.Provider>
 	);
@@ -85,6 +102,10 @@ export const ActionButton = styled.button`
 	background: #333;
 	color: #fff;
 	cursor: pointer;
+
+	&:focus {
+		outline: 2px solid #007aff;
+	}
 `;
 
 export const CloseButton = styled.button`
@@ -96,6 +117,10 @@ export const CloseButton = styled.button`
 	border-radius: 5px;
 	background: #fff;
 	cursor: pointer;
+
+	&:focus {
+		outline: 2px solid #007aff;
+	}
 `;
 
 const Modal = Object.assign(ModalRoot, {
