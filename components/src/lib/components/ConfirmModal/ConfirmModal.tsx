@@ -1,4 +1,4 @@
-import { Modal } from '../../lib';
+import { Modal } from '../..';
 import {
   ButtonContainer,
   CancelButton,
@@ -8,9 +8,12 @@ import { Main, MainContainer } from './ConfirmModal.styles';
 
 type ConfirmModalProps = {
   isOpen: boolean;
-  position: 'center' | 'bottom';
-  size: 'small' | 'medium' | 'large';
+  position?: 'center' | 'bottom';
+  size?: 'small' | 'medium' | 'large';
+  title: string;
+  message: string;
   onClose: () => void;
+  onConfirm: () => void;
   onBackdropClick: (e: React.MouseEvent<HTMLDivElement>) => void;
 };
 
@@ -18,25 +21,28 @@ const ConfirmModal = ({
   isOpen,
   position,
   size,
+  title,
+  message,
   onClose,
+  onConfirm,
   onBackdropClick,
 }: ConfirmModalProps) => {
   return (
     <Modal
       isOpen={isOpen}
       position={position}
-      title="카드를 삭제하시겠습니까?"
+      title={title}
       showCloseButton={false}
       size={size}
       onClose={onClose}
       onBackdropClick={onBackdropClick}
     >
       <MainContainer>
-        <Main>삭제하면 복구하실 수 없습니다.</Main>
+        <Main>{message}</Main>
       </MainContainer>
       <ButtonContainer>
         <CancelButton onClick={onClose}>취소</CancelButton>
-        <ConfirmButton>확인</ConfirmButton>
+        <ConfirmButton onClick={onConfirm}>확인</ConfirmButton>
       </ButtonContainer>
     </Modal>
   );
