@@ -1,4 +1,4 @@
-# summit-hook
+# summit-hooks
 
 React 애플리케이션에서 신용카드 정보를 안전하게 처리하기 위한 커스텀 훅 모음입니다.
 
@@ -7,7 +7,7 @@ React 애플리케이션에서 신용카드 정보를 안전하게 처리하기 
 ## 설치
 
 ```bash
-npm i summit-hook
+npm i summit-hooks
 ```
 
 ## 사용 가능한 훅
@@ -15,10 +15,10 @@ npm i summit-hook
 이 패키지는 다음과 같은 훅을 제공합니다:
 
 - `useCardNumber`: 카드 번호 입력 및 유효성 검사를 위한 훅
-- `useCardBrand`: 카드사 식별 및 유효성 검사를 위한 훅
 - `useCardExpiry`: 카드 만료일 입력 및 유효성 검사를 위한 훅
 - `useCardCvc`: 카드 CVC 코드 입력 및 유효성 검사를 위한 훅
 - `useCardPassword`: 카드 비밀번호 입력 및 유효성 검사를 위한 훅
+- `useCardBrand`: 카드사 식별 및 유효성 검사를 위한 훅
 
 ## 개별 훅 사용 가이드
 
