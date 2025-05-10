@@ -1,11 +1,4 @@
-import React from 'react';
 import styled from '@emotion/styled';
-
-export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
-  fullWidth?: boolean;
-  error?: boolean;
-  className?: string;
-}
 
 const StyledInputWrapper = styled.div<{ fullWidth: boolean }>`
   display: block;
@@ -36,16 +29,4 @@ const StyledInput = styled.input<{ error: boolean }>`
   }
 `;
 
-export const Input = React.forwardRef<HTMLInputElement, InputProps>(
-  ({ fullWidth = true, error = false, className, ...props }, ref) => {
-    return (
-      <StyledInputWrapper fullWidth={fullWidth} className={className}>
-        <StyledInput ref={ref} error={error} {...props} />
-      </StyledInputWrapper>
-    );
-  },
-);
-
-Input.displayName = 'Input';
-
-export default Input;
+export { StyledInput, StyledInputWrapper };

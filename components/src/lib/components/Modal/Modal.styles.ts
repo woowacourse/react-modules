@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { ModalSize } from './useModalContext';
+import { ModalSize } from './hooks/useModalContext';
 
 const ModalContainer = styled.div``;
 

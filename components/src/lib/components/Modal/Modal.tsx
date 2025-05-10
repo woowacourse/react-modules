@@ -12,8 +12,8 @@ import {
   TitleContainer,
 } from './Modal.styles';
 import { CloseIcon } from './CloseIcon';
-import useModalContext, { ModalContext, ModalSize } from './useModalContext';
-import useFocusTrap from './useFocusTrap';
+import useModalContext, { ModalContext, ModalSize } from './hooks/useModalContext';
+import useFocusTrap from './hooks/useFocusTrap';
 
 type BaseProps = {
   children?: React.ReactNode;
