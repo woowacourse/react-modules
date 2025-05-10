@@ -1,5 +1,9 @@
 import styled from '@emotion/styled';
 
+export const FormContainer = styled.form`
+  width: 100%;
+`;
+
 export const MainContainer = styled.div`
   width: 100%;
   flex: 1;
