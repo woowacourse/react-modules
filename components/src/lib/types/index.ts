@@ -1,12 +1,8 @@
 import { HTMLAttributes } from "react";
 
 export interface BaseProps extends HTMLAttributes<HTMLElement> {
-  /** 자식 요소 (JSX.Element 또는 문자열 등) */
+  /** 필수 자식 요소 (JSX.Element 또는 문자열 등) */
   children: React.ReactNode;
-  // /** className 지정 (style) */
-  // className?: string;
-  // /** inline style 지정 (style) */
-  // style?: React.CSSProperties;
 }
 
 export interface ModalProps extends BaseProps {
