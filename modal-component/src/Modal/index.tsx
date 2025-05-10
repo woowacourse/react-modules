@@ -56,15 +56,13 @@ const Modal = ({
 
       if (event.key === 'Tab') {
         if (event.shiftKey) {
-          // Shift + Tab
           if (document.activeElement === first) {
             event.preventDefault();
             last?.focus();
           }
         } else {
-          // Tab
           if (document.activeElement === last) {
-            // event.preventDefault();
+            event.preventDefault();
             first?.focus();
           }
         }
