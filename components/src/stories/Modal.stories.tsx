@@ -148,3 +148,48 @@ export const PromptModal: Story = {
     );
   },
 };
+
+export const SmallModal: Story = {
+  render: () => {
+    const [isOpen, setIsOpen] = useState(true);
+    return (
+      <Modal isOpen={isOpen} onClose={() => setIsOpen(false)}>
+        <Modal.Overlay />
+        <Modal.Content size="small">
+          <Modal.Title title="Size: small 모달" />
+          <p>모달열림</p>
+        </Modal.Content>
+      </Modal>
+    );
+  },
+};
+
+export const MediumModal: Story = {
+  render: () => {
+    const [isOpen, setIsOpen] = useState(true);
+    return (
+      <Modal isOpen={isOpen} onClose={() => setIsOpen(false)}>
+        <Modal.Overlay />
+        <Modal.Content size="medium">
+          <Modal.Title title="Size: medium 모달" />
+          <p>모달열림</p>
+        </Modal.Content>
+      </Modal>
+    );
+  },
+};
+
+export const LargeModal: Story = {
+  render: () => {
+    const [isOpen, setIsOpen] = useState(true);
+    return (
+      <Modal isOpen={isOpen} onClose={() => setIsOpen(false)}>
+        <Modal.Overlay />
+        <Modal.Content size="large">
+          <Modal.Title title="Size: large 모달" />
+          <p>모달열림</p>
+        </Modal.Content>
+      </Modal>
+    );
+  },
+};
