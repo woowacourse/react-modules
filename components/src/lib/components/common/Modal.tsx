@@ -4,6 +4,7 @@ import styled from '@emotion/styled';
 
 import ModalBackdrop from './Modal.Backdrop';
 import ModalContainer from './Modal.Container';
+import ModalDescription from './Modal.Description';
 import ModalTitle from './Modal.Title';
 import Portal from './Portal';
 import { ModalContext, useModalContext } from './useModalContext';
@@ -39,23 +40,6 @@ export type ModalProps = {
    */
   closeByEscapeKey?: boolean;
 } & ComponentProps<'div'>;
-
-type ModalDescriptionProps = {
-  /**
-   * The description of the modal
-   */
-  description?: string;
-};
-
-const ModalDescription = ({ description }: ModalDescriptionProps) => {
-  return (
-    <>
-      {description && (
-        <StyledModalDescription aria-label={description}>{description}</StyledModalDescription>
-      )}
-    </>
-  );
-};
 
 const ModalCloseButton = () => {
   const { onClose } = useModalContext();
@@ -129,11 +113,6 @@ Modal.CloseButton = ModalCloseButton;
 Modal.ButtonWrapper = ModalButtonWrapper;
 Modal.CancelButton = ModalCancelButton;
 Modal.ConfirmButton = ModalConfirmButton;
-
-const StyledModalDescription = styled.p`
-  font-size: 16px;
-  font-weight: 400;
-`;
 
 const StyledCloseButton = styled.button`
   position: absolute;
