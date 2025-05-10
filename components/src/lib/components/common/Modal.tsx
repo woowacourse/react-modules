@@ -3,6 +3,7 @@ import { ComponentProps, useCallback, useEffect } from 'react';
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 
+import ModalBackdrop from './Modal.Backdrop';
 import Portal from './Portal';
 import { ModalContext, useModalContext } from './useModalContext';
 
@@ -54,10 +55,6 @@ type ModalContainerProps = {
   containerStyle?: React.CSSProperties;
 };
 
-type ModalBackdropProps = {
-  closeByBackdrop?: boolean;
-};
-
 type ModalTitleProps = {
   /**
    * The title of the modal
@@ -70,18 +67,6 @@ type ModalDescriptionProps = {
    * The description of the modal
    */
   description?: string;
-};
-
-const ModalBackdrop = ({ closeByBackdrop = true }: ModalBackdropProps) => {
-  const { onClose, $zIndex = 1000 } = useModalContext();
-
-  const handleCloseModal = () => {
-    if (closeByBackdrop) {
-      onClose();
-    }
-  };
-
-  return <StyledBackDrop onClick={handleCloseModal} aria-hidden="true" backdropZIndex={$zIndex} />;
 };
 
 const ModalContainer = ({
@@ -191,20 +176,6 @@ Modal.CloseButton = ModalCloseButton;
 Modal.ButtonWrapper = ModalButtonWrapper;
 Modal.CancelButton = ModalCancelButton;
 Modal.ConfirmButton = ModalConfirmButton;
-
-const StyledBackDrop = styled.div<{ backdropZIndex: number }>`
-  width: 100%;
-  position: fixed;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  z-index: ${({ backdropZIndex }) => backdropZIndex};
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: rgba(31, 41, 55, 0.2);
-`;
 
 const positionStyle = {
   center: css`
