@@ -1,11 +1,10 @@
 import { ComponentProps, useCallback, useEffect } from 'react';
 
-import styled from '@emotion/styled';
-
 import ModalBackdrop from './Modal.Backdrop';
 import ModalButtonWrapper from './Modal.ButtonWrapper';
 import ModalCancelButton from './Modal.CancelButton';
 import ModalCloseButton from './Modal.CloseButton';
+import ModalConfirmButton from './Modal.ConfirmButton';
 import ModalContainer from './Modal.Container';
 import ModalDescription from './Modal.Description';
 import ModalTitle from './Modal.Title';
@@ -42,20 +41,6 @@ export type ModalProps = {
   closeByEscapeKey?: boolean;
 } & ComponentProps<'div'>;
 
-const ModalConfirmButton = ({
-  onClick,
-  children,
-}: {
-  onClick: () => void;
-  children: React.ReactNode;
-}) => {
-  return (
-    <StyledConfirmButton type="button" onClick={onClick} aria-label="confirmButton">
-      {children}
-    </StyledConfirmButton>
-  );
-};
-
 export const Modal = (props: ModalProps) => {
   const { isOpen, onClose, children, closeByEscapeKey = true } = props;
 
@@ -90,14 +75,3 @@ Modal.CloseButton = ModalCloseButton;
 Modal.ButtonWrapper = ModalButtonWrapper;
 Modal.CancelButton = ModalCancelButton;
 Modal.ConfirmButton = ModalConfirmButton;
-
-const StyledConfirmButton = styled.button`
-  width: 80px;
-  height: 40px;
-  padding: 8px 4px;
-  background-color: #333333;
-  color: white;
-  cursor: pointer;
-  border: none;
-  border-radius: 4px;
-`;
