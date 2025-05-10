@@ -1,0 +1,53 @@
+import { useState } from "react";
+
+import getCardNetwork from "../useCardNumbersValidate/utils/getCardNetwork";
+
+import validateCardNumbersType from "../../types/validateCardNumbersType";
+import CardNumbersState from "../../types/CardNumberState";
+import CardNumbersKey from "../../types/CardNumbersKey";
+
+type useCardNumbersStateProps = {
+  validateCardNumbers: (params: validateCardNumbersType) => boolean;
+};
+
+const INIT_CARD_NUMBERS_STATE: CardNumbersState = {
+  numbers: {
+    first: "",
+    second: "",
+    third: "",
+    fourth: "",
+  },
+  network: "NOTHING",
+};
+
+const useCardNumbersState = ({
+  validateCardNumbers,
+}: useCardNumbersStateProps) => {
+  const [cardNumbers, setCardNumbers] = useState(INIT_CARD_NUMBERS_STATE);
+
+  const handleCardNumber = ({
+    event,
+    key,
+  }: {
+    event: React.ChangeEvent<HTMLInputElement>;
+    key: CardNumbersKey;
+  }) => {
+    const { value } = event.target;
+    const network = getCardNetwork({
+      key,
+      value,
+      cardNumbers,
+    });
+
+    if (!validateCardNumbers({ key, value, cardNumbers })) return;
+
+    setCardNumbers((prev) => ({
+      numbers: { ...prev.numbers, [key]: value },
+      network: network.name,
+    }));
+  };
+
+  return { cardNumbers, handleCardNumber };
+};
+
+export default useCardNumbersState;
