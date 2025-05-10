@@ -27,7 +27,12 @@ function PromptModal({
 
   const handlePromptSubmit = (e: FormEvent) => {
     e.preventDefault();
-    onSubmit(inputRef.current?.value ?? "");
+
+    const value =
+      inputAttributes.value !== undefined
+        ? String(inputAttributes.value)
+        : inputRef.current?.value ?? "";
+    onSubmit(value);
     onRequestClose();
   };
 
