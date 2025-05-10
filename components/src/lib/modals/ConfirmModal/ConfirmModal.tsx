@@ -1,6 +1,6 @@
 import BaseModal from "../BaseModal/BaseModal";
 import type { ReactNode } from "react";
-import CancleButton from "../components/CancleButton/CancleButton";
+import CancelButton from "../components/CancelButton/CancelButton";
 import ConfirmButton from "../components/ConfirmButton/ConfirmButton";
 
 type ConfirmModalProps = {
@@ -24,7 +24,7 @@ const ConfirmModal = ({
 }: ConfirmModalProps) => {
   const buttonElements = (
     <>
-      <CancleButton onClick={onClose} />
+      <CancelButton onClick={onClose} />
       <ConfirmButton onClick={onConfirm ?? onClose} />
     </>
   );

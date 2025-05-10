@@ -1,14 +1,14 @@
 import styled from "@emotion/styled";
 
-type CancleButtonProps = {
+type CancelButtonProps = {
   onClick: () => void;
 };
 
-const CancleButton = ({ onClick }: CancleButtonProps) => {
+const CancelButton = ({ onClick }: CancelButtonProps) => {
   return <StyledButton onClick={onClick}>취소</StyledButton>;
 };
 
-export default CancleButton;
+export default CancelButton;
 
 const StyledButton = styled.button`
   width: 80px;

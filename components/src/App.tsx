@@ -1,7 +1,7 @@
 import { useState } from "react";
-import PromptModal from "./lib/PromprtModal/PromptModal";
-import AlertModal from "./lib/AlertModal/AlertModal";
-import ConfirmModal from "./lib/ConfirmModal/ConfirmModal";
+import PromptModal from "./lib/modals/PromptModal/PromptModal";
+import AlertModal from "./lib/modals/AlertModal/AlertModal";
+import ConfirmModal from "./lib/modals/ConfirmModal/ConfirmModal";
 
 function App() {
   const [openModal, setOpenModal] = useState<
