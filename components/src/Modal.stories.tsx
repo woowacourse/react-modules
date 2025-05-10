@@ -17,6 +17,7 @@ export const Default: Story = {
         <Modal {...args}>
           <Modal.Background onClick={() => {}}>
             <Modal.ModalContainer
+              $size="medium"
               $position="center"
               onClick={(e) => e.stopPropagation()}
             >
@@ -37,7 +38,7 @@ export const Default: Story = {
   },
   args: {
     isOpen: true,
-    handleCloseModal: () => alert("모달 닫힘"),
+    onModalClose: () => alert("모달 닫힘"),
   },
 };
 
@@ -48,6 +49,7 @@ export const BottomModal: Story = {
         <Modal {...args}>
           <Modal.Background onClick={() => {}}>
             <Modal.ModalContainer
+              $size="large"
               $position="bottom"
               onClick={(e) => e.stopPropagation()}
             >
@@ -68,6 +70,6 @@ export const BottomModal: Story = {
   },
   args: {
     isOpen: true,
-    handleCloseModal: () => alert("모달 닫기"),
+    onModalClose: () => alert("모달 닫기"),
   },
 };

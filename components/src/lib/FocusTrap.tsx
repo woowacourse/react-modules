@@ -22,8 +22,6 @@ const FocusTrap = ({ children }: { children: React.ReactNode }) => {
     const lastElement = focusableElements[focusableElements.length - 1];
 
     firstElement.focus();
-    console.log(firstElement);
-    console.log(focusableElements);
 
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key !== "Tab" && !e.shiftKey) return;

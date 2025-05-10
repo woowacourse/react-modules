@@ -125,8 +125,10 @@ export const ModalButton = styled.button<{
   padding: 8px 20px;
   cursor: pointer;
 
-  &:focus {
-    border: 1px solid #c91929;
+  &:focus-visible {
+    outline: 2px solid #4c9ffe;
+    outline-offset: 2px;
+    border-radius: 4px;
   }
 
   ${({ $type }) => $type === "cancel" && cancelButton}
