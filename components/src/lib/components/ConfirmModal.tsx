@@ -6,6 +6,11 @@ type ConfirmModalProps = {
 } & ModalProps;
 
 const ConfirmModal = ({ isOpen, onClose, children, onConfirm, title }: ConfirmModalProps) => {
+  const handleConfirm = () => {
+    onConfirm();
+    onClose();
+  };
+
   return (
     <Modal isOpen={isOpen} onClose={onClose} closeByEscapeKey={false}>
       <Modal.Backdrop closeByBackdrop={false} />
@@ -14,7 +19,7 @@ const ConfirmModal = ({ isOpen, onClose, children, onConfirm, title }: ConfirmMo
         {children}
         <Modal.ButtonWrapper>
           <Modal.CancelButton>취소</Modal.CancelButton>
-          <Modal.ConfirmButton onClick={onConfirm}>확인</Modal.ConfirmButton>
+          <Modal.ConfirmButton onClick={handleConfirm}>확인</Modal.ConfirmButton>
         </Modal.ButtonWrapper>
       </Modal.Container>
     </Modal>

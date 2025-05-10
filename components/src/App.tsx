@@ -59,7 +59,6 @@ function App() {
           onClose={handleCloseConfirmModal}
           onConfirm={() => {
             console.log('confirm 확인!');
-            handleCloseConfirmModal();
           }}
           title="카드를 삭제하시겠습니까?"
         >
