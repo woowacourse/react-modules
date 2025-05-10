@@ -7,6 +7,7 @@ interface ButtonProps {
 
 export type Position = 'center' | 'bottom';
 export type Direction = 'row' | 'column';
+export type Size = 'small' | 'medium' | 'large';
 
 export interface BaseProps {
   children?: React.ReactNode;
@@ -26,6 +27,7 @@ export interface OverlayProps extends BaseProps {
 export interface ModalContentProps extends BaseProps {
   hasTopCloseButton?: boolean;
   position?: Position;
+  size?: Size;
 }
 
 export interface AlertContentProps extends ModalContentProps {

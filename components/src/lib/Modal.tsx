@@ -12,7 +12,8 @@ import {
   OverlayProps,
   Position,
   PromptContentProps,
-} from './types/Props';
+  Size,
+} from './types/props';
 import TextButton from './components/TextButton';
 
 const ModalContext = createContext<{ onClose: () => void }>({ onClose: () => {} });
@@ -46,12 +47,13 @@ const Content = ({
   children,
   hasTopCloseButton = true,
   position = 'center',
+  size = 'small',
   ...props
 }: ModalContentProps) => {
   const { onClose } = useContext(ModalContext);
 
   return (
-    <S.ModalContent position={position} {...props}>
+    <S.ModalContent position={position} size={size} {...props}>
       {hasTopCloseButton && <CloseIconButton data-testid="modal-close" onClick={() => onClose()} />}
       {children}
     </S.ModalContent>
@@ -62,6 +64,7 @@ const AlertContent = ({
   children,
   hasTopCloseButton = true,
   position = 'center',
+  size = 'small',
   alertButton = {},
   ...props
 }: AlertContentProps) => {
@@ -77,6 +80,7 @@ const AlertContent = ({
   return (
     <S.ModalContent
       position={position}
+      size={size}
       style={{
         display: 'flex',
         flexDirection: 'column',
@@ -96,6 +100,7 @@ const ConfirmContent = ({
   children,
   hasTopCloseButton = true,
   position = 'center',
+  size = 'small',
   confirmButton = {},
   cancelButton = {},
   ...props
@@ -119,6 +124,7 @@ const ConfirmContent = ({
   return (
     <S.ModalContent
       position={position}
+      size={size}
       style={{
         display: 'flex',
         flexDirection: 'column',
@@ -151,6 +157,7 @@ const PromptContent = ({
   children,
   hasTopCloseButton = true,
   position = 'center',
+  size = 'small',
   confirmButton = {},
   cancelButton = {},
   ...props
@@ -174,6 +181,7 @@ const PromptContent = ({
   return (
     <S.ModalContent
       position={position}
+      size={size}
       style={{
         display: 'flex',
         flexDirection: 'column',
@@ -219,9 +227,13 @@ Modal.Title = Title;
 export default Modal;
 
 const S = {
-  ModalContent: styled.div<{ position: Position }>`
+  ModalContent: styled.div<{ position: Position; size: Size }>`
     height: 216px;
-    width: 304px;
+    width: ${({ size }) => {
+      if (size === 'small') return 320;
+      if (size === 'medium') return 480;
+      if (size === 'large') return 600;
+    }}px;
     position: fixed;
     top: 50%;
     left: 50%;
