@@ -1,5 +1,9 @@
 import { isNumeric } from "..";
-import { CARD_NUMBER_LENGTH, ERROR_MESSAGE } from "../../constants/index";
+import {
+  CARD_NUMBER_LENGTH,
+  CardNetwork,
+  ERROR_MESSAGE,
+} from "../../constants/index";
 
 function getCardNumberGroupError(cardNumber: string) {
   if (!isNumeric(cardNumber)) return ERROR_MESSAGE.NOT_NUMERIC;
@@ -9,12 +13,14 @@ function getCardNumberGroupError(cardNumber: string) {
   return "";
 }
 
-export function validateCardNumber(cardNumbers: string[]) {
+export function validateCardNumber(
+  cardNumbers: string[],
+  cardNetwork: CardNetwork
+) {
   const cardNumberErrors = ["", "", "", ""];
 
   cardNumbers.forEach((cardNumber, index) => {
-    const trimCardNumber = cardNumber.trim();
-    cardNumberErrors[index] = getCardNumberGroupError(trimCardNumber);
+    cardNumberErrors[index] = getCardNumberGroupError(cardNumber);
   });
 
   return cardNumberErrors;

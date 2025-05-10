@@ -17,13 +17,9 @@ export default function validateExpiryDateNumber(expiryDate: string[]) {
   const expiryDateErrors = ["", ""];
 
   expiryDate.forEach((date, index) => {
-    const trimExpiryDate = date.trim();
     const dateIndex = index === 0 ? "month" : "year";
 
-    expiryDateErrors[index] = getExpiryDateGroupError(
-      trimExpiryDate,
-      dateIndex
-    );
+    expiryDateErrors[index] = getExpiryDateGroupError(date, dateIndex);
   });
 
   return expiryDateErrors;

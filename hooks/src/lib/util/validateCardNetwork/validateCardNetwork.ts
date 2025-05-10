@@ -1,14 +1,6 @@
+import { CardNetwork } from "../../constants";
+
 const CARD_NETWORK_ID_LENGTH = 6;
-
-export type CardNetwork =
-  | "VISA"
-  | "MASTER"
-  | "DINERS"
-  | "AMEX"
-  | "UNIONPAY"
-  | "PENDING"
-  | "DEFAULT";
-
 interface CardRule {
   name: CardNetwork;
   match: (num: string) => boolean;

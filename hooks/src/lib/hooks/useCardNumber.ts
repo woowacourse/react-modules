@@ -1,9 +1,7 @@
 import { Dispatch, useState } from "react";
 import { validateCardNumber } from "../util/validateCardNumber/validateCardNumber";
-import {
-  CardNetwork,
-  validateCardNetwork,
-} from "../util/validateCardNetwork/validateCardNetwork";
+import { validateCardNetwork } from "../util/validateCardNetwork/validateCardNetwork";
+import { CardNetwork } from "../constants";
 
 interface UseCardNumberReturn {
   cardNumber: string[];
@@ -17,7 +15,7 @@ export default function useCardNumber(): UseCardNumberReturn {
   const [cardNumber, setCardNumber] = useState(["", "", "", ""]);
 
   const cardNetwork: CardNetwork = validateCardNetwork(cardNumber);
-  const errorMessage: string[] = validateCardNumber(cardNumber);
+  const errorMessage: string[] = validateCardNumber(cardNumber, cardNetwork);
 
   const isError = errorMessage.map((msg) => msg !== "");
 
