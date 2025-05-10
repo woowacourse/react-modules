@@ -46,23 +46,27 @@ const Modal = ({
       modalRef.current.querySelectorAll<HTMLElement>(FOCUSABLE_SELECTORS);
     const first = focusableElements[0];
     const last = focusableElements[focusableElements.length - 1];
+
     first?.focus();
+
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === 'Escape') {
         onClose();
       }
 
-      if (event.shiftKey) {
-        // Shift + Tab
-        if (document.activeElement === first) {
-          event.preventDefault();
-          last?.focus();
-        }
-      } else {
-        // Tab
-        if (document.activeElement === last) {
-          event.preventDefault();
-          first?.focus();
+      if (event.key === 'Tab') {
+        if (event.shiftKey) {
+          // Shift + Tab
+          if (document.activeElement === first) {
+            event.preventDefault();
+            last?.focus();
+          }
+        } else {
+          // Tab
+          if (document.activeElement === last) {
+            // event.preventDefault();
+            first?.focus();
+          }
         }
       }
     };
