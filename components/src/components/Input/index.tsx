@@ -1,9 +1,9 @@
 import type { ComponentProps } from "react";
 import * as S from "./Input.styled";
 
-interface InputProps extends ComponentProps<"input"> {}
+interface InputProps extends Omit<ComponentProps<"input">, "children"> {}
 
-function Input({ children, ...props }: InputProps) {
+function Input({ ...props }: InputProps) {
   return <S.Input {...props} />;
 }
 
