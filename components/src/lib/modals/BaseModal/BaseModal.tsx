@@ -1,5 +1,8 @@
 import styled from "@emotion/styled";
 import CloseButton from "../components/CloseButton/CloseButton";
+import { useFocusTrap } from "../hooks/useFocusTrap";
+import { useEscapeKey } from "../hooks/useEscapeKey";
+import { useOutsideClick } from "../hooks/useOutSideClick";
 
 type ModalProps = {
   position?: "center" | "bottom";
@@ -11,13 +14,6 @@ type ModalProps = {
   buttonElements?: React.ReactNode;
 };
 
-const handleWrapperClick =
-  (onClose: () => void) => (e: React.MouseEvent<HTMLDivElement>) => {
-    if (e.target === e.currentTarget) {
-      onClose();
-    }
-  };
-
 const BaseModal = ({
   position = "center",
   size,
@@ -27,6 +23,10 @@ const BaseModal = ({
   onClose,
   buttonElements,
 }: ModalProps) => {
+  const modalRef = useFocusTrap();
+  useEscapeKey(onClose);
+  const handleWrapperClick = useOutsideClick(onClose);
+
   return (
     <Overlay
       role="dialog"
@@ -34,8 +34,8 @@ const BaseModal = ({
       aria-labelledby="modal-title"
       aria-describedby="modal-content"
     >
-      <Wrapper className={position} onClick={handleWrapperClick(onClose)}>
-        <ModalContainer className={`${position} ${size}`}>
+      <Wrapper className={position} onClick={handleWrapperClick}>
+        <ModalContainer className={`${position} ${size}`} ref={modalRef}>
           <ModalHeader>
             <ModalTitle id="modal-title">{title}</ModalTitle>
             <CloseButtonWrapper>
