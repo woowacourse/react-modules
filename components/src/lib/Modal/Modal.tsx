@@ -1,131 +1,65 @@
 import { ReactNode } from "react";
-import styled from "@emotion/styled";
+import {
+  ModalBackDrop,
+  ModalContainer,
+  StyledTitle,
+  StyledDescription,
+  StyledInput,
+  ButtonWrap,
+  StyledCloseButton,
+  StyledConfirmButton,
+} from "./Modal.styles";
 
 interface ModalProps {
   size?: "small" | "medium" | "large";
   position: "center" | "bottom";
   isOpen: boolean;
-  showCloseButton?: boolean;
-  showConfirmButton?: boolean;
   children: ReactNode;
   onClose: () => void;
 }
 
-const Modal = ({
-  size = "small",
-  position,
-  isOpen,
-  children,
-  onClose,
-  showCloseButton = false,
-  showConfirmButton = false,
-}: ModalProps) => {
-  return (
-    <>
-      {isOpen && (
-        <ModalBackDrop position={position}>
-          <ModalContainer size={size} position={position}>
-            {children}
-            <ButtonWrap>
-              {showConfirmButton && (
-                <ConfirmButton onClick={onClose}>확인</ConfirmButton>
-              )}
-              {showCloseButton && (
-                <CloseButton onClick={onClose}>닫기</CloseButton>
-              )}
-            </ButtonWrap>
-          </ModalContainer>
-        </ModalBackDrop>
-      )}
-    </>
-  );
+const Modal = ({ isOpen, children, position, size = "medium" }: ModalProps) => {
+  return isOpen ? (
+    <ModalBackDrop position={position}>
+      <ModalContainer size={size} position={position}>
+        {children}
+      </ModalContainer>
+    </ModalBackDrop>
+  ) : null;
 };
 
+const Title = ({ children }: { children: ReactNode }) => (
+  <StyledTitle>{children}</StyledTitle>
+);
+
+const Description = ({ children }: { children: ReactNode }) => (
+  <StyledDescription>{children}</StyledDescription>
+);
+
+const Input = () => <StyledInput />;
+
+const Actions = ({ children }: { children: ReactNode }) => (
+  <ButtonWrap>{children}</ButtonWrap>
+);
+
+interface ButtonProps {
+  children: ReactNode;
+  onClick?: () => void;
+}
+
+const ConfirmButton = ({ children, onClick }: ButtonProps) => (
+  <StyledConfirmButton onClick={onClick}>{children}</StyledConfirmButton>
+);
+
+const CloseButton = ({ children, onClick }: ButtonProps) => (
+  <StyledCloseButton onClick={onClick}>{children}</StyledCloseButton>
+);
+
+Modal.Title = Title;
+Modal.Description = Description;
+Modal.Input = Input;
+Modal.Actions = Actions;
+Modal.ConfirmButton = ConfirmButton;
+Modal.CloseButton = CloseButton;
+
 export default Modal;
-
-const ModalBackDrop = styled.div<{ position: "center" | "bottom" }>`
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 2;
-  width: 100vw;
-  height: 100vh;
-  background-color: rgba(0, 0, 0, 0.35);
-  display: flex;
-  justify-content: center;
-  align-items: ${(props: { position: "center" | "bottom" }) =>
-    props.position === "center" ? "center" : "flex-end"};
-  padding: 0;
-`;
-
-const ModalContainer = styled.div<{
-  position: "center" | "bottom";
-  size: "small" | "medium" | "large";
-}>`
-  z-index: 3;
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  width: ${(props) => {
-    if (props.position === "bottom") return "100%";
-    switch (props.size) {
-      case "small":
-        return "320px";
-      case "medium":
-        return "480px";
-      case "large":
-        return "600px";
-      default:
-        return "60%";
-    }
-  }};
-  height: auto;
-  padding: 24px 32px;
-  border-radius: 8px;
-  background-color: #fff;
-  font-family: "Noto Sans KR", sans-serif;
-`;
-
-const CloseButton = styled.button`
-  width: 100%;
-  padding: 8px 0px;
-  border: 1px solid #8b95a1;
-  text-align: center;
-  font-size: 15px;
-  font-weight: 700;
-  border-radius: 5px;
-  background: #fff;
-  color: #8b95a1;
-  cursor: pointer;
-`;
-
-const ConfirmButton = styled.button<{ size?: "small" | "medium" | "large" }>`
-  width: ${(props) => {
-    switch (props.size) {
-      case "small":
-        return "80px";
-      case "medium":
-        return "160px";
-      case "large":
-        return "240px";
-      default:
-        return "80px";
-    }
-  }};
-  padding: 8px 0px;
-  border: none;
-  text-align: center;
-  font-size: 15px;
-  font-weight: 700;
-  border-radius: 5px;
-  color: #fff;
-  background: #333;
-  cursor: pointer;
-`;
-
-const ButtonWrap = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: 12px;
-`;
