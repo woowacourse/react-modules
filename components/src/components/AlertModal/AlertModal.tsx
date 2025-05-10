@@ -1,10 +1,6 @@
 import { Modal } from '../../lib';
-import {
-  ButtonContainer,
-  ConfirmButton,
-  Main,
-  MainContainer,
-} from './AlertModal.styles';
+import { ButtonContainer, ConfirmButton } from '../common/Button.styles';
+import { Main, MainContainer } from './AlertModal.styles';
 
 type AlertModalProps = {
   isOpen: boolean;
@@ -17,7 +13,7 @@ type AlertModalProps = {
 const AlertModal = ({
   isOpen,
   position,
-  size = 'small',
+  size,
   onClose,
   onBackdropClick,
 }: AlertModalProps) => {
@@ -35,7 +31,7 @@ const AlertModal = ({
         <Main>아이디는 필수로 입력해야 합니다.</Main>
       </MainContainer>
       <ButtonContainer>
-        <ConfirmButton>확인</ConfirmButton>
+        <ConfirmButton onClick={onClose}>확인</ConfirmButton>
       </ButtonContainer>
     </Modal>
   );

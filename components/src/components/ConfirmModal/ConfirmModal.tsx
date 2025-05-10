@@ -3,9 +3,8 @@ import {
   ButtonContainer,
   CancelButton,
   ConfirmButton,
-  Main,
-  MainContainer,
-} from './ConfirmModal.styles';
+} from '../common/Button.styles';
+import { Main, MainContainer } from './ConfirmModal.styles';
 
 type ConfirmModalProps = {
   isOpen: boolean;
@@ -18,7 +17,7 @@ type ConfirmModalProps = {
 const ConfirmModal = ({
   isOpen,
   position,
-  size = 'small',
+  size,
   onClose,
   onBackdropClick,
 }: ConfirmModalProps) => {
@@ -36,7 +35,7 @@ const ConfirmModal = ({
         <Main>삭제하면 복구하실 수 없습니다.</Main>
       </MainContainer>
       <ButtonContainer>
-        <CancelButton>취소</CancelButton>
+        <CancelButton onClick={onClose}>취소</CancelButton>
         <ConfirmButton>확인</ConfirmButton>
       </ButtonContainer>
     </Modal>

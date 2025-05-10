@@ -3,9 +3,8 @@ import {
   ButtonContainer,
   CancelButton,
   ConfirmButton,
-  InputField,
-  MainContainer,
-} from './PromptModal.styles';
+} from '../common/Button.styles';
+import { InputField, MainContainer } from './PromptModal.styles';
 
 type PromptModalProps = {
   isOpen: boolean;
@@ -18,7 +17,7 @@ type PromptModalProps = {
 const PromptModal = ({
   isOpen,
   position,
-  size = 'small',
+  size,
   onClose,
   onBackdropClick,
 }: PromptModalProps) => {
@@ -36,7 +35,7 @@ const PromptModal = ({
         <InputField placeholder="1234" />
       </MainContainer>
       <ButtonContainer>
-        <CancelButton>취소</CancelButton>
+        <CancelButton onClick={onClose}>취소</CancelButton>
         <ConfirmButton>확인</ConfirmButton>
       </ButtonContainer>
     </Modal>
