@@ -1,8 +1,13 @@
 import { ErrorState, ValidationRule } from "../lib/types";
 
 export const commonConditions = {
-  isNumeric: (value: string) => !isNaN(Number(value)),
-  hasLength: (length: number) => (value: string) => value.length === length,
+  hasLengthInRange: (min: number, max: number) => (value: string) => {
+    const targetLength = value.length;
+    return targetLength >= min && targetLength <= max;
+  },
+  isFilled: (value: string) => value !== "",
+  hasExactLength: (length: number) => (value: string) =>
+    value.length === length,
 };
 
 export const getErrorByRules = (
