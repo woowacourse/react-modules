@@ -14,12 +14,16 @@ interface ErrorMessageProps {
   };
 }
 
-const useExpirationDate = ({ customErrorMessages }: ErrorMessageProps) => {
+const useExpirationDate = ({
+  customErrorMessages = {},
+}: ErrorMessageProps = {}) => {
   const [isValid, setIsValid] = useState({ month: true, year: true });
   const [errorMessage, setErrorMessage] = useState("");
 
   const handleExpirationDate = ({ month, year }: ExpirationDateInput) => {
     const monthResult = validateMonth(month);
+
+    if (year.length == 0) return;
     const yearResult = validateYear(year);
 
     setIsValid({ month: monthResult.isValid, year: yearResult.isValid });
@@ -72,7 +76,12 @@ const useExpirationDate = ({ customErrorMessages }: ErrorMessageProps) => {
           DEFAULT_ERROR_MESSAGE.INVALID_EXPIRATION_TWO_DIGITS,
       };
     }
-
+    if (!isValidYear(year)) {
+      return {
+        isValid: false,
+        errorMessage: DEFAULT_ERROR_MESSAGE.INVALID_EXPIRATION_YEAR_RANGE,
+      };
+    }
     return { isValid: true, errorMessage: "" };
   };
 
@@ -90,6 +99,14 @@ const isTwoDigits = (value: string) => {
 const isValidMonth = (month: string) => {
   const monthNumber = Number(month);
   return monthNumber >= 1 && monthNumber <= 12;
+};
+
+const isValidYear = (year: string) => {
+  const yearNumber = Number(year);
+  const currentYear = new Date().getFullYear();
+  return (
+    yearNumber >= Number(currentYear.toString().slice(2, 4)) && yearNumber <= 99
+  );
 };
 
 export default useExpirationDate;

@@ -1,6 +1,9 @@
 import { useState } from "react";
 import { DEFAULT_ERROR_MESSAGE } from "./constants/messages";
-import { DEFAULT_SYSTEM_CONSTANTS } from "./constants/systemConstants";
+import {
+  DEFAULT_SYSTEM_CONSTANTS,
+  FORMAT_MARK,
+} from "./constants/systemConstants";
 
 interface ErrorMessageProps {
   customErrorMessages?: {
@@ -17,7 +20,7 @@ const useCardNumber = ({
   const [errorMessage, setErrorMessage] = useState("");
 
   const handleCardNumberValidation = (numbers: string) => {
-    numbers = numbers.replaceAll("-", "");
+    numbers = numbers.replaceAll(FORMAT_MARK, "");
     const result = validateCardNumber(numbers);
     setIsValid(result.isValid);
     setErrorMessage(result.errorMessage);

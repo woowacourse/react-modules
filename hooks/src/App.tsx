@@ -4,6 +4,7 @@ import useExpirationDate from "./lib/useExpirationDate";
 import useCardCVC from "./lib/useCardCVC";
 import useCardBrand from "./lib/useCardBrand";
 import styled from "@emotion/styled";
+import { FORMAT_MARK } from "./lib/constants/systemConstants";
 
 function App() {
   const [cardNumber, setCardNumber] = useState("");
@@ -53,9 +54,9 @@ function App() {
   } = useCardBrand();
 
   const handleCardNumberChange = (e) => {
-    const raw = e.target.value.replaceAll("-", "");
-    guessCardBrandByPrefix(raw);
-    setCardNumber(handleCardNumberFormat(raw));
+    const raw = e.target.value.replaceAll(FORMAT_MARK, "");
+    guessCardBrandByPrefix(raw, FORMAT_MARK);
+    setCardNumber(handleCardNumberFormat(raw, FORMAT_MARK));
   };
 
   const handleExpirationChange = (e) => {
@@ -65,7 +66,7 @@ function App() {
 
   const handleBlurCardNumber = () => {
     handleCardNumberValidation(cardNumber);
-    justifyCardBrand(cardNumber);
+    justifyCardBrand(cardNumber, FORMAT_MARK);
   };
 
   const handleBlurExpiration = () => {
@@ -78,6 +79,7 @@ function App() {
 
   return (
     <Container>
+      {cardBrand}
       <Input
         name="cardNumber"
         value={cardNumber}

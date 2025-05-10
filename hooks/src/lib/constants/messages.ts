@@ -7,4 +7,5 @@ export const DEFAULT_ERROR_MESSAGE = {
   INVALID_EXPIRATION_NUMBER_FORMAT: "숫자만 입력해 주세요.",
   INVALID_EXPIRATION_TWO_DIGITS: "2자리의 숫자를 입력해 주세요.",
   INVALID_EXPIRATION_MONTH_RANGE: "1~12 사이의 숫자를 입력해 주세요.",
+  INVALID_EXPIRATION_YEAR_RANGE: "유효기간이 지난 카드입니다.",
 };

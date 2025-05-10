@@ -1,5 +1,6 @@
 import { useState } from "react";
 import * as P from "./utils/checkPrefix";
+import { CARD_FORMAT_RULES, FORMAT_MARK } from "./constants/systemConstants";
 
 type CardBrandTypes =
   | "visa"
@@ -43,16 +44,11 @@ const cardBrandRules: CardBrandConfig[] = [
   },
 ];
 
-const cardFormatRules = {
-  16: [4, 4, 4, 4],
-  15: [4, 6, 5],
-  14: [4, 6, 4],
-};
-
 const useCardBrand = () => {
   const [cardBrand, setCardBrand] = useState<CardBrandTypes>("noBrand");
 
-  const justifyCardBrand = (cardInput: string) => {
+  const justifyCardBrand = (cardInput: string, delimiter: string) => {
+    cardInput = cardInput.replaceAll(delimiter, "");
     const matchedBrand = cardBrandRules.find(
       (rule) =>
         rule.checkPrefixFunc(cardInput) && cardInput.length === rule.length
@@ -61,7 +57,8 @@ const useCardBrand = () => {
     setCardBrand(updatedBrand);
   };
 
-  const guessCardBrandByPrefix = (cardInput: string) => {
+  const guessCardBrandByPrefix = (cardInput: string, delimiter: string) => {
+    cardInput = cardInput.replaceAll(delimiter, "");
     const matchedBrand = cardBrandRules.find((rule) =>
       rule.checkPrefixFunc(cardInput)
     );
@@ -81,15 +78,17 @@ const useCardBrand = () => {
       offset += length;
       result.push(slice);
     }
-    return result.join("-");
+    return result;
   };
 
-  const handleCardNumberFormat = (cardInput: string) => {
+  const handleCardNumberFormat = (cardInput: string, delimiter: string) => {
     const DEFAULT_FORMAT_LENGTH = 16;
     const brandRule = cardBrandRules.find((rule) => rule.brand === cardBrand);
     const length = brandRule ? brandRule.length : DEFAULT_FORMAT_LENGTH;
 
-    return divideByFormat(cardInput, cardFormatRules[length]);
+    const dividedInput = divideByFormat(cardInput, CARD_FORMAT_RULES[length]);
+
+    return dividedInput.join(delimiter);
   };
 
   return {
