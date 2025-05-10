@@ -6,11 +6,12 @@ import { useModalContext } from './ModalProvider';
 
 interface CloseButtonProps {
   style?: CSSProperties;
+  className?: string;
 }
 
 // ============================== Component ==============================
 
-function CloseButton({ style }: CloseButtonProps) {
+function CloseButton({ style, className }: CloseButtonProps) {
   const { onClose } = useModalContext();
 
   const memoizedStyle = useMemo(() => {
@@ -19,7 +20,12 @@ function CloseButton({ style }: CloseButtonProps) {
   }, [style]);
 
   return (
-    <StyledCloseButton type="button" style={memoizedStyle} onClick={onClose}>
+    <StyledCloseButton
+      type="button"
+      style={memoizedStyle}
+      className={className}
+      onClick={onClose}
+    >
       <img
         src={new URL('./assets/close-button.png', import.meta.url).href}
         alt="모달 닫기 버튼"
@@ -33,9 +39,7 @@ function CloseButton({ style }: CloseButtonProps) {
 const StyledCloseButton = styled.button`
   border: none;
   background: none;
-  position: absolute;
-  top: 24px;
-  right: 32px;
+
   cursor: pointer;
 `;
 

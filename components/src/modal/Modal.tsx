@@ -20,6 +20,8 @@ import ButtonTrigger from './ButtonTrigger';
 interface ModalProps {
   position?: ModalPositionType;
   size?: ModalSizeType;
+  title?: string;
+  showCloseButton?: boolean;
   style?: CSSProperties;
 }
 
@@ -31,6 +33,8 @@ export type ModalSizeType = 'small' | 'medium' | 'large';
 function ModalContainer({
   position = 'center',
   size = 'medium',
+  title = '',
+  showCloseButton = true,
   style,
   children,
 }: PropsWithChildren<ModalProps>) {
@@ -72,6 +76,8 @@ function ModalContainer({
           size={size}
           style={memoizedStyle}
         >
+          {title && <Title>{title}</Title>}
+          {showCloseButton && <FixedCloseButton />}
           {children}
         </StyledModalContent>
       </StyledModalContainer>
@@ -117,8 +123,14 @@ const StyledModalContent = styled.div<{
   }
 `;
 
+const FixedCloseButton = styled(CloseButton)`
+  position: absolute;
+  top: 24px;
+  right: 32px;
+`;
+
 const Modal = Object.assign(ModalProvider, {
-  Container: ModalContainer,
+  Content: ModalContainer,
   ButtonTrigger,
   CloseButton,
   Title,
