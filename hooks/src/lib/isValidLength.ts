@@ -1,5 +1,5 @@
-function isValidLength(value: string, min: number, max: number) {
-  return !(value.length > min && value.length < max);
+function isValidLength(value: string, length: number) {
+  return !(Number(value) !== length);
 }
 
 export default isValidLength;

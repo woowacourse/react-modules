@@ -1,7 +1,7 @@
 import { useState } from "react";
-import cardNumberValidation from "./cardNumberValidation";
 import { CardNumber } from "./types/Card";
 import { getCardType } from "./getCardType";
+import { cardNumberValidation } from "./cardNumberValidation";
 
 const defaultCardNumber = {
   first: "",
@@ -18,7 +18,10 @@ function useCardNumber() {
   }
 
   const cardType = getCardType(cardNumber);
-  const { isCardNumberError, errorText } = cardNumberValidation(cardNumber);
+  const { isCardNumberError, errorText } = cardNumberValidation(
+    cardNumber,
+    cardType
+  );
 
   return { cardNumber, handleCardNumber, isCardNumberError, errorText };
 }

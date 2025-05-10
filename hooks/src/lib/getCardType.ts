@@ -1,6 +1,6 @@
-import { CardNumber } from "./types/Card";
+import { CardNumber, CardType } from "./types/Card";
 
-export function getCardType(cardNumber: CardNumber): string {
+export function getCardType(cardNumber: CardNumber): CardType {
   const cardNumberPrefix = `${cardNumber.first}${cardNumber.second}${cardNumber.third}${cardNumber.fourth}`;
 
   const prefix1 = cardNumberPrefix.slice(0, 1);
