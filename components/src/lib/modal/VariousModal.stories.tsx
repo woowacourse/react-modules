@@ -2,11 +2,10 @@ import { useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 import styled from '@emotion/styled';
 import Modal from './Modal';
-import PromptModal from './promptModal/PromptModal';
 
-const meta: Meta<typeof PromptModal> = {
+const meta: Meta<typeof Modal> = {
   title: 'Components/VariousModal',
-  component: PromptModal,
+  component: Modal,
   argTypes: {
     type: {
       control: { type: 'radio' },
@@ -30,7 +29,7 @@ const meta: Meta<typeof PromptModal> = {
 };
 export default meta;
 
-type Story = StoryObj<typeof PromptModal>;
+type Story = StoryObj<typeof Modal>;
 
 export const Default: Story = {
   render: (args) => {
