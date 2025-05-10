@@ -3,82 +3,106 @@
 ## 설치 방법
 
 ```bash
-# npm 사용
+# npm
 npm install @mlnwns/modal
 
-# yarn 사용
+# yarn
 yarn add @mlnwns/modal
 
-# pnpm 사용
+# pnpm
 pnpm add @mlnwns/modal
 ```
 
 ---
 
-## 📦 Props
+## Props
 
-| 이름                  | 타입                                            | 필수 | 설명                                                                                |
-| --------------------- | ----------------------------------------------- | ---- | ----------------------------------------------------------------------------------- |
-| `position`            | `"center"` \| `"top"` \| `"bottom"`             | ✅   | 모달이 화면에 표시될 위치를 설정합니다.                                             |
-| `title`               | `string`                                        | ✅   | 모달의 제목입니다.                                                                  |
-| `content`             | `React.ReactNode`                               | ✅   | 모달에 표시할 내용입니다.                                                           |
-| `hasCloseButton`      | `boolean`                                       | ✅   | 닫기 버튼 표시 여부입니다.                                                          |
-| `onClose`             | `() => void`                                    | ✅   | 닫기 버튼 또는 바깥 영역 클릭 시 호출됩니다.                                        |
-| `handleBackdropClick` | `(e: React.MouseEvent<HTMLDivElement>) => void` | ❌   | 오버레이 클릭 시 실행할 핸들러입니다.                                               |
-| `confirmText`         | `string`                                        | ❌   | 확인 버튼의 텍스트입니다. 기본값은 `"확인"`입니다.                                  |
-| `onConfirm`           | `() => void`                                    | ❌   | 확인 버튼 클릭 시 호출됩니다. `confirmText`와 함께 사용하면 확인 버튼이 표시됩니다. |
+표를 사용하지 않고, 각 prop에 대해 설명하는 방식으로 변경할 수 있습니다. 다음은
+그 예시입니다:
 
 ---
 
-## 💡 사용 예시
+### BaseModal (기본 모달)
 
-### ✅ 기본 모달 (중앙 위치)
+- **`position`** (`"center"` | `"bottom"`, 기본값: `"center"`)
+
+  - 모달이 화면에 표시될 위치를 설정합니다. `"center"`는 중앙에, `"bottom"`은 하
+    단에 모달을 표시합니다.
+
+- **`size`** (`"small"` | `"medium"` | `"large"`)
+
+  - 모달의 너비 크기를 설정합니다. `"small"`은 작은 모달, `"medium"`은 중간 크기
+    , `"large"`는 큰 모달을 나타냅니다.
+
+- **`title`** (`string`, 필수)
+
+  - 모달의 제목을 설정합니다.
+
+- **`content`** (`React.ReactNode`, 필수)
+
+  - 모달에 표시할 내용을 설정합니다. 텍스트, 이미지, 컴포넌트 등 React 요소가 될
+    수 있습니다.
+
+- **`hasCloseButton`** (`boolean`, 기본값: `true`)
+
+  - 닫기 버튼의 표시 여부를 설정합니다. `true`일 경우 닫기 버튼이 나타나며,
+    `false`일 경우 버튼이 숨겨집니다.
+
+- **`onClose`** (`() => void`, 필수)
+
+  - 닫기 버튼을 클릭하거나, 모달 외부를 클릭했을 때 호출되는 함수입니다. 모달을
+    닫는 역할을 합니다.
+
+- **`buttonElements`** (`React.ReactNode`)
+
+  - 모달 하단에 표시할 버튼 요소입니다. 버튼은 React 컴포넌트 형태로 전달할 수있
+    습니다. 이 요소가 전달되면 모달 하단에 버튼이 추가됩니다.
+
+---
+
+## 구성 모달
+
+### AlertModal
+
+- 확인 버튼 하나만 있는 단순 알림 모달입니다.
 
 ```tsx
-import Modal from "@mlnwns/modal";
-
-<Modal
-  position="center"
-  title="삭제하시겠습니까?"
-  content={<p>한 번 삭제하면 복구할 수 없습니다.</p>}
-  hasCloseButton={true}
+<AlertModal
+  title="알림"
+  content={<p>변경 사항이 저장되었습니다.</p>}
   onClose={() => console.log("닫기")}
   onConfirm={() => console.log("확인")}
-  confirmText="삭제"
-/>;
-```
-
----
-
-### 📍 바닥 고정 모달 (Bottom)
-
-```tsx
-<Modal
-  position="bottom"
-  title="설정"
-  content={<p>여기서 설정을 변경할 수 있습니다.</p>}
-  hasCloseButton={true}
-  onClose={() => console.log("닫기")}
 />
 ```
 
 ---
 
-### 📍 상단 고정 모달 (Top)
+### ConfirmModal
+
+- 취소 / 확인 버튼이 함께 있는 확인 모달입니다.
 
 ```tsx
-<Modal
-  position="top"
-  title="알림"
-  content={<p>업데이트가 완료되었습니다.</p>}
-  hasCloseButton={false}
-  onClose={() => console.log("닫기")}
+<ConfirmModal
+  title="삭제하시겠습니까?"
+  content={<p>이 작업은 되돌릴 수 없습니다.</p>}
+  onClose={() => console.log("취소")}
+  onConfirm={() => console.log("확인")}
 />
 ```
 
-### 모달 컴포넌트
+---
 
-- [x] 모달 위치: 중앙, 하단, 상단
-- [x] 모달 내용: 제목, 버튼 등
-- [x] 사용자 정의 이벤트 핸들러를 지원해야 한다.
-- [x] 모달 열기, 닫기, 확인 등의 동작에 대한 이벤트 핸들러
+### PromptModal
+
+- 입력창이 포함된 모달입니다.
+
+```tsx
+<PromptModal
+  title="닉네임 변경"
+  onClose={() => console.log("닫기")}
+  onConfirm={() => console.log("확인")}
+  inputAttributes={{
+    placeholder: "새 닉네임 입력",
+  }}
+/>
+```
