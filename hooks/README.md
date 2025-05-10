@@ -17,51 +17,32 @@ npm i @muffin2219/hooks
 import {useCardNumber} from '@muffin2219/hooks';
 
 function App() {
-  const {cardNumber, onChange, cardNumberValidationResult} = useCardNumber();
+  const {
+    cardNumber,
+    onChange,
+    cardNumberValidationResult,
+    cardBrand,
+    formattingCardNumber,
+  } = useCardNumber();
 
   return (
     <>
       <h2>카드 번호</h2>
+      <h2>{cardBrand}</h2>
+
       <input
-        key="first"
-        value={cardNumber.first}
+        value={cardNumber}
         type="text"
-        maxLength={4}
-        onChange={(e) => onChange('first', e.target.value)}
-      />
-      <input
-        key="second"
-        value={cardNumber.second}
-        type="text"
-        maxLength={4}
-        onChange={(e) => onChange('second', e.target.value)}
-      />
-      <input
-        key="third"
-        value={cardNumber.third}
-        type="text"
-        maxLength={4}
-        onChange={(e) => onChange('third', e.target.value)}
-      />
-      <input
-        key="fourth"
-        value={cardNumber.fourth}
-        type="text"
-        maxLength={4}
-        onChange={(e) => onChange('fourth', e.target.value)}
+        maxLength={16}
+        onChange={(e) => onChange(e.target.value)}
       />
 
-      {cardNumberValidationResult.first.isError && (
-        <span>{cardNumberValidationResult.first.errorMessage}</span>
-      )}
-      {cardNumberValidationResult.second.isError && (
-        <span>{cardNumberValidationResult.second.errorMessage}</span>
-      )}
-      {cardNumberValidationResult.third.isError && (
-        <span>{cardNumberValidationResult.third.errorMessage}</span>
-      )}
-      {cardNumberValidationResult.fourth.isError && (
-        <span>{cardNumberValidationResult.fourth.errorMessage}</span>
+      {formattingCardNumber?.map((field) => (
+        <span style={{padding: 30}}>{field}</span>
+      ))}
+
+      {cardNumberValidationResult.isError && (
+        <span>{cardNumberValidationResult.errorMessage}</span>
       )}
     </>
   );
@@ -72,53 +53,24 @@ export default App;
 
 ### 📝 Validation List
 
-1. 각 카드 번호는 숫자여야한다.
-2. 각 카드 번호는 4자리여야한다.
+1. 카드 번호는 숫자여야한다.
+2. 카드 번호는 14자리 이상 16자리 이하여야한다.
 
 ### ⛏️ Return Value
 
-### cardNumber (Object)
-
-| Name   | Datatype | Description  |
-| ------ | -------- | ------------ |
-| first  | string   | 첫 번째 자리 |
-| second | string   | 두 번째 자리 |
-| third  | string   | 세 번째 자리 |
-| fourth | string   | 네 번째 자리 |
-
 ### cardNumberValidationResult (Object)
-
-```
-{
-  first: {
-    isError: string
-    errorMessage: string
-  },
-  second: {
-    isError: string,
-    errorMessage: string,
-  },
-  third: {
-    isError: string
-    errorMessage: string
-  },
-  fourth: {
-    isError: string,
-    errorMessage: string,
-  }
-}
-```
 
 | Name         | Datatype | Description |
 | ------------ | -------- | ----------- |
 | isError      | boolean  | 에러 여부   |
 | errorMessage | string   | 에러 메시지 |
 
-### onChange
-
-| Name     | Datatype                                 | Description   |
-| -------- | ---------------------------------------- | ------------- |
-| onChange | (label : string, value : string) => void | onChange 함수 |
+| Name                 | Datatype                                 | Description                                        |
+| -------------------- | ---------------------------------------- | -------------------------------------------------- |
+| cardNumber           | string                                   | 카드 번호                                          |
+| onChange             | (label : string, value : string) => void | onChange 함수                                      |
+| cardBrand            | string                                   | 카드 브랜드(Visa, MasterCard, Union, Diners, AMEX) |
+| formattingCardNumber | string[]                                 | 카드 번호를 포맷팅한 결과                          |
 
 ## 📌 How to use: useExpirationDate
 
@@ -238,12 +190,6 @@ export default App;
 
 ### ⛏️ Return Value
 
-### cvc
-
-| Name | Datatype | Description |
-| ---- | -------- | ----------- |
-| cvc  | string   | cvc번호     |
-
 ### cvcValidationResult (Object)
 
 | Name         | Datatype | Description |
@@ -251,10 +197,9 @@ export default App;
 | isError      | boolean  | 에러 여부   |
 | errorMessage | string   | 에러 메시지 |
 
-### onChange
-
 | Name     | Datatype                  | Description   |
 | -------- | ------------------------- | ------------- |
+| cvc      | string                    | cvc번호       |
 | onChange | ( value : string) => void | onChange 함수 |
 
 ## 📌 How to use: usePassword
@@ -293,12 +238,6 @@ export default App;
 
 ### ⛏️ Return Value (Object)
 
-### password
-
-| Name     | Datatype | Description            |
-| -------- | -------- | ---------------------- |
-| password | string   | 카드 비밀번호 앞 2자리 |
-
 ### passwordValidationResult (Object)
 
 | Name         | Datatype | Description |
@@ -306,11 +245,12 @@ export default App;
 | isError      | boolean  | 에러 여부   |
 | errorMessage | string   | 에러 메시지 |
 
-### onChange
+### password
 
-| Name     | Datatype                  | Description   |
-| -------- | ------------------------- | ------------- |
-| onChange | ( value : string) => void | onChange 함수 |
+| Name     | Datatype                  | Description            |
+| -------- | ------------------------- | ---------------------- |
+| password | string                    | 카드 비밀번호 앞 2자리 |
+| onChange | ( value : string) => void | onChange 함수          |
 
 ## 👥 Author
 
