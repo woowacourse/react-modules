@@ -23,7 +23,7 @@ export function testInputUpdate<T, K extends keyof T>({
   expect(result.current[stateKey]).toBe(input);
 }
 
-export function testInputEmptyUpdate<T, K extends keyof T>({
+export function testInvalidInputClearsState<T, K extends keyof T>({
   renderHookFn,
   handleChangeKey,
   stateKey,

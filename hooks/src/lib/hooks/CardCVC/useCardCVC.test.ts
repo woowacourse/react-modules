@@ -5,7 +5,7 @@ import {
   testInvalidInput,
   testValidInput,
   testMaxLength,
-  testInputEmptyUpdate,
+  testInvalidInputClearsState,
 } from "@tests/index";
 
 describe("useCardCVC", () => {
@@ -19,7 +19,7 @@ describe("useCardCVC", () => {
   });
 
   it("CVC 입력에 숫자 이외의 입력 값은 입력되지 않는다.", () => {
-    testInputEmptyUpdate({
+    testInvalidInputClearsState({
       renderHookFn: () => renderHook(() => useCardCVC()),
       handleChangeKey: "onChange",
       stateKey: "value",

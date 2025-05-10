@@ -2,7 +2,7 @@ import { renderHook } from "@testing-library/react";
 import useCardExpiryDate from "./index";
 import {
   testInputUpdate,
-  testInputEmptyUpdate,
+  testInvalidInputClearsState,
   testInvalidInput,
   testValidInput,
   testMaxLength,
@@ -19,7 +19,7 @@ describe("useCardExpiryDate", () => {
   });
 
   it("카드 만료일에 숫자 이외의 입력 값은 입력되지 않는다.", () => {
-    testInputEmptyUpdate({
+    testInvalidInputClearsState({
       renderHookFn: () => renderHook(() => useCardExpiryDate()),
       handleChangeKey: "onChange",
       stateKey: "value",
