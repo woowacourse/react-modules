@@ -13,6 +13,7 @@ import ModalProvider, { useModalContext } from './ModalProvider';
 import ButtonWrapper from './ButtonWrapper';
 import PromptInput from './PromptInput';
 import Button from './Button';
+import ButtonTrigger from './ButtonTrigger';
 
 // ============================== Types ==============================
 
@@ -76,12 +77,6 @@ function ModalContainer({
       </StyledModalContainer>
     )
   );
-}
-
-function ButtonTrigger({ children }: PropsWithChildren) {
-  const { onOpen } = useModalContext();
-
-  return <button onClick={onOpen}>{children}</button>;
 }
 
 // ============================== Styled Components ==============================
