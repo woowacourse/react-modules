@@ -2,13 +2,13 @@ import calculateNetwork from "./calculateNetwork";
 import getCardPrefixNumber from "./getCardPrefixNumber";
 
 import validateCardNumbersType from "../types/validateCardNumbersType";
-import CardNextWork from "../types/CardNextWork";
+import CardNetwork from "../types/CardNetwork";
 
 const getCardNetwork = ({
   key,
   value,
   cardNumbers,
-}: validateCardNumbersType): { name: CardNextWork; length: number } => {
+}: validateCardNumbersType): CardNetwork => {
   const cardPrefixNumber = getCardPrefixNumber({
     key,
     value,

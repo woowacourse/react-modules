@@ -1,7 +1,8 @@
 import { renderHook, act } from "@testing-library/react";
+
 import useCardNumbersValidate from "./useCardNumbersValidate";
 
-import CardNextWork from "../../types/CardNextWork";
+import CardNetworkName from "../../types/CardNetworkName";
 
 describe("useCardNumbersValidate", () => {
   const cardNumbers = {
@@ -11,7 +12,11 @@ describe("useCardNumbersValidate", () => {
       third: "",
       fourth: "",
     },
-    network: "NOTHING" as CardNextWork,
+    network: {
+      name: "NOTHING" as CardNetworkName,
+      length: 0,
+      formatting: [],
+    },
   };
 
   it("값이 '1234'이면 isValid 값이 true이고 errorMessage 값이 null로 설정되어야 한다.", () => {

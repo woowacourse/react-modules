@@ -17,7 +17,11 @@ const INIT_CARD_NUMBERS_STATE: CardNumbersState = {
     third: "",
     fourth: "",
   },
-  network: "NOTHING",
+  network: {
+    name: "NOTHING",
+    length: 0,
+    formatting: [],
+  },
 };
 
 const useCardNumbersState = ({
@@ -43,7 +47,9 @@ const useCardNumbersState = ({
 
     setCardNumbers((prev) => ({
       numbers: { ...prev.numbers, [key]: value },
-      network: network.name,
+      network: {
+        ...network,
+      },
     }));
   };
 

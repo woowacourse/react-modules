@@ -1,4 +1,4 @@
-type CardNextWork =
+type CardNetworkName =
   | "NOTHING"
   | "VISA"
   | "MASTER_CARD"
@@ -6,4 +6,4 @@ type CardNextWork =
   | "DINERS"
   | "UNION_PAY";
 
-export default CardNextWork;
+export default CardNetworkName;

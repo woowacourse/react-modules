@@ -1,9 +1,9 @@
 import CardNumbers from "./CardNumbers";
-import CardNextWork from "./CardNextWork";
+import CardNetwork from "./CardNetwork";
 
 type CardNumbersState = {
   numbers: CardNumbers;
-  network: CardNextWork;
+  network: CardNetwork;
 };
 
 export default CardNumbersState;
