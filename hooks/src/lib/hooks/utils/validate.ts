@@ -1,4 +1,6 @@
 import { EXPIRATION } from "../constants/cardValidationInfo";
+import ERROR_MESSAGE from "../constants/errorMessage";
+import { detectCardCompany } from "../useCardBrand/useCardBrand";
 
 const validator = {
   hasNonNumericValue(number: string) {
@@ -18,6 +20,25 @@ const validator = {
 
   isInValidYear(year: string) {
     return Number(year) < EXPIRATION.YEAR.CURRENT;
+  },
+
+  isValidCardStartNumber(number: string) {
+    const brand = detectCardCompany(number);
+    return brand !== null;
+  },
+
+  validateFirstCardNumbers(number: string) {
+    if (!validator.isValidCardStartNumber(number))
+      return {
+        isValidCardCompany: false,
+        idx: 0,
+        helperText: ERROR_MESSAGE.CARD_NUMBER.INVALID,
+      };
+    return {
+      isValidCardCompany: true,
+      idx: null,
+      helperText: "",
+    };
   },
 };
 

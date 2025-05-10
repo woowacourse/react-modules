@@ -14,7 +14,7 @@ export default ConfirmButton;
 const Button = styled.button`
   width: 100%;
   padding: 8px 16px;
-  background-color: #007bff;
+  background-color: #333333;
   color: white;
   border: none;
   border-radius: 4px;

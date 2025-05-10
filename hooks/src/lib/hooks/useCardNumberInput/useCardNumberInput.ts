@@ -1,63 +1,83 @@
-import { useState } from "react";
-import validator from "../utils/validate";
-import { CARD_INPUT } from "../constants/cardValidationInfo";
+import { useEffect, useState } from "react";
+import { detectCardCompany } from "../useCardBrand/useCardBrand";
+import {
+  getCardNumberMaxLength,
+  validateCardNumberForBrand,
+} from "../utils/cardBrandUtils";
+import CARD_BRAND_FORMAT from "../constants/cardBrandInfo";
 import ERROR_MESSAGE from "../constants/errorMessage";
 
-type CardNumberState = {
-  value: string;
+interface UseCardNumberInputResult {
+  cardNumber: string;
+  formattedCardNumber: string;
+  cardBrand: string | null;
   isValid: boolean;
-};
-
-interface Props {
-  cardNumberState: CardNumberState[];
   errorMessage: string;
-  handleInputChange: (
-    e: React.ChangeEvent<HTMLInputElement>,
-    index: number,
-  ) => void;
+  handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-const useCardNumberInput = (): Props => {
-  const [cardNumberState, setCardNumberState] = useState<CardNumberState[]>(
-    Array.from({ length: CARD_INPUT.NUMBER_INPUTS }, () => ({
-      value: "",
-      isValid: true,
-    })),
-  );
-
+const useCardNumberInput = (): UseCardNumberInputResult => {
+  const [cardNumber, setCardNumber] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
 
-  const handleInputChange = (
-    e: React.ChangeEvent<HTMLInputElement>,
-    index: number,
-  ) => {
-    const inputValue = e.target.value;
+  const cardBrand = detectCardCompany(cardNumber);
 
-    let isValid = true;
-    let errorMessage = "";
+  const isValidCardNumber = (): boolean => {
+    if (!cardBrand) return false;
+    return validateCardNumberForBrand(cardNumber, cardBrand);
+  };
+  const isValid = isValidCardNumber();
 
-    if (validator.hasNonNumericValue(inputValue)) {
-      isValid = false;
-      errorMessage = ERROR_MESSAGE.REQUIRE.NUMBER;
-    } else if (
-      validator.hasIncorrectLength(inputValue, CARD_INPUT.MAX_LENGTH.CARD)
-    ) {
-      isValid = false;
-      errorMessage = `숫자 ${CARD_INPUT.MAX_LENGTH.CARD}${ERROR_MESSAGE.REQUIRE.SPECIFIC_LENGTH}`;
+  const formattedNumber = (): string => {
+    if (!cardBrand) return cardNumber;
+
+    const format = CARD_BRAND_FORMAT[cardBrand] || CARD_BRAND_FORMAT.DEFAULT;
+    const digits = cardNumber.replace(/\D/g, "");
+    const groups = [];
+    let cursor = 0;
+
+    for (const len of format) {
+      groups.push(digits.slice(cursor, cursor + len));
+      cursor += len;
     }
 
-    setCardNumberState((prev) =>
-      prev.map((item, i) =>
-        i === index ? { value: inputValue, isValid } : item,
-      ),
-    );
-    setErrorMessage(errorMessage);
+    return groups.filter(Boolean).join(" ");
+  };
+
+  const formattedCardNumber = formattedNumber();
+
+  useEffect(() => {
+    if (
+      (!cardBrand && cardNumber.length > 0) ||
+      (cardBrand && !validateCardNumberForBrand(cardNumber, cardBrand))
+    ) {
+      setErrorMessage(ERROR_MESSAGE.CARD_NUMBER.INVALID);
+    } else {
+      setErrorMessage("");
+    }
+  }, [cardNumber, cardBrand]);
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const raw = e.target.value.replace(/\D/g, "");
+    const maxLength = getCardNumberMaxLength(cardBrand);
+    const trimmed = raw.slice(0, maxLength);
+
+    setCardNumber(trimmed);
+
+    if (cardBrand && !validateCardNumberForBrand(trimmed, cardBrand)) {
+      setErrorMessage(ERROR_MESSAGE.CARD_NUMBER.INVALID);
+    } else {
+      setErrorMessage("");
+    }
   };
 
   return {
-    cardNumberState,
+    cardNumber,
+    formattedCardNumber,
+    cardBrand,
+    isValid,
     errorMessage,
-    handleInputChange,
+    handleChange,
   };
 };
 
