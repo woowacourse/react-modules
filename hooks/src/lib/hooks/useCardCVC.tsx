@@ -24,3 +24,5 @@ function useCardCVC() {
     errorMessage,
   };
 }
+
+export default useCardCVC;
