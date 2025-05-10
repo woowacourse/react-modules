@@ -6,6 +6,8 @@ export { default as useModalAfterOpen } from './hooks/useModalAfterOpen';
 export { default as useModalEvents } from './hooks/useModalEvent';
 export { default as AlertModal } from './components/AlertModal';
 export { default as Button } from './components/Button';
+export { default as ConfirmModal } from './components/ConfirmModal';
 export * from './types/Modal.type';
 export * from './types/AlertModal.type';
 export * from './types/Button.type';
+export * from './types/ConfirmModal.type';
