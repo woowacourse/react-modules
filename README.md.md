@@ -29,7 +29,7 @@
   - [x] focusTrap wrapper 구현
 - [x] 웹접근성 적용
 - [x] 모달 컴포넌트 별 스토리 작성
-- [ ] 베포시) dependencies 제거 -> peer dependencies 설정
+- [x] 베포시) dependencies 제거 -> peer dependencies 설정
 - [x] 컴포넌트 타입 재정의 - componentProps 이용 태그들 타입 재정의
 
 ---
