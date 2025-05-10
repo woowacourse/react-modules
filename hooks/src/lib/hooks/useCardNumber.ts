@@ -9,35 +9,19 @@ export default function useCardNumber({
   initCardNumber: Record<string, string>;
   initCardNumberError: Record<string, string>;
 }) {
-  const {
-    values: cardNumber,
-    changeValues: setCardNumber,
-    isFullFilled,
-  } = useCardInfo({
+  const cardNumber = useCardInfo({
     initValues: initCardNumber,
     maxLength: 4,
   });
 
-  const {
-    error: cardNumberError,
-    checkValidation: validateCardNumber,
-    getErrorMessage: getCardNumberErrorMessage,
-    isError: isCardNumberError,
-    resetError: resetCardNumberError,
-  } = useError({
+  const cardNumberError = useError({
     initError: initCardNumberError,
     getValidationFns: getCardNumberValidationFns,
   });
 
   return {
     cardNumber,
-    setCardNumber,
-    isFullFilled,
     cardNumberError,
-    validateCardNumber,
-    getCardNumberErrorMessage,
-    isCardNumberError,
-    resetCardNumberError,
   };
 }
 
