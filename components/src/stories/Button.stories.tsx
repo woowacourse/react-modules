@@ -12,7 +12,7 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
-    text: "테스트 버튼",
+    children: "확인",
     color: "#fff",
     backgroundColor: "#333",
   },

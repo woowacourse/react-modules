@@ -1,4 +1,10 @@
-export type CardType = "VISA" | "MasterCard" | "None";
+export type CardType =
+  | "VISA"
+  | "MasterCard"
+  | "Diners"
+  | "AMEX"
+  | "UnionPay"
+  | "None";
 
 export type CompanyType =
   | ""

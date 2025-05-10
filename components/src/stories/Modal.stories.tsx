@@ -1,7 +1,7 @@
-import type { Meta, StoryFn, StoryObj } from "@storybook/react";
-import Modal from "../lib/Modal";
+import type { Meta, StoryObj } from "@storybook/react";
+import Modal from "../lib/Modal/Modal";
 import { useState } from "react";
-import { expect, screen, userEvent, within } from "@storybook/test";
+import { expect, screen, userEvent } from "@storybook/test";
 
 const meta = {
   title: "Modal",
@@ -14,36 +14,12 @@ type Story = StoryObj<typeof meta>;
 
 export const OpenModal: Story = {
   args: {
-    title: "테스트",
     isOpen: true,
     onClose: () => {},
     children: <p>모달열림</p>,
   },
   play: async () => {
     expect(screen.getByText("모달열림")).toBeVisible();
-  },
-};
-
-export const CloseByButton: Story = {
-  render: (args) => {
-    const [isOpen, setIsOpen] = useState(true);
-
-    return <Modal {...args} isOpen={isOpen} onClose={() => setIsOpen(false)} />;
-  },
-  args: {
-    title: "테스트 모달",
-    isOpen: true,
-    onClose: () => {},
-    children: <p>모달열림</p>,
-    hasTopCloseButton: true,
-  },
-  play: async () => {
-    expect(screen.getByText("모달열림")).toBeVisible();
-
-    const closeButton = screen.getByRole("button", { name: "✕" });
-    await userEvent.click(closeButton);
-
-    expect(screen.queryByText("모달열림")).not.toBeInTheDocument();
   },
 };
 
@@ -54,7 +30,6 @@ export const CloseByOverlayClick: Story = {
     return <Modal {...args} isOpen={isOpen} onClose={() => setIsOpen(false)} />;
   },
   args: {
-    title: "테스트 모달",
     isOpen: true,
     onClose: () => {},
     children: <p>모달열림</p>,
@@ -76,7 +51,6 @@ export const CloseByEsc: Story = {
     return <Modal {...args} isOpen={isOpen} onClose={() => setIsOpen(false)} />;
   },
   args: {
-    title: "테스트 모달",
     isOpen: true,
     onClose: () => {},
     children: <p>모달열림</p>,
@@ -95,7 +69,6 @@ export const Default = () => {
 
   return (
     <Modal
-      title="테스트"
       isOpen={isOpen}
       onClose={() => setIsOpen(false)}
       onConfirm={() => setIsOpen(false)}
@@ -108,13 +81,15 @@ export const CenterModal = () => {
   const [isOpen, setIsOpen] = useState(true);
 
   return (
-    <Modal
-      title="테스트"
-      children={<p>테스트</p>}
-      isOpen={isOpen}
-      onClose={() => setIsOpen(false)}
-      position="center"
-    />
+    <Modal isOpen={isOpen} onClose={() => setIsOpen(false)} position="center">
+      <Modal.Header>테스트 제목</Modal.Header>
+      <Modal.Body>
+        <p>모달열림</p>
+      </Modal.Body>
+      <Modal.Footer>
+        <Modal.SecondaryButton>확인</Modal.SecondaryButton>
+      </Modal.Footer>
+    </Modal>
   );
 };
 
@@ -123,12 +98,19 @@ export const BottomModal = () => {
 
   return (
     <Modal
-      title="테스트"
-      children={<p>테스트</p>}
       isOpen={isOpen}
       onClose={() => setIsOpen(false)}
+      onConfirm={() => setIsOpen(false)}
       position="bottom"
-    />
+    >
+      <Modal.Header>테스트 제목</Modal.Header>
+      <Modal.Body>
+        <p>모달열림</p>
+      </Modal.Body>
+      <Modal.Footer>
+        <Modal.SecondaryButton>확인</Modal.SecondaryButton>
+      </Modal.Footer>
+    </Modal>
   );
 };
 
@@ -137,15 +119,19 @@ export const ConfirmButtonModal = () => {
 
   return (
     <Modal
-      title="테스트"
-      children={<p>테스트</p>}
       isOpen={isOpen}
       onClose={() => setIsOpen(false)}
       onConfirm={() => setIsOpen(false)}
-      primaryButton={true}
-      primaryButtonText="확인"
       position="center"
-    />
+    >
+      <Modal.Header>테스트 제목</Modal.Header>
+      <Modal.Body>
+        <p>모달열림</p>
+      </Modal.Body>
+      <Modal.Footer>
+        <Modal.SecondaryButton>확인</Modal.SecondaryButton>
+      </Modal.Footer>
+    </Modal>
   );
 };
 
@@ -154,17 +140,18 @@ export const CloseButtonModal = () => {
 
   return (
     <Modal
-      title="테스트"
-      children={<p>테스트</p>}
       isOpen={isOpen}
       onClose={() => setIsOpen(false)}
       onConfirm={() => setIsOpen(false)}
-      primaryButton={true}
-      primaryButtonText="확인"
-      hasTopCloseButton={false}
-      secondaryButton={true}
-      secondaryButtonText="닫기"
       position="center"
-    />
+    >
+      <Modal.Header>테스트 제목</Modal.Header>
+      <Modal.Body>
+        <p>모달열림</p>
+      </Modal.Body>
+      <Modal.Footer>
+        <Modal.PrimaryButton>취소</Modal.PrimaryButton>
+      </Modal.Footer>
+    </Modal>
   );
 };

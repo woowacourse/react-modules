@@ -5,7 +5,7 @@ import isValidLength from "./isValidLength";
 function cardPasswordValidation(passwordFront: string) {
   const isPasswordError =
     !isNumber(passwordFront) ||
-    !isValidLength(passwordFront, 0, 2) ||
+    !isValidLength(passwordFront, 2) ||
     !isPositiveNumber(passwordFront);
 
   const errorText = (() => {
@@ -15,7 +15,7 @@ function cardPasswordValidation(passwordFront: string) {
     if (!isPositiveNumber(passwordFront)) {
       return "입력값은 양수여야합니다.";
     }
-    if (!isValidLength(passwordFront, 0, 2)) {
+    if (!isValidLength(passwordFront, 2)) {
       return "입력값은 2자리이어야합니다.";
     }
     return "";

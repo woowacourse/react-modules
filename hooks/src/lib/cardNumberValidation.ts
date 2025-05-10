@@ -1,27 +1,40 @@
-import { CardNumber } from "./types/Card";
+import { cardNumberLengthRules } from "./cardNumberLengthRules";
 import isNumber from "./isNumber";
 import isPositiveNumber from "./isPositiveNumber";
 import isValidLength from "./isValidLength";
+import { CardNumber, CardType } from "./types/Card";
 
-function cardNumberValidation(cardNumbers: CardNumber) {
-  const isCardNumberError = Object.values(cardNumbers).map((number) => {
+export function cardNumberValidation(
+  cardNumbers: CardNumber,
+  cardType: CardType
+) {
+  const lengthRules = cardNumberLengthRules[cardType];
+
+  const isCardNumberError = (
+    Object.entries(cardNumbers) as [keyof CardNumber, string][]
+  ).map(([key, number]) => {
+    const expectedLength = lengthRules[key];
     return (
-      !isValidLength(number, 0, 4) ||
+      !isValidLength(number, expectedLength) ||
       !isNumber(number) ||
       !isPositiveNumber(number)
     );
   });
 
   const errorText = (() => {
-    for (const number of Object.values(cardNumbers)) {
+    for (const [key, number] of Object.entries(cardNumbers) as [
+      keyof CardNumber,
+      string
+    ][]) {
+      const expectedLength = lengthRules[key];
       if (!isNumber(number)) {
         return "입력값은 숫자여야합니다.";
       }
       if (!isPositiveNumber(number)) {
         return "입력값은 양수여야합니다.";
       }
-      if (!isValidLength(number, 0, 4)) {
-        return "입력값은 4자리이어야합니다.";
+      if (!isValidLength(number, expectedLength)) {
+        return `${key} 입력값은 ${expectedLength}자리여야 합니다.`;
       }
     }
     return "";
@@ -29,5 +42,3 @@ function cardNumberValidation(cardNumbers: CardNumber) {
 
   return { isCardNumberError, errorText };
 }
-
-export default cardNumberValidation;

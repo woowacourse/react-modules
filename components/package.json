@@ -1,6 +1,6 @@
 {
   "name": "beomgo-modal",
-  "version": "0.0.10",
+  "version": "0.0.11",
   "description": "npm modules pair programming",
   "type": "module",
   "types": "dist/index.d.ts",
@@ -20,7 +20,7 @@
   "dependencies": {
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.0",
-    "beomgo-modal": "^0.0.9",
+    "beomgo-modal": "^0.0.11",
     "react": "^19.1.0",
     "react-dom": "^19.1.0"
   },
