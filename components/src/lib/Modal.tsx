@@ -1,51 +1,145 @@
-import React, { useEffect } from 'react';
-import { Layout, Overlay, ModalContainer, TitleContainer, Title, CloseButton, CloseIcon } from './Modal.styles';
+import React, { useEffect, useState } from 'react';
+import {
+  CloseButtonContainer,
+  FooterContainer,
+  HeaderContainer,
+  ModalContainer,
+  ModalContentContainer,
+  ModalOverlay,
+  StyledButton,
+  StyledDescription,
+  StyledTitle,
+  TitleContainer,
+} from './Modal.styles';
+import { CloseIcon } from './CloseIcon';
+import useModalContext, { ModalContext, ModalSize } from './useModalContext';
 
-export type ModalPosition = 'center' | 'bottom';
-
-export type ModalContainerProps = {
-  width?: string;
-  height?: string;
-  position: ModalPosition;
-};
-
-type ModalProps = ModalContainerProps & {
-  title?: string;
+type BaseProps = {
   children?: React.ReactNode;
-  onClose: () => void;
+  className?: string;
 };
 
-function Modal({ width = '304px', height = '216px', position, title, onClose, children }: ModalProps) {
-  const customWidth = position === 'center' ? width : '100%';
+type ModalProps = BaseProps & {
+  size?: ModalSize;
+};
 
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') {
-        onClose();
-      }
-    };
-
-    document.addEventListener('keydown', handleKeyDown);
-
-    return () => {
-      document.removeEventListener('keydown', handleKeyDown);
-    };
-  }, [onClose]);
+function Modal({ children, className, size = 'medium' }: ModalProps) {
+  const [open, setOpen] = useState(false);
 
   return (
-    <Layout>
-      <Overlay onClick={onClose} />
-      <ModalContainer width={customWidth} height={height} position={position}>
-        <TitleContainer>
-          <Title>{title}</Title>
-          <CloseButton onClick={onClose}>
-            <CloseIcon />
-          </CloseButton>
-        </TitleContainer>
-        {children}
-      </ModalContainer>
-    </Layout>
+    <ModalContext.Provider value={{ open, setOpen, size }}>
+      <ModalContainer className={className}>{children}</ModalContainer>
+    </ModalContext.Provider>
   );
 }
 
-export default Modal;
+function Trigger({ children, className, asChild }: BaseProps & { asChild?: boolean; children?: React.ReactNode }) {
+  const { setOpen } = useModalContext();
+
+  if (asChild && React.isValidElement(children)) {
+    const element = children as React.ReactElement<{
+      onClick?: (e: React.MouseEvent) => void;
+      className?: string;
+    }>;
+
+    return React.cloneElement(element, {
+      ...element.props,
+      onClick: (e: React.MouseEvent) => {
+        element.props.onClick?.(e);
+        setOpen(true);
+      },
+      className: `${element.props.className || ''} ${className || ''}`.trim(),
+    });
+  }
+
+  return (
+    <StyledButton className={className} onClick={() => setOpen(true)}>
+      {children}
+    </StyledButton>
+  );
+}
+
+function Content({ children, className }: BaseProps) {
+  const { open, setOpen, size } = useModalContext();
+
+  useEffect(() => {
+    if (open) {
+      const handleKeyDown = (e: KeyboardEvent) => {
+        if (e.key === 'Escape') {
+          setOpen(false);
+        }
+      };
+
+      document.addEventListener('keydown', handleKeyDown);
+      return () => {
+        document.removeEventListener('keydown', handleKeyDown);
+      };
+    }
+  }, [open, setOpen]);
+
+  if (!open) return null;
+
+  return (
+    <>
+      <ModalOverlay onClick={() => setOpen(false)} />
+      <ModalContentContainer className={className} size={size || 'medium'}>
+        {children}
+      </ModalContentContainer>
+    </>
+  );
+}
+
+function Header({ children, className }: BaseProps) {
+  if (React.Children.count(children) > 0) {
+    return <HeaderContainer className={className}>{children}</HeaderContainer>;
+  }
+
+  return (
+    <HeaderContainer className={className}>
+      <TitleContainer />
+      <CloseButton />
+    </HeaderContainer>
+  );
+}
+
+function Title({ children, className }: BaseProps) {
+  return <StyledTitle className={className}>{children}</StyledTitle>;
+}
+
+function Description({ children, className }: BaseProps) {
+  return <StyledDescription className={className}>{children}</StyledDescription>;
+}
+
+function Footer({ children, className }: BaseProps) {
+  return <FooterContainer className={className}>{children}</FooterContainer>;
+}
+
+function CloseButton({ className }: Pick<BaseProps, 'className'>) {
+  const { setOpen } = useModalContext();
+
+  return (
+    <CloseButtonContainer className={className} onClick={() => setOpen(false)}>
+      <CloseIcon />
+    </CloseButtonContainer>
+  );
+}
+
+function HeaderTitleWrapper({ children, className }: BaseProps) {
+  return (
+    <>
+      <TitleContainer className={className}>{children}</TitleContainer>
+      <CloseButton />
+    </>
+  );
+}
+
+Modal.Trigger = Trigger;
+Modal.Content = Content;
+Modal.Header = Header;
+Modal.Title = Title;
+Modal.Description = Description;
+Modal.Footer = Footer;
+Modal.CloseButton = CloseButton;
+Modal.HeaderTitleWrapper = HeaderTitleWrapper;
+
+export { Modal };

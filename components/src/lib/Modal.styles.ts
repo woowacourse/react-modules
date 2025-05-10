@@ -1,99 +1,117 @@
 import styled from '@emotion/styled';
-import { css } from '@emotion/react';
-import { ModalContainerProps } from './Modal';
+import { ModalSize } from './useModalContext';
 
-export const Layout = styled.div`
+const ModalContainer = styled.div``;
+
+const ModalOverlay = styled.div`
   position: fixed;
-  display: flex;
   inset: 0;
-  background-color: #00000059;
-  z-index: 10;
-  width: 100vw;
-  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 50;
 `;
 
-export const Overlay = styled.div`
-  position: absolute;
-  inset: 0;
+const getModalWidth = (size: ModalSize) => {
+  switch (size) {
+    case 'small':
+      return '320px';
+    case 'medium':
+      return '480px';
+    case 'large':
+      return '600px';
+    default:
+      return '480px';
+  }
+};
+
+const ModalContentContainer = styled.div<{ size: ModalSize }>`
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  border-radius: 0.5rem;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  padding: 1.5rem;
+  z-index: 50;
+  max-width: 28rem;
+  width: ${({ size }) => getModalWidth(size)};
 `;
 
-export const ModalContainer = styled.div<ModalContainerProps>`
-  box-sizing: border-box;
-  position: absolute;
-  background-color: #ffffff;
+const StyledButton = styled.div`
+  background-color: inherit;
   border: none;
-  padding: 24px 32px;
-  overflow-y: auto;
-  width: ${({ width }) => width};
-  height: ${({ height }) => height};
-
-  ${({ position }) =>
-    position === 'center'
-      ? css`
-          top: 50%;
-          left: 50%;
-          transform: translate(-50%, -50%);
-          border-radius: 8px;
-        `
-      : css`
-          bottom: 0;
-          border-top-left-radius: 8px;
-          border-top-right-radius: 8px;
-        `}
 `;
 
-export const TitleContainer = styled.div`
+const HeaderContainer = styled.div`
   display: flex;
-  flex-direction: row;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
+  margin-bottom: 1rem;
 `;
 
-export const Title = styled.h3`
-  margin: 0;
-  padding: 0;
-  font-weight: 700;
-  font-size: 18px;
-  line-height: 100%;
+const StyledTitle = styled.h2`
+  font-size: 1.125rem;
+  font-weight: 600;
 `;
 
-export const CloseButton = styled.button`
+const StyledDescription = styled.p`
+  font-size: 0.875rem;
+  color: #6b7280;
+  margin-top: 0.25rem;
+`;
+
+const FooterContainer = styled.div`
+  margin-top: 1.5rem;
   display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 24px;
-  height: 24px;
-  border: none;
+  justify-content: flex-end;
+  gap: 0.5rem;
+`;
+
+const CloseButtonContainer = styled.button`
   background: none;
-  outline: none;
+  border: none;
   cursor: pointer;
+  padding: 0.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.25rem;
+  color: #6b7280;
+  transition: background-color 0.2s, color 0.2s;
+
+  &:hover {
+    background-color: #f3f4f6;
+    color: #111827;
+  }
+
+  &:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.3);
+  }
+
+  margin-left: auto;
+  flex-shrink: 0;
 `;
 
-export const CloseIcon = styled.span`
-  width: 100%;
-  height: 100%;
-  display: inline-block;
-  position: relative;
-  background: transparent;
-  cursor: pointer;
-
-  &::before,
-  &::after {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 16px;
-    height: 2px;
-    background-color: currentColor;
-    transform-origin: center;
-  }
-
-  &::before {
-    transform: translate(-50%, -50%) rotate(45deg);
-  }
-
-  &::after {
-    transform: translate(-50%, -50%) rotate(-45deg);
-  }
+const ModalBody = styled.div`
+  margin: 1rem 0;
 `;
+
+const TitleContainer = styled.div`
+  flex: 1;
+  padding-right: 1rem; /* 닫기 버튼과의 간격 */
+`;
+
+export {
+  ModalContainer,
+  ModalOverlay,
+  ModalContentContainer,
+  StyledButton,
+  HeaderContainer,
+  StyledTitle,
+  StyledDescription,
+  FooterContainer,
+  CloseButtonContainer,
+  ModalBody,
+  TitleContainer,
+};
