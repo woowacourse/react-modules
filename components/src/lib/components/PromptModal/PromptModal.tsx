@@ -15,7 +15,7 @@ type PromptModalProps = {
   placeholder?: string;
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   onClose: () => void;
-  onSubmit: () => void;
+  onSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
   onBackdropClick: (e: React.MouseEvent<HTMLDivElement>) => void;
 };
 
