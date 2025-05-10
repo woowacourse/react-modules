@@ -21,7 +21,13 @@ function BaseModal({
 }: PropsWithChildren<BaseModalProps>) {
   return (
     <S.Backdrop>
-      <S.Modal ref={modalRef} position={position} size={size}>
+      <S.Modal
+        role="dialog"
+        aria-modal
+        ref={modalRef}
+        position={position}
+        size={size}
+      >
         <S.ModalHeader>
           <S.Title>{title}</S.Title>
           {hasCloseButton && (
