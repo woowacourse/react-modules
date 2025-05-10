@@ -1,6 +1,6 @@
 import { INITIAL_CVC_STATE } from "./constants";
 import { getCardCVCError } from "./utils";
-import useSingleNumberInput from "../../../hooks/useSingleInput";
+import useSingleNumberInput from "@hooks/useSingleInput";
 
 const useCardCVC = () => {
   return useSingleNumberInput({

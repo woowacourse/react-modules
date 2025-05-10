@@ -1,5 +1,5 @@
 import { useCallback, useState } from "react";
-import { isNonNumericNonEmpty } from "../../../utils/validation";
+import { isNonNumericNonEmpty } from "@utils/validation";
 import { INITIAL_CARD_NUMBER_STATE } from "./constants";
 import { getCardNumberError } from "./utils";
 

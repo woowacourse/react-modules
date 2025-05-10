@@ -1,5 +1,5 @@
-import { getErrorByRules } from "../../../../utils/validation";
-import { ErrorState, ValidationRule } from "../../../types";
+import { getErrorByRules } from "@utils/validation";
+import { ErrorState, ValidationRule } from "@/lib/types";
 import { CARD_BRAND_RULE } from "../constants";
 import { CardBrand, CardBrandRule } from "../types";
 

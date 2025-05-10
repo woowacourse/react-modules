@@ -1,6 +1,6 @@
 import { INITIAL_CARD_PASSWORD } from "./constants";
 import { getCardPasswordError } from "./utils";
-import useSingleNumberInput from "../../../hooks/useSingleInput";
+import useSingleNumberInput from "@hooks/useSingleInput";
 
 const useCardPassword = () => {
   return useSingleNumberInput({

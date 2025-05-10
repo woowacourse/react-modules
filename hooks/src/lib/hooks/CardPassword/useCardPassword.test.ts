@@ -6,7 +6,7 @@ import {
   testInvalidInput,
   testValidInput,
   testMaxLength,
-} from "../../../test/index";
+} from "@tests/index";
 
 describe("useCardPassword", () => {
   it("입력값이 정확히 업데이트 되어야 한다.", () => {

@@ -30,4 +30,13 @@ export default defineConfig({
       rollupTypes: true,
     }),
   ],
+  resolve: {
+    alias: {
+      "@": path.resolve(__dirname, "./src"),
+      "@hooks": path.resolve(__dirname, "./src/hooks"),
+      "@tests": path.resolve(__dirname, "./src/tests"),
+      "@utils": path.resolve(__dirname, "./src/utils"),
+      "@lib": path.resolve(__dirname, "./src/lib"),
+    },
+  },
 });

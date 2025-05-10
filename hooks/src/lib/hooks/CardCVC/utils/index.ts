@@ -1,8 +1,5 @@
-import {
-  commonConditions,
-  getErrorByRules,
-} from "../../../../utils/validation";
-import { ErrorState, ValidationRule } from "../../../types";
+import { commonConditions, getErrorByRules } from "@utils/validation";
+import { ErrorState, ValidationRule } from "@lib/types";
 
 const cvcValidationRules: ValidationRule<string>[] = [
   {

@@ -1,6 +1,6 @@
 import { INITIAL_EXPIRY_DATE_STATE } from "./constants";
 import { getCardExpiryDateError } from "./utils";
-import useSingleNumberInput from "../../../hooks/useSingleInput";
+import useSingleNumberInput from "@hooks/useSingleInput";
 
 const useCardExpiryDate = () => {
   return useSingleNumberInput({

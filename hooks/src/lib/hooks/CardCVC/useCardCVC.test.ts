@@ -6,7 +6,7 @@ import {
   testValidInput,
   testMaxLength,
   testInputEmptyUpdate,
-} from "../../../test/index";
+} from "@tests/index";
 
 describe("useCardCVC", () => {
   it("입력 값이 정확히 업데이트 되어야 한다.", () => {
