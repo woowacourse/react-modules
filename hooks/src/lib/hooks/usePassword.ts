@@ -9,35 +9,19 @@ export default function usePassword({
   initPassword: Record<string, string>;
   initPasswordError: Record<string, string>;
 }) {
-  const {
-    values: password,
-    changeValues: setPassword,
-    isFullFilled,
-  } = useCardInfo({
+  const password = useCardInfo({
     initValues: initPassword,
     maxLength: 3,
   });
 
-  const {
-    error: passwordError,
-    checkValidation: validatePassword,
-    getErrorMessage: getPasswordErrorMessage,
-    isError: isPasswordError,
-    resetError: resetPasswordError,
-  } = useError({
+  const passwordError = useError({
     initError: initPasswordError,
     getValidationFns: getPasswordValidationFns,
   });
 
   return {
     password,
-    setPassword,
-    isFullFilled,
     passwordError,
-    validatePassword,
-    getPasswordErrorMessage,
-    isPasswordError,
-    resetPasswordError,
   };
 }
 
