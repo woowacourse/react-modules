@@ -17,12 +17,18 @@ type ModalContainerProps = {
    * Custom styles for the modal
    */
   containerStyle?: React.CSSProperties;
+
+  /**
+   * size of the modal
+   */
+  size?: 'small' | 'medium' | 'large';
 };
 
 const ModalContainer = ({
   children,
   position = 'center',
   containerStyle = {},
+  size = 'medium',
 }: ModalContainerProps) => {
   const { $zIndex = 1000, ...props } = useModalContext();
 
@@ -33,6 +39,7 @@ const ModalContainer = ({
       position={position}
       modalZIndex={$zIndex + 1}
       containerStyle={containerStyle}
+      size={size}
       {...props}
     >
       {children}
@@ -77,10 +84,46 @@ const positionStyle = {
   `,
 } as const;
 
+const modalSizes = {
+  small: css`
+    width: 90%;
+    max-width: 320px;
+    max-height: 240px;
+  `,
+  medium: css`
+    width: 100%;
+    max-width: 480px;
+    max-height: 360px;
+  `,
+  large: css`
+    width: 100%;
+    max-width: 600px;
+    max-height: 450px;
+  `,
+} as const;
+
+const fontSizes = {
+  small: css`
+    font-size: 1rem;
+    line-height: 1.5;
+  `,
+  medium: css`
+    font-size: 1.125rem;
+    line-height: 1.6;
+  `,
+  large: css`
+    font-size: 1.25rem;
+    line-height: 1.7;
+  `,
+} as const;
+
 const StyledModalContainer = styled.div<{ modalZIndex: number } & ModalContainerProps>`
   display: flex;
   flex-direction: column;
   gap: 16px;
+
+  box-sizing: border-box;
+  overflow-y: auto;
 
   width: 100%;
   max-width: 400px;
@@ -88,7 +131,9 @@ const StyledModalContainer = styled.div<{ modalZIndex: number } & ModalContainer
   position: fixed;
   background-color: white;
   padding: 18px 24px;
-  ${({ position }) => positionStyle[position ?? 'center']};
+  ${({ position = 'center' }) => positionStyle[position]};
+  ${({ size = 'small' }) => modalSizes[size]};
+  ${({ size = 'small' }) => fontSizes[size]};
   ${({ containerStyle }) => ({ ...containerStyle })};
   z-index: ${({ modalZIndex }) => modalZIndex};
 `;
