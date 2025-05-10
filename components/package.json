@@ -1,6 +1,6 @@
 {
   "name": "hoyychoi-modal-component",
-  "version": "0.0.6",
+  "version": "0.0.8",
   "description": "npm modules",
   "type": "module",
   "types": "dist/index.d.ts",
