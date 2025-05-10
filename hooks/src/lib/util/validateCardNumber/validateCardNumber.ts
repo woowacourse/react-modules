@@ -20,7 +20,8 @@ export function validateCardNumber(
   const cardNumberErrors = ["", "", "", ""];
 
   cardNumbers.forEach((cardNumber, index) => {
-    cardNumberErrors[index] = getCardNumberGroupError(cardNumber);
+    const trimCardNumber = cardNumber.trim();
+    cardNumberErrors[index] = getCardNumberGroupError(trimCardNumber);
   });
 
   return cardNumberErrors;

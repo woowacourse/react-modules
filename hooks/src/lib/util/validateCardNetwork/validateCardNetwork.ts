@@ -1,6 +1,7 @@
 import { CardNetwork } from "../../constants";
 
 const CARD_NETWORK_ID_LENGTH = 6;
+
 interface CardRule {
   name: CardNetwork;
   match: (num: string) => boolean;
