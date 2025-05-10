@@ -4,12 +4,13 @@ import styled from '@emotion/styled';
 
 import ModalBackdrop from './Modal.Backdrop';
 import ModalButtonWrapper from './Modal.ButtonWrapper';
+import ModalCancelButton from './Modal.CancelButton';
 import ModalCloseButton from './Modal.CloseButton';
 import ModalContainer from './Modal.Container';
 import ModalDescription from './Modal.Description';
 import ModalTitle from './Modal.Title';
 import Portal from './Portal';
-import { ModalContext, useModalContext } from './useModalContext';
+import { ModalContext } from './useModalContext';
 
 export type ModalProps = {
   /**
@@ -40,16 +41,6 @@ export type ModalProps = {
    */
   closeByEscapeKey?: boolean;
 } & ComponentProps<'div'>;
-
-const ModalCancelButton = ({ children }: { children: React.ReactNode }) => {
-  const { onClose } = useModalContext();
-
-  return (
-    <StyledCancelButton type="button" onClick={onClose} aria-label="cancelButton">
-      {children}
-    </StyledCancelButton>
-  );
-};
 
 const ModalConfirmButton = ({
   onClick,
@@ -99,17 +90,6 @@ Modal.CloseButton = ModalCloseButton;
 Modal.ButtonWrapper = ModalButtonWrapper;
 Modal.CancelButton = ModalCancelButton;
 Modal.ConfirmButton = ModalConfirmButton;
-
-const StyledCancelButton = styled.button`
-  width: 80px;
-  height: 40px;
-  padding: 8px 0;
-  background-color: #f3f4f6;
-  color: #333333;
-  cursor: pointer;
-  border: 1px solid #333333;
-  border-radius: 4px;
-`;
 
 const StyledConfirmButton = styled.button`
   width: 80px;
