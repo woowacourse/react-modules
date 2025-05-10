@@ -3,14 +3,12 @@ import { CardNumberType, HookReturnType, ValidInputFuncType } from "../../types"
 import useInputValue from "../common/useInputValue";
 import { MAX_LENGTH } from "../../constants";
 import useErrors from "../common/useErrors";
-
-const KEY_INDEX_MATCH = ["first", "second", "third", "fourth"];
+import { useCardType } from "../common/useCardType";
 
 const useCardNumber = (): HookReturnType<"cardNumber"> => {
   const { state, onChange, isLengthComplete } = useInputValue<CardNumberType>({
     initialState: "",
     maxLength: MAX_LENGTH.CARD_NUMBER,
-    keyIndexMap: KEY_INDEX_MATCH,
   });
 
   const { errors, errorMessage, clearError, changeError, isErrorComplete } = useErrors({
@@ -28,6 +26,7 @@ const useCardNumber = (): HookReturnType<"cardNumber"> => {
   };
 
   const isValid = isLengthComplete && isErrorComplete;
+  const cardType = useCardType(state.slice(0, 6));
 
   return {
     state,
@@ -38,6 +37,7 @@ const useCardNumber = (): HookReturnType<"cardNumber"> => {
     isLengthComplete,
     isErrorComplete,
     isValid,
+    cardType,
   };
 };
 

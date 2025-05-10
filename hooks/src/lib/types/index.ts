@@ -22,6 +22,7 @@ export interface HookReturnType<T extends keyof CardInformationType> {
   isLengthComplete: boolean;
   isErrorComplete: boolean;
   isValid: boolean;
+  cardType?: string;
 }
 
 export type CardInformationType = {
@@ -46,3 +47,12 @@ export type PasswordType = string;
 export type cardStateType = CardNumberType | ExpirationDateType | CvcNumberType | PasswordType;
 
 export type SetValueFn<T> = (value: T, index?: number) => void;
+
+export type CardType = "visa" | "master" | "amex" | "diners" | "unionpay" | "none";
+
+export interface CardPrefixRuleType {
+  type: CardType;
+  length: number;
+  start: number;
+  end: number;
+}

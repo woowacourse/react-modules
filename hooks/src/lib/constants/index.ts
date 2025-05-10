@@ -1,4 +1,4 @@
-import { ErrorMessageType } from "../types";
+import { CardPrefixRuleType, ErrorMessageType } from "../types";
 
 export const NUMBER_REGEX = /^[0-9]*$/;
 export const ERROR_MESSAGE: Record<string, ErrorMessageType> = {
@@ -16,3 +16,23 @@ export const MAX_LENGTH = {
   CVC_NUMBER: 3,
   PASSWORD: 2,
 };
+
+export const cardPrefixRule: CardPrefixRuleType[] = [
+  // AMEX: 34, 37
+  { type: "amex", length: 2, start: 34, end: 34 },
+  { type: "amex", length: 2, start: 37, end: 37 },
+
+  // Diners: 36
+  { type: "diners", length: 2, start: 36, end: 36 },
+
+  // UnionPay
+  { type: "unionpay", length: 6, start: 622126, end: 622925 },
+  { type: "unionpay", length: 3, start: 624, end: 626 },
+  { type: "unionpay", length: 4, start: 6282, end: 6288 },
+
+  // Visa: 4
+  { type: "visa", length: 1, start: 4, end: 4 },
+
+  // MasterCard: 51–55
+  { type: "master", length: 2, start: 51, end: 55 },
+];
