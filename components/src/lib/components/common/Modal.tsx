@@ -3,6 +3,7 @@ import { ComponentProps, useCallback, useEffect } from 'react';
 import styled from '@emotion/styled';
 
 import ModalBackdrop from './Modal.Backdrop';
+import ModalButtonWrapper from './Modal.ButtonWrapper';
 import ModalCloseButton from './Modal.CloseButton';
 import ModalContainer from './Modal.Container';
 import ModalDescription from './Modal.Description';
@@ -39,10 +40,6 @@ export type ModalProps = {
    */
   closeByEscapeKey?: boolean;
 } & ComponentProps<'div'>;
-
-const ModalButtonWrapper = ({ children }: { children: React.ReactNode }) => {
-  return <StyledModalButtonWrapper>{children}</StyledModalButtonWrapper>;
-};
 
 const ModalCancelButton = ({ children }: { children: React.ReactNode }) => {
   const { onClose } = useModalContext();
@@ -102,14 +99,6 @@ Modal.CloseButton = ModalCloseButton;
 Modal.ButtonWrapper = ModalButtonWrapper;
 Modal.CancelButton = ModalCancelButton;
 Modal.ConfirmButton = ModalConfirmButton;
-
-const StyledModalButtonWrapper = styled.div`
-  display: flex;
-  width: 100%;
-  justify-content: flex-end;
-  align-items: center;
-  gap: 8px;
-`;
 
 const StyledCancelButton = styled.button`
   width: 80px;
