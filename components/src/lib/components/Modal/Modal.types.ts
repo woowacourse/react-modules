@@ -15,8 +15,8 @@ import { ModalOverlayProps } from "../ModalOverlay/ModalOverlay.types";
 export interface ModalInternalProps extends ModalProps, ModalOverlayProps {}
 
 export interface ModalProps {
-  isOpen: boolean;
   children: ReactNode;
+  isOpen: boolean;
 }
 
 export interface ModalCompoundComponent extends FC<ModalInternalProps> {

@@ -35,9 +35,9 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
+    children: "",
     isOpen: true,
     onClose: () => {},
-    children: "",
   },
 
   render: () => {
@@ -66,9 +66,9 @@ export const Default: Story = {
 
 export const Alert: Story = {
   args: {
+    children: "",
     isOpen: true,
     onClose: () => {},
-    children: "",
   },
 
   render: () => {
@@ -98,9 +98,9 @@ export const Alert: Story = {
 
 export const Confirm: Story = {
   args: {
+    children: "",
     isOpen: true,
     onClose: () => {},
-    children: "",
   },
 
   render: () => {
@@ -133,9 +133,9 @@ export const Confirm: Story = {
 
 export const Prompt: Story = {
   args: {
+    children: "",
     isOpen: true,
     onClose: () => {},
-    children: "",
   },
 
   render: () => {

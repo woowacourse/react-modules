@@ -5,17 +5,20 @@
 ## useModal
 
 - isOpen: 모달이 보이는지 여부
+
   - `boolean`
 
 - handleOpen: 모달을 여는 함수
-  - `() => void`  
+
+  - `() => void`
 
 - handleClose: 모달을 닫는 함수
-  - `() => void`  
+  - `() => void`
 
 ## Modal
 
 - isOpen: 모달이 보여지는지 여부를 받는다.
+
   - `boolean`
 
 - children: 하위 컴포넌트를 받는다.
@@ -23,7 +26,7 @@
 ## ModalOverlay
 
 - onClose: 모달 외부를 클릭 시 닫는 함수를 받는다.
-  - `() => void`  
+  - `() => void`
 
 ## ModalContent
 
@@ -52,7 +55,7 @@
 ## ModalCloseButton
 
 - onClose: 모달을 닫는 함수를 받는다.
-  - `() => void`  
+  - `() => void`
 
 ## ModalBody
 
@@ -67,6 +70,18 @@
 - justify(`start | center | end`): Flex 방향에 따른 축을 설정한다.
   - 기본 값: `start`
 - children: 하위 컴포넌트를 받는다.
+
+## Button
+
+- onClick: 버튼에 등록할 이벤트 함수를 받는다.
+  - () => void;
+- color(`light` | `dark`): 버튼의 색상을 설정한다.
+  - 기본 값: light
+- size(`small` | `medium` | `large`): 버튼의 사이즈를 설정한다.
+  - 기본 값: `small`
+  - children: 하위 컴포넌트를 받는다.
+
+## Input
 
 ## 사용 예시
 

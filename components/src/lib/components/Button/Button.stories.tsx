@@ -26,17 +26,17 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
   args: {
     children: "확인",
-    onClick: () => {},
     color: "dark",
     size: "small",
+    onClick: () => {},
   },
 };
 
 export const Delete: Story = {
   args: {
     children: "삭제",
-    onClick: () => {},
     color: "light",
     size: "small",
+    onClick: () => {},
   },
 };
