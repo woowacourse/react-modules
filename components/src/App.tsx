@@ -61,9 +61,8 @@ function App() {
             console.log('confirm 확인!');
           }}
           title="카드를 삭제하시겠습니까?"
-        >
-          <p>삭제하면 복구하실 수 없습니다.</p>
-        </ConfirmModal>
+          description="삭제하면 복구하실 수 없습니다."
+        />
       </div>
       <div>
         <button onClick={handleOpenPromptModal}>prompt 모달 버튼</button>

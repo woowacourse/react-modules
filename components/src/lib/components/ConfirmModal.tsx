@@ -3,9 +3,10 @@ import { Modal, ModalProps } from './Modal';
 type ConfirmModalProps = {
   onConfirm: () => void;
   title: string;
-} & ModalProps;
+  description?: string;
+} & Omit<ModalProps, 'children'>;
 
-const ConfirmModal = ({ isOpen, onClose, children, onConfirm, title }: ConfirmModalProps) => {
+const ConfirmModal = ({ isOpen, onClose, onConfirm, title, description }: ConfirmModalProps) => {
   const handleConfirm = () => {
     onConfirm();
     onClose();
@@ -16,7 +17,7 @@ const ConfirmModal = ({ isOpen, onClose, children, onConfirm, title }: ConfirmMo
       <Modal.Backdrop closeByBackdrop={false} />
       <Modal.Container>
         <Modal.Title title={title} />
-        {children}
+        <Modal.Description description={description} />
         <Modal.ButtonWrapper>
           <Modal.CancelButton>취소</Modal.CancelButton>
           <Modal.ConfirmButton onClick={handleConfirm}>확인</Modal.ConfirmButton>
