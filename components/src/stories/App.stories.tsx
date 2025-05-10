@@ -75,7 +75,7 @@ export const CloseByEsc: Story = {
   },
 };
 
-export const AutoFocusTest: Story = {
+export const FocusWrap: Story = {
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
 
@@ -85,9 +85,36 @@ export const AutoFocusTest: Story = {
     await userEvent.click(openButton);
 
     const firstInput = await canvas.findByTestId('first-input');
+    const secondButton = await canvas.findByTestId('second-button');
+    const thirdLink = await canvas.findByTestId('third-link');
 
+    // 첫 번째 포커스 요소 확인
     await waitFor(() => {
       expect(document.activeElement).toBe(firstInput);
     });
+
+    // TAB → 버튼2
+    await userEvent.tab();
+    expect(document.activeElement).toBe(secondButton);
+
+    // TAB → 링크3
+    await userEvent.tab();
+    expect(document.activeElement).toBe(thirdLink);
+
+    // TAB → 다시 input1 (순환)
+    await userEvent.tab();
+    expect(document.activeElement).toBe(firstInput);
+
+    // Shift+TAB → 링크3 (역순환)
+    await userEvent.tab({ shift: true });
+    expect(document.activeElement).toBe(thirdLink);
+
+    // Shift+TAB → 버튼2
+    await userEvent.tab({ shift: true });
+    expect(document.activeElement).toBe(secondButton);
+
+    // Shift+TAB → input1
+    await userEvent.tab({ shift: true });
+    expect(document.activeElement).toBe(firstInput);
   },
 };

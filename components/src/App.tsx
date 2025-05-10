@@ -14,7 +14,10 @@ function App() {
         <Modal.Content>
           <p>모달열림</p>
           <input placeholder="첫 번째 인풋" data-testid="first-input" />
-          <button>두 번째 버튼</button>
+          <button data-testid="second-button">두 번째 버튼</button>
+          <a href="#" data-testid="third-link">
+            세 번째 링크
+          </a>
         </Modal.Content>
       </Modal>
     </>
