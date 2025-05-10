@@ -1,4 +1,5 @@
 import type { Preview } from "@storybook/react";
+import { INITIAL_VIEWPORTS } from "@storybook/addon-viewport";
 import "../src/reset.css";
 
 const preview: Preview = {
@@ -12,6 +13,9 @@ const preview: Preview = {
     story: {
       inline: false,
       iframeHeight: 700,
+    },
+    viewport: {
+      viewports: INITIAL_VIEWPORTS,
     },
   },
 };
