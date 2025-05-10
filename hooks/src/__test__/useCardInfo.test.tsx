@@ -1,5 +1,4 @@
 import { renderHook, act } from "@testing-library/react";
-import { CardInfo } from "../lib/types/Card";
 import {
   useCardCVC,
   useCardExpirationDate,
