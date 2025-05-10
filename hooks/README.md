@@ -245,8 +245,6 @@ export default App;
 | isError      | boolean  | 에러 여부   |
 | errorMessage | string   | 에러 메시지 |
 
-### password
-
 | Name     | Datatype                  | Description            |
 | -------- | ------------------------- | ---------------------- |
 | password | string                    | 카드 비밀번호 앞 2자리 |

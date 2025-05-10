@@ -1,6 +1,6 @@
 {
   "name": "@muffin2219/hooks",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Card form validation hooks module",
   "type": "module",
   "types": "dist/index.d.ts",
