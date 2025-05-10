@@ -72,4 +72,24 @@ describe("useCardNumber", () => {
 
     expect(result.current.isValid).toBeTruthy();
   });
+
+  it.each([
+    ["", "none"],
+    ["41", "visa"],
+    ["52", "master"],
+    ["34", "amex"],
+    ["371234", "amex"],
+    ["36123", "diners"],
+    ["622126", "unionpay"],
+    ["625000", "unionpay"],
+    ["628212", "unionpay"],
+  ])("현재 입력값이 '%s'면 카드 타입은 '%s'을 반환한다.", (userInput, expected) => {
+    const { result } = renderHook(() => useCardNumber());
+
+    act(() => {
+      result.current.onChange(userInput);
+    });
+
+    expect(result.current.cardType).toBe(expected);
+  });
 });
