@@ -57,6 +57,21 @@ export const NoOverlayCloseModal: Story = {
   },
 };
 
+export const NoEscapeCloseModal: Story = {
+  render: () => {
+    const [isOpen, setIsOpen] = useState(true);
+    return (
+      <Modal isOpen={isOpen} onClose={() => setIsOpen(false)} closeOnEscape={false}>
+        <Modal.Overlay closeOnClick={false} />
+        <Modal.Content>
+          <Modal.Title title="모달 타이틀" />
+          <p>모달열림</p>
+        </Modal.Content>
+      </Modal>
+    );
+  },
+};
+
 export const ModalWithBottomCancelButton: Story = {
   render: () => {
     const [isOpen, setIsOpen] = useState(true);

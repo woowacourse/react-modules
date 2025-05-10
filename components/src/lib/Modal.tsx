@@ -18,8 +18,8 @@ import TextButton from './components/TextButton';
 
 const ModalContext = createContext<{ onClose: () => void }>({ onClose: () => {} });
 
-const Modal = ({ children, isOpen, onClose }: ModalProps) => {
-  useEscapeKeyClose(isOpen, onClose);
+const Modal = ({ children, isOpen, onClose, closeOnEscape = true }: ModalProps) => {
+  useEscapeKeyClose(closeOnEscape, isOpen, onClose);
 
   return (
     <>

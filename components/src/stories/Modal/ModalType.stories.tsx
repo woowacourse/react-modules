@@ -15,7 +15,7 @@ export const AlertModal: Story = {
   render: () => {
     const [isOpen, setIsOpen] = useState(true);
     return (
-      <Modal isOpen={isOpen} onClose={() => setIsOpen(false)}>
+      <Modal isOpen={isOpen} onClose={() => setIsOpen(false)} closeOnEscape={false}>
         <Modal.Overlay closeOnClick={false} />
         <Modal.AlertContent>
           <Modal.Title title="아이디를 입력해 주세요." />
@@ -30,7 +30,7 @@ export const ConfirmModal: Story = {
   render: () => {
     const [isOpen, setIsOpen] = useState(true);
     return (
-      <Modal isOpen={isOpen} onClose={() => setIsOpen(false)}>
+      <Modal isOpen={isOpen} onClose={() => setIsOpen(false)} closeOnEscape={false}>
         <Modal.Overlay closeOnClick={false} />
         <Modal.ConfirmContent>
           <Modal.Title title="카드를 삭제하시겠습니까?" />
@@ -47,7 +47,7 @@ export const PromptModal: Story = {
     const [inputValue, setInputValue] = useState('');
 
     return (
-      <Modal isOpen={isOpen} onClose={() => setIsOpen(false)}>
+      <Modal isOpen={isOpen} onClose={() => setIsOpen(false)} closeOnEscape={false}>
         <Modal.Overlay closeOnClick={false} />
         <Modal.PromptContent
           inputValue={inputValue}
