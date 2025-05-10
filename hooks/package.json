@@ -17,7 +17,7 @@
     "test": "jest"
   },
   "dependencies": {
-    "@muffin2219/hooks": "^0.0.1",
+    "@muffin2219/hooks": "^0.0.2",
     "react": "^19.1.0",
     "react-dom": "^19.1.0"
   },
