@@ -1,9 +1,14 @@
-import { Modal, useModal } from "./lib";
+import BasicModal from "./lib/components/BasicModal";
 import "./App.css";
 import {
   useCardNumbersInput,
   useCardCVCInput,
 } from "../../payments-hooks/src/lib";
+import { useState } from "react";
+import ConfirmModal from "./lib/components/ConfirmModal";
+import AlertModal from "./lib/components/AlertModal";
+import PromptModal from "./lib/components/PromptModal";
+import AgreementModal from "./lib/components/AgreementModal";
 
 function CardNumberInput() {
   const { cardNumbersInfo, cardBrand, cardBlocks, onChangeHandler } =
@@ -58,31 +63,125 @@ function App({
   titleText: string;
   children?: React.ReactNode;
 }) {
-  const { isModalOpened, openModalHandler, closeModalHandler } = useModal();
-  const onClickHandler = () => {
-    openModalHandler();
+  const [isBasicModalOpened, setIsBasicModalOpened] = useState(false);
+  const [isConfirmModalOpened, setIsConfirmModalOpened] = useState(false);
+  const [isAlertModalOpened, setIsAlertModalOpened] = useState(false);
+  const [isPromptModalOpened, setIsPromptModalOpened] = useState(false);
+  const [isAgreementModalOpened, setIsAgreementModalOpened] = useState(false);
+
+  const openBasicModal = () => {
+    setIsBasicModalOpened(true);
+  };
+
+  const openConfirmModal = () => {
+    setIsConfirmModalOpened(true);
+  };
+
+  const openAlertModal = () => {
+    setIsAlertModalOpened(true);
+  };
+
+  const openPromptModal = () => {
+    setIsPromptModalOpened(true);
+  };
+
+  const openAgreementModal = () => {
+    setIsAgreementModalOpened(true);
   };
 
   const handleClose = () => {
-    closeModalHandler();
+    setIsBasicModalOpened(false);
+    setIsConfirmModalOpened(false);
+    setIsAlertModalOpened(false);
+    setIsPromptModalOpened(false);
+    setIsAgreementModalOpened(false);
   };
 
   return (
     <>
-      {isModalOpened && (
-        <Modal
+      {isBasicModalOpened && (
+        <BasicModal
           modalPosition={modalPosition}
+          modalSize="medium"
           closeType={closeType}
           titleText={titleText}
           onClose={handleClose}
         >
           <CardNumberInput />
           <CardCVCInput />
-        </Modal>
+        </BasicModal>
+      )}
+      {isConfirmModalOpened && (
+        <ConfirmModal
+          modalPosition={modalPosition}
+          modalSize="large"
+          closeType="none"
+          titleText="카드를 삭제하시겠습니까?"
+          onClose={handleClose}
+          onConfirm={() => {
+            alert("삭제되었습니다.");
+            handleClose();
+          }}
+          onCancel={() => {
+            alert("취소버튼을 눌렀습니다");
+            handleClose();
+          }}
+          descriptionText="삭제하면 복구하실 수 없습니다."
+        ></ConfirmModal>
+      )}
+      {isAlertModalOpened && (
+        <AlertModal
+          modalPosition={modalPosition}
+          modalSize="large"
+          closeType="none"
+          titleText="카드를 삭제하시겠습니까?"
+          onClose={handleClose}
+          descriptionText="삭제하면 복구하실 수 없습니다."
+        />
+      )}
+      {isAlertModalOpened && (
+        <AlertModal
+          modalPosition={modalPosition}
+          modalSize="large"
+          closeType="none"
+          titleText="카드를 삭제하시겠습니까?"
+          onClose={handleClose}
+          descriptionText="삭제하면 복구하실 수 없습니다."
+        />
+      )}
+      {isPromptModalOpened && (
+        <PromptModal
+          modalPosition="center"
+          modalSize="large"
+          closeType="none"
+          titleText="쿠폰 번호를 입력해주세요"
+          onClose={handleClose}
+        />
+      )}
+      {isAgreementModalOpened && (
+        <AgreementModal
+          modalPosition="center"
+          modalSize="large"
+          closeType="none"
+          titleText="약관에 동의해 주세요"
+          onClose={handleClose}
+        />
       )}
       <div className="button-container">
-        <button className="click-me-button" onClick={onClickHandler}>
-          모달 열기
+        <button className="click-me-button" onClick={openBasicModal}>
+          베이직 모달 열기
+        </button>
+        <button className="click-me-button" onClick={openAlertModal}>
+          Alert 모달 열기
+        </button>
+        <button className="click-me-button" onClick={openConfirmModal}>
+          Confirm 모달 열기
+        </button>
+        <button className="click-me-button" onClick={openPromptModal}>
+          Prompt Modal 모달 열기
+        </button>
+        <button className="click-me-button" onClick={openAgreementModal}>
+          AgreeMdoal 열기
         </button>
       </div>
     </>
