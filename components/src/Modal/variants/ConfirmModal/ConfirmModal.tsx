@@ -4,7 +4,7 @@ type ConfirmModalProps = {
   /** 확인 모달 제목 */
   title: string;
   /** 확인 모달 내용 */
-  content: string;
+  content?: string;
 };
 
 const ConfirmModal = ({ title, content }: ConfirmModalProps) => {

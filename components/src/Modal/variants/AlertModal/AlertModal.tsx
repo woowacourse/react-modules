@@ -4,7 +4,7 @@ type AlertModalProps = {
   /** 확인 모달 제목 */
   title: string;
   /** 확인 모달 내용 */
-  content: string;
+  content?: string;
   /** 확인 모달 확인 버튼 클릭 시 동작 */
   onButtonClick?: () => void;
 };
