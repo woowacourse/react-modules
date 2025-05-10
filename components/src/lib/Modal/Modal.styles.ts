@@ -56,7 +56,7 @@ export const StyledDescription = styled.div`
 export const StyledInput = styled.input`
   font-size: 14px;
   color: #333;
-  margin-bottom: 16px;
+  margin: 16px 0;
   padding: 8px;
   border: 1px solid #ccc;
   border-radius: 4px;
