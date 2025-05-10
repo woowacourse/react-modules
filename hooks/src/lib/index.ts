@@ -1,5 +1,5 @@
 export { default as useCardPassword } from "./hooks/CardPassword";
 export { default as useCardNumber } from "./hooks/CardNumber";
-export { default as useCardExpiry } from "./hooks/CardExpiryDate";
+export { default as useCardExpiryDate } from "./hooks/CardExpiryDate";
 export { default as useCardCvc } from "./hooks/CardCVC";
 export { default as useCardBrand } from "./hooks/CardBrand";
