@@ -16,7 +16,7 @@ export const ModalBackdrop = css`
 
 export const ModalFrame = (position: Position) => css`
   background-color: white;
-  padding: 20px;
+  padding: 30px;
   width: ${position === 'center' ? '100%' : '100dvw'};
   min-width: ${position === 'center' && '300px'};
   max-width: ${position === 'center' && '80dvw'};
@@ -56,11 +56,15 @@ export const ModalCloseButton = css`
 export const ModalContent = css`
   width: 100%;
   padding: 10px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  justify-content: center;
 `;
 
 export const ButtonBar = css`
   display: flex;
-  justify-content: center;
+  justify-content: flex-end;
   align-items: center;
   gap: 10px;
   width: 100%;
