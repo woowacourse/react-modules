@@ -8,10 +8,10 @@ import {
 interface ModalPropsType {
   children: React.ReactNode;
   isOpen: boolean;
-  position: 'center' | 'bottom';
+  position?: 'center' | 'bottom';
   title: string;
-  showCloseButton: boolean;
-  size: 'small' | 'medium' | 'large';
+  showCloseButton?: boolean;
+  size?: 'small' | 'medium' | 'large';
   onClose: () => void;
   onBackdropClick: (e: React.MouseEvent<HTMLDivElement>) => void;
 }
@@ -19,9 +19,9 @@ interface ModalPropsType {
 const Modal = ({
   children,
   isOpen,
-  position,
+  position = 'center',
   title,
-  showCloseButton,
+  showCloseButton = true,
   size = 'small',
   onClose,
   onBackdropClick,
