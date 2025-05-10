@@ -1,5 +1,5 @@
-import React, { createContext, useContext } from "react";
-import useKeyEscClose from "./useKeyEscClose";
+import React, { createContext, useContext, useRef } from "react";
+import useKeyEscClose from "./hooks/useKeyEscClose";
 import {
   backGroundStyle,
   ModalBodyStyle,
@@ -10,6 +10,7 @@ import {
   ModalTitleStyle,
   ModalWrapperStyle,
 } from "./styles";
+import { useFocusTrap } from "./hooks/useFocusTrap";
 
 export interface ChildrenProps {
   /** 자식 요소 (JSX.Element 또는 문자열 등) */
@@ -69,12 +70,18 @@ const Modal = ({
   size = "medium",
   children,
 }: ModalProps) => {
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  useFocusTrap(containerRef, show);
   useKeyEscClose(onHide);
+
   return (
     <ModalContext.Provider value={{ onHide }}>
       <div css={ModalWrapperStyle(show)}>
         <div css={backGroundStyle(background)} onClick={onHide}></div>
-        <div css={ModalContainerStyle(position, gap, size)}>{children}</div>
+        <div  ref={containerRef}  css={ModalContainerStyle(position, gap, size)}>
+          {children}
+        </div>
       </div>
     </ModalContext.Provider>
   );
