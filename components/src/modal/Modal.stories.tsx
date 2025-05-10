@@ -6,6 +6,26 @@ import styled from '@emotion/styled';
 const meta = {
   title: 'ModalContainer',
   component: Modal.Container,
+  tags: ['autodocs'],
+  argTypes: {
+    open: {
+      control: 'boolean',
+    },
+    position: {
+      control: 'inline-radio',
+      options: ['center', 'bottom'],
+    },
+    size: {
+      control: 'inline-radio',
+      options: ['small', 'medium', 'large'],
+    },
+  },
+  args: {
+    open: false,
+    onClose: () => {},
+    position: 'center',
+    size: 'medium',
+  },
 } satisfies Meta<typeof Modal.Container>;
 
 export default meta;
@@ -13,11 +33,6 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
-  args: {
-    open: true,
-    onClose: () => {},
-  },
-
   render: function App(args) {
     const [modalOpen, setModalOpen] = useState(false);
 
@@ -40,8 +55,6 @@ export const Default: Story = {
 
 export const BottomPosition: Story = {
   args: {
-    open: true,
-    onClose: () => {},
     position: 'bottom',
   },
 
@@ -66,11 +79,6 @@ export const BottomPosition: Story = {
 };
 
 export const ShowCloseButton: Story = {
-  args: {
-    open: true,
-    onClose: () => {},
-  },
-
   render: function App(args) {
     const [modalOpen, setModalOpen] = useState(false);
 
@@ -93,11 +101,6 @@ export const ShowCloseButton: Story = {
 };
 
 export const ShowAllButtons: Story = {
-  args: {
-    open: true,
-    onClose: () => {},
-  },
-
   render: function App(args) {
     const [modalOpen, setModalOpen] = useState(false);
 
@@ -107,6 +110,7 @@ export const ShowAllButtons: Story = {
 
     return (
       <>
+        <h1>Component Modules</h1>
         <button onClick={() => setModalOpen(true)}>열기</button>
         <Modal.Container {...args} onClose={onClose} open={modalOpen}>
           <Modal.Title>약관에 동의해 주세요</Modal.Title>
