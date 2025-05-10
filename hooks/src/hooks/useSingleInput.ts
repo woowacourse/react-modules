@@ -15,16 +15,19 @@ const useSingleNumberInput = ({
 }: UseInputStateParams) => {
   const [inputState, setInputState] = useState<BaseInputState>(initialValue);
 
-  const handleInputChange = useCallback((value: string) => {
-    if (value.length > maxLength || isNonNumericNonEmpty(value)) {
-      return;
-    }
+  const handleInputChange = useCallback(
+    (value: string) => {
+      if (value.length > maxLength || isNonNumericNonEmpty(value)) {
+        return;
+      }
 
-    setInputState((prev) => ({
-      ...prev,
-      value,
-    }));
-  }, []);
+      setInputState((prev) => ({
+        ...prev,
+        value,
+      }));
+    },
+    [maxLength]
+  );
 
   return {
     value: inputState.value,
