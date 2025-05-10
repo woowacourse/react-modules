@@ -11,6 +11,7 @@ import { initialError } from '../utils/initial';
 import { ErrorType } from '../types/errorType';
 import { INPUT_RULE } from '../constants/inputRule';
 import { identifyCardBrand } from '../utils/identifyCardBrand';
+import { getCardNumberLength } from '../utils/getCardNumberLength';
 
 type ValitationResult = {
   numbers: string;
@@ -27,6 +28,7 @@ export default function useCardNumbers(): ValitationResult {
   const [numbers, setNumbers] = useState('');
   const [error, setError] = useState<ErrorType>(initialError);
   const cardBrand = identifyCardBrand(numbers);
+  const cardNumberLength = getCardNumberLength(cardBrand);
 
   const updateError = (args: UpdateErrorArgs) => {
     setError({

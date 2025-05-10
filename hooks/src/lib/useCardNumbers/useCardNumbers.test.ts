@@ -1,6 +1,7 @@
 import { renderHook, act } from '@testing-library/react';
 import useCardNumbers from './useCardNumbers';
 import { ERROR_MESSAGE } from '../constants/errorMessage';
+import { getCardNumberLength } from '../utils/getCardNumberLength';
 
 test('숫자가 아닌 값을 validate 하면 에러 메시지가 세팅된다', () => {
   const { result } = renderHook(() => useCardNumbers());
@@ -107,5 +108,28 @@ describe('카드사 판별 테스트', () => {
     expect(result.current.error.errorMessage).toBe(
       ERROR_MESSAGE.CARD_NUMBERS.INVALID_NUMBER
     );
+  });
+});
+
+describe('카드사별 카드 번호 길이 테스트', () => {
+  test.each(['Visa', 'Master', 'UnionPay'])(
+    '%s인 경우 16자리 반환',
+    (brand) => {
+      const length = getCardNumberLength(brand);
+
+      expect(length).toBe(16);
+    }
+  );
+
+  test('Diners인 경우 14자리 반환', () => {
+    const length = getCardNumberLength('Diners');
+
+    expect(length).toBe(14);
+  });
+
+  test('AMEX인 경우 15자리 반환', () => {
+    const length = getCardNumberLength('AMEX');
+
+    expect(length).toBe(15);
   });
 });
