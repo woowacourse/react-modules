@@ -7,6 +7,7 @@ import { useEffect, useRef, useState } from 'react';
 export default function PromptModal({ onClose, onSubmit }: ModalProps) {
   const [input, setInput] = useState('');
   const inputRef = useRef<HTMLInputElement>(null);
+  const messageId = 'prompt-modal-message';
 
   useEffect(() => {
     inputRef.current?.focus();
@@ -47,7 +48,7 @@ export default function PromptModal({ onClose, onSubmit }: ModalProps) {
         placeholder='입력해주세요.'
         required
       />
-      <S.ModalButtonSection>
+      <S.ModalButtonSection id={messageId} aria-describedby={messageId}>
         <CloseButton type='button' onClick={onClose}>
           취소
         </CloseButton>

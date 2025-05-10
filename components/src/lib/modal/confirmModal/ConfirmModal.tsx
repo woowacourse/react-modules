@@ -3,8 +3,9 @@ import { ModalProps } from '../../shared/types/modal';
 import { CloseButton, ConfirmButton } from '../../shared/ui/Button.styles';
 import { useEffect, useRef } from 'react';
 
-export default function ConfirmModal({ message, onClose, onConfirm }: ModalProps) {
+export default function ConfirmModal({ message = 'no message', onClose, onConfirm }: ModalProps) {
   const closeBtnRef = useRef<HTMLButtonElement>(null);
+  const messageId = 'confirm-modal-message';
 
   useEffect(() => {
     closeBtnRef.current?.focus();
@@ -20,7 +21,9 @@ export default function ConfirmModal({ message, onClose, onConfirm }: ModalProps
   };
   return (
     <>
-      <S.ModalContentSection>{message}</S.ModalContentSection>
+      <S.ModalContentSection id={messageId} aria-describedby={messageId}>
+        {message}
+      </S.ModalContentSection>
       <S.ModalButtonSection>
         <CloseButton ref={closeBtnRef} onClick={onClose}>
           취소

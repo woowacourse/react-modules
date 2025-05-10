@@ -59,7 +59,11 @@ const renderModal = ({ children, type, message, onClose, onConfirm, onSubmit, si
     case 'prompt':
       return <PromptModal onClose={onClose} onSubmit={onSubmit} size={size} />;
     default:
-      return <S.ModalContentSection>{children}</S.ModalContentSection>;
+      return (
+        <S.ModalContentSection id='custom-modal' aria-describedby={'custom-modal'}>
+          {children}
+        </S.ModalContentSection>
+      );
   }
 };
 
