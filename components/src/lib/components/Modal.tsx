@@ -235,6 +235,10 @@ const positionStyle = {
 } as const;
 
 const StyledModalContainer = styled.div<{ modalZIndex: number } & ModalContainerProps>`
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+
   width: 100%;
   max-width: 400px;
   height: auto;
