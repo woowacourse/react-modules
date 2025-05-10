@@ -20,8 +20,8 @@ const useExpirationDate = (): HookReturnType<"expirationDate"> => {
     initialErrorState: { month: false, year: false },
   });
 
-  const validateInput: ValidInputFuncType = (value: string, index: number) => {
-    const type = KEY_INDEX_MATCH[index];
+  const validateInput: ValidInputFuncType = (value: string, index?: number) => {
+    const type = KEY_INDEX_MATCH[index!];
     const { error, message } = isExpirationDate(type, value);
     if (error) {
       changeError(type, message);

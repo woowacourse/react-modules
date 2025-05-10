@@ -8,10 +8,10 @@ export interface ValidateFuncReturnType {
   message: ErrorMessageType;
 }
 
-type ValidWithoutIndex = (value: string) => void;
-type ValidWithIndex = (value: string, index: number) => void;
-
-export type ValidInputFuncType = ValidWithoutIndex | ValidWithIndex;
+export type ValidInputFuncType = {
+  (value: string): void;
+  (value: string, index: number): void;
+};
 
 export interface HookReturnType<T extends keyof CardInformationType> {
   state: CardInformationType[T];
@@ -38,7 +38,7 @@ export type setCardInformationType = {
   password: SetValueFn<PasswordType>;
 };
 
-export type CardNumberType = Record<"first" | "second" | "third" | "fourth", string>;
+export type CardNumberType = string;
 export type ExpirationDateType = Record<"month" | "year", string>;
 export type CvcNumberType = string;
 export type PasswordType = string;
