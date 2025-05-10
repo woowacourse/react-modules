@@ -42,17 +42,25 @@ const Modal = ({
                 <img src='./closeIcon.png' />
               </S.ModalCloseButton>
             </S.HeaderSection>
-            {type === 'custom' && <S.ModalContentSection>{children}</S.ModalContentSection>}
-            {type === 'alert' && <AlertModal message={message} onClose={onClose} size={size} />}
-            {type === 'confirm' && (
-              <ConfirmModal message={message} onClose={onClose} onConfirm={onConfirm} size={size} />
-            )}
-            {type === 'prompt' && <PromptModal onClose={onClose} onSubmit={onSubmit} size={size} />}
+            {renderModal({ children, type, message, onClose, onConfirm, onSubmit, size })}
           </S.ModalContainer>
         </S.Background>
       )}
     </>
   );
+};
+
+const renderModal = ({ children, type, message, onClose, onConfirm, onSubmit, size }) => {
+  switch (type) {
+    case 'alert':
+      return <AlertModal message={message} onClose={onClose} size={size} />;
+    case 'confirm':
+      return <ConfirmModal message={message} onClose={onClose} onConfirm={onConfirm} size={size} />;
+    case 'prompt':
+      return <PromptModal onClose={onClose} onSubmit={onSubmit} size={size} />;
+    default:
+      return <S.ModalContentSection>{children}</S.ModalContentSection>;
+  }
 };
 
 export default Modal;
