@@ -1,30 +1,27 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
+import { isNonNumericNonEmpty } from "../../../utils/validation";
 import { INITIAL_CARD_NUMBER_STATE } from "./constants";
-import { CardNumberKey, CardNumberState } from "./types";
-import { getCardNumbersError } from "./utils";
+import { getCardNumberError } from "./utils";
 
 const useCardNumber = () => {
-  const [cardNumberState, setCardNumberState] = useState<CardNumberState>(
-    INITIAL_CARD_NUMBER_STATE
-  );
+  const [cardNumber, setCardNumber] = useState(INITIAL_CARD_NUMBER_STATE);
 
-  const handleCardNumberChange = (key: CardNumberKey, value: string) => {
-    if (value.length > 4) {
+  const handleCardNumberChange = useCallback((cardNumber: string) => {
+    const cleanCardNumber = cardNumber.replace(/-/g, "");
+    if (isNonNumericNonEmpty(cleanCardNumber)) {
       return;
     }
 
-    setCardNumberState((prevState) => ({
-      ...prevState,
-      [key]: {
-        value,
-      },
+    setCardNumber((prev) => ({
+      ...prev,
+      value: cleanCardNumber,
     }));
-  };
+  }, []);
 
   return {
-    cardNumberState,
-    handleCardNumberChange,
-    errorState: getCardNumbersError(cardNumberState),
+    value: cardNumber.value,
+    onchange: handleCardNumberChange,
+    errorState: getCardNumberError(cardNumber.value),
   };
 };
 
