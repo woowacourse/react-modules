@@ -17,6 +17,7 @@ function App() {
       <button onClick={() => setPromptModal((prev) => !prev)}>입력 모달</button>
       <Modal
         position="center"
+        size="sm"
         isOpen={alertModal}
         onClose={() => {
           setAlertModal(false);
@@ -33,6 +34,7 @@ function App() {
       </Modal>
       <Modal
         position="center"
+        size="md"
         isOpen={confirmModal}
         onClose={() => {
           setConfirmModal(false);
@@ -46,6 +48,7 @@ function App() {
       </Modal>
       <Modal
         position="center"
+        size="lg"
         isOpen={promptModal}
         onClose={() => {
           setPromptModal(false);

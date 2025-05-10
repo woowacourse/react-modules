@@ -8,12 +8,20 @@
   align-items: end;
 }
 
-.bottomWidth {
-  width: 100%;
+.smModal {
+  width: 320px;
 }
 
-.centerWidth {
-  width: 80%;
+.mdModal {
+  width: 480px;
+}
+
+.lgModal {
+  width: 600px;
+}
+
+.modal {
+  width: 320px;
 }
 
 .modalBackground {

@@ -8,6 +8,7 @@ export interface ModalComponentProps {
   isOpen: boolean;
   onClose: () => void;
   children: React.ReactNode;
+  size?: "sm" | "md" | "lg";
 }
 
 export default function ModalComponent({
@@ -15,12 +16,16 @@ export default function ModalComponent({
   isOpen,
   onClose,
   children,
+  size = "md",
 }: ModalComponentProps) {
   const backgroundClassName = `${styles[position]} ${styles.modalBackground}`;
   const containerClassName = `${styles.modalContents} ${
-    styles[`${position}Width`]
+    styles[`${size}Modal`]
   }`;
 
+  // ${
+  //   styles[`${position}Width`]
+  // }
   useKeyPress({ targetKey: "Escape", isOpen, onClose });
   if (!isOpen) return null;
 

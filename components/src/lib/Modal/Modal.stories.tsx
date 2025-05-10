@@ -75,6 +75,7 @@ export const CenterModal: Story = {
 export const BottomModal: Story = {
   args: {
     position: "bottom",
+    size: "lg",
   },
   render: function Render(args) {
     const [isOpen, setIsOpen] = useState(false);
