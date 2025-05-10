@@ -3,13 +3,12 @@ import { ComponentProps, useCallback, useEffect } from 'react';
 import styled from '@emotion/styled';
 
 import ModalBackdrop from './Modal.Backdrop';
+import ModalCloseButton from './Modal.CloseButton';
 import ModalContainer from './Modal.Container';
 import ModalDescription from './Modal.Description';
 import ModalTitle from './Modal.Title';
 import Portal from './Portal';
 import { ModalContext, useModalContext } from './useModalContext';
-
-import closeIcon from '../../assets/Close.svg';
 
 export type ModalProps = {
   /**
@@ -40,16 +39,6 @@ export type ModalProps = {
    */
   closeByEscapeKey?: boolean;
 } & ComponentProps<'div'>;
-
-const ModalCloseButton = () => {
-  const { onClose } = useModalContext();
-
-  return (
-    <StyledCloseButton type="button" onClick={onClose} aria-label="closeModalButton">
-      <StyledCloseIcon src={closeIcon} alt="closeIcon" />
-    </StyledCloseButton>
-  );
-};
 
 const ModalButtonWrapper = ({ children }: { children: React.ReactNode }) => {
   return <StyledModalButtonWrapper>{children}</StyledModalButtonWrapper>;
@@ -113,26 +102,6 @@ Modal.CloseButton = ModalCloseButton;
 Modal.ButtonWrapper = ModalButtonWrapper;
 Modal.CancelButton = ModalCancelButton;
 Modal.ConfirmButton = ModalConfirmButton;
-
-const StyledCloseButton = styled.button`
-  position: absolute;
-  top: 12px;
-  right: 12px;
-  padding: 0;
-  background-color: transparent;
-  border: none;
-  cursor: pointer;
-  z-index: 0;
-  &:hover {
-    background-color: rgba(31, 41, 55, 0.1);
-    border-radius: 20%;
-  }
-`;
-
-const StyledCloseIcon = styled.img`
-  width: 27px;
-  height: 27px;
-`;
 
 const StyledModalButtonWrapper = styled.div`
   display: flex;
