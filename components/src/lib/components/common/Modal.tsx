@@ -3,7 +3,7 @@ import { ComponentProps, createContext, useCallback, useContext, useEffect } fro
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 
-import { Portal } from './Portal';
+import Portal from './Portal';
 
 import closeIcon from '../../assets/Close.svg';
 

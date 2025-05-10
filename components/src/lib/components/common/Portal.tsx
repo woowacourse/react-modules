@@ -24,7 +24,7 @@ type Props = {
   children: React.ReactNode;
 } & PropsWithChildren;
 
-export const Portal = ({ isOpen, children }: Props) => {
+const Portal = ({ isOpen, children }: Props) => {
   if (!isOpen) return null;
 
   return (
@@ -33,3 +33,5 @@ export const Portal = ({ isOpen, children }: Props) => {
     </PortalWrapper>
   );
 };
+
+export default Portal;
