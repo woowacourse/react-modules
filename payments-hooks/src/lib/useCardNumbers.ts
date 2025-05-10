@@ -78,7 +78,7 @@ export function useCardNumbersInput() {
 
       setCardNumbersInfo(next);
 
-      const fullNumber = next.map((info) => info.value).join("");
+      const fullNumber = next.map(({ value }) => value).join("");
       const detectedBrand = detectCardBrand(fullNumber);
       if (detectedBrand !== cardBrand) {
         setCardBrand(detectedBrand);
