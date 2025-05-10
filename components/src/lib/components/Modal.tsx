@@ -11,13 +11,13 @@ import { ModalBackdrop, ModalFrame, ModalHeader, ModalCloseButton, ModalContent,
 const ModalContext = createContext<ModalContextType | undefined>(undefined);
 
 const Modal = ({ children, isOpen, onAfterOpen, onClose, position = 'center' }: ModalProps) => {
-  const handleKeyDown = (e: KeyboardEvent) => {
+  const handleCloseByEsc = (e: KeyboardEvent) => {
     if (e.key === 'Escape') {
       onClose();
     }
   };
 
-  const handleBackdropClick = (e: MouseEvent<HTMLDivElement>) => {
+  const handleCloseByBackdrop = (e: MouseEvent<HTMLDivElement>) => {
     if (e.target === e.currentTarget) {
       onClose();
     }
@@ -30,18 +30,18 @@ const Modal = ({ children, isOpen, onAfterOpen, onClose, position = 'center' }: 
   }, [isOpen, onAfterOpen]);
 
   useEffect(() => {
-    window.addEventListener('keydown', handleKeyDown);
+    window.addEventListener('keydown', handleCloseByEsc);
 
     return () => {
-      window.removeEventListener('keydown', handleKeyDown);
+      window.removeEventListener('keydown', handleCloseByEsc);
     };
-  }, [handleKeyDown]);
+  }, [handleCloseByEsc]);
 
   if (!isOpen) return null;
 
   return (
     <ModalContext.Provider value={{ onClose, position }}>
-      <div className={ModalBackdrop} onClick={handleBackdropClick} aria-label="modal-backdrop">
+      <div className={ModalBackdrop} onClick={handleCloseByBackdrop} aria-label="modal-backdrop">
         <div className={ModalFrame(position)} role="dialog" aria-modal="true" aria-labelledby="modal-title">
           {children}
         </div>
