@@ -19,6 +19,8 @@ type PromptModalProps = {
   onLeftButtonClick: () => void;
   /** 오른쪽 버튼 클릭 시 동작 */
   onRightButtonClick: () => void;
+  /** Input의 placeholder 텍스트 */
+  placeholder?: string;
 };
 
 const PropmptModal = ({
@@ -31,6 +33,7 @@ const PropmptModal = ({
   onClose,
   onLeftButtonClick,
   onRightButtonClick,
+  placeholder,
 }: PromptModalProps) => {
   return (
     <Modal
@@ -45,7 +48,7 @@ const PropmptModal = ({
           <Modal.Title title={title} />
           <Modal.Body>
             {content}
-            <Modal.Input />
+            <Modal.Input $placeholder={placeholder} />
             <Modal.ConfirmButton
               onLeftButtonClick={onLeftButtonClick}
               onRightButtonClick={onRightButtonClick}

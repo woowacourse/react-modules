@@ -1,13 +1,13 @@
 import styled from "styled-components";
 
 type ModalInputProps = {
-  $placeHolder: string;
+  $placeholder: string;
   size: "small" | "medium" | "large";
 };
 
 export const ModalInput = styled.input.attrs<ModalInputProps>(
-  ({ $placeHolder }) => ({
-    placeholder: $placeHolder,
+  ({ $placeholder }) => ({
+    placeholder: $placeholder,
   })
 )`
   border: 1px solid #000000;
