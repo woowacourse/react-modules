@@ -9,7 +9,6 @@ export function cardNumberValidation(
   cardType: CardType
 ) {
   const lengthRules = cardNumberLengthRules[cardType];
-  lengthRules;
 
   const isCardNumberError = (
     Object.entries(cardNumbers) as [keyof CardNumber, string][]
