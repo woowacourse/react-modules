@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import closeIcon from '../assets/close-icon.png';
+import { get } from 'http';
 
 type PositionProps = {
   $position: 'center' | 'bottom';
@@ -75,8 +76,20 @@ const ModalTitle = styled.div`
 
 const ModalContents = styled.div`
   display: flex;
+  flex-direction: column;
   margin-top: 56px;
-  height: 100%;
+`;
+
+type ModalButtonContainerProps = {
+  $position: 'left' | 'right' | 'center';
+};
+
+const ModalButtonContainer = styled.div<ModalButtonContainerProps>`
+  display: flex;
+  justify-content: ${({ $position }) => getButtonPosition($position)};
+  gap: 10px;
+  margin-top: 20px;
+  width: 100%;
 `;
 
 type ModalButtonProps = {
@@ -96,7 +109,6 @@ const ModalButton = styled.button<ModalButtonProps>`
   padding: 10px 20px;
   cursor: pointer;
   font-size: 16px;
-  margin-top: 20px;
   &:focus {
     border: none;
     outline: none;
@@ -116,18 +128,22 @@ function getSize(size: 'small' | 'medium' | 'large') {
   }
 }
 
-const ModalButtonContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  margin-top: 20px;
-  width: 100%;
-`;
+function getButtonPosition($position: 'left' | 'right' | 'center') {
+  switch ($position) {
+    case 'left':
+      return 'flex-start';
+    case 'right':
+      return 'flex-end';
+    case 'center':
+      return 'center';
+    default:
+      return 'center';
+  }
+}
 
 const ModalInput = styled.input`
-  width: 100%;
   padding: 10px;
-  border: 1px solid;
-  border-radius: 4px;
+  min-height: 20px;
 `;
 
 export {
@@ -136,7 +152,7 @@ export {
   CloseIcon,
   ModalTitle,
   ModalContents,
-  ModalButton,
   ModalButtonContainer,
+  ModalButton,
   ModalInput,
 };

@@ -20,48 +20,34 @@ function App() {
 
         <Modal.Contents>
           <Modal.Input placeholder="입력하세요" />
+          <div> 내용1</div>
+          <div> 내용2</div>
+          <div> 내용3</div>
         </Modal.Contents>
-        <Modal.Button
-          title="취소"
-          backgroundColor="#000000"
-          textColor="#000000"
-          border="1px solid #000000"
-          size="small"
-          onClick={() => {
-            console.log('확인 버튼 클릭!');
-          }}
-        />
-        <Modal.Button
-          title="취소"
-          backgroundColor="#00ffff"
-          textColor="#000000"
-          border="1px solid #000000"
-          size="small"
-          onClick={() => {
-            console.log('확인 버튼 클릭!');
-          }}
-        />
-        <Modal.Button
-          title="취소"
-          backgroundColor="#00ffff"
-          textColor="#000000"
-          border="1px solid #000000"
-          size="small"
-          onClick={() => {
-            console.log('확인 버튼 클릭!');
-          }}
-        />
-        <Modal.Button
-          title="취소"
-          backgroundColor="#00ffff"
-          textColor="#000000"
-          border="1px solid #000000"
-          size="small"
-          onClick={() => {
-            console.log('확인 버튼 클릭!');
-          }}
-        />
         <Modal.CloseButton />
+        <Modal.ButtonContainer position="center">
+          <Modal.Button
+            title="확인"
+            backgroundColor="#00fdff"
+            textColor="#000000"
+            border="1px solid #000000"
+            size="small"
+            onClick={() => {
+              console.log('확인 버튼 클릭!');
+            }}
+          />
+
+          <Modal.Button
+            title="취소"
+            backgroundColor="#011fff"
+            textColor="#000000"
+            border="1px solid #000000"
+            size="small"
+            onClick={() => {
+              console.log('확인 버튼 클릭!');
+            }}
+          />
+        </Modal.ButtonContainer>
       </Modal>
     </>
   );

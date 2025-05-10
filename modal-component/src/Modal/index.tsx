@@ -122,6 +122,19 @@ const Contents = ({ children }: ModalContentsProps) => {
   return <ModalContents>{children}</ModalContents>;
 };
 
+type ModalButtonContainerProps = {
+  position?: 'left' | 'right' | 'center';
+  children: React.ReactNode;
+};
+const ButtonContainer = ({
+  position = 'right',
+  children,
+}: ModalButtonContainerProps) => {
+  return (
+    <ModalButtonContainer $position={position}>{children}</ModalButtonContainer>
+  );
+};
+
 type ButtonProps = {
   title: string;
   backgroundColor?: string;
@@ -130,7 +143,6 @@ type ButtonProps = {
   onClick?: () => void;
   border?: string;
 };
-
 const Button = ({
   title,
   backgroundColor,
@@ -140,17 +152,15 @@ const Button = ({
   onClick,
 }: ButtonProps) => {
   return (
-    <ModalButtonContainer>
-      <ModalButton
-        $backgroundColor={backgroundColor}
-        $textColor={textColor}
-        $size={size}
-        $border={border}
-        onClick={onClick}
-      >
-        {title}
-      </ModalButton>
-    </ModalButtonContainer>
+    <ModalButton
+      $backgroundColor={backgroundColor}
+      $textColor={textColor}
+      $size={size}
+      $border={border}
+      onClick={onClick}
+    >
+      {title}
+    </ModalButton>
   );
 };
 
@@ -161,6 +171,7 @@ const Input = ({ placeholder }) => {
 Modal.Title = Title;
 Modal.CloseButton = CloseButton;
 Modal.Contents = Contents;
+Modal.ButtonContainer = ButtonContainer;
 Modal.Button = Button;
 Modal.Input = Input;
 
