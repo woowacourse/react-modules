@@ -3,41 +3,61 @@ import {isLengthBetween} from '../utils/validation';
 const MIN_LENGTH = 14;
 const MAX_LENGTH = 16;
 
-const getPrefixCardNumber = (digit: number, cardNumber: string) => {
-  if (cardNumber.length <= digit) return 0;
+const getPrefixCardNumber = (count: number, cardNumber: string) => {
+  if (cardNumber.length <= count) return 0;
 
-  return Number(
-    cardNumber
-      .slice(0, digit)
-      .split('')
-      .reduce((acc, curr) => acc + curr)
-  );
+  return Number(cardNumber.slice(0, count));
 };
 
+const cardBrandRules = [
+  {
+    brand: 'Diners',
+    validate: (cardNumber: string) =>
+      cardNumber.length === 14 && cardNumber.startsWith('36'),
+  },
+  {
+    brand: 'AMEX',
+    validate: (cardNumber: string) =>
+      cardNumber.length === 15 &&
+      (cardNumber.startsWith('34') || cardNumber.startsWith('37')),
+  },
+  {
+    brand: 'Visa',
+    validate: (cardNumber: string) =>
+      cardNumber.length === 16 && cardNumber.startsWith('4'),
+  },
+  {
+    brand: 'MasterCard',
+    validate: (cardNumber: string) => {
+      const prefix = getPrefixCardNumber(2, cardNumber);
+      return cardNumber.length === 16 && prefix >= 51 && prefix <= 55;
+    },
+  },
+  {
+    brand: 'Union',
+    validate: (cardNumber: string) => {
+      const prefix3 = getPrefixCardNumber(3, cardNumber);
+      return cardNumber.length === 16 && prefix3 >= 624 && prefix3 <= 626;
+    },
+  },
+  {
+    brand: 'Union',
+    validate: (cardNumber: string) => {
+      const prefix4 = getPrefixCardNumber(4, cardNumber);
+      return cardNumber.length === 16 && prefix4 >= 6282 && prefix4 <= 6288;
+    },
+  },
+  {
+    brand: 'Union',
+    validate: (cardNumber: string) => {
+      const prefix6 = getPrefixCardNumber(6, cardNumber);
+      return cardNumber.length === 16 && prefix6 >= 622126 && prefix6 <= 622925;
+    },
+  },
+];
+
 export const getCardBrand = (cardNumber: string) => {
-  if (!isLengthBetween(cardNumber, MIN_LENGTH, MAX_LENGTH)) return;
+  if (!isLengthBetween(cardNumber, MIN_LENGTH, MAX_LENGTH)) return undefined;
 
-  if (cardNumber.length === 14) {
-    if (cardNumber.startsWith('36')) return 'Diners';
-  }
-
-  if (cardNumber.length === 15) {
-    if (cardNumber.startsWith('34') || cardNumber.startsWith('37'))
-      return 'AMEX';
-  }
-
-  if (cardNumber.length === 16) {
-    if (cardNumber.startsWith('4')) return 'Visa';
-
-    const addTwoBit = getPrefixCardNumber(2, cardNumber);
-    const addThreeBit = getPrefixCardNumber(3, cardNumber);
-    const addFourBit = getPrefixCardNumber(4, cardNumber);
-    const addSixBit = getPrefixCardNumber(6, cardNumber);
-
-    if (addTwoBit >= 51 && addTwoBit <= 55) return 'MasterCard';
-
-    if (addThreeBit >= 624 && addThreeBit <= 626) return 'Union';
-    if (addFourBit >= 6282 && addFourBit <= 6288) return 'Union';
-    if (addSixBit >= 622126 && addSixBit <= 622925) return 'Union';
-  }
+  return cardBrandRules.find((rule) => rule.validate(cardNumber))?.brand;
 };
