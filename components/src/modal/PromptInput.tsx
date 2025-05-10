@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { ComponentPropsWithRef, useEffect } from 'react';
+import { ComponentPropsWithRef, useMemo } from 'react';
 
 // ============================== Types ==============================
 
@@ -9,9 +9,13 @@ interface InputProps extends ComponentPropsWithRef<'input'> {
 
 // ============================== Component ==============================
 
-function PromptInput({ isError = false, ...props }: InputProps) {
-  useEffect;
-  return <StyledInput {...props} isError={isError} />;
+function PromptInput({ isError = false, style, ...props }: InputProps) {
+  const memoizedStyle = useMemo(() => {
+    if (!style) return {};
+    return { ...style };
+  }, [style]);
+
+  return <StyledInput {...props} isError={isError} style={memoizedStyle} />;
 }
 
 // ============================== Styled Components ==============================
