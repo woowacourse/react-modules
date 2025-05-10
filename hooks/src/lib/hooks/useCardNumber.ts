@@ -2,15 +2,8 @@ import {useState} from 'react';
 import {ValidationType} from '../../types/validation';
 import {ERROR_MESSAGE, defaultValidationValue} from '../constants/validation';
 import {isEmpty, isLengthBetween, isPositiveInteger} from '../utils/validation';
-import useCardBrand from './useCardBrand';
-
-type CardBrand =
-  | 'Diners'
-  | 'AMEX'
-  | 'Visa'
-  | 'MasterCard'
-  | 'Union'
-  | undefined;
+import {getCardBrand} from '../feature/getCardBrand';
+import {formatCardNumberBlocks} from '../feature/formatCardNumberBlocks';
 
 const MIN_LENGTH = 14;
 const MAX_LENGTH = 16;
@@ -19,8 +12,12 @@ const useCardNumber = () => {
   const [cardNumber, setCardNumber] = useState('');
   const [cardNumberValidationResult, setCardNumberValidationResult] =
     useState<ValidationType>(defaultValidationValue);
-  const [cardBrand, setCardBrand] = useState<CardBrand>();
-  const {findBrand} = useCardBrand();
+
+  const cardBrand = cardNumberValidationResult.isError
+    ? undefined
+    : getCardBrand(cardNumber);
+
+  const formattingCardNumber = formatCardNumberBlocks(cardNumber);
 
   const onChange = (value: string) => {
     validation(value);
@@ -53,10 +50,15 @@ const useCardNumber = () => {
     }
 
     setCardNumberValidationResult(defaultValidationValue);
-    setCardBrand(findBrand(value));
   };
 
-  return {cardBrand, onChange, cardNumber, cardNumberValidationResult};
+  return {
+    onChange,
+    cardNumber,
+    cardNumberValidationResult,
+    cardBrand,
+    formattingCardNumber,
+  };
 };
 
 export default useCardNumber;
