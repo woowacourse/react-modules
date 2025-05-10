@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import {
   ModalBackground,
   ModalContainer,
@@ -21,10 +22,22 @@ const Modal = ({
   position,
   title,
   showCloseButton,
-  size,
+  size = 'small',
   onClose,
   onBackdropClick,
 }: ModalPropsType) => {
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        onClose();
+      }
+    };
+    if (isOpen) document.addEventListener('keydown', handleKeyDown);
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [isOpen]);
+
   return (
     <>
       <ModalBackground
