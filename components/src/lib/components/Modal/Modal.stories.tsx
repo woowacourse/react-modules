@@ -7,10 +7,8 @@ import ModalTitle from "../ModalTitle/ModalTitle";
 import ModalCloseButton from "../ModalCloseButton/ModalCloseButton";
 import ModalBody from "../ModalBody/ModalBody";
 import ModalFooter from "../ModalFooter/ModalFooter";
-import Button from "../Button/Button";
 
 import useModal from "../../hooks/useModal";
-import Input from "../Input/Input";
 
 const meta = {
   title: "Modal",
@@ -85,9 +83,9 @@ export const Alert: Story = {
             </Modal.Header>
             <Modal.Body>아이디는 필수로 입력해야 합니다.</Modal.Body>
             <Modal.Footer direction="row" align="end" justify="end">
-              <Button color="dark" size="small">
+              <Modal.Button color="dark" size="small">
                 확인
-              </Button>
+              </Modal.Button>
             </Modal.Footer>
           </Modal.Content>
         </Modal>
@@ -117,12 +115,12 @@ export const Confirm: Story = {
             </Modal.Header>
             <Modal.Body>삭제하면 복구하실 수 없습니다.</Modal.Body>
             <Modal.Footer direction="row" align="end" justify="end">
-              <Button color="light" size="small">
+              <Modal.Button color="light" size="small">
                 취소
-              </Button>
-              <Button color="dark" size="small">
+              </Modal.Button>
+              <Modal.Button color="dark" size="small">
                 확인
-              </Button>
+              </Modal.Button>
             </Modal.Footer>
           </Modal.Content>
         </Modal>
@@ -151,15 +149,15 @@ export const Prompt: Story = {
               </Modal.Title>
             </Modal.Header>
             <Modal.Body>
-              <Input placeholder="쿠폰 번호 입력" />
+              <Modal.Input placeholder="쿠폰 번호 입력" />
             </Modal.Body>
             <Modal.Footer direction="row" align="end" justify="end">
-              <Button color="light" size="small">
+              <Modal.Button color="light" size="small">
                 취소
-              </Button>
-              <Button color="dark" size="small">
+              </Modal.Button>
+              <Modal.Button color="dark" size="small">
                 확인
-              </Button>
+              </Modal.Button>
             </Modal.Footer>
           </Modal.Content>
         </Modal>

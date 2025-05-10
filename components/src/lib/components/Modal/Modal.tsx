@@ -11,6 +11,8 @@ import { ModalCompoundComponent } from "./Modal.types";
 
 import { StyledModal } from "./Modal.styled";
 import { StyledModalOverlay } from "../ModalOverlay/ModalOverlay.styled";
+import Button from "../Button/Button";
+import Input from "../Input/Input";
 
 const Modal: ModalCompoundComponent = ({ children, onClose, ...props }) => {
   return (
@@ -23,13 +25,14 @@ const Modal: ModalCompoundComponent = ({ children, onClose, ...props }) => {
   );
 };
 
-Modal.Overlay = ModalOverlay;
+Modal.useModal = useModal;
 Modal.Content = ModalContent;
 Modal.Header = ModalHeader;
 Modal.Title = ModalTitle;
 Modal.CloseButton = ModalCloseButton;
 Modal.Body = ModalBody;
 Modal.Footer = ModalFooter;
-Modal.useModal = useModal;
+Modal.Button = Button;
+Modal.Input = Input;
 
 export default Modal;

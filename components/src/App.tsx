@@ -1,7 +1,5 @@
 // import { Modal } from "@kaori-killer/modal-component";
 import Modal from "../src/lib/components/Modal/Modal";
-import Button from "./lib/components/Button/Button";
-import Input from "./lib/components/Input/Input";
 
 function App() {
   const { isOpen, handleOpen, handleClose } = Modal.useModal();
@@ -18,15 +16,15 @@ function App() {
             <Modal.CloseButton onClose={handleClose} />
           </Modal.Header>
           <Modal.Body>
-            <Input placeholder="쿠폰 번호 입력" />
+            <Modal.Input placeholder="쿠폰 번호 입력" />
           </Modal.Body>
           <Modal.Footer direction="row" align="end" justify="center">
-            <Button color="light" size="small">
+            <Modal.Button color="light" size="small">
               확인
-            </Button>
-            <Button color="dark" size="small" onClick={handleClose}>
+            </Modal.Button>
+            <Modal.Button color="dark" size="small" onClick={handleClose}>
               취소
-            </Button>
+            </Modal.Button>
           </Modal.Footer>
         </Modal.Content>
       </Modal>
