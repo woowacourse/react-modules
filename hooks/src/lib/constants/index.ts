@@ -11,7 +11,7 @@ export const MAX_MONTH = 12;
 export const CURRENT_YEAR = new Date().getFullYear() % 100;
 
 export const MAX_LENGTH = {
-  CARD_NUMBER: 4,
+  CARD_NUMBER: 16,
   EXPIRATION_DATE: 2,
   CVC_NUMBER: 3,
   PASSWORD: 2,
