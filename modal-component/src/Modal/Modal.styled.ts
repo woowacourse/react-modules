@@ -110,8 +110,7 @@ const ModalButton = styled.button<ModalButtonProps>`
   cursor: pointer;
   font-size: 16px;
   &:focus {
-    border: none;
-    outline: none;
+    outline: 1px solid #000000;
   }
 `;
 

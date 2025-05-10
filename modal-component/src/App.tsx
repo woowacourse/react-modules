@@ -24,7 +24,6 @@ function App() {
           <div> 내용2</div>
           <div> 내용3</div>
         </Modal.Contents>
-        <Modal.CloseButton />
         <Modal.ButtonContainer position="center">
           <Modal.Button
             title="확인"
@@ -48,6 +47,7 @@ function App() {
             }}
           />
         </Modal.ButtonContainer>
+        <Modal.CloseButton />
       </Modal>
     </>
   );
