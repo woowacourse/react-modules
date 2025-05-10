@@ -13,6 +13,7 @@ import SecondaryButton from './SecondaryButton';
 import Title from './Title';
 import { ModalPositionType, ModalProps, ModalSizeType } from './types';
 import ModalProvider, { useModalContext } from './ModalProvider';
+import ButtonWrapper from './ButtonWrapper';
 
 function ModalContainer({
   position = 'center',
@@ -107,6 +108,7 @@ const Modal = Object.assign(ModalProvider, {
   ButtonTrigger,
   CloseButton,
   Title,
+  ButtonWrapper,
   PrimaryButton,
   SecondaryButton,
 });

@@ -1,4 +1,3 @@
-import styled from '@emotion/styled';
 import Modal from './modal/Modal';
 
 function App() {
@@ -14,22 +13,16 @@ function App() {
 
         <div>컨텐츠</div>
 
-        <ButtonWrapper>
+        <Modal.ButtonWrapper direction="column">
           <Modal.PrimaryButton
             label="동의하고 저장하기"
             onClick={() => alert('클릭됨')}
           />
           <Modal.SecondaryButton label="닫기" onClick={() => {}} />
-        </ButtonWrapper>
+        </Modal.ButtonWrapper>
       </Modal.Container>
     </Modal>
   );
 }
-
-const ButtonWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-`;
 
 export default App;
