@@ -1,9 +1,10 @@
-import { ComponentProps, createContext, useCallback, useContext, useEffect } from 'react';
+import { ComponentProps, useCallback, useEffect } from 'react';
 
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 
 import Portal from './Portal';
+import { ModalContext, useModalContext } from './useModalContext';
 
 import closeIcon from '../../assets/Close.svg';
 
@@ -69,18 +70,6 @@ type ModalDescriptionProps = {
    * The description of the modal
    */
   description?: string;
-};
-
-const ModalContext = createContext<ModalProps | undefined>(undefined);
-
-const useModalContext = () => {
-  const props = useContext(ModalContext);
-
-  if (!props) {
-    throw new Error('useModalContext must be used within a ModalProvider');
-  }
-
-  return props;
 };
 
 const ModalBackdrop = ({ closeByBackdrop = true }: ModalBackdropProps) => {
