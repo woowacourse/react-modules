@@ -11,6 +11,7 @@ function App() {
         <Modal.CloseButton />
 
         <div>컨텐츠</div>
+        <Modal.PromptInput />
 
         <Modal.ButtonWrapper direction="column">
           <Modal.PrimaryButton

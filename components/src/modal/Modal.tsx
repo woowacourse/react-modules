@@ -13,6 +13,7 @@ import SecondaryButton from './SecondaryButton';
 import Title from './Title';
 import ModalProvider, { useModalContext } from './ModalProvider';
 import ButtonWrapper from './ButtonWrapper';
+import PromptInput from './PromptInput';
 
 // ============================== Types ==============================
 
@@ -127,6 +128,7 @@ const Modal = Object.assign(ModalProvider, {
   ButtonTrigger,
   CloseButton,
   Title,
+  PromptInput,
   ButtonWrapper,
   PrimaryButton,
   SecondaryButton,
