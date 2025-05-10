@@ -13,7 +13,7 @@ export const MODAL_CONTAINER_POSITION_STYLES: Record<
   `,
 };
 
-export const MODAL_CONTAINER_RESPONSIVE_WIDTH_STYLES: Record<
+export const MODAL_CONTENT_RESPONSIVE_WIDTH_STYLES: Record<
   ModalPositionType,
   SerializedStyles
 > = {
@@ -25,7 +25,7 @@ export const MODAL_CONTAINER_RESPONSIVE_WIDTH_STYLES: Record<
   `,
 };
 
-export const MODAL_WRAPPER_POSITION_STYLES: Record<
+export const MODAL_CONTENT_POSITION_STYLES: Record<
   ModalPositionType,
   SerializedStyles
 > = {
@@ -42,7 +42,7 @@ export const MODAL_WRAPPER_POSITION_STYLES: Record<
   `,
 };
 
-export const MODAL_WRAPPER_SIZE_STYLES: Record<
+export const MODAL_CONTENT_SIZE_STYLES: Record<
   ModalSizeType,
   SerializedStyles
 > = {

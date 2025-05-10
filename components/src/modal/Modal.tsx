@@ -4,9 +4,9 @@ import CloseButton from './CloseButton';
 import useClickOutside from './hooks/useClickOutside';
 import {
   MODAL_CONTAINER_POSITION_STYLES,
-  MODAL_CONTAINER_RESPONSIVE_WIDTH_STYLES,
-  MODAL_WRAPPER_POSITION_STYLES,
-  MODAL_WRAPPER_SIZE_STYLES,
+  MODAL_CONTENT_POSITION_STYLES,
+  MODAL_CONTENT_RESPONSIVE_WIDTH_STYLES,
+  MODAL_CONTENT_SIZE_STYLES,
 } from './Modal.styles';
 import PrimaryButton from './PrimaryButton';
 import SecondaryButton from './SecondaryButton';
@@ -31,9 +31,9 @@ function ModalContainer({
   return (
     open && (
       <StyledModalContainer position={position} style={memoizedStyle}>
-        <ModalWrapper position={position} size={size} ref={modalRef}>
+        <ModalContent position={position} size={size} ref={modalRef}>
           {children}
-        </ModalWrapper>
+        </ModalContent>
       </StyledModalContainer>
     )
   );
@@ -54,7 +54,7 @@ const StyledModalContainer = styled.div<{ position: ModalPositionType }>`
   ${(props) => MODAL_CONTAINER_POSITION_STYLES[props.position]}
 `;
 
-const ModalWrapper = styled.div<{
+const ModalContent = styled.div<{
   position: ModalPositionType;
   size: ModalSizeType;
 }>`
@@ -67,11 +67,11 @@ const ModalWrapper = styled.div<{
   box-sizing: border-box;
   background-color: white;
 
-  ${(props) => MODAL_WRAPPER_SIZE_STYLES[props.size]}
-  ${(props) => MODAL_WRAPPER_POSITION_STYLES[props.position]}
+  ${(props) => MODAL_CONTENT_SIZE_STYLES[props.size]}
+  ${(props) => MODAL_CONTENT_POSITION_STYLES[props.position]}
 
   @media (max-width: 600px) {
-    ${(props) => MODAL_CONTAINER_RESPONSIVE_WIDTH_STYLES[props.position]};
+    ${(props) => MODAL_CONTENT_RESPONSIVE_WIDTH_STYLES[props.position]};
   }
 `;
 
