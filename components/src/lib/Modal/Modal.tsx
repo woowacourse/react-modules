@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import { ReactNode, useRef, useEffect } from "react";
 import {
   ModalBackDrop,
   ModalContainer,
@@ -19,9 +19,49 @@ interface ModalProps {
 }
 
 const Modal = ({ isOpen, children, position, size = "medium" }: ModalProps) => {
+  const modalRef = useRef<HTMLDivElement>(null);
+
+  const focusableSelectors = [
+    "a[href]",
+    "area[href]",
+    "input:not([disabled])",
+    "select:not([disabled])",
+    "textarea:not([disabled])",
+    "button:not([disabled])",
+    '[tabindex]:not([tabindex="-1"])',
+  ];
+
+  useEffect(() => {
+    if (!isOpen || !modalRef.current) return;
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key !== "Tab") return;
+
+      const elements = modalRef.current!.querySelectorAll<HTMLElement>(
+        focusableSelectors.join(",")
+      );
+      const focusables = Array.from(elements);
+      if (focusables.length === 0) return;
+
+      const first = focusables[0];
+      const last = focusables[focusables.length - 1];
+      const active = document.activeElement;
+
+      if (!e.shiftKey && active === last) {
+        e.preventDefault();
+        first.focus();
+      } else if (e.shiftKey && active === first) {
+        e.preventDefault();
+        last.focus();
+      }
+    };
+
+    document.addEventListener("keydown", handleKeyDown);
+    return () => document.removeEventListener("keydown", handleKeyDown);
+  }, [isOpen]);
   return isOpen ? (
     <ModalBackDrop position={position}>
-      <ModalContainer size={size} position={position}>
+      <ModalContainer ref={modalRef} size={size} position={position}>
         {children}
       </ModalContainer>
     </ModalBackDrop>
