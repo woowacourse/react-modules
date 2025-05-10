@@ -24,7 +24,7 @@ const cardExpiryDateConditions = {
 
 const cardExpiryDateValidationRules: ValidationRule[] = [
   {
-    condition: commonConditions.hasLength(4),
+    condition: commonConditions.hasExactLength(4),
     errorMessage: "유효기간은 4자리여야 합니다.",
   },
   {
