@@ -3,8 +3,6 @@ import Modal from "./Modal";
 import Button from "../../modules/Button/Button";
 import { useState } from "react";
 import styled from "@emotion/styled";
-import CardCompany from "./CardCompany";
-import AgreeTermModal from "./AgreeTermModal";
 
 const meta: Meta<typeof Modal> = {
   title: "Components/Modal",
@@ -16,23 +14,14 @@ const meta: Meta<typeof Modal> = {
       control: { type: "radio" },
       options: ["center", "bottom"],
     },
+    size: {
+      description: "모달의 크기",
+      control: { type: "radio" },
+      options: ["small", "medium", "large"],
+    },
     isOpen: {
       description: "모달의 표시 여부",
       control: "boolean",
-    },
-    showCloseButton: {
-      description: "닫기 버튼 표시 여부",
-      control: "boolean",
-      defaultValue: false,
-    },
-    showConfirmButton: {
-      description: "확인 버튼 표시 여부",
-      control: "boolean",
-      defaultValue: false,
-    },
-    onClose: {
-      description: "모달이 닫힐 때 호출되는 함수",
-      action: "closed",
     },
     children: {
       description: "모달 내부에 표시할 콘텐츠",
@@ -46,10 +35,9 @@ type Story = StoryObj<typeof Modal>;
 
 export const Default: Story = {
   args: {
+    size: "medium",
     position: "center",
     isOpen: false,
-    showCloseButton: true,
-    showConfirmButton: false,
   },
   render: (args) => {
     const [isOpen, setIsOpen] = useState(args.isOpen);
@@ -65,19 +53,100 @@ export const Default: Story = {
     return (
       <>
         <ButtonWrap>
-          <Button onclick={openModal} />
+          <Button onClick={openModal}></Button>
         </ButtonWrap>
         <Modal
+          size={args.size}
           isOpen={isOpen}
           position={args.position}
           onClose={closeModal}
-          showCloseButton={args.showCloseButton}
-          showConfirmButton={args.showConfirmButton}
         >
-          <ModalContent>
-            <h3>기본 모달</h3>
-            <p>이것은 기본 모달 콘텐츠입니다.</p>
-          </ModalContent>
+          <Modal.Title>기본 모달</Modal.Title>
+          <Modal.Description>기본 모달입니다.</Modal.Description>
+          <Modal.Actions>
+            <Modal.CloseButton onClick={closeModal}>닫기</Modal.CloseButton>
+            <Modal.ConfirmButton onClick={closeModal}>확인</Modal.ConfirmButton>
+          </Modal.Actions>
+        </Modal>
+      </>
+    );
+  },
+};
+
+export const SmallModal: Story = {
+  args: {
+    size: "small",
+    position: "center",
+    isOpen: false,
+  },
+  render: (args) => {
+    const [isOpen, setIsOpen] = useState(args.isOpen);
+
+    const openModal = () => {
+      setIsOpen(true);
+    };
+
+    const closeModal = () => {
+      setIsOpen(false);
+    };
+
+    return (
+      <>
+        <ButtonWrap>
+          <Button onClick={openModal}></Button>
+        </ButtonWrap>
+        <Modal
+          size={args.size}
+          isOpen={isOpen}
+          position={args.position}
+          onClose={closeModal}
+        >
+          <Modal.Title>작은 기본 모달</Modal.Title>
+          <Modal.Description>작은 사이즈 기본 모달입니다.</Modal.Description>
+          <Modal.Actions>
+            <Modal.CloseButton onClick={closeModal}>닫기</Modal.CloseButton>
+            <Modal.ConfirmButton onClick={closeModal}>확인</Modal.ConfirmButton>
+          </Modal.Actions>
+        </Modal>
+      </>
+    );
+  },
+};
+
+export const LargeModal: Story = {
+  args: {
+    size: "large",
+    position: "center",
+    isOpen: false,
+  },
+  render: (args) => {
+    const [isOpen, setIsOpen] = useState(args.isOpen);
+
+    const openModal = () => {
+      setIsOpen(true);
+    };
+
+    const closeModal = () => {
+      setIsOpen(false);
+    };
+
+    return (
+      <>
+        <ButtonWrap>
+          <Button onClick={openModal}></Button>
+        </ButtonWrap>
+        <Modal
+          size={args.size}
+          isOpen={isOpen}
+          position={args.position}
+          onClose={closeModal}
+        >
+          <Modal.Title>큰 기본 모달</Modal.Title>
+          <Modal.Description>큰 사이즈의 기본 모달입니다.</Modal.Description>
+          <Modal.Actions>
+            <Modal.CloseButton onClick={closeModal}>닫기</Modal.CloseButton>
+            <Modal.ConfirmButton onClick={closeModal}>확인</Modal.ConfirmButton>
+          </Modal.Actions>
         </Modal>
       </>
     );
@@ -86,10 +155,9 @@ export const Default: Story = {
 
 export const BottomModal: Story = {
   args: {
+    size: "medium",
     position: "bottom",
     isOpen: false,
-    showConfirmButton: true,
-    showCloseButton: false,
   },
   render: (args) => {
     const [isOpen, setIsOpen] = useState(args.isOpen);
@@ -105,117 +173,27 @@ export const BottomModal: Story = {
     return (
       <>
         <ButtonWrap>
-          <Button onclick={openModal} />
+          <Button onClick={openModal}></Button>
         </ButtonWrap>
         <Modal
+          size={args.size}
           isOpen={isOpen}
           position={args.position}
           onClose={closeModal}
-          showCloseButton={args.showCloseButton}
-          showConfirmButton={args.showConfirmButton}
         >
-          <ModalContent>
-            <h3>하단 모달</h3>
-            <p>
-              이것은 화면 하단에 표시되는 모달입니다. 모바일 환경에서 많이
-              사용되는 UI 패턴입니다.
-            </p>
-          </ModalContent>
+          <Modal.Title>하단 모달</Modal.Title>
+          <Modal.Description>
+            화면 하단에 표시되는 모달입니다.
+          </Modal.Description>
+          <Modal.Actions>
+            <Modal.CloseButton onClick={closeModal}>닫기</Modal.CloseButton>
+            <Modal.ConfirmButton onClick={closeModal}>확인</Modal.ConfirmButton>
+          </Modal.Actions>
         </Modal>
       </>
     );
   },
 };
-
-export const TermsAgreementModal: Story = {
-  args: {
-    position: "center",
-    isOpen: false,
-    showConfirmButton: true,
-    showCloseButton: true,
-  },
-  render: (args) => {
-    const [isOpen, setIsOpen] = useState(args.isOpen);
-
-    const openModal = () => {
-      setIsOpen(true);
-    };
-
-    const closeModal = () => {
-      setIsOpen(false);
-    };
-
-    return (
-      <>
-        <ButtonWrap>
-          <Button onclick={openModal} />
-        </ButtonWrap>
-        <Modal
-          isOpen={isOpen}
-          position={args.position}
-          onClose={closeModal}
-          showCloseButton={args.showCloseButton}
-          showConfirmButton={args.showConfirmButton}
-        >
-          <AgreeTermModal />
-        </Modal>
-      </>
-    );
-  },
-};
-
-export const CompanyCardModal: Story = {
-  args: {
-    position: "center",
-    isOpen: false,
-    showCloseButton: true,
-    showConfirmButton: false,
-  },
-  render: (args) => {
-    const [isOpen, setIsOpen] = useState(args.isOpen);
-
-    const openModal = () => {
-      setIsOpen(true);
-    };
-
-    const closeModal = () => {
-      setIsOpen(false);
-    };
-
-    return (
-      <>
-        <ButtonWrap>
-          <Button onclick={openModal} />
-        </ButtonWrap>
-        <Modal
-          isOpen={isOpen}
-          position={args.position}
-          onClose={closeModal}
-          showCloseButton={args.showCloseButton}
-          showConfirmButton={args.showConfirmButton}
-        >
-          <CardCompany />
-        </Modal>
-      </>
-    );
-  },
-};
-
-const ModalContent = styled.div`
-  padding: 8px 0;
-
-  h3 {
-    margin-top: 0;
-    margin-bottom: 16px;
-    font-size: 18px;
-  }
-
-  p {
-    margin: 0;
-    font-size: 14px;
-    line-height: 1.5;
-  }
-`;
 
 const ButtonWrap = styled.div`
   position: absolute;

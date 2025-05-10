@@ -1,100 +1,105 @@
-import { ReactNode } from "react";
-import styled from "@emotion/styled";
+import { ReactNode, useRef, useEffect } from "react";
+import {
+  ModalBackDrop,
+  ModalContainer,
+  StyledTitle,
+  StyledDescription,
+  StyledInput,
+  ButtonWrap,
+  StyledCloseButton,
+  StyledConfirmButton,
+} from "./Modal.styles";
 
 interface ModalProps {
+  size?: "small" | "medium" | "large";
   position: "center" | "bottom";
   isOpen: boolean;
-  showCloseButton?: boolean;
-  showConfirmButton?: boolean;
   children: ReactNode;
   onClose: () => void;
 }
 
-const Modal = ({
-  position,
-  isOpen,
-  children,
-  onClose,
-  showCloseButton = false,
-  showConfirmButton = false,
-}: ModalProps) => {
-  return (
-    <>
-      {isOpen && (
-        <ModalBackDrop position={position}>
-          <ModalContainer position={position}>
-            {children}
-            <ButtonWrap>
-              {showConfirmButton && (
-                <ConfirmButton onClick={onClose}>확인</ConfirmButton>
-              )}
-              {showCloseButton && (
-                <CloseButton onClick={onClose}>닫기</CloseButton>
-              )}
-            </ButtonWrap>
-          </ModalContainer>
-        </ModalBackDrop>
-      )}
-    </>
-  );
+const Modal = ({ isOpen, children, position, size = "medium" }: ModalProps) => {
+  const modalRef = useRef<HTMLDivElement>(null);
+
+  const focusableSelectors = [
+    "a[href]",
+    "area[href]",
+    "input:not([disabled])",
+    "select:not([disabled])",
+    "textarea:not([disabled])",
+    "button:not([disabled])",
+    '[tabindex]:not([tabindex="-1"])',
+  ];
+
+  useEffect(() => {
+    if (!isOpen || !modalRef.current) return;
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key !== "Tab") return;
+
+      const elements = modalRef.current!.querySelectorAll<HTMLElement>(
+        focusableSelectors.join(",")
+      );
+      const focusables = Array.from(elements);
+      if (focusables.length === 0) return;
+
+      const first = focusables[0];
+      const last = focusables[focusables.length - 1];
+      const active = document.activeElement;
+
+      if (!e.shiftKey && active === last) {
+        e.preventDefault();
+        first.focus();
+      } else if (e.shiftKey && active === first) {
+        e.preventDefault();
+        last.focus();
+      }
+    };
+
+    document.addEventListener("keydown", handleKeyDown);
+    return () => document.removeEventListener("keydown", handleKeyDown);
+  }, [isOpen]);
+  return isOpen ? (
+    <ModalBackDrop position={position}>
+      <ModalContainer ref={modalRef} size={size} position={position}>
+        {children}
+      </ModalContainer>
+    </ModalBackDrop>
+  ) : null;
 };
 
+const Title = ({ children }: { children: ReactNode }) => (
+  <StyledTitle>{children}</StyledTitle>
+);
+
+const Description = ({ children }: { children: ReactNode }) => (
+  <StyledDescription>{children}</StyledDescription>
+);
+
+const Input = () => <StyledInput />;
+
+const Actions = ({ children }: { children: ReactNode }) => (
+  <ButtonWrap>{children}</ButtonWrap>
+);
+
+interface ButtonProps {
+  children: ReactNode;
+  onClick?: () => void;
+}
+
+const ConfirmButton = ({ children, onClick }: ButtonProps) => (
+  <StyledConfirmButton onClick={onClick}>{children}</StyledConfirmButton>
+);
+
+const CloseButton = ({ children, onClick }: ButtonProps) => (
+  <StyledCloseButton onClick={onClick}>{children}</StyledCloseButton>
+);
+
+Modal.Title = Title;
+Modal.Description = Description;
+Modal.Input = Input;
+Modal.Actions = Actions;
+Modal.ConfirmButton = ConfirmButton;
+Modal.CloseButton = CloseButton;
+
 export default Modal;
-
-const ModalBackDrop = styled.div<{ position: "center" | "bottom" }>`
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 2;
-  width: 100vw;
-  height: 100vh;
-  background-color: rgba(0, 0, 0, 0.35);
-  display: flex;
-  justify-content: center;
-  align-items: ${(props: { position: "center" | "bottom" }) =>
-    props.position === "center" ? "center" : "flex-end"};
-  padding: 0;
-`;
-const ModalContainer = styled.div<{ position: "center" | "bottom" }>`
-  z-index: 3;
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  width: ${(props) => (props.position === "bottom" ? "100%" : "60%")};
-  height: auto;
-  padding: 24px 32px;
-  border-radius: 8px;
-  background-color: #fff;
-`;
-
-const CloseButton = styled.button`
-  width: 100%;
-  padding: 8px 0px;
-  border: 1px solid #8b95a1;
-  text-align: center;
-  font-size: 15px;
-  font-weight: 700;
-  border-radius: 5px;
-  background: #fff;
-  color: #8b95a1;
-  cursor: pointer;
-`;
-
-const ConfirmButton = styled.button`
-  width: 100%;
-  padding: 8px 0px;
-  border: none;
-  text-align: center;
-  font-size: 15px;
-  font-weight: 700;
-  border-radius: 5px;
-  color: #fff;
-  background: #333;
-  cursor: pointer;
-`;
-
-const ButtonWrap = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-`;
