@@ -1,6 +1,7 @@
 import AlertModal from './lib/components/AlertModal';
 import ConfirmModal from './lib/components/ConfirmModal';
 import { Modal } from './lib/components/Modal';
+import PromptModal from './lib/components/PromptModal';
 import { useModal } from './lib/hooks/useModal';
 
 function App() {
@@ -16,6 +17,12 @@ function App() {
     isOpen: isOpenConfirmModal,
     handleOpenModal: handleOpenConfirmModal,
     handleCloseModal: handleCloseConfirmModal,
+  } = useModal();
+
+  const {
+    isOpen: isOpenPromptModal,
+    handleOpenModal: handleOpenPromptModal,
+    handleCloseModal: handleClosePromptModal,
   } = useModal();
 
   return (
@@ -58,6 +65,17 @@ function App() {
         >
           <p>삭제하면 복구하실 수 없습니다.</p>
         </ConfirmModal>
+      </div>
+      <div>
+        <button onClick={handleOpenPromptModal}>prompt 모달 버튼</button>
+        <PromptModal
+          isOpen={isOpenPromptModal}
+          onClose={handleClosePromptModal}
+          onConfirm={(value) => {
+            console.log('prompt 확인!:', value);
+          }}
+          title="쿠폰 번호를 입력해 주세요."
+        />
       </div>
     </>
   );
