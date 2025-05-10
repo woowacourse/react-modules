@@ -177,6 +177,7 @@ const Container = styled.div<{ position: "center" | "bottom"; size: "small" | "m
 	border-radius: 8px;
 	width: ${(props) => WIDTH_MAP[props.size]};
 	position: ${(props) => (props.position === "bottom" ? "absolute" : "relative")};
+	transform: ${(props) => props.position === "bottom" && "translate(-50%)"};
 	bottom: ${(props) => (props.position === "bottom" ? "0" : "auto")};
 `;
 
