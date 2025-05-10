@@ -64,6 +64,13 @@ type ModalTitleProps = {
   title: string;
 };
 
+type ModalDescriptionProps = {
+  /**
+   * The description of the modal
+   */
+  description?: string;
+};
+
 const ModalContext = createContext<ModalProps | undefined>(undefined);
 
 const useModalContext = () => {
@@ -111,6 +118,16 @@ const ModalContainer = ({
 
 const ModalTitle = ({ title }: ModalTitleProps) => {
   return <StyledModalTitle aria-label={title}>{title}</StyledModalTitle>;
+};
+
+const ModalDescription = ({ description }: ModalDescriptionProps) => {
+  return (
+    <>
+      {description && (
+        <StyledModalDescription aria-label={description}>{description}</StyledModalDescription>
+      )}
+    </>
+  );
 };
 
 const ModalCloseButton = () => {
@@ -180,6 +197,7 @@ export const Modal = (props: ModalProps) => {
 Modal.Backdrop = ModalBackdrop;
 Modal.Container = ModalContainer;
 Modal.Title = ModalTitle;
+Modal.Description = ModalDescription;
 Modal.CloseButton = ModalCloseButton;
 Modal.ButtonWrapper = ModalButtonWrapper;
 Modal.CancelButton = ModalCancelButton;
@@ -252,10 +270,14 @@ const StyledModalContainer = styled.div<{ modalZIndex: number } & ModalContainer
 
 const StyledModalTitle = styled.div`
   display: flex;
-  justify-content: space-between;
   align-items: center;
   font-size: 20px;
   font-weight: 600;
+`;
+
+const StyledModalDescription = styled.p`
+  font-size: 16px;
+  font-weight: 400;
 `;
 
 const StyledCloseButton = styled.button`
