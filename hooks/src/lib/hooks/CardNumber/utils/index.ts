@@ -4,7 +4,7 @@ import {
 } from "../../../../utils/validation";
 import { ErrorState, ValidationRule } from "../../../types";
 
-const cardNumberValidationRules: ValidationRule[] = [
+const cardNumberValidationRules: ValidationRule<string>[] = [
   {
     condition: commonConditions.isFilled,
     errorMessage: "카드 번호를 입력해주세요.",

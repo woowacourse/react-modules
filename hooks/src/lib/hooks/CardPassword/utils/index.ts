@@ -4,7 +4,7 @@ import {
   getErrorByRules,
 } from "../../../../utils/validation";
 
-const cardPasswordValidationRules: ValidationRule[] = [
+const cardPasswordValidationRules: ValidationRule<string>[] = [
   {
     condition: commonConditions.hasExactLength(2),
     errorMessage: "비밀번호는 2자리여야 합니다.",

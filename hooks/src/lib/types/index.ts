@@ -7,7 +7,7 @@ export interface BaseInputState {
   value: string;
 }
 
-export type ValidationRule = {
-  condition: (value: string) => boolean;
+export type ValidationRule<T> = {
+  condition: (value: T) => boolean;
   errorMessage: string;
 };

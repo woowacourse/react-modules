@@ -4,7 +4,7 @@ import {
 } from "../../../../utils/validation";
 import { ErrorState, ValidationRule } from "../../../types";
 
-const cvcValidationRules: ValidationRule[] = [
+const cvcValidationRules: ValidationRule<string>[] = [
   {
     condition: commonConditions.hasExactLength(3),
     errorMessage: "CVC는 3자리여야 합니다.",

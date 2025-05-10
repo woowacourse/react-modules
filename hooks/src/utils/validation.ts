@@ -10,9 +10,9 @@ export const commonConditions = {
     value.length === length,
 };
 
-export const getErrorByRules = (
-  value: string,
-  rules: ValidationRule[]
+export const getErrorByRules = <T>(
+  value: T,
+  rules: ValidationRule<T>[]
 ): ErrorState => {
   for (const { condition, errorMessage } of rules) {
     if (!condition(value)) {
