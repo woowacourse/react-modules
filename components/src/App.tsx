@@ -1,13 +1,15 @@
 import { useState } from 'react';
-import { Modal } from './lib';
+// import { Modal } from './lib';
 // import { Modal } from 'jurunghappy-modal';
 import './App.css';
-import AlertModal from './components/AlertModal/AlertModal';
-import ConfirmModal from './components/ConfirmModal/ConfirmModal';
-import PromptModal from './components/PromptModal/PromptModal';
+import { PromptModal } from 'jurunghappy-modal';
+// import AlertModal from './lib/components/AlertModal/AlertModal';
+// import ConfirmModal from './lib/components/ConfirmModal/ConfirmModal';
+// import PromptModal from './lib/components/PromptModal/PromptModal';
 
 function App() {
   const [isOpen, setIsOpen] = useState(false);
+  const [input, setInput] = useState('');
 
   const handleBackdropClick = (e: React.MouseEvent<HTMLDivElement>) => {
     if (e.target === e.currentTarget) {
@@ -17,12 +19,22 @@ function App() {
 
   return (
     <>
-      <button onClick={() => setIsOpen(true)}>AlertModal Open</button>
+      <button onClick={() => setIsOpen(true)}>Modal Open</button>
       <PromptModal
         isOpen={isOpen}
         position="center"
         size="large"
+        title="타이틀"
+        value={input}
         onClose={() => setIsOpen(false)}
+        onChange={(e) => {
+          setInput(e.target.value);
+          console.log(e.target.value);
+        }}
+        onSubmit={(e) => {
+          e.preventDefault();
+          console.log('submit');
+        }}
         onBackdropClick={handleBackdropClick}
       />
     </>
