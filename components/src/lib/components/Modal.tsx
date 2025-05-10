@@ -1,4 +1,4 @@
-import { createContext, useContext, MouseEvent, useEffect } from 'react';
+import { createContext, useContext } from 'react';
 import {
   ModalProps,
   ModalContextType,
@@ -7,26 +7,14 @@ import {
   ModalHeaderProps,
 } from '../types/Modal.type';
 import { ModalBackdrop, ModalFrame, ModalHeader, ModalCloseButton, ModalContent, ButtonBar } from './Modal.styles';
-import useModalCloseByEsc from '../hooks/useModalCloseByEsc';
+import useModalEvents from '../hooks/useModalEvent';
 
 const ModalContext = createContext<ModalContextType | undefined>(undefined);
 
 const Modal = ({ children, isOpen, onAfterOpen, onClose, position = 'center' }: ModalProps) => {
-  useModalCloseByEsc(onClose);
-
-  const handleCloseByBackdrop = (e: MouseEvent<HTMLDivElement>) => {
-    if (e.target === e.currentTarget) {
-      onClose();
-    }
-  };
-
-  useEffect(() => {
-    if (isOpen && onAfterOpen) {
-      onAfterOpen();
-    }
-  }, [isOpen, onAfterOpen]);
-
   if (!isOpen) return null;
+
+  const { handleCloseByBackdrop } = useModalEvents(isOpen, onClose, onAfterOpen);
 
   return (
     <ModalContext.Provider value={{ onClose, position }}>
