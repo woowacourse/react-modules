@@ -2,16 +2,6 @@ import { renderHook, act } from '@testing-library/react';
 import useCardNumbers from './useCardNumbers';
 import { ERROR_MESSAGE } from '../constants/errorMessage';
 
-test('4자리 숫자가 입력되면 정상 작동된다.', () => {
-  const { result } = renderHook(() => useCardNumbers());
-
-  act(() => {
-    result.current.handleCardNumbers('1234');
-  });
-
-  expect(result.current.error.errorMessage).toBe('');
-});
-
 test('숫자가 아닌 값을 validate 하면 에러 메시지가 세팅된다', () => {
   const { result } = renderHook(() => useCardNumbers());
 
@@ -106,4 +96,16 @@ describe('카드사 판별 테스트', () => {
       expect(result.current.cardBrand).toBe('UnionPay');
     }
   );
+
+  test('유효하지 않은 카드 번호를 입력할 경우 예외 메시지 반환', () => {
+    const { result } = renderHook(() => useCardNumbers());
+
+    act(() => {
+      result.current.handleCardNumbers('0000000000000000');
+    });
+
+    expect(result.current.error.errorMessage).toBe(
+      ERROR_MESSAGE.CARD_NUMBERS.INVALID_NUMBER
+    );
+  });
 });

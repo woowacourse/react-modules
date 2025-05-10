@@ -1,6 +1,11 @@
 import { useState } from 'react';
 import { ERROR_MESSAGE } from '../constants/errorMessage';
-import { isEmpty, isValidLength, isNumber } from '../utils/validate';
+import {
+  isEmpty,
+  isValidLength,
+  isNumber,
+  isValidCardBrand,
+} from '../utils/validate';
 import { isOverInputLength } from '../utils/overInputLength';
 import { initialError } from '../utils/initial';
 import { ErrorType } from '../types/errorType';
@@ -53,7 +58,7 @@ export default function useCardNumbers(): ValitationResult {
       return;
     }
     // 😱length 매개변수 수정 필요
-    if (!isValidLength(value, INPUT_RULE.CARD_NUMBERS.MAX_LENGTH)) {
+    if (!isValidLength(value, 16)) {
       updateError({
         isValid: true,
         errorMessage: ERROR_MESSAGE.CARD_NUMBERS.INVALID_LENGTH(
@@ -62,6 +67,15 @@ export default function useCardNumbers(): ValitationResult {
       });
       return;
     }
+
+    if (!isValidCardBrand(cardBrand)) {
+      updateError({
+        isValid: true,
+        errorMessage: ERROR_MESSAGE.CARD_NUMBERS.INVALID_NUMBER,
+      });
+      return;
+    }
+
     updateError({ isValid: false });
   };
 

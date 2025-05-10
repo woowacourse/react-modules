@@ -12,6 +12,10 @@ export const isValidLength = (value: string, length: number) => {
   return value.length === length;
 };
 
+export const isValidCardBrand = (brand: string) => {
+  return brand !== 'Unknown';
+};
+
 export const isValidMonth = (value: string) => {
   return (
     Number(value) > INPUT_RULE.EXPIRY_DATE.MONTH_MIN &&
