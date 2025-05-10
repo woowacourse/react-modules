@@ -2,7 +2,7 @@ import useOutsideClickRef from "../../hooks/useOutsideClickRef";
 import useKeyDown from "@/hooks/useKeyDown";
 import type { ModalDefaultProps } from "../types";
 import Button from "@/components/Button";
-import * as S from "./ConfirmModal.styled";
+import * as S from "@/styles/Typography.styled";
 import ContentModal from "../ContentModal";
 
 interface ConfirmModalProps extends ModalDefaultProps {
@@ -26,7 +26,7 @@ function ConfirmModal({
       size={size}
       hasCloseButton={false}
       modalRef={modalRef}
-      content={<S.ConfirmText>{confirmText}</S.ConfirmText>}
+      content={<S.ModalText>{confirmText}</S.ModalText>}
       buttonElements={[
         <Button
           autoFocus

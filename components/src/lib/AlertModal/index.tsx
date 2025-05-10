@@ -2,7 +2,7 @@ import useOutsideClickRef from "../../hooks/useOutsideClickRef";
 import useKeyDown from "@/hooks/useKeyDown";
 import type { ModalDefaultProps } from "../types";
 import Button from "@/components/Button";
-import * as S from "./AlertModal.styled";
+import * as S from "@/styles/Typography.styled";
 import ContentModal from "../ContentModal";
 
 interface AlertModalProps extends ModalDefaultProps {
@@ -24,7 +24,7 @@ function AlertModal({
       size={size}
       hasCloseButton={false}
       modalRef={modalRef}
-      content={<S.AlertText>{alertText}</S.AlertText>}
+      content={<S.ModalText>{alertText}</S.ModalText>}
       buttonElements={[
         <Button
           autoFocus
