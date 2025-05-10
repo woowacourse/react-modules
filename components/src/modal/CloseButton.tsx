@@ -1,13 +1,10 @@
 import styled from '@emotion/styled';
 import { CSSProperties, useMemo } from 'react';
+import { useModalContext } from './ModalProvider';
 
-function CloseButton({
-  style,
-  onClose,
-}: {
-  style?: CSSProperties;
-  onClose: () => void;
-}) {
+function CloseButton({ style }: { style?: CSSProperties }) {
+  const { onClose } = useModalContext();
+
   const memoizedStyle = useMemo(() => {
     if (!style) return {};
     return { ...style };

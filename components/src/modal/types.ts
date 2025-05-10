@@ -1,8 +1,6 @@
 import { CSSProperties } from 'react';
 
 export interface ModalProps {
-  open: boolean;
-  onClose: () => void;
   position?: ModalPositionType;
   size?: ModalSizeType;
   style?: CSSProperties;

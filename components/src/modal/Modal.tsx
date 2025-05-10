@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { PropsWithChildren, useMemo } from 'react';
+import { PropsWithChildren, useEffect, useMemo } from 'react';
 import CloseButton from './CloseButton';
 import useClickOutside from './hooks/useClickOutside';
 import {
@@ -12,16 +12,32 @@ import PrimaryButton from './PrimaryButton';
 import SecondaryButton from './SecondaryButton';
 import Title from './Title';
 import { ModalPositionType, ModalProps, ModalSizeType } from './types';
+import ModalProvider, { useModalContext } from './ModalProvider';
 
 function ModalContainer({
-  open,
-  onClose,
   position = 'center',
   size = 'medium',
   style,
   children,
 }: PropsWithChildren<ModalProps>) {
+  const { open, onClose } = useModalContext();
   const modalRef = useClickOutside<HTMLDivElement>(onClose);
+
+  useEffect(
+    function handleEscapeKeyClose() {
+      if (!open) return;
+
+      const handleKeydown = (event: KeyboardEvent) => {
+        if (event.key === 'Escape') onClose();
+      };
+
+      document.addEventListener('keydown', handleKeydown);
+      return () => {
+        document.removeEventListener('keydown', handleKeydown);
+      };
+    },
+    [open, onClose]
+  );
 
   const memoizedStyle = useMemo(() => {
     if (!style) return {};
@@ -30,13 +46,24 @@ function ModalContainer({
 
   return (
     open && (
-      <StyledModalContainer position={position} style={memoizedStyle}>
-        <ModalContent position={position} size={size} ref={modalRef}>
+      <StyledModalContainer position={position}>
+        <ModalContent
+          ref={modalRef}
+          position={position}
+          size={size}
+          style={memoizedStyle}
+        >
           {children}
         </ModalContent>
       </StyledModalContainer>
     )
   );
+}
+
+function ButtonTrigger({ children }: PropsWithChildren) {
+  const { onOpen } = useModalContext();
+
+  return <button onClick={onOpen}>{children}</button>;
 }
 
 const StyledModalContainer = styled.div<{ position: ModalPositionType }>`
@@ -75,10 +102,13 @@ const ModalContent = styled.div<{
   }
 `;
 
-export default {
+const Modal = Object.assign(ModalProvider, {
   Container: ModalContainer,
+  ButtonTrigger,
   CloseButton,
   Title,
   PrimaryButton,
   SecondaryButton,
-};
+});
+
+export default Modal;
