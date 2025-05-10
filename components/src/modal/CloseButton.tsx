@@ -22,6 +22,7 @@ function CloseButton({ style, className }: CloseButtonProps) {
   return (
     <StyledCloseButton
       type="button"
+      aria-label="모달 닫기 버튼"
       style={memoizedStyle}
       className={className}
       onClick={onClose}

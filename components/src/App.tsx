@@ -6,7 +6,7 @@ function App() {
       <Modal.ButtonTrigger>
         <button>열기</button>
       </Modal.ButtonTrigger>
-      <Modal.Content title="모달" showCloseButton={true}>
+      <Modal.Content title="모달" showCloseButton={false}>
         <div>컨텐츠</div>
         <Modal.PromptInput />
 

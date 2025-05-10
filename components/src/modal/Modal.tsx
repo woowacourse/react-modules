@@ -46,26 +46,85 @@ function ModalContainer({
     isClickOutsideEnabled
   );
 
-  useEffect(
-    function handleEscapeKeyClose() {
-      if (!open) return;
-
-      const handleKeydown = (event: KeyboardEvent) => {
-        if (event.key === 'Escape') onClose();
-      };
-
-      document.addEventListener('keydown', handleKeydown);
-      return () => {
-        document.removeEventListener('keydown', handleKeydown);
-      };
-    },
-    [open, onClose]
-  );
-
   const memoizedStyle = useMemo(() => {
     if (!style) return {};
     return { ...style };
   }, [style]);
+
+  useEffect(
+    function handleBodyScrollLock() {
+      if (open) {
+        document.body.style.overflow = 'hidden';
+      } else {
+        document.body.style.overflow = '';
+      }
+
+      return () => {
+        document.body.style.overflow = '';
+      };
+    },
+    [open]
+  );
+
+  useEffect(
+    function handleModalOpenEffects() {
+      if (!open) return;
+
+      const allFocusable = modalRef.current?.querySelectorAll<HTMLElement>(
+        'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+      );
+
+      const focusableList = Array.from(allFocusable || []).filter(
+        (element) =>
+          !element.hasAttribute('disabled') && element.tabIndex !== -1
+      );
+
+      console.log(allFocusable);
+
+      // 모달 열릴 때 첫 번째 포커스
+      if (allFocusable && allFocusable.length > 0) {
+        // 첫 번째 요소가 모달 닫기 버튼인 경우, 두 번째 요소에 포커스
+        if (allFocusable[0].getAttribute('aria-label') !== '모달 닫기 버튼') {
+          allFocusable[0].focus();
+        } else {
+          allFocusable[1]?.focus();
+        }
+      }
+
+      const handleKeyDown = (event: KeyboardEvent) => {
+        // ESC 키로 닫기
+        if (event.key === 'Escape') {
+          onClose();
+          return;
+        }
+
+        if (event.key !== 'Tab' || !focusableList.length) return;
+
+        const firstElement = focusableList[0];
+        const lastElement = focusableList[focusableList.length - 1];
+
+        if (event.shiftKey) {
+          // Shift + Tab
+          if (document.activeElement === firstElement) {
+            event.preventDefault();
+            lastElement.focus();
+          }
+        } else {
+          // Tab
+          if (document.activeElement === lastElement) {
+            event.preventDefault();
+            firstElement.focus();
+          }
+        }
+      };
+
+      document.addEventListener('keydown', handleKeyDown);
+      return () => {
+        document.removeEventListener('keydown', handleKeyDown);
+      };
+    },
+    [open, onClose]
+  );
 
   return (
     open && (
