@@ -1,5 +1,6 @@
 import { ComponentProps } from "react";
 import ConfirmModal from "../ConfirmModal/ConfirmModal";
+import styled from "@emotion/styled";
 
 type PromptModalProps = {
   title: string;
@@ -23,7 +24,7 @@ const PromptModal = ({
   return (
     <ConfirmModal
       title={title}
-      content={<input {...inputAttributes} />}
+      content={<StyledInput {...inputAttributes} />}
       position={position}
       size={size}
       hasCloseButton={hasCloseButton}
@@ -34,3 +35,10 @@ const PromptModal = ({
 };
 
 export default PromptModal;
+
+const StyledInput = styled.input`
+  width: 100%;
+  border-radius: 2px;
+  border: 1.015px solid #000;
+  padding: 8px 0;
+`;

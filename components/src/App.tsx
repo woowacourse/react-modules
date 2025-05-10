@@ -28,7 +28,7 @@ function App() {
           title="쿠폰 번호를 입력해 주세요."
           hasCloseButton={false}
           position="center"
-          size="small"
+          size="large"
           onClose={handleCloseModal}
           onConfirm={handleConfirm("PromptModal 확인")}
         />
