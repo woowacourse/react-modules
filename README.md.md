@@ -44,6 +44,16 @@
 - [ ] 카드사 식별 (AMEX, Diners, UnionPay 포함) 및 유효성 검사 로직 테스트
 - [ ] 카드 번호 포맷팅 기능 테스트
 
+- [ ] useCardNumber 훅 변경
+  - [ ] 카드번호 상태 단일 string으로 변경
+  - [ ] 카드번호 상태 변경 onChange 함수의 역할
+    - [ ] 1. 유효성 검증 (이 카드 번호가 숫자가 맞는지) > (validInput)
+    - [ ] 2. 카드 타입 (visa,master) > (카드 앞자리 숫자바탕으로 값 생성)
+    - [ ] 3. 파싱 기준 설정 (위에서 설정된 카드타입을 바탕으로 설정 후, onChange에 넣어주어야한다.)
+    - [ ] 4. 실제 useInputValue에서 나오는 setter를 이용해 값 업데이트
+  - [ ] 즉, useCardNumber 훅 내부에서 새로운 onChange 함수를 재정의하고 내부에서 위의 1~4까지를 진행한 후, return은 onChange로 한다.
+  - [ ] 1,2,3은 각각의 util성 함수로 제작
+
 ### 웹접근성
 
 ✅ 역할 정리
