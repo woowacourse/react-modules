@@ -33,8 +33,13 @@ function ModalContainer({
   style,
   children,
 }: PropsWithChildren<ModalProps>) {
-  const { open, onClose } = useModalContext();
-  const modalRef = useClickOutside<HTMLDivElement>(onClose);
+  const { role, open, onClose } = useModalContext();
+
+  const isClickOutsideEnabled = role !== 'alert-modal';
+  const modalRef = useClickOutside<HTMLDivElement>(
+    onClose,
+    isClickOutsideEnabled
+  );
 
   useEffect(
     function handleEscapeKeyClose() {

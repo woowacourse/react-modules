@@ -2,8 +2,7 @@ import Modal from './modal/Modal';
 
 function App() {
   return (
-    <Modal>
-      <h1>Component Modules</h1>
+    <Modal role="alert-modal">
       <Modal.ButtonTrigger>
         <button>열기</button>
       </Modal.ButtonTrigger>

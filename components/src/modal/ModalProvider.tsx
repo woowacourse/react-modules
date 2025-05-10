@@ -9,12 +9,14 @@ import {
 
 type ModalContextType = {
   open: boolean;
+  role: ModalProviderRoleType;
   onClose: () => void;
   onOpen: () => void;
 };
 
 const ModalContext = createContext<ModalContextType>({
   open: false,
+  role: 'modal',
   onClose: () => {},
   onOpen: () => {},
 });
@@ -23,21 +25,29 @@ export function useModalContext() {
   const context = useContext(ModalContext);
   if (!context) {
     throw new Error(
-      `Toggle compound components cannot be rendered outside the Toggle component`
+      'Modal의 하위 컴포넌트들은 Modal 컴포넌트 내부에서만 렌더링할 수 있습니다.'
     );
   }
   return context;
 }
 
-function ModalProvider({ children }: PropsWithChildren) {
+interface ModalProviderProps {
+  role?: ModalProviderRoleType;
+}
+type ModalProviderRoleType = 'modal' | 'alert-modal';
+
+function ModalProvider({
+  role = 'modal',
+  children,
+}: PropsWithChildren<ModalProviderProps>) {
   const [open, setOpen] = useState(false);
 
   const onClose = useCallback(() => setOpen(false), []);
   const onOpen = useCallback(() => setOpen(true), []);
 
   const value = useMemo(
-    () => ({ open, onClose, onOpen }),
-    [open, onClose, onOpen]
+    () => ({ role, open, onClose, onOpen }),
+    [role, open, onClose, onOpen]
   );
 
   return (
