@@ -1,13 +1,9 @@
 import { createContext, ReactNode } from "react";
-import { THEME_MAP, ThemeMode } from "../constants/theme";
+import { THEME_MAP, ThemeMode, ThemeType } from "../constants/theme";
 
 export interface ModalContextType {
   theme: ThemeMode;
-  currentTheme: {
-    background: string;
-    title: string;
-    icon: string;
-  };
+  currentTheme: ThemeType;
   onClose: () => void;
 }
 

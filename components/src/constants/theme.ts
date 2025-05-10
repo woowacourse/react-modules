@@ -5,6 +5,20 @@ export const MODAL_COLORS = {
   DARK_GRAY: "#333333BF",
 } as const;
 
+export type ThemeMode = "light" | "dark";
+export type ButtonVarient = "primary" | "secondary";
+export type ModalColor = (typeof MODAL_COLORS)[keyof typeof MODAL_COLORS];
+export interface ThemeType {
+  background: ModalColor;
+  title: ModalColor;
+  icon: ModalColor;
+}
+export interface ButtonColorType {
+  background: ModalColor;
+  text: ModalColor;
+  border: ModalColor;
+}
+
 export const THEME_MAP = {
   light: {
     background: MODAL_COLORS.WHITE,
@@ -16,7 +30,7 @@ export const THEME_MAP = {
     title: MODAL_COLORS.WHITE,
     icon: MODAL_COLORS.WHITE,
   },
-} as const;
+} as const satisfies Record<ThemeMode, ThemeType>;
 
 export const BUTTON_COLOR_MAP = {
   primary: {
@@ -29,8 +43,4 @@ export const BUTTON_COLOR_MAP = {
     text: MODAL_COLORS.DARK_GRAY,
     border: MODAL_COLORS.LIGHT_GRAY,
   },
-} as const;
-
-export type ThemeMode = "light" | "dark";
-export type ButtonVarient = "primary" | "secondary";
-export type ModalColor = (typeof MODAL_COLORS)[keyof typeof MODAL_COLORS];
+} as const satisfies Record<ButtonVarient, ButtonColorType>;
