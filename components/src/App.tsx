@@ -1,8 +1,4 @@
-import AlertModal from './lib/components/AlertModal';
-import { Modal } from './lib/components/common/Modal';
-import ConfirmModal from './lib/components/ConfirmModal';
-import PromptModal from './lib/components/PromptModal';
-import { useModal } from './lib/hooks/useModal';
+import { Modal, useModal, AlertModal, ConfirmModal, PromptModal } from './lib';
 
 function App() {
   const { isOpen, handleOpenModal, handleCloseModal } = useModal();
