@@ -27,7 +27,7 @@ export const Default: Story = {
   args: {
     children: "확인",
     onClick: () => {},
-    color: "light",
+    color: "dark",
     size: "small",
   },
 };
@@ -36,7 +36,7 @@ export const Delete: Story = {
   args: {
     children: "삭제",
     onClick: () => {},
-    color: "dark",
+    color: "light",
     size: "small",
   },
 };
