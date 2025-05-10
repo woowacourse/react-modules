@@ -2,6 +2,6 @@ export type CardBrand = "Visa" | "MasterCard" | "AMEX" | "Diners" | "UnionPay";
 
 export interface CardBrandRule {
   ranges: number[][];
-  maxLength: number;
+  length: number;
   formatNumbers: number[];
 }
