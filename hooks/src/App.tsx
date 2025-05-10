@@ -18,6 +18,7 @@ function App() {
         ))}
       </ul>
       <p>{errorMessage}</p>
+      <p>카드 네트워크: {cardNumbers.network}</p>
       <input
         value={cardNumbers.numbers.first}
         onBlur={(event) => handleCardNumber({ event, key: "first" })}

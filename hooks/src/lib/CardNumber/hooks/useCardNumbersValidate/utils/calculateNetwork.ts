@@ -23,7 +23,8 @@ const calculateNetwork = (
     return { name: "DINERS", length: 14 };
   }
 
-  if (51 <= calculatedValue && calculatedValue < 55)
+  calculatedValue = parseInt(value.slice(0, 6), 10);
+  if (622126 <= calculatedValue && calculatedValue < 622925)
     return { name: "UNION_PAY", length: 16 };
 
   return { name: "NOTHING", length: 16 };
