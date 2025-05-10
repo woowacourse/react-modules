@@ -1,7 +1,11 @@
 const splitByBlocks = (blockSizes: number[], cardNumber: string) => {
-  return blockSizes.map((size, idx) =>
-    cardNumber.slice(size * idx, size * (idx + 1))
-  );
+  let result: string[] = [];
+  let start = 0;
+  for (const size of blockSizes) {
+    result.push(cardNumber.slice(start, start + size));
+    start += size;
+  }
+  return result;
 };
 
 export const formatCardNumberBlocks = (cardNumber: string) => {
