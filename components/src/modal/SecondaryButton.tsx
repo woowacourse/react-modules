@@ -11,10 +11,9 @@ function SecondaryButton({
   style?: CSSProperties;
 }) {
   const memoizedStyle = useMemo(() => {
-    return {
-      ...style,
-    };
-  }, [JSON.stringify(style)]);
+    if (!style) return {};
+    return { ...style };
+  }, [style]);
 
   return (
     <SecondaryButtonContainer style={memoizedStyle} onClick={onClick}>

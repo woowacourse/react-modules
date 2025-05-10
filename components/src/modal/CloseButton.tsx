@@ -9,10 +9,9 @@ function CloseButton({
   onClose: () => void;
 }) {
   const memoizedStyle = useMemo(() => {
-    return {
-      ...style,
-    };
-  }, [JSON.stringify(style)]);
+    if (!style) return {};
+    return { ...style };
+  }, [style]);
 
   return (
     <StyledCloseButton type="button" style={memoizedStyle} onClick={onClose}>

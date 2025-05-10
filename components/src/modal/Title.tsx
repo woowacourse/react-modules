@@ -9,10 +9,9 @@ function Title({
   children: ReactNode;
 }) {
   const memoizedStyle = useMemo(() => {
-    return {
-      ...style,
-    };
-  }, [JSON.stringify(style)]);
+    if (!style) return {};
+    return { ...style };
+  }, [style]);
 
   return <StyledTitle style={memoizedStyle}>{children}</StyledTitle>;
 }
