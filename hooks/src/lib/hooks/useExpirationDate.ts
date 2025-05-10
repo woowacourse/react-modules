@@ -34,7 +34,7 @@ const useExpirationDate = () => {
   };
 
   const validation = (label: string, value: string) => {
-    if (!value || isEmpty(value)) {
+    if (isEmpty(value)) {
       setExpirationDateValidationResult((prev) => ({
         ...prev,
         [label]: defaultValidationValue,

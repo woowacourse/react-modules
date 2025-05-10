@@ -25,7 +25,7 @@ const useCardNumber = () => {
   };
 
   const validation = (value: string) => {
-    if (!value || isEmpty(value)) {
+    if (isEmpty(value)) {
       setCardNumberValidationResult(defaultValidationValue);
       return;
     }
