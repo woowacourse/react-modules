@@ -15,11 +15,13 @@ describe("useCardNumber", () => {
   it("카드 번호에 숫자 이외의 입력 값은 입력되지 않는다.", () => {
     const { result } = renderHook(() => useCardNumber());
 
-    const userInput = "ㅁ";
-    act(() => {
-      result.current.onchange(userInput);
+    const nonNumericInputs = ["ㅁ", "abc", "@#$", "123abc", " "];
+    nonNumericInputs.forEach((input) => {
+      act(() => {
+        result.current.onchange(input);
+      });
+      expect(result.current.value).toBe("");
     });
-    expect(result.current.value).toBe("");
   });
 
   it("카드 번호를 입력하지 않으면 에러가 발생한다.", () => {
