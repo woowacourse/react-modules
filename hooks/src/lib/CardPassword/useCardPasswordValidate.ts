@@ -1,7 +1,5 @@
 import { useState } from "react";
-import validateNumber from "../utils/validateNumber";
-import validateMaxLength from "../utils/validateMaxLength";
-import { validationMessages } from "../../constants/validationMessages";
+
 import { checkBasicValidation } from "../utils/checkBasicValidation";
 
 const useCardPasswordValidate = () => {

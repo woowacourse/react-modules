@@ -1,5 +1,6 @@
-import validateNumber from "./validateNumber";
 import validateMaxLength from "./validateMaxLength";
+import validateNumber from "./validateNumber";
+
 import { validationMessages } from "../../constants/validationMessages";
 
 type ValidationResult = {

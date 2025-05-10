@@ -1,11 +1,9 @@
 import { useState } from "react";
 
-import validateNumber from "../utils/validateNumber";
-import validateMaxLength from "../utils/validateMaxLength";
 import validateRange from "../utils/validateRange";
+import { checkBasicValidation } from "../utils/checkBasicValidation";
 
 import { validationMessages } from "../../constants/validationMessages";
-import { checkBasicValidation } from "../utils/checkBasicValidation";
 
 type CardExpireDate = {
   month: string;
