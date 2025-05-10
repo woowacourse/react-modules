@@ -16,6 +16,7 @@ import {
 } from './types/props';
 import TextButton from './components/TextButton';
 import useAutoFocus from './hooks/useAutoFocus';
+import handleFocusWrap from './utils/handleFocusWrap';
 
 const ModalContext = createContext<{ onClose: () => void }>({ onClose: () => {} });
 
@@ -56,7 +57,12 @@ const Content = ({
   useAutoFocus(contentRef);
 
   return (
-    <S.ModalContent ref={contentRef} position={position} size={size} {...props}>
+    <S.ModalContent
+      ref={contentRef}
+      position={position}
+      size={size}
+      onKeyDown={(e) => handleFocusWrap(e, contentRef)}
+      {...props}>
       {hasTopCloseButton && <CloseIconButton data-testid="modal-close" onClick={() => onClose()} />}
       {children}
     </S.ModalContent>
@@ -87,6 +93,7 @@ const AlertContent = ({
       ref={contentRef}
       position={position}
       size={size}
+      onKeyDown={(e) => handleFocusWrap(e, contentRef)}
       style={{
         display: 'flex',
         flexDirection: 'column',
@@ -134,6 +141,7 @@ const ConfirmContent = ({
       ref={contentRef}
       position={position}
       size={size}
+      onKeyDown={(e) => handleFocusWrap(e, contentRef)}
       style={{
         display: 'flex',
         flexDirection: 'column',
@@ -194,6 +202,7 @@ const PromptContent = ({
       ref={contentRef}
       position={position}
       size={size}
+      onKeyDown={(e) => handleFocusWrap(e, contentRef)}
       style={{
         display: 'flex',
         flexDirection: 'column',
