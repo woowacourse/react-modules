@@ -7,10 +7,9 @@ export const MODAL_CONTAINER_POSITION_STYLES: Record<
 > = {
   center: css``,
   bottom: css`
-    bottom: 0;
-    margin-bottom: 0;
     width: 100%;
     max-width: 100%;
+    align-items: flex-end;
   `,
 };
 
@@ -35,6 +34,8 @@ export const MODAL_WRAPPER_POSITION_STYLES: Record<
     border-radius: 8px;
   `,
   bottom: css`
+    width: 100%;
+
     gap: 16px;
     border-top-right-radius: 8px;
     border-top-left-radius: 8px;

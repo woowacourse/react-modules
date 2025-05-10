@@ -18,21 +18,12 @@ function ModalContainer({
   style,
   children,
 }: PropsWithChildren<ModalProps>) {
-  const modalRef = useRef<HTMLDialogElement>(null);
+  const modalRef = useRef<HTMLDivElement>(null);
 
   const memoizedStyle = useMemo(() => {
-    return {
-      ...style,
-    };
-  }, [JSON.stringify(style)]);
-
-  useEffect(() => {
-    if (open) {
-      modalRef.current?.showModal();
-    } else {
-      modalRef.current?.close();
-    }
-  }, [open]);
+    if (!style) return {};
+    return { ...style };
+  }, [style]);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -51,46 +42,48 @@ function ModalContainer({
   }, [open, onClose]);
 
   return (
-    <StyledModalContainer
-      onClose={onClose}
-      position={position}
-      style={memoizedStyle}
-      ref={modalRef}
-    >
-      <ModalWrapper position={position}>{children}</ModalWrapper>
-    </StyledModalContainer>
+    open && (
+      <StyledModalContainer
+        position={position}
+        style={memoizedStyle}
+        ref={modalRef}
+      >
+        <ModalWrapper position={position}>{children}</ModalWrapper>
+      </StyledModalContainer>
+    )
   );
 }
 
-const StyledModalContainer = styled.dialog<{ position: ModalPositionType }>`
-  box-sizing: border-box;
-  min-width: 400px;
-  padding: 0;
-  position: relative;
-  background-color: transparent;
-  border: none;
+const StyledModalContainer = styled.div<{ position: ModalPositionType }>`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.35);
 
   ${(props) => MODAL_CONTAINER_POSITION_STYLES[props.position]}
-
-  &::backdrop {
-    background-color: #000000;
-    opacity: 0.35;
-  }
-
-  @media (max-width: 600px) {
-    width: ${(props) =>
-      MODAL_CONTAINER_RESPONSIVE_WIDTH_STYLES[props.position]};
-  }
 `;
 
 const ModalWrapper = styled.div<{ position: ModalPositionType }>`
+  min-width: 400px;
   display: flex;
   flex-direction: column;
 
+  position: relative;
   padding: 24px 32px;
+  box-sizing: border-box;
   background-color: white;
 
   ${(props) => MODAL_WRAPPER_POSITION_STYLES[props.position]}
+
+  @media (max-width: 600px) {
+    ${(props) => MODAL_CONTAINER_RESPONSIVE_WIDTH_STYLES[props.position]};
+  }
 `;
 
 export default {
