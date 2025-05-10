@@ -1,17 +1,13 @@
-import {
-  BackDrop,
-  ModalLayout,
-  CloseIcon,
-  ModalTitle,
-  ModalContents,
-  ModalButton,
-  ModalButtonContainer,
-  ModalInput,
-} from './Modal.styled';
+import { BackDrop, ModalLayout } from './Modal.styled';
 import { useEffect, useRef } from 'react';
 import { createContext } from 'react';
 import { createPortal } from 'react-dom';
-import useModalContext from './hooks/useModalContext';
+import ButtonContainer from './ButtonContainer';
+import Contents from './Contents';
+import Title from './Title';
+import Button from './Button';
+import Input from './Input';
+import CloseButton from './CloseButton';
 
 type ModalProps = {
   isOpen: boolean;
@@ -98,84 +94,6 @@ const Modal = ({
         )}
     </>
   );
-};
-
-interface ModalTitleProps {
-  title: string;
-}
-
-const Title = ({ title }: ModalTitleProps) => {
-  return <ModalTitle>{title}</ModalTitle>;
-};
-
-const CloseButton = () => {
-  const modalContext = useModalContext();
-
-  return <CloseIcon onClick={modalContext.onClose} />;
-};
-
-interface ModalContentsProps {
-  children: React.ReactNode;
-}
-
-const Contents = ({ children }: ModalContentsProps) => {
-  return <ModalContents>{children}</ModalContents>;
-};
-
-type ModalButtonContainerProps = {
-  position?: 'left' | 'right' | 'center';
-  children: React.ReactNode;
-};
-const ButtonContainer = ({
-  position = 'right',
-  children,
-}: ModalButtonContainerProps) => {
-  return (
-    <ModalButtonContainer $position={position}>{children}</ModalButtonContainer>
-  );
-};
-
-type ButtonProps = {
-  title: string;
-  backgroundColor?: string;
-  textColor?: string;
-  size?: 'small' | 'medium' | 'large';
-  onClick?: () => void;
-  border?: string;
-};
-const Button = ({
-  title,
-  backgroundColor,
-  textColor,
-  size,
-  border,
-  onClick,
-}: ButtonProps) => {
-  const { onClose } = useModalContext();
-
-  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-    event.stopPropagation();
-    if (onClick) {
-      onClick();
-    }
-    onClose();
-  };
-
-  return (
-    <ModalButton
-      $backgroundColor={backgroundColor}
-      $textColor={textColor}
-      $size={size}
-      $border={border}
-      onClick={handleClick}
-    >
-      {title}
-    </ModalButton>
-  );
-};
-
-const Input = ({ placeholder }) => {
-  return <ModalInput placeholder={placeholder} />;
 };
 
 Modal.Title = Title;
