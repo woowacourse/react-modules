@@ -27,7 +27,11 @@
 }
 
 .modalContents {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
   padding: 24px 32px;
+  box-sizing: border-box;
   background: white;
   color: black;
   border-radius: 8px;
