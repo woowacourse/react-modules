@@ -37,7 +37,6 @@ export const StyledModalContent = styled.div<ModalContentProps>`
   padding: 24px 32px;
   min-height: 216px;
   background-color: #fff;
-  border: 1px solid red;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
