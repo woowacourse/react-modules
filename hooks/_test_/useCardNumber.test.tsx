@@ -7,61 +7,63 @@ describe("useCardNumber 테스트", () => {
     const { result } = renderHook(() => useCardNumber());
 
     act(() => {
-      result.current.handleCardNumber({
-        input1: "1234",
-        input2: "5678",
-        input3: "9012",
-        input4: "3456",
-      });
+      result.current.handleCardNumberValidation("1234-5678-1234-5678");
     });
 
-    expect(result.current.isValid).toEqual({
-      input1: true,
-      input2: true,
-      input3: true,
-      input4: true,
-    });
+    expect(result.current.isValid).toEqual(true);
     expect(result.current.errorMessage).toBe("");
   });
 
-  it("숫자가 아닌 값이 포함된 경우, 해당 input만 false가 되어야 하며 에러 메시지가 설정되어야 한다", () => {
+  it("숫자가 아닌 값이 포함된 경우, isValid 값이 false가 되어야 하며 에러 메시지가 설정되어야 한다", () => {
     const { result } = renderHook(() => useCardNumber());
 
     act(() => {
-      result.current.handleCardNumber({
-        input1: "ㅁㅁ",
-        input2: "5678",
-        input3: "9012",
-        input4: "3456",
-      });
+      result.current.handleCardNumberValidation("1234-5678-9012-34a6");
     });
 
-    expect(result.current.isValid).toEqual({
-      input1: false,
-      input2: true,
-      input3: true,
-      input4: true,
-    });
+    expect(result.current.isValid).toEqual(false);
     expect(result.current.errorMessage).toBe("숫자만 입력해 주세요.");
   });
-  it("4자리가 아닌 숫자가 포함된 경우, 해당 input만 false가 되어야 하며 에러 메시지가 설정되어야 한다", () => {
+  it("카드 번호가 13자리 미만이면 isValid는 false이고, 에러 메시지가 설정되어야 한다", () => {
     const { result } = renderHook(() => useCardNumber());
 
     act(() => {
-      result.current.handleCardNumber({
-        input1: "123",
-        input2: "5678",
-        input3: "9012",
-        input4: "3456",
-      });
+      result.current.handleCardNumberValidation("123456789012");
     });
 
-    expect(result.current.isValid).toEqual({
-      input1: false,
-      input2: true,
-      input3: true,
-      input4: true,
+    expect(result.current.isValid).toBe(false);
+    expect(result.current.errorMessage).toBe(
+      "카드 번호는 13자리 이상으로 입력해주세요."
+    );
+  });
+  it("카드 번호가 19자리 초과이면 isValid는 false이고, 에러 메시지가 설정되어야 한다", () => {
+    const { result } = renderHook(() => useCardNumber());
+
+    act(() => {
+      result.current.handleCardNumberValidation("123456789012345678901");
     });
-    expect(result.current.errorMessage).toBe("4자리의 숫자를 입력해 주세요.");
+
+    expect(result.current.isValid).toBe(false);
+    expect(result.current.errorMessage).toBe(
+      "카드 번호는 19자리 이하로 입력해주세요."
+    );
+  });
+  it("customErrorMessages가 주어지면 해당 메시지가 우선 적용되어야 한다", () => {
+    const customErrorMessages = {
+      format: "형식 에러메세지 커스텀",
+      minLength: "최소 길이 에러메세지 커스텀",
+      maxLength: "최대 길이 에러메세지 커스텀",
+    };
+    const { result } = renderHook(() =>
+      useCardNumber({
+        customErrorMessages: customErrorMessages,
+      })
+    );
+    act(() => {
+      result.current.handleCardNumberValidation("1234-5678-9012");
+    });
+
+    expect(result.current.isValid).toEqual(false);
+    expect(result.current.errorMessage).toBe(customErrorMessages.minLength);
   });
 });
