@@ -1,5 +1,6 @@
 import BaseModal from "../BaseModal/BaseModal";
 import type { ReactNode } from "react";
+import ConfirmButton from "../components/ConfirmButton/ConfirmButton";
 
 type AlertModalProps = {
   title: string;
@@ -20,7 +21,7 @@ const AlertModal = ({
   onClose,
   onConfirm,
 }: AlertModalProps) => {
-  const buttonElements = <button onClick={onConfirm}>확인</button>;
+  const buttonElements = <ConfirmButton onClick={onConfirm} />;
 
   return (
     <BaseModal

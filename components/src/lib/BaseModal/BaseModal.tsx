@@ -129,6 +129,6 @@ const ModalContent = styled.div`
 const ModalFooter = styled.div`
   display: flex;
   justify-content: flex-end;
-  gap: 8px;
+  gap: 12px;
   margin-top: 24px;
 `;

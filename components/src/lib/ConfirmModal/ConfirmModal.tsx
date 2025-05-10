@@ -1,5 +1,7 @@
 import BaseModal from "../BaseModal/BaseModal";
 import type { ReactNode } from "react";
+import CancleButton from "../components/CancleButton/CancleButton";
+import ConfirmButton from "../components/ConfirmButton/ConfirmButton";
 
 type ConfirmModalProps = {
   title: string;
@@ -22,8 +24,8 @@ const ConfirmModal = ({
 }: ConfirmModalProps) => {
   const buttonElements = (
     <>
-      <button onClick={onClose}>취소</button>
-      <button onClick={onConfirm ?? onClose}>확인</button>
+      <CancleButton onClick={onClose} />
+      <ConfirmButton onClick={onConfirm ?? onClose} />
     </>
   );
 

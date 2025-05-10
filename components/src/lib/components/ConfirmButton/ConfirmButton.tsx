@@ -1,23 +1,22 @@
 import styled from "@emotion/styled";
 
 type ConfirmButtonProps = {
-  confirmText: string;
   onClick: () => void;
 };
 
-const ConfirmButton = ({ confirmText, onClick }: ConfirmButtonProps) => {
-  return <Button onClick={onClick}>{confirmText}</Button>;
+const ConfirmButton = ({ onClick }: ConfirmButtonProps) => {
+  return <StyledButton onClick={onClick}>확인</StyledButton>;
 };
 
 export default ConfirmButton;
 
-const Button = styled.button`
-  width: 100%;
-  padding: 8px 16px;
-  background-color: #007bff;
-  color: white;
-  border: none;
-  border-radius: 4px;
+const StyledButton = styled.button`
+  width: 80px;
+  height: 36px;
+  border-radius: 5px;
+  background: #333;
   cursor: pointer;
-  font-size: 14px;
+  font-size: 15px;
+  font-weight: 700;
+  color: #fff;
 `;
