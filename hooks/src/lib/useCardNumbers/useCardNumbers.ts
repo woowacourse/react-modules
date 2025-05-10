@@ -5,9 +5,11 @@ import { isOverInputLength } from '../utils/overInputLength';
 import { initialError } from '../utils/initial';
 import { ErrorType } from '../types/errorType';
 import { INPUT_RULE } from '../constants/inputRule';
+import { identifyCardBrand } from '../utils/identifyCardBrand';
 
 type ValitationResult = {
   numbers: string;
+  cardBrand: string;
   error: ErrorType;
   handleCardNumbers: (value: string) => void;
 };
@@ -19,6 +21,7 @@ type UpdateErrorArgs =
 export default function useCardNumbers(): ValitationResult {
   const [numbers, setNumbers] = useState('');
   const [error, setError] = useState<ErrorType>(initialError);
+  const cardBrand = identifyCardBrand(numbers);
 
   const updateError = (args: UpdateErrorArgs) => {
     setError({
@@ -28,8 +31,8 @@ export default function useCardNumbers(): ValitationResult {
   };
 
   const handleCardNumbers = (value: string) => {
-    // length 수정 필요
-    if (isOverInputLength(value, INPUT_RULE.CARD_NUMBERS.MAX_LENGTH)) return;
+    // 😱length 수정 필요
+    if (isOverInputLength(value, 16)) return;
 
     validate(value);
 
@@ -49,7 +52,7 @@ export default function useCardNumbers(): ValitationResult {
       });
       return;
     }
-    // length 매개변수 수정 필요
+    // 😱length 매개변수 수정 필요
     if (!isValidLength(value, INPUT_RULE.CARD_NUMBERS.MAX_LENGTH)) {
       updateError({
         isValid: true,
@@ -62,5 +65,5 @@ export default function useCardNumbers(): ValitationResult {
     updateError({ isValid: false });
   };
 
-  return { numbers, error, handleCardNumbers };
+  return { numbers, cardBrand, error, handleCardNumbers };
 }

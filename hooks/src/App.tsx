@@ -16,6 +16,7 @@ import { useCardNumbers } from './lib';
 function App() {
   const {
     numbers,
+    cardBrand,
     error: cardNumbersError,
     handleCardNumbers,
   } = useCardNumbers();
@@ -32,6 +33,7 @@ function App() {
           value={numbers}
           onChange={(e) => handleCardNumbers(e.target.value)}
         />
+        <p>{cardBrand}</p>
         <p>{cardNumbersError.errorMessage}</p>
       </div>
       <div>
