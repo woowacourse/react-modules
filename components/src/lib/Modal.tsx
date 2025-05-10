@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 import useEscapeKeyClose from './hooks/useEscapePress';
-import { createContext, useContext } from 'react';
+import { createContext, useContext, useRef } from 'react';
 import CloseIconButton from './components/CloseIconButton';
 import {
   AlertContentProps,
@@ -15,6 +15,7 @@ import {
   Size,
 } from './types/props';
 import TextButton from './components/TextButton';
+import useAutoFocus from './hooks/useAutoFocus';
 
 const ModalContext = createContext<{ onClose: () => void }>({ onClose: () => {} });
 
@@ -51,9 +52,11 @@ const Content = ({
   ...props
 }: ModalContentProps) => {
   const { onClose } = useContext(ModalContext);
+  const contentRef = useRef<HTMLDivElement>(null);
+  useAutoFocus(contentRef);
 
   return (
-    <S.ModalContent position={position} size={size} {...props}>
+    <S.ModalContent ref={contentRef} position={position} size={size} {...props}>
       {hasTopCloseButton && <CloseIconButton data-testid="modal-close" onClick={() => onClose()} />}
       {children}
     </S.ModalContent>
@@ -69,6 +72,8 @@ const AlertContent = ({
   ...props
 }: AlertContentProps) => {
   const { onClose } = useContext(ModalContext);
+  const contentRef = useRef<HTMLDivElement>(null);
+  useAutoFocus(contentRef);
 
   const {
     text = '확인',
@@ -79,6 +84,7 @@ const AlertContent = ({
 
   return (
     <S.ModalContent
+      ref={contentRef}
       position={position}
       size={size}
       style={{
@@ -106,6 +112,8 @@ const ConfirmContent = ({
   ...props
 }: ConfirmContentProps) => {
   const { onClose } = useContext(ModalContext);
+  const contentRef = useRef<HTMLDivElement>(null);
+  useAutoFocus(contentRef);
 
   const {
     text: confirmText = '확인',
@@ -123,6 +131,7 @@ const ConfirmContent = ({
 
   return (
     <S.ModalContent
+      ref={contentRef}
       position={position}
       size={size}
       style={{
@@ -163,6 +172,8 @@ const PromptContent = ({
   ...props
 }: PromptContentProps) => {
   const { onClose } = useContext(ModalContext);
+  const contentRef = useRef<HTMLDivElement>(null);
+  useAutoFocus(contentRef);
 
   const {
     text: confirmText = '확인',
@@ -180,6 +191,7 @@ const PromptContent = ({
 
   return (
     <S.ModalContent
+      ref={contentRef}
       position={position}
       size={size}
       style={{
