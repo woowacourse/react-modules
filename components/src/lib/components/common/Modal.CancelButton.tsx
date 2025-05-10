@@ -15,6 +15,10 @@ const ModalCancelButton = ({ children }: { children: React.ReactNode }) => {
 export default ModalCancelButton;
 
 const StyledCancelButton = styled.button`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
   width: 80px;
   height: 40px;
   padding: 8px 0;

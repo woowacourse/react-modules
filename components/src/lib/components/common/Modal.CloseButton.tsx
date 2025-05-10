@@ -16,6 +16,10 @@ const ModalCloseButton = () => {
 export default ModalCloseButton;
 
 const StyledCloseButton = styled.button`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
   position: absolute;
   top: 12px;
   right: 12px;
