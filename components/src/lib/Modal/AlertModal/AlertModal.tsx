@@ -1,32 +1,35 @@
-import { ReactNode } from "react";
 import Modal from "../Modal";
 
 interface AlertModalProps {
+  position: "bottom" | "center";
   size: "small" | "medium" | "large";
-  position: "center" | "bottom";
   isOpen: boolean;
-  showConfirmButton?: boolean;
-  children: ReactNode;
   onClose: () => void;
+  onConfirm: () => void;
+  title: string;
+  description?: string;
+  confirmText?: string;
 }
 
 const AlertModal = ({
+  position = "center",
   size = "medium",
-  position,
   isOpen,
-  showConfirmButton,
-  children,
   onClose,
+  onConfirm,
+  title,
+  description,
+  confirmText = "확인",
 }: AlertModalProps) => {
   return (
-    <Modal
-      size={size}
-      position={position}
-      isOpen={isOpen}
-      showConfirmButton={showConfirmButton}
-      onClose={onClose}
-    >
-      {children}
+    <Modal isOpen={isOpen} onClose={onClose} position={position} size={size}>
+      <Modal.Title>{title}</Modal.Title>
+      {description && <Modal.Description>{description}</Modal.Description>}
+      <Modal.Actions>
+        <Modal.ConfirmButton onClick={onConfirm}>
+          {confirmText}
+        </Modal.ConfirmButton>
+      </Modal.Actions>
     </Modal>
   );
 };

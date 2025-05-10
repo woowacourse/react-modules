@@ -1,41 +1,12 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import styled from "@emotion/styled";
-import Button from "../../../modules/Button/Button";
 import { useState } from "react";
 import AlertModal from "./AlertModal";
+import Button from "../../../modules/Button/Button";
+import styled from "@emotion/styled";
 
 const meta: Meta<typeof AlertModal> = {
-  title: "Components/AlertModal",
+  title: "Components/Modal/AlertModal",
   component: AlertModal,
-  tags: ["autodocs"],
-  argTypes: {
-    position: {
-      description: "모달의 위치",
-      control: { type: "radio" },
-      options: ["center", "bottom"],
-    },
-    size: {
-      description: "모달의 크기",
-      control: { type: "radio" },
-      options: ["small", "medium", "large"],
-    },
-    isOpen: {
-      description: "모달의 표시 여부",
-      control: "boolean",
-    },
-    showConfirmButton: {
-      description: "확인 버튼 표시 여부",
-      control: "boolean",
-      defaultValue: false,
-    },
-    onClose: {
-      description: "모달이 닫힐 때 호출되는 함수",
-      action: "closed",
-    },
-    children: {
-      description: "모달 내부에 표시할 콘텐츠",
-    },
-  },
 };
 
 export default meta;
@@ -43,60 +14,36 @@ export default meta;
 type Story = StoryObj<typeof AlertModal>;
 
 export const Default: Story = {
-  args: {
-    size: "medium",
-    position: "center",
-    isOpen: false,
-    showConfirmButton: false,
-  },
-  render: (args) => {
-    const [isOpen, setIsOpen] = useState(args.isOpen);
+  render: () => {
+    const [isOpen, setIsOpen] = useState(false);
 
     const openModal = () => {
       setIsOpen(true);
     };
-
-    const closeModal = () => {
+    const handleConfirm = () => {
       setIsOpen(false);
     };
 
     return (
       <>
         <ButtonWrap>
-          <Button onclick={openModal} />
+          <Button onClick={openModal}></Button>
         </ButtonWrap>
+
         <AlertModal
-          size={args.size}
           isOpen={isOpen}
-          position={args.position}
-          onClose={closeModal}
-          showConfirmButton={args.showConfirmButton}
-        >
-          <ModalContent>
-            <h3>기본 모달</h3>
-            <p>이것은 기본 모달 콘텐츠입니다.</p>
-          </ModalContent>
-        </AlertModal>
+          onClose={() => setIsOpen(false)}
+          onConfirm={handleConfirm}
+          title="아이디를 입력해 주세요."
+          description="아이디는 필수로 입력해야 합니다."
+          confirmText="확인"
+          position="center"
+          size="small"
+        />
       </>
     );
   },
 };
-
-const ModalContent = styled.div`
-  padding: 8px 0;
-
-  h3 {
-    margin-top: 0;
-    margin-bottom: 16px;
-    font-size: 18px;
-  }
-
-  p {
-    margin: 0;
-    font-size: 14px;
-    line-height: 1.5;
-  }
-`;
 
 const ButtonWrap = styled.div`
   position: absolute;
