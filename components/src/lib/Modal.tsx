@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import {
   CloseButtonContainer,
   FooterContainer,
@@ -13,6 +13,7 @@ import {
 } from './Modal.styles';
 import { CloseIcon } from './CloseIcon';
 import useModalContext, { ModalContext, ModalSize } from './useModalContext';
+import useFocusTrap from './useFocusTrap';
 
 type BaseProps = {
   children?: React.ReactNode;
@@ -62,27 +63,20 @@ function Trigger({ children, className, asChild }: BaseProps & { asChild?: boole
 function Content({ children, className }: BaseProps) {
   const { open, setOpen, size } = useModalContext();
 
-  useEffect(() => {
-    if (open) {
-      const handleKeyDown = (e: KeyboardEvent) => {
-        if (e.key === 'Escape') {
-          setOpen(false);
-        }
-      };
-
-      document.addEventListener('keydown', handleKeyDown);
-      return () => {
-        document.removeEventListener('keydown', handleKeyDown);
-      };
-    }
-  }, [open, setOpen]);
+  const contentRef = useFocusTrap(open, setOpen);
 
   if (!open) return null;
 
   return (
     <>
       <ModalOverlay onClick={() => setOpen(false)} />
-      <ModalContentContainer className={className} size={size || 'medium'}>
+      <ModalContentContainer
+        ref={contentRef}
+        className={className}
+        size={size || 'medium'}
+        role="dialog"
+        aria-modal="true"
+      >
         {children}
       </ModalContentContainer>
     </>
