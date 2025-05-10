@@ -39,7 +39,7 @@ const Modal = ({
             <S.HeaderSection>
               <S.Title>{title}</S.Title>
               <S.ModalCloseButton onClick={onClose}>
-                <img src='./closeIcon.png' />
+                <img src='/closeIcon.png' alt='close button' />
               </S.ModalCloseButton>
             </S.HeaderSection>
             {renderModal({ children, type, message, onClose, onConfirm, onSubmit, size })}
