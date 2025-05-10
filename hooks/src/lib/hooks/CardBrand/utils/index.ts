@@ -1,3 +1,5 @@
+import { getErrorByRules } from "../../../../utils/validation";
+import { ErrorState, ValidationRule } from "../../../types";
 import { CARD_BRAND_RULE } from "../constants";
 import { CardBrand, CardBrandRule } from "../types";
 
@@ -26,6 +28,7 @@ export const getCardBrand = (cardNumber: string): CardBrand | null => {
 export const formatCardNumber = (cardNumber: string, cardBrand: CardBrand) => {
   const { formatNumbers: format } = CARD_BRAND_RULE[cardBrand];
   let indexStart = 0;
+
   return format
     .map((formatNumber) => {
       const indexEnd = indexStart + formatNumber;
@@ -35,4 +38,19 @@ export const formatCardNumber = (cardNumber: string, cardBrand: CardBrand) => {
     })
     .filter(Boolean)
     .join("-");
+};
+
+const cardBrandConditions = {
+  checkCardBrand: (cardBrand: CardBrand | null) => Boolean(cardBrand),
+};
+
+const cardBrandValidationRules: ValidationRule<CardBrand | null>[] = [
+  {
+    condition: cardBrandConditions.checkCardBrand,
+    errorMessage: "현재 카드 번호에 일치하는 카드사가 존재하지 않습니다.",
+  },
+];
+
+export const getCardBrandError = (cardBrand: CardBrand | null): ErrorState => {
+  return getErrorByRules(cardBrand, cardBrandValidationRules);
 };

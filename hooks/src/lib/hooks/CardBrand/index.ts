@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
-import { formatCardNumber, getCardBrand } from "./utils";
+import { formatCardNumber, getCardBrand, getCardBrandError } from "./utils";
 import { CardBrand } from "./types";
 
 const useCardBrand = (cardNumber: string) => {
@@ -7,7 +7,7 @@ const useCardBrand = (cardNumber: string) => {
 
   useEffect(
     function checkCardBrand() {
-      const cleanCardNumber = cardNumber.replaceAll("-", "");
+      const cleanCardNumber = cardNumber.replace(/-/g, "");
       const findCardBrand = getCardBrand(cleanCardNumber);
 
       if (findCardBrand) {
@@ -25,13 +25,14 @@ const useCardBrand = (cardNumber: string) => {
       return cardNumber;
     }
 
-    const cleanCardNumber = cardNumber.replaceAll("-", "");
+    const cleanCardNumber = cardNumber.replace(/-/g, "");
     return formatCardNumber(cleanCardNumber, cardBrand);
   }, [cardNumber, cardBrand]);
 
   return {
     cardBrand,
     formattedCardNumber,
+    errorState: getCardBrandError(cardBrand),
   };
 };
 
