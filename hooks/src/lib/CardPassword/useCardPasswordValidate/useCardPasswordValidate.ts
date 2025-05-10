@@ -1,12 +1,12 @@
 import { useState } from "react";
 
-import { checkBasicValidation } from "../utils/checkBasicValidation";
+import { checkBasicValidation } from "../../utils/checkBasicValidation";
 
 const useCardPasswordValidate = () => {
   const [isValid, setIsValid] = useState<boolean>(true);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
-  const validateCardPassword = (cardPassword: string) => {
+  const validateCardPassword = (cardPassword: string): boolean => {
     const result = checkBasicValidation({
       value: cardPassword,
       maxLength: 2,
@@ -14,6 +14,8 @@ const useCardPasswordValidate = () => {
 
     setIsValid(result.isValid);
     setErrorMessage(result.errorMessage);
+
+    return result.isValid;
   };
 
   return { isValid, errorMessage, validateCardPassword };
