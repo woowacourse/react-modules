@@ -43,6 +43,12 @@ const cardBrandRules: CardBrandConfig[] = [
   },
 ];
 
+const cardFormatRules = {
+  16: [4, 4, 4, 4],
+  15: [4, 6, 5],
+  14: [4, 6, 4],
+};
+
 const useCardBrand = () => {
   const [cardBrand, setCardBrand] = useState<CardBrandTypes>("noBrand");
 
@@ -51,7 +57,6 @@ const useCardBrand = () => {
       (rule) =>
         rule.checkPrefixFunc(cardInput) && cardInput.length === rule.length
     );
-
     const updatedBrand = matchedBrand ? matchedBrand.brand : "noBrand";
     setCardBrand(updatedBrand);
   };
@@ -60,12 +65,30 @@ const useCardBrand = () => {
     const matchedBrand = cardBrandRules.find((rule) =>
       rule.checkPrefixFunc(cardInput)
     );
-
     const updatedBrand = matchedBrand ? matchedBrand.brand : "noBrand";
     setCardBrand(updatedBrand);
   };
 
-  const handleCardNumberFormat = (cardInput: string) => {};
+  const divideByFormat = (cardInput: string, format: number[]) => {
+    const result = [];
+    let offset = 0;
+
+    for (let i = 0; i < format.length; i++) {
+      const length = format[i];
+      const slice = cardInput.slice(offset, offset + length);
+      offset += length;
+      result.push(slice);
+    }
+    return result.join("-");
+  };
+
+  const handleCardNumberFormat = (cardInput: string) => {
+    const DEFAULT_FORMAT_LENGTH = 16;
+    const brandRule = cardBrandRules.find((rule) => rule.brand === cardBrand);
+    const length = brandRule ? brandRule.length : DEFAULT_FORMAT_LENGTH;
+
+    return divideByFormat(cardInput, cardFormatRules[length]);
+  };
 
   return {
     cardBrand,

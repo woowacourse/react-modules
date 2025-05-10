@@ -1,7 +1,7 @@
 import { useState } from "react";
 import "./App.css";
 import useCardNumber from "./lib/useCardNumber";
-// import { useCardNumber } from "woowa-hooks-payments";
+import useCardBrand from "./lib/useCardBrand";
 import React from "react";
 
 function App() {
@@ -12,6 +12,7 @@ function App() {
     input4: "",
   });
   const { handleCardNumber, isValid, errorMessage } = useCardNumber();
+  useCardBrand();
 
   const handleBlur = (e) => {
     const { name, value } = e.target;
@@ -23,10 +24,8 @@ function App() {
     });
   };
 
-  console.log(isValid, errorMessage);
   return (
     <div>
-      {/* <input name="month" onBlur={handleBlur}></input> */}
       {errorMessage}
       <input name="input1" onBlur={handleBlur}></input>
       <input name="input2" onBlur={handleBlur}></input>
