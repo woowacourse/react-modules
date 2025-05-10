@@ -3,6 +3,7 @@ import { css } from '@emotion/css';
 import { Modal, useModal } from '@sanghee01/modal';
 import AlertModal from './lib/components/AlertModal';
 import ConfirmModal from './lib/components/ConfirmModal';
+import PromptModal from './lib/components/PromptModal';
 
 function App() {
   const {
@@ -16,6 +17,12 @@ function App() {
     handleOpen: handleOpenConfirmModal,
     handleClose: handleCloseConfirmModal,
   } = useModal();
+  const {
+    isOpen: isOpenPromptModal,
+    handleOpen: handleOpenPromptModal,
+    handleClose: handleClosePromptModal,
+  } = useModal();
+
   const handleAfterOpenModal = () => {
     console.log('기본 모달 열기 버튼 클릭');
   };
@@ -28,6 +35,11 @@ function App() {
   const handleConfirmAlertModal = () => {
     alert('Alert 모달 확인 버튼 클릭');
     handleCloseAlertModal();
+  };
+
+  const handleConfirmPromptModal = (inputValue: string) => {
+    alert(`Prompt 모달 확인 버튼 클릭, 입력값: ${inputValue}`);
+    handleClosePromptModal();
   };
 
   const handleConfirmConfirmModal = () => {
@@ -46,6 +58,9 @@ function App() {
       </button>
       <button className={OpenButton} onClick={handleOpenConfirmModal}>
         Confirm 모달 열기
+      </button>
+      <button className={OpenButton} onClick={handleOpenPromptModal}>
+        Prompt 모달 열기
       </button>
       <Modal
         isOpen={isOpenDefaultModal}
@@ -87,13 +102,19 @@ function App() {
         onConfirm={handleConfirmConfirmModal}
         onCancel={handleCloseConfirmModal}
         title="Confirm 모달 제목"
-        content={
-          <>
-            <div>Confirm 모달 내용입니다.</div>
-            <div>Confirm 모달 내용입니다2.</div>
-          </>
-        }
+        content={<div>Confirm 모달 내용입니다.</div>}
         position="center"
+      />
+      <PromptModal
+        isOpen={isOpenPromptModal}
+        onClose={handleClosePromptModal}
+        onAfterOpen={handleAfterOpenModal}
+        onConfirm={handleConfirmPromptModal}
+        onCancel={handleClosePromptModal}
+        title="Prompt 모달 제목"
+        content={<div>Prompt 모달 내용입니다.</div>}
+        position="center"
+        placeholder="내용을 입력하세요."
       />
     </>
   );
