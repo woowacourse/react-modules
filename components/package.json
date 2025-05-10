@@ -1,7 +1,19 @@
 {
-  "name": "bunju-summit-modal",
-  "version": "1.0.0",
-  "description": "A modal component for Bunju Summit",
+  "name": "summit-modal",
+  "version": "1.0.4",
+  "description": "A modal component for Summit",
+  "keywords": [
+    "react",
+    "component",
+    "modal"
+  ],
+  "author": "woohyeok <woogur29@gmail.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wo-o29/react-modules",
+    "directory": "components"
+  },
   "type": "module",
   "types": "dist/index.d.ts",
   "main": "dist/index.js",
@@ -10,12 +22,16 @@
   ],
   "scripts": {
     "dev": "vite",
-    "build": "vite build && tsc --emitDeclarationOnly --outDir dist",
+    "build": "vite build && tsc ",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
     "chromatic": "npx chromatic"
+  },
+  "peerDependencies": {
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
   },
   "dependencies": {
     "@emotion/react": "^11.14.0",
@@ -29,6 +45,7 @@
     "@storybook/addon-interactions": "^8.6.12",
     "@storybook/addon-links": "^8.6.12",
     "@storybook/addon-onboarding": "^8.6.12",
+    "@storybook/addon-viewport": "^8.6.12",
     "@storybook/blocks": "^8.6.12",
     "@storybook/react": "^8.6.12",
     "@storybook/react-vite": "^8.6.12",

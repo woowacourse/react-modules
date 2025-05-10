@@ -9,6 +9,8 @@ const meta = {
     title: "Modal Title",
     onRequestClose: () => {},
     position: "center",
+    size: "medium",
+    children: "Modal Content",
   },
 } satisfies Meta<typeof Modal>;
 

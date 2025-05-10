@@ -1,7 +1,19 @@
 {
-  "name": "bunju-summit-hooks",
-  "version": "1.0.1",
-  "description": "A collection of React hooks for Bunju Summit.",
+  "name": "summit-hooks",
+  "version": "1.0.4",
+  "description": "A collection of React hooks for Summit.",
+  "keywords": [
+    "react",
+    "hooks",
+    "card"
+  ],
+  "author": "woohyeok <woogur29@gmail.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wo-o29/react-modules",
+    "directory": "hooks"
+  },
   "type": "module",
   "types": "dist/index.d.ts",
   "main": "dist/index.js",
@@ -16,7 +28,12 @@
     "preview": "vite preview",
     "test": "jest",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "coverage": "jest --coverage --coverageReporters=text"
+  },
+  "peerDependencies": {
+    "react": "^18.0.0 || ^19.0.0",
+    "react-dom": "^18.0.0 || ^19.0.0"
   },
   "dependencies": {
     "react": "^19.1.0",

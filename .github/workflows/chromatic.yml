@@ -1,24 +1,23 @@
-# Workflow name
 name: "Chromatic Deployment"
-
-# Event for the workflow
 on: push
 
-# List of jobs
 jobs:
   chromatic:
     name: "Run Chromatic"
     runs-on: ubuntu-latest
-    # Job steps
     steps:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - run: yarn
-        #👇 Adds Chromatic as a step in the workflow
+
+      # components 폴더에서 의존성 설치
+      - name: Install dependencies
+        run: npm install
+        working-directory: components
+
+      # components 폴더를 대상으로 Chromatic 실행
       - uses: chromaui/action@latest
-        # Options required for Chromatic's GitHub Action
         with:
-          #👇 Chromatic projectToken, see https://storybook.js.org/tutorials/intro-to-storybook/react/ko/deploy/ to obtain it
           projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
           token: ${{ secrets.GITHUB_TOKEN }}
+          workingDir: components
