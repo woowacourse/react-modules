@@ -216,27 +216,22 @@ export const LargeModal: Story = {
 export const AlertModal: Story = {
   name: 'Alert Modal',
   render: () => {
-    const ModalContent = () => {
-      const { setOpen } = useModalContext();
-
-      return (
-        <>
-          <Modal.Title>아이디를 입력해 주세요.</Modal.Title>
-          <Modal.Description>아이디는 필수로 입력해야 합니다.</Modal.Description>
-          <Modal.Footer>
-            <Button onClick={() => setOpen(false)}>확인</Button>
-          </Modal.Footer>
-        </>
-      );
-    };
-
     return (
       <Modal>
         <Modal.Trigger>
           <Button>Alert Modal 열기</Button>
         </Modal.Trigger>
         <Modal.Content>
-          <ModalContent />
+          <Modal.Header>
+            <Modal.Title>아이디를 입력해 주세요.</Modal.Title>
+            <Modal.CloseButton />
+          </Modal.Header>
+          <Modal.Description>아이디는 필수로 입력해야 합니다.</Modal.Description>
+          <Modal.Footer>
+            <Modal.ActionButton action="confirm" onClick={() => alert('확인 버튼 클릭됨')}>
+              확인
+            </Modal.ActionButton>
+          </Modal.Footer>
         </Modal.Content>
       </Modal>
     );
@@ -246,35 +241,25 @@ export const AlertModal: Story = {
 export const ConfirmModal: Story = {
   name: 'Confirm Modal',
   render: () => {
-    const ModalContent = () => {
-      const { setOpen } = useModalContext();
-
-      const handleConfirm = () => {
-        alert('카드가 삭제되었습니다.');
-        setOpen(false);
-      };
-
-      return (
-        <>
-          <Modal.Title>카드를 삭제하시겠습니까?</Modal.Title>
-          <Modal.Description>삭제하면 복구하실 수 없습니다.</Modal.Description>
-          <Modal.Footer>
-            <Button variant="secondary" onClick={() => setOpen(false)}>
-              취소
-            </Button>
-            <Button onClick={handleConfirm}>확인</Button>
-          </Modal.Footer>
-        </>
-      );
-    };
-
     return (
       <Modal>
         <Modal.Trigger>
           <Button>Confirm Modal 열기</Button>
         </Modal.Trigger>
         <Modal.Content>
-          <ModalContent />
+          <Modal.Header>
+            <Modal.Title>카드를 삭제하시겠습니까?</Modal.Title>
+            <Modal.CloseButton />
+          </Modal.Header>
+          <Modal.Description>삭제하면 복구하실 수 없습니다.</Modal.Description>
+          <Modal.Footer>
+            <Modal.ActionButton action="cancel" onClick={() => alert('취소됨')}>
+              취소
+            </Modal.ActionButton>
+            <Modal.ActionButton action="confirm" onClick={() => alert('확인됨')}>
+              확인
+            </Modal.ActionButton>
+          </Modal.Footer>
         </Modal.Content>
       </Modal>
     );
@@ -284,30 +269,7 @@ export const ConfirmModal: Story = {
 export const PromptModal: Story = {
   name: 'Prompt Modal',
   render: () => {
-    const ModalContent = () => {
-      const { setOpen } = useModalContext();
-      const [inputValue, setInputValue] = useState('CGEXX46Z');
-
-      const handleConfirm = () => {
-        alert(`입력한 쿠폰 번호: ${inputValue}`);
-        setOpen(false);
-      };
-
-      return (
-        <>
-          <Modal.Title>쿠폰 번호를 입력해 주세요.</Modal.Title>
-          <div style={{ marginTop: '16px' }}>
-            <Input value={inputValue} onChange={(e) => setInputValue(e.target.value)} placeholder="CGEXX46Z" />
-          </div>
-          <Modal.Footer>
-            <Button variant="secondary" onClick={() => setOpen(false)}>
-              취소
-            </Button>
-            <Button onClick={handleConfirm}>확인</Button>
-          </Modal.Footer>
-        </>
-      );
-    };
+    const [inputValue, setInputValue] = useState('CGEXX46Z');
 
     return (
       <Modal>
@@ -315,7 +277,17 @@ export const PromptModal: Story = {
           <Button>Prompt Modal 열기</Button>
         </Modal.Trigger>
         <Modal.Content>
-          <ModalContent />
+          <Modal.Header>
+            <Modal.Title>쿠폰 번호를 입력해 주세요.</Modal.Title>
+            <Modal.CloseButton />
+          </Modal.Header>
+          <Input value={inputValue} onChange={(e) => setInputValue(e.target.value)} placeholder="CGEXX46Z" />
+          <Modal.Footer>
+            <Modal.ActionButton action="cancel">취소</Modal.ActionButton>
+            <Modal.ActionButton action="confirm" onClick={() => alert(`입력한 쿠폰 번호: ${inputValue}`)}>
+              확인
+            </Modal.ActionButton>
+          </Modal.Footer>
         </Modal.Content>
       </Modal>
     );

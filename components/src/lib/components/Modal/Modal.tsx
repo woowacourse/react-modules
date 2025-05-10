@@ -14,6 +14,7 @@ import {
 import { CloseIcon } from './CloseIcon';
 import useModalContext, { ModalContext, ModalSize } from './hooks/useModalContext';
 import useFocusTrap from './hooks/useFocusTrap';
+import Button from '../Button/Button';
 
 type BaseProps = {
   children?: React.ReactNode;
@@ -127,6 +128,47 @@ function HeaderTitleWrapper({ children, className }: BaseProps) {
   );
 }
 
+type ActionButtonType = 'confirm' | 'cancel' | 'default';
+
+function ActionButton({
+  children,
+  className,
+  onClick,
+  action = 'confirm',
+  closeOnClick = true,
+  ...props
+}: React.ButtonHTMLAttributes<HTMLButtonElement> & {
+  children?: React.ReactNode;
+  className?: string;
+  onClick?: (e: React.MouseEvent) => void;
+  action?: ActionButtonType;
+  closeOnClick?: boolean;
+}) {
+  const { setOpen } = useModalContext();
+
+  const defaultText = action === 'confirm' ? '확인' : action === 'cancel' ? '취소' : '확인';
+  const buttonVariant = action === 'confirm' ? 'primary' : action === 'cancel' ? 'secondary' : 'primary';
+
+  const handleClick = (e: React.MouseEvent) => {
+    if (onClick) onClick(e);
+    if (closeOnClick) setOpen(false);
+  };
+
+  return (
+    <Button className={className} onClick={handleClick} variant={buttonVariant} {...props}>
+      {children || defaultText}
+    </Button>
+  );
+}
+
+const ConfirmButton = (props: Omit<React.ComponentProps<typeof ActionButton>, 'action'>) => (
+  <ActionButton action="confirm" {...props} />
+);
+
+const CancelButton = (props: Omit<React.ComponentProps<typeof ActionButton>, 'action'>) => (
+  <ActionButton action="cancel" {...props} />
+);
+
 Modal.Trigger = Trigger;
 Modal.Content = Content;
 Modal.Header = Header;
@@ -135,5 +177,8 @@ Modal.Description = Description;
 Modal.Footer = Footer;
 Modal.CloseButton = CloseButton;
 Modal.HeaderTitleWrapper = HeaderTitleWrapper;
+Modal.ActionButton = ActionButton;
+Modal.ConfirmButton = ConfirmButton;
+Modal.CancelButton = CancelButton;
 
 export { Modal };
