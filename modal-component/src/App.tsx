@@ -17,7 +17,7 @@ function App() {
         size="medium"
       >
         <Modal.Title title="제목" />
-        <Modal.CloseButton />
+
         <Modal.Contents>
           <Modal.Input placeholder="입력하세요" />
         </Modal.Contents>
@@ -61,6 +61,7 @@ function App() {
             console.log('확인 버튼 클릭!');
           }}
         />
+        <Modal.CloseButton />
       </Modal>
     </>
   );
