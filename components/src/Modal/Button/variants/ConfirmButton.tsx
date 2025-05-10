@@ -12,8 +12,8 @@ type ConfirmButtonProps = {
 };
 
 const ConfirmButton = ({
-  leftButtonTitle,
-  rightButtonTitle,
+  leftButtonTitle = "취소",
+  rightButtonTitle = "확인",
   leftButtonOnClick,
   rightButtonOnClick,
 }: ConfirmButtonProps) => {
