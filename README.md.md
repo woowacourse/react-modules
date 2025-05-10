@@ -28,9 +28,9 @@
 - [x] 모달 내부 자동 포커스 기능 구현
   - [x] focusTrap wrapper 구현
 - [x] 웹접근성 적용
-- [ ] 모달 컴포넌트 별 스토리 작성
+- [x] 모달 컴포넌트 별 스토리 작성
 - [ ] 베포시) dependencies 제거 -> peer dependencies 설정
-- [ ] 컴포넌트 타입 재정의 - componentProps 이용 태그들 타입 재정의
+- [x] 컴포넌트 타입 재정의 - componentProps 이용 태그들 타입 재정의
 
 ---
 

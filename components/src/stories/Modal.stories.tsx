@@ -1,15 +1,21 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import Modal from "../lib/Modal";
 import { useEffect, useState } from "react";
+import { ModalProps } from "../lib/types";
 
-const meta: Meta<typeof Modal> = {
+const meta: Meta<ModalProps & { size: "small" | "medium" | "large" | "default" }> = {
   title: "Modal",
   component: Modal,
   argTypes: {
     show: { control: "boolean" },
+    size: {
+      control: { type: "radio" }, // 혹은 select
+      options: ["small", "medium", "large", "default"],
+    },
   },
   args: {
     show: true,
+    size: "default",
   },
   parameters: {
     docs: {
@@ -23,7 +29,7 @@ const meta: Meta<typeof Modal> = {
 
 export default meta;
 
-type Story = StoryObj<typeof Modal>;
+type Story = StoryObj<ModalProps & { size: "small" | "medium" | "large" | "default" }>;
 
 export const ModalComponent: Story = {
   render: (args, { updateArgs }) => {
@@ -41,15 +47,96 @@ export const ModalComponent: Story = {
 
     return (
       <Modal {...args} show={internalShow} onHide={handleHide}>
-        <Modal.BackDrop>
-          <Modal.Container>
-            <Modal.Header style={{ color: "red" }} closeButton>
-              <Modal.Title>Title</Modal.Title>
-            </Modal.Header>
-            <Modal.Body>Body</Modal.Body>
-            <Modal.Footer>Footer</Modal.Footer>
-          </Modal.Container>
-        </Modal.BackDrop>
+        <Modal.BackDrop />
+        <Modal.Container size={args.size}>
+          <Modal.Header style={{ color: "red" }} closeButton>
+            <Modal.Title>Title</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>Body</Modal.Body>
+          <Modal.Footer>Footer</Modal.Footer>
+        </Modal.Container>
+      </Modal>
+    );
+  },
+};
+
+export const ModalAlertComponent: Story = {
+  render: (args, { updateArgs }) => {
+    const [internalShow, setInternalShow] = useState(args.show);
+
+    useEffect(() => {
+      setInternalShow(args.show);
+    }, [args.show]);
+
+    const handleHide = () => {
+      setInternalShow(false);
+      updateArgs?.({ show: false });
+    };
+
+    return (
+      <Modal {...args} show={internalShow} onHide={handleHide}>
+        <Modal.BackDrop />
+        <Modal.AlertContainer
+          title="아이디를 입력해 주세요."
+          description="아이디는 필수로 입력해야 합니다."
+          size={args.size}
+        />
+      </Modal>
+    );
+  },
+};
+
+export const ModalConfirmComponent: Story = {
+  render: (args, { updateArgs }) => {
+    const [internalShow, setInternalShow] = useState(args.show);
+
+    useEffect(() => {
+      setInternalShow(args.show);
+    }, [args.show]);
+
+    const handleHide = () => {
+      setInternalShow(false);
+      updateArgs?.({ show: false });
+    };
+
+    return (
+      <Modal {...args} show={internalShow} onHide={handleHide}>
+        <Modal.BackDrop />
+        <Modal.AlertContainer
+          title="카드를 삭제하시겠습니까?"
+          description="삭제하면 복구하실 수 없습니다."
+          onClick={() => console.log("카드삭제")}
+          size={args.size}
+        />
+      </Modal>
+    );
+  },
+};
+
+export const ModalPromptComponent: Story = {
+  render: (args, { updateArgs }) => {
+    const [internalShow, setInternalShow] = useState(args.show);
+    const [value, setValue] = useState("");
+
+    useEffect(() => {
+      setInternalShow(args.show);
+    }, [args.show]);
+
+    const handleHide = () => {
+      setInternalShow(false);
+      updateArgs?.({ show: false });
+    };
+
+    return (
+      <Modal {...args} show={internalShow} onHide={handleHide}>
+        <Modal.BackDrop />
+        <Modal.PromptContainer
+          title="쿠폰 번호를 입력해 주세요."
+          value={value}
+          onChange={(e) => setValue(e.target.value)}
+          onClick={() => console.log(value)}
+          size={args.size}
+        />
       </Modal>
     );
   },
