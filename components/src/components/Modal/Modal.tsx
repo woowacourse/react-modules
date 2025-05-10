@@ -4,9 +4,11 @@ import useEscapeKey from "../../hooks/useEscapeKey";
 import { ModalPosition, ModalSize } from "../../types/modal";
 import Portal from "../Common/Portal/Portal";
 import ModalContainer from "../ModalContainer/ModalContainer";
-import ModalContent from "../ModalContent/ModalContent";
 import ModalHeader from "../ModalHeader/ModalHeader";
-import { ModalBackdrop } from "./Modal.styles";
+import { ModalBackdrop, ModalContent } from "./Modal.styles";
+import Button from "../Common/Button/Button";
+import ButtonGroup from "../Common/ButtonGroup/ButtonGroup";
+import Input from "../Common/Input/Input";
 
 interface TitleProps {
   text?: string;
@@ -14,25 +16,40 @@ interface TitleProps {
 }
 
 export interface ModalProps {
+  /**
+   * 모달 레이아웃 설정
+   */
   position?: ModalPosition;
   size?: ModalSize;
   theme?: ThemeMode;
-  title?: TitleProps;
-  showCloseButton?: boolean;
+
+  /**
+   * 모달 상태 제어
+   */
   isOpen: boolean;
   onClose: () => void;
+
+  /**
+   * 모달 컨텐츠
+   */
   children: ReactNode;
+
+  /**
+   * 헤더 설정
+   */
+  title?: TitleProps;
+  showCloseButton?: boolean;
 }
 
 const Modal = ({
   position = "center",
   size = "medium",
   theme = "light",
-  title,
-  showCloseButton = true,
   isOpen,
   onClose,
   children,
+  title,
+  showCloseButton = true,
 }: ModalProps) => {
   useEscapeKey(onClose);
   const currentTheme = THEME_MAP[theme];
@@ -65,7 +82,7 @@ const Modal = ({
                 showCloseButton={showCloseButton}
                 onClose={onClose}
               />
-              <ModalContent contentId={contentId}>{children}</ModalContent>
+              <ModalContent id={contentId}>{children}</ModalContent>
             </ModalContainer>
           </ModalBackdrop>
         </Portal>
@@ -73,5 +90,9 @@ const Modal = ({
     </>
   );
 };
+
+Modal.Button = Button;
+Modal.ButtonGroup = ButtonGroup;
+Modal.Input = Input;
 
 export default Modal;

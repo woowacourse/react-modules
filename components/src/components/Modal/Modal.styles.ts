@@ -14,3 +14,9 @@ export const ModalBackdrop = styled.div<{
   background-color: rgba(0, 0, 0, 0.3);
   inset: 0;
 `;
+
+export const ModalContent = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+`;
