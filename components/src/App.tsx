@@ -48,9 +48,8 @@ function App() {
             handleCloseAlertModal();
           }}
           title="아이디를 입력해 주세요."
-        >
-          <p>아이디는 필수로 입력해야 합니다.</p>
-        </AlertModal>
+          description="아이디는 필수로 입력해야 합니다."
+        />
       </div>
       <div>
         <button onClick={handleOpenConfirmModal}>confirm 모달 버튼</button>

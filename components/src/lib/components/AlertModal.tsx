@@ -3,15 +3,16 @@ import { Modal, ModalProps } from './Modal';
 type AlertModalProps = {
   onConfirm: () => void;
   title: string;
-} & ModalProps;
+  description?: string;
+} & Omit<ModalProps, 'children'>;
 
-const AlertModal = ({ isOpen, onClose, children, onConfirm, title }: AlertModalProps) => {
+const AlertModal = ({ isOpen, onClose, description, onConfirm, title }: AlertModalProps) => {
   return (
     <Modal isOpen={isOpen} onClose={onClose} closeByEscapeKey={false}>
       <Modal.Backdrop closeByBackdrop={false} />
       <Modal.Container>
         <Modal.Title title={title} />
-        {children}
+        <Modal.Description description={description} />
         <Modal.ButtonWrapper>
           <Modal.ConfirmButton onClick={onConfirm}>확인</Modal.ConfirmButton>
         </Modal.ButtonWrapper>
