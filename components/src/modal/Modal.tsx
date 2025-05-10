@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { PropsWithChildren, useEffect, useMemo } from 'react';
+import { CSSProperties, PropsWithChildren, useEffect, useMemo } from 'react';
 import CloseButton from './CloseButton';
 import useClickOutside from './hooks/useClickOutside';
 import {
@@ -11,9 +11,21 @@ import {
 import PrimaryButton from './PrimaryButton';
 import SecondaryButton from './SecondaryButton';
 import Title from './Title';
-import { ModalPositionType, ModalProps, ModalSizeType } from './types';
 import ModalProvider, { useModalContext } from './ModalProvider';
 import ButtonWrapper from './ButtonWrapper';
+
+// ============================== Types ==============================
+
+interface ModalProps {
+  position?: ModalPositionType;
+  size?: ModalSizeType;
+  style?: CSSProperties;
+}
+
+export type ModalPositionType = 'center' | 'bottom';
+export type ModalSizeType = 'small' | 'medium' | 'large';
+
+// ============================== Component ==============================
 
 function ModalContainer({
   position = 'center',
@@ -48,14 +60,14 @@ function ModalContainer({
   return (
     open && (
       <StyledModalContainer position={position}>
-        <ModalContent
+        <StyledModalContent
           ref={modalRef}
           position={position}
           size={size}
           style={memoizedStyle}
         >
           {children}
-        </ModalContent>
+        </StyledModalContent>
       </StyledModalContainer>
     )
   );
@@ -66,6 +78,8 @@ function ButtonTrigger({ children }: PropsWithChildren) {
 
   return <button onClick={onOpen}>{children}</button>;
 }
+
+// ============================== Styled Components ==============================
 
 const StyledModalContainer = styled.div<{ position: ModalPositionType }>`
   width: 100%;
@@ -82,7 +96,7 @@ const StyledModalContainer = styled.div<{ position: ModalPositionType }>`
   ${(props) => MODAL_CONTAINER_POSITION_STYLES[props.position]}
 `;
 
-const ModalContent = styled.div<{
+const StyledModalContent = styled.div<{
   position: ModalPositionType;
   size: ModalSizeType;
 }>`

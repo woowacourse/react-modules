@@ -1,15 +1,17 @@
 import styled from '@emotion/styled';
 import { CSSProperties, useMemo } from 'react';
 
-function PrimaryButton({
-  label,
-  onClick,
-  style,
-}: {
+// ============================== Types ==============================
+
+interface PrimaryButtonProps {
   label: string;
   onClick: () => void;
   style?: CSSProperties;
-}) {
+}
+
+// ============================== Component ==============================
+
+function PrimaryButton({ label, onClick, style }: PrimaryButtonProps) {
   const memoizedStyle = useMemo(() => {
     if (!style) return {};
     return { ...style };
@@ -21,6 +23,8 @@ function PrimaryButton({
     </PrimaryButtonContainer>
   );
 }
+
+// ============================== Styled Components ==============================
 
 const PrimaryButtonContainer = styled.button`
   font-weight: 700;

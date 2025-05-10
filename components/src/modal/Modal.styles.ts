@@ -1,5 +1,5 @@
 import { css, SerializedStyles } from '@emotion/react';
-import { ModalPositionType, ModalSizeType } from './types';
+import { ModalPositionType, ModalSizeType } from './Modal';
 
 export const MODAL_CONTAINER_POSITION_STYLES: Record<
   ModalPositionType,

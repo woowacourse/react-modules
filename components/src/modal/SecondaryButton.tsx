@@ -1,15 +1,17 @@
 import styled from '@emotion/styled';
 import { CSSProperties, useMemo } from 'react';
 
-function SecondaryButton({
-  label,
-  onClick,
-  style,
-}: {
+// ============================== Types ==============================
+
+interface SecondaryButtonProps {
   label: string;
   onClick: () => void;
   style?: CSSProperties;
-}) {
+}
+
+// ============================== Component ==============================
+
+function SecondaryButton({ label, onClick, style }: SecondaryButtonProps) {
   const memoizedStyle = useMemo(() => {
     if (!style) return {};
     return { ...style };
@@ -21,6 +23,8 @@ function SecondaryButton({
     </SecondaryButtonContainer>
   );
 }
+
+// ============================== Styled Components ==============================
 
 const SecondaryButtonContainer = styled.button`
   font-weight: 700;

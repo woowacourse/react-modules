@@ -1,9 +1,7 @@
 import styled from '@emotion/styled';
 import { CSSProperties, PropsWithChildren, useMemo } from 'react';
 
-// ==============================
-// Types
-// ==============================
+// ============================== Types ==============================
 
 interface ButtonWrapperProps {
   direction?: ButtonWrapperDirectionType;
@@ -11,12 +9,11 @@ interface ButtonWrapperProps {
   gap?: number;
   style?: CSSProperties;
 }
+
 type ButtonWrapperDirectionType = 'row' | 'column';
 type ButtonWrapperAlignType = 'start' | 'center' | 'end';
 
-// ==============================
-// Component
-// ==============================
+// ============================== Component ==============================
 
 function ButtonWrapper({
   direction = 'row',
@@ -42,9 +39,7 @@ function ButtonWrapper({
   );
 }
 
-// ==============================
-// Styled Components
-// ==============================
+// ============================== Styled Components ==============================
 
 const StyledButtonWrapper = styled.div<{
   direction: ButtonWrapperDirectionType;

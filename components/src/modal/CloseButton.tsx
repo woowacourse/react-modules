@@ -2,7 +2,15 @@ import styled from '@emotion/styled';
 import { CSSProperties, useMemo } from 'react';
 import { useModalContext } from './ModalProvider';
 
-function CloseButton({ style }: { style?: CSSProperties }) {
+// ============================== Types ==============================
+
+interface CloseButtonProps {
+  style?: CSSProperties;
+}
+
+// ============================== Component ==============================
+
+function CloseButton({ style }: CloseButtonProps) {
   const { onClose } = useModalContext();
 
   const memoizedStyle = useMemo(() => {
@@ -19,6 +27,8 @@ function CloseButton({ style }: { style?: CSSProperties }) {
     </StyledCloseButton>
   );
 }
+
+// ============================== Styled Components ==============================
 
 const StyledCloseButton = styled.button`
   border: none;
