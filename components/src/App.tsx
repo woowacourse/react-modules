@@ -14,11 +14,12 @@ function App() {
         <Modal.PromptInput />
 
         <Modal.ButtonWrapper direction="column">
-          <Modal.PrimaryButton
-            label="동의하고 저장하기"
-            onClick={() => alert('클릭됨')}
-          />
-          <Modal.SecondaryButton label="닫기" onClick={() => {}} />
+          <Modal.Button variant="primary" onClick={() => alert('클릭됨')}>
+            동의하고 저장하기
+          </Modal.Button>
+          <Modal.Button variant="secondary" onClick={() => {}}>
+            닫기
+          </Modal.Button>
         </Modal.ButtonWrapper>
       </Modal.Container>
     </Modal>

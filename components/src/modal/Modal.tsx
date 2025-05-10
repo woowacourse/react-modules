@@ -8,12 +8,11 @@ import {
   MODAL_CONTENT_RESPONSIVE_WIDTH_STYLES,
   MODAL_CONTENT_SIZE_STYLES,
 } from './Modal.styles';
-import PrimaryButton from './PrimaryButton';
-import SecondaryButton from './SecondaryButton';
 import Title from './Title';
 import ModalProvider, { useModalContext } from './ModalProvider';
 import ButtonWrapper from './ButtonWrapper';
 import PromptInput from './PromptInput';
+import Button from './Button';
 
 // ============================== Types ==============================
 
@@ -130,8 +129,7 @@ const Modal = Object.assign(ModalProvider, {
   Title,
   PromptInput,
   ButtonWrapper,
-  PrimaryButton,
-  SecondaryButton,
+  Button,
 });
 
 export default Modal;
