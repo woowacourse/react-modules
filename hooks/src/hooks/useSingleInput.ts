@@ -27,7 +27,7 @@ const useSingleNumberInput = ({
   }, []);
 
   return {
-    value: inputState,
+    value: inputState.value,
     onChange: handleInputChange,
     errorState: getErrorFn(inputState.value),
   };
