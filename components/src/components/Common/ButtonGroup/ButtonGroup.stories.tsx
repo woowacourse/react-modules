@@ -11,28 +11,28 @@ export default meta;
 
 type Story = StoryObj<typeof ButtonGroup>;
 
-export const DefaultButton: Story = {
+export const ConfirmButton: Story = {
   args: {
     left: {
       varient: "secondary",
-      text: "취소",
+      children: "취소",
     },
     right: {
       varient: "primary",
-      text: "확인",
+      children: "확인",
     },
   },
 };
 
-export const ReverseButton: Story = {
+export const ReverseConfirmButton: Story = {
   args: {
     left: {
       varient: "primary",
-      text: "확인",
+      children: "확인",
     },
     right: {
       varient: "secondary",
-      text: "취소",
+      children: "취소",
     },
   },
 };

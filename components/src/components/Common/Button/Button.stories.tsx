@@ -11,16 +11,18 @@ export default meta;
 
 type Story = StoryObj<typeof Button>;
 
+export const Default: Story = {};
+
 export const PrimaryButton: Story = {
   args: {
     varient: "primary",
-    text: "확인",
+    children: "확인",
   },
 };
 
 export const SecondaryButton: Story = {
   args: {
     varient: "secondary",
-    text: "취소",
+    children: "취소",
   },
 };
