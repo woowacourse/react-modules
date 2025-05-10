@@ -13,6 +13,8 @@ function App() {
         <Modal.Overlay />
         <Modal.Content>
           <p>모달열림</p>
+          <input placeholder="첫 번째 인풋" data-testid="first-input" />
+          <button>두 번째 버튼</button>
         </Modal.Content>
       </Modal>
     </>

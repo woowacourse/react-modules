@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { expect, userEvent, within } from '@storybook/test';
+import { expect, userEvent, waitFor, within } from '@storybook/test';
 import App from '../App';
 
 const meta = {
@@ -72,5 +72,22 @@ export const CloseByEsc: Story = {
     await userEvent.keyboard('{Escape}');
 
     expect(canvas.queryByText('모달열림')).toBeNull();
+  },
+};
+
+export const AutoFocusTest: Story = {
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    const openButton = canvas.getByRole('button', {
+      name: '모달열기',
+    });
+    await userEvent.click(openButton);
+
+    const firstInput = await canvas.findByTestId('first-input');
+
+    await waitFor(() => {
+      expect(document.activeElement).toBe(firstInput);
+    });
   },
 };
