@@ -17,6 +17,7 @@ const useCardNumber = ({
   const [errorMessage, setErrorMessage] = useState("");
 
   const handleCardNumberValidation = (numbers: string) => {
+    numbers = numbers.replaceAll("-", "");
     const result = validateCardNumber(numbers);
     setIsValid(result.isValid);
     setErrorMessage(result.errorMessage);

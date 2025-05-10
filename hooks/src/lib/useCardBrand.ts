@@ -81,7 +81,6 @@ const useCardBrand = () => {
       offset += length;
       result.push(slice);
     }
-
     return result.join("-");
   };
 
