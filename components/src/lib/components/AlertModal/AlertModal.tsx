@@ -1,11 +1,13 @@
-import { Modal } from '../../lib';
+import { Modal } from '../..';
 import { ButtonContainer, ConfirmButton } from '../common/Button.styles';
 import { Main, MainContainer } from './AlertModal.styles';
 
 type AlertModalProps = {
   isOpen: boolean;
-  position: 'center' | 'bottom';
-  size: 'small' | 'medium' | 'large';
+  position?: 'center' | 'bottom';
+  size?: 'small' | 'medium' | 'large';
+  title: string;
+  message: string;
   onClose: () => void;
   onBackdropClick: (e: React.MouseEvent<HTMLDivElement>) => void;
 };
@@ -14,6 +16,8 @@ const AlertModal = ({
   isOpen,
   position,
   size,
+  title,
+  message,
   onClose,
   onBackdropClick,
 }: AlertModalProps) => {
@@ -21,14 +25,14 @@ const AlertModal = ({
     <Modal
       isOpen={isOpen}
       position={position}
-      title="아이디를 입력해주세요."
+      title={title}
       showCloseButton={false}
       size={size}
       onClose={onClose}
       onBackdropClick={onBackdropClick}
     >
       <MainContainer>
-        <Main>아이디는 필수로 입력해야 합니다.</Main>
+        <Main>{message}</Main>
       </MainContainer>
       <ButtonContainer>
         <ConfirmButton onClick={onClose}>확인</ConfirmButton>

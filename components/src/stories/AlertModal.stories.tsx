@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import AlertModal from './AlertModal.tsx';
+import { AlertModal } from '../lib';
 
 const meta: Meta<typeof AlertModal> = {
   title: 'Components/AlertModal',
@@ -16,6 +16,8 @@ export const AlertModalCenter: Story = {
     isOpen: true,
     position: 'center',
     size: 'small',
+    title: '타이틀',
+    message: 'AlertModal입니다.',
     onClose: () => {},
     onBackdropClick: () => {},
   },
@@ -25,6 +27,8 @@ export const AlertModalBottom: Story = {
   args: {
     isOpen: true,
     position: 'bottom',
+    title: '타이틀',
+    message: 'AlertModal입니다.',
     onClose: () => {},
     onBackdropClick: () => {},
   },
@@ -35,6 +39,8 @@ export const AlertModalSmall: Story = {
     isOpen: true,
     position: 'center',
     size: 'small',
+    title: '타이틀',
+    message: 'AlertModal입니다.',
     onClose: () => {},
     onBackdropClick: () => {},
   },
@@ -45,6 +51,8 @@ export const AlertModalMedium: Story = {
     isOpen: true,
     position: 'center',
     size: 'medium',
+    title: '타이틀',
+    message: 'AlertModal입니다.',
     onClose: () => {},
     onBackdropClick: () => {},
   },
@@ -55,6 +63,8 @@ export const AlertModalLarge: Story = {
     isOpen: true,
     position: 'center',
     size: 'large',
+    title: '타이틀',
+    message: 'AlertModal입니다.',
     onClose: () => {},
     onBackdropClick: () => {},
   },
