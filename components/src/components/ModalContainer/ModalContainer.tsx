@@ -1,12 +1,11 @@
 import { MouseEvent, ReactNode } from "react";
-import { ModalColor } from "../../constants/theme";
+import { useModalContext } from "../../hooks/useModalContext";
 import { ModalPosition, ModalSize } from "../../types/modal";
 import { ModalWrapper } from "./ModalContainer.styles";
 
 interface ModalContainerProps {
   position: ModalPosition;
   size: ModalSize;
-  backgroundColor: ModalColor;
   titleId: string;
   contentId: string;
   children: ReactNode;
@@ -15,11 +14,12 @@ interface ModalContainerProps {
 const ModalContainer = ({
   position,
   size,
-  backgroundColor,
   titleId,
   contentId,
   children,
 }: ModalContainerProps) => {
+  const { currentTheme } = useModalContext();
+
   const stopPropagation = (e: MouseEvent<HTMLDivElement>) => {
     e.stopPropagation();
   };
@@ -28,7 +28,7 @@ const ModalContainer = ({
     <ModalWrapper
       $position={position}
       $size={size}
-      $backgroundColor={backgroundColor}
+      $backgroundColor={currentTheme.background}
       aria-labelledby={titleId}
       aria-describedby={contentId}
       onClick={stopPropagation}

@@ -1,37 +1,33 @@
 import { IoClose } from "react-icons/io5";
-import { ModalColor } from "../../constants/theme";
+import { useModalContext } from "../../hooks/useModalContext";
 import { CloseButton, HeaderWrapper, Title } from "./ModalHeader.styles";
 
 interface ModalHeaderProps {
   titleId: string;
   titleText?: string;
   titleSize?: number;
-  titleColor: ModalColor;
-  iconColor: ModalColor;
   showCloseButton: boolean;
-  onClose: () => void;
 }
 
 const ModalHeader = ({
   titleId,
   titleText,
   titleSize,
-  titleColor,
-  iconColor,
   showCloseButton,
-  onClose,
 }: ModalHeaderProps) => {
+  const { currentTheme, onClose } = useModalContext();
+
   return (
     <HeaderWrapper $titleText={titleText}>
       {titleText && (
-        <Title $color={titleColor} $size={titleSize} id={titleId}>
+        <Title $color={currentTheme.title} $size={titleSize} id={titleId}>
           {titleText}
         </Title>
       )}
       {showCloseButton && (
         <CloseButton type="button" onClick={onClose} aria-label="close">
           <IoClose
-            color={iconColor}
+            color={currentTheme.icon}
             size={30}
             aria-hidden="true"
             focusable="false"

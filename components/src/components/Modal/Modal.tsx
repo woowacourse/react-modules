@@ -1,14 +1,15 @@
 import { ReactNode, useId } from "react";
-import { THEME_MAP, ThemeMode } from "../../constants/theme";
+import { ThemeMode } from "../../constants/theme";
+import { ModalProvider } from "../../contexts/ModalContext";
 import useEscapeKey from "../../hooks/useEscapeKey";
 import { ModalPosition, ModalSize } from "../../types/modal";
+import Button from "../Common/Button/Button";
+import ButtonGroup from "../Common/ButtonGroup/ButtonGroup";
+import Input from "../Common/Input/Input";
 import Portal from "../Common/Portal/Portal";
 import ModalContainer from "../ModalContainer/ModalContainer";
 import ModalHeader from "../ModalHeader/ModalHeader";
 import { ModalBackdrop, ModalContent } from "./Modal.styles";
-import Button from "../Common/Button/Button";
-import ButtonGroup from "../Common/ButtonGroup/ButtonGroup";
-import Input from "../Common/Input/Input";
 
 interface TitleProps {
   text?: string;
@@ -52,7 +53,6 @@ const Modal = ({
   showCloseButton = true,
 }: ModalProps) => {
   useEscapeKey(onClose);
-  const currentTheme = THEME_MAP[theme];
   const id = useId();
   const titleId = `modal-title-${id}`;
   const contentId = `modal-content-${id}`;
@@ -61,30 +61,28 @@ const Modal = ({
     <>
       {isOpen && (
         <Portal>
-          <ModalBackdrop
-            $position={position}
-            onClick={onClose}
-            role="presentation"
-          >
-            <ModalContainer
-              position={position}
-              size={size}
-              backgroundColor={currentTheme.background}
-              titleId={titleId}
-              contentId={contentId}
+          <ModalProvider theme={theme} onClose={onClose}>
+            <ModalBackdrop
+              $position={position}
+              onClick={onClose}
+              role="presentation"
             >
-              <ModalHeader
+              <ModalContainer
+                position={position}
+                size={size}
                 titleId={titleId}
-                titleText={title?.text}
-                titleSize={title?.size}
-                titleColor={currentTheme.title}
-                iconColor={currentTheme.icon}
-                showCloseButton={showCloseButton}
-                onClose={onClose}
-              />
-              <ModalContent id={contentId}>{children}</ModalContent>
-            </ModalContainer>
-          </ModalBackdrop>
+                contentId={contentId}
+              >
+                <ModalHeader
+                  titleId={titleId}
+                  titleText={title?.text}
+                  titleSize={title?.size}
+                  showCloseButton={showCloseButton}
+                />
+                <ModalContent id={contentId}>{children}</ModalContent>
+              </ModalContainer>
+            </ModalBackdrop>
+          </ModalProvider>
         </Portal>
       )}
     </>
