@@ -7,15 +7,12 @@ import {
   ModalHeaderProps,
 } from '../types/Modal.type';
 import { ModalBackdrop, ModalFrame, ModalHeader, ModalCloseButton, ModalContent, ButtonBar } from './Modal.styles';
+import useModalCloseByEsc from '../hooks/useModalCloseByEsc';
 
 const ModalContext = createContext<ModalContextType | undefined>(undefined);
 
 const Modal = ({ children, isOpen, onAfterOpen, onClose, position = 'center' }: ModalProps) => {
-  const handleCloseByEsc = (e: KeyboardEvent) => {
-    if (e.key === 'Escape') {
-      onClose();
-    }
-  };
+  useModalCloseByEsc(onClose);
 
   const handleCloseByBackdrop = (e: MouseEvent<HTMLDivElement>) => {
     if (e.target === e.currentTarget) {
@@ -28,14 +25,6 @@ const Modal = ({ children, isOpen, onAfterOpen, onClose, position = 'center' }: 
       onAfterOpen();
     }
   }, [isOpen, onAfterOpen]);
-
-  useEffect(() => {
-    window.addEventListener('keydown', handleCloseByEsc);
-
-    return () => {
-      window.removeEventListener('keydown', handleCloseByEsc);
-    };
-  }, [handleCloseByEsc]);
 
   if (!isOpen) return null;
 
