@@ -8,28 +8,22 @@ const KEY_INDEX_MATCH = ["first", "second", "third", "fourth"];
 
 const useCardNumber = (): HookReturnType<"cardNumber"> => {
   const { state, onChange, isLengthComplete } = useInputValue<CardNumberType>({
-    initialState: {
-      first: "",
-      second: "",
-      third: "",
-      fourth: "",
-    },
+    initialState: "",
     maxLength: MAX_LENGTH.CARD_NUMBER,
     keyIndexMap: KEY_INDEX_MATCH,
   });
 
   const { errors, errorMessage, clearError, changeError, isErrorComplete } = useErrors({
-    initialErrorState: { first: false, second: false, third: false, fourth: false },
+    initialErrorState: { cardNumber: false },
   });
 
-  const validateInput: ValidInputFuncType = (value: string, index: number) => {
-    const type = KEY_INDEX_MATCH[index];
+  const validateInput: ValidInputFuncType = (value: string) => {
     const { error, message } = validateNumericString(value);
 
     if (error) {
-      changeError(type, message);
+      changeError("cardNumber", message);
     } else {
-      clearError(type);
+      clearError("cardNumber");
     }
   };
 
