@@ -6,6 +6,7 @@ import { Title } from "./Title/Title";
 import { Button } from "./Button/Button";
 import { CloseButton } from "./CloseButton/CloseButton";
 import { Body } from "./Body/Body";
+import ConfirmButton from "./Button/variants/ConfirmButton";
 
 type ModalProps = {
   /** 모달 열림/닫힘 상태 */
@@ -75,5 +76,6 @@ Modal.Title = Title;
 Modal.CloseButton = CloseButton;
 Modal.Body = Body;
 Modal.Button = Button;
+Modal.ConfirmButton = ConfirmButton;
 
 export default Modal;
