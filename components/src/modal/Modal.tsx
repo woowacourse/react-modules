@@ -1,6 +1,7 @@
 import styled from '@emotion/styled';
-import { PropsWithChildren, useEffect, useMemo, useRef } from 'react';
+import { PropsWithChildren, useMemo } from 'react';
 import CloseButton from './CloseButton';
+import useClickOutside from './hooks/useClickOutside';
 import {
   MODAL_CONTAINER_POSITION_STYLES,
   MODAL_CONTAINER_RESPONSIVE_WIDTH_STYLES,
@@ -20,37 +21,17 @@ function ModalContainer({
   style,
   children,
 }: PropsWithChildren<ModalProps>) {
-  const modalRef = useRef<HTMLDivElement>(null);
+  const modalRef = useClickOutside<HTMLDivElement>(onClose);
 
   const memoizedStyle = useMemo(() => {
     if (!style) return {};
     return { ...style };
   }, [style]);
 
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (modalRef.current && event.target === modalRef.current) {
-        onClose();
-      }
-    };
-
-    if (open) {
-      document.addEventListener('mousedown', handleClickOutside);
-    }
-
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
-  }, [open, onClose]);
-
   return (
     open && (
-      <StyledModalContainer
-        position={position}
-        style={memoizedStyle}
-        ref={modalRef}
-      >
-        <ModalWrapper position={position} size={size}>
+      <StyledModalContainer position={position} style={memoizedStyle}>
+        <ModalWrapper position={position} size={size} ref={modalRef}>
           {children}
         </ModalWrapper>
       </StyledModalContainer>
