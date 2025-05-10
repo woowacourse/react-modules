@@ -3,20 +3,24 @@ import Modal from './modal/Modal';
 function App() {
   return (
     <Modal role="alert-modal">
-      <Modal.ButtonTrigger>
+      <Modal.OpenTrigger>
         <button>열기</button>
-      </Modal.ButtonTrigger>
+      </Modal.OpenTrigger>
       <Modal.Content title="모달" showCloseButton={false}>
         <div>컨텐츠</div>
         <Modal.PromptInput />
 
         <Modal.ButtonWrapper direction="column">
-          <Modal.Button variant="primary" onClick={() => alert('클릭됨')}>
-            동의하고 저장하기
-          </Modal.Button>
-          <Modal.Button variant="secondary" onClick={() => {}}>
-            닫기
-          </Modal.Button>
+          <Modal.CloseTrigger>
+            <Modal.Button variant="primary" onClick={() => alert('클릭됨')}>
+              동의하고 저장하기
+            </Modal.Button>
+          </Modal.CloseTrigger>
+          <Modal.CloseTrigger>
+            <Modal.Button variant="secondary" onClick={() => {}}>
+              닫기
+            </Modal.Button>
+          </Modal.CloseTrigger>
         </Modal.ButtonWrapper>
       </Modal.Content>
     </Modal>

@@ -1,7 +1,7 @@
 import { PropsWithChildren } from 'react';
 import { useModalContext } from './ModalProvider';
 
-function ButtonTrigger({ children }: PropsWithChildren) {
+function ModalOpenTrigger({ children }: PropsWithChildren) {
   const { onOpen } = useModalContext();
 
   return (
@@ -11,4 +11,4 @@ function ButtonTrigger({ children }: PropsWithChildren) {
   );
 }
 
-export default ButtonTrigger;
+export default ModalOpenTrigger;

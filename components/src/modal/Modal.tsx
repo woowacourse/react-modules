@@ -1,5 +1,7 @@
 import styled from '@emotion/styled';
 import { CSSProperties, PropsWithChildren, useEffect, useMemo } from 'react';
+import Button from './Button';
+import ButtonWrapper from './ButtonWrapper';
 import CloseButton from './CloseButton';
 import useClickOutside from './hooks/useClickOutside';
 import {
@@ -8,12 +10,11 @@ import {
   MODAL_CONTENT_RESPONSIVE_WIDTH_STYLES,
   MODAL_CONTENT_SIZE_STYLES,
 } from './Modal.styles';
-import Title from './Title';
+import ModalCloseTrigger from './ModalCloseTrigger';
+import ModalOpenTrigger from './ModalOpenTrigger';
 import ModalProvider, { useModalContext } from './ModalProvider';
-import ButtonWrapper from './ButtonWrapper';
 import PromptInput from './PromptInput';
-import Button from './Button';
-import ButtonTrigger from './ButtonTrigger';
+import Title from './Title';
 
 // ============================== Types ==============================
 
@@ -189,10 +190,11 @@ const FixedCloseButton = styled(CloseButton)`
 `;
 
 const Modal = Object.assign(ModalProvider, {
+  OpenTrigger: ModalOpenTrigger,
+  CloseTrigger: ModalCloseTrigger,
   Content: ModalContainer,
-  ButtonTrigger,
-  CloseButton,
   Title,
+  CloseButton,
   PromptInput,
   ButtonWrapper,
   Button,
