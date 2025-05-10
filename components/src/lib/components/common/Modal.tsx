@@ -4,6 +4,7 @@ import styled from '@emotion/styled';
 
 import ModalBackdrop from './Modal.Backdrop';
 import ModalContainer from './Modal.Container';
+import ModalTitle from './Modal.Title';
 import Portal from './Portal';
 import { ModalContext, useModalContext } from './useModalContext';
 
@@ -39,22 +40,11 @@ export type ModalProps = {
   closeByEscapeKey?: boolean;
 } & ComponentProps<'div'>;
 
-type ModalTitleProps = {
-  /**
-   * The title of the modal
-   */
-  title: string;
-};
-
 type ModalDescriptionProps = {
   /**
    * The description of the modal
    */
   description?: string;
-};
-
-const ModalTitle = ({ title }: ModalTitleProps) => {
-  return <StyledModalTitle aria-label={title}>{title}</StyledModalTitle>;
 };
 
 const ModalDescription = ({ description }: ModalDescriptionProps) => {
@@ -139,13 +129,6 @@ Modal.CloseButton = ModalCloseButton;
 Modal.ButtonWrapper = ModalButtonWrapper;
 Modal.CancelButton = ModalCancelButton;
 Modal.ConfirmButton = ModalConfirmButton;
-
-const StyledModalTitle = styled.div`
-  display: flex;
-  align-items: center;
-  font-size: 20px;
-  font-weight: 600;
-`;
 
 const StyledModalDescription = styled.p`
   font-size: 16px;
