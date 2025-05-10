@@ -184,7 +184,7 @@ function App() {
       {isOpen && (
         <ConfirmModal
           title="카드를 삭제하시겠습니까?"
-          alertText="삭제하면 복구하실 수 없습니다."
+          confirmText="삭제하면 복구하실 수 없습니다."
           size="medium"
           onRequestClose={handleCloseModal}
           onConfirm={() => console.log("카드가 삭제되었습니다.")}
