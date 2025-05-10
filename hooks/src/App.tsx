@@ -47,6 +47,7 @@ function App() {
               value={card.cardNumber[index]}
               onChange={(e) => handleCardNumberChange(e, index)}
               placeholder="1234"
+              className={card.isError[index] ? "input-error" : ""}
             />
           ))}
 

@@ -75,8 +75,6 @@ function App() {
     password.setPasswordNumber(e.target.value);
   };
 
-  console.log(expiry.errorMessage);
-
   return (
     <div className="App">
       <h1>카드 정보 입력</h1>

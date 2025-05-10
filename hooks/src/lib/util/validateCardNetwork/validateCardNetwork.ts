@@ -40,12 +40,16 @@ const CARD_RULES: CardRule[] = [
 ];
 
 export function validateCardNetwork(cardNumbers: string[]): CardNetwork {
-  const fullCardNumber = cardNumbers.join("");
+  const fullCardNumber = cardNumbers.join("").trim();
 
   for (const rule of CARD_RULES) {
     if (rule.match(fullCardNumber)) return rule.name;
   }
 
-  if (fullCardNumber.length < CARD_NETWORK_ID_LENGTH) return "PENDING";
+  if (
+    fullCardNumber.length === 0 ||
+    fullCardNumber.length < CARD_NETWORK_ID_LENGTH
+  )
+    return "PENDING";
   return "DEFAULT";
 }

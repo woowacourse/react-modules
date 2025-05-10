@@ -1,15 +1,44 @@
 import { isNumeric } from "..";
-import {
-  CARD_NUMBER_LENGTH,
-  CardNetwork,
-  ERROR_MESSAGE,
-} from "../../constants/index";
+import { CardNetwork, ERROR_MESSAGE } from "../../constants/index";
 
-function getCardNumberGroupError(cardNumber: string) {
-  if (!isNumeric(cardNumber)) return ERROR_MESSAGE.NOT_NUMERIC;
-  if (cardNumber.length !== CARD_NUMBER_LENGTH) {
-    return ERROR_MESSAGE.INVALID_LENGTH(CARD_NUMBER_LENGTH);
+const CARD_INPUT_LENGTH: Record<CardNetwork, number[]> = {
+  VISA: [4, 4, 4, 4],
+  MASTER: [4, 4, 4, 4],
+  DINERS: [4, 6, 4],
+  AMEX: [4, 6, 5],
+  UNIONPAY: [4, 4, 4, 4],
+  PENDING: [4, 4, 4, 4],
+  DEFAULT: [4],
+};
+
+function getCardNumberGroupError(
+  cardNumber: string,
+  cardNetwork: CardNetwork,
+  index: number
+) {
+  if (cardNumber.length === 0) return "";
+
+  if (!isNumeric(cardNumber)) {
+    return ERROR_MESSAGE.NOT_NUMERIC;
   }
+
+  if (
+    !CARD_INPUT_LENGTH.hasOwnProperty(cardNetwork) ||
+    cardNetwork === "DEFAULT"
+  ) {
+    return ERROR_MESSAGE.INVALID_CARD_NETWORK;
+  }
+
+  const groupLengths = CARD_INPUT_LENGTH[cardNetwork];
+  if (index >= groupLengths.length) {
+    return ERROR_MESSAGE.INVALID_GROUP_INDEX;
+  }
+
+  const expectedLength = groupLengths[index];
+  if (cardNumber.length !== expectedLength) {
+    return ERROR_MESSAGE.INVALID_LENGTH(expectedLength);
+  }
+
   return "";
 }
 
@@ -21,7 +50,11 @@ export function validateCardNumber(
 
   cardNumbers.forEach((cardNumber, index) => {
     const trimCardNumber = cardNumber.trim();
-    cardNumberErrors[index] = getCardNumberGroupError(trimCardNumber);
+    cardNumberErrors[index] = getCardNumberGroupError(
+      trimCardNumber,
+      cardNetwork,
+      index
+    );
   });
 
   return cardNumberErrors;
