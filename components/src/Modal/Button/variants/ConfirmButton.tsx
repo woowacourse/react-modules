@@ -6,16 +6,16 @@ type ConfirmButtonProps = {
   /** 오른쪽 버튼 */
   rightButtonTitle: string;
   /** 왼쪽 버튼 클릭 시 동작 */
-  leftButtonOnClick?: () => void;
+  onLeftButtonClick: () => void;
   /** 오른쪽 버튼 클릭 시 동작 */
-  rightButtonOnClick?: () => void;
+  onRightButtonClick: () => void;
 };
 
 const ConfirmButton = ({
   leftButtonTitle = "취소",
   rightButtonTitle = "확인",
-  leftButtonOnClick,
-  rightButtonOnClick,
+  onLeftButtonClick,
+  onRightButtonClick,
 }: ConfirmButtonProps) => {
   return (
     <>
@@ -31,13 +31,13 @@ const ConfirmButton = ({
           title={leftButtonTitle}
           variant="secondary"
           size="small"
-          onClick={leftButtonOnClick}
+          onClick={onLeftButtonClick}
         ></Modal.Button>
         <Modal.Button
           title={rightButtonTitle}
           variant="primary"
           size="small"
-          onClick={rightButtonOnClick}
+          onClick={onRightButtonClick}
         ></Modal.Button>
       </div>
     </>

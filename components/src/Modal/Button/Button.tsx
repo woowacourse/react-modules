@@ -4,7 +4,7 @@ type ButtonProps = {
   title: string;
   variant?: "primary" | "secondary";
   size?: "small" | "medium" | "large";
-  onClick?: () => void;
+  onClick: () => void;
   styled?: React.CSSProperties;
 };
 
