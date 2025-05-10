@@ -7,8 +7,6 @@ export const ERROR_MESSAGE = {
   INVALID_GROUP_INDEX: "카드 번호 그룹 인덱스가 유효하지 않습니다.",
 } as const;
 
-export const CARD_NUMBER_LENGTH = 4;
-
 export const CVC_LENGTH = 3;
 
 export const PASSWORD_LENGTH = 2;
