@@ -1,52 +1,27 @@
-export type SingleErrorType = boolean;
-export type ListErrorType = boolean[];
-
 export type ErrorMessageType = "" | "숫자만 입력 가능합니다." | "유효하지 않은 월입니다." | "유효하지 않은 연도입니다.";
 
 export interface ValidateFuncReturnType {
   error: boolean;
-  message: ErrorMessageType;
+  errorMessage: ErrorMessageType;
 }
 
-export type ValidInputFuncType = {
-  (value: string): void;
-  (value: string, index: number): void;
-};
-
-export interface HookReturnType<T extends keyof CardInformationType> {
-  state: CardInformationType[T];
-  onChange: setCardInformationType[T];
-  errors: Record<string, boolean>;
+export interface HookReturnType {
+  value: string;
+  onChange: (value: string) => void;
+  error: boolean;
   errorMessage: ErrorMessageType;
-  validateInput: ValidInputFuncType;
   isLengthComplete: boolean;
   isErrorComplete: boolean;
   isValid: boolean;
   cardType?: string;
 }
 
-export type CardInformationType = {
-  cardNumber: CardNumberType;
-  expirationDate: ExpirationDateType;
-  cvcNumber: CvcNumberType;
-  password: PasswordType;
-};
-
-export type setCardInformationType = {
-  cardNumber: SetValueFn<CardNumberType>;
-  expirationDate: SetValueFn<ExpirationDateType[keyof ExpirationDateType]>;
-  cvcNumber: SetValueFn<CvcNumberType>;
-  password: SetValueFn<PasswordType>;
-};
-
 export type CardNumberType = string;
-export type ExpirationDateType = Record<"month" | "year", string>;
+export type ExpirationDateType = string;
 export type CvcNumberType = string;
 export type PasswordType = string;
 
 export type cardStateType = CardNumberType | ExpirationDateType | CvcNumberType | PasswordType;
-
-export type SetValueFn<T> = (value: T, index?: number) => void;
 
 export type CardType = "visa" | "master" | "amex" | "diners" | "unionpay" | "none";
 
