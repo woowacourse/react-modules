@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { ERROR_MESSAGE } from '../constants/errorMessage';
 import {
   isEmpty,
@@ -9,9 +9,11 @@ import {
 import { isOverInputLength } from '../utils/overInputLength';
 import { initialError } from '../utils/initial';
 import { ErrorType } from '../types/errorType';
-import { INPUT_RULE } from '../constants/inputRule';
-import { identifyCardBrand } from '../utils/identifyCardBrand';
-import { getCardNumberLength } from '../utils/getCardNumberLength';
+import {
+  getCardNumberLength,
+  getFormat,
+  identifyCardBrand,
+} from '../utils/cardBrandUtils';
 
 type ValitationResult = {
   numbers: string;
@@ -29,6 +31,7 @@ export default function useCardNumbers(): ValitationResult {
   const [error, setError] = useState<ErrorType>(initialError);
   const cardBrand = identifyCardBrand(numbers);
   const cardNumberLength = getCardNumberLength(cardBrand);
+  const format = getFormat(cardBrand);
 
   const updateError = (args: UpdateErrorArgs) => {
     setError({
@@ -38,15 +41,16 @@ export default function useCardNumbers(): ValitationResult {
   };
 
   const handleCardNumbers = (value: string) => {
-    // 😱length 수정 필요
-    if (isOverInputLength(value, 16)) return;
-
-    validate(value);
+    if (isOverInputLength(value, cardNumberLength)) return;
 
     setNumbers(value);
   };
 
-  const validate = (value: string) => {
+  useEffect(() => {
+    validate(numbers, cardBrand, cardNumberLength);
+  }, [numbers, cardBrand, cardNumberLength]);
+
+  const validate = (value: string, brand: string, length: number) => {
     if (isEmpty(value)) {
       updateError({ isValid: false });
       return;
@@ -59,18 +63,9 @@ export default function useCardNumbers(): ValitationResult {
       });
       return;
     }
-    // 😱length 매개변수 수정 필요
-    if (!isValidLength(value, 16)) {
-      updateError({
-        isValid: true,
-        errorMessage: ERROR_MESSAGE.CARD_NUMBERS.INVALID_LENGTH(
-          INPUT_RULE.CARD_NUMBERS.MAX_LENGTH
-        ),
-      });
-      return;
-    }
 
-    if (!isValidCardBrand(cardBrand)) {
+    if (!isValidCardBrand(brand)) {
+      console.log('barnd', brand);
       updateError({
         isValid: true,
         errorMessage: ERROR_MESSAGE.CARD_NUMBERS.INVALID_NUMBER,
@@ -78,8 +73,21 @@ export default function useCardNumbers(): ValitationResult {
       return;
     }
 
+    if (!isValidLength(value, length)) {
+      updateError({
+        isValid: true,
+        errorMessage: ERROR_MESSAGE.CARD_NUMBERS.INVALID_LENGTH(length),
+      });
+      return;
+    }
+    console.log('before false');
     updateError({ isValid: false });
   };
 
-  return { numbers, cardBrand, error, handleCardNumbers };
+  return {
+    numbers,
+    cardBrand: identifyCardBrand(numbers),
+    error,
+    handleCardNumbers,
+  };
 }

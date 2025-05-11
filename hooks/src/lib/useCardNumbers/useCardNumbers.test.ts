@@ -1,7 +1,11 @@
 import { renderHook, act } from '@testing-library/react';
 import useCardNumbers from './useCardNumbers';
 import { ERROR_MESSAGE } from '../constants/errorMessage';
-import { getCardNumberLength } from '../utils/getCardNumberLength';
+import {
+  getCardNumberLength,
+  identifyCardBrand,
+} from '../utils/cardBrandUtils';
+import { CARD_BRAND_INFO } from '../constants/cardBrandRule';
 
 test('숫자가 아닌 값을 validate 하면 에러 메시지가 세팅된다', () => {
   const { result } = renderHook(() => useCardNumbers());
@@ -12,19 +16,6 @@ test('숫자가 아닌 값을 validate 하면 에러 메시지가 세팅된다',
 
   expect(result.current.error.errorMessage).toBe(
     ERROR_MESSAGE.CARD_NUMBERS.NOT_A_NUMBER
-  );
-});
-
-test('4자리가 아닌 숫자를 validate 하면 에러 메시지가 세팅된다', () => {
-  const { result } = renderHook(() => useCardNumbers());
-
-  act(() => {
-    result.current.handleCardNumbers('12');
-  });
-
-  // 😱 length 수정 필요
-  expect(result.current.error.errorMessage).toBe(
-    ERROR_MESSAGE.CARD_NUMBERS.INVALID_LENGTH(4)
   );
 });
 
@@ -132,4 +123,21 @@ describe('카드사별 카드 번호 길이 테스트', () => {
 
     expect(length).toBe(15);
   });
+
+  test.each(['4123', '5123', '36123', '34123', '622126'])(
+    '각 카드사별 카드 번호 길이를 충족하지 못한 경우 예외 메시지 반환',
+    (number) => {
+      const { result } = renderHook(() => useCardNumbers());
+
+      const brand = identifyCardBrand(number);
+
+      act(() => {
+        result.current.handleCardNumbers(number);
+      });
+
+      expect(result.current.error.errorMessage).toBe(
+        ERROR_MESSAGE.CARD_NUMBERS.INVALID_LENGTH(CARD_BRAND_INFO[brand].length)
+      );
+    }
+  );
 });
