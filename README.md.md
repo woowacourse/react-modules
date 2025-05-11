@@ -59,7 +59,7 @@
 
 - [x] input 상태에 따른 에러 및 에러메시지 처리 (상태 제거 -> 파생 값으로 관리)
 - [x] expirationDate 훅 단일 값으로 수정
-  - [ ] 화면에 보일 때, parsing 해서 보여주기 (month, year)
+  - [x] 화면에 보일 때, parsing 해서 보여주기 (month, year)
 - [x] useInputValue 단일값만 처리 (상태 단일값만)
 - [ ] useCardNumber, useExpirationDate 훅 인자로 splitter 받기
 
