@@ -1,4 +1,4 @@
-import React, { ComponentProps } from 'react';
+import React, { ComponentProps, useRef } from 'react';
 import './App.css';
 import {
   useCardPasswordInput,
@@ -54,13 +54,42 @@ function InputField({ title, label, error, children }: InputFieldProps) {
 }
 
 const CardNumberInput = () => {
-  const { cardNumberGroups, cardBrand, onChangeHandler, error } = useCardNumbersInput();
+  const { cardNumberGroups, cardBrand, formatPattern, onChangeHandler, error } =
+    useCardNumbersInput();
+  const inputRefs = useRef<Array<HTMLInputElement | null>>([]);
+
+  const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    const index = Number(name);
+
+    onChangeHandler(e);
+
+    if (value.length >= formatPattern[index] && index < formatPattern.length - 1) {
+      const nextInput = inputRefs.current[index + 1];
+      if (nextInput) {
+        nextInput.focus();
+      }
+    }
+  };
+
   return (
     <InputField title="카드 번호" label="라벨 cardNumbers" error={error}>
-      <Input type="text" name="0" onChange={onChangeHandler} autoFocus />
-      <Input type="text" name="1" onChange={onChangeHandler} autoFocus />
-      <Input type="text" name="2" onChange={onChangeHandler} autoFocus />
-      <Input type="text" name="3" onChange={onChangeHandler} autoFocus />
+      {formatPattern.map((maxLength, index) => (
+        <React.Fragment key={index}>
+          <Input
+            type="text"
+            name={index.toString()}
+            value={cardNumberGroups[index] || ''}
+            onChange={handleInput}
+            maxLength={maxLength}
+            ref={(el) => {
+              inputRefs.current[index] = el;
+            }}
+            autoFocus={index === 0}
+            placeholder={`${'*'.repeat(maxLength)}`}
+          />
+        </React.Fragment>
+      ))}
       <p>실시간 value : {cardNumberGroups.join(' ')}</p>
       <p>카드사 value : {cardBrand}</p>
     </InputField>

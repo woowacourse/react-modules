@@ -5,15 +5,31 @@ import { getFirstErrorMessage } from './validator/getFirstErrorMessage';
 
 type CardBrand = 'VISA' | 'MASTER' | 'DINERS' | 'AMEX' | 'UNIONPAY' | 'UNKNOWN';
 
+const CARD_FORMAT_PATTERNS = {
+  VISA: [4, 4, 4, 4],
+  MASTER: [4, 4, 4, 4],
+  DINERS: [4, 6, 4],
+  AMEX: [4, 6, 5],
+  UNIONPAY: [4, 4, 4, 4],
+  UNKNOWN: [4, 4, 4, 4],
+};
+
 export function useCardNumbersInput() {
   const [cardNumberGroups, setCardNumberGroups] = useState(['', '', '', '']);
+  const [cardBrand, setCardBrand] = useState<CardBrand>('UNKNOWN');
+  const [formatPattern, setFormatPattern] = useState(CARD_FORMAT_PATTERNS.UNKNOWN);
 
   const cardNumber = cardNumberGroups.join('');
 
-  const [cardBrand, setCardBrand] = useState<CardBrand>('UNKNOWN');
-
   useEffect(() => {
-    setCardBrand(determineCardBrand(cardNumber));
+    const newCardBrand = determineCardBrand(cardNumber);
+    setCardBrand(newCardBrand);
+
+    setFormatPattern(CARD_FORMAT_PATTERNS[newCardBrand]);
+
+    if (cardNumber) {
+      formatCardNumber(cardNumber, newCardBrand);
+    }
   }, [cardNumber]);
 
   const [error, setError] = useState<{ isValid: boolean; errorMessage: string }>({
@@ -21,16 +37,40 @@ export function useCardNumbersInput() {
     errorMessage: '',
   });
 
+  function formatCardNumber(number: string, brand: CardBrand) {
+    const cleanNumber = number.replace(/\D/g, '');
+    const pattern = CARD_FORMAT_PATTERNS[brand];
+
+    let formattedGroups: string[] = [];
+    let startIndex = 0;
+
+    for (let i = 0; i < pattern.length; i++) {
+      const groupSize = pattern[i];
+      const endIndex = startIndex + groupSize;
+      const group = cleanNumber.substring(startIndex, endIndex);
+      formattedGroups.push(group);
+      startIndex = endIndex;
+    }
+
+    setCardNumberGroups(formattedGroups);
+  }
+
   function onChangeHandler(e: ChangeEvent<HTMLInputElement>) {
     const { name, value } = e.target;
     const index = Number(name);
 
-    const newCardNumberGroups = cardNumberGroups.map((num, i) => (i === index ? value : num));
+    const cardNumberError = validateCardNumber(value);
+
+    const numericValue = value.replace(/\D/g, '');
+    const maxLength = formatPattern[index] || 4;
+    const truncatedValue = numericValue.substring(0, maxLength);
+
+    let newCardNumberGroups = [...cardNumberGroups];
+    newCardNumberGroups[index] = truncatedValue;
 
     const newCardNumber = newCardNumberGroups.join('');
     const newCardBrand = determineCardBrand(newCardNumber);
 
-    const cardNumberError = validateCardNumber(value);
     const fullCardNumberError = validateFullCardNumber(newCardBrand, newCardNumber);
 
     const errorResult = { ...cardNumberError, ...fullCardNumberError };
@@ -47,6 +87,7 @@ export function useCardNumbersInput() {
     cardNumberGroups,
     cardNumber,
     cardBrand,
+    formatPattern,
     onChangeHandler,
     error,
   };
