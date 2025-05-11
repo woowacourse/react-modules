@@ -1,107 +1,117 @@
-import { renderHook, act } from '@testing-library/react';
+import { renderHook, act, waitFor } from '@testing-library/react';
 import useCardNumberValidation from '.';
 
 describe('useCardNumberValidation', () => {
-  it('useCardNumberValidation의 초기 noError 상태는 true이다.', () => {
-    const initialNoError = true;
+  it('초기 noError 상태는 true이다.', () => {
     const { result } = renderHook(() => useCardNumberValidation());
-
-    expect(result.current.noError).toEqual(initialNoError);
-  });
-
-  it('숫자가 아닌 값이 들어오면 에러메시지를 반환한다.', () => {
-    const { result } = renderHook(() => useCardNumberValidation());
-    const event = {
-      target: { value: 'hi' },
-    } as React.ChangeEvent<HTMLInputElement>;
-
-    act(() => {
-      result.current.onChange(0)(event);
-    });
-
-    expect(result.current.errorMessage).toBe('숫자만 입력 가능합니다.');
-  });
-
-  it('숫자만 입력하면 noError가 true이다.', () => {
-    const { result } = renderHook(() => useCardNumberValidation());
-    const event = {
-      target: { value: '1234' },
-    } as React.ChangeEvent<HTMLInputElement>;
-
-    act(() => {
-      result.current.onChange(0)(event);
-      result.current.onChange(1)(event);
-      result.current.onChange(2)(event);
-      result.current.onChange(3)(event);
-    });
-
     expect(result.current.noError).toBe(true);
   });
 
-  it('숫자가 아닌 값이 들어오면 noError가 false이다.', () => {
+  it('정확한 길이의 숫자 입력 시 noError는 true이다.', async () => {
     const { result } = renderHook(() => useCardNumberValidation());
-    const goodEvent = {
-      target: { value: '1234' },
-    } as React.ChangeEvent<HTMLInputElement>;
-    const badEvent = {
-      target: { value: 'hi' },
-    } as React.ChangeEvent<HTMLInputElement>;
+    const testCases = [
+      {
+        name: 'Visa',
+        value: '4111111111111111',
+        expectedBrand: 'visa',
+        expectedFormat: [4, 4, 4, 4],
+        expectedFormatted: '4111 1111 1111 1111',
+      },
+      {
+        name: 'Diners',
+        value: '36123456789012',
+        expectedBrand: 'diners',
+        expectedFormat: [4, 6, 4],
+        expectedFormatted: '3612 345678 9012',
+      },
+      {
+        name: 'Amex',
+        value: '341234567890123',
+        expectedBrand: 'amex',
+        expectedFormat: [4, 6, 5],
+        expectedFormatted: '3412 345678 90123',
+      },
+      {
+        name: 'UnionPay',
+        value: '6221261234567890',
+        expectedBrand: 'unionpay',
+        expectedFormat: [4, 4, 4, 4],
+        expectedFormatted: '6221 2612 3456 7890',
+      },
+    ];
 
-    act(() => {
-      result.current.onChange(0)(goodEvent);
-      result.current.onChange(1)(goodEvent);
-      result.current.onChange(2)(badEvent);
-      result.current.onChange(3)(goodEvent);
-    });
+    for (const test of testCases) {
+      const event = {
+        target: { value: test.value },
+      } as React.ChangeEvent<HTMLInputElement>;
 
-    expect(result.current.noError).toBe(false);
-  });
+      act(() => {
+        result.current.onChange(0)(event);
+      });
 
-  it('숫자 입력 시 에러 메시지가 사라진다.', () => {
-    const { result } = renderHook(() => useCardNumberValidation());
-    const badEvent = {
-      target: { value: '3ab' },
-    } as React.ChangeEvent<HTMLInputElement>;
-    const goodEvent = {
-      target: { value: '1234' },
-    } as React.ChangeEvent<HTMLInputElement>;
-
-    act(() => {
-      result.current.onChange(0)(badEvent);
-    });
-    expect(result.current.errorMessage).toBe('숫자만 입력 가능합니다.');
-
-    act(() => {
-      result.current.onChange(0)(goodEvent);
-    });
-    expect(result.current.errorMessage).toBe('');
+      await waitFor(() => {
+        expect(result.current.cardBrand).toBe(test.expectedBrand);
+        expect(result.current.format).toEqual(test.expectedFormat);
+        expect(result.current.formattedValue).toBe(test.expectedFormatted);
+        expect(result.current.noError).toBe(true);
+        expect(result.current.errorMessage).toBe('');
+      });
+    }
   });
 
   it('자릿수가 부족한 경우 에러 메시지를 반환한다.', () => {
     const { result } = renderHook(() => useCardNumberValidation());
-    const shortValueEvent = {
-      target: { value: '12' }, // format[index]는 4자리
+    const shortValue = {
+      target: { value: '41111111111' }, // Visa지만 부족한 길이
     } as React.ChangeEvent<HTMLInputElement>;
 
     act(() => {
-      result.current.onChange(0)(shortValueEvent);
+      result.current.onChange(0)(shortValue);
     });
 
-    expect(result.current.errorMessage).toBe(
-      '올바른 길이의 숫자를 입력해주세요.'
-    );
+    expect(result.current.noError).toBe(false);
+    expect(result.current.errorMessage).toBe('16자리의 숫자를 입력해주세요.');
   });
 
-  it('올바른 자릿수를 입력하면 에러 메시지가 없다.', () => {
+  it('formattedValue는 카드 브랜드에 따라 포맷팅된다 (Visa)', () => {
     const { result } = renderHook(() => useCardNumberValidation());
-    const correctValueEvent = {
-      target: { value: '1234' },
+    const event = {
+      target: { value: '4111111111111111' },
     } as React.ChangeEvent<HTMLInputElement>;
 
     act(() => {
-      result.current.onChange(0)(correctValueEvent);
+      result.current.onChange(0)(event);
     });
 
-    expect(result.current.errorMessage).toBe('');
+    expect(result.current.formattedValue).toBe('4111 1111 1111 1111');
+  });
+
+  it('formattedValue는 카드 브랜드에 따라 포맷팅된다 (AMEX)', () => {
+    const { result } = renderHook(() => useCardNumberValidation());
+    const event = {
+      target: { value: '341234567890123' },
+    } as React.ChangeEvent<HTMLInputElement>;
+
+    act(() => {
+      result.current.onChange(0)(event);
+    });
+
+    expect(result.current.formattedValue).toBe('3412 345678 90123');
+    expect(result.current.cardBrand).toBe('amex');
+    expect(result.current.format).toEqual([4, 6, 5]);
+  });
+
+  it('식별되지 않는 카드 번호는 포맷 없이 출력된다.', () => {
+    const { result } = renderHook(() => useCardNumberValidation());
+    const event = {
+      target: { value: '1234567890123456' },
+    } as React.ChangeEvent<HTMLInputElement>;
+
+    act(() => {
+      result.current.onChange(0)(event);
+    });
+
+    expect(result.current.formattedValue).toBe('1234 5678 9012 3456');
+    expect(result.current.format).toEqual([4, 4, 4, 4]);
   });
 });
