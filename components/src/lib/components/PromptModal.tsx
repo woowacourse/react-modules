@@ -12,7 +12,9 @@ type PromptModalProps = {
 const PromptModal = ({ isOpen, onClose, onConfirm, title }: PromptModalProps) => {
   const ref = useRef<HTMLInputElement>(null);
 
-  const handleConfirm = () => {
+  const handleConfirm = (e: React.FormEvent) => {
+    e.preventDefault();
+
     if (!ref.current) {
       return;
     }
@@ -27,17 +29,34 @@ const PromptModal = ({ isOpen, onClose, onConfirm, title }: PromptModalProps) =>
       <Modal.Backdrop closeByBackdrop={false} />
       <Modal.Container>
         <Modal.Title title={title} />
-        <StyledInput ref={ref} autoFocus={true} />
-        <Modal.ButtonWrapper>
-          <Modal.CancelButton>취소</Modal.CancelButton>
-          <Modal.ConfirmButton onClick={handleConfirm}>확인</Modal.ConfirmButton>
-        </Modal.ButtonWrapper>
+        <StyledForm onSubmit={handleConfirm}>
+          <StyledLabel htmlFor="prompt-input" />
+          <StyledInput ref={ref} autoFocus={true} id="prompt-input" />
+          <Modal.ButtonWrapper>
+            <Modal.CancelButton>취소</Modal.CancelButton>
+            <Modal.ConfirmButton>확인</Modal.ConfirmButton>
+          </Modal.ButtonWrapper>
+        </StyledForm>
       </Modal.Container>
     </Modal>
   );
 };
 
 export default PromptModal;
+
+const StyledForm = styled.form`
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+`;
+
+const StyledLabel = styled.label`
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: rect(0, 0, 0, 0);
+`;
 
 const StyledInput = styled.input`
   border: 1px solid black;
