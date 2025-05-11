@@ -9,6 +9,7 @@ import {
   formatNumbersByNetwork,
   identifyNetworkByList,
   identifyNetworkByRange,
+  removeFormat,
 } from '../utils/cardNetwork';
 
 const CARD_NUMBERS_LENGTH: Record<NetworkType, number> = {
@@ -91,7 +92,7 @@ function useCardNumbers() {
       });
     }
 
-    setCardNumbers(value);
+    setCardNumbers(removeFormat(value));
   };
 
   const handleCardNumbersBlur = (event: FocusEvent<HTMLInputElement>) => {

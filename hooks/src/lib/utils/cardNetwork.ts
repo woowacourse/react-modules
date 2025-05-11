@@ -41,6 +41,8 @@ const NETWORK_FORMAT: Record<NetworkType, number[]> = {
 
 const DEFAULT_FORMAT = [4, 4, 4, 4];
 
+const FORMAT_SEPARATOR = '-';
+
 export const identifyNetworkByList = (
   cardNumbers: string
 ): NetworkType | '' => {
@@ -81,5 +83,9 @@ export const formatNumbersByNetwork = (
 
       return result;
     }, [])
-    .join('-');
+    .join(FORMAT_SEPARATOR);
+};
+
+export const removeFormat = (formattedNumbers: string) => {
+  return formattedNumbers.split(FORMAT_SEPARATOR).join('');
 };
