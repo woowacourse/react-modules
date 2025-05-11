@@ -2,58 +2,51 @@ import { useState } from 'react';
 
 import validateNumber from '../utils/validateNumber';
 import validateMaxLength from '../utils/validateMaxLength';
-
-type CardNumbersValidate = {
-  first: boolean;
-  second: boolean;
-  third: boolean;
-  fourth: boolean;
-};
-
-const initialCardNumberValidate: CardNumbersValidate = {
-  first: true,
-  second: true,
-  third: true,
-  fourth: true
-};
+import { cardTypeRules } from './cardTypeRules';
 
 export type CardNumberValidateResult = {
-  isValid: CardNumbersValidate;
+  isValid: boolean;
   errorMessage: string | null;
-  validateCardNumbers: (cardNumber: string, key: string) => void;
+  validateCardNumbers: (
+    cardNumber: string,
+    cardType: keyof typeof cardTypeRules | null
+  ) => void;
 };
 
 const useCardNumbersValidate = (): CardNumberValidateResult => {
-  const [isValid, setIsValid] = useState<CardNumbersValidate>(
-    initialCardNumberValidate
-  );
+  const [isValid, setIsValid] = useState<boolean>(true);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
-  const validateCardNumbers = (cardNumber: string, key: string) => {
+  const validateCardNumbers = (
+    cardNumber: string,
+    cardType: keyof typeof cardTypeRules | null
+  ) => {
     if (!validateNumber(cardNumber)) {
-      setIsValid({
-        ...isValid,
-        [key]: false
-      });
+      setIsValid(false);
 
       setErrorMessage('숫자만 입력해주세요.');
       return;
     }
 
-    if (!validateMaxLength(cardNumber, 4)) {
-      setIsValid({
-        ...isValid,
-        [key]: false
-      });
+    if (cardType) {
+      if (!validateMaxLength(cardNumber, cardTypeRules[cardType].length)) {
+        setIsValid(false);
 
-      setErrorMessage('4자리만 입력해주세요.');
-      return;
+        setErrorMessage(
+          `${cardTypeRules[cardType].length}자리만 입력해주세요.`
+        );
+        return;
+      }
+    } else {
+      if (!validateMaxLength(cardNumber, 16)) {
+        setIsValid(false);
+
+        setErrorMessage('16자리만 입력해주세요.');
+        return;
+      }
     }
 
-    setIsValid({
-      ...isValid,
-      [key]: true
-    });
+    setIsValid(true);
 
     setErrorMessage(null);
   };
