@@ -292,7 +292,7 @@ export const ConfirmModalWithButton = (args: ModalProps) => {
    * 따라서 onClick 핸들러에 closeModal 함수를 명시적으로 호출해야함
    */
   const handleSubmit = () => {
-    alert("확인 버튼 클릭");
+    alert("카드를 삭제하였습니다.");
     closeModal();
   };
 
@@ -354,7 +354,7 @@ export const ConfirmModalWithActionButtons = (args: ModalProps) => {
    * CancelButton은 항상 자동으로 모달을 닫음
    */
   const handleSubmit = () => {
-    alert("확인 버튼 클릭");
+    alert("카드를 삭제하였습니다.");
   };
 
   return (
