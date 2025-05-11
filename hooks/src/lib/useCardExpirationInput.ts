@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { isNotOverMaxLength, isNumeric } from './utils';
+import isBeforeToday from './utils/isBeforeToday';
 
 const useCardExpirationInput = () => {
   const [monthInputValue, setMonthInputValue] = useState('');
@@ -16,6 +17,9 @@ const useCardExpirationInput = () => {
   const yearErrorText = (() => {
     if (!isNumeric(yearInputValue)) return '입력값이 숫자가 아닙니다.';
     if (!isNotOverMaxLength(yearInputValue, 2)) return '입력값이 최대 길이를 초과했습니다.';
+    if (isBeforeToday(Number(monthInputValue), Number(yearInputValue)))
+      return '유효 기간이 만료되었습니다.';
+
     return '';
   })();
 
