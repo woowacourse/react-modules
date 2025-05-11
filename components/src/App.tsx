@@ -10,41 +10,16 @@ const App = () => {
     <>
       <button onClick={() => setIsOpen(true)}>모달 열기</button>
       <Modal isOpen={isOpen} onModalClose={handleCloseModal}>
-        <Modal.Background onClick={handleCloseModal}>
-          <Modal.ModalContainer
-            $position="center"
-            $size="small"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <Modal.HeaderSection>
-              <Modal.Title>모달 타이틀</Modal.Title>
-              <Modal.ModalCloseButton onClick={handleCloseModal}>
-                <img src="./closeIcon.png" />
-              </Modal.ModalCloseButton>
-            </Modal.HeaderSection>
+        <Modal.Background onClick={handleCloseModal} />
+        <Modal.ModalContainer $position="center" $size="large">
+          <Modal.ModalFocusTrap>
+            <Modal.Title>접근성 테스트</Modal.Title>
             <Modal.ModalContent>
-              <p>모달 내용입니다.</p>
+              <input type="text" placeholder="이름" />
+              <button>확인</button>
             </Modal.ModalContent>
-            <Modal.ModalButtonContainer>
-              <Modal.ModalFocusTrap>
-                <Modal.ModalButton
-                  $size="small"
-                  $type="confirm"
-                  onClick={handleCloseModal}
-                >
-                  확인
-                </Modal.ModalButton>
-                <Modal.ModalButton
-                  $size="small"
-                  $type="cancel"
-                  onClick={handleCloseModal}
-                >
-                  취소
-                </Modal.ModalButton>
-              </Modal.ModalFocusTrap>
-            </Modal.ModalButtonContainer>
-          </Modal.ModalContainer>
-        </Modal.Background>
+          </Modal.ModalFocusTrap>
+        </Modal.ModalContainer>
       </Modal>
     </>
   );
