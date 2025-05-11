@@ -15,8 +15,9 @@ npm install laireca-modal-components
 ## ✨ 제공 기능
 
 - `ModalComponent` - 모달 컴포넌트
-  - 중앙 모달
-  - 하단 모달
+  - `modalPosition`: 중앙 / 하단 모달
+  - `modalType` : 확인(Alert) / 확인/취소(Confirm) / 입력(Prompt) 모달
+  - `modalSize` : small / medium / large 모달
 - `useModal` - 모달 제어 훅
   - `openModalHandler` : 모달을 여는 함수
   - `closeModalHandler` : 모달을 닫는 함수
@@ -27,13 +28,26 @@ npm install laireca-modal-components
 
 모달의 형태와 내용을 구성합니다:
 
-| Prop                     | Type                     | Description                                  |
-| ------------------------ | ------------------------ | -------------------------------------------- |
-| `modalType`              | `'center'` \| `'bottom'` | 모달 위치 설정                               |
-| `titleText` _(optional)_ | `string`                 | 모달의 제목                                  |
-| `children`               | `ReactNode`              | 모달에 들어갈 내용                           |
-| `closeType`              | `'top'` \| `'bottom'`    | 닫기 버튼 위치 설정                          |
-| `onClose` _(optional)_   | `() => void`             | 모달이 닫히기 전에 실행되는 사용자 정의 함수 |
+| Prop                     | Type                                                  | Description                                  |
+| ------------------------ | ----------------------------------------------------- | -------------------------------------------- |
+| `modalPosition`          | `'center'` \| `'bottom'`                              | 모달 위치 설정                               |
+| `modalType`              | `'default'` \| `'alert'` \| `'confirm'` \| `'prompt'` | 모달 타입 설정                               |
+| `modalSize` _(optional)_ | `'small'` \| `'medium'` \| `'large'`                  | 모달 크기 설정                               |
+| `titleText` _(optional)_ | `string`                                              | 모달의 제목                                  |
+| `closeType`              | `'top'` \| `'bottom'` \| `'none'`                     | 닫기 버튼 위치 설정                          |
+| `children`               | `ReactNode`                                           | 모달에 들어갈 내용                           |
+| `onClose` _(optional)_   | `() => void`                                          | 모달이 닫히기 전에 실행되는 사용자 정의 함수 |
+
+---
+
+## 📋 모달 타입 설명
+
+다양한 상황에 맞는 모달 타입을 제공합니다:
+
+- `default` : 기본 모달로, closeType에 따라 닫기 버튼이 표시됩니다.
+- `alert` : 사용자에게 메시지를 전달하고 확인 버튼만 제공하는 모달입니다.
+- `confirm` : 사용자에게 선택지를 제공하고 확인 및 취소 버튼을 제공하는 모달입니다.
+- `prompt` : 사용자로부터 입력값을 받을 수 있는 입력 필드와 확인/취소 버튼을 제공하는 모달입니다.
 
 ---
 
