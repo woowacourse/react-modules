@@ -137,6 +137,8 @@ describe('useCardNumber', () => {
       act(() => {
         cardNumberRegister('cardNumber').onChange(mockInputEvent('1234567890123456'));
       });
+
+      expect(result.current.isCardNumberValid).toBe(true);
     });
   });
 
