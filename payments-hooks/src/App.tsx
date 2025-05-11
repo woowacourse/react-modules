@@ -6,7 +6,7 @@ import {
   useCardNumbersInput,
   useCardCVCInput,
   useCardCompanyInput,
-} from "./lib";
+} from "@dev-dino22/payments-hooks";
 
 interface InputProps extends ComponentProps<"input"> {
   isValid?: boolean;
