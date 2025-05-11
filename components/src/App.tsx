@@ -1,122 +1,18 @@
-import { Modal, useModal, ModalProvider } from './lib';
 import './App.css';
-
-function ModalOpenButton({ type }: { type: string }) {
-  const { openModalHandler } = useModal();
-
-  return (
-    <>
-      <button className="click-me-button" onClick={openModalHandler}>
-        {type} 모달
-      </button>
-    </>
-  );
-}
-
-function Step1ModalContents() {
-  return (
-    <div className="button-container">
-      <ModalProvider modalPosition={'center'} closeType={'top'} titleText={'titleText'}>
-        <ModalOpenButton type="중앙(size 미지정)" />
-        <Modal>
-          <p style={{ color: 'black' }}>Test!!!!!!</p>
-          <p style={{ color: 'black' }}>Test!!!!!!</p>
-          <p style={{ color: 'black' }}>Test!!!!!!</p>
-          <p style={{ color: 'black' }}>Test!!!!!!</p>
-        </Modal>
-      </ModalProvider>
-
-      <ModalProvider modalPosition={'bottom'} closeType={'top'} titleText={'titleText'}>
-        <ModalOpenButton type="하단(상단 닫기)" />
-        <Modal>
-          <p style={{ color: 'black' }}>Test!!!!!!</p>
-          <p style={{ color: 'black' }}>Test!!!!!!</p>
-          <p style={{ color: 'black' }}>Test!!!!!!</p>
-          <p style={{ color: 'black' }}>Test!!!!!!</p>
-        </Modal>
-      </ModalProvider>
-
-      <ModalProvider modalPosition={'bottom'} closeType={'bottom'} titleText={'titleText'}>
-        <ModalOpenButton type="하단(하단 닫기)" />
-        <Modal>
-          <p style={{ color: 'black' }}>Test!!!!!!</p>
-          <p style={{ color: 'black' }}>Test!!!!!!</p>
-          <p style={{ color: 'black' }}>Test!!!!!!</p>
-          <p style={{ color: 'black' }}>Test!!!!!!</p>
-        </Modal>
-      </ModalProvider>
-    </div>
-  );
-}
-
-function Step2ModalContents() {
-  return (
-    <div className="button-container">
-      <ModalProvider
-        modalPosition={'center'}
-        modalSize={'small'}
-        closeType={'top'}
-        titleText={'titleText'}
-      >
-        <ModalOpenButton type="중앙(small)" />
-        <Modal>
-          <p style={{ color: 'black' }}>Test!!!!!!</p>
-          <p style={{ color: 'black' }}>Test!!!!!!</p>
-          <p style={{ color: 'black' }}>Test!!!!!!</p>
-          <p style={{ color: 'black' }}>Test!!!!!!</p>
-        </Modal>
-      </ModalProvider>
-
-      <ModalProvider
-        modalPosition={'center'}
-        modalSize={'medium'}
-        closeType={'top'}
-        titleText={'titleText'}
-      >
-        <ModalOpenButton type="중앙(medium)" />
-        <Modal>
-          <p style={{ color: 'black' }}>Test!!!!!!</p>
-          <p style={{ color: 'black' }}>Test!!!!!!</p>
-          <p style={{ color: 'black' }}>Test!!!!!!</p>
-          <p style={{ color: 'black' }}>Test!!!!!!</p>
-        </Modal>
-      </ModalProvider>
-
-      <ModalProvider
-        modalPosition={'center'}
-        modalSize={'large'}
-        closeType={'top'}
-        titleText={'titleText'}
-      >
-        <ModalOpenButton type="중앙(large)" />
-        <Modal>
-          <p style={{ color: 'black' }}>Test!!!!!!</p>
-          <p style={{ color: 'black' }}>Test!!!!!!</p>
-          <p style={{ color: 'black' }}>Test!!!!!!</p>
-          <p style={{ color: 'black' }}>Test!!!!!!</p>
-        </Modal>
-      </ModalProvider>
-
-      <ModalProvider modalPosition={'center'} closeType={'top'} titleText={'titleText'}>
-        <ModalOpenButton type="중앙(size 미지정)" />
-        <Modal>
-          <p style={{ color: 'black' }}>Test!!!!!!</p>
-          <p style={{ color: 'black' }}>Test!!!!!!</p>
-          <p style={{ color: 'black' }}>Test!!!!!!</p>
-          <p style={{ color: 'black' }}>Test!!!!!!</p>
-        </Modal>
-      </ModalProvider>
-    </div>
-  );
-}
+import ModalContents from './ModalContents';
+import ModalTypeContents from './ModalTypeContents';
+import ModalSizeContents from './ModalSizeContents';
 
 function App() {
   return (
     <>
       <h1 style={{ color: 'black', margin: '20px 50px' }}>Step1 Modal</h1>
-      <Step1ModalContents />
+      <ModalContents />
       <h1 style={{ color: 'black', margin: '20px 50px' }}>Step2 Modal</h1>
-      <Step2ModalContents />
+      <h2 style={{ color: 'black', margin: '20px 50px' }}>Modal Types</h2>
+      <ModalTypeContents />
+      <h2 style={{ color: 'black', margin: '20px 50px' }}>Modal Size Option</h2>
+      <ModalSizeContents />
     </>
   );
 }
