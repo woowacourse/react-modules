@@ -11,6 +11,11 @@ const CARD_IDENTIFYING_NUMBER = {
   },
 };
 
+const CARD_IDENTIFYING_NUMBER_LENGTH = {
+  DINERS: 14,
+  AMEX: 15,
+};
+
 const UNION_PAY_IDENTIFYING_NUMBER = {
   SIX: {
     MIN: 622126,
@@ -25,9 +30,11 @@ const UNION_PAY_IDENTIFYING_NUMBER = {
 
 const getValidCardNumber = (id: string) => {
   const cardNumber = id.replace(/\D/g, '');
+  const length = cardNumber.length;
   const firstDigit = parseInt(cardNumber[0]);
   const firstTwoDigits = parseInt(cardNumber.slice(0, 2));
   const firstThreeDigits = parseInt(cardNumber.slice(0, 3));
+  const firstFourDigits = parseInt(cardNumber.slice(0, 4));
   const firstSixDigits = parseInt(cardNumber.slice(0, 6));
 
   // VISA (4로 시작)
@@ -44,12 +51,16 @@ const getValidCardNumber = (id: string) => {
   }
 
   // DINERS (36로 시작)
-  if (firstTwoDigits === CARD_IDENTIFYING_NUMBER.DINERS) {
+  if (firstTwoDigits === CARD_IDENTIFYING_NUMBER.DINERS && length === CARD_IDENTIFYING_NUMBER_LENGTH.DINERS) {
     return 'DINERS';
   }
 
   // AMEX (34-37로 시작)
-  if (firstTwoDigits >= CARD_IDENTIFYING_NUMBER.AMEX.MIN && firstTwoDigits <= CARD_IDENTIFYING_NUMBER.AMEX.MAX) {
+  if (
+    firstTwoDigits >= CARD_IDENTIFYING_NUMBER.AMEX.MIN &&
+    firstTwoDigits <= CARD_IDENTIFYING_NUMBER.AMEX.MAX &&
+    length === CARD_IDENTIFYING_NUMBER_LENGTH.AMEX
+  ) {
     return 'AMEX';
   }
 
@@ -59,7 +70,7 @@ const getValidCardNumber = (id: string) => {
       firstSixDigits <= UNION_PAY_IDENTIFYING_NUMBER.SIX.MAX) ||
     (firstThreeDigits >= UNION_PAY_IDENTIFYING_NUMBER.THREE.MIN &&
       firstThreeDigits <= UNION_PAY_IDENTIFYING_NUMBER.THREE.MAX) ||
-    UNION_PAY_IDENTIFYING_NUMBER.FOUR.includes(firstSixDigits)
+    UNION_PAY_IDENTIFYING_NUMBER.FOUR.includes(firstFourDigits)
   ) {
     return 'UNIONPAY';
   }
