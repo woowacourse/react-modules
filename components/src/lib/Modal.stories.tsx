@@ -48,6 +48,7 @@ const meta: Meta<typeof Modal> = {
 
 export default meta;
 type Story = StoryObj<typeof Modal>;
+
 export const Center: Story = {
   args: {
     position: 'center',
