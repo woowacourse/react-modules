@@ -17,7 +17,7 @@
 
 ### 2. 모달 크기 옵션 추가
 
-- [ ] small, medium, large 등의 크기 옵션을 prop으로 전달받아 모달 크기 조절
+- [x] small, medium, large 등의 크기 옵션을 prop으로 전달받아 모달 크기 조절
 
 ### 3. 반응형 구현
 

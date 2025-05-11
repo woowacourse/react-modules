@@ -7,6 +7,7 @@ export type ModalContainerProps = {
   width?: string;
   height?: string;
   position: ModalPosition;
+  size?: 'sm' | 'md' | 'lg';
 };
 
 type ModalProps = ModalContainerProps & {
@@ -15,7 +16,7 @@ type ModalProps = ModalContainerProps & {
   onClose: () => void;
 };
 
-function Modal({ width = '304px', height = '216px', position, title, onClose, children }: ModalProps) {
+function Modal({ width = '304px', height = '216px', position, title, onClose, children, size = 'md' }: ModalProps) {
   const customWidth = position === 'center' ? width : '100%';
 
   useEffect(() => {
@@ -43,6 +44,7 @@ function Modal({ width = '304px', height = '216px', position, title, onClose, ch
         width={customWidth}
         height={height}
         position={position}
+        size={size}
         onClick={(e) => e.stopPropagation()}
       >
         <TitleContainer>
@@ -58,3 +60,4 @@ function Modal({ width = '304px', height = '216px', position, title, onClose, ch
 }
 
 export default Modal;
+

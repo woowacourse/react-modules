@@ -17,6 +17,21 @@ export const Overlay = styled.div`
   inset: 0;
 `;
 
+export const sizeStyles = {
+    sm: {
+        width: '320px',
+        height: '206px',
+    },
+    md: {
+        width: '480px',
+        height: '206px',
+    },
+    lg: {
+        width: '600px',
+        height: '206px',
+    },
+};
+
 export const ModalContainer = styled.div<ModalContainerProps>`
   box-sizing: border-box;
   position: absolute;
@@ -24,18 +39,23 @@ export const ModalContainer = styled.div<ModalContainerProps>`
   border: none;
   padding: 24px 32px;
   overflow-y: auto;
-  width: ${({ width }) => width || 'auto'};
-  height: ${({ height }) => height || 'auto'};
+
+  ${({ size }) =>
+  size &&
+  css`
+      width: ${sizeStyles[size].width};
+      height: ${sizeStyles[size].height};
+    `}
 
   ${({ position }) =>
-    position === 'center'
-      ? css`
+  position === 'center'
+    ? css`
           top: 50%;
           left: 50%;
           transform: translate(-50%, -50%);
           border-radius: 8px;
         `
-      : css`
+    : css`
           bottom: 0;
           border-top-left-radius: 8px;
           border-top-right-radius: 8px;
