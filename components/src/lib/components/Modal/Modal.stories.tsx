@@ -1,11 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
 import Modal from "./Modal";
-import ModalOverlay from "../ModalOverlay/ModalOverlay";
-import ModalContent from "../ModalContent/ModalContent";
-import ModalTitle from "../ModalTitle/ModalTitle";
-
-import useModal from "../../hooks/useModal";
 
 const meta = {
   title: "Modal",
@@ -30,26 +25,28 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
-    isOpen: true,
     children: "",
   },
 
   render: () => {
-    const { isOpen, handleOpen, handleClose } = useModal();
-
     return (
-      <>
-        <button onClick={handleOpen}>Open</button>
-        <Modal isOpen={isOpen}>
-          <ModalOverlay onClose={handleClose} />
-          <ModalContent position="center">
-            <ModalTitle fontSize="25px" fontWeight="700">
+      <Modal.Root>
+        <Modal.Trigger>
+          <button>Open</button>
+        </Modal.Trigger>
+        <Modal>
+          <Modal.Overlay />
+          <Modal.Content position="center">
+            <Modal.Title fontSize="25px" fontWeight="700">
               모달 제목입니다.
-            </ModalTitle>
+            </Modal.Title>
             모달의 컨텐츠를 넣어주세요.
-          </ModalContent>
+            <Modal.Close>
+              <button>Close</button>
+            </Modal.Close>
+          </Modal.Content>
         </Modal>
-      </>
+      </Modal.Root>
     );
   },
 };
