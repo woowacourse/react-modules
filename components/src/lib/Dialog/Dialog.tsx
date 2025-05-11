@@ -6,7 +6,7 @@ import {
   RefObject,
 } from "react";
 import { createPortal } from "react-dom";
-import useEscapeModal from "./hooks/useEscapeModal";
+import useEscapeModal from "../hooks/useEscapeModal";
 import {
   StyledCloseButton,
   StyledContent,

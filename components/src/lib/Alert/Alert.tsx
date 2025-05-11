@@ -1,9 +1,9 @@
-import Dialog from "./Dialog";
-import DialogContent from "./DialogContent";
-import DialogHeader from "./DialogHeader";
-import DialogButton from "./DialogButton";
-import useFocus from "./hooks/useFocus";
-import useFirstNodeFocus from "./hooks/useFirstNodeFocus";
+import Dialog from "../Dialog/Dialog";
+import DialogContent from "../Dialog/DialogContent";
+import DialogHeader from "../Dialog/DialogHeader";
+import DialogButton from "../Dialog/DialogButton";
+import useFocus from "../hooks/useFocus";
+import useFirstNodeFocus from "../hooks/useFirstNodeFocus";
 
 type AlertProps = {
   open: boolean;

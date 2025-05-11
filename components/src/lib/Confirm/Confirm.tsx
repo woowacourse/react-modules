@@ -1,9 +1,9 @@
-import Dialog from "./Dialog";
-import DialogButton from "./DialogButton";
-import DialogHeader from "./DialogHeader";
-import DialogContent from "./DialogContent";
-import useFocus from "./hooks/useFocus";
-import useFirstNodeFocus from "./hooks/useFirstNodeFocus";
+import Dialog from "../Dialog/Dialog";
+import DialogButton from "../Dialog/DialogButton";
+import DialogHeader from "../Dialog/DialogHeader";
+import DialogContent from "../Dialog/DialogContent";
+import useFocus from "../hooks/useFocus";
+import useFirstNodeFocus from "../hooks/useFirstNodeFocus";
 
 type ConfirmProps = {
   open: boolean;
