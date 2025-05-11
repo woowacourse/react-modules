@@ -7,6 +7,9 @@ import Button from "../Common/Button/Button";
 import ButtonGroup from "../Common/ButtonGroup/ButtonGroup";
 import Input from "../Common/Input/Input";
 import Portal from "../Common/Portal/Portal";
+import ActionButtons from "../ModalActions/ActionButtons";
+import CancelButton from "../ModalActions/CancelButton";
+import ConfirmButton from "../ModalActions/ConfirmButton";
 import ModalContainer from "../ModalContainer/ModalContainer";
 import ModalHeader from "../ModalHeader/ModalHeader";
 import { ModalBackdrop, ModalContent } from "./Modal.styles";
@@ -33,7 +36,7 @@ export interface ModalProps {
   /**
    * 모달 컨텐츠
    */
-  children: ReactNode;
+  children?: ReactNode;
 
   /**
    * 헤더 설정
@@ -92,5 +95,9 @@ const Modal = ({
 Modal.Button = Button;
 Modal.ButtonGroup = ButtonGroup;
 Modal.Input = Input;
+
+Modal.CancelButton = CancelButton;
+Modal.ConfirmButton = ConfirmButton;
+Modal.ActionButtons = ActionButtons;
 
 export default Modal;
