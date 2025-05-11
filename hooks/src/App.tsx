@@ -1,4 +1,4 @@
-import useCardNumber from "./lib/hooks/CardNumber";
+import { useCardNumber } from "bunju-react-hooks";
 
 function App() {
   const {
