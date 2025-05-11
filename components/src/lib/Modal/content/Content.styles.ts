@@ -16,6 +16,18 @@ export const BtnWrapper = styled.div`
 export const Button = styled.button`
   background-color: #000;
   color: #fff;
+  border: 1px solid #000;
+  padding: 5px 10px;
+  border-radius: 10px;
+  cursor: pointer;
+
+  &:focus {
+    outline: 1px solid #646cff;
+  }
+
+  &:hover {
+    border: 1px solid #646cff;
+  }
 `;
 
 export const CancelButton = styled(Button)`
