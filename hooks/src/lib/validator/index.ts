@@ -39,6 +39,7 @@ function createValidator(field: ValidateField) {
             : rule.message;
 
         errors.push({ field, code, message });
+        break;
       }
     }
 
