@@ -71,6 +71,18 @@ const useCardNumber = () => {
       fourth: 3,
     };
 
+    const index = labelIndexMap[label];
+    const typeLengthRule = CARD_TYPE_LENGTH_RULES[type ?? "Default"];
+
+    if (index >= typeLengthRule.length) {
+      const result = { errorState: false, message: "" };
+      setValidationResult((prev) => ({
+        ...prev,
+        [label]: result,
+      }));
+      return result;
+    }
+
     if (!checkNumber(inputValue)) {
       message = ERROR_MESSAGE.INVALID_NUMBER;
       isError = true;
@@ -99,25 +111,21 @@ const useCardNumber = () => {
 
     if (!["first", "second", "third", "fourth"].includes(name)) return;
 
+    const newCardNumber = { ...cardNumber, [name]: value };
+
     let currentCardType: CardType = cardType;
 
-    setCardNumber((prev) => {
-      const newCardNumber = { ...prev, [name]: value };
+    if (newCardNumber.first.length === 4 && newCardNumber.second.length >= 4) {
+      const cardBIN = newCardNumber.first + newCardNumber.second;
+      currentCardType = getCardType(cardBIN) as CardType;
+      setCardType(currentCardType);
+    }
 
-      if (
-        newCardNumber.first.length === 4 &&
-        newCardNumber.second.length === 4
-      ) {
-        const cardBIN = newCardNumber.first + newCardNumber.second;
-        currentCardType = getCardType(cardBIN) as CardType;
-        setCardType(currentCardType);
-      }
+    setCardNumber(newCardNumber);
 
-      return newCardNumber;
-    });
     validate(name as CardNumberLabel, value, currentCardType);
   };
 
-  return { cardNumber, handleChange, validationResult };
+  return { cardNumber, handleChange, validationResult, cardType };
 };
 export default useCardNumber;
