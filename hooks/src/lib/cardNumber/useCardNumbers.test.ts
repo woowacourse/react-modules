@@ -5,7 +5,12 @@ import useCardNumbers from './useCardNumbers';
 describe('useCardNumbers', () => {
   it('입력값이 정확히 업데이트 되어야 한다.', () => {
     const { result } = renderHook(() =>
-      useCardNumbers({ part1: '', part2: '', part3: '', part4: '' })
+      useCardNumbers([
+        { name: 'part1', length: 4 },
+        { name: 'part2', length: 4 },
+        { name: 'part3', length: 4 },
+        { name: 'part4', length: 4 },
+      ])
     );
 
     act(() => {
@@ -33,10 +38,18 @@ describe('useCardNumbers', () => {
       '%s 상황일 때 isValid로 false를 반환하고 에러 메시지를 반환해야 한다.',
       ({ input, expected }) => {
         const { result } = renderHook(() =>
-          useCardNumbers({ part1: '', part2: '', part3: '', part4: '' })
+          useCardNumbers([
+            { name: 'part1', length: 4 },
+            { name: 'part2', length: 4 },
+            { name: 'part3', length: 4 },
+            { name: 'part4', length: 4 },
+          ])
         );
 
-        const error = result.current.getCardNumberValidationError(input);
+        const error = result.current.getCardNumberValidationError(
+          'part1',
+          input
+        );
         expect(error).toBe(expected);
       }
     );

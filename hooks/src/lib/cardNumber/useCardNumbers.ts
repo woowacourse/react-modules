@@ -1,33 +1,43 @@
 import { useCallback, useMemo, useState } from 'react';
-import {
-  CARD_NUMBER_ERROR_TYPES,
-  CardNumbersKey,
-  ERROR_MESSAGE,
-} from '../config';
+import { CARD_NUMBER_ERROR_TYPES, ERROR_MESSAGE } from '../config';
+import { FieldDefinition } from '../config/fieldType';
 import { ValidationResult } from '../types';
-import { checkIsNumber, checkIsValidLength } from '../validators';
+import { createInitialCardNumbers } from '../utils/createInitialCardNumbers';
 import { createValidationResult } from '../utils/createValidationResult';
+import { checkIsNumber, checkIsValidLength } from '../validators';
 
-function useCardNumbers<T extends string>(initialValue: Record<T, string>) {
-  const [cardNumbers, setCardNumbers] =
-    useState<Record<T, string>>(initialValue);
+function useCardNumbers<T extends string>(fields: FieldDefinition<T>[]) {
+  const [cardNumbers, setCardNumbers] = useState<Record<T, string>>(() =>
+    createInitialCardNumbers(fields)
+  );
 
-  const getCardNumberValidationError = useCallback((value: string) => {
-    const isNumber = checkIsNumber(value);
-    const isValidLength = checkIsValidLength(value, 4);
+  const fieldLengthMap = fields.reduce(
+    (acc, field) => {
+      acc[field.name] = field.length;
+      return acc;
+    },
+    {} as Record<T, number>
+  );
 
-    if (!isNumber) return CARD_NUMBER_ERROR_TYPES.notNumber;
-    if (!isValidLength) return CARD_NUMBER_ERROR_TYPES.invalidLength;
+  const getCardNumberValidationError = useCallback(
+    (key: T, value: string) => {
+      const isNumber = checkIsNumber(value);
+      const isValidLength = checkIsValidLength(value, fieldLengthMap[key]);
 
-    return null;
-  }, []);
+      if (!isNumber) return CARD_NUMBER_ERROR_TYPES.notNumber;
+      if (!isValidLength) return CARD_NUMBER_ERROR_TYPES.invalidLength;
+
+      return null;
+    },
+    [fields]
+  );
 
   const validationResults: Record<T, ValidationResult> = useMemo(
     () =>
       Object.entries(cardNumbers).reduce(
         (acc, [key, value]) => {
           acc[key as T] = createValidationResult(ERROR_MESSAGE.cardNumber, [
-            getCardNumberValidationError(value as string),
+            getCardNumberValidationError(key as T, value as string),
           ]);
           return acc;
         },
@@ -37,12 +47,8 @@ function useCardNumbers<T extends string>(initialValue: Record<T, string>) {
   );
 
   const handleCardNumbersChange = useCallback(
-    (
-      key: CardNumbersKey,
-      value: string,
-      options?: { skipValidation?: boolean }
-    ) => {
-      const errorType = getCardNumberValidationError(value);
+    (key: T, value: string, options?: { skipValidation?: boolean }) => {
+      const errorType = getCardNumberValidationError(key as T, value);
 
       const shouldSkipValidation = options?.skipValidation ?? false;
 
