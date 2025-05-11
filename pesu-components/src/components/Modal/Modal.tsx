@@ -62,6 +62,8 @@ export interface ModalProps {
   size?: 'small' | 'medium' | 'large';
   /** 배경 클릭 시 모달 닫기 여부 */
   isBackdropClose?: boolean;
+  /** 모달의 내용 */
+  children: React.ReactNode;
 }
 
 function ModalMain({
@@ -70,7 +72,7 @@ function ModalMain({
   zIndex = 10,
   size = 'medium',
   isBackdropClose = false,
-}: StrictPropsWithChildren<ModalProps>) {
+}: ModalProps) {
   const { isOpen, close } = useContext(ModalContext);
   const device = useDevice();
 
