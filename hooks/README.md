@@ -19,8 +19,9 @@
 
 **useCardNumbers**
 
-- numbers : 카드 번호 (4\*4) 배열
-- error : isValid(boolean)와 errorMassage(string)를 담고 있는 객체 배열
+- formattedNumber : 카드사별로 포맷팅된 카드 번호
+- cardBrand : 카드사
+- error : isValid(boolean)와 errorMassage(string)를 담고 있는 객체
 - handleCardNumbers : numbers 상태 업데이트 및 유효성 검증 함수
 
 ```js
@@ -28,7 +29,8 @@ import { useCardNumbers } from 'jurunghappy-hooks';
 
 function App() {
   const {
-    numbers,
+    formattedNumber,
+    cardBrand,
     error: cardNumbersError,
     handleCardNumbers,
   } = useCardNumbers();
@@ -37,18 +39,13 @@ function App() {
     <>
       <div>
         <h1>CardNumbers</h1>
-        {numbers.map((number, index) => (
-          <input
-            key={index}
-            type="text"
-            value={number}
-            onChange={(e) => handleCardNumbers(e, index)}
-          />
-        ))}
-        <p>
-          {cardNumbersError.find((error) => error.errorMessage !== '')
-            ?.errorMessage ?? ''}
-        </p>
+        <input
+          type="text"
+          value={formattedNumber}
+          onChange={(e) => handleCardNumbers(e.target.value)}
+        />
+        <p>{cardBrand !== 'Unknown' ? cardBrand : ''}</p>
+        <p>{cardNumbersError.errorMessage}</p>
       </div>
     </>
   );
