@@ -1,26 +1,38 @@
 import { useMemo, useState } from 'react';
-import { validateNumberError } from '../utils/cardInputValidations';
 import { determineCardBrand } from '../utils/determineCardBrand';
 import { validateCardBrandLength } from '../utils/cardBrandValidations';
+import { formatCardNumber, getMaxInputLength } from '../utils/cardFormatting';
 
 export function useCardNumberField() {
   const [cardNumbers, setCardNumbers] = useState('');
+  const [formattedCardNumber, setFormattedCardNumber] = useState('');
 
-  const cardBrand = determineCardBrand(cardNumbers);
+  const numbersOnly = cardNumbers.replace(/\D/g, '');
+  const cardBrand = determineCardBrand(numbersOnly);
+
+  const maxCardLength = getMaxInputLength(cardBrand);
 
   const cardNumberErrors = useMemo(() => {
-    const numError = validateNumberError(cardNumbers);
-    if (numError) return numError;
-
-    const cardBrandLengthError = validateCardBrandLength(cardBrand, cardNumbers);
+    const cardBrandLengthError = validateCardBrandLength(cardBrand, numbersOnly);
     if (cardBrandLengthError) return cardBrandLengthError;
 
     return '';
-  }, [cardNumbers]);
+  }, [cardNumbers, cardBrand, numbersOnly]);
 
   const handleCardNumberChange = (value: string) => {
-    setCardNumbers(value);
+    const digitsOnly = value.replace(/\D/g, '');
+    setCardNumbers(digitsOnly);
+
+    const formatted = formatCardNumber(digitsOnly, cardBrand);
+    setFormattedCardNumber(formatted);
   };
 
-  return { cardNumbers, cardBrand, handleCardNumberChange, cardNumberErrors };
+  return {
+    cardNumbers,
+    formattedCardNumber,
+    cardBrand,
+    handleCardNumberChange,
+    cardNumberErrors,
+    maxCardLength,
+  };
 }
