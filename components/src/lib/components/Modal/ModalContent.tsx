@@ -36,6 +36,8 @@ function ModalContent({
       id="modal-content"
       position={position}
       size={size}
+      role="dialog"
+      aria-modal="true"
       styleProps={styleProps}
     >
       {children}
