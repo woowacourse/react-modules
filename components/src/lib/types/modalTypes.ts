@@ -1,10 +1,11 @@
 import { ReactNode } from 'react';
 
 export interface ModalProps {
+  modalType: 'default' | 'alert' | 'confirm' | 'prompt';
   modalPosition: 'center' | 'bottom';
   modalSize?: 'small' | 'medium' | 'large';
   titleText?: string;
-  closeType: 'top' | 'bottom';
+  closeType: 'top' | 'bottom' | 'none';
   children?: ReactNode;
   onClose?: () => void;
 }

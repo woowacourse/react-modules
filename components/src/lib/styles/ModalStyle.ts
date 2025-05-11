@@ -80,3 +80,58 @@ export const ModalBottomCloseBtn = styled.div`
   padding: 10px;
   cursor: pointer;
 `;
+
+export const ModalButtons = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+
+  button {
+    width: 80px;
+    height: 36px;
+    border-radius: 5px;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background-color 0.2s;
+
+    &:first-of-type {
+      background-color: #ffffff;
+      color: #333333;
+      border-radius: 5px;
+      border: 1px solid rgba(51, 51, 51, 0.25);
+
+      &:hover {
+        background-color: #ffffff;
+      }
+    }
+
+    &:last-of-type {
+      background-color: #333333;
+      color: white;
+
+      &:hover {
+        background-color: #333333;
+      }
+    }
+  }
+`;
+
+export const ModalInput = styled.div`
+  margin: 16px 0px;
+
+  input {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0.75rem;
+    background-color: #ffffff;
+    border: 1.015px solid #000;
+    border-radius: 2px;
+    font-size: 1rem;
+    color: #000000;
+
+    &:focus {
+      outline: none;
+    }
+  }
+`;
