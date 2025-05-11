@@ -1,5 +1,5 @@
 import { useState } from "react";
-import AgreementModal from "../lib/components/modals/AgreementModal";
+import AgreementModal from "../lib/components/modals/agreementModal/AgreementModal";
 import { agreementContents } from "./AgreementModalData";
 
 export default {

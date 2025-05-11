@@ -8,7 +8,7 @@ import {
   useCardCompanyInput,
 } from "./lib";
 
-export interface InputProps extends ComponentProps<"input"> {
+interface InputProps extends ComponentProps<"input"> {
   isValid?: boolean;
 }
 

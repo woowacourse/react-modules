@@ -15,13 +15,14 @@ export interface ConfirmModalProps extends ModalProps {
   onCancel?: () => void;
 }
 
+export interface agreementContent {
+  text: string;
+  details?: string;
+  isRequired: boolean;
+}
 export interface AgreementModalProps extends ModalProps {
   onConfirm?: () => void;
-  agreementContents: {
-    text: string;
-    details?: string;
-    isRequired: boolean;
-  }[];
+  agreementContents: agreementContent[];
 }
 
 export interface ModalHeaderProps {
@@ -33,4 +34,12 @@ export interface ModalHeaderProps {
 
 export interface ModalStyledProps {
   modalPosition: "center" | "bottom";
+}
+
+export interface DetailModalProps {
+  isOpen: boolean;
+  content: string | null;
+  title: string;
+  modalSize?: "small" | "medium" | "large";
+  onClose: () => void;
 }

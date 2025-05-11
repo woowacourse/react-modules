@@ -8,7 +8,7 @@ import { useState } from "react";
 import ConfirmModal from "./lib/components/modals/ConfirmModal";
 import AlertModal from "./lib/components/modals/AlertModal";
 import PromptModal from "./lib/components/modals/PromptModal";
-import AgreementModal from "./lib/components/modals/AgreementModal";
+import AgreementModal from "./lib/components/modals/agreementModal/AgreementModal";
 
 function CardNumberInput() {
   const { cardNumbersInfo, cardBrand, cardBlocks, onChangeHandler } =

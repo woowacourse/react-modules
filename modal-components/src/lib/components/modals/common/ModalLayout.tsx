@@ -1,4 +1,3 @@
-// ModalLayout.tsx
 import ModalBox from "./ModalBox";
 import {
   ModalContainer,
@@ -40,6 +39,7 @@ const ModalLayout = ({
                   margin: "0",
                   whiteSpace: "pre-line",
                   overflow: "auto",
+                  height: "fit-content",
                   maxHeight: "200px",
                   fontSize: "14px",
                   color: "#424242",
