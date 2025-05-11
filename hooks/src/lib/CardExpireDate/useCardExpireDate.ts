@@ -18,6 +18,10 @@ export type CardExpireDateResult = {
     e: React.ChangeEvent<HTMLInputElement>,
     key: 'month' | 'year'
   ) => void;
+  handleExpireDateBlur: (
+    e: React.FocusEvent<HTMLInputElement>,
+    key: 'month' | 'year'
+  ) => void;
 };
 
 const useCardExpireDate = (): CardExpireDateResult => {
@@ -25,8 +29,12 @@ const useCardExpireDate = (): CardExpireDateResult => {
     month: '',
     year: ''
   });
-  const { isValid, errorMessage, validateCardExpireDate } =
-    useCardExpireDateValidate();
+  const {
+    isValid,
+    errorMessage,
+    validateCardExpireDate,
+    validateCardExpireDateBlur
+  } = useCardExpireDateValidate();
 
   const handleExpireDateChange = (
     e: React.ChangeEvent<HTMLInputElement>,
@@ -41,7 +49,20 @@ const useCardExpireDate = (): CardExpireDateResult => {
     setExpireDate(newExpireDate);
   };
 
-  return { expireDate, isValid, errorMessage, handleExpireDateChange };
+  const handleExpireDateBlur = (
+    e: React.FocusEvent<HTMLInputElement>,
+    key: 'month' | 'year'
+  ) => {
+    validateCardExpireDateBlur(expireDate, key);
+  };
+
+  return {
+    expireDate,
+    isValid,
+    errorMessage,
+    handleExpireDateChange,
+    handleExpireDateBlur
+  };
 };
 
 export default useCardExpireDate;

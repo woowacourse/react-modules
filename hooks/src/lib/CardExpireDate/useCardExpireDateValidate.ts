@@ -18,6 +18,10 @@ export type CardExpireDateValidateResult = {
     expireDate: CardExpireDate,
     key: 'month' | 'year'
   ) => void;
+  validateCardExpireDateBlur: (
+    expireDate: CardExpireDate,
+    key: 'month' | 'year'
+  ) => void;
 };
 
 const useCardExpireDateValidate = (): CardExpireDateValidateResult => {
@@ -103,7 +107,27 @@ const useCardExpireDateValidate = (): CardExpireDateValidateResult => {
     setErrorMessage(null);
   };
 
-  return { isValid, errorMessage, validateCardExpireDate };
+  const validateCardExpireDateBlur = (
+    expireDate: CardExpireDate,
+    key: 'month' | 'year'
+  ) => {
+    if (expireDate[key].length < 2) {
+      setIsValid({
+        ...isValid,
+        [key]: false
+      });
+
+      setErrorMessage('2자리의 숫자를 입력해주세요.');
+      return;
+    }
+  };
+
+  return {
+    isValid,
+    errorMessage,
+    validateCardExpireDate,
+    validateCardExpireDateBlur
+  };
 };
 
 export default useCardExpireDateValidate;
