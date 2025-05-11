@@ -1,21 +1,8 @@
-import Modal from '../baseModal/Modal';
 import * as S from './AlertModal.styles';
+import Modal from '../baseModal/Modal';
+import { AlertModalProps } from '../types';
 
-function AlertModal({
-  title,
-  description,
-  onClose,
-  onConfirmButtonClick,
-  position,
-  size
-}: {
-  title: string;
-  description: string;
-  onClose: () => void;
-  onConfirmButtonClick: () => void;
-  position?: 'center' | 'bottom';
-  size?: 'small' | 'medium' | 'large';
-}) {
+function AlertModal({ title, description, onClose, onConfirmButtonClick, position, size }: AlertModalProps) {
   return (
     <Modal onClose={onClose}>
       <Modal.BackDrop />

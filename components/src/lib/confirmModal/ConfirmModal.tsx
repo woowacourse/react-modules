@@ -1,21 +1,8 @@
-import Modal from '../baseModal/Modal';
 import * as S from './ConfirmModal.styles';
+import Modal from '../baseModal/Modal';
+import { ConfirmModalProps } from '../types';
 
-function ConfirmModal({
-  title,
-  description,
-  onClose,
-  onConfirmButtonClick,
-  position,
-  size
-}: {
-  title: string;
-  description: string;
-  onClose: () => void;
-  onConfirmButtonClick: () => void;
-  position?: 'center' | 'bottom';
-  size?: 'small' | 'medium' | 'large';
-}) {
+function ConfirmModal({ title, description, onClose, onConfirmButtonClick, position, size }: ConfirmModalProps) {
   return (
     <Modal onClose={onClose}>
       <Modal.BackDrop />

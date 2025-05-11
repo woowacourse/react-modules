@@ -1,19 +1,8 @@
-import Modal from '../baseModal/Modal';
 import * as S from './PromptModal.styles';
+import Modal from '../baseModal/Modal';
+import { PromptModalProps } from '../types';
 
-function PromptModal({
-  title,
-  onClose,
-  onPromptButtonClick,
-  position,
-  size
-}: {
-  title: string;
-  onClose: () => void;
-  onPromptButtonClick: () => void;
-  position?: 'center' | 'bottom';
-  size?: 'small' | 'medium' | 'large';
-}) {
+function PromptModal({ title, onClose, onPromptButtonClick, position, size }: PromptModalProps) {
   return (
     <Modal onClose={onClose}>
       <Modal.BackDrop />
