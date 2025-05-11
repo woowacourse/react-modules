@@ -1,6 +1,6 @@
 {
-  "name": "bunju-summit-hooks",
-  "version": "1.0.1",
+  "name": "bunju-react-hooks",
+  "version": "1.0.0",
   "description": "A collection of React hooks for Bunju Summit.",
   "type": "module",
   "types": "dist/index.d.ts",
