@@ -75,7 +75,11 @@ export const formatNumbersByNetwork = (
 
   return format
     .reduce<string[]>((result, number) => {
-      return [...result, numbersArray.splice(0, number).join('')];
+      if (numbersArray.length !== 0) {
+        return [...result, numbersArray.splice(0, number).join('')];
+      }
+
+      return result;
     }, [])
     .join('-');
 };
