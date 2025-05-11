@@ -1,6 +1,6 @@
 # Modal Components
 
-본 모듈은 React 애플리케이션에서 사용할 수 있는 모달 컴포넌트를 제공합니다.
+본 모듈은 React 애플리케이션에서 사용할 수 있는 접근성과 사용성을 고려한 모달 컴포넌트를 제공합니다.
 
 ## 💡 Installation
 
@@ -12,32 +12,48 @@ npm i @sooyeoniya/components
 
 모달 컴포넌트의 사용 방법과 예제를 확인하려면 Storybook 문서를 참조하세요.
 
-[📖 Storybook으로 확인하기](https://6812fc18153d0f93012d5a97-cyuwxipvby.chromatic.com/)
+[📖 Storybook으로 확인하기](https://6812fc18153d0f93012d5a97-uidzhzjyep.chromatic.com/)
 
 Storybook에서는 다음과 같은 정보를 확인할 수 있습니다.
 
-- 기본 모달 및 다양한 변형 예시
+- 기본 모달 및 다양한 변형 예시 (Alert, Confirm, Prompt)
 - 모달의 다양한 상태와 스타일링 옵션 미리보기
 - 인터랙티브 컨트롤을 통한 실시간 속성 변경 테스트
+- 웹 접근성 테스트 케이스 및 상호작용 테스트
 
 ## 🔧 Modal Component Props
 
-| Name            | Datatype                                          | Default  | Description                       |
-| --------------- | ------------------------------------------------- | -------- | --------------------------------- |
-| position        | 'center' \| 'bottom'                              | 'center' | 모달의 위치를 지정합니다          |
-| title           | { text?: string; color?: string; size?: number; } | -        | 모달의 제목과 스타일을 설정합니다 |
-| showCloseButton | boolean                                           | true     | 닫기 버튼 표시 여부를 설정합니다  |
-| backgroundColor | string                                            | -        | 모달의 배경색을 설정합니다        |
-| children        | ReactNode                                         | -        | 모달 내부에 표시될 콘텐츠입니다   |
-| isOpen          | boolean                                           | -        | 모달의 열림 상태를 제어합니다     |
-| onClose         | () => void                                        | -        | 모달을 닫는 함수입니다            |
+| Name            | Datatype                          | Default  | Description                       |
+| --------------- | --------------------------------- | -------- | --------------------------------- |
+| position        | 'center' \| 'bottom'              | 'center' | 모달의 위치를 지정합니다          |
+| size            | 'small' \| 'medium' \| 'large'    | 'medium' | 모달의 가로 크기를 설정합니다     |
+| theme           | 'light' \| 'dark'                 | 'light'  | 모달의 테마를 설정합니다          |
+| title           | { text?: string; size?: number; } | -        | 모달의 제목과 스타일을 설정합니다 |
+| showCloseButton | boolean                           | true     | 닫기 버튼 표시 여부를 설정합니다  |
+| children        | ReactNode                         | -        | 모달 내부에 표시될 콘텐츠입니다   |
+| isOpen          | boolean                           | -        | 모달의 열림 상태를 제어합니다     |
+| onClose         | () => void                        | -        | 모달을 닫는 함수입니다            |
 
-## 📌 How to use
+## 🚀 주요 기능
+
+### 접근성 기능
+
+- **키보드 접근성**: Tab 키를 이용한 포커스 이동과 포커스 트랩 지원
+- **스크린 리더 지원**: 적절한 ARIA 속성 및 역할 설정
+- **ESC 키 지원**: ESC 키를 눌러 모달 닫기 가능
+- **포커스 관리**: 모달 열림/닫힘 시 포커스 자동 관리
+
+### 사용자 경험 기능
+
+- **배경 스크롤 잠금**: 모달이 열려있을 때 배경 스크롤 방지
+- **다양한 모달 타입**: Alert, Confirm, Prompt 등 여러 모달 유형 지원
+- **커스터마이징**: 위치, 크기, 테마 등 다양한 옵션으로 모달 스타일링
+
+## 📌 기본 사용법
 
 ```tsx
 import { Modal } from "@sooyeoniya/components";
 import { useState } from "react";
-import "./App.css";
 
 function App() {
   const [isOpen, setIsOpen] = useState(false);
@@ -50,64 +66,102 @@ function App() {
       <button type="button" onClick={openModal}>
         모달 열기
       </button>
-      <Modal isOpen={isOpen} onClose={closeModal}>
+      <Modal isOpen={isOpen} onClose={closeModal} title={{ text: "기본 모달" }}>
         <div style={{ padding: "20px" }}>
-          <h3>모달 내용</h3>
           <p>
             모달 컴포넌트의 children으로 다양한 콘텐츠를 추가할 수 있습니다.
           </p>
-          <button onClick={closeModal}>닫기</button>
+          <div style={{ display: "flex", justifyContent: "flex-end" }}>
+            <Modal.Button onClick={closeModal}>닫기</Modal.Button>
+          </div>
         </div>
       </Modal>
     </>
   );
 }
-
-export default App;
 ```
 
-## 🎨 Customizing Modal
+## 🎨 모달 유형별 사용 예시
+
+### Alert 모달
 
 ```tsx
-import { Modal } from "@sooyeoniya/components";
-import { useState } from "react";
-import "./App.css";
+<Modal isOpen={isOpen} onClose={closeModal} title={{ text: "알림" }}>
+  <p>작업이 완료되었습니다.</p>
+  <div style={{ display: "flex", justifyContent: "flex-end" }}>
+    <Modal.ConfirmButton />
+  </div>
+</Modal>
+```
 
-function App() {
-  const [isOpen, setIsOpen] = useState(false);
+### Confirm 모달
 
-  const closeModal = () => setIsOpen(false);
-  const openModal = () => setIsOpen(true);
+```tsx
+<Modal isOpen={isOpen} onClose={closeModal} title={{ text: "확인" }}>
+  <p>정말로 삭제하시겠습니까?</p>
+  <Modal.ActionButtons
+    onConfirm={handleDelete}
+    confirmProps={{ style: { width: "90px" } }}
+    cancelProps={{ style: { width: "90px" } }}
+  />
+</Modal>
+```
 
-  return (
-    <>
-      <button type="button" onClick={openModal}>
-        모달 열기
-      </button>
-      <Modal
-        isOpen={isOpen}
-        onClose={() => setIsOpen(false)}
-        position="bottom"
-        title={{
-          text: "알림",
-          color: "#4a154b",
-          size: 24,
-        }}
-        backgroundColor="#f5f5f5"
-      >
-        <div style={{ padding: "20px" }}>
-          <p>다양한 props를 통해 모달을 커스터마이징할 수 있습니다.</p>
-          <button onClick={() => setIsOpen(false)}>확인</button>
-        </div>
-      </Modal>
-    </>
-  );
-}
+### Prompt 모달
 
-export default App;
+```tsx
+const [inputValue, setInputValue] = useState("");
+
+const handleSubmit = () => {
+  alert(`입력된 값: ${inputValue}`);
+  closeModal();
+};
+
+<Modal isOpen={isOpen} onClose={closeModal} title={{ text: "쿠폰 번호 입력" }}>
+  <div style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
+    <Modal.Input
+      placeholder="쿠폰 번호를 입력하세요"
+      value={inputValue}
+      onChange={(e) => setInputValue(e.target.value)}
+    />
+    <Modal.ActionButtons
+      onConfirm={handleSubmit}
+      confirmProps={{ style: { width: "90px" } }}
+      cancelProps={{ style: { width: "90px" } }}
+    />
+  </div>
+</Modal>;
+```
+
+## 🔍 커스터마이징
+
+```tsx
+<Modal
+  isOpen={isOpen}
+  onClose={closeModal}
+  position="bottom"
+  size="large"
+  theme="dark"
+  title={{ text: "커스텀 모달", size: 24 }}
+  showCloseButton={false}
+>
+  <div style={{ padding: "20px", color: "white" }}>
+    <p>위치, 크기, 테마 등 다양한 props로 모달을 커스터마이징할 수 있습니다.</p>
+    <button
+      onClick={closeModal}
+      style={{
+        background: "#6c5ce7",
+        color: "white",
+        border: "none",
+        padding: "8px 16px",
+      }}
+    >
+      확인
+    </button>
+  </div>
+</Modal>
 ```
 
 ## 👥 Author
 
-[sooyeoniya](https://github.com/sooyeoniya),
-[minji2219](https://github.com/minji2219)
+[sooyeoniya](https://github.com/sooyeoniya)
