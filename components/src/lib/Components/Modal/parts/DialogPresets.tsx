@@ -14,16 +14,20 @@ export interface ConfirmDialogProps
   extends Omit<ModalProps, "children" | "dialogType"> {
   title: string;
   message: string;
-  onConfirm: () => void;
-  onCancel: () => void;
+  onConfirm: () => void | Promise<void>;
+  onCancel: () => void | Promise<void>;
+  closeOnConfirm?: boolean;
+  closeOnCancel?: boolean;
   size?: "small" | "medium" | "large";
 }
 
 export interface PromptDialogProps
   extends Omit<ModalProps, "children" | "dialogType"> {
   title: string;
-  onConfirm: (value: string) => void;
-  onCancel: () => void;
+  onConfirm: (value: string) => void | Promise<void>;
+  onCancel: () => void | Promise<void>;
+  closeOnConfirm?: boolean;
+  closeOnCancel?: boolean;
   size?: "small" | "medium" | "large";
   placeholder?: string;
 }
@@ -89,20 +93,26 @@ export const ConfirmDialog: React.FC<ConfirmDialogProps> = ({
   message,
   onConfirm,
   onCancel,
+  closeOnConfirm = true,
+  closeOnCancel = true,
   size = "medium",
   position = "center",
 }) => {
   const headerId = "confirm-dialog-title";
   const descId = "confirm-dialog-description";
 
-  const handleConfirm = () => {
-    onConfirm();
-    onClose();
+  const handleConfirm = async () => {
+    await onConfirm();
+    if (closeOnConfirm) {
+      onClose();
+    }
   };
 
-  const handleCancel = () => {
-    onCancel();
-    onClose();
+  const handleCancel = async () => {
+    await onCancel();
+    if (closeOnCancel) {
+      onClose();
+    }
   };
 
   return (
@@ -150,20 +160,26 @@ export const PromptDialog: React.FC<PromptDialogProps> = ({
   title,
   onConfirm,
   onCancel,
+  closeOnConfirm = true,
+  closeOnCancel = true,
   size,
   position = "center",
   placeholder = "값을 입력하세요",
 }) => {
   const [value, setValue] = React.useState("");
 
-  const handleConfirm = (e: React.FormEvent) => {
-    e.preventDefault();
-    onConfirm(value);
-    onClose();
+  const handleConfirm = async (e: React.FormEvent) => {
+    await onConfirm(value);
+    if (closeOnConfirm) {
+      e.preventDefault();
+      onClose();
+    }
   };
-  const handleCancel = () => {
-    onCancel();
-    onClose();
+  const handleCancel = async () => {
+    await onCancel();
+    if (closeOnCancel) {
+      onClose();
+    }
   };
 
   return (
