@@ -32,7 +32,7 @@ const ButtonContainer = styled.button<{
 interface ButtonInterface {
   variant?: "confirm" | "cancel";
   size: "small" | "medium" | "large";
-  onclick: () => void;
+  onClick: () => void;
   tabIndex?: number;
   text?: string;
 }
@@ -40,7 +40,7 @@ interface ButtonInterface {
 export default function Button({
   variant,
   size,
-  onclick,
+  onClick,
   text,
 }: ButtonInterface) {
   const textMap: Record<"confirm" | "cancel", string> = {
@@ -51,7 +51,7 @@ export default function Button({
   const buttonText = variant ? textMap[variant] : text ?? "";
 
   return (
-    <ButtonContainer size={size} variant={variant} onClick={onclick}>
+    <ButtonContainer size={size} variant={variant} onClick={onClick}>
       {buttonText}
     </ButtonContainer>
   );

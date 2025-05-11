@@ -4,7 +4,7 @@ import Button from "./Button";
 const meta: Meta<typeof Button> = {
   component: Button,
   args: {
-    type: "confirm",
+    variant: "confirm",
   },
 };
 
@@ -15,9 +15,9 @@ type Story = StoryObj<typeof Button>;
 export const Confirm: Story = {
   render: () => (
     <>
-      <Button size="medium" text="버튼" onclick={() => {}} />
-      <Button size="medium" type="confirm" onclick={() => {}} />
-      <Button size="medium" type="cancel" onclick={() => {}} />
+      <Button size="medium" text="버튼" onClick={() => {}} />
+      <Button size="medium" variant="confirm" onClick={() => {}} />
+      <Button size="medium" variant="cancel" onClick={() => {}} />
     </>
   ),
 };

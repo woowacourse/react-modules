@@ -43,12 +43,12 @@ const ModalContainer = styled.div<{
   gap: 15px;
 `;
 
-const ModalTop = styled.div`
+const ModalTopStyle = styled.div`
   display: flex;
   align-items: center;
 `;
 
-const ModalBottom = styled.div`
+const ModalBottomStyle = styled.div`
   display: flex;
   justify-content: flex-end;
   align-itmes: center;
@@ -111,33 +111,71 @@ export default function Modal({
   return (
     <>
       <ModalContainer position={position} size={size} ref={modalRef}>
-        <ModalTop>
-          {title && <Title>{title}</Title>}
-          {closeButton && (
-            <CloseIcon onClick={onClose} css={closeIconStyle} tabIndex={0} />
-          )}
-        </ModalTop>
-        {children}
+        <ModalTop title={title} closeButton={!!closeButton} onClose={onClose} />
         {input && (
           <Input height={"32px"} value={inputValue} onChange={onInputChange} />
         )}
-        <ModalBottom>
-          {cancelButton && (
-            <Button variant="cancel" size={size} onclick={onClose} />
-          )}
-          {confirmButton && (
-            <Button
-              variant="confirm"
-              size={size}
-              onclick={onConfirm ? onConfirm : onClose}
-            />
-          )}
-        </ModalBottom>
+        {children}
+        <ModalBottom
+          cancelButton={cancelButton}
+          confirmButton={confirmButton}
+          size={size}
+          onClose={onClose}
+          onConfirm={onConfirm}
+        />
       </ModalContainer>
       <ModalBackdrop onClick={onClose} />
     </>
   );
 }
+
+const ModalTop = ({
+  title,
+  closeButton,
+  onClose,
+}: {
+  title?: string;
+  closeButton?: boolean;
+  onClose: () => void;
+}) => {
+  return (
+    <ModalTopStyle>
+      {title && <Title>{title}</Title>}
+      {closeButton && (
+        <CloseIcon onClick={onClose} css={closeIconStyle} tabIndex={0} />
+      )}
+    </ModalTopStyle>
+  );
+};
+
+const ModalBottom = ({
+  cancelButton,
+  confirmButton,
+  size,
+  onClose,
+  onConfirm,
+}: {
+  cancelButton?: boolean;
+  confirmButton?: boolean;
+  size: "small" | "medium" | "large";
+  onClose: () => void;
+  onConfirm?: () => void;
+}) => {
+  return (
+    <ModalBottomStyle>
+      {cancelButton && (
+        <Button variant="cancel" size={size} onClick={onClose} />
+      )}
+      {confirmButton && (
+        <Button
+          variant="confirm"
+          size={size}
+          onClick={onConfirm ? onConfirm : onClose}
+        />
+      )}
+    </ModalBottomStyle>
+  );
+};
 
 const closeIconStyle = css`
   cursor: pointer;

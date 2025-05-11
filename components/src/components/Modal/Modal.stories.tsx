@@ -72,9 +72,9 @@ export const Size: Story = {
 
     return (
       <>
-        <Button text="small" size="medium" onclick={openSmallModal} />
-        <Button text="medium" size="medium" onclick={openMediumModal} />
-        <Button text="large" size="medium" onclick={openLargeModal} />
+        <Button text="small" size="medium" onClick={openSmallModal} />
+        <Button text="medium" size="medium" onClick={openMediumModal} />
+        <Button text="large" size="medium" onClick={openLargeModal} />
         <Modal
           onClose={closeSmallModal}
           isOpen={isSmallOpened}
@@ -119,7 +119,7 @@ export const AlertModal: Story = {
 
     return (
       <>
-        <Button size="medium" text="열기" onclick={openModal} />
+        <Button size="medium" text="열기" onClick={openModal} />
         <Modal
           onClose={closeModal}
           title="아이디를 입력해 주세요."
@@ -148,7 +148,7 @@ export const ConfirmModal: Story = {
 
     return (
       <>
-        <Button size="medium" text="열기" onclick={openModal} />
+        <Button size="medium" text="열기" onClick={openModal} />
         <Modal
           onClose={closeModal}
           title="카드를 삭제하시겠습니까?"
@@ -181,7 +181,7 @@ export const PromptModal: Story = {
 
     return (
       <>
-        <Button size="small" text="열기" onclick={openModal} />
+        <Button size="small" text="열기" onClick={openModal} />
         <Modal
           title="쿠폰 번호를 입력해 주세요."
           onClose={closeModal}
