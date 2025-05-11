@@ -54,6 +54,7 @@ export const ModalBoxContainer = styled.div<{
   height: fit-content;
   max-height: 90vh;
   display: flex;
+  gap: 8px;
   flex-direction: column;
   background-color: #ffffff;
   padding: 1.5rem;

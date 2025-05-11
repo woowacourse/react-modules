@@ -1,24 +1,26 @@
-import { ReactNode } from "react";
-
 export interface ModalProps {
   modalPosition: "center" | "bottom";
   modalSize?: "small" | "medium" | "large";
   titleText?: string;
-  children: ReactNode;
+  children?: React.ReactNode;
   closeType: "top" | "bottom" | "none";
   onClose: () => void;
+  footer?: React.ReactNode;
+  descriptionText?: string;
 }
 
-export interface ConfirmModalProps {
-  modalPosition: "center" | "bottom";
-  modalSize?: "small" | "medium" | "large";
-  titleText?: string;
-  descriptionText?: string;
-  children?: ReactNode;
-  closeType: "top" | "bottom" | "none";
-  onClose: () => void;
+export interface ConfirmModalProps extends ModalProps {
   onConfirm?: () => void;
   onCancel?: () => void;
+}
+
+export interface AgreementModalProps extends ModalProps {
+  onConfirm?: () => void;
+  agreementContents: {
+    text: string;
+    details?: string;
+    isRequired: boolean;
+  }[];
 }
 
 export interface ModalHeaderProps {

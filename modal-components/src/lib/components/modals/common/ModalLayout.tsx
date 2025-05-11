@@ -6,13 +6,8 @@ import {
   Container,
   Wrapper,
 } from "./ModalStyle";
-import { ConfirmModalProps } from "../../../types/modalTypes";
+import { ModalProps } from "../../../types/modalTypes";
 import { useEscapeKeyClose } from "../../../hook/useEscapeKeyClose";
-
-interface ModalLayoutProps extends ConfirmModalProps {
-  children?: React.ReactNode;
-  footer?: React.ReactNode;
-}
 
 const ModalLayout = ({
   modalPosition = "center",
@@ -23,7 +18,7 @@ const ModalLayout = ({
   closeType,
   onClose,
   footer,
-}: ModalLayoutProps) => {
+}: ModalProps) => {
   useEscapeKeyClose(onClose);
 
   return (
@@ -40,10 +35,11 @@ const ModalLayout = ({
             {descriptionText && (
               <p
                 style={{
+                  margin: "0",
                   whiteSpace: "pre-line",
                   overflow: "auto",
-                  height: "200px",
-                  fontSize: "12px",
+                  maxHeight: "200px",
+                  fontSize: "14px",
                   color: "#424242",
                 }}
               >
