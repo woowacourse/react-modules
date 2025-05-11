@@ -8,15 +8,9 @@ import { ValidationResult } from '../types';
 import { checkIsNumber, checkIsValidLength } from '../validators';
 import { createValidationResult } from '../utils/createValidationResult';
 
-function useCardNumbers() {
-  const [cardNumbers, setCardNumbers] = useState<
-    Record<CardNumbersKey, string>
-  >({
-    part1: '',
-    part2: '',
-    part3: '',
-    part4: '',
-  });
+function useCardNumbers<T extends string>(initialValue: Record<T, string>) {
+  const [cardNumbers, setCardNumbers] =
+    useState<Record<T, string>>(initialValue);
 
   const getCardNumberValidationError = useCallback((value: string) => {
     const isNumber = checkIsNumber(value);
@@ -28,23 +22,19 @@ function useCardNumbers() {
     return null;
   }, []);
 
-  const validationResults: Record<CardNumbersKey, ValidationResult> =
-    useMemo(() => {
-      return {
-        part1: createValidationResult(ERROR_MESSAGE.cardNumber, [
-          getCardNumberValidationError(cardNumbers.part1),
-        ]),
-        part2: createValidationResult(ERROR_MESSAGE.cardNumber, [
-          getCardNumberValidationError(cardNumbers.part2),
-        ]),
-        part3: createValidationResult(ERROR_MESSAGE.cardNumber, [
-          getCardNumberValidationError(cardNumbers.part3),
-        ]),
-        part4: createValidationResult(ERROR_MESSAGE.cardNumber, [
-          getCardNumberValidationError(cardNumbers.part4),
-        ]),
-      };
-    }, [cardNumbers, getCardNumberValidationError]);
+  const validationResults: Record<T, ValidationResult> = useMemo(
+    () =>
+      Object.entries(cardNumbers).reduce(
+        (acc, [key, value]) => {
+          acc[key as T] = createValidationResult(ERROR_MESSAGE.cardNumber, [
+            getCardNumberValidationError(value as string),
+          ]);
+          return acc;
+        },
+        {} as Record<T, ValidationResult>
+      ),
+    [cardNumbers, getCardNumberValidationError]
+  );
 
   const handleCardNumbersChange = useCallback(
     (
