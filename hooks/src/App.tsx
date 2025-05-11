@@ -1,11 +1,11 @@
 import './App.css';
 import {
-  // useCardNumbers,
+  useCardNumbers,
   useExpiryDate,
   useCvcNumber,
   usePassword,
 } from 'jurunghappy-hooks';
-import { useCardNumbers } from './lib';
+// import { useCardNumbers } from './lib';
 // import {
 //   useCardNumbers,
 //   useExpiryDate,
