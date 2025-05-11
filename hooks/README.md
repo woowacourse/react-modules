@@ -157,3 +157,17 @@ type cardNumbers = {
       - cardPassword: 카드 비밀번호 (`string`)
     - output
       - 유효성 검증 결과 `boolean`
+
+## 유틸 함수
+
+formatCardNumber: 카드 번호 포맷팅 기능
+
+- input
+  - cardNumbers: 카드 번호 `{
+first: string;
+second: string;
+third: string;
+fourth: string;
+}`
+  - formatting: 포메팅 방식 (`number[]`)
+- output: 포매팅된 카드 번호 (`string`)
