@@ -6,18 +6,24 @@ export type CardPasswordResult = {
   password: string;
   errorMessage: string | null;
   handlePasswordChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  handlePasswordBlur: (e: React.FocusEvent<HTMLInputElement>) => void;
 };
 
 const useCardPassword = (): CardPasswordResult => {
   const [password, setPassword] = useState('');
-  const { errorMessage, validateCardPassword } = useCardPasswordValidate();
+  const { errorMessage, validateCardPassword, validateCardPasswordBlur } =
+    useCardPasswordValidate();
 
   const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setPassword(e.target.value);
     validateCardPassword(e.target.value);
   };
 
-  return { password, errorMessage, handlePasswordChange };
+  const handlePasswordBlur = (e: React.FocusEvent<HTMLInputElement>) => {
+    validateCardPasswordBlur(e.target.value);
+  };
+
+  return { password, errorMessage, handlePasswordChange, handlePasswordBlur };
 };
 
 export default useCardPassword;

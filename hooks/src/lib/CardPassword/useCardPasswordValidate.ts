@@ -5,6 +5,7 @@ import validateMaxLength from '../utils/validateMaxLength';
 export type CardPasswordValidateResult = {
   errorMessage: string | null;
   validateCardPassword: (cardPassword: string) => void;
+  validateCardPasswordBlur: (cardPassword: string) => void;
 };
 
 const useCardPasswordValidate = (): CardPasswordValidateResult => {
@@ -24,7 +25,14 @@ const useCardPasswordValidate = (): CardPasswordValidateResult => {
     setErrorMessage(null);
   };
 
-  return { errorMessage, validateCardPassword };
+  const validateCardPasswordBlur = (cardPassword: string) => {
+    if (cardPassword.length < 2) {
+      setErrorMessage('2자리의 숫자를 입력해주세요.');
+      return;
+    }
+  };
+
+  return { errorMessage, validateCardPassword, validateCardPasswordBlur };
 };
 
 export default useCardPasswordValidate;
