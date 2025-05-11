@@ -1,19 +1,11 @@
 import { renderHook, act } from "@testing-library/react";
-import useCardNumber from "../hooks/useCardNumber";
+import useCardNumber from "../hooks/useCardNumber/useCardNumber";
 
 describe("useError", () => {
-  const cardNumberError = {
-    cardNumber: "",
-  };
-
   let result: any;
 
   beforeEach(() => {
-    const hook = renderHook(() =>
-      useCardNumber({
-        initCardNumberError: cardNumberError,
-      })
-    );
+    const hook = renderHook(() => useCardNumber());
     result = hook.result;
   });
 
@@ -87,22 +79,36 @@ describe("useError", () => {
     }
   );
 
-  test("카드 번호가 올바르지 않은 경우 에러 메시지를 반환한다.", () => {
-    const type = "cardNumber";
-    const changeValue = "100a";
-    const maxLength = 4;
+  test("카드 번호에 문자가 입력된 경우 에러 메시지를 반환한다.", () => {
+    const changeValue = "abcd";
 
     act(() => {
       result.current.changeCardNumber(changeValue);
-      result.current.cardNumberError.checkValidation({
-        length: maxLength,
-        type,
-        value: changeValue,
-      });
     });
 
-    expect(result.current.cardNumberError.getErrorMessage()).toEqual(
-      "숫자만 입력 가능합니다."
+    act(() => {
+      result.current.validateCardNumber();
+    });
+
+    expect(result.current.cardNumberError).toEqual(
+      "카드 번호는 숫자만 입력 가능합니다."
+    );
+  });
+
+  test("카드 번호 수가 카드 브랜드 규칙에 맞지 않는 경우 에러 메시지를 반환한다.", () => {
+    const type = "cardNumber";
+    const changeValue = "41111111111111";
+
+    act(() => {
+      result.current.changeCardNumber(changeValue);
+    });
+
+    act(() => {
+      result.current.validateCardNumber();
+    });
+
+    expect(result.current.cardNumberError).toEqual(
+      "Visa 카드 번호는 16자리여야 합니다."
     );
   });
 });

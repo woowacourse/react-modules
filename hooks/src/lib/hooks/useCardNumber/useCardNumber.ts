@@ -1,6 +1,20 @@
-import useError from "./useError";
-import { isValidLength, isValidNumber } from "../util";
-import { useState, useMemo } from "react";
+import { isValidNumber } from "../../util";
+import { useState, useMemo, useCallback } from "react";
+
+function validateCardNumberLength({
+  cardNumber,
+  maxLength,
+  brand,
+}: {
+  cardNumber: string;
+  maxLength: number;
+  brand: string;
+}) {
+  const cardLength = cardNumber.length;
+  if (cardLength < maxLength) {
+    return `${brand} 카드 번호는 ${maxLength}자리여야 합니다.`;
+  }
+}
 
 const cardBranRule = {
   Visa: {
@@ -11,6 +25,12 @@ const cardBranRule = {
       cardNumber
         .replace(/(\d{4})(\d{4})(\d{4})(\d{0,4})/, "$1 $2 $3 $4")
         .split(" "),
+    validateLength: (cardNumber: string) =>
+      validateCardNumberLength({
+        cardNumber,
+        maxLength: 16,
+        brand: "Visa",
+      }),
   },
   MasterCard: {
     inputCount: 4,
@@ -20,6 +40,12 @@ const cardBranRule = {
       cardNumber
         .replace(/(\d{4})(\d{4})(\d{4})(\d{0,4})/, "$1 $2 $3 $4")
         .split(" "),
+    validateLength: (cardNumber: string) =>
+      validateCardNumberLength({
+        cardNumber,
+        maxLength: 16,
+        brand: "MasterCard",
+      }),
   },
   Diners: {
     inputCount: 3,
@@ -27,6 +53,12 @@ const cardBranRule = {
     ranges: [[36]],
     format: (cardNumber: string) =>
       cardNumber.replace(/(\d{4})(\d{6})(\d{0,4})/, "$1 $2 $3").split(" "),
+    validateLength: (cardNumber: string) =>
+      validateCardNumberLength({
+        cardNumber,
+        maxLength: 14,
+        brand: "Diners",
+      }),
   },
   AMEX: {
     inputCount: 3,
@@ -34,6 +66,12 @@ const cardBranRule = {
     ranges: [[34], [37]],
     format: (cardNumber: string) =>
       cardNumber.replace(/(\d{4})(\d{6})(\d{0,5})/, "$1 $2 $3").split(" "),
+    validateLength: (cardNumber: string) =>
+      validateCardNumberLength({
+        cardNumber,
+        maxLength: 15,
+        brand: "AMEX",
+      }),
   },
   UnionPay: {
     inputCount: 4,
@@ -47,23 +85,32 @@ const cardBranRule = {
       cardNumber
         .replace(/(\d{4})(\d{4})(\d{4})(\d{0,4})/, "$1 $2 $3 $4")
         .split(" "),
+    validateLength: (cardNumber: string) =>
+      validateCardNumberLength({
+        cardNumber,
+        maxLength: 16,
+        brand: "UnionPay",
+      }),
   },
   Unknown: {
     inputCount: 1,
     length: 16,
     ranges: [[0]],
     format: (cardNumber: string) => [cardNumber],
+    validateLength: (cardNumber: string) =>
+      validateCardNumberLength({
+        cardNumber,
+        maxLength: 16,
+        brand: "Unknown",
+      }),
   },
 };
 
 type CardType = keyof typeof cardBranRule;
 
-export default function useCardNumber({
-  initCardNumberError,
-}: {
-  initCardNumberError: Record<string, string>;
-}) {
+export default function useCardNumber() {
   const [cardNumber, setCardNumber] = useState("");
+  const [cardNumberError, setCardNumberError] = useState("");
 
   function changeCardNumber(value: string) {
     setCardNumber(value);
@@ -77,10 +124,18 @@ export default function useCardNumber({
     return (matched?.[0] as CardType) ?? "Unknown";
   }, [cardNumber]);
 
-  const cardNumberError = useError({
-    initError: initCardNumberError,
-    getValidationFns: getCardNumberValidationFns,
-  });
+  const validateCardNumber = useCallback(() => {
+    const cardNumberError = cardBranRule[cardBrand].validateLength(cardNumber);
+    if (!isValidNumber(cardNumber)) {
+      setCardNumberError("카드 번호는 숫자만 입력 가능합니다.");
+      return "카드 번호는 숫자만 입력 가능합니다.";
+    }
+    if (cardNumberError) {
+      setCardNumberError(cardNumberError);
+      return cardNumberError;
+    }
+    setCardNumberError("");
+  }, [cardNumber, cardBrand]);
 
   return {
     cardNumber,
@@ -89,25 +144,8 @@ export default function useCardNumber({
     inputCount: cardBranRule[cardBrand].inputCount,
     changeCardNumber,
     cardNumberError,
+    validateCardNumber,
   };
-}
-
-const ERROR_MESSAGE = {
-  LENGTH: "4자리만 입력 가능합니다.",
-  NUMBER: "숫자만 입력 가능합니다.",
-};
-
-function getCardNumberValidationFns(maxLength: number, cardNumber: string) {
-  return [
-    {
-      condition: () => !isValidLength(cardNumber, maxLength),
-      errorMsg: ERROR_MESSAGE.LENGTH,
-    },
-    {
-      condition: () => !isValidNumber(cardNumber),
-      errorMsg: ERROR_MESSAGE.NUMBER,
-    },
-  ];
 }
 
 function isInRange(card: string, range: number[]): boolean {
