@@ -3,6 +3,7 @@ import Button from './Button';
 import { PromptModalProps } from '../types/PromptModal.type';
 import Input from './Input';
 import { useEffect, useState } from 'react';
+import { css } from '@emotion/css';
 
 const PromptModal = ({
   isOpen,
@@ -22,7 +23,8 @@ const PromptModal = ({
     setInputValue(e.target.value);
   };
 
-  const handleConfirm = () => {
+  const handleConfirm = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
     onConfirm(inputValue);
     onClose();
   };
@@ -36,15 +38,24 @@ const PromptModal = ({
   return (
     <Modal isOpen={isOpen} onAfterOpen={onAfterOpen} onClose={onClose} position={position}>
       <Modal.Header title={title} showCloseButton={false} />
-      <Modal.Content>
-        <div>{content}</div>
-        <Input type="text" placeholder={placeholder} value={inputValue} onChange={handleInputChange} />
-      </Modal.Content>
-      <Modal.Footer>
-        <Button type="cancel" onClick={onClose} buttonText={cancelText} width="80px" />
-        <Button type="confirm" onClick={handleConfirm} buttonText={confirmText} width="80px" />
-      </Modal.Footer>
+      <form className={FormStyle} onSubmit={handleConfirm}>
+        <Modal.Content>
+          <div>{content}</div>
+          <Input type="text" placeholder={placeholder} value={inputValue} onChange={handleInputChange} />
+        </Modal.Content>
+        <Modal.Footer>
+          <Button type="cancel" onClick={onClose} buttonText={cancelText} width="80px" />
+          <Button type="confirm" buttonText={confirmText} width="80px" />
+        </Modal.Footer>
+      </form>
     </Modal>
   );
 };
 export default PromptModal;
+
+const FormStyle = css`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 10px;
+`;
