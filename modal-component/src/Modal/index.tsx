@@ -38,6 +38,7 @@ const Modal = ({
   position = 'center',
   size = 'small',
 }: ModalProps) => {
+
   const modalContextValue: ModalContextType = {
     onClose,
     children,
