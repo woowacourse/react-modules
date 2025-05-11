@@ -1,6 +1,6 @@
 {
   "name": "pesu-hooks",
-  "version": "0.0.13",
+  "version": "0.0.15",
   "description": "npm modules",
   "type": "module",
   "types": "dist/index.d.ts",
@@ -38,7 +38,7 @@
     "build": "tsc && vite build",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "test": "jest",
-    "publish": "npm run build && npm publish"
+    "release": "./release.sh"
   },
   "dependencies": {
     "react": "^19.1.0",
