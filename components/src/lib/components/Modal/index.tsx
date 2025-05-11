@@ -73,7 +73,7 @@ export const BaseModal = ({ isOpen, closeOnOutsideClick, onClose, children }: Mo
 
   return (
     <Portal isOpen={isOpen}>
-      <StyledBackDrop aria-hidden={isOpen ? 'true' : 'false'} onClick={handleOutsideClick} />
+      <StyledBackDrop aria-hidden={isOpen ? 'false' : 'true'} onClick={handleOutsideClick} />
       {children}
     </Portal>
   );
