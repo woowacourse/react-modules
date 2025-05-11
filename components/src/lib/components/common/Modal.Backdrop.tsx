@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 
-import { useModalContext } from './useModalContext';
+import { useModalContext } from '../../hooks/useModalContext';
 
 type ModalBackdropProps = {
   closeByBackdrop?: boolean;

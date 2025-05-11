@@ -1,6 +1,6 @@
 import { createContext, useContext } from 'react';
 
-import type { ModalProps } from './Modal';
+import type { ModalProps } from '../components/common/Modal';
 
 export const ModalContext = createContext<ModalProps | undefined>(undefined);
 

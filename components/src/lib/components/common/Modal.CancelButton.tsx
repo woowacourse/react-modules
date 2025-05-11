@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 
-import { useModalContext } from './useModalContext';
+import { useModalContext } from '../../hooks/useModalContext';
 
 const ModalCancelButton = ({ children }: { children: React.ReactNode }) => {
   const { onClose } = useModalContext();

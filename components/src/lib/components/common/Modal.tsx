@@ -9,7 +9,8 @@ import ModalContainer from './Modal.Container';
 import ModalDescription from './Modal.Description';
 import ModalTitle from './Modal.Title';
 import Portal from './Portal';
-import { ModalContext } from './useModalContext';
+
+import { ModalContext } from '../../hooks/useModalContext';
 
 export type ModalProps = {
   /**

@@ -1,8 +1,7 @@
 import styled from '@emotion/styled';
 
-import { useModalContext } from './useModalContext';
-
 import closeIcon from '../../assets/Close.svg';
+import { useModalContext } from '../../hooks/useModalContext';
 
 const ModalCloseButton = () => {
   const { onClose } = useModalContext();
