@@ -9,6 +9,17 @@ import {
 } from '../utils/cardBrandUtils';
 import { CARD_BRAND_INFO } from '../constants/cardBrandRule';
 
+test('빈 값이 입력된 경우', () => {
+  const { result } = renderHook(() => useCardNumbers());
+
+  act(() => {
+    result.current.handleCardNumbers('');
+  });
+
+  expect(result.current.error.errorMessage).toBe('');
+  expect(result.current.cardBrand).toBe('Unknown');
+});
+
 test('숫자가 아닌 값을 validate 하면 에러 메시지가 세팅된다', () => {
   const { result } = renderHook(() => useCardNumbers());
 
@@ -126,9 +137,15 @@ describe('카드사별 카드 번호 길이 테스트', () => {
     expect(length).toBe(15);
   });
 
-  test.each(['4123', '5123', '36123', '34123', '622126'])(
-    '각 카드사별 카드 번호 길이를 충족하지 못한 경우 예외 메시지 반환',
-    (number) => {
+  test.each([
+    ['Visa', '4123'],
+    ['Master', '5123'],
+    ['Diners', '36123'],
+    ['AMEX', '34123'],
+    ['UnionPay', '622126'],
+  ])(
+    '%s의 카드 번호 길이를 충족하지 못한 경우 예외 메시지 반환',
+    (_, number) => {
       const { result } = renderHook(() => useCardNumbers());
 
       const brand = identifyCardBrand(number);

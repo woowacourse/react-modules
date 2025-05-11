@@ -30,12 +30,24 @@ type UpdateErrorArgs =
 export default function useCardNumbers(): ValitationResult {
   const [numbers, setNumbers] = useState('');
   const [error, setError] = useState<ErrorType>(initialError);
+
   const cardBrand = identifyCardBrand(numbers);
   const cardNumberLength = getCardNumberLength(cardBrand);
   const format = getFormat(cardBrand);
 
-  const digits = numbers.replace(/\s/g, '');
-  const formattedNumber = getFormattedNumber(digits, format) || '';
+  const numberWithoutSpaces = numbers.replace(/\s/g, '');
+  const formattedNumber = getFormattedNumber(numberWithoutSpaces, format) || '';
+
+  const handleCardNumbers = (value: string) => {
+    const numberWithoutSpaces = value.replace(/\s/g, '');
+    if (isOverInputLength(numberWithoutSpaces, cardNumberLength)) return;
+
+    setNumbers(numberWithoutSpaces);
+  };
+
+  useEffect(() => {
+    validate(numberWithoutSpaces, cardBrand, cardNumberLength);
+  }, [numberWithoutSpaces, cardBrand, cardNumberLength]);
 
   const updateError = (args: UpdateErrorArgs) => {
     setError({
@@ -43,17 +55,6 @@ export default function useCardNumbers(): ValitationResult {
       errorMessage: args.isValid ? args.errorMessage : '',
     });
   };
-
-  const handleCardNumbers = (value: string) => {
-    const digits = value.replace(/\s/g, '');
-    if (isOverInputLength(digits, cardNumberLength)) return;
-
-    setNumbers(digits);
-  };
-
-  useEffect(() => {
-    validate(digits, cardBrand, cardNumberLength);
-  }, [numbers, cardBrand, cardNumberLength]);
 
   const validate = (value: string, brand: string, length: number) => {
     if (isEmpty(value)) {
@@ -90,7 +91,7 @@ export default function useCardNumbers(): ValitationResult {
 
   return {
     formattedNumber,
-    cardBrand: identifyCardBrand(numbers),
+    cardBrand,
     error,
     handleCardNumbers,
   };
