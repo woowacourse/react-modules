@@ -1,10 +1,11 @@
 /** @jsxImportSource @emotion/react */
 
-import { createContext, PropsWithChildren, ReactNode, useContext, useEffect, useState } from 'react';
+import { createContext, useContext, useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { useAutoFocus, useDevice } from '../../hooks';
 import { CloseIcon } from '../common';
 
+import { StrictPropsWithChildren } from '../../types';
 import Button, { ButtonProps } from '../common/Button/Button';
 import Input, { InputProps } from '../common/Input/Input';
 import * as S from './Modal.styles';
@@ -29,18 +30,12 @@ const ModalContext = createContext<ModalContext>({
  * @property zIndex - 모달의 z-index 값입니다. 기본값은 10입니다.
  * @property size - 모달의 크기 (small | medium | large)
  */
-export interface ModalInterface {
-  /** 모달의 위치 (center | bottom) */
-  position?: 'center' | 'bottom';
-  /** 모달의 z-index 값 */
-  zIndex?: number;
-  /** 모달의 크기 (small | medium | large) */
-  size?: 'small' | 'medium' | 'large';
-  /** 배경 클릭 시 모달 닫기 여부 */
-  isBackdropClose?: boolean;
+
+interface WrapperProps {
+  initialOpen?: boolean;
 }
 
-function Wrapper({ children, initialOpen = false }: { children: ReactNode; initialOpen?: boolean }) {
+function Wrapper({ children, initialOpen = false }: StrictPropsWithChildren<WrapperProps>) {
   const [isOpen, setIsOpen] = useState(initialOpen);
 
   useEffect(() => {
@@ -58,13 +53,24 @@ function Wrapper({ children, initialOpen = false }: { children: ReactNode; initi
 }
 Wrapper.displayName = 'ModalWrapper';
 
+export interface ModalProps {
+  /** 모달의 위치 (center | bottom) */
+  position?: 'center' | 'bottom';
+  /** 모달의 z-index 값 */
+  zIndex?: number;
+  /** 모달의 크기 (small | medium | large) */
+  size?: 'small' | 'medium' | 'large';
+  /** 배경 클릭 시 모달 닫기 여부 */
+  isBackdropClose?: boolean;
+}
+
 function ModalMain({
   children,
   position = 'center',
   zIndex = 10,
   size = 'medium',
   isBackdropClose = false,
-}: PropsWithChildren<ModalInterface>) {
+}: StrictPropsWithChildren<ModalProps>) {
   const { isOpen, close } = useContext(ModalContext);
   const device = useDevice();
 
@@ -90,7 +96,7 @@ ModalMain.displayName = 'ModalMain';
 /**
  * Outside
  */
-function Trigger({ children }: { children: ReactNode }) {
+function Trigger({ children }: StrictPropsWithChildren) {
   const { open } = useContext(ModalContext);
 
   return <S.TransparentButton onClick={open}>{children}</S.TransparentButton>;
@@ -101,17 +107,17 @@ Trigger.displayName = 'ModalTrigger';
  * Top
  */
 
-function Top({ children }: { children: ReactNode }) {
+function Top({ children }: StrictPropsWithChildren) {
   return <S.ModalTop>{children}</S.ModalTop>;
 }
 Top.displayName = 'ModalTop';
 
-function Title({ children }: { children: ReactNode }) {
+function Title({ children }: StrictPropsWithChildren) {
   return <S.Title>{children}</S.Title>;
 }
 Title.displayName = 'ModalTitle';
 
-function Close({ children }: { children: ReactNode }) {
+function Close({ children }: StrictPropsWithChildren) {
   const { close } = useContext(ModalContext);
 
   return <S.TransparentButton onClick={close}>{children}</S.TransparentButton>;
@@ -121,7 +127,7 @@ Close.displayName = 'ModalClose';
 /**
  * Middle
  */
-function Content({ children }: { children: ReactNode }) {
+function Content({ children }: StrictPropsWithChildren) {
   return <S.ModalContent>{children}</S.ModalContent>;
 }
 Content.displayName = 'ModalContent';
@@ -135,17 +141,17 @@ PromptInput.displayName = 'ModalPromptInput';
  * Bottom
  */
 
-function Bottom({ children }: { children: ReactNode }) {
+function Bottom({ children }: StrictPropsWithChildren) {
   return <S.ModalBottom>{children}</S.ModalBottom>;
 }
 Bottom.displayName = 'ModalBottom';
 
-function ButtonContainer({ children }: { children: ReactNode }) {
+function ButtonContainer({ children }: StrictPropsWithChildren) {
   return <S.ButtonContainer>{children}</S.ButtonContainer>;
 }
 ButtonContainer.displayName = 'ModalButtonContainer';
 
-function CancelButton({ children }: { children: ReactNode }) {
+function CancelButton({ children }: StrictPropsWithChildren) {
   const { close } = useContext(ModalContext);
 
   return (

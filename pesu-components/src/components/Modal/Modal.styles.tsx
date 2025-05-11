@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import type { ModalInterface } from './Modal';
+import type { ModalProps } from './Modal';
 import { Device } from '../../hooks';
 
 const getModalWidth = (size: 'small' | 'medium' | 'large', position: 'center' | 'bottom', device: Device) => {
@@ -22,7 +22,7 @@ const getModalWidth = (size: 'small' | 'medium' | 'large', position: 'center' | 
   }
 };
 
-export const ModalContainer = styled.div<Pick<ModalInterface, 'position' | 'zIndex' | 'size'> & { device: Device }>`
+export const ModalContainer = styled.div<Pick<ModalProps, 'position' | 'zIndex' | 'size'> & { device: Device }>`
   width: ${(props) => getModalWidth(props.size ?? 'medium', props.position ?? 'center', props.device)};
   box-sizing: border-box;
   height: fit-content;
