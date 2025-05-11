@@ -99,11 +99,16 @@ function useCardNumbers() {
     });
   };
 
-  function identifiedNetwork(cardNumbers: string): NetworkType | '' {
-    return (
-      identifyNetworkByList(cardNumbers) ?? identifyNetworkByRange(cardNumbers)
-    );
-  }
+  const identifiedNetwork = (cardNumbers: string): NetworkType | '' => {
+    const network =
+      identifyNetworkByList(cardNumbers) ?? identifyNetworkByRange(cardNumbers);
+
+    if (network && cardNumbers.length === CARD_NUMBERS_LENGTH[network]) {
+      return network;
+    }
+
+    return '';
+  };
 
   const network = identifiedNetwork(cardNumbers);
 
