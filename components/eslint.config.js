@@ -23,6 +23,7 @@ export default [
       '@typescript-eslint': eslintPluginTypeScript,
     },
     rules: {
+      'react-hooks/exhaustive-deps': 'warn',
       '@typescript-eslint/no-unused-vars': 'warn',
       '@typescript-eslint/consistent-type-definitions': ['error', 'type'],
       'react-refresh/only-export-components': ['warn', { allowConstantExport: true }],
