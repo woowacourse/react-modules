@@ -1,12 +1,13 @@
 import { useCardNumberInput, useExpiryDateInput, useSingleInput } from "./lib";
 import { CARD_INPUT } from "./lib/hooks/constants/cardValidationInfo";
-import { useCardBrand } from "./lib/hooks/useCardBrand/useCardBrand";
+import { CARD_BRAND_RULE } from "./lib/hooks/useCardBrand/constants";
 
 const App = () => {
   const {
     cardNumberState,
     errorMessage: cardError,
     handleInputChange: handleCardInputChange,
+    cardBrand,
   } = useCardNumberInput();
 
   const {
@@ -21,31 +22,25 @@ const App = () => {
     handleInputChange: handleCVCInputChange,
   } = useSingleInput(CARD_INPUT.MAX_LENGTH.CVC);
 
-  const cardNumberSegments = cardNumberState.map((segment) => segment.value);
-  const cardBrand = useCardBrand(cardNumberSegments);
-
   return (
     <div>
       <div>
-        <h2>Card Number</h2>
-        {cardNumberState.map((input, index) => (
-          <input
-            key={index}
-            maxLength={CARD_INPUT.MAX_LENGTH.CARD}
-            value={input.value}
-            onChange={(e) => handleCardInputChange(e, index)}
-            style={{
-              borderColor: input.isValid ? "black" : "red",
-              marginRight: "8px",
-            }}
-          />
-        ))}
-        {!cardNumberState.every((input) => input.isValid) && (
+        <h2>카드 번호</h2>
+        <input
+          maxLength={cardBrand ? CARD_BRAND_RULE[cardBrand]?.length : 16}
+          value={cardNumberState.value}
+          onChange={handleCardInputChange}
+          style={{
+            borderColor: cardNumberState.isValid ? "black" : "red",
+          }}
+          placeholder="카드 번호 입력"
+        />
+        {!cardNumberState.isValid && (
           <p style={{ color: "red" }}>{cardError}</p>
         )}
       </div>
       <div>
-        <h2>Expiry Date (MM / YY)</h2>
+        <h2>만료일 (MM / YY)</h2>
         {expiryDateState.map((input, index) => (
           <input
             key={index}

@@ -1,55 +1,49 @@
 import { useState } from "react";
-import { CARD_INPUT } from "../constants/cardValidationInfo";
 import { validateNumericInput } from "../utils/inputValidation";
+import { CARD_BRAND_RULE } from "../useCardBrand/constants";
+import { useCardBrand } from "../useCardBrand/useCardBrand";
 
 type CardNumberState = {
   value: string;
   isValid: boolean;
 };
 
-interface Props {
-  cardNumberState: CardNumberState[];
-  errorMessage: string;
-  handleInputChange: (
-    e: React.ChangeEvent<HTMLInputElement>,
-    index: number
-  ) => void;
-}
-
-const useCardNumberInput = (): Props => {
-  const [cardNumberState, setCardNumberState] = useState<CardNumberState[]>(
-    Array.from({ length: CARD_INPUT.NUMBER_INPUTS }, () => ({
-      value: "",
-      isValid: true,
-    }))
-  );
+const useCardNumberInput = () => {
+  const [cardNumberState, setCardNumberState] = useState<CardNumberState>({
+    value: "",
+    isValid: true,
+  });
 
   const [errorMessage, setErrorMessage] = useState("");
 
+  const cardBrand = useCardBrand([cardNumberState.value]);
+
   const validateCardNumber = (value: string) => {
-    return validateNumericInput(value, CARD_INPUT.MAX_LENGTH.CARD);
+    return validateNumericInput(value, getMaxLength());
   };
 
-  const handleInputChange = (
-    e: React.ChangeEvent<HTMLInputElement>,
-    index: number
-  ) => {
-    const inputValue = e.target.value;
+  const getMaxLength = () => {
+    if (cardBrand && CARD_BRAND_RULE[cardBrand]) {
+      return CARD_BRAND_RULE[cardBrand].length;
+    }
+    return 16;
+  };
 
-    const { isValid, errorMessage } = validateCardNumber(inputValue);
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const inputValue = e.target.value.replace(/\D/g, "");
 
-    const updatedState = cardNumberState.map((item, i) =>
-      i === index ? { value: inputValue, isValid } : item
-    );
+    const { isValid, errorMessage: validationError } =
+      validateCardNumber(inputValue);
 
-    setCardNumberState(updatedState);
-    setErrorMessage(errorMessage);
+    setCardNumberState({ value: inputValue, isValid });
+    setErrorMessage(validationError);
   };
 
   return {
     cardNumberState,
     errorMessage,
     handleInputChange,
+    cardBrand,
   };
 };
 
