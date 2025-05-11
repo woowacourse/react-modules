@@ -37,7 +37,19 @@ const ModalLayout = ({
             closeType={closeType}
             onClose={onClose}
           >
-            {descriptionText && <p>{descriptionText}</p>}
+            {descriptionText && (
+              <p
+                style={{
+                  whiteSpace: "pre-line",
+                  overflow: "auto",
+                  height: "200px",
+                  fontSize: "12px",
+                  color: "#424242",
+                }}
+              >
+                {descriptionText}
+              </p>
+            )}
             {children}
             {footer}
           </ModalBox>

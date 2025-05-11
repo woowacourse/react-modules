@@ -160,7 +160,7 @@ function App({
       )}
       {isAgreementModalOpened && (
         <AgreementModal
-          modalPosition="center"
+          modalPosition="bottom"
           modalSize="large"
           closeType="none"
           titleText="약관에 동의해 주세요"
