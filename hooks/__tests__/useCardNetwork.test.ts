@@ -1,8 +1,8 @@
 import { renderHook, act } from "@testing-library/react";
 import { useCardNetwork } from "../src/useCardNetwork/useCardNetwork";
 
-describe("useCardNumbers hook 테스트", () => {
-  it("초깃값은 빈 문자열이다", () => {
+describe("useCardNetwork hook 테스트", () => {
+  it("매칭되는 카드 네트워크가 없으면 빈 문자열을 반환한다.", () => {
     const cardNumbers = {
       FIRST: "",
       SECOND: "",
@@ -322,6 +322,7 @@ describe("useCardNumbers hook 테스트", () => {
         const userCardNetworkPatterns = {
           JSB: {
             PATTERN: /^(3528|3589)/,
+            FORMAT_PATTERN: /^(\d{4})(\d{4})(\d{4})(\d{4})$/,
             LENGTH: 16,
           },
         };
