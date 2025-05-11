@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { Modal } from '.';
+import { Modal } from '../..';
 import { useArgs } from '@storybook/preview-api';
 import ModalContent from './ModalContent';
 

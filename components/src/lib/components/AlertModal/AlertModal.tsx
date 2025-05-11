@@ -1,33 +1,30 @@
-import { ComponentProps } from 'react';
-import { Modal } from '.';
-import { useFocusTrap } from './hooks/useFocusTrap';
+import { Modal } from '../..';
 
-interface PromptModalProps extends Omit<ComponentProps<'input'>, 'size'> {
+interface AlertModalProps {
   isOpen: boolean;
   title: string;
+  content: string;
   onCloseClick: () => void;
   onConfirmClick: () => void;
   size?: 'small' | 'medium' | 'large';
   alertActionsWidth?: number;
 }
 
-function PromptModal({
+function AlertModal({
   isOpen,
   title,
+  content,
   onCloseClick,
   onConfirmClick,
   size,
   alertActionsWidth,
-  ...props
-}: PromptModalProps) {
-  const modalRef = useFocusTrap(isOpen, onCloseClick);
-
+}: AlertModalProps) {
   return (
     <Modal isOpen={isOpen}>
       <Modal.Overlay onClick={onCloseClick} />
-      <Modal.Content position="center" size={size} modalRef={modalRef}>
+      <Modal.Content position="center" size={size}>
         <Modal.Title>{title}</Modal.Title>
-        <Modal.Input {...props} autoFocus />
+        <Modal.Body>{content}</Modal.Body>
         <Modal.AlertActions
           width={alertActionsWidth}
           onCancelClick={onCloseClick}
@@ -38,4 +35,4 @@ function PromptModal({
   );
 }
 
-export default PromptModal;
+export default AlertModal;

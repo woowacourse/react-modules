@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { Modal } from '.';
+import { Modal } from '../..';
 
 interface ConfirmModalProps {
   isOpen: boolean;
