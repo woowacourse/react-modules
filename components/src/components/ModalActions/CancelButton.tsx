@@ -1,7 +1,7 @@
 import { useModalContext } from "../../hooks/useModalContext";
 import Button, { ButtonProps } from "../Common/Button/Button";
 
-const CancelButton = ({ children, ...props }: ButtonProps) => {
+const CancelButton = ({ children = "취소", ...props }: ButtonProps) => {
   const { onClose } = useModalContext();
 
   return (
