@@ -43,5 +43,31 @@ const StyledModalContainer = styled.div<StyledModalContainerProps>`
   padding: 24px 32px;
   background: #fff;
   border-radius: ${(props) => radius[props.position]};
-  outline: none; // 포커스 스타일이 겹치지 않도록 제거
+  outline: none;
+  position: fixed;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+
+  ${(props) =>
+    props.position === 'top' &&
+    `
+      top: 0;
+      transform: translate(-50%, 0);
+    `}
+
+  ${(props) =>
+    props.position === 'bottom' &&
+    `
+      bottom: 0;
+      transform: translate(-50%, 0);
+    `}
+
+  ${(props) =>
+    props.position === 'center' &&
+    `
+      top: 50%;
+      transform: translate(-50%, -50%);
+    `}
 `;
