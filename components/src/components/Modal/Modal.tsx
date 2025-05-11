@@ -2,6 +2,7 @@ import { ReactNode, useId } from "react";
 import { ThemeMode } from "../../constants/theme";
 import { ModalProvider } from "../../contexts/ModalContext";
 import useEscapeKey from "../../hooks/useEscapeKey";
+import useModalFocusTrap from "../../hooks/useModalFocusTrap";
 import { ModalPosition, ModalSize } from "../../types/modal";
 import Button from "../Common/Button/Button";
 import Input from "../Common/Input/Input";
@@ -55,6 +56,7 @@ const Modal = ({
   showCloseButton = true,
 }: ModalProps) => {
   useEscapeKey(onClose);
+  const { modalRef } = useModalFocusTrap(isOpen);
 
   const id = useId();
   const titleId = `modal-title-${id}`;
@@ -71,6 +73,7 @@ const Modal = ({
               role="presentation"
             >
               <ModalContainer
+                ref={modalRef}
                 position={position}
                 size={size}
                 titleId={titleId}
