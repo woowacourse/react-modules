@@ -14,7 +14,9 @@ const AlertModal = ({ isOpen, onClose, description, onConfirm, title }: AlertMod
         <Modal.Title title={title} />
         <Modal.Description description={description} />
         <Modal.ButtonWrapper>
-          <Modal.ConfirmButton onClick={onConfirm}>확인</Modal.ConfirmButton>
+          <Modal.ConfirmButton onClick={onConfirm} $autoFocus={true}>
+            확인
+          </Modal.ConfirmButton>
         </Modal.ButtonWrapper>
       </Modal.Container>
     </Modal>

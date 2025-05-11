@@ -3,12 +3,19 @@ import styled from '@emotion/styled';
 const ModalConfirmButton = ({
   onClick,
   children,
+  $autoFocus = false,
 }: {
   onClick: () => void;
   children: React.ReactNode;
+  $autoFocus?: boolean;
 }) => {
   return (
-    <StyledConfirmButton type="button" onClick={onClick} aria-label="confirmButton">
+    <StyledConfirmButton
+      type="button"
+      onClick={onClick}
+      aria-label="confirmButton"
+      autoFocus={$autoFocus}
+    >
       {children}
     </StyledConfirmButton>
   );
