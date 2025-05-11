@@ -5,6 +5,7 @@ import validateNumber from '../utils/validateNumber';
 export type CardCVCValidateResult = {
   errorMessage: string | null;
   validateCardCVC: (cardCVC: string) => void;
+  validateCardCVCBlur: (cardCVC: string) => void;
 };
 
 const useCardCVCValidate = (): CardCVCValidateResult => {
@@ -24,7 +25,14 @@ const useCardCVCValidate = (): CardCVCValidateResult => {
     setErrorMessage(null);
   };
 
-  return { errorMessage, validateCardCVC };
+  const validateCardCVCBlur = (cardCVC: string) => {
+    if (cardCVC.length < 3) {
+      setErrorMessage('3자리의 숫자를 입력해주세요.');
+      return;
+    }
+  };
+
+  return { errorMessage, validateCardCVC, validateCardCVCBlur };
 };
 
 export default useCardCVCValidate;
