@@ -1,5 +1,5 @@
 export interface ButtonProps {
-  onClick: () => void;
+  onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void | (() => void);
   buttonText: string;
   width?: string;
   type: 'confirm' | 'cancel';
