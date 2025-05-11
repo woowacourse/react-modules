@@ -29,7 +29,11 @@ function App() {
           close 버튼과 폰트가 적용되어 보입니다
         </Modal.Content>
         <Modal.Footer>
-          <Modal.AlertButton />
+          <Modal.AlertButton
+            onClick={() => {
+              setAlertModal(false);
+            }}
+          />
         </Modal.Footer>
       </Modal>
       <Modal
@@ -43,7 +47,14 @@ function App() {
         <Modal.Header>기본 스타일이 적용된 confirm 모달</Modal.Header>
         <Modal.Content>확인/취소 옵션을 사용할 수 있습니다</Modal.Content>
         <Modal.Footer>
-          <Modal.ConfirmButton />
+          <Modal.ConfirmButton
+            onConfirm={() => {
+              setAlertModal(false);
+            }}
+            onCancel={() => {
+              setAlertModal(false);
+            }}
+          />
         </Modal.Footer>
       </Modal>
       <Modal
@@ -54,7 +65,9 @@ function App() {
           setPromptModal(false);
         }}
       >
-        <Modal.Header>기본 스타일이 적용된 prompt 모달</Modal.Header>
+        <Modal.Header hasCloseButton>
+          기본 스타일이 적용된 prompt 모달
+        </Modal.Header>
         <Modal.Content>
           <Modal.InputPrompt
             value={inputValue}
@@ -65,7 +78,14 @@ function App() {
           />
         </Modal.Content>
         <Modal.Footer>
-          <Modal.ConfirmButton />
+          <Modal.ConfirmButton
+            onConfirm={() => {
+              setAlertModal(false);
+            }}
+            onCancel={() => {
+              setAlertModal(false);
+            }}
+          />
         </Modal.Footer>
       </Modal>
     </>

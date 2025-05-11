@@ -18,6 +18,7 @@ export function InputPrompt({
       value={value}
       onChange={onChange}
       className={style.inputPrompt}
+      tabIndex={0}
     />
   );
 }

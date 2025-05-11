@@ -2,6 +2,8 @@ import { createPortal } from "react-dom";
 import { useKeyPress } from "../../hooks/useKeyPress";
 import styles from "./Modal.module.css";
 import { ModalContext } from "../ModalContext";
+import { useRef } from "react";
+import useFocusTrap from "../../hooks/useFocusTrap";
 
 export interface ModalComponentProps {
   position: "bottom" | "center";
@@ -18,14 +20,15 @@ export default function ModalComponent({
   children,
   size = "md",
 }: ModalComponentProps) {
+  const modalRef = useRef<HTMLDivElement>(null);
+
+  useFocusTrap({ modalRef, isOpen });
+
   const backgroundClassName = `${styles[position]} ${styles.modalBackground}`;
   const containerClassName = `${styles.modalContents} ${
     styles[`${size}Modal`]
   }`;
 
-  // ${
-  //   styles[`${position}Width`]
-  // }
   useKeyPress({ targetKey: "Escape", isOpen, onClose });
   if (!isOpen) return null;
 
@@ -42,6 +45,7 @@ export default function ModalComponent({
           id="modal-container"
           className={`${containerClassName}`}
           onClick={(e) => e.stopPropagation()}
+          ref={modalRef}
         >
           {children}
         </div>

@@ -23,6 +23,7 @@ export default function ModalHeader({
           alt="닫기버튼"
           onClick={onClose}
           id="modal-close-button"
+          tabIndex={0}
         />
       )}
     </header>
