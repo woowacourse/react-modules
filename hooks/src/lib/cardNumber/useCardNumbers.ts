@@ -79,8 +79,9 @@ function useCardNumbers() {
     restrictChange: boolean = true
   ) => {
     const { value } = event.target;
-    const { isValid, errorType } = validateCardNumbersChange(value);
+    const newNumbers = removeFormat(value);
 
+    const { isValid, errorType } = validateCardNumbersChange(newNumbers);
     if (restrictChange && errorType) {
       return;
     }
@@ -92,13 +93,14 @@ function useCardNumbers() {
       });
     }
 
-    setCardNumbers(removeFormat(value));
+    setCardNumbers(newNumbers);
   };
 
   const handleCardNumbersBlur = (event: FocusEvent<HTMLInputElement>) => {
     const { value } = event.target;
-    const { isValid, errorType } = validateCardNumbersBlur(value);
+    const newNumbers = removeFormat(value);
 
+    const { isValid, errorType } = validateCardNumbersBlur(newNumbers);
     setValidationResults({
       isValid,
       errorMessage: errorType ? ERROR_MESSAGE.cardNumber[errorType] : '',
