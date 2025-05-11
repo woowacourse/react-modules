@@ -18,19 +18,3 @@ export const Default: Story = {
     children: "children",
   },
 };
-export const BottomTypeA: Story = {
-  args: {
-    modalPosition: "bottom",
-    closeType: "top",
-    titleText: "text",
-    children: "children",
-  },
-};
-export const BottomTypeB: Story = {
-  args: {
-    modalPosition: "bottom",
-    closeType: "bottom",
-    titleText: "text",
-    children: "children",
-  },
-};

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import PromptModal from "../lib/components/modals/PromptModal";
+import { PromptModal } from "@dev-dino22/modal-components";
 
 export default {
   title: "Modals/PromptModal",

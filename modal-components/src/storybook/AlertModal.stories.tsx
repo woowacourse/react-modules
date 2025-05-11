@@ -1,5 +1,5 @@
 import { useState } from "react";
-import AlertModal from "../lib/components/modals/AlertModal";
+import { AlertModal } from "@dev-dino22/modal-components";
 
 export default {
   title: "Modals/AlertModal",

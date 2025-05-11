@@ -1,5 +1,5 @@
 import { useState } from "react";
-import BasicModal from "../lib/components/modals/BasicModal";
+import { BasicModal } from "@dev-dino22/modal-components";
 
 export default {
   title: "Modals/BasicModal",
