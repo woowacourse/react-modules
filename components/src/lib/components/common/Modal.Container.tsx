@@ -1,3 +1,5 @@
+import { useEffect, useRef } from 'react';
+
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 
@@ -32,6 +34,42 @@ const ModalContainer = ({
 }: ModalContainerProps) => {
   const { $zIndex = 1000, ...props } = useModalContext();
 
+  const modalRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key !== 'Tab' || !modalRef.current) {
+        return;
+      }
+
+      const focusableElements = modalRef.current.querySelectorAll<HTMLElement>(
+        'a[href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), button:not([disabled]), [tabindex]:not([tabindex="-1"])'
+      );
+      const firstElement = focusableElements[0];
+      const lastElement = focusableElements[focusableElements.length - 1];
+
+      if (!firstElement || !lastElement) {
+        return;
+      }
+
+      if (e.shiftKey) {
+        if (document.activeElement === firstElement) {
+          e.preventDefault();
+          lastElement.focus();
+        }
+      } else {
+        if (document.activeElement === lastElement) {
+          e.preventDefault();
+          firstElement.focus();
+        }
+      }
+    };
+    document.addEventListener('keydown', handleKeyDown);
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown);
+    };
+  }, []);
+
   return (
     <StyledModalContainer
       role="dialog"
@@ -40,6 +78,7 @@ const ModalContainer = ({
       modalZIndex={$zIndex + 1}
       containerStyle={containerStyle}
       size={size}
+      ref={modalRef}
       {...props}
     >
       {children}
