@@ -33,3 +33,17 @@ export interface PromptModalProps extends ModalBaseProps {
   title: string;
   onPromptButtonClick: () => void;
 }
+
+export interface ModalMainProps {
+  onClose: () => void;
+  children: ReactNode;
+}
+
+export interface ModalBackDropProps extends ComponentProps<'div'> {
+  backgroundColor?: string;
+  zIndex?: number;
+}
+
+export interface ModalTitleProps extends ComponentProps<'h2'> {
+  children: ReactNode;
+}
