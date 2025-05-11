@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Layout, Overlay, ModalContainer, TitleContainer, Title, CloseButton, CloseIcon } from './Modal.styles';
 
 export type ModalPosition = 'center' | 'bottom';
@@ -27,6 +27,12 @@ function Modal({
   size
 }: ModalProps) {
   const customWidth = position === 'center' ? width : '100%';
+  const closeButtonRef = useRef<HTMLButtonElement>(null);
+  const modalRef = useRef<HTMLDivElement>(null);
+
+  const handleClickOverlay = () => {
+    onClose();
+  };
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -42,9 +48,18 @@ function Modal({
     };
   }, [onClose]);
 
-  const handleClickOverlay = () => {
-    onClose();
-  };
+  useEffect(() => {
+    if (closeButtonRef.current) {
+      closeButtonRef.current.focus();
+    }
+
+    const originalStyle = window.getComputedStyle(document.body).overflow;
+    document.body.style.overflow = 'hidden';
+
+    return () => {
+      document.body.style.overflow = originalStyle;
+    };
+  }, []);
 
   return (
     <Layout onClick={handleClickOverlay}>
@@ -55,11 +70,18 @@ function Modal({
         position={position}
         size={size}
         onClick={(e) => e.stopPropagation()}
+        ref={modalRef}
+        role="dialog"
+        aria-modal="true"
       >
         {title && (
           <TitleContainer>
             <Title>{title}</Title>
-            <CloseButton onClick={onClose}>
+            <CloseButton
+              onClick={onClose}
+              ref={closeButtonRef}
+              aria-label="모달 닫기"
+            >
               <CloseIcon />
             </CloseButton>
           </TitleContainer>

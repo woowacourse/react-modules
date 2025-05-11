@@ -99,7 +99,6 @@ export const CloseButton = styled.button`
   height: 24px;
   border: none;
   background: none;
-  outline: none;
   cursor: pointer;
 `;
 
