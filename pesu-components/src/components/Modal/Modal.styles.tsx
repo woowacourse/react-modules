@@ -2,21 +2,19 @@ import styled from '@emotion/styled';
 import type { ModalProps } from './Modal';
 import { Device } from '../../hooks';
 
+const modalSize = {
+  small: '320px',
+  medium: '480px',
+  large: '600px',
+};
+
 const getModalWidth = (size: 'small' | 'medium' | 'large', position: 'center' | 'bottom', device: Device) => {
   if (device === 'mobile' || device === 'tablet') {
     return '90%';
   }
 
   if (position === 'center') {
-    switch (size) {
-      case 'small':
-        return '320px';
-      case 'large':
-        return '600px';
-      case 'medium':
-      default:
-        return '480px';
-    }
+    return modalSize[size] ?? modalSize.medium;
   } else {
     return '100%';
   }
@@ -76,7 +74,7 @@ export const Title = styled.div`
 
 export const ModalBackdrop = styled.div`
   background-color: #000;
-  opacity: 35%;
+  opacity: 0.35;
 
   position: fixed;
   left: 0;
