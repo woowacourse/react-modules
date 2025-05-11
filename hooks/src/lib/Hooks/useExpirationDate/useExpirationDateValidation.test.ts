@@ -82,4 +82,15 @@ describe("useExpirationDate", () => {
     });
     expect(result.current.isValid).toBeTruthy();
   });
+
+  it("현재 입력 값이 자동으로 월, 년도 규칙에 맞게 구분되어 화면에 표시된다.", () => {
+    const userInput = "1226";
+    const displayValue = "12 26";
+    const { result } = renderHook(() => useExpirationDate());
+
+    act(() => {
+      result.current.onChange(userInput);
+    });
+    expect(result.current.value).toEqual(displayValue);
+  });
 });
