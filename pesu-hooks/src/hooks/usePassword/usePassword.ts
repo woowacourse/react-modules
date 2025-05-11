@@ -7,7 +7,7 @@ export default function usePassword() {
     value: password,
     errors: passwordErrors,
     register: passwordRegister,
-    isValid: isPasswordIsValid,
+    isValid: isPasswordValid,
   } = useForm<CardPasswordInput>({
     defaultValues: {
       password: '',
@@ -26,7 +26,7 @@ export default function usePassword() {
 
   return {
     passwordErrors,
-    isPasswordIsValid,
+    isPasswordValid,
     password,
     passwordRegister,
   };
