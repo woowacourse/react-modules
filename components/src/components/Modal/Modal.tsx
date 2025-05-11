@@ -4,7 +4,6 @@ import { ModalProvider } from "../../contexts/ModalContext";
 import useEscapeKey from "../../hooks/useEscapeKey";
 import { ModalPosition, ModalSize } from "../../types/modal";
 import Button from "../Common/Button/Button";
-import ButtonGroup from "../Common/ButtonGroup/ButtonGroup";
 import Input from "../Common/Input/Input";
 import Portal from "../Common/Portal/Portal";
 import ActionButtons from "../ModalActions/ActionButtons";
@@ -94,7 +93,6 @@ const Modal = ({
 };
 
 Modal.Button = Button;
-Modal.ButtonGroup = ButtonGroup;
 Modal.Input = Input;
 
 Modal.CancelButton = CancelButton;

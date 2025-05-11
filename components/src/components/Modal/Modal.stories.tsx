@@ -275,7 +275,7 @@ export const AlertModalWithConfirmButton = (args: ModalProps) => (
   </Default>
 );
 
-export const ConfirmModalWithButtonGroup = (args: ModalProps) => {
+export const ConfirmModalWithButton = (args: ModalProps) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const closeModal = () => {
@@ -285,6 +285,12 @@ export const ConfirmModalWithButtonGroup = (args: ModalProps) => {
 
   const openModal = () => setIsOpen(true);
 
+  /**
+   * Button 사용 시 닫기 동작
+   * -----------------------------
+   * Button은 단순 버튼 컴포넌트로, 모달 닫기 기능이 자동으로 연결되지 않음
+   * 따라서 onClick 핸들러에 closeModal 함수를 명시적으로 호출해야함
+   */
   const handleSubmit = () => {
     alert("확인 버튼 클릭");
     closeModal();
@@ -310,20 +316,20 @@ export const ConfirmModalWithButtonGroup = (args: ModalProps) => {
             gap: "10px",
           }}
         >
-          <Modal.ButtonGroup
-            leftProps={{
-              onClick: closeModal,
-              children: "취소",
-              varient: "secondary",
-              style: { width: "90px" },
-            }}
-            rightProps={{
-              onClick: handleSubmit,
-              children: "확인",
-              varient: "primary",
-              style: { width: "90px" },
-            }}
-          />
+          <Modal.Button
+            onClick={closeModal}
+            varient="secondary"
+            style={{ width: "90px" }}
+          >
+            취소
+          </Modal.Button>
+          <Modal.Button
+            onClick={handleSubmit}
+            varient="primary"
+            style={{ width: "90px" }}
+          >
+            확인
+          </Modal.Button>
         </div>
       </Modal>
     </>
@@ -340,9 +346,15 @@ export const ConfirmModalWithActionButtons = (args: ModalProps) => {
 
   const openModal = () => setIsOpen(true);
 
+  /**
+   * ActionButtons 사용 시 닫기 동작
+   * -----------------------------
+   * ActionButtons는 Modal 컨텍스트와 통합되어 있어, onClose 함수를 자동으로 호출함
+   * ConfirmButton은 사용자 정의 onClick 핸들러(handleSubmit) 실행 후 자동으로 모달을 닫음
+   * CancelButton은 항상 자동으로 모달을 닫음
+   */
   const handleSubmit = () => {
     alert("확인 버튼 클릭");
-    closeModal();
   };
 
   return (
@@ -376,7 +388,7 @@ export const ConfirmModalWithActionButtons = (args: ModalProps) => {
   );
 };
 
-export const PromptModalWithButtonGroup = (args: ModalProps) => {
+export const PromptModalWithButton = (args: ModalProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const [inputValue, setInputValue] = useState("");
 
@@ -388,9 +400,9 @@ export const PromptModalWithButtonGroup = (args: ModalProps) => {
   const openModal = () => setIsOpen(true);
 
   /**
-   * ButtonGroup 사용 시 닫기 동작
+   * Button 사용 시 닫기 동작
    * -----------------------------
-   * ButtonGroup은 단순 버튼 배치 컴포넌트로, 모달 닫기 기능이 자동으로 연결되지 않음
+   * Button은 단순 버튼 컴포넌트로, 모달 닫기 기능이 자동으로 연결되지 않음
    * 따라서 onClick 핸들러에 closeModal 함수를 명시적으로 호출해야함
    */
   const handleSubmit = () => {
@@ -432,20 +444,20 @@ export const PromptModalWithButtonGroup = (args: ModalProps) => {
               gap: "10px",
             }}
           >
-            <Modal.ButtonGroup
-              leftProps={{
-                onClick: closeModal,
-                children: "취소",
-                varient: "secondary",
-                style: { width: "90px" },
-              }}
-              rightProps={{
-                onClick: handleSubmit,
-                children: "확인",
-                varient: "primary",
-                style: { width: "90px" },
-              }}
-            />
+            <Modal.Button
+              onClick={closeModal}
+              varient="secondary"
+              style={{ width: "90px" }}
+            >
+              취소
+            </Modal.Button>
+            <Modal.Button
+              onClick={handleSubmit}
+              varient="primary"
+              style={{ width: "90px" }}
+            >
+              확인
+            </Modal.Button>
           </div>
         </div>
       </Modal>
