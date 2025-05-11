@@ -12,12 +12,14 @@ export type CardNumbersResult = {
   cardNumberMaxLength: number;
   errorMessage: string | null;
   handleCardNumberChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  handleCardNumberBlur: () => void;
 };
 
 const useCardNumbers = (): CardNumbersResult => {
   const [cardNumbers, setCardNumbers] = useState<string>('');
   const [cardType, setCardType] = useState<CardType | null>(null);
-  const { errorMessage, validateCardNumbers } = useCardNumbersValidate();
+  const { errorMessage, validateCardNumbers, validateCardNumberBlur } =
+    useCardNumbersValidate();
 
   const cardNumberMaxLength = cardType ? cardTypeRules[cardType].length : 16;
 
@@ -75,8 +77,12 @@ const useCardNumbers = (): CardNumbersResult => {
   const handleCardNumberChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setCardType(getCardType(e.target.value));
 
-    validateCardNumbers(e.target.value, cardType);
+    validateCardNumbers(e.target.value);
     setCardNumbers(e.target.value);
+  };
+
+  const handleCardNumberBlur = () => {
+    validateCardNumberBlur(cardNumbers, cardType);
   };
 
   const getFormattedCardNumber = (cardNumbers: string) => {
@@ -106,13 +112,15 @@ const useCardNumbers = (): CardNumbersResult => {
   };
 
   const formattedCardNumbers = getFormattedCardNumber(cardNumbers);
+
   return {
     cardNumbers,
     formattedCardNumbers,
     cardType,
     cardNumberMaxLength,
     errorMessage,
-    handleCardNumberChange
+    handleCardNumberChange,
+    handleCardNumberBlur
   };
 };
 
