@@ -27,7 +27,7 @@ const PromptModal = ({ isOpen, onClose, onConfirm, title }: PromptModalProps) =>
       <Modal.Backdrop closeByBackdrop={false} />
       <Modal.Container>
         <Modal.Title title={title} />
-        <StyledInput ref={ref} autoFocus />
+        <StyledInput ref={ref} autoFocus={true} />
         <Modal.ButtonWrapper>
           <Modal.CancelButton>취소</Modal.CancelButton>
           <Modal.ConfirmButton onClick={handleConfirm}>확인</Modal.ConfirmButton>
