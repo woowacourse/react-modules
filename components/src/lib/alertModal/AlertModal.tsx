@@ -7,7 +7,6 @@ function AlertModal({
   onClose,
   onConfirmButtonClick,
   position,
-  buttonText,
   size
 }: {
   title: string;
@@ -15,7 +14,6 @@ function AlertModal({
   onClose: () => void;
   onConfirmButtonClick: () => void;
   position?: 'center' | 'bottom';
-  buttonText: string;
   size?: 'small' | 'medium' | 'large';
 }) {
   return (
@@ -25,7 +23,7 @@ function AlertModal({
         <S.CustomTitle>{title}</S.CustomTitle>
         {description && <S.CustomDescription>{description}</S.CustomDescription>}
         <S.CustomButtonWrapper>
-          <S.CustomButtonConfirm onClick={onConfirmButtonClick}>{buttonText}</S.CustomButtonConfirm>
+          <S.CustomButtonConfirm onClick={onConfirmButtonClick}>확인</S.CustomButtonConfirm>
         </S.CustomButtonWrapper>
       </S.CustomContent>
     </Modal>

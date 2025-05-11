@@ -30,7 +30,7 @@ export const CenteredModal: Story = {
     return (
       <>
         <button onClick={open}>모달 열기</button>
-        {isOpen && <AlertModal onClose={close} onConfirmButtonClick={close} title={args.title} description={args.description} buttonText="확인" />}
+        {isOpen && <AlertModal onClose={close} onConfirmButtonClick={close} title={args.title} description={args.description} />}
       </>
     );
   }
@@ -55,9 +55,7 @@ export const BottomSheetModal: Story = {
     return (
       <>
         <button onClick={open}>바텀시트 열기</button>
-        {isOpen && (
-          <AlertModal onClose={close} onConfirmButtonClick={close} title={args.title} description={args.description} position="bottom" buttonText="확인" />
-        )}
+        {isOpen && <AlertModal onClose={close} onConfirmButtonClick={close} title={args.title} description={args.description} position="bottom" />}
       </>
     );
   }

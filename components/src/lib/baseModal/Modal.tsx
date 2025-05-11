@@ -36,12 +36,12 @@ function ModalContent({
   ...props
 }: {
   children: ReactNode;
-  position: 'center' | 'bottom';
+  position?: 'center' | 'bottom';
   size?: 'small' | 'medium' | 'large';
   zIndex?: number;
 } & ComponentProps<'div'>) {
   return (
-    <S.ModalWrapper position={position} zIndex={zIndex} size={size ?? 'medium'} {...props}>
+    <S.ModalWrapper position={position ?? 'center'} zIndex={zIndex} size={size ?? 'medium'} {...props}>
       {children}
     </S.ModalWrapper>
   );

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
-import ConfirmModal from './confirmModal';
+import ConfirmModal from './ConfirmModal';
 
 const meta: Meta<typeof ConfirmModal> = {
   title: 'Components/ConfirmModal',
@@ -30,7 +30,7 @@ export const CenteredModal: Story = {
     return (
       <>
         <button onClick={open}>모달 열기</button>
-        {isOpen && <ConfirmModal onClose={close} onConfirmButtonClick={close} title={args.title} description={args.description} buttonText="확인" />}
+        {isOpen && <ConfirmModal onClose={close} onConfirmButtonClick={close} title={args.title} description={args.description} />}
       </>
     );
   }
@@ -55,9 +55,7 @@ export const BottomSheetModal: Story = {
     return (
       <>
         <button onClick={open}>바텀시트 열기</button>
-        {isOpen && (
-          <ConfirmModal onClose={close} onConfirmButtonClick={close} title={args.title} description={args.description} position="bottom" buttonText="확인" />
-        )}
+        {isOpen && <ConfirmModal onClose={close} onConfirmButtonClick={close} title={args.title} description={args.description} position="bottom" />}
       </>
     );
   }

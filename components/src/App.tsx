@@ -51,8 +51,6 @@ function App() {
           description="삭제하면 복구하실 수 없습니다."
           onClose={() => setIsOpen({ ...isOpen, confirm: !isOpen.confirm })}
           onConfirmButtonClick={() => setIsOpen({ ...isOpen, confirm: !isOpen.confirm })}
-          position="center"
-          buttonText="확인"
         />
       )}
       {isOpen.prompt && (
