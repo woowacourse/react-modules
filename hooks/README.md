@@ -4,10 +4,10 @@ Reusable React custom hooks for building validated credit card forms. Supports c
 
 ## ✨ Features
 
-💡 Modular hooks for card number, expiration date, and CVC
-✅ Built-in validation and error message handling
-🧠 Automatic card brand detection (Visa, Master, AMEX, Diners, UnionPay)
-⚛️ React state integration for controlled components
+- 💡 Modular hooks for card number, expiration date, and CVC
+- ✅ Built-in validation and error message handling
+- 🧠 Automatic card brand detection (Visa, Master, AMEX, Diners, UnionPay)
+- ⚛️ React state integration for controlled components
 
 ## 🚀 Usage - example
 
@@ -61,6 +61,29 @@ Manages state and validation for a 4-field credit card number input.
 | `errorMessage`     | Latest validation error message        |
 | `cardBrand`        | Detected card brand (e.g., 'Visa')     |
 
+#### Return Type
+
+```ts
+{
+  cardNumber: {
+    input1: string;
+    input2: string;
+    input3: string;
+    input4: string;
+  };
+  setCardNumber: React.Dispatch<React.SetStateAction<CardNumberInput>>;
+  handleCardNumber: (numbers: CardNumberInput) => void;
+  isValid: {
+    input1: boolean;
+    input2: boolean;
+    input3: boolean;
+    input4: boolean;
+  };
+  errorMessage: string;
+  cardBrand: 'Visa' | 'Master' | 'Diners' | 'AMEX' | 'UnionPay' | 'Unknown';
+}
+```
+
 ### useExpirationDate()
 
 Handles expiration date validation for month/year inputs.
@@ -71,6 +94,24 @@ Handles expiration date validation for month/year inputs.
 | `handleExpirationDate` | Updates + validates date            |
 | `isValid`              | `{ month: boolean, year: boolean }` |
 | `errorMessage`         | Validation message                  |
+
+#### Return Type
+
+```ts
+{
+  expirationDate: {
+    month: string;
+    year: string;
+  };
+  setExpirationDate: React.Dispatch<React.SetStateAction<ExpirationDateInput>>;
+  handleExpirationDate: (date: ExpirationDateInput) => void;
+  isValid: {
+    month: boolean;
+    year: boolean;
+  };
+  errorMessage: string;
+}
+```
 
 ### useCardCVC()
 
@@ -83,6 +124,18 @@ Validates 3-digit CVC values.
 | `handleCVCValidate` | Validation trigger      |
 | `isValid`           | Boolean                 |
 | `errorMessage`      | Validation error string |
+
+#### Return Type
+
+```ts
+{
+  cardCVC: string;
+  setCardCVC: React.Dispatch<React.SetStateAction<string>>;
+  handleCVCValidate: (input: string) => void;
+  isValid: boolean;
+  errorMessage: string;
+}
+```
 
 ## 🔍 Validation Rules
 
