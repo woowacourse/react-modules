@@ -4,7 +4,7 @@ import { ModalComponent as Modal } from './index';
 
 import ButtonContainer from '../ButtonContainer.tsx';
 import Button from '../Button.tsx';
-import Input from './Input.tsx';
+import Input from '../Input.tsx';
 
 const meta: Meta<typeof Modal> = {
   title: 'Components/Modal',

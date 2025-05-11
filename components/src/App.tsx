@@ -2,7 +2,7 @@ import './App.css';
 import { useState } from 'react';
 import { ModalComponent as Modal } from './lib/index.ts';
 import Button from './Button';
-import Input from './lib/Input';
+import Input from './Input.tsx';
 import ButtonContainer from './ButtonContainer';
 
 function App() {

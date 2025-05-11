@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { useModalContext } from './ModalContext';
-import useFocus from '../useFocus';
+import useFocus from './useFocus';
 
 const radius = {
   top: '0px 0px 8px 8px',
