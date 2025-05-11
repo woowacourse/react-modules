@@ -1,21 +1,23 @@
 import './App.css';
-import { useCvcInput } from '@eunoia-jaxson/card-field-hooks';
+import { useCardNumberInput, BRAND_LENGTHS } from '@eunoia-jaxson/card-field-hooks';
 
 function App() {
-  const { cvc, handleCvcChange, cvcError } = useCvcInput();
+  const { cardNumber, formattedCardNumber, brand, cardNumberError, handleCardNumberChange } = useCardNumberInput();
 
   return (
     <div>
-      <label htmlFor="cvc">cvc</label>
+      <label htmlFor="cardNumber">카드 번호</label>
       <input
         type="text"
-        name="cvc"
-        value={cvc}
-        onChange={(e) => handleCvcChange(e.target.value)}
-        maxLength={3}
-        placeholder="cvc 번호를 입력해주세요."
+        name="cardNumber"
+        value={cardNumber}
+        onChange={(e) => handleCardNumberChange(e.target.value)}
+        placeholder="카드 번호를 입력해주세요."
+        maxLength={brand === 'Unknown' ? 16 : BRAND_LENGTHS[brand]}
       />
-      <p>{cvcError}</p>
+      <p>{cardNumberError}</p>
+      <p>{formattedCardNumber}</p>
+      <p>{brand}</p>
     </div>
   );
 }
