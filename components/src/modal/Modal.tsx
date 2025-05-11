@@ -18,7 +18,7 @@ import Title from './Title';
 
 // ============================== Types ==============================
 
-interface ModalProps {
+export interface ModalProps {
   position?: ModalPositionType;
   size?: ModalSizeType;
   title?: string;
