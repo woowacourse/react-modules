@@ -1,8 +1,8 @@
-import type { Meta, StoryObj } from '@storybook/react';
-import Modal from './components/Modal/Modal';
+import { Meta, StoryObj } from '@storybook/react';
+import Modal from '../components/Modal/Modal';
 import { within, expect, userEvent, waitFor } from '@storybook/test';
-import type { ModalProps } from './Modal.type';
-import useModal from './hooks/useModal';
+import { ModalProps } from '../Modal.type';
+import useModal from '../hooks/useModal';
 
 const meta: Meta<ModalProps> = {
   title: 'Modal',
