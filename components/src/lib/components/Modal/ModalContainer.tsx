@@ -5,14 +5,22 @@ import styled from 'styled-components';
 interface ModalContainerProps {
   isOpen: boolean;
   children: ReactElement | ReactElement[];
+  parentElement?: HTMLElement;
 }
 
-function ModalContainer({ isOpen, children }: ModalContainerProps) {
+function ModalContainer({
+  isOpen,
+  children,
+  parentElement,
+}: ModalContainerProps) {
   if (!isOpen) {
     return null;
   }
 
-  return createPortal(<StyledModal>{children}</StyledModal>, document.body);
+  return createPortal(
+    <StyledModal>{children}</StyledModal>,
+    parentElement ?? document.body
+  );
 }
 
 export default ModalContainer;
