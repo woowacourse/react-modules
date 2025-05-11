@@ -7,8 +7,8 @@ export interface UseCardNumberResult {
   onChange: (value: string) => void;
   cardNumber: string;
   cardNumberValidationResult: ValidationType;
-  cardBrand?: string;
-  formattingCardNumber: string;
+  cardBrand: string;
+  formattingCardNumber: string[];
 }
 
 export interface UseExpirationDateResult {
