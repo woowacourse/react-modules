@@ -62,7 +62,6 @@
   },
   "dependencies": {
     "@emotion/react": "^11.14.0",
-    "@emotion/styled": "^11.14.0",
-    "happyjurung-modal": "^0.0.10"
+    "@emotion/styled": "^11.14.0"
   }
 }
