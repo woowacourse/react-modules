@@ -8,13 +8,13 @@ const EXPIRY_DATE_INPUTS_LENGTH = 2;
 /**
  * @returns
  * @description
- * useExpiryDate 훅은 카드 만료일 입력을 관리하는 커스텀 훅입니다.
+ * 카드 만료일 입력을 관리하는 커스텀 훅입니다.
  * 카드 만료일의 유효성을 검사하고, 입력값을 상태로 관리합니다.
- * @param  validLength 카드 만료일의 유효 길이
+ * 만료일은 MM/YY 형식으로 입력됩니다.
  * @returns 카드 만료일 입력 상태와 핸들러를 반환합니다.
- * @returns expiryDate 카드 만료일 입력 상태
- * @returns errorMessage 카드 만료일 입력 오류 메시지
- * @returns handleExpiryDateChange 카드 만료일 입력 핸들러
+ * @returns {CardInputItem[]} expiryDate 카드 만료일 입력 상태
+ * @returns {string} errorMessage 카드 만료일 입력 오류 메시지
+ * @returns {function} handleExpiryDateChange 카드 만료일 입력 핸들러
  * @example
  * const { expiryDate, errorMessage, handleExpiryDateChange } = useExpiryDate();
  * <input
