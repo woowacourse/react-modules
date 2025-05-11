@@ -1,4 +1,4 @@
-import React from "react";
+import React, { ChangeEvent, FC, FormEvent, useEffect, useState } from "react";
 import Modal, { ModalProps } from "../index";
 import styles from "../styles/DialogPresets.module.css";
 
@@ -30,7 +30,10 @@ export interface PromptDialogProps
   closeOnCancel?: boolean;
   size?: "small" | "medium" | "large";
   placeholder?: string;
+  initialValue?: string;
+  onChange?: (value: string) => void;
 }
+
 export const AlertDialog: React.FC<AlertDialogProps> = ({
   isOpen,
   onClose,
@@ -154,7 +157,7 @@ export const ConfirmDialog: React.FC<ConfirmDialogProps> = ({
   );
 };
 
-export const PromptDialog: React.FC<PromptDialogProps> = ({
+export const PromptDialog: FC<PromptDialogProps> = ({
   isOpen,
   onClose,
   title,
@@ -163,12 +166,19 @@ export const PromptDialog: React.FC<PromptDialogProps> = ({
   closeOnConfirm = true,
   closeOnCancel = true,
   size,
+  initialValue = "",
+  onChange,
   position = "center",
   placeholder = "값을 입력하세요",
 }) => {
-  const [value, setValue] = React.useState("");
+  const [value, setValue] = useState(initialValue);
+  useEffect(() => {
+    if (isOpen) {
+      setValue(initialValue);
+    }
+  }, [isOpen, initialValue]);
 
-  const handleConfirm = async (e: React.FormEvent) => {
+  const handleConfirm = async (e: FormEvent) => {
     await onConfirm(value);
     if (closeOnConfirm) {
       e.preventDefault();
@@ -181,7 +191,11 @@ export const PromptDialog: React.FC<PromptDialogProps> = ({
       onClose();
     }
   };
-
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const newValue = e.target.value;
+    setValue(newValue);
+    onChange?.(newValue);
+  };
   return (
     <Modal
       isOpen={isOpen}
@@ -206,7 +220,7 @@ export const PromptDialog: React.FC<PromptDialogProps> = ({
               id="prompt-dialog-input"
               type="text"
               value={value}
-              onChange={(e) => setValue(e.target.value)}
+              onChange={handleChange}
               placeholder={placeholder}
               className={styles.input}
               autoFocus
