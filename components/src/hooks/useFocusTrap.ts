@@ -1,5 +1,4 @@
 import { useEffect, useRef } from "react";
-import { domainToUnicode } from "url";
 
 const useFocusTrap = () => {
   const ref = useRef<HTMLDivElement>(null);
@@ -42,7 +41,6 @@ const useFocusTrap = () => {
 
     const focusableElements = getFocusableElements();
     const firstElement = focusableElements[0];
-    const lastElement = focusableElements[focusableElements.length - 1];
 
     if (firstElement) firstElement.focus();
 
