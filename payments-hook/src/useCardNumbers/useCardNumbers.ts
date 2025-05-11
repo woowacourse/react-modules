@@ -6,6 +6,7 @@ import getCardNetwork from './getCardNetwork';
 import {
   AMEX_CARD_NUMBER_LENGTH_BY_POSITION,
   DINERS_CARD_NUMBER_LENGTH_BY_POSITION,
+  VISA_CARD_NUMBER_LENGTH_BY_POSITION,
 } from '../constants/cardNumberlengthByPosition';
 
 type CardNumbers = {
@@ -38,7 +39,9 @@ const INITIAL_IS_ERROR: TYPE_OF_CARD_NUMBERS_IS_ERROR = {
 export const CARD_NUMBER_MAX_LENGTH = 4;
 
 export const CARD_NUMBER_ERROR_MESSAGE = {
-  INVALID_LENGTH: `카드 번호는 ${CARD_NUMBER_MAX_LENGTH}자리 숫자여야 합니다.`,
+  INVALID_LENGTH(length) {
+    return `카드 번호는 ${length}자리 숫자여야 합니다.`;
+  },
   NOT_NUMBERIC: '숫자만 입력 가능합니다.',
 } as const;
 
@@ -114,7 +117,9 @@ function getCardNumbersError({
     if (!isUnderMaxLength(input, 4)) {
       return {
         inputError: true,
-        inputErrorMessage: CARD_NUMBER_ERROR_MESSAGE.INVALID_LENGTH,
+        inputErrorMessage: CARD_NUMBER_ERROR_MESSAGE.INVALID_LENGTH(
+          VISA_CARD_NUMBER_LENGTH_BY_POSITION[target]
+        ),
       };
     }
   }
@@ -126,7 +131,9 @@ function getCardNumbersError({
     ) {
       return {
         inputError: true,
-        inputErrorMessage: CARD_NUMBER_ERROR_MESSAGE.INVALID_LENGTH,
+        inputErrorMessage: CARD_NUMBER_ERROR_MESSAGE.INVALID_LENGTH(
+          DINERS_CARD_NUMBER_LENGTH_BY_POSITION[target]
+        ),
       };
     }
 
@@ -136,7 +143,9 @@ function getCardNumbersError({
     ) {
       return {
         inputError: true,
-        inputErrorMessage: `6자리 숫자여야 합니다.`,
+        inputErrorMessage: CARD_NUMBER_ERROR_MESSAGE.INVALID_LENGTH(
+          DINERS_CARD_NUMBER_LENGTH_BY_POSITION[target]
+        ),
       };
     }
 
@@ -146,7 +155,9 @@ function getCardNumbersError({
     ) {
       return {
         inputError: true,
-        inputErrorMessage: CARD_NUMBER_ERROR_MESSAGE.INVALID_LENGTH,
+        inputErrorMessage: CARD_NUMBER_ERROR_MESSAGE.INVALID_LENGTH(
+          DINERS_CARD_NUMBER_LENGTH_BY_POSITION[target]
+        ),
       };
     }
 
@@ -168,7 +179,9 @@ function getCardNumbersError({
     ) {
       return {
         inputError: true,
-        inputErrorMessage: CARD_NUMBER_ERROR_MESSAGE.INVALID_LENGTH,
+        inputErrorMessage: CARD_NUMBER_ERROR_MESSAGE.INVALID_LENGTH(
+          AMEX_CARD_NUMBER_LENGTH_BY_POSITION[target]
+        ),
       };
     }
 
@@ -178,7 +191,9 @@ function getCardNumbersError({
     ) {
       return {
         inputError: true,
-        inputErrorMessage: `6자리 숫자여야 합니다.`,
+        inputErrorMessage: CARD_NUMBER_ERROR_MESSAGE.INVALID_LENGTH(
+          AMEX_CARD_NUMBER_LENGTH_BY_POSITION[target]
+        ),
       };
     }
 
@@ -188,7 +203,9 @@ function getCardNumbersError({
     ) {
       return {
         inputError: true,
-        inputErrorMessage: `5자리 숫자여야 합니다.`,
+        inputErrorMessage: CARD_NUMBER_ERROR_MESSAGE.INVALID_LENGTH(
+          AMEX_CARD_NUMBER_LENGTH_BY_POSITION[target]
+        ),
       };
     }
 
