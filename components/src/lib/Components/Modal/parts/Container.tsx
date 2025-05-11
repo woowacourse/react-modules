@@ -10,9 +10,8 @@ interface ContainerProps extends ComponentProps<"div"> {
 
 function Container({ children, size = "medium", ...props }: ContainerProps) {
   const ctx = useContext(ModalContext);
-  if (!ctx) return null;
 
-  const sizeClass = ctx.position === "bottom" ? styles.full : styles[size];
+  const sizeClass = ctx?.position === "bottom" ? styles.full : styles[size];
 
   const combined = [styles.modalContents, sizeClass].join(" ");
 
@@ -22,17 +21,19 @@ function Container({ children, size = "medium", ...props }: ContainerProps) {
       id="modal-container"
       className={combined}
       onClick={(e) => e.stopPropagation()}
-      role={ctx.dialogType === "alert" ? "alertdialog" : "dialog"}
+      role={ctx?.dialogType === "alert" ? "alertdialog" : "dialog"}
       aria-modal="true"
     >
-      <img
-        id="modal-close-button"
-        className={styles.closeButton}
-        src={closeIcon}
-        alt="닫기"
-        onClick={ctx?.onClose}
-        hidden={ctx.dialogType !== "default"}
-      />
+      {ctx?.dialogType === "default" && (
+        <img
+          id="modal-close-button"
+          className={styles.closeButton}
+          src={closeIcon}
+          alt="닫기"
+          onClick={ctx?.onClose}
+        />
+      )}
+
       {children}
     </div>
   );
