@@ -1,19 +1,26 @@
 import calculateNetwork from "./calculateNetwork";
 import getCardPrefixNumber from "./getCardPrefixNumber";
 
-import validateCardNumbersType from "../types/validateCardNumbersType";
 import CardNetwork from "../types/CardNetwork";
+import CardNumbersKey from "../types/CardNumbersKey";
+import CardNumbers from "../types/CardNumbers";
+
+type getCardNetworkType = {
+  key: CardNumbersKey;
+  value: string;
+  numbers: CardNumbers;
+};
 
 const getCardNetwork = ({
   key,
   value,
-  cardNumbers,
-}: validateCardNumbersType): CardNetwork => {
+  numbers,
+}: getCardNetworkType): CardNetwork => {
   const cardPrefixNumber = getCardPrefixNumber({
     key,
     value,
-    firstNumber: cardNumbers.numbers["first"],
-    secondNumber: cardNumbers.numbers["second"],
+    firstNumber: numbers["first"],
+    secondNumber: numbers["second"],
   });
   return calculateNetwork(cardPrefixNumber);
 };

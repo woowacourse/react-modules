@@ -9,7 +9,7 @@ const calculateNetwork = (value: string): CardNetwork => {
   }
 
   calculatedValue = parseInt(value.slice(0, 2), 10);
-  if (51 <= calculatedValue && calculatedValue < 55) {
+  if (51 <= calculatedValue && calculatedValue <= 55) {
     return { name: "MASTER_CARD", length: 16, formatting: [4, 4, 4, 4] };
   }
 

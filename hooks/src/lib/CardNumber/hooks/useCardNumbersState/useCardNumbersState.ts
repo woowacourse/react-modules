@@ -40,7 +40,7 @@ const useCardNumbersState = ({
     const network = getCardNetwork({
       key,
       value,
-      cardNumbers,
+      numbers: cardNumbers.numbers,
     });
 
     if (!validateCardNumbers({ key, value, cardNumbers })) return;
