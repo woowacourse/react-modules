@@ -32,6 +32,7 @@ type Story = StoryObj<typeof AlertModal>;
 export const Alert: Story = {
   args: {
     message: '정말 삭제하시겠습니까?',
+    height: '157px',
   },
   render: (args) => {
     const [isOpen, setIsOpen] = useState(false);

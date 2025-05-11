@@ -9,9 +9,10 @@ type ConfirmModalProps = {
   description?: string;
   onCancel: () => void;
   onConfirm: () => void;
+  height?: string;
 };
 
-function ConfirmModal({ message, description, onCancel, onConfirm }: ConfirmModalProps) {
+function ConfirmModal({ message, description, onCancel, onConfirm, height = "157px" }: ConfirmModalProps) {
   const cancelButtonRef = useRef<HTMLButtonElement>(null);
 
   const { containerRef, handleKeyDown } = useFocusTrap({
@@ -24,7 +25,7 @@ function ConfirmModal({ message, description, onCancel, onConfirm }: ConfirmModa
       position="center"
       onClose={onCancel}
       width="480px"
-      height="157px"
+      height={height}
     >
       <Container ref={containerRef} onKeyDown={handleKeyDown}>
         <Message>{message}</Message>

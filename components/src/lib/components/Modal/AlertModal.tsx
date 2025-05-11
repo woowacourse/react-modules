@@ -8,9 +8,10 @@ type AlertModalProps = {
   message: string;
   description?: string;
   onConfirm: () => void;
+  height?: string;
 };
 
-function AlertModal({ message, description, onConfirm }: AlertModalProps) {
+function AlertModal({ message, description, onConfirm, height = "157px" }: AlertModalProps) {
   const confirmButtonRef = useRef<HTMLButtonElement>(null);
 
   const { containerRef, handleKeyDown } = useFocusTrap({
@@ -23,7 +24,7 @@ function AlertModal({ message, description, onConfirm }: AlertModalProps) {
       position="center"
       onClose={onConfirm}
       width="480px"
-      height="157px"
+      height={height}
     >
       <Container ref={containerRef} onKeyDown={handleKeyDown}>
         <Message>{message}</Message>

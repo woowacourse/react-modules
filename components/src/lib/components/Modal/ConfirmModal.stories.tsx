@@ -33,6 +33,7 @@ type Story = StoryObj<typeof ConfirmModal>;
 export const Confirm: Story = {
   args: {
     message: '변경 사항을 저장하시겠습니까?',
+    height: '157px',
   },
   render: (args) => {
     const [open, setOpen] = useState(false);
