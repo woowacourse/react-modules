@@ -7,6 +7,7 @@ import useModal from '../hooks/useModal';
 type ModalStoryProps = ModalProps & {
   title?: string;
   showCloseButton?: boolean;
+  size?: 'small' | 'medium' | 'large';
 };
 
 const meta: Meta<ModalStoryProps> = {
@@ -87,6 +88,45 @@ export const Default: Story = {
 
     const content = canvas.getAllByText('모달 내용입니다.');
     expect(content).toBeDefined();
+  },
+};
+
+export const Small: Story = {
+  args: {
+    size: 'small',
+  },
+  render: (args) => <Wrapper {...args} />,
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const openButton = canvas.getByRole('button', { name: '열기' });
+    expect(openButton).toBeDefined();
+    userEvent.click(openButton);
+  },
+};
+
+export const Medium: Story = {
+  args: {
+    size: 'medium',
+  },
+  render: (args) => <Wrapper {...args} />,
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const openButton = canvas.getByRole('button', { name: '열기' });
+    expect(openButton).toBeDefined();
+    userEvent.click(openButton);
+  },
+};
+
+export const Large: Story = {
+  args: {
+    size: 'large',
+  },
+  render: (args) => <Wrapper {...args} />,
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const openButton = canvas.getByRole('button', { name: '열기' });
+    expect(openButton).toBeDefined();
+    userEvent.click(openButton);
   },
 };
 
