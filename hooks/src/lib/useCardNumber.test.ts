@@ -96,24 +96,30 @@ describe("useCardNumber 테스트", () => {
         expect(result.current.cardBrand()).toBe("Amex");
       }
     );
-  });
 
-  describe("유효성 검증", () => {
     test.each([
-      ["4111111111111111"],
-      ["5111111111111111"],
-      ["5511111111111111"],
+      ["622126"],
+      ["622127"],
+      ["622925"],
+      ["624"],
+      ["625"],
+      ["626"],
+      ["6282"],
+      ["6283"],
+      ["6288"],
     ])(
-      "visa/master 카드는 16자리일 경우 에러가 발생하지 않는다.",
+      "cardNumber가 622126~622925/624~626/6282~6288으로 시작하면 Amex를 반환한다.",
       (cardNumber) => {
         const { result, rerender } = renderHook(() => useCardNumber());
 
         changeCardNumber(result, rerender, cardNumber);
 
-        expect(result.current.isValid).toBeTruthy();
+        expect(result.current.cardBrand()).toBe("UnionPay");
       }
     );
+  });
 
+  describe("유효성 검증", () => {
     test.each([["411111111111111"], ["51111111111111"], ["551111111111"]])(
       "visa/master 카드는 16자리 미만인 경우 에러가 발생한다.",
       (cardNumber) => {
@@ -138,6 +144,28 @@ describe("useCardNumber 테스트", () => {
 
     test.each([["3411"], ["371111111111111"]])(
       "amex 카드는 16자리 미만인 경우 에러가 발생한다.",
+      (cardNumber) => {
+        const { result, rerender } = renderHook(() => useCardNumber());
+
+        changeCardNumber(result, rerender, cardNumber);
+
+        expect(result.current.isValid).toBeFalsy();
+      }
+    );
+
+    test.each([["6288111111111111"], ["6221281111111111"]])(
+      "unionPay 카드는 16자리인 경우 에러가 발생하지 않는다.",
+      (cardNumber) => {
+        const { result, rerender } = renderHook(() => useCardNumber());
+
+        changeCardNumber(result, rerender, cardNumber);
+
+        expect(result.current.isValid).toBeTruthy();
+      }
+    );
+
+    test.each([["628811111"], ["622128111111111"]])(
+      "unionPay 카드는 16자리 미만인 경우 에러가 발생한다.",
       (cardNumber) => {
         const { result, rerender } = renderHook(() => useCardNumber());
 
@@ -192,4 +220,19 @@ describe("useCardNumber 테스트", () => {
       }
     );
   });
+
+  test.each([
+    ["6221261111111111", "6221 2611 1111 1111"],
+    ["624111", "6241 11"],
+    ["6282111", "6282 111"],
+  ])(
+    "visa/master 카드는 4자리씩 띄어서 반환한다.",
+    (cardNumber, formattedCardNumber) => {
+      const { result, rerender } = renderHook(() => useCardNumber());
+
+      changeCardNumber(result, rerender, cardNumber);
+
+      expect(result.current.formatCardNumber()).toBe(formattedCardNumber);
+    }
+  );
 });

@@ -24,6 +24,17 @@ const getCardBrand = (value: string) => {
 
   if (number === 34 || number === 37) return "Amex";
 
+  const numberr = Number(value.slice(0, 6));
+  const numberrr = Number(value.slice(0, 3));
+  const numberrrr = Number(value.slice(0, 4));
+
+  if (
+    (numberr >= 622126 && numberr <= 622925) ||
+    (numberrr >= 624 && numberrr <= 626) ||
+    (numberrrr >= 6282 && numberrrr <= 6288)
+  )
+    return "UnionPay";
+
   return "none";
 };
 
@@ -74,6 +85,10 @@ export default function useCardNumber(
     }
 
     if (getCardBrand(value) === "Amex") {
+      validateCardNumberLength(value, 16);
+    }
+
+    if (getCardBrand(value) === "UnionPay") {
       validateCardNumberLength(value, 16);
     }
   };
