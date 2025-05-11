@@ -108,6 +108,8 @@ export const ModalCloseButton = styled.button`
   justify-content: center;
   color: black;
   cursor: pointer;
+  background: none;
+  border: none;
 `;
 
 export const ModalButtonContainer = styled.div`
@@ -124,6 +126,8 @@ export const ModalButton = styled.button<{
   border-radius: 4px;
   padding: 8px 20px;
   cursor: pointer;
+  background: none;
+  border: none;
 
   &:focus-visible {
     outline: 2px solid #4c9ffe;

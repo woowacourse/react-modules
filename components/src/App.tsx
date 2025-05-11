@@ -27,10 +27,18 @@ const App = () => {
             </Modal.ModalContent>
             <Modal.ModalButtonContainer>
               <Modal.ModalFocusTrap>
-                <Modal.ModalButton $size="small" $type="confirm">
+                <Modal.ModalButton
+                  $size="small"
+                  $type="confirm"
+                  onClick={handleCloseModal}
+                >
                   확인
                 </Modal.ModalButton>
-                <Modal.ModalButton $size="small" $type="cancel">
+                <Modal.ModalButton
+                  $size="small"
+                  $type="cancel"
+                  onClick={handleCloseModal}
+                >
                   취소
                 </Modal.ModalButton>
               </Modal.ModalFocusTrap>

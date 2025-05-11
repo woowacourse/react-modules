@@ -1,6 +1,6 @@
 {
   "name": "hanheel-modal-payments",
-  "version": "0.0.1",
+  "version": "0.0.5",
   "description": "우아한테크코스 payments 모달",
   "type": "module",
   "types": "dist/index.d.ts",

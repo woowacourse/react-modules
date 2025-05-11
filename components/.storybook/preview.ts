@@ -1,6 +1,5 @@
 import type { Preview } from "@storybook/react";
 import { INITIAL_VIEWPORTS } from "@storybook/addon-viewport";
-import "../src/reset.css";
 
 const preview: Preview = {
   parameters: {
