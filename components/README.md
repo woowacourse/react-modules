@@ -133,7 +133,6 @@ function App() {
       <Modal
         isOpen={isOpen}
         onClose={closeModal}
-        position="bottom"
         title={{
           text: 'Alert Modal',
         }}
@@ -167,7 +166,6 @@ function App() {
       <Modal
         isOpen={isOpen}
         onClose={closeModal}
-        position="bottom"
         title={{
           text: 'Confirm Modal',
         }}
@@ -201,7 +199,6 @@ function App() {
       <Modal
         isOpen={isOpen}
         onClose={closeModal}
-        position="bottom"
         title={{
           text: 'Prompt Modal',
         }}
