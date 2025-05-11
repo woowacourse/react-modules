@@ -15,7 +15,7 @@ const useInputValue = <T extends string>(props: InputValueType<T>) => {
   const onChange = (value: T) => {
     const regex = new RegExp(splitter, "g");
     const cleanValue = value.replace(regex, "") as T;
-    setState(cleanValue);
+    if (cleanValue.length <= maxLength) setState(cleanValue);
   };
 
   const isLengthComplete = useCheckLengthComplete(state as cardStateType, maxLength);
