@@ -3,65 +3,72 @@ import { validateNumericString } from '../../utils/validation';
 import checkNoError from '../../utils/checkNoError';
 import {
   ErrorMessageType,
-  ListErrorType,
   CurriedInputChangeHandler,
-  ValidationHookReturnType,
   ValidateFuncReturnType,
+  SingleErrorType,
+  CarNumberValidationHookReturnType,
 } from '../../types';
+import { CARD_BRANDS } from '../../constants';
+import { formatCardNumber } from '../../utils/formatCardNumber';
+import { identifyCardNumber } from '../../utils/identifyCardBrand';
 
-const useCardNumberValidation = (
-  format: number[] = [4, 4, 4, 4]
-): ValidationHookReturnType => {
-  const [inputStates, setInputStates] = useState<string[]>(
-    format.map(() => '')
-  );
-  const [errors, setErrors] = useState<ListErrorType>(format.map(() => false));
-  const [errorMessage, setErrorMessage] = useState<ErrorMessageType>('');
+const useCardNumberValidation = (): CarNumberValidationHookReturnType => {
+  const [inputStates, setInputStates] = useState('');
 
   const validateCardNumber = (
     value: string,
     maxLength: number
   ): ValidateFuncReturnType => {
+    if (value === '') return { error: false, message: '' };
+
     const numberCheck = validateNumericString(value);
     if (numberCheck.error) return numberCheck;
 
-    const lengthCheck = value.length !== maxLength;
+    const lengthCheck = value.length < maxLength;
     if (lengthCheck) {
       return {
         error: true,
-        message: '올바른 길이의 숫자를 입력해주세요.',
+        message: `${maxLength}자리의 숫자를 입력해주세요.`,
       };
     }
 
     return { error: false, message: '' };
   };
 
-  const onChange: CurriedInputChangeHandler =
-    (index: number) => (e: React.ChangeEvent<HTMLInputElement>) => {
-      const value = e.target.value;
+  const { cardBrand, maxLength } = identifyCardNumber(inputStates);
 
-      const updatedValues = [...inputStates];
-      updatedValues[index] = value;
-      setInputStates(updatedValues);
+  const {
+    error,
+    message,
+  }: { error: SingleErrorType; message: ErrorMessageType | string } =
+    validateCardNumber(inputStates, maxLength); //inputState 바뀌면 자동 계산
 
-      const { error, message } = validateCardNumber(value, format[index]);
+  const onChange: CurriedInputChangeHandler = () => (e) => {
+    const value = e.target.value;
+    const digitsOnly = value.replace(/\D/g, '');
 
-      setErrors((prev) => {
-        const updated = [...prev];
-        updated[index] = error;
-        return updated;
-      });
+    // 최신 입력 기반으로 다시 카드 브랜드 식별
+    const { maxLength: latestMaxLength } = identifyCardNumber(digitsOnly);
+    const sliced = digitsOnly.slice(0, latestMaxLength);
 
-      setErrorMessage(message);
-    };
+    setInputStates(sliced);
+  };
 
-  const noError = checkNoError(errors);
+  const noError = checkNoError(error);
+
+  const brandInfo = CARD_BRANDS.find((b) => b.name === cardBrand);
+  const formattedValue = brandInfo
+    ? formatCardNumber(inputStates, brandInfo.format)
+    : inputStates;
 
   return {
     inputStates,
-    errorMessage,
+    errorMessage: message,
     onChange,
     noError,
+    cardBrand,
+    formattedValue,
+    format: brandInfo?.format ?? [4, 4, 4, 4],
   };
 };
 
