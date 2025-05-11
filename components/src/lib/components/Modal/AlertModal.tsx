@@ -1,33 +1,31 @@
-import Modal from '../Modal';
+import Modal from '../../Modal.tsx';
 import styled from '@emotion/styled';
 import { Button } from '../Button';
 
-type ConfirmModalProps = {
+type AlertModalProps = {
   message: string;
   description?: string;
-  onCancel: () => void;
   onConfirm: () => void;
 };
 
-function ConfirmModal({ message, description, onCancel, onConfirm }: ConfirmModalProps) {
+function AlertModal({ message, description, onConfirm }: AlertModalProps) {
   return (
     <Modal
       position="center"
-      onClose={onCancel}
+      onClose={onConfirm}
       width="480px"
       height="157px"
     >
       <Message>{message}</Message>
       {description && <Description>{description}</Description>}
       <ButtonContainer>
-        <Button variant="cancel" onClick={onCancel}>취소</Button>
         <Button variant="confirm" onClick={onConfirm}>확인</Button>
       </ButtonContainer>
     </Modal>
   );
 }
 
-export default ConfirmModal;
+export default AlertModal;
 
 const Message = styled.p`
     margin: 0;
@@ -50,5 +48,5 @@ const ButtonContainer = styled.div`
     justify-content: flex-end;
     flex-direction: row;
     align-items: flex-end;
-    gap: 12px;
 `;
+
