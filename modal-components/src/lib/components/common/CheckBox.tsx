@@ -17,6 +17,10 @@ const CheckboxContainer = styled.button<{ disabled?: boolean }>`
   border-radius: 50%;
   background-color: ${(props) => (props.disabled ? "#E0E0E0" : "#000")};
   cursor: ${(props) => (props.disabled ? "not-allowed" : "pointer")};
+  &:focus {
+    border: 1px solid #ffffff;
+    outline: 2px solid #0d61f1;
+  }
 `;
 
 const CheckIcon = styled.svg`
