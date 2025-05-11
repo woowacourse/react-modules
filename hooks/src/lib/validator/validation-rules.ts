@@ -46,7 +46,10 @@ type ValidationRule = {
 
 type ValidationRules = {
   cvc: Record<CvcErrorCodes, ValidationRule>;
-  cardNumber: Record<CardNumberErrorCodes | "INVALID_LENGTH", ValidationRule>;
+  cardNumber: Record<
+    Exclude<CardNumberErrorCodes, "INVALID_CHECKSUM"> | "INVALID_LENGTH",
+    ValidationRule
+  >;
   strictCardNumber: Record<
     CardNumberErrorCodes | "INVALID_LENGTH",
     ValidationRule
@@ -92,12 +95,6 @@ export const validationRules: ValidationRules = {
           checkCardBrand(value),
           CLIENT_CARD_NUMBER_LENGTH
         ),
-    },
-    INVALID_CHECKSUM: {
-      applyWhen: (value: string) =>
-        isValidLength(value, CLIENT_CARD_NUMBER_LENGTH),
-      check: (value: string) => isValidLuhn(value),
-      message: CARD_NUMBER_ERROR_MESSAGES.INVALID_CHECKSUM,
     },
   },
   strictCardNumber: {
