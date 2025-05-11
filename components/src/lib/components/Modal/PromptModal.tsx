@@ -1,4 +1,4 @@
-import { PropsWithChildren, useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { ModalProps } from '../../Modal.type';
 import ModalBackdrop from '../common/ModalBackdrop';
 import ModalHeader from '../common/ModalHeader';
@@ -7,11 +7,14 @@ import { ModalProvider, useModalContext } from '../../ModalContext';
 import ConfirmButton from '../common/ConfirmButton';
 import { ButtonBar, ModalFrame } from '../common/cssStyle';
 import CancelButton from '../common/CancelButton';
+import { css } from '@emotion/css';
 
 const PromptModal = ({ children, position, isOpen, onClose, onAfterOpen, size }: ModalProps) => {
   if (!isOpen) return null;
+  const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
+    inputRef.current?.focus();
     if (onAfterOpen) onAfterOpen();
   }, [onAfterOpen]);
 
@@ -22,6 +25,7 @@ const PromptModal = ({ children, position, isOpen, onClose, onAfterOpen, size }:
       <ModalBackdrop>
         <div className={ModalFrame(position, size)} data-testid="modal">
           {children}
+          <input type="text" className={Input} ref={inputRef} />
           <div className={ButtonBar}>
             <CancelButton />
             <ConfirmButton />
@@ -38,8 +42,11 @@ PromptModal.Header = function Header({ title, showCloseButton = false }: { title
   return <ModalHeader title={title} showCloseButton={showCloseButton} onClose={context.onClose} />;
 };
 
-PromptModal.Body = function Body({ children }: PropsWithChildren) {
-  return <section>{children}</section>;
-};
-
 export default PromptModal;
+
+const Input = css`
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #000;
+  border-radius: 5px;
+`;

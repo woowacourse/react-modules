@@ -1,7 +1,7 @@
 import './App.css';
 import { css } from '@emotion/css';
 import useModal from './lib/hooks/useModal';
-import { ConfirmModal } from './lib';
+import { PromptModal } from './lib';
 
 function App() {
   const { isOpen, handleOpen, handleClose } = useModal();
@@ -10,29 +10,15 @@ function App() {
     console.log('열기 버튼 클릭');
   };
 
-  const ModalContent = () => {
-    return (
-      <>
-        <p>모달 내용입니다.</p>
-        <p>모달 내용입니다.</p>
-        <p>모달 내용입니다.</p>
-        <p>모달 내용입니다.</p>
-      </>
-    );
-  };
-
   return (
     <>
       <h1>Modal Component</h1>
       <button className={OpenButton} onClick={handleOpen}>
         열기
       </button>
-      <ConfirmModal isOpen={isOpen} position="center" onAfterOpen={handleAfterOpen} onClose={handleClose} size="large">
-        <ConfirmModal.Header title="알림" showCloseButton />
-        <ConfirmModal.Body>
-          <ModalContent />
-        </ConfirmModal.Body>
-      </ConfirmModal>
+      <PromptModal isOpen={isOpen} position="center" onAfterOpen={handleAfterOpen} onClose={handleClose} size="large">
+        <PromptModal.Header title="알림" showCloseButton />
+      </PromptModal>
     </>
   );
 }
