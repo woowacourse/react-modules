@@ -7,6 +7,11 @@ type AlertModalProps = {
 } & Omit<ModalProps, 'children'>;
 
 const AlertModal = ({ isOpen, onClose, description, onConfirm, title }: AlertModalProps) => {
+  const handleConfirm = () => {
+    onConfirm();
+    onClose();
+  };
+
   return (
     <Modal isOpen={isOpen} onClose={onClose} closeByEscapeKey={false}>
       <Modal.Backdrop closeByBackdrop={false} />
@@ -14,7 +19,7 @@ const AlertModal = ({ isOpen, onClose, description, onConfirm, title }: AlertMod
         <Modal.Title title={title} />
         <Modal.Description description={description} />
         <Modal.ButtonWrapper>
-          <Modal.ConfirmButton onClick={onConfirm} $autoFocus={true}>
+          <Modal.ConfirmButton onClick={handleConfirm} $autoFocus={true}>
             확인
           </Modal.ConfirmButton>
         </Modal.ButtonWrapper>

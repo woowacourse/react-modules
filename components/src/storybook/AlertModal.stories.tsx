@@ -34,7 +34,6 @@ const ModalStory = (args: Story['args']) => {
           onClose={handleCloseModal}
           onConfirm={() => {
             console.log('alert 확인!');
-            handleCloseModal();
           }}
           title={args.title}
           description={args.description}
