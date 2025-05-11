@@ -6,35 +6,57 @@ interface CustomErrorMessagesType {
   length?: string;
 }
 
-type CardBrandType =
-  | "Visa"
-  | "MasterCard"
-  | "Diners"
-  | "Amex"
-  | "UnionPay"
-  | "none";
+const CARD_BRAND = {
+  Visa: {
+    length: 16,
+    format: [4, 4, 4, 4],
+    condition: (value: string) => value.startsWith("4"),
+  },
+  MasterCard: {
+    length: 16,
+    format: [4, 4, 4, 4],
+    condition: (value: string) => {
+      const number = Number(value.slice(0, 2));
+      return number >= 51 && number <= 55;
+    },
+  },
+  Diners: {
+    length: 14,
+    format: [4, 6, 4],
+    condition: (value: string) => value.startsWith("36"),
+  },
+  Amex: {
+    length: 16,
+    format: [4, 6, 5],
+    condition: (value: string) =>
+      value.startsWith("34") || value.startsWith("37"),
+  },
+  UnionPay: {
+    length: 16,
+    format: [4, 4, 4, 4],
+    condition: (value: string) => {
+      const six = Number(value.slice(0, 6));
+      const three = Number(value.slice(0, 3));
+      const four = Number(value.slice(0, 4));
+      return (
+        (six >= 622126 && six <= 622925) ||
+        (three >= 624 && three <= 626) ||
+        (four >= 6282 && four <= 6288)
+      );
+    },
+  },
+  none: { length: null, format: [], condition: null },
+};
 
-const getCardBrand = (value: string) => {
-  if (value[0] === "4") return "Visa";
+type CardBrandType = keyof typeof CARD_BRAND;
 
-  const number = Number(value.slice(0, 2));
-  if (number <= 55 && number >= 51) return "MasterCard";
-
-  if (number === 36) return "Diners";
-
-  if (number === 34 || number === 37) return "Amex";
-
-  const numberr = Number(value.slice(0, 6));
-  const numberrr = Number(value.slice(0, 3));
-  const numberrrr = Number(value.slice(0, 4));
-
-  if (
-    (numberr >= 622126 && numberr <= 622925) ||
-    (numberrr >= 624 && numberrr <= 626) ||
-    (numberrrr >= 6282 && numberrrr <= 6288)
-  )
-    return "UnionPay";
-
+const getCardBrand = (value: string): CardBrandType => {
+  for (const brand in CARD_BRAND) {
+    const condition = CARD_BRAND[brand as CardBrandType].condition;
+    if (condition && condition(value)) {
+      return brand as CardBrandType;
+    }
+  }
   return "none";
 };
 
@@ -47,16 +69,20 @@ export default function useCardNumber(
 
   const validateCardNumberLength = (
     value: string,
-    cardNumberLength: number
+    cardNumberLength: number | null
   ) => {
-    if (value.length > cardNumberLength) {
+    if (cardNumberLength && value.length > cardNumberLength) {
       return;
     }
 
     setCardNumber(value);
 
-    if (value.length < cardNumberLength) {
-      setErrorMessage(`${cardNumberLength}자리를 입력해 주세요.`);
+    if (cardNumberLength && value.length < cardNumberLength) {
+      setErrorMessage(
+        customErrorMessage
+          ? `${cardNumberLength}${customErrorMessage}`
+          : `${cardNumberLength}자리를 입력해 주세요.`
+      );
       return;
     }
 
@@ -70,53 +96,27 @@ export default function useCardNumber(
 
     if (!numberRegex.test(value)) return;
 
-    if (getCardBrand(value) === "Visa") {
-      validateCardNumberLength(value, 16);
-      return;
-    }
+    const brand = getCardBrand(value);
+    const brandLength = CARD_BRAND[brand].length;
 
-    if (getCardBrand(value) === "MasterCard") {
-      validateCardNumberLength(value, 16);
-      return;
-    }
-
-    if (getCardBrand(value) === "Diners") {
-      validateCardNumberLength(value, 14);
-    }
-
-    if (getCardBrand(value) === "Amex") {
-      validateCardNumberLength(value, 16);
-    }
-
-    if (getCardBrand(value) === "UnionPay") {
-      validateCardNumberLength(value, 16);
-    }
+    validateCardNumberLength(value, brandLength);
   };
 
   const formatCardNumber = () => {
-    const patterns: Record<CardBrandType, number[]> = {
-      Visa: [4, 4, 4, 4],
-      MasterCard: [4, 4, 4, 4],
-      Diners: [4, 6, 4],
-      Amex: [4, 6, 5],
-      UnionPay: [4, 4, 4, 4],
-      none: [],
-    };
-
-    const pattern = patterns[cardBrand()];
-
-    const result = [];
+    const pattern = CARD_BRAND[cardBrand()].format;
     let start = 0;
 
-    for (const len of pattern) {
-      result.push(cardNumber.slice(start, start + len));
-      start += len;
-    }
-
-    return result.join(" ").trim();
+    return pattern
+      .map((len) => {
+        const number = cardNumber.slice(start, start + len);
+        start += len;
+        return number;
+      })
+      .join(" ")
+      .trim();
   };
 
-  const cardBrand = () => {
+  const cardBrand = (): CardBrandType => {
     return getCardBrand(cardNumber);
   };
 

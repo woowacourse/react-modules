@@ -37,12 +37,8 @@ export const Positioin: Story = {
 
     return (
       <>
-        <button type="button" onClick={openCenterModal}>
-          center
-        </button>
-        <button type="button" onClick={openBottomModal}>
-          bottom
-        </button>
+        <Button text="center" size="medium" onClick={openCenterModal} />
+        <Button text="bottom" size="medium" onClick={openBottomModal} />
         <Modal
           onClose={handleCenterModalClose}
           isOpen={isCenterOpen}
