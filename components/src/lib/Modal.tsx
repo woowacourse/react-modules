@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import { Layout, Overlay, ModalContainer, TitleContainer, Title, CloseButton, CloseIcon } from './Modal.styles';
+import {useFocusTrap} from "./hooks/useFocusTrap";
 
 export type ModalPosition = 'center' | 'bottom';
 export type ModalSize = 'sm' | 'md' | 'lg';
@@ -28,7 +29,11 @@ function Modal({
 }: ModalProps) {
   const customWidth = position === 'center' ? width : '100%';
   const closeButtonRef = useRef<HTMLButtonElement>(null);
-  const modalRef = useRef<HTMLDivElement>(null);
+
+  const {containerRef, handleKeyDown} = useFocusTrap({
+    initialFocusRef: closeButtonRef as React.RefObject<HTMLButtonElement>,
+    onEscape: onClose
+  });
 
   const handleClickOverlay = () => {
     onClose();
@@ -70,7 +75,8 @@ function Modal({
         position={position}
         size={size}
         onClick={(e) => e.stopPropagation()}
-        ref={modalRef}
+        onKeyDown={handleKeyDown}
+        ref={containerRef}
         role="dialog"
         aria-modal="true"
       >

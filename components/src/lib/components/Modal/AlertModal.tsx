@@ -1,6 +1,8 @@
 import Modal from '../../Modal.tsx';
 import styled from '@emotion/styled';
 import { Button } from '../Button';
+import { useRef } from "react";
+import { useFocusTrap } from "../../hooks/useFocusTrap";
 
 type AlertModalProps = {
   message: string;
@@ -9,6 +11,13 @@ type AlertModalProps = {
 };
 
 function AlertModal({ message, description, onConfirm }: AlertModalProps) {
+  const confirmButtonRef = useRef<HTMLButtonElement>(null);
+
+  const { containerRef, handleKeyDown } = useFocusTrap({
+    initialFocusRef: confirmButtonRef as React.RefObject<HTMLButtonElement>,
+    onEscape: onConfirm
+  });
+
   return (
     <Modal
       position="center"
@@ -16,16 +25,25 @@ function AlertModal({ message, description, onConfirm }: AlertModalProps) {
       width="480px"
       height="157px"
     >
-      <Message>{message}</Message>
-      {description && <Description>{description}</Description>}
-      <ButtonContainer>
-        <Button variant="confirm" onClick={onConfirm}>확인</Button>
-      </ButtonContainer>
+      <Container ref={containerRef} onKeyDown={handleKeyDown}>
+        <Message>{message}</Message>
+        {description && <Description>{description}</Description>}
+        <ButtonContainer>
+          <Button variant="confirm" onClick={onConfirm} ref={confirmButtonRef}>확인</Button>
+        </ButtonContainer>
+      </Container>
     </Modal>
   );
 }
 
 export default AlertModal;
+
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+`;
 
 const Message = styled.p`
     margin: 0;

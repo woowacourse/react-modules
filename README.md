@@ -1,9 +1,8 @@
 # 1️⃣ 모달 컴포넌트
 
-> 페이먼츠 모듈 1단계
+> 페이먼츠 모듈 2단계
 
-[🎨 스토리북 배포 주소](https://6811b32435027dad59e3902b-hdzpptbvyn.chromatic.com/?path=/story/components-modal--center)  
-[🗂️ 배포 npm 링크](https://www.npmjs.com/package/lumes_modal)
+[🎨 모달 스토리북 배포 주소](https://6813031d6576e04c1cfcc2c7-prfyakyhgp.chromatic.com/?path=/story/components-modal--center)  
 
 ## 🎯 기능 요구 사항
 
@@ -132,6 +131,13 @@
     - [x] 각 커스텀 훅에 대해 독립적으로 테스트를 작성한다.
     - [x] 정상 입력과 비정상 입력(성공 시나리오 / 실패 시나리오)을 모두 테스트한다.
     - [x] 다양한 잘못된 입력(경계값 초과, 빈 입력, 형식 오류 등)에 대해 폭넓게 테스트한다.
+
+<br>
+
+> 페이먼츠 모듈 1단계
+
+[🎨 스토리북 배포 주소](https://6811b32435027dad59e3902b-hdzpptbvyn.chromatic.com/?path=/story/components-modal--center)  
+[🗂️ 배포 npm 링크](https://www.npmjs.com/package/lumes_modal)
 
 <br>
 
