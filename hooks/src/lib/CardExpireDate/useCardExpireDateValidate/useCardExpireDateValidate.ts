@@ -1,9 +1,9 @@
 import { useState } from "react";
 
-import validateRange from "../utils/validateRange";
-import { checkBasicValidation } from "../utils/checkBasicValidation";
+import validateRange from "../../utils/validateRange";
+import { checkBasicValidation } from "../../utils/checkBasicValidation";
 
-import { validationMessages } from "../../constants/validationMessages";
+import { validationMessages } from "../../../constants/validationMessages";
 
 type CardExpireDate = {
   month: string;
@@ -35,7 +35,7 @@ const useCardExpireDateValidate = () => {
         [key]: result.isValid,
       }));
       setErrorMessage(result.errorMessage);
-      return;
+      return result.isValid;
     }
 
     if (key === "month" && expireDate[key].length === 2) {
@@ -52,7 +52,7 @@ const useCardExpireDateValidate = () => {
         });
 
         setErrorMessage(validationMessages.rangeMonth);
-        return;
+        return false;
       }
     }
 
@@ -70,7 +70,7 @@ const useCardExpireDateValidate = () => {
         });
 
         setErrorMessage(validationMessages.invalidYear);
-        return;
+        return false;
       }
     }
 
@@ -88,7 +88,7 @@ const useCardExpireDateValidate = () => {
       });
 
       setErrorMessage(validationMessages.invalidExpire);
-      return;
+      return false;
     }
 
     setIsValid({
@@ -97,6 +97,7 @@ const useCardExpireDateValidate = () => {
     });
 
     setErrorMessage(null);
+    return true;
   };
 
   return { isValid, errorMessage, validateCardExpireDate };
