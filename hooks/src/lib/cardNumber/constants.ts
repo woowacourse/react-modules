@@ -12,11 +12,6 @@ export type ValidateCardNumbersResult = {
   errorType?: CardNumberErrorType;
 };
 
-export const ERROR_MESSAGE = {
-  notNumber: '숫자만 입력해주세요.',
-  invalidLength: '카드 번호는 네 자리만 입력해야 합니다.',
-};
-
 export const CARD_NUMBERS_LENGTH: Record<NetworkType, number> = {
   visa: 16,
   master: 16,
@@ -26,3 +21,8 @@ export const CARD_NUMBERS_LENGTH: Record<NetworkType, number> = {
 };
 
 export const DEFAULT_LENGTH = 16;
+
+export const ERROR_MESSAGE = {
+  notNumber: '숫자만 입력해주세요.',
+  invalidLength: `카드 번호는 최대 ${DEFAULT_LENGTH}만 입력해야 합니다.`,
+};
