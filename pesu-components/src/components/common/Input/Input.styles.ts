@@ -8,5 +8,5 @@ export const Input = styled.input<{ isError: boolean }>`
   &::placeholder {
     color: #acacac;
   }
-  ${({ isError }) => isError && `outline: #f00`};
+  ${({ isError }) => isError && `outline: 1px solid #f00`};
 `;
