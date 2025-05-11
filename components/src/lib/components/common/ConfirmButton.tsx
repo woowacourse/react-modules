@@ -21,10 +21,6 @@ const ConfirmButtonStyle = css`
   color: white;
   border: 1px solid #333333;
 
-  &:focus {
-    outline: none;
-  }
-
   &:hover {
     border: 1px solid #333333;
     background-color: #111111;

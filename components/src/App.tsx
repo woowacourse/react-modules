@@ -32,7 +32,6 @@ function App() {
         position="center"
         onAfterOpen={handleAfterOpen}
         onClose={handleClose}
-        type="prompt"
         size="large"
         showDefaultCancelButton
         showDefaultConfirmButton
