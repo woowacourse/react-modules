@@ -48,9 +48,9 @@
 - [x] Input 구현
 - [x] Flex 구현
 - [x] Loading 구현 
-- [] Modal 
-    - [] Modal Header, Content 분리
-    - [] Modal Focus hook 구현
+- [x] Modal 
+    - [x] Modal Header, Content 분리
+    - [x] Modal Focus hook 구현
 - [] useModal hook 테스트
 - [] AlertModal 구현
     - [] 컴포넌트 구현
