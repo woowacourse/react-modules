@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { expect, userEvent, waitFor } from "@storybook/test";
+import { expect, screen, userEvent, waitFor } from "@storybook/test";
 
 import { useState } from "react";
 import Modal from "../..";
@@ -20,7 +20,7 @@ export const CenterModal: Story = {
     const [isOpen, setIsOpen] = useState(false);
     return (
       <>
-        <button onClick={() => setIsOpen((prev) => !prev)} id="trigger-button">
+        <button onClick={() => setIsOpen(() => true)} id="trigger-button">
           모달창 trigger
         </button>
         <Modal
@@ -30,7 +30,7 @@ export const CenterModal: Story = {
             setIsOpen(false);
           }}
         >
-          <Modal.Header>중앙 모달 제목입니다</Modal.Header>
+          <Modal.Header hasCloseButton>중앙 모달 제목입니다</Modal.Header>
           <Modal.Content>중앙 모달 내용 입니다.</Modal.Content>
         </Modal>
       </>
@@ -41,17 +41,20 @@ export const CenterModal: Story = {
       "#trigger-button"
     ) as HTMLButtonElement;
     await userEvent.click(triggerButton);
-    const modalContainer = document.body.querySelector(
-      "#modal-container"
+    const modalContainer = screen.getByTestId(
+      "modal-container"
     ) as HTMLDivElement;
     await waitFor(() => {
       expect(modalContainer).toHaveTextContent("중앙 모달 제목입니다");
     });
 
-    // close button 클릭시 모달 닫히기
+    // // close button 클릭시 모달 닫히기
     await userEvent.click(triggerButton);
-    const closeButton = document.body.querySelector(
-      "#modal-close-button"
+    await waitFor(() =>
+      expect(screen.getByTestId("modal-container")).toBeInTheDocument()
+    );
+    const closeButton = screen.getByTestId(
+      "modal-close-button"
     ) as HTMLImageElement;
     await userEvent.click(closeButton);
 
@@ -59,8 +62,9 @@ export const CenterModal: Story = {
 
     // background 클릭시 모달 닫히기
     await userEvent.click(triggerButton);
-    const modalBackground = document.body.querySelector(
-      "#modal-background"
+
+    const modalBackground = screen.getByTestId(
+      "modal-background"
     ) as HTMLImageElement;
     await userEvent.click(modalBackground);
     await waitFor(() => expect(modalContainer).not.toBeInTheDocument());

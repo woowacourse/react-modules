@@ -35,14 +35,14 @@ export default function ModalComponent({
   return createPortal(
     <ModalContext.Provider value={{ isOpen, onClose, position }}>
       <div
-        id="modal-background"
+        data-testid="modal-background"
         className={backgroundClassName}
         onClick={() => {
           onClose();
         }}
       >
         <div
-          id="modal-container"
+          data-testid="modal-container"
           className={`${containerClassName}`}
           onClick={(e) => e.stopPropagation()}
           ref={modalRef}
