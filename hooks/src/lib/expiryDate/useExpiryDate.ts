@@ -28,6 +28,8 @@ function useExpiryDate() {
 
   const getExpiryDateValidationError = useCallback(
     (name: ExpiryDateKey, value: string) => {
+      if (value === '') return null;
+
       const isNumber = checkIsNumber(value);
       const isValidLength = checkIsValidLength(value, 2);
       const isMonthInRange = checkIsInRange(Number(value), 1, 12);
@@ -44,6 +46,8 @@ function useExpiryDate() {
 
   const getExpiryDateExpiredError = useCallback(
     (name: ExpiryDateKey, value: string) => {
+      if (value === '') return null;
+
       const { month, year } = expiryDate;
       const targetMonth = name === EXPIRY_DATE_KEY.month ? value : month;
       const targetYear = name === EXPIRY_DATE_KEY.year ? value : year;
@@ -62,33 +66,32 @@ function useExpiryDate() {
       value: string,
       options?: { skipValidation?: boolean }
     ) => {
-      const errorType = getExpiryDateValidationError(key, value);
-
       const shouldSkipValidation = options?.skipValidation ?? false;
+
+      const errorType = getExpiryDateValidationError(key, value);
+      const expiredDateErrorType = getExpiryDateExpiredError(key, value);
 
       if (!shouldSkipValidation && errorType) {
         return;
       }
 
-      if (shouldSkipValidation) {
-        setValidationResults((prev) => ({
-          ...prev,
-          [key]: {
-            isValid: errorType === null,
-            errorMessage: errorType ? ERROR_MESSAGE.expiryDate[errorType] : '',
-          },
-        }));
-      }
+      const isValid = shouldSkipValidation
+        ? !errorType && !expiredDateErrorType
+        : !expiredDateErrorType;
 
-      const isExpiredDate = getExpiryDateExpiredError(key, value);
+      const errorMessage = (() => {
+        if (isValid) return '';
+
+        if (expiredDateErrorType)
+          return ERROR_MESSAGE.expiryDate[expiredDateErrorType];
+        if (errorType) return ERROR_MESSAGE.expiryDate[errorType];
+
+        return '';
+      })();
+
       setValidationResults((prev) => ({
         ...prev,
-        [key]: {
-          isValid: !isExpiredDate,
-          errorMessage: isExpiredDate
-            ? ERROR_MESSAGE.expiryDate[isExpiredDate]
-            : '',
-        },
+        [key]: { isValid, errorMessage },
       }));
 
       setExpiryDate((prev) => ({ ...prev, [key]: value }));
