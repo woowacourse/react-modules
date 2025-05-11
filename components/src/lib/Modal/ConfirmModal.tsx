@@ -1,20 +1,24 @@
 import Modal from '../Modal';
 import styled from '@emotion/styled';
-import {Button} from "../Button";
+import { Button } from '../Button';
 
 type ConfirmModalProps = {
   message: string;
   description?: string;
   onCancel: () => void;
   onConfirm: () => void;
-  size?: 'sm' | 'md' | 'lg';
 };
 
-function ConfirmModal({message, description, onCancel, onConfirm, size = 'md'}: ConfirmModalProps) {
+function ConfirmModal({ message, description, onCancel, onConfirm }: ConfirmModalProps) {
   return (
-    <Modal position="center" size={size} onClose={onConfirm}>
+    <Modal
+      position="center"
+      onClose={onCancel}
+      width="480px"
+      height="157px"
+    >
       <Message>{message}</Message>
-      <Description>{description}</Description>
+      {description && <Description>{description}</Description>}
       <ButtonContainer>
         <Button variant="cancel" onClick={onCancel}>취소</Button>
         <Button variant="confirm" onClick={onConfirm}>확인</Button>

@@ -40,12 +40,26 @@ export const ModalContainer = styled.div<ModalContainerProps>`
   padding: 24px 32px;
   overflow-y: auto;
 
-  ${({ size }) =>
-  size &&
-  css`
-      width: ${sizeStyles[size].width};
-      height: ${sizeStyles[size].height};
-    `}
+    ${({size, width, height}) => {
+        if (width || height) {
+            return css`
+                width: ${width || 'auto'};
+                height: ${height || 'auto'};
+            `;
+        }
+
+        if (size && sizeStyles[size]) {
+            return css`
+                width: ${sizeStyles[size].width};
+                height: ${sizeStyles[size].height};
+            `;
+        }
+
+        return css`
+            width: 480px;
+            height: 157px;
+        `;
+    }}
 
   ${({ position }) =>
   position === 'center'

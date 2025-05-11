@@ -1,18 +1,22 @@
 import Modal from '../Modal';
 import styled from '@emotion/styled';
-import {Button} from "../Button";
+import { Button } from "../Button";
 
 type PromptModalProps = {
   message: string;
   placeholder?: string;
   onCancel: () => void;
   onConfirm: () => void;
-  size?: 'sm' | 'md' | 'lg';
 };
 
-function PromptModal({message, placeholder, onCancel, onConfirm, size = 'md'}: PromptModalProps) {
+function PromptModal({message, placeholder, onCancel, onConfirm}: PromptModalProps) {
   return (
-    <Modal position="center" size={size} onClose={onConfirm}>
+    <Modal
+      position="center"
+      onClose={onCancel}
+      width="480px"
+      height="157px"
+    >
       <Message>{message}</Message>
       <Input type="text" placeholder={placeholder}/>
       <ButtonContainer>
@@ -51,3 +55,4 @@ const ButtonContainer = styled.div`
     align-items: flex-end;
     gap: 12px;
 `;
+

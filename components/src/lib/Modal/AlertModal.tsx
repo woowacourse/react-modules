@@ -1,21 +1,25 @@
 import Modal from '../Modal';
 import styled from '@emotion/styled';
-import {Button} from '../Button';
+import { Button } from '../Button';
 
 type AlertModalProps = {
   message: string;
   description?: string;
   onConfirm: () => void;
-  size?: 'sm' | 'md' | 'lg';
 };
 
-function AlertModal({message, description, onConfirm, size = 'md'}: AlertModalProps) {
+function AlertModal({ message, description, onConfirm }: AlertModalProps) {
   return (
-    <Modal position="center" size={size} onClose={onConfirm}>
+    <Modal
+      position="center"
+      onClose={onConfirm}
+      width="480px"
+      height="157px"
+    >
       <Message>{message}</Message>
-      <Description>{description}</Description>
+      {description && <Description>{description}</Description>}
       <ButtonContainer>
-        <Button variant="confirm" onClick={onConfirm}>확인</Button> {/* 'type'을 'variant'로 변경 */}
+        <Button variant="confirm" onClick={onConfirm}>확인</Button>
       </ButtonContainer>
     </Modal>
   );
@@ -45,3 +49,4 @@ const ButtonContainer = styled.div`
     flex-direction: row;
     align-items: flex-end;
 `;
+

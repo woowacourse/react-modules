@@ -1,13 +1,14 @@
-import React, {useEffect} from 'react';
-import {Layout, Overlay, ModalContainer, TitleContainer, Title, CloseButton, CloseIcon} from './Modal.styles';
+import React, { useEffect } from 'react';
+import { Layout, Overlay, ModalContainer, TitleContainer, Title, CloseButton, CloseIcon } from './Modal.styles';
 
 export type ModalPosition = 'center' | 'bottom';
+export type ModalSize = 'sm' | 'md' | 'lg';
 
 export type ModalContainerProps = {
   width?: string;
   height?: string;
   position: ModalPosition;
-  size?: 'sm' | 'md' | 'lg';
+  size?: ModalSize;
 };
 
 type ModalProps = ModalContainerProps & {
@@ -16,7 +17,15 @@ type ModalProps = ModalContainerProps & {
   onClose: () => void;
 };
 
-function Modal({width = '480px', height = '157px', position, title, onClose, children, size = 'md'}: ModalProps) {
+function Modal({
+  width,
+  height,
+  position = 'center',
+  title,
+  onClose,
+  children,
+  size
+}: ModalProps) {
   const customWidth = position === 'center' ? width : '100%';
 
   useEffect(() => {
@@ -39,7 +48,7 @@ function Modal({width = '480px', height = '157px', position, title, onClose, chi
 
   return (
     <Layout onClick={handleClickOverlay}>
-      <Overlay/>
+      <Overlay />
       <ModalContainer
         width={customWidth}
         height={height}
@@ -51,7 +60,7 @@ function Modal({width = '480px', height = '157px', position, title, onClose, chi
           <TitleContainer>
             <Title>{title}</Title>
             <CloseButton onClick={onClose}>
-              <CloseIcon/>
+              <CloseIcon />
             </CloseButton>
           </TitleContainer>
         )}
@@ -62,4 +71,3 @@ function Modal({width = '480px', height = '157px', position, title, onClose, chi
 }
 
 export default Modal;
-

@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
 
 type ButtonProps = {
-  variant: 'confirm' | 'cancel'; // 'type'을 'variant'로 변경
+  variant: 'confirm' | 'cancel';
   onClick: () => void;
   children: React.ReactNode;
 };
