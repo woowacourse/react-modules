@@ -6,11 +6,12 @@ export type ErrorMessageType =
   | '숫자만 입력 가능합니다.'
   | '유효하지 않은 월입니다.'
   | '유효하지 않은 연도입니다.'
-  | '올바른 길이의 숫자를 입력해주세요.';
+  | '올바른 길이의 숫자를 입력해주세요.'
+  | string;
 
 export interface ValidateFuncReturnType {
   error: boolean;
-  message: ErrorMessageType;
+  message: ErrorMessageType | string;
 }
 
 export type CurriedInputChangeHandler = (
@@ -19,7 +20,7 @@ export type CurriedInputChangeHandler = (
 
 export interface ValidationHookReturnType {
   inputStates: string | string[];
-  errorMessage: ErrorMessageType;
+  errorMessage: ErrorMessageType | string;
   onChange: CurriedInputChangeHandler;
   noError: boolean;
 }
@@ -43,4 +44,15 @@ export interface ExpirationDateValidationReturnType {
   errorMessage: ErrorMessageType;
   onChange: ExpirationDateChangeHandler;
   noError: boolean;
+}
+
+export interface CarNumberValidationHookReturnType
+  extends ValidationHookReturnType {
+  inputStates: string;
+  errorMessage: ErrorMessageType | string;
+  onChange: CurriedInputChangeHandler;
+  noError: boolean;
+  cardBrand: string;
+  formattedValue: string;
+  format: number[];
 }
