@@ -56,6 +56,7 @@ const Modal = ({
   showCloseButton = true,
 }: ModalProps) => {
   useEscapeKey(onClose);
+
   const id = useId();
   const titleId = `modal-title-${id}`;
   const contentId = `modal-content-${id}`;
