@@ -1,7 +1,7 @@
-import CloseIconSVG from "../assets/CloseIconSVG";
-import { ModalHeaderContainer } from "../styles/ModalStyle";
-import { ModalTitle } from "../styles/ModalTextStyle";
-import { ModalHeaderProps } from "../types/modalTypes";
+import CloseIconSVG from "../../../assets/CloseIconSVG";
+import { ModalHeaderContainer } from "./ModalStyle";
+import { ModalTitle } from "../../../styles/ModalTextStyle";
+import { ModalHeaderProps } from "../../../types/modalTypes";
 
 const ModalHeader = ({
   titleText,

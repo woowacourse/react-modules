@@ -1,23 +1,20 @@
+// ModalLayout.tsx
 import ModalBox from "./ModalBox";
 import {
   ModalContainer,
   ModalBackdrop,
   Container,
   Wrapper,
-} from "../styles/ModalStyle";
-import { ConfirmModalProps } from "../types/modalTypes";
-import Button from "./common/Button";
-import styled from "@emotion/styled";
-import { useEscapeKeyClose } from "../hook/useEscapeKeyClose";
+} from "./ModalStyle";
+import { ConfirmModalProps } from "../../../types/modalTypes";
+import { useEscapeKeyClose } from "../../../hook/useEscapeKeyClose";
 
-const ButtonContainer = styled.div`
-  width: 100%;
-  height: 36px;
-  display: flex;
-  justify-content: flex-end;
-`;
+interface ModalLayoutProps extends ConfirmModalProps {
+  children?: React.ReactNode;
+  footer?: React.ReactNode;
+}
 
-const AlertModal = ({
+const ModalLayout = ({
   modalPosition = "center",
   modalSize = "medium",
   titleText = "",
@@ -25,8 +22,8 @@ const AlertModal = ({
   children,
   closeType,
   onClose,
-  onConfirm = onClose,
-}: ConfirmModalProps) => {
+  footer,
+}: ModalLayoutProps) => {
   useEscapeKeyClose(onClose);
 
   return (
@@ -42,11 +39,7 @@ const AlertModal = ({
           >
             {descriptionText && <p>{descriptionText}</p>}
             {children}
-            <ButtonContainer>
-              <Button widthSize="80px" onClick={onConfirm} variant="primary">
-                확인
-              </Button>
-            </ButtonContainer>
+            {footer}
           </ModalBox>
         </Wrapper>
       </Container>
@@ -54,4 +47,4 @@ const AlertModal = ({
   );
 };
 
-export default AlertModal;
+export default ModalLayout;

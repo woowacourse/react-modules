@@ -1,6 +1,6 @@
 import ModalHeader from "./ModalHeader";
-import { ModalBoxContainer, ModalBottomCloseBtn } from "../styles/ModalStyle";
-import { ModalProps } from "../types/modalTypes";
+import { ModalBoxContainer, ModalBottomCloseBtn } from "./ModalStyle";
+import { ModalProps } from "../../../types/modalTypes";
 
 const ModalBox = ({
   modalPosition,
