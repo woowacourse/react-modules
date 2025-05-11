@@ -1,0 +1,46 @@
+.center {
+  justify-content: center;
+  align-items: center;
+}
+
+.bottom {
+  justify-content: center;
+  align-items: end;
+}
+
+.smModal {
+  width: 320px;
+}
+
+.mdModal {
+  width: 480px;
+}
+
+.lgModal {
+  width: 600px;
+}
+
+.modal {
+  width: 320px;
+}
+
+.modalBackground {
+  position: fixed;
+  display: flex;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: #00000059;
+}
+
+.modalContents {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 24px 32px;
+  box-sizing: border-box;
+  background: white;
+  color: black;
+  border-radius: 8px;
+}

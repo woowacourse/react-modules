@@ -1,4 +1,4 @@
-import { ERROR_MESSAGE, EXPIRY_DATE_LENGTH } from "../constants";
+import { ERROR_MESSAGE, EXPIRY_DATE_LENGTH } from "../../constants";
 
 import validateExpiryDateNumber from "./validateExpiryDateNumber";
 

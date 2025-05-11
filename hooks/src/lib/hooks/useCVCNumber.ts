@@ -1,5 +1,5 @@
 import { Dispatch, useState } from "react";
-import validateCVCNumber from "../util/validateCVCNumber";
+import validateCVCNumber from "../util/validateCVCNumber/validateCVCNumber";
 
 interface useCVCNumberReturn {
   CVCNumber: string;

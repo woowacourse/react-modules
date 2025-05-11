@@ -1,5 +1,5 @@
-import { EXPIRY_DATE_LENGTH, ERROR_MESSAGE } from "../constants";
-import { isNumeric } from "./index";
+import { EXPIRY_DATE_LENGTH, ERROR_MESSAGE } from "../../constants";
+import { isNumeric } from "../index";
 
 function getExpiryDateGroupError(expiryDate: string, index: string) {
   if (!isNumeric(expiryDate)) return ERROR_MESSAGE.NOT_NUMERIC;
