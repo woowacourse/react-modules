@@ -21,7 +21,7 @@ type ConfirmModalProps = {
   onRightButtonClick: () => void;
 };
 
-const ConfirmModal = ({
+export const ConfirmModal = ({
   isOpen,
   autoCloseOnESC,
   position,
@@ -57,5 +57,3 @@ const ConfirmModal = ({
     </Modal>
   );
 };
-
-export default ConfirmModal;

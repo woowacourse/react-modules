@@ -23,7 +23,7 @@ type PromptModalProps = {
   placeholder?: string;
 };
 
-const PropmptModal = ({
+export const PropmptModal = ({
   isOpen,
   autoCloseOnESC,
   position,
@@ -61,5 +61,3 @@ const PropmptModal = ({
     </Modal>
   );
 };
-
-export default PropmptModal;

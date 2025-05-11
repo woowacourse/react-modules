@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import PropmptModal from "../Modal/variants/PromptModal/PromptModal";
+import { PropmptModal } from "../Modal/variants/PromptModal/PromptModal";
 
 const meta: Meta<typeof PropmptModal> = {
   title: "Components/PropmptModal",

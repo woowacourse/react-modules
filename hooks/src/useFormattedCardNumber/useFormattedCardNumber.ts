@@ -10,7 +10,7 @@ type CardNumbers = {
   FOURTH: string;
 };
 
-export function useFormattedCardNumbers(
+export default function useFormattedCardNumbers(
   cardNumbers: CardNumbers,
   userCardNetworkFormatter?: TypeOfCardNetworkPatterns
 ) {

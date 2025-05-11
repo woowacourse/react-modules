@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import AlertModal from "../Modal/variants/AlertModal/AlertModal";
+import { AlertModal } from "../Modal/variants/AlertModal/AlertModal";
 
 const meta: Meta<typeof AlertModal> = {
   title: "Components/AlertModal",

@@ -19,7 +19,7 @@ type AlertModalProps = {
   onClose: () => void;
 };
 
-const AlertModal = ({
+export const AlertModal = ({
   isOpen,
   autoCloseOnESC,
   position,
@@ -62,5 +62,3 @@ const AlertModal = ({
     </Modal>
   );
 };
-
-export default AlertModal;

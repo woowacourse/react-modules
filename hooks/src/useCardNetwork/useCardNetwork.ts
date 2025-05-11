@@ -10,7 +10,7 @@ type CardNumbers = {
   FOURTH: string;
 };
 
-export function useCardNetwork(
+export default function useCardNetwork(
   cardNumbers: CardNumbers,
   userCardNetworkPatterns?: TypeOfCardNetworkPatterns
 ) {

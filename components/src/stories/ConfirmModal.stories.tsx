@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import ConfirmModal from "../Modal/variants/ConfirmModal/ConfirmModal";
+import { ConfirmModal } from "../Modal/variants/ConfirmModal/ConfirmModal";
 
 const meta: Meta<typeof ConfirmModal> = {
   title: "Components/ConfirmModal",
