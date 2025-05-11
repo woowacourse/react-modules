@@ -1,9 +1,9 @@
 import {useState} from 'react';
-import {ValidationType} from '../../types/validation';
 import {ERROR_MESSAGE, defaultValidationValue} from '../constants/validation';
 import {isEmpty, isLengthBetween, isPositiveInteger} from '../utils/validation';
 import {getCardBrand} from '../feature/getCardBrand';
 import {formatCardNumberBlocks} from '../feature/formatCardNumberBlocks';
+import {ValidationType} from '../types/validation';
 
 const MIN_LENGTH = 14;
 const MAX_LENGTH = 16;
