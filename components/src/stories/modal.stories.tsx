@@ -63,16 +63,16 @@ export const PrimaryButtonModal: Story = {
           <Modal.Title title="Primary 버튼 모달" />
           <Modal.Body>
             <p>Primary 버튼 모달의 내용입니다.</p>
+            <Modal.Button
+              variant="primary"
+              title="확인"
+              size="large"
+              onClick={() => {
+                console.log("확인 버튼 클릭!");
+                args.onClose();
+              }}
+            />
           </Modal.Body>
-          <Modal.Button
-            variant="primary"
-            title="확인"
-            size="large"
-            onClick={() => {
-              console.log("확인 버튼 클릭!");
-              args.onClose();
-            }}
-          />
         </Modal.Frame>
       </Modal.Backdrop>
     </Modal>
@@ -92,16 +92,16 @@ export const SecondaryButtonModal: Story = {
           <Modal.Title title="Secondary 버튼 모달" />
           <Modal.Body>
             <p>Secondary 버튼 모달의 내용입니다.</p>
+            <Modal.Button
+              variant="secondary"
+              title="확인"
+              size="large"
+              onClick={() => {
+                console.log("확인 버튼 클릭!");
+                args.onClose();
+              }}
+            />
           </Modal.Body>
-          <Modal.Button
-            variant="secondary"
-            title="확인"
-            size="large"
-            onClick={() => {
-              console.log("확인 버튼 클릭!");
-              args.onClose();
-            }}
-          />
         </Modal.Frame>
       </Modal.Backdrop>
     </Modal>
@@ -121,16 +121,24 @@ export const SmallButtonModal: Story = {
           <Modal.Title title="Small 버튼 모달" />
           <Modal.Body>
             <p>Small 버튼 모달의 내용입니다.</p>
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "flex-end",
+                width: "100%",
+              }}
+            >
+              <Modal.Button
+                variant="primary"
+                title="확인"
+                size="small"
+                onClick={() => {
+                  console.log("확인 버튼 클릭!");
+                  args.onClose();
+                }}
+              />
+            </div>
           </Modal.Body>
-          <Modal.Button
-            variant="primary"
-            title="확인"
-            size="small"
-            onClick={() => {
-              console.log("확인 버튼 클릭!");
-              args.onClose();
-            }}
-          />
         </Modal.Frame>
       </Modal.Backdrop>
     </Modal>
@@ -151,15 +159,23 @@ export const MediumButtonModal: Story = {
           <Modal.Body>
             <p>Medium 버튼 모달의 내용입니다.</p>
           </Modal.Body>
-          <Modal.Button
-            variant="primary"
-            title="확인"
-            size="medium"
-            onClick={() => {
-              console.log("확인 버튼 클릭!");
-              args.onClose();
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              width: "100%",
             }}
-          />
+          >
+            <Modal.Button
+              variant="primary"
+              title="확인"
+              size="medium"
+              onClick={() => {
+                console.log("확인 버튼 클릭!");
+                args.onClose();
+              }}
+            />
+          </div>
         </Modal.Frame>
       </Modal.Backdrop>
     </Modal>
@@ -180,15 +196,23 @@ export const LargeButtonModal: Story = {
           <Modal.Body>
             <p>Large 버튼 모달의 내용입니다.</p>
           </Modal.Body>
-          <Modal.Button
-            variant="primary"
-            title="확인"
-            size="large"
-            onClick={() => {
-              console.log("확인 버튼 클릭!");
-              args.onClose();
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              width: "100%",
             }}
-          />
+          >
+            <Modal.Button
+              variant="primary"
+              title="확인"
+              size="large"
+              onClick={() => {
+                console.log("확인 버튼 클릭!");
+                args.onClose();
+              }}
+            />
+          </div>
         </Modal.Frame>
       </Modal.Backdrop>
     </Modal>
@@ -237,7 +261,9 @@ export const Example: Story = {
           <Modal.Body>
             <div>모달 활용 예시입니다.</div>
           </Modal.Body>
-          <div style={{ display: "flex", gap: "10px" }}>
+          <div
+            style={{ display: "flex", justifyContent: "center", gap: "10px" }}
+          >
             <Modal.Button
               variant="secondary"
               title="취소"
