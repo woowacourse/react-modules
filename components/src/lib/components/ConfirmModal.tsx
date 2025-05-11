@@ -12,9 +12,10 @@ const ConfirmModal = ({
   content,
   confirmText = '확인',
   cancelText = '취소',
+  size,
 }: ConfirmModalProps) => {
   return (
-    <Modal isOpen={isOpen} onAfterOpen={onAfterOpen} onClose={onClose} position={position}>
+    <Modal isOpen={isOpen} onAfterOpen={onAfterOpen} onClose={onClose} position={position} size={size}>
       <Modal.Header title={title} showCloseButton={false} />
       <Modal.Content>{content}</Modal.Content>
       <Modal.Footer>

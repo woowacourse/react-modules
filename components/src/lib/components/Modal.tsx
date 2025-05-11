@@ -11,7 +11,7 @@ import useModalEvents from '../hooks/useModalEvent';
 
 const ModalContext = createContext<ModalContextType | undefined>(undefined);
 
-const Modal = ({ children, isOpen, onAfterOpen, onClose, position = 'center' }: ModalProps) => {
+const Modal = ({ children, isOpen, onAfterOpen, onClose, position = 'center', size }: ModalProps) => {
   if (!isOpen) return null;
 
   const { handleCloseByBackdrop } = useModalEvents(isOpen, onClose, onAfterOpen);
@@ -19,7 +19,7 @@ const Modal = ({ children, isOpen, onAfterOpen, onClose, position = 'center' }: 
   return (
     <ModalContext.Provider value={{ onClose, position }}>
       <div className={ModalBackdrop} onClick={handleCloseByBackdrop} aria-label="modal-backdrop">
-        <div className={ModalFrame(position)} role="dialog" aria-modal="true" aria-labelledby="modal-title">
+        <div className={ModalFrame(position, size)} role="dialog" aria-modal="true" aria-labelledby="modal-title">
           {children}
         </div>
       </div>

@@ -16,6 +16,7 @@ const PromptModal = ({
   confirmText = '확인',
   cancelText = '취소',
   placeholder,
+  size,
 }: PromptModalProps) => {
   const [inputValue, setInputValue] = useState('');
 
@@ -36,7 +37,7 @@ const PromptModal = ({
   }, [isOpen]);
 
   return (
-    <Modal isOpen={isOpen} onAfterOpen={onAfterOpen} onClose={onClose} position={position}>
+    <Modal isOpen={isOpen} onAfterOpen={onAfterOpen} onClose={onClose} position={position} size={size}>
       <Modal.Header title={title} showCloseButton={false} />
       <form className={FormStyle} onSubmit={handleConfirm}>
         <Modal.Content>

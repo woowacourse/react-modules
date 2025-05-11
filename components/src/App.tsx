@@ -1,6 +1,7 @@
 import './App.css';
 import { css } from '@emotion/css';
-import { Modal, useModal } from '@sanghee01/modal';
+import Modal from './lib/components/Modal';
+import useModal from './lib/hooks/useModal';
 import AlertModal from './lib/components/AlertModal';
 import ConfirmModal from './lib/components/ConfirmModal';
 import PromptModal from './lib/components/PromptModal';
@@ -67,6 +68,7 @@ function App() {
         onClose={handleCloseDefaultModal}
         onAfterOpen={handleAfterOpenModal}
         position="center"
+        size="medium"
       >
         <Modal.Header title="기본 모달" />
         <Modal.Content>
@@ -94,6 +96,7 @@ function App() {
           </>
         }
         position="center"
+        size="medium"
       />
       <ConfirmModal
         isOpen={isOpenConfirmModal}
@@ -104,6 +107,7 @@ function App() {
         title="Confirm 모달 제목"
         content={<div>Confirm 모달 내용입니다.</div>}
         position="center"
+        size="small"
       />
       <PromptModal
         isOpen={isOpenPromptModal}
@@ -115,6 +119,7 @@ function App() {
         content={<div>Prompt 모달 내용입니다.</div>}
         position="center"
         placeholder="내용을 입력하세요."
+        size="large"
       />
     </>
   );

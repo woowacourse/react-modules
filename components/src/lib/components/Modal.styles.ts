@@ -1,5 +1,5 @@
 import { css } from '@emotion/css';
-import { Position } from '../types/Modal.type';
+import { Position, Size } from '../types/Modal.type';
 
 export const ModalBackdrop = css`
   width: 100dvw;
@@ -14,10 +14,25 @@ export const ModalBackdrop = css`
   top: 0;
 `;
 
-export const ModalFrame = (position: Position) => css`
+const ModalFrameWidth = (size: Size) => {
+  if (!size) {
+    return '100%';
+  }
+  if (size === 'small') {
+    return '320px';
+  }
+  if (size === 'medium') {
+    return '480px';
+  }
+  if (size === 'large') {
+    return '600px';
+  }
+};
+
+export const ModalFrame = (position: Position, size: Size) => css`
   background-color: white;
   padding: 30px;
-  width: ${position === 'center' ? '100%' : '100dvw'};
+  width: ${position === 'center' ? ModalFrameWidth(size) : '100dvw'};
   min-width: ${position === 'center' && '300px'};
   max-width: ${position === 'center' && '80dvw'};
   border-radius: ${position === 'center' ? '8px' : '8px 8px 0 0'};

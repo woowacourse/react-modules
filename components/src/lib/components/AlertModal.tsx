@@ -11,9 +11,10 @@ const AlertModal = ({
   title,
   content,
   confirmText = '확인',
+  size,
 }: AlertModalProps) => {
   return (
-    <Modal isOpen={isOpen} onAfterOpen={onAfterOpen} onClose={onClose} position={position}>
+    <Modal isOpen={isOpen} onAfterOpen={onAfterOpen} onClose={onClose} position={position} size={size}>
       <Modal.Header title={title} showCloseButton={false} />
       <Modal.Content>{content}</Modal.Content>
       <Modal.Footer>
