@@ -8,6 +8,8 @@ import { CloseButton } from "./CloseButton/CloseButton";
 import { Body } from "./Body/Body";
 import ConfirmButton from "./Button/variants/ConfirmButton";
 import { Input } from "./Input/Input";
+import { useKeyPress } from "./hooks/useKeyPress";
+import useFocus from "./hooks/useModalFocus";
 
 type ModalProps = {
   /** 모달 열림/닫힘 상태 */
@@ -48,19 +50,7 @@ const Modal = ({
     size,
   };
 
-  useEffect(() => {
-    const handleKeyDown = (event: KeyboardEvent) => {
-      if (autoCloseOnESC && event.key === "Escape") {
-        onClose();
-      }
-    };
-
-    window.addEventListener("keydown", handleKeyDown);
-
-    return () => {
-      window.removeEventListener("keydown", handleKeyDown);
-    };
-  }, [isOpen, onClose]);
+  useKeyPress("Escape", onClose, autoCloseOnESC);
 
   return (
     <>

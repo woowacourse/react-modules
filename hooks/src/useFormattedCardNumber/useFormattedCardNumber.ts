@@ -1,4 +1,3 @@
-import { error } from "console";
 import {
   CARD_NETWORK_PATTERNS,
   TypeOfCardNetworkPatterns,
