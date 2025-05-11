@@ -89,7 +89,7 @@ function useExpiryDate() {
 
   const handleExpiryDateChange = (
     event: ChangeEvent<HTMLInputElement>,
-    restrictChange: boolean = true
+    preventInvalidTypo: boolean = true
   ) => {
     const { name, value } = event.target;
     const { isValid, errorType } = validateExpiryDate(
@@ -97,11 +97,11 @@ function useExpiryDate() {
       value
     );
 
-    if (restrictChange && errorType) {
+    if (preventInvalidTypo && errorType) {
       return;
     }
 
-    if (!restrictChange) {
+    if (!preventInvalidTypo) {
       setValidationResults((prev) => ({
         ...prev,
         [name]: {

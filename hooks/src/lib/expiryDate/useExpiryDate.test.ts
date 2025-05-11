@@ -25,7 +25,7 @@ interface RenderHookCurrent {
   ) => ValidateExpiryDateResult;
   handleExpiryDateChange: (
     event: ChangeEvent<HTMLInputElement>,
-    restrictChange?: boolean
+    preventInvalidTypo?: boolean
   ) => void;
 }
 

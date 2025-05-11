@@ -36,16 +36,16 @@ function useCVC() {
 
   const handleCVCChange = (
     event: ChangeEvent<HTMLInputElement>,
-    restrictChange: boolean = true
+    preventInvalidTypo: boolean = true
   ) => {
     const { value } = event.target;
     const { isValid, errorType } = validateCVC(value);
 
-    if (restrictChange && errorType) {
+    if (preventInvalidTypo && errorType) {
       return;
     }
 
-    if (!restrictChange) {
+    if (!preventInvalidTypo) {
       setValidationResult({
         isValid,
         errorMessage: errorType ? ERROR_MESSAGE[errorType] : '',

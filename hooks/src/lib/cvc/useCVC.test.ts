@@ -14,7 +14,7 @@ interface RenderHookCurrent {
   validateCVC: (value: string) => ValidateCVCResult;
   handleCVCChange: (
     event: ChangeEvent<HTMLInputElement>,
-    restrictChange?: boolean
+    preventInvalidTypo?: boolean
   ) => void;
 }
 

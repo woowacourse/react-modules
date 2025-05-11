@@ -21,7 +21,7 @@ interface RenderHookCurrent {
   validateCardNumbersBlur: (value: string) => ValidateCardNumbersResult;
   handleCardNumbersChange: (
     event: ChangeEvent<HTMLInputElement>,
-    restrictChange?: boolean
+    preventInvalidTypo?: boolean
   ) => void;
   handleCardNumbersBlur: (event: FocusEvent<HTMLInputElement>) => void;
   network: string;

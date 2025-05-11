@@ -68,17 +68,17 @@ function useCardNumbers() {
 
   const handleCardNumbersChange = (
     event: ChangeEvent<HTMLInputElement>,
-    restrictChange: boolean = true
+    preventInvalidTypo: boolean = true
   ) => {
     const { value } = event.target;
     const newNumbers = removeFormat(value);
 
     const { isValid, errorType } = validateCardNumbersChange(newNumbers);
-    if (restrictChange && errorType) {
+    if (preventInvalidTypo && errorType) {
       return;
     }
 
-    if (!restrictChange) {
+    if (!preventInvalidTypo) {
       setValidationResults({
         isValid,
         errorMessage: errorType ? ERROR_MESSAGE[errorType] : '',
