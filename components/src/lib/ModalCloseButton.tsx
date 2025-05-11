@@ -1,10 +1,9 @@
 import styled from 'styled-components';
+import { useModalContext } from './ModalContext';
 
-interface ModalCloseButtonProps {
-  onClose: () => void;
-}
+function ModalCloseButton() {
+  const { onClose } = useModalContext();
 
-function ModalCloseButton({ onClose }: ModalCloseButtonProps) {
   return (
     <StyledCloseButton onClick={onClose} className="close-button">
       <span>X</span>
