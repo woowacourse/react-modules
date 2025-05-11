@@ -27,6 +27,4 @@ export interface ModalProps {
   onConfirm?: (value?: string) => void;
 }
 
-declare const Modal: React.FC<ModalProps>;
-
-export default Modal;
+export declare const Modal: React.FC<ModalProps>;
