@@ -39,7 +39,7 @@ export const formatNumbersByNetwork = (
   const format = network ? NETWORK_FORMAT[network] : DEFAULT_FORMAT;
   const numbersArray = cardNumbers.split('');
 
-  return format
+  const formattedNumbers = format
     .reduce<string[]>((result, number) => {
       if (numbersArray.length !== 0) {
         return [...result, numbersArray.splice(0, number).join('')];
@@ -48,6 +48,8 @@ export const formatNumbersByNetwork = (
       return result;
     }, [])
     .join(FORMAT_SEPARATOR);
+
+  return formattedNumbers + numbersArray.join('');
 };
 
 export const removeFormat = (formattedNumbers: string) => {
