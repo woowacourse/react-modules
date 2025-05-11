@@ -135,7 +135,7 @@ function App({
     },
     {
       isRequired: false,
-      text: "개인정보 수집 및 이용 동의",
+      text: "마케팅 정보 수신 동의",
       details: "",
     },
   ];
