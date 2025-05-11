@@ -2,7 +2,7 @@ import validation from '../validation';
 import { CardNumberStateKey, CardNumberStateType } from './useCardNumber';
 
 const validateCardNumber = (cardNumber: CardNumberStateType) => {
-  const errorState = {
+  const errorState: Record<CardNumberStateKey, boolean> = {
     first: false,
     second: false,
     third: false,

@@ -2,7 +2,7 @@ import validation from '../validation';
 import { ExpirationStateKey, ExpirationStateType } from './useExpiration';
 
 const validateExpiration = (expiration: ExpirationStateType) => {
-  const errorState = {
+  const errorState: Record<ExpirationStateKey, boolean> = {
     year: false,
     month: false
   };
