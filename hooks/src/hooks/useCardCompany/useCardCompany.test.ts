@@ -18,6 +18,22 @@ const cardTypeCases: Array<[string, string]> = [
   ["0000000000000000", "default"],
 ];
 
+const formatCases: Array<[string, string]> = [
+  ["4000000000000000", "4000 0000 0000 0000"],
+  ["5100000000000000", "5100 0000 0000 0000"],
+  ["36111111111111", "3611 111111 1111"],
+  ["341111111111111", "3411 111111 11111"],
+  ["6221261111111111", "6221 2611 1111 1111"],
+];
+
+const invalidLengthCases: Array<[string, number]> = [
+  ["400000000000000", 3],
+  ["510000000000000", 3],
+  ["36111111111", 2],
+  ["341", 0],
+  ["622126111111111", 3],
+];
+
 describe("useCardNumbers 훅", () => {
   test("초기 상태에는 빈 숫자 4개, 에러 없음", () => {
     const { result } = renderHook(() => useCardNumbers());
@@ -60,6 +76,28 @@ describe("카드 타입 감지", () => {
       const { result } = renderHook(() => useCardNumbers());
       act(() => result.current.handleCardNumberChange(input));
       expect(result.current.cardType).toBe(expectedType);
+    }
+  );
+});
+
+describe("formatted", () => {
+  test.each(formatCases)('%s → "%s" 형태로 포맷팅', (input, expected) => {
+    const { result } = renderHook(() => useCardNumbers());
+    act(() => result.current.handleCardNumberChange(input));
+    expect(result.current.formatted).toBe(expected);
+  });
+});
+
+describe("잘못된 길이 입력 시 에러 처리", () => {
+  test.each(invalidLengthCases)(
+    "%s 입력 → error[%d]에 INVALID_LENGTH_ERROR",
+    (input, segmentIndex) => {
+      const { result } = renderHook(() => useCardNumbers());
+      act(() => result.current.handleCardNumberChange(input));
+      expect(result.current.error[segmentIndex]).toEqual({
+        isValid: true,
+        errorMessage: "카드 번호는 4자리로 입력해 주세요.",
+      });
     }
   );
 });
