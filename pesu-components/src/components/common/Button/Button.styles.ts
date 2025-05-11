@@ -1,12 +1,7 @@
 import styled from '@emotion/styled';
+import { ButtonProps } from './Button';
 
-interface ButtonProps {
-  isFixed?: boolean;
-  variant?: 'outline' | 'primary';
-  isExpanded?: boolean;
-}
-
-export const Button = styled.button<ButtonProps>`
+export const Button = styled.button<Pick<ButtonProps, 'isFixed' | 'variant' | 'isExpanded'>>`
   width: ${(props) => (props.isExpanded ? '100%' : '100px')};
   height: 42px;
   background-color: ${(props) => (props.variant === 'outline' ? 'transparent' : '#000')};
