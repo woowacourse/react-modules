@@ -22,7 +22,7 @@ export function useCardExpDateInput() {
     const nextExpDate = { ...cardExpDate, [name]: value };
     setCardExpDate(nextExpDate);
 
-    const monthErrorResult = validateExpirationDateMonth(nextExpDate.month, nextExpDate.year);
+    const monthErrorResult = validateExpirationDateMonth(nextExpDate.month);
     const yearErrorResult = validateExpirationDateYear(nextExpDate.month, nextExpDate.year);
 
     const monthErrorMessage = getFirstErrorMessage(monthErrorResult, 'MONTH');
