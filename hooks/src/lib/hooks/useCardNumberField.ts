@@ -1,40 +1,26 @@
 import { useMemo, useState } from 'react';
-import { CardNumber } from '../types/card';
 import { validateNumberError } from '../utils/cardInputValidations';
+import { determineCardBrand } from '../utils/determineCardBrand';
+import { validateCardBrandLength } from '../utils/cardBrandValidations';
 
 export function useCardNumberField() {
-  const [cardNumbers, setCardNumbers] = useState<CardNumber>({ first: '', second: '', third: '', fourth: '' });
+  const [cardNumbers, setCardNumbers] = useState('');
+
+  const cardBrand = determineCardBrand(cardNumbers);
 
   const cardNumberErrors = useMemo(() => {
-    const errors = {
-      first: '',
-      second: '',
-      third: '',
-      fourth: '',
-    };
+    const numError = validateNumberError(cardNumbers);
+    if (numError) return numError;
 
-    for (const key of ['first', 'second', 'third', 'fourth'] as const) {
-      const value = cardNumbers[key];
+    const cardBrandLengthError = validateCardBrandLength(cardBrand, cardNumbers);
+    if (cardBrandLengthError) return cardBrandLengthError;
 
-      if (value === '') continue;
-
-      const numError = validateNumberError(value);
-      if (numError) {
-        errors[key] = numError;
-        continue;
-      }
-
-      if (value.length !== 4) {
-        errors[key] = '4자리 숫자를 입력해주세요.';
-      }
-    }
-
-    return errors;
+    return '';
   }, [cardNumbers]);
 
-  const handleCardNumberChange = (key: keyof CardNumber, value: string) => {
-    setCardNumbers((prev) => ({ ...prev, [key]: value }));
+  const handleCardNumberChange = (value: string) => {
+    setCardNumbers(value);
   };
 
-  return { cardNumbers, handleCardNumberChange, cardNumberErrors };
+  return { cardNumbers, cardBrand, handleCardNumberChange, cardNumberErrors };
 }
