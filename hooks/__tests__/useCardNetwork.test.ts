@@ -236,7 +236,7 @@ describe("useCardNumbers hook 테스트", () => {
     });
   });
 
-  describe("AMEX 네트워크 테스트", () => {
+  describe("MasterCard 네트워크 테스트", () => {
     it.each([
       {
         cardNumbers: {
@@ -286,11 +286,87 @@ describe("useCardNumbers hook 테스트", () => {
         startWith: "55",
       },
     ])(
-      "AMEX 카드 네트워크는 15자리 숫자가 아니면 에러를 반환한다.",
+      "MasterCard 카드 네트워크는 15자리 숫자가 아니면 에러를 반환한다.",
       ({ cardNumbers, startWtih }) => {
         const { result } = renderHook(() => useCardNetwork(cardNumbers));
 
         expect(result.current.cardNetwork).toBe("MASTER_CARD");
+        expect(result.current.error).toBe(true);
+      }
+    );
+  });
+
+  describe("사용자 커스텀 네트워크 테스트", () => {
+    it.each([
+      {
+        cardNumbers: {
+          FIRST: "3528",
+          SECOND: "3456",
+          THIRD: "7890",
+          FOURTH: "1234",
+        },
+        startWith: "3528",
+      },
+      {
+        cardNumbers: {
+          FIRST: "3589",
+          SECOND: "3456",
+          THIRD: "7890",
+          FOURTH: "1234",
+        },
+        startWith: "3589",
+      },
+    ])(
+      "$startWith로 시작하는 16자리 숫자이면 cardNetwork는 JSB이다.",
+      ({ cardNumbers, startWtih }) => {
+        const userCardNetworkPatterns = {
+          JSB: {
+            PATTERN: /^(3528|3589)/,
+            LENGTH: 16,
+          },
+        };
+        const { result } = renderHook(() =>
+          useCardNetwork(cardNumbers, userCardNetworkPatterns)
+        );
+
+        expect(result.current.cardNetwork).toBe("JSB");
+        expect(result.current.error).toBe(false);
+      }
+    );
+
+    it.each([
+      {
+        cardNumbers: {
+          FIRST: "3528",
+          SECOND: "3456",
+          THIRD: "7890",
+          FOURTH: "123",
+        },
+        startWith: "3528",
+      },
+      {
+        cardNumbers: {
+          FIRST: "3589",
+          SECOND: "3456",
+          THIRD: "7890",
+          FOURTH: "123",
+        },
+        startWith: "3589",
+      },
+    ])(
+      "$startWith로 시작하는 16자리 숫자이면 cardNetwork는 JSB이다.",
+      ({ cardNumbers, startWtih }) => {
+        const userCardNetworkPatterns = {
+          JSB: {
+            PATTERN: /^(3528|3589)/,
+            LENGTH: 16,
+          },
+        };
+        const { result } = renderHook(() =>
+          useCardNetwork(cardNumbers, userCardNetworkPatterns)
+        );
+
+        expect(result.current.cardNetwork).toBe("JSB");
         expect(result.current.error).toBe(true);
       }
     );
