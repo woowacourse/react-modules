@@ -1,9 +1,12 @@
 import { useEffect, RefObject } from "react";
 
 export function useFocusTrap<T extends HTMLElement>(
-  modalRef: RefObject<T | null>
+  modalRef: RefObject<T | null>,
+  isOpen: boolean
 ) {
   useEffect(() => {
+    if (!isOpen) return;
+
     const modalEl = modalRef.current;
     if (!modalEl) return;
 
@@ -36,5 +39,5 @@ export function useFocusTrap<T extends HTMLElement>(
       modalEl.removeEventListener("keydown", onKeyDown);
       prevActive?.focus();
     };
-  }, [modalRef]);
+  }, [modalRef, isOpen]);
 }
