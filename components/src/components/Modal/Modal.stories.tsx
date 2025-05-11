@@ -91,15 +91,24 @@ export const WithoutCloseButton = (args: ModalProps) => (
   </Default>
 );
 
+export const ModalInLightMode = (args: ModalProps) => (
+  <Default {...args} title={{ text: "Light Mode" }} theme="light">
+    Light Mode Contents
+  </Default>
+);
+
 export const ModalInDarkMode = (args: ModalProps) => (
   <Default {...args} title={{ text: "Dark Mode" }} theme="dark">
     <div style={{ color: "#fff" }}>Dark Mode Contents</div>
   </Default>
 );
 
-export const ModalInLightMode = (args: ModalProps) => (
-  <Default {...args} title={{ text: "Light Mode" }} theme="light">
-    Light Mode Contents
+export const ModalInDarkModeWithActionButtons = (args: ModalProps) => (
+  <Default {...args} title={{ text: "Dark Mode" }} theme="dark">
+    <p style={{ color: "#fff" }}>Dark Mode Contents</p>
+    <div style={{ display: "flex", width: "100%", gap: "10px" }}>
+      <Modal.ActionButtons />
+    </div>
   </Default>
 );
 
@@ -265,3 +274,104 @@ export const AlertModalWithConfirmButton = (args: ModalProps) => (
     </div>
   </Default>
 );
+
+export const ConfirmModalWithButtonGroup = (args: ModalProps) => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const closeModal = () => {
+    setIsOpen(false);
+    args.onClose?.();
+  };
+
+  const openModal = () => setIsOpen(true);
+
+  const handleSubmit = () => {
+    alert("확인 버튼 클릭");
+    closeModal();
+  };
+
+  return (
+    <>
+      <button type="button" onClick={openModal}>
+        모달 열기
+      </button>
+      <Modal
+        {...args}
+        isOpen={isOpen}
+        onClose={closeModal}
+        title={{ text: "카드를 삭제하시겠습니까?" }}
+      >
+        <p>삭제하면 복구하실 수 없습니다.</p>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "flex-end",
+            width: "100%",
+            gap: "10px",
+          }}
+        >
+          <Modal.ButtonGroup
+            leftProps={{
+              onClick: closeModal,
+              children: "취소",
+              varient: "secondary",
+              style: { width: "90px" },
+            }}
+            rightProps={{
+              onClick: handleSubmit,
+              children: "확인",
+              varient: "primary",
+              style: { width: "90px" },
+            }}
+          />
+        </div>
+      </Modal>
+    </>
+  );
+};
+
+export const ConfirmModalWithActionButtons = (args: ModalProps) => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const closeModal = () => {
+    setIsOpen(false);
+    args.onClose?.();
+  };
+
+  const openModal = () => setIsOpen(true);
+
+  const handleSubmit = () => {
+    alert("확인 버튼 클릭");
+    closeModal();
+  };
+
+  return (
+    <>
+      <button type="button" onClick={openModal}>
+        모달 열기
+      </button>
+      <Modal
+        {...args}
+        isOpen={isOpen}
+        onClose={closeModal}
+        title={{ text: "카드를 삭제하시겠습니까?" }}
+      >
+        <p>삭제하면 복구하실 수 없습니다.</p>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "flex-end",
+            width: "100%",
+            gap: "10px",
+          }}
+        >
+          <Modal.ActionButtons
+            onConfirm={handleSubmit}
+            confirmProps={{ style: { width: "90px" } }}
+            cancelProps={{ style: { width: "90px" } }}
+          />
+        </div>
+      </Modal>
+    </>
+  );
+};
