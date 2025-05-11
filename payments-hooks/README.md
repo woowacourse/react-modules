@@ -15,7 +15,7 @@ npm install @dev-dino22/payments-hooks
 
 ## ✨ 제공 훅 목록
 
-- `useCardNumbersInput` – 카드 번호 입력 관리
+- `useCardNumbersInput` – 카드 번호 입력 관리 및 브랜드/유효성 체크
 - `useCardExpDateInput` – 유효 기간 (월/년) 입력 관리
 - `useCardCompanyInput` – 카드사 선택값 관리
 - `useCardCVCInput` – CVC 입력 관리
@@ -35,9 +35,71 @@ npm install @dev-dino22/payments-hooks
 
 ---
 
-## 🧪 사용 예시
+## (New!) useCardNumbersInput
+
+- 브랜드 체크 기능이 추가되었습니다.
+- 브랜드 별로 cardNumbersInfo의 배열 길이가 달라져, 사용자의 입력에 따라 input 개수를 실시간으로 조절할 수 있습니다.
+
+### 🔧 **Return 값**
+
+| Return Value      | Type                                                                | Description                              |
+| ----------------- | ------------------------------------------------------------------- | ---------------------------------------- |
+| `cardNumbersInfo` | `{ value: string, errorMessage: string }[]`                         | 각 인풋 필드의 값과 에러 메시지 정보     |
+| `onChangeHandler` | `(index: number) => (event: ChangeEvent<HTMLInputElement>) => void` | 카드 번호가 입력될 때 호출되는 핸들러    |
+| `cardBrand`       | `string`                                                            | 감지된 카드 브랜드 (Visa, MasterCard 등) |
+| `cardBlocks`      | `number[]`                                                          | 각 인풋 필드의 최대 글자 수 배열         |
 
 ```tsx
+import { useCardNumbersInput } from "@dev-dino22/modal-components";
+import Input from "./Input";
+
+const CardNumberInput = () => {
+  const { cardNumbersInfo, onChangeHandler, cardBrand, cardBlocks } =
+    useCardNumbersInput();
+
+  return (
+    <div className="card-number-inputs">
+      {cardNumbersInfo.map(({ value }, i) => (
+        <Input
+          key={i}
+          type="text"
+          value={value}
+          onChange={onChangeHandler(i)}
+          maxLength={cardBlocks[i]}
+          inputMode="numeric"
+          autoComplete="cc-number"
+        />
+      ))}
+
+      <p>선택된 카드 브랜드: {cardBrand}</p>
+
+      <p>
+        에러메세지:{" "}
+        {
+          cardNumbersInfo.find(({ errorMessage }) => errorMessage !== "")
+            ?.errorMessage
+        }
+      </p>
+    </div>
+  );
+};
+```
+
+---
+
+## 🧪 훅 전체 사용 예시
+
+```tsx
+import React, { ComponentProps } from "react";
+import "./App.css";
+import {
+  useCardPasswordInput,
+  useCardExpirationDateInput,
+  useCardNumbersInput,
+  useCardCVCInput,
+  useCardCompanyInput,
+} from "./lib";
+
 interface InputProps extends ComponentProps<"input"> {
   isValid?: boolean;
 }
@@ -89,19 +151,31 @@ function InputField({
 }
 
 const CardNumberInput = () => {
-  const { cardNumbers, onChangeHandler, errorMessage } = useCardNumbersInput();
+  const { cardNumbersInfo, onChangeHandler, cardBrand, cardBlocks } =
+    useCardNumbersInput();
+
   return (
-    <InputField
-      title="카드 번호"
-      label="라벨 cardNumbers"
-      feedbackMessage={errorMessage}
-    >
-      <Input type="text" name="0" onChange={onChangeHandler} autoFocus />
-      <Input type="text" name="1" onChange={onChangeHandler} autoFocus />
-      <Input type="text" name="2" onChange={onChangeHandler} autoFocus />
-      <Input type="text" name="3" onChange={onChangeHandler} autoFocus />
-      <p>인풋 실시간 value : {cardNumbers}</p>
-    </InputField>
+    <div className="card-number-inputs">
+      {cardNumbersInfo.map(({ value }, i) => (
+        <Input
+          key={i}
+          type="text"
+          value={value}
+          onChange={onChangeHandler(i)}
+          maxLength={cardBlocks[i]}
+          inputMode="numeric"
+          autoComplete="cc-number"
+        />
+      ))}
+      <p>선택된 카드 브랜드: {cardBrand}</p>
+      <p>
+        에러메세지:
+        {
+          cardNumbersInfo.find(({ errorMessage }) => errorMessage !== "")
+            ?.errorMessage
+        }
+      </p>
+    </div>
   );
 };
 
