@@ -13,6 +13,11 @@ const ModalContainer = styled.div<{
   size: "small" | "medium" | "large";
 }>`
   ${({ size }) => sizeStyles[size]}
+
+  @media (max-width: 768px) {
+    width: 80%;
+  }
+
   height: fit-content;
 
   background-color: white;
@@ -53,6 +58,10 @@ const ModalBottomStyle = styled.div`
   justify-content: flex-end;
   align-itmes: center;
   gap: 10px;
+
+  @media (max-width: 768px) {
+    flex-direction: row;
+  }
 `;
 
 const Title = styled.div`

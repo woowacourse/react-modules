@@ -14,30 +14,50 @@ const meta: Meta<typeof Modal> = {
 export default meta;
 type Story = StoryObj<typeof Modal>;
 
-export const Center: Story = {
+export const Positioin: Story = {
   render: () => {
-    const [isOpen, setIsOpen] = useState(true);
+    const [isCenterOpen, setIsCenterOpen] = useState(false);
+    const [isBottomOpen, setIsBottomOpen] = useState(false);
 
-    const handleModalClose = () => {
-      setIsOpen(false);
+    const handleCenterModalClose = () => {
+      setIsCenterOpen(false);
     };
 
-    const openModal = () => {
-      setIsOpen(true);
+    const openCenterModal = () => {
+      setIsCenterOpen(true);
+    };
+
+    const handleBottomModalClose = () => {
+      setIsBottomOpen(false);
+    };
+
+    const openBottomModal = () => {
+      setIsBottomOpen(true);
     };
 
     return (
       <>
-        <button type="button" onClick={openModal}>
-          열기
+        <button type="button" onClick={openCenterModal}>
+          center
+        </button>
+        <button type="button" onClick={openBottomModal}>
+          bottom
         </button>
         <Modal
-          onClose={handleModalClose}
-          isOpen={isOpen}
+          onClose={handleCenterModalClose}
+          isOpen={isCenterOpen}
           position={"center"}
           size={"large"}
         >
-          content
+          center
+        </Modal>
+        <Modal
+          onClose={handleBottomModalClose}
+          isOpen={isBottomOpen}
+          position={"bottom"}
+          size={"large"}
+        >
+          bottom
         </Modal>
       </>
     );
