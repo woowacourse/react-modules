@@ -1,7 +1,7 @@
 import './App.css';
 import { css } from '@emotion/css';
 import useModal from './lib/hooks/useModal';
-import { PromptModal } from './lib';
+import { PromptModal } from '@eunoia-jaxson/modal';
 
 function App() {
   const { isOpen, handleOpen, handleClose } = useModal();
