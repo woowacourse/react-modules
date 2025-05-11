@@ -75,7 +75,14 @@ const CardNumberInput = () => {
           autoComplete="cc-number"
         />
       ))}
-      <p>Detected brand: {cardBrand}</p>
+      <p>선택된 카드 브랜드: {cardBrand}</p>
+      <p>
+        에러메세지:
+        {
+          cardNumbersInfo.find(({ errorMessage }) => errorMessage !== "")
+            ?.errorMessage
+        }
+      </p>
     </div>
   );
 };
