@@ -29,7 +29,7 @@ function Modal({
   children,
 }: ModalProps) {
   const modalRef = useRef<HTMLDivElement>(null);
-  useFocusTrap(modalRef);
+  useFocusTrap(modalRef, isOpen);
   useEscapeClose(isOpen, onClose);
   if (!isOpen) return null;
 
