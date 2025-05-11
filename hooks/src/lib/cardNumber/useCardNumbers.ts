@@ -112,6 +112,13 @@ function useCardNumbers() {
 
   const network = identifiedNetwork(cardNumbers);
 
+  const cardNumberFormatter = (cardNumbers: string) => {
+    const network =
+      identifyNetworkByList(cardNumbers) ?? identifyNetworkByRange(cardNumbers);
+
+    return formatNumbersByNetwork(cardNumbers, network);
+  };
+
   return {
     cardNumbers,
     validationResults,
@@ -120,7 +127,7 @@ function useCardNumbers() {
     handleCardNumbersChange,
     handleCardNumbersBlur,
     network,
-    formatNumbersByNetwork,
+    cardNumberFormatter,
   };
 }
 
