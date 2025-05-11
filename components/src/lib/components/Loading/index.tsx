@@ -11,7 +11,7 @@ export type LoadingProps = {
   /**
    *
    * @type {string}
-   * @description It can be a string (e.g. 'black') or a number (e.g. 100).  1rem = 16px
+   * @description It can be a string (e.g. 'black')
    * @default 'black'
    */
   color?: string;
