@@ -2,7 +2,7 @@ import { renderHook } from '@testing-library/react';
 import useSingleNumberInput from '../lib/useSingleNumberInput';
 import { act } from 'react';
 
-describe('usePasswordValidation 테스트', () => {
+describe('useSingleNumberInput 훅 테스트', () => {
   const maxLength = 4;
 
   it.each(['-1', '0.5', 'hey'])(
