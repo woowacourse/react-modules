@@ -64,7 +64,7 @@ export const ModalCloseButton = css`
     background-color: rgba(0, 0, 0, 0.1);
   }
   &:focus {
-    outline: none;
+    background-color: rgba(0, 0, 0, 0.1);
   }
 `;
 

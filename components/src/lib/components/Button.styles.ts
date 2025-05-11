@@ -11,6 +11,7 @@ export const ButtonStyle = (type: 'confirm' | 'cancel', width: string) => css`
   cursor: pointer;
 
   &:focus {
+    border: ${type === 'cancel' ? '1px solid #333333' : '1px solid #8b95a1'};
     outline: none;
   }
 

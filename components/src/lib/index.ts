@@ -9,6 +9,7 @@ export { default as Button } from './components/Button';
 export { default as ConfirmModal } from './components/ConfirmModal';
 export { default as Input } from './components/Input';
 export { default as PromptModal } from './components/PromptModal';
+export { default as useModalFocus } from './hooks/useModalFocus';
 export * from './types/Modal.type';
 export * from './types/AlertModal.type';
 export * from './types/Button.type';
