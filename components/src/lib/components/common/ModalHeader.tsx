@@ -37,7 +37,4 @@ const closeButtonStyles = css`
   &:hover {
     background-color: rgba(0, 0, 0, 0.1);
   }
-  &:focus {
-    outline: none;
-  }
 `;

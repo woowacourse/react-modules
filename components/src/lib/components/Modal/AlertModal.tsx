@@ -5,7 +5,7 @@ import ModalHeader from '../common/ModalHeader';
 import useModalKeyboard from '../../hooks/useModalKeyboard';
 import { ModalProvider, useModalContext } from '../../ModalContext';
 import ConfirmButton from '../common/ConfirmButton';
-import { ModalFrame } from '../common/cssStyle';
+import { ButtonBar, ModalFrame } from '../common/cssStyle';
 
 const AlertModal = ({ children, position, isOpen, onClose, onAfterOpen, size }: ModalProps) => {
   if (!isOpen) return null;
@@ -21,7 +21,9 @@ const AlertModal = ({ children, position, isOpen, onClose, onAfterOpen, size }: 
       <ModalBackdrop>
         <div className={ModalFrame(position, size)} data-testid="modal">
           {children}
-          <ConfirmButton />
+          <div className={ButtonBar}>
+            <ConfirmButton />
+          </div>
         </div>
       </ModalBackdrop>
     </ModalProvider>

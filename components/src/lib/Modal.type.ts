@@ -1,7 +1,6 @@
 import { ReactNode } from 'react';
 
 type Position = 'center' | 'bottom';
-type ModalType = 'confirm' | 'alert' | 'prompt';
 type ModalSize = 'small' | 'medium' | 'large';
 interface ModalProps {
   children: ReactNode;
@@ -13,7 +12,6 @@ interface ModalProps {
   showCloseButton?: boolean;
   showDefaultCancelButton?: boolean;
   showDefaultConfirmButton?: boolean;
-  type?: ModalType;
 }
 
 export type { Position, ModalProps, ModalSize };

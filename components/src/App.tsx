@@ -1,7 +1,7 @@
 import './App.css';
 import { css } from '@emotion/css';
-import Modal from './lib/components/Modal/Modal';
 import useModal from './lib/hooks/useModal';
+import { ConfirmModal } from './lib';
 
 function App() {
   const { isOpen, handleOpen, handleClose } = useModal();
@@ -27,20 +27,12 @@ function App() {
       <button className={OpenButton} onClick={handleOpen}>
         열기
       </button>
-      <Modal
-        isOpen={isOpen}
-        position="center"
-        onAfterOpen={handleAfterOpen}
-        onClose={handleClose}
-        size="large"
-        showDefaultCancelButton
-        showDefaultConfirmButton
-      >
-        <Modal.Header title="알림" showCloseButton />
-        <Modal.Body>
+      <ConfirmModal isOpen={isOpen} position="center" onAfterOpen={handleAfterOpen} onClose={handleClose} size="large">
+        <ConfirmModal.Header title="알림" showCloseButton />
+        <ConfirmModal.Body>
           <ModalContent />
-        </Modal.Body>
-      </Modal>
+        </ConfirmModal.Body>
+      </ConfirmModal>
     </>
   );
 }
