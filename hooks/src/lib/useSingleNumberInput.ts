@@ -1,6 +1,5 @@
 import { useState } from 'react';
-import isNumeric from './utils/isNumeric';
-import isNotOverThanMax from './utils/isNotOverThanMax';
+import { isNotOverThanMax, isNumeric } from './utils';
 
 const useSingleNumberInput = (maxLength: number) => {
   const [inputValue, setInputValue] = useState('');
