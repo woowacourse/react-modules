@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { useModalContext } from './ModalContext';
+import useFocus from '../useFocus';
 
 const radius = {
   top: '0px 0px 8px 8px',
@@ -14,10 +15,17 @@ const widthMap = {
 };
 
 function ModalContainer({ children }: { children: React.ReactNode }) {
-  const { position, width } = useModalContext();
+  const { isOpen, position, width, onClose } = useModalContext();
+  const { modalRef } = useFocus(isOpen);
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
+    if (e.key === 'Escape') {
+      onClose();
+    }
+  };
 
   return (
-    <StyledModalContainer position={position} width={width}>
+    <StyledModalContainer ref={modalRef} position={position} width={width} onKeyDown={handleKeyDown} tabIndex={-1}>
       {children}
     </StyledModalContainer>
   );
@@ -35,4 +43,5 @@ const StyledModalContainer = styled.div<StyledModalContainerProps>`
   padding: 24px 32px;
   background: #fff;
   border-radius: ${(props) => radius[props.position]};
+  outline: none; // 포커스 스타일이 겹치지 않도록 제거
 `;
