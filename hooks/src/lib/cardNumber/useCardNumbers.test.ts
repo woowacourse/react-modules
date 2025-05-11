@@ -1,15 +1,14 @@
 import { renderHook, act } from '@testing-library/react';
-import useCardNumbers, {
-  CARD_NUMBERS_LENGTH,
-  DEFAULT_LENGTH,
-} from './useCardNumbers';
+import useCardNumbers from './useCardNumbers';
 import { ChangeEvent, FocusEvent } from 'react';
 import {
   CARD_NUMBER_ERROR_TYPES,
-  NetworkType,
+  CARD_NUMBERS_LENGTH,
+  DEFAULT_LENGTH,
   ValidateCardNumbersResult,
-} from '../constants';
+} from './constants';
 import { ValidationResult } from '../types';
+import { NetworkType } from '../utils/constants';
 
 interface RenderHookResult {
   current: RenderHookCurrent;

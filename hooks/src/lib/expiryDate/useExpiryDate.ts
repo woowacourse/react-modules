@@ -1,7 +1,11 @@
 import { ChangeEvent, useState } from 'react';
-import { EXPIRY_DATE_KEY, ExpiryDateKey } from '../constants';
 import { ValidationResult } from '../types';
-import { ERROR_MESSAGE, EXPIRY_DATE_ERROR_TYPES } from '../constants';
+import {
+  ERROR_MESSAGE,
+  EXPIRY_DATE_ERROR_TYPES,
+  EXPIRY_DATE_KEY,
+  ExpiryDateKey,
+} from './constants';
 
 function useExpiryDate() {
   const [expiryDate, setExpiryDate] = useState<Record<ExpiryDateKey, string>>({
@@ -102,7 +106,7 @@ function useExpiryDate() {
         ...prev,
         [name]: {
           isValid,
-          errorMessage: errorType ? ERROR_MESSAGE.expiryDate[errorType] : '',
+          errorMessage: errorType ? ERROR_MESSAGE[errorType] : '',
         },
       }));
     }
@@ -116,7 +120,7 @@ function useExpiryDate() {
       [name]: {
         isValid: validateDateResult.isValid,
         errorMessage: validateDateResult.errorType
-          ? ERROR_MESSAGE.expiryDate[validateDateResult.errorType]
+          ? ERROR_MESSAGE[validateDateResult.errorType]
           : '',
       },
     }));

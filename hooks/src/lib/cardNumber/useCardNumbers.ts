@@ -1,9 +1,4 @@
 import { ChangeEvent, FocusEvent, useState } from 'react';
-import {
-  CARD_NUMBER_ERROR_TYPES,
-  ERROR_MESSAGE,
-  NetworkType,
-} from '../constants';
 import { ValidationResult } from '../types';
 import {
   formatNumbersByNetwork,
@@ -11,16 +6,13 @@ import {
   identifyNetworkByRange,
   removeFormat,
 } from '../utils/cardNetwork';
-
-export const CARD_NUMBERS_LENGTH: Record<NetworkType, number> = {
-  visa: 16,
-  master: 16,
-  diners: 14,
-  amex: 15,
-  union: 16,
-};
-
-export const DEFAULT_LENGTH = 16;
+import { NetworkType } from '../utils/constants';
+import {
+  CARD_NUMBER_ERROR_TYPES,
+  CARD_NUMBERS_LENGTH,
+  DEFAULT_LENGTH,
+  ERROR_MESSAGE,
+} from './constants';
 
 function useCardNumbers() {
   const [cardNumbers, setCardNumbers] = useState('');
@@ -89,7 +81,7 @@ function useCardNumbers() {
     if (!restrictChange) {
       setValidationResults({
         isValid,
-        errorMessage: errorType ? ERROR_MESSAGE.cardNumber[errorType] : '',
+        errorMessage: errorType ? ERROR_MESSAGE[errorType] : '',
       });
     }
 
@@ -103,7 +95,7 @@ function useCardNumbers() {
     const { isValid, errorType } = validateCardNumbersBlur(newNumbers);
     setValidationResults({
       isValid,
-      errorMessage: errorType ? ERROR_MESSAGE.cardNumber[errorType] : '',
+      errorMessage: errorType ? ERROR_MESSAGE[errorType] : '',
     });
   };
 

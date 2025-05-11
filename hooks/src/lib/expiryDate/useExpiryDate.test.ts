@@ -1,12 +1,12 @@
 import { renderHook, act } from '@testing-library/react';
 import useExpiryDate from './useExpiryDate';
 import { ChangeEvent } from 'react';
+import { ValidationResult } from '../types';
 import {
   EXPIRY_DATE_ERROR_TYPES,
   ExpiryDateKey,
   ValidateExpiryDateResult,
-} from '../constants';
-import { ValidationResult } from '../types';
+} from './constants';
 
 interface RenderHookResult {
   current: RenderHookCurrent;

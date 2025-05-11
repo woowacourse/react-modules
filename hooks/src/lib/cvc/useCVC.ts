@@ -1,6 +1,6 @@
 import { ChangeEvent, useState } from 'react';
 import { ValidationResult } from '../types';
-import { CVC_ERROR_TYPES, ERROR_MESSAGE } from '../constants';
+import { CVC_ERROR_TYPES, ERROR_MESSAGE } from './constants';
 
 function useCVC() {
   const [CVC, setCVC] = useState('');
@@ -48,7 +48,7 @@ function useCVC() {
     if (!restrictChange) {
       setValidationResult({
         isValid,
-        errorMessage: errorType ? ERROR_MESSAGE.cardNumber[errorType] : '',
+        errorMessage: errorType ? ERROR_MESSAGE[errorType] : '',
       });
     }
 
