@@ -1,10 +1,15 @@
 import { css } from '@emotion/css';
 import { useModalContext } from '../../ModalContext';
 
-const ConfirmButton = () => {
+const ConfirmButton = ({ onClick }: { onClick?: () => void }) => {
   const { onClose } = useModalContext();
+  const handleClick = () => {
+    onClick?.();
+    onClose();
+  };
+
   return (
-    <button className={ConfirmButtonStyle} onClick={onClose}>
+    <button className={ConfirmButtonStyle} onClick={handleClick}>
       확인
     </button>
   );

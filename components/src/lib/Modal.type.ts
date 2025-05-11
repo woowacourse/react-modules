@@ -9,6 +9,7 @@ interface ModalProps {
   size: ModalSize;
   onClose: () => void;
   onAfterOpen?: () => void;
+  onConfirm?: () => void;
   showCloseButton?: boolean;
   showDefaultCancelButton?: boolean;
   showDefaultConfirmButton?: boolean;

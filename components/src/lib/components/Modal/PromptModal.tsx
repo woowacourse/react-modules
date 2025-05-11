@@ -9,7 +9,7 @@ import { ButtonBar, ModalFrame } from '../common/cssStyle';
 import CancelButton from '../common/CancelButton';
 import { css } from '@emotion/css';
 
-const PromptModal = ({ children, position, isOpen, onClose, onAfterOpen, size }: ModalProps) => {
+const PromptModal = ({ children, position, isOpen, onClose, onAfterOpen, size, onConfirm }: ModalProps) => {
   if (!isOpen) return null;
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -28,7 +28,7 @@ const PromptModal = ({ children, position, isOpen, onClose, onAfterOpen, size }:
           <input type="text" className={Input} ref={inputRef} />
           <div className={ButtonBar}>
             <CancelButton />
-            <ConfirmButton />
+            <ConfirmButton onClick={onConfirm} />
           </div>
         </div>
       </ModalBackdrop>

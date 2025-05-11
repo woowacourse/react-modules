@@ -8,7 +8,7 @@ import ConfirmButton from '../common/ConfirmButton';
 import { ButtonBar, ModalFrame } from '../common/cssStyle';
 import CancelButton from '../common/CancelButton';
 
-const ConfirmModal = ({ children, position, isOpen, onClose, onAfterOpen, size }: ModalProps) => {
+const ConfirmModal = ({ children, position, isOpen, onClose, onAfterOpen, size, onConfirm }: ModalProps) => {
   if (!isOpen) return null;
 
   useEffect(() => {
@@ -24,7 +24,7 @@ const ConfirmModal = ({ children, position, isOpen, onClose, onAfterOpen, size }
           {children}
           <div className={ButtonBar}>
             <CancelButton />
-            <ConfirmButton />
+            <ConfirmButton onClick={onConfirm} />
           </div>
         </div>
       </ModalBackdrop>
