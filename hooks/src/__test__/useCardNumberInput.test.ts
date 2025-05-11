@@ -30,4 +30,18 @@ describe('useCardNumberInput 훅 테스트', () => {
     expect(result.current.errorInfo.isError).toBe(false);
     expect(result.current.errorInfo.errorText).toBe('');
   });
+
+  it.each([
+    ['4123123412341234', 'Visa'],
+    ['5123123412341234', 'MasterCard'],
+    ['36121234123412', 'Diners'],
+    ['341212341234123', 'AMEX'],
+    ['6222221234567890', '유니온페이'],
+    ['412312341234123', ''],
+  ])('카드 번호(%s)의 브랜드(%s)를 반환한다.', (cardNumberInput, cardBrand) => {
+    const { result } = renderHook(() => useCardNumberInput());
+
+    act(() => result.current.setCardNumberInputValue(cardNumberInput));
+    expect(result.current.cardBrand).toBe(cardBrand);
+  });
 });
