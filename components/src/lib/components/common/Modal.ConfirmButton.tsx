@@ -4,14 +4,16 @@ const ModalConfirmButton = ({
   onClick,
   children,
   $autoFocus = false,
+  type = 'button',
 }: {
-  onClick: () => void;
+  onClick?: () => void;
   children: React.ReactNode;
   $autoFocus?: boolean;
+  type?: 'button' | 'submit' | 'reset';
 }) => {
   return (
     <StyledConfirmButton
-      type="button"
+      type={type}
       onClick={onClick}
       aria-label="confirmButton"
       autoFocus={$autoFocus}

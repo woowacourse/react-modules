@@ -34,7 +34,7 @@ const PromptModal = ({ isOpen, onClose, onConfirm, title }: PromptModalProps) =>
           <StyledInput ref={ref} autoFocus={true} id="prompt-input" />
           <Modal.ButtonWrapper>
             <Modal.CancelButton>취소</Modal.CancelButton>
-            <Modal.ConfirmButton>확인</Modal.ConfirmButton>
+            <Modal.ConfirmButton type="submit">확인</Modal.ConfirmButton>
           </Modal.ButtonWrapper>
         </StyledForm>
       </Modal.Container>
