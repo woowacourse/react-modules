@@ -1,23 +1,21 @@
 import { useState } from "react";
-import { cardStateType, SetValueFn } from "../../types/index";
+import { cardStateType } from "../../types/index";
 import useCheckLengthComplete from "./useCheckLengthComplete";
 
 interface InputValueType<T> {
   initialState: T;
   maxLength: number;
-  keyIndexMap?: string[];
+  splitter?: string;
 }
 
-const useInputValue = <T>(props: InputValueType<T>) => {
-  const { initialState, maxLength, keyIndexMap } = props;
+const useInputValue = <T extends string>(props: InputValueType<T>) => {
+  const { initialState, maxLength, splitter = " " } = props;
   const [state, setState] = useState<T>(initialState);
 
-  const onChange: SetValueFn<T[keyof T] | T> = (value, index) => {
-    if (typeof initialState === "object") {
-      setState((prev) => ({ ...prev, [keyIndexMap![index!]]: value }));
-    } else {
-      setState(value as T);
-    }
+  const onChange = (value: T) => {
+    const regex = new RegExp(splitter, "g");
+    const cleanValue = value.replace(regex, "") as T;
+    setState(cleanValue);
   };
 
   const isLengthComplete = useCheckLengthComplete(state as cardStateType, maxLength);
