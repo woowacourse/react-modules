@@ -2,11 +2,11 @@ import { PropsWithChildren, ReactNode } from "react";
 import * as S from "./Modal.styled";
 import CloseIcon from "@assets/close.svg";
 import useModalCloseEvent from "../../hooks/useModalCloseEvent";
+import useFocusTrap from "@/hooks/useFocusTrap";
 
 export type ModalType = "alert" | "confirm" | "prompt";
 export type ModalSizeType = "small" | "medium" | "large";
 export type ModalPositionType = "bottom" | "center";
-
 export interface ModalProps {
   onClose: () => void;
   modalType?: ModalType;
@@ -55,12 +55,18 @@ function Modal({
 }: PropsWithChildren<ModalProps>) {
   useModalCloseEvent(onClose);
 
+  const focusTapRef = useFocusTrap();
+
   return (
     <S.Backdrop id="backdrop">
       <S.ModalContainer
+        ref={focusTapRef}
         modalType={modalType}
         modalSize={modalSize}
         position={position}
+        role="dialog"
+        aria-modal="true"
+        tabIndex={-1}
       >
         {children}
       </S.ModalContainer>
@@ -78,7 +84,7 @@ Modal.Title = function Title({ children }: TitleProps) {
 
 Modal.CloseButton = function CloseButton({ onClick }: CloseButtonProps) {
   return (
-    <S.CloseButton type="button" onClick={onClick}>
+    <S.CloseButton type="button" onClick={onClick} aria-label="모달 닫기">
       <img src={CloseIcon} alt="닫기 버튼" />
     </S.CloseButton>
   );
@@ -95,7 +101,6 @@ Modal.Input = function Input({ value, onChange, placeholder }: InputProps) {
       value={value}
       onChange={onChange}
       placeholder={placeholder}
-      autoFocus
     />
   );
 };
