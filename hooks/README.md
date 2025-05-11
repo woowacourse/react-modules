@@ -4,26 +4,25 @@
 
 ## 사용 예시
 
-### 카드 번호 4자리 입력 필드 관리 – `useCardNumber`
+### 카드사에 따른 카드번호 입력 필드 관리 – `useCardNumber`
 ```tsx
 import { useCardNumber } from '@sebin0580/payments-hooks';
 
 const CardNumberForm = () => {
-  const { cardNumbers, handleCardNumberChange, errorMessage } = useCardNumber();
+  const { cardNumbers, cardType, isValid, errorMessage, handleCardNumberChange } = useCardNumber();
 
   return (
     <div>
-      {cardNumbers.map((card, index) => (
-        <input
-          key={index}
-          type="text"
-          maxLength={4}
-          value={card}
-          onChange={(e) => handleCardNumberChange(e, index)}
-          placeholder="0000"
-        />
-      ))}
-      {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
+      <input
+        key={index}
+        type="text"
+        maxLength={4}
+        value={cardNumbers}
+        onChange={handleCardNumberChange}
+        placeholder="0000"
+      />
+    <span>{cardType}</span>
+    <span>{errorMessage}</span>
     </div>
   );
 };
@@ -96,4 +95,4 @@ const CardPasswordInput = () => {
 ```
 
 ## 라이센스
-@keemsebin @dlsxjzld
+@keemsebin
