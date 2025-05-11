@@ -93,4 +93,16 @@ describe("useExpirationDate", () => {
     });
     expect(result.current.value).toEqual(displayValue);
   });
+
+  it("원하는 구분자에 맞춰 월과 년도가 구분되어 화면에 표시된다.", () => {
+    const userInput = "1226";
+    const displayValue = "12/26";
+    const splitter = "/";
+    const { result } = renderHook(() => useExpirationDate(splitter));
+
+    act(() => {
+      result.current.onChange(userInput);
+    });
+    expect(result.current.value).toEqual(displayValue);
+  });
 });

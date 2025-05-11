@@ -92,6 +92,18 @@ describe("useCardNumber", () => {
 
     expect(result.current.cardType).toBe(expected);
   });
+
+  it("원하는 구분자에 맞춰 카드번호가 구분되어 화면에 표시된다.", () => {
+    const userInput = "4112123112311231";
+    const displayValue = "4112-1231-1231-1231";
+    const splitter = "-";
+    const { result } = renderHook(() => useCardNumber(splitter));
+
+    act(() => {
+      result.current.onChange(userInput);
+    });
+    expect(result.current.value).toEqual(displayValue);
+  });
 });
 
 describe("현재 입력 값이 자동으로 카드사별 규칙에 맞게 카드 번호를 구분하여 화면에 표시된다.", () => {
