@@ -1,5 +1,4 @@
-// import { useCardNumber, useCvc, useExpiration, usePassword } from '@seo_dev/react-card-hooks';
-import { useCardNumber, useExpiration, useCvc, usePassword } from './lib';
+import { useCvc, useExpiration, usePassword, useCardNumber } from '@seo_dev/react-card-hooks';
 
 function App() {
   const { cardNumber, cardCompany, errorState: cardError, handleCardNumberChange } = useCardNumber();
