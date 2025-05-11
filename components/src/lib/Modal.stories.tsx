@@ -171,8 +171,16 @@ export const Large: Story = {
           gap: '10px',
           marginTop: '20px'
         }}>
-          <Button variant="cancel">취소</Button>
-          <Button variant="confirm">확인</Button>
+          <Button
+            onClick={() => action('onCancel')()}
+            variant="cancel">
+            취소
+          </Button>
+          <Button
+            onClick={() => action('onCancel')()}
+            variant="confirm">
+            확인
+          </Button>
         </div>
       </div>
     ),
