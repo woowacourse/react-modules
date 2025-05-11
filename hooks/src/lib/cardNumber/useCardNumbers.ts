@@ -1,10 +1,17 @@
 import { useCallback, useMemo, useState } from 'react';
 import { CARD_NUMBER_ERROR_TYPES, ERROR_MESSAGE } from '../config';
-import { FieldDefinition } from '../config/fieldType';
 import { ValidationResult } from '../types';
-import { createInitialCardNumbers } from '../utils/createInitialCardNumbers';
 import { createValidationResult } from '../utils/createValidationResult';
 import { checkIsNumber, checkIsValidLength } from '../validators';
+import { createInitialCardNumbers } from '../utils/createInitialCardNumbers';
+import { CardBrand, FieldDefinition } from '../config/fieldType';
+import {
+  isVisa,
+  isMasterCard,
+  isAmex,
+  isDiners,
+  isUnionPay,
+} from './validation';
 
 function useCardNumbers<T extends string>(fields: FieldDefinition<T>[]) {
   const [cardNumbers, setCardNumbers] = useState<Record<T, string>>(() =>
@@ -46,6 +53,18 @@ function useCardNumbers<T extends string>(fields: FieldDefinition<T>[]) {
     [cardNumbers, getCardNumberValidationError]
   );
 
+  const brand: CardBrand = useMemo(() => {
+    const fullNumber = Object.values(cardNumbers).join('');
+
+    if (isVisa(fullNumber)) return 'VISA';
+    if (isMasterCard(fullNumber)) return 'MASTERCARD';
+    if (isAmex(fullNumber)) return 'AMEX';
+    if (isDiners(fullNumber)) return 'DINERS';
+    if (isUnionPay(fullNumber)) return 'UNIONPAY';
+
+    return 'UNKNOWN';
+  }, [cardNumbers]);
+
   const handleCardNumbersChange = useCallback(
     (key: T, value: string, options?: { skipValidation?: boolean }) => {
       const errorType = getCardNumberValidationError(key as T, value);
@@ -64,6 +83,7 @@ function useCardNumbers<T extends string>(fields: FieldDefinition<T>[]) {
   return {
     cardNumbers,
     validationResults,
+    brand,
     getCardNumberValidationError,
     handleCardNumbersChange,
   };
