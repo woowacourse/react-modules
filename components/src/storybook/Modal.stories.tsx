@@ -4,7 +4,7 @@ import { Modal } from '../lib/components/common/Modal';
 import { useModal } from '../lib/hooks/useModal';
 
 const meta = {
-  title: 'Modal',
+  title: 'Modal/Modal',
   component: Modal,
   tags: ['autodocs'],
   parameters: {
@@ -21,14 +21,32 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
+const ModalStory = (args: Story['args']) => {
+  const { isOpen, handleOpenModal, handleCloseModal } = useModal();
+
+  return (
+    <div>
+      <button onClick={handleOpenModal}>기본 모달 버튼</button>
+      <Modal {...args} isOpen={isOpen} onClose={handleCloseModal}>
+        <Modal.Backdrop />
+        <Modal.Container>
+          <Modal.Title title="모달 제목" />
+          <Modal.CloseButton />
+          세라와 로건의 페어 프로그래밍
+        </Modal.Container>
+      </Modal>
+    </div>
+  );
+};
+
 export const Default: Story = {
   args: {
     isOpen: true,
-    position: 'center',
     title: '모달 제목',
-    showCloseButton: true,
     onClose: () => {},
     children: <></>,
+    $zIndex: 1000,
+    closeByEscapeKey: true,
   },
   argTypes: {
     isOpen: {
@@ -39,28 +57,12 @@ export const Default: Story = {
         type: 'text',
       },
     },
-    position: {
-      control: {
-        type: 'select',
-        options: ['center', 'bottom'],
-      },
-    },
-    showCloseButton: {
+    closeByEscapeKey: {
       control: {
         type: 'boolean',
       },
+      description: 'Esc 키로 모달을 닫을지 여부를 설정합니다.',
     },
   },
-  render: (args) => {
-    const { isOpen, handleOpenModal, handleCloseModal } = useModal();
-
-    return (
-      <div>
-        <button onClick={handleOpenModal}>버튼</button>
-        <Modal {...args} isOpen={isOpen} onClose={handleCloseModal}>
-          세라와 로건의 페어 프로그래밍
-        </Modal>
-      </div>
-    );
-  },
+  render: (args) => <ModalStory {...args} />,
 };
