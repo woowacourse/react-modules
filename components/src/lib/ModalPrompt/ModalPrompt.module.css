@@ -6,6 +6,7 @@
   padding: 8px;
   border: 1px solid #000000;
   box-sizing: border-box;
+  background-color: white;
 }
 
 .inputPrompt::placeholder {
