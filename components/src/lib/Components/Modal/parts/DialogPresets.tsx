@@ -179,9 +179,9 @@ export const PromptDialog: FC<PromptDialogProps> = ({
   }, [isOpen, initialValue]);
 
   const handleConfirm = async (e: FormEvent) => {
+    e.preventDefault();
     await onConfirm(value);
     if (closeOnConfirm) {
-      e.preventDefault();
       onClose();
     }
   };
