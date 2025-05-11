@@ -1,11 +1,11 @@
 import { StyledModalOverlay } from "./ModalOverlay.styled";
 
-interface ModalOverlayProps {
-  onClose: () => void;
-}
+import { useModal } from "../ModalRoot";
 
-const ModalOverlay = ({ onClose }: ModalOverlayProps) => {
-  return <StyledModalOverlay onClick={onClose} />;
+const ModalOverlay = () => {
+  const { close } = useModal();
+
+  return <StyledModalOverlay onClick={close} />;
 };
 
 export default ModalOverlay;

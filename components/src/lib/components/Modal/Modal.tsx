@@ -5,13 +5,16 @@ import ModalClose from "../ModalClose";
 import ModalTrigger from "../ModalTrigger";
 import ModalRoot from "../ModalRoot";
 
+import { useModal } from "../ModalRoot";
 
 import { StyledModal } from "./Modal.styled";
 
 import { ModalProps } from "./Modal.types";
 
-const Modal = ({ children, ...props }: ModalProps) => {
-  return <StyledModal {...props}>{children}</StyledModal>;
+const Modal = ({ children }: ModalProps) => {
+  const { isOpen } = useModal();
+
+  return <StyledModal isOpen={isOpen}>{children}</StyledModal>;
 };
 
 Modal.Overlay = ModalOverlay;
