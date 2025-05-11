@@ -102,4 +102,39 @@ describe('useCardNumbers', () => {
       });
     }
   );
+
+  test.each([
+    {
+      network: 'visa',
+      cardNumbers: '4234567890123456',
+      formattedNumbers: '4234-5678-9012-3456',
+    },
+    {
+      network: 'master',
+      cardNumbers: '5134567890123456',
+      formattedNumbers: '5134-5678-9012-3456',
+    },
+    {
+      network: 'diners',
+      cardNumbers: '36123456789012',
+      formattedNumbers: '3612-345678-9012',
+    },
+    {
+      network: 'amex',
+      cardNumbers: '343456789012345',
+      formattedNumbers: '3434-567890-12345',
+    },
+    {
+      network: 'union',
+      cardNumbers: '6244567890123145',
+      formattedNumbers: '6244-5678-9012-3145',
+    },
+  ])(
+    `카드 브랜드가 $network인 입력값이 $cardNumbers일 때, $formattedNumbers로 포맷팅한다.`,
+    ({ cardNumbers, formattedNumbers }) => {
+      expect(result.current.cardNumberFormatter(cardNumbers)).toEqual(
+        formattedNumbers
+      );
+    }
+  );
 });
