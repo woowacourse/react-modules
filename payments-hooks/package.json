@@ -1,6 +1,6 @@
 {
   "name": "@dev-dino22/payments-hooks",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Custom React hooks for credit card input validation and state management.",
   "type": "module",
   "types": "dist/index.d.ts",
