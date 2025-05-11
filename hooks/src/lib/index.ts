@@ -3,4 +3,3 @@ export { default as useExpirationDate } from "./Hooks/useExpirationDate";
 export { default as useCvcNumber } from "./Hooks/useCvcNumber";
 export { default as usePassword } from "./Hooks/usePassword";
 export { default as useInputValue } from "./Hooks/common/useInputValue";
-export { default as useErrors } from "./Hooks/common/useErrors";
