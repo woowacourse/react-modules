@@ -44,4 +44,21 @@ describe('useCardNumberInput 훅 테스트', () => {
     act(() => result.current.setCardNumberInputValue(cardNumberInput));
     expect(result.current.cardBrand).toBe(cardBrand);
   });
+
+  it.each([
+    ['4123123412341234', ['4123', '1234', '1234', '1234']],
+    ['5123123412341234', ['5123', '1234', '1234', '1234']],
+    ['36121234123412', ['3612', '123412', '3412']],
+    ['341212341234123', ['3412', '123412', '34123']],
+    ['6222221234567890', ['6222', '2212', '3456', '7890']],
+    ['412312341234123', ['412312341234123']],
+  ])(
+    '카드 번호(%s)를 보고 포맷팅된 카드 번호를 반환한다.',
+    (cardNumberInput, formattedCardNumber) => {
+      const { result } = renderHook(() => useCardNumberInput());
+
+      act(() => result.current.setCardNumberInputValue(cardNumberInput));
+      expect(result.current.formattedCardNumber).toEqual(formattedCardNumber);
+    }
+  );
 });
