@@ -1,4 +1,4 @@
-import { CardCVC } from '../types/types';
+import { CardCVC } from '../types';
 import useCardField, { ValidationConfig } from './useCardFields';
 import { CARD_TYPES, CardType } from '../constants/cardTypes';
 import { CVC } from '../constants/cardConstants';
