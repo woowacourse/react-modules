@@ -1,10 +1,12 @@
 import { useState } from 'react';
-import { checkCardBrand, isNotOverMaxLength, isNumeric } from './utils';
+import { checkCardBrand, formatCardNumber, isNotOverMaxLength, isNumeric } from './utils';
 
 const useCardNumberInput = () => {
   const [cardNumberInputValue, setCardNumberInputValue] = useState('');
 
   const cardBrand = checkCardBrand(cardNumberInputValue);
+
+  const formattedCardNumber = formatCardNumber(cardNumberInputValue, cardBrand);
 
   const errorText = (() => {
     if (!isNumeric(cardNumberInputValue)) return '입력값이 숫자가 아닙니다.';
@@ -18,6 +20,7 @@ const useCardNumberInput = () => {
     cardNumberInputValue,
     setCardNumberInputValue,
     cardBrand,
+    formattedCardNumber,
     errorInfo: { isError, errorText },
   };
 };
