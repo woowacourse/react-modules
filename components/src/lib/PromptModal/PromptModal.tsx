@@ -33,7 +33,6 @@ const PromptModal = ({
         value={inputValue}
         onChange={onChangeInput}
         placeholder="내용을 입력하세요"
-        autoFocus
       />
       <S.ButtonContainer>
         <S.CancelButton type="button" onClick={onClose}>

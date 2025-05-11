@@ -26,7 +26,7 @@ const AlertModal = ({
       size={size}
     >
       <p>{description}</p>
-      <S.ConfirmButton type="button" onClick={onClose} autoFocus>
+      <S.ConfirmButton type="button" onClick={onClose}>
         확인
       </S.ConfirmButton>
     </BaseModal>
