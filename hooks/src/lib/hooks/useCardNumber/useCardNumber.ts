@@ -48,7 +48,7 @@ export const useCardNumber = () => {
   return {
     cardNumbers,
     cardType: cardBrandInfo(cardNumbers)?.brand,
-    isValid: Boolean(errorMessage),
+    isValid: !Boolean(errorMessage),
     errorMessage,
     handleCardNumberChange,
   };

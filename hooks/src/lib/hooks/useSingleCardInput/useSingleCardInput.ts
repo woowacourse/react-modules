@@ -32,7 +32,7 @@ export const useSingleCardInput = (validLength: number) => {
     setErrorMessage(isValid ? '' : errorMessage);
   };
 
-  const isValid = Boolean(errorMessage);
+  const isValid = !Boolean(errorMessage);
   const singleCardInput = { value, isValid };
 
   return {
