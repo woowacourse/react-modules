@@ -116,7 +116,12 @@ function useCardNumbers() {
     const network =
       identifyNetworkByList(cardNumbers) ?? identifyNetworkByRange(cardNumbers);
 
-    return formatNumbersByNetwork(cardNumbers, network);
+    const formatNetwork =
+      network !== '' && cardNumbers.length <= CARD_NUMBERS_LENGTH[network]
+        ? network
+        : '';
+
+    return formatNumbersByNetwork(cardNumbers, formatNetwork);
   };
 
   return {
