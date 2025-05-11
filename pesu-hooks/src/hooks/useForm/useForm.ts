@@ -14,7 +14,9 @@ export default function useForm<TState extends Record<string, string>>({
   inputRegex,
 }: UseFormProps<TState>) {
   const [value, setValue] = useState<TState>(defaultValues);
-  const [errors, setErrors] = useState<TState>(defaultValues);
+  const [errors, setErrors] = useState<TState>(
+    Object.keys(defaultValues).reduce((acc, key) => ({ ...acc, [key]: '' }), {} as TState),
+  );
 
   const register = <UElement extends HTMLInputElement | HTMLSelectElement>(
     currentKey: keyof TState,
@@ -41,9 +43,9 @@ export default function useForm<TState extends Record<string, string>>({
     };
   };
 
-  const isDirty = Object.values(errors).some((error) => error === '');
-  const isAllDirty = Object.values(value).every((value) => value !== '');
-  const isValid = isAllDirty && Object.values(errors).every((error) => error === '');
+  const isDirty = Object.entries(value).some(([key, val]) => val !== defaultValues[key]);
+  const isAllDirty = Object.entries(value).every(([key, val]) => val !== defaultValues[key]);
+  const isValid = Object.values(errors).every((error) => error === '');
 
   return { value, errors, register, isValid, isDirty, isAllDirty };
 }
