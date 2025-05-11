@@ -1,6 +1,6 @@
 {
   "name": "@sanghee01/modal",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "description": "A modal component for React",
   "type": "module",
   "types": "dist/index.d.ts",
@@ -55,6 +55,6 @@
     "access": "public"
   },
   "dependencies": {
-    "@sanghee01/modal": "^0.0.8"
+    "@sanghee01/modal": "^0.0.9"
   }
 }

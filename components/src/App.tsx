@@ -1,10 +1,6 @@
 import './App.css';
 import { css } from '@emotion/css';
-import Modal from './lib/components/Modal';
-import useModal from './lib/hooks/useModal';
-import AlertModal from './lib/components/AlertModal';
-import ConfirmModal from './lib/components/ConfirmModal';
-import PromptModal from './lib/components/PromptModal';
+import { Modal, useModal, AlertModal, ConfirmModal, PromptModal } from '@sanghee01/modal';
 
 function App() {
   const {
