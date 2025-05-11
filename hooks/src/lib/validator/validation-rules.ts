@@ -5,6 +5,12 @@ import {
   PASSWORD_ERROR_MESSAGES,
   EXPIRY_DATE_ERROR_MESSAGES,
 } from "./constants/error-messages";
+import type {
+  CvcErrorCodes,
+  CardNumberErrorCodes,
+  PasswordErrorCodes,
+  ExpiryDateErrorCodes,
+} from "./constants/error-messages";
 import { isNumeric } from "../utils/isNumeric";
 import {
   isValidExpiryDateFormat,
@@ -32,7 +38,24 @@ function makeMessageForInvalidLength(
   )} 자리여야 합니다.`;
 }
 
-export const validationRules = {
+type ValidationRule = {
+  check: (value: string) => boolean;
+  message: string | ((value: string) => string);
+  applyWhen?: (value: string) => boolean;
+};
+
+type ValidationRules = {
+  cvc: Record<CvcErrorCodes, ValidationRule>;
+  cardNumber: Record<CardNumberErrorCodes | "INVALID_LENGTH", ValidationRule>;
+  strictCardNumber: Record<
+    CardNumberErrorCodes | "INVALID_LENGTH",
+    ValidationRule
+  >;
+  password: Record<PasswordErrorCodes, ValidationRule>;
+  expiryDate: Record<ExpiryDateErrorCodes, ValidationRule>;
+};
+
+export const validationRules: ValidationRules = {
   cvc: {
     INVALID_NUMBER: {
       check: (value: string) => isNumeric(value),
@@ -69,6 +92,12 @@ export const validationRules = {
           checkCardBrand(value),
           CLIENT_CARD_NUMBER_LENGTH
         ),
+    },
+    INVALID_CHECKSUM: {
+      applyWhen: (value: string) =>
+        isValidLength(value, CLIENT_CARD_NUMBER_LENGTH),
+      check: (value: string) => isValidLuhn(value),
+      message: CARD_NUMBER_ERROR_MESSAGES.INVALID_CHECKSUM,
     },
   },
   strictCardNumber: {
@@ -127,4 +156,4 @@ export const validationRules = {
       message: EXPIRY_DATE_ERROR_MESSAGES.EXPIRED_DATE,
     },
   },
-} as const;
+};

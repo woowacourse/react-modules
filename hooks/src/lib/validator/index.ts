@@ -1,57 +1,44 @@
-import { ValidateField, FieldValueType } from "./constants";
+import { ValidateField } from "./constants";
 import { validationRules } from "./validation-rules";
-import { FieldErrorCode } from "./constants/error-messages";
 
-// ValidationRule 및 ValidationRules 타입 정의
-interface ValidationRule<T extends ValidateField> {
-  message: string | ((value: FieldValueType[T]) => string);
-  check: (value: FieldValueType[T]) => boolean;
-}
-
-type ValidationRules = {
-  [K in ValidateField]: Record<FieldErrorCode[K], ValidationRule<K>>;
-};
-
-type ValidationRuleParam<T extends ValidateField> = {
-  check: (value: FieldValueType[T]) => boolean;
-  errorMeta: {
-    field: T;
-    code: FieldErrorCode[T];
-  };
-  applyWhen?: (value: FieldValueType[T]) => boolean;
+type ValidationError = {
+  field: string;
+  code: string;
+  message: string;
 };
 
 type ValidationResult = {
   valid: boolean;
-  errors: Array<{
-    field: ValidateField;
-    code: FieldErrorCode[ValidateField];
-    message: string;
-  }>;
+  errors: ValidationError[];
 };
 
-function createValidator<T extends ValidateField>(
-  rules: ValidationRuleParam<T>[]
-): (value: FieldValueType[T]) => ValidationResult {
-  return (value: FieldValueType[T]) => {
-    if (value === "") {
-      return { errors: [], valid: true };
-    }
+/**
+ * 특정 필드에 대한 유효성 검증기를 생성합니다.
+ * @param field 검증할 필드 이름
+ * @returns 검증 함수
+ */
+function createValidator(field: ValidateField) {
+  return (value: string): ValidationResult => {
+    if (value === "") return { errors: [], valid: true };
 
-    const errors: ValidationResult["errors"] = [];
-    for (const { check, applyWhen, errorMeta } of rules) {
-      if (applyWhen && !applyWhen(value)) continue;
-      if (!check(value)) {
-        const { field, code } = errorMeta;
+    const fieldRules = validationRules[field];
 
-        const ruleSet = (validationRules as ValidationRules)[field];
-        const rawMessage = ruleSet[code]?.message;
+    if (!fieldRules) throw new Error(`해당 ${field} 필드가 존재하지 않습니다`);
 
+    const errors: ValidationError[] = [];
+
+    for (const [code, rule] of Object.entries(fieldRules)) {
+      // applyWhen이 있고, 그 조건을 만족하지 않으면 건너뜀
+      if (rule.applyWhen && !rule.applyWhen(value)) continue;
+
+      // 검증 실패 시 에러 추가
+      if (!rule.check(value)) {
         const message =
-          typeof rawMessage === "function" ? rawMessage(value) : rawMessage;
+          typeof rule.message === "function"
+            ? rule.message(value)
+            : rule.message;
 
         errors.push({ field, code, message });
-        break;
       }
     }
 
@@ -59,4 +46,4 @@ function createValidator<T extends ValidateField>(
   };
 }
 
-export { createValidator, type ValidationRuleParam, type ValidationResult };
+export { createValidator };
