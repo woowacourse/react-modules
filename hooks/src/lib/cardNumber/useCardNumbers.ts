@@ -12,7 +12,7 @@ import {
   removeFormat,
 } from '../utils/cardNetwork';
 
-const CARD_NUMBERS_LENGTH: Record<NetworkType, number> = {
+export const CARD_NUMBERS_LENGTH: Record<NetworkType, number> = {
   visa: 16,
   master: 16,
   diners: 14,
@@ -20,7 +20,7 @@ const CARD_NUMBERS_LENGTH: Record<NetworkType, number> = {
   union: 16,
 };
 
-const DEFAULT_LENGTH = 16;
+export const DEFAULT_LENGTH = 16;
 
 function useCardNumbers() {
   const [cardNumbers, setCardNumbers] = useState('');

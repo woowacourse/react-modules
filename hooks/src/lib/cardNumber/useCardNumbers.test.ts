@@ -1,5 +1,8 @@
 import { renderHook, act } from '@testing-library/react';
-import useCardNumbers from './useCardNumbers';
+import useCardNumbers, {
+  CARD_NUMBERS_LENGTH,
+  DEFAULT_LENGTH,
+} from './useCardNumbers';
 import { ChangeEvent, FocusEvent } from 'react';
 import {
   CARD_NUMBER_ERROR_TYPES,
@@ -53,7 +56,7 @@ describe('useCardNumbers', () => {
     });
   });
 
-  it('입력값이 유효한 길이가 아닐 때 isValid로 false를 반환하고 invalidLength 에러 타입을 반환한다.', () => {
+  it(`카드 브랜드가 없는 입력값이 유효한 길이인 ${CARD_NUMBERS_LENGTH}이(가) 아닐 때 isValid로 false를 반환하고 invalidLength 에러 타입을 반환한다.`, () => {
     expect(
       result.current.validateCardNumbersChange('12345678901234567')
     ).toEqual({
@@ -62,9 +65,43 @@ describe('useCardNumbers', () => {
     });
   });
 
-  test.each(['1234567890123456', '341234567890123'])(
-    '입력값이 유효한 길이인 일 때 isValid로 true를 반환한다.',
-    (cardNumbers) => {
+  it(`카드 브랜드가 없는 입력값이 유효한 길이인 ${DEFAULT_LENGTH}일 때 isValid로 true를 반환한다.`, () => {
+    expect(
+      result.current.validateCardNumbersChange('1234567890123456')
+    ).toEqual({
+      isValid: true,
+    });
+  });
+
+  test.each([
+    {
+      network: 'visa',
+      cardNumbers: '4234567890123456',
+      length: CARD_NUMBERS_LENGTH['visa'],
+    },
+    {
+      network: 'master',
+      cardNumbers: '5134567890123456',
+      length: CARD_NUMBERS_LENGTH['master'],
+    },
+    {
+      network: 'diners',
+      cardNumbers: '36123456789012',
+      length: CARD_NUMBERS_LENGTH['diners'],
+    },
+    {
+      network: 'amex',
+      cardNumbers: '343456789012345',
+      length: CARD_NUMBERS_LENGTH['amex'],
+    },
+    {
+      network: 'union',
+      cardNumbers: '6244567890123145',
+      length: CARD_NUMBERS_LENGTH['union'],
+    },
+  ])(
+    `카드 브랜드가 $network인 입력값이 유효한 길이 $length일 때, isValid로 true를 반환한다.`,
+    ({ cardNumbers }) => {
       expect(result.current.validateCardNumbersChange(cardNumbers)).toEqual({
         isValid: true,
       });
