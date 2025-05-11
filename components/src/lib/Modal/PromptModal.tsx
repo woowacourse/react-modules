@@ -1,15 +1,26 @@
 import Modal from '../Modal';
 import styled from '@emotion/styled';
 import { Button } from "../Button";
+import { useState } from 'react';
 
 type PromptModalProps = {
   message: string;
   placeholder?: string;
   onCancel: () => void;
-  onConfirm: () => void;
+  onConfirm: (input: string) => void;
 };
 
 function PromptModal({message, placeholder, onCancel, onConfirm}: PromptModalProps) {
+  const [input, setInput] = useState('');
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setInput(e.target.value);
+  }
+
+  const handleConfirm = () => {
+    onConfirm(input);
+  }
+
   return (
     <Modal
       position="center"
@@ -18,10 +29,15 @@ function PromptModal({message, placeholder, onCancel, onConfirm}: PromptModalPro
       height="157px"
     >
       <Message>{message}</Message>
-      <Input type="text" placeholder={placeholder}/>
+      <Input
+        type="text"
+        placeholder={placeholder}
+        value={input}
+        onChange={handleInputChange}
+      />
       <ButtonContainer>
         <Button variant="cancel" onClick={onCancel}>취소</Button>
-        <Button variant="confirm" onClick={onConfirm}>확인</Button>
+        <Button variant="confirm" onClick={handleConfirm}>확인</Button>
       </ButtonContainer>
     </Modal>
   );
