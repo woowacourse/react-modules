@@ -88,6 +88,10 @@ export const CloseButton = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
+  &:focus {
+    outline: 2px solid #4d90fe;
+    outline-offset: 2px;
+  }
 `;
 
 export const ModalContent = styled.div`
@@ -102,6 +106,11 @@ export const ModalInput = styled.input`
   border-radius: 4px;
   margin: 1rem 0;
   font-size: 1rem;
+  &:focus {
+    outline: 2px solid #4d90fe;
+    border-color: #4d90fe;
+    box-shadow: 0 0 0 3px rgba(77, 144, 254, 0.2);
+  }
 `;
 
 export const ModalFooter = styled.div`
@@ -134,4 +143,8 @@ export const Button = styled.button<{ primary?: boolean }>`
           color: #333333;
           border: 1px solid #333333;
         `}
+  &:focus {
+    outline: 2px solid #4d90fe;
+    outline-offset: 2px;
+  }
 `;
