@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 import { CardType } from "../../types";
-import { cardPrefixRule } from "../../constants";
+import { CARD_PREFIX_RULE } from "../../constants";
 
 export const useCardType = (input: string) => {
   return useMemo(() => {
@@ -9,7 +9,7 @@ export const useCardType = (input: string) => {
 };
 
 const detectCardType = (input: string): CardType => {
-  for (const { type, length, start, end } of cardPrefixRule) {
+  for (const { type, length, start, end } of CARD_PREFIX_RULE) {
     const prefix = Number(input.slice(0, length));
     if (prefix >= start && prefix <= end) {
       return type;

@@ -17,7 +17,7 @@ export const MAX_LENGTH = {
   PASSWORD: 2,
 };
 
-export const cardPrefixRule: CardPrefixRuleType[] = [
+export const CARD_PREFIX_RULE: CardPrefixRuleType[] = [
   // AMEX: 34, 37
   { type: "amex", length: 2, start: 34, end: 34 },
   { type: "amex", length: 2, start: 37, end: 37 },
@@ -37,12 +37,14 @@ export const cardPrefixRule: CardPrefixRuleType[] = [
   { type: "master", length: 2, start: 51, end: 55 },
 ];
 
-const defaultParsingRule = [4, 4, 4, 4];
-const uniqueParsingRule: Record<string, number[]> = {
+const DEFAULT_CARD_PARSING_RULE = [4, 4, 4, 4];
+const UNIQUE_CARD_PARSING_RULE: Record<string, number[]> = {
   diners: [4, 6, 4],
   amex: [4, 6, 5],
 };
 
 export const cardParsingRule = (type: CardType) => {
-  return uniqueParsingRule[type] ?? defaultParsingRule;
+  return UNIQUE_CARD_PARSING_RULE[type] ?? DEFAULT_CARD_PARSING_RULE;
 };
+
+export const DATE_PARSING_RULE = [2, 2];
