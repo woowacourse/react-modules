@@ -6,6 +6,7 @@ export default function useAutoFocus(isOpen: boolean) {
   useEffect(() => {
     if (!isOpen) return;
     const modalEl = modalRef.current;
+    if (!modalEl) return;
     const focusableEls = modalEl?.querySelectorAll<HTMLElement>(
       'button, a[href], input, select, textarea, [tabindex]:not([tabindex="-1"])',
     );
@@ -26,8 +27,10 @@ export default function useAutoFocus(isOpen: boolean) {
         }
       }
     };
-    document.addEventListener('keydown', handleKeyDown);
     firstEl?.focus();
+
+    document.addEventListener('keydown', handleKeyDown);
+    return () => document.removeEventListener('keydown', handleKeyDown);
   }, [isOpen]);
   return { modalRef };
 }

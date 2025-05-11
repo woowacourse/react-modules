@@ -163,6 +163,8 @@ describe('useCardNumber', () => {
       });
 
       expect(result.current.formattedCardNumber).toEqual(['3412', '345678', '90123']);
+
+      expect(result.current.formattedCardNumber).toEqual(['3412', '345678', '90123']);
     });
 
     it('UnionPay 카드 번호는 4-4-4-4-4 포맷으로 포맷팅된다.', () => {
