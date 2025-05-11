@@ -14,7 +14,6 @@ const CardNumberForm = () => {
   return (
     <div>
       <input
-        key={index}
         type="text"
         maxLength={4}
         value={cardNumbers}
