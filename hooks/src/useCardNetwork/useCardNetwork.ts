@@ -1,0 +1,69 @@
+type CardNumbers = {
+  FIRST: string;
+  SECOND: string;
+  THIRD: string;
+  FOURTH: string;
+};
+
+const CARD_BRAND_PATTERNS = {
+  VISA: {
+    PATTERN: /^4/,
+    LENGTH: 16,
+  },
+  MASTER_CARD: {
+    PATTERN: /^5[1-5]/,
+    LENGTH: 16,
+  },
+  AMEX: {
+    PATTERN: /^3[47]/,
+    LENGTH: 15,
+  },
+  DINERS: {
+    PATTERN: /^3(?:0[0-5]|[68])/,
+    LENGTH: 14,
+  },
+  UNION_PAY: {
+    PATTERN:
+      /^(622(?:12[6-9]|1[3-9]\d|[2-8]\d{2}|9[0-1]\d|92[0-5])|62[4-6]|628[2-8])/,
+    LENGTH: 16,
+  },
+} as const;
+
+export function useCardNetwork(cardNumbers: CardNumbers) {
+  const fullCardNumber = `${cardNumbers.FIRST}${cardNumbers.SECOND}${cardNumbers.THIRD}${cardNumbers.FOURTH}`;
+
+  const matchedNetwork = Object.entries(CARD_BRAND_PATTERNS).find(
+    ([_, { PATTERN }]) => PATTERN.test(fullCardNumber)
+  );
+
+  let cardNetwork = "";
+  let isValidLegnth = false;
+  let errorMessage = "";
+
+  if (matchedNetwork) {
+    const [parsedcardNetwork, { LENGTH }] = matchedNetwork;
+    cardNetwork = parsedcardNetwork;
+    isValidLegnth = fullCardNumber.length === LENGTH;
+  }
+
+  if (!isValidLegnth) errorMessage = "카드 길이가 올바르지 않습니다.";
+  else errorMessage = "";
+
+  return {
+    cardNetwork,
+    error: !isValidLegnth,
+    errorMessage: errorMessage,
+  };
+}
+
+// - Diners: 36으로 시작하는 14자리 숫자
+//   - 예시: 3612 345678 9012
+// - AMEX: 34, 37로 시작하는 15자리 숫자
+//   - 예시 (34로 시작): 3412 345678 90123
+//   - 예시 (37로 시작): 3712 345678 90123
+// - 유니온페이: 카드의 앞 번호가 아래 3가지 조건을 만족하는 16자리 숫자
+//   - 622126~622925로 시작하는 경우: 6221 2612 3456 7890
+//   - 624~626로 시작하는 경우: 6240 1234 5678 9012
+//   - 6282~6288로 시작하는 경우: 6282 1234 5678 9012
+// - Visa: 4로 시작하는 16자리 숫자
+// - MasterCard: 51~55로 시작하는 16자리 숫자
