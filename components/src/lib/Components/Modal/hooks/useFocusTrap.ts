@@ -16,9 +16,16 @@ export function useFocusTrap<T extends HTMLElement>(
         'a[href], button, input, select, textarea, [tabindex]:not([tabindex="-1"])'
       )
     );
+
     const first = nodes[0];
     const last = nodes[nodes.length - 1];
-    first?.focus();
+
+    if (nodes.length === 0) {
+      first?.focus();
+    } else {
+      modalEl.setAttribute("tabindex", "-1");
+      modalEl.focus();
+    }
 
     const onKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Tab" && e.shiftKey && document.activeElement === first) {
