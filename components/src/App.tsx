@@ -1,8 +1,5 @@
-import AlertModal from './lib/alertModal/AlertModal';
-import ConfirmModal from './lib/confirmModal/ConfirmModal';
-import PromptModal from './lib/promptModal/PromptModal';
 import { useState } from 'react';
-import { Modal } from './lib';
+import { AlertModal, ConfirmModal, Modal, PromptModal } from '@seo_dev/react-modal';
 
 function App() {
   const [isOpen, setIsOpen] = useState({
