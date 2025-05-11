@@ -11,6 +11,8 @@ interface ModalProps {
   onClose: () => void;
   onAfterOpen?: () => void;
   showCloseButton?: boolean;
+  showDefaultCancelButton?: boolean;
+  showDefaultConfirmButton?: boolean;
   type?: ModalType;
 }
 

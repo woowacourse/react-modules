@@ -34,6 +34,8 @@ function App() {
         onClose={handleClose}
         type="prompt"
         size="large"
+        showDefaultCancelButton
+        showDefaultConfirmButton
       >
         <Modal.Header title="알림" showCloseButton />
         <Modal.Body>
