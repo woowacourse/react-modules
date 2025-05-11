@@ -1,5 +1,5 @@
 import { BackDrop, ModalLayout } from './Modal.styled';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { createContext } from 'react';
 import { createPortal } from 'react-dom';
 import ButtonContainer from './ButtonContainer';
@@ -10,14 +10,19 @@ import Input from './Input';
 import CloseButton from './CloseButton';
 
 type ModalProps = {
-  isOpen: boolean;
+  isOpen?: boolean;
+  defaultOpen?: boolean;
   onClose: () => void;
   children: React.ReactNode;
   position?: 'center' | 'bottom';
   size?: 'small' | 'medium' | 'large';
 };
-
-export const ModalContext = createContext<ModalProps | null>(null);
+type ModalContextType = {
+  onClose: () => void;
+  children: React.ReactNode;
+  position?: 'center' | 'bottom';
+};
+export const ModalContext = createContext<ModalContextType | null>(null);
 
 const FOCUSABLE_SELECTORS = `
   a[href], area[href], input:not([disabled]),
@@ -27,14 +32,13 @@ const FOCUSABLE_SELECTORS = `
 `;
 
 const Modal = ({
-  isOpen = true,
+  isOpen,
   onClose,
   children,
   position = 'center',
   size = 'small',
 }: ModalProps) => {
-  const value: ModalProps = {
-    isOpen,
+  const modalContextValue: ModalContextType = {
     onClose,
     children,
     position,
@@ -42,6 +46,8 @@ const Modal = ({
   const modalRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    if (!modalRef.current) return;
+
     const focusableElements =
       modalRef.current.querySelectorAll<HTMLElement>(FOCUSABLE_SELECTORS);
     const first = focusableElements[0];
@@ -80,7 +86,7 @@ const Modal = ({
     <>
       {isOpen &&
         createPortal(
-          <ModalContext.Provider value={value}>
+          <ModalContext.Provider value={modalContextValue}>
             <BackDrop onClick={onClose} $position={position}>
               <ModalLayout
                 ref={modalRef}
@@ -94,6 +100,7 @@ const Modal = ({
           </ModalContext.Provider>,
           document.getElementById('root') as HTMLElement
         )}
+      ,
     </>
   );
 };
