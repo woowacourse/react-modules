@@ -5,10 +5,11 @@ import { cardParsingRule, MAX_LENGTH } from "../../constants";
 import { useCardType } from "../common/useCardType";
 import getParsingValue from "../../utils/getParsingValue";
 
-const useCardNumber = (): HookReturnType => {
+const useCardNumber = (splitter: string = " "): HookReturnType => {
   const { state, onChange, isLengthComplete } = useInputValue<CardNumberType>({
     initialState: "",
     maxLength: MAX_LENGTH.CARD_NUMBER,
+    splitter: splitter,
   });
 
   const { error, errorMessage } = validateNumericString(state);
@@ -17,7 +18,7 @@ const useCardNumber = (): HookReturnType => {
   const cardType = useCardType(state.slice(0, 6));
 
   const pattern = cardParsingRule(cardType);
-  const displayValue = getParsingValue(state, pattern);
+  const displayValue = getParsingValue(state, pattern, splitter);
 
   return {
     value: displayValue,

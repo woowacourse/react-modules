@@ -9,12 +9,11 @@ interface InputValueType<T> {
 }
 
 const useInputValue = <T extends string>(props: InputValueType<T>) => {
-  const { initialState, maxLength, splitter = " " } = props;
+  const { initialState, maxLength, splitter } = props;
   const [state, setState] = useState<T>(initialState);
 
   const onChange = (value: T) => {
-    const regex = new RegExp(splitter, "g");
-    const cleanValue = value.replace(regex, "") as T;
+    const cleanValue = splitter ? (value.replace(new RegExp(splitter, "g"), "") as T) : value;
     if (cleanValue.length <= maxLength) setState(cleanValue);
   };
 

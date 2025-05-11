@@ -1,4 +1,4 @@
-const getParsingValue = (input: string, pattern: number[], splitter = " ") => {
+const getParsingValue = (input: string, pattern: number[], splitter: string) => {
   const result: string[] = [];
   let cursor = 0;
 
