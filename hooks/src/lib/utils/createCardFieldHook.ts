@@ -1,25 +1,26 @@
-import { useState } from 'react';
-import { CardFieldHook, validationResult } from '../card.type';
+// hooks/createCardFieldHook.ts
+import { useState, useMemo } from 'react';
+import { validationResult, CardFieldHook } from '../card.type';
 
-function createCardField<T extends string>(
-  initialState: T,
-  validationFunctions: Array<(value: T) => validationResult>,
+export default function createCardFieldHook<T extends string>(
+  initialValue: T,
+  validators: Array<(value: T) => validationResult>,
 ): CardFieldHook<T> {
-  const [value, setValue] = useState<T>(initialState);
+  const [value, setValue] = useState<T>(initialValue);
 
-  const validate = () => {
-    for (const validateFn of validationFunctions) {
-      const { isValid, errorMessage } = validateFn(value);
-      if (!isValid && errorMessage) return errorMessage;
+  const errorMessage = useMemo(() => {
+    for (const validate of validators) {
+      const { isValid, errorMessage } = validate(value);
+      if (!isValid && errorMessage) {
+        return errorMessage;
+      }
     }
     return '';
-  };
+  }, [value, validators]);
 
   const handleChange = (newValue: T) => {
     setValue(newValue);
   };
 
-  return { value, handleChange, errorMessage: validate() };
+  return { value, handleChange, errorMessage };
 }
-
-export default createCardField;

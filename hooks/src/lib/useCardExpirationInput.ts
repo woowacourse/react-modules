@@ -1,52 +1,25 @@
-import { useState } from 'react';
-import { CardExpiration } from './card.type';
-import { validateMonthRangeError, validateNumberError, validateYearLengthError } from './utils/cardInputValidations';
-import { CARD_EXPIRATION_KEYS, INITIAL_CARD_EXPIRATION } from './card.contant';
+// hooks/useCardExpirationInput.ts
+import createCardFieldHook from './utils/createCardFieldHook';
+import { validateNumberError, validateMonthRangeError, validateYearLengthError } from './utils/cardInputValidations';
+import { INITIAL_CARD_EXPIRATION } from './card.contant';
 
 export function useCardExpirationInput() {
-  const [cardExpiration, setCardExpiration] = useState<CardExpiration>(INITIAL_CARD_EXPIRATION);
+  const monthHook = createCardFieldHook(INITIAL_CARD_EXPIRATION.month, [validateNumberError, validateMonthRangeError]);
+  const yearHook = createCardFieldHook(INITIAL_CARD_EXPIRATION.year, [validateNumberError, validateYearLengthError]);
 
-  const validateCardExpiration = () => {
-    const errors: CardExpiration = {
-      month: '',
-      year: '',
-    };
-
-    for (const key of CARD_EXPIRATION_KEYS) {
-      const value = cardExpiration[key];
-      if (value === '') continue;
-
-      if (key === 'month') {
-        const numErr = validateNumberError(value);
-        if (!numErr.isValid && numErr.errorMessage) {
-          errors.month = numErr.errorMessage;
-          continue;
-        }
-        const rangeErr = validateMonthRangeError(value);
-        if (!rangeErr.isValid && rangeErr.errorMessage) {
-          errors.month = rangeErr.errorMessage;
-        }
-      }
-
-      if (key === 'year') {
-        const numErr = validateNumberError(value);
-        if (!numErr.isValid && numErr.errorMessage) {
-          errors.year = numErr.errorMessage;
-          continue;
-        }
-        const lengthErr = validateYearLengthError(value);
-        if (!lengthErr.isValid && lengthErr.errorMessage) {
-          errors.year = lengthErr.errorMessage;
-        }
-      }
-    }
-
-    return errors;
+  const cardExpiration = {
+    month: monthHook.value,
+    year: yearHook.value,
+  };
+  const cardExpirationError = {
+    month: monthHook.errorMessage,
+    year: yearHook.errorMessage,
   };
 
-  const handleCardExpirationChange = (key: keyof CardExpiration, value: string) => {
-    setCardExpiration((prev) => ({ ...prev, [key]: value }));
+  const handleCardExpirationChange = (key: keyof typeof cardExpiration, value: string) => {
+    if (key === 'month') monthHook.handleChange(value as typeof INITIAL_CARD_EXPIRATION.month);
+    else yearHook.handleChange(value as typeof INITIAL_CARD_EXPIRATION.year);
   };
 
-  return { cardExpiration, handleCardExpirationChange, cardExpirationError: validateCardExpiration() };
+  return { cardExpiration, handleCardExpirationChange, cardExpirationError };
 }

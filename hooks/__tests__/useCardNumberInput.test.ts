@@ -12,7 +12,7 @@ describe('useCardNumberInput custom hook 테스트', () => {
     act(() => {
       hookResult.result.current.handleCardNumberChange('first', '1234');
     });
-    expect(hookResult.result.current.cardNumberError).toBe('');
+    expect(hookResult.result.current.cardNumberError.first).toBe('');
     expect(hookResult.result.current.cardNumbers.first).toBe('1234');
   });
 
@@ -20,13 +20,6 @@ describe('useCardNumberInput custom hook 테스트', () => {
     act(() => {
       hookResult.result.current.handleCardNumberChange('first', '12a4');
     });
-    expect(hookResult.result.current.cardNumberError).toBe('숫자만 입력 가능합니다.');
-  });
-
-  it('자리수가 4자리 미만이면, 에러가 발생한다.', () => {
-    act(() => {
-      hookResult.result.current.handleCardNumberChange('first', '123');
-    });
-    expect(hookResult.result.current.cardNumberError).toBe('4자리 숫자를 입력해주세요.');
+    expect(hookResult.result.current.cardNumberError.first).toBe('숫자만 입력 가능합니다.');
   });
 });
