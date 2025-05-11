@@ -1,7 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { within, userEvent } from "@storybook/testing-library";
-
-import { useEffect, useState } from "react";
 import AlertModal from "./AlertModal";
 
 const meta: Meta<typeof AlertModal> = {
