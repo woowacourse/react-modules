@@ -33,7 +33,7 @@ function useCVC() {
 
       if (shouldSkipValidation) {
         setValidationResult({
-          isValid: !Boolean(errorType),
+          isValid: !errorType,
           errorMessage: errorType ? ERROR_MESSAGE.CVC[errorType] : '',
         });
       }

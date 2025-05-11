@@ -54,7 +54,7 @@ function useCardNumbers() {
         setValidationResults((prev) => ({
           ...prev,
           [key]: {
-            isValid: !Boolean(errorType),
+            isValid: !errorType,
             errorMessage: errorType ? ERROR_MESSAGE.cardNumber[errorType] : '',
           },
         }));

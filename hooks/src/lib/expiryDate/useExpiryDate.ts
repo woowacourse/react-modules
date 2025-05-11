@@ -74,7 +74,7 @@ function useExpiryDate() {
         setValidationResults((prev) => ({
           ...prev,
           [key]: {
-            isValid: !Boolean(errorType),
+            isValid: errorType === null,
             errorMessage: errorType ? ERROR_MESSAGE.expiryDate[errorType] : '',
           },
         }));
@@ -84,7 +84,7 @@ function useExpiryDate() {
       setValidationResults((prev) => ({
         ...prev,
         [key]: {
-          isValid: !Boolean(isExpiredDate),
+          isValid: !isExpiredDate,
           errorMessage: isExpiredDate
             ? ERROR_MESSAGE.expiryDate[isExpiredDate]
             : '',
