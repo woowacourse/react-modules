@@ -52,10 +52,21 @@ describe('useCardExpiration 훅 테스트', () => {
     expect(result.current.errorInfo.year.errorText).toBe('입력값이 최대 길이를 초과했습니다.');
   });
 
+  it('년도를 입력했을 때 오늘 이전의 값이라면 isError: true와 에러 메세지를 반환한다.', () => {
+    const { result } = renderHook(() => useCardExpirationInput());
+    const rightMonthInput = '12';
+    const wrongYearInput = String(new Date().getFullYear() - 2000 - 1);
+
+    act(() => result.current.setCardExpirationValue.month(rightMonthInput));
+    act(() => result.current.setCardExpirationValue.year(wrongYearInput));
+    expect(result.current.errorInfo.year.isError).toBe(true);
+    expect(result.current.errorInfo.year.errorText).toBe('유효 기간이 만료되었습니다.');
+  });
+
   it('월과 년도에 숫자로 이루어진 최대 길이를 넘지 않은 값을 입력하면 isError: false와 빈 에러 메세지를 반환한다.', () => {
     const { result } = renderHook(() => useCardExpirationInput());
     const rightMonthInput = '12';
-    const rightYearInput = '99';
+    const rightYearInput = String(new Date().getFullYear() - 2000 + 1);
 
     act(() => result.current.setCardExpirationValue.month(rightMonthInput));
     act(() => result.current.setCardExpirationValue.year(rightYearInput));
