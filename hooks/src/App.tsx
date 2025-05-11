@@ -1,32 +1,38 @@
 import './App.css';
-import { EXPIRY_DATE_KEY } from './lib/constants';
-import useExpiryDate from './lib/expiryDate/useExpiryDate';
+import Input from './Input';
+import InputField from './InputField';
+import { useCardNumbers } from './lib';
 
 function App() {
-  const { expiryDate, validationResults, handleExpiryDateChange } =
-    useExpiryDate();
-
+  const cardNumbersResult = useCardNumbers();
   return (
-    <>
-      <h1>Hooks Modules</h1>
-      <input
-        type="text"
-        name={EXPIRY_DATE_KEY.month}
-        onChange={handleExpiryDateChange}
-        value={expiryDate.month}
-      />
-      <p>{validationResults.month.isValid}</p>
-      <input
-        type="text"
-        name={EXPIRY_DATE_KEY.year}
-        onChange={(e) => handleExpiryDateChange(e, false)}
-        value={expiryDate.year}
-      />
-      <p>{validationResults.year.isValid}</p>
-
-      <p>{validationResults.month.errorMessage}</p>
-      <p>{validationResults.year.errorMessage}</p>
-    </>
+    <section className="section">
+      <div className="sectionContainer">
+        <InputField
+          feedbackMessage={cardNumbersResult.validationResults.errorMessage}
+          title="결제할 카드 번호를 입력해주세요."
+          description="본인 명의의 카드만 결제 가능합니다."
+          label={`
+            카드 번호${
+              cardNumbersResult.network !== ''
+                ? ` (${cardNumbersResult.network})`
+                : ''
+            }`}
+        >
+          <Input
+            type="text"
+            name="cardNumber"
+            value={cardNumbersResult.cardNumberFormatter(
+              cardNumbersResult.cardNumbers
+            )}
+            handleInputChange={(e) =>
+              cardNumbersResult.handleCardNumbersChange(e, false)
+            }
+            isValidInput={cardNumbersResult.validationResults.isValid}
+          />
+        </InputField>
+      </div>
+    </section>
   );
 }
 
