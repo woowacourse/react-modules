@@ -1,64 +1,18 @@
 import { useState } from "react";
-
-const numberRegex = /^[0-9]*$/;
+import {
+  getCardBrand,
+  formatCardNumber,
+  numberRegex,
+  isExceedCardNumberLength,
+  isShortOfCardNumberLength,
+} from "../\butils/card";
+import { CARD_BRAND } from "../constants/cardBrand";
 
 interface CustomErrorMessagesType {
   length?: string;
 }
 
-const CARD_BRAND = {
-  Visa: {
-    length: 16,
-    format: [4, 4, 4, 4],
-    condition: (value: string) => value.startsWith("4"),
-  },
-  MasterCard: {
-    length: 16,
-    format: [4, 4, 4, 4],
-    condition: (value: string) => {
-      const number = Number(value.slice(0, 2));
-      return number >= 51 && number <= 55;
-    },
-  },
-  Diners: {
-    length: 14,
-    format: [4, 6, 4],
-    condition: (value: string) => value.startsWith("36"),
-  },
-  Amex: {
-    length: 15,
-    format: [4, 6, 5],
-    condition: (value: string) =>
-      value.startsWith("34") || value.startsWith("37"),
-  },
-  UnionPay: {
-    length: 16,
-    format: [4, 4, 4, 4],
-    condition: (value: string) => {
-      const six = Number(value.slice(0, 6));
-      const three = Number(value.slice(0, 3));
-      const four = Number(value.slice(0, 4));
-      return (
-        (six >= 622126 && six <= 622925) ||
-        (three >= 624 && three <= 626) ||
-        (four >= 6282 && four <= 6288)
-      );
-    },
-  },
-  none: { length: null, format: [], condition: null },
-};
-
 type CardBrandType = keyof typeof CARD_BRAND;
-
-const getCardBrand = (value: string): CardBrandType => {
-  for (const brand in CARD_BRAND) {
-    const condition = CARD_BRAND[brand as CardBrandType].condition;
-    if (condition && condition(value)) {
-      return brand as CardBrandType;
-    }
-  }
-  return "none";
-};
 
 export default function useCardNumber(
   customErrorMessage?: CustomErrorMessagesType
@@ -71,13 +25,11 @@ export default function useCardNumber(
     value: string,
     cardNumberLength: number | null
   ) => {
-    if (cardNumberLength && value.length > cardNumberLength) {
-      return;
-    }
+    if (isExceedCardNumberLength(value, cardNumberLength)) return;
 
     setCardNumber(value);
 
-    if (cardNumberLength && value.length < cardNumberLength) {
+    if (isShortOfCardNumberLength(value, cardNumberLength)) {
       setErrorMessage(
         customErrorMessage
           ? `${cardNumberLength}${customErrorMessage.length}`
@@ -102,31 +54,19 @@ export default function useCardNumber(
     validateCardNumberLength(value, brandLength);
   };
 
-  const formatCardNumber = () => {
-    const pattern = CARD_BRAND[cardBrand()].format;
-    let start = 0;
-
-    if (cardBrand() === "none") {
-      return cardNumber;
-    }
-
-    return pattern
-      .map((len) => {
-        const number = cardNumber.slice(start, start + len);
-        start += len;
-        return number;
-      })
-      .join(" ")
-      .trim();
-  };
-
   const cardBrand = (): CardBrandType => {
     return getCardBrand(cardNumber);
   };
 
+  const formattedCardNumber = () => {
+    const brand = cardBrand();
+    const pattern = CARD_BRAND[brand].format;
+    return formatCardNumber(cardNumber, brand, pattern);
+  };
+
   return {
     cardNumber,
-    formatCardNumber,
+    formattedCardNumber,
     errorMessage,
     isValid,
     handleCardNumberChange,

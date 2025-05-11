@@ -251,7 +251,7 @@ describe("useCardNumber 테스트", () => {
 
         changeCardNumber(result, rerender, cardNumber);
 
-        expect(result.current.formatCardNumber()).toBe(formattedCardNumber);
+        expect(result.current.formattedCardNumber()).toBe(formattedCardNumber);
       }
     );
 
@@ -265,7 +265,7 @@ describe("useCardNumber 테스트", () => {
 
         changeCardNumber(result, rerender, cardNumber);
 
-        expect(result.current.formatCardNumber()).toBe(formattedCardNumber);
+        expect(result.current.formattedCardNumber()).toBe(formattedCardNumber);
       }
     );
 
@@ -279,7 +279,7 @@ describe("useCardNumber 테스트", () => {
 
         changeCardNumber(result, rerender, cardNumber);
 
-        expect(result.current.formatCardNumber()).toBe(formattedCardNumber);
+        expect(result.current.formattedCardNumber()).toBe(formattedCardNumber);
       }
     );
 
@@ -294,7 +294,7 @@ describe("useCardNumber 테스트", () => {
 
         changeCardNumber(result, rerender, cardNumber);
 
-        expect(result.current.formatCardNumber()).toBe(formattedCardNumber);
+        expect(result.current.formattedCardNumber()).toBe(formattedCardNumber);
       }
     );
 
@@ -305,7 +305,7 @@ describe("useCardNumber 테스트", () => {
 
         changeCardNumber(result, rerender, cardNumber);
 
-        expect(result.current.formatCardNumber()).toBe(cardNumber);
+        expect(result.current.formattedCardNumber()).toBe(cardNumber);
       }
     );
   });
