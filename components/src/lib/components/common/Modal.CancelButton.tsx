@@ -2,11 +2,22 @@ import styled from '@emotion/styled';
 
 import { useModalContext } from '../../hooks/useModalContext';
 
-const ModalCancelButton = ({ children }: { children: React.ReactNode }) => {
+const ModalCancelButton = ({
+  children,
+  $autoFocus = false,
+}: {
+  children: React.ReactNode;
+  $autoFocus?: boolean;
+}) => {
   const { onClose } = useModalContext();
 
   return (
-    <StyledCancelButton type="button" onClick={onClose} aria-label="cancelButton">
+    <StyledCancelButton
+      type="button"
+      onClick={onClose}
+      aria-label="cancelButton"
+      autoFocus={$autoFocus}
+    >
       {children}
     </StyledCancelButton>
   );
