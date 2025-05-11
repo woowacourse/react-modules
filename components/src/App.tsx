@@ -1,5 +1,6 @@
 import AlertModal from './lib/alertModal/AlertModal';
-import ConfirmModal from './lib/confirmModal/confirmModal';
+import ConfirmModal from './lib/confirmModal/ConfirmModal';
+import PromptModal from './lib/promptModal/PromptModal';
 import { useState } from 'react';
 import { Modal } from './lib';
 
@@ -7,30 +8,20 @@ function App() {
   const [isOpen, setIsOpen] = useState({
     base: false,
     alert: false,
-    confirm: false
+    confirm: false,
+    prompt: false
   });
-
-  const handleBaseModalButtonToggle = () => {
-    setIsOpen({ ...isOpen, base: !isOpen.base });
-  };
-
-  const handleAlertButtonToggle = () => {
-    setIsOpen({ ...isOpen, alert: !isOpen.alert });
-  };
-
-  const handleConfirmButtonToggle = () => {
-    setIsOpen({ ...isOpen, confirm: !isOpen.confirm });
-  };
 
   return (
     <>
       <div style={{ display: 'flex', gap: '10px' }}>
-        <button onClick={handleBaseModalButtonToggle}>Base 모달 열기</button>
-        <button onClick={handleAlertButtonToggle}>Alert 모달 열기</button>
-        <button onClick={handleConfirmButtonToggle}>Confirm 모달 열기</button>
+        <button onClick={() => setIsOpen({ ...isOpen, base: !isOpen.base })}>Base 모달 열기</button>
+        <button onClick={() => setIsOpen({ ...isOpen, alert: !isOpen.alert })}>Alert 모달 열기</button>
+        <button onClick={() => setIsOpen({ ...isOpen, confirm: !isOpen.confirm })}>Confirm 모달 열기</button>
+        <button onClick={() => setIsOpen({ ...isOpen, prompt: !isOpen.prompt })}>Prompt 모달 열기</button>
       </div>
       {isOpen.base && (
-        <Modal onClose={handleBaseModalButtonToggle}>
+        <Modal onClose={() => setIsOpen({ ...isOpen, base: !isOpen.base })}>
           <Modal.BackDrop backgroundColor={'rgba(0,0,255,0.35)'} />
           <Modal.Content position="center" style={{ width: '300px', height: '300px', backgroundColor: 'white' }}>
             <Modal.Title>하이</Modal.Title>
@@ -49,10 +40,8 @@ function App() {
         <AlertModal
           title="아이디를 입력해 주세요."
           description="아이디는 필수로 입력해야 합니다."
-          onClose={handleAlertButtonToggle}
-          onConfirmButtonClick={handleAlertButtonToggle}
-          position="center"
-          buttonText="확인"
+          onClose={() => setIsOpen({ ...isOpen, alert: !isOpen.alert })}
+          onConfirmButtonClick={() => setIsOpen({ ...isOpen, alert: !isOpen.alert })}
           size="small"
         />
       )}
@@ -60,10 +49,17 @@ function App() {
         <ConfirmModal
           title="카드를 삭제하시겠습니까?"
           description="삭제하면 복구하실 수 없습니다."
-          onClose={handleConfirmButtonToggle}
-          onConfirmButtonClick={handleConfirmButtonToggle}
+          onClose={() => setIsOpen({ ...isOpen, confirm: !isOpen.confirm })}
+          onConfirmButtonClick={() => setIsOpen({ ...isOpen, confirm: !isOpen.confirm })}
           position="center"
           buttonText="확인"
+        />
+      )}
+      {isOpen.prompt && (
+        <PromptModal
+          title="쿠폰 번호를 입력해 주세요."
+          onClose={() => setIsOpen({ ...isOpen, prompt: !isOpen.prompt })}
+          onPromptButtonClick={() => setIsOpen({ ...isOpen, prompt: !isOpen.prompt })}
         />
       )}
     </>
