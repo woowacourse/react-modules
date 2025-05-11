@@ -1,6 +1,7 @@
 import { ReactNode, useId } from "react";
 import { ThemeMode } from "../../constants/theme";
 import { ModalProvider } from "../../contexts/ModalContext";
+import useBodyScrollLock from "../../hooks/useBodyScrollLock";
 import useEscapeKey from "../../hooks/useEscapeKey";
 import useModalFocusTrap from "../../hooks/useModalFocusTrap";
 import { ModalPosition, ModalSize } from "../../types/modal";
@@ -56,6 +57,7 @@ const Modal = ({
   showCloseButton = true,
 }: ModalProps) => {
   useEscapeKey(onClose);
+  useBodyScrollLock({ isLocked: isOpen });
   const { modalRef } = useModalFocusTrap(isOpen);
 
   const id = useId();
