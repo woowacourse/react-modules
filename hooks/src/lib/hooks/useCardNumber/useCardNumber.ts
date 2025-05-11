@@ -1,51 +1,54 @@
 import { useState } from 'react';
+
+import { cardBrandInfo } from '../../utils/cardBrandInfo';
+import { formatWithPattern } from '../../utils/formatWithPattern';
 import { validateCardInput } from '../../validation/cardNumberLengthInfo';
-
-import { CardInputItem } from '../../types/cardInputItem.types';
-
-const CARD_NUMBER_INPUTS_LENGTH = 4;
 
 /**
  * @description
- * useCardNumber 훅은 카드 번호 입력을 관리하는 커스텀 훅입니다.
+ * 카드 번호 입력을 관리하는 커스텀 훅입니다.
  * 카드 번호의 유효성을 검사하고, 입력값을 상태로 관리합니다.
  * @returns 카드 번호 입력 상태와 핸들러를 반환합니다.
- * @returns cardNumbers - 카드 번호 입력 상태 배열 (4개 항목)
- * @returns errorMessage 카드 번호 입력 오류 메시지
- * @returns handleCardNumberChange 카드 번호 입력 핸들러
+ * @returns {string} cardNumbers 카드 번호 입력 상태
+ * @returns {string} cardType 카드 브랜드 정보
+ * @returns {boolean} isValid 카드 번호 유효성 검사 결과
+ * @returns {string} errorMessage 카드 번호 입력 오류 메시지
+ * @returns {function} handleCardNumberChange 카드 번호 입력 핸들러
  * @example
- * const { cardNumbers, errorMessage, handleCardNumberChange } = useCardNumber();
+ * const { cardNumbers, cardType, isValid, errorMessage, handleCardNumberChange } = useCardNumber();
  * <input
  *   type="text"
- *   value={cardNumbers[0].value}
- *   onChange={(e) => handleCardNumberChange(e, 0)}
+ *   value={cardNumbers}
+ *   onChange={handleCardNumberChange}
  *   placeholder="카드 번호를 입력하세요"
  * />
+ * <span>{cardType}</span>
+ * <span>{errorMessage}</span>
  */
 export const useCardNumber = () => {
-  const [cardNumbers, setCardNumbers] = useState<CardInputItem[]>(
-    Array.from({ length: CARD_NUMBER_INPUTS_LENGTH }, () => ({ value: '', isValid: true }))
-  );
-
+  const [cardNumbers, setCardNumbers] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
 
-  const handleCardNumberChange = (event: React.ChangeEvent<HTMLInputElement>, index: number) => {
-    const newValue = event.target.value;
+  const handleCardNumberChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const newValue = event.target.value.replace(/\D/g, '');
+    const currentCardInfo = cardBrandInfo(newValue);
 
-    const { isValid, errorMessage } = validateCardInput(newValue, CARD_NUMBER_INPUTS_LENGTH);
+    const limitedValue = newValue.slice(0, currentCardInfo?.maxLength ?? 16);
+    const formatted = formatWithPattern(limitedValue, currentCardInfo?.pattern ?? [4, 4, 4, 4]);
 
-    setCardNumbers((prev) => {
-      const newCardNumbers = [...prev];
-      newCardNumbers[index].value = newValue;
-      newCardNumbers[index].isValid = isValid;
-      return newCardNumbers;
-    });
+    const { isValid, errorMessage: validationError } = validateCardInput(
+      limitedValue,
+      currentCardInfo?.maxLength ?? 16
+    );
 
-    setErrorMessage(isValid ? '' : errorMessage);
+    setErrorMessage(isValid ? '' : validationError);
+    setCardNumbers(formatted);
   };
 
   return {
     cardNumbers,
+    cardType: cardBrandInfo(cardNumbers)?.brand,
+    isValid: Boolean(errorMessage),
     errorMessage,
     handleCardNumberChange,
   };
