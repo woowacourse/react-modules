@@ -54,14 +54,15 @@ function InputField({ title, label, error, children }: InputFieldProps) {
 }
 
 const CardNumberInput = () => {
-  const { cardNumbers, onChangeHandler, error } = useCardNumbersInput();
+  const { cardNumberGroups, cardBrand, onChangeHandler, error } = useCardNumbersInput();
   return (
     <InputField title="카드 번호" label="라벨 cardNumbers" error={error}>
       <Input type="text" name="0" onChange={onChangeHandler} autoFocus />
       <Input type="text" name="1" onChange={onChangeHandler} autoFocus />
       <Input type="text" name="2" onChange={onChangeHandler} autoFocus />
       <Input type="text" name="3" onChange={onChangeHandler} autoFocus />
-      <p>인풋 실시간 value : {cardNumbers}</p>
+      <p>실시간 value : {cardNumberGroups.join(' ')}</p>
+      <p>카드사 value : {cardBrand}</p>
     </InputField>
   );
 };

@@ -1,5 +1,5 @@
 import { validatorUtils } from './utils/validateUtils';
-import { VALIDATION_LENGTH } from './constants/validationRules';
+import { BRAND_CARD_NUMBER_LENGTH, VALIDATION_LENGTH } from './constants/validationRules';
 
 export function validateExpirationDateMonth(month: string) {
   const errorResult = {
@@ -36,15 +36,26 @@ export function validatePassword(password: string) {
 export function validateCardNumber(cardNumber: string) {
   return {
     IS_NUMBER_STRING: validatorUtils.isNumber(cardNumber),
-    IS_VALID_LENGTH: validatorUtils.isValidLength(cardNumber, VALIDATION_LENGTH.CARD_NUMBER),
   };
 }
 
-export function validateFullCardNumber(fullCardNumber: string) {
+export function validateFullCardNumber(cardBrand: string, fullCardNumber: string) {
+  if (!cardBrand || cardBrand === 'UNKNOWN') {
+    return {};
+  }
+
+  if (!(cardBrand in BRAND_CARD_NUMBER_LENGTH)) {
+    return {};
+  }
+
+  const isValid = validatorUtils.isValidLength(
+    fullCardNumber.replace(/\D/g, ''),
+    BRAND_CARD_NUMBER_LENGTH[cardBrand as keyof typeof BRAND_CARD_NUMBER_LENGTH],
+  );
+
+  const errorKey = `IS_VALID_FULL_LENGTH_BRAND_${cardBrand}`;
+
   return {
-    IS_VALID_NUMBERS_FULL_LENGTH: validatorUtils.isValidLength(
-      fullCardNumber,
-      VALIDATION_LENGTH.CARD_NUMBER_FULL,
-    ),
+    [errorKey]: isValid,
   };
 }
