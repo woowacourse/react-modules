@@ -1,6 +1,6 @@
 {
   "name": "payments-modal-component",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "description": "payments modal component",
   "type": "module",
   "types": "dist/index.d.ts",

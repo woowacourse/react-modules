@@ -1,4 +1,4 @@
-# 💳 useCardFormHooks
+# 💳 React Payments Custom Hooks Library
 
 Reusable React custom hooks for building validated credit card forms. Supports card number, expiration date, and CVC input with automatic brand detection and validation.
 
