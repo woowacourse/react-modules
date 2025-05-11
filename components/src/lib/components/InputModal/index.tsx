@@ -38,6 +38,10 @@ export const InputModal = ({
         justify="flex-start"
         gap={1}
         padding="1rem 0 0 0"
+        onSubmit={(e) => {
+          e.preventDefault();
+          onSubmit();
+        }}
       >
         <Input autoFocus size={2.25} value={value} onChange={onChange} placeholder={placeholder} />
         <Flex gap="0.5rem" justify="flex-end">
@@ -51,7 +55,7 @@ export const InputModal = ({
           >
             취소
           </Button>
-          <Button size="md" width={position === 'center' ? '20%' : '100%'} onClick={onSubmit}>
+          <Button size="md" width={position === 'center' ? '20%' : '100%'}>
             확인
           </Button>
         </Flex>
