@@ -12,7 +12,7 @@ Reusable React custom hooks for building validated credit card forms. Supports c
 ## 🚀 Usage - example
 
 ```tsx
-import { useCardNumber, useExpirationDate, useCardCVC } from 'use-card-form-hooks';
+import { useCardNumber, useExpirationDate, useCardCVC } from '@your-org/payments-custom-hooks';
 
 const CardForm = () => {
   const {

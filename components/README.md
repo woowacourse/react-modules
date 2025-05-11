@@ -15,7 +15,7 @@ A customizable, accessible modal component library for React applications, suppo
 ### Basic Example
 
 ```tsx
-import Modal from 'your-modal-library-name';
+import Modal from '@your-org/payments-modal-component';
 
 <Modal
   isOpen={isModalOpen}
@@ -57,18 +57,18 @@ import Modal from 'your-modal-library-name';
 
 ## Props
 
-| Prop        | Type                                           | Description                                    | Required |
-| ----------- | ---------------------------------------------- | ---------------------------------------------- | -------- |
-| `isOpen`    | `boolean`                                      | Whether the modal is open                      | No       |
-| `onClose`   | `() => void`                                   | Function to call when modal closes             | Yes      |
-| `type`      | `'alert' \| 'confirm' \| 'prompt' \| 'custom'` | Type of modal to render                        | No       |
-| `title`     | `string`                                       | Title of the modal                             | No       |
-| `message`   | `string`                                       | Message to display inside alert/confirm modals | No       |
-| `onConfirm` | `() => void`                                   | Confirm action for `confirm` modals            | No       |
-| `onSubmit`  | `(value: string) => void`                      | Submit handler for `prompt` modals             | No       |
-| `children`  | `React.ReactNode`                              | Custom modal content for `custom` type         | No       |
-| `size`      | `'small' \| 'medium' \| 'large'`               | Modal size                                     | No       |
-| `position`  | `'top' \| 'center' \| 'bottom'`                | Modal position on screen                       | No       |
+| Prop        | Type                                           | Description                             | Required    | Default    |
+| ----------- | ---------------------------------------------- | --------------------------------------- | ----------- | ---------- |
+| `isOpen`    | `boolean`                                      | Whether the modal is open               | No          | `false`    |
+| `onClose`   | `() => void`                                   | Called when modal is closed             | Yes         | –          |
+| `type`      | `'alert' \| 'confirm' \| 'prompt' \| 'custom'` | Type of modal to render                 | No          | `'custom'` |
+| `title`     | `string`                                       | Title displayed at the top of the modal | No          | `''`       |
+| `message`   | `string`                                       | Message for `alert` or `confirm` modals | No          | `''`       |
+| `onConfirm` | `() => void`                                   | Required if `type="confirm"`            | Conditional | –          |
+| `onSubmit`  | `(value: string) => void`                      | Required if `type="prompt"`             | Conditional | –          |
+| `children`  | `React.ReactNode`                              | Custom content, used in `type="custom"` | No          | `null`     |
+| `size`      | `'small' \| 'medium' \| 'large'`               | Modal size                              | No          | `'medium'` |
+| `position`  | `'top' \| 'center' \| 'bottom'`                | Modal position on screen                | No          | `'center'` |
 
 ## Accessibility
 
