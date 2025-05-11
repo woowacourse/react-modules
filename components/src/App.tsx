@@ -24,7 +24,6 @@ function App() {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  // 사용자 정의 Form 모달 - 포커스 트랩 테스트용
   const renderFormModal = () => (
     <Modal onClose={handleClose} modalType="alert" modalSize="large">
       <Modal.Header>
@@ -162,7 +161,7 @@ function App() {
         </button>
         <button
           onClick={() => {
-            setModalType("confirm"); // 새로운 모달 타입 추가
+            setModalType("confirm");
             setIsOpen(true);
           }}
         >
