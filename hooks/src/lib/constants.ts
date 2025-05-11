@@ -6,6 +6,15 @@ export const CARD_NUMBERS_KEY = {
 };
 export type CardNumbersKey = keyof typeof CARD_NUMBERS_KEY;
 
+export const NETWORK = {
+  visa: 'visa',
+  master: 'master',
+  diners: 'diners',
+  amex: 'amex',
+  union: 'union',
+};
+export type NetworkType = keyof typeof NETWORK;
+
 export const EXPIRY_DATE_KEY = {
   month: 'month',
   year: 'year',
