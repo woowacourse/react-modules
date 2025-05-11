@@ -34,6 +34,24 @@ export const validateCardNumber = (
     }
   }
 
+  if (cardType === "visa") {
+    if (cardNumber.length !== 16) {
+      return {
+        isValid: false,
+        errorMessage: "Visa 카드 번호는 16자리여야 합니다.",
+      };
+    }
+  }
+
+  if (cardType === "mastercard") {
+    if (cardNumber.length !== 16) {
+      return {
+        isValid: false,
+        errorMessage: "MasterCard 카드 번호는 16자리여야 합니다.",
+      };
+    }
+  }
+
   if (cardType === "unionpay") {
     if (cardNumber.length !== 16) {
       return {

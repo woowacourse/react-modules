@@ -41,6 +41,16 @@ describe("useCardNumber", () => {
       result.current.handleCardNumberChange("6221261234567890");
     });
     expect(result.current.cardType).toBe("unionpay");
+
+    act(() => {
+      result.current.handleCardNumberChange("4123456789012345");
+    });
+    expect(result.current.cardType).toBe("visa");
+
+    act(() => {
+      result.current.handleCardNumberChange("5123456789012345");
+    });
+    expect(result.current.cardType).toBe("mastercard");
   });
 
   it("카드 번호가 올바르게 포맷팅되어야 한다.", () => {
@@ -60,5 +70,15 @@ describe("useCardNumber", () => {
       result.current.handleCardNumberChange("6221261234567890");
     });
     expect(result.current.getFormattedCardNumber()).toBe("6221 2612 3456 7890");
+
+    act(() => {
+      result.current.handleCardNumberChange("4123456789012345");
+    });
+    expect(result.current.getFormattedCardNumber()).toBe("4123 4567 8901 2345");
+
+    act(() => {
+      result.current.handleCardNumberChange("5123456789012345");
+    });
+    expect(result.current.getFormattedCardNumber()).toBe("5123 4567 8901 2345");
   });
 });

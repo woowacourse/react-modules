@@ -13,9 +13,20 @@ const useCardNumber = (initialState: string = "") => {
   };
 
   const getCardType = () => {
+    const firstDigit = cardNumber.substring(0, 1);
     const firstTwoDigits = cardNumber.substring(0, 2);
     const firstFourDigits = cardNumber.substring(0, 4);
     const firstSixDigits = cardNumber.substring(0, 6);
+
+    // Visa: 4로 시작하는 16자리
+    if (firstDigit === "4") {
+      return "visa";
+    }
+
+    // MasterCard: 51-55로 시작하는 16자리
+    if (firstTwoDigits >= "51" && firstTwoDigits <= "55") {
+      return "mastercard";
+    }
 
     // Diners: 36으로 시작하는 14자리
     if (firstTwoDigits === "36") {
@@ -61,6 +72,9 @@ const useCardNumber = (initialState: string = "") => {
     } else if (cardType === "amex") {
       // 3412 345678 90123
       return cardNumber.replace(/(\d{4})(\d{6})(\d{5})/, "$1 $2 $3");
+    } else if (cardType === "visa" || cardType === "mastercard") {
+      // 4123 4567 8901 2345
+      return cardNumber.replace(/(\d{4})(\d{4})(\d{4})(\d{4})/, "$1 $2 $3 $4");
     } else if (cardType === "unionpay") {
       // 6221 2612 3456 7890
       return cardNumber.replace(/(\d{4})(\d{4})(\d{4})(\d{4})/, "$1 $2 $3 $4");
