@@ -19,7 +19,7 @@ function ConfirmModal({
   return (
     <Modal onClose={onClose}>
       <Modal.BackDrop />
-      <S.CustomContent position={position ?? 'center'} size={size}>
+      <S.CustomContent position={position} size={size}>
         <S.CustomTitle>{title}</S.CustomTitle>
         {description && <S.CustomDescription>{description}</S.CustomDescription>}
         <S.CustomButtonWrapper>
