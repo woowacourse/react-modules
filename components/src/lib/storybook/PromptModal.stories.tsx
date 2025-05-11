@@ -15,6 +15,7 @@ type PromptModalStoryProps = PromptModalProps & {
 const meta: Meta<PromptModalStoryProps> = {
   title: 'PromptModal',
   component: PromptModal,
+  tags: ['autodocs'],
   args: {
     title: 'PromptModal 제목',
     content: 'PromptModal 내용',

@@ -13,6 +13,7 @@ type ModalStoryProps = ModalProps & {
 const meta: Meta<ModalStoryProps> = {
   title: 'Modal',
   component: Modal,
+  tags: ['autodocs'],
   args: {
     position: 'center',
     title: '모달 제목',

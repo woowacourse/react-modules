@@ -13,6 +13,7 @@ type AlertModalStoryProps = AlertModalProps & {
 const meta: Meta<AlertModalStoryProps> = {
   title: 'AlertModal',
   component: AlertModal,
+  tags: ['autodocs'],
   args: {
     position: 'center',
     title: 'AlertModal 제목',

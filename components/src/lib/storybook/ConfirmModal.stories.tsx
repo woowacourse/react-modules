@@ -14,6 +14,7 @@ type ConfirmModalStoryProps = ConfirmModalProps & {
 const meta: Meta<ConfirmModalStoryProps> = {
   title: 'ConfirmModal',
   component: ConfirmModal,
+  tags: ['autodocs'],
   args: {
     title: 'ConfirmModal 제목',
     content: 'ConfirmModal 내용',
