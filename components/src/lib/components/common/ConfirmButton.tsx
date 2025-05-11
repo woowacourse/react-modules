@@ -1,5 +1,5 @@
 import { css } from '@emotion/css';
-import { useModalContext } from '../ModalContext';
+import { useModalContext } from '../../ModalContext';
 
 const ConfirmButton = () => {
   const { onClose } = useModalContext();
@@ -23,5 +23,10 @@ const ConfirmButtonStyle = css`
 
   &:focus {
     outline: none;
+  }
+
+  &:hover {
+    border: 1px solid #333333;
+    background-color: #111111;
   }
 `;

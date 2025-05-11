@@ -1,6 +1,6 @@
 import './App.css';
 import { css } from '@emotion/css';
-import Modal from './lib/Modal';
+import Modal from './lib/components/Modal/Modal';
 import useModal from './lib/hooks/useModal';
 
 function App() {
@@ -27,7 +27,14 @@ function App() {
       <button className={OpenButton} onClick={handleOpen}>
         열기
       </button>
-      <Modal isOpen={isOpen} position="center" onAfterOpen={handleAfterOpen} onClose={handleClose} type="prompt">
+      <Modal
+        isOpen={isOpen}
+        position="center"
+        onAfterOpen={handleAfterOpen}
+        onClose={handleClose}
+        type="prompt"
+        size="large"
+      >
         <Modal.Header title="알림" showCloseButton />
         <Modal.Body>
           <ModalContent />

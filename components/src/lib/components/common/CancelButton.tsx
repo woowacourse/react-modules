@@ -1,5 +1,5 @@
 import { css } from '@emotion/css';
-import { useModalContext } from '../ModalContext';
+import { useModalContext } from '../../ModalContext';
 
 const CancelButton = () => {
   const { onClose } = useModalContext();
@@ -23,5 +23,10 @@ const CancelButtonStyle = css`
 
   &:focus {
     outline: none;
+  }
+
+  &:hover {
+    border: 1px solid #c9c9c9;
+    background-color: #c9c9c9;
   }
 `;

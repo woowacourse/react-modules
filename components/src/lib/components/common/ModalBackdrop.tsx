@@ -1,6 +1,6 @@
 import { css } from '@emotion/css';
 import { MouseEvent, PropsWithChildren } from 'react';
-import { useModalContext } from '../ModalContext';
+import { useModalContext } from '../../ModalContext';
 
 const ModalBackdrop: React.FC<PropsWithChildren> = ({ children }) => {
   const context = useModalContext();

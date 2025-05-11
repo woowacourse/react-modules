@@ -1,14 +1,14 @@
 import { Children, isValidElement, PropsWithChildren, useEffect } from 'react';
 import { css } from '@emotion/css';
-import { ModalProps, Position } from './Modal.type';
-import ModalBackdrop from './components/ModalBackdrop';
-import ModalHeader from './components/ModalHeader';
-import useModalKeyboard from './hooks/useModalKeyboard';
-import { ModalProvider, useModalContext } from './ModalContext';
-import ConfirmButton from './components/ConfirmButton';
-import CancelButton from './components/CancelButton';
+import { ModalProps, ModalSize, Position } from '../../Modal.type';
+import ModalBackdrop from '../common/ModalBackdrop';
+import ModalHeader from '../common/ModalHeader';
+import useModalKeyboard from '../../hooks/useModalKeyboard';
+import { ModalProvider, useModalContext } from '../../ModalContext';
+import ConfirmButton from '../common/ConfirmButton';
+import CancelButton from '../common/CancelButton';
 
-const Modal = ({ children, position, isOpen, onClose, onAfterOpen, type }: ModalProps) => {
+const Modal = ({ children, position, isOpen, onClose, onAfterOpen, type, size }: ModalProps) => {
   if (!isOpen) return null;
 
   useEffect(() => {
@@ -20,7 +20,7 @@ const Modal = ({ children, position, isOpen, onClose, onAfterOpen, type }: Modal
   return (
     <ModalProvider onClose={onClose}>
       <ModalBackdrop>
-        <div className={ModalFrame(position)} data-testid="modal">
+        <div className={ModalFrame(position, size)} data-testid="modal">
           {children}
           {Children.toArray(children).every((child) => isValidElement(child) && child.type !== Modal.Actions) && (
             <div className={ButtonBar}>
@@ -50,11 +50,20 @@ Modal.Actions = function Actions({ children }: PropsWithChildren) {
 
 export default Modal;
 
+const ModalSizeStyle = {
+  small: css`
+    width: 320px;
+  `,
+  medium: css`
+    width: 480px;
+  `,
+  large: css`
+    width: 600px;
+  `,
+};
+
 const modalPositionStyle = {
   center: css`
-    width: 100%;
-    min-width: 300px;
-    max-width: 80dvw;
     border-radius: 8px;
   `,
   bottom: css`
@@ -65,7 +74,7 @@ const modalPositionStyle = {
   `,
 };
 
-const ModalFrame = (position: Position) => css`
+const ModalFrame = (position: Position, size: ModalSize) => css`
   background-color: white;
   padding: 20px;
   display: flex;
@@ -73,6 +82,7 @@ const ModalFrame = (position: Position) => css`
   align-items: center;
   justify-content: center;
   gap: 20px;
+  ${ModalSizeStyle[size]}
   ${modalPositionStyle[position]}
 `;
 
