@@ -1,4 +1,4 @@
-import { CARD_TYPE } from "../useCardNumbers/type";
+import { CARD_TYPE } from "./type";
 
 const CARD_NUMBER_RULE = {
   VISA_TYPE_MAX_LENGTH: 1,

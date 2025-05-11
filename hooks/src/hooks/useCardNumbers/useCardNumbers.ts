@@ -1,7 +1,7 @@
 import { useState, useMemo } from "react";
 import { ValidationResult } from "./type";
 import { ErrorType } from "../../types/ErrorType";
-import { getCardCompany } from "../useCardCompany/useCardCompany";
+import { getCardCompany } from "../useCardCompany/getCardCompany";
 
 const CARD_NUMBER_RULE = {
   INVALID_LENGTH_ERROR: "카드 번호는 4자리로 입력해 주세요.",
