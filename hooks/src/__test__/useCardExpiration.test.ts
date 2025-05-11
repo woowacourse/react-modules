@@ -22,6 +22,17 @@ describe('useCardExpiration 훅 테스트', () => {
     expect(result.current.errorInfo.month.errorText).toBe('입력값이 최대 길이를 초과했습니다.');
   });
 
+  it.each(['0', '13'])(
+    '월에 01~12 사이가 아닌 값(%s)을 입력하면 isError: true와 에러 메세지를 반환한다.',
+    (overInput) => {
+      const { result } = renderHook(() => useCardExpirationInput());
+
+      act(() => result.current.setCardExpirationValue.month(overInput));
+      expect(result.current.errorInfo.month.isError).toBe(true);
+      expect(result.current.errorInfo.month.errorText).toBe('월은 01 ~ 12 사이의 숫자여야 합니다.');
+    }
+  );
+
   it.each(['-1', '0.5', 'hey'])(
     '년도에 숫자가 아닌 값(%s)을 입력하면 isError: true와 에러 메세지를 반환한다.',
     (value) => {
