@@ -30,7 +30,7 @@ const useModalFocus = (isOpen: boolean) => {
       }
     };
     document.addEventListener("keydown", handleKeyDown);
-    firstElement.focus();
+    if (firstElement) firstElement.focus();
   }, [isOpen]);
 
   return { modalRef };

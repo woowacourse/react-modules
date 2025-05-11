@@ -40,7 +40,7 @@ function getSize(size: "small" | "medium" | "large") {
     case "medium":
       return "200px";
     case "large":
-      return "400px";
+      return "100%";
     default:
       return "100%";
   }
