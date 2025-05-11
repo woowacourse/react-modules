@@ -29,14 +29,15 @@ export default function useCardNumber() {
     },
   });
 
-  const formattedCardNumber = formatCardNumber(cardNumber.cardNumber, getCardBrand(cardNumber.cardNumber));
+  const brand = getCardBrand(cardNumber.cardNumber);
+  const formattedCardNumber = formatCardNumber(cardNumber.cardNumber, brand);
 
   return {
     cardNumberErrors,
     cardNumber,
     formattedCardNumber,
     cardNumberRegister,
-    brand: getCardBrand(cardNumber.cardNumber),
+    brand,
     isCardNumberValid,
   };
 }
