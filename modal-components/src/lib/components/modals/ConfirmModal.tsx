@@ -23,7 +23,7 @@ const ConfirmModal = ({
 }: ConfirmModalProps) => {
   const footer = (
     <ButtonContainer>
-      <Button widthSize="80px" onClick={onCancel} variant="secondary">
+      <Button widthSize="80px" onClick={onCancel} variant="secondary" autoFocus>
         취소
       </Button>
       <Button widthSize="80px" onClick={onConfirm} variant="primary">

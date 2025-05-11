@@ -35,7 +35,7 @@ const PromptModal = ({
 
   const customForm = (
     <form>
-      <Input />
+      <Input autoFocus />
     </form>
   );
 

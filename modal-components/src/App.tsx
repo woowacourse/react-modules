@@ -149,6 +149,7 @@ function App({
           closeType={closeType}
           titleText={titleText}
           onClose={handleClose}
+          isCloseFocus={true}
         >
           <CardNumberInput />
           <CardCVCInput />

@@ -8,6 +8,7 @@ const BasicModal = ({
   children,
   closeType,
   onClose,
+  isCloseFocus = false,
 }: ModalProps) => {
   return (
     <ModalLayout
@@ -16,6 +17,7 @@ const BasicModal = ({
       titleText={titleText}
       closeType={closeType}
       onClose={onClose}
+      isCloseFocus={isCloseFocus}
     >
       {children}
     </ModalLayout>

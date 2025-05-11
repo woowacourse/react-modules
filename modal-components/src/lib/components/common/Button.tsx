@@ -37,6 +37,10 @@ const StyledButton = styled.button<{
       &:active {
         background-color: #111;
       }
+      &:focus {
+        border: 1px solid #ffffff;
+        outline: 2px solid #0d61f1;
+      }
       `
       : `
       background-color: white;
@@ -47,6 +51,10 @@ const StyledButton = styled.button<{
       }
       &:active {
         background-color: #e5e5e5;
+      }
+      &:focus {
+        border: 1px solid #ffffff;
+        outline: 2px solid #0d61f1;
       }
       `}
 

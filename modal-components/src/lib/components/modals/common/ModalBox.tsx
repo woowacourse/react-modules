@@ -8,6 +8,7 @@ const ModalBox = ({
   children,
   closeType,
   onClose,
+  isCloseFocus = false,
 }: ModalProps) => {
   const hasHeaderCloseButton = closeType === "top" ? true : false;
   const hasBottomCloseButton = closeType === "bottom" ? true : false;
@@ -17,10 +18,16 @@ const ModalBox = ({
         titleText={titleText}
         hasCloseButton={hasHeaderCloseButton}
         onClose={onClose}
+        isCloseFocus={isCloseFocus}
       />
       {children}
       {hasBottomCloseButton && (
-        <ModalBottomCloseBtn onClick={onClose}>닫기</ModalBottomCloseBtn>
+        <ModalBottomCloseBtn
+          onClick={onClose}
+          {...(isCloseFocus ? { autoFocus: true } : {})}
+        >
+          닫기
+        </ModalBottomCloseBtn>
       )}
     </ModalBoxContainer>
   );

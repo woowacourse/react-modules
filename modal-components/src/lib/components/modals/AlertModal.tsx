@@ -21,7 +21,7 @@ const AlertModal = ({
 }: ConfirmModalProps) => {
   const footer = (
     <ButtonContainer>
-      <Button widthSize="80px" onClick={onConfirm} variant="primary">
+      <Button widthSize="80px" onClick={onConfirm} variant="primary" autoFocus>
         확인
       </Button>
     </ButtonContainer>

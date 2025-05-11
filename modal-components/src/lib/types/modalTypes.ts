@@ -7,6 +7,7 @@ export interface ModalProps {
   onClose: () => void;
   footer?: React.ReactNode;
   descriptionText?: string;
+  isCloseFocus?: boolean;
 }
 
 export interface ConfirmModalProps extends ModalProps {
@@ -27,6 +28,7 @@ export interface ModalHeaderProps {
   titleText: string;
   hasCloseButton: boolean;
   onClose?: () => void;
+  isCloseFocus?: boolean;
 }
 
 export interface ModalStyledProps {

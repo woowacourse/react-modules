@@ -18,6 +18,7 @@ const ModalLayout = ({
   closeType,
   onClose,
   footer,
+  isCloseFocus = false,
 }: ModalProps) => {
   useEscapeKeyClose(onClose);
 
@@ -31,6 +32,7 @@ const ModalLayout = ({
             titleText={titleText}
             closeType={closeType}
             onClose={onClose}
+            isCloseFocus={isCloseFocus}
           >
             {descriptionText && (
               <p
