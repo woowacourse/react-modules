@@ -3,6 +3,8 @@ import useCardNumbers from './useCardNumbers';
 import { ERROR_MESSAGE } from '../constants/errorMessage';
 import {
   getCardNumberLength,
+  getFormat,
+  getFormattedNumber,
   identifyCardBrand,
 } from '../utils/cardBrandUtils';
 import { CARD_BRAND_INFO } from '../constants/cardBrandRule';
@@ -140,4 +142,26 @@ describe('카드사별 카드 번호 길이 테스트', () => {
       );
     }
   );
+});
+
+describe('카드사별 포맷팅 테스트', () => {
+  test.each([
+    ['Visa', '4123123412341234'],
+    ['Master', '5123123412341234'],
+    ['Diners', '36111111111111'],
+    ['AMEX', '341111111111111'],
+    ['UnionPay', '6282111111111111'],
+  ])('%s 카드사 포맷팅 테스트', (_, number) => {
+    const { result } = renderHook(() => useCardNumbers());
+
+    const cardBrand = identifyCardBrand(number);
+    const format = getFormat(cardBrand);
+    const formattedNumber = getFormattedNumber(number, format) || '';
+
+    act(() => {
+      result.current.handleCardNumbers(number);
+    });
+
+    expect(result.current.formattedNumber).toBe(formattedNumber);
+  });
 });

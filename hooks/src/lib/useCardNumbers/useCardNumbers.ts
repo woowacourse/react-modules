@@ -12,11 +12,12 @@ import { ErrorType } from '../types/errorType';
 import {
   getCardNumberLength,
   getFormat,
+  getFormattedNumber,
   identifyCardBrand,
 } from '../utils/cardBrandUtils';
 
 type ValitationResult = {
-  numbers: string;
+  formattedNumber: string;
   cardBrand: string;
   error: ErrorType;
   handleCardNumbers: (value: string) => void;
@@ -33,6 +34,9 @@ export default function useCardNumbers(): ValitationResult {
   const cardNumberLength = getCardNumberLength(cardBrand);
   const format = getFormat(cardBrand);
 
+  const digits = numbers.replace(/\s/g, '');
+  const formattedNumber = getFormattedNumber(digits, format) || '';
+
   const updateError = (args: UpdateErrorArgs) => {
     setError({
       isValid: args.isValid,
@@ -41,13 +45,14 @@ export default function useCardNumbers(): ValitationResult {
   };
 
   const handleCardNumbers = (value: string) => {
-    if (isOverInputLength(value, cardNumberLength)) return;
+    const digits = value.replace(/\s/g, '');
+    if (isOverInputLength(digits, cardNumberLength)) return;
 
-    setNumbers(value);
+    setNumbers(digits);
   };
 
   useEffect(() => {
-    validate(numbers, cardBrand, cardNumberLength);
+    validate(digits, cardBrand, cardNumberLength);
   }, [numbers, cardBrand, cardNumberLength]);
 
   const validate = (value: string, brand: string, length: number) => {
@@ -65,7 +70,6 @@ export default function useCardNumbers(): ValitationResult {
     }
 
     if (!isValidCardBrand(brand)) {
-      console.log('barnd', brand);
       updateError({
         isValid: true,
         errorMessage: ERROR_MESSAGE.CARD_NUMBERS.INVALID_NUMBER,
@@ -80,12 +84,12 @@ export default function useCardNumbers(): ValitationResult {
       });
       return;
     }
-    console.log('before false');
+
     updateError({ isValid: false });
   };
 
   return {
-    numbers,
+    formattedNumber,
     cardBrand: identifyCardBrand(numbers),
     error,
     handleCardNumbers,

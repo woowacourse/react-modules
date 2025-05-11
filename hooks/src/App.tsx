@@ -15,7 +15,7 @@ import { useCardNumbers } from './lib';
 
 function App() {
   const {
-    numbers,
+    formattedNumber,
     cardBrand,
     error: cardNumbersError,
     handleCardNumbers,
@@ -30,7 +30,7 @@ function App() {
         <h1>CardNumbers</h1>
         <input
           type="text"
-          value={numbers}
+          value={formattedNumber}
           onChange={(e) => handleCardNumbers(e.target.value)}
         />
         <p>{cardBrand !== 'Unknown' ? cardBrand : ''}</p>
