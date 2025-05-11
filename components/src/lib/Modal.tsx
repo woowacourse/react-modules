@@ -79,7 +79,7 @@ const Modal = ({
     <ModalContext.Provider value={{ onHide }}>
       <div css={ModalWrapperStyle(show)}>
         <div css={backGroundStyle(background)} onClick={onHide}></div>
-        <div  ref={containerRef}  css={ModalContainerStyle(position, gap, size)}>
+        <div ref={containerRef} css={ModalContainerStyle(position, gap, size)}>
           {children}
         </div>
       </div>
