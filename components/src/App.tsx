@@ -1,6 +1,5 @@
 import { useState } from "react";
-import { Modal } from "bunju-react-modal";
-import { ModalType } from "bunju-react-modal/dist/lib/Modal";
+import { Modal, ModalType } from "bunju-react-modal";
 
 function App() {
   const [isOpen, setIsOpen] = useState(false);
