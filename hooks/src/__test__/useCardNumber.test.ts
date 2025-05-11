@@ -1,10 +1,7 @@
 import { renderHook } from "@testing-library/react";
 import { act } from "react";
-import {
-  defaultValidationValue,
-  ERROR_MESSAGE,
-} from "../lib/constants/validation";
-import useCardNumber from "../lib/hooks/useCardNumber";
+import { defaultValidationValue, ERROR_MESSAGE } from "../constants/validation";
+import useCardNumber from "../hooks/useCardNumber";
 
 describe("useCardNumber", () => {
   it("초깃값은 카드 번호가 빈 문자열이고, 유효성 검증 상태가 초기 상태(에러 없음)이어야 한다.", () => {
