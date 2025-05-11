@@ -44,10 +44,10 @@
 ## 2단계 기능 구현 목록 
 
 ### 컴포넌트 
-- [] Button 구현
-- [] Input 구현
-- [] Flex 구현
-- [] Loading 구현 
+- [x] Button 구현
+- [x] Input 구현
+- [x] Flex 구현
+- [x] Loading 구현 
 - [] Modal 
     - [] Modal Header, Content 분리
     - [] Modal Focus hook 구현
