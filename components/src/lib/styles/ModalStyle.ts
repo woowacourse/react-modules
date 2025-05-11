@@ -1,12 +1,12 @@
 import styled from '@emotion/styled';
-import { ModalTypeProps, ModalTypeAndSizeProps } from '../types/modalTypes';
+import { ModalPositionProps, ModalPositionAndSizeProps } from '../types/modalTypes';
 
-export const ModalContainer = styled.div<ModalTypeProps>`
+export const ModalContainer = styled.div<ModalPositionProps>`
   width: 100%;
   height: 100%;
   display: flex;
   justify-content: center;
-  align-items: ${({ modalType }) => (modalType === 'center' ? 'center' : 'flex-end')};
+  align-items: ${({ modalPosition }) => (modalPosition === 'center' ? 'center' : 'flex-end')};
   position: fixed;
   top: 0;
   left: 0;
@@ -36,10 +36,10 @@ export const Wrapper = styled.div`
   align-items: center;
 `;
 
-export const ModalBoxContainer = styled.div<ModalTypeAndSizeProps>`
-  width: ${({ modalType }) => (modalType === 'center' ? '70%' : '100%')};
-  max-width: ${({ modalType, modalSize }) => {
-    if (modalType === 'bottom') return 'none';
+export const ModalBoxContainer = styled.div<ModalPositionAndSizeProps>`
+  width: ${({ modalPosition }) => (modalPosition === 'center' ? '70%' : '100%')};
+  max-width: ${({ modalPosition, modalSize }) => {
+    if (modalPosition === 'bottom') return 'none';
     if (!modalSize) return '480px';
 
     switch (modalSize) {
@@ -59,8 +59,8 @@ export const ModalBoxContainer = styled.div<ModalTypeAndSizeProps>`
   flex-direction: column;
   background-color: #ffffff;
   padding: 1.5rem;
-  border-radius: ${({ modalType }) =>
-    modalType === 'center' ? '0.5rem' : '0.5rem 0.5rem 0rem 0rem'};
+  border-radius: ${({ modalPosition }) =>
+    modalPosition === 'center' ? '0.5rem' : '0.5rem 0.5rem 0rem 0rem'};
 `;
 
 export const ModalHeaderContainer = styled.div`

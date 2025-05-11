@@ -16,7 +16,7 @@ function ModalOpenButton({ type }: { type: string }) {
 function Step1ModalContents() {
   return (
     <div className="button-container">
-      <ModalProvider modalType={'center'} closeType={'top'} titleText={'titleText'}>
+      <ModalProvider modalPosition={'center'} closeType={'top'} titleText={'titleText'}>
         <ModalOpenButton type="중앙(size 미지정)" />
         <Modal>
           <p style={{ color: 'black' }}>Test!!!!!!</p>
@@ -26,7 +26,7 @@ function Step1ModalContents() {
         </Modal>
       </ModalProvider>
 
-      <ModalProvider modalType={'bottom'} closeType={'top'} titleText={'titleText'}>
+      <ModalProvider modalPosition={'bottom'} closeType={'top'} titleText={'titleText'}>
         <ModalOpenButton type="하단(상단 닫기)" />
         <Modal>
           <p style={{ color: 'black' }}>Test!!!!!!</p>
@@ -36,7 +36,7 @@ function Step1ModalContents() {
         </Modal>
       </ModalProvider>
 
-      <ModalProvider modalType={'bottom'} closeType={'bottom'} titleText={'titleText'}>
+      <ModalProvider modalPosition={'bottom'} closeType={'bottom'} titleText={'titleText'}>
         <ModalOpenButton type="하단(하단 닫기)" />
         <Modal>
           <p style={{ color: 'black' }}>Test!!!!!!</p>
@@ -53,7 +53,7 @@ function Step2ModalContents() {
   return (
     <div className="button-container">
       <ModalProvider
-        modalType={'center'}
+        modalPosition={'center'}
         modalSize={'small'}
         closeType={'top'}
         titleText={'titleText'}
@@ -68,7 +68,7 @@ function Step2ModalContents() {
       </ModalProvider>
 
       <ModalProvider
-        modalType={'center'}
+        modalPosition={'center'}
         modalSize={'medium'}
         closeType={'top'}
         titleText={'titleText'}
@@ -83,7 +83,7 @@ function Step2ModalContents() {
       </ModalProvider>
 
       <ModalProvider
-        modalType={'center'}
+        modalPosition={'center'}
         modalSize={'large'}
         closeType={'top'}
         titleText={'titleText'}
@@ -97,7 +97,7 @@ function Step2ModalContents() {
         </Modal>
       </ModalProvider>
 
-      <ModalProvider modalType={'center'} closeType={'top'} titleText={'titleText'}>
+      <ModalProvider modalPosition={'center'} closeType={'top'} titleText={'titleText'}>
         <ModalOpenButton type="중앙(size 미지정)" />
         <Modal>
           <p style={{ color: 'black' }}>Test!!!!!!</p>

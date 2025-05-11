@@ -4,11 +4,11 @@ import { ModalBoxContainer, ModalBottomCloseBtn } from './styles/ModalStyle';
 import { ModalChildrenProps } from './types/modalTypes';
 
 const ModalBox = ({ children }: ModalChildrenProps) => {
-  const { modalType, modalSize, closeType, closeModalHandler } = useModal();
+  const { modalPosition, modalSize, closeType, closeModalHandler } = useModal();
   const hasHeaderCloseButton = closeType === 'top' ? true : false;
 
   return (
-    <ModalBoxContainer modalType={modalType} modalSize={modalSize}>
+    <ModalBoxContainer modalPosition={modalPosition} modalSize={modalSize}>
       <ModalHeader />
       {children}
       {!hasHeaderCloseButton && (

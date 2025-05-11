@@ -5,7 +5,7 @@ import { useModal } from './contexts/ModalContext';
 import { ModalChildrenProps } from './types/modalTypes';
 
 const Modal = ({ children }: ModalChildrenProps) => {
-  const { isModalOpened, closeModalHandler, modalType } = useModal();
+  const { isModalOpened, closeModalHandler, modalPosition } = useModal();
 
   const handleKeyDown = (event: KeyboardEvent) => {
     if (event.key === 'Escape') {
@@ -25,7 +25,7 @@ const Modal = ({ children }: ModalChildrenProps) => {
   if (!isModalOpened) return null;
 
   return (
-    <ModalContainer modalType={modalType}>
+    <ModalContainer modalPosition={modalPosition}>
       <ModalBackdrop onClick={closeModalHandler} />
       <Container>
         <Wrapper>
