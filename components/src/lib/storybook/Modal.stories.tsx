@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import Modal from './Modal';
+import Modal from '../components/Modal';
 import { within, expect, userEvent, waitFor } from '@storybook/test';
 import type { ModalProps } from '../types/Modal.type';
 import useModal from '../hooks/useModal';
@@ -79,8 +79,11 @@ export const Default: Story = {
     expect(openButton).toBeDefined();
     userEvent.click(openButton);
 
-    const modal = canvas.getByRole('dialog', { name: '모달 제목' });
-    expect(modal).toBeDefined();
+    const dialog = await canvas.findByRole('dialog');
+    expect(dialog).toBeDefined();
+
+    const title = await canvas.findByText('모달 제목');
+    expect(title).toBeDefined();
 
     const content = canvas.getAllByText('모달 내용입니다.');
     expect(content).toBeDefined();
@@ -100,7 +103,7 @@ export const CenterWithAction: Story = {
     expect(openButton).toBeDefined();
     userEvent.click(openButton);
 
-    const modal = canvas.getByRole('dialog', { name: '모달 제목' });
+    const modal = await canvas.findByRole('dialog', { name: '모달 제목' });
     expect(modal).toBeDefined();
 
     const closeButton = canvas.getByRole('button', { name: '닫기' });
@@ -129,10 +132,13 @@ export const Bottom: Story = {
     expect(openButton).toBeDefined();
     userEvent.click(openButton);
 
-    const modal = canvas.getByRole('dialog', { name: '모달 제목' });
-    expect(modal).toBeDefined();
+    const dialog = await canvas.findByRole('dialog');
+    expect(dialog).toBeDefined();
 
-    expect(modal).toHaveStyle({
+    const title = await canvas.findByText('모달 제목');
+    expect(title).toBeDefined();
+
+    expect(dialog).toHaveStyle({
       position: 'absolute',
       bottom: '0',
     });
@@ -151,8 +157,11 @@ export const ESCClose: Story = {
     expect(openButton).toBeDefined();
     userEvent.click(openButton);
 
-    const modal = canvas.getByRole('dialog', { name: '모달 제목' });
-    expect(modal).toBeDefined();
+    const dialog = await canvas.findByRole('dialog');
+    expect(dialog).toBeDefined();
+
+    const title = await canvas.findByText('모달 제목');
+    expect(title).toBeDefined();
 
     await userEvent.keyboard('{Escape}');
     await waitFor(() => {
@@ -173,8 +182,11 @@ export const BackdropClose: Story = {
     expect(openButton).toBeDefined();
     userEvent.click(openButton);
 
-    const modal = canvas.getByRole('dialog', { name: '모달 제목' });
-    expect(modal).toBeDefined();
+    const dialog = await canvas.findByRole('dialog');
+    expect(dialog).toBeDefined();
+
+    const title = await canvas.findByText('모달 제목');
+    expect(title).toBeDefined();
 
     const backdrop = canvas.getByLabelText('modal-backdrop');
     expect(backdrop).toBeDefined();
