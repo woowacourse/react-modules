@@ -2,7 +2,6 @@ import { ReactNode } from "react";
 import CancelButton from "./CancelButton";
 import ConfirmButton from "./ConfirmButton";
 import { ButtonProps } from "../Common/Button/Button";
-import { ButtonGroupWrapper } from "../Common/ButtonGroup/ButtonGroup.styles";
 
 export interface ActionButtonsProps {
   confirmText?: ReactNode;
@@ -20,12 +19,12 @@ const ActionButtons = ({
   cancelProps = {},
 }: ActionButtonsProps) => {
   return (
-    <ButtonGroupWrapper>
+    <>
       <CancelButton {...cancelProps}>{cancelText}</CancelButton>
       <ConfirmButton onClick={onConfirm} {...confirmProps}>
         {confirmText}
       </ConfirmButton>
-    </ButtonGroupWrapper>
+    </>
   );
 };
 

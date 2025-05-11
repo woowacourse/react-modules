@@ -13,11 +13,11 @@ type Story = StoryObj<typeof ButtonGroup>;
 
 export const ConfirmButton: Story = {
   args: {
-    left: {
+    leftProps: {
       varient: "secondary",
       children: "취소",
     },
-    right: {
+    rightProps: {
       varient: "primary",
       children: "확인",
     },
@@ -26,11 +26,11 @@ export const ConfirmButton: Story = {
 
 export const ReverseConfirmButton: Story = {
   args: {
-    left: {
+    leftProps: {
       varient: "primary",
       children: "확인",
     },
-    right: {
+    rightProps: {
       varient: "secondary",
       children: "취소",
     },
