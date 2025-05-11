@@ -115,7 +115,7 @@ const useCardNumber = () => {
 
     let currentCardType: CardType = cardType;
 
-    if (newCardNumber.first.length === 4 && newCardNumber.second.length >= 4) {
+    if (newCardNumber.first.length + newCardNumber.second.length >= 6) {
       const cardBIN = newCardNumber.first + newCardNumber.second;
       currentCardType = getCardType(cardBIN) as CardType;
       setCardType(currentCardType);
