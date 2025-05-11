@@ -39,12 +39,14 @@ function Wrapper({ children, initialOpen = false }: StrictPropsWithChildren<Wrap
   const [isOpen, setIsOpen] = useState(initialOpen);
 
   useEffect(() => {
+    if (!isOpen) return;
+
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === 'Escape') setIsOpen(false);
     };
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, []);
+  }, [isOpen]);
 
   const close = () => setIsOpen(false);
   const open = () => setIsOpen(true);
@@ -168,8 +170,8 @@ function ConfirmButton({ ...props }: ButtonProps) {
   const { close } = useContext(ModalContext);
 
   const handleConfirmButtonClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-    close();
     props.onClick?.(event);
+    close();
   };
 
   return <Button onClick={handleConfirmButtonClick} {...props} />;
