@@ -67,7 +67,7 @@ export const Bottom: Story = {
     expect(openButton).toBeDefined();
     userEvent.click(openButton);
 
-    const title = await canvas.findByText('ConfirmModal');
+    const title = await canvas.findByText('PromptModal');
     expect(title).toBeDefined();
 
     const input = await canvas.findByRole('textbox');
@@ -101,7 +101,7 @@ export const medium: Story = {
     expect(openButton).toBeDefined();
     userEvent.click(openButton);
 
-    const title = await canvas.findByText('ConfirmModal');
+    const title = await canvas.findByText('PromptModal');
     expect(title).toBeDefined();
 
     const input = await canvas.findByRole('textbox');
