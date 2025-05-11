@@ -26,7 +26,7 @@ const CARD_BRAND = {
     condition: (value: string) => value.startsWith("36"),
   },
   Amex: {
-    length: 16,
+    length: 15,
     format: [4, 6, 5],
     condition: (value: string) =>
       value.startsWith("34") || value.startsWith("37"),
@@ -80,7 +80,7 @@ export default function useCardNumber(
     if (cardNumberLength && value.length < cardNumberLength) {
       setErrorMessage(
         customErrorMessage
-          ? `${cardNumberLength}${customErrorMessage}`
+          ? `${cardNumberLength}${customErrorMessage.length}`
           : `${cardNumberLength}자리를 입력해 주세요.`
       );
       return;
@@ -105,6 +105,10 @@ export default function useCardNumber(
   const formatCardNumber = () => {
     const pattern = CARD_BRAND[cardBrand()].format;
     let start = 0;
+
+    if (cardBrand() === "none") {
+      return cardNumber;
+    }
 
     return pattern
       .map((len) => {
