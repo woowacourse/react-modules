@@ -12,4 +12,5 @@ export const CARD_BRAND_INFO: Record<
   },
   Diners: { pattern: /^36/, length: 14, format: [4, 6, 4] },
   AMEX: { pattern: /^3[47]/, length: 15, format: [4, 6, 5] },
+  UNKNOWN: { pattern: /^4\d*/, length: 16, format: [4, 4, 4, 4] },
 };

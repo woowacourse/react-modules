@@ -7,10 +7,11 @@ export const identifyCardBrand = (numbers: string): string => {
   return 'Unknown';
 };
 
-export const getCardNumberLength = (brand: string) => {
-  return CARD_BRAND_INFO[brand]?.length;
+export const getCardNumberLength = (brand: string): number => {
+  console.log('unknown length:', CARD_BRAND_INFO['UNKNOWN'].length);
+  return CARD_BRAND_INFO[brand]?.length || CARD_BRAND_INFO['UNKNOWN'].length;
 };
 
-export const getFormat = (brand: string) => {
-  return CARD_BRAND_INFO[brand]?.length;
+export const getFormat = (brand: string): number[] => {
+  return CARD_BRAND_INFO[brand]?.format || CARD_BRAND_INFO['UNKNOWN'].format;
 };
