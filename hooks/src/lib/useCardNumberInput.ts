@@ -57,11 +57,11 @@ function formatCardNumber(value: string, brand: CardBrand): string {
 }
 
 export function useCardNumberInput(): {
-  value: string;
-  formattedValue: string;
+  cardNumber: string;
+  formattedCardNumber: string;
   brand: CardBrand;
-  errorMessage: string;
-  handleChange: (newValue: string) => void;
+  cardNumberError: string;
+  handleCardNumberChange: (newValue: string) => void;
 } {
   const { value, handleChange, errorMessage } = createCardFieldHook<string>('', [
     validateNumberError,
@@ -71,5 +71,11 @@ export function useCardNumberInput(): {
   const brand = useMemo(() => detectBrand(value), [value]);
   const formattedValue = useMemo(() => formatCardNumber(value, brand), [value, brand]);
 
-  return { value, formattedValue, brand, errorMessage, handleChange };
+  return {
+    cardNumber: value,
+    formattedCardNumber: formattedValue,
+    brand,
+    cardNumberError: errorMessage,
+    handleCardNumberChange: handleChange,
+  };
 }
