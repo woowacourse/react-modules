@@ -6,7 +6,7 @@ describe("usePassword", () => {
     const initialState = "";
     const { result } = renderHook(() => usePassword());
 
-    expect(result.current.state).toEqual(initialState);
+    expect(result.current.value).toEqual(initialState);
   });
 
   it("usePassword 상태를 변경할 수 있다.", () => {
@@ -19,14 +19,14 @@ describe("usePassword", () => {
       result.current.onChange(userInput);
     });
 
-    expect(result.current.state).toEqual(initialState);
+    expect(result.current.value).toEqual(initialState);
   });
 
   it("usePassword 초기 에러 상태가 반환된다.", () => {
-    const initialErrors = { password: false };
+    const initialError = false;
     const { result } = renderHook(() => usePassword());
 
-    expect(result.current.errors).toEqual(initialErrors);
+    expect(result.current.error).toEqual(initialError);
   });
 
   it("숫자가 아닌 값이 들어오면 에러메시지를 반환한다.", () => {
@@ -34,7 +34,7 @@ describe("usePassword", () => {
     const { result } = renderHook(() => usePassword());
 
     act(() => {
-      (result.current.validateInput as (value: string) => void)(userInput);
+      result.current.onChange(userInput);
     });
 
     expect(result.current.errorMessage).toBe("숫자만 입력 가능합니다.");
@@ -45,7 +45,7 @@ describe("usePassword", () => {
     const { result } = renderHook(() => usePassword());
 
     act(() => {
-      (result.current.validateInput as (value: string) => void)(userInput);
+      result.current.onChange(userInput);
     });
 
     expect(result.current.isErrorComplete).toBeTruthy();

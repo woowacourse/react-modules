@@ -6,7 +6,7 @@ describe("useCardNumber", () => {
     const initialState = "";
     const { result } = renderHook(() => useCardNumber());
 
-    expect(result.current.state).toEqual(initialState);
+    expect(result.current.value).toEqual(initialState);
   });
 
   it("useCardNumber 상태를 변경할 수 있다.", () => {
@@ -19,14 +19,14 @@ describe("useCardNumber", () => {
       result.current.onChange(userInput);
     });
 
-    expect(result.current.state).toEqual(initialState);
+    expect(result.current.value).toEqual(initialState);
   });
 
   it("useCardNumber 초기 에러 상태가 반환된다.", () => {
-    const initialErrors = { cardNumber: false };
+    const initialError = false;
     const { result } = renderHook(() => useCardNumber());
 
-    expect(result.current.errors).toEqual(initialErrors);
+    expect(result.current.error).toEqual(initialError);
   });
 
   it("숫자가 아닌 값이 들어오면 에러메시지를 반환한다.", () => {
@@ -34,7 +34,7 @@ describe("useCardNumber", () => {
     const { result } = renderHook(() => useCardNumber());
 
     act(() => {
-      result.current.validateInput(userInput);
+      result.current.onChange(userInput);
     });
 
     expect(result.current.errorMessage).toBe("숫자만 입력 가능합니다.");
@@ -45,7 +45,7 @@ describe("useCardNumber", () => {
     const { result } = renderHook(() => useCardNumber());
 
     act(() => {
-      result.current.validateInput(userInput);
+      result.current.onChange(userInput);
     });
 
     expect(result.current.isErrorComplete).toBeTruthy();
@@ -110,6 +110,6 @@ describe("현재 입력 값이 자동으로 카드사별 규칙에 맞게 카드
       result.current.onChange(userInput);
     });
 
-    expect(result.current.state).toBe(expected);
+    expect(result.current.value).toBe(expected);
   });
 });
