@@ -8,6 +8,8 @@ type CardCompany =
   | '하나카드'
   | '국민카드';
 
+type CardBrand = 'Visa' | 'Mastercard' | 'AMEX' | 'Diners' | 'UnionPay' | 'Unknown';
+
 interface CardExpiration {
   month: string;
   year: string;
@@ -23,4 +25,4 @@ interface validationResult {
   errorMessage?: string;
 }
 
-export type { CardCompany, CardExpiration, CardFieldHook, validationResult };
+export type { CardCompany, CardBrand, CardExpiration, CardFieldHook, validationResult };
