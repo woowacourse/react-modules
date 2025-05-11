@@ -50,7 +50,7 @@ function App() {
 
 ## 스토리북
 
-https://step1--6804bd5db0df970ca29a898f.chromatic.com
+https://step2--6804bd5db0df970ca29a898f.chromatic.com
 
 ## ✅ Props
 
