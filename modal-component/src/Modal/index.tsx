@@ -11,7 +11,6 @@ import CloseButton from './CloseButton';
 
 type ModalProps = {
   isOpen?: boolean;
-  defaultOpen?: boolean;
   onClose: () => void;
   children: React.ReactNode;
   position?: 'center' | 'bottom';
@@ -38,7 +37,6 @@ const Modal = ({
   position = 'center',
   size = 'small',
 }: ModalProps) => {
-
   const modalContextValue: ModalContextType = {
     onClose,
     children,
