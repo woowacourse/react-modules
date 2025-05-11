@@ -40,8 +40,8 @@ export interface ModalInterface {
   isBackdropClose?: boolean;
 }
 
-function Wrapper({ children }: { children: ReactNode }) {
-  const [isOpen, setIsOpen] = useState(true);
+function Wrapper({ children, initialOpen = false }: { children: ReactNode; initialOpen?: boolean }) {
+  const [isOpen, setIsOpen] = useState(initialOpen);
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {

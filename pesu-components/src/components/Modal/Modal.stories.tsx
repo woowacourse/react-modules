@@ -13,7 +13,7 @@ type Story = StoryObj<typeof Modal>;
 export const AlertModal: Story = {
   render: (args) => {
     return (
-      <Modal.Wrapper>
+      <Modal.Wrapper initialOpen>
         <Modal.Trigger>
           <Button>모달 열기</Button>
         </Modal.Trigger>
@@ -37,7 +37,7 @@ export const AlertModal: Story = {
 export const ConfirmModal: Story = {
   render: (args) => {
     return (
-      <Modal.Wrapper>
+      <Modal.Wrapper initialOpen>
         <Modal.Trigger>
           <Button>모달 열기</Button>
         </Modal.Trigger>
@@ -62,7 +62,7 @@ export const ConfirmModal: Story = {
 export const PromptModal: Story = {
   render: (args) => {
     return (
-      <Modal.Wrapper>
+      <Modal.Wrapper initialOpen>
         <Modal.Trigger>
           <Button>모달 열기</Button>
         </Modal.Trigger>
@@ -89,7 +89,7 @@ export const PromptModal: Story = {
 export const SmallModal: Story = {
   render: (args) => {
     return (
-      <Modal.Wrapper>
+      <Modal.Wrapper initialOpen>
         <Modal.Trigger>
           <Button>모달 열기</Button>
         </Modal.Trigger>
@@ -119,7 +119,7 @@ export const SmallModal: Story = {
 export const MediumModal: Story = {
   render: (args) => {
     return (
-      <Modal.Wrapper>
+      <Modal.Wrapper initialOpen>
         <Modal.Trigger>
           <Button>모달 열기</Button>
         </Modal.Trigger>
@@ -149,7 +149,7 @@ export const MediumModal: Story = {
 export const LargeModal: Story = {
   render: (args) => {
     return (
-      <Modal.Wrapper>
+      <Modal.Wrapper initialOpen>
         <Modal.Trigger>
           <Button>모달 열기</Button>
         </Modal.Trigger>
