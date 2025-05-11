@@ -33,7 +33,7 @@ const Modal = ({
   position = 'center',
   size = 'small',
 }: ModalProps) => {
-  const value: ModalProps = {
+  const modalContextValue: ModalProps = {
     isOpen,
     onClose,
     children,
@@ -80,7 +80,7 @@ const Modal = ({
     <>
       {isOpen &&
         createPortal(
-          <ModalContext.Provider value={value}>
+          <ModalContext.Provider value={modalContextValue}>
             <BackDrop onClick={onClose} $position={position}>
               <ModalLayout
                 ref={modalRef}
