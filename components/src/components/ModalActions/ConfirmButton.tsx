@@ -14,7 +14,7 @@ const ConfirmButton = ({
   };
 
   return (
-    <Button varient="primary" onClick={handleConfirmClick} {...props}>
+    <Button variant="primary" onClick={handleConfirmClick} {...props}>
       {children}
     </Button>
   );

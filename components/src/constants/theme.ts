@@ -6,7 +6,7 @@ export const MODAL_COLORS = {
 } as const;
 
 export type ThemeMode = "light" | "dark";
-export type ButtonVarient = "primary" | "secondary";
+export type ButtonVariant = "primary" | "secondary";
 export type ModalColor = (typeof MODAL_COLORS)[keyof typeof MODAL_COLORS];
 export interface ThemeType {
   background: ModalColor;
@@ -43,4 +43,4 @@ export const BUTTON_COLOR_MAP = {
     text: MODAL_COLORS.DARK_GRAY,
     border: MODAL_COLORS.LIGHT_GRAY,
   },
-} as const satisfies Record<ButtonVarient, ButtonColorType>;
+} as const satisfies Record<ButtonVariant, ButtonColorType>;

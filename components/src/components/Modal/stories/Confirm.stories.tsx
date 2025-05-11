@@ -51,14 +51,14 @@ export const ConfirmModalWithButton = (args: ModalProps) => {
         >
           <Modal.Button
             onClick={closeModal}
-            varient="secondary"
+            variant="secondary"
             style={{ width: "90px" }}
           >
             취소
           </Modal.Button>
           <Modal.Button
             onClick={handleSubmit}
-            varient="primary"
+            variant="primary"
             style={{ width: "90px" }}
           >
             확인

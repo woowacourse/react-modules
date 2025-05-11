@@ -15,14 +15,14 @@ export const Default: Story = {};
 
 export const PrimaryButton: Story = {
   args: {
-    varient: "primary",
+    variant: "primary",
     children: "확인",
   },
 };
 
 export const SecondaryButton: Story = {
   args: {
-    varient: "secondary",
+    variant: "secondary",
     children: "취소",
   },
 };

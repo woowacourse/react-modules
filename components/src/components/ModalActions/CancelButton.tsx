@@ -5,7 +5,7 @@ const CancelButton = ({ children = "취소", ...props }: ButtonProps) => {
   const { onClose } = useModalContext();
 
   return (
-    <Button varient="secondary" onClick={onClose} {...props}>
+    <Button variant="secondary" onClick={onClose} {...props}>
       {children}
     </Button>
   );
