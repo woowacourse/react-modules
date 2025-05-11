@@ -5,7 +5,7 @@ const calculateNetwork = (value: string): CardNetwork => {
 
   calculatedValue = parseInt(value[0], 10);
   if (calculatedValue === 4) {
-    return { name: "VISA", length: 16, formatting: [4, 4, 4, 0] };
+    return { name: "VISA", length: 16, formatting: [4, 4, 4, 4] };
   }
 
   calculatedValue = parseInt(value.slice(0, 2), 10);
