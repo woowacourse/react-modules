@@ -4,6 +4,7 @@ import { css } from "@emotion/react";
 const ButtonContainer = styled.button<{
   variant?: "confirm" | "cancel";
   size: "small" | "medium" | "large";
+  text?: string;
 }>`
   ${({ size }) => sizeStyles[size]}
 
@@ -33,10 +34,10 @@ const ButtonContainer = styled.button<{
   }
 `;
 
-interface ButtonInterface {
+interface ButtonInterface
+  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: "confirm" | "cancel";
   size: "small" | "medium" | "large";
-  onClick: () => void;
   tabIndex?: number;
   text?: string;
 }
@@ -44,8 +45,8 @@ interface ButtonInterface {
 export default function Button({
   variant,
   size,
-  onClick,
   text,
+  ...rest
 }: ButtonInterface) {
   const textMap: Record<"confirm" | "cancel", string> = {
     confirm: "확인",
@@ -55,7 +56,7 @@ export default function Button({
   const buttonText = variant ? textMap[variant] : text ?? "";
 
   return (
-    <ButtonContainer size={size} variant={variant} onClick={onClick}>
+    <ButtonContainer size={size} variant={variant} {...rest}>
       {buttonText}
     </ButtonContainer>
   );

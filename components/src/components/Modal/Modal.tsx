@@ -4,8 +4,8 @@ import styled from "@emotion/styled";
 import { CloseIcon } from "../common";
 import { PropsWithChildren } from "react";
 import { css } from "@emotion/react";
-import Button from "../Button/Button";
-import Input from "../Input/Input";
+import Button from "../common/Button/Button";
+import Input from "../common/Input/Input";
 import useFocus from "./useFocus";
 
 const ModalContainer = styled.div<{
