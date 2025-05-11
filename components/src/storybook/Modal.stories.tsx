@@ -4,7 +4,7 @@ import { Modal } from '../lib/components/Modal';
 import { useModal } from '../lib/hooks/useModal';
 
 const meta = {
-  title: 'Modal',
+  title: 'Component/Modal',
   component: Modal,
   tags: ['autodocs'],
   parameters: {
@@ -28,7 +28,7 @@ export const Default: Story = {
     title: '모달 제목',
     showCloseButton: true,
     onClose: () => {},
-    onOutsideClick: () => {},
+
     maxWidth: '400px',
     zIndex: 10,
     children: <></>,
@@ -48,24 +48,29 @@ export const Default: Story = {
         options: ['center', 'bottom'],
       },
     },
+
     showCloseButton: {
       control: {
         type: 'boolean',
       },
     },
+    onClose: {
+      control: false,
+    },
+    maxWidth: {
+      control: false,
+    },
+    zIndex: {
+      control: false,
+    },
   },
   render: (args) => {
-    const { isOpen, handleOpenModal, handleCloseModal, handleOutsideClick } = useModal();
+    const { isOpen, handleOpenModal, handleCloseModal } = useModal();
 
     return (
       <div>
         <button onClick={handleOpenModal}>버튼</button>
-        <Modal
-          {...args}
-          isOpen={isOpen}
-          onClose={handleCloseModal}
-          onOutsideClick={handleOutsideClick}
-        >
+        <Modal {...args} isOpen={isOpen} onClose={handleCloseModal}>
           세라와 로건의 페어 프로그래밍
         </Modal>
       </div>
@@ -84,17 +89,12 @@ export const NoCloseButton: Story = {
   },
 
   render: (args) => {
-    const { isOpen, handleOpenModal, handleCloseModal, handleOutsideClick } = useModal();
+    const { isOpen, handleOpenModal, handleCloseModal } = useModal();
 
     return (
       <div>
         <button onClick={handleOpenModal}>close 버튼 없는 버전 모달 버튼</button>
-        <Modal
-          {...args}
-          isOpen={isOpen}
-          onClose={handleCloseModal}
-          onOutsideClick={handleOutsideClick}
-        >
+        <Modal {...args} isOpen={isOpen} onClose={handleCloseModal}>
           세라와 로건의 페어 프로그래밍
         </Modal>
       </div>
@@ -112,17 +112,12 @@ export const PositionBottom: Story = {
     children: <></>,
   },
   render: (args) => {
-    const { isOpen, handleOpenModal, handleCloseModal, handleOutsideClick } = useModal();
+    const { isOpen, handleOpenModal, handleCloseModal } = useModal();
 
     return (
       <div>
         <button onClick={handleOpenModal}>Bottom 모달 버튼</button>
-        <Modal
-          {...args}
-          isOpen={isOpen}
-          onClose={handleCloseModal}
-          onOutsideClick={handleOutsideClick}
-        >
+        <Modal {...args} isOpen={isOpen} onClose={handleCloseModal}>
           세라와 로건의 페어 프로그래밍
         </Modal>
       </div>
@@ -140,17 +135,12 @@ export const PositionBottomNoCloseButton: Story = {
     children: <></>,
   },
   render: (args) => {
-    const { isOpen, handleOpenModal, handleCloseModal, handleOutsideClick } = useModal();
+    const { isOpen, handleOpenModal, handleCloseModal } = useModal();
 
     return (
       <div>
         <button onClick={handleOpenModal}>Bottom close 버튼 없는 버전 모달 버튼</button>
-        <Modal
-          {...args}
-          isOpen={isOpen}
-          onClose={handleCloseModal}
-          onOutsideClick={handleOutsideClick}
-        >
+        <Modal {...args} isOpen={isOpen} onClose={handleCloseModal}>
           세라와 로건의 페어 프로그래밍
         </Modal>
       </div>
