@@ -1,7 +1,12 @@
 import styled from '@emotion/styled';
 import type { ModalInterface } from './Modal';
+import { Device } from '../../hooks';
 
-const getModalWidth = (size: 'small' | 'medium' | 'large', position: 'center' | 'bottom') => {
+const getModalWidth = (size: 'small' | 'medium' | 'large', position: 'center' | 'bottom', device: Device) => {
+  if (device === 'mobile' || device === 'tablet') {
+    return '90%';
+  }
+
   if (position === 'center') {
     switch (size) {
       case 'small':
@@ -17,8 +22,8 @@ const getModalWidth = (size: 'small' | 'medium' | 'large', position: 'center' | 
   }
 };
 
-export const ModalContainer = styled.div<Pick<ModalInterface, 'position' | 'zIndex' | 'size'>>`
-  width: ${(props) => getModalWidth(props.size ?? 'medium', props.position ?? 'center')};
+export const ModalContainer = styled.div<Pick<ModalInterface, 'position' | 'zIndex' | 'size'> & { device: Device }>`
+  width: ${(props) => getModalWidth(props.size ?? 'medium', props.position ?? 'center', props.device)};
   box-sizing: border-box;
   height: fit-content;
 

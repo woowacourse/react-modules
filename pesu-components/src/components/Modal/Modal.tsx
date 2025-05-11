@@ -2,7 +2,7 @@
 
 import { createContext, PropsWithChildren, ReactNode, useContext, useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
-import { useAutoFocus } from '../../hooks';
+import { useAutoFocus, useDevice } from '../../hooks';
 import { CloseIcon } from '../common';
 
 import Button, { ButtonProps } from '../common/Button/Button';
@@ -66,6 +66,7 @@ function ModalMain({
   isBackdropClose = false,
 }: PropsWithChildren<ModalInterface>) {
   const { isOpen, close } = useContext(ModalContext);
+  const device = useDevice();
 
   const { modalRef } = useAutoFocus(isOpen);
 
@@ -74,7 +75,7 @@ function ModalMain({
       {isOpen &&
         createPortal(
           <>
-            <S.ModalContainer position={position} zIndex={zIndex} size={size} ref={modalRef}>
+            <S.ModalContainer position={position} zIndex={zIndex} size={size} ref={modalRef} device={device}>
               {children}
             </S.ModalContainer>
             <S.ModalBackdrop onClick={isBackdropClose ? close : undefined} />
