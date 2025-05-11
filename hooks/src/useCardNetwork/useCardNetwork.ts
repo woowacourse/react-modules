@@ -5,7 +5,7 @@ type CardNumbers = {
   FOURTH: string;
 };
 
-const CARD_BRAND_PATTERNS = {
+const CARD_NETWORK_PATTERNS = {
   VISA: {
     PATTERN: /^4/,
     LENGTH: 16,
@@ -29,11 +29,24 @@ const CARD_BRAND_PATTERNS = {
   },
 } as const;
 
-export function useCardNetwork(cardNumbers: CardNumbers) {
-  const fullCardNumber = `${cardNumbers.FIRST}${cardNumbers.SECOND}${cardNumbers.THIRD}${cardNumbers.FOURTH}`;
+type CardBrandPattern = {
+  PATTERN: RegExp;
+  LENGTH: number;
+};
 
-  const matchedNetwork = Object.entries(CARD_BRAND_PATTERNS).find(
-    ([_, { PATTERN }]) => PATTERN.test(fullCardNumber)
+export type CardBrandName = keyof typeof CARD_NETWORK_PATTERNS;
+
+export type CardBrandPatterns = Record<string, CardBrandPattern>;
+
+export function useCardNetwork(
+  cardNumbers: CardNumbers,
+  userCardNetworkPatterns?: CardBrandPatterns
+) {
+  const fullCardNumber = `${cardNumbers.FIRST}${cardNumbers.SECOND}${cardNumbers.THIRD}${cardNumbers.FOURTH}`;
+  const patterns = { ...CARD_NETWORK_PATTERNS, ...userCardNetworkPatterns };
+
+  const matchedNetwork = Object.entries(patterns).find(([_, { PATTERN }]) =>
+    PATTERN.test(fullCardNumber)
   );
 
   let cardNetwork = "";
