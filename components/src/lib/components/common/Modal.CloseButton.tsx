@@ -3,11 +3,16 @@ import styled from '@emotion/styled';
 import closeIcon from '../../assets/Close.svg';
 import { useModalContext } from '../../hooks/useModalContext';
 
-const ModalCloseButton = () => {
+const ModalCloseButton = ({ $autoFocus = true }: { $autoFocus?: boolean }) => {
   const { onClose } = useModalContext();
 
   return (
-    <StyledCloseButton type="button" onClick={onClose} aria-label="closeModalButton">
+    <StyledCloseButton
+      type="button"
+      onClick={onClose}
+      aria-label="closeModalButton"
+      autoFocus={$autoFocus}
+    >
       <StyledCloseIcon src={closeIcon} alt="closeIcon" />
     </StyledCloseButton>
   );
