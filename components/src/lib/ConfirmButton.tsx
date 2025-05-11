@@ -1,3 +1,4 @@
+import { ComponentProps } from 'react';
 import styled from 'styled-components';
 
 interface ConfirmButtonProps {
@@ -5,7 +6,10 @@ interface ConfirmButtonProps {
   width?: number;
 }
 
-function ConfirmButton({ onClick, width }: ConfirmButtonProps) {
+function ConfirmButton({
+  onClick,
+  width,
+}: ConfirmButtonProps & ComponentProps<'button'>) {
   return (
     <StyledButton onClick={onClick} width={width}>
       확인

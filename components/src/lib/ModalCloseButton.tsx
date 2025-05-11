@@ -1,10 +1,13 @@
 import styled from 'styled-components';
+import { ComponentProps } from 'react';
 
 interface ModalCloseButtonProps {
   onCloseClick: () => void;
 }
 
-function ModalCloseButton({ onCloseClick }: ModalCloseButtonProps) {
+function ModalCloseButton({
+  onCloseClick,
+}: ModalCloseButtonProps & ComponentProps<'button'>) {
   return (
     <Button onClick={onCloseClick} className="close-button">
       <span>X</span>

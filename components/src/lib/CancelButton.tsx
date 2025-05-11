@@ -1,3 +1,4 @@
+import { ComponentProps } from 'react';
 import styled from 'styled-components';
 
 interface CancelButtonProps {
@@ -5,7 +6,10 @@ interface CancelButtonProps {
   width?: number;
 }
 
-function CancelButton({ onClick, width }: CancelButtonProps) {
+function CancelButton({
+  onClick,
+  width,
+}: CancelButtonProps & ComponentProps<'button'>) {
   return (
     <StyledButton onClick={onClick} width={width}>
       취소
