@@ -1,7 +1,6 @@
 # Hooks Module
 
-본 모듈은 결제 정보 입력 시 필요한 다양한 유효성 검증 Hook을 제공합니다. </br>
-카드 번호, 유효 기간, CVC, 비밀번호 등의 입력값을 쉽고 효율적으로 검증할 수 있습니다.
+본 모듈은 결제 정보 입력 시 필요한 다양한 유효성 검증 Hook을 제공합니다. 카드 번호, 유효 기간, CVC, 비밀번호 등의 입력값을 쉽고 효율적으로 검증할 수 있습니다.
 
 ## 💡 Installation
 
@@ -51,12 +50,12 @@ function App() {
 export default App;
 ```
 
-### 📝 Validation List
+## 📝 Validation List
 
 1. 카드 번호는 숫자여야한다.
 2. 카드 번호는 14자리 이상 16자리 이하여야한다.
 
-### ⛏️ Return Value
+## ⛏️ Return Value
 
 ### cardNumberValidationResult (Object)
 
@@ -112,14 +111,14 @@ function App() {
 export default App;
 ```
 
-### 📝 Validation List
+## 📝 Validation List
 
 1. 월과 연도는 값이 숫자여야한다.
 2. 월과 연도는 2자리여야한다.
 3. 월은 1부터 12 사이의 숫자여야한다.
 4. 연도는 현재 연도보다 크거나 같아야한다.
 
-### ⛏️ Return Value
+## ⛏️ Return Value
 
 ### expirationDate (Object)
 
@@ -130,7 +129,7 @@ export default App;
 
 ### expirationDateValidationResult (Object)
 
-```
+```javascript
 {
   month: {
     isError: string
@@ -183,12 +182,12 @@ function App() {
 export default App;
 ```
 
-### 📝 Validation List
+## 📝 Validation List
 
 1. CVC 번호는 숫자여야한다.
 2. CVC 번호는 3자리여야한다.
 
-### ⛏️ Return Value
+## ⛏️ Return Value
 
 ### cvcValidationResult (Object)
 
@@ -231,12 +230,12 @@ function App() {
 export default App;
 ```
 
-### 📝 Validation List
+## 📝 Validation List
 
 1. 비밀번호는 숫자여야한다.
 2. 비밀번호는 2자리여야한다.
 
-### ⛏️ Return Value (Object)
+## ⛏️ Return Value (Object)
 
 ### passwordValidationResult (Object)
 
@@ -252,5 +251,4 @@ export default App;
 
 ## 👥 Author
 
-[sooyeoniya](https://github.com/sooyeoniya),
-[minji2219](https://github.com/minji2219)
+sooyeoniya, minji2219

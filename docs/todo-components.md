@@ -24,5 +24,5 @@
   - [x] Prompt모달
 
 - [x] 모달 UI 테스트: Storybook 구현
-- [ ] 모달 npm 배포
-- [ ] README 수정하기
+- [x] 모달 npm 배포
+- [x] README 수정하기
