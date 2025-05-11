@@ -8,7 +8,6 @@ import {
   ValidateCardNumbersResult,
 } from './constants';
 import { ValidationResult } from '../types';
-import { NetworkType } from '../utils/constants';
 
 interface RenderHookResult {
   current: RenderHookCurrent;
@@ -25,10 +24,7 @@ interface RenderHookCurrent {
   ) => void;
   handleCardNumbersBlur: (event: FocusEvent<HTMLInputElement>) => void;
   network: string;
-  formatNumbersByNetwork: (
-    cardNumbers: string,
-    network: NetworkType | ''
-  ) => string;
+  cardNumberFormatter: (cardNumbers: string) => string;
 }
 
 describe('useCardNumbers', () => {
