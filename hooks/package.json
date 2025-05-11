@@ -1,6 +1,6 @@
 {
-  "name": "laireca-custom-hooks",
-  "version": "0.1.0",
+  "name": "oa-custom-hooks",
+  "version": "0.1.2",
   "description": "Easily create card custom hooks with this lightweight npm package",
   "type": "module",
   "types": "dist/index.d.ts",

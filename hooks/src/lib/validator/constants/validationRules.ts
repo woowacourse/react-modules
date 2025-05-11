@@ -5,6 +5,12 @@ export const VALIDATION_LENGTH = {
   },
   CVC: 3,
   PASSWORD: 2,
-  CARD_NUMBER: 4,
-  CARD_NUMBER_FULL: 16,
+};
+
+export const BRAND_CARD_NUMBER_LENGTH = {
+  VISA: 16,
+  MASTER: 16,
+  DINERS: 14,
+  AMEX: 15,
+  UNIONPAY: 16,
 };

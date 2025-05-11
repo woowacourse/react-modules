@@ -6,6 +6,8 @@ interface ModalContextType {
   openModalHandler: () => void;
   closeModalHandler: () => void;
   modalType: ModalProps['modalType'];
+  modalPosition: ModalProps['modalPosition'];
+  modalSize?: ModalProps['modalSize'];
   titleText: string;
   closeType: ModalProps['closeType'];
   onClose?: () => void;
@@ -13,7 +15,9 @@ interface ModalContextType {
 
 interface ModalProviderProps {
   children: ReactNode;
-  modalType: ModalProps['modalType'];
+  modalType?: ModalProps['modalType'];
+  modalPosition: ModalProps['modalPosition'];
+  modalSize?: ModalProps['modalSize'];
   titleText?: string;
   closeType: ModalProps['closeType'];
   onClose?: () => void;
@@ -23,9 +27,11 @@ export const ModalContext = createContext<ModalContextType | undefined>(undefine
 
 export const ModalProvider = ({
   children,
-  modalType,
+  modalType = 'default',
+  modalPosition = 'center',
+  modalSize = 'medium',
   titleText = '',
-  closeType,
+  closeType = 'none',
   onClose,
 }: ModalProviderProps) => {
   const [isModalOpened, setIsModalOpened] = useState(false);
@@ -40,6 +46,8 @@ export const ModalProvider = ({
         openModalHandler,
         closeModalHandler,
         modalType,
+        modalPosition,
+        modalSize,
         titleText,
         closeType,
         onClose,

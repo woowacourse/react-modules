@@ -5,6 +5,6 @@ import './index.css';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-    <App children={'123'} modalType={'center'} closeType={'top'} titleText={'text'} />
+    <App />
   </React.StrictMode>,
 );

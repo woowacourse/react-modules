@@ -83,25 +83,25 @@ describe('useCardExpDate', () => {
     expect(result.current.error.errorMessage).toBe(ERROR_MESSAGE.EXPIRATION.MONTH.IS_EXPIRATION);
   });
 
-  // it('숫자가 아닌 year 입력값에 에러메세지가 출력된다.', () => {
-  //   const userInputMonth = '12';
-  //   const userInputYear = 'k';
-  //   const { result } = renderHook(() => useCardExpDateInput());
+  it('숫자가 아닌 year 입력값에 에러메세지가 출력된다.', () => {
+    const userInputMonth = '12';
+    const userInputYear = 'k';
+    const { result } = renderHook(() => useCardExpDateInput());
 
-  //   act(() => {
-  //     result.current.onChangeHandler({
-  //       target: { name: 'month', value: userInputMonth },
-  //     } as ChangeEvent<HTMLInputElement>);
-  //   });
+    act(() => {
+      result.current.onChangeHandler({
+        target: { name: 'month', value: userInputMonth },
+      } as ChangeEvent<HTMLInputElement>);
+    });
 
-  //   act(() => {
-  //     result.current.onChangeHandler({
-  //       target: { name: 'year', value: userInputYear },
-  //     } as ChangeEvent<HTMLInputElement>);
-  //   });
+    act(() => {
+      result.current.onChangeHandler({
+        target: { name: 'year', value: userInputYear },
+      } as ChangeEvent<HTMLInputElement>);
+    });
 
-  //   expect(result.current.errorMessage).toBe(ERROR_MESSAGE.EXPIRATION.YEAR.IS_NUMBER);
-  // });
+    expect(result.current.error.errorMessage).toBe(ERROR_MESSAGE.EXPIRATION.YEAR.IS_NUMBER);
+  });
 
   it('현재 만료된 유효 기간을 입력 시 에러메세지가 출력된다.', () => {
     const userMonthInput = '12';
