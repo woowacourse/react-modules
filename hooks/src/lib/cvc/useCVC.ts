@@ -1,15 +1,11 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 import { CVC_ERROR_TYPES, ERROR_MESSAGE } from '../config';
 import { ValidationResult } from '../types';
 import { checkIsNumber, checkIsValidLength } from '../validators';
+import { createValidationResult } from '../utils/createValidationResult';
 
 function useCVC() {
   const [CVC, setCVC] = useState('');
-
-  const [validationResult, setValidationResult] = useState<ValidationResult>({
-    isValid: true,
-    errorMessage: '',
-  });
 
   const getCVCValidationError = useCallback((value: string) => {
     const isNumber = checkIsNumber(value);
@@ -21,21 +17,20 @@ function useCVC() {
     return null;
   }, []);
 
+  const validationResult: ValidationResult = useMemo(
+    () =>
+      createValidationResult(ERROR_MESSAGE.CVC, [getCVCValidationError(CVC)]),
+    [CVC, getCVCValidationError]
+  );
+
   const handleCVCChange = useCallback(
     (value: string, options?: { skipValidation?: boolean }) => {
-      const errorType = getCVCValidationError(value);
-
       const shouldSkipValidation = options?.skipValidation ?? false;
+
+      const errorType = getCVCValidationError(value);
 
       if (!shouldSkipValidation && errorType) {
         return;
-      }
-
-      if (shouldSkipValidation) {
-        setValidationResult({
-          isValid: !errorType,
-          errorMessage: errorType ? ERROR_MESSAGE.CVC[errorType] : '',
-        });
       }
 
       setCVC(value);

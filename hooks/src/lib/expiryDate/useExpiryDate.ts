@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 import {
   ERROR_MESSAGE,
   EXPIRY_DATE_ERROR_TYPES,
@@ -12,18 +12,12 @@ import {
   checkIsNumber,
   checkIsValidLength,
 } from '../validators';
+import { createValidationResult } from '../utils/createValidationResult';
 
 function useExpiryDate() {
   const [expiryDate, setExpiryDate] = useState<Record<ExpiryDateKey, string>>({
     month: '',
     year: '',
-  });
-
-  const [validationResults, setValidationResults] = useState<
-    Record<ExpiryDateKey, ValidationResult>
-  >({
-    month: { isValid: true, errorMessage: '' },
-    year: { isValid: true, errorMessage: '' },
   });
 
   const getExpiryDateValidationError = useCallback(
@@ -45,19 +39,44 @@ function useExpiryDate() {
   );
 
   const getExpiryDateExpiredError = useCallback(
-    (name: ExpiryDateKey, value: string) => {
+    (
+      name: ExpiryDateKey,
+      value: string,
+      other: Record<ExpiryDateKey, string>
+    ) => {
       if (value === '') return null;
 
-      const { month, year } = expiryDate;
-      const targetMonth = name === EXPIRY_DATE_KEY.month ? value : month;
-      const targetYear = name === EXPIRY_DATE_KEY.year ? value : year;
+      const targetMonth = name === EXPIRY_DATE_KEY.month ? value : other.month;
+      const targetYear = name === EXPIRY_DATE_KEY.year ? value : other.year;
       const isExpiredDate = checkIsExpiredDate(targetMonth, targetYear);
 
       if (isExpiredDate) return EXPIRY_DATE_ERROR_TYPES.expiredDate;
 
       return null;
     },
-    [expiryDate]
+    []
+  );
+
+  const validationResults: Record<ExpiryDateKey, ValidationResult> = useMemo(
+    () => ({
+      month: createValidationResult(ERROR_MESSAGE.expiryDate, [
+        getExpiryDateExpiredError(
+          EXPIRY_DATE_KEY.month,
+          expiryDate.month,
+          expiryDate
+        ),
+        getExpiryDateValidationError(EXPIRY_DATE_KEY.month, expiryDate.month),
+      ]),
+      year: createValidationResult(ERROR_MESSAGE.expiryDate, [
+        getExpiryDateExpiredError(
+          EXPIRY_DATE_KEY.year,
+          expiryDate.year,
+          expiryDate
+        ),
+        getExpiryDateValidationError(EXPIRY_DATE_KEY.year, expiryDate.year),
+      ]),
+    }),
+    [expiryDate, getExpiryDateExpiredError, getExpiryDateValidationError]
   );
 
   const handleExpiryDateChange = useCallback(
@@ -69,34 +88,14 @@ function useExpiryDate() {
       const shouldSkipValidation = options?.skipValidation ?? false;
 
       const errorType = getExpiryDateValidationError(key, value);
-      const expiredDateErrorType = getExpiryDateExpiredError(key, value);
 
       if (!shouldSkipValidation && errorType) {
         return;
       }
 
-      const isValid = shouldSkipValidation
-        ? !errorType && !expiredDateErrorType
-        : !expiredDateErrorType;
-
-      const errorMessage = (() => {
-        if (isValid) return '';
-
-        if (expiredDateErrorType)
-          return ERROR_MESSAGE.expiryDate[expiredDateErrorType];
-        if (errorType) return ERROR_MESSAGE.expiryDate[errorType];
-
-        return '';
-      })();
-
-      setValidationResults((prev) => ({
-        ...prev,
-        [key]: { isValid, errorMessage },
-      }));
-
       setExpiryDate((prev) => ({ ...prev, [key]: value }));
     },
-    [getExpiryDateValidationError, getExpiryDateExpiredError]
+    [expiryDate]
   );
 
   return {

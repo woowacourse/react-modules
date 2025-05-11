@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 import {
   CARD_NUMBER_ERROR_TYPES,
   CardNumbersKey,
@@ -6,6 +6,7 @@ import {
 } from '../config';
 import { ValidationResult } from '../types';
 import { checkIsNumber, checkIsValidLength } from '../validators';
+import { createValidationResult } from '../utils/createValidationResult';
 
 function useCardNumbers() {
   const [cardNumbers, setCardNumbers] = useState<
@@ -17,15 +18,6 @@ function useCardNumbers() {
     part4: '',
   });
 
-  const [validationResults, setValidationResults] = useState<
-    Record<CardNumbersKey, ValidationResult>
-  >({
-    part1: { isValid: true, errorMessage: '' },
-    part2: { isValid: true, errorMessage: '' },
-    part3: { isValid: true, errorMessage: '' },
-    part4: { isValid: true, errorMessage: '' },
-  });
-
   const getCardNumberValidationError = useCallback((value: string) => {
     const isNumber = checkIsNumber(value);
     const isValidLength = checkIsValidLength(value, 4);
@@ -35,6 +27,24 @@ function useCardNumbers() {
 
     return null;
   }, []);
+
+  const validationResults: Record<CardNumbersKey, ValidationResult> =
+    useMemo(() => {
+      return {
+        part1: createValidationResult(ERROR_MESSAGE.cardNumber, [
+          getCardNumberValidationError(cardNumbers.part1),
+        ]),
+        part2: createValidationResult(ERROR_MESSAGE.cardNumber, [
+          getCardNumberValidationError(cardNumbers.part2),
+        ]),
+        part3: createValidationResult(ERROR_MESSAGE.cardNumber, [
+          getCardNumberValidationError(cardNumbers.part3),
+        ]),
+        part4: createValidationResult(ERROR_MESSAGE.cardNumber, [
+          getCardNumberValidationError(cardNumbers.part4),
+        ]),
+      };
+    }, [cardNumbers, getCardNumberValidationError]);
 
   const handleCardNumbersChange = useCallback(
     (
@@ -48,16 +58,6 @@ function useCardNumbers() {
 
       if (!shouldSkipValidation && errorType) {
         return;
-      }
-
-      if (shouldSkipValidation) {
-        setValidationResults((prev) => ({
-          ...prev,
-          [key]: {
-            isValid: !errorType,
-            errorMessage: errorType ? ERROR_MESSAGE.cardNumber[errorType] : '',
-          },
-        }));
       }
 
       setCardNumbers((prev) => ({ ...prev, [key]: value }));

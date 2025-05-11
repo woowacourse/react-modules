@@ -54,9 +54,13 @@ describe('useExpiryDate', () => {
         result.current.handleExpiryDateChange('month', '04');
       });
 
-      expect(result.current.getExpiryDateExpiredError('year', '12')).toBe(
-        EXPIRY_DATE_ERROR_TYPES.expiredDate
-      );
+      expect(
+        result.current.getExpiryDateExpiredError(
+          'year',
+          '12',
+          result.current.expiryDate
+        )
+      ).toBe(EXPIRY_DATE_ERROR_TYPES.expiredDate);
     });
   });
 });
