@@ -1,3 +1,8 @@
+import {
+  CARD_NETWORK_PATTERNS,
+  TypeOfCardNetworkPatterns,
+} from "../constants/cardNetworkPatterns";
+
 type CardNumbers = {
   FIRST: string;
   SECOND: string;
@@ -5,42 +10,9 @@ type CardNumbers = {
   FOURTH: string;
 };
 
-const CARD_NETWORK_PATTERNS = {
-  VISA: {
-    PATTERN: /^4/,
-    LENGTH: 16,
-  },
-  MASTER_CARD: {
-    PATTERN: /^5[1-5]/,
-    LENGTH: 16,
-  },
-  AMEX: {
-    PATTERN: /^3[47]/,
-    LENGTH: 15,
-  },
-  DINERS: {
-    PATTERN: /^3(?:0[0-5]|[68])/,
-    LENGTH: 14,
-  },
-  UNION_PAY: {
-    PATTERN:
-      /^(622(?:12[6-9]|1[3-9]\d|[2-8]\d{2}|9[0-1]\d|92[0-5])|62[4-6]|628[2-8])/,
-    LENGTH: 16,
-  },
-} as const;
-
-type CardBrandPattern = {
-  PATTERN: RegExp;
-  LENGTH: number;
-};
-
-export type CardBrandName = keyof typeof CARD_NETWORK_PATTERNS;
-
-export type CardBrandPatterns = Record<string, CardBrandPattern>;
-
 export function useCardNetwork(
   cardNumbers: CardNumbers,
-  userCardNetworkPatterns?: CardBrandPatterns
+  userCardNetworkPatterns?: TypeOfCardNetworkPatterns
 ) {
   const fullCardNumber = `${cardNumbers.FIRST}${cardNumbers.SECOND}${cardNumbers.THIRD}${cardNumbers.FOURTH}`;
   const patterns = { ...CARD_NETWORK_PATTERNS, ...userCardNetworkPatterns };
