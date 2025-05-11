@@ -1,37 +1,56 @@
-import { Modal, useModal, ModalProvider, ModalProps } from './lib';
+import { Modal, useModal, ModalProvider } from './lib';
 import './App.css';
 
-function ModalContent() {
+function ModalOpenButton({ type }: { type: string }) {
   const { openModalHandler } = useModal();
 
   return (
     <>
-      <Modal>
-        <p style={{ color: 'black' }}>Test!!!!!!</p>
-        <p style={{ color: 'black' }}>Test!!!!!!</p>
-        <p style={{ color: 'black' }}>Test!!!!!!</p>
-        <p style={{ color: 'black' }}>Test!!!!!!</p>
-      </Modal>
-      <div className="button-container">
-        <button className="click-me-button" onClick={openModalHandler}>
-          click me!!
-        </button>
-      </div>
+      <button className="click-me-button" onClick={openModalHandler}>
+        {type} 모달
+      </button>
     </>
   );
 }
 
-function App({ modalType, closeType, titleText, ...otherProps }: ModalProps) {
+function ModalContents() {
   return (
-    <ModalProvider
-      modalType={modalType}
-      closeType={closeType}
-      titleText={titleText}
-      {...otherProps}
-    >
-      <ModalContent />
-    </ModalProvider>
+    <div className="button-container">
+      <ModalProvider modalType={'center'} closeType={'top'} titleText={'titleText'}>
+        <ModalOpenButton type="중앙" />
+        <Modal>
+          <p style={{ color: 'black' }}>Test!!!!!!</p>
+          <p style={{ color: 'black' }}>Test!!!!!!</p>
+          <p style={{ color: 'black' }}>Test!!!!!!</p>
+          <p style={{ color: 'black' }}>Test!!!!!!</p>
+        </Modal>
+      </ModalProvider>
+
+      <ModalProvider modalType={'bottom'} closeType={'top'} titleText={'titleText'}>
+        <ModalOpenButton type="하단(상단 닫기)" />
+        <Modal>
+          <p style={{ color: 'black' }}>Test!!!!!!</p>
+          <p style={{ color: 'black' }}>Test!!!!!!</p>
+          <p style={{ color: 'black' }}>Test!!!!!!</p>
+          <p style={{ color: 'black' }}>Test!!!!!!</p>
+        </Modal>
+      </ModalProvider>
+
+      <ModalProvider modalType={'bottom'} closeType={'bottom'} titleText={'titleText'}>
+        <ModalOpenButton type="하단(하단 닫기)" />
+        <Modal>
+          <p style={{ color: 'black' }}>Test!!!!!!</p>
+          <p style={{ color: 'black' }}>Test!!!!!!</p>
+          <p style={{ color: 'black' }}>Test!!!!!!</p>
+          <p style={{ color: 'black' }}>Test!!!!!!</p>
+        </Modal>
+      </ModalProvider>
+    </div>
   );
+}
+
+function App() {
+  return <ModalContents />;
 }
 
 export default App;

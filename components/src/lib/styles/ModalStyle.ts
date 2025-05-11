@@ -8,17 +8,24 @@ export const ModalContainer = styled.div<ModalTypeProps>`
   justify-content: center;
   align-items: ${({ modalType }) => (modalType === 'center' ? 'center' : 'flex-end')};
   position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
 `;
 export const ModalBackdrop = styled.div`
   width: 100%;
   height: 100%;
   position: fixed;
+  top: 0;
+  left: 0;
   background-color: rgba(0, 0, 0, 0.5);
+  z-index: 990;
 `;
 
 export const Container = styled.div`
   width: 100%;
   position: absolute;
+  z-index: 1001;
 `;
 
 export const Wrapper = styled.div`
