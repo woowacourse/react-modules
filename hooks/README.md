@@ -12,9 +12,13 @@ npm install npm i hooks-kangoll-test
 
 ### 1. useCardNumber
 
-- 카드 번호 입력을 관리하는 훅
-- 16자리 숫자 입력 제한
-- 4자리마다 하이픈(-) 자동 추가
+- 카드 번호를 그룹 단위(string[])로 관리
+- 카드사별 그룹 구조(VISA, AMEX 등)에 맞춰 입력 길이 자동 제한
+- 숫자 외 문자 자동 제거
+- 카드 네트워크 자동 판별
+- 각 그룹별 유효성 검사 수행
+- 에러 메시지 및 에러 여부 반환
+- 하이픈 자동 추가는 UI에서 처리 (훅 내부엔 없음)
 
 ### 2. useExpiryDateNumber
 
@@ -88,6 +92,7 @@ function App() {
               value={card.cardNumber[index]}
               onChange={(e) => handleCardNumberChange(e, index)}
               placeholder="1234"
+              className={card.isError[index] ? "input-error" : ""}
             />
           ))}
 
@@ -153,6 +158,8 @@ function App() {
     </div>
   );
 }
+
+export default App;
 ```
 
 ## 기술 스택
