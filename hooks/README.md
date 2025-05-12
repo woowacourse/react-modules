@@ -19,10 +19,48 @@ npm install @sanghee01/card-field-hooks
 ### useCardNumberField
 
 - 카드 번호 입력 관리
-- 입력값 포매팅 및 유효성 검사 자동 처리
+- 입력값 자동 포맷팅 (VISA, MasterCard, AMEX, Diners, UnionPay 등 카드사별 포맷)
+- 카드 브랜드 자동 감지 기능
+- 카드사별 유효성 검사 자동 처리
+- 카드 종류에 따른 최대 입력 길이 자동 설정
 
 ```tsx
-const { cardNumber, handleCardNumberChange, cardNumberErrors } = useCardNumberField();
+const {
+  cardNumbers, // 숫자만 포함된 원본 카드 번호
+  formattedCardNumber, // 포맷팅된 카드 번호 (예: "4111 1111 1111 1111")
+  cardBrand, // 감지된 카드 브랜드 (visa, master, amex, diners, unionpay 등)
+  handleCardNumberChange,
+  cardNumberErrors, // 유효성 검사 오류 메시지
+  maxCardLength, // 카드 종류에 따른 최대 입력 길이 (공백 포함)
+} = useCardNumberField();
+```
+
+#### 사용 예시
+
+```tsx
+import React from 'react';
+import { useCardNumberField } from '@sanghee01/card-field-hooks';
+
+function CardNumberInput() {
+  const { formattedCardNumber, cardBrand, handleCardNumberChange, cardNumberErrors, maxCardLength } =
+    useCardNumberField();
+
+  return (
+    <div>
+      <label htmlFor="cardNumber">카드 번호</label>
+      <input
+        type="text"
+        name="cardNumber"
+        value={formattedCardNumber}
+        onChange={(e) => handleCardNumberChange(e.target.value)}
+        placeholder="카드 번호를 입력해주세요."
+        maxLength={maxCardLength}
+      />
+      {cardNumberErrors && <p className="error">{cardNumberErrors}</p>}
+      {cardBrand && <p>카드 종류: {cardBrand.toUpperCase()}</p>}
+    </div>
+  );
+}
 ```
 
 ### useExpirationDateField
@@ -67,7 +105,7 @@ const { cardCompany, handleSelectChange } = useCardCompanyField();
 - **cardInputValidations**: 카드 번호, 유효기간, 비밀번호, CVC 입력에 대한 유효성 검사 로직을 제공합니다.
 
 ```tsx
-import { validateCardNumber, validateExpiration, validatePassword, validateCvc } from '@sanghee01-field-hooks';
+import { validateCardNumber, validateExpiration, validatePassword, validateCvc } from '@sanghee01/card-field-hooks';
 
 const isCardValid = validateCardNumber('1234 5678 9012 3456');
 ```
@@ -78,7 +116,7 @@ const isCardValid = validateCardNumber('1234 5678 9012 3456');
 
 ```tsx
 iimport React from 'react';
-import { useCardNumberField, useExpirationDateField, useCardPasswordField, useCvcField, useCardCompanyField, CardCompany } from '@sanghee01-field-hooks';
+import { useCardNumberField, useExpirationDateField, useCardPasswordField, useCvcField, useCardCompanyField, CardCompany } from '@sanghee01/card-field-hooks';
 
 const CardForm = () => {
   const { cardNumber, handleCardNumberChange } = useCardNumberField();
