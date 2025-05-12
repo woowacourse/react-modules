@@ -10,6 +10,7 @@ interface ConfirmButtonProps {
 function ConfirmButton({
   onClick,
   width,
+  ...rest
 }: ConfirmButtonProps & ComponentProps<'button'>) {
   const { setOpen } = useModal();
 
@@ -20,6 +21,7 @@ function ConfirmButton({
         onClick?.();
       }}
       width={width}
+      {...rest}
     >
       확인
     </StyledButton>

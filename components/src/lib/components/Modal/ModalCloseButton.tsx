@@ -8,6 +8,7 @@ interface ModalCloseButtonProps {
 
 function ModalCloseButton({
   onCloseClick,
+  ...rest
 }: ModalCloseButtonProps & ComponentProps<'button'>) {
   const { setOpen } = useModal();
 
@@ -18,6 +19,7 @@ function ModalCloseButton({
         onCloseClick?.();
       }}
       className="close-button"
+      {...rest}
     >
       <span>X</span>
     </Button>

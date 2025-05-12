@@ -10,6 +10,7 @@ interface CancelButtonProps {
 function CancelButton({
   onClick,
   width,
+  ...rest
 }: CancelButtonProps & ComponentProps<'button'>) {
   const { setOpen } = useModal();
 
@@ -20,6 +21,7 @@ function CancelButton({
         onClick?.();
       }}
       width={width}
+      {...rest}
     >
       취소
     </StyledButton>
