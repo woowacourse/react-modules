@@ -1,7 +1,10 @@
 import { useState } from 'react';
 import { isOnlyDigits } from '../utils/validateNumber';
 import { CARD_CVC_ERROR } from '../constants/errorMessages';
-import { CARD_CVC } from '../constants/cardConfig';
+
+export const CARD_CVC = {
+  maxLength: 3,
+};
 
 export const useCardCVC = (initialCVC: string, initialError: string) => {
   const [cardCVC, setCardCVC] = useState<string>(initialCVC);
