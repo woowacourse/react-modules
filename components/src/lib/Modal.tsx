@@ -1,12 +1,15 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Layout, Overlay, ModalContainer, TitleContainer, Title, CloseButton, CloseIcon } from './Modal.styles';
+import {useFocusTrap} from "./hooks/useFocusTrap";
 
 export type ModalPosition = 'center' | 'bottom';
+export type ModalSize = 'sm' | 'md' | 'lg';
 
 export type ModalContainerProps = {
   width?: string;
   height?: string;
   position: ModalPosition;
+  size?: ModalSize;
 };
 
 type ModalProps = ModalContainerProps & {
@@ -15,8 +18,26 @@ type ModalProps = ModalContainerProps & {
   onClose: () => void;
 };
 
-function Modal({ width = '304px', height = '216px', position, title, onClose, children }: ModalProps) {
+function Modal({
+  width,
+  height,
+  position = 'center',
+  title,
+  onClose,
+  children,
+  size
+}: ModalProps) {
   const customWidth = position === 'center' ? width : '100%';
+  const closeButtonRef = useRef<HTMLButtonElement>(null);
+
+  const {containerRef, handleKeyDown} = useFocusTrap({
+    initialFocusRef: closeButtonRef as React.RefObject<HTMLButtonElement>,
+    onEscape: onClose
+  });
+
+  const handleClickOverlay = () => {
+    onClose();
+  };
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -32,9 +53,18 @@ function Modal({ width = '304px', height = '216px', position, title, onClose, ch
     };
   }, [onClose]);
 
-  const handleClickOverlay = () => {
-    onClose();
-  };
+  useEffect(() => {
+    if (closeButtonRef.current) {
+      closeButtonRef.current.focus();
+    }
+
+    const originalStyle = window.getComputedStyle(document.body).overflow;
+    document.body.style.overflow = 'hidden';
+
+    return () => {
+      document.body.style.overflow = originalStyle;
+    };
+  }, []);
 
   return (
     <Layout onClick={handleClickOverlay}>
@@ -43,14 +73,25 @@ function Modal({ width = '304px', height = '216px', position, title, onClose, ch
         width={customWidth}
         height={height}
         position={position}
+        size={size}
         onClick={(e) => e.stopPropagation()}
+        onKeyDown={handleKeyDown}
+        ref={containerRef}
+        role="dialog"
+        aria-modal="true"
       >
-        <TitleContainer>
-          <Title>{title}</Title>
-          <CloseButton onClick={onClose}>
-            <CloseIcon />
-          </CloseButton>
-        </TitleContainer>
+        {title && (
+          <TitleContainer>
+            <Title>{title}</Title>
+            <CloseButton
+              onClick={onClose}
+              ref={closeButtonRef}
+              aria-label="모달 닫기"
+            >
+              <CloseIcon />
+            </CloseButton>
+          </TitleContainer>
+        )}
         {children}
       </ModalContainer>
     </Layout>

@@ -7,3 +7,5 @@ export type CardNumberError = Record<CardNumberKey, string>;
 
 export type CardExpiryDate = Record<CardPeriodKey, string>;
 export type CardExpiryDateError = Record<CardPeriodKey, string>;
+
+export type CardBrand = 'visa' | 'mastercard' | 'amex' | 'diners' | 'unionpay' | 'unknown';
