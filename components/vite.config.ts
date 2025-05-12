@@ -26,7 +26,7 @@ export default defineConfig({
     react(),
     dts({
       exclude: ["**/*.stories.tsx"],
-      include: ["src/lib", "src/svg.d.ts"],
+      include: ["src/lib", "src/svg.d.ts", "src/types/modal.ts"],
       tsconfigPath: "./tsconfig.app.json",
       rollupTypes: true,
     }),

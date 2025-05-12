@@ -1,10 +1,10 @@
-import { INITIAL_CVC_STATE } from "./constants";
+import { UseCardHookReturn } from "../types";
 import { getCardCVCError } from "./utils";
-import useSingleNumberInput from "@hooks/useSingleInput";
+import useSingleNumberInput from "@/hooks/useSingleNumberInput";
 
-const useCardCVC = () => {
+const useCardCVC = (): UseCardHookReturn => {
   return useSingleNumberInput({
-    initialValue: INITIAL_CVC_STATE,
+    initialValue: { value: "" },
     maxLength: 3,
     getErrorFn: getCardCVCError,
   });

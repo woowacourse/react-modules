@@ -1,4 +1,4 @@
-import type { CardBrand, CardBrandRule } from "../types";
+import type { CardBrand, CardBrandRule } from "@/lib/cardBrand/types";
 
 export const CARD_BRAND_RULE: Record<CardBrand, CardBrandRule> = {
   AMEX: {

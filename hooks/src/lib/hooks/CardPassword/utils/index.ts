@@ -1,4 +1,4 @@
-import { ErrorState, ValidationRule } from "@/types";
+import { ErrorState, ValidationRule } from "@/types/validation";
 import { commonConditions, getErrorByRules } from "@utils/validation";
 
 const cardPasswordValidationRules: ValidationRule<string>[] = [

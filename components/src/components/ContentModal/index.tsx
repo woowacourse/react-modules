@@ -1,5 +1,5 @@
 import BaseModal from "@/components/BaseModal";
-import type { ModalSizeType } from "../../types";
+import type { ModalSizeType } from "../../types/modal";
 import Button from "@/components/Button";
 import * as S from "./ContentModal.styled";
 import type { RefObject, ReactElement, ReactNode, ElementType } from "react";

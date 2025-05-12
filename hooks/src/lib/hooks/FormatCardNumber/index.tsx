@@ -1,23 +1,20 @@
 import { useMemo } from "react";
-import { CardBrand } from "../CardBrand/types";
-import { formatCardNumber } from "../CardBrand/utils";
+import type { CardBrand } from "@/lib/cardBrand/types";
+import { formatCardNumber } from "@/lib/cardBrand/utils/formatCardNumber";
 
 interface UseFormatCardNumberPrams {
   cardNumber: string;
-  cardBrand: CardBrand | null;
+  cardBrand: CardBrand;
 }
 
 const useFormatCardNumber = ({
   cardNumber,
   cardBrand,
-}: UseFormatCardNumberPrams) => {
-  return useMemo(() => {
-    if (!cardBrand) {
-      return cardNumber;
-    }
-
-    return formatCardNumber(cardNumber, cardBrand);
-  }, [cardNumber, cardBrand]);
+}: UseFormatCardNumberPrams): string => {
+  return useMemo(
+    () => formatCardNumber(cardNumber, cardBrand),
+    [cardNumber, cardBrand]
+  );
 };
 
 export default useFormatCardNumber;

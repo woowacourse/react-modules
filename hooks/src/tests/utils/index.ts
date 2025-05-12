@@ -6,7 +6,7 @@ import {
   TestMaxLengthParams,
   TestValidInputParams,
 } from "./type";
-import { ErrorState } from "@/types";
+import { ErrorState } from "@/types/validation";
 
 export function testInputUpdate<T, K extends keyof T>({
   renderHookFn,

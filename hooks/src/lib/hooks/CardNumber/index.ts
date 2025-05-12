@@ -1,10 +1,12 @@
 import { useCallback, useState } from "react";
 import { isNonNumericNonEmpty } from "@utils/validation";
-import { INITIAL_CARD_NUMBER_STATE } from "./constants";
 import { getCardNumberError } from "./utils";
+import { UseCardHookReturn } from "../types";
 
-const useCardNumber = () => {
-  const [cardNumber, setCardNumber] = useState(INITIAL_CARD_NUMBER_STATE);
+const useCardNumber = (): UseCardHookReturn => {
+  const [cardNumber, setCardNumber] = useState({
+    value: "",
+  });
 
   const handleCardNumberChange = useCallback((value: string) => {
     const cleanCardNumber = value.replace(/-/g, "");

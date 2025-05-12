@@ -1,10 +1,10 @@
-import { INITIAL_CARD_PASSWORD } from "./constants";
+import { UseCardHookReturn } from "../types";
 import { getCardPasswordError } from "./utils";
-import useSingleNumberInput from "@hooks/useSingleInput";
+import useSingleNumberInput from "@/hooks/useSingleNumberInput";
 
-const useCardPassword = () => {
+const useCardPassword = (): UseCardHookReturn => {
   return useSingleNumberInput({
-    initialValue: INITIAL_CARD_PASSWORD,
+    initialValue: { value: "" },
     maxLength: 2,
     getErrorFn: getCardPasswordError,
   });

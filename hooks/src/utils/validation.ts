@@ -1,4 +1,4 @@
-import { ErrorState, ValidationRule } from "@/types";
+import { ErrorState, ValidationRule } from "@/types/validation";
 
 export const commonConditions = {
   hasLengthInRange: (min: number, max: number) => (value: string) => {

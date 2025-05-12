@@ -1,6 +1,6 @@
 import useOutsideClickRef from "@hooks/useOutsideClickRef";
 import useKeyDown from "@/hooks/useKeyDown";
-import type { ModalDefaultProps } from "../../types";
+import type { ModalDefaultProps } from "../../types/modal";
 import Button from "@/components/Button";
 import * as S from "@/styles/Typography.styled";
 import ContentModal from "../../components/ContentModal";
