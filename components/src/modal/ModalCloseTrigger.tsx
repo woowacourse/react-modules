@@ -1,25 +1,11 @@
-import {
-  cloneElement,
-  isValidElement,
-  PropsWithChildren,
-  ReactElement,
-} from 'react';
+import { cloneElement, PropsWithChildren, ReactElement } from 'react';
 import { useModalContext } from './ModalProvider';
+import { isTriggerButtonElement } from './utils/modalTriggerUtils';
 
 function ModalCloseTrigger({ children }: PropsWithChildren) {
   const { onClose } = useModalContext();
 
-  const isButton =
-    isValidElement(children) &&
-    typeof children.type === 'string' &&
-    children.type === 'button';
-
-  const isModalButton =
-    isValidElement(children) &&
-    typeof children.type === 'function' &&
-    children.type.name === 'Button';
-
-  if (isButton || isModalButton) {
+  if (isTriggerButtonElement(children)) {
     const element = children as ReactElement<{
       onClick?: (e: React.MouseEvent) => void;
     }>;
