@@ -30,7 +30,7 @@ yarn add @suhwa/react-custom-hooks
 
 <br/>
 
-## 기본 사용법
+## 기본 사용
 
 ```jsx
 import React from 'react';
@@ -117,15 +117,17 @@ function CreditCardForm() {
 
 처음 몇 자리 숫자를 기반으로 다음 카드 브랜드를 자동으로 감지합니다.
 
-- Visa : 4로 시작 / 16자리
-- Mastercard : 51~55로 시작 / 16자리
-- Diners : 36으로 시작 / 14
+- `Visa` : 4로 시작 / 16자리 / 4-4-4-4
+- `Mastercard` : 51~55로 시작 / 16자리 / 4-4-4-4
+- `Diners` : 36으로 시작 / 14자리 / 4-6-4
+- `AMEX` : 34, 37로 시작 / 15자리 / 4-6-5
+- `유니온페이` : 622126~622925, 624~626, 6282~6288로 시작 / 16자리 / 4-4-4-4
 
 각 카드 브랜드는 동적으로 조정되는 특정 형식 규칙을 가지고 있습니다.
 
 <br/>
 
-## 고급 사용 예제
+## 사용 예제
 
 ```jsx
 import React, { useState } from 'react';
