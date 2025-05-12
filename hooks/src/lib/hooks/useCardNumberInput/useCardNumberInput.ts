@@ -1,7 +1,9 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { validateNumericInput } from "../utils/inputValidation";
 import { CARD_BRAND_RULE } from "../useCardBrand/constants";
 import { useCardBrand } from "../useCardBrand/useCardBrand";
+import { formatCardNumber } from "./utils/cardFormatter";
+import { removeNonDigits } from "../utils/inputUtils";
 
 type CardNumberState = {
   value: string;
@@ -15,12 +17,9 @@ const useCardNumberInput = () => {
   });
 
   const [errorMessage, setErrorMessage] = useState("");
+  const [formattedCardNumber, setFormattedCardNumber] = useState("");
 
   const cardBrand = useCardBrand([cardNumberState.value]);
-
-  const validateCardNumber = (value: string) => {
-    return validateNumericInput(value, getMaxLength());
-  };
 
   const getMaxLength = () => {
     if (cardBrand && CARD_BRAND_RULE[cardBrand]) {
@@ -29,8 +28,17 @@ const useCardNumberInput = () => {
     return 16;
   };
 
+  useEffect(() => {
+    const formatted = formatCardNumber(cardNumberState.value, cardBrand);
+    setFormattedCardNumber(formatted);
+  }, [cardNumberState.value, cardBrand]);
+
+  const validateCardNumber = (value: string) => {
+    return validateNumericInput(value, getMaxLength());
+  };
+
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const inputValue = e.target.value.replace(/\D/g, "");
+    const inputValue = removeNonDigits(e.target.value);
 
     const { isValid, errorMessage: validationError } =
       validateCardNumber(inputValue);
@@ -39,11 +47,18 @@ const useCardNumberInput = () => {
     setErrorMessage(validationError);
   };
 
+  const formattedMaxLength = formatCardNumber(
+    "1".repeat(getMaxLength()),
+    cardBrand
+  ).length;
+
   return {
     cardNumberState,
     errorMessage,
     handleInputChange,
     cardBrand,
+    formattedCardNumber,
+    maxLength: formattedMaxLength,
   };
 };
 

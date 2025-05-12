@@ -1,6 +1,5 @@
 import { useCardNumberInput, useExpiryDateInput, useSingleInput } from "./lib";
 import { CARD_INPUT } from "./lib/hooks/constants/cardValidationInfo";
-import { CARD_BRAND_RULE } from "./lib/hooks/useCardBrand/constants";
 
 const App = () => {
   const {
@@ -8,6 +7,8 @@ const App = () => {
     errorMessage: cardError,
     handleInputChange: handleCardInputChange,
     cardBrand,
+    formattedCardNumber,
+    maxLength,
   } = useCardNumberInput();
 
   const {
@@ -27,8 +28,8 @@ const App = () => {
       <div>
         <h2>카드 번호</h2>
         <input
-          maxLength={cardBrand ? CARD_BRAND_RULE[cardBrand]?.length : 16}
-          value={cardNumberState.value}
+          maxLength={maxLength}
+          value={formattedCardNumber}
           onChange={handleCardInputChange}
           style={{
             borderColor: cardNumberState.isValid ? "black" : "red",
