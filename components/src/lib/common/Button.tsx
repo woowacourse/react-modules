@@ -25,12 +25,13 @@ export default Button;
 const StyleButton = styled.button<{ color: string; backgroundColor: string }>`
   cursor: pointer;
 
-  width: 80px;
+  min-width: 80px;
   height: 44px;
   border: 1px solid #333;
   border-radius: 5px;
   font-size: 15px;
   font-weight: 700;
+  white-space: nowrap;
 
   color: ${({ color }) => color};
   background-color: ${({ backgroundColor }) => backgroundColor};
