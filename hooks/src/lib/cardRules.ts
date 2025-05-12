@@ -1,9 +1,9 @@
-import { CardType } from "./types/Card";
+import { CardNumber, CardType } from "./types/Card";
 
 export interface CardRule {
   type: CardType;
   match: (cardNumber: string) => boolean;
-  numberLengths: number;
+  numberLengths: Record<keyof CardNumber, number>;
 }
 
 export const cardRules: CardRule[] = [
@@ -13,7 +13,7 @@ export const cardRules: CardRule[] = [
       const p = Number(prefix.slice(0, 1));
       return p === 4;
     },
-    numberLengths: 16,
+    numberLengths: { first: 4, second: 4, third: 4, fourth: 4 },
   },
   {
     type: "MasterCard",
@@ -21,7 +21,7 @@ export const cardRules: CardRule[] = [
       const p = Number(prefix.slice(0, 2));
       return p >= 51 && p <= 55;
     },
-    numberLengths: 16,
+    numberLengths: { first: 4, second: 4, third: 4, fourth: 4 },
   },
   {
     type: "AMEX",
@@ -29,12 +29,12 @@ export const cardRules: CardRule[] = [
       const p = prefix.slice(0, 2);
       return p === "34" || p === "37";
     },
-    numberLengths: 15,
+    numberLengths: { first: 4, second: 6, third: 5, fourth: 0 },
   },
   {
     type: "Diners",
     match: (prefix: string) => prefix.startsWith("36"),
-    numberLengths: 14,
+    numberLengths: { first: 4, second: 6, third: 4, fourth: 0 },
   },
   {
     type: "UnionPay",
@@ -48,11 +48,11 @@ export const cardRules: CardRule[] = [
         (p4 >= 6282 && p4 <= 6288)
       );
     },
-    numberLengths: 16,
+    numberLengths: { first: 4, second: 4, third: 4, fourth: 4 },
   },
   {
     type: "None",
     match: () => false,
-    numberLengths: 16,
+    numberLengths: { first: 4, second: 4, third: 4, fourth: 4 },
   },
 ];

@@ -13,7 +13,10 @@ export function cardNumberValidation(cardNumber: string, cardType: CardType) {
     };
   }
 
-  const expectedLength = matchedRule.numberLengths;
+  const expectedLength = Object.values(matchedRule.numberLengths).reduce(
+    (acc, len) => acc + len,
+    0
+  );
 
   const isCardNumberError =
     !isValidLength(cardNumber, expectedLength) ||
