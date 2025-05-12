@@ -16,7 +16,7 @@ const useCardCompany = () => {
 		setCardCompany(pureCardNumber);
 	};
 
-	return { cardCompany, onChange, cardNumberError: getError(cardCompany, errorCases) };
+	return { cardCompany, onChange, cardCompanyError: getError(cardCompany, errorCases) };
 };
 
 export default useCardCompany;
