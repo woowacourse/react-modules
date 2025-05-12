@@ -63,7 +63,7 @@ describe('카드 타입 검증 테스트입니다.', () => {
     const { result } = renderHook(() => useCardNumber());
 
     const mockEvent = {
-      target: { value: '3234123412341234' },
+      target: { value: '123' },
     } as React.ChangeEvent<HTMLInputElement>;
 
     act(() => {
@@ -77,7 +77,7 @@ describe('카드 타입 검증 테스트입니다.', () => {
     const { result } = renderHook(() => useCardNumber());
 
     const mockEvent = {
-      target: { value: '4123456789012345' },
+      target: { value: '4' },
     } as React.ChangeEvent<HTMLInputElement>;
 
     act(() => {
@@ -91,7 +91,7 @@ describe('카드 타입 검증 테스트입니다.', () => {
     const { result } = renderHook(() => useCardNumber());
 
     const mockEvent = {
-      target: { value: '5523456789012345' },
+      target: { value: '55' },
     } as React.ChangeEvent<HTMLInputElement>;
 
     act(() => {
