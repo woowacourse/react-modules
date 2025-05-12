@@ -2,7 +2,7 @@ import { useCallback, useMemo, useState } from 'react';
 import { CVC_ERROR_TYPES, ERROR_MESSAGE } from '../config';
 import { ValidationResult } from '../types';
 import { checkIsNumber, checkIsValidLength } from '../validators';
-import { createValidationResult } from '../utils/createValidationResult';
+import { createValidationResult } from '../utils';
 
 function useCVC() {
   const [CVC, setCVC] = useState('');

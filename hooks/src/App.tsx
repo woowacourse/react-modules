@@ -2,7 +2,7 @@ import './App.css';
 import { useCardNumbers } from './lib';
 
 function App() {
-  const { cardNumbers, validationResults, brand, handleCardNumbersChange } =
+  const { cardNumbers, validationResults, cardBrand, handleCardNumbersChange } =
     useCardNumbers([
       { name: 'part1', length: 4 },
       { name: 'part2', length: 4 },
@@ -32,7 +32,7 @@ function App() {
       <p>{validationResults.part1.errorMessage}</p>
       <p>{validationResults.part2.errorMessage}</p>
       <p>{validationResults.part3.errorMessage}</p>
-      <p>{brand}</p>
+      <p>{cardBrand}</p>
     </>
   );
 }

@@ -1,30 +1,24 @@
 import { useCallback, useMemo, useState } from 'react';
-import { CARD_NUMBER_ERROR_TYPES, ERROR_MESSAGE } from '../config';
-import { ValidationResult } from '../types';
-import { createValidationResult } from '../utils/createValidationResult';
-import { checkIsNumber, checkIsValidLength } from '../validators';
-import { createInitialCardNumbers } from '../utils/createInitialCardNumbers';
-import { CardBrand, FieldDefinition } from '../config/fieldType';
 import {
-  isVisa,
-  isMasterCard,
-  isAmex,
-  isDiners,
-  isUnionPay,
-} from './validation';
+  CARD_NUMBER_ERROR_TYPES,
+  CardBrandType,
+  CardNumberFieldType,
+  ERROR_MESSAGE,
+} from '../config';
+import { ValidationResult } from '../types';
+import { checkIsNumber, checkIsValidLength } from '../validators';
+import {
+  createFieldLengthMap,
+  createInitialCardNumbers,
+  createValidationResult,
+  detectCardBrand,
+} from '../utils';
 
-function useCardNumbers<T extends string>(fields: FieldDefinition<T>[]) {
+function useCardNumbers<T extends string>(fields: CardNumberFieldType<T>[]) {
   const [cardNumbers, setCardNumbers] = useState<Record<T, string>>(() =>
     createInitialCardNumbers(fields)
   );
-
-  const fieldLengthMap = fields.reduce(
-    (acc, field) => {
-      acc[field.name] = field.length;
-      return acc;
-    },
-    {} as Record<T, number>
-  );
+  const fieldLengthMap = useMemo(() => createFieldLengthMap(fields), [fields]);
 
   const getCardNumberValidationError = useCallback(
     (key: T, value: string) => {
@@ -53,16 +47,9 @@ function useCardNumbers<T extends string>(fields: FieldDefinition<T>[]) {
     [cardNumbers, getCardNumberValidationError]
   );
 
-  const brand: CardBrand = useMemo(() => {
+  const cardBrand: CardBrandType = useMemo(() => {
     const fullNumber = Object.values(cardNumbers).join('');
-
-    if (isVisa(fullNumber)) return 'VISA';
-    if (isMasterCard(fullNumber)) return 'MASTERCARD';
-    if (isAmex(fullNumber)) return 'AMEX';
-    if (isDiners(fullNumber)) return 'DINERS';
-    if (isUnionPay(fullNumber)) return 'UNIONPAY';
-
-    return 'UNKNOWN';
+    return detectCardBrand(fullNumber);
   }, [cardNumbers]);
 
   const handleCardNumbersChange = useCallback(
@@ -83,7 +70,7 @@ function useCardNumbers<T extends string>(fields: FieldDefinition<T>[]) {
   return {
     cardNumbers,
     validationResults,
-    brand,
+    cardBrand,
     getCardNumberValidationError,
     handleCardNumbersChange,
   };

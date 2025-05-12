@@ -1,20 +1,20 @@
 export function isVisa(cardNumber: string): boolean {
-  return cardNumber.startsWith('4') && cardNumber.length === 16;
+  return cardNumber.startsWith('4');
 }
 
 export function isMasterCard(cardNumber: string): boolean {
   const firstTwo = Number(cardNumber.slice(0, 2));
-  return firstTwo >= 51 && firstTwo <= 55 && cardNumber.length === 16;
+  return firstTwo >= 51 && firstTwo <= 55;
 }
 
 export function isAmex(cardNumber: string): boolean {
   const firstTwo = cardNumber.slice(0, 2);
-  return (firstTwo === '34' || firstTwo === '37') && cardNumber.length === 14;
+  return firstTwo === '34' || firstTwo === '37';
 }
 
 export function isDiners(cardNumber: string): boolean {
   const firstTwo = cardNumber.slice(0, 2);
-  return firstTwo === '36' && cardNumber.length === 13;
+  return firstTwo === '36';
 }
 
 export function isUnionPay(cardNumber: string): boolean {
@@ -26,5 +26,5 @@ export function isUnionPay(cardNumber: string): boolean {
   const is624to626 = firstThree >= 624 && firstThree <= 626;
   const is6282to6288 = firstFour >= 6282 && firstFour <= 6288;
 
-  return (is622 || is624to626 || is6282to6288) && cardNumber.length === 16;
+  return is622 || is624to626 || is6282to6288;
 }

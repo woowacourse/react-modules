@@ -1,12 +1,4 @@
-export type FieldDefinition<T extends string> = {
+export type CardNumberFieldType<T extends string> = {
   name: T;
   length: number;
 };
-
-export type CardBrand =
-  | 'VISA'
-  | 'MASTERCARD'
-  | 'AMEX'
-  | 'DINERS'
-  | 'UNIONPAY'
-  | 'UNKNOWN';

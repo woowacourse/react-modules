@@ -12,7 +12,7 @@ import {
   checkIsNumber,
   checkIsValidLength,
 } from '../validators';
-import { createValidationResult } from '../utils/createValidationResult';
+import { createValidationResult } from '../utils';
 
 function useExpiryDate() {
   const [expiryDate, setExpiryDate] = useState<Record<ExpiryDateKey, string>>({

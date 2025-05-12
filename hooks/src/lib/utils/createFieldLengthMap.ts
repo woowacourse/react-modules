@@ -1,13 +1,13 @@
 import { CardNumberFieldType } from '../config';
 
-export function createInitialCardNumbers<T extends string>(
+export function createFieldLengthMap<T extends string>(
   fields: CardNumberFieldType<T>[]
-): Record<T, string> {
+): Record<T, number> {
   return fields.reduce(
     (acc, field) => {
-      acc[field.name] = '';
+      acc[field.name] = field.length;
       return acc;
     },
-    {} as Record<T, string>
+    {} as Record<T, number>
   );
 }
