@@ -1,4 +1,4 @@
-import { cardNumberLengthRules } from "./cardNumberLengthRules";
+import { cardRules } from "./cardRules";
 import isNumber from "./isNumber";
 import isPositiveNumber from "./isPositiveNumber";
 import isValidLength from "./isValidLength";
@@ -8,7 +8,18 @@ export function cardNumberValidation(
   cardNumbers: CardNumber,
   cardType: CardType
 ) {
-  const lengthRules = cardNumberLengthRules[cardType];
+  const matchedRule = cardRules.find((cardRule) => {
+    return cardType === cardRule.type;
+  });
+
+  if (!matchedRule) {
+    return {
+      isCardNumberError: [true, true, true, true],
+      errorText: "해당 카드 타입에 대한 길이 규칙이 없습니다.",
+    };
+  }
+
+  const lengthRules = matchedRule?.numberLengths;
 
   const isCardNumberError = (
     Object.entries(cardNumbers) as [keyof CardNumber, string][]

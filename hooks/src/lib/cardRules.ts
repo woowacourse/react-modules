@@ -50,4 +50,9 @@ export const cardRules: CardRule[] = [
     },
     numberLengths: { first: 4, second: 4, third: 4, fourth: 4 },
   },
+  {
+    type: "None",
+    match: () => false,
+    numberLengths: { first: 4, second: 4, third: 4, fourth: 4 },
+  },
 ];

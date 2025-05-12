@@ -1,4 +1,4 @@
-function isValidLength(value: string, expectedLength: number) {
+function isValidLength(value: string, expectedLength: number | undefined) {
   return value.length === expectedLength;
 }
 
