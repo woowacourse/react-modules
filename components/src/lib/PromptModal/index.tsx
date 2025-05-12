@@ -13,7 +13,7 @@ export const defaultInputAttributes: ComponentProps<"input"> = {
 
 interface PromptModalProps extends ModalDefaultProps {
   inputAttributes?: ComponentProps<"input">;
-  onSubmit: (value: string) => void;
+  onSubmit: (value: ComponentProps<"input">["value"]) => void;
 }
 
 function PromptModal({
@@ -30,7 +30,7 @@ function PromptModal({
 
     const value =
       inputAttributes.value !== undefined
-        ? String(inputAttributes.value)
+        ? inputAttributes.value
         : inputRef.current?.value ?? "";
     onSubmit(value);
     onRequestClose();
