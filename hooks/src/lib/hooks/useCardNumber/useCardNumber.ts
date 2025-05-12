@@ -52,12 +52,17 @@ export const useCardNumber = () => {
   };
 };
 
-const CARD_BRANDS = {
+const VALID_CARD_BRANDS = {
   Visa: 'Visa',
   MasterCard: 'MasterCard',
-  Unknown: 'Unknown',
+  Diners: 'Diners',
 } as const;
 
+const CARD_BRANDS = {
+  ...VALID_CARD_BRANDS,
+  Unknown: 'Unknown',
+} as const;
+type ValidCardType = keyof typeof VALID_CARD_BRANDS;
 type CardType = keyof typeof CARD_BRANDS;
 
 const isCardType = (cardType: string): cardType is CardType => {
@@ -70,18 +75,53 @@ interface CardRule {
   numberLengths: number;
 }
 
+const cardBrandRangeRules = {
+  // 카드 브랜드별로 시작하는 카드 번호의 유효한 숫자 범위를 정의합니다.
+  Visa: [{ start: 4, end: 4 }], // Visa 카드 번호는 4로 시작합니다.
+  MasterCard: [{ start: 51, end: 55 }], // MasterCard 카드 번호는 51~55로 시작합니다.
+  Diners: [{ start: 36, end: 36 }],
+  AMEX: [
+    { start: 34, end: 34 },
+    { start: 37, end: 37 },
+  ],
+  UnionPay: [
+    { start: 622126, end: 622925 },
+    { start: 624, end: 626 },
+    { start: 6282, end: 6288 },
+  ],
+};
+
+const checkCardBrandRange = ({ value, type }: { value: string; type: ValidCardType }) => {
+  for (const { start, end } of cardBrandRangeRules[type]) {
+    const needToCheckLength = start.toString().length;
+    const convertedValue = Number.parseInt(value.slice(0, needToCheckLength), 10);
+
+    if (convertedValue >= start && convertedValue <= end) {
+      return true;
+    }
+  }
+
+  return false;
+};
+
 const cardRules: CardRule[] = [
   {
-    type: 'Visa',
-    // Visa 카드 번호는 4로 시작합니다.
-    match: (cardNumber: string) => /^4[0-9]/.test(cardNumber),
+    type: CARD_BRANDS.Visa,
+    match: (cardNumber: string) =>
+      checkCardBrandRange({ value: cardNumber, type: CARD_BRANDS.Visa }),
     numberLengths: 16,
   },
   {
-    type: 'MasterCard',
-    // MasterCard 카드 번호는 51~55로 시작합니다.
-    match: (cardNumber: string) => /^5[1-5][0-9]/.test(cardNumber),
+    type: CARD_BRANDS.MasterCard,
+    match: (cardNumber: string) =>
+      checkCardBrandRange({ value: cardNumber, type: CARD_BRANDS.MasterCard }),
     numberLengths: 16,
+  },
+  {
+    type: CARD_BRANDS.Diners,
+    match: (cardNumber: string) =>
+      checkCardBrandRange({ value: cardNumber, type: CARD_BRANDS.Diners }),
+    numberLengths: 14,
   },
 ];
 
