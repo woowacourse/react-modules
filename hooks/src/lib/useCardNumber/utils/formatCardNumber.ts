@@ -1,6 +1,8 @@
+import { CardType } from "../types";
+
 export const formatCardNumber = (
   cardNumber: { first: string; second: string; third: string; fourth: string },
-  cardType
+  cardType: CardType
 ): string => {
   const { first, second, third, fourth } = cardNumber;
   const cardNumberStr = first + second + third + fourth;
@@ -50,7 +52,7 @@ export const formatCardNumber = (
 
 export const splitCardNumber = (
   formattedCardNumber: string,
-  cardType
+  cardType: CardType
 ): { first: string; second: string; third: string; fourth: string } => {
   const cardNumberStr = formattedCardNumber.replace(/\s/g, "");
 
