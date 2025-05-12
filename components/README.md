@@ -25,10 +25,6 @@ npm install @suhwa/react-modal
 
 yarn add @suhwa/react-modal
 
-### pnpm
-
-pnpm add @suhwa/react-modal
-
 <br/>
 
 ## 기본 사용법
@@ -73,9 +69,9 @@ function App() {
 
 #### Props
 
-size : 'small' | 'medium' | 'large' 'medium' 모달의 크기를 지정합니다
-children : ReactNode - 모달 구성 요소 (Trigger, Content 등)
-className : string - 커스텀 CSS 클래스
+- `size` ('small' | 'medium' | 'large' 'medium') : 모달의 크기를 지정합니다
+- `children` (ReactNode) : 모달 구성 요소 (Trigger, Content 등)
+- `className` (string) : 커스텀 CSS 클래스
 
 <br/>
 
@@ -91,9 +87,9 @@ className : string - 커스텀 CSS 클래스
 
 #### Props
 
-children : ReactNode - 클릭 가능한 요소
-asChild : boolean false 자식 요소의 속성을 트리거에 전달할지 여부
-className : string - 커스텀 CSS 클래스
+- `children` (ReactNode) : 클릭 가능한 요소
+- `asChild` (boolean) : 자식 요소의 속성을 트리거에 전달할지 여부
+- `className` (string) : 커스텀 CSS 클래스
 
 <br/>
 
@@ -107,8 +103,8 @@ className : string - 커스텀 CSS 클래스
 
 #### Props
 
-children : ReactNode - 모달 내용
-className : string - 커스텀 CSS 클래스
+- `children` (ReactNode) 모달 내용
+- `className` (string) 커스텀 CSS 클래스
 
 <br/>
 
@@ -180,11 +176,11 @@ className : string - 커스텀 CSS 클래스
 
 #### Props
 
-action : 'confirm' | 'cancel' | 'custom' 'confirm' 버튼의 역할과 스타일 지정
-onClick : (e: React.MouseEvent) => void - 클릭 이벤트 핸들러
-closeOnClick : boolean true 클릭 시 모달 닫기 여부
-children : ReactNode action에 따라 다름 버튼 텍스트
-className : string - 커스텀 CSS 클래스
+- `action` ('confirm' | 'cancel' | 'custom' 'confirm') : 버튼의 역할과 스타일 지정
+- `onClick` ((e: React.MouseEvent) => void) : 클릭 이벤트 핸들러
+- `closeOnClick` (boolean) : 클릭 시 모달 닫기 여부
+- `children` (ReactNode) : action에 따라 다름 버튼 텍스트
+- `className` (string) : 커스텀 CSS 클래스
 
 <br/>
 
@@ -291,9 +287,3 @@ function PromptExample() {
 ESC 키를 눌러 모달 닫기 지원
 모달이 닫힐 때 이전 포커스 위치로 복귀
 ```
-
-<br/>
-
-### 라이센스
-
-MIT © suhwa
