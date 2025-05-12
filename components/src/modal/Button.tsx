@@ -4,8 +4,8 @@ import { CSSProperties, useMemo } from 'react';
 // ============================== Types ==============================
 
 interface ButtonProps {
-  variant: ButtonVariantType;
   onClick: () => void;
+  variant?: ButtonVariantType;
   style?: CSSProperties;
   children?: string;
 }
@@ -13,7 +13,12 @@ type ButtonVariantType = 'primary' | 'secondary';
 
 // ============================== Component ==============================
 
-function Button({ variant, onClick, style, children }: ButtonProps) {
+function Button({
+  onClick,
+  variant = 'primary',
+  style,
+  children,
+}: ButtonProps) {
   const memoizedStyle = useMemo(() => {
     if (!style) return {};
     return { ...style };
