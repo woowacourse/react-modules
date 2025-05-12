@@ -1,5 +1,5 @@
-import { useState } from 'react';
 import { AlertModal, ConfirmModal, Modal, PromptModal } from '@seo_dev/react-modal';
+import { useState } from 'react';
 
 function App() {
   const [isOpen, setIsOpen] = useState({
