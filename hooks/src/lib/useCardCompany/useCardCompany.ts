@@ -4,7 +4,7 @@ const ERROR_MESSAGE = {
   EMPTY_CARD_COMPANY: "카드사를 선택해주세요.",
 };
 
-const useCardCompany = () => {
+const useCardCompany = (validCardCompanies: string[] = []) => {
   const [cardCompany, setCardCompany] = useState("");
   const [validationResult, setValidationResult] = useState({
     errorState: false,
@@ -19,6 +19,15 @@ const useCardCompany = () => {
       });
       return;
     }
+
+    if (!validCardCompanies.includes(inputValue)) {
+      setValidationResult({
+        errorState: true,
+        message: "유효하지 않은 카드사입니다.",
+      });
+      return;
+    }
+
     setValidationResult({ errorState: false, message: "" });
   };
 
