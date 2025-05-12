@@ -10,21 +10,26 @@
 import { useCardNumber } from '@sinjuk1/payments-hooks';
 
 const CardNumberForm = () => {
-  const { cardNumbers, handleCardNumberChange, errorMessage } = useCardNumber();
+  const { cardNumber, errorMessage, isValid, cardType, handleCardNumberChange } = useCardNumber();
 
   return (
     <div>
-      {cardNumbers.map((card, index) => (
-        <input
-          key={index}
-          type="text"
-          maxLength={4}
-          value={card}
-          onChange={(e) => handleCardNumberChange(e, index)}
-          placeholder="0000"
-        />
-      ))}
-      {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
+      <input
+        type="text"
+        value={cardNumber.formatted}
+        onChange={handleCardNumberChange}
+        placeholder="카드 번호를 입력하세요"
+      />
+      {errorMessage && (
+        <p style={{ border: `1px solid ${errorMessage === '' ? 'black' : 'red'}` }}>
+          {errorMessage}
+        </p>
+      )}
+      <p>카드 타입: {cardType}</p>
+      <p>포맷팅 카드 번호: {cardNumber.formatted}</p>
+      <p>원본 카드 번호: {cardNumber.raw}</p>
+      <h1>Hooks Modules</h1>
+      <button style={{ cursor: `${isValid ? 'pointer' : 'not-allowed'}` }}>카드 추가하기</button>
     </div>
   );
 };
@@ -100,49 +105,49 @@ const CardPasswordInput = () => {
 
 ### 카드 브랜드 식별
 
-- [ ] 다양한 카드 브랜드 지원 확장
+- [x] 다양한 카드 브랜드 지원 확장
 
-  - [ ] 카드사 식별 로직 추가
-    - [ ] Visa
-      - [ ] 4로 시작하는 16자리 숫자
-    - [ ] Mastercard
-      - [ ] 51~55로 시작하는 16자리 숫자
-    - [ ] AMEX
-      - [ ] 34, 37로 시작하는 15자리 숫자
+  - [x] 카드사 식별 로직 추가
+    - [x] Visa
+      - [x] 4로 시작하는 16자리 숫자
+    - [x] Mastercard
+      - [x] 51~55로 시작하는 16자리 숫자
+    - [x] AMEX
+      - [x] 34, 37로 시작하는 15자리 숫자
         - 예시 (34로 시작): 3412 345678 90123
         - 예시 (37로 시작): 3712 345678 90123
-    - [ ] Diners
-      - [ ] 36으로 시작하는 14자리 숫자
+    - [x] Diners
+      - [x] 36으로 시작하는 14자리 숫자
         - 예시: 3612 345678 9012
-    - [ ] UnionPay
-      - [ ] 카드의 앞 번호가 아래 3가지 조건을 만족하는 16자리 숫자
+    - [x] UnionPay
+      - [x] 카드의 앞 번호가 아래 3가지 조건을 만족하는 16자리 숫자
         - 622126~622925로 시작하는 경우: 6221 2612 3456 7890
         - 624~626로 시작하는 경우: 6240 1234 5678 9012
         - 6282~6288로 시작하는 경우: 6282 1234 5678 9012
-  - [ ] 카드사 유효성 검사 로직 추가
-    - [ ] 공통
-      - [ ] 숫자만 입력 가능해야함
-      - [ ] 처음 상태는 빈문자열이지만 입력하다 지워서 빈문자열 되면 에러
-      - [ ] 카드 번호 전체 길이가 14~16자리가 아니면 에러
-    - [ ] Visa
-    - [ ] Mastercard
-    - [ ] AMEX
-    - [ ] Diners
-    - [ ] UnionPay
+  - [x] 카드사 유효성 검사 로직 추가
+    - [x] 공통
+      - [x] 숫자만 입력 가능해야함
+      - [x] 처음 상태는 빈문자열이지만 입력하다 지워서 빈문자열 되면 에러
+      - [x] 카드 번호 전체 길이가 14~16자리가 아니면 에러
+    - [x] Visa
+    - [x] Mastercard
+    - [x] AMEX
+    - [x] Diners
+    - [x] UnionPay
 
-- [ ] 카드 번호 포맷팅 기능 추가
+- [x] 카드 번호 포맷팅 기능 추가
 
-  - [ ] 사용자 입력 시 자동으로 카드사별 규칙에 맞게 카드 번호를 구분하여 표시
-    - [ ] Visa
-      - [ ] 4, 4, 4, 4
-    - [ ] Mastercard
-      - [ ] 4, 4, 4, 4
-    - [ ] AMEX
-      - [ ] 4, 6, 5
-    - [ ] Diners
-      - [ ] 4, 6, 4
-    - [ ] UnionPay
-      - [ ] 4, 4, 4, 4
+  - [x] 사용자 입력 시 자동으로 카드사별 규칙에 맞게 카드 번호를 구분하여 표시
+    - [x] Visa
+      - [x] 4, 4, 4, 4
+    - [x] Mastercard
+      - [x] 4, 4, 4, 4
+    - [x] AMEX
+      - [x] 4, 6, 5
+    - [x] Diners
+      - [x] 4, 6, 4
+    - [x] UnionPay
+      - [x] 4, 4, 4, 4
 
 ## 라이센스
 
