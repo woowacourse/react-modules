@@ -10,8 +10,8 @@ export const cardRules: CardRule[] = [
   {
     type: "VISA",
     match: (prefix: string) => {
-      const p = Number(prefix.slice(0, 2));
-      return p >= 51 && p <= 55;
+      const p = Number(prefix.slice(0, 1));
+      return p === 4;
     },
     numberLengths: { first: 4, second: 4, third: 4, fourth: 4 },
   },
