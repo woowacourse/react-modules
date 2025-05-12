@@ -1,6 +1,6 @@
 {
   "name": "@jae-o/hooks-module",
-  "version": "0.0.2",
+  "version": "1.0.0",
   "description": "hooks module",
   "type": "module",
   "types": "dist/index.d.ts",
