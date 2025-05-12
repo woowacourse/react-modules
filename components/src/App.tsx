@@ -16,11 +16,7 @@ function App() {
               동의하고 저장하기
             </Modal.Button>
           </Modal.CloseTrigger>
-          <Modal.CloseTrigger>
-            <Modal.Button variant="secondary" onClick={() => {}}>
-              닫기
-            </Modal.Button>
-          </Modal.CloseTrigger>
+          <Modal.CloseTrigger>닫기</Modal.CloseTrigger>
         </Modal.ButtonWrapper>
       </Modal.Content>
     </Modal>
