@@ -63,9 +63,6 @@
 
 # 2️⃣ 페이먼츠 커스텀 훅
 
-> 페이먼츠 모듈 1단계
-
-[🗂️ 배포 npm 링크](https://www.npmjs.com/package/lume_hooks)
 
 ## 🎯 기능 요구 사항
 
@@ -137,7 +134,9 @@
 > 페이먼츠 모듈 1단계
 
 [🎨 스토리북 배포 주소](https://6811b32435027dad59e3902b-hdzpptbvyn.chromatic.com/?path=/story/components-modal--center)  
-[🗂️ 배포 npm 링크](https://www.npmjs.com/package/lumes_modal)
+[🗂️ 모달 배포 npm 링크](https://www.npmjs.com/package/lumes_modal)
+
+[🗂️ 커스텀 훅 배포 npm 링크](https://www.npmjs.com/package/lume_hooks)
 
 <br>
 
