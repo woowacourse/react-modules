@@ -1,6 +1,6 @@
 {
   "name": "@kimyouk/payments-validation",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "payments validation",
   "type": "module",
   "types": "dist/index.d.ts",
