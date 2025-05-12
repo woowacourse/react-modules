@@ -1,4 +1,4 @@
-import { ErrorType } from "../../types/errorType";
+import { ErrorType } from "../../types/ErrorType";
 
 export type ValidationResult = {
   cvc: string;
