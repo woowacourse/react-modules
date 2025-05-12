@@ -29,7 +29,7 @@ const makeNumbers = (start: number, end: number) => {
 };
 
 type Rule = {
-  cardBrand?: 'Visa' | 'MasterCard' | 'Diners' | 'AMEX' | 'UnionPay';
+  cardBrand?: 'Visa' | 'MasterCard' | 'Diners' | 'AMEX' | 'UnionPay' | string;
   startNumbers: string[];
   lengthArray: number[];
   message: string;
