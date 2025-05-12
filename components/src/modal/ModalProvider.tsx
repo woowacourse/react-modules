@@ -7,12 +7,20 @@ import {
   useState,
 } from 'react';
 
+// ============================== Types ==============================
+
 type ModalContextType = {
   open: boolean;
   role: ModalProviderRoleType;
   onClose: () => void;
   onOpen: () => void;
 };
+interface ModalProviderProps {
+  role?: ModalProviderRoleType;
+}
+type ModalProviderRoleType = 'modal' | 'alert-modal';
+
+// ============================== ModalContext ==============================
 
 const ModalContext = createContext<ModalContextType>({
   open: false,
@@ -31,10 +39,7 @@ export function useModalContext() {
   return context;
 }
 
-interface ModalProviderProps {
-  role?: ModalProviderRoleType;
-}
-type ModalProviderRoleType = 'modal' | 'alert-modal';
+// ============================== ModalProvider Component ==============================
 
 function ModalProvider({
   role = 'modal',
