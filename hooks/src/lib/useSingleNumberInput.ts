@@ -1,13 +1,13 @@
 import { useState } from 'react';
 import { isNotOverMaxLength, isNumeric } from './utils';
-import ErrorMessage from './constants/ErrorMessage';
+import ERROR_MESSAGE from './constants/ERROR_MESSAGE';
 
 const useSingleNumberInput = (maxLength: number) => {
   const [inputValue, setInputValue] = useState('');
 
   const errorText = (() => {
-    if (!isNumeric(inputValue)) return ErrorMessage.IS_NOT_NUMERIC;
-    if (!isNotOverMaxLength(inputValue, maxLength)) return ErrorMessage.IS_OVER_LENGTH;
+    if (!isNumeric(inputValue)) return ERROR_MESSAGE.IS_NOT_NUMERIC;
+    if (!isNotOverMaxLength(inputValue, maxLength)) return ERROR_MESSAGE.IS_OVER_LENGTH;
     return '';
   })();
 

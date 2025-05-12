@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { checkCardBrand, formatCardNumber, isNotOverMaxLength, isNumeric } from './utils';
-import ErrorMessage from './constants/ErrorMessage';
+import ERROR_MESSAGE from './constants/ERROR_MESSAGE';
 
 const useCardNumberInput = () => {
   const [cardNumberInputValue, setCardNumberInputValue] = useState('');
@@ -10,8 +10,8 @@ const useCardNumberInput = () => {
   const formattedCardNumber = formatCardNumber(cardNumberInputValue, cardBrand);
 
   const errorText = (() => {
-    if (!isNumeric(cardNumberInputValue)) return ErrorMessage.IS_NOT_NUMERIC;
-    if (!isNotOverMaxLength(cardNumberInputValue, 16)) return ErrorMessage.IS_OVER_LENGTH;
+    if (!isNumeric(cardNumberInputValue)) return ERROR_MESSAGE.IS_NOT_NUMERIC;
+    if (!isNotOverMaxLength(cardNumberInputValue, 16)) return ERROR_MESSAGE.IS_OVER_LENGTH;
     return '';
   })();
 
