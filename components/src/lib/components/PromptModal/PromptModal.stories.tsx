@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { useArgs } from '@storybook/preview-api';
 import PromptModal from './PromptModal';
+import { ModalProvider } from '../Modal/ModalProvider';
+import { Modal } from '../..';
 
 const meta: Meta<typeof PromptModal> = {
   title: 'Components/PromptModal',
@@ -20,6 +21,15 @@ const meta: Meta<typeof PromptModal> = {
   args: {
     size: 'medium',
   },
+  decorators: [
+    (Story) => {
+      return (
+        <ModalProvider>
+          <Story />
+        </ModalProvider>
+      );
+    },
+  ],
 };
 
 export default meta;
@@ -32,41 +42,10 @@ export const Default: Story = {
     content: 'prompt 모달 내용입니다.',
   },
   render: (args) => {
-    const [{ isPromptOpen }, updateArgs] = useArgs();
-
-    function handleCloseClick() {
-      updateArgs({ isPromptOpen: !isPromptOpen });
-    }
     return (
       <>
-        <button onClick={handleCloseClick}>alert모달</button>
-        <PromptModal
-          {...args}
-          isOpen={isPromptOpen}
-          onConfirmClick={handleCloseClick}
-          onCloseClick={handleCloseClick}
-        />
-      </>
-    );
-  },
-};
-
-export const Open: Story = {
-  args: {
-    size: 'medium',
-    title: 'prompt 모달 제목',
-    content: 'prompt 모달 내용입니다.',
-  },
-  render: (args) => {
-    function handleCloseClick() {}
-    return (
-      <>
-        <PromptModal
-          {...args}
-          isOpen={true}
-          onConfirmClick={handleCloseClick}
-          onCloseClick={handleCloseClick}
-        />
+        <Modal.Trigger>prompt모달</Modal.Trigger>
+        <PromptModal {...args} />
       </>
     );
   },

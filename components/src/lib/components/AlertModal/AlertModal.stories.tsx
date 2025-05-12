@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { useArgs } from '@storybook/preview-api';
 import AlertModal from './AlertModal';
+import { ModalProvider } from '../Modal/ModalProvider';
+import { Modal } from '../..';
 
 const meta: Meta<typeof AlertModal> = {
   title: 'Components/AlertModal',
@@ -23,6 +24,15 @@ const meta: Meta<typeof AlertModal> = {
   args: {
     size: 'medium',
   },
+  decorators: [
+    (Story) => {
+      return (
+        <ModalProvider>
+          <Story />
+        </ModalProvider>
+      );
+    },
+  ],
 };
 
 export default meta;
@@ -35,41 +45,10 @@ export const Default: Story = {
     content: 'alert 모달 내용입니다.',
   },
   render: (args) => {
-    const [{ isAlertOpen }, updateArgs] = useArgs();
-
-    function handleCloseClick() {
-      updateArgs({ isAlertOpen: !isAlertOpen });
-    }
     return (
       <>
-        <button onClick={handleCloseClick}>alert모달</button>
-        <AlertModal
-          {...args}
-          isOpen={isAlertOpen}
-          onCloseClick={handleCloseClick}
-          onConfirmClick={handleCloseClick}
-        />
-      </>
-    );
-  },
-};
-
-export const Open: Story = {
-  args: {
-    size: 'medium',
-    title: 'alert 모달 제목',
-    content: 'alert 모달 내용입니다.',
-  },
-  render: (args) => {
-    function handleCloseClick() {}
-    return (
-      <>
-        <AlertModal
-          {...args}
-          isOpen={true}
-          onCloseClick={handleCloseClick}
-          onConfirmClick={handleCloseClick}
-        />
+        <Modal.Trigger>alert모달</Modal.Trigger>
+        <AlertModal {...args} />
       </>
     );
   },
@@ -83,15 +62,10 @@ export const AlertWidth: Story = {
     alertActionsWidth: 172,
   },
   render: (args) => {
-    function handleCloseClick() {}
     return (
       <>
-        <AlertModal
-          {...args}
-          isOpen={true}
-          onCloseClick={handleCloseClick}
-          onConfirmClick={handleCloseClick}
-        />
+        <Modal.Trigger>alert모달</Modal.Trigger>
+        <AlertModal {...args} />
       </>
     );
   },
