@@ -7,7 +7,7 @@ interface BaseModalProps extends ModalLayoutProps {
   title: string;
   onRequestClose?: () => void;
   hasCloseButton?: boolean;
-  ref?: RefObject<HTMLDivElement | null>;
+  ref?: RefObject<HTMLDivElement>;
 }
 
 function BaseModal({

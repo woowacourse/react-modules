@@ -8,7 +8,7 @@ interface ContentModalProps {
   title: string;
   size?: ModalSizeType;
   hasCloseButton?: boolean;
-  ref?: RefObject<HTMLDivElement | null>;
+  ref?: RefObject<HTMLDivElement>;
   containerAs?: ElementType;
   content: ReactNode;
   buttonElements: ReactElement<typeof Button>[];
