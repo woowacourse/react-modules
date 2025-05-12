@@ -1,9 +1,11 @@
 import styled from '@emotion/styled';
-import { CSSProperties, PropsWithChildren, useEffect, useMemo } from 'react';
+import { CSSProperties, PropsWithChildren, useMemo } from 'react';
 import Button from './Button';
 import ButtonWrapper from './ButtonWrapper';
 import CloseButton from './CloseButton';
+import { useBodyScrollLock } from './hooks/useBodyScrollLock';
 import useClickOutside from './hooks/useClickOutside';
+import { useModalAccessibility } from './hooks/useModalAccessibility';
 import {
   MODAL_CONTAINER_POSITION_STYLES,
   MODAL_CONTENT_POSITION_STYLES,
@@ -52,80 +54,8 @@ function ModalContainer({
     return { ...style };
   }, [style]);
 
-  useEffect(
-    function handleBodyScrollLock() {
-      if (open) {
-        document.body.style.overflow = 'hidden';
-      } else {
-        document.body.style.overflow = '';
-      }
-
-      return () => {
-        document.body.style.overflow = '';
-      };
-    },
-    [open]
-  );
-
-  useEffect(
-    function handleModalOpenEffects() {
-      if (!open) return;
-
-      const allFocusable = modalRef.current?.querySelectorAll<HTMLElement>(
-        'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
-      );
-
-      const focusableList = Array.from(allFocusable || []).filter(
-        (element) =>
-          !element.hasAttribute('disabled') && element.tabIndex !== -1
-      );
-
-      console.log(allFocusable);
-
-      // 모달 열릴 때 첫 번째 포커스
-      if (allFocusable && allFocusable.length > 0) {
-        // 첫 번째 요소가 모달 닫기 버튼인 경우, 두 번째 요소에 포커스
-        if (allFocusable[0].getAttribute('aria-label') !== '모달 닫기 버튼') {
-          allFocusable[0].focus();
-        } else {
-          allFocusable[1]?.focus();
-        }
-      }
-
-      const handleKeyDown = (event: KeyboardEvent) => {
-        // ESC 키로 닫기
-        if (event.key === 'Escape') {
-          onClose();
-          return;
-        }
-
-        if (event.key !== 'Tab' || !focusableList.length) return;
-
-        const firstElement = focusableList[0];
-        const lastElement = focusableList[focusableList.length - 1];
-
-        if (event.shiftKey) {
-          // Shift + Tab
-          if (document.activeElement === firstElement) {
-            event.preventDefault();
-            lastElement.focus();
-          }
-        } else {
-          // Tab
-          if (document.activeElement === lastElement) {
-            event.preventDefault();
-            firstElement.focus();
-          }
-        }
-      };
-
-      document.addEventListener('keydown', handleKeyDown);
-      return () => {
-        document.removeEventListener('keydown', handleKeyDown);
-      };
-    },
-    [open, onClose]
-  );
+  useBodyScrollLock(open);
+  useModalAccessibility(open, onClose, modalRef);
 
   return (
     open && (
