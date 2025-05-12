@@ -1,8 +1,9 @@
 import { ComponentProps } from 'react';
 import styled from 'styled-components';
+import { useModal } from './ModalProvider';
 
 interface ConfirmButtonProps {
-  onClick: () => void;
+  onClick?: () => void;
   width?: number;
 }
 
@@ -10,8 +11,16 @@ function ConfirmButton({
   onClick,
   width,
 }: ConfirmButtonProps & ComponentProps<'button'>) {
+  const { setOpen } = useModal();
+
   return (
-    <StyledButton onClick={onClick} width={width}>
+    <StyledButton
+      onClick={() => {
+        setOpen(false);
+        onClick?.();
+      }}
+      width={width}
+    >
       확인
     </StyledButton>
   );

@@ -1,5 +1,6 @@
 import { ComponentProps } from 'react';
 import styled from 'styled-components';
+import { useModal } from './ModalProvider';
 
 interface CancelButtonProps {
   onClick: () => void;
@@ -10,8 +11,16 @@ function CancelButton({
   onClick,
   width,
 }: CancelButtonProps & ComponentProps<'button'>) {
+  const { setOpen } = useModal();
+
   return (
-    <StyledButton onClick={onClick} width={width}>
+    <StyledButton
+      onClick={() => {
+        setOpen(false);
+        onClick?.();
+      }}
+      width={width}
+    >
       취소
     </StyledButton>
   );

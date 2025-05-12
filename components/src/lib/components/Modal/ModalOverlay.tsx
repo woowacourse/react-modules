@@ -1,11 +1,21 @@
 import styled from 'styled-components';
+import { useModal } from './ModalProvider';
 
 interface ModalOverlayProps {
-  onClick: () => void;
+  onClick?: () => void;
 }
 
 function ModalOverlay({ onClick }: ModalOverlayProps) {
-  return <StyledModalOverlay onClick={onClick} />;
+  const { setOpen } = useModal();
+
+  return (
+    <StyledModalOverlay
+      onClick={() => {
+        setOpen(false);
+        onClick?.();
+      }}
+    />
+  );
 }
 
 export default ModalOverlay;

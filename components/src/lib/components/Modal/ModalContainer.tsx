@@ -1,19 +1,17 @@
 import { ReactElement } from 'react';
 import { createPortal } from 'react-dom';
 import styled from 'styled-components';
+import { useModal } from './ModalProvider';
 
 interface ModalContainerProps {
-  isOpen: boolean;
   children: ReactElement | ReactElement[];
   parentElement?: HTMLElement;
 }
 
-function ModalContainer({
-  isOpen,
-  children,
-  parentElement,
-}: ModalContainerProps) {
-  if (!isOpen) {
+function ModalContainer({ children, parentElement }: ModalContainerProps) {
+  const { open } = useModal();
+
+  if (!open) {
     return null;
   }
 
