@@ -22,10 +22,9 @@ const useCardCompany = () => {
     setValidationResult({ errorState: false, message: "" });
   };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const inputValue = e.target.value;
-    setCardCompany(inputValue);
-    validate(inputValue);
+  const handleChange = (value: string) => {
+    setCardCompany(value);
+    validate(value);
   };
 
   return { cardCompany, handleChange, validationResult };

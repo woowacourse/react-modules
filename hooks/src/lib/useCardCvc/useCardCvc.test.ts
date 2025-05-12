@@ -6,9 +6,7 @@ describe("useCardCvc 테스트", () => {
     const { result } = renderHook(() => useCardCvc());
 
     act(() => {
-      result.current.handleChange({
-        target: { value: "123" },
-      } as React.ChangeEvent<HTMLInputElement>);
+      result.current.handleChange("123");
     });
 
     expect(result.current.validationResult.errorState).toBe(false);
@@ -19,9 +17,7 @@ describe("useCardCvc 테스트", () => {
     const { result } = renderHook(() => useCardCvc());
 
     act(() => {
-      result.current.handleChange({
-        target: { value: "12ㄱ" },
-      } as React.ChangeEvent<HTMLInputElement>);
+      result.current.handleChange("12ㄱ");
     });
 
     expect(result.current.validationResult.errorState).toBe(true);
@@ -34,9 +30,7 @@ describe("useCardCvc 테스트", () => {
     const { result } = renderHook(() => useCardCvc());
 
     act(() => {
-      result.current.handleChange({
-        target: { value: "12" },
-      } as React.ChangeEvent<HTMLInputElement>);
+      result.current.handleChange("12");
     });
 
     expect(result.current.validationResult.errorState).toBe(true);

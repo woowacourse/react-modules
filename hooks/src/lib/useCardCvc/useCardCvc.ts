@@ -38,10 +38,9 @@ const useCardCvc = () => {
     return result;
   };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const inputValue = e.target.value;
-    setCardCVC(inputValue);
-    validate(inputValue);
+  const handleChange = (value: string) => {
+    setCardCVC(value);
+    validate(value);
   };
 
   return { cardCVC, handleChange, validationResult };

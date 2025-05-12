@@ -13,9 +13,7 @@ describe("useCardCompany 테스트", () => {
     const { result } = renderHook(() => useCardCompany());
 
     act(() => {
-      result.current.handleChange({
-        target: { value: "BC카드" },
-      } as React.ChangeEvent<HTMLInputElement>);
+      result.current.handleChange("BC카드");
     });
 
     expect(result.current.validationResult.errorState).toBe(false);
@@ -25,9 +23,7 @@ describe("useCardCompany 테스트", () => {
   it("CardCompany가 선택되지 않았을 때 errorState는 true, message는 '카드사를 선택해주세요' 여야 한다. ", () => {
     const { result } = renderHook(() => useCardCompany());
     act(() => {
-      result.current.handleChange({
-        target: { value: "" },
-      } as React.ChangeEvent<HTMLInputElement>);
+      result.current.handleChange("");
     });
 
     expect(result.current.validationResult.errorState).toBe(true);

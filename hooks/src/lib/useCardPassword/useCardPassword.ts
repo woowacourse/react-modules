@@ -39,10 +39,9 @@ const useCardPassword = () => {
     return result;
   };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const inputValue = e.target.value;
-    setCardPassword(inputValue);
-    validate(inputValue);
+  const handleChange = (value: string) => {
+    setCardPassword(value);
+    validate(value);
   };
 
   return { cardPassword, handleChange, validationResult };

@@ -6,9 +6,7 @@ describe("useCardPassword 테스트", () => {
     const { result } = renderHook(() => useCardPassword());
 
     act(() => {
-      result.current.handleChange({
-        target: { value: "12" },
-      } as React.ChangeEvent<HTMLInputElement>);
+      result.current.handleChange("12");
     });
 
     expect(result.current.validationResult.errorState).toBe(false);
@@ -19,9 +17,7 @@ describe("useCardPassword 테스트", () => {
     const { result } = renderHook(() => useCardPassword());
 
     act(() => {
-      result.current.handleChange({
-        target: { value: "1ㄱ" },
-      } as React.ChangeEvent<HTMLInputElement>);
+      result.current.handleChange("1ㄱ");
     });
 
     expect(result.current.validationResult.errorState).toBe(true);
@@ -34,9 +30,7 @@ describe("useCardPassword 테스트", () => {
     const { result } = renderHook(() => useCardPassword());
 
     act(() => {
-      result.current.handleChange({
-        target: { value: "3" },
-      } as React.ChangeEvent<HTMLInputElement>);
+      result.current.handleChange("3");
     });
 
     expect(result.current.validationResult.errorState).toBe(true);
