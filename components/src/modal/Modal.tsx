@@ -11,6 +11,7 @@ import SecondaryButton from './SecondaryButton';
 import { ModalProps, PositionType, SizeType } from './types';
 import { css } from '@emotion/react';
 import Input from './Input';
+import useFocusTrap from './useFocus';
 
 function ModalContainer({
   open,
@@ -37,10 +38,22 @@ function ModalContainer({
     }
   };
 
+  const { setRef, handleKeyDownTab } = useFocusTrap(open);
+
+  useEffect(() => {
+    const modal = modalRef.current;
+    if (!modal || !open) {
+      return;
+    }
+
+    setRef(modal);
+  }, [modalRef, open, setRef]);
+
   return (
     <StyledModalContainer
       onClick={handleClickOutside}
       onClose={onClose}
+      onKeyDown={handleKeyDownTab}
       position={position}
       size={size}
       style={style}
