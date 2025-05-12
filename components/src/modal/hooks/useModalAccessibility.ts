@@ -1,5 +1,15 @@
 import { useEffect } from 'react';
 
+/**
+ * 모달이 열릴 때 웹 접근성을 향상시키기 위한 훅입니다.
+ * - 첫 번째 포커스 가능한 요소로 포커스를 이동시킵니다.
+ * - 키보드 Tab 이동을 모달 내에서 순환시킵니다.
+ * - Escape 키를 누르면 모달을 닫습니다.
+ *
+ * @param open - 모달이 열려 있는지 여부입니다.
+ * @param onClose - 모달을 닫을 때 호출되는 콜백 함수입니다.
+ * @param modalRef - 포커스 관리 대상이 되는 모달 요소의 ref입니다.
+ */
 export function useModalAccessibility(
   open: boolean,
   onClose: () => void,
