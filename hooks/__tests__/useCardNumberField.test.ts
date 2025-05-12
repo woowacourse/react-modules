@@ -2,27 +2,96 @@ import { renderHook, act } from '@testing-library/react';
 import { useCardNumberField } from '../src/lib/hooks/useCardNumberField';
 
 describe('useCardNumberInput custom hook 테스트', () => {
-  it('유효한 카드 번호를 입력 처리', () => {
+  it.each([
+    ['1234567890123456', '브랜드가 없는 카드 번호'],
+    ['4111111111111111', 'visa 카드 번호'],
+    ['5111111111111111', 'master 카드 번호'],
+    ['36111111111111', 'diners 카드 번호'],
+    ['341111111111111', 'amex 카드 번호'],
+    ['6221261111111111', 'unionpay 카드 번호'],
+  ])('%s일 때 유효한 입력: %s)', (input, _) => {
     const { result } = renderHook(() => useCardNumberField());
 
     act(() => {
-      result.current.handleCardNumberChange('first', '1234');
+      result.current.handleCardNumberChange(input);
     });
 
-    expect(result.current.cardNumbers.first).toBe('1234');
-    expect(result.current.cardNumberErrors.first).toBe('');
+    expect(result.current.cardNumbers).toBe(input);
+    expect(result.current.cardNumberErrors).toBe('');
   });
 
-  describe('숫자 입력 유효성 검사', () => {
+  describe('VISA 카드 입력 유효성 검사', () => {
     it.each([
-      ['123a', '숫자만 입력 가능합니다.', '숫자가 아닌 입력'],
-      ['123', '4자리 숫자를 입력해주세요.', '자리수가 부족한 입력'],
+      ['411111111111111', 'VISA 카드는 16자리여야 합니다.', '자리수가 부족한 입력'],
+      ['41111111111111111', 'VISA 카드는 16자리여야 합니다.', '자리수가 많은 입력'],
     ])('카드 번호 입력이 %s일 때 에러: %s (%s)', (input, error, _) => {
       const { result } = renderHook(() => useCardNumberField());
+
       act(() => {
-        result.current.handleCardNumberChange('first', input);
+        result.current.handleCardNumberChange(input);
       });
-      expect(result.current.cardNumberErrors.first).toBe(error);
+
+      expect(result.current.cardNumberErrors).toBe(error);
+    });
+  });
+
+  describe('MASTER 카드 입력 유효성 검사', () => {
+    it.each([
+      ['511111111111111', 'MASTER 카드는 16자리여야 합니다.', '자리수가 부족한 입력'],
+      ['51111111111111111', 'MASTER 카드는 16자리여야 합니다.', '자리수가 많은 입력'],
+    ])('카드 번호 입력이 %s일 때 에러: %s (%s)', (input, error, _) => {
+      const { result } = renderHook(() => useCardNumberField());
+
+      act(() => {
+        result.current.handleCardNumberChange(input);
+      });
+
+      expect(result.current.cardNumberErrors).toBe(error);
+    });
+  });
+
+  describe('DINERS 카드 입력 유효성 검사', () => {
+    it.each([
+      ['3611111111111', 'DINERS 카드는 14자리여야 합니다.', '자리수가 부족한 입력'],
+      ['361111111111111', 'DINERS 카드는 14자리여야 합니다.', '자리수가 많은 입력'],
+    ])('카드 번호 입력이 %s일 때 에러: %s (%s)', (input, error, _) => {
+      const { result } = renderHook(() => useCardNumberField());
+
+      act(() => {
+        result.current.handleCardNumberChange(input);
+      });
+
+      expect(result.current.cardNumberErrors).toBe(error);
+    });
+  });
+
+  describe('AMEX 카드 입력 유효성 검사', () => {
+    it.each([
+      ['34111111111111', 'AMEX 카드는 15자리여야 합니다.', '자리수가 부족한 입력'],
+      ['3411111111111111', 'AMEX 카드는 15자리여야 합니다.', '자리수가 많은 입력'],
+    ])('카드 번호 입력이 %s일 때 에러: %s (%s)', (input, error, _) => {
+      const { result } = renderHook(() => useCardNumberField());
+
+      act(() => {
+        result.current.handleCardNumberChange(input);
+      });
+
+      expect(result.current.cardNumberErrors).toBe(error);
+    });
+  });
+
+  describe('UNIONPAY 카드 입력 유효성 검사', () => {
+    it.each([
+      ['622126111111111', 'UNIONPAY 카드는 16자리여야 합니다.', '자리수가 부족한 입력'],
+      ['62212611111111111', 'UNIONPAY 카드는 16자리여야 합니다.', '자리수가 많은 입력'],
+    ])('카드 번호 입력이 %s일 때 에러: %s (%s)', (input, error, _) => {
+      const { result } = renderHook(() => useCardNumberField());
+
+      act(() => {
+        result.current.handleCardNumberChange(input);
+      });
+
+      expect(result.current.cardNumberErrors).toBe(error);
     });
   });
 });
