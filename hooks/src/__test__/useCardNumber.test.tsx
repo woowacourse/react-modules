@@ -2,7 +2,7 @@ import { renderHook } from "@testing-library/react";
 import useCardNumber from "../lib/useCardNumber";
 import { act } from "react";
 
-describe("cardNumberValidation 테스트", () => {
+describe("useCardNumber 테스트", () => {
   it("CardNumber가 유효한 형태인지 확인한다.", () => {
     const { result } = renderHook(() => useCardNumber());
     act(() => {

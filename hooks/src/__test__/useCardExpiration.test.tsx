@@ -2,7 +2,7 @@ import { renderHook } from "@testing-library/react";
 import useCardExpirationDate from "../lib/useCardExpirationDate";
 import { act } from "react";
 
-describe("cardExpirationValidation 테스트", () => {
+describe("useCardExpiration 테스트", () => {
   it("유효기간이 유효한 형태인지 확인한다.", () => {
     const { result } = renderHook(() => useCardExpirationDate());
     act(() => {
