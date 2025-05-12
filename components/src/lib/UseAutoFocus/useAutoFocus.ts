@@ -1,16 +1,21 @@
 import { useEffect, useRef } from "react";
+
 const useAutoFocus = (isOpen: boolean) => {
   const modalRef = useRef<HTMLDivElement>(null);
+
   useEffect(() => {
     if (!isOpen) return;
+
     const modalEl = modalRef.current;
     const focusableEls = modalEl?.querySelectorAll<HTMLElement>(
       'button, a[href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
     );
     const firstEl = focusableEls?.[0];
     const lastEl = focusableEls?.[focusableEls.length - 1];
+
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key !== "Tab" || focusableEls?.length === 0) return;
+
       if (e.shiftKey) {
         if (document.activeElement === firstEl) {
           e.preventDefault();
@@ -24,7 +29,11 @@ const useAutoFocus = (isOpen: boolean) => {
       }
     };
     document.addEventListener("keydown", handleKeyDown);
+
     firstEl?.focus();
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+    };
   }, [isOpen]);
   return { modalRef };
 };
