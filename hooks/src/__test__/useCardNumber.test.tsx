@@ -118,7 +118,36 @@ describe('MasterCard 카드 타입 검증 테스트입니다.', () => {
 
     expect(result.current.cardType).toBe('MasterCard');
   });
+
+  test('카드 번호의 앞자리가 51~55로 시작하고 16자리를 채우면, errorMessage를 빈 값으로 반환한다.', () => {
+    const { result } = renderHook(() => useCardNumber());
+
+    const mockEvent = {
+      target: { value: '5555555555554444' },
+    } as React.ChangeEvent<HTMLInputElement>;
+
+    act(() => {
+      result.current.handleCardNumberChange(mockEvent);
+    });
+
+    expect(result.current.errorMessage).toBe('');
+  });
+
+  test('카드 번호의 앞자리가 51~55로 시작하고 16자리를 채우면, 공백이 포함된 포맷팅 된 값을 반환한다.', () => {
+    const { result } = renderHook(() => useCardNumber());
+
+    const mockEvent = {
+      target: { value: '5555555555554444' },
+    } as React.ChangeEvent<HTMLInputElement>;
+
+    act(() => {
+      result.current.handleCardNumberChange(mockEvent);
+    });
+
+    expect(result.current.cardNumber.formatted).toBe('5555 5555 5555 4444');
+  });
 });
+
 describe('Diners 카드 타입 검증 테스트입니다.', () => {
   test('카드 번호의 앞자리가 36으로 시작하면, 카드 타입을 Diners로 반환한다.', () => {
     const { result } = renderHook(() => useCardNumber());
@@ -132,6 +161,32 @@ describe('Diners 카드 타입 검증 테스트입니다.', () => {
     });
 
     expect(result.current.cardType).toBe('Diners');
+  });
+  test('카드 번호의 앞자리가 36으로 시작하고 14자리를 채우면, errorMessage를 빈 값으로 반환한다.', () => {
+    const { result } = renderHook(() => useCardNumber());
+
+    const mockEvent = {
+      target: { value: '36363636363636' },
+    } as React.ChangeEvent<HTMLInputElement>;
+
+    act(() => {
+      result.current.handleCardNumberChange(mockEvent);
+    });
+
+    expect(result.current.errorMessage).toBe('');
+  });
+  test('카드 번호의 앞자리가 36으로 시작하고 14자리를 채우면, 공백이 포함된 포맷팅 된 값을 반환한다.', () => {
+    const { result } = renderHook(() => useCardNumber());
+
+    const mockEvent = {
+      target: { value: '36363636363636' },
+    } as React.ChangeEvent<HTMLInputElement>;
+
+    act(() => {
+      result.current.handleCardNumberChange(mockEvent);
+    });
+
+    expect(result.current.cardNumber.formatted).toBe('3636 363636 3636');
   });
 });
 
@@ -162,6 +217,32 @@ describe('AMEX 카드 타입 검증 테스트입니다.', () => {
     });
 
     expect(result.current.cardType).toBe('AMEX');
+  });
+  test('카드 번호의 앞자리가 34로 시작하고 15자리를 채우면, errorMessage를 빈 값으로 반환한다.', () => {
+    const { result } = renderHook(() => useCardNumber());
+
+    const mockEvent = {
+      target: { value: '343434343434343' },
+    } as React.ChangeEvent<HTMLInputElement>;
+
+    act(() => {
+      result.current.handleCardNumberChange(mockEvent);
+    });
+
+    expect(result.current.errorMessage).toBe('');
+  });
+  test('카드 번호의 앞자리가 34로 시작하고 15자리를 채우면, 공백이 포함된 포맷팅 된 값을 반환한다.', () => {
+    const { result } = renderHook(() => useCardNumber());
+
+    const mockEvent = {
+      target: { value: '343434343434343' },
+    } as React.ChangeEvent<HTMLInputElement>;
+
+    act(() => {
+      result.current.handleCardNumberChange(mockEvent);
+    });
+
+    expect(result.current.cardNumber.formatted).toBe('3434 343434 34343');
   });
 });
 
@@ -206,5 +287,32 @@ describe('UnionPay 카드 타입 검증 테스트입니다.', () => {
     });
 
     expect(result.current.cardType).toBe('UnionPay');
+  });
+  test('카드 번호의 앞자리가 622126~622925로 시작하고 16자리를 채우면, errorMessage를 빈 값으로 반환한다.', () => {
+    const { result } = renderHook(() => useCardNumber());
+
+    const mockEvent = {
+      target: { value: '6221266221266221' },
+    } as React.ChangeEvent<HTMLInputElement>;
+
+    act(() => {
+      result.current.handleCardNumberChange(mockEvent);
+    });
+
+    expect(result.current.errorMessage).toBe('');
+  });
+
+  test('카드 번호의 앞자리가 622126~622925로 시작하고 16자리를 채우면, 공백이 포함된 포맷팅 된 값을 반환한다.', () => {
+    const { result } = renderHook(() => useCardNumber());
+
+    const mockEvent = {
+      target: { value: '6221266221266221' },
+    } as React.ChangeEvent<HTMLInputElement>;
+
+    act(() => {
+      result.current.handleCardNumberChange(mockEvent);
+    });
+
+    expect(result.current.cardNumber.formatted).toBe('6221 2662 2126 6221');
   });
 });
