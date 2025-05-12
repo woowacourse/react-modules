@@ -8,6 +8,8 @@ interface PromptModalProps {
   onConfirm: (value: string) => void;
   title: string;
   size?: Size;
+  primaryButtonText?: string;
+  secondaryButtonText?: string;
 }
 
 function PromptModal({
@@ -16,6 +18,8 @@ function PromptModal({
   onConfirm,
   title,
   size,
+  primaryButtonText = "확인",
+  secondaryButtonText = "취소",
 }: PromptModalProps) {
   const [input, setInput] = useState("");
 
@@ -37,8 +41,8 @@ function PromptModal({
           <Input value={input} onChange={(e) => setInput(e.target.value)} />
         </Modal.Body>
         <Modal.Footer>
-          <Modal.SecondaryButton>취소</Modal.SecondaryButton>
-          <Modal.PrimaryButton>확인</Modal.PrimaryButton>
+          <Modal.SecondaryButton>{secondaryButtonText}</Modal.SecondaryButton>
+          <Modal.PrimaryButton>{primaryButtonText}</Modal.PrimaryButton>
         </Modal.Footer>
       </Modal>
     </>

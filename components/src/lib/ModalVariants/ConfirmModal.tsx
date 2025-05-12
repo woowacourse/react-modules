@@ -7,6 +7,8 @@ interface ConfirmModalProps {
   title: string;
   content: string;
   size: Size;
+  primaryButtonText?: string;
+  secondaryButtonText?: string;
 }
 
 function ConfirmModal({
@@ -16,6 +18,8 @@ function ConfirmModal({
   title,
   content,
   size,
+  primaryButtonText = "확인",
+  secondaryButtonText = "취소",
 }: ConfirmModalProps) {
   return (
     <>
@@ -29,8 +33,8 @@ function ConfirmModal({
         <Modal.Header>{title}</Modal.Header>
         <Modal.Body>{content}</Modal.Body>
         <Modal.Footer>
-          <Modal.SecondaryButton>취소</Modal.SecondaryButton>
-          <Modal.PrimaryButton>확인</Modal.PrimaryButton>
+          <Modal.SecondaryButton>{secondaryButtonText}</Modal.SecondaryButton>
+          <Modal.PrimaryButton>{primaryButtonText}</Modal.PrimaryButton>
         </Modal.Footer>
       </Modal>
     </>

@@ -7,6 +7,7 @@ interface AlertModalProps {
   title: string;
   content: string;
   size?: Size;
+  primaryButtonText?: string;
 }
 
 function AlertModal({
@@ -16,6 +17,7 @@ function AlertModal({
   title,
   content,
   size,
+  primaryButtonText = "확인",
 }: AlertModalProps) {
   return (
     <>
@@ -28,7 +30,7 @@ function AlertModal({
         <Modal.Header>{title}</Modal.Header>
         <Modal.Body>{content}</Modal.Body>
         <Modal.Footer>
-          <Modal.PrimaryButton>확인</Modal.PrimaryButton>
+          <Modal.PrimaryButton>{primaryButtonText}</Modal.PrimaryButton>
         </Modal.Footer>
       </Modal>
     </>
