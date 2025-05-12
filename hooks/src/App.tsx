@@ -3,9 +3,7 @@ import useCardNumber from "./lib/hooks/CardNumber";
 
 function App() {
   const cardNumber = useCardNumber();
-  const { cardBrand, formattedCardNumber, errorState } = useCardBrand(
-    cardNumber.value
-  );
+  const cardBrand = useCardBrand(cardNumber.value);
 
   return (
     <div style={{ width: "100vw", height: "100vh" }}>
@@ -13,7 +11,7 @@ function App() {
         style={{ width: "500px", height: "50px" }}
         placeholder="1"
         type="text"
-        value={formattedCardNumber}
+        value={cardBrand.formattedValue}
         onChange={(e) => {
           cardNumber.onChange(e.target.value);
         }}
