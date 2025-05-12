@@ -1,14 +1,11 @@
 import BaseModal from "../BaseModal/BaseModal";
 import * as S from "./PromptModal.styles";
 import { ChangeEvent } from "react";
+import { ModalPropsType } from "../types/ModalPropsType";
 
-interface ModalPropsType {
-  isModalOpen: boolean;
-  title: string;
-  size?: "small" | "medium" | "large";
+interface PromptModal extends ModalPropsType {
   inputValue: string;
   onChangeInput: (e: ChangeEvent<HTMLInputElement>) => void;
-  onClose: () => void;
 }
 
 const PromptModal = ({
@@ -18,7 +15,7 @@ const PromptModal = ({
   inputValue,
   onChangeInput,
   onClose,
-}: ModalPropsType) => {
+}: PromptModal) => {
   return (
     <BaseModal
       isModalOpen={isModalOpen}

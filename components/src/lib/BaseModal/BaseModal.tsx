@@ -9,14 +9,11 @@ import {
 } from "./BaseModal.styles";
 import { IconClose } from "../IconClose";
 import useFocus from "../autoFocus/autoFocus";
+import { ModalPropsType } from "../types/ModalPropsType";
 
-interface ModalPropsType {
-  isModalOpen: boolean;
+export interface BaseModalProps extends ModalPropsType {
   position?: "center" | "bottom";
-  size?: "small" | "medium" | "large";
-  title: string;
   children: React.ReactNode;
-  onClose: () => void;
   showCloseButton?: boolean;
 }
 
@@ -28,7 +25,7 @@ const BaseModal = ({
   children,
   onClose,
   showCloseButton = true,
-}: ModalPropsType) => {
+}: BaseModalProps) => {
   const { modalRef } = useFocus(isModalOpen);
   if (!isModalOpen) return null;
 

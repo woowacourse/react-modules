@@ -1,12 +1,9 @@
 import BaseModal from "../BaseModal/BaseModal";
 import * as S from "./ConfirmModal.styles";
+import { ModalPropsType } from "../types/ModalPropsType";
 
-interface ModalPropsType {
-  isModalOpen: boolean;
-  title: string;
+interface ConfirmModalProps extends ModalPropsType {
   description: string;
-  size?: "small" | "medium" | "large";
-  onClose: () => void;
 }
 
 const ConfirmModal = ({
@@ -15,7 +12,7 @@ const ConfirmModal = ({
   description,
   size = "small",
   onClose,
-}: ModalPropsType) => {
+}: ConfirmModalProps) => {
   return (
     <BaseModal
       isModalOpen={isModalOpen}

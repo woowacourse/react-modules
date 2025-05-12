@@ -1,12 +1,9 @@
 import BaseModal from "../BaseModal/BaseModal";
 import * as S from "./AlertModal.styles";
+import { ModalPropsType } from "../types/ModalPropsType";
 
-interface ModalPropsType {
-  isModalOpen: boolean;
-  title: string;
+interface AlertModalProps extends ModalPropsType {
   description: string;
-  size?: "small" | "medium" | "large";
-  onClose: () => void;
 }
 
 const AlertModal = ({
@@ -15,7 +12,7 @@ const AlertModal = ({
   description,
   onClose,
   size = "small",
-}: ModalPropsType) => {
+}: AlertModalProps) => {
   return (
     <BaseModal
       isModalOpen={isModalOpen}
