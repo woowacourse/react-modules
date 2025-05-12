@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { ButtonVariants } from ".";
+import { ButtonVariants } from "./Button.type";
 import Polymorphic from "../Polymorphic";
 
 export const getButtonStyle = (variant: ButtonVariants) => {
