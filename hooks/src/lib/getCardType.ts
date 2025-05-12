@@ -9,21 +9,16 @@ export function getCardType(cardNumber: CardNumber): CardType {
   const prefix4 = cardNumberPrefix.slice(0, 4);
   const prefix6 = cardNumberPrefix.slice(0, 6);
 
-  if (prefix1 === "4") {
-    return "VISA";
-  } else if (Number(prefix2) >= 51 && Number(prefix2) <= 55) {
-    return "MasterCard";
-  } else if (prefix2 === "34" || prefix2 === "37") {
-    return "AMEX";
-  } else if (prefix2 === "36") {
-    return "Diners";
-  } else if (
+  if (prefix1 === "4") return "VISA";
+  if (Number(prefix2) >= 51 && Number(prefix2) <= 55) return "MasterCard";
+  if (prefix2 === "34" || prefix2 === "37") return "AMEX";
+  if (prefix2 === "36") return "Diners";
+  if (
     (Number(prefix6) >= 622126 && Number(prefix6) <= 622925) ||
     (Number(prefix3) >= 624 && Number(prefix3) <= 626) ||
     (Number(prefix4) >= 6282 && Number(prefix4) <= 6288)
-  ) {
+  )
     return "UnionPay";
-  }
 
   return "None";
 }
