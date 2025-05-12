@@ -47,7 +47,7 @@ function ModalContainer({
     }
 
     setRef(modal);
-  }, [modalRef, open, setRef]);
+  }, [open, setRef]);
 
   return (
     <StyledModalContainer
