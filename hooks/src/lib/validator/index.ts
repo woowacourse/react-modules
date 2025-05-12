@@ -36,10 +36,13 @@ function createValidator(field: ValidateField) {
           typeof rule.message === "function"
             ? rule.message(value)
             : rule.message;
-        // 정신건강상 as 타입 단언이...
-        errors.push({ field, code, message } as ValidationError);
+        const error: ValidationError = {
+          field,
+          code: code as ErrorCodeMap[ValidateField],
+          message,
+        };
+        errors.push(error);
         // 첫번째 에러가 발생하면 더 이상 검증하지 않음
-
         break;
       }
     }
@@ -48,9 +51,7 @@ function createValidator(field: ValidateField) {
   };
 }
 
-function createValidatorWithMultipleAndMostRelevantErrors(
-  field: ValidateField
-) {
+function createValidatorWithRelevantErrors(field: ValidateField) {
   return (value: string): ValidationResult => {
     if (value === "") return { errors: [], valid: true };
 
@@ -70,7 +71,13 @@ function createValidatorWithMultipleAndMostRelevantErrors(
             ? rule.message(value)
             : rule.message;
 
-        errors.push({ field, code, message } as ValidationError);
+        const error: ValidationError = {
+          field,
+          code: code as ErrorCodeMap[ValidateField],
+          message,
+        };
+        errors.push(error);
+        break;
       }
     }
 
@@ -78,4 +85,4 @@ function createValidatorWithMultipleAndMostRelevantErrors(
   };
 }
 
-export { createValidator, createValidatorWithMultipleAndMostRelevantErrors };
+export { createValidator, createValidatorWithRelevantErrors };
