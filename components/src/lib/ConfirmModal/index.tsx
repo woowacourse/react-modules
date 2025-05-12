@@ -1,9 +1,9 @@
 import useOutsideClickRef from "@hooks/useOutsideClickRef";
 import useKeyDown from "@/hooks/useKeyDown";
-import type { ModalDefaultProps } from "../types";
+import type { ModalDefaultProps } from "../../types";
 import Button from "@/components/Button";
 import * as S from "@/styles/Typography.styled";
-import ContentModal from "../ContentModal";
+import ContentModal from "../../components/ContentModal";
 
 interface ConfirmModalProps extends ModalDefaultProps {
   confirmText: string;

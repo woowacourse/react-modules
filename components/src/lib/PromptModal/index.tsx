@@ -1,6 +1,6 @@
-import type { ModalDefaultProps } from "../types";
+import type { ModalDefaultProps } from "../../types";
 import Button from "@/components/Button";
-import ContentModal from "../ContentModal";
+import ContentModal from "../../components/ContentModal";
 import { type ComponentProps, FormEvent, useRef } from "react";
 import Input from "@/components/Input";
 

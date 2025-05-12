@@ -1,7 +1,7 @@
 import { PropsWithChildren, RefObject } from "react";
 import * as S from "./BaseModal.styled";
 import CloseIcon from "@assets/close.svg";
-import { ModalLayoutProps } from "../types";
+import { ModalLayoutProps } from "@/types";
 
 interface BaseModalProps extends ModalLayoutProps {
   title: string;

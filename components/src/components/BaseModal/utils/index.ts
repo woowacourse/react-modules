@@ -1,4 +1,4 @@
-import { ModalPositionType, ModalSizeType } from "@/lib/types";
+import { ModalPositionType, ModalSizeType } from "@/types";
 
 export const getModalPositionStyle = (position: ModalPositionType) => {
   switch (position) {
