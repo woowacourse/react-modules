@@ -18,4 +18,8 @@ export function validateCardBrandLength(cardBrand: string, cardNumber: string) {
   if (cardBrand === 'unionpay' && cardNumber.length !== 16) {
     return 'UNIONPAY 카드는 16자리여야 합니다.';
   }
+
+  if (!cardBrand && cardNumber.length !== 16 && cardNumber.length > 0) {
+    return '카드 번호는 16자리여야 합니다.';
+  }
 }

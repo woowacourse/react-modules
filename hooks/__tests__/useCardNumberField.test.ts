@@ -20,6 +20,21 @@ describe('useCardNumberField custom hook 테스트', () => {
     expect(result.current.cardNumberErrors).toBe('');
   });
 
+  describe('브랜드 없는 카드 번호 입력 유효성 검사', () => {
+    it.each([
+      ['123456789012345', '카드 번호는 16자리여야 합니다.', '자리수가 부족한 입력'],
+      ['12345678901234567', '카드 번호는 16자리여야 합니다.', '자리수가 많은 입력'],
+    ])('카드 번호 입력이 %s일 때 에러: %s (%s)', (input, error, _) => {
+      const { result } = renderHook(() => useCardNumberField());
+
+      act(() => {
+        result.current.handleCardNumberChange(input);
+      });
+
+      expect(result.current.cardNumberErrors).toBe(error);
+    });
+  });
+
   describe('VISA 카드 입력 유효성 검사', () => {
     it.each([
       ['411111111111111', 'VISA 카드는 16자리여야 합니다.', '자리수가 부족한 입력'],
