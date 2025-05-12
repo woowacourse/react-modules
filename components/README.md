@@ -2,7 +2,7 @@
 
 React 애플리케이션을 위한 유연하고 커스터마이징이 가능한 모달 컴포넌트입니다.
 
-해당 훅은 ESM import 방식만을 지원하고,
+이 컴포넌트는 ESM import 방식만을 지원하고,
 
 react, react-dom 의존을 필요로 합니다.
 
@@ -138,6 +138,36 @@ export default App;
 | position   | 'center' \| 'bottom'                          | 아니오    | 'center'  | 모달 위치                         |
 | dialogType | 'default' \| 'alert' \| 'confirm' \| 'prompt' | 아니오    | 'default' | 모달 대화상자 유형                |
 | children   | React.ReactNode                               | 예        | -         | 모달 내용                         |
+| className  | string                                        | 아니오    | -         | 추가 CSS 클래스                   |
+| aria-\*    | string                                        | 아니오    | -         | 접근성 관련 속성들                |
+
+### Modal.Background Props
+
+| Prop      | Type            | 필수 여부 | 기본값 | 설명             |
+| --------- | --------------- | --------- | ------ | ---------------- |
+| children  | React.ReactNode | 예        | -      | 배경 내부 콘텐츠 |
+| className | string          | 아니오    | -      | 추가 CSS 클래스  |
+
+### Modal.Container Props
+
+| Prop      | Type            | 필수 여부 | 기본값 | 설명                 |
+| --------- | --------------- | --------- | ------ | -------------------- |
+| children  | React.ReactNode | 예        | -      | 컨테이너 내부 콘텐츠 |
+| className | string          | 아니오    | -      | 추가 CSS 클래스      |
+
+### Modal.Header Props
+
+| Prop      | Type            | 필수 여부 | 기본값 | 설명             |
+| --------- | --------------- | --------- | ------ | ---------------- |
+| children  | React.ReactNode | 예        | -      | 헤더 내부 콘텐츠 |
+| className | string          | 아니오    | -      | 추가 CSS 클래스  |
+
+### Modal.Content Props
+
+| Prop      | Type            | 필수 여부 | 기본값 | 설명             |
+| --------- | --------------- | --------- | ------ | ---------------- |
+| children  | React.ReactNode | 예        | -      | 콘텐츠 내부 요소 |
+| className | string          | 아니오    | -      | 추가 CSS 클래스  |
 
 ### Modal.Alert Props
 
@@ -150,6 +180,8 @@ export default App;
 | onConfirm | () => void                     | 예        | -        | 확인 버튼 클릭 시 호출되는 함수   |
 | position  | 'center' \| 'bottom'           | 아니오    | 'center' | 모달 위치                         |
 | size      | 'small' \| 'medium' \| 'large' | 아니오    | 'medium' | 모달 크기                         |
+| className | string                         | 아니오    | -        | 추가 CSS 클래스                   |
+| aria-\*   | string                         | 아니오    | -        | 접근성 관련 속성들                |
 
 ### Modal.Confirm Props
 
@@ -163,6 +195,8 @@ export default App;
 | onCancel  | () => void                     | 예        | -        | 취소 버튼 클릭 시 호출되는 함수   |
 | position  | 'center' \| 'bottom'           | 아니오    | 'center' | 모달 위치                         |
 | size      | 'small' \| 'medium' \| 'large' | 아니오    | 'medium' | 모달 크기                         |
+| className | string                         | 아니오    | -        | 추가 CSS 클래스                   |
+| aria-\*   | string                         | 아니오    | -        | 접근성 관련 속성들                |
 
 ### Modal.Prompt Props
 
@@ -176,6 +210,8 @@ export default App;
 | position    | 'center' \| 'bottom'           | 아니오    | 'center'          | 모달 위치                         |
 | size        | 'small' \| 'medium' \| 'large' | 아니오    | 'medium'          | 모달 크기                         |
 | placeholder | string                         | 아니오    | '값을 입력하세요' | 입력 필드 플레이스홀더 텍스트     |
+| className   | string                         | 아니오    | -                 | 추가 CSS 클래스                   |
+| aria-\*     | string                         | 아니오    | -                 | 접근성 관련 속성들                |
 
 ## 특징
 
@@ -185,6 +221,7 @@ export default App;
 - **다양한 대화상자 유형**: 기본, 알림(Alert), 확인(Confirm), 입력(Prompt) 모달 지원
 - **커스터마이징**: 컴포넌트 기반 API로 유연한 구성 가능
 - **포털 렌더링**: 모달이 DOM 계층 구조에 관계없이 body에 렌더링됨
+- **스타일 커스터마이징**: className을 통한 스타일 확장 가능
 
 ## 스토리북
 
