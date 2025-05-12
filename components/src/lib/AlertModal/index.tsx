@@ -23,7 +23,7 @@ function AlertModal({
       title={title}
       size={size}
       hasCloseButton={false}
-      modalRef={modalRef}
+      ref={modalRef}
       content={<S.ModalText>{alertText}</S.ModalText>}
       buttonElements={[
         <Button

@@ -8,7 +8,7 @@ interface ContentModalProps {
   title: string;
   size?: ModalSizeType;
   hasCloseButton?: boolean;
-  modalRef?: RefObject<HTMLDivElement | null>;
+  ref?: RefObject<HTMLDivElement | null>;
   containerAs?: ElementType;
   content: ReactNode;
   buttonElements: ReactElement<typeof Button>[];
@@ -18,7 +18,7 @@ function ContentModal({
   title,
   size,
   hasCloseButton,
-  modalRef,
+  ref,
   containerAs = "div",
   content,
   buttonElements,
@@ -26,7 +26,7 @@ function ContentModal({
   return (
     <BaseModal
       title={title}
-      modalRef={modalRef}
+      ref={ref}
       size={size}
       hasCloseButton={hasCloseButton}
     >

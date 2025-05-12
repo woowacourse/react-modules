@@ -7,7 +7,7 @@ interface BaseModalProps extends ModalLayoutProps {
   title: string;
   onRequestClose?: () => void;
   hasCloseButton?: boolean;
-  modalRef?: RefObject<HTMLDivElement | null>;
+  ref?: RefObject<HTMLDivElement | null>;
 }
 
 function BaseModal({
@@ -16,7 +16,7 @@ function BaseModal({
   hasCloseButton = true,
   position = "center",
   size = "medium",
-  modalRef,
+  ref,
   children,
 }: PropsWithChildren<BaseModalProps>) {
   return (
@@ -24,7 +24,7 @@ function BaseModal({
       <S.Modal
         role="dialog"
         aria-modal
-        ref={modalRef}
+        ref={ref}
         position={position}
         size={size}
       >

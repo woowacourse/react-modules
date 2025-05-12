@@ -11,7 +11,7 @@ const meta = {
     hasCloseButton: true,
     position: "center",
     size: "medium",
-    modalRef: { current: null },
+    ref: { current: null },
     children: "Modal Content",
   },
 } satisfies Meta<typeof BaseModal>;

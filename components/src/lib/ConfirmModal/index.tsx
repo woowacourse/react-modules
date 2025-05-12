@@ -25,7 +25,7 @@ function ConfirmModal({
       title={title}
       size={size}
       hasCloseButton={false}
-      modalRef={modalRef}
+      ref={modalRef}
       content={<S.ModalText>{confirmText}</S.ModalText>}
       buttonElements={[
         <Button

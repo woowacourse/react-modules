@@ -1,7 +1,7 @@
 import { PropsWithChildren } from "react";
 import useOutsideClickRef from "@hooks/useOutsideClickRef";
 import useKeyDown from "@/hooks/useKeyDown";
-import BaseModal from "../BaseModal";
+import BaseModal from "@/components/BaseModal";
 import { ModalLayoutProps, ModalDefaultProps } from "../../types";
 
 interface ModalProps
@@ -22,7 +22,7 @@ function Modal({
     <BaseModal
       title={title}
       onRequestClose={onRequestClose}
-      modalRef={modalRef}
+      ref={modalRef}
       position={position}
       size={size}
     >
