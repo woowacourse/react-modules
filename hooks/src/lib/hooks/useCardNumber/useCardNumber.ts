@@ -27,26 +27,22 @@ export const useCardNumber = () => {
 
   const handleCardNumberChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const newValue = event.target.value;
-    // 카드 번호가 들어오면 카드의 타입을 검사하고 공통 유효성 검사(14~16자리, 숫자만 입력 가능)을 한다.
-    // 카드 타입과 카드 길이를 받으면 카드 길이가 유효한지를 검사한다.
-    const { type, numberLengths } = getCardType({ cardNumber: newValue, cardRules: cardRules });
+    // 카드 번호가 들어오면 카드의 타입과 카드 길이를 반환한다.
+    // 카드 타입과 카드 길이를 받으면 해당 카드 타입의 카드 길이가 유효한지를 검사한다.
 
-    const { isValid, errorMessage } = validateCardInput(newValue, numberLengths);
+    const { type, numberLengths } = getCardType({ cardNumber: newValue, cardRules: cardRules });
+    const { errorMessage } = validateCardInput(newValue, numberLengths);
 
     setCardNumbers(newValue);
     setCardType(type);
 
-    if (!isValid) {
-      setErrorMessage(errorMessage);
-    } else {
-      setErrorMessage('');
-    }
+    setErrorMessage(errorMessage);
   };
 
   return {
     cardNumbers,
     errorMessage,
-    isValid: errorMessage === '',
+    isValid: cardNumbers !== '' && errorMessage === '',
     cardType,
     handleCardNumberChange,
   };
@@ -92,7 +88,7 @@ const cardBrandRangeRules = {
     { start: 624, end: 626 },
     { start: 6282, end: 6288 },
   ],
-};
+} as const;
 
 const checkCardBrandRange = ({ value, type }: { value: string; type: ValidCardType }) => {
   for (const { start, end } of cardBrandRangeRules[type]) {
