@@ -17,12 +17,18 @@ pnpm add @mlnwns/hooks
 
 ### 1. useCardNumberInput
 
-카드 번호 입력을 위한 커스텀 훅입니다. 여러 개의 입력 필드로 나누어진 카드 번호
-를 관리합니다.
+카드 번호 입력을 위한 커스텀 훅입니다. 카드 번호를 자동으로 포맷팅하고 카드 브랜
+드를 감지합니다.
 
 ```ts
-const { cardNumberState, errorMessage, handleInputChange } =
-  useCardNumberInput();
+const {
+  cardNumberState,
+  errorMessage,
+  handleInputChange,
+  cardBrand,
+  formattedCardNumber,
+  maxLength,
+} = useCardNumberInput();
 ```
 
 ### 2. useExpiryDateInput
@@ -36,10 +42,18 @@ const { expiryDateState, errorMessage, handleInputChange } =
 
 ### 3. useSingleInput
 
-CVV, 우편번호 등 단일 입력 필드를 위한 커스텀 훅입니다.
+CVV, 비밀번호 등 단일 입력 필드를 위한 커스텀 훅입니다.
 
 ```ts
 const { singleState, errorMessage, handleInputChange } = useSingleInput(3); // CVC(3자리)
+```
+
+### 4. useCardBrand
+
+카드 번호를 기반으로 카드 브랜드를 감지하는 커스텀 훅입니다.
+
+```ts
+const cardBrand = useCardBrand([cardNumberPart]);
 ```
 
 ## 사용 예시
@@ -51,20 +65,23 @@ import React from "react";
 import { useCardNumberInput } from "@mlnwns/hooks";
 
 const CardNumberForm = () => {
-  const { cardNumberState, errorMessage, handleInputChange } =
-    useCardNumberInput();
+  const {
+    cardNumberState,
+    errorMessage,
+    handleInputChange,
+    cardBrand,
+    formattedCardNumber,
+    maxLength,
+  } = useCardNumberInput();
 
-  const isCardNumberValid = cardNumberState.every(
-    (field) => field.isValid && field.value.length > 0
-  );
+  const isCardNumberValid =
+    cardNumberState.isValid && cardNumberState.value.length > 0;
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (isCardNumberValid) {
-      const fullCardNumber = cardNumberState
-        .map((field) => field.value)
-        .join("");
-      console.log("카드 번호:", fullCardNumber);
+      console.log("카드 번호:", cardNumberState.value);
+      console.log("카드 브랜드:", cardBrand);
     }
   };
 
@@ -72,18 +89,15 @@ const CardNumberForm = () => {
     <form onSubmit={handleSubmit}>
       <div>
         <label>카드 번호</label>
-        <div style={{ display: "flex" }}>
-          {cardNumberState.map((field, index) => (
-            <div key={index}>
-              <input
-                type="text"
-                maxLength={4}
-                value={field.value}
-                onChange={(e) => handleInputChange(e, index)}
-              />
-              {index < cardNumberState.length - 1 && <span>-</span>}
-            </div>
-          ))}
+        <div>
+          <input
+            type="text"
+            maxLength={maxLength}
+            value={formattedCardNumber}
+            onChange={handleInputChange}
+            placeholder="0000 0000 0000 0000"
+          />
+          {cardBrand && <span>카드 유형: {cardBrand}</span>}
         </div>
         {errorMessage && <p style={{ color: "red" }}>{errorMessage}</p>}
       </div>
@@ -187,6 +201,31 @@ const CVCForm = () => {
 };
 ```
 
-- [x] useCardNumberInput: 카드 번호
-- [x] useExpiryDateInput: 유효 기간
-- [x] useSingleInput: 한 개의 입력창
+### 카드 브랜드 감지(useCardBrand) 사용 예시
+
+```jsx
+import React, { useState } from "react";
+import { useCardBrand } from "@mlnwns/hooks";
+
+const CardBrandDetector = () => {
+  const [cardNumber, setCardNumber] = useState("");
+  const cardBrand = useCardBrand([cardNumber]);
+
+  const handleInputChange = (e) => {
+    setCardNumber(e.target.value);
+  };
+
+  return (
+    <div>
+      <label>카드 번호 입력</label>
+      <input
+        type="text"
+        value={cardNumber}
+        onChange={handleInputChange}
+        placeholder="카드 번호를 입력하세요"
+      />
+      {cardBrand && <p>감지된 카드 브랜드: {cardBrand}</p>}
+    </div>
+  );
+};
+```
