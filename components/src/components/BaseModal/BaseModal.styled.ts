@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { ModalLayoutProps } from "../types";
+import { ModalLayoutProps } from "@/types";
 import {
   getModalPositionStyle,
   getModalSizeStyle,
