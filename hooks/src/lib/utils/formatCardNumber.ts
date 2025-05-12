@@ -1,15 +1,15 @@
+const formatMap: Record<string, number[]> = {
+  Visa: [4, 4, 4, 4],
+  MasterCard: [4, 4, 4, 4],
+  유니온페이: [4, 4, 4, 4],
+  Diners: [4, 6, 4],
+  AMEX: [4, 6, 5],
+};
+
 const formatCardNumber = (cardNumber: string, cardBrand?: string) => {
   if (!cardBrand) {
     return [cardNumber];
   }
-
-  const formatMap: Record<string, number[]> = {
-    Visa: [4, 4, 4, 4],
-    MasterCard: [4, 4, 4, 4],
-    유니온페이: [4, 4, 4, 4],
-    Diners: [4, 6, 4],
-    AMEX: [4, 6, 5],
-  };
 
   const format = formatMap[cardBrand];
 
