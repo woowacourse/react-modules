@@ -38,22 +38,25 @@ function makeMessageForInvalidLength(
   )} 자리여야 합니다.`;
 }
 
-type ValidationRule = {
+export type ValidationRule = {
   check: (value: string) => boolean;
   message: string | ((value: string) => string);
   applyWhen?: (value: string) => boolean;
 };
+export type ErrorCodeMap = {
+  cvc: CvcErrorCodes;
+  cardNumber:
+    | Exclude<CardNumberErrorCodes, "INVALID_CHECKSUM">
+    | "INVALID_LENGTH";
+  strictCardNumber: CardNumberErrorCodes | "INVALID_LENGTH";
+  password: PasswordErrorCodes;
+  expiryDate: ExpiryDateErrorCodes;
+};
 
 type ValidationRules = {
   cvc: Record<CvcErrorCodes, ValidationRule>;
-  cardNumber: Record<
-    Exclude<CardNumberErrorCodes, "INVALID_CHECKSUM"> | "INVALID_LENGTH",
-    ValidationRule
-  >;
-  strictCardNumber: Record<
-    CardNumberErrorCodes | "INVALID_LENGTH",
-    ValidationRule
-  >;
+  cardNumber: Record<ErrorCodeMap["cardNumber"], ValidationRule>;
+  strictCardNumber: Record<ErrorCodeMap["strictCardNumber"], ValidationRule>;
   password: Record<PasswordErrorCodes, ValidationRule>;
   expiryDate: Record<ExpiryDateErrorCodes, ValidationRule>;
 };

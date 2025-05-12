@@ -1,9 +1,11 @@
 import { ValidateField } from "./constants";
 import { validationRules } from "./validation-rules";
 
+import { ErrorCodeMap } from "./validation-rules";
+
 type ValidationError = {
-  field: string;
-  code: string;
+  field: ValidateField;
+  code: ErrorCodeMap[ValidateField];
   message: string;
 };
 
@@ -34,8 +36,8 @@ function createValidator(field: ValidateField) {
           typeof rule.message === "function"
             ? rule.message(value)
             : rule.message;
-
-        errors.push({ field, code, message });
+        // 정신건강상 as 타입 단언이...
+        errors.push({ field, code, message } as ValidationError);
         // 첫번째 에러가 발생하면 더 이상 검증하지 않음
 
         break;
@@ -68,7 +70,7 @@ function createValidatorWithMultipleAndMostRelevantErrors(
             ? rule.message(value)
             : rule.message;
 
-        errors.push({ field, code, message });
+        errors.push({ field, code, message } as ValidationError);
         // 첫번째 에러가 발생하면 더 이상 검증하지 않음
       }
     }
