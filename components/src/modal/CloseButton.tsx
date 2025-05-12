@@ -13,7 +13,6 @@ interface CloseButtonProps {
 
 function CloseButton({ style, className }: CloseButtonProps) {
   const { onClose } = useModalContext();
-
   const memoizedStyle = useMemo(() => {
     if (!style) return {};
     return { ...style };

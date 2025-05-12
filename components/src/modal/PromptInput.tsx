@@ -17,10 +17,10 @@ function PromptInput({ isError = false, style, ...props }: InputProps) {
 
   return (
     <StyledInput
-      {...props}
       isError={isError}
       style={memoizedStyle}
       aria-invalid={isError || undefined}
+      {...props}
     />
   );
 }

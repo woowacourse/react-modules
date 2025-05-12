@@ -9,7 +9,6 @@ interface ButtonGroupProps {
   gap?: number;
   style?: CSSProperties;
 }
-
 type ButtonGroupDirectionType = 'row' | 'column';
 type ButtonGroupAlignType = 'start' | 'center' | 'end';
 

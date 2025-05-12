@@ -28,7 +28,6 @@ export interface ModalProps {
   showCloseButton?: boolean;
   style?: CSSProperties;
 }
-
 export type ModalPositionType = 'center' | 'bottom';
 export type ModalSizeType = 'small' | 'medium' | 'large';
 
@@ -43,17 +42,16 @@ function ModalContainer({
   children,
 }: PropsWithChildren<ModalProps>) {
   const { role, open, onClose } = useModalContext();
+  const memoizedStyle = useMemo(() => {
+    if (!style) return {};
+    return { ...style };
+  }, [style]);
 
   const isClickOutsideEnabled = role !== 'alert-modal';
   const modalRef = useClickOutside<HTMLDivElement>(
     onClose,
     isClickOutsideEnabled
   );
-
-  const memoizedStyle = useMemo(() => {
-    if (!style) return {};
-    return { ...style };
-  }, [style]);
 
   useBodyScrollLock(open);
   useModalAccessibility(open, onClose, modalRef);

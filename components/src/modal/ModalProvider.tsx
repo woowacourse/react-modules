@@ -46,7 +46,6 @@ function ModalProvider({
   children,
 }: PropsWithChildren<ModalProviderProps>) {
   const [open, setOpen] = useState(false);
-
   const onClose = useCallback(() => setOpen(false), []);
   const onOpen = useCallback(() => setOpen(true), []);
 
