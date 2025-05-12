@@ -28,7 +28,14 @@ const makeNumbers = (start: number, end: number) => {
   );
 };
 
-const rules = [
+type Rule = {
+  cardBrand?: 'Visa' | 'MasterCard' | 'Diners' | 'AMEX' | 'UnionPay';
+  startNumbers: string[];
+  lengthArray: number[];
+  message: string;
+};
+
+const rules: Rule[] = [
   // Visa
   {
     cardBrand: 'Visa',
@@ -63,7 +70,7 @@ const rules = [
     startNumbers: [
       ...makeNumbers(622126, 622925),
       ...makeNumbers(624, 626),
-      makeNumbers(6282, 6288),
+      ...makeNumbers(6282, 6288),
     ],
     lengthArray: [4, 4, 4, 4],
     message: '4-4-4-4 형태의 16자리로 입력해주세요',
@@ -76,10 +83,10 @@ const rules = [
   },
 ];
 
-const validate = (cardNumbersValue: string) => {
+const validate = (cardNumbersValue: string, addedRules: Rule[] = []) => {
   const cardNumbers = cardNumbersValue.replace(/' '/g, '');
 
-  const rule = rules.find(({ startNumbers }) => {
+  const rule = rules.concat(addedRules).find(({ startNumbers }) => {
     return startNumbers.find((startNumber) => {
       const startNummberLength = startNumber.length;
       return cardNumbers.slice(0, startNummberLength) === startNumber;
@@ -114,7 +121,7 @@ const validate = (cardNumbersValue: string) => {
   };
 };
 
-function useCardNumber() {
+function useCardNumber(addedRules?: Rule[]) {
   const [value, setCardNumber] = useState('');
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -123,7 +130,10 @@ function useCardNumber() {
     setCardNumber(parsedvalue);
   };
 
-  const { isError, message, cardBrand, formatted } = validate(value);
+  const { isError, message, cardBrand, formatted } = validate(
+    value,
+    addedRules
+  );
 
   return {
     cardBrand,
