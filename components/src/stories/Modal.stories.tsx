@@ -64,6 +64,78 @@ export const CloseByEsc: Story = {
   },
 };
 
+export const PrimaryButtonClick: Story = {
+  render: (args) => {
+    const [isOpen, setIsOpen] = useState(true);
+
+    return (
+      <Modal
+        {...args}
+        isOpen={isOpen}
+        onClose={() => setIsOpen(false)}
+        onConfirm={() => setIsOpen(false)}
+      >
+        <Modal.Header>제목</Modal.Header>
+        <Modal.Body>모달열림</Modal.Body>
+        <Modal.Footer>
+          <Modal.PrimaryButton data-testid="primary-button">
+            확인
+          </Modal.PrimaryButton>
+        </Modal.Footer>
+      </Modal>
+    );
+  },
+  args: {
+    isOpen: true,
+    onClose: () => {},
+    onConfirm: () => {},
+    children: <p>모달열림</p>,
+  },
+  play: async () => {
+    expect(screen.getByText("모달열림")).toBeVisible();
+
+    const primaryButton = screen.getByTestId("primary-button");
+    await userEvent.click(primaryButton);
+
+    expect(screen.queryByText("모달열림")).not.toBeInTheDocument();
+  },
+};
+export const SecondaryButtonClick: Story = {
+  render: (args) => {
+    const [isOpen, setIsOpen] = useState(true);
+
+    return (
+      <Modal
+        {...args}
+        isOpen={isOpen}
+        onClose={() => setIsOpen(false)}
+        onConfirm={() => setIsOpen(false)}
+      >
+        <Modal.Header>제목</Modal.Header>
+        <Modal.Body>모달열림</Modal.Body>
+        <Modal.Footer>
+          <Modal.SecondaryButton data-testid="secondary-button">
+            확인
+          </Modal.SecondaryButton>
+        </Modal.Footer>
+      </Modal>
+    );
+  },
+  args: {
+    isOpen: true,
+    onClose: () => {},
+    children: <p>모달열림</p>,
+  },
+  play: async () => {
+    expect(screen.getByText("모달열림")).toBeVisible();
+
+    const primaryButton = screen.getByTestId("secondary-button");
+    await userEvent.click(primaryButton);
+
+    expect(screen.queryByText("모달열림")).not.toBeInTheDocument();
+  },
+};
+
 export const Default = () => {
   const [isOpen, setIsOpen] = useState(true);
 

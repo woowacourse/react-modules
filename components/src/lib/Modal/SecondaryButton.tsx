@@ -5,7 +5,12 @@ import { useModalContext } from "../useModalContext";
 const SecondaryButton = ({ children }: { children: ReactNode }) => {
   const { onClose } = useModalContext();
   return (
-    <Button onClick={onClose} color="#8b95a1" backgroundColor="transparent">
+    <Button
+      data-testid="secondary-button"
+      onClick={onClose}
+      color="#8b95a1"
+      backgroundColor="transparent"
+    >
       {children}
     </Button>
   );
