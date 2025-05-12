@@ -142,4 +142,46 @@ describe('카드 타입 검증 테스트입니다.', () => {
 
     expect(result.current.cardType).toBe('AMEX');
   });
+
+  test('카드 번호의 앞자리가 622126~622925로 시작하면, 카드 타입을 UnionPay로 반환한다.', () => {
+    const { result } = renderHook(() => useCardNumber());
+
+    const mockEvent = {
+      target: { value: '622126' },
+    } as React.ChangeEvent<HTMLInputElement>;
+
+    act(() => {
+      result.current.handleCardNumberChange(mockEvent);
+    });
+
+    expect(result.current.cardType).toBe('UnionPay');
+  });
+
+  test('카드 번호의 앞자리가 624~626로 시작하면, 카드 타입을 UnionPay로 반환한다.', () => {
+    const { result } = renderHook(() => useCardNumber());
+
+    const mockEvent = {
+      target: { value: '624' },
+    } as React.ChangeEvent<HTMLInputElement>;
+
+    act(() => {
+      result.current.handleCardNumberChange(mockEvent);
+    });
+
+    expect(result.current.cardType).toBe('UnionPay');
+  });
+
+  test('카드 번호의 앞자리가 6282~6288로 시작하면, 카드 타입을 UnionPay로 반환한다.', () => {
+    const { result } = renderHook(() => useCardNumber());
+
+    const mockEvent = {
+      target: { value: '6282' },
+    } as React.ChangeEvent<HTMLInputElement>;
+
+    act(() => {
+      result.current.handleCardNumberChange(mockEvent);
+    });
+
+    expect(result.current.cardType).toBe('UnionPay');
+  });
 });
