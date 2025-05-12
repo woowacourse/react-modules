@@ -100,6 +100,7 @@ describe('카드 타입 검증 테스트입니다.', () => {
 
     expect(result.current.cardType).toBe('MasterCard');
   });
+
   test('카드 번호의 앞자리가 36으로 시작하면, 카드 타입을 Diners로 반환한다.', () => {
     const { result } = renderHook(() => useCardNumber());
 
@@ -112,5 +113,33 @@ describe('카드 타입 검증 테스트입니다.', () => {
     });
 
     expect(result.current.cardType).toBe('Diners');
+  });
+
+  test('카드 번호의 앞자리가 34로 시작하면, 카드 타입을 AMEX로 반환한다.', () => {
+    const { result } = renderHook(() => useCardNumber());
+
+    const mockEvent = {
+      target: { value: '34' },
+    } as React.ChangeEvent<HTMLInputElement>;
+
+    act(() => {
+      result.current.handleCardNumberChange(mockEvent);
+    });
+
+    expect(result.current.cardType).toBe('AMEX');
+  });
+
+  test('카드 번호의 앞자리가 37로 시작하면, 카드 타입을 AMEX로 반환한다.', () => {
+    const { result } = renderHook(() => useCardNumber());
+
+    const mockEvent = {
+      target: { value: '37' },
+    } as React.ChangeEvent<HTMLInputElement>;
+
+    act(() => {
+      result.current.handleCardNumberChange(mockEvent);
+    });
+
+    expect(result.current.cardType).toBe('AMEX');
   });
 });
