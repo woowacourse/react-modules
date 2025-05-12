@@ -2,20 +2,6 @@ import { act, renderHook } from '@testing-library/react';
 import { useCardNumber } from '../lib/hooks/useCardNumber/useCardNumber';
 
 describe('카드 번호 검증 테스트입니다.', () => {
-  test('사용자가 입력한 value값의 길이와 validLength(16)가 같다면, errorMessage를 빈 값으로 반환한다.', () => {
-    const { result } = renderHook(() => useCardNumber());
-
-    const mockEvent = {
-      target: { value: '1234123412341234' },
-    } as React.ChangeEvent<HTMLInputElement>;
-
-    act(() => {
-      result.current.handleCardNumberChange(mockEvent);
-    });
-
-    expect(result.current.errorMessage).toBe('');
-  });
-
   test('숫자를 입력하지 않은 경우, 숫자를 입력하라는 errorMessage를 반환한다.', () => {
     const { result } = renderHook(() => useCardNumber());
     const mockEvent = {
@@ -55,5 +41,63 @@ describe('카드 번호 검증 테스트입니다.', () => {
     });
 
     expect(result.current.errorMessage).toBe('숫자 16자리를 입력해주세요.');
+  });
+
+  test('사용자가 입력한 value값의 길이와 validLength(16)가 같다면, errorMessage를 빈 값으로 반환한다.', () => {
+    const { result } = renderHook(() => useCardNumber());
+
+    const mockEvent = {
+      target: { value: '1234123412341234' },
+    } as React.ChangeEvent<HTMLInputElement>;
+
+    act(() => {
+      result.current.handleCardNumberChange(mockEvent);
+    });
+
+    expect(result.current.errorMessage).toBe('');
+  });
+});
+
+describe('카드 타입 검증 테스트입니다.', () => {
+  test('카드 번호가 4, 51~55, 36, 34, 37, 622126~622925, 624~626, 6282~6288 로 시작하지 않으면, 카드 타입을 Unknown으로 반환한다.', () => {
+    const { result } = renderHook(() => useCardNumber());
+
+    const mockEvent = {
+      target: { value: '3234123412341234' },
+    } as React.ChangeEvent<HTMLInputElement>;
+
+    act(() => {
+      result.current.handleCardNumberChange(mockEvent);
+    });
+
+    expect(result.current.cardType).toBe('Unknown');
+  });
+
+  test('카드 번호가 4로 시작하면, 카드 타입을 Visa로 반환한다.', () => {
+    const { result } = renderHook(() => useCardNumber());
+
+    const mockEvent = {
+      target: { value: '4123456789012345' },
+    } as React.ChangeEvent<HTMLInputElement>;
+
+    act(() => {
+      result.current.handleCardNumberChange(mockEvent);
+    });
+
+    expect(result.current.cardType).toBe('Visa');
+  });
+
+  test('카드 번호의 앞자리가 51~55로 시작하면, 카드 타입을 MasterCard로 반환한다.', () => {
+    const { result } = renderHook(() => useCardNumber());
+
+    const mockEvent = {
+      target: { value: '5523456789012345' },
+    } as React.ChangeEvent<HTMLInputElement>;
+
+    act(() => {
+      result.current.handleCardNumberChange(mockEvent);
+    });
+
+    expect(result.current.cardType).toBe('MasterCard');
   });
 });
