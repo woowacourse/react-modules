@@ -6,6 +6,7 @@ import dts from 'vite-plugin-dts';
 export default defineConfig({
   base: '/react-modules/',
   build: {
+    outDir: 'dist',
     lib: {
       entry: path.resolve(__dirname, 'src/lib/index.ts'),
       name: 'index',
