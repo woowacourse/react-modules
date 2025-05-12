@@ -23,33 +23,53 @@ import { validateCardInput } from '../../validation/cardNumberLengthInfo';
 export const useCardNumber = () => {
   const [cardNumbers, setCardNumbers] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
-  const [cardType, setCardType] = useState('Unknown');
+  const [cardType, setCardType] = useState<CardType>('Unknown');
 
   const handleCardNumberChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const newValue = event.target.value;
+    const value = event.target.value;
     // 카드 번호가 들어오면 카드의 타입과 카드 길이를 반환한다.
     // 카드 타입과 카드 길이를 받으면 해당 카드 타입의 카드 길이가 유효한지를 검사한다.
+    const newCardNumbers = value.replace(/\s/g, '');
 
-    const { type, numberLengths } = getCardType({ cardNumber: newValue, cardRules: cardRules });
-    const { errorMessage } = validateCardInput(newValue, numberLengths);
+    const { type, numberLengths } = getCardType({
+      cardNumber: newCardNumbers,
+      cardRules: cardRules,
+    });
+    const { errorMessage } = validateCardInput(newCardNumbers, numberLengths);
 
-    if (newValue.length > numberLengths) {
+    if (newCardNumbers.length > numberLengths) {
       return;
     }
 
-    setCardNumbers(newValue);
+    setCardNumbers(newCardNumbers);
     setCardType(type);
 
     setErrorMessage(errorMessage);
   };
 
   return {
-    cardNumbers,
+    cardNumber: {
+      raw: cardNumbers,
+      formatted: formatCardNumber({ type: cardType, cardNumber: cardNumbers }),
+    },
     errorMessage,
     isValid: cardNumbers !== '' && errorMessage === '',
-    cardType,
+    cardType: cardType === CARD_BRANDS.Unknown ? '기본' : cardType,
     handleCardNumberChange,
   };
+};
+
+const formatCardNumber = ({ type, cardNumber }: { type: CardType; cardNumber: string }) => {
+  // 카드 번호 사이에 공백을 추가하는 포맷팅 함수입니다.
+  const formattedCardNumber = cardBrandFormatRules[type]
+    .map((length) => {
+      const chunk = cardNumber.slice(0, length);
+      cardNumber = cardNumber.slice(length);
+      return chunk;
+    })
+    .filter(Boolean);
+
+  return formattedCardNumber.join(' ');
 };
 
 const VALID_CARD_BRANDS = {
@@ -92,6 +112,16 @@ const cardBrandRangeRules = {
     { start: 624, end: 626 },
     { start: 6282, end: 6288 },
   ],
+} as const;
+
+const cardBrandFormatRules = {
+  // 카드 브랜드별로 카드 번호의 포맷을 정의합니다.
+  Visa: [4, 4, 4, 4],
+  MasterCard: [4, 4, 4, 4],
+  Diners: [4, 6, 4],
+  AMEX: [4, 6, 5],
+  UnionPay: [4, 4, 4, 4],
+  Unknown: [4, 4, 4, 4],
 } as const;
 
 const checkCardBrandRange = ({ value, type }: { value: string; type: ValidCardType }) => {
