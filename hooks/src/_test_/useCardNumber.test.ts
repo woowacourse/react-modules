@@ -1,5 +1,5 @@
-import { renderHook, act } from '@testing-library/react';
 import useCardNumber from '../lib/cardNumber/useCardNumber';
+import { renderHook, act } from '@testing-library/react';
 
 describe('useCardNumber 성공 케이스', () => {
   it('모든 입력값이 유효할 경우, 에러 메시지는 비어 있어야 한다.', () => {
@@ -27,7 +27,7 @@ describe('useCardNumber 성공 케이스', () => {
       const { result } = renderHook(() => useCardNumber());
 
       act(() => {
-        result.current.handleCardNumberChange('42345678');
+        result.current.handleCardNumberChange('4123123456789012');
       });
 
       expect(result.current.cardCompany).toBe('Visa');
@@ -49,7 +49,7 @@ describe('useCardNumber 성공 케이스', () => {
       const { result } = renderHook(() => useCardNumber());
 
       act(() => {
-        result.current.handleCardNumberChange('51345678');
+        result.current.handleCardNumberChange('5134567856785678');
       });
 
       expect(result.current.cardCompany).toBe('MasterCard');
@@ -71,7 +71,7 @@ describe('useCardNumber 성공 케이스', () => {
       const { result } = renderHook(() => useCardNumber());
 
       act(() => {
-        result.current.handleCardNumberChange('34345678');
+        result.current.handleCardNumberChange('3434567812121234');
       });
 
       expect(result.current.cardCompany).toBe('AMEX');
@@ -93,7 +93,7 @@ describe('useCardNumber 성공 케이스', () => {
       const { result } = renderHook(() => useCardNumber());
 
       act(() => {
-        result.current.handleCardNumberChange('36345678');
+        result.current.handleCardNumberChange('36345678912341');
       });
 
       expect(result.current.cardCompany).toBe('Diners');
@@ -115,7 +115,7 @@ describe('useCardNumber 성공 케이스', () => {
       const { result } = renderHook(() => useCardNumber());
 
       act(() => {
-        result.current.handleCardNumberChange('624345678');
+        result.current.handleCardNumberChange('6243456781123456');
       });
 
       expect(result.current.cardCompany).toBe('UnionPay');
@@ -125,7 +125,7 @@ describe('useCardNumber 성공 케이스', () => {
       const { result } = renderHook(() => useCardNumber());
 
       act(() => {
-        result.current.handleCardNumberChange('6282345678');
+        result.current.handleCardNumberChange('6282345678123456');
       });
 
       expect(result.current.cardCompany).toBe('UnionPay');
@@ -135,7 +135,7 @@ describe('useCardNumber 성공 케이스', () => {
       const { result } = renderHook(() => useCardNumber());
 
       act(() => {
-        result.current.handleCardNumberChange('6221262');
+        result.current.handleCardNumberChange('6221262123456789');
       });
 
       expect(result.current.cardCompany).toBe('UnionPay');
@@ -162,5 +162,85 @@ describe('useCardNumber 실패 케이스', () => {
     });
 
     expect(result.current.errorState.errorMessage).toBe('숫자만 입력하세요.');
+  });
+
+  describe('Visa', () => {
+    it('15자리 이하일 경우 이름이 업데이트 되면 안된다.', () => {
+      const { result } = renderHook(() => useCardNumber());
+
+      act(() => {
+        result.current.handleCardNumberChange('412312345678901');
+      });
+
+      expect(result.current.cardCompany).toBe('');
+    });
+  });
+
+  describe('MasterCard', () => {
+    it('15자리 이하일 경우 이름이 업데이트 되면 안된다.', () => {
+      const { result } = renderHook(() => useCardNumber());
+
+      act(() => {
+        result.current.handleCardNumberChange('512312345678901');
+      });
+
+      expect(result.current.cardCompany).toBe('');
+    });
+  });
+
+  describe('AMEX', () => {
+    it('14자리 이하일 경우 이름이 업데이트 되면 안된다.', () => {
+      const { result } = renderHook(() => useCardNumber());
+
+      act(() => {
+        result.current.handleCardNumberChange('34345678121212');
+      });
+
+      expect(result.current.cardCompany).toBe('');
+    });
+  });
+
+  describe('Diners', () => {
+    it('13자리 이하일 경우 이름이 업데이트 되면 안된다.', () => {
+      const { result } = renderHook(() => useCardNumber());
+
+      act(() => {
+        result.current.handleCardNumberChange('3634567891234');
+      });
+
+      expect(result.current.cardCompany).toBe('');
+    });
+  });
+
+  describe('UnionPay', () => {
+    it('15자리 이하일 경우 이름이 업데이트 되면 안된다. (62[4-6])', () => {
+      const { result } = renderHook(() => useCardNumber());
+
+      act(() => {
+        result.current.handleCardNumberChange('624345678112345');
+      });
+
+      expect(result.current.cardCompany).toBe('');
+    });
+
+    it('15자리 이하일 경우 이름이 업데이트 되면 안된다. (628[2-8])', () => {
+      const { result } = renderHook(() => useCardNumber());
+
+      act(() => {
+        result.current.handleCardNumberChange('628234567812345');
+      });
+
+      expect(result.current.cardCompany).toBe('');
+    });
+
+    it('15자리 이하일 경우 이름이 업데이트 되면 안된다. (622126 ~ 622925)', () => {
+      const { result } = renderHook(() => useCardNumber());
+
+      act(() => {
+        result.current.handleCardNumberChange('622126212345678');
+      });
+
+      expect(result.current.cardCompany).toBe('');
+    });
   });
 });
