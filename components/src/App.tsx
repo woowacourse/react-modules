@@ -2,6 +2,7 @@ import { useState } from "react";
 import useModalState from "./lib/hooks/useModalState";
 import Prompt from "./lib/Prompt/Prompt";
 
+
 function App() {
   const { isOpen, modalClose, modalOpen } = useModalState(true);
   const [value, setValue] = useState("");
