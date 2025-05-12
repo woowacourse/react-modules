@@ -1,4 +1,4 @@
-import { PropsWithChildren, RefObject } from "react";
+import { PropsWithChildren, RefObject, useEffect } from "react";
 import * as S from "./BaseModal.styled";
 import CloseIcon from "@assets/close.svg";
 import { ModalLayoutProps } from "@/types/modal";
@@ -19,6 +19,14 @@ function BaseModal({
   ref,
   children,
 }: PropsWithChildren<BaseModalProps>) {
+  useEffect(() => {
+    document.body.style.overflow = "hidden";
+
+    return () => {
+      document.body.style.overflow = "unset";
+    };
+  }, []);
+
   return (
     <S.Backdrop>
       <S.Modal

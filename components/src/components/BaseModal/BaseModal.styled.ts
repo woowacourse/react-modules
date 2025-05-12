@@ -23,6 +23,7 @@ export const Backdrop = styled.div`
   position: fixed;
   left: 0;
   top: 0;
+  z-index: 999;
   animation: ${fadeIn} 0.3s ease;
 `;
 
