@@ -15,7 +15,7 @@ function App() {
         type="text"
         value={formattedCardNumber}
         onChange={(e) => {
-          cardNumber.onchange(e.target.value);
+          cardNumber.onChange(e.target.value);
         }}
       />
 

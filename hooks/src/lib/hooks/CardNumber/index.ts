@@ -20,7 +20,7 @@ const useCardNumber = () => {
 
   return {
     value: cardNumber.value,
-    onchange: handleCardNumberChange,
+    onChange: handleCardNumberChange,
     errorState: getCardNumberError(cardNumber.value),
   };
 };

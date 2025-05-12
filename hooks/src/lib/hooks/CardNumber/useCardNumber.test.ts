@@ -7,7 +7,7 @@ describe("useCardNumber", () => {
 
     const userInput = "1234";
     act(() => {
-      result.current.onchange(userInput);
+      result.current.onChange(userInput);
     });
     expect(result.current.value).toBe(userInput);
   });
@@ -18,7 +18,7 @@ describe("useCardNumber", () => {
     const nonNumericInputs = ["ㅁ", "abc", "@#$", "123abc", " "];
     nonNumericInputs.forEach((input) => {
       act(() => {
-        result.current.onchange(input);
+        result.current.onChange(input);
       });
       expect(result.current.value).toBe("");
     });
@@ -29,7 +29,7 @@ describe("useCardNumber", () => {
 
     const emptyInput = "";
     act(() => {
-      result.current.onchange(emptyInput);
+      result.current.onChange(emptyInput);
     });
 
     expect(result.current.errorState.isValid).toBe(false);
@@ -46,7 +46,7 @@ describe("useCardNumber", () => {
     const { result } = renderHook(() => useCardNumber());
 
     act(() => {
-      result.current.onchange(validMinLengthInput);
+      result.current.onChange(validMinLengthInput);
     });
 
     expect(result.current.errorState.isValid).toBe(false);
@@ -63,7 +63,7 @@ describe("useCardNumber", () => {
     const { result } = renderHook(() => useCardNumber());
 
     act(() => {
-      result.current.onchange(validMinLengthInput);
+      result.current.onChange(validMinLengthInput);
     });
 
     expect(result.current.errorState.isValid).toBe(false);
