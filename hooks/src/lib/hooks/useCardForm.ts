@@ -123,8 +123,14 @@ export default function useCardForm(
 
   // 전체 폼 유효성 계산
   const isValid =
-    !errors.cardNumber && !errors.cvc && !errors.expiryDate && !errors.password;
-
+    !errors.cardNumber &&
+    !errors.cvc &&
+    !errors.expiryDate &&
+    !errors.password &&
+    card.cardNumber.length !== 0 &&
+    cvc.CVCNumber.length !== 0 &&
+    expiry.expiryDateNumber.length !== 0 &&
+    password.passwordNumber.length !== 0;
   // 폼 값 설정
   const setValues = useCallback(
     (newValues: Partial<CardFormValues>) => {
