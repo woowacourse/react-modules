@@ -31,7 +31,7 @@ export const CARD_BRAND_CONFIG: Record<string, { length: number }> = {
 
 export const CARD_BRAND_SEGMENT: Record<string, number[]> = {
   amex:   [4, 6, 5],
-  diners: [2, 6, 6],
+  diners: [4, 6, 4],
   visa:   [4, 4, 4, 4],
   mastercard: [4, 4, 4, 4],
   unionpay:   [4, 4, 4, 4],
