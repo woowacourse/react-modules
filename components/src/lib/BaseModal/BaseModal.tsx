@@ -8,7 +8,7 @@ import {
   CloseButton,
 } from "./BaseModal.styles";
 import { IconClose } from "../IconClose";
-import useFocus from "../autoFocus/autoFocus";
+import useAutoFocus from "../UseAutoFocus/useAutoFocus";
 import { ModalPropsType } from "../types/ModalPropsType";
 
 export interface BaseModalProps extends ModalPropsType {
@@ -26,7 +26,7 @@ const BaseModal = ({
   onClose,
   showCloseButton = true,
 }: BaseModalProps) => {
-  const { modalRef } = useFocus(isModalOpen);
+  const { modalRef } = useAutoFocus(isModalOpen);
   if (!isModalOpen) return null;
 
   const BaseModalContent = (

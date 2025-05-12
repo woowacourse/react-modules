@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-const useFocus = (isOpen: boolean) => {
+const useAutoFocus = (isOpen: boolean) => {
   const modalRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
     if (!isOpen) return;
@@ -28,4 +28,4 @@ const useFocus = (isOpen: boolean) => {
   }, [isOpen]);
   return { modalRef };
 };
-export default useFocus;
+export default useAutoFocus;
