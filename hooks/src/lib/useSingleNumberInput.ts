@@ -1,12 +1,13 @@
 import { useState } from 'react';
 import { isNotOverMaxLength, isNumeric } from './utils';
+import ErrorMessage from './constants/ErrorMessage';
 
 const useSingleNumberInput = (maxLength: number) => {
   const [inputValue, setInputValue] = useState('');
 
   const errorText = (() => {
-    if (!isNumeric(inputValue)) return '입력값이 숫자가 아닙니다.';
-    if (!isNotOverMaxLength(inputValue, maxLength)) return '입력값이 최대 길이를 초과했습니다.';
+    if (!isNumeric(inputValue)) return ErrorMessage.IS_NOT_NUMERIC;
+    if (!isNotOverMaxLength(inputValue, maxLength)) return ErrorMessage.IS_OVER_LENGTH;
     return '';
   })();
 
