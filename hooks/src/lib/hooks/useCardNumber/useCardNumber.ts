@@ -33,6 +33,10 @@ export const useCardNumber = () => {
     const { type, numberLengths } = getCardType({ cardNumber: newValue, cardRules: cardRules });
     const { errorMessage } = validateCardInput(newValue, numberLengths);
 
+    if (newValue.length > numberLengths) {
+      return;
+    }
+
     setCardNumbers(newValue);
     setCardType(type);
 
