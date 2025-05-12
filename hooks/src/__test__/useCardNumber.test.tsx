@@ -100,4 +100,17 @@ describe('카드 타입 검증 테스트입니다.', () => {
 
     expect(result.current.cardType).toBe('MasterCard');
   });
+  test('카드 번호의 앞자리가 36으로 시작하면, 카드 타입을 Diners로 반환한다.', () => {
+    const { result } = renderHook(() => useCardNumber());
+
+    const mockEvent = {
+      target: { value: '36' },
+    } as React.ChangeEvent<HTMLInputElement>;
+
+    act(() => {
+      result.current.handleCardNumberChange(mockEvent);
+    });
+
+    expect(result.current.cardType).toBe('Diners');
+  });
 });
