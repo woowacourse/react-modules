@@ -4,4 +4,7 @@ export { default as useCardNumber } from "../lib/useCardNumber/useCardNumber";
 export { default as useCardPassword } from "../lib/useCardPassword/useCardPassword";
 export { default as useExpirationMonth } from "../lib/useExpirationMonth/useExpirationMonth";
 export { default as useExpirationYear } from "../lib/useExpirationYear/useExpirationYear";
-export { checkEmptyValue, checkLength, checkMonthRange, checkNumber, checkYearRange } from "./utils/vaildate";
+export { default as useCardBrand } from "../lib/useCardBrand/useCardBrand";
+export { checkEmptyValue, checkLength, checkMonthRange, checkNumber, checkYearRange, getError } from "./utils/vaildate";
+export { detectCardBrand, formatCardNumber } from "./utils/cardBrand";
+export { CARD_NUMBER_FORMAT, CARD_NUMBER_PATTERN } from "./constants/cardBrand";
