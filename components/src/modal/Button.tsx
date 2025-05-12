@@ -1,12 +1,10 @@
 import styled from '@emotion/styled';
-import { CSSProperties, useMemo } from 'react';
+import { ComponentPropsWithRef, useMemo } from 'react';
 
 // ============================== Types ==============================
 
-interface ButtonProps {
-  onClick: () => void;
+interface ButtonProps extends ComponentPropsWithRef<'button'> {
   variant?: ButtonVariantType;
-  style?: CSSProperties;
   children?: string;
 }
 type ButtonVariantType = 'primary' | 'secondary';
@@ -14,10 +12,10 @@ type ButtonVariantType = 'primary' | 'secondary';
 // ============================== Component ==============================
 
 function Button({
-  onClick,
   variant = 'primary',
   style,
   children,
+  ...props
 }: ButtonProps) {
   const memoizedStyle = useMemo(() => {
     if (!style) return {};
@@ -25,7 +23,7 @@ function Button({
   }, [style]);
 
   return (
-    <StyledButton variant={variant} onClick={onClick} style={memoizedStyle}>
+    <StyledButton variant={variant} style={memoizedStyle} {...props}>
       {children}
     </StyledButton>
   );
@@ -44,6 +42,12 @@ const StyledButton = styled.button<{ variant: ButtonVariantType }>`
   border-radius: 4px;
 
   cursor: pointer;
+
+  &:disabled {
+    background-color: #e0e0e0;
+    color: #9e9e9e;
+    cursor: not-allowed;
+  }
 `;
 
 export default Button;

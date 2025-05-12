@@ -15,7 +15,14 @@ function PromptInput({ isError = false, style, ...props }: InputProps) {
     return { ...style };
   }, [style]);
 
-  return <StyledInput {...props} isError={isError} style={memoizedStyle} />;
+  return (
+    <StyledInput
+      {...props}
+      isError={isError}
+      style={memoizedStyle}
+      aria-invalid={isError || undefined}
+    />
+  );
 }
 
 // ============================== Styled Components ==============================

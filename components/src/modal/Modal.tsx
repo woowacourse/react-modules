@@ -62,11 +62,13 @@ function ModalContainer({
       <StyledModalContainer position={position}>
         <StyledModalContent
           ref={modalRef}
+          role={role === 'modal' ? 'dialog' : 'alertdialog'}
+          aria-modal="true"
           position={position}
           size={size}
           style={memoizedStyle}
         >
-          {title && <Title>{title}</Title>}
+          {title && <Title id="modal-title">{title}</Title>}
           {showCloseButton && <FixedCloseButton />}
           {children}
         </StyledModalContent>

@@ -8,16 +8,18 @@ function App() {
       </Modal.OpenTrigger>
       <Modal.Container title="모달" showCloseButton={false}>
         <div>컨텐츠</div>
-        <Modal.PromptInput />
+        <form>
+          <Modal.PromptInput />
 
-        <Modal.ButtonWrapper direction="column">
-          <Modal.CloseTrigger>
-            <Modal.Button variant="primary" onClick={() => alert('클릭됨')}>
-              동의하고 저장하기
-            </Modal.Button>
-          </Modal.CloseTrigger>
-          <Modal.CloseTrigger>닫기</Modal.CloseTrigger>
-        </Modal.ButtonWrapper>
+          <Modal.ButtonWrapper direction="column">
+            <Modal.CloseTrigger>
+              <Modal.Button variant="secondary" onClick={() => alert('클릭됨')}>
+                동의하고 저장하기
+              </Modal.Button>
+            </Modal.CloseTrigger>
+            <Modal.CloseTrigger>닫기</Modal.CloseTrigger>
+          </Modal.ButtonWrapper>
+        </form>
       </Modal.Container>
     </Modal>
   );

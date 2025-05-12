@@ -1,21 +1,19 @@
 import styled from '@emotion/styled';
-import { CSSProperties, PropsWithChildren, useMemo } from 'react';
-
-// ============================== Types ==============================
-
-interface TitleProps {
-  style?: CSSProperties;
-}
+import { ComponentPropsWithoutRef, useMemo } from 'react';
 
 // ============================== Component ==============================
 
-function Title({ style, children }: PropsWithChildren<TitleProps>) {
+function Title({ style, children, ...props }: ComponentPropsWithoutRef<'h2'>) {
   const memoizedStyle = useMemo(() => {
     if (!style) return {};
     return { ...style };
   }, [style]);
 
-  return <StyledTitle style={memoizedStyle}>{children}</StyledTitle>;
+  return (
+    <StyledTitle style={memoizedStyle} {...props}>
+      {children}
+    </StyledTitle>
+  );
 }
 
 // ============================== Styled Components ==============================
