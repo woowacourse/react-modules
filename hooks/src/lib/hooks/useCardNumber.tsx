@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { parseNumber } from '../utils/parseNumber';
+import { makeNumbers } from '../utils/makeNumbers';
 
 function formatByGroups(value: string, groups: number[]) {
   const result = [];
@@ -21,12 +22,6 @@ function formatByGroups(value: string, groups: number[]) {
 
   return result;
 }
-
-const makeNumbers = (start: number, end: number) => {
-  return Array.from({ length: end - start + 1 }, (_, i) => start + i).map(
-    String
-  );
-};
 
 type Rule = {
   cardBrand?: 'Visa' | 'MasterCard' | 'Diners' | 'AMEX' | 'UnionPay' | string;
