@@ -159,7 +159,7 @@ export const getCardType = ({
   }
 
   return {
-    type: 'Unknown',
+    type: CARD_BRANDS.Unknown,
     numberLengths: 16,
   };
 };
