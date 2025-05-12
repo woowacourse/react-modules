@@ -27,7 +27,6 @@ interface CardNumberError {
   third: SingleCardNumberError;
   fourth: SingleCardNumberError;
 }
-
 const useCardNumber = () => {
   const [cardNumber, setCardNumber] = useState({
     first: "",
@@ -50,9 +49,6 @@ const useCardNumber = () => {
     inputValue: string,
     type?: CardType
   ) => {
-    let isError = false;
-    let message = "";
-
     const labelIndexMap: Record<CardNumberLabel, number> = {
       first: 0,
       second: 1,
@@ -64,35 +60,41 @@ const useCardNumber = () => {
     const typeLengthRule = CARD_TYPE_LENGTH_RULES[type ?? "Default"];
 
     if (index >= typeLengthRule.length) {
-      const result = { errorState: false, message: "" };
       setValidationResult((prev) => ({
         ...prev,
-        [label]: result,
+        [label]: { errorState: false, message: "" },
       }));
-      return result;
+      return;
     }
 
     if (!checkNumber(inputValue)) {
-      message = ERROR_MESSAGE.INVALID_NUMBER;
-      isError = true;
-    } else {
-      const expectedLength =
-        CARD_TYPE_LENGTH_RULES[type!]?.[labelIndexMap[label]] ??
-        CARDNUMBER_VALID_LENGTH;
-
-      if (!checkValidLength(inputValue, expectedLength)) {
-        message = `${expectedLength}자리를 입력해주세요.`;
-        isError = true;
-      }
+      setValidationResult((prev) => ({
+        ...prev,
+        [label]: {
+          errorState: true,
+          message: ERROR_MESSAGE.INVALID_NUMBER,
+        },
+      }));
+      return;
     }
-    const result = { errorState: isError, message };
+
+    const expectedLength = typeLengthRule[index] ?? CARDNUMBER_VALID_LENGTH;
+
+    if (!checkValidLength(inputValue, expectedLength)) {
+      setValidationResult((prev) => ({
+        ...prev,
+        [label]: {
+          errorState: true,
+          message: `${expectedLength}자리를 입력해주세요.`,
+        },
+      }));
+      return;
+    }
 
     setValidationResult((prev) => ({
       ...prev,
-      [label]: result,
+      [label]: { errorState: false, message: "" },
     }));
-
-    return result;
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {

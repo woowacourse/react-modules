@@ -38,40 +38,61 @@ const useExpirationDate = () => {
   };
 
   const validate = (label: "month" | "year", value: string) => {
-    let isError = false;
-    let message = "";
-
     const validLength =
       label === "month" ? MONTH_VALID_LENGTH : YEAR_VALID_LENGTH;
 
     if (!checkValidLength(value, validLength)) {
-      message =
-        label === "month"
-          ? ERROR_MESSAGE.INVALID_MONTH_FORMAT
-          : ERROR_MESSAGE.INVALID_YEAR_FORMAT;
-      isError = true;
-    } else if (!checkNumber(value)) {
-      message = ERROR_MESSAGE.INVALID_NUMBER;
-      isError = true;
-    } else if (
-      (label === "month" && !checkMonthRange(value)) ||
-      (label === "year" && !checkYearRange(value))
-    ) {
-      message =
-        label === "month"
-          ? ERROR_MESSAGE.INVALID_MONTH_RANGE
-          : ERROR_MESSAGE.INVALID_YEAR_RANGE;
-      isError = true;
+      setValidationResult((prev) => ({
+        ...prev,
+        [label]: {
+          errorState: true,
+          message:
+            label === "month"
+              ? ERROR_MESSAGE.INVALID_MONTH_FORMAT
+              : ERROR_MESSAGE.INVALID_YEAR_FORMAT,
+        },
+      }));
+      return;
+    }
+
+    if (!checkNumber(value)) {
+      setValidationResult((prev) => ({
+        ...prev,
+        [label]: {
+          errorState: true,
+          message: ERROR_MESSAGE.INVALID_NUMBER,
+        },
+      }));
+      return;
+    }
+
+    if (label === "month" && !checkMonthRange(value)) {
+      setValidationResult((prev) => ({
+        ...prev,
+        [label]: {
+          errorState: true,
+          message: ERROR_MESSAGE.INVALID_MONTH_RANGE,
+        },
+      }));
+      return;
+    }
+
+    if (label === "year" && !checkYearRange(value)) {
+      setValidationResult((prev) => ({
+        ...prev,
+        [label]: {
+          errorState: true,
+          message: ERROR_MESSAGE.INVALID_YEAR_RANGE,
+        },
+      }));
+      return;
     }
 
     setValidationResult((prev) => ({
       ...prev,
-      [label]: { errorState: isError, message },
+      [label]: { errorState: false, message: "" },
     }));
-
-    return { errorState: isError, message };
   };
-
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
 

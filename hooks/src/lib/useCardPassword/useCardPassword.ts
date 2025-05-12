@@ -19,26 +19,21 @@ const useCardPassword = () => {
 
   const validate = (value: string) => {
     if (!checkNumber(value)) {
-      const result = {
+      setValidationResult({
         errorState: true,
         message: ERROR_MESSAGE.INVALID_NUMBER,
-      };
-      setValidationResult(result);
-      return result;
+      });
+      return;
     }
 
     if (!checkValidLength(value, PASSWORD_VALID_LENGTH)) {
-      const result = {
+      setValidationResult({
         errorState: true,
         message: ERROR_MESSAGE.INPUT_LENGTH_LIMIT,
-      };
-      setValidationResult(result);
-      return result;
+      });
+      return;
     }
-
-    const result = { errorState: false, message: "" };
-    setValidationResult(result);
-    return result;
+    setValidationResult({ errorState: false, message: "" });
   };
 
   const handleChange = (value: string) => {
