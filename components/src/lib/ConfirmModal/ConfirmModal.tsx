@@ -1,5 +1,5 @@
 import BaseModal from "../BaseModal/BaseModal";
-import * as S from "./ConfirmModal.styles";
+import * as BaseStyles from "../styles/modal.styles";
 import { ModalPropsType } from "../types/ModalPropsType";
 
 interface ConfirmModalProps extends ModalPropsType {
@@ -25,14 +25,14 @@ const ConfirmModal = ({
       size={size}
     >
       <p>{description}</p>
-      <S.ButtonContainer>
-        <S.CancelButton type="button" onClick={onClose}>
+      <BaseStyles.ButtonContainer>
+        <BaseStyles.CancelButton type="button" onClick={onClose}>
           취소
-        </S.CancelButton>
-        <S.ConfirmButton type="button" onClick={onConfirm}>
+        </BaseStyles.CancelButton>
+        <BaseStyles.ConfirmButton type="button" onClick={onConfirm}>
           확인
-        </S.ConfirmButton>
-      </S.ButtonContainer>
+        </BaseStyles.ConfirmButton>
+      </BaseStyles.ButtonContainer>
     </BaseModal>
   );
 };

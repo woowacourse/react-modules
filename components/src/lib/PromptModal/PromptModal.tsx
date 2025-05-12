@@ -1,5 +1,5 @@
 import BaseModal from "../BaseModal/BaseModal";
-import * as S from "./PromptModal.styles";
+import * as BaseStyle from "../styles/modal.styles";
 import { ChangeEvent } from "react";
 import { ModalPropsType } from "../types/ModalPropsType";
 
@@ -27,20 +27,20 @@ const PromptModal = ({
       showCloseButton={false}
       size={size}
     >
-      <S.Input
+      <BaseStyle.Input
         type="text"
         value={inputValue}
         onChange={onChangeInput}
         placeholder="내용을 입력하세요"
       />
-      <S.ButtonContainer>
-        <S.CancelButton type="button" onClick={onClose}>
+      <BaseStyle.ButtonContainer>
+        <BaseStyle.CancelButton type="button" onClick={onClose}>
           취소
-        </S.CancelButton>
-        <S.ConfirmButton type="button" onClick={onConfirm}>
+        </BaseStyle.CancelButton>
+        <BaseStyle.ConfirmButton type="button" onClick={onConfirm}>
           확인
-        </S.ConfirmButton>
-      </S.ButtonContainer>
+        </BaseStyle.ConfirmButton>
+      </BaseStyle.ButtonContainer>
     </BaseModal>
   );
 };

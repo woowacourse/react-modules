@@ -6,7 +6,7 @@ export const ButtonContainer = styled.div`
   gap: 10px;
 `;
 
-const BaseButton = styled.button`
+export const Button = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -16,14 +16,14 @@ const BaseButton = styled.button`
   border-radius: 4px;
 `;
 
-export const ConfirmButton = styled(BaseButton)`
+export const ConfirmButton = styled(Button)`
   background-color: #333;
   color: #fff;
 `;
 
-export const CancelButton = styled(BaseButton)`
+export const CancelButton = styled(Button)`
   background-color: transparent;
-  color: #333333bf; /* 75% 투명도 적용 */
+  color: #333333bf;
   border: 1px solid #33333340;
 `;
 
