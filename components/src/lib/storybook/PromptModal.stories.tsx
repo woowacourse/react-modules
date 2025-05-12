@@ -77,7 +77,8 @@ export const Default: Story = {
     const input = canvas.getByPlaceholderText('입력해주세요');
     expect(input).toBeDefined();
 
-    userEvent.type(input, '테스트');
+    await userEvent.type(input, '테스트');
+    await new Promise((resolve) => setTimeout(resolve, 0));
     expect(input).toHaveValue('테스트');
   },
 };
