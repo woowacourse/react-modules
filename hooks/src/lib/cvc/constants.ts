@@ -10,7 +10,7 @@ export type ValidateCVCResult = {
   errorType?: CVCErrorType;
 };
 
-export const ERROR_MESSAGE = {
+export const ERROR_MESSAGE: Record<CVCErrorType, string> = {
   notNumber: '숫자만 입력해주세요.',
   invalidLength: 'CVC는 세 자리만 입력해야 합니다.',
 };

@@ -19,7 +19,7 @@ export type ValidateExpiryDateResult = {
   errorType?: ExpiryDateErrorType;
 };
 
-export const ERROR_MESSAGE = {
+export const ERROR_MESSAGE: Record<ExpiryDateErrorType, string> = {
   notNumber: '숫자만 입력해주세요.',
   invalidLength: '유효기간은 두 자리만 입력해야 합니다.',
   invalidMonthRange: '유효한 월(1~12)을 입력해야 합니다.',

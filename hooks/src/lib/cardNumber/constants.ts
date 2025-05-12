@@ -22,7 +22,7 @@ export const CARD_NUMBERS_LENGTH: Record<NetworkType, number> = {
 
 export const DEFAULT_LENGTH = 16;
 
-export const ERROR_MESSAGE = {
+export const ERROR_MESSAGE: Record<CardNumberErrorType, string> = {
   notNumber: '숫자만 입력해주세요.',
   invalidLength: `카드 번호는 최대 ${DEFAULT_LENGTH}만 입력해야 합니다.`,
 };
