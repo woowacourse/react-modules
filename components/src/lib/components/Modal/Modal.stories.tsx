@@ -1,12 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
 import Modal from "./Modal";
-import ModalContent from "../ModalContent/ModalContent";
-import ModalHeader from "../ModalHeader/ModalHeader";
-import ModalTitle from "../ModalTitle/ModalTitle";
-import ModalCloseButton from "../ModalCloseButton/ModalCloseButton";
-import ModalBody from "../ModalBody/ModalBody";
-import ModalFooter from "../ModalFooter/ModalFooter";
 
 import useModal from "../../hooks/useModal";
 
@@ -44,18 +38,18 @@ export const Default: Story = {
     return (
       <>
         <Modal isOpen={true} onClose={handleClose}>
-          <ModalContent position="center">
-            <ModalHeader direction="row" align="start" justify="start">
-              <ModalTitle tag="h1" fontSize="25px" fontWeight="700">
+          <Modal.Content position="center">
+            <Modal.Header direction="row" align="start" justify="start">
+              <Modal.Title tag="h1" fontSize="25px" fontWeight="700">
                 Title이다!
-              </ModalTitle>
-              <ModalCloseButton onClose={handleClose} />
-            </ModalHeader>
-            <ModalBody>몸통이다!</ModalBody>
-            <ModalFooter direction="row" align="end" justify="center">
+              </Modal.Title>
+              <Modal.CloseButton onClose={handleClose} />
+            </Modal.Header>
+            <Modal.Body>몸통이다!</Modal.Body>
+            <Modal.Footer direction="row" align="end" justify="center">
               Footer이다!
-            </ModalFooter>
-          </ModalContent>
+            </Modal.Footer>
+          </Modal.Content>
         </Modal>
       </>
     );
