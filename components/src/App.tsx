@@ -5,10 +5,10 @@ import ConfirmModal from "./lib/ModalVariants/ConfirmModal";
 import PromptModal from "./lib/ModalVariants/PromptModal";
 
 function App() {
-  const [ModalIsOpen, setModalIsOpen] = useState(false);
-  const [AlertIsOpen, setAlertIsOpen] = useState(false);
-  const [ConfirmIsOpen, setConfirmIsOpen] = useState(false);
-  const [PromptIsOpen, setpromptIsOpen] = useState(false);
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [alertIsOpen, setAlertIsOpen] = useState(false);
+  const [confirmIsOpen, setConfirmIsOpen] = useState(false);
+  const [promptIsOpen, setpromptIsOpen] = useState(false);
 
   function handleModalClose() {
     setModalIsOpen(false);
@@ -43,7 +43,7 @@ function App() {
   return (
     <>
       <Modal
-        isOpen={ModalIsOpen}
+        isOpen={modalIsOpen}
         onClose={handleModalClose}
         onConfirm={handleModalConfirm}
         position="center"
@@ -59,14 +59,14 @@ function App() {
         </Modal.Footer>
       </Modal>
       <AlertModal
-        isOpen={AlertIsOpen}
+        isOpen={alertIsOpen}
         onClose={handleAlertClose}
         onConfirm={handleAlertConfirm}
         title="아이디를 입력해 주세요."
         content="아이디는 필수로 입력해야 합니다."
       />
       <ConfirmModal
-        isOpen={ConfirmIsOpen}
+        isOpen={confirmIsOpen}
         onClose={handleConfirmClose}
         onConfirm={handleConfirmConfirm}
         title="카드를 삭제하시겠습니까?"
@@ -74,7 +74,7 @@ function App() {
         size="medium"
       />
       <PromptModal
-        isOpen={PromptIsOpen}
+        isOpen={promptIsOpen}
         onClose={handlePromptClose}
         onConfirm={handlePromptConfirm}
         title="쿠폰 번호를 입력해 주세요."
