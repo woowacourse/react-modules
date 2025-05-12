@@ -1,6 +1,5 @@
 import { useState } from 'react';
-import { isNotOverMaxLength, isNumeric } from './utils';
-import isBeforeToday from './utils/isBeforeToday';
+import { isBeforeToday, isNotOverMaxLength, isNumeric } from './utils';
 import ErrorMessage from './constants/ErrorMessage';
 
 const useCardExpirationInput = () => {
