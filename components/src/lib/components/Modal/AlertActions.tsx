@@ -3,8 +3,8 @@ import CancelButton from './CancelButton';
 import ConfirmButton from './ConfirmButton';
 
 interface AlertActionsProps {
-  onCancelClick: () => void;
-  onConfirmClick: () => void;
+  onCancelClick?: () => void;
+  onConfirmClick?: () => void;
   width?: number;
 }
 

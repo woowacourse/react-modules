@@ -3,23 +3,21 @@ import styled from 'styled-components';
 import { Modal } from '../..';
 
 interface ConfirmModalProps {
-  isOpen: boolean;
   title: string;
   content: string;
-  onConfirmClick: () => void;
   size?: 'small' | 'medium' | 'large';
+  onConfirmClick?: () => void;
 }
 
 function ConfirmModal({
-  isOpen,
   title,
   content,
-  onConfirmClick,
   size,
+  onConfirmClick,
 }: ConfirmModalProps) {
   return (
-    <Modal isOpen={isOpen}>
-      <Modal.Overlay onClick={onConfirmClick} />
+    <Modal.Container>
+      <Modal.Overlay />
       <Modal.Content position="center" size={size}>
         <Modal.Title>{title}</Modal.Title>
         <Modal.Body>{content}</Modal.Body>
@@ -27,7 +25,7 @@ function ConfirmModal({
           <Modal.ConfirmButton width={80} onClick={onConfirmClick} />
         </ButtonWrapper>
       </Modal.Content>
-    </Modal>
+    </Modal.Container>
   );
 }
 

@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { useModal } from './ModalProvider';
 
 interface CancelButtonProps {
-  onClick: () => void;
+  onClick?: () => void;
   width?: number;
 }
 

@@ -1,30 +1,30 @@
 import { ComponentProps } from 'react';
 import { Modal } from '../..';
 import { useFocusTrap } from '../../hooks/useFocusTrap';
+import { useModal } from '../Modal/ModalProvider';
 
 interface PromptModalProps extends Omit<ComponentProps<'input'>, 'size'> {
-  isOpen: boolean;
   title: string;
-  onCloseClick: () => void;
-  onConfirmClick: () => void;
   size?: 'small' | 'medium' | 'large';
   alertActionsWidth?: number;
+  onCloseClick?: () => void;
+  onConfirmClick?: () => void;
 }
 
 function PromptModal({
-  isOpen,
   title,
-  onCloseClick,
-  onConfirmClick,
   size,
   alertActionsWidth,
+  onCloseClick,
+  onConfirmClick,
   ...props
 }: PromptModalProps) {
-  const modalRef = useFocusTrap(isOpen, onCloseClick);
+  const { open, setOpen } = useModal();
+  const modalRef = useFocusTrap(open, () => setOpen(false));
 
   return (
-    <Modal isOpen={isOpen}>
-      <Modal.Overlay onClick={onCloseClick} />
+    <Modal.Container>
+      <Modal.Overlay />
       <Modal.Content position="center" size={size} modalRef={modalRef}>
         <Modal.Title>{title}</Modal.Title>
         <Modal.Input {...props} autoFocus />
@@ -34,7 +34,7 @@ function PromptModal({
           onConfirmClick={onConfirmClick}
         />
       </Modal.Content>
-    </Modal>
+    </Modal.Container>
   );
 }
 

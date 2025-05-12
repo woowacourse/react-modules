@@ -1,17 +1,15 @@
 import { Modal } from '../..';
 
 interface AlertModalProps {
-  isOpen: boolean;
   title: string;
   content: string;
-  onCloseClick: () => void;
-  onConfirmClick: () => void;
+  onCloseClick?: () => void;
+  onConfirmClick?: () => void;
   size?: 'small' | 'medium' | 'large';
   alertActionsWidth?: number;
 }
 
 function AlertModal({
-  isOpen,
   title,
   content,
   onCloseClick,
@@ -20,8 +18,8 @@ function AlertModal({
   alertActionsWidth,
 }: AlertModalProps) {
   return (
-    <Modal isOpen={isOpen}>
-      <Modal.Overlay onClick={onCloseClick} />
+    <Modal.Container>
+      <Modal.Overlay />
       <Modal.Content position="center" size={size}>
         <Modal.Title>{title}</Modal.Title>
         <Modal.Body>{content}</Modal.Body>
@@ -31,7 +29,7 @@ function AlertModal({
           onConfirmClick={onConfirmClick}
         />
       </Modal.Content>
-    </Modal>
+    </Modal.Container>
   );
 }
 
