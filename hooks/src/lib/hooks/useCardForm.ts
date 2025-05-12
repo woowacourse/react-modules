@@ -102,7 +102,12 @@ export default function useCardForm(
       card.onCardNumberChange(sanitizedEvent);
       strictCard.onCardNumberChange(sanitizedEvent);
     },
-    [format, network, card, strictCard]
+    [
+      format.onCardNumberChange,
+      network.onCardNumberChange,
+      card.onCardNumberChange,
+      strictCard.onCardNumberChange,
+    ]
   );
 
   // 현재 폼 값 계산
