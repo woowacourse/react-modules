@@ -6,6 +6,7 @@ import { ModalPropsType } from "../types/ModalPropsType";
 interface PromptModal extends ModalPropsType {
   inputValue: string;
   onChangeInput: (e: ChangeEvent<HTMLInputElement>) => void;
+  onConfirm?: () => void;
 }
 
 const PromptModal = ({
@@ -15,6 +16,7 @@ const PromptModal = ({
   inputValue,
   onChangeInput,
   onClose,
+  onConfirm = onClose,
 }: PromptModal) => {
   return (
     <BaseModal
@@ -35,7 +37,7 @@ const PromptModal = ({
         <S.CancelButton type="button" onClick={onClose}>
           취소
         </S.CancelButton>
-        <S.ConfirmButton type="button" onClick={onClose}>
+        <S.ConfirmButton type="button" onClick={onConfirm}>
           확인
         </S.ConfirmButton>
       </S.ButtonContainer>

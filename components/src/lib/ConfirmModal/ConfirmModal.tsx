@@ -4,6 +4,7 @@ import { ModalPropsType } from "../types/ModalPropsType";
 
 interface ConfirmModalProps extends ModalPropsType {
   description: string;
+  onConfirm?: () => void;
 }
 
 const ConfirmModal = ({
@@ -12,6 +13,7 @@ const ConfirmModal = ({
   description,
   size = "small",
   onClose,
+  onConfirm = onClose,
 }: ConfirmModalProps) => {
   return (
     <BaseModal
@@ -27,7 +29,7 @@ const ConfirmModal = ({
         <S.CancelButton type="button" onClick={onClose}>
           취소
         </S.CancelButton>
-        <S.ConfirmButton type="button" onClick={onClose}>
+        <S.ConfirmButton type="button" onClick={onConfirm}>
           확인
         </S.ConfirmButton>
       </S.ButtonContainer>
