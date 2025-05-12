@@ -27,13 +27,15 @@ const ButtonSizeVariants = {
   },
 };
 
-export const StyledButton = styled.div<ButtonProps>`
+export const StyledButton = styled.button<ButtonProps>`
+  padding: 0px;
   cursor: pointer;
   height: 36px;
   line-height: 36px;
   text-align: center;
   border-radius: 5px;
   font-weight: 700;
+  font-size: 15px;
   ${({ color = "light" }) => ButtonColorVariants[color]};
   ${({ size = "small" }) => ButtonSizeVariants[size]};
 `;
