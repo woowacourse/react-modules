@@ -1,9 +1,10 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import Modal from './Modal';
+import { userEvent, within } from '@storybook/test';
+import Modal from '../Modal';
 
 const meta = {
-  title: 'ModalContainer',
-  component: Modal.Content,
+  title: 'Modal',
+  component: Modal.Container,
   tags: ['autodocs'],
   argTypes: {
     position: {
@@ -19,7 +20,12 @@ const meta = {
     position: 'center',
     size: 'medium',
   },
-} satisfies Meta<typeof Modal.Content>;
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const openButton = canvas.getByRole('button');
+    await userEvent.click(openButton);
+  },
+} satisfies Meta<typeof Modal.Container>;
 
 export default meta;
 
@@ -32,28 +38,9 @@ export const Default: Story = {
         <Modal.OpenTrigger>
           <button>Component Modules</button>
         </Modal.OpenTrigger>
-        <Modal.Content {...args} title="약관에 동의해 주세요">
+        <Modal.Container {...args} title="약관에 동의해 주세요">
           <div>컨텐츠</div>
-        </Modal.Content>
-      </Modal>
-    );
-  },
-};
-
-export const BottomPosition: Story = {
-  args: {
-    position: 'bottom',
-  },
-
-  render: function App(args) {
-    return (
-      <Modal>
-        <Modal.OpenTrigger>
-          <button>Component Modules</button>
-        </Modal.OpenTrigger>
-        <Modal.Content {...args} title="약관에 동의해 주세요">
-          <div>컨텐츠</div>
-        </Modal.Content>
+        </Modal.Container>
       </Modal>
     );
   },
@@ -66,13 +53,13 @@ export const HideCloseButton: Story = {
         <Modal.OpenTrigger>
           <button>Component Modules</button>
         </Modal.OpenTrigger>
-        <Modal.Content
+        <Modal.Container
           {...args}
           title="약관에 동의해 주세요"
           showCloseButton={false}
         >
           <div>컨텐츠</div>
-        </Modal.Content>
+        </Modal.Container>
       </Modal>
     );
   },
@@ -85,7 +72,7 @@ export const ShowAllButtons: Story = {
         <Modal.OpenTrigger>
           <button>Component Modules</button>
         </Modal.OpenTrigger>
-        <Modal.Content {...args} title="약관에 동의해 주세요">
+        <Modal.Container {...args} title="약관에 동의해 주세요">
           <div>컨텐츠</div>
           <Modal.ButtonWrapper direction="column">
             <Modal.CloseTrigger>
@@ -99,7 +86,7 @@ export const ShowAllButtons: Story = {
               </Modal.Button>
             </Modal.CloseTrigger>
           </Modal.ButtonWrapper>
-        </Modal.Content>
+        </Modal.Container>
       </Modal>
     );
   },

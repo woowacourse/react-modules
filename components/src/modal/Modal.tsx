@@ -192,7 +192,7 @@ const FixedCloseButton = styled(CloseButton)`
 const Modal = Object.assign(ModalProvider, {
   OpenTrigger: ModalOpenTrigger,
   CloseTrigger: ModalCloseTrigger,
-  Content: ModalContainer,
+  Container: ModalContainer,
   Title,
   CloseButton,
   PromptInput,
