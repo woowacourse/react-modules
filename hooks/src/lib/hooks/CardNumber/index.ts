@@ -6,8 +6,8 @@ import { getCardNumberError } from "./utils";
 const useCardNumber = () => {
   const [cardNumber, setCardNumber] = useState(INITIAL_CARD_NUMBER_STATE);
 
-  const handleCardNumberChange = useCallback((cardNumber: string) => {
-    const cleanCardNumber = cardNumber.replace(/-/g, "");
+  const handleCardNumberChange = useCallback((value: string) => {
+    const cleanCardNumber = value.replace(/-/g, "");
     if (isNonNumericNonEmpty(cleanCardNumber)) {
       return;
     }
