@@ -30,8 +30,8 @@ const useCardBrand = (cardNumber: string) => {
   }, [cardNumber, cardBrand]);
 
   return {
-    cardBrand,
-    formattedCardNumber,
+    value: cardBrand,
+    formattedValue: formattedCardNumber,
     errorState: getCardBrandError(cardBrand),
   };
 };
