@@ -1,3 +1,9 @@
+[![npm version](https://img.shields.io/npm/v/woowacourse-hooks-marvin.svg)](https://www.npmjs.com/package/woowacourse-hooks-marvin)
+[![npm downloads](https://img.shields.io/npm/dm/woowacourse-hooks-marvin.svg)](https://www.npmjs.com/package/woowacourse-hooks-marvin)
+[![Bundle Size](https://img.shields.io/bundlephobia/minzip/woowacourse-hooks-marvin)](https://bundlephobia.com/package/woowacourse-hooks-marvin)
+[![TypeScript](https://img.shields.io/badge/TypeScript-4.9-blue)](https://www.typescriptlang.org/)
+[![React](https://img.shields.io/badge/React-18-blue)](https://reactjs.org/)
+
 # React Hooks Module
 
 이 프로젝트는 신용카드 입력 폼을 위한 커스텀 React Hooks 모음입니다.

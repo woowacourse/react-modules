@@ -1,3 +1,10 @@
+[![npm version](https://img.shields.io/npm/v/woowacourse-modal-component-marvin.svg)](https://www.npmjs.com/package/woowacourse-modal-component-marvin)
+[![npm downloads](https://img.shields.io/npm/dm/woowacourse-modal-component-marvin.svg)](https://www.npmjs.com/package/woowacourse-modal-component-marvin)
+[![Build Status](https://img.shields.io/github/actions/workflow/status/woowacourse/react-modules/ci.yml?branch=main)](https://github.com/woowacourse/react-modules/actions)
+[![Bundle Size](https://img.shields.io/bundlephobia/minzip/woowacourse-hooks-marvin)](https://bundlephobia.com/package/woowacourse-hooks-marvin)
+[![TypeScript](https://img.shields.io/badge/TypeScript-4.9-blue)](https://www.typescriptlang.org/)
+[![React](https://img.shields.io/badge/React-18-blue)](https://reactjs.org/)
+
 # woowacourse-modal-component-marvin
 
 React 애플리케이션을 위한 유연하고 커스터마이징이 가능한 모달 컴포넌트입니다.
