@@ -1,5 +1,5 @@
 import { commonConditions, getErrorByRules } from "@utils/validation";
-import { ErrorState, ValidationRule } from "@lib/types";
+import { ErrorState, ValidationRule } from "@/types";
 
 const cardExpiryDateConditions = {
   isValidMonth: (value: string) => {

@@ -1,5 +1,4 @@
 import { act } from "@testing-library/react";
-import { ErrorState } from "../lib/types";
 import {
   handleChangeFn,
   TestInvalidInputParams,
@@ -7,6 +6,7 @@ import {
   TestMaxLengthParams,
   TestValidInputParams,
 } from "./type";
+import { ErrorState } from "@/types";
 
 export function testInputUpdate<T, K extends keyof T>({
   renderHookFn,

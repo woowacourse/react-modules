@@ -31,7 +31,8 @@
       "@hooks/*": ["src/hooks/*"],
       "@tests/*": ["src/tests/*"],
       "@utils/*": ["src/utils/*"],
-      "@lib/*": ["src/lib/*"]
+      "@lib/*": ["src/lib/*"],
+      "@types/*": ["src/types/*"]
     }
   },
   "include": ["src"]

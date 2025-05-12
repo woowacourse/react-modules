@@ -1,6 +1,6 @@
 import { useCallback, useState } from "react";
-import { BaseInputState, ErrorState } from "../lib/types";
 import { isNonNumericNonEmpty } from "../utils/validation";
+import { BaseInputState, ErrorState } from "@/types";
 
 interface UseInputStateParams {
   initialValue: BaseInputState;
