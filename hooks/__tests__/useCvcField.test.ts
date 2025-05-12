@@ -1,7 +1,7 @@
 import { renderHook, act } from '@testing-library/react';
 import { useCvcField } from '../src/lib/hooks/useCvcField';
 
-describe('useCvcInput custom hook 테스트', () => {
+describe('useCvcField custom hook 테스트', () => {
   it('유효한 CVC 입력 처리', () => {
     const { result } = renderHook(() => useCvcField());
     act(() => {

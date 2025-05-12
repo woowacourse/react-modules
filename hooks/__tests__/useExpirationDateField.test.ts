@@ -1,7 +1,7 @@
 import { renderHook, act } from '@testing-library/react';
 import { useExpirationDateField } from '../src/lib/hooks/useExpirationDateField';
 
-describe('useCardExpirationInput custom hook 테스트', () => {
+describe('useCardExpirationField custom hook 테스트', () => {
   it('유효한 카드 유효기간 입력 처리', () => {
     const { result } = renderHook(() => useExpirationDateField());
 

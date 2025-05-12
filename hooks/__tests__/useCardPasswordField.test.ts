@@ -1,7 +1,7 @@
 import { renderHook, act } from '@testing-library/react';
 import { useCardPasswordField } from '../src/lib/hooks/useCardPasswordField';
 
-describe('useCardPasswordInput custom hook 테스트', () => {
+describe('useCardPasswordField custom hook 테스트', () => {
   it('유효한 비밀번호 입력 처리', () => {
     const { result } = renderHook(() => useCardPasswordField());
 

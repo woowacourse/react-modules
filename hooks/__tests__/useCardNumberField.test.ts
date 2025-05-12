@@ -1,7 +1,7 @@
 import { renderHook, act } from '@testing-library/react';
 import { useCardNumberField } from '../src/lib/hooks/useCardNumberField';
 
-describe('useCardNumberInput custom hook 테스트', () => {
+describe('useCardNumberField custom hook 테스트', () => {
   it.each([
     ['1234567890123456', '브랜드가 없는 카드 번호'],
     ['4111111111111111', 'visa 카드 번호'],
