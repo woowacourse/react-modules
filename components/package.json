@@ -1,6 +1,6 @@
 {
   "name": "@jae-o/modal-component-module",
-  "version": "0.0.5",
+  "version": "1.0.0",
   "description": "modal component module",
   "type": "module",
   "types": "dist/index.d.ts",
