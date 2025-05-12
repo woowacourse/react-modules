@@ -14,7 +14,7 @@ const useKeyboardEffect = ({
   useEffect(() => {
     if (!enabled) return;
 
-    const handleKeyPress = (event) => {
+    const handleKeyPress = (event: KeyboardEvent) => {
       if (event.key === key) {
         handler();
       }
