@@ -97,7 +97,11 @@ const CardForm: React.FC<CardFormProps> = ({ cardForm }) => {
           )}
         </div>
         <div className="button-container">
-          <button type="submit" className="submit-button" disabled={!isValid}>
+          <button
+            type="submit"
+            className="submit-button"
+            disabled={!isValid || cardForm?.isSubmitting}
+          >
             카드 등록하기
           </button>
 
