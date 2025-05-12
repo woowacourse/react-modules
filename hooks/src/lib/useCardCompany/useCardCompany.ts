@@ -1,37 +1,22 @@
 import { useState } from "react";
+import { checkEmptyValue, getError } from "../utils/vaildate";
 
-type ValidationResult = {
-	isValid: boolean;
-	errorMessage: string;
-};
+const useCardCompany = () => {
+	const [cardCompany, setCardCompany] = useState<string | null>(null);
+	const errorCases = [
+		{
+			validate: (value: string) => checkEmptyValue(value),
+			errorMessage: "값을 입력해주세요.",
+		},
+	];
 
-type Validator = (value: string) => ValidationResult;
+	const onChange = (cardCompanyInput: string) => {
+		const pureCardNumber = cardCompanyInput.replace(/-/g, "");
 
-const useCardCompany = (validators: Validator[]) => {
-	const [value, setValue] = useState("");
-	const [error, setError] = useState({
-		isValid: true,
-		errorMessage: "",
-	});
-
-	const validate = (value: string) => {
-		for (const validator of validators) {
-			const result = validator(value);
-			if (!result.isValid) {
-				setError({ isValid: result.isValid, errorMessage: result.errorMessage });
-				return;
-			}
-		}
-		setError({ isValid: true, errorMessage: "" });
+		setCardCompany(pureCardNumber);
 	};
 
-	const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-		const newValue = e.target.value;
-		setValue(newValue);
-		validate(newValue);
-	};
-
-	return { value, error, onChange, validate };
+	return { cardCompany, onChange, cardNumberError: getError(cardCompany, errorCases) };
 };
 
 export default useCardCompany;

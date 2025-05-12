@@ -1,50 +1,31 @@
 import { useState } from "react";
+import { checkEmptyValue, checkLength, checkNumber, getError } from "../utils/vaildate";
 
-interface ValidationResult {
-	isValid: boolean;
-	errorMessage: string;
-}
+const MAX_LENGTH = 4;
 
-type Validator = (value: string) => ValidationResult;
-type CardNumberField = "first" | "second" | "third" | "fourth";
-type CardNumberError = Record<CardNumberField, ValidationResult>;
+const useCardNumber = () => {
+	const [cardNumber, setCardNumber] = useState("");
+	const errorCases = [
+		{
+			validate: (value: string) => checkEmptyValue(value),
+			errorMessage: "값을 입력해주세요.",
+		},
+		{
+			validate: (value: string) => checkNumber(value),
+			errorMessage: "숫자만 입력 가능합니다.",
+		},
+		{
+			validate: (value: string) => checkLength(value, MAX_LENGTH),
+			errorMessage: `${MAX_LENGTH}자리를 입력해주세요.`,
+		},
+	];
 
-const useCardNumber = (validators: Validator[]) => {
-	const [value, setValue] = useState({ first: "", second: "", third: "", fourth: "" });
-	const [error, setError] = useState<CardNumberError>({
-		first: { isValid: true, errorMessage: "" },
-		second: { isValid: true, errorMessage: "" },
-		third: { isValid: true, errorMessage: "" },
-		fourth: { isValid: true, errorMessage: "" },
-	});
+	const onChange = (cardNumberInput: string) => {
+		const pureCardNumber = cardNumberInput.replace(/-/g, "");
 
-	const validate = (label: string, value: string) => {
-		for (const validator of validators) {
-			const result = validator(value);
-			if (!result.isValid) {
-				setError({
-					...error,
-					[label]: {
-						...error[label as CardNumberField],
-						isValid: false,
-						errorMessage: result.errorMessage,
-					},
-				});
-				return;
-			}
-		}
-		setError((prev) => ({
-			...prev,
-			[label]: { isValid: true, errorMessage: "" },
-		}));
+		setCardNumber(pureCardNumber);
 	};
 
-	const onChange = (e: React.ChangeEvent<HTMLInputElement>, label: CardNumberField) => {
-		const { value } = e.target;
-		setValue((prev) => ({ ...prev, [label]: value }));
-		validate(label, value);
-	};
-
-	return { value, error, onChange, validate };
+	return { cardNumber, onChange, cardNumberError: getError(cardNumber, errorCases) };
 };
 export default useCardNumber;

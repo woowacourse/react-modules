@@ -1,37 +1,31 @@
 import { useState } from "react";
+import { checkEmptyValue, checkLength, checkNumber, getError } from "../utils/vaildate";
 
-type ValidationResult = {
-	isValid: boolean;
-	errorMessage: string;
-};
+const MAX_LENGTH = 3;
 
-type Validator = (value: string) => ValidationResult;
+const useCardCvc = () => {
+	const [cardCvc, setCardCvc] = useState("");
+	const errorCases = [
+		{
+			validate: (value: string) => checkEmptyValue(value),
+			errorMessage: "값을 입력해주세요.",
+		},
+		{
+			validate: (value: string) => checkNumber(value),
+			errorMessage: "숫자만 입력 가능합니다.",
+		},
+		{
+			validate: (value: string) => checkLength(value, MAX_LENGTH),
+			errorMessage: `${MAX_LENGTH}자리를 입력해주세요.`,
+		},
+	];
 
-const useCardCvc = (validators: Validator[]) => {
-	const [value, setValue] = useState("");
-	const [error, setError] = useState({
-		isValid: true,
-		errorMessage: "",
-	});
+	const onChange = (cardCvcInput: string) => {
+		const pureCardNumber = cardCvcInput.replace(/-/g, "");
 
-	const validate = (value: string) => {
-		for (const validator of validators) {
-			const result = validator(value);
-			if (!result.isValid) {
-				setError({ isValid: result.isValid, errorMessage: result.errorMessage });
-				return;
-			}
-		}
-		setError({ isValid: true, errorMessage: "" });
+		setCardCvc(pureCardNumber);
 	};
 
-	const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-		const newValue = e.target.value;
-		setValue(newValue);
-		validate(newValue);
-	};
-
-	return { value, error, onChange, validate };
+	return { cardCvc, onChange, cardCvcError: getError(cardCvc, errorCases) };
 };
-
 export default useCardCvc;
