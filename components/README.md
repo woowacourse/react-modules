@@ -70,11 +70,11 @@
   - 기본 값: light
 - size(`small` | `medium` | `large`): 버튼의 사이즈를 받는다.
   - 기본 값: `small`
-  - children: 하위 컴포넌트를 받는다.
+- children: 하위 컴포넌트를 받는다.
 
 ## Input
 
-- placeHolder: 인풋에 등록할 placeHolder를 받는다.
+- placeholder: 인풋에 등록할 placeholder를 받는다.
 
 ## 사용 예시
 
