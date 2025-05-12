@@ -1,7 +1,6 @@
 import { ReactNode } from "react";
 import { FC } from "react";
 
-import ModalOverlay from "../ModalOverlay/ModalOverlay";
 import ModalContent from "../ModalContent/ModalContent";
 import ModalHeader from "../ModalHeader/ModalHeader";
 import ModalTitle from "../ModalTitle/ModalTitle";
