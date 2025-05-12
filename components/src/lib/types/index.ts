@@ -20,7 +20,9 @@ export interface ModalButtonProps extends ComponentProps<'button'> {
   onClick: () => void;
   children: ReactNode;
 }
-export type ModalCloseButtonProps = Omit<ModalButtonProps, 'onClick'>;
+export interface ModalCloseButtonProps extends Omit<ModalButtonProps, 'onClick'> {
+  onClick?: () => void;
+}
 
 export interface AlertModalProps extends ModalBaseProps {
   title: string;

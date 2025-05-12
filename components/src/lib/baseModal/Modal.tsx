@@ -4,7 +4,7 @@ import ModalPortal from './ModalPortal';
 import useEscClick from './useEscKey';
 import useScrollBlock from './useScrollBlock';
 import { ModalContext, useModalContext } from './ModalContext';
-import { ModalBackDropProps, ModalButtonProps, ModalContentProps, ModalMainProps, ModalTitleProps } from '../types';
+import { ModalBackDropProps, ModalButtonProps, ModalCloseButtonProps, ModalContentProps, ModalMainProps, ModalTitleProps } from '../types';
 
 function ModalMain({ onClose, children }: ModalMainProps) {
   useEscClick(onClose);
@@ -40,11 +40,11 @@ function ModalTitle({ children, ...props }: ModalTitleProps) {
   return <h2 {...props}>{children}</h2>;
 }
 
-function ModalCloseButton({ children, ...props }: Omit<ModalButtonProps, 'onClick'>) {
+function ModalCloseButton({ children, onClick, ...props }: ModalCloseButtonProps) {
   const { onClose } = useModalContext();
 
   return (
-    <button onClick={onClose} {...props}>
+    <button onClick={onClick ?? onClose} {...props}>
       {children}
     </button>
   );
