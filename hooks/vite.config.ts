@@ -4,6 +4,7 @@ import react from '@vitejs/plugin-react-swc';
 import dts from 'vite-plugin-dts';
 
 export default defineConfig({
+  base: '/react-modules/',
   build: {
     lib: {
       entry: path.resolve(__dirname, 'src/lib/index.ts'),
