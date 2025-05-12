@@ -1,47 +1,42 @@
 # Mingtae-Modal
 
-React 애플리케이션을 위한 유연하고 접근성 높은 모달 컴포넌트입니다.
-
-![NPM 버전](https://img.shields.io/npm/v/mingtae-modal)
-![다운로드](https://img.shields.io/npm/dm/mingtae-modal)
-
-## 주요 기능
-
-- 🚀 다양한 모달 타입: 기본, 알림(Alert), 확인(Confirm), 프롬프트(Prompt) 지원
-- 🎨 위치, 크기, 스타일 커스터마이징 가능
-- ⌨️ 포커스 관리를 통한 키보드 접근성 지원
-- 🔄 컨텍스트 기반 상태 관리
-- 📱 반응형 디자인 지원
+React에서 쉽게 사용할 수 있는 모달 컴포넌트 라이브러리입니다. 다양한 종류의 모달(기본, 알림, 확인, 프롬프트)을 제공하며 직관적인 API로 쉽게 사용할 수 있습니다.
 
 ## 설치 방법
 
+npm을 사용하여 설치할 수 있습니다:
+
 ```bash
 npm install mingtae-modal
-# 또는
+```
+
+또는 yarn을 사용하는 경우:
+
+```bash
 yarn add mingtae-modal
 ```
 
 ## 기본 사용법
 
 ```jsx
-import { useState } from 'react';
+import React, { useState } from 'react';
 import Modal from 'mingtae-modal';
 
 function App() {
   const [isOpen, setIsOpen] = useState(false);
 
-  const handleOpen = () => setIsOpen(true);
-  const handleClose = () => setIsOpen(false);
+  const openModal = () => setIsOpen(true);
+  const closeModal = () => setIsOpen(false);
 
   return (
     <div>
-      <button onClick={handleOpen}>모달 열기</button>
+      <button onClick={openModal}>모달 열기</button>
 
-      <Modal isOpen={isOpen} onClose={handleClose}>
+      <Modal isOpen={isOpen} onClose={closeModal}>
         <Modal.Overlay />
         <Modal.Content>
-          <Modal.Title title="모달 제목" />
-          <p>커스터마이징 가능한 기본 모달입니다.</p>
+          <Modal.Title title="기본 모달" />
+          <p>모달 내용을 여기에 작성합니다.</p>
         </Modal.Content>
       </Modal>
     </div>
@@ -49,148 +44,266 @@ function App() {
 }
 ```
 
-## 모달 타입
+## 컴포넌트 구성 요소
+
+### Modal
+
+모달의 루트 컴포넌트입니다.
+
+#### Props
+
+| 속성          | 타입      | 기본값 | 설명                                                  |
+| ------------- | --------- | ------ | ----------------------------------------------------- |
+| isOpen        | boolean   | -      | 모달의 표시 여부를 결정합니다.                        |
+| onClose       | function  | -      | 모달이 닫힐 때 호출되는 함수입니다.                   |
+| closeOnEscape | boolean   | true   | ESC 키를 눌렀을 때 모달이 닫히는지 여부를 결정합니다. |
+| children      | ReactNode | -      | 모달 내용을 정의합니다.                               |
+
+### Modal.Overlay
+
+모달의 배경을 표시하는 컴포넌트입니다.
+
+#### Props
+
+| 속성         | 타입    | 기본값 | 설명                                                      |
+| ------------ | ------- | ------ | --------------------------------------------------------- |
+| closeOnClick | boolean | true   | 오버레이를 클릭했을 때 모달이 닫히는지 여부를 결정합니다. |
+
+### Modal.Content
+
+모달의 기본 컨텐츠 컴포넌트입니다.
+
+#### Props
+
+| 속성              | 타입                           | 기본값   | 설명                                                                |
+| ----------------- | ------------------------------ | -------- | ------------------------------------------------------------------- |
+| hasTopCloseButton | boolean                        | true     | 우측 상단에 닫기 버튼 표시 여부를 결정합니다.                       |
+| position          | 'center' \| 'bottom'           | 'center' | 모달의 위치를 결정합니다.                                           |
+| size              | 'small' \| 'medium' \| 'large' | 'small'  | 모달의 크기를 결정합니다. small(320px), medium(480px), large(600px) |
+| children          | ReactNode                      | -        | 모달 내용을 정의합니다.                                             |
+
+### Modal.AlertContent
+
+확인 버튼이 있는 알림 모달입니다.
+
+#### Props
+
+| 속성              | 타입                           | 기본값                                                                     | 설명                                              |
+| ----------------- | ------------------------------ | -------------------------------------------------------------------------- | ------------------------------------------------- |
+| hasTopCloseButton | boolean                        | true                                                                       | 우측 상단에 닫기 버튼 표시 여부를 결정합니다.     |
+| position          | 'center' \| 'bottom'           | 'center'                                                                   | 모달의 위치를 결정합니다.                         |
+| size              | 'small' \| 'medium' \| 'large' | 'small'                                                                    | 모달의 크기를 결정합니다.                         |
+| alertButton       | object                         | { text: '확인', color: '#fff', backgroundColor: '#333', onClick: onClose } | 알림 버튼의 스타일과 동작을 커스텀할 수 있습니다. |
+| children          | ReactNode                      | -                                                                          | 모달 내용을 정의합니다.                           |
+
+### Modal.ConfirmContent
+
+확인 및 취소 버튼이 있는 확인 모달입니다.
+
+#### Props
+
+| 속성              | 타입                           | 기본값                                                                               | 설명                                              |
+| ----------------- | ------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------- |
+| hasTopCloseButton | boolean                        | true                                                                                 | 우측 상단에 닫기 버튼 표시 여부를 결정합니다.     |
+| position          | 'center' \| 'bottom'           | 'center'                                                                             | 모달의 위치를 결정합니다.                         |
+| size              | 'small' \| 'medium' \| 'large' | 'small'                                                                              | 모달의 크기를 결정합니다.                         |
+| confirmButton     | object                         | { text: '확인', color: '#fff', backgroundColor: '#333', onClick: onClose }           | 확인 버튼의 스타일과 동작을 커스텀할 수 있습니다. |
+| cancelButton      | object                         | { text: '취소', color: '#8B95A1', backgroundColor: 'transparent', onClick: onClose } | 취소 버튼의 스타일과 동작을 커스텀할 수 있습니다. |
+| children          | ReactNode                      | -                                                                                    | 모달 내용을 정의합니다.                           |
+
+### Modal.PromptContent
+
+사용자 입력을 받을 수 있는 프롬프트 모달입니다.
+
+#### Props
+
+| 속성              | 타입                           | 기본값                                                                               | 설명                                              |
+| ----------------- | ------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------- |
+| inputValue        | string                         | -                                                                                    | 입력 필드의 값입니다.                             |
+| setInputValue     | function                       | -                                                                                    | 입력 필드 값을 업데이트하는 함수입니다.           |
+| hasTopCloseButton | boolean                        | true                                                                                 | 우측 상단에 닫기 버튼 표시 여부를 결정합니다.     |
+| position          | 'center' \| 'bottom'           | 'center'                                                                             | 모달의 위치를 결정합니다.                         |
+| size              | 'small' \| 'medium' \| 'large' | 'small'                                                                              | 모달의 크기를 결정합니다.                         |
+| confirmButton     | object                         | { text: '확인', color: '#fff', backgroundColor: '#333', onClick: onClose }           | 확인 버튼의 스타일과 동작을 커스텀할 수 있습니다. |
+| cancelButton      | object                         | { text: '취소', color: '#8B95A1', backgroundColor: 'transparent', onClick: onClose } | 취소 버튼의 스타일과 동작을 커스텀할 수 있습니다. |
+| children          | ReactNode                      | -                                                                                    | 모달 내용을 정의합니다.                           |
+
+### Modal.Title
+
+모달의 제목을 표시하는 컴포넌트입니다.
+
+#### Props
+
+| 속성  | 타입   | 기본값 | 설명                      |
+| ----- | ------ | ------ | ------------------------- |
+| title | string | -      | 표시할 제목 텍스트입니다. |
+
+## 사용 예시
 
 ### 기본 모달
 
 ```jsx
-<Modal isOpen={isOpen} onClose={handleClose}>
-  <Modal.Overlay />
-  <Modal.Content>
-    <Modal.Title title="기본 모달" />
-    <p>내용을 여기에 작성하세요...</p>
-  </Modal.Content>
-</Modal>
+import React, { useState } from 'react';
+import Modal from 'mingtae-modal';
+
+function BasicModalExample() {
+  const [isOpen, setIsOpen] = useState(false);
+
+  return (
+    <>
+      <button onClick={() => setIsOpen(true)}>기본 모달 열기</button>
+
+      <Modal isOpen={isOpen} onClose={() => setIsOpen(false)}>
+        <Modal.Overlay />
+        <Modal.Content>
+          <Modal.Title title="기본 모달" />
+          <p>기본 모달 내용입니다.</p>
+        </Modal.Content>
+      </Modal>
+    </>
+  );
+}
 ```
 
-### 알림 모달 (Alert)
+### 알림 모달 (AlertContent)
 
 ```jsx
-<Modal isOpen={isOpen} onClose={handleClose}>
-  <Modal.Overlay />
-  <Modal.AlertContent
-    alertButton={{
-      text: '확인',
-      color: '#fff',
-      backgroundColor: '#007bff',
-    }}>
-    <Modal.Title title="알림" />
-    <p>알림 메시지입니다!</p>
-  </Modal.AlertContent>
-</Modal>
+import React, { useState } from 'react';
+import Modal from 'mingtae-modal';
+
+function AlertModalExample() {
+  const [isOpen, setIsOpen] = useState(false);
+
+  return (
+    <>
+      <button onClick={() => setIsOpen(true)}>알림 모달 열기</button>
+
+      <Modal isOpen={isOpen} onClose={() => setIsOpen(false)}>
+        <Modal.Overlay />
+        <Modal.AlertContent
+          alertButton={{
+            text: '확인했습니다',
+            backgroundColor: '#007bff',
+          }}>
+          <Modal.Title title="알림" />
+          <p>알림 메시지입니다.</p>
+        </Modal.AlertContent>
+      </Modal>
+    </>
+  );
+}
 ```
 
-### 확인 모달 (Confirm)
+### 확인 모달 (ConfirmContent)
 
 ```jsx
-<Modal isOpen={isOpen} onClose={handleClose}>
-  <Modal.Overlay />
-  <Modal.ConfirmContent
-    confirmButton={{
-      text: '확인',
-      onClick: () => {
-        console.log('확인됨!');
-        handleClose();
-      },
-    }}
-    cancelButton={{
-      text: '취소',
-      onClick: handleClose,
-    }}>
-    <Modal.Title title="작업 확인" />
-    <p>정말 진행하시겠습니까?</p>
-  </Modal.ConfirmContent>
-</Modal>
+import React, { useState } from 'react';
+import Modal from 'mingtae-modal';
+
+function ConfirmModalExample() {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const handleConfirm = () => {
+    console.log('확인 버튼이 클릭되었습니다');
+    setIsOpen(false);
+  };
+
+  return (
+    <>
+      <button onClick={() => setIsOpen(true)}>확인 모달 열기</button>
+
+      <Modal isOpen={isOpen} onClose={() => setIsOpen(false)}>
+        <Modal.Overlay />
+        <Modal.ConfirmContent
+          confirmButton={{
+            text: '삭제',
+            backgroundColor: '#dc3545',
+            onClick: handleConfirm,
+          }}
+          cancelButton={{
+            text: '취소하기',
+          }}>
+          <Modal.Title title="확인" />
+          <p>정말로 삭제하시겠습니까?</p>
+        </Modal.ConfirmContent>
+      </Modal>
+    </>
+  );
+}
 ```
 
-### 프롬프트 모달 (Prompt)
+### 프롬프트 모달 (PromptContent)
 
 ```jsx
-const [inputValue, setInputValue] = useState('');
+import React, { useState } from 'react';
+import Modal from 'mingtae-modal';
 
-<Modal isOpen={isOpen} onClose={handleClose}>
-  <Modal.Overlay />
-  <Modal.PromptContent
-    inputValue={inputValue}
-    setInputValue={setInputValue}
-    confirmButton={{
-      text: '제출',
-      onClick: () => {
-        console.log('제출됨:', inputValue);
-        handleClose();
-      },
-    }}>
-    <Modal.Title title="정보 입력" />
-    <p>필요한 정보를 입력해주세요:</p>
-  </Modal.PromptContent>
-</Modal>;
+function PromptModalExample() {
+  const [isOpen, setIsOpen] = useState(false);
+  const [inputValue, setInputValue] = useState('');
+
+  const handleSubmit = () => {
+    console.log('입력된 값:', inputValue);
+    setIsOpen(false);
+  };
+
+  return (
+    <>
+      <button onClick={() => setIsOpen(true)}>프롬프트 모달 열기</button>
+
+      <Modal isOpen={isOpen} onClose={() => setIsOpen(false)}>
+        <Modal.Overlay />
+        <Modal.PromptContent
+          inputValue={inputValue}
+          setInputValue={setInputValue}
+          confirmButton={{
+            text: '제출',
+            onClick: handleSubmit,
+          }}>
+          <Modal.Title title="입력" />
+          <p>이름을 입력해주세요:</p>
+        </Modal.PromptContent>
+      </Modal>
+    </>
+  );
+}
 ```
 
-## API 레퍼런스
+### 위치 및 크기 조정
 
-### Modal 속성
+```jsx
+import React, { useState } from 'react';
+import Modal from 'mingtae-modal';
 
-| 속성            | 타입            | 기본값 | 설명                          |
-| --------------- | --------------- | ------ | ----------------------------- |
-| `isOpen`        | boolean         | -      | 모달 표시 여부를 제어         |
-| `onClose`       | function        | -      | 모달이 닫힐 때 호출되는 함수  |
-| `closeOnEscape` | boolean         | `true` | ESC 키 누를 때 모달 닫기 여부 |
-| `children`      | React.ReactNode | -      | 모달 내용                     |
+function CustomPositionModalExample() {
+  const [isOpen, setIsOpen] = useState(false);
 
-### Modal.Overlay 속성
+  return (
+    <>
+      <button onClick={() => setIsOpen(true)}>커스텀 모달 열기</button>
 
-| 속성           | 타입    | 기본값 | 설명                            |
-| -------------- | ------- | ------ | ------------------------------- |
-| `closeOnClick` | boolean | `true` | 오버레이 클릭 시 모달 닫기 여부 |
+      <Modal isOpen={isOpen} onClose={() => setIsOpen(false)}>
+        <Modal.Overlay />
+        <Modal.Content position="bottom" size="large">
+          <Modal.Title title="바텀 시트 모달" />
+          <p>화면 하단에 큰 크기로 표시되는 모달입니다.</p>
+        </Modal.Content>
+      </Modal>
+    </>
+  );
+}
+```
 
-### Modal.Content 속성
+## 주요 기능
 
-| 속성                | 타입                           | 기본값   | 설명                            |
-| ------------------- | ------------------------------ | -------- | ------------------------------- |
-| `hasTopCloseButton` | boolean                        | `true`   | 우측 상단에 닫기 버튼 표시 여부 |
-| `position`          | 'center' \| 'bottom'           | 'center' | 화면에서 모달의 위치            |
-| `size`              | 'small' \| 'medium' \| 'large' | 'small'  | 모달의 크기                     |
+- 다양한 모달 유형 제공 (기본, 알림, 확인, 프롬프트)
+- ESC 키로 모달 닫기 기능
+- 오버레이 클릭으로 모달 닫기 기능
+- 위치 및 크기 조정 가능
+- 접근성 지원 (포커스 관리)
+- 사용자 정의 버튼 스타일링
+- 간편한 API
 
-### Modal.AlertContent 속성
+## 라이센스
 
-Modal.Content 속성을 상속하며 다음을 추가:
-
-| 속성          | 타입   | 기본값                                                     | 설명           |
-| ------------- | ------ | ---------------------------------------------------------- | -------------- |
-| `alertButton` | object | `{ text: '확인', color: '#fff', backgroundColor: '#333' }` | 알림 버튼 설정 |
-
-### Modal.ConfirmContent 속성
-
-Modal.Content 속성을 상속하며 다음을 추가:
-
-| 속성            | 타입   | 기본값                                                               | 설명           |
-| --------------- | ------ | -------------------------------------------------------------------- | -------------- |
-| `confirmButton` | object | `{ text: '확인', color: '#fff', backgroundColor: '#333' }`           | 확인 버튼 설정 |
-| `cancelButton`  | object | `{ text: '취소', color: '#8B95A1', backgroundColor: 'transparent' }` | 취소 버튼 설정 |
-
-### Modal.PromptContent 속성
-
-Modal.ConfirmContent 속성을 상속하며 다음을 추가:
-
-| 속성            | 타입     | 기본값 | 설명                        |
-| --------------- | -------- | ------ | --------------------------- |
-| `inputValue`    | string   | -      | 입력 필드의 현재 값         |
-| `setInputValue` | function | -      | 입력 값을 업데이트하는 함수 |
-
-## 접근성 기능
-
-- 모달 열림 시 자동으로 포커스 이동
-- 모달 열림 상태에서 포커스 트랩 기능
-- ESC 키로 모달 닫기 (설정 가능)
-- 스크린 리더를 위한 ARIA 속성 지원
-
-## 브라우저 지원
-
-- Chrome: 최신 2개 버전
-- Firefox: 최신 2개 버전
-- Safari: 최신 2개 버전
-- Edge: 최신 2개 버전
-
-## 라이선스
-
-MIT © MinSungJe
+MIT
