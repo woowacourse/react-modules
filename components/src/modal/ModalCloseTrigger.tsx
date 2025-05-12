@@ -9,11 +9,17 @@ import { useModalContext } from './ModalProvider';
 function ModalCloseTrigger({ children }: PropsWithChildren) {
   const { onClose } = useModalContext();
 
-  if (
+  const isButton =
+    isValidElement(children) &&
+    typeof children.type === 'string' &&
+    children.type === 'button';
+
+  const isModalButton =
     isValidElement(children) &&
     typeof children.type === 'function' &&
-    children.type.name === 'Button'
-  ) {
+    children.type.name === 'Button';
+
+  if (isButton || isModalButton) {
     const element = children as ReactElement<{
       onClick?: (e: React.MouseEvent) => void;
     }>;
