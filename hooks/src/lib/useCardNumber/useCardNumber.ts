@@ -5,8 +5,6 @@ import { isOnlyDigits } from '../utils/validateNumber';
 import { CARD_NUMBER } from '../constants/cardConfig';
 import { useCardFormatter } from "../useCardFormatter";
 
-export type CardBrand = 'visa' | 'mastercard' | 'amex' | 'diners' | 'unionpay' | 'unknown';
-
 export const useCardNumber = (initialCardNumber: CardNumber, initialError: CardNumberError) => {
   const [cardNumber, setCardNumber] = useState<CardNumber>(initialCardNumber);
   const [cardNumberError, setCardNumberError] = useState<CardNumberError>(initialError);

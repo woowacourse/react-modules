@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
-import { CardBrand } from '../useCardNumber';
 import { CARD_BRAND_CONFIG } from '../constants/cardConfig';
 import { CARD_NUMBER_ERROR } from "../constants/errorMessages";
+import { CardBrand } from "../types/cardTypes";
 
 type CardValidationResult = {
   cardBrand: CardBrand;
