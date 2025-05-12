@@ -1,24 +1,13 @@
-import { useEffect, useMemo, useState } from "react";
+import { useMemo } from "react";
 import { formatCardNumber, getCardBrand, getCardBrandError } from "./utils";
-import { CardBrand } from "./types";
 
 const useCardBrand = (cardNumber: string) => {
-  const [cardBrand, setCardBrand] = useState<CardBrand | null>(null);
+  const cardBrand = useMemo(() => {
+    const cleanCardNumber = cardNumber.replace(/-/g, "");
+    const findCardBrand = getCardBrand(cleanCardNumber);
 
-  useEffect(
-    function checkCardBrand() {
-      const cleanCardNumber = cardNumber.replace(/-/g, "");
-      const findCardBrand = getCardBrand(cleanCardNumber);
-
-      if (findCardBrand) {
-        setCardBrand(findCardBrand);
-        return;
-      }
-
-      setCardBrand(null);
-    },
-    [cardNumber]
-  );
+    return findCardBrand || null;
+  }, [cardNumber]);
 
   const formattedCardNumber = useMemo(() => {
     if (!cardBrand) {
