@@ -71,7 +71,6 @@ function createValidatorWithMultipleAndMostRelevantErrors(
             : rule.message;
 
         errors.push({ field, code, message } as ValidationError);
-        // 첫번째 에러가 발생하면 더 이상 검증하지 않음
       }
     }
 
