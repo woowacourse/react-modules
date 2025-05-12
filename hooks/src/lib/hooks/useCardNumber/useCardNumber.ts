@@ -57,6 +57,7 @@ const VALID_CARD_BRANDS = {
   MasterCard: 'MasterCard',
   Diners: 'Diners',
   AMEX: 'AMEX',
+  UnionPay: 'UnionPay',
 } as const;
 
 const CARD_BRANDS = {
@@ -130,6 +131,12 @@ const cardRules: CardRule[] = [
     match: (cardNumber: string) =>
       checkCardBrandRange({ value: cardNumber, type: CARD_BRANDS.AMEX }),
     numberLengths: 15,
+  },
+  {
+    type: CARD_BRANDS.UnionPay,
+    match: (cardNumber: string) =>
+      checkCardBrandRange({ value: cardNumber, type: CARD_BRANDS.UnionPay }),
+    numberLengths: 16,
   },
 ];
 
