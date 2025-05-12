@@ -1,72 +1,191 @@
-# Hooks Module
+# Mingtae-Hooks
 
-<details>
-<summary><b>🎯 기능 요구 사항</b></summary>
+![NPM 버전](https://img.shields.io/npm/v/mingtae-hooks)
+![다운로드](https://img.shields.io/npm/dm/mingtae-hooks)
 
-### 페이먼츠 커스텀 훅
+카드 정보 입력에 특화된 React Hook 모음입니다. 카드 번호, 유효기간, CVC 등의 입력을 쉽게 관리할 수 있습니다.
 
-- 페이먼츠 커스텀 훅 모듈을 npm으로 배포하고 사용할 수 있어야 한다.
-- 카드 정보 입력에 필요한 상태 관리와 유효성 검사 로직을 함께 포함한 커스텀 훅을 작성해야 한다.
-- 각 커스텀 훅은 입력 필드 단위로 책임을 분리해 구성하며, 필요한 경우 다른 훅들과 조합해 사용할 수 있어야 한다.
-- 필수적으로 만들어야 하는 커스텀 훅은 페이먼츠 앱에서 다루었던 카드 정보에 대한 부분이다.
-- 훅이 입력 로직의 책임을 갖고, UI 컴포넌트는 렌더링에만 집중할 수 있도록 책임을 분리하는 구조를 학습하는 것이 이번 미션의 핵심이다.
+## 특징
 
-### RTL
+- 카드 번호 입력 및 유효성 검사
+- 카드 유효기간 입력 관리
+- 단일 숫자 필드 관리 (CVC, 우편번호 등)
+- 숫자 입력 유효성 검사
+- 카드 브랜드 자동 감지
+- 에러 상태 관리
 
-- 각 커스텀 훅에 대해 독립적으로 테스트를 작성한다.
-- 정상 입력과 비정상 입력(성공 시나리오 / 실패 시나리오)을 모두 테스트한다.
-- 다양한 잘못된 입력(경계값 초과, 빈 입력, 형식 오류 등)에 대해 폭넓게 테스트한다.
-- 카드사 식별 (AMEX, Diners, UnionPay 포함) 및 유효성 검사 로직 테스트
-- 카드 번호 포맷팅 기능 테스트
-- 💡 카드 브랜드 구분 로직 (Diners / AMEX / UnionPay)
-  - Visa: 4로 시작하는 16자리 숫자
-  - MasterCard: 51~55로 시작하는 16자리 숫자
-  - Diners: 36으로 시작하는 14자리 숫자
-    - 예시: 3612 345678 9012
-  - AMEX: 34, 37로 시작하는 15자리 숫자
-    - 예시 (34로 시작): 3412 345678 90123
-    - 예시 (37로 시작): 3712 345678 90123
-  - 유니온페이: 카드의 앞 번호가 아래 3가지 조건을 만족하는 16자리 숫자
-    - 622126~622925로 시작하는 경우: 6221 2612 3456 7890
-    - 624~626로 시작하는 경우: 6240 1234 5678 9012
-    - 6282~6288로 시작하는 경우: 6282 1234 5678 9012
+## 설치
 
-</details>
+```bash
+npm install mingtae-hooks
+```
 
-## 🦩 구현 목록
+또는
 
-### CVC 번호, 비밀번호 앞자리 등 단일 숫자 Input
+```bash
+yarn add mingtae-hooks
+```
 
-- [x] 해당하는 정보의 상태를 관리할 수 있다.
-- [x] 해당하는 정보가 유효한 지 확인한다.
-  - [x] 해당하는 정보가 숫자로만 이루어져 있는 지 확인한다.
-  - [x] 해당하는 정보가 입력 받은 최대 길이 이내인지 확인한다.
+## 사용법
 
-### 카드 번호
+### 카드 번호 입력 Hook (`useCardNumberInput`)
 
-- [x] 카드 번호의 상태를 관리할 수 있다.
-- [x] 카드 번호가 유효한 지 확인한다.
-  - [x] 카드 번호가 숫자로만 이루어져 있는 지 확인한다.
-  - [x] 카드 번호가 16자 이내인지 확인한다.
-- [x] 카드 번호를 보고 어떤 브랜드인지 확인한다.
-  - [x] Visa: 4로 시작하는 16자리 숫자
-  - [x] MasterCard: 51~55로 시작하는 16자리 숫자
-  - [x] Diners: 36으로 시작하는 14자리 숫자
-  - [x] AMEX: 34, 37로 시작하는 15자리 숫자
-  - [x] 유니온페이: 카드의 앞 번호가 아래 3가지 조건을 만족하는 16자리 숫자
-    - 622126~622925로 시작하는 경우
-    - 624~626로 시작하는 경우
-    - 6282~6288로 시작하는 경우
-- [x] 카드 번호의 브랜드에 따라 포맷팅을 한다.
-  - [x] Visa, MasterCard, 유니온 페이: 4-4-4-4
-  - [x] Diners: 4-6-4
-  - [x] AMEX: 4-6-5
+카드 번호 입력을 관리하고 유효성을 검증합니다.
 
-### 유효 기간
+```jsx
+import { useCardNumberInput } from 'mingtae-hooks';
 
-- [x] 유효 기간의 상태를 관리할 수 있다.
-- [x] 유효 기간이 유효한 지 확인한다.
-  - [x] 유효 기간이 숫자로만 이루어져 있는 지 확인한다.
-  - [x] 각 유효기간이 2자 이내인지 확인한다.
-  - [x] 월은 01 ~ 12 사이의 숫자여야 한다.
-  - [x] 월과 년은 오늘 날짜 이후여야 한다.
+const CardNumberInput = () => {
+  const {
+    cardNumberInputValue,
+    setCardNumberInputValue,
+    cardBrand,
+    formattedCardNumber,
+    errorInfo: { isError, errorText },
+  } = useCardNumberInput();
+
+  return (
+    <div>
+      <input
+        type="text"
+        value={formattedCardNumber}
+        onChange={(e) => setCardNumberInputValue(e.target.value)}
+        placeholder="카드 번호 입력"
+      />
+      {cardBrand && <div>카드 종류: {cardBrand}</div>}
+      {isError && <div className="error">{errorText}</div>}
+    </div>
+  );
+};
+```
+
+### 카드 유효기간 입력 Hook (`useCardExpirationInput`)
+
+카드 유효기간(월/년) 입력을 관리하고 유효성을 검증합니다.
+
+```jsx
+import { useCardExpirationInput } from 'mingtae-hooks';
+
+const CardExpirationInput = () => {
+  const { cardExpirationValue, setCardExpirationValue, errorInfo } = useCardExpirationInput();
+
+  return (
+    <div>
+      <div>
+        <input
+          type="text"
+          value={cardExpirationValue.month}
+          onChange={(e) => setCardExpirationValue.month(e.target.value)}
+          placeholder="MM"
+          maxLength={2}
+        />
+        {errorInfo.month.isError && <div className="error">{errorInfo.month.errorText}</div>}
+      </div>
+      <div>
+        <input
+          type="text"
+          value={cardExpirationValue.year}
+          onChange={(e) => setCardExpirationValue.year(e.target.value)}
+          placeholder="YY"
+          maxLength={2}
+        />
+        {errorInfo.year.isError && <div className="error">{errorInfo.year.errorText}</div>}
+      </div>
+    </div>
+  );
+};
+```
+
+### 단일 숫자 입력 Hook (`useSingleNumberInput`)
+
+CVC나 우편번호 같은 숫자 필드 입력을 관리합니다.
+
+```jsx
+import { useSingleNumberInput } from 'mingtae-hooks';
+
+const CVCInput = () => {
+  // 최대 길이 3으로 CVC 입력 관리
+  const {
+    inputValue,
+    setInputValue,
+    errorInfo: { isError, errorText },
+  } = useSingleNumberInput(3);
+
+  return (
+    <div>
+      <input
+        type="text"
+        value={inputValue}
+        onChange={(e) => setInputValue(e.target.value)}
+        placeholder="CVC"
+        maxLength={3}
+      />
+      {isError && <div className="error">{errorText}</div>}
+    </div>
+  );
+};
+```
+
+## API 참조
+
+### useCardNumberInput
+
+카드 번호 입력을 관리하는 훅입니다.
+
+**반환값:**
+
+| 이름                      | 타입                                      | 설명                                           |
+| ------------------------- | ----------------------------------------- | ---------------------------------------------- |
+| `cardNumberInputValue`    | `string`                                  | 현재 카드 번호 입력값                          |
+| `setCardNumberInputValue` | `(value: string) => void`                 | 카드 번호 입력값 설정 함수                     |
+| `cardBrand`               | `string \| null`                          | 감지된 카드 브랜드 (VISA, Mastercard 등)       |
+| `formattedCardNumber`     | `string`                                  | 포맷팅된 카드 번호 (예: `4111 1111 1111 1111`) |
+| `errorInfo`               | `{ isError: boolean, errorText: string }` | 에러 상태 정보                                 |
+
+### useCardExpirationInput
+
+카드 유효기간 입력을 관리하는 훅입니다.
+
+**반환값:**
+
+| 이름                     | 타입                                                                                                | 설명                        |
+| ------------------------ | --------------------------------------------------------------------------------------------------- | --------------------------- |
+| `cardExpirationValue`    | `{ month: string, year: string }`                                                                   | 현재 월/년 입력값           |
+| `setCardExpirationValue` | `{ month: (value: string) => void, year: (value: string) => void }`                                 | 월/년 입력값 설정 함수      |
+| `errorInfo`              | `{ month: { isError: boolean, errorText: string }, year: { isError: boolean, errorText: string } }` | 월/년 각각의 에러 상태 정보 |
+
+### useSingleNumberInput
+
+숫자 필드 입력을 관리하는 훅입니다.
+
+**매개변수:**
+
+| 이름        | 타입     | 설명                  |
+| ----------- | -------- | --------------------- |
+| `maxLength` | `number` | 입력 필드의 최대 길이 |
+
+**반환값:**
+
+| 이름            | 타입                                      | 설명             |
+| --------------- | ----------------------------------------- | ---------------- |
+| `inputValue`    | `string`                                  | 현재 입력값      |
+| `setInputValue` | `(value: string) => void`                 | 입력값 설정 함수 |
+| `errorInfo`     | `{ isError: boolean, errorText: string }` | 에러 상태 정보   |
+
+## 유틸리티 함수
+
+이 라이브러리는 다음 유틸리티 함수들을 내부적으로 사용합니다:
+
+- `checkCardBrand`: 카드 번호로부터 카드 브랜드 감지
+- `formatCardNumber`: 카드 번호 포맷팅
+- `isNumeric`: 입력값이 숫자인지 확인
+- `isNotOverMaxLength`: 입력값이 최대 길이를 초과하지 않는지 확인
+- `isBeforeToday`: 유효기간이 오늘 이전인지 확인
+
+## 의존성
+
+- React 16.8.0 이상 (Hooks 기능 필요)
+
+## 라이선스
+
+MIT © MinSungJe
