@@ -36,7 +36,7 @@ export const PASSWORD_ERROR_MESSAGES: Record<PasswordErrorCodes, string> = {
 
 export const EXPIRY_DATE_ERROR_MESSAGES: Record<ExpiryDateErrorCodes, string> =
   {
-    INVALID_FORMAT: "만료일을 MM/YY 형식으로 입력해주세요.",
+    INVALID_FORMAT: "만료일을 MMYY 형식으로 입력해주세요.",
     INVALID_MONTH: "유효한 월을 입력해주세요 (01~12).",
     EXPIRED_DATE: "만료된 카드입니다.",
   } as const;
