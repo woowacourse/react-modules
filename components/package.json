@@ -1,6 +1,6 @@
 {
   "name": "@leeje/modal-component-module",
-  "version": "0.0.4",
+  "version": "0.0.7",
   "description": "modal component module",
   "type": "module",
   "types": "dist/index.d.ts",
