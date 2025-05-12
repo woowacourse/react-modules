@@ -1,6 +1,7 @@
 import { renderHook } from "@testing-library/react";
 import { useCardNumber } from "../lib";
 import { act } from "react";
+import { formatByCardType } from "../lib/formatByCardType";
 
 describe("cardType 테스트", () => {
   it("VISA 카드 식별 테스트", () => {
@@ -51,79 +52,29 @@ describe("cardType 테스트", () => {
   });
 });
 
-// describe("cardType에 따른 포맷팅 테스트", () => {
-//   it("VISA 카드 포맷팅 테스트", () => {
-//     const { result } = renderHook(() => useCardNumber());
+describe("cardType에 따른 포맷팅 테스트", () => {
+  it("VISA 카드는 4-4-4-4 포맷으로 출력되어야 한다.", () => {
+    const result = formatByCardType("4111111111111111", "VISA");
+    expect(result).toBe("4111 1111 1111 1111");
+  });
 
-//     act(() => {
-//       result.current.handleCardNumber("4321", "first");
-//       result.current.handleCardNumber("1234", "second");
-//       result.current.handleCardNumber("1234", "third");
-//       result.current.handleCardNumber("123", "fourth");
-//     });
+  it("MasterCard 카드는 4-4-4-4 포맷으로 출력되어야 한다.", () => {
+    const result = formatByCardType("5555555555554444", "MasterCard");
+    expect(result).toBe("5555 5555 5555 4444");
+  });
 
-//     expect(result.current.isCardNumberError).toEqual([
-//       false,
-//       false,
-//       false,
-//       true,
-//     ]);
-//     expect(result.current.errorText).toBe("fourth 입력값은 4자리여야 합니다.");
-//   });
-//   it("Master 카드 포맷팅 테스트", () => {
-//     const { result } = renderHook(() => useCardNumber());
+  it("AMEX 카드는 4-6-5 포맷으로 출력되어야 한다.", () => {
+    const result = formatByCardType("341234567890123", "AMEX");
+    expect(result).toBe("3412 345678 90123");
+  });
 
-//     act(() => {
-//       result.current.handleCardNumber("5221", "first");
-//       result.current.handleCardNumber("1234", "second");
-//       result.current.handleCardNumber("1234", "third");
-//       result.current.handleCardNumber("123", "fourth");
-//     });
+  it("Diners 카드는 4-6-4 포맷으로 출력되어야 한다.", () => {
+    const result = formatByCardType("36211234561234", "Diners");
+    expect(result).toBe("3621 123456 1234");
+  });
 
-//     expect(result.current.isCardNumberError).toEqual([
-//       false,
-//       false,
-//       false,
-//       true,
-//     ]);
-//     expect(result.current.errorText).toBe("fourth 입력값은 4자리여야 합니다.");
-//   });
-// });
-// it("Diners 카드 포맷팅 테스트", () => {
-//   const { result } = renderHook(() => useCardNumber());
-
-//   act(() => {
-//     result.current.handleCardNumber("3621", "first");
-//     result.current.handleCardNumber("1234", "second");
-//     result.current.handleCardNumber("1234", "third");
-//   });
-
-//   expect(result.current.isCardNumberError).toEqual([false, true, false, false]);
-//   expect(result.current.errorText).toBe("second 입력값은 6자리여야 합니다.");
-// });
-
-// it("AMEX 카드 포맷팅 테스트", () => {
-//   const { result } = renderHook(() => useCardNumber());
-
-//   act(() => {
-//     result.current.handleCardNumber("3412", "first");
-//     result.current.handleCardNumber("123456", "second");
-//     result.current.handleCardNumber("1234", "third");
-//   });
-
-//   expect(result.current.isCardNumberError).toEqual([false, false, true, false]);
-//   expect(result.current.errorText).toBe("third 입력값은 5자리여야 합니다.");
-// });
-// it("UnionPay 카드 포맷팅 테스트", () => {
-//   const { result } = renderHook(() => useCardNumber());
-
-//   act(() => {
-//     result.current.handleCardNumber("6221", "first");
-//     result.current.handleCardNumber("2612", "second");
-//     result.current.handleCardNumber("1234", "third");
-//     result.current.handleCardNumber("123", "fourth");
-//   });
-
-//   expect(result.current.isCardNumberError).toEqual([false, false, false, true]);
-//   expect(result.current.errorText).toBe("fourth 입력값은 4자리여야 합니다.");
-// });
+  it("UnionPay 카드는 4-4-4-4 포맷으로 출력되어야 한다.", () => {
+    const result = formatByCardType("6221261234567890", "UnionPay");
+    expect(result).toBe("6221 2612 3456 7890");
+  });
+});
