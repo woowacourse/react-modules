@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { checkNumber, checkValidLength } from "../validator/inputValidator";
+import { SingleCardNumberError } from "../types/cardErrorType";
 
 const MONTH_VALID_LENGTH = 2;
 const YEAR_VALID_LENGTH = 2;
@@ -12,12 +13,19 @@ const ERROR_MESSAGE = {
   INVALID_YEAR_FORMAT: "YY형태로 입력해주세요.",
 };
 
+interface ExpirationDateError {
+  month: SingleCardNumberError;
+  year: SingleCardNumberError;
+}
+
 const useExpirationDate = () => {
   const [expDate, setExpDate] = useState({ month: "", year: "" });
-  const [validationResult, setValidationResult] = useState({
-    month: { errorState: false, message: "" },
-    year: { errorState: false, message: "" },
-  });
+  const [validationResult, setValidationResult] = useState<ExpirationDateError>(
+    {
+      month: { errorState: false, message: "" },
+      year: { errorState: false, message: "" },
+    }
+  );
 
   const checkMonthRange = (value: string) => {
     const num = Number(value);

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { checkNumber, checkValidLength } from "../validator/inputValidator";
+import { SingleCardNumberError } from "../types/cardErrorType";
 
 const CVC_VALID_LENGTH = 3;
 
@@ -10,10 +11,11 @@ const ERROR_MESSAGE = {
 
 const useCardCvc = () => {
   const [cardCVC, setCardCVC] = useState("");
-  const [validationResult, setValidationResult] = useState({
-    errorState: false,
-    message: "",
-  });
+  const [validationResult, setValidationResult] =
+    useState<SingleCardNumberError>({
+      errorState: false,
+      message: "",
+    });
 
   const validate = (value: string) => {
     if (!checkNumber(value)) {

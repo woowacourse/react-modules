@@ -2,6 +2,8 @@ import { useState } from "react";
 import { checkNumber, checkValidLength } from "../validator/inputValidator";
 import getCardType from "./utils/getCardType";
 import { formatCardNumber } from "./utils/formatCardNumber";
+import { CardNumberLabel, CardType } from "./types";
+import { SingleCardNumberError } from "../types/cardErrorType";
 
 const CARDNUMBER_VALID_LENGTH = 4;
 
@@ -19,27 +21,12 @@ const CARD_TYPE_LENGTH_RULES: Record<CardType, number[]> = {
   Default: [4, 4, 4, 4],
 };
 
-interface SingleCardNumberError {
-  errorState: boolean;
-  message: string;
-}
-
 interface CardNumberError {
   first: SingleCardNumberError;
   second: SingleCardNumberError;
   third: SingleCardNumberError;
   fourth: SingleCardNumberError;
 }
-
-export type CardNumberLabel = "first" | "second" | "third" | "fourth";
-
-type CardType =
-  | "UnionPay"
-  | "Visa"
-  | "MasterCard"
-  | "Diners"
-  | "AMEX"
-  | "Default";
 
 const useCardNumber = () => {
   const [cardNumber, setCardNumber] = useState({

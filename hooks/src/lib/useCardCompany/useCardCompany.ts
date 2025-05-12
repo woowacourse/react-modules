@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { SingleCardNumberError } from "../types/cardErrorType";
 
 const ERROR_MESSAGE = {
   EMPTY_CARD_COMPANY: "카드사를 선택해주세요.",
@@ -6,10 +7,11 @@ const ERROR_MESSAGE = {
 
 const useCardCompany = (validCardCompanies: string[] = []) => {
   const [cardCompany, setCardCompany] = useState("");
-  const [validationResult, setValidationResult] = useState({
-    errorState: false,
-    message: "",
-  });
+  const [validationResult, setValidationResult] =
+    useState<SingleCardNumberError>({
+      errorState: false,
+      message: "",
+    });
 
   const validate = (inputValue: string) => {
     if (inputValue.length === 0) {
