@@ -30,8 +30,7 @@ export const useCardNumber = () => {
 
   const handleCardNumberChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
-    // 카드 번호가 들어오면 카드의 타입과 카드 길이를 반환한다.
-    // 카드 타입과 카드 길이를 받으면 해당 카드 타입의 카드 길이가 유효한지를 검사한다.
+
     const newCardNumbers = value.replace(/\s/g, '');
 
     const { type, numberLengths } = getCardBrand({
@@ -45,7 +44,6 @@ export const useCardNumber = () => {
 
     setCardNumbers(newCardNumbers);
     setCardBrand(type);
-
     setErrorMessage(errorMessage);
   };
 
