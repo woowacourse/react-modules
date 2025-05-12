@@ -74,7 +74,7 @@ export const ShowAllButtons: Story = {
         </Modal.OpenTrigger>
         <Modal.Container {...args} title="약관에 동의해 주세요">
           <div>컨텐츠</div>
-          <Modal.ButtonWrapper direction="column">
+          <Modal.ButtonGroup direction="column">
             <Modal.CloseTrigger>
               <Modal.Button variant="primary" onClick={() => alert('클릭됨')}>
                 동의하고 저장하기
@@ -85,7 +85,7 @@ export const ShowAllButtons: Story = {
                 닫기
               </Modal.Button>
             </Modal.CloseTrigger>
-          </Modal.ButtonWrapper>
+          </Modal.ButtonGroup>
         </Modal.Container>
       </Modal>
     );

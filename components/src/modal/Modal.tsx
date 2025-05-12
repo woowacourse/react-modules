@@ -1,7 +1,6 @@
 import styled from '@emotion/styled';
 import { CSSProperties, PropsWithChildren, useMemo } from 'react';
 import Button from './Button';
-import ButtonWrapper from './ButtonWrapper';
 import CloseButton from './CloseButton';
 import { useBodyScrollLock } from './hooks/useBodyScrollLock';
 import useClickOutside from './hooks/useClickOutside';
@@ -18,6 +17,7 @@ import ModalProvider, { useModalContext } from './ModalProvider';
 import PromptInput from './PromptInput';
 import Title from './Title';
 import WideButton from './WideButton';
+import ButtonGroup from './ButtonGroup';
 
 // ============================== Types ==============================
 
@@ -129,7 +129,7 @@ const Modal = Object.assign(ModalProvider, {
   Title,
   CloseButton,
   PromptInput,
-  ButtonWrapper,
+  ButtonGroup,
   Button,
   WideButton,
 });

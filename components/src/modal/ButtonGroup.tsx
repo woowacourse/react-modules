@@ -3,47 +3,47 @@ import { CSSProperties, PropsWithChildren, useMemo } from 'react';
 
 // ============================== Types ==============================
 
-interface ButtonWrapperProps {
-  direction?: ButtonWrapperDirectionType;
-  align?: ButtonWrapperAlignType;
+interface ButtonGroupProps {
+  direction?: ButtonGroupDirectionType;
+  align?: ButtonGroupAlignType;
   gap?: number;
   style?: CSSProperties;
 }
 
-type ButtonWrapperDirectionType = 'row' | 'column';
-type ButtonWrapperAlignType = 'start' | 'center' | 'end';
+type ButtonGroupDirectionType = 'row' | 'column';
+type ButtonGroupAlignType = 'start' | 'center' | 'end';
 
 // ============================== Component ==============================
 
-function ButtonWrapper({
+function ButtonGroup({
   direction = 'row',
   align = 'center',
   gap = 12,
   style,
   children,
-}: PropsWithChildren<ButtonWrapperProps>) {
+}: PropsWithChildren<ButtonGroupProps>) {
   const memoizedStyle = useMemo(() => {
     if (!style) return {};
     return { ...style };
   }, [style]);
 
   return (
-    <StyledButtonWrapper
+    <StyledButtonGroup
       direction={direction}
       align={align}
       gap={gap}
       style={memoizedStyle}
     >
       {children}
-    </StyledButtonWrapper>
+    </StyledButtonGroup>
   );
 }
 
 // ============================== Styled Components ==============================
 
-const StyledButtonWrapper = styled.div<{
-  direction: ButtonWrapperDirectionType;
-  align: ButtonWrapperAlignType;
+const StyledButtonGroup = styled.div<{
+  direction: ButtonGroupDirectionType;
+  align: ButtonGroupAlignType;
   gap: number;
 }>`
   width: 100%;
@@ -70,4 +70,4 @@ const StyledButtonWrapper = styled.div<{
   }};
 `;
 
-export default ButtonWrapper;
+export default ButtonGroup;

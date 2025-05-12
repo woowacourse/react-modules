@@ -10,7 +10,7 @@ function App() {
         <div>컨텐츠</div>
         <Modal.PromptInput />
 
-        <Modal.ButtonWrapper direction="row" align="end">
+        <Modal.ButtonGroup direction="row" align="end">
           <Modal.CloseTrigger>
             <Modal.Button variant="primary" onClick={() => alert('클릭됨')}>
               동의하고 저장하기
@@ -19,7 +19,7 @@ function App() {
           <Modal.CloseTrigger>
             <Modal.Button>확인</Modal.Button>
           </Modal.CloseTrigger>
-        </Modal.ButtonWrapper>
+        </Modal.ButtonGroup>
       </Modal.Container>
     </Modal>
   );
