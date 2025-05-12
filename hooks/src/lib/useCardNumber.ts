@@ -1,20 +1,12 @@
 import { useState } from "react";
-import { CardNumber } from "./types/Card";
 import { getCardType } from "./getCardType";
 import { cardNumberValidation } from "./cardNumberValidation";
 
-const defaultCardNumber = {
-  first: "",
-  second: "",
-  third: "",
-  fourth: "",
-};
-
 function useCardNumber() {
-  const [cardNumber, setCardNumber] = useState(defaultCardNumber);
+  const [cardNumber, setCardNumber] = useState("");
 
-  function handleCardNumber(value: string, position: keyof CardNumber) {
-    setCardNumber((prev) => ({ ...prev, [position]: value }));
+  function handleCardNumber(value: string) {
+    setCardNumber(value);
   }
 
   const cardType = getCardType(cardNumber);
