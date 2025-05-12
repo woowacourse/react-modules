@@ -19,7 +19,7 @@ const useCardNumberInput = () => {
 
   const [errorMessage, setErrorMessage] = useState("");
 
-  const cardBrand = useCardBrand([cardNumberState.value]);
+  const cardBrand = useCardBrand(cardNumberState.value);
   const formattedCardNumber = useFormattedCardNumber(
     cardNumberState.value,
     cardBrand

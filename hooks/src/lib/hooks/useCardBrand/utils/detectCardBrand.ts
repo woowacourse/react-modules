@@ -1,9 +1,7 @@
 import { CARD_BRAND_RULE } from "../constants";
 import type { CardBrand } from "../types";
 
-export function detectCardBrand(cardNumberParts: string[]): CardBrand | null {
-  const cardNumber = cardNumberParts.join("");
-
+export function detectCardBrand(cardNumber: string): CardBrand | null {
   if (!cardNumber) return null;
 
   for (const [brand, rule] of Object.entries(CARD_BRAND_RULE)) {
