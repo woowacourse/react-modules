@@ -13,7 +13,7 @@ function App() {
   return (
     <>
       <h1>Hooks Modules</h1>
-      {...Object.keys(cardNumbers).map((key) => {
+      {(['part1', 'part2', 'part3', 'part4'] as const).map((key) => {
         return (
           <>
             <input
