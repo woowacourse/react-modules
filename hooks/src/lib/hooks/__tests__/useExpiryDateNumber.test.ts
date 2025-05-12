@@ -29,11 +29,11 @@ describe("useExpiryDateNumber", () => {
 
     act(() => {
       result.current.onExpiryDateNumberChange({
-        target: { value: "e" },
+        target: { value: "eeee" },
       } as React.ChangeEvent<HTMLInputElement>);
     });
 
-    expect(result.current.expiryDateNumber).toBe("e");
+    expect(result.current.expiryDateNumber).toBe("eeee");
     expect(result.current.isError).toBe(true);
     expect(result.current.errorMessage).toBe(
       EXPIRY_DATE_ERROR_MESSAGES.INVALID_FORMAT

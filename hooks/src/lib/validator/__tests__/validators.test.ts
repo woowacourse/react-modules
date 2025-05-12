@@ -98,7 +98,7 @@ describe("유효성 검사기", () => {
     });
 
     it("유효하지 않은 월에 대해 유효하지 않음을 반환해야 함", () => {
-      const result = validateExpiryDate("1323");
+      const result = validateExpiryDate("1326");
       expect(result.valid).toBe(false);
       expect(result.errors).toContainEqual(
         expect.objectContaining({

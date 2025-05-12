@@ -81,12 +81,6 @@ export const validationRules: ValidationRules = {
       check: (value: string) => isNumeric(value),
       message: CARD_NUMBER_ERROR_MESSAGES.INVALID_NUMBER,
     },
-
-    INVALID_FORMAT: {
-      applyWhen: isNumeric,
-      check: (value: string) => /^\d+$/.test(value),
-      message: CARD_NUMBER_ERROR_MESSAGES.INVALID_FORMAT,
-    },
     INVALID_LENGTH: {
       applyWhen: (value: string) => /^\d+$/.test(value),
       check: (value: string) => isValidLength(value, CLIENT_CARD_NUMBER_LENGTH),
@@ -95,6 +89,11 @@ export const validationRules: ValidationRules = {
           checkCardBrand(value),
           CLIENT_CARD_NUMBER_LENGTH
         ),
+    },
+    INVALID_FORMAT: {
+      applyWhen: isNumeric,
+      check: (value: string) => /^\d+$/.test(value),
+      message: CARD_NUMBER_ERROR_MESSAGES.INVALID_FORMAT,
     },
   },
   strictCardNumber: {
@@ -142,15 +141,15 @@ export const validationRules: ValidationRules = {
       check: isValidExpiryDateFormat,
       message: EXPIRY_DATE_ERROR_MESSAGES.INVALID_FORMAT,
     },
-    INVALID_MONTH: {
-      applyWhen: isValidExpiryDateFormat,
-      check: isValidExpiryMonth,
-      message: EXPIRY_DATE_ERROR_MESSAGES.INVALID_MONTH,
-    },
     EXPIRED_DATE: {
       applyWhen: isValidExpiryDateFormat,
       check: isNotExpiredDate,
       message: EXPIRY_DATE_ERROR_MESSAGES.EXPIRED_DATE,
+    },
+    INVALID_MONTH: {
+      applyWhen: isValidExpiryDateFormat,
+      check: isValidExpiryMonth,
+      message: EXPIRY_DATE_ERROR_MESSAGES.INVALID_MONTH,
     },
   },
 };

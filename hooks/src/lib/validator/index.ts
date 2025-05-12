@@ -28,9 +28,6 @@ function createValidator(field: ValidateField) {
     const errors: ValidationError[] = [];
 
     for (const [code, rule] of Object.entries(fieldRules)) {
-      // applyWhen이 있고, 그 조건을 만족하지 않으면 건너뜀
-      if (rule.applyWhen && !rule.applyWhen(value)) continue;
-
       // 검증 실패 시 에러 추가
       if (!rule.check(value)) {
         const message =
@@ -39,6 +36,8 @@ function createValidator(field: ValidateField) {
             : rule.message;
 
         errors.push({ field, code, message });
+        // 첫번째 에러가 발생하면 더 이상 검증하지 않음
+
         break;
       }
     }
@@ -47,4 +46,35 @@ function createValidator(field: ValidateField) {
   };
 }
 
-export { createValidator };
+function createValidatorWithMultipleAndMostRelevantErrors(
+  field: ValidateField
+) {
+  return (value: string): ValidationResult => {
+    if (value === "") return { errors: [], valid: true };
+
+    const fieldRules = validationRules[field];
+
+    if (!fieldRules) throw new Error(`해당 ${field} 필드가 존재하지 않습니다`);
+
+    const errors: ValidationError[] = [];
+
+    for (const [code, rule] of Object.entries(fieldRules)) {
+      if (rule.applyWhen && !rule.applyWhen(value)) continue;
+      // applyWhen이 true인 경우에만 검증
+
+      if (!rule.check(value)) {
+        const message =
+          typeof rule.message === "function"
+            ? rule.message(value)
+            : rule.message;
+
+        errors.push({ field, code, message });
+        // 첫번째 에러가 발생하면 더 이상 검증하지 않음
+      }
+    }
+
+    return { valid: errors.length === 0, errors };
+  };
+}
+
+export { createValidator, createValidatorWithMultipleAndMostRelevantErrors };
