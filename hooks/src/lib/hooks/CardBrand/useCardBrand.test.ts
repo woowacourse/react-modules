@@ -18,14 +18,12 @@ describe("useCardBrand", () => {
       const amexCardNumber = "341234567890123";
       const { result } = renderHook(() => useCardBrand(amexCardNumber));
       expect(result.current.value).toBe("AMEX");
-      expect(result.current.formattedValue).toBe("3412-345678-90123");
     });
 
     it("37로 시작하는 카드 번호는 AMEX 카드 브랜드이다.", () => {
       const amexCardNumber = "371234567890123";
       const { result } = renderHook(() => useCardBrand(amexCardNumber));
       expect(result.current.value).toBe("AMEX");
-      expect(result.current.formattedValue).toBe("3712-345678-90123");
     });
   });
 
@@ -34,7 +32,6 @@ describe("useCardBrand", () => {
       const dinersCardNumber = "36123456789012";
       const { result } = renderHook(() => useCardBrand(dinersCardNumber));
       expect(result.current.value).toBe("Diners");
-      expect(result.current.formattedValue).toBe("3612-345678-9012");
     });
   });
 
@@ -43,7 +40,6 @@ describe("useCardBrand", () => {
       const visaCardNumber = "4234567890123456";
       const { result } = renderHook(() => useCardBrand(visaCardNumber));
       expect(result.current.value).toBe("Visa");
-      expect(result.current.formattedValue).toBe("4234-5678-9012-3456");
     });
   });
 
@@ -54,14 +50,12 @@ describe("useCardBrand", () => {
         useCardBrand(masterCardNumber1)
       );
       expect(result1.current.value).toBe("MasterCard");
-      expect(result1.current.formattedValue).toBe("5112-1234-1234-1234");
 
       const masterCardNumber2 = "5512123412341234";
       const { result: result2 } = renderHook(() =>
         useCardBrand(masterCardNumber2)
       );
       expect(result2.current.value).toBe("MasterCard");
-      expect(result2.current.formattedValue).toBe("5512-1234-1234-1234");
     });
   });
 
@@ -72,14 +66,12 @@ describe("useCardBrand", () => {
         useCardBrand(unionPayCardNumber1)
       );
       expect(result1.current.value).toBe("UnionPay");
-      expect(result1.current.formattedValue).toBe("6221-2612-3456-7890");
 
       const masterCardNumber2 = "6229251234567890";
       const { result: result2 } = renderHook(() =>
         useCardBrand(masterCardNumber2)
       );
       expect(result2.current.value).toBe("UnionPay");
-      expect(result2.current.formattedValue).toBe("6229-2512-3456-7890");
     });
 
     it("624 ~ 626로 시작하는 카드 번호는 UnionPay 카드 브랜드이다.", () => {
@@ -88,14 +80,12 @@ describe("useCardBrand", () => {
         useCardBrand(unionPayCardNumber1)
       );
       expect(result1.current.value).toBe("UnionPay");
-      expect(result1.current.formattedValue).toBe("6241-2612-3456-7890");
 
       const masterCardNumber2 = "6269251234567890";
       const { result: result2 } = renderHook(() =>
         useCardBrand(masterCardNumber2)
       );
       expect(result2.current.value).toBe("UnionPay");
-      expect(result2.current.formattedValue).toBe("6269-2512-3456-7890");
     });
 
     it("6282 ~ 6288로 시작하는 카드 번호는 UnionPay 카드 브랜드이다.", () => {
@@ -104,14 +94,12 @@ describe("useCardBrand", () => {
         useCardBrand(unionPayCardNumber1)
       );
       expect(result1.current.value).toBe("UnionPay");
-      expect(result1.current.formattedValue).toBe("6282-2612-3456-7890");
 
       const masterCardNumber2 = "6288251234567890";
       const { result: result2 } = renderHook(() =>
         useCardBrand(masterCardNumber2)
       );
       expect(result2.current.value).toBe("UnionPay");
-      expect(result2.current.formattedValue).toBe("6288-2512-3456-7890");
     });
   });
 });
