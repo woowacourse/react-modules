@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { checkNumber, checkValidLength } from "../validator/inputValidator";
 import getCardType from "./utils/getCardType";
+import { formatCardNumber } from "./utils/formatCardNumber";
 
 const CARDNUMBER_VALID_LENGTH = 4;
 
@@ -55,6 +56,7 @@ const useCardNumber = () => {
   });
 
   const [cardType, setCardType] = useState<CardType>("Default");
+  const [formattedCardNumber, setFormattedCardNumber] = useState("");
 
   const validate = (
     label: CardNumberLabel,
@@ -124,8 +126,17 @@ const useCardNumber = () => {
     setCardNumber(newCardNumber);
 
     validate(name as CardNumberLabel, value, currentCardType);
+
+    const formatted = formatCardNumber(newCardNumber, currentCardType);
+    setFormattedCardNumber(formatted);
   };
 
-  return { cardNumber, handleChange, validationResult, cardType };
+  return {
+    cardNumber,
+    handleChange,
+    validationResult,
+    formattedCardNumber,
+    cardType,
+  };
 };
 export default useCardNumber;
