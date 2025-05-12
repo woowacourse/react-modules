@@ -1,21 +1,24 @@
 import './App.css';
-import { useCvcField } from '@sanghee01/card-field-hooks';
+import { useCardNumberField } from '@sanghee01/card-field-hooks';
 
 function App() {
-  const { cvc, handleCvcChange, cvcError } = useCvcField();
+  const { cardNumbers, formattedCardNumber, cardBrand, handleCardNumberChange, cardNumberErrors, maxCardLength } =
+    useCardNumberField();
 
   return (
     <div>
-      <label htmlFor="cvc">cvc</label>
+      <label htmlFor="cardNumber">카드 번호</label>
       <input
         type="text"
-        name="cvc"
-        value={cvc}
-        onChange={(e) => handleCvcChange(e.target.value)}
-        maxLength={3}
-        placeholder="cvc 번호를 입력해주세요."
+        name="cardNumber"
+        value={formattedCardNumber}
+        onChange={(e) => handleCardNumberChange(e.target.value)}
+        placeholder="카드 번호를 입력해주세요."
+        maxLength={maxCardLength}
       />
-      <p>{cvcError}</p>
+      <p>{cardNumberErrors}</p>
+      {cardBrand && <p>카드 종류: {cardBrand}</p>}
+      <p>카드 번호 원본: {cardNumbers}</p>
     </div>
   );
 }
