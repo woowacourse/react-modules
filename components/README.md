@@ -200,18 +200,18 @@ export default App;
 
 ### Modal.Prompt Props
 
-| Prop        | Type                           | 필수 여부 | 기본값            | 설명                              |
-| ----------- | ------------------------------ | --------- | ----------------- | --------------------------------- |
-| isOpen      | boolean                        | 예        | -                 | 모달 표시 여부 제어               |
-| onClose     | () => void                     | 예        | -                 | 모달이 닫힐 때 호출되는 콜백 함수 |
-| title       | string                         | 예        | -                 | 모달 제목                         |
-| onConfirm   | (value: string) => void        | 예        | -                 | 확인 버튼 클릭 시 호출되는 함수   |
-| onCancel    | () => void                     | 예        | -                 | 취소 버튼 클릭 시 호출되는 함수   |
-| position    | 'center' \| 'bottom'           | 아니오    | 'center'          | 모달 위치                         |
-| size        | 'small' \| 'medium' \| 'large' | 아니오    | 'medium'          | 모달 크기                         |
-| placeholder | string                         | 아니오    | '값을 입력하세요' | 입력 필드 플레이스홀더 텍스트     |
-| className   | string                         | 아니오    | -                 | 추가 CSS 클래스                   |
-| aria-\*     | string                         | 아니오    | -                 | 접근성 관련 속성들                |
+| Prop        | Type                           | 필수 여부 | 기본값              | 설명                              |
+| ----------- | ------------------------------ | --------- | ------------------- | --------------------------------- |
+| isOpen      | boolean                        | 예        | -                   | 모달 표시 여부 제어               |
+| onClose     | () => void                     | 예        | -                   | 모달이 닫힐 때 호출되는 콜백 함수 |
+| title       | string                         | 예        | -                   | 모달 제목                         |
+| onConfirm   | (value: string) => void        | 예        | -                   | 확인 버튼 클릭 시 호출되는 함수   |
+| onCancel    | () => void                     | 예        | -                   | 취소 버튼 클릭 시 호출되는 함수   |
+| position    | 'center' \| 'bottom'           | 아니오    | 'center'            | 모달 위치                         |
+| size        | 'small' \| 'medium' \| 'large' | 아니오    | 'medium'            | 모달 크기                         |
+| placeholder | string                         | 아니오    | '여기에 입력하세요' | 입력 필드 플레이스홀더 텍스트     |
+| className   | string                         | 아니오    | -                   | 추가 CSS 클래스                   |
+| aria-\*     | string                         | 아니오    | -                   | 접근성 관련 속성들                |
 
 ## 특징
 
