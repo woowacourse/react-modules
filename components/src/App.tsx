@@ -35,8 +35,8 @@ function App() {
     alert("확인");
     setConfirmIsOpen(false);
   }
-  function handlePromptConfirm() {
-    alert("확인");
+  function handlePromptConfirm(value: string) {
+    alert(value);
     setpromptIsOpen(false);
   }
 

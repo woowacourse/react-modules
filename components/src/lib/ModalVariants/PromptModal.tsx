@@ -5,7 +5,7 @@ import styled from "@emotion/styled";
 interface PromptModalProps {
   isOpen: boolean;
   onClose: () => void;
-  onConfirm: () => void;
+  onConfirm: (value: string) => void;
   title: string;
   size?: Size;
 }
@@ -18,12 +18,17 @@ function PromptModal({
   size,
 }: PromptModalProps) {
   const [input, setInput] = useState("");
+
+  const handleConfirm = () => {
+    onConfirm(input);
+  };
+
   return (
     <>
       <Modal
         isOpen={isOpen}
         onClose={onClose}
-        onConfirm={onConfirm}
+        onConfirm={handleConfirm}
         hasTopCloseButton={false}
         size={size}
       >
