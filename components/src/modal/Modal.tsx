@@ -17,6 +17,7 @@ import ModalOpenTrigger from './ModalOpenTrigger';
 import ModalProvider, { useModalContext } from './ModalProvider';
 import PromptInput from './PromptInput';
 import Title from './Title';
+import WideButton from './WideButton';
 
 // ============================== Types ==============================
 
@@ -130,6 +131,7 @@ const Modal = Object.assign(ModalProvider, {
   PromptInput,
   ButtonWrapper,
   Button,
+  WideButton,
 });
 
 export default Modal;
