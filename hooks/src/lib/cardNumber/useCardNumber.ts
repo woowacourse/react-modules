@@ -1,6 +1,6 @@
 import validateCardNumber from './validateCardNumber';
 import { useMemo, useState } from 'react';
-import { formatByPattern, getPatternByBin } from './utils/cardFormat';
+import { formatByPattern, getCardBrandByBin, getPatternByBin } from './utils';
 import { CARD_FORMATS } from './constants';
 import { NO_SPACE_REGEX } from './constants/regex';
 
@@ -9,12 +9,17 @@ function useCardNumber() {
 
   const cardCompany = useMemo(() => {
     const digits = cardNumber.replace(NO_SPACE_REGEX, '');
-    return getPatternByBin(CARD_FORMATS, digits).name;
+    const { name, length } = getCardBrandByBin(CARD_FORMATS, digits);
+    if (length === digits.length) {
+      return name;
+    }
+
+    return '';
   }, [cardNumber]);
 
   const handleCardNumberChange = (value: string) => {
     const digits = value.replace(NO_SPACE_REGEX, '');
-    const { pattern } = getPatternByBin(CARD_FORMATS, digits);
+    const pattern = getPatternByBin(CARD_FORMATS, digits);
     const formatted = formatByPattern(digits, pattern);
 
     setCardNumber(formatted);
