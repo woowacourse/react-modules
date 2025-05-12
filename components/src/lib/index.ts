@@ -8,8 +8,12 @@ import CancelButton from './components/Modal/CancelButton';
 import ConfirmButton from './components/Modal/ConfirmButton';
 import AlertActions from './components/Modal/AlertActions';
 import Input from './components/Modal/Input';
+import { ModalProvider } from './components/Modal/ModalProvider';
+import Trigger from './components/Modal/Trigger';
 
-export const Modal = Object.assign(ModalContainer, {
+export const Modal = {
+  Root: ModalProvider,
+  Container: ModalContainer,
   Overlay: ModalOverlay,
   Content: ModalContent,
   Body: ModalBody,
@@ -19,4 +23,5 @@ export const Modal = Object.assign(ModalContainer, {
   ConfirmButton: ConfirmButton,
   AlertActions: AlertActions,
   Input: Input,
-});
+  Trigger: Trigger,
+};
