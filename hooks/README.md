@@ -134,13 +134,13 @@ const CVCInput = () => {
 
 **반환값:**
 
-| 이름                      | 타입                                      | 설명                                           |
-| ------------------------- | ----------------------------------------- | ---------------------------------------------- |
-| `cardNumberInputValue`    | `string`                                  | 현재 카드 번호 입력값                          |
-| `setCardNumberInputValue` | `(value: string) => void`                 | 카드 번호 입력값 설정 함수                     |
-| `cardBrand`               | `string \| null`                          | 감지된 카드 브랜드 (VISA, Mastercard 등)       |
-| `formattedCardNumber`     | `string`                                  | 포맷팅된 카드 번호 (예: `4111 1111 1111 1111`) |
-| `errorInfo`               | `{ isError: boolean, errorText: string }` | 에러 상태 정보                                 |
+| 이름                      | 타입                                      | 설명                                                             |
+| ------------------------- | ----------------------------------------- | ---------------------------------------------------------------- |
+| `cardNumberInputValue`    | `string`                                  | 현재 카드 번호 입력값                                            |
+| `setCardNumberInputValue` | `(value: string) => void`                 | 카드 번호 입력값 설정 함수                                       |
+| `cardBrand`               | `string`                                  | 감지된 카드 브랜드 (VISA, Mastercard 등)                         |
+| `formattedCardNumber`     | `string[]`                                | 포맷팅된 카드 번호 배열 (예: `['4111', '1111', '1111', '1111']`) |
+| `errorInfo`               | `{ isError: boolean, errorText: string }` | 에러 상태 정보                                                   |
 
 ### useCardExpirationInput
 
