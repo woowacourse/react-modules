@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { Modal } from '../..';
-import { useArgs } from '@storybook/preview-api';
 import ModalContent from './ModalContent';
+import { ModalProvider } from './ModalProvider';
 
 const meta: Meta<typeof Modal.Content> = {
   title: 'Components/Modal',
@@ -23,6 +23,15 @@ const meta: Meta<typeof Modal.Content> = {
     position: 'center',
     size: 'medium',
   },
+  decorators: [
+    (Story) => {
+      return (
+        <ModalProvider>
+          <Story />
+        </ModalProvider>
+      );
+    },
+  ],
 };
 
 export default meta;
@@ -33,44 +42,17 @@ export const Default: Story = {
     size: 'medium',
   },
   render: (args) => {
-    const [{ isOpen }, updateArgs] = useArgs();
-
-    function handleCloseClick() {
-      updateArgs({ isOpen: !isOpen });
-    }
     return (
       <>
-        <button onClick={handleCloseClick}>열림버튼</button>
-        <Modal isOpen={isOpen}>
-          <Modal.Overlay onClick={handleCloseClick} />
+        <Modal.Trigger>열림버튼</Modal.Trigger>
+        <Modal.Container>
+          <Modal.Overlay />
           <Modal.Content {...args}>
-            <Modal.CloseButton onCloseClick={handleCloseClick} />
+            <Modal.CloseButton />
             <Modal.Title>기본 모달 제목</Modal.Title>
             <Modal.Body>이것은 모달의 본문입니다.</Modal.Body>
           </Modal.Content>
-        </Modal>
-      </>
-    );
-  },
-};
-
-export const Open: Story = {
-  args: {
-    size: 'medium',
-  },
-  render: (args) => {
-    function handleCloseClick() {}
-    return (
-      <>
-        <button onClick={handleCloseClick}>열림버튼</button>
-        <Modal isOpen={true}>
-          <Modal.Overlay onClick={handleCloseClick} />
-          <Modal.Content position={args.position} size={args.size}>
-            <Modal.CloseButton onCloseClick={handleCloseClick} />
-            <Modal.Title>기본 모달 제목</Modal.Title>
-            <Modal.Body>이것은 모달의 본문입니다.</Modal.Body>
-          </Modal.Content>
-        </Modal>
+        </Modal.Container>
       </>
     );
   },
@@ -83,14 +65,15 @@ export const TopModal: Story = {
   render: (args) => {
     return (
       <>
-        <Modal isOpen={true}>
-          <Modal.Overlay onClick={() => {}} />
+        <Modal.Trigger>열림버튼</Modal.Trigger>
+        <Modal.Container>
+          <Modal.Overlay />
           <Modal.Content {...args}>
-            <Modal.CloseButton onCloseClick={() => {}} />
-            <Modal.Title>상단 모달 제목</Modal.Title>
+            <Modal.CloseButton />
+            <Modal.Title>기본 모달 제목</Modal.Title>
             <Modal.Body>이것은 모달의 본문입니다.</Modal.Body>
           </Modal.Content>
-        </Modal>
+        </Modal.Container>
       </>
     );
   },
@@ -103,14 +86,15 @@ export const BottomModal: Story = {
   render: (args) => {
     return (
       <>
-        <Modal isOpen={true}>
-          <Modal.Overlay onClick={() => {}} />
+        <Modal.Trigger>열림버튼</Modal.Trigger>
+        <Modal.Container>
+          <Modal.Overlay />
           <Modal.Content {...args}>
-            <Modal.CloseButton onCloseClick={() => {}} />
-            <Modal.Title>하단 모달 제목</Modal.Title>
+            <Modal.CloseButton />
+            <Modal.Title>기본 모달 제목</Modal.Title>
             <Modal.Body>이것은 모달의 본문입니다.</Modal.Body>
           </Modal.Content>
-        </Modal>
+        </Modal.Container>
       </>
     );
   },
@@ -124,14 +108,15 @@ export const CenterModal: Story = {
   render: (args) => {
     return (
       <>
-        <Modal isOpen={true}>
-          <Modal.Overlay onClick={() => {}} />
-          <Modal.Content {...args} size={args.size}>
-            <Modal.CloseButton onCloseClick={() => {}} />
-            <Modal.Title>중앙 모달 제목</Modal.Title>
+        <Modal.Trigger>열림버튼</Modal.Trigger>
+        <Modal.Container>
+          <Modal.Overlay />
+          <Modal.Content {...args}>
+            <Modal.CloseButton />
+            <Modal.Title>기본 모달 제목</Modal.Title>
             <Modal.Body>이것은 모달의 본문입니다.</Modal.Body>
           </Modal.Content>
-        </Modal>
+        </Modal.Container>
       </>
     );
   },
@@ -145,14 +130,15 @@ export const SmallModal: Story = {
   render: (args) => {
     return (
       <>
-        <Modal isOpen={true}>
-          <Modal.Overlay onClick={() => {}} />
-          <Modal.Content {...args} size={args.size}>
-            <Modal.CloseButton onCloseClick={() => {}} />
-            <Modal.Title>스몰 모달 제목</Modal.Title>
+        <Modal.Trigger>열림버튼</Modal.Trigger>
+        <Modal.Container>
+          <Modal.Overlay />
+          <Modal.Content {...args}>
+            <Modal.CloseButton />
+            <Modal.Title>기본 모달 제목</Modal.Title>
             <Modal.Body>이것은 모달의 본문입니다.</Modal.Body>
           </Modal.Content>
-        </Modal>
+        </Modal.Container>
       </>
     );
   },
@@ -166,14 +152,15 @@ export const MediumModal: Story = {
   render: (args) => {
     return (
       <>
-        <Modal isOpen={true}>
-          <Modal.Overlay onClick={() => {}} />
-          <Modal.Content {...args} size={args.size}>
-            <Modal.CloseButton onCloseClick={() => {}} />
-            <Modal.Title>미디엄 모달 제목</Modal.Title>
+        <Modal.Trigger>열림버튼</Modal.Trigger>
+        <Modal.Container>
+          <Modal.Overlay />
+          <Modal.Content {...args}>
+            <Modal.CloseButton />
+            <Modal.Title>기본 모달 제목</Modal.Title>
             <Modal.Body>이것은 모달의 본문입니다.</Modal.Body>
           </Modal.Content>
-        </Modal>
+        </Modal.Container>
       </>
     );
   },
@@ -187,14 +174,15 @@ export const LargeModal: Story = {
   render: (args) => {
     return (
       <>
-        <Modal isOpen={true}>
-          <Modal.Overlay onClick={() => {}} />
-          <Modal.Content {...args} size={args.size}>
-            <Modal.CloseButton onCloseClick={() => {}} />
-            <Modal.Title>라지 모달 제목</Modal.Title>
+        <Modal.Trigger>열림버튼</Modal.Trigger>
+        <Modal.Container>
+          <Modal.Overlay />
+          <Modal.Content {...args}>
+            <Modal.CloseButton />
+            <Modal.Title>기본 모달 제목</Modal.Title>
             <Modal.Body>이것은 모달의 본문입니다.</Modal.Body>
           </Modal.Content>
-        </Modal>
+        </Modal.Container>
       </>
     );
   },
