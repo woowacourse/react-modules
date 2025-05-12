@@ -13,12 +13,13 @@ import { formatCardNumber } from './cardBrand/formatCardNumber';
  * @returns cardNumbers - 카드 번호 입력 상태 배열 (4개 항목)
  * @returns errorMessage 카드 번호 입력 오류 메시지
  * @returns isValid 카드 번호 입력 유효성 검사 결과
+ * @returns cardType 카드 타입 (Visa, MasterCard, Diners, AMEX, UnionPay, Unknown)
  * @returns handleCardNumberChange 카드 번호 입력 핸들러
  * @example
- * const { cardNumbers, errorMessage, isValid, handleCardNumberChange } = useCardNumber();
+ * const { cardNumbers, errorMessage, isValid, cardType, handleCardNumberChange } = useCardNumber();
  * <input
  *   type="text"
- *   value={cardNumbers}
+ *   value={cardNumbers.formatted} // 포맷팅 된 카드 번호
  *   onChange={(e) => handleCardNumberChange(e)}
  *   placeholder="카드 번호를 입력하세요"
  * />
