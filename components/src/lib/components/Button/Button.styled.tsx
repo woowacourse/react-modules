@@ -36,6 +36,6 @@ export const StyledButton = styled.button<ButtonProps>`
   border-radius: 5px;
   font-weight: 700;
   font-size: 15px;
-  ${({ color = "light" }) => ButtonColorVariants[color]};
-  ${({ size = "small" }) => ButtonSizeVariants[size]};
+  ${({ color }) => ButtonColorVariants[color]};
+  ${({ size }) => ButtonSizeVariants[size]};
 `;

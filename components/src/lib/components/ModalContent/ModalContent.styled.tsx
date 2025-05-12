@@ -40,6 +40,6 @@ export const StyledModalContent = styled.div<ModalContentProps>`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  ${({ position = "center" }) => modalPositionVariants[position]};
-  ${({ size = "medium" }) => modalSizeVariants[size]}
+  ${({ position }) => modalPositionVariants[position]};
+  ${({ size }) => modalSizeVariants[size]}
 `;
