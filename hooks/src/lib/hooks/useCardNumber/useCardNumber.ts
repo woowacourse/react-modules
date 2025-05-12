@@ -56,12 +56,14 @@ const VALID_CARD_BRANDS = {
   Visa: 'Visa',
   MasterCard: 'MasterCard',
   Diners: 'Diners',
+  AMEX: 'AMEX',
 } as const;
 
 const CARD_BRANDS = {
   ...VALID_CARD_BRANDS,
   Unknown: 'Unknown',
 } as const;
+
 type ValidCardType = keyof typeof VALID_CARD_BRANDS;
 type CardType = keyof typeof CARD_BRANDS;
 
@@ -122,6 +124,12 @@ const cardRules: CardRule[] = [
     match: (cardNumber: string) =>
       checkCardBrandRange({ value: cardNumber, type: CARD_BRANDS.Diners }),
     numberLengths: 14,
+  },
+  {
+    type: CARD_BRANDS.AMEX,
+    match: (cardNumber: string) =>
+      checkCardBrandRange({ value: cardNumber, type: CARD_BRANDS.AMEX }),
+    numberLengths: 15,
   },
 ];
 
