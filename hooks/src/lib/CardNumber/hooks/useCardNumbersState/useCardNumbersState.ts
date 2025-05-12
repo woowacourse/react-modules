@@ -2,12 +2,12 @@ import { useState } from "react";
 
 import getCardNetwork from "../../utils/getCardNetwork";
 
-import validateCardNumbersType from "../../types/validateCardNumbersType";
+import ValidateCardNumbersParams from "../../types/ValidateCardNumbersParams";
 import CardNumbersState from "../../types/CardNumberState";
 import CardNumbersKey from "../../types/CardNumbersKey";
 
 type useCardNumbersStateProps = {
-  validateCardNumbers: (params: validateCardNumbersType) => boolean;
+  validateCardNumbers: (params: ValidateCardNumbersParams) => boolean;
 };
 
 const INIT_CARD_NUMBERS_STATE: CardNumbersState = {

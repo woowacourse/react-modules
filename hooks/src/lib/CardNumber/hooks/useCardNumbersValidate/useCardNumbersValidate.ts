@@ -3,7 +3,7 @@ import { useState } from "react";
 import checkCardNetworkValidation from "../../utils/checkCardNetworkValidation";
 import { checkBasicValidation } from "../../../utils/checkBasicValidation";
 
-import validateCardNumbersType from "../../types/validateCardNumbersType";
+import ValidateCardNumbersParams from "../../types/ValidateCardNumbersParams";
 
 type CardNumbersValidate = {
   first: boolean;
@@ -22,7 +22,7 @@ const initialCardNumberValidate: CardNumbersValidate = {
 type CardNumberValidateResult = {
   validationState: CardNumbersValidate;
   errorMessage: string | null;
-  validateCardNumbers: (params: validateCardNumbersType) => boolean;
+  validateCardNumbers: (params: ValidateCardNumbersParams) => boolean;
 };
 
 const useCardNumbersValidate = (): CardNumberValidateResult => {
@@ -35,7 +35,7 @@ const useCardNumbersValidate = (): CardNumberValidateResult => {
     key,
     value,
     cardNumbers,
-  }: validateCardNumbersType) => {
+  }: ValidateCardNumbersParams) => {
     const basicValidationResult = checkBasicValidation({
       value,
       maxLength: 4,
