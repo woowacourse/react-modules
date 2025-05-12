@@ -1,61 +1,41 @@
-import { useEffect, useState } from 'react';
 import './App.css';
-// import { useCardCVC, useCardNumber } from '@kimyouk/payments-validation';
-// import { useCardNumber } from './lib';
-import useExpirationPeriod from './lib/hooks/useExpirationPeriod';
+import { useCardNumber } from './lib';
 
 function App() {
-  const { value, isError, onChange, errorMessage } = useExpirationPeriod();
-
-  const [num, setNum] = useState(0);
-
-  useEffect(() => {
-    const handler = () => {
-      // 이 handler는 최초 렌더 시점의 `num`만 캡처 → 항상 0을 로그
-      console.log('Current num:', num);
-    };
-    window.addEventListener('click', handler);
-    return () => {
-      window.removeEventListener('click', handler);
-    };
-  }, []); // ⚠️ 빈 deps → handler가 재생성되지 않음
+  const rules = [
+    {
+      cardBrand: 'CARDBRAND',
+      startNumbers: ['0'],
+      lengthArray: [4, 4, 4, 4],
+      message: '4-4-4-4 형태의 16자리로 입력해주세요',
+    },
+  ];
+  const { onChange, formatted, cardBrand, isError, errorMessage } =
+    useCardNumber(rules);
   return (
-    <div>
-      <button onClick={() => setNum((n) => n + 1)}>{num}</button>;
-      <label>유효기간 (MM / YY)</label>
-      <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
-        <input
-          type="text"
-          value={value.month}
-          maxLength={2}
+    <>
+      <input
+        value={formatted?.join(' ')}
+        style={{
+          border: `1px solid ${isError ? 'red' : 'black'}`,
+          height: '30px',
+          fontSize: '20px',
+          paddingLeft: '10px',
+        }}
+        maxLength={19}
+        onChange={onChange}
+      />
+      <p>카드사: {cardBrand}</p>
+      {errorMessage ? (
+        <span
           style={{
-            width: '3em',
-            border: `1px solid ${isError.month ? 'red' : 'black'}`,
-            padding: '4px',
+            color: `${isError ? 'red' : 'black'}`,
           }}
-          onChange={(e) => onChange(e, 'month')}
-          placeholder="MM"
-        />
-        <span>/</span>
-        <input
-          type="text"
-          value={value.year}
-          maxLength={2}
-          style={{
-            width: '3em',
-            border: `1px solid ${isError.year ? 'red' : 'black'}`,
-            padding: '4px',
-          }}
-          onChange={(e) => onChange(e, 'year')}
-          placeholder="YY"
-        />
-      </div>
-      {errorMessage && (
-        <span style={{ color: 'red', marginTop: '4px', display: 'block' }}>
+        >
           {errorMessage}
         </span>
-      )}
-    </div>
+      ) : null}
+    </>
   );
 }
 
