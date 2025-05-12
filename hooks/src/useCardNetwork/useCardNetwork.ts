@@ -10,6 +10,8 @@ type CardNumbers = {
   FOURTH: string;
 };
 
+const CARD_NETWORK_ERROR_MESSAGE = "카드 길이가 올바르지 않습니다.";
+
 export default function useCardNetwork(
   cardNumbers: CardNumbers,
   userCardNetworkPatterns?: TypeOfCardNetworkPatterns
@@ -31,7 +33,7 @@ export default function useCardNetwork(
     isValidLegnth = fullCardNumber.length === LENGTH;
   }
 
-  if (!isValidLegnth) errorMessage = "카드 길이가 올바르지 않습니다.";
+  if (!isValidLegnth) errorMessage = CARD_NETWORK_ERROR_MESSAGE;
   else errorMessage = "";
 
   return {

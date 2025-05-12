@@ -10,6 +10,8 @@ type CardNumbers = {
   FOURTH: string;
 };
 
+const CARD_FORMATTER_ERROR_MESSAGE = "카드 번호를 포맷팅할 수 없습니다.";
+
 export default function useFormattedCardNumbers(
   cardNumbers: CardNumbers,
   userCardNetworkFormatter?: TypeOfCardNetworkPatterns
@@ -29,7 +31,7 @@ export default function useFormattedCardNumbers(
     return {
       formattedCardNumbers: "",
       error: true,
-      errorMessage: "카드 번호를 포맷팅할 수 없습니다.",
+      errorMessage: CARD_FORMATTER_ERROR_MESSAGE,
     };
 
   const [parsedCardNetwork, { FORMAT_PATTERN, LENGTH, FORMAT_TEMPLATE }] =
@@ -39,7 +41,7 @@ export default function useFormattedCardNumbers(
     return {
       formattedCardNumbers: "",
       error: true,
-      errorMessage: "카드 번호를 포맷팅할 수 없습니다.",
+      errorMessage: CARD_FORMATTER_ERROR_MESSAGE,
     };
 
   const formattedCardNumbers = fullCardNumber.replace(
