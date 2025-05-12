@@ -29,8 +29,8 @@ function ConfirmModal({
         <Modal.Header>{title}</Modal.Header>
         <Modal.Body>{content}</Modal.Body>
         <Modal.Footer>
-          <Modal.PrimaryButton>취소</Modal.PrimaryButton>
-          <Modal.SecondaryButton>확인</Modal.SecondaryButton>
+          <Modal.SecondaryButton>취소</Modal.SecondaryButton>
+          <Modal.PrimaryButton>확인</Modal.PrimaryButton>
         </Modal.Footer>
       </Modal>
     </>

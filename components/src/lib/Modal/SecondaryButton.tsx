@@ -2,9 +2,13 @@ import { ReactNode } from "react";
 import Button from "../common/Button";
 import { useModalContext } from "../useModalContext";
 
-const SecondaryButton = ({ children }: { children?: ReactNode }) => {
-  const { onConfirm } = useModalContext();
-  return <Button onClick={onConfirm}>{children}</Button>;
+const SecondaryButton = ({ children }: { children: ReactNode }) => {
+  const { onClose } = useModalContext();
+  return (
+    <Button onClick={onClose} color="#8b95a1" backgroundColor="transparent">
+      {children}
+    </Button>
+  );
 };
 
 export default SecondaryButton;

@@ -6,9 +6,9 @@ import { ModalContext, Position } from "../useModalContext";
 import Header from "./Header";
 import Body from "./Body";
 import Footer from "./Footer";
+import { useFocusTrap } from "../useFocusTrap";
 import PrimaryButton from "./PrimaryButton";
 import SecondaryButton from "./SecondaryButton";
-import { useFocusTrap } from "../useFocusTrap";
 
 export type Size = "small" | "medium" | "large";
 interface ModalProps {

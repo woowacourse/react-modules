@@ -28,7 +28,7 @@ function AlertModal({
         <Modal.Header>{title}</Modal.Header>
         <Modal.Body>{content}</Modal.Body>
         <Modal.Footer>
-          <Modal.SecondaryButton>확인</Modal.SecondaryButton>
+          <Modal.PrimaryButton>확인</Modal.PrimaryButton>
         </Modal.Footer>
       </Modal>
     </>

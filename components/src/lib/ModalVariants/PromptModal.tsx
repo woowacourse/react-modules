@@ -32,8 +32,8 @@ function PromptModal({
           <Input value={input} onChange={(e) => setInput(e.target.value)} />
         </Modal.Body>
         <Modal.Footer>
-          <Modal.PrimaryButton>취소</Modal.PrimaryButton>
-          <Modal.SecondaryButton>확인</Modal.SecondaryButton>
+          <Modal.SecondaryButton>취소</Modal.SecondaryButton>
+          <Modal.PrimaryButton>확인</Modal.PrimaryButton>
         </Modal.Footer>
       </Modal>
     </>
