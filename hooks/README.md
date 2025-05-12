@@ -53,7 +53,7 @@ npm i woowacourse-hooks-marvin
 
 ```tsx
 import React from "react";
-import { useCardValidation } from "./lib";
+import { useCardValidation } from "woowacourse-hooks-marvin";
 
 function App() {
   const { card, cvc, expiry, password, network, strictCard, format } =
