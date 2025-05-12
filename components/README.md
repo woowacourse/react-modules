@@ -152,7 +152,7 @@ interface ConfirmModalProps {
 ### 파라미터
 
 - title: 모달 상단에 표시할 제목입니다.
-- confirmText: 용자에게 안내하거나 확인을 요청하는 메시지입니다.
+- confirmText: 사용자에게 안내하거나 확인을 요청하는 메시지입니다.
 - size: 모달의 크기를 설정합니다.
 - onRequestClose: 모달 닫기 시 호출되는 콜백 함수입니다.
 - onConfirm: 확인 버튼 클릭 시 호출되는 콜백 함수입니다.
