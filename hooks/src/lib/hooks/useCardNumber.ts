@@ -1,12 +1,18 @@
 import {useState} from 'react';
 import {ERROR_MESSAGE, defaultValidationValue} from '../constants/validation';
 import {isEmpty, isLengthBetween, isPositiveInteger} from '../utils/validation';
-import {getCardBrand} from '../feature/getCardBrand';
-import {formatCardNumberBlocks} from '../feature/formatCardNumberBlocks';
+import {getCardBrand} from '../helper/getCardBrand';
 import {ValidationType} from '../types/validation';
+import {splitByBlocks} from '../utils/splitByBlocks';
 
 const MIN_LENGTH = 14;
 const MAX_LENGTH = 16;
+
+export const formatCardNumberBlocks = (cardNumber: string) => {
+  if (cardNumber.length === 15) return splitByBlocks([4, 6, 5], cardNumber);
+  if (cardNumber.length === 14) return splitByBlocks([4, 6, 4], cardNumber);
+  return splitByBlocks([4, 4, 4, 4], cardNumber);
+};
 
 const useCardNumber = () => {
   const [cardNumber, setCardNumber] = useState('');
