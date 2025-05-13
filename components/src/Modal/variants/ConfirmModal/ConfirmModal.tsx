@@ -45,7 +45,7 @@ export const ConfirmModal = ({
           <Modal.Title title={title} />
           <Modal.Body>
             {content}
-            <Modal.ConfirmButton
+            <Modal.DualButtons
               onLeftButtonClick={onLeftButtonClick}
               onRightButtonClick={onRightButtonClick}
               leftButtonTitle="취소"

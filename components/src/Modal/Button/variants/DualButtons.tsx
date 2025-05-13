@@ -1,6 +1,6 @@
 import Modal from "../../Modal";
 
-type ConfirmButtonProps = {
+type DualButtonsProps = {
   /** 왽쪽 버튼 */
   leftButtonTitle: string;
   /** 오른쪽 버튼 */
@@ -11,12 +11,12 @@ type ConfirmButtonProps = {
   onRightButtonClick: () => void;
 };
 
-const ConfirmButton = ({
+const DualButtons = ({
   leftButtonTitle = "취소",
   rightButtonTitle = "확인",
   onLeftButtonClick,
   onRightButtonClick,
-}: ConfirmButtonProps) => {
+}: DualButtonsProps) => {
   return (
     <>
       <div
@@ -44,4 +44,4 @@ const ConfirmButton = ({
   );
 };
 
-export default ConfirmButton;
+export default DualButtons;

@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { createContext } from "react";
 import { BackDrop } from "./BackDrop/BackDrop";
 import { Frame } from "./Frame/Frame";
@@ -6,10 +5,9 @@ import { Title } from "./Title/Title";
 import { Button } from "./Button/Button";
 import { CloseButton } from "./CloseButton/CloseButton";
 import { Body } from "./Body/Body";
-import ConfirmButton from "./Button/variants/ConfirmButton";
 import { Input } from "./Input/Input";
 import { useKeyPress } from "./hooks/useKeyPress";
-import useFocus from "./hooks/useModalFocus";
+import DualButtons from "./Button/variants/DualButtons";
 
 type ModalProps = {
   /** 모달 열림/닫힘 상태 */
@@ -67,7 +65,7 @@ Modal.Title = Title;
 Modal.CloseButton = CloseButton;
 Modal.Body = Body;
 Modal.Button = Button;
-Modal.ConfirmButton = ConfirmButton;
+Modal.DualButtons = DualButtons;
 Modal.Input = Input;
 
 export default Modal;

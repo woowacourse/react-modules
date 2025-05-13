@@ -49,7 +49,7 @@ export const PromptModal = ({
           <Modal.Body>
             {content}
             <Modal.Input $placeholder={placeholder} />
-            <Modal.ConfirmButton
+            <Modal.DualButtons
               onLeftButtonClick={onLeftButtonClick}
               onRightButtonClick={onRightButtonClick}
               leftButtonTitle="취소"
