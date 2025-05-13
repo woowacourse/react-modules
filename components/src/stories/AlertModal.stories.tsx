@@ -13,12 +13,8 @@ export const Default: Story = {
   args: {
     isOpen: true,
     onClose: () => {},
+    title: "Alert 모달",
+    content: "Alert 모달 내용을 확인하시겠습니까?",
   },
-  render: (args) => (
-    <AlertModal
-      {...args}
-      title="Alert 모달"
-      content="Alert 모달 내용을 확인하시겠습니까?"
-    />
-  ),
+  render: (args) => <AlertModal {...args} />,
 };

@@ -13,12 +13,8 @@ export const Default: Story = {
   args: {
     isOpen: true,
     onClose: () => {},
+    title: "Confirm 모달",
+    content: "Confirm 모달 내용입니다.",
   },
-  render: (args) => (
-    <ConfirmModal
-      {...args}
-      title="Confirm 모달"
-      content="Confirm 모달 내용입니다."
-    />
-  ),
+  render: (args) => <ConfirmModal {...args} />,
 };
