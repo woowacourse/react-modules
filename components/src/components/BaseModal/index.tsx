@@ -1,7 +1,8 @@
-import { PropsWithChildren, RefObject, useEffect } from "react";
+import { PropsWithChildren, RefObject } from "react";
 import * as S from "./BaseModal.styled";
 import CloseIcon from "@assets/close.svg";
 import { ModalLayoutProps } from "@/types/modal";
+import usePreventScroll from "@/hooks/usePreventScroll";
 
 interface BaseModalProps extends ModalLayoutProps {
   title: string;
@@ -19,13 +20,7 @@ function BaseModal({
   ref,
   children,
 }: PropsWithChildren<BaseModalProps>) {
-  useEffect(() => {
-    document.body.style.overflow = "hidden";
-
-    return () => {
-      document.body.style.overflow = "unset";
-    };
-  }, []);
+  usePreventScroll();
 
   return (
     <S.Backdrop>
