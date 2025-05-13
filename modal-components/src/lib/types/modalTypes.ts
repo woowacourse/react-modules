@@ -16,7 +16,7 @@ export interface ConfirmModalProps extends ModalProps {
 }
 
 export interface agreementContent {
-  text: string;
+  infoText: string;
   details?: string;
   isRequired: boolean;
 }

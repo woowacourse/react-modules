@@ -41,7 +41,7 @@ const AgreementModal = ({
         details={!!content.details}
         onClick={() => content.details && handleOpenDetail(content)}
       >
-        {content.text}
+        {content.infoText}
       </S.ContentText>
     </S.AgreementContentBox>
   ));
