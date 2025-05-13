@@ -1,7 +1,7 @@
 import {useState} from 'react';
 import {ERROR_MESSAGE, defaultValidationValue} from '../constants/validation';
 import {isEmpty, isLengthBetween, isPositiveInteger} from '../utils/validation';
-import {getCardBrand} from '../helper/getCardBrand';
+import {CardBrand, getCardBrand} from '../helper/getCardBrand';
 import {ValidationType} from '../types/validation';
 import {splitByBlocks} from '../utils/splitByBlocks';
 
@@ -19,7 +19,7 @@ const useCardNumber = () => {
   const [cardNumberValidationResult, setCardNumberValidationResult] =
     useState<ValidationType>(defaultValidationValue);
 
-  const cardBrand = cardNumberValidationResult.isError
+  const cardBrand: CardBrand | undefined = cardNumberValidationResult.isError
     ? undefined
     : getCardBrand(cardNumber);
 

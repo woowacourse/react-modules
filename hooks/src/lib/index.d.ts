@@ -3,16 +3,18 @@ export interface ValidationType {
   errorMessage: string | null;
 }
 
+export type CardBrand = 'Diners' | 'AMEX' | 'Visa' | 'MasterCard' | 'Union';
+
 export interface UseCardNumberResult {
   onChange: (value: string) => void;
   cardNumber: string;
   cardNumberValidationResult: ValidationType;
-  cardBrand: string;
+  cardBrand: CardBrand | undefined;
   formattingCardNumber: string[];
 }
 
 export interface UseExpirationDateResult {
-  onChange: (label: string, value: string) => void;
+  onChange: (label: 'month' | 'year', value: string) => void;
   expirationDate: {month: string; year: string};
   expirationDateValidationResult: {month: ValidationType; year: ValidationType};
 }

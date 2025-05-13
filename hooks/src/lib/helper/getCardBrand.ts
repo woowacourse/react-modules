@@ -1,5 +1,12 @@
 import {isLengthBetween} from '../utils/validation';
 
+export type CardBrand = 'Diners' | 'AMEX' | 'Visa' | 'MasterCard' | 'Union';
+
+interface CardBrandRules {
+  brand: CardBrand;
+  validate: (value: string) => boolean;
+}
+
 const MIN_LENGTH = 14;
 const MAX_LENGTH = 16;
 
@@ -9,7 +16,7 @@ const getPrefixCardNumber = (count: number, cardNumber: string) => {
   return Number(cardNumber.slice(0, count));
 };
 
-const cardBrandRules = [
+const cardBrandRules: CardBrandRules[] = [
   {
     brand: 'Diners',
     validate: (cardNumber: string) =>
@@ -56,7 +63,7 @@ const cardBrandRules = [
   },
 ];
 
-export const getCardBrand = (cardNumber: string) => {
+export const getCardBrand = (cardNumber: string): CardBrand | undefined => {
   if (!isLengthBetween(cardNumber, MIN_LENGTH, MAX_LENGTH)) return undefined;
 
   return cardBrandRules.find((rule) => rule.validate(cardNumber))?.brand;
