@@ -7,7 +7,7 @@ function SecondaryButton({
   style,
 }: {
   label: string;
-  onClick: () => void;
+  onClick: (event: React.MouseEvent<HTMLButtonElement>) => void;
   style?: CSSProperties;
 }): ReactElement<HTMLButtonElement, 'button'> {
   return (
