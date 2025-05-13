@@ -70,7 +70,12 @@ export const Default = (args: ModalProps) => {
         테스트 열기 버튼
       </button>
 
-      <Modal {...args} isOpen={isOpen} onClose={closeModal}>
+      <Modal
+        {...args}
+        isOpen={isOpen}
+        onClose={closeModal}
+        onConfirm={closeModal}
+      >
         {args.children}
       </Modal>
     </>
