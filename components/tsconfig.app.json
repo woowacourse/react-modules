@@ -26,5 +26,5 @@
     "declaration": true,
     "declarationDir": "dist"
   },
-  "include": ["src", "src/modal", "src/types/images.d.ts"]
+  "include": ["src", "src/lib/modal", "src/types/images.d.ts"]
 }

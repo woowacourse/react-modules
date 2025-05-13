@@ -5,11 +5,11 @@ import {
   useEffect,
   useRef,
 } from 'react';
-import PrimaryButton from './PrimaryButton';
-import SecondaryButton from './SecondaryButton';
+import PrimaryButton from '../button/PrimaryButton';
+import SecondaryButton from '../button/SecondaryButton';
 import { ModalProps } from './types';
-import Input from './Input';
-import useFocusTrap from './useFocus';
+import Input from '../input/Input';
+import useFocusTrap from '../hooks/useFocus';
 import {
   ModalWrapper,
   StyledModalContainer,

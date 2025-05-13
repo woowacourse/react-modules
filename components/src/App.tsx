@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 import { useState } from 'react';
-import Modal from './modal/Modal';
+import Modal from './lib/modal/Modal';
 
 function App() {
   const [alertModalOpen, setAlertModalOpen] = useState(false);
