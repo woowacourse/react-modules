@@ -18,6 +18,7 @@
   },
   "dependencies": {
     "@muffin2219/hooks": "^0.0.4",
+    "hooks": "^0.3.2",
     "react": "^19.1.0",
     "react-dom": "^19.1.0"
   },

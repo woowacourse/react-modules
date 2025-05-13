@@ -19,9 +19,7 @@ interface TitleProps {
   size?: number;
 }
 
-interface MessageProps {
-  message: string;
-}
+type ModalType = 'alert' | 'confirm' | 'prompt';
 
 export interface ModalProps {
   position?: 'center' | 'bottom';
@@ -30,11 +28,8 @@ export interface ModalProps {
   showCloseButton?: boolean;
   backgroundColor?: string;
   children?: ReactNode;
-
-  alert?: MessageProps;
-  confirm?: MessageProps;
-  prompt?: boolean | MessageProps;
-
+  type?: ModalType;
+  message?: string;
   isOpen: boolean;
   onClose: () => void;
   onConfirm?: (value?: string) => void;
@@ -47,7 +42,7 @@ type ModalHeaderProps = Pick<
 
 type ModalContentProps = Pick<
   ModalProps,
-  'children' | 'alert' | 'confirm' | 'prompt' | 'onConfirm' | 'onClose'
+  'children' | 'type' | 'message' | 'onConfirm' | 'onClose'
 >;
 
 const ModalHeader = ({
@@ -77,29 +72,20 @@ const ModalHeader = ({
 
 const ModalContent = ({
   children,
-  alert,
-  confirm,
-  prompt,
+  type,
+  message,
   onConfirm,
   onClose,
 }: ModalContentProps) => {
   return (
     <>
       {children}
-      {alert && <Alert message={alert.message} onConfirm={onConfirm} />}
-      {confirm && (
-        <Confirm
-          message={confirm.message}
-          onConfirm={onConfirm}
-          onClose={onClose}
-        />
+      {type === 'alert' && <Alert message={message} onConfirm={onConfirm} />}
+      {type === 'confirm' && (
+        <Confirm message={message} onConfirm={onConfirm} onClose={onClose} />
       )}
-      {prompt && (
-        <Prompt
-          message={(prompt as MessageProps).message}
-          onConfirm={onConfirm}
-          onClose={onClose}
-        />
+      {type === 'prompt' && (
+        <Prompt message={message} onConfirm={onConfirm} onClose={onClose} />
       )}
     </>
   );
@@ -112,9 +98,8 @@ const Modal = ({
   showCloseButton = true,
   backgroundColor,
   children,
-  alert,
-  confirm,
-  prompt,
+  type,
+  message,
   isOpen,
   onClose,
   onConfirm,
@@ -144,9 +129,8 @@ const Modal = ({
           />
           <ModalContent
             children={children}
-            alert={alert}
-            confirm={confirm}
-            prompt={prompt}
+            type={type}
+            message={message}
             onConfirm={onConfirm}
             onClose={onClose}
           />

@@ -113,7 +113,8 @@ export const AlertModal = (args: ModalProps) => (
   <Default
     {...args}
     title={{text: 'Alert Modal'}}
-    alert={{message: 'Alert Modal Contents'}}
+    type="alert"
+    message="Alert Modal Contents"
   />
 );
 
@@ -121,10 +122,11 @@ export const ConfirmModal = (args: ModalProps) => (
   <Default
     {...args}
     title={{text: 'Confirm Modal'}}
-    confirm={{message: 'Confirm Modal Contents'}}
+    type="confirm"
+    message="Confirm Modal Contents"
   />
 );
 
 export const PromptModal = (args: ModalProps) => (
-  <Default {...args} title={{text: 'Prompt Modal'}} prompt />
+  <Default {...args} title={{text: 'Prompt Modal'}} type="prompt" />
 );

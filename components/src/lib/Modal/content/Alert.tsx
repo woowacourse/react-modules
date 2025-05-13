@@ -1,7 +1,7 @@
 import {BtnWrapper, Button, Container} from './Content.styles';
 
 interface Props {
-  message: string;
+  message?: string;
   onConfirm?: () => void;
 }
 
