@@ -19,11 +19,7 @@ function InputField(props: InputFormProps) {
         <label className="label tx-lg">{label}</label>
         <div className="inputContainer">{props.children}</div>
         <p
-          style={
-            feedbackMessage
-              ? { visibility: 'visible' }
-              : { visibility: 'hidden' }
-          }
+          style={{ visibility: feedbackMessage ? 'visible' : 'hidden' }}
           className="feedbackMessage"
         >
           {feedbackMessage}
