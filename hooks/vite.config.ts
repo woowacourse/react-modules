@@ -25,8 +25,19 @@ export default defineConfig({
   plugins: [
     react(),
     dts({
-      include: ["src/lib"],
+      include: ["src/lib*", "src/types"],
       tsconfigPath: "./tsconfig.app.json",
+      rollupTypes: true,
     }),
   ],
+  resolve: {
+    alias: {
+      "@": path.resolve(__dirname, "./src"),
+      "@hooks": path.resolve(__dirname, "./src/hooks"),
+      "@tests": path.resolve(__dirname, "./src/tests"),
+      "@utils": path.resolve(__dirname, "./src/utils"),
+      "@lib": path.resolve(__dirname, "./src/lib"),
+      "@types": path.resolve(__dirname, "./src/types"),
+    },
+  },
 });

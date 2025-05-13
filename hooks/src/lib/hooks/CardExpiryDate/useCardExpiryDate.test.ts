@@ -2,35 +2,35 @@ import { renderHook } from "@testing-library/react";
 import useCardExpiryDate from "./index";
 import {
   testInputUpdate,
+  testInvalidInputClearsState,
   testInvalidInput,
   testValidInput,
   testMaxLength,
-} from "../../../utils/test/index";
+} from "@/tests/utils/index";
 
 describe("useCardExpiryDate", () => {
   it("입력값이 정확히 업데이트 되어야 한다.", () => {
     testInputUpdate({
       renderHookFn: () => renderHook(() => useCardExpiryDate()),
-      handleChangeKey: "handleExpiryChange",
-      stateKey: "expiryDate",
+      handleChangeKey: "onChange",
+      stateKey: "value",
       input: "0727",
     });
   });
 
-  it("카드 만료일에 문자열을 입력하면 에러가 발생한다.", () => {
-    testInvalidInput({
+  it("카드 만료일에 숫자 이외의 입력 값은 입력되지 않는다.", () => {
+    testInvalidInputClearsState({
       renderHookFn: () => renderHook(() => useCardExpiryDate()),
-      handleChangeKey: "handleExpiryChange",
-      errorStateKey: "errorState",
-      input: "ㅁㅁㅁ",
-      errorMessage: "숫자만 입력해주세요.",
+      handleChangeKey: "onChange",
+      stateKey: "value",
+      input: "ㅁ",
     });
   });
 
   it("카드 만료일에 3자리를 입력하면 에러가 발생한다.", () => {
     testInvalidInput({
       renderHookFn: () => renderHook(() => useCardExpiryDate()),
-      handleChangeKey: "handleExpiryChange",
+      handleChangeKey: "onChange",
       errorStateKey: "errorState",
       input: "122",
       errorMessage: "유효기간은 4자리여야 합니다.",
@@ -40,7 +40,7 @@ describe("useCardExpiryDate", () => {
   it("카드 만료일에 유효하지 않은 월(1~12월)을 입력하면 에러가 발생한다.", () => {
     testInvalidInput({
       renderHookFn: () => renderHook(() => useCardExpiryDate()),
-      handleChangeKey: "handleExpiryChange",
+      handleChangeKey: "onChange",
       errorStateKey: "errorState",
       input: "1325",
       errorMessage: "월은 1~12 사이여야 합니다.",
@@ -50,7 +50,7 @@ describe("useCardExpiryDate", () => {
   it("카드 만료일에 년도는 유효하지만 기간이 지난 월을 입력하면 에러가 발생한다.", () => {
     testInvalidInput({
       renderHookFn: () => renderHook(() => useCardExpiryDate()),
-      handleChangeKey: "handleExpiryChange",
+      handleChangeKey: "onChange",
       errorStateKey: "errorState",
       input: "0325",
       errorMessage: "유효기간이 만료되었습니다.",
@@ -65,7 +65,7 @@ describe("useCardExpiryDate", () => {
 
     testValidInput({
       renderHookFn: () => renderHook(() => useCardExpiryDate()),
-      handleChangeKey: "handleExpiryChange",
+      handleChangeKey: "onChange",
       errorStateKey: "errorState",
       input: validInput,
     });
@@ -74,8 +74,8 @@ describe("useCardExpiryDate", () => {
   it("카드 만료일에 5자리를 입력하여도 무시되어 4자리만 입력 가능하다.", () => {
     testMaxLength({
       renderHookFn: () => renderHook(() => useCardExpiryDate()),
-      handleChangeKey: "handleExpiryChange",
-      stateKey: "expiryDate",
+      handleChangeKey: "onChange",
+      stateKey: "value",
       maxLength: 4,
     });
   });

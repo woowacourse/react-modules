@@ -1,16 +1,9 @@
-import { ErrorState, ValidationRule } from "../../../types";
-import {
-  commonConditions,
-  getErrorByRules,
-} from "../../../../utils/validation";
+import { ErrorState, ValidationRule } from "@/types/validation";
+import { commonConditions, getErrorByRules } from "@utils/validation";
 
-const cardPasswordValidationRules: ValidationRule[] = [
+const cardPasswordValidationRules: ValidationRule<string>[] = [
   {
-    condition: commonConditions.isNumeric,
-    errorMessage: "숫자만 입력해주세요.",
-  },
-  {
-    condition: commonConditions.hasLength(2),
+    condition: commonConditions.hasExactLength(2),
     errorMessage: "비밀번호는 2자리여야 합니다.",
   },
 ];

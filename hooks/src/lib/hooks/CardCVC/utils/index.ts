@@ -1,16 +1,9 @@
-import {
-  commonConditions,
-  getErrorByRules,
-} from "../../../../utils/validation";
-import { ErrorState, ValidationRule } from "../../../types";
+import { commonConditions, getErrorByRules } from "@utils/validation";
+import { ErrorState, ValidationRule } from "@/types/validation";
 
-const cvcValidationRules: ValidationRule[] = [
+const cvcValidationRules: ValidationRule<string>[] = [
   {
-    condition: commonConditions.isNumeric,
-    errorMessage: "숫자만 입력해주세요.",
-  },
-  {
-    condition: commonConditions.hasLength(3),
+    condition: commonConditions.hasExactLength(3),
     errorMessage: "CVC는 3자리여야 합니다.",
   },
 ];

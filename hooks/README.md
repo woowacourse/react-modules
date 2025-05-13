@@ -1,17 +1,13 @@
-# bunju-summit-hooks
+# summit-hooks
 
 React 애플리케이션에서 신용카드 정보를 안전하게 처리하기 위한 커스텀 훅 모음입니다.
 
-카드 번호, 만료일, CVC 코드, 카드 비밀번호의 입력과 유효성 검사를 쉽게 구현할 수 있습니다.
+카드 번호, 만료일, CVC 코드, 카드 비밀번호의 입력과 카드사 식별, 유효성 검사를 쉽게 구현할 수 있습니다.
 
 ## 설치
 
 ```bash
-npm install bunju-summit-hooks
-# 또는
-yarn add bunju-summit-hooks
-# 또는
-pnpm add bunju-summit-hooks
+npm i summit-hooks
 ```
 
 ## 사용 가능한 훅
@@ -21,7 +17,8 @@ pnpm add bunju-summit-hooks
 - `useCardNumber`: 카드 번호 입력 및 유효성 검사를 위한 훅
 - `useCardExpiry`: 카드 만료일 입력 및 유효성 검사를 위한 훅
 - `useCardCvc`: 카드 CVC 코드 입력 및 유효성 검사를 위한 훅
-- `useCardSecretNumber`: 카드 비밀번호 입력 및 유효성 검사를 위한 훅
+- `useCardPassword`: 카드 비밀번호 입력 및 유효성 검사를 위한 훅
+- `useCardBrand`: 카드사 식별 및 유효성 검사를 위한 훅
 
 ## 개별 훅 사용 가이드
 
@@ -30,95 +27,102 @@ pnpm add bunju-summit-hooks
 카드 번호 입력과 유효성 검사를 위한 훅입니다.
 
 ```jsx
-const { cardNumberState, handleCardNumberChange, errorState } = useCardNumber();
+const { value, onchange, errorState } = useCardNumber();
 ```
 
 **반환값:**
 
-- `cardNumberState`: 현재 입력된 카드 번호 상태 객체
-
-  ```ts
-  {
-    first: { value: string },
-    second: { value: string },
-    third: { value: string },
-    fourth: { value: string },
-  }
-  ```
-
-- `handleCardNumberChange`: 카드 번호 변경 핸들러 함수
+- `value`: 현재 입력된 카드 번호
+- `onchange`: 카드 번호 변경 핸들러 함수
 - `errorState`: 유효성 검사 결과 객체
 
   ```ts
   { isValid: boolean, errorMessage: string }
   ```
 
-### useCardExpiry
+---
+
+### useCardExpiryDate
 
 카드 만료일 입력과 유효성 검사를 위한 훅입니다.
 
 ```jsx
-const { expiryDate, handleExpiryChange, errorState } = useCardExpiry();
+const { value, onchange, errorState } = useCardExpiryDate();
 ```
 
 **반환값:**
 
-- `expiryDate`: 현재 입력된 만료일 상태 객체
-  ```ts
-  {
-    value: string;
-  }
-  ```
-- `handleExpiryChange`: 만료일 변경 핸들러 함수
+- `value`: 현재 입력된 카드 만료일
+- `onchange`: 카드 만료일 변경 핸들러 함수
 - `errorState`: 유효성 검사 결과 객체
 
   ```ts
   { isValid: boolean, errorMessage: string }
   ```
+
+---
 
 ### useCardCvc
 
 카드 CVC 코드 입력과 유효성 검사를 위한 훅입니다.
 
 ```jsx
-const { cvcState, handleCVCState, errorState } = useCardCvc();
+const { value, onchange, errorState } = useCardCvc();
 ```
 
 **반환값:**
 
-- `cvcState`: 현재 입력된 CVC 상태 객체
-
-  ```ts
-  {
-    value: string;
-  }
-  ```
-
-- `handleCVCState`: CVC 변경 핸들러 함수
+- `value`: 현재 입력된 카드 CVC 코드
+- `onchange`: 카드 CVC 코드 변경 핸들러 함수
 - `errorState`: 유효성 검사 결과 객체
 
   ```ts
   { isValid: boolean, errorMessage: string }
   ```
 
-### useCardSecretNumber
+---
+
+### useCardPassword
 
 카드 비밀번호 입력과 유효성 검사를 위한 훅입니다.
 
 ```jsx
-const { secretNumber, handleSecretNumberChange, errorState } =
-  useCardSecretNumber();
+const { value, onchange, errorState } = useCardPassword();
 ```
 
 **반환값:**
 
-- `secretNumber`: 현재 입력된 카드 비밀번호 상태 객체
+- `value`: 현재 입력된 카드 비밀번호
+- `onchange`: 카드 비밀번호 변경 핸들러 함수
+- `errorState`: 유효성 검사 결과 객체
+
   ```ts
-  {
-    value: string;
-  }
+  { isValid: boolean, errorMessage: string }
   ```
-- `handleSecretNumberChange`: 카드 비밀번호 변경 핸들러 함수
+
+---
+
+### useCardBrand
+
+카드 번호에 해당하는 카드사 식별 및 유효성 검사를 위한 훅입니다.
+
+```jsx
+const { cardBrand, formattedCardNumber, errorState } = useCardBrand(cardNumber);
+```
+
+**파라미터**
+
+- `cardNumber`: 카드사를 식별할 카드 번호
+
+**반환값:**
+
+- `cardBrand`: 카드 번호에 해당하는 카드사
+- `formattedCardNumber`: 입력된 카드 번호를 카드사별 포맷 규칙에 맞게 자동으로 하이픈(`-`)을 추가하여 반환
+  - 포맷팅 예시:
+  - Visa, MasterCard 등 16자리 카드:
+    `5112123412341234` → `5112-1234-1234-1234`
+  - AMEX 15자리 카드
+    `341234567890123` → `3412-345678-90123`
 - `errorState`: 유효성 검사 결과 객체
 
   ```ts

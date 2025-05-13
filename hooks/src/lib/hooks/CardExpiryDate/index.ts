@@ -1,19 +1,15 @@
-import { INITIAL_EXPIRY_DATE_STATE } from "./constants";
+import { UseCardHookReturn } from "../types";
 import { getCardExpiryDateError } from "./utils";
-import useCardSingleInput from "../../../hooks/useCardSingleInput";
+import useSingleNumberInput from "@/hooks/useSingleNumberInput";
 
-const useCardExpiryDate = () => {
-  const { inputState, handleInputChange, errorState } = useCardSingleInput({
-    initialValue: INITIAL_EXPIRY_DATE_STATE,
+const useCardExpiryDate = (): UseCardHookReturn => {
+  const { value, changeInputState, errorState } = useSingleNumberInput({
+    initialValue: { value: "" },
     maxLength: 4,
     getErrorFn: getCardExpiryDateError,
   });
 
-  return {
-    expiryDate: inputState,
-    handleExpiryChange: handleInputChange,
-    errorState,
-  };
+  return { value, onChange: changeInputState, errorState };
 };
 
 export default useCardExpiryDate;

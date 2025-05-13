@@ -1,46 +1,24 @@
+import useCardBrand from "./lib/hooks/CardBrand";
 import useCardNumber from "./lib/hooks/CardNumber";
-function App() {
-  const { cardNumberState, handleCardNumberChange, errorState } =
-    useCardNumber();
 
-  console.log(errorState);
+function App() {
+  const cardNumber = useCardNumber();
+  const cardBrand = useCardBrand(cardNumber.value);
+
   return (
-    <>
-      <div onClick={undefined}>123</div>
+    <div style={{ width: "100vw", height: "100vh" }}>
       <input
+        style={{ width: "500px", height: "50px" }}
         placeholder="1"
         type="text"
-        value={cardNumberState.first.value}
+        value={cardBrand.formattedValue}
         onChange={(e) => {
-          handleCardNumberChange("first", e.target.value);
+          cardNumber.onChange(e.target.value);
         }}
       />
-      <input
-        placeholder="1"
-        type="text"
-        value={cardNumberState.second.value}
-        onChange={(e) => {
-          handleCardNumberChange("second", e.target.value);
-        }}
-      />
-      <input
-        placeholder="1"
-        type="text"
-        value={cardNumberState.third.value}
-        onChange={(e) => {
-          handleCardNumberChange("third", e.target.value);
-        }}
-      />
-      <input
-        placeholder="1"
-        type="text"
-        value={cardNumberState.fourth.value}
-        onChange={(e) => {
-          handleCardNumberChange("fourth", e.target.value);
-        }}
-      />
-      <button disabled={!errorState.isValid}>123</button>
-    </>
+
+      {/* <button disabled={!errorState.isValid}>123</button> */}
+    </div>
   );
 }
 

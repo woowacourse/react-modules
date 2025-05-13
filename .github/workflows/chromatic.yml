@@ -1,0 +1,23 @@
+name: "Chromatic Deployment"
+on: push
+
+jobs:
+  chromatic:
+    name: "Run Chromatic"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      # components 폴더에서 의존성 설치
+      - name: Install dependencies
+        run: npm install
+        working-directory: components
+
+      # components 폴더를 대상으로 Chromatic 실행
+      - uses: chromaui/action@latest
+        with:
+          projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+          workingDir: components

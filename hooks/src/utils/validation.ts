@@ -1,18 +1,27 @@
-import { ErrorState, ValidationRule } from "../lib/types";
+import { ErrorState, ValidationRule } from "@/types/validation";
 
 export const commonConditions = {
-  isNumeric: (value: string) => !isNaN(Number(value)),
-  hasLength: (length: number) => (value: string) => value.length === length,
+  hasLengthInRange: (min: number, max: number) => (value: string) => {
+    const targetLength = value.length;
+    return targetLength >= min && targetLength <= max;
+  },
+  isFilled: (value: string) => value !== "",
+  hasExactLength: (length: number) => (value: string) =>
+    value.length === length,
 };
 
-export function getErrorByRules(
-  value: string,
-  rules: ValidationRule[]
-): ErrorState {
+export const getErrorByRules = <T>(
+  value: T,
+  rules: ValidationRule<T>[]
+): ErrorState => {
   for (const { condition, errorMessage } of rules) {
     if (!condition(value)) {
       return { isValid: false, errorMessage: errorMessage };
     }
   }
   return { isValid: true, errorMessage: "" };
-}
+};
+
+export const isNonNumericNonEmpty = (value: string) => {
+  return !/^\d+$/.test(value) && value !== "";
+};
