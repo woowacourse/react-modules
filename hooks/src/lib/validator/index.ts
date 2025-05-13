@@ -1,47 +1,88 @@
-import { ValidateField, FieldValueType } from "./constants";
+import { ValidateField } from "./constants";
 import { validationRules } from "./validation-rules";
-import { FieldErrorCode } from "./constants/error-messages";
 
-type ValidationRule<T extends ValidateField> = {
-  check: (value: FieldValueType[T]) => boolean;
-  errorMeta: {
-    field: T;
-    code: FieldErrorCode[T];
-  };
+import { ErrorCodeMap } from "./validation-rules";
+
+type ValidationError = {
+  field: ValidateField;
+  code: ErrorCodeMap[ValidateField];
+  message: string;
 };
 
 type ValidationResult = {
   valid: boolean;
-  errors: Array<{
-    field: ValidateField;
-    code: FieldErrorCode[ValidateField];
-    message: string;
-  }>;
+  errors: ValidationError[];
 };
 
-function createValidator<T extends ValidateField>(
-  rules: ValidationRule<T>[]
-): (value: FieldValueType[T]) => ValidationResult {
-  return (value: FieldValueType[T]) => {
-    if (value === "") {
-      return { errors: [], valid: true };
-    }
+/**
+ * 특정 필드에 대한 유효성 검증기를 생성합니다.
+ * @param field 검증할 필드 이름
+ * @returns 검증 함수
+ */
+function createValidator(field: ValidateField) {
+  return (value: string): ValidationResult => {
+    if (value === "") return { errors: [], valid: true };
 
-    const errors: ValidationResult["errors"] = [];
-    rules.forEach(({ check, errorMeta }) => {
-      if (!check(value)) {
-        const { field, code } = errorMeta;
-        console.log(`Rules for field:`, validationRules[field]);
-        const message = (validationRules[field] as any)[code]?.message;
+    const fieldRules = validationRules[field];
 
-        console.log(`Message:`, (validationRules[field] as any)[code]?.message);
+    if (!fieldRules) throw new Error(`해당 ${field} 필드가 존재하지 않습니다`);
 
-        errors.push({ field, code, message });
+    const errors: ValidationError[] = [];
+
+    for (const [code, rule] of Object.entries(fieldRules)) {
+      // 검증 실패 시 에러 추가
+      if (!rule.check(value)) {
+        const message =
+          typeof rule.message === "function"
+            ? rule.message(value)
+            : rule.message;
+        const error: ValidationError = {
+          field,
+          code: code as ErrorCodeMap[ValidateField],
+          message,
+        };
+        errors.push(error);
+        // 첫번째 에러가 발생하면 더 이상 검증하지 않음
+        break;
       }
-    });
+    }
 
     return { valid: errors.length === 0, errors };
   };
 }
 
-export { createValidator, type ValidationRule, type ValidationResult };
+function createValidatorWithRelevantErrors(field: ValidateField) {
+  return (value: string): ValidationResult => {
+    if (value === "") return { errors: [], valid: true };
+
+    const fieldRules = validationRules[field];
+
+    if (!fieldRules) throw new Error(`해당 ${field} 필드가 존재하지 않습니다`);
+
+    const errors: ValidationError[] = [];
+
+    for (const [code, rule] of Object.entries(fieldRules)) {
+      if (rule.applyWhen && !rule.applyWhen(value)) continue;
+      // applyWhen이 true인 경우에만 검증
+
+      if (!rule.check(value)) {
+        const message =
+          typeof rule.message === "function"
+            ? rule.message(value)
+            : rule.message;
+
+        const error: ValidationError = {
+          field,
+          code: code as ErrorCodeMap[ValidateField],
+          message,
+        };
+        errors.push(error);
+        break;
+      }
+    }
+
+    return { valid: errors.length === 0, errors };
+  };
+}
+
+export { createValidator, createValidatorWithRelevantErrors };

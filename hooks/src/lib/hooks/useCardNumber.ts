@@ -1,7 +1,7 @@
 import { useCallback, useState } from "react";
 import { validateCardNumber } from "../validator/validators";
 
-interface UseCardNumberReturn {
+export interface UseCardNumberReturn {
   cardNumber: string;
   onCardNumberChange: React.ChangeEventHandler<HTMLInputElement>;
   errorMessage?: string;
@@ -17,10 +17,13 @@ export default function useCardNumber(): UseCardNumberReturn {
       setCardNumber(e.target.value);
     }, []);
 
+  const lastError = errors.at(-1);
+  const errorMessage = lastError?.message as string | undefined;
+
   return {
     cardNumber,
     onCardNumberChange: handleCardNumberChange,
-    errorMessage: errors.at(-1)?.message,
-    isError: !!errors.at(-1)?.message,
+    errorMessage,
+    isError: !!errorMessage,
   };
 }

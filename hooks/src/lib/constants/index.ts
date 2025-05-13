@@ -5,8 +5,6 @@ export const ERROR_MESSAGE = {
   INVALID_MONTH: "1부터 12까지의 월수를 입력해주세요.",
 } as const;
 
-export const CARD_NUMBER_LENGTH = 16;
-
 export const CVC_LENGTH = 3;
 
 export const PASSWORD_LENGTH = 2;

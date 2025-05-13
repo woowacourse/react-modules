@@ -1,7 +1,7 @@
 import { Dispatch, useCallback, useState } from "react";
 import { validatePassword } from "../validator/validators";
 
-interface UsePasswordNumberReturn {
+export interface UsePasswordNumberReturn {
   passwordNumber: string;
   onPasswordNumberChange: Dispatch<React.ChangeEvent<HTMLInputElement>>;
   errorMessage?: string;

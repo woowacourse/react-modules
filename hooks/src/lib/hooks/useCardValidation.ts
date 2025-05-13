@@ -1,17 +1,14 @@
 import useCardNumber from "./useCardNumber";
+import useStrictCardNumber from "./useStrictCardNumber";
 import useCVCNumber from "./useCVCNumber";
 import useExpiryDateNumber from "./useExpiryDateNumber";
 import usePasswordNumber from "./usePasswordNumber";
-import useCardNetwork from "./useCardNetwork";
-import useStrictCardNumber from "./useStrictCardNumber";
-
-interface UseCardValidationReturn {
+export interface UseCardValidationReturn {
   card: ReturnType<typeof useCardNumber>;
+  strictCard: ReturnType<typeof useStrictCardNumber>;
   cvc: ReturnType<typeof useCVCNumber>;
   expiry: ReturnType<typeof useExpiryDateNumber>;
   password: ReturnType<typeof usePasswordNumber>;
-  network: ReturnType<typeof useCardNetwork>;
-  strictCard: ReturnType<typeof useStrictCardNumber>;
 }
 
 export default function useCardValidation(): UseCardValidationReturn {
@@ -20,7 +17,6 @@ export default function useCardValidation(): UseCardValidationReturn {
   const cvc = useCVCNumber();
   const expiry = useExpiryDateNumber();
   const password = usePasswordNumber();
-  const network = useCardNetwork();
 
-  return { card, cvc, expiry, password, network, strictCard };
+  return { card, strictCard, cvc, expiry, password };
 }

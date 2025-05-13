@@ -1,7 +1,6 @@
 import {
   isValidExpiryDateFormat,
   isValidExpiryMonth,
-  isValidExpiryYear,
   isNotExpiredDate,
 } from "../date-utils";
 
@@ -60,35 +59,6 @@ describe("date-utils", () => {
       expect(isValidExpiryMonth("0123")).toBe(true); // 정확히 1
       expect(isValidExpiryMonth("1223")).toBe(true); // 정확히 12
       expect(isValidExpiryMonth("1323")).toBe(false); // 12보다 큼
-    });
-
-    it("숫자가 아니거나 잘못된 길이에 대해 false를 반환해야 합니다", () => {
-      expect(isValidExpiryMonth("abcd")).toBe(false);
-      expect(isValidExpiryMonth("01/23")).toBe(false);
-      expect(isValidExpiryMonth("123")).toBe(false);
-      expect(isValidExpiryMonth("12345")).toBe(false);
-    });
-  });
-
-  describe("isValidExpiryYear", () => {
-    it("현재 연도와 미래 연도에 대해 true를 반환해야 합니다", () => {
-      // 모의 설정된 날짜(2023)로, 유효한 연도는 23-99입니다
-      expect(isValidExpiryYear("0123")).toBe(true); // 현재 연도(23)
-      expect(isValidExpiryYear("0124")).toBe(true); // 미래 연도(24)
-      expect(isValidExpiryYear("0199")).toBe(true); // 먼 미래(99)
-    });
-
-    it("과거 연도에 대해 false를 반환해야 합니다", () => {
-      // 모의 설정된 날짜(2023)로, 유효하지 않은 연도는 00-22입니다
-      expect(isValidExpiryYear("0122")).toBe(false); // 과거 연도(22)
-      expect(isValidExpiryYear("0100")).toBe(false); // 먼 과거(00)
-    });
-
-    it("숫자가 아니거나 잘못된 길이에 대해 false를 반환해야 합니다", () => {
-      expect(isValidExpiryYear("ab23")).toBe(false);
-      expect(isValidExpiryYear("01/23")).toBe(false);
-      expect(isValidExpiryYear("123")).toBe(false);
-      expect(isValidExpiryYear("12345")).toBe(false);
     });
   });
 

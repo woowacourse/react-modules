@@ -40,3 +40,27 @@
 .read-the-docs {
   color: #888;
 }
+
+.App {
+  text-align: center;
+  min-height: 100vh;
+  background-color: #f5f7fa;
+  padding: 40px 20px;
+}
+
+.App-header {
+  margin-bottom: 40px;
+}
+
+.App-header h1 {
+  color: #1e40af;
+  font-size: 2rem;
+  font-weight: 700;
+  margin: 0;
+}
+
+main {
+  width: 100%;
+  max-width: 700px;
+  margin: 0 auto;
+}

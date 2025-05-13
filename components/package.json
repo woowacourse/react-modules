@@ -1,16 +1,12 @@
 {
   "name": "woowacourse-modal-component-marvin",
-  "version": "0.0.4",
+  "version": "1.0.0",
   "description": "npm modules",
   "type": "module",
-  "main": "dist/index.cjs",
-  "module": "dist/index.js",
-  "types": "dist/index.d.ts",
-  "style": "dist/index.css",
+  "main": "dist/index.js",
   "exports": {
     ".": {
       "import": "./dist/index.js",
-      "require": "./dist/index.cjs",
       "types": "./dist/index.d.ts"
     }
   },
@@ -32,11 +28,13 @@
   },
   "devDependencies": {
     "@chromatic-com/storybook": "^3.2.6",
+    "@storybook/addon-a11y": "^8.6.12",
     "@storybook/addon-essentials": "^8.6.12",
     "@storybook/addon-interactions": "^8.6.12",
     "@storybook/addon-links": "^8.6.12",
     "@storybook/addon-onboarding": "^8.6.12",
     "@storybook/blocks": "^8.6.12",
+    "@storybook/jest": "^0.2.2",
     "@storybook/react": "^8.6.12",
     "@storybook/react-vite": "^8.6.12",
     "@storybook/test": "^8.6.12",
@@ -56,7 +54,6 @@
     "storybook": "^8.6.12",
     "typescript": "^5.8.3",
     "vite": "^6.2.6",
-    "vite-plugin-css-injected-by-js": "^3.5.2",
     "vite-plugin-dts": "^4.5.3"
   }
 }

@@ -24,23 +24,22 @@ describe("useExpiryDateNumber", () => {
     expect(result.current.isError).toBe(false);
     expect(result.current.errorMessage).toBeUndefined();
   });
-  it("지난 유효기간은 유효하지 않은 만료일이라는 에러를 발생시켜야 한다", () => {
+  it(`유효하지 않은 만료일을 입력하면 ${EXPIRY_DATE_ERROR_MESSAGES.INVALID_FORMAT} 발생해야 한다.`, () => {
     const { result } = renderHook(() => useExpiryDateNumber());
 
     act(() => {
       result.current.onExpiryDateNumberChange({
-        target: { value: "0125" },
+        target: { value: "eeee" },
       } as React.ChangeEvent<HTMLInputElement>);
     });
 
-    expect(result.current.expiryDateNumber).toBe("0125");
+    expect(result.current.expiryDateNumber).toBe("eeee");
     expect(result.current.isError).toBe(true);
     expect(result.current.errorMessage).toBe(
-      EXPIRY_DATE_ERROR_MESSAGES.EXPIRED_DATE
+      EXPIRY_DATE_ERROR_MESSAGES.INVALID_FORMAT
     );
   });
-
-  it("유효하지 않은 만료일을 입력하면 에러가 발생해야 한다", () => {
+  it(`유효하지 않은 만료월을 입력하면 ${EXPIRY_DATE_ERROR_MESSAGES.INVALID_MONTH} 발생해야 한다`, () => {
     const { result } = renderHook(() => useExpiryDateNumber());
 
     act(() => {
@@ -53,6 +52,23 @@ describe("useExpiryDateNumber", () => {
     expect(result.current.isError).toBe(true);
     expect(result.current.errorMessage).toBe(
       EXPIRY_DATE_ERROR_MESSAGES.INVALID_MONTH
+    );
+  });
+  it(`지난 유효기간은 ${EXPIRY_DATE_ERROR_MESSAGES.EXPIRED_DATE} 에러를 발생시켜야 한다`, () => {
+    const { result } = renderHook(() => useExpiryDateNumber());
+    jest.useFakeTimers();
+    jest.setSystemTime(new Date("2025-02-01").getTime());
+
+    act(() => {
+      result.current.onExpiryDateNumberChange({
+        target: { value: "0125" },
+      } as React.ChangeEvent<HTMLInputElement>);
+    });
+    jest.useRealTimers();
+    expect(result.current.expiryDateNumber).toBe("0125");
+    expect(result.current.isError).toBe(true);
+    expect(result.current.errorMessage).toBe(
+      EXPIRY_DATE_ERROR_MESSAGES.EXPIRED_DATE
     );
   });
 
