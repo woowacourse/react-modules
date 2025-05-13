@@ -1,14 +1,10 @@
 import BaseModal from "@/components/BaseModal";
-import type { ModalSizeType } from "../../types/modal";
+import type { ModalDefaultProps } from "../../types/modal";
 import Button from "@/components/Button";
 import * as S from "./ContentModal.styled";
-import type { RefObject, ReactElement, ReactNode, ElementType } from "react";
+import type { ReactElement, ReactNode, ElementType } from "react";
 
-interface ContentModalProps {
-  title: string;
-  size?: ModalSizeType;
-  hasCloseButton?: boolean;
-  ref?: RefObject<HTMLDivElement>;
+interface ContentModalProps extends ModalDefaultProps {
   containerAs?: ElementType;
   content: ReactNode;
   buttonElements: ReactElement<typeof Button>[];
@@ -16,9 +12,10 @@ interface ContentModalProps {
 
 function ContentModal({
   title,
+  onRequestClose,
   size,
   hasCloseButton,
-  ref,
+  closeTrigger,
   containerAs = "div",
   content,
   buttonElements,
@@ -26,9 +23,10 @@ function ContentModal({
   return (
     <BaseModal
       title={title}
-      ref={ref}
+      onRequestClose={onRequestClose}
       size={size}
       hasCloseButton={hasCloseButton}
+      closeTrigger={closeTrigger}
     >
       <S.StyledPolymorphic as={containerAs}>
         <S.ContentBox>{content}</S.ContentBox>

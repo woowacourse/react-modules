@@ -19,6 +19,7 @@ interface PromptModalProps extends ModalDefaultProps {
 function PromptModal({
   title,
   size,
+  closeTrigger,
   inputAttributes = defaultInputAttributes,
   onRequestClose,
   onSubmit,
@@ -39,7 +40,9 @@ function PromptModal({
   return (
     <ContentModal
       title={title}
+      onRequestClose={onRequestClose}
       size={size}
+      closeTrigger={closeTrigger}
       hasCloseButton={false}
       containerAs="form"
       content={<Input ref={inputRef} {...inputAttributes} />}

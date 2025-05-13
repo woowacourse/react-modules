@@ -1,15 +1,13 @@
 import { PropsWithChildren, RefObject } from "react";
 import * as S from "./BaseModal.styled";
 import CloseIcon from "@assets/close.svg";
-import { ModalLayoutProps } from "@/types/modal";
+import { ModalLayoutProps, ModalDefaultProps } from "@/types/modal";
 import usePreventScroll from "@/hooks/usePreventScroll";
+import useModalCloseTriggers from "@/hooks/useModalCloseTriggers";
 
-interface BaseModalProps extends ModalLayoutProps {
-  title: string;
-  onRequestClose?: () => void;
-  hasCloseButton?: boolean;
-  ref?: RefObject<HTMLDivElement>;
-}
+interface BaseModalProps
+  extends ModalDefaultProps,
+    Exclude<ModalLayoutProps, "size"> {}
 
 function BaseModal({
   title,
@@ -17,17 +15,21 @@ function BaseModal({
   hasCloseButton = true,
   position = "center",
   size = "medium",
-  ref,
   children,
+  closeTrigger,
 }: PropsWithChildren<BaseModalProps>) {
   usePreventScroll();
+  const modalRef = useModalCloseTriggers<HTMLDivElement>({
+    onRequestClose,
+    closeTrigger,
+  });
 
   return (
     <S.Backdrop>
       <S.Modal
         role="dialog"
         aria-modal
-        ref={ref}
+        ref={modalRef}
         position={position}
         size={size}
       >

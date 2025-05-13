@@ -1,5 +1,3 @@
-import useOutsideClickRef from "@hooks/useOutsideClickRef";
-import useKeyDown from "@/hooks/useKeyDown";
 import type { ModalDefaultProps } from "../../types/modal";
 import Button from "@/components/Button";
 import * as S from "@/styles/Typography.styled";
@@ -14,18 +12,18 @@ function ConfirmModal({
   title,
   confirmText,
   size,
+  closeTrigger,
+  hasCloseButton,
   onRequestClose,
   onConfirm,
 }: ConfirmModalProps) {
-  const modalRef = useOutsideClickRef<HTMLDivElement>(onRequestClose);
-  useKeyDown({ keys: ["Escape"], callback: onRequestClose });
-
   return (
     <ContentModal
       title={title}
       size={size}
-      hasCloseButton={false}
-      ref={modalRef}
+      onRequestClose={onRequestClose}
+      closeTrigger={closeTrigger}
+      hasCloseButton={hasCloseButton}
       content={<S.ModalText>{confirmText}</S.ModalText>}
       buttonElements={[
         <Button

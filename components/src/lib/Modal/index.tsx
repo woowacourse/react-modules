@@ -1,6 +1,4 @@
 import { PropsWithChildren } from "react";
-import useOutsideClickRef from "@hooks/useOutsideClickRef";
-import useKeyDown from "@/hooks/useKeyDown";
 import BaseModal from "@/components/BaseModal";
 import { ModalLayoutProps, ModalDefaultProps } from "../../types/modal";
 
@@ -13,18 +11,17 @@ function Modal({
   onRequestClose,
   position,
   size,
+  closeTrigger,
   children,
 }: PropsWithChildren<ModalProps>) {
-  const modalRef = useOutsideClickRef<HTMLDivElement>(onRequestClose);
-  useKeyDown({ keys: ["Escape"], callback: onRequestClose });
-
   return (
     <BaseModal
       title={title}
       onRequestClose={onRequestClose}
-      ref={modalRef}
       position={position}
       size={size}
+      closeTrigger={closeTrigger}
+      hasCloseButton
     >
       {children}
     </BaseModal>
