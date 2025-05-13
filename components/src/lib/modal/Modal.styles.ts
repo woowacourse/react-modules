@@ -1,5 +1,6 @@
 import styled from '@emotion/styled';
 import { css, keyframes } from '@emotion/react';
+import { ModalPosition, ModalSize } from '../shared/types/modal';
 
 const slideUpCenter = keyframes`
   from {
@@ -23,8 +24,8 @@ const slideUpBottom = keyframes`
   }
 `;
 
-const positionCenter = css`
-  width: 80%;
+const positionCenter = (size: ModalSize) => css`
+  width: ${size === 'small' ? '320px' : size === 'large' ? '600px' : '480px'};
   top: 50%;
   transform: translate(-50%, -50%);
   left: 50%;
@@ -48,7 +49,7 @@ export const Background = styled.div`
   left: 0;
 `;
 
-export const ModalContainer = styled.div<{ position: string }>`
+export const ModalContainer = styled.div<{ position: ModalPosition; size: ModalSize }>`
   height: 216px;
   border-radius: 8px;
   background-color: #fff;
@@ -59,8 +60,10 @@ export const ModalContainer = styled.div<{ position: string }>`
   flex-direction: column;
   box-sizing: border-box;
   gap: 16px;
+  justify-content: space-between;
+  align-items: center;
 
-  ${({ position }) => (position === 'center' ? positionCenter : positionBottom)};
+  ${({ position, size }) => (position === 'center' ? positionCenter(size) : positionBottom)};
 `;
 
 export const HeaderSection = styled.div`
@@ -82,8 +85,30 @@ export const ModalCloseButton = styled.button`
   align-items: center;
   justify-content: center;
   color: black;
+  cursor: pointer;
+  border: none;
+  background-color: transparent;
+
+  :focus {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(51, 51, 51, 0.5);
+  }
 `;
 
-export const ModalContent = styled.main`
+export const ModalContentSection = styled.main`
+  width: 100%;
   flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: start;
+`;
+
+export const ModalButtonSection = styled.div`
+  margin-top: 16px;
+  width: 100%;
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  gap: 8px;
 `;

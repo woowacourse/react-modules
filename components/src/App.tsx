@@ -1,13 +1,12 @@
-import styled from "@emotion/styled";
-import "./App.css";
-import { useState } from "react";
-import React from "react";
-// import Modal from "./lib/Modal";
-import { Modal } from "woowa-modal-payments";
+import styled from '@emotion/styled';
+import './App.css';
+import { useState } from 'react';
+import React from 'react';
+import Modal from './lib/modal/Modal';
 
 function App() {
   const [isOpen, setIsOpen] = useState(false);
-  const handleCloseModal = () => {
+  const onClose = () => {
     setIsOpen(false);
   };
   return (
@@ -15,13 +14,18 @@ function App() {
       <h1>My App</h1>
       <Modal
         isOpen={isOpen}
-        handleCloseModal={handleCloseModal}
-        title="타이틀입니다"
-        position="center"
-      >
-        <h2>Modal Title</h2>
+        onClose={onClose}
+        title='타이틀입니다'
+        message='메세지입니다'
+        type='prompt'
+        onConfirm={() => {}}
+        size='large'
+        // onSubmit={(input) => {
+        // }}
+      />
+      {/* <h2>Modal Title</h2>
         <p>This is a modal content.</p>
-      </Modal>
+      </Modal> */}
       <OpenModal onClick={() => setIsOpen(!isOpen)}>모달 켜지는 버튼</OpenModal>
     </div>
   );
