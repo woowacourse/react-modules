@@ -7,7 +7,7 @@ export { default as useCardPasswordValidate } from "./CardPassword/useCardPasswo
 export { default as useCardNumbersState } from "./CardNumber/hooks/useCardNumbersState/useCardNumbersState";
 export { default as useCardExpireDateState } from "./CardExpireDate/useCardExpireDateState/useCardExpireDateState";
 export { default as useCardCVCState } from "./CardCVC/useCardCVCState/useCardCVCState";
-export { default as useCardBrandState } from "./CardBrand/useCardBrandState.ts/useCardBrandState";
+export { default as useCardBrandState } from "./CardBrand/useCardBrandState/useCardBrandState";
 export { default as useCardPasswordState } from "./CardPassword/useCardPasswordState/useCardPasswordState";
 
 export { default as formatCardNumber } from "./CardNumber/utils/formatCardNumber";
