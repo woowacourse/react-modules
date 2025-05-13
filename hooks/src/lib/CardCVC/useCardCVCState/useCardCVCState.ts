@@ -8,12 +8,8 @@ const useCardCVCState = ({ validateCardCVC }: useCardCVCStateProps) => {
   const [cardCVC, setCardCVC] = useState("");
 
   const handleCardCVC = ({
-    event,
-  }: {
-    event: React.ChangeEvent<HTMLInputElement>;
-  }) => {
-    const { value } = event.target;
-
+    target: { value },
+  }: React.ChangeEvent<HTMLInputElement>) => {
     if (!validateCardCVC(value)) return;
     setCardCVC(value);
   };
