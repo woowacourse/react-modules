@@ -1,6 +1,6 @@
 {
   "name": "@muffin2219/hooks",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Card form validation hooks module",
   "type": "module",
   "types": "dist/src/lib/index.d.ts",
@@ -17,8 +17,6 @@
     "test": "jest"
   },
   "dependencies": {
-    "@muffin2219/hooks": "^0.0.4",
-    "hooks": "^0.3.2",
     "react": "^19.1.0",
     "react-dom": "^19.1.0"
   },
