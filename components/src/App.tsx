@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 import { useState } from 'react';
-import Modal from './lib/modal/Modal';
+import { PresetModal } from './lib';
 
 function App() {
   const [alertModalOpen, setAlertModalOpen] = useState(false);
@@ -33,40 +33,30 @@ function App() {
         </OpenModalButton>
       </OpenModalButtonContainer>
 
-      <Modal.Container onClose={onAlertClose} open={alertModalOpen}>
-        <Modal.Title>아이디를 입력해 주세요.</Modal.Title>
+      <PresetModal.Alert
+        title="아이디를 입력해 주세요."
+        onClose={onAlertClose}
+        open={alertModalOpen}
+        handlePrimaryButtonClick={() => alert('확인 클릭')}
+      >
         <div>아이디는 필수로 입력해야 합니다.</div>
-        <AlertButtonWrapper>
-          <Modal.PrimaryButton
-            label="확인"
-            onClick={() => alert('확인 클릭')}
-          />
-        </AlertButtonWrapper>
-      </Modal.Container>
+      </PresetModal.Alert>
 
-      <Modal.Container onClose={onConfirmClose} open={confirmModalOpen}>
-        <Modal.Title>카드를 삭제하시겠습니까?</Modal.Title>
+      <PresetModal.Confirm
+        title="카드를 삭제하시겠습니까?"
+        onClose={onConfirmClose}
+        open={confirmModalOpen}
+        handlePrimaryButtonClick={() => alert('확인 클릭')}
+      >
         <div>삭제하면 복구하실 수 없습니다.</div>
-        <ButtonRowWrapper>
-          <Modal.SecondaryButton label="취소" onClick={onConfirmClose} />
-          <Modal.PrimaryButton
-            label="확인"
-            onClick={() => alert('확인 클릭')}
-          />
-        </ButtonRowWrapper>
-      </Modal.Container>
+      </PresetModal.Confirm>
 
-      <Modal.Container onClose={onPromptClose} open={promptModalOpen}>
-        <Modal.Title>쿠폰 번호를 입력해 주세요.</Modal.Title>
-        <Modal.Input />
-        <ButtonRowWrapper>
-          <Modal.SecondaryButton label="취소" onClick={onPromptClose} />
-          <Modal.PrimaryButton
-            label="확인"
-            onClick={() => alert('확인 클릭')}
-          />
-        </ButtonRowWrapper>
-      </Modal.Container>
+      <PresetModal.Prompt
+        title="쿠폰 번호를 입력해 주세요."
+        onClose={onPromptClose}
+        open={promptModalOpen}
+        handlePrimaryButtonClick={() => alert('확인 클릭')}
+      />
     </>
   );
 }
