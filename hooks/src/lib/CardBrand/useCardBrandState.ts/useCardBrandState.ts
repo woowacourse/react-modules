@@ -2,7 +2,6 @@ import { useState } from "react";
 
 interface useCardBrandStateProps {
   validateCardBrand: (cardBrand: string) => boolean;
-  CARD_BRANDS: string[];
 }
 
 const useCardBrandState = ({ validateCardBrand }: useCardBrandStateProps) => {
