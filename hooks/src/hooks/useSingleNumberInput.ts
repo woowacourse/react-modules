@@ -16,7 +16,7 @@ const useSingleNumberInput = ({
 }: UseInputStateParams) => {
   const [inputState, setInputState] = useState<BaseInputState>(initialValue);
 
-  const handleInputChange = useCallback(
+  const changeInputState = useCallback(
     (value: string) => {
       if (value.length > maxLength || isNonNumericNonEmpty(value)) {
         return;
@@ -32,7 +32,7 @@ const useSingleNumberInput = ({
 
   return {
     value: inputState.value,
-    onChange: handleInputChange,
+    changeInputState,
     errorState: getErrorFn(inputState.value),
   };
 };
