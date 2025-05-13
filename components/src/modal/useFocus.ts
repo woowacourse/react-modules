@@ -40,16 +40,14 @@ function useFocusTrap(open: boolean) {
       return;
     }
 
-    if (event.shiftKey) {
-      if (document.activeElement === firstRef.current) {
-        event.preventDefault();
-        lastRef.current?.focus();
-      }
-    } else {
-      if (document.activeElement === lastRef.current) {
-        event.preventDefault();
-        firstRef.current?.focus();
-      }
+    if (event.shiftKey && document.activeElement === firstRef.current) {
+      event.preventDefault();
+      lastRef.current?.focus();
+    }
+
+    if (document.activeElement === lastRef.current) {
+      event.preventDefault();
+      firstRef.current?.focus();
     }
   };
 
