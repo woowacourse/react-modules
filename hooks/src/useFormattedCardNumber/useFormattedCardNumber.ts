@@ -34,8 +34,7 @@ export default function useFormattedCardNumbers(
       errorMessage: CARD_FORMATTER_ERROR_MESSAGE,
     };
 
-  const [parsedCardNetwork, { FORMAT_PATTERN, LENGTH, FORMAT_TEMPLATE }] =
-    matchedNetwork;
+  const [_, { FORMAT_PATTERN, LENGTH, FORMAT_TEMPLATE }] = matchedNetwork;
 
   if (fullCardNumber.length < LENGTH)
     return {
