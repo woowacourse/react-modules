@@ -42,8 +42,7 @@ const meta = {
       table: {defaultValue: {summary: 'false'}},
     },
     onClose: {
-      description: '모달 닫기 함수',
-      action: 'closed',
+      description: '모달을 닫았을 때 실행되는 함수',
       table: {type: {summary: '() => void'}},
     },
   },
