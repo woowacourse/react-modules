@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 
 interface useKeyboardEffectProps {
-  key: string;
+  key: "Escape" | "Enter";
   handler: () => void;
   enabled?: boolean;
 }
