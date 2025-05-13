@@ -18,21 +18,21 @@ const checkCardNetworkValidation = ({
   });
   const network = calculateNetWork(cardPrefixNumber);
 
-  if (cardPrefixNumber.length >= 6) {
-    if (
-      Object.keys(cardNumbers.numbers)
-        .map((objectKey) =>
-          objectKey === key ? value : cardNumbers.numbers[objectKey]
-        )
-        .reduce((acc, value) => acc + value, "").length > network.length
-    )
-      return {
-        isValid: false,
-        errorMessage: validationMessages.limitedCardNetworkLength(
-          network.length
-        ),
-      };
+  if (cardPrefixNumber.length < 6) {
+    return { isValid: true, errorMessage: null };
   }
+
+  if (
+    Object.keys(cardNumbers.numbers)
+      .map((objectKey) =>
+        objectKey === key ? value : cardNumbers.numbers[objectKey]
+      )
+      .reduce((acc, value) => acc + value, "").length > network.length
+  )
+    return {
+      isValid: false,
+      errorMessage: validationMessages.limitedCardNetworkLength(network.length),
+    };
 
   return { isValid: true, errorMessage: null };
 };
