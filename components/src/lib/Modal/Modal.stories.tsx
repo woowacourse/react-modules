@@ -10,6 +10,11 @@ const meta = {
     onRequestClose: () => {},
     position: "center",
     size: "medium",
+    closeTrigger: {
+      outsideClick: true,
+      escapeKey: true,
+    },
+    hasCloseButton: true,
     children: "Modal Content",
   },
 } satisfies Meta<typeof Modal>;

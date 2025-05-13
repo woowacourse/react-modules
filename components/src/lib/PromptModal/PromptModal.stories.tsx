@@ -8,6 +8,11 @@ const meta = {
   args: {
     title: "PromptModal Title",
     size: "medium",
+    closeTrigger: {
+      outsideClick: true,
+      escapeKey: true,
+    },
+    hasCloseButton: false,
     inputAttributes: defaultInputAttributes,
     onRequestClose: () => {},
     onSubmit: () => {},

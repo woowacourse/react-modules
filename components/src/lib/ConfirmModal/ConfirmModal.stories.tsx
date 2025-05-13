@@ -9,6 +9,11 @@ const meta = {
     title: "ConfirmModal Title",
     confirmText: "ConfirmModal Text",
     size: "medium",
+    closeTrigger: {
+      outsideClick: true,
+      escapeKey: true,
+    },
+    hasCloseButton: false,
     onRequestClose: () => {},
     onConfirm: () => {},
   },

@@ -8,10 +8,15 @@ const meta = {
   tags: ["autodocs"],
   args: {
     title: "ContentModal Title",
-    content: <p>ContentModal Content</p>,
-    hasCloseButton: true,
-    containerAs: "div",
+    onRequestClose: () => {},
     size: "medium",
+    hasCloseButton: true,
+    closeTrigger: {
+      outsideClick: true,
+      escapeKey: true,
+    },
+    content: <p>ContentModal Content</p>,
+    containerAs: "div",
     buttonElements: [
       <Button key="cancel" variant="secondary" type="button">
         취소

@@ -8,6 +8,11 @@ const meta = {
   args: {
     title: "AlertModal Title",
     alertText: "Alert Text",
+    hasCloseButton: false,
+    closeTrigger: {
+      outsideClick: true,
+      escapeKey: true,
+    },
     onRequestClose: () => {},
     size: "medium",
   },
