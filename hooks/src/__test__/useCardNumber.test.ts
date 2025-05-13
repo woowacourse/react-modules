@@ -1,10 +1,9 @@
-import {renderHook} from '@testing-library/react';
+import {act, renderHook} from '@testing-library/react';
 import {
   ERROR_MESSAGE,
   defaultValidationValue,
 } from '../lib/constants/validation';
 import useCardNumber from '../lib/hooks/useCardNumber';
-import {act} from 'react';
 
 describe('useCardNumber', () => {
   describe('초기 상태', () => {

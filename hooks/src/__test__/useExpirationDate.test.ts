@@ -1,10 +1,9 @@
-import {renderHook} from '@testing-library/react';
+import {act, renderHook} from '@testing-library/react';
 import {
   ERROR_MESSAGE,
   defaultValidationValue,
 } from '../lib/constants/validation';
 import useExpirationDate from '../lib/hooks/useExpirationDate';
-import {act} from 'react';
 
 const defaultExpirationDateValidationValue = {
   month: defaultValidationValue,

@@ -1,10 +1,9 @@
-import {renderHook} from '@testing-library/react';
+import {act, renderHook} from '@testing-library/react';
 import {
   ERROR_MESSAGE,
   defaultValidationValue,
 } from '../lib/constants/validation';
 import useCvc from '../lib/hooks/useCvc';
-import {act} from 'react';
 
 describe('useCvc', () => {
   it('CVC번호가 올바른 경우 에러가 발생하지 않는다.', () => {

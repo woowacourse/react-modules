@@ -1,10 +1,9 @@
-import {renderHook} from '@testing-library/react';
+import {act, renderHook} from '@testing-library/react';
 import {
   ERROR_MESSAGE,
   defaultValidationValue,
 } from '../lib/constants/validation';
 import usePassword from '../lib/hooks/usePassword';
-import {act} from 'react';
 
 describe('usePassword', () => {
   it('비밀번호가 올바른 경우 에러가 발생하지 않는다.', () => {
