@@ -1,6 +1,6 @@
 {
   "name": "happyjurung-modal",
-  "version": "0.0.8",
+  "version": "0.0.11",
   "description": "React 애플리케이션에서 모달 창을 쉽고 일관되게 구현할 수 있도록 돕는 라이브러리",
   "keywords": [
     "react",
@@ -14,13 +14,6 @@
   "module": "dist/index.js",
   "types": "dist/index.d.ts",
   "style": "dist/index.css",
-  "exports": {
-    ".": {
-      "import": "./dist/index.js",
-      "require": "./dist/index.cjs",
-      "types": "./dist/index.d.ts"
-    }
-  },
   "files": [
     "dist"
   ],

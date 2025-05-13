@@ -1,4 +1,27 @@
 import styled from "@emotion/styled";
+import { css } from "@emotion/react";
+
+const sizeStyles = (size: string) => {
+  switch (size) {
+    case "small":
+      return css`
+        width: 320px;
+      `;
+
+    case "medium":
+      return css`
+        width: 480px;
+      `;
+
+    case "large":
+      return css`
+        width: 600px;
+      `;
+
+    default:
+      return css``;
+  }
+};
 
 export const ModalBackground = styled.div<{
   isModalOpen: boolean;
@@ -26,19 +49,24 @@ export const ModalBackground = styled.div<{
         return "flex-end";
     }
   }};
-`;
+      `;
 
 export const ModalContainer = styled.div<{
   position: string;
+  size: string;
 }>`
   min-width: 300px;
   background-color: white;
-  padding: 20px;
-  border-radius: 16px;
   color: #000000;
   position: relative;
-  width:  ${({ position }) => position === "bottom" && "100%"}
-  border-radius:  ${({ position }) => position === "bottom" && "10px 10px 0 0;"}
+  ${({ size }) => sizeStyles(size)};
+  border-radius: 8px;
+  padding: 24px 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: ${({ position }) => position === "bottom" && "100%"};
+  border-radius: ${({ position }) => position === "bottom" && "10px 10px 0 0;"};
 `;
 
 export const ModalHeader = styled.div`
@@ -52,7 +80,11 @@ export const ModalHeader = styled.div`
   }
 `;
 
-export const ModalBody = styled.div``;
+export const ModalBody = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+`;
 
 export const CloseButton = styled.button`
   font-size: 18px;

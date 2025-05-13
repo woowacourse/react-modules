@@ -164,3 +164,9 @@ input[type="number"]::-webkit-outer-spin-button {
 input:focus {
   outline: none;
 }
+
+input[type="checkbox"] {
+  -webkit-appearance: checkbox !important;
+  -moz-appearance: checkbox !important;
+  appearance: auto !important;
+}

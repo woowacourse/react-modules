@@ -2,7 +2,7 @@
 
 ### 소개
 
-카드 등록 시 필요한 입력 값에 대한 유효성 검사를 진행할 수 있는 훅입니다.
+카드 등록 시 카드 번호에 따른 카드사를 반환하는 훅 모듈입니다.
 
 ### 설치 방법
 
@@ -10,183 +10,53 @@
 
 ### 주요 hooks
 
-- useCardNumbers : 카드 번호 유효성 검증할 수 있습니다.
-- useExpiryDate : 카드 유효 날짜 유효성 검증할 수 있습니다.
-- useCvcNumber : 카드 CVC 번호 유효성 검증할 수 있습니다.
-- usePassword : 카드 비밀번호 2자리 검증할 수 있습니다.
+- useCardNumbers : 카드 번호 입력을 16자리 숫자로 관리하면서 4자리씩 분할 및 검증하고, 카드사를 감지해 카드사별 포맷 문자열까지 반환하는 React 훅입니다.
+- getCardCompany : 숫자 문자열의 접두사와 전체 길이를 검사해 해당 카드사(visa, master, amex, diners, unionPay) 또는 default를 반환하는 함수입니다.
 
 ### 사용 예시
 
-**useCardNumbers**
-
-- numbers : 카드 번호 (4\*4) 배열
-- error : isValidate(boolean)와 errorMassage(string)를 담고 있는 객체 배열
-- validate : 유효성 검증 함수
-
 ```js
-import { useCardNumbers } from "happyjurung-hooks";
-function App() {
-  const {
-    numbers,
-    error: cardNumbersError,
-    validate: cardNumbersValidate,
-  } = useCardNumbers();
-  const handleCardNumber = (
-    e: React.ChangeEvent<HTMLInputElement>,
-    index: number
-  ) => {
-    cardNumbersValidate(e.target.value, index);
-  };
+import React, { useState } from "react";
+import useCardNumbers from "./useCardNumbers";
+
+function CardForm() {
+  const { numbers, cardType, handleCardNumberChange } = useCardNumbers();
+
   return (
-    <>
-      <div>
-        <h1>CardNumbers</h1>
-        {numbers.map((number, index) => (
+    <div>
+      <h3>카드사: {cardType || "미확인"}</h3>
+      <div style={{ display: "flex", gap: 8 }}>
+        {numbers.map((num, idx) => (
           <input
-            key={index}
-            type="text"
-            value={number}
-            onChange={(e) => handleCardNumber(e, index)}
+            key={idx}
+            maxLength={4}
+            value={num}
+            onChange={(e) => handleCardNumberChange(e.target.value)}
+            placeholder="0000"
           />
         ))}
-        <p>
-          {cardNumbersError.find((error) => error.errorMessage !== "")
-            ?.errorMessage ?? ""}
-        </p>
       </div>
-    </>
+    </div>
   );
 }
-export default App;
+
+import { getCardCompany } from "./getCardCompany";
+
+console.log(getCardCompany("4000123412341234"));
+// → "visa"      (4로 시작, 길이 16)
+
+console.log(getCardCompany("5100123412341234"));
+// → "master"    (51~55로 시작, 길이 16)
+
+console.log(getCardCompany("341234123412345"));
+// → "amex"      (34 or 37로 시작, 길이 15)
+
+console.log(getCardCompany("36123412341234"));
+// → "diners"    (36으로 시작, 길이 14)
+
+console.log(getCardCompany("6221261234123412"));
+// → "unionPay"  (622126~622925 범위, 길이 16)
+
+console.log(getCardCompany("1234123412341234"));
+// → "default"   (위 조건 모두 불충분)
 ```
-
-**useExpiryDate**
-
-- date : {month: string, year: string} 객체
-- error : isValidate(boolean)와 errorMassage(string)를 담고 있는 객체 배열
-- validate : 유효성 검증 함수
-
-```js
-import { useExpiryDate } from "happyjurung-hooks";
-function App() {
-  const { date, error: dateError, validate: dateValidate } = useExpiryDate();
-  const handleCardNumber = (
-    e: React.ChangeEvent<HTMLInputElement>,
-    index: number
-  ) => {
-    cardNumbersValidate(e.target.value, index);
-  };
-  const handleExpiryDate = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.name === "month") {
-      dateValidate(e.target.value, "month");
-    } else if (e.target.name === "year") {
-      dateValidate(e.target.value, "year");
-    }
-  };
-  return (
-    <>
-      <div>
-        <h1>Date</h1>
-        <input
-          type="text"
-          value={date.month}
-          name="month"
-          onChange={handleExpiryDate}
-        />
-        <p>{dateError[0].errorMessage}</p>
-        <input
-          type="text"
-          value={date.year}
-          name="year"
-          onChange={handleExpiryDate}
-        />
-        <p>{dateError[1].errorMessage}</p>
-      </div>
-    </>
-  );
-}
-export default App;
-```
-
-**useCvcNumber**
-
-- cvc : 카드 cvc 번호 (string)
-- error : isValidate(boolean)와 errorMassage(string)를 담고 있는 객체
-- validate : 유효성 검증 함수
-
-```js
-import "./App.css";
-import { useCvcNumber } from "happyjurung-hooks";
-function App() {
-  const { cvc, error: cvcError, validate: cvcValidate } = useCvcNumber();
-  const handleCvcNumber = (e: React.ChangeEvent<HTMLInputElement>) => {
-    cvcValidate(e.target.value);
-  };
-  return (
-    <>
-      <div>
-        <h1>CVC</h1>
-        <input type="text" value={cvc} onChange={handleCvcNumber} />
-        <p>{cvcError.errorMessage}</p>
-      </div>
-    </>
-  );
-}
-export default App;
-```
-
-**usePassword**
-
-- password : 카드 비밀번호 2자리 (string)
-- error : isValidate(boolean)와 errorMassage(string)를 담고 있는 객체
-- validate : 유효성 검증 함수
-
-```js
-import { usePassword } from "happyjurung-hooks";
-function App() {
-  const {
-    password,
-    error: passwordError,
-    validate: passwordValidate,
-  } = usePassword();
-  const handlePassword = (e: React.ChangeEvent<HTMLInputElement>) => {
-    passwordValidate(e.target.value);
-  };
-  return (
-    <>
-      <div>
-        <h1>Password</h1>
-        <input type="text" value={password} onChange={handlePassword} />
-        <p>{passwordError.errorMessage}</p>
-      </div>
-    </>
-  );
-}
-export default App;
-```
-
-components
-hooks (hooks에 관련된 라이브러리)
-/**test**
-/src
-/hooks
-/types을 import해서 사용
-
-    /types
-      /공통된 타입 관리
-
-hooks (hooks에 관련된 라이브러리)
-/src
-/hooks
-/useCardNumbers
-/useCardNumbers.test.ts
-/useCardNumbers.ts
-/types.ts // useCardNumbers에서만 쓰는 타입
-
-    /types
-      /공통된 타입 관리
-
-    /styles
-
-    App.tsx
-    main.tsx

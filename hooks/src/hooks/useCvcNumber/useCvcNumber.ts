@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { ValidationResult } from "./type";
-import { ErrorType } from "../../types/errorType";
+import { ErrorType } from "../../types/ErrorType";
 
 const CVC_RULE = {
   INVALID_LENGTH_ERROR: "CVC는 3자리로 입력해 주세요.",

@@ -20,11 +20,8 @@ function App() {
     handlePasswordChange,
   } = usePassword();
 
-  const handleCardNumber = (
-    e: React.ChangeEvent<HTMLInputElement>,
-    index: number
-  ) => {
-    handleCardNumberChange(e.target.value, index);
+  const handleCardNumber = (e: React.ChangeEvent<HTMLInputElement>) => {
+    handleCardNumberChange(e.target.value);
   };
 
   const handleExpiryDate = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -52,7 +49,7 @@ function App() {
             key={index}
             type="text"
             value={number}
-            onChange={(e) => handleCardNumber(e, index)}
+            onChange={(e) => handleCardNumber(e)}
           />
         ))}
         <p>

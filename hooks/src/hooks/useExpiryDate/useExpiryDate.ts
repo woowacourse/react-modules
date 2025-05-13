@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { ValidationResult, DateType } from "./type";
-import { ErrorType } from "../../types/errorType";
+import { ErrorType } from "../../types/ErrorType";
 
 const EXPIRY_DATE_RULE = {
   INVALID_YEAR_LENGTH_ERROR: "연도는 2자리로 입력해 주세요.",

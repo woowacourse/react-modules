@@ -1,7 +1,9 @@
-import { ErrorType } from "../../types/errorType";
+import { ErrorType } from "../../types/ErrorType";
+import { CardType } from "../useCardCompany/type";
 
-export type ValidationResult = {
+export interface ValidationResult {
   numbers: string[];
   error: ErrorType[];
-  handleCardNumberChange: (value: string, index: number) => void;
-};
+  cardType: CardType;
+  handleCardNumberChange: (value: string) => void;
+}

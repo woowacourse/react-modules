@@ -12,34 +12,91 @@ npm install @happyjurung/modal
 
 ## 주요 기능
 
-- 헤더 & 닫기 버튼: title과 CloseButton으로 기본 헤더 레이아웃과 닫기 기능 제공
-- 위치 제어: position prop으로 center/bottom 등 원하는 위치에 배치 가능
-- 포함 콘텐츠: children에 어떤 JSX든 전달해 자유롭게 본문 구성
-- 열림/닫힘 상태: isModalOpen과 onClose로 모달 제어
+- AlertModal: 사용자에게 메시지를 전달하고 확인 버튼만 제공
+- ConfirmModal: 사용자에게 선택지를 제공하고 확인 및 취소 버튼 제공
+- PromptModal: 사용자로부터 입력값을 받을 수 있는 입력 필드와 확인/취소 버튼 제공
+- Option: small, medium, large 등의 크기 옵션을 prop으로 전달받아 모달 크기 조절
 
 ## 사용 예시
 
 ```js
 import React, { useState } from "react";
-import Modal from "@happyjurung/modal";
+import { AlertModal } from "happyjurung-modal";
 
-function App() {
-  const [open, setOpen] = useState(false);
+const AlertModalExample = () => {
+  const [isModalOpen, setModalOpen] = useState(false);
+
+  const openModal = () => setModalOpen(true);
+  const closeModal = () => setModalOpen(false);
 
   return (
     <>
-      <button onClick={() => setOpen(true)}>모달 열기</button>
-      <Modal
-        isModalOpen={open}
-        position="center"
-        title="모달 제목"
-        onClose={() => setOpen(false)}
-      >
-        <p>여기 모달 본문 내용을 작성하세요.</p>
-      </Modal>
+      <button onClick={openModal}>경고창 열기</button>
+
+      <AlertModal
+        isModalOpen={isModalOpen}
+        title="제목"
+        description="모달 설명입니다."
+        size="medium"
+        onClose={closeModal}
+      />
     </>
   );
-}
+};
 
-export default App;
+export default AlertModalExample;
+
+import React, { useState } from "react";
+import { ConfirmModal } from "happyjurung-modal";
+
+const ConfirmModalExample = () => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  return (
+    <>
+      <button onClick={() => setIsOpen(true)}>삭제하기</button>
+
+      <ConfirmModal
+        isModalOpen={isOpen}
+        title="제목"
+        description="모달 설명입니다."
+        size="medium"
+        onClose={() => setIsOpen(false)}
+      />
+    </>
+  );
+};
+
+export default ConfirmModalExample;
+
+import React, { useState, ChangeEvent } from "react";
+import { PromptModal } from "happyjurung-modal";
+
+const PromptModalExample = () => {
+  const [isOpen, setIsOpen] = useState(false);
+  const [value, setValue] = useState("");
+
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setValue(e.target.value);
+  };
+
+  return (
+    <>
+      <button onClick={() => setIsOpen(true)}>프롬프트 열기</button>
+
+      <PromptModal
+        isModalOpen={isOpen}
+        title="제목"
+        size="medium"
+        inputValue={value}
+        onChangeInput={handleChange}
+        onClose={() => setIsOpen(false)}
+      />
+    </>
+  );
+};
+
+export default PromptModalExample;
+
+
 ```
