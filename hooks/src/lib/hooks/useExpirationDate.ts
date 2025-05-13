@@ -28,12 +28,12 @@ const useExpirationDate = () => {
       defaultExpirationDateValidationValue
     );
 
-  const onChange = (label: string, value: string) => {
+  const onChange = (label: 'month' | 'year', value: string) => {
     validation(label, value);
     setExpirationDate((prev) => ({...prev, [label]: value}));
   };
 
-  const validation = (label: string, value: string) => {
+  const validation = (label: 'month' | 'year', value: string) => {
     if (isEmpty(value)) {
       setExpirationDateValidationResult((prev) => ({
         ...prev,

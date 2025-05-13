@@ -206,7 +206,7 @@ export default App;
 ### 📍 Example
 
 ```tsx
-import {usePassword} from '@muffin2219/usePassword';
+import {usePassword} from '@muffin2219/hooks';
 
 function App() {
   const {onChange, password, passwordValidationResult} = usePassword();
