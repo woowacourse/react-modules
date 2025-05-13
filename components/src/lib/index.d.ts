@@ -6,9 +6,7 @@ export interface TitleProps {
   size?: number;
 }
 
-export interface MessageProps {
-  message: string;
-}
+type ModalType = 'alert' | 'confirm' | 'prompt';
 
 export interface ModalProps {
   position?: 'center' | 'bottom';
@@ -17,11 +15,8 @@ export interface ModalProps {
   showCloseButton?: boolean;
   backgroundColor?: string;
   children?: React.ReactNode;
-
-  alert?: MessageProps;
-  confirm?: MessageProps;
-  prompt?: boolean | MessageProps;
-
+  type?: ModalType;
+  message?: string;
   isOpen: boolean;
   onClose: () => void;
   onConfirm?: (value?: string) => void;
