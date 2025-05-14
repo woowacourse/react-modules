@@ -102,7 +102,7 @@ export const ModalConfirmComponent: Story = {
     return (
       <Modal {...args} show={internalShow} onHide={handleHide}>
         <Modal.BackDrop />
-        <Modal.AlertContainer
+        <Modal.ConfirmContainer
           title="카드를 삭제하시겠습니까?"
           description="삭제하면 복구하실 수 없습니다."
           onClick={() => console.log("카드삭제")}
