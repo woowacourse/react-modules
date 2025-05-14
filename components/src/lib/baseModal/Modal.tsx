@@ -40,11 +40,11 @@ function ModalTitle({ children, ...props }: ModalTitleProps) {
   return <h2 {...props}>{children}</h2>;
 }
 
-function ModalCloseButton({ children, onClick, ...props }: ModalCloseButtonProps) {
+function ModalCloseButton({ children, ...props }: ModalCloseButtonProps) {
   const { onClose } = useModalContext();
 
   return (
-    <button onClick={onClick ?? onClose} {...props}>
+    <button onClick={onClose} {...props}>
       {children}
     </button>
   );
