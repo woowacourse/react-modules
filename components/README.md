@@ -64,7 +64,7 @@ const { isOpen, handleOpen, handleClose } = useModal();
 | onClose                  | () => void                           | ✅                | 모달 닫기 함수                     |
 | children                 | ReactNode                            | ✅                | 모달 컨텐츠                        |
 | position                 | `'center'` \| `'bottom'`             | ✅                | 모달 위치                          |
-| size                     | `'small'` \| `'medium'` \| `'large'` | ✅                | 모달 제목                          |
+| size                     | `'small'` \| `'medium'` \| `'large'` | ✅                | 모달 크기                          |
 | onAfterOpen              | () => void                           | ❌                | 모달 열린 후 실행될 콜백           |
 | onConfirm                | () => void                           | ❌                | 모달 확인 버튼 클릭 시 실행될 콜백 |
 | showCloseButton          | boolean                              | ❌ (기본값: true) | 닫기 버튼 표시 여부                |
