@@ -1,5 +1,6 @@
 import "./App.css";
 import { useCardNumber, useCvcNumber, useExpirationDate, usePassword } from "./lib";
+import parseCardNumber from "./lib/utils/ParseCardNumber";
 
 function App() {
   const cardNumber = useCardNumber(" - ");
@@ -14,8 +15,25 @@ function App() {
     비밀번호: password,
   };
 
+  const chunks = parseCardNumber(cardNumber.value, [4, 4, 4, 4]);
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>, index: number) => {
+    const newValue = e.target.value;
+
+    const chunks = parseCardNumber(cardNumber.value, [4, 4, 4, 4]);
+    chunks[index] = newValue;
+
+    const merged = chunks.join("");
+    cardNumber.onChange(merged);
+  };
+
   return (
     <main>
+      <input value={chunks[0]} onChange={(e) => handleChange(e, 0)} />
+      <input value={chunks[1]} onChange={(e) => handleChange(e, 1)} />
+      <input value={chunks[2]} onChange={(e) => handleChange(e, 2)} />
+      <input value={chunks[3]} onChange={(e) => handleChange(e, 3)} />
+
       <h2 className="cardType">카드 타입: {cardNumber.cardType}</h2>
       {Object.entries(cardInformation).map(([label, field]) => (
         <div key={label} className="form-group">
