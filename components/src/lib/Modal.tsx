@@ -26,23 +26,25 @@ import ModalContext, { useModalContext } from "./contexts/ModalContext";
 import React, { ComponentProps, HTMLAttributes } from "react";
 import FocusTrap from "./FocusTrap";
 
-const Modal = ({ show, onHide, children, ...props }: ModalProps) => {
-  useKeyEscClose(onHide);
+const Modal = ({ show, onHide, escClose = true, focusTrap = true, children, ...props }: ModalProps) => {
+  if (escClose) useKeyEscClose(onHide);
+
+  const content = (
+    <div
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="modal-title"
+      css={ModalWrapperStyle(show)}
+      onClick={onHide}
+      {...props}
+    >
+      {children}
+    </div>
+  );
 
   return (
     <ModalContext.Provider value={{ onHide }}>
-      <FocusTrap>
-        <div
-          role="dialog"
-          aria-modal="true"
-          aria-labelledby="modal-title"
-          css={ModalWrapperStyle(show)}
-          onClick={onHide}
-          {...props}
-        >
-          {children}
-        </div>
-      </FocusTrap>
+      {focusTrap ? <FocusTrap>{content}</FocusTrap> : content}
     </ModalContext.Provider>
   );
 };

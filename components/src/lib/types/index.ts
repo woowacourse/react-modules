@@ -10,6 +10,10 @@ export interface ModalProps extends BaseProps {
   show: boolean;
   /** 모달을 닫는 함수 (배경 클릭이나 X 버튼 클릭 시 호출) */
   onHide: () => void;
+  /** 모달을 ESC 키로 닫을지 말지 구분 */
+  escClose?: boolean;
+  /** 모달 내부에 포커스 트랩을 적용시킬지 여부 */
+  focusTrap?: boolean;
 }
 
 export type ModalContainerProps = Omit<BaseProps, "children"> & {
