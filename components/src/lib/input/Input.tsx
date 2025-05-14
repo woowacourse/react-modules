@@ -1,17 +1,12 @@
 import styled from '@emotion/styled';
-import { useState } from 'react';
 
-function Input() {
-  const [prompt, setPrompt] = useState('');
+type InputProps = {
+  inputValue: string;
+  onInputChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+} & Omit<React.InputHTMLAttributes<HTMLInputElement>, 'value' | 'onChange'>;
 
-  const onInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const {
-      target: { value },
-    } = event;
-    setPrompt(value);
-  };
-
-  return <StyledInput type="text" onChange={onInputChange} value={prompt} />;
+function Input({ inputValue, onInputChange, ...rest }: InputProps) {
+  return <StyledInput value={inputValue} onChange={onInputChange} {...rest} />;
 }
 
 const StyledInput = styled.input`

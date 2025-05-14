@@ -8,6 +8,8 @@ interface PromptModalProps {
   handlePrimaryButtonClick: (
     event: React.MouseEvent<HTMLButtonElement>
   ) => void;
+  inputValue: string;
+  onInputChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   children?: React.ReactNode;
 }
 
@@ -16,13 +18,15 @@ function PromptModal({
   open,
   onClose,
   handlePrimaryButtonClick,
+  inputValue,
+  onInputChange,
   children,
 }: PromptModalProps) {
   return (
     <Modal.Container onClose={onClose} open={open}>
       <Modal.Title>{title}</Modal.Title>
       {children}
-      <Modal.Input />
+      <Modal.Input inputValue={inputValue} onInputChange={onInputChange} />
       <ButtonRowWrapper>
         <Modal.SecondaryButton label="취소" onClick={onClose} />
         <Modal.PrimaryButton label="확인" onClick={handlePrimaryButtonClick} />
