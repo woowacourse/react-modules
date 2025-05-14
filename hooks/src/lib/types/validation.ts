@@ -1,4 +1,4 @@
 export interface ValidationType {
   isError: boolean;
-  errorMessage: string | null;
+  errorMessage: null | string;
 }

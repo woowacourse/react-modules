@@ -12,7 +12,7 @@ npm i @muffin2219/components
 
 모달 컴포넌트의 사용 방법과 예제를 확인하려면 Storybook 문서를 참조하세요.
 
-[📖 Storybook으로 확인하기](https://681300d422622e22ef68e834-bjxrcyyjur.chromatic.com/?path=/docs/components-modal--docs)
+[📖 Storybook으로 확인하기](https://681300d422622e22ef68e834-hsuvjurbpk.chromatic.com/?path=/docs/components-modal--docs)
 
 Storybook에서는 다음과 같은 정보를 확인할 수 있습니다.
 
@@ -22,15 +22,20 @@ Storybook에서는 다음과 같은 정보를 확인할 수 있습니다.
 
 ## 🔧 Modal Component Props
 
-| Name            | Datatype                                          | Default  | Description                       |
-| --------------- | ------------------------------------------------- | -------- | --------------------------------- |
-| position        | 'center' \| 'bottom'                              | 'center' | 모달의 위치를 지정합니다          |
-| title           | { text?: string; color?: string; size?: number; } | -        | 모달의 제목과 스타일을 설정합니다 |
-| showCloseButton | boolean                                           | true     | 닫기 버튼 표시 여부를 설정합니다  |
-| backgroundColor | string                                            | -        | 모달의 배경색을 설정합니다        |
-| children        | ReactNode                                         | -        | 모달 내부에 표시될 콘텐츠입니다   |
-| isOpen          | boolean                                           | -        | 모달의 열림 상태를 제어합니다     |
-| onClose         | () => void                                        | -        | 모달을 닫는 함수입니다            |
+| Name            | Datatype                                          | Default  | Description                                                |
+| --------------- | ------------------------------------------------- | -------- | ---------------------------------------------------------- |
+| position        | 'center' \| 'bottom'                              | 'center' | 모달의 위치를 지정합니다                                   |
+| size            | 'small' \| 'medium' \| 'large'                    | -        | 모달의 크기를 지정합니다                                   |
+| title           | { text?: string; color?: string; size?: number; } | -        | 모달의 제목과 스타일을 설정합니다                          |
+| showCloseButton | boolean                                           | true     | 닫기 버튼 표시 여부를 설정합니다                           |
+| backgroundColor | string                                            | -        | 모달의 배경색을 설정합니다                                 |
+| children        | ReactNode                                         | -        | 모달 내부에 표시될 콘텐츠입니다                            |
+| alert           | {message: string}                                 | -        | 모달 컨텐츠를 주어진 메시지와 함께 Alert 형태로 띄웁니다   |
+| confirm         | {message: string}                                 | -        | 모달 컨텐츠를 주어진 메시지와 함께 Confirm 형태로 띄웁니다 |
+| prompt          | boolean \| {message: string}                      | -        | 모달 컨텐츠를 주어진 메시지와 함께 Prompt 형태로 띄웁니다  |
+| isOpen          | boolean                                           | -        | 모달의 열림 상태를 제어합니다                              |
+| onClose         | () => void                                        | -        | 모달을 닫는 함수입니다                                     |
+| onConfirm       | (value?:string) => void                           | -        | 모달 내 확인 버튼에 등록하는 함수입니다                    |
 
 ## 📌 How to use
 
@@ -100,6 +105,106 @@ function App() {
           <button onClick={closeModal}>확인</button>
         </div>
       </Modal>
+    </>
+  );
+}
+
+export default App;
+```
+
+## Alert Modal
+
+```tsx
+import {Modal} from '@muffin2219/components';
+import {useState} from 'react';
+import './App.css';
+
+function App() {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const closeModal = () => setIsOpen(false);
+  const openModal = () => setIsOpen(true);
+
+  return (
+    <>
+      <button type="button" onClick={openModal}>
+        모달 열기
+      </button>
+      <Modal
+        isOpen={isOpen}
+        onClose={closeModal}
+        title={{
+          text: 'Alert Modal',
+        }}
+        alert={{message: 'Alert 모달 입니다'}}
+      />
+    </>
+  );
+}
+
+export default App;
+```
+
+## Confirm Modal
+
+```tsx
+import {Modal} from '@muffin2219/components';
+import {useState} from 'react';
+import './App.css';
+
+function App() {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const closeModal = () => setIsOpen(false);
+  const openModal = () => setIsOpen(true);
+
+  return (
+    <>
+      <button type="button" onClick={openModal}>
+        모달 열기
+      </button>
+      <Modal
+        isOpen={isOpen}
+        onClose={closeModal}
+        title={{
+          text: 'Confirm Modal',
+        }}
+        confirm={{message: 'Confirm 모달 입니다'}}
+      />
+    </>
+  );
+}
+
+export default App;
+```
+
+## Prompt Modal
+
+```tsx
+import {Modal} from '@muffin2219/components';
+import {useState} from 'react';
+import './App.css';
+
+function App() {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const closeModal = () => setIsOpen(false);
+  const openModal = () => setIsOpen(true);
+
+  return (
+    <>
+      <button type="button" onClick={openModal}>
+        모달 열기
+      </button>
+      <Modal
+        isOpen={isOpen}
+        onClose={closeModal}
+        title={{
+          text: 'Prompt Modal',
+        }}
+        prompt
+        size="large"
+      />
     </>
   );
 }

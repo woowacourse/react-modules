@@ -1,13 +1,17 @@
-import { MouseEvent, ReactNode, useEffect } from "react";
+import {MouseEvent, ReactNode} from 'react';
 import {
   Backdrop,
   CloseButton,
-  ModalBox,
+  ModalContainer,
   Title,
   TopWrapper,
-} from "./Modal.styles";
-import { IoClose } from "react-icons/io5";
-import { createPortal } from "react-dom";
+} from './Modal.styles';
+import {IoClose} from 'react-icons/io5';
+import {createPortal} from 'react-dom';
+import Alert from './content/Alert';
+import Confirm from './content/Confirm';
+import Prompt from './content/Prompt';
+import useFocusTrap from './useFocusTrap';
 
 interface TitleProps {
   text?: string;
@@ -15,64 +19,125 @@ interface TitleProps {
   size?: number;
 }
 
+type ModalType = 'alert' | 'confirm' | 'prompt';
+
 export interface ModalProps {
-  position?: "center" | "bottom";
+  position?: 'center' | 'bottom';
+  size?: 'small' | 'medium' | 'large';
   title?: TitleProps;
   showCloseButton?: boolean;
   backgroundColor?: string;
-  children: ReactNode;
+  children?: ReactNode;
+  type?: ModalType;
+  message?: string;
   isOpen: boolean;
   onClose: () => void;
+  onConfirm?: (value?: string) => void;
 }
 
+type ModalHeaderProps = Pick<
+  ModalProps,
+  'title' | 'showCloseButton' | 'onClose' | 'backgroundColor'
+>;
+
+type ModalContentProps = Pick<
+  ModalProps,
+  'children' | 'type' | 'message' | 'onConfirm' | 'onClose'
+>;
+
+const ModalHeader = ({
+  title,
+  showCloseButton,
+  onClose,
+  backgroundColor,
+}: ModalHeaderProps) => {
+  return (
+    <TopWrapper $titleText={title?.text}>
+      {title && (
+        <Title $color={title.color} $size={title.size}>
+          {title.text}
+        </Title>
+      )}
+      {showCloseButton && (
+        <CloseButton type="button" onClick={onClose}>
+          <IoClose
+            color={backgroundColor === '#000' ? '#fff' : '#000'}
+            size={30}
+          />
+        </CloseButton>
+      )}
+    </TopWrapper>
+  );
+};
+
+const ModalContent = ({
+  children,
+  type,
+  message,
+  onConfirm,
+  onClose,
+}: ModalContentProps) => {
+  return (
+    <>
+      {children}
+      {type === 'alert' && <Alert message={message} onConfirm={onConfirm} />}
+      {type === 'confirm' && (
+        <Confirm message={message} onConfirm={onConfirm} onClose={onClose} />
+      )}
+      {type === 'prompt' && (
+        <Prompt message={message} onConfirm={onConfirm} onClose={onClose} />
+      )}
+    </>
+  );
+};
+
 const Modal = ({
-  position = "center",
+  position = 'center',
+  size,
   title,
   showCloseButton = true,
   backgroundColor,
   children,
+  type,
+  message,
   isOpen,
   onClose,
+  onConfirm,
 }: ModalProps) => {
+  const trapRef = useFocusTrap(onClose);
+
   const stopPropagation = (e: MouseEvent<HTMLDivElement>) => {
     e.stopPropagation();
   };
 
-  useEffect(() => {
-    const handleEscape = (e: KeyboardEvent) => {
-      if (e.key === "Escape") onClose();
-    };
-
-    document.addEventListener("keydown", handleEscape);
-    return () => document.removeEventListener("keydown", handleEscape);
-  }, [onClose]);
-
-  return createPortal(
-    <Backdrop $isOpen={isOpen} $position={position} onClick={onClose}>
-      <ModalBox
-        $backgroundColor={backgroundColor}
-        $position={position}
-        onClick={stopPropagation}
-      >
-        <TopWrapper $titleText={title?.text}>
-          {title && (
-            <Title $color={title.color} $size={title.size}>
-              {title.text}
-            </Title>
-          )}
-          {showCloseButton && (
-            <CloseButton type="button" onClick={onClose}>
-              <IoClose
-                color={backgroundColor === "#000" ? "#fff" : "#000"}
-                size={30}
-              />
-            </CloseButton>
-          )}
-        </TopWrapper>
-        {children}
-      </ModalBox>
-    </Backdrop>,
-    document.body
+  return (
+    isOpen &&
+    createPortal(
+      <Backdrop $position={position} onClick={onClose}>
+        <ModalContainer
+          ref={trapRef}
+          $backgroundColor={backgroundColor}
+          $position={position}
+          $size={size}
+          onClick={stopPropagation}
+        >
+          <ModalHeader
+            title={title}
+            showCloseButton={showCloseButton}
+            onClose={onClose}
+            backgroundColor={backgroundColor}
+          />
+          <ModalContent
+            children={children}
+            type={type}
+            message={message}
+            onConfirm={onConfirm}
+            onClose={onClose}
+          />
+        </ModalContainer>
+      </Backdrop>,
+      document.body
+    )
   );
 };
 
