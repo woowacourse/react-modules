@@ -1,4 +1,4 @@
-import { AlertModal, ConfirmModal, Modal, PromptModal } from '@seo_dev/react-modal';
+import { AlertModal, ConfirmModal, Modal, PromptModal } from './lib';
 import { useState } from 'react';
 
 function App() {
