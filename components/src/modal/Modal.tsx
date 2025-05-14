@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { CSSProperties, PropsWithChildren, useMemo } from 'react';
+import { CSSProperties, PropsWithChildren, useMemo, useRef } from 'react';
 import Button from './Button';
 import CloseButton from './CloseButton';
 import { useBodyScrollLock } from './hooks/useBodyScrollLock';
@@ -46,12 +46,12 @@ function ModalContainer({
     if (!style) return {};
     return { ...style };
   }, [style]);
+  let modalRef = useRef<HTMLDivElement>(null);
 
   const isClickOutsideEnabled = role !== 'alert-modal';
-  const modalRef = useClickOutside<HTMLDivElement>(
-    onClose,
-    isClickOutsideEnabled
-  );
+  if (isClickOutsideEnabled) {
+    modalRef = useClickOutside<HTMLDivElement>(onClose);
+  }
 
   useBodyScrollLock(open);
   useModalAccessibility(open, onClose, modalRef);

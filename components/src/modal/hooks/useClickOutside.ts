@@ -10,14 +10,11 @@ import { useEffect, useRef } from 'react';
  * @returns 대상 요소에 연결할 ref 객체를 반환합니다.
  */
 function useClickOutside<T extends HTMLElement = HTMLElement>(
-  callback: (event: Event) => void,
-  enabled: boolean = true
+  callback: (event: Event) => void
 ) {
   const ref = useRef<T>(null);
 
   useEffect(() => {
-    if (!enabled) return;
-
     const listener = (event: Event) => {
       if (!ref.current || ref.current.contains(event.target as Node)) {
         return;
@@ -29,7 +26,7 @@ function useClickOutside<T extends HTMLElement = HTMLElement>(
     return () => {
       document.removeEventListener('click', listener, true);
     };
-  }, [enabled, callback]);
+  }, [callback]);
 
   return ref;
 }
