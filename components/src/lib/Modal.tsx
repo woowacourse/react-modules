@@ -204,19 +204,6 @@ const PromptContainer = ({ title, value, onChange, onClick, ...props }: ModalPro
   );
 };
 
-BackDrop.displayName = "Modal.Backdrop";
-Container.displayName = "Modal.Container";
-Header.displayName = "Modal.Header";
-Body.displayName = "Modal.Body";
-Footer.displayName = "Modal.Footer";
-Title.displayName = "Modal.Title";
-Button.displayName = "Modal.Button";
-Input.displayName = "Modal.Input";
-Trigger.displayName = "Modal.Trigger";
-AlertContainer.displayName = "Modal.AlertContainer";
-ConfirmContainer.displayName = "Modal.ConfirmContainer";
-PromptContainer.displayName = "Modal.PromptContainer";
-
 Modal.BackDrop = BackDrop;
 Modal.Container = Container;
 Modal.Header = Header;
