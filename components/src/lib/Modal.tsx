@@ -47,11 +47,11 @@ const Modal = ({ show, onHide, children, ...props }: ModalProps) => {
   );
 };
 
-Modal.BackDrop = (props: Omit<BaseProps, "children">) => {
+const BackDrop = (props: Omit<BaseProps, "children">) => {
   return <div css={backGroundStyle} {...props}></div>;
 };
 
-Modal.Container = ({ size = "default", position = "center", gap = 16, children, ...props }: ModalContainerProps) => {
+const Container = ({ size = "default", position = "center", gap = 16, children, ...props }: ModalContainerProps) => {
   return (
     <div
       css={ModalContainerStyle(size, position, gap)}
@@ -63,7 +63,7 @@ Modal.Container = ({ size = "default", position = "center", gap = 16, children, 
   );
 };
 
-Modal.Header = ({ closeButton = false, children, ...props }: ModalHeaderProps) => {
+const Header = ({ closeButton = false, children, ...props }: ModalHeaderProps) => {
   const { onHide } = useModalContext();
   return (
     <header css={ModalHeaderStyle} {...props}>
@@ -73,7 +73,7 @@ Modal.Header = ({ closeButton = false, children, ...props }: ModalHeaderProps) =
   );
 };
 
-Modal.Body = ({ children, ...props }: BaseProps) => {
+const Body = ({ children, ...props }: BaseProps) => {
   return (
     <div css={ModalBodyStyle} {...props}>
       {children}
@@ -81,7 +81,7 @@ Modal.Body = ({ children, ...props }: BaseProps) => {
   );
 };
 
-Modal.Footer = ({ children, ...props }: BaseProps) => {
+const Footer = ({ children, ...props }: BaseProps) => {
   return (
     <footer css={ModalFooterStyle} {...props}>
       {children}
@@ -89,7 +89,7 @@ Modal.Footer = ({ children, ...props }: BaseProps) => {
   );
 };
 
-Modal.Title = ({ children, ...props }: BaseProps) => {
+const Title = ({ children, ...props }: BaseProps) => {
   return (
     <span id="modal-title" css={ModalTitleStyle} {...props}>
       {children}
@@ -97,7 +97,7 @@ Modal.Title = ({ children, ...props }: BaseProps) => {
   );
 };
 
-Modal.Button = ({
+const Button = ({
   onClick,
   fontSize = 16,
   color = "#fff",
@@ -115,11 +115,11 @@ Modal.Button = ({
   );
 };
 
-Modal.Input = (props: ComponentProps<"input">) => {
+const Input = (props: ComponentProps<"input">) => {
   return <input css={ModalInputStyle} {...props} />;
 };
 
-Modal.Trigger = ({ children }: BaseProps) => {
+const Trigger = ({ children }: BaseProps) => {
   const { onHide } = useModalContext();
 
   return React.Children.map(children, (child) => {
@@ -138,7 +138,7 @@ Modal.Trigger = ({ children }: BaseProps) => {
 
 /** 커스텀 모달 Container */
 /**확인(Alert) 모달 */
-Modal.AlertContainer = ({ title, description, ...props }: ModalAlertContainerProps) => {
+const AlertContainer = ({ title, description, ...props }: ModalAlertContainerProps) => {
   return (
     <Modal.Container {...props}>
       {title && (
@@ -157,7 +157,7 @@ Modal.AlertContainer = ({ title, description, ...props }: ModalAlertContainerPro
 };
 
 /**확인/취소(Confirm) 모달 */
-Modal.ConfirmContainer = ({ title, description, onClick, ...props }: ModalConfirmContainerProps) => {
+const ConfirmContainer = ({ title, description, onClick, ...props }: ModalConfirmContainerProps) => {
   return (
     <Modal.Container {...props}>
       {title && (
@@ -179,7 +179,7 @@ Modal.ConfirmContainer = ({ title, description, onClick, ...props }: ModalConfir
 };
 
 /**입력(Prompt) 모달 */
-Modal.PromptContainer = ({ title, value, onChange, onClick, ...props }: ModalPromptContainerProps) => {
+const PromptContainer = ({ title, value, onChange, onClick, ...props }: ModalPromptContainerProps) => {
   return (
     <Modal.Container {...props}>
       {title && (
@@ -201,5 +201,31 @@ Modal.PromptContainer = ({ title, value, onChange, onClick, ...props }: ModalPro
     </Modal.Container>
   );
 };
+
+BackDrop.displayName = "Modal.Backdrop";
+Container.displayName = "Modal.Container";
+Header.displayName = "Modal.Header";
+Body.displayName = "Modal.Body";
+Footer.displayName = "Modal.Footer";
+Title.displayName = "Modal.Title";
+Button.displayName = "Modal.Button";
+Input.displayName = "Modal.Input";
+Trigger.displayName = "Modal.Trigger";
+AlertContainer.displayName = "Modal.AlertContainer";
+ConfirmContainer.displayName = "Modal.ConfirmContainer";
+PromptContainer.displayName = "Modal.PromptContainer";
+
+Modal.BackDrop = BackDrop;
+Modal.Container = Container;
+Modal.Header = Header;
+Modal.Body = Body;
+Modal.Footer = Footer;
+Modal.Title = Title;
+Modal.Button = Button;
+Modal.Input = Input;
+Modal.Trigger = Trigger;
+Modal.AlertContainer = AlertContainer;
+Modal.ConfirmContainer = ConfirmContainer;
+Modal.PromptContainer = PromptContainer;
 
 export default Modal;
