@@ -2,8 +2,8 @@ import { CardNumberFieldType } from '../config';
 
 export function createInitialCardNumbers<T extends string>(
   fields: CardNumberFieldType<T>[]
-): Record<T, string> {
-  return fields.reduce(
+) {
+  return fields.reduce<Record<T, string>>(
     (acc, field) => {
       acc[field.name] = '';
       return acc;

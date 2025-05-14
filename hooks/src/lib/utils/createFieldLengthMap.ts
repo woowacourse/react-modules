@@ -2,8 +2,8 @@ import { CardNumberFieldType } from '../config';
 
 export function createFieldLengthMap<T extends string>(
   fields: CardNumberFieldType<T>[]
-): Record<T, number> {
-  return fields.reduce(
+) {
+  return fields.reduce<Record<T, number>>(
     (acc, field) => {
       acc[field.name] = field.length;
       return acc;
