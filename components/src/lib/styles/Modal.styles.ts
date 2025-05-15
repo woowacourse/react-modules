@@ -26,7 +26,7 @@ export const backGroundStyle = (background: boolean) => css`
   visibility: ${background ? "visible" : "hidden"};
 `;
 
-export const ModalContainerStyle = (position: string, gap: number, size: "small" | "medium" | "large" = "medium") => {
+export const ModalContainerStyle = (position: string, size: "small" | "medium" | "large" = "medium") => {
   const positionStyle = getPositionStyle(position);
   const maxWidth = SIZE_MAP[size];
 
@@ -40,7 +40,7 @@ export const ModalContainerStyle = (position: string, gap: number, size: "small"
     padding: 24px 32px;
     min-width: 320px;
     ${position === "center" && `max-width: ${maxWidth}px;`}
-    gap: ${gap}px;
+    gap: 16px;
     ${positionStyle}
   `;
 };
