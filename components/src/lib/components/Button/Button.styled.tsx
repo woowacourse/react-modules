@@ -48,7 +48,7 @@ const variantStyles = {
     background-color: transparent;
 
     &:hover {
-      background-color: ${color}1A;
+      background-color: ${color.startsWith('#') ? `${color}1A` : `rgba(0, 0, 0, 0.1)`};
       opacity: 0.8;
     }
   `,
