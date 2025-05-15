@@ -17,6 +17,20 @@ type ModalStoryArgs = ModalProps & {
 const meta: Meta<ModalStoryArgs> = {
   title: "Components/Modal",
   component: Modal,
+  argTypes: {
+    size: {
+      control: { type: "radio" },
+      options: ["small", "medium", "large"],
+      description: "모달의 크기 설정",
+      defaultValue: "medium",
+    },
+    position: {
+      control: { type: "radio" },
+      options: ["center", "bottom"],
+      description: "모달의 위치 설정",
+      defaultValue: "center",
+    },
+  },
 };
 export default meta;
 

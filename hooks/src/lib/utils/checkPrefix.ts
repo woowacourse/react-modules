@@ -15,7 +15,6 @@ export const hasAMEXPrefix = (cardInput: string) => {
 };
 
 export const hasUnionPayPrefix = (cardInput: string) => {
-  console.log(cardInput);
   const threePrefix = Number(cardInput.slice(0, 3));
   const fourPrefix = Number(cardInput.slice(0, 4));
   const sixPrefix = Number(cardInput.slice(0, 6));
