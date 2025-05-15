@@ -20,7 +20,13 @@ const ConfirmModal = ({
   size,
 }: PropsWithChildren<ModalInterface>) => {
   return (
-    <Modal isOpen={isOpen} size={size} onClose={onClose} title={title}>
+    <Modal
+      isOpen={isOpen}
+      size={size}
+      onClose={onClose}
+      title={title}
+      closeOnBackdropClick={false}
+    >
       {children}
       <ModalBottom>
         <Button variant="confirm" size={size} onClick={onConfirm} />

@@ -74,6 +74,7 @@ interface ModalInterface {
   size: "small" | "medium" | "large";
   title?: string;
   closeButton?: boolean;
+  closeOnBackdropClick?: boolean;
 }
 
 export default function Modal({
@@ -81,9 +82,10 @@ export default function Modal({
   onClose,
   children,
   isOpen,
-  size,
+  size = "medium",
   title,
   closeButton,
+  closeOnBackdropClick = true,
 }: PropsWithChildren<ModalInterface>) {
   if (!isOpen) return;
 
@@ -101,7 +103,7 @@ export default function Modal({
         </ModalTop>
         {children}
       </ModalContainer>
-      <ModalBackdrop onClick={onClose} />
+      <ModalBackdrop onClick={closeOnBackdropClick ? onClose : () => {}} />
     </>
   );
 }
