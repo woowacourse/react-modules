@@ -62,7 +62,10 @@ export type ModalProps = {
   children?: React.ReactNode;
 } & ComponentProps<'div'>;
 
-type ModalBaseProps = Pick<ModalProps, 'isOpen' | 'closeOnOutsideClick' | 'onClose' | 'children'>;
+type ModalBaseProps = Pick<
+  ModalProps,
+  'isOpen' | 'closeOnOutsideClick' | 'onClose' | 'children' | 'zIndex'
+>;
 
 export const BaseModal = ({
   isOpen,
