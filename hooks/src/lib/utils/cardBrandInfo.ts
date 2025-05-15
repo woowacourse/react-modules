@@ -1,5 +1,5 @@
 type CardInfo = {
-  brand: string;
+  brand: 'VISA' | 'MASTERCARD' | 'AMEX' | 'Diners' | 'UnionPay' | 'Unknown';
   maxLength: number;
   pattern: number[];
   test: (cardNumber: string) => boolean;
