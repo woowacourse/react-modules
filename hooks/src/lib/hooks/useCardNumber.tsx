@@ -92,6 +92,9 @@ const validate = (cardNumbersValue: string, addedRules: Rule[] = []) => {
     return {
       isError: false,
       message: '',
+      cardBrand: '',
+      formatted: '',
+      lengthArray: [],
     };
 
   const { lengthArray } = rule;
