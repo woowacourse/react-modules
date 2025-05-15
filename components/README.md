@@ -5,16 +5,22 @@ React 프로젝트에서 간편하게 모달 UI를 구성할 수 있는 모달 �
 
 ### 설치
 
-```TypeScript
+```Typescript
 npm install @hakukudh/modal-components
 # 또는
 yarn add @hakukudh/modal-components
 ```
 
-### 빠른 시작
+### 사용 방법
 
-```TypeScript
-import { Modal } from '@hakukudh/modal-components';
+기본 예시
+
+```Typescript
+import React, { useState } from 'react';
+import { ModalComponent as Modal } from '@hakukudh/modal-components';
+import Button from './Button';
+import Input from './Input';
+import ButtonContainer from './ButtonContainer';
 
 function App() {
   const [isOpen, setIsOpen] = useState(false);
@@ -25,68 +31,66 @@ function App() {
 
   return (
     <>
-      <button onClick={() => setIsOpen(true)}>열림!</button>
+      <button onClick={() => setIsOpen(true)}>모달 열기</button>
 
-      <Modal isOpen={isOpen} onClose={onClose}>
-        <Modal.ModalContainer isOpen={isOpen} position="top" width={400}>
-          <>
-            <Modal.ModalCloseButton onClose={onClose} />
-            <Modal.ModalTitle>제목</Modal.ModalTitle>
-            <Modal.ModalBody>내용1!</Modal.ModalBody>
-          </>
-        </Modal.ModalContainer>
+      <Modal isOpen={isOpen} position="top" width="large" onClose={onClose}>
+        <Modal.Overlay>
+          <Modal.Container>
+            <Modal.CloseButton />
+            <Modal.Title>모달 제목</Modal.Title>
+            <Modal.Body>
+              모달 내용입니다! <Input type="text" />
+              <ButtonContainer>
+                <Button position="left">취소</Button>
+                <Button position="right">확인</Button>
+              </ButtonContainer>
+            </Modal.Body>
+          </Modal.Container>
+        </Modal.Overlay>
       </Modal>
     </>
   );
 }
+
+export default App;
 ```
 
-### 구성 요소
+보다 자세한 사용방법은 storybook을 참고해주세요
+storybook : [storybook](https://6820cf52e1a6c61bea8a9829-sgrrdbvcve.chromatic.com/)
+
+### Props
 
 Modal
-최상위 모달 컴포넌트입니다. isOpen, position, width를 props로 받습니다.
+최상위 모달 컴포넌트입니다. isOpen, position, width, onClose, children 을 props로 받습니다.
 
-| 이름       | 타입                            | 필수 | 설명                                |
-| ---------- | ------------------------------- | ---- | ----------------------------------- |
-| `isOpen`   | `boolean`                       | ✅   | 모달의 열림 여부                    |
-| `position` | `'top' \| 'bottom' \| 'center'` | ✅   | 모달의 위치                         |
-| `width`    | `number`                        | ❌   | center 위치일 경우 모달의 너비 (px) |
-
-- Modal.ModalContainer
-  모달의 내부 구조를 감싸는 컨테이너입니다. 내부에 타이틀, 본문, 버튼 등을 배치할 수 있습니다.
-
-- Modal.ModalTitle
-  모달의 제목을 표시하는 컴포넌트입니다. 일반적으로 가장 상단에 배치합니다.
-
-- Modal.ModalBody
-  모달 본문에 들어갈 내용을 표시하는 영역입니다.
-
-- Modal.ModalCloseButton
-  모달을 닫기 위한 버튼입니다. onClick 이벤트 핸들러를 통해 닫기 기능을 구현합니다.
-
-```tsx
-<Modal.ModalCloseButton onClick={() => setIsOpen(false)} />
-```
+| 이름       | 타입                            | 설명                  |
+| ---------- | ------------------------------- | --------------------- |
+| `isOpen`   | `boolean`                       | 모달의 열림 여부      |
+| `position` | `'top' \| 'bottom' \| 'center'` | 모달의 위치           |
+| `width`    | `small`\| 'medium' \| 'large'`  | 모달의 너비 설정      |
+| `onClose`  | `() => void`                    | 모달을 닫는 콜백 함수 |
+| `children` | `React.ReactNode`               | 모달의 내부 컨텐츠    |
 
 ### 스타일 커스터마이징
 
 position에 따라 모달의 위치 및 border-radius가 자동 조정됩니다.
 
-center일 경우 width 값을 통해 너비를 설정할 수 있습니다.
-
 styled-components 기반이므로 ModalContainer 등 하위 컴포넌트를 확장하여 스타일 커스터마이징도 가능합니다.
 
-### 내부 구조
+### 컴포넌트
 
-```TypeScript
-export const Modal = Object.assign(ModalOverlay, {
-  ModalContainer,
-  ModalBody,
-  ModalCloseButton,
-  ModalTitle,
-});
-```
+Modal: 기본 모달 래퍼
+
+Modal.Overlay: 배경 오버레이
+
+Modal.Container: 모달 컨테이너
+
+Modal.Title: 제목 영역
+
+Modal.Body: 본문 영역
+
+Modal.CloseButton: 닫기 버튼
 
 ### 📝 라이선스
 
-@kimyou1102 @ha-kuku
+@ha-kuku

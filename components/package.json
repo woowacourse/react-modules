@@ -1,6 +1,6 @@
 {
   "name": "@hakukudh/modal-components",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "npm modal modules",
   "type": "module",
   "types": "dist/index.d.ts",
@@ -19,7 +19,6 @@
     "chromatic": "npx chromatic --project-token=CHROMATIC_PROJECT_TOKEN"
   },
   "dependencies": {
-    "@hakukudh/modal-components": "^0.0.2",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "styled-components": "^6.1.17"
