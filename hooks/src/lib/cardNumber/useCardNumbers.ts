@@ -101,7 +101,7 @@ function useCardNumbers() {
 
   const identifiedNetwork = (cardNumbers: string): NetworkType | '' => {
     const network =
-      identifyNetworkByList(cardNumbers) ?? identifyNetworkByRange(cardNumbers);
+      identifyNetworkByList(cardNumbers) || identifyNetworkByRange(cardNumbers);
 
     if (network && cardNumbers.length === CARD_NUMBERS_LENGTH[network]) {
       return network;
@@ -114,7 +114,7 @@ function useCardNumbers() {
 
   const cardNumberFormatter = (cardNumbers: string) => {
     const network =
-      identifyNetworkByList(cardNumbers) ?? identifyNetworkByRange(cardNumbers);
+      identifyNetworkByList(cardNumbers) || identifyNetworkByRange(cardNumbers);
 
     const formatNetwork =
       network !== '' && cardNumbers.length <= CARD_NUMBERS_LENGTH[network]
