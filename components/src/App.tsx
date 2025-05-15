@@ -1,39 +1,93 @@
 import styled from '@emotion/styled';
 import { useState } from 'react';
-import Modal from './modal/Modal';
+import { PresetModal } from './lib';
 
 function App() {
-  const [modalOpen, setModalOpen] = useState(false);
+  const [alertModalOpen, setAlertModalOpen] = useState(false);
+  const [confirmModalOpen, setConfirmModalOpen] = useState(false);
+  const [promptModalOpen, setPromptModalOpen] = useState(false);
 
-  const onClose = () => {
-    setModalOpen(false);
+  const onAlertClose = () => {
+    setAlertModalOpen(false);
+  };
+
+  const onConfirmClose = () => {
+    setConfirmModalOpen(false);
+  };
+
+  const onPromptClose = () => {
+    setPromptModalOpen(false);
   };
 
   return (
     <>
-      <h1>Component Modules</h1>
-      <button onClick={() => setModalOpen(true)}>열기</button>
-      <Modal.Container open={modalOpen} onClose={onClose}>
-        <Modal.Title style={{ color: 'red' }}>모달</Modal.Title>
-        <Modal.CloseButton onClose={onClose} />
+      <OpenModalButtonContainer>
+        <OpenModalButton onClick={() => setAlertModalOpen(true)}>
+          Alert 모달 열기
+        </OpenModalButton>
+        <OpenModalButton onClick={() => setConfirmModalOpen(true)}>
+          Confirm 모달 열기
+        </OpenModalButton>
+        <OpenModalButton onClick={() => setPromptModalOpen(true)}>
+          Prompt 모달 열기
+        </OpenModalButton>
+      </OpenModalButtonContainer>
 
-        <div>컨텐츠</div>
+      <PresetModal.Alert
+        title="아이디를 입력해 주세요."
+        onClose={onAlertClose}
+        open={alertModalOpen}
+        handlePrimaryButtonClick={() => alert('확인 클릭')}
+      >
+        <div>아이디는 필수로 입력해야 합니다.</div>
+      </PresetModal.Alert>
 
-        <ButtonWrapper>
-          <Modal.PrimaryButton
-            label="동의하고 저장하기"
-            onClick={() => alert('클릭됨')}
-          />
-          <Modal.SecondaryButton label="닫기" onClick={onClose} />
-        </ButtonWrapper>
-      </Modal.Container>
+      <PresetModal.Confirm
+        title="카드를 삭제하시겠습니까?"
+        onClose={onConfirmClose}
+        open={confirmModalOpen}
+        handlePrimaryButtonClick={() => alert('확인 클릭')}
+      >
+        <div>삭제하면 복구하실 수 없습니다.</div>
+      </PresetModal.Confirm>
+
+      <PresetModal.Prompt
+        title="쿠폰 번호를 입력해 주세요."
+        onClose={onPromptClose}
+        open={promptModalOpen}
+        handlePrimaryButtonClick={() => alert('확인 클릭')}
+      />
     </>
   );
 }
 
-const ButtonWrapper = styled.div`
+const OpenModalButtonContainer = styled.div`
+  width: 160px;
   display: flex;
   flex-direction: column;
+  gap: 10px;
+`;
+
+const OpenModalButton = styled.button`
+  font-weight: 700;
+  font-size: 18px;
+  width: 100%;
+  height: 44px;
+  background-color: #333333;
+  color: white;
+  border-radius: 4px;
+`;
+
+const AlertButtonWrapper = styled.div`
+  width: 80px;
+  margin-left: auto;
+`;
+
+const ButtonRowWrapper = styled.div`
+  width: 160px;
+  margin-left: auto;
+
+  display: flex;
   gap: 12px;
 `;
 

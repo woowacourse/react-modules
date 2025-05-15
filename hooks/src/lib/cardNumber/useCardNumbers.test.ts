@@ -1,11 +1,12 @@
 import { renderHook, act } from '@testing-library/react';
 import useCardNumbers from './useCardNumbers';
-import { ChangeEvent } from 'react';
+import { ChangeEvent, FocusEvent } from 'react';
 import {
   CARD_NUMBER_ERROR_TYPES,
-  CardNumbersKey,
+  CARD_NUMBERS_LENGTH,
+  DEFAULT_LENGTH,
   ValidateCardNumbersResult,
-} from '../constants';
+} from './constants';
 import { ValidationResult } from '../types';
 
 interface RenderHookResult {
@@ -13,13 +14,17 @@ interface RenderHookResult {
 }
 
 interface RenderHookCurrent {
-  cardNumbers: Record<CardNumbersKey, string>;
-  validationResults: Record<CardNumbersKey, ValidationResult>;
-  validateCardNumbers: (value: string) => ValidateCardNumbersResult;
+  cardNumbers: string;
+  validationResults: ValidationResult;
+  validateCardNumbersChange: (value: string) => ValidateCardNumbersResult;
+  validateCardNumbersBlur: (value: string) => ValidateCardNumbersResult;
   handleCardNumbersChange: (
     event: ChangeEvent<HTMLInputElement>,
-    restrictChange?: boolean
+    preventInvalidTypo?: boolean
   ) => void;
+  handleCardNumbersBlur: (event: FocusEvent<HTMLInputElement>) => void;
+  network: string;
+  cardNumberFormatter: (cardNumbers: string) => string;
 }
 
 describe('useCardNumbers', () => {
@@ -32,24 +37,104 @@ describe('useCardNumbers', () => {
   it('이벤트 핸들러가 감지한 입력값이 hook 내부의 cardNumbers 상태(state)로 변경된다.', () => {
     act(() => {
       result.current.handleCardNumbersChange({
-        target: { name: 'part1', value: '1234' },
+        target: { value: '1234567890123456' },
       } as ChangeEvent<HTMLInputElement>);
     });
 
-    expect(result.current.cardNumbers.part1).toBe('1234');
+    expect(result.current.cardNumbers).toBe('1234567890123456');
   });
 
   it('입력값이 숫자가 아닐 때 isValid로 false를 반환하고 notNumber 에러 타입을 반환한다.', () => {
-    expect(result.current.validateCardNumbers('aaaa')).toEqual({
+    expect(result.current.validateCardNumbersChange('aaaa')).toEqual({
       isValid: false,
       errorType: CARD_NUMBER_ERROR_TYPES.notNumber,
     });
   });
 
-  it('입력값이 네 자리가 아닐 때 isValid로 false를 반환하고 invalidLength 에러 타입을 반환한다.', () => {
-    expect(result.current.validateCardNumbers('12345')).toEqual({
+  it(`카드 브랜드가 없는 입력값이 유효한 길이인 ${DEFAULT_LENGTH}이(가) 아닐 때 isValid로 false를 반환하고 invalidLength 에러 타입을 반환한다.`, () => {
+    expect(
+      result.current.validateCardNumbersChange('12345678901234567')
+    ).toEqual({
       isValid: false,
       errorType: CARD_NUMBER_ERROR_TYPES.invalidLength,
     });
   });
+
+  it(`카드 브랜드가 없는 입력값이 유효한 길이인 ${DEFAULT_LENGTH}일 때 isValid로 true를 반환한다.`, () => {
+    expect(
+      result.current.validateCardNumbersChange('1234567890123456')
+    ).toEqual({
+      isValid: true,
+    });
+  });
+
+  test.each([
+    {
+      network: 'visa',
+      cardNumbers: '4234567890123456',
+      length: CARD_NUMBERS_LENGTH['visa'],
+    },
+    {
+      network: 'master',
+      cardNumbers: '5134567890123456',
+      length: CARD_NUMBERS_LENGTH['master'],
+    },
+    {
+      network: 'diners',
+      cardNumbers: '36123456789012',
+      length: CARD_NUMBERS_LENGTH['diners'],
+    },
+    {
+      network: 'amex',
+      cardNumbers: '343456789012345',
+      length: CARD_NUMBERS_LENGTH['amex'],
+    },
+    {
+      network: 'union',
+      cardNumbers: '6244567890123145',
+      length: CARD_NUMBERS_LENGTH['union'],
+    },
+  ])(
+    `카드 브랜드가 $network인 입력값이 유효한 길이 $length일 때, isValid로 true를 반환한다.`,
+    ({ cardNumbers }) => {
+      expect(result.current.validateCardNumbersChange(cardNumbers)).toEqual({
+        isValid: true,
+      });
+    }
+  );
+
+  test.each([
+    {
+      network: 'visa',
+      cardNumbers: '4234567890123456',
+      formattedNumbers: '4234-5678-9012-3456',
+    },
+    {
+      network: 'master',
+      cardNumbers: '5134567890123456',
+      formattedNumbers: '5134-5678-9012-3456',
+    },
+    {
+      network: 'diners',
+      cardNumbers: '36123456789012',
+      formattedNumbers: '3612-345678-9012',
+    },
+    {
+      network: 'amex',
+      cardNumbers: '343456789012345',
+      formattedNumbers: '3434-567890-12345',
+    },
+    {
+      network: 'union',
+      cardNumbers: '6244567890123145',
+      formattedNumbers: '6244-5678-9012-3145',
+    },
+  ])(
+    `카드 브랜드가 $network인 입력값이 $cardNumbers일 때, $formattedNumbers로 포맷팅한다.`,
+    ({ cardNumbers, formattedNumbers }) => {
+      expect(result.current.cardNumberFormatter(cardNumbers)).toEqual(
+        formattedNumbers
+      );
+    }
+  );
 });

@@ -8,7 +8,7 @@ React 프로젝트에서 결제 폼을 만들 때 사용할 수 있는 커스텀
 - 카드 정보 입력 필드의 상태 & 유효성 검증 관리
 - 컴포넌트와 분리된 로직 구조로 재사용성과 테스트 용이성 향상
 - 타입 안전한 TypeScript 기반
-- `validateCardNumbers`, `restrictChange` 등 유연한 API
+- `validateCardNumbers`, `preventInvalidTypo` 등 유연한 API
 
 ---
 
@@ -55,13 +55,13 @@ function CardInputForm() {
 
 > 반환값
 
-| 이름                      | 타입                                                                       | 설명                       |
-| ------------------------- | -------------------------------------------------------------------------- | -------------------------- |
-| `cardNumbers`             | `Record<'part1' \| 'part2' \| 'part3' \| 'part4', string>`                 | 각 4자리 카드 번호 상태    |
-| `validationResults`       | `Record<CardNumbersKey, { isValid: boolean; errorMessage: string }>`       | 각 필드의 유효성 결과      |
-| `handleCardNumbersChange` | `(event: ChangeEvent<HTMLInputElement>, restrictChange?: boolean) => void` | 입력 및 유효성 검증 핸들러 |
-| `validateCardNumbers`     | `(value: string) => string \| null`                                        | 숫자 여부, 길이 검증 수행  |
+| 이름                      | 타입                                                                           | 설명                       |
+| ------------------------- | ------------------------------------------------------------------------------ | -------------------------- |
+| `cardNumbers`             | `Record<'part1' \| 'part2' \| 'part3' \| 'part4', string>`                     | 각 4자리 카드 번호 상태    |
+| `validationResults`       | `Record<CardNumbersKey, { isValid: boolean; errorMessage: string }>`           | 각 필드의 유효성 결과      |
+| `handleCardNumbersChange` | `(event: ChangeEvent<HTMLInputElement>, preventInvalidTypo?: boolean) => void` | 입력 및 유효성 검증 핸들러 |
+| `validateCardNumbers`     | `(value: string) => string \| null`                                            | 숫자 여부, 길이 검증 수행  |
 
 > 옵션 설명
 
-- restrictChange: 기본값 true. false로 설정하면 유효하지 않아도 상태 변경을 허용하며, 유효성 결과가 갱신됨.
+- preventInvalidTypo: 기본값 true. false로 설정하면 유효하지 않아도 상태 변경을 허용하며, 유효성 결과가 갱신됨.

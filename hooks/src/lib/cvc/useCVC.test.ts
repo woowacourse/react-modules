@@ -1,8 +1,8 @@
 import { renderHook, act } from '@testing-library/react';
 import useCVC from './useCVC';
 import { ChangeEvent } from 'react';
-import { CVC_ERROR_TYPES, ValidateCVCResult } from '../constants';
 import { ValidationResult } from '../types';
+import { CVC_ERROR_TYPES, ValidateCVCResult } from './constants';
 
 interface RenderHookResult {
   current: RenderHookCurrent;
@@ -14,7 +14,7 @@ interface RenderHookCurrent {
   validateCVC: (value: string) => ValidateCVCResult;
   handleCVCChange: (
     event: ChangeEvent<HTMLInputElement>,
-    restrictChange?: boolean
+    preventInvalidTypo?: boolean
   ) => void;
 }
 

@@ -1,25 +1,25 @@
-import { ChangeEvent, useState } from 'react';
-import { CARD_NUMBER_ERROR_TYPES, ERROR_MESSAGE } from '../constants';
+import { ChangeEvent, FocusEvent, useState } from 'react';
 import { ValidationResult } from '../types';
-import { CardNumbersKey } from '../constants';
+import {
+  formatNumbersByNetwork,
+  identifyNetworkByList,
+  identifyNetworkByRange,
+  removeFormat,
+} from '../utils/cardNetwork';
+import { NetworkType } from '../utils/constants';
+import {
+  CARD_NUMBER_ERROR_TYPES,
+  CARD_NUMBERS_LENGTH,
+  DEFAULT_LENGTH,
+  ERROR_MESSAGE,
+} from './constants';
 
 function useCardNumbers() {
-  const [cardNumbers, setCardNumbers] = useState<
-    Record<CardNumbersKey, string>
-  >({
-    part1: '',
-    part2: '',
-    part3: '',
-    part4: '',
-  });
+  const [cardNumbers, setCardNumbers] = useState('');
 
-  const [validationResults, setValidationResults] = useState<
-    Record<CardNumbersKey, ValidationResult>
-  >({
-    part1: { isValid: true, errorMessage: '' },
-    part2: { isValid: true, errorMessage: '' },
-    part3: { isValid: true, errorMessage: '' },
-    part4: { isValid: true, errorMessage: '' },
+  const [validationResults, setValidationResults] = useState<ValidationResult>({
+    isValid: true,
+    errorMessage: '',
   });
 
   const checkIsNumber = (value: string) => {
@@ -27,19 +27,36 @@ function useCardNumbers() {
     return regex.test(value);
   };
 
-  const checkIsValidLength = (value: string) => {
-    return value.length <= 4;
+  const checkIsValidLength = (value: string, network: NetworkType | '') => {
+    const validLength =
+      network !== '' ? CARD_NUMBERS_LENGTH[network] : DEFAULT_LENGTH;
+    return value.length <= validLength;
   };
 
-  const validateCardNumbers = (value: string) => {
+  const validateCardNumbersChange = (value: string) => {
     const isNumber = checkIsNumber(value);
-    const isValidLength = checkIsValidLength(value);
-
     if (!isNumber) {
       return { isValid: false, errorType: CARD_NUMBER_ERROR_TYPES.notNumber };
     }
 
+    const network = identifiedNetwork(value);
+    const isValidLength = checkIsValidLength(value, network);
     if (!isValidLength) {
+      return {
+        isValid: false,
+        errorType: CARD_NUMBER_ERROR_TYPES.invalidLength,
+      };
+    }
+
+    return { isValid: true };
+  };
+
+  const validateCardNumbersBlur = (value: string) => {
+    const network = identifiedNetwork(value);
+    const validLength =
+      network !== '' ? CARD_NUMBERS_LENGTH[network] : DEFAULT_LENGTH;
+
+    if (value.length !== validLength) {
       return {
         isValid: false,
         errorType: CARD_NUMBER_ERROR_TYPES.invalidLength,
@@ -51,33 +68,71 @@ function useCardNumbers() {
 
   const handleCardNumbersChange = (
     event: ChangeEvent<HTMLInputElement>,
-    restrictChange: boolean = true
+    preventInvalidTypo: boolean = true
   ) => {
-    const { name, value } = event.target;
-    const { isValid, errorType } = validateCardNumbers(value);
+    const { value } = event.target;
+    const newNumbers = removeFormat(value);
 
-    if (restrictChange && errorType) {
+    const { isValid, errorType } = validateCardNumbersChange(newNumbers);
+    if (preventInvalidTypo && errorType) {
       return;
     }
 
-    if (!restrictChange) {
-      setValidationResults((prev) => ({
-        ...prev,
-        [name]: {
-          isValid,
-          errorMessage: errorType ? ERROR_MESSAGE.cardNumber[errorType] : '',
-        },
-      }));
+    if (!preventInvalidTypo) {
+      setValidationResults({
+        isValid,
+        errorMessage: errorType ? ERROR_MESSAGE[errorType] : '',
+      });
     }
 
-    setCardNumbers((prev) => ({ ...prev, [name]: value }));
+    setCardNumbers(newNumbers);
+  };
+
+  const handleCardNumbersBlur = (event: FocusEvent<HTMLInputElement>) => {
+    const { value } = event.target;
+    const newNumbers = removeFormat(value);
+
+    const { isValid, errorType } = validateCardNumbersBlur(newNumbers);
+    setValidationResults({
+      isValid,
+      errorMessage: errorType ? ERROR_MESSAGE[errorType] : '',
+    });
+  };
+
+  const identifiedNetwork = (cardNumbers: string): NetworkType | '' => {
+    const network =
+      identifyNetworkByList(cardNumbers) || identifyNetworkByRange(cardNumbers);
+
+    if (network && cardNumbers.length === CARD_NUMBERS_LENGTH[network]) {
+      return network;
+    }
+
+    return '';
+  };
+
+  const network = identifiedNetwork(cardNumbers);
+
+  const cardNumberFormatter = (cardNumbers: string) => {
+    const network =
+      identifyNetworkByList(cardNumbers) || identifyNetworkByRange(cardNumbers);
+
+    const formatNetwork =
+      network !== '' && cardNumbers.length <= CARD_NUMBERS_LENGTH[network]
+        ? network
+        : '';
+
+    return formatNumbersByNetwork(cardNumbers, formatNetwork);
   };
 
   return {
     cardNumbers,
     validationResults,
-    validateCardNumbers,
+    validateCardNumbersChange,
+    validateCardNumbersBlur,
     handleCardNumbersChange,
+    handleCardNumbersBlur,
+    network,
+    cardNumberFormatter,
   };
 }
 
