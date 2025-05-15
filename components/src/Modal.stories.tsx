@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import Modal from "../src/lib/Modal";
-import React, { type ReactNode } from "react";
+import React, { type ReactNode, useState } from "react";
 
 interface ModalProps {
   isOpen: boolean;
@@ -12,6 +12,11 @@ type ModalStoryArgs = ModalProps & {
   size: "small" | "medium" | "large";
   position: "center" | "bottom";
   title: string;
+  message?: string;
+  confirmLabel?: string;
+  cancelLabel?: string;
+  placeholder?: string;
+  onConfirm?: (value?: string) => void;
 };
 
 const meta: Meta<ModalStoryArgs> = {
@@ -36,22 +41,17 @@ export default meta;
 
 type Story = StoryObj<ModalStoryArgs>;
 
-const baseArgs = {
-  isOpen: true,
-  onModalClose: () => alert("닫힘"),
+const baseStyle = {
+  width: "100%",
+  height: "900px",
+  maxWidth: "1440px",
+  margin: "0 auto",
+  backgroundColor: "#f8f8f8",
 };
 
-const Template: Story = {
+const PlaygroundTemplate: Story = {
   render: (args) => (
-    <div
-      style={{
-        width: "100%",
-        height: "900px",
-        maxWidth: "1440px",
-        margin: "0 auto",
-        backgroundColor: "#f8f8f8",
-      }}
-    >
+    <div style={baseStyle}>
       <Modal isOpen={args.isOpen} onModalClose={args.onModalClose}>
         <Modal.Background onClick={() => {}}>
           <Modal.ModalContainer
@@ -59,123 +59,174 @@ const Template: Story = {
             $position={args.position}
             onClick={(e) => e.stopPropagation()}
           >
-            <Modal.HeaderSection>
-              <Modal.Title>{args.title}</Modal.Title>
-              <Modal.ModalCloseButton onClick={args.onModalClose}>
-                ✕
-              </Modal.ModalCloseButton>
-            </Modal.HeaderSection>
+            <Modal.Title>{args.title}</Modal.Title>
             <Modal.ModalContent>
-              <div style={{ padding: "20px" }}>{args.children}</div>
+              <div style={{ padding: "20px" }}>{args.message}</div>
             </Modal.ModalContent>
           </Modal.ModalContainer>
         </Modal.Background>
       </Modal>
     </div>
   ),
-  parameters: {
-    viewport: { defaultViewport: "desktop" },
-  },
 };
 
 export const Playground: Story = {
-  ...Template,
+  ...PlaygroundTemplate,
   name: "Playground",
   args: {
-    ...baseArgs,
+    isOpen: true,
+    onModalClose: () => alert("닫힘"),
     size: "medium",
     position: "center",
     title: "Playground Modal",
-    children: "size, position 등을 자유롭게 조절해보세요.",
+    message: "size, position 등을 자유롭게 조절해보세요.",
   },
 };
 
-export const PCCenterSmall: Story = {
-  ...Template,
-  name: "PC - Center Small",
+const AlertTemplate: Story = {
+  render: (args) => (
+    <div style={baseStyle}>
+      <Modal isOpen={args.isOpen} onModalClose={args.onModalClose}>
+        <Modal.Background onClick={args.onModalClose} />
+        <Modal.ModalContainer $size={args.size} $position={args.position}>
+          <Modal.Title>{args.title}</Modal.Title>
+          <Modal.ModalContent>
+            <p>{args.message}</p>
+          </Modal.ModalContent>
+          <Modal.ModalButtonContainer>
+            <Modal.ModalButton
+              onClick={() => args.onConfirm?.()}
+              $size="small"
+              $type="confirm"
+            >
+              {args.confirmLabel || "확인"}
+            </Modal.ModalButton>
+          </Modal.ModalButtonContainer>
+        </Modal.ModalContainer>
+      </Modal>
+    </div>
+  ),
+};
+
+export const AlertModal: Story = {
+  ...AlertTemplate,
+  name: "Alert Modal",
   args: {
-    ...baseArgs,
+    isOpen: true,
+    onModalClose: () => alert("닫힘"),
     size: "small",
     position: "center",
-    title: "Small Modal - PC",
-    children: "PC용 small 모달입니다",
-  },
-  parameters: {
-    controls: { disable: true },
-  },
-};
-
-export const PCCenterMedium: Story = {
-  ...Template,
-  name: "PC - Center Medium",
-  args: {
-    ...baseArgs,
-    size: "medium",
-    position: "center",
-    title: "Medium Modal - PC",
-    children: "PC용 medium 모달입니다",
-  },
-  parameters: {
-    controls: { disable: true },
+    title: "알림",
+    message: "alert 문구",
+    confirmLabel: "확인",
+    onConfirm: () => alert("확인"),
   },
 };
 
-export const PCCenterLarge: Story = {
-  ...Template,
-  name: "PC - Center Large",
-  args: {
-    ...baseArgs,
-    size: "large",
-    position: "center",
-    title: "Large Modal - PC",
-    children: "PC용 large 모달입니다",
-  },
-  parameters: {
-    controls: { disable: true },
-  },
+const ConfirmTemplate: Story = {
+  render: (args) => (
+    <div style={baseStyle}>
+      <Modal isOpen={args.isOpen} onModalClose={args.onModalClose}>
+        <Modal.Background onClick={args.onModalClose} />
+        <Modal.ModalContainer $size={args.size} $position={args.position}>
+          <Modal.Title>{args.title}</Modal.Title>
+          <Modal.ModalContent>
+            <p>{args.message}</p>
+          </Modal.ModalContent>
+          <Modal.ModalButtonContainer>
+            <Modal.ModalButton
+              onClick={() => args.onConfirm?.()}
+              $size="small"
+              $type="confirm"
+            >
+              {args.confirmLabel || "확인"}
+            </Modal.ModalButton>
+            <Modal.ModalButton
+              onClick={args.onModalClose}
+              $size="small"
+              $type="cancel"
+            >
+              {args.cancelLabel || "취소"}
+            </Modal.ModalButton>
+          </Modal.ModalButtonContainer>
+        </Modal.ModalContainer>
+      </Modal>
+    </div>
+  ),
 };
 
-export const PCBottomSmall: Story = {
-  ...Template,
-  name: "PC - Bottom Small",
+export const ConfirmModal: Story = {
+  ...ConfirmTemplate,
+  name: "Confirm Modal",
   args: {
-    ...baseArgs,
+    isOpen: true,
+    onModalClose: () => alert("취소됨"),
     size: "small",
-    position: "bottom",
-    title: "Small Modal - PC / bottom",
-    children: "PC용 small 모달입니다 (bottom)",
-  },
-  parameters: {
-    controls: { disable: true },
-  },
-};
-
-export const PCBottomMedium: Story = {
-  ...Template,
-  name: "PC - Bottom Medium",
-  args: {
-    ...baseArgs,
-    size: "medium",
-    position: "bottom",
-    title: "Medium Modal - PC / bottom",
-    children: "PC용 medium 모달입니다 (bottom)",
-  },
-  parameters: {
-    controls: { disable: true },
+    position: "center",
+    title: "확인",
+    message: "confirm 문구",
+    confirmLabel: "확인",
+    cancelLabel: "취소",
+    onConfirm: () => alert("확인됨"),
   },
 };
 
-export const PCBottomLarge: Story = {
-  ...Template,
-  name: "PC - Bottom Large",
-  args: {
-    ...baseArgs,
-    size: "large",
-    position: "bottom",
-    title: "Large Modal - PC / bottom",
-    children: "PC용 large 모달입니다 (bottom)",
+const PromptTemplate: Story = {
+  render: (args) => {
+    const [value, setValue] = useState("");
+    return (
+      <div style={baseStyle}>
+        <Modal isOpen={args.isOpen} onModalClose={args.onModalClose}>
+          <Modal.Background onClick={args.onModalClose} />
+          <Modal.ModalContainer $size={args.size} $position={args.position}>
+            <Modal.Title>{args.title}</Modal.Title>
+            <Modal.ModalContent>
+              <input
+                type="text"
+                value={value}
+                onChange={(e) => setValue(e.target.value)}
+                placeholder={args.placeholder}
+                style={{ width: "100%", padding: 8, marginBottom: 16 }}
+              />
+            </Modal.ModalContent>
+            <Modal.ModalButtonContainer>
+              <Modal.ModalButton
+                onClick={() => {
+                  args.onConfirm?.(value);
+                  setValue("");
+                }}
+                $size="small"
+                $type="confirm"
+              >
+                {args.confirmLabel || "저장"}
+              </Modal.ModalButton>
+              <Modal.ModalButton
+                onClick={args.onModalClose}
+                $size="small"
+                $type="cancel"
+              >
+                {args.cancelLabel || "취소"}
+              </Modal.ModalButton>
+            </Modal.ModalButtonContainer>
+          </Modal.ModalContainer>
+        </Modal>
+      </div>
+    );
   },
-  parameters: {
-    controls: { disable: true },
+};
+
+export const PromptModal: Story = {
+  ...PromptTemplate,
+  name: "Prompt Modal",
+  args: {
+    isOpen: true,
+    onModalClose: () => alert("취소됨"),
+    size: "small",
+    position: "center",
+    title: "입력",
+    placeholder: "값을 입력하세요",
+    confirmLabel: "저장",
+    cancelLabel: "취소",
+    onConfirm: (value?: string) => alert(`입력값: ${value}`),
   },
 };
