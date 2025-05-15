@@ -30,9 +30,6 @@ export interface ModalProps extends ChildrenProps {
   /** 모달 위치 설정: 가운데(center), 상단(top), 하단(bottom) */
   position?: "center" | "top" | "bottom";
 
-  /** 모달 내부의 flex 간격 설정 */
-  gap?: number;
-
   /**모달의 넓이를 설정 */
   size?: "small" | "medium" | "large";
 }
@@ -66,7 +63,6 @@ const Modal = ({
   onHide,
   background = true,
   position = "center",
-  gap = 16,
   size = "medium",
   children,
 }: ModalProps) => {
@@ -79,7 +75,7 @@ const Modal = ({
     <ModalContext.Provider value={{ onHide }}>
       <div css={ModalWrapperStyle(show)}>
         <div css={backGroundStyle(background)} onClick={onHide}></div>
-        <div ref={containerRef} css={ModalContainerStyle(position, gap, size)}>
+        <div ref={containerRef} css={ModalContainerStyle(position, size)}>
           {children}
         </div>
       </div>

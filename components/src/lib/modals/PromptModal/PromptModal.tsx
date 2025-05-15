@@ -18,9 +18,6 @@ export interface PromptModalProps {
   /** 모달 위치 설정: 가운데(center), 상단(top), 하단(bottom) */
   position?: "center" | "top" | "bottom";
 
-  /** 모달 내부의 flex 간격 설정 */
-  gap?: number;
-
   /**모달의 넓이를 설정 */
   size?: "small" | "medium" | "large";
 
@@ -44,7 +41,6 @@ const PromptModal = ({
   onHide,
   onConfirm,
   position = "center",
-  gap = 16,
   size,
   title,
   content,
@@ -53,7 +49,7 @@ const PromptModal = ({
   onChange,
 }: PromptModalProps) => {
   return (
-    <Modal show={show} onHide={onHide} gap={gap} size={size} position={position} background={background}>
+    <Modal show={show} onHide={onHide} size={size} position={position} background={background}>
       {title && (
         <Modal.Header>
           <Modal.Title>{title}</Modal.Title>
