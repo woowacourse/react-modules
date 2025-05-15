@@ -25,7 +25,7 @@ function PromptModal({
   return (
     <Modal.Container>
       <Modal.Overlay />
-      <Modal.Content position="center" size={size} modalRef={modalRef}>
+      <Modal.Content position="center" size={size} ref={modalRef}>
         <Modal.Title>{title}</Modal.Title>
         <Modal.Input {...props} autoFocus />
         <Modal.AlertActions

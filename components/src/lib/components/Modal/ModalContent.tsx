@@ -6,7 +6,7 @@ interface ModalContentProps {
   position: 'top' | 'bottom' | 'center';
   size?: 'small' | 'medium' | 'large';
   styleProps?: React.CSSProperties;
-  modalRef?: React.RefObject<HTMLDivElement | null>;
+  ref?: React.RefObject<HTMLDivElement | null>;
 }
 
 type SizeKey = 'small' | 'medium' | 'large';
@@ -28,11 +28,11 @@ function ModalContent({
   position,
   size,
   styleProps,
-  modalRef,
+  ref,
 }: ModalContentProps) {
   return (
     <StyledModal
-      ref={modalRef}
+      ref={ref}
       id="modal-content"
       position={position}
       size={size}
