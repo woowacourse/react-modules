@@ -1,11 +1,7 @@
-/** @jsxImportSource @emotion/react */
-
 import styled from "@emotion/styled";
 import { CloseIcon } from "../common";
 import { PropsWithChildren } from "react";
 import { css } from "@emotion/react";
-import Button from "../common/Button/Button";
-import Input from "../common/Input/Input";
 import useFocus from "./useFocus";
 
 const ModalContainer = styled.div<{
@@ -48,20 +44,9 @@ const ModalContainer = styled.div<{
   gap: 15px;
 `;
 
-const ModalTopStyle = styled.div`
+const ModalTop = styled.div`
   display: flex;
   align-items: center;
-`;
-
-const ModalBottomStyle = styled.div`
-  display: flex;
-  justify-content: flex-end;
-  align-itmes: center;
-  gap: 10px;
-
-  @media (max-width: 768px) {
-    flex-direction: row;
-  }
 `;
 
 const Title = styled.div`
@@ -84,33 +69,21 @@ const ModalBackdrop = styled.div`
 
 interface ModalInterface {
   position?: "center" | "bottom";
-  closeButton?: boolean;
-  confirmButton?: boolean;
-  cancelButton?: boolean;
-  onConfirm?: () => void;
-  title?: string;
   onClose: () => void;
   isOpen: boolean;
   size: "small" | "medium" | "large";
-  input?: boolean;
-  inputValue?: string;
-  onInputChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  title?: string;
+  closeButton?: boolean;
 }
 
 export default function Modal({
   position = "center",
-  closeButton,
-  confirmButton,
-  cancelButton,
-  onConfirm,
-  title,
   onClose,
   children,
   isOpen,
   size,
-  input,
-  inputValue,
-  onInputChange,
+  title,
+  closeButton,
 }: PropsWithChildren<ModalInterface>) {
   if (!isOpen) return;
 
@@ -120,71 +93,18 @@ export default function Modal({
   return (
     <>
       <ModalContainer position={position} size={size} ref={modalRef}>
-        <ModalTop title={title} closeButton={!!closeButton} onClose={onClose} />
-        {input && (
-          <Input height={"32px"} value={inputValue} onChange={onInputChange} />
-        )}
+        <ModalTop>
+          {title && <Title>{title}</Title>}
+          {closeButton && (
+            <CloseIcon onClick={onClose} css={closeIconStyle} tabIndex={0} />
+          )}
+        </ModalTop>
         {children}
-        <ModalBottom
-          cancelButton={cancelButton}
-          confirmButton={confirmButton}
-          size={size}
-          onClose={onClose}
-          onConfirm={onConfirm}
-        />
       </ModalContainer>
       <ModalBackdrop onClick={onClose} />
     </>
   );
 }
-
-const ModalTop = ({
-  title,
-  closeButton,
-  onClose,
-}: {
-  title?: string;
-  closeButton?: boolean;
-  onClose: () => void;
-}) => {
-  return (
-    <ModalTopStyle>
-      {title && <Title>{title}</Title>}
-      {closeButton && (
-        <CloseIcon onClick={onClose} css={closeIconStyle} tabIndex={0} />
-      )}
-    </ModalTopStyle>
-  );
-};
-
-const ModalBottom = ({
-  cancelButton,
-  confirmButton,
-  size,
-  onClose,
-  onConfirm,
-}: {
-  cancelButton?: boolean;
-  confirmButton?: boolean;
-  size: "small" | "medium" | "large";
-  onClose: () => void;
-  onConfirm?: () => void;
-}) => {
-  return (
-    <ModalBottomStyle>
-      {cancelButton && (
-        <Button variant="cancel" size={size} onClick={onClose} />
-      )}
-      {confirmButton && (
-        <Button
-          variant="confirm"
-          size={size}
-          onClick={onConfirm ? onConfirm : onClose}
-        />
-      )}
-    </ModalBottomStyle>
-  );
-};
 
 const closeIconStyle = css`
   cursor: pointer;

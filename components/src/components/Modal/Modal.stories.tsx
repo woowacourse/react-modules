@@ -2,6 +2,9 @@ import type { Meta, StoryObj } from "@storybook/react";
 import Modal from "./Modal";
 import Button from "../common/Button/Button";
 import { useState } from "react";
+import AlertModal from "./AlertModal";
+import ConfirmModal from "./ConfirmModal";
+import PromptModal from "./PromptModal";
 
 const meta: Meta<typeof Modal> = {
   tags: ["autodocs"],
@@ -123,7 +126,7 @@ export const Size: Story = {
   },
 };
 
-export const AlertModal: Story = {
+export const Alert: Story = {
   render: () => {
     const [isOpened, setIsOpened] = useState(true);
     const openModal = () => {
@@ -136,23 +139,20 @@ export const AlertModal: Story = {
     return (
       <>
         <Button size="medium" text="열기" onClick={openModal} />
-        <Modal
+        <AlertModal
           onClose={closeModal}
-          title="아이디를 입력해 주세요."
           isOpen={isOpened}
-          position={"center"}
-          confirmButton={true}
-          onConfirm={closeModal}
-          size={"medium"}
+          title="아이디를 입력해 주세요."
+          size="medium"
         >
           아이디는 필수로 입력해야 합니다.
-        </Modal>
+        </AlertModal>
       </>
     );
   },
 };
 
-export const ConfirmModal: Story = {
+export const Confirm: Story = {
   render: () => {
     const [isOpened, setIsOpened] = useState(true);
     const openModal = () => {
@@ -165,23 +165,21 @@ export const ConfirmModal: Story = {
     return (
       <>
         <Button size="medium" text="열기" onClick={openModal} />
-        <Modal
+        <ConfirmModal
           onClose={closeModal}
-          title="카드를 삭제하시겠습니까?"
-          isOpen={isOpened}
-          confirmButton={true}
-          cancelButton={true}
           onConfirm={() => {}}
-          size={"medium"}
+          isOpen={isOpened}
+          title="카드를 삭제하시겠습니까?"
+          size="medium"
         >
           삭제하면 복구하실 수 없습니다.
-        </Modal>
+        </ConfirmModal>
       </>
     );
   },
 };
 
-export const PromptModal: Story = {
+export const Prompt: Story = {
   render: () => {
     const [isOpened, setIsOpened] = useState(true);
     const [inputValue, setInputValue] = useState("");
@@ -198,18 +196,15 @@ export const PromptModal: Story = {
     return (
       <>
         <Button size="small" text="열기" onClick={openModal} />
-        <Modal
+        <PromptModal
           title="쿠폰 번호를 입력해 주세요."
           onClose={closeModal}
           isOpen={isOpened}
-          size="medium"
-          confirmButton={true}
-          cancelButton={true}
-          onConfirm={() => {}}
-          input={true}
           inputValue={inputValue}
+          onConfirm={() => {}}
           onInputChange={(e) => handleSetInputValue(e.target.value)}
-        />
+          size="medium"
+        ></PromptModal>
       </>
     );
   },
