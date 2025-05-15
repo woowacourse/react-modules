@@ -15,14 +15,14 @@ const ButtonContainer = styled.div<{ position: Position }>`
   display: flex;
   justify-content: end;
   gap: 12px;
-  width: ${({ position }) =>
+  ${({ position }) =>
     position === "bottom" &&
     `
-      flex-grow:1;
-      width:100%;
-
-      ${Button} button{
-        width:100%;
-      }
-    `};
+    flex-grow: 1;
+    width: 100%;
+    
+    ${Button} button {
+      width: 100%;
+    }
+  `}
 `;
