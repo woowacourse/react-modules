@@ -1,8 +1,8 @@
-import { css } from "@emotion/react";
+import { css, SerializedStyles } from "@emotion/react";
 
 export interface ModalButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children?: React.ReactNode;
-  css?: any;
+  css?: SerializedStyles;
 }
 
 const ModalButton = ({ children, css: overrideCss, disabled, ...rest }: ModalButtonProps) => {
