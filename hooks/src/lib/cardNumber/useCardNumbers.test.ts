@@ -51,7 +51,7 @@ describe('useCardNumbers', () => {
     });
   });
 
-  it(`카드 브랜드가 없는 입력값이 유효한 길이인 ${CARD_NUMBERS_LENGTH}이(가) 아닐 때 isValid로 false를 반환하고 invalidLength 에러 타입을 반환한다.`, () => {
+  it(`카드 브랜드가 없는 입력값이 유효한 길이인 ${DEFAULT_LENGTH}이(가) 아닐 때 isValid로 false를 반환하고 invalidLength 에러 타입을 반환한다.`, () => {
     expect(
       result.current.validateCardNumbersChange('12345678901234567')
     ).toEqual({
