@@ -1,36 +1,30 @@
+import styled from 'styled-components';
 import { Modal } from '../..';
 
 interface AlertModalProps {
   title: string;
   content: string;
-  onCloseClick?: () => void;
-  onConfirmClick?: () => void;
   size?: 'small' | 'medium' | 'large';
-  alertActionsWidth?: number;
+  onConfirmClick?: () => void;
 }
 
-function AlertModal({
-  title,
-  content,
-  onCloseClick,
-  onConfirmClick,
-  size,
-  alertActionsWidth,
-}: AlertModalProps) {
+function AlertModal({ title, content, size, onConfirmClick }: AlertModalProps) {
   return (
     <Modal.Container>
       <Modal.Overlay />
       <Modal.Content position="center" size={size}>
         <Modal.Title>{title}</Modal.Title>
         <Modal.Body>{content}</Modal.Body>
-        <Modal.AlertActions
-          width={alertActionsWidth}
-          onCancelClick={onCloseClick}
-          onConfirmClick={onConfirmClick}
-        />
+        <ButtonWrapper>
+          <Modal.ConfirmButton width={80} onClick={onConfirmClick} />
+        </ButtonWrapper>
       </Modal.Content>
     </Modal.Container>
   );
 }
 
 export default AlertModal;
+
+const ButtonWrapper = styled.div`
+  margin-top: 22px;
+`;

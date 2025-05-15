@@ -1,19 +1,21 @@
-import styled from 'styled-components';
-
 import { Modal } from '../..';
 
 interface ConfirmModalProps {
   title: string;
   content: string;
-  size?: 'small' | 'medium' | 'large';
+  onCloseClick?: () => void;
   onConfirmClick?: () => void;
+  size?: 'small' | 'medium' | 'large';
+  alertActionsWidth?: number;
 }
 
 function ConfirmModal({
   title,
   content,
-  size,
+  onCloseClick,
   onConfirmClick,
+  size,
+  alertActionsWidth,
 }: ConfirmModalProps) {
   return (
     <Modal.Container>
@@ -21,16 +23,14 @@ function ConfirmModal({
       <Modal.Content position="center" size={size}>
         <Modal.Title>{title}</Modal.Title>
         <Modal.Body>{content}</Modal.Body>
-        <ButtonWrapper>
-          <Modal.ConfirmButton width={80} onClick={onConfirmClick} />
-        </ButtonWrapper>
+        <Modal.AlertActions
+          width={alertActionsWidth}
+          onCancelClick={onCloseClick}
+          onConfirmClick={onConfirmClick}
+        />
       </Modal.Content>
     </Modal.Container>
   );
 }
 
 export default ConfirmModal;
-
-const ButtonWrapper = styled.div`
-  margin-top: 22px;
-`;

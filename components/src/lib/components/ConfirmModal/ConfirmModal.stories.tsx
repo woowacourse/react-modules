@@ -17,6 +17,9 @@ const meta: Meta<typeof ConfirmModal> = {
     content: {
       control: 'text',
     },
+    alertActionsWidth: {
+      control: 'number',
+    },
   },
   args: {
     size: 'medium',
@@ -38,8 +41,25 @@ type Story = StoryObj<typeof ConfirmModal>;
 export const Default: Story = {
   args: {
     size: 'medium',
+    title: 'confirm 모달 제목',
+    content: 'confirm 모달 내용입니다.',
+  },
+  render: (args) => {
+    return (
+      <>
+        <Modal.Trigger>confirm모달</Modal.Trigger>
+        <ConfirmModal {...args} />
+      </>
+    );
+  },
+};
+
+export const AlertWidth: Story = {
+  args: {
+    size: 'medium',
     title: 'alert 모달 제목',
     content: 'alert 모달 내용입니다.',
+    alertActionsWidth: 172,
   },
   render: (args) => {
     return (
