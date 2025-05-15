@@ -1,45 +1,28 @@
-import { isExpirationDate } from "../../utils/validation";
-import { HookReturnType, ValidInputFuncType } from "../../types";
-import { MAX_LENGTH } from "../../constants";
+import { validateExpirationDate } from "../../utils/validation";
+import { ExpirationDateType, HookReturnType } from "../../types";
+import { DATE_PARSING_RULE, MAX_LENGTH } from "../../constants";
 import useInputValue from "../common/useInputValue";
-import useErrors from "../common/useErrors";
+import getParsingValue from "../../utils/getParsingValue";
 
-const KEY_INDEX_MATCH: ("month" | "year")[] = ["month", "year"];
-
-const useExpirationDate = (): HookReturnType<"expirationDate"> => {
-  const { state, onChange, isLengthComplete } = useInputValue({
-    initialState: {
-      month: "",
-      year: "",
-    },
+const useExpirationDate = (splitter: string = " "): HookReturnType => {
+  const { state, onChange, isLengthComplete } = useInputValue<ExpirationDateType>({
+    initialState: "",
     maxLength: MAX_LENGTH.EXPIRATION_DATE,
-    keyIndexMap: KEY_INDEX_MATCH,
+    splitter: splitter,
   });
 
-  const { errors, errorMessage, clearError, changeError, isErrorComplete } = useErrors({
-    initialErrorState: { month: false, year: false },
-  });
+  const { error, errorMessage } = validateExpirationDate(state);
 
-  const validateInput: ValidInputFuncType = (value: string, index: number) => {
-    const type = KEY_INDEX_MATCH[index];
-    const { error, message } = isExpirationDate(type, value);
-    if (error) {
-      changeError(type, message);
-    } else {
-      clearError(type);
-    }
-  };
-
-  const isValid = isLengthComplete && isErrorComplete;
+  const isValid = isLengthComplete && !error;
+  const displayValue = getParsingValue(state, DATE_PARSING_RULE, splitter);
 
   return {
-    state,
+    value: displayValue,
     onChange,
-    errors,
+    error,
     errorMessage,
-    validateInput,
     isLengthComplete,
-    isErrorComplete,
+    isErrorComplete: !error,
     isValid,
   };
 };

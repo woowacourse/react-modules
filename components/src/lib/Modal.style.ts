@@ -1,27 +1,26 @@
 import { css } from "@emotion/react";
+import { ModalButtonCSSProps } from "./types";
 
 export const ModalWrapperStyle = (show: boolean) => css`
-  position: fixed;
   width: 100%;
-  height: 100vh;
-  top: 0;
-  left: 0;
+  height: 100%;
   min-width: 300px;
   display: ${show ? "block" : "none"};
 `;
 
 export const backGroundStyle = css`
   width: 100%;
-  height: 100vh;
+  height: 100%;
   position: absolute;
   top: 0;
   left: 0;
   background-color: rgba(0, 0, 0, 0.35);
 `;
-export const ModalContainerStyle = (position: string, gap: number) => {
+export const ModalContainerStyle = (size: string, position: string, gap: number) => {
   const positionStyle = getPositionStyle(position);
-
+  const sizeStyle = getSizeStyle(size);
   return css`
+    width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -31,6 +30,7 @@ export const ModalContainerStyle = (position: string, gap: number) => {
     padding: 24px 32px;
     gap: ${gap}px;
     ${positionStyle}
+    ${sizeStyle}
   `;
 };
 
@@ -65,11 +65,72 @@ export const ModalCloseStyle = css`
   cursor: pointer;
 `;
 
+export const ModalButtonStyle = (cssProps: ModalButtonCSSProps) => css`
+  background: ${cssProps.backgroundColor};
+  border: 1px solid ${cssProps.borderColor};
+  box-shadow: none;
+  border-radius: ${cssProps.borderRadius}px;
+  padding: 0;
+  overflow: visible;
+  cursor: pointer;
+  color: ${cssProps.color};
+  font-size: ${cssProps.fontSize}px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  padding: 7px 21px;
+`;
+
+export const ModalInputStyle = css`
+  width: 100%;
+  display: flex;
+  padding: 8px;
+  align-items: center;
+  gap: 8px;
+  align-self: stretch;
+  border-radius: 2px;
+  border: 1.015px solid #000;
+  box-sizing: border-box;
+
+  &::placeholder {
+    font-weight: 400;
+    font-size: 11px;
+    line-height: 14.88px;
+    letter-spacing: 0%;
+    vertical-align: middle;
+    color: #acacac;
+  }
+
+  &:focus {
+    outline-color: #000000;
+  }
+`;
+
+export const getSizeStyle = (size: string) => {
+  switch (size) {
+    case "small":
+      return css`
+        max-width: 320px;
+      `;
+    case "medium":
+      return css`
+        max-width: 480px;
+      `;
+    case "large":
+      return css`
+        max-width: 600px;
+      `;
+    default:
+      return css`
+        width: calc(100% - 72px);
+      `;
+  }
+};
+
 export const getPositionStyle = (position: string) => {
   switch (position) {
     case "center":
       return css`
-        width: calc(100% - 72px);
         border-radius: 8px;
         position: absolute;
         top: 50%;
@@ -78,7 +139,6 @@ export const getPositionStyle = (position: string) => {
       `;
     case "bottom":
       return css`
-        width: 100%;
         border-radius: 8px 8px 0 0;
         position: fixed;
         bottom: 0;
@@ -86,7 +146,6 @@ export const getPositionStyle = (position: string) => {
       `;
     case "top":
       return css`
-        width: 100%;
         border-radius: 0 0 8px 8px;
         position: fixed;
         top: 0;
