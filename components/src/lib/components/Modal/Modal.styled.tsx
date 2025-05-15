@@ -38,14 +38,14 @@ const positionStyle = {
   `,
 } as const;
 
-export const StyledBackDrop = styled.div`
+export const StyledBackDrop = styled.div<Pick<ModalProps, 'zIndex'>>`
   width: 100%;
   position: fixed;
   top: 0;
   right: 0;
   bottom: 0;
   left: 0;
-  z-index: 10;
+  z-index: ${({ zIndex }) => zIndex ?? 10};
   display: flex;
   align-items: center;
   justify-content: center;

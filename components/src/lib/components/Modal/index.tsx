@@ -64,7 +64,13 @@ export type ModalProps = {
 
 type ModalBaseProps = Pick<ModalProps, 'isOpen' | 'closeOnOutsideClick' | 'onClose' | 'children'>;
 
-export const BaseModal = ({ isOpen, closeOnOutsideClick, onClose, children }: ModalBaseProps) => {
+export const BaseModal = ({
+  isOpen,
+  closeOnOutsideClick,
+  onClose,
+  zIndex,
+  children,
+}: ModalBaseProps) => {
   const handleOutsideClick = (e: React.MouseEvent) => {
     if (e.target instanceof HTMLElement && e.target === e.currentTarget && closeOnOutsideClick) {
       onClose();
@@ -73,7 +79,11 @@ export const BaseModal = ({ isOpen, closeOnOutsideClick, onClose, children }: Mo
 
   return (
     <Portal isOpen={isOpen}>
-      <StyledBackDrop aria-hidden={isOpen ? 'false' : 'true'} onClick={handleOutsideClick} />
+      <StyledBackDrop
+        zIndex={zIndex}
+        aria-hidden={isOpen ? 'false' : 'true'}
+        onClick={handleOutsideClick}
+      />
       {children}
     </Portal>
   );
