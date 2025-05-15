@@ -22,7 +22,6 @@ export default ModalOverlay;
 
 const StyledModalOverlay = styled.div`
   background-color: rgba(0, 0, 0, 0.35);
-  position: relative;
   width: 100%;
   height: 100%;
   justify-content: center;
