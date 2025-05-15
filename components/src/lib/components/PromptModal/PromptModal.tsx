@@ -19,8 +19,8 @@ function PromptModal({
   onConfirmClick,
   ...props
 }: PromptModalProps) {
-  const { open, setOpen } = useModal();
-  const modalRef = useFocusTrap(open, () => setOpen(false));
+  const { open } = useModal();
+  const modalRef = useFocusTrap(open);
 
   return (
     <Modal.Container>

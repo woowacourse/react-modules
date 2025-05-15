@@ -8,7 +8,7 @@ type FocusableSelector =
   | 'select'
   | '[tabindex]:not([tabindex="-1"])';
 
-export function useFocusTrap(isOpen: boolean, onClose: () => void) {
+export function useFocusTrap(isOpen: boolean) {
   const ref = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
@@ -50,7 +50,7 @@ export function useFocusTrap(isOpen: boolean, onClose: () => void) {
     return () => {
       modalElement.removeEventListener('keydown', handleKeyDown);
     };
-  }, [isOpen, onClose]);
+  }, [isOpen]);
 
   return ref;
 }
