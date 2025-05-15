@@ -15,16 +15,12 @@ function Input({
   handleInputChange,
   isValidInput,
 }: InputProps) {
-  function onChangeInputHandler(e: React.ChangeEvent<HTMLInputElement>) {
-    handleInputChange(e);
-  }
-
   return (
     <input
       type={type}
       name={name}
       value={value}
-      onChange={onChangeInputHandler}
+      onChange={handleInputChange}
       className={`input tx-md ${
         !isValidInput && value !== '' ? 'isNotValid' : ''
       }`}
