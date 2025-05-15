@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import Modal from "../src/lib/Modal";
-import React, { ReactNode } from "react";
+import React, { type ReactNode } from "react";
 
 interface ModalProps {
   isOpen: boolean;
@@ -78,6 +78,18 @@ const Template: Story = {
   },
 };
 
+export const Playground: Story = {
+  ...Template,
+  name: "Playground",
+  args: {
+    ...baseArgs,
+    size: "medium",
+    position: "center",
+    title: "Playground Modal",
+    children: "size, position 등을 자유롭게 조절해보세요.",
+  },
+};
+
 export const PCCenterSmall: Story = {
   ...Template,
   name: "PC - Center Small",
@@ -87,6 +99,9 @@ export const PCCenterSmall: Story = {
     position: "center",
     title: "Small Modal - PC",
     children: "PC용 small 모달입니다",
+  },
+  parameters: {
+    controls: { disable: true },
   },
 };
 
@@ -100,6 +115,9 @@ export const PCCenterMedium: Story = {
     title: "Medium Modal - PC",
     children: "PC용 medium 모달입니다",
   },
+  parameters: {
+    controls: { disable: true },
+  },
 };
 
 export const PCCenterLarge: Story = {
@@ -111,6 +129,9 @@ export const PCCenterLarge: Story = {
     position: "center",
     title: "Large Modal - PC",
     children: "PC용 large 모달입니다",
+  },
+  parameters: {
+    controls: { disable: true },
   },
 };
 
@@ -124,6 +145,9 @@ export const PCBottomSmall: Story = {
     title: "Small Modal - PC / bottom",
     children: "PC용 small 모달입니다 (bottom)",
   },
+  parameters: {
+    controls: { disable: true },
+  },
 };
 
 export const PCBottomMedium: Story = {
@@ -136,6 +160,9 @@ export const PCBottomMedium: Story = {
     title: "Medium Modal - PC / bottom",
     children: "PC용 medium 모달입니다 (bottom)",
   },
+  parameters: {
+    controls: { disable: true },
+  },
 };
 
 export const PCBottomLarge: Story = {
@@ -147,5 +174,8 @@ export const PCBottomLarge: Story = {
     position: "bottom",
     title: "Large Modal - PC / bottom",
     children: "PC용 large 모달입니다 (bottom)",
+  },
+  parameters: {
+    controls: { disable: true },
   },
 };
