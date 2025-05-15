@@ -27,6 +27,5 @@ const StyledModalOverlay = styled.div`
   justify-content: center;
   align-items: center;
   position: absolute;
-  top: 0px;
-  left: 0px;
+  inset: 0;
 `;
