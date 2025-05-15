@@ -2,7 +2,7 @@ type CardInfo = {
   brand: 'VISA' | 'MASTERCARD' | 'AMEX' | 'Diners' | 'UnionPay' | 'Unknown';
   maxLength: number;
   pattern: number[];
-  test: (cardNumber: string) => boolean;
+  isMatch: (cardNumber: string) => boolean;
 };
 
 const DEFAULT_CARD_INFO: CardInfo[] = [
@@ -10,13 +10,13 @@ const DEFAULT_CARD_INFO: CardInfo[] = [
     brand: 'VISA',
     maxLength: 16,
     pattern: [4, 4, 4, 4],
-    test: (cardNumber) => cardNumber.startsWith('4'),
+    isMatch: (cardNumber) => cardNumber.startsWith('4'),
   },
   {
     brand: 'MASTERCARD',
     maxLength: 16,
     pattern: [4, 4, 4, 4],
-    test: (cardNumber) => {
+    isMatch: (cardNumber) => {
       if (!cardNumber.startsWith('5')) return false;
       const prefix = parseInt(cardNumber[1], 10);
       return prefix >= 1 && prefix <= 5;
@@ -26,19 +26,19 @@ const DEFAULT_CARD_INFO: CardInfo[] = [
     brand: 'AMEX',
     maxLength: 15,
     pattern: [4, 6, 5],
-    test: (cardNumber) => cardNumber.startsWith('34') || cardNumber.startsWith('37'),
+    isMatch: (cardNumber) => cardNumber.startsWith('34') || cardNumber.startsWith('37'),
   },
   {
     brand: 'Diners',
     maxLength: 14,
     pattern: [4, 6, 4],
-    test: (cardNumber) => cardNumber.startsWith('36'),
+    isMatch: (cardNumber) => cardNumber.startsWith('36'),
   },
   {
     brand: 'UnionPay',
     maxLength: 16,
     pattern: [4, 4, 4, 4],
-    test: (cardNumber) => {
+    isMatch: (cardNumber) => {
       if (cardNumber.length >= 6) {
         const prefixSix = parseInt(cardNumber.slice(0, 6), 10);
         if (prefixSix >= 622126 && prefixSix <= 622925) return true;
@@ -61,11 +61,11 @@ const DEFAULT_CARD_INFO: CardInfo[] = [
     brand: 'Unknown',
     maxLength: 16,
     pattern: [4, 4, 4, 4],
-    test: () => true,
+    isMatch: () => true,
   },
 ];
 
 export const cardBrandInfo = (cardNumber: string) => {
   const numericCardNumber = cardNumber.replace(/\D/g, '');
-  return DEFAULT_CARD_INFO.find((rule) => rule.test(numericCardNumber));
+  return DEFAULT_CARD_INFO.find((rule) => rule.isMatch(numericCardNumber));
 };
