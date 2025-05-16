@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 import useEscapeKeyClose from './hooks/useEscapePress';
-import { createContext, useContext, useRef } from 'react';
+import { createContext, useContext } from 'react';
 import CloseIconButton from './components/CloseIconButton';
 import {
   AlertContentProps,
@@ -15,8 +15,8 @@ import {
   Size,
 } from './types/props';
 import TextButton from './components/TextButton';
-import useAutoFocus from './hooks/useAutoFocus';
 import handleFocusWrap from './utils/handleFocusWrap';
+import useModalContentLogic from './hooks/useModalContentLogic';
 
 const ModalContext = createContext<{ onClose: () => void; position: Position }>({
   onClose: () => {},
@@ -60,9 +60,7 @@ const Content = ({
   size = 'small',
   ...props
 }: ModalContentProps) => {
-  const { onClose, position } = useContext(ModalContext);
-  const contentRef = useRef<HTMLDivElement>(null);
-  useAutoFocus(contentRef);
+  const { onClose, position, contentRef } = useModalContentLogic();
 
   return (
     <S.ModalContent
@@ -84,9 +82,7 @@ const AlertContent = ({
   alertButton = {},
   ...props
 }: AlertContentProps) => {
-  const { onClose, position } = useContext(ModalContext);
-  const contentRef = useRef<HTMLDivElement>(null);
-  useAutoFocus(contentRef);
+  const { onClose, position, contentRef } = useModalContentLogic();
 
   const {
     text = '확인',
@@ -124,9 +120,7 @@ const ConfirmContent = ({
   cancelButton = {},
   ...props
 }: ConfirmContentProps) => {
-  const { onClose, position } = useContext(ModalContext);
-  const contentRef = useRef<HTMLDivElement>(null);
-  useAutoFocus(contentRef);
+  const { onClose, position, contentRef } = useModalContentLogic();
 
   const {
     text: confirmText = '확인',
@@ -184,9 +178,7 @@ const PromptContent = ({
   cancelButton = {},
   ...props
 }: PromptContentProps) => {
-  const { onClose, position } = useContext(ModalContext);
-  const contentRef = useRef<HTMLDivElement>(null);
-  useAutoFocus(contentRef);
+  const { onClose, position, contentRef } = useModalContentLogic();
 
   const {
     text: confirmText = '확인',
