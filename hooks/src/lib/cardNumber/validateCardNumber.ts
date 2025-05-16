@@ -9,13 +9,12 @@ const validateCardNumber = (cardNumber: string) => {
     errorMessage: ''
   };
 
-  const formattedCardNumber = cardNumber.replace(NO_SPACE_REGEX, '');
+  const digits = cardNumber.replace(NO_SPACE_REGEX, '');
 
-  if (!validation.isNumber(formattedCardNumber) && formattedCardNumber !== '') {
+  if (!validation.isNumber(digits) && digits !== '') {
     return { errorState: true, errorMessage: '숫자만 입력하세요.' };
   }
 
-  const digits = cardNumber.replace(NO_SPACE_REGEX, '');
   const { length } = getCardBrandByBin(CARD_FORMATS, digits);
   if (length > 0 && length !== digits.length) {
     return { errorState: true, errorMessage: `${length}자리를 입력하세요.` };
