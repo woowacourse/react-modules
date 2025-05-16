@@ -25,7 +25,16 @@ function ModalContainer({ children }: { children: React.ReactNode }) {
   };
 
   return (
-    <StyledModalContainer ref={modalRef} position={position} width={width} onKeyDown={handleKeyDown} tabIndex={-1}>
+    <StyledModalContainer
+      ref={modalRef}
+      position={position}
+      width={width}
+      onKeyDown={handleKeyDown}
+      tabIndex={-1}
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="modal-title"
+    >
       {children}
     </StyledModalContainer>
   );
