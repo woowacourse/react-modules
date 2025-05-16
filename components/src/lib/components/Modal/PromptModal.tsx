@@ -1,16 +1,11 @@
 import { useEffect, useRef } from 'react';
 import { ModalProps } from '../../Modal.type';
-import ModalBackdrop from '../common/ModalBackdrop';
-import ModalHeader from '../common/ModalHeader';
-import useModalKeyboard from '../../hooks/useModalKeyboard';
-import { ModalProvider, useModalContext } from '../../ModalContext';
+import Modal from './Modal';
 import ConfirmButton from '../common/ConfirmButton';
-import { ButtonBar, ModalFrame } from '../common/cssStyle';
 import CancelButton from '../common/CancelButton';
 import { css } from '@emotion/css';
 
-const PromptModal = ({ children, position, isOpen, onClose, onAfterOpen, size, onConfirm }: ModalProps) => {
-  if (!isOpen) return null;
+function PromptModal({ title, position, isOpen, onClose, onAfterOpen, size, onConfirm }: ModalProps) {
   const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
@@ -18,29 +13,19 @@ const PromptModal = ({ children, position, isOpen, onClose, onAfterOpen, size, o
     if (onAfterOpen) onAfterOpen();
   }, [onAfterOpen]);
 
-  useModalKeyboard(onClose);
-
   return (
-    <ModalProvider onClose={onClose}>
-      <ModalBackdrop>
-        <div className={ModalFrame(position, size)} data-testid="modal">
-          {children}
-          <input type="text" className={Input} ref={inputRef} />
-          <div className={ButtonBar}>
-            <CancelButton />
-            <ConfirmButton onClick={onConfirm} />
-          </div>
-        </div>
-      </ModalBackdrop>
-    </ModalProvider>
+    <Modal isOpen={isOpen} position={position} onClose={onClose} onAfterOpen={onAfterOpen} size={size} title={title}>
+      <Modal.Header title={title} showCloseButton />
+      <Modal.Body>
+        <input type="text" ref={inputRef} className={Input} />
+      </Modal.Body>
+      <Modal.Actions>
+        <CancelButton />
+        <ConfirmButton onClick={onConfirm} />
+      </Modal.Actions>
+    </Modal>
   );
-};
-
-PromptModal.Header = function Header({ title, showCloseButton = false }: { title: string; showCloseButton?: boolean }) {
-  const context = useModalContext();
-  if (!context) throw new Error('Modal.Header must be used within a Modal');
-  return <ModalHeader title={title} showCloseButton={showCloseButton} onClose={context.onClose} />;
-};
+}
 
 export default PromptModal;
 

@@ -1,43 +1,17 @@
-import { PropsWithChildren, useEffect } from 'react';
-import { ModalProps } from '../../Modal.type';
-import ModalBackdrop from '../common/ModalBackdrop';
-import ModalHeader from '../common/ModalHeader';
-import useModalKeyboard from '../../hooks/useModalKeyboard';
-import { ModalProvider, useModalContext } from '../../ModalContext';
+import Modal from './Modal';
 import ConfirmButton from '../common/ConfirmButton';
-import { ButtonBar, ModalFrame } from '../common/cssStyle';
+import { ModalProps } from '../../Modal.type';
 
-const AlertModal = ({ children, position, isOpen, onClose, onAfterOpen, size }: ModalProps) => {
-  if (!isOpen) return null;
-
-  useEffect(() => {
-    if (onAfterOpen) onAfterOpen();
-  }, [onAfterOpen]);
-
-  useModalKeyboard(onClose);
-
+function AlertModal({ children, title, position, isOpen, onClose, onAfterOpen, size }: ModalProps) {
   return (
-    <ModalProvider onClose={onClose}>
-      <ModalBackdrop>
-        <div className={ModalFrame(position, size)} data-testid="modal">
-          {children}
-          <div className={ButtonBar}>
-            <ConfirmButton />
-          </div>
-        </div>
-      </ModalBackdrop>
-    </ModalProvider>
+    <Modal isOpen={isOpen} position={position} onClose={onClose} onAfterOpen={onAfterOpen} size={size} title={title}>
+      <Modal.Header title={title} showCloseButton />
+      <Modal.Body>{children}</Modal.Body>
+      <Modal.Actions>
+        <ConfirmButton />
+      </Modal.Actions>
+    </Modal>
   );
-};
-
-AlertModal.Header = function Header({ title, showCloseButton = false }: { title: string; showCloseButton?: boolean }) {
-  const context = useModalContext();
-  if (!context) throw new Error('Modal.Header must be used within a Modal');
-  return <ModalHeader title={title} showCloseButton={showCloseButton} onClose={context.onClose} />;
-};
-
-AlertModal.Body = function Body({ children }: PropsWithChildren) {
-  return <section>{children}</section>;
-};
+}
 
 export default AlertModal;

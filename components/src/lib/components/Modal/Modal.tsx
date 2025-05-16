@@ -6,8 +6,10 @@ import useModalKeyboard from '../../hooks/useModalKeyboard';
 import { ModalProvider, useModalContext } from '../../ModalContext';
 import ConfirmButton from '../common/ConfirmButton';
 import CancelButton from '../common/CancelButton';
-import { ModalFrame } from '../common/cssStyle';
-import { ButtonBar } from '../common/cssStyle';
+import { ModalFrame, ButtonBar, BodyStyles } from '../common/cssStyle';
+import PromptModal from './PromptModal';
+import ConfirmModal from './ConfirmModal';
+import AlertModal from './AlertModal';
 
 const Modal = ({
   children,
@@ -51,11 +53,15 @@ Modal.Header = function Header({ title, showCloseButton = false }: { title: stri
 };
 
 Modal.Body = function Body({ children }: PropsWithChildren) {
-  return <section>{children}</section>;
+  return <section className={BodyStyles}>{children}</section>;
 };
 
 Modal.Actions = function Actions({ children }: PropsWithChildren) {
-  return <>{children}</>;
+  return <section className={ButtonBar}>{children}</section>;
 };
+
+Modal.Prompt = PromptModal;
+Modal.Confirm = ConfirmModal;
+Modal.Alert = AlertModal;
 
 export default Modal;

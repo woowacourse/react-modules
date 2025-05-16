@@ -46,4 +46,8 @@ const ButtonBar = css`
   width: 100%;
 `;
 
-export { ModalFrame, ButtonBar };
+const BodyStyles = css`
+  width: 100%;
+`;
+
+export { ModalFrame, ButtonBar, BodyStyles };
