@@ -33,7 +33,6 @@ export const ModalContainerStyle = (position: string, size: "small" | "medium" |
   return css`
     display: flex;
     flex-direction: column;
-    /* align-items: center; */
     background: #fff;
     z-index: 99;
     box-sizing: border-box;

@@ -4,7 +4,6 @@ export const ConfirmButtonStyle = (disabled?: boolean) => css`
   border: 0;
   background-color: ${disabled ? "#ccc" : "#333333"};
   color: ${disabled ? "#666" : "#ffffff"};
-  /* width: 80px; */
   padding-left: 18px;
   padding-right: 18px;
   height: 36px;
@@ -16,7 +15,6 @@ export const CancelButtonStyle = css`
   background-color: #fff;
   color: #333;
   border: 1px solid #ccc;
-  /* width: 80px; */
   padding-left: 18px;
   padding-right: 18px;
   height: 36px;
