@@ -5,17 +5,12 @@ import {
   ConfirmButton,
 } from '../common/Button.styles';
 import { Main, MainContainer } from './ConfirmModal.styles';
+import { ModalPropsType } from '../../module/Modal.types';
 
-type ConfirmModalProps = {
-  isOpen: boolean;
-  position?: 'center' | 'bottom';
-  size?: 'small' | 'medium' | 'large';
-  title: string;
+interface ConfirmModalProps extends ModalPropsType {
   message: string;
-  onClose: () => void;
   onConfirm: () => void;
-  onBackdropClick: (e: React.MouseEvent<HTMLDivElement>) => void;
-};
+}
 
 const ConfirmModal = ({
   isOpen,

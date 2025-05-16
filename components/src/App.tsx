@@ -29,11 +29,9 @@ function App() {
         onClose={() => setIsOpen(false)}
         onChange={(e) => {
           setInput(e.target.value);
-          console.log(e.target.value);
         }}
         onSubmit={(e) => {
           e.preventDefault();
-          console.log('submit');
         }}
         onBackdropClick={handleBackdropClick}
       />

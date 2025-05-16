@@ -1,16 +1,11 @@
 import { Modal } from '../..';
+import { ModalPropsType } from '../../module/Modal.types';
 import { ButtonContainer, ConfirmButton } from '../common/Button.styles';
 import { Main, MainContainer } from './AlertModal.styles';
 
-type AlertModalProps = {
-  isOpen: boolean;
-  position?: 'center' | 'bottom';
-  size?: 'small' | 'medium' | 'large';
-  title: string;
+interface AlertModalProps extends ModalPropsType {
   message: string;
-  onClose: () => void;
-  onBackdropClick: (e: React.MouseEvent<HTMLDivElement>) => void;
-};
+}
 
 const AlertModal = ({
   isOpen,

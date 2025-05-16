@@ -1,4 +1,5 @@
 import { Modal } from '../..';
+import { ModalPropsType } from '../../module/Modal.types';
 import {
   ButtonContainer,
   CancelButton,
@@ -6,18 +7,12 @@ import {
 } from '../common/Button.styles';
 import { FormContainer, InputField, MainContainer } from './PromptModal.styles';
 
-type PromptModalProps = {
-  isOpen: boolean;
-  position?: 'center' | 'bottom';
-  size?: 'small' | 'medium' | 'large';
-  title: string;
+interface PromptModalProps extends ModalPropsType {
   value: string;
   placeholder?: string;
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  onClose: () => void;
   onSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
-  onBackdropClick: (e: React.MouseEvent<HTMLDivElement>) => void;
-};
+}
 
 const PromptModal = ({
   isOpen,
