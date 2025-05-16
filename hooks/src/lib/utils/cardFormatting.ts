@@ -24,12 +24,16 @@ export const CARD_FORMAT: Record<string, CardFormat> = {
     gaps: [4, 8, 12],
     length: 16,
   },
+  default: {
+    gaps: [4, 8, 12],
+    length: 16,
+  },
 };
 
 export function formatCardNumber(cardNumber: string, cardBrand: string): string {
   const digitsOnly = cardNumber.replace(/\D/g, '');
 
-  const format = CARD_FORMAT[cardBrand] || { gaps: [4, 8, 12], length: 16 };
+  const format = CARD_FORMAT[cardBrand] || CARD_FORMAT.default;
 
   let result = '';
 
@@ -44,8 +48,7 @@ export function formatCardNumber(cardNumber: string, cardBrand: string): string 
 }
 
 export function getMaxInputLength(cardBrand: string): number {
-  const format = CARD_FORMAT[cardBrand];
-  if (!format) return 16 + 3;
+  const format = CARD_FORMAT[cardBrand] || CARD_FORMAT.default;
 
   const maxLength = format.length;
   const gapsCount = format.gaps.length;
