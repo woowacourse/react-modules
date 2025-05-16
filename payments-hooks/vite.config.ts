@@ -22,5 +22,11 @@ export default defineConfig({
       esmExternals: ["react"],
     },
   },
-  plugins: [react(), dts()],
+  plugins: [
+    react(),
+    dts({
+      include: ["src/lib"],
+      tsconfigPath: "./tsconfig.app.json",
+    }),
+  ],
 });
