@@ -26,8 +26,6 @@ const slideUpBottom = keyframes`
   }
 `;
 
-// animation 선언은 생략
-
 export const positionStyles = {
   center: css`
     top: 50%;
