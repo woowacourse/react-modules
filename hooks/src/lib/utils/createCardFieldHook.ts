@@ -8,19 +8,17 @@ export default function createCardFieldHook<T extends string>(
 ): CardFieldHook<T> {
   const [value, setValue] = useState<T>(initialValue);
 
-  const errorMessage = useMemo(() => {
-    for (const validate of validators) {
-      const { isValid, errorMessage } = validate(value);
-      if (!isValid && errorMessage) {
-        return errorMessage;
-      }
-    }
-    return '';
-  }, [value, validators]);
-
   const handleChange = (newValue: T) => {
     setValue(newValue);
   };
+
+  const errorMessage = useMemo(() => {
+    for (const validate of validators) {
+      const { isValid, errorMessage } = validate(value);
+      if (!isValid && errorMessage) return errorMessage;
+    }
+    return '';
+  }, [value, validators]);
 
   return { value, handleChange, errorMessage };
 }
