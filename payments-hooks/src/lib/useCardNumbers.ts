@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import type { ChangeEvent } from "react";
 import { validateCardNumber } from "./validator/validateCardInput";
 import { getFirstErrorMessage } from "./validator/getFirstErrorMessage";
@@ -48,24 +48,6 @@ export function useCardNumbersInput() {
   ]);
   const [cardBrand, setCardBrand] = useState<CardBrand>("UNKNOWN");
 
-  useEffect(() => {
-    const blockCount = CARD_NUMBER_BLOCKS[cardBrand].length;
-
-    setCardNumbersInfo((prev) => {
-      const next = prev.slice(0, blockCount).map((item) => ({ ...item }));
-      if (next.length < blockCount) {
-        next.push(
-          ...Array(blockCount - next.length).fill({
-            value: "",
-            errorMessage: "",
-          })
-        );
-      }
-
-      return next;
-    });
-  }, [cardBrand]);
-
   const onChangeHandler = (index: number) => {
     return (e: ChangeEvent<HTMLInputElement>) => {
       const { value } = e.target;
@@ -76,13 +58,12 @@ export function useCardNumbersInput() {
         i === index ? { value, errorMessage } : prev
       );
 
-      setCardNumbersInfo(next);
+      setCardBrand(detectCardBrand(next.map(({ value }) => value).join("")));
 
-      const fullNumber = next.map(({ value }) => value).join("");
-      const detectedBrand = detectCardBrand(fullNumber);
-      if (detectedBrand !== cardBrand) {
-        setCardBrand(detectedBrand);
-      }
+      const blockCount = CARD_NUMBER_BLOCKS[cardBrand].length;
+      const validNext = next.slice(0, blockCount).map((item) => ({ ...item }));
+
+      setCardNumbersInfo(validNext);
     };
   };
 
