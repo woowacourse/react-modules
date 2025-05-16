@@ -13,8 +13,8 @@ const useCardCompany = (validCardCompanies: string[] = []) => {
       message: "",
     });
 
-  const validate = (inputValue: string) => {
-    if (inputValue.length === 0) {
+  const validate = (cardCompany: string) => {
+    if (cardCompany.length === 0) {
       setValidationResult({
         errorState: true,
         message: ERROR_MESSAGE.EMPTY_CARD_COMPANY,
@@ -22,7 +22,7 @@ const useCardCompany = (validCardCompanies: string[] = []) => {
       return;
     }
 
-    if (!validCardCompanies.includes(inputValue)) {
+    if (!validCardCompanies.includes(cardCompany)) {
       setValidationResult({
         errorState: true,
         message: "유효하지 않은 카드사입니다.",
@@ -33,9 +33,9 @@ const useCardCompany = (validCardCompanies: string[] = []) => {
     setValidationResult({ errorState: false, message: "" });
   };
 
-  const handleChange = (value: string) => {
-    setCardCompany(value);
-    validate(value);
+  const handleChange = (cardCompany: string) => {
+    setCardCompany(cardCompany);
+    validate(cardCompany);
   };
 
   return { cardCompany, handleChange, validationResult };

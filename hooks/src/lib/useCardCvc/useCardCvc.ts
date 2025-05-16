@@ -17,8 +17,8 @@ const useCardCvc = () => {
       message: "",
     });
 
-  const validate = (value: string) => {
-    if (!checkNumber(value)) {
+  const validate = (cardCVC: string) => {
+    if (!checkNumber(cardCVC)) {
       setValidationResult({
         errorState: true,
         message: ERROR_MESSAGE.INVALID_NUMBER,
@@ -26,7 +26,7 @@ const useCardCvc = () => {
       return;
     }
 
-    if (!checkValidLength(value, CVC_VALID_LENGTH)) {
+    if (!checkValidLength(cardCVC, CVC_VALID_LENGTH)) {
       setValidationResult({
         errorState: true,
         message: ERROR_MESSAGE.INPUT_LENGTH_LIMIT,
@@ -37,9 +37,9 @@ const useCardCvc = () => {
     setValidationResult({ errorState: false, message: "" });
   };
 
-  const handleChange = (value: string) => {
-    setCardCVC(value);
-    validate(value);
+  const handleChange = (cardCVC: string) => {
+    setCardCVC(cardCVC);
+    validate(cardCVC);
   };
 
   return { cardCVC, handleChange, validationResult };

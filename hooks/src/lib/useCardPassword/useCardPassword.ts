@@ -17,8 +17,8 @@ const useCardPassword = () => {
       message: "",
     });
 
-  const validate = (value: string) => {
-    if (!checkNumber(value)) {
+  const validate = (cardPassword: string) => {
+    if (!checkNumber(cardPassword)) {
       setValidationResult({
         errorState: true,
         message: ERROR_MESSAGE.INVALID_NUMBER,
@@ -26,7 +26,7 @@ const useCardPassword = () => {
       return;
     }
 
-    if (!checkValidLength(value, PASSWORD_VALID_LENGTH)) {
+    if (!checkValidLength(cardPassword, PASSWORD_VALID_LENGTH)) {
       setValidationResult({
         errorState: true,
         message: ERROR_MESSAGE.INPUT_LENGTH_LIMIT,
@@ -36,9 +36,9 @@ const useCardPassword = () => {
     setValidationResult({ errorState: false, message: "" });
   };
 
-  const handleChange = (value: string) => {
-    setCardPassword(value);
-    validate(value);
+  const handleChange = (cardPassword: string) => {
+    setCardPassword(cardPassword);
+    validate(cardPassword);
   };
 
   return { cardPassword, handleChange, validationResult };
