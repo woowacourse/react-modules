@@ -35,10 +35,10 @@ describe('useCardNumberField custom hook 테스트', () => {
     });
   });
 
-  describe('VISA 카드 입력 유효성 검사', () => {
+  describe('visa 카드 입력 유효성 검사', () => {
     it.each([
-      ['411111111111111', 'VISA 카드는 16자리여야 합니다.', '자리수가 부족한 입력'],
-      ['41111111111111111', 'VISA 카드는 16자리여야 합니다.', '자리수가 많은 입력'],
+      ['411111111111111', 'visa 카드는 16자리여야 합니다.', '자리수가 부족한 입력'],
+      ['41111111111111111', 'visa 카드는 16자리여야 합니다.', '자리수가 많은 입력'],
     ])('카드 번호 입력이 %s일 때 에러: %s (%s)', (input, error, _) => {
       const { result } = renderHook(() => useCardNumberField());
 
@@ -52,8 +52,8 @@ describe('useCardNumberField custom hook 테스트', () => {
 
   describe('MASTER 카드 입력 유효성 검사', () => {
     it.each([
-      ['511111111111111', 'MASTER 카드는 16자리여야 합니다.', '자리수가 부족한 입력'],
-      ['51111111111111111', 'MASTER 카드는 16자리여야 합니다.', '자리수가 많은 입력'],
+      ['511111111111111', 'master 카드는 16자리여야 합니다.', '자리수가 부족한 입력'],
+      ['51111111111111111', 'master 카드는 16자리여야 합니다.', '자리수가 많은 입력'],
     ])('카드 번호 입력이 %s일 때 에러: %s (%s)', (input, error, _) => {
       const { result } = renderHook(() => useCardNumberField());
 
@@ -65,10 +65,10 @@ describe('useCardNumberField custom hook 테스트', () => {
     });
   });
 
-  describe('DINERS 카드 입력 유효성 검사', () => {
+  describe('diners 카드 입력 유효성 검사', () => {
     it.each([
-      ['3611111111111', 'DINERS 카드는 14자리여야 합니다.', '자리수가 부족한 입력'],
-      ['361111111111111', 'DINERS 카드는 14자리여야 합니다.', '자리수가 많은 입력'],
+      ['3611111111111', 'diners 카드는 14자리여야 합니다.', '자리수가 부족한 입력'],
+      ['361111111111111', 'diners 카드는 14자리여야 합니다.', '자리수가 많은 입력'],
     ])('카드 번호 입력이 %s일 때 에러: %s (%s)', (input, error, _) => {
       const { result } = renderHook(() => useCardNumberField());
 
@@ -82,8 +82,8 @@ describe('useCardNumberField custom hook 테스트', () => {
 
   describe('AMEX 카드 입력 유효성 검사', () => {
     it.each([
-      ['34111111111111', 'AMEX 카드는 15자리여야 합니다.', '자리수가 부족한 입력'],
-      ['3411111111111111', 'AMEX 카드는 15자리여야 합니다.', '자리수가 많은 입력'],
+      ['34111111111111', 'amex 카드는 15자리여야 합니다.', '자리수가 부족한 입력'],
+      ['3411111111111111', 'amex 카드는 15자리여야 합니다.', '자리수가 많은 입력'],
     ])('카드 번호 입력이 %s일 때 에러: %s (%s)', (input, error, _) => {
       const { result } = renderHook(() => useCardNumberField());
 
@@ -97,8 +97,8 @@ describe('useCardNumberField custom hook 테스트', () => {
 
   describe('UNIONPAY 카드 입력 유효성 검사', () => {
     it.each([
-      ['622126111111111', 'UNIONPAY 카드는 16자리여야 합니다.', '자리수가 부족한 입력'],
-      ['62212611111111111', 'UNIONPAY 카드는 16자리여야 합니다.', '자리수가 많은 입력'],
+      ['622126111111111', 'unionpay 카드는 16자리여야 합니다.', '자리수가 부족한 입력'],
+      ['62212611111111111', 'unionpay 카드는 16자리여야 합니다.', '자리수가 많은 입력'],
     ])('카드 번호 입력이 %s일 때 에러: %s (%s)', (input, error, _) => {
       const { result } = renderHook(() => useCardNumberField());
 
