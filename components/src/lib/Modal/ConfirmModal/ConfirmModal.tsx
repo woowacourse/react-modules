@@ -1,10 +1,8 @@
+import { ComponentProps } from "react";
 import Modal from "../Modal";
 
-interface ConfirmModalProps {
-  position: "bottom" | "center";
-  size: "small" | "medium" | "large";
-  isOpen: boolean;
-  onClose: () => void;
+type ModalBaseProps = Omit<ComponentProps<typeof Modal>, "children">;
+interface ConfirmModalProps extends ModalBaseProps {
   onConfirm: () => void;
   title: string;
   description?: string;
