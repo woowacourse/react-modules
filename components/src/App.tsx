@@ -1,13 +1,17 @@
 import './App.css';
 import { css } from '@emotion/css';
+import Modal from './lib/components/Modal/Modal';
 import useModal from './lib/hooks/useModal';
-import { PromptModal } from '@eunoia-jaxson/modal';
-
 function App() {
   const { isOpen, handleOpen, handleClose } = useModal();
 
   const handleAfterOpen = () => {
-    console.log('열기 버튼 클릭');
+    console.log('모달 열기 버튼 클릭');
+  };
+
+  const handleConfirm = () => {
+    console.log('확인 버튼 클릭');
+    handleClose();
   };
 
   return (
@@ -16,9 +20,16 @@ function App() {
       <button className={OpenButton} onClick={handleOpen}>
         열기
       </button>
-      <PromptModal isOpen={isOpen} position="center" onAfterOpen={handleAfterOpen} onClose={handleClose} size="large">
-        <PromptModal.Header title="알림" showCloseButton />
-      </PromptModal>
+
+      <Modal.Prompt
+        isOpen={isOpen}
+        position="center"
+        onAfterOpen={handleAfterOpen}
+        onClose={handleClose}
+        onConfirm={handleConfirm}
+        size="large"
+        title="Prompt"
+      />
     </>
   );
 }

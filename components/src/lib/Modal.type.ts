@@ -3,10 +3,11 @@ import { ReactNode } from 'react';
 type Position = 'center' | 'bottom';
 type ModalSize = 'small' | 'medium' | 'large';
 interface ModalProps {
-  children: ReactNode;
+  children?: ReactNode;
   isOpen: boolean;
   position: Position;
   size: ModalSize;
+  title: string;
   onClose: () => void;
   onAfterOpen?: () => void;
   onConfirm?: () => void;
