@@ -17,7 +17,7 @@ const Modal = ({
   isOpen,
   onClose,
   onAfterOpen,
-  size,
+  size = 'medium',
   showDefaultCancelButton,
   showDefaultConfirmButton,
 }: ModalProps) => {
