@@ -19,7 +19,7 @@ export interface ModalProps extends BaseProps {
   isOpen: boolean;
   onClose: () => void;
   closeOnEscape?: boolean;
-  position: Position;
+  position?: Position;
 }
 
 export interface OverlayProps extends BaseProps {
