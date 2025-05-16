@@ -35,11 +35,12 @@ export const useFocusTrap = (containerRef: React.RefObject<HTMLElement | null>, 
           e.preventDefault();
           lastEl.focus();
         }
-      } else {
-        if (activeEl === lastEl) {
-          e.preventDefault();
-          firstEl.focus();
-        }
+        return;
+      }
+
+      if (activeEl === lastEl) {
+        e.preventDefault();
+        firstEl.focus();
       }
     };
 
