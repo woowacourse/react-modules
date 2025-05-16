@@ -2,13 +2,13 @@ import { StyledButton } from './Button.styles';
 
 interface ButtonProps {
   text: string;
-  varient: 'confirm' | 'cancel';
+  variant: 'confirm' | 'cancel';
   onClick?: () => void;
 }
 
-const Button = ({ text, varient, onClick }: ButtonProps) => {
+const Button = ({ text, variant, onClick }: ButtonProps) => {
   return (
-    <StyledButton varient={varient} onClick={onClick}>
+    <StyledButton varient={variant} onClick={onClick}>
       {text}
     </StyledButton>
   );

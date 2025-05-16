@@ -1,8 +1,8 @@
 import { Modal } from '../..';
+import { ModalAction, ModalContent } from '../../module/Modal.styles';
 import { ModalPropsType } from '../../module/Modal.types';
 import Button from '../common/Button';
-import { ButtonContainer } from '../common/Button.styles';
-import { FormContainer, InputField, MainContainer } from './PromptModal.styles';
+import { FormContainer, InputField } from './PromptModal.styles';
 
 interface PromptModalProps extends ModalPropsType {
   value: string;
@@ -34,17 +34,17 @@ const PromptModal = ({
       onBackdropClick={onBackdropClick}
     >
       <FormContainer onSubmit={onSubmit}>
-        <MainContainer>
+        <ModalContent>
           <InputField
             placeholder={placeholder}
             value={value}
             onChange={onChange}
           />
-        </MainContainer>
-        <ButtonContainer>
-          <Button text="취소" varient="cancel" onClick={onClose} />
-          <Button text="확인" varient="confirm" />
-        </ButtonContainer>
+        </ModalContent>
+        <ModalAction>
+          <Button text="취소" variant="cancel" onClick={onClose} />
+          <Button text="확인" variant="confirm" />
+        </ModalAction>
       </FormContainer>
     </Modal>
   );

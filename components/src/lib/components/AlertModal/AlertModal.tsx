@@ -1,8 +1,7 @@
 import { Modal } from '../..';
+import { ModalAction, ModalContent } from '../../module/Modal.styles';
 import { ModalPropsType } from '../../module/Modal.types';
 import Button from '../common/Button';
-import { ButtonContainer } from '../common/Button.styles';
-import { Main, MainContainer } from './AlertModal.styles';
 
 interface AlertModalProps extends ModalPropsType {
   message: string;
@@ -27,12 +26,10 @@ const AlertModal = ({
       onClose={onClose}
       onBackdropClick={onBackdropClick}
     >
-      <MainContainer>
-        <Main>{message}</Main>
-      </MainContainer>
-      <ButtonContainer>
-        <Button text={'확인'} varient={'confirm'} onClick={onClose} />
-      </ButtonContainer>
+      <ModalContent>{message}</ModalContent>
+      <ModalAction>
+        <Button text={'확인'} variant={'confirm'} onClick={onClose} />
+      </ModalAction>
     </Modal>
   );
 };

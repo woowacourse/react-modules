@@ -1,6 +1,5 @@
 import { Modal } from '../..';
-import { ButtonContainer } from '../common/Button.styles';
-import { Main, MainContainer } from './ConfirmModal.styles';
+import { ModalAction, ModalContent } from '../../module/Modal.styles';
 import { ModalPropsType } from '../../module/Modal.types';
 import Button from '../common/Button';
 
@@ -29,13 +28,11 @@ const ConfirmModal = ({
       onClose={onClose}
       onBackdropClick={onBackdropClick}
     >
-      <MainContainer>
-        <Main>{message}</Main>
-      </MainContainer>
-      <ButtonContainer>
-        <Button text="취소" varient="cancel" onClick={onClose} />
-        <Button text="확인" varient="confirm" onClick={onConfirm} />
-      </ButtonContainer>
+      <ModalContent>{message}</ModalContent>
+      <ModalAction>
+        <Button text="취소" variant="cancel" onClick={onClose} />
+        <Button text="확인" variant="confirm" onClick={onConfirm} />
+      </ModalAction>
     </Modal>
   );
 };

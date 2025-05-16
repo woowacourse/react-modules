@@ -87,3 +87,15 @@ export const CloseButton = styled.button<{ showCloseButton: boolean }>`
   cursor: pointer;
   display: ${({ showCloseButton }) => (showCloseButton ? 'block;' : 'none;')};
 `;
+
+export const ModalContent = styled.div`
+  width: 100%;
+  flex: 1;
+  text-align: start;
+  padding: 20px 0;
+`;
+
+export const ModalAction = styled.div`
+  width: 100%;
+  text-align: end;
+`;
