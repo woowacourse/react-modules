@@ -12,3 +12,5 @@ export type CardExpiration = {
   month: string;
   year: string;
 };
+
+export type CardBrand = 'visa' | 'master' | 'diners' | 'amex' | 'unionpay' | '';
