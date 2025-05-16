@@ -1,23 +1,25 @@
+## 세오의 React CARD HOOKS 라이브러리
+
 신용카드 결제 정보를 쉽게 입력하고 검증할 수 있도록 돕는 React용 커스텀 훅 모음입니다.
 **CVC, 카드번호, 만료일, 비밀번호 입력 필드 유효성 검사 및 상태 관리**를 자동으로 처리해줍니다.
 
 ## 제공 훅 목록
 
-| Hook              | 기능                                            |
-| ----------------- | ----------------------------------------------- |
-| `useCardNumber()` | 카드 번호 4자리 × 4 입력 상태 및 유효성 검사    |
-| `useCvc()`        | CVC 입력 상태 및 유효성 검사 (3자리 숫자)       |
-| `useExpiration()` | 만료월/년 입력 상태 및 유효성 검사              |
-| `usePassword()`   | 카드 비밀번호 앞 2자리 입력 상태 및 유효성 검사 |
+| Hook              | 기능                                              |
+| ----------------- | ------------------------------------------------- |
+| `useCardNumber()` | 카드 번호 입력 상태 및 유효성 검사 및 카드사 검사 |
+| `useCvc()`        | CVC 입력 상태 및 유효성 검사 (3자리 숫자)         |
+| `useExpiration()` | 만료월/년 입력 상태 및 유효성 검사                |
+| `usePassword()`   | 카드 비밀번호 앞 2자리 입력 상태 및 유효성 검사   |
 
 ---
 
 ## 설치
 
 ```
-npm install react-card-form-hooks
+npm install @seo_dev/react-card-hooks
 # 또는
-yarn add react-card-form-hooks
+yarn add @seo_dev/react-card-hooks
 ```
 
 ---
@@ -25,10 +27,10 @@ yarn add react-card-form-hooks
 ## 사용 예시
 
 ```tsx
-import { useCardNumber, useCvc, useExpiration, usePassword } from 'react-card-form-hooks';
+import { useCardNumber, useCvc, useExpiration, usePassword } from '@seo_dev/react-card-hooks';
 
 function CardForm() {
-  const { cardNumber, errorState: cardError, handleCardNumberChange } = useCardNumber();
+  const { cardNumber, cardCompany, errorState: cardError, handleCardNumberChange } = useCardNumber();
   const { cvc, errorState: cvcError, handleCvcChange } = useCvc();
   const { expiration, errorState: expError, handleExpirationChange } = useExpiration();
   const { password, errorState: pwError, handlePasswordChange } = usePassword();
@@ -36,10 +38,8 @@ function CardForm() {
   return (
     <form>
       <div>
-        <input value={cardNumber.first} onChange={(e) => handleCardNumberChange(e, 'first')} />
-        <input value={cardNumber.second} onChange={(e) => handleCardNumberChange(e, 'second')} />
-        <input value={cardNumber.third} onChange={(e) => handleCardNumberChange(e, 'third')} />
-        <input value={cardNumber.fourth} onChange={(e) => handleCardNumberChange(e, 'fourth')} />
+        <p>카드사: {cardCompany}</p>
+        <input value={cardNumber} onChange={(e) => handleCardNumberChange(e.target.value)} />
         {cardError.errorMessage && <p>{cardError.errorMessage}</p>}
       </div>
 
@@ -69,9 +69,17 @@ function CardForm() {
 
 ### `useCardNumber()`
 
-- 상태 구조: `{ first, second, third, fourth }`
-- 에러 메시지: `'숫자만 입력해주세요.'`, `'4자리 숫자를 입력해주세요.'`
-- 각 필드에 대해 `onChange` 핸들러 제공
+- 상태 구조: `string`
+- 에러 메시지: `'숫자만 입력해주세요.'`
+- 각 카드사별 포맷팅 및 카드사 반환
+
+| 카드사       | 조건                                                                                                                              | 예시                |
+| ------------ | --------------------------------------------------------------------------------------------------------------------------------- | ------------------- |
+| `visa`       | 4로 시작하는 16자리 카드 번호                                                                                                     | 4234 5678 9123 4567 |
+| `masterCard` | 51~55로 시작하는 16자리 카드 번호                                                                                                 | 5123 4567 8901 2345 |
+| `AMEX`       | 34,37로 시작하는 15자리 카드 번호                                                                                                 | 3412 345678 90123   |
+| `Diners`     | 36으로 시작하는 14자리 카드 번호                                                                                                  | 3612 345678 9012    |
+| `UnionPay`   | 622126 ~ 622925로 시작하는 16자리 카드 번호<br/>624 ~ 626로 시작하는 16자리 카드 번호<br/>6282 ~ 6288로 시작하는 16자리 카드 번호 | 6241 2345 6789 0123 |
 
 ---
 
@@ -108,4 +116,4 @@ function CardForm() {
 
 MIT License
 
-© 2025 youdame, jin123457
+© 2025 jin123457

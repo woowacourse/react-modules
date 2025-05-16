@@ -1,32 +1,23 @@
 import validation from '../validation';
-import { CardNumberStateKey, CardNumberStateType } from './useCardNumber';
+import { NO_SPACE_REGEX } from './constants/regex';
 
-const validateCardNumber = (cardNumber: CardNumberStateType) => {
-  const errorState = {
-    first: false,
-    second: false,
-    third: false,
-    fourth: false
+const validateCardNumber = (cardNumber: string, cardCompanyLength: number) => {
+  const errorObject = {
+    errorState: false,
+    errorMessage: ''
   };
 
-  let errorMessage = '';
+  const digits = cardNumber.replace(NO_SPACE_REGEX, '');
 
-  for (const [k, value] of Object.entries(cardNumber)) {
-    const key = k as CardNumberStateKey;
-    if (!validation.isNumber(value) && value !== '') {
-      errorState[key] = true;
-      errorMessage = '숫자만 입력하세요.';
-      break;
-    }
-
-    if (!validation.isValidLength(value, 4) && value !== '') {
-      errorState[key] = true;
-      errorMessage = '4자리 숫자를 입력하세요.';
-      break;
-    }
+  if (!validation.isNumber(digits) && digits !== '') {
+    return { errorState: true, errorMessage: '숫자만 입력하세요.' };
   }
 
-  return { errorState, errorMessage };
+  if (cardCompanyLength > 0 && cardCompanyLength !== digits.length) {
+    return { errorState: true, errorMessage: `${cardCompanyLength}자리를 입력하세요.` };
+  }
+
+  return errorObject;
 };
 
 export default validateCardNumber;

@@ -30,7 +30,7 @@ export const CenteredModal: Story = {
             <Modal.Content position="center" style={{ width: '300px', height: '300px', backgroundColor: 'white' }}>
               <Modal.Title>중앙 모달</Modal.Title>
               <p>이곳은 중앙에 위치한 모달입니다.</p>
-              <Modal.CloseButton onClick={close}>닫기</Modal.CloseButton>
+              <Modal.CloseButton>닫기</Modal.CloseButton>
             </Modal.Content>
           </Modal>
         )}

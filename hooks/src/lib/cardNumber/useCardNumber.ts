@@ -1,28 +1,30 @@
-import { ChangeEvent, useState } from 'react';
 import validateCardNumber from './validateCardNumber';
-
-export type CardNumberStateType = typeof initialCardNumberState;
-
-const initialCardNumberState = {
-  first: '',
-  second: '',
-  third: '',
-  fourth: ''
-};
-
-export type CardNumberStateKey = keyof CardNumberStateType;
+import { useCallback, useMemo, useState } from 'react';
+import { formatByPattern, getCardBrandByBin, getPatternByBin } from './utils';
+import { CARD_FORMATS } from './constants';
+import { NO_SPACE_REGEX } from './constants/regex';
 
 function useCardNumber() {
-  const [cardNumber, setCardNumber] = useState<CardNumberStateType>(initialCardNumberState);
+  const [cardNumber, setCardNumber] = useState<string>('');
 
-  const handleCardNumberChange = (e: ChangeEvent<HTMLInputElement>, field: CardNumberStateKey) => {
-    const value = e.target.value;
-    setCardNumber((prev) => ({ ...prev, [field]: value }));
-  };
+  const { name: cardCompany, length: cardCompanyLength } = useMemo(() => {
+    const digits = cardNumber.replace(NO_SPACE_REGEX, '');
+
+    return getCardBrandByBin(CARD_FORMATS, digits);
+  }, [cardNumber]);
+
+  const handleCardNumberChange = useCallback((value: string) => {
+    const digits = value.replace(NO_SPACE_REGEX, '');
+    const pattern = getPatternByBin(CARD_FORMATS, digits);
+    const formatted = formatByPattern(digits, pattern);
+
+    setCardNumber(formatted);
+  }, []);
 
   return {
     cardNumber,
-    errorState: validateCardNumber(cardNumber),
+    cardCompany,
+    errorState: validateCardNumber(cardNumber, cardCompanyLength),
     handleCardNumberChange
   };
 }

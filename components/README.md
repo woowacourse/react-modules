@@ -1,7 +1,8 @@
-## 메타 세오의 React Modal 라이브러리
+## 세오의 React Modal 라이브러리
 
 React Portal을 활용하여 `document.body`에 모달을 렌더링하는 유연하고 가벼운 모달 컴포넌트입니다.
 중앙 모달, 바텀시트 모달을 기본으로 제공하며, ESC 키 닫기, 스크롤 락 기능이 내장되어 있습니다.
+또한, 간편하게 사용할 수 있는 AlertModal, ConfirmModal, PromptModal을 제공합니다.
 
 ## 주요 기능
 
@@ -11,19 +12,22 @@ React Portal을 활용하여 `document.body`에 모달을 렌더링하는 유연
 - 모달 열림 시 배경 스크롤 차단
 - 백드롭 클릭 시 닫기 기능 포함
 - emotion 기반의 스타일 구성
+- `AlertModal | ConfirmModal | PromptModal` 모달 제공
 
 ## 설치 방법
 
 ```bash
-npm install seo-meta-react-modal
+npm install @seo_dev/react-modal
 # 또는
-yarn add seo-meta-react-modal
+yarn add @seo_dev/react-modal
 ```
 
 ## 기본 사용 예시
 
+### BaseModal 사용법
+
 ```tsx
-import Modal from 'seo-meta-react-modal';
+import Modal from '@seo_dev/react-modal';
 import { useState } from 'react';
 
 function Example() {
@@ -45,6 +49,66 @@ function Example() {
           </Modal.Content>
         </Modal>
       )}
+    </>
+  );
+}
+```
+
+### AlertModal 사용법
+
+```tsx
+import AlertModal from '@seo_dev/react-modal';
+import { useState } from 'react';
+
+function Example() {
+  const [isOpen, setIsOpen] = useState(false);
+  const open = () => setIsOpen(true);
+  const close = () => setIsOpen(false);
+
+  return (
+    <>
+      <button onClick={open}>모달 열기</button>
+      {isOpen & <AlertModal title="제목을 설정할 수 있습니다." description="설명을 설정할 수 있습니다." onClose={close} onConfirmButtonClick={close} />}
+    </>
+  );
+}
+```
+
+### ConfirmModal 사용법
+
+```tsx
+import ConfirmModal from '@seo_dev/react-modal';
+import { useState } from 'react';
+
+function Example() {
+  const [isOpen, setIsOpen] = useState(false);
+  const open = () => setIsOpen(true);
+  const close = () => setIsOpen(false);
+
+  return (
+    <>
+      <button onClick={open}>모달 열기</button>
+      {isOpen & <ConfirmModal title="제목을 설정할 수 있습니다." description="설명을 설정할 수 있습니다." onClose={close} onConfirmButtonClick={close} />}
+    </>
+  );
+}
+```
+
+### PromptModal 사용법
+
+```tsx
+import PromptModal from '@seo_dev/react-modal';
+import { useState } from 'react';
+
+function Example() {
+  const [isOpen, setIsOpen] = useState(false);
+  const open = () => setIsOpen(true);
+  const close = () => setIsOpen(false);
+
+  return (
+    <>
+      <button onClick={open}>모달 열기</button>
+      {isOpen & <ConfirmModal title="제목을 설정할 수 있습니다." onClose={close} onPromptButtonClick={close} />}
     </>
   );
 }
@@ -78,6 +142,53 @@ function Example() {
 </Modal>
 ```
 
+### size별 모달 (small,medium,large)
+
+small,medium,large별로 사이즈를 모달의 사이즈를 조정할 수 있습니다.
+각각의 사이즈는 320px, 480px, 600px 입니다.
+
+`BaseModal 예시`
+
+```tsx
+<Modal onClose={close}>
+  <Modal.BackDrop onClose={close} backgroundColor="rgba(0, 0, 0, 0.6)" />
+  <Modal.Content size={size} position={position}>
+    <Modal.Title>바텀 시트</Modal.Title>
+    <p>이 모달은 화면 하단에서 올라옵니다.</p>
+    <Modal.Button onClick={close}>확인</Modal.Button>
+  </Modal.Content>
+</Modal>
+```
+
+`AlertModal | ConfirmModal | PromptModal 예시`
+
+```tsx
+<AlertModal title="제목을 정합니다." description="설명을 정합니다." onClose={close} onConfirmButtonClick={close} size="small" />
+```
+
+## props 구성
+
+### AlertModal, ConfirmModal
+
+| props                     | 설명                                                                                               |
+| ------------------------- | -------------------------------------------------------------------------------------------------- |
+| \* `title`                | 제목을 넣는 곳입니다. (필수항목)                                                                   |
+| \* `description`          | 설명을 넣는 곳입니다. (필수항목)                                                                   |
+| \* `onClose`              | 닫기 이벤트를 넣는 곳입니다. (필수항목)                                                            |
+| \* `onConfirmButtonClick` | 확인 버튼 클릭 시 이벤트를 넣는 곳입니다. (필수항목)                                               |
+| `position`                | 위치를 넣는 곳입니다. 기본값은 `center`이고 `bottom`,`center`가 있습니다. (선택항목)               |
+| `size`                    | 모달 사이즈를 넣는 곳입니다. 기본값은 `medium`이고 `small`,`medium`,`large`가 있습니다. (선택항목) |
+
+### PromptModal
+
+| props                     | 설명                                                                                               |
+| ------------------------- | -------------------------------------------------------------------------------------------------- |
+| \* `title`                | 제목을 넣는 곳입니다. (필수항목)                                                                   |
+| \* `onClose`              | 닫기 이벤트를 넣는 곳입니다. (필수항목)                                                            |
+| \* `onConfirmButtonClick` | 확인 버튼 클릭 시 이벤트를 넣는 곳입니다. (필수항목)                                               |
+| `position`                | 위치를 넣는 곳입니다. 기본값은 `center`이고 `bottom`,`center`가 있습니다. (선택항목)               |
+| `size`                    | 모달 사이즈를 넣는 곳입니다. 기본값은 `medium`이고 `small`,`medium`,`large`가 있습니다. (선택항목) |
+
 ## 컴포넌트 구성
 
 | 컴포넌트            | 설명                                                                                            |
@@ -97,4 +208,4 @@ function Example() {
 
 MIT License
 
-© 2025 youdame, jin123457
+© 2025 jin123457
