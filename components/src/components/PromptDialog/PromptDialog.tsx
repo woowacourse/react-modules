@@ -1,8 +1,6 @@
 import { Dialog } from '../../lib';
 import {
   buttonContainer,
-  cancelButton,
-  confirmButton,
   dialogContainer,
   input,
   inputContainer,
@@ -22,12 +20,8 @@ const PromptDialog = () => {
               <input css={input} type="text" placeholder="CGEXX46Z" />
             </div>
             <div css={buttonContainer}>
-              <Dialog.CloseButton>
-                <button css={cancelButton}>취소</button>
-              </Dialog.CloseButton>
-              <Dialog.CloseButton>
-                <button css={confirmButton}>확인</button>
-              </Dialog.CloseButton>
+              <Dialog.CloseButton>취소</Dialog.CloseButton>
+              <Dialog.CloseButton>확인</Dialog.CloseButton>
             </div>
           </div>
         </Dialog.Content>
