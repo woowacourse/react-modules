@@ -1,5 +1,5 @@
 import './App.css';
-import { useCardNumberInput, BRAND_LENGTHS } from '@eunoia-jaxson/card-field-hooks';
+import { useCardNumberInput, BRAND_LENGTHS } from './lib';
 
 function App() {
   const { cardNumber, formattedCardNumber, brand, cardNumberError, handleCardNumberChange } = useCardNumberInput();

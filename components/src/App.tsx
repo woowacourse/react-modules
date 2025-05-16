@@ -2,6 +2,7 @@ import './App.css';
 import { css } from '@emotion/css';
 import Modal from './lib/components/Modal/Modal';
 import useModal from './lib/hooks/useModal';
+
 function App() {
   const { isOpen, handleOpen, handleClose } = useModal();
 
