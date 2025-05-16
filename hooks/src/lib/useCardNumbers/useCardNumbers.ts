@@ -12,16 +12,22 @@ import { ErrorType } from '../types/errorType';
 import { getCardBrandInfo, getFormattedNumber } from '../utils/cardBrandUtils';
 import { CardBrandType } from '../types/cardTypes';
 
-type ValitationResult = {
+interface ValitationResult {
   formattedNumber: string;
   cardBrand: CardBrandType | null;
   error: ErrorType;
   handleCardNumbers: (value: string) => void;
-};
+}
 
 type UpdateErrorArgs =
   | { isValid: true; errorMessage: string }
   | { isValid: false };
+
+interface ValidateParams {
+  value: string;
+  brand: CardBrandType | null;
+  length: number;
+}
 
 export default function useCardNumbers(): ValitationResult {
   const [numbers, setNumbers] = useState('');
@@ -40,7 +46,11 @@ export default function useCardNumbers(): ValitationResult {
   };
 
   useEffect(() => {
-    validate(numberWithoutSpaces, cardBrand, cardNumberLength);
+    validate({
+      value: numberWithoutSpaces,
+      brand: cardBrand,
+      length: cardNumberLength,
+    });
   }, [numberWithoutSpaces, cardBrand, cardNumberLength]);
 
   const updateError = (args: UpdateErrorArgs) => {
@@ -50,11 +60,7 @@ export default function useCardNumbers(): ValitationResult {
     });
   };
 
-  const validate = (
-    value: string,
-    brand: CardBrandType | null,
-    length: number
-  ) => {
+  const validate = ({ value, brand, length }: ValidateParams) => {
     if (isEmpty(value)) {
       updateError({ isValid: false });
       return;
