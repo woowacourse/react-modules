@@ -1,11 +1,8 @@
 import { Modal } from '../..';
-import {
-  ButtonContainer,
-  CancelButton,
-  ConfirmButton,
-} from '../common/Button.styles';
+import { ButtonContainer } from '../common/Button.styles';
 import { Main, MainContainer } from './ConfirmModal.styles';
 import { ModalPropsType } from '../../module/Modal.types';
+import Button from '../common/Button';
 
 interface ConfirmModalProps extends ModalPropsType {
   message: string;
@@ -36,8 +33,8 @@ const ConfirmModal = ({
         <Main>{message}</Main>
       </MainContainer>
       <ButtonContainer>
-        <CancelButton onClick={onClose}>취소</CancelButton>
-        <ConfirmButton onClick={onConfirm}>확인</ConfirmButton>
+        <Button text="취소" varient="cancel" onClick={onClose} />
+        <Button text="확인" varient="confirm" onClick={onConfirm} />
       </ButtonContainer>
     </Modal>
   );

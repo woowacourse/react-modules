@@ -1,5 +1,5 @@
 export interface ModalPropsType {
-  children: React.ReactNode;
+  children?: React.ReactNode;
   isOpen: boolean;
   position?: 'center' | 'bottom';
   title: string;

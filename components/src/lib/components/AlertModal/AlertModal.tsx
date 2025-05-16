@@ -1,6 +1,7 @@
 import { Modal } from '../..';
 import { ModalPropsType } from '../../module/Modal.types';
-import { ButtonContainer, ConfirmButton } from '../common/Button.styles';
+import Button from '../common/Button';
+import { ButtonContainer } from '../common/Button.styles';
 import { Main, MainContainer } from './AlertModal.styles';
 
 interface AlertModalProps extends ModalPropsType {
@@ -30,7 +31,7 @@ const AlertModal = ({
         <Main>{message}</Main>
       </MainContainer>
       <ButtonContainer>
-        <ConfirmButton onClick={onClose}>확인</ConfirmButton>
+        <Button text={'확인'} varient={'confirm'} onClick={onClose} />
       </ButtonContainer>
     </Modal>
   );

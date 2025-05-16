@@ -5,14 +5,23 @@ export const ButtonContainer = styled.div`
   text-align: end;
 `;
 
-export const CancelButton = styled.button`
+export const StyledButton = styled.button<{ varient: 'confirm' | 'cancel' }>`
   outline: 1px solid #333333bf;
-  background-color: #ffffff;
-  color: #333333bf;
   margin-right: 10px;
-`;
-
-export const ConfirmButton = styled.button`
-  background-color: #333333;
-  color: #ffffff;
+  background-color: ${({ varient }) => {
+    switch (varient) {
+      case 'confirm':
+        return '#333333';
+      case 'cancel':
+        return '#ffffff';
+    }
+  }};
+  color: ${({ varient }) => {
+    switch (varient) {
+      case 'confirm':
+        return '#ffffff';
+      case 'cancel':
+        return '#333333';
+    }
+  }};
 `;

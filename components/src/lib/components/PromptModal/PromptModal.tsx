@@ -1,10 +1,7 @@
 import { Modal } from '../..';
 import { ModalPropsType } from '../../module/Modal.types';
-import {
-  ButtonContainer,
-  CancelButton,
-  ConfirmButton,
-} from '../common/Button.styles';
+import Button from '../common/Button';
+import { ButtonContainer } from '../common/Button.styles';
 import { FormContainer, InputField, MainContainer } from './PromptModal.styles';
 
 interface PromptModalProps extends ModalPropsType {
@@ -45,8 +42,8 @@ const PromptModal = ({
           />
         </MainContainer>
         <ButtonContainer>
-          <CancelButton onClick={onClose}>취소</CancelButton>
-          <ConfirmButton>확인</ConfirmButton>
+          <Button text="취소" varient="cancel" onClick={onClose} />
+          <Button text="확인" varient="confirm" />
         </ButtonContainer>
       </FormContainer>
     </Modal>
