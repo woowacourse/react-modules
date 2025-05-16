@@ -15,10 +15,11 @@ import {
   getFormattedNumber,
   identifyCardBrand,
 } from '../utils/cardBrandUtils';
+import { CardBrandType } from '../types/cardTypes';
 
 type ValitationResult = {
   formattedNumber: string;
-  cardBrand: string;
+  cardBrand: CardBrandType | null;
   error: ErrorType;
   handleCardNumbers: (value: string) => void;
 };
@@ -56,7 +57,11 @@ export default function useCardNumbers(): ValitationResult {
     });
   };
 
-  const validate = (value: string, brand: string, length: number) => {
+  const validate = (
+    value: string,
+    brand: CardBrandType | null,
+    length: number
+  ) => {
     if (isEmpty(value)) {
       updateError({ isValid: false });
       return;
@@ -70,7 +75,7 @@ export default function useCardNumbers(): ValitationResult {
       return;
     }
 
-    if (!isValidCardBrand(brand)) {
+    if (!brand || !isValidCardBrand(brand)) {
       updateError({
         isValid: true,
         errorMessage: ERROR_MESSAGE.CARD_NUMBERS.INVALID_NUMBER,

@@ -1,18 +1,28 @@
-import { CARD_BRAND_INFO } from '../constants/cardBrandRule';
+import {
+  CARD_BRAND_INFO,
+  FALLBACK_CARD_INFO,
+} from '../constants/cardBrandRule';
+import { CardBrandType } from '../types/cardTypes';
 
-export const identifyCardBrand = (numbers: string): string => {
-  for (const [brand, { pattern }] of Object.entries(CARD_BRAND_INFO)) {
+export function isCardBrandType(key: string): key is CardBrandType {
+  return key in CARD_BRAND_INFO;
+}
+
+export const identifyCardBrand = (numbers: string): CardBrandType | null => {
+  for (const brand in CARD_BRAND_INFO) {
+    if (!isCardBrandType(brand)) continue;
+
+    const { pattern } = CARD_BRAND_INFO[brand];
     if (pattern.test(numbers)) return brand;
   }
-  return 'Unknown';
+  return null;
+};
+export const getCardNumberLength = (brand: CardBrandType | null): number => {
+  return brand ? CARD_BRAND_INFO[brand].length : FALLBACK_CARD_INFO.length;
 };
 
-export const getCardNumberLength = (brand: string): number => {
-  return CARD_BRAND_INFO[brand]?.length || CARD_BRAND_INFO['UNKNOWN'].length;
-};
-
-export const getFormat = (brand: string): number[] => {
-  return CARD_BRAND_INFO[brand]?.format || CARD_BRAND_INFO['UNKNOWN'].format;
+export const getFormat = (brand: CardBrandType | null): number[] => {
+  return brand ? CARD_BRAND_INFO[brand].format : FALLBACK_CARD_INFO.format;
 };
 
 export const getFormattedNumber = (number: string, format: number[]) => {

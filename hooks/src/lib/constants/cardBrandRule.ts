@@ -1,7 +1,6 @@
-export const CARD_BRAND_INFO: Record<
-  string,
-  { pattern: RegExp; length: number; format: number[] }
-> = {
+import { CardBrandInfoType, CardBrandType } from '../types/cardTypes';
+
+export const CARD_BRAND_INFO: Record<CardBrandType, CardBrandInfoType> = {
   Visa: { pattern: /^4\d*/, length: 16, format: [4, 4, 4, 4] },
   Master: { pattern: /^5[1-5]/, length: 16, format: [4, 4, 4, 4] },
   UnionPay: {
@@ -12,5 +11,10 @@ export const CARD_BRAND_INFO: Record<
   },
   Diners: { pattern: /^36/, length: 14, format: [4, 6, 4] },
   AMEX: { pattern: /^3[47]/, length: 15, format: [4, 6, 5] },
-  UNKNOWN: { pattern: /^4\d*/, length: 16, format: [4, 4, 4, 4] },
+};
+
+export const FALLBACK_CARD_INFO: CardBrandInfoType = {
+  pattern: /^4\d*/,
+  length: 16,
+  format: [4, 4, 4, 4],
 };

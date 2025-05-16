@@ -33,7 +33,7 @@ function App() {
           value={formattedNumber}
           onChange={(e) => handleCardNumbers(e.target.value)}
         />
-        <p>{cardBrand !== 'Unknown' ? cardBrand : ''}</p>
+        <p>{cardBrand ? cardBrand : ''}</p>
         <p>{cardNumbersError.errorMessage}</p>
       </div>
       <div>

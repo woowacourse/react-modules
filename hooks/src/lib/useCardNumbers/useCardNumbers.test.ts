@@ -7,7 +7,10 @@ import {
   getFormattedNumber,
   identifyCardBrand,
 } from '../utils/cardBrandUtils';
-import { CARD_BRAND_INFO } from '../constants/cardBrandRule';
+import {
+  CARD_BRAND_INFO,
+  FALLBACK_CARD_INFO,
+} from '../constants/cardBrandRule';
 
 test('빈 값이 입력된 경우', () => {
   const { result } = renderHook(() => useCardNumbers());
@@ -17,7 +20,7 @@ test('빈 값이 입력된 경우', () => {
   });
 
   expect(result.current.error.errorMessage).toBe('');
-  expect(result.current.cardBrand).toBe('Unknown');
+  expect(result.current.cardBrand).toBe(null);
 });
 
 test('숫자가 아닌 값을 validate 하면 에러 메시지가 세팅된다', () => {
@@ -116,7 +119,7 @@ describe('카드사 판별 테스트', () => {
 });
 
 describe('카드사별 카드 번호 길이 테스트', () => {
-  test.each(['Visa', 'Master', 'UnionPay'])(
+  test.each(['Visa', 'Master', 'UnionPay'] as const)(
     '%s인 경우 16자리 반환',
     (brand) => {
       const length = getCardNumberLength(brand);
@@ -155,7 +158,9 @@ describe('카드사별 카드 번호 길이 테스트', () => {
       });
 
       expect(result.current.error.errorMessage).toBe(
-        ERROR_MESSAGE.CARD_NUMBERS.INVALID_LENGTH(CARD_BRAND_INFO[brand].length)
+        ERROR_MESSAGE.CARD_NUMBERS.INVALID_LENGTH(
+          brand ? CARD_BRAND_INFO[brand].length : FALLBACK_CARD_INFO.length
+        )
       );
     }
   );
