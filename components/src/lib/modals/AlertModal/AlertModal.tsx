@@ -30,6 +30,7 @@ export interface AlertModalProps {
    * 경고 메시지 등 사용자에게 전달할 핵심 내용을 표시
    */
   content: React.ReactNode;
+  label?: string;
 }
 
 const AlertModal = ({
@@ -41,6 +42,7 @@ const AlertModal = ({
   title,
   content,
   background = true,
+  label = "확인",
 }: AlertModalProps) => {
   return (
     <Modal show={show} onHide={onHide} position={position} background={background} size={size}>
@@ -51,7 +53,9 @@ const AlertModal = ({
       )}
       <Modal.Body>{content}</Modal.Body>
       <Modal.Footer buttonAlign="right">
-        <ConfirmButton onHide={onHide} onConfirm={onConfirm} />
+        <ConfirmButton onHide={onHide} onConfirm={onConfirm}>
+          {label}
+        </ConfirmButton>
       </Modal.Footer>
     </Modal>
   );
