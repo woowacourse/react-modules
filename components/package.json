@@ -1,6 +1,6 @@
 {
   "name": "@kimyouk/modal-components",
-  "version": "0.0.8",
+  "version": "0.0.10",
   "description": "npm modal modules",
   "type": "module",
   "types": "dist/index.d.ts",
