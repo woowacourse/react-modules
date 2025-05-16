@@ -16,39 +16,58 @@ yarn add @kimyouk/payments-validation
 
 ```
 function CardNumberInput() {
-  const { cardNumber, isError, errorMessage, onChange } = useCardNumber();
+  const { onChange, formatted, cardBrand, isError, errorMessage } =
+    useCardNumber();
 
   return (
     <>
       <input
-        value={cardNumber[0]}
-        style={{ border: `1px solid ${isError[0] ? 'red' : 'black'}` }}
-        maxLength={4}
-        onChange={(e) => onChange(e, 0)}
+        value={formatted?.join(' ')}
+        style={{
+          border: `1px solid ${isError ? 'red' : 'black'}`,
+          height: '30px',
+          fontSize: '20px',
+          paddingLeft: '10px',
+        }}
+        maxLength={19}
+        onChange={onChange}
       />
-      <input
-        value={cardNumber[1]}
-        style={{ border: `1px solid ${isError[1] ? 'red' : 'black'}` }}
-        maxLength={4}
-        onChange={(e) => onChange(e, 1)}
-      />
-      <input
-        value={cardNumber[2]}
-        style={{ border: `1px solid ${isError[2] ? 'red' : 'black'}` }}
-        maxLength={4}
-        onChange={(e) => onChange(e, 2)}
-      />
-      <input
-        value={cardNumber[3]}
-        style={{ border: `1px solid ${isError[3] ? 'red' : 'black'}` }}
-        maxLength={4}
-        onChange={(e) => onChange(e, 3)}
-      />
-      {errorMessage ? <span>${errorMessage}</span> : null}
+      <p>카드사: {cardBrand}</p>
+      {errorMessage ? (
+        <span
+          style={{
+            color: `${isError ? 'red' : 'black'}`,
+          }}
+        >
+          {errorMessage}
+        </span>
+      ) : null}
     </>
   );
 }
 ```
+
+### 구성 요소
+
+카드브랜드별 규칙인 rules를 받을 수 있습니다.
+
+| 이름    | 타입   | 필수 | 설명                        |
+| ------- | ------ | ---- | --------------------------- |
+| `rules` | `Rule` | ❌   | `카드브랜드별 규칙인 rules` |
+
+```
+type Rule = {
+  cardBrand?: 'Visa' | 'MasterCard' | 'Diners' | 'AMEX' | 'UnionPay' | string;
+  startNumbers: string[];
+  lengthArray: number[];
+  message: string;
+};
+```
+
+- `cardBrand`: 카드 브랜드
+- `startNumbers`: 특정 카드 브랜드일때 시작하는 숫자 배열
+- `lengthArray`: 글자 수 형식(ex. 4-4-4-4인 형식은 [4,4,4,4])
+- `message`: 해당 카드 브랜드의 검증을 통과하지 못하면 표시되는 에러메시지
 
 ### 카드 유효기간 입력 필드 관리 - `useExpirationPeriod`
 
