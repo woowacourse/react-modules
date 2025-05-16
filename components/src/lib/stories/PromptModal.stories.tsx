@@ -1,12 +1,12 @@
 import { Meta, StoryObj } from '@storybook/react';
 import { ModalProps } from '../Modal.type';
-import PromptModal from '../components/Modal/PromptModal';
 import useModal from '../hooks/useModal';
 import { expect, within, userEvent } from '@storybook/test';
+import Modal from '../components/Modal/Modal';
 
 const meta: Meta<ModalProps> = {
   title: 'PromptModal',
-  component: PromptModal,
+  component: Modal,
   args: {
     position: 'center',
     size: 'large',
@@ -24,12 +24,22 @@ const Wrapper = (args: ModalProps) => {
     console.log('열기 버튼 클릭');
   };
 
+  const handleConfirm = () => {
+    console.log('확인 버튼 클릭');
+    handleClose();
+  };
+
   return (
     <>
       <button onClick={handleOpen}>Open</button>
-      <PromptModal {...args} isOpen={isOpen} onClose={handleClose} onAfterOpen={handleAfterOpen}>
-        <PromptModal.Header title="PromptModal" />
-      </PromptModal>
+      <Modal.Prompt
+        {...args}
+        isOpen={isOpen}
+        onClose={handleClose}
+        onConfirm={handleConfirm}
+        onAfterOpen={handleAfterOpen}
+        title="PromptModal"
+      />
     </>
   );
 };

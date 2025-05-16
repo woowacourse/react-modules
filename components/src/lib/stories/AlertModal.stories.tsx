@@ -1,12 +1,12 @@
 import { Meta, StoryObj } from '@storybook/react';
 import { ModalProps } from '../Modal.type';
-import AlertModal from '../components/Modal/AlertModal';
 import useModal from '../hooks/useModal';
 import { expect, within, userEvent } from '@storybook/test';
+import Modal from '../components/Modal/Modal';
 
 const meta: Meta<ModalProps> = {
   title: 'AlertModal',
-  component: AlertModal,
+  component: Modal,
   args: {
     position: 'center',
     size: 'large',
@@ -27,12 +27,11 @@ const Wrapper = (args: ModalProps) => {
   return (
     <>
       <button onClick={handleOpen}>Open</button>
-      <AlertModal {...args} isOpen={isOpen} onClose={handleClose} onAfterOpen={handleAfterOpen}>
-        <AlertModal.Header title="AlertModal" />
-        <AlertModal.Body>
+      <Modal.Alert {...args} isOpen={isOpen} onClose={handleClose} onAfterOpen={handleAfterOpen} title="AlertModal">
+        <Modal.Body>
           <div>AlertModal 내용입니다.</div>
-        </AlertModal.Body>
-      </AlertModal>
+        </Modal.Body>
+      </Modal.Alert>
     </>
   );
 };

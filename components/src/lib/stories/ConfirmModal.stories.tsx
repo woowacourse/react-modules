@@ -1,12 +1,12 @@
 import { Meta, StoryObj } from '@storybook/react';
 import { ModalProps } from '../Modal.type';
-import ConfirmModal from '../components/Modal/ConfirmModal';
 import useModal from '../hooks/useModal';
 import { expect, within, userEvent } from '@storybook/test';
+import Modal from '../components/Modal/Modal';
 
 const meta: Meta<ModalProps> = {
   title: 'ConfirmModal',
-  component: ConfirmModal,
+  component: Modal,
   args: {
     position: 'center',
     size: 'large',
@@ -27,12 +27,11 @@ const Wrapper = (args: ModalProps) => {
   return (
     <>
       <button onClick={handleOpen}>Open</button>
-      <ConfirmModal {...args} isOpen={isOpen} onClose={handleClose} onAfterOpen={handleAfterOpen}>
-        <ConfirmModal.Header title="ConfirmModal" />
-        <ConfirmModal.Body>
+      <Modal.Confirm {...args} isOpen={isOpen} onClose={handleClose} onAfterOpen={handleAfterOpen} title="ConfirmModal">
+        <Modal.Body>
           <div>ConfirmModal 내용입니다.</div>
-        </ConfirmModal.Body>
-      </ConfirmModal>
+        </Modal.Body>
+      </Modal.Confirm>
     </>
   );
 };
