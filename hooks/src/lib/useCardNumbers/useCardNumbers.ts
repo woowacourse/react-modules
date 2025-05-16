@@ -20,8 +20,8 @@ interface ValitationResult {
 }
 
 type UpdateErrorArgs =
-  | { isValid: true; errorMessage: string }
-  | { isValid: false };
+  | { isValid: false; errorMessage: string }
+  | { isValid: true };
 
 interface ValidateParams {
   value: string;
@@ -56,19 +56,19 @@ export default function useCardNumbers(): ValitationResult {
   const updateError = (args: UpdateErrorArgs) => {
     setError({
       isValid: args.isValid,
-      errorMessage: args.isValid ? args.errorMessage : '',
+      errorMessage: args.isValid ? '' : args.errorMessage,
     });
   };
 
   const validate = ({ value, brand, length }: ValidateParams) => {
     if (isEmpty(value)) {
-      updateError({ isValid: false });
+      updateError({ isValid: true });
       return;
     }
 
     if (!isNumber(value)) {
       updateError({
-        isValid: true,
+        isValid: false,
         errorMessage: ERROR_MESSAGE.CARD_NUMBERS.NOT_A_NUMBER,
       });
       return;
@@ -76,7 +76,7 @@ export default function useCardNumbers(): ValitationResult {
 
     if (!brand || !isValidCardBrand(brand)) {
       updateError({
-        isValid: true,
+        isValid: false,
         errorMessage: ERROR_MESSAGE.CARD_NUMBERS.INVALID_NUMBER,
       });
       return;
@@ -84,13 +84,13 @@ export default function useCardNumbers(): ValitationResult {
 
     if (!isValidLength(value, length)) {
       updateError({
-        isValid: true,
+        isValid: false,
         errorMessage: ERROR_MESSAGE.CARD_NUMBERS.INVALID_LENGTH(length),
       });
       return;
     }
 
-    updateError({ isValid: false });
+    updateError({ isValid: true });
   };
 
   return {
