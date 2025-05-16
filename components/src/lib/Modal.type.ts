@@ -10,7 +10,7 @@ interface ModalProps {
   title: string;
   onClose: () => void;
   onAfterOpen?: () => void;
-  onConfirm?: () => void;
+  onConfirm?: (value?: string) => void;
   showCloseButton?: boolean;
   showDefaultCancelButton?: boolean;
   showDefaultConfirmButton?: boolean;

@@ -8,7 +8,7 @@ interface HeaderProps {
 
 const ModalHeader = ({ title, showCloseButton, onClose }: HeaderProps) => (
   <section className={headerStyles}>
-    {title && <h2>{title}</h2>}
+    {title && <h2 id="modal-title">{title}</h2>}
     {showCloseButton && (
       <button className={closeButtonStyles} onClick={onClose}>
         X

@@ -32,7 +32,14 @@ const Modal = ({
   return (
     <ModalProvider onClose={onClose}>
       <ModalBackdrop>
-        <div className={ModalFrame(position, size)} data-testid="modal">
+        <div
+          className={ModalFrame(position, size)}
+          data-testid="modal"
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="modal-title"
+          aria-describedby="modal-body"
+        >
           {children}
           {(showDefaultCancelButton || showDefaultConfirmButton) && (
             <div className={ButtonBar}>
@@ -61,7 +68,7 @@ Modal.Header = function Header({ title, showCloseButton = false }: { title: stri
 };
 
 Modal.Body = function Body({ children }: PropsWithChildren) {
-  return <section className={BodyStyles}>{children}</section>;
+  return <section className={BodyStyles} id="modal-body">{children}</section>;
 };
 
 Modal.Actions = function Actions({ children }: PropsWithChildren) {
