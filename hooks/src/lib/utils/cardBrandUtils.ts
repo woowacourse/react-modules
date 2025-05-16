@@ -4,7 +4,7 @@ import {
 } from '../constants/cardBrandRule';
 import { CardBrandType } from '../types/cardTypes';
 
-export function isCardBrandType(key: string): key is CardBrandType {
+function isCardBrandType(key: string): key is CardBrandType {
   return key in CARD_BRAND_INFO;
 }
 
@@ -23,6 +23,14 @@ export const getCardNumberLength = (brand: CardBrandType | null): number => {
 
 export const getFormat = (brand: CardBrandType | null): number[] => {
   return brand ? CARD_BRAND_INFO[brand].format : FALLBACK_CARD_INFO.format;
+};
+
+export const getCardBrandInfo = (numbers: string) => {
+  const cardBrand = identifyCardBrand(numbers);
+  const cardNumberLength = getCardNumberLength(cardBrand);
+  const format = getFormat(cardBrand);
+
+  return { cardBrand, cardNumberLength, format };
 };
 
 export const getFormattedNumber = (number: string, format: number[]) => {

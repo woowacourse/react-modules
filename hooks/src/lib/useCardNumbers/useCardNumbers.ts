@@ -9,12 +9,7 @@ import {
 import { isOverInputLength } from '../utils/overInputLength';
 import { initialError } from '../utils/initial';
 import { ErrorType } from '../types/errorType';
-import {
-  getCardNumberLength,
-  getFormat,
-  getFormattedNumber,
-  identifyCardBrand,
-} from '../utils/cardBrandUtils';
+import { getCardBrandInfo, getFormattedNumber } from '../utils/cardBrandUtils';
 import { CardBrandType } from '../types/cardTypes';
 
 type ValitationResult = {
@@ -32,9 +27,7 @@ export default function useCardNumbers(): ValitationResult {
   const [numbers, setNumbers] = useState('');
   const [error, setError] = useState<ErrorType>(initialError);
 
-  const cardBrand = identifyCardBrand(numbers);
-  const cardNumberLength = getCardNumberLength(cardBrand);
-  const format = getFormat(cardBrand);
+  const { cardBrand, cardNumberLength, format } = getCardBrandInfo(numbers);
 
   const numberWithoutSpaces = numbers.replace(/\s/g, '');
   const formattedNumber = getFormattedNumber(numberWithoutSpaces, format) || '';
