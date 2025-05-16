@@ -47,27 +47,28 @@ const baseStyle = {
   maxWidth: "1440px",
   margin: "0 auto",
   backgroundColor: "#f8f8f8",
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
 };
 
 const PlaygroundTemplate: Story = {
-  render: (args) => (
-    <div style={baseStyle}>
-      <Modal isOpen={args.isOpen} onModalClose={args.onModalClose}>
-        <Modal.Background onClick={() => {}}>
-          <Modal.ModalContainer
-            $size={args.size}
-            $position={args.position}
-            onClick={(e) => e.stopPropagation()}
-          >
-            <Modal.Title>{args.title}</Modal.Title>
-            <Modal.ModalContent>
-              <div style={{ padding: "20px" }}>{args.message}</div>
-            </Modal.ModalContent>
-          </Modal.ModalContainer>
-        </Modal.Background>
-      </Modal>
-    </div>
-  ),
+  render: (args) => {
+    return (
+      <div style={baseStyle}>
+        <Modal isOpen={args.isOpen} onModalClose={args.onModalClose}>
+          <Modal.Background onClick={() => {}}>
+            <Modal.ModalContainer $position={args.position} $size={args.size}>
+              <Modal.Title>{args.title}</Modal.Title>
+              <Modal.ModalContent>
+                <div style={{ padding: "20px" }}>{args.message}</div>
+              </Modal.ModalContent>
+            </Modal.ModalContainer>
+          </Modal.Background>
+        </Modal>
+      </div>
+    );
+  },
 };
 
 export const Playground: Story = {
@@ -88,7 +89,7 @@ const AlertTemplate: Story = {
     <div style={baseStyle}>
       <Modal isOpen={args.isOpen} onModalClose={args.onModalClose}>
         <Modal.Background onClick={args.onModalClose} />
-        <Modal.ModalContainer $size={args.size} $position={args.position}>
+        <Modal.ModalContainer $position="center" $size="small">
           <Modal.Title>{args.title}</Modal.Title>
           <Modal.ModalContent>
             <p>{args.message}</p>
@@ -128,7 +129,7 @@ const ConfirmTemplate: Story = {
     <div style={baseStyle}>
       <Modal isOpen={args.isOpen} onModalClose={args.onModalClose}>
         <Modal.Background onClick={args.onModalClose} />
-        <Modal.ModalContainer $size={args.size} $position={args.position}>
+        <Modal.ModalContainer $position="center" $size="small">
           <Modal.Title>{args.title}</Modal.Title>
           <Modal.ModalContent>
             <p>{args.message}</p>
@@ -178,7 +179,7 @@ const PromptTemplate: Story = {
       <div style={baseStyle}>
         <Modal isOpen={args.isOpen} onModalClose={args.onModalClose}>
           <Modal.Background onClick={args.onModalClose} />
-          <Modal.ModalContainer $size={args.size} $position={args.position}>
+          <Modal.ModalContainer $position="center" $size="small">
             <Modal.Title>{args.title}</Modal.Title>
             <Modal.ModalContent>
               <input

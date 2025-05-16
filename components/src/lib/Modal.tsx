@@ -1,6 +1,6 @@
 import FocusTrap from "./FocusTrap";
 import * as S from "./Modal.styles";
-import { FC, ReactNode, useEffect } from "react";
+import { type FC, type ReactNode, useEffect } from "react";
 
 /**
  * Modal 컴포넌트에 전달되는 props
@@ -21,9 +21,9 @@ interface ModalProps {
  */
 interface ModalComponent extends FC<ModalProps> {
   Background: typeof S.Background;
-  ModalContainer: typeof S.ModalContainer;
   HeaderSection: typeof S.HeaderSection;
   Title: typeof S.Title;
+  ModalContainer: typeof S.ModalContainer;
   ModalCloseButton: typeof S.ModalCloseButton;
   ModalContent: typeof S.ModalContent;
   ModalButton: typeof S.ModalButton;
@@ -52,9 +52,9 @@ const Modal: ModalComponent = ({ isOpen, onModalClose, children }) => {
 
 // 스타일링 커스터마이징을 위한 하위 컴포넌트
 Modal.Background = S.Background;
-Modal.ModalContainer = S.ModalContainer;
 Modal.HeaderSection = S.HeaderSection;
 Modal.Title = S.Title;
+Modal.ModalContainer = S.ModalContainer;
 Modal.ModalCloseButton = S.ModalCloseButton;
 Modal.ModalContent = S.ModalContent;
 Modal.ModalButtonContainer = S.ModalButtonContainer;

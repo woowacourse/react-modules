@@ -23,6 +23,6 @@ const App = () => {
       </Modal>
     </>
   );
-}
+};
 
 export default App;

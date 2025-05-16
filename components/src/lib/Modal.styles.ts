@@ -26,24 +26,36 @@ const slideUpBottom = keyframes`
   }
 `;
 
-const positionCenter = css`
-  width: 80%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  left: 50%;
-  animation: 0.5s ease ${slideUpCenter};
-`;
+// animation 선언은 생략
 
-const positionBottom = css`
-  width: 100vw;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  right: 20px;
-  animation: 0.5s ease ${slideUpBottom};
-  border-bottom-left-radius: 0;
-  border-bottom-right-radius: 0;
-`;
+export const positionStyles = {
+  center: css`
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+    animation: 0.5s ease ${slideUpCenter};
+  `,
+  bottom: css`
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100vw;
+    animation: 0.5s ease ${slideUpBottom};
+  `,
+};
+
+export const sizeStyles = {
+  small: css`
+    max-width: 320px;
+  `,
+  medium: css`
+    max-width: 480px;
+  `,
+  large: css`
+    max-width: 600px;
+  `,
+};
 
 export const Background = styled.div`
   width: 100%;
@@ -57,7 +69,7 @@ export const Background = styled.div`
 
 export const ModalContainer = styled.div<{
   $position: string;
-  $size: SizeProps;
+  $size: string;
 }>`
   width: 100%;
   border-radius: 8px;
@@ -70,12 +82,8 @@ export const ModalContainer = styled.div<{
   box-sizing: border-box;
   gap: 16px;
 
-  ${({ $position }) => $position === "center" && positionCenter};
-  ${({ $position }) => $position === "bottom" && positionBottom};
-
-  ${({ $size }) => $size === "small" && "max-width: 320px"}
-  ${({ $size }) => $size === "medium" && "max-width: 480px"}
-  ${({ $size }) => $size === "large" && "max-width: 600px"}
+  ${({ $position }) => positionStyles[$position]}
+  ${({ $size }) => sizeStyles[$size]}
 `;
 
 export const HeaderSection = styled.div`
