@@ -1,25 +1,25 @@
-export function validateCardBrandLength(cardBrand: string, cardNumber: string) {
-  if (cardBrand === 'visa' && cardNumber.length !== 16) {
-    return 'VISA 카드는 16자리여야 합니다.';
-  }
+import { CardBrand } from '../types/card';
 
-  if (cardBrand === 'master' && cardNumber.length !== 16) {
-    return 'MASTER 카드는 16자리여야 합니다.';
-  }
+const CARD_LENGTH_RULES: Record<string, number> = {
+  visa: 16,
+  master: 16,
+  diners: 14,
+  amex: 15,
+  unionpay: 16,
+};
 
-  if (cardBrand === 'diners' && cardNumber.length !== 14) {
-    return 'DINERS 카드는 14자리여야 합니다.';
-  }
+export function validateCardBrandLength(cardBrand: CardBrand, cardNumber: string): string | null {
+  const requiredLength = CARD_LENGTH_RULES[cardBrand];
 
-  if (cardBrand === 'amex' && cardNumber.length !== 15) {
-    return 'AMEX 카드는 15자리여야 합니다.';
-  }
-
-  if (cardBrand === 'unionpay' && cardNumber.length !== 16) {
-    return 'UNIONPAY 카드는 16자리여야 합니다.';
-  }
+  if (!cardNumber) return null;
 
   if (!cardBrand && cardNumber.length !== 16 && cardNumber.length > 0) {
     return '카드 번호는 16자리여야 합니다.';
   }
+
+  if (requiredLength && cardNumber.length !== requiredLength) {
+    return `${cardBrand} 카드는 ${requiredLength}자리여야 합니다.`;
+  }
+
+  return null;
 }
