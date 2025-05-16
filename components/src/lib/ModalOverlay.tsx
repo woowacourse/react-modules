@@ -3,15 +3,20 @@ import styled from 'styled-components';
 import { createPortal } from 'react-dom';
 import { useModalContext } from './ModalContext';
 
-function ModalOverlay({ children }: { children: React.ReactNode }) {
+export default function ModalOverlay({ children }: { children: React.ReactNode }) {
   const { isOpen, onClose } = useModalContext();
 
   if (!isOpen) return null;
 
-  return createPortal(<StyledModalOverlay onClick={onClose}>{children}</StyledModalOverlay>, document.body);
-}
+  const handleOverlayClick = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (e.target === e.currentTarget) {
+      e.stopPropagation();
+      onClose();
+    }
+  };
 
-export default ModalOverlay;
+  return createPortal(<StyledModalOverlay onClick={handleOverlayClick}>{children}</StyledModalOverlay>, document.body);
+}
 
 const StyledModalOverlay = styled.div`
   background-color: rgba(0, 0, 0, 0.35);
