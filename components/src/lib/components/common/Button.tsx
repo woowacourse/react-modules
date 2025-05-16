@@ -11,7 +11,7 @@ interface ButtonProps extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'typ
 
 const Button = ({ variant = 'default', children, onClick, ...props }: ButtonProps) => {
   return (
-    <button type="button" className={buttonStyle(variant)} {...props}>
+    <button type="button" className={buttonStyle(variant)} onClick={onClick} {...props}>
       {children}
     </button>
   );

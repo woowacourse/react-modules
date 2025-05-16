@@ -8,7 +8,7 @@ describe('useCardNumberInput custom hook 테스트', () => {
     hookResult = renderHook<ReturnType<typeof useCardNumberInput>, void>(() => useCardNumberInput());
   });
 
-  it('Visa 카드(4111…1111)를 인식하고 포맷팅/유효성 검사를 통과한다.', () => {
+  it('4로 시작하는 16자리 숫자가 입력되었을 때, Visa 카드 타입이 반환된다.', () => {
     act(() => {
       hookResult.result.current.handleCardNumberChange('4111111111111111');
     });
@@ -20,7 +20,7 @@ describe('useCardNumberInput custom hook 테스트', () => {
     expect(cardNumberError).toBe('');
   });
 
-  it('Mastercard 카드(5105…100)를 인식하고 포맷팅/유효성 검사를 통과한다.', () => {
+  it('51로 시작하는 16자리 숫자가 입력되었을 때, Mastercard 카드 타입이 반환된다.', () => {
     act(() => {
       hookResult.result.current.handleCardNumberChange('5105105105105100');
     });
@@ -31,7 +31,7 @@ describe('useCardNumberInput custom hook 테스트', () => {
     expect(cardNumberError).toBe('');
   });
 
-  it('AMEX 카드(3782…0005)를 인식하고 4-6-5 포맷팅/유효성 검사를 통과한다.', () => {
+  it('37로 시작하는 15자리 숫자가 입력되었을 때, AMEX 카드 타입이 반환된다.', () => {
     act(() => {
       hookResult.result.current.handleCardNumberChange('378282246310005');
     });
@@ -42,7 +42,7 @@ describe('useCardNumberInput custom hook 테스트', () => {
     expect(cardNumberError).toBe('');
   });
 
-  it('Diners 카드(3612…9012)를 인식하고 4-6-4 포맷팅/유효성 검사를 통과한다.', () => {
+  it('36으로 시작하는 14자리 숫자가 입력되었을 때, Diners 카드 타입이 반환된다.', () => {
     act(() => {
       hookResult.result.current.handleCardNumberChange('36123456789012');
     });
@@ -53,7 +53,7 @@ describe('useCardNumberInput custom hook 테스트', () => {
     expect(cardNumberError).toBe('');
   });
 
-  it('UnionPay 카드(622126…7890)를 인식하고 기본 4-4-4-4 포맷팅/유효성 검사를 통과한다.', () => {
+  it('622126으로 시작하는 16자리 숫자가 입력되었을 때, UnionPay 카드 타입이 반환된다.', () => {
     act(() => {
       hookResult.result.current.handleCardNumberChange('6221261234567890');
     });
@@ -64,7 +64,7 @@ describe('useCardNumberInput custom hook 테스트', () => {
     expect(cardNumberError).toBe('');
   });
 
-  it('알 수 없는 카드(prefix 9) 입력 시 Unknown 브랜드 및 기본 포맷팅한다.', () => {
+  it('9로 시작하는 숫자가 입력되었을 때, Unknown이 반환된다.', () => {
     act(() => {
       hookResult.result.current.handleCardNumberChange('9000123412341234');
     });
