@@ -7,14 +7,10 @@ import { NO_SPACE_REGEX } from './constants/regex';
 function useCardNumber() {
   const [cardNumber, setCardNumber] = useState<string>('');
 
-  const cardCompany = useMemo(() => {
+  const { name: cardCompany, length: cardCompanyLength } = useMemo(() => {
     const digits = cardNumber.replace(NO_SPACE_REGEX, '');
-    const { name, length } = getCardBrandByBin(CARD_FORMATS, digits);
-    if (length === digits.length) {
-      return name;
-    }
 
-    return '';
+    return getCardBrandByBin(CARD_FORMATS, digits);
   }, [cardNumber]);
 
   const handleCardNumberChange = useCallback((value: string) => {
@@ -28,7 +24,7 @@ function useCardNumber() {
   return {
     cardNumber,
     cardCompany,
-    errorState: validateCardNumber(cardNumber),
+    errorState: validateCardNumber(cardNumber, cardCompanyLength),
     handleCardNumberChange
   };
 }
