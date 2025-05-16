@@ -7,10 +7,6 @@ interface ModalContextType {
   onConfirm?: () => void;
   position: Position;
   hasTopCloseButton?: boolean;
-  primaryButton?: boolean;
-  primaryButtonText?: string;
-  secondaryButton?: boolean;
-  secondaryButtonText?: string;
 }
 
 export const ModalContext = createContext<ModalContextType | undefined>(
