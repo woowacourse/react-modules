@@ -7,10 +7,9 @@ import {
 } from 'react';
 import { createPortal } from 'react-dom';
 import useBoolean from './hooks/useBoolean';
-import useFocus from './hooks/useFocus';
 import { closeButton, content, header, overlay } from './Dialog.css';
 import useOverlay from './hooks/useOverlay';
-
+import useFocusRef from './hooks/useFocusRef';
 interface DialogContextType {
   open: () => void;
   close: () => void;
@@ -130,7 +129,7 @@ export function Content({
   className,
 }: ContentProps) {
   const { isOpen } = useDialogContext();
-  const { focusRef } = useFocus(isOpen);
+  const { focusRef } = useFocusRef(isOpen);
 
   return (
     <div css={content(position, size)} className={className} ref={focusRef}>

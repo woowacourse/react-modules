@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react';
 
-const useFocus = (isOpen: boolean) => {
+const useFocusRef = (isOpen: boolean) => {
   const focusRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -38,4 +38,4 @@ const useFocus = (isOpen: boolean) => {
   }, [isOpen]);
   return { focusRef };
 };
-export default useFocus;
+export default useFocusRef;
