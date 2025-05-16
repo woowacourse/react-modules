@@ -5,6 +5,7 @@ import useEscClick from './useEscKey';
 import useScrollBlock from './useScrollBlock';
 import { ModalContext, useModalContext } from './ModalContext';
 import { ModalBackDropProps, ModalButtonProps, ModalCloseButtonProps, ModalContentProps, ModalMainProps, ModalTitleProps } from '../types';
+import { useHandleTabKey } from './useHandleTabKey';
 
 function ModalMain({ onClose, children }: ModalMainProps) {
   useEscClick(onClose);
@@ -29,8 +30,9 @@ function ModalBackDrop({ backgroundColor, zIndex, ...props }: ModalBackDropProps
 }
 
 function ModalContent({ children, position, zIndex, size, ...props }: ModalContentProps) {
+  const modalRef = useHandleTabKey();
   return (
-    <S.ModalWrapper position={position ?? 'center'} zIndex={zIndex} size={size ?? 'medium'} {...props}>
+    <S.ModalWrapper position={position ?? 'center'} zIndex={zIndex} size={size ?? 'medium'} {...props} ref={modalRef}>
       {children}
     </S.ModalWrapper>
   );
