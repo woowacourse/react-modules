@@ -2,7 +2,6 @@ import {
   ButtonHTMLAttributes,
   createContext,
   PropsWithChildren,
-  RefObject,
   useContext,
   useId,
 } from 'react';
@@ -48,7 +47,7 @@ interface TriggerProps
   className?: string;
 }
 
-function Trigger({ children, className, ...props }: TriggerProps) {
+export function Trigger({ children, className, ...props }: TriggerProps) {
   const { open } = useDialogContext();
 
   return (
@@ -62,7 +61,7 @@ interface RootProps extends PropsWithChildren {
   root?: HTMLElement;
 }
 
-function Root({ children, root = document.body }: RootProps) {
+export function Root({ children, root = document.body }: RootProps) {
   const { isOpen } = useDialogContext();
   return createPortal(isOpen ? children : null, root);
 }
@@ -71,7 +70,7 @@ interface OverlayProps {
   className?: string;
 }
 
-function Overlay({ className }: OverlayProps) {
+export function Overlay({ className }: OverlayProps) {
   const { close } = useDialogContext();
   const id = useId();
   const { handleClickOverlay } = useOverlay(close);
@@ -90,7 +89,7 @@ interface HeaderProps extends PropsWithChildren {
   className?: string;
 }
 
-function Header({ children, className }: HeaderProps) {
+export function Header({ children, className }: HeaderProps) {
   return (
     <div css={header} className={className}>
       {children}
@@ -104,7 +103,11 @@ interface CloseButtonProps
   className?: string;
 }
 
-function CloseButton({ children, className, ...props }: CloseButtonProps) {
+export function CloseButton({
+  children,
+  className,
+  ...props
+}: CloseButtonProps) {
   const { close } = useDialogContext();
 
   return (
@@ -118,25 +121,19 @@ interface ContentProps extends PropsWithChildren {
   position?: 'center' | 'bottom';
   size?: 'small' | 'medium' | 'large';
   className?: string;
-  ref?: RefObject<HTMLDivElement | null>;
 }
 
-function Content({
+export function Content({
   children,
   position = 'center',
   size = 'medium',
   className,
-  ref,
 }: ContentProps) {
   const { isOpen } = useDialogContext();
-  const { modalRef } = useFocus(isOpen);
+  const { focusRef } = useFocus(isOpen);
 
   return (
-    <div
-      css={content(position, size)}
-      className={className}
-      ref={ref || modalRef}
-    >
+    <div css={content(position, size)} className={className} ref={focusRef}>
       {children}
     </div>
   );
