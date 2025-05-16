@@ -18,15 +18,24 @@ import TextButton from './components/TextButton';
 import useAutoFocus from './hooks/useAutoFocus';
 import handleFocusWrap from './utils/handleFocusWrap';
 
-const ModalContext = createContext<{ onClose: () => void }>({ onClose: () => {} });
+const ModalContext = createContext<{ onClose: () => void; position: Position }>({
+  onClose: () => {},
+  position: 'center',
+});
 
-const Modal = ({ children, isOpen, onClose, closeOnEscape = true }: ModalProps) => {
+const Modal = ({
+  children,
+  isOpen,
+  onClose,
+  closeOnEscape = true,
+  position = 'center',
+}: ModalProps) => {
   useEscapeKeyClose(closeOnEscape, isOpen, onClose);
 
   return (
     <>
       {isOpen && (
-        <ModalContext.Provider value={{ onClose }}>
+        <ModalContext.Provider value={{ onClose, position }}>
           <div id="modal">{children}</div>
         </ModalContext.Provider>
       )}
@@ -48,11 +57,10 @@ const Overlay = ({ closeOnClick = true }: OverlayProps) => {
 const Content = ({
   children,
   hasTopCloseButton = true,
-  position = 'center',
   size = 'small',
   ...props
 }: ModalContentProps) => {
-  const { onClose } = useContext(ModalContext);
+  const { onClose, position } = useContext(ModalContext);
   const contentRef = useRef<HTMLDivElement>(null);
   useAutoFocus(contentRef);
 
@@ -72,12 +80,11 @@ const Content = ({
 const AlertContent = ({
   children,
   hasTopCloseButton = true,
-  position = 'center',
   size = 'small',
   alertButton = {},
   ...props
 }: AlertContentProps) => {
-  const { onClose } = useContext(ModalContext);
+  const { onClose, position } = useContext(ModalContext);
   const contentRef = useRef<HTMLDivElement>(null);
   useAutoFocus(contentRef);
 
@@ -112,13 +119,12 @@ const AlertContent = ({
 const ConfirmContent = ({
   children,
   hasTopCloseButton = true,
-  position = 'center',
   size = 'small',
   confirmButton = {},
   cancelButton = {},
   ...props
 }: ConfirmContentProps) => {
-  const { onClose } = useContext(ModalContext);
+  const { onClose, position } = useContext(ModalContext);
   const contentRef = useRef<HTMLDivElement>(null);
   useAutoFocus(contentRef);
 
@@ -173,13 +179,12 @@ const PromptContent = ({
   setInputValue,
   children,
   hasTopCloseButton = true,
-  position = 'center',
   size = 'small',
   confirmButton = {},
   cancelButton = {},
   ...props
 }: PromptContentProps) => {
-  const { onClose } = useContext(ModalContext);
+  const { onClose, position } = useContext(ModalContext);
   const contentRef = useRef<HTMLDivElement>(null);
   useAutoFocus(contentRef);
 
