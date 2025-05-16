@@ -2,57 +2,48 @@ import { useMemo } from 'react';
 import createCardFieldHook from './utils/createCardFieldHook';
 import { validateNumberError } from './utils/cardInputValidations';
 import { CardBrand, validationResult } from './card.type';
-import { BRAND_LENGTHS } from './card.contant';
+import { BRAND_LENGTHS, CARD_GROUPS, CARD_PATTERNS } from './card.contant';
+import isUnionPay from './utils/isUnionPay';
 
 function detectBrand(value: string): CardBrand {
-  if (/^4/.test(value)) return 'Visa';
-  if (/^(5[1-5])/.test(value)) return 'Mastercard';
-  if (/^(34|37)/.test(value)) return 'AMEX';
-  if (/^36/.test(value)) return 'Diners';
-  const prefix6 = parseInt(value.slice(0, 6), 10);
-  const prefix3 = parseInt(value.slice(0, 3), 10);
-  const prefix4 = parseInt(value.slice(0, 4), 10);
-  if (
-    (prefix6 >= 622126 && prefix6 <= 622925) ||
-    (prefix3 >= 624 && prefix3 <= 626) ||
-    (prefix4 >= 6282 && prefix4 <= 6288)
-  ) {
-    return 'UnionPay';
-  }
+  if (CARD_PATTERNS.VISA.test(value)) return 'Visa';
+  if (CARD_PATTERNS.MASTERCARD.test(value)) return 'Mastercard';
+  if (CARD_PATTERNS.AMEX.test(value)) return 'AMEX';
+  if (CARD_PATTERNS.DINERS.test(value)) return 'Diners';
+  if (isUnionPay(value)) return 'UnionPay';
+
   return 'Unknown';
 }
 
 function validateBrandLength(value: string): validationResult {
   const brand = detectBrand(value);
-  const length = BRAND_LENGTHS[brand];
-  if (!length) return { isValid: true };
+  const expectedLength = BRAND_LENGTHS[brand];
 
-  if (value.length > length) {
-    return { isValid: false, errorMessage: `${brand} 카드 번호는 ${length}자리여야 합니다.` };
+  if (!expectedLength) return { isValid: true };
+
+  if (value.length > expectedLength) {
+    return {
+      isValid: false,
+      errorMessage: `${brand} 카드 번호는 ${expectedLength}자리여야 합니다.`,
+    };
   }
+
   return { isValid: true };
 }
 
 function formatCardNumber(value: string, brand: CardBrand): string {
   const digits = value.replace(/\D/g, '');
-  let groups: number[];
-  switch (brand) {
-    case 'AMEX':
-      groups = [4, 6, 5];
-      break;
-    case 'Diners':
-      groups = [4, 6, 4];
-      break;
-    default:
-      groups = [4, 4, 4, 4];
-  }
+  const groups = CARD_GROUPS[brand];
+
   const parts: string[] = [];
   let start = 0;
-  for (const len of groups) {
+
+  for (const length of groups) {
     if (start >= digits.length) break;
-    parts.push(digits.slice(start, start + len));
-    start += len;
+    parts.push(digits.slice(start, start + length));
+    start += length;
   }
+
   return parts.join(' ');
 }
 
