@@ -24,7 +24,7 @@ export default defineConfig({
     },
   },
   plugins: [
-    react(),
+    react({ jsxImportSource: '@emotion/react' }),
     dts({
       include: ['src/lib'],
       insertTypesEntry: true,
