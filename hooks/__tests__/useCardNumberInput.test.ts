@@ -82,7 +82,7 @@ describe('useCardNumberInput custom hook 테스트', () => {
     expect(hookResult.result.current.cardNumberError).toBe('숫자만 입력 가능합니다.');
   });
 
-  it('길이를 초과한 입력 시 브랜드별 길이 에러가 발생한다.', () => {
+  it('15자리 카드 타입에 16자리 숫자가 입력되었을 때, 에러가 발생한다.', () => {
     act(() => {
       hookResult.result.current.handleCardNumberChange('3782822463100057');
     });
