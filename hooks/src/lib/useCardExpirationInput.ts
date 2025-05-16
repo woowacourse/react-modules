@@ -16,9 +16,9 @@ export function useCardExpirationInput() {
     year: yearHook.errorMessage,
   };
 
-  const handleCardExpirationChange = (key: keyof typeof cardExpiration, value: string) => {
-    if (key === 'month') monthHook.handleChange(value as typeof INITIAL_CARD_EXPIRATION.month);
-    else yearHook.handleChange(value as typeof INITIAL_CARD_EXPIRATION.year);
+  const handleCardExpirationChange = <K extends keyof typeof cardExpiration>(key: K, value: string) => {
+    if (key === 'month') monthHook.handleChange(value);
+    else if (key === 'year') yearHook.handleChange(value);
   };
 
   return { cardExpiration, handleCardExpirationChange, cardExpirationError };
