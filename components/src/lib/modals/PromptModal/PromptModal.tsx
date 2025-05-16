@@ -34,6 +34,7 @@ export interface PromptModalProps {
   content?: React.ReactNode;
   value: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  label?: string;
 }
 
 const PromptModal = ({
@@ -47,6 +48,7 @@ const PromptModal = ({
   background = true,
   value,
   onChange,
+  label = "확인",
 }: PromptModalProps) => {
   return (
     <Modal show={show} onHide={onHide} size={size} position={position} background={background}>
@@ -61,7 +63,9 @@ const PromptModal = ({
       </Modal.Body>
       <Modal.Footer buttonAlign="right">
         <CancelButton onClick={onHide} />
-        <ConfirmButton onHide={onHide} onConfirm={onConfirm} disabled={!value.trim()} />
+        <ConfirmButton onHide={onHide} onConfirm={onConfirm} disabled={!value.trim()}>
+          {label}
+        </ConfirmButton>
       </Modal.Footer>
     </Modal>
   );

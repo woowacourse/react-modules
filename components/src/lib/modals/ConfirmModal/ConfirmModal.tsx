@@ -31,6 +31,7 @@ export interface ConfirmModalProps {
    * 경고 메시지 등 사용자에게 전달할 핵심 내용을 표시
    */
   content: React.ReactNode;
+  label?: string;
 }
 
 const ConfirmModal = ({
@@ -42,6 +43,7 @@ const ConfirmModal = ({
   title,
   content,
   background = true,
+  label = "확인",
 }: ConfirmModalProps) => {
   return (
     <Modal show={show} onHide={onHide} size={size} position={position} background={background}>
@@ -53,7 +55,9 @@ const ConfirmModal = ({
       <Modal.Body>{content}</Modal.Body>
       <Modal.Footer buttonAlign="right">
         <CancelButton onClick={onHide} />
-        <ConfirmButton onHide={onHide} onConfirm={onConfirm} />
+        <ConfirmButton onHide={onHide} onConfirm={onConfirm}>
+          {label}
+        </ConfirmButton>
       </Modal.Footer>
     </Modal>
   );
