@@ -31,6 +31,7 @@ const {
   cardBrand, // 감지된 카드 브랜드 (visa, master, amex, diners, unionpay 등)
   handleCardNumberChange,
   cardNumberErrors, // 유효성 검사 오류 메시지
+  isCardNumberValid, // 카드 번호 유효한지 여부
   maxCardLength, // 카드 종류에 따른 최대 입력 길이 (공백 포함)
 } = useCardNumberField();
 ```
@@ -42,7 +43,7 @@ import React from 'react';
 import { useCardNumberField } from '@sanghee01/card-field-hooks';
 
 function CardNumberInput() {
-  const { formattedCardNumber, cardBrand, handleCardNumberChange, cardNumberErrors, maxCardLength } =
+  const { formattedCardNumber, cardBrand, handleCardNumberChange, cardNumberErrors, isCardNumberValid, maxCardLength } =
     useCardNumberField();
 
   return (
@@ -56,7 +57,7 @@ function CardNumberInput() {
         placeholder="카드 번호를 입력해주세요."
         maxLength={maxCardLength}
       />
-      {cardNumberErrors && <p className="error">{cardNumberErrors}</p>}
+      {!isCardNumberValid && <p className="error">{cardNumberErrors}</p>}
       {cardBrand && <p>카드 종류: {cardBrand.toUpperCase()}</p>}
     </div>
   );

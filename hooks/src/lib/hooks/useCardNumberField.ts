@@ -19,6 +19,8 @@ export function useCardNumberField() {
     return '';
   }, [cardNumbers, cardBrand, numbersOnly]);
 
+  const isCardNumberValid = !cardNumberErrors;
+
   const handleCardNumberChange = (value: string) => {
     const digitsOnly = value.replace(/\D/g, '');
     setCardNumbers(digitsOnly);
@@ -34,5 +36,6 @@ export function useCardNumberField() {
     handleCardNumberChange,
     cardNumberErrors,
     maxCardLength,
+    isCardNumberValid,
   };
 }
