@@ -52,7 +52,7 @@ const PromptModal = ({
 }: PromptModalProps) => {
   return (
     <Modal show={show} onHide={onHide} size={size} position={position} background={background}>
-      {title && (
+      {title != null && (
         <Modal.Header>
           <Modal.Title>{title}</Modal.Title>
         </Modal.Header>

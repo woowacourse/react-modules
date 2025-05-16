@@ -46,7 +46,7 @@ const AlertModal = ({
 }: AlertModalProps) => {
   return (
     <Modal show={show} onHide={onHide} position={position} background={background} size={size}>
-      {title && (
+      {title != null && (
         <Modal.Header>
           <Modal.Title>{title}</Modal.Title>
         </Modal.Header>
