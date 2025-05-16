@@ -165,26 +165,26 @@ describe('useCardNumber 실패 케이스', () => {
   });
 
   describe('Visa', () => {
-    it('15자리 이하일 경우 이름이 업데이트 되면 안된다.', () => {
+    it('15자리 이하일 경우 에러 메시지지를 반환한다.', () => {
       const { result } = renderHook(() => useCardNumber());
 
       act(() => {
         result.current.handleCardNumberChange('412312345678901');
       });
 
-      expect(result.current.cardCompany).toBe('');
+      expect(result.current.errorState.errorMessage).toBe('16자리를 입력하세요.');
     });
   });
 
   describe('MasterCard', () => {
-    it('15자리 이하일 경우 이름이 업데이트 되면 안된다.', () => {
+    it('15자리 이하일 경우 에러 메시지지를 반환한다.', () => {
       const { result } = renderHook(() => useCardNumber());
 
       act(() => {
         result.current.handleCardNumberChange('512312345678901');
       });
 
-      expect(result.current.cardCompany).toBe('');
+      expect(result.current.errorState.errorMessage).toBe('16자리를 입력하세요.');
     });
   });
 
@@ -196,7 +196,7 @@ describe('useCardNumber 실패 케이스', () => {
         result.current.handleCardNumberChange('34345678121212');
       });
 
-      expect(result.current.cardCompany).toBe('');
+      expect(result.current.errorState.errorMessage).toBe('15자리를 입력하세요.');
     });
   });
 
@@ -208,7 +208,7 @@ describe('useCardNumber 실패 케이스', () => {
         result.current.handleCardNumberChange('3634567891234');
       });
 
-      expect(result.current.cardCompany).toBe('');
+      expect(result.current.errorState.errorMessage).toBe('14자리를 입력하세요.');
     });
   });
 
@@ -220,7 +220,7 @@ describe('useCardNumber 실패 케이스', () => {
         result.current.handleCardNumberChange('624345678112345');
       });
 
-      expect(result.current.cardCompany).toBe('');
+      expect(result.current.errorState.errorMessage).toBe('16자리를 입력하세요.');
     });
 
     it('15자리 이하일 경우 이름이 업데이트 되면 안된다. (628[2-8])', () => {
@@ -230,7 +230,7 @@ describe('useCardNumber 실패 케이스', () => {
         result.current.handleCardNumberChange('628234567812345');
       });
 
-      expect(result.current.cardCompany).toBe('');
+      expect(result.current.errorState.errorMessage).toBe('16자리를 입력하세요.');
     });
 
     it('15자리 이하일 경우 이름이 업데이트 되면 안된다. (622126 ~ 622925)', () => {
@@ -240,7 +240,7 @@ describe('useCardNumber 실패 케이스', () => {
         result.current.handleCardNumberChange('622126212345678');
       });
 
-      expect(result.current.cardCompany).toBe('');
+      expect(result.current.errorState.errorMessage).toBe('16자리를 입력하세요.');
     });
   });
 });
