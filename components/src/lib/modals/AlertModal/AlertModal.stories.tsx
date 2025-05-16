@@ -12,7 +12,6 @@ const meta: Meta<typeof AlertModal> = {
     show: true,
     position: "center",
     background: true,
-    gap: 16,
     title: "경고",
     content: "정말로 삭제하시겠습니까?",
   },

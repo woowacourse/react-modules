@@ -13,7 +13,6 @@ const meta: Meta<typeof PromptModal> = {
     show: true,
     position: "center",
     background: true,
-    gap: 16,
     title: "입력해주세요",
     content: "사용자 이름을 입력해주세요",
   },

@@ -12,7 +12,6 @@ const meta: Meta<typeof ConfirmModal> = {
     show: true,
     position: "center",
     background: true,
-    gap: 16,
     title: "정말로 삭제하시겠습니까?",
     content: "이 작업은 되돌릴 수 없습니다.",
   },
