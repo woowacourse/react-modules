@@ -1,22 +1,16 @@
-import { Dialog } from './lib';
-
+import AlertDialog from './components/AlertDialog/AlertDialog';
+import CardTypeDialog from './components/CardTypeDialog/CardTypeDialog';
+import ConfirmDialog from './components/ConfirmDialog/ConfirmDialog';
+import DialogSizeExample from './components/DialogSizeExample/DialogSizeExample';
+import PromptDialog from './components/PromptDialog/PromptDialog';
 function App() {
   return (
     <>
-      <Dialog>
-        <Dialog.Trigger>Open Dialog</Dialog.Trigger>
-        <Dialog.Root>
-          <Dialog.Overlay />
-          <Dialog.Content>
-            <Dialog.Header>
-              <Dialog.CloseButton>Close</Dialog.CloseButton>
-            </Dialog.Header>
-            <div style={{ padding: '16px' }}>
-              <p>Dialog Content</p>
-            </div>
-          </Dialog.Content>
-        </Dialog.Root>
-      </Dialog>
+      <CardTypeDialog />
+      <AlertDialog />
+      <ConfirmDialog />
+      <PromptDialog />
+      <DialogSizeExample />
     </>
   );
 }

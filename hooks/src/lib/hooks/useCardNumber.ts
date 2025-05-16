@@ -1,8 +1,10 @@
 import useCardField, { ValidationConfig } from './useCardFields';
+import { CARD_LENGTH } from '../constants/cardConstants';
+import { formatCardNumber, detectCardType } from '../utils/cardUtils';
 
 export default function useCardNumber() {
   const validationConfig: ValidationConfig = {
-    requiredLength: 16,
+    requiredLength: CARD_LENGTH.VISA,
     errorMessages: {
       onlyNumbers: '카드 번호는 숫자만 입력 가능합니다',
       invalidValue: '유효하지 않은 카드 번호입니다',
@@ -10,35 +12,24 @@ export default function useCardNumber() {
     },
   };
 
-  const { value, error, handleChange, reset, isValid, getErrorMessage } =
+  const { value, error, handleChange, reset, getErrorMessage } =
     useCardField(validationConfig);
-
-  const formatCardNumber = (input: string): string => {
-    const digitsOnly = input.replace(/\D/g, '');
-    const groups = [];
-
-    for (let i = 0; i < digitsOnly.length && i < 16; i += 4) {
-      groups.push(digitsOnly.substring(i, i + 4));
-    }
-
-    return groups.join(' ');
-  };
-
-  const detectCardType = (input: string): string | null => {
-    const cardNumber = input.replace(/\D/g, '');
-
-    if (cardNumber.startsWith('4')) return 'Visa';
-    if (/^5[1-5]/.test(cardNumber)) return 'Mastercard';
-
-    return null;
-  };
 
   const handleCardNumberChange = (input: string) => {
     const digitsOnly = input.replace(/\D/g, '');
+    const cardType = detectCardType(digitsOnly);
+    const maxLength = cardType ? CARD_LENGTH[cardType] : CARD_LENGTH.VISA;
 
-    const limitedInput = digitsOnly.slice(0, 16);
-
+    const limitedInput = digitsOnly.slice(0, maxLength);
     handleChange(limitedInput);
+  };
+
+  const isCardNumberValid = (): boolean => {
+    const cardType = detectCardType(value);
+    if (!cardType) return false;
+
+    const requiredLength = CARD_LENGTH[cardType];
+    return value.length === requiredLength;
   };
 
   return {
@@ -47,7 +38,7 @@ export default function useCardNumber() {
     error,
     handleChange: handleCardNumberChange,
     reset,
-    isValid,
+    isValid: isCardNumberValid,
     getErrorMessage,
     cardType: detectCardType(value),
   };

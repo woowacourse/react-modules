@@ -7,10 +7,6 @@ export { default as useCardField } from './hooks/useCardFields';
 export { NO_ERROR } from './constants/message';
 export { isOnlyDigits } from './utils/validateNumber';
 export { DIGITS_ONLY_REGEX } from './constants/regex';
-export type {
-  ValidationFn,
-  CheckValidationType,
-  GetValidationFnsType,
-  UseInputErrorProps,
-} from './types/types';
+
+export * from './types';
 export { findFirstError } from './utils/errorUtils';
