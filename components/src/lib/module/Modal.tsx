@@ -15,9 +15,15 @@ const Modal = ({
   showCloseButton = true,
   size = 'small',
   onClose,
-  onBackdropClick,
+  closeOnBackdropClick = true,
 }: ModalPropsType) => {
   const modalRef = useRef<HTMLDivElement>(null);
+
+  const handleBackdropClick = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (e.target === e.currentTarget) {
+      onClose();
+    }
+  };
 
   useEffect(() => {
     if (!isOpen || !modalRef.current) return;
@@ -63,7 +69,7 @@ const Modal = ({
       <ModalBackground
         isOpen={isOpen}
         position={position}
-        onClick={(e) => onBackdropClick(e)}
+        onClick={(e) => closeOnBackdropClick && handleBackdropClick(e)}
       >
         <ModalContainer ref={modalRef} position={position} size={size}>
           <ModalHeader>

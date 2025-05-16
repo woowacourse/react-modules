@@ -2,21 +2,15 @@ import { useState } from 'react';
 // import { Modal } from './lib';
 // import { Modal } from 'jurunghappy-modal';
 import './App.css';
-import { PromptModal } from 'jurunghappy-modal';
+// import { PromptModal } from 'jurunghappy-modal';
 import AlertModal from './lib/components/AlertModal/AlertModal';
-import { ConfirmModal } from './lib';
+import { ConfirmModal, PromptModal } from './lib';
 // import ConfirmModal from './lib/components/ConfirmModal/ConfirmModal';
 // import PromptModal from './lib/components/PromptModal/PromptModal';
 
 function App() {
   const [isOpen, setIsOpen] = useState(false);
   const [input, setInput] = useState('');
-
-  const handleBackdropClick = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (e.target === e.currentTarget) {
-      setIsOpen(false);
-    }
-  };
 
   return (
     <>
@@ -53,7 +47,6 @@ function App() {
         onSubmit={(e) => {
           e.preventDefault();
         }}
-        onBackdropClick={handleBackdropClick}
       />
     </>
   );

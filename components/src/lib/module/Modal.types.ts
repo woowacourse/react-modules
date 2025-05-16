@@ -6,5 +6,5 @@ export interface ModalPropsType {
   showCloseButton?: boolean;
   size?: 'small' | 'medium' | 'large';
   onClose: () => void;
-  onBackdropClick: (e: React.MouseEvent<HTMLDivElement>) => void;
+  closeOnBackdropClick?: boolean;
 }

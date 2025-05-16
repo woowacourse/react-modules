@@ -16,7 +16,7 @@ const ConfirmModal = ({
   message,
   onClose,
   onConfirm,
-  onBackdropClick,
+  closeOnBackdropClick,
 }: ConfirmModalProps) => {
   return (
     <Modal
@@ -26,7 +26,7 @@ const ConfirmModal = ({
       showCloseButton={false}
       size={size}
       onClose={onClose}
-      onBackdropClick={onBackdropClick}
+      closeOnBackdropClick={closeOnBackdropClick}
     >
       <ModalContent>{message}</ModalContent>
       <ModalAction>

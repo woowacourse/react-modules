@@ -14,7 +14,7 @@ const AlertModal = ({
   title,
   message,
   onClose,
-  onBackdropClick,
+  closeOnBackdropClick,
 }: AlertModalProps) => {
   return (
     <Modal
@@ -24,7 +24,7 @@ const AlertModal = ({
       showCloseButton={false}
       size={size}
       onClose={onClose}
-      onBackdropClick={onBackdropClick}
+      closeOnBackdropClick={closeOnBackdropClick}
     >
       <ModalContent>{message}</ModalContent>
       <ModalAction>

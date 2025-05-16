@@ -21,7 +21,7 @@ const PromptModal = ({
   onChange,
   onClose,
   onSubmit,
-  onBackdropClick,
+  closeOnBackdropClick,
 }: PromptModalProps) => {
   return (
     <Modal
@@ -31,7 +31,7 @@ const PromptModal = ({
       showCloseButton={false}
       size={size}
       onClose={onClose}
-      onBackdropClick={onBackdropClick}
+      closeOnBackdropClick={closeOnBackdropClick}
     >
       <FormContainer onSubmit={onSubmit}>
         <ModalContent>
