@@ -7,7 +7,11 @@ const Header = ({ children }: { children: ReactNode }) => {
   return (
     <TitleSection>
       <TitleText>{children}</TitleText>
-      {hasTopCloseButton && <CloseButton onClick={onClose}>✕</CloseButton>}
+      {hasTopCloseButton && (
+        <CloseButton onClick={onClose} aria-label="모달 닫기">
+          ✕
+        </CloseButton>
+      )}
     </TitleSection>
   );
 };
