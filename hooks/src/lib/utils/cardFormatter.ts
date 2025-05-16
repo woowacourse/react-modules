@@ -1,4 +1,4 @@
-import useIdentifyCard from '../hooks/useIdentifyCard';
+import { identifyCard } from './identifyCard';
 
 const CARD_FORMAT = {
   VISA: [4, 4, 4, 4],
@@ -20,13 +20,11 @@ const formatByPattern = (digits: string, pattern: number[]) => {
 };
 
 export function formatCardNumber(rawValue: string) {
-  const { getValidCardNumber } = useIdentifyCard();
-
   // 1) 숫자만 추출
   const digits = rawValue.replace(/\D/g, '');
 
   // 2) 카드사 감지
-  const brand = getValidCardNumber(digits) as keyof typeof CARD_FORMAT;
+  const brand = identifyCard(digits) as keyof typeof CARD_FORMAT;
 
   // 3) 포맷 패턴 선택
   const pattern = CARD_FORMAT[brand] || CARD_FORMAT.DEFAULT;
