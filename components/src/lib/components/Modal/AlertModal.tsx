@@ -1,6 +1,6 @@
 import Modal from './Modal';
-import ConfirmButton from '../common/ConfirmButton';
 import { ModalProps } from '../../Modal.type';
+import Button from '../common/Button';
 
 function AlertModal({ children, title, position, isOpen, onClose, onAfterOpen, size }: ModalProps) {
   return (
@@ -8,7 +8,9 @@ function AlertModal({ children, title, position, isOpen, onClose, onAfterOpen, s
       <Modal.Header title={title} showCloseButton />
       <Modal.Body>{children}</Modal.Body>
       <Modal.Actions>
-        <ConfirmButton />
+        <Button variant="primary" onClick={onClose}>
+          확인
+        </Button>
       </Modal.Actions>
     </Modal>
   );

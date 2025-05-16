@@ -1,7 +1,6 @@
 import Modal from './Modal';
-import ConfirmButton from '../common/ConfirmButton';
-import CancelButton from '../common/CancelButton';
 import { ModalProps } from '../../Modal.type';
+import Button from '../common/Button';
 
 function ConfirmModal({ children, title, position, isOpen, onClose, onAfterOpen, size, onConfirm }: ModalProps) {
   return (
@@ -9,8 +8,12 @@ function ConfirmModal({ children, title, position, isOpen, onClose, onAfterOpen,
       <Modal.Header title={title} showCloseButton />
       <Modal.Body>{children}</Modal.Body>
       <Modal.Actions>
-        <CancelButton />
-        <ConfirmButton onClick={onConfirm} />
+        <Button variant="default" onClick={onClose}>
+          취소
+        </Button>
+        <Button variant="primary" onClick={onConfirm}>
+          확인
+        </Button>
       </Modal.Actions>
     </Modal>
   );

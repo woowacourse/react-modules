@@ -4,12 +4,11 @@ import ModalBackdrop from '../common/ModalBackdrop';
 import ModalHeader from '../common/ModalHeader';
 import useModalKeyboard from '../../hooks/useModalKeyboard';
 import { ModalProvider, useModalContext } from '../../ModalContext';
-import ConfirmButton from '../common/ConfirmButton';
-import CancelButton from '../common/CancelButton';
 import { ModalFrame, ButtonBar, BodyStyles } from '../common/cssStyle';
 import PromptModal from './PromptModal';
 import ConfirmModal from './ConfirmModal';
 import AlertModal from './AlertModal';
+import Button from '../common/Button';
 
 const Modal = ({
   children,
@@ -17,6 +16,7 @@ const Modal = ({
   isOpen,
   onClose,
   onAfterOpen,
+  onConfirm,
   size = 'medium',
   showDefaultCancelButton,
   showDefaultConfirmButton,
@@ -36,8 +36,16 @@ const Modal = ({
           {children}
           {(showDefaultCancelButton || showDefaultConfirmButton) && (
             <div className={ButtonBar}>
-              {showDefaultCancelButton && <CancelButton />}
-              {showDefaultConfirmButton && <ConfirmButton />}
+              {showDefaultCancelButton && (
+                <Button variant="default" onClick={onClose}>
+                  취소
+                </Button>
+              )}
+              {showDefaultConfirmButton && (
+                <Button variant="primary" onClick={onConfirm}>
+                  확인
+                </Button>
+              )}
             </div>
           )}
         </div>
