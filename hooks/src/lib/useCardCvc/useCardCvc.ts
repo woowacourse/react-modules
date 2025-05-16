@@ -4,7 +4,7 @@ import { SingleCardNumberError } from "../types/cardErrorType";
 
 const CVC_VALID_LENGTH = 3;
 
-const ERROR_MESSAGE = {
+export const ERROR_MESSAGE = {
   INVALID_NUMBER: "숫자만 입력 가능합니다.",
   INPUT_LENGTH_LIMIT: `${CVC_VALID_LENGTH}자리를 입력해주세요.`,
 };

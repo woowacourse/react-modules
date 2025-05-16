@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { SingleCardNumberError } from "../types/cardErrorType";
 
-const ERROR_MESSAGE = {
+export const ERROR_MESSAGE = {
   EMPTY_CARD_COMPANY: "카드사를 선택해주세요.",
 };
 

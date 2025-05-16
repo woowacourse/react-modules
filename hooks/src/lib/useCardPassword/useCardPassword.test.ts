@@ -1,5 +1,5 @@
 import { renderHook, act } from "@testing-library/react";
-import useCardPassword from "./useCardPassword";
+import useCardPassword, { ERROR_MESSAGE } from "./useCardPassword";
 
 describe("useCardPassword 테스트", () => {
   it("카드 비밀번호가 유효하게 입력되었을 때 isValid는 true, errorMessage는 빈 문자열인지 확인한다.", () => {
@@ -22,7 +22,7 @@ describe("useCardPassword 테스트", () => {
 
     expect(result.current.validationResult.errorState).toBe(true);
     expect(result.current.validationResult.message).toEqual(
-      "숫자만 입력 가능합니다."
+      ERROR_MESSAGE.INVALID_NUMBER
     );
   });
 
@@ -35,7 +35,7 @@ describe("useCardPassword 테스트", () => {
 
     expect(result.current.validationResult.errorState).toBe(true);
     expect(result.current.validationResult.message).toEqual(
-      "2자리를 입력해주세요."
+      ERROR_MESSAGE.INPUT_LENGTH_LIMIT
     );
   });
 });

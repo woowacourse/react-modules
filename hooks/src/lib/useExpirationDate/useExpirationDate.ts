@@ -5,7 +5,7 @@ import { SingleCardNumberError } from "../types/cardErrorType";
 const MONTH_VALID_LENGTH = 2;
 const YEAR_VALID_LENGTH = 2;
 
-const ERROR_MESSAGE = {
+export const ERROR_MESSAGE = {
   INVALID_NUMBER: "숫자만 입력 가능합니다.",
   INVALID_MONTH_RANGE: "1~12까지의 범위만 입력 가능합니다.",
   INVALID_MONTH_FORMAT: "MM형태로 입력해주세요.",

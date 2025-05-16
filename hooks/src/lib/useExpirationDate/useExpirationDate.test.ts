@@ -1,5 +1,5 @@
 import { renderHook, act } from "@testing-library/react";
-import useExpirationDate from "./useExpirationDate";
+import useExpirationDate, { ERROR_MESSAGE } from "./useExpirationDate";
 
 describe("useExpirationDate 훅 테스트", () => {
   it("유효한 월, 연도 입력 시 isValid가 true이고 에러 메시지가 없음", () => {
@@ -30,7 +30,7 @@ describe("useExpirationDate 훅 테스트", () => {
 
     expect(result.current.validationResult.month).toEqual({
       errorState: true,
-      message: "숫자만 입력 가능합니다.",
+      message: ERROR_MESSAGE.INVALID_NUMBER,
     });
   });
 
@@ -45,7 +45,7 @@ describe("useExpirationDate 훅 테스트", () => {
 
     expect(result.current.validationResult.month).toEqual({
       errorState: true,
-      message: "MM형태로 입력해주세요.",
+      message: ERROR_MESSAGE.INVALID_MONTH_FORMAT,
     });
   });
 
@@ -60,7 +60,7 @@ describe("useExpirationDate 훅 테스트", () => {
 
     expect(result.current.validationResult.month).toEqual({
       errorState: true,
-      message: "1~12까지의 범위만 입력 가능합니다.",
+      message: ERROR_MESSAGE.INVALID_MONTH_RANGE,
     });
   });
 
@@ -75,7 +75,7 @@ describe("useExpirationDate 훅 테스트", () => {
 
     expect(result.current.validationResult.year).toEqual({
       errorState: true,
-      message: "숫자만 입력 가능합니다.",
+      message: ERROR_MESSAGE.INVALID_NUMBER,
     });
   });
 
@@ -90,7 +90,7 @@ describe("useExpirationDate 훅 테스트", () => {
 
     expect(result.current.validationResult.year).toEqual({
       errorState: true,
-      message: "YY형태로 입력해주세요.",
+      message: ERROR_MESSAGE.INVALID_YEAR_FORMAT,
     });
   });
 
@@ -107,7 +107,7 @@ describe("useExpirationDate 훅 테스트", () => {
 
     expect(result.current.validationResult.year).toEqual({
       errorState: true,
-      message: "현재보다 이전년도는 입력할 수 없습니다.",
+      message: ERROR_MESSAGE.INVALID_YEAR_RANGE,
     });
   });
 });

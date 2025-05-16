@@ -1,5 +1,5 @@
 import { renderHook, act } from "@testing-library/react";
-import useCardCompany from "./useCardCompany";
+import useCardCompany, { ERROR_MESSAGE } from "./useCardCompany";
 
 describe("useCardCompany 테스트", () => {
   const VALID_CARD_COMPANIES = [
@@ -39,7 +39,7 @@ describe("useCardCompany 테스트", () => {
 
     expect(result.current.validationResult.errorState).toBe(true);
     expect(result.current.validationResult.message).toEqual(
-      "카드사를 선택해주세요."
+      ERROR_MESSAGE.EMPTY_CARD_COMPANY
     );
   });
 });

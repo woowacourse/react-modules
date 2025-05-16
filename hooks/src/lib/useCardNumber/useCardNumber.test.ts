@@ -1,5 +1,5 @@
 import { renderHook, act } from "@testing-library/react";
-import useCardNumber from "./useCardNumber";
+import useCardNumber, { ERROR_MESSAGE } from "./useCardNumber";
 
 describe("useCardNumber 테스트", () => {
   it("카드 번호가 유효하게 입력되었을 때 errorState가 false,  errorMessage는 빈 문자열인지 확인한다.", () => {
@@ -45,7 +45,7 @@ describe("useCardNumber 테스트", () => {
     }
 
     expect(result.current.validationResult).toEqual({
-      first: { errorState: true, message: "숫자만 입력 가능합니다." },
+      first: { errorState: true, message: ERROR_MESSAGE.INVALID_NUMBER },
       second: { errorState: false, message: "" },
       third: { errorState: false, message: "" },
       fourth: { errorState: false, message: "" },
@@ -71,7 +71,7 @@ describe("useCardNumber 테스트", () => {
     }
 
     expect(result.current.validationResult).toEqual({
-      first: { errorState: true, message: "4자리를 입력해주세요." },
+      first: { errorState: true, message: ERROR_MESSAGE.INPUT_LENGTH_LIMIT },
       second: { errorState: false, message: "" },
       third: { errorState: false, message: "" },
       fourth: { errorState: false, message: "" },
