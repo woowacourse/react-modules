@@ -30,7 +30,8 @@ export interface ConfirmModalProps extends AlertModalProps {}
 
 export interface PromptModalProps extends ModalBaseProps {
   title: string;
-  onPromptButtonClick: () => void;
+  placeholder?: string;
+  onPromptButtonClick: (inputValue: string) => void;
 }
 
 export interface ModalMainProps {
