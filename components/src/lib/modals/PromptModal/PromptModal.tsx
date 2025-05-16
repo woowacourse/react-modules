@@ -60,7 +60,7 @@ const PromptModal = ({
 
 export default PromptModal;
 
-export const ModalInputStyle = () => css`
+const ModalInputStyle = css`
   width: 100%;
   height: 32px;
   border-radius: 2px;
