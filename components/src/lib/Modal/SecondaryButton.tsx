@@ -1,8 +1,7 @@
-import { ReactNode } from "react";
 import Button from "../common/Button";
 import { useModalContext } from "../useModalContext";
 
-const SecondaryButton = ({ children }: { children: ReactNode }) => {
+const SecondaryButton = ({ children }: { children: string }) => {
   const { onClose } = useModalContext();
   return (
     <Button
