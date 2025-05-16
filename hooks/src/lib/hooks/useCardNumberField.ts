@@ -5,10 +5,11 @@ import { formatCardNumber, getMaxInputLength } from '../utils/cardFormatting';
 
 export function useCardNumberField() {
   const [cardNumbers, setCardNumbers] = useState('');
-  const [formattedCardNumber, setFormattedCardNumber] = useState('');
 
   const numbersOnly = cardNumbers.replace(/\D/g, '');
   const cardBrand = determineCardBrand(numbersOnly);
+
+  const formattedCardNumber = formatCardNumber(numbersOnly, cardBrand);
 
   const maxCardLength = getMaxInputLength(cardBrand);
 
@@ -24,9 +25,6 @@ export function useCardNumberField() {
   const handleCardNumberChange = (value: string) => {
     const digitsOnly = value.replace(/\D/g, '');
     setCardNumbers(digitsOnly);
-
-    const formatted = formatCardNumber(digitsOnly, cardBrand);
-    setFormattedCardNumber(formatted);
   };
 
   return {
