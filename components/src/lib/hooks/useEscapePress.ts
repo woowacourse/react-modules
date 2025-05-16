@@ -1,9 +1,8 @@
 import { useEffect } from 'react';
 
 const useEscapeKeyClose = (closeOnEscape: boolean, isOpen: boolean, onClose: () => void) => {
-  if (!closeOnEscape) return;
-
   useEffect(() => {
+    if (!closeOnEscape) return;
     if (!isOpen) return;
 
     function handleKeyDown(e: KeyboardEvent) {
