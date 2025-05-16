@@ -78,7 +78,7 @@ const rules: Rule[] = [
   },
 ];
 
-const validate = (cardNumbersValue: string, addedRules: Rule[] = []) => {
+const findRule = (cardNumbersValue: string, addedRules: Rule[] = []) => {
   const cardNumbers = cardNumbersValue.replace(/' '/g, '');
 
   const rule = rules.concat(addedRules).find(({ startNumbers }) => {
@@ -87,16 +87,18 @@ const validate = (cardNumbersValue: string, addedRules: Rule[] = []) => {
       return cardNumbers.slice(0, startNummberLength) === startNumber;
     });
   });
+  return rule;
+};
 
-  if (!rule)
+const fommat = (cardNumbers: string, rule?: Rule) => {
+  if (!rule) {
     return {
       isError: false,
       message: '',
       cardBrand: '',
       formatted: '',
-      lengthArray: [],
     };
-
+  }
   const { lengthArray } = rule;
   const totalLength = lengthArray.reduce((a, b) => a + b, 0);
 
@@ -128,9 +130,10 @@ function useCardNumber(addedRules?: Rule[]) {
     setCardNumber(parsedvalue);
   };
 
-  const { isError, message, cardBrand, formatted } = validate(
-    value,
-    addedRules
+  const rule = findRule(value, addedRules);
+  const { cardBrand, formatted, isError, message } = fommat(
+    value.replace(/' '/g, ''),
+    rule
   );
 
   return {
