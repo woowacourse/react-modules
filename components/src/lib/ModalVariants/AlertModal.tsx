@@ -1,3 +1,4 @@
+import { ReactNode } from "react";
 import Modal, { Size } from "../Modal/Modal";
 
 interface AlertModalProps {
@@ -5,7 +6,7 @@ interface AlertModalProps {
   onClose: () => void;
   onConfirm: () => void;
   title: string;
-  content: string;
+  content: ReactNode;
   size?: Size;
   primaryButtonText?: string;
 }
