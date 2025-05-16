@@ -62,7 +62,7 @@ export default function Prompt({
               onChange={onChange}
               handleEnterKeyDown={handleEnterKeyDown}
             />
-            <Dialog.CloseButton>
+            <Dialog.CloseAction>
               <div
                 style={{
                   display: "flex",
@@ -79,7 +79,7 @@ export default function Prompt({
                   onClick={onCheckButtonClick}
                 />
               </div>
-            </Dialog.CloseButton>
+            </Dialog.CloseAction>
           </Dialog.Content>
         </Dialog.Overlay>
       </Dialog.Root>

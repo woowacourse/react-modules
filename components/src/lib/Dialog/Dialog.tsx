@@ -8,7 +8,7 @@ import {
 import { createPortal } from "react-dom";
 import useEscapeModal from "../hooks/useEscapeModal";
 import {
-  StyledCloseButton,
+  StyledCloseAction,
   StyledContent,
   StyledHeader,
   StyledOverlay,
@@ -106,7 +106,7 @@ function Header({
   );
 }
 
-function CloseButton({
+function CloseAction({
   children,
   className,
   style,
@@ -118,9 +118,9 @@ function CloseButton({
   const { modalClose } = useDialogContext();
 
   return (
-    <StyledCloseButton style={style} onClick={modalClose} className={className}>
+    <StyledCloseAction style={style} onClick={modalClose} className={className}>
       {children}
-    </StyledCloseButton>
+    </StyledCloseAction>
   );
 }
 
@@ -151,7 +151,7 @@ function Content({
 Dialog.Root = Root;
 Dialog.Overlay = Overlay;
 Dialog.Header = Header;
-Dialog.CloseButton = CloseButton;
+Dialog.CloseAction = CloseAction;
 Dialog.Content = Content;
 
 export default Dialog;

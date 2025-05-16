@@ -48,7 +48,7 @@ export default function Confirm({
               <DialogHeader title={title} />
             </Dialog.Header>
             <DialogContent content={content} />
-            <Dialog.CloseButton>
+            <Dialog.CloseAction>
               <div
                 style={{
                   display: "flex",
@@ -64,7 +64,7 @@ export default function Confirm({
                   onClick={onCheckButtonClick}
                 />
               </div>
-            </Dialog.CloseButton>
+            </Dialog.CloseAction>
           </Dialog.Content>
         </Dialog.Overlay>
       </Dialog.Root>

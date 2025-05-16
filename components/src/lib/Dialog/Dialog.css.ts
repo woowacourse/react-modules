@@ -43,7 +43,7 @@ export const StyledHeader = styled.div`
   align-items: center;
 `;
 
-export const StyledCloseButton = styled.div`
+export const StyledCloseAction = styled.div`
   background: none;
   border: none;
   cursor: pointer;

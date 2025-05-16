@@ -44,7 +44,7 @@ export default function Alert({
               <DialogHeader title={title} />
             </Dialog.Header>
             <DialogContent content={content} />
-            <Dialog.CloseButton>
+            <Dialog.CloseAction>
               <div
                 style={{
                   display: "flex",
@@ -58,7 +58,7 @@ export default function Alert({
                   onClick={modalClose}
                 />
               </div>
-            </Dialog.CloseButton>
+            </Dialog.CloseAction>
           </Dialog.Content>
         </Dialog.Overlay>
       </Dialog.Root>
