@@ -11,8 +11,7 @@ import Input from './components/Modal/Input';
 import { ModalProvider } from './components/Modal/ModalProvider';
 import Trigger from './components/Modal/Trigger';
 
-export const Modal = {
-  Root: ModalProvider,
+export const Modal = Object.assign(ModalProvider, {
   Container: ModalContainer,
   Overlay: ModalOverlay,
   Content: ModalContent,
@@ -24,4 +23,4 @@ export const Modal = {
   AlertActions: AlertActions,
   Input: Input,
   Trigger: Trigger,
-};
+});
