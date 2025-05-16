@@ -1,29 +1,30 @@
 import { useState } from "react";
-import cardNumberValidation from "./cardNumberValidation";
-type CardNumber = {
-  first: string;
-  second: string;
-  third: string;
-  fourth: string;
-};
-
-const defaultCardNumber = {
-  first: "",
-  second: "",
-  third: "",
-  fourth: "",
-};
+import { getCardType } from "./getCardType";
+import { cardNumberValidation } from "./cardNumberValidation";
+import { formatByCardType } from "./formatByCardType";
 
 function useCardNumber() {
-  const [cardNumber, setCardNumber] = useState(defaultCardNumber);
+  const [cardNumber, setCardNumber] = useState("");
 
-  function handleCardNumber(value: string, position: keyof CardNumber) {
-    setCardNumber((prev) => ({ ...prev, [position]: value }));
+  const cardType = getCardType(cardNumber);
+  const formatted = formatByCardType(cardNumber, cardType);
+
+  function handleCardNumber(value: string) {
+    setCardNumber(value);
   }
 
-  const { isCardNumberError, errorText } = cardNumberValidation(cardNumber);
+  const { isCardNumberError, errorText } = cardNumberValidation(
+    cardNumber,
+    cardType
+  );
 
-  return { cardNumber, handleCardNumber, isCardNumberError, errorText };
+  return {
+    cardNumber: formatted,
+    handleCardNumber,
+    cardType,
+    isCardNumberError,
+    errorText,
+  };
 }
 
 export default useCardNumber;

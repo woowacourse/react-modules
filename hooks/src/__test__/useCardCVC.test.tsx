@@ -2,7 +2,7 @@ import { renderHook } from "@testing-library/react";
 import useCardCVC from "../lib/useCardCVC";
 import { act } from "react";
 
-describe("cardCvcValidation 테스트", () => {
+describe("useCardCVC 테스트", () => {
   it("CardCvc 유효한 형태인지 확인한다.", () => {
     const { result } = renderHook(() => useCardCVC());
     act(() => {

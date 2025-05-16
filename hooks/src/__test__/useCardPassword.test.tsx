@@ -2,7 +2,7 @@ import { renderHook } from "@testing-library/react";
 import useCardPassword from "../lib/useCardPassword";
 import { act } from "react";
 
-describe("usePasswordValidation 테스트", () => {
+describe("useCardPassword 테스트", () => {
   it("password가 유효한 형태인지 확인한다.", () => {
     const { result } = renderHook(() => useCardPassword());
     act(() => {

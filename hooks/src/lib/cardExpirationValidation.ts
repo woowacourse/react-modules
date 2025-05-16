@@ -5,11 +5,11 @@ import isValidLength from "./isValidLength";
 function cardExpirationValidation(month: string, year: string) {
   const isCardExpirationError = [
     !isValidMonth(month) ||
-      !isValidLength(month, 0, 2) ||
+      !isValidLength(month, 2) ||
       !isNumber(month) ||
       !isPositiveNumber(month),
     !isValidYear(year) ||
-      !isValidLength(year, 0, 2) ||
+      !isValidLength(year, 2) ||
       !isNumber(year) ||
       !isPositiveNumber(year),
   ];
@@ -21,7 +21,7 @@ function cardExpirationValidation(month: string, year: string) {
     if (!isPositiveNumber(month)) {
       return "입력값은 양수여야합니다.";
     }
-    if (!isValidLength(month, 0, 2)) {
+    if (!isValidLength(month, 2)) {
       return "입력값은 2자리이어야합니다.";
     }
     if (!isValidMonth(month)) {
@@ -33,7 +33,7 @@ function cardExpirationValidation(month: string, year: string) {
     if (!isPositiveNumber(year)) {
       return "입력값은 양수여야합니다.";
     }
-    if (!isValidLength(year, 0, 2)) {
+    if (!isValidLength(year, 2)) {
       return "입력값은 2자리이어야합니다.";
     }
     if (!isValidYear(year)) {
