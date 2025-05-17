@@ -21,7 +21,6 @@ export const PromptModalModalCenter: Story = {
     onChange: () => {},
     onSubmit: () => {},
     onClose: () => {},
-    onBackdropClick: () => {},
   },
 };
 
@@ -34,7 +33,6 @@ export const PromptModalModalBottom: Story = {
     onChange: () => {},
     onSubmit: () => {},
     onClose: () => {},
-    onBackdropClick: () => {},
   },
 };
 
@@ -48,7 +46,6 @@ export const PromptModalModalSmall: Story = {
     onChange: () => {},
     onSubmit: () => {},
     onClose: () => {},
-    onBackdropClick: () => {},
   },
 };
 
@@ -62,7 +59,6 @@ export const PromptModalMedium: Story = {
     onChange: () => {},
     onSubmit: () => {},
     onClose: () => {},
-    onBackdropClick: () => {},
   },
 };
 
@@ -76,6 +72,5 @@ export const PromptModalLarge: Story = {
     onChange: () => {},
     onSubmit: () => {},
     onClose: () => {},
-    onBackdropClick: () => {},
   },
 };

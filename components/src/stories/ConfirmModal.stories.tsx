@@ -20,7 +20,6 @@ export const ConfirmModalCenter: Story = {
     message: 'confirm modal입니다.',
     onClose: () => {},
     onConfirm: () => {},
-    onBackdropClick: () => {},
   },
 };
 
@@ -32,7 +31,6 @@ export const ConfirmModalBottom: Story = {
     message: 'confirm modal입니다.',
     onClose: () => {},
     onConfirm: () => {},
-    onBackdropClick: () => {},
   },
 };
 
@@ -45,7 +43,6 @@ export const ConfirmModalSmall: Story = {
     message: 'confirm modal입니다.',
     onClose: () => {},
     onConfirm: () => {},
-    onBackdropClick: () => {},
   },
 };
 
@@ -58,7 +55,6 @@ export const ConfirmModalMedium: Story = {
     message: 'confirm modal입니다.',
     onClose: () => {},
     onConfirm: () => {},
-    onBackdropClick: () => {},
   },
 };
 
@@ -71,6 +67,5 @@ export const ConfirmModalLarge: Story = {
     message: 'confirm modal입니다.',
     onClose: () => {},
     onConfirm: () => {},
-    onBackdropClick: () => {},
   },
 };

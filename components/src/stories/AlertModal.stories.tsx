@@ -19,7 +19,6 @@ export const AlertModalCenter: Story = {
     title: '타이틀',
     message: 'AlertModal입니다.',
     onClose: () => {},
-    onBackdropClick: () => {},
   },
 };
 
@@ -30,7 +29,6 @@ export const AlertModalBottom: Story = {
     title: '타이틀',
     message: 'AlertModal입니다.',
     onClose: () => {},
-    onBackdropClick: () => {},
   },
 };
 
@@ -42,7 +40,6 @@ export const AlertModalSmall: Story = {
     title: '타이틀',
     message: 'AlertModal입니다.',
     onClose: () => {},
-    onBackdropClick: () => {},
   },
 };
 
@@ -54,7 +51,6 @@ export const AlertModalMedium: Story = {
     title: '타이틀',
     message: 'AlertModal입니다.',
     onClose: () => {},
-    onBackdropClick: () => {},
   },
 };
 
@@ -66,6 +62,5 @@ export const AlertModalLarge: Story = {
     title: '타이틀',
     message: 'AlertModal입니다.',
     onClose: () => {},
-    onBackdropClick: () => {},
   },
 };
