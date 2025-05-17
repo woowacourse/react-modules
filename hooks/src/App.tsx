@@ -42,10 +42,14 @@ function App() {
           <label htmlFor="cardNumber">카드 번호</label>
           {Array.from({ length: 4 }).map((_, index) => (
             <input
+              ref={card.inputRefs?.[index]}
               id={`cardNumber-${index}`}
               type="text"
               value={card.cardNumber[index]}
-              onChange={(e) => handleCardNumberChange(e, index)}
+              onChange={(e) => {
+                handleCardNumberChange(e, index);
+                card.moveToNext?.(e.target.value, index);
+              }}
               placeholder="1234"
               className={card.isError[index] ? "input-error" : ""}
             />
@@ -76,17 +80,25 @@ function App() {
         <div className="input-group">
           <label htmlFor="expiry">유효기간</label>
           <input
+            ref={expiry.inputRefs?.[0]}
             id="expiry-month"
             type="text"
             value={expiry.expiryDateNumber[0]}
-            onChange={(e) => handleExpiryChange(e, 0)}
+            onChange={(e) => {
+              handleExpiryChange(e, 0);
+              expiry.moveToNext?.(e.target.value, 0);
+            }}
             placeholder="MM"
           />
           <input
+            ref={expiry.inputRefs?.[1]}
             id="expiry-year"
             type="text"
             value={expiry.expiryDateNumber[1]}
-            onChange={(e) => handleExpiryChange(e, 1)}
+            onChange={(e) => {
+              handleExpiryChange(e, 1);
+              expiry.moveToNext?.(e.target.value, 1);
+            }}
             placeholder="YY"
           />
           {expiry.errorMessage && (
