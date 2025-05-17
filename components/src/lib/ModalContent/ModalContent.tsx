@@ -4,5 +4,5 @@ interface ModalContentProps {
 }
 
 export default function ModalContent({ children }: ModalContentProps) {
-  return <div className={style.modalContent}>{children}</div>;
+  return <main className={style.modalContent}>{children}</main>;
 }

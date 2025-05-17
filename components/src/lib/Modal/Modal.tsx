@@ -41,14 +41,14 @@ export default function ModalComponent({
           onClose();
         }}
       >
-        <div
+        <section
           data-testid="modal-container"
           className={`${containerClassName}`}
           onClick={(e) => e.stopPropagation()}
           ref={modalRef}
         >
           {children}
-        </div>
+        </section>
       </div>
     </ModalContext.Provider>,
     document.body
