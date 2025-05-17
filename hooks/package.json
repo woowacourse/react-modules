@@ -1,6 +1,6 @@
 {
   "name": "hanheel-hooks-payments",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "우아한테크코스 payments 카드폼 훅입니다",
   "type": "module",
   "types": "dist/index.d.ts",
@@ -17,6 +17,7 @@
     "test": "vitest"
   },
   "dependencies": {
+    "@emotion/styled": "^11.14.0",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "woowa-hooks-payments": "^0.0.1"

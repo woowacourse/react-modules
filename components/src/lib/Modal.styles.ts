@@ -1,6 +1,9 @@
 import styled from "@emotion/styled";
 import { css, keyframes } from "@emotion/react";
 
+type SizeProps = "small" | "medium" | "large";
+type ButtonTypeProps = "cancel" | "confirm";
+
 const slideUpCenter = keyframes`
   from {
     opacity: 0;
@@ -15,31 +18,42 @@ const slideUpCenter = keyframes`
 const slideUpBottom = keyframes`
   from {
     opacity: 0;
-    transform: translateY(50%);
+    transform: translate(-50%,50%);
   }
   to {
     opacity: 1;
-    transform: translateY(0);
+    transform: translate(-50%,0);
   }
 `;
 
-const positionCenter = css`
-  width: 80%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  left: 50%;
-  animation: 0.5s ease ${slideUpCenter};
-`;
+export const positionStyles = {
+  center: css`
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+    animation: 0.5s ease ${slideUpCenter};
+  `,
+  bottom: css`
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100vw;
+    animation: 0.5s ease ${slideUpBottom};
+  `,
+};
 
-const positionBottom = css`
-  width: 100vw;
-  bottom: 0;
-  left: 0;
-  right: 20px;
-  animation: 0.5s ease ${slideUpBottom};
-  border-bottom-left-radius: 0;
-  border-bottom-right-radius: 0;
-`;
+export const sizeStyles = {
+  small: css`
+    max-width: 320px;
+  `,
+  medium: css`
+    max-width: 480px;
+  `,
+  large: css`
+    max-width: 600px;
+  `,
+};
 
 export const Background = styled.div`
   width: 100%;
@@ -51,8 +65,11 @@ export const Background = styled.div`
   left: 0;
 `;
 
-export const ModalContainer = styled.div<{ $position: string }>`
-  min-height: 216px;
+export const ModalContainer = styled.div<{
+  $position: string;
+  $size: string;
+}>`
+  width: 100%;
   border-radius: 8px;
   background-color: #fff;
   position: fixed;
@@ -63,8 +80,8 @@ export const ModalContainer = styled.div<{ $position: string }>`
   box-sizing: border-box;
   gap: 16px;
 
-  ${({ $position }) =>
-    $position === "center" ? positionCenter : positionBottom};
+  ${({ $position }) => positionStyles[$position]}
+  ${({ $size }) => sizeStyles[$size]}
 `;
 
 export const HeaderSection = styled.div`
@@ -79,6 +96,16 @@ export const Title = styled.span`
   font-size: 18px;
 `;
 
+const cancelButton = css`
+  border: 1px solid #cccccc;
+  background-color: #fff;
+`;
+
+const confirmButton = css`
+  background-color: #333333;
+  color: #ffffff;
+`;
+
 export const ModalCloseButton = styled.button`
   width: 24px;
   height: 24px;
@@ -87,6 +114,38 @@ export const ModalCloseButton = styled.button`
   justify-content: center;
   color: black;
   cursor: pointer;
+  background: none;
+  border: none;
+`;
+
+export const ModalButtonContainer = styled.div`
+  display: flex;
+  gap: 12px;
+  justify-content: right;
+`;
+
+export const ModalButton = styled.button<{
+  $size: SizeProps;
+  $type: ButtonTypeProps;
+}>`
+  width: 100%;
+  border-radius: 4px;
+  padding: 8px 20px;
+  cursor: pointer;
+  background: none;
+  border: none;
+
+  &:focus-visible {
+    outline: 2px solid #4c9ffe;
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+
+  ${({ $type }) => $type === "cancel" && cancelButton}
+  ${({ $type }) => $type === "confirm" && confirmButton}
+
+  ${({ $size }) => $size === "small" && "max-width: 80px"}
+  ${({ $size }) => $size === "large" && "max-width: 100%"}
 `;
 
 export const ModalContent = styled.main`

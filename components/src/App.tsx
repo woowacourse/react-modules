@@ -4,29 +4,22 @@ import React from "react";
 
 const App = () => {
   const [isOpen, setIsOpen] = useState(false);
-
   const handleCloseModal = () => setIsOpen(false);
 
   return (
     <>
       <button onClick={() => setIsOpen(true)}>모달 열기</button>
-      <Modal isOpen={isOpen} handleCloseModal={handleCloseModal}>
-        <Modal.Background onClick={handleCloseModal}>
-          <Modal.ModalContainer
-            $position="bottom"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <Modal.HeaderSection>
-              <Modal.Title>모달 타이틀</Modal.Title>
-              <Modal.ModalCloseButton onClick={handleCloseModal}>
-                <img src="./closeIcon.png" />
-              </Modal.ModalCloseButton>
-            </Modal.HeaderSection>
+      <Modal isOpen={isOpen} onModalClose={handleCloseModal}>
+        <Modal.Background onClick={handleCloseModal} />
+        <Modal.ModalContainer $position="center" $size="large">
+          <Modal.ModalFocusTrap>
+            <Modal.Title>접근성 테스트</Modal.Title>
             <Modal.ModalContent>
-              <p>모달 내용입니다.</p>
+              <input type="text" placeholder="이름" />
+              <button>확인</button>
             </Modal.ModalContent>
-          </Modal.ModalContainer>
-        </Modal.Background>
+          </Modal.ModalFocusTrap>
+        </Modal.ModalContainer>
       </Modal>
     </>
   );

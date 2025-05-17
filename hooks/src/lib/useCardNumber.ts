@@ -1,64 +1,65 @@
 import { useState } from "react";
+import { DEFAULT_ERROR_MESSAGE } from "./constants/messages";
+import {
+  DEFAULT_SYSTEM_CONSTANTS,
+  FORMAT_MARK,
+} from "./constants/systemConstants";
 
-interface CardNumberInput {
-  input1: string;
-  input2: string;
-  input3: string;
-  input4: string;
+interface ErrorMessageProps {
+  customErrorMessages?: {
+    minLength?: string;
+    maxLength?: string;
+    format?: string;
+  };
 }
 
-const useCardNumber = () => {
-  const [isValid, setIsValid] = useState({
-    input1: true,
-    input2: true,
-    input3: true,
-    input4: true,
-  });
+const useCardNumber = ({
+  customErrorMessages = {},
+}: ErrorMessageProps = {}) => {
+  const [isValid, setIsValid] = useState(true);
   const [errorMessage, setErrorMessage] = useState("");
 
-  const handleCardNumber = (numbers: CardNumberInput) => {
-    const numbersArray = Object.values(numbers);
-    validateCardNumber(numbersArray);
+  const handleCardNumberValidation = (numbers: string) => {
+    numbers = numbers.replaceAll(FORMAT_MARK, "");
+    const result = validateCardNumber(numbers);
+    setIsValid(result.isValid);
+    setErrorMessage(result.errorMessage);
   };
 
-  const validateCardNumber = (numbers: string[]) => {
-    let isValid = true;
-
-    for (let i = 0; i < numbers.length; i++) {
-      const number = numbers[i];
-      if (number.length === 0) continue;
-      if (!isNumber(number)) {
-        setErrorMessage("숫자만 입력해 주세요.");
-        setIsValid((prev) => ({ ...prev, [`input${i + 1}`]: false }));
-        isValid = false;
-        continue;
-      }
-      if (!isFourDigits(number)) {
-        setErrorMessage("4자리의 숫자를 입력해 주세요.");
-        setIsValid((prev) => ({ ...prev, [`input${i + 1}`]: false }));
-        isValid = false;
-      }
+  const validateCardNumber = (
+    numbers: string
+  ): { isValid: boolean; errorMessage: string } => {
+    if (Number.isNaN(Number(numbers))) {
+      return {
+        isValid: false,
+        errorMessage:
+          customErrorMessages.format ??
+          DEFAULT_ERROR_MESSAGE.INVALID_CARD_NUMBER_FORMAT,
+      };
     }
-    if (isValid) {
-      setIsValid({
-        input1: true,
-        input2: true,
-        input3: true,
-        input4: true,
-      });
-      setErrorMessage("");
+    if (numbers.length < DEFAULT_SYSTEM_CONSTANTS.CARD_NUMBER_MIN_LENGTH) {
+      return {
+        isValid: false,
+        errorMessage:
+          customErrorMessages.minLength ??
+          DEFAULT_ERROR_MESSAGE.INVALID_CARD_NUMBER_MIN_LENGTH,
+      };
     }
+    if (numbers.length > DEFAULT_SYSTEM_CONSTANTS.CARD_NUMBER_MAX_LENGTH) {
+      return {
+        isValid: false,
+        errorMessage:
+          customErrorMessages.maxLength ??
+          DEFAULT_ERROR_MESSAGE.INVALID_CARD_NUMBER_MAX_LENGTH,
+      };
+    }
+    return {
+      isValid: true,
+      errorMessage: "",
+    };
   };
 
-  return { handleCardNumber, isValid, errorMessage };
-};
-
-const isNumber = (value: string) => {
-  return !Number.isNaN(Number(value));
-};
-
-const isFourDigits = (value: string) => {
-  return value.length === 4;
+  return { handleCardNumberValidation, isValid, errorMessage };
 };
 
 export default useCardNumber;

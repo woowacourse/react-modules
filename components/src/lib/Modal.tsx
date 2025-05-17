@@ -1,5 +1,6 @@
+import FocusTrap from "./FocusTrap";
 import * as S from "./Modal.styles";
-import { FC, ReactNode, useEffect } from "react";
+import { type FC, type ReactNode, useEffect } from "react";
 
 /**
  * Modal 컴포넌트에 전달되는 props
@@ -8,7 +9,7 @@ interface ModalProps {
   /** 모달의 열림 여부 */
   isOpen: boolean;
   /** 모달을 닫을 때 호출되는 함수 */
-  handleCloseModal: () => void;
+  onModalClose: () => void;
   /** 모달 내부에 표시될 내용 */
   children: ReactNode;
 }
@@ -20,11 +21,14 @@ interface ModalProps {
  */
 interface ModalComponent extends FC<ModalProps> {
   Background: typeof S.Background;
-  ModalContainer: typeof S.ModalContainer;
   HeaderSection: typeof S.HeaderSection;
   Title: typeof S.Title;
+  ModalContainer: typeof S.ModalContainer;
   ModalCloseButton: typeof S.ModalCloseButton;
   ModalContent: typeof S.ModalContent;
+  ModalButton: typeof S.ModalButton;
+  ModalButtonContainer: typeof S.ModalButtonContainer;
+  ModalFocusTrap: typeof FocusTrap;
 }
 
 /**
@@ -34,24 +38,27 @@ interface ModalComponent extends FC<ModalProps> {
  * - `handleCloseModal`은 클릭 또는 키보드 이벤트로 닫기 동작을 수행합니다.
  * - 내부 구조 커스터마이징이 가능합니다.
  */
-const Modal: ModalComponent = ({ isOpen, handleCloseModal, children }) => {
+const Modal: ModalComponent = ({ isOpen, onModalClose, children }) => {
   useEffect(() => {
     const handleEsc = (e: KeyboardEvent) => {
-      if (e.key === "Escape") handleCloseModal();
+      if (e.key === "Escape") onModalClose();
     };
     window.addEventListener("keyup", handleEsc);
     return () => window.removeEventListener("keyup", handleEsc);
-  }, [handleCloseModal]);
+  }, [onModalClose]);
 
   return isOpen ? <>{children}</> : null;
 };
 
 // 스타일링 커스터마이징을 위한 하위 컴포넌트
 Modal.Background = S.Background;
-Modal.ModalContainer = S.ModalContainer;
 Modal.HeaderSection = S.HeaderSection;
 Modal.Title = S.Title;
+Modal.ModalContainer = S.ModalContainer;
 Modal.ModalCloseButton = S.ModalCloseButton;
 Modal.ModalContent = S.ModalContent;
+Modal.ModalButtonContainer = S.ModalButtonContainer;
+Modal.ModalButton = S.ModalButton;
+Modal.ModalFocusTrap = FocusTrap;
 
 export default Modal;
