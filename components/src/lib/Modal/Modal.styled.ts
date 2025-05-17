@@ -1,6 +1,5 @@
 import styled from "@emotion/styled";
 
-export type ModalType = "alert" | "confirm" | "prompt";
 export type ModalSizeType = "small" | "medium" | "large";
 export type ModalPositionType = "bottom" | "center";
 
@@ -18,7 +17,6 @@ export const Backdrop = styled.div`
 `;
 
 export const ModalContainer = styled.div<{
-  modalType: ModalType;
   modalSize: ModalSizeType;
   position: ModalPositionType;
 }>`
@@ -57,7 +55,6 @@ export const ModalContainer = styled.div<{
           })()}
         `}
 `;
-
 export const ModalHeader = styled.div`
   display: flex;
   justify-content: space-between;
