@@ -1,6 +1,7 @@
 import styled from '@emotion/styled';
-import { CSSProperties, PropsWithChildren, useMemo, useRef } from 'react';
+import { CSSProperties, PropsWithChildren, useMemo } from 'react';
 import Button from './Button';
+import ButtonGroup from './ButtonGroup';
 import CloseButton from './CloseButton';
 import { useBodyScrollLock } from './hooks/useBodyScrollLock';
 import useClickOutside from './hooks/useClickOutside';
@@ -17,7 +18,6 @@ import ModalProvider, { useModalContext } from './ModalProvider';
 import PromptInput from './PromptInput';
 import Title from './Title';
 import WideButton from './WideButton';
-import ButtonGroup from './ButtonGroup';
 
 // ============================== Types ==============================
 
@@ -46,12 +46,11 @@ function ModalContainer({
     if (!style) return {};
     return { ...style };
   }, [style]);
-  let modalRef = useRef<HTMLDivElement>(null);
 
   const isClickOutsideEnabled = role !== 'alert-modal';
-  if (isClickOutsideEnabled) {
-    modalRef = useClickOutside<HTMLDivElement>(onClose);
-  }
+  const modalRef = useClickOutside<HTMLDivElement>(
+    isClickOutsideEnabled ? onClose : null
+  );
 
   useBodyScrollLock(open);
   useModalAccessibility(open, onClose, modalRef);

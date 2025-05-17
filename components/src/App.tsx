@@ -3,7 +3,7 @@ import Modal from './modal/Modal';
 
 function App() {
   return (
-    <Modal>
+    <Modal role="alert-modal">
       <Modal.OpenTrigger>
         <button>열기</button>
       </Modal.OpenTrigger>
