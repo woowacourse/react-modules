@@ -2,7 +2,7 @@ import Dialog from "../Dialog/Dialog";
 import DialogButton from "../Dialog/DialogButton";
 import DialogHeader from "../Dialog/DialogHeader";
 import DialogContent from "../Dialog/DialogContent";
-import useFocus from "../hooks/useFocus";
+import useFocus from "../hooks/useDialogFocusTrap";
 import useFirstNodeFocus from "../hooks/useFirstNodeFocus";
 import { StyledButtonWrapper, StyledContentWrapper } from "../styled.css";
 
