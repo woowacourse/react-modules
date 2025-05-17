@@ -46,7 +46,7 @@ export interface ExpirationDateHookReturnType {
   noError: boolean;
 }
 
-export interface CarNumberHookReturnType extends HookReturnType {
+export interface CardNumberHookReturnType extends HookReturnType {
   inputStates: string;
   errorMessage: ErrorMessageType | string;
   onChange: CurriedInputChangeHandler;

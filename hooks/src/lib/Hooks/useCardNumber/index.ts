@@ -6,13 +6,13 @@ import {
   CurriedInputChangeHandler,
   ValidateFuncReturnType,
   SingleErrorType,
-  CarNumberHookReturnType,
+  CardNumberHookReturnType,
 } from '../../types';
 import { CARD_BRANDS } from '../../constants';
 import { formatCardNumber } from '../../utils/formatCardNumber';
 import { identifyCardNumber } from '../../utils/identifyCardBrand';
 
-const useCardNumber = (): CarNumberHookReturnType => {
+const useCardNumber = (): CardNumberHookReturnType => {
   const [inputStates, setInputStates] = useState('');
 
   const validateCardNumber = (
