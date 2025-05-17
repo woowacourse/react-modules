@@ -5,8 +5,6 @@ import { useEffect, useRef } from 'react';
  *
  * @template T - 참조할 요소(Element)의 타입입니다. 기본값은 HTMLElement입니다.
  * @param callback - 요소 외부를 클릭했을 때 호출할 함수입니다.
- * @param enabled - 외부 클릭 감지 기능을 활성화할지 여부입니다.
- *                  false이면 이벤트 리스너를 등록하지 않습니다. (기본값: true)
  * @returns 대상 요소에 연결할 ref 객체를 반환합니다.
  */
 function useClickOutside<T extends HTMLElement = HTMLElement>(
