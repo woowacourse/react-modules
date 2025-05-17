@@ -1,16 +1,8 @@
-import type { CardBrand } from '../constant';
-
-const CARD_BRAND_FORMAT_RULES = {
-  Visa: [4, 4, 4, 4],
-  MasterCard: [4, 4, 4, 4],
-  Diners: [4, 6, 4],
-  AMEX: [4, 6, 5],
-  UnionPay: [4, 4, 4, 4],
-  Unknown: [4, 4, 4, 4],
-} as const;
+import { CARD_BRANDS_RULE } from '../rule';
+import { type CardBrand } from '../types';
 
 export const formatCardNumber = ({ type, cardNumber }: { type: CardBrand; cardNumber: string }) => {
-  const formattedCardNumber = CARD_BRAND_FORMAT_RULES[type]
+  const formattedCardNumber = CARD_BRANDS_RULE[type].format
     .map((length) => {
       const chunk = cardNumber.slice(0, length);
       cardNumber = cardNumber.slice(length);
