@@ -1,6 +1,6 @@
 {
   "name": "@sanghee01/card-field-hooks",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "description": "A set of hooks for managing card fields in React",
   "type": "module",
   "types": "dist/index.d.ts",
@@ -45,6 +45,6 @@
     "access": "public"
   },
   "dependencies": {
-    "@sanghee01/card-field-hooks": "^0.0.8"
+    "@sanghee01/card-field-hooks": "^0.0.9"
   }
 }
