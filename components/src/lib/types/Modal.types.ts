@@ -2,6 +2,7 @@ import { SerializedStyles } from "@emotion/react";
 
 export type ModalPosition = "center" | "top" | "bottom";
 export type ModalSize = "small" | "medium" | "large";
+export type ButtonAlign = "left" | "center" | "right";
 
 export interface ChildrenProps {
   /** 자식 요소 (JSX.Element 또는 문자열 등) */
@@ -19,10 +20,10 @@ export interface ModalProps extends ChildrenProps {
   showBackdrop?: boolean;
 
   /** 모달 위치 설정: 가운데(center), 상단(top), 하단(bottom) */
-  position?: "center" | "top" | "bottom";
+  position?: ModalPosition;
 
   /**모달의 넓이를 설정 */
-  size?: "small" | "medium" | "large";
+  size?: ModalSize;
 }
 
 export interface ModalHeaderProps extends ChildrenProps {
@@ -36,7 +37,7 @@ export interface ModalTitleProps extends ChildrenProps {
 }
 
 export interface ModalFooterProps extends ChildrenProps {
-  buttonAlign?: "left" | "center" | "right";
+  buttonAlign?: ButtonAlign
 }
 
 export interface ModalContextType {
