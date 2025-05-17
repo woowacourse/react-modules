@@ -8,9 +8,17 @@ type PromptModalProps = {
   onConfirm: (value: string) => void;
   title: string;
   size?: 'small' | 'medium' | 'large';
+  $zIndex?: number;
 } & Omit<ModalProps, 'children'>;
 
-const PromptModal = ({ isOpen, onClose, onConfirm, title, size = 'medium' }: PromptModalProps) => {
+const PromptModal = ({
+  isOpen,
+  onClose,
+  onConfirm,
+  title,
+  size = 'medium',
+  $zIndex = 1000,
+}: PromptModalProps) => {
   const ref = useRef<HTMLInputElement>(null);
 
   const handleConfirm = (e: React.FormEvent) => {
@@ -26,7 +34,7 @@ const PromptModal = ({ isOpen, onClose, onConfirm, title, size = 'medium' }: Pro
   };
 
   return (
-    <Modal isOpen={isOpen} onClose={onClose} closeByEscapeKey={false}>
+    <Modal isOpen={isOpen} onClose={onClose} closeByEscapeKey={false} $zIndex={$zIndex}>
       <Modal.Backdrop closeByBackdrop={false} />
       <Modal.Container size={size}>
         <Modal.Title title={title} />
