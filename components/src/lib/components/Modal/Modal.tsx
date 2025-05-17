@@ -9,15 +9,20 @@ import useModal from "../../hooks/useModal";
 import { ModalCompoundComponent } from "./Modal.types";
 
 import { StyledModal } from "./Modal.styled";
-import { StyledModalOverlay } from "../ModalOverlay/ModalOverlay.styled";
+
 import Button from "../Button/Button";
 import Input from "../Input/Input";
+import ModalOverlay from "../ModalOverlay/ModalOverlay";
 
 const Modal: ModalCompoundComponent = ({ children, onClose, ...props }) => {
   return (
     <>
-      <StyledModal {...props}>
-        <StyledModalOverlay onClick={onClose} />
+      <StyledModal
+        aria-labelledby="modal-title"
+        aria-describedby="modal-description"
+        {...props}
+      >
+        <ModalOverlay {...props} onClose={onClose} />
         {children}
       </StyledModal>
     </>

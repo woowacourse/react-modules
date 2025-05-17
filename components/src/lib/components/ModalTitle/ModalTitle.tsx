@@ -6,7 +6,7 @@ const ModalTitle = ({ children, tag = "h1", ...props }: ModalTitleProps) => {
   const StyledModalTitle = createStyledModalTitle(tag);
 
   return (
-    <StyledModalTitle tag={tag} {...props}>
+    <StyledModalTitle id="modal-title" tag={tag} {...props}>
       {children}
     </StyledModalTitle>
   );
