@@ -1,10 +1,11 @@
 import { useState } from "react";
 import { checkNumber, checkValidLength } from "../validator/inputValidator";
+import { CardInputError } from "../types/cardErrorType";
 
 const MONTH_VALID_LENGTH = 2;
 const YEAR_VALID_LENGTH = 2;
 
-const ERROR_MESSAGE = {
+export const ERROR_MESSAGE = {
   INVALID_NUMBER: "숫자만 입력 가능합니다.",
   INVALID_MONTH_RANGE: "1~12까지의 범위만 입력 가능합니다.",
   INVALID_MONTH_FORMAT: "MM형태로 입력해주세요.",
@@ -12,16 +13,20 @@ const ERROR_MESSAGE = {
   INVALID_YEAR_FORMAT: "YY형태로 입력해주세요.",
 };
 
-const useExpirationDate = () => {
-  const [isValid, setIsValid] = useState({
-    month: true,
-    year: true,
-  });
+interface ExpirationDateError {
+  month: CardInputError;
+  year: CardInputError;
+}
+type ExpDateField = "month" | "year";
 
-  const [errorMessage, setErrorMessage] = useState({
-    month: "",
-    year: "",
-  });
+const useExpirationDate = () => {
+  const [expDate, setExpDate] = useState({ month: "", year: "" });
+  const [validationResult, setValidationResult] = useState<ExpirationDateError>(
+    {
+      month: { errorState: false, message: "" },
+      year: { errorState: false, message: "" },
+    }
+  );
 
   const checkMonthRange = (value: string) => {
     const num = Number(value);
@@ -34,47 +39,81 @@ const useExpirationDate = () => {
   };
 
   const validate = (label: "month" | "year", value: string) => {
-    let valid = true;
-    let message = "";
-
     const validLength =
       label === "month" ? MONTH_VALID_LENGTH : YEAR_VALID_LENGTH;
 
     if (!checkValidLength(value, validLength)) {
-      message =
-        label === "month"
-          ? ERROR_MESSAGE.INVALID_MONTH_FORMAT
-          : ERROR_MESSAGE.INVALID_YEAR_FORMAT;
-      valid = false;
-    } else if (!checkNumber(value)) {
-      message = ERROR_MESSAGE.INVALID_NUMBER;
-      valid = false;
-    } else if (
-      (label === "month" && !checkMonthRange(value)) ||
-      (label === "year" && !checkYearRange(value))
-    ) {
-      message =
-        label === "month"
-          ? ERROR_MESSAGE.INVALID_MONTH_RANGE
-          : ERROR_MESSAGE.INVALID_YEAR_RANGE;
-      valid = false;
+      setValidationResult((prev) => ({
+        ...prev,
+        [label]: {
+          errorState: true,
+          message:
+            label === "month"
+              ? ERROR_MESSAGE.INVALID_MONTH_FORMAT
+              : ERROR_MESSAGE.INVALID_YEAR_FORMAT,
+        },
+      }));
+      return;
     }
 
-    setIsValid((prev) => ({
-      ...prev,
-      [label]: valid,
-    }));
+    if (!checkNumber(value)) {
+      setValidationResult((prev) => ({
+        ...prev,
+        [label]: {
+          errorState: true,
+          message: ERROR_MESSAGE.INVALID_NUMBER,
+        },
+      }));
+      return;
+    }
 
-    setErrorMessage((prev) => ({
+    if (label === "month" && !checkMonthRange(value)) {
+      setValidationResult((prev) => ({
+        ...prev,
+        [label]: {
+          errorState: true,
+          message: ERROR_MESSAGE.INVALID_MONTH_RANGE,
+        },
+      }));
+      return;
+    }
+
+    if (label === "year" && !checkYearRange(value)) {
+      setValidationResult((prev) => ({
+        ...prev,
+        [label]: {
+          errorState: true,
+          message: ERROR_MESSAGE.INVALID_YEAR_RANGE,
+        },
+      }));
+      return;
+    }
+
+    setValidationResult((prev) => ({
       ...prev,
-      [label]: message,
+      [label]: { errorState: false, message: "" },
     }));
   };
 
+  const handleChange = ({
+    name,
+    value,
+  }: {
+    name: ExpDateField;
+    value: string;
+  }) => {
+    setExpDate((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+
+    validate(name, value);
+  };
+
   return {
-    isValid,
-    errorMessage,
-    validate,
+    expDate,
+    handleChange,
+    validationResult,
   };
 };
 

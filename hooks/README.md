@@ -17,29 +17,65 @@ yarn add db0111-react-payments-hooks
 - `useCardNumber`: 카드번호 유효성 검증
 - `useCardPassword`: 카드 비밀번호 유효성 검증
 - `useCardCvc`: 카드 CVC 코드 유효성 검증
-- `useExpirationMonth`: 카드 만료 월 유효성 검증
-- `useExpirationYear`: 카드 만료 연도 유효성 검증
+- `useExpirationDate`: 카드 만료 월, 연도 유효성 검증
 - `useCardCompany`: 카드사 선택 유효성 검증
 
 ## 사용 방법
 
-각 훅은 `isValid`, `errorMessage`, `validate` 속성을 반환합니다.
+각 훅은 상태 값, handleChange(이벤트 핸들러), validationResult(유효성 검증 결과) 속성을 반환합니다.
 
 ```jsx
+import React from "react";
 import { useCardNumber } from "db0111-react-payments-hooks";
 
-function CardForm() {
-  const { isValid, errorMessage, validate } = useCardNumber();
-
-  const handleCardNumberChange = (e) => {
-    const value = e.target.value;
-    validate("first", value);
-  };
+function CardNumberForm() {
+  const { cardNumber, handleChange, validationResult } = useCardNumber();
 
   return (
     <div>
-      <input type="text" onChange={handleCardNumberChange} />
-      {!isValid.first && <p className="error">{errorMessage.first}</p>}
+      <input
+        type="text"
+        name="first"
+        value={cardNumber.first}
+        onChange={handleChange}
+        placeholder="1234"
+      />
+      {validationResult.first.errorState && (
+        <p className="error">{validationResult.first.message}</p>
+      )}
+
+      <input
+        type="text"
+        name="second"
+        value={cardNumber.second}
+        onChange={handleChange}
+        placeholder="5678"
+      />
+      {validationResult.second.errorState && (
+        <p className="error">{validationResult.second.message}</p>
+      )}
+
+      <input
+        type="text"
+        name="third"
+        value={cardNumber.third}
+        onChange={handleChange}
+        placeholder="9012"
+      />
+      {validationResult.third.errorState && (
+        <p className="error">{validationResult.third.message}</p>
+      )}
+
+      <input
+        type="text"
+        name="fourth"
+        value={cardNumber.fourth}
+        onChange={handleChange}
+        placeholder="3456"
+      />
+      {validationResult.fourth.errorState && (
+        <p className="error">{validationResult.fourth.message}</p>
+      )}
     </div>
   );
 }
@@ -52,12 +88,12 @@ function CardForm() {
 카드 번호를 4개의 그룹으로 나누어 각각 검증합니다.
 
 ```jsx
-const { isValid, errorMessage, validate } = useCardNumber();
+const { cardNumber, handleChange, validationResult } = useCardNumber();
 ```
 
-- `isValid`: { first: boolean, second: boolean, third: boolean, fourth: boolean } - 각 그룹의 유효성 상태
-- `errorMessage`: { first: string, second: string, third: string, fourth: string } - 각 그룹의 오류 메시지
-- `validate(label: string, value: string)`: 지정된 그룹(`first`, `second`, `third`, `fourth`)의 카드 번호를 검증
+- `cardNumber`: { first: string, second: string, third: string, fourth: string } - 각 그룹의 카드 번호 상태
+- `handleChange`: 입력 필드 변경을 처리하는 이벤트 핸들러
+- `validationResult`: { first: { errorState: boolean, message: string }, second: { errorState: boolean, message: string }, third: { errorState: boolean, message: string }, fourth: { errorState: boolean, message: string } } - 각 그룹의 유효성 상태와 오류 메시지
 
 검증 규칙:
 
@@ -69,12 +105,12 @@ const { isValid, errorMessage, validate } = useCardNumber();
 카드 비밀번호를 검증합니다.
 
 ```jsx
-const { isValid, errorMessage, validate } = useCardPassword();
+const { cardPassword, handleChange, validationResult } = useCardPassword();
 ```
 
-- `isValid`: boolean - 유효성 상태
-- `errorMessage`: string - 오류 메시지
-- `validate(value: string)`: 비밀번호 검증
+- `cardPassword`: string - 카드 비밀번호 상태
+- `handleChange`: 입력 필드 변경을 처리하는 이벤트 핸들러
+- `validationResult`: { errorState: boolean, message: string } - 유효성 상태와 오류 메시지
 
 검증 규칙:
 
@@ -86,65 +122,47 @@ const { isValid, errorMessage, validate } = useCardPassword();
 카드 CVC 코드를 검증합니다.
 
 ```jsx
-const { isValid, errorMessage, validate } = useCardCvc();
+const { cardCVC, handleChange, validationResult } = useCardCvc();
 ```
 
-- `isValid`: boolean - 유효성 상태
-- `errorMessage`: string - 오류 메시지
-- `validate(value: string)`: CVC 코드 검증
+- `cardCVC`: string - CVC 코드 상태
+- `handleChange`: 입력 필드 변경을 처리하는 이벤트 핸들러
+- `validationResult`: { errorState: boolean, message: string } - 유효성 상태와 오류 메시지
 
 검증 규칙:
 
 - 숫자만 입력 가능
 - 3자리여야 함
 
-### useExpirationMonth
+### useExpirationDate
 
-카드 만료 월을 검증합니다.
+카드 만료 월/연도를 검증합니다.
 
 ```jsx
-const { isValid, errorMessage, validate } = useExpirationMonth();
+const { expDate, handleChange, validationResult } = useExpirationDate();
 ```
 
-- `isValid`: boolean - 유효성 상태
-- `errorMessage`: string - 오류 메시지
-- `validate(value: string)`: 만료 월 검증
+- `expDate`: { month: string, year: string } - 만료 월/연도 상태
+- `handleChange`: 입력 필드 변경을 처리하는 이벤트 핸들러
+- `validationResult`: { month: { errorState: boolean, message: string }, year: { errorState: boolean, message: string } } - 유효성 상태와 오류 메시지
 
 검증 규칙:
 
 - 숫자만 입력 가능
-- 2자리 형식(MM)이어야 함
-- 1~12 사이의 값이어야 함
-
-### useExpirationYear
-
-카드 만료 연도를 검증합니다.
-
-```jsx
-const { isValid, errorMessage, validate } = useExpirationYear();
-```
-
-- `isValid`: boolean - 유효성 상태
-- `errorMessage`: string - 오류 메시지
-- `validate(value: string)`: 만료 연도 검증
-
-검증 규칙:
-
-- 숫자만 입력 가능
-- 2자리 형식(YY)이어야 함
-- 현재 연도 이후여야 함
+- 월은 2자리 형식(MM)이어야 하며 1~12 사이의 값이어야 함
+- 연도는 2자리 형식(YY)이어야 하며 현재 연도 이후여야 함
 
 ### useCardCompany
 
 카드사 선택을 검증합니다.
 
 ```jsx
-const { isValid, errorMessage, validate } = useCardCompany();
+const { cardCompany, handleChange, validationResult } = useCardCompany();
 ```
 
-- `isValid`: boolean - 유효성 상태
-- `errorMessage`: string - 오류 메시지
-- `validate(value: string)`: 카드사 선택 검증
+- `cardCompany`: string - 선택된 카드사 상태
+- `handleChange`: 입력 필드 변경을 처리하는 이벤트 핸들러
+- `validationResult`: { errorState: boolean, message: string } - 유효성 상태와 오류 메시지
 
 검증 규칙:
 

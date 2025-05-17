@@ -1,5 +1,5 @@
-const Button = ({ onclick }: { onclick: () => void }) => {
-	return <button onClick={onclick}>모달 테스트 버튼</button>;
+const Button = ({ onClick }: { onClick: () => void }) => {
+  return <button onClick={onClick}>모달 테스트 버튼</button>;
 };
 
 export default Button;

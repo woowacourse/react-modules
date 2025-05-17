@@ -1,34 +1,47 @@
 import { useState } from "react";
 import { checkNumber, checkValidLength } from "../validator/inputValidator";
+import { CardInputError } from "../types/cardErrorType";
 
 const CVC_VALID_LENGTH = 3;
 
-const ERROR_MESSAGE = {
+export const ERROR_MESSAGE = {
   INVALID_NUMBER: "숫자만 입력 가능합니다.",
   INPUT_LENGTH_LIMIT: `${CVC_VALID_LENGTH}자리를 입력해주세요.`,
 };
 
 const useCardCvc = () => {
-  const [isValid, setIsValid] = useState<boolean>(true);
-  const [errorMessage, setErrorMessage] = useState<string>("");
+  const [cardCVC, setCardCVC] = useState("");
+  const [validationResult, setValidationResult] = useState<CardInputError>({
+    errorState: false,
+    message: "",
+  });
 
-  const validate = (value: string) => {
-    if (!checkNumber(value)) {
-      setErrorMessage(ERROR_MESSAGE.INVALID_NUMBER);
-      setIsValid(false);
+  const validate = (cardCVC: string) => {
+    if (!checkNumber(cardCVC)) {
+      setValidationResult({
+        errorState: true,
+        message: ERROR_MESSAGE.INVALID_NUMBER,
+      });
       return;
     }
 
-    if (!checkValidLength(value, CVC_VALID_LENGTH)) {
-      setErrorMessage(ERROR_MESSAGE.INPUT_LENGTH_LIMIT);
-      setIsValid(false);
+    if (!checkValidLength(cardCVC, CVC_VALID_LENGTH)) {
+      setValidationResult({
+        errorState: true,
+        message: ERROR_MESSAGE.INPUT_LENGTH_LIMIT,
+      });
       return;
     }
-    setErrorMessage("");
-    setIsValid(true);
+
+    setValidationResult({ errorState: false, message: "" });
   };
 
-  return { isValid, errorMessage, validate };
+  const handleChange = (cardCVC: string) => {
+    setCardCVC(cardCVC);
+    validate(cardCVC);
+  };
+
+  return { cardCVC, handleChange, validationResult };
 };
 
 export default useCardCvc;

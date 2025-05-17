@@ -1,24 +1,43 @@
 import { useState } from "react";
+import { CardInputError } from "../types/cardErrorType";
 
-const ERROR_MESSAGE = {
+export const ERROR_MESSAGE = {
   EMPTY_CARD_COMPANY: "카드사를 선택해주세요.",
 };
 
-const useCardCompany = () => {
-  const [isValid, setIsValid] = useState<boolean>(true);
-  const [errorMessage, setErrorMessage] = useState<string>("");
+const useCardCompany = (validCardCompanies: string[] = []) => {
+  const [cardCompany, setCardCompany] = useState("");
+  const [validationResult, setValidationResult] = useState<CardInputError>({
+    errorState: false,
+    message: "",
+  });
 
-  const validate = (value: string) => {
-    if (value.length === 0) {
-      setIsValid(false);
-      setErrorMessage(ERROR_MESSAGE.EMPTY_CARD_COMPANY);
+  const validate = (cardCompany: string) => {
+    if (cardCompany.length === 0) {
+      setValidationResult({
+        errorState: true,
+        message: ERROR_MESSAGE.EMPTY_CARD_COMPANY,
+      });
       return;
     }
-    setErrorMessage("");
-    setIsValid(true);
+
+    if (!validCardCompanies.includes(cardCompany)) {
+      setValidationResult({
+        errorState: true,
+        message: "유효하지 않은 카드사입니다.",
+      });
+      return;
+    }
+
+    setValidationResult({ errorState: false, message: "" });
   };
 
-  return { isValid, errorMessage, validate };
+  const handleChange = (cardCompany: string) => {
+    setCardCompany(cardCompany);
+    validate(cardCompany);
+  };
+
+  return { cardCompany, handleChange, validationResult };
 };
 
 export default useCardCompany;
