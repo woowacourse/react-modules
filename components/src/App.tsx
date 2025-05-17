@@ -3,6 +3,7 @@ import useModalState from "./lib/hooks/useModalState";
 import Prompt from "./lib/Prompt/Prompt";
 import { Alert, Confirm } from "./lib";
 
+
 function App() {
   const {
     isOpen: isAlertOpen,
