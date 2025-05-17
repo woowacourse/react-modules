@@ -16,13 +16,12 @@ function useCardPassword() {
   const isError = !getValidLength(value, 2);
   const errorMessage = isError ? '한 칸은 2자리 숫자를 입력해야합니다.' : '';
 
-  const cardPassword = {
+  return {
     value,
     isError,
     onChange,
     errorMessage,
   };
-  return cardPassword;
 }
 
 export default useCardPassword;
