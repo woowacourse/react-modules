@@ -1,5 +1,6 @@
 import { CARD_NUMBER_FORMAT, CARD_NUMBER_PATTERN } from "../constants/cardBrand";
-import { CardBrand } from "../useCardBrand/useCardBrand";
+import { getError } from "../utils/vaildate";
+import { ERROR } from "../constants/message";
 
 export const detectCardBrand = (cardNumber: string) => {
 	const cleanedCardNumber = cardNumber.replace(/\s+/g, "");
@@ -26,4 +27,30 @@ export const formatCardNumber = (cardNumber: string, cardBrand: CardBrand): stri
 		default:
 			return cardNumber;
 	}
+};
+
+export type CardBrand = "AMEX" | "Diners" | "Visa" | "Mastercard" | "UnionPay" | null;
+
+interface CardBrandResult {
+	cardBrand: CardBrand;
+	formattedCardNumber: string;
+	cardBrandError: {
+		isValid: boolean;
+		errorMessage: string | null;
+	};
+}
+
+export const getCardBrandInfo = (cardNumber: string): CardBrandResult => {
+	const cardBrand = detectCardBrand(cardNumber) ?? null;
+
+	return {
+		cardBrand,
+		formattedCardNumber: formatCardNumber(cardNumber, cardBrand),
+		cardBrandError: getError(cardBrand, [
+			{
+				validate: () => cardBrand === null,
+				errorMessage: ERROR.NO_CARD_BRAND,
+			},
+		]),
+	};
 };
