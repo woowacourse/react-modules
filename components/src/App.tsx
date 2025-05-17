@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Modal, ModalType } from "bunju-react-modal";
+import Modal, { ModalType } from "./lib/Modal";
 
 function App() {
   const [isOpen, setIsOpen] = useState(false);
@@ -24,109 +24,154 @@ function App() {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const renderFormModal = () => (
-    <Modal onClose={handleClose} modalType="alert" modalSize="large">
+  const renderIncorrectUsageModal = () => (
+    <Modal onClose={handleClose} modalType="alert" modalSize="medium">
       <Modal.Header>
-        <Modal.Title>사용자 정보 입력</Modal.Title>
+        <Modal.Title>Alert 모달에서 Input 사용 (잘못된 사용)</Modal.Title>
         <Modal.CloseButton onClick={handleClose} />
       </Modal.Header>
 
       <Modal.Content>
-        <div style={{ display: "flex", flexDirection: "column", gap: "15px" }}>
-          <div>
-            <label
-              htmlFor="name"
-              style={{ display: "block", marginBottom: "5px" }}
-            >
-              이름
-            </label>
-            <input
-              id="name"
-              name="name"
-              type="text"
-              value={formData.name}
-              onChange={handleChange}
-              style={{
-                width: "100%",
-                padding: "8px",
-                borderRadius: "4px",
-                border: "1px solid #ccc",
-              }}
-            />
-          </div>
+        <p>
+          이것은 Alert 모달입니다. Input 컴포넌트를 사용하면 경고가 발생합니다.
+        </p>
 
-          <div>
-            <label
-              htmlFor="email"
-              style={{ display: "block", marginBottom: "5px" }}
-            >
-              이메일
-            </label>
-            <input
-              id="email"
-              name="email"
-              type="email"
-              value={formData.email}
-              onChange={handleChange}
-              style={{
-                width: "100%",
-                padding: "8px",
-                borderRadius: "4px",
-                border: "1px solid #ccc",
-              }}
-            />
-          </div>
+        {/* 잘못된 사용: Alert 모달에서 Modal.Input 사용 */}
+        <div
+          style={{
+            marginTop: "15px",
+            padding: "10px",
+            backgroundColor: "#fff4f4",
+            borderRadius: "4px",
+            border: "1px solid #ffdddd",
+          }}
+        >
+          <p
+            style={{
+              marginBottom: "10px",
+              color: "#d32f2f",
+              fontWeight: "bold",
+            }}
+          >
+            잘못된 사용 예시: Alert 모달에서 Modal.Input 사용
+          </p>
 
-          <div>
-            <label
-              htmlFor="phone"
-              style={{ display: "block", marginBottom: "5px" }}
-            >
-              전화번호
-            </label>
-            <input
-              id="phone"
-              name="phone"
-              type="tel"
-              value={formData.phone}
-              onChange={handleChange}
-              style={{
-                width: "100%",
-                padding: "8px",
-                borderRadius: "4px",
-                border: "1px solid #ccc",
-              }}
-            />
-          </div>
+          <label
+            htmlFor="incorrectInput"
+            style={{ display: "block", marginBottom: "5px" }}
+          >
+            입력해보세요 (경고가 발생합니다):
+          </label>
 
-          <div>
-            <label
-              htmlFor="message"
-              style={{ display: "block", marginBottom: "5px" }}
-            >
-              메시지
-            </label>
-            <textarea
-              id="message"
-              name="message"
-              value={formData.message}
-              onChange={handleChange}
-              rows={4}
-              style={{
-                width: "100%",
-                padding: "8px",
-                borderRadius: "4px",
-                border: "1px solid #ccc",
-              }}
-            />
-          </div>
+          {/* 이 Input에 포커스하거나 클릭하거나 입력하면 경고가 발생 */}
+          <Modal.Input
+            value={formData.name}
+            onChange={(e) =>
+              setFormData((prev) => ({ ...prev, name: e.target.value }))
+            }
+            placeholder="이 필드와 상호작용하면 경고가 발생합니다"
+          />
+        </div>
+      </Modal.Content>
+
+      <Modal.Footer>
+        <Modal.Button primary onClick={handleClose}>
+          확인
+        </Modal.Button>
+      </Modal.Footer>
+    </Modal>
+  );
+
+  const renderCorrectUsageModal = () => (
+    <Modal onClose={handleClose} modalType="prompt" modalSize="medium">
+      <Modal.Header>
+        <Modal.Title>Prompt 모달에서 Input 사용 (올바른 사용)</Modal.Title>
+        <Modal.CloseButton onClick={handleClose} />
+      </Modal.Header>
+
+      <Modal.Content>
+        <p>
+          이것은 Prompt 모달입니다. Input 컴포넌트를 사용해도 경고가 발생하지
+          않습니다.
+        </p>
+
+        <div
+          style={{
+            marginTop: "15px",
+            padding: "10px",
+            backgroundColor: "#f4fff4",
+            borderRadius: "4px",
+            border: "1px solid #ddffdd",
+          }}
+        >
+          <p
+            style={{
+              marginBottom: "10px",
+              color: "#2e7d32",
+              fontWeight: "bold",
+            }}
+          >
+            올바른 사용 예시: Prompt 모달에서 Modal.Input 사용
+          </p>
+
+          <label
+            htmlFor="correctInput"
+            style={{ display: "block", marginBottom: "5px" }}
+          >
+            입력해보세요 (경고가 발생하지 않습니다):
+          </label>
+
+          {/* 이 Input은 prompt 모달 내에 있어 경고가 발생하지 않음 */}
+          <Modal.Input
+            value={formData.email}
+            onChange={(e) =>
+              setFormData((prev) => ({ ...prev, email: e.target.value }))
+            }
+            placeholder="이 필드는 경고가 발생하지 않습니다"
+          />
         </div>
       </Modal.Content>
 
       <Modal.Footer>
         <Modal.Button onClick={handleClose}>취소</Modal.Button>
         <Modal.Button primary onClick={handleConfirm}>
-          제출
+          확인
+        </Modal.Button>
+      </Modal.Footer>
+    </Modal>
+  );
+
+  const renderConfirmWithInputModal = () => (
+    <Modal onClose={handleClose} modalType="confirm" modalSize="medium">
+      <Modal.Header>
+        <Modal.Title>카드를 삭제하시겠습니까?</Modal.Title>
+        <Modal.CloseButton onClick={handleClose} />
+      </Modal.Header>
+
+      <Modal.Content>
+        <p>삭제하면 복구하실 수 없습니다.</p>
+
+        {/* 잘못된 사용: Confirm 모달에서 Modal.Input 사용 */}
+        <div style={{ marginTop: "15px" }}>
+          <p style={{ fontSize: "14px", color: "#666", marginBottom: "5px" }}>
+            삭제 이유를 입력하세요 (선택사항):
+          </p>
+
+          {/* 이 Input에 포커스하거나 클릭하거나 입력하면 경고가 발생 */}
+          <Modal.Input
+            value={formData.message}
+            onChange={(e) =>
+              setFormData((prev) => ({ ...prev, message: e.target.value }))
+            }
+            placeholder="삭제 이유"
+          />
+        </div>
+      </Modal.Content>
+
+      <Modal.Footer>
+        <Modal.Button onClick={handleClose}>취소</Modal.Button>
+        <Modal.Button primary onClick={handleConfirm}>
+          삭제
         </Modal.Button>
       </Modal.Footer>
     </Modal>
@@ -134,88 +179,82 @@ function App() {
 
   return (
     <>
+      <h1>Modal.Input 경고 테스트</h1>
+
       <div style={{ display: "flex", gap: "10px", marginBottom: "20px" }}>
         <button
           onClick={() => {
             setModalType("alert");
             setIsOpen(true);
           }}
+          style={{
+            padding: "8px 16px",
+            backgroundColor: "#f44336",
+            color: "white",
+            border: "none",
+            borderRadius: "4px",
+            cursor: "pointer",
+          }}
         >
-          Alert 모달 열기
+          잘못된 사용 예시 (Alert+Input)
         </button>
         <button
           onClick={() => {
             setModalType("confirm");
             setIsOpen(true);
           }}
+          style={{
+            padding: "8px 16px",
+            backgroundColor: "#ff9800",
+            color: "white",
+            border: "none",
+            borderRadius: "4px",
+            cursor: "pointer",
+          }}
         >
-          Confirm 모달 열기
+          잘못된 사용 예시 (Confirm+Input)
         </button>
         <button
           onClick={() => {
             setModalType("prompt");
             setIsOpen(true);
           }}
-        >
-          Prompt 모달 열기
-        </button>
-        <button
-          onClick={() => {
-            setModalType("confirm");
-            setIsOpen(true);
+          style={{
+            padding: "8px 16px",
+            backgroundColor: "#4caf50",
+            color: "white",
+            border: "none",
+            borderRadius: "4px",
+            cursor: "pointer",
           }}
         >
-          Form 모달 열기
+          올바른 사용 예시 (Prompt+Input)
         </button>
       </div>
 
-      {isOpen && modalType === "confirm"
-        ? renderFormModal()
-        : isOpen && (
-            <Modal
-              onClose={handleClose}
-              modalType={modalType}
-              modalSize="medium"
-            >
-              <Modal.Header>
-                <Modal.Title>
-                  {modalType === "alert"
-                    ? "아이디를 입력해주세요"
-                    : modalType === "confirm"
-                      ? "카드를 삭제하시겠습니다?"
-                      : "쿠폰번호를 입력해주세요"}
-                </Modal.Title>
-                <Modal.CloseButton onClick={handleClose} />
-              </Modal.Header>
+      <div
+        style={{
+          marginBottom: "20px",
+          padding: "15px",
+          backgroundColor: "#f5f5f5",
+          borderRadius: "4px",
+        }}
+      >
+        <h3>테스트 방법:</h3>
+        <ol>
+          <li>"잘못된 사용 예시" 버튼을 클릭하여 Alert 모달을 엽니다.</li>
+          <li>입력 필드를 클릭하거나 입력해 봅니다.</li>
+          <li>브라우저 콘솔(F12)에서 경고 메시지를 확인합니다.</li>
+          <li>동일한 방식으로 다른 예시도 테스트해 봅니다.</li>
+        </ol>
+      </div>
 
-              <Modal.Content>
-                {modalType === "alert" && (
-                  <p>아이디는 필수로 입력해야합니다.</p>
-                )}
-                {modalType === "confirm" && (
-                  <p>삭제하면 복구하실 수 없습니다.</p>
-                )}
-                {modalType === "prompt" && (
-                  <Modal.Input
-                    value={formData.name}
-                    onChange={(e) =>
-                      setFormData((prev) => ({ ...prev, name: e.target.value }))
-                    }
-                    placeholder="아이디를 입력하세요"
-                  />
-                )}
-              </Modal.Content>
-
-              <Modal.Footer>
-                {(modalType === "confirm" || modalType === "prompt") && (
-                  <Modal.Button onClick={handleClose}>취소</Modal.Button>
-                )}
-                <Modal.Button primary onClick={handleConfirm}>
-                  확인
-                </Modal.Button>
-              </Modal.Footer>
-            </Modal>
-          )}
+      {isOpen &&
+        (modalType === "alert"
+          ? renderIncorrectUsageModal()
+          : modalType === "confirm"
+            ? renderConfirmWithInputModal()
+            : renderCorrectUsageModal())}
     </>
   );
 }

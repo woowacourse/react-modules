@@ -1,4 +1,4 @@
-import styled, { css } from "styled-components";
+import styled from "@emotion/styled";
 
 export type ModalType = "alert" | "confirm" | "prompt";
 export type ModalSizeType = "small" | "medium" | "large";
@@ -32,37 +32,29 @@ export const ModalContainer = styled.div<{
 
   ${({ position, modalSize }) =>
     position === "bottom"
-      ? css`
+      ? `
           width: 100%;
           bottom: 0;
           left: 0;
           border-radius: 8px 8px 0 0;
         `
-      : css`
+      : `
           top: 50%;
           left: 50%;
           transform: translate(-50%, -50%);
           border-radius: 8px;
-          ${() => {
+          ${(() => {
             switch (modalSize) {
               case "small":
-                return css`
-                  width: 320px;
-                `;
+                return `width: 320px;`;
               case "medium":
-                return css`
-                  width: 480px;
-                `;
+                return `width: 480px;`;
               case "large":
-                return css`
-                  width: 600px;
-                `;
+                return `width: 600px;`;
               default:
-                return css`
-                  width: 320px;
-                `;
+                return `width: 320px;`;
             }
-          }}
+          })()}
         `}
 `;
 
@@ -133,12 +125,12 @@ export const Button = styled.button<{ primary?: boolean }>`
 
   ${({ primary }) =>
     primary
-      ? css`
+      ? `
           background-color: #333333;
           color: white;
           border: none;
         `
-      : css`
+      : `
           background-color: white;
           color: #333333;
           border: 1px solid #333333;

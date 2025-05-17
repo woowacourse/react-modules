@@ -1,4 +1,4 @@
-import { PropsWithChildren, ReactNode } from "react";
+import { PropsWithChildren, ReactNode, useRef } from "react";
 import * as S from "./Modal.styled";
 import CloseIcon from "@assets/close.svg";
 import useModalCloseEvent from "../../hooks/useModalCloseEvent";
@@ -46,6 +46,8 @@ export interface ButtonProps {
   children: ReactNode;
 }
 
+let currentModalType: ModalType = "alert";
+
 function Modal({
   onClose,
   children,
@@ -54,13 +56,14 @@ function Modal({
   position = "center",
 }: PropsWithChildren<ModalProps>) {
   useModalCloseEvent(onClose);
+  const focusTrapRef = useFocusTrap();
 
-  const focusTapRef = useFocusTrap();
+  currentModalType = modalType;
 
   return (
     <S.Backdrop id="backdrop">
       <S.ModalContainer
-        ref={focusTapRef}
+        ref={focusTrapRef}
         modalType={modalType}
         modalSize={modalSize}
         position={position}
@@ -95,11 +98,38 @@ Modal.Content = function Content({ children }: ContentProps) {
 };
 
 Modal.Input = function Input({ value, onChange, placeholder }: InputProps) {
+  const hasInteractedRef = useRef(false);
+
+  const showWarningIfNeeded = () => {
+    if (!hasInteractedRef.current) {
+      hasInteractedRef.current = true;
+
+      if (process.env.NODE_ENV !== "production") {
+        if (currentModalType !== "prompt") {
+          setTimeout(() => {
+            console.warn(
+              `Modal.Input은 prompt 타입 모달에서만 사용해야 합니다. 현재 모달 타입: ${currentModalType}`
+            );
+          }, 0);
+        }
+      }
+    }
+  };
+
   return (
     <S.ModalInput
       type="text"
       value={value}
-      onChange={onChange}
+      onChange={(e) => {
+        showWarningIfNeeded();
+        onChange(e);
+      }}
+      onFocus={() => {
+        showWarningIfNeeded();
+      }}
+      onClick={() => {
+        showWarningIfNeeded();
+      }}
       placeholder={placeholder}
     />
   );
