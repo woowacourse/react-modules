@@ -1,3 +1,5 @@
+import { SerializedStyles } from "@emotion/react";
+
 export type ModalPosition = "center" | "top" | "bottom";
 export type ModalSize = "small" | "medium" | "large";
 
@@ -39,4 +41,9 @@ export interface ModalFooterProps extends ChildrenProps {
 
 export interface ModalContextType {
   onHide: () => void;
+}
+
+export interface ModalButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  children?: React.ReactNode;
+  css?: SerializedStyles;
 }
