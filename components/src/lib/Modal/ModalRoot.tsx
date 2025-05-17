@@ -25,8 +25,16 @@ export const ModalRoot = ({ isOpen, onClose, modalPosition = "center", children,
 	useEffect(() => {
 		if (!isOpen) return;
 		const modalContainer = containerRef.current;
+		if (!modalContainer) return;
+
+		const keydownHandler = (e: KeyboardEvent) => handleFocusTrap(e, modalContainer);
+
 		focusFirstElement(modalContainer);
-		modalContainer?.addEventListener("keydown", (e) => handleFocusTrap(e, modalContainer));
+		modalContainer.addEventListener("keydown", keydownHandler);
+
+		return () => {
+			modalContainer.removeEventListener("keydown", keydownHandler);
+		};
 	}, [isOpen]);
 
 	if (!isOpen) return null;
