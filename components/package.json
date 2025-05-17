@@ -1,6 +1,6 @@
 {
   "name": "@jae-o/modal-component-module",
-  "version": "0.0.5",
+  "version": "1.0.1",
   "description": "modal component module",
   "type": "module",
   "types": "dist/index.d.ts",
@@ -16,7 +16,7 @@
     "preview": "vite preview",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "chromatic": "npx chromatic --project-token=chpt_984c2cec99e798a"
+    "chromatic": "dotenv -e .env -- npx chromatic --project-token=$CHROMATIC_PROJECT_TOKEN"
   },
   "dependencies": {
     "@emotion/react": "^11.14.0",
@@ -41,7 +41,8 @@
     "@typescript-eslint/eslint-plugin": "^8.29.1",
     "@typescript-eslint/parser": "^8.29.1",
     "@vitejs/plugin-react-swc": "^3.8.1",
-    "eslint": "^9.24.0",
+    "dotenv-cli": "^8.0.0",
+    "eslint": "^8.57.0",
     "eslint-plugin-react-hooks": "^5.2.0",
     "eslint-plugin-react-refresh": "^0.4.19",
     "eslint-plugin-storybook": "^0.12.0",

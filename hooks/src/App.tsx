@@ -1,37 +1,38 @@
 import './App.css';
-import { EXPIRY_DATE_KEY } from './lib';
-import useExpiryDate from './lib/expiryDate/useExpiryDate';
+import { useCardNumbers } from './lib';
 
 function App() {
-  const { expiryDate, validationResults, handleExpiryDateChange } =
-    useExpiryDate();
+  const { cardNumbers, validationResults, cardBrand, handleCardNumbersChange } =
+    useCardNumbers([
+      { name: 'part1', length: 4 },
+      { name: 'part2', length: 4 },
+      { name: 'part3', length: 4 },
+      { name: 'part4', length: 4 },
+    ]);
 
   return (
     <>
       <h1>Hooks Modules</h1>
-      <input
-        type="text"
-        name={EXPIRY_DATE_KEY.month}
-        onChange={(event) =>
-          handleExpiryDateChange('month', event.target.value)
-        }
-        value={expiryDate.month}
-      />
-      <p>{validationResults.month.isValid}</p>
-      <input
-        type="text"
-        name={EXPIRY_DATE_KEY.year}
-        onChange={(event) =>
-          handleExpiryDateChange('year', event?.target.value, {
-            skipValidation: true,
-          })
-        }
-        value={expiryDate.year}
-      />
-      <p>{validationResults.year.isValid}</p>
+      {(['part1', 'part2', 'part3', 'part4'] as const).map((key) => {
+        return (
+          <>
+            <input
+              type="text"
+              name={key}
+              onChange={(event) =>
+                handleCardNumbersChange(key, event.target.value)
+              }
+              value={cardNumbers[key]}
+            />
+            <p>{validationResults[key].isValid}</p>
+          </>
+        );
+      })}
 
-      <p>{validationResults.month.errorMessage}</p>
-      <p>{validationResults.year.errorMessage}</p>
+      <p>{validationResults.part1.errorMessage}</p>
+      <p>{validationResults.part2.errorMessage}</p>
+      <p>{validationResults.part3.errorMessage}</p>
+      <p>{cardBrand}</p>
     </>
   );
 }

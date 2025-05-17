@@ -17,4 +17,4 @@ export const ERROR_MESSAGE = {
     notNumber: COMMON_ERROR_MESSAGE.notNumber,
     invalidLength: 'CVC는 세 자리만 입력해야 합니다.',
   },
-};
+} as const;

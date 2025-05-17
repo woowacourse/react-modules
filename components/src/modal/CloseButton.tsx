@@ -1,21 +1,31 @@
 import styled from '@emotion/styled';
 import { CSSProperties, useMemo } from 'react';
+import { useModalContext } from './ModalProvider';
 
-function CloseButton({
-  style,
-  onClose,
-}: {
+// ============================== Types ==============================
+
+interface CloseButtonProps {
   style?: CSSProperties;
-  onClose: () => void;
-}) {
+  className?: string;
+}
+
+// ============================== Component ==============================
+
+function CloseButton({ style, className }: CloseButtonProps) {
+  const { onClose } = useModalContext();
   const memoizedStyle = useMemo(() => {
-    return {
-      ...style,
-    };
-  }, [JSON.stringify(style)]);
+    if (!style) return {};
+    return { ...style };
+  }, [style]);
 
   return (
-    <StyledCloseButton type="button" style={memoizedStyle} onClick={onClose}>
+    <StyledCloseButton
+      type="button"
+      aria-label="모달 닫기 버튼"
+      style={memoizedStyle}
+      className={className}
+      onClick={onClose}
+    >
       <img
         src={new URL('./assets/close-button.png', import.meta.url).href}
         alt="모달 닫기 버튼"
@@ -24,12 +34,12 @@ function CloseButton({
   );
 }
 
+// ============================== Styled Components ==============================
+
 const StyledCloseButton = styled.button`
   border: none;
   background: none;
-  position: absolute;
-  top: 24px;
-  right: 32px;
+
   cursor: pointer;
 `;
 
