@@ -1,4 +1,4 @@
-import { CardCompany } from './types/card';
+import { CardCompany } from './card.type';
 import createCardField from './utils/createCardFieldHook';
 
 export function useCardCompanySelect() {

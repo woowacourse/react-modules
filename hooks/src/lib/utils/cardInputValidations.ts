@@ -1,4 +1,4 @@
-import { validationResult } from '../types/card';
+import { validationResult } from '../card.type';
 
 export function validateNumberError(value: string): validationResult {
   if (!/^[0-9]*$/.test(value)) {

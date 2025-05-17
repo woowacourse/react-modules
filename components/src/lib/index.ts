@@ -1,2 +1,2 @@
-export { default as Modal } from './Modal';
-export { default as useModal } from './useModal';
+export { default as Modal } from './components/Modal/Modal';
+export { default as useModal } from './hooks/useModal';

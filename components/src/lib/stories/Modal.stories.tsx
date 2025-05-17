@@ -1,15 +1,15 @@
-import type { Meta, StoryObj } from '@storybook/react';
-import Modal from './Modal';
+import { Meta, StoryObj } from '@storybook/react';
+import Modal from '../components/Modal/Modal';
 import { within, expect, userEvent, waitFor } from '@storybook/test';
-import type { ModalProps } from './Modal.type';
-import useModal from './useModal';
+import { ModalProps } from '../Modal.type';
+import useModal from '../hooks/useModal';
 
 const meta: Meta<ModalProps> = {
   title: 'Modal',
   component: Modal,
   args: {
     position: 'center',
-    title: '모달 제목',
+    size: 'large',
   },
 };
 
@@ -54,8 +54,13 @@ const Wrapper = (args: ModalProps) => {
       <h1>Modal Component</h1>
       <button onClick={handleOpen}>열기</button>
       <Modal {...args} isOpen={isOpen} onAfterOpen={handleAfterOpen} onClose={handleClose}>
-        <ModalContent />
-        <ModalActions />
+        <Modal.Header title="모달 제목" showCloseButton />
+        <Modal.Body>
+          <ModalContent />
+        </Modal.Body>
+        <Modal.Actions>
+          <ModalActions />
+        </Modal.Actions>
       </Modal>
     </>
   );
@@ -80,7 +85,6 @@ export const Default: Story = {
 export const CenterWithAction: Story = {
   args: {
     position: 'center',
-    title: '모달 제목',
     showCloseButton: true,
   },
   render: (args) => <Wrapper {...args} />,
@@ -110,7 +114,6 @@ export const CenterWithAction: Story = {
 export const Bottom: Story = {
   args: {
     position: 'bottom',
-    title: '모달 제목',
     showCloseButton: true,
   },
   render: (args) => <Wrapper {...args} />,
@@ -134,7 +137,6 @@ export const Bottom: Story = {
 export const ESCClose: Story = {
   args: {
     position: 'center',
-    title: '모달 제목',
   },
   render: (args) => <Wrapper {...args} />,
   play: async ({ canvasElement }) => {
@@ -157,7 +159,6 @@ export const ESCClose: Story = {
 export const BackdropClose: Story = {
   args: {
     position: 'center',
-    title: '모달 제목',
   },
   render: (args) => <Wrapper {...args} />,
   play: async ({ canvasElement }) => {
@@ -176,6 +177,28 @@ export const BackdropClose: Story = {
     userEvent.click(backdrop);
     await waitFor(() => {
       expect(canvas.queryByTestId('modal')).toBeNull();
+    });
+  },
+};
+
+export const Size: Story = {
+  args: {
+    position: 'center',
+    size: 'medium',
+  },
+  render: (args) => <Wrapper {...args} />,
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    const openButton = await canvas.findByRole('button', { name: '열기' });
+    expect(openButton).toBeDefined();
+    userEvent.click(openButton);
+
+    const modal = await canvas.findByTestId('modal');
+    expect(modal).toBeDefined();
+
+    expect(modal).toHaveStyle({
+      width: '480px',
     });
   },
 };

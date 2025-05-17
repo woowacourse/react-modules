@@ -19,10 +19,11 @@ npm install @eunoia-jaxson/card-field-hooks
 ### useCardNumberInput
 
 - 카드 번호 입력 관리
-- 입력값 포매팅 및 유효성 검사 자동 처리
+- 입력값 포맷팅 및 유효성 검사 자동 처리
+- 카드 브랜드 식별
 
 ```tsx
-const { cardNumber, handleCardNumberChange, cardNumberError } = useCardNumberInput();
+const { cardNumber, formattedCardNumber, brand, cardNumberError, handleCardNumberChange } = useCardNumberInput();
 ```
 
 ### useCardExpirationInput
@@ -31,7 +32,7 @@ const { cardNumber, handleCardNumberChange, cardNumberError } = useCardNumberInp
 - MM/YY 형식 자동 처리 및 유효성 검사
 
 ```tsx
-const { expirationDate, handleExpirationChange, expirationError } = useCardExpirationInput();
+const { cardExpiration, handleCardExpirationChange, cardExpirationError } = useCardExpirationInput();
 ```
 
 ### useCardPasswordInput
@@ -40,7 +41,7 @@ const { expirationDate, handleExpirationChange, expirationError } = useCardExpir
 - 유효성 검사 및 마스킹 처리
 
 ```tsx
-const { password, handlePasswordChange, passwordError } = useCardPasswordInput();
+const { cardPassword, handleCardPasswordChange, cardPasswordError } = useCardPasswordInput();
 ```
 
 ### useCvcInput
@@ -67,9 +68,9 @@ const { cardCompany, handleSelectChange } = useCardCompanySelect();
 - **cardInputValidations**: 카드 번호, 유효기간, 비밀번호, CVC 입력에 대한 유효성 검사 로직을 제공합니다.
 
 ```tsx
-import { validateCardNumber, validateExpiration, validatePassword, validateCvc } from 'your-card-input-package';
+import { validateCardNumber, validateExpiration, validatePassword, validateCvc } from '@eunoia-jaxson/card-field-hooks';
 
-const isCardValid = validateCardNumber('1234 5678 9012 3456');
+const isCardValid = validateCardNumber('1234567890123456');
 ```
 
 ---
