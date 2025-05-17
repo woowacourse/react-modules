@@ -28,6 +28,7 @@ type Story = StoryObj<typeof meta>;
 
 export const Alert: Story = {
   args: {
+    isOpen: true,
     modalType: "alert",
     onClose: () => {},
     children: (
@@ -49,6 +50,7 @@ export const Alert: Story = {
 
 export const Confirm: Story = {
   args: {
+    isOpen: true,
     modalType: "confirm",
     onClose: () => {},
     children: (
@@ -73,6 +75,7 @@ export const Confirm: Story = {
 
 export const Prompt: Story = {
   args: {
+    isOpen: true,
     modalType: "prompt",
     onClose: () => {},
     children: (
@@ -102,6 +105,7 @@ export const Prompt: Story = {
 
 export const BottomPosition: Story = {
   args: {
+    isOpen: true,
     position: "bottom",
     onClose: () => {},
     children: (

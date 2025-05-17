@@ -1,4 +1,4 @@
-import { PropsWithChildren, ReactNode, useRef } from "react";
+import { PropsWithChildren, ReactNode, useRef, useEffect } from "react";
 import * as S from "./Modal.styled";
 import CloseIcon from "@assets/close.svg";
 import useModalCloseEvent from "../../hooks/useModalCloseEvent";
@@ -9,6 +9,7 @@ export type ModalSizeType = "small" | "medium" | "large";
 export type ModalPositionType = "bottom" | "center";
 export interface ModalProps {
   onClose: () => void;
+  isOpen: boolean;
   modalType?: ModalType;
   modalSize?: ModalSizeType;
   position?: ModalPositionType;
@@ -50,15 +51,18 @@ let currentModalType: ModalType = "alert";
 
 function Modal({
   onClose,
+  isOpen,
   children,
   modalType = "alert",
   modalSize = "medium",
   position = "center",
 }: PropsWithChildren<ModalProps>) {
+  currentModalType = modalType;
+
+  if (!isOpen) return null;
+
   useModalCloseEvent(onClose);
   const focusTrapRef = useFocusTrap();
-
-  currentModalType = modalType;
 
   return (
     <S.Backdrop id="backdrop">

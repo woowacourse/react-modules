@@ -25,7 +25,12 @@ function App() {
   };
 
   const renderIncorrectUsageModal = () => (
-    <Modal onClose={handleClose} modalType="alert" modalSize="medium">
+    <Modal
+      onClose={handleClose}
+      isOpen={isOpen}
+      modalType="alert"
+      modalSize="medium"
+    >
       <Modal.Header>
         <Modal.Title>Alert 모달에서 Input 사용 (잘못된 사용)</Modal.Title>
         <Modal.CloseButton onClick={handleClose} />
@@ -83,7 +88,12 @@ function App() {
   );
 
   const renderCorrectUsageModal = () => (
-    <Modal onClose={handleClose} modalType="prompt" modalSize="medium">
+    <Modal
+      onClose={handleClose}
+      isOpen={isOpen}
+      modalType="prompt"
+      modalSize="medium"
+    >
       <Modal.Header>
         <Modal.Title>Prompt 모달에서 Input 사용 (올바른 사용)</Modal.Title>
         <Modal.CloseButton onClick={handleClose} />
@@ -142,7 +152,12 @@ function App() {
   );
 
   const renderConfirmWithInputModal = () => (
-    <Modal onClose={handleClose} modalType="confirm" modalSize="medium">
+    <Modal
+      onClose={handleClose}
+      isOpen={isOpen}
+      modalType="confirm"
+      modalSize="medium"
+    >
       <Modal.Header>
         <Modal.Title>카드를 삭제하시겠습니까?</Modal.Title>
         <Modal.CloseButton onClick={handleClose} />
