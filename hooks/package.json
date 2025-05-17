@@ -19,7 +19,7 @@
     "build-storybook": "storybook build"
   },
   "dependencies": {
-    "bunju-react-hooks": "^1.0.0",
+    "bunju-react-hooks": "^1.0.1",
     "react": "^19.1.0",
     "react-dom": "^19.1.0"
   },
