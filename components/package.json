@@ -54,7 +54,5 @@
   "publishConfig": {
     "access": "public"
   },
-  "dependencies": {
-    "@sanghee01/modal": "^0.0.9"
-  }
+  "dependencies": {}
 }
