@@ -17,5 +17,5 @@ export function useKeyPress({ targetKey, isOpen, onClose }: useKeyPressProps) {
 
     window.addEventListener("keydown", handleKeydown);
     return () => window.removeEventListener("keydown", handleKeydown);
-  }, [isOpen, onClose]);
+  }, [isOpen, onClose, targetKey]);
 }
