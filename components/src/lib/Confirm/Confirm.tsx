@@ -48,23 +48,23 @@ export default function Confirm({
               <DialogHeader title={title} />
             </Dialog.Header>
             <DialogContent content={content} />
-            <Dialog.CloseAction>
-              <div
-                style={{
-                  display: "flex",
-                  width: "100%",
-                  justifyContent: "flex-end",
-                  gap: "12px",
-                }}
-              >
+            <div
+              style={{
+                display: "flex",
+                width: "100%",
+                justifyContent: "flex-end",
+                gap: "12px",
+              }}
+            >
+              <Dialog.CloseAction>
                 <DialogButton type="basic" text={closeButtonText} />
-                <DialogButton
-                  type="primary"
-                  text={checkButtonText}
-                  onClick={onCheckButtonClick}
-                />
-              </div>
-            </Dialog.CloseAction>
+              </Dialog.CloseAction>
+              <DialogButton
+                type="primary"
+                text={checkButtonText}
+                onClick={onCheckButtonClick}
+              />
+            </div>
           </Dialog.Content>
         </Dialog.Overlay>
       </Dialog.Root>
