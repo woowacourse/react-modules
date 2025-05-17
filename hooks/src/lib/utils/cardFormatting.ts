@@ -32,8 +32,8 @@ export const CARD_FORMAT: Record<string, CardFormat> = {
 
 export function formatCardNumber(cardNumber: string, cardBrand: string): string {
   const digitsOnly = cardNumber.replace(/\D/g, '');
-
-  const format = CARD_FORMAT[cardBrand] || CARD_FORMAT.default;
+  const key = cardBrand?.toLowerCase() ?? '';
+  const format = CARD_FORMAT[key] ?? CARD_FORMAT.default;
 
   let result = '';
 
