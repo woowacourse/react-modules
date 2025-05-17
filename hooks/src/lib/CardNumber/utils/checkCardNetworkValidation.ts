@@ -22,17 +22,15 @@ const checkCardNetworkValidation = ({
     return { isValid: true, errorMessage: null };
   }
 
-  if (
-    Object.keys(cardNumbers.numbers)
-      .map((objectKey) =>
-        objectKey === key ? value : cardNumbers.numbers[objectKey]
-      )
-      .reduce((acc, value) => acc + value, "").length > network.length
-  )
+  const newCardNumbersNumbers = { ...cardNumbers.numbers, [key]: value };
+  const totalLength = Object.values(newCardNumbersNumbers).join("").length;
+
+  if (totalLength > network.length) {
     return {
       isValid: false,
       errorMessage: validationMessages.limitedCardNetworkLength(network.length),
     };
+  }
 
   return { isValid: true, errorMessage: null };
 };
