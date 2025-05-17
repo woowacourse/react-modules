@@ -1,16 +1,16 @@
 import { renderHook, act } from '@testing-library/react';
-import useCvcNumberValidation from '.';
+import useCvcNumber from '.';
 
 describe('useCvcNumberValidation', () => {
   it('useCvcNumberValidation 초기 noError 상태는 true이다.', () => {
     const initialNoError = true;
-    const { result } = renderHook(() => useCvcNumberValidation());
+    const { result } = renderHook(() => useCvcNumber());
 
     expect(result.current.noError).toEqual(initialNoError);
   });
 
   it('숫자가 아닌 값이 들어오면 에러메시지를 반환한다.', () => {
-    const { result } = renderHook(() => useCvcNumberValidation());
+    const { result } = renderHook(() => useCvcNumber());
     const event = {
       target: { value: 'hi' },
     } as React.ChangeEvent<HTMLInputElement>;
@@ -23,7 +23,7 @@ describe('useCvcNumberValidation', () => {
   });
 
   it('숫자만 입력하면 noError가 true이다.', () => {
-    const { result } = renderHook(() => useCvcNumberValidation());
+    const { result } = renderHook(() => useCvcNumber());
     const goodEvent = {
       target: { value: '123' },
     } as React.ChangeEvent<HTMLInputElement>;
@@ -36,7 +36,7 @@ describe('useCvcNumberValidation', () => {
   });
 
   it('숫자가 아닌 값이 들어오면 noError가 false이다.', () => {
-    const { result } = renderHook(() => useCvcNumberValidation());
+    const { result } = renderHook(() => useCvcNumber());
     const badEvent = {
       target: { value: '3h' },
     } as React.ChangeEvent<HTMLInputElement>;
@@ -49,7 +49,7 @@ describe('useCvcNumberValidation', () => {
   });
 
   it('숫자가 아닌 입력 시 에러 메시지가 나타난다.', () => {
-    const { result } = renderHook(() => useCvcNumberValidation());
+    const { result } = renderHook(() => useCvcNumber());
     const badEvent = {
       target: { value: '3ab' },
     } as React.ChangeEvent<HTMLInputElement>;
@@ -61,7 +61,7 @@ describe('useCvcNumberValidation', () => {
   });
 
   it('숫자 입력 시 에러 메시지가 사라진다.', () => {
-    const { result } = renderHook(() => useCvcNumberValidation());
+    const { result } = renderHook(() => useCvcNumber());
     const badEvent = {
       target: { value: '3ab' },
     } as React.ChangeEvent<HTMLInputElement>;
@@ -81,7 +81,7 @@ describe('useCvcNumberValidation', () => {
   });
 
   it('3자리가 아닌 숫자가 들어오면 에러메시지를 반환한다.', () => {
-    const { result } = renderHook(() => useCvcNumberValidation());
+    const { result } = renderHook(() => useCvcNumber());
     const shortEvent = {
       target: { value: '12' },
     } as React.ChangeEvent<HTMLInputElement>;
@@ -97,7 +97,7 @@ describe('useCvcNumberValidation', () => {
   });
 
   it('정상적인 3자리 숫자 입력 시 noError가 true가 된다.', () => {
-    const { result } = renderHook(() => useCvcNumberValidation());
+    const { result } = renderHook(() => useCvcNumber());
     const goodEvent = {
       target: { value: '123' },
     } as React.ChangeEvent<HTMLInputElement>;
