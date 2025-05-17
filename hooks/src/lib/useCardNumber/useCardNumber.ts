@@ -8,7 +8,7 @@ import {
   isCardNumberLabel,
   isCardType,
 } from "./types";
-import { SingleCardNumberError } from "../types/cardErrorType";
+import { CardInputError } from "../types/cardErrorType";
 
 const CARDNUMBER_VALID_LENGTH = 4;
 
@@ -27,10 +27,10 @@ const CARD_TYPE_LENGTH_RULES: Record<CardType, number[]> = {
 };
 
 interface CardNumberError {
-  first: SingleCardNumberError;
-  second: SingleCardNumberError;
-  third: SingleCardNumberError;
-  fourth: SingleCardNumberError;
+  first: CardInputError;
+  second: CardInputError;
+  third: CardInputError;
+  fourth: CardInputError;
 }
 
 const labelIndexMap: Record<CardNumberLabel, number> = {

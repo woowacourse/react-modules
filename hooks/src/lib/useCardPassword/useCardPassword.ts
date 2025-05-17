@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { checkNumber, checkValidLength } from "../validator/inputValidator";
-import { SingleCardNumberError } from "../types/cardErrorType";
+import { CardInputError } from "../types/cardErrorType";
 
 const PASSWORD_VALID_LENGTH = 2;
 
@@ -11,11 +11,10 @@ export const ERROR_MESSAGE = {
 
 const useCardPassword = () => {
   const [cardPassword, setCardPassword] = useState("");
-  const [validationResult, setValidationResult] =
-    useState<SingleCardNumberError>({
-      errorState: false,
-      message: "",
-    });
+  const [validationResult, setValidationResult] = useState<CardInputError>({
+    errorState: false,
+    message: "",
+  });
 
   const validate = (cardPassword: string) => {
     if (!checkNumber(cardPassword)) {

@@ -1,4 +1,4 @@
-export interface SingleCardNumberError {
+export interface CardInputError {
   errorState: boolean;
   message: string;
 }

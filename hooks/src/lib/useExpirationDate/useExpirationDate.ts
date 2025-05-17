@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { checkNumber, checkValidLength } from "../validator/inputValidator";
-import { SingleCardNumberError } from "../types/cardErrorType";
+import { CardInputError } from "../types/cardErrorType";
 
 const MONTH_VALID_LENGTH = 2;
 const YEAR_VALID_LENGTH = 2;
@@ -14,8 +14,8 @@ export const ERROR_MESSAGE = {
 };
 
 interface ExpirationDateError {
-  month: SingleCardNumberError;
-  year: SingleCardNumberError;
+  month: CardInputError;
+  year: CardInputError;
 }
 type ExpDateField = "month" | "year";
 
