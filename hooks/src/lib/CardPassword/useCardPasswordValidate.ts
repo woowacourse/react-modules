@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import validateNumber from '../utils/validateNumber';
 import validateMaxLength from '../utils/validateMaxLength';
-
+import { ERROR_MESSAGE } from '../constants/errorMessage';
 export type CardPasswordValidateResult = {
   errorMessage: string | null;
   validateCardPassword: (cardPassword: string) => void;
@@ -13,12 +13,12 @@ const useCardPasswordValidate = (): CardPasswordValidateResult => {
 
   const validateCardPassword = (cardPassword: string) => {
     if (!validateNumber(cardPassword)) {
-      setErrorMessage('숫자만 입력해주세요.');
+      setErrorMessage(ERROR_MESSAGE.INVALID_NUMBER);
       return;
     }
 
     if (!validateMaxLength(cardPassword, 2)) {
-      setErrorMessage('2자리만 입력해주세요.');
+      setErrorMessage(ERROR_MESSAGE.INVALID_LENGTH);
       return;
     }
 
@@ -27,7 +27,7 @@ const useCardPasswordValidate = (): CardPasswordValidateResult => {
 
   const validateCardPasswordBlur = (cardPassword: string) => {
     if (cardPassword.length < 2) {
-      setErrorMessage('2자리의 숫자를 입력해주세요.');
+      setErrorMessage(ERROR_MESSAGE.INVALID_LENGTH);
       return;
     }
   };

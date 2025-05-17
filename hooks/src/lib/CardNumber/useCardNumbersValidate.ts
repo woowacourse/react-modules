@@ -1,8 +1,10 @@
 import { useState } from 'react';
 
 import validateNumber from '../utils/validateNumber';
-import validateMaxLength from '../utils/validateMaxLength';
 import { cardTypeRules } from './cardTypeRules';
+import { ERROR_MESSAGE } from '../constants/errorMessage';
+
+const INITIAL_CARD_NUMBER_LENGTH = 16;
 
 export type CardNumberValidateResult = {
   isValid: boolean;
@@ -21,7 +23,7 @@ const useCardNumbersValidate = (): CardNumberValidateResult => {
   const validateCardNumbers = (cardNumber: string) => {
     if (!validateNumber(cardNumber)) {
       setIsValid(false);
-      setErrorMessage('숫자만 입력해주세요.');
+      setErrorMessage(ERROR_MESSAGE.INVALID_NUMBER);
       return;
     }
 
@@ -44,10 +46,10 @@ const useCardNumbersValidate = (): CardNumberValidateResult => {
       }
     }
 
-    if (cardNumber.length < 16) {
+    if (cardNumber.length < INITIAL_CARD_NUMBER_LENGTH) {
       setIsValid(false);
 
-      setErrorMessage('16자리의 숫자를 입력해주세요.');
+      setErrorMessage(ERROR_MESSAGE.INVALID_CARD_NUMBER_LENGTH);
       return;
     }
   };

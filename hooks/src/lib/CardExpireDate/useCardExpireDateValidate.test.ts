@@ -1,6 +1,7 @@
 import { renderHook, act } from '@testing-library/react';
 
 import useCardExpireDate, { CardExpireDateResult } from './useCardExpireDate';
+import { ERROR_MESSAGE } from '../constants/errorMessage';
 
 describe('CardExpireDateValidate', () => {
   let result: { current: CardExpireDateResult };
@@ -16,8 +17,8 @@ describe('CardExpireDateValidate', () => {
         result.current.handleExpireDateChange(
           {
             target: {
-              value: '12'
-            }
+              value: '12',
+            },
           } as React.ChangeEvent<HTMLInputElement>,
           'month'
         );
@@ -33,8 +34,8 @@ describe('CardExpireDateValidate', () => {
         result.current.handleExpireDateChange(
           {
             target: {
-              value: '25'
-            }
+              value: '25',
+            },
           } as React.ChangeEvent<HTMLInputElement>,
           'year'
         );
@@ -52,15 +53,15 @@ describe('CardExpireDateValidate', () => {
         result.current.handleExpireDateChange(
           {
             target: {
-              value: '1a'
-            }
+              value: '1a',
+            },
           } as React.ChangeEvent<HTMLInputElement>,
           'month'
         );
       });
 
       expect(result.current.isValid.month).toBe(false);
-      expect(result.current.errorMessage).toBe('숫자만 입력해주세요.');
+      expect(result.current.errorMessage).toBe(ERROR_MESSAGE.INVALID_NUMBER);
     });
 
     it('year', () => {
@@ -68,15 +69,15 @@ describe('CardExpireDateValidate', () => {
         result.current.handleExpireDateChange(
           {
             target: {
-              value: '2a'
-            }
+              value: '2a',
+            },
           } as React.ChangeEvent<HTMLInputElement>,
           'year'
         );
       });
 
       expect(result.current.isValid.year).toBe(false);
-      expect(result.current.errorMessage).toBe('숫자만 입력해주세요.');
+      expect(result.current.errorMessage).toBe(ERROR_MESSAGE.INVALID_NUMBER);
     });
   });
 
@@ -86,17 +87,15 @@ describe('CardExpireDateValidate', () => {
         result.current.handleExpireDateChange(
           {
             target: {
-              value: '13'
-            }
+              value: '13',
+            },
           } as React.ChangeEvent<HTMLInputElement>,
           'month'
         );
       });
 
       expect(result.current.isValid.month).toBe(false);
-      expect(result.current.errorMessage).toBe(
-        '1~12 사이의 숫자를 입력해주세요.'
-      );
+      expect(result.current.errorMessage).toBe(ERROR_MESSAGE.INVALID_MONTH);
     });
 
     it('year', () => {
@@ -104,15 +103,15 @@ describe('CardExpireDateValidate', () => {
         result.current.handleExpireDateChange(
           {
             target: {
-              value: '23'
-            }
+              value: '23',
+            },
           } as React.ChangeEvent<HTMLInputElement>,
           'year'
         );
       });
 
       expect(result.current.isValid.year).toBe(false);
-      expect(result.current.errorMessage).toBe('유효한 년도를 입력해주세요.');
+      expect(result.current.errorMessage).toBe(ERROR_MESSAGE.INVALID_YEAR);
     });
   });
 
@@ -122,8 +121,8 @@ describe('CardExpireDateValidate', () => {
         result.current.handleExpireDateChange(
           {
             target: {
-              value: '25'
-            }
+              value: '25',
+            },
           } as React.ChangeEvent<HTMLInputElement>,
           'year'
         );
@@ -133,15 +132,17 @@ describe('CardExpireDateValidate', () => {
         result.current.handleExpireDateChange(
           {
             target: {
-              value: '04'
-            }
+              value: '04',
+            },
           } as React.ChangeEvent<HTMLInputElement>,
           'month'
         );
       });
 
       expect(result.current.isValid.month).toBe(false);
-      expect(result.current.errorMessage).toBe('유효한 만료일을 입력해주세요.');
+      expect(result.current.errorMessage).toBe(
+        ERROR_MESSAGE.INVALID_EXPIRE_DATE
+      );
     });
 
     it('year', () => {
@@ -149,8 +150,8 @@ describe('CardExpireDateValidate', () => {
         result.current.handleExpireDateChange(
           {
             target: {
-              value: '04'
-            }
+              value: '04',
+            },
           } as React.ChangeEvent<HTMLInputElement>,
           'month'
         );
@@ -159,15 +160,17 @@ describe('CardExpireDateValidate', () => {
         result.current.handleExpireDateChange(
           {
             target: {
-              value: '25'
-            }
+              value: '25',
+            },
           } as React.ChangeEvent<HTMLInputElement>,
           'year'
         );
       });
 
       expect(result.current.isValid.month).toBe(false);
-      expect(result.current.errorMessage).toBe('유효한 만료일을 입력해주세요.');
+      expect(result.current.errorMessage).toBe(
+        ERROR_MESSAGE.INVALID_EXPIRE_DATE
+      );
     });
   });
 });

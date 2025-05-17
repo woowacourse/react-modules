@@ -1,6 +1,7 @@
 import { renderHook, act } from '@testing-library/react';
 
 import useCardBrand, { UseCardBrandResult } from './useCardBrand';
+import { ERROR_MESSAGE } from '../constants/errorMessage';
 
 describe('useCardBrand', () => {
   const CARD_BRANDS = ['신한카드', '카카오뱅크', '국민카드'];
@@ -14,7 +15,7 @@ describe('useCardBrand', () => {
   it('선택된 카드 브랜드가 올바르면 카드 브랜드가 선택되고 에러 메시지가 null이다.', () => {
     act(() => {
       result.current.handleBrandSelect({
-        target: { value: '신한카드' }
+        target: { value: '신한카드' },
       } as React.ChangeEvent<HTMLSelectElement>);
     });
 
@@ -25,12 +26,10 @@ describe('useCardBrand', () => {
   it('선택된 카드 브랜드가 올바르지 않으면 "카드 브랜드가 올바르지 않습니다." 에러 메시지가 나온다.', () => {
     act(() => {
       result.current.handleBrandSelect({
-        target: { value: '농협카드' }
+        target: { value: '농협카드' },
       } as React.ChangeEvent<HTMLSelectElement>);
     });
 
-    expect(result.current.errorMessage).toBe(
-      '카드 브랜드가 올바르지 않습니다.'
-    );
+    expect(result.current.errorMessage).toBe(ERROR_MESSAGE.INVALID_CARD_BRAND);
   });
 });

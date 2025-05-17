@@ -1,5 +1,7 @@
 import { useState } from 'react';
 
+import { ERROR_MESSAGE } from '../constants/errorMessage';
+
 type CardBrandValidateResult = {
   errorMessage: string | null;
   validateCardBrand: (cardBrand: string) => void;
@@ -12,7 +14,7 @@ const useCardBrandValidate = (
 
   const validateCardBrand = (cardBrand: string) => {
     if (!cardBrands.includes(cardBrand)) {
-      setErrorMessage('카드 브랜드가 올바르지 않습니다.');
+      setErrorMessage(ERROR_MESSAGE.INVALID_CARD_BRAND);
       return;
     }
 

@@ -1,6 +1,7 @@
 import { renderHook, act } from '@testing-library/react';
 
 import useCardNumbers, { CardNumbersResult } from './useCardNumbers';
+import { ERROR_MESSAGE } from '../constants/errorMessage';
 
 describe('useCardNumbersValidate', () => {
   let result: { current: CardNumbersResult };
@@ -13,7 +14,7 @@ describe('useCardNumbersValidate', () => {
   it('4로 시작하는 16자리 카드 번호가 들어오면 카드 타입이 Visa이다.', () => {
     act(() => {
       result.current.handleCardNumberChange({
-        target: { value: '4123456789012345' }
+        target: { value: '4123456789012345' },
       } as React.ChangeEvent<HTMLInputElement>);
     });
 
@@ -28,7 +29,7 @@ describe('useCardNumbersValidate', () => {
     it('51로 시작하는 16자리 카드 번호가 들어오면 카드 타입이 Master이다.', () => {
       act(() => {
         result.current.handleCardNumberChange({
-          target: { value: '5123456789012345' }
+          target: { value: '5123456789012345' },
         } as React.ChangeEvent<HTMLInputElement>);
       });
 
@@ -42,7 +43,7 @@ describe('useCardNumbersValidate', () => {
     it('55로 시작하는 16자리 카드 번호가 들어오면 카드 타입이 Master이다.', () => {
       act(() => {
         result.current.handleCardNumberChange({
-          target: { value: '5523456789012345' }
+          target: { value: '5523456789012345' },
         } as React.ChangeEvent<HTMLInputElement>);
       });
 
@@ -58,7 +59,7 @@ describe('useCardNumbersValidate', () => {
     it('34로 시작하는 15자리 카드 번호가 들어오면 카드 타입이 Amex이다.', () => {
       act(() => {
         result.current.handleCardNumberChange({
-          target: { value: '342345678901234' }
+          target: { value: '342345678901234' },
         } as React.ChangeEvent<HTMLInputElement>);
       });
 
@@ -72,7 +73,7 @@ describe('useCardNumbersValidate', () => {
     it('37로 시작하는 15자리 카드 번호가 들어오면 카드 타입이 Amex이다.', () => {
       act(() => {
         result.current.handleCardNumberChange({
-          target: { value: '372345678901234' }
+          target: { value: '372345678901234' },
         } as React.ChangeEvent<HTMLInputElement>);
       });
 
@@ -87,7 +88,7 @@ describe('useCardNumbersValidate', () => {
     it('36로 시작하는 14자리 카드 번호가 들어오면 카드 타입이 Diners이다.', () => {
       act(() => {
         result.current.handleCardNumberChange({
-          target: { value: '36234567890123' }
+          target: { value: '36234567890123' },
         } as React.ChangeEvent<HTMLInputElement>);
       });
 
@@ -103,7 +104,7 @@ describe('useCardNumbersValidate', () => {
     it('622126 ~ 622925로 시작하고 16자리 카드 번호이다.', () => {
       act(() => {
         result.current.handleCardNumberChange({
-          target: { value: '6221262345678901' }
+          target: { value: '6221262345678901' },
         } as React.ChangeEvent<HTMLInputElement>);
       });
 
@@ -117,7 +118,7 @@ describe('useCardNumbersValidate', () => {
     it('6282 ~ 6288로 시작하고 16자리 카드 번호이다.', () => {
       act(() => {
         result.current.handleCardNumberChange({
-          target: { value: '6282234567890123' }
+          target: { value: '6282234567890123' },
         } as React.ChangeEvent<HTMLInputElement>);
       });
 
@@ -131,7 +132,7 @@ describe('useCardNumbersValidate', () => {
     it('6282 ~ 6288로 시작하고 16자리 카드 번호이다.', () => {
       act(() => {
         result.current.handleCardNumberChange({
-          target: { value: '6282234567890123' }
+          target: { value: '6282234567890123' },
         } as React.ChangeEvent<HTMLInputElement>);
       });
 
@@ -147,11 +148,11 @@ describe('useCardNumbersValidate', () => {
     it('숫자가 아닌 문자가 들어오면 에러 메시지가 나온다.', () => {
       act(() => {
         result.current.handleCardNumberChange({
-          target: { value: '12345a' }
+          target: { value: '12345a' },
         } as React.ChangeEvent<HTMLInputElement>);
       });
 
-      expect(result.current.errorMessage).toBe('숫자만 입력해주세요.');
+      expect(result.current.errorMessage).toBe(ERROR_MESSAGE.INVALID_NUMBER);
     });
   });
 });

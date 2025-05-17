@@ -2,6 +2,7 @@ import { useState } from 'react';
 import validateNumber from '../utils/validateNumber';
 import validateMaxLength from '../utils/validateMaxLength';
 import validateRange from '../utils/validateRange';
+import { ERROR_MESSAGE } from '../constants/errorMessage';
 
 type CardExpireDate = {
   month: string;
@@ -27,7 +28,7 @@ export type CardExpireDateValidateResult = {
 const useCardExpireDateValidate = (): CardExpireDateValidateResult => {
   const [isValid, setIsValid] = useState({
     month: true,
-    year: true
+    year: true,
   });
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
@@ -41,20 +42,20 @@ const useCardExpireDateValidate = (): CardExpireDateValidateResult => {
     if (!validateNumber(expireDate[key])) {
       setIsValid({
         ...isValid,
-        [key]: false
+        [key]: false,
       });
 
-      setErrorMessage('숫자만 입력해주세요.');
+      setErrorMessage(ERROR_MESSAGE.INVALID_NUMBER);
       return;
     }
 
     if (!validateMaxLength(expireDate[key], 2)) {
       setIsValid({
         ...isValid,
-        [key]: false
+        [key]: false,
       });
 
-      setErrorMessage('2자리만 입력해주세요.');
+      setErrorMessage(ERROR_MESSAGE.INVALID_LENGTH);
       return;
     }
 
@@ -62,10 +63,10 @@ const useCardExpireDateValidate = (): CardExpireDateValidateResult => {
       if (!validateRange(expireDate[key], 1, 12)) {
         setIsValid({
           ...isValid,
-          month: false
+          month: false,
         });
 
-        setErrorMessage('1~12 사이의 숫자를 입력해주세요.');
+        setErrorMessage(ERROR_MESSAGE.INVALID_MONTH);
         return;
       }
     }
@@ -74,10 +75,10 @@ const useCardExpireDateValidate = (): CardExpireDateValidateResult => {
       if (!validateRange(expireDate[key], currentYear, currentYear + 5)) {
         setIsValid({
           ...isValid,
-          year: false
+          year: false,
         });
 
-        setErrorMessage('유효한 년도를 입력해주세요.');
+        setErrorMessage(ERROR_MESSAGE.INVALID_YEAR);
         return;
       }
     }
@@ -92,16 +93,16 @@ const useCardExpireDateValidate = (): CardExpireDateValidateResult => {
     ) {
       setIsValid({
         ...isValid,
-        month: false
+        month: false,
       });
 
-      setErrorMessage('유효한 만료일을 입력해주세요.');
+      setErrorMessage(ERROR_MESSAGE.INVALID_EXPIRE_DATE);
       return;
     }
 
     setIsValid({
       ...isValid,
-      [key]: true
+      [key]: true,
     });
 
     setErrorMessage(null);
@@ -114,10 +115,10 @@ const useCardExpireDateValidate = (): CardExpireDateValidateResult => {
     if (expireDate[key].length < 2) {
       setIsValid({
         ...isValid,
-        [key]: false
+        [key]: false,
       });
 
-      setErrorMessage('2자리의 숫자를 입력해주세요.');
+      setErrorMessage(ERROR_MESSAGE.INVALID_LENGTH);
       return;
     }
   };
@@ -126,7 +127,7 @@ const useCardExpireDateValidate = (): CardExpireDateValidateResult => {
     isValid,
     errorMessage,
     validateCardExpireDate,
-    validateCardExpireDateBlur
+    validateCardExpireDateBlur,
   };
 };
 
