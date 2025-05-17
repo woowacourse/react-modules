@@ -1,55 +1,75 @@
 import { useState } from "react";
-
-const numberRegex = /^[0-9]*$/;
+import {
+  getCardBrand,
+  formatCardNumber,
+  numberRegex,
+  isExceedCardNumberLength,
+  isShortOfCardNumberLength,
+} from "../\butils/card";
+import { CARD_BRAND } from "../constants/cardBrand";
 
 interface CustomErrorMessagesType {
   length?: string;
 }
 
+type CardBrandType = keyof typeof CARD_BRAND;
+
 export default function useCardNumber(
   customErrorMessage?: CustomErrorMessagesType
 ) {
-  const [cardNumber, setCardNumber] = useState({
-    first: "",
-    second: "",
-    third: "",
-    fourth: "",
-  });
+  const [cardNumber, setCardNumber] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
+  const isValid = !errorMessage;
 
-  const [errorMessage, setErrorMessage] = useState({
-    first: "",
-    second: "",
-    third: "",
-    fourth: "",
-  });
+  const validateCardNumberLength = (
+    value: string,
+    cardNumberLength: number | null
+  ) => {
+    if (isExceedCardNumberLength(value, cardNumberLength)) return;
 
-  const isValid = Object.values(errorMessage).every(
-    (message) => message === ""
-  );
+    setCardNumber(value);
+
+    if (isShortOfCardNumberLength(value, cardNumberLength)) {
+      setErrorMessage(
+        customErrorMessage
+          ? `${cardNumberLength}${customErrorMessage.length}`
+          : `${cardNumberLength}자리를 입력해 주세요.`
+      );
+      return;
+    }
+
+    setErrorMessage("");
+  };
 
   const handleCardNumberChange = (
-    event: React.ChangeEvent<HTMLInputElement>,
-    sequence: string
+    event: React.ChangeEvent<HTMLInputElement>
   ) => {
     const value = event.target.value;
 
     if (!numberRegex.test(value)) return;
 
-    setCardNumber({ ...cardNumber, [sequence]: value });
+    const brand = getCardBrand(value);
+    const brandLength = CARD_BRAND[brand].length;
 
-    if (value.length < 4) {
-      setErrorMessage({
-        ...errorMessage,
-        [sequence]: customErrorMessage?.length ?? "4자리 숫자를 입력해 주세요.",
-      });
-      return;
-    }
-
-    setErrorMessage({
-      ...errorMessage,
-      [sequence]: "",
-    });
+    validateCardNumberLength(value, brandLength);
   };
 
-  return { errorMessage, isValid, cardNumber, handleCardNumberChange };
+  const cardBrand = (): CardBrandType => {
+    return getCardBrand(cardNumber);
+  };
+
+  const formattedCardNumber = () => {
+    const brand = cardBrand();
+    const pattern = CARD_BRAND[brand].format;
+    return formatCardNumber(cardNumber, brand, pattern);
+  };
+
+  return {
+    cardNumber,
+    formattedCardNumber,
+    errorMessage,
+    isValid,
+    handleCardNumberChange,
+    cardBrand,
+  };
 }
