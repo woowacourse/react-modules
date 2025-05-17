@@ -29,7 +29,6 @@ const useFocus = (isOpen: boolean) => {
 
     return () => {
       document.removeEventListener("keydown", handleKeyDown);
-      //   modalEl?.focus();
     };
   }, [isOpen]);
   return { modalRef };
