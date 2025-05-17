@@ -14,7 +14,7 @@ export interface ModalProps extends ChildrenProps {
   onHide: () => void;
 
   /** 배경 어두움 여부  */
-  background?: boolean;
+  showBackdrop?: boolean;
 
   /** 모달 위치 설정: 가운데(center), 상단(top), 하단(bottom) */
   position?: "center" | "top" | "bottom";
