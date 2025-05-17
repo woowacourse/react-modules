@@ -34,6 +34,74 @@ Storybook에서는 다음과 같은 정보를 확인할 수 있습니다.
 | isOpen          | boolean                           | -        | 모달의 열림 상태를 제어합니다     |
 | onClose         | () => void                        | -        | 모달을 닫는 함수입니다            |
 
+## 🔧 Modal Component Props
+
+| Name            | Datatype                          | Default  | Required | Description                       |
+| --------------- | --------------------------------- | -------- | :------: | --------------------------------- |
+| position        | 'center' \| 'bottom'              | 'center' |    -     | 모달의 위치를 지정합니다          |
+| size            | 'small' \| 'medium' \| 'large'    | 'medium' |    -     | 모달의 가로 크기를 설정합니다     |
+| theme           | 'light' \| 'dark'                 | 'light'  |    -     | 모달의 테마를 설정합니다          |
+| title           | { text?: string; size?: number; } | -        |    -     | 모달의 제목과 스타일을 설정합니다 |
+| showCloseButton | boolean                           | true     |    -     | 닫기 버튼 표시 여부를 설정합니다  |
+| children        | ReactNode                         | -        |    -     | 모달 내부에 표시될 콘텐츠입니다   |
+| isOpen          | boolean                           | -        |    ✅    | 모달의 열림 상태를 제어합니다     |
+| onClose         | () => void                        | -        |    ✅    | 모달을 닫는 함수입니다            |
+
+## 🔧 Modal Preset Component Props
+
+모든 프리셋 컴포넌트는 위의 Modal Component Props를 상속받습니다.
+
+### AlertModal Props
+
+`<AlertModal>` 컴포넌트는 단일 확인 버튼을 가진 알림용 모달입니다.
+
+| Name                      | Datatype                                          | Default                    | Required | Description                                |
+| ------------------------- | ------------------------------------------------- | -------------------------- | :------: | ------------------------------------------ |
+| isOpen                    | boolean                                           | -                          |    ✅    | 모달의 열림 상태를 제어합니다              |
+| onClose                   | () => void                                        | -                          |    ✅    | 모달을 닫는 함수입니다                     |
+| onConfirm                 | (e: React.MouseEvent\<HTMLButtonElement>) => void | -                          |    -     | 확인 버튼 클릭 시 실행될 핸들러 함수입니다 |
+| confirmButtonText         | string                                            | "확인"                     |    -     | 확인 버튼에 표시될 텍스트입니다            |
+| confirmButtonStyle        | React.CSSProperties                               | { width: "90px" }          |    -     | 확인 버튼의 스타일을 지정합니다            |
+| confirmButtonWrapperStyle | React.CSSProperties                               | { 오른쪽 정렬, 너비 100% } |    -     | 버튼 컨테이너의 스타일을 지정합니다        |
+
+### ConfirmModal Props
+
+`<ConfirmModal>` 컴포넌트는 확인 및 취소 버튼이 있는 확인용 모달입니다.
+
+| Name                      | Datatype                                          | Default                    | Required | Description                                |
+| ------------------------- | ------------------------------------------------- | -------------------------- | :------: | ------------------------------------------ |
+| isOpen                    | boolean                                           | -                          |    ✅    | 모달의 열림 상태를 제어합니다              |
+| onClose                   | () => void                                        | -                          |    ✅    | 모달을 닫는 함수입니다                     |
+| onConfirm                 | (e: React.MouseEvent\<HTMLButtonElement>) => void | -                          |    -     | 확인 버튼 클릭 시 실행될 핸들러 함수입니다 |
+| confirmButtonText         | string                                            | "확인"                     |    -     | 확인 버튼에 표시될 텍스트입니다            |
+| cancelButtonText          | string                                            | "취소"                     |    -     | 취소 버튼에 표시될 텍스트입니다            |
+| confirmButtonStyle        | React.CSSProperties                               | { width: "90px" }          |    -     | 확인 버튼의 스타일을 지정합니다            |
+| cancelButtonStyle         | React.CSSProperties                               | { width: "90px" }          |    -     | 취소 버튼의 스타일을 지정합니다            |
+| confirmProps              | ButtonProps                                       | -                          |    -     | 확인 버튼에 전달될 추가 속성입니다         |
+| cancelProps               | ButtonProps                                       | -                          |    -     | 취소 버튼에 전달될 추가 속성입니다         |
+| actionButtonsWrapperStyle | React.CSSProperties                               | { 오른쪽 정렬, 너비 100% } |    -     | 버튼 컨테이너의 스타일을 지정합니다        |
+
+### PromptModal Props
+
+`<PromptModal>` 컴포넌트는 사용자 입력을 받는 텍스트 필드와 버튼이 있는 모달입니다.
+
+| Name                      | Datatype                                          | Default                      | Required | Description                                |
+| ------------------------- | ------------------------------------------------- | ---------------------------- | :------: | ------------------------------------------ |
+| isOpen                    | boolean                                           | -                            |    ✅    | 모달의 열림 상태를 제어합니다              |
+| onClose                   | () => void                                        | -                            |    ✅    | 모달을 닫는 함수입니다                     |
+| inputValue                | string                                            | -                            |    ✅    | 입력 필드에 표시될 값입니다                |
+| onChange                  | (e: ChangeEvent\<HTMLInputElement>) => void       | -                            |    ✅    | 입력 필드 값 변경 시 호출될 함수입니다     |
+| placeholder               | string                                            | ""                           |    -     | 입력 필드의 플레이스홀더 텍스트입니다      |
+| onConfirm                 | (e: React.MouseEvent\<HTMLButtonElement>) => void | -                            |    -     | 확인 버튼 클릭 시 실행될 핸들러 함수입니다 |
+| confirmButtonText         | string                                            | "확인"                       |    -     | 확인 버튼에 표시될 텍스트입니다            |
+| cancelButtonText          | string                                            | "취소"                       |    -     | 취소 버튼에 표시될 텍스트입니다            |
+| confirmButtonStyle        | React.CSSProperties                               | { width: "90px" }            |    -     | 확인 버튼의 스타일을 지정합니다            |
+| cancelButtonStyle         | React.CSSProperties                               | { width: "90px" }            |    -     | 취소 버튼의 스타일을 지정합니다            |
+| confirmProps              | ButtonProps                                       | -                            |    -     | 확인 버튼에 전달될 추가 속성입니다         |
+| cancelProps               | ButtonProps                                       | -                            |    -     | 취소 버튼에 전달될 추가 속성입니다         |
+| wrapperStyle              | React.CSSProperties                               | { 컬럼 레이아웃, 간격 설정 } |    -     | 전체 내용 컨테이너의 스타일을 지정합니다   |
+| actionButtonsWrapperStyle | React.CSSProperties                               | { 오른쪽 정렬, 너비 100% }   |    -     | 버튼 컨테이너의 스타일을 지정합니다        |
+
 ## 🚀 주요 기능
 
 ### 접근성 기능
