@@ -1,20 +1,19 @@
 import styled from 'styled-components';
+import { useModalContext } from './ModalContext';
 
-interface ModalCloseButtonProps {
-  onClose: () => void;
-}
+function ModalCloseButton() {
+  const { onClose } = useModalContext();
 
-function ModalCloseButton({ onClose }: ModalCloseButtonProps) {
   return (
-    <Button onClick={onClose} className="close-button">
+    <StyledCloseButton onClick={onClose} className="close-button">
       <span>X</span>
-    </Button>
+    </StyledCloseButton>
   );
 }
 
 export default ModalCloseButton;
 
-const Button = styled.button`
+const StyledCloseButton = styled.button`
   width: 24px;
   height: 24px;
   border: none;

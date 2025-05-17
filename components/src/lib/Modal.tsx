@@ -1,42 +1,44 @@
-import styled from 'styled-components';
+import { ModalProvider } from './ModalContext';
+import React, { useEffect } from 'react';
 
 interface ModalProps {
   isOpen: boolean;
-  children: React.ReactNode;
   position: 'top' | 'bottom' | 'center';
-  width?: number;
+  width: 'small' | 'medium' | 'large';
+  onClose: () => void;
+  children: React.ReactNode;
 }
 
-const radius = {
-  top: '0px 0px 8px 8px',
-  center: '8px',
-  bottom: '8px 8px 0px 0px',
-};
+function Modal({ isOpen, position, width, onClose, children }: ModalProps) {
+  useEffect(() => {
+    if (!isOpen) return;
+    const hasOverlay = React.Children.toArray(children).some(
+      (child) => React.isValidElement(child) && child.type === Modal.Overlay
+    );
+    const hasContainer = React.Children.toArray(children).some(
+      (child) => React.isValidElement(child) && child.type === Modal.Container
+    );
 
-function Modal({ isOpen, children, position, width }: ModalProps) {
-  if (!isOpen) {
-    return null;
-  }
+    if (!hasOverlay || !hasContainer) {
+      console.error('Modal은 <Modal.Overlay> <Modal.Container> components 필수로 포함해야합니다');
+    }
+  }, [isOpen, children]);
+
+  if (!isOpen) return null;
 
   return (
-    <StyledModal isOpen={isOpen} position={position} width={width}>
+    <ModalProvider isOpen={isOpen} position={position} width={width} onClose={onClose}>
       {children}
-    </StyledModal>
+    </ModalProvider>
   );
 }
 
-export default Modal;
+Modal.Overlay = function Overlay({ children }: { children: React.ReactNode }) {
+  return <>{children}</>;
+};
 
-type modalStyledProps = Pick<ModalProps, 'isOpen' | 'position' | 'width'>;
-const StyledModal = styled.div<modalStyledProps>`
-  width: ${(props) =>
-    props.position === 'center' ? `${props.width}px` : '100%'};
-  padding: 24px 32px;
-  background: #fff;
-  box-sizing: border-box;
-  position: absolute;
-  display: ${(props) => (props.isOpen ? 'block' : 'none')};
-  top: ${(props) => (props.position === 'top' ? '0px' : 'auto')};
-  border-radius: ${(props) => radius[props.position]};
-  bottom: ${(props) => (props.position === 'bottom' ? '0px' : 'auto')};
-`;
+Modal.Container = function Container({ children }: { children: React.ReactNode }) {
+  return <>{children}</>;
+};
+
+export default Modal;
