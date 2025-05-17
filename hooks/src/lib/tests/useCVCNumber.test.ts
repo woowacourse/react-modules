@@ -23,7 +23,7 @@ describe("CVC 번호 테스트", () => {
   });
 
   test("CVC번호 초기 값을 가져온다.", () => {
-    expect(result.current.CVCNumber).toEqual(CVCNumber);
+    expect(result.current.CVCNumber.values).toEqual(CVCNumber);
   });
 
   test("CVC번호 값을 변경할 수 있다.", () => {
@@ -31,10 +31,10 @@ describe("CVC 번호 테스트", () => {
     const changeValue = "321";
 
     act(() => {
-      result.current.setCVCNumber(type, changeValue);
+      result.current.CVCNumber.changeValues(type, changeValue);
     });
 
-    expect(result.current.CVCNumber.value).toEqual(changeValue);
+    expect(result.current.CVCNumber.values.value).toEqual(changeValue);
   });
 
   test("CVC번호가 올바르지 않은 경우 에러를 반환한다.", () => {
@@ -43,15 +43,15 @@ describe("CVC 번호 테스트", () => {
     const maxLength = 3;
 
     act(() => {
-      result.current.setCVCNumber(type, changeValue);
-      result.current.validateCVCNumber({
+      result.current.CVCNumber.changeValues(type, changeValue);
+      result.current.CVCError.checkValidation({
         length: maxLength,
         type,
         value: changeValue,
       });
     });
 
-    expect(result.current.isCVCNumberError()).toEqual(true);
+    expect(result.current.CVCError.isError()).toEqual(true);
   });
 
   test("CVC번호가 올바르지 않은 경우 에러 메시지를 반환한다.", () => {
@@ -60,15 +60,15 @@ describe("CVC 번호 테스트", () => {
     const maxLength = 3;
 
     act(() => {
-      result.current.setCVCNumber(type, changeValue);
-      result.current.validateCVCNumber({
+      result.current.CVCNumber.changeValues(type, changeValue);
+      result.current.CVCError.checkValidation({
         length: maxLength,
         type,
         value: changeValue,
       });
     });
 
-    expect(result.current.getCVCNumberErrorMessage()).toEqual(
+    expect(result.current.CVCError.getErrorMessage()).toEqual(
       "숫자만 입력 가능합니다."
     );
   });

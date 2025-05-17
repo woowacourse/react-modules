@@ -29,7 +29,7 @@ describe("유효 기간 테스트", () => {
   });
 
   test("유효 기간 초기 값을 가져온다.", () => {
-    expect(result.current.expiration).toEqual(expiration);
+    expect(result.current.expiration.values).toEqual(expiration);
   });
 
   test("유효 기간 값을 변경할 수 있다.", () => {
@@ -37,10 +37,10 @@ describe("유효 기간 테스트", () => {
     const changeValue = "12";
 
     act(() => {
-      result.current.setExpiration(type, changeValue);
+      result.current.expiration.changeValues(type, changeValue);
     });
 
-    expect(result.current.expiration[type]).toEqual(changeValue);
+    expect(result.current.expiration.values[type]).toEqual(changeValue);
   });
 
   test("유효 기간 달이 올바르지 않은 경우 에러를 반환한다.", () => {
@@ -49,15 +49,15 @@ describe("유효 기간 테스트", () => {
     const maxLength = 2;
 
     act(() => {
-      result.current.setExpiration(type, changeValue);
-      result.current.validateMonth({
+      result.current.expiration.changeValues(type, changeValue);
+      result.current.monthError.checkValidation({
         length: maxLength,
         type,
         value: changeValue,
       });
     });
 
-    expect(result.current.isMonthError()).toEqual(true);
+    expect(result.current.monthError.isError()).toEqual(true);
   });
 
   test("유효 기간 년이 올바르지 않은 경우 에러를 반환한다.", () => {
@@ -66,15 +66,15 @@ describe("유효 기간 테스트", () => {
     const maxLength = 2;
 
     act(() => {
-      result.current.setExpiration(type, changeValue);
-      result.current.validateMonth({
+      result.current.expiration.changeValues(type, changeValue);
+      result.current.yearError.checkValidation({
         length: maxLength,
         type,
         value: changeValue,
       });
     });
 
-    expect(result.current.isMonthError()).toEqual(true);
+    expect(result.current.yearError.isError()).toEqual(true);
   });
 
   test("유효 기간 달이 올바르지 않은 경우 에러 메시지를 반환한다.", () => {
@@ -83,15 +83,15 @@ describe("유효 기간 테스트", () => {
     const maxLength = 2;
 
     act(() => {
-      result.current.setExpiration(type, changeValue);
-      result.current.validateMonth({
+      result.current.expiration.changeValues(type, changeValue);
+      result.current.monthError.checkValidation({
         length: maxLength,
         type,
         value: changeValue,
       });
     });
 
-    expect(result.current.getMonthErrorMessage()).toEqual(
+    expect(result.current.monthError.getErrorMessage()).toEqual(
       "숫자만 입력 가능합니다."
     );
   });
@@ -102,15 +102,15 @@ describe("유효 기간 테스트", () => {
     const maxLength = 2;
 
     act(() => {
-      result.current.setExpiration(type, changeValue);
-      result.current.validateYear({
+      result.current.expiration.changeValues(type, changeValue);
+      result.current.yearError.checkValidation({
         length: maxLength,
         type,
         value: changeValue,
       });
     });
 
-    expect(result.current.getYearErrorMessage()).toEqual(
+    expect(result.current.yearError.getErrorMessage()).toEqual(
       "숫자만 입력 가능합니다."
     );
   });
