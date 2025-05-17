@@ -1,8 +1,13 @@
-import { useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { checkNumber, checkValidLength } from "../validator/inputValidator";
 import getCardType from "./utils/getCardType";
 import { formatCardNumber } from "./utils/formatCardNumber";
-import { CardNumberLabel, CardType } from "./types";
+import {
+  CardNumberLabel,
+  CardType,
+  isCardNumberLabel,
+  isCardType,
+} from "./types";
 import { SingleCardNumberError } from "../types/cardErrorType";
 
 const CARDNUMBER_VALID_LENGTH = 4;
@@ -27,6 +32,13 @@ interface CardNumberError {
   third: SingleCardNumberError;
   fourth: SingleCardNumberError;
 }
+
+const labelIndexMap: Record<CardNumberLabel, number> = {
+  first: 0,
+  second: 1,
+  third: 2,
+  fourth: 3,
+};
 const useCardNumber = () => {
   const [cardNumber, setCardNumber] = useState({
     first: "",
@@ -41,20 +53,21 @@ const useCardNumber = () => {
     fourth: { errorState: false, message: "" },
   });
 
-  const [cardType, setCardType] = useState<CardType>("Default");
-  const [formattedCardNumber, setFormattedCardNumber] = useState("");
+  const cardBIN = useMemo(() => {
+    return cardNumber.first + cardNumber.second;
+  }, [cardNumber]);
 
-  const validate = (
-    label: CardNumberLabel,
-    inputValue: string,
-    type?: CardType
-  ) => {
-    const labelIndexMap: Record<CardNumberLabel, number> = {
-      first: 0,
-      second: 1,
-      third: 2,
-      fourth: 3,
-    };
+  const cardType = useMemo(() => {
+    const raw = cardBIN.length >= 6 ? getCardType(cardBIN) : "Default";
+    return isCardType(raw) ? raw : "Default";
+  }, [cardBIN]);
+
+  const formattedCardNumber = useMemo(() => {
+    return formatCardNumber(cardNumber, cardType);
+  }, [cardNumber, cardType]);
+
+  const validate = (label: string, inputValue: string, type?: CardType) => {
+    if (!isCardNumberLabel(label)) return;
 
     const index = labelIndexMap[label];
     const typeLengthRule = CARD_TYPE_LENGTH_RULES[type ?? "Default"];
@@ -97,27 +110,22 @@ const useCardNumber = () => {
     }));
   };
 
+  useEffect(() => {
+    Object.entries(cardNumber).forEach(([label, value]) => {
+      if (isCardNumberLabel(label)) {
+        validate(label, value, cardType);
+      }
+    });
+  }, [cardNumber, cardType]);
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
 
-    if (!["first", "second", "third", "fourth"].includes(name)) return;
+    if (!isCardNumberLabel(name)) return;
 
     const newCardNumber = { ...cardNumber, [name]: value };
 
-    let currentCardType: CardType = cardType;
-
-    if (newCardNumber.first.length + newCardNumber.second.length >= 6) {
-      const cardBIN = newCardNumber.first + newCardNumber.second;
-      currentCardType = getCardType(cardBIN) as CardType;
-      setCardType(currentCardType);
-    }
-
     setCardNumber(newCardNumber);
-
-    validate(name as CardNumberLabel, value, currentCardType);
-
-    const formatted = formatCardNumber(newCardNumber, currentCardType);
-    setFormattedCardNumber(formatted);
   };
 
   return {
