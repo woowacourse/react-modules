@@ -34,7 +34,7 @@ const StyledConfirmButton = styled.button`
   height: 40px;
   padding: 8px 4px;
   background-color: #333333;
-  color: white;
+  color: #ffffff;
   cursor: pointer;
   border: none;
   border-radius: 4px;
