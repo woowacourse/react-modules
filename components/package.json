@@ -1,6 +1,6 @@
 {
   "name": "@mlnwns/modal",
-  "version": "0.0.2",
+  "version": "0.0.7",
   "description": "모달 컴포넌트",
   "type": "module",
   "types": "dist/index.d.ts",
