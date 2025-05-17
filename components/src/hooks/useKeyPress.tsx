@@ -2,20 +2,24 @@ import { useEffect } from "react";
 
 interface useKeyPressProps {
   targetKey: string;
-  isOpen: boolean;
-  onClose: () => void;
+  enabled: boolean;
+  onKeyMatch: () => void;
 }
 
-export function useKeyPress({ targetKey, isOpen, onClose }: useKeyPressProps) {
+export function useKeyPress({
+  targetKey,
+  enabled,
+  onKeyMatch,
+}: useKeyPressProps) {
   useEffect(() => {
-    if (!isOpen) return;
+    if (enabled) return;
     const handleKeydown = (e: KeyboardEvent) => {
       if (e.key === targetKey) {
-        onClose();
+        onKeyMatch();
       }
     };
 
     window.addEventListener("keydown", handleKeydown);
     return () => window.removeEventListener("keydown", handleKeydown);
-  }, [isOpen, onClose, targetKey]);
+  }, [enabled, onKeyMatch, targetKey]);
 }

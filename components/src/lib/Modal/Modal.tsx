@@ -29,7 +29,7 @@ export default function ModalComponent({
     styles[`${size}Modal`]
   }`;
 
-  useKeyPress({ targetKey: "Escape", isOpen, onClose });
+  useKeyPress({ targetKey: "Escape", enabled: !isOpen, onKeyMatch: onClose });
   if (!isOpen) return null;
 
   return createPortal(
