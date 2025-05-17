@@ -4,7 +4,7 @@ import style from "./ModalPrompt.module.css";
 interface InputPromptProps {
   value: string | number;
   placeholder: string;
-  onChange: (e: ChangeEvent) => void;
+  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
 }
 
 export function InputPrompt({
