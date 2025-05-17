@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { validateNumericInput } from "../utils/inputValidation";
 import { CARD_BRAND_RULE } from "../useCardBrand/constants";
 import { useCardBrand } from "../useCardBrand/useCardBrand";
@@ -25,15 +25,19 @@ const useCardNumberInput = () => {
     cardBrand
   );
 
-  const getMaxLength = () => {
+  const maxLength = useMemo(() => {
     if (cardBrand && CARD_BRAND_RULE[cardBrand]) {
       return CARD_BRAND_RULE[cardBrand].length;
     }
     return 16;
-  };
+  }, [cardBrand]);
+
+  const formattedMaxLength = useMemo(() => {
+    return formatCardNumber("1".repeat(maxLength), cardBrand).length;
+  }, [maxLength, cardBrand]);
 
   const validateCardNumber = (value: string) => {
-    return validateNumericInput(value, getMaxLength());
+    return validateNumericInput(value, maxLength);
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -45,11 +49,6 @@ const useCardNumberInput = () => {
     setCardNumberState({ value: inputValue, isValid });
     setErrorMessage(validationError);
   };
-
-  const formattedMaxLength = formatCardNumber(
-    "1".repeat(getMaxLength()),
-    cardBrand
-  ).length;
 
   return {
     cardNumberState,
