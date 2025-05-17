@@ -5,15 +5,15 @@ describe("useExpirationDate 훅 테스트", () => {
   it("유효한 월, 연도 입력 시 isValid가 true이고 에러 메시지가 없음", () => {
     const { result } = renderHook(() => useExpirationDate());
     act(() => {
-      result.current.handleChange({
-        target: { name: "month", value: "12" },
-      } as React.ChangeEvent<HTMLInputElement>);
-      result.current.handleChange({
-        target: { name: "year", value: "30" },
-      } as React.ChangeEvent<HTMLInputElement>);
+      result.current.handleChange({ name: "month", value: "12" });
+      result.current.handleChange({ name: "year", value: "30" });
     });
 
     expect(result.current.validationResult.month).toEqual({
+      errorState: false,
+      message: "",
+    });
+    expect(result.current.validationResult.year).toEqual({
       errorState: false,
       message: "",
     });
@@ -23,9 +23,7 @@ describe("useExpirationDate 훅 테스트", () => {
     const { result } = renderHook(() => useExpirationDate());
 
     act(() => {
-      result.current.handleChange({
-        target: { name: "month", value: "1a" },
-      } as React.ChangeEvent<HTMLInputElement>);
+      result.current.handleChange({ name: "month", value: "1a" });
     });
 
     expect(result.current.validationResult.month).toEqual({
@@ -38,9 +36,7 @@ describe("useExpirationDate 훅 테스트", () => {
     const { result } = renderHook(() => useExpirationDate());
 
     act(() => {
-      result.current.handleChange({
-        target: { name: "month", value: "1" },
-      } as React.ChangeEvent<HTMLInputElement>);
+      result.current.handleChange({ name: "month", value: "1" });
     });
 
     expect(result.current.validationResult.month).toEqual({
@@ -53,9 +49,7 @@ describe("useExpirationDate 훅 테스트", () => {
     const { result } = renderHook(() => useExpirationDate());
 
     act(() => {
-      result.current.handleChange({
-        target: { name: "month", value: "13" },
-      } as React.ChangeEvent<HTMLInputElement>);
+      result.current.handleChange({ name: "month", value: "13" });
     });
 
     expect(result.current.validationResult.month).toEqual({
@@ -68,9 +62,7 @@ describe("useExpirationDate 훅 테스트", () => {
     const { result } = renderHook(() => useExpirationDate());
 
     act(() => {
-      result.current.handleChange({
-        target: { name: "year", value: "2a" },
-      } as React.ChangeEvent<HTMLInputElement>);
+      result.current.handleChange({ name: "year", value: "2a" });
     });
 
     expect(result.current.validationResult.year).toEqual({
@@ -83,9 +75,7 @@ describe("useExpirationDate 훅 테스트", () => {
     const { result } = renderHook(() => useExpirationDate());
 
     act(() => {
-      result.current.handleChange({
-        target: { name: "year", value: "1" },
-      } as React.ChangeEvent<HTMLInputElement>);
+      result.current.handleChange({ name: "year", value: "1" });
     });
 
     expect(result.current.validationResult.year).toEqual({
@@ -100,9 +90,7 @@ describe("useExpirationDate 훅 테스트", () => {
     const pastYear = String(currentYear - 1).padStart(2, "0");
 
     act(() => {
-      result.current.handleChange({
-        target: { name: "year", value: pastYear },
-      } as React.ChangeEvent<HTMLInputElement>);
+      result.current.handleChange({ name: "year", value: pastYear });
     });
 
     expect(result.current.validationResult.year).toEqual({

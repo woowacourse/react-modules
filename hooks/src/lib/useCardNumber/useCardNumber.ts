@@ -118,16 +118,18 @@ const useCardNumber = () => {
     });
   }, [cardNumber, cardType]);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-
+  const handleChange = ({
+    name,
+    value,
+  }: {
+    name: CardNumberLabel;
+    value: string;
+  }) => {
     if (!isCardNumberLabel(name)) return;
 
     const newCardNumber = { ...cardNumber, [name]: value };
-
     setCardNumber(newCardNumber);
   };
-
   return {
     cardNumber,
     handleChange,

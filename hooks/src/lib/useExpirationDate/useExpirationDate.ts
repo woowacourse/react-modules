@@ -17,6 +17,7 @@ interface ExpirationDateError {
   month: SingleCardNumberError;
   year: SingleCardNumberError;
 }
+type ExpDateField = "month" | "year";
 
 const useExpirationDate = () => {
   const [expDate, setExpDate] = useState({ month: "", year: "" });
@@ -93,11 +94,14 @@ const useExpirationDate = () => {
       [label]: { errorState: false, message: "" },
     }));
   };
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
 
-    if (name !== "month" && name !== "year") return;
-
+  const handleChange = ({
+    name,
+    value,
+  }: {
+    name: ExpDateField;
+    value: string;
+  }) => {
     setExpDate((prev) => ({
       ...prev,
       [name]: value,

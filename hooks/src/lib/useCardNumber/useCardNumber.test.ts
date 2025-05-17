@@ -1,8 +1,11 @@
 import { renderHook, act } from "@testing-library/react";
 import useCardNumber, { ERROR_MESSAGE } from "./useCardNumber";
+import { CardNumberLabel } from "./types";
 
 describe("useCardNumber 테스트", () => {
-  it("카드 번호가 유효하게 입력되었을 때 errorState가 false,  errorMessage는 빈 문자열인지 확인한다.", () => {
+  const keys: CardNumberLabel[] = ["first", "second", "third", "fourth"];
+
+  it("카드 번호가 유효하게 입력되었을 때 errorState가 false, errorMessage는 빈 문자열인지 확인한다.", () => {
     const { result } = renderHook(() => useCardNumber());
 
     const testValue = {
@@ -12,11 +15,9 @@ describe("useCardNumber 테스트", () => {
       fourth: "1234",
     };
 
-    for (const [label, value] of Object.entries(testValue)) {
+    for (const label of keys) {
       act(() => {
-        result.current.handleChange({
-          target: { name: label, value: value },
-        } as React.ChangeEvent<HTMLInputElement>);
+        result.current.handleChange({ name: label, value: testValue[label] });
       });
     }
 
@@ -28,7 +29,7 @@ describe("useCardNumber 테스트", () => {
     });
   });
 
-  it("카드 번호에 문자가 포함되었을 때 유효하지 않은 경우만 errorState가 true,  errorMessage 값이 반환되는지 확인한다.", () => {
+  it("카드 번호에 문자가 포함되었을 때 유효하지 않은 경우만 errorState가 true, errorMessage 값이 반환되는지 확인한다.", () => {
     const { result } = renderHook(() => useCardNumber());
     const testValue = {
       first: "123a",
@@ -36,11 +37,10 @@ describe("useCardNumber 테스트", () => {
       third: "3333",
       fourth: "1234",
     };
-    for (const [label, value] of Object.entries(testValue)) {
+
+    for (const label of keys) {
       act(() => {
-        result.current.handleChange({
-          target: { name: label, value: value },
-        } as React.ChangeEvent<HTMLInputElement>);
+        result.current.handleChange({ name: label, value: testValue[label] });
       });
     }
 
@@ -62,11 +62,9 @@ describe("useCardNumber 테스트", () => {
       fourth: "1234",
     };
 
-    for (const [label, value] of Object.entries(testValue)) {
+    for (const label of keys) {
       act(() => {
-        result.current.handleChange({
-          target: { name: label, value: value },
-        } as React.ChangeEvent<HTMLInputElement>);
+        result.current.handleChange({ name: label, value: testValue[label] });
       });
     }
 
@@ -87,12 +85,9 @@ describe("useCardNumber 테스트", () => {
       third: "3333",
       fourth: "",
     };
-
-    for (const [label, value] of Object.entries(testValue)) {
+    for (const label of keys) {
       act(() => {
-        result.current.handleChange({
-          target: { name: label, value: value },
-        } as React.ChangeEvent<HTMLInputElement>);
+        result.current.handleChange({ name: label, value: testValue[label] });
       });
     }
 
@@ -115,12 +110,9 @@ describe("useCardNumber 테스트", () => {
       third: "33333",
       fourth: "",
     };
-
-    for (const [label, value] of Object.entries(testValue)) {
+    for (const label of keys) {
       act(() => {
-        result.current.handleChange({
-          target: { name: label, value: value },
-        } as React.ChangeEvent<HTMLInputElement>);
+        result.current.handleChange({ name: label, value: testValue[label] });
       });
     }
 
@@ -144,11 +136,9 @@ describe("useCardNumber 테스트", () => {
       fourth: "1111",
     };
 
-    for (const [label, value] of Object.entries(testValue)) {
+    for (const label of keys) {
       act(() => {
-        result.current.handleChange({
-          target: { name: label, value: value },
-        } as React.ChangeEvent<HTMLInputElement>);
+        result.current.handleChange({ name: label, value: testValue[label] });
       });
     }
 
