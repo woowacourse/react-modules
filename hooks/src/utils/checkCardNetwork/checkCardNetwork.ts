@@ -1,7 +1,7 @@
 import {
   CARD_NETWORK_PATTERNS,
   TypeOfCardNetworkPatterns,
-} from "../constants/cardNetworkPatterns";
+} from "../../constants/cardNetworkPatterns";
 
 type CardNumbers = {
   FIRST: string;
