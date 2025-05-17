@@ -1,9 +1,8 @@
 import { CancelButtonStyle } from "../styles";
-import ModalButton from "./ModalButton";
+import { ModalButtonProps } from "../types/Modal.types";
+import ModalButton from "./Button";
 
-interface CancelButtonProps extends React.ComponentProps<typeof ModalButton> {}
-
-const CancelButton = ({ children = "취소", ...rest }: CancelButtonProps) => (
+const CancelButton = ({ children = "취소", ...rest }: ModalButtonProps) => (
   <ModalButton css={CancelButtonStyle} {...rest}>
     {children}
   </ModalButton>
