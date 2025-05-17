@@ -7,9 +7,10 @@ import { Modal, ModalProps } from './common/Modal';
 type PromptModalProps = {
   onConfirm: (value: string) => void;
   title: string;
+  size?: 'small' | 'medium' | 'large';
 } & Omit<ModalProps, 'children'>;
 
-const PromptModal = ({ isOpen, onClose, onConfirm, title }: PromptModalProps) => {
+const PromptModal = ({ isOpen, onClose, onConfirm, title, size = 'medium' }: PromptModalProps) => {
   const ref = useRef<HTMLInputElement>(null);
 
   const handleConfirm = (e: React.FormEvent) => {
@@ -27,7 +28,7 @@ const PromptModal = ({ isOpen, onClose, onConfirm, title }: PromptModalProps) =>
   return (
     <Modal isOpen={isOpen} onClose={onClose} closeByEscapeKey={false}>
       <Modal.Backdrop closeByBackdrop={false} />
-      <Modal.Container>
+      <Modal.Container size={size}>
         <Modal.Title title={title} />
         <StyledForm onSubmit={handleConfirm}>
           <StyledLabel htmlFor="prompt-input" />
