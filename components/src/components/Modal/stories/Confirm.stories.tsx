@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Modal, { ModalProps } from "../Modal";
 import meta from "./Modal.meta";
+import ConfirmModal from "../../ModalPreset/ConfirmModal";
 
 export default {
   ...meta,
@@ -86,9 +87,7 @@ export const ConfirmModalWithActionButtons = (args: ModalProps) => {
    * ConfirmButton은 사용자 정의 onClick 핸들러(handleSubmit) 실행 후 자동으로 모달을 닫음
    * CancelButton은 항상 자동으로 모달을 닫음
    */
-  const handleSubmit = () => {
-    alert("카드를 삭제하였습니다.");
-  };
+  const handleSubmit = () => alert("카드를 삭제하였습니다.");
 
   return (
     <>
@@ -117,6 +116,35 @@ export const ConfirmModalWithActionButtons = (args: ModalProps) => {
           />
         </div>
       </Modal>
+    </>
+  );
+};
+
+export const ConfirmModalPreset = (args: ModalProps) => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const closeModal = () => {
+    setIsOpen(false);
+    args.onClose?.();
+  };
+
+  const openModal = () => setIsOpen(true);
+
+  const handleSubmit = () => alert("카드를 삭제하였습니다.");
+
+  return (
+    <>
+      <button type="button" onClick={openModal}>
+        모달 열기
+      </button>
+      <ConfirmModal
+        isOpen={isOpen}
+        onClose={closeModal}
+        onConfirm={handleSubmit}
+        title={{ text: "카드를 삭제하시겠습니까?" }}
+      >
+        <p>삭제하면 복구하실 수 없습니다.</p>
+      </ConfirmModal>
     </>
   );
 };
