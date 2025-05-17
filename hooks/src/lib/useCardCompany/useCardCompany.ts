@@ -10,10 +10,10 @@ const useCardCompany = () => {
 		},
 	];
 
-	const onChange = (cardCompanyInput: string) => {
-		const pureCardNumber = cardCompanyInput.replace(/-/g, "");
+	const onChange = (value: string) => {
+		const cardCompanyInput = value.replace(/-/g, "");
 
-		setCardCompany(pureCardNumber);
+		setCardCompany(cardCompanyInput);
 	};
 
 	return { cardCompany, onChange, cardCompanyError: getError(cardCompany, errorCases) };
