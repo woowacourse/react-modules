@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useMemo } from "react";
 import { detectCardBrand, formatCardNumber } from "../utils/cardBrand";
 import { getError } from "../utils/vaildate";
 
@@ -14,19 +14,18 @@ interface CardBrandResult {
 }
 
 const useCardBrand = (cardNumber: string): CardBrandResult => {
-	const [cardBrand, setCardBrand] = useState<CardBrand | null>(null);
-	const errorCases = [
-		{
-			validate: () => cardBrand === null,
-			errorMessage: "카드 번호에 맞는 카드사가 없습니다.",
-		},
-	];
-
-	useEffect(() => {
-		const detected = detectCardBrand(cardNumber) ?? null;
-		setCardBrand(detected);
+	const cardBrand = useMemo<CardBrand>(() => {
+		return detectCardBrand(cardNumber) ?? null;
 	}, [cardNumber]);
-
+	const errorCases = useMemo(
+		() => [
+			{
+				validate: () => cardBrand === null,
+				errorMessage: "카드 번호에 맞는 카드사가 없습니다.",
+			},
+		],
+		[cardBrand]
+	);
 	const formattedCardNumber = useMemo(() => {
 		return formatCardNumber(cardNumber, cardBrand);
 	}, [cardNumber, cardBrand]);
