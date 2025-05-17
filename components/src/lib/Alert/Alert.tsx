@@ -4,6 +4,7 @@ import DialogHeader from "../Dialog/DialogHeader";
 import DialogButton from "../Dialog/DialogButton";
 import useFocus from "../hooks/useFocus";
 import useFirstNodeFocus from "../hooks/useFirstNodeFocus";
+import { StyledButtonWrapper, StyledContentWrapper } from "../styled.css";
 
 type AlertProps = {
   open: boolean;
@@ -37,28 +38,22 @@ export default function Alert({
     >
       <Dialog.Root>
         <Dialog.Overlay>
-          <Dialog.Content
-            style={{ padding: "26px 32px", borderRadius: "10px" }}
-          >
-            <Dialog.Header>
-              <DialogHeader title={title} />
-            </Dialog.Header>
-            <DialogContent content={content} />
-            <Dialog.CloseAction>
-              <div
-                style={{
-                  display: "flex",
-                  width: "100%",
-                  justifyContent: "flex-end",
-                }}
-              >
-                <DialogButton
-                  type="basic"
-                  text={buttonText}
-                  onClick={modalClose}
-                />
-              </div>
-            </Dialog.CloseAction>
+          <Dialog.Content>
+            <StyledContentWrapper>
+              <Dialog.Header>
+                <DialogHeader title={title} />
+              </Dialog.Header>
+              <DialogContent content={content} />
+              <Dialog.CloseAction>
+                <StyledButtonWrapper>
+                  <DialogButton
+                    type="basic"
+                    text={buttonText}
+                    onClick={modalClose}
+                  />
+                </StyledButtonWrapper>
+              </Dialog.CloseAction>
+            </StyledContentWrapper>
           </Dialog.Content>
         </Dialog.Overlay>
       </Dialog.Root>

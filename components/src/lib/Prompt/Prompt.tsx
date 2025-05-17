@@ -4,6 +4,7 @@ import DialogButton from "../Dialog/DialogButton";
 import DialogHeader from "../Dialog/DialogHeader";
 import useFocus from "../hooks/useFocus";
 import useFirstNodeFocus from "../hooks/useFirstNodeFocus";
+import { StyledButtonWrapper, StyledContentWrapper } from "../styled.css";
 
 type ConfirmProps = {
   open: boolean;
@@ -51,35 +52,28 @@ export default function Prompt({
     >
       <Dialog.Root>
         <Dialog.Overlay>
-          <Dialog.Content
-            style={{ padding: "26px 32px", borderRadius: "10px" }}
-          >
-            <Dialog.Header>
-              <DialogHeader title={title} />
-            </Dialog.Header>
-            <Input
-              value={value}
-              onChange={onChange}
-              handleEnterKeyDown={handleEnterKeyDown}
-            />
-            <div
-              style={{
-                display: "flex",
-                width: "100%",
-                justifyContent: "flex-end",
-                gap: "12px",
-              }}
-            >
-              <Dialog.CloseAction>
-                <DialogButton type="basic" text={closeButtonText} />
-              </Dialog.CloseAction>
-              <DialogButton
-                ref={checkButtonRef}
-                type="primary"
-                text={checkButtonText}
-                onClick={onCheckButtonClick}
+          <Dialog.Content>
+            <StyledContentWrapper>
+              <Dialog.Header>
+                <DialogHeader title={title} />
+              </Dialog.Header>
+              <Input
+                value={value}
+                onChange={onChange}
+                handleEnterKeyDown={handleEnterKeyDown}
               />
-            </div>
+              <StyledButtonWrapper>
+                <Dialog.CloseAction>
+                  <DialogButton type="basic" text={closeButtonText} />
+                </Dialog.CloseAction>
+                <DialogButton
+                  ref={checkButtonRef}
+                  type="primary"
+                  text={checkButtonText}
+                  onClick={onCheckButtonClick}
+                />
+              </StyledButtonWrapper>
+            </StyledContentWrapper>
           </Dialog.Content>
         </Dialog.Overlay>
       </Dialog.Root>
