@@ -1,4 +1,4 @@
-import type { CardBrand } from './constant';
+import type { CardBrand } from '../constant';
 
 const CARD_BRAND_FORMAT_RULES = {
   Visa: [4, 4, 4, 4],

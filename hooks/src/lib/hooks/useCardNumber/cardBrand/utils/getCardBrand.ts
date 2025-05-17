@@ -1,5 +1,5 @@
-import { CARD_BRANDS } from './constant';
-import type { CardBrand, CardRule, ValidCardBrand } from './constant';
+import { CARD_BRANDS } from '../constant';
+import type { CardBrand, CardRule, ValidCardBrand } from '../constant';
 
 const CARD_BRAND_RANGE_RULES = {
   Visa: [{ start: 4, end: 4 }],

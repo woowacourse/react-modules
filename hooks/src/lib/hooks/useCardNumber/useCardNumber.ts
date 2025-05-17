@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { validateCardInput } from '../../validation/cardNumberLengthInfo';
-import { getCardBrand } from './cardBrand/getCardBrand';
+import { getCardBrand } from './cardBrand/utils/getCardBrand';
 import type { CardBrand } from './cardBrand/constant';
-import { formatCardNumber } from './cardBrand/formatCardNumber';
+import { formatCardNumber } from './cardBrand/utils/formatCardNumber';
 
 /**
  *
