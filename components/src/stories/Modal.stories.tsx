@@ -10,9 +10,8 @@ const meta: Meta<typeof Modal> = {
   },
   args: {
     show: true,
-    background: true,
+    showBackdrop: true,
     position: "center",
-    gap: 16,
   },
   parameters: {
     docs: {

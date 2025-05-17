@@ -5,11 +5,11 @@ import {
   ErrorMessageType,
   SingleErrorType,
   CurriedInputChangeHandler,
-  ValidationHookReturnType,
+  HookReturnType,
   ValidateFuncReturnType,
 } from '../../types';
 
-const useCvcNumberValidation = (): ValidationHookReturnType => {
+const useCvcNumber = (): HookReturnType => {
   const [inputStates, setInputStates] = useState<string>('');
 
   const validateCvcNumber = (value: string): ValidateFuncReturnType => {
@@ -50,4 +50,4 @@ const useCvcNumberValidation = (): ValidationHookReturnType => {
   };
 };
 
-export default useCvcNumberValidation;
+export default useCvcNumber;

@@ -1,15 +1,15 @@
 import { renderHook, act } from '@testing-library/react';
-import useExpirationDateValidation from '.';
+import useExpirationDate from '.';
 
-describe('useExpirationDateValidation', () => {
+describe('useExpirationDate', () => {
   it('초기 noError 상태는 true이다.', () => {
-    const { result } = renderHook(() => useExpirationDateValidation());
+    const { result } = renderHook(() => useExpirationDate());
 
     expect(result.current.noError).toBe(true);
   });
 
   it('월이 아닌 값이 들어오면 에러메시지를 반환한다.', () => {
-    const { result } = renderHook(() => useExpirationDateValidation());
+    const { result } = renderHook(() => useExpirationDate());
     const badMonthEvent = {
       target: { value: '14' },
     } as React.ChangeEvent<HTMLInputElement>;
@@ -22,7 +22,7 @@ describe('useExpirationDateValidation', () => {
   });
 
   it('올해 이전 연도 값이 들어오면 에러메시지를 반환한다.', () => {
-    const { result } = renderHook(() => useExpirationDateValidation());
+    const { result } = renderHook(() => useExpirationDate());
     const badYearEvent = {
       target: { value: '24' },
     } as React.ChangeEvent<HTMLInputElement>;
@@ -35,7 +35,7 @@ describe('useExpirationDateValidation', () => {
   });
 
   it('유효한 월과 연도를 입력하면 noError는 true, 에러 메시지는 없다.', () => {
-    const { result } = renderHook(() => useExpirationDateValidation());
+    const { result } = renderHook(() => useExpirationDate());
     const goodMonthEvent = {
       target: { value: '12' },
     } as React.ChangeEvent<HTMLInputElement>;
@@ -53,7 +53,7 @@ describe('useExpirationDateValidation', () => {
   });
 
   it('1자리 숫자를 입력하면 자릿수 에러 메시지를 반환한다.', () => {
-    const { result } = renderHook(() => useExpirationDateValidation());
+    const { result } = renderHook(() => useExpirationDate());
     const shortMonthEvent = {
       target: { value: '2' },
     } as React.ChangeEvent<HTMLInputElement>;

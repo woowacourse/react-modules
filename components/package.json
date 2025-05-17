@@ -1,6 +1,6 @@
 {
   "name": "kirin-modal-component",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "npm modules",
   "type": "module",
   "types": "dist/index.d.ts",
@@ -36,6 +36,7 @@
     "@storybook/react": "^8.6.12",
     "@storybook/react-vite": "^8.6.12",
     "@storybook/test": "^8.6.12",
+    "@storybook/testing-library": "^0.2.1",
     "@types/jest": "^29.5.14",
     "@types/node": "^22.14.1",
     "@types/react": "^19.1.1",

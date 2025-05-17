@@ -5,11 +5,11 @@ import {
   ErrorMessageType,
   SingleErrorType,
   CurriedInputChangeHandler,
-  ValidationHookReturnType,
+  HookReturnType,
   ValidateFuncReturnType,
 } from '../../types';
 
-const usePasswordValidation = (): ValidationHookReturnType => {
+const usePassword = (): HookReturnType => {
   const [inputStates, setInputStates] = useState<string>('');
 
   const validatePassword = (value: string): ValidateFuncReturnType => {
@@ -50,4 +50,4 @@ const usePasswordValidation = (): ValidationHookReturnType => {
   };
 };
 
-export default usePasswordValidation;
+export default usePassword;
