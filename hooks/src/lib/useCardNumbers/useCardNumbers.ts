@@ -22,7 +22,6 @@ interface ValitationResult {
 type UpdateErrorArgs =
   | { isValid: false; errorMessage: string }
   | { isValid: true };
-
 interface ValidateParams {
   value: string;
   brand: CardBrandType | null;
@@ -45,20 +44,20 @@ export default function useCardNumbers(): ValitationResult {
     setNumbers(numberWithoutSpaces);
   };
 
-  useEffect(() => {
-    validate({
-      value: numberWithoutSpaces,
-      brand: cardBrand,
-      length: cardNumberLength,
-    });
-  }, [numberWithoutSpaces, cardBrand, cardNumberLength]);
-
   const updateError = (args: UpdateErrorArgs) => {
     setError({
       isValid: args.isValid,
-      errorMessage: args.isValid ? '' : args.errorMessage,
+      errorMessage: args.isValid === false ? args.errorMessage : '',
     });
   };
+
+  useEffect(() => {
+    validate({
+      value: numbers,
+      brand: cardBrand,
+      length: cardNumberLength,
+    });
+  }, [numbers, cardBrand, cardNumberLength]);
 
   const validate = ({ value, brand, length }: ValidateParams) => {
     if (isEmpty(value)) {
