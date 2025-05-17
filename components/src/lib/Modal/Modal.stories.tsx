@@ -1,10 +1,11 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import Modal, { ModalInput } from "./Modal";
 import Button from "../../modules/Button/Button";
 import { useState } from "react";
 import styled from "@emotion/styled";
 import CardCompany from "./CardCompany";
 import AgreeTermModal from "./AgreeTermModal";
+import Modal from ".";
+import { ModalInput } from "./ModalInput";
 
 const meta: Meta<typeof Modal> = {
 	title: "Components/Modal",
