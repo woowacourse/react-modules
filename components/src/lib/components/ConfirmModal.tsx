@@ -4,9 +4,17 @@ type ConfirmModalProps = {
   onConfirm: () => void;
   title: string;
   description?: string;
+  size?: 'small' | 'medium' | 'large';
 } & Omit<ModalProps, 'children'>;
 
-const ConfirmModal = ({ isOpen, onClose, onConfirm, title, description }: ConfirmModalProps) => {
+const ConfirmModal = ({
+  isOpen,
+  onClose,
+  onConfirm,
+  title,
+  description,
+  size = 'medium',
+}: ConfirmModalProps) => {
   const handleConfirm = () => {
     onConfirm();
     onClose();
@@ -15,7 +23,7 @@ const ConfirmModal = ({ isOpen, onClose, onConfirm, title, description }: Confir
   return (
     <Modal isOpen={isOpen} onClose={onClose} closeByEscapeKey={false}>
       <Modal.Backdrop closeByBackdrop={false} />
-      <Modal.Container>
+      <Modal.Container size={size}>
         <Modal.Title title={title} />
         <Modal.Description description={description} />
         <Modal.ButtonWrapper>
