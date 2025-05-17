@@ -17,7 +17,7 @@ export const formatCardNumber = (
     return formatDefaultCardNumber(cleanNumber);
   }
 
-  const formatNumbers = CARD_BRAND_RULE[brand].formatNumbers;
+  const formatNumbers = [...CARD_BRAND_RULE[brand].formatNumbers];
 
   let currentIndex = 0;
 

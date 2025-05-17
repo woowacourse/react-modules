@@ -1,6 +1,4 @@
-import type { CardBrand, CardBrandRule } from "../types";
-
-export const CARD_BRAND_RULE: Record<CardBrand, CardBrandRule> = {
+export const CARD_BRAND_RULE = {
   MasterCard: {
     ranges: [[51, 55]],
     length: 16,
@@ -33,4 +31,4 @@ export const CARD_BRAND_RULE: Record<CardBrand, CardBrandRule> = {
     length: 16,
     formatNumbers: [4, 4, 4, 4],
   },
-};
+} as const;

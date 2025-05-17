@@ -1,7 +1,3 @@
-export type CardBrand = "AMEX" | "Diners" | "Visa" | "MasterCard" | "UnionPay";
+import { CARD_BRAND_RULE } from "../constants";
 
-export type CardBrandRule = {
-  ranges: [number, number][];
-  length: number;
-  formatNumbers: number[];
-};
+export type CardBrand = keyof typeof CARD_BRAND_RULE;

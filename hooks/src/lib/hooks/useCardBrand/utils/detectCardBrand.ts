@@ -4,7 +4,11 @@ import type { CardBrand } from "../types";
 export function detectCardBrand(cardNumber: string): CardBrand | null {
   if (!cardNumber) return null;
 
-  for (const [brand, rule] of Object.entries(CARD_BRAND_RULE)) {
+  const brands = Object.keys(CARD_BRAND_RULE) as CardBrand[];
+
+  for (const brand of brands) {
+    const rule = CARD_BRAND_RULE[brand];
+
     for (const [start, end] of rule.ranges) {
       const prefixLength = Math.max(
         start.toString().length,
@@ -16,7 +20,7 @@ export function detectCardBrand(cardNumber: string): CardBrand | null {
       const cardPrefix = parseInt(cardNumber.slice(0, prefixLength), 10);
 
       if (cardPrefix >= start && cardPrefix <= end) {
-        return brand as CardBrand;
+        return brand;
       }
     }
   }
