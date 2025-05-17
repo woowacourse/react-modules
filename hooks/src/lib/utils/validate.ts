@@ -13,7 +13,7 @@ export const isValidLength = (value: string, length: number) => {
 };
 
 export const isValidCardBrand = (brand: string) => {
-  return brand !== 'Unknown';
+  return brand !== null;
 };
 
 export const isValidMonth = (value: string) => {
