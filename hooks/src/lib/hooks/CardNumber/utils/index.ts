@@ -1,10 +1,5 @@
 import { ValidationResult } from "../../../types";
 
-export const validateCardNumbers = (cardNumber: string, cardType: string) => {
-  const result = validateCardNumber(cardNumber, cardType);
-  return result;
-};
-
 export const validateCardNumber = (
   cardNumber: string,
   cardType: string
