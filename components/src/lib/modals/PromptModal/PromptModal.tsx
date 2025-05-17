@@ -32,13 +32,13 @@ const PromptModal = ({
   size,
   title,
   content,
-  background = true,
+  showBackdrop = true,
   value,
   onChange,
   label = "확인",
 }: PromptModalProps) => {
   return (
-    <Modal show={show} onHide={onHide} size={size} position={position} background={background}>
+    <Modal show={show} onHide={onHide} size={size} position={position} showBackdrop={showBackdrop}>
       {title != null && (
         <Modal.Header>
           <Modal.Title>{title}</Modal.Title>

@@ -12,7 +12,7 @@ const meta: Meta<typeof PromptModal> = {
   args: {
     show: true,
     position: "center",
-    background: true,
+    showBackdrop: true,
     title: "입력해주세요",
     content: "사용자 이름을 입력해주세요",
   },

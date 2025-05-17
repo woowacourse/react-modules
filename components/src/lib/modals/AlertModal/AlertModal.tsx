@@ -24,11 +24,11 @@ const AlertModal = ({
   size,
   title,
   content,
-  background = true,
+  showBackdrop = true,
   label = "확인",
 }: AlertModalProps) => {
   return (
-    <Modal show={show} onHide={onHide} position={position} background={background} size={size}>
+    <Modal show={show} onHide={onHide} position={position} showBackdrop={showBackdrop} size={size}>
       {title != null && (
         <Modal.Header>
           <Modal.Title>{title}</Modal.Title>

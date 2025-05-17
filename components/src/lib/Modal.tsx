@@ -26,7 +26,7 @@ const ModalContext = createContext<ModalContextType>({
   },
 });
 
-const Modal = ({ show, onHide, background = true, position = "center", size = "medium", children }: ModalProps) => {
+const Modal = ({ show, onHide, showBackdrop = true, position = "center", size = "medium", children }: ModalProps) => {
   const containerRef = useRef<HTMLDivElement>(null);
 
   useFocusTrap(containerRef, show);
@@ -35,7 +35,7 @@ const Modal = ({ show, onHide, background = true, position = "center", size = "m
   return (
     <ModalContext.Provider value={{ onHide }}>
       <div css={ModalWrapperStyle(show)}>
-        <div css={backGroundStyle(background)} onClick={onHide}></div>
+        <div css={backGroundStyle(showBackdrop)} onClick={onHide}></div>
         <div ref={containerRef} css={ModalContainerStyle(position, size)}>
           {children}
         </div>

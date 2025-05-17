@@ -25,11 +25,11 @@ const ConfirmModal = ({
   size,
   title,
   content,
-  background = true,
+  showBackdrop = true,
   label = "확인",
 }: ConfirmModalProps) => {
   return (
-    <Modal show={show} onHide={onHide} size={size} position={position} background={background}>
+    <Modal show={show} onHide={onHide} size={size} position={position} showBackdrop={showBackdrop}>
       {title != null && (
         <Modal.Header>
           <Modal.Title>{title}</Modal.Title>
