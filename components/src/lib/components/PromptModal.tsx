@@ -45,8 +45,8 @@ const PromptModal = ({
           <Input type="text" placeholder={placeholder} value={inputValue} onChange={handleInputChange} />
         </Modal.Content>
         <Modal.Footer>
-          <Button type="cancel" onClick={onClose} buttonText={cancelText} width="80px" />
-          <Button type="confirm" buttonText={confirmText} width="80px" />
+          <Button buttonType="cancel" onClick={onClose} buttonText={cancelText} width="80px" />
+          <Button buttonType="confirm" buttonText={confirmText} width="80px" />
         </Modal.Footer>
       </form>
     </Modal>

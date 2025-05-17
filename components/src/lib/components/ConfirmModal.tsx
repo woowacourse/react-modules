@@ -19,8 +19,8 @@ const ConfirmModal = ({
       <Modal.Header title={title} showCloseButton={false} />
       <Modal.Content>{content}</Modal.Content>
       <Modal.Footer>
-        <Button type="cancel" onClick={onClose} buttonText={cancelText} width="80px" />
-        <Button type="confirm" onClick={onConfirm} buttonText={confirmText} width="80px" />
+        <Button buttonType="cancel" onClick={onClose} buttonText={cancelText} width="80px" />
+        <Button buttonType="confirm" onClick={onConfirm} buttonText={confirmText} width="80px" />
       </Modal.Footer>
     </Modal>
   );

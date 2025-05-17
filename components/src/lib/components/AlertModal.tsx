@@ -18,7 +18,7 @@ const AlertModal = ({
       <Modal.Header title={title} showCloseButton={false} />
       <Modal.Content>{content}</Modal.Content>
       <Modal.Footer>
-        <Button type="confirm" onClick={onConfirm} buttonText={confirmText} width="80px" />
+        <Button buttonType="confirm" onClick={onConfirm} buttonText={confirmText} width="80px" />
       </Modal.Footer>
     </Modal>
   );
