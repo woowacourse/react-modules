@@ -1,3 +1,3 @@
-import { ModalType } from "../../dist/lib/Modal/Modal.styled";
+import { ModalType } from "./Modal/type";
 export { default as Modal } from "./Modal";
 export type { ModalType };

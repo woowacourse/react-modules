@@ -1,8 +1,6 @@
 import styled from "@emotion/styled";
 import { ElementType } from "react";
-
-export type ModalSizeType = "small" | "medium" | "large";
-export type ModalPositionType = "bottom" | "center";
+import { ModalSizeType, ModalPositionType } from "./type";
 
 export const Backdrop = styled.div`
   position: fixed;
