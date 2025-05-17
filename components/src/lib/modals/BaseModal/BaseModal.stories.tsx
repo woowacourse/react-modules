@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import BaseModal from "./BaseModal";
 
 const meta = {
-  title: "BaseModal",
+  title: "Components/Modals/BaseModal",
   component: BaseModal,
 } satisfies Meta<typeof BaseModal>;
 

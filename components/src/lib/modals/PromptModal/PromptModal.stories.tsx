@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import PromptModal from "./PromptModal";
 
 const meta = {
-  title: "PromptModal",
+  title: "Components/Modals/PromptModal",
   component: PromptModal,
 } satisfies Meta<typeof PromptModal>;
 

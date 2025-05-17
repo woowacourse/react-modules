@@ -1,6 +1,6 @@
 {
   "name": "@mlnwns/hooks",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "카드 정보 커스텀 훅",
   "type": "module",
   "types": "dist/index.d.ts",
