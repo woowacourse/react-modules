@@ -136,8 +136,8 @@ const StyledModalContainer = styled.div<{ modalZIndex: number } & ModalContainer
   background-color: white;
   padding: 18px 24px;
   ${({ position = 'center' }) => positionStyle[position]};
-  ${({ size = 'small' }) => modalSizes[size]};
-  ${({ size = 'small' }) => fontSizes[size]};
+  ${({ size = 'medium' }) => modalSizes[size]};
+  ${({ size = 'medium' }) => fontSizes[size]};
   ${({ containerStyle }) => ({ ...containerStyle })};
   z-index: ${({ modalZIndex }) => modalZIndex};
 `;
