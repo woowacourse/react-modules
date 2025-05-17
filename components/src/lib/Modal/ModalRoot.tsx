@@ -8,7 +8,7 @@ const WIDTH_MAP = {
 	small: "320px",
 	medium: "480px",
 	large: "600px",
-	full: "100%",
+	full: "100vw",
 };
 
 export interface ModalRootProps {
