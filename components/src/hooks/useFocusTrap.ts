@@ -39,11 +39,6 @@ const useFocusTrap = () => {
       setInitialFocus();
     }, 50);
 
-    const focusableElements = getFocusableElements();
-    const firstElement = focusableElements[0];
-
-    if (firstElement) firstElement.focus();
-
     const handleTabKey = (e: KeyboardEvent) => {
       if (e.key != "Tab") return;
       if (!ref.current) return;
