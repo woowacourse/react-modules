@@ -35,20 +35,27 @@ npm install @yeji0214/hooks
 import { useCardNumberInput } from "@yeji0214/hooks";
 
 const CardNumberInput = () => {
-  const { cardNumberState, errorMessage, handleInputChange } =
-    useCardNumberInput();
+  const {
+    cardNumber,
+    formattedCardNumber,
+    cardBrand,
+    isValid,
+    errorMessage,
+    handleChange,
+  } = useCardNumberInput();
 
   return (
     <div>
-      {cardNumberState.map((item, index) => (
-        <input
-          key={index}
-          value={item.value}
-          onChange={(e) => handleInputChange(e, index)}
-          maxLength={4}
-        />
-      ))}
-      {errorMessage && <p>{errorMessage}</p>}
+      <input
+        value={formattedCardNumber}
+        onChange={handleChange}
+        placeholder="카드 번호를 입력하세요"
+        maxLength={19}
+      />
+      {cardBrand && <p>카드사: {cardBrand}</p>}
+      {!isValid && errorMessage && (
+        <p style={{ color: "red" }}>{errorMessage}</p>
+      )}
     </div>
   );
 };
@@ -56,11 +63,29 @@ const CardNumberInput = () => {
 
 #### ✅ 반환 값
 
-| 항목                | 타입                                    | 설명                              |
-| ------------------- | --------------------------------------- | --------------------------------- |
-| `cardNumberState`   | `{ value: string; isValid: boolean }[]` | 4개의 카드 번호 입력 상태         |
-| `errorMessage`      | `string`                                | 유효성 검사 실패 시 표시할 메시지 |
-| `handleInputChange` | `(e, index) => void`                    | 입력 변경 핸들러                  |
+| 항목                  | 타입                                         | 설명                                                             |
+| --------------------- | -------------------------------------------- | ---------------------------------------------------------------- |
+| `cardNumber`          | `string`                                     | 숫자만 포함된 원본 카드 번호                                     |
+| `formattedCardNumber` | `string`                                     | 카드사 포맷에 따라 자동 포맷된 카드 번호 (`#### #### #### ####`) |
+| `cardBrand`           | `string \| null`                             | 자동 식별된 카드 브랜드 (예: `VISA`, `AMEX` 등)                  |
+| `isValid`             | `boolean`                                    | 현재 입력된 카드 번호가 해당 카드사 기준으로 유효한지 여부       |
+| `errorMessage`        | `string`                                     | 유효성 검사 실패 시 반환되는 에러 메시지                         |
+| `handleChange`        | `(e: ChangeEvent<HTMLInputElement>) => void` | input의 onChange 핸들러                                          |
+
+---
+
+## 🏦 지원 카드사 및 식별 조건
+
+| 카드사         | 시작 숫자 범위                                  | 전체 길이 | 포맷 구조 |
+| -------------- | ----------------------------------------------- | --------- | --------- |
+| **VISA**       | `4`                                             | 16자      | `4-4-4-4` |
+| **MASTERCARD** | `51` ~ `55`                                     | 16자      | `4-4-4-4` |
+| **AMEX**       | `34`, `37`                                      | 15자      | `4-6-5`   |
+| **DINERS**     | `36`                                            | 14자      | `4-6-4`   |
+| **UNIONPAY**   | `622126` ~ `622925`, `624`~`626`, `6282`~`6288` | 16자      | `4-4-4-4` |
+
+> ⚠️ 입력값은 숫자만 허용되며, 자동으로 카드사에 맞게 포맷됩니다.  
+> ⚠️ 위 조건을 만족하지 않는 경우 `CARD_NUMBER.INVALID` 에러 메시지가 설정됩니다.
 
 ---
 

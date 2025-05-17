@@ -1,4 +1,5 @@
 import { EXPIRATION } from "../constants/cardValidationInfo";
+import { detectCardCompany } from "./cardBrandUtils";
 
 const validator = {
   hasNonNumericValue(number: string) {
@@ -18,6 +19,11 @@ const validator = {
 
   isInValidYear(year: string) {
     return Number(year) < EXPIRATION.YEAR.CURRENT;
+  },
+
+  isValidCardStartNumber(number: string) {
+    const brand = detectCardCompany(number);
+    return brand !== null;
   },
 };
 

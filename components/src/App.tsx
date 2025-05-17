@@ -12,12 +12,6 @@ function App() {
     setIsOpen(false);
   };
 
-  const handleBackdropClick = (e: React.MouseEvent<HTMLDivElement>): void => {
-    if (e.target === e.currentTarget) {
-      handleCloseModal();
-    }
-  };
-
   const handleConfirm = () => {
     console.log("확인 버튼이 클릭되었습니다.");
   };
@@ -27,13 +21,10 @@ function App() {
       <button onClick={handleOpenModal}>모달 열기</button>
       {isOpen && (
         <Modal
-          position="center"
-          title="제목"
-          content="내용"
-          handleBackdropClick={handleBackdropClick}
+          // size="medium"
+          variant="confirm"
           onClose={handleCloseModal}
           onConfirm={handleConfirm}
-          confirmText="확인"
         />
       )}
     </>
