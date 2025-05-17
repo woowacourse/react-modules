@@ -12,7 +12,7 @@ type CardNumbers = {
 
 const CARD_NETWORK_ERROR_MESSAGE = "카드 길이가 올바르지 않습니다.";
 
-export default function useCardNetwork(
+export default function checkCardNetwork(
   cardNumbers: CardNumbers,
   userCardNetworkPatterns?: TypeOfCardNetworkPatterns
 ) {

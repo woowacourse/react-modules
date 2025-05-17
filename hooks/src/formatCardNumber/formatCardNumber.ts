@@ -12,7 +12,7 @@ type CardNumbers = {
 
 const CARD_FORMATTER_ERROR_MESSAGE = "카드 번호를 포맷팅할 수 없습니다.";
 
-export default function useFormattedCardNumbers(
+export default function formatCardNumber(
   cardNumbers: CardNumbers,
   userCardNetworkFormatter?: TypeOfCardNetworkPatterns
 ) {
