@@ -1,24 +1,25 @@
 import { checkEmptyValue, checkLength, checkNumber, checkYearRange, getError } from "../utils/vaildate";
 import usePureNumberState from "../usePureNumber/usePureNumberState";
+import { ERROR } from "../constants/message";
 
 const MAX_LENGTH = 2;
 
 export const expirationYearErrorCases = [
 	{
 		validate: (value: string) => checkEmptyValue(value),
-		errorMessage: "값을 입력해주세요.",
+		errorMessage: ERROR.EMPTY_VALUE,
 	},
 	{
 		validate: (value: string) => checkNumber(value),
-		errorMessage: "숫자만 입력 가능합니다.",
+		errorMessage: ERROR.ONLY_NUMBER,
 	},
 	{
 		validate: (value: string) => checkLength(value, MAX_LENGTH),
-		errorMessage: `${MAX_LENGTH}자리를 입력해주세요.`,
+		errorMessage: ERROR.MAX_LENGTH(MAX_LENGTH),
 	},
 	{
 		validate: (value: string) => checkYearRange(value),
-		errorMessage: "현재보다 이전년도는 입력할 수 없습니다.",
+		errorMessage: ERROR.BEFORE_YEAR,
 	},
 ];
 const useExpirationYear = () => {

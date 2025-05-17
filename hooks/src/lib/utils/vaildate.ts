@@ -1,6 +1,6 @@
 interface ErrorCase {
 	validate: (value: string) => boolean;
-	errorMessage: string;
+	errorMessage: string | ((value: string) => string);
 }
 
 export const checkEmptyValue = (value: string) => {
@@ -26,11 +26,13 @@ export const checkYearRange = (value: string) => {
 };
 
 export const getError = (value: string | null, errorCases: ErrorCase[]) => {
+	const input = value ?? "";
+
 	for (const errorCase of errorCases) {
-		if (errorCase.validate(value ?? "")) {
+		if (errorCase.validate(input)) {
 			return {
 				isValid: false,
-				errorMessage: errorCase.errorMessage,
+				errorMessage: typeof errorCase.errorMessage === "function" ? errorCase.errorMessage(input) : errorCase.errorMessage,
 			};
 		}
 	}

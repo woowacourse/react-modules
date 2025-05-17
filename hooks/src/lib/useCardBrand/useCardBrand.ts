@@ -1,6 +1,7 @@
 import { useMemo } from "react";
 import { detectCardBrand, formatCardNumber } from "../utils/cardBrand";
 import { getError } from "../utils/vaildate";
+import { ERROR } from "../constants/message";
 
 export type CardBrand = "AMEX" | "Diners" | "Visa" | "Mastercard" | "UnionPay" | null;
 
@@ -21,7 +22,7 @@ const useCardBrand = (cardNumber: string): CardBrandResult => {
 		() => [
 			{
 				validate: () => cardBrand === null,
-				errorMessage: "카드 번호에 맞는 카드사가 없습니다.",
+				errorMessage: ERROR.NO_CARD_BRAND,
 			},
 		],
 		[cardBrand]

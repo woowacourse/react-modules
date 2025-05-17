@@ -1,19 +1,20 @@
 import { checkEmptyValue, checkLength, checkNumber, getError } from "../utils/vaildate";
 import usePureNumberState from "../usePureNumber/usePureNumberState";
+import { ERROR } from "../constants/message";
 
 const MAX_LENGTH = 4;
 export const cardNumberErrorCases = [
 	{
 		validate: (value: string) => checkEmptyValue(value),
-		errorMessage: "값을 입력해주세요.",
+		errorMessage: ERROR.EMPTY_VALUE,
 	},
 	{
 		validate: (value: string) => checkNumber(value),
-		errorMessage: "숫자만 입력 가능합니다.",
+		errorMessage: ERROR.ONLY_NUMBER,
 	},
 	{
 		validate: (value: string) => checkLength(value, MAX_LENGTH),
-		errorMessage: `${MAX_LENGTH}자리를 입력해주세요.`,
+		errorMessage: ERROR.MAX_LENGTH(MAX_LENGTH),
 	},
 ];
 

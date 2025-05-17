@@ -1,10 +1,11 @@
 import { checkEmptyValue, getError } from "../utils/vaildate";
 import usePureNumberState from "../usePureNumber/usePureNumberState";
+import { ERROR } from "../constants/message";
 
 export const cardCompanyErrorCases = [
 	{
 		validate: (value: string) => checkEmptyValue(value),
-		errorMessage: "값을 입력해주세요.",
+		errorMessage: ERROR.EMPTY_VALUE,
 	},
 ];
 
