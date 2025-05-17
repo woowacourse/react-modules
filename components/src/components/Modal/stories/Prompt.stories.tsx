@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Modal, { ModalProps } from "../Modal";
 import meta from "./Modal.meta";
+import PromptModal from "../../ModalPreset/PromptModal";
 
 export default {
   ...meta,
@@ -149,6 +150,40 @@ export const PromptModalWithActionButtons = (args: ModalProps) => {
           </div>
         </div>
       </Modal>
+    </>
+  );
+};
+
+export const PromptModalPreset = (args: ModalProps) => {
+  const [isOpen, setIsOpen] = useState(false);
+  const [inputValue, setInputValue] = useState("");
+
+  const closeModal = () => {
+    setIsOpen(false);
+    args.onClose?.();
+  };
+
+  const openModal = () => setIsOpen(true);
+
+  const handleSubmit = () => {
+    alert(`입력된 쿠폰 번호: ${inputValue}`);
+    setInputValue("");
+  };
+
+  return (
+    <>
+      <button type="button" onClick={openModal}>
+        모달 열기
+      </button>
+      <PromptModal
+        inputValue={inputValue}
+        onChange={(e) => setInputValue(e.target.value)}
+        isOpen={isOpen}
+        onClose={closeModal}
+        onConfirm={handleSubmit}
+        placeholder="CGEXX46Z"
+        title={{ text: "쿠폰 번호를 입력해 주세요." }}
+      />
     </>
   );
 };
