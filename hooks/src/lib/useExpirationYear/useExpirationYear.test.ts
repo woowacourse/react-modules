@@ -1,45 +1,44 @@
 import { renderHook, act } from "@testing-library/react";
 import useExpirationYear from "./useExpirationYear";
-import { checkLength, checkNumber, checkYearRange } from "../utils/vaildate";
 
 describe("useExpirationYear 테스트", () => {
 	it("카드 유효 기간 연이 유효하게 입력되었을 때 isValid는 true, errorMessage는 빈 문자열인지 확인한다.", () => {
-		const { result } = renderHook(() => useExpirationYear([checkNumber, () => checkLength("25", 2), checkYearRange]));
+		const { result } = renderHook(() => useExpirationYear());
 
 		act(() => {
-			result.current.validate("25");
+			result.current.onChange("25");
 		});
 
-		expect(result.current.error).toEqual({ isValid: true, errorMessage: "" });
+		expect(result.current.cardExpirationYearError).toEqual({ isValid: true, errorMessage: "" });
 	});
 
 	it("카드 유효 기간 연도에 문자가 포함되었을 때 isValid는 false, errorMessage 값이 반환되는지 확인한다.", () => {
-		const { result } = renderHook(() => useExpirationYear([checkNumber]));
+		const { result } = renderHook(() => useExpirationYear());
 
 		act(() => {
-			result.current.validate("2ㄱ");
+			result.current.onChange("2ㄱ");
 		});
 
-		expect(result.current.error).toEqual({ isValid: false, errorMessage: "숫자만 입력 가능합니다." });
+		expect(result.current.cardExpirationYearError).toEqual({ isValid: false, errorMessage: "숫자만 입력 가능합니다." });
 	});
 
 	it("카드 유효 기간 연도 길이가 2자 미만일 경우 isValid는 false, errorMessage 값이 반환되는지 확인한다.", () => {
-		const { result } = renderHook(() => useExpirationYear([() => checkLength("3", 2)]));
+		const { result } = renderHook(() => useExpirationYear());
 
 		act(() => {
-			result.current.validate("2");
+			result.current.onChange("2");
 		});
 
-		expect(result.current.error).toEqual({ isValid: false, errorMessage: "2자리를 입력해주세요." });
+		expect(result.current.cardExpirationYearError).toEqual({ isValid: false, errorMessage: "2자리를 입력해주세요." });
 	});
 
 	it("카드 유효 기간 연도가 현재 연도보다 이전일 경우 isValid는 false, errorMessage 값이 반환되는지 확인한다.", () => {
-		const { result } = renderHook(() => useExpirationYear([checkYearRange]));
+		const { result } = renderHook(() => useExpirationYear());
 
 		act(() => {
-			result.current.validate("24");
+			result.current.onChange("24");
 		});
 
-		expect(result.current.error).toEqual({ isValid: false, errorMessage: "현재보다 이전년도는 입력할 수 없습니다." });
+		expect(result.current.cardExpirationYearError).toEqual({ isValid: false, errorMessage: "현재보다 이전년도는 입력할 수 없습니다." });
 	});
 });
