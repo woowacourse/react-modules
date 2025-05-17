@@ -1,9 +1,14 @@
 import { ButtonProps } from '../types/Button.type';
 import { ButtonStyle } from './Button.styles';
 
-const Button = ({ type, onClick, buttonText, width = '100%' }: ButtonProps) => {
+const Button = ({ buttonType, onClick, buttonText, width = '100%', ...props }: ButtonProps) => {
   return (
-    <button className={ButtonStyle(type, width)} onClick={onClick} type={type === 'confirm' ? 'submit' : 'button'}>
+    <button
+      className={ButtonStyle(buttonType, width)}
+      onClick={onClick}
+      type={buttonType === 'confirm' ? 'submit' : 'button'}
+      {...props}
+    >
       {buttonText}
     </button>
   );
