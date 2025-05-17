@@ -1,11 +1,10 @@
-import { ReactNode } from "react";
 import CancelButton from "./CancelButton";
 import ConfirmButton from "./ConfirmButton";
 import { ButtonProps } from "../Common/Button/Button";
 
 export interface ActionButtonsProps {
-  confirmText?: ReactNode;
-  cancelText?: ReactNode;
+  confirmText?: string;
+  cancelText?: string;
   onConfirm?: (e: React.MouseEvent<HTMLButtonElement>) => void;
   confirmProps?: ButtonProps;
   cancelProps?: ButtonProps;
