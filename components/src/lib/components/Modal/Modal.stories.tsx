@@ -1,6 +1,12 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
 import Modal from ".";
+import ModalRoot from "../ModalRoot";
+import ModalOverlay from "../ModalOverlay";
+import ModalContent from "../ModalContent";
+import ModalTitle from "../ModalTitle";
+import ModalClose from "../ModalClose";
+import ModalTrigger from "../ModalTrigger";
 
 const meta = {
   title: "Modal",
@@ -30,23 +36,23 @@ export const Default: Story = {
 
   render: () => {
     return (
-      <Modal.Root>
-        <Modal.Trigger>
+      <ModalRoot>
+        <ModalTrigger>
           <button>Open</button>
-        </Modal.Trigger>
+        </ModalTrigger>
         <Modal>
-          <Modal.Overlay />
-          <Modal.Content position="center">
-            <Modal.Title fontSize="25px" fontWeight="700">
+          <ModalOverlay />
+          <ModalContent position="center">
+            <ModalTitle fontSize="25px" fontWeight="700">
               모달 제목입니다.
-            </Modal.Title>
+            </ModalTitle>
             모달의 컨텐츠를 넣어주세요.
-            <Modal.Close>
+            <ModalClose>
               <button>Close</button>
-            </Modal.Close>
-          </Modal.Content>
+            </ModalClose>
+          </ModalContent>
         </Modal>
-      </Modal.Root>
+      </ModalRoot>
     );
   },
 };
