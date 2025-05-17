@@ -61,6 +61,7 @@ Modal.Input은 prompt 타입 모달에서만 사용해야 합니다. 현재 모�
 
 이 경고는 개발 모드에서만 표시되며, 사용자가 실제로 `Modal.Input` 컴포넌트와 상호작용할 때(클릭, 포커스, 입력)만 발생합니다. 최상의 사용자 경험과 일관된 디자인을 위해 `Modal.Input`은 항상 `prompt` 타입 모달에서만 사용하는 것이 권장됩니다.
 
+
 ## 기능 설명
 
 - 모달이 열린 상태에서 모달 외부 영역(Backdrop 영역)을 클릭하면 모달이 닫힙니다.
@@ -70,6 +71,175 @@ Modal.Input은 prompt 타입 모달에서만 사용해야 합니다. 현재 모�
 - 개발 모드에서 컴포넌트 사용 제한 경고를 제공합니다.
 - 모달 컴포넌트에서 직접 렌더링 여부를 제어하여 코드를 더 깔끔하게 유지할 수 있습니다.
 
+## 스타일 커스터마이징
+
+모든 서브 컴포넌트는 다음과 같은 공통 스타일 props를 제공합니다:
+- `className`: CSS 클래스 이름
+- `style`: 인라인 스타일 객체
+- `as`: 렌더링할 HTML 요소나 컴포넌트
+
+추가로 각 컴포넌트는 자주 사용되는 스타일 속성을 직접 설정할 수 있는 props를 제공합니다:
+
+### Modal.Header
+
+```ts
+interface HeaderProps {
+  padding?: string;
+  borderBottom?: string;
+}
+```
+
+### Modal.Title
+
+```ts
+interface TitleProps {
+  fontSize?: string;
+  fontWeight?: string;
+  color?: string;
+}
+```
+
+### Modal.CloseButton
+
+```ts
+interface CloseButtonProps {
+  size?: string;
+  color?: string;
+}
+```
+
+### Modal.Content
+
+```ts
+interface ContentProps {
+  padding?: string;
+}
+```
+
+### Modal.Input
+
+```ts
+interface InputProps {
+  type?: string;
+  width?: string;
+  height?: string;
+  borderRadius?: string;
+  borderColor?: string;
+  focusBorderColor?: string;
+  padding?: string;
+  disabled?: boolean;
+}
+```
+
+### Modal.Footer
+
+```ts
+interface FooterProps {
+  justifyContent?: string;
+  padding?: string;
+  borderTop?: string;
+  gap?: string;
+}
+```
+
+### Modal.Button
+
+```ts
+interface ButtonProps {
+  width?: string;
+  height?: string;
+  backgroundColor?: string;
+  textColor?: string;
+  borderRadius?: string;
+  borderColor?: string;
+  disabled?: boolean;
+}
+```
+
+## 스타일 커스터마이징 예시
+
+```tsx
+import { Modal } from "bunju-react-modal";
+import React from "react";
+
+function App() {
+  const [isOpen, setIsOpen] = React.useState(false);
+  const [inputValue, setInputValue] = React.useState("");
+
+  const handleOpenModal = () => {
+    setIsOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsOpen(false);
+  };
+
+  return (
+    <div>
+      <button onClick={handleOpenModal}>스타일 커스텀 모달 열기</button>
+      <Modal 
+        isOpen={isOpen} 
+        onClose={handleCloseModal}
+        modalType="prompt"
+        style={{ boxShadow: "0 8px 16px rgba(0, 0, 0, 0.2)" }}
+      >
+        <Modal.Header 
+          borderBottom="1px solid #eee"
+          padding="1rem 1.5rem"
+        >
+          <Modal.Title 
+            fontSize="1.5rem"
+            color="#333"
+          >
+            커스텀 스타일 제목
+          </Modal.Title>
+          <Modal.CloseButton 
+            onClick={handleCloseModal}
+            size="20px" 
+          />
+        </Modal.Header>
+        
+        <Modal.Content padding="1.5rem">
+          <p>스타일 커스터마이징 예시입니다:</p>
+          <Modal.Input
+            value={inputValue}
+            onChange={(e) => setInputValue(e.target.value)}
+            placeholder="여기에 입력하세요"
+            borderRadius="8px"
+            focusBorderColor="#3498db"
+            padding="12px"
+          />
+        </Modal.Content>
+        
+        <Modal.Footer
+          padding="0 1.5rem 1.5rem"
+          gap="1rem"
+        >
+          <Modal.Button 
+            onClick={handleCloseModal}
+            borderRadius="8px"
+            width="100px"
+          >
+            취소
+          </Modal.Button>
+          <Modal.Button 
+            primary
+            onClick={() => {
+              console.log("입력값:", inputValue);
+              handleCloseModal();
+            }}
+            backgroundColor="#3498db"
+            borderRadius="8px"
+            width="100px"
+          >
+            확인
+          </Modal.Button>
+        </Modal.Footer>
+      </Modal>
+    </div>
+  );
+}
+```
 ## 사용 예시
 
 ### 기본 사용법

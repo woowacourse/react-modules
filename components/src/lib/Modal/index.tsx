@@ -1,4 +1,10 @@
-import { PropsWithChildren, ReactNode, useRef, useEffect } from "react";
+import {
+  PropsWithChildren,
+  ReactNode,
+  useRef,
+  ElementType,
+  CSSProperties,
+} from "react";
 import * as S from "./Modal.styled";
 import CloseIcon from "@assets/close.svg";
 import useModalCloseEvent from "../../hooks/useModalCloseEvent";
@@ -13,38 +19,73 @@ export interface ModalProps {
   modalType?: ModalType;
   modalSize?: ModalSizeType;
   position?: ModalPositionType;
+  className?: string;
+  style?: CSSProperties;
 }
 
-export interface HeaderProps {
+interface StyleProps {
+  className?: string;
+  style?: CSSProperties;
+  as?: ElementType;
+}
+
+export interface HeaderProps extends StyleProps {
   children: ReactNode;
+  padding?: string;
+  borderBottom?: string;
 }
 
-export interface TitleProps {
+export interface TitleProps extends StyleProps {
   children: ReactNode;
+  fontSize?: string;
+  fontWeight?: string;
+  color?: string;
 }
 
-export interface CloseButtonProps {
+export interface CloseButtonProps extends StyleProps {
   onClick: () => void;
+  size?: string;
+  color?: string;
 }
 
-export interface ContentProps {
+export interface ContentProps extends StyleProps {
   children: ReactNode;
+  padding?: string;
 }
 
-export interface InputProps {
+export interface InputProps extends StyleProps {
   value: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   placeholder?: string;
+  type?: string;
+  width?: string;
+  height?: string;
+  borderRadius?: string;
+  borderColor?: string;
+  focusBorderColor?: string;
+  padding?: string;
+  disabled?: boolean;
 }
 
-export interface FooterProps {
+export interface FooterProps extends StyleProps {
   children: ReactNode;
+  justifyContent?: string;
+  padding?: string;
+  borderTop?: string;
+  gap?: string;
 }
 
-export interface ButtonProps {
+export interface ButtonProps extends StyleProps {
   onClick: () => void;
   primary?: boolean;
   children: ReactNode;
+  width?: string;
+  height?: string;
+  backgroundColor?: string;
+  textColor?: string;
+  borderRadius?: string;
+  borderColor?: string;
+  disabled?: boolean;
 }
 
 let currentModalType: ModalType = "alert";
@@ -56,6 +97,8 @@ function Modal({
   modalType = "alert",
   modalSize = "medium",
   position = "center",
+  className,
+  style,
 }: PropsWithChildren<ModalProps>) {
   currentModalType = modalType;
 
@@ -68,12 +111,13 @@ function Modal({
     <S.Backdrop id="backdrop">
       <S.ModalContainer
         ref={focusTrapRef}
-        modalType={modalType}
         modalSize={modalSize}
         position={position}
         role="dialog"
         aria-modal="true"
         tabIndex={-1}
+        className={className}
+        style={style}
       >
         {children}
       </S.ModalContainer>
@@ -81,27 +125,120 @@ function Modal({
   );
 }
 
-Modal.Header = function Header({ children }: HeaderProps) {
-  return <S.ModalHeader>{children}</S.ModalHeader>;
-};
-
-Modal.Title = function Title({ children }: TitleProps) {
-  return <S.Title>{children}</S.Title>;
-};
-
-Modal.CloseButton = function CloseButton({ onClick }: CloseButtonProps) {
+Modal.Header = function Header({
+  children,
+  className,
+  style,
+  as,
+  padding,
+  borderBottom,
+}: HeaderProps) {
   return (
-    <S.CloseButton type="button" onClick={onClick} aria-label="모달 닫기">
-      <img src={CloseIcon} alt="닫기 버튼" />
+    <S.ModalHeader
+      as={as}
+      className={className}
+      style={{
+        padding,
+        borderBottom,
+        ...style,
+      }}
+    >
+      {children}
+    </S.ModalHeader>
+  );
+};
+
+Modal.Title = function Title({
+  children,
+  className,
+  style,
+  as,
+  fontSize,
+  fontWeight,
+  color,
+}: TitleProps) {
+  return (
+    <S.Title
+      as={as}
+      className={className}
+      style={{
+        fontSize,
+        fontWeight,
+        color,
+        ...style,
+      }}
+    >
+      {children}
+    </S.Title>
+  );
+};
+
+Modal.CloseButton = function CloseButton({
+  onClick,
+  className,
+  style,
+  as,
+  size,
+  color,
+}: CloseButtonProps) {
+  return (
+    <S.CloseButton
+      as={as}
+      type="button"
+      onClick={onClick}
+      aria-label="모달 닫기"
+      className={className}
+      style={{
+        color,
+        ...style,
+      }}
+    >
+      <img
+        src={CloseIcon}
+        alt="닫기 버튼"
+        style={{ width: size, height: size }}
+      />
     </S.CloseButton>
   );
 };
 
-Modal.Content = function Content({ children }: ContentProps) {
-  return <S.ModalContent>{children}</S.ModalContent>;
+Modal.Content = function Content({
+  children,
+  className,
+  style,
+  as,
+  padding,
+}: ContentProps) {
+  return (
+    <S.ModalContent
+      as={as}
+      className={className}
+      style={{
+        padding,
+        ...style,
+      }}
+    >
+      {children}
+    </S.ModalContent>
+  );
 };
 
-Modal.Input = function Input({ value, onChange, placeholder }: InputProps) {
+Modal.Input = function Input({
+  value,
+  onChange,
+  placeholder,
+  className,
+  style,
+  as,
+  type = "text",
+  width,
+  height,
+  borderRadius,
+  borderColor,
+  focusBorderColor = "transparent",
+  padding,
+  disabled,
+}: InputProps) {
   const hasInteractedRef = useRef(false);
 
   const showWarningIfNeeded = () => {
@@ -122,7 +259,8 @@ Modal.Input = function Input({ value, onChange, placeholder }: InputProps) {
 
   return (
     <S.ModalInput
-      type="text"
+      as={as || "input"}
+      type={type}
       value={value}
       onChange={(e) => {
         showWarningIfNeeded();
@@ -135,21 +273,80 @@ Modal.Input = function Input({ value, onChange, placeholder }: InputProps) {
         showWarningIfNeeded();
       }}
       placeholder={placeholder}
+      className={className}
+      style={{
+        width,
+        height,
+        borderRadius,
+        borderColor,
+        padding,
+        ...style,
+      }}
+      disabled={disabled}
+      data-focus-border-color={focusBorderColor}
     />
   );
 };
 
-Modal.Footer = function Footer({ children }: FooterProps) {
-  return <S.ModalFooter>{children}</S.ModalFooter>;
+Modal.Footer = function Footer({
+  children,
+  className,
+  style,
+  as,
+  justifyContent = "flex-end",
+  padding,
+  borderTop,
+  gap,
+}: FooterProps) {
+  return (
+    <S.ModalFooter
+      as={as}
+      className={className}
+      style={{
+        justifyContent,
+        padding,
+        borderTop,
+        gap,
+        ...style,
+      }}
+    >
+      {children}
+    </S.ModalFooter>
+  );
 };
 
 Modal.Button = function Button({
   onClick,
   primary = false,
   children,
+  className,
+  style,
+  as,
+  width,
+  height,
+  backgroundColor,
+  textColor,
+  borderRadius,
+  borderColor,
+  disabled,
 }: ButtonProps) {
   return (
-    <S.Button primary={primary} onClick={onClick}>
+    <S.Button
+      as={as}
+      primary={primary}
+      onClick={onClick}
+      className={className}
+      style={{
+        width,
+        height,
+        backgroundColor: backgroundColor || (primary ? undefined : "white"),
+        color: textColor,
+        borderRadius,
+        borderColor,
+        ...style,
+      }}
+      disabled={disabled}
+    >
       {children}
     </S.Button>
   );

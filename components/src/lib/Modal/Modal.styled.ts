@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { ElementType } from "react";
 
 export type ModalSizeType = "small" | "medium" | "large";
 export type ModalPositionType = "bottom" | "center";
@@ -19,6 +20,7 @@ export const Backdrop = styled.div`
 export const ModalContainer = styled.div<{
   modalSize: ModalSizeType;
   position: ModalPositionType;
+  as?: ElementType;
 }>`
   position: fixed;
   background: #fff;
@@ -55,6 +57,7 @@ export const ModalContainer = styled.div<{
           })()}
         `}
 `;
+
 export const ModalHeader = styled.div`
   display: flex;
   justify-content: space-between;
@@ -96,9 +99,23 @@ export const ModalInput = styled.input`
   margin: 1rem 0;
   font-size: 1rem;
   &:focus {
-    outline: 2px solid #4d90fe;
-    border-color: #4d90fe;
-    box-shadow: 0 0 0 3px rgba(77, 144, 254, 0.2);
+    outline: 2px solid
+      ${(props: { "data-focus-border-color": string }) =>
+        props["data-focus-border-color"] || "#4d90fe"};
+    border-color: ${(props: { "data-focus-border-color": string }) =>
+      props["data-focus-border-color"] || "#4d90fe"};
+    box-shadow: 0 0 0 3px
+      ${(props) => {
+        const color = props["data-focus-border-color"] || "#4d90fe";
+        // RGBA 변환 - 기본 색상에 0.2 투명도 적용
+        return color.startsWith("#")
+          ? `${color}33` // HEX 색상에 33 (20% 투명도) 추가
+          : `${color.replace(/[^,]+$/, "0.2)")}`; // RGB/RGBA 색상에 0.2 투명도 적용
+      }};
+  }
+  &:disabled {
+    background-color: #f5f5f5;
+    cursor: not-allowed;
   }
 `;
 
@@ -135,5 +152,9 @@ export const Button = styled.button<{ primary?: boolean }>`
   &:focus {
     outline: 2px solid #4d90fe;
     outline-offset: 2px;
+  }
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
   }
 `;
