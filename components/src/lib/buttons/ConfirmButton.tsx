@@ -1,7 +1,7 @@
 import { ConfirmButtonStyle } from "../styles";
-import ModalButton from "./ModalButton";
+import ModalButton from "./Button";
 
-interface ConfirmButtonProps extends React.ComponentProps<typeof ModalButton> {
+export interface ConfirmButtonProps extends React.ComponentProps<typeof ModalButton> {
   onConfirm?: () => void;
   onHide: () => void;
 }
