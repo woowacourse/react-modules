@@ -1,5 +1,15 @@
 import { css } from "@emotion/react";
 
+export const baseButtonStyle = css`
+  border: none;
+  background: transparent;
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+`;
+
 export const ConfirmButtonStyle = (disabled?: boolean) => css`
   border: 0;
   background-color: ${disabled ? "#ccc" : "#333333"};
