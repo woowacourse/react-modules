@@ -19,7 +19,7 @@ export const AlertModal: Story = {
     const [isOpen, setIsOpen] = useState(false);
     return (
       <>
-        <button onClick={() => setIsOpen((prev) => !prev)} id="trigger-button">
+        <button onClick={() => setIsOpen((prev) => !prev)}>
           모달창 trigger
         </button>
         <Modal
@@ -50,7 +50,7 @@ export const ConfirmModal: Story = {
     const [isOpen, setIsOpen] = useState(false);
     return (
       <>
-        <button onClick={() => setIsOpen((prev) => !prev)} id="trigger-button">
+        <button onClick={() => setIsOpen((prev) => !prev)}>
           모달창 trigger
         </button>
         <Modal
@@ -85,7 +85,7 @@ export const PromptModal: Story = {
     const [value, setValue] = useState("");
     return (
       <>
-        <button onClick={() => setIsOpen((prev) => !prev)} id="trigger-button">
+        <button onClick={() => setIsOpen((prev) => !prev)}>
           모달창 trigger
         </button>
         <Modal
