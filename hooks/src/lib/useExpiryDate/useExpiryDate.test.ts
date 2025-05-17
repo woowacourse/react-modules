@@ -1,6 +1,6 @@
 import { renderHook, act } from '@testing-library/react';
 import useExpiryDate from './useExpiryDate';
-import { ERROR_MESSAGE } from './constants/errorMessage';
+import { ERROR_MESSAGE } from '../constants/errorMessage';
 
 test('월 입력에 1에서 12 사이의 숫자를 입력하면 정상 작동한다. ', () => {
   const { result } = renderHook(() => useExpiryDate());

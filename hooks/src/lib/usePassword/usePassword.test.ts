@@ -1,6 +1,6 @@
 import { renderHook, act } from '@testing-library/react';
 import usePassword from './usePassword';
-import { ERROR_MESSAGE } from './constants/errorMessage';
+import { ERROR_MESSAGE } from '../constants/errorMessage';
 
 test('3자리 숫자를 입력하면 정상 작동한다.', () => {
   const { result } = renderHook(() => usePassword());

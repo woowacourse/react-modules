@@ -1,6 +1,6 @@
 import { renderHook, act } from '@testing-library/react';
 import useCvcNumber from './useCvcNumber';
-import { ERROR_MESSAGE } from './constants/errorMessage';
+import { ERROR_MESSAGE } from '../constants/errorMessage';
 
 test('3자리 숫자가 입력되면 정상 작동한다.', () => {
   const { result } = renderHook(() => useCvcNumber());
