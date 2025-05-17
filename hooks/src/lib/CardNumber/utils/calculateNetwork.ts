@@ -3,12 +3,12 @@ import CardNetwork from "../types/CardNetwork";
 const calculateNetwork = (value: string): CardNetwork => {
   let calculatedValue: number;
 
-  calculatedValue = parseInt(value[0], 10);
+  calculatedValue = Number(value[0]);
   if (calculatedValue === 4) {
     return { name: "VISA", length: 16, formatting: [4, 4, 4, 4] };
   }
 
-  calculatedValue = parseInt(value.slice(0, 2), 10);
+  calculatedValue = Number(value.slice(0, 2));
   if (51 <= calculatedValue && calculatedValue <= 55) {
     return { name: "MASTER_CARD", length: 16, formatting: [4, 4, 4, 4] };
   }
@@ -21,7 +21,7 @@ const calculateNetwork = (value: string): CardNetwork => {
     return { name: "DINERS", length: 14, formatting: [4, 6, 4, 0] };
   }
 
-  calculatedValue = parseInt(value.slice(0, 6), 10);
+  calculatedValue = Number(value.slice(0, 6));
   if (622126 <= calculatedValue && calculatedValue < 622925)
     return { name: "UNION_PAY", length: 16, formatting: [4, 4, 4, 4] };
 
