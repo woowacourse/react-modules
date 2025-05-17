@@ -18,7 +18,7 @@ export type CurriedInputChangeHandler = (
   index: number
 ) => (e: React.ChangeEvent<HTMLInputElement>) => void;
 
-export interface ValidationHookReturnType {
+export interface HookReturnType {
   inputStates: string | string[];
   errorMessage: ErrorMessageType | string;
   onChange: CurriedInputChangeHandler;
@@ -39,15 +39,14 @@ export interface ExpirationDateErrors {
   year: SingleErrorType;
 }
 
-export interface ExpirationDateValidationReturnType {
+export interface ExpirationDateHookReturnType {
   inputStates: ExpirationDateInputs;
   errorMessage: ErrorMessageType;
   onChange: ExpirationDateChangeHandler;
   noError: boolean;
 }
 
-export interface CarNumberValidationHookReturnType
-  extends ValidationHookReturnType {
+export interface CarNumberHookReturnType extends HookReturnType {
   inputStates: string;
   errorMessage: ErrorMessageType | string;
   onChange: CurriedInputChangeHandler;
