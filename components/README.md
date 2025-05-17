@@ -16,7 +16,6 @@ useModal 훅과 Modal 컴포넌트를 함께 사용하면 간편하게 모달 �
 ### Modal
 
 - isOpen: 모달이 보이는지 여부(`boolean`)
-- title: 모달 상단에 표시할 제목(`string`)
 
 - onClose: 모달 닫기 시 호출되는 함수
 - $zIndex: 모달의 기본 z-index, modalBackdrop = 1000, modalContainer = 1001 (`number`)
