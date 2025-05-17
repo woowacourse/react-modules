@@ -6,6 +6,14 @@ jest.mock("./utils/detectCardBrand", () => ({
   detectCardBrand: jest.fn(),
 }));
 
+const brandCases = [
+  { input: "4111", brand: "Visa" },
+  { input: "5111", brand: "MasterCard" },
+  { input: "3411", brand: "AMEX" },
+  { input: "3611", brand: "Diners" },
+  { input: "6221261111111111", brand: "UnionPay" },
+];
+
 describe("useCardBrand", () => {
   beforeEach(() => {
     jest.clearAllMocks();
@@ -19,45 +27,16 @@ describe("useCardBrand", () => {
     expect(result.current).toBeNull();
   });
 
-  it('Visa 카드 번호를 감지하면 "Visa"를 반환해야 함', () => {
-    (detectCardBrand as jest.Mock).mockReturnValue("Visa");
+  it.each(brandCases)(
+    "$brand 카드 번호를 감지하면 $brand를 반환해야 함",
+    ({ input, brand }) => {
+      (detectCardBrand as jest.Mock).mockReturnValue(brand);
 
-    const { result } = renderHook(() => useCardBrand("4111"));
+      const { result } = renderHook(() => useCardBrand(input));
 
-    expect(result.current).toBe("Visa");
-  });
-
-  it('MasterCard 카드 번호를 감지하면 "MasterCard"를 반환해야 함', () => {
-    (detectCardBrand as jest.Mock).mockReturnValue("MasterCard");
-
-    const { result } = renderHook(() => useCardBrand("5111"));
-
-    expect(result.current).toBe("MasterCard");
-  });
-
-  it('AMEX 카드 번호를 감지하면 "AMEX"를 반환해야 함', () => {
-    (detectCardBrand as jest.Mock).mockReturnValue("AMEX");
-
-    const { result } = renderHook(() => useCardBrand("3411"));
-
-    expect(result.current).toBe("AMEX");
-  });
-
-  it('Diners 카드 번호를 감지하면 "Diners"를 반환해야 함', () => {
-    (detectCardBrand as jest.Mock).mockReturnValue("Diners");
-
-    const { result } = renderHook(() => useCardBrand("3611"));
-
-    expect(result.current).toBe("Diners");
-  });
-
-  it('UnionPay 카드 번호를 감지하면 "UnionPay"를 반환해야 함', () => {
-    (detectCardBrand as jest.Mock).mockReturnValue("UnionPay");
-
-    const { result } = renderHook(() => useCardBrand("6221261111111111"));
-
-    expect(result.current).toBe("UnionPay");
-  });
+      expect(result.current).toBe(brand);
+    }
+  );
 
   it("카드 번호가 변경되면 브랜드도 업데이트되어야 함", () => {
     (detectCardBrand as jest.Mock)
