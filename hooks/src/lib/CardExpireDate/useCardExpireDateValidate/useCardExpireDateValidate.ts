@@ -3,7 +3,7 @@ import { useState } from "react";
 import validateRange from "../../utils/validateRange";
 import { checkBasicValidation } from "../../utils/checkBasicValidation";
 
-import { validationMessages } from "../../../constants/validationMessages";
+import { staticValidationMessages } from "../../../constants/validationMessages";
 
 type CardExpireDate = {
   month: string;
@@ -51,7 +51,7 @@ const useCardExpireDateValidate = () => {
           month: false,
         });
 
-        setErrorMessage(validationMessages.rangeMonth);
+        setErrorMessage(staticValidationMessages.rangeMonth);
         return false;
       }
     }
@@ -69,7 +69,7 @@ const useCardExpireDateValidate = () => {
           year: false,
         });
 
-        setErrorMessage(validationMessages.invalidYear);
+        setErrorMessage(staticValidationMessages.invalidYear);
         return false;
       }
     }
@@ -87,7 +87,7 @@ const useCardExpireDateValidate = () => {
         month: false,
       });
 
-      setErrorMessage(validationMessages.invalidExpire);
+      setErrorMessage(staticValidationMessages.invalidExpire);
       return false;
     }
 

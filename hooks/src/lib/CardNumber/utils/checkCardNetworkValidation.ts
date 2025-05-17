@@ -3,7 +3,7 @@ import getCardPrefixNumber from "./getCardPrefixNumber";
 
 import ValidateCardNumbersParams from "../types/ValidateCardNumbersParams";
 
-import { validationMessages } from "../../../constants/validationMessages";
+import { dynamicValidationMessages } from "../../../constants/validationMessages";
 
 const checkCardNetworkValidation = ({
   key,
@@ -28,7 +28,9 @@ const checkCardNetworkValidation = ({
   if (totalLength > network.length) {
     return {
       isValid: false,
-      errorMessage: validationMessages.limitedCardNetworkLength(network.length),
+      errorMessage: dynamicValidationMessages.limitedCardNetworkLength(
+        network.length
+      ),
     };
   }
 
