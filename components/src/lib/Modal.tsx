@@ -1,131 +1,306 @@
 import styled from '@emotion/styled';
-import { ReactNode, useEffect } from 'react';
-import Button from './common/Button';
+import useEscapeKeyClose from './hooks/useEscapePress';
+import { createContext, useContext } from 'react';
+import CloseIconButton from './components/CloseIconButton';
+import {
+  AlertContentProps,
+  ButtonContainerProps,
+  ConfirmContentProps,
+  Direction,
+  ModalContentProps,
+  ModalProps,
+  OverlayProps,
+  Position,
+  PromptContentProps,
+  Size,
+} from './types/props';
+import TextButton from './components/TextButton';
+import handleFocusWrap from './utils/handleFocusWrap';
+import useModalContentLogic from './hooks/useModalContentLogic';
 
-type Position = 'center' | 'bottom';
+const ModalContext = createContext<{ onClose: () => void; position: Position }>({
+  onClose: () => {},
+  position: 'center',
+});
 
-interface ModalProps {
-  title: string;
-  isOpen: boolean;
-  onClose: () => void;
-  onConfirm?: () => void;
-  position?: Position;
-  hasTopCloseButton?: boolean;
-  hasBottomCloseButton?: boolean;
-  hasConfirmButton?: boolean;
-  content: ReactNode;
-}
-
-function Modal({
-  title,
+const Modal = ({
+  children,
   isOpen,
   onClose,
-  onConfirm,
+  closeOnEscape = true,
   position = 'center',
-  content,
-  hasTopCloseButton = true,
-  hasBottomCloseButton = false,
-  hasConfirmButton = false,
-}: ModalProps) {
-  useEffect(() => {
-    if (!isOpen) return;
-
-    function handleKeyDown(e: KeyboardEvent) {
-      if (e.key === 'Escape') onClose();
-    }
-
-    addEventListener('keydown', handleKeyDown);
-
-    return () => {
-      removeEventListener('keydown', handleKeyDown);
-    };
-  }, [isOpen]);
+}: ModalProps) => {
+  useEscapeKeyClose(closeOnEscape, isOpen, onClose);
 
   return (
     <>
       {isOpen && (
-        <div id="modal">
-          <ModalOverlay data-testid="modal-overlay" onClick={onClose} />
-          <ModalContent position={position}>
-            <TitleSection>
-              <TitleText>{title}</TitleText>
-              {hasTopCloseButton && <CloseButton onClick={onClose}>✕</CloseButton>}
-            </TitleSection>
-            <MainSection>
-              {content}
-              {hasConfirmButton && <Button text="동의하고 저장하기" onClick={onConfirm} />}
-              {hasBottomCloseButton && (
-                <Button
-                  text="닫기"
-                  onClick={onClose}
-                  color="#8b95a1"
-                  backgroundColor="transparent"
-                />
-              )}
-            </MainSection>
-          </ModalContent>
-        </div>
+        <ModalContext.Provider value={{ onClose, position }}>
+          <div id="modal">{children}</div>
+        </ModalContext.Provider>
       )}
     </>
   );
-}
+};
+
+const Overlay = ({ closeOnClick = true }: OverlayProps) => {
+  const { onClose } = useContext(ModalContext);
+
+  const handleClick = () => {
+    if (!closeOnClick) return;
+    onClose();
+  };
+
+  return <S.ModalOverlay data-testid="modal-overlay" onClick={handleClick} />;
+};
+
+const Content = ({
+  children,
+  hasTopCloseButton = true,
+  size = 'small',
+  ...props
+}: ModalContentProps) => {
+  const { onClose, position, contentRef } = useModalContentLogic();
+
+  return (
+    <S.ModalContent
+      ref={contentRef}
+      position={position}
+      size={size}
+      onKeyDown={(e) => handleFocusWrap(e, contentRef)}
+      {...props}>
+      {hasTopCloseButton && <CloseIconButton data-testid="modal-close" onClick={() => onClose()} />}
+      {children}
+    </S.ModalContent>
+  );
+};
+
+const AlertContent = ({
+  children,
+  hasTopCloseButton = true,
+  size = 'small',
+  alertButton = {},
+  ...props
+}: AlertContentProps) => {
+  const { onClose, position, contentRef } = useModalContentLogic();
+
+  const {
+    text = '확인',
+    color = '#fff',
+    backgroundColor = '#333',
+    onClick = onClose,
+  } = alertButton;
+
+  return (
+    <S.ModalContent
+      ref={contentRef}
+      position={position}
+      size={size}
+      onKeyDown={(e) => handleFocusWrap(e, contentRef)}
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'space-between',
+      }}
+      {...props}>
+      {hasTopCloseButton && <CloseIconButton data-testid="modal-close" onClick={onClose} />}
+      {children}
+      <ButtonContainer>
+        <TextButton text={text} color={color} backgroundColor={backgroundColor} onClick={onClick} />
+      </ButtonContainer>
+    </S.ModalContent>
+  );
+};
+
+const ConfirmContent = ({
+  children,
+  hasTopCloseButton = true,
+  size = 'small',
+  confirmButton = {},
+  cancelButton = {},
+  ...props
+}: ConfirmContentProps) => {
+  const { onClose, position, contentRef } = useModalContentLogic();
+
+  const {
+    text: confirmText = '확인',
+    color: confirmColor = '#fff',
+    backgroundColor: confirmBackgroundColor = '#333',
+    onClick: onConfirmClick = onClose,
+  } = confirmButton;
+
+  const {
+    text: cancelText = '취소',
+    color: cancelColor = '#8B95A1',
+    backgroundColor: cancelBackgroundColor = 'transparent',
+    onClick: onCancelClick = onClose,
+  } = cancelButton;
+
+  return (
+    <S.ModalContent
+      ref={contentRef}
+      position={position}
+      size={size}
+      onKeyDown={(e) => handleFocusWrap(e, contentRef)}
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'space-between',
+      }}
+      {...props}>
+      {hasTopCloseButton && <CloseIconButton data-testid="modal-close" onClick={onClose} />}
+      {children}
+      <ButtonContainer>
+        <TextButton
+          text={cancelText}
+          color={cancelColor}
+          backgroundColor={cancelBackgroundColor}
+          onClick={onCancelClick}
+        />
+        <TextButton
+          text={confirmText}
+          color={confirmColor}
+          backgroundColor={confirmBackgroundColor}
+          onClick={onConfirmClick}
+        />
+      </ButtonContainer>
+    </S.ModalContent>
+  );
+};
+
+const PromptContent = ({
+  inputValue,
+  setInputValue,
+  children,
+  hasTopCloseButton = true,
+  size = 'small',
+  confirmButton = {},
+  cancelButton = {},
+  ...props
+}: PromptContentProps) => {
+  const { onClose, position, contentRef } = useModalContentLogic();
+
+  const {
+    text: confirmText = '확인',
+    color: confirmColor = '#fff',
+    backgroundColor: confirmBackgroundColor = '#333',
+    onClick: onConfirmClick = onClose,
+  } = confirmButton;
+
+  const {
+    text: cancelText = '취소',
+    color: cancelColor = '#8B95A1',
+    backgroundColor: cancelBackgroundColor = 'transparent',
+    onClick: onCancelClick = onClose,
+  } = cancelButton;
+
+  return (
+    <S.ModalContent
+      ref={contentRef}
+      position={position}
+      size={size}
+      onKeyDown={(e) => handleFocusWrap(e, contentRef)}
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'space-between',
+      }}
+      {...props}>
+      {hasTopCloseButton && <CloseIconButton data-testid="modal-close" onClick={onClose} />}
+      {children}
+      <S.Input value={inputValue} onChange={(e) => setInputValue(e.target.value)} />
+      <ButtonContainer>
+        <TextButton
+          text={cancelText}
+          color={cancelColor}
+          backgroundColor={cancelBackgroundColor}
+          onClick={onCancelClick}
+        />
+        <TextButton
+          text={confirmText}
+          color={confirmColor}
+          backgroundColor={confirmBackgroundColor}
+          onClick={onConfirmClick}
+        />
+      </ButtonContainer>
+    </S.ModalContent>
+  );
+};
+
+const ButtonContainer = ({ children, direction = 'row' }: ButtonContainerProps) => {
+  return <S.ButtonContainerStyle direction={direction}>{children}</S.ButtonContainerStyle>;
+};
+
+const Title = ({ title }: { title: string }) => {
+  return <S.TitleText>{title}</S.TitleText>;
+};
+
+Modal.Overlay = Overlay;
+Modal.Content = Content;
+Modal.AlertContent = AlertContent;
+Modal.ConfirmContent = ConfirmContent;
+Modal.PromptContent = PromptContent;
+Modal.Title = Title;
 
 export default Modal;
 
-const ModalContent = styled.div<{ position: Position }>`
-  height: 216px;
-  width: 304px;
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: white;
-  padding: 24px 32px;
-  border-radius: 8px;
-  color: #000;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+const S = {
+  ModalContent: styled.div<{ position: Position; size: Size }>`
+    height: 216px;
+    width: ${({ size }) => {
+      if (size === 'small') return 320;
+      if (size === 'medium') return 480;
+      if (size === 'large') return 600;
+    }}px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 24px 32px;
+    border-radius: 8px;
+    color: #000;
 
-  ${({ position }) =>
-    position === 'bottom' &&
-    `
+    ${({ position }) =>
+      position === 'bottom' &&
+      `
       width: 100%;
       top: auto;
       left: 0;
       transform: none;
       bottom: 0;
     `}
-`;
+  `,
 
-const ModalOverlay = styled.div`
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.35);
-`;
+  ModalOverlay: styled.div`
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.35);
+  `,
 
-const CloseButton = styled.div`
-  cursor: pointer;
-`;
+  TitleText: styled.p`
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  `,
 
-const TitleSection = styled.section`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 24px;
-`;
+  ButtonContainerStyle: styled.div<{ direction: Direction }>`
+    display: flex;
+    flex-direction: ${({ direction }) => direction};
+    justify-content: end;
+    gap: 12px;
 
-const TitleText = styled.p`
-  font-size: 18px;
-  font-weight: bold;
-`;
+    & > button {
+      ${({ direction }) => direction === 'row' && `width: auto;`}
+    }
+  `,
 
-const MainSection = styled.section`
-  flex-grow: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-`;
+  Input: styled.input`
+    border: 2px solid black;
+    border-radius: 2px;
+    padding: 8px;
+  `,
+};

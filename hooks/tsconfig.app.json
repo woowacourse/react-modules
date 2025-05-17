@@ -21,8 +21,10 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
     "noUncheckedSideEffectImports": true,
+
+    // dts
     "declaration": true,
     "declarationDir": "dist"
   },
-  "include": ["src/lib", "src"]
+  "include": ["src", "src/lib"]
 }
