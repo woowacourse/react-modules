@@ -62,7 +62,7 @@ const useCardNumber = (initialState: string = "") => {
     getCardType()
   );
 
-  const getFormattedCardNumber = () => {
+  const formattedCardNumber = (() => {
     const cardType = getCardType();
     if (cardType === "unknown") {
       return cardNumber;
@@ -79,7 +79,8 @@ const useCardNumber = (initialState: string = "") => {
       // 6221 2612 3456 7890
       return cardNumber.replace(/(\d{4})(\d{4})(\d{4})(\d{4})/, "$1 $2 $3 $4");
     }
-  };
+    return cardNumber;
+  })();
 
   return {
     cardNumber,
@@ -87,7 +88,8 @@ const useCardNumber = (initialState: string = "") => {
     cardType: getCardType(),
     isValid,
     errorMessage,
-    getFormattedCardNumber,
+    formattedCardNumber,
+    getFormattedCardNumber: () => formattedCardNumber,
   };
 };
 
