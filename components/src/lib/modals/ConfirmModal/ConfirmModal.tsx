@@ -10,7 +10,7 @@ type ConfirmModalProps = {
   size?: "small" | "medium" | "large";
   hasCloseButton?: boolean;
   onClose: () => void;
-  onConfirm?: () => void;
+  onConfirm: () => void;
 };
 
 const ConfirmModal = ({
