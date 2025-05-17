@@ -1,8 +1,8 @@
 import { StyledInput } from "./Input.styled";
 import InputProps from "./Input.types";
 
-const Input = ({ placeholder }: InputProps) => {
-  return <StyledInput placeholder={placeholder} />;
+const Input = ({ disabled = false, ...props }: InputProps) => {
+  return <StyledInput disabled={disabled} {...props} />;
 };
 
 export default Input;
