@@ -1,4 +1,5 @@
 import { CARD_BRANDS } from "./constants";
+import { formatCardNumber, FORMAT_PATTERNS } from "./cardFormatUtils";
 
 export const cardBranRule = {
   Visa: {
@@ -6,9 +7,11 @@ export const cardBranRule = {
     length: 16,
     ranges: [[4]],
     format: (cardNumber: string) =>
-      cardNumber
-        .replace(/(\d{4})(\d{4})(\d{4})(\d{0,4})/, "$1 $2 $3 $4")
-        .split(" "),
+      formatCardNumber({
+        pattern: FORMAT_PATTERNS.FourFourFourFour,
+        cardNumber,
+        groupCount: 4,
+      }),
     validateLength: (cardNumber: string) =>
       validateCardNumberLength({
         cardNumber,
@@ -16,14 +19,17 @@ export const cardBranRule = {
         brand: CARD_BRANDS.Visa,
       }),
   },
+
   MasterCard: {
     inputCount: 4,
     length: 16,
     ranges: [[51, 55]],
     format: (cardNumber: string) =>
-      cardNumber
-        .replace(/(\d{4})(\d{4})(\d{4})(\d{0,4})/, "$1 $2 $3 $4")
-        .split(" "),
+      formatCardNumber({
+        pattern: FORMAT_PATTERNS.FourFourFourFour,
+        cardNumber,
+        groupCount: 4,
+      }),
     validateLength: (cardNumber: string) =>
       validateCardNumberLength({
         cardNumber,
@@ -31,12 +37,17 @@ export const cardBranRule = {
         brand: CARD_BRANDS.MasterCard,
       }),
   },
+
   Diners: {
     inputCount: 3,
     length: 14,
     ranges: [[36]],
     format: (cardNumber: string) =>
-      cardNumber.replace(/(\d{4})(\d{6})(\d{0,4})/, "$1 $2 $3").split(" "),
+      formatCardNumber({
+        pattern: FORMAT_PATTERNS.FourSixFour,
+        cardNumber,
+        groupCount: 3,
+      }),
     validateLength: (cardNumber: string) =>
       validateCardNumberLength({
         cardNumber,
@@ -44,12 +55,17 @@ export const cardBranRule = {
         brand: CARD_BRANDS.Diners,
       }),
   },
+
   AMEX: {
     inputCount: 3,
     length: 15,
     ranges: [[34], [37]],
     format: (cardNumber: string) =>
-      cardNumber.replace(/(\d{4})(\d{6})(\d{0,5})/, "$1 $2 $3").split(" "),
+      formatCardNumber({
+        pattern: FORMAT_PATTERNS.FourSixFive,
+        cardNumber,
+        groupCount: 3,
+      }),
     validateLength: (cardNumber: string) =>
       validateCardNumberLength({
         cardNumber,
@@ -57,6 +73,7 @@ export const cardBranRule = {
         brand: CARD_BRANDS.AMEX,
       }),
   },
+
   UnionPay: {
     inputCount: 4,
     length: 16,
@@ -66,9 +83,11 @@ export const cardBranRule = {
       [6282, 6288],
     ],
     format: (cardNumber: string) =>
-      cardNumber
-        .replace(/(\d{4})(\d{4})(\d{4})(\d{0,4})/, "$1 $2 $3 $4")
-        .split(" "),
+      formatCardNumber({
+        pattern: FORMAT_PATTERNS.FourFourFourFour,
+        cardNumber,
+        groupCount: 4,
+      }),
     validateLength: (cardNumber: string) =>
       validateCardNumberLength({
         cardNumber,
@@ -76,6 +95,7 @@ export const cardBranRule = {
         brand: CARD_BRANDS.UnionPay,
       }),
   },
+
   Unknown: {
     inputCount: 1,
     length: 16,
