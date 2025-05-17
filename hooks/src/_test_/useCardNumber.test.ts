@@ -1,61 +1,113 @@
 import { renderHook, act } from '@testing-library/react';
 import useCardNumber from '../lib/cardNumber/useCardNumber';
-import { TEST_CARD_NUMBERS } from '../_fixture_/cardNumber.fixture';
+import { CARD_TEST_CASES } from '../_fixture_/cardNumber.fixture';
 
-const setupHook = () => {
-  const hook = renderHook(() => useCardNumber());
-  return hook.result;
-};
-describe('useCardNumber 성공 케이스', () => {
-  it('모든 입력값이 유효할 경우, 에러 메시지는 비어 있어야 한다.', () => {
+const setupHook = () => renderHook(() => useCardNumber()).result;
+
+describe('✅ useCardNumber 성공 케이스', () => {
+  it('Visa 카드 정상 입력', () => {
     const result = setupHook();
+    const { valid, expectedFormat, expectedCompany } = CARD_TEST_CASES.Visa;
 
     act(() => {
-      result.current.handleCardNumberChange(TEST_CARD_NUMBERS.valid, 'first');
-      result.current.handleCardNumberChange(TEST_CARD_NUMBERS.valid, 'second');
+      result.current.handleCardNumberChange(valid);
     });
 
     expect(result.current.errorState.errorMessage).toBe('');
+    expect(result.current.cardNumber).toBe(expectedFormat);
+    expect(result.current.company).toBe(expectedCompany);
   });
 
-  it('입력값이 정확히 업데이트 되어야 한다.', () => {
+  it('AMEX 카드 정상 입력', () => {
     const result = setupHook();
+    const { valid, expectedFormat, expectedCompany } = CARD_TEST_CASES.AMEX;
+
     act(() => {
-      result.current.handleCardNumberChange(TEST_CARD_NUMBERS.valid, 'first');
+      result.current.handleCardNumberChange(valid);
     });
 
-    expect(result.current.cardNumber.first).toBe(TEST_CARD_NUMBERS.valid);
+    expect(result.current.errorState.errorMessage).toBe('');
+    expect(result.current.cardNumber).toBe(expectedFormat);
+    expect(result.current.company).toBe(expectedCompany);
+  });
+
+  it('Diners 카드 정상 입력', () => {
+    const result = setupHook();
+    const { valid, expectedFormat, expectedCompany } = CARD_TEST_CASES.Diners;
+
+    act(() => {
+      result.current.handleCardNumberChange(valid);
+    });
+
+    expect(result.current.errorState.errorMessage).toBe('');
+    expect(result.current.cardNumber).toBe(expectedFormat);
+    expect(result.current.company).toBe(expectedCompany);
+  });
+
+  it('UnionPay 카드 정상 입력', () => {
+    const result = setupHook();
+    const { valid, expectedFormat, expectedCompany } = CARD_TEST_CASES.UnionPay;
+
+    act(() => {
+      result.current.handleCardNumberChange(valid);
+    });
+
+    expect(result.current.errorState.errorMessage).toBe('');
+    expect(result.current.cardNumber).toBe(expectedFormat);
+    expect(result.current.company).toBe(expectedCompany);
   });
 });
 
-describe('useCardNumber 실패 케이스', () => {
-  it('숫자가 아닌 문자가 포함되면 형식 오류 메시지를 반환해야 한다.', () => {
+describe('❌ useCardNumber 실패 케이스 - 길이 부족', () => {
+  it('Visa 카드 길이 부족 시 에러', () => {
     const result = setupHook();
+    const { tooShort, expectedCompany, expectedLength } = CARD_TEST_CASES.Visa;
 
     act(() => {
-      result.current.handleCardNumberChange(TEST_CARD_NUMBERS.invalid.nonNumeric, 'first');
+      result.current.handleCardNumberChange(tooShort);
     });
 
-    expect(result.current.errorState.errorMessage).toBe('숫자만 입력하세요.');
+    expect(result.current.errorState.errorMessage).toBe(
+      `${expectedCompany} 카드는 ${expectedLength}자리 숫자를 입력하세요.`
+    );
   });
 
-  it('입력값이 4자리보다 짧으면 길이 오류 메시지를 반환해야 한다.', () => {
+  it('AMEX 카드 길이 부족 시 에러', () => {
     const result = setupHook();
+    const { tooShort, expectedCompany, expectedLength } = CARD_TEST_CASES.AMEX;
 
     act(() => {
-      result.current.handleCardNumberChange(TEST_CARD_NUMBERS.invalid.tooShort, 'first');
+      result.current.handleCardNumberChange(tooShort);
     });
 
-    expect(result.current.errorState.errorMessage).toBe('4자리 숫자를 입력하세요.');
+    expect(result.current.errorState.errorMessage).toBe(
+      `${expectedCompany} 카드는 ${expectedLength}자리 숫자를 입력하세요.`
+    );
   });
 
-  it('입력값이 4자리보다 길면 길이 오류 메시지를 반환해야 한다.', () => {
+  it('Diners 카드 길이 부족 시 에러', () => {
     const result = setupHook();
+    const { tooShort, expectedCompany, expectedLength } = CARD_TEST_CASES.Diners;
 
     act(() => {
-      result.current.handleCardNumberChange(TEST_CARD_NUMBERS.invalid.tooLong, 'first');
+      result.current.handleCardNumberChange(tooShort);
     });
 
-    expect(result.current.errorState.errorMessage).toBe('4자리 숫자를 입력하세요.');
+    expect(result.current.errorState.errorMessage).toBe(
+      `${expectedCompany} 카드는 ${expectedLength}자리 숫자를 입력하세요.`
+    );
+  });
+
+  it('UnionPay 카드 길이 부족 시 에러', () => {
+    const result = setupHook();
+    const { tooShort, expectedCompany, expectedLength } = CARD_TEST_CASES.UnionPay;
+
+    act(() => {
+      result.current.handleCardNumberChange(tooShort);
+    });
+
+    expect(result.current.errorState.errorMessage).toBe(
+      `${expectedCompany} 카드는 ${expectedLength}자리 숫자를 입력하세요.`
+    );
   });
 });

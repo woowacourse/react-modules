@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useCardNumber, useCvc, useExpiration, usePassword } from './lib';
 
 function App() {
-  const { cardNumber, errorState: cardError, handleCardNumberChange } = useCardNumber();
+  const { cardNumber, company, errorState: cardError, handleCardNumberChange } = useCardNumber();
   const { expiration, errorState: expirationError, handleExpirationChange } = useExpiration();
   const { cvc, errorState: cvcError, handleCvcChange } = useCvc();
   const { password, errorState: passwordError, handlePasswordChange } = usePassword();
@@ -17,26 +17,8 @@ function App() {
   return (
     <div style={{ padding: '1rem', maxWidth: '400px' }}>
       <h2>카드 번호</h2>
-      <input
-        value={cardNumber.first}
-        onChange={(e) => handleCardNumberChange(e.target.value, 'first')}
-        placeholder="첫 번째 4자리"
-      />
-      <input
-        value={cardNumber.second}
-        onChange={(e) => handleCardNumberChange(e.target.value, 'second')}
-        placeholder="두 번째 4자리"
-      />
-      <input
-        value={cardNumber.third}
-        onChange={(e) => handleCardNumberChange(e.target.value, 'third')}
-        placeholder="세 번째 4자리"
-      />
-      <input
-        value={cardNumber.fourth}
-        onChange={(e) => handleCardNumberChange(e.target.value, 'fourth')}
-        placeholder="네 번째 4자리"
-      />
+      <input value={cardNumber} onChange={(e) => handleCardNumberChange(e.target.value)} />
+      <p style={{ color: 'gray' }}>{company !== 'Unknown' && `카드사: ${company}`}</p>
       <p style={{ color: 'red' }}>{cardError.errorMessage}</p>
 
       <h2>유효기간</h2>

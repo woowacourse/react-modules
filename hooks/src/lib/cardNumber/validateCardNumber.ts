@@ -1,29 +1,32 @@
-import { CardNumberStateKey, CarNumberStateType } from '../types/cardNumber';
-import validation from '../validation';
+import { CARD_RULES } from '../CardCompany/checkCompany';
+import { CardCompany } from '../types/cardCompany';
+import { extractDigits } from '../utils/extractDigits';
 
-const validateCardNumber = (cardNumber: CarNumberStateType) => {
-  const { errorState, errorMessage } = Object.entries(cardNumber).reduce(
-    (acc, [k, value]) => {
-      const key = k as CardNumberStateKey;
-      if (!validation.isNumber(value) && value !== '') {
-        return {
-          errorState: { ...acc.errorState, [key]: true },
-          errorMessage: '숫자만 입력하세요.'
-        };
-      }
+export function validateCardNumber(
+  cardNumber: string,
+  company: CardCompany
+): {
+  errorState: boolean;
+  errorMessage: string;
+} {
+  const digitsOnly = extractDigits(cardNumber);
 
-      if (!validation.isValidLength(value, 4) && value !== '') {
-        return {
-          errorState: { ...acc.errorState, [key]: true },
-          errorMessage: '4자리 숫자를 입력하세요.'
-        };
-      }
-      return acc;
-    },
-    { errorState: { first: false, second: false, third: false, fourth: false }, errorMessage: '' }
-  );
+  if (digitsOnly.length === 0) {
+    return { errorState: false, errorMessage: '' };
+  }
 
-  return { errorState, errorMessage };
-};
+  if (company === 'Unknown') {
+    return { errorState: false, errorMessage: '' };
+  }
 
-export default validateCardNumber;
+  const rule = CARD_RULES[company];
+
+  if (rule && digitsOnly.length !== rule.validLength) {
+    return {
+      errorState: true,
+      errorMessage: `${company} 카드는 ${rule.validLength}자리 숫자를 입력하세요.`
+    };
+  }
+
+  return { errorState: false, errorMessage: '' };
+}
