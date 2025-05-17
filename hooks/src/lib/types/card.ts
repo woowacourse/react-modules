@@ -13,9 +13,4 @@ export type CardExpiration = {
   year: string;
 };
 
-export type CardNumber = {
-  first: string;
-  second: string;
-  third: string;
-  fourth: string;
-};
+export type CardBrand = 'visa' | 'master' | 'diners' | 'amex' | 'unionpay' | '';

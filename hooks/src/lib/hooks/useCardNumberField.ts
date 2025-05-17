@@ -1,40 +1,39 @@
 import { useMemo, useState } from 'react';
-import { CardNumber } from '../types/card';
-import { validateNumberError } from '../utils/cardInputValidations';
+import { determineCardBrand } from '../utils/determineCardBrand';
+import { validateCardBrandLength } from '../utils/cardBrandValidations';
+import { formatCardNumber, getMaxInputLength } from '../utils/cardFormatting';
 
 export function useCardNumberField() {
-  const [cardNumbers, setCardNumbers] = useState<CardNumber>({ first: '', second: '', third: '', fourth: '' });
+  const [cardNumbers, setCardNumbers] = useState('');
+
+  const numbersOnly = cardNumbers.replace(/\D/g, '');
+  const cardBrand = determineCardBrand(numbersOnly);
+
+  const formattedCardNumber = formatCardNumber(numbersOnly, cardBrand);
+
+  const maxCardLength = getMaxInputLength(cardBrand);
 
   const cardNumberErrors = useMemo(() => {
-    const errors = {
-      first: '',
-      second: '',
-      third: '',
-      fourth: '',
-    };
+    const cardBrandLengthError = validateCardBrandLength(cardBrand, numbersOnly);
+    if (cardBrandLengthError) return cardBrandLengthError;
 
-    for (const key of ['first', 'second', 'third', 'fourth'] as const) {
-      const value = cardNumbers[key];
+    return '';
+  }, [cardNumbers, cardBrand, numbersOnly]);
 
-      if (value === '') continue;
+  const isCardNumberValid = !cardNumberErrors;
 
-      const numError = validateNumberError(value);
-      if (numError) {
-        errors[key] = numError;
-        continue;
-      }
-
-      if (value.length !== 4) {
-        errors[key] = '4자리 숫자를 입력해주세요.';
-      }
-    }
-
-    return errors;
-  }, [cardNumbers]);
-
-  const handleCardNumberChange = (key: keyof CardNumber, value: string) => {
-    setCardNumbers((prev) => ({ ...prev, [key]: value }));
+  const handleCardNumberChange = (value: string) => {
+    const digitsOnly = value.replace(/\D/g, '');
+    setCardNumbers(digitsOnly);
   };
 
-  return { cardNumbers, handleCardNumberChange, cardNumberErrors };
+  return {
+    cardNumbers,
+    formattedCardNumber,
+    cardBrand,
+    handleCardNumberChange,
+    cardNumberErrors,
+    maxCardLength,
+    isCardNumberValid,
+  };
 }

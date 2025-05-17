@@ -14,9 +14,11 @@ export function useCardPasswordField() {
     return '';
   }, [cardPassword]);
 
+  const isCardPasswordValid = !cardPasswordError;
+
   const handleCardPasswordChange = (value: string) => {
     setCardPassword(value);
   };
 
-  return { cardPassword, handleCardPasswordChange, cardPasswordError };
+  return { cardPassword, handleCardPasswordChange, cardPasswordError, isCardPasswordValid };
 }

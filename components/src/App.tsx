@@ -1,62 +1,122 @@
 import './App.css';
 import { css } from '@emotion/css';
-import { Modal, useModal } from '@sanghee01/modal';
+import { Modal, useModal, AlertModal, ConfirmModal, PromptModal } from '@sanghee01/modal';
 
 function App() {
-  const { isOpen, handleOpen, handleClose } = useModal();
+  const {
+    isOpen: isOpenDefaultModal,
+    handleOpen: handleOpenDefaultModal,
+    handleClose: handleCloseDefaultModal,
+  } = useModal();
+  const { isOpen: isOpenAlertModal, handleOpen: handleOpenAlertModal, handleClose: handleCloseAlertModal } = useModal();
+  const {
+    isOpen: isOpenConfirmModal,
+    handleOpen: handleOpenConfirmModal,
+    handleClose: handleCloseConfirmModal,
+  } = useModal();
+  const {
+    isOpen: isOpenPromptModal,
+    handleOpen: handleOpenPromptModal,
+    handleClose: handleClosePromptModal,
+  } = useModal();
 
-  const handleConfirm = () => {
-    alert('동의하고 저장하기 버튼 클릭');
-    handleClose();
+  const handleAfterOpenModal = () => {
+    console.log('기본 모달 열기 버튼 클릭');
   };
 
-  const handleAfterOpen = () => {
-    console.log('열기 버튼 클릭');
+  const handleConfirmDefaultModal = () => {
+    alert('기본 모달 동의하고 저장하기 버튼 클릭');
+    handleCloseDefaultModal();
   };
 
-  const ModalContent = () => {
-    return (
-      <>
-        <div>
-          <p>모달 내용입니다.</p>
-          <p>모달 내용입니다.</p>
-          <p>모달 내용입니다.</p>
-        </div>
-        <div>
-          <span>모달 내용입니다.2</span>
-        </div>
-      </>
-    );
+  const handleConfirmAlertModal = () => {
+    alert('Alert 모달 확인 버튼 클릭');
+    handleCloseAlertModal();
   };
 
-  const ModalActions = () => {
-    return (
-      <>
-        <button className={CancelButton} onClick={handleClose}>
-          닫기
-        </button>
-        <button className={ConfirmButton} onClick={handleConfirm}>
-          동의하고 저장하기
-        </button>
-      </>
-    );
+  const handleConfirmPromptModal = (inputValue: string) => {
+    alert(`Prompt 모달 확인 버튼 클릭, 입력값: ${inputValue}`);
+    handleClosePromptModal();
+  };
+
+  const handleConfirmConfirmModal = () => {
+    alert('Confirm 모달 확인 버튼 클릭');
+    handleCloseConfirmModal();
   };
 
   return (
     <>
       <h1>Modal Component</h1>
-      <button className={OpenButton} onClick={handleOpen}>
-        열기
+      <button className={OpenButton} onClick={handleOpenDefaultModal}>
+        기본 모달 열기
       </button>
-      <Modal isOpen={isOpen} onClose={handleClose} onAfterOpen={handleAfterOpen} position="center">
-        <Modal.Header title="알림" />
+      <button className={OpenButton} onClick={handleOpenAlertModal}>
+        Alert 모달 열기
+      </button>
+      <button className={OpenButton} onClick={handleOpenConfirmModal}>
+        Confirm 모달 열기
+      </button>
+      <button className={OpenButton} onClick={handleOpenPromptModal}>
+        Prompt 모달 열기
+      </button>
+      <Modal
+        isOpen={isOpenDefaultModal}
+        onClose={handleCloseDefaultModal}
+        onAfterOpen={handleAfterOpenModal}
+        position="center"
+        size="medium"
+      >
+        <Modal.Header title="기본 모달" />
         <Modal.Content>
-          <ModalContent />
+          <div>기본 모달 내용</div>
         </Modal.Content>
         <Modal.Footer>
-          <ModalActions />
+          <button className={CancelButton} onClick={handleCloseDefaultModal}>
+            닫기
+          </button>
+          <button className={ConfirmButton} onClick={handleConfirmDefaultModal}>
+            동의하고 저장하기
+          </button>
         </Modal.Footer>
       </Modal>
+      <AlertModal
+        isOpen={isOpenAlertModal}
+        onClose={handleCloseAlertModal}
+        onAfterOpen={handleAfterOpenModal}
+        onConfirm={handleConfirmAlertModal}
+        title="Alert 모달 제목"
+        content={
+          <>
+            <div>Alert 모달 내용입니다.</div>
+            <div>Alert 모달 내용입니다2.</div>
+          </>
+        }
+        position="center"
+        size="medium"
+      />
+      <ConfirmModal
+        isOpen={isOpenConfirmModal}
+        onClose={handleCloseConfirmModal}
+        onAfterOpen={handleAfterOpenModal}
+        onConfirm={handleConfirmConfirmModal}
+        onCancel={handleCloseConfirmModal}
+        title="Confirm 모달 제목"
+        content={<div>Confirm 모달 내용입니다.</div>}
+        position="center"
+        size="small"
+      />
+      <PromptModal
+        isOpen={isOpenPromptModal}
+        onClose={handleClosePromptModal}
+        onAfterOpen={handleAfterOpenModal}
+        onConfirm={handleConfirmPromptModal}
+        onCancel={handleClosePromptModal}
+        title="Prompt 모달 제목"
+        content={<div>Prompt 모달 내용입니다.</div>}
+        position="center"
+        placeholder="내용을 입력하세요."
+        size="large"
+      />
     </>
   );
 }
