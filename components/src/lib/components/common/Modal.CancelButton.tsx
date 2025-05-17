@@ -1,5 +1,7 @@
 import styled from '@emotion/styled';
 
+import { BaseButton } from './Modal.BaseButton.styled';
+
 const ModalCancelButton = ({
   onClose,
   children,
@@ -23,17 +25,13 @@ const ModalCancelButton = ({
 
 export default ModalCancelButton;
 
-const StyledCancelButton = styled.button`
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
+const StyledCancelButton = styled(BaseButton)`
   width: 80px;
   height: 40px;
   padding: 8px 0;
   background-color: #f3f4f6;
   color: #333333;
-  cursor: pointer;
+
   border: 1px solid #333333;
   border-radius: 4px;
 `;

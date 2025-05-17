@@ -1,5 +1,7 @@
 import styled from '@emotion/styled';
 
+import { BaseButton } from './Modal.BaseButton.styled';
+
 import closeIcon from '../../assets/Close.svg';
 import { useModalContext } from '../../hooks/useModalContext';
 
@@ -19,18 +21,14 @@ const ModalCloseButton = ({ $autoFocus = true }: { $autoFocus?: boolean }) => {
 };
 export default ModalCloseButton;
 
-const StyledCloseButton = styled.button`
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
+const StyledCloseButton = styled(BaseButton)`
   position: absolute;
   top: 12px;
   right: 12px;
   padding: 0;
   background-color: transparent;
   border: none;
-  cursor: pointer;
+
   z-index: 0;
   &:hover {
     background-color: rgba(31, 41, 55, 0.1);

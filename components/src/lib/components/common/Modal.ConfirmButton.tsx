@@ -1,5 +1,7 @@
 import styled from '@emotion/styled';
 
+import { BaseButton } from './Modal.BaseButton.styled';
+
 const ModalConfirmButton = ({
   onClick,
   children,
@@ -25,17 +27,13 @@ const ModalConfirmButton = ({
 
 export default ModalConfirmButton;
 
-const StyledConfirmButton = styled.button`
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
+const StyledConfirmButton = styled(BaseButton)`
   width: 80px;
   height: 40px;
   padding: 8px 4px;
   background-color: #333333;
   color: #ffffff;
-  cursor: pointer;
+
   border: none;
   border-radius: 4px;
 `;
