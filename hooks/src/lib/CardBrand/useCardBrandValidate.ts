@@ -1,7 +1,8 @@
 import { useState } from 'react';
 
-export type CardBrandValidateResult = {
-  isValid: boolean;
+import { ERROR_MESSAGE } from '../constants/errorMessage';
+
+type CardBrandValidateResult = {
   errorMessage: string | null;
   validateCardBrand: (cardBrand: string) => void;
 };
@@ -9,21 +10,18 @@ export type CardBrandValidateResult = {
 const useCardBrandValidate = (
   cardBrands: string[]
 ): CardBrandValidateResult => {
-  const [isValid, setIsValid] = useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   const validateCardBrand = (cardBrand: string) => {
     if (!cardBrands.includes(cardBrand)) {
-      setIsValid(false);
-      setErrorMessage('카드 브랜드가 올바르지 않습니다.');
+      setErrorMessage(ERROR_MESSAGE.INVALID_CARD_BRAND);
       return;
     }
 
-    setIsValid(true);
     setErrorMessage(null);
   };
 
-  return { isValid, errorMessage, validateCardBrand };
+  return { errorMessage, validateCardBrand };
 };
 
 export default useCardBrandValidate;

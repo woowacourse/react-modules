@@ -1,44 +1,47 @@
 import { renderHook, act } from '@testing-library/react';
 
-import useCardExpireDateValidate, {
-  CardExpireDateValidateResult
-} from './useCardExpireDateValidate';
+import useCardExpireDate, { CardExpireDateResult } from './useCardExpireDate';
+import { ERROR_MESSAGE } from '../constants/errorMessage';
 
 describe('CardExpireDateValidate', () => {
-  let result: { current: CardExpireDateValidateResult };
+  let result: { current: CardExpireDateResult };
 
   beforeEach(() => {
-    const rendered = renderHook(() => useCardExpireDateValidate());
+    const rendered = renderHook(() => useCardExpireDate());
     result = rendered.result;
   });
 
   describe('숫자로 이루어진 2자리 값이 들어오면 isValid가 true이고 에러 메시지가 null이다.', () => {
     it('month', () => {
       act(() => {
-        result.current.validateCardExpireDate(
+        result.current.handleExpireDateChange(
           {
-            month: '12',
-            year: ''
-          },
+            target: {
+              value: '12',
+            },
+          } as React.ChangeEvent<HTMLInputElement>,
           'month'
         );
       });
 
+      expect(result.current.expireDate.month).toBe('12');
       expect(result.current.isValid.month).toBe(true);
       expect(result.current.errorMessage).toBeNull();
     });
 
     it('year', () => {
       act(() => {
-        result.current.validateCardExpireDate(
+        result.current.handleExpireDateChange(
           {
-            month: '',
-            year: '25'
-          },
+            target: {
+              value: '25',
+            },
+          } as React.ChangeEvent<HTMLInputElement>,
           'year'
         );
       });
 
+      expect(result.current.expireDate.year).toBe('25');
       expect(result.current.isValid.year).toBe(true);
       expect(result.current.errorMessage).toBeNull();
     });
@@ -47,98 +50,127 @@ describe('CardExpireDateValidate', () => {
   describe('숫자로 이루어지지 않은 값이 들어오면 isValid가 false이고 에러 메시지가 나온다.', () => {
     it('month', () => {
       act(() => {
-        result.current.validateCardExpireDate(
+        result.current.handleExpireDateChange(
           {
-            month: '1a',
-            year: ''
-          },
+            target: {
+              value: '1a',
+            },
+          } as React.ChangeEvent<HTMLInputElement>,
           'month'
         );
       });
 
       expect(result.current.isValid.month).toBe(false);
-      expect(result.current.errorMessage).toBe('숫자만 입력해주세요.');
+      expect(result.current.errorMessage).toBe(ERROR_MESSAGE.INVALID_NUMBER);
     });
 
     it('year', () => {
       act(() => {
-        result.current.validateCardExpireDate(
+        result.current.handleExpireDateChange(
           {
-            month: '',
-            year: '2a'
-          },
+            target: {
+              value: '2a',
+            },
+          } as React.ChangeEvent<HTMLInputElement>,
           'year'
         );
       });
 
       expect(result.current.isValid.year).toBe(false);
-      expect(result.current.errorMessage).toBe('숫자만 입력해주세요.');
+      expect(result.current.errorMessage).toBe(ERROR_MESSAGE.INVALID_NUMBER);
     });
   });
 
   describe('숫자로 이루어진 2자리 값이 들어오면 범위를 검증하여 유효하지 않으면 isValid가 false이고 에러 메시지가 나온다.', () => {
     it('month', () => {
       act(() => {
-        result.current.validateCardExpireDate(
+        result.current.handleExpireDateChange(
           {
-            month: '13',
-            year: ''
-          },
+            target: {
+              value: '13',
+            },
+          } as React.ChangeEvent<HTMLInputElement>,
           'month'
         );
       });
 
       expect(result.current.isValid.month).toBe(false);
-      expect(result.current.errorMessage).toBe(
-        '1~12 사이의 숫자를 입력해주세요.'
-      );
+      expect(result.current.errorMessage).toBe(ERROR_MESSAGE.INVALID_MONTH);
     });
 
     it('year', () => {
       act(() => {
-        result.current.validateCardExpireDate(
+        result.current.handleExpireDateChange(
           {
-            month: '',
-            year: '23'
-          },
+            target: {
+              value: '23',
+            },
+          } as React.ChangeEvent<HTMLInputElement>,
           'year'
         );
       });
 
       expect(result.current.isValid.year).toBe(false);
-      expect(result.current.errorMessage).toBe('유효한 년도를 입력해주세요.');
+      expect(result.current.errorMessage).toBe(ERROR_MESSAGE.INVALID_YEAR);
     });
   });
 
   describe('년도가 올해인데 월이 현재 월보다 이전이면 month의 isValid가 false이고 에러 메시지가 나온다.', () => {
     it('month', () => {
       act(() => {
-        result.current.validateCardExpireDate(
+        result.current.handleExpireDateChange(
           {
-            month: '04',
-            year: '25'
-          },
+            target: {
+              value: '25',
+            },
+          } as React.ChangeEvent<HTMLInputElement>,
+          'year'
+        );
+      });
+
+      act(() => {
+        result.current.handleExpireDateChange(
+          {
+            target: {
+              value: '04',
+            },
+          } as React.ChangeEvent<HTMLInputElement>,
           'month'
         );
       });
 
       expect(result.current.isValid.month).toBe(false);
-      expect(result.current.errorMessage).toBe('유효한 만료일을 입력해주세요.');
+      expect(result.current.errorMessage).toBe(
+        ERROR_MESSAGE.INVALID_EXPIRE_DATE
+      );
     });
 
     it('year', () => {
       act(() => {
-        result.current.validateCardExpireDate(
+        result.current.handleExpireDateChange(
           {
-            month: '04',
-            year: '25'
-          },
+            target: {
+              value: '04',
+            },
+          } as React.ChangeEvent<HTMLInputElement>,
+          'month'
+        );
+      });
+      act(() => {
+        result.current.handleExpireDateChange(
+          {
+            target: {
+              value: '25',
+            },
+          } as React.ChangeEvent<HTMLInputElement>,
           'year'
         );
       });
 
       expect(result.current.isValid.month).toBe(false);
-      expect(result.current.errorMessage).toBe('유효한 만료일을 입력해주세요.');
+      expect(result.current.errorMessage).toBe(
+        ERROR_MESSAGE.INVALID_EXPIRE_DATE
+      );
     });
   });
 });

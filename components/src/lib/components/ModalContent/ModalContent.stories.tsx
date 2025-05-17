@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
-import ModalContent from "./ModalContent";
+import ModalContent from ".";
 
 const meta = {
   title: "ModalContent",
@@ -27,6 +27,20 @@ export const Default: Story = {
   args: {
     children: "",
     position: "center",
+    size: "medium",
+  },
+  argTypes: {
+    position: {
+      control: "select",
+      options: ["center", "bottom"],
+    },
+    size: {
+      control: "select",
+      options: ["small", "medium", "large"],
+    },
+    children: {
+      control: false,
+    },
   },
 
   render: (args) => {

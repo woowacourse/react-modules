@@ -1,64 +1,60 @@
 import { useState } from 'react';
 
 import validateNumber from '../utils/validateNumber';
-import validateMaxLength from '../utils/validateMaxLength';
+import { cardTypeRules } from './cardTypeRules';
+import { ERROR_MESSAGE } from '../constants/errorMessage';
 
-type CardNumbersValidate = {
-  first: boolean;
-  second: boolean;
-  third: boolean;
-  fourth: boolean;
-};
-
-const initialCardNumberValidate: CardNumbersValidate = {
-  first: true,
-  second: true,
-  third: true,
-  fourth: true
-};
+const INITIAL_CARD_NUMBER_LENGTH = 16;
 
 export type CardNumberValidateResult = {
-  isValid: CardNumbersValidate;
+  isValid: boolean;
   errorMessage: string | null;
-  validateCardNumbers: (cardNumber: string, key: string) => void;
+  validateCardNumbers: (cardNumber: string) => void;
+  validateCardNumberBlur: (
+    cardNumber: string,
+    cardType: keyof typeof cardTypeRules | null
+  ) => void;
 };
 
 const useCardNumbersValidate = (): CardNumberValidateResult => {
-  const [isValid, setIsValid] = useState<CardNumbersValidate>(
-    initialCardNumberValidate
-  );
+  const [isValid, setIsValid] = useState<boolean>(true);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
-  const validateCardNumbers = (cardNumber: string, key: string) => {
+  const validateCardNumbers = (cardNumber: string) => {
     if (!validateNumber(cardNumber)) {
-      setIsValid({
-        ...isValid,
-        [key]: false
-      });
-
-      setErrorMessage('숫자만 입력해주세요.');
+      setIsValid(false);
+      setErrorMessage(ERROR_MESSAGE.INVALID_NUMBER);
       return;
     }
 
-    if (!validateMaxLength(cardNumber, 4)) {
-      setIsValid({
-        ...isValid,
-        [key]: false
-      });
-
-      setErrorMessage('4자리만 입력해주세요.');
-      return;
-    }
-
-    setIsValid({
-      ...isValid,
-      [key]: true
-    });
-
+    setIsValid(true);
     setErrorMessage(null);
   };
 
-  return { isValid, errorMessage, validateCardNumbers };
+  const validateCardNumberBlur = (
+    cardNumber: string,
+    cardType: keyof typeof cardTypeRules | null
+  ) => {
+    if (cardType) {
+      if (cardNumber.length < cardTypeRules[cardType].length) {
+        setIsValid(false);
+
+        setErrorMessage(
+          `${cardTypeRules[cardType].length}자리의 숫자를 입력해주세요.`
+        );
+        return;
+      }
+    }
+
+    if (cardNumber.length < INITIAL_CARD_NUMBER_LENGTH) {
+      setIsValid(false);
+
+      setErrorMessage(ERROR_MESSAGE.INVALID_CARD_NUMBER_LENGTH);
+      return;
+    }
+  };
+
+  return { isValid, errorMessage, validateCardNumbers, validateCardNumberBlur };
 };
 
 export default useCardNumbersValidate;

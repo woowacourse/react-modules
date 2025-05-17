@@ -1,14 +1,12 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
-import Modal from "./Modal";
-import ModalOverlay from "../ModalOverlay/ModalOverlay";
-import ModalContent from "../ModalContent/ModalContent";
-import ModalHeader from "../ModalHeader/ModalHeader";
-import ModalTitle from "../ModalTitle/ModalTitle";
-import ModalCloseButton from "../ModalCloseButton/ModalCloseButton";
-import ModalBody from "../ModalBody/ModalBody";
-import ModalFooter from "../ModalFooter/ModalFooter";
-import useModal from "../../hooks/useModal";
+import Modal from ".";
+import ModalRoot from "../ModalRoot";
+import ModalOverlay from "../ModalOverlay";
+import ModalContent from "../ModalContent";
+import ModalTitle from "../ModalTitle";
+import ModalClose from "../ModalClose";
+import ModalTrigger from "../ModalTrigger";
 
 const meta = {
   title: "Modal",
@@ -33,32 +31,28 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
-    isOpen: true,
     children: "",
   },
 
   render: () => {
-    const { isOpen, handleOpen, handleClose } = useModal();
-
     return (
-      <>
-        <button onClick={handleOpen}>Open</button>
-        <Modal isOpen={isOpen}>
-          <ModalOverlay onClose={handleClose} />
+      <ModalRoot>
+        <ModalTrigger>
+          <button>Open</button>
+        </ModalTrigger>
+        <Modal>
+          <ModalOverlay />
           <ModalContent position="center">
-            <ModalHeader direction="row" align="start" justify="start">
-              <ModalTitle tag="h1" fontSize="25px" fontWeight="700">
-                Title이다!
-              </ModalTitle>
-              <ModalCloseButton onClose={handleClose} />
-            </ModalHeader>
-            <ModalBody>몸통이다!</ModalBody>
-            <ModalFooter direction="row" align="end" justify="center">
-              Footer이다!
-            </ModalFooter>
+            <ModalTitle fontSize="25px" fontWeight="700">
+              모달 제목입니다.
+            </ModalTitle>
+            모달의 컨텐츠를 넣어주세요.
+            <ModalClose>
+              <button>Close</button>
+            </ModalClose>
           </ModalContent>
         </Modal>
-      </>
+      </ModalRoot>
     );
   },
 };

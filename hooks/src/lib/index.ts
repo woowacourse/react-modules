@@ -1,5 +1,5 @@
-export { default as useCardNumbersValidate } from './CardNumber/useCardNumbersValidate';
-export { default as useCardExpireDateValidate } from './CardExpireDate/useCardExpireDateValidate';
-export { default as useCardCVCValidate } from './CardCVC/useCardCVCValidate';
-export { default as useCardBrandValidate } from './CardBrand/useCardBrandValidate';
-export { default as useCardPasswordValidate } from './CardPassword/useCardPasswordValidate';
+export { default as useCardNumbers } from './CardNumber/useCardNumbers';
+export { default as useCardExpireDate } from './CardExpireDate/useCardExpireDate';
+export { default as useCardCVC } from './CardCVC/useCardCVC';
+export { default as useCardBrand } from './CardBrand/useCardBrand';
+export { default as useCardPassword } from './CardPassword/useCardPassword';

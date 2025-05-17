@@ -2,92 +2,63 @@
 
 @ohgus/modal-component는 모달을 쉽게 사용할 수 있도록 돕는 컴포넌트 라이브러리입니다.
 
-## useModal
+## Modal.Root
 
-- isOpen: 모달이 보이는지 여부 `(boolean)`
-- handleOpen: 모달을 여는 함수
-- handleClose: 모달을 닫는 함수
+모달을 선언하는 곳 최상단에 사용하여 자식요소들이 Modal의 context api를 공유할 수 있게 한다.
 
 ## Modal
 
-- isOpen: 모달이 보여지는지 여부를 받는다.
 - children: 하위 컴포넌트를 받는다.
 
-## ModalOverlay
+## Modal.Overlay
 
-- onClose: 모달 외부를 클릭 시 닫는 함수를 받는다.
-
-# ModalContent
+# Modal.Content
 
 - position: 모달을 표시할 위치를 받는다. `(center | bottom )`
+- size: 모달의 사이즈를 받는다. `(small | medium | large)`
+  - position이 bottom인 경우 사이즈의 영향을 받지 않습니다.
 - children: 하위 컴포넌트를 받는다.
 
-## ModalHeader
-
-- direction: 내부 요소의 Flex 방향을 설정한다. `(row | column)`
-- align: Flex 방향에 따른 축을 설정한다. `(start | center | end)`
-- justify: Flex 방향에 따른 축을 설정한다. `(start | center | end)`
-- children: 하위 컴포넌트를 받는다.
-
-## ModalTitle
+## Modal.Title
 
 - fontSize: 모달의 제목의 폰트 사이즈를 설정한다.
 - fontWeight: 모달의 제목의 폰트 두께를 설정한다.
 - tag: 모달의 제목에 사용할 태그를 설정한다.
 - children: 하위 컴포넌트를 받는다.
 
-## ModalCloseButton
+## Modal.Close
 
-- onClose: 모달을 닫는 함수를 받는다.
+- 모달 닫기 기능을 수행한다.
+- children: 버튼 내부 컨텐츠를 자식으로 받는다.
 
-## ModalBody
+## Modal.Trigger
 
-- children: 하위 컴포넌트를 받는다.
-
-## ModalFooter
-
-- direction: 내부 요소의 Flex 방향을 설정한다. `(row | column)`
-- align: Flex 방향에 따른 축을 설정한다. `(start | center | end)`
-- justify: Flex 방향에 따른 축을 설정한다. `(start | center | end)`
-- children: 하위 컴포넌트를 받는다.
+- 모달 열기 기능을 수행한다.
+- children: 버튼 내부 컨텐츠를 자식으로 받는다.
 
 ## 사용 예시
 
 ```tsx
-import {
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalTitle,
-  ModalCloseButton,
-  ModalBody,
-  ModalFooter,
-  useModal,
-} from "@kaori-killer/modal-component";
+import { Modal } from "@ohgus/modal-component";
 
 function App() {
-  const { isOpen, handleOpen, handleClose } = useModal();
-
   return (
-    <>
-      <button onClick={handleOpen}>Open</button>
-      <Modal isOpen={isOpen}>
-        <ModalOverlay onClose={handleClose} />
-        <ModalContent position="center">
-          <ModalHeader direction="row" align="start" justify="start">
-            <ModalTitle tag="h1" fontSize="25px" fontWeight="700">
-              Title이다!
-            </ModalTitle>
-            <ModalCloseButton onClose={handleClose} />
-          </ModalHeader>
-          <ModalBody>몸통이다!</ModalBody>
-          <ModalFooter direction="row" align="end" justify="center">
-            Footer이다!
-          </ModalFooter>
-        </ModalContent>
+    <Modal.Root>
+      <Modal.Trigger>
+        <button>Open</button>
+      </Modal.Trigger>
+      <Modal>
+        <Modal.Overlay />
+        <Modal.Content position="center" size="medium">
+          <Modal.Title tag="h1" fontSize="25px" fontWeight="700">
+            Title이다!
+          </Modal.Title>
+          <Modal.Close>
+            <button>Close</button>
+          </Modal.Close>
+        </Modal.Content>
       </Modal>
-    </>
+    </Modal.Root>
   );
 }
 
