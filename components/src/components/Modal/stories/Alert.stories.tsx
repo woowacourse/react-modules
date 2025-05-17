@@ -73,8 +73,8 @@ export const AlertModalPreset = (args: ModalProps) => {
       <AlertModal
         isOpen={isOpen}
         onClose={closeModal}
-        title={{ text: "아이디를 입력해 주세요." }}
         onConfirm={handleConfirm}
+        title={{ text: "아이디를 입력해 주세요." }}
       >
         <p>아이디는 필수로 입력해야 합니다.</p>
       </AlertModal>
