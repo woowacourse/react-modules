@@ -1,14 +1,14 @@
 import { renderHook, act, waitFor } from '@testing-library/react';
-import useCardNumberValidation from '.';
+import useCardNumber from '.';
 
 describe('useCardNumberValidation', () => {
   it('초기 noError 상태는 true이다.', () => {
-    const { result } = renderHook(() => useCardNumberValidation());
+    const { result } = renderHook(() => useCardNumber());
     expect(result.current.noError).toBe(true);
   });
 
   it('정확한 길이의 숫자 입력 시 noError는 true이다.', async () => {
-    const { result } = renderHook(() => useCardNumberValidation());
+    const { result } = renderHook(() => useCardNumber());
     const testCases = [
       {
         name: 'Visa',
@@ -60,7 +60,7 @@ describe('useCardNumberValidation', () => {
   });
 
   it('자릿수가 부족한 경우 에러 메시지를 반환한다.', () => {
-    const { result } = renderHook(() => useCardNumberValidation());
+    const { result } = renderHook(() => useCardNumber());
     const shortValue = {
       target: { value: '41111111111' }, // Visa지만 부족한 길이
     } as React.ChangeEvent<HTMLInputElement>;
@@ -74,7 +74,7 @@ describe('useCardNumberValidation', () => {
   });
 
   it('formattedValue는 카드 브랜드에 따라 포맷팅된다 (Visa)', () => {
-    const { result } = renderHook(() => useCardNumberValidation());
+    const { result } = renderHook(() => useCardNumber());
     const event = {
       target: { value: '4111111111111111' },
     } as React.ChangeEvent<HTMLInputElement>;
@@ -87,7 +87,7 @@ describe('useCardNumberValidation', () => {
   });
 
   it('formattedValue는 카드 브랜드에 따라 포맷팅된다 (AMEX)', () => {
-    const { result } = renderHook(() => useCardNumberValidation());
+    const { result } = renderHook(() => useCardNumber());
     const event = {
       target: { value: '341234567890123' },
     } as React.ChangeEvent<HTMLInputElement>;
@@ -102,7 +102,7 @@ describe('useCardNumberValidation', () => {
   });
 
   it('식별되지 않는 카드 번호는 포맷 없이 출력된다.', () => {
-    const { result } = renderHook(() => useCardNumberValidation());
+    const { result } = renderHook(() => useCardNumber());
     const event = {
       target: { value: '1234567890123456' },
     } as React.ChangeEvent<HTMLInputElement>;
