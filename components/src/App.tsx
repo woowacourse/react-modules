@@ -49,10 +49,10 @@ function App() {
         <Modal.Footer>
           <Modal.ConfirmButton
             onConfirm={() => {
-              setAlertModal(false);
+              setConfirmModal(false);
             }}
             onCancel={() => {
-              setAlertModal(false);
+              setConfirmModal(false);
             }}
           />
         </Modal.Footer>
@@ -80,10 +80,10 @@ function App() {
         <Modal.Footer>
           <Modal.ConfirmButton
             onConfirm={() => {
-              setAlertModal(false);
+              setPromptModal(false);
             }}
             onCancel={() => {
-              setAlertModal(false);
+              setPromptModal(false);
             }}
           />
         </Modal.Footer>
