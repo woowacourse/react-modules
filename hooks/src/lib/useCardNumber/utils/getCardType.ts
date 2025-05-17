@@ -46,6 +46,6 @@ const getCardType = (cardNumber: string) => {
     }
   }
 
-  return null;
+  return "Default";
 };
 export default getCardType;
