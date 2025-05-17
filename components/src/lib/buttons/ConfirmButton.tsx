@@ -14,7 +14,7 @@ const ConfirmButton = ({ children = "확인", onConfirm, onHide, disabled, ...re
   };
 
   return (
-    <ModalButton css={ConfirmButtonStyle(disabled)} onClick={handleClick} disabled={disabled} {...rest}>
+    <ModalButton css={ConfirmButtonStyle(disabled)} onClick={handleClick} disabled={disabled}  aria-label="확인" {...rest}>
       {children}
     </ModalButton>
   );
