@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useRef } from "react";
+import { createContext, useContext, useRef } from "react";
 import useKeyEscClose from "./hooks/useKeyEscClose";
 import {
   backGroundStyle,
@@ -11,6 +11,7 @@ import {
   ModalWrapperStyle,
 } from "./styles";
 import { useFocusTrap } from "./hooks/useFocusTrap";
+import BaseButton from "./buttons/Button";
 import {
   ChildrenProps,
   ModalContextType,
@@ -19,6 +20,8 @@ import {
   ModalProps,
   ModalTitleProps,
 } from "./types/Modal.types";
+import CancelButton from "./buttons/CancelButton";
+import ConfirmButton from "./buttons/ConfirmButton";
 
 const ModalContext = createContext<ModalContextType>({
   onHide: () => {
@@ -75,5 +78,11 @@ Modal.Footer = ({ buttonAlign = "left", children }: ModalFooterProps) => {
 Modal.Title = ({ color = "#000", children }: ModalTitleProps) => {
   return <span css={ModalTitleStyle(color)}>{children}</span>;
 };
+
+Modal.Button = BaseButton;
+
+Modal.ConfirmButton = ConfirmButton;
+
+Modal.CancelButton = CancelButton;
 
 export default Modal;
