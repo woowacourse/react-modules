@@ -7,7 +7,7 @@ import {
   ModalHeaderProps,
 } from '../types/Modal.type';
 import { ModalBackdrop, ModalFrame, ModalHeader, ModalCloseButton, ModalContent, ButtonBar } from './Modal.styles';
-import useModalEvents from '../hooks/useModalEvent';
+import useModalEvents from '../hooks/useModalEvents';
 import useModalFocus from '../hooks/useModalFocus';
 
 const ModalContext = createContext<ModalContextType | undefined>(undefined);
