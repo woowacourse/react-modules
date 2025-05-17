@@ -5,6 +5,7 @@ type AlertModalProps = {
   title: string;
   description?: string;
   size?: 'small' | 'medium' | 'large';
+  $zIndex?: number;
 } & Omit<ModalProps, 'children'>;
 
 const AlertModal = ({
@@ -14,6 +15,7 @@ const AlertModal = ({
   onConfirm,
   title,
   size = 'medium',
+  $zIndex = 1000,
 }: AlertModalProps) => {
   const handleConfirm = () => {
     onConfirm();
@@ -21,7 +23,7 @@ const AlertModal = ({
   };
 
   return (
-    <Modal isOpen={isOpen} onClose={onClose} closeByEscapeKey={false}>
+    <Modal isOpen={isOpen} onClose={onClose} closeByEscapeKey={false} $zIndex={$zIndex}>
       <Modal.Backdrop closeByBackdrop={false} />
       <Modal.Container size={size}>
         <Modal.Title title={title} />
