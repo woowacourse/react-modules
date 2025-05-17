@@ -1,50 +1,158 @@
 import styled from "@emotion/styled";
-import { ModalPositionType } from ".";
+import { ElementType } from "react";
+import { ModalSizeType, ModalPositionType } from "./type";
 
 export const Backdrop = styled.div`
-  background-color: rgba(0, 0, 0, 0.5);
-  width: 500px;
-  height: 100vh;
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
+  position: fixed;
   top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
 `;
 
-export const Modal = styled.div<{ position: ModalPositionType }>`
+export const ModalContainer = styled.div<{
+  modalSize: ModalSizeType;
+  position: ModalPositionType;
+  as?: ElementType;
+}>`
   position: fixed;
   background: #fff;
   padding: 1.5rem 2rem;
-  min-height: 220px;
-  ${({ position }) =>
-    position === "center"
+  min-height: 157px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  display: flex;
+  flex-direction: column;
+
+  ${({ position, modalSize }) =>
+    position === "bottom"
       ? `
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        border-radius: 8px;
-        width: 350px;
-      `
+          width: 100%;
+          bottom: 0;
+          left: 0;
+          border-radius: 8px 8px 0 0;
+        `
       : `
-        width: 100%;
-        bottom: 0;      
-        border-radius: 8px 8px 0 0;
-      `}
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          border-radius: 8px;
+          ${(() => {
+            switch (modalSize) {
+              case "small":
+                return `width: 320px;`;
+              case "medium":
+                return `width: 480px;`;
+              case "large":
+                return `width: 600px;`;
+              default:
+                return `width: 320px;`;
+            }
+          })()}
+        `}
 `;
 
 export const ModalHeader = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-bottom: 1rem;
 `;
+
 export const Title = styled.h2`
-  color: #000;
-  font-family: "Noto Sans KR";
-  font-size: 1.125rem;
-  font-weight: 700;
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin: 0;
 `;
 
 export const CloseButton = styled.button`
-  width: 1.5rem;
-  height: 1.5rem;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  padding: 0.5rem;
+  margin: -0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  &:focus {
+    outline: 2px solid #4d90fe;
+    outline-offset: 2px;
+  }
+`;
+
+export const ModalContent = styled.div`
+  margin-bottom: 1.5rem;
+  flex-grow: 1;
+`;
+
+export const ModalInput = styled.input`
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  margin: 1rem 0;
+  font-size: 1rem;
+  &:focus {
+    outline: 2px solid
+      ${(props: { "data-focus-border-color": string }) =>
+        props["data-focus-border-color"] || "#4d90fe"};
+    border-color: ${(props: { "data-focus-border-color": string }) =>
+      props["data-focus-border-color"] || "#4d90fe"};
+    box-shadow: 0 0 0 3px
+      ${(props) => {
+        const color = props["data-focus-border-color"] || "#4d90fe";
+        // RGBA 변환 - 기본 색상에 0.2 투명도 적용
+        return color.startsWith("#")
+          ? `${color}33` // HEX 색상에 33 (20% 투명도) 추가
+          : `${color.replace(/[^,]+$/, "0.2)")}`; // RGB/RGBA 색상에 0.2 투명도 적용
+      }};
+  }
+  &:disabled {
+    background-color: #f5f5f5;
+    cursor: not-allowed;
+  }
+`;
+
+export const ModalFooter = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.75rem;
+  margin-top: auto;
+`;
+
+export const Button = styled.button<{ primary?: boolean }>`
+  padding: 0;
+  border-radius: 4px;
+  font-weight: 500;
+  cursor: pointer;
+  width: 80px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  ${({ primary }) =>
+    primary
+      ? `
+          background-color: #333333;
+          color: white;
+          border: none;
+        `
+      : `
+          background-color: white;
+          color: #333333;
+          border: 1px solid #333333;
+        `}
+  &:focus {
+    outline: 2px solid #4d90fe;
+    outline-offset: 2px;
+  }
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
 `;

@@ -7,54 +7,78 @@ describe("useCardNumber", () => {
     const { result } = renderHook(() => useCardNumber());
 
     act(() => {
-      result.current.handleCardNumberChange("first", userInput);
+      result.current.handleCardNumberChange(userInput);
     });
-    expect(result.current.cardNumberState.first.value).toBe(userInput);
+    expect(result.current.cardNumber).toBe(userInput);
   });
 
   it("카드 번호에 문자열을 입력하면 오류가 발생해야한다.", () => {
-    const invalidKoreanInput = "ㅁㅁㅁㅁ";
+    const invalidInput = "ㅁㅁㅁㅁ";
     const { result } = renderHook(() => useCardNumber());
 
     act(() => {
-      result.current.handleCardNumberChange("first", invalidKoreanInput);
-      result.current.handleCardNumberChange("second", invalidKoreanInput);
-      result.current.handleCardNumberChange("third", invalidKoreanInput);
-      result.current.handleCardNumberChange("fourth", invalidKoreanInput);
+      result.current.handleCardNumberChange(invalidInput);
     });
 
-    expect(result.current.errorState.isValid).toBe(false);
-    expect(result.current.errorState.errorMessage).toBe("숫자만 입력해주세요.");
+    expect(result.current.isValid).toBe(false);
+    expect(result.current.errorMessage).toBe("숫자만 입력해주세요.");
   });
 
-  it("카드번호에 3자리를 입력하면 오류가 발생해야한다.", () => {
-    const invalidLengthInput = "123";
+  it("카드 타입이 정확히 식별되어야 한다.", () => {
     const { result } = renderHook(() => useCardNumber());
 
     act(() => {
-      result.current.handleCardNumberChange("first", invalidLengthInput);
-      result.current.handleCardNumberChange("second", invalidLengthInput);
-      result.current.handleCardNumberChange("third", invalidLengthInput);
-      result.current.handleCardNumberChange("fourth", invalidLengthInput);
+      result.current.handleCardNumberChange("36123456789012");
     });
+    expect(result.current.cardType).toBe("diners");
 
-    expect(result.current.errorState.isValid).toBe(false);
-    expect(result.current.errorState.errorMessage).toBe(
-      "카드 번호는 4자리여야 합니다."
-    );
+    act(() => {
+      result.current.handleCardNumberChange("341234567890123");
+    });
+    expect(result.current.cardType).toBe("amex");
+
+    act(() => {
+      result.current.handleCardNumberChange("6221261234567890");
+    });
+    expect(result.current.cardType).toBe("unionpay");
+
+    act(() => {
+      result.current.handleCardNumberChange("4123456789012345");
+    });
+    expect(result.current.cardType).toBe("visa");
+
+    act(() => {
+      result.current.handleCardNumberChange("5123456789012345");
+    });
+    expect(result.current.cardType).toBe("mastercard");
   });
 
-  it("카드번호에 숫자 4자리를 입력하면 유효하게 작동해야한다. ", () => {
-    const validInput = "1234";
+  it("카드 번호가 올바르게 포맷팅되어야 한다.", () => {
     const { result } = renderHook(() => useCardNumber());
 
     act(() => {
-      result.current.handleCardNumberChange("first", validInput);
-      result.current.handleCardNumberChange("second", validInput);
-      result.current.handleCardNumberChange("third", validInput);
-      result.current.handleCardNumberChange("fourth", validInput);
+      result.current.handleCardNumberChange("36123456789012");
     });
+    expect(result.current.getFormattedCardNumber()).toBe("3612 345678 9012");
 
-    expect(result.current.errorState.isValid).toBe(true);
+    act(() => {
+      result.current.handleCardNumberChange("341234567890123");
+    });
+    expect(result.current.getFormattedCardNumber()).toBe("3412 345678 90123");
+
+    act(() => {
+      result.current.handleCardNumberChange("6221261234567890");
+    });
+    expect(result.current.getFormattedCardNumber()).toBe("6221 2612 3456 7890");
+
+    act(() => {
+      result.current.handleCardNumberChange("4123456789012345");
+    });
+    expect(result.current.getFormattedCardNumber()).toBe("4123 4567 8901 2345");
+
+    act(() => {
+      result.current.handleCardNumberChange("5123456789012345");
+    });
+    expect(result.current.getFormattedCardNumber()).toBe("5123 4567 8901 2345");
   });
 });

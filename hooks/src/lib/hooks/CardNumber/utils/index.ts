@@ -1,21 +1,36 @@
 import { ValidationResult } from "../../../types";
-import { CardNumberState } from "../types";
 
-export const validateCardNumbers = (cardNumber: CardNumberState) => {
-  const invalidEntry = Object.values(cardNumber).find(({ value }) => {
-    const result = validateCardNumber(value);
-    return !result.isValid;
-  });
-
-  if (invalidEntry) {
-    const { isValid, errorMessage } = validateCardNumber(invalidEntry.value);
-    return { isValid, errorMessage };
-  }
-
-  return { isValid: true, errorMessage: "" };
+const CARD_TYPES = {
+  diners: {
+    displayName: "Diners",
+    numberLength: 14,
+  },
+  amex: {
+    displayName: "AMEX",
+    numberLength: 15,
+  },
+  visa: {
+    displayName: "Visa",
+    numberLength: 16,
+  },
+  mastercard: {
+    displayName: "MasterCard",
+    numberLength: 16,
+  },
+  unionpay: {
+    displayName: "UnionPay",
+    numberLength: 16,
+  },
+  unknown: {
+    displayName: "알 수 없는 카드",
+    numberLength: 16,
+  },
 };
 
-const validateCardNumber = (cardNumber: string): ValidationResult => {
+export const validateCardNumber = (
+  cardNumber: string,
+  cardType: string
+): ValidationResult => {
   if (!/^\d+$/.test(cardNumber)) {
     return {
       isValid: false,
@@ -23,11 +38,15 @@ const validateCardNumber = (cardNumber: string): ValidationResult => {
     };
   }
 
-  if (cardNumber.length !== 4) {
-    return {
-      isValid: false,
-      errorMessage: "카드 번호는 4자리여야 합니다.",
-    };
+  if (cardType in CARD_TYPES) {
+    const { displayName, numberLength } =
+      CARD_TYPES[cardType as keyof typeof CARD_TYPES];
+    if (cardNumber.length !== numberLength) {
+      return {
+        isValid: false,
+        errorMessage: `${displayName} 카드 번호는 ${numberLength}자리여야 합니다.`,
+      };
+    }
   }
 
   return {
