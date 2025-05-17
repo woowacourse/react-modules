@@ -96,16 +96,14 @@ const useCardNumbers = (): CardNumbersResult => {
     format.forEach((length) => {
       const segment = formattedCardNumbers.slice(
         currentIndex,
-        currentIndex + parseInt(length)
+        currentIndex + length
       );
       if (segment) {
         result +=
           segment +
-          (currentIndex + parseInt(length) < formattedCardNumbers.length
-            ? '-'
-            : '');
+          (currentIndex + length < formattedCardNumbers.length ? '-' : '');
       }
-      currentIndex += parseInt(length);
+      currentIndex += length;
     });
 
     return result;
@@ -120,7 +118,7 @@ const useCardNumbers = (): CardNumbersResult => {
     cardNumberMaxLength,
     errorMessage,
     handleCardNumberChange,
-    handleCardNumberBlur
+    handleCardNumberBlur,
   };
 };
 
