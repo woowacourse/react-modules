@@ -86,25 +86,63 @@ function App() {
 ### Alert 모달
 
 ```tsx
-<Modal isOpen={isOpen} onClose={closeModal} title={{ text: "알림" }}>
-  <p>작업이 완료되었습니다.</p>
+<Modal
+  isOpen={isOpen}
+  onClose={closeModal}
+  title={{ text: "아이디를 입력해 주세요." }}
+>
+  <p>아이디는 필수로 입력해야 합니다.</p>
   <div style={{ display: "flex", justifyContent: "flex-end" }}>
     <Modal.ConfirmButton />
   </div>
 </Modal>
 ```
 
+```tsx
+import { AlertModal } from "@sooyeoniya/components";
+
+...
+
+<AlertModal
+  isOpen={isOpen}
+  onClose={closeModal}
+  onConfirm={handleConfirm}
+  title={{ text: "아이디를 입력해 주세요." }}
+>
+  <p>아이디는 필수로 입력해야 합니다.</p>
+</AlertModal>;
+```
+
 ### Confirm 모달
 
 ```tsx
-<Modal isOpen={isOpen} onClose={closeModal} title={{ text: "확인" }}>
-  <p>정말로 삭제하시겠습니까?</p>
+<Modal
+  isOpen={isOpen}
+  onClose={closeModal}
+  title={{ text: "카드를 삭제하시겠습니까?" }}
+>
+  <p>삭제하면 복구하실 수 없습니다.</p>
   <Modal.ActionButtons
     onConfirm={handleDelete}
     confirmProps={{ style: { width: "90px" } }}
     cancelProps={{ style: { width: "90px" } }}
   />
 </Modal>
+```
+
+```tsx
+import { ConfirmModal } from "@sooyeoniya/components";
+
+...
+
+<ConfirmModal
+  isOpen={isOpen}
+  onClose={closeModal}
+  onConfirm={handleSubmit}
+  title={{ text: "카드를 삭제하시겠습니까?" }}
+>
+  <p>삭제하면 복구하실 수 없습니다.</p>
+</ConfirmModal>;
 ```
 
 ### Prompt 모달
@@ -117,10 +155,14 @@ const handleSubmit = () => {
   closeModal();
 };
 
-<Modal isOpen={isOpen} onClose={closeModal} title={{ text: "쿠폰 번호 입력" }}>
+<Modal
+  isOpen={isOpen}
+  onClose={closeModal}
+  title={{ text: "쿠폰 번호를 입력해 주세요." }}
+>
   <div style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
     <Modal.Input
-      placeholder="쿠폰 번호를 입력하세요"
+      placeholder="CGEXX46Z"
       value={inputValue}
       onChange={(e) => setInputValue(e.target.value)}
     />
@@ -131,6 +173,22 @@ const handleSubmit = () => {
     />
   </div>
 </Modal>;
+```
+
+```tsx
+import { PromptModal } from "@sooyeoniya/components";
+
+...
+
+<PromptModal
+  inputValue={inputValue}
+  onChange={(e) => setInputValue(e.target.value)}
+  isOpen={isOpen}
+  onClose={closeModal}
+  onConfirm={handleSubmit}
+  placeholder="CGEXX46Z"
+  title={{ text: "쿠폰 번호를 입력해 주세요." }}
+/>;
 ```
 
 ## 🔍 커스터마이징
