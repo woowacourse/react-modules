@@ -1,33 +1,22 @@
-export const identifyCardNumber = (inputStates: string) => {
-  if (inputStates.length >= 1) {
-    if (inputStates.startsWith('4'))
-      return { cardBrand: 'visa', maxLength: 16 };
-  }
-  if (inputStates.length >= 2) {
-    if (inputStates.startsWith('34') || inputStates.startsWith('37')) {
-      return { cardBrand: 'amex', maxLength: 15 };
+import { CARD_BRANDS } from '../constants';
+
+export const identifyCardNumber = (input: string) => {
+  for (const { name, length, startNumbers } of CARD_BRANDS) {
+    for (const rule of startNumbers) {
+      if (typeof rule === 'number') {
+        const slice = input.slice(0, rule.toString().length);
+        if (slice === rule.toString()) {
+          return { cardBrand: name, maxLength: length };
+        }
+      } else if (Array.isArray(rule)) {
+        const [min, max] = rule;
+        const slice = input.slice(0, min.toString().length);
+        const numeric = Number(slice);
+        if (numeric >= min && numeric <= max) {
+          return { cardBrand: name, maxLength: length };
+        }
+      }
     }
-    if (inputStates.startsWith('36'))
-      return { cardBrand: 'diners', maxLength: 14 };
-    
-    const startsWith = Number(inputStates.slice(0, 2));
-    if (startsWith >= 51 && startsWith <= 55)
-      return { cardBrand: 'master', maxLength: 16 };
-  }
-  if (inputStates.length >= 3) {
-    const startsWith = Number(inputStates.slice(0, 3));
-    if (startsWith >= 624 && startsWith <= 626)
-      return { cardBrand: 'unionpay', maxLength: 16 };
-  }
-  if (inputStates.length >= 4) {
-    const startsWith = Number(inputStates.slice(0, 4));
-    if (startsWith >= 6282 && startsWith <= 6288)
-      return { cardBrand: 'unionpay', maxLength: 16 };
-  }
-  if (inputStates.length >= 6) {
-    const startsWith = Number(inputStates.slice(0, 6));
-    if (startsWith >= 622126 && startsWith <= 622925)
-      return { cardBrand: 'unionpay', maxLength: 16 };
   }
 
   return { cardBrand: 'default', maxLength: 16 };
