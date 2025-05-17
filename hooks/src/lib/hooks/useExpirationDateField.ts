@@ -32,7 +32,7 @@ export function useExpirationDateField() {
     return errors;
   }, [cardExpiration]);
 
-  const isCardExpirationValid = !cardExpirationError;
+  const isCardExpirationValid = !cardExpirationError.month && !cardExpirationError.year;
   const handleCardExpirationChange = (key: keyof CardExpiration, value: string) => {
     setCardExpiration((prev) => ({ ...prev, [key]: value }));
   };
