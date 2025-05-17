@@ -28,6 +28,7 @@ export const ModalButton = styled.button<ModalButtonProps>`
   border-radius: 4px;
   cursor: pointer;
   font-size: 16px;
+  margin: 10px 0 0 0;
   &:hover {
   }
 `;
@@ -39,15 +40,8 @@ function getSize(size: "small" | "medium" | "large") {
     case "medium":
       return "200px";
     case "large":
-      return "400px";
+      return "100%";
     default:
       return "100%";
   }
 }
-
-export const ModalButtonContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  margin-top: 20px;
-  width: 100%;
-`;

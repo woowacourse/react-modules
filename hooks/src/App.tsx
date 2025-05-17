@@ -1,7 +1,8 @@
 import "./App.css";
 import { useCardNumbers } from "pongju-payments-hooks";
+import { useCardBrand } from "./lib";
 function App() {
-  const cardNumbersHook = useCardNumbers();
+  const cardNumbersHook = useCardBrand({ optionValues: ["신한은행", "BC"] });
   console.log(cardNumbersHook);
   return (
     <>
