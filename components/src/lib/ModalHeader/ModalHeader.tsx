@@ -24,6 +24,8 @@ export default function ModalHeader({
           onClick={onClose}
           data-testid="modal-close-button"
           tabIndex={0}
+          onKeyDown={(e) => e.key === "Enter" && onClose()}
+          role="button"
         />
       )}
     </header>
