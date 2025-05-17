@@ -29,7 +29,9 @@ const ConfirmModal = ({
         <Modal.Title title={title} />
         <Modal.Description description={description} />
         <Modal.ButtonWrapper>
-          <Modal.CancelButton $autoFocus={true}>취소</Modal.CancelButton>
+          <Modal.CancelButton onClose={onClose} $autoFocus={true}>
+            취소
+          </Modal.CancelButton>
           <Modal.ConfirmButton onClick={handleConfirm}>확인</Modal.ConfirmButton>
         </Modal.ButtonWrapper>
       </Modal.Container>

@@ -42,7 +42,7 @@ const PromptModal = ({
           <StyledLabel htmlFor="prompt-input" />
           <StyledInput ref={ref} autoFocus={true} id="prompt-input" />
           <Modal.ButtonWrapper>
-            <Modal.CancelButton>취소</Modal.CancelButton>
+            <Modal.CancelButton onClose={onClose}>취소</Modal.CancelButton>
             <Modal.ConfirmButton type="submit">확인</Modal.ConfirmButton>
           </Modal.ButtonWrapper>
         </StyledForm>
