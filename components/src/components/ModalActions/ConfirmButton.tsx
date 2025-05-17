@@ -9,7 +9,7 @@ const ConfirmButton = ({
   const { onClose } = useModalContext();
 
   const handleConfirmClick = (e: React.MouseEvent<HTMLButtonElement>) => {
-    if (onClick) onClick(e);
+    onClick?.(e);
     onClose();
   };
 
