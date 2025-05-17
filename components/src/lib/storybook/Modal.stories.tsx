@@ -79,7 +79,7 @@ export const Default: Story = {
     const canvas = within(canvasElement);
     const openButton = canvas.getByRole('button', { name: '열기' });
     expect(openButton).toBeDefined();
-    userEvent.click(openButton);
+    await userEvent.click(openButton);
 
     const dialog = await canvas.findByRole('dialog');
     expect(dialog).toBeDefined();
@@ -101,7 +101,7 @@ export const Small: Story = {
     const canvas = within(canvasElement);
     const openButton = canvas.getByRole('button', { name: '열기' });
     expect(openButton).toBeDefined();
-    userEvent.click(openButton);
+    await userEvent.click(openButton);
   },
 };
 
@@ -114,7 +114,7 @@ export const Medium: Story = {
     const canvas = within(canvasElement);
     const openButton = canvas.getByRole('button', { name: '열기' });
     expect(openButton).toBeDefined();
-    userEvent.click(openButton);
+    await userEvent.click(openButton);
   },
 };
 
@@ -127,7 +127,7 @@ export const Large: Story = {
     const canvas = within(canvasElement);
     const openButton = canvas.getByRole('button', { name: '열기' });
     expect(openButton).toBeDefined();
-    userEvent.click(openButton);
+    await userEvent.click(openButton);
   },
 };
 
@@ -142,7 +142,7 @@ export const CenterWithAction: Story = {
 
     const openButton = canvas.getByRole('button', { name: '열기' });
     expect(openButton).toBeDefined();
-    userEvent.click(openButton);
+    await userEvent.click(openButton);
 
     const modal = await canvas.findByRole('dialog', { name: '모달 제목' });
     expect(modal).toBeDefined();
@@ -153,7 +153,7 @@ export const CenterWithAction: Story = {
     const confirmButton = canvas.getByRole('button', { name: '동의하고 저장하기' });
     expect(confirmButton).toBeDefined();
 
-    userEvent.click(confirmButton);
+    await userEvent.click(confirmButton);
     await waitFor(() => {
       expect(canvas.queryByRole('dialog', { name: '모달 제목' })).toBeNull();
     });
@@ -171,7 +171,7 @@ export const Bottom: Story = {
 
     const openButton = canvas.getByRole('button', { name: '열기' });
     expect(openButton).toBeDefined();
-    userEvent.click(openButton);
+    await userEvent.click(openButton);
 
     const dialog = await canvas.findByRole('dialog');
     expect(dialog).toBeDefined();
@@ -196,7 +196,7 @@ export const ESCClose: Story = {
 
     const openButton = canvas.getByRole('button', { name: '열기' });
     expect(openButton).toBeDefined();
-    userEvent.click(openButton);
+    await userEvent.click(openButton);
 
     const dialog = await canvas.findByRole('dialog');
     expect(dialog).toBeDefined();
@@ -204,7 +204,7 @@ export const ESCClose: Story = {
     const title = await canvas.findByText('모달 제목');
     expect(title).toBeDefined();
 
-    await userEvent.keyboard('{Escape}');
+    await await userEvent.keyboard('{Escape}');
     await waitFor(() => {
       expect(canvas.queryByRole('dialog', { name: '모달 제목' })).toBeNull();
     });
@@ -221,7 +221,7 @@ export const BackdropClose: Story = {
 
     const openButton = canvas.getByRole('button', { name: '열기' });
     expect(openButton).toBeDefined();
-    userEvent.click(openButton);
+    await userEvent.click(openButton);
 
     const dialog = await canvas.findByRole('dialog');
     expect(dialog).toBeDefined();
@@ -232,7 +232,7 @@ export const BackdropClose: Story = {
     const backdrop = canvas.getByLabelText('modal-backdrop');
     expect(backdrop).toBeDefined();
 
-    userEvent.click(backdrop);
+    await userEvent.click(backdrop);
     await waitFor(() => {
       expect(canvas.queryByRole('dialog', { name: '모달 제목' })).toBeNull();
     });

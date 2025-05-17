@@ -59,7 +59,7 @@ export const Default: Story = {
     const canvas = within(canvasElement);
     const openButton = canvas.getByRole('button', { name: '알림 열기' });
     expect(openButton).toBeDefined();
-    userEvent.click(openButton);
+    await userEvent.click(openButton);
 
     const dialog = await canvas.findByRole('dialog');
     expect(dialog).toBeDefined();
@@ -84,7 +84,7 @@ export const Bottom: Story = {
     const canvas = within(canvasElement);
     const openButton = canvas.getByRole('button', { name: '알림 열기' });
     expect(openButton).toBeDefined();
-    userEvent.click(openButton);
+    await userEvent.click(openButton);
 
     const dialog = await canvas.findByRole('dialog');
     expect(dialog).toBeDefined();
