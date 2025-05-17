@@ -1,5 +1,5 @@
-import { useState } from "react";
 import { checkEmptyValue, checkLength, checkNumber, getError } from "../utils/vaildate";
+import usePureNumberState from "../usePureNumber/usePureNumberState";
 
 const MAX_LENGTH = 4;
 export const cardNumberErrorCases = [
@@ -18,14 +18,8 @@ export const cardNumberErrorCases = [
 ];
 
 const useCardNumber = () => {
-	const [cardNumber, setCardNumber] = useState("");
+	const { value, onChange } = usePureNumberState();
 
-	const onChange = (cardNumberInput: string) => {
-		const pureCardNumber = cardNumberInput.replace(/-/g, "");
-
-		setCardNumber(pureCardNumber);
-	};
-
-	return { cardNumber, onChange, cardNumberError: getError(cardNumber, cardNumberErrorCases) };
+	return { cardNumber: value, onChange, cardNumberError: getError(value, cardNumberErrorCases) };
 };
 export default useCardNumber;

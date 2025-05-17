@@ -1,5 +1,5 @@
-import { useState } from "react";
 import { checkEmptyValue, getError } from "../utils/vaildate";
+import usePureNumberState from "../usePureNumber/usePureNumberState";
 
 export const cardCompanyErrorCases = [
 	{
@@ -9,15 +9,9 @@ export const cardCompanyErrorCases = [
 ];
 
 const useCardCompany = () => {
-	const [cardCompany, setCardCompany] = useState<string | null>(null);
+	const { value, onChange } = usePureNumberState();
 
-	const onChange = (value: string) => {
-		const cardCompanyInput = value.replace(/-/g, "");
-
-		setCardCompany(cardCompanyInput);
-	};
-
-	return { cardCompany, onChange, cardCompanyError: getError(cardCompany, cardCompanyErrorCases) };
+	return { cardCompany: value, onChange, cardCompanyError: getError(value, cardCompanyErrorCases) };
 };
 
 export default useCardCompany;

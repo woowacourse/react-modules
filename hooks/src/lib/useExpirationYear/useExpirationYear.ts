@@ -1,5 +1,5 @@
-import { useState } from "react";
 import { checkEmptyValue, checkLength, checkNumber, checkYearRange, getError } from "../utils/vaildate";
+import usePureNumberState from "../usePureNumber/usePureNumberState";
 
 const MAX_LENGTH = 2;
 
@@ -22,14 +22,8 @@ export const expirationYearErrorCases = [
 	},
 ];
 const useExpirationYear = () => {
-	const [expirationYear, setExpirationYear] = useState("");
+	const { value, onChange } = usePureNumberState();
 
-	const onChange = (cardCvcInput: string) => {
-		const pureCardNumber = cardCvcInput.replace(/-/g, "");
-
-		setExpirationYear(pureCardNumber);
-	};
-
-	return { expirationYear, onChange, cardExpirationYearError: getError(expirationYear, expirationYearErrorCases) };
+	return { expirationYear: value, onChange, cardExpirationYearError: getError(value, expirationYearErrorCases) };
 };
 export default useExpirationYear;

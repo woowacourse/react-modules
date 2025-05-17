@@ -1,5 +1,5 @@
-import { useState } from "react";
 import { checkEmptyValue, checkLength, checkNumber, getError } from "../utils/vaildate";
+import usePureNumberState from "../usePureNumber/usePureNumberState";
 
 const MAX_LENGTH = 3;
 
@@ -19,14 +19,8 @@ export const cardCvcErrorCases = [
 ];
 
 const useCardCvc = () => {
-	const [cardCvc, setCardCvc] = useState("");
+	const { value, onChange } = usePureNumberState();
 
-	const onChange = (cardCvcInput: string) => {
-		const pureCardNumber = cardCvcInput.replace(/-/g, "");
-
-		setCardCvc(pureCardNumber);
-	};
-
-	return { cardCvc, onChange, cardCvcError: getError(cardCvc, cardCvcErrorCases) };
+	return { cardCvc: value, onChange, cardCvcError: getError(value, cardCvcErrorCases) };
 };
 export default useCardCvc;
