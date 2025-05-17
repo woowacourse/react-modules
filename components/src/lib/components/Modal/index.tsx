@@ -3,9 +3,7 @@ import ModalContent from "../ModalContent";
 import ModalTitle from "../ModalTitle";
 import ModalClose from "../ModalClose";
 import ModalTrigger from "../ModalTrigger";
-import ModalRoot from "../ModalRoot";
-
-import { useModal } from "../ModalRoot";
+import ModalRoot, { useModal } from "../ModalRoot";
 
 import { StyledModal } from "./Modal.styled";
 
