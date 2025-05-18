@@ -24,16 +24,17 @@ function ModalExample({
   children,
 }: ModalExampleProps) {
   return (
-    <ModalProvider
-      modalPosition={modalPosition}
-      modalSize={modalSize}
-      modalType={modalType}
-      closeType={closeType}
-      titleText={titleText}
-      onClose={onClose}
-    >
+    <ModalProvider onClose={onClose}>
       <ModalOpenButton type={type} />
-      <Modal>{children}</Modal>
+      <Modal
+        modalPosition={modalPosition}
+        modalSize={modalSize}
+        modalType={modalType}
+        closeType={closeType}
+        titleText={titleText}
+      >
+        {children}
+      </Modal>
     </ModalProvider>
   );
 }

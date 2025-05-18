@@ -4,8 +4,23 @@ import { ModalContainer, ModalBackdrop, Container, Wrapper } from './styles/Moda
 import { useModalContext } from './contexts/ModalContext';
 import { ModalChildrenProps } from './types/modalTypes';
 
-const Modal = ({ children }: ModalChildrenProps) => {
-  const { isModalOpened, closeModalHandler, modalPosition } = useModalContext();
+interface ModalProps extends ModalChildrenProps {
+  modalPosition: 'center' | 'bottom';
+  modalType?: 'default' | 'alert' | 'confirm' | 'prompt';
+  modalSize?: 'small' | 'medium' | 'large';
+  titleText?: string;
+  closeType?: 'top' | 'bottom' | 'none';
+}
+
+const Modal = ({
+  children,
+  modalPosition,
+  modalType = 'default',
+  modalSize = 'medium',
+  titleText = '',
+  closeType = 'none',
+}: ModalProps) => {
+  const { isModalOpened, closeModalHandler } = useModalContext();
 
   const handleKeyDown = (event: KeyboardEvent) => {
     if (event.key === 'Escape') {
@@ -29,7 +44,15 @@ const Modal = ({ children }: ModalChildrenProps) => {
       <ModalBackdrop onClick={closeModalHandler} />
       <Container>
         <Wrapper>
-          <ModalBox>{children}</ModalBox>
+          <ModalBox
+            modalPosition={modalPosition}
+            modalType={modalType}
+            modalSize={modalSize}
+            titleText={titleText}
+            closeType={closeType}
+          >
+            {children}
+          </ModalBox>
         </Wrapper>
       </Container>
     </ModalContainer>

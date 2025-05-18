@@ -3,8 +3,13 @@ import { ModalHeaderContainer } from './styles/ModalStyle';
 import { ModalTitle } from './styles/ModalTextStyle';
 import { useModalContext } from './contexts/ModalContext';
 
-const ModalHeader = () => {
-  const { titleText, closeType, closeModalHandler, onClose } = useModalContext();
+interface ModalHeaderProps {
+  titleText: string;
+  closeType: 'top' | 'bottom' | 'none';
+}
+
+const ModalHeader = ({ titleText, closeType }: ModalHeaderProps) => {
+  const { closeModalHandler, onClose } = useModalContext();
   const hasCloseButton = closeType === 'top' ? true : false;
 
   function closeHandler() {

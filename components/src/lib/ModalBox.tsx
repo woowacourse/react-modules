@@ -1,11 +1,23 @@
 import ModalHeader from './ModalHeader';
 import { useModalContext } from './contexts/ModalContext';
 import { ModalBoxContainer, ModalBottomCloseBtn, ModalButtons } from './styles/ModalStyle';
-import { ModalChildrenProps } from './types/modalTypes';
+import { ModalChildrenProps, ModalPositionAndSizeProps } from './types/modalTypes';
 
-const ModalBox = ({ children }: ModalChildrenProps) => {
-  const { modalPosition, modalSize, closeType, modalType, closeModalHandler, onClose } =
-    useModalContext();
+interface ModalBoxProps extends ModalChildrenProps, ModalPositionAndSizeProps {
+  modalType: 'default' | 'alert' | 'confirm' | 'prompt';
+  titleText: string;
+  closeType: 'top' | 'bottom' | 'none';
+}
+
+const ModalBox = ({
+  children,
+  modalPosition,
+  modalSize,
+  closeType,
+  modalType,
+  titleText,
+}: ModalBoxProps) => {
+  const { closeModalHandler, onClose } = useModalContext();
 
   const handleConfirm = () => {
     onClose?.();
@@ -37,7 +49,7 @@ const ModalBox = ({ children }: ModalChildrenProps) => {
 
   return (
     <ModalBoxContainer modalPosition={modalPosition} modalSize={modalSize}>
-      <ModalHeader />
+      <ModalHeader titleText={titleText} closeType={closeType} />
       {children}
       {renderModalButtons()}
     </ModalBoxContainer>

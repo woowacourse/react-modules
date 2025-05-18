@@ -1,39 +1,20 @@
 import { createContext, useState, useContext, ReactNode } from 'react';
-import { ModalProps } from '../types/modalTypes';
 
 interface ModalContextType {
   isModalOpened: boolean;
   openModalHandler: () => void;
   closeModalHandler: () => void;
-  modalType: ModalProps['modalType'];
-  modalPosition: ModalProps['modalPosition'];
-  modalSize?: ModalProps['modalSize'];
-  titleText: string;
-  closeType: ModalProps['closeType'];
   onClose?: () => void;
 }
 
 interface ModalProviderProps {
   children: ReactNode;
-  modalType?: ModalProps['modalType'];
-  modalPosition: ModalProps['modalPosition'];
-  modalSize?: ModalProps['modalSize'];
-  titleText?: string;
-  closeType: ModalProps['closeType'];
   onClose?: () => void;
 }
 
 export const ModalContext = createContext<ModalContextType | undefined>(undefined);
 
-export const ModalProvider = ({
-  children,
-  modalType = 'default',
-  modalPosition = 'center',
-  modalSize = 'medium',
-  titleText = '',
-  closeType = 'none',
-  onClose,
-}: ModalProviderProps) => {
+export const ModalProvider = ({ children, onClose }: ModalProviderProps) => {
   const [isModalOpened, setIsModalOpened] = useState(false);
 
   const openModalHandler = () => setIsModalOpened(true);
@@ -45,11 +26,6 @@ export const ModalProvider = ({
         isModalOpened,
         openModalHandler,
         closeModalHandler,
-        modalType,
-        modalPosition,
-        modalSize,
-        titleText,
-        closeType,
         onClose,
       }}
     >
