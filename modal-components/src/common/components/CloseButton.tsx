@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import CloseIconSVG from "../../assets/CloseIconSVG";
+import CloseIconSVG from "../assets/CloseIconSVG";
 
 const CloseButtonStyle = styled.button`
   cursor: pointer;

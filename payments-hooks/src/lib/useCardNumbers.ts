@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useState } from "react";
 import type { ChangeEvent } from "react";
 import { validateCardNumber } from "./validator/validateCardInput";
 import { getFirstErrorMessage } from "./validator/getFirstErrorMessage";

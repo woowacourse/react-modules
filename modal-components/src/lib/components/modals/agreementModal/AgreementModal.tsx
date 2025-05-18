@@ -1,7 +1,7 @@
 import ModalLayout from "../common/ModalLayout";
-import Button from "../../common/Button";
+import Button from "../../../../common/components/Button";
 import { AgreementModalProps } from "../../../types/modalTypes";
-import Checkbox from "../../common/CheckBox";
+import Checkbox from "../../../../common/components/CheckBox";
 import * as S from "./AgreementModal.styled";
 import { useAgreementModal } from "./useAgreementCheck";
 

@@ -1,7 +1,7 @@
 import { ModalHeaderContainer } from "./ModalStyle";
 import { ModalTitle } from "../../../styles/ModalTextStyle";
 import { ModalHeaderProps } from "../../../types/modalTypes";
-import CloseButton from "../../common/CloseButton";
+import CloseButton from "../../../../common/components/CloseButton";
 
 const ModalHeader = ({
   titleText,

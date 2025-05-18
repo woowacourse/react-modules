@@ -35,58 +35,6 @@ npm install @dev-dino22/payments-hooks
 
 ---
 
-## (New!) useCardNumbersInput
-
-- 브랜드 체크 기능이 추가되었습니다.
-- 브랜드 별로 cardNumbersInfo의 배열 길이가 달라져, 사용자의 입력에 따라 input 개수를 실시간으로 조절할 수 있습니다.
-
-### 🔧 **Return 값**
-
-| Return Value      | Type                                                                | Description                              |
-| ----------------- | ------------------------------------------------------------------- | ---------------------------------------- |
-| `cardNumbersInfo` | `{ value: string, errorMessage: string }[]`                         | 각 인풋 필드의 값과 에러 메시지 정보     |
-| `onChangeHandler` | `(index: number) => (event: ChangeEvent<HTMLInputElement>) => void` | 카드 번호가 입력될 때 호출되는 핸들러    |
-| `cardBrand`       | `string`                                                            | 감지된 카드 브랜드 (Visa, MasterCard 등) |
-| `cardBlocks`      | `number[]`                                                          | 각 인풋 필드의 최대 글자 수 배열         |
-
-```tsx
-import { useCardNumbersInput } from "@dev-dino22/modal-components";
-import Input from "./Input";
-
-const CardNumberInput = () => {
-  const { cardNumbersInfo, onChangeHandler, cardBrand, cardBlocks } =
-    useCardNumbersInput();
-
-  return (
-    <div className="card-number-inputs">
-      {cardNumbersInfo.map(({ value }, i) => (
-        <Input
-          key={i}
-          type="text"
-          value={value}
-          onChange={onChangeHandler(i)}
-          maxLength={cardBlocks[i]}
-          inputMode="numeric"
-          autoComplete="cc-number"
-        />
-      ))}
-
-      <p>선택된 카드 브랜드: {cardBrand}</p>
-
-      <p>
-        에러메세지:{" "}
-        {
-          cardNumbersInfo.find(({ errorMessage }) => errorMessage !== "")
-            ?.errorMessage
-        }
-      </p>
-    </div>
-  );
-};
-```
-
----
-
 ## 🧪 훅 전체 사용 예시
 
 ```tsx

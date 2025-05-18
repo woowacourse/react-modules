@@ -1,6 +1,6 @@
 import ModalLayout from "./common/ModalLayout";
-import Button from "../common/Button";
-import Input from "../common/Input";
+import Button from "../../../common/components/Button";
+import Input from "../../../common/components/Input";
 import styled from "@emotion/styled";
 import { ConfirmModalProps } from "../../types/modalTypes";
 
