@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { CARD_INPUT_LENGTH, CardNetwork } from "../constants";
-import limitInputNumber from "../util/limitInputNumber/limitInputNumber";
+import { limitInputNumber } from "../util/limitInputNumber/limitInputNumber";
 import { validateCardNetwork } from "../util/validateCardNetwork/validateCardNetwork";
 import { validateCardNumber } from "../util/validateCardNumber/validateCardNumber";
 import { useInputFocus } from "./internal/useInputFocus";

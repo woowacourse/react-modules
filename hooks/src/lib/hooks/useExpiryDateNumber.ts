@@ -1,7 +1,7 @@
 import { Dispatch, useState } from "react";
 import validateExpiryDateNumber from "../util/validateExpiryDateNumber/validateExpiryDateNumber";
 import { useInputFocus } from "./internal/useInputFocus";
-import limitInputNumber from "../util/limitInputNumber/limitInputNumber";
+import { limitInputNumber } from "../util/limitInputNumber/limitInputNumber";
 import { EXPIRY_DATE_LENGTH } from "../constants";
 
 interface UseExpiryDateNumberReturn {

@@ -6,7 +6,7 @@ interface limitInputNumberProps {
   groupLengths: number[];
 }
 
-export default function limitInputNumber({
+export function limitInputNumber({
   inputNumbers,
   setInputNumber,
   groupLengths,

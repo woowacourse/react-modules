@@ -14,32 +14,28 @@ describe("useExpiryDateNumber", () => {
     expect(result.current.isError).toEqual([false, false]);
   });
 
-  it(`유효기간이 4자를 초과하면 ${ERROR_MESSAGE.INVALID_LENGTH(
-    EXPIRY_DATE_LENGTH
-  )}를 보여준다.`, () => {
+  it(`유효기간이 4자를 초과하면 유효기간의 최대 길이까지만 보여준다.`, () => {
     const { result } = renderHook(() => useExpiryDateNumber());
     act(() => {
       result.current.setExpiryDateNumber(["01", "243"]);
     });
 
-    expect(result.current.errorMessage).toEqual([
-      "",
-      ERROR_MESSAGE.INVALID_LENGTH(EXPIRY_DATE_LENGTH),
-    ]);
-    expect(result.current.isError).toEqual([false, true]);
+    expect(result.current.isError).toEqual([false, false]);
+    expect(result.current.expiryDateNumber).toEqual(["01", "24"]);
   });
 
-  it(`유효기간이 문자열을 받는다면 ${ERROR_MESSAGE.NOT_NUMERIC}를 보여준다.`, () => {
+  it(`유효기간이 문자열을 받는다면 숫자만 필터링 해서 보여준다.`, () => {
     const { result } = renderHook(() => useExpiryDateNumber());
     act(() => {
       result.current.setExpiryDateNumber(["aa", "24"]);
     });
 
     expect(result.current.errorMessage).toEqual([
-      ERROR_MESSAGE.NOT_NUMERIC,
+      ERROR_MESSAGE.INVALID_LENGTH(EXPIRY_DATE_LENGTH),
       "",
     ]);
     expect(result.current.isError).toEqual([true, false]);
+    expect(result.current.expiryDateNumber).toEqual(["", "24"]);
   });
 
   it(`유효기간이 공백을 받는다면 ${ERROR_MESSAGE.INVALID_LENGTH(

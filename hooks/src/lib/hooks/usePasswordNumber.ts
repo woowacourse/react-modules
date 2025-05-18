@@ -1,6 +1,6 @@
 import { Dispatch, useState } from "react";
 import validatePasswordNumber from "../util/validatePasswordNumber/validatePasswordNumber";
-import limitInputNumber from "../util/limitInputNumber/limitInputNumber";
+import { limitInputNumber } from "../util/limitInputNumber/limitInputNumber";
 import { PASSWORD_LENGTH } from "../constants";
 
 interface UsePasswordNumberReturn {

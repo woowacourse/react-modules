@@ -4,6 +4,7 @@ export default function validateCVCNumber(CVCNumber: string) {
   const trimCVCNumber = CVCNumber.trim();
   if (!isNumeric(trimCVCNumber)) return ERROR_MESSAGE.NOT_NUMERIC;
 
+  console.log("CVC : ", trimCVCNumber.length);
   if (trimCVCNumber.length !== CVC_LENGTH)
     return ERROR_MESSAGE.INVALID_LENGTH(CVC_LENGTH);
   return "";

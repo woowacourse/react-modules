@@ -1,7 +1,8 @@
 import { useState } from "react";
-import limitInputNumber from "../util/limitInputNumber/limitInputNumber";
+
 import validateCVCNumber from "../util/validateCVCNumber/validateCVCNumber";
 import { CVC_LENGTH } from "../constants";
+import { limitInputNumber } from "../util/limitInputNumber/limitInputNumber";
 
 interface useCVCNumberReturn {
   CVCNumber: string;
