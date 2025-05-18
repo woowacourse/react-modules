@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import type { ChangeEvent } from 'react';
 import { validateCardNumber, validateFullCardNumber } from './validator/validateCardInput';
 import { getFirstErrorMessage } from './validator/getFirstErrorMessage';
@@ -22,12 +22,6 @@ export function useCardNumbersInput() {
   const cardBrand = determineCardBrand(cardNumber);
   const formatPattern = CARD_FORMAT_PATTERNS[cardBrand];
 
-  useEffect(() => {
-    if (cardNumber) {
-      formatCardNumber(cardNumber);
-    }
-  }, [cardNumber]);
-
   function formatCardNumber(number: string) {
     const cleanNumber = number.replace(/\D/g, '');
     const pattern = CARD_FORMAT_PATTERNS[cardBrand];
@@ -43,7 +37,7 @@ export function useCardNumbersInput() {
       startIndex = endIndex;
     }
 
-    setCardNumberGroups(formattedGroups);
+    return formattedGroups;
   }
 
   function onChangeHandler(e: CardNumberInputEvent) {
@@ -62,6 +56,10 @@ export function useCardNumbersInput() {
 
     const newCardNumber = newCardNumberGroups.join('');
     const newCardBrand = determineCardBrand(newCardNumber);
+
+    if (newCardNumber) {
+      newCardNumberGroups = formatCardNumber(newCardNumber);
+    }
 
     const fullCardNumberError = validateFullCardNumber(newCardBrand, newCardNumber);
 
