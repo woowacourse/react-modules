@@ -58,9 +58,12 @@ export function useCardNumbersInput() {
         i === index ? { value, errorMessage } : prev
       );
 
-      setCardBrand(detectCardBrand(next.map(({ value }) => value).join("")));
+      const detectedBrand = detectCardBrand(
+        next.map(({ value }) => value).join("")
+      );
+      setCardBrand(detectedBrand);
 
-      const blockCount = CARD_NUMBER_BLOCKS[cardBrand].length;
+      const blockCount = CARD_NUMBER_BLOCKS[detectedBrand].length;
       const validNext = next.slice(0, blockCount).map((item) => ({ ...item }));
 
       setCardNumbersInfo(validNext);
