@@ -2,10 +2,11 @@ import CloseIconSVG from './assets/CloseIconSVG';
 import { ModalHeaderContainer } from './styles/ModalStyle';
 import { ModalTitle } from './styles/ModalTextStyle';
 import { useModalContext } from './contexts/ModalContext';
+import { ModalCloseType } from './types/modalTypes';
 
 interface ModalHeaderProps {
   titleText: string;
-  closeType: 'top' | 'bottom' | 'none';
+  closeType: ModalCloseType;
 }
 
 const ModalHeader = ({ titleText, closeType }: ModalHeaderProps) => {

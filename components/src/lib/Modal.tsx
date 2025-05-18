@@ -2,14 +2,20 @@ import { useEffect } from 'react';
 import ModalBox from './ModalBox';
 import { ModalContainer, ModalBackdrop, Container, Wrapper } from './styles/ModalStyle';
 import { useModalContext } from './contexts/ModalContext';
-import { ModalChildrenProps } from './types/modalTypes';
+import {
+  ModalChildrenProps,
+  ModalPosition,
+  ModalType,
+  ModalSize,
+  ModalCloseType,
+} from './types/modalTypes';
 
 interface ModalProps extends ModalChildrenProps {
-  modalPosition: 'center' | 'bottom';
-  modalType?: 'default' | 'alert' | 'confirm' | 'prompt';
-  modalSize?: 'small' | 'medium' | 'large';
+  modalPosition: ModalPosition;
+  modalType?: ModalType;
+  modalSize?: ModalSize;
   titleText?: string;
-  closeType?: 'top' | 'bottom' | 'none';
+  closeType?: ModalCloseType;
 }
 
 const Modal = ({

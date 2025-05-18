@@ -1,12 +1,17 @@
 import ModalHeader from './ModalHeader';
 import { useModalContext } from './contexts/ModalContext';
 import { ModalBoxContainer, ModalBottomCloseBtn, ModalButtons } from './styles/ModalStyle';
-import { ModalChildrenProps, ModalPositionAndSizeProps } from './types/modalTypes';
+import {
+  ModalChildrenProps,
+  ModalPositionAndSizeProps,
+  ModalType,
+  ModalCloseType,
+} from './types/modalTypes';
 
 interface ModalBoxProps extends ModalChildrenProps, ModalPositionAndSizeProps {
-  modalType: 'default' | 'alert' | 'confirm' | 'prompt';
+  modalType: ModalType;
   titleText: string;
-  closeType: 'top' | 'bottom' | 'none';
+  closeType: ModalCloseType;
 }
 
 const ModalBox = ({

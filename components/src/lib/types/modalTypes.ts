@@ -1,11 +1,16 @@
 import { ReactNode } from 'react';
 
-export interface ModalProps {
-  modalType: 'default' | 'alert' | 'confirm' | 'prompt';
-  modalPosition: 'center' | 'bottom';
-  modalSize?: 'small' | 'medium' | 'large';
+export type ModalPosition = 'center' | 'bottom';
+export type ModalSize = 'small' | 'medium' | 'large';
+export type ModalType = 'default' | 'alert' | 'confirm' | 'prompt';
+export type ModalCloseType = 'top' | 'bottom' | 'none';
+
+export interface ModalConfig {
+  modalType: ModalType;
+  modalPosition: ModalPosition;
+  modalSize?: ModalSize;
   titleText?: string;
-  closeType: 'top' | 'bottom' | 'none';
+  closeType: ModalCloseType;
   children?: ReactNode;
   onClose?: () => void;
 }
@@ -21,10 +26,10 @@ export interface ModalHeaderProps {
 }
 
 export interface ModalPositionProps {
-  modalPosition: 'center' | 'bottom';
+  modalPosition: ModalPosition;
 }
 
 export interface ModalPositionAndSizeProps {
-  modalPosition: 'center' | 'bottom';
-  modalSize?: 'small' | 'medium' | 'large';
+  modalPosition: ModalPosition;
+  modalSize?: ModalSize;
 }
