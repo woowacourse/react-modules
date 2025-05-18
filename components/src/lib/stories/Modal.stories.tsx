@@ -1,6 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { userEvent, screen } from '@storybook/testing-library';
-
 import { useState } from 'react';
 import Modal from '../component/Modal';
 
@@ -13,15 +12,18 @@ const meta: Meta<typeof Modal> = {
         component: `
 Compound Component 패턴으로 구성된 Modal입니다. 
 
-<Modal onClose={...} isOpen={true}>
+<Modal isOpen={true} onClose={...} position="center">
   <Modal.BackDrop />
-  <Modal.Content position="center">
+  <Modal.Content>
     <Modal.Title>제목</Modal.Title>
     <Modal.CloseButton>X</Modal.CloseButton>
+    <Modal.Footer align="right">
+      <button>확인</button>
+    </Modal.Footer>
   </Modal.Content>
 </Modal>
 
-각 하위 컴포넌트는 props를 통해 커스터마이징할 수 있으며, 모달 외부 클릭이나 ESC 키 입력 시 자동으로 닫힐 수 있도록 설계되어 있습니다.
+ESC 키나 외부 클릭 시 자동으로 닫히며, position, size 등을 통해 유연하게 조절 가능합니다.
         `
       }
     }
@@ -45,21 +47,21 @@ const ModalExample = ({ position, openButtonLabel, title, content }: ModalExampl
   return (
     <div>
       <button onClick={handleOpen}>{openButtonLabel}</button>
-      {isOpen ? (
-        <Modal isOpen={isOpen} onClose={handleClose}>
-          <Modal.BackDrop />
-          <Modal.Content position={position} style={{ width: 300, height: 200, background: 'pink' }}>
-            <Modal.Title>{title}</Modal.Title>
+      <Modal isOpen={isOpen} onClose={handleClose} position={position} size="medium">
+        <Modal.BackDrop />
+        <Modal.Content style={{ backgroundColor: 'white', padding: '24px 32px', borderRadius: '8px' }}>
+          <Modal.Title>{title}</Modal.Title>
+          <p>{content}</p>
+          <Modal.Footer align="right">
             <Modal.CloseButton>닫기</Modal.CloseButton>
-            <p>{content}</p>
-          </Modal.Content>
-        </Modal>
-      ) : (
-        <p>모달이 닫혔습니다</p>
-      )}
+          </Modal.Footer>
+        </Modal.Content>
+      </Modal>
+      {!isOpen && <p>모달이 닫혔습니다</p>}
     </div>
   );
 };
+
 export const Default: Story = {
   render: () => <ModalExample position="center" openButtonLabel="모달 열기" title="테스트 타이틀" content="모달 내용입니다." />,
   play: async ({ step }) => {

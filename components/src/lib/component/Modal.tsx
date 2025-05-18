@@ -1,19 +1,20 @@
-import ModalPortal from '../ModalPortal';
 import useScrollBlock from '../hooks/useScrollBlock';
 import { ModalContext, useModalContext } from '../ModalContext';
-import { BackDrop, ModalWrapper } from './Modal.styles';
+import { BackDrop, ModalWrapper, StyledFooter } from './Modal.styles';
 import { useClickAway } from '../hooks/useClickAway';
-import { ModalBackDropProps, ModalButtonProps, ModalCloseButtonProps, ModalContentProps, ModalMainProps, ModalTitleProps } from '../type/Modal.types';
+import { ModalBackDropProps, ModalCloseButtonProps, ModalContentProps, ModalFooterProps, ModalMainProps, ModalTitleProps } from '../type/Modal.types';
 import useEscKeydown from '../hooks/useEscKeydown';
+import ModalPortal from '../ModalPortal';
 
-function ModalMain({ isOpen, onClose, children }: ModalMainProps) {
+function ModalMain({ isOpen, size, onClose, position, children }: ModalMainProps) {
   useEscKeydown(onClose);
   useScrollBlock(isOpen);
 
+  if (!isOpen) return null;
   return (
-    <ModalContext.Provider value={{ onClose }}>
-      <ModalPortal>{children}</ModalPortal>
-    </ModalContext.Provider>
+    <ModalPortal>
+      <ModalContext.Provider value={{ onClose, position, size }}>{children}</ModalContext.Provider>
+    </ModalPortal>
   );
 }
 
@@ -21,19 +22,19 @@ function ModalBackDrop({ ...props }: ModalBackDropProps) {
   return <BackDrop {...props} />;
 }
 
-function ModalContent({ children, position, ...props }: ModalContentProps) {
-  const { onClose } = useModalContext();
+function ModalContent({ children, ...props }: ModalContentProps) {
+  const { onClose, position, size } = useModalContext();
   const outsideRef = useClickAway<HTMLDivElement>(onClose);
 
   return (
-    <ModalWrapper position={position} ref={outsideRef} {...props}>
+    <ModalWrapper size={size} position={position} ref={outsideRef} {...props}>
       {children}
     </ModalWrapper>
   );
 }
 
 function ModalTitle({ children, ...props }: ModalTitleProps) {
-  return <h2 {...props}>{children}</h2>;
+  return <p {...props}>{children}</p>;
 }
 
 function ModalCloseButton({ children, ...props }: ModalCloseButtonProps) {
@@ -45,11 +46,11 @@ function ModalCloseButton({ children, ...props }: ModalCloseButtonProps) {
   );
 }
 
-function ModalButton({ onClick, children, ...props }: ModalButtonProps) {
+function ModalFooter({ align = 'right', children, ...props }: ModalFooterProps) {
   return (
-    <button onClick={onClick} {...props}>
+    <StyledFooter align={align} {...props}>
       {children}
-    </button>
+    </StyledFooter>
   );
 }
 
@@ -58,7 +59,7 @@ const Modal = Object.assign(ModalMain, {
   Content: ModalContent,
   Title: ModalTitle,
   CloseButton: ModalCloseButton,
-  Button: ModalButton
+  Footer: ModalFooter
 });
 
 export default Modal;

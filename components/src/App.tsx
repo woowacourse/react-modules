@@ -1,40 +1,36 @@
 import { useState } from 'react';
-import './App.css';
-
-import Modal from './lib/component/Modal';
-import styled from '@emotion/styled';
+import AlertModal from './lib/component/AlertModal/AlertModal';
+import ConfirmModal from './lib/component/ConfirmModal/ConfirmModal';
+import PromptModal from './lib/component/PromptModal/PromptModal';
 
 function App() {
-  const [isOpen, setIsOpen] = useState(false);
-
-  const handleButtonToggle = () => {
-    setIsOpen((prev) => !prev);
-  };
-
-  const CustomBackDrop = styled(Modal.BackDrop)`
-    background-color: rgba(0, 0, 255, 0.35);
-  `;
+  const [isAlertOpen, setAlertOpen] = useState(false);
+  const [isConfirmOpen, setConfirmOpen] = useState(false);
+  const [isPromptOpen, setPromptOpen] = useState(false);
 
   return (
-    <div>
-      {isOpen && (
-        <Modal isOpen={isOpen} onClose={handleButtonToggle}>
-          <CustomBackDrop />
-          <Modal.Content position="bottom" style={{ width: '300px', height: '300px', backgroundColor: 'white' }}>
-            <Modal.Title>하이</Modal.Title>
-            <Modal.CloseButton style={{ position: 'absolute', right: '24px', top: '24px' }}>
-              <svg width="15" height="14" viewBox="0 0 15 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path
-                  d="M14.8167 1.41L13.4067 0L7.81665 5.59L2.22665 0L0.81665 1.41L6.40665 7L0.81665 12.59L2.22665 14L7.81665 8.41L13.4067 14L14.8167 12.59L9.22665 7L14.8167 1.41Z"
-                  fill="black"
-                />
-              </svg>
-            </Modal.CloseButton>
-          </Modal.Content>
-        </Modal>
-      )}
+    <div style={{ padding: '40px', display: 'flex', gap: '16px' }}>
+      <button onClick={() => setAlertOpen(true)}>모달 1 열기</button>
+      <AlertModal size="large" isOpen={isAlertOpen} onClose={() => setAlertOpen(false)} content={<p>아이디는 필수로 입력해야 합니다.</p>} />
 
-      <button onClick={handleButtonToggle}>모달 열기</button>
+      <button onClick={() => setConfirmOpen(true)}>모달 2 열기</button>
+      <ConfirmModal
+        size="medium"
+        isOpen={isConfirmOpen}
+        onClose={() => setConfirmOpen(false)}
+        title="카드를 삭제하시겠습니까?"
+        content={<p>삭제하면 복구하실 수 없습니다.</p>}
+        onConfirm={() => alert('확인!')}
+      />
+
+      <button onClick={() => setPromptOpen(true)}>모달 3 열기</button>
+      <PromptModal
+        isOpen={isPromptOpen}
+        onClose={() => setPromptOpen(false)}
+        title="쿠폰 번호를 입력해 주세요"
+        placeholder="GCEXX46Z"
+        onConfirm={() => alert('확인!')}
+      />
     </div>
   );
 }
