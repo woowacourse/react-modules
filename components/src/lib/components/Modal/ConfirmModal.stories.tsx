@@ -36,15 +36,16 @@ export const Confirm: Story = {
     height: '157px',
   },
   render: (args) => {
-    const [open, setOpen] = useState(false);
+    const [isOpen, setIsOpen] = useState(false);
+
     return (
       <>
-        <button onClick={() => setOpen(true)}>Confirm 열기</button>
-        {open && (
+        <button onClick={() => setIsOpen(true)}>Confirm 열기</button>
+        {isOpen && (
           <ConfirmModal
             {...args}
-            onCancel={() => { action('onCancel')(); setOpen(false); }}
-            onConfirm={() => { action('onConfirm')(); setOpen(false); }}
+            onCancel={() => { action('onCancel')(); setIsOpen(false); }}
+            onConfirm={() => { action('onConfirm')(); setIsOpen(false); }}
           />
         )}
       </>

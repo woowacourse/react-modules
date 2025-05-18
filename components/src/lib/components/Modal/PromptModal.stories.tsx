@@ -15,8 +15,8 @@ const meta: Meta<typeof PromptModal> = {
       control: 'text',
       description: '인풋 플레이스홀더(선택)',
     },
-    onCancel: { action: 'onCancel' },
-    onConfirm: { action: 'onConfirm' },
+    onCancel: {action: 'onCancel'},
+    onConfirm: {action: 'onConfirm'},
   },
   parameters: {
     docs: {
@@ -35,15 +35,22 @@ export const Prompt: Story = {
     message: '이름을 입력해주세요',
   },
   render: (args) => {
-    const [open, setOpen] = useState(false);
+    const [isOpen, setIsOpen] = useState(false);
+
     return (
       <>
-        <button onClick={() => setOpen(true)}>Prompt 열기</button>
-        {open && (
+        <button onClick={() => setIsOpen(true)}>Prompt 열기</button>
+        {isOpen && (
           <PromptModal
             {...args}
-            onCancel={() => { action('onCancel')(); setOpen(false); }}
-            onConfirm={(value) => { action('onConfirm')(value); setOpen(false); }}
+            onCancel={() => {
+              action('onCancel')();
+              setIsOpen(false);
+            }}
+            onConfirm={(value) => {
+              action('onConfirm')(value);
+              setIsOpen(false);
+            }}
           />
         )}
       </>

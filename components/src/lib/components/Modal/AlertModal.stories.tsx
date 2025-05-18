@@ -15,7 +15,7 @@ const meta: Meta<typeof AlertModal> = {
       control: 'text',
       description: '추가 설명(선택)',
     },
-    onConfirm: { action: 'onConfirm' },
+    onConfirm: {action: 'onConfirm'},
   },
   parameters: {
     docs: {
@@ -36,6 +36,7 @@ export const Alert: Story = {
   },
   render: (args) => {
     const [isOpen, setIsOpen] = useState(false);
+
     return (
       <>
         <button onClick={() => setIsOpen(true)}>
