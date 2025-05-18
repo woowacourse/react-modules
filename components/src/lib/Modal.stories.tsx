@@ -3,23 +3,7 @@ import { Meta, StoryObj } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 import { Button } from "./components/Button";
 import { useState } from 'react';
-
-export type ModalSize = 'sm' | 'md' | 'lg';
-
-const SIZE_MAP = {
-  sm: {
-    width: '320px',
-    height: '206px',
-  },
-  md: {
-    width: '480px',
-    height: '206px',
-  },
-  lg: {
-    width: '600px',
-    height: '206px',
-  },
-};
+import { sizeStyles } from './Modal.styles';
 
 const meta: Meta<typeof Modal> = {
   title: 'Components/Modal',
@@ -104,8 +88,8 @@ export const Bottom: Story = {
 export const Small: Story = {
   args: {
     position: 'center',
-    width: SIZE_MAP.sm.width,
-    height: SIZE_MAP.sm.height,
+    width: sizeStyles.sm.width,
+    height: sizeStyles.sm.height,
     children: (
       <div>
         <h2>작은 모달 (sm)</h2>
@@ -129,8 +113,8 @@ export const Small: Story = {
 export const Medium: Story = {
   args: {
     position: 'center',
-    width: SIZE_MAP.md.width,
-    height: SIZE_MAP.md.height,
+    width: sizeStyles.md.width,
+    height: sizeStyles.md.height,
     children: (
       <div>
         <h2>중간 모달 (md)</h2>
@@ -160,8 +144,8 @@ export const Medium: Story = {
 export const Large: Story = {
   args: {
     position: 'center',
-    width: SIZE_MAP.lg.width,
-    height: SIZE_MAP.lg.height,
+    width: sizeStyles.lg.width,
+    height: sizeStyles.lg.height,
     children: (
       <div>
         <h2>큰 모달 (lg)</h2>
