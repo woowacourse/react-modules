@@ -2,7 +2,7 @@
 
 > 페이먼츠 모듈 2단계
 
-[🎨 모달 스토리북 배포 주소](https://6813031d6576e04c1cfcc2c7-wbpmbxnplv.chromatic.com/?path=/story/components-modal--center)
+[🎨 모달 스토리북 배포 주소](https://6813031d6576e04c1cfcc2c7-wpxtgrnltj.chromatic.com/?path=/story/components-modal--center)
 
 ## 🎯 기능 요구 사항
 
