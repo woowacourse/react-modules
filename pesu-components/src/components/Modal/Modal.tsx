@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
 
-import { createContext, useContext, useEffect, useState } from 'react';
+import { createContext, HTMLAttributes, useContext, useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { useAutoFocus, useDevice } from '../../hooks';
 import { CloseIcon } from '../common';
@@ -121,10 +121,20 @@ function Title({ children }: StrictPropsWithChildren) {
 }
 Title.displayName = 'ModalTitle';
 
-function Close({ children }: StrictPropsWithChildren) {
+function Close({ children, ...props }: StrictPropsWithChildren & HTMLAttributes<HTMLButtonElement>) {
   const { close } = useContext(ModalContext);
 
-  return <S.TransparentButton onClick={close}>{children}</S.TransparentButton>;
+  const handleCloseButtonClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.stopPropagation();
+    props.onClick?.(event);
+    close();
+  };
+
+  return (
+    <S.TransparentButton onClick={handleCloseButtonClick} {...props}>
+      {children}
+    </S.TransparentButton>
+  );
 }
 Close.displayName = 'ModalClose';
 
