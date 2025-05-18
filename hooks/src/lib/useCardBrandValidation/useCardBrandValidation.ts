@@ -5,14 +5,14 @@ import { CardBrand } from "../types/cardTypes";
 import { validateCardBrand } from "../utils/validateCardBrand";
 
 type CardValidationResult = {
-  cardBrand: CardBrand;
+  cardBrand: CardBrand | null;
   isValid: boolean;
   error: string | null;
 }
 
 export const useCardBrandValidation = (cardNumber: string): CardValidationResult => {
   const [result, setResult] = useState<CardValidationResult>({
-    cardBrand: 'unknown',
+    cardBrand: null,
     isValid: false,
     error: null
   });
@@ -23,7 +23,7 @@ export const useCardBrandValidation = (cardNumber: string): CardValidationResult
 
     if (digits === '') {
       setResult({
-        cardBrand: 'unknown',
+        cardBrand: null,
         isValid: false,
         error: CARD_NUMBER_ERROR.required,
       });
@@ -32,7 +32,7 @@ export const useCardBrandValidation = (cardNumber: string): CardValidationResult
 
     if (!isAllDigits) {
       setResult({
-        cardBrand: 'unknown',
+        cardBrand: null,
         isValid: false,
         error: CARD_NUMBER_ERROR.onlyNumbers,
       });
@@ -41,9 +41,9 @@ export const useCardBrandValidation = (cardNumber: string): CardValidationResult
 
     const detectedBrand = validateCardBrand(digits);
 
-    if (detectedBrand === 'unknown') {
+    if (detectedBrand === null) {
       setResult({
-        cardBrand: 'unknown',
+        cardBrand: null,
         isValid: false,
         error: CARD_NUMBER_ERROR.invalidBrand,
       });

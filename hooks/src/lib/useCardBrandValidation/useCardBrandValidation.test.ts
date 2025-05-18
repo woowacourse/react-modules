@@ -6,7 +6,7 @@ describe('useCardBrandValidation', () => {
   it('빈 카드 번호에 대해 적절한 에러를 반환해야 함', () => {
     const { result } = renderHook(() => useCardBrandValidation(''));
 
-    expect(result.current.cardBrand).toBe('unknown');
+    expect(result.current.cardBrand).toBeNull();
     expect(result.current.isValid).toBe(false);
     expect(result.current.error).toBe(CARD_NUMBER_ERROR.required);
   });
@@ -14,7 +14,7 @@ describe('useCardBrandValidation', () => {
   it('숫자가 아닌 입력에 대해 에러를 반환해야 함', () => {
     const { result } = renderHook(() => useCardBrandValidation('123a456'));
 
-    expect(result.current.cardBrand).toBe('unknown');
+    expect(result.current.cardBrand).toBeNull();
     expect(result.current.isValid).toBe(false);
     expect(result.current.error).toBe(CARD_NUMBER_ERROR.onlyNumbers);
   });
@@ -22,7 +22,7 @@ describe('useCardBrandValidation', () => {
   it('알 수 없는 카드 브랜드에 대해 에러를 반환해야 함', () => {
     const { result } = renderHook(() => useCardBrandValidation('1234567890123456'));
 
-    expect(result.current.cardBrand).toBe('unknown');
+    expect(result.current.cardBrand).toBeNull();
     expect(result.current.isValid).toBe(false);
     expect(result.current.error).toBe(CARD_NUMBER_ERROR.invalidBrand);
   });

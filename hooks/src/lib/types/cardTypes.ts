@@ -8,4 +8,6 @@ export type CardNumberError = Record<CardNumberKey, string>;
 export type CardExpiryDate = Record<CardPeriodKey, string>;
 export type CardExpiryDateError = Record<CardPeriodKey, string>;
 
-export type CardBrand = 'visa' | 'mastercard' | 'amex' | 'diners' | 'unionpay' | 'unknown';
+export const CARD_BRAND_KEYS = ['visa', 'mastercard', 'amex', 'diners', 'unionpay'] as const;
+
+export type CardBrand = typeof CARD_BRAND_KEYS[number];

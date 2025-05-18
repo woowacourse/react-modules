@@ -1,6 +1,10 @@
 import { CardBrand } from "../types/cardTypes";
 
-export const validateCardBrand = (digits: string): CardBrand => {
+export const validateCardBrand = (digits: string): CardBrand | null => {
+  if (!digits) {
+    return null;
+  }
+
   const length = digits.length;
 
   if (length === 14 && digits.startsWith('36')) {
@@ -37,5 +41,5 @@ export const validateCardBrand = (digits: string): CardBrand => {
     }
   }
 
-  return 'unknown';
+  return null;
 }
