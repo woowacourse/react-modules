@@ -1,5 +1,5 @@
 export interface ModalContentProps {
   children: React.ReactNode;
   position?: "center" | "bottom";
-  size?: "small" | "medium" | "large";
+  size?: "small" | "medium" | "large" | { width: string; maxWidth?: string };
 }

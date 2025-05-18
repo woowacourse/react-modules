@@ -34,6 +34,16 @@ const modalSizeVariants = {
   },
 };
 
+const getSizeStyles = (size: ModalContentProps["size"]) => {
+  if (!size) return modalSizeVariants.large;
+
+  if (typeof size === "string") {
+    return modalSizeVariants[size];
+  }
+
+  return size;
+};
+
 export const StyledModalContent = styled.div<ModalContentProps>`
   position: fixed;
   box-sizing: border-box;
@@ -44,6 +54,12 @@ export const StyledModalContent = styled.div<ModalContentProps>`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  ${({ size = "large" }) => modalSizeVariants[size]};
+  ${({ size }) => {
+    const sizeStyles = getSizeStyles(size);
+    return `
+      width: ${sizeStyles.width};
+      max-width: ${sizeStyles.maxWidth};
+    `;
+  }}
   ${({ position = "center" }) => modalPositionVariants[position]};
 `;

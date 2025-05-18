@@ -11,7 +11,10 @@ function App() {
         </Modal.Trigger>
         <Modal.Portal>
           <Modal.Overlay />
-          <Modal.Content position="center" size="large">
+          <Modal.Content
+            position="center"
+            size={{ width: "1000px", maxWidth: "200px" }}
+          >
             <Modal.Title tag="h1" fontSize="25px" fontWeight="700">
               Title이다!
             </Modal.Title>

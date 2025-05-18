@@ -47,7 +47,32 @@ export const Default: Story = {
   render: (args) => {
     return (
       <ModalRoot>
-        <ModalContent {...args}>모달 컨텐츠입니다.</ModalContent>
+        <ModalContent {...args}>모달, 컨텐츠입니다.</ModalContent>
+      </ModalRoot>
+    );
+  },
+};
+
+export const CustomSize: Story = {
+  args: {
+    children: "",
+    position: "center",
+    size: { width: "95%", maxWidth: "800px" },
+  },
+  argTypes: {
+    position: {
+      control: "select",
+      options: ["center", "bottom"],
+    },
+    children: {
+      control: false,
+    },
+  },
+
+  render: (args) => {
+    return (
+      <ModalRoot>
+        <ModalContent {...args}>커스텀 사이즈 모달 컨텐츠입니다.</ModalContent>
       </ModalRoot>
     );
   },
