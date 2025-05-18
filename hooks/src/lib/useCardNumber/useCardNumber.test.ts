@@ -1,59 +1,56 @@
 import { renderHook, act } from "@testing-library/react";
 import useCardNumber from "./useCardNumber";
-import { checkLength, checkNumber } from "../utils/vaildate";
 
-describe("useCardNumber 테스트", () => {
-	it("카드 번호가 유효하게 입력되었을 때 isValid는 true, errorMessage는 빈 문자열인지 확인한다.", () => {
-		const { result } = renderHook(() => useCardNumber([checkNumber, () => checkLength("1234", 4)]));
-		const testValue = { first: "1234", second: "1111", third: "3333", fourth: "1234" };
+describe("useCardNumber", () => {
+	it("정상 입력 (4자리 숫자) 시 에러 없음", () => {
+		const { result } = renderHook(() => useCardNumber());
 
-		for (const [label, value] of Object.entries(testValue)) {
-			act(() => {
-				result.current.validate(label, value);
-			});
-		}
+		act(() => {
+			result.current.onChange("1234");
+		});
 
-		expect(result.current.error).toEqual({
-			first: { isValid: true, errorMessage: "" },
-			second: { isValid: true, errorMessage: "" },
-			third: { isValid: true, errorMessage: "" },
-			fourth: { isValid: true, errorMessage: "" },
+		expect(result.current.cardNumber).toBe("1234");
+		expect(result.current.cardNumberError).toEqual({
+			isValid: true,
+			errorMessage: "",
 		});
 	});
 
-	it("카드 번호에 문자가 포함되었을 때 isValid는 false, errorMessage 값이 반환되는지 확인한다.", () => {
-		const { result } = renderHook(() => useCardNumber([checkNumber]));
-		const testValue = { first: "123a", second: "1111", third: "3333", fourth: "1234" };
+	it("문자 입력 시 '숫자만 입력 가능합니다.' 에러 발생", () => {
+		const { result } = renderHook(() => useCardNumber());
 
-		for (const [label, value] of Object.entries(testValue)) {
-			act(() => {
-				result.current.validate(label, value);
-			});
-		}
-
-		expect(result.current.error).toEqual({
-			first: { isValid: false, errorMessage: "숫자만 입력 가능합니다." },
-			second: { isValid: true, errorMessage: "" },
-			third: { isValid: true, errorMessage: "" },
-			fourth: { isValid: true, errorMessage: "" },
+		act(() => {
+			result.current.onChange("12a4");
+		});
+		expect(result.current.cardNumberError).toEqual({
+			isValid: false,
+			errorMessage: "숫자만 입력 가능합니다.",
 		});
 	});
 
-	it("카드 번호 길이가 4자 미만일 경우 isValid는 false, errorMessage 값이 반환되는지 확인한다.", () => {
-		const { result } = renderHook(() => useCardNumber([(value) => checkLength(value, 4)]));
-		const testValue = { first: "123", second: "1111", third: "3333", fourth: "1234" };
+	it("빈 값 입력 시 '값을 입력해주세요.' 에러 발생", () => {
+		const { result } = renderHook(() => useCardNumber());
 
-		for (const [label, value] of Object.entries(testValue)) {
-			act(() => {
-				result.current.validate(label, value);
-			});
-		}
+		act(() => {
+			result.current.onChange("");
+		});
 
-		expect(result.current.error).toEqual({
-			first: { isValid: false, errorMessage: "4자리를 입력해주세요." },
-			second: { isValid: true, errorMessage: "" },
-			third: { isValid: true, errorMessage: "" },
-			fourth: { isValid: true, errorMessage: "" },
+		expect(result.current.cardNumberError).toEqual({
+			isValid: false,
+			errorMessage: "값을 입력해주세요.",
+		});
+	});
+
+	it("4자리 미만 (예: 123) 입력 시 '4자리를 입력해주세요.' 에러 발생", () => {
+		const { result } = renderHook(() => useCardNumber());
+
+		act(() => {
+			result.current.onChange("123");
+		});
+
+		expect(result.current.cardNumberError).toEqual({
+			isValid: false,
+			errorMessage: "4자리를 입력해주세요.",
 		});
 	});
 });

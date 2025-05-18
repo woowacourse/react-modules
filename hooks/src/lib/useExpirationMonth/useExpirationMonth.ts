@@ -1,37 +1,33 @@
-import { useState } from "react";
+import { checkEmptyValue, checkLength, checkMonthRange, checkNumber, getError } from "../utils/vaildate";
+import usePureNumberState from "../usePureNumber/usePureNumberState";
+import { ERROR } from "../constants/message";
 
-type ValidationResult = {
-	isValid: boolean;
-	errorMessage: string;
+const MAX_LENGTH = 2;
+const MIN_RANGE = 1;
+const MAX_RANGE = 12;
+
+export const expirationMonthErrorCases = [
+	{
+		validate: (value: string) => checkEmptyValue(value),
+		errorMessage: ERROR.EMPTY_VALUE,
+	},
+	{
+		validate: (value: string) => checkNumber(value),
+		errorMessage: ERROR.ONLY_NUMBER,
+	},
+	{
+		validate: (value: string) => checkLength(value, MAX_LENGTH),
+		errorMessage: ERROR.MAX_LENGTH(MAX_LENGTH),
+	},
+	{
+		validate: (value: string) => checkMonthRange(value),
+		errorMessage: ERROR.OUT_RANGE(MIN_RANGE, MAX_RANGE),
+	},
+];
+
+const useExpirationMonth = () => {
+	const { value, onChange } = usePureNumberState();
+
+	return { expirationMonth: value, onChange, cardExpirationMonthError: getError(value, expirationMonthErrorCases) };
 };
-
-type Validator = (value: string) => ValidationResult;
-
-const useExpirationMonth = (validators: Validator[]) => {
-	const [value, setValue] = useState("");
-	const [error, setError] = useState({
-		isValid: true,
-		errorMessage: "",
-	});
-
-	const validate = (value: string) => {
-		for (const validator of validators) {
-			const result = validator(value);
-			if (!result.isValid) {
-				setError({ isValid: result.isValid, errorMessage: result.errorMessage });
-				return;
-			}
-		}
-		setError({ isValid: true, errorMessage: "" });
-	};
-
-	const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-		const newValue = e.target.value;
-		setValue(newValue);
-		validate(newValue);
-	};
-
-	return { value, error, onChange, validate };
-};
-
 export default useExpirationMonth;
