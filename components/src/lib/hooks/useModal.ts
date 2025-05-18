@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 
 /**
  * @description
@@ -8,7 +8,6 @@ import { useState, useEffect } from 'react';
  * @returns isOpen 모달 열림 상태
  * @returns handleOpenModal 모달 열기 핸들러
  * @returns handleCloseModal 모달 닫기 핸들러
- * @returns handleOutsideClick 외부 클릭 핸들러
  */
 export const useModal = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -21,24 +20,18 @@ export const useModal = () => {
     setIsOpen(false);
   };
 
-  const handleOutsideClick = (e: React.MouseEvent) => {
-    if (e.target instanceof HTMLElement && e.target === e.currentTarget) {
-      handleCloseModal();
-    }
-  };
-
-  const handleKeyDown = (e: KeyboardEvent) => {
+  const handleKeyDown = useCallback((e: KeyboardEvent) => {
     if (e.key === 'Escape') {
       handleCloseModal();
     }
-  };
+  }, []);
 
   useEffect(() => {
     window.addEventListener('keydown', handleKeyDown);
     return () => {
       window.removeEventListener('keydown', handleKeyDown);
     };
-  }, []);
+  }, [handleKeyDown]);
 
-  return { isOpen, handleOpenModal, handleCloseModal, handleOutsideClick };
+  return { isOpen, handleOpenModal, handleCloseModal };
 };

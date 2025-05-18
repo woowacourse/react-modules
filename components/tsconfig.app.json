@@ -22,7 +22,9 @@
     "noFallthroughCasesInSwitch": true,
     "noUncheckedSideEffectImports": true,
     "declaration": true,
-    "declarationDir": "./dist"
+    "declarationDir": "./dist",
+
+    "jsxImportSource": "@emotion/react"
   },
   "include": ["src/lib", "src"]
 }

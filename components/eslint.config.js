@@ -1,31 +1,53 @@
-import eslintPluginImport from 'eslint-plugin-import';
-import eslintPluginReactHooks from 'eslint-plugin-react-hooks';
-import eslintPluginStorybook from 'eslint-plugin-storybook';
-import eslintPluginReactRefresh from 'eslint-plugin-react-refresh';
+import eslint from '@eslint/js';
 import eslintPluginTypeScript from '@typescript-eslint/eslint-plugin';
-import tsParser from '@typescript-eslint/parser';
+import eslintPluginImport from 'eslint-plugin-import';
+import reactPlugin from 'eslint-plugin-react';
+import reactHooks from 'eslint-plugin-react-hooks';
+import eslintPluginReactRefresh from 'eslint-plugin-react-refresh';
+import eslintPluginStorybook from 'eslint-plugin-storybook';
+import globals from 'globals';
+import tseslint from 'typescript-eslint';
 
 export default [
+  eslint.configs.recommended,
+  ...tseslint.configs.recommended,
   {
-    files: ['**/*.{ts,tsx}'],
+    files: ['**/*.{ts,tsx,js,jsx}'],
     languageOptions: {
-      parser: tsParser,
+      parser: tseslint.parser,
       parserOptions: {
-        ecmaVersion: 2020,
+        ecmaVersion: 2022,
         sourceType: 'module',
+        ecmaFeatures: {
+          jsx: true,
+        },
+      },
+      globals: {
+        ...globals.node,
+        ...globals.browser,
       },
     },
     plugins: {
+      react: reactPlugin,
       import: eslintPluginImport,
-      'react-hooks': eslintPluginReactHooks,
+      'react-hooks': reactHooks,
       storybook: eslintPluginStorybook,
       'react-refresh': eslintPluginReactRefresh,
       '@typescript-eslint': eslintPluginTypeScript,
     },
     rules: {
+      ...reactHooks.configs.recommended.rules,
+      ...eslintPluginStorybook.configs.recommended.rules,
+      ...eslintPluginReactRefresh.configs.recommended.rules,
+      ...eslintPluginTypeScript.configs.recommended.rules,
+      'react/react-in-jsx-scope': 'off',
+      'react-hooks/exhaustive-deps': 'warn',
+
       '@typescript-eslint/no-unused-vars': 'warn',
       '@typescript-eslint/consistent-type-definitions': ['error', 'type'],
+
       'react-refresh/only-export-components': ['warn', { allowConstantExport: true }],
+
       'import/order': [
         'error',
         {
@@ -43,6 +65,14 @@ export default [
           'newlines-between': 'always',
         },
       ],
+    },
+  },
+
+  {
+    files: ['**/*.stories.{ts,tsx,js,jsx}'],
+    rules: {
+      'storybook/hierarchy-separator': 'error',
+      'storybook/default-exports': 'error',
     },
   },
 ];
