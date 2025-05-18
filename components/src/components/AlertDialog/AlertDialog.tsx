@@ -1,11 +1,10 @@
-import { Dialog } from '../../lib';
 import { AlertDialogLayout } from './AlertDialog.css';
-
+import * as Dialog from '../../lib/Dialog';
 const AlertDialog = () => {
   return (
-    <Dialog>
+    <Dialog.Root>
       <Dialog.Trigger>Alert Dialog</Dialog.Trigger>
-      <Dialog.Root>
+      <Dialog.Portal>
         <Dialog.Overlay />
         <Dialog.Content>
           <section css={AlertDialogLayout}>
@@ -18,8 +17,8 @@ const AlertDialog = () => {
             <Dialog.CloseButton>확인</Dialog.CloseButton>
           </section>
         </Dialog.Content>
-      </Dialog.Root>
-    </Dialog>
+      </Dialog.Portal>
+    </Dialog.Root>
   );
 };
 

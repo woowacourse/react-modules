@@ -1,4 +1,3 @@
-import { Dialog } from '../../lib';
 import {
   buttonContainer,
   dialogContainer,
@@ -6,12 +5,13 @@ import {
   inputContainer,
   titleStyle,
 } from './PromptDialog.css';
+import * as Dialog from '../../lib/Dialog';
 
 const PromptDialog = () => {
   return (
-    <Dialog>
+    <Dialog.Root>
       <Dialog.Trigger>Prompt Dialog</Dialog.Trigger>
-      <Dialog.Root>
+      <Dialog.Portal>
         <Dialog.Overlay />
         <Dialog.Content size="small">
           <div css={dialogContainer}>
@@ -25,8 +25,8 @@ const PromptDialog = () => {
             </div>
           </div>
         </Dialog.Content>
-      </Dialog.Root>
-    </Dialog>
+      </Dialog.Portal>
+    </Dialog.Root>
   );
 };
 

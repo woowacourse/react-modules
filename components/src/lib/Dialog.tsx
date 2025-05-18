@@ -2,6 +2,7 @@ import {
   ButtonHTMLAttributes,
   createContext,
   PropsWithChildren,
+  RefObject,
   useContext,
   useId,
 } from 'react';
@@ -22,7 +23,7 @@ export const DialogContext = createContext<DialogContextType>({
   close: () => {},
 });
 
-export function Dialog({ children }: { children: React.ReactNode }) {
+const Root = ({ children }: { children: React.ReactNode }) => {
   const { value: isOpen, setTrue: open, setFalse: close } = useBoolean(false);
 
   return (
@@ -30,7 +31,7 @@ export function Dialog({ children }: { children: React.ReactNode }) {
       {children}
     </DialogContext.Provider>
   );
-}
+};
 
 export function useDialogContext() {
   const context = useContext(DialogContext);
@@ -46,7 +47,7 @@ interface TriggerProps
   className?: string;
 }
 
-export function Trigger({ children, className, ...props }: TriggerProps) {
+const Trigger = ({ children, className, ...props }: TriggerProps) => {
   const { open } = useDialogContext();
 
   return (
@@ -54,22 +55,22 @@ export function Trigger({ children, className, ...props }: TriggerProps) {
       {children}
     </button>
   );
-}
+};
 
 interface RootProps extends PropsWithChildren {
   root?: HTMLElement;
 }
 
-export function Root({ children, root = document.body }: RootProps) {
+const Portal = ({ children, root = document.body }: RootProps) => {
   const { isOpen } = useDialogContext();
   return createPortal(isOpen ? children : null, root);
-}
+};
 
 interface OverlayProps {
   className?: string;
 }
 
-export function Overlay({ className }: OverlayProps) {
+const Overlay = ({ className }: OverlayProps) => {
   const { close } = useDialogContext();
   const id = useId();
   const { handleClickOverlay } = useOverlay(close);
@@ -82,19 +83,19 @@ export function Overlay({ className }: OverlayProps) {
       className={className}
     />
   );
-}
+};
 
 interface HeaderProps extends PropsWithChildren {
   className?: string;
 }
 
-export function Header({ children, className }: HeaderProps) {
+const Header = ({ children, className }: HeaderProps) => {
   return (
     <div css={header} className={className}>
       {children}
     </div>
   );
-}
+};
 
 interface CloseButtonProps
   extends PropsWithChildren,
@@ -102,11 +103,7 @@ interface CloseButtonProps
   className?: string;
 }
 
-export function CloseButton({
-  children,
-  className,
-  ...props
-}: CloseButtonProps) {
+const CloseButton = ({ children, className, ...props }: CloseButtonProps) => {
   const { close } = useDialogContext();
 
   return (
@@ -114,35 +111,36 @@ export function CloseButton({
       {children}
     </button>
   );
-}
+};
 
 interface ContentProps extends PropsWithChildren {
   position?: 'center' | 'bottom';
   size?: 'small' | 'medium' | 'large';
   className?: string;
+  ref?: RefObject<HTMLDivElement>;
 }
 
-export function Content({
+const Content = ({
   children,
   position = 'center',
   size = 'medium',
   className,
-}: ContentProps) {
+  ref,
+  ...props
+}: ContentProps) => {
   const { isOpen } = useDialogContext();
   const { focusRef } = useFocusRef(isOpen);
 
   return (
-    <div css={content(position, size)} className={className} ref={focusRef}>
+    <div
+      css={content(position, size)}
+      className={className}
+      ref={focusRef || ref}
+      {...props}
+    >
       {children}
     </div>
   );
-}
+};
 
-Dialog.Root = Root;
-Dialog.Overlay = Overlay;
-Dialog.Header = Header;
-Dialog.CloseButton = CloseButton;
-Dialog.Content = Content;
-Dialog.Trigger = Trigger;
-
-export default Dialog;
+export { Portal, Overlay, Header, CloseButton, Content, Trigger, Root };

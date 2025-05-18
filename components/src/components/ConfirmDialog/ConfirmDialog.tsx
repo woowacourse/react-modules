@@ -1,4 +1,4 @@
-import { Dialog } from '../../lib';
+import * as Dialog from '../../lib/Dialog';
 import {
   buttonContainer,
   descriptionStyle,
@@ -8,9 +8,9 @@ import {
 
 const ConfirmDialog = () => {
   return (
-    <Dialog>
+    <Dialog.Root>
       <Dialog.Trigger>Confirm Dialog</Dialog.Trigger>
-      <Dialog.Root>
+      <Dialog.Portal>
         <Dialog.Overlay />
         <Dialog.Content>
           <div css={dialogContainer}>
@@ -22,8 +22,8 @@ const ConfirmDialog = () => {
             </div>
           </div>
         </Dialog.Content>
-      </Dialog.Root>
-    </Dialog>
+      </Dialog.Portal>
+    </Dialog.Root>
   );
 };
 
