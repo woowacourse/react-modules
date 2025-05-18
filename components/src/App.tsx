@@ -1,36 +1,19 @@
-import { Modal, useModal, ModalProvider, ModalProps } from './lib';
 import './App.css';
+import ModalContents from './ModalContents';
+import ModalTypeContents from './ModalTypeContents';
+import ModalSizeContents from './ModalSizeContents';
 
-function ModalContent() {
-  const { openModalHandler } = useModal();
-
+function App() {
   return (
     <>
-      <Modal>
-        <p style={{ color: 'black' }}>Test!!!!!!</p>
-        <p style={{ color: 'black' }}>Test!!!!!!</p>
-        <p style={{ color: 'black' }}>Test!!!!!!</p>
-        <p style={{ color: 'black' }}>Test!!!!!!</p>
-      </Modal>
-      <div className="button-container">
-        <button className="click-me-button" onClick={openModalHandler}>
-          click me!!
-        </button>
-      </div>
+      <h1 style={{ color: 'black', margin: '20px 50px' }}>Step1 Modal</h1>
+      <ModalContents />
+      <h1 style={{ color: 'black', margin: '20px 50px' }}>Step2 Modal</h1>
+      <h2 style={{ color: 'black', margin: '20px 50px' }}>Modal Types</h2>
+      <ModalTypeContents />
+      <h2 style={{ color: 'black', margin: '20px 50px' }}>Modal Size Option</h2>
+      <ModalSizeContents />
     </>
-  );
-}
-
-function App({ modalType, closeType, titleText, ...otherProps }: ModalProps) {
-  return (
-    <ModalProvider
-      modalType={modalType}
-      closeType={closeType}
-      titleText={titleText}
-      {...otherProps}
-    >
-      <ModalContent />
-    </ModalProvider>
   );
 }
 

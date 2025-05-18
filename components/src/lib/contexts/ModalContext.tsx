@@ -1,33 +1,20 @@
 import { createContext, useState, useContext, ReactNode } from 'react';
-import { ModalProps } from '../types/modalTypes';
 
 interface ModalContextType {
   isModalOpened: boolean;
   openModalHandler: () => void;
   closeModalHandler: () => void;
-  modalType: ModalProps['modalType'];
-  titleText: string;
-  closeType: ModalProps['closeType'];
   onClose?: () => void;
 }
 
 interface ModalProviderProps {
   children: ReactNode;
-  modalType: ModalProps['modalType'];
-  titleText?: string;
-  closeType: ModalProps['closeType'];
   onClose?: () => void;
 }
 
 export const ModalContext = createContext<ModalContextType | undefined>(undefined);
 
-export const ModalProvider = ({
-  children,
-  modalType,
-  titleText = '',
-  closeType,
-  onClose,
-}: ModalProviderProps) => {
+export const ModalProvider = ({ children, onClose }: ModalProviderProps) => {
   const [isModalOpened, setIsModalOpened] = useState(false);
 
   const openModalHandler = () => setIsModalOpened(true);
@@ -39,9 +26,6 @@ export const ModalProvider = ({
         isModalOpened,
         openModalHandler,
         closeModalHandler,
-        modalType,
-        titleText,
-        closeType,
         onClose,
       }}
     >
@@ -50,11 +34,11 @@ export const ModalProvider = ({
   );
 };
 
-export const useModal = () => {
+export const useModalContext = () => {
   const context = useContext(ModalContext);
 
   if (context === undefined) {
-    throw new Error('useModal은 ModalProvider 내부에서 사용해야 합니다');
+    throw new Error('useModalContext은 ModalProvider 내부에서 사용해야 합니다');
   }
 
   return context;

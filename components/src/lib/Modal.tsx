@@ -1,11 +1,32 @@
 import { useEffect } from 'react';
 import ModalBox from './ModalBox';
 import { ModalContainer, ModalBackdrop, Container, Wrapper } from './styles/ModalStyle';
-import { useModal } from './contexts/ModalContext';
-import { ModalChildrenProps } from './types/modalTypes';
+import { useModalContext } from './contexts/ModalContext';
+import {
+  ModalChildrenProps,
+  ModalPosition,
+  ModalType,
+  ModalSize,
+  ModalCloseType,
+} from './types/modalTypes';
 
-const Modal = ({ children }: ModalChildrenProps) => {
-  const { isModalOpened, closeModalHandler, modalType } = useModal();
+interface ModalProps extends ModalChildrenProps {
+  modalPosition: ModalPosition;
+  modalType?: ModalType;
+  modalSize?: ModalSize;
+  titleText?: string;
+  closeType?: ModalCloseType;
+}
+
+const Modal = ({
+  children,
+  modalPosition,
+  modalType = 'default',
+  modalSize = 'medium',
+  titleText = '',
+  closeType = 'none',
+}: ModalProps) => {
+  const { isModalOpened, closeModalHandler } = useModalContext();
 
   const handleKeyDown = (event: KeyboardEvent) => {
     if (event.key === 'Escape') {
@@ -25,11 +46,19 @@ const Modal = ({ children }: ModalChildrenProps) => {
   if (!isModalOpened) return null;
 
   return (
-    <ModalContainer modalType={modalType}>
+    <ModalContainer modalPosition={modalPosition}>
       <ModalBackdrop onClick={closeModalHandler} />
       <Container>
         <Wrapper>
-          <ModalBox>{children}</ModalBox>
+          <ModalBox
+            modalPosition={modalPosition}
+            modalType={modalType}
+            modalSize={modalSize}
+            titleText={titleText}
+            closeType={closeType}
+          >
+            {children}
+          </ModalBox>
         </Wrapper>
       </Container>
     </ModalContainer>

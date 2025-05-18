@@ -1,19 +1,62 @@
 import ModalHeader from './ModalHeader';
-import { useModal } from './contexts/ModalContext';
-import { ModalBoxContainer, ModalBottomCloseBtn } from './styles/ModalStyle';
-import { ModalChildrenProps } from './types/modalTypes';
+import { useModalContext } from './contexts/ModalContext';
+import { ModalBoxContainer, ModalBottomCloseBtn, ModalButtons } from './styles/ModalStyle';
+import {
+  ModalChildrenProps,
+  ModalPositionAndSizeProps,
+  ModalType,
+  ModalCloseType,
+} from './types/modalTypes';
 
-const ModalBox = ({ children }: ModalChildrenProps) => {
-  const { modalType, closeType, closeModalHandler } = useModal();
-  const hasHeaderCloseButton = closeType === 'top' ? true : false;
+interface ModalBoxProps extends ModalChildrenProps, ModalPositionAndSizeProps {
+  modalType: ModalType;
+  titleText: string;
+  closeType: ModalCloseType;
+}
+
+const ModalBox = ({
+  children,
+  modalPosition,
+  modalSize,
+  closeType,
+  modalType,
+  titleText,
+}: ModalBoxProps) => {
+  const { closeModalHandler, onClose } = useModalContext();
+
+  const handleConfirm = () => {
+    onClose?.();
+    closeModalHandler();
+  };
+
+  const handleCancel = () => {
+    closeModalHandler();
+  };
+
+  const renderModalButtons = () => {
+    if (modalType === 'alert') {
+      return (
+        <ModalButtons>
+          <button onClick={handleConfirm}>확인</button>
+        </ModalButtons>
+      );
+    } else if (modalType === 'confirm' || modalType === 'prompt') {
+      return (
+        <ModalButtons>
+          <button onClick={handleCancel}>취소</button>
+          <button onClick={handleConfirm}>확인</button>
+        </ModalButtons>
+      );
+    } else if (closeType === 'bottom') {
+      return <ModalBottomCloseBtn onClick={closeModalHandler}>닫기</ModalBottomCloseBtn>;
+    }
+  };
 
   return (
-    <ModalBoxContainer modalType={modalType}>
-      <ModalHeader />
+    <ModalBoxContainer modalPosition={modalPosition} modalSize={modalSize}>
+      <ModalHeader titleText={titleText} closeType={closeType} />
       {children}
-      {!hasHeaderCloseButton && (
-        <ModalBottomCloseBtn onClick={closeModalHandler}>닫기</ModalBottomCloseBtn>
-      )}
+      {renderModalButtons()}
     </ModalBoxContainer>
   );
 };
