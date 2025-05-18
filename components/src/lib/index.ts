@@ -16,3 +16,4 @@ export * from './types/Button.type';
 export * from './types/ConfirmModal.type';
 export * from './types/Input.type';
 export * from './types/PromptModal.type';
+export { default as GlobalStyles } from './styles/GlobalStyles';
