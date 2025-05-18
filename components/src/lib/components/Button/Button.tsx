@@ -1,18 +1,18 @@
 import styled from '@emotion/styled';
+import { ButtonHTMLAttributes } from "react";
 
 type ButtonProps = {
   variant: 'confirm' | 'cancel';
-  onClick: () => void;
   children: React.ReactNode;
-};
+} & ButtonHTMLAttributes<HTMLButtonElement>;
 
-function Button({variant, onClick, children}: ButtonProps) {
-  return <StyledButton variant={variant} onClick={onClick}>{children}</StyledButton>;
+function Button({variant, children, ...rest}: ButtonProps) {
+  return <StyledButton variant={variant} {...rest}>{children}</StyledButton>;
 }
 
 export default Button;
 
-const StyledButton = styled.button<{ variant: 'confirm' | 'cancel' }>` // 'type'을 'variant'로 변경
+const StyledButton = styled.button<{ variant: 'confirm' | 'cancel' }>`
     width: 80px;
     height: 36px;
     border-radius: 5px;
@@ -24,6 +24,6 @@ const StyledButton = styled.button<{ variant: 'confirm' | 'cancel' }>` // 'type'
 
     &:hover {
         background-color: ${({variant}) =>
-                variant === 'confirm' ? 'rgba(28, 28, 28, 0.6)' : 'rgba(224, 224, 224, 0.8)'};
+                variant === 'confirm' ? '#1C1C1C99' : '#E0E0E0CC'};
     }
 `;
