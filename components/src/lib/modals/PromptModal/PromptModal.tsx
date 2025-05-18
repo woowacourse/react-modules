@@ -8,7 +8,7 @@ type PromptModalProps = {
   size?: "small" | "medium" | "large";
   hasCloseButton?: boolean;
   onClose: () => void;
-  onConfirm?: () => void;
+  onConfirm: () => void;
   inputAttributes?: ComponentProps<"input">;
 };
 
