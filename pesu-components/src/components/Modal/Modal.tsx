@@ -33,23 +33,33 @@ const ModalContext = createContext<ModalContext>({
 
 interface WrapperProps {
   initialOpen?: boolean;
+  isOpen?: boolean;
+  onClose?: () => void;
+  onOpen?: () => void;
 }
 
-function Wrapper({ children, initialOpen = false }: StrictPropsWithChildren<WrapperProps>) {
-  const [isOpen, setIsOpen] = useState(initialOpen);
+function Wrapper({
+  children,
+  initialOpen = false,
+  isOpen: controlledIsOpen,
+  onClose,
+  onOpen,
+}: StrictPropsWithChildren<WrapperProps>) {
+  const isControlled = controlledIsOpen !== undefined;
+  const [uncontrolledOpen, setUncontrolledOpen] = useState(initialOpen);
+
+  const isOpen = isControlled ? controlledIsOpen : uncontrolledOpen;
+  const close = isControlled ? (onClose ?? (() => {})) : () => setUncontrolledOpen(false);
+  const open = isControlled ? (onOpen ?? (() => {})) : () => setUncontrolledOpen(true);
 
   useEffect(() => {
     if (!isOpen) return;
-
     const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') setIsOpen(false);
+      if (event.key === 'Escape') close();
     };
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [isOpen]);
-
-  const close = () => setIsOpen(false);
-  const open = () => setIsOpen(true);
+  }, [isOpen, close]);
 
   return <ModalContext.Provider value={{ isOpen, close, open }}>{children}</ModalContext.Provider>;
 }
@@ -80,7 +90,6 @@ function ModalMain({
 }: ModalProps) {
   const { isOpen, close } = useContext(ModalContext);
   const device = useDevice();
-
   const { modalRef } = useAutoFocus(isOpen);
 
   return (
@@ -105,7 +114,6 @@ ModalMain.displayName = 'ModalMain';
  */
 function Trigger({ children }: StrictPropsWithChildren) {
   const { open } = useContext(ModalContext);
-
   return <S.TransparentButton onClick={open}>{children}</S.TransparentButton>;
 }
 Trigger.displayName = 'ModalTrigger';
@@ -170,7 +178,6 @@ ButtonContainer.displayName = 'ModalButtonContainer';
 
 function CancelButton({ children }: StrictPropsWithChildren) {
   const { close } = useContext(ModalContext);
-
   return (
     <Button variant="outline" onClick={close}>
       {children}
@@ -181,12 +188,10 @@ CancelButton.displayName = 'ModalCancelButton';
 
 function ConfirmButton({ ...props }: ButtonProps) {
   const { close } = useContext(ModalContext);
-
   const handleConfirmButtonClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     props.onClick?.(event);
     close();
   };
-
   return <Button onClick={handleConfirmButtonClick} {...props} />;
 }
 ConfirmButton.displayName = 'ModalConfirmButton';
