@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { createContext } from "react";
 import { BackDrop } from "./BackDrop/BackDrop";
 import { Frame } from "./Frame/Frame";
@@ -6,6 +5,9 @@ import { Title } from "./Title/Title";
 import { Button } from "./Button/Button";
 import { CloseButton } from "./CloseButton/CloseButton";
 import { Body } from "./Body/Body";
+import { Input } from "./Input/Input";
+import { useKeyPress } from "./hooks/useKeyPress";
+import DualButtons from "./Button/variants/DualButtons";
 
 type ModalProps = {
   /** 모달 열림/닫힘 상태 */
@@ -18,6 +20,8 @@ type ModalProps = {
   autoCloseOnESC?: boolean;
   /** 모달 위치 */
   position?: "center" | "bottom";
+  /** 모달 크기 */
+  size?: "small" | "medium" | "large";
 };
 
 export const ModalContext = createContext<ModalProps>({
@@ -25,6 +29,7 @@ export const ModalContext = createContext<ModalProps>({
   onClose: () => {},
   children: <></>,
   position: "center",
+  size: "medium",
 });
 
 const Modal = ({
@@ -33,27 +38,17 @@ const Modal = ({
   children,
   autoCloseOnESC = true,
   position = "center",
+  size = "medium",
 }: ModalProps) => {
   const value = {
     isOpen,
     onClose,
     children,
     position,
+    size,
   };
 
-  useEffect(() => {
-    const handleKeyDown = (event: KeyboardEvent) => {
-      if (autoCloseOnESC && event.key === "Escape") {
-        onClose();
-      }
-    };
-
-    window.addEventListener("keydown", handleKeyDown);
-
-    return () => {
-      window.removeEventListener("keydown", handleKeyDown);
-    };
-  }, [isOpen, onClose]);
+  useKeyPress("Escape", onClose, autoCloseOnESC);
 
   return (
     <>
@@ -70,5 +65,7 @@ Modal.Title = Title;
 Modal.CloseButton = CloseButton;
 Modal.Body = Body;
 Modal.Button = Button;
+Modal.DualButtons = DualButtons;
+Modal.Input = Input;
 
 export default Modal;

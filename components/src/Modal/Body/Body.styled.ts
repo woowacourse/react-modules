@@ -9,6 +9,7 @@ const ModalBody = styled.div`
   max-height: 300px;
   overflow-y: auto;
   overflow-x: hidden;
+  align-items: flex-start;
 `;
 
 export { ModalBody };
