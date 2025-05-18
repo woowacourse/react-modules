@@ -9,35 +9,19 @@ export default function useCVCNumber({
   initCVCNumber: Record<string, string>;
   initCVCNumberError: Record<string, string>;
 }) {
-  const {
-    values: CVCNumber,
-    changeValues: setCVCNumber,
-    isFullFilled,
-  } = useCardInfo({
+  const CVCNumber = useCardInfo({
     initValues: initCVCNumber,
     maxLength: 3,
   });
 
-  const {
-    error: CVCNumberError,
-    checkValidation: validateCVCNumber,
-    getErrorMessage: getCVCNumberErrorMessage,
-    isError: isCVCNumberError,
-    resetError: resetCVCNumberError,
-  } = useError({
+  const CVCError = useError({
     initError: initCVCNumberError,
     getValidationFns: getCVCNumberValidationFns,
   });
 
   return {
     CVCNumber,
-    setCVCNumber,
-    isFullFilled,
-    CVCNumberError,
-    validateCVCNumber,
-    getCVCNumberErrorMessage,
-    isCVCNumberError,
-    resetCVCNumberError,
+    CVCError,
   };
 }
 

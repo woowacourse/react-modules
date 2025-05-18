@@ -36,7 +36,7 @@ function App() {
           <Dialog.Content>
             <Dialog.Header>
               <h2>다이얼로그 제목</h2>
-              <Dialog.CloseButton>✕</Dialog.CloseButton>
+              <Dialog.CloseAction>✕</Dialog.CloseAction>
             </Dialog.Header>
             <div>
               <p>다이얼로그 내용이 여기에 들어갑니다.</p>
@@ -68,7 +68,7 @@ function App() {
           <Dialog.Content position="bottom">
             <Dialog.Header>
               <h2>하단 시트 제목</h2>
-              <Dialog.CloseButton>✕</Dialog.CloseButton>
+              <Dialog.CloseAction>✕</Dialog.CloseAction>
             </Dialog.Header>
             <div>
               <p>하단 시트 내용이 여기에 들어갑니다.</p>
@@ -98,7 +98,7 @@ function App() {
 - `Dialog.Overlay`: 배경 오버레이 (클릭 시 다이얼로그 닫힘)
 - `Dialog.Content`: 다이얼로그 콘텐츠 컨테이너
 - `Dialog.Header`: 다이얼로그 헤더 (선택 사항)
-- `Dialog.CloseButton`: 클릭 시 다이얼로그를 닫는 버튼
+- `Dialog.CloseAction`: 클릭 시 다이얼로그를 닫는 버튼
 
 ### 각 컴포넌트 프롭스
 
@@ -123,7 +123,7 @@ function App() {
 
 - `children`: React 노드
 
-#### CloseButton
+#### CloseAction
 
 - `children`: React 노드
 

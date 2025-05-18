@@ -16,51 +16,25 @@ export default function useExpiration({
   initMonthError: Record<string, string>;
   initYearError: Record<string, string>;
 }) {
-  const {
-    values: expiration,
-    changeValues: setExpiration,
-    isFullFilled,
-  } = useCardInfo({
+  const expiration = useCardInfo({
     initValues: initExpiration,
     maxLength: 3,
   });
 
-  const {
-    error: monthError,
-    checkValidation: validateMonth,
-    getErrorMessage: getMonthErrorMessage,
-    isError: isMonthError,
-    resetError: resetMonthError,
-  } = useError({
+  const monthError = useError({
     initError: initMonthError,
     getValidationFns: getMonthValidationFns,
   });
 
-  const {
-    error: yearError,
-    checkValidation: validateYear,
-    getErrorMessage: getYearErrorMessage,
-    isError: isYearError,
-    resetError: resetYearError,
-  } = useError({
+  const yearError = useError({
     initError: initYearError,
     getValidationFns: getYearValidationFns,
   });
 
   return {
     expiration,
-    setExpiration,
-    isFullFilled,
     monthError,
-    validateMonth,
-    getMonthErrorMessage,
-    isMonthError,
-    resetMonthError,
     yearError,
-    isYearError,
-    validateYear,
-    getYearErrorMessage,
-    resetYearError,
   };
 }
 
