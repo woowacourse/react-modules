@@ -6,6 +6,8 @@ import {
   useCardNumbersInput,
   useCardCVCInput,
   useCardCompanyInput,
+  CardNumberInputEvent,
+  CardNumberInputElement,
 } from './lib';
 
 export interface InputProps extends ComponentProps<'input'> {
@@ -58,7 +60,7 @@ const CardNumberInput = () => {
     useCardNumbersInput();
   const inputRefs = useRef<Array<HTMLInputElement | null>>([]);
 
-  const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleInput = (e: CardNumberInputEvent) => {
     const { name, value } = e.target;
     const index = Number(name);
 
@@ -78,7 +80,7 @@ const CardNumberInput = () => {
         <React.Fragment key={index}>
           <Input
             type="text"
-            name={index.toString()}
+            name={index.toString() as CardNumberInputElement['name']}
             value={cardNumberGroups[index] || ''}
             onChange={handleInput}
             maxLength={maxLength}

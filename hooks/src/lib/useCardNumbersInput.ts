@@ -5,6 +5,12 @@ import { getFirstErrorMessage } from './validator/getFirstErrorMessage';
 import { CARD_FORMAT_PATTERNS } from './types/cardBrand';
 import { determineCardBrand } from './utils/determineCardBrand';
 
+export type CardNumberInputElement = HTMLInputElement & {
+  name: '0' | '1' | '2' | '3';
+};
+
+export type CardNumberInputEvent = ChangeEvent<CardNumberInputElement>;
+
 export function useCardNumbersInput() {
   const [cardNumberGroups, setCardNumberGroups] = useState(['', '', '', '']);
   const [error, setError] = useState<{ isValid: boolean; errorMessage: string }>({
@@ -40,7 +46,7 @@ export function useCardNumbersInput() {
     setCardNumberGroups(formattedGroups);
   }
 
-  function onChangeHandler(e: ChangeEvent<HTMLInputElement>) {
+  function onChangeHandler(e: CardNumberInputEvent) {
     const { name, value } = e.target;
     const index = Number(name);
 

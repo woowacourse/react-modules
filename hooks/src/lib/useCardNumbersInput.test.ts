@@ -1,6 +1,5 @@
 import { renderHook, act } from '@testing-library/react';
-import { useCardNumbersInput } from './useCardNumbersInput';
-import { ChangeEvent } from 'react';
+import { useCardNumbersInput, CardNumberInputEvent } from './useCardNumbersInput';
 import { ERROR_MESSAGE } from './validator/constants/errorMessage';
 
 describe('useCardNumbersInput', () => {
@@ -18,7 +17,7 @@ describe('useCardNumbersInput', () => {
     act(() => {
       result.current.onChangeHandler({
         target: { name: '0', value: userInput },
-      } as ChangeEvent<HTMLInputElement>);
+      } as CardNumberInputEvent);
     });
 
     expect(result.current.cardNumberGroups).toEqual([userInput, '', '', '']);
@@ -31,7 +30,7 @@ describe('useCardNumbersInput', () => {
     act(() => {
       result.current.onChangeHandler({
         target: { name: '0', value: userInput },
-      } as ChangeEvent<HTMLInputElement>);
+      } as CardNumberInputEvent);
     });
 
     expect(result.current.error.errorMessage).toBe(ERROR_MESSAGE.NUMBER.IS_NUMBER_STRING);
@@ -44,7 +43,7 @@ describe('useCardNumbersInput', () => {
     act(() => {
       result.current.onChangeHandler({
         target: { name: '0', value: userInput },
-      } as ChangeEvent<HTMLInputElement>);
+      } as CardNumberInputEvent);
     });
 
     expect(result.current.cardBrand).toBe('VISA');
@@ -57,7 +56,7 @@ describe('useCardNumbersInput', () => {
     act(() => {
       result.current.onChangeHandler({
         target: { name: '0', value: userInput },
-      } as ChangeEvent<HTMLInputElement>);
+      } as CardNumberInputEvent);
     });
 
     expect(result.current.cardBrand).toBe('MASTER');
@@ -70,7 +69,7 @@ describe('useCardNumbersInput', () => {
     act(() => {
       result.current.onChangeHandler({
         target: { name: '0', value: userInput },
-      } as ChangeEvent<HTMLInputElement>);
+      } as CardNumberInputEvent);
     });
 
     expect(result.current.cardBrand).toBe('DINERS');
@@ -83,7 +82,7 @@ describe('useCardNumbersInput', () => {
     act(() => {
       result.current.onChangeHandler({
         target: { name: '0', value: userInput },
-      } as ChangeEvent<HTMLInputElement>);
+      } as CardNumberInputEvent);
     });
 
     expect(result.current.cardBrand).toBe('AMEX');
@@ -96,7 +95,7 @@ describe('useCardNumbersInput', () => {
     act(() => {
       result.current.onChangeHandler({
         target: { name: '0', value: userInput },
-      } as ChangeEvent<HTMLInputElement>);
+      } as CardNumberInputEvent);
     });
 
     expect(result.current.cardBrand).toBe('UNIONPAY');
