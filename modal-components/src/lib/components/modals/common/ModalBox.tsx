@@ -10,8 +10,8 @@ const ModalBox = ({
   onClose,
   isCloseFocus = false,
 }: ModalProps) => {
-  const hasHeaderCloseButton = closeType === "top" ? true : false;
-  const hasBottomCloseButton = closeType === "bottom" ? true : false;
+  const hasHeaderCloseButton = closeType === "top";
+  const hasBottomCloseButton = closeType === "bottom";
   return (
     <ModalBoxContainer modalPosition={modalPosition}>
       <ModalHeader
