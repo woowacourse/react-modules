@@ -4,7 +4,7 @@ import { Meta, StoryObj } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 
 const meta: Meta<typeof AlertModal> = {
-  title: 'Components',
+  title: 'Components/Modal/Alert',
   component: AlertModal,
   argTypes: {
     message: {

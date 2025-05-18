@@ -4,7 +4,7 @@ import { Meta, StoryObj } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 
 const meta: Meta<typeof PromptModal> = {
-  title: 'Components',
+  title: 'Components/Modal/Prompt',
   component: PromptModal,
   argTypes: {
     message: {
