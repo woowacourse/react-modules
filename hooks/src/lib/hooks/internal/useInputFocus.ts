@@ -17,8 +17,6 @@ export function useInputFocus({
     (value: string, index: number) => {
       if (validateInputLength(value, index) && inputRefs[index + 1])
         inputRefs[index + 1].current?.focus();
-
-      console.log(validateInputLength(value, index), value, index);
     },
     [inputRefs]
   );

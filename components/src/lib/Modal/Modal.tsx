@@ -11,6 +11,7 @@ export interface ModalComponentProps {
   onClose: () => void;
   children: React.ReactNode;
   size?: "sm" | "md" | "lg";
+  backdropClosable?: boolean;
 }
 
 export default function ModalComponent({
@@ -19,6 +20,7 @@ export default function ModalComponent({
   onClose,
   children,
   size = "md",
+  backdropClosable = false,
 }: ModalComponentProps) {
   const modalRef = useRef<HTMLDivElement>(null);
 
@@ -29,7 +31,11 @@ export default function ModalComponent({
     styles[`${size}Modal`]
   }`;
 
-  useKeyPress({ targetKey: "Escape", enabled: !isOpen, onKeyMatch: onClose });
+  useKeyPress({
+    targetKey: "Escape",
+    enabled: !(isOpen && backdropClosable),
+    onKeyMatch: onClose,
+  });
   if (!isOpen) return null;
 
   return createPortal(
@@ -38,7 +44,9 @@ export default function ModalComponent({
         data-testid="modal-background"
         className={backgroundClassName}
         onClick={() => {
-          onClose();
+          if (backdropClosable) {
+            onClose();
+          }
         }}
       >
         <section

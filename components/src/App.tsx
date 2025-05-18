@@ -22,6 +22,7 @@ function App() {
         onClose={() => {
           setAlertModal(false);
         }}
+        backdropClosable
       >
         <Modal.Header>기본 스타일이 적용된 alert 모달</Modal.Header>
         <Modal.Content>
