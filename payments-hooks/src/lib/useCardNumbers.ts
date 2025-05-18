@@ -1,25 +1,79 @@
-import { useState } from 'react';
-import type { ChangeEvent } from 'react';
-import { validateCardNumber } from './validator/validateCardInput';
-import { getFirstErrorMessage } from './validator/getFirstErrorMessage';
+import { useState } from "react";
+import type { ChangeEvent } from "react";
+import { validateCardNumber } from "./validator/validateCardInput";
+import { getFirstErrorMessage } from "./validator/getFirstErrorMessage";
+
+type CardBrand =
+  | "VISA"
+  | "MASTERCARD"
+  | "AMEX"
+  | "DINERS"
+  | "UNIONPAY"
+  | "UNKNOWN";
+
+function detectCardBrand(cardNumber: string): CardBrand {
+  const noSpace = cardNumber.replace(/\s/g, "");
+
+  if (/^3[47]/.test(noSpace)) return "AMEX";
+  if (/^36/.test(noSpace)) return "DINERS";
+  if (/^4/.test(noSpace)) return "VISA";
+  if (/^5[1-5]/.test(noSpace)) return "MASTERCARD";
+  if (
+    /^622(?:12[6-9]|1[3-9][0-9]|[2-8][0-9]{2}|9[0-1][0-9]|92[0-5])/.test(
+      noSpace
+    ) ||
+    /^624|625|626/.test(noSpace) ||
+    /^628[2-8]/.test(noSpace)
+  )
+    return "UNIONPAY";
+
+  return "UNKNOWN";
+}
+
+const CARD_NUMBER_BLOCKS: Record<CardBrand, number[]> = {
+  VISA: [4, 4, 4, 4],
+  MASTERCARD: [4, 4, 4, 4],
+  AMEX: [4, 6, 5],
+  DINERS: [4, 6, 4],
+  UNIONPAY: [4, 4, 4, 4],
+  UNKNOWN: [4, 4, 4, 4],
+};
 
 export function useCardNumbersInput() {
-  const [cardNumbers, setCardNumbers] = useState(['', '', '', '']);
-  const [errorMessage, setErrorMessage] = useState('');
+  const [cardNumbersInfo, setCardNumbersInfo] = useState([
+    { value: "", errorMessage: "" },
+    { value: "", errorMessage: "" },
+    { value: "", errorMessage: "" },
+    { value: "", errorMessage: "" },
+  ]);
+  const [cardBrand, setCardBrand] = useState<CardBrand>("UNKNOWN");
 
-  function onChangeHandler(e: ChangeEvent<HTMLInputElement>) {
-    const { name, value } = e.target;
-    const index = Number(name);
+  const onChangeHandler = (index: number) => {
+    return (e: ChangeEvent<HTMLInputElement>) => {
+      const { value } = e.target;
+      const errorResults = validateCardNumber(value);
+      const errorMessage = getFirstErrorMessage(errorResults, "NUMBER");
 
-    setCardNumbers(cardNumbers.map((num, i) => (i === index ? value : num)));
+      const next = cardNumbersInfo.map((prev, i) =>
+        i === index ? { value, errorMessage } : prev
+      );
 
-    const errorResult = validateCardNumber(value);
-    setErrorMessage(getFirstErrorMessage(errorResult, 'NUMBER'));
-  }
+      const detectedBrand = detectCardBrand(
+        next.map(({ value }) => value).join("")
+      );
+      setCardBrand(detectedBrand);
+
+      const blockCount = CARD_NUMBER_BLOCKS[detectedBrand].length;
+      const validNext = next.slice(0, blockCount).map((item) => ({ ...item }));
+
+      setCardNumbersInfo(validNext);
+    };
+  };
 
   return {
-    cardNumbers,
+    cardNumbersInfo,
     onChangeHandler,
-    errorMessage,
+    cardBrand,
+    cardBlocks: CARD_NUMBER_BLOCKS[cardBrand],
   };
 }

@@ -5,7 +5,11 @@ import "./index.css";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <App modalType={"center"} closeType={"top"} titleText={"text"}>
+    <App
+      modalPosition={"center"}
+      closeType={"top"}
+      titleText={"카드 정보 입력"}
+    >
       123
     </App>
   </React.StrictMode>

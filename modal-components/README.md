@@ -10,82 +10,31 @@ npm install @dev-dino22/modal-components
 
 ---
 
-## ✨ 제공 기능
+## ✨ **제공 컴포넌트**
 
-- `Modal` - 모달 컴포넌트
-  - 중앙 모달
-  - 하단 모달
-- `useModal` - 모달 제어 훅
-  - `isModalOpened`: 모달의 열림/닫힘 상태
-  - `openModalHandler` : 모달을 여는 함수
-  - `closeModalHandler` : 모달을 닫는 함수
-
----
-
-## 🔧 ModalComponent Props
-
-모달의 형태와 내용을 구성합니다:
-
-| Prop                     | Type                     | Description                    |
-| ------------------------ | ------------------------ | ------------------------------ |
-| `modalType`              | `'center'` \| `'bottom'` | 모달 위치 설정                 |
-| `titleText` _(optional)_ | `string`                 | 모달의 제목                    |
-| `children`               | `ReactNode`              | 모달에 들어갈 내용             |
-| `closeType`              | `'top'` \| `'bottom'`    | 닫기 버튼 위치 설정            |
-| `onClose`                | `() => void`             | 모달이 닫히기 전에 호출될 함수 |
+- **BasicModal** - 기본 모달
+- **AlertModal** - 경고 모달
+- **ConfirmModal** - 확인/취소 모달
+- **PromptModal** - 사용자 입력 모달
+- **AgreementModal** - 약관 동의 모달
+- **useModal** - 모달 상태 관리 훅
 
 ---
 
-## 🧪 사용 예시
+## 🔧 **Modal Props**
 
-```tsx
-import { Modal, useModal } from "./lib";
-import "./App.css";
-
-function App({
-  modalType,
-  closeType,
-  titleText,
-}: {
-  modalType: "center" | "bottom";
-  closeType: "top" | "bottom";
-  titleText: string;
-  children?: React.ReactNode;
-}) {
-  const { isModalOpened, openModalHandler, closeModalHandler } = useModal();
-  const onClickHandler = () => {
-    openModalHandler();
-  };
-
-  const handleClose = () => {
-    console.log("닫힘");
-    closeModalHandler();
-  };
-
-  return (
-    <>
-      {isModalOpened && (
-        <Modal
-          modalType={modalType}
-          closeType={closeType}
-          titleText={titleText}
-          onClose={handleClose}
-        >
-          <p>Test!!!!!!</p>
-          <p>Test!!!!!!</p>
-        </Modal>
-      )}
-      <div className="button-container">
-        <button className="click-me-button" onClick={onClickHandler}>
-          click me!!
-        </button>
-      </div>
-    </>
-  );
-}
-
-export default App;
-```
+| Prop                           | Type                                 | Description                                    |
+| ------------------------------ | ------------------------------------ | ---------------------------------------------- |
+| `modalPosition`                | `'center'` \| `'bottom'`             | 모달의 위치 설정                               |
+| `modalSize`                    | `'small'` \| `'medium'` \| `'large'` | 모달의 크기 설정                               |
+| `titleText` _(optional)_       | `string`                             | 모달의 제목                                    |
+| `descriptionText` _(optional)_ | `string`                             | 모달의 설명                                    |
+| `children` _(optional)_        | `ReactNode`                          | 모달에 들어갈 내용                             |
+| `closeType`                    | `'top'` \| `'bottom'` \| `'none'`    | 닫기 버튼 위치 설정                            |
+| `onClose`                      | `() => void`                         | 모달이 닫힐 때 호출되는 함수                   |
+| `onConfirm` _(optional)_       | `() => void`                         | 확인 버튼 클릭 시 호출되는 함수                |
+| `onCancel` _(optional)_        | `() => void`                         | 취소 버튼 클릭 시 호출되는 함수                |
+| `isCloseFocus` _(optional)_    | `boolean`                            | 모달창 오픈 첫 포커스로 닫기 버튼을 할 지 여부 |
 
 ---
 
