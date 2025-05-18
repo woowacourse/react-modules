@@ -1,6 +1,6 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useRef } from 'react';
 import { Layout, Overlay, ModalContainer, TitleContainer, Title, CloseButton, CloseIcon } from './Modal.styles';
-import {useFocusTrap} from "./hooks/useFocusTrap";
+import { useFocusTrap } from "./hooks/useFocusTrap";
 
 export type ModalPosition = 'center' | 'bottom';
 export type ModalSize = 'sm' | 'md' | 'lg';
@@ -30,7 +30,7 @@ function Modal({
   const customWidth = position === 'center' ? width : '100%';
   const closeButtonRef = useRef<HTMLButtonElement>(null);
 
-  const {containerRef, handleKeyDown} = useFocusTrap({
+  const { containerRef, handleKeyDown } = useFocusTrap({
     initialFocusRef: closeButtonRef as React.RefObject<HTMLButtonElement>,
     onEscape: onClose
   });
@@ -38,33 +38,6 @@ function Modal({
   const handleClickOverlay = () => {
     onClose();
   };
-
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') {
-        onClose();
-      }
-    };
-
-    document.addEventListener('keydown', handleKeyDown);
-
-    return () => {
-      document.removeEventListener('keydown', handleKeyDown);
-    };
-  }, [onClose]);
-
-  useEffect(() => {
-    if (closeButtonRef.current) {
-      closeButtonRef.current.focus();
-    }
-
-    const originalStyle = window.getComputedStyle(document.body).overflow;
-    document.body.style.overflow = 'hidden';
-
-    return () => {
-      document.body.style.overflow = originalStyle;
-    };
-  }, []);
 
   return (
     <Layout onClick={handleClickOverlay}>
@@ -79,6 +52,7 @@ function Modal({
         ref={containerRef}
         role="dialog"
         aria-modal="true"
+        tabIndex={-1}
       >
         {title && (
           <TitleContainer>
