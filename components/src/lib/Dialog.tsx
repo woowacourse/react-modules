@@ -11,6 +11,8 @@ import useBoolean from './hooks/useBoolean';
 import { closeButton, content, header, overlay } from './Dialog.css';
 import useOverlay from './hooks/useOverlay';
 import useFocusRef from './hooks/useFocusRef';
+import useMergeRefs from './hooks/useMergeRefs';
+
 interface DialogContextType {
   open: () => void;
   close: () => void;
@@ -130,12 +132,13 @@ const Content = ({
 }: ContentProps) => {
   const { isOpen } = useDialogContext();
   const { focusRef } = useFocusRef(isOpen);
+  const mergedRef = useMergeRefs(focusRef, ref);
 
   return (
     <div
       css={content(position, size)}
       className={className}
-      ref={focusRef || ref}
+      ref={mergedRef}
       {...props}
     >
       {children}
