@@ -5,11 +5,11 @@ import {
   ErrorMessageType,
   ExpirationDateErrors,
   ExpirationDateInputs,
-  ExpirationDateValidationReturnType,
+  ExpirationDateHookReturnType,
   ValidateFuncReturnType,
 } from '../../types';
 
-const useExpirationDateValidation = (): ExpirationDateValidationReturnType => {
+const useExpirationDate = (): ExpirationDateHookReturnType => {
   const [inputStates, setInputStates] = useState<ExpirationDateInputs>({
     month: '',
     year: '',
@@ -60,4 +60,4 @@ const useExpirationDateValidation = (): ExpirationDateValidationReturnType => {
   };
 };
 
-export default useExpirationDateValidation;
+export default useExpirationDate;

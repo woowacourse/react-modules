@@ -1,16 +1,16 @@
 import { renderHook, act } from '@testing-library/react';
-import useCardNumberValidation from '.';
+import useCvcNumber from '.';
 
-describe('useCardNumberValidation', () => {
-  it('useCardNumberValidation의 초기 noError 상태는 true이다.', () => {
+describe('useCvcNumberValidation', () => {
+  it('useCvcNumberValidation 초기 noError 상태는 true이다.', () => {
     const initialNoError = true;
-    const { result } = renderHook(() => useCardNumberValidation());
+    const { result } = renderHook(() => useCvcNumber());
 
     expect(result.current.noError).toEqual(initialNoError);
   });
 
   it('숫자가 아닌 값이 들어오면 에러메시지를 반환한다.', () => {
-    const { result } = renderHook(() => useCardNumberValidation());
+    const { result } = renderHook(() => useCvcNumber());
     const event = {
       target: { value: 'hi' },
     } as React.ChangeEvent<HTMLInputElement>;
@@ -23,47 +23,50 @@ describe('useCardNumberValidation', () => {
   });
 
   it('숫자만 입력하면 noError가 true이다.', () => {
-    const { result } = renderHook(() => useCardNumberValidation());
-    const event = {
-      target: { value: '1234' },
+    const { result } = renderHook(() => useCvcNumber());
+    const goodEvent = {
+      target: { value: '123' },
     } as React.ChangeEvent<HTMLInputElement>;
 
     act(() => {
-      result.current.onChange(0)(event);
-      result.current.onChange(1)(event);
-      result.current.onChange(2)(event);
-      result.current.onChange(3)(event);
+      result.current.onChange(0)(goodEvent);
     });
 
     expect(result.current.noError).toBe(true);
   });
 
   it('숫자가 아닌 값이 들어오면 noError가 false이다.', () => {
-    const { result } = renderHook(() => useCardNumberValidation());
-    const goodEvent = {
-      target: { value: '1234' },
-    } as React.ChangeEvent<HTMLInputElement>;
+    const { result } = renderHook(() => useCvcNumber());
     const badEvent = {
-      target: { value: 'hi' },
+      target: { value: '3h' },
     } as React.ChangeEvent<HTMLInputElement>;
 
     act(() => {
-      result.current.onChange(0)(goodEvent);
-      result.current.onChange(1)(goodEvent);
-      result.current.onChange(2)(badEvent);
-      result.current.onChange(3)(goodEvent);
+      result.current.onChange(0)(badEvent);
     });
 
     expect(result.current.noError).toBe(false);
   });
 
+  it('숫자가 아닌 입력 시 에러 메시지가 나타난다.', () => {
+    const { result } = renderHook(() => useCvcNumber());
+    const badEvent = {
+      target: { value: '3ab' },
+    } as React.ChangeEvent<HTMLInputElement>;
+
+    act(() => {
+      result.current.onChange(0)(badEvent);
+    });
+    expect(result.current.errorMessage).toBe('숫자만 입력 가능합니다.');
+  });
+
   it('숫자 입력 시 에러 메시지가 사라진다.', () => {
-    const { result } = renderHook(() => useCardNumberValidation());
+    const { result } = renderHook(() => useCvcNumber());
     const badEvent = {
       target: { value: '3ab' },
     } as React.ChangeEvent<HTMLInputElement>;
     const goodEvent = {
-      target: { value: '1234' },
+      target: { value: '123' },
     } as React.ChangeEvent<HTMLInputElement>;
 
     act(() => {
@@ -77,31 +80,33 @@ describe('useCardNumberValidation', () => {
     expect(result.current.errorMessage).toBe('');
   });
 
-  it('자릿수가 부족한 경우 에러 메시지를 반환한다.', () => {
-    const { result } = renderHook(() => useCardNumberValidation());
-    const shortValueEvent = {
-      target: { value: '12' }, // format[index]는 4자리
+  it('3자리가 아닌 숫자가 들어오면 에러메시지를 반환한다.', () => {
+    const { result } = renderHook(() => useCvcNumber());
+    const shortEvent = {
+      target: { value: '12' },
     } as React.ChangeEvent<HTMLInputElement>;
 
     act(() => {
-      result.current.onChange(0)(shortValueEvent);
+      result.current.onChange(0)(shortEvent);
     });
 
     expect(result.current.errorMessage).toBe(
       '올바른 길이의 숫자를 입력해주세요.'
     );
+    expect(result.current.noError).toBe(false);
   });
 
-  it('올바른 자릿수를 입력하면 에러 메시지가 없다.', () => {
-    const { result } = renderHook(() => useCardNumberValidation());
-    const correctValueEvent = {
-      target: { value: '1234' },
+  it('정상적인 3자리 숫자 입력 시 noError가 true가 된다.', () => {
+    const { result } = renderHook(() => useCvcNumber());
+    const goodEvent = {
+      target: { value: '123' },
     } as React.ChangeEvent<HTMLInputElement>;
 
     act(() => {
-      result.current.onChange(0)(correctValueEvent);
+      result.current.onChange(0)(goodEvent);
     });
 
+    expect(result.current.noError).toBe(true);
     expect(result.current.errorMessage).toBe('');
   });
 });

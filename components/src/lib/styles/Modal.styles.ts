@@ -1,12 +1,18 @@
 import { css } from "@emotion/react";
 
+const SIZE_MAP = {
+  small: 320,
+  medium: 480,
+  large: 600,
+};
+
 export const ModalWrapperStyle = (show: boolean) => css`
   position: fixed;
   width: 100%;
   height: 100vh;
   top: 0;
   left: 0;
-  min-width: 300px;
+  min-width: 320px;
   display: ${show ? "block" : "none"};
 `;
 
@@ -20,18 +26,20 @@ export const backGroundStyle = (background: boolean) => css`
   visibility: ${background ? "visible" : "hidden"};
 `;
 
-export const ModalContainerStyle = (position: string, gap: number) => {
+export const ModalContainerStyle = (position: string, size: "small" | "medium" | "large" = "medium") => {
   const positionStyle = getPositionStyle(position);
+  const maxWidth = SIZE_MAP[size];
 
   return css`
     display: flex;
     flex-direction: column;
-    align-items: center;
     background: #fff;
     z-index: 99;
     box-sizing: border-box;
     padding: 24px 32px;
-    gap: ${gap}px;
+    min-width: 320px;
+    ${position === "center" && `max-width: ${maxWidth}px;`}
+    gap: 16px;
     ${positionStyle}
   `;
 };
@@ -56,11 +64,16 @@ export const ModalTitleStyle = (color: string) => css`
 `;
 
 export const ModalBodyStyle = css`
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
   width: 100%;
 `;
 
-export const ModalFooterStyle = css`
-  width: 100%;
+export const ModalFooterStyle = (align: "left" | "center" | "right" = "right") => css`
+  display: flex;
+  justify-content: ${align === "left" ? "flex-start" : align === "center" ? "center" : "flex-end"};
+  gap: 10px;
 `;
 
 export const ModalCloseStyle = css`
