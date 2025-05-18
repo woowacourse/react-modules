@@ -1,19 +1,19 @@
 import { StoryObj } from "@storybook/react";
 import { expect, userEvent, waitFor, within } from "@storybook/test";
 import { useState } from "react";
-import Modal from "../Modal";
-import meta from "./Modal.meta";
-import CancelButton from "../../ModalActions/CancelButton";
+import Modal from "../../Modal";
+import meta from "../Modal.meta";
+import CancelButton from "../../../ModalActions/CancelButton";
 
 export default {
   ...meta,
-  title: "modal/Interaction",
+  title: "modal/Interaction/DefaultModal",
   tags: ["autodocs"],
 };
 
 type Story = StoryObj<typeof Modal>;
 
-const ModalForInteraction = () => {
+const ModalWithInteractions = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   const closeModal = () => setIsOpen(false);
@@ -40,7 +40,7 @@ const ModalForInteraction = () => {
 };
 
 export const ModalOpenAndClose: Story = {
-  render: () => <ModalForInteraction />,
+  render: () => <ModalWithInteractions />,
   play: async ({ canvasElement, step }) => {
     const canvas = within(canvasElement);
 
@@ -81,7 +81,7 @@ export const ModalOpenAndClose: Story = {
 };
 
 export const ModalCloseWithEscapeKey: Story = {
-  render: () => <ModalForInteraction />,
+  render: () => <ModalWithInteractions />,
   play: async ({ canvasElement, step }) => {
     const canvas = within(canvasElement);
 
