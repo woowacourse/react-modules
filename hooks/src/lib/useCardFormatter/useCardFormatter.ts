@@ -1,41 +1,32 @@
-import { useEffect, useState } from 'react';
+import { useMemo } from 'react';
 import { useCardBrandValidation } from "../useCardBrandValidation";
 import { CARD_BRAND_SEGMENT } from "../constants/cardConfig";
 
 export const useCardFormatter = (cardNumber: string) => {
-  const [rawNumber, setRawNumber] = useState<string>('');
-  const [formattedNumber, setFormattedNumber] = useState<string>('');
+  const rawNumber = useMemo(() =>
+      cardNumber
+        .split('')
+        .filter(char => char >= '0' && char <= '9')
+        .join(''),
+    [cardNumber]);
+
   const { cardBrand } = useCardBrandValidation(cardNumber);
 
-  useEffect(() => {
+  const formattedNumber = useMemo(() => {
     if (!rawNumber) {
-      setFormattedNumber('');
-      return;
+      return '';
     }
 
-    const pattern = CARD_BRAND_SEGMENT[cardBrand] || CARD_BRAND_SEGMENT.unknown;
+    const pattern = cardBrand !== null ? CARD_BRAND_SEGMENT[cardBrand] : CARD_BRAND_SEGMENT.visa;
 
-    const segments = pattern.reduce<string[]>((acc, length) => {
+    const segments = pattern.reduce<string[]>((acc: string[], length: number) => {
       const offset = acc.reduce((sum, segment) => sum + segment.length, 0);
       const slice = rawNumber.slice(offset, offset + length);
       return slice ? [...acc, slice] : acc;
     }, []);
 
-    setFormattedNumber(segments.join(' '));
+    return segments.join(' ');
   }, [rawNumber, cardBrand]);
 
-  const handleCardNumberChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const input = e.target.value;
-    const digits = input
-      .split('')
-      .filter((num) => num >= '0' && num <= '9')
-      .join('');
-
-    setRawNumber(digits);
-  };
-
-  return {
-    formattedNumber,
-    handleCardNumberChange
-  };
+  return { formattedNumber };
 };
