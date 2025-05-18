@@ -1,6 +1,5 @@
 import { ReactNode } from "react";
 
-export interface ModalProps {
-  isOpen: boolean;
+export interface ModalPortalProps {
   children: ReactNode;
 }

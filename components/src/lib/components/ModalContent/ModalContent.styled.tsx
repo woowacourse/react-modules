@@ -7,6 +7,7 @@ const modalPositionVariants = {
     left: "0",
     bottom: "0",
     width: "100%",
+    maxWidth: "100%",
     borderTopLeftRadius: "8px",
     borderTopRightRadius: "8px",
   },
@@ -14,19 +15,51 @@ const modalPositionVariants = {
     top: "50%",
     left: "50%",
     transform: "translate(-50%, -50%)",
-    width: "90%",
     borderRadius: "8px",
   },
 };
 
+const modalSizeVariants = {
+  small: {
+    width: "80%",
+    maxWidth: "320px",
+  },
+  medium: {
+    width: "90%",
+    maxWidth: "480px",
+  },
+  large: {
+    width: "90%",
+    maxWidth: "640px",
+  },
+};
+
+const getSizeStyles = (size: ModalContentProps["size"]) => {
+  if (!size) return modalSizeVariants.large;
+
+  if (typeof size === "string") {
+    return modalSizeVariants[size];
+  }
+
+  return size;
+};
+
 export const StyledModalContent = styled.div<ModalContentProps>`
   position: fixed;
+  box-sizing: border-box;
+  box-shadow: 0px 4px 16px 0px rgba(0, 0, 0, 0.1);
   padding: 24px 32px;
   min-height: 216px;
   background-color: #fff;
-  border: 1px solid red;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  ${({ size }) => {
+    const sizeStyles = getSizeStyles(size);
+    return `
+      width: ${sizeStyles.width};
+      max-width: ${sizeStyles.maxWidth};
+    `;
+  }}
   ${({ position = "center" }) => modalPositionVariants[position]};
 `;

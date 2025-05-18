@@ -1,35 +1,39 @@
 import { useState } from 'react';
 import validateMaxLength from '../utils/validateMaxLength';
 import validateNumber from '../utils/validateNumber';
+import { ERROR_MESSAGE } from '../constants/errorMessage';
 
 export type CardCVCValidateResult = {
-  isValid: boolean;
   errorMessage: string | null;
   validateCardCVC: (cardCVC: string) => void;
+  validateCardCVCBlur: (cardCVC: string) => void;
 };
 
 const useCardCVCValidate = (): CardCVCValidateResult => {
-  const [isValid, setIsValid] = useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   const validateCardCVC = (cardCVC: string) => {
     if (!validateNumber(cardCVC)) {
-      setIsValid(false);
-      setErrorMessage('숫자만 입력해주세요.');
+      setErrorMessage(ERROR_MESSAGE.INVALID_NUMBER);
       return;
     }
 
     if (!validateMaxLength(cardCVC, 3)) {
-      setIsValid(false);
-      setErrorMessage('3자리만 입력해주세요.');
+      setErrorMessage(ERROR_MESSAGE.INVALID_CVC_LENGTH);
       return;
     }
 
-    setIsValid(true);
     setErrorMessage(null);
   };
 
-  return { isValid, errorMessage, validateCardCVC };
+  const validateCardCVCBlur = (cardCVC: string) => {
+    if (cardCVC.length < 3) {
+      setErrorMessage(ERROR_MESSAGE.INVALID_CVC_LENGTH);
+      return;
+    }
+  };
+
+  return { errorMessage, validateCardCVC, validateCardCVCBlur };
 };
 
 export default useCardCVCValidate;
