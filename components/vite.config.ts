@@ -26,7 +26,8 @@ export default defineConfig({
     react(),
     dts({
       include: ['src/lib'],
-      tsconfigPath: 'tsconfig.app.json'
+      tsconfigPath: 'tsconfig.app.json',
+      rollupTypes: true
     })
   ]
 });

@@ -1,12 +1,13 @@
-import { MouseEvent, ReactNode, useRef } from 'react';
+import { MouseEvent, useRef } from 'react';
 import * as S from './Modal.styles';
-import { ComponentProps } from 'react';
 import ModalPortal from './ModalPortal';
 import useEscClick from './useEscKey';
 import useScrollBlock from './useScrollBlock';
 import { ModalContext, useModalContext } from './ModalContext';
+import { ModalBackDropProps, ModalButtonProps, ModalCloseButtonProps, ModalContentProps, ModalMainProps, ModalTitleProps } from '../types';
+import { useHandleTabKey } from './useHandleTabKey';
 
-function ModalMain({ onClose, children }: { onClose: () => void; children: ReactNode }) {
+function ModalMain({ onClose, children }: ModalMainProps) {
   useEscClick(onClose);
   useScrollBlock();
 
@@ -17,7 +18,7 @@ function ModalMain({ onClose, children }: { onClose: () => void; children: React
   );
 }
 
-function ModalBackDrop({ backgroundColor, ...props }: { backgroundColor?: string } & ComponentProps<'div'>) {
+function ModalBackDrop({ backgroundColor, zIndex, ...props }: ModalBackDropProps) {
   const { onClose } = useModalContext();
   const outsideRef = useRef<HTMLDivElement>(null);
   const handleBackClick = (e: MouseEvent<HTMLDivElement>) => {
@@ -25,29 +26,23 @@ function ModalBackDrop({ backgroundColor, ...props }: { backgroundColor?: string
       onClose();
     }
   };
-  return <S.BackDrop {...props} ref={outsideRef} backgroundColor={backgroundColor} onClick={handleBackClick} />;
+  return <S.BackDrop {...props} ref={outsideRef} backgroundColor={backgroundColor} zIndex={zIndex} onClick={handleBackClick} />;
 }
 
-function ModalContent({
-  children,
-  position,
-  ...props
-}: {
-  children: ReactNode;
-  position: 'center' | 'bottom';
-} & ComponentProps<'div'>) {
+function ModalContent({ children, position, zIndex, size, ...props }: ModalContentProps) {
+  const modalRef = useHandleTabKey();
   return (
-    <S.ModalWrapper position={position} {...props}>
+    <S.ModalWrapper position={position ?? 'center'} zIndex={zIndex} size={size ?? 'medium'} {...props} ref={modalRef}>
       {children}
     </S.ModalWrapper>
   );
 }
 
-function ModalTitle({ children, ...props }: { children: ReactNode } & ComponentProps<'h2'>) {
+function ModalTitle({ children, ...props }: ModalTitleProps) {
   return <h2 {...props}>{children}</h2>;
 }
 
-function ModalCloseButton({ children, ...props }: { children: ReactNode } & ComponentProps<'button'>) {
+function ModalCloseButton({ children, ...props }: ModalCloseButtonProps) {
   const { onClose } = useModalContext();
 
   return (
@@ -57,7 +52,7 @@ function ModalCloseButton({ children, ...props }: { children: ReactNode } & Comp
   );
 }
 
-function ModalButton({ onClick, children, ...props }: { onClick: () => void; children: ReactNode } & ComponentProps<'button'>) {
+function ModalButton({ onClick, children, ...props }: ModalButtonProps) {
   return (
     <button onClick={onClick} {...props}>
       {children}
