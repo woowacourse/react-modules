@@ -14,7 +14,7 @@ const getModalWidth = (size: 'small' | 'medium' | 'large', position: 'center' | 
   }
 
   if (position === 'center') {
-    return modalSize[size] ?? modalSize.medium;
+    return modalSize[size];
   } else {
     return '100%';
   }
