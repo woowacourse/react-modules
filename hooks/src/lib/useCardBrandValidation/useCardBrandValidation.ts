@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useMemo } from 'react';
 import { CARD_BRAND_CONFIG } from '../constants/cardConfig';
 import { CARD_NUMBER_ERROR } from "../constants/errorMessages";
 import { CardBrand } from "../types/cardTypes";
@@ -11,64 +11,50 @@ type CardValidationResult = {
 }
 
 export const useCardBrandValidation = (cardNumber: string): CardValidationResult => {
-  const [result, setResult] = useState<CardValidationResult>({
-    cardBrand: null,
-    isValid: false,
-    error: null
-  });
-
-  useEffect(() => {
+  return useMemo(() => {
     const digits = cardNumber.split(' ').join('');
     const isAllDigits = [...digits].every((num) => num >= '0' && num <= '9');
 
     if (digits === '') {
-      setResult({
+      return {
         cardBrand: null,
         isValid: false,
         error: CARD_NUMBER_ERROR.required,
-      });
-      return;
+      };
     }
 
     if (!isAllDigits) {
-      setResult({
+      return {
         cardBrand: null,
         isValid: false,
         error: CARD_NUMBER_ERROR.onlyNumbers,
-      });
-      return;
+      }
     }
 
     const detectedBrand = validateCardBrand(digits);
 
     if (detectedBrand === null) {
-      setResult({
+      return {
         cardBrand: null,
         isValid: false,
         error: CARD_NUMBER_ERROR.invalidBrand,
-      });
-
-      return;
+      };
     }
 
     const expectedLength = CARD_BRAND_CONFIG[detectedBrand].length;
 
     if (digits.length !== expectedLength) {
-      setResult({
+      return {
         cardBrand: detectedBrand,
         isValid: false,
         error: `${detectedBrand.toUpperCase()} 카드는 ${expectedLength}자리 숫자여야 합니다.`,
-      });
-
-      return;
+      };
     }
 
-    setResult({
+    return {
       cardBrand: detectedBrand,
       isValid: true,
       error: null,
-    });
+    };
   }, [cardNumber]);
-
-  return result;
 }

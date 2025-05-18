@@ -74,4 +74,29 @@ describe('useCardBrandValidation', () => {
     expect(result.current.isValid).toBe(true);
     expect(result.current.error).toBeNull();
   });
+
+  it('동일한 카드 번호로 여러 번 호출해도 동일한 결과를 반환해야 함', () => {
+    const { result, rerender } = renderHook(
+      (props) => useCardBrandValidation(props),
+      { initialProps: '4111111111111111' }
+    );
+
+    const initialResult = result.current;
+
+    rerender('4111111111111111');
+    expect(result.current).toBe(initialResult);
+  });
+
+  it('카드 번호가 변경되면 결과가 업데이트되어야 함', () => {
+    const { result, rerender } = renderHook(
+      (props) => useCardBrandValidation(props),
+      { initialProps: '4111111111111111' }
+    );
+
+    expect(result.current.cardBrand).toBe('visa');
+
+    rerender('5555555555554444');
+    expect(result.current.cardBrand).toBe('mastercard');
+  });
+
 });
