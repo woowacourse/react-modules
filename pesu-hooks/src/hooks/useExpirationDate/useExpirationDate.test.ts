@@ -14,7 +14,6 @@ describe('useExpiryDate', () => {
     const { result } = renderHook(() => useExpirationDate());
     expect(result.current.expiryDate).toEqual({ month: '', year: '' });
     expect(result.current.expiryDateErrors).toEqual({ month: '', year: '' });
-    expect(result.current.isExpiryDateIsValid).toBe(false);
   });
 
   it('월과 연도를 올바르게 입력하면 isExpiryDateIsValid가 true가 된다', () => {

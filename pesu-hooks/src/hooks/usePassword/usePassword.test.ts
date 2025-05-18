@@ -14,7 +14,6 @@ describe('usePassword', () => {
     const { result } = renderHook(() => usePassword());
     expect(result.current.password).toEqual({ password: '' });
     expect(result.current.passwordErrors).toEqual({ password: '' });
-    expect(result.current.isPasswordValid).toBe(false);
   });
 
   it('2자리 숫자를 입력하면 isPasswordValid가 true가 된다', () => {

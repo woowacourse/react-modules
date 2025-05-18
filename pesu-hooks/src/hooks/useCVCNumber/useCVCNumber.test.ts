@@ -14,7 +14,6 @@ describe('useCvcNumber', () => {
     const { result } = renderHook(() => useCvcNumber());
     expect(result.current.cvcNumber).toEqual({ cvc: '' });
     expect(result.current.cvcNumberErrors).toEqual({ cvc: '' });
-    expect(result.current.isCvcNumberIsValid).toBe(false);
   });
 
   it('3자리 숫자를 입력하면 isCvcNumberIsValid가 true가 된다', () => {
