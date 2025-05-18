@@ -72,7 +72,7 @@ export const Title = styled.div`
   flex: 1;
 `;
 
-export const ModalBackdrop = styled.div`
+export const ModalBackdrop = styled.div<{ zIndex: number }>`
   background-color: #000;
   opacity: 0.35;
 
@@ -82,6 +82,8 @@ export const ModalBackdrop = styled.div`
   top: 0;
   bottom: 0;
   margin: auto;
+
+  z-index: ${(props) => props.zIndex};
 `;
 
 export const TransparentButton = styled.button`

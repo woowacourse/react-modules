@@ -64,6 +64,8 @@ export interface ModalProps {
   size?: 'small' | 'medium' | 'large';
   /** 배경 클릭 시 모달 닫기 여부 */
   isBackdropClose?: boolean;
+  /** 배경의 z-index 값 */
+  backdropZIndex?: number;
   /** 모달의 내용 */
   children: React.ReactNode;
 }
@@ -72,6 +74,7 @@ function ModalMain({
   children,
   position = 'center',
   zIndex = 10,
+  backdropZIndex = 9,
   size = 'medium',
   isBackdropClose = false,
 }: ModalProps) {
@@ -88,7 +91,7 @@ function ModalMain({
             <S.ModalContainer position={position} zIndex={zIndex} size={size} ref={modalRef} device={device}>
               {children}
             </S.ModalContainer>
-            <S.ModalBackdrop onClick={isBackdropClose ? close : undefined} />
+            <S.ModalBackdrop onClick={isBackdropClose ? close : undefined} zIndex={backdropZIndex} />
           </>,
           document.body,
         )}
