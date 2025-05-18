@@ -1,34 +1,119 @@
 import styled from "@emotion/styled";
 import CloseButton from "../components/CloseButton/CloseButton";
-import ConfirmButton from "../components/ConfirmButton/ConfirmButton";
+import Button, { ModalButtonProps } from "../components/Button/Button";
+import Input from "../components/Input/Input";
+import { useEffect, useRef, useState } from "react";
 
 type ModalProps = {
-  position: "center" | "bottom" | "top";
-  title: string;
-  content: React.ReactNode;
+  variant?: "alert" | "confirm" | "prompt";
+  position?: "center" | "bottom" | "top";
+  size?: "small" | "medium" | "large";
+  title?: string;
+  content?: React.ReactNode;
   handleBackdropClick?: (e: React.MouseEvent<HTMLDivElement>) => void;
   hasCloseButton?: boolean;
   onClose: () => void;
-  onConfirm?: () => void;
-  confirmText?: string;
+  onConfirm: () => void;
+  confirmButton?: ModalButtonProps;
+  cancelButton?: ModalButtonProps;
+  inputTitle?: string;
+  inputName?: string;
 };
 
 const Modal = ({
-  position,
-  title,
-  content,
+  variant = "alert",
+  position = "center",
+  size = "small",
+  title = "알림",
+  content = "내용이 없습니다.",
   handleBackdropClick,
   hasCloseButton = true,
   onClose,
   onConfirm,
-  confirmText = "확인",
+  confirmButton,
+  cancelButton,
+  inputTitle = "입력해주세요.",
+  inputName = "input",
 }: ModalProps) => {
+  const modalRef = useRef<HTMLDivElement | null>(null);
+  const [inputValue, setInputValue] = useState("");
+
+  const defaultConfirmButton = {
+    text: "확인",
+    onClick: onConfirm,
+    variant: "confirm" as const,
+  };
+
+  const defaultCancelButton = {
+    text: "취소",
+    onClick: onClose,
+    variant: "cancel" as const,
+  };
+
+  useEffect(() => {
+    const modal = modalRef.current;
+    if (!modal) return;
+
+    const originalOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+
+    const focusableSelectors = [
+      "button",
+      "a[href]",
+      "input",
+      "textarea",
+      "select",
+      '[tabindex]:not([tabindex="-1"])',
+    ];
+
+    const focusableElements = modal.querySelectorAll<HTMLElement>(
+      focusableSelectors.join(","),
+    );
+    const first = focusableElements[0];
+    const last = focusableElements[focusableElements.length - 1];
+
+    first?.focus();
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        e.preventDefault();
+        onClose();
+        return;
+      }
+      if (e.key !== "Tab") return;
+      if (!first || !last) return;
+
+      if (e.shiftKey) {
+        if (document.activeElement === first) {
+          e.preventDefault();
+          last.focus();
+        }
+      } else {
+        if (document.activeElement === last) {
+          e.preventDefault();
+          first.focus();
+        }
+      }
+    };
+
+    modal.addEventListener("keydown", handleKeyDown);
+    return () => {
+      modal.removeEventListener("keydown", handleKeyDown);
+      document.body.style.overflow = originalOverflow;
+    };
+  }, []);
+
   return (
     <Overlay>
-      <Wrapper position={position} onClick={handleBackdropClick}>
+      <Wrapper
+        position={position}
+        onClick={handleBackdropClick ? handleBackdropClick : onClose}
+      >
         <ModalContainer
           position={position}
-          onClick={(e) => e.stopPropagation()} // 모달 내부 클릭 시 backdrop 이벤트 방지
+          size={size}
+          onClick={(e) => e.stopPropagation()}
+          ref={modalRef}
         >
           <ModalHeader>
             <ModalTitle>{title}</ModalTitle>
@@ -36,10 +121,36 @@ const Modal = ({
               {hasCloseButton && <CloseButton onClose={onClose} />}
             </CloseButtonWrapper>
           </ModalHeader>
-          <ModalContent>{content}</ModalContent>
+          {variant !== "prompt" && <ModalContent>{content}</ModalContent>}
+
+          {variant === "prompt" && (
+            <InputContainer>
+              <Input
+                title={inputTitle}
+                name={inputName}
+                value={inputValue}
+                onChange={(e) => setInputValue(e.target.value)}
+                placeholder="이름을 입력하세요"
+              />
+            </InputContainer>
+          )}
+
           <ModalFooter>
-            {onConfirm && (
-              <ConfirmButton confirmText={confirmText} onClick={onConfirm} />
+            {variant === "alert" && (
+              <Button
+                {...(confirmButton ? confirmButton : defaultConfirmButton)}
+              />
+            )}
+
+            {(variant === "confirm" || variant === "prompt") && (
+              <Buttons>
+                <Button
+                  {...(cancelButton ? cancelButton : defaultCancelButton)}
+                />
+                <Button
+                  {...(confirmButton ? confirmButton : defaultConfirmButton)}
+                />
+              </Buttons>
             )}
           </ModalFooter>
         </ModalContainer>
@@ -49,6 +160,24 @@ const Modal = ({
 };
 
 export default Modal;
+
+const positionMap: Record<"center" | "bottom" | "top", string> = {
+  center: "center",
+  top: "flex-start",
+  bottom: "flex-end",
+};
+
+const borderRadiusMap: Record<"center" | "bottom" | "top", string> = {
+  center: "8px",
+  bottom: "8px 8px 0 0",
+  top: "0 0 8px 8px",
+};
+
+const sizeMap: Record<"small" | "medium" | "large", string> = {
+  small: "304px",
+  medium: "40%",
+  large: "70%",
+};
 
 const Overlay = styled.div`
   position: fixed;
@@ -66,28 +195,20 @@ const Overlay = styled.div`
 const Wrapper = styled.div<{ position: "center" | "bottom" | "top" }>`
   display: flex;
   justify-content: center;
-  align-items: ${({ position }) =>
-    position === "bottom"
-      ? "flex-end"
-      : position === "top"
-        ? "flex-start"
-        : "center"};
+  align-items: ${({ position }) => positionMap[position]};
   width: 100%;
   height: 100%;
 `;
 
-const borderRadiusMap: Record<"center" | "bottom" | "top", string> = {
-  center: "8px",
-  bottom: "8px 8px 0 0",
-  top: "0 0 8px 8px",
-};
-
-const ModalContainer = styled.div<{ position: "center" | "bottom" | "top" }>`
+const ModalContainer = styled.div<{
+  position: "center" | "bottom" | "top";
+  size: "small" | "medium" | "large";
+}>`
   display: flex;
   flex-direction: column;
   background-color: white;
   border-radius: ${({ position }) => borderRadiusMap[position]};
-  width: 304px;
+  width: ${({ size }) => sizeMap[size]};
   min-height: 216px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   padding: 24px 32px;
@@ -101,6 +222,7 @@ const ModalHeader = styled.div`
 const ModalTitle = styled.h2`
   font-size: 18px;
   font-weight: 700;
+  margin: 0;
 `;
 
 const CloseButtonWrapper = styled.div`
@@ -115,4 +237,13 @@ const ModalFooter = styled.div`
   margin-top: auto;
   text-align: center;
   justify-content: flex-end;
+`;
+
+const Buttons = styled.div`
+  display: flex;
+  gap: 7px;
+`;
+
+const InputContainer = styled.div`
+  display: flex;
 `;

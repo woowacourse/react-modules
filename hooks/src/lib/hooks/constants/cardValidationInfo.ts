@@ -18,3 +18,16 @@ export const EXPIRATION = {
     CURRENT: new Date().getFullYear() % 100,
   },
 } as const;
+
+export const CARD_BRAND_REGEX = [
+  { brand: "VISA", pattern: /^4/ },
+  { brand: "MASTERCARD", pattern: /^5[1-5]/ },
+  { brand: "AMEX", pattern: /^3[47]/ },
+  { brand: "DINERS", pattern: /^36/ },
+  { brand: "UNIONPAY", pattern: /^62[4-6]/ },
+  { brand: "UNIONPAY", pattern: /^628[2-8]/ },
+  {
+    brand: "UNIONPAY",
+    pattern: /^622(12[6-9]|1[3-9][0-9]|[2-8][0-9]{2}|9[0-1][0-9]|92[0-5])/,
+  },
+];
