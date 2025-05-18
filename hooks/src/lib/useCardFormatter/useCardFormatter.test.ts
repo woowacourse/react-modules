@@ -1,4 +1,4 @@
-import { renderHook, act } from '@testing-library/react';
+import { renderHook } from '@testing-library/react';
 import { useCardFormatter } from './useCardFormatter';
 import { useCardBrandValidation } from '../useCardBrandValidation';
 
@@ -7,7 +7,7 @@ jest.mock('../useCardBrandValidation');
 describe('useCardFormatter', () => {
   beforeEach(() => {
     (useCardBrandValidation as jest.Mock).mockReturnValue({
-      cardBrand: 'unknown'
+      cardBrand: null
     });
   });
 
@@ -27,13 +27,6 @@ describe('useCardFormatter', () => {
     });
 
     const { result } = renderHook(() => useCardFormatter('4111111111111111'));
-
-    act(() => {
-      result.current.handleCardNumberChange({
-        target: { value: '4111111111111111' }
-      } as React.ChangeEvent<HTMLInputElement>);
-    });
-
     expect(result.current.formattedNumber).toBe('4111 1111 1111 1111');
   });
 
@@ -43,44 +36,20 @@ describe('useCardFormatter', () => {
     });
 
     const { result } = renderHook(() => useCardFormatter('378282246310005'));
-
-    act(() => {
-      result.current.handleCardNumberChange({
-        target: { value: '378282246310005' }
-      } as React.ChangeEvent<HTMLInputElement>);
-    });
-
     expect(result.current.formattedNumber).toBe('3782 822463 10005');
   });
 
   it('숫자가 아닌 문자는 필터링되어야 함', () => {
-    const { result } = renderHook(() => useCardFormatter(''));
-
-    act(() => {
-      result.current.handleCardNumberChange({
-        target: { value: '4111-2222-3333-4444' }
-      } as React.ChangeEvent<HTMLInputElement>);
+    (useCardBrandValidation as jest.Mock).mockReturnValue({
+      cardBrand: 'visa'
     });
 
+    const { result } = renderHook(() => useCardFormatter('4111-2222-3333-4444'));
     expect(result.current.formattedNumber).toBe('4111 2222 3333 4444');
   });
 
   it('빈 문자열이 입력되면 포맷팅도 빈 문자열이어야 함', () => {
-    const { result } = renderHook(() => useCardFormatter('4111111111111111'));
-
-    act(() => {
-      result.current.handleCardNumberChange({
-        target: { value: '4111111111111111' }
-      } as React.ChangeEvent<HTMLInputElement>);
-    });
-
-    // 값이 있는 상태에서 빈 값으로 변경
-    act(() => {
-      result.current.handleCardNumberChange({
-        target: { value: '' }
-      } as React.ChangeEvent<HTMLInputElement>);
-    });
-
+    const { result } = renderHook(() => useCardFormatter(''));
     expect(result.current.formattedNumber).toBe('');
   });
 
@@ -97,13 +66,6 @@ describe('useCardFormatter', () => {
       });
 
       const { result } = renderHook(() => useCardFormatter(number));
-
-      act(() => {
-        result.current.handleCardNumberChange({
-          target: { value: number }
-        } as React.ChangeEvent<HTMLInputElement>);
-      });
-
       expect(result.current.formattedNumber).toBe(expected);
     });
   });

@@ -6,7 +6,7 @@ import { CARD_EXPIRATION_ERROR } from '../constants/errorMessages';
 describe('useCardExpiryPeriod 훅 테스트', () => {
   it('초기값이 올바르게 설정되어야 한다', () => {
     const initialCardExpiryDate = { month: '05', year: '25' };
-    const initialCardExpiryDateError = { month: '', year: '' };
+    const initialCardExpiryDateError = { month: null, year: null };
 
     const { result } = renderHook(() => useCardExpiryPeriod(initialCardExpiryDate, initialCardExpiryDateError));
 
@@ -16,7 +16,7 @@ describe('useCardExpiryPeriod 훅 테스트', () => {
 
   it('유효한 월이 입력되면 cardExpirationDate가 업데이트되고 에러 메시지가 지워져야 한다', () => {
     const initialCardExpiryDate = { month: '', year: '' };
-    const initialCardExpiryDateError = { month: '', year: '' };
+    const initialCardExpiryDateError = { month: null, year: null };
 
     const { result } = renderHook(() => useCardExpiryPeriod(initialCardExpiryDate, initialCardExpiryDateError));
 
@@ -27,12 +27,12 @@ describe('useCardExpiryPeriod 훅 테스트', () => {
     });
 
     expect(result.current.cardExpirationDate.month).toBe('06');
-    expect(result.current.cardExpirationDateError.month).toBe('');
+    expect(result.current.cardExpirationDateError.month).toBe(null);
   });
 
   it('유효한 연도가 입력되면 cardExpirationDate가 업데이트되고 에러 메시지가 지워져야 한다', () => {
     const initialCardExpiryDate = { month: '06', year: '' };
-    const initialCardExpiryDateError = { month: '', year: '' };
+    const initialCardExpiryDateError = { month: null, year: null };
 
     const { result } = renderHook(() => useCardExpiryPeriod(initialCardExpiryDate, initialCardExpiryDateError));
 
@@ -43,12 +43,12 @@ describe('useCardExpiryPeriod 훅 테스트', () => {
     });
 
     expect(result.current.cardExpirationDate.year).toBe('25');
-    expect(result.current.cardExpirationDateError.year).toBe('');
+    expect(result.current.cardExpirationDateError.year).toBe(null);
   });
 
   it('모든 값이 유효하면 isCardExpirationValid가 true를 반환해야 한다', () => {
     const initialCardExpiryDate = { month: '06', year: '25' };
-    const initialCardExpiryDateError = { month: '', year: '' };
+    const initialCardExpiryDateError = { month: null, year: null };
 
     const { result } = renderHook(() => useCardExpiryPeriod(initialCardExpiryDate, initialCardExpiryDateError));
 
@@ -57,7 +57,7 @@ describe('useCardExpiryPeriod 훅 테스트', () => {
 
   it('숫자가 아닌 값이 입력되면 에러 메시지가 설정되어야 한다', () => {
     const initialCardExpiryDate = { month: '', year: '' };
-    const initialCardExpiryDateError = { month: '', year: '' };
+    const initialCardExpiryDateError = { month: null, year: null };
 
     const { result } = renderHook(() => useCardExpiryPeriod(initialCardExpiryDate, initialCardExpiryDateError));
 
@@ -72,7 +72,7 @@ describe('useCardExpiryPeriod 훅 테스트', () => {
 
   it('유효하지 않은 월(0)이 입력되면 에러 메시지가 설정되어야 한다', () => {
     const initialCardExpiryDate = { month: '', year: '' };
-    const initialCardExpiryDateError = { month: '', year: '' };
+    const initialCardExpiryDateError = { month: null, year: null };
 
     const { result } = renderHook(() => useCardExpiryPeriod(initialCardExpiryDate, initialCardExpiryDateError));
 
@@ -88,7 +88,7 @@ describe('useCardExpiryPeriod 훅 테스트', () => {
 
   it('유효하지 않은 월(13 이상)이 입력되면 에러 메시지가 설정되어야 한다', () => {
     const initialCardExpiryDate = { month: '', year: '' };
-    const initialCardExpiryDateError = { month: '', year: '' };
+    const initialCardExpiryDateError = { month: null, year: null };
 
     const { result } = renderHook(() => useCardExpiryPeriod(initialCardExpiryDate, initialCardExpiryDateError));
 
@@ -104,7 +104,7 @@ describe('useCardExpiryPeriod 훅 테스트', () => {
 
   it('유효하지 않은 연도(현재 연도보다 이전)가 입력되면 에러 메시지가 설정되어야 한다', () => {
     const initialCardExpiryDate = { month: '06', year: '' };
-    const initialCardExpiryDateError = { month: '', year: '' };
+    const initialCardExpiryDateError = { month: null, year: null };
 
     const { result } = renderHook(() => useCardExpiryPeriod(initialCardExpiryDate, initialCardExpiryDateError));
 
@@ -120,7 +120,7 @@ describe('useCardExpiryPeriod 훅 테스트', () => {
 
   it('월이 유효하지 않으면 isCardExpirationValid가 false를 반환해야 한다', () => {
     const initialCardExpiryDate = { month: '13', year: '25' };
-    const initialCardExpiryDateError = { month: CARD_EXPIRATION_ERROR.invalidMonth, year: '' };
+    const initialCardExpiryDateError = { month: CARD_EXPIRATION_ERROR.invalidMonth, year: null };
 
     const { result } = renderHook(() => useCardExpiryPeriod(initialCardExpiryDate, initialCardExpiryDateError));
 
@@ -129,7 +129,7 @@ describe('useCardExpiryPeriod 훅 테스트', () => {
 
   it('연도가 유효하지 않으면 isCardExpirationValid가 false를 반환해야 한다', () => {
     const initialCardExpiryDate = { month: '06', year: '20' };
-    const initialCardExpiryDateError = { month: '', year: CARD_EXPIRATION_ERROR.invalidYear };
+    const initialCardExpiryDateError = { month: null, year: CARD_EXPIRATION_ERROR.invalidYear };
 
     const { result } = renderHook(() => useCardExpiryPeriod(initialCardExpiryDate, initialCardExpiryDateError));
 
@@ -138,7 +138,7 @@ describe('useCardExpiryPeriod 훅 테스트', () => {
 
   it('월이나 연도가 비어 있으면 isCardExpirationValid가 false를 반환해야 한다', () => {
     const initialCardExpiryDate = { month: '', year: '25' };
-    const initialCardExpiryDateError = { month: '', year: '' };
+    const initialCardExpiryDateError = { month: null, year: null };
 
     const { result } = renderHook(() => useCardExpiryPeriod(initialCardExpiryDate, initialCardExpiryDateError));
 
@@ -146,8 +146,8 @@ describe('useCardExpiryPeriod 훅 테스트', () => {
   });
 
   it('월이나 연도의 길이가 올바르지 않으면 isCardExpirationValid가 false를 반환해야 한다', () => {
-    const initialCardExpiryDate = { month: '6', year: '25' }; 
-    const initialCardExpiryDateError = { month: '', year: '' };
+    const initialCardExpiryDate = { month: '6', year: '25' };
+    const initialCardExpiryDateError = { month: null, year: null };
 
     const { result } = renderHook(() => useCardExpiryPeriod(initialCardExpiryDate, initialCardExpiryDateError));
 
