@@ -1,9 +1,6 @@
 import { act, renderHook } from "@testing-library/react";
-import {
-  ERROR_MESSAGE,
-  defaultValidationValue,
-} from "../lib/constants/validation";
-import useCvcNumber from "../lib/hooks/useCvcNumber";
+import { ERROR_MESSAGE, defaultValidationValue } from "../constants/validation";
+import useCvcNumber from "../hooks/useCvcNumber";
 
 describe("useCvcNumber", () => {
   it("초깃값은 빈 문자열이고, 유효성 검증 상태는 초기 상태(에러 없음)이어야 한다.", () => {
