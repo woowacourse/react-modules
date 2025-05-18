@@ -93,18 +93,30 @@ function determineCardBrand(cardNumber: string): CardBrand {
 
   if (cleanNumber[0] === '4') {
     return 'VISA';
-  } else if (cleanNumber[0] === '5' && cleanNumber[1] >= '1' && cleanNumber[1] <= '5') {
+  }
+
+  if (cleanNumber[0] === '5' && cleanNumber[1] >= '1' && cleanNumber[1] <= '5') {
     return 'MASTER';
-  } else if (cleanNumber.startsWith('36')) {
+  }
+
+  if (cleanNumber.startsWith('36')) {
     return 'DINERS';
-  } else if (cleanNumber.startsWith('34') || cleanNumber.startsWith('37')) {
+  }
+
+  if (cleanNumber.startsWith('34') || cleanNumber.startsWith('37')) {
     return 'AMEX';
-  } else if (cleanNumber.startsWith('62')) {
+  }
+
+  if (cleanNumber.startsWith('62')) {
     if (cleanNumber[2] >= '4' && cleanNumber[2] <= '6') {
       return 'UNIONPAY';
-    } else if (cleanNumber[2] === '8' && cleanNumber[3] >= '2' && cleanNumber[3] <= '8') {
+    }
+
+    if (cleanNumber[2] === '8' && cleanNumber[3] >= '2' && cleanNumber[3] <= '8') {
       return 'UNIONPAY';
-    } else if (
+    }
+
+    if (
       cleanNumber[2] === '2' &&
       parseInt(cleanNumber.slice(3, 6), 10) >= 126 &&
       parseInt(cleanNumber.slice(3, 6), 10) <= 925
