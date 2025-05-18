@@ -9,6 +9,7 @@ export const ButtonStyle = (buttonType: 'confirm' | 'cancel', width: string) => 
   border: ${buttonType === 'cancel' && '1px solid #8b95a1'};
   border-radius: 5px;
   cursor: pointer;
+  text-align: center;
 
   &:focus {
     border: ${buttonType === 'cancel' ? '1px solid #333333' : '1px solid #8b95a1'};

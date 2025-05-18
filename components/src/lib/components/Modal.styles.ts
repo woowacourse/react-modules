@@ -59,6 +59,7 @@ export const ModalCloseButton = css`
   cursor: pointer;
   border-radius: 50%;
   font-size: 16px;
+  text-align: center;
 
   &:hover {
     background-color: rgba(0, 0, 0, 0.1);

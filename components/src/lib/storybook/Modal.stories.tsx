@@ -3,6 +3,7 @@ import Modal from '../components/Modal';
 import { within, expect, userEvent, waitFor } from '@storybook/test';
 import type { ModalProps } from '../types/Modal.type';
 import useModal from '../hooks/useModal';
+import Button from '../components/Button';
 
 type ModalStoryProps = ModalProps & {
   title?: string;
@@ -50,8 +51,8 @@ const Wrapper = (args: ModalStoryProps) => {
   const ModalActions = () => {
     return (
       <>
-        <button onClick={handleClose}>닫기</button>
-        <button onClick={handleConfirm}>동의하고 저장하기</button>
+        <Button buttonType="cancel" onClick={handleClose} buttonText="닫기" />
+        <Button buttonType="confirm" onClick={handleConfirm} buttonText="동의하고 저장하기" />
       </>
     );
   };
