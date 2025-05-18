@@ -1,24 +1,16 @@
-import { CardBrand, CardBrandType } from "../types/cardBrand";
-
-const CARD_FORMAT_SEGMENTS: Record<CardBrand, number[]> = {
-  visa: [4, 4, 4, 4],
-  masterCard: [4, 4, 4, 4],
-  diners: [4, 6, 4],
-  amex: [4, 6, 5],
-  unionPay: [4, 4, 4, 4],
-};
+import { CardBrandType } from "../types/cardBrand";
+import { CARD_RULES } from "../constants/cardRules";
 
 export const formatByBrand = (
   cardBrand: CardBrandType,
   value: string
 ): string[] => {
-  if (!cardBrand) return [];
+  if (!cardBrand || !CARD_RULES[cardBrand]) return [];
 
-  const formatInfo = CARD_FORMAT_SEGMENTS[cardBrand];
-  if (!formatInfo) return [];
+  const segments = CARD_RULES[cardBrand].segments;
 
-  return formatInfo.map((segmentLength, index) => {
-    const startIndex = formatInfo
+  return segments.map((segmentLength, index) => {
+    const startIndex = segments
       .slice(0, index)
       .reduce((sum, length) => sum + length, 0);
 
