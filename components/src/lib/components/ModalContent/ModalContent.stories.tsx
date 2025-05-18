@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
+import ModalRoot from "../ModalRoot";
 import ModalContent from ".";
 
 const meta = {
@@ -44,6 +45,10 @@ export const Default: Story = {
   },
 
   render: (args) => {
-    return <ModalContent {...args}>모달 컨텐츠입니다.</ModalContent>;
+    return (
+      <ModalRoot>
+        <ModalContent {...args}>모달 컨텐츠입니다.</ModalContent>
+      </ModalRoot>
+    );
   },
 };

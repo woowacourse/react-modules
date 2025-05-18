@@ -1,5 +1,5 @@
-import { Modal } from "@ohgus/modal-component";
-// import { Modal } from "./lib";
+// import { Modal } from "@ohgus/modal-component";
+import { Modal } from "./lib";
 
 function App() {
   return (
@@ -9,7 +9,7 @@ function App() {
         <Modal.Trigger>
           <button>Open</button>
         </Modal.Trigger>
-        <Modal>
+        <Modal.Portal>
           <Modal.Overlay />
           <Modal.Content position="center" size="large">
             <Modal.Title tag="h1" fontSize="25px" fontWeight="700">
@@ -22,7 +22,7 @@ function App() {
               <button>Close</button>
             </Modal.Close>
           </Modal.Content>
-        </Modal>
+        </Modal.Portal>
       </Modal.Root>
     </>
   );

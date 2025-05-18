@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
-import Modal from ".";
-import ModalRoot from "../ModalRoot";
+import ModalRoot from ".";
+import ModalPortal from "../ModalPortal";
 import ModalOverlay from "../ModalOverlay";
 import ModalContent from "../ModalContent";
 import ModalTitle from "../ModalTitle";
@@ -9,8 +9,8 @@ import ModalClose from "../ModalClose";
 import ModalTrigger from "../ModalTrigger";
 
 const meta = {
-  title: "Modal",
-  component: Modal,
+  title: "ModalRoot",
+  component: ModalRoot,
   tags: ["autodocs"],
   parameters: {
     docs: {
@@ -23,7 +23,7 @@ const meta = {
       },
     },
   },
-} satisfies Meta<typeof Modal>;
+} satisfies Meta<typeof ModalRoot>;
 
 export default meta;
 
@@ -40,7 +40,7 @@ export const Default: Story = {
         <ModalTrigger>
           <button>Open</button>
         </ModalTrigger>
-        <Modal>
+        <ModalPortal>
           <ModalOverlay />
           <ModalContent position="center">
             <ModalTitle fontSize="25px" fontWeight="700">
@@ -51,7 +51,7 @@ export const Default: Story = {
               <button>Close</button>
             </ModalClose>
           </ModalContent>
-        </Modal>
+        </ModalPortal>
       </ModalRoot>
     );
   },
