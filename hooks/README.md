@@ -209,7 +209,7 @@ import { useCardBrand } from "@mlnwns/hooks";
 
 const CardBrandDetector = () => {
   const [cardNumber, setCardNumber] = useState("");
-  const cardBrand = useCardBrand([cardNumber]);
+  const cardBrand = useCardBrand(cardNumber);
 
   const handleInputChange = (e) => {
     setCardNumber(e.target.value);
