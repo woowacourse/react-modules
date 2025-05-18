@@ -1,14 +1,14 @@
 import { useState } from 'react';
 
 import useCardNumbersValidate from './useCardNumbersValidate';
-import { cardTypeRules } from './cardTypeRules';
+import { cardRules } from './cardTypeRules';
 import {
   getCardType,
   getFormattedCardNumber,
   getCardNumberMaxLength,
 } from './cardNumberUtil';
 
-type CardType = keyof typeof cardTypeRules;
+type CardType = (typeof cardRules)[number]['name'];
 
 export type CardNumbersResult = {
   cardNumbers: string;
@@ -29,14 +29,15 @@ const useCardNumbers = (): CardNumbersResult => {
   const cardNumberMaxLength = getCardNumberMaxLength(cardType);
 
   const handleCardNumberChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setCardType(getCardType(e.target.value));
+    const newCardType = getCardType(e.target.value) as CardType | null;
+    setCardType(newCardType);
 
     validateCardNumbers(e.target.value);
     setCardNumbers(e.target.value);
   };
 
   const handleCardNumberBlur = () => {
-    validateCardNumberBlur(cardNumbers, cardType);
+    validateCardNumberBlur({ cardNumbers, cardType });
   };
 
   const formattedCardNumbers = getFormattedCardNumber(cardNumbers, cardType);

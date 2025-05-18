@@ -1,19 +1,21 @@
 import { useState } from 'react';
 
 import validateNumber from '../utils/validateNumber';
-import { cardTypeRules } from './cardTypeRules';
+import { cardRules } from './cardTypeRules';
 import { ERROR_MESSAGE } from '../constants/errorMessage';
 
 const INITIAL_CARD_NUMBER_LENGTH = 16;
+
+type validateCardNumberBlurProps = {
+  cardNumbers: string;
+  cardType: (typeof cardRules)[number]['name'] | null;
+};
 
 export type CardNumberValidateResult = {
   isValid: boolean;
   errorMessage: string | null;
   validateCardNumbers: (cardNumber: string) => void;
-  validateCardNumberBlur: (
-    cardNumber: string,
-    cardType: keyof typeof cardTypeRules | null
-  ) => void;
+  validateCardNumberBlur: (props: validateCardNumberBlurProps) => void;
 };
 
 const useCardNumbersValidate = (): CardNumberValidateResult => {
@@ -31,22 +33,22 @@ const useCardNumbersValidate = (): CardNumberValidateResult => {
     setErrorMessage(null);
   };
 
-  const validateCardNumberBlur = (
-    cardNumber: string,
-    cardType: keyof typeof cardTypeRules | null
-  ) => {
+  const validateCardNumberBlur = ({
+    cardNumbers,
+    cardType,
+  }: validateCardNumberBlurProps) => {
     if (cardType) {
-      if (cardNumber.length < cardTypeRules[cardType].length) {
+      const rule = cardRules.find((rule) => rule.name === cardType);
+
+      if (cardNumbers.length < rule.length) {
         setIsValid(false);
 
-        setErrorMessage(
-          `${cardTypeRules[cardType].length}자리의 숫자를 입력해주세요.`
-        );
+        setErrorMessage(`${rule.length}자리의 숫자를 입력해주세요.`);
         return;
       }
     }
 
-    if (cardNumber.length < INITIAL_CARD_NUMBER_LENGTH) {
+    if (cardNumbers.length < INITIAL_CARD_NUMBER_LENGTH) {
       setIsValid(false);
 
       setErrorMessage(ERROR_MESSAGE.INVALID_CARD_NUMBER_LENGTH);
