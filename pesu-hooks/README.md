@@ -62,7 +62,7 @@ function CardRegisterForm() {
   const { cvcNumber, cvcNumberErrors, cvcNumberRegister, isCvcNumberIsValid } = useCVCNumber();
 
   // 5. 비밀번호
-  const { password, passwordErrors, passwordRegister, isPasswordIsValid } = usePassword();
+  const { password, passwordErrors, passwordRegister, isPasswordValid } = usePassword();
 
   return (
     <form>
@@ -91,11 +91,7 @@ function CardRegisterForm() {
       <button
         type="submit"
         disabled={
-          !isCardNumberIsValid ||
-          !isCardCompanyValid ||
-          !isExpiryDateIsValid ||
-          !isCvcNumberIsValid ||
-          !isPasswordIsValid
+          !isCardNumberIsValid || !isCardCompanyValid || !isExpiryDateIsValid || !isCvcNumberIsValid || !isPasswordValid
         }
       >
         등록

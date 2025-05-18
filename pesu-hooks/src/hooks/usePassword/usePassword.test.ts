@@ -14,10 +14,10 @@ describe('usePassword', () => {
     const { result } = renderHook(() => usePassword());
     expect(result.current.password).toEqual({ password: '' });
     expect(result.current.passwordErrors).toEqual({ password: '' });
-    expect(result.current.isPasswordIsValid).toBe(false);
+    expect(result.current.isPasswordValid).toBe(false);
   });
 
-  it('2자리 숫자를 입력하면 isPasswordIsValid가 true가 된다', () => {
+  it('2자리 숫자를 입력하면 isPasswordValid가 true가 된다', () => {
     const { result } = renderHook(() => usePassword());
     const { passwordRegister } = result.current;
 
@@ -26,10 +26,10 @@ describe('usePassword', () => {
     });
 
     expect(result.current.password.password).toBe('12');
-    expect(result.current.isPasswordIsValid).toBe(true);
+    expect(result.current.isPasswordValid).toBe(true);
   });
 
-  it('2자리가 아니면 isPasswordIsValid가 false가 된다', () => {
+  it('2자리가 아니면 isPasswordValid가 false가 된다', () => {
     const { result } = renderHook(() => usePassword());
     const { passwordRegister } = result.current;
 
@@ -37,7 +37,7 @@ describe('usePassword', () => {
       passwordRegister('password').onChange(mockInputEvent('1'));
     });
 
-    expect(result.current.isPasswordIsValid).toBe(false);
+    expect(result.current.isPasswordValid).toBe(false);
     expect(result.current.passwordErrors.password).not.toBe('');
   });
 
