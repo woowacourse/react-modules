@@ -3,6 +3,7 @@ import Modal, { ModalProps } from "../Modal";
 import meta from "./Modal.meta";
 import { Default } from "./Styles.stories";
 import AlertModal from "../../ModalPreset/AlertModal";
+import { Button } from "../../../lib";
 
 export default {
   ...meta,
@@ -35,20 +36,23 @@ export const AlertModalWithButton = (args: ModalProps) => {
         <div
           style={{ display: "flex", justifyContent: "flex-end", width: "100%" }}
         >
-          <Modal.Button style={{ width: "90px" }} onClick={closeModal}>
+          <Button style={{ width: "90px" }} onClick={closeModal}>
             확인
-          </Modal.Button>
+          </Button>
         </div>
       </Modal>
     </>
   );
 };
 
-export const AlertModalWithConfirmButton = (args: ModalProps) => (
+export const AlertModalWithActionButtons = (args: ModalProps) => (
   <Default {...args} title={{ text: "아이디를 입력해 주세요." }}>
     <p>아이디는 필수로 입력해야 합니다.</p>
     <div style={{ display: "flex", justifyContent: "flex-end", width: "100%" }}>
-      <Modal.ConfirmButton style={{ width: "90px" }} />
+      <Modal.ActionButtons
+        confirmProps={{ style: { width: "90px" } }}
+        showCancel={false}
+      />
     </div>
   </Default>
 );

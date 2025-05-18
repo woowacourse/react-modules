@@ -1,6 +1,6 @@
+import { ButtonProps } from "../Common/Button/Button";
 import CancelButton from "./CancelButton";
 import ConfirmButton from "./ConfirmButton";
-import { ButtonProps } from "../Common/Button/Button";
 
 export interface ActionButtonsProps {
   confirmText?: string;
@@ -8,6 +8,7 @@ export interface ActionButtonsProps {
   onConfirm?: (e: React.MouseEvent<HTMLButtonElement>) => void;
   confirmProps?: ButtonProps;
   cancelProps?: ButtonProps;
+  showCancel?: boolean;
 }
 
 const ActionButtons = ({
@@ -16,10 +17,11 @@ const ActionButtons = ({
   onConfirm,
   confirmProps = {},
   cancelProps = {},
+  showCancel = true,
 }: ActionButtonsProps) => {
   return (
     <>
-      <CancelButton {...cancelProps}>{cancelText}</CancelButton>
+      {showCancel && <CancelButton {...cancelProps}>{cancelText}</CancelButton>}
       <ConfirmButton onClick={onConfirm} {...confirmProps}>
         {confirmText}
       </ConfirmButton>

@@ -2,6 +2,7 @@ import { useState } from "react";
 import Modal, { ModalProps } from "../Modal";
 import meta from "./Modal.meta";
 import PromptModal from "../../ModalPreset/PromptModal";
+import { Button, Input } from "../../../lib";
 
 export default {
   ...meta,
@@ -52,7 +53,7 @@ export const PromptModalWithButton = (args: ModalProps) => {
             paddingTop: "20px",
           }}
         >
-          <Modal.Input
+          <Input
             placeholder="CGEXX46Z"
             value={inputValue}
             onChange={(e) => setInputValue(e.target.value)}
@@ -65,20 +66,20 @@ export const PromptModalWithButton = (args: ModalProps) => {
               gap: "10px",
             }}
           >
-            <Modal.Button
+            <Button
               onClick={closeModal}
               variant="secondary"
               style={{ width: "90px" }}
             >
               취소
-            </Modal.Button>
-            <Modal.Button
+            </Button>
+            <Button
               onClick={handleSubmit}
               variant="primary"
               style={{ width: "90px" }}
             >
               확인
-            </Modal.Button>
+            </Button>
           </div>
         </div>
       </Modal>
@@ -129,7 +130,7 @@ export const PromptModalWithActionButtons = (args: ModalProps) => {
             paddingTop: "20px",
           }}
         >
-          <Modal.Input
+          <Input
             placeholder="CGEXX46Z"
             value={inputValue}
             onChange={(e) => setInputValue(e.target.value)}

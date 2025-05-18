@@ -1,4 +1,5 @@
 import { ChangeEvent } from "react";
+import { Input } from "../../lib";
 import { ButtonProps } from "../Common/Button/Button";
 import Modal, { ModalProps } from "../Modal/Modal";
 
@@ -90,7 +91,7 @@ const PromptModal = ({
   return (
     <Modal {...props} isOpen={isOpen} onClose={onClose}>
       <div style={wrapperStyle}>
-        <Modal.Input
+        <Input
           placeholder={placeholder}
           value={inputValue}
           onChange={onChange}

@@ -52,9 +52,12 @@ const AlertModal = ({
     <Modal {...props} isOpen={isOpen} onClose={onClose}>
       {children}
       <div style={confirmButtonWrapperStyle}>
-        <Modal.ConfirmButton style={confirmButtonStyle} onClick={onConfirm}>
-          {confirmButtonText}
-        </Modal.ConfirmButton>
+        <Modal.ActionButtons
+          confirmText={confirmButtonText}
+          onConfirm={onConfirm}
+          confirmProps={{ style: confirmButtonStyle }}
+          showCancel={false}
+        />
       </div>
     </Modal>
   );

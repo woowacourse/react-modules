@@ -2,6 +2,7 @@ import { useState } from "react";
 import Modal, { ModalProps } from "../Modal";
 import meta from "./Modal.meta";
 import ConfirmModal from "../../ModalPreset/ConfirmModal";
+import { Button } from "../../../lib";
 
 export default {
   ...meta,
@@ -50,20 +51,20 @@ export const ConfirmModalWithButton = (args: ModalProps) => {
             gap: "10px",
           }}
         >
-          <Modal.Button
+          <Button
             onClick={closeModal}
             variant="secondary"
             style={{ width: "90px" }}
           >
             취소
-          </Modal.Button>
-          <Modal.Button
+          </Button>
+          <Button
             onClick={handleSubmit}
             variant="primary"
             style={{ width: "90px" }}
           >
             확인
-          </Modal.Button>
+          </Button>
         </div>
       </Modal>
     </>

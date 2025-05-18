@@ -5,12 +5,8 @@ import useBodyScrollLock from "../../hooks/useBodyScrollLock";
 import useEscapeKey from "../../hooks/useEscapeKey";
 import useModalFocusTrap from "../../hooks/useModalFocusTrap";
 import { ModalPosition, ModalSize } from "../../types/modal";
-import Button from "../Common/Button/Button";
-import Input from "../Common/Input/Input";
 import Portal from "../Common/Portal/Portal";
 import ActionButtons from "../ModalActions/ActionButtons";
-import CancelButton from "../ModalActions/CancelButton";
-import ConfirmButton from "../ModalActions/ConfirmButton";
 import ModalContainer from "../ModalContainer/ModalContainer";
 import ModalHeader from "../ModalHeader/ModalHeader";
 import { ModalBackdrop, ModalContent } from "./Modal.styles";
@@ -97,11 +93,6 @@ const Modal = ({
   );
 };
 
-Modal.Button = Button;
-Modal.Input = Input;
-
-Modal.CancelButton = CancelButton;
-Modal.ConfirmButton = ConfirmButton;
 Modal.ActionButtons = ActionButtons;
 
 export default Modal;
