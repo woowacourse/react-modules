@@ -2,17 +2,8 @@ import { useEffect, useState } from 'react';
 import type { ChangeEvent } from 'react';
 import { validateCardNumber, validateFullCardNumber } from './validator/validateCardInput';
 import { getFirstErrorMessage } from './validator/getFirstErrorMessage';
-
-type CardBrand = 'VISA' | 'MASTER' | 'DINERS' | 'AMEX' | 'UNIONPAY' | 'UNKNOWN';
-
-const CARD_FORMAT_PATTERNS = {
-  VISA: [4, 4, 4, 4],
-  MASTER: [4, 4, 4, 4],
-  DINERS: [4, 6, 4],
-  AMEX: [4, 6, 5],
-  UNIONPAY: [4, 4, 4, 4],
-  UNKNOWN: [4, 4, 4, 4],
-};
+import { CARD_FORMAT_PATTERNS } from './types/cardBrand';
+import { determineCardBrand } from './utils/determineCardBrand';
 
 export function useCardNumbersInput() {
   const [cardNumberGroups, setCardNumberGroups] = useState(['', '', '', '']);
@@ -86,44 +77,4 @@ export function useCardNumbersInput() {
     onChangeHandler,
     error,
   };
-}
-
-function determineCardBrand(cardNumber: string): CardBrand {
-  const cleanNumber = cardNumber.replace(/\D/g, '');
-
-  if (cleanNumber[0] === '4') {
-    return 'VISA';
-  }
-
-  if (cleanNumber[0] === '5' && cleanNumber[1] >= '1' && cleanNumber[1] <= '5') {
-    return 'MASTER';
-  }
-
-  if (cleanNumber.startsWith('36')) {
-    return 'DINERS';
-  }
-
-  if (cleanNumber.startsWith('34') || cleanNumber.startsWith('37')) {
-    return 'AMEX';
-  }
-
-  if (cleanNumber.startsWith('62')) {
-    if (cleanNumber[2] >= '4' && cleanNumber[2] <= '6') {
-      return 'UNIONPAY';
-    }
-
-    if (cleanNumber[2] === '8' && cleanNumber[3] >= '2' && cleanNumber[3] <= '8') {
-      return 'UNIONPAY';
-    }
-
-    if (
-      cleanNumber[2] === '2' &&
-      parseInt(cleanNumber.slice(3, 6), 10) >= 126 &&
-      parseInt(cleanNumber.slice(3, 6), 10) <= 925
-    ) {
-      return 'UNIONPAY';
-    }
-  }
-
-  return 'UNKNOWN';
 }
