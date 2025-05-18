@@ -1,9 +1,8 @@
 import { useState } from 'react';
 import { validateCardInput } from '../../validation/cardNumberLengthInfo';
-
-import { CardInputItem } from '../../types/cardInputItem.types';
-
-const CARD_NUMBER_INPUTS_LENGTH = 4;
+import { getCardBrand } from './cardBrands/utils/getCardBrand';
+import type { CardBrand } from './cardBrands/types';
+import { formatCardNumber } from './cardBrands/utils/formatCardNumber';
 
 /**
  *
@@ -13,45 +12,50 @@ const CARD_NUMBER_INPUTS_LENGTH = 4;
  * @returns 카드 번호 입력 상태와 핸들러를 반환합니다.
  * @returns cardNumbers - 카드 번호 입력 상태 배열 (4개 항목)
  * @returns errorMessage 카드 번호 입력 오류 메시지
+ * @returns isValid 카드 번호 입력 유효성 검사 결과
+ * @returns cardType 카드 타입 (Visa, MasterCard, Diners, AMEX, UnionPay, Unknown)
  * @returns handleCardNumberChange 카드 번호 입력 핸들러
  * @example
- * const { cardNumbers, errorMessage, handleCardNumberChange } = useCardNumber();
+ * const { cardNumbers, errorMessage, isValid, cardType, handleCardNumberChange } = useCardNumber();
  * <input
  *   type="text"
- *   value={cardNumbers[0].value}
- *   onChange={(e) => handleCardNumberChange(e, 0)}
+ *   value={cardNumbers.formatted} // 포맷팅 된 카드 번호
+ *   onChange={(e) => handleCardNumberChange(e)}
  *   placeholder="카드 번호를 입력하세요"
  * />
  */
 export const useCardNumber = () => {
-  const [cardNumbers, setCardNumbers] = useState<CardInputItem[]>(
-    Array.from({ length: CARD_NUMBER_INPUTS_LENGTH }, () => ({ value: '', isValid: true }))
-  );
-
+  const [cardNumbers, setCardNumbers] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
+  const [cardType, setCardBrand] = useState<CardBrand>('Unknown');
 
-  const handleCardNumberChange = (event: React.ChangeEvent<HTMLInputElement>, index: number) => {
-    const newValue = event.target.value;
+  const handleCardNumberChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const value = event.target.value;
 
-    const { isValid, errorMessage } = validateCardInput(newValue, CARD_NUMBER_INPUTS_LENGTH);
+    const newCardNumbers = value.replace(/\s/g, '');
 
-    setCardNumbers((prev) => {
-      const newCardNumbers = [...prev];
-      newCardNumbers[index].value = newValue;
-      newCardNumbers[index].isValid = isValid;
-      return newCardNumbers;
+    const { type, numberLengths } = getCardBrand({
+      cardNumber: newCardNumbers,
     });
+    const { errorMessage } = validateCardInput(newCardNumbers, numberLengths);
 
-    if (!isValid) {
-      setErrorMessage(errorMessage);
-    } else {
-      setErrorMessage('');
+    if (newCardNumbers.length > numberLengths) {
+      return;
     }
+
+    setCardNumbers(newCardNumbers);
+    setCardBrand(type);
+    setErrorMessage(errorMessage);
   };
 
   return {
-    cardNumbers,
+    cardNumber: {
+      raw: cardNumbers,
+      formatted: formatCardNumber({ type: cardType, cardNumber: cardNumbers }),
+    },
     errorMessage,
+    isValid: cardNumbers !== '' && errorMessage === '',
+    cardType: cardType,
     handleCardNumberChange,
   };
 };
