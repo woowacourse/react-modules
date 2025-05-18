@@ -15,13 +15,6 @@ pnpm add @mlnwns/modal
 
 ---
 
-## Props
-
-표를 사용하지 않고, 각 prop에 대해 설명하는 방식으로 변경할 수 있습니다. 다음은
-그 예시입니다:
-
----
-
 ### BaseModal (기본 모달)
 
 - **`position`** (`"center"` | `"bottom"`, 기본값: `"center"`)
@@ -72,6 +65,9 @@ pnpm add @mlnwns/modal
   content={<p>변경 사항이 저장되었습니다.</p>}
   onClose={() => console.log("닫기")}
   onConfirm={() => console.log("확인")}
+  position="bottom"
+  size="small"
+  hasCloseButton={false}
 />
 ```
 
@@ -87,6 +83,9 @@ pnpm add @mlnwns/modal
   content={<p>이 작업은 되돌릴 수 없습니다.</p>}
   onClose={() => console.log("취소")}
   onConfirm={() => console.log("확인")}
+  position="center"
+  size="large"
+  hasCloseButton={true}
 />
 ```
 
@@ -94,13 +93,17 @@ pnpm add @mlnwns/modal
 
 ### PromptModal
 
-- 입력창이 포함된 모달입니다.
+- 입력창이 포함된 모달입니다. `inputAttributes`로 placeholder 등 input 속성을 전
+  달 할 수 있습니다.
 
 ```tsx
 <PromptModal
   title="닉네임 변경"
   onClose={() => console.log("닫기")}
   onConfirm={() => console.log("확인")}
+  position="bottom"
+  size="medium"
+  hasCloseButton={true}
   inputAttributes={{
     placeholder: "새 닉네임 입력",
   }}
