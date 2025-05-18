@@ -1,11 +1,11 @@
 import { useEffect } from 'react';
 import ModalBox from './ModalBox';
 import { ModalContainer, ModalBackdrop, Container, Wrapper } from './styles/ModalStyle';
-import { useModal } from './contexts/ModalContext';
+import { useModalContext } from './contexts/ModalContext';
 import { ModalChildrenProps } from './types/modalTypes';
 
 const Modal = ({ children }: ModalChildrenProps) => {
-  const { isModalOpened, closeModalHandler, modalPosition } = useModal();
+  const { isModalOpened, closeModalHandler, modalPosition } = useModalContext();
 
   const handleKeyDown = (event: KeyboardEvent) => {
     if (event.key === 'Escape') {

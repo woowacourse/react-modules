@@ -58,11 +58,11 @@ export const ModalProvider = ({
   );
 };
 
-export const useModal = () => {
+export const useModalContext = () => {
   const context = useContext(ModalContext);
 
   if (context === undefined) {
-    throw new Error('useModal은 ModalProvider 내부에서 사용해야 합니다');
+    throw new Error('useModalContext은 ModalProvider 내부에서 사용해야 합니다');
   }
 
   return context;

@@ -2,7 +2,7 @@
 
 > 간단하게 사용할 수 있는 모달 컴포넌트와 관련 훅을 제공합니다.
 > <br />
-> 사용자는 모달의 열고 닫힘의 동작, 기본적인 모달 UI에 신경쓸 필요 없이 Modal 컴포넌트와 useModal 훅만으로 모달 구현이 가능합니다.
+> 사용자는 모달의 열고 닫힘의 동작, 기본적인 모달 UI에 신경쓸 필요 없이 Modal 컴포넌트와 useModalContext 훅만으로 모달 구현이 가능합니다.
 
 ## 📦 Install
 
@@ -18,7 +18,7 @@ npm install oa-modal-components
   - `modalPosition`: 중앙 / 하단 모달
   - `modalType` : 확인(Alert) / 확인/취소(Confirm) / 입력(Prompt) 모달
   - `modalSize` : small / medium / large 모달
-- `useModal` - 모달 제어 훅
+- `useModalContext` - 모달 제어 훅
   - `openModalHandler` : 모달을 여는 함수
   - `closeModalHandler` : 모달을 닫는 함수
 - `ModalProvider` - 모달 컨텍스트 제공자
@@ -57,7 +57,7 @@ npm install oa-modal-components
 ## 🧪 사용 예시
 
 ```tsx
-import { Modal, ModalProvider, useModal } from 'oa-modal-components';
+import { Modal, ModalProvider, useModalContext } from 'oa-modal-components';
 import './App.css';
 
 function App() {
@@ -69,7 +69,7 @@ function App() {
 }
 
 function ModalExample() {
-  const { openModalHandler } = useModal();
+  const { openModalHandler } = useModalContext();
 
   const onClickHandler = () => {
     openModalHandler();

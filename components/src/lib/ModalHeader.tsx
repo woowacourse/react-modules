@@ -1,10 +1,10 @@
 import CloseIconSVG from './assets/CloseIconSVG';
 import { ModalHeaderContainer } from './styles/ModalStyle';
 import { ModalTitle } from './styles/ModalTextStyle';
-import { useModal } from './contexts/ModalContext';
+import { useModalContext } from './contexts/ModalContext';
 
 const ModalHeader = () => {
-  const { titleText, closeType, closeModalHandler, onClose } = useModal();
+  const { titleText, closeType, closeModalHandler, onClose } = useModalContext();
   const hasCloseButton = closeType === 'top' ? true : false;
 
   function closeHandler() {

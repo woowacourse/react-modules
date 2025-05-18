@@ -1,7 +1,7 @@
-import { useModal } from './lib';
+import { useModalContext } from './lib';
 
 function ModalOpenButton({ type }: { type: string }) {
-  const { openModalHandler } = useModal();
+  const { openModalHandler } = useModalContext();
 
   return (
     <>

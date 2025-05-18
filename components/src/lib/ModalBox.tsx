@@ -1,10 +1,11 @@
 import ModalHeader from './ModalHeader';
-import { useModal } from './contexts/ModalContext';
+import { useModalContext } from './contexts/ModalContext';
 import { ModalBoxContainer, ModalBottomCloseBtn, ModalButtons } from './styles/ModalStyle';
 import { ModalChildrenProps } from './types/modalTypes';
 
 const ModalBox = ({ children }: ModalChildrenProps) => {
-  const { modalPosition, modalSize, closeType, modalType, closeModalHandler, onClose } = useModal();
+  const { modalPosition, modalSize, closeType, modalType, closeModalHandler, onClose } =
+    useModalContext();
 
   const handleConfirm = () => {
     onClose?.();
