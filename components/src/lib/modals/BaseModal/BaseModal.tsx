@@ -1,28 +1,32 @@
 import styled from "@emotion/styled";
 import CloseButton from "../components/CloseButton/CloseButton";
-import ConfirmButton from "../components/ConfirmButton/ConfirmButton";
+import { useFocusTrap } from "../hooks/useFocusTrap";
+import { useEscapeKey } from "../hooks/useEscapeKey";
+import { useOutsideClick } from "../hooks/useOutSideClick";
 
 type ModalProps = {
-  position: "center" | "bottom" | "top";
+  position?: "center" | "bottom";
+  size: "small" | "medium" | "large";
   title: string;
   content: React.ReactNode;
-  hasCloseButton: boolean;
+  hasCloseButton?: boolean;
   onClose: () => void;
-  handleBackdropClick?: (e: React.MouseEvent<HTMLDivElement>) => void;
-  confirmText?: string;
-  onConfirm?: () => void;
+  buttonElements?: React.ReactNode;
 };
 
-const Modal = ({
-  position,
+const BaseModal = ({
+  position = "center",
+  size,
   title,
   content,
-  hasCloseButton,
+  hasCloseButton = true,
   onClose,
-  handleBackdropClick,
-  confirmText = "확인",
-  onConfirm,
+  buttonElements,
 }: ModalProps) => {
+  const modalRef = useFocusTrap();
+  useEscapeKey(onClose);
+  const handleWrapperClick = useOutsideClick(onClose);
+
   return (
     <Overlay
       role="dialog"
@@ -30,27 +34,23 @@ const Modal = ({
       aria-labelledby="modal-title"
       aria-describedby="modal-content"
     >
-      <Wrapper className={position} onClick={handleBackdropClick}>
-        <ModalContainer className={position}>
+      <Wrapper className={position} onClick={handleWrapperClick}>
+        <ModalContainer className={`${position} ${size}`} ref={modalRef}>
           <ModalHeader>
             <ModalTitle id="modal-title">{title}</ModalTitle>
             <CloseButtonWrapper>
               {hasCloseButton && <CloseButton onClose={onClose} />}
             </CloseButtonWrapper>
           </ModalHeader>
-          <ModalContent id="modal-content">{content}</ModalContent>{" "}
-          <ModalFooter>
-            {onConfirm && (
-              <ConfirmButton confirmText={confirmText} onClick={onConfirm} />
-            )}
-          </ModalFooter>
+          <ModalContent id="modal-content">{content}</ModalContent>
+          {buttonElements && <ModalFooter>{buttonElements}</ModalFooter>}
         </ModalContainer>
       </Wrapper>
     </Overlay>
   );
 };
 
-export default Modal;
+export default BaseModal;
 
 const Overlay = styled.div`
   position: fixed;
@@ -78,18 +78,12 @@ const Wrapper = styled.div`
   &.bottom {
     align-items: flex-end;
   }
-
-  &.top {
-    align-items: flex-start;
-  }
 `;
 
 const ModalContainer = styled.div`
   display: flex;
   flex-direction: column;
   background-color: white;
-  width: 304px;
-  min-height: 216px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   padding: 24px 32px;
 
@@ -101,8 +95,16 @@ const ModalContainer = styled.div`
     border-radius: 8px 8px 0 0;
   }
 
-  &.top {
-    border-radius: 0 0 8px 8px;
+  &.small {
+    width: 320px;
+  }
+
+  &.medium {
+    width: 480px;
+  }
+
+  &.large {
+    width: 600px;
   }
 `;
 
@@ -125,7 +127,8 @@ const ModalContent = styled.div`
 `;
 
 const ModalFooter = styled.div`
-  margin-top: auto;
-  text-align: center;
+  display: flex;
   justify-content: flex-end;
+  gap: 12px;
+  margin-top: 24px;
 `;

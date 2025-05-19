@@ -1,40 +1,60 @@
 import { useState } from "react";
-import { Modal } from "./lib";
+import PromptModal from "./lib/modals/PromptModal/PromptModal";
+import AlertModal from "./lib/modals/AlertModal/AlertModal";
+import ConfirmModal from "./lib/modals/ConfirmModal/ConfirmModal";
 
 function App() {
-  const [isOpen, setIsOpen] = useState(false);
+  const [openModal, setOpenModal] = useState<
+    null | "prompt" | "alert" | "confirm"
+  >(null);
 
-  const handleOpenModal = () => {
-    setIsOpen(true);
-  };
+  const handleCloseModal = () => setOpenModal(null);
 
-  const handleCloseModal = () => {
-    setIsOpen(false);
-  };
-
-  const handleBackdropClick = (e: React.MouseEvent<HTMLDivElement>): void => {
-    if (e.target === e.currentTarget) {
-      handleCloseModal();
-    }
-  };
-
-  const handleConfirm = () => {
-    console.log('확인 버튼이 클릭되었습니다.')
+  const handleConfirm = (message: string) => () => {
+    alert(message);
+    setOpenModal(null);
   };
 
   return (
     <>
-      <button onClick={handleOpenModal}>모달 열기</button>
-      {isOpen && (
-        <Modal
-          onClose={handleCloseModal}
-          title="제목"
+      <div style={{ display: "flex", gap: "10px", marginBottom: "20px" }}>
+        <button onClick={() => setOpenModal("prompt")}>PromptModal</button>
+        <button onClick={() => setOpenModal("alert")}>AlertModal</button>
+        <button onClick={() => setOpenModal("confirm")}>ConfirmModal</button>
+      </div>
+
+      {openModal === "prompt" && (
+        <PromptModal
+          title="쿠폰 번호를 입력해 주세요."
+          hasCloseButton={false}
           position="center"
-          content="내용"
-          hasCloseButton={true}
-          handleBackdropClick={handleBackdropClick}
-          confirmText="확인"
-          onConfirm={handleConfirm}
+          size="large"
+          onClose={handleCloseModal}
+          onConfirm={handleConfirm("PromptModal 확인")}
+        />
+      )}
+
+      {openModal === "alert" && (
+        <AlertModal
+          title="아이디를 입력해 주세요."
+          content={<p>아이디는 필수로 입력해야 합니다.</p>}
+          hasCloseButton={false}
+          size="large"
+          position="center"
+          onClose={handleCloseModal}
+          onConfirm={handleConfirm("AlertModal 확인")}
+        />
+      )}
+
+      {openModal === "confirm" && (
+        <ConfirmModal
+          title="카드를 삭제하시겠습니까?"
+          content={<p>삭제하면 복구하실 수 없습니다.</p>}
+          hasCloseButton={false}
+          position="center"
+          size="medium"
+          onClose={handleCloseModal}
+          onConfirm={handleConfirm("ConfirmModal 확인")}
         />
       )}
     </>
