@@ -14,9 +14,11 @@ export function useCvcField() {
     return '';
   }, [cvc]);
 
+  const isCvcValid = !cvcError;
+
   const handleCvcChange = (value: string) => {
     setCvc(value);
   };
 
-  return { cvc, handleCvcChange, cvcError };
+  return { cvc, handleCvcChange, cvcError, isCvcValid };
 }

@@ -1,6 +1,7 @@
 import { ReactNode } from 'react';
 
 export type Position = 'center' | 'bottom';
+export type Size = 'small' | 'medium' | 'large' | undefined;
 
 export type ModalContextType = {
   onClose: () => void;
@@ -13,6 +14,7 @@ export interface ModalProps {
   position: Position;
   onClose: () => void;
   onAfterOpen?: () => void;
+  size?: Size;
 }
 
 export interface ModalContentProps {

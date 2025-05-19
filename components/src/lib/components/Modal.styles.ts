@@ -1,5 +1,5 @@
 import { css } from '@emotion/css';
-import { Position } from '../types/Modal.type';
+import { Position, Size } from '../types/Modal.type';
 
 export const ModalBackdrop = css`
   width: 100dvw;
@@ -14,10 +14,25 @@ export const ModalBackdrop = css`
   top: 0;
 `;
 
-export const ModalFrame = (position: Position) => css`
+const ModalFrameWidth = (size: Size) => {
+  if (!size) {
+    return '100%';
+  }
+  if (size === 'small') {
+    return '320px';
+  }
+  if (size === 'medium') {
+    return '480px';
+  }
+  if (size === 'large') {
+    return '600px';
+  }
+};
+
+export const ModalFrame = (position: Position, size: Size) => css`
   background-color: white;
-  padding: 20px;
-  width: ${position === 'center' ? '100%' : '100dvw'};
+  padding: 30px;
+  width: ${position === 'center' ? ModalFrameWidth(size) : '100dvw'};
   min-width: ${position === 'center' && '300px'};
   max-width: ${position === 'center' && '80dvw'};
   border-radius: ${position === 'center' ? '8px' : '8px 8px 0 0'};
@@ -44,23 +59,28 @@ export const ModalCloseButton = css`
   cursor: pointer;
   border-radius: 50%;
   font-size: 16px;
+  text-align: center;
 
   &:hover {
     background-color: rgba(0, 0, 0, 0.1);
   }
   &:focus {
-    outline: none;
+    background-color: rgba(0, 0, 0, 0.1);
   }
 `;
 
 export const ModalContent = css`
   width: 100%;
   padding: 10px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  justify-content: center;
 `;
 
 export const ButtonBar = css`
   display: flex;
-  justify-content: center;
+  justify-content: flex-end;
   align-items: center;
   gap: 10px;
   width: 100%;
