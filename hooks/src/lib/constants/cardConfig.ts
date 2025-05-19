@@ -19,3 +19,19 @@ export const CARD_CVC = {
 export const CARD_PASSWORD = {
   maxLength: 2,
 };
+
+export const CARD_BRAND_CONFIG: Record<string, { length: number }> = {
+  diners: {length: 14},
+  amex: {length: 15},
+  unionpay: {length: 16},
+  visa: {length: 16},
+  mastercard: {length: 16},
+};
+
+export const CARD_BRAND_SEGMENT: Record<string, number[]> = {
+  amex: [4, 6, 5],
+  diners: [4, 6, 4],
+  visa: [4, 4, 4, 4],
+  mastercard: [4, 4, 4, 4],
+  unionpay: [4, 4, 4, 4],
+};

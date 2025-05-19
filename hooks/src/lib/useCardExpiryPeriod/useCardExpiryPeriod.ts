@@ -31,7 +31,7 @@ export const useCardExpiryPeriod = (
 
     setCardExpirationDateError(prevErrors => ({
       ...prevErrors,
-      [name]: CARD_EXPIRATION_ERROR.onlyNumbers,
+      [name]: null,
     }));
 
     if (name === 'month' && value.length > 0) {
@@ -40,6 +40,11 @@ export const useCardExpiryPeriod = (
         setCardExpirationDateError(prevErrors => ({
           ...prevErrors,
           month: CARD_EXPIRATION_ERROR.invalidMonth,
+        }));
+      } else {
+        setCardExpirationDateError(prevErrors => ({
+          ...prevErrors,
+          month: null,
         }));
       }
     }
@@ -50,6 +55,11 @@ export const useCardExpiryPeriod = (
         setCardExpirationDateError(prevErrors => ({
           ...prevErrors,
           year: CARD_EXPIRATION_ERROR.invalidYear,
+        }));
+      } else {
+        setCardExpirationDateError(prevErrors => ({
+          ...prevErrors,
+          year: null,
         }));
       }
     }

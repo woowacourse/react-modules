@@ -3,59 +3,79 @@ import { CardNumber, CardNumberError } from '../types/cardTypes';
 import { CARD_NUMBER_ERROR } from '../constants/errorMessages';
 import { isOnlyDigits } from '../utils/validateNumber';
 import { CARD_NUMBER } from '../constants/cardConfig';
+import { useCardFormatter } from "../useCardFormatter";
+import { useCardBrandValidation } from "../useCardBrandValidation";
 
 export const useCardNumber = (initialCardNumber: CardNumber, initialError: CardNumberError) => {
   const [cardNumber, setCardNumber] = useState<CardNumber>(initialCardNumber);
   const [cardNumberError, setCardNumberError] = useState<CardNumberError>(initialError);
 
+  const rawNumber = `${cardNumber.first}${cardNumber.second}${cardNumber.third}${cardNumber.fourth}`;
+
+  const { formattedNumber } = useCardFormatter(rawNumber);
+  const { cardBrand, isValid: isBrandValid, error: brandError } = useCardBrandValidation(formattedNumber);
+
   const handleCardNumberChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-
-    const updatedError = { ...cardNumberError };
-    const cardFields: Array<keyof CardNumberError> = ['first', 'second', 'third', 'fourth'];
-
-    cardFields.forEach((field) => {
-      if (field !== name && updatedError[field] === CARD_NUMBER_ERROR.onlyNumbers) {
-        updatedError[field] = '';
-      }
-    });
 
     const isNumber = isOnlyDigits(value);
 
     if (!isNumber && value !== '') {
-      setCardNumberError({
-        ...updatedError,
+      setCardNumberError(prevErrors => ({
+        ...prevErrors,
         [name]: CARD_NUMBER_ERROR.onlyNumbers,
-      });
+      }));
 
       return;
     }
 
-    setCardNumber({
-      ...cardNumber,
-      [name]: value,
-    });
+    const digits = value
+      .split('')
+      .filter((num) => num >= '0' && num <= '9')
+      .join('');
 
-    setCardNumberError(prevErrors => ({
-      ...prevErrors,
-      [name]: CARD_NUMBER_ERROR.onlyNumbers,
-    }));
+
+    const updatedCardNumber = {
+      ...cardNumber,
+      [name]: digits,
+    }
+
+    setCardNumber(updatedCardNumber);
+
+    if (brandError) {
+      setCardNumberError(prevErrors => ({
+        ...prevErrors,
+        [name]: brandError,
+      }));
+    } else {
+      setCardNumberError(prevErrors => ({
+        ...prevErrors,
+        [name]: null,
+      }));
+    }
   };
 
   const isCardNumberValid = () => {
     const { first, second, third, fourth } = cardNumber;
+    const length = CARD_NUMBER.maxLength;
 
-    return (
-      first.length === CARD_NUMBER.maxLength &&
-      second.length === CARD_NUMBER.maxLength &&
-      third.length === CARD_NUMBER.maxLength &&
-      fourth.length === CARD_NUMBER.maxLength
+    const isBasicFormatValid = (
+      first.length === length &&
+      second.length === length &&
+      third.length === length &&
+      fourth.length === length
     );
+
+    return isBasicFormatValid && isBrandValid;
   };
 
   return {
     cardNumber,
     cardNumberError,
+    formattedNumber,
+    cardBrand,
+    isBrandValid,
+    brandError,
     handleCardNumberChange,
     isCardNumberValid,
   };
