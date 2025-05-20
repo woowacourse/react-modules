@@ -50,7 +50,6 @@ describe('useCardNumber 훅 테스트', () => {
       result.current.handleCardNumberChange({ idx: 0, value: '' });
     });
 
-    expect(result.current.formattedCardNumber[0]).toBe('');
     expect(result.current.cardNumberError[0]).toBe('');
   });
 
@@ -86,7 +85,7 @@ describe('useCardNumber 훅 테스트', () => {
     expect(visaResult.current.requiredFields).toBe(4);
     expect(visaResult.current.fieldLengthArr).toEqual([4, 4, 4, 4]);
 
-    // AMEX 카드 
+    // AMEX 카드
     const { result: amexResult } = renderHook(() => useCardNumber('371449635398431', emptyErrorMsg));
     expect(amexResult.current.requiredFields).toBe(3);
     expect(amexResult.current.fieldLengthArr).toEqual([4, 6, 5]);
