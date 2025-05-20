@@ -41,6 +41,12 @@ export default function useCardNumbers(): ValitationResult {
     const numberWithoutSpaces = value.replace(/\s/g, '');
     if (isOverInputLength(numberWithoutSpaces, cardNumberLength)) return;
 
+    validate({
+      value: numberWithoutSpaces,
+      brand: cardBrand,
+      length: cardNumberLength,
+    });
+
     setNumbers(numberWithoutSpaces);
   };
 
@@ -51,13 +57,13 @@ export default function useCardNumbers(): ValitationResult {
     });
   };
 
-  useEffect(() => {
-    validate({
-      value: numbers,
-      brand: cardBrand,
-      length: cardNumberLength,
-    });
-  }, [numbers, cardBrand, cardNumberLength]);
+  // useEffect(() => {
+  //   validate({
+  //     value: numbers,
+  //     brand: cardBrand,
+  //     length: cardNumberLength,
+  //   });
+  // }, [numbers, cardBrand, cardNumberLength]);
 
   const validate = ({ value, brand, length }: ValidateParams) => {
     if (isEmpty(value)) {
