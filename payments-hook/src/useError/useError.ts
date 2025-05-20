@@ -1,32 +1,36 @@
 import { useState } from 'react';
 
-const useError = <T extends Record<string, boolean>>(initialError: T) => {
-  const initialErrorMessage = Object.keys(initialError).reduce((acc, key) => {
-    acc[key as keyof T] = '';
-    return acc;
-  }, {} as Record<keyof T, string>);
+const useError = () => {
+  const [errorMessage, setErrorMessage] = useState<
+    Record<string, string | undefined>
+  >({});
 
-  const [errorMessage, setErrorMessage] = useState(initialErrorMessage);
-
-  const clearError = (target: keyof T) => {
-    setErrorMessage((prev) => ({ ...prev, [target]: '' }));
+  const clearError = (key: string) => {
+    setErrorMessage((prev) => {
+      const { [key]: _, ...rest } = prev;
+      return rest;
+    });
   };
 
-  const changeError = (target: keyof T, message: string) => {
-    setErrorMessage((prev) => ({ ...prev, [target]: message }));
+  const changeError = (key: string, message: string) => {
+    setErrorMessage((prev) => ({ ...prev, [key]: message }));
   };
 
-  const isError = Object.keys(initialError).reduce((acc, key) => {
-    acc[key as keyof T] = errorMessage[key as keyof T] !== '';
-    return acc;
-  }, {} as Record<keyof T, boolean>);
+  const isError = Object.fromEntries(
+    Object.entries(errorMessage).map(([key, message]) => [
+      key,
+      message !== undefined && message !== '',
+    ])
+  );
 
-  const error = {
-    isError,
-    errorMessage: errorMessage,
+  return {
+    error: {
+      isError: isError as Record<string, boolean>,
+      errorMessage,
+    },
+    changeError,
+    clearError,
   };
-
-  return { error, changeError, clearError };
 };
 
 export default useError;

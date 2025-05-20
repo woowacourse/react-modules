@@ -50,7 +50,7 @@ export type CardNumbersKeys = 'FIRST' | 'SECOND' | 'THIRD' | 'FOURTH';
 
 export default function useCardNumbers(userCardNumbers = INITIAL_CARD_NUMBER) {
   const [cardNumbers, setCardNumbers] = useState<CardNumbers>(userCardNumbers);
-  const { error, changeError, clearError } = useError(INITIAL_IS_ERROR);
+  const { error, changeError, clearError } = useError();
   const cardNetwork = getCardNetwork(Object.values(cardNumbers).join(''));
 
   function handleCardNumbersChange({ target }: { target: CardNumbersKeys }) {

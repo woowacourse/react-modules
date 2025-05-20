@@ -14,9 +14,7 @@ export const CARD_CVC_ERROR_MESSAGE = {
 
 export default function useCardCVCNumber(userCardCVCNumber = '') {
   const [cardCVCNumber, setCardCVCNumber] = useState(userCardCVCNumber);
-  const { error, changeError, clearError } = useError({
-    [KEY]: false,
-  });
+  const { error, changeError, clearError } = useError();
 
   function handleCardCVCNumberChange(
     event: React.ChangeEvent<HTMLInputElement>

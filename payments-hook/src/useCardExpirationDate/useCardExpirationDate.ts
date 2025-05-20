@@ -40,7 +40,7 @@ export default function useCardExpirationDate(
   const [cardExpirationDate, setCardExpirationDate] = useState(
     userCardExpirationDate
   );
-  const { error, changeError, clearError } = useError(INITIAL_IS_ERROR);
+  const { error, changeError, clearError } = useError();
 
   function handleCardExpirationDateChange({ target }: CardExpirationDateKeys) {
     return function (event: React.ChangeEvent<HTMLInputElement>) {
