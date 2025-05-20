@@ -5,7 +5,7 @@ type PositionProps = {
 };
 
 type SizeProps = {
-  $size: 'small' | 'medium' | 'large';
+  $size: 'small' | 'medium' | 'large' | string;
 };
 
 const BackDrop = styled.div<PositionProps>`
@@ -26,7 +26,7 @@ const BackDrop = styled.div<PositionProps>`
 const ModalLayout = styled.div<PositionProps & SizeProps>`
   position: relative;
   width: ${({ $position, $size }) =>
-    $position === 'bottom' ? '100%' : getModalWidth($size)};
+    $position === 'bottom' ? '100%' : sizeMap[$size] || $size};
   z-index: 500;
   background-color: white;
   border-radius: 8px;
@@ -36,17 +36,10 @@ const ModalLayout = styled.div<PositionProps & SizeProps>`
   flex-direction: column;
 `;
 
-function getModalWidth(size: 'small' | 'medium' | 'large') {
-  switch (size) {
-    case 'small':
-      return '320px';
-    case 'medium':
-      return '480px';
-    case 'large':
-      return '600px';
-    default:
-      return '100%';
-  }
-}
+const sizeMap = {
+  small: '320px',
+  medium: '480px',
+  large: '600px',
+};
 
 export { BackDrop, ModalLayout };
