@@ -1,4 +1,4 @@
-import { CVC_LENGTH, ERROR_MESSAGE } from "../../constants";
+import { CVC_LENGTH } from "../../constants";
 import { getErrorMessage } from "../getErrorMessage";
 import { isNumeric } from "../index";
 export default function validateCVCNumber(CVCNumber: string) {
