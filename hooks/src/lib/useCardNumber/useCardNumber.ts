@@ -1,4 +1,4 @@
-import { useMemo, useState, useEffect } from 'react';
+import { useMemo, useState } from 'react';
 import { CARD_NUMBER_ERROR } from '../constants/errorMessages';
 import { isOnlyDigits } from '../utils/validateNumber';
 import { CARD_RULES } from './cardRules';
@@ -9,7 +9,7 @@ export const CARD_NUMBER = {
   fieldCount: 4,
 };
 
-const splitInitialCardNumber = (cardNumber: string): string[] => {
+const splitCardNumber = (cardNumber: string): string[] => {
   if (!cardNumber) return Array(CARD_NUMBER.fieldCount).fill('');
 
   const brand = identifyCardBrand(cardNumber);
@@ -34,21 +34,15 @@ const splitInitialCardNumber = (cardNumber: string): string[] => {
 };
 
 export const useCardNumber = (initialCardNumber: string = '', initialErrorMsg: string = '') => {
-  const [formattedCardNumber, setFormattedCardNumber] = useState<string[]>(splitInitialCardNumber(initialCardNumber));
+  const [cardNumber, setCardNumber] = useState<string>(initialCardNumber);
   const [cardNumberError, setCardNumberError] = useState<string[]>(Array(CARD_NUMBER.fieldCount).fill(initialErrorMsg));
 
-  const cardBrand = useMemo(() => identifyCardBrand(formattedCardNumber[0]), [formattedCardNumber[0]]);
+  const cardBrand = useMemo(() => identifyCardBrand(cardNumber), [cardNumber]);
+
   const fieldLengthArr = useMemo(() => CARD_RULES[cardBrand].fieldLengths, [cardBrand]);
   const requiredFields = useMemo(() => CARD_RULES[cardBrand].fields, [cardBrand]);
 
-  const cardNumber = useMemo(() => {
-    let result = '';
-
-    for (let i = 0; i < requiredFields; i++) {
-      result += formattedCardNumber[i] || '';
-    }
-    return result;
-  }, [formattedCardNumber, requiredFields]);
+  const formattedCardNumber = useMemo(() => splitCardNumber(cardNumber), [cardNumber]);
 
   const handleCardNumberChange = ({ idx, value }: { idx: number; value: string }) => {
     if (!isOnlyDigits(value) && value !== '') {
@@ -67,9 +61,15 @@ export const useCardNumber = (initialCardNumber: string = '', initialErrorMsg: s
       value = value.substring(0, maxLength);
     }
 
-    const newFormattedCardNumber = [...formattedCardNumber];
-    newFormattedCardNumber[idx] = value;
-    setFormattedCardNumber(newFormattedCardNumber);
+    const updatedFields = [...formattedCardNumber];
+    updatedFields[idx] = value;
+
+    let newCardNumber = '';
+    for (let i = 0; i < requiredFields; i++) {
+      newCardNumber += updatedFields[i] || '';
+    }
+
+    setCardNumber(newCardNumber);
   };
 
   const isCardNumberValid = () => {
@@ -89,21 +89,6 @@ export const useCardNumber = (initialCardNumber: string = '', initialErrorMsg: s
 
     return cardNumber.length === expectedTotalLength;
   };
-
-  useEffect(() => {
-    const adjustedFields = [...formattedCardNumber].slice(0, requiredFields);
-
-    for (let i = 0; i < requiredFields; i++) {
-      if (i < adjustedFields.length) {
-        const maxLength = fieldLengthArr[i];
-        if (adjustedFields[i].length > maxLength) {
-          adjustedFields[i] = adjustedFields[i].substring(0, maxLength);
-        }
-      }
-    }
-
-    setFormattedCardNumber(adjustedFields);
-  }, [cardBrand]);
 
   return {
     cardNumber,
