@@ -8,6 +8,7 @@ import {
   DINERS_CARD_NUMBER_LENGTH_BY_POSITION,
   VISA_CARD_NUMBER_LENGTH_BY_POSITION,
 } from '../constants/cardNumberlengthByPosition';
+import CARD_NUMBER_LENGTH_BY_POSITION_MAP from '../useFormattedCardNumbers/cardNumberlengthMap';
 
 type CardNumbers = {
   FIRST: string;
@@ -109,115 +110,21 @@ function getCardNumbersError({
     };
   }
 
-  if (
-    cardNetwork === 'VISA' ||
-    cardNetwork === 'MASTER' ||
-    cardNetwork === 'UNIONPAY'
-  ) {
-    if (!isUnderMaxLength(input, 4)) {
-      return {
-        inputError: true,
-        inputErrorMessage: CARD_NUMBER_ERROR_MESSAGE.INVALID_LENGTH(
-          VISA_CARD_NUMBER_LENGTH_BY_POSITION[target]
-        ),
-      };
-    }
+  const networkLengths = CARD_NUMBER_LENGTH_BY_POSITION_MAP[cardNetwork];
+  const maxLength = networkLengths?.[target];
+
+  if (maxLength === undefined) {
+    return {
+      inputError: true,
+      inputErrorMessage: `해당 자리는 입력할 수 없습니다.`,
+    };
   }
 
-  if (cardNetwork === 'DINERS') {
-    if (
-      target === 'FIRST' &&
-      !isUnderMaxLength(input, DINERS_CARD_NUMBER_LENGTH_BY_POSITION.FIRST)
-    ) {
-      return {
-        inputError: true,
-        inputErrorMessage: CARD_NUMBER_ERROR_MESSAGE.INVALID_LENGTH(
-          DINERS_CARD_NUMBER_LENGTH_BY_POSITION[target]
-        ),
-      };
-    }
-
-    if (
-      target === 'SECOND' &&
-      !isUnderMaxLength(input, DINERS_CARD_NUMBER_LENGTH_BY_POSITION.SECOND)
-    ) {
-      return {
-        inputError: true,
-        inputErrorMessage: CARD_NUMBER_ERROR_MESSAGE.INVALID_LENGTH(
-          DINERS_CARD_NUMBER_LENGTH_BY_POSITION[target]
-        ),
-      };
-    }
-
-    if (
-      target === 'THIRD' &&
-      !isUnderMaxLength(input, DINERS_CARD_NUMBER_LENGTH_BY_POSITION.THIRD)
-    ) {
-      return {
-        inputError: true,
-        inputErrorMessage: CARD_NUMBER_ERROR_MESSAGE.INVALID_LENGTH(
-          DINERS_CARD_NUMBER_LENGTH_BY_POSITION[target]
-        ),
-      };
-    }
-
-    if (
-      target === 'FOURTH' &&
-      !isUnderMaxLength(input, DINERS_CARD_NUMBER_LENGTH_BY_POSITION.FOURTH)
-    ) {
-      return {
-        inputError: true,
-        inputErrorMessage: `해당 자리는 입력할 수 없습니다.`,
-      };
-    }
-  }
-
-  if (cardNetwork === 'AMEX') {
-    if (
-      target === 'FIRST' &&
-      !isUnderMaxLength(input, AMEX_CARD_NUMBER_LENGTH_BY_POSITION.FIRST)
-    ) {
-      return {
-        inputError: true,
-        inputErrorMessage: CARD_NUMBER_ERROR_MESSAGE.INVALID_LENGTH(
-          AMEX_CARD_NUMBER_LENGTH_BY_POSITION[target]
-        ),
-      };
-    }
-
-    if (
-      target === 'SECOND' &&
-      !isUnderMaxLength(input, AMEX_CARD_NUMBER_LENGTH_BY_POSITION.SECOND)
-    ) {
-      return {
-        inputError: true,
-        inputErrorMessage: CARD_NUMBER_ERROR_MESSAGE.INVALID_LENGTH(
-          AMEX_CARD_NUMBER_LENGTH_BY_POSITION[target]
-        ),
-      };
-    }
-
-    if (
-      target === 'THIRD' &&
-      !isUnderMaxLength(input, AMEX_CARD_NUMBER_LENGTH_BY_POSITION.THIRD)
-    ) {
-      return {
-        inputError: true,
-        inputErrorMessage: CARD_NUMBER_ERROR_MESSAGE.INVALID_LENGTH(
-          AMEX_CARD_NUMBER_LENGTH_BY_POSITION[target]
-        ),
-      };
-    }
-
-    if (
-      target === 'FOURTH' &&
-      !isUnderMaxLength(input, AMEX_CARD_NUMBER_LENGTH_BY_POSITION.FOURTH)
-    ) {
-      return {
-        inputError: true,
-        inputErrorMessage: `해당 자리는 입력할 수 없습니다.`,
-      };
-    }
+  if (!isUnderMaxLength(input, maxLength)) {
+    return {
+      inputError: true,
+      inputErrorMessage: CARD_NUMBER_ERROR_MESSAGE.INVALID_LENGTH(maxLength),
+    };
   }
 
   return {
