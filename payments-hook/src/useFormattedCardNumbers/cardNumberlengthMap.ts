@@ -5,10 +5,10 @@ import {
   UNIONPAY_CARD_NUMBER_LENGTH_BY_POSITION,
   VISA_CARD_NUMBER_LENGTH_BY_POSITION,
 } from '../constants/cardNumberlengthByPosition';
-import { CardNetWorks } from '../useCardNumbers/useCardNumbers';
+import { CardNetWork } from '../useCardNumbers/useCardNumbers';
 
 const CARD_NUMBER_LENGTH_BY_POSITION_MAP: Record<
-  CardNetWorks,
+  CardNetWork,
   Record<string, number>
 > = {
   VISA: VISA_CARD_NUMBER_LENGTH_BY_POSITION,

@@ -82,12 +82,12 @@ export default function useCardNumbers(userCardNumbers = INITIAL_CARD_NUMBER) {
   };
 }
 
-export type CardNetWorks = 'VISA' | 'MASTER' | 'AMEX' | 'DINERS' | 'UNIONPAY';
+export type CardNetWork = 'VISA' | 'MASTER' | 'AMEX' | 'DINERS' | 'UNIONPAY';
 
 type getCardNumbersErrorProps = {
   input: string;
   target: 'FIRST' | 'SECOND' | 'THIRD' | 'FOURTH';
-  cardNetwork: CardNetWorks | undefined;
+  cardNetwork: CardNetWork | undefined;
 };
 
 function getCardNumbersError({

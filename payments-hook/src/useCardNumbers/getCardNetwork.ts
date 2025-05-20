@@ -1,9 +1,9 @@
-import { CardNetWorks } from './useCardNumbers';
+import { CardNetWork } from './useCardNumbers';
 
 const CARD_NETWORKS: {
   prefixes: string[];
   length: number;
-  name: CardNetWorks;
+  name: CardNetWork;
 }[] = [
   {
     prefixes: ['4'],
@@ -34,7 +34,7 @@ const CARD_NETWORKS: {
   },
 ];
 
-const getCardNetwork = (cardNumbers: string): CardNetWorks => {
+const getCardNetwork = (cardNumbers: string): CardNetWork => {
   const cardNetwork = CARD_NETWORKS.find(
     (network) =>
       matchesPrefix(network.prefixes, cardNumbers) &&
