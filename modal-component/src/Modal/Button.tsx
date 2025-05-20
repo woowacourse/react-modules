@@ -46,10 +46,16 @@ type ModalButtonProps = {
   $border: string;
 };
 
+const sizeMap = {
+  small: '80px',
+  medium: '120px',
+  large: '300px',
+};
+
 const ModalButton = styled.button<ModalButtonProps>`
   background-color: ${({ $backgroundColor }) => $backgroundColor || '#ffffff'};
   color: ${({ $textColor }) => $textColor || '#000000'};
-  width: ${({ $size }) => getSize($size)};
+  width: ${({ $size }) => sizeMap[$size] || '100%'};
   border: ${({ $border }) => $border || 'none'};
   border-radius: 4px;
   padding: 10px 20px;
@@ -59,18 +65,5 @@ const ModalButton = styled.button<ModalButtonProps>`
     outline: 1px solid #000000;
   }
 `;
-
-function getSize(size: 'small' | 'medium' | 'large') {
-  switch (size) {
-    case 'small':
-      return '80px';
-    case 'medium':
-      return '120px';
-    case 'large':
-      return '300px';
-    default:
-      return '100%';
-  }
-}
 
 export default Button;
