@@ -6,13 +6,14 @@ import {
   ERROR_MESSAGE,
 } from '../config';
 import { ValidationResult } from '../types';
-import { checkIsNumber, checkIsValidLength } from '../validators';
 import {
   createFieldLengthMap,
   createInitialCardNumbers,
   createValidationResult,
   detectCardBrand,
 } from '../utils';
+import { objectEntries } from '../utils/objectEntries';
+import { checkIsNumber, checkIsValidLength } from '../validators';
 
 /**
  * @description
@@ -63,15 +64,15 @@ function useCardNumbers<T extends string>(fields: CardNumberFieldType<T>[]) {
 
       return null;
     },
-    [fields]
+    [fieldLengthMap]
   );
 
   const validationResults: Record<T, ValidationResult> = useMemo(
     () =>
-      Object.entries(cardNumbers).reduce(
+      objectEntries<Record<T, string>>(cardNumbers).reduce(
         (acc, [key, value]) => {
-          acc[key as T] = createValidationResult(ERROR_MESSAGE.cardNumber, [
-            getCardNumberValidationError(key as T, value as string),
+          acc[key] = createValidationResult(ERROR_MESSAGE.cardNumber, [
+            getCardNumberValidationError(key, value),
           ]);
           return acc;
         },
