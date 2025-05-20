@@ -13,7 +13,7 @@ function App() {
         <Modal.ButtonGroup direction="row" align="end">
           <ModalCloseButton />
           <Modal.CloseTrigger>
-            <Modal.Button>확인</Modal.Button>
+            <Modal.WideButton>확인</Modal.WideButton>
           </Modal.CloseTrigger>
         </Modal.ButtonGroup>
       </Modal.Container>
@@ -24,7 +24,7 @@ function App() {
 function ModalCloseButton() {
   const { onClose } = useModalContext();
   return (
-    <Modal.Button
+    <Modal.WideButton
       variant="primary"
       onClick={() => {
         if (Math.random() > 0.5) {
@@ -34,7 +34,7 @@ function ModalCloseButton() {
       }}
     >
       동의하고 저장하기
-    </Modal.Button>
+    </Modal.WideButton>
   );
 }
 

@@ -1,5 +1,6 @@
 import styled from '@emotion/styled';
 import { ComponentPropsWithRef, useMemo } from 'react';
+import { StyledButton } from './Button.styles';
 
 // ============================== Types ==============================
 
@@ -31,23 +32,10 @@ function WideButton({
 
 // ============================== Styled Components ==============================
 
-const StyledWideButton = styled.button<{ variant: ButtonVariantType }>`
-  font-weight: 700;
+const StyledWideButton = styled(StyledButton)<{ variant: ButtonVariantType }>`
   font-size: 18px;
   width: 100%;
   height: 44px;
-  background-color: ${({ variant }) =>
-    variant === 'primary' ? '#333333' : '#ffffff'};
-  color: ${({ variant }) => (variant === 'primary' ? '#ffffff' : '#8b95a1')};
-  border-radius: 4px;
-
-  cursor: pointer;
-
-  &:disabled {
-    background-color: #e0e0e0;
-    color: #9e9e9e;
-    cursor: not-allowed;
-  }
 `;
 
 export default WideButton;

@@ -7,7 +7,8 @@ export function isTriggerButtonElement(children: ReactNode): boolean {
     typeof children.type === 'string' && children.type === 'button';
 
   const isCustomButtonComponent =
-    typeof children.type === 'function' && children.type.name === 'Button';
+    typeof children.type === 'function' &&
+    (children.type.name === 'Button' || children.type.name === 'WideButton');
 
   return isHTMLButton || isCustomButtonComponent;
 }
