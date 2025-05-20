@@ -3,8 +3,6 @@ import useCardNumbers from './useCardNumbers';
 import { ERROR_MESSAGE } from '../constants/errorMessage';
 import {
   getCardNumberLength,
-  getFormat,
-  getFormattedNumber,
   identifyCardBrand,
 } from '../utils/cardBrandUtils';
 import {
