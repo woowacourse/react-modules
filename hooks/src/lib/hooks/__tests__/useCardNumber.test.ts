@@ -36,7 +36,7 @@ describe("useCardNumber 입력값 처리 확인", () => {
   it("VISA : 유효한 카드 input 길이를 벗어난 경우 유요한 길이의 값 까지만 사용자에게 보여준다.", () => {
     const { result } = renderHook(() => useCardNumber());
     act(() => {
-      result.current.setCardNumber(["4123", "12345678", "1234", "1234"]);
+      result.current.setCardNumber(["4123", "1234", "1234", "12343333"]);
     });
     expect(result.current.cardNumber).toEqual(["4123", "1234", "1234", "1234"]);
   });

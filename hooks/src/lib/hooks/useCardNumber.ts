@@ -32,12 +32,13 @@ export default function useCardNumber(): UseCardNumberReturn {
     validateInputLength,
   });
 
-  const setValidCardNumber = (cardNumber: string[]) =>
-    limitInputNumber({
+  const setValidCardNumber = (cardNumber: string[]) => {
+    return limitInputNumber({
       inputNumbers: cardNumber,
       setInputNumber: setCardNumber,
       groupLengths: CARD_INPUT_LENGTH[cardNetwork],
     });
+  };
 
   return {
     cardNumber,
