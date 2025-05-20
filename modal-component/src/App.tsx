@@ -46,7 +46,7 @@ function App() {
           }}
         />
       </Modal.ButtonContainer>
-      <Modal.CloseButton />
+      <Modal.CloseXButton />
     </Modal>
   );
 }

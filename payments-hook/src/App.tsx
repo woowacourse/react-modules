@@ -14,7 +14,7 @@ function App() {
       <input
         value={formattedCardNumbers}
         onChange={handleFormattedCardNumbersChange}
-      ></input>
+      />
 
       {isError && (
         <div className="error-message">
