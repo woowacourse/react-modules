@@ -22,9 +22,7 @@ const Button = ({
 
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.stopPropagation();
-    if (onClick) {
-      onClick();
-    }
+    onClick?.();
     onClose();
   };
 
