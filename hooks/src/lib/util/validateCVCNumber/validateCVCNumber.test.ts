@@ -1,4 +1,5 @@
-import { ERROR_MESSAGE, CVC_LENGTH } from "../../constants";
+import { CVC_LENGTH } from "../../constants";
+import { getErrorMessage } from "../getErrorMessage";
 
 import validateCVCNumber from "./validateCVCNumber";
 
@@ -7,16 +8,18 @@ describe(`CVC 유효성 검사`, () => {
     const cardNumber = "111";
     expect(validateCVCNumber(cardNumber)).toBe("");
   });
-  it(`CVC 번호가 덜입력 되었을때, ${ERROR_MESSAGE.INVALID_LENGTH(
+  it(`CVC 번호가 덜입력 되었을때, ${getErrorMessage(
+    "INVALID_LENGTH",
+    "ko",
     CVC_LENGTH
   )}`, () => {
     const cardNumber = "11";
     expect(validateCVCNumber(cardNumber)).toBe(
-      ERROR_MESSAGE.INVALID_LENGTH(CVC_LENGTH)
+      getErrorMessage("INVALID_LENGTH", "ko", CVC_LENGTH)
     );
   });
-  it(`문자가 입력 되었을떄, ${ERROR_MESSAGE.NOT_NUMERIC}`, () => {
+  it(`문자가 입력 되었을떄, ${getErrorMessage("NOT_NUMERIC")}`, () => {
     const cardNumber = "aa";
-    expect(validateCVCNumber(cardNumber)).toBe(ERROR_MESSAGE.NOT_NUMERIC);
+    expect(validateCVCNumber(cardNumber)).toBe(getErrorMessage("NOT_NUMERIC"));
   });
 });

@@ -1,6 +1,7 @@
 import { renderHook, act } from "@testing-library/react";
 import usePasswordNumber from "../usePasswordNumber";
-import { ERROR_MESSAGE, PASSWORD_LENGTH } from "../../constants";
+import { PASSWORD_LENGTH } from "../../constants";
+import { getErrorMessage } from "../../util/getErrorMessage";
 
 describe("usePasswordNumber", () => {
   it("초기 상태를 올바르게 반환한다", () => {
@@ -29,13 +30,15 @@ describe("usePasswordNumber", () => {
       result.current.setPasswordNumber("aa1");
     });
     expect(result.current.errorMessage).toBe(
-      ERROR_MESSAGE.INVALID_LENGTH(PASSWORD_LENGTH)
+      getErrorMessage("INVALID_LENGTH", "ko", PASSWORD_LENGTH)
     );
     expect(result.current.isError).toBe(true);
     expect(result.current.passwordNumber).toBe("1");
   });
 
-  it(`비밀번호가 공백을 받는다면 ${ERROR_MESSAGE.INVALID_LENGTH(
+  it(`비밀번호가 공백을 받는다면 ${getErrorMessage(
+    "INVALID_LENGTH",
+    "ko",
     PASSWORD_LENGTH
   )}를 보여준다.`, () => {
     const { result } = renderHook(() => usePasswordNumber());
@@ -44,7 +47,7 @@ describe("usePasswordNumber", () => {
     });
 
     expect(result.current.errorMessage).toBe(
-      ERROR_MESSAGE.INVALID_LENGTH(PASSWORD_LENGTH)
+      getErrorMessage("INVALID_LENGTH", "ko", PASSWORD_LENGTH)
     );
     expect(result.current.isError).toBe(true);
   });

@@ -1,6 +1,7 @@
-import { renderHook, act } from "@testing-library/react";
+import { act, renderHook } from "@testing-library/react";
+import { CVC_LENGTH } from "../../constants";
+import { getErrorMessage } from "../../util/getErrorMessage";
 import useCVCNumber from "../useCVCNumber";
-import { CVC_LENGTH, ERROR_MESSAGE } from "../../constants";
 
 describe("useCVCNumber", () => {
   it("초기 상태를 올바르게 반환한다", () => {
@@ -30,13 +31,16 @@ describe("useCVCNumber", () => {
     });
 
     expect(result.current.errorMessage).toBe(
-      ERROR_MESSAGE.INVALID_LENGTH(CVC_LENGTH)
+      getErrorMessage("INVALID_LENGTH", "ko", CVC_LENGTH)
     );
+
     expect(result.current.isError).toBe(true);
     expect(result.current.CVCNumber).toEqual("");
   });
 
-  it(`CVC 넘버가 공백을 받는다면 ${ERROR_MESSAGE.INVALID_LENGTH(
+  it(`CVC 넘버가 공백을 받는다면 ${getErrorMessage(
+    "INVALID_LENGTH",
+    "ko",
     CVC_LENGTH
   )}를 보여준다.`, () => {
     const { result } = renderHook(() => useCVCNumber());
@@ -45,7 +49,7 @@ describe("useCVCNumber", () => {
     });
 
     expect(result.current.errorMessage).toBe(
-      ERROR_MESSAGE.INVALID_LENGTH(CVC_LENGTH)
+      getErrorMessage("INVALID_LENGTH", "ko", CVC_LENGTH)
     );
     expect(result.current.isError).toBe(true);
   });

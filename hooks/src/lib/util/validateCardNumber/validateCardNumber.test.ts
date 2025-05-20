@@ -1,4 +1,5 @@
-import { CARD_INPUT_LENGTH, ERROR_MESSAGE } from "../../constants";
+import { CARD_INPUT_LENGTH } from "../../constants";
+import { getErrorMessage } from "../getErrorMessage";
 import { validateCardNetwork } from "../validateCardNetwork/validateCardNetwork";
 import { validateCardNumber } from "./validateCardNumber";
 
@@ -23,7 +24,11 @@ describe("validateCardNumber", () => {
       "",
       "",
       "",
-      ERROR_MESSAGE.INVALID_LENGTH(CARD_INPUT_LENGTH[cardNetwork][3]),
+      getErrorMessage(
+        "INVALID_LENGTH",
+        "ko",
+        CARD_INPUT_LENGTH[cardNetwork][3]
+      ),
     ]);
   });
 
@@ -32,7 +37,11 @@ describe("validateCardNumber", () => {
     const cardNetwork = "MASTER";
     expect(validateCardNumber(cardNumbers, cardNetwork)).toEqual([
       "",
-      ERROR_MESSAGE.INVALID_LENGTH(CARD_INPUT_LENGTH[cardNetwork][1]),
+      getErrorMessage(
+        "INVALID_LENGTH",
+        "ko",
+        CARD_INPUT_LENGTH[cardNetwork][1]
+      ),
       "",
       "",
     ]);
@@ -43,7 +52,11 @@ describe("validateCardNumber", () => {
     const cardNetwork = "DINERS";
     expect(validateCardNumber(cardNumbers, cardNetwork)).toEqual([
       "",
-      ERROR_MESSAGE.INVALID_LENGTH(CARD_INPUT_LENGTH[cardNetwork][1]),
+      getErrorMessage(
+        "INVALID_LENGTH",
+        "ko",
+        CARD_INPUT_LENGTH[cardNetwork][1]
+      ),
       "",
       "",
     ]);
@@ -54,8 +67,16 @@ describe("validateCardNumber", () => {
     const cardNetwork = "AMEX";
     expect(validateCardNumber(cardNumbers, cardNetwork)).toEqual([
       "",
-      ERROR_MESSAGE.INVALID_LENGTH(CARD_INPUT_LENGTH[cardNetwork][1]),
-      ERROR_MESSAGE.INVALID_LENGTH(CARD_INPUT_LENGTH[cardNetwork][2]),
+      getErrorMessage(
+        "INVALID_LENGTH",
+        "ko",
+        CARD_INPUT_LENGTH[cardNetwork][1]
+      ),
+      getErrorMessage(
+        "INVALID_LENGTH",
+        "ko",
+        CARD_INPUT_LENGTH[cardNetwork][2]
+      ),
 
       "",
     ]);
@@ -66,8 +87,16 @@ describe("validateCardNumber", () => {
     const cardNetwork = "UNIONPAY";
     expect(validateCardNumber(cardNumbers, cardNetwork)).toEqual([
       "",
-      ERROR_MESSAGE.INVALID_LENGTH(CARD_INPUT_LENGTH[cardNetwork][1]),
-      ERROR_MESSAGE.INVALID_LENGTH(CARD_INPUT_LENGTH[cardNetwork][2]),
+      getErrorMessage(
+        "INVALID_LENGTH",
+        "ko",
+        CARD_INPUT_LENGTH[cardNetwork][1]
+      ),
+      getErrorMessage(
+        "INVALID_LENGTH",
+        "ko",
+        CARD_INPUT_LENGTH[cardNetwork][2]
+      ),
       "",
     ]);
   });

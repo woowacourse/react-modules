@@ -1,4 +1,5 @@
-import { ERROR_MESSAGE, PASSWORD_LENGTH } from "../../constants";
+import { PASSWORD_LENGTH } from "../../constants";
+import { getErrorMessage } from "../getErrorMessage";
 
 import validatePasswordNumber from "./validatePasswordNumber";
 
@@ -7,18 +8,20 @@ describe(`Password 유효성 검사`, () => {
     const passwordNumber = "11";
     expect(validatePasswordNumber(passwordNumber)).toBe("");
   });
-  it(`Password 번호가 덜입력 되었을때, ${ERROR_MESSAGE.INVALID_LENGTH(
+  it(`Password 번호가 덜입력 되었을때, ${getErrorMessage(
+    "INVALID_LENGTH",
+    "ko",
     PASSWORD_LENGTH
   )}`, () => {
     const passwordNumber = "1";
     expect(validatePasswordNumber(passwordNumber)).toBe(
-      ERROR_MESSAGE.INVALID_LENGTH(PASSWORD_LENGTH)
+      getErrorMessage("INVALID_LENGTH", "ko", PASSWORD_LENGTH)
     );
   });
-  it(`문자가 입력 되었을떄, ${ERROR_MESSAGE.NOT_NUMERIC}`, () => {
+  it(`문자가 입력 되었을떄, ${getErrorMessage("NOT_NUMERIC")}`, () => {
     const passwordNumber = "aa";
     expect(validatePasswordNumber(passwordNumber)).toBe(
-      ERROR_MESSAGE.NOT_NUMERIC
+      getErrorMessage("NOT_NUMERIC")
     );
   });
 });
