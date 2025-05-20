@@ -5,7 +5,7 @@ type ButtonProps = {
   title: string;
   backgroundColor?: string;
   textColor?: string;
-  size?: 'small' | 'medium' | 'large';
+  size?: 'small' | 'medium' | 'large' | string;
   onClick?: () => void;
   border?: string;
 };
@@ -42,7 +42,7 @@ const Button = ({
 type ModalButtonProps = {
   $backgroundColor: string;
   $textColor: string;
-  $size: 'small' | 'medium' | 'large';
+  $size: 'small' | 'medium' | 'large' | string;
   $border: string;
 };
 
@@ -55,7 +55,7 @@ const sizeMap = {
 const ModalButton = styled.button<ModalButtonProps>`
   background-color: ${({ $backgroundColor }) => $backgroundColor || '#ffffff'};
   color: ${({ $textColor }) => $textColor || '#000000'};
-  width: ${({ $size }) => sizeMap[$size] || '100%'};
+  width: ${({ $size }) => sizeMap[$size] || $size || '100%'};
   border: ${({ $border }) => $border || 'none'};
   border-radius: 4px;
   padding: 10px 20px;
