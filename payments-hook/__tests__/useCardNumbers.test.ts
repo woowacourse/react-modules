@@ -91,7 +91,7 @@ function testCardBrand({
   validNumbers: string[];
   tooLong: string;
   invalidChar: string;
-  target: 'FIRST' | 'SECOND' | 'THIRD' | 'FOURTH';
+  target: CardNumbersKeys;
   lengthByPosition: Record<string, number>;
 }) {
   describe(`${name} 카드 테스트`, () => {
