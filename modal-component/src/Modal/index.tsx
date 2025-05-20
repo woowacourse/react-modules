@@ -7,7 +7,7 @@ import Contents from './Contents';
 import Title from './Title';
 import Button from './Button';
 import Input from './Input';
-import CloseButton from './CloseButton';
+import CloseXButton from './CloseXButton';
 
 type ModalProps = {
   isOpen?: boolean;
@@ -105,7 +105,7 @@ const Modal = ({
 };
 
 Modal.Title = Title;
-Modal.CloseButton = CloseButton;
+Modal.CloseXButton = CloseXButton;
 Modal.Contents = Contents;
 Modal.ButtonContainer = ButtonContainer;
 Modal.Button = Button;
