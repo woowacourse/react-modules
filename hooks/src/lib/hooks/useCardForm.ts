@@ -1,3 +1,4 @@
+import { CARD_TYPES } from '../constants/cardTypes';
 import useCardCVC from './useCardCVC';
 import useCardExpiry from './useCardExpiry';
 import useCardNumber from './useCardNumber';
@@ -12,7 +13,7 @@ export interface CardFormData {
 export default function useCardForm() {
   const cardNumber = useCardNumber();
   const cardExpiry = useCardExpiry();
-  const cardCVC = useCardCVC(cardNumber.cardType);
+  const cardCVC = useCardCVC(cardNumber.cardType ?? CARD_TYPES.VISA);
 
   const isFormValid = (): boolean => {
     return cardNumber.isValid() && cardExpiry.isValid() && cardCVC.isValid();

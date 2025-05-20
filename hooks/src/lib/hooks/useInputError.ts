@@ -1,5 +1,5 @@
 import { useState, useMemo } from 'react';
-import { CheckValidationType, UseInputErrorProps } from '../types/types';
+import { CheckValidationType, UseInputErrorProps } from '../types';
 import { NO_ERROR } from '../constants/message';
 import { findFirstError } from '../utils/errorUtils';
 

@@ -1,8 +1,10 @@
-import { CardCVC } from '../types/types';
+import { CardCVC } from '../types';
 import useCardField, { ValidationConfig } from './useCardFields';
+import { CARD_TYPES, CardType } from '../constants/cardTypes';
+import { CVC } from '../constants/cardConstants';
 
-export default function useCardCVC(cardType?: string | null) {
-  const requiredLength = cardType === 'American Express' ? 4 : 3;
+export default function useCardCVC(cardType?: CardType) {
+  const requiredLength = cardType === CARD_TYPES.AMEX ? CVC.AMEX : CVC.DEFAULT;
 
   const validationConfig: ValidationConfig = {
     requiredLength,
@@ -20,11 +22,13 @@ export default function useCardCVC(cardType?: string | null) {
 
   const handleCVCChange = (input: string) => {
     const digitsOnly = input.replace(/\D/g, '');
-    handleChange(digitsOnly);
+    const maxLength = cardType === CARD_TYPES.AMEX ? CVC.AMEX : CVC.DEFAULT;
+    const limitedInput = digitsOnly.slice(0, maxLength);
+    handleChange(limitedInput);
   };
 
   const isCVCValid = () => {
-    const requiredLen = cardType === 'American Express' ? 4 : 3;
+    const requiredLen = cardType === CARD_TYPES.AMEX ? CVC.AMEX : CVC.DEFAULT;
     return isValid() && value.length === requiredLen;
   };
 

@@ -1,9 +1,11 @@
 import useCardField, { ValidationConfig } from './useCardFields';
+import { EXPIRY } from '../constants/cardConstants';
 
 export default function useCardExpiry() {
   const monthValidationConfig: ValidationConfig = {
-    minValue: 1,
-    maxValue: 12,
+    minValue: EXPIRY.MONTH.MIN,
+    maxValue: EXPIRY.MONTH.MAX,
+    requiredLength: EXPIRY.MONTH.LENGTH,
     errorMessages: {
       onlyNumbers: '월은 숫자만 입력 가능합니다',
       invalidValue: '유효한 월(1-12)을 입력해주세요',
@@ -14,6 +16,7 @@ export default function useCardExpiry() {
   const currentYear = new Date().getFullYear() % 100;
   const yearValidationConfig: ValidationConfig = {
     minValue: currentYear,
+    requiredLength: EXPIRY.YEAR.LENGTH,
     errorMessages: {
       onlyNumbers: '연도는 숫자만 입력 가능합니다',
       invalidValue: `유효한 연도 (${currentYear}년도) 이상을 입력해주세요.`,
