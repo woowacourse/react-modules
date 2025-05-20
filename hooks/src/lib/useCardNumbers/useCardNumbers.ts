@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { ERROR_MESSAGE } from '../constants/errorMessage';
 import {
   isEmpty,
@@ -9,12 +9,13 @@ import {
 import { isOverInputLength } from '../utils/overInputLength';
 import { initialError } from '../utils/initial';
 import { ErrorType } from '../types/errorType';
-import { getCardBrandInfo, getFormattedNumber } from '../utils/cardBrandUtils';
+import { getCardBrandInfo } from '../utils/cardBrandUtils';
 import { CardBrandType } from '../types/cardTypes';
 
 interface ValitationResult {
-  formattedNumber: string;
+  numbers: string;
   cardBrand: CardBrandType | null;
+  format: number[];
   error: ErrorType;
   handleCardNumbers: (value: string) => void;
 }
@@ -34,20 +35,16 @@ export default function useCardNumbers(): ValitationResult {
 
   const { cardBrand, cardNumberLength, format } = getCardBrandInfo(numbers);
 
-  const numberWithoutSpaces = numbers.replace(/\s/g, '');
-  const formattedNumber = getFormattedNumber(numberWithoutSpaces, format) || '';
-
   const handleCardNumbers = (value: string) => {
-    const numberWithoutSpaces = value.replace(/\s/g, '');
-    if (isOverInputLength(numberWithoutSpaces, cardNumberLength)) return;
+    if (isOverInputLength(value, cardNumberLength)) return;
 
     validate({
-      value: numberWithoutSpaces,
+      value: value,
       brand: cardBrand,
       length: cardNumberLength,
     });
 
-    setNumbers(numberWithoutSpaces);
+    setNumbers(value);
   };
 
   const updateError = (args: UpdateErrorArgs) => {
@@ -56,14 +53,6 @@ export default function useCardNumbers(): ValitationResult {
       errorMessage: args.isValid === false ? args.errorMessage : '',
     });
   };
-
-  // useEffect(() => {
-  //   validate({
-  //     value: numbers,
-  //     brand: cardBrand,
-  //     length: cardNumberLength,
-  //   });
-  // }, [numbers, cardBrand, cardNumberLength]);
 
   const validate = ({ value, brand, length }: ValidateParams) => {
     if (isEmpty(value)) {
@@ -99,8 +88,9 @@ export default function useCardNumbers(): ValitationResult {
   };
 
   return {
-    formattedNumber,
+    numbers,
     cardBrand,
+    format,
     error,
     handleCardNumbers,
   };

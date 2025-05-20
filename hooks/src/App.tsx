@@ -1,11 +1,11 @@
 import './App.css';
 import {
-  useCardNumbers,
+  // useCardNumbers,
   useExpiryDate,
   useCvcNumber,
   usePassword,
 } from 'jurunghappy-hooks';
-// import { useCardNumbers } from './lib';
+import { useCardNumbers } from './lib';
 // import {
 //   useCardNumbers,
 //   useExpiryDate,
@@ -15,8 +15,9 @@ import {
 
 function App() {
   const {
-    formattedNumber,
+    numbers,
     cardBrand,
+    format,
     error: cardNumbersError,
     handleCardNumbers,
   } = useCardNumbers();
@@ -30,7 +31,7 @@ function App() {
         <h1>CardNumbers</h1>
         <input
           type="text"
-          value={formattedNumber}
+          value={numbers}
           onChange={(e) => handleCardNumbers(e.target.value)}
         />
         <p>{cardBrand ? cardBrand : ''}</p>
