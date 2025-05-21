@@ -24,7 +24,7 @@ export const ModalBackground = styled.div<{
   justify-content: center;
   background-color: ${Common.colors.grey};
   backdrop-filter: blur(10px);
-  width: 35%;
+  width: 100%;
   min-width: 376px;
   height: 100%;
   margin: 0 auto;
@@ -44,24 +44,33 @@ export const ModalBackground = styled.div<{
 
 export const ModalContainer = styled.div<{
   position: 'center' | 'bottom';
+  size: 'small' | 'medium' | 'large';
 }>`
   position: relative;
   background-color: ${Common.colors.white};
   color: ${Common.colors.black};
-  height: 30%;
-  min-height: 216px;
-  padding: 20px;
+  height: 20%;
+  min-height: 150px;
+  padding: 30px 35px;
   z-index: ${Common.zIndex.modalContainer};
+  display: flex;
+  flex-direction: column;
 
   ${({ position }) =>
     position === 'center' &&
-    ` width: 80%;
-      min-width: 304px;
-      border-radius: 16px;`}
+    `min-width: 250px;
+    border-radius: 16px;`}
   ${({ position }) =>
     position === 'bottom' &&
     ` width: 100%;
       border-radius: 10px 10px 0 0;`}
+
+      ${({ position, size }) =>
+    position === 'center' && size === 'small' && `width: 25%`}
+      ${({ position, size }) =>
+    position === 'center' && size === 'medium' && ` width: 40%;`}
+      ${({ position, size }) =>
+    position === 'center' && size === 'large' && ` width: 55%;`}
 `;
 
 export const ModalHeader = styled.div`
@@ -73,7 +82,20 @@ export const ModalHeader = styled.div`
   margin: 0 auto;
 `;
 
-export const CloseButton = styled.button`
+export const CloseButton = styled.button<{ showCloseButton: boolean }>`
   background-color: transparent;
   cursor: pointer;
+  display: ${({ showCloseButton }) => (showCloseButton ? 'block;' : 'none;')};
+`;
+
+export const ModalContent = styled.div`
+  width: 100%;
+  flex: 1;
+  text-align: start;
+  padding: 20px 0;
+`;
+
+export const ModalAction = styled.div`
+  width: 100%;
+  text-align: end;
 `;

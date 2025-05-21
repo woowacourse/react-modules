@@ -1,16 +1,16 @@
 import { useState } from 'react';
-import { INPUT_RULE } from './constants/inputRule';
-import { ERROR_MESSAGE } from './constants/errorMessage';
-import { isOverInputLength } from './utils/overInputLength';
+import { INPUT_RULE } from '../constants/inputRule';
+import { ERROR_MESSAGE } from '../constants/errorMessage';
+import { isOverInputLength } from '../utils/overInputLength';
 import {
   isEmpty,
   isNumber,
   isValidLength,
   isValidMonth,
   isValidYear,
-} from './utils/validate';
-import { initialError } from './utils/initial';
-import { ErrorType } from './types/errorType';
+} from '../utils/validate';
+import { initialError } from '../utils/initial';
+import { ErrorType } from '../types/errorType';
 
 type ValitationResult = {
   date: dateType;
