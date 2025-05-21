@@ -1,48 +1,199 @@
-# 페이먼츠 커스텀 훅
+# React Custom Hooks
 
-> 페이먼츠 모듈 1단계
+신용카드 번호 처리를 위한 React 훅으로, 자동 카드 브랜드 감지, 필드 유효성 검사 및 형식 지정 기능을 제공합니다.
 
-[🗂️ 배포 npm 링크](https://www.npmjs.com/package/lume_hooks)
+<br/>
 
-<br>
+## 주요 기능
 
-## 🎯 기능 요구 사항
+```
+- 자동 카드 브랜드 감지 (Visa, Mastercard, Amex 등)
+- 다양한 카드 형식에 대한 내장 유효성 검사
+- 여러 필드로 나눠진 카드 번호 입력 지원
+- 입력 정제 및 오류 처리
+- 카드 유형에 따른 반응형 필드 길이 조정
+```
 
-## [Step1] ⚙️ Module
+<br/>
 
-### 1. 커스텀 훅 분리
+## 설치
 
-- [x] 페이먼츠 카드의 다양한 정보에 대한 유효성 검사 로직을 여러 개의 작은 커스텀 훅으로 분리하기
-  - 페이먼츠 앱에서 다루었던 카드 정보를 필수적으로 커스텀 훅으로 만들기
+```bash
+npm install @suhwa/react-custom-hooks
+```
 
-### 2. 유효성 검사하기
+또는
 
-- [x] 카드 정보의 유효성 검사 결과와 에러 정보를 사용자인 개발자에게 제공하기
-- [x] 유효성 검사에 실패한 경우, 에러 정보를 문자열 형태로 반환하기
+```bash
+yarn add @suhwa/react-custom-hooks
+```
 
-### 3. npm 배포
+<br/>
 
-- [x] 페이먼츠 커스텀 훅 모듈을 npm으로 배포하기
+## 기본 사용
 
-<br>
+```jsx
+import React from 'react';
+import { useCardNumber } from '@suhwa/react-custom-hooks';
 
-## [Step1] ✅ 프로그래밍 요구사항
+function CreditCardForm() {
+  const {
+    formattedCardNumber,
+    cardNumberError,
+    handleCardNumberChange,
+    isCardNumberValid,
+    cardBrand,
+    requiredFields,
+    fieldLengthArr,
+  } = useCardNumber();
 
-- RTL
-  - [x] 각 커스텀 훅에 대해 독립적으로 테스트를 작성한다.
-  - [x] 정상 입력과 비정상 입력(성공 시나리오 / 실패 시나리오)을 모두 테스트한다.
-  - [x] 다양한 잘못된 입력(경계값 초과, 빈 입력, 형식 오류 등)에 대해 폭넓게 테스트한다.
+  return (
+    <div>
+      <div>
+        {Array.from({ length: requiredFields }).map((_, idx) => (
+          <input
+            key={idx}
+            type="text"
+            value={formattedCardNumber[idx]}
+            onChange={(e) => handleCardNumberChange({ idx, value: e.target.value })}
+            maxLength={fieldLengthArr[idx]}
+            placeholder="••••"
+            className={cardNumberError[idx] ? 'error' : ''}
+          />
+        ))}
+      </div>
 
-<br>
+      {cardNumberError.map(
+        (error, idx) =>
+          error && (
+            <p key={idx} className="error-message">
+              {error}
+            </p>
+          ),
+      )}
 
-## 📝 커밋 메시지
+      <div>
+        <p>카드 브랜드: {cardBrand}</p>
+        <p>유효성: {isCardNumberValid() ? '유효함' : '유효하지 않음'}</p>
+      </div>
+    </div>
+  );
+}
+```
 
-- feat : 새로운 기능을 추가한 경우
-- fix : 버그 수정
-- docs : 문서를 수정한 경우
-- style : 코드 스타일, 포멧, 주석을 변경
-- design: CSS 등 사용자 UI 디자인 변경
-- refactor : 코드 리팩토링
-- test : 테스트 관련 코드를 수정한 경우
-- chore : 코드 수정이 아닌, 단순 폴더명 파일명 등을 수정한 경우
-- remove: 파일이나 로직을 삭제한 경우
+<br/>
+
+## API 참조
+
+### useCardNumber(initialCardNumber?: string, initialErrorMsg?: string)
+
+<br/>
+
+#### 매개변수
+
+| 이름              | 타입   | 설명              | 기본값 |
+| ----------------- | ------ | ----------------- | ------ |
+| initialCardNumber | string | 초기 카드 번호 값 | `''`   |
+| initialErrorMsg   | string | 초기 오류 메시지  | `''`   |
+
+<br/>
+
+#### 반환 값
+
+| 이름                   | 타입     | 설명                                      |
+| ---------------------- | -------- | ----------------------------------------- |
+| cardNumber             | string   | 공백 없는 전체 카드 번호                  |
+| formattedCardNumber    | string[] | 카드 번호를 구분자로 자른 배열            |
+| cardNumberError        | string[] | 각 카드 번호 배열에 대한 오류 메시지 배열 |
+| handleCardNumberChange | Function | 카드 번호 입력 변경 핸들러                |
+| isCardNumberValid      | Function | 카드 번호가 유효한지 확인하는 함수        |
+| cardBrand              | string   | 계산된 카드 브랜드                        |
+| requiredFields         | number   | 계산된 카드에 필요한 입력 필드 수         |
+| fieldLengthArr         | number[] | 각 입력 필드의 최대 길이 배열             |
+
+<br/>
+
+## 카드 브랜드 감지
+
+처음 몇 자리 숫자를 기반으로 다음 카드 브랜드를 자동으로 감지합니다.
+
+- `Visa` : 4로 시작 / 16자리 / 4-4-4-4
+- `Mastercard` : 51~55로 시작 / 16자리 / 4-4-4-4
+- `Diners` : 36으로 시작 / 14자리 / 4-6-4
+- `AMEX` : 34, 37로 시작 / 15자리 / 4-6-5
+- `유니온페이` : 622126~622925, 624~626, 6282~6288로 시작 / 16자리 / 4-4-4-4
+
+각 카드 브랜드는 동적으로 조정되는 특정 형식 규칙을 가지고 있습니다.
+
+<br/>
+
+## 사용 예제
+
+```jsx
+import React, { useState } from 'react';
+import { useCardNumber } from '@suhwa/react-custom-hooks';
+
+function AdvancedCreditCardForm() {
+  const {
+    formattedCardNumber,
+    cardNumberError,
+    handleCardNumberChange,
+    isCardNumberValid,
+    cardBrand,
+    requiredFields,
+    fieldLengthArr,
+  } = useCardNumber();
+
+  const [isFocused, setIsFocused] = useState(Array(4).fill(false));
+
+  const handleFocus = (idx) => {
+    const newFocused = Array(4).fill(false);
+    newFocused[idx] = true;
+    setIsFocused(newFocused);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (isCardNumberValid()) {
+      console.log('유효한 카드 제출');
+    } else {
+      console.log('유효하지 않은 카드');
+    }
+  };
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <div className={`card-fields ${cardBrand.toLowerCase()}`}>
+        {Array.from({ length: requiredFields }).map((_, idx) => (
+          <div key={idx} className="input-wrapper">
+            <input
+              type="text"
+              value={formattedCardNumber[idx]}
+              onChange={(e) => handleCardNumberChange({ idx, value: e.target.value })}
+              onFocus={() => handleFocus(idx)}
+              onBlur={() => setIsFocused(Array(4).fill(false))}
+              maxLength={fieldLengthArr[idx]}
+              placeholder="••••"
+              className={`
+                card-input 
+                ${cardNumberError[idx] ? 'has-error' : ''} 
+                ${isFocused[idx] ? 'is-focused' : ''}
+              `}
+              aria-invalid={!!cardNumberError[idx]}
+            />
+            {cardNumberError[idx] && <div className="error-tooltip">{cardNumberError[idx]}</div>}
+          </div>
+        ))}
+      </div>
+
+      <div className="card-brand-indicator">
+        <img src={`/images/card-brands/${cardBrand.toLowerCase()}.svg`} alt={`${cardBrand} 카드`} />
+      </div>
+
+      <button type="submit" disabled={!isCardNumberValid()}>
+        제출
+      </button>
+    </form>
+  );
+}
+```

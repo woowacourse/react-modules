@@ -1,60 +1,105 @@
-import { useState } from 'react';
-import { CardNumber, CardNumberError } from '../types/cardTypes';
+import { useMemo, useState } from 'react';
 import { CARD_NUMBER_ERROR } from '../constants/errorMessages';
 import { isOnlyDigits } from '../utils/validateNumber';
-import { CARD_NUMBER } from '../constants/cardConfig';
+import { CARD_RULES } from './cardRules';
+import identifyCardBrand from './identifyCardBrand';
 
-export const useCardNumber = (initialCardNumber: CardNumber, initialError: CardNumberError) => {
-  const [cardNumber, setCardNumber] = useState<CardNumber>(initialCardNumber);
-  const [cardNumberError, setCardNumberError] = useState<CardNumberError>(initialError);
+export const CARD_NUMBER = {
+  maxLength: 4,
+  fieldCount: 4,
+};
 
-  const handleCardNumberChange = ({ name, value }: { name: string; value: string }) => {
-    const updatedError = { ...cardNumberError };
-    const cardFields: Array<keyof CardNumberError> = ['first', 'second', 'third', 'forth'];
+const splitCardNumber = (cardNumber: string): string[] => {
+  if (!cardNumber) return Array(CARD_NUMBER.fieldCount).fill('');
 
-    cardFields.forEach((field) => {
-      if (field !== name && updatedError[field] === CARD_NUMBER_ERROR.onlyNumbers) {
-        updatedError[field] = '';
-      }
-    });
+  const brand = identifyCardBrand(cardNumber);
+  const fieldLengths = CARD_RULES[brand].fieldLengths;
+  const requiredFields = CARD_RULES[brand].fields;
 
-    const isNumber = isOnlyDigits(value);
+  const result: string[] = [];
+  let start = 0;
 
-    if (!isNumber && value !== '') {
-      setCardNumberError({
-        ...updatedError,
-        [name]: CARD_NUMBER_ERROR.onlyNumbers,
-      });
+  for (let i = 0; i < requiredFields; i++) {
+    const fieldLength = fieldLengths[i];
+    const end = Math.min(start + fieldLength, cardNumber.length);
+    result.push(cardNumber.substring(start, end));
+    start += fieldLength;
+  }
 
+  while (result.length < CARD_NUMBER.fieldCount) {
+    result.push('');
+  }
+
+  return result;
+};
+
+export const useCardNumber = (initialCardNumber: string = '', initialErrorMsg: string = '') => {
+  const [cardNumber, setCardNumber] = useState<string>(initialCardNumber);
+  const [cardNumberError, setCardNumberError] = useState<string[]>(Array(CARD_NUMBER.fieldCount).fill(initialErrorMsg));
+
+  const cardBrand = useMemo(() => identifyCardBrand(cardNumber), [cardNumber]);
+
+  const fieldLengthArr = useMemo(() => CARD_RULES[cardBrand].fieldLengths, [cardBrand]);
+  const requiredFields = useMemo(() => CARD_RULES[cardBrand].fields, [cardBrand]);
+
+  const formattedCardNumber = useMemo(() => splitCardNumber(cardNumber), [cardNumber]);
+
+  const handleCardNumberChange = ({ idx, value }: { idx: number; value: string }) => {
+    if (!isOnlyDigits(value) && value !== '') {
+      const newErrors = [...cardNumberError];
+      newErrors[idx] = CARD_NUMBER_ERROR.onlyNumbers;
+      setCardNumberError(newErrors);
       return;
     }
 
-    setCardNumber({
-      ...cardNumber,
-      [name]: value,
-    });
+    const newErrors = [...cardNumberError];
+    newErrors[idx] = '';
+    setCardNumberError(newErrors);
 
-    setCardNumberError({
-      ...updatedError,
-      [name]: '',
-    });
+    const maxLength = fieldLengthArr[idx] || CARD_NUMBER.maxLength;
+    if (value.length > maxLength) {
+      value = value.substring(0, maxLength);
+    }
+
+    const updatedFields = [...formattedCardNumber];
+    updatedFields[idx] = value;
+
+    let newCardNumber = '';
+    for (let i = 0; i < requiredFields; i++) {
+      newCardNumber += updatedFields[i] || '';
+    }
+
+    setCardNumber(newCardNumber);
   };
 
   const isCardNumberValid = () => {
-    const { first, second, third, forth } = cardNumber;
+    const expectedTotalLength = CARD_RULES[cardBrand].lengths[0];
 
-    return (
-      first.length === CARD_NUMBER.maxLength &&
-      second.length === CARD_NUMBER.maxLength &&
-      third.length === CARD_NUMBER.maxLength &&
-      forth.length === CARD_NUMBER.maxLength
-    );
+    for (let i = 0; i < requiredFields; i++) {
+      const expectedFieldLength = fieldLengthArr[i];
+      if ((formattedCardNumber[i] || '').length !== expectedFieldLength) {
+        return false;
+      }
+    }
+
+    const formatPattern = CARD_RULES[cardBrand].formatPattern;
+    if (!formatPattern.test(cardNumber)) {
+      return false;
+    }
+
+    return cardNumber.length === expectedTotalLength;
   };
 
   return {
     cardNumber,
+    formattedCardNumber,
     cardNumberError,
     handleCardNumberChange,
     isCardNumberValid,
+    cardBrand,
+    requiredFields,
+    fieldLengthArr,
   };
 };
+
+export default useCardNumber;

@@ -1,7 +1,10 @@
 import { useState } from 'react';
-import { CARD_PASSWORD } from '../constants/cardConfig';
 import { isOnlyDigits } from '../utils/validateNumber';
 import { CARD_PASSWORD_ERROR } from '../constants/errorMessages';
+
+export const CARD_PASSWORD = {
+  maxLength: 2,
+};
 
 export const useCardPassword = (initialPassword: string, initialError: string) => {
   const [cardPassword, setCardPassword] = useState<string>(initialPassword);

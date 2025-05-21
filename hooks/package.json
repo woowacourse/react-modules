@@ -1,6 +1,6 @@
 {
-  "name": "lume_hooks",
-  "version": "0.0.1",
+  "name": "@suhwa/react-custom-hooks",
+  "version": "0.0.3",
   "description": "페이먼츠 유효성 검증을 위한 커스텀 훅입니다.",
   "type": "module",
   "types": "dist/index.d.ts",
