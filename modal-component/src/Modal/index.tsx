@@ -1,43 +1,76 @@
-import {
-  BackDrop,
-  ModalLayout,
-  CloseIcon,
-  ModalTitle,
-  ModalContents,
-  ModalButton,
-  ModalButtonContainer,
-} from './Modal.styled';
-import { useEffect } from 'react';
+import { BackDrop, ModalLayout } from './Modal.styled';
+import { useEffect, useRef, useState } from 'react';
 import { createContext } from 'react';
 import { createPortal } from 'react-dom';
-import useModalContext from './hooks/useModalContext';
+import ButtonContainer from './ButtonContainer';
+import Contents from './Contents';
+import Title from './Title';
+import Button from './Button';
+import Input from './Input';
+import CloseXButton from './CloseXButton';
 
 type ModalProps = {
-  isOpen: boolean;
+  isOpen?: boolean;
+  onClose: () => void;
+  children: React.ReactNode;
+  position?: 'center' | 'bottom';
+  size?: 'small' | 'medium' | 'large';
+};
+type ModalContextType = {
   onClose: () => void;
   children: React.ReactNode;
   position?: 'center' | 'bottom';
 };
+export const ModalContext = createContext<ModalContextType | null>(null);
 
-export const ModalContext = createContext<ModalProps | null>(null);
+const FOCUSABLE_SELECTORS = `
+  a[href], area[href], input:not([disabled]),
+  select:not([disabled]), textarea:not([disabled]),
+  button:not([disabled]), iframe, object, embed,
+  [tabindex]:not([tabindex="-1"])
+`;
 
 const Modal = ({
-  isOpen = true,
+  isOpen,
   onClose,
   children,
   position = 'center',
+  size = 'small',
 }: ModalProps) => {
-  const value: ModalProps = {
-    isOpen,
+  const modalContextValue: ModalContextType = {
     onClose,
     children,
     position,
   };
+  const modalRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    if (!modalRef.current) return;
+
+    const focusableElements =
+      modalRef.current.querySelectorAll<HTMLElement>(FOCUSABLE_SELECTORS);
+    const first = focusableElements[0];
+    const last = focusableElements[focusableElements.length - 1];
+
+    first?.focus();
+
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === 'Escape') {
         onClose();
+      }
+
+      if (event.key === 'Tab') {
+        if (event.shiftKey) {
+          if (document.activeElement === first) {
+            event.preventDefault();
+            last?.focus();
+          }
+        } else {
+          if (document.activeElement === last) {
+            event.preventDefault();
+            first?.focus();
+          }
+        }
       }
     };
 
@@ -52,10 +85,12 @@ const Modal = ({
     <>
       {isOpen &&
         createPortal(
-          <ModalContext.Provider value={value}>
+          <ModalContext.Provider value={modalContextValue}>
             <BackDrop onClick={onClose} $position={position}>
               <ModalLayout
+                ref={modalRef}
                 $position={position}
+                $size={size}
                 onClick={(event) => event.stopPropagation()}
               >
                 {children}
@@ -64,64 +99,16 @@ const Modal = ({
           </ModalContext.Provider>,
           document.getElementById('root') as HTMLElement
         )}
+      ,
     </>
   );
 };
 
-interface ModalTitleProps {
-  title: string;
-}
-
-const Title = ({ title }: ModalTitleProps) => {
-  return <ModalTitle>{title}</ModalTitle>;
-};
-
-const CloseButton = () => {
-  const modalContext = useModalContext();
-
-  return <CloseIcon onClick={modalContext.onClose} />;
-};
-
-interface ModalContentsProps {
-  children: React.ReactNode;
-}
-
-const Contents = ({ children }: ModalContentsProps) => {
-  return <ModalContents>{children}</ModalContents>;
-};
-
-type ButtonProps = {
-  title: string;
-  backgroundColor?: string;
-  textColor?: string;
-  size?: 'small' | 'medium' | 'large';
-  onClick?: () => void;
-};
-
-const Button = ({
-  title,
-  backgroundColor,
-  textColor,
-  size,
-  onClick,
-}: ButtonProps) => {
-  return (
-    <ModalButtonContainer>
-      <ModalButton
-        $backgroundColor={backgroundColor}
-        $textColor={textColor}
-        $size={size}
-        onClick={onClick}
-      >
-        {title}
-      </ModalButton>
-    </ModalButtonContainer>
-  );
-};
-
 Modal.Title = Title;
-Modal.CloseButton = CloseButton;
+Modal.CloseXButton = CloseXButton;
 Modal.Contents = Contents;
+Modal.ButtonContainer = ButtonContainer;
 Modal.Button = Button;
+Modal.Input = Input;
 
 export default Modal;

@@ -1,9 +1,13 @@
 import styled from 'styled-components';
-import closeIcon from '../assets/close-icon.png';
 
 type PositionProps = {
   $position: 'center' | 'bottom';
 };
+
+type SizeProps = {
+  $size: 'small' | 'medium' | 'large' | string;
+};
+
 const BackDrop = styled.div<PositionProps>`
   position: fixed;
   display: flex;
@@ -19,10 +23,10 @@ const BackDrop = styled.div<PositionProps>`
   background-color: rgba(0, 0, 0, 0.5);
 `;
 
-const ModalLayout = styled.div<PositionProps>`
+const ModalLayout = styled.div<PositionProps & SizeProps>`
   position: relative;
-  width: ${({ $position }) => ($position === 'bottom' ? '100%' : '')};
-
+  width: ${({ $position, $size }) =>
+    $position === 'bottom' ? '100%' : sizeMap[$size] || $size};
   z-index: 500;
   background-color: white;
   border-radius: 8px;
@@ -32,80 +36,10 @@ const ModalLayout = styled.div<PositionProps>`
   flex-direction: column;
 `;
 
-const CloseIcon = styled.img.attrs({
-  src: closeIcon,
-  alt: 'Close Icon',
-})`
-  position: absolute;
-  top: 30px;
-  right: 20px;
-  cursor: pointer;
-`;
-
-const ModalTitle = styled.div`
-  font-size: 24px;
-  font-weight: 900;
-  position: absolute;
-  top: 20px;
-  left: 20px;
-  text-align: start;
-`;
-
-const ModalContents = styled.div`
-  display: flex;
-  margin-top: 56px;
-  height: 100%;
-`;
-
-type ModalButtonProps = {
-  $backgroundColor: string;
-  $textColor: string;
-  $size: 'small' | 'medium' | 'large';
+const sizeMap = {
+  small: '320px',
+  medium: '480px',
+  large: '600px',
 };
 
-const ModalButton = styled.button<ModalButtonProps>`
-  background-color: ${({ $backgroundColor }) => $backgroundColor || '#ffffff'};
-  color: ${({ $textColor }) => $textColor || '#000000'};
-  width: ${({ $size }) => getSize($size)};
-  color: white;
-  border: none;
-  border-radius: 4px;
-  padding: 10px 20px;
-  cursor: pointer;
-  font-size: 16px;
-  margin-top: 20px;
-  &:focus {
-    border: none;
-    outline: none;
-  }
-`;
-
-function getSize(size: 'small' | 'medium' | 'large') {
-  switch (size) {
-    case 'small':
-      return '120px';
-    case 'medium':
-      return '200px';
-    case 'large':
-      return '400px';
-    default:
-      return '100%';
-  }
-}
-
-const ModalButtonContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  margin-top: 20px;
-  width: 100%;
-`;
-
-export {
-  BackDrop,
-  ModalLayout,
-  CloseIcon,
-  ModalTitle,
-  ModalContents,
-  ModalButton,
-  ModalButtonContainer,
-};
+export { BackDrop, ModalLayout };

@@ -14,9 +14,7 @@ export const CARD_PASSWORD_ERROR_MESSAGE = {
 
 export default function useCardPassword(userCardPassword = '') {
   const [cardPassword, setCardPassword] = useState(userCardPassword);
-  const { error, changeError, clearError } = useError({
-    [KEY]: false,
-  });
+  const { error, changeError, clearError } = useError();
 
   function handleCardPasswordChange(
     event: React.ChangeEvent<HTMLInputElement>

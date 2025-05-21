@@ -1,7 +1,14 @@
-import { ChangeEvent, useState } from 'react';
+import { useState } from 'react';
 import isInteger from '../validate/isInteger';
 import isUnderMaxLength from '../validate/isUnderMaxLength';
 import useError from '../useError/useError';
+import getCardNetwork from './getCardNetwork';
+import {
+  AMEX_CARD_NUMBER_LENGTH_BY_POSITION,
+  DINERS_CARD_NUMBER_LENGTH_BY_POSITION,
+  VISA_CARD_NUMBER_LENGTH_BY_POSITION,
+} from '../constants/cardNumberlengthByPosition';
+import CARD_NUMBER_LENGTH_BY_POSITION_MAP from '../useFormattedCardNumbers/cardNumberlengthMap';
 
 type CardNumbers = {
   FIRST: string;
@@ -33,22 +40,27 @@ const INITIAL_IS_ERROR: TYPE_OF_CARD_NUMBERS_IS_ERROR = {
 export const CARD_NUMBER_MAX_LENGTH = 4;
 
 export const CARD_NUMBER_ERROR_MESSAGE = {
-  INVALID_LENGTH: `카드 번호는 ${CARD_NUMBER_MAX_LENGTH}자리 숫자여야 합니다.`,
+  INVALID_LENGTH(length) {
+    return `카드 번호는 ${length}자리 숫자여야 합니다.`;
+  },
   NOT_NUMBERIC: '숫자만 입력 가능합니다.',
 } as const;
 
-type CardNumbersKeys = {
-  target: 'FIRST' | 'SECOND' | 'THIRD' | 'FOURTH';
-};
+export type CardNumbersKeys = 'FIRST' | 'SECOND' | 'THIRD' | 'FOURTH';
 
 export default function useCardNumbers(userCardNumbers = INITIAL_CARD_NUMBER) {
   const [cardNumbers, setCardNumbers] = useState<CardNumbers>(userCardNumbers);
-  const { error, changeError, clearError } = useError(INITIAL_IS_ERROR);
+  const { error, changeError, clearError } = useError();
+  const cardNetwork = getCardNetwork(Object.values(cardNumbers).join(''));
 
-  function handleCardNumbersChange({ target }: CardNumbersKeys) {
+  function handleCardNumbersChange({ target }: { target: CardNumbersKeys }) {
     return function (event: React.ChangeEvent<HTMLInputElement>) {
       const input = event.target.value.trim();
-      const { inputError, inputErrorMessage } = getCardNumbersError(input);
+      const { inputError, inputErrorMessage } = getCardNumbersError({
+        input,
+        target,
+        cardNetwork,
+      });
 
       if (inputError) {
         changeError(target, inputErrorMessage);
@@ -71,7 +83,19 @@ export default function useCardNumbers(userCardNumbers = INITIAL_CARD_NUMBER) {
   };
 }
 
-function getCardNumbersError(input: string) {
+export type CardNetWork = 'VISA' | 'MASTER' | 'AMEX' | 'DINERS' | 'UNIONPAY';
+
+type getCardNumbersErrorProps = {
+  input: string;
+  target: 'FIRST' | 'SECOND' | 'THIRD' | 'FOURTH';
+  cardNetwork: CardNetWork | undefined;
+};
+
+function getCardNumbersError({
+  input,
+  target,
+  cardNetwork,
+}: getCardNumbersErrorProps) {
   if (!isInteger(input)) {
     return {
       inputError: true,
@@ -79,10 +103,27 @@ function getCardNumbersError(input: string) {
     };
   }
 
-  if (!isUnderMaxLength(input, 4)) {
+  if (cardNetwork === undefined) {
+    return {
+      inputError: false,
+      inputErrorMessage: '',
+    };
+  }
+
+  const networkLengths = CARD_NUMBER_LENGTH_BY_POSITION_MAP[cardNetwork];
+  const maxLength = networkLengths?.[target];
+
+  if (maxLength === undefined) {
     return {
       inputError: true,
-      inputErrorMessage: CARD_NUMBER_ERROR_MESSAGE.INVALID_LENGTH,
+      inputErrorMessage: `해당 자리는 입력할 수 없습니다.`,
+    };
+  }
+
+  if (!isUnderMaxLength(input, maxLength)) {
+    return {
+      inputError: true,
+      inputErrorMessage: CARD_NUMBER_ERROR_MESSAGE.INVALID_LENGTH(maxLength),
     };
   }
 

@@ -1,10 +1,28 @@
 import './App.css';
-import { useCardNumbers } from 'pongda-payments-hooks';
+import useFormattedCardNumbers from './useFormattedCardNumbers/useFormattedCardNumbers';
 function App() {
-  const cardNumbersHook = useCardNumbers();
+  const {
+    formattedCardNumbers,
+    handleFormattedCardNumbersChange,
+    isError,
+    errorMessage,
+  } = useFormattedCardNumbers();
+
   return (
     <>
       <h1>Hooks Modules</h1>
+      <input
+        value={formattedCardNumbers}
+        onChange={handleFormattedCardNumbersChange}
+      />
+
+      {isError && (
+        <div className="error-message">
+          {Object.values(errorMessage).map((message, index) => (
+            <p key={index}>{message}</p>
+          ))}
+        </div>
+      )}
     </>
   );
 }
