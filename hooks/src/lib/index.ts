@@ -1,5 +1,6 @@
 export { default as useCardNumbers } from './cardNumber/useCardNumbers';
-export { default as useExpiryDate } from './expiryDate/useExpiryDate';
-export { default as useCVC } from './cvc/useCVC';
 export * from './config';
+export { default as useCVC } from './cvc/useCVC';
+export { default as useExpiryDate } from './expiryDate/useExpiryDate';
 export * from './types';
+export * from './utils';

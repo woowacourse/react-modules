@@ -1,102 +1,134 @@
 import styled from '@emotion/styled';
-import { PropsWithChildren, useEffect, useMemo, useRef } from 'react';
+import { CSSProperties, PropsWithChildren, useMemo } from 'react';
+import Button from './Button';
+import ButtonGroup from './ButtonGroup';
 import CloseButton from './CloseButton';
+import { useBodyScrollLock } from './hooks/useBodyScrollLock';
+import useClickOutside from './hooks/useClickOutside';
+import { useModalAccessibility } from './hooks/useModalAccessibility';
 import {
   MODAL_CONTAINER_POSITION_STYLES,
-  MODAL_CONTAINER_RESPONSIVE_WIDTH_STYLES,
-  MODAL_WRAPPER_POSITION_STYLES,
+  MODAL_CONTENT_POSITION_STYLES,
+  MODAL_CONTENT_RESPONSIVE_WIDTH_STYLES,
+  MODAL_CONTENT_SIZE_STYLES,
 } from './Modal.styles';
-import PrimaryButton from './PrimaryButton';
-import SecondaryButton from './SecondaryButton';
+import ModalCloseTrigger from './ModalCloseTrigger';
+import ModalOpenTrigger from './ModalOpenTrigger';
+import ModalProvider, { useModalContext } from './ModalProvider';
+import PromptInput from './PromptInput';
 import Title from './Title';
-import { ModalPositionType, ModalProps } from './types';
+import WideButton from './WideButton';
+
+// ============================== Types ==============================
+
+export interface ModalProps {
+  position?: ModalPositionType;
+  size?: ModalSizeType;
+  title?: string;
+  showCloseButton?: boolean;
+  style?: CSSProperties;
+}
+export type ModalPositionType = 'center' | 'bottom';
+export type ModalSizeType = 'small' | 'medium' | 'large';
+
+// ============================== Component ==============================
 
 function ModalContainer({
-  open,
-  onClose,
   position = 'center',
+  size = 'medium',
+  title = '',
+  showCloseButton = true,
   style,
   children,
 }: PropsWithChildren<ModalProps>) {
-  const modalRef = useRef<HTMLDialogElement>(null);
-
+  const { role, open, onClose } = useModalContext();
   const memoizedStyle = useMemo(() => {
-    return {
-      ...style,
-    };
-  }, [JSON.stringify(style)]);
+    if (!style) return {};
+    return { ...style };
+  }, [style]);
 
-  useEffect(() => {
-    if (open) {
-      modalRef.current?.showModal();
-    } else {
-      modalRef.current?.close();
-    }
-  }, [open]);
+  const isClickOutsideEnabled = role !== 'alert-modal';
+  const modalRef = useClickOutside<HTMLDivElement>(
+    isClickOutsideEnabled ? onClose : null
+  );
 
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (modalRef.current && event.target === modalRef.current) {
-        onClose();
-      }
-    };
-
-    if (open) {
-      document.addEventListener('mousedown', handleClickOutside);
-    }
-
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
-  }, [open, onClose]);
+  useBodyScrollLock(open);
+  useModalAccessibility(open, onClose, modalRef);
 
   return (
-    <StyledModalContainer
-      onClose={onClose}
-      position={position}
-      style={memoizedStyle}
-      ref={modalRef}
-    >
-      <ModalWrapper position={position}>{children}</ModalWrapper>
-    </StyledModalContainer>
+    open && (
+      <StyledModalContainer position={position}>
+        <StyledModalContent
+          ref={modalRef}
+          role={role === 'modal' ? 'dialog' : 'alertdialog'}
+          aria-modal="true"
+          position={position}
+          size={size}
+          style={memoizedStyle}
+        >
+          {title && <Title id="modal-title">{title}</Title>}
+          {showCloseButton && <FixedCloseButton />}
+          {children}
+        </StyledModalContent>
+      </StyledModalContainer>
+    )
   );
 }
 
-const StyledModalContainer = styled.dialog<{ position: ModalPositionType }>`
-  box-sizing: border-box;
-  min-width: 400px;
-  padding: 0;
-  position: relative;
-  background-color: transparent;
-  border: none;
+// ============================== Styled Components ==============================
+
+const StyledModalContainer = styled.div<{ position: ModalPositionType }>`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.35);
 
   ${(props) => MODAL_CONTAINER_POSITION_STYLES[props.position]}
-
-  &::backdrop {
-    background-color: #000000;
-    opacity: 0.35;
-  }
-
-  @media (max-width: 600px) {
-    width: ${(props) =>
-      MODAL_CONTAINER_RESPONSIVE_WIDTH_STYLES[props.position]};
-  }
 `;
 
-const ModalWrapper = styled.div<{ position: ModalPositionType }>`
+const StyledModalContent = styled.div<{
+  position: ModalPositionType;
+  size: ModalSizeType;
+}>`
+  min-width: 400px;
   display: flex;
   flex-direction: column;
 
+  position: relative;
   padding: 24px 32px;
+  box-sizing: border-box;
   background-color: white;
 
-  ${(props) => MODAL_WRAPPER_POSITION_STYLES[props.position]}
+  ${(props) => MODAL_CONTENT_SIZE_STYLES[props.size]}
+  ${(props) => MODAL_CONTENT_POSITION_STYLES[props.position]}
+
+  @media (max-width: 600px) {
+    ${(props) => MODAL_CONTENT_RESPONSIVE_WIDTH_STYLES[props.position]};
+  }
 `;
 
-export default {
+const FixedCloseButton = styled(CloseButton)`
+  position: absolute;
+  top: 24px;
+  right: 32px;
+`;
+
+const Modal = Object.assign(ModalProvider, {
+  OpenTrigger: ModalOpenTrigger,
+  CloseTrigger: ModalCloseTrigger,
   Container: ModalContainer,
-  CloseButton,
   Title,
-  PrimaryButton,
-  SecondaryButton,
-};
+  CloseButton,
+  PromptInput,
+  ButtonGroup,
+  Button,
+  WideButton,
+});
+
+export default Modal;
