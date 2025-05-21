@@ -1,48 +1,93 @@
-import { Modal } from "compoents-modal-test-kangoll";
 import { useState } from "react";
 import "./App.css";
+import Modal from "./lib";
 
 function App() {
-  const [modalOpen, setModalOpen] = useState(true);
-  const [titleModalOpen, setTitleModalOpen] = useState(true);
+  const [alertModal, setAlertModal] = useState(false);
+  const [confirmModal, setConfirmModal] = useState(false);
+  const [promptModal, setPromptModal] = useState(false);
+  const [inputValue, setInputValue] = useState("");
 
   return (
     <>
-      <button onClick={() => setModalOpen((prev) => !prev)}>
-        모달 trigger 버튼
+      <button onClick={() => setAlertModal((prev) => !prev)}>확인 모달</button>
+      <button onClick={() => setConfirmModal((prev) => !prev)}>
+        확인/취소 모달
       </button>
-      <button onClick={() => setTitleModalOpen((prev) => !prev)}>
-        커스텀 제목을 사용한 모달 trigger 버튼
-      </button>
+      <button onClick={() => setPromptModal((prev) => !prev)}>입력 모달</button>
       <Modal
-        id="modal-component"
         position="center"
-        title="모달 제목"
-        isOpen={modalOpen}
+        size="sm"
+        isOpen={alertModal}
         onClose={() => {
-          setModalOpen(false);
+          setAlertModal(false);
         }}
+        backdropClosable
       >
-        <p>
+        <Modal.Header>기본 스타일이 적용된 alert 모달</Modal.Header>
+        <Modal.Content>
           default로 제공되는 모달 title 사용시 <br />
           close 버튼과 폰트가 적용되어 보입니다
-        </p>
+        </Modal.Content>
+        <Modal.Footer>
+          <Modal.AlertButton
+            onClick={() => {
+              setAlertModal(false);
+            }}
+          />
+        </Modal.Footer>
       </Modal>
       <Modal
-        id="modal-component"
         position="center"
-        renderHeader={() => {
-          return <header>자체 제작된 모달 헤더입니다</header>;
-        }}
-        isOpen={titleModalOpen}
+        size="md"
+        isOpen={confirmModal}
         onClose={() => {
-          setTitleModalOpen(false);
+          setConfirmModal(false);
         }}
       >
-        <p>
-          또는 renderHeader() 함수를 통해 <br /> 원하는 헤더 속성을 적용시킬 수
-          있습니다
-        </p>
+        <Modal.Header>기본 스타일이 적용된 confirm 모달</Modal.Header>
+        <Modal.Content>확인/취소 옵션을 사용할 수 있습니다</Modal.Content>
+        <Modal.Footer>
+          <Modal.ConfirmButton
+            onConfirm={() => {
+              setConfirmModal(false);
+            }}
+            onCancel={() => {
+              setConfirmModal(false);
+            }}
+          />
+        </Modal.Footer>
+      </Modal>
+      <Modal
+        position="center"
+        size="lg"
+        isOpen={promptModal}
+        onClose={() => {
+          setPromptModal(false);
+        }}
+      >
+        <Modal.Header hasCloseButton>
+          기본 스타일이 적용된 prompt 모달
+        </Modal.Header>
+        <Modal.Content>
+          <Modal.InputPrompt
+            value={inputValue}
+            placeholder="placeholder"
+            onChange={(e) =>
+              setInputValue((e.target as HTMLInputElement).value)
+            }
+          />
+        </Modal.Content>
+        <Modal.Footer>
+          <Modal.ConfirmButton
+            onConfirm={() => {
+              setPromptModal(false);
+            }}
+            onCancel={() => {
+              setPromptModal(false);
+            }}
+          />
+        </Modal.Footer>
       </Modal>
     </>
   );

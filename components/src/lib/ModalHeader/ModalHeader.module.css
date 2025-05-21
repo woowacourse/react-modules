@@ -1,0 +1,30 @@
+p {
+  margin: 0;
+  padding: 0;
+}
+
+.modalHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.closeButton {
+  width: 18px;
+  height: 18px;
+}
+
+.closeButton:hover {
+  cursor: pointer;
+}
+
+.title {
+  font-family: Noto Sans KR;
+  font-weight: 700;
+  font-size: 18px;
+  width: fit-content;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: calc(100% - 20px);
+}

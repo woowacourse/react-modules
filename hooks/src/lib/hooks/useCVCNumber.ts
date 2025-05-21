@@ -1,9 +1,12 @@
-import { Dispatch, useState } from "react";
-import validateCVCNumber from "../util/validateCVCNumber";
+import { useState } from "react";
+
+import validateCVCNumber from "../util/validateCVCNumber/validateCVCNumber";
+import { CVC_LENGTH } from "../constants";
+import { limitInputNumber } from "../util/limitInputNumber/limitInputNumber";
 
 interface useCVCNumberReturn {
   CVCNumber: string;
-  setCVCNumber: Dispatch<string>;
+  setCVCNumber: (input: string) => void;
   errorMessage?: string;
   isError: boolean;
 }
@@ -12,9 +15,16 @@ export default function useCVCNumber(): useCVCNumberReturn {
   const [CVCNumber, setCVCNumber] = useState("");
   const errorMessage = validateCVCNumber(CVCNumber);
 
+  const setValidCVCNumber = (CVCNumber: string) =>
+    limitInputNumber({
+      inputNumbers: CVCNumber,
+      setInputNumber: setCVCNumber,
+      groupLengths: [CVC_LENGTH],
+    });
+
   return {
     CVCNumber,
-    setCVCNumber,
+    setCVCNumber: setValidCVCNumber,
     errorMessage,
     isError: !!errorMessage,
   };

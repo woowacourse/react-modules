@@ -1,6 +1,6 @@
 {
   "name": "compoents-modal-test-kangoll",
-  "version": "0.0.21",
+  "version": "0.0.24",
   "description": "npm modules",
   "type": "module",
   "main": "dist/index.cjs",

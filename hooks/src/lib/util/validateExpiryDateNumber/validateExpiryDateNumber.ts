@@ -1,14 +1,15 @@
-import { EXPIRY_DATE_LENGTH, ERROR_MESSAGE } from "../constants";
-import { isNumeric } from "./index";
+import { EXPIRY_DATE_LENGTH } from "../../constants";
+import { getErrorMessage } from "../getErrorMessage";
+import { isNumeric } from "../index";
 
 function getExpiryDateGroupError(expiryDate: string, index: string) {
-  if (!isNumeric(expiryDate)) return ERROR_MESSAGE.NOT_NUMERIC;
+  if (!isNumeric(expiryDate)) return getErrorMessage("NOT_NUMERIC");
 
   if (expiryDate.length !== EXPIRY_DATE_LENGTH)
-    return ERROR_MESSAGE.INVALID_LENGTH(EXPIRY_DATE_LENGTH);
+    return getErrorMessage("INVALID_LENGTH", "ko", EXPIRY_DATE_LENGTH);
 
   if (index === "month" && (Number(expiryDate) < 1 || Number(expiryDate) > 12))
-    return ERROR_MESSAGE.INVALID_MONTH;
+    return getErrorMessage("INVALID_MONTH");
 
   return "";
 }
